@@ -1,0 +1,16 @@
+[
+{
+  "modid": "MineFantasy2",
+  "name": "Mine FantasyII",
+  "description": "NOTE: This is an incomplete mod, crafting has not been implemented. Make sure to have a recipe guide installed. Not all items are obtainable or balanced",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Anonymous"],
+  "credits": "-",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,257 @@
+{
+	"weapon.bombBounce": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/bombBounce"
+      ]
+    },
+	
+	"weapon.bowFire": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/bowFire"
+      ]
+    },
+	
+	"weapon.arrowHit": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/arrowHit"
+      ]
+    },
+	
+	"weapon.crossbowload": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/crossbow_load"
+      ]
+    },
+	
+	"weapon.crossbow_fire": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/crossbow_fire"
+      ]
+    },
+	
+    "weapon.critical": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/critical"
+      ]
+    },
+
+	"weapon.wood_parry": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/wood_parry"
+      ]
+    },
+	
+	"weapon.hit.blunt.wood": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/hit/blunt/wood1"
+      ]
+    },
+    
+	"weapon.hit.blunt.stone": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/hit/blunt/stone1"
+      ]
+    },
+	"weapon.hit.blunt.metal": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/hit/blunt/metal1"
+      ]
+    },
+	
+	"weapon.hit.blade.wood": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/hit/blade/wood1"
+      ]
+    },
+	
+	"weapon.hit.blade.stone": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/hit/blade/stone1"
+      ]
+    },
+	
+	"weapon.hit.blade.metal": {
+    "category": "neutral",
+    "sounds": [
+        "weapon/hit/blade/metal1"
+      ]
+    },
+	
+	"block.mythicore": {
+    "category": "neutral",
+    "sounds": [
+        "blocks/MythicOre"
+      ]
+    },
+	
+	"block.carpentermallet": {
+    "category": "neutral",
+    "sounds": [
+        "blocks/CarpenterMallet"
+      ]
+    },
+	
+	"block.anvilfail": {
+    "category": "neutral",
+    "sounds": [
+        "process/anvil/AnvilFail1",
+		 "process/anvil/AnvilFail2",
+		  "process/anvil/AnvilFail3"
+      ]
+    },
+    
+	"block.anvilsucceed": {
+    "category": "neutral",
+    "sounds": [
+        "process/anvil/AnvilSucceed1",
+		 "process/anvil/AnvilSucceed2",
+		  "process/anvil/AnvilSucceed3"
+      ]
+    },
+	
+	"block.hammercarpenter": {
+    "category": "neutral",
+    "sounds": [
+        "process/carpenter/HammerCarpenter1",
+		 "process/carpenter/HammerCarpenter2",
+		  "process/carpenter/HammerCarpenter3"
+      ]
+    },
+	
+	"block.quern": {
+    "category": "neutral",
+    "sounds": [
+        "process/carpenter/Quern1",
+		 "process/carpenter/Quern2",
+		  "process/carpenter/Quern3"
+      ]
+    },
+	
+	"block.craftprimitive": {
+    "category": "neutral",
+    "sounds": [
+        "process/carpenter/CraftPrimitive1",
+		 "process/carpenter/CraftPrimitive2",
+		  "process/carpenter/CraftPrimitive3"
+      ]
+    },
+	
+	"block.sawcarpenter": {
+    "category": "neutral",
+    "sounds": [
+        "process/carpenter/SawCarpenter1",
+		 "process/carpenter/SawCarpenter2",
+		  "process/carpenter/SawCarpenter3"
+      ]
+    },
+	
+	"block.twistbolt": {
+    "category": "neutral",
+    "sounds": [
+        "process/carpenter/TwistBolt1"
+      ]
+    },
+	
+	"updateResearch": {
+    "category": "player",
+    "sounds": [
+        "updateResearch"
+      ]
+    },
+	
+	"block.flipPage": {
+    "category": "neutral",
+    "sounds": [
+        "process/research/FlipPage1",
+		 "process/research/FlipPage2",
+		  "process/research/FlipPage3",
+		  "process/research/FlipPage4"
+      ]
+    },
+    
+    "block.bellows": {
+    "category": "neutral",
+    "sounds": [
+        "blocks/Bellows"
+      ]
+    },
+	
+	"mob.dragon.say": {
+    "category": "neutral",
+    "sounds": [
+        "monster/dragon/dragon_say1",
+		"monster/dragon/dragon_say2",
+		"monster/dragon/dragon_say3"
+      ]
+    },
+	
+	"mob.dragon.bite": {
+    "category": "neutral",
+    "sounds": [
+        "monster/dragon/dragon_bite1",
+		"monster/dragon/dragon_bite2",
+		"monster/dragon/dragon_bite3"
+      ]
+    },
+	
+	"mob.dragon.hurt": {
+    "category": "neutral",
+    "sounds": [
+        "monster/dragon/dragon_hurt1"
+      ]
+    },
+	
+	"mob.dragon.fire": {
+    "category": "neutral",
+    "sounds": [
+        "monster/dragon/dragon_fire1"
+      ]
+    },
+	
+	"mob.dragon.step": {
+    "category": "neutral",
+    "sounds": [
+        "monster/dragon/dragon_step1"
+      ]
+    },
+	
+	"mob.minotaur.say": {
+    "category": "neutral",
+    "sounds": [
+        "monster/minotaur/minotaur_say1"
+      ]
+    },
+	
+	"mob.minotaur.hurt": {
+    "category": "neutral",
+    "sounds": [
+        "monster/minotaur/minotaur_hurt1"
+      ]
+    },
+	
+	"mob.minotaur.death": {
+    "category": "neutral",
+    "sounds": [
+        "monster/minotaur/minotaur_death1"
+      ]
+    },
+	
+	"vehicle.cogstep": {
+    "category": "neutral",
+    "sounds": [
+        "vehicle/cogStep"
+      ]
+    }
+}
