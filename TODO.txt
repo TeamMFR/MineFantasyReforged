@@ -1,0 +1,45 @@
+Key
+~~~~
+- = Incomplete
+X = Complete
+? = Uncertainty (if some bugs may be unclear)
+O = Obsolete (Or not considered to matter)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ISSUES       	 				     |Check|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Knife salvage needs to yield 1 ingot                 	 -
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CONTENT		 				     |Check|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fletching (expand arrow crafting)                   	-
+Big Furnace                    			      	-
+Cooking Oven						-
+Wood Bucket                     			-
+Pottery Oven (Kiln)         			        -
+Pottery Stand                   			-
+Firepit                         			-
+Cooktop                                                 -
+
+////////////////////////////////////////////////////////////
+More Detail:
+1: Fletching: Pretty much the use of arrow shafts crafted with a knife, rather
+   than just sticks, but really it isn't too important.
+
+2: Big Furnace: Similar to the crucible, kind of the same design as MF1 big
+   Furnaces, maybe with ingot moulds outside to fill.
+
+3: Cooking oven: Similar to MF1, only with temperature levels and recipes have
+   a set time of cooking, so you have to remove it at the right time to avoid
+   burning food.
+
+4: Wood Bucket: Just for milk and water
+
+5: Kiln: A stone furnace for cooking ceramics
+
+6: Pottery stand: similar to carpenter bench except for pottery
+
+7: Firepit: used as a weaker heat source than a forge, with spit roasts even
+
+8: Cooktop: Carpenter bench for cooking
