@@ -56,7 +56,6 @@ Temporary Items
 .gradle/gradle.log
 .project
 .settings/org.eclipse.jdt.core.prefs
-build.gradle
 CREDITS-fml.txt
 *.location
 eclipse/.metadata/.plugins/org.eclipse.core.resources/.root/0.tree
