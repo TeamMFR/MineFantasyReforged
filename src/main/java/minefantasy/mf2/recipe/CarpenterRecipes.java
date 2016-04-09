@@ -23,6 +23,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -96,6 +97,8 @@ public class CarpenterRecipes
 		}
 		Salvage.addSalvage(ToolListMF.dryrocks, Blocks.cobblestone);
 		
+		
+		
 		KnowledgeListMF.threadR =
 		MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMF.thread, 4), "commodities", sewing, "hands", -1, 5 , new Object[]
 		{
@@ -120,6 +123,9 @@ public class CarpenterRecipes
 			"L",
 			'L', Items.leather,
 		});
+		
+
+		
 		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ToolListMF.swordTraining), nailHammer, "knife", 1, 40 , new Object[]
 		{
 			"NI  ",
@@ -129,6 +135,7 @@ public class CarpenterRecipes
 			'S', ComponentListMF.plank,
 			'I', Blocks.planks,
 		});
+		
 		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ToolListMF.waraxeTraining), nailHammer, "knife", 1, 30 , new Object[]
 		{
 			" II ",
@@ -1791,4 +1798,23 @@ public class CarpenterRecipes
 			}
 		}
 	}
+	
+	static void tryAddSawPlanks(ItemStack planks, CustomMaterial material)
+	{
+		String sub = material.name.substring(0, material.name.length()-4).toLowerCase();
+		
+		if(planks.getUnlocalizedName().toLowerCase().contains(sub))
+		{
+			addSawPlanks(planks, material);
+		}
+	}
+	
+	static void addSawPlanks(ItemStack planks, CustomMaterial material)
+	{
+		MineFantasyAPI.addCarpenterRecipe(construction, ((ItemComponentMF)(ComponentListMF.plank)).construct(material.name, 4), "commodities", sawing, "saw", -1, 10 , new Object[]
+				{
+					"P",
+					'P', planks.copy()
+				});
+		}
 }

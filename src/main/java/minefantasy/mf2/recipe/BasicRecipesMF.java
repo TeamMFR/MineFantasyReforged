@@ -350,11 +350,13 @@ public class BasicRecipesMF
 						{
 							item.setItemDamage(i);
 							tryAddWoodPlanks(item, material);
+							CarpenterRecipes.tryAddSawPlanks(item, material);
 						}
 					}
 					else
 					{
 						tryAddWoodPlanks(planks, material);
+						CarpenterRecipes.tryAddSawPlanks(planks, material);
 					}
 				}
 			}
@@ -367,9 +369,11 @@ public class BasicRecipesMF
 					"P",
 					'P', block
 				}));
+				CarpenterRecipes.addSawPlanks(block, material);
 			}
 		}
 	}
+	
 	private static void tryAddWoodPlanks(ItemStack planks, CustomMaterial material)
 	{
 		String sub = material.name.substring(0, material.name.length()-4).toLowerCase();
