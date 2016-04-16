@@ -226,7 +226,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 			}
 			if(temp <= 0)
 			{
-				this.setInventorySlotContents(slot, ItemHeated.getItem(item));
+				//this.setInventorySlotContents(slot, ItemHeated.getItem(item));
 			}
 			else
 			{

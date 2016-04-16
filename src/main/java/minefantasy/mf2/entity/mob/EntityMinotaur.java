@@ -43,7 +43,8 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 
 	public int swing;
 	private int grabCooldown;
-
+	private int hitCooldownTime;
+	
 	public EntityMinotaur(World world)
 	{
 		super(world);
@@ -82,7 +83,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4F);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.35F);
         this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(ConfigMobs.minotaurMD);
         this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigMobs.minotaurHP);
     }
@@ -106,6 +107,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     	
     	if(!worldObj.isRemote)
     	{
+    		if(hitCooldownTime > 0)--hitCooldownTime;
     		if(grabCooldown > 0)
     		{
     			--grabCooldown;
@@ -220,12 +222,14 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 	{
 		setSprinting(true);
 		specialAttackTime = 30;
+		hitCooldownTime = 0;
 		setAttack((byte)3);
 	}
 	public void initHeadbutt()
 	{
 		setSprinting(true);
 		specialAttackTime = 20;
+		this.hitCooldownTime = 0;
 		setAttack((byte)1);
 	}
 	public void initBasicAttack()
@@ -378,6 +382,8 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 	@Override
 	public boolean attackEntityAsMob(Entity target)
     {
+		if(hitCooldownTime > 0)return false;
+		
 		if(!canEntityBeSeen(target))
 		{
 			return false;
@@ -426,6 +432,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 
         if (flag)
         {
+        	this.hitCooldownTime = getAttackSpeed();
         	this.swingItem();
             if (i > 0)
             {
@@ -451,6 +458,11 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 
         return flag;
     }
+	private int getAttackSpeed()
+	{
+		return this.getAttack() == 2 ? 15 : 35;
+	}
+
 	public MinotaurBreed getMinotaur()
 	{
 		return MinotaurBreed.getBreed(getSpecies(), getBreed());

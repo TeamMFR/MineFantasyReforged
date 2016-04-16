@@ -58,12 +58,5 @@ public class ItemResearchBook extends Item
     public void addInformation(ItemStack item, EntityPlayer user, List list, boolean fullInfo)
     {
     	super.addInformation(item, user, list, fullInfo);
-    	if(ClientItemsMF.showSpecials(item, user, list, fullInfo))
-    	{
-    		list.add("Gives information on MineFantasy Content");
-    		list.add("");
-    		list.add("This item can be re-crafted by placing");
-    		list.add("a regular book on a carpenter bench");
-    	}
     }
 }

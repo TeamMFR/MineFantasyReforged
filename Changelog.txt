@@ -1,0 +1,9 @@
+Alpha 2.6.11
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-Reduced minotaur speed
++Increased Dragon speed and range
+*Compacted Armour Tooltips
+
+-Fixes
+*Fixed crash on servers crafting
+*Forges nolonger convert hot items back to normal (avoid duplication)

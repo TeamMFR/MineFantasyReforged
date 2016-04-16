@@ -301,7 +301,7 @@ public class CustomToolHelper
     	}
     	
 	}
-	@SideOnly(Side.CLIENT)
+	
 	public static String getWoodenLocalisedName(ItemStack item, String unlocalName)
 	{
 		if(materialOnTooltip())
@@ -317,7 +317,7 @@ public class CustomToolHelper
     	}
     	return StatCollector.translateToLocalFormatted(unlocalName, StatCollector.translateToLocal("material."+name + ".name"));
 	}
-	@SideOnly(Side.CLIENT)
+	
 	public static String getLocalisedName(ItemStack item, String unlocalName)
 	{
 		if(materialOnTooltip())

@@ -369,13 +369,17 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
         		disengage(200);
         		return;
             }
+        	float range = getAttackRange();
+        	
             double var11 = this.targetedEntity.posX - this.posX;
             double var13 = this.targetedEntity.boundingBox.minY + (double) (this.targetedEntity.height / 2.0F) - (this.posY + (double) (this.height / 2.0F));
             double var15 = this.targetedEntity.posZ - this.posZ;
             this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(var11, var15)) * 180.0F / (float) Math.PI;
-            boolean inRangeOfAttack = this.targetedEntity.getDistanceToEntity(this) < (4F*getScale()) && this.canEntityBeSeen(targetedEntity);
-            boolean inRangeOfLeap = onGround && this.targetedEntity.getDistanceToEntity(this) > 8 && this.targetedEntity.getDistanceToEntity(this) < 32;
-            boolean inRangeOfFire = this.targetedEntity.getDistanceToEntity(this) > 4 && this.targetedEntity.getDistanceToEntity(this) < 24 && fireBreathCooldown <= 0;
+            
+            boolean inRangeOfAttack = this.targetedEntity.getDistanceToEntity(this) < (range*getScale()) && this.canEntityBeSeen(targetedEntity);
+            boolean inRangeOfLeap = onGround && this.targetedEntity.getDistanceToEntity(this) > range*2 && this.targetedEntity.getDistanceToEntity(this) < range*8;
+            boolean inRangeOfFire = this.targetedEntity.getDistanceToEntity(this) > range && this.targetedEntity.getDistanceToEntity(this) < range*6 && fireBreathCooldown <= 0;
+            
             if (this.canEntityBeSeen(this.targetedEntity) && inRangeOfFire)
             {
                 this.fireBreathTick = getType().fireTimer;
@@ -434,8 +438,13 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
             }
         }
     }
-    private float getFlightSpeed() {
-		return 0.5F;
+    private float getAttackRange() 
+    {
+		return 6.0F;
+	}
+
+	private float getFlightSpeed() {
+		return 0.8F;
 	}
 
 	@Override

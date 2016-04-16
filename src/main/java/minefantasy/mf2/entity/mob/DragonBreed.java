@@ -21,23 +21,23 @@ public class DragonBreed
 	 * Black: Dire, nether
 	 * 
 	 */
-	public static DragonBreed YOUNGRED = new DragonBreed(0, "dragon_young", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.youngdragonHP,       0.0F, 0F, ConfigMobs.youngdragonMD, 40,   200).setProjectile(ConfigMobs.youngdragonFD, ConfigMobs.youngdragonFT, 1000, 0.05F).register();
-	public static DragonBreed YOUNGWHITE = new DragonBreed(0, "dragon_young", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.youngdragonHP,   0.0F, 0F, ConfigMobs.youngdragonMD, 40,   200).setProjectile(ConfigMobs.youngdragonFD, ConfigMobs.youngdragonFT, 800, 0.05F).register();
+	public static DragonBreed YOUNGRED = new DragonBreed(0, "dragon_young", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.youngdragonHP,       0.0F, 0F, ConfigMobs.youngdragonMD, 30,   200).setProjectile(ConfigMobs.youngdragonFD, ConfigMobs.youngdragonFT, 1000, 0.05F).register();
+	public static DragonBreed YOUNGWHITE = new DragonBreed(0, "dragon_young", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.youngdragonHP,   0.0F, 0F, ConfigMobs.youngdragonMD, 30,   200).setProjectile(ConfigMobs.youngdragonFD, ConfigMobs.youngdragonFT, 800, 0.05F).register();
 	public static DragonBreed YOUNGGREEN = new DragonBreed(0, "dragon_young", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.youngdragonHP,   0.0F, 0F, ConfigMobs.youngdragonMD, 30,   100).setProjectile(ConfigMobs.youngdragonFD, ConfigMobs.youngdragonFT, 600, 0.05F).register();
 	
-	public static DragonBreed RED = new DragonBreed(1, "dragon", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.dragonHP, 		  2.0F, 0F,   ConfigMobs.dragonMD, 40, 300).setProjectile(ConfigMobs.dragonFD, ConfigMobs.dragonFT, 500, 0.1F).register();
-	public static DragonBreed WHITE = new DragonBreed(1, "dragon", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.youngdragonHP, 2.0F, 0F,   ConfigMobs.dragonMD, 40, 300).setProjectile(ConfigMobs.dragonFD, ConfigMobs.dragonFT, 400, 0.1F).register();
-	public static DragonBreed GREEN = new DragonBreed(1, "dragon", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.dragonHP, 	  2.0F, 0F,   ConfigMobs.dragonMD, 30, 200).setProjectile(ConfigMobs.dragonFD, ConfigMobs.dragonFT, 300, 0.1F).register();
+	public static DragonBreed RED = new DragonBreed(1, "dragon", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.dragonHP, 		  2.0F, 0F,   ConfigMobs.dragonMD, 20, 300).setProjectile(ConfigMobs.dragonFD, ConfigMobs.dragonFT, 500, 0.1F).register();
+	public static DragonBreed WHITE = new DragonBreed(1, "dragon", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.youngdragonHP, 2.0F, 0F,   ConfigMobs.dragonMD, 20, 300).setProjectile(ConfigMobs.dragonFD, ConfigMobs.dragonFT, 400, 0.1F).register();
+	public static DragonBreed GREEN = new DragonBreed(1, "dragon", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.dragonHP, 	  2.0F, 0F,   ConfigMobs.dragonMD, 20, 200).setProjectile(ConfigMobs.dragonFD, ConfigMobs.dragonFT, 300, 0.1F).register();
 	
-	public static DragonBreed REDM = new DragonBreed(2, "dragon_mature", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.diredragonHP, 2.0F, 1F,   ConfigMobs.diredragonMD, 40, 300).setProjectile(ConfigMobs.diredragonFD, ConfigMobs.diredragonFT, 400, 0.25F).register();
-	public static DragonBreed WHITEM = new DragonBreed(2, "dragon_mature", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.diredragonHP, 2.0F, 1F,   ConfigMobs.diredragonMD, 40, 300).setProjectile(ConfigMobs.diredragonFD, ConfigMobs.diredragonFT, 300, 0.25F).register();
-	public static DragonBreed GREENM = new DragonBreed(2, "dragon_mature", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.diredragonHP, 2.0F, 1F,   ConfigMobs.diredragonMD, 30, 200).setProjectile(ConfigMobs.diredragonFD, ConfigMobs.diredragonFT, 200, 0.25F).register();
+	public static DragonBreed REDM = new DragonBreed(2, "dragon_mature", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.diredragonHP, 2.0F, 1F,   ConfigMobs.diredragonMD, 20, 300).setProjectile(ConfigMobs.diredragonFD, ConfigMobs.diredragonFT, 400, 0.25F).register();
+	public static DragonBreed WHITEM = new DragonBreed(2, "dragon_mature", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.diredragonHP, 2.0F, 1F,   ConfigMobs.diredragonMD, 20, 300).setProjectile(ConfigMobs.diredragonFD, ConfigMobs.diredragonFT, 300, 0.25F).register();
+	public static DragonBreed GREENM = new DragonBreed(2, "dragon_mature", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.diredragonHP, 2.0F, 1F,   ConfigMobs.diredragonMD, 20, 200).setProjectile(ConfigMobs.diredragonFD, ConfigMobs.diredragonFT, 200, 0.25F).register();
 	
-	public static DragonBreed ELDERRED = new DragonBreed(3, "dragon_elder", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.elderdragonHP, 2.0F, 2F, ConfigMobs.elderdragonMD, 40, 300).setProjectile(ConfigMobs.elderdragonFD, ConfigMobs.elderdragonFT, 400, 0.35F).register();
-	public static DragonBreed ELDERWHITE = new DragonBreed(3, "dragon_elder", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.elderdragonHP,  2.0F, 2F, ConfigMobs.elderdragonMD, 40, 300).setProjectile(ConfigMobs.elderdragonFD, ConfigMobs.elderdragonFT, 300, 0.35F).register();
-	public static DragonBreed ELDERGREEN = new DragonBreed(3, "dragon_elder", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.elderdragonHP,  2.0F, 2F, ConfigMobs.elderdragonMD, 30, 200).setProjectile(ConfigMobs.elderdragonFD, ConfigMobs.elderdragonFT, 200, 0.35F).register();
+	public static DragonBreed ELDERRED = new DragonBreed(3, "dragon_elder", "red", "dragon_red", DragonBreath.fire).setCombat(ConfigMobs.elderdragonHP, 2.0F, 2F, ConfigMobs.elderdragonMD, 20, 300).setProjectile(ConfigMobs.elderdragonFD, ConfigMobs.elderdragonFT, 400, 0.35F).register();
+	public static DragonBreed ELDERWHITE = new DragonBreed(3, "dragon_elder", "white", "dragon_frost", DragonBreath.frost).setCombat(ConfigMobs.elderdragonHP,  2.0F, 2F, ConfigMobs.elderdragonMD, 20, 300).setProjectile(ConfigMobs.elderdragonFD, ConfigMobs.elderdragonFT, 300, 0.35F).register();
+	public static DragonBreed ELDERGREEN = new DragonBreed(3, "dragon_elder", "green", "dragon_green", DragonBreath.poison).setCombat(ConfigMobs.elderdragonHP,  2.0F, 2F, ConfigMobs.elderdragonMD, 20, 200).setProjectile(ConfigMobs.elderdragonFD, ConfigMobs.elderdragonFT, 200, 0.35F).register();
 	
-	public static DragonBreed ANCIENT = new DragonBreed(4, "dragon_ancient", "dire", "dragon_ancient", DragonBreath.fire).setCombat(ConfigMobs.ancientdragonHP, 2.0F, 5F, ConfigMobs.ancientdragonMD, 40, 300).setProjectile(ConfigMobs.ancientdragonFD, ConfigMobs.ancientdragonFT, 400, 1.0F).register();
+	public static DragonBreed ANCIENT = new DragonBreed(4, "dragon_ancient", "dire", "dragon_ancient", DragonBreath.fire).setCombat(ConfigMobs.ancientdragonHP, 2.0F, 5F, ConfigMobs.ancientdragonMD, 20, 300).setProjectile(ConfigMobs.ancientdragonFD, ConfigMobs.ancientdragonFT, 400, 1.0F).register();
 	
 	
 	public int tier = 0;
@@ -53,7 +53,7 @@ public class DragonBreed
 	public int disengageChance = 200;
 	public int fireTimer = 50;
 	public int coolTimer = 200;
-	public int meleeSpeed = 30;
+	public int meleeSpeed = 20;
 	public float DT = 2.0F;
 	
 	public DragonBreed(int tier, String name, String breedname, String tex, DragonBreath breath)

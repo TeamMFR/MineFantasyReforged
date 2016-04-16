@@ -2032,6 +2032,7 @@ knowledge.research.desc=Keeping track
 knowledge.research.1=The research book doubles off as an unlocking section as well as a "What do I do now!". Here you can view different pieces of content including what they do as well as how their obtained.^Although a lot of this stuff is unavailable and researching is required to unlock them.
 knowledge.research.2=If an icon is green: It can be unlocked: Click it to view what is needed, gather these items and hit "Purchase" to unlock the entry. And then: you will need to take it to a $hResearch Table$r to process the knowledge. This takes time, but is faster if you contribute.
 knowledge.research.3=The research table is used to process scrolls. When you select a research to conduct, you must also spend time to actually figure it out, obviously. Put your scroll onto the research table slot and it will start to process. This takes a long time, but you can click it to speed it up... slowly.
+knowledge.research.4=This book can be re-crafted by placing a normal book on a carpenter bench.
 
 knowledge.carpenter=Carpenter Bench
 knowledge.carpenter.desc=Simple crafting

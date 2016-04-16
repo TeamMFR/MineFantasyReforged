@@ -7,6 +7,7 @@ import java.util.Random;
 
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.ISpecialArmourMF;
+import minefantasy.mf2.api.armour.ItemArmourMFBase;
 import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.heating.TongsHelper;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
@@ -29,6 +30,7 @@ import minefantasy.mf2.config.ConfigStamina;
 import minefantasy.mf2.entity.EntityItemUnbreakable;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.farming.FarmingHelper;
+import minefantasy.mf2.item.ClientItemsMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -610,6 +612,11 @@ public class EventManagerMF
 	@SubscribeEvent
 	public void setTooltip(ItemTooltipEvent event)
 	{
+		if(!event.entity.worldObj.isRemote)
+		{
+			return;
+		}
+		
 		if(event.itemStack != null)
 		{
 			int[] ids = OreDictionary.getOreIDs(event.itemStack);
@@ -648,7 +655,7 @@ public class EventManagerMF
 					event.toolTip.add(EnumChatFormatting.GREEN + StatCollector.translateToLocal("attribute.superior.name"));
 				}
 			}
-			if(event.itemStack.getItem() instanceof ItemArmor)
+			if(event.itemStack.getItem() instanceof ItemArmor && (!(event.itemStack.getItem() instanceof ItemArmourMFBase) || ClientItemsMF.showSpecials(event.itemStack, event.entityPlayer, event.toolTip, event.showAdvancedItemTooltips)))
 			{
 				if(ArmourCalculator.useThresholdSystem)
 				{
