@@ -12,6 +12,7 @@ import minefantasy.mf2.api.crafting.anvil.ShapelessAnvilRecipes;
 import minefantasy.mf2.api.crafting.exotic.SpecialForging;
 import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.heating.IHotItem;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.rpg.RPGElements;
@@ -498,7 +499,14 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 		if(isPerfectItem() && !isMythicRecipe())
 		{
 			this.setTrait(result, "MF_Inferior", false);
-			ToolHelper.setQuality(result, 200.0F);
+			if(CustomToolHelper.isMythic(result))
+			{
+				result.getTagCompound().setBoolean("Unbreakable", true);
+			}
+			else
+			{
+				ToolHelper.setQuality(result, 200.0F);
+			}
 			return result;
 		}
 		if(isTool)

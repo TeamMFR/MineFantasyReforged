@@ -253,7 +253,7 @@ public class StaminaBar
 		
 		float current = getBonusStamina(user);
 		int currentTicks = getBonusStaminaTicks(user);
-		//if(mod >= current && ticks >= currentTicks)
+		if(mod >= current)
 		{
 			success = true;
 			setBonusStaminaTicks(user, ticks);
@@ -607,7 +607,7 @@ public class StaminaBar
 	}
 	private static final String noStaminaNBT = "MF_NoStamina";
 
-	public static boolean	restrictSystem	= false;
+	public static boolean	restrictSystem	= true;
 	
 	/**
 	 * This toggles the stamina use for entities

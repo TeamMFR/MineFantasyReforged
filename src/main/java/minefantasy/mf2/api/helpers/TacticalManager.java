@@ -164,6 +164,10 @@ public class TacticalManager
 		{
 			return false;//If burning and can't take the heat.. can't block!
 		}
+		if(rand.nextInt(5) == 0)
+		{
+			return false;
+		}
 		if(user.getHeldItem() != null)
 		{
 			return user.getHeldItem().getItem().getItemUseAction(user.getHeldItem()) == EnumAction.block;

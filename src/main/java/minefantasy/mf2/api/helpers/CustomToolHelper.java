@@ -448,5 +448,19 @@ public class CustomToolHelper
 		
 		return true;
 	}
+	public static boolean isMythic(ItemStack result)
+	{
+		CustomMaterial main1 = getCustomMetalMaterial(result);
+		CustomMaterial haft1 = getCustomMetalMaterial(result);
+		 if(main1 != null && main1.isUnbrekable())
+		 {
+			 return true;
+		 }
+		 if(haft1 != null && haft1.isUnbrekable())
+		 {
+			 return true;
+		 }
+		return false;
+	}
 	
 }

@@ -222,7 +222,6 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
     	}
         ArrowNockEvent event = new ArrowNockEvent(player, item);
         MinecraftForge.EVENT_BUS.post(event);
-        System.out.println(event.result);
         if (event.isCanceled())
         {
             return event.result;

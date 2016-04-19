@@ -2,21 +2,21 @@
 	"weapon.bombBounce": {
     "category": "neutral",
     "sounds": [
-        "weapon/bombBounce"
+        "weapon/bomb_bounce"
       ]
     },
 	
 	"weapon.bowFire": {
     "category": "neutral",
     "sounds": [
-        "weapon/bowFire"
+        "weapon/bow_fire"
       ]
     },
 	
 	"weapon.arrowHit": {
     "category": "neutral",
     "sounds": [
-        "weapon/arrowHit"
+        "weapon/arrow_hit"
       ]
     },
 	

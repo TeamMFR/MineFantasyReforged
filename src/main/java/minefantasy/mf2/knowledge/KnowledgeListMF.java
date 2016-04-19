@@ -39,7 +39,7 @@ public class KnowledgeListMF
 	public static InformationPage gnomish = InformationList.gnomish;
 	
 	//BASICS -FREE
-	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney, tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker;
+	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney, tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker, dragons, minotaurs;
 	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel, smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
     public static InformationBase bellows, trough, forge, anvil, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, /*craftOrnateWeapons, craftAdvOrnateWeapons,*/ craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
 	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner, advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb, stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian, mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo, crossScope, crossBayonet, cogArmour, compPlate;
@@ -68,6 +68,9 @@ public class KnowledgeListMF
     	combat = (new InformationBase("combat", 						-5, 2, 0, Items.iron_sword, stamina)).registerStat().setUnlocked();
     	craftArmourBasic = (new InformationBase("craftArmourBasic",   -5, 0, 5, ArmourListMF.armour(ArmourListMF.leather, 0, 1), combat)).registerStat().setUnlocked();
     	firemaker = (new InformationBase("firemaker", 		       	   5,  1,  0, Items.flint_and_steel, (InformationBase)null)).registerStat().setUnlocked();
+    	
+    	dragons = (new InformationBase("dragons", 		       	  	   -1,  3,  0, ComponentListMF.dragon_heart, (InformationBase)null)).registerStat().setUnlocked();
+    	minotaurs = (new InformationBase("minotaurs", 		       	    1,  3,  0, Items.beef, (InformationBase)null)).registerStat().setUnlocked();
     	
     	//ARTISANRY -From Not very to the most Expensive
     	bloomery = (new InformationBase("bloomery", 				4, -2, 5, BlockListMF.bloomery, crucible)).registerStat().setPage(artisanry).setUnlocked().setSpecial();

@@ -6,9 +6,11 @@ import java.util.List;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.hunger.HungerSystemMF;
+import minefantasy.mf2.item.ClientItemsMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.mechanics.TierHelper;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -23,6 +25,8 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemFoodMF extends ItemFood
 {
@@ -45,18 +49,13 @@ public class ItemFoodMF extends ItemFood
 		this.setTextureName("minefantasy2:food/"+name);
 	}
 	
-	public ItemFoodMF(String name, int hunger, float saturation, float saturation2, boolean isMeat, int rarity)
+	public ItemFoodMF(String name, int hunger, float saturation, boolean isMeat, int rarity)
 	{
 		this(name, hunger, saturation, isMeat);
-		this.mfSaturation = saturation2 * FoodListMF.satModifier;
 		itemRarity = rarity;
 	}
-	
-	@Override
-	protected void onFoodEaten(ItemStack food, World world, EntityPlayer consumer)
+	protected void onMFFoodEaten(ItemStack food, World world, EntityPlayer consumer)
     {
-		super.onFoodEaten(food, world, consumer);
-		
 		if(StaminaBar.isSystemActive)
 		{
 			if(staminaRestore > 0)
@@ -72,10 +71,17 @@ public class ItemFoodMF extends ItemFood
 				StaminaBar.buffStaminaRegen(consumer, staminaRegenBuff, staminaRegenSeconds);
 			}
 		}
-		
-		if(mfSaturation > 0 && consumer.getFoodStats().getFoodLevel() >= 20)//Only apply saturation at full food level
+		if(mfSaturation > 0)
 		{
-			HungerSystemMF.applySaturation(consumer, mfSaturation);
+			int foodLeftOver = consumer.getFoodStats().getFoodLevel();
+			
+			float saturation = mfSaturation - (20-foodLeftOver);
+			
+			if(saturation > 0)
+			{
+				HungerSystemMF.applySaturation(consumer, saturation);
+		
+			}
 		}
 		
 		if(this == FoodListMF.berriesJuicy)
@@ -99,6 +105,49 @@ public class ItemFoodMF extends ItemFood
 		hasEffect = true;
 		return this;
 	}
+	
+	/**
+	 * Grade Sugar, Carbs and Fats from 0-1 and tier does the rest
+	 * 0 means non-existent
+	 * @param sugar restore stamina and add regen
+	 * @param carbs increase max stamina for 1 hr
+	 * @param fats saturation
+	 */
+	public ItemFoodMF setFoodStats(int tier, float sugar, float carbs, float fats)
+	{
+		return setFoodStats(sugar*tier, carbs*tier, fats*tier);
+	}
+	/**
+	 * New system for setting food vales: Values should be based on tier value (t1, t2, t3,...,tx)
+	 * 0 means non-existent
+	 * @param sugar restore stamina and add regen
+	 * @param carbs increase max stamina for 1 hr
+	 * @param fats saturation
+	 */
+	public ItemFoodMF setFoodStats(float sugar, float carbs, float fats)
+	{
+		if(sugar > 0)
+		{
+			setStaminaRestore((int)(sugar*50));
+			setStaminaRegenModifier((int)sugar, sugar/30);
+		}
+		if(carbs > 0)
+		{
+			setStaminaModifier(50*carbs, 1F);
+		}
+		if(fats > 0)
+		{
+			setSaturation(10*fats);
+		}
+		return this;
+	}
+	public ItemFoodMF setSaturation(float amount)
+	{
+		hasEffect = true;
+		this.mfSaturation = amount * FoodListMF.satModifier;
+		return this;
+	}
+	
 	public ItemFoodMF setStaminaModifier(float buff, float hours)
 	{
 		int secondsLasting = (int) (hours*3600F);
@@ -120,27 +169,20 @@ public class ItemFoodMF extends ItemFood
 	}
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	@Override
-    public void addInformation(ItemStack weapon, EntityPlayer user, List list, boolean extra) 
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack food, EntityPlayer user, List list, boolean extra) 
     {
-        super.addInformation(weapon, user, list, extra);
-        if(MineFantasyII.isDebug())
-        {
-        	int pts = TierHelper.getPointsWorthForFood(hungerLevel, mfSaturation, staminaBuff, staminaSeconds, staminaRegenBuff, staminaRegenSeconds);
-        	list.add("Points: " + pts);
-        	list.add("Recommended Tier: " + (pts <= 10 ? 0 : (int)Math.ceil(pts/50F)));
-        	int lvl =(Math.max(0, (Math.round(pts/5F))-10));
-        	list.add("Level: " + lvl);
-        }
+        super.addInformation(food, user, list, extra);
         list.add(StatCollector.translateToLocalFormatted("food.stat.hunger.name", hungerLevel));
-        if(mfSaturation > 0)
-    	{
-			list.add(StatCollector.translateToLocalFormatted("food.stat.saturation.name", decimal_format.format(mfSaturation)));
-    	}
         
-        if(hasEffect)
+        if(hasEffect && ClientItemsMF.showSpecials(food, user, list, extra))
         {
         	list.add("");
         	list.add(EnumChatFormatting.WHITE + StatCollector.translateToLocal("food.stat.list.name"));
+        	if(mfSaturation > 0)
+        	{
+    			list.add(StatCollector.translateToLocalFormatted("food.stat.saturation.name", decimal_format.format(mfSaturation)));
+        	}
         	if(staminaRestore > 0)
         	{
         		list.add(StatCollector.translateToLocalFormatted("food.stat.staminaPlus.name", (int)staminaRestore));
@@ -219,23 +261,39 @@ public class ItemFoodMF extends ItemFood
 	@Override
 	public ItemStack onEaten(ItemStack food, World world, EntityPlayer consumer)
     {
-		ItemStack left = getLeftOver(food);
-        if(left != null)
+        setEatDelay(consumer, 10);
+        consumer.getFoodStats().func_151686_a(this, food);
+        world.playSoundAtEntity(consumer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
+        this.onMFFoodEaten(food, world, consumer);
+        
+        if(this.isDamageable())//Multifood
         {
-        	if(food.stackSize == 1)
-        	{
-        		consumer.getFoodStats().func_151686_a(this, food);
-                world.playSoundAtEntity(consumer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F);
-                this.onFoodEaten(food, world, consumer);
-        		return left;
-        	}
-    		if(!consumer.inventory.addItemStackToInventory(left) && !consumer.worldObj.isRemote)
+        	if(food.attemptDamageItem(1, consumer.getRNG()))
     		{
-    			consumer.entityDropItem(left, 1.0F);
+    			--food.stackSize;
+    			if(food.stackSize < 0)
+    			{
+    				food.stackSize = 0;
+    			}
     		}
         }
-        setEatDelay(consumer, 10);
-        return super.onEaten(food, world, consumer);
+        else//Food
+        {
+	        ItemStack left = getLeftOver(food);
+	        if(left != null)
+	        {
+	        	if(food.stackSize == 1)
+	        	{
+	        		return left;
+	        	}
+	    		if(!consumer.inventory.addItemStackToInventory(left) && !consumer.worldObj.isRemote)
+	    		{
+	    			consumer.entityDropItem(left, 1.0F);
+	    		}
+	        }
+	        -- food.stackSize;
+        }
+        return food;
     }
 	
 	public static void setLeftOver(ItemStack food, ItemStack leftover)
@@ -298,6 +356,8 @@ public class ItemFoodMF extends ItemFood
 
 	private static void setEatDelay(EntityPlayer player, int time)
 	{
+		time += getEatDelay(player);//add to existing
+		
 		player.getEntityData().setInteger(eatDelayNBT , time);
 	}
 	private static int getEatDelay(EntityPlayer player)

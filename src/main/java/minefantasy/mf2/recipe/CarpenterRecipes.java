@@ -1341,7 +1341,7 @@ public class CarpenterRecipes
 			'N', ComponentListMF.nail
 		});
 		KnowledgeListMF.crossStockIronR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.crossbow_stock_iron), "crossShaftAdvanced", spanner, "spanner", 2, 300, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.crossbow_stock_iron), "crossShaftAdvanced", spanner, "spanner", 1, 300, new Object[]
 		{
 			" BBB",
 			"BOGG",

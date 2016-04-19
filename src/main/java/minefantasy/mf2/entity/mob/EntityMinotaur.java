@@ -1,31 +1,36 @@
 package minefantasy.mf2.entity.mob;
 
-import java.util.ArrayList;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.armour.IArmourPenetrationMob;
 import minefantasy.mf2.api.armour.IArmouredEntity;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.TacticalManager;
+import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigMobs;
+import minefantasy.mf2.entity.mob.ai.AI_MinotaurFindTarget;
 import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveThroughVillage;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.EntityCreeper;
+import net.minecraft.entity.monster.EntityGhast;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +41,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeModContainer;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmourPenetrationMob
 {
@@ -51,15 +56,15 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 		this.getNavigator().setBreakDoors(true);
         this.tasks.addTask(0, new EntityAISwimming(this));
         this.tasks.addTask(2, new EntityAIAttackOnCollide(this, EntityPlayer.class, 1.0D, false));
-        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityVillager.class, 1.0D, true));
+        this.tasks.addTask(4, new EntityAIAttackOnCollide(this, EntityLivingBase.class, 1.0D, true));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
-        this.tasks.addTask(6, new EntityAIMoveThroughVillage(this, 1.0D, false));
-        this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
+        this.tasks.addTask(7, new EntityAIWander(this, 0.5D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityVillager.class, 0, false));
+        this.targetTasks.addTask(2, new AI_MinotaurFindTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(2, new AI_MinotaurFindTarget(this, EntityLiving.class, 0, false));
+        //this.targetTasks.addTask(2, new AI_MinotaurFindTarget(this, EntityLivingBase.class, 0, false).limitToBeserk());
         this.setSize(1.5F, 3F);
         this.stepHeight = 1.0F;
         this.experienceValue = 40;
@@ -68,10 +73,15 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
         {
             this.equipmentDropChances[i] = 1F;
         }
-        int species = dimension == -1 ?1:0;
+	}
+	@Override
+    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data)
+    {
+		int species = MinotaurBreed.getEnvironment(this);
     	setSpecies((byte)species);
     	setBreed(MinotaurBreed.getRandomMinotaur(species));
-	}
+    	return super.onSpawnWithEgg(data);
+    }
 	
 	@Override
 	public String getCommandSenderName()
@@ -99,6 +109,12 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
         this.dataWatcher.addObject(dataID, Byte.valueOf((byte)0));
         this.dataWatcher.addObject(dataID+1, Byte.valueOf((byte)1));
         this.dataWatcher.addObject(dataID+2, Integer.valueOf(2));
+        this.dataWatcher.addObject(dataID+3, Integer.valueOf(0));
+    }
+    @Override
+    public float getBlockPathWeight(int x, int y, int z)
+    {
+        return super.getBlockPathWeight(x, y, z);
     }
     @Override
     public void onUpdate()
@@ -107,6 +123,31 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     	
     	if(!worldObj.isRemote)
     	{
+    		if(getRageLevel() == 0 && getAttackTarget() == null)
+    		{
+    			if(ticksExisted % 40 == 0)
+    			{
+    				forage();
+    			}
+    		}
+    		if(ticksExisted % 20 == 0)
+    		{
+				if(!isBloodied())
+	    		{
+					if(getRageVariable() > 0)
+					{
+		    			addRage(-1);
+		    			if(getRageVariable() > 50)
+		    			{
+		    				setRage(50);
+		    			}
+					}
+	    		}
+				else
+				{
+					heal(1);
+				}
+    		}
     		if(hitCooldownTime > 0)--hitCooldownTime;
     		if(grabCooldown > 0)
     		{
@@ -120,25 +161,49 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     		{
     			initBasicAttack();
     		}
-    		
     		if(this.getAttackTarget() != null)
     		{
-    			if(getAttack() != (byte)2 && getHeldItem() == null && rand.nextInt(100) == 0)
+    			if(getRageLevel() > 20 && getAttack() != (byte)2 && getHeldItem() == null && rand.nextInt(100) == 0)
     			{
     				this.initHeadbutt();
     			}
     			EntityLivingBase target = getAttackTarget();
-    			if(getAttack() !=2 && rand.nextInt(50) == 0 && onGround && target instanceof EntityPlayer && ((EntityPlayer)target).isBlocking() && this.getDistanceToEntity(target) < 4F)
+    			if(getIntLvl() > 0)//Smarter means more likely
     			{
-    				this.jump();
-    				this.initPowerAttack();
+    				if(getAttack() !=2 && rand.nextInt(10) == 0 && onGround && target instanceof EntityPlayer && ((EntityPlayer)target).isBlocking() && this.getDistanceToEntity(target) < 4F)
+        			{
+        				this.jump();
+        				this.initPowerAttack();
+        			}
+    			}
+    			else
+    			{
+	    			if(getRageLevel() > 40 && getAttack() !=2 && rand.nextInt(50) == 0 && onGround && target instanceof EntityPlayer && ((EntityPlayer)target).isBlocking() && this.getDistanceToEntity(target) < 4F)
+	    			{
+	    				this.jump();
+	    				this.initPowerAttack();
+	    			}
+    			}
+    			
+    			if(this.ticksExisted % 20 == 0 && (getRageLevel() <= 0 || !canEntityBeSeen(getAttackTarget())))
+    			{
+    				int chance = 10;
+    				int intel = getIntLvl();
+    				if(intel > 0)
+    				{
+    					chance += (intel * 90);
+    				}
+    				if(rand.nextInt(chance) == 0)
+    				{
+    					this.setAttackTarget(null);
+    				}
     			}
     		}
     		
-    		boolean bloodied = getHealth() < (getMaxHealth()* ((float)getMinotaur().beserkThreshold/100F));
+    		boolean inBeserk = getRageLevel() >= 100 && isBloodied();
     		if(getAttack() == (byte)2)
     		{
-    			if(!bloodied)
+    			if(!inBeserk)
     			{
     				initBasicAttack();
     			}
@@ -147,14 +212,63 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     				this.swingItem();
     			}
     		}
-    		if(getAttack() != (byte)2 && bloodied)
+    		if(getAttack() != (byte)2 && inBeserk)
     		{
 				initBeserk();
     		}
     	}
     }
 
-    @Override
+    private void forage() 
+    {
+    	if(rand.nextInt(100) == 0)
+    	{
+    		int radius = 8;
+    		for(int x = -radius; x <= radius; x++)
+    		{
+    			for(int y = -2; y <= 2; y++)
+        		{
+    				for(int z = -radius; z <= radius; z++)
+    	    		{
+    	    			int xPos = (int)posX + x;
+    	    			int yPos = (int)posY + y;
+    	    			int zPos = (int)posZ + z;
+    	    			if(rand.nextInt(10) == 0)
+    	    			{
+	    	    			if(worldObj.getBlock(xPos, yPos, zPos) == BlockListMF.berryBush && worldObj.getBlockMetadata(xPos, yPos, zPos) == 0)
+	    	    			{
+	    	    				getNavigator().tryMoveToXYZ(xPos+0.5, yPos+1, zPos+0.5, 0.6F);
+	    	    				return;
+	    	    			}
+	    	    			if(worldObj.getBlock(xPos, yPos, zPos) instanceof BlockCrops && worldObj.getBlockMetadata(xPos, yPos, zPos) >= 4)
+	    	    			{
+	    	    				getNavigator().tryMoveToXYZ(xPos+0.5, yPos+1, zPos+0.5, 0.6F);
+	    	    				return;
+	    	    			}
+    	    			}
+    	    		}	
+        		}	
+    		}
+    		return;
+    	}
+    	if(worldObj.getBlock((int)posX, (int)posY, (int)posZ) == BlockListMF.berryBush && worldObj.getBlockMetadata((int)posX, (int)posY, (int)posZ) == 0)
+    	{
+    		worldObj.playSoundEffect(posX, posY+getEyeHeight(), posZ, "random.eat", 1.0F, 0.75F);
+    		swingItem();
+    		heal(10);
+    		worldObj.setBlockMetadataWithNotify((int)posX, (int)posY, (int)posZ, 1, 2);
+    	}
+    	else if(worldObj.getBlock((int)posX, (int)posY, (int)posZ) instanceof BlockCrops && worldObj.getBlockMetadata((int)posX, (int)posY, (int)posZ) > 0)
+    	{
+    		worldObj.playSoundEffect(posX, posY+getEyeHeight(), posZ, "random.eat", 1.0F, 0.75F);
+    		worldObj.playSoundEffect(posX, posY+getEyeHeight(), posZ, "dig.grass", 1.0F, 1.00F);
+    		swingItem();
+    		heal(5);
+    		worldObj.setBlockToAir((int)posX, (int)posY, (int)posZ);
+    	}
+	}
+
+	@Override
     protected void dropFewItems(boolean playerKill, int looting)
     {
     	int count = rand.nextInt(looting+getLootCount()+1);
@@ -179,14 +293,20 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     {
     	if(getSpecies() == 1)//NETHER
     	{
-    		return rand.nextInt(5) == 0 ? ToolListMF.loot_sack_uc : ToolListMF.loot_sack;
+    		return ToolListMF.loot_sack_uc;
     	}
-		return rand.nextInt(10) == 0 ? ToolListMF.loot_sack_uc : ToolListMF.loot_sack;
+		return rand.nextInt(8) == 0 ? ToolListMF.loot_sack_uc : ToolListMF.loot_sack;
 	}
     private int getLootCount() 
     {
 		return 2;
 	}
+    @Override
+    public boolean canAttackClass(Class enemy)
+    {
+    	return super.canAttackClass(enemy) && (getIntLvl() <= 0 || enemy != EntityMinotaur.class);
+    }
+    
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage)
     {
@@ -196,6 +316,11 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
         }
         else
         {
+        	if(source.getEntity() != null)
+    		{
+    			addRage(this.getIntLvl() >= 1 ? (int)(damage/2) : (int)damage);
+    		}
+        	
             EntityLivingBase entitylivingbase = this.getAttackTarget();
 
             if (entitylivingbase == null && this.getEntityToAttack() instanceof EntityLivingBase)
@@ -214,7 +339,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 	public void initBeserk()
 	{
 		TacticalManager.tryDisarm(this);
-		this.playSound("minefantasy2:mob.minotaur.beserk", 1.0F, 1.0F);
+		//this.playSound("minefantasy2:mob.minotaur.beserk", 1.0F, 1.0F);
 		setSprinting(true);
 		setAttack((byte)2);
 	}
@@ -295,6 +420,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
         nbt.setInteger("Attack", (int)getAttack());
         nbt.setInteger("Species", (int)getSpecies());
         nbt.setInteger("Breed", (int)getBreed());
+        nbt.setInteger("Rage", (int)getRageVariable());
     }
 
     @Override
@@ -305,6 +431,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
         setAttack((byte)nbt.getInteger("Attack"));
         setSpecies((byte)nbt.getInteger("Species"));
         setBreed(nbt.getInteger("Breed"));
+        setRage(nbt.getInteger("Rage"));
     }
 	
 	private float getDT()
@@ -354,6 +481,11 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     {
     	this.isImmuneToFire = type == 1;
     	dataWatcher.updateObject(dataID+1, type);
+    	
+    	if(type == 1)//nether
+    	{
+    		this.setCurrentItemOrArmor(0, CustomToolListMF.standard_halbeard.construct("iron", "ScrapWood"));
+    	}
     }
     public int getBreed()
 	{
@@ -382,7 +514,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 	@Override
 	public boolean attackEntityAsMob(Entity target)
     {
-		if(hitCooldownTime > 0)return false;
+		//if(hitCooldownTime > 0)return false;
 		
 		if(!canEntityBeSeen(target))
 		{
@@ -395,6 +527,11 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 		
 		
 		float dam = getHitDamage();
+		
+		if(getRageLevel() > 50)
+		{
+			addRage((int) (dam*1.5));
+		}
 		if(getAttack() == 2 && this.riddenByEntity != null && this.riddenByEntity == target)
 		{
 			if(target instanceof EntityLivingBase && rand.nextInt(4) == 0)
@@ -404,7 +541,7 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 		}
 		if(this.riddenByEntity == null)
 		{
-			if(grabCooldown <= 0 && rand.nextInt(100) < getGrabChance())
+			if(grabCooldown <= 0 && rand.nextInt(100) < getGrabChance() && canPickUp(target))
 			{
 				target.mountEntity(this);
 			}
@@ -458,11 +595,56 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 
         return flag;
     }
-	private int getAttackSpeed()
+	private boolean canPickUp(Entity target) 
 	{
-		return this.getAttack() == 2 ? 15 : 35;
+		float mysize = getVolume(this);
+		float theirsize = getVolume(target);
+		return mysize > theirsize;
 	}
 
+	private float getVolume(Entity entity)
+	{
+		return entity.width*entity.width*entity.height;
+	}
+
+	private int getAttackSpeed()
+	{
+		return 0;
+		/*
+		if(rage >= 100)
+		{
+			return 10;
+		}
+		if(rage > 80)
+		{
+			return 15;
+		}
+		if(rage > 50)
+		{
+			return 20;
+		}
+		if(rage > 25)
+		{
+			return 30;
+		}
+		return 35;
+		*/
+	}
+
+	@Override
+	public void onKillEntity(EntityLivingBase victim) 
+	{
+		super.onKillEntity(victim);
+		if(!isBloodied())
+		{
+			addRage(-20);
+		}
+		if(getHealth() < getMaxHealth()*0.75F)
+		{
+			this.heal(5);
+		}
+	}
+	
 	public MinotaurBreed getMinotaur()
 	{
 		return MinotaurBreed.getBreed(getSpecies(), getBreed());
@@ -523,7 +705,8 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 	
 	public boolean isBloodied()
 	{
-		return getHealth() < (getMaxHealth()*0.4F);
+		float t = this.getMinotaur().beserkThreshold/100F;
+		return getHealth() < (getMaxHealth()*t);
 	}
 	@SideOnly(Side.CLIENT)
 	public String getTexture()
@@ -534,5 +717,30 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
 			tex += "_bloodied";
 		}
 		return tex;
+	}
+
+	public int getRageVariable()
+	{
+		return dataWatcher.getWatchableObjectInt(dataID+3);
+	}
+	public void addRage(int level)
+	{
+		setRage(getRageVariable() + level);
+	}
+	public void setRage(int level)
+	{
+		if(!worldObj.isRemote)
+		dataWatcher.updateObject(dataID+3, Math.max(0, level));
+	}
+	
+	
+	public int getRageLevel() 
+	{
+		return isBloodied() ? 100 : getRageVariable();
+	}
+	
+	private int getIntLvl()
+	{
+		return this.getMinotaur().intelligenceLvl;
 	}
 }

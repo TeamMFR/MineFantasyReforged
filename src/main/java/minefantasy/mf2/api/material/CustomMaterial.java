@@ -287,4 +287,13 @@ public class CustomMaterial
 	public boolean isHeatable() {
 		return type.equalsIgnoreCase("metal");
 	}
+	public CustomMaterial setUnbreakable()
+	{
+		unbreakable = true;
+		return this;
+	}
+	private boolean unbreakable = false;
+	public boolean isUnbrekable() {
+		return unbreakable;
+	}
 }

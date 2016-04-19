@@ -5,6 +5,7 @@ import java.util.Random;
 import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.AlloyRecipes;
 import minefantasy.mf2.api.refine.SmokeMechanics;
+import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.refining.BlockCrucible;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
 import net.minecraft.block.Block;
@@ -189,6 +190,10 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 	}
 	public float getTemperature()
 	{
+		if(this.getTier() >= 1 && !isCoated())
+		{
+			return 0F;
+		}
 		Block under = worldObj.getBlock(xCoord, yCoord-1, zCoord);
 		
 		if(under.getMaterial() == Material.fire)
@@ -206,6 +211,19 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		}
 		return 0F;
 	}
+	private boolean isCoated() 
+	{
+		return isFirebrick(0, 0, -1)
+			&& isFirebrick(0, 0,  1)
+			&& isFirebrick(-1, 0,  0)
+			&& isFirebrick( 1, 0,  0);
+	}
+
+	private boolean isFirebrick(int x, int y, int z)
+	{
+		return worldObj.getBlock(xCoord+x, yCoord+y, zCoord+z) == BlockListMF.firebricks;
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt)
 	{

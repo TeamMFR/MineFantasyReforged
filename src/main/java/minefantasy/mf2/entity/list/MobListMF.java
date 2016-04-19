@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;

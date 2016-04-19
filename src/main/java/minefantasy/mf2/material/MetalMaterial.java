@@ -79,9 +79,9 @@ public class MetalMaterial extends CustomMaterial
 		//Mythic Mats  Name          	T  Dur     Flx 	 Shp   	Rst		 Wg
 		getOrAddMetal("Mithril",        7, 10.0F,  0.8F, 7.0F,  90F,	1.5F, 		250, 180, 250).setMeltingPoint(200).setCrafterTiers(6).setRarity(1);
 		getOrAddMetal("Adamantium",     7, 12.0F,  0.8F, 8.0F,  80F,	4.5F, 		100, 200, 100).setMeltingPoint(250).setCrafterTiers(6).setRarity(1);
-		getOrAddMetal("Mithium",  	    8, 15.0F,  0.8F, 10.0F, 95F,	1.0F, 		60 , 200, 255).setMeltingPoint(250).setCrafterTiers(7).setRarity(2);
-		getOrAddMetal("Ignotumite",     8, 15.0F,  0.8F, 14.0F, 85F,	5.0F, 		20 , 255, 100).setMeltingPoint(300).setCrafterTiers(7).setRarity(2);
-		getOrAddMetal("Ender",          8, 15.0F,  0.8F, 12.0F, 90F,	4.0F, 		255, 63 , 243).setMeltingPoint(275).setCrafterTiers(7).setRarity(2);
+		getOrAddMetal("Mithium",  	    8, 15.0F,  0.8F, 10.0F, 95F,	1.0F, 		60 , 200, 255).setMeltingPoint(250).setCrafterTiers(7).setRarity(2).setUnbreakable();
+		getOrAddMetal("Ignotumite",     8, 15.0F,  0.8F, 14.0F, 85F,	5.0F, 		20 , 255, 100).setMeltingPoint(300).setCrafterTiers(7).setRarity(2).setUnbreakable();
+		getOrAddMetal("Ender",          8, 15.0F,  0.8F, 12.0F, 90F,	4.0F, 		255, 63 , 243).setMeltingPoint(275).setCrafterTiers(7).setRarity(2).setUnbreakable();
 		
 		//Non MF
 		getOrAddMetal("StainlessSteel", 3, 5.0F,   1.0F, 2.5F,  40F,	2.5F, 		188, 188, 198).setMeltingPoint(140).setCrafterTiers(3);

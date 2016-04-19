@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import minefantasy.mf2.config.ConfigMobs;
+import net.minecraft.world.biome.BiomeGenBase;
 
 public class MinotaurBreed 
 {
 	public static final ArrayList normal = new ArrayList<MinotaurBreed>();
+	public static final ArrayList frost = new ArrayList<MinotaurBreed>();
 	public static final ArrayList nether = new ArrayList<MinotaurBreed>();
 	private static Random rand = new Random();
 	
 	public static MinotaurBreed BROWN = new MinotaurBreed(normal, "minotaur", "Brown", ConfigMobs.minotaurHP, ConfigMobs.minotaurMD, ConfigMobs.minotaurGD).setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC).setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB);
-	public static MinotaurBreed NETHER = new MinotaurBreed(nether, "dredminotaur", "Nether", ConfigMobs.netherminotaurHP, ConfigMobs.netherminotaurMD, ConfigMobs.netherminotaurGD).setGrabs(ConfigMobs.netherminotaurDC, ConfigMobs.netherminotaurGC, ConfigMobs.netherminotaurTC).setBeserk(ConfigMobs.netherminotaurBT, ConfigMobs.netherminotaurBD, ConfigMobs.netherminotaurGCB);
+	public static MinotaurBreed FROST = new MinotaurBreed(frost, "frostminotaur", "White", ConfigMobs.frostminotaurHP, ConfigMobs.frostminotaurMD, ConfigMobs.frostminotaurGD).setGrabs(ConfigMobs.frostminotaurDC, ConfigMobs.frostminotaurGC, ConfigMobs.frostminotaurTC).setBeserk(ConfigMobs.frostminotaurBT, ConfigMobs.frostminotaurBD, ConfigMobs.frostminotaurGCB);
+	public static MinotaurBreed NETHER = new MinotaurBreed(nether, "dredminotaur", "Nether", ConfigMobs.netherminotaurHP, ConfigMobs.netherminotaurMD, ConfigMobs.netherminotaurGD).setGrabs(ConfigMobs.netherminotaurDC, ConfigMobs.netherminotaurGC, ConfigMobs.netherminotaurTC).setBeserk(ConfigMobs.netherminotaurBT, ConfigMobs.netherminotaurBD, ConfigMobs.netherminotaurGCB).setIntelligence(1);
 	
 	public String name = "minotaur";
 	public String tex = "Brown";
@@ -26,6 +29,7 @@ public class MinotaurBreed
 	public int throwChance = 20;
 	public int disarmChance = 10;
 	public ArrayList pool;
+	public int intelligenceLvl = 0;
 	
 	public MinotaurBreed(ArrayList pool, String name, String tex, float health, float poundDamage, float goreDamage)
 	{
@@ -65,6 +69,16 @@ public class MinotaurBreed
 		this.throwChance = throwChance;
 		return this;
 	}
+	
+	/**
+	 * Set the intelligence for the mob -1 For feral... 0 For basic... 1 For Orderly
+	 */
+	public MinotaurBreed setIntelligence(int level)
+	{
+		this.intelligenceLvl = level;
+		return this;
+	}
+	
 	public static int getRandomMinotaur(int species)
 	{
 		return getRandomMinotaur(species == 1 ? MinotaurBreed.nether : MinotaurBreed.normal);
@@ -79,10 +93,28 @@ public class MinotaurBreed
 	}
 	public static MinotaurBreed getBreed(int species, int id)
 	{
-		return getBreed(species == 1 ? MinotaurBreed.nether : MinotaurBreed.normal, id);
+		return getBreed(species == 2 ? MinotaurBreed.frost : species == 1 ? MinotaurBreed.nether : MinotaurBreed.normal, id);
 	}
 	public static MinotaurBreed getBreed(ArrayList<MinotaurBreed> pool, int id)
 	{
+		if(id >= pool.size())
+		{
+			id = (pool.size()-1);
+		}
 		return pool.get(id);
+	}
+	public static int getEnvironment(EntityMinotaur mob) 
+	{
+		if(mob.dimension == -1)return 1;//NETHER
+		
+		BiomeGenBase biome =mob.worldObj.getBiomeGenForCoords((int)mob.posY, (int)mob.posZ);
+		if(biome != null)
+		{
+			if(biome.getEnableSnow() || biome.temperature <= 0.25F || biome.getTempCategory() == BiomeGenBase.TempCategory.COLD)
+			{
+				return 2;//FROST
+			}
+		}
+		return 0;//BROWN
 	}
 }

@@ -782,8 +782,8 @@ public class GuiKnowledge extends GuiScreen
     		int level = RPGElements.getLevel(mc.thePlayer, skill);
     		int xp = skill.getXP(player)[0];
     		int max = skill.getXP(player)[1];
+    		if(xp > max)xp = max;
     		
-    		//this.mc.getTextureManager().bindTexture(skillTex);
     		float scale = (float)xp / (float)max;
     		this.drawTexturedModalRect(x+22, y+13, 0, 156, (int)(78F * scale), 5);
     		
