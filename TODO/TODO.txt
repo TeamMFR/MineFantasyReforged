@@ -1,0 +1,45 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+NOTE: Content folder has more detail, and may also be updated.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Key
+~~~~
+- = Incomplete
+X = Complete
+? = Uncertainty (if some bugs may be unclear)
+O = Obsolete (Or not considered to matter)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ISSUES       	 				     |Check|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Carpenter craft bows                                    -
+Show stats of wood (tooltip)                            -
+Optional book spawn                                     -
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+CONTENT		 				     |Check|
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Cooking Oven						-
+Mattock                                                 -
+Big Furnace                    			      	-
+Wood Bucket                     			-
+Pottery Oven (Kiln)         			        -
+Pottery Stand                   			-
+Cooktop                                                 -
+
+////////////////////////////////////////////////////////////
+More Detail:
+1: Carpenter bench craft bows: bows will be craftable with wood and "metal joints".
+   Metal joints are made on the anvil, then they (with wood and other pieces) go
+   on carpenter benches.
+
+2: Big Furnace: (See "Content" folder)
+
+3: Cooking oven: Pretty much complete (See "Content" folder)
+
+4: Wood Bucket: Just for milk and water
+
+5: Kiln: A stone furnace for cooking ceramics
+
+6: Pottery stand: similar to carpenter bench except for pottery
+
+8: Cooktop: Carpenter bench for cooking

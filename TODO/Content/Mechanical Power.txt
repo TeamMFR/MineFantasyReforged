@@ -1,0 +1,9 @@
+This is something rather tricky but being on the TODO for ages.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+General content
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Waterwheels, windmills, etc that can generate force
+Shafts and cogworks that rotate accordingly
+Bellows, industrial machines (like the auto engineering things) powered by it
+Construction tree does basic systems, engineering expands on it.
