@@ -71,7 +71,7 @@ public class TileEntityForgeRenderer extends TileEntitySpecialRenderer
         }
         model.renderModel(tile, 0.0625F, hasFuel, level); 
         
-        if(tile.hasCrucibleAbove())
+        if(tile.hasBlockAbove())
         {
         	bindTextureByName("textures/models/tileentity/forge_top.png"); //texture
         	topModel.render(0.0625F);

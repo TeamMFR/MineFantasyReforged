@@ -237,17 +237,17 @@ public class ComponentListMF
 
 	private static void initFuels() 
 	{
-		MineFantasyAPI.addForgeFuel(new ItemStack(Items.coal, 1, 0), 900, 150);//	150* , 45s
-		MineFantasyAPI.addForgeFuel(new ItemStack(Items.coal, 1, 1), 1200, 170);//	170* , 1m
-		MineFantasyAPI.addForgeFuel(Items.blaze_powder, 200, 300, true);//			300* , 10s
-		MineFantasyAPI.addForgeFuel(Items.blaze_rod,    300, 300, true);//			300* , 15s
-		MineFantasyAPI.addForgeFuel(Items.fire_charge,  1200, 350,true);//			350* , 1m
-		MineFantasyAPI.addForgeFuel(Items.lava_bucket,  2400, 500, true);//			500* , 2m
-		MineFantasyAPI.addForgeFuel(Items.magma_cream,  2400, 400);//				400* , 2m
+		MineFantasyAPI.addForgeFuel(new ItemStack(Items.coal, 1, 0), 900, 150);//	150C , 45s
+		MineFantasyAPI.addForgeFuel(new ItemStack(Items.coal, 1, 1), 1200, 180);//	180C , 1m
+		MineFantasyAPI.addForgeFuel(Items.blaze_powder, 200, 300, true);//			300C , 10s
+		MineFantasyAPI.addForgeFuel(Items.blaze_rod,    300, 300, true);//			300C , 15s
+		MineFantasyAPI.addForgeFuel(Items.fire_charge,  1200, 350,true);//			350C , 1m
+		MineFantasyAPI.addForgeFuel(Items.lava_bucket,  2400, 500, true);//			500C , 2m
+		MineFantasyAPI.addForgeFuel(Items.magma_cream,  2400, 400);//				400C , 2m
 		
-		MineFantasyAPI.addForgeFuel(ComponentListMF.coalDust, 200, 150);//				150* , 10s
-		MineFantasyAPI.addForgeFuel(ComponentListMF.coke, 1200, 250);//					250* , 1m
-		MineFantasyAPI.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 200);//	500* , 2m
+		MineFantasyAPI.addForgeFuel(ComponentListMF.coalDust, 200, 150);//				150C , 10s
+		MineFantasyAPI.addForgeFuel(ComponentListMF.coke, 1200, 250);//					250C , 1m
+		MineFantasyAPI.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 500);//	500C , 2m
 	}
 
 	private static void addRandomDrops()

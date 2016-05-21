@@ -13,8 +13,10 @@ import minefantasy.mf2.block.crafting.BlockBombPress;
 import minefantasy.mf2.block.crafting.BlockCarpenter;
 import minefantasy.mf2.block.crafting.BlockCrossbowBench;
 import minefantasy.mf2.block.crafting.BlockEngineerTanner;
+import minefantasy.mf2.block.crafting.BlockFirepit;
 import minefantasy.mf2.block.crafting.BlockRepairKit;
 import minefantasy.mf2.block.crafting.BlockResearchStation;
+import minefantasy.mf2.block.crafting.BlockRoast;
 import minefantasy.mf2.block.crafting.BlockSalvage;
 import minefantasy.mf2.block.crafting.BlockTanningRack;
 import minefantasy.mf2.block.decor.BlockRoad;
@@ -25,6 +27,7 @@ import minefantasy.mf2.block.food.BlockPie;
 import minefantasy.mf2.block.refining.BlockBFC;
 import minefantasy.mf2.block.refining.BlockBFH;
 import minefantasy.mf2.block.refining.BlockBellows;
+import minefantasy.mf2.block.refining.BlockBigFurnace;
 import minefantasy.mf2.block.refining.BlockBloomery;
 import minefantasy.mf2.block.refining.BlockChimney;
 import minefantasy.mf2.block.refining.BlockCrucible;
@@ -198,6 +201,12 @@ public class BlockListMF
 	public static Block ironbark_stair = new ConstructionBlockMF.StairsConstBlock("ironbark_stair", ironbark_planks).register("ironbark_stair");
 	public static Block ebony_stair = new ConstructionBlockMF.StairsConstBlock("ebony_stair", ebony_planks).register("ebony_stair");
 	
+	public static Block firepit = new BlockFirepit();
+	public static Block roast = new BlockRoast(0, "basic", false);
+	public static Block oven_stone = new BlockRoast(0, "basic", true);
+	
+	public static Block furnacemf = new BlockBigFurnace("fireclay", 1, false);
+	public static Block furnacemf_active = new BlockBigFurnace("fireclay", 1, true).setLightLevel(12F);
 	
 	public static void load()
 	{

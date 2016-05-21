@@ -2,11 +2,15 @@ package minefantasy.mf2.network;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.refine.ISmokeHandler;
 import minefantasy.mf2.api.refine.SmokeMechanics;
 import minefantasy.mf2.block.tileentity.TileEntityAnvilMF;
 import minefantasy.mf2.block.tileentity.TileEntityBellows;
+import minefantasy.mf2.block.tileentity.TileEntityBigFurnace;
 import minefantasy.mf2.block.tileentity.TileEntityBloomery;
 import minefantasy.mf2.block.tileentity.TileEntityBombBench;
 import minefantasy.mf2.block.tileentity.TileEntityBombPress;
@@ -14,9 +18,11 @@ import minefantasy.mf2.block.tileentity.TileEntityCarpenterMF;
 import minefantasy.mf2.block.tileentity.TileEntityChimney;
 import minefantasy.mf2.block.tileentity.TileEntityCrossbowBench;
 import minefantasy.mf2.block.tileentity.TileEntityCrucible;
+import minefantasy.mf2.block.tileentity.TileEntityFirepit;
 import minefantasy.mf2.block.tileentity.TileEntityForge;
 import minefantasy.mf2.block.tileentity.TileEntityQuern;
 import minefantasy.mf2.block.tileentity.TileEntityResearch;
+import minefantasy.mf2.block.tileentity.TileEntityRoast;
 import minefantasy.mf2.block.tileentity.TileEntityTanningRack;
 import minefantasy.mf2.block.tileentity.TileEntityTrough;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
@@ -47,9 +53,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * @author Anonymous Productions
  */
@@ -153,6 +156,9 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler
 		GameRegistry.registerTileEntity(TileEntityBombPress.class, "MF_BombPress");
 		GameRegistry.registerTileEntity(TileEntityBloomery.class, "MF_Bloomery");
 		GameRegistry.registerTileEntity(TileEntityQuern.class, "MF_Quern");
+		GameRegistry.registerTileEntity(TileEntityFirepit.class, "MF_Firepit");
+		GameRegistry.registerTileEntity(TileEntityRoast.class, "MF_SpitRoast");
+		GameRegistry.registerTileEntity(TileEntityBigFurnace.class, "MF_BigFurnace");
 	}
 
 

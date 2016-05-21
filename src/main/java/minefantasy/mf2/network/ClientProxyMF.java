@@ -1,5 +1,9 @@
 package minefantasy.mf2.network;
 
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import minefantasy.mf2.api.helpers.ClientTickHandler;
 import minefantasy.mf2.api.knowledge.InformationList;
 import minefantasy.mf2.block.tileentity.TileEntityAnvilMF;
@@ -10,9 +14,11 @@ import minefantasy.mf2.block.tileentity.TileEntityBombPress;
 import minefantasy.mf2.block.tileentity.TileEntityCarpenterMF;
 import minefantasy.mf2.block.tileentity.TileEntityCrossbowBench;
 import minefantasy.mf2.block.tileentity.TileEntityCrucible;
+import minefantasy.mf2.block.tileentity.TileEntityFirepit;
 import minefantasy.mf2.block.tileentity.TileEntityForge;
 import minefantasy.mf2.block.tileentity.TileEntityQuern;
 import minefantasy.mf2.block.tileentity.TileEntityResearch;
+import minefantasy.mf2.block.tileentity.TileEntityRoast;
 import minefantasy.mf2.block.tileentity.TileEntityTanningRack;
 import minefantasy.mf2.block.tileentity.TileEntityTrough;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
@@ -55,9 +61,11 @@ import minefantasy.mf2.client.render.block.RenderBombBench;
 import minefantasy.mf2.client.render.block.RenderBombPress;
 import minefantasy.mf2.client.render.block.RenderCarpenter;
 import minefantasy.mf2.client.render.block.RenderCrossbowBench;
+import minefantasy.mf2.client.render.block.RenderFirepit;
 import minefantasy.mf2.client.render.block.RenderForge;
 import minefantasy.mf2.client.render.block.RenderQuern;
 import minefantasy.mf2.client.render.block.RenderResearch;
+import minefantasy.mf2.client.render.block.RenderRoast;
 import minefantasy.mf2.client.render.block.RenderTanningRack;
 import minefantasy.mf2.client.render.block.RenderTrough;
 import minefantasy.mf2.client.render.block.TileEntityAnvilMFRenderer;
@@ -67,9 +75,11 @@ import minefantasy.mf2.client.render.block.TileEntityBombBenchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mf2.client.render.block.TileEntityCarpenterRenderer;
 import minefantasy.mf2.client.render.block.TileEntityCrossbowBenchRenderer;
+import minefantasy.mf2.client.render.block.TileEntityFirepitRenderer;
 import minefantasy.mf2.client.render.block.TileEntityForgeRenderer;
 import minefantasy.mf2.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mf2.client.render.block.TileEntityResearchRenderer;
+import minefantasy.mf2.client.render.block.TileEntityRoastRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTroughRenderer;
 import minefantasy.mf2.client.render.mob.ModelDragon;
@@ -96,10 +106,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
 /**
  * @author Anonymous Productions
  */
@@ -165,6 +171,10 @@ public class ClientProxyMF extends CommonProxyMF
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrossbowBench.class, new TileEntityCrossbowBenchRenderer());
 		RenderingRegistry.registerBlockHandler(new RenderQuern());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer());
+		RenderingRegistry.registerBlockHandler(new RenderFirepit());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFirepit.class, new TileEntityFirepitRenderer());
+		RenderingRegistry.registerBlockHandler(new RenderRoast());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer());
 	}
 	
 	public void registerEntityRenderer()

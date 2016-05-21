@@ -104,7 +104,10 @@ public class CogworkArmour
 				float fuel = getFuelValue(armour);
 				if(fuel > 0)
 				{
-					SmokeMechanics.spawnSmokeD(user.worldObj, user.posX, user.posY+user.height+0.5F, user.posZ, 1);
+					if(user.ticksExisted % 20 == 0)
+					{
+						SmokeMechanics.spawnSmokeD(user.worldObj, user.posX, user.posY+user.height+0.5F, user.posZ, 1);
+					}
 					float cost = ((ICogworkArmour)armour.getItem()).getPowerCost(armour);
 					if(user.isSprinting())
 					{

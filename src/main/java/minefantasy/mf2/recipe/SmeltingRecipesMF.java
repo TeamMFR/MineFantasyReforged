@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.crafting.refine.BloomRecipe;
 import minefantasy.mf2.api.refine.Alloy;
+import minefantasy.mf2.api.refine.BigFurnaceRecipes;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.item.ItemComponentMF;
@@ -64,10 +65,6 @@ public class SmeltingRecipesMF {
 		GameRegistry.addSmelting(BlockListMF.oreNitre, new ItemStack(ComponentListMF.nitre, 4), 0.25F);
 		GameRegistry.addSmelting(BlockListMF.oreSulfur, new ItemStack(ComponentListMF.sulfur, 4), 0.25F);
 		GameRegistry.addSmelting(BlockListMF.oreClay, new ItemStack(Items.clay_ball, 4), 0.25F);
-		
-		GameRegistry.addSmelting(ComponentListMF.fireclay_brick, new ItemStack(ComponentListMF.strong_brick), 0.1F);
-		GameRegistry.addSmelting(ComponentListMF.bomb_casing_uncooked, new ItemStack(ComponentListMF.bomb_casing), 0F);
-		GameRegistry.addSmelting(ComponentListMF.mine_casing_uncooked, new ItemStack(ComponentListMF.mine_casing), 0F);
 		
 		//ALLOY
 		KnowledgeListMF.bronze = 
@@ -208,6 +205,7 @@ public class SmeltingRecipesMF {
 		{
 			GameRegistry.addSmelting(ore, new ItemStack(ingot), xp);
 		}
+		BigFurnaceRecipes.addRecipe(new ItemStack(ore), new ItemStack(ingot), 100, 10);
 	}
 
 }

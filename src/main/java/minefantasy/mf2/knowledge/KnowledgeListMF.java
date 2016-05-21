@@ -45,7 +45,7 @@ public class KnowledgeListMF
 	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner, advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb, stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian, mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo, crossScope, crossBayonet, cogArmour, compPlate;
     public static InformationBase refined_planks, reinforced_stone, clay_wall, glass, brickworks, decorated_stone, bars, thatch, easyRefine, paint_brush;
     public static InformationBase toughness, fitness, armourpro, parrypro, counteratt, autoparry, scrapper, firstaid, doctor;
-    public static InformationBase cookingutensil, generic_meat, stew, jerky, saussage, sandwitch, sandwitchBig, meatpie, shepardpie, bread, oats, salt, jug, berry, icing, sweetroll, eclair, cake, carrotcake, chococake, bfcake, applepie, berrypie, cheese, cheeseroll, bandage, bandageadv;
+    public static InformationBase cookingutensil, firepit, generic_meat, stew, jerky, saussage, sandwitch, sandwitchBig, meatpie, shepardpie, bread, oats, salt, jug, berry, icing, sweetroll, eclair, cake, carrotcake, chococake, bfcake, applepie, berrypie, cheese, cheeseroll, bandage, bandageadv;
     
     public static InformationBase dwarvernKnowledge;
     public static InformationBase gnomishKnowledge;
@@ -178,6 +178,7 @@ public class KnowledgeListMF
         
         //COOKING -The Cheapest
         cookingutensil = (new InformationBase("cookingutensil",-1, 0, 0, FoodListMF.pie_tray, (InformationBase)null)).registerStat().setPage(provisioning).setUnlocked();
+        firepit = (new InformationBase("firepit", 0, 0, 0, BlockListMF.firepit, (InformationBase)null)).registerStat().setPage(provisioning).setUnlocked();
         
         generic_meat = (new InformationBase("generic_meat", 0,  -1, 0, FoodListMF.generic_meat_uncooked, (InformationBase)null)).registerStat().setPage(provisioning).setUnlocked();
         stew = (new InformationBase("stew",               0,  -3, 0, FoodListMF.stew, generic_meat)).registerStat().setPage(provisioning).setUnlocked();
@@ -230,7 +231,7 @@ public class KnowledgeListMF
     	
 		return "?";
 	}
-    public static IRecipe carpenterRecipe, waterJugR, milkJugR, plantOilR, sugarRecipe, stickRecipe, dryrocksR, meatpieOut, shepardOut, berryOut, appleOut, pumpPieOut;
+    public static IRecipe firepitRecipe, cooktopRecipe, carpenterRecipe, waterJugR, milkJugR, plantOilR, sugarRecipe, stickRecipe, dryrocksR, meatpieOut, shepardOut, berryOut, appleOut, pumpPieOut;
     public static final ArrayList<IRecipe> plankRecipe = new ArrayList<IRecipe>();
     public static final ArrayList<IRecipe> stoneBricksR = new ArrayList<IRecipe>();
     
@@ -250,7 +251,7 @@ public class KnowledgeListMF
     public static final ArrayList<IAnvilRecipe> rivetR = new ArrayList<IAnvilRecipe>();
     
     public static IAnvilRecipe tinderboxR, flintAndSteelR;
-    public static ICarpenterRecipe lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR, stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR, boneNeedleR, stoneKnifeR, quernR;
+    public static ICarpenterRecipe lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR, stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR, boneNeedleR, stoneKnifeR, quernR, stoneovenRecipe;
     
     public static Alloy[] reStone, bronze, steel, obsidalloy, black, red, blue, mithril, adamantium, ignotumite, mithium, enderforge, wolframiteR;
     public static IAnvilRecipe coalfluxR, encrustedR, steelR, obsidianHunkR, diamondR;

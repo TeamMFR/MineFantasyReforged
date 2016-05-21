@@ -283,7 +283,7 @@ public class TacticalManager
 		
 		if(CogworkArmour.isWearingAnyCogwork(entityLiving))
 		{
-			totalSpeed = 80F;//Cogwork regardless always slows speed by 20%
+			totalSpeed = entityLiving.isSprinting() ? 60F : 80F;//Cogwork regardless always slows speed by 20%
 		}
 		else if(shouldSlow && !isImmuneToWeight(entityLiving))
 		{

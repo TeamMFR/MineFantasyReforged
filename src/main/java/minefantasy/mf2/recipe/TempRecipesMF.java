@@ -55,18 +55,6 @@ public class TempRecipesMF
 				'S', Items.stick,
 			});
 		}
-		GameRegistry.addSmelting(FoodListMF.horse_raw, new ItemStack(FoodListMF.horse_cooked), 0.2F);
-		GameRegistry.addSmelting(FoodListMF.wolf_raw, new ItemStack(FoodListMF.wolf_cooked), 0.2F);
-		
-		GameRegistry.addSmelting(FoodListMF.raw_bread, new ItemStack(Items.bread), 0);
-		GameRegistry.addSmelting(FoodListMF.dough, new ItemStack(FoodListMF.breadroll), 0);
-		GameRegistry.addSmelting(FoodListMF.generic_meat_uncooked, new ItemStack(FoodListMF.generic_meat_cooked), 0);
-		GameRegistry.addSmelting(FoodListMF.generic_meat_strip_uncooked, new ItemStack(FoodListMF.generic_meat_strip_cooked), 0);
-		GameRegistry.addSmelting(FoodListMF.generic_meat_chunk_uncooked, new ItemStack(FoodListMF.generic_meat_chunk_cooked), 0);
-		GameRegistry.addSmelting(FoodListMF.generic_meat_mince_uncooked, new ItemStack(FoodListMF.generic_meat_mince_cooked), 0);
-		GameRegistry.addSmelting(FoodListMF.curds, new ItemStack(BlockListMF.cheese_wheel), 0);
-		GameRegistry.addSmelting(FoodListMF.bowl_water_salt, new ItemStack(FoodListMF.salt), 0);
-		GameRegistry.addSmelting(FoodListMF.saussage_raw, new ItemStack(FoodListMF.saussage_cooked), 0);
 		
 		GameRegistry.addShapedRecipe(new ItemStack(Blocks.cobblestone), new Object[]
 		{
@@ -156,19 +144,6 @@ public class TempRecipesMF
 
 	private static void addFood()
 	{
-		GameRegistry.addSmelting(FoodListMF.sweetroll_raw, new ItemStack(FoodListMF.sweetroll_uniced), 0F);
-		GameRegistry.addSmelting(FoodListMF.cake_raw, new ItemStack(FoodListMF.cake_uniced), 0F);
-		GameRegistry.addSmelting(FoodListMF.cake_simple_raw, new ItemStack(FoodListMF.cake_simple_uniced), 0F);
-		GameRegistry.addSmelting(FoodListMF.cake_carrot_raw, new ItemStack(FoodListMF.cake_carrot_uniced), 0F);
-		GameRegistry.addSmelting(FoodListMF.cake_choc_raw, new ItemStack(FoodListMF.cake_choc_uniced), 0F);
-		GameRegistry.addSmelting(FoodListMF.cake_bf_raw, new ItemStack(FoodListMF.cake_bf_uniced), 0F);
-		GameRegistry.addSmelting(FoodListMF.pie_meat_uncooked, new ItemStack(FoodListMF.pie_meat_cooked), 0F);
-		GameRegistry.addSmelting(FoodListMF.pie_shepard_uncooked, new ItemStack(FoodListMF.pie_shepard_cooked), 0F);
-		GameRegistry.addSmelting(FoodListMF.pie_apple_uncooked, new ItemStack(FoodListMF.pie_apple_cooked), 0F);
-		GameRegistry.addSmelting(FoodListMF.pie_berry_uncooked, new ItemStack(FoodListMF.pie_berry_cooked), 0F);
-		GameRegistry.addSmelting(FoodListMF.pie_pumpkin_uncooked, new ItemStack(FoodListMF.pie_pumpkin_uncooked), 0F);
-		GameRegistry.addSmelting(FoodListMF.eclair_raw, new ItemStack(FoodListMF.eclair_uniced), 0F);
-
 		KnowledgeListMF.meatpieOut =
 		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.pie_meat), new Object[]
 		{

@@ -11,7 +11,7 @@ public class ForgePacket extends PacketMF
 	public static final String packetName = "MF2_ForgePacket";
 	private int[] coords = new int[3];
 	private float[] fuels = new float[2];
-	private float[] temps = new float[2];
+	private float[] temps = new float[3];
 	private int workableState;
 	
 	public ForgePacket(TileEntityForge tile)
@@ -22,7 +22,7 @@ public class ForgePacket extends PacketMF
 		{
 			fuels[0] = fuels[1];
 		}
-		temps = new float[]{tile.temperature, tile.fuelTemperature};
+		temps = new float[]{tile.temperature, tile.fuelTemperature, tile.getHeat()};
 		workableState = tile.getWorkableState();
 	}
 
@@ -37,6 +37,7 @@ public class ForgePacket extends PacketMF
         fuels[1] = packet.readFloat();
         temps[0] = packet.readFloat();
         temps[1] = packet.readFloat();
+        temps[2] = packet.readFloat();
         workableState = packet.readInt();
         
         TileEntity entity = player.worldObj.getTileEntity(coords[0], coords[1], coords[2]);
@@ -48,6 +49,7 @@ public class ForgePacket extends PacketMF
 	        tile.maxFuel = fuels[1];
 	        tile.temperature = temps[0];
 	        tile.fuelTemperature = temps[1];
+	        tile.exactTemperature = (int)temps[2];
 	        tile.workableState = workableState;
         }
 	}
@@ -69,6 +71,7 @@ public class ForgePacket extends PacketMF
 		packet.writeFloat(fuels[1]);
 		packet.writeFloat(temps[0]);
 		packet.writeFloat(temps[1]);
+		packet.writeFloat(temps[2]);
 		packet.writeInt(workableState);
 	}
 }

@@ -29,7 +29,10 @@ public class KnowledgePageRegistry
 			KnowledgeListMF.gettingStarted.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.stoneSpearR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneAxeR));
 		}
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.1"), new EntryPageText("knowledge.gettingStarted.2"));
+		
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.carpenter"), new EntryPageRecipeBase(KnowledgeListMF.carpenterRecipe));
+		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.fire"), new EntryPageRecipeBase(KnowledgeListMF.firepitRecipe), new EntryPageRecipeBase(KnowledgeListMF.dryrocksR));
+		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.food"), new EntryPageRecipeBase(KnowledgeListMF.cooktopRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneovenRecipe));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.tanning"), new EntryPageRecipeCarpenter(KnowledgeListMF.tannerRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneKnifeR));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.forging"), new EntryPageText("knowledge.gettingStarted.forging.2"), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneAnvilRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.forgeRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneHammerR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneTongsR), new EntryPageRecipeBase(KnowledgeListMF.dryrocksR), new EntryPageRecipeCarpenter(KnowledgeListMF.apronRecipe));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.3"), new EntryPageRecipeAnvil(KnowledgeListMF.shearsR), new EntryPageText("knowledge.gettingStarted.4"), new EntryPageText("knowledge.gettingStarted.5"), new EntryPageRecipeAnvil(KnowledgeListMF.hammerR), new EntryPageRecipeAnvil(KnowledgeListMF.tongsR), new EntryPageText("knowledge.gettingStarted.6"));
@@ -322,6 +325,10 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.smeltMithium.addPages(new EntryPageText("knowledge.smeltMithium.1"), new EntryPageCrucible(KnowledgeListMF.mithium));
 	    KnowledgeListMF.smeltEnderforge.addPages(new EntryPageText("knowledge.smeltEnderforge.1"), new EntryPageCrucible(KnowledgeListMF.enderforge));
 	    
+	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.1"), new EntryPageRecipeBase(KnowledgeListMF.firepitRecipe));
+	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.2"), new EntryPageRecipeBase(KnowledgeListMF.cooktopRecipe));
+	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.3"), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneovenRecipe));
+	    		
 	    KnowledgeListMF.cookingutensil.addPages(new EntryPageText("knowledge.cookingutensil.1"), new EntryPageRecipeAnvil(KnowledgeListMF.caketinRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.pieTrayRecipe), new EntryPageSmelting(ComponentListMF.pie_tray_uncooked, FoodListMF.pie_tray));
 	    KnowledgeListMF.salt.addPages(new EntryPageText("knowledge.salt.1"), new EntryPageSmelting(new ItemStack(FoodListMF.bowl_water_salt), new ItemStack(FoodListMF.salt)));
 	    KnowledgeListMF.jug.addPages(new EntryPageText("knowledge.jug.1"),  new EntryPageRecipeCarpenter(KnowledgeListMF.jugRecipe), new EntryPageSmelting(FoodListMF.jug_uncooked, FoodListMF.jug_empty), new EntryPageText("knowledge.jug.2"), new EntryPageRecipeBase(KnowledgeListMF.waterJugR), new EntryPageRecipeBase(KnowledgeListMF.milkJugR));

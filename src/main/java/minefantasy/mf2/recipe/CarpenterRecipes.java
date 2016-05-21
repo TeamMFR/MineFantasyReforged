@@ -532,11 +532,6 @@ public class CarpenterRecipes
 			" C ",
 			'C', Items.clay_ball,
 		});
-		GameRegistry.addSmelting(ComponentListMF.pie_tray_uncooked, new ItemStack(FoodListMF.pie_tray), 0F);
-		GameRegistry.addSmelting(ComponentListMF.clay_pot_uncooked, new ItemStack(ComponentListMF.clay_pot), 0F);
-		GameRegistry.addSmelting(ComponentListMF.ingot_mould_uncooked, new ItemStack(ComponentListMF.ingot_mould), 0F);
-		GameRegistry.addSmelting(FoodListMF.jug_uncooked, new ItemStack(FoodListMF.jug_empty), 0F);
-		
 		KnowledgeListMF.blackpowderRec = 
 		MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMF.blackpowder, 2), "blackpowder", basic, "hands", -1, 2 , new Object[]
 		{
@@ -680,6 +675,14 @@ public class CarpenterRecipes
 			"FSF",
 			"SSS",
 			'F', Items.flint,
+			'S', Blocks.stone,
+		});
+		KnowledgeListMF.stoneovenRecipe =
+		MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(BlockListMF.oven_stone), "", stonemason, "hammer", -1, 10, new Object[]
+		{
+			"S",
+			"C",
+			'C', BlockListMF.roast,
 			'S', Blocks.stone,
 		});
 				

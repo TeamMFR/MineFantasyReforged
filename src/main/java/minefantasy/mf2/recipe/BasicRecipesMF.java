@@ -41,6 +41,7 @@ public class BasicRecipesMF
 		CarpenterRecipes.init();
 		SmeltingRecipesMF.init();
 		SalvageRecipes.init();
+		CookingRecipes.init();
 		GameRegistry.addRecipe(new RecipeArmourDyeMF());
 		
 		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
@@ -51,6 +52,22 @@ public class BasicRecipesMF
 		{
 			"S",
 			'S', ComponentListMF.plank
+		});
+		
+		KnowledgeListMF.firepitRecipe =
+		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.firepit), new Object[]
+		{
+			" P ",
+			"S S",
+			'S', Items.stick,
+			'P', ComponentListMF.plank
+		});
+		KnowledgeListMF.cooktopRecipe =
+		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.roast), new Object[]
+		{
+			"PSP",
+			'S', Blocks.cobblestone,
+			'P', ComponentListMF.plank
 		});
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(BlockListMF.yew_planks, 4), new Object[]

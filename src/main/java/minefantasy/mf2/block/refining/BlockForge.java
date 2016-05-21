@@ -229,6 +229,10 @@ public class BlockForge extends BlockContainer
     			ForgeFuel stats = ForgeItemHandler.getStats(held);
     			if(stats != null && tile.addFuel(stats, true, tier))
     			{
+    				if(user.capabilities.isCreativeMode)
+    				{
+    					return true;
+    				}
 					if(user.getHeldItem().getItem().getContainerItem() != null)
 					{
 						ItemStack cont = new ItemStack(user.getHeldItem().getItem().getContainerItem());
@@ -269,7 +273,7 @@ public class BlockForge extends BlockContainer
     				return true;
     			}
     		}
-    		if(!world.isRemote && !tile.hasCrucibleAbove())
+    		if(!world.isRemote && !tile.hasBlockAbove())
     		{
     			user.openGui(MineFantasyII.instance, 0, world, x, y, z);
     		}

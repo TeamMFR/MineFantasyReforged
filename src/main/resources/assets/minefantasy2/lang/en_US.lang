@@ -708,8 +708,13 @@ tile.anvilSteel.name=Steel Anvil
 tile.anvilBlackSteel.name=Black Steel Anvil
 tile.anvilRedSteel.name=Red Steel Anvil
 tile.anvilBlueSteel.name= Blue Steel Anvil
+tile.furnacemf.fireclay.name=Furnace
 tile.blastfurnchamber.name=Blast Furnace Chamber
 tile.blastfurnheater.name=Blast Furnace Heater
+
+tile.firepit.name=Firepit
+tile.food_roast_basic.name=Cooking Plate
+tile.food_oven_basic.name=Stone Oven
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /TABS/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1805,6 +1810,10 @@ item.generic_meat_chunk_uncooked.name=Raw Meat Chunks
 item.generic_meat_chunk_cooked.name=Cooked Meat Chunks
 item.generic_meat_mince_uncooked.name=Raw Mince
 item.generic_meat_mince_cooked.name=Cooked Mince
+item.burnt_food.name=Burnt Food
+item.burnt_pot.name=Burnt Food
+item.burnt_cake.name=Burnt Food
+item.burnt_pie.name=Burnt Food
 
 tile.berries.name=Berry Bush
 item.breadcrumbs.name=Bread Crumbs
@@ -2025,6 +2034,8 @@ knowledge.gettingStarted.1=This is where you start working on MineFantasy. At th
 knowledge.gettingStarted.2=Crafting blocks require some interaction on your part to function. First: Set up the recipe as instructed(heating items for anvils). Then select the correct tool with the correct tier (such as fists, knives, hammers, etc). You will then need to click the block with the item keeping hits about a second apart until it finishes.
 knowledge.gettingStarted.hcc=$hHardcore Crafting-$r^Hardcore crafting appears to be active. Regular tools are less effective and its recommended that primitive tools are crafted. See the Artisanry section for all the tools.
 knowledge.gettingStarted.hcc2=To start off: Punch some stone... no really, break stone bare-handed (meaning no item held) and Sharp Rocks will be dropped. Use these to break some leaves for vines and sticks, and logs for wood.
+knowledge.gettingStarted.fire=$hFirepit-$r^Before you get to work, you need a fire, one of these should provide flame and a place to cook if you have meat.^Right-click with timber to add fuel, and firestarter to light.
+knowledge.gettingStarted.food=Also place one of these cooking plates on top of the fire. You then need to right-click raw food (mainly meat) to place them on the plate.
 knowledge.gettingStarted.carpenter=$hCarpenter Bench-$r^The carpenter bench is a basic crafting table for a selection of recipes. The tools needed for this vary and some recipes require bare fists. See the crafting tools section for more information on tools.
 knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathered some hide you can't use. Tanning is a simple method of creating leather from hide.^To start off, build a shabby tanning rack and a stone knife. These tools are poor quality and should be upgraded when convinient.
 knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic
@@ -2711,6 +2722,12 @@ knowledge.cheese.1=Cheese is made from refining milk. It has use in some recipes
 knowledge.cheeseroll=Cheese Roll
 knowledge.cheeseroll.desc=Easy snack
 knowledge.cheeseroll.1=Cheese goes well with bread. Put some cheese in a roll to give it some flavour.
+
+knowledge.firepit=Firepit and cookplates
+knowledge.firepit.desc=Basic cooking
+knowledge.firepit.1=The firepit is the easist way to steadily provide flame for cooking and lighting purposes and can be made with litte cost.^To create a fire, place a firepit block and right-click timber items to add fuel, then right-click with a firestarter.
+knowledge.firepit.2=Cooking plates are used to cook food, these must be placed on top of a heat source (firepit or forge).^Right-click raw food ontop of the plate to place it, and wait until it cooks, try not to overcook it. If you use a forge, be careful not to make it too hot (plain coal should do).
+knowledge.firepit.3=Ovens are able to cook baked items such as bread as well as that of a normal cooktop.^Ovens are also required to make ceramics out of clay making them useful in cooking as well as other crafts.
 
 knowledge.cookingutensil=Cooking Utensils
 knowledge.cookingutensil.desc=Tools for cooking

@@ -1,12 +1,22 @@
 package minefantasy.mf2.config;
 
-import minefantasy.mf2.api.archery.AmmoMechanicsMF;
-import minefantasy.mf2.block.crafting.*;
-import minefantasy.mf2.block.decor.BlockTrough;
-import minefantasy.mf2.block.refining.*;
-import minefantasy.mf2.mechanics.EventManagerMF;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.block.crafting.BlockAnvilMF;
+import minefantasy.mf2.block.crafting.BlockBombBench;
+import minefantasy.mf2.block.crafting.BlockBombPress;
+import minefantasy.mf2.block.crafting.BlockCarpenter;
+import minefantasy.mf2.block.crafting.BlockCrossbowBench;
+import minefantasy.mf2.block.crafting.BlockFirepit;
+import minefantasy.mf2.block.crafting.BlockResearchStation;
+import minefantasy.mf2.block.crafting.BlockRoast;
+import minefantasy.mf2.block.crafting.BlockTanningRack;
+import minefantasy.mf2.block.decor.BlockTrough;
+import minefantasy.mf2.block.refining.BlockBellows;
+import minefantasy.mf2.block.refining.BlockBloomery;
+import minefantasy.mf2.block.refining.BlockForge;
+import minefantasy.mf2.block.refining.BlockQuern;
+import minefantasy.mf2.mechanics.EventManagerMF;
 
 @SideOnly(Side.CLIENT)
 public class ConfigClient extends ConfigurationBaseMF
@@ -97,6 +107,8 @@ public class ConfigClient extends ConfigurationBaseMF
 		BlockBloomery.bloomery_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Bloomery", -109).getString());
 		BlockCrossbowBench.crossBench_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Crossbow Bench", -110).getString());
 		BlockQuern.quern_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Quern", -111).getString());
+		BlockFirepit.firepit_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Firepit", -112).getString());
+		BlockRoast.roast_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Roast", -113).getString());
 		
 		EventManagerMF.displayOreDict = Boolean.parseBoolean(config.get(CATEGORY_DEBUG, "Show Debug OreDict", false, "Displays a list of Ore Dictionary entries to tooltips").getString());
 	}

@@ -38,6 +38,9 @@ public class PacketHandlerMF
         packetList.put(RoadPacket.packetName, new RoadPacket());
         packetList.put(BloomeryPacket.packetName, new BloomeryPacket());
         packetList.put(CrossbowBenchPacket.packetName, new CrossbowBenchPacket());
+        packetList.put(FirepitPacket.packetName, new FirepitPacket());
+        packetList.put(TileInventoryPacket.packetName, new TileInventoryPacket());
+        packetList.put(BigFurnacePacket.packetName, new BigFurnacePacket());
     }
 
     @SubscribeEvent

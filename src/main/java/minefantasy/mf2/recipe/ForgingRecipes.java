@@ -244,7 +244,7 @@ public class ForgingRecipes
 		IAnvilRecipe[] anvilRecs = new IAnvilRecipe[BlockListMF.anvils.length];
 		for(int id = 0; id < BlockListMF.anvils.length; id ++)
 		{
-			time = 20;
+			time = 8;
 			material = BaseMaterialMF.getMaterial(BlockListMF.anvils[id]);
 			
 			for(ItemStack ingot: OreDictionary.getOres("ingot"+material.name))

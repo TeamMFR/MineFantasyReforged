@@ -1,11 +1,11 @@
 package minefantasy.mf2.item.food;
 
+import minefantasy.mf2.api.cooking.CookRecipe;
+import minefantasy.mf2.item.ItemBurntFood;
 import minefantasy.mf2.item.ItemComponentMF;
-import minefantasy.mf2.item.ItemMFBowl;
 import minefantasy.mf2.item.gadget.ItemJug;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
@@ -128,11 +128,17 @@ public class FoodListMF
 	public static Item jug_empty = new ItemJug("empty");
 	public static Item jug_water = new ItemJug("water").setContainerItem(jug_empty);
 	public static Item jug_milk = new ItemJug("milk").setContainerItem(jug_empty);
+	
+	public static Item burnt_food = new ItemBurntFood("burnt_food");
+	public static Item burnt_pot = new ItemBurntFood("burnt_pot").setContainerItem(ComponentListMF.clay_pot);
+	public static Item burnt_pie = new ItemBurntFood("burnt_pie").setContainerItem(pie_tray);
+	public static Item burnt_cake = new ItemBurntFood("burnt_cake").setContainerItem(cake_tin);
 	//SPECIAL RECIPES
 	
 	public static final float satModifier = 1.0F;
 	public static void load()
 	{
+		CookRecipe.burnt_food = burnt_food;
 	}
 	
 	/**

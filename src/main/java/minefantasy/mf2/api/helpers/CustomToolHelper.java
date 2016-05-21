@@ -11,8 +11,10 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 
 public class CustomToolHelper 
 {
@@ -396,14 +398,14 @@ public class CustomToolHelper
     		}
 		}
 	}
-	public static int getBurnProperties(ItemStack fuel) 
+	public static float getBurnModifier(ItemStack fuel) 
 	{
 		CustomMaterial mat = CustomMaterial.getMaterialFor(fuel, slot_main);
 		if(mat != null && mat.type.equalsIgnoreCase("wood"))
 		{
-			return 200 + (int) (100 * mat.density);
+			return (2*mat.density) + 0.5F;
 		}
-		return 0;
+		return 1.0F;
 	}
 	public static String getReferenceName(ItemStack item) 
 	{
@@ -461,6 +463,45 @@ public class CustomToolHelper
 			 return true;
 		 }
 		return false;
+	}
+	public static void writeToPacket(ByteBuf packet, ItemStack stack)
+	{
+		packet.writeInt(stack != null ? Item.getIdFromItem(stack.getItem()) : 0);
+		packet.writeInt(stack != null ? stack.stackSize : 0);
+		packet.writeInt(stack != null ? stack.getItemDamage() : 0);
+		packet.writeInt( (stack != null && stack.isItemEnchanted()) ? 1 : 0);
+		
+		CustomMaterial main1 = getCustomMetalMaterial(stack);
+		CustomMaterial haft1 = getCustomMetalMaterial(stack);
+		
+		ByteBufUtils.writeUTF8String(packet, main1 != null ? main1.name : "null");
+		ByteBufUtils.writeUTF8String(packet, haft1 != null ? haft1.name : "null");
+	}
+	public static ItemStack readFromPacket(ByteBuf packet)
+	{
+		int id = packet.readInt();
+		int ss = packet.readInt();
+		int md = packet.readInt();
+		boolean ec = packet.readBoolean();
+		String main1 = ByteBufUtils.readUTF8String(packet);
+		String haft1 = ByteBufUtils.readUTF8String(packet);
+		Item item = Item.getItemById(id);
+		
+		if(item != null && ss > 0)
+		{
+			ItemStack stack = new ItemStack(item, ss, md);
+			if(!main1.equalsIgnoreCase("null"))
+			{
+				CustomMaterial.addMaterial(stack, slot_main, main1);
+			}
+			if(!haft1.equalsIgnoreCase("null"))
+			{
+				CustomMaterial.addMaterial(stack, slot_haft, haft1);
+			}
+			return stack;
+		}
+		
+		return null;
 	}
 	
 }

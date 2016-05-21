@@ -17,7 +17,7 @@ public class FuelHandlerMF implements IFuelHandler
 		}
 		if(fuel.getItem() == ComponentListMF.plank)
 		{
-			return CustomToolHelper.getBurnProperties(fuel);
+			return (int)(200 * CustomToolHelper.getBurnModifier(fuel));
 		}
 		if(fuel.getItem() == ComponentListMF.coalDust)
 		{

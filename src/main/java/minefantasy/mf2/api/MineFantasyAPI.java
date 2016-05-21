@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import minefantasy.mf2.api.cooking.CookRecipe;
 import minefantasy.mf2.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mf2.api.crafting.carpenter.CraftingManagerCarpenter;
@@ -502,5 +503,69 @@ public class MineFantasyAPI
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * Add a cooking recipe
+	 * @param input what goes in
+	 * @param output what is made
+	 * @param min_temperature minimal temperature to work
+	 * @param max_temperature maximum temperature until burn
+	 * @param time how many ticks until it finishes
+	 * @param requireBaking whether it needs to be in an oven
+	 */
+	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature, int max_temperature, int time, boolean requireBaking)
+	{
+		return CookRecipe.addRecipe(input, output, min_temperature, max_temperature, time, requireBaking, true);
+	}
+	
+	/**
+	 * Add a cooking recipe
+	 * @param input what goes in
+	 * @param output what is made
+	 * @param min_temperature minimal temperature to work
+	 * @param max_temperature maximum temperature until burn
+	 * @param time how many ticks until it finishes
+	 * @param requireBaking whether it needs to be in an oven
+	 * @param canBurn false if it cannot burn by traditional means (such as if its in a container)
+	 */
+	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature, int max_temperature, int time, boolean requireBaking, boolean canBurn)
+	{
+		return CookRecipe.addRecipe(input, output, min_temperature, max_temperature, time, requireBaking, canBurn);
+	}
+	/**
+	 * Add a cooking recipe
+	 * @param input what goes in
+	 * @param output what is made
+	 * @param min_temperature minimal temperature to work
+	 * @param max_temperature maximum temperature until burn
+	 * @param time how many ticks until it finishes
+	 * @param requireBaking whether it needs to be in an oven
+	 * @param canBurn false if it cannot burn by traditional means (such as if its in a container)
+	 */
+	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem, int min_temperature, int max_temperature, int time, boolean requireBaking)
+	{
+		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, requireBaking, true);
+	}
+	
+	/**
+	 * Add a cooking recipe
+	 * @param input what goes in
+	 * @param output what is made
+	 * @param min_temperature minimal temperature to work
+	 * @param max_temperature maximum temperature until burn
+	 * @param time how many ticks until it finishes
+	 * @param burn_time how long until a finished product burns
+	 * @param requireBaking whether it needs to be in an oven
+	 * @param canBurn false if it cannot burn by traditional means (such as if its in a container)
+	 */
+	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem, int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking)
+	{
+		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time, requireBaking, true);
+	}
+
+	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem, int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking, boolean canBurn)
+	{
+		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time, requireBaking, canBurn);
 	}
 }

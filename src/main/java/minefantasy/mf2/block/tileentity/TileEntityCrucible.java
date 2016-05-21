@@ -2,6 +2,7 @@ package minefantasy.mf2.block.tileentity;
 
 import java.util.Random;
 
+import minefantasy.mf2.api.crafting.IHeatUser;
 import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.AlloyRecipes;
 import minefantasy.mf2.api.refine.SmokeMechanics;
@@ -18,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityCrucible extends TileEntity implements IInventory, ISidedInventory
+public class TileEntityCrucible extends TileEntity implements IInventory, ISidedInventory, IHeatUser
 {
 	private ItemStack[] inv = new ItemStack[10];
 	public float progress = 0, progressMax = 400;
@@ -401,5 +402,10 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 	public boolean canExtractItem(int slot, ItemStack item, int side) 
 	{
 		return isAuto() && slot == getOutSlot();
+	}
+
+	@Override
+	public boolean canAccept(TileEntity tile) {
+		return tile instanceof TileEntityForge;
 	}
 }

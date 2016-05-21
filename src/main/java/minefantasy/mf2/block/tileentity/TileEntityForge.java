@@ -5,22 +5,18 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import minefantasy.mf2.api.crafting.IBasicMetre;
+import minefantasy.mf2.api.crafting.IHeatSource;
+import minefantasy.mf2.api.crafting.IHeatUser;
 import minefantasy.mf2.api.heating.ForgeFuel;
-import minefantasy.mf2.api.heating.ForgeItemHandler;
 import minefantasy.mf2.api.heating.Heatable;
-import minefantasy.mf2.api.heating.IHotItem;
-import minefantasy.mf2.api.refine.Alloy;
-import minefantasy.mf2.api.refine.AlloyRecipes;
+import minefantasy.mf2.api.helpers.Functions;
 import minefantasy.mf2.api.refine.IBellowsUseable;
 import minefantasy.mf2.api.refine.SmokeMechanics;
 import minefantasy.mf2.block.refining.BlockForge;
 import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.item.list.ComponentListMF;
-import minefantasy.mf2.network.packet.AnvilPacket;
 import minefantasy.mf2.network.packet.ForgePacket;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +29,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
 
-public class TileEntityForge extends TileEntity implements IInventory, IBasicMetre, IBellowsUseable
+public class TileEntityForge extends TileEntity implements IInventory, IBasicMetre, IHeatSource, IBellowsUseable
 {
 	public static final float dragonHeat = 200F; //200*
 	private ItemStack[] inv = new ItemStack[1];
@@ -61,12 +57,14 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 	@Override
 	public void updateEntity()
 	{
+		++ticksExisted;
+		
 		if(worldObj.isRemote)return;
 		
 		if(justShared > 0)--justShared;
 		super.updateEntity();
 		
-		if(++ticksExisted % 20 == 0)
+		if(ticksExisted % 20 == 0)
 		{
 			ItemStack item = getStackInSlot(0);
 			if(item != null && !worldObj.isRemote)
@@ -113,7 +111,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		if(isBurning && temperature > 100 && rand.nextInt(20) == 0 && !isOutside())
 		{
 			int val = this.getTier() == 1 ? 3 : 1;
-			if(this.hasCrucibleAbove())
+			if(this.hasBlockAbove())
 			{
 				SmokeMechanics.emitSmokeIndirect(worldObj, xCoord, yCoord+1, zCoord, val);
 			}
@@ -244,7 +242,6 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 	private float getStackModifier(int stackSize) 
 	{
 		float mod = 1F + (float)stackSize / 8F;//1x to 9x
-		MFLogUtil.logDebug("HeatModifier: " + mod);
 		return mod;
 	}
 
@@ -557,7 +554,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 	@Override
 	public String getLocalisedName() 
 	{
-		return StatCollector.translateToLocal(workableState >= 2 ? "state.unstable" : workableState == 1 ? "state.workable" : "forge.fuel.name");
+		return (int)this.temperature+"C " + StatCollector.translateToLocal(workableState >= 2 ? "state.unstable" : workableState == 1 ? "state.workable" : "forge.fuel.name");
 	}
 
 	public boolean[] showSides() {
@@ -642,12 +639,17 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		return 0;
 	}
 	
-	public boolean hasCrucibleAbove()
+	public boolean hasBlockAbove()
 	{
 		if(worldObj == null)return false;
 		
 		TileEntity tile = worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
-		return tile != null && tile instanceof TileEntityCrucible || tile instanceof TileEntityFurnace;
+		if(tile != null && tile instanceof IHeatUser)
+		{
+			return ((IHeatUser)tile).canAccept(this);
+		}
+		
+		return tile != null && tile instanceof TileEntityFurnace;
 	}
 	
 	private void averageAllItems()
@@ -707,5 +709,24 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 			return (int)Heatable.getHeatableStage(inv[0]);
 		}
 		return 0;
+	}
+	
+	@Override
+	public boolean canPlaceAbove() 
+	{
+		return true;
+	}
+
+	public int exactTemperature;
+	@Override
+	public int getHeat() 
+	{
+		if(worldObj.isRemote)
+		{
+			return exactTemperature;
+		}
+		int mx = (int)(temperature*1.2F);
+		int mn = (int)(temperature*0.8F);
+		return Functions.getIntervalWave1_i(ticksExisted, 400, mx, mn);
 	}
 }
