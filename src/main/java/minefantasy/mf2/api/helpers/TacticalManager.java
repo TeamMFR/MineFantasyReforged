@@ -539,4 +539,10 @@ public class TacticalManager
 	{
 		return CogworkArmour.hasPoweredSuit(entityLiving);
 	}
+	
+	public static void leap(Entity target, float angle, float power, float height) 
+	{
+        target.addVelocity(-MathHelper.sin(angle * (float) Math.PI / 180.0F) * power, height, MathHelper.cos(angle * (float) Math.PI / 180.0F) * power);
+    }
+	
 }

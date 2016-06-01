@@ -41,6 +41,7 @@ public class PacketHandlerMF
         packetList.put(FirepitPacket.packetName, new FirepitPacket());
         packetList.put(TileInventoryPacket.packetName, new TileInventoryPacket());
         packetList.put(BigFurnacePacket.packetName, new BigFurnacePacket());
+        packetList.put(DodgeCommand.packetName, new DodgeCommand());
     }
 
     @SubscribeEvent

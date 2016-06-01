@@ -130,10 +130,10 @@ public class MineFantasyII
     	CustomArmourEntry.registerItem(Items.chainmail_leggings, ArmourDesign.MAIL);
     	CustomArmourEntry.registerItem(Items.chainmail_boots, ArmourDesign.MAIL);
     	
-    	CustomArmourEntry.registerItem(Items.golden_helmet, ArmourDesign.SOLID, 2.0F);
-    	CustomArmourEntry.registerItem(Items.golden_chestplate, ArmourDesign.SOLID, 2.0F);
-    	CustomArmourEntry.registerItem(Items.golden_leggings, ArmourDesign.SOLID, 2.0F);
-    	CustomArmourEntry.registerItem(Items.golden_boots, ArmourDesign.SOLID, 2.0F);
+    	CustomArmourEntry.registerItem(Items.golden_helmet, ArmourDesign.SOLID, 1.5F);
+    	CustomArmourEntry.registerItem(Items.golden_chestplate, ArmourDesign.SOLID, 1.5F);
+    	CustomArmourEntry.registerItem(Items.golden_leggings, ArmourDesign.SOLID, 1.5F);
+    	CustomArmourEntry.registerItem(Items.golden_boots, ArmourDesign.SOLID, 1.5F);
     	
     	ConfigItemRegistry.readCustoms();
     	

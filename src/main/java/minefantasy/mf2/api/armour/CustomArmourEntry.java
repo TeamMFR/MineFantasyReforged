@@ -34,7 +34,7 @@ public class CustomArmourEntry
 		{
 			divider = ArmourCalculator.sizes[((ItemArmor)piece).armorType];
 		}
-		registerItem(piece, template.getWeight()*divider, template.getBulk()*divider);
+		registerItem(piece, template.getWeight() * weightMod, template.getBulk()*divider);
 	}
 	/**
 	 * Registeres a piece (called by code or config)
@@ -64,6 +64,7 @@ public class CustomArmourEntry
 	
 	/**
 	 * Gets the variables for the item if there are any: order is weight, bulk
+	 * @param deft the default preset if not present
 	 */
 	public static float[] getEntryVars(ItemStack piece)
 	{
@@ -72,7 +73,8 @@ public class CustomArmourEntry
 		{
 			return new float[]{entry.weight, entry.bulkiness};
 		}
-		return new float[]{ArmourDesign.SOLID.getWeight(), ArmourDesign.SOLID.getBulk()};
+		ArmourDesign deft = ArmourCalculator.getDefaultAD(piece);
+		return new float[]{deft.getWeight(), deft.getBulk()};
 	}
 	
 	/**
@@ -109,9 +111,9 @@ public class CustomArmourEntry
 		if(piece != null)
 		{
 			int id = Item.getIdFromItem(piece);
-			if(entries.containsKey(piece))
+			if(entries.containsKey(id))
 			{
-				return entries.get(piece);
+				return entries.get(id);
 			}
 		}
 		return null;

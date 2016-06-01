@@ -65,22 +65,16 @@ public class ArmourCalculator
 	{
 		return CustomArmourEntry.getEntryVars(armour)[0];
 	}
-	
+
 	private static float getDefaultBulk(ItemStack armour) 
 	{
-		if(armour.getItem() instanceof ItemArmor)
-		{
-			ItemArmor vanilla = (ItemArmor)armour.getItem();
-			if(vanilla.getArmorMaterial() == ArmorMaterial.CLOTH)
-			{
-				return ArmourDesign.LEATHER.getBulk();
-			}
-			if(vanilla.getArmorMaterial() == ArmorMaterial.CHAIN)
-			{
-				return ArmourDesign.MAIL.getBulk();
-			}
-		}
 		return CustomArmourEntry.getEntryVars(armour)[1];
+	}
+	
+
+	public static ArmourDesign getDefaultAD(ItemStack armour) 
+	{
+		return ArmourDesign.SOLID;
 	}
 	
 	public static float slowRate = 1.0F;

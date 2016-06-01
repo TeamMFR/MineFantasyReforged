@@ -878,7 +878,6 @@ public class EventManagerMF
 
         return s;
     }
-	
 	@SubscribeEvent
 	public void updateEntity(LivingUpdateEvent event)
 	{

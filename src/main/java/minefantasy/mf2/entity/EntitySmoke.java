@@ -327,7 +327,7 @@ public class EntitySmoke extends Entity
     @Override
     public boolean canBeCollidedWith()
     {
-        return true;
+        return false;
     }
 
     /**

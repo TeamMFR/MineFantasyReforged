@@ -168,7 +168,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 					if(AD != null && piece != null)
 					{
 						CustomArmourEntry.registerItem(piece, AD, weight);
-						MFLogUtil.logDebug("Added Armour: " + id + " To " + AD.getName() + " modified weight is " + weight);
+						MFLogUtil.logDebug("Added Armour: " + piece.getUnlocalizedName() + " To " + AD.getName() + " modified weight is " + weight);
 					}
 					phase = 0;
 				}

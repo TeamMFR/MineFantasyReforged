@@ -54,9 +54,9 @@ public class CustomHoeEntry
 		if(piece != null)
 		{
 			int id = Item.getIdFromItem(piece);
-			if(entries.containsKey(piece))
+			if(entries.containsKey(id))
 			{
-				return entries.get(piece);
+				return entries.get(id);
 			}
 		}
 		return null;

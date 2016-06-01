@@ -1,5 +1,6 @@
 package minefantasy.mf2.mechanics;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -35,8 +36,10 @@ import minefantasy.mf2.item.weapon.ItemWaraxeMF;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
+import minefantasy.mf2.network.packet.DodgeCommand;
 import minefantasy.mf2.network.packet.ParryPacket;
 import minefantasy.mf2.util.MFLogUtil;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -1024,8 +1027,66 @@ public class CombatMechanics
 				StaminaMechanics.onJump(event.entityLiving);
 			}
 		}
+		if(event.entityLiving.worldObj.isRemote && event.entityLiving instanceof EntityPlayer)
+		{
+			tryDodge((EntityPlayer)event.entityLiving);
+		}
 	}
 	
+	private void tryDodge(EntityPlayer user) 
+	{
+		if(user.isBlocking())
+		{
+			float forward = user.moveForward;
+			float side = user.moveStrafing;
+			
+			if(side > 0F)//LEFT
+			{
+				commandDodge(user, 1);
+			}
+			else if(side < 0)//RIGHT
+			{
+				commandDodge(user, -1);
+			}
+			else if(forward < 0)//BACK
+			{
+				commandDodge(user, 0);
+			}
+		}
+	}
+	/**
+	 * Client-sided dodge
+	 */
+	private static void commandDodge(EntityPlayer user, int type) 
+	{
+		initDodge(user, type);
+		((EntityClientPlayerMP)user).sendQueue.addToSendQueue(new DodgeCommand(user, type).generatePacket());
+	}
+	public static void initDodge(EntityPlayer user, int type)
+	{
+		float mass = ArmourCalculator.getTotalWeightOfWorn(user, false);
+		int cost = type == 0 ? 20 : 10;
+		
+		if(mass <= 40F && ItemWeaponMF.tryPerformAbility(user, cost))
+		{
+			float force = 1.0F;
+			if(mass > 10)
+			{
+				force -= (mass-10)/30F * 0.5F;
+			}
+			if(mass > 30)
+			{
+				user.motionY *= 0.5F;
+			}
+			
+			float direction = user.rotationYaw;
+			if(type == 0)  direction += 180;//BACK
+			if(type == 1)  direction -=  90;//LEFT
+			if(type == -1) direction +=  90;//RIGHT
+			TacticalManager.leap(user, direction, force, 0.0F);
+		}
+	}
+
 	/*
 	 * Causes the victim to 'Spaz out' which never stops being funny (Apply every tick)
 	 */

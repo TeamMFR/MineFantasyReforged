@@ -32,7 +32,7 @@ public class ConfigStamina extends ConfigurationBaseMF
 		StaminaBar.configRegenModifier = Float.parseFloat(config.get(VALUES, "Regen Modifier", 1.0F, "This modifies the rate of regen").getString());
 		StaminaBar.pauseModifier = Float.parseFloat(config.get(VALUES, "Idle Modifier", 1.0F, "This modifies the time between decaying and regenning back").getString());
 		StaminaBar.configBulk = Float.parseFloat(config.get(VALUES, "Bulk Regen Modifier", 1.0F, "This is the rate that worn apparel slows regen: Most items bring it down by 25%, plate is more scale/leather is less").getString());
-		StaminaBar.scaleDifficulty = Boolean.parseBoolean(config.get(VALUES, "Difficulty Scale Decay", true, "This makes difficulty change your decay rate across all fields: peaceful(-50%), easy(-25%), normal(base), hard(+25%)").getString());
+		StaminaBar.scaleDifficulty = Boolean.parseBoolean(config.get(VALUES, "Difficulty Scale Decay", false, "This makes difficulty change your decay rate across all fields: peaceful(-50%), easy(-25%), normal(base), hard(+25%)").getString());
 		StaminaBar.defaultMax = Float.parseFloat(config.get(VALUES, "Max stamina base", 100F, "This is where your stamina starts on spawning, Note that when changed: it only applies on death or new worlds").getString());
 		//StaminaBar.restrictSystem = Boolean.parseBoolean(config.get("Restrict use to players", "Will restrict", false, "This restricts the stamina system only to players").getString());
 				

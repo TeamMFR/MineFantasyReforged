@@ -454,7 +454,7 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 			points *= StaminaBar.getBaseDecayModifier(user, armour, weapon);
 			if(StaminaBar.isStaminaAvailable(user, points, flash))
 			{
-				if(takePoints)
+				if(takePoints && !user.worldObj.isRemote)
 				{
 					applyFatigue(user, points);
 				}
