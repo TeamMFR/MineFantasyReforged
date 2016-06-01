@@ -620,4 +620,27 @@ public class ArmourCalculator
 			}
 		}
 	}
+
+	/**
+	 * Determines how much armour reduces parrying ability
+	 */
+	public static float getParryModifier(EntityLivingBase user) 
+	{
+		float weight = getTotalWeightOfWorn(user, false);
+		if(weight > 20F)
+		{
+			return 1.0F / (1 + ((weight-20F)/20F));
+		}
+		
+		return 1.0F;
+	}
+
+	public static int modifyParryCooldown(EntityLivingBase user, int ticks) 
+	{
+		float weight = getTotalWeightOfWorn(user, false) - 20F;//anything <20kg gives a bonus
+		
+		int t = (int)Math.floor(weight / 4);//each 5kg added adds 1 to the ticks
+		
+		return Math.max(5, ticks + t);
+	}
 }

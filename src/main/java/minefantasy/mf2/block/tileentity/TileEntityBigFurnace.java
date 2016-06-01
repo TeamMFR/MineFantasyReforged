@@ -3,307 +3,1096 @@ package minefantasy.mf2.block.tileentity;
 import java.util.List;
 import java.util.Random;
 
-import minefantasy.mf2.api.crafting.IHeatSource;
-import minefantasy.mf2.api.crafting.IHeatUser;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.api.heating.ForgeItemHandler;
 import minefantasy.mf2.api.refine.BigFurnaceRecipes;
+import minefantasy.mf2.api.refine.IBellowsUseable;
+import minefantasy.mf2.api.refine.SmokeMechanics;
+import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.block.refining.BlockBigFurnace;
+import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.network.packet.BigFurnacePacket;
+import minefantasy.mf2.util.MFLogUtil;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.util.StatCollector;
+import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityBigFurnace extends TileEntity implements IInventory, IHeatUser
+public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable, IInventory, ISidedInventory 
 {
-	public ItemStack[] items = new ItemStack[2];
-	public float progress;
-	public float maxProgress;
-	private int tempTicksExisted = 0;
+
+	//UNIVERSAL
+	public int fuel;
+	public int maxFuel;
+	public ItemStack[] inv;
+	public int itemMeta;
+	public boolean built = false;
 	private Random rand = new Random();
-	private int ticksExisted;
 	
+	//ANIMATE
+	public int numUsers;
+	public int doorAngle;
+	
+	//HEATER
+	public float heat;
+	public float maxHeat;
+	private int aboveType;
+	public int justShared;
+	
+	//FURNACE
+	public int progress;
+	private int ticksExisted;
+	private int ticksSinceSync;
+	
+	/**
+	 * CLIENT VAR
+	 * This is used to determine if the block is able to emit smoke
+	 */
+	public boolean isBurningClient;
+	
+	public TileEntityBigFurnace setBlockType(Block block)
+	{
+		blockType = block;
+		return this;
+	}
 	public TileEntityBigFurnace()
 	{
+		super();
+		inv = new ItemStack[8];
+		fuel = maxFuel = progress = 0;
 	}
-	private Object recipe;
+	public TileEntityBigFurnace(int meta)
+	{
+		this();
+		itemMeta = meta;
+	}
+
+
 	@Override
-	public void updateEntity()
+	public void onUsedWithBellows(float powerLevel) 
+	{
+		if(isHeater())
+		{
+			if(justShared > 0)
+			{
+				return;
+			}
+			justShared = 5;
+			
+			if(fuel > 0)
+			{
+				int max = (int)((float)maxHeat * 1.5F);
+				if(heat < max)
+				{
+					heat += 50*powerLevel;
+				}
+				
+				for(int a = 0; a < 10; a ++)
+				{
+					worldObj.spawnParticle("flame", xCoord+(rand.nextDouble()*0.8D)+0.1D, yCoord + 0.4D, zCoord+(rand.nextDouble()*0.8D)+0.1D, 0, 0.01, 0);
+				}
+			}
+			pumpBellows(-1, 0, powerLevel*0.9F);
+			pumpBellows(0, -1, powerLevel*0.9F);
+			pumpBellows(0, 1, powerLevel*0.9F);
+			pumpBellows(1, 0, powerLevel*0.9F);
+		}
+	}
+	
+	
+	private void pumpBellows(int x, int z, float pump)
+	{
+		int share = 2;
+		TileEntity tile = worldObj.getTileEntity(xCoord+x, yCoord, zCoord+z);
+		if(tile == null)return;
+		
+		if(tile instanceof TileEntityBigFurnace)
+		{
+			TileEntityBigFurnace furn = (TileEntityBigFurnace)tile;
+			if(furn.isHeater())
+			furn.onUsedWithBellows(pump);
+		}
+	}
+	private boolean wasBurning;
+	@Override
+	public void updateEntity() 
 	{
 		super.updateEntity();
-		++tempTicksExisted;
-		if(tempTicksExisted == 10)
+		
+		if(!worldObj.isRemote)
 		{
-			blockMetadata = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-			updateRecipe();
-		}
-		int temp = getTemp();
-		++ticksExisted;
-		if(ticksExisted % 20 == 0 && !worldObj.isRemote)
-		{
-			if(getResult() != null && temp > 0 && maxProgress > 0 && temp > getMinTemperature())
+			if(numUsers > 0 && doorAngle < 20)
 			{
-				progress += (temp/100F);
-				if(progress >= maxProgress && smeltItem())
+				doorAngle ++;
+			}
+			
+			if(numUsers <= 0 && doorAngle > 0)
+			{
+				doorAngle --;
+			}
+			if(doorAngle < 0)doorAngle = 0;
+			if(doorAngle > 20)doorAngle = 20;
+		}
+		
+		++ticksExisted;
+		if(justShared > 0)justShared --;
+		if(ticksExisted % 10 == 0)
+		{
+			built = structureExists();
+		}
+		if(isHeater())
+		{
+			updateHeater();
+		}
+		else
+		{
+			updateFurnace();
+		}
+		//UNIVERSAL
+		if(isBurning() != wasBurning || ticksExisted == 20)
+		{
+			worldObj.updateLightByType(EnumSkyBlock.Block, xCoord, yCoord, zCoord);
+		}
+		if(!worldObj.isRemote)
+		{
+			sendPacketToClients();
+		}
+		wasBurning = isBurning();
+	}
+	
+	private void updateFurnace() 
+	{
+		if(isBurning())
+		{
+			if(worldObj.isRemote && rand.nextInt(10)==0)
+			{
+				worldObj.spawnParticle("flame", xCoord+(rand.nextDouble()*0.8D)+0.1D, yCoord + 0.4D, zCoord+(rand.nextDouble()*0.8D)+0.1D, 0, 0.01, 0);
+			}
+		}
+		if(worldObj.isRemote)
+		{
+			return;
+		}
+		if(isBurning())
+		{
+			puffSmoke(new Random(), worldObj, xCoord, yCoord, zCoord);
+		}
+		TileEntityBigFurnace heater = getHeater();
+		
+		if(heater != null)
+		{
+			heat = heater.heat;
+		}
+		else
+		{
+			heat -= 4;
+		}
+		boolean canSmelt = false;
+		boolean smelted = false;
+		
+		if(getSpecialResult() != null)
+		{
+			if(!canFitSpecialResult())
+			{
+				canSmelt = false;
+			}
+			else
+			{
+				canSmelt = true;
+				
+				if(progress >= getMaxTime())
 				{
-					this.decrStackSize(0, 1);
-					updateRecipe();
+					smeltSpecial();
+					smelted = true;
 				}
 			}
 		}
-	}
-	private int getMinTemperature() 
-	{
-		if(recipe != null && recipe instanceof BigFurnaceRecipes)
+		else for(int a = 0; a < 4; a ++)
 		{
-			return ((BigFurnaceRecipes)recipe).minTemperature;
+			if(canSmelt(inv[a], inv[a+4]))
+			{
+				canSmelt = true;
+				
+				if(progress >= getMaxTime())
+				{
+					smeltItem(a, a+4);
+					smelted = true;
+				}
+			}
 		}
-		return 150;
-	}
-	private int getSmeltTime() 
-	{
-		if(recipe != null && recipe instanceof BigFurnaceRecipes)
+		
+		if(canSmelt)
 		{
-			return ((BigFurnaceRecipes)recipe).time;
+			progress += heat;
 		}
-		return 20;
-	}
-	private ItemStack getResult() 
-	{
-		if(recipe == null)return null;
-		if(recipe != null && recipe instanceof BigFurnaceRecipes)
+		if(!canSmelt || smelted)
 		{
-			return ((BigFurnaceRecipes)recipe).output;
+			progress = 0;
 		}
-		if(recipe instanceof ItemStack)
+	}
+	
+	private boolean canFitSpecialResult() 
+	{
+		ItemStack spec = getSpecialResult();
+		
+		if(spec != null)
 		{
-			return (ItemStack)recipe;
+			int spaceNeeded = spec.stackSize;
+			int spaceLeft = 0;
+			
+			for(int a = 4; a < 8; a ++)
+			{
+				ItemStack item = inv[a];
+				if(inv[a] == null)
+				{
+					spaceLeft += 64;
+				}
+				else
+				{
+					if(inv[a].isItemEqual(spec))
+					{
+						if(inv[a].stackSize < inv[a].getMaxStackSize())
+						{
+							spaceLeft += inv[a].getMaxStackSize() - inv[a].stackSize;
+						}
+					}
+				}
+			}
+			return spec.stackSize <= spaceLeft;
+		}
+		return false;
+	}
+	private void smeltSpecial()
+	{
+		ItemStack res = getSpecialResult().copy();
+		
+		for(int output = 4; output < 8; output ++)
+		{
+			if(res.stackSize <= 0)break;
+			
+			if(inv[output] == null)
+			{
+				setInventorySlotContents(output, res);
+				break;
+			}
+			else
+			{
+				if(inv[output].isItemEqual(res))
+				{
+					int spaceLeft = inv[output].getMaxStackSize() - inv[output].stackSize;
+					
+					if(res.stackSize <= spaceLeft)
+					{
+						inv[output].stackSize += res.stackSize;
+						break;
+					}
+					else
+					{
+						inv[output].stackSize += spaceLeft;
+						res.stackSize -= spaceLeft;
+					}
+				}
+			}
+		}
+		for(int input = 0; input < 4; input ++)
+		decrStackSize(input, 1);
+	}
+	
+	public void puffSmoke(Random rand, World world, int x, int y, int z)
+	{
+		if(rand.nextInt(5) != 0)
+		{
+			return;
+		}
+		ForgeDirection dir = getBack();
+		SmokeMechanics.emitSmokeIndirect(world, x+dir.offsetX, y+(isHeater() ? 2 : 1), z+dir.offsetZ, 1);
+	}
+	
+	private int getMaxTime() 
+	{
+		return (int) 1.0E+4;
+	}
+	private void smeltItem(int input, int output)
+	{
+		ItemStack res = getResult(inv[input]).copy();
+		
+		if(inv[output] == null)
+		{
+			setInventorySlotContents(output, res);
+		}
+		else
+		{
+			if(inv[output].isItemEqual(res))
+			{
+				inv[output].stackSize += res.stackSize;
+			}
+		}
+		
+		decrStackSize(input, 1);
+	}
+	private boolean canSmelt(ItemStack in, ItemStack out)
+	{
+		if(isHeater()) return false;
+		
+		if(!built)return false;
+		
+		ItemStack res = getResult(in);
+		if(res == null)
+		{
+			return false;
+		}
+		if(out == null)
+		{
+			return true;
+		}
+		if(out.isItemEqual(res))
+		{
+			int max = res.getMaxStackSize();
+			if((out.stackSize + res.stackSize) > max)
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private TileEntityBigFurnace getHeater() 
+	{
+		TileEntity tile = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
+		if(tile != null && tile instanceof TileEntityBigFurnace)
+		{
+			if(((TileEntityBigFurnace)tile).isHeater())
+			return (TileEntityBigFurnace)tile;
 		}
 		return null;
 	}
 	
-	private boolean smeltItem() 
+	private TileEntityBigFurnace getFurnace() 
 	{
-		ItemStack recipeItem = getResult();
-		ItemStack currentSlot = getStackInSlot(1);
-		if(currentSlot == null)
+		TileEntity tile = worldObj.getTileEntity(xCoord, yCoord+1, zCoord);
+		if(tile != null && tile instanceof TileEntityBigFurnace)
 		{
-			setInventorySlotContents(1, recipeItem.copy());
-			return true;
+			if(!((TileEntityBigFurnace)tile).isHeater())
+			return (TileEntityBigFurnace)tile;
 		}
-		if(currentSlot.isItemEqual(recipeItem) && (currentSlot.stackSize + recipeItem.stackSize) <= currentSlot.getMaxStackSize())
-		{
-			currentSlot.stackSize += recipeItem.stackSize;
-			return true;
-		}
-		return false;
+		return null;
 	}
-	private int getTemp() 
+	
+	private void updateHeater() 
 	{
-		TileEntity tile = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);
-		if(tile != null && tile instanceof IHeatSource)
+		if(worldObj.isRemote)return;
+		
+		TileEntityBigFurnace furn = getFurnace();
+		if(furn != null)
 		{
-			return ((IHeatSource)tile).getHeat();
+			aboveType = furn.getType();
 		}
-		return 0;
-	}
-	public void updateRecipe()
-	{
-		recipe = BigFurnaceRecipes.getResult(getStackInSlot(0));
-		if(recipe != null)
+		if(!built)
 		{
-			maxProgress = getSmeltTime();
+			heat = maxHeat = fuel = maxFuel = 0;
+			return;
 		}
-		else if(getStackInSlot(0) != null)
+		if(heat < maxHeat)
 		{
-			ItemStack item = FurnaceRecipes.smelting().getSmeltingResult(getStackInSlot(0));
-			if(item != null && !(item.getItem() instanceof ItemFood))
+			heat ++;
+		}
+		if(heat > maxHeat)
+		{
+			heat --;
+		}
+		if(fuel > 0)
+		{
+			fuel --;
+		}
+		else
+		{
+			if(inv[0] != null && isItemFuel(inv[0]))
 			{
-				recipe = item;
+				fuel = maxFuel = getItemBurnTime(inv[0]);
+				maxHeat = getItemHeat(inv[0]);
+				ItemStack cont = inv[0].getItem().getContainerItem(inv[0]);
+				
+				if(cont != null)
+				{
+					inv[0] = cont;
+				}
+				else
+				{
+					decrStackSize(0, 1);
+				}
+			}
+			if(fuel <= 0)
+			{
+				if(heat > 0)heat --;
+				maxHeat = 0;
 			}
 		}
-		progress = 0;
-		sendPacketToClients();
+		
+		
 	}
-	public int getProgressBar(int i) 
+	
+	
+	
+	private float getItemHeat(ItemStack itemStack) 
 	{
-		if(maxProgress <= 0)return 0;
-		return (int)((float)i / maxProgress * progress);
+		return ForgeItemHandler.getForgeHeat(itemStack);
 	}
-	public String getResultName() 
+	public ItemStack getResult(ItemStack item)
 	{
-		if(getResult() != null)
+		if(item == null)return null;
+	
+		//SPECIAL SMELTING
+		BigFurnaceRecipes recipe = BigFurnaceRecipes.getResult(item);
+		if(recipe != null && recipe.tier <= this.getTier())
 		{
-			return getResult().getDisplayName();
+			return recipe.result;
 		}
-		return "";
+		
+		ItemStack res = FurnaceRecipes.smelting().getSmeltingResult(item);//If no special: try vanilla
+		if(res != null)
+		{
+			if(res.getItem() instanceof ItemFood || item.getItem() instanceof ItemFood)
+			{
+				return new ItemStack(FoodListMF.burnt_food, 1, 1);
+			}
+			return res;
+		}
+		
+		return null;
+	}
+	
+	public ItemStack getSpecialResult()
+	{
+		return null;
+		/*
+		ItemStack[] input = new ItemStack[4];
+		for(int a = 0; a < 4; a ++)
+		{
+			input[a] = inv[a];
+		}
+		Alloy alloy = SpecialFurnaceRecipes.getResult(input);
+		if(alloy != null)
+		{
+			if(alloy.getLevel() <= getSmeltLevel())
+			{
+				return SpecialFurnaceRecipes.getResult(input).getRecipeOutput();
+			}
+		}
+		return null;
+		*/
+	}
+	
+	public int getSizeInventory() {
+		return inv.length;
+	}
+
+	public ItemStack getStackInSlot(int i) {
+		return inv[i];
+	}
+
+	public ItemStack decrStackSize(int i, int j) {
+		if (inv[i] != null) {
+			if (inv[i].stackSize <= j) {
+				ItemStack itemstack = inv[i];
+				inv[i] = null;
+				return itemstack;
+			}
+			ItemStack itemstack1 = inv[i].splitStack(j);
+			if (inv[i].stackSize == 0) {
+				inv[i] = null;
+			}
+			return itemstack1;
+		} else {
+			return null;
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+    public int getBurnTimeRemainingScaled(int height)
+    {
+        if (this.maxFuel == 0)
+        {
+            this.maxFuel = 200;
+        }
+
+        return this.fuel * height / this.maxFuel;
+    }
+	
+	@SideOnly(Side.CLIENT)
+    public int getHeatScaled(int height)
+    {
+    	if(heat <= 0)return 0;
+        int size = (int)((float)height / TileEntityForge.maxTemperature * this.heat);
+        
+        return (int)Math.min(size, height);
+    }
+	
+	@SideOnly(Side.CLIENT)
+    public int getItemHeatScaled(int height)
+    {
+    	if(maxHeat <= 0)return 0;
+    	int size = (int)((float)height / TileEntityForge.maxTemperature * this.maxHeat);
+    	
+    	return (int)Math.min(size, height);
+    }
+    
+    
+	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		inv[i] = itemstack;
+		if (itemstack != null && itemstack.stackSize > getInventoryStackLimit()) {
+			itemstack.stackSize = getInventoryStackLimit();
+		}
+	}
+
+	public String getInvName()
+	{
+		int t = getType();
+		String tier = "";
+		
+		if(isHeater())
+		{
+        	return StatCollector.translateToLocal("tile.furnace.name") + " " + StatCollector.translateToLocal("block.furnace.heater");
+        }
+        
+        return tier + " " + StatCollector.translateToLocal("tile.furnace.name");
 	}
 	
 	
-	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
+	public int getSmeltLevel() {
+		if(isHeater())
+		{
+			return -1;
+		}
+		return getType() - 1;
+	}
+
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		progress = nbt.getFloat("Progress");
-        maxProgress = nbt.getFloat("maxProgress");
 		
 		NBTTagList savedItems = nbt.getTagList("Items", 10);
+        this.inv = new ItemStack[this.getSizeInventory()];
 
         for (int i = 0; i < savedItems.tagCount(); ++i)
         {
             NBTTagCompound savedSlot = savedItems.getCompoundTagAt(i);
             byte slotNum = savedSlot.getByte("Slot");
 
-            if (slotNum >= 0 && slotNum < items.length)
+            if (slotNum >= 0 && slotNum < this.inv.length)
             {
-            	items[slotNum] = ItemStack.loadItemStackFromNBT(savedSlot);
+                this.inv[slotNum] = ItemStack.loadItemStackFromNBT(savedSlot);
             }
         }
-	}
-	
-	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		super.writeToNBT(nbt);
-		nbt.setFloat("Progress", progress);
-        nbt.setFloat("maxProgress", maxProgress);
-        
-		NBTTagList savedItems = new NBTTagList();
+
+		justShared = nbt.getInteger("Shared");
+		built = nbt.getBoolean("Built");
 		
-        for (int i = 0; i < items.length; ++i)
+		fuel = nbt.getInteger("fuel");
+		maxFuel = nbt.getInteger("MaxFuel");
+		
+		heat = nbt.getFloat("heat");
+		maxHeat = nbt.getFloat("maxHeat");
+		
+		progress = nbt.getInteger("progress");
+		aboveType = nbt.getInteger("Level");
+	}
+
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		
+		nbt.setInteger("Shared", justShared);
+		nbt.setInteger("Level", aboveType);
+		nbt.setBoolean("Built", built);
+		
+		nbt.setInteger("fuel", fuel);
+		nbt.setInteger("maxFuel", maxFuel);
+		
+		nbt.setFloat("heat", heat);
+		nbt.setFloat("maxHeat", maxHeat);
+		
+		nbt.setInteger("progress", progress);
+		
+		NBTTagList savedItems = new NBTTagList();
+
+        for (int i = 0; i < this.inv.length; ++i)
         {
-            if (items[i] != null)
+            if (this.inv[i] != null)
             {
                 NBTTagCompound savedSlot = new NBTTagCompound();
                 savedSlot.setByte("Slot", (byte)i);
-                items[i].writeToNBT(savedSlot);
+                this.inv[i].writeToNBT(savedSlot);
                 savedItems.appendTag(savedSlot);
             }
         }
 
         nbt.setTag("Items", savedItems);
 	}
-	
-	//INVENTORY
-	public void onInventoryChanged() 
-	{
+
+	public int getInventoryStackLimit() {
+		return 64;
 	}
 	
-	@Override
-	public int getSizeInventory()
+	
+	public boolean isBurning()
 	{
-		return items.length;
+		if(worldObj == null)
+		{
+			return false;
+		}
+		if(worldObj.isRemote)
+		{
+			return isBurningClient;
+		}
+		if(isHeater())
+		{
+			return heat > 0;
+		}
+		return progress > 0 && heat > 0;
+	}
+	public boolean isHeater()
+	{
+		Block block = worldObj != null ? getBlockType() : blockType;
+		
+		if(block != null && block instanceof BlockBigFurnace)
+		{
+			return ((BlockBigFurnace)block).isHeater;
+		}
+		return false;
+	}
+	
+	
+	public int getTier()
+	{
+		Block block = worldObj != null ? getBlockType() : blockType;
+		
+		if(block != null && block instanceof BlockBigFurnace)
+		{
+			return ((BlockBigFurnace)block).tier;
+		}
+		return 0;
+	}
+	
+	public int getItemBurnTime(ItemStack itemstack) {
+		if (itemstack == null) {
+			return 0;
+		}
+		return (int)Math.ceil(ForgeItemHandler.getForgeFuel(itemstack)/4);
+	}
+	
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		if (worldObj.getTileEntity(xCoord, yCoord, zCoord) != this) {
+			return false;
+		}
+		return entityplayer.getDistanceSq((double) xCoord + 0.5D,
+				(double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
 	}
 
-	@Override
-	public ItemStack getStackInSlot(int slot)
-	{
-		return items[slot];
-	}
-
-	@Override
-	public ItemStack decrStackSize(int slot, int num)
+	public void openChest()
     {
-		onInventoryChanged();
-        if (this.items[slot] != null)
-        {
-            ItemStack itemstack;
+		if(numUsers == 0)
+		{
+			this.worldObj.playSoundEffect(xCoord+0.5D, (double)this.yCoord + 0.5D, zCoord+0.5D, "minefantasy2:block.furnace_open", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+		}
+		++numUsers;
+    }
 
-            if (this.items[slot].stackSize <= num)
-            {
-                itemstack = this.items[slot];
-                this.items[slot] = null;
-                return itemstack;
-            }
-            else
-            {
-                itemstack = this.items[slot].splitStack(num);
-
-                if (this.items[slot].stackSize == 0)
-                {
-                    this.items[slot] = null;
-                }
-
-                return itemstack;
-            }
-        }
-        else
-        {
-            return null;
-        }
+    public void closeChest()
+    {
+    	--numUsers;
+    	if(numUsers == 0 && doorAngle >= 15)
+		{
+			this.worldObj.playSoundEffect(xCoord+0.5D, (double)this.yCoord + 0.5D, zCoord+0.5D, "minefantasy2:block.furnace_close", 0.5F, this.worldObj.rand.nextFloat() * 0.1F + 0.9F);
+		}
     }
 
 	@Override
-	public ItemStack getStackInSlotOnClosing(int slot)
+	public ItemStack getStackInSlotOnClosing(int var1) {
+		return null;
+	}
+	
+	private void sendPacketToClients()
 	{
-		return items[slot];
+		if (!worldObj.isRemote)
+		{
+			List<EntityPlayer> players = ((WorldServer)worldObj).playerEntities;
+			for(int i = 0; i < players.size(); i++)
+			{
+				EntityPlayer player = players.get(i);
+				((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new BigFurnacePacket(this).generatePacket());
+			}
+		}
 	}
 
+	/*
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack item)
+	public void recievePacket(ByteArrayDataInput data)
 	{
-		onInventoryChanged();
-		items[slot] = item;
+		fuel = data.readInt();
+		progress = data.readInt();
+		direction = data.readInt();
+		heat = data.readInt();
+		int burn = data.readInt();
+		isBurningClient = burn == 1;
+		justShared = data.readInt();
+		doorAngle = data.readInt();
 	}
+	*/
+	
+	public int getBlockMetadata()
+    {
+		if(worldObj == null)
+			return itemMeta*2;
+		
+		
+        if (this.blockMetadata == -1)
+        {
+            this.blockMetadata = this.worldObj.getBlockMetadata(this.xCoord, this.yCoord, this.zCoord);
+        }
 
-	@Override
-	public String getInventoryName()
+        return this.blockMetadata;
+    }
+	
+	/**
+	 *  Heater:0||Stone :1;
+	 */
+	public int getType()
 	{
-		return "tile.roast.name";
+		return isHeater() ? 0 : 1;
 	}
-
-	@Override
-	public boolean hasCustomInventoryName()
+	
+	private int getOnMetadata()
 	{
-		return false;
+		return getType()*2 + 1;
 	}
-
-	@Override
-	public int getInventoryStackLimit()
+	
+	private int getOffMetadata()
 	{
-		return 64;
+		return getType()*2;
 	}
-
+    
+	
 	@Override
-	public boolean isUseableByPlayer(EntityPlayer user)
-	{
-		return user.getDistance(xCoord+0.5D, yCoord+0.5D, zCoord+0.5D) < 8D;
-	}
-
-	@Override
-	public void openInventory()
-	{
-	}
-
-	@Override
-	public void closeInventory()
-	{
-	}
-
-	@Override
-	public boolean isItemValidForSlot(int slot, ItemStack item)
-	{
-		return false;
+	public int[] getAccessibleSlotsFromSide(int side) {
+		if(isHeater())
+		{
+			return new int[]{0};
+		}
+		return new int[]{0, 1, 2, 3, 4, 5, 6, 7};
 	}
 	
 	@Override
-	public boolean canAccept(TileEntity tile) 
+	public boolean canInsertItem(int slot, ItemStack item, int side) {
+		if(isHeater())
+		{
+			return slot == 0 && isItemFuel(item);
+		}
+		return slot < 4 && getResult(item) != null;
+	}
+	
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item)
+    {
+		return canInsertItem(slot, item, 0);
+    }
+	
+	public boolean isItemFuel(ItemStack item)
 	{
+		return this.getItemBurnTime(item) > 0;
+	}
+	
+	@Override
+	public boolean canExtractItem(int slot, ItemStack item, int side) 
+	{
+		if(!isHeater())
+		{
+			return slot >= 4;
+		}
+		return item.getItem() == Items.bucket;
+	}
+	
+	
+	
+	public int getCookProgressScaled(int i) 
+	{
+		return (progress * i) / getMaxTime();
+	}
+	
+	public boolean isBlockValidForSide(int x, int y, int z)
+	{
+		if(worldObj == null)
+		{
+			return false;
+		}
+		
+		Block block = worldObj.getBlock(x, y, z);
+		
+		if(block == null)
+		{
+			return false;
+		}
+		
+		if(block == worldObj.getBlock(xCoord, yCoord, zCoord))
+		{
+			return true;
+		}
+		return block == BlockListMF.firebricks;
+	}
+	
+	
+	/**
+	 * Checks a valid block for sides. It must be the required block.
+	 * 
+	 * HEATER: Requires any stone block for bronze, stone above hardness 2.0(like slate)for iron,
+	 * and stone above hardness above 5.0(like granite) for steel
+	 * 
+	 * FURNACES require metal blocks of their material
+	 */
+	public boolean isBlockValidForTop(int x, int y, int z)
+	{
+		if(worldObj == null)
+		{
+			return false;
+		}
+		Block block = worldObj.getBlock(x, y, z);
+		
+		if(block == null)
+		{
+			return false;
+		}
+		return block == BlockListMF.firebricks;
+	}
+	
+	
+	
+	public boolean isBlockValidForSide(ForgeDirection side)
+	{
+		if(worldObj == null)
+		{
+			return false;
+		}
+		
+		int x = xCoord + side.offsetX;
+		int y = yCoord + side.offsetY;
+		int z = zCoord + side.offsetZ;
+		
+		return isBlockValidForSide(x, y, z);
+	}
+	
+	
+	public boolean isSolid(ForgeDirection side)
+	{
+		if(worldObj == null)
+		{
+			return false;
+		}
+		
+		int x = xCoord + side.offsetX;
+		int y = yCoord + side.offsetY;
+		int z = zCoord + side.offsetZ;
+		
+		Material mat = worldObj.getBlock(x, y, z).getMaterial();
+		
+		return mat.isSolid();
+	}
+	
+	
+	
+	/**
+	 *  Determines if the furnace is built properly
+	 *  HEATER must have sides blocked by stone
+	 *  FURNACES must have walls built to specifications
+	 */
+	private boolean structureExists()
+	{
+		if(worldObj == null)
+		{
+			return false;
+		}
+		
+		if(isSolid(getFront()))
+		{
+			return false;
+		}
+		
+		if(!isHeater() && !isBlockValidForTop(xCoord, yCoord+1, zCoord))
+		{
+			return false;
+		}
+		
+		if(!isBlockValidForSide(getLeft()))
+		{
+			return false;
+		}
+		if(!isBlockValidForSide(getRight()))
+		{
+			return false;
+		}
+		if(!isBlockValidForSide(getBack()))
+		{
+			return false;
+		}
+		
+		
 		return true;
 	}
 	
-	private void sendPacketToClients() 
+	
+	
+	
+	
+	/**
+	 *  Gets the direction the face is at(Opposite to the placer)
+	 */
+	public ForgeDirection getFront()
 	{
-		if(worldObj.isRemote)return;
-		
-		List<EntityPlayer> players = ((WorldServer)worldObj).playerEntities;
-		for(int i = 0; i < players.size(); i++)
+		int direction = getDirection();
+		if(direction == 0)//SOUTH PLACE
 		{
-			EntityPlayer player = players.get(i);
-			((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new BigFurnacePacket(this).generatePacket());
+			return ForgeDirection.NORTH;
 		}
+		if(direction == 1)//WEST PLACE
+		{
+			return ForgeDirection.EAST;
+		}
+		if(direction == 2)//NORTH PLACE
+		{
+			return ForgeDirection.SOUTH;
+		}
+		if(direction == 3)//EAST PLACE
+		{
+			return ForgeDirection.WEST;
+		}
+		return ForgeDirection.UNKNOWN;
+	}
+	
+	/**
+	 *  Gets the direction the back is facing (Same dir as placer)
+	 */
+	public ForgeDirection getBack()
+	{
+		int direction = getDirection();
+		if(direction == 0)//SOUTH PLACE
+		{
+			return ForgeDirection.SOUTH;
+		}
+		if(direction == 1)//WEST PLACE
+		{
+			return ForgeDirection.WEST;
+		}
+		if(direction == 2)//NORTH PLACE
+		{
+			return ForgeDirection.NORTH;
+		}
+		if(direction == 3)//EAST PLACE
+		{
+			return ForgeDirection.EAST;
+		}
+		return ForgeDirection.UNKNOWN;
+	}
+	
+	/**
+	 *  Gets the direction the left is facing
+	 */
+	public ForgeDirection getLeft()
+	{
+		int direction = getDirection();
+		if(direction == 0)//SOUTH PLACE
+		{
+			return ForgeDirection.WEST;
+		}
+		if(direction == 1)//WEST PLACE
+		{
+			return ForgeDirection.NORTH;
+		}
+		if(direction == 2)//NORTH PLACE
+		{
+			return ForgeDirection.EAST;
+		}
+		if(direction == 3)//EAST PLACE
+		{
+			return ForgeDirection.SOUTH;
+		}
+		return ForgeDirection.UNKNOWN;
+	}
+	
+	/**
+	 *  Gets the direction the right is facing
+	 */
+	public ForgeDirection getRight()
+	{
+		int direction = getDirection();
+		if(direction == 0)//SOUTH PLACE
+		{
+			return ForgeDirection.EAST;
+		}
+		if(direction == 1)//WEST PLACE
+		{
+			return ForgeDirection.SOUTH;
+		}
+		if(direction == 2)//NORTH PLACE
+		{
+			return ForgeDirection.WEST;
+		}
+		if(direction == 3)//EAST PLACE
+		{
+			return ForgeDirection.NORTH;
+		}
+		return ForgeDirection.UNKNOWN;
+	}
+	
+	private int getDirection()
+	{
+		if(worldObj != null)
+		{
+			return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		}
+		return 0;
+	}
+	public String getTexture() 
+	{
+		if(isHeater())
+		{
+			return "furnace_heater";
+		}
+	    return "furnace_rock";
+	}
+	@Override
+	public String getInventoryName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public boolean hasCustomInventoryName() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	@Override
+	public void openInventory() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void closeInventory() {
+		// TODO Auto-generated method stub
+		
 	}
 }

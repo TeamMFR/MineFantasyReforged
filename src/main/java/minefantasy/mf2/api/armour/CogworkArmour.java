@@ -120,8 +120,6 @@ public class CogworkArmour
 						++cost;
 					}
 					fuel -= cost;
-					if(!user.worldObj.isRemote)
-					System.out.println("Cost: " + cost);
 					NBTTagCompound nbt = getOrCreateNBT(armour);
 					nbt.setFloat(fuelNBT, Math.max(0, fuel));
 				}

@@ -10,20 +10,18 @@ X = Complete
 O = Obsolete (Or not considered to matter)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ISSUES       	 				     |Check|
+ISSUES       	 								     |Check|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Carpenter craft bows                                    -
 Show stats of wood (tooltip)                            -
 Optional book spawn                                     -
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-CONTENT		 				     |Check|
+CONTENT		 				     					 |Check|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Cooking Oven						-
 Mattock                                                 -
-Big Furnace                    			      	-
-Wood Bucket                     			-
-Pottery Oven (Kiln)         			        -
-Pottery Stand                   			-
+Wood Bucket                     						-
+Pottery Oven (Kiln)         			       			-
+Pottery Stand                   						-
 Cooktop                                                 -
 
 ////////////////////////////////////////////////////////////
@@ -32,14 +30,10 @@ More Detail:
    Metal joints are made on the anvil, then they (with wood and other pieces) go
    on carpenter benches.
 
-2: Big Furnace: (See "Content" folder)
+2: Wood Bucket: Just for milk and water
 
-3: Cooking oven: Pretty much complete (See "Content" folder)
+3: Kiln: A stone furnace for cooking ceramics
 
-4: Wood Bucket: Just for milk and water
+4: Pottery stand: similar to carpenter bench except for pottery
 
-5: Kiln: A stone furnace for cooking ceramics
-
-6: Pottery stand: similar to carpenter bench except for pottery
-
-8: Cooktop: Carpenter bench for cooking
+5: Cooktop: Carpenter bench for cooking

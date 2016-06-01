@@ -10,16 +10,17 @@ public class BigFurnacePacket extends PacketMF
 {
 	public static final String packetName = "MF2_BigfurnPkt";
 	private int[] coords = new int[3];
-	private float[] progress = new float[2];
+	private int fuel, progress, burn, doorAngle;
 	
 	public BigFurnacePacket(TileEntityBigFurnace tile)
 	{
 		coords = new int[]{tile.xCoord, tile.yCoord, tile.zCoord};
-		progress = new float[]{tile.progress, tile.maxProgress};
-		if(progress[0] > progress[1])
-		{
-			progress[0] = progress[1];
-		}
+		fuel = tile.fuel;
+		progress = tile.progress;
+		//heat = (int)tile.heat;
+		burn = tile.isBurning() ? 1 : 0;
+		//justShared = tile.justShared;
+		doorAngle = tile.doorAngle;
 	}
 
 	public BigFurnacePacket() {
@@ -29,16 +30,30 @@ public class BigFurnacePacket extends PacketMF
 	public void process(ByteBuf packet, EntityPlayer player) 
 	{
         coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
-        progress[0] = packet.readFloat();
-        progress[1] = packet.readFloat();
+        
+        fuel = packet.readInt();
+		progress = packet.readInt();
+		//heat = packet.readInt();
+		burn = packet.readInt();
+		//justShared = packet.readInt();
+		doorAngle = packet.readInt();
         
         TileEntity entity = player.worldObj.getTileEntity(coords[0], coords[1], coords[2]);
         
         if(entity != null && entity instanceof TileEntityBigFurnace)
         {
 	        TileEntityBigFurnace tile = (TileEntityBigFurnace)entity;
-	        tile.progress = progress[0];
-	        tile.maxProgress = progress[1];
+	        
+	        tile.fuel = fuel;
+	        tile.progress = progress;
+			//tile.heat = heat;
+			//tile.justShared = justShared;
+			tile.doorAngle = doorAngle;
+			
+			if(tile.getWorldObj().isRemote)
+			{
+				tile.isBurningClient = (burn == 1);
+			}
         }
 	}
 
@@ -55,7 +70,11 @@ public class BigFurnacePacket extends PacketMF
 		{
 			packet.writeInt(coords[a]);
 		}
-		packet.writeFloat(progress[0]);
-		packet.writeFloat(progress[1]);
+		packet.writeInt(fuel);
+		packet.writeInt(progress);
+		//packet.writeInt(heat);
+		packet.writeInt(burn);
+		//packet.writeInt(justShared);
+		packet.writeInt(doorAngle);
 	}
 }

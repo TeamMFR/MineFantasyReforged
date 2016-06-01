@@ -40,7 +40,7 @@ public class KnowledgeListMF
 	
 	//BASICS -FREE
 	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney, tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker, dragons, minotaurs;
-	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel, smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
+	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, bigfurn, blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel, smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
     public static InformationBase bellows, trough, forge, anvil, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, /*craftOrnateWeapons, craftAdvOrnateWeapons,*/ craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
 	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner, advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb, stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian, mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo, crossScope, crossBayonet, cogArmour, compPlate;
     public static InformationBase refined_planks, reinforced_stone, clay_wall, glass, brickworks, decorated_stone, bars, thatch, easyRefine, paint_brush;
@@ -82,6 +82,7 @@ public class KnowledgeListMF
         smeltIron = (new InformationBase("smeltIron",  			    1, 4,  5, Items.iron_ingot, smeltBronze)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10).setDescriptValues(getMetalTier("iron"));
         coalflux = (new InformationBase("coalflux",  			    1, 6,  5, ComponentListMF.coal_flux, smeltIron)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 15);
         blastfurn = (new InformationBase("blastfurn",  				2, 5, 15, BlockListMF.blast_heater_active, smeltIron)).registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 25);
+        bigfurn = (new InformationBase("bigfurn",  					0, 5, 10, BlockListMF.furnace_stone, smeltIron)).registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 10);
         smeltPig = (new InformationBase("smeltPig",  					3, 3, 0, ComponentListMF.ingots[3], blastfurn)).registerStat().setPage(artisanry).setUnlocked().addSkill(SkillList.artisanry, 25);
         smeltSteel = (new InformationBase("smeltSteel",  				4, 5, 0, ComponentListMF.ingots[4], smeltPig)).registerStat().setPage(artisanry).setUnlocked().addSkill(SkillList.artisanry, 25).setDescriptValues(getMetalTier("Steel"));
         encrusted = (new InformationBase("smeltEncrusted",  			6, 5, 10, ComponentListMF.diamond_shards, smeltSteel)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 35).setDescriptValues(getMetalTier("encrusted"));
@@ -330,7 +331,7 @@ public class KnowledgeListMF
     public static final ArrayList<ICarpenterRecipe> spoonR = new ArrayList<ICarpenterRecipe>();
     
     public static IAnvilRecipe ironPrepR, ironPrepR2, coalPrepR;
-    public static IAnvilRecipe blastChamR, blastHeatR;
+    public static IAnvilRecipe blastChamR, blastHeatR, bigFurnR, bigHeatR;
     
     public static ICarpenterRecipe padding[] = new ICarpenterRecipe[4];
     public static ICarpenterRecipe repairBasicR, repairAdvancedR, repairOrnateR;

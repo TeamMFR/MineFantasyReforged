@@ -5,17 +5,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
+import com.google.common.collect.Lists;
+
+import cpw.mods.fml.common.IFuelHandler;
 import minefantasy.mf2.api.cooking.CookRecipe;
 import minefantasy.mf2.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mf2.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mf2.api.crafting.engineer.ICrossbowPart;
+import minefantasy.mf2.api.crafting.refine.QuernRecipes;
 import minefantasy.mf2.api.heating.ForgeFuel;
 import minefantasy.mf2.api.heating.ForgeItemHandler;
 import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.AlloyRecipes;
+import minefantasy.mf2.api.refine.BigFurnaceRecipes;
 import minefantasy.mf2.api.refine.BlastFurnaceRecipes;
 import minefantasy.mf2.api.rpg.Skill;
 import minefantasy.mf2.util.MFLogUtil;
@@ -26,10 +31,6 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
-
-import com.google.common.collect.Lists;
-
-import cpw.mods.fml.common.IFuelHandler;
 
 public class MineFantasyAPI 
 {
@@ -567,5 +568,14 @@ public class MineFantasyAPI
 	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem, int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking, boolean canBurn)
 	{
 		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time, requireBaking, canBurn);
+	}
+	
+	public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output)
+	{
+		return QuernRecipes.addRecipe(input, output, 1);
+	}
+	public static BigFurnaceRecipes addFurnaceRecipe(ItemStack input, ItemStack output, int tier)
+	{
+		return BigFurnaceRecipes.addRecipe(input, output, tier);
 	}
 }

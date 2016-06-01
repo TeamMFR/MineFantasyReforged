@@ -36,7 +36,7 @@ public class ConfigHardcore extends ConfigurationBaseMF
 	@Override
 	protected void loadConfig()
 	{
-		HCCreduceIngots = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hardcore Ingots", true, "Some Metals (Like iron, steel and direct ore smelts) Must be worked manually on an anvil rather than smelted. They may also cost more!").getString());
+		HCCreduceIngots = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hardcore Ingots", true, "Some Metals (Like iron, steel and direct ore smelts) Must be worked manually on an anvil rather than smelted. They may also cost more! Big furnace still works.").getString());
 		HCChotBurn = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hot burns", true, "You cannot hold hot items (apron or not), tongs must be used.").getString());
 		Heatable.HCCquenchRuin = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hardcore Quench", true, "Hot items can be damaged if a trough is not used.").getString());
 		HCCWeakItems = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Weaken Basic items", true, "This will significantly reduce the durability of basic items (made on basic crafting table), they can still be crafted but are practically useless.").getString());

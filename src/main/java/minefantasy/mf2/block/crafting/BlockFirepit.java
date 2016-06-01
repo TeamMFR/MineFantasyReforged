@@ -38,10 +38,11 @@ public class BlockFirepit extends BlockContainer
 		this.setBlockName(name);
 		GameRegistry.registerBlock(this, name);
         this.setLightOpacity(0);
-        setHardness(5F);
+        setHardness(2F);
     }
 	
-	public int idDropped(int id, Random rand, int meta)
+	@Override
+	public int quantityDropped(Random rand)
     {
 		return 0;
     }

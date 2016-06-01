@@ -36,7 +36,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 	public float fuel;
 	public float maxFuel = 6000;//5m
 	public float temperature, fuelTemperature;
-	public float maxTemperature = 1000;
+	public static final float maxTemperature = 1000;
 	private Random rand = new Random();
 	private int ticksExisted;
 	public float dragonHeartPower = 0F;

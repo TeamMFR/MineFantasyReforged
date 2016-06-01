@@ -105,16 +105,17 @@ public class CookingRecipes
 	private static void addCeramics() 
 	{
 		bakeCeramic(ComponentListMF.clay_pot_uncooked, ComponentListMF.clay_pot, 100, 5);
-		bakeCeramic(FoodListMF.jug_uncooked, FoodListMF.jug_empty, 100, 10);
-		bakeCeramic(ComponentListMF.pie_tray_uncooked, FoodListMF.pie_tray, 100, 20);
-		bakeCeramic(ComponentListMF.ingot_mould_uncooked, ComponentListMF.ingot_mould, 100, 15);
-		bakeCeramic(ComponentListMF.mine_casing_uncooked, ComponentListMF.mine_casing, 100, 20);
-		bakeCeramic(ComponentListMF.bomb_casing_uncooked, ComponentListMF.bomb_casing, 100, 20);
+		bakeCeramic(FoodListMF.jug_uncooked, FoodListMF.jug_empty, 100, 5);
+		bakeCeramic(ComponentListMF.pie_tray_uncooked, FoodListMF.pie_tray, 100, 10);
+		bakeCeramic(ComponentListMF.ingot_mould_uncooked, ComponentListMF.ingot_mould, 100, 5);
+		bakeCeramic(ComponentListMF.mine_casing_uncooked, ComponentListMF.mine_casing, 100, 10);
+		bakeCeramic(ComponentListMF.bomb_casing_uncooked, ComponentListMF.bomb_casing, 100, 10);
 		
-		bakeCeramic(ComponentListMF.fireclay_brick, ComponentListMF.strong_brick, 150, 10);
+		bakeCeramic(ComponentListMF.fireclay_brick, ComponentListMF.strong_brick, 150, 5);
 	}
 	private static CookRecipe bakeCeramic(Item clay, Item ceramic, int temp, int time) 
 	{
+		GameRegistry.addSmelting(clay, new ItemStack(ceramic), 0F);
 		return MineFantasyAPI.addCookingRecipe(new ItemStack(clay),
 				new ItemStack(ceramic), null,
 				temp, 1000, time, 0, true, false);

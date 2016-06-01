@@ -166,6 +166,13 @@ public class KnowledgePageRegistry
 	    
 	    KnowledgeListMF.coalflux.addPages(new EntryPageText("knowledge.coalflux.1"), new EntryPageGrind(new ItemStack(ComponentListMF.flux), new ItemStack(ComponentListMF.flux_pot)), new EntryPageRecipeAnvil(KnowledgeListMF.coalfluxR));
 	    
+	    KnowledgeListMF.bigfurn.addPages(assembleSimpleImgPage("furnace_example", BlockListMF.furnace_stone.getUnlocalizedName()+".name"), new EntryPageText("knowledge.bigfurn.1"));
+	    KnowledgeListMF.bigfurn.addPages(new EntryPageGrind(new ItemStack(ComponentListMF.kaolinite), new ItemStack(ComponentListMF.kaolinite_dust)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireclayR), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBrickR), new EntryPageSmelting(new ItemStack(ComponentListMF.fireclay_brick), new ItemStack(ComponentListMF.strong_brick)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBricksR));
+	    KnowledgeListMF.bigfurn.addPages(new EntryPageText("knowledge.bigfurn.heater"), new EntryPageRecipeAnvil(KnowledgeListMF.bigHeatR), assembleSimpleImgPage("furnace_heater", BlockListMF.furnace_heater.getUnlocalizedName()+".name"));
+	    KnowledgeListMF.bigfurn.addPages(new EntryPageText("knowledge.bigfurn.top"), new EntryPageRecipeAnvil(KnowledgeListMF.bigFurnR), assembleSimpleImgPage("furnace_full", BlockListMF.furnace_stone.getUnlocalizedName()+".name"));
+	    KnowledgeListMF.bigfurn.addPages(new EntryPageText("knowledge.bigfurn.structure"));
+	    
+	    
 	    KnowledgeListMF.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.1"), new EntryPageText("knowledge.blastfurn.2"));
 	    KnowledgeListMF.blastfurn.addPages(new EntryPageGrind(new ItemStack(ComponentListMF.kaolinite), new ItemStack(ComponentListMF.kaolinite_dust)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireclayR), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBrickR), new EntryPageSmelting(new ItemStack(ComponentListMF.fireclay_brick), new ItemStack(ComponentListMF.strong_brick)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBricksR));
 	    KnowledgeListMF.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.3"), new EntryPageRecipeAnvil(KnowledgeListMF.blastChamR), new EntryPageRecipeAnvil(KnowledgeListMF.blastHeatR), new EntryPageText("knowledge.blastfurn.4"), new EntryPageText("knowledge.blastfurn.5"));

@@ -708,7 +708,8 @@ tile.anvilSteel.name=Steel Anvil
 tile.anvilBlackSteel.name=Black Steel Anvil
 tile.anvilRedSteel.name=Red Steel Anvil
 tile.anvilBlueSteel.name= Blue Steel Anvil
-tile.furnacemf.fireclay.name=Furnace
+tile.furnace_stone.name=Furnace
+tile.furnace_heater.name=Furnace Heater
 tile.blastfurnchamber.name=Blast Furnace Chamber
 tile.blastfurnheater.name=Blast Furnace Heater
 
@@ -2232,6 +2233,13 @@ knowledge.masterArmour=For any armour, you need to make mail and plate items dif
 knowledge.coalflux=Coal Flux
 knowledge.coalflux.desc=Conservative
 knowledge.coalflux.1=It's pretty certain now that those piles of coal you have don't last very long when a boat load of ore comes in. Smelting equipment just uses so much of it and it drains your supplies fast!^A mixture of flux and coal can be used in substitute for coal in bloomeries, though it doesn't work as fuel.
+
+knowledge.bigfurn=Furnace
+knowledge.bigfurn.desc=Mass Producing
+knowledge.bigfurn.1=Manually smelting ores in a bloomery is a slow and tedious process that cries for an alternative. Furnaces are able to smelt four inputs at a time and are easily able to produce a refined product with little effort.^Furnaces are milti-block structures with two main components.
+knowledge.bigfurn.heater=The heater block takes fuel and produces power for a furnace. These are placed at the base of the furnace and must be surrounded three sides by fire brick.^Furnace heaters only accept forge-based fuel (coal, charcoal, etc)
+knowledge.bigfurn.top=The furnace block itself is placed directly above heaters, they also must have three sides sorrounded by fire brick and have firebricks on top.
+knowledge.bigfurn.structure=the structure works with multiple furnaces, two side walls and one back wall can support many connected furnaces.
 
 knowledge.blastfurn=Refining
 knowledge.blastfurn.desc=More than smelting

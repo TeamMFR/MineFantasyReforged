@@ -3,6 +3,7 @@ package minefantasy.mf2.mechanics;
 import java.util.Map;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minefantasy.mf2.api.armour.CogworkArmour;
 import minefantasy.mf2.api.armour.IElementalResistance;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
@@ -14,7 +15,6 @@ import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.api.stamina.StaminaBar;
-import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.api.weapon.IDamageModifier;
 import minefantasy.mf2.api.weapon.IKnockbackWeapon;
 import minefantasy.mf2.api.weapon.IParryable;
@@ -27,6 +27,7 @@ import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigStamina;
 import minefantasy.mf2.config.ConfigWeapon;
 import minefantasy.mf2.entity.Shockwave;
+import minefantasy.mf2.entity.mob.EntityMinotaur;
 import minefantasy.mf2.item.weapon.ItemBattleaxeMF;
 import minefantasy.mf2.item.weapon.ItemDagger;
 import minefantasy.mf2.item.weapon.ItemKatanaMF;
@@ -59,7 +60,6 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class CombatMechanics
 {
@@ -604,8 +604,6 @@ public class CombatMechanics
         	   float previousDam = dam;
         	   dam = Math.max(0F, dam - threshold);
         	   
-        	   if(debugParry && !user.worldObj.isRemote){MFLogUtil.logDebug("Parried: dam = " + dam);}
-        	   
         	   if(properHit || dam <= 0)
         	   {
 	        	   user.hurtResistantTime = user.maxHurtResistantTime;
@@ -617,6 +615,7 @@ public class CombatMechanics
         		   {
         			   dam = 0;
         		   }
+        		   ticks = ArmourCalculator.modifyParryCooldown(user, ticks);
         		   
         		   if(StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user) && !StaminaBar.isAnyStamina(user, false))
 	        	   {
@@ -1032,6 +1031,10 @@ public class CombatMechanics
 	 */
 	public static void panic(EntityLivingBase victim, float speed, int directionTimer)
 	{
+		if(!shouldPanic(victim))
+		{
+			return;
+		}
 		double moveX = victim.getEntityData().getDouble("MF2_PanicX");
 		double moveZ = victim.getEntityData().getDouble("MF2_PanicZ");
     	victim.setJumping(true);
@@ -1053,6 +1056,15 @@ public class CombatMechanics
 	
 	
 	
+	private static boolean shouldPanic(EntityLivingBase victim) 
+	{
+		if(victim instanceof EntityMinotaur)
+		{
+			return ((EntityMinotaur)victim).getRageLevel() < 80;
+		}
+		return !(victim instanceof EntityPlayer);
+	}
+
 	private float modifyPlayerDamage(EntityPlayer hit, float dam) 
 	{
 		if(ResearchLogic.hasInfoUnlocked(hit, KnowledgeListMF.toughness))

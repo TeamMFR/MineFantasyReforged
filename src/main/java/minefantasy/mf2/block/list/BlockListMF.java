@@ -205,8 +205,8 @@ public class BlockListMF
 	public static Block roast = new BlockRoast(0, "basic", false);
 	public static Block oven_stone = new BlockRoast(0, "basic", true);
 	
-	public static Block furnacemf = new BlockBigFurnace("fireclay", 1, false);
-	public static Block furnacemf_active = new BlockBigFurnace("fireclay", 1, true).setLightLevel(12F);
+	public static Block furnace_heater = new BlockBigFurnace("furnace_heater", true, -1);
+	public static Block furnace_stone = new BlockBigFurnace("furnace_stone", false, 0);
 	
 	public static void load()
 	{

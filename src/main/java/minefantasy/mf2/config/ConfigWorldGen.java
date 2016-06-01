@@ -151,7 +151,7 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		tinFrequencyMax = Integer.parseInt(config.get(tin, "Tin Frequency Max", 8, "Tin will try spawn between min and this veins per chunk").getString());
 		tinLayerMin = Integer.parseInt(config.get(tin, "Tin Layer Min", 48, "Tin veins spawn above this layer").getString());
 		tinLayerMax = Integer.parseInt(config.get(tin, "Tin Layer Max", 96, "Tin veins spawn below this layer").getString());
-		tinSize = Integer.parseInt(config.get(tin, "Tin Size", 4, "How many blocks consist of the vein").getString());
+		tinSize = Integer.parseInt(config.get(tin, "Tin Size", 5, "How many blocks consist of the vein").getString());
 		
 		silverRarity = Float.parseFloat(config.get(silver, "Silver Rarity", 1.0D, "The chance for silver to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any ").getString());
 		silverFrequencyMin = Integer.parseInt(config.get(silver, "Silver Frequency Min", 3, "Silver will try spawn between this and max veins per chunk").getString());
@@ -161,11 +161,11 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		silverSize = Integer.parseInt(config.get(silver, "Silver Size", 8, "How many blocks consist of the vein").getString());
 		
 		wolframiteRarity = Float.parseFloat(config.get(wolframite, "Wolframite Rarity", 1.0D, "The chance for wolframite to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any ").getString());
-		wolframiteFrequencyMin = Integer.parseInt(config.get(wolframite, "Wolframite Frequency Min", 5, "Wolframite will try spawn between this and max veins per chunk").getString());
-		wolframiteFrequencyMax = Integer.parseInt(config.get(wolframite, "Wolframite Frequency Max", 10, "Wolframite will try spawn between min and this veins per chunk").getString());
+		wolframiteFrequencyMin = Integer.parseInt(config.get(wolframite, "Wolframite Frequency Min", 1, "Wolframite will try spawn between this and max veins per chunk").getString());
+		wolframiteFrequencyMax = Integer.parseInt(config.get(wolframite, "Wolframite Frequency Max", 1, "Wolframite will try spawn between min and this veins per chunk").getString());
 		wolframiteLayerMin = Integer.parseInt(config.get(wolframite, "Wolframite Layer Min", 0, "Wolframite veins spawn above this layer").getString());
 		wolframiteLayerMax = Integer.parseInt(config.get(wolframite, "Wolframite Layer Max", 16, "Wolframite veins spawn below this layer").getString());
-		wolframiteSize = Integer.parseInt(config.get(wolframite, "Wolframite Size", 1, "How many blocks consist of the vein").getString());
+		wolframiteSize = Integer.parseInt(config.get(wolframite, "Wolframite Size", 7, "How many blocks consist of the vein").getString());
 		
 		mythicRarity = Float.parseFloat(config.get(mythic, "Mythic Rarity", 0.05D, "The chance for mythic to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any mythic").getString());
 		mythicFrequencyMin = Integer.parseInt(config.get(mythic, "Mythic Frequency Min", 2, "Mythic will try spawn between this and max veins per chunk").getString());
@@ -203,7 +203,7 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		nitreFrequencyMax = Integer.parseInt(config.get(nitre, "Nitre Frequency Max", 5, "Nitre will try spawn between min and this deposits per chunk").getString());
 		nitreLayerMin = Integer.parseInt(config.get(nitre, "Nitre Layer Min", 16, "Nitre deposits spawn above this layer").getString());
 		nitreLayerMax = Integer.parseInt(config.get(nitre, "Nitre Layer Max", 64, "Nitre deposits spawn below this layer").getString());
-		nitreSize = Integer.parseInt(config.get(nitre, "Nitre Size", 12, "How many blocks consist of the deposit").getString());
+		nitreSize = Integer.parseInt(config.get(nitre, "Nitre Size", 8, "How many blocks consist of the deposit").getString());
 		
 		sulfurRarity = Float.parseFloat(config.get(sulfur, "Sulfur Rarity", 1.0D, "The chance for sulfur to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any sulfur").getString());
 		sulfurFrequencyMin = Integer.parseInt(config.get(sulfur, "Sulfur Frequency Min", 6, "Sulfur will try spawn between this and max deposits per chunk").getString());
@@ -219,7 +219,7 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		boraxLayerMax = Integer.parseInt(config.get(borax, "Borax Layer Max", 96, "Borax deposits spawn below this layer").getString());
 		boraxSize = Integer.parseInt(config.get(borax, "Borax Size", 8, "How many blocks consist of the deposit").getString());
 		
-		limestoneRarity = Float.parseFloat(config.get(limestone, "Limestone Rarity", 5.0E-2D, "The chance for limestone to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any limestone").getString());
+		limestoneRarity = Float.parseFloat(config.get(limestone, "Limestone Rarity", 2.5E-2D, "The chance for limestone to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any limestone").getString());
 		limestoneFrequencyMin = Integer.parseInt(config.get(limestone, "Limestone Frequency Min", 1, "Limestone will try spawn between this and max deposits per chunk").getString());
 		limestoneFrequencyMax = Integer.parseInt(config.get(limestone, "Limestone Frequency Max", 1, "Limestone will try spawn between min and this deposits per chunk").getString());
 		limestoneLayerMin = Integer.parseInt(config.get(limestone, "Limestone Layer Min", 48, "Limestone deposits spawn above this layer").getString());
@@ -228,9 +228,9 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		
 		//Trees and Plants use SN values to make them more compact (since their pretty rare)
 		berryRarity = Float.parseFloat(config.get(berry, "Berry Bush Rarity", 			3.0E-2D, "The chance for berry bushes to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any berries").getString());
-		yewRarity = Float.parseFloat(config.get(yew, "Yew Tree Rarity", 		 		1.0E-2D, "The chance for yew trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees").getString());
-		ironbarkRarity = Float.parseFloat(config.get(ironbark, "Ironbark Tree Rarity", 	1.5E-2D, "The chance for ironbark trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees").getString());
-		ebonyRarity = Float.parseFloat(config.get(ebony, "Ebony Tree Rarity", 		    5.0E-3D, "The chance for ebony trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees").getString());
+		yewRarity = Float.parseFloat(config.get(yew, "Yew Tree Rarity", 		 		1.0E-3D, "The chance for yew trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees").getString());
+		ironbarkRarity = Float.parseFloat(config.get(ironbark, "Ironbark Tree Rarity", 	1.5E-3D, "The chance for ironbark trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees").getString());
+		ebonyRarity = Float.parseFloat(config.get(ebony, "Ebony Tree Rarity", 		    5.0E-4D, "The chance for ebony trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees").getString());
 		
 		berryMinTemp = Float.parseFloat(config.get(berry, "Berry Bush Spawn Temp Min", 0.2D, "The minimal biome temperature berries can spawn").getString());
 		berryMaxTemp = Float.parseFloat(config.get(berry, "Berry Bush Spawn Temp Max", 1.0D, "The maximum biome temperature berries can spawn").getString());

@@ -9,7 +9,6 @@ import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.BigFurnaceRecipes;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigHardcore;
-import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.util.MFLogUtil;
@@ -18,7 +17,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class SmeltingRecipesMF {
@@ -42,6 +40,9 @@ public class SmeltingRecipesMF {
 			}
 			BloomRecipe.addRecipe(new ItemStack(Blocks.iron_ore), new ItemStack(Items.iron_ingot));
 			BloomRecipe.addRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Items.gold_ingot));
+			
+			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.iron_ore), new ItemStack(Items.iron_ingot), 0);
+			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Items.gold_ingot), 0);
 		}
 		
 		refineRawOre(ComponentListMF.oreCopper, ComponentListMF.ingots[0]);
@@ -205,7 +206,7 @@ public class SmeltingRecipesMF {
 		{
 			GameRegistry.addSmelting(ore, new ItemStack(ingot), xp);
 		}
-		BigFurnaceRecipes.addRecipe(new ItemStack(ore), new ItemStack(ingot), 100, 10);
+		BigFurnaceRecipes.addRecipe(new ItemStack(ore), new ItemStack(ingot), 0);
 	}
 
 }

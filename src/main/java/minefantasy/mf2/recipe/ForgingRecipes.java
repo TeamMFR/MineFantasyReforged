@@ -95,7 +95,7 @@ public class ForgingRecipes
 			'H',BlockListMF.limestone
 		});
 		
-		//PLATE ARMOUR
+		//LEATHER ARMOUR
 		for(int id = 1; id < ArmourListMF.mats.length; id ++)
 		{
 			material = BaseMaterialMF.getMaterial(ArmourListMF.mats[id]);
@@ -230,6 +230,39 @@ public class ForgingRecipes
 				Blocks.furnace);
 		Salvage.addSalvage(BlockListMF.blast_chamber, new ItemStack(ComponentListMF.rivet, 8),
 				plate, plate, plate, plate, plate, plate, plate, plate);
+		
+		
+		time=20;
+		KnowledgeListMF.bigFurnR = 
+		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(BlockListMF.furnace_stone), "bigfurn", false, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]{
+			"PRP",
+			"RCR",
+			"PFP",
+			'F', Blocks.furnace,
+			'R', ComponentListMF.rivet,
+			'P', plate,
+			'C', BlockListMF.firebricks
+		});
+		time=20;
+		KnowledgeListMF.bigHeatR = 
+		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(BlockListMF.furnace_heater), "bigfurn", false, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]{
+				"RCR",
+				"PFP",
+				'R', ComponentListMF.rivet,
+				'P', plate,
+				'C', BlockListMF.firebricks,
+				'F', BlockListMF.forge,
+		});
+		
+		Salvage.addSalvage(BlockListMF.furnace_heater, new ItemStack(ComponentListMF.rivet, 2),
+				plate, plate,
+				BlockListMF.firebricks,
+				BlockListMF.forge);
+		Salvage.addSalvage(BlockListMF.furnace_stone, new ItemStack(ComponentListMF.rivet, 3),
+				plate, plate, plate, plate,
+				BlockListMF.firebricks,
+				Blocks.furnace);
+		
 		
 		for(ItemStack silver : OreDictionary.getOres("ingotSilver"))
 		{

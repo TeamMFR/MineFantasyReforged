@@ -253,5 +253,19 @@
     "sounds": [
         "vehicle/cogStep"
       ]
+    },
+	
+	"block.furnace_open": {
+    "category": "block",
+    "sounds": [
+        "blocks/furnace_open"
+      ]
+    },
+	
+	"block.furnace_close": {
+    "category": "block",
+    "sounds": [
+        "blocks/furnace_close"
+      ]
     }
 }

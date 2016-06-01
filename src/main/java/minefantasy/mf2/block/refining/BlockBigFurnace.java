@@ -1,7 +1,5 @@
 package minefantasy.mf2.block.refining;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -10,255 +8,189 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityBigFurnace;
-import minefantasy.mf2.config.ConfigHardcore;
-import minefantasy.mf2.item.ItemFilledMould;
-import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
-public class BlockBigFurnace extends BlockContainer 
+public class BlockBigFurnace extends BlockContainer
 {
-	private Random rand = new Random();
-	public final boolean isActive;
-	private static boolean keepInventory;
-	public int tier;
-	public String type;
-	
-	public BlockBigFurnace(String tex, int tier, boolean isActive) 
-	{
-		super(Material.rock);
-		this.tier = tier;
-		this.type = tex;
-		this.isActive = isActive;
-        GameRegistry.registerBlock(this, "MF_Bigfurnace"+tex + (isActive ? "Active" : ""));
-		setBlockName("furnacemf."+tex);
-		this.setStepSound(Block.soundTypeStone);
-		this.setHardness(8F);
-		this.setResistance(8F);
+    /**
+     * Is the random generator used by furnace to drop the inventory contents in random directions.
+     */
+    private Random rand = new Random();
+    public final boolean isHeater;
+    public final int tier;
+
+    /**
+     * This flag is used to prevent the furnace inventory to be dropped upon block removal, is used internally when the
+     * furnace block changes from idle to active and vice-versa.
+     */
+    private static boolean keepFurnaceInventory = false;
+	public static int furn_RI = 114;
+
+    public BlockBigFurnace(String name, boolean isHeater, int tier)
+    {
+        super(Material.rock);
+        this.isHeater = isHeater;
+        this.tier = tier;
         this.setCreativeTab(CreativeTabMF.tabUtil);
-	}
-	public boolean isAuto;
-	public BlockBigFurnace setAuto()
-	{
-		isAuto = true;
-		return this;
-	}
-
-	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, List list)
-    {
-		if(!isActive)
-		{
-			super.getSubBlocks(item, tab, list);
-		}
+        GameRegistry.registerBlock(this, name);
+		setBlockName(name);
+		this.setStepSound(Block.soundTypeStone);
+		this.setHardness(3.5F);
+		this.setResistance(2F);
     }
-	
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) 
-	{
-		return new TileEntityBigFurnace();
-	}
-	
-	private static TileEntityBigFurnace getTile(IBlockAccess world, int x, int y, int z)
-	{
-		return (TileEntityBigFurnace)world.getTileEntity(x, y, z);
-	}
-	
-	
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+    
+    @Override
+    public IIcon getIcon(int side, int meta)
     {
-		if(keepInventory)return;
-		
-		TileEntityBigFurnace tile = getTile(world, x, y, z);
+    	return BlockListMF.firebricks.getIcon(side, meta);
+    }
+    
+    public boolean isOpaqueCube() {
+        return false;
+    }
 
-        if (tile != null)
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+   
+
+    @Override
+    public int getLightValue(IBlockAccess world, int x, int y, int z)
+    {
+    	TileEntity tile = world.getTileEntity(x, y, z);
+    	if(tile != null && tile instanceof TileEntityBigFurnace)
+    	{
+    		if(((TileEntityBigFurnace)tile).isBurning())
+    		{
+    			return 10;
+    		}
+    	}
+    	return super.getLightValue(world, x, y, z);
+    }
+    /**
+     * Called whenever the block is added into the world. Args: world, x, y, z
+     */
+    public void onBlockAdded(World world, int x, int y, int z)
+    {
+        super.onBlockAdded(world, x, y, z);
+    }
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getRenderType()
+    {
+    	return furn_RI;
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1, float f2)
+    {
+        if (world.isRemote)
         {
-        	int size = (!isAuto && ConfigHardcore.HCCreduceIngots) ? tile.getSizeInventory()-1 : tile.getSizeInventory();
-            for (int i1 = 0; i1 < size; ++i1)
+            return true;
+        }
+        else
+        {
+            TileEntityBigFurnace tile = (TileEntityBigFurnace)world.getTileEntity(x, y, z);
+
+            ItemStack item = player.getHeldItem();
+            
+            if (tile != null)
             {
-                ItemStack itemstack = tile.getStackInSlot(i1);
+    			player.openGui(MineFantasyII.instance, 0, world, x, y, z);
+            }
 
-                if (itemstack != null)
+            return true;
+        }
+    }
+
+    /**
+
+    /**
+     * Returns the TileEntity used by this block.
+     */
+    public TileEntity createNewTileEntity(World world, int meta)
+    {
+        return new TileEntityBigFurnace();
+    }
+
+    /**
+     * Called when the block is placed in the world.
+     */
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack item) {
+        int dir = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+
+        world.setBlockMetadataWithNotify(x, y, z, dir, 2);
+    }
+
+    /**
+     * Called whenever the block is removed.
+     */
+    @Override
+    public void breakBlock(World world, int x, int y, int z, Block i1, int i2)
+    {
+        if (!keepFurnaceInventory)
+        {
+            TileEntityBigFurnace tile = (TileEntityBigFurnace)world.getTileEntity(x, y, z);
+
+            if (tile != null)
+            {
+                for (int var6 = 0; var6 < tile.getSizeInventory(); ++var6)
                 {
-                    float f = this.rand .nextFloat() * 0.8F + 0.1F;
-                    float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-                    float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+                    ItemStack var7 = tile.getStackInSlot(var6);
 
-                    while (itemstack.stackSize > 0)
+                    if (var7 != null)
                     {
-                        int j1 = this.rand.nextInt(21) + 10;
+                        float var8 = this.rand.nextFloat() * 0.8F + 0.1F;
+                        float var9 = this.rand.nextFloat() * 0.8F + 0.1F;
+                        float var10 = this.rand.nextFloat() * 0.8F + 0.1F;
 
-                        if (j1 > itemstack.stackSize)
+                        while (var7.stackSize > 0)
                         {
-                            j1 = itemstack.stackSize;
+                            int var11 = this.rand.nextInt(21) + 10;
+
+                            if (var11 > var7.stackSize)
+                            {
+                                var11 = var7.stackSize;
+                            }
+
+                            var7.stackSize -= var11;
+                            EntityItem var12 = new EntityItem(world, (double)((float)x + var8), (double)((float)y + var9), (double)((float)z + var10), new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+
+                            if (var7.hasTagCompound())
+                            {
+                            	 var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
+                            }
+
+                            float var13 = 0.05F;
+                            var12.motionX = (double)((float)this.rand.nextGaussian() * var13);
+                            var12.motionY = (double)((float)this.rand.nextGaussian() * var13 + 0.2F);
+                            var12.motionZ = (double)((float)this.rand.nextGaussian() * var13);
+                            world.spawnEntityInWorld(var12);
                         }
-
-                        itemstack.stackSize -= j1;
-                        EntityItem entityitem = new EntityItem(world, x + f, y + f1, z + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-                        if (itemstack.hasTagCompound())
-                        {
-                            entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-                        }
-
-                        float f3 = 0.05F;
-                        entityitem.motionX = (float)this.rand.nextGaussian() * f3;
-                        entityitem.motionY = (float)this.rand.nextGaussian() * f3 + 0.2F;
-                        entityitem.motionZ = (float)this.rand.nextGaussian() * f3;
-                        world.spawnEntityInWorld(entityitem);
                     }
                 }
             }
-
-            world.func_147453_f(x, y, z, block);
         }
 
-        super.breakBlock(world, x, y, z, block, meta);
+        super.breakBlock(world, x, y, z, i1, i2);
     }
-	
-	public static void updateFurnaceBlockState(boolean state, World world, int x, int y, int z)
-    {
-        int l = world.getBlockMetadata(x, y, z);
-        TileEntityBigFurnace tileentity = getTile(world, x, y, z);
-        keepInventory = true;
-        Block block = world.getBlock(x, y, z);
-        
-        if(block != null && block instanceof BlockBigFurnace)
-        {
-        	int blocktier = ((BlockBigFurnace)block).tier;
-        	boolean auto = ((BlockBigFurnace)block).isAuto;
-	        if (state)
-	        {
-	            world.setBlock(x, y, z, getActiveBlock(blocktier, auto));
-	        }
-	        else
-	        {
-	            world.setBlock(x, y, z, getInactiveBlock(blocktier, auto));
-	        }
-        }
 
-        keepInventory = false;
-        world.setBlockMetadataWithNotify(x, y, z, l, 2);
-
-        if (tileentity != null)
-        {
-            tileentity.validate();
-            world.setTileEntity(x, y, z, tileentity);
-        }
-    }
-	
-	private static Block getActiveBlock(int tier, boolean auto)
-	{
-		if(tier == 1)
-		{
-			return auto ? BlockListMF.crucibleauto_active : BlockListMF.crucibleadv_active;
-		}
-		return BlockListMF.crucible_active;
-	}
-
-	private static Block getInactiveBlock(int tier, boolean auto) 
-	{
-		if(tier == 1)
-		{
-			return auto ? BlockListMF.crucibleauto : BlockListMF.crucibleadv;
-		}
-		return BlockListMF.crucible;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIcon(int side, int meta)
-	{
-		return side > 1 ? mainTex : sideTex;
-	}
-	
-	@Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer user, int side, float xOffset, float yOffset, float zOffset)
-    {
-		TileEntityBigFurnace tile = getTile(world, x, y, z);
-    	if(tile != null)
-    	{
-    		ItemStack held = user.getHeldItem();
-    		ItemStack out = tile.getStackInSlot(tile.getSizeInventory()-1);
-    		if(held != null)
-			{
-    			if(held.getItem() == ComponentListMF.ingot_mould && out != null && !(out.getItem() instanceof ItemBlock))
-	    		{
-	    			ItemStack result = out.copy();
-	    			result.stackSize = 1;
-	    			tile.decrStackSize(tile.getSizeInventory()-1, 1);
-	    			
-	    			ItemStack mould = ItemFilledMould.createMould(result);
-	    			if(held.stackSize == 1)
-	    			{
-	    				user.setCurrentItemOrArmor(0, mould);
-	    			}
-	    			else
-	    			{
-	    				--held.stackSize;
-	    				 if(!world.isRemote)
-	    				 {
-			    			EntityItem drop = new EntityItem(world, user.posX, user.posY, user.posZ, mould);
-			    			drop.delayBeforeCanPickup = 0;
-			    			world.spawnEntityInWorld(drop);
-	    				 }
-	    			}
-	    			return true;
-	    		}
-    			if(tile.getStackInSlot(0) == null)
-    			{
-    				tile.setInventorySlotContents(0, held.copy());
-    				user.setCurrentItemOrArmor(0, null);
-    				tile.updateRecipe();
-    				return true;
-    			}
-			}
-    		if(!world.isRemote)
-    		{
-    			user.openGui(MineFantasyII.instance, 0, world, x, y, z);
-    		}
-    	}
-        return true;
-    }
-	private IIcon sideTex, mainTex;
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg)
-	{
-		mainTex = isActive ? reg.registerIcon("minefantasy2:processor/furnace_face_active") : reg.registerIcon("minefantasy2:processor/furnace_face");
-		sideTex = reg.registerIcon("minefantasy2:processor/crucible_side_"+type);
-	}
-	@Override
-	@SideOnly(Side.CLIENT)
-    public Item getItem(World world, int x, int y, int z)
-    {
-        return Item.getItemFromBlock(getInactiveBlock(tier, isAuto));
-    }
-	@Override
-	public Item getItemDropped(int meta, Random rand, int fort)
-    {
-        return Item.getItemFromBlock(getInactiveBlock(tier, isAuto));
-    }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerBlockIcons(IIconRegister reg){}
 }

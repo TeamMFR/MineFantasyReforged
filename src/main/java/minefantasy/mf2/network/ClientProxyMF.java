@@ -8,6 +8,7 @@ import minefantasy.mf2.api.helpers.ClientTickHandler;
 import minefantasy.mf2.api.knowledge.InformationList;
 import minefantasy.mf2.block.tileentity.TileEntityAnvilMF;
 import minefantasy.mf2.block.tileentity.TileEntityBellows;
+import minefantasy.mf2.block.tileentity.TileEntityBigFurnace;
 import minefantasy.mf2.block.tileentity.TileEntityBloomery;
 import minefantasy.mf2.block.tileentity.TileEntityBombBench;
 import minefantasy.mf2.block.tileentity.TileEntityBombPress;
@@ -25,6 +26,7 @@ import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
 import minefantasy.mf2.client.KnowledgePageRegistry;
 import minefantasy.mf2.client.gui.GuiAnvilMF;
+import minefantasy.mf2.client.gui.GuiBigFurnace;
 import minefantasy.mf2.client.gui.GuiBlastChamber;
 import minefantasy.mf2.client.gui.GuiBlastHeater;
 import minefantasy.mf2.client.gui.GuiBloomery;
@@ -56,6 +58,7 @@ import minefantasy.mf2.client.render.RenderSpear;
 import minefantasy.mf2.client.render.RenderSword;
 import minefantasy.mf2.client.render.block.RenderAnvilMF;
 import minefantasy.mf2.client.render.block.RenderBellows;
+import minefantasy.mf2.client.render.block.RenderBigFurnace;
 import minefantasy.mf2.client.render.block.RenderBloomery;
 import minefantasy.mf2.client.render.block.RenderBombBench;
 import minefantasy.mf2.client.render.block.RenderBombPress;
@@ -70,6 +73,7 @@ import minefantasy.mf2.client.render.block.RenderTanningRack;
 import minefantasy.mf2.client.render.block.RenderTrough;
 import minefantasy.mf2.client.render.block.TileEntityAnvilMFRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBellowsRenderer;
+import minefantasy.mf2.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBloomeryRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBombBenchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBombPressRenderer;
@@ -175,6 +179,8 @@ public class ClientProxyMF extends CommonProxyMF
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFirepit.class, new TileEntityFirepitRenderer());
 		RenderingRegistry.registerBlockHandler(new RenderRoast());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer());
+		RenderingRegistry.registerBlockHandler(new RenderBigFurnace());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer());
 	}
 	
 	public void registerEntityRenderer()
@@ -206,49 +212,58 @@ public class ClientProxyMF extends CommonProxyMF
 	    	TileEntity tile = world.getTileEntity(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
 			
-			if(tile != null && tile instanceof TileEntityAnvilMF)
+			if(tile == null)
+			{
+				return null;
+			}
+			
+			if(tile instanceof TileEntityAnvilMF)
 			{
 				return new GuiAnvilMF(player.inventory, (TileEntityAnvilMF) tile);
 			}
-			if(tile != null && tile instanceof TileEntityCarpenterMF)
+			if(tile instanceof TileEntityCarpenterMF)
 			{
 				return new GuiCarpenterMF(player.inventory, (TileEntityCarpenterMF) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBombBench)
+			if(tile instanceof TileEntityBombBench)
 			{
 				return new GuiBombBench(player.inventory, (TileEntityBombBench) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBlastFH)
+			if(tile instanceof TileEntityBlastFH)
 			{
 				return new GuiBlastHeater(player.inventory, (TileEntityBlastFH) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBlastFC)
+			if(tile instanceof TileEntityBlastFC)
 			{
 				return new GuiBlastChamber(player.inventory, (TileEntityBlastFC) tile);
 			}
-			if(tile != null && tile instanceof TileEntityCrucible)
+			if(tile instanceof TileEntityCrucible)
 			{
 				return new GuiCrucible(player.inventory, (TileEntityCrucible) tile);
 			}
-			if(tile != null && tile instanceof TileEntityForge)
+			if(tile instanceof TileEntityForge)
 			{
 				return new GuiForge(player.inventory, (TileEntityForge) tile);
 			}
-			if(tile != null && tile instanceof TileEntityResearch)
+			if(tile instanceof TileEntityResearch)
 			{
 				return new GuiResearchBlock(player.inventory, (TileEntityResearch) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBloomery)
+			if(tile instanceof TileEntityBloomery)
 			{
 				return new GuiBloomery(player.inventory, (TileEntityBloomery) tile);
 			}
-			if(tile != null && tile instanceof TileEntityCrossbowBench)
+			if(tile instanceof TileEntityCrossbowBench)
 			{
 				return new GuiCrossbowBench(player.inventory, (TileEntityCrossbowBench) tile);
 			}
-			if(tile != null && tile instanceof TileEntityQuern)
+			if(tile instanceof TileEntityQuern)
 			{
 				return new GuiQuern(player.inventory, (TileEntityQuern) tile);
+			}
+			if(tile instanceof TileEntityBigFurnace)
+			{
+				return new GuiBigFurnace(player, (TileEntityBigFurnace) tile);
 			}
 			 return null;
 		}

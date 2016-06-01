@@ -1,33 +1,18 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
 import java.util.Random;
 
-import minefantasy.mf2.api.crafting.refine.BloomRecipe;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.crafting.refine.QuernRecipes;
-import minefantasy.mf2.api.helpers.ToolHelper;
-import minefantasy.mf2.api.knowledge.ResearchLogic;
-import minefantasy.mf2.api.refine.SmokeMechanics;
-import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
-import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.item.list.ComponentListMF;
-import minefantasy.mf2.knowledge.KnowledgeListMF;
-import minefantasy.mf2.network.packet.BloomeryPacket;
-import minefantasy.mf2.util.MFLogUtil;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class TileEntityQuern extends TileEntity implements IInventory, ISidedInventory
 {

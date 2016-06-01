@@ -28,6 +28,7 @@ import minefantasy.mf2.block.tileentity.TileEntityTrough;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
 import minefantasy.mf2.container.ContainerAnvilMF;
+import minefantasy.mf2.container.ContainerBigFurnace;
 import minefantasy.mf2.container.ContainerBlastChamber;
 import minefantasy.mf2.container.ContainerBlastHeater;
 import minefantasy.mf2.container.ContainerBloomery;
@@ -75,50 +76,58 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler
     	{
 	    	TileEntity tile = world.getTileEntity(x, y, z);
 			int meta = world.getBlockMetadata(x, y, z);
+			if(tile == null)
+			{
+				return null;
+			}
 			
-			if(tile != null && tile instanceof TileEntityAnvilMF)
+			if(tile instanceof TileEntityAnvilMF)
 			{
 				return new ContainerAnvilMF(player.inventory, (TileEntityAnvilMF) tile);
 			}
-			if(tile != null && tile instanceof TileEntityCarpenterMF)
+			if(tile instanceof TileEntityCarpenterMF)
 			{
 				return new ContainerCarpenterMF(player.inventory, (TileEntityCarpenterMF) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBombBench)
+			if(tile instanceof TileEntityBombBench)
 			{
 				return new ContainerBombBench(player.inventory, (TileEntityBombBench) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBlastFH)
+			if(tile instanceof TileEntityBlastFH)
 			{
 				return new ContainerBlastHeater(player.inventory, (TileEntityBlastFH) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBlastFC)
+			if(tile instanceof TileEntityBlastFC)
 			{
 				return new ContainerBlastChamber(player.inventory, (TileEntityBlastFC) tile);
 			}
-			if(tile != null && tile instanceof TileEntityCrucible)
+			if(tile instanceof TileEntityCrucible)
 			{
 				return new ContainerCrucible(player.inventory, (TileEntityCrucible) tile);
 			}
-			if(tile != null && tile instanceof TileEntityForge)
+			if(tile instanceof TileEntityForge)
 			{
 				return new ContainerForge(player.inventory, (TileEntityForge) tile);
 			}
-			if(tile != null && tile instanceof TileEntityResearch)
+			if(tile instanceof TileEntityResearch)
 			{
 				return new ContainerResearch(player.inventory, (TileEntityResearch) tile);
 			}
-			if(tile != null && tile instanceof TileEntityBloomery)
+			if(tile instanceof TileEntityBloomery)
 			{
 				return new ContainerBloomery(player.inventory, (TileEntityBloomery) tile);
 			}
-			if(tile != null && tile instanceof TileEntityCrossbowBench)
+			if(tile instanceof TileEntityCrossbowBench)
 			{
 				return new ContainerCrossbowBench(player.inventory, (TileEntityCrossbowBench) tile);
 			}
-			if(tile != null && tile instanceof TileEntityQuern)
+			if(tile instanceof TileEntityQuern)
 			{
 				return new ContainerQuern(player.inventory, (TileEntityQuern) tile);
+			}
+			if(tile instanceof TileEntityBigFurnace)
+			{
+				return new ContainerBigFurnace(player, (TileEntityBigFurnace) tile);
 			}
     	}
         return null;

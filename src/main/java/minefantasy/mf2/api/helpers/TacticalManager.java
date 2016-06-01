@@ -125,14 +125,7 @@ public class TacticalManager
 		{
 			confusion = user.getActivePotionEffect(Potion.confusion).getAmplifier() +1;
 		}
-		float arc = source.isProjectile() ? 10 : 20;//DEFAULT
-		
-		arc *= getHighgroundModifier(user, entityHitting, 1.5F);
-		arc = ArmourCalculator.adjustACForDamage(source, arc, 1.0F, 1.0F, 0.5F);//Harder to block piercing
-		if(autoParry)
-		{
-			arc *= 0.5F;
-		}
+		float arc = 20;//DEFAULT
 		
 		if(weapon != null && weapon.getItem() instanceof IParryable)
 		{
@@ -148,6 +141,18 @@ public class TacticalManager
 				return false;
 			}
 		}
+		if(source.isProjectile())
+		{
+			arc *= 0.75F;
+		}
+		
+		arc *= getHighgroundModifier(user, entityHitting, 1.5F);
+		arc = ArmourCalculator.adjustACForDamage(source, arc, 1.0F, 1.0F, 0.5F);//Harder to block piercing
+		if(autoParry)
+		{
+			arc *= 0.5F;
+		}
+		arc *= ArmourCalculator.getParryModifier(user);
 		if(confusion > 0 && rand.nextInt(confusion+1) != 0)
 		{
 			return false;
