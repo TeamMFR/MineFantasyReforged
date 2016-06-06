@@ -121,10 +121,10 @@ public class CustomToolListMF
 		
 		tab = CreativeTabMF.tabArcher;
 		standard_bow = (ItemBowMF) new ItemBowMF(design+"_bow", EnumBowType.COMPOSITE).setCustom(design).setCreativeTab(tab);
-		standard_bolt = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BOLT).setCustom(design).setAmmoType("bolt").setCreativeTab(tab);
-		standard_arrow = (ItemArrowMF) new ItemArrowMF(design, ArrowType.NORMAL).setCustom(design).setCreativeTab(tab);
-		standard_arrow_bodkin = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BODKIN).setCustom(design).setCreativeTab(tab);
-		standard_arrow_broad = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BROADHEAD).setCustom(design).setCreativeTab(tab);
+		standard_bolt = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BOLT, 20).setCustom(design).setAmmoType("bolt").setCreativeTab(tab);
+		standard_arrow = (ItemArrowMF) new ItemArrowMF(design, ArrowType.NORMAL, 16).setCustom(design).setCreativeTab(tab);
+		standard_arrow_bodkin = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BODKIN, 16).setCustom(design).setCreativeTab(tab);
+		standard_arrow_broad = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BROADHEAD, 16).setCustom(design).setCreativeTab(tab);
 		
 		 tab = CreativeTabMF.tabTool;
 		//Standard Tools

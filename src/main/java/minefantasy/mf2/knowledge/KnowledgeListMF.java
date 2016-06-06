@@ -43,7 +43,7 @@ public class KnowledgeListMF
 	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, bigfurn, blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel, smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
     public static InformationBase bellows, trough, forge, anvil, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, /*craftOrnateWeapons, craftAdvOrnateWeapons,*/ craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
 	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner, advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb, stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian, mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo, crossScope, crossBayonet, cogArmour, compPlate;
-    public static InformationBase refined_planks, reinforced_stone, clay_wall, glass, brickworks, decorated_stone, bars, thatch, easyRefine, paint_brush;
+    public static InformationBase refined_planks, reinforced_stone, clay_wall, glass, brickworks, decorated_stone, bars, thatch, easyRefine, paint_brush, tool_rack, ammo_box;
     public static InformationBase toughness, fitness, armourpro, parrypro, counteratt, autoparry, scrapper, firstaid, doctor;
     public static InformationBase cookingutensil, firepit, generic_meat, stew, jerky, saussage, sandwitch, sandwitchBig, meatpie, shepardpie, bread, oats, salt, jug, berry, icing, sweetroll, eclair, cake, carrotcake, chococake, bfcake, applepie, berrypie, cheese, cheeseroll, bandage, bandageadv;
     
@@ -171,11 +171,13 @@ public class KnowledgeListMF
         brickworks = (new InformationBase("brickworks",   3,  0, 0, BlockListMF.cobble_brick, reinforced_stone)).registerStat().setPage(construction).setUnlocked();
         bars = (new InformationBase("bars",               0,  3, 0, BlockListMF.bars[2], glass)).registerStat().setPage(construction).setUnlocked();
         thatch = (new InformationBase("thatch",           0,  -3, 0, BlockListMF.thatch, clay_wall)).registerStat().setPage(construction).setUnlocked();
-
         refined_planks = (new InformationBase("refined_planks",      -1, 0, 5, BlockListMF.refined_planks, (InformationBase)null)).registerStat().setPage(construction).addSkill(SkillList.construction, 0);
         clay_wall = (new InformationBase("clay_wall",     0, -1, 5, BlockListMF.clayWall, (InformationBase)null)).registerStat().setPage(construction).addSkill(SkillList.construction, 5);
         paint_brush = (new InformationBase("paint_brush",  2, 2, 10, ToolListMF.paint_brush, (InformationBase)null)).registerStat().setPage(construction).addSkill(SkillList.construction, 10);
         decorated_stone = (new InformationBase("decorated_stone",   5,  0, 15, BlockListMF.reinforced_stone_framed, brickworks)).registerStat().setPage(construction).addSkill(SkillList.construction, 15);
+        
+        tool_rack = (new InformationBase("tool_rack",      -1,  3, 0, BlockListMF.rack_wood, refined_planks)).registerStat().setPage(construction).setUnlocked();
+        ammo_box = (new InformationBase("ammo_box",       0,  4, 0, BlockListMF.ammo_box_basic, tool_rack)).registerStat().setPage(construction).addSkill(SkillList.construction, 5);
         
         //COOKING -The Cheapest
         cookingutensil = (new InformationBase("cookingutensil",-1, 0, 0, FoodListMF.pie_tray, (InformationBase)null)).registerStat().setPage(provisioning).setUnlocked();
@@ -352,6 +354,7 @@ public class KnowledgeListMF
     
     public static IAnvilRecipe brushRecipe, spannerRecipe, blkspannerR, climbPickbR, iframeR, boltR, istrutR, bgearR, tgearR, stubeR, eatoolsR, bombarrowR, bombBoltR, compPlateR, cogFrameHelmetR, cogFrameChestR, cogFrameLegsR, cogFrameBootsR, cogArmourHelmetR, cogArmourChestR, cogArmourLegsR, cogArmourBootsR;
     public static ICarpenterRecipe mouldRecipe, jugRecipe, potRecipe, pieTrayRecipe, blackpowderRec, advblackpowderRec, magmaRefinedR, chocoRecipe;
+    public static ICarpenterRecipe rackRecipe, ammoboxR;
     
     public static final ArrayList<ICarpenterRecipe> easyPaintPlank = new ArrayList<ICarpenterRecipe>();
     public static final ArrayList<ICarpenterRecipe> refinedPlankR = new ArrayList<ICarpenterRecipe>();

@@ -1,9 +1,12 @@
 package minefantasy.mf2.item.gadget;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.api.archery.IAmmo;
 import minefantasy.mf2.api.crafting.ISpecialSalvage;
 import minefantasy.mf2.entity.EntityBomb;
 import minefantasy.mf2.item.list.CreativeTabMF;
@@ -12,27 +15,19 @@ import minefantasy.mf2.mechanics.BombDispenser;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemBomb extends Item implements ISpecialSalvage
+public class ItemBomb extends Item implements ISpecialSalvage, IAmmo
 {
     public ItemBomb(String name)
     {
@@ -352,5 +347,10 @@ public class ItemBomb extends Item implements ISpecialSalvage
 	public byte getItemPowder(byte value) 
     {
 		return value;
+	}
+	
+	@Override
+	public String getAmmoType(ItemStack arrow) {
+		return "mine";
 	}
 }

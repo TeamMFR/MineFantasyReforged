@@ -185,10 +185,10 @@ public class ForgedArmourRecipes
 	
 	private static void assembleSplintmail(CustomMaterial material)
 	{
-		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 2, 0);
-		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 2, 1);
-		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 2, 2);
-		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 2, 3);
+		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 4, 0);
+		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 4, 1);
+		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 4, 2);
+		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 4, 3);
 		
 		ItemStack mail = ComponentListMF.splintmesh.createComm(material.name);
 		Item rivet = ComponentListMF.rivet;
@@ -255,10 +255,10 @@ public class ForgedArmourRecipes
 	
 	private static void assembleFieldplate(CustomMaterial material)
 	{
-		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 5, 0);
-		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 5, 1);
-		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 5, 2);
-		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 5, 3);
+		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 4, 0);
+		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 4, 1);
+		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 4, 2);
+		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 4, 3);
 		
 		ItemStack mail = ComponentListMF.chainmesh.createComm(material.name);
 		ItemStack plate = ComponentListMF.plate.createComm(material.name);

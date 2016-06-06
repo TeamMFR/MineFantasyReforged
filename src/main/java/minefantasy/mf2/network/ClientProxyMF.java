@@ -24,6 +24,8 @@ import minefantasy.mf2.block.tileentity.TileEntityTanningRack;
 import minefantasy.mf2.block.tileentity.TileEntityTrough;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
+import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
+import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.client.KnowledgePageRegistry;
 import minefantasy.mf2.client.gui.GuiAnvilMF;
 import minefantasy.mf2.client.gui.GuiBigFurnace;
@@ -56,6 +58,7 @@ import minefantasy.mf2.client.render.RenderSaw;
 import minefantasy.mf2.client.render.RenderShrapnel;
 import minefantasy.mf2.client.render.RenderSpear;
 import minefantasy.mf2.client.render.RenderSword;
+import minefantasy.mf2.client.render.block.RenderAmmoBox;
 import minefantasy.mf2.client.render.block.RenderAnvilMF;
 import minefantasy.mf2.client.render.block.RenderBellows;
 import minefantasy.mf2.client.render.block.RenderBigFurnace;
@@ -67,10 +70,12 @@ import minefantasy.mf2.client.render.block.RenderCrossbowBench;
 import minefantasy.mf2.client.render.block.RenderFirepit;
 import minefantasy.mf2.client.render.block.RenderForge;
 import minefantasy.mf2.client.render.block.RenderQuern;
+import minefantasy.mf2.client.render.block.RenderRack;
 import minefantasy.mf2.client.render.block.RenderResearch;
 import minefantasy.mf2.client.render.block.RenderRoast;
 import minefantasy.mf2.client.render.block.RenderTanningRack;
 import minefantasy.mf2.client.render.block.RenderTrough;
+import minefantasy.mf2.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mf2.client.render.block.TileEntityAnvilMFRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBigFurnaceRenderer;
@@ -82,6 +87,7 @@ import minefantasy.mf2.client.render.block.TileEntityCrossbowBenchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityFirepitRenderer;
 import minefantasy.mf2.client.render.block.TileEntityForgeRenderer;
 import minefantasy.mf2.client.render.block.TileEntityQuernRenderer;
+import minefantasy.mf2.client.render.block.TileEntityRackRenderer;
 import minefantasy.mf2.client.render.block.TileEntityResearchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityRoastRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTanningRackRenderer;
@@ -181,6 +187,10 @@ public class ClientProxyMF extends CommonProxyMF
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer());
 		RenderingRegistry.registerBlockHandler(new RenderBigFurnace());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer());
+		RenderingRegistry.registerBlockHandler(new RenderRack());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer());
+		RenderingRegistry.registerBlockHandler(new RenderAmmoBox());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer());
 	}
 	
 	public void registerEntityRenderer()

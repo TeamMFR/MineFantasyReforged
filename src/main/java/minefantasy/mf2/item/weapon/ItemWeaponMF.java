@@ -6,10 +6,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.TacticalManager;
-import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.stamina.IHeldStaminaItem;
@@ -21,19 +26,17 @@ import minefantasy.mf2.api.weapon.IDamageType;
 import minefantasy.mf2.api.weapon.IKnockbackWeapon;
 import minefantasy.mf2.api.weapon.IParryable;
 import minefantasy.mf2.api.weapon.IPowerAttack;
+import minefantasy.mf2.api.weapon.IRackItem;
 import minefantasy.mf2.api.weapon.ISpecialEffect;
 import minefantasy.mf2.api.weapon.IWeaponClass;
 import minefantasy.mf2.api.weapon.IWeaponSpeed;
 import minefantasy.mf2.api.weapon.IWeightedWeapon;
+import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.config.ConfigWeapon;
-import minefantasy.mf2.item.armour.ItemCogworkArmour;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
-import minefantasy.mf2.item.tool.ToolMaterialMF;
 import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
 import minefantasy.mf2.material.BaseMaterialMF;
-import minefantasy.mf2.mechanics.CombatMechanics;
 import minefantasy.mf2.util.MFLogUtil;
 import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
 import mods.battlegear2.api.weapons.IBackStabbable;
@@ -64,19 +67,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.oredict.OreDictionary;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 //Made this extend the sword class (allows them to be enchanted)
-public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, IDamageType, IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IBattlegearWeapon, IToolMaterial, IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass
+public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, IDamageType, IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IBattlegearWeapon, IToolMaterial, IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem
 {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 
@@ -878,5 +872,56 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 		return this;
 	}
 	
+	@Override
+	public float getScale(ItemStack itemstack)
+	{
+		return 1.0F;
+	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack)
+	{
+		return 0;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack)
+	{
+		if(this.getScale(itemstack) > 1.5F)
+		{
+			return 0.5F;
+		}
+		return 0;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0;
+	}
+	
+	@Override
+	public float getRotationOffset(ItemStack itemstack)
+	{
+		return 0;
+	}
+
+	@Override
+	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) 
+	{
+		float scale = this.getScale(item);
+		if(scale > 1.5F && !rack.hasRackBelow(slot))
+		{
+			return false;
+		}
+		if(scale > 2.5F && !rack.hasRackAbove(slot))
+		{
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public boolean isSpecialRender(ItemStack item) {
+		return false;
+	}
 	public String designType = "standard";
 }

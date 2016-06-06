@@ -355,7 +355,7 @@ public class TileEntityRoast extends TileEntity implements IInventory, IHeatUser
 			((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new TileInventoryPacket(this, this).generatePacket());
 		}
 	}
-	@SideOnly(Side.CLIENT)
+	
 	public String texname = "basic";
 	
 	@SideOnly(Side.CLIENT)

@@ -2,7 +2,11 @@ package minefantasy.mf2.item.gadget;
 
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.api.archery.IAmmo;
 import minefantasy.mf2.api.crafting.ISpecialSalvage;
 import minefantasy.mf2.entity.EntityMine;
 import minefantasy.mf2.item.list.CreativeTabMF;
@@ -20,11 +24,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemMine extends Item implements ISpecialSalvage
+public class ItemMine extends Item implements ISpecialSalvage, IAmmo
 {
     public ItemMine(String name)
     {
@@ -273,5 +274,10 @@ public class ItemMine extends Item implements ISpecialSalvage
 			ItemBombComponent.getBombComponent("powder", getPowder(item)),
 			ItemBombComponent.getBombComponent("filling", getFilling(item)),
 		};
+	}
+
+	@Override
+	public String getAmmoType(ItemStack arrow) {
+		return "mine";
 	}
 }

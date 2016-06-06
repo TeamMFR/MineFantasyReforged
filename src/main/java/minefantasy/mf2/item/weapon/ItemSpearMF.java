@@ -188,4 +188,9 @@ public class ItemSpearMF extends ItemWeaponMF implements IExtendedReachWeapon
 	{
 		return false;
 	}
+	@Override
+	public float getScale(ItemStack itemstack)
+	{
+		return 3.0F;
+	}
 }

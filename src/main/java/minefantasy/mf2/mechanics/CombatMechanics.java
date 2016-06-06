@@ -1064,20 +1064,12 @@ public class CombatMechanics
 	}
 	public static void initDodge(EntityPlayer user, int type)
 	{
-		float mass = ArmourCalculator.getTotalWeightOfWorn(user, false);
-		int cost = type == 0 ? 20 : 10;
+		float bulk = ArmourCalculator.getArmourBulk(user);
+		int cost = (int) ((type == 0 ? 15 : 10) * (bulk+1));//Medium armour cost 2x more
 		
-		if(mass <= 40F && ItemWeaponMF.tryPerformAbility(user, cost))
+		if(bulk <= 1.0F && ItemWeaponMF.tryPerformAbility(user, cost))
 		{
-			float force = 1.0F;
-			if(mass > 10)
-			{
-				force -= (mass-10)/30F * 0.5F;
-			}
-			if(mass > 30)
-			{
-				user.motionY *= 0.5F;
-			}
+			float force = 1.0F - (bulk*0.25F);//Medium armour gives 75%
 			
 			float direction = user.rotationYaw;
 			if(type == 0)  direction += 180;//BACK

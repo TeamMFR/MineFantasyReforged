@@ -11,6 +11,8 @@ import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.api.weapon.IDamageType;
+import minefantasy.mf2.api.weapon.IRackItem;
+import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.farming.FarmingHelper;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -43,7 +45,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 /**
  * @author Anonymous Productions
  */
-public class ItemScythe extends Item implements IToolMaterial, IDamageType
+public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem
 {
 	private Random rand = new Random();
 	private ToolMaterial toolMaterial;
@@ -369,4 +371,40 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType
     	return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
     //====================================================== CUSTOM END ==============================================================\\
+
+	@Override
+	public float getScale(ItemStack itemstack) {
+		return 2.0F;
+	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 0;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) {
+		return 0;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0;
+	}
+	
+	@Override
+	public float getRotationOffset(ItemStack itemstack) {
+		return 0;
+	}
+
+	@Override
+	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) 
+	{
+		return rack.hasRackBelow(slot);
+	}
+
+	@Override
+	public boolean isSpecialRender(ItemStack item) {
+		return false;
+	}
 }

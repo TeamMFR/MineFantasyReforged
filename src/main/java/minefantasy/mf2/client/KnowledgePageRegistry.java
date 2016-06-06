@@ -44,7 +44,7 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.talisman.addPages(new EntryPageText("knowledge.talisman.1"), new EntryPageRecipeAnvil(KnowledgeListMF.talismanRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.artBookR), new EntryPageRecipeCarpenter(KnowledgeListMF.conBookR), new EntryPageRecipeCarpenter(KnowledgeListMF.proBookR), new EntryPageRecipeCarpenter(KnowledgeListMF.engBookR), new EntryPageRecipeCarpenter(KnowledgeListMF.comBookR), new EntryPageText("knowledge.talisman.2"), new EntryPageRecipeAnvil(KnowledgeListMF.greatTalismanRecipe));
 		KnowledgeListMF.talisman.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.artBook2R), new EntryPageRecipeCarpenter(KnowledgeListMF.conBook2R), new EntryPageRecipeCarpenter(KnowledgeListMF.proBook2R), new EntryPageRecipeCarpenter(KnowledgeListMF.engBook2R), new EntryPageRecipeCarpenter(KnowledgeListMF.comBook2R));
 		KnowledgeListMF.stamina.addPages(new EntryPageText("knowledge.stamina.1"), new EntryPageText("knowledge.stamina.2"));
-		KnowledgeListMF.combat.addPages(new EntryPageText("knowledge.combat.1"), new EntryPageText("knowledge.combat.2"), new EntryPageText("knowledge.parry.info"), new EntryPageText("knowledge.parry.info2"), new EntryPageText("knowledge.advparry.info"), new EntryPageText("knowledge.poweratt.info"));
+		KnowledgeListMF.combat.addPages(new EntryPageText("knowledge.combat.1"), new EntryPageText("knowledge.combat.2"), new EntryPageText("knowledge.parry.info"), new EntryPageText("knowledge.parry.info2"), new EntryPageText("knowledge.advparry.info"), new EntryPageText("knowledge.poweratt.info"), new EntryPageText("knowledge.dodge.info"), new EntryPageText("knowledge.armour.info"));
 		KnowledgeListMF.craftArmourBasic.addPages(new EntryPageText("knowledge.craftArmourBasic.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.hideHelmR), new EntryPageRecipeCarpenter(KnowledgeListMF.hideChestR), new EntryPageRecipeCarpenter(KnowledgeListMF.hideLegsR), new EntryPageRecipeCarpenter(KnowledgeListMF.hideBootsR));
 		KnowledgeListMF.craftArmourBasic.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.roughHelmetR), new EntryPageRecipeCarpenter(KnowledgeListMF.roughChestR), new EntryPageRecipeCarpenter(KnowledgeListMF.roughLegsR), new EntryPageRecipeCarpenter(KnowledgeListMF.roughBootsR));
 		 
@@ -246,6 +246,8 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.paint_brush.addPages(new EntryPageText("knowledge.paint_brush.1"), new EntryPageRecipeAnvil(KnowledgeListMF.brushRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.easyPaintPlank));
 	    KnowledgeListMF.decorated_stone.addPages(new EntryPageText("knowledge.decorated_stone.1"), new EntryPageRecipeAnvil(KnowledgeListMF.framedStoneR), new EntryPageRecipeAnvil(KnowledgeListMF.iframedStoneR));
 	    
+	    KnowledgeListMF.tool_rack.addPages(new EntryPageText("knowledge.tool_rack.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.rackRecipe), new EntryPageText("knowledge.tool_rack.rules"));
+	    KnowledgeListMF.ammo_box.addPages(new EntryPageText("knowledge.ammo_box.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.ammoboxR));
 	    /*
 	    for(int a = 0; a < KnowledgeListMF.ornateWepsR.size(); a++)
 	    {

@@ -19,6 +19,8 @@ import minefantasy.mf2.block.crafting.BlockResearchStation;
 import minefantasy.mf2.block.crafting.BlockRoast;
 import minefantasy.mf2.block.crafting.BlockSalvage;
 import minefantasy.mf2.block.crafting.BlockTanningRack;
+import minefantasy.mf2.block.decor.BlockAmmoBox;
+import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.decor.BlockRoad;
 import minefantasy.mf2.block.decor.BlockTrough;
 import minefantasy.mf2.block.food.BlockBerryBush;
@@ -175,9 +177,9 @@ public class BlockListMF
 	public static Block log_ironbark = new BlockLogMF("ironbark").setHardness(3F).setResistance(8F);
 	public static Block log_ebony = new BlockLogMF("ebony").setHardness(5F).setResistance(10F);
 	
-	public static Block leaves_yew = new BlockLeavesMF("yew", 5F);
-	public static Block leaves_ironbark = new BlockLeavesMF("ironbark", 10F).setHardness(0.3F);
-	public static Block leaves_ebony = new BlockLeavesMF("ebony", 2F).setHardness(0.5F);
+	public static Block leaves_yew = new BlockLeavesMF("yew", 100);
+	public static Block leaves_ironbark = new BlockLeavesMF("ironbark", 20).setHardness(0.3F);
+	public static Block leaves_ebony = new BlockLeavesMF("ebony", 1000).setHardness(0.5F);
 	
 	public static Block sapling_yew = new BlockSaplingMF("yew", log_yew, leaves_yew, 4F);
 	public static Block sapling_ironbark = new BlockSaplingMF("ironbark", log_ironbark, leaves_ironbark, 8F);
@@ -207,6 +209,9 @@ public class BlockListMF
 	
 	public static Block furnace_heater = new BlockBigFurnace("furnace_heater", true, -1);
 	public static Block furnace_stone = new BlockBigFurnace("furnace_stone", false, 0);
+	
+	public static Block rack_wood = new BlockRack("rack_wood");
+	public static Block ammo_box_basic = new BlockAmmoBox("basic", Material.wood, 128);
 	
 	public static void load()
 	{

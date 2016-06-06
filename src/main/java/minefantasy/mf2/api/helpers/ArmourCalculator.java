@@ -390,6 +390,31 @@ public class ArmourCalculator
 
         return s;
     }
+	/**
+	 * Defined by Light/Medium/Heavy armour average
+	 * 0 for light, 1 for full medium, 2 for full heavy
+	 */
+	public static float getArmourBulk(EntityLivingBase user)
+	{
+		float bulk = 0.0F;
+		for(int a = 0; a < 4; a ++)
+		{
+			String s = getArmourClass(user.getEquipmentInSlot(4-a));
+			if(s != null)
+			{
+				if(s.equalsIgnoreCase("Medium"))
+				{
+					bulk += 1;
+				}
+				if(s.equalsIgnoreCase("Heavy"))
+				{
+					bulk += 2;
+				}
+			}
+			
+		}
+		return bulk/4;
+	}
 	public static String getArmourClass(ItemStack armour)
 	{
 		if(armour == null)
@@ -400,9 +425,7 @@ public class ArmourCalculator
 		{
 			return ((IArmourMF)armour.getItem()).getSuitWeigthType(armour);
 		}
-		float weight = getDefaultSuitWeight(armour);
-		float bulk = getDefaultBulk(armour);
-		return weight >= ACArray[1] ? "heavy" : weight >= ACArray[0] ? "medium" : "light";
+		return CustomArmourEntry.getArmourClass(armour); 
 	}
 	
 	//THRESHOLD
@@ -620,21 +643,15 @@ public class ArmourCalculator
 	 */
 	public static float getParryModifier(EntityLivingBase user) 
 	{
-		float weight = getTotalWeightOfWorn(user, false);
-		if(weight > 20F)
-		{
-			return 1.0F / (1 + ((weight-20F)/20F));
-		}
+		float bulk = getArmourBulk(user);
 		
-		return 1.0F;
+		return 1.0F / ( (bulk*0.5F) + 1);//50% in heavy
 	}
 
 	public static int modifyParryCooldown(EntityLivingBase user, int ticks) 
 	{
-		float weight = getTotalWeightOfWorn(user, false) - 20F;//anything <20kg gives a bonus
+		float bulk = getArmourBulk(user);
 		
-		int t = (int)Math.floor(weight / 4);//each 5kg added adds 1 to the ticks
-		
-		return Math.max(5, ticks + t);
+		return (int) Math.max(5, ticks + (bulk*5));//plate adds 5t
 	}
 }

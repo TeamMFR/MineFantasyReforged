@@ -103,4 +103,9 @@ public class ItemHalbeardMF extends ItemSpearMF
     {
     	return super.getMeleeDamage(item)*1.5F;
 	}
+	@Override
+	public float getScale(ItemStack itemstack)
+	{
+		return 3.0F;
+	}
 }

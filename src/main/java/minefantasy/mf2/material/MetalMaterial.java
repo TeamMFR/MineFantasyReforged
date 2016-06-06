@@ -70,18 +70,18 @@ public class MetalMaterial extends CustomMaterial
 		getOrAddMetal("Tungsten",       4, 8.0F,   0.8F, 3.0F,  35F,	4.0F, 		66 , 86 , 65).setCrafterTiers(3).setMeltingPoint(150).setArmourStats(1.3F, 1.0F, 1.3F);//Better Cutting/Piercing
 		getOrAddMetal("BlackSteel",     5, 6.0F,   1.0F, 4.0F,  50F,	3.0F, 		80 , 80 , 80).setCrafterTiers(4).setMeltingPoint(150).setArmourStats(1.0F, 1.0F, 1.0F);//Standard
 		getOrAddMetal("BlueSteel",      6, 7.0F,   1.2F, 5.0F,  65F,	2.0F, 		28,   31, 159).setCrafterTiers(5).setMeltingPoint(160).setArmourStats(1.0F, 1.2F, 0.8F);//Better Blunt and Resist
-		getOrAddMetal("RedSteel",       6, 8.0F,   0.8F, 6.0F,  50F,	4.0F, 		219,  56,  56).setCrafterTiers(5).setMeltingPoint(180).setArmourStats(0.9F, 0.9F, 1.2F);//Better AC and Piercing
+		getOrAddMetal("RedSteel",       6, 8.0F,   0.8F, 6.0F,  50F,	3.5F, 		219,  56,  56).setCrafterTiers(5).setMeltingPoint(180).setArmourStats(0.9F, 0.9F, 1.2F);//Better AC and Piercing
 		
 		//Precious Mats
-		getOrAddMetal("Silver", 	    0, 2/5F,   1.0F, 0.0F,  10F, 	5.0F, 		155, 206, 205).setMeltingPoint(120);
-		getOrAddMetal("Gold", 		    0, 2/5F,   1.0F, 0.0F,  10F, 	5.0F, 		243, 222,  49).setMeltingPoint(120);
+		getOrAddMetal("Silver", 	    0, 2/5F,   1.0F, 0.0F,  10F, 	3.5F, 		155, 206, 205).setMeltingPoint(120);
+		getOrAddMetal("Gold", 		    0, 2/5F,   1.0F, 0.0F,  10F, 	3.5F, 		243, 222,  49).setMeltingPoint(120);
 		
 		//Mythic Mats  Name          	T  Dur     Flx 	 Shp   	Rst		 Wg
-		getOrAddMetal("Mithril",        7, 10.0F,  0.8F, 7.0F,  90F,	1.5F, 		250, 180, 250).setMeltingPoint(200).setCrafterTiers(6).setRarity(1);
-		getOrAddMetal("Adamantium",     7, 12.0F,  0.8F, 8.0F,  80F,	4.5F, 		100, 200, 100).setMeltingPoint(250).setCrafterTiers(6).setRarity(1);
-		getOrAddMetal("Mithium",  	    8, 15.0F,  0.8F, 10.0F, 95F,	1.0F, 		60 , 200, 255).setMeltingPoint(250).setCrafterTiers(7).setRarity(2).setUnbreakable();
-		getOrAddMetal("Ignotumite",     8, 15.0F,  0.8F, 14.0F, 85F,	5.0F, 		20 , 255, 100).setMeltingPoint(300).setCrafterTiers(7).setRarity(2).setUnbreakable();
-		getOrAddMetal("Ender",          8, 15.0F,  0.8F, 12.0F, 90F,	4.0F, 		255, 63 , 243).setMeltingPoint(275).setCrafterTiers(7).setRarity(2).setUnbreakable();
+		getOrAddMetal("Mithril",        7, 10.0F,  0.8F, 7.0F,  90F,	2.0F, 		250, 180, 250).setMeltingPoint(200).setCrafterTiers(6).setRarity(1);
+		getOrAddMetal("Adamantium",     7, 12.0F,  0.8F, 8.0F,  80F,	3.5F, 		100, 200, 100).setMeltingPoint(250).setCrafterTiers(6).setRarity(1);
+		getOrAddMetal("Mithium",  	    8, 15.0F,  0.8F, 10.0F, 95F,	2.0F, 		60 , 200, 255).setMeltingPoint(250).setCrafterTiers(7).setRarity(2).setUnbreakable();
+		getOrAddMetal("Ignotumite",     8, 15.0F,  0.8F, 14.0F, 85F,	3.5F, 		20 , 255, 100).setMeltingPoint(300).setCrafterTiers(7).setRarity(2).setUnbreakable();
+		getOrAddMetal("Ender",          8, 15.0F,  0.8F, 12.0F, 90F,	3.0F, 		255, 63 , 243).setMeltingPoint(275).setCrafterTiers(7).setRarity(2).setUnbreakable();
 		
 		//Non MF
 		getOrAddMetal("StainlessSteel", 3, 5.0F,   1.0F, 2.5F,  40F,	2.5F, 		188, 188, 198).setMeltingPoint(140).setCrafterTiers(3);
@@ -94,7 +94,7 @@ public class MetalMaterial extends CustomMaterial
 		getOrAddMetal("Terrasteel", 	4, 6.0F,   1.0F, 4.0F,  40F,	2.5F, 		88 , 250, 150).setMeltingPoint(150).setArmourStats(1.0F, 0.9F, 1.0F).setCrafterTiers(3);
 				
 		//Alloy
-		getOrAddMetal("CompositeAlloy", 4,  4.5F, 10.0F,  1.0F, 2.5F,  75F,	6.0F, 		65, 75 ,65).setMeltingPoint(250).setRarity(1).setCrafterTiers(3).modifyCraftTime(5.0F);//Powerful All-Rounder
+		getOrAddMetal("CompositeAlloy", 4,  4.5F, 10.0F,  1.0F, 2.5F,  75F,	4.0F, 		65, 75 ,65).setMeltingPoint(250).setRarity(1).setCrafterTiers(3).modifyCraftTime(5.0F);//Powerful All-Rounder
 	}
 	
 	public static void addHeatables()

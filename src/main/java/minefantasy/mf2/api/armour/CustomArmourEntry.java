@@ -34,7 +34,7 @@ public class CustomArmourEntry
 		{
 			divider = ArmourCalculator.sizes[((ItemArmor)piece).armorType];
 		}
-		registerItem(piece, template.getWeight() * weightMod, template.getBulk()*divider);
+		registerItem(piece, template.getWeight() * weightMod, template.getBulk()*divider, template.getGroup());
 	}
 	/**
 	 * Registeres a piece (called by code or config)
@@ -42,9 +42,9 @@ public class CustomArmourEntry
 	 * @param weight the weight of the piece (Kg)
 	 * @param bulk the bulk of the piece
 	 */
-	public static void registerItem(Item piece, float weight, float bulk)
+	public static void registerItem(Item piece, float weight, float bulk, String AC)
 	{
-		registerItem(piece, weight, bulk, true);
+		registerItem(piece, weight, bulk, true, AC);
 	}
 	
 	/**
@@ -54,12 +54,26 @@ public class CustomArmourEntry
 	 * @param bulk the bulk of the piece
 	 * @param alterSpeed if the armour's weight slows you down
 	 */
-	public static void registerItem(Item piece, float weight, float bulk, boolean alterSpeed)
+	public static void registerItem(Item piece, float weight, float bulk, boolean alterSpeed, String AC)
 	{
 		int id = Item.getIdFromItem(piece);
 		
 		MineFantasyAPI.debugMsg("Added Custom armour: " + piece.getUnlocalizedName() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
-		entries.put(id, new CustomArmourEntry(id, weight, bulk, alterSpeed));
+		entries.put(id, new CustomArmourEntry(id, weight, bulk, alterSpeed, AC));
+	}
+	
+	/**
+	 * Returns the "Armour Class" Weight type Light, Medium or Heavy
+	 */
+	public static String getArmourClass(ItemStack piece)
+	{
+		CustomArmourEntry entry = getEntry(piece);
+		if(entry != null)
+		{
+			return entry.AC;
+		}
+		ArmourDesign deft = ArmourCalculator.getDefaultAD(piece);
+		return deft.getGroup();
 	}
 	
 	/**
@@ -131,13 +145,19 @@ public class CustomArmourEntry
 	 */
 	public float bulkiness;
 	
+	/**
+	 * Light Medium or Heavy
+	 */
+	public String AC;
+	
 	public static HashMap<Integer, CustomArmourEntry>entries = new HashMap<Integer, CustomArmourEntry>();
 	
-	private CustomArmourEntry(int id, float weight, float bulk, boolean alterSpeed) 
+	private CustomArmourEntry(int id, float weight, float bulk, boolean alterSpeed, String AC) 
 	{
 		this.alterSpeed = alterSpeed;
 		this.itemID = id;
 		this.weight = weight;
 		this.bulkiness = bulk;
+		this.AC = AC;
 	}
 }

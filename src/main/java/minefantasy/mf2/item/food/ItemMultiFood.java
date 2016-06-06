@@ -40,6 +40,11 @@ public class ItemMultiFood extends ItemFoodMF
     }
 	
 	@Override
+	public boolean isItemTool(ItemStack item)
+	{
+		return false;
+	}
+	@Override
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register)
     {

@@ -25,26 +25,7 @@ public class ArmourListMF
 		"roughleather",
 		"strongleather",
 		"studleather",
-		"scaleleather",
 		"padded",
-	};
-	
-	public static final String[] mats = new String[]
-	{
-		"copper",
-		"bronze",
-		"iron",
-		"steel",
-		"encrusted",
-		"blacksteel",
-		"dragonforge",
-		"redsteel",
-		"bluesteel",
-		"adamantium",
-		"mithril",
-		"ignotumite",
-		"mithium",
-		"ender",
 	};
 	
 	public static ItemArmourMF[] leather = new ItemArmourMF[leathermats.length*4];

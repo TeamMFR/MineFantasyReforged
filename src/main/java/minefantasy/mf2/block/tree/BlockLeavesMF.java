@@ -19,12 +19,12 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable
 {
 	private String name;
 	private Block sapling;
-	private float dropRate;
+	private int dropRate;
     public BlockLeavesMF(String baseWood)
     {
-   		this(baseWood, 5F);
+   		this(baseWood, 20);
     }
-    public BlockLeavesMF(String baseWood, float droprate)
+    public BlockLeavesMF(String baseWood, int droprate)
     {
         super();
         this.setTickRandomly(true);
@@ -54,7 +54,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable
      @Override
     public int quantityDropped(Random rand)
     {
-        return rand.nextFloat()*100F < dropRate ? 1 : 0;
+        return 1;
     }
 
 	@Override
@@ -66,7 +66,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable
 	@Override
 	protected int func_150123_b(int meta)
     {
-        return meta == 15 ? 40 : 20;
+        return meta == 15 ? dropRate*2 : dropRate;
     }
 	
 	private Block getBlockDrop()

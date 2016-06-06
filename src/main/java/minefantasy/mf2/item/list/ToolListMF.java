@@ -230,125 +230,21 @@ public class ToolListMF
 	public static Item exploding_bolt = new ItemExplodingBolt();
 	public static Item paint_brush = new ItemPaintBrush("paint_brush", 256);
 	
+	
 	public static void load() 
 	{
 		if(ConfigHardcore.HCCWeakItems)
 		{
 			weakenItems();
 		}
-		spanner = new ItemEngineerTool("spanner", BaseMaterialMF.getMaterial("steel").getToolConversion(), 0, "spanner", 1);
-		spanner_blk = new ItemEngineerTool("spanner_blk", BaseMaterialMF.getMaterial("blacksteel").getToolConversion(), 1, "spanner", 3);
-		climbing_pick_basic = new ItemClimbingPick("climbing_pick_basic", BaseMaterialMF.getMaterial("iron").getToolConversion(), 0);
+		spanner = new ItemEngineerTool("spanner", ToolMaterial.IRON, 0, "spanner", 1);
+		spanner_blk = new ItemEngineerTool("spanner_blk", ToolMaterial.EMERALD, 1, "spanner", 3);
+		climbing_pick_basic = new ItemClimbingPick("climbing_pick_basic", ToolMaterial.IRON, 0);
 		BlockListMF.load();
 		ArmourListMF.load();
 		FoodListMF.load();
 		CustomToolListMF.load();
 		CustomArmourListMF.load();
-		/*
-		for(int a = 0; a < mats.length; a ++)
-		{
-			BaseMaterialMF baseMat = BaseMaterialMF.getMaterial(mats[a]);
-			
-			ToolMaterial mat = baseMat.getToolConversion();
-			String matName = baseMat.name.toLowerCase();
-			int rarity = baseMat.rarity;
-			float weight = baseMat.weight;
-			int tier = baseMat.tier;
-			
-			picks[a] = new ItemPickMF(matName+"_pick", mat, rarity);
-			axes[a] = new ItemAxeMF(matName+"_axe", mat, rarity);
-			spades[a] = new ItemSpadeMF(matName+"_spade", mat, rarity);
-			hoes[a] = new ItemHoeMF(matName+"_hoe", mat, rarity);
-			shears[a] = new ItemShearsMF(matName+"_shears", mat, rarity, tier);
-			knives[a] = new ItemKnifeMF(matName+"_knife", mat, rarity, weight, tier);
-			hammers[a] = new ItemHammer(matName+"_hammer", mat, false, rarity, tier);
-			tongs[a] = new ItemTongs(matName+"_tongs", mat, rarity);
-			needles[a] = new ItemNeedle(matName+"_needle", mat, rarity, tier);
-			saws[a] = new ItemSaw(matName+"_saw", mat, rarity, tier);
-			
-			if(a > 0)
-			{
-				hvyHammers[a-1] = new ItemHammer(matName+"_hvyHammer", mat, true, rarity, tier);
-				hvypicks[a-1] = new ItemHvyPick(matName+"_hvypick", mat, rarity);
-				handpicks[a-1] = new ItemHandpick(matName+"_handpick", mat, rarity);
-				trows[a-1] = new ItemTrowMF(matName+"_trow", mat, rarity);
-				scythes[a-1] = new ItemScythe(matName+"_scythe", mat, rarity);
-				hvyshovels[a-1] = new ItemHvyShovel(matName+"_hvyShovel", mat, rarity);
-				mattocks[a-1] = new ItemMattock(matName+"_mattock", mat, rarity);
-			}
-			SpecialForging.addDragonforgeCraft(picks[5], picks[6]);
-			SpecialForging.addDragonforgeCraft(axes[5], axes[6]);
-			SpecialForging.addDragonforgeCraft(spades[5], spades[6]);
-			SpecialForging.addDragonforgeCraft(hoes[5], hoes[6]);
-			
-			SpecialForging.addDragonforgeCraft(shears[5], shears[6]);
-			SpecialForging.addDragonforgeCraft(knives[5], knives[6]);
-			SpecialForging.addDragonforgeCraft(hammers[5], hammers[6]);
-			SpecialForging.addDragonforgeCraft(tongs[5], tongs[6]);
-			SpecialForging.addDragonforgeCraft(needles[5], needles[6]);
-			SpecialForging.addDragonforgeCraft(saws[5], saws[6]);
-			
-			SpecialForging.addDragonforgeCraft(hvyHammers[4], hvyHammers[5]);
-			SpecialForging.addDragonforgeCraft(hvypicks[4], hvypicks[5]);
-			SpecialForging.addDragonforgeCraft(handpicks[4], handpicks[5]);
-			SpecialForging.addDragonforgeCraft(trows[4], trows[5]);
-			SpecialForging.addDragonforgeCraft(scythes[4], scythes[5]);
-			SpecialForging.addDragonforgeCraft(hvyshovels[4], hvyshovels[5]);
-			SpecialForging.addDragonforgeCraft(mattocks[4], mattocks[5]);
-		}
-		
-		
-		for(int a = 0; a < weaponMats.length; a ++)
-		{
-			BaseMaterialMF baseMat = BaseMaterialMF.getMaterial(weaponMats[a]);
-			ToolMaterial mat = baseMat.getToolConversion();
-			String matName = baseMat.name.toLowerCase();
-			int rarity = baseMat.rarity;
-			float weight = baseMat.weight;
-			int tier = baseMat.tier;
-			
-			swords[a] = new ItemSwordMF(matName+"_sword", mat, rarity, weight);
-			waraxes[a] = new ItemWaraxeMF(matName+"_waraxe", mat, rarity, weight);
-			maces[a] = new ItemMaceMF(matName+"_mace", mat, rarity, weight);
-			daggers[a] = new ItemDagger(matName+"_dagger", mat, rarity, weight);
-			spears[a] = new ItemSpearMF(matName+"_spear", mat, rarity, weight);
-			
-			bolts[a] = new ItemArrowMF(matName, rarity, mat, ArrowType.BOLT).setAmmoType("bolt");
-			arrows[a] = new ItemArrowMF(matName, rarity, mat);
-			bows[a] = new ItemBowMF(matName+"_bow", mat, EnumBowType.RECURVE, rarity);
-			
-			if(a > 0)
-			{
-				warhammers[a-1] = new ItemWarhammerMF(matName+"_warhammer", mat, rarity, weight);
-				battleaxes[a-1] = new ItemBattleaxeMF(matName+"_battleaxe", mat, rarity, weight);
-				greatswords[a-1] = new ItemGreatswordMF(matName+"_greatsword", mat, rarity, weight);
-				katanas[a-1] = new ItemKatanaMF(matName+"_katana", mat, rarity, weight);
-				halbeards[a-1] = new ItemHalbeardMF(matName+"_halbeard", mat, rarity, weight);
-				lances[a-1] = new ItemLance(matName+"_lance", mat, rarity, weight);
-				
-				bodkinArrows[a-1] = new ItemArrowMF(matName, rarity, mat, ArrowType.BODKIN);
-				broadArrows[a-1] = new ItemArrowMF(matName, rarity, mat, ArrowType.BROADHEAD);
-			}
-			
-			SpecialForging.addDragonforgeCraft(swords[6], swords[7]);
-			SpecialForging.addDragonforgeCraft(waraxes[6], waraxes[7]);
-			SpecialForging.addDragonforgeCraft(maces[6], maces[7]);
-			SpecialForging.addDragonforgeCraft(spears[6], spears[7]);
-			SpecialForging.addDragonforgeCraft(bows[6], bows[7]);
-			SpecialForging.addDragonforgeCraft(arrows[6], arrows[7]);
-			SpecialForging.addDragonforgeCraft(ComponentListMF.arrowheads[6], ComponentListMF.arrowheads[7]);
-			SpecialForging.addDragonforgeCraft(bolts[6], bolts[7]);
-			
-			SpecialForging.addDragonforgeCraft(greatswords[5], greatswords[6]);
-			SpecialForging.addDragonforgeCraft(battleaxes[5], battleaxes[6]);
-			SpecialForging.addDragonforgeCraft(warhammers[5], warhammers[6]);
-			SpecialForging.addDragonforgeCraft(halbeards[5], halbeards[6]);
-			SpecialForging.addDragonforgeCraft(lances[5], lances[6]);
-			SpecialForging.addDragonforgeCraft(ComponentListMF.bodkinheads[5], ComponentListMF.bodkinheads[6]);
-			SpecialForging.addDragonforgeCraft(ComponentListMF.broadheads[5], ComponentListMF.broadheads[6]);
-			SpecialForging.addDragonforgeCraft(BlockListMF.bars[3], BlockListMF.bars[4]);
-		}
-		*/
 		
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(skillbook_artisanry), 1, 5, 50));
 		ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(skillbook_construction), 1, 1, 10));

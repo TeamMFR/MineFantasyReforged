@@ -26,6 +26,7 @@ public class ItemExplodingBolt extends ItemArrowMF implements ISpecialSalvage
 		super("exploding_bolt", 1, BaseMaterialMF.iron.getToolConversion(), ArrowType.EXPLOSIVEBOLT);
 		setCreativeTab(CreativeTabMF.tabGadget);
 		setAmmoType("bolt");
+		setMaxStackSize(20);
 	}
 	@Override
 	public EntityArrowMF getFiredArrow(EntityArrowMF instance, ItemStack arrow)

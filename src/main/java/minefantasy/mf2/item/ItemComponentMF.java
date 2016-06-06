@@ -217,19 +217,9 @@ public class ItemComponentMF extends Item
 		add(list, ComponentListMF.cross_scope);
 		add(list, ComponentListMF.cross_bayonet);
 		
-		/*
-		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-		Iterator iteratorMetal = metal.iterator();
-		while(iteratorMetal.hasNext())
-    	{
-			CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-			ArrayList<ItemStack> mats = OreDictionary.getOres("ingot"+customMat.name);
-			if(MineFantasyII.isDebug() || (mats != null && !mats.isEmpty()))
-			{
-				list.add(ComponentListMF.scrapMetal.createComm(customMat.name.toLowerCase()));
-			}
-    	}
-    	*/
+		add(list, ComponentListMF.copper_coin);
+		add(list, ComponentListMF.silver_coin);
+		add(list, ComponentListMF.gold_coin);
     }
     private void add(List list, Item item)
     {

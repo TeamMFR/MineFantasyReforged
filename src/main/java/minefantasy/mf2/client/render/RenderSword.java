@@ -36,7 +36,12 @@ public class RenderSword implements IItemRenderer
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) 
     {
     	boolean hasParried = false;
-    	EntityLivingBase user = ((EntityLivingBase)data[1]);
+    	EntityLivingBase user = null;
+    	if(data.length> 0 && data[1] instanceof EntityLivingBase)
+		{
+    		user = ((EntityLivingBase)data[1]);
+		}
+    	
     	ItemStack weapon = user.getHeldItem();
     	
     	if(user instanceof EntityPlayer && weapon != null)

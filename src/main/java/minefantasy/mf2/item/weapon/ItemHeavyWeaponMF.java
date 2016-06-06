@@ -121,4 +121,10 @@ public abstract class ItemHeavyWeaponMF extends ItemWeaponMF implements IExtende
     {
     	return super.getMeleeDamage(item)*1.5F;
 	}
+	
+	@Override
+	public float getScale(ItemStack itemstack)
+	{
+		return 2.0F;
+	}
 }

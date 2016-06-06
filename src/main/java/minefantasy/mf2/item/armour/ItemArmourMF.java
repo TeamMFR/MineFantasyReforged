@@ -23,6 +23,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -449,5 +450,16 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 
 	public boolean isCustom() {
 		return false;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack item, EntityPlayer user, List list, boolean full)
+	{
+		CustomToolHelper.addInformation(item, list);
+		float mass = getPieceWeight(item, armorType);
+    	
+    	list.add(CustomMaterial.getWeightString(mass));
+		super.addInformation(item, user, list, full);
 	}
 }

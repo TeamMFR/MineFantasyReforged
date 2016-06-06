@@ -2,6 +2,9 @@ package minefantasy.mf2.item.gadget;
 
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IDisplayMFAmmo;
@@ -11,15 +14,13 @@ import minefantasy.mf2.api.crafting.ISpecialSalvage;
 import minefantasy.mf2.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mf2.api.weapon.IDamageModifier;
 import minefantasy.mf2.api.weapon.IDamageType;
+import minefantasy.mf2.api.weapon.IRackItem;
+import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.entity.EntityArrowMF;
-import minefantasy.mf2.entity.EntityMine;
 import minefantasy.mf2.item.archery.ItemArrowMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.item.list.ToolListMF;
-import minefantasy.mf2.mechanics.BombDispenser;
 import minefantasy.mf2.mechanics.CombatMechanics;
-import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -28,18 +29,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDamageModifier, IDamageType, IScope, ISpecialSalvage
+public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDamageModifier, IRackItem, IDamageType, IScope, ISpecialSalvage
 {
     public ItemCrossbow()
     {
@@ -496,4 +493,53 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
     {
         return super.getMaxDamage(item) + (int)getFullValue(item, "durability");
     }
+
+	@Override
+	public float getScale(ItemStack itemstack) {
+		return 1.0F;
+	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 0F;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) 
+	{
+		return (isHandCrossbow(itemstack) ? 0F : 0.5F) + 1/8F;
+	}
+	
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0.25F;
+	}
+
+	@Override
+	public float getRotationOffset(ItemStack itemstack) {
+		return 0;
+	}
+
+	@Override
+	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) 
+	{
+		if(slot == 0 || slot == 3)return false;
+		
+		return isHandCrossbow(item) || rack.hasRackBelow(slot);
+	}
+
+	@Override
+	public boolean isSpecialRender(ItemStack item) {
+		return true;
+	}
+	
+	public boolean isHandCrossbow(ItemStack item)
+	{
+		ICrossbowPart part = ItemCrossbowPart.getPart("stock", getPart("stock", item));
+		if(part != null)
+		{
+			return part.makesSmallWeapon();
+		}
+		return true;
+	}
 }

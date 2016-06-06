@@ -2,8 +2,11 @@ package minefantasy.mf2.api.helpers;
 
 import java.util.List;
 
+import cpw.mods.fml.common.network.ByteBufUtils;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import io.netty.buffer.ByteBuf;
 import minefantasy.mf2.api.material.CustomMaterial;
-import minefantasy.mf2.item.list.ToolListMF;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,10 +14,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.network.ByteBufUtils;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import io.netty.buffer.ByteBuf;
 
 public class CustomToolHelper 
 {
@@ -472,7 +471,7 @@ public class CustomToolHelper
 		packet.writeInt( (stack != null && stack.isItemEnchanted()) ? 1 : 0);
 		
 		CustomMaterial main1 = getCustomMetalMaterial(stack);
-		CustomMaterial haft1 = getCustomMetalMaterial(stack);
+		CustomMaterial haft1 = getCustomWoodMaterial(stack);
 		
 		ByteBufUtils.writeUTF8String(packet, main1 != null ? main1.name : "null");
 		ByteBufUtils.writeUTF8String(packet, haft1 != null ? haft1.name : "null");
@@ -482,7 +481,7 @@ public class CustomToolHelper
 		int id = packet.readInt();
 		int ss = packet.readInt();
 		int md = packet.readInt();
-		boolean ec = packet.readBoolean();
+		boolean ec = packet.readInt() == 1;
 		String main1 = ByteBufUtils.readUTF8String(packet);
 		String haft1 = ByteBufUtils.readUTF8String(packet);
 		Item item = Item.getItemById(id);

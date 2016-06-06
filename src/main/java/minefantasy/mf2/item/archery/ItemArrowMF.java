@@ -43,6 +43,11 @@ public class ItemArrowMF extends Item implements IArrowMF, IAmmo
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	public static final MFArrowDispenser dispenser = new MFArrowDispenser();
 	
+	public ItemArrowMF(String name, ArrowType type, int stackSize)
+	{
+		this(name, 0, ToolMaterial.WOOD, type);
+		setMaxStackSize(stackSize);
+	}
 	public ItemArrowMF(String name, ArrowType type)
 	{
 		this(name, 0, ToolMaterial.WOOD, type);

@@ -134,6 +134,11 @@ public class ItemCrossbowPart extends ItemComponentMF implements ICrossbowPart
 		this.durability = durability;
 		return this;
 	}
+	public ItemCrossbowPart setHandCrossbow(boolean flag)
+	{
+		this.isHandle = flag;
+		return this;
+	}
 	@Override
 	public float getModifier(String type) 
 	{
@@ -146,5 +151,10 @@ public class ItemCrossbowPart extends ItemComponentMF implements ICrossbowPart
 		if(type.equalsIgnoreCase("zoom"))return zoom;
 		if(type.equalsIgnoreCase("durability"))return durability;
 		return 0F;
+	}
+	private boolean isHandle = false;
+	@Override
+	public boolean makesSmallWeapon() {
+		return isHandle;
 	}
 }

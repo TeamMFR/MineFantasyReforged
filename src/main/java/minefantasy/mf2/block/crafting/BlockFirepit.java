@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.tool.ILighter;
 import minefantasy.mf2.block.tileentity.TileEntityFirepit;
+import minefantasy.mf2.item.list.CreativeTabMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -32,13 +33,13 @@ public class BlockFirepit extends BlockContainer
 	public BlockFirepit()
     {
         super(Material.wood);
-        this.setCreativeTab(CreativeTabs.tabDecorations);
         setBlockBounds(0.2F, 0F, 0.2F, 0.8F, 0.5F, 0.8F);
         String name = "firepit";
 		this.setBlockName(name);
 		GameRegistry.registerBlock(this, name);
         this.setLightOpacity(0);
         setHardness(2F);
+        this.setCreativeTab(CreativeTabMF.tabUtil);
     }
 	
 	@Override

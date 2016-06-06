@@ -138,7 +138,7 @@ public class ForgedToolRecipes
 			'F', ComponentListMF.fletching,
 			'H', hunk
 		}));
-		time = 5;
+		time = 2;
 		KnowledgeListMF.arrowheadR.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.arrowhead.createComm(material.name, 4), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
@@ -148,7 +148,7 @@ public class ForgedToolRecipes
 			
 			'H', hunk
 		}));
-		time = 6;
+		time = 5;
 		KnowledgeListMF.bodkinheadR.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.bodkinhead.createComm(material.name, 4), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
@@ -158,7 +158,7 @@ public class ForgedToolRecipes
 			
 			'H', hunk
 		}));
-		time = 10;
+		time = 5;
 		KnowledgeListMF.broadheadR.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.broadhead.createComm(material.name, 4), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{

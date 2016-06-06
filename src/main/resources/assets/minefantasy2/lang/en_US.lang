@@ -329,7 +329,9 @@ item.loot_sack.name=Loot
 item.loot_sack_uc.name=Valuable Loot
 item.loot_sack_rare.name=Exquisite Loot
 
-
+item.copper_coin.name=Copper Coin
+item.silver_coin.name=Silver Coin
+item.gold_coin.name=Gold Coin
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /COMPONENT/
@@ -716,6 +718,9 @@ tile.blastfurnheater.name=Blast Furnace Heater
 tile.firepit.name=Firepit
 tile.food_roast_basic.name=Cooking Plate
 tile.food_oven_basic.name=Stone Oven
+
+tile.rack_wood.name=Tool Rack
+tile.ammo_box_basic.name=Ammunition Box
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /TABS/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2150,6 +2155,8 @@ knowledge.parry.info=$hParrying and Blocking$r^When holding right-click on most 
 knowledge.parry.info2=(like axes and blunt) take damage based on the hit.^It is recommended to block attacks rather than try take them, this technique can save lives.^Attacking directly after a parry does reduce damage however.
 knowledge.advparry.info=$hParrying abilities$r^When a parry succeeds: if you're holding shift, you will lunge forward, and even past an attacker, throwing them your way. This consumes stamina but timed right, can change the battlefield to your favor. It is also possible to do this while jumping.
 knowledge.poweratt.info=$hPower attacks$r^If you hold sneak and attack while falling down, you will attempt a power attack. A power attack cost stamina, but when it succeeds will double damage and bypass through a blocking target. This can be interrupted if attacked just before the attempt.
+knowledge.dodge.info=$hDodge$r^In many situations, it's better to avoid a hit all together. If you jump to the sides or back while blocking, you will leap quickly. This uses stamina and cannot be done in heavy armour.
+knowledge.armour.info=$hArmour Selection$r^There are three main types of armour Light, Medium and Heavy. If you rely more on avoidance and skill, use light, if you want more protection, rely on heavy, for a mix of both, use medium.
 knowledge.blade.info=
 knowledge.fastblade.info=
 knowledge.axe.info=
@@ -2330,17 +2337,17 @@ knowledge.craftArmourBasic.1=When you first start out in this world, you may wan
 
 knowledge.craftArmourLight=Light Armor
 knowledge.craftArmourLight.desc=Cheap and practical
-knowledge.craftArmourLight.1=Light armor weighs pretty much nothing and will not restrict any stamina regeneration.^It however isn't likely to protect you from much, so think about that before catching broadswords with your face. Leather armours are protective against blunt based damage.
+knowledge.craftArmourLight.1=Light armor is designed to be as easy to wear as possible and is only made from a small variety of material. You do not get much protecion from this, but your ability to dodge and parry will be unaffected.^These suits are best worn where tactics and avoidance are used.
 
 knowledge.craftArmourMedium=Medium Armor
 knowledge.craftArmourMedium.desc=Average protection
-knowledge.craftArmourMedium.1=Medium armor is the base average. Nothing more to say there but the protection is decent but stamina regeneration is slowed by about half, but you should be able to take a decent whack with it. Chainmail armour is pretty effective but vulnerable to blunt based damage.
+knowledge.craftArmourMedium.1=Medium armor covers stock-standard metal mails. Your ability to avoid damage is reduced in trade for added protection.^Use of this armor will cover most situations where avoidance and protection are balanced.
 knowledge.craftArmourMedium.scale=As an alternative, Scalemail can be created. Scale armor has more balanced protection against all forms of damage, not quite as effective against piercing and cutting resistance, it makes up in blunt.
 
 knowledge.craftArmourHeavy=Heavy Armor
 knowledge.craftArmourHeavy.desc=Strong but restricted
-knowledge.craftArmourHeavy.1=This stuff is strong and much like medium armor, crafted from metal. Heavy armour not only significantly slows your stamina regeneration to roughly a third, but it also increases the rate of decay. Plate is highly protective but vulnerable to piercing based damage.
-knowledge.craftArmourHeavy.splint=Splintmail isn't quite as heavy as a full blown suit of plate, and has lesser protective qualities in return. However, splintmail is still far superior to medium armours and protects all damage types equally.
+knowledge.craftArmourHeavy.1=Heavy armour is designed to take as much damage as possible. While wearing this, you will be unable to dodge and have significant disadvantage to blocking.^This armor is best used when shear force is needed and avoidance is left behind.
+knowledge.craftArmourHeavy.splint=Splintmail isn't quite as heavy as a full blown suit of plate, and has lesser protective qualities in return. However, splintmail is still far superior to medium armors and protects all damage types equally.
 
 knowledge.craftHCCTools=Primitive Tools
 knowledge.craftHCCTools.desc=(HARDCORE CRAFTING)
@@ -2634,6 +2641,15 @@ knowledge.paint_brush.2=$hPainting In-World$r^To save the trouble of going to th
 knowledge.decorated_stone=Decorated Stone
 knowledge.decorated_stone.desc=Metal Trimming
 knowledge.decorated_stone.1=Stone can look bland in large quantaties, so you've learnt to trim reinforced stone with metals, adding just a little bit of style to your walls.
+
+knowledge.tool_rack=Tool Rack
+knowledge.tool_rack.desc=Store your hardware
+knowledge.tool_rack.1=There are a lot of tools that may be needed and only so much space to hold them. Tool racks can be used to place items for easy access.^Right-click the block to place or with empty hands to remove tools.^Heavy weapons need at second rack below to fit, and polearms need an additional rack above.
+knowledge.tool_rack.rules=*Heavy weapons require a rack below them.^*Polearms require above and below.^*Full-size crossbows count as heavy weapons.^*Crossbows cannot be placed on edge hooks.
+
+knowledge.ammo_box=Ammo Box
+knowledge.ammo_box.desc=Munitions storage
+knowledge.ammo_box.1=Ammunition is always needed and must be kept easy-access for when it's used. Ammunition boxes allow up to 8x the normal stack size of arrows, bolts, bombs or mines to be kept in a crate. Right-click to place items, empty hands retrieves a stack, clicking an appropriate firearm (bow/crossbow) can load the weapon.
 
 knowledge.generic_meat=Generic Meat
 knowledge.generic_meat.desc=Good for any recipe

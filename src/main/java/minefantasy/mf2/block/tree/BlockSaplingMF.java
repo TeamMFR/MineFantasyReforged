@@ -7,6 +7,7 @@ import minefantasy.mf2.mechanics.worldGen.WorldGenMFTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -33,7 +34,8 @@ public class BlockSaplingMF extends BlockBush implements IGrowable
 	
     public BlockSaplingMF(String baseWood, Block log, Block leaves, float growthModifier)
     {
-    	super();
+    	super(Material.plants);
+    	setStepSound(Block.soundTypeGrass);
         float f = 0.4F;
         this.setBlockBounds(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
         this.setCreativeTab(CreativeTabs.tabDecorations);

@@ -25,6 +25,7 @@ public class ItemExplodingArrow extends ItemArrowMF implements ISpecialSalvage
 	{
 		super("exploding_arrow", 1, BaseMaterialMF.iron.getToolConversion(), ArrowType.EXPLOSIVE);
 		setCreativeTab(CreativeTabMF.tabGadget);
+		setMaxStackSize(16);
 	}
 	@Override
 	public EntityArrowMF getFiredArrow(EntityArrowMF instance, ItemStack arrow)

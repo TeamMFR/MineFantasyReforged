@@ -13,7 +13,7 @@ public interface IArmourMF
 	public float getPieceWeight(ItemStack item, int slot);
 	/**
 	 * This is if the suit is light or heavy armour (pretty much anything above 50kg is heavy)
-	 * @return "light" or "heavy"
+	 * @return "light" "medium" or "heavy"
 	 */
 	public String getSuitWeigthType(ItemStack item);
 }

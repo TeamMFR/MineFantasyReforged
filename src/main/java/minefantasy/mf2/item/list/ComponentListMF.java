@@ -154,7 +154,7 @@ public class ComponentListMF
 	
 	public static Item crossbow_stock_wood = new ItemCrossbowPart("cross_stock_wood",   "stock").addSpeed(1.0F).addRecoil(0.5F);
 	public static Item crossbow_stock_iron = new ItemCrossbowPart("cross_stock_iron",   "stock").addSpeed(1.0F).addRecoil(-0.5F).addDurability(150);
-	public static Item crossbow_handle_wood = new ItemCrossbowPart("cross_handle_wood", "stock").addSpeed(0.5F).addRecoil(1.5F).addSpread(1.0F);
+	public static Item crossbow_handle_wood = new ItemCrossbowPart("cross_handle_wood", "stock").addSpeed(0.5F).addRecoil(1.5F).addSpread(1.0F).setHandCrossbow(true);
 	
 	public static Item cross_arms_basic = new ItemCrossbowPart("cross_arms_basic", 		 "mechanism").addPower(1.00F).addSpeed(0.50F).addRecoil(1.00F).addSpread(1.00F);
 	public static Item cross_arms_light = new ItemCrossbowPart("cross_arms_light", 		 "mechanism").addPower(0.85F).addSpeed(0.25F).addRecoil(0.50F).addSpread(0.50F);
@@ -184,6 +184,10 @@ public class ComponentListMF
 	
 	public static Item flux_pot = new ItemComponentMF("flux_pot", 0).setContainerItem(clay_pot);
 	public static Item coal_flux = new ItemComponentMF("coal_flux", 0);
+	
+	public static Item copper_coin = new ItemComponentMF("copper_coin", 0);
+	public static Item silver_coin = new ItemComponentMF("silver_coin", 0);
+	public static Item gold_coin = new ItemComponentMF("gold_coin", 0);
 	
 	//public static Item lime_rock = new ItemComponentMF("lime_rock", 0);
 	//public static Item borax_rock = new ItemComponentMF("borax_rock", 0);

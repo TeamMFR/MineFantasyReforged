@@ -60,23 +60,6 @@ public class ItemCustomArmour extends ItemArmourMF
 		}
 		return tex +"_detail.png";//STATIC LAYER
 	}
-	@Override
-	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack item, EntityPlayer user, List list, boolean full)
-	{
-		CustomToolHelper.addInformation(item, list);
-		float mass = getPieceWeight(item, armorType);
-    	
-    	list.add(CustomMaterial.getWeightString(mass));
-    	/*
-    	CustomMaterial base = CustomToolHelper.getCustomMetalMaterial(item);
-    	if(base != null)
-    	{
-    		list.add(StatCollector.translateToLocalFormatted("materialtype.fireresist.name", base.getFireResistance()));
-    	}
-    	*/
-		super.addInformation(item, user, list, full);
-	}
 
 	@Override
 	public boolean hasColor(ItemStack item)
