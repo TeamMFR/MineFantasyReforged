@@ -135,44 +135,9 @@ public class TempRecipesMF
 			"GGG",
 			'G', BlockListMF.window
 		});
-		addFood();
 		
 	}
 	private static void assembleWoodVariations(CustomMaterial material) {
 		
-	}
-
-	private static void addFood()
-	{
-		KnowledgeListMF.meatpieOut =
-		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.pie_meat), new Object[]
-		{
-			"F",
-			'F', FoodListMF.pie_meat_cooked
-		});
-		KnowledgeListMF.shepardOut =
-		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.pie_shepards), new Object[]
-		{
-			"F",
-			'F', FoodListMF.pie_shepard_cooked
-		});
-		KnowledgeListMF.appleOut =
-		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.pie_apple), new Object[]
-		{
-			"F",
-			'F', FoodListMF.pie_apple_cooked
-		});
-		KnowledgeListMF.berryOut =
-		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.pie_berry), new Object[]
-		{
-			"F",
-			'F', FoodListMF.pie_berry_cooked
-		});
-		KnowledgeListMF.pumpPieOut =
-		GameRegistry.addShapedRecipe(new ItemStack(Items.pumpkin_pie), new Object[]
-		{
-			"F",
-			'F', FoodListMF.pie_pumpkin_cooked
-		});
 	}
 }

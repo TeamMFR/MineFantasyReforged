@@ -5,18 +5,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
-import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.api.tool.IToolMF;
 import minefantasy.mf2.api.weapon.IDamageType;
+import minefantasy.mf2.api.weapon.IRackItem;
+import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.config.ConfigTools;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.item.list.ToolListMF;
-import minefantasy.mf2.item.tool.ToolMaterialMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -35,17 +40,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.ForgeDirection;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 /**
  * @author Anonymous Productions
  */
-public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMF
+public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMF, IRackItem
 {
 	private Random rand = new Random();
 	private float hitDamage;
@@ -384,4 +382,39 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
     	return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
     //====================================================== CUSTOM END ==============================================================\\
+
+	@Override
+	public float getScale(ItemStack itemstack) {
+		return 1.0F;
+	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 0;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) {
+		return 9F/16F;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0;
+	}
+
+	@Override
+	public float getRotationOffset(ItemStack itemstack) {
+		return 90F;
+	}
+
+	@Override
+	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
+		return true;
+	}
+
+	@Override
+	public boolean isSpecialRender(ItemStack item) {
+		return false;
+	}
 }

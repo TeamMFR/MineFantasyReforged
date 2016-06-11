@@ -74,7 +74,7 @@ public class ItemCustomComponent extends Item
 	
 	public CustomMaterial getBase(ItemStack component)
 	{
-		return CustomToolHelper.getCustomMetalMaterial(component);
+		return CustomToolHelper.getCustomPrimaryMaterial(component);
 	}
 	
 	@Override

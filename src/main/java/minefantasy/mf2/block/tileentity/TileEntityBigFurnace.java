@@ -695,7 +695,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 		if (itemstack == null) {
 			return 0;
 		}
-		return (int)Math.ceil(ForgeItemHandler.getForgeFuel(itemstack)/4);
+		return (int)Math.ceil(ForgeItemHandler.getForgeFuel(itemstack)/8);
 	}
 	
 	public boolean isUseableByPlayer(EntityPlayer entityplayer) {

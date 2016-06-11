@@ -37,10 +37,6 @@ public class ChimneyPacket extends PacketMF
         	
         	int blockID = packet.readInt();
         	int blockMetadata = packet.readInt();
-        	if(Block.getIdFromBlock(tile.maskBlock) != blockID || tile.maskMeta != blockMetadata)
-        	{
-        		MFLogUtil.logDebug("Chimney Texture Change Found");
-        	}
     		tile.setBlock(blockID, blockMetadata);
         }
 	}

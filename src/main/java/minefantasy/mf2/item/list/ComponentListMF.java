@@ -70,7 +70,7 @@ public class ComponentListMF
 	public static ItemComponentMF[] ingots = new ItemComponentMF[ingotMats.length];
 	
 	
-	public static Item plank = new ItemComponentMF("plank").setCustom("yes");
+	public static Item plank = new ItemComponentMF("plank").setCustom(1);
 	public static Item vine = new ItemComponentMF("vine", -1);
 	public static Item sharp_rock = new ItemComponentMF("sharp_rock", -1);
 	
@@ -165,18 +165,10 @@ public class ComponentListMF
 	public static Item cross_ammo = new ItemCrossbowPart("cross_ammo", "mod").addCapacity(5).addSpread(2.00F);
 	public static Item cross_scope = new ItemCrossbowPart("cross_scope", "mod").setScope(0.75F);
 	
-	//public static ItemHaft hilt_custom = new ItemHaft("hilt");
-	//public static ItemHaft longhilt_custom = new ItemHaft("longhilt");
-	//public static ItemHaft haft_custom = new ItemHaft("haft");
-	//public static ItemHaft longhaft_custom = new ItemHaft("longhaft");
-	//public static ItemHaft spearhaft_custom = new ItemHaft("spearhaft");
-	//public static ItemCustomComponent plankCustom = new ItemCustomComponent("plank", 1F);
-	//public static ItemCustomComponent plateHeavy = new ItemCustomComponent("plateheavy", 3F);
 	public static ItemCustomComponent chainmesh = new ItemCustomComponent("chainmesh", 1F);
 	public static ItemCustomComponent scalemesh = new ItemCustomComponent("scalemesh", 1F);
 	public static ItemCustomComponent splintmesh = new ItemCustomComponent("splintmesh", 1F);
 	public static ItemCustomComponent plate = new ItemCustomComponent("plate", 2F);
-	//public static ItemCustomComponent scrapMetal = new ItemCustomComponent("scrap", 1F);
 	public static ItemCustomComponent metalHunk = new ItemCustomComponent("hunk", 0.25F);
 	public static ItemCustomComponent arrowhead = new ItemCustomComponent("arrowhead", 1/4F);
 	public static ItemCustomComponent bodkinhead = new ItemCustomComponent("bodkinhead", 1/4F);
@@ -189,10 +181,9 @@ public class ComponentListMF
 	public static Item silver_coin = new ItemComponentMF("silver_coin", 0);
 	public static Item gold_coin = new ItemComponentMF("gold_coin", 0);
 	
-	//public static Item lime_rock = new ItemComponentMF("lime_rock", 0);
-	//public static Item borax_rock = new ItemComponentMF("borax_rock", 0);
-	//public static Item sulfur_rock = new ItemComponentMF("sulfur_rock", 0);
-	//public static Item nitre_rock = new ItemComponentMF("nitre_rock", 0);
+	public static Item hinge = new ItemComponentMF("hinge", 0);
+	public static Item plank_cut = new ItemComponentMF("plank_cut").setCustom(1);
+	public static Item plank_pane = new ItemComponentMF("plank_pane").setCustom(6);
 	
 	public static void load() 
 	{
@@ -217,17 +208,6 @@ public class ComponentListMF
 				OreDictionary.registerOre("ingotRefinedIron", ingots[a]);
 			}
 		}
-		
-		/*for(int a = 0; a < woodMats.length; a ++)
-		{
-			CustomMaterial mat = CustomMaterial.getMaterial(woodMats[a]);
-			String name = mat.name;
-    			planks[a] = new ItemComponentMF("plank"+name, 0).setCustom("This is irrelevant text,but i'm lazy now");
-    			OreDictionary.registerOre("MFplank2"+name, planks[a]);
-    		
-		}*/
-		
-		
 		
 		addRandomDrops();
 		initFuels();

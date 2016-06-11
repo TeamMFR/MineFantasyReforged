@@ -29,6 +29,7 @@ public class BlockCakeMF extends Block
     private Item cakeSlice;
     protected int maxSlices = 8;
     protected float height = 0.5F;
+    protected float width = 14F/16F;
 
     public BlockCakeMF(String name, Item slice)
     {
@@ -48,7 +49,7 @@ public class BlockCakeMF extends Block
     public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z)
     {
         int slices = world.getBlockMetadata(x, y, z);
-        float border = 0.0625F;
+        float border = (1F-width)/2;
         float size = (slices / (float)maxSlices) * (1.0F-(border*2));
         this.setBlockBounds(border + size, 0.0F, border, 1.0F-border, height, 1.0F - border);
     }
@@ -59,7 +60,7 @@ public class BlockCakeMF extends Block
     @Override
     public void setBlockBoundsForItemRender()
     {
-        float f = 0.0625F;
+        float f = (1F-width)/2;
         float f1 = height;
         this.setBlockBounds(f, 0.0F, f, 1.0F - f, f1, 1.0F - f);
     }
@@ -72,7 +73,7 @@ public class BlockCakeMF extends Block
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
     {
     	int slices = world.getBlockMetadata(x, y, z);
-        float border = 0.0625F;
+        float border =(1F-width)/2;
         float size = border + (slices / (float)maxSlices) * (1.0F-(border*2));
         return AxisAlignedBB.getBoundingBox(x + size, y, z + border, x + 1 - border, y + height - border, z + 1 - border);
     }
@@ -85,7 +86,7 @@ public class BlockCakeMF extends Block
     public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
     {
     	int slices = world.getBlockMetadata(x, y, z);
-        float border = 0.0625F;
+        float border = (1F-width)/2;
         float size = border + (slices / (float)maxSlices) * (1.0F-(border*2));
         return AxisAlignedBB.getBoundingBox(x + size, y, z + border, x + 1 - border, y + height, z + 1 - border);
     }
@@ -228,5 +229,12 @@ public class BlockCakeMF extends Block
 			return ((ItemFoodMF)cakeSlice).itemRarity;
 		}
 		return 0;
+	}
+	
+	public Block setCheese()
+	{
+		width = 0.5F;
+		height = 5F/16F;
+		return this;
 	}
 }

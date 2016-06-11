@@ -5,6 +5,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 import minefantasy.mf2.api.helpers.TextureHelperMF;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.weapon.IRackItem;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import net.minecraft.client.Minecraft;
@@ -41,7 +42,6 @@ public class TileEntityRackRenderer extends TileEntitySpecialRenderer
         int j = i*90;
         if(i == 1)j = 180;
         if(i == 2)j = 90;
-        bindTextureByName("textures/models/tileentity/rack_wood.png"); //texture
         
         GL11.glPushMatrix();//Start all
         GL11.glTranslatef((float) d + 0.5F, (float) d1+1F, (float) d2 + 0.5F);
@@ -49,7 +49,18 @@ public class TileEntityRackRenderer extends TileEntitySpecialRenderer
         GL11.glScalef(1.0F, -1F, -1F);
         float itemsStart = -(3F/16F);
         float itemsGap = 4F/16F;
-        model.renderModel(0.0625F);
+        
+        CustomMaterial material = tile.getMaterial();
+        GL11.glColor3f((float)material.colourRGB[0]/255F, (float)material.colourRGB[1]/255F, (float)material.colourRGB[2]/255F);
+        
+        bindTextureByName("textures/models/tileentity/"+tile.getTexName()+"_base.png"); //texture
+        model.renderModel(0.0625F); 
+        
+        GL11.glColor3f(1F, 1F, 1F);
+        
+        bindTextureByName("textures/models/tileentity/"+tile.getTexName()+"_detail.png"); //texture
+        model.renderModel(0.0625F); 
+        
         for(int a = 0; a < 4; a ++)
         {
         	GL11.glPushMatrix();//Start Individual Items
@@ -119,7 +130,6 @@ public class TileEntityRackRenderer extends TileEntitySpecialRenderer
         
 
     }
-
 	private float getRotationForItem(Item item) {
 		String classname = item.getClass().getName();
 		if(classname.endsWith("ItemCrossbow") || classname.endsWith("ItemBlunderbuss") || classname.endsWith("ItemBlowgun") || classname.endsWith("ItemMusket"))

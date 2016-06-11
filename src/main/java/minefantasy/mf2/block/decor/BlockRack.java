@@ -41,7 +41,7 @@ import net.minecraftforge.common.util.ForgeDirection;
  * Sources are provided for educational reasons.
  * though small bits of code, or methods can be used in your own creations.
  */
-public class BlockRack extends BlockContainer 
+public class BlockRack extends BlockWoodDecor 
 {
 
     private Random rand = new Random();
@@ -49,11 +49,11 @@ public class BlockRack extends BlockContainer
     private static final float thickness = 5F/16F;
     public BlockRack(String name)
     {
-        super(Material.wood);
+        super(name);
         
         setHardness(1.0F);
         setResistance(1.0F);
-        GameRegistry.registerBlock(this, name);
+        GameRegistry.registerBlock(this, ItemBlockToolRack.class, name);
 		setBlockName(name);
 		this.setCreativeTab(CreativeTabMF.tabUtil);
     }
@@ -316,14 +316,6 @@ public class BlockRack extends BlockContainer
 
 	@SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister reg){}
-    
-    
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack stack) 
-    {
-    }
-    
-    
     
     
     public static boolean interact(int slot, World world, TileEntityRack tile, EntityPlayer player)

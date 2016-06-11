@@ -408,6 +408,19 @@ public class ForgingRecipes
 			'C', Items.coal,
 			'F', ComponentListMF.flux_pot,
 		});
+		
+		time = 8;
+		material = BaseMaterialMF.iron;
+		KnowledgeListMF.hingeRecipe =
+		MineFantasyAPI.addAnvilRecipe(construction, new ItemStack(ComponentListMF.hinge), "", true, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		{
+			"LR",
+			'L', ComponentListMF.leather_strip,
+			'R', ComponentListMF.rivet,
+		});
+		Salvage.addSalvage(ComponentListMF.hinge, 
+				ComponentListMF.leather_strip
+				, ComponentListMF.rivet);
 	}
 
 	private static void addOrnate(ItemStack silver)

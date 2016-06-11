@@ -5,6 +5,7 @@ import java.util.Random;
 import org.lwjgl.opengl.GL11;
 
 import minefantasy.mf2.api.helpers.TextureHelperMF;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -15,6 +16,8 @@ public class TileEntityAmmoBoxRenderer extends TileEntitySpecialRenderer
     public TileEntityAmmoBoxRenderer() 
     {
         model = new ModelAmmoBox();
+        modelbig = new ModelSmallCrate();
+        modelsml = new ModelFoodBox();
     }
 
     public void renderAModelAt(TileEntityAmmoBox tile, double d, double d1, double d2, float f) 
@@ -29,31 +32,15 @@ public class TileEntityAmmoBoxRenderer extends TileEntitySpecialRenderer
     
 	public void renderModelAt(TileEntityAmmoBox tile, int meta, double d, double d1, double d2, float f) 
     {
+		ModelAmmoBox baseMdl = tile.getStorageType() == 0 ? modelsml : tile.getStorageType() == 1 ? model : modelbig;
 		int i = meta;
-        
+		if(!tile.hasWorldObj())
+		{
+			i = 2;
+		}
 
-		int j = 90 * i;
+		int j = 450 - (90 * i);
 
-        if (i == 1) {
-            j = 0;
-        }
-
-        if (i == 2) {
-            j = 270;
-        }
-
-        if (i == 3) {
-            j = 180;
-        }
-
-        if (i == 0) {
-            j = 90;
-        }
-        if (i == 0) {
-            j = 90;
-        }
-    	bindTextureByName("textures/models/tileentity/ammo_box_"+tile.getTexName()+".png"); //texture
-        
         GL11.glPushMatrix(); //start
         float scale = 1.0F;
         float yOffset = 1/16F;
@@ -62,10 +49,21 @@ public class TileEntityAmmoBoxRenderer extends TileEntitySpecialRenderer
         GL11.glScalef(scale, -scale, -scale); //if you read this comment out this line and you can see what happens
         GL11.glPushMatrix();
         float level = 0F;
-        model.renderModel(0.0625F); 
-    	model.renderLid(0.0625F, tile.angle);
-        GL11.glPopMatrix();
-        GL11.glColor3f(255, 255, 255);
+        
+        CustomMaterial material = tile.getMaterial();
+        GL11.glColor3f((float)material.colourRGB[0]/255F, (float)material.colourRGB[1]/255F, (float)material.colourRGB[2]/255F);
+        
+        bindTextureByName("textures/models/tileentity/"+tile.getTexName()+"_base.png"); //texture
+        baseMdl.renderModel(0.0625F); 
+        baseMdl.renderLid(0.0625F, tile.angle);
+    	
+    	GL11.glColor3f(1F, 1F, 1F);
+    	
+    	bindTextureByName("textures/models/tileentity/"+tile.getTexName()+"_detail.png"); //texture
+    	baseMdl.renderModel(0.0625F); 
+    	baseMdl.renderLid(0.0625F, tile.angle);
+    	GL11.glPopMatrix();
+        GL11.glColor3f(1F, 1F, 1F);
         GL11.glPopMatrix(); //end
 
     }
@@ -78,6 +76,6 @@ public class TileEntityAmmoBoxRenderer extends TileEntitySpecialRenderer
         renderAModelAt((TileEntityAmmoBox) tileentity, d, d1, d2, f); //where to render
     }
 	
-    private ModelAmmoBox model;
+    private ModelAmmoBox modelbig, model, modelsml;
     private Random random = new Random();
 }

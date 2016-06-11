@@ -59,7 +59,7 @@ public class CarpenterRecipes
     	}
     	*/
 		assembleWoodBasic();
-		
+		CustomWoodRecipes.init();
 		addDusts();
 		addWoodworks();
 		addStonemason();
@@ -652,31 +652,6 @@ public class CarpenterRecipes
 		});
 		Salvage.addSalvage(BlockListMF.advTanner, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood", 8), new ItemStack(ComponentListMF.nail, 3));
 		
-
-		KnowledgeListMF.rackRecipe = 
-		MineFantasyAPI.addCarpenterRecipe(construction, new ItemStack(BlockListMF.rack_wood), "", nailHammer, "hammer", 1, 80 , new Object[]
-		{
-			"N N",
-			"P P",
-			"PPP",
-			"P P",
-			'N', ComponentListMF.nail,
-			'P', ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"),
-		});
-		Salvage.addSalvage(BlockListMF.rack_wood, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood", 7), new ItemStack(ComponentListMF.nail, 2));
-		
-		KnowledgeListMF.ammoboxR = 
-		MineFantasyAPI.addCarpenterRecipe(construction, new ItemStack(BlockListMF.ammo_box_basic), "ammo_box", nailHammer, "hammer", 1, 100 , new Object[]
-		{
-			"NNN",
-			"P P",
-			"PPP",
-			'N', ComponentListMF.nail,
-			'P', ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"),
-		});
-		Salvage.addSalvage(BlockListMF.ammo_box_basic, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood", 5), new ItemStack(ComponentListMF.nail, 3));
-		
-		
 		MineFantasyAPI.addCarpenterRecipe(construction, new ItemStack(BlockListMF.refined_planks), "paint_brush", sewing, "brush", -1, 3 , new Object[]
 		{
 			"O",
@@ -817,6 +792,8 @@ public class CarpenterRecipes
 			"T",
 			"S",
 			"M",
+			"P",
+			'P', ComponentListMF.clay_pot,
 			'T', FoodListMF.salt,
 			'S', FoodListMF.sugarpot,
 			'M', FoodListMF.jug_milk,
@@ -1345,6 +1322,17 @@ public class CarpenterRecipes
 		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 0, 1), ComponentListMF.hideLarge, Blocks.wool);
 		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 0, 2), ComponentListMF.hideMedium, Blocks.wool);
 		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 0, 3), ComponentListMF.hideSmall, Blocks.wool);
+		
+		KnowledgeListMF.bedrollR = 
+		MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ToolListMF.bedroll), "", sewing, "needle", -1, 50, new Object[]
+		{
+			"TLT",
+			"CCC",
+			'C', Blocks.wool,
+			'T', ComponentListMF.thread,
+			'L', Items.leather
+		});
+		Salvage.addSalvage(ToolListMF.bedroll, new ItemStack(Blocks.wool, 3), Items.leather, new ItemStack(ComponentListMF.thread, 3));
 	}
 	public static void addCrossbows()
 	{

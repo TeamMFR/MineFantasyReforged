@@ -384,7 +384,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 
 	@Override
 	public float getOffsetY(ItemStack itemstack) {
-		return 0;
+		return 5F/16F;
 	}
 
 	@Override

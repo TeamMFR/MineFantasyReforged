@@ -51,11 +51,6 @@ public class ItemJug extends ItemComponentMF
 	@Override
 	public ItemStack onEaten(ItemStack item, World world, EntityPlayer user)
     {
-        if (!user.capabilities.isCreativeMode)
-        {
-            --item.stackSize;
-        }
-
         if (!world.isRemote)
         {
         	if(type.equalsIgnoreCase("milk"))
@@ -67,8 +62,21 @@ public class ItemJug extends ItemComponentMF
         		StaminaBar.modifyStaminaValue(user, 10);
         	}
         }
+        ItemStack container = getContainerItem(item);
+        if(item.stackSize > 1)
+        {
+        	if (!user.capabilities.isCreativeMode)
+            {
+                --item.stackSize;
+            }
+        	if(!user.inventory.addItemStackToInventory(container))
+        	{
+        		user.entityDropItem(container, 0F);
+        	}
+        	return item;
+        }
 
-        return item.stackSize <= 0 ? getContainerItem(item) : item;
+        return container;
     }
 
     private void curePotionEffects(EntityPlayer user) 

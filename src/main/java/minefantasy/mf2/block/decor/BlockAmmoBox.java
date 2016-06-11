@@ -1,19 +1,17 @@
 package minefantasy.mf2.block.decor;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minefantasy.mf2.block.tileentity.TileEntityQuern;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
+import minefantasy.mf2.block.tileentity.decor.TileEntityWoodDecor;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -23,23 +21,37 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockAmmoBox extends BlockContainer 
+public class BlockAmmoBox extends BlockWoodDecor 
 {
 	public static int ammo_RI = 116;
-	public int capacity = 128;
+	/**
+	 * Food-Ammo-All
+	 */
+	public final byte storageType;
 	public String name;
-	public BlockAmmoBox(String name, Material material, int capacity) 
+	
+	public BlockAmmoBox(String name, byte storageType) 
 	{
-		super(material);
-		this.capacity = capacity;
-		float border = 1F/8F;
-		this.setBlockBounds(border, border, 0F, 1-border, 0.5F, 1-border);
+		this(name, name, storageType);
+	}
+	/**
+	 * @param storageType (Food, Ammo, All)
+	 */
+	public BlockAmmoBox(String name, String texName, byte storageType) 
+	{
+		super(texName);
+		this.storageType = storageType;
+		float width =  (storageType == 0 ? 8F : storageType == 1 ? 14F : 16F) / 16F;
+		float height = (storageType == 0 ? 4F : storageType == 1 ? 8F  : 9F ) / 16F;
+		
+		float border = (1F-width)/2;
+		this.setBlockBounds(border, 0F, border, 1-border, height, 1-border);
 		
 		this.name=name;
-		GameRegistry.registerBlock(this, "MF_AmmoBox_"+name);
-		setBlockName("ammo_box_"+name);
-		this.setHardness(1F);
-		this.setResistance(0.5F);
+		GameRegistry.registerBlock(this, ItemBlockAmmoBox.class, name);
+		setBlockName(name);
+		this.setHardness(0.5F);
+		this.setResistance(2F);
         this.setCreativeTab(CreativeTabMF.tabUtil);
 	}
 	
@@ -69,12 +81,23 @@ public class BlockAmmoBox extends BlockContainer
     {
     	return ammo_RI;
     }
+    public static final String NBT_Ammo = "Ammo", NBT_Stock = "Stock";
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase user, ItemStack item)
     {
         int direction = MathHelper.floor_double((double)(user.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
         world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+        
+        TileEntityAmmoBox tile = getTile(world, x, y, z);
+        if(tile != null)
+        {
+			if(item.hasTagCompound() && item.getTagCompound().hasKey(NBT_Ammo) && item.getTagCompound().hasKey(NBT_Stock))
+		    {
+		    	tile.ammo = ItemStack.loadItemStackFromNBT(item.getTagCompound().getCompoundTag(NBT_Ammo));
+		    	tile.stock = item.getTagCompound().getInteger(NBT_Stock);
+		    }
+        }
+        super.onBlockPlacedBy(world, x, y, z, user, item);
     }
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
@@ -93,51 +116,40 @@ public class BlockAmmoBox extends BlockContainer
 		return false;
     }
 	private Random rand = new Random();
+	
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block, int meta)
+	public ArrayList<ItemStack> getDrops(World world, int x, int y, int z, int metadata, int fortune)
     {
-		TileEntityAmmoBox tile = getTile(world, x, y, z);
-
-        if (tile != null && tile.ammo != null)
-        {
-            ItemStack itemstack = tile.ammo;
-
-            if (itemstack != null)
-            {
-                float f = this.rand .nextFloat() * 0.8F + 0.1F;
-                float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-                float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-                while (tile.stock > 0)
-                {
-                    int j1 = this.rand.nextInt(10) + 8;
-
-                    if (j1 > tile.stock)
-                    {
-                        j1 = tile.stock;
-                    }
-
-                    tile.stock -= j1;
-                    EntityItem entityitem = new EntityItem(world, x + f, y + f1, z + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-                    if (itemstack.hasTagCompound())
-                    {
-                        entityitem.getEntityItem().setTagCompound((NBTTagCompound)itemstack.getTagCompound().copy());
-                    }
-
-                    float f3 = 0.05F;
-                    entityitem.motionX = (float)this.rand.nextGaussian() * f3;
-                    entityitem.motionY = (float)this.rand.nextGaussian() * f3 + 0.2F;
-                    entityitem.motionZ = (float)this.rand.nextGaussian() * f3;
-                    world.spawnEntityInWorld(entityitem);
-                }
-            }
-
-            world.func_147453_f(x, y, z, block);
-        }
-
-        super.breakBlock(world, x, y, z, block, meta);
+        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
+        return ret;
     }
+	
+	@Override
+	protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) 
+	{
+		return modifyAmmo((TileEntityAmmoBox)tile, super.modifyDrop(tile, item));
+	}
+
+	private ItemStack modifyAmmo(TileEntityAmmoBox tile, ItemStack item)
+	{
+		if(tile != null && item != null)
+		{
+			if(tile.ammo != null)
+			{
+				NBTTagCompound nbt = new NBTTagCompound();
+				if(!item.hasTagCompound())
+				{
+					item.setTagCompound(new NBTTagCompound());
+				}
+				tile.ammo.writeToNBT(nbt);
+				
+				MFLogUtil.logDebug("Added Drop: " + tile.ammo.getDisplayName() + " x" + tile.stock);
+				item.getTagCompound().setTag(NBT_Ammo, nbt);
+				item.getTagCompound().setInteger(NBT_Stock, tile.stock);
+			}
+		}
+		return item;
+	}
 
 	private TileEntityAmmoBox getTile(World world, int x, int y, int z) 
 	{

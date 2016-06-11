@@ -102,13 +102,14 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
         
         ArrowLooseEvent event = new ArrowLooseEvent(player, item, power);
         MinecraftForge.EVENT_BUS.post(event);
+        
         if (event.isCanceled())
         {
             return;
         }
+        boolean var5 = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, item) > 0;
         power = event.charge;
         
-        boolean var5 = player.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, item) > 0;
 
         if (var5 || player.inventory.hasItem(Items.arrow))
         {

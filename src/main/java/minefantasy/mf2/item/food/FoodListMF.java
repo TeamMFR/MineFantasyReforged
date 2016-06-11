@@ -37,6 +37,7 @@ public class FoodListMF
 	public static Item breadSlice = (new ItemFoodMF("breadslice", 2, 1.0F, false));
 	
 	public static Item curds = new ItemUnfinishedFood("curds");
+	public static Item cheese_pot = new ItemUnfinishedFood("cheese_pot").setContainerItem(ComponentListMF.clay_pot);
 	public static Item cheese_slice = (new ItemFoodMF("cheese_slice",       4, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F));
 	
 	//T1 (basic mixing)

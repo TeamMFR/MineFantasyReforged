@@ -1,7 +1,7 @@
 package minefantasy.mf2.item.list;
 
-import minefantasy.mf2.api.crafting.exotic.SpecialForging;
 import minefantasy.mf2.api.rpg.SkillList;
+import minefantasy.mf2.block.decor.ItemBedMF;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.item.ItemBandage;
@@ -10,10 +10,6 @@ import minefantasy.mf2.item.ItemResearchBook;
 import minefantasy.mf2.item.ItemResearchScroll;
 import minefantasy.mf2.item.ItemSkillBook;
 import minefantasy.mf2.item.ItemSpecialKnowledge;
-import minefantasy.mf2.item.archery.ArrowType;
-import minefantasy.mf2.item.archery.EnumBowType;
-import minefantasy.mf2.item.archery.ItemArrowMF;
-import minefantasy.mf2.item.archery.ItemBowMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.gadget.ItemBomb;
 import minefantasy.mf2.item.gadget.ItemClimbingPick;
@@ -30,36 +26,18 @@ import minefantasy.mf2.item.tool.ItemAxeMF;
 import minefantasy.mf2.item.tool.ItemHoeMF;
 import minefantasy.mf2.item.tool.ItemLighterMF;
 import minefantasy.mf2.item.tool.ItemPickMF;
-import minefantasy.mf2.item.tool.ItemShearsMF;
 import minefantasy.mf2.item.tool.ItemSpadeMF;
-import minefantasy.mf2.item.tool.advanced.ItemHandpick;
-import minefantasy.mf2.item.tool.advanced.ItemHvyPick;
-import minefantasy.mf2.item.tool.advanced.ItemHvyShovel;
-import minefantasy.mf2.item.tool.advanced.ItemMattock;
-import minefantasy.mf2.item.tool.advanced.ItemScythe;
-import minefantasy.mf2.item.tool.advanced.ItemTrowMF;
-import minefantasy.mf2.item.tool.crafting.ItemBasicCraftTool;
 import minefantasy.mf2.item.tool.crafting.ItemEAnvilTools;
 import minefantasy.mf2.item.tool.crafting.ItemEngineerTool;
 import minefantasy.mf2.item.tool.crafting.ItemHammer;
 import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
 import minefantasy.mf2.item.tool.crafting.ItemNeedle;
 import minefantasy.mf2.item.tool.crafting.ItemPaintBrush;
-import minefantasy.mf2.item.tool.crafting.ItemSaw;
 import minefantasy.mf2.item.tool.crafting.ItemTongs;
-import minefantasy.mf2.item.weapon.ItemBattleaxeMF;
-import minefantasy.mf2.item.weapon.ItemDagger;
-import minefantasy.mf2.item.weapon.ItemGreatswordMF;
-import minefantasy.mf2.item.weapon.ItemHalbeardMF;
-import minefantasy.mf2.item.weapon.ItemHeavyWeaponMF;
-import minefantasy.mf2.item.weapon.ItemKatanaMF;
-import minefantasy.mf2.item.weapon.ItemLance;
 import minefantasy.mf2.item.weapon.ItemMaceMF;
 import minefantasy.mf2.item.weapon.ItemSpearMF;
 import minefantasy.mf2.item.weapon.ItemSwordMF;
 import minefantasy.mf2.item.weapon.ItemWaraxeMF;
-import minefantasy.mf2.item.weapon.ItemWarhammerMF;
-import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
@@ -230,7 +208,7 @@ public class ToolListMF
 	public static Item exploding_bolt = new ItemExplodingBolt();
 	public static Item paint_brush = new ItemPaintBrush("paint_brush", 256);
 	
-	
+	public static Item bedroll = new ItemBedMF("bedroll");
 	public static void load() 
 	{
 		if(ConfigHardcore.HCCWeakItems)

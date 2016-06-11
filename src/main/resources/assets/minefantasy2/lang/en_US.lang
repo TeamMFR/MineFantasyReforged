@@ -719,8 +719,14 @@ tile.firepit.name=Firepit
 tile.food_roast_basic.name=Cooking Plate
 tile.food_oven_basic.name=Stone Oven
 
-tile.rack_wood.name=Tool Rack
-tile.ammo_box_basic.name=Ammunition Box
+tile.rack_wood.name=%1$s Tool Rack
+tile.food_box_basic.name=%1$s Food Box
+tile.ammo_box_basic.name=%1$s Ammunition Box
+tile.crate_basic.name=%1$s Crate
+attribute.box.capacity.name=Capacity: %1$s Stacks
+
+item.bedroll.name=Bedroll
+tile.bedroll.name=Bedroll
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /TABS/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1854,6 +1860,7 @@ item.salad.name=Salad
 item.oats.name=Oats
 
 item.curds.name=Curds
+item.cheese_pot.name=Cheese Pot
 
 item.jerky.name=Jerky
 item.cheese_roll.name=Cheese Roll
@@ -1944,6 +1951,12 @@ food.stat.staminabuffRegenMinutes.name=Regen %1$s stamina/second for %2$s mins
 food.stat.staminabuffRegenSeconds.name=Regen %1$s stamina/second for %2$s secs
 food.stat.cure.poison=Cure Poison
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/CONSTRUCTION/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.hinge.name=Hinge
+item.commodity_plank_cut.name=Cut %1$s Timber
+item.commodity_plank_pane.name=%1$s Timber Pane
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /RPG/
@@ -2032,7 +2045,7 @@ knowledge.red_dragon.1=The most common form, red dragons have the capability of 
 knowledge.mob.blue_dragon.name=Frost Dragon
 knowledge.blue_dragon.1=With homes in the colder regions, Frost dragons get their name from the icy winds they are able to breathe out, freezing their foes. The frost dragon isn't seen as destructive or fearsome as their cousins, but are still deadly.
 knowledge.mob.green_dragon.name=Green Dragon
-knowledge.green_dragon.1=Only found deep in marshlands, green dragons have a disgusting nature, spreading decay where they go. These dragons are able to release a strong acid upon their foes, damaging equipment. These dragons take to the skies more often, returning with a devistating acid cloud.
+knowledge.green_dragon.1=Green dragons, also known as "Venom Dragons" have a filthy, gruesome nature. They fly mainly in swampland, but can also come out in the rain. Green dragons emit a deadly acid from their breath, decaying armour and poisoning their victim.
 
 knowledge.gettingStarted=Getting Started
 knowledge.gettingStarted.desc=From the ground-up
@@ -2609,6 +2622,10 @@ knowledge.refined_planks=Refined Planks
 knowledge.refined_planks.desc=Structually stable
 knowledge.refined_planks.1=Refined planks are both strong and resistent to weathering and should prove a decent building material. By nailing some of these together, you can make a block for building. This block cannot be taken apart.^You can also make this out of normal planks.
 
+knowledge.constructionPts=Construction Parts
+knowledge.constructionPts.desc=Prepared Woods
+knowledge.constructionPts.1=Wood must be cut and shaped in many ways before being workable, here are a few shapes and sizes required for construction.^A lot of timber goes in to creating proper furnishings, as well as metal for fittings and nails.
+
 knowledge.reinforced_stone=Reinforced Stone
 knowledge.reinforced_stone.desc=Heavy Duty
 knowledge.reinforced_stone.1=Stone is a useful material being strong, non-flammable and resists explosions. You can however, increase the capabilities of stone by melting some obsidian and kaolinite with it.^You will not need an ingot mould to retrieve this from the crucible.
@@ -2647,9 +2664,22 @@ knowledge.tool_rack.desc=Store your hardware
 knowledge.tool_rack.1=There are a lot of tools that may be needed and only so much space to hold them. Tool racks can be used to place items for easy access.^Right-click the block to place or with empty hands to remove tools.^Heavy weapons need at second rack below to fit, and polearms need an additional rack above.
 knowledge.tool_rack.rules=*Heavy weapons require a rack below them.^*Polearms require above and below.^*Full-size crossbows count as heavy weapons.^*Crossbows cannot be placed on edge hooks.
 
+knowledge.bed_roll=Bedroll
+knowledge.bed_roll.desc=Sleeping out
+knowledge.bed_roll.1=When in the wilderness, you sometimes need to sleep where you'd rather not live. Bedrolls allow sleeping without resetting spawn points.
+
+knowledge.food_box=Food Box
+knowledge.food_box.desc=Food storage
+knowledge.food_box.1=Food should be kept on easy access for when its needed. Food boxes allow food items to be stored multiple times their own stack size. Right-clicking can place a food item and retrieve with empty hands.
+
 knowledge.ammo_box=Ammo Box
 knowledge.ammo_box.desc=Munitions storage
 knowledge.ammo_box.1=Ammunition is always needed and must be kept easy-access for when it's used. Ammunition boxes allow up to 8x the normal stack size of arrows, bolts, bombs or mines to be kept in a crate. Right-click to place items, empty hands retrieves a stack, clicking an appropriate firearm (bow/crossbow) can load the weapon.
+knowledge.ammo_box.2=Upon breaking, the stored items are still kept, ready for placement allowing easy carrying of storage.
+
+knowledge.big_box=Storage Crate
+knowledge.big_box.desc=Store anything
+knowledge.big_box.1=For either storage or shipment of bulk material, these crates allow anything to be placed inside them, these can hold one item at a multiple of their stack size.
 
 knowledge.generic_meat=Generic Meat
 knowledge.generic_meat.desc=Good for any recipe

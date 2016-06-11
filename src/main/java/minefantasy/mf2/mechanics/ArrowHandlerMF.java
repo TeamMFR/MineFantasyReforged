@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
+import cpw.mods.fml.common.eventhandler.Event.Result;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent.ItemPickupEvent;
@@ -26,13 +27,18 @@ public class ArrowHandlerMF
 	@SubscribeEvent
 	public void readyBow(ArrowNockEvent event)
 	{
-		if(AmmoMechanicsMF.arrows == null || AmmoMechanicsMF.arrows.size() <= 0)
-		{
-			return;
-		}
-		
 		EntityPlayer user = event.entityPlayer;
 		ItemStack bow = event.result;
+		
+		if(AmmoMechanicsMF.arrows == null || AmmoMechanicsMF.arrows.size() <= 0)
+		{
+			if(getIsInfinite(event.entityPlayer, event.result))
+			{
+				user.setItemInUse(bow, bow.getMaxItemUseDuration());//Starts pullback
+				event.setCanceled(true);
+			}
+			return;
+		}
 		
 		/*Checks over registered arrows and finds one to load
 		* The Quiver can be used to determine this
@@ -44,6 +50,15 @@ public class ArrowHandlerMF
 			loadArrow(user, bow, arrowToFire);//adds the arrow to NBT for rendering and later use
 			event.setCanceled(true);
 			return;
+		}
+		else
+		{
+			if(getIsInfinite(event.entityPlayer, event.result))
+			{
+				user.setItemInUse(bow, bow.getMaxItemUseDuration());//Starts pullback
+				event.setCanceled(true);
+				return;
+			}
 		}
 		/*
 		for(int a = 0; a < AmmoMechanicsMF.arrows.size(); a ++)
@@ -116,7 +131,7 @@ public class ArrowHandlerMF
 		
 		ItemStack bow = event.bow;
 		World world = event.entity.worldObj;
-		boolean infinite = getIsInfinite(user, bow);
+		boolean creative = user.capabilities.isCreativeMode;
 		
 		float charge = power / 20.0F;
         charge = (charge * charge + charge * 2.0F) / 3.0F;
@@ -144,16 +159,12 @@ public class ArrowHandlerMF
 			for(int a = 0; a < AmmoMechanicsMF.handlers.size(); a ++)
 			{
 				//If the Arrow handler succeeds at firing an arrow
-				if(AmmoMechanicsMF.handlers.get(a).onFireArrow(world, arrow, bow, user, charge, infinite))
+				if(AmmoMechanicsMF.handlers.get(a).onFireArrow(world, arrow, bow, user, charge, creative))
 				{
 					if(!user.capabilities.isCreativeMode)
 		            {
 		            	bow.damageItem(1, user);
 		            }
-					if(!infinite)
-					{
-						consumePlayerItem(user, arrow);
-					}
 					world.playSoundAtEntity(user, "minefantasy2:weapon.bowFire", 0.5F, 1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
 					loadArrow(user, bow, null);
 					event.setCanceled(true);

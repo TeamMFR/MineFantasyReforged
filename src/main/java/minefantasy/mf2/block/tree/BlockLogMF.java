@@ -85,4 +85,9 @@ public class BlockLogMF extends BlockLog
 	        world.spawnEntityInWorld(entityitem);
     	}
     }
+    @Override
+    public int damageDropped(int meta)
+    {
+        return 0;
+    }
 }

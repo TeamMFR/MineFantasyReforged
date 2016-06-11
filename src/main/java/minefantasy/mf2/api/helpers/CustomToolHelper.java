@@ -22,7 +22,7 @@ public class CustomToolHelper
 	/**
 	 * A bit of the new system, gets custom materials for the head
 	 */
-	public static CustomMaterial getCustomMetalMaterial(ItemStack item)
+	public static CustomMaterial getCustomPrimaryMaterial(ItemStack item)
 	{
 		if(item == null)return null;
 		
@@ -33,7 +33,7 @@ public class CustomToolHelper
 		}
 		return null;
 	}
-	public static CustomMaterial getCustomWoodMaterial(ItemStack item)
+	public static CustomMaterial getCustomSecondaryMaterial(ItemStack item)
 	{
 		if(item == null)return null;
 		
@@ -106,15 +106,15 @@ public class CustomToolHelper
 	 */
 	public static int getMaxDamage(ItemStack stack, int dura)
 	{
-		CustomMaterial head = getCustomMetalMaterial(stack);
-		CustomMaterial haft = getCustomWoodMaterial(stack);
+		CustomMaterial head = getCustomPrimaryMaterial(stack);
+		CustomMaterial haft = getCustomSecondaryMaterial(stack);
 		if(head != null)
 		{
-			dura = (int)(head.durability * 200);
+			dura = (int)(head.durability * 100);
 		}
 		if(haft != null)
 		{
-			dura += (int)(haft.durability * 50);//Hafts add a 1/5th to the durability
+			dura += (int)(haft.durability * 100);//Hafts add 50% to the durability
 		}
 		return ToolHelper.setDuraOnQuality(stack, dura);
 	}
@@ -149,8 +149,8 @@ public class CustomToolHelper
 	
 	public static float getWeightModifier(ItemStack item, float base)
 	{
-		CustomMaterial metal = getCustomMetalMaterial(item);
-		CustomMaterial wood = getCustomWoodMaterial(item);
+		CustomMaterial metal = getCustomPrimaryMaterial(item);
+		CustomMaterial wood = getCustomSecondaryMaterial(item);
 		
     	if(metal != null)
     	{
@@ -169,7 +169,7 @@ public class CustomToolHelper
 	 */
 	public static float getMeleeDamage(ItemStack item, float defaultModifier) 
     {
-    	CustomMaterial custom = getCustomMetalMaterial(item);
+    	CustomMaterial custom = getCustomPrimaryMaterial(item);
     	if(custom != null)
     	{
     		return custom.sharpness;
@@ -178,8 +178,8 @@ public class CustomToolHelper
 	}
 	public static float getBowDamage(ItemStack item, float defaultModifier) 
     {
-		CustomMaterial base = getCustomWoodMaterial(item);
-		CustomMaterial joints = getCustomMetalMaterial(item);
+		CustomMaterial base = getCustomSecondaryMaterial(item);
+		CustomMaterial joints = getCustomPrimaryMaterial(item);
 		
     	if(base != null)
     	{
@@ -196,7 +196,7 @@ public class CustomToolHelper
 	 */
 	public static float getBaseDamages(ItemStack item, float defaultModifier)
 	{
-		CustomMaterial custom = getCustomMetalMaterial(item);
+		CustomMaterial custom = getCustomPrimaryMaterial(item);
     	if(custom != null)
     	{
     		return getBaseDamage(custom.sharpness*custom.flexibility);
@@ -213,7 +213,7 @@ public class CustomToolHelper
 	
 	public static float getEfficiencyForHds(ItemStack item, float value, float mod) 
     {
-    	CustomMaterial custom = getCustomMetalMaterial(item);
+    	CustomMaterial custom = getCustomPrimaryMaterial(item);
     	if(custom != null)
     	{
     		value = 2.0F + (custom.hardness*4F);//Efficiency starts at 2 and each point of sharpness adds 2
@@ -223,7 +223,7 @@ public class CustomToolHelper
 	
 	public static float getEfficiency(ItemStack item, float value, float mod) 
     {
-    	CustomMaterial custom = getCustomMetalMaterial(item);
+    	CustomMaterial custom = getCustomPrimaryMaterial(item);
     	if(custom != null)
     	{
     		value = 2.0F + (custom.sharpness*2F);//Efficiency starts at 2 and each point of sharpness adds 2
@@ -233,7 +233,7 @@ public class CustomToolHelper
 	
 	public static int getCrafterTier(ItemStack item, int value) 
     {
-    	CustomMaterial custom = getCustomMetalMaterial(item);
+    	CustomMaterial custom = getCustomPrimaryMaterial(item);
     	if(custom != null)
     	{
     		return custom.crafterTier;
@@ -248,7 +248,7 @@ public class CustomToolHelper
     		return value;//If its not effective
     	}
 		
-    	CustomMaterial custom = getCustomMetalMaterial(item);
+    	CustomMaterial custom = getCustomPrimaryMaterial(item);
     	if(custom != null)
     	{
     		if(custom.tier == 0)return 1;
@@ -261,11 +261,11 @@ public class CustomToolHelper
 	@SideOnly(Side.CLIENT)
 	public static void addInformation(ItemStack item, List list) 
 	{
-		CustomMaterial haft = getCustomWoodMaterial(item);
+		CustomMaterial haft = getCustomSecondaryMaterial(item);
 		
 		if(materialOnTooltip())
 		{
-			CustomMaterial main = getCustomMetalMaterial(item);
+			CustomMaterial main = getCustomPrimaryMaterial(item);
 			if(main != null)
 			{
 				String matName = StatCollector.translateToLocal(StatCollector.translateToLocal("material."+main.name.toLowerCase() + ".name"));
@@ -294,7 +294,7 @@ public class CustomToolHelper
 	public static void addBowInformation(ItemStack item, List list) 
 	{
 		
-		CustomMaterial metals = getCustomMetalMaterial(item);
+		CustomMaterial metals = getCustomPrimaryMaterial(item);
     	if(metals != null)
     	{
     		String matName = StatCollector.translateToLocalFormatted("item.mod_joint.name", StatCollector.translateToLocal("material."+metals.name.toLowerCase() + ".name"));
@@ -310,7 +310,7 @@ public class CustomToolHelper
     		StatCollector.translateToLocal(unlocalName);
     	}
 		
-		CustomMaterial base = getCustomWoodMaterial(item);
+		CustomMaterial base = getCustomSecondaryMaterial(item);
 		String name = "any";
     	if(base != null)
     	{
@@ -326,7 +326,7 @@ public class CustomToolHelper
     		StatCollector.translateToLocal(unlocalName);
     	}
 		
-		CustomMaterial base = getCustomMetalMaterial(item);
+		CustomMaterial base = getCustomPrimaryMaterial(item);
 		String name = "any";
     	if(base != null)
     	{
@@ -343,8 +343,8 @@ public class CustomToolHelper
 	}
 	public static boolean doesMainMatchForRecipe(ItemStack recipeItem, ItemStack inputItem) 
 	{
-		CustomMaterial recipeMat = CustomToolHelper.getCustomMetalMaterial(recipeItem);
-        CustomMaterial inputMat = CustomToolHelper.getCustomMetalMaterial(inputItem);
+		CustomMaterial recipeMat = CustomToolHelper.getCustomPrimaryMaterial(recipeItem);
+        CustomMaterial inputMat = CustomToolHelper.getCustomPrimaryMaterial(inputItem);
         
         if(recipeMat == null)
         {
@@ -363,8 +363,8 @@ public class CustomToolHelper
 	}
 	public static boolean doesHaftMatchForRecipe(ItemStack recipeItem, ItemStack inputItem) 
 	{
-		CustomMaterial recipeMat = CustomToolHelper.getCustomWoodMaterial(recipeItem);
-        CustomMaterial inputMat = CustomToolHelper.getCustomWoodMaterial(inputItem);
+		CustomMaterial recipeMat = CustomToolHelper.getCustomSecondaryMaterial(recipeItem);
+        CustomMaterial inputMat = CustomToolHelper.getCustomSecondaryMaterial(inputItem);
         
         if(recipeMat == null)
         {
@@ -383,9 +383,13 @@ public class CustomToolHelper
 	}
 	public static void addComponentString(ItemStack tool, List list, CustomMaterial base) 
 	{
+		addComponentString(tool, list, base, 1);
+	}
+	public static void addComponentString(ItemStack tool, List list, CustomMaterial base, float units) 
+	{
     	if(base != null)
     	{
-    		float mass = base.density;
+    		float mass = base.density * units;
     		list.add(EnumChatFormatting.GOLD + base.getMaterialString());
     		list.add(CustomMaterial.getWeightString(mass));
     		
@@ -421,8 +425,8 @@ public class CustomToolHelper
 	{
 		String reference = item.getUnlocalizedName().toLowerCase() + "_@" + dam;
 		
-		CustomMaterial base = getCustomMetalMaterial(item);
-		CustomMaterial haft = getCustomWoodMaterial(item);
+		CustomMaterial base = getCustomPrimaryMaterial(item);
+		CustomMaterial haft = getCustomSecondaryMaterial(item);
 		
 		if(base != null)
 		{
@@ -437,10 +441,10 @@ public class CustomToolHelper
 	}
 	public static boolean areToolsSame(ItemStack item1, ItemStack item2) 
 	{
-		CustomMaterial main1 = getCustomMetalMaterial(item1);
-		CustomMaterial main2 = getCustomWoodMaterial(item2);
-		CustomMaterial haft1 = getCustomMetalMaterial(item1);
-		CustomMaterial haft2 = getCustomWoodMaterial(item2);
+		CustomMaterial main1 = getCustomPrimaryMaterial(item1);
+		CustomMaterial main2 = getCustomSecondaryMaterial(item2);
+		CustomMaterial haft1 = getCustomPrimaryMaterial(item1);
+		CustomMaterial haft2 = getCustomSecondaryMaterial(item2);
 		if((main1 == null && main2 != null) || (main2 == null && main1 != null))return false;
 		if((haft1 == null && haft2 != null) || (haft2 == null && haft1 != null))return false;
 		
@@ -451,8 +455,8 @@ public class CustomToolHelper
 	}
 	public static boolean isMythic(ItemStack result)
 	{
-		CustomMaterial main1 = getCustomMetalMaterial(result);
-		CustomMaterial haft1 = getCustomMetalMaterial(result);
+		CustomMaterial main1 = getCustomPrimaryMaterial(result);
+		CustomMaterial haft1 = getCustomPrimaryMaterial(result);
 		 if(main1 != null && main1.isUnbrekable())
 		 {
 			 return true;
@@ -470,8 +474,8 @@ public class CustomToolHelper
 		packet.writeInt(stack != null ? stack.getItemDamage() : 0);
 		packet.writeInt( (stack != null && stack.isItemEnchanted()) ? 1 : 0);
 		
-		CustomMaterial main1 = getCustomMetalMaterial(stack);
-		CustomMaterial haft1 = getCustomWoodMaterial(stack);
+		CustomMaterial main1 = getCustomPrimaryMaterial(stack);
+		CustomMaterial haft1 = getCustomSecondaryMaterial(stack);
 		
 		ByteBufUtils.writeUTF8String(packet, main1 != null ? main1.name : "null");
 		ByteBufUtils.writeUTF8String(packet, haft1 != null ? haft1.name : "null");

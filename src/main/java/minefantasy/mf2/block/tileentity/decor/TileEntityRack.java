@@ -4,9 +4,6 @@ import java.util.List;
 
 import minefantasy.mf2.api.helpers.BlockPositionHelper;
 import minefantasy.mf2.api.weapon.IRackItem;
-import minefantasy.mf2.item.gadget.ItemBomb;
-import minefantasy.mf2.item.gadget.ItemCrossbow;
-import minefantasy.mf2.item.gadget.ItemMine;
 import minefantasy.mf2.network.packet.TileInventoryPacket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class TileEntityRack extends TileEntity
+public class TileEntityRack extends TileEntityWoodDecor
     implements IInventory
 {
     private ItemStack inv[];
@@ -28,6 +25,7 @@ public class TileEntityRack extends TileEntity
 
     public TileEntityRack()
     {
+    	super("rack_wood");
         inv = new ItemStack[4];
     }
     @Override
@@ -141,6 +139,7 @@ public class TileEntityRack extends TileEntity
     		{
     			EntityPlayer player = players.get(i);
     			((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new TileInventoryPacket(this, this).generatePacket());
+    			super.sendPacketToClient(player);
     		}
     	}
 	}
@@ -268,5 +267,4 @@ public class TileEntityRack extends TileEntity
 			}
 		}
 	}
-
 }

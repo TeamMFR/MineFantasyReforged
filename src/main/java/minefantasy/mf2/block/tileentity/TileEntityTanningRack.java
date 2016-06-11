@@ -108,16 +108,6 @@ public class TileEntityTanningRack extends TileEntity implements IInventory
 				if(efficiency > 0)
 				{
 					progress += efficiency;
-					if(items[0] != null && items[0].stackSize > 1)
-					{
-						ItemStack item = items[0].copy();
-						item.stackSize --;
-						items[0].stackSize = 1;
-						if(player == null || !player.inventory.addItemStackToInventory(item))
-						{
-							player.entityDropItem(item, 0F);
-						}
-					}
 				}
 				if(toolType.equalsIgnoreCase("shears"))
 				{
@@ -134,7 +124,10 @@ public class TileEntityTanningRack extends TileEntity implements IInventory
 						SkillList.artisanry.addXP(player, 1);
 					}
 					progress = 0;
-					setInventorySlotContents(0, items[1].copy());
+					int ss = items[0] != null ? items[0].stackSize : 1;
+					ItemStack out = items[1].copy();
+					out.stackSize *= ss;
+					setInventorySlotContents(0, out);
 					updateRecipe();
 					if(isShabbyRack() && rand.nextInt(10) == 0 && !worldObj.isRemote)
 					{

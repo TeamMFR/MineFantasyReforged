@@ -6,41 +6,45 @@ import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IAmmo;
 import minefantasy.mf2.api.archery.IFirearm;
 import minefantasy.mf2.api.crafting.IBasicMetre;
+import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.api.tool.IStorageBlock;
+import minefantasy.mf2.block.decor.BlockAmmoBox;
 import minefantasy.mf2.network.packet.AmmoBoxPacket;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
-public class TileEntityAmmoBox extends TileEntity implements IBasicMetre
+public class TileEntityAmmoBox extends TileEntityWoodDecor implements IBasicMetre
 {
-	public int maxStack = 8;
 	public int angle, stock;
 	public ItemStack ammo;
-	private String tex;
+	private byte storageSize = -1;
 	
 	public TileEntityAmmoBox()
 	{
-		this("basic");
+		super("ammo_box_basic", CustomMaterial.getMaterial("RefinedWood"));
 	}
-	public TileEntityAmmoBox(String tex)
+	public TileEntityAmmoBox(String tex, CustomMaterial material, byte size)
 	{
-		this.tex = tex;
+		super(tex, material);
+		this.storageSize = size;
 	}
 	
 	public boolean interact(EntityPlayer user, ItemStack held) 
 	{
 		if(held != null)
 		{
-			if(ammo != null && held.getItem() instanceof IFirearm && loadGun(held))
+			if(this.getStorageType() == 1 && ammo != null && held.getItem() instanceof IFirearm && loadGun(held))
 			{
 				open();
 				syncData();
 				return true;
 			}
-			if(held.getItem() instanceof IAmmo)
+			if(canAcceptItem(held))
 			{
-				int max = this.getMaxAmmo(ammo != null ? ammo : held, (IAmmo)held.getItem());
+				int max = this.getMaxAmmo(ammo != null ? ammo : held);
 				if(ammo == null)
 				{
 					open();
@@ -66,6 +70,16 @@ public class TileEntityAmmoBox extends TileEntity implements IBasicMetre
 		}
 		syncData();
 		return false;
+	}
+	private boolean canAcceptItem(ItemStack held) 
+	{
+		if(held.getItem() instanceof IStorageBlock)
+		{
+			return false;
+		}
+		byte type = this.getStorageType();
+		
+		return type == 0 ? held.getItem() instanceof ItemFood : type == 1 ? held.getItem() instanceof IAmmo : type == 2;
 	}
 	private boolean loadGun(ItemStack held) 
 	{
@@ -129,8 +143,9 @@ public class TileEntityAmmoBox extends TileEntity implements IBasicMetre
 		ItemStack taken = ammo.copy();
 		if(ss > taken.getMaxStackSize())
 		{
-			ss = taken.stackSize = taken.getMaxStackSize();
+			ss = taken.getMaxStackSize();
 		}
+		taken.stackSize = ss;
 		stock -= ss;
 		user.setCurrentItemOrArmor(0, taken);
 		if(stock <= 0)
@@ -207,19 +222,12 @@ public class TileEntityAmmoBox extends TileEntity implements IBasicMetre
 		{
 			EntityPlayer player = players.get(i);
 			((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new AmmoBoxPacket(this).generatePacket());
+			super.sendPacketToClient(player);
 		}
 	}
 	public int getMaxAmmo(ItemStack ammo)
 	{
-		if(ammo.getItem() instanceof IAmmo)
-		{
-			return getMaxAmmo(ammo, (IAmmo)ammo.getItem());
-		}
-		return getMaxAmmo(ammo, (IAmmo)null);
-	}
-	public int getMaxAmmo(ItemStack item, IAmmo ammo)
-	{
-		return item.getMaxStackSize() * maxStack;
+		return ammo.getMaxStackSize() * getCapacity(getMaterial().tier);
 	}
 	@Override
 	public int getMetreScale(int size)
@@ -243,9 +251,7 @@ public class TileEntityAmmoBox extends TileEntity implements IBasicMetre
 		}
 		return "";
 	}
-	public String getTexName() {
-		return tex;
-	}
+	
 	private boolean areItemStacksEqual(ItemStack i1, ItemStack i2) 
 	{
 		if(i1 == null || i2 == null)return false;
@@ -259,5 +265,18 @@ public class TileEntityAmmoBox extends TileEntity implements IBasicMetre
 			return ((IAmmo)ammo.getItem()).getAmmoType(ammo);
 		}
 		return "null";
+	}
+	
+	public byte getStorageType()
+	{
+		if(worldObj != null)
+		{
+			Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
+			if(block instanceof BlockAmmoBox)
+			{
+				return ((BlockAmmoBox)block).storageType;
+			}
+		}
+		return storageSize;	
 	}
 }

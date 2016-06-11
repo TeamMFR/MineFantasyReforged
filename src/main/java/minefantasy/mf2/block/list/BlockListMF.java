@@ -20,6 +20,7 @@ import minefantasy.mf2.block.crafting.BlockRoast;
 import minefantasy.mf2.block.crafting.BlockSalvage;
 import minefantasy.mf2.block.crafting.BlockTanningRack;
 import minefantasy.mf2.block.decor.BlockAmmoBox;
+import minefantasy.mf2.block.decor.BlockBedMF;
 import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.decor.BlockRoad;
 import minefantasy.mf2.block.decor.BlockTrough;
@@ -106,7 +107,7 @@ public class BlockListMF
 	public static BlockBombBench bombBench = new BlockBombBench();
 	public static BlockCrossbowBench crossbowBench = new BlockCrossbowBench();
 	
-	public static Block cheese_wheel = new BlockCakeMF("cheese", FoodListMF.cheese_slice);
+	public static Block cheese_wheel = new BlockCakeMF("cheese", FoodListMF.cheese_slice).setCheese();
 	
 	public static Block cake_vanilla = new BlockCakeMF("cake_vanilla", FoodListMF.cake_slice);
 	public static Block cake_carrot = new BlockCakeMF("cake_carrot", FoodListMF.carrotcake_slice);
@@ -211,8 +212,11 @@ public class BlockListMF
 	public static Block furnace_stone = new BlockBigFurnace("furnace_stone", false, 0);
 	
 	public static Block rack_wood = new BlockRack("rack_wood");
-	public static Block ammo_box_basic = new BlockAmmoBox("basic", Material.wood, 128);
+	public static Block food_box_basic = new BlockAmmoBox("food_box_basic", (byte)0);
+	public static Block ammo_box_basic = new BlockAmmoBox("ammo_box_basic", (byte)1);
+	public static Block crate_basic = new BlockAmmoBox("crate_basic", (byte)2);
 	
+	public static Block bedroll = new BlockBedMF("bedroll");
 	public static void load()
 	{
 		anvilStone = new BlockAnvilMF(BaseMaterialMF.getMaterial("stone"));

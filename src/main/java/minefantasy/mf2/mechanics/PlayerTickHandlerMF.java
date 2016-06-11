@@ -4,8 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import minefantasy.mf2.MineFantasyII;
-import minefantasy.mf2.api.MineFantasyAPI;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.PlayerEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IFirearm;
 import minefantasy.mf2.api.armour.CogworkArmour;
@@ -15,7 +16,6 @@ import minefantasy.mf2.api.helpers.PlayerTagData;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.rpg.RPGElements;
-import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.config.ConfigMobs;
 import minefantasy.mf2.config.ConfigWeapon;
@@ -29,19 +29,13 @@ import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumDifficulty;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.PlayerEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 
 public class PlayerTickHandlerMF
 {
@@ -108,6 +102,10 @@ public class PlayerTickHandlerMF
         	if(!event.player.worldObj.isRemote)
         	{
         		tickDragonSpawner(event.player);
+        	}
+        	if(!event.player.worldObj.isRemote)
+        	{
+        		tryResetBed(event.player);
         	}
         	//updatePitch(event.player); (This keeps track of player camera angles, could make a mechanic based on swinging the camera)
         }
@@ -430,5 +428,57 @@ public class PlayerTickHandlerMF
 	{
 		NBTTagCompound nbt = PlayerTagData.getPersistedData(player);
 		return nbt.getInteger("MF_DragonKills");
+	}
+	
+	private static String chunkCoords = "MF_BedPos";
+	private static String resetBed = "MF_Resetbed";
+	
+	public static void wakeUp(EntityPlayer player)
+	{
+		MFLogUtil.logDebug("Woken up");
+		if(player.getEntityData().hasKey(chunkCoords + "_x"))
+		{
+			player.getEntityData().setBoolean(resetBed, true);
+			MFLogUtil.logDebug("Mark for reset bed");
+		}
+	}
+	
+	private void tryResetBed(EntityPlayer player)
+	{
+		boolean t = false;
+		if(player.getEntityData().hasKey(resetBed))
+		{
+			t = true;
+			player.getEntityData().removeTag(resetBed);
+			resetBedPosition(player);
+		}
+	}
+	public static void readyToResetBedPosition(EntityPlayer player)
+	{
+		ChunkCoordinates coords = player.getBedLocation(player.dimension);
+		if(coords != null)
+		{
+			player.getEntityData().setInteger(chunkCoords + "_x", coords.posX);
+			player.getEntityData().setInteger(chunkCoords + "_y", coords.posY);
+			player.getEntityData().setInteger(chunkCoords + "_z", coords.posZ);
+			MFLogUtil.logDebug("Prepare new Spawn Point: " + coords.posX + "x " + coords.posY + "y " + coords.posZ + "z");
+		}
+	}
+	private void resetBedPosition(EntityPlayer player)
+	{
+		if(player.getEntityData().hasKey(chunkCoords + "_x"))
+		{
+			int x = player.getEntityData().getInteger(chunkCoords + "_x");
+			int y = player.getEntityData().getInteger(chunkCoords + "_y");
+			int z = player.getEntityData().getInteger(chunkCoords + "_z");
+			ChunkCoordinates coords = new ChunkCoordinates(x, y, z);
+			
+			player.getEntityData().removeTag(chunkCoords + "_x");
+			player.getEntityData().removeTag(chunkCoords + "_y");
+			player.getEntityData().removeTag(chunkCoords + "_z");
+			
+			player.setSpawnChunk(coords, false);
+			MFLogUtil.logDebug("Successfully Assigned new Spawn Point: " + x + "x " + y + "y " + z + "z");
+		}
 	}
 }

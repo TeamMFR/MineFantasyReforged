@@ -120,7 +120,7 @@ public class BlockRepairKit extends Block
 	private boolean canRepair(ItemStack held) 
 	{
 		if(held == null)return false;
-		if(held.getItem().isDamageable() && CustomToolHelper.getCustomMetalMaterial(held) != null)//Custom Tool
+		if(held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != null)//Custom Tool
 		{
 			return held.isItemDamaged();
 		}

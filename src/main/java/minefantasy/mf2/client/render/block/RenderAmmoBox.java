@@ -3,6 +3,7 @@ package minefantasy.mf2.client.render.block;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.decor.BlockAmmoBox;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import net.minecraft.block.Block;
@@ -19,7 +20,7 @@ public class RenderAmmoBox implements ISimpleBlockRenderingHandler
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		BlockAmmoBox forge = (BlockAmmoBox)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityAmmoBox(forge.name), 0.0D, 0.0D, 0.0D, 0.0F);
+		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityAmmoBox(forge.getFullTexName(), CustomMaterial.getMaterial("RefinedWood"), forge.storageType), 0.0D, 0.0D, 0.0D, 0.0F);
 		GL11.glPopMatrix();
 	}
 

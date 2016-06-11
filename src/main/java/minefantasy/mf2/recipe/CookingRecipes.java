@@ -24,7 +24,7 @@ public class CookingRecipes
 		
 		bake(FoodListMF.dough, FoodListMF.breadroll, 						150, 300, 10, 20, true);
 		bake(FoodListMF.raw_bread, Items.bread, 							150, 300, 20, 40, true);
-		bake(FoodListMF.curds, Item.getItemFromBlock(BlockListMF.cheese_wheel),180, 300, 60, 20, false);
+		bake(FoodListMF.curds, FoodListMF.cheese_pot, 						100, 300, 60, 20, false);
 		bake(FoodListMF.sweetroll_raw, FoodListMF.sweetroll_uniced, 		180, 250, 20, 10, true);
 		
 		bake(FoodListMF.pie_pumpkin_uncooked, FoodListMF.pie_pumpkin_cooked,150, 300, 20, 20, FoodListMF.burnt_pie);

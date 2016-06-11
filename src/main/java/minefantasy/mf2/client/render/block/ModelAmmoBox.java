@@ -13,14 +13,14 @@ import net.minecraft.entity.Entity;
  */
 public class ModelAmmoBox extends ModelBase
 {
-	ModelRenderer LeftWall;
-    ModelRenderer FrontWall;
-    ModelRenderer BackWall;
-    ModelRenderer RightWall;
-    ModelRenderer lid;
-    ModelRenderer Base;
-    ModelRenderer lock2;
-    ModelRenderer lock1;
+	protected ModelRenderer LeftWall;
+	protected ModelRenderer FrontWall;
+	protected ModelRenderer BackWall;
+	protected  ModelRenderer RightWall;
+	protected ModelRenderer lid;
+	protected ModelRenderer Base;
+	protected ModelRenderer lock2;
+	protected ModelRenderer lock1;
   
     public ModelAmmoBox()
     {
@@ -79,7 +79,7 @@ public class ModelAmmoBox extends ModelBase
     renderModel(f5);
   }
   
-  private void setRotation(ModelRenderer model, float x, float y, float z)
+  protected void setRotation(ModelRenderer model, float x, float y, float z)
   {
     model.rotateAngleX = x;
     model.rotateAngleY = y;

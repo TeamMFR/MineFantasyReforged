@@ -341,7 +341,7 @@ public class CombatMechanics
     			//TODO: IDamageModifier, this mods the damage for weapons
     			dam = ((IDamageModifier)weapon.getItem()).modifyDamage(weapon, user, target, dam, properHit);
     		}
-    		CustomMaterial material = CustomToolHelper.getCustomMetalMaterial(weapon);
+    		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(weapon);
     		if(material != null && material.name.equalsIgnoreCase("silver"))
     		{
     			dam = hurtUndead(user, target, dam, properHit);
@@ -445,7 +445,7 @@ public class CombatMechanics
 
 	private boolean isMaterialUndeadKiller(ItemStack weapon, ToolMaterial material) 
     {
-		CustomMaterial mat = CustomToolHelper.getCustomMetalMaterial(weapon);
+		CustomMaterial mat = CustomToolHelper.getCustomPrimaryMaterial(weapon);
 		if(mat != null && mat.name.equalsIgnoreCase("silver"))
 		{
 			return true;

@@ -105,7 +105,7 @@ public class AmmoMechanicsMF
 	public static void consumeAmmo(EntityPlayer user, ItemStack bow) 
 	{
 		ItemStack ammo = getAmmo(bow);
-		if(user.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, bow) > 0)
+		if(user.capabilities.isCreativeMode)
 		{
 			return;
 		}

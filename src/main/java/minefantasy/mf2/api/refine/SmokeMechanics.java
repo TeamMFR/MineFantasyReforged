@@ -147,15 +147,24 @@ public class SmokeMechanics
 	 */
 	public static void emitSmokeIndirect(World world, int xCoord, int yCoord, int zCoord, int value) 
 	{
-		if(!tryUseChimney(world, xCoord, yCoord + 1, zCoord, value, false) && !tryUseChimney(world, xCoord, yCoord + 2, zCoord, value))
+		if(tryUseChimney(world, xCoord, yCoord, zCoord, value))
 		{
-			if(!tryUseChimney(world, xCoord - 1, yCoord + 1, zCoord, value) && !tryUseChimney(world, xCoord + 1, yCoord + 1, zCoord, value) &&!tryUseChimney(world, xCoord, yCoord + 1, zCoord - 1, value) &&!tryUseChimney(world, xCoord, yCoord + 1, zCoord + 1, value))
+			return;
+		}	
+		
+		for(int x = -1; x <= 1; x++)
+		{
+			for(int y = 0; y <= 1; y++)
 			{
-				if(!tryUseChimney(world, xCoord - 1, yCoord + 1, zCoord - 1, value) && !tryUseChimney(world, xCoord + 1, yCoord + 1, zCoord + 1, value) &&!tryUseChimney(world, xCoord - 1, yCoord + 1, zCoord - 1, value) &&!tryUseChimney(world, xCoord + 1, yCoord + 1, zCoord + 1, value))
+				for(int z = -1; z <= 1; z++)
 				{
-					spawnSmoke(world, xCoord, yCoord+1, zCoord, value);
-				}	
+					if(tryUseChimney(world, xCoord + x, yCoord + y, zCoord + z, value))
+					{
+						return;
+					}	
+				}
 			}
 		}
+		spawnSmoke(world, xCoord, yCoord, zCoord, value);
 	}
 }

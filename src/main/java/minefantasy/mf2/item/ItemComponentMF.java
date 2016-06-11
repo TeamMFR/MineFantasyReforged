@@ -116,18 +116,11 @@ public class ItemComponentMF extends Item
     		while(iteratorWood.hasNext())
         	{
     			CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
-    			//if(MineFantasyII.isDebug() || customMat.getItem() != null)
-    			//{
-    				//list.add(this.construct(customMat.name));
-    				//list.add(this);
-    				list.add( this.construct(customMat.name) );
-    				//list.add(this);
-    			//}
+				list.add( this.construct(customMat.name) );
+				list.add( ((ItemComponentMF)ComponentListMF.plank_cut).construct(customMat.name) );
         	}
     	}
 		
-		//add(list, ComponentListMF.plank);
-		//add(list, ComponentListMF.plankRefined);
 		add(list, ComponentListMF.nail);
 		add(list, ComponentListMF.rivet);
 		add(list, ComponentListMF.thread);
@@ -234,17 +227,20 @@ public class ItemComponentMF extends Item
         super.addInformation(item, user, list, extra);
         if(isCustom)
         {
-        	CustomToolHelper.addComponentString(item, list,CustomMaterial.getMaterialFor(item,CustomToolHelper.slot_main));
+        	CustomToolHelper.addComponentString(item, list,CustomMaterial.getMaterialFor(item,CustomToolHelper.slot_main), this.unitCount);
         }
     }
     
 	//===================================================== CUSTOM START =============================================================\\
 	private boolean isCustom = false;
-	public ItemComponentMF setCustom(String s)
+	private float unitCount = 1;
+	public ItemComponentMF setCustom(float units)
 	{
 		canRepair = false;
-		setTextureName("minefantasy2:custom/component/"+"plank");
+		this.unitCount = units;
+		setTextureName("minefantasy2:custom/component/"+name);
 		isCustom = true;
+		this.setHasSubtypes(true);
 		return this;
 	}
 
@@ -325,12 +321,8 @@ public class ItemComponentMF extends Item
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack item)
     {
-    	//TODO
-    	//For now if this item is custom, it must be a plank.	
-    	//Replace with more proper code
-    	
     	if(isCustom){
-    		return CustomToolHelper.getLocalisedName(item, "item.commodity_plank.name");
+    		return CustomToolHelper.getLocalisedName(item, "item.commodity_"+name+".name");
     	}
     	String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
     	return CustomToolHelper.getLocalisedName(item, unlocalName);
