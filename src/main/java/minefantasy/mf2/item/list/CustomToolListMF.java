@@ -20,6 +20,7 @@ import minefantasy.mf2.item.tool.crafting.ItemHammer;
 import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
 import minefantasy.mf2.item.tool.crafting.ItemNeedle;
 import minefantasy.mf2.item.tool.crafting.ItemSaw;
+import minefantasy.mf2.item.tool.crafting.ItemSpanner;
 import minefantasy.mf2.item.tool.crafting.ItemTongs;
 import minefantasy.mf2.item.weapon.ItemBattleaxeMF;
 import minefantasy.mf2.item.weapon.ItemDagger;
@@ -58,6 +59,7 @@ public class CustomToolListMF
 	public static ItemKnifeMF standard_knife;
 	public static ItemNeedle standard_needle;
 	public static ItemSaw standard_saw;
+	public static ItemSpanner standard_spanner;
 	public static ItemBasicCraftTool standard_spoon, standard_mallet;
 	
 	public static ItemBowMF standard_bow;
@@ -148,6 +150,7 @@ public class CustomToolListMF
 		standard_needle = (ItemNeedle) new ItemNeedle(design+"_needle", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
 		standard_saw = (ItemSaw) new ItemSaw(design+"_saw", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
 		standard_tongs = (ItemTongs) new ItemTongs(design+"_tongs", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
+		standard_spanner = (ItemSpanner) new ItemSpanner(design+"_spanner", 0, 0).setCustom(design).setCreativeTab(tab);
 		
 		standard_spoon = (ItemBasicCraftTool) new ItemBasicCraftTool(design+"_spoon", "spoon", 0, 64).setCustom(design).setCreativeTab(tab);
 		standard_mallet = (ItemBasicCraftTool) new ItemBasicCraftTool(design+"_mallet", "mallet", 0, 64).setCustom(design).setCreativeTab(tab);

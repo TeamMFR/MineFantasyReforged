@@ -38,6 +38,8 @@ public class WoodMaterial extends CustomMaterial
 	}
 	public static void init()
 	{
+		new CustomMaterial("magic", "Magic", -1, 1F, 0F, 1F, 0F, 0F, 0F).setColour(157, 157, 255).register();
+		
 		MetalMaterial.init();
 		LeatherMaterial.init();
 		//Hardness-The Impact it can take. Used for armour rating, in this case nothing.

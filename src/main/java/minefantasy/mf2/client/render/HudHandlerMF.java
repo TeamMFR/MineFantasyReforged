@@ -22,6 +22,10 @@ public class HudHandlerMF
 		{
 			inGameGUI.renderGameOverlay(event.partialTicks, event.mouseX, event.mouseY);
 		}
+		if (event.type == RenderGameOverlayEvent.ElementType.HELMET)
+		{
+			inGameGUI.renderViewport();
+		}
 	}
 	
 	@SubscribeEvent

@@ -11,9 +11,11 @@ import minefantasy.mf2.block.crafting.BlockAnvilMF;
 import minefantasy.mf2.block.crafting.BlockBombBench;
 import minefantasy.mf2.block.crafting.BlockBombPress;
 import minefantasy.mf2.block.crafting.BlockCarpenter;
+import minefantasy.mf2.block.crafting.BlockCogwork;
 import minefantasy.mf2.block.crafting.BlockCrossbowBench;
 import minefantasy.mf2.block.crafting.BlockEngineerTanner;
 import minefantasy.mf2.block.crafting.BlockFirepit;
+import minefantasy.mf2.block.crafting.BlockFrame;
 import minefantasy.mf2.block.crafting.BlockRepairKit;
 import minefantasy.mf2.block.crafting.BlockResearchStation;
 import minefantasy.mf2.block.crafting.BlockRoast;
@@ -41,6 +43,7 @@ import minefantasy.mf2.block.tree.BlockLogMF;
 import minefantasy.mf2.block.tree.BlockSaplingMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -136,6 +139,7 @@ public class BlockListMF
 	public static Block chimney_stone = new BlockChimney("stone", false, false, 5);
 	public static Block chimney_stone_wide = new BlockChimney("stone", true, false, 10);
 	public static Block chimney_stone_extractor = new BlockChimney("stone_extractor", true, true, 15);
+	public static Block chimney_pipe = new BlockChimney("pipe", false, false, 10).setPipe();
 	
 	public static Block tanner = new BlockTanningRack(0, "");
 	
@@ -179,7 +183,7 @@ public class BlockListMF
 	public static Block log_ebony = new BlockLogMF("ebony").setHardness(5F).setResistance(10F);
 	
 	public static Block leaves_yew = new BlockLeavesMF("yew", 100);
-	public static Block leaves_ironbark = new BlockLeavesMF("ironbark", 20).setHardness(0.3F);
+	public static Block leaves_ironbark = new BlockLeavesMF("ironbark", 40).setHardness(0.3F);
 	public static Block leaves_ebony = new BlockLeavesMF("ebony", 1000).setHardness(0.5F);
 	
 	public static Block sapling_yew = new BlockSaplingMF("yew", log_yew, leaves_yew, 4F);
@@ -217,6 +221,11 @@ public class BlockListMF
 	public static Block crate_basic = new BlockAmmoBox("crate_basic", (byte)2);
 	
 	public static Block bedroll = new BlockBedMF("bedroll");
+	public static Block cogwork_helm = new BlockCogwork("cogwork_helm", false);
+	public static Block cogwork_legs = new BlockCogwork("cogwork_legs", false);
+	public static Block cogwork_chest = new BlockCogwork("cogwork_chest", true);
+	public static Block frame_block = new BlockFrame("frame_block");
+	public static Block cogwork_builder = new BlockFrame("cogwork_builder", frame_block).setCogworkHolder();
 	public static void load()
 	{
 		anvilStone = new BlockAnvilMF(BaseMaterialMF.getMaterial("stone"));

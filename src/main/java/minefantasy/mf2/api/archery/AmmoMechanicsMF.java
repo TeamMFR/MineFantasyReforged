@@ -170,6 +170,11 @@ public class AmmoMechanicsMF
 		getNBT(bow).removeTag(savedAmmoNBT);
 	}
 	
+	public static boolean isFirearmOutOfAmmo(ItemStack firearm)
+	{
+		return getAmmo(firearm) == null && EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, firearm) == 0;
+	}
+	
 	public static boolean isFirearmLoaded(ItemStack firearm)
 	{
 		return getGunAmmoCount(firearm)>0;

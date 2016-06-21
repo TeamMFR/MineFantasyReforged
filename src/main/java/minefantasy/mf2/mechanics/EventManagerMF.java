@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.ISpecialArmourMF;
 import minefantasy.mf2.api.armour.ItemArmourMFBase;
@@ -15,6 +17,7 @@ import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.ArrowEffectsMF;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.EntityHelper;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
@@ -25,9 +28,11 @@ import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.api.tool.IHuntingItem;
 import minefantasy.mf2.api.tool.ISmithTongs;
 import minefantasy.mf2.api.weapon.WeaponClass;
+import minefantasy.mf2.client.render.RenderPowerArmour;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.config.ConfigStamina;
+import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.entity.EntityItemUnbreakable;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.farming.FarmingHelper;
@@ -38,12 +43,12 @@ import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.network.packet.LevelupPacket;
 import minefantasy.mf2.network.packet.SkillPacket;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityItem;
@@ -76,6 +81,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -656,14 +662,7 @@ public class EventManagerMF
 			}
 			if(event.itemStack.getItem() instanceof ItemArmor && (!(event.itemStack.getItem() instanceof ItemArmourMFBase) || ClientItemsMF.showSpecials(event.itemStack, event.entityPlayer, event.toolTip, event.showAdvancedItemTooltips)))
 			{
-				if(ArmourCalculator.useThresholdSystem)
-				{
-					addArmourDT(event.itemStack, event.entityPlayer, event.toolTip, event.showAdvancedItemTooltips);
-				}
-				else
-				{
-					addArmourDR(event.itemStack, event.entityPlayer, event.toolTip, event.showAdvancedItemTooltips);
-				}
+				addArmourDR(event.itemStack, event.entityPlayer, event.toolTip, event.showAdvancedItemTooltips);
 			}
 			if(ArmourCalculator.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.itemStack) != null)
 			{
@@ -880,11 +879,15 @@ public class EventManagerMF
 	@SubscribeEvent
 	public void updateEntity(LivingUpdateEvent event)
 	{
+		if(event.entity instanceof EntityCogwork)
+		{
+			return;
+		}
 		EntityLivingBase entity = event.entityLiving;
 		float lowHp = entity.getMaxHealth()/5F;
 		int injury = getInjuredTime(entity);
 		
-		if(ConfigHardcore.critLimp && !(entity instanceof EntityPlayer && ((EntityPlayer)entity).capabilities.isCreativeMode))
+		if(ConfigHardcore.critLimp && (entity instanceof EntityLiving || !(entity instanceof EntityPlayer && ((EntityPlayer)entity).capabilities.isCreativeMode)))
 		{
 			if(entity.getHealth() <= lowHp || injury > 0)
 			{
@@ -1061,4 +1064,13 @@ public class EventManagerMF
 	}
 	
 	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void renderEntity (RenderLivingEvent.Pre event)
+	{
+		if(!(event.renderer instanceof RenderPowerArmour) && event.entity instanceof EntityPlayer && PowerArmour.isFullyArmoured(event.entity))
+		{
+			event.setCanceled(true);
+		}
+	}
 }

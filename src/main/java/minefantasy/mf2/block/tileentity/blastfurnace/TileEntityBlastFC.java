@@ -2,23 +2,20 @@ package minefantasy.mf2.block.tileentity.blastfurnace;
 
 import java.util.Random;
 
-import minefantasy.mf2.MineFantasyII;
-import minefantasy.mf2.api.MineFantasyAPI;
+import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import minefantasy.mf2.api.refine.BlastFurnaceRecipes;
 import minefantasy.mf2.api.refine.ISmokeCarrier;
 import minefantasy.mf2.api.refine.SmokeMechanics;
 import minefantasy.mf2.block.list.BlockListMF;
-import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityBlastFC extends TileEntity implements IInventory, ISidedInventory, ISmokeCarrier
 {
@@ -91,7 +88,7 @@ public class TileEntityBlastFC extends TileEntity implements IInventory, ISidedI
 	private boolean canShare(ItemStack mySlot, int a) 
 	{
 		if(a == 1)return isInput(mySlot);
-		return isCoal(mySlot);
+		return isCarbon(mySlot);
 	}
 	public void updateBuild()
 	{
@@ -267,13 +264,13 @@ public class TileEntityBlastFC extends TileEntity implements IInventory, ISidedI
 	{
 		if(slot == 0)
 		{
-			return isCoal(item);
+			return isCarbon(item);
 		}
 		return isInput(item);
 	}
-	public static boolean isCoal(ItemStack item)
+	public static boolean isCarbon(ItemStack item)
 	{
-		return MineFantasyAPI.isCarbon(item);
+		return MineFantasyFuels.isCarbon(item);
 	}
 	public static boolean isFlux(ItemStack item)
 	{
@@ -325,5 +322,25 @@ public class TileEntityBlastFC extends TileEntity implements IInventory, ISidedI
 	public boolean canAbsorbIndirect()
 	{
 		return false;
+	}
+	public int tempUses;
+	public boolean shouldRemoveCarbon()
+	{
+		if(tempUses > 0)
+		{
+			--tempUses;
+			MFLogUtil.logDebug("Decr Carbon Uses: " + tempUses);
+			return false;
+		}
+		else
+		{
+			int carb = MineFantasyFuels.getCarbon(getStackInSlot(0)) - 1;
+			if(carb > 0)
+			{
+				tempUses = carb;
+				MFLogUtil.logDebug("Set Carbon Uses: " + tempUses);
+			}
+			return true;
+		}
 	}
 }

@@ -117,7 +117,7 @@ public class ItemComponentMF extends Item
         	{
     			CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
 				list.add( this.construct(customMat.name) );
-				list.add( ((ItemComponentMF)ComponentListMF.plank_cut).construct(customMat.name) );
+				list.add( ((ItemComponentMF)ComponentListMF.plank_pane).construct(customMat.name) );
         	}
     	}
 		
@@ -292,13 +292,6 @@ public class ItemComponentMF extends Item
     	}
     	return super.getColorFromItemStack(item, layer);
     }
-
-    
-    @Override
-	public int getMaxDamage(ItemStack stack)
-	{
-		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
-	}
 	
 	protected int itemRarity;
     @Override

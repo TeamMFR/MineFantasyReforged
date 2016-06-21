@@ -115,16 +115,8 @@ public class BaseMaterialMF
 	public static BaseMaterialMF addMaterial(String name, int tier, int durability, int harvestLevel, float sharpness, int enchantment, float weight, int lvl)
 	{
 		float AC = 0;
-		if(ArmourCalculator.useThresholdSystem)
-		{
-			AC = (sharpness+swordDam) - 2.0F;
-			MFLogUtil.logDebug("Added Threshold Armour Material " + name + " AR = " + AC);
-		}
-		else
-		{
-			AC = ((sharpness+swordDam)/armourVsSwordBalance) - 1.0F;
-			MFLogUtil.logDebug("Added Ratio Armour Material " + name + " AR = " + AC);
-		}
+		AC = ((sharpness+swordDam)/armourVsSwordBalance) - 1.0F;
+		MFLogUtil.logDebug("Added Ratio Armour Material " + name + " AR = " + AC);
 		float initAc = AC;
 		
 		AC = Math.round(AC*(100F/ACrounding));

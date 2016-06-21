@@ -15,12 +15,13 @@ ISSUES       	 								     |Check|
 Carpenter craft bows                                    -
 Show stats of wood (tooltip)                            -
 Optional book spawn                                     -
-
-Cooking sounds                                          -
 Salvage damage saw                                      -
 Trough keep fill                                        -
-Wood pane render bar?                                   -
-Box yield more than stack size                          -
+
+Dragonscale Armour                                      -
+
+COGWORK
+Balance Rating                                          -
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 CONTENT		 				     					 |Check|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

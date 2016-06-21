@@ -76,36 +76,12 @@ public class RenderCrossbow implements IItemRenderer
         }
     }
 
-    /*
-    private void renderFirstPerson(ItemStack item, EntityPlayer player, int ic) {
-    	GL11.glPushMatrix();
-    	//if(item.getItem() == MFP_RenItem.bayonet)
-        	//GL11.glTranslatef(0.25F, 0, 0);
-    	GL11.glTranslatef(-0.4F, 0.2F, 0F);
-    	if(player.isUsingItem() && item.getItemUseAction() == EnumAction.bow)
-    		GL11.glTranslatef(0.1F, -0.1F, 0F);
-    	if(player.isUsingItem() && item.getItemUseAction() == EnumAction.block)
-    	{
-    		GL11.glRotatef(90, 0, 0, 1);
-    		GL11.glTranslatef(-1.0F, -1.0F, 0F);
-    	}
-        renderWeapon(item, player, ic);
-        GL11.glPopMatrix();
-    }
-    */
-
     private void renderPart(ItemStack item, EntityLivingBase player, String iconName) {
 
         GL11.glPushMatrix();
 
         GL11.glTranslatef(0.75F, -0.25F, 0F);
         GL11.glTranslatef(0f, 0f, 0);
-
-        if(player == null)
-        {
-        	//GL11.glRotatef(-90, 1, 1, 0);
-        	//GL11.glTranslatef((12F/16F), -(2F/16F), (8F/16F));
-        }
         doRenderPart(item, iconName);
         
         GL11.glPopMatrix();
@@ -161,7 +137,7 @@ public class RenderCrossbow implements IItemRenderer
         Tessellator tessellator = Tessellator.instance;
         ItemCrossbow crossbow = (ItemCrossbow)item.getItem();
         IIcon icon = crossbow.getPartIcon(item, iconName);
-        renderIcon(mc, item, tessellator, icon);
+        renderIcon(mc, item, tessellator, icon, true);
         
         if(isHead)
         {
@@ -184,6 +160,7 @@ public class RenderCrossbow implements IItemRenderer
         	
         	if(loaded != null)
         	{
+        		mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
         		for(int layer = 0; layer < loaded.getItem().getRenderPasses(loaded.getItemDamage()); layer ++)
         		{
         			GL11.glPushMatrix();
@@ -196,7 +173,7 @@ public class RenderCrossbow implements IItemRenderer
                     
                     GL11.glColor4f(red, green, blue, 1.0F);
                     
-	                renderIcon(mc, item, tessellator, bolt, ammoSize);
+	                renderIcon(mc, item, tessellator, bolt, ammoSize, false);
 	                GL11.glPopMatrix();
         		}
         	}
@@ -206,11 +183,11 @@ public class RenderCrossbow implements IItemRenderer
 
     }
 
-    private void renderIcon(Minecraft mc, ItemStack item, Tessellator tessellator, IIcon icon) 
+    private void renderIcon(Minecraft mc, ItemStack item, Tessellator tessellator, IIcon icon, boolean enchant) 
     {
-    	renderIcon(mc, item, tessellator, icon, 1.0F);
+    	renderIcon(mc, item, tessellator, icon, 1.0F, enchant);
     }
-    private void renderIcon(Minecraft mc, ItemStack item, Tessellator tessellator, IIcon icon, float scale) 
+    private void renderIcon(Minecraft mc, ItemStack item, Tessellator tessellator, IIcon icon, float scale, boolean enchant) 
     {
     	if(icon == null)return;
     	
@@ -234,7 +211,8 @@ public class RenderCrossbow implements IItemRenderer
         GL11.glScalef(scale, scale, scale);
         ItemRenderer.renderItemIn2D(tessellator, x2, y1, x1, y2, (int)(icon.getIconWidth()), (int)(icon.getIconHeight()), 0.0625F);
 
-        if (item != null && item.isItemEnchanted()) {
+        if (enchant && item != null && item.isItemEnchanted())
+        {
             GL11.glDepthFunc(GL11.GL_EQUAL);
             GL11.glDisable(GL11.GL_LIGHTING);
             mc.renderEngine.bindTexture(TextureHelperMF.ITEM_GLINT);

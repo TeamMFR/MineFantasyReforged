@@ -9,13 +9,13 @@ import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IFirearm;
-import minefantasy.mf2.api.armour.CogworkArmour;
 import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.PlayerTagData;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.rpg.RPGElements;
+import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.config.ConfigMobs;
 import minefantasy.mf2.config.ConfigWeapon;
@@ -63,16 +63,6 @@ public class PlayerTickHandlerMF
 			//COMMON
 	    	TacticalManager.applyArmourWeight(event.player);
         	
-        	if(event.player.ticksExisted % 20 == 0)
-        	{
-        		CogworkArmour.updateVars(event.player);
-        		
-        		if(event.player.isBurning() && TacticalManager.getResistance(event.player, DamageSource.inFire) <= 0.0F)
-            	{
-            		event.player.extinguish();
-            	}
-        		CogworkArmour.tickUser(event.player);
-    		}
         	if(event.player.worldObj.isRemote)
         	{
 	        	if(isNextStep(event.player))
@@ -168,16 +158,7 @@ public class PlayerTickHandlerMF
 
 	private void onStep(EntityPlayer player, boolean alternateStep) 
 	{
-		if(CogworkArmour.isWearingAnyCogwork(player))
-		{
-			String s = alternateStep ? "in" : "out";
-			player.playSound("tile.piston."+s, 0.5F, 1.0F);
-			float f1 = 2.0F;
-			//player.rotationPitch += (alternateStep ? f1 : -f1);
-			
-			CogworkArmour.onStep(player);
-		}
-		else if(ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50)
+		if(ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50)
         {
 			player.playSound("mob.irongolem.throw", 1.0F, 1.0F);
         }
@@ -435,11 +416,13 @@ public class PlayerTickHandlerMF
 	
 	public static void wakeUp(EntityPlayer player)
 	{
-		MFLogUtil.logDebug("Woken up");
+		if(StaminaBar.isSystemActive)
+		{
+			StaminaBar.modifyStaminaValue(player, 500F);
+		}
 		if(player.getEntityData().hasKey(chunkCoords + "_x"))
 		{
 			player.getEntityData().setBoolean(resetBed, true);
-			MFLogUtil.logDebug("Mark for reset bed");
 		}
 	}
 	
@@ -461,7 +444,6 @@ public class PlayerTickHandlerMF
 			player.getEntityData().setInteger(chunkCoords + "_x", coords.posX);
 			player.getEntityData().setInteger(chunkCoords + "_y", coords.posY);
 			player.getEntityData().setInteger(chunkCoords + "_z", coords.posZ);
-			MFLogUtil.logDebug("Prepare new Spawn Point: " + coords.posX + "x " + coords.posY + "y " + coords.posZ + "z");
 		}
 	}
 	private void resetBedPosition(EntityPlayer player)
@@ -478,7 +460,6 @@ public class PlayerTickHandlerMF
 			player.getEntityData().removeTag(chunkCoords + "_z");
 			
 			player.setSpawnChunk(coords, false);
-			MFLogUtil.logDebug("Successfully Assigned new Spawn Point: " + x + "x " + y + "y " + z + "z");
 		}
 	}
 }

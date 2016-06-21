@@ -3,6 +3,7 @@ package minefantasy.mf2.block.tileentity;
 import java.util.List;
 import java.util.Random;
 
+import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import minefantasy.mf2.api.crafting.refine.BloomRecipe;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
@@ -13,6 +14,7 @@ import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFC;
 import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.network.packet.BloomeryPacket;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -40,9 +42,25 @@ public class TileEntityBloomery extends TileEntity implements IInventory
 		
 		if(hasBloom())return null;//Cannot smelt if a bloom exists
 		if(input == null || coal == null)return null;//Needs input
-		if(!TileEntityBlastFC.isCoal(coal) || input.stackSize != coal.stackSize)return null;//Needs Coal
+		
+		if(!hasEnoughCarbon(input, coal))
+		{
+			return null;
+		}
 		
 		return getResult(input);
+	}
+	private boolean hasEnoughCarbon(ItemStack input, ItemStack coal) 
+	{
+		int amount = input.stackSize;
+		int uses = MineFantasyFuels.getCarbon(coal);
+		if(uses > 0)
+		{
+			int coalNeeded = (int)Math.ceil((float)amount / (float) uses);
+			MFLogUtil.logDebug("Required Coal: " + coalNeeded);
+			return coal.stackSize == coalNeeded;
+		}
+		return false;
 	}
 	private Random rand = new Random();
 	@Override
@@ -299,7 +317,7 @@ public class TileEntityBloomery extends TileEntity implements IInventory
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item)
 	{
-		if(item != null && TileEntityBlastFC.isCoal(item))
+		if(item != null && TileEntityBlastFC.isCarbon(item))
 		{
 			return slot == 1;
 		}

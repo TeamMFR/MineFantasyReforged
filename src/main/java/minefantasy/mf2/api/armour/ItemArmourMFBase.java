@@ -3,11 +3,10 @@ package minefantasy.mf2.api.armour;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.ToolHelper;
-import minefantasy.mf2.config.ConfigClient;
-import minefantasy.mf2.util.MFLogUtil;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
@@ -18,8 +17,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.util.EnumHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemArmourMFBase extends ItemArmor implements ISpecialArmor, IArmourMF, IArmourRating, ISpecialArmourMF
 {
@@ -91,12 +88,11 @@ public class ItemArmourMFBase extends ItemArmor implements ISpecialArmor, IArmou
 		float AC = getProtectionRatio(armour);
 		AC = ArmourCalculator.getArmourValueMod(armour, AC);
 		
-		MFLogUtil.logDebug("Ratio = " + AC);
-		
 		if(ArmourCalculator.advancedDamageTypes && !player.worldObj.isRemote)
 		{
 			AC = ArmourCalculator.adjustACForDamage(source, AC, getProtectiveTrait(armour, 0), getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}
+		
 		AC *= getACModifier(player, armour, source, damage);
 		
 		if(source == DamageSource.fall && design == ArmourDesign.PLATE)
@@ -131,12 +127,13 @@ public class ItemArmourMFBase extends ItemArmor implements ISpecialArmor, IArmou
 		{
 			totalPercent = maxPercent;
 		}
-		
 		double percent = totalPercent*scalePiece();
+		if(percent < 0)
+		{
+			percent = 0;
+		}
 		
-		float max = (float) ((getMaxDamage() + 1 - armour.getItemDamage()) * (percent*25F));//I don't know how this variable works
-		
-		return new ArmorProperties(0, percent, (int)max);
+		return new ArmorProperties(0, percent, Integer.MAX_VALUE);
 	}
 	
 	private float getACForBurn() 

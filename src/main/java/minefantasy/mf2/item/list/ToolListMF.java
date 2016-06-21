@@ -189,9 +189,7 @@ public class ToolListMF
 	public static Item skillbook_dwarvern = new ItemSpecialKnowledge("dwarvern");
 	public static Item skillbook_gnomish = new ItemSpecialKnowledge("gnomish");
 	
-	public static Item spanner;
 	public static Item engin_anvil_tools = new ItemEAnvilTools("engin_anvil_tools", 64);
-	public static Item spanner_blk;
 	
 	public static Item exploding_arrow = new ItemExplodingArrow();
 	public static Item spyglass = new ItemSpyglass();
@@ -215,8 +213,6 @@ public class ToolListMF
 		{
 			weakenItems();
 		}
-		spanner = new ItemEngineerTool("spanner", ToolMaterial.IRON, 0, "spanner", 1);
-		spanner_blk = new ItemEngineerTool("spanner_blk", ToolMaterial.EMERALD, 1, "spanner", 3);
 		climbing_pick_basic = new ItemClimbingPick("climbing_pick_basic", ToolMaterial.IRON, 0);
 		BlockListMF.load();
 		ArmourListMF.load();

@@ -9,6 +9,8 @@ import minefantasy.mf2.api.crafting.IBasicMetre;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.tool.IStorageBlock;
 import minefantasy.mf2.block.decor.BlockAmmoBox;
+import minefantasy.mf2.item.ItemBandage;
+import minefantasy.mf2.item.gadget.ItemSyringe;
 import minefantasy.mf2.network.packet.AmmoBoxPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -79,7 +81,11 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements IBasicMetr
 		}
 		byte type = this.getStorageType();
 		
-		return type == 0 ? held.getItem() instanceof ItemFood : type == 1 ? held.getItem() instanceof IAmmo : type == 2;
+		return type == 0 ? isFood(held) : type == 1 ? held.getItem() instanceof IAmmo : type == 2;
+	}
+	private boolean isFood(ItemStack held) 
+	{
+		return held.getItem() instanceof ItemFood || held.getItem() instanceof ItemBandage || held.getItem() instanceof ItemSyringe;
 	}
 	private boolean loadGun(ItemStack held) 
 	{

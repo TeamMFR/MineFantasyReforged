@@ -3,16 +3,17 @@ package minefantasy.mf2.entity;
 import java.util.Iterator;
 import java.util.List;
 
-import minefantasy.mf2.MineFantasyII;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.archery.IArrowMF;
 import minefantasy.mf2.api.archery.IArrowRetrieve;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.weapon.IDamageType;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigWeapon;
 import minefantasy.mf2.item.archery.ArrowType;
-import minefantasy.mf2.item.gadget.EnumCasingType;
 import minefantasy.mf2.item.gadget.EnumExplosiveType;
-import minefantasy.mf2.item.gadget.EnumFuseType;
 import minefantasy.mf2.item.gadget.EnumPowderType;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
@@ -36,8 +37,6 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageType, IArrowRetrieve
 {
@@ -404,8 +403,6 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 					
 					float dam = Math.max(0.1F, this.getHitDamage() * firepower);//(getDamageModifier()*power) / 10F * (float)k;
 					
-					if(!worldObj.isRemote)
-						MFLogUtil.logDebug("Base MF Arrow Damage = " + dam + "force = " + (int)(firepower*100F));
 					if (this.getIsCritical())
 					{
 						dam *= (rand.nextFloat()*0.5F)+1.0F;
@@ -489,6 +486,10 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 						this.prevRotationYaw += 180.0F;
 						this.ticksInAir = 0;
 					}
+					if(isMagicArrow())
+					{
+						setDead();
+					}
 				} 
 				else 
 				{
@@ -522,6 +523,10 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 								this.worldObj, this.xTile,
 								this.yTile, this.zTile, this);
 					}
+					if(isMagicArrow())
+					{
+						setDead();
+					}
 					if(ConfigWeapon.breakArrowsGround && didArrowBreak())
 					{
 						breakArrow();
@@ -534,6 +539,18 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 				}
 			}
 
+			if(isMagicArrow())
+			{
+				for (i = 0; i < 4; ++i)
+				{
+					this.worldObj.spawnParticle("reddust", this.posX
+							+ this.motionX * i / 4.0D, this.posY
+							+ this.motionY * i / 4.0D, this.posZ
+							+ this.motionZ * i / 4.0D, -this.motionX,
+							-this.motionY + 0.2D, -this.motionZ);
+				}
+			}
+			
 			if (this.getIsCritical()) 
 			{
 				for (i = 0; i < 4; ++i)
@@ -902,6 +919,10 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 	@Override
 	public boolean canBePickedUp() 
 	{
+		if(isMagicArrow())
+		{
+			return false;
+		}
 		if(didArrowBreak())
 		{
 			breakArrow();
@@ -1063,4 +1084,10 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
     {
         return (new EntityDamageSourceBomb(bomb, user)).setProjectile();
     }
+	
+	public boolean isMagicArrow()
+	{
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(getArrowStack());
+		return material != null && material.type.equalsIgnoreCase("magic");
+	}
 }

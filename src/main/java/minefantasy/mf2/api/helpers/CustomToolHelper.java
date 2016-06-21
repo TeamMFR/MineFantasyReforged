@@ -391,6 +391,7 @@ public class CustomToolHelper
     	{
     		float mass = base.density * units;
     		list.add(EnumChatFormatting.GOLD + base.getMaterialString());
+    		if(mass > 0)
     		list.add(CustomMaterial.getWeightString(mass));
     		
     		if(base.isHeatable())

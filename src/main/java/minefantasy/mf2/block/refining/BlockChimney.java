@@ -79,7 +79,10 @@ public class BlockChimney extends BlockContainer
 	{
 		return (TileEntityChimney)world.getTileEntity(x, y, z);
 	}
-	
+	public boolean isWideChimney()
+	{
+		return isWide;
+	}
 	@Override
 	public boolean isOpaqueCube()
 	{
@@ -95,6 +98,10 @@ public class BlockChimney extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(int side, int meta)
 	{
+		if(isPipe)
+		{
+			return BlockListMF.reinforced_stone.getIcon(side, meta);
+		}
 		if(side == 1 || side == 0)
 		{
 			return bottomTex;
@@ -152,8 +159,28 @@ public class BlockChimney extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg)
 	{
+		if(isPipe)return;
+		
 		sideTex = reg.registerIcon("minefantasy2:chimney/chimney_"+chimneyType+"_side" + (isWide ? "Wide" : ""));
 		bottomTex = reg.registerIcon("minefantasy2:chimney/chimney_"+chimneyType+"_top" + (isWide ? "Wide" : ""));
 	}
+	private boolean isPipe;
+
+	public Block setPipe()
+	{
+		this.setBlockBounds(0F, 0F, 0F, 1F, 1F, 1F);
+		isPipe = true;
+		isWide = false;
+		return this;
+	}
+	public boolean isPipe() {
+		return isPipe;
+	}
+	@Override
+	public int getRenderType()
+	{
+		return isPipe() ? pipe_RI : super.getRenderType();
+	}
+	public static int pipe_RI = 117;
 
 }

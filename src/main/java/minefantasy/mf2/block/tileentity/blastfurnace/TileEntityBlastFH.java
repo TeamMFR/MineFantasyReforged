@@ -1,28 +1,17 @@
 package minefantasy.mf2.block.tileentity.blastfurnace;
 
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemHoe;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
-import net.minecraft.item.ItemTool;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityHopper;
-import net.minecraftforge.common.util.ForgeDirection;
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.MineFantasyAPI;
+import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import minefantasy.mf2.block.refining.BlockBFH;
 import minefantasy.mf2.block.tileentity.TileEntityCrucible;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.entity.EntityFireBlast;
-import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.util.MFLogUtil;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityBlastFH extends TileEntityBlastFC
 {
@@ -181,7 +170,7 @@ public class TileEntityBlastFH extends TileEntityBlastFC
 		if(shaft.getIsBuilt())
 		{
 			ItemStack input = shaft.getStackInSlot(1);
-			if(shaft.getStackInSlot(0) == null || !isCoal(shaft.getStackInSlot(0)))
+			if(shaft.tempUses <=0 && shaft.getStackInSlot(0) == null || !isCarbon(shaft.getStackInSlot(0)))
 			{
 				return null;
 			}
@@ -192,7 +181,10 @@ public class TileEntityBlastFH extends TileEntityBlastFC
 				{
 					for(int a = 0; a < shaft.getSizeInventory(); a++)
 					{
-						shaft.decrStackSize(a, 1);
+						if(a > 0 || shaft.shouldRemoveCarbon())
+						{
+							shaft.decrStackSize(a, 1);
+						}
 					}
 					return result;
 				}
@@ -200,6 +192,7 @@ public class TileEntityBlastFH extends TileEntityBlastFC
 		}
 		return null;
 	}
+
 	@Override
 	protected void interact(TileEntityBlastFC tile)
 	{

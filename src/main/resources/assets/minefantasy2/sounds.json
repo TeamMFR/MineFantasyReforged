@@ -248,13 +248,6 @@
       ]
     },
 	
-	"vehicle.cogstep": {
-    "category": "neutral",
-    "sounds": [
-        "vehicle/cogStep"
-      ]
-    },
-	
 	"block.furnace_open": {
     "category": "block",
     "sounds": [

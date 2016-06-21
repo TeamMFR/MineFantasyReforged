@@ -6,7 +6,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 import minefantasy.mf2.api.MineFantasyAPI;
-import minefantasy.mf2.api.armour.CogworkArmour;
 import minefantasy.mf2.api.armour.IArmouredEntity;
 import minefantasy.mf2.api.armour.ISpecialArmourMF;
 import minefantasy.mf2.api.armour.IElementalResistance;
@@ -286,11 +285,7 @@ public class TacticalManager
 		//Default speed is 100%
 		float totalSpeed = 100F;
 		
-		if(CogworkArmour.isWearingAnyCogwork(entityLiving))
-		{
-			totalSpeed = entityLiving.isSprinting() ? 60F : 80F;//Cogwork regardless always slows speed by 20%
-		}
-		else if(shouldSlow && !isImmuneToWeight(entityLiving))
+		if(shouldSlow && !isImmuneToWeight(entityLiving))
 		{
 			
 			totalSpeed += ArmourCalculator.getSpeedModForWeight(entityLiving);
@@ -537,7 +532,7 @@ public class TacticalManager
 	 */
 	public static boolean isImmuneToWeight(EntityLivingBase entityLiving) 
 	{
-		return CogworkArmour.hasPoweredSuit(entityLiving);
+		return PowerArmour.isPowered(entityLiving);
 	}
 	
 	public static void leap(Entity target, float angle, float power, float height) 

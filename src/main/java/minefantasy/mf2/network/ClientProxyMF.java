@@ -13,6 +13,7 @@ import minefantasy.mf2.block.tileentity.TileEntityBloomery;
 import minefantasy.mf2.block.tileentity.TileEntityBombBench;
 import minefantasy.mf2.block.tileentity.TileEntityBombPress;
 import minefantasy.mf2.block.tileentity.TileEntityCarpenterMF;
+import minefantasy.mf2.block.tileentity.TileEntityChimney;
 import minefantasy.mf2.block.tileentity.TileEntityCrossbowBench;
 import minefantasy.mf2.block.tileentity.TileEntityCrucible;
 import minefantasy.mf2.block.tileentity.TileEntityFirepit;
@@ -47,6 +48,7 @@ import minefantasy.mf2.client.render.HudHandlerMF;
 import minefantasy.mf2.client.render.RenderArrowMF;
 import minefantasy.mf2.client.render.RenderBombIcon;
 import minefantasy.mf2.client.render.RenderBow;
+import minefantasy.mf2.client.render.RenderPowerArmour;
 import minefantasy.mf2.client.render.RenderCrossbow;
 import minefantasy.mf2.client.render.RenderDragonBreath;
 import minefantasy.mf2.client.render.RenderFireBlast;
@@ -73,6 +75,7 @@ import minefantasy.mf2.client.render.block.RenderQuern;
 import minefantasy.mf2.client.render.block.RenderRack;
 import minefantasy.mf2.client.render.block.RenderResearch;
 import minefantasy.mf2.client.render.block.RenderRoast;
+import minefantasy.mf2.client.render.block.RenderSmokePipe;
 import minefantasy.mf2.client.render.block.RenderTanningRack;
 import minefantasy.mf2.client.render.block.RenderTrough;
 import minefantasy.mf2.client.render.block.TileEntityAmmoBoxRenderer;
@@ -90,14 +93,15 @@ import minefantasy.mf2.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mf2.client.render.block.TileEntityRackRenderer;
 import minefantasy.mf2.client.render.block.TileEntityResearchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityRoastRenderer;
+import minefantasy.mf2.client.render.block.TileEntitySmokePipeRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTroughRenderer;
-import minefantasy.mf2.client.render.mob.ModelDragon;
 import minefantasy.mf2.client.render.mob.ModelMinotaur;
 import minefantasy.mf2.client.render.mob.RenderDragon;
 import minefantasy.mf2.client.render.mob.RenderMinotaur;
 import minefantasy.mf2.entity.EntityArrowMF;
 import minefantasy.mf2.entity.EntityBomb;
+import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.entity.EntityDragonBreath;
 import minefantasy.mf2.entity.EntityFireBlast;
 import minefantasy.mf2.entity.EntityMine;
@@ -191,6 +195,8 @@ public class ClientProxyMF extends CommonProxyMF
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer());
 		RenderingRegistry.registerBlockHandler(new RenderAmmoBox());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer());
+		RenderingRegistry.registerBlockHandler(new RenderSmokePipe());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChimney.class, new TileEntitySmokePipeRenderer());
 	}
 	
 	public void registerEntityRenderer()
@@ -203,8 +209,9 @@ public class ClientProxyMF extends CommonProxyMF
 		RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, new RenderFireBlast());
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, new RenderDragonBreath());
 		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour());
 		
-		RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, new RenderDragon(new ModelDragon(), 2F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, new RenderDragon(2F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));
 	}
 	

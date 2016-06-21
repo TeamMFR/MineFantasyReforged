@@ -88,7 +88,7 @@ public class ContainerBlastChamber extends Container
 
             if (clicked > 1)//INVENTORY
             {
-                if (TileEntityBlastFC.isCoal(itemstack1))
+                if (TileEntityBlastFC.isCarbon(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false))
                     {

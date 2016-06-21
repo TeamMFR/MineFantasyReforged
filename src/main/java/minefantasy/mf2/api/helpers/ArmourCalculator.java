@@ -381,6 +381,10 @@ public class ArmourCalculator
 
 	public static String getEntityRegisterName(Entity entity)
     {
+		if(entity == null)
+		{
+			return "genetic";
+		}
         String s = EntityList.getEntityString(entity);
 
         if (s == null)
@@ -552,7 +556,6 @@ public class ArmourCalculator
 		return 1F - ((float)armour.getItemDamage() / (float)armour.getMaxDamage());
 	}
 
-	public static boolean useThresholdSystem = false;
 	/**
 	 * MECHANIC DT CALCULATOR: 
 	 * Gets the natural DT of an entity
@@ -571,6 +574,7 @@ public class ArmourCalculator
 	 */
 	public static float getArmourValueMod(ItemStack armour, float DT)
 	{
+		float initDT = DT;
 		if(armour.hasTagCompound() && armour.getTagCompound().hasKey("MF_Inferior"))
 		{
 			DT *= (armour.getTagCompound().getBoolean("MF_Inferior") ? 0.8F : 1.2F);

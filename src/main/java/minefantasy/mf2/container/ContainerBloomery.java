@@ -90,7 +90,7 @@ public class ContainerBloomery extends Container
                         return null;
                     }
                 }
-                else if (TileEntityBlastFC.isCoal(itemstack1))
+                else if (TileEntityBlastFC.isCarbon(itemstack1))
                 {
                     if (!this.mergeItemStack(itemstack1, 1, 2, false))
                     {

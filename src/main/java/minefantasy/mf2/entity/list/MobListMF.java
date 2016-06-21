@@ -1,20 +1,22 @@
 package minefantasy.mf2.entity.list;
 
 
+import cpw.mods.fml.common.registry.EntityRegistry;
+import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.config.ConfigMobs;
+import minefantasy.mf2.entity.EntityCogwork;
+import minefantasy.mf2.entity.mob.DragonBreath;
+import minefantasy.mf2.entity.mob.EntityDragon;
+import minefantasy.mf2.entity.mob.EntityMinotaur;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityList.EntityEggInfo;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
-import minefantasy.mf2.MineFantasyII;
-import minefantasy.mf2.config.ConfigMobs;
-import minefantasy.mf2.entity.mob.*;
-
-import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class MobListMF
 {
@@ -22,7 +24,8 @@ public class MobListMF
 	{
 		DragonBreath.init();
 		addEntity(auto ? EntityListMF.autoAssign() : IDBase, EntityDragon.class, "MF_Dragon", 0, 12698049);++IDBase;
-		addEntity(auto ? EntityListMF.autoAssign() : IDBase, EntityMinotaur.class, "MF_Minotaur", 5651507, 11013646);
+		addEntity(auto ? EntityListMF.autoAssign() : IDBase, EntityMinotaur.class, "MF_Minotaur", 5651507, 11013646);++IDBase;
+		addStaticEntity(auto ? EntityListMF.autoAssign() : IDBase, EntityCogwork.class, "MF_CogSuit");
 		
 		addSpawn(EntityDragon.class, 1, 1, 1, EnumCreatureType.monster, Type.NETHER);
 		if(ConfigMobs.minotaurSpawnrate > 0)
@@ -35,11 +38,20 @@ public class MobListMF
 		}
 	}
 	
+	private static void addStaticEntity(int IDBase, Class<? extends Entity> entityClass, String entityName)
+    {
+		if (MineFantasyII.isDebug())
+        {
+        	MFLogUtil.logDebug("MineFantasy: Register Basic Entity " + entityClass + " with Mod ID " + IDBase);
+        }
+        EntityRegistry.registerModEntity(entityClass, entityName, IDBase, MineFantasyII.instance, 128, 1, true);
+        EntityList.addMapping(entityClass, entityName, IDBase);
+    }
 	private static void addEntity(int IDBase, Class<? extends Entity> entityClass, String entityName, int eggColor, int eggDotsColor)
     {
             if (MineFantasyII.isDebug())
             {
-            	System.out.println("MineFantasy: Register Mob " + entityClass + " with Mod ID " + IDBase);
+            	MFLogUtil.logDebug("MineFantasy: Register Mob " + entityClass + " with Mod ID " + IDBase);
             }
             EntityRegistry.registerModEntity(entityClass, entityName, IDBase, MineFantasyII.instance, 128, 1, true);
             EntityList.entityEggs.put(Integer.valueOf(IDBase), new EntityEggInfo(IDBase, eggColor, eggDotsColor));

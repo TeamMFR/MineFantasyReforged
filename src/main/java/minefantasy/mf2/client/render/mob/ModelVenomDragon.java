@@ -991,7 +991,7 @@ public class ModelVenomDragon extends ModelBase
         this.Rightfoot.addChild(this.Lefttoeleft);
         this.Righthandleftfinger.addChild(this.Clawrighthandleft);
         this.Neckend.addChild(this.Headback);
-        this.Headback.addChild(this.Lowerjaw);
+        //this.Headback.addChild(this.Lowerjaw);
         this.Shoulderleft.addChild(this.Lowerarmleft);
         this.Thumbtoeupperleft.addChild(this.Thumbtoelowerleft);
         this.Body.addChild(this.Shoulderleft_1);
@@ -1063,7 +1063,7 @@ public class ModelVenomDragon extends ModelBase
         this.Headback.rotateAngleX = neckX / (180F / (float) Math.PI) + neckAngle;
         this.Headback.rotateAngleY = neckY / (180F / (float) Math.PI);
         
-        this.Lowerjaw.rotateAngleX = -0.045553093477052F - jawAngle;
+        this.Lowerjaw.rotateAngleX = 0.045553093477052F + jawAngle;
         //this.Tail1.rotateAngleY = (float) Math.toRadians(dragon.prevRotationYaw-dragon.rotationYaw)*1.5F;
         //this.Tail3.rotateAngleY = (float) Math.toRadians(dragon.prevRotationYaw-dragon.rotationYaw)*1.5F;
         //this.Tail4.rotateAngleY = (float) Math.toRadians(dragon.prevRotationYaw-dragon.rotationYaw)*1.5F;

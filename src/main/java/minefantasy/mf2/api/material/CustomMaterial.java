@@ -201,6 +201,11 @@ public class CustomMaterial
 			df = decimal_format_grams;
 			mass = (int)(mass*1000F);
 		}
+		else if(mass > 1000)
+		{
+			s = "attribute.weightt.name";
+			mass = (int)(mass/1000F);
+		}
 		return StatCollector.translateToLocalFormatted(s, decimal_format.format(mass));
 	}
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");

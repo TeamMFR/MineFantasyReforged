@@ -2,34 +2,27 @@ package minefantasy.mf2.entity;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
-import minefantasy.mf2.MineFantasyII;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.item.gadget.EnumCasingType;
 import minefantasy.mf2.item.gadget.EnumExplosiveType;
 import minefantasy.mf2.item.gadget.EnumFuseType;
 import minefantasy.mf2.item.gadget.EnumPowderType;
+import minefantasy.mf2.mechanics.CombatMechanics;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.passive.EntityVillager;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.pathfinding.PathEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import minefantasy.mf2.mechanics.CombatMechanics;
 
 public class EntityBomb extends Entity
 {
@@ -162,7 +155,7 @@ public class EntityBomb extends Entity
         		Object object = collide.get(0);
 	        	if(object instanceof Entity && object != this)
 	        	{
-	        		if(this.ridingEntity == null)
+	        		if(this.ridingEntity == null && ((Entity) object).riddenByEntity == null && canStick((Entity) object))
 	        		{
 		        		this.mountEntity((Entity) object);
 		        		this.fuse = getFuseTime();
@@ -200,7 +193,12 @@ public class EntityBomb extends Entity
         }
     }
     
-    @Override
+    private boolean canStick(Entity entity) 
+    {
+		return ! (entity instanceof EntityCogwork);
+	}
+
+	@Override
     public void mountEntity(Entity object)
     {
     	super.mountEntity(object);

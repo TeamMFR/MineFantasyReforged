@@ -293,100 +293,6 @@ public class MineFantasyAPI
 	}
 	
 	/**
-	 * Adds a fuel for forges
-	 * 
-	 * @param item
-	 *            the item ID to be used
-	 * @param meta
-	 *            the item Meta to be used
-	 * @param dura
-	 *            the amount of ticks said item gives
-	 * @param temperature
-	 *            the base temperature given
-	 * @param willLight
-	 *            weather the fuel lights forges(like lava)
-	 */
-	public static void addForgeFuel(Item item, int meta, float dura, int temperature, boolean willLight) {
-		addForgeFuel(new ItemStack(item, 1, meta), dura, temperature, willLight);
-	}
-
-	/**
-	 * Adds a fuel for forges
-	 * 
-	 * @param item
-	 *            the item ID to be used
-	 * @param meta
-	 *            the item Meta to be used
-	 * @param dura
-	 *            the amount of ticks said item gives
-	 * @param temperature
-	 *            the base temperature given
-	 */
-	public static void addForgeFuel(Item item, int meta, float dura, int temperature) {
-		addForgeFuel(item, meta, dura, temperature, false);
-	}
-
-	/**
-	 * Adds a fuel for forges
-	 * 
-	 * @param item
-	 *            the item to be used
-	 * @param dura
-	 *            the amount of ticks said item gives
-	 * @param temperature
-	 *            the base temperature given
-	 * @param willLight
-	 *            weather the fuel lights forges(like lava)
-	 */
-	public static void addForgeFuel(ItemStack item, float dura, int temperature, boolean willLight) {
-		ForgeItemHandler.forgeFuel.add(new ForgeFuel(item, dura, temperature, willLight));
-		if ((int) (temperature * 1.25) > ForgeItemHandler.forgeMaxTemp) {
-			ForgeItemHandler.forgeMaxTemp = (int) (temperature * 1.25);
-		}
-	}
-
-	/**
-	 * Adds a fuel for forges
-	 * 
-	 * @param item
-	 *            the item to be used
-	 * @param dura
-	 *            the amount of ticks said item gives
-	 * @param temperature
-	 *            the base temperature given
-	 * @param willLight
-	 *            weather the fuel lights forges(like lava)
-	 */
-	public static void addForgeFuel(Item id, float dura, int temperature, boolean willLight) {
-		addForgeFuel(new ItemStack(id, 2, OreDictionary.WILDCARD_VALUE), dura, temperature, willLight);
-	}
-
-	/**
-	 * Adds a fuel for forges
-	 * 
-	 * @param item
-	 *            the item to be used
-	 * @param dura
-	 *            the amount of ticks said item gives
-	 * @param temperature
-	 *            the base temperature given
-	 */
-	public static void addForgeFuel(ItemStack item, float dura, int temperature) {
-		addForgeFuel(item, dura, temperature, false);
-	}
-
-	/**
-	 * Adds a fuel for forges
-	 * 
-	 * @param item the item to be used
-	 * @param dura the amount of ticks said item gives
-	 * @param temperature the base temperature given
-	 */
-	public static void addForgeFuel(Item id, float dura, int temperature) {
-		addForgeFuel(id, dura, temperature, false);
-	}
-
-	/**
 	 * Allows an item to be heated
 	 * 
 	 * @param item the item to heat
@@ -492,19 +398,6 @@ public class MineFantasyAPI
     {
         return item2.getItem() == item1.getItem() && (item2.getItemDamage() == 32767 || item2.getItemDamage() == item1.getItemDamage());
     }
-
-	public static boolean isCarbon(ItemStack item)
-	{
-		for(int i: OreDictionary.getOreIDs(item))
-		{
-			String name = OreDictionary.getOreName(i);
-			if(name != null && name.equalsIgnoreCase("carbon"))
-			{
-				return true;
-			}
-		}
-		return false;
-	}
 	
 	/**
 	 * Add a cooking recipe

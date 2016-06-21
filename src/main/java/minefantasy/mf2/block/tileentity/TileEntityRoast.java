@@ -109,7 +109,10 @@ public class TileEntityRoast extends TileEntity implements IInventory, IHeatUser
 				setInventorySlotContents(0, item2);
 				tryDecrMainItem(player);
 				updateRecipe();
-				//worldObj.playSoundEffect(xCoord+0.5D, yCoord+0.5D, zCoord+0.5D, "mob.horse.leather", 1.0F, 1.0F);
+				if(!isOven() && this.getTemp() > 0)
+				{
+					worldObj.playSoundEffect(xCoord+0.5D, yCoord+0.5D, zCoord+0.5D, "random.fizz", 1.0F, 1.0F);
+				}
 				return true;
 			}
 		}

@@ -2,18 +2,20 @@ package minefantasy.mf2.config;
 
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.TacticalManager;
+import minefantasy.mf2.entity.EntityCogwork;
 
 public class ConfigArmour extends ConfigurationBaseMF 
 {
 	public static final String CATEGORY_BONUS = "Bonuses";
 	
 	public static boolean resistArrow;
-
 	
 	public static final String CATEGORY_PENALTIES = "Penalties";
 	
 	
-	public static final String CATEGORY_MISC = "Other Features";
+	public static final String CATEGORY_COGWORK = "Cogwork Features";
+	public static boolean cogworkGrief;
+	public static float cogworkFuelUnits;
 
 	@Override
 	protected void loadConfig() 
@@ -25,7 +27,11 @@ public class ConfigArmour extends ConfigurationBaseMF
 		TacticalManager.minWeightSpeed = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Min armour weigh speed", 10F, "The minimal speed percent capable from weight (10 = 10%), MF armours don't go lower than 75% anyway").getString());
 		ArmourCalculator.slowRate = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Slowdown Rate", 1.0F, "A modifier for the rate armours slow down movement, increasing this slows you more, decreasing it slows less, just keep it above 0").getString());
 		
-		//ArmourCalculator.useThresholdSystem = Boolean.parseBoolean(config.get(CATEGORY_MISC, "DT Armour", false, "(As of 2.4.2) Armour has two mechanics how it works: All armours have a value that effects how it works against cutting/blunt/piercing ratios and will react to durability loss... However the Damage Threshold system cuts a set amount of damage off, (default uses damage ratio which cuts off a percentage)").getString());
+		cogworkGrief = Boolean.parseBoolean(config.get(CATEGORY_COGWORK, "Cogwork Grief", true, "Should cogwork armour cause envionmental damage when impact landing").getString());
+		cogworkFuelUnits = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Fuel Modifier", 1F, "Modify the amount of fuel added to cogworks").getString());
+		EntityCogwork.health_modifier = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Durability Modifier", 1.0F, "Modify the relative durability of cogwork armour").getString());
+		EntityCogwork.rating_modifier = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Armour Modifier", 1.0F, "Modify the relative armour rating of cogwork armour").getString());
+		EntityCogwork.allowedBulk = Integer.parseInt(config.get(CATEGORY_COGWORK, "Worn Apparel Restrict", 2, "-1: can't wear armour with cogwork, 0=Can enter cogwork with light armour, 1=can enter with medium, 2=can enter in any armour").getString());
 	}
 
 }

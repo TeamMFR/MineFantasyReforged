@@ -2,6 +2,7 @@ package minefantasy.mf2.api.stamina;
 
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import net.minecraft.entity.EntityLivingBase;
@@ -320,6 +321,10 @@ public class StaminaBar
 	}
 	public static void modifyStaminaValue(EntityLivingBase user, float mod)
 	{
+		if(mod < 0 && PowerArmour.isPowered(user))
+		{
+			return;
+		}
 		setStaminaValue(user, getStaminaValue(user)+mod);
 		
 		if(mod < 0 && getStaminaValue(user) < 0)
@@ -441,11 +446,20 @@ public class StaminaBar
 	}
 	public static boolean isPercentStamAvailable(EntityLivingBase user, float decimal, boolean flash)
 	{
+		if(PowerArmour.isPowered(user))
+		{
+			return true;//Cogwork infinite power
+		}
+		
 		return isStaminaAvailable(user, getTotalMaxStamina(user)*decimal, flash);
 	}
 	
 	public static float getBaseDecayModifier(EntityLivingBase user, boolean countArmour, boolean countHeld)
 	{
+		if(PowerArmour.isPowered(user))
+		{
+			return 0F;
+		}
 		float value = getDecayModifier(user.worldObj);
 		float AM = 1.0F;
 		if(user instanceof EntityPlayer)

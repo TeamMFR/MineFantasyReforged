@@ -6,10 +6,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import minefantasy.mf2.api.MineFantasyAPI;
+import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class Alloy{
@@ -84,7 +83,7 @@ public class Alloy{
 
     private boolean areBothCarbon(ItemStack item1, ItemStack item2) 
     {
-		return MineFantasyAPI.isCarbon(item1) && MineFantasyAPI.isCarbon(item2);
+		return MineFantasyFuels.isCarbon(item1) && MineFantasyFuels.isCarbon(item2);
 	}
 
 	/**

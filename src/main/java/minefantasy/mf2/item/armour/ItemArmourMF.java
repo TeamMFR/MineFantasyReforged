@@ -392,6 +392,7 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 		{
 			DR = ArmourCalculator.adjustACForDamage(src, DR, getProtectiveTrait(armour, 0), getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}
+		MFLogUtil.logDebug(">>>>DR<<<< = " + DR);
 		return DR;
 	}
 	@Override

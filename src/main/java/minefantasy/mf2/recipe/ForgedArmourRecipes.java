@@ -11,9 +11,8 @@ import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.item.list.ArmourListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
-import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
-import net.minecraft.init.Items;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -40,6 +39,7 @@ public class ForgedArmourRecipes
     		assembleScalemail(customMat);
     		assembleSplintmail(customMat);
     		assembleFieldplate(customMat);
+    		assembleCogPlating(customMat);
     	}
 	}
 	
@@ -331,11 +331,56 @@ public class ForgedArmourRecipes
 				rivet, rivet);//2 Rivet
 	}
 	
+	
+	private static void assembleCogPlating(CustomMaterial material)
+	{
+		ItemStack product = ComponentListMF.cogwork_armour.createComm(material.name);
+		
+		ItemStack minorPiece = ComponentListMF.plate.createComm(material.name);
+		ItemStack majorPiece = ComponentListMF.plate_huge.createComm(material.name);
+		
+		for(ItemStack ingot: OreDictionary.getOres("ingot"+material.name))
+		{
+			int time = 4;
+			KnowledgeListMF.hugePlateR.add(
+			MineFantasyAPI.addAnvilRecipe(engineering, majorPiece, "cogArmour", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+			{
+				"RRRR",
+				"IIII",
+				'R', ComponentListMF.rivet,
+				'I', ingot
+			}));
+			
+			Salvage.addSalvage(majorPiece,
+					material.getItem(), material.getItem(), material.getItem(), material.getItem(),
+					new ItemStack(ComponentListMF.rivet, 4)
+					);
+			
+			
+			time = 25;
+			KnowledgeListMF.cogPlateR.add(
+			MineFantasyAPI.addAnvilRecipe(engineering, product, "cogArmour", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+			{
+				"  P  ",
+				"pPPPp",
+				"p P p",
+				" pPp ",
+				
+				'p', ingot,
+				'P', majorPiece,
+			}));
+		}
+		Salvage.addSalvage(product,
+				material.getItem(), material.getItem(), material.getItem(), material.getItem(),material.getItem(),material.getItem(),
+				majorPiece, majorPiece, majorPiece, majorPiece, majorPiece, majorPiece
+				);
+	}
+	
 	private static void addMetalComponents(CustomMaterial material)
 	{
 		ItemStack salvage = material.getItem();
 		
-		int time = 4;
+		int time = 3;
 		KnowledgeListMF.mailRecipes.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.chainmesh.createComm(material.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
@@ -345,7 +390,7 @@ public class ForgedArmourRecipes
 			
 			'H', ComponentListMF.metalHunk.createComm(material.name)
 		}));
-		time = 6;
+		time = 3;
 		KnowledgeListMF.scaleRecipes.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.scalemesh.createComm(material.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
@@ -354,7 +399,7 @@ public class ForgedArmourRecipes
 			
 			'H', ComponentListMF.metalHunk.createComm(material.name)
 		}));
-		time = 8;
+		time = 4;
 		KnowledgeListMF.splintRecipes.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.splintmesh.createComm(material.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
@@ -375,14 +420,13 @@ public class ForgedArmourRecipes
 	{
 		ItemStack salvage = material.getItem();
 		
-		int time = 10;
+		int time = 4;
 		KnowledgeListMF.plateRecipes.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.plate.createComm(material.name), "smelt"+material.name, true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
 			"II",
 			'I', ingot
 		}));
-		
-		Salvage.addSalvage(ComponentListMF.chainmesh.createComm(material.name), salvage, salvage);
+		Salvage.addSalvage(ComponentListMF.plate.createComm(material.name), salvage, salvage);
 	}
 }

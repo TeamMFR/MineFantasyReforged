@@ -1,12 +1,8 @@
 package minefantasy.mf2.item.list;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
+import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.api.MineFantasyAPI;
-import minefantasy.mf2.api.heating.Heatable;
-import minefantasy.mf2.api.knowledge.InformationBase;
-import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import minefantasy.mf2.api.mining.RandomDigs;
 import minefantasy.mf2.api.mining.RandomOre;
 import minefantasy.mf2.block.list.BlockListMF;
@@ -17,7 +13,7 @@ import minefantasy.mf2.item.ItemFilledMould;
 import minefantasy.mf2.item.ItemHide;
 import minefantasy.mf2.item.ItemMFBowl;
 import minefantasy.mf2.item.ItemRawOreMF;
-import minefantasy.mf2.item.custom.*;
+import minefantasy.mf2.item.custom.ItemCustomComponent;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.gadget.ItemBombComponent;
 import minefantasy.mf2.item.gadget.ItemCrossbowPart;
@@ -29,7 +25,6 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
 /**
  * @author Anonymous Productions
  */
@@ -169,10 +164,12 @@ public class ComponentListMF
 	public static ItemCustomComponent scalemesh = new ItemCustomComponent("scalemesh", 1F);
 	public static ItemCustomComponent splintmesh = new ItemCustomComponent("splintmesh", 1F);
 	public static ItemCustomComponent plate = new ItemCustomComponent("plate", 2F);
+	public static ItemCustomComponent plate_huge = new ItemCustomComponent("plate_huge", 8F);
 	public static ItemCustomComponent metalHunk = new ItemCustomComponent("hunk", 0.25F);
 	public static ItemCustomComponent arrowhead = new ItemCustomComponent("arrowhead", 1/4F);
 	public static ItemCustomComponent bodkinhead = new ItemCustomComponent("bodkinhead", 1/4F);
 	public static ItemCustomComponent broadhead = new ItemCustomComponent("broadhead", 1/4F);
+	public static ItemCustomComponent cogwork_armour = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 64F).setCanDamage().setCreativeTab(CreativeTabMF.tabGadget).setMaxStackSize(1);
 	
 	public static Item flux_pot = new ItemComponentMF("flux_pot", 0).setContainerItem(clay_pot);
 	public static Item coal_flux = new ItemComponentMF("coal_flux", 0);
@@ -184,6 +181,8 @@ public class ComponentListMF
 	public static Item hinge = new ItemComponentMF("hinge", 0);
 	public static Item plank_cut = new ItemComponentMF("plank_cut").setCustom(1);
 	public static Item plank_pane = new ItemComponentMF("plank_pane").setCustom(6);
+	
+	public static Item cogwork_pulley = new ItemComponentMF("cogwork_pulley", 1).setCreativeTab(CreativeTabMF.tabGadget);
 	
 	public static void load() 
 	{
@@ -214,24 +213,23 @@ public class ComponentListMF
 		OreDictionary.registerOre("ingotCompositeAlloy", ingotCompositeAlloy);
 		OreDictionary.registerOre("ingotIron", Items.iron_ingot);
 		OreDictionary.registerOre("ingotGold", Items.gold_ingot);
-		OreDictionary.registerOre("carbon", new ItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("carbon", coke);
-		OreDictionary.registerOre("carbon", coal_flux);
+		
+		AdvancedFuelHandlerMF.registerItems();
 	}
 
 	private static void initFuels() 
 	{
-		MineFantasyAPI.addForgeFuel(new ItemStack(Items.coal, 1, 0), 900, 150);//	150C , 45s
-		MineFantasyAPI.addForgeFuel(new ItemStack(Items.coal, 1, 1), 1200, 180);//	180C , 1m
-		MineFantasyAPI.addForgeFuel(Items.blaze_powder, 200, 300, true);//			300C , 10s
-		MineFantasyAPI.addForgeFuel(Items.blaze_rod,    300, 300, true);//			300C , 15s
-		MineFantasyAPI.addForgeFuel(Items.fire_charge,  1200, 350,true);//			350C , 1m
-		MineFantasyAPI.addForgeFuel(Items.lava_bucket,  2400, 500, true);//			500C , 2m
-		MineFantasyAPI.addForgeFuel(Items.magma_cream,  2400, 400);//				400C , 2m
+		MineFantasyFuels.addForgeFuel(new ItemStack(Items.coal, 1, 0), 900, 150);//	150C , 45s
+		MineFantasyFuels.addForgeFuel(new ItemStack(Items.coal, 1, 1), 1200, 180);//	180C , 1m
+		MineFantasyFuels.addForgeFuel(Items.blaze_powder, 200, 300, true);//			300C , 10s
+		MineFantasyFuels.addForgeFuel(Items.blaze_rod,    300, 300, true);//			300C , 15s
+		MineFantasyFuels.addForgeFuel(Items.fire_charge,  1200, 350,true);//			350C , 1m
+		MineFantasyFuels.addForgeFuel(Items.lava_bucket,  2400, 500, true);//			500C , 2m
+		MineFantasyFuels.addForgeFuel(Items.magma_cream,  2400, 400, true, true);//				400C , 2m
 		
-		MineFantasyAPI.addForgeFuel(ComponentListMF.coalDust, 200, 150);//				150C , 10s
-		MineFantasyAPI.addForgeFuel(ComponentListMF.coke, 1200, 250);//					250C , 1m
-		MineFantasyAPI.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 500);//	500C , 2m
+		MineFantasyFuels.addForgeFuel(ComponentListMF.coalDust, 200, 150);//				150C , 10s
+		MineFantasyFuels.addForgeFuel(ComponentListMF.coke, 1200, 250, false, true);//					250C , 1m
+		MineFantasyFuels.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 500, true, true);//	500C , 2m
 	}
 
 	private static void addRandomDrops()

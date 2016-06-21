@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 
 import minefantasy.mf2.api.armour.IGasProtector;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
@@ -280,6 +281,10 @@ public class EntitySmoke extends Entity
     		{
     			return false;
     		}
+    	}
+    	if(PowerArmour.isWearingCogwork(hit))
+    	{
+    		return false;
     	}
 		return hit.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
 	}

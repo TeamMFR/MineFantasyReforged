@@ -45,6 +45,7 @@ public class PacketHandlerMF
         packetList.put(RackCommand.packetName, new RackCommand());
         packetList.put(AmmoBoxPacket.packetName, new AmmoBoxPacket());
         packetList.put(WoodDecorPacket.packetName, new WoodDecorPacket());
+        packetList.put(CogworkControlPacket.packetName, new CogworkControlPacket());
     }
 
     @SubscribeEvent

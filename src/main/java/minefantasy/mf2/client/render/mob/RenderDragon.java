@@ -17,9 +17,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderDragon extends RenderLiving
 {
-	public RenderDragon(ModelBase model, float shadow)
+	private static ModelBase dragonModel = new ModelDragon();
+	private static ModelBase venomModel = new ModelVenomDragon();
+	private static ModelBase frostModel = new ModelFrostDragon();
+	public RenderDragon(float shadow)
     {
-        super(model, shadow);
+        super(dragonModel, shadow);
     }
     
     @Override
@@ -39,6 +42,8 @@ public class RenderDragon extends RenderLiving
     }
     public void doRender(EntityLiving entity, double x, double y, double z, float f, float f1)
     {
+    	String breed = ((EntityDragon)entity).getType().breedName;
+    	this.mainModel = breed.equalsIgnoreCase("white") ? frostModel : breed.equalsIgnoreCase("green") ? venomModel : dragonModel;
     	super.doRender(entity, x, y, z, f, 1);
     	BossStatus.setBossStatus((EntityDragon)entity, ((EntityDragon)entity).getType().tier == 4);
     }

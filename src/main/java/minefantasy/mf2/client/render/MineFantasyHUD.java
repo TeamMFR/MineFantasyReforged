@@ -2,15 +2,16 @@ package minefantasy.mf2.client.render;
 
 import java.awt.Color;
 
+import org.lwjgl.opengl.GL11;
+
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IDisplayMFAmmo;
 import minefantasy.mf2.api.archery.IFirearm;
-import minefantasy.mf2.api.armour.CogworkArmour;
-import minefantasy.mf2.api.armour.ICogworkArmour;
 import minefantasy.mf2.api.crafting.IBasicMetre;
 import minefantasy.mf2.api.crafting.IQualityBalance;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.GuiHelper;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TextureHelperMF;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
@@ -19,6 +20,7 @@ import minefantasy.mf2.block.tileentity.TileEntityAnvilMF;
 import minefantasy.mf2.block.tileentity.TileEntityCarpenterMF;
 import minefantasy.mf2.block.tileentity.TileEntityTanningRack;
 import minefantasy.mf2.config.ConfigClient;
+import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.item.gadget.IScope;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import net.minecraft.client.Minecraft;
@@ -26,23 +28,44 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import org.lwjgl.opengl.GL11;
 
 public class MineFantasyHUD extends Gui
 {
 	private static Minecraft mc = Minecraft.getMinecraft();
+	public void renderViewport() 
+	{
+		if(mc.thePlayer != null)
+		{
+			EntityPlayer player = mc.thePlayer;
+			
+			if(this.mc.gameSettings.thirdPersonView == 0)
+			{
+				if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IScope)
+				{
+					renderScope(player.getHeldItem(), player);
+				}
+				if(player.ridingEntity != null && player.ridingEntity instanceof EntityCogwork)
+				{
+					renderPowerHelmet(player, (EntityCogwork)player.ridingEntity);
+				}
+			}
+		}
+	}
 	public void renderGameOverlay(float partialTicks, int mouseX, int mouseY) 
 	{
 		if(mc.thePlayer != null)
 		{
 			EntityPlayer player = mc.thePlayer;
+			
 			if(mc.currentScreen != null && (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative))
 			{
 				renderArmourRating(player);
@@ -51,25 +74,9 @@ public class MineFantasyHUD extends Gui
 			{
 				renderAmmo(player);
 			}
-			if(this.mc.gameSettings.thirdPersonView == 0)
-			{
-				if(player.getHeldItem() != null && player.getHeldItem().getItem() instanceof IScope)
-				{
-					renderScope(player.getHeldItem(), player);
-				}
-			}
-			if(StaminaBar.isSystemActive && !player.capabilities.isCreativeMode)
+			if(StaminaBar.isSystemActive && !player.capabilities.isCreativeMode && !PowerArmour.isWearingCogwork(player))
 			{
 				renderStaminaBar(player);
-			}
-			
-			if(player.getEquipmentInSlot(0) != null && player.getEquipmentInSlot(0).getItem() instanceof ICogworkArmour)
-			{
-				renderPowerArmourBar(player.getEquipmentInSlot(0), player, (ICogworkArmour)player.getEquipmentInSlot(0).getItem());
-			}
-			else if(player.getEquipmentInSlot(3) != null && player.getEquipmentInSlot(3).getItem() instanceof ICogworkArmour)
-			{
-				renderPowerArmourBar(player.getEquipmentInSlot(3), player, (ICogworkArmour)player.getEquipmentInSlot(3).getItem());
 			}
 			
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -107,7 +114,24 @@ public class MineFantasyHUD extends Gui
 			}
 		}
 	}
+	protected static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
 	
+	protected void renderPowerHelmet()
+    {
+		GL11.glPushMatrix();
+		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc, MineFantasyHUD.mc.displayWidth, MineFantasyHUD.mc.displayHeight);
+        int width = scaledresolution.getScaledWidth();
+        int height = scaledresolution.getScaledHeight();
+        
+        bindTexture("textures/gui/scopes/cogwork_helm.png");
+        int x = (width/2 - 256);
+        int y = height - 256;
+        
+        this.drawTexturedModalRect(x, y, 0, 64, 128, 64);
+        
+        GL11.glPopMatrix();
+    }
+
 	private void renderScope(ItemStack item, EntityPlayer user)
 	{
 		if(item.getItem() instanceof IFirearm)
@@ -129,30 +153,51 @@ public class MineFantasyHUD extends Gui
 			}
 		}
 	}
-	private void renderPowerArmourBar(ItemStack item, EntityPlayer user, ICogworkArmour armour)
+	private void renderPowerHelmet(EntityPlayer user, EntityCogwork suit)
 	{
-		if(armour.needsPower(item))
-		{
-			GL11.glPushMatrix();
-			 GL11.glColor3f(1.0F, 1.0F, 1.0F);
-			GL11.glEnable(GL11.GL_BLEND);
-	        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc, MineFantasyHUD.mc.displayWidth, MineFantasyHUD.mc.displayHeight);
-	        int width = scaledresolution.getScaledWidth();
-	        int height = scaledresolution.getScaledHeight();
-	        
-	        bindTexture("textures/gui/hud_overlay.png");
-	        int[] orientationAR = getOrientsFor(width, height, ConfigClient.CF_xOrient, ConfigClient.CF_yOrient);
-	        int xPos = orientationAR[0] + ConfigClient.CF_xPos;
-	        int yPos = orientationAR[1] + ConfigClient.CF_yPos;
-	        
-	        this.drawTexturedModalRect(xPos, yPos, 84, 38, 172, 20);
-	        int i = CogworkArmour.getScaledMetre(item, 160);
-	        this.drawTexturedModalRect(xPos+6+(160-i), yPos+11, 90, 20, i, 3);
-	        
-	        GL11.glPopMatrix();
-		}
+		GL11.glPushMatrix();
+		 GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		GL11.glEnable(GL11.GL_BLEND);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc, MineFantasyHUD.mc.displayWidth, MineFantasyHUD.mc.displayHeight);
+        int width = scaledresolution.getScaledWidth();
+        int height = scaledresolution.getScaledHeight();
+        
+        renderHelmetBlur(width, height);
+        
+        bindTexture("textures/gui/hud_overlay.png");
+        int[] orientationAR = getOrientsFor(width, height, ConfigClient.CF_xOrient, ConfigClient.CF_yOrient);
+        int xPos = orientationAR[0] + ConfigClient.CF_xPos;
+        int yPos = orientationAR[1] + ConfigClient.CF_yPos;
+        
+        this.drawTexturedModalRect(xPos, yPos, 84, 38, 172, 20);
+        int i = suit.getMetreScaled(160);
+        this.drawTexturedModalRect(xPos+6+(160-i), yPos+11, 90, 20, i, 3);
+        
+        GL11.glPopMatrix();
 	}
+	
+	protected void renderHelmetBlur(int p_73836_1_, int p_73836_2_)
+    {
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glDepthMask(false);
+        OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        bindTexture("textures/gui/scopes/cogwork_helm.png");
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(0.0D, (double)p_73836_2_, -90.0D, 0.0D, 1.0D);
+        tessellator.addVertexWithUV((double)p_73836_1_, (double)p_73836_2_, -90.0D, 1.0D, 1.0D);
+        tessellator.addVertexWithUV((double)p_73836_1_, 0.0D, -90.0D, 1.0D, 0.0D);
+        tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
+        tessellator.draw();
+        GL11.glDepthMask(true);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
+
 
 	public int[] getClickedBlock(float ticks, int mouseX, int mouseY)
 	{
@@ -168,6 +213,7 @@ public class MineFantasyHUD extends Gui
 	}
 	private void renderArmourRating(EntityPlayer player)
 	{
+		int base = getBaseRating(player);
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc, MineFantasyHUD.mc.displayWidth, MineFantasyHUD.mc.displayHeight);
 		int width = scaledresolution.getScaledWidth();
         int height = scaledresolution.getScaledHeight();
@@ -180,17 +226,17 @@ public class MineFantasyHUD extends Gui
         if(ArmourCalculator.advancedDamageTypes)
         {
         	mc.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal("attribute.armour.protection"), xPosAR, yPosAR, Color.WHITE.getRGB());
-	        displayTraitValue(xPosAR, yPosAR+8, orientationAR, 0, player);
-	        displayTraitValue(xPosAR, yPosAR+16, orientationAR, 2, player);
-	        displayTraitValue(xPosAR, yPosAR+24, orientationAR, 1, player);
+	        displayTraitValue(xPosAR, yPosAR+8, orientationAR, 0, player, base);
+	        displayTraitValue(xPosAR, yPosAR+16, orientationAR, 2, player, base);
+	        displayTraitValue(xPosAR, yPosAR+24, orientationAR, 1, player, base);
 	        y = 32;
         }
         else
         {
-        	 displayGeneralAR(xPosAR, yPosAR, orientationAR, player);
+        	 displayGeneralAR(xPosAR, yPosAR, orientationAR, player, base);
         }
         
-        float weight = 0.0F;
+        float weight = getBaseWeight(player);
 		
 		for(int a = 0; a < 4; a ++)
 		{
@@ -200,6 +246,22 @@ public class MineFantasyHUD extends Gui
 		
         String massString = CustomMaterial.getWeightString(weight);
         mc.fontRenderer.drawStringWithShadow(massString, xPosAR, yPosAR+y, Color.WHITE.getRGB());
+	}
+	private int getBaseRating(EntityPlayer player) 
+	{
+		if(player.ridingEntity != null && player.ridingEntity instanceof EntityCogwork)
+		{
+			return ((EntityCogwork)player.ridingEntity).getArmourRating();
+		}
+		return 0;
+	}
+	private float getBaseWeight(EntityPlayer player) 
+	{
+		if(player.ridingEntity != null && player.ridingEntity instanceof EntityCogwork)
+		{
+			return ((EntityCogwork)player.ridingEntity).getWeight();
+		}
+		return 0;
 	}
 	private void renderAmmo(EntityPlayer player)
 	{
@@ -241,14 +303,14 @@ public class MineFantasyHUD extends Gui
         }
 	}
 	
-	private void displayTraitValue(int xPosAR, int yPosAR, int[] orientationAR, int id, EntityPlayer player)
+	private void displayTraitValue(int xPosAR, int yPosAR, int[] orientationAR, int id, EntityPlayer player, int base)
 	{
-		float AR = ArmourCalculator.useThresholdSystem ? ArmourCalculator.getDTDisplay(player, id) : (int)(ArmourCalculator.getDRDisplay(player, id)*100F);
+		float AR = (int)(ArmourCalculator.getDRDisplay(player, id)*100F) + base;
     	mc.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal("attribute.armour.rating."+id)+" " + ItemWeaponMF.decimal_format.format(AR), xPosAR, yPosAR, Color.WHITE.getRGB());
 	}
-	private void displayGeneralAR(int xPosAR, int yPosAR, int[] orientationAR, EntityPlayer player)
+	private void displayGeneralAR(int xPosAR, int yPosAR, int[] orientationAR, EntityPlayer player, int base)
 	{
-		float AR = ArmourCalculator.useThresholdSystem ? ArmourCalculator.getDTDisplay(player, 0) : (int)(ArmourCalculator.getDRDisplay(player, 0)*100F);
+		float AR = ((int)(ArmourCalculator.getDRDisplay(player, 0)*100F) + base);
     	
 		mc.fontRenderer.drawStringWithShadow(StatCollector.translateToLocal("attribute.armour.protection")+": " + ItemWeaponMF.decimal_format.format(AR), xPosAR, yPosAR, Color.WHITE.getRGB());
 	}

@@ -5,7 +5,6 @@ import minefantasy.mf2.api.armour.ArmourMaterialMF;
 import minefantasy.mf2.api.crafting.exotic.SpecialForging;
 import minefantasy.mf2.item.armour.ItemApron;
 import minefantasy.mf2.item.armour.ItemArmourMF;
-import minefantasy.mf2.item.armour.ItemCogworkArmour;
 import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -29,29 +28,12 @@ public class ArmourListMF
 	};
 	
 	public static ItemArmourMF[] leather = new ItemArmourMF[leathermats.length*4];
-	public static ItemArmourMF leatherapron, cogwork_frame_helmet, cogwork_frame_chest, cogwork_frame_legs, cogwork_frame_boots, cogwork_armour_helmet, cogwork_armour_chest, cogwork_armour_legs, cogwork_armour_boots;//, cogwork_dwarf_armour_helmet, cogwork_dwarf_armour_chest, cogwork_dwarf_armour_legs, cogwork_dwarf_armour_boots;
-	//public static ItemArmourMF[] chainmail = new ItemArmourMF[mats.length*4];
-	//public static ItemArmourMF[] fieldplate = new ItemArmourMF[mats.length*4 - 4];
+	public static ItemArmourMF leatherapron;
 	
 	
 	public static void load() 
 	{
 		leatherapron = new ItemApron("leatherapron", BaseMaterialMF.leatherapron, "leatherapron_layer_1", 0);
-		
-		cogwork_frame_helmet = new ItemCogworkArmour("cogwork_frame_helmet", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 0, "cogwork_frame_layer_1", 2).setAsFrame();
-		cogwork_frame_chest = new ItemCogworkArmour("cogwork_frame_chest", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 1, "cogwork_frame_layer_1", 2).setAsFrame();
-		cogwork_frame_legs = new ItemCogworkArmour("cogwork_frame_legs", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 2, "cogwork_frame_layer_2", 2).setAsFrame();
-		cogwork_frame_boots = new ItemCogworkArmour("cogwork_frame_boots", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 3, "cogwork_frame_layer_1", 2).setAsFrame();
-		
-		cogwork_armour_helmet = (ItemArmourMF) new ItemCogworkArmour("cogwork_armour_helmet", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 0, "cogwork_armour_layer_1", 2);
-		cogwork_armour_chest = (ItemArmourMF) new ItemCogworkArmour("cogwork_armour_chest", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 1, "cogwork_armour_layer_1", 2);
-		cogwork_armour_legs = (ItemArmourMF) new ItemCogworkArmour("cogwork_armour_legs", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 2, "cogwork_armour_layer_2", 2);
-		cogwork_armour_boots = (ItemArmourMF) new ItemCogworkArmour("cogwork_armour_boots", ArmourDesign.COGWORK, BaseMaterialMF.cogworks, 3, "cogwork_armour_layer_1", 2);
-		
-		//cogwork_dwarf_armour_helmet = (ItemArmourMF) new ItemCogworkArmour("cogwork_dwarf_armour_helmet", ArmourDesign.DWARFCOG, BaseMaterialMF.cogworks, 0, "cogwork_dwarf_armour_layer_1", 2).setContainerItem(cogwork_frame_helmet);
-		//cogwork_dwarf_armour_chest = (ItemArmourMF) new ItemCogworkArmour("cogwork_dwarf_armour_chest", ArmourDesign.DWARFCOG, BaseMaterialMF.cogworks, 1, "cogwork_dwarf_armour_layer_1", 2).setFuelCost(2).setContainerItem(cogwork_frame_chest);
-		//cogwork_dwarf_armour_legs = (ItemArmourMF) new ItemCogworkArmour("cogwork_dwarf_armour_legs", ArmourDesign.DWARFCOG, BaseMaterialMF.cogworks, 2, "cogwork_dwarf_armour_layer_2", 2).setContainerItem(cogwork_frame_legs);
-		//cogwork_dwarf_armour_boots = (ItemArmourMF) new ItemCogworkArmour("cogwork_dwarf_armour_boots", ArmourDesign.DWARFCOG, BaseMaterialMF.cogworks, 3, "cogwork_dwarf_armour_layer_1", 2).setContainerItem(cogwork_frame_boots);
 		
 		for(int a = 0; a < leathermats.length; a ++)
 		{

@@ -45,6 +45,9 @@ infoPage.dwarvern=Dwarvern
 infoPage.gnomish=Gnomish
 
 knowledge.unlocked=Research Completed
+
+vehicle.noArmour=You cannot fit in this suit when apparel is worn.
+vehicle.tooBigArmour=Your worn items make you too big to fit.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /MOBS/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,6 +95,7 @@ item.haft.name=Haft
 item.commodity_hunk.name=%1$s Hunk
 item.commodity_scrap.name=%1$s Scrap
 item.commodity_plate.name=%1$s Plate
+item.commodity_plate_huge.name=Huge %1$s Plate
 item.commodity_chainmesh.name=%1$s Chain Mesh
 item.commodity_scalemesh.name=%1$s Scales Mesh
 item.commodity_splintmesh.name=%1$s Splint Mesh
@@ -99,6 +103,7 @@ item.commodity_plateheavy.name=Heavy %1$s Plate
 item.commodity_arrowhead.name=%1$s Arrow Head
 item.commodity_bodkinhead.name=%1$s Bodkin Head
 item.commodity_broadhead.name=%1$s Broad Head
+item.commodity_cogwork_armour.name=%1$s Cogwork Plating
 
 item.mod_plating.name=%1$s Plating
 item.mod_head.name=%1$s Head
@@ -212,6 +217,7 @@ material.terrasteel.name=Terrasteel
 prefix.hotitem.name=Hot %1$s
 state.workable=Workable
 state.unstable=Unstable
+attribute.weightt.name=Weight: %1$st
 attribute.weightKg.name=Weight: %1$sKg
 attribute.weightg.name=Weight: %1$sg
 attribute.nomfcrafttier.name=Any Tier
@@ -476,6 +482,14 @@ item.climbing_pick_basic.name=Climbing Pick
 item.parachute.name=Parachute
 item.syringe_empty.name=Empty Syringe
 
+tile.cogwork_helm.name=Cogwork Helmet Block
+tile.cogwork_chest.name=Cogwork Chest Block
+tile.cogwork_legs.name=Cogwork Legs Block
+tile.frame_block.name=Frame Block
+tile.cogwork_builder.name=Cogwork Hook
+
+item.cogwork_pulley.name=Cogwork Pulley
+
 bomb.component.name=Bomb Component
 bomb.component.filling=Filling
 bomb.component.bombcase=Bomb Case
@@ -561,20 +575,6 @@ item.cross_arms_advanced.desc=More accuracy and power, but slow with high recoil
 item.cross_ammo.desc=6x shot capacity, increased spread.
 item.cross_scope.desc=Allows zoom function.
 item.cross_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
-
-item.cogwork_frame_helmet.name=Cogwork Helmet Frame
-item.cogwork_frame_chest.name=Cogwork Chest Frame
-item.cogwork_frame_legs.name=Cogwork Legs Frame
-item.cogwork_frame_boots.name=Cogwork Boots Frame
-item.cogwork_armour_helmet.name=Cogwork Plate Helmet
-item.cogwork_armour_chest.name=Cogwork Plate Chest
-item.cogwork_armour_legs.name=Cogwork Plate Legs
-item.cogwork_armour_boots.name=Cogwork Plate Boots
-item.cogwork_dwarf_armour_helmet.name=Dwarvern Cogwork Helmet
-item.cogwork_dwarf_armour_chest.name=Dwarvern Cogwork Chest
-item.cogwork_dwarf_armour_legs.name=Dwarvern Cogwork Legs
-item.cogwork_dwarf_armour_boots.name=Dwarvern Cogwork Boots
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /ORES/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -690,6 +690,7 @@ tile.crucible.auto.name=Advanced Crucible
 tile.chimney.stone.name=Stone Chimney
 tile.chimney.stone.wide.name=Wide Stone Chimney
 tile.chimney.stone_extractor.wide.name=Stone Extractor Chimney
+tile.chimney.pipe.name=Smoke Pipe
 tile.bellows.name=Bellows
 tile.troughBasic.name=Wooden Trough
 tile.troughRock.name=Stone Trough
@@ -716,11 +717,11 @@ tile.blastfurnchamber.name=Blast Furnace Chamber
 tile.blastfurnheater.name=Blast Furnace Heater
 
 tile.firepit.name=Firepit
-tile.food_roast_basic.name=Cooking Plate
+tile.food_roast_basic.name=Stove
 tile.food_oven_basic.name=Stone Oven
 
 tile.rack_wood.name=%1$s Tool Rack
-tile.food_box_basic.name=%1$s Food Box
+tile.food_box_basic.name=%1$s Provisions Box
 tile.ammo_box_basic.name=%1$s Ammunition Box
 tile.crate_basic.name=%1$s Crate
 attribute.box.capacity.name=Capacity: %1$s Stacks
@@ -1710,6 +1711,8 @@ item.standard_hammer.name=%1$s Hammer
 item.standard_hvyhammer.name=Heavy %1$s Hammer
 item.standard_tongs.name=%1$s Tongs
 item.standard_saw.name=%1$s Saw
+item.standard_spanner.name=%1$s Spanner
+
 
 item.standard_dagger.name=%1$s Dagger
 item.standard_sword.name=%1$s Sword
@@ -2018,6 +2021,8 @@ method.quern=Quern
 gui.purchase=Purchase
 knowledge.guiSubtitle=This is the GUI
 knowledge.basicstructure=Basic Structure
+knowledge.example=Example
+knowledge.rightclickspanner=Right-Click spanner
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /KNOWLEDGE TEXT/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2054,7 +2059,7 @@ knowledge.gettingStarted.2=Crafting blocks require some interaction on your part
 knowledge.gettingStarted.hcc=$hHardcore Crafting-$r^Hardcore crafting appears to be active. Regular tools are less effective and its recommended that primitive tools are crafted. See the Artisanry section for all the tools.
 knowledge.gettingStarted.hcc2=To start off: Punch some stone... no really, break stone bare-handed (meaning no item held) and Sharp Rocks will be dropped. Use these to break some leaves for vines and sticks, and logs for wood.
 knowledge.gettingStarted.fire=$hFirepit-$r^Before you get to work, you need a fire, one of these should provide flame and a place to cook if you have meat.^Right-click with timber to add fuel, and firestarter to light.
-knowledge.gettingStarted.food=Also place one of these cooking plates on top of the fire. You then need to right-click raw food (mainly meat) to place them on the plate.
+knowledge.gettingStarted.food=Also place one of these stove tops on top of the fire. You then need to right-click raw food (mainly meat) to place them on the plate.
 knowledge.gettingStarted.carpenter=$hCarpenter Bench-$r^The carpenter bench is a basic crafting table for a selection of recipes. The tools needed for this vary and some recipes require bare fists. See the crafting tools section for more information on tools.
 knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathered some hide you can't use. Tanning is a simple method of creating leather from hide.^To start off, build a shabby tanning rack and a stone knife. These tools are poor quality and should be upgraded when convinient.
 knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic
@@ -2148,6 +2153,8 @@ knowledge.chimney.desc=What greenhouse gasses?
 knowledge.chimney.1=It is a well-known fact that burning fuel produces smoke. You will also need to understand that breathing smoke is not wise.^But if you're reading this you probably already figured that out after attempting to smoke it like a pipe.^In any case: Chimneys can be used to
 knowledge.chimney.2=redirect smoke away from your precious breathing air and into the sky! Leave it for someone else a few centuries later to complain about.
 knowledge.chimney.3=Extractor chimneys can also be used on some devices (forge and crucible mainly) to absorb smoke indirectly.^"Indirectly" of course just means 1 block adjacent to where it normally would go.
+knowledge.chimney.pipe=Smoke pipes allow the transport of gas between chimney systems. Each pipe itself cannot release smoke and must connect to a regular chimney at some point, these can only accept smoke from chimneys directly under.
+knowledge.chimney.pipe.2=Best use includes a pipe system starting on the top of a starting chimney block, and leading outside with a second chimney on top.
 
 knowledge.tanning=Tanning
 knowledge.tanning.desc=Dead animal working
@@ -2604,14 +2611,28 @@ knowledge.stickybomb.desc=Catch this!
 knowledge.stickybomb.1=Sticky bombs- as the name might suggest, are bombs that are sticky. And with this amazing trait: will attatch themselves to whatever poor sod gets in its way.^So what you have here is a bomb that does a lot of damage sticking to someone! Which never stops being funny.
 knowledge.stickybomb.2=To create these: Leave(or put) a bomb in the output slot and right-click the block with a slime ball. A single slimeball can coat a stack of any size.
 
+$hUse of Cogworks$r^
+
 knowledge.cogArmour=Cogwork Suit
 knowledge.cogArmour.desc=Power Armor
-knowledge.cogArmour.1=Heavy armour has its limits, it may provide substantial protection but at a cost of mobility.^Cogwork suits use the momentum generated through complex contraptions to aid movement. Wearers of these suits will have increased strength, reducing stamina decay.
-knowledge.cogArmour.2=A basic frame of this suit may not offer much protection, but it greatly reduces fall damage and reduces stamina cost from actions, while the helmet filters smoke, meaning you suffer no negative effects from exposure.
-knowledge.cogArmour.mechanics.1=$hUse of Cogworks$r^Alone, single pieces of cogwork are extremely heavy and impossible to move in.^You need to have a chest, legs and boots all equipped in order for the suit to function. Not only that; but the chest needs fuel to move the suit in the first place.
-knowledge.cogArmour.mechanics.2=The helmet is not required for the suit to function, but since the suit generates smoke, it's good to protect yourself.^In total: These suits are so heavy, swimming becomes inpossible, be careful.
-knowledge.cogArmour.fuel=$hRefueling$r^As mentioned: The chest piece needs to be fuelled to function. In order to do this the chest piece must be unequipped, then used while sneaking. You need coke in your inventory which are consumed for fuel.
-knowledge.cogArmour.armour=With further refinement you are also able to create a super heavy, and powerful plating for cogwork suits. This plating upgrade grants superior resistance against all forms of damage. This can be made from nearly any metal and can greatly affect its properties.
+knowledge.cogArmour.1=For real protection, there's always a limit your body can take, limiting your choice for heavy armour.^Cogwork armour is a separate, extremely powerful suit of armour which can carry enourmous amounts of weight, capable of carrying extremely heavy equipment.
+knowledge.cogArmour.2=Each suit of cogwork armour can stand on its self, and is not equipped, rather ridden. There are a wide range of benefits gained from these suits, but mobility is extremely reduced due to its shear size.
+knowledge.cogArmour.station=$hCrafting Station$r^A crafting station is necessary for any construction or modification to take place. Cogwork crafting stations are made from a frame and pulley system. To start off, built three posts 4 blocks tall with a single one in the middle-top.
+//Example
+knowledge.cogwork_station=Crafting Station
+knowledge.cogArmour.station.2=With the frame set up, you need to craft the pulley, when this is made, right-click the top block of the frame to install it. Ensure you have the frame in the right place, there's no way to return the pulley after installation.
+//Pulley Recipe
+knowledge.cogArmour.crafting=To craft cogwork armour: you need the three blocks (Helmet, Chest and Legs). Stack these on top of each other inside the frame. Then right-click the chest with a spanner.
+//Piece Recipes
+knowledge.cogArmour.armour=$hPlating$r^To add plating, you need to craft a plating item. Each set of plates cost a lot of ingots, and is recommended to use simple materials like steel. These can be installed by right-clicking a suit in a frame, and removed with a spanner.
+//Armour Recipe
+knowledge.cogArmour.fuel=$hRefueling$r^Cogwork armour only takes refined fuels (coke or magma cream). Right-click the suit to add fuel.^The heavier the armour on the suit, the faster fuel decays.
+knowledge.cogArmour.advantage=$hAdvantages$r^An unarmoured suit can give immunity to smoke, remove fall damage, increase attack damage and eliminate stamina decay.
+knowledge.cogArmour.advantage.2=When fitted with plating: the suit is sealed, you will gain a huge armour bonus and be able to breathe underwater. The suit is also able to remove poison/wither damage and make the wearer immune to fire.
+knowledge.cogArmour.advantage.3=The armour can still take damage from fire depending on its melting point, higher durability tiers make the armour last longer as well, plating must be removed at a cogwork station for repair.
+knowledge.cogArmour.disadvantage=When wearing cogwork, you cannot jump, but are able to walk up single-block steps, your movement is also much slower and you are unable to sneak.
+knowledge.cogArmour.disadvantage.2=Explosions can also damage the armour more than other forms of damage, as well as stun you for a second.
+knowledge.cogArmour.removal=Although plating is removed when the suit is broken, the framework remains in tact, an empty, unarmoured suit can be broken by hitting it with a spanner, it may also be destroyed if left in fire or lava when plating is broken.
 
 knowledge.compPlate=Composite Alloy
 knowledge.compPlate.desc=Powerful all-rounder
@@ -2668,9 +2689,9 @@ knowledge.bed_roll=Bedroll
 knowledge.bed_roll.desc=Sleeping out
 knowledge.bed_roll.1=When in the wilderness, you sometimes need to sleep where you'd rather not live. Bedrolls allow sleeping without resetting spawn points.
 
-knowledge.food_box=Food Box
+knowledge.food_box=Provisions Box
 knowledge.food_box.desc=Food storage
-knowledge.food_box.1=Food should be kept on easy access for when its needed. Food boxes allow food items to be stored multiple times their own stack size. Right-clicking can place a food item and retrieve with empty hands.
+knowledge.food_box.1=Food and medical supplies should be kept on easy access for when its needed. Provision boxes allow food items and bandages to be stored multiple times their own stack size. Right-clicking can place an item and retrieve with empty hands.
 
 knowledge.ammo_box=Ammo Box
 knowledge.ammo_box.desc=Munitions storage
@@ -2777,10 +2798,10 @@ knowledge.cheeseroll=Cheese Roll
 knowledge.cheeseroll.desc=Easy snack
 knowledge.cheeseroll.1=Cheese goes well with bread. Put some cheese in a roll to give it some flavour.
 
-knowledge.firepit=Firepit and cookplates
+knowledge.firepit=Firepit and Stoves
 knowledge.firepit.desc=Basic cooking
 knowledge.firepit.1=The firepit is the easist way to steadily provide flame for cooking and lighting purposes and can be made with litte cost.^To create a fire, place a firepit block and right-click timber items to add fuel, then right-click with a firestarter.
-knowledge.firepit.2=Cooking plates are used to cook food, these must be placed on top of a heat source (firepit or forge).^Right-click raw food ontop of the plate to place it, and wait until it cooks, try not to overcook it. If you use a forge, be careful not to make it too hot (plain coal should do).
+knowledge.firepit.2=Stovetops are used to cook food, these must be placed on top of a heat source (firepit or forge).^Right-click raw food ontop of the plate to place it, and wait until it cooks, try not to overcook it. If you use a forge, be careful not to make it too hot (plain coal should do).
 knowledge.firepit.3=Ovens are able to cook baked items such as bread as well as that of a normal cooktop.^Ovens are also required to make ceramics out of clay making them useful in cooking as well as other crafts.
 
 knowledge.cookingutensil=Cooking Utensils
@@ -2809,7 +2830,7 @@ knowledge.fitness.1=Your biggest foe in battle is your energy (well apart from t
 
 knowledge.toughness=Toughness
 knowledge.toughness.desc=Take it!
-knowledge.toughness.1=Your constant exposure to battle has granted you a higher resistance to the elements.^Damage from all sources is reduced by 25%.
+knowledge.toughness.1=Your constant exposure to battle has granted you a higher resistance to the elements.^Damage from all sources is reduced by 10%.
 
 knowledge.armourpro=Armor Proficiency
 knowledge.armourpro.desc=Feel the weight

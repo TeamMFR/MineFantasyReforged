@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.armour.IArmourPenetrationMob;
 import minefantasy.mf2.api.armour.IArmouredEntity;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigMobs;
@@ -597,6 +598,10 @@ public class EntityMinotaur extends EntityMob implements IArmouredEntity, IArmou
     }
 	private boolean canPickUp(Entity target) 
 	{
+		if(target instanceof EntityLivingBase && PowerArmour.isWearingCogwork((EntityLivingBase)target))
+		{
+			return false;
+		}
 		float mysize = getVolume(this);
 		float theirsize = getVolume(target);
 		return mysize > theirsize;

@@ -1,8 +1,6 @@
 package minefantasy.mf2.entity.list;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityList.EntityEggInfo;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigMobs;
@@ -15,7 +13,8 @@ import minefantasy.mf2.entity.EntityMine;
 import minefantasy.mf2.entity.EntityParachute;
 import minefantasy.mf2.entity.EntityShrapnel;
 import minefantasy.mf2.entity.EntitySmoke;
-import cpw.mods.fml.common.registry.EntityRegistry;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
 
 public class EntityListMF 
 {

@@ -701,7 +701,7 @@ public class CarpenterRecipes
 			'S', Blocks.stone,
 		});
 		KnowledgeListMF.advCrucibleRecipe = 
-		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(BlockListMF.crucibleadv), "crucible2", stonemason, 40 , new Object[]{
+		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(BlockListMF.crucibleadv), "crucible2", basic, 40 , new Object[]{
 			"SSS",
 			"SCS",
 			"SSS",
@@ -1356,7 +1356,7 @@ public class CarpenterRecipes
 			'N', ComponentListMF.nail
 		});
 		KnowledgeListMF.crossStockIronR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.crossbow_stock_iron), "crossShaftAdvanced", spanner, "spanner", 1, 300, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.crossbow_stock_iron), "crossShaftAdvanced", spanner, "spanner", 2, 300, new Object[]
 		{
 			" BBB",
 			"BOGG",
@@ -1421,7 +1421,7 @@ public class CarpenterRecipes
 			'N', ComponentListMF.nail,
 		});
 		KnowledgeListMF.crossScopeR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.cross_scope), "crossScope", spanner, "spanner", 0, 150, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.cross_scope), "crossScope", spanner, "spanner", 2, 150, new Object[]
 		{
 			"BSB",
 			"GP ",
@@ -1455,7 +1455,7 @@ public class CarpenterRecipes
 			'C', BlockListMF.carpenter,
 		});
 		KnowledgeListMF.bombPressCraft =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.bombPress), "bpress", spanner, "spanner", 0, 200, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.bombPress), "bpress", spanner, "spanner", 3, 200, new Object[]
 		{
 			"BFB",
 			"GGL",
@@ -1464,7 +1464,7 @@ public class CarpenterRecipes
 			'B', ComponentListMF.bolt,
 			'F', ComponentListMF.iron_frame,
 			'L', Blocks.lever,
-			'P', new ItemStack(ToolListMF.spanner, 1, 0),
+			'P', new ItemStack(CustomToolListMF.standard_spanner, 1, 0),
 			'G', ComponentListMF.bronze_gears,
 		});
 		
@@ -1483,7 +1483,7 @@ public class CarpenterRecipes
 		
 		
 		KnowledgeListMF.engTannerR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.engTanner), "engTanner", spanner, "spanner", 0, 300, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.engTanner), "engTanner", spanner, "spanner", 3, 300, new Object[]
 		{
 			"BLB",
 			"SPS",
@@ -1498,7 +1498,7 @@ public class CarpenterRecipes
 		});
 		ItemStack blackPlate = ComponentListMF.plate.createComm("blackSteel");
 		KnowledgeListMF.advancedForgeR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.forge_metal), "advforge", spanner, "spanner", 1, 400, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.forge_metal), "advforge", spanner, "spanner", 4, 400, new Object[]
 		{
 			" T  ",
 			"FRRF",
@@ -1512,7 +1512,7 @@ public class CarpenterRecipes
 		});
 		ItemStack steelPlate = ComponentListMF.plate.createComm("steel");
 		KnowledgeListMF.autoCrucibleR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.crucibleauto), "advcrucible", spanner, "spanner", 1, 200, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(BlockListMF.crucibleauto), "advcrucible", spanner, "spanner", 4, 200, new Object[]
 		{
 			" T ",
 			"PCP",
@@ -1525,7 +1525,7 @@ public class CarpenterRecipes
 			'P', steelPlate
 		});
 		KnowledgeListMF.spyglassR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ToolListMF.spyglass), "spyglass", spanner, "spanner", 0, 300, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ToolListMF.spyglass), "spyglass", spanner, "spanner", 1, 300, new Object[]
 		{
 			" T ",
 			"BCB",
@@ -1539,7 +1539,7 @@ public class CarpenterRecipes
 		
 		
 		KnowledgeListMF.syringeR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ToolListMF.syringe_empty), "syringe", spanner, "spanner", 0, 200, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ToolListMF.syringe_empty), "syringe", spanner, "spanner", 1, 200, new Object[]
 		{
 			"E",
 			"T",
@@ -1565,7 +1565,7 @@ public class CarpenterRecipes
 			'C', Blocks.wool,
 		});
 		KnowledgeListMF.cogShaftR =
-		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.cogwork_shaft), "cogArmour", spanner, "spanner", 1, 150, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(engineering, new ItemStack(ComponentListMF.cogwork_shaft), "cogArmour", spanner, "spanner", 4, 150, new Object[]
 		{
 			"BPB",
 			"SGS",
@@ -1582,7 +1582,7 @@ public class CarpenterRecipes
 		Salvage.addSalvage(BlockListMF.crucibleauto, new ItemStack(ComponentListMF.bolt, 3), ComponentListMF.tungsten_gears, BlockListMF.crucibleadv, steelPlate, steelPlate, steelPlate, steelPlate);
 		Salvage.addSalvage(BlockListMF.bombBench, new ItemStack(ComponentListMF.bolt, 4), ComponentListMF.iron_frame, BlockListMF.carpenter);
 		Salvage.addSalvage(BlockListMF.crossbowBench, new ItemStack(ComponentListMF.nail, 2), ((ItemComponentMF)ComponentListMF.plank).construct("ScrapWood", 2), Items.string, BlockListMF.carpenter);
-		Salvage.addSalvage(BlockListMF.bombPress, new ItemStack(ComponentListMF.iron_strut, 2), new ItemStack(ComponentListMF.bolt, 2), new ItemStack(ComponentListMF.bronze_gears, 2), Blocks.lever, ComponentListMF.iron_frame, ToolListMF.spanner);
+		Salvage.addSalvage(BlockListMF.bombPress, new ItemStack(ComponentListMF.iron_strut, 2), new ItemStack(ComponentListMF.bolt, 2), new ItemStack(ComponentListMF.bronze_gears, 2), Blocks.lever, ComponentListMF.iron_frame);
 		Salvage.addSalvage(BlockListMF.engTanner, new ItemStack(ComponentListMF.iron_strut, 4), new ItemStack(ComponentListMF.bolt, 2), new ItemStack(ComponentListMF.bronze_gears, 3), CustomToolListMF.standard_needle, Blocks.lever, ComponentListMF.iron_frame);
 		Salvage.addSalvage(BlockListMF.forge_metal, new ItemStack(ComponentListMF.bolt, 4), blackPlate, blackPlate, blackPlate, blackPlate, new ItemStack(ComponentListMF.iron_frame, 2), new ItemStack(Blocks.redstone_block, 2));
 		Salvage.addSalvage(ToolListMF.spyglass, new ItemStack(ComponentListMF.bolt, 2), new ItemStack(Blocks.glass, 2), ComponentListMF.steel_tube, ComponentListMF.bronze_gears);

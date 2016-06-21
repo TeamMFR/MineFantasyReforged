@@ -120,7 +120,7 @@ public class KnowledgeListMF
         arrowsBroad = (new InformationBase("arrowsBroad", 		  	 -5, 5, 10, CustomToolListMF.standard_arrow_broad, arrows)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 20);
         
         //ENGINEERING - Highly Expensive
-        etools = (new InformationBase("etools", 					    3, 0, 0, ToolListMF.spanner, (InformationBase)null)).registerStat().setPage(engineering).setUnlocked();
+        etools = (new InformationBase("etools", 					    3, 0, 0, CustomToolListMF.standard_spanner, (InformationBase)null)).registerStat().setPage(engineering).setUnlocked();
         ecomponents = (new InformationBase("ecomponents",             5, 0, 0, ComponentListMF.bolt, etools)).registerStat().setPage(engineering).setUnlocked();
         tungsten = (new InformationBase("tungsten",             	  8, -1, 10, ComponentListMF.ingots[18], ecomponents)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20).addSkill(SkillList.artisanry, 35);
         coke = (new InformationBase("coke",             	 		  4, -1, 5, ComponentListMF.coke, ecomponents)).registerStat().setPage(engineering);
@@ -159,7 +159,7 @@ public class KnowledgeListMF
         crossAmmo = (new InformationBase("crossAmmo", 					-5,  3, 20, ComponentListMF.cross_ammo, crossShafts)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 30);
         crossScope = (new InformationBase("crossScope", 				-7,  3, 25, ComponentListMF.cross_scope, crossShafts)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
         
-        cogArmour = (new InformationBase("cogArmour",             	 	10, -1, 30, ArmourListMF.cogwork_frame_chest, tungsten)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 85);
+        cogArmour = (new InformationBase("cogArmour",             	 	10, -1, 30, BlockListMF.cogwork_helm, tungsten)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 85);
         compPlate = (new InformationBase("compPlate",             	 	10, -3, 30, ComponentListMF.ingotCompositeAlloy, cogArmour)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 90).addSkill(SkillList.artisanry, 50);
         
         repair_basic = (new InformationBase("repair_basic",  		   8, 0, 5, BlockListMF.repair_basic, (InformationBase)null)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10);
@@ -252,7 +252,7 @@ public class KnowledgeListMF
     
     public static ICarpenterRecipe fireclayR, fireBrickR, fireBricksR, fireBrickStairR, refinedPlankBlockR, clayWallR, bSalvageR, tannerRecipe, stoneAnvilRecipe, forgeRecipe, apronRecipe, woodTroughRecipe;
     public static ICarpenterRecipe researchTableRecipe, framedGlassR, windowR, thatchR, thatchStairR;
-    public static IAnvilRecipe framedStoneR, iframedStoneR, fluxR;
+    public static IAnvilRecipe smokePipeR, framedStoneR, iframedStoneR, fluxR;
     public static final ArrayList<IAnvilRecipe> barsR = new ArrayList<IAnvilRecipe>();
     public static final ArrayList<IAnvilRecipe> nailR = new ArrayList<IAnvilRecipe>();
     public static final ArrayList<IAnvilRecipe> rivetR = new ArrayList<IAnvilRecipe>();
@@ -335,6 +335,7 @@ public class KnowledgeListMF
     public static final ArrayList<ICarpenterRecipe> arrowR = new ArrayList<ICarpenterRecipe>();
     public static final ArrayList<ICarpenterRecipe> malletR = new ArrayList<ICarpenterRecipe>();
     public static final ArrayList<ICarpenterRecipe> spoonR = new ArrayList<ICarpenterRecipe>();
+    public static ArrayList<IAnvilRecipe> spannerRecipe = new ArrayList<IAnvilRecipe>();
     
     public static IAnvilRecipe ironPrepR, ironPrepR2, coalPrepR;
     public static IAnvilRecipe blastChamR, blastHeatR, bigFurnR, bigHeatR;
@@ -356,8 +357,12 @@ public class KnowledgeListMF
 
     public static ICarpenterRecipe syringeR, parachuteR, bandageR, badBandageR, goodBandageR, cogShaftR;
     
-    public static IAnvilRecipe hingeRecipe, brushRecipe, spannerRecipe, blkspannerR, climbPickbR, iframeR, boltR, istrutR, bgearR, tgearR, stubeR, eatoolsR, bombarrowR, bombBoltR, compPlateR, cogFrameHelmetR, cogFrameChestR, cogFrameLegsR, cogFrameBootsR, cogArmourHelmetR, cogArmourChestR, cogArmourLegsR, cogArmourBootsR;
+    public static IAnvilRecipe hingeRecipe, brushRecipe, climbPickbR, iframeR, boltR, istrutR, bgearR, tgearR, stubeR, eatoolsR, bombarrowR, bombBoltR, compPlateR;
     public static ICarpenterRecipe mouldRecipe, jugRecipe, potRecipe, pieTrayRecipe, blackpowderRec, advblackpowderRec, magmaRefinedR, chocoRecipe, bedrollR;
+    
+    public static IAnvilRecipe frameBlockR, cogPulleyR, cogLegsR, cogChestR, cogHelmR;
+    public static ArrayList<IAnvilRecipe> hugePlateR = new ArrayList<IAnvilRecipe>();
+    public static ArrayList<IAnvilRecipe> cogPlateR = new ArrayList<IAnvilRecipe>();
     
     public static final ArrayList<ICarpenterRecipe> easyPaintPlank = new ArrayList<ICarpenterRecipe>();
     public static final ArrayList<ICarpenterRecipe> refinedPlankR = new ArrayList<ICarpenterRecipe>();

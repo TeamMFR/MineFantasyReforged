@@ -514,6 +514,24 @@ public class ForgedToolRecipes
 				salvage, salvage, salvage, salvage,
 				plank,
 				strip);
+		
+		time = 15;
+		KnowledgeListMF.spannerRecipe.add(
+		MineFantasyAPI.addAnvilRecipe(artisanry, CustomToolListMF.standard_spanner.construct(material.name,haftMaterial.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		{
+			"  I ",
+			"  II",
+			"LP  ",
+			" L  ",
+			
+			'I', ingot,
+			'P', plank,
+			'L', strip,
+		}));
+		Salvage.addSalvage(CustomToolListMF.standard_spanner.construct(material.name,haftMaterial.name),
+				salvage, salvage, salvage,
+				plank,
+				strip, strip);
 	}
 	private static void addStandardWeapons(CustomMaterial material, ItemStack ingot,CustomMaterial haftMaterial, ItemStack plank) 
 	{

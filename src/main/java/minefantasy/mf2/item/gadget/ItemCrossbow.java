@@ -20,6 +20,7 @@ import minefantasy.mf2.entity.EntityArrowMF;
 import minefantasy.mf2.item.archery.ItemArrowMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
+import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.mechanics.CombatMechanics;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -64,7 +65,7 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
     @Override
     public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
     {
-    	if(user.isSneaking())//OPEN INV
+    	if(!world.isRemote && user.isSneaking() || AmmoMechanicsMF.isFirearmOutOfAmmo(item))//OPEN INV
     	{
     		user.openGui(MineFantasyII.instance, 1, user.worldObj, 1, 0, 0);
     		return item;
@@ -84,32 +85,44 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
     @Override
 	public ItemStack onEaten(ItemStack item, World world, EntityPlayer user)
     {
+    	boolean infinity = EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, item) > 0;
     	user.swingItem();
     	ItemStack loaded = AmmoMechanicsMF.getArrowOnBow(item);
     	ItemStack storage = AmmoMechanicsMF.getAmmo(item);
     	String action = getUseAction(item);
+    	boolean shouldConsume = true;
     	
-    	if(action.equalsIgnoreCase("reload") && storage != null)//RELOAD
+    	if(action.equalsIgnoreCase("reload"))
 		{
-    		boolean success = false;
-			if(loaded == null)
+    		if(storage == null && infinity)
+    		{
+    			shouldConsume = false;
+    			storage = CustomToolListMF.standard_bolt.construct("Magic");
+    		}
+    		if(storage != null)//RELOAD
 			{
-    			ItemStack ammo = storage.copy();
-    			ammo.stackSize = 1;
-    			AmmoMechanicsMF.consumeAmmo(user, item);
-    			AmmoMechanicsMF.putAmmoOnFirearm(item, ammo);
-    			success = true;
-			}
-			else if(loaded.isItemEqual(storage) && loaded.stackSize < getAmmoCapacity(item))
-			{
-				AmmoMechanicsMF.consumeAmmo(user, item);
-				++loaded.stackSize;
-				AmmoMechanicsMF.putAmmoOnFirearm(item, loaded);
-				success = true;
-			}
-			if(success)
-			{
-				user.playSound("random.click", 1.0F, 1.0F);
+	    		boolean success = false;
+				if(loaded == null)
+				{
+	    			ItemStack ammo = storage.copy();
+	    			ammo.stackSize = 1;
+	    			if(shouldConsume)
+	    			AmmoMechanicsMF.consumeAmmo(user, item);
+	    			AmmoMechanicsMF.putAmmoOnFirearm(item, ammo);
+	    			success = true;
+				}
+				else if(loaded.isItemEqual(storage) && loaded.stackSize < getAmmoCapacity(item))
+				{
+					if(shouldConsume)
+					AmmoMechanicsMF.consumeAmmo(user, item);
+					++loaded.stackSize;
+					AmmoMechanicsMF.putAmmoOnFirearm(item, loaded);
+					success = true;
+				}
+				if(success)
+				{
+					user.playSound("random.click", 1.0F, 1.0F);
+				}
 			}
 		}
     	return super.onEaten(item, world, user);

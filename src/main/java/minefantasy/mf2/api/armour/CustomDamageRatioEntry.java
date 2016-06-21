@@ -62,7 +62,7 @@ public class CustomDamageRatioEntry
 	 */
 	public static float[] getTraits(String id)
 	{
-		return entriesProj.get(id) != null ? entriesProj.get(id).vars : null;
+		return entriesProj.get(id) != null ? entriesProj.get(id).vars : new float[]{1, 1, 1};
 	}
 
 	private CustomDamageRatioEntry(float[] vars)

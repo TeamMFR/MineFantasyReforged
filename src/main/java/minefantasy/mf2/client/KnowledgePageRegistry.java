@@ -105,6 +105,9 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.dragons.addPages(new EntryPageText("knowledge.green_dragon.1"));
 		
 		KnowledgeListMF.chimney.addPages(new EntryPageText("knowledge.chimney.1"), new EntryPageText("knowledge.chimney.2"), new EntryPageRecipeCarpenter(KnowledgeListMF.chimneyRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.wideChimneyRecipe), new EntryPageText("knowledge.chimney.3"), new EntryPageRecipeCarpenter(KnowledgeListMF.extractChimneyRecipe));
+		KnowledgeListMF.chimney.addPages(new EntryPageText("knowledge.chimney.pipe"), new EntryPageRecipeAnvil(KnowledgeListMF.smokePipeR), new EntryPageText("knowledge.chimney.pipe.2"));
+		KnowledgeListMF.chimney.addPages(assembleSimpleImgPage("smoke_pipe_example", "knowledge.example"));
+		
 		KnowledgeListMF.tanning.addPages(new EntryPageText("knowledge.tanning.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.tannerRecipe), new EntryPageText("knowledge.tanning.2"), new EntryPageText("knowledge.tanning.3"), new EntryPageRecipeCarpenter(KnowledgeListMF.strongRackR));
 		
 		KnowledgeListMF.bloomery.addPages(new EntryPageText("knowledge.bloomery.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.bloomeryR), new EntryPageText("knowledge.bloomery.2"), new EntryPageText("knowledge.bloomery.3"));
@@ -183,7 +186,7 @@ public class KnowledgePageRegistry
 	    	KnowledgeListMF.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.hcc"));
 	    }
 	    
-	    KnowledgeListMF.etools.addPages(new EntryPageText("knowledge.etools.1"), new EntryPageRecipeAnvil(KnowledgeListMF.spannerRecipe), new EntryPageRecipeAnvil(KnowledgeListMF.blkspannerR), new EntryPageRecipeAnvil(KnowledgeListMF.eatoolsR));
+	    KnowledgeListMF.etools.addPages(new EntryPageText("knowledge.etools.1"), new EntryPageRecipeAnvil(KnowledgeListMF.spannerRecipe), new EntryPageRecipeAnvil(KnowledgeListMF.eatoolsR));
 	    KnowledgeListMF.ecomponents.addPages(new EntryPageText("knowledge.ecomponents.1"), new EntryPageRecipeAnvil(KnowledgeListMF.boltR), new EntryPageText("knowledge.ecomponents.2"), new EntryPageRecipeAnvil(KnowledgeListMF.iframeR), new EntryPageRecipeAnvil(KnowledgeListMF.bgearR), new EntryPageRecipeAnvil(KnowledgeListMF.tgearR), new EntryPageRecipeAnvil(KnowledgeListMF.istrutR), new EntryPageRecipeAnvil(KnowledgeListMF.stubeR));
 	    KnowledgeListMF.tungsten.addPages(new EntryPageText("knowledge.tungsten.1"), new EntryPageText("knowledge.tungsten.2"), new EntryPageText("knowledge.tungsten.3"), new EntryPageCrucible(KnowledgeListMF.wolframiteR));
 	    KnowledgeListMF.climber.addPages(new EntryPageText("knowledge.climber.1"), new EntryPageRecipeAnvil(KnowledgeListMF.climbPickbR), new EntryPageText("knowledge.climber.2"));
@@ -223,11 +226,20 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.crossAmmo.addPages(new EntryPageText("knowledge.crossAmmo.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.crossAmmoR));
 	    KnowledgeListMF.crossBayonet.addPages(new EntryPageText("knowledge.crossBayonet.1"), new EntryPageRecipeAnvil(KnowledgeListMF.crossBayonetR));
 	    
-	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.1"), new EntryPageText("knowledge.cogArmour.2"), new EntryPageRecipeCarpenter(KnowledgeListMF.cogShaftR));
-	    KnowledgeListMF.cogArmour.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.cogFrameHelmetR), new EntryPageRecipeAnvil(KnowledgeListMF.cogFrameChestR), new EntryPageRecipeAnvil(KnowledgeListMF.cogFrameLegsR),new EntryPageRecipeAnvil(KnowledgeListMF.cogFrameBootsR));
-	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.mechanics.1"), new EntryPageText("knowledge.cogArmour.mechanics.2"), new EntryPageText("knowledge.cogArmour.fuel"));
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.1"), new EntryPageText("knowledge.cogArmour.2"));
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.station"), new EntryPageRecipeAnvil(KnowledgeListMF.frameBlockR), assembleSimpleImgPage("cogwork_station", "knowledge.cogwork_station"));
+	    //EXAMPLE
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.station.2"), new EntryPageRecipeAnvil(KnowledgeListMF.cogPulleyR), assembleSimpleImgPage("cogwork_station_2", "knowledge.rightclickspanner"));
+	    
+	    //RECIPE
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.crafting"), new EntryPageRecipeCarpenter(KnowledgeListMF.cogShaftR), new EntryPageRecipeAnvil(KnowledgeListMF.cogHelmR), new EntryPageRecipeAnvil(KnowledgeListMF.cogChestR), new EntryPageRecipeAnvil(KnowledgeListMF.cogLegsR), assembleSimpleImgPage("cogwork_suit_craft", "knowledge.rightclickspanner"));
+	    
 	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.armour"));
-	    KnowledgeListMF.cogArmour.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.cogArmourHelmetR), new EntryPageRecipeAnvil(KnowledgeListMF.cogArmourChestR), new EntryPageRecipeAnvil(KnowledgeListMF.cogArmourLegsR),new EntryPageRecipeAnvil(KnowledgeListMF.cogArmourBootsR));
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.hugePlateR), new EntryPageRecipeAnvil(KnowledgeListMF.cogPlateR));
+	    
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.advantage"), new EntryPageText("knowledge.cogArmour.advantage.2"), new EntryPageText("knowledge.cogArmour.advantage.3"));
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.disadvantage"), new EntryPageText("knowledge.cogArmour.disadvantage.2"));
+	    KnowledgeListMF.cogArmour.addPages(new EntryPageText("knowledge.cogArmour.removal"));
 	    
 	    KnowledgeListMF.compPlate.addPages(new EntryPageText("knowledge.compPlate.1"), new EntryPageText("knowledge.compPlate.2"), new EntryPageRecipeAnvil(KnowledgeListMF.compPlateR));
 	   //KnowledgeListMF.craftOrnateWeapons.addPages(new EntryPageText("knowledge.craftOrnateWeapons.1"));

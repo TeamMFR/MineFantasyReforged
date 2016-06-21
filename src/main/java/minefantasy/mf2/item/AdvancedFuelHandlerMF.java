@@ -1,15 +1,24 @@
 package minefantasy.mf2.item;
 
+import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import minefantasy.mf2.item.list.ComponentListMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.IFuelHandler;
 
 public class AdvancedFuelHandlerMF implements IFuelHandler
 {
 
+	public static void registerItems()
+	{
+		MineFantasyFuels.addCarbon( new ItemStack(Items.coal, 1, OreDictionary.WILDCARD_VALUE), 1);
+		MineFantasyFuels.addCarbon(ComponentListMF.coke, 1);
+		MineFantasyFuels.addCarbon(ComponentListMF.coal_flux, 1);
+		MineFantasyFuels.addCarbon(Blocks.coal_block, 9);
+	}
 	@Override
 	public int getBurnTime(ItemStack fuel)
 	{

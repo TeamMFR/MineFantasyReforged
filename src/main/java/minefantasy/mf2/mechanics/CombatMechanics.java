@@ -1,15 +1,14 @@
 package minefantasy.mf2.mechanics;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import minefantasy.mf2.api.armour.CogworkArmour;
 import minefantasy.mf2.api.armour.IElementalResistance;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.ArrowEffectsMF;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
@@ -27,6 +26,7 @@ import minefantasy.mf2.config.ConfigArmour;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigStamina;
 import minefantasy.mf2.config.ConfigWeapon;
+import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.entity.Shockwave;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
 import minefantasy.mf2.item.weapon.ItemBattleaxeMF;
@@ -80,28 +80,6 @@ public class CombatMechanics
 	@SubscribeEvent
 	public void initAttack(LivingAttackEvent event)
 	{
-		/*
-		if(event.source == DamageSource.fall && event.entityLiving instanceof EntityPlayer && RPGElements.isSystemActive)
-		{
-			SkillList.acrobatics.addXP((EntityPlayer) event.entityLiving, (int)event.ammount+1);
-		}
-		
-		if(RPGElements.isSystemActive && event.entityLiving instanceof EntityPlayer && !event.source.isUnblockable())
-		{
-			for(int a = 0; a < 4; a++)
-			{
-				ItemStack piece = event.entityLiving.getEquipmentInSlot(a+1);
-				if(piece != null)
-				{
-					int AC = ArmourCalculator.getArmourClass(piece).equalsIgnoreCase("heavy") ? 2 : ArmourCalculator.getArmourClass(piece).equalsIgnoreCase("light") ? 0 : 1;
-					
-					Skill skill = (AC == 2) ? SkillList.heavyarmour : (AC == 0) ? SkillList.lightarmour : SkillList.mediumarmour;
-					skill.addXP((EntityPlayer) event.entityLiving, (int)(event.ammount/5F));
-				}
-			}
-		}
-		*/
-		
 		EntityLivingBase hitter = getHitter(event.source);
 		int spd = EventManagerMF.getHitspeedTime(hitter);
 		if(hitter != null && !hitter.worldObj.isRemote)
@@ -114,20 +92,24 @@ public class CombatMechanics
 		DamageSource src = event.source;
 		EntityLivingBase hit = event.entityLiving;
 		World world = hit.worldObj;
+		boolean powerArmour = PowerArmour.isFullyArmoured(hit);
 		float damage = modifyDamage(src, world, hit, event.ammount, false);
 		
-		if(event.source.isProjectile() && !event.source.isFireDamage() && damage < event.ammount && hit.getTotalArmorValue() > 0)//only if dam has been reduced
-    	{
-    		if(ConfigArmour.resistArrow && !event.isCanceled() && damage <= 0)//TacticalManager.resistArrow(event.entityLiving, event.source, damage))
-    		{
-    			if(event.source.getSourceOfDamage() != null && !event.source.getSourceOfDamage().getEntityData().hasKey("arrowDeflectMF") && !(event.source.getEntity() instanceof EntityEnderPearl))
-    			{
-    				event.source.getSourceOfDamage().getEntityData().setBoolean("arrowDeflectMF", true);
-    				event.entityLiving.worldObj.playSoundAtEntity(event.entityLiving, "random.break", 1.0F, 0.5F);
-    			}
-    			event.setCanceled(true);
-    		}
-    	}
+		if(event.source.isProjectile() && !event.source.isFireDamage())
+		{
+			if(powerArmour || (damage < event.ammount && hit.getTotalArmorValue() > 0))//only if dam has been reduced
+	    	{
+	    		if(ConfigArmour.resistArrow && !event.isCanceled() && (damage <= 0.5F))//TacticalManager.resistArrow(event.entityLiving, event.source, damage))
+	    		{
+	    			if(event.source.getSourceOfDamage() != null && !event.source.getSourceOfDamage().getEntityData().hasKey("arrowDeflectMF") && !(event.source.getEntity() instanceof EntityEnderPearl))
+	    			{
+	    				event.source.getSourceOfDamage().getEntityData().setBoolean("arrowDeflectMF", true);
+	    				event.entityLiving.worldObj.playSoundAtEntity(event.entityLiving, "random.break", 1.0F, 0.5F);
+	    				event.setCanceled(true);
+	    			}
+	    		}
+	    	}
+		}
 		
 		if(damage <= 0)
 		{
@@ -240,6 +222,11 @@ public class CombatMechanics
 	{
 		Entity source = src.getSourceOfDamage();
 		Entity hitter = src.getEntity();
+		
+		if(PowerArmour.allowDamageToBlock(src))
+		{
+			dam = PowerArmour.modifyDamage(hit, dam, src);
+		}
 		
 		if(properHit && hit instanceof EntityPlayer)
 		{
@@ -700,50 +687,6 @@ public class CombatMechanics
 			}
     	}
     	
-    	
-    	if(!source.isUnblockable() && (properHit || source.isProjectile()) && dam > 0 && ArmourCalculator.useThresholdSystem)//THRESHOLD SYSTEM
-    	{
-	    	float AC = ArmourCalculator.getACThreshold(user, source);
-	    	if(source.isFireDamage())
-	    	{
-	    		AC *= 0.5F;
-	    	}
-	    	if(AC > 0)
-	    	{
-	    		if(dam > 0)
-	    		{
-	    			for(int a = 0; a < 4; a++)
-	    			{
-	    				ItemStack armour = user.getEquipmentInSlot(a+1);
-	    				if(armour != null)
-	    				{
-	    					int dura = ArmourCalculator.getDamageToDura(user, source, armour, dam);
-	    					if(!user.worldObj.isRemote)
-	    					{
-	    						if(armour.getItemDamage() + dura < armour.getMaxDamage())
-	    						{
-	    							armour.damageItem(dura, user);
-	    						}
-	    						else
-	    						{
-	    							armour.setItemDamage(armour.getMaxDamage());
-	    						}
-	    					}
-	    					if(armour.getItemDamage() >= armour.getMaxDamage())
-	    					{
-	    						user.setCurrentItemOrArmor(a+1, null);
-	    						user.worldObj.playSoundEffect(user.posX, user.posY+user.getEyeHeight() - (0.4F*a), user.posZ, "random.break", 1.0F, 1.0F);
-	    					}
-	    				}
-	    			}
-	    		}
-	    		
-	    		MFLogUtil.logDebug("Init AC Reduction: " + AC);
-	    		dam -= AC;
-	    		if(dam < 0)dam = 0;
-	    	}
-    	}
-    	
     	if(dam > 0 && user instanceof EntityPlayer || (entityHitting != null && entityHitting instanceof EntityPlayer))
     	{
     		if(!user.worldObj.isRemote)
@@ -1115,14 +1058,14 @@ public class CombatMechanics
 		{
 			return ((EntityMinotaur)victim).getRageLevel() < 80;
 		}
-		return !(victim instanceof EntityPlayer);
+		return !(victim instanceof EntityPlayer || victim instanceof EntityCogwork);
 	}
 
 	private float modifyPlayerDamage(EntityPlayer hit, float dam) 
 	{
 		if(ResearchLogic.hasInfoUnlocked(hit, KnowledgeListMF.toughness))
 		{
-			dam *= 0.75F;//25% Resist
+			dam *= 0.9F;//10% Resist
 		}
 		return dam;
 	}
@@ -1133,7 +1076,7 @@ public class CombatMechanics
 	public static float getStrengthEnhancement(EntityLivingBase user)
 	{
 		float dam = 0F;
-		if(CogworkArmour.hasPoweredSuit(user))
+		if(PowerArmour.isPowered(user))
 		{
 			dam += 3F;
 		}
