@@ -30,7 +30,7 @@ public class ArmourDesign
 	public static final ArmourDesign SPLINTMAIL = new ArmourDesign("splintmail","Splintmail",  1.2F, 1.0F, 20F, 0.75F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);//50kg, Average
 	public static final ArmourDesign FIELDPLATE = new ArmourDesign("fieldplate", "Fieldplate", 1.2F, 1.0F, 24F, 1.00F).calibrateTraits(1.25F, 1.25F, 1.00F).setWeightGroup(heavy);//60kg, Vulnerable to piercing
 	
-	public static final ArmourDesign COGWORK = new ArmourDesign("cogwork",   "Cogwork",   	   5.0F, 5.0F, 48F, 2.00F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);//120kg, Massive Protection
+	public static final ArmourDesign COGWORK = new ArmourDesign("cogwork",   "Cogwork",   	   3.0F, 5.0F, 48F, 2.00F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);//120kg, Massive Protection
 	//ArmourCalculator
 	private String name;
 	private float durability;

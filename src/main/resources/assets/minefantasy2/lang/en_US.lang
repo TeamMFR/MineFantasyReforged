@@ -692,9 +692,6 @@ tile.chimney.stone.wide.name=Wide Stone Chimney
 tile.chimney.stone_extractor.wide.name=Stone Extractor Chimney
 tile.chimney.pipe.name=Smoke Pipe
 tile.bellows.name=Bellows
-tile.troughBasic.name=Wooden Trough
-tile.troughRock.name=Stone Trough
-tile.troughRefinedwood.name=Refined Wooden Trough
 tile.tanner.name=Shabby Tanning Rack
 tile.tannerStrong.name=Tanning Rack
 tile.tannerMetal.name=Advanced Tanning Rack
@@ -724,7 +721,10 @@ tile.rack_wood.name=%1$s Tool Rack
 tile.food_box_basic.name=%1$s Provisions Box
 tile.ammo_box_basic.name=%1$s Ammunition Box
 tile.crate_basic.name=%1$s Crate
+tile.trough_wood.name=%1$s Trough
 attribute.box.capacity.name=Capacity: %1$s Stacks
+attribute.fill.capacity.name=Capacity: %1$s
+attribute.fill=Fill x%1$s
 
 item.bedroll.name=Bedroll
 tile.bedroll.name=Bedroll
@@ -2045,6 +2045,7 @@ knowledge.dragons=Dragons
 knowledge.dragons.desc=Death from above
 knowledge.dragons.1=Dragons are proud but destructive reptiles found stalking their prey from above. Many breeds of dragon are found in the world, varying greatly in their offensive capabilities. Keep an eye on the skies when travelling to avoid an ill omen.
 knowledge.dragons.2=Although their young may be easy to kill, the elder dragons are powerful monsters to face. The skin of these reptiles are so strong that most weapons are ineffective. Special dragonforged weapons can be made to penetrate their powerful scales.
+knowledge.dragons.3=Dragons are hunted for their hearts, which have been useful for skilled artisans. Young dragon hearts aren't worth anything however and only older dragons are hunted for these purposes.
 knowledge.mob.red_dragon.name=Red Dragon
 knowledge.red_dragon.1=The most common form, red dragons have the capability of breathing fire. Many have fallen to these creatures and entire villages have gone up in flames. They use their breath more sparingly than other dragons, but appear to be extremely aggressive with their bite.
 knowledge.mob.blue_dragon.name=Frost Dragon
@@ -2336,8 +2337,8 @@ knowledge.bellows.2=constantly. They can also work through solid walls.
 
 knowledge.trough=Trough
 knowledge.trough.desc=Ready to Quench
-knowledge.trough.1=Having to walk to or build near water sources can be tricky, and diging holes to fill your own water sources also gets annoying. Troughs are simple containers capable of quenching hot items, just right-click tongs or hot items on this. To fill: Right-click with a bucket or water jug, but make sure not to overfill it.
-
+knowledge.trough.1=Having to walk to or build near water sources can be tricky, and regular water sources can damage smithed items. Troughs are simple containers capable of quenching hot items, just right-click tongs or hot items on this. To fill: Right-click with a bucket or water jug, but make sure not to overfill it.
+knowledge.trough.2=It is recommended to quench items in a trough, they may be damaged otherwise.^Troughs can also be filled by right-clicking the block on water, you can also pick them up without losing contents.
 knowledge.repair_basic=Repair Kits
 knowledge.repair_basic.desc=Keeping tools in condition
 knowledge.repair_basic.1=It's likely that by now one of your precious tools has broken. And it also is likely that you looked like a right idiot when it happened.^Repair kits allow you to touch up on the durability of items when they get damaged. These kits don't repair much but do the job alright, just Right-Click the block with an item to
@@ -2624,7 +2625,7 @@ knowledge.cogArmour.station.2=With the frame set up, you need to craft the pulle
 //Pulley Recipe
 knowledge.cogArmour.crafting=To craft cogwork armour: you need the three blocks (Helmet, Chest and Legs). Stack these on top of each other inside the frame. Then right-click the chest with a spanner.
 //Piece Recipes
-knowledge.cogArmour.armour=$hPlating$r^To add plating, you need to craft a plating item. Each set of plates cost a lot of ingots, and is recommended to use simple materials like steel. These can be installed by right-clicking a suit in a frame, and removed with a spanner.
+knowledge.cogArmour.armour=$hPlating$r^To add plating, you need to craft a plating item. Each set of plates cost a lot of ingots, and is recommended to use simple materials like steel. These can be installed by right-clicking a suit in a frame. You also need 16 bolts, which will be consumed before plating can be added. plating can easily be removed with a spanner.
 //Armour Recipe
 knowledge.cogArmour.fuel=$hRefueling$r^Cogwork armour only takes refined fuels (coke or magma cream). Right-click the suit to add fuel.^The heavier the armour on the suit, the faster fuel decays.
 knowledge.cogArmour.advantage=$hAdvantages$r^An unarmoured suit can give immunity to smoke, remove fall damage, increase attack damage and eliminate stamina decay.

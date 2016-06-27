@@ -5,6 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
@@ -12,7 +18,7 @@ import minefantasy.mf2.api.mining.RandomOre;
 import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.config.ConfigTools;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.item.list.CustomToolListMF;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -31,13 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * @author Anonymous Productions
@@ -71,7 +71,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial
 			while(list.hasNext())
 			{
 				ItemStack drop = list.next();
-				if(!drop.isItemEqual(new ItemStack(block, 1, m)) && !(drop.getItem() instanceof ItemBlock) && rand.nextFloat() < getDoubleDropChance())
+				if(isOre(block, m) && !drop.isItemEqual(new ItemStack(block, 1, m)) && !(drop.getItem() instanceof ItemBlock) && rand.nextFloat() < getDoubleDropChance())
 				{
 					dropItem(world, x, y, z, drop.copy());
 				}
@@ -104,6 +104,22 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial
 	    	}
 		}
 		return super.onBlockDestroyed(item, world, block, x, y, z, user);
+	}
+	private boolean isOre(Block block, int meta) 
+	{
+		if(!block.isToolEffective("pickaxe", meta))
+		{
+			return false;
+		}
+		for(int i: OreDictionary.getOreIDs(new ItemStack(block, 1, meta)))
+		{
+			String orename = OreDictionary.getOreName(i);
+			if(orename != null && orename.startsWith("ore"))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	private void dropItem(World world, int x, int y, int z, ItemStack drop) 
 	{

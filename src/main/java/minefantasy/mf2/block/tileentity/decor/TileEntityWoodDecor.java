@@ -60,6 +60,15 @@ public abstract class TileEntityWoodDecor extends TileEntity
 		this.trySetMaterial(nbt.getString("Material"));
 	}
 
+	public int getCapacity() 
+	{
+		CustomMaterial material = getMaterial();
+		if(material != null)
+		{
+			return getCapacity(material.tier);
+		}
+		return getCapacity(0);
+	}
 	public static int getCapacity(int tier) 
 	{
 		return (tier)*4 + 4;

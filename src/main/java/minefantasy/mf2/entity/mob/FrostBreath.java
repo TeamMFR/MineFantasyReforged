@@ -1,5 +1,6 @@
 package minefantasy.mf2.entity.mob;
 
+import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.config.ConfigMobs;
 import minefantasy.mf2.entity.EntityDragonBreath;
 import net.minecraft.block.Block;
@@ -41,12 +42,16 @@ public class FrostBreath extends DragonBreath
 		super.onHitEntity(target, instance);
 		if(target instanceof EntityLivingBase)
 		{
+			if(StaminaBar.isSystemActive && StaminaBar.doesAffectEntity((EntityLivingBase) target))
+			{
+				StaminaBar.modifyStaminaValue((EntityLivingBase) target, -1F);
+			}
 			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 100, 2));
 		}
 	}
 	
 	@Override
-	public float modifyDamage(float dam)
+	public float modifyDamage(Entity hit, float dam)
 	{
 		return dam;
 	}

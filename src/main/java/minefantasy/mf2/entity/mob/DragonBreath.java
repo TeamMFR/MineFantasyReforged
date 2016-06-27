@@ -54,10 +54,10 @@ public abstract class DragonBreath
 	public abstract String getTexture(EntityDragonBreath instance);
 	
 	public void onHitEntity(Entity entityHit, EntityDragonBreath instance) {
-		entityHit.attackEntityFrom(getDamageSource(instance, instance.shootingEntity), modifyDamage(instance.getDamage()));
+		entityHit.attackEntityFrom(getDamageSource(instance, instance.shootingEntity), modifyDamage(entityHit, instance.getDamage()));
 	}
 	
-	public float modifyDamage(float dam)
+	public float modifyDamage(Entity hit, float dam)
 	{
 		return dam;
 	}

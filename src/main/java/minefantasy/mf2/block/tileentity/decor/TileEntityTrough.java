@@ -1,32 +1,24 @@
-package minefantasy.mf2.block.tileentity;
+package minefantasy.mf2.block.tileentity.decor;
 
 import java.util.List;
 
 import minefantasy.mf2.api.heating.IQuenchBlock;
 import minefantasy.mf2.block.decor.BlockTrough;
 import minefantasy.mf2.item.food.FoodListMF;
-import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.network.packet.TroughPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
-public class TileEntityTrough extends TileEntity implements IQuenchBlock
+public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBlock
 {
 	public int fill;
-	private String tex;
 	
 	public TileEntityTrough()
 	{
-		this("Basic");
-	}
-	public TileEntityTrough(String tex)
-	{
-		this.tex = tex;
+		super("trough_wood");
 	}
 	@Override
 	public float quench() 
@@ -43,48 +35,59 @@ public class TileEntityTrough extends TileEntity implements IQuenchBlock
 	{
 		if(held != null)
 		{
+			int glass_bottle = 1,
+				jug = 1,
+				bucket = 16;
 			if(fill < getCapacity())//Give
 			{
 				if(held.getItem() == Items.water_bucket)
 				{
 					user.setCurrentItemOrArmor(0, new ItemStack(Items.bucket));
-					addCapacity(12);
+					addCapacity(bucket);
 					return true;
 				}
 				if(held.getItem() == FoodListMF.jug_water)
 				{
 					givePlayerItem(user, held, new ItemStack(FoodListMF.jug_empty));
-					addCapacity(1);
+					addCapacity(jug);
 					return true;
 				}
 				if(held.getItem() == Items.potionitem && held.getItemDamage() == 0)
 				{
 					givePlayerItem(user, held, new ItemStack(Items.glass_bottle));
-					addCapacity(4);
+					addCapacity(glass_bottle);
 					return true;
 				}
 			}
 			
-			/*
+			
 			//Take
-			if(getCapacity() >=4 && held.getItem() == Items.glass_bottle && held.getItemDamage() == 0)
+			if(fill >=1 && held.getItem() == Items.glass_bottle && held.getItemDamage() == 0)
 			{
 				givePlayerItem(user, held, new ItemStack(Items.potionitem));
-				addCapacity(-4);
+				addCapacity(-glass_bottle);
 				return true;
 			}
-			*/
+			if(fill >=16 && held.getItem() == Items.bucket)
+			{
+				givePlayerItem(user, held, new ItemStack(Items.water_bucket));
+				addCapacity(-bucket);
+				return true;
+			}
+			
 		}
 		return false;
 	}
 	private void givePlayerItem(EntityPlayer user, ItemStack held, ItemStack jug) 
 	{
-		--held.stackSize;
-		if(held.stackSize <= 0)
+		if(held.stackSize == 1)
 		{
 			user.setCurrentItemOrArmor(0, jug);
+			return;
 		}
-		else if(!user.inventory.addItemStackToInventory(jug))
+		
+		--held.stackSize;
+		if(!user.inventory.addItemStackToInventory(jug))
 		{
 			if(!user.worldObj.isRemote)
 			{
@@ -127,31 +130,13 @@ public class TileEntityTrough extends TileEntity implements IQuenchBlock
 		fill = Math.min(cap, fill+i);
 		syncData();
 	}
-	public int getCapacity()
+	public static int capacityScale = 8;
+	@Override
+	public int getCapacity() 
 	{
-		if(worldObj != null)
-		{
-			Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
-			if(block instanceof BlockTrough)
-			{
-				return ((BlockTrough)block).capacity;
-			}
-		}
-		return 16;
+		return super.getCapacity() * capacityScale;
 	}
-	public String getName()
-	{
-		if(worldObj != null)
-		{
-			Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
-			if(block instanceof BlockTrough)
-			{
-				return ((BlockTrough)block).name;
-			}
-		}
-		return tex;
-	}
-	
+
 	public void syncData()
 	{
 		if(worldObj.isRemote)return;
@@ -161,6 +146,7 @@ public class TileEntityTrough extends TileEntity implements IQuenchBlock
 		{
 			EntityPlayer player = players.get(i);
 			((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new TroughPacket(this).generatePacket());
+			super.sendPacketToClient(player);
 		}
 	}
 	

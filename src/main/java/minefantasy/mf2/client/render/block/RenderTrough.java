@@ -1,7 +1,7 @@
 package minefantasy.mf2.client.render.block;
 
 import minefantasy.mf2.block.decor.BlockTrough;
-import minefantasy.mf2.block.tileentity.TileEntityTrough;
+import minefantasy.mf2.block.tileentity.decor.TileEntityTrough;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
@@ -20,7 +20,7 @@ public class RenderTrough implements ISimpleBlockRenderingHandler
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		BlockTrough forge = (BlockTrough)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityTrough(forge.name), 0.0D, 0.0D, 0.0D, 0.0F);
+		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityTrough(), 0.0D, 0.0D, 0.0D, 0.0F);
 		GL11.glPopMatrix();
 	}
 

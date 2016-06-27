@@ -26,10 +26,12 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 {
@@ -56,12 +58,24 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         super.entityInit();
         this.dataWatcher.addObject(12, "");
         this.dataWatcher.addObject(13, Float.valueOf(0F));
+        this.dataWatcher.addObject(14, Integer.valueOf(0));
     }
 	
 	
-	public void setFuel(float name)
+	public void setBolts(int value)
     {
-        this.dataWatcher.updateObject(13, name);
+        this.dataWatcher.updateObject(14, value);
+    }
+
+    public int getBolts()
+    {
+        return this.dataWatcher.getWatchableObjectInt(14);
+    }
+    
+    
+	public void setFuel(float level)
+    {
+        this.dataWatcher.updateObject(13, level);
     }
 
     public float getFuel()
@@ -106,7 +120,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         super.onUpdate();
         if(noMoveTime > 0)
     	{
-        	motionX = motionZ = 0;
+        	moveForward = moveStrafing = 0;
         	--noMoveTime;
     	}
         
@@ -166,7 +180,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	            {
 	                this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(i, j, k), this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
 	            }
-	            if(!worldObj.isRemote)
+	            if(!worldObj.isRemote &&  ConfigArmour.cogworkGrief)
 	            {
 	            	damageBlock(block, i, j, k, worldObj.getBlockMetadata(i, j, k));
 	            	block = this.worldObj.getBlock(i, j+1, k);
@@ -186,6 +200,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         	this.prevRotationYawHead = this.prevRotationYaw;
         	this.swingProgress = this.swingProgressInt = 0;
         }
+        onPortalTick();
     }
 	
 	private float getFuelDecay() 
@@ -199,18 +214,33 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 		{
 			worldObj.setBlock(x, y, z, Blocks.dirt, 0, 2);
 		}
-		if(block.getMaterial() == Material.glass && ConfigArmour.cogworkGrief)
+		if(block.getMaterial() == Material.glass)
 		{
 			worldObj.setBlockToAir(x, y, z);
 			this.worldObj.playSoundEffect(x+0.5D, y+0.5D, z+0.5D, "dig.glass", 1.0F, 0.9F+(rand.nextFloat() * 0.2F));
 		}
+		if(block == Blocks.ice)
+		{
+			worldObj.setBlock(x, y, z, Blocks.water, 0, 2);
+			this.worldObj.playSoundEffect(x+0.5D, y+0.5D, z+0.5D, "dig.glass", 1.0F, 0.9F+(rand.nextFloat() * 0.2F));
+		}
+		if(block.getMaterial() == Material.leaves)
+		{
+			worldObj.setBlock(x, y, z, Blocks.water, 0, 2);
+			this.worldObj.playSoundEffect(x+0.5D, y+0.5D, z+0.5D, "dig.grass", 1.0F, 0.9F+(rand.nextFloat() * 0.2F));
+		}
 	}
 	private void damageSurface(Block block, int x, int y, int z, int blockMetadata)
 	{
-		if(block.getBlockHardness(worldObj, x, y, z) == 0 && (block.getMaterial() == Material.grass || block.getMaterial() == Material.plants))
+		if(block.getBlockHardness(worldObj, x, y, z) == 0 && (block.getMaterial() == Material.vine || block.getMaterial() == Material.plants))
 		{
 			worldObj.setBlockToAir(x, y, z);
 			this.worldObj.playSoundEffect(x+0.5D, y+0.5D, z+0.5D, "dig.grass", 1.0F, 0.9F+(rand.nextFloat() * 0.2F));
+		}
+		if(block == Blocks.snow_layer)
+		{
+			worldObj.setBlockToAir(x, y, z);
+			this.worldObj.playSoundEffect(x+0.5D, y+0.5D, z+0.5D, "dig.cloth", 1.0F, 0.9F+(rand.nextFloat() * 0.2F));
 		}
 	}
 	@Override
@@ -224,6 +254,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	}
 	public void updateRider()
 	{
+		if(!isPowered())return;
+		
 		if(worldObj.isRemote && riddenByEntity != null && riddenByEntity instanceof EntityPlayer)
 		{
 			float forward = ((EntityPlayer)riddenByEntity).moveForward;
@@ -290,14 +322,15 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
     {
         return false;
     }
-	
+	public static int maxBolts = 16;
 	@Override
 	public boolean interactFirst(EntityPlayer user)
     {
-		if(this.riddenByEntity != null)
+		if(user.isSwingInProgress)
 		{
 			return false;
 		}
+		
 		ItemStack item = user.getHeldItem();
 		if(item != null)
 		{
@@ -338,6 +371,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 				}
 				return true;
 			}
+			if(this.riddenByEntity != null)
+			{
+				return false;
+			}
 			if(this.isUnderRepairFrame())
 			{
 				if(getPlating() == null && item.getItem() == ComponentListMF.cogwork_armour)
@@ -346,6 +383,17 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 					if(material != null)
 					{
 						this.playSound("mob.horse.armor", 1.0F, 1.0F);
+						int boltCount = this.getBolts();
+						if(boltCount < maxBolts)
+						{
+							if(!user.isSwingInProgress && user.capabilities.isCreativeMode || user.inventory.consumeInventoryItem(ComponentListMF.bolt))
+							{
+								++boltCount;
+								setBolts(boltCount);
+							}
+							user.swingItem();
+							return true;
+						}
 						this.setCustomMaterial(material.name);
 						float damagePercent = 1F - ((float)item.getItemDamage() / (float)item.getMaxDamage());
 						this.setHealth(getMaxHealth() * damagePercent);
@@ -357,17 +405,36 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 								user.setCurrentItemOrArmor(0, null);
 							}
 						}
+						user.swingItem();
 						return true;
 					}
 				}
 				if(this.getPlating() != null && ToolHelper.getCrafterTool(item).equalsIgnoreCase("spanner"))
 				{
+					this.playSound("mob.horse.armor", 1.2F, 1.0F);
+					user.swingItem();
+					int boltCount = this.getBolts();
+					if(boltCount > 0)
+					{
+						if(!worldObj.isRemote)
+						{
+							ItemStack bolt = new ItemStack(ComponentListMF.bolt, boltCount);
+							if(!user.capabilities.isCreativeMode && !user.inventory.addItemStackToInventory(bolt))
+							{
+								this.entityDropItem(bolt, 0.0F);
+							}
+						}
+						setBolts(0);
+					}
 					float damagePercent = 1F - (getHealth() / getMaxHealth());
 					if(!worldObj.isRemote)
 					{
-						this.entityDropItem(ComponentListMF.cogwork_armour.createComm(getPlating().name, 1, damagePercent), 0.0F);
+						ItemStack armour = ComponentListMF.cogwork_armour.createComm(getPlating().name, 1, damagePercent);
+						if(!user.capabilities.isCreativeMode && !user.inventory.addItemStackToInventory(armour))
+						{
+							this.entityDropItem(armour, 0.0F);
+						}
 					}
-					this.playSound("mob.horse.armor", 1.2F, 1.0F);
 				    this.playSound("mob.irongolem.hit", 1.0F, 1.0F);
 					this.setCustomMaterial("");
 					return true;
@@ -403,7 +470,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 			return true;//Any Armour
 		}
 		
-		float bulk = ArmourCalculator.getArmourBulk(user);
+		float bulk = ArmourCalculator.getEquipmentBulk(user);
 		if(allowedBulk >= 0)
 		{
 			if(bulk > allowedBulk)
@@ -443,11 +510,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	@Override
 	public void moveEntityWithHeading(float strafe, float forward)
     {
-		if(!isPowered())
-		{
-			return;
-		}
-        if (this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
+        if (isPowered() && this.riddenByEntity != null && this.riddenByEntity instanceof EntityLivingBase)
         {
         	EntityLivingBase user = (EntityLivingBase)riddenByEntity;
         	
@@ -481,6 +544,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 
             user.limbSwingAmount += (f4 - user.limbSwingAmount) * 0.4F;
             user.limbSwing += user.limbSwingAmount;
+        }
+        else
+        {
+        	super.moveEntityWithHeading(strafe, forward);
         }
     }
 	
@@ -606,6 +673,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         super.writeEntityToNBT(nbt);
         nbt.setString("Plating", this.getCustomMaterial());
         nbt.setFloat("Fuel", getFuel());
+        nbt.setInteger("Bolts", getBolts());
     }
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt)
@@ -616,6 +684,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
             this.setCustomMaterial(nbt.getString("Plating"));
         }
         this.setFuel(nbt.getFloat("Fuel"));
+        setBolts(nbt.getInteger("Bolts"));
     }
 	
 	@Override
@@ -892,4 +961,67 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         
 		return PowerArmour.isStationBlock(worldObj, i, j, k);
 	}
+	
+	private void onPortalTick() 
+	{
+		if (!this.worldObj.isRemote && this.worldObj instanceof WorldServer)
+        {
+            this.worldObj.theProfiler.startSection("portal");
+            MinecraftServer minecraftserver = ((WorldServer)this.worldObj).func_73046_m();
+            int i = this.getMaxInPortalTime();
+
+            if (this.inPortal)
+            {
+                if (minecraftserver.getAllowNether())
+                {
+                    if (this.ridingEntity == null && this.portalCounter++ >= i)
+                    {
+                        this.portalCounter = i;
+                        this.timeUntilPortal = this.getPortalCooldown();
+                        byte b0;
+
+                        if (this.worldObj.provider.dimensionId == -1)
+                        {
+                            b0 = 0;
+                        }
+                        else
+                        {
+                            b0 = -1;
+                        }
+                        this.travelToDimension(b0);
+                    }
+
+                    this.inPortal = false;
+                }
+            }
+            else
+            {
+                if (this.portalCounter > 0)
+                {
+                    this.portalCounter -= 4;
+                }
+
+                if (this.portalCounter < 0)
+                {
+                    this.portalCounter = 0;
+                }
+            }
+
+            if (this.timeUntilPortal > 0)
+            {
+                --this.timeUntilPortal;
+            }
+
+            this.worldObj.theProfiler.endSection();
+        }
+	}
+	@Override
+	public void travelToDimension(int id)
+    {
+		if(this.riddenByEntity != null)
+        {
+        	riddenByEntity.travelToDimension(id);
+        }
+		super.travelToDimension(id);
+    }
 }

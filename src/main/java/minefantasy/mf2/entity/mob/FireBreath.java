@@ -45,7 +45,7 @@ public class FireBreath extends DragonBreath
 	}
 	
 	@Override
-	public float modifyDamage(float dam)
+	public float modifyDamage(Entity hit, float dam)
 	{
 		return dam;
 	}

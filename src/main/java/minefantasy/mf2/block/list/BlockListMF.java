@@ -43,7 +43,6 @@ import minefantasy.mf2.block.tree.BlockLogMF;
 import minefantasy.mf2.block.tree.BlockSaplingMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
-import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -166,9 +165,7 @@ public class BlockListMF
 	
 	public static Block advTanner = new BlockTanningRack(1, "Strong");
 	public static Block research = new BlockResearchStation();
-	public static Block trough_wood = new BlockTrough("Basic", Material.wood, 32);
-	public static Block trough_rock = new BlockTrough("Rock", Material.wood, 100);
-	public static Block trough_strongwood = new BlockTrough("Refinedwood", Material.wood, 64);
+	public static Block trough_wood = new BlockTrough("trough_wood");
 	public static Block engTanner = new BlockEngineerTanner(2, "Metal");
 	
 	public static Block bombPress = new BlockBombPress();
@@ -226,6 +223,7 @@ public class BlockListMF
 	public static Block cogwork_chest = new BlockCogwork("cogwork_chest", true);
 	public static Block frame_block = new BlockFrame("frame_block");
 	public static Block cogwork_builder = new BlockFrame("cogwork_builder", frame_block).setCogworkHolder();
+	
 	public static void load()
 	{
 		anvilStone = new BlockAnvilMF(BaseMaterialMF.getMaterial("stone"));

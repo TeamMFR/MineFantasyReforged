@@ -12,6 +12,7 @@ import minefantasy.mf2.api.archery.IFirearm;
 import minefantasy.mf2.api.archery.ISpecialBow;
 import minefantasy.mf2.api.crafting.ISpecialSalvage;
 import minefantasy.mf2.api.crafting.engineer.ICrossbowPart;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.weapon.IDamageModifier;
 import minefantasy.mf2.api.weapon.IDamageType;
 import minefantasy.mf2.api.weapon.IRackItem;
@@ -65,7 +66,7 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
     @Override
     public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
     {
-    	if(!world.isRemote && user.isSneaking() || AmmoMechanicsMF.isFirearmOutOfAmmo(item))//OPEN INV
+    	if(!world.isRemote && user.isSneaking() || AmmoMechanicsMF.isDepleted(item))//OPEN INV
     	{
     		user.openGui(MineFantasyII.instance, 1, user.worldObj, 1, 0, 0);
     		return item;
@@ -181,6 +182,10 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
     
     private void recoilUser(EntityPlayer user, float value) 
     {
+    	if(PowerArmour.isPowered(user))
+    	{
+    		return;
+    	}
     	float str = CombatMechanics.getStrengthEnhancement(user)+1;
     	value /= str;
     	

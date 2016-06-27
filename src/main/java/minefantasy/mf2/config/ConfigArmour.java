@@ -27,11 +27,12 @@ public class ConfigArmour extends ConfigurationBaseMF
 		TacticalManager.minWeightSpeed = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Min armour weigh speed", 10F, "The minimal speed percent capable from weight (10 = 10%), MF armours don't go lower than 75% anyway").getString());
 		ArmourCalculator.slowRate = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Slowdown Rate", 1.0F, "A modifier for the rate armours slow down movement, increasing this slows you more, decreasing it slows less, just keep it above 0").getString());
 		
+		ArmourCalculator.useConfigIndirectDmg = Boolean.parseBoolean(config.get("Misc", "Use config indrect damage", true, "Allows config for indirect projectiles, disable if you get problems when getting hit by modded projectiles").getString());
+		
 		cogworkGrief = Boolean.parseBoolean(config.get(CATEGORY_COGWORK, "Cogwork Grief", true, "Should cogwork armour cause envionmental damage when impact landing").getString());
 		cogworkFuelUnits = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Fuel Modifier", 1F, "Modify the amount of fuel added to cogworks").getString());
 		EntityCogwork.health_modifier = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Durability Modifier", 1.0F, "Modify the relative durability of cogwork armour").getString());
 		EntityCogwork.rating_modifier = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Armour Modifier", 1.0F, "Modify the relative armour rating of cogwork armour").getString());
 		EntityCogwork.allowedBulk = Integer.parseInt(config.get(CATEGORY_COGWORK, "Worn Apparel Restrict", 2, "-1: can't wear armour with cogwork, 0=Can enter cogwork with light armour, 1=can enter with medium, 2=can enter in any armour").getString());
 	}
-
 }

@@ -38,6 +38,9 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayData, IArmouredEntity, IArmourPenetrationMob
 {
+	public static int interestTimeSeconds = 90;
+	public static float heartChance = 1.0F;
+	  
     public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
@@ -50,7 +53,6 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
 	private int interestTime;
 	@SideOnly(Side.CLIENT)
 	private int wingFlap, wingTick;
-
     public EntityDragon(World world)
     {
         super(world);
@@ -214,7 +216,8 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
 	        		setHealth(getMaxHealth());
 	        	}
 	        }
-        	int maxTime = ((getHealth() > (getMaxHealth()*0.75F)) ? 60 : 120) * 20;
+	        int time = getInterestTime();
+        	int maxTime = ((getHealth() > (getMaxHealth()*0.75F)) ? time : time*2) * 20;
         	if(dimension != -1)
         	{
 	        	++interestTime;
@@ -269,7 +272,12 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
 	        wingFlap = -40 + i;
     	}
     }
-    private void breatheFire()
+  
+    private int getInterestTime() {
+		return interestTimeSeconds;
+	}
+
+	private void breatheFire()
     {
     	int spread = 4;
     	
@@ -662,9 +670,12 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
     	{
     		this.dropItem(Items.nether_star, 1);
     	}
-        this.dropItem(ComponentListMF.dragon_heart, 1);
+    	if(didDropHeart(this.getTier()))
+    	{
+    		this.dropItem(ComponentListMF.dragon_heart, 1);
+    	}
     }
-
+    
     private Item getLoot(int tier) 
     {
     	if(tier == 4)//Ancient
@@ -673,6 +684,28 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
     	}
 		return ToolListMF.loot_sack_uc;//Any
 	}
+    
+    private boolean didDropHeart(int tier) 
+    {
+    	if(tier == 4)//Ancient
+    	{
+    		return true;
+    	}
+    	if(tier == 3)//Elder
+    	{
+    		return true;
+    	}
+    	if(tier == 2)//Mature
+    	{
+    		return rand.nextFloat() * heartChance > 0.25F;//75% chance
+    	}
+    	if(tier == 1)//Adult
+    	{
+    		return rand.nextFloat() * heartChance >0.85F;//15% chance
+    	}
+		return false;//Young
+	}
+    
     private int getLootCount(int tier) 
     {
     	if(tier == 4)//Ancient

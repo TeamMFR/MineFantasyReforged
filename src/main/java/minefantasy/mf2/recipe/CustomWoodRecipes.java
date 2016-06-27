@@ -124,6 +124,20 @@ public class CustomWoodRecipes
 		}));
 		Salvage.addSalvage(result, woodpane, woodpane, woodpane, woodpane, woodpane, woodpane, new ItemStack(ComponentListMF.nail, 4), new ItemStack(ComponentListMF.hinge, 2));
 		
+		
+		time = 15;
+		result = ((BlockWoodDecor)BlockListMF.trough_wood).construct(material.name);
+		KnowledgeListMF.nailTroughR.add( 
+		MineFantasyAPI.addCarpenterRecipe(construction, result, "", nailHammer, "hammer", material.tier, (int)(material.durability * time) , new Object[]
+		{
+			"P P",
+			"PPP",
+			"NNN",
+			'N', ComponentListMF.nail,
+			'P', timber,
+		}));
+		Salvage.addSalvage(result, timber, timber, timber, timber, timber, new ItemStack(ComponentListMF.nail, 3));
+		
 	}
 
 }

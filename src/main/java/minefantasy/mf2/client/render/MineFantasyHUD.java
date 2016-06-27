@@ -30,6 +30,7 @@ import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -77,6 +78,11 @@ public class MineFantasyHUD extends Gui
 			if(StaminaBar.isSystemActive && !player.capabilities.isCreativeMode && !PowerArmour.isWearingCogwork(player))
 			{
 				renderStaminaBar(player);
+			}
+			Entity highlight = getClickedEntity(partialTicks, mouseX, mouseY);
+			if(highlight != null && highlight instanceof EntityCogwork)
+			{
+				lookAtCogwork((EntityCogwork)highlight);
 			}
 			
 			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -153,6 +159,18 @@ public class MineFantasyHUD extends Gui
 			}
 		}
 	}
+	private void lookAtCogwork(EntityCogwork suit)
+	{
+		GL11.glPushMatrix();
+		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc, MineFantasyHUD.mc.displayWidth, MineFantasyHUD.mc.displayHeight);
+        int width = scaledresolution.getScaledWidth();
+        int height = scaledresolution.getScaledHeight();
+        
+        renderCogworkFuel(width, height, suit);
+        
+        GL11.glPopMatrix();
+	}
 	private void renderPowerHelmet(EntityPlayer user, EntityCogwork suit)
 	{
 		GL11.glPushMatrix();
@@ -164,6 +182,13 @@ public class MineFantasyHUD extends Gui
         int height = scaledresolution.getScaledHeight();
         
         renderHelmetBlur(width, height);
+        renderCogworkFuel(width, height, suit);
+        
+        GL11.glPopMatrix();
+	}
+	private void renderCogworkFuel(int width, int height, EntityCogwork suit)
+	{
+		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc, MineFantasyHUD.mc.displayWidth, MineFantasyHUD.mc.displayHeight);
         
         bindTexture("textures/gui/hud_overlay.png");
         int[] orientationAR = getOrientsFor(width, height, ConfigClient.CF_xOrient, ConfigClient.CF_yOrient);
@@ -173,11 +198,9 @@ public class MineFantasyHUD extends Gui
         this.drawTexturedModalRect(xPos, yPos, 84, 38, 172, 20);
         int i = suit.getMetreScaled(160);
         this.drawTexturedModalRect(xPos+6+(160-i), yPos+11, 90, 20, i, 3);
-        
-        GL11.glPopMatrix();
 	}
 	
-	protected void renderHelmetBlur(int p_73836_1_, int p_73836_2_)
+	private void renderHelmetBlur(int width, int height)
     {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glDepthMask(false);
@@ -187,9 +210,9 @@ public class MineFantasyHUD extends Gui
         bindTexture("textures/gui/scopes/cogwork_helm.png");
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(0.0D, (double)p_73836_2_, -90.0D, 0.0D, 1.0D);
-        tessellator.addVertexWithUV((double)p_73836_1_, (double)p_73836_2_, -90.0D, 1.0D, 1.0D);
-        tessellator.addVertexWithUV((double)p_73836_1_, 0.0D, -90.0D, 1.0D, 0.0D);
+        tessellator.addVertexWithUV(0.0D, (double)height, -90.0D, 0.0D, 1.0D);
+        tessellator.addVertexWithUV((double)width, (double)height, -90.0D, 1.0D, 1.0D);
+        tessellator.addVertexWithUV((double)width, 0.0D, -90.0D, 1.0D, 0.0D);
         tessellator.addVertexWithUV(0.0D, 0.0D, -90.0D, 0.0D, 0.0D);
         tessellator.draw();
         GL11.glDepthMask(true);
@@ -208,6 +231,15 @@ public class MineFantasyHUD extends Gui
             int l = mc.objectMouseOver.blockZ;
             
             return new int[]{j, k, l};
+        }
+		return null;
+	}
+	
+	public Entity getClickedEntity(float ticks, int mouseX, int mouseY)
+	{
+		if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.ENTITY)
+        {
+			return mc.objectMouseOver.entityHit;
         }
 		return null;
 	}

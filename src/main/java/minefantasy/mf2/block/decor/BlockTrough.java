@@ -1,9 +1,11 @@
 package minefantasy.mf2.block.decor;
 
-import minefantasy.mf2.block.tileentity.TileEntityTrough;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.block.tileentity.decor.TileEntityTrough;
+import minefantasy.mf2.block.tileentity.decor.TileEntityWoodDecor;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,24 +15,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockTrough extends BlockContainer 
+public class BlockTrough extends BlockWoodDecor 
 {
 	public static int trough_RI = 107;
-	public int capacity = 16;
-	public String name;
-	public BlockTrough(String name, Material material, int capacity) 
+	public BlockTrough(String name) 
 	{
-		super(material);
-		this.capacity = capacity;
+		super(name);
 		this.setBlockBounds(0F, 0F, 0F, 1.0F, (7F/16F), 1.0F);
 		
-		this.name=name;
-		GameRegistry.registerBlock(this, "MF_Trough_"+name);
-		setBlockName("trough"+name);
+		GameRegistry.registerBlock(this, ItemBlockTrough.class, name);
+		setBlockName(name);
 		this.setHardness(1F);
 		this.setResistance(0.5F);
         this.setCreativeTab(CreativeTabMF.tabUtil);
@@ -40,6 +35,12 @@ public class BlockTrough extends BlockContainer
     public boolean isOpaqueCube() 
     {
         return false;
+    }
+	@Override
+	@SideOnly(Side.CLIENT)
+    public int getRenderBlockPass()
+    {
+        return 1;
     }
     @Override
     public boolean renderAsNormalBlock() 
@@ -62,12 +63,22 @@ public class BlockTrough extends BlockContainer
     {
     	return trough_RI;
     }
+    public static final String NBT_fill = "Fill_Level";
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase user, ItemStack item)
     {
-        int direction = MathHelper.floor_double((double)(user.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
+    	int direction = MathHelper.floor_double((double)(user.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, direction, 2);
+        
+        TileEntityTrough tile = getTile(world, x, y, z);
+        if(tile != null)
+        {
+			if(item.hasTagCompound() && item.getTagCompound().hasKey(NBT_fill))
+		    {
+		    	tile.fill = item.getTagCompound().getInteger(NBT_fill);
+		    }
+        }
+        super.onBlockPlacedBy(world, x, y, z, user, item);
     }
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
@@ -81,8 +92,37 @@ public class BlockTrough extends BlockContainer
 		TileEntity tile = world.getTileEntity(x, y, z);
 		if(tile != null && tile instanceof TileEntityTrough)
 		{
-			return ((TileEntityTrough)tile).interact(user, held);
+			if( ((TileEntityTrough)tile).interact(user, held))
+			{
+				world.playSoundEffect(x+0.5D, y+0.5D, z+0.5D, "random.splash",  0.125F + user.getRNG().nextFloat()/4F, 0.5F + user.getRNG().nextFloat());
+				((TileEntityTrough)tile).syncData();
+				return true;
+			}
 		}
 		return false;
     }
+	private TileEntityTrough getTile(World world, int x, int y, int z) 
+	{
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if(tile != null && tile instanceof TileEntityTrough)
+		{
+			return (TileEntityTrough)tile;
+		}
+		return null;
+	}
+	
+	@Override
+	protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) 
+	{
+		return modifyFill((TileEntityTrough)tile, super.modifyDrop(tile, item));
+	}
+
+	private ItemStack modifyFill(TileEntityTrough tile, ItemStack item)
+	{
+		if(tile != null && item != null)
+		{
+			item.getTagCompound().setInteger(NBT_fill, tile.fill);
+		}
+		return item;
+	}
 }

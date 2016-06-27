@@ -1,6 +1,7 @@
 package minefantasy.mf2.config;
 
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
+import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.mechanics.CombatMechanics;
 
 public class ConfigMobs extends ConfigurationBaseMF
@@ -72,7 +73,9 @@ public class ConfigMobs extends ConfigurationBaseMF
 		dragonGriefFire =  Boolean.parseBoolean(config.get(MOB_DRAGON, "4B: Fire Grief", true, "Should fire breath start fires").getString());
 		dragonGriefGeneral =  Boolean.parseBoolean(config.get(MOB_DRAGON, "4C: General Block Grief", true, "Should blocks be frozen by frost breath, melted by fire, or glass shatter with fire and stomping").getString());
 		dragonMSG =  Boolean.parseBoolean(config.get(MOB_DRAGON, "4D: Spawn Message", true, "Will players get a message when dragons enter/leave").getString());
-	
+		EntityDragon.interestTimeSeconds = Integer.parseInt(config.get(MOB_DRAGON, "4E: Dragon Interest Time", 90, "How many seconds until a dragon leaves (2x as long if wounded) ").getString());
+		EntityDragon.heartChance = Float.parseFloat(config.get(MOB_DRAGON, "4F: Heart Drop chance modifier", 1F, "Modify chance of getting a heart").getString());
+		
 		minotaurHP =  Integer.parseInt(config.get(MOB_MINOTAUR, 	"5Aa: Health", 50, "Brown Minotaur").getString());
 		minotaurMD =  Integer.parseInt(config.get(MOB_MINOTAUR, 	"5Ab: Pound dmg", 5).getString());
 		minotaurGD =  Integer.parseInt(config.get(MOB_MINOTAUR, 	"5Ac: Gore dmg", 5).getString());

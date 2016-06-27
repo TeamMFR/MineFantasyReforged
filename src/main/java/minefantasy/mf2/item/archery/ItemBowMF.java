@@ -216,7 +216,7 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
     public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player)
     {
     	
-    	if(!world.isRemote && player.isSneaking() || AmmoMechanicsMF.isFirearmOutOfAmmo(item))
+    	if(!world.isRemote && player.isSneaking() || AmmoMechanicsMF.isDepleted(item))
     	{
     		reloadBow(item, player);
     		return item;

@@ -1,5 +1,8 @@
 package minefantasy.mf2.entity.mob;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.entity.EntityDragonBreath;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -9,8 +12,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class PoisonBreath extends DragonBreath 
 {
@@ -39,8 +40,8 @@ public class PoisonBreath extends DragonBreath
 		if(target instanceof EntityLivingBase)
 		{
 			float dam = instance.getDamage();
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.poison.id, 20, (int)dam));
-			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.confusion.id, 20, 10));
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.poison.id, 40, (int)dam));
+			((EntityLivingBase)target).addPotionEffect(new PotionEffect(Potion.confusion.id, 50, 10));
 			
 			if(instance.rand.nextInt(10) == 0)
 			{
@@ -62,8 +63,12 @@ public class PoisonBreath extends DragonBreath
 	}
 	
 	@Override
-	public float modifyDamage(float dam)
+	public float modifyDamage(Entity hit, float dam)
 	{
+		if(hit instanceof EntityCogwork)
+		{
+			return dam * 2;
+		}
 		return dam;
 	}
 	

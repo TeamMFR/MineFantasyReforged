@@ -61,12 +61,20 @@ public class MonsterUpgrader
 				{
 					tier = "Obsidian";
 					giveEntityWeapon(mob, tier, rand.nextInt(7));
+					if(mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null)
+					{
+						mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
+					}
 				}
 				else
 				{
 					if(mob.getHeldItem() != null && mob.getHeldItem().getItem() == Items.iron_sword)
 					{
 						giveEntityWeapon(mob, tier, 0);
+						if(mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null)
+						{
+							mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
+						}
 					}
 					else
 					{
@@ -75,6 +83,10 @@ public class MonsterUpgrader
 						if(chance >= (100F-zombieWepChance))
 						{
 							giveEntityWeapon(mob, tier, rand.nextInt(5));
+							if(mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null)
+							{
+								mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
+							}
 						}
 					}
 				}
@@ -202,8 +214,10 @@ public class MonsterUpgrader
 		{
 			weapon = CustomToolListMF.standard_spear;
 		}
-		mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
-		mob.setCurrentItemOrArmor(0, weapon.construct(tier,"OakWood"));
+		if(mob != null && weapon != null)
+		{
+			mob.setCurrentItemOrArmor(0, weapon.construct(tier,"OakWood"));
+		}
 	}
 	
 	@SubscribeEvent

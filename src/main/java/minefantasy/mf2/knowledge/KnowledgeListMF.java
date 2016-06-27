@@ -262,7 +262,7 @@ public class KnowledgeListMF
     
     public static Alloy[] reStone, bronze, steel, obsidalloy, black, red, blue, mithril, adamantium, ignotumite, mithium, enderforge, wolframiteR;
     public static IAnvilRecipe coalfluxR, encrustedR, steelR, obsidianHunkR, diamondR;
-    public static ICarpenterRecipe nailPlanksR, nailStairR, refinedStairR, strongRackR, rockTroughRecipe, strongwoodTroughRecipe, bellowsRecipe, bloomeryR, crucibleRecipe, advCrucibleRecipe, chimneyRecipe, wideChimneyRecipe, extractChimneyRecipe;
+    public static ICarpenterRecipe nailPlanksR, nailStairR, refinedStairR, strongRackR, bellowsRecipe, bloomeryR, crucibleRecipe, advCrucibleRecipe, chimneyRecipe, wideChimneyRecipe, extractChimneyRecipe;
     
     public static ICarpenterRecipe hideHelmR, hideChestR, hideLegsR, hideBootsR, roughHelmetR, roughChestR, roughLegsR, roughBootsR, reHelmetR, reChestR, reLegsR, reBootsR;
     public static IAnvilRecipe studHelmetR, studChestR, studLegsR, studBootsR;
@@ -373,4 +373,5 @@ public class KnowledgeListMF
     public static ArrayList<ICarpenterRecipe> foodboxR = new ArrayList<ICarpenterRecipe>();
     public static ArrayList<ICarpenterRecipe> ammoboxR = new ArrayList<ICarpenterRecipe>();
     public static ArrayList<ICarpenterRecipe> bigboxR = new ArrayList<ICarpenterRecipe>();
+    public static ArrayList<ICarpenterRecipe> nailTroughR = new ArrayList<ICarpenterRecipe>();
 }

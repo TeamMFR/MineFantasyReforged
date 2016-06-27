@@ -75,7 +75,7 @@ public class BlockRack extends BlockWoodDecor
     @Override
     public void setBlockBoundsBasedOnState(IBlockAccess p_149719_1_, int p_149719_2_, int p_149719_3_, int p_149719_4_)
     {
-        this.func_149797_b(p_149719_1_.getBlockMetadata(p_149719_2_, p_149719_3_, p_149719_4_));
+        this.modifyBoundingbox(p_149719_1_.getBlockMetadata(p_149719_2_, p_149719_3_, p_149719_4_));
     }
 
     /**
@@ -89,26 +89,26 @@ public class BlockRack extends BlockWoodDecor
         return super.getSelectedBoundingBoxFromPool(p_149633_1_, p_149633_2_, p_149633_3_, p_149633_4_);
     }
 
-    public void func_149797_b(int p_149797_1_)
+    public void modifyBoundingbox(int meta)
     {
         float f = 0.25F;
 
-        if (p_149797_1_ == 2)
+        if (meta == 2)
         {
             this.setBlockBounds(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
         }
 
-        if (p_149797_1_ == 3)
+        if (meta == 3)
         {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
         }
 
-        if (p_149797_1_ == 4)
+        if (meta == 4)
         {
             this.setBlockBounds(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
         }
 
-        if (p_149797_1_ == 5)
+        if (meta == 5)
         {
             this.setBlockBounds(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
         }

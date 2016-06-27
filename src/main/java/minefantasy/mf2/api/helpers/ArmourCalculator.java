@@ -323,8 +323,13 @@ public class ArmourCalculator
 			return new float[]{0, 0, 1};
 		}
 		
-		return CustomDamageRatioEntry.getTraits(getEntityRegisterName(damager));
+		if(useConfigIndirectDmg)
+		{
+			return CustomDamageRatioEntry.getTraits(getEntityRegisterName(damager));
+		}
+		return new float[]{1, 1, 1};
 	}
+	public static boolean useConfigIndirectDmg = true;
 
 	public static float[] getRatioForMelee(EntityLivingBase user, ItemStack weapon) 
 	{
@@ -394,11 +399,19 @@ public class ArmourCalculator
 
         return s;
     }
+	public static float getTotalBulk(EntityLivingBase user)
+	{
+		if(PowerArmour.isWearingCogwork(user))
+		{
+			return 5F;
+		}
+		return getEquipmentBulk(user);
+	}
 	/**
 	 * Defined by Light/Medium/Heavy armour average
 	 * 0 for light, 1 for full medium, 2 for full heavy
 	 */
-	public static float getArmourBulk(EntityLivingBase user)
+	public static float getEquipmentBulk(EntityLivingBase user)
 	{
 		float bulk = 0.0F;
 		for(int a = 0; a < 4; a ++)
@@ -647,14 +660,14 @@ public class ArmourCalculator
 	 */
 	public static float getParryModifier(EntityLivingBase user) 
 	{
-		float bulk = getArmourBulk(user);
+		float bulk = getTotalBulk(user);
 		
 		return 1.0F / ( (bulk*0.5F) + 1);//50% in heavy
 	}
 
 	public static int modifyParryCooldown(EntityLivingBase user, int ticks) 
 	{
-		float bulk = getArmourBulk(user);
+		float bulk = getTotalBulk(user);
 		
 		return (int) Math.max(5, ticks + (bulk*5));//plate adds 5t
 	}

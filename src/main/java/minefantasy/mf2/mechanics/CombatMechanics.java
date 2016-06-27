@@ -1007,7 +1007,7 @@ public class CombatMechanics
 	}
 	public static void initDodge(EntityPlayer user, int type)
 	{
-		float bulk = ArmourCalculator.getArmourBulk(user);
+		float bulk = ArmourCalculator.getTotalBulk(user);
 		int cost = (int) ((type == 0 ? 15 : 10) * (bulk+1));//Medium armour cost 2x more
 		
 		if(bulk <= 1.0F && ItemWeaponMF.tryPerformAbility(user, cost))
@@ -1075,11 +1075,11 @@ public class CombatMechanics
 	 */
 	public static float getStrengthEnhancement(EntityLivingBase user)
 	{
-		float dam = 0F;
+		float mod = 0F;
 		if(PowerArmour.isPowered(user))
 		{
-			dam += 3F;
+			mod += 3F;
 		}
-		return Math.max(-0.5F, dam);
+		return Math.max(-0.5F, mod);
 	}
 }

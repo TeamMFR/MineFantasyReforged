@@ -12,35 +12,11 @@ O = Obsolete (Or not considered to matter)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ISSUES       	 								     |Check|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Carpenter craft bows                                    -
-Show stats of wood (tooltip)                            -
-Optional book spawn                                     -
-Salvage damage saw                                      -
-Trough keep fill                                        -
 
-Dragonscale Armour                                      -
-
-COGWORK
-Balance Rating                                          -
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 CONTENT		 				     					 |Check|
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Mattock                                                 -
-Wood Bucket                     						-
-Pottery Oven (Kiln)         			       			-
-Pottery Stand                   						-
-Cooktop                                                 -
 
 ////////////////////////////////////////////////////////////
 More Detail:
-1: Carpenter bench craft bows: bows will be craftable with wood and "metal joints".
-   Metal joints are made on the anvil, then they (with wood and other pieces) go
-   on carpenter benches.
 
-2: Wood Bucket: Just for milk and water
-
-3: Kiln: A stone furnace for cooking ceramics
-
-4: Pottery stand: similar to carpenter bench except for pottery
-
-5: Cooktop: Carpenter bench for cooking
