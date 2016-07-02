@@ -60,15 +60,12 @@ public class EntryPageRecipeBase extends EntryPage
 		}
 		tooltipStack = null;
 		
-		int xPoint = (parent.width - universalBookImageWidth) / 2;
-        int yPoint = (parent.height - universalBookImageHeight) / 2;
-        
 		this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/craftGrid.png"));
-        parent.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
         
         IRecipe recipe = recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method.workbench") + ">";
-        mc.fontRenderer.drawSplitString(cft, posX+(universalBookImageWidth/2) - (mc.fontRenderer.getStringWidth(cft)/2), posY+150, 117, 0);
+        mc.fontRenderer.drawSplitString(cft, posX+(universalBookImageWidth/2) - (mc.fontRenderer.getStringWidth(cft)/2), posY+175, 117, 0);
         renderRecipe(parent, x, y, f, posX, posY, recipe);
         
         if(tooltipStack != null)
@@ -87,21 +84,6 @@ public class EntryPageRecipeBase extends EntryPage
 			}
 
 			minefantasy.mf2.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-
-			/*
-			int tooltipY = 8 + tooltipData.size() * 11;
-
-			if(tooltipEntry) 
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.GRAY + StatCollector.translateToLocal("botaniamisc.clickToRecipe")));
-				tooltipY += 18;
-			}
-
-			if(tooltipContainerStack != null)
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipGreen(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("botaniamisc.craftingContainer"), tooltipContainerStack.getDisplayName()));
-			}
-			*/
 		}
 	}
 
@@ -118,7 +100,7 @@ public class EntryPageRecipeBase extends EntryPage
 			{
 				for(int x = 0; x < shaped.recipeWidth; x++)
 				{
-					renderItemAtGridPos(parent, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true, posX, posY, mx, my);
+					renderItemAtGridPos(parent, x, y, shaped.recipeItems[y * shaped.recipeWidth + x], true, posX, posY, mx, my);
 				}
 			}
 		} 
@@ -134,7 +116,7 @@ public class EntryPageRecipeBase extends EntryPage
 				{
 					Object input = shaped.getInput()[y * width + x];
 					if(input != null)
-						renderItemAtGridPos(parent, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true, posX, posY, mx, my);
+						renderItemAtGridPos(parent, x, y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true, posX, posY, mx, my);
 				}
 			}
 
@@ -155,7 +137,7 @@ public class EntryPageRecipeBase extends EntryPage
 						if(index >= shapeless.recipeItems.size())
 							break drawGrid;
 
-						renderItemAtGridPos(parent, 1 + x, 1 + y, (ItemStack) shapeless.recipeItems.get(index), true, posX, posY, mx, my);
+						renderItemAtGridPos(parent, x, y, (ItemStack) shapeless.recipeItems.get(index), true, posX, posY, mx, my);
 					}
 				}
 			}
@@ -179,7 +161,7 @@ public class EntryPageRecipeBase extends EntryPage
 
 						Object input = shapeless.getInput().get(index);
 						if(input != null)
-							renderItemAtGridPos(parent, 1 + x, 1 + y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true, posX, posY, mx, my);
+							renderItemAtGridPos(parent, x, y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0), true, posX, posY, mx, my);
 					}
 				}
 			}
@@ -211,8 +193,8 @@ public class EntryPageRecipeBase extends EntryPage
 		if(stack.getItemDamage() == Short.MAX_VALUE)
 			stack.setItemDamage(0);
 
-		int xPos = xOrigin + 65;
-		int yPos = yOrigin + 20;
+		int xPos = xOrigin + 80;
+		int yPos = yOrigin + 42;
 		ItemStack stack1 = stack.copy();
 		if(stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);
@@ -229,8 +211,8 @@ public class EntryPageRecipeBase extends EntryPage
 		if(stack.getItemDamage() == Short.MAX_VALUE)
 			stack.setItemDamage(0);
 
-		int xPos = xOrigin + x * 29 + 7 + (y == 0  && x == 3 ? 10 : 0);
-		int yPos = yOrigin + y * 29 + 36 - (y == 0 ? 7 : 0);
+		int xPos = xOrigin + (x * 29) + 51;
+		int yPos = yOrigin + (y * 29) + 86;
 		ItemStack stack1 = stack.copy();
 		if(stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);

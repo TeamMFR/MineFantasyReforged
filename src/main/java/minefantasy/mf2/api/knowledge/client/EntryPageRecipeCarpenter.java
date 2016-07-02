@@ -59,16 +59,13 @@ public class EntryPageRecipeCarpenter extends EntryPage
 			tickRecipes();
 		}
 		tooltipStack = null;
-		
-		int xPoint = (parent.width - universalBookImageWidth) / 2;
-        int yPoint = (parent.height - universalBookImageHeight) / 2;
         
 		this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/carpenterGrid.png"));
-        parent.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
         
         ICarpenterRecipe recipe = recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method.carpenter") + ">";
-        mc.fontRenderer.drawSplitString(cft, posX+(universalBookImageWidth/2) - (mc.fontRenderer.getStringWidth(cft)/2), posY+150, 117, 0);
+        mc.fontRenderer.drawSplitString(cft, posX+(universalBookImageWidth/2) - (mc.fontRenderer.getStringWidth(cft)/2), posY+175, 117, 0);
         renderRecipe(parent, x, y, f, posX, posY, recipe);
         
         if(tooltipStack != null)
@@ -87,21 +84,6 @@ public class EntryPageRecipeCarpenter extends EntryPage
 			}
 
 			minefantasy.mf2.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-
-			/*
-			int tooltipY = 8 + tooltipData.size() * 11;
-
-			if(tooltipEntry) 
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.GRAY + StatCollector.translateToLocal("botaniamisc.clickToRecipe")));
-				tooltipY += 18;
-			}
-
-			if(tooltipContainerStack != null)
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipGreen(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("botaniamisc.craftingContainer"), tooltipContainerStack.getDisplayName()));
-			}
-			*/
 		}
         
 	}
@@ -114,8 +96,8 @@ public class EntryPageRecipeCarpenter extends EntryPage
 		oreDictRecipe = false;
 		
 		GL11.glColor3f(255, 255, 255);
-		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX+35, posY+32, true);
-		GuiHelper.renderToolIcon(parent, "carpenter", recipe.getAnvil(), posX+93, posY+32, true);
+		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX+34, posY+51, true, true);
+		GuiHelper.renderToolIcon(parent, "carpenter", recipe.getAnvil(), posX+124, posY+51, true, true);
 		
 		if(recipe instanceof ShapedCarpenterRecipes) 
 		{
@@ -174,8 +156,8 @@ public class EntryPageRecipeCarpenter extends EntryPage
 		if(stack.getItemDamage() == Short.MAX_VALUE)
 			stack.setItemDamage(0);
 
-		int xPos = xOrigin + 65;
-		int yPos = yOrigin + 20;
+		int xPos = xOrigin + 80;
+		int yPos = yOrigin + 42;
 		ItemStack stack1 = stack.copy();
 		if(stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);
@@ -196,8 +178,8 @@ public class EntryPageRecipeCarpenter extends EntryPage
 
 		x-=1;
 		y-=1;
-		int xPos = xOrigin + (x * gridSize) + 31;
-		int yPos = yOrigin + (y * gridSize) + 59;
+		int xPos = xOrigin + (x * gridSize) + 46;
+		int yPos = yOrigin + (y * gridSize) + 80;
 		ItemStack stack1 = stack.copy();
 		if(stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);

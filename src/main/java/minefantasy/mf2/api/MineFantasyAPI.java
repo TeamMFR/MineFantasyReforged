@@ -8,6 +8,8 @@ import java.util.Map.Entry;
 import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.IFuelHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.cooking.CookRecipe;
 import minefantasy.mf2.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
@@ -15,8 +17,6 @@ import minefantasy.mf2.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mf2.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mf2.api.crafting.refine.QuernRecipes;
-import minefantasy.mf2.api.heating.ForgeFuel;
-import minefantasy.mf2.api.heating.ForgeItemHandler;
 import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.AlloyRecipes;
@@ -25,11 +25,14 @@ import minefantasy.mf2.api.refine.BlastFurnaceRecipes;
 import minefantasy.mf2.api.rpg.Skill;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MineFantasyAPI 
@@ -38,7 +41,14 @@ public class MineFantasyAPI
 	 * This variable saves if MineFantasy is in debug mode
 	 */
 	public static boolean isInDebugMode;
-
+	
+	@SideOnly(Side.CLIENT)
+	public static FontRenderer fontRenderer;
+	@SideOnly(Side.CLIENT)
+	public static void init()
+	{
+		fontRenderer = new FontRenderer(Minecraft.getMinecraft().gameSettings, new ResourceLocation("minefantasy2:textures/font/standard.png"), Minecraft.getMinecraft().renderEngine, false);
+	}
 	public static void debugMsg(String msg)
 	{
 		MFLogUtil.logDebug(msg);

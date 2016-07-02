@@ -34,11 +34,8 @@ public class EntryPageCraft extends EntryPage
 			tickRecipes();
 		}
 		
-		int xPoint = (parent.width - universalBookImageWidth) / 2;
-        int yPoint = (parent.height - universalBookImageHeight) / 2;
-        
 		this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/craftGrid.png"));
-        parent.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+        parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
         
         IRecipe recipe = recipes[recipeID];
         renderRecipe(parent, x, y, f, posX, posY, recipe);

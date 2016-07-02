@@ -6,15 +6,10 @@ knowledge.craftArmourBasic.desc=Nothing fancy
 knowledge.craftArmourBasic.1=When you first start out in this world, you may want something to wear. These Armours don't offer much protection but their better than nothing.
 
 knowledge.craftArmourLight=Light Armour
-knowledge.craftArmourLight.1=Light armour is designed to be as easy to wear as possible and is only made from a small variety of material. You do not get much protecion from this, but your ability to dodge and parry will be unaffected.^These suits are best worn where tactics and avoidance are used.
 
 knowledge.craftArmourMedium=Medium Armour
-knowledge.craftArmourMedium.1=Medium armour covers stock-standard metal mails. Your ability to avoid damage is reduced in trade for added protection.^Use of this armour will cover most situations where avoidance and protection are balanced.
-knowledge.craftArmourMedium.scale=As an alternative, Scalemail can be created. Scale armour has more balanced protection against all forms of damage, not quite as effective against piercing and cutting resistance, it makes up in blunt.
 
 knowledge.craftArmourHeavy=Heavy Armour
-knowledge.craftArmourHeavy.1=Heavy armour is designed to take as much damage as possible. While wearing this, you will be unable to dodge and have significant disadvantage to blocking.^This armour is best used when shear force is needed and avoidance is left behind.
-knowledge.craftArmourHeavy.splint=Splintmail isn't quite as heavy as a full blown suit of plate, and has lesser protective qualities in return. However, splintmail is still far superior to medium armours and protects all damage types equally.
 
 knowledge.armourpro=Armour Proficiency
 knowledge.armourpro.1=After all this time, your core has become stronger.^Armour penalty to stamina cost is halved.

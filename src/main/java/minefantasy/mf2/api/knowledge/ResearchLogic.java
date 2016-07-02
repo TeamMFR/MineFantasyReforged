@@ -1,13 +1,13 @@
 package minefantasy.mf2.api.knowledge;
 
-import minefantasy.mf2.api.MineFantasyAPI;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.helpers.PlayerTagData;
 import minefantasy.mf2.network.packet.KnowledgePacket;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ResearchLogic
 {
@@ -135,4 +135,44 @@ public class ResearchLogic
 			((WorldServer)player.worldObj).getEntityTracker().func_151248_b(player, new KnowledgePacket(player).generatePacket());
 		}
     }
+	public static InformationBase getResearch(String researchName)
+	{
+		return InformationList.nameMap.get(researchName.toLowerCase());
+	}
+	
+	public static int getArtefactCount(String research, EntityPlayer user) 
+	{
+		NBTTagCompound nbt = getNBT(user);
+		return nbt.getInteger("ArtefactCount-"+research);
+	}
+	public static void setArtefactCount(String research, EntityPlayer user, int count) 
+	{
+		NBTTagCompound nbt = getNBT(user);
+		nbt.setInteger("ArtefactCount-"+research, count);
+	}
+	public static int addArtefact(String research, EntityPlayer user)
+	{
+		int count = getArtefactCount(research, user);
+		++count;
+		setArtefactCount(research, user, count);
+		return count;
+	}
+	public static void addArtefactUsed(EntityPlayer user, InformationBase base, ItemStack item)
+	{
+		NBTTagCompound nbt = getNBT(user);
+		nbt.setBoolean(getKeyName(item, base), true);
+	}
+	public static boolean alreadyUsedArtefact(EntityPlayer user, InformationBase base, ItemStack item) 
+	{
+		NBTTagCompound nbt = getNBT(user);
+		if(nbt.hasKey(getKeyName(item, base)))
+		{
+			return true;
+		}
+		return false;
+	}
+	private static String getKeyName(ItemStack item, InformationBase base) 
+	{
+		return "research_"+base.getUnlocalisedName() + "_" + item.getUnlocalizedName() + "_" + item.getItemDamage();
+	}
 }

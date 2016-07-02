@@ -65,6 +65,10 @@ public class GuiCrucible extends GuiContainer
     	{
     		return "textures/gui/crucible_advanced.png";
     	}
+    	if(tile.getTier() >= 2)
+    	{
+    		return "textures/gui/crucible_mythic.png";
+    	}
 		return "textures/gui/crucible.png";
 	}
 

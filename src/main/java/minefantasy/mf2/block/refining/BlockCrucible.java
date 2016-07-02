@@ -1,6 +1,5 @@
 package minefantasy.mf2.block.refining;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,27 +13,22 @@ import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.item.ItemFilledMould;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public class BlockCrucible extends BlockContainer 
 {
@@ -174,6 +168,14 @@ public class BlockCrucible extends BlockContainer
 		{
 			return auto ? BlockListMF.crucibleauto_active : BlockListMF.crucibleadv_active;
 		}
+		if(tier == 2)
+		{
+			return  BlockListMF.cruciblemythic_active;
+		}
+		if(tier == 3)
+		{
+			return  BlockListMF.cruciblemaster_active;
+		}
 		return BlockListMF.crucible_active;
 	}
 
@@ -182,6 +184,14 @@ public class BlockCrucible extends BlockContainer
 		if(tier == 1)
 		{
 			return auto ? BlockListMF.crucibleauto : BlockListMF.crucibleadv;
+		}
+		if(tier == 2)
+		{
+			return BlockListMF.cruciblemythic;
+		}
+		if(tier == 3)
+		{
+			return BlockListMF.cruciblemaster;
 		}
 		return BlockListMF.crucible;
 	}
@@ -200,6 +210,27 @@ public class BlockCrucible extends BlockContainer
     	if(tile != null)
     	{
     		ItemStack held = user.getHeldItem();
+    		if(held != null && held.getItem() == ComponentListMF.artefacts && held.getItemDamage() == 3)
+    		{
+    			if(tier == 2 && isActive)
+    			{
+	    			--held.stackSize;
+	    			if(held.stackSize <= 0)
+	    			{
+	    				user.setCurrentItemOrArmor(0, null);
+	    			}
+	    			if(!world.isRemote)
+	    			{
+	    				world.spawnEntityInWorld(new EntityLightningBolt(world, x+0.5, y+1.5, z+0.5));
+		    			world.setBlock(x, y, z, BlockListMF.cruciblemaster_active, 0, 2);
+	    			}
+    			}
+    			return true;
+    		}
+    		if(tier >= 2)
+    		{
+    			BlockCrucible.updateFurnaceBlockState(tile.isCoated(), world, x, y, z);
+    		}
     		ItemStack out = tile.getStackInSlot(tile.getSizeInventory()-1);
     		if(held != null && held.getItem() == ComponentListMF.ingot_mould && out != null && !(out.getItem() instanceof ItemBlock))
     		{

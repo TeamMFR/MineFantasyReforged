@@ -4,6 +4,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.helpers.ClientTickHandler;
 import minefantasy.mf2.api.knowledge.InformationList;
 import minefantasy.mf2.block.tileentity.TileEntityAnvilMF;
@@ -148,6 +149,7 @@ public class ClientProxyMF extends CommonProxyMF
 	{
 		super.postInit();
 		registerRenders();
+		MineFantasyAPI.init();
 		KnowledgePageRegistry.registerPages();
 	}
 	

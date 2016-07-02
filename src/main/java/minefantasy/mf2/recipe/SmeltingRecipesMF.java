@@ -148,16 +148,16 @@ public class SmeltingRecipesMF {
 			}
 		}
 		KnowledgeListMF.adamantium = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[13], 2), 1, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[13], 2), 2, new Object[]
 		{
-			ComponentListMF.ingots[10], BlockListMF.oreMythic, Items.gold_ingot, Items.gold_ingot
+			BlockListMF.oreMythic, Items.gold_ingot, Items.gold_ingot
 		});
 		for(ItemStack silver: silvers)
 		{
 			Alloy[] alloy = 
-			MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[14], 2), 1, new Object[]
+			MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[14], 2), 2, new Object[]
 			{
-				ComponentListMF.ingots[12], BlockListMF.oreMythic, silver, silver
+				BlockListMF.oreMythic, silver, silver
 			});
 			if(KnowledgeListMF.mithril == null)
 			{
@@ -165,17 +165,17 @@ public class SmeltingRecipesMF {
 			}
 		}
 		KnowledgeListMF.ignotumite = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[15], 1), 1, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[15], 1), 3, new Object[]
 		{
-			ComponentListMF.ingots[13], ComponentListMF.ingots[13], Items.gold_ingot, Items.emerald
+			ComponentListMF.ingots[13], ComponentListMF.ingots[13], Items.emerald, Items.blaze_powder
 		});
 		KnowledgeListMF.mithium = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[16], 1), 1, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[16], 1), 3, new Object[]
 		{
 			ComponentListMF.ingots[14], ComponentListMF.ingots[14], ComponentListMF.diamond_shards, Items.ghast_tear
 		});
 		KnowledgeListMF.enderforge = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[17], 1), 1, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[17], 1), 3, new Object[]
 		{
 			ComponentListMF.ingots[13], ComponentListMF.ingots[14], Items.ender_pearl, Items.ender_pearl
 		});

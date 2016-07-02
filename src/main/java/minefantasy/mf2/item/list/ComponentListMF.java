@@ -8,6 +8,7 @@ import minefantasy.mf2.api.mining.RandomOre;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.item.AdvancedFuelHandlerMF;
 import minefantasy.mf2.item.FuelHandlerMF;
+import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.ItemFilledMould;
 import minefantasy.mf2.item.ItemHide;
@@ -184,6 +185,7 @@ public class ComponentListMF
 	
 	public static Item cogwork_pulley = new ItemComponentMF("cogwork_pulley", 1).setCreativeTab(CreativeTabMF.tabGadget);
 	
+	public static Item artefacts = new ItemArtefact("artefact_any");
 	public static void load() 
 	{
 		WoodMaterial.init();

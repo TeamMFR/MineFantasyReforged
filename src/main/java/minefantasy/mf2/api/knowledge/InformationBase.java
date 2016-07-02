@@ -7,6 +7,7 @@ import minefantasy.mf2.api.knowledge.client.EntryPage;
 import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -35,18 +36,18 @@ public class InformationBase
     private final String idName;
     private ArrayList<SkillRequirement> skills = new ArrayList<SkillRequirement>();
     public String[] requirements = null;
-    private int minutes = 10;
+    private int artefactCount = 1;
 
-    public InformationBase(String name, int x, int y, int time, Item icon, InformationBase parent)
+    public InformationBase(String name, int x, int y, int artefacts, Item icon, InformationBase parent)
     {
-        this(name, x, y, time, new ItemStack(icon), parent);
+        this(name, x, y, artefacts, new ItemStack(icon), parent);
     }
-    public InformationBase(String name, int x, int y, int time, Block icon, InformationBase parent)
+    public InformationBase(String name, int x, int y, int artefacts, Block icon, InformationBase parent)
     {
-        this(name, x, y, time, new ItemStack(icon), parent);
+        this(name, x, y, artefacts, new ItemStack(icon), parent);
     }
 
-    public InformationBase(String name, int x, int y, int time, ItemStack icon, InformationBase parent)
+    public InformationBase(String name, int x, int y, int artefacts, ItemStack icon, InformationBase parent)
     {
     	this.idName = name;
         this.theItemStack = icon;
@@ -74,7 +75,7 @@ public class InformationBase
             InformationList.maxDisplayRow = y;
         }
         this.parentInfo = parent;
-        this.minutes = Math.max(1, time);
+        this.artefactCount = Math.max(1, artefacts);
     }
     
     public InformationBase addSkill(Skill skill, int level)
@@ -121,7 +122,7 @@ public class InformationBase
     	ID = nextID;
     	nextID++;
         InformationList.knowledgeList.add(this);
-        InformationList.nameMap.put(idName, this);
+        InformationList.nameMap.put(idName.toLowerCase(), this);
         return this;
     }
 
@@ -169,13 +170,25 @@ public class InformationBase
     			}
     		}
     	}
-        
         return text;
     }
     @SideOnly(Side.CLIENT)
-    public String getName()
+    public String getDisplayName()
     {
-        return this.statStringFormatter != null ? this.statStringFormatter.formatString(StatCollector.translateToLocal("knowledge."+this.idName)) : StatCollector.translateToLocal("knowledge."+this.idName);
+    	String name = this.statStringFormatter != null ? this.statStringFormatter.formatString(StatCollector.translateToLocal("knowledge."+this.idName)) : StatCollector.translateToLocal("knowledge."+this.idName);
+    	
+    	if(!easyResearch)
+        {
+        	EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+        	if(player != null && !ResearchLogic.hasInfoUnlocked(player, this))
+        	{
+        		int artefacts = ResearchLogic.getArtefactCount(this.idName, player);
+        		int max = this.getArtefactCount();
+        		name += StatCollector.translateToLocalFormatted("research.cluecount", artefacts, max);
+        	}
+        }
+    	
+        return name;
     }
 
     /**
@@ -209,11 +222,6 @@ public class InformationBase
 		}
 		else
 		{
-			ItemStack item = new ItemStack(scroll, 1, ID);
-			if(!user.inventory.addItemStackToInventory(item))
-			{
-				user.entityDropItem(item, 0F);
-			}
 		}
 		return true;
 	}
@@ -272,13 +280,13 @@ public class InformationBase
 		return requirements;
 	}
 	
-	public int getTime() 
-	{
-		return minutes;
-	}
 	public boolean isPreUnlocked() 
 	{
 		return !getPerk() && (unlockAll || startedUnlocked);
+	}
+	public int getArtefactCount() 
+	{
+		return artefactCount;
 	}
 }
 class SkillRequirement

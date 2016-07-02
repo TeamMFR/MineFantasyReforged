@@ -3,6 +3,7 @@ package minefantasy.mf2.block.list;
 import minefantasy.mf2.block.basic.BasicBlockMF;
 import minefantasy.mf2.block.basic.BlockMetalBarsMF;
 import minefantasy.mf2.block.basic.BlockMetalMF;
+import minefantasy.mf2.block.basic.BlockMythicDecor;
 import minefantasy.mf2.block.basic.BlockMythicOre;
 import minefantasy.mf2.block.basic.BlockOreMF;
 import minefantasy.mf2.block.basic.BlockPaneMF;
@@ -224,6 +225,12 @@ public class BlockListMF
 	public static Block frame_block = new BlockFrame("frame_block");
 	public static Block cogwork_builder = new BlockFrame("cogwork_builder", frame_block).setCogworkHolder();
 	
+	public static Block cruciblemythic = new BlockCrucible("mythic", 2, false).setAuto().setBlockUnbreakable();
+	public static Block cruciblemythic_active = new BlockCrucible("mythic", 2, true).setAuto().setBlockUnbreakable().setLightLevel(12F);
+	public static Block cruciblemaster = new BlockCrucible("master", 3, false).setAuto().setBlockUnbreakable();
+	public static Block cruciblemaster_active = new BlockCrucible("master", 3, true).setAuto().setBlockUnbreakable().setLightLevel(12F);
+	
+	public static Block mythic_decor = new BlockMythicDecor();
 	public static void load()
 	{
 		anvilStone = new BlockAnvilMF(BaseMaterialMF.getMaterial("stone"));

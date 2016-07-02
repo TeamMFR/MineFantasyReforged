@@ -1,13 +1,15 @@
 package minefantasy.mf2.block.tileentity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import minefantasy.mf2.api.crafting.IBasicMetre;
+import minefantasy.mf2.api.knowledge.IArtefact;
 import minefantasy.mf2.api.knowledge.InformationBase;
-import minefantasy.mf2.api.knowledge.InformationList;
+import minefantasy.mf2.api.knowledge.ResearchArtefacts;
+import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.item.list.ComponentListMF;
-import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.network.packet.ResearchTablePacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -16,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.WorldServer;
 
 public class TileEntityResearch extends TileEntity implements IInventory, IBasicMetre
@@ -27,17 +30,104 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 	
 	public boolean interact(EntityPlayer user)
 	{
-		maxProgress = getMaxTime();
-		if(maxProgress > 0)
+		if(worldObj.isRemote)
 		{
-			addProgress(user);
 			return true;
+		}
+		ArrayList<String> research = this.getInfo(items[0]);
+		int result = canResearch(user, research);
+		
+		if(research != null && research.size() > 0 && result != 0)
+		{
+			if(result == -1)
+			{
+				if(!user.worldObj.isRemote)
+				user.addChatComponentMessage(new ChatComponentTranslation("research.noskill", new Object[0]));
+				 return true;
+			}
+			maxProgress = getMaxTime();
+			if(maxProgress > 0)
+			{
+				addProgress(user);
+				
+				if(progress >= maxProgress)
+				{
+					addResearch(research, user);
+					progress = 0;
+				}
+				
+				return true;
+			}
 		}
 		else
 		{
+			if(result == 0)
+			{
+				if(!user.worldObj.isRemote)
+				user.addChatComponentMessage(new ChatComponentTranslation("research.null", new Object[0]));
+			}
 			progress = 0;
 		}
-		return false;
+		
+		return items[0] != null;
+	}
+	private void addResearch(ArrayList<String> research, EntityPlayer user) 
+	{
+		for(int id = 0; id < research.size(); id++)
+		{
+			InformationBase base = ResearchLogic.getResearch(research.get(id));
+			if(base != null && !ResearchLogic.alreadyUsedArtefact(user, base, items[0]) && ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user))
+			{
+				int artefacts = ResearchArtefacts.useArtefact(items[0], base, user);
+				worldObj.playSoundEffect(xCoord+0.5, yCoord+0.5, zCoord+0.5, "minefantasy2:updateResearch", 1.0F, 1.0F);
+				if(!user.worldObj.isRemote)
+				{
+					Object name = new ChatComponentTranslation("knowledge."+base.getUnlocalisedName());
+					if(artefacts == -1)
+					{
+						user.addChatComponentMessage(new ChatComponentTranslation("research.finishResearch", name));
+					}
+					else
+					{
+						user.addChatComponentMessage(new ChatComponentTranslation("research.addArtefact", name, artefacts, base.getArtefactCount()));
+					}
+				}
+				return;
+			}
+			
+		}
+	}
+	//0 nothing, -1 for no skill, 1 for yes
+	private int canResearch(EntityPlayer user, ArrayList<String> research) 
+	{
+		if(research == null){return 0;}
+		int result = 0;
+		
+		for(int id = 0; id < research.size(); id++)
+		{
+			InformationBase base = ResearchLogic.getResearch(research.get(id));
+			if(base != null && !ResearchLogic.alreadyUsedArtefact(user, base, items[0]))
+			{
+				if(ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user))
+				{
+					return 1;
+				}
+				else if (!ResearchLogic.hasInfoUnlocked(user, base))
+				{
+					result = -1;
+				}
+			}
+		}
+		return result;
+	}
+	private float getMaxTime() 
+	{
+		int t = 10;
+		if(items[0] != null && items[0].getItem() instanceof IArtefact)
+		{
+			return ((IArtefact)items[0].getItem()).getStudyTime(items[0]);
+		}
+		return this.getInfo(items[0]) != null ? t : 0;
 	}
 	private void addProgress(EntityPlayer user)
 	{
@@ -55,10 +145,10 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 			}
 			return;
 		}
-		float efficiency = 10F/60F;//10s taken each swing
-		if(user.swingProgress > 0 && user.swingProgress <= 1.0)
+		float efficiency = 1.0F;
+		if(user.swingProgress > 0)
 		{
-			efficiency *= (0.5F-user.swingProgress);
+			efficiency *= Math.max(0F, 1.0F-user.swingProgress);
 		}
 		worldObj.playSoundEffect(xCoord+0.5, yCoord+0.5, zCoord+0.5, "minefantasy2:block.flipPage", 1.0F, rand.nextFloat()*0.4F+0.8F);
 		efficiency *= getEnvironmentBoost();
@@ -83,68 +173,17 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 		return 1.0F + (0.1F*books);
 	}
 	private Random rand = new Random();
-	private void createComplete() 
-	{
-		if(items[0] != null && items[0].getItem() == ToolListMF.research_scroll)
-		{
-			int id = items[0].getItemDamage();
-			ItemStack newItem = new ItemStack(ToolListMF.research_scroll_complete, 1, id);
-			this.setInventorySlotContents(0, newItem);
-		}
-		this.maxProgress = 0;
-		this.progress = 0;
-		researchID = -1;
-	}
-	private int getMaxTime()
-	{
-		ItemStack item = items[0];
-		
-		if(item == null || !(item.getItem() == ToolListMF.research_scroll))
-		{
-			researchID = -1;
-			progress = 0;
-			return -1;
-		}
-		
-		if(item.getItemDamage() >= InformationList.knowledgeList.size())
-		{
-			researchID = -1;
-			progress = 0;
-			return -1;
-		}
-		InformationBase info = InformationList.knowledgeList.get(item.getItemDamage());
-		if(info != null)
-		{
-			researchID = info.ID;
-			return info.getTime();
-		}
-		researchID = -1;
-		progress = 0;
-		return -1;
-	}
+	
 	private int ticksExisted;
 	@Override
 	public void updateEntity()
 	{
 		super.updateEntity();
 		
-		if(!worldObj.isRemote)
-		{
-			if(++ticksExisted % 20 == 0)
-			{
-				maxProgress = getMaxTime();
-				progress += 1F/60F;//+1 each minute
-			}
-			if(maxProgress > 0 && progress >= maxProgress)
-			{
-				createComplete();
-			}
-		}
 		syncData();
 	}
 	public void syncData()
 	{
-		
 		if(worldObj.isRemote)return;
 		
 		List<EntityPlayer> players = ((WorldServer)worldObj).playerEntities;
@@ -298,10 +337,19 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 	{
 		return canAccept(item);
 	}
-
+	public static ArrayList<String> getInfo(ItemStack item)
+	{
+		if(item == null)
+		{
+			return null;
+		}
+		
+		return ResearchArtefacts.getResearchNames(item);
+	}
 	public static boolean canAccept(ItemStack item)
 	{
-		return item != null && item.getItem() == ToolListMF.research_scroll;
+		ArrayList<String> info = getInfo(item);
+		return info != null && info.size() > 0;
 	}
 	
 	@Override
@@ -321,14 +369,6 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 	@Override
 	public String getLocalisedName() 
 	{
-		if(researchID >= 0)
-		{
-			InformationBase base = InformationList.knowledgeList.get(researchID);
-			if(base != null)
-			{
-				return base.getName();
-			}
-		}
 		return "";
 	}
 }

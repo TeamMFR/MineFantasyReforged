@@ -32,30 +32,31 @@ public class KnowledgePacket extends PacketMF
 	public void process(ByteBuf packet, EntityPlayer player) 
 	{
 		int size = InformationList.knowledgeList.size();
-		ArrayList<InformationBase> completed = new ArrayList<InformationBase>();
-		
+		ArrayList<Object[]> completed = new ArrayList<Object[]>();
 		for(int a = 0; a < size; a++)
 		{
 			boolean unlocked = packet.readBoolean();
+			int artefactCount = packet.readInt();
 			
-			if(unlocked)
+			InformationBase base = InformationList.knowledgeList.get(a);
+			if(base != null)
 			{
-				InformationBase base = InformationList.knowledgeList.get(a);
-				if(base != null)
-				{
-					completed.add(base);
-				}
+				completed.add(new Object[]{base, unlocked, artefactCount});
 			}
 		}
 		username = ByteBufUtils.readUTF8String(packet);
         if(username != null && player.getCommandSenderName().equals(username))
         {
-        	MFLogUtil.logDebug("KnowledgeSync Complete: " + completed.size() + " Unlocked");
         	Iterator researches = completed.iterator();
         	while(researches.hasNext())
         	{
-        		InformationBase base = (InformationBase) researches.next();
-        		ResearchLogic.tryUnlock(player, base);
+        		Object[] entry = (Object[])researches.next();
+        		InformationBase base = (InformationBase) entry[0];
+        		if((Boolean) entry[1])
+        		{
+        			ResearchLogic.tryUnlock(player, base);
+        		}
+        		ResearchLogic.setArtefactCount(base.getUnlocalisedName(), player, (Integer)entry[2]);
         	}
         }
         packet.clear();
@@ -77,6 +78,7 @@ public class KnowledgePacket extends PacketMF
 		{
 			InformationBase base = InformationList.knowledgeList.get(a);
 			packet.writeBoolean(ResearchLogic.hasInfoUnlocked(user, base));
+			packet.writeInt(ResearchLogic.getArtefactCount(base.getUnlocalisedName(), user));
 		}
         ByteBufUtils.writeUTF8String(packet, username);
 	}

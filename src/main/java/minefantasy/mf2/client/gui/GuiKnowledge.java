@@ -1,10 +1,15 @@
 package minefantasy.mf2.client.gui;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.helpers.GuiHelper;
 import minefantasy.mf2.api.knowledge.InformationBase;
@@ -14,12 +19,8 @@ import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.Skill;
 import minefantasy.mf2.api.rpg.SkillList;
-import minefantasy.mf2.block.list.BlockListMF;
-import minefantasy.mf2.item.ItemResearchScroll;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.network.packet.ResearchRequest;
-import minefantasy.mf2.util.MFLogUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
@@ -32,20 +33,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import com.sun.prism.paint.Color;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiKnowledge extends GuiScreen
@@ -139,7 +130,7 @@ public class GuiKnowledge extends GuiScreen
     		{
     			player.openGui(MineFantasyII.instance, 1, player.worldObj, 0, highlighted.ID, 0);
     		}
-    		else if(ResearchLogic.canPurchase(player, highlighted))
+    		else if(InformationBase.easyResearch && ResearchLogic.canPurchase(player, highlighted))
     		{
     			selected = highlighted;
     			setPurchaseAvailable(player);
@@ -581,7 +572,7 @@ public class GuiKnowledge extends GuiScreen
         highlighted = achievement;
         if (selected == null && achievement != null)
         {
-            String s1 = achievement.getName();
+            String s1 = achievement.getDisplayName();
             String s2 = achievement.getDescription();
             i5 = mx + 12;
             j5 = my - 4;
@@ -596,7 +587,7 @@ public class GuiKnowledge extends GuiScreen
                 {
                     s1 = I18n.format("achievement.unknown", new Object[0]);
                     j4 = Math.max(this.fontRendererObj.getStringWidth(s1), 120);
-                    s = (new ChatComponentTranslation("achievement.requires", new Object[] {achievement.parentInfo.getName()})).getUnformattedText();
+                    s = (new ChatComponentTranslation("achievement.requires", new Object[] {achievement.parentInfo.getDisplayName()})).getUnformattedText();
                     k4 = this.fontRendererObj.splitStringWidth(s, j4);
                     this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k4 + 12 + 3, -1073741824, -1073741824);
                     this.fontRendererObj.drawSplitString(s, i5, j5 + 12, j4, -9416624);
@@ -604,7 +595,7 @@ public class GuiKnowledge extends GuiScreen
                 else if (researchVisibility < 3)
                 {
                     j4 = Math.max(this.fontRendererObj.getStringWidth(s1), 120);
-                    s = (new ChatComponentTranslation("achievement.requires", new Object[] {achievement.parentInfo.getName()})).getUnformattedText();
+                    s = (new ChatComponentTranslation("achievement.requires", new Object[] {achievement.parentInfo.getDisplayName()})).getUnformattedText();
                     k4 = this.fontRendererObj.splitStringWidth(s, j4);
                     this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k4 + 12 + 3, -1073741824, -1073741824);
                     this.fontRendererObj.drawSplitString(s, i5, j5 + 12, j4, -9416624);
@@ -631,7 +622,7 @@ public class GuiKnowledge extends GuiScreen
                 {
                     this.fontRendererObj.drawStringWithShadow(I18n.format("information.discovered", new Object[0]), i5, j5 + k5 + 4, -7302913);
                 }
-                else if(ResearchLogic.canUnlockInfo(player, achievement))
+                else if(InformationBase.easyResearch && ResearchLogic.canUnlockInfo(player, achievement))
                 {
                 	this.fontRendererObj.drawStringWithShadow(StatCollector.translateToLocal("information.buy"), i5, j5 + k5 + 4, -7302913);
                 }
@@ -695,7 +686,7 @@ public class GuiKnowledge extends GuiScreen
             }
         	int red = GuiHelper.getColourForRGB(220, 0, 0);
         	int white = 16777215;
-        	mc.fontRenderer.drawString(selected.getName(), x+22, y+12, white, false);
+        	mc.fontRenderer.drawString(selected.getDisplayName(), x+22, y+12, white, false);
         	
         	if(hasScroll)
             {
@@ -716,36 +707,14 @@ public class GuiKnowledge extends GuiScreen
     
     private void setPurchaseAvailable(EntityPlayer user)
     {
-    	hasScroll = getHasScroll(user);
-    	
     	if(selected != null)
         {
-    		canPurchase = !hasScroll && selected.hasSkillsUnlocked(user);
+    		canPurchase = selected.hasSkillsUnlocked(user);
         }
     	else
     	{
     		canPurchase = false;
     	}
-    }
-    private boolean getHasScroll(EntityPlayer user)
-    {
-    	if(selected == null || user == null)
-    	{
-    		return false;
-    	}
-    	int id = selected.ID;
-    	for(int a = 0; a < user.inventory.getSizeInventory(); a++)
-    	{
-    		ItemStack slot = user.inventory.getStackInSlot(a);
-    		if(slot != null && slot.getItem() instanceof ItemResearchScroll)
-    		{
-    			if(slot.getItemDamage() == id)
-    			{
-    				return true;
-    			}
-    		}
-    	}
-    	return false;
     }
     
     protected void drawSkillList()

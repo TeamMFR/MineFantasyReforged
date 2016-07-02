@@ -25,12 +25,12 @@ public class ItemLootSack extends Item
 	public static final String VALUABLE       = "valuableLootBag";
 	public static final String EXQUISITE           = "exquisiteLootBag";
 	
-	private int ammount, tier;
-	private String pool;
-	public ItemLootSack(String name, int ammount, int tier)
+	protected int amount, tier;
+	protected String pool;
+	public ItemLootSack(String name, int amount, int tier)
 	{
         this.setCreativeTab(CreativeTabMF.tabGadget);
-        this.ammount = ammount;
+        this.amount = amount;
         this.tier = tier;
         pool = tier == 0 ? COMMON : tier == 1 ? VALUABLE : EXQUISITE;
         setTextureName("minefantasy2:Other/"+name);
@@ -53,9 +53,9 @@ public class ItemLootSack extends Item
 		if(!world.isRemote)
 		{
 			ChestGenHooks gen = ChestGenHooks.getInfo(pool);
-			IInventory inv = new Loot(ammount);
+			IInventory inv = new Loot(amount);
 			Random rand = new Random();
-			WeightedRandomChestContent.generateChestContents(rand, gen.getItems(rand), inv, 1 + rand.nextInt(ammount));
+			WeightedRandomChestContent.generateChestContents(rand, gen.getItems(rand), inv, 1 + rand.nextInt(amount));
 			for(int a = 0; a < inv.getSizeInventory(); a++)
 			{
 				if(inv.getStackInSlot(a) != null)

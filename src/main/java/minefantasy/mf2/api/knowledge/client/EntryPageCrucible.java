@@ -50,15 +50,12 @@ public class EntryPageCrucible extends EntryPage
 		}
 		tooltipStack = null;
 		
-		int xPoint = (parent.width - universalBookImageWidth) / 2;
-        int yPoint = (parent.height - universalBookImageHeight) / 2;
-        
 		this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/crucible.png"));
-        parent.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
         
         Alloy recipe = recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method."+getName()+"") + ">";
-        mc.fontRenderer.drawSplitString(cft, posX+(universalBookImageWidth/2) - (mc.fontRenderer.getStringWidth(cft)/2), posY+150, 117, 0);
+        mc.fontRenderer.drawSplitString(cft, posX+(universalBookImageWidth/2) - (mc.fontRenderer.getStringWidth(cft)/2), posY+175, 117, 0);
         if(recipe != null)
         {
         	currTier = recipe.getLevel();
@@ -81,28 +78,13 @@ public class EntryPageCrucible extends EntryPage
 			}
 
 			minefantasy.mf2.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-
-			/*
-			int tooltipY = 8 + tooltipData.size() * 11;
-
-			if(tooltipEntry) 
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.GRAY + StatCollector.translateToLocal("botaniamisc.clickToRecipe")));
-				tooltipY += 18;
-			}
-
-			if(tooltipContainerStack != null)
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipGreen(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("botaniamisc.craftingContainer"), tooltipContainerStack.getDisplayName()));
-			}
-			*/
 		}
 	}
 	private int currTier;
 
 	protected String getName() 
 	{
-		return currTier == 0 ? "crucible" : "crucibleT2";
+		return currTier == 3 ? "crucibleT4" : currTier == 2 ? "crucibleT3" : currTier == 1 ? "crucibleT2" : "crucible";
 	}
 
 	private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, Alloy recipe)
@@ -148,8 +130,8 @@ public class EntryPageCrucible extends EntryPage
 		if(stack.getItemDamage() == Short.MAX_VALUE)
 			stack.setItemDamage(0);
 
-		int xPos = xOrigin + 65;
-		int yPos = yOrigin + 123;
+		int xPos = xOrigin + 80;
+		int yPos = yOrigin + 144;
 		ItemStack stack1 = stack.copy();
 		if(stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);
@@ -172,7 +154,7 @@ public class EntryPageCrucible extends EntryPage
 		if(stack1.getItemDamage() == -1)
 			stack1.setItemDamage(0);
 
-		renderItem(gui, xPos, yPos, stack1, accountForContainer, mx, my);
+		renderItem(gui, xPos+15, yPos+22, stack1, accountForContainer, mx, my);
 	}
 	
 	private ItemStack tooltipStack;

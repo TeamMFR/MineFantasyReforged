@@ -38,7 +38,7 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class ItemComponentMF extends Item 
 {
-	private String name;
+	protected String name;
 	public ItemComponentMF(int rarity)
 	{
 		itemRarity = rarity;
@@ -49,7 +49,6 @@ public class ItemComponentMF extends Item
 	}
 	public ItemComponentMF(String name, int rarity)
 	{
-		super();
 		itemRarity = rarity;
 		this.name = name;
 		setTextureName("minefantasy2:component/"+name);

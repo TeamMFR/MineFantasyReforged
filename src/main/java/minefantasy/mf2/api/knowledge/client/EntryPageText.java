@@ -86,7 +86,7 @@ public class EntryPageText extends EntryPage
 				temp = temp + c;
 			}
 		}
-		mc.fontRenderer.drawSplitString(text, posX+14, posY+15, 117, 0);
+		mc.fontRenderer.drawSplitString(text, posX+14, posY+15, 155, 0);
 	}
 	@Override
 	public void preRender(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick)

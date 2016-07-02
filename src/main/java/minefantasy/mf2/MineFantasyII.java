@@ -2,6 +2,18 @@ package minefantasy.mf2;
 
 import java.io.File;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.FMLEventChannel;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.CustomArmourEntry;
@@ -21,34 +33,21 @@ import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.item.gadget.ItemLootSack;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.ToolListMF;
+import minefantasy.mf2.knowledge.ArtefactListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.material.MetalMaterial;
-import minefantasy.mf2.mechanics.worldGen.WorldGenMFBase;
 import minefantasy.mf2.mechanics.worldGen.WorldGenBiological;
+import minefantasy.mf2.mechanics.worldGen.WorldGenMFBase;
 import minefantasy.mf2.network.CommonProxyMF;
 import minefantasy.mf2.network.packet.PacketHandlerMF;
 import minefantasy.mf2.recipe.BasicRecipesMF;
 import minefantasy.mf2.recipe.RecipeRemover;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.FMLEventChannel;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
 
 /**
  * @author Anonymous Productions
@@ -142,6 +141,7 @@ public class MineFantasyII
     		registerBiomeStuff(biome);
     	}
     	KnowledgeListMF.init();
+    	ArtefactListMF.init();
     	BasicRecipesMF.init();
     	ItemLootSack.addItems();
     	proxy.postInit();

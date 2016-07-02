@@ -135,10 +135,6 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 	@Override
 	protected void loadConfig()
 	{
-		//BiomeDecorator
-		//BiomeGenBase
-		WorldGenMFBase.generatorLayer = config.get("##World Gen Layer##","Generation layer", "MineFantasy2", "This is what 'Layer' generation is: You shouldn't ever need to change this, it recognises new chunks itself but change this if you want a second run of world gen. Only change this if you want world gen to generate twice").getString();
-		
 		copperRarity = Float.parseFloat(config.get(copper, "Copper Rarity", 1.0D, "The chance for copper to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any copper").getString());
 		copperFrequencyMin = Integer.parseInt(config.get(copper, "Copper Frequency Min", 8, "Copper will try spawn between this and max veins per chunk").getString());
 		copperFrequencyMax = Integer.parseInt(config.get(copper, "Copper Frequency Max", 8, "Copper will try spawn between min and this veins per chunk").getString());

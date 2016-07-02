@@ -12,7 +12,6 @@ import cpw.mods.fml.common.IWorldGenerator;
 
 public class WorldGenMFBase implements IWorldGenerator 
 {
-	public static String generatorLayer = "MineFantasy2";
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
@@ -20,23 +19,8 @@ public class WorldGenMFBase implements IWorldGenerator
 	}
 	public void generate(Random random, int chunkX, int chunkZ, World world) 
 	{
-		if(shouldGenerate(null, chunkX, chunkZ))
-		{
-			WorldGenGeological.generate(random, chunkX, chunkZ, world);
-			WorldGenBiological.generate(random, chunkX, chunkZ, world);
-		}
-	}
-	
-	private static boolean shouldGenerate(NBTTagCompound nbt, int x, int z)
-	{
-		if(nbt == null)return true;
-		String index = "WorldGenMF_x" + x + "z" + z + generatorLayer;
-		
-		if(nbt.hasKey(index))
-		{
-			return !nbt.getBoolean(index);
-		}
-		nbt.setBoolean(index, true);
-		return true;
+		WorldGenGeological.generate(random, chunkX, chunkZ, world);
+		WorldGenBiological.generate(random, chunkX, chunkZ, world);
+		WorldGenRuins.generate(random, chunkX, chunkZ, world);
 	}
 }

@@ -62,11 +62,8 @@ public class EntryPageRecipeAnvil extends EntryPage
 			tickRecipes();
 		}
 		
-		int xPoint = (parent.width - universalBookImageWidth) / 2;
-        int yPoint = (parent.height - universalBookImageHeight) / 2;
-        
 		this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/anvilGrid.png"));
-        parent.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
         
         IAnvilRecipe recipe = recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method.anvil") + ">";
@@ -89,21 +86,6 @@ public class EntryPageRecipeAnvil extends EntryPage
 			}
 
 			minefantasy.mf2.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-
-			/*
-			int tooltipY = 8 + tooltipData.size() * 11;
-
-			if(tooltipEntry) 
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipOrange(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.GRAY + StatCollector.translateToLocal("botaniamisc.clickToRecipe")));
-				tooltipY += 18;
-			}
-
-			if(tooltipContainerStack != null)
-			{
-				vazkii.botania.client.core.helper.RenderHelper.renderTooltipGreen(mx, my + tooltipY, Arrays.asList(EnumChatFormatting.AQUA + StatCollector.translateToLocal("botaniamisc.craftingContainer"), tooltipContainerStack.getDisplayName()));
-			}
-			*/
 		}
         
 	}
@@ -115,8 +97,8 @@ public class EntryPageRecipeAnvil extends EntryPage
 		oreDictRecipe = false;
 		
 		GL11.glColor3f(255, 255, 255);
-		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX+35, posY+32, true);
-		GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvil(), posX+93, posY+32, true);
+		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX+34, posY+51, true, true);
+		GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvil(), posX+124, posY+51, true, true);
 		
 		if(recipe instanceof ShapedAnvilRecipes) 
 		{
@@ -177,8 +159,8 @@ public class EntryPageRecipeAnvil extends EntryPage
 		if(stack.getItemDamage() == -1)
 			stack.setItemDamage(0);
 		
-		int xPos = xOrigin + 65;
-		int yPos = yOrigin + 20;
+		int xPos = xOrigin + 80;
+		int yPos = yOrigin + 42;
 
 		renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my, hot);
 	}
@@ -201,8 +183,8 @@ public class EntryPageRecipeAnvil extends EntryPage
 
 		x-=1;
 		y-=1;
-		int xPos = xOrigin + (x * gridSize) + 21;
-		int yPos = yOrigin + (y * gridSize) + 54;
+		int xPos = xOrigin + (x * gridSize) + 36;
+		int yPos = yOrigin + (y * gridSize) + 76;
 		
 		renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my, heatable);
 	}

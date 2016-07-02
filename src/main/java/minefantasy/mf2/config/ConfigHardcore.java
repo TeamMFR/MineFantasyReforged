@@ -45,7 +45,7 @@ public class ConfigHardcore extends ConfigurationBaseMF
 		
 		ResearchLogic.knowledgelyr = Integer.parseInt(config.get(CATEGORY_RESEARCH, "###CHANGE RESEARCH ID###", 0, "This changes the research ID, removing all entries").getString());
 		InformationBase.unlockAll = Boolean.parseBoolean(config.get(CATEGORY_RESEARCH, "Unlock entries", false, "If you don't want to research, this will unlock all entries.").getString());
-		InformationBase.easyResearch = Boolean.parseBoolean(config.get(CATEGORY_RESEARCH, "Easy Research", false, "This makes entries unlock as soon as their puchased (Removing the research table process).").getString());
+		InformationBase.easyResearch = Boolean.parseBoolean(config.get(CATEGORY_RESEARCH, "Baby-Mode Research", false, "This removes the process of examining artefacts, research is unlocked by clicking entries in the book.").getString());
 				
 		hunterKnife = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Restrict to hunting weapon", false, "This option means animals ONLY drop meat and hide when killed with a hunting weapon such as a knife, only the killing blow counts").getString());
 		lessHunt = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Reduce Meat Drops", false, "This will alter the stack size of animal meat drops, meaning they only drop 1 every time").getString());

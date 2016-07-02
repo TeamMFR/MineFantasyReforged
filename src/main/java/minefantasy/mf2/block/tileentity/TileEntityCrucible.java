@@ -10,8 +10,10 @@ import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.refining.BlockCrucible;
 import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockEndPortalFrame;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -30,8 +32,12 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 	public void updateEntity()
 	{
 		super.updateEntity();
-		boolean isHot = temperature > 0 && progressMax > 0;
+		boolean isHot = getIsHot();
 		temperature = getTemperature();
+		if(getTier() >= 2)
+		{
+			progressMax = 2000;
+		}
 		
 		/*
 		int time = 400;
@@ -65,17 +71,26 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		{
 			progress = 0;
 		}
-		if(progress > 0 && rand.nextInt(4) == 0 && !isOutside())
+		if(progress > 0 && rand.nextInt(4) == 0 && !isOutside() && this.getTier() < 2)
 		{
 			SmokeMechanics.emitSmokeIndirect(worldObj, xCoord, yCoord, zCoord, 1);
 		}
 		
-		if(isHot != (getTemperature() >0 && progressMax > 0))
+		if(isHot != getIsHot())
 		{
 			BlockCrucible.updateFurnaceBlockState(getTemperature() > 0, worldObj, xCoord, yCoord, zCoord);
 		}
 	}
 	
+	private boolean getIsHot()
+	{
+		if(this.getTier() >= 2)
+		{
+			return this.isCoated();
+		}
+		return getTemperature() > 0;
+	}
+
 	private void onAutoSmelt()
 	{
 		worldObj.playSoundEffect(xCoord+0.5, yCoord+0.5, zCoord+0.5, "random.fizz", 1.0F, 1.0F);
@@ -97,7 +112,8 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		return true;
 	}
 
-	public void smeltItem() {
+	public void smeltItem()
+	{
 		if (!canSmelt()) 
 		{
 			return;
@@ -125,8 +141,21 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 				}
 			}
 		}
+		if(worldObj.isRemote && getTier() >= 2)
+		{
+			spawnParticle(-3, 0, 0);
+			spawnParticle(3,  0, 0);
+			spawnParticle(0,  0, -3);
+			spawnParticle(0,  0, 3);
+		}
 	}
 	
+	
+	private void spawnParticle(int x, int y, int z) 
+	{
+		this.worldObj.playAuxSFX(2003, xCoord+x, yCoord+y, zCoord+z, 0);
+	}
+
 	private boolean canSmelt() 
 	{
 		if(temperature <= 0)
@@ -173,19 +202,26 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		return null;
 	}
 	
+	@Override
+	public Block getBlockType()
+    {
+		if(worldObj == null)return Blocks.air;
+		
+		return super.getBlockType();
+    }
 	public int getTier()
 	{
-		if(this.blockType != null && blockType instanceof BlockCrucible)
+		if(this.getBlockType() != null && this.getBlockType() instanceof BlockCrucible)
 		{
-			return ((BlockCrucible)blockType).tier;
+			return ((BlockCrucible)this.getBlockType()).tier;
 		}
 		return 0;
 	}
 	public boolean isAuto()
 	{
-		if(this.blockType != null && blockType instanceof BlockCrucible)
+		if(this.getBlockType() != null && this.getBlockType() instanceof BlockCrucible)
 		{
-			return ((BlockCrucible)blockType).isAuto;
+			return ((BlockCrucible)this.getBlockType()).isAuto;
 		}
 		return false;
 	}
@@ -194,6 +230,10 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		if(this.getTier() >= 1 && !isCoated())
 		{
 			return 0F;
+		}
+		if(getTier() >= 2)
+		{
+			return 500;
 		}
 		Block under = worldObj.getBlock(xCoord, yCoord-1, zCoord);
 		
@@ -212,8 +252,19 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		}
 		return 0F;
 	}
-	private boolean isCoated() 
+	public boolean isCoated() 
 	{
+		if(this.getTier() >= 2)
+		{
+			return  isEnderAlter(-1, -1, -3)
+				 && isEnderAlter(-1, -1,  3)
+				 && isEnderAlter(-3, -1,  -1)
+				 && isEnderAlter( 3, -1,  -1)
+				 && isEnderAlter(1, -1, -3)
+				 && isEnderAlter(1, -1,  3)
+				 && isEnderAlter(-3, -1,  1)
+				 && isEnderAlter( 3, -1,  1);
+		}
 		return isFirebrick(0, 0, -1)
 			&& isFirebrick(0, 0,  1)
 			&& isFirebrick(-1, 0,  0)
@@ -223,6 +274,21 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 	private boolean isFirebrick(int x, int y, int z)
 	{
 		return worldObj.getBlock(xCoord+x, yCoord+y, zCoord+z) == BlockListMF.firebricks;
+	}
+	private boolean isEnderAlter(int x, int y, int z)
+	{
+		Block block =  worldObj.getBlock(xCoord+x, yCoord+y, zCoord+z);
+		int meta = worldObj.getBlockMetadata(xCoord+x, yCoord+y, zCoord+z);
+		
+		if(block == Blocks.end_portal_frame && BlockEndPortalFrame.isEnderEyeInserted(meta))
+		{
+			return true;
+		}
+		else
+		{
+			//worldObj.setBlock(xCoord+x, yCoord+y, zCoord+z, Blocks.end_portal_frame, 0, 2);
+			return false;
+		}
 	}
 
 	@Override

@@ -4,13 +4,15 @@ import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.block.decor.ItemBedMF;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigHardcore;
+import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.item.ItemBandage;
 import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.ItemResearchBook;
-import minefantasy.mf2.item.ItemResearchScroll;
 import minefantasy.mf2.item.ItemSkillBook;
 import minefantasy.mf2.item.ItemSpecialKnowledge;
+import minefantasy.mf2.item.ItemWorldGenPlacer;
 import minefantasy.mf2.item.food.FoodListMF;
+import minefantasy.mf2.item.gadget.ItemArtefactLoot;
 import minefantasy.mf2.item.gadget.ItemBomb;
 import minefantasy.mf2.item.gadget.ItemClimbingPick;
 import minefantasy.mf2.item.gadget.ItemCrossbow;
@@ -28,7 +30,6 @@ import minefantasy.mf2.item.tool.ItemLighterMF;
 import minefantasy.mf2.item.tool.ItemPickMF;
 import minefantasy.mf2.item.tool.ItemSpadeMF;
 import minefantasy.mf2.item.tool.crafting.ItemEAnvilTools;
-import minefantasy.mf2.item.tool.crafting.ItemEngineerTool;
 import minefantasy.mf2.item.tool.crafting.ItemHammer;
 import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
 import minefantasy.mf2.item.tool.crafting.ItemNeedle;
@@ -168,8 +169,6 @@ public class ToolListMF
 	public static ItemMine mine_custom = new ItemMine("mine_basic");
 	
 	public static ItemResearchBook researchBook = new ItemResearchBook();
-	public static Item research_scroll = new ItemResearchScroll("research_scroll", false);
-	public static Item research_scroll_complete = new ItemResearchScroll("research_scroll_complete", true);
 	
 	public static Item dryrocks = new ItemLighterMF("dryrocks", 0.1F, 16);
 	public static Item tinderbox = new ItemLighterMF("tinderbox", 0.5F, 100);
@@ -207,6 +206,9 @@ public class ToolListMF
 	public static Item paint_brush = new ItemPaintBrush("paint_brush", 256);
 	
 	public static Item bedroll = new ItemBedMF("bedroll");
+	
+	public static Item mythic_box = new ItemArtefactLoot("mythic_box", ItemArtefact.MYTHIC, 1);
+	public static Item debug_place = new ItemWorldGenPlacer();
 	public static void load() 
 	{
 		if(ConfigHardcore.HCCWeakItems)
@@ -250,6 +252,7 @@ public class ToolListMF
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(loot_sack), 1, 3, 20));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(loot_sack_uc), 1, 2, 10));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(loot_sack_rare), 1, 1, 2));
+		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_CROSSING, new WeightedRandomChestContent(new ItemStack(mythic_box), 1, 1, 4));
 		
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(skillbook_artisanry), 2, 6, 10));
 		ChestGenHooks.addItem(ChestGenHooks.STRONGHOLD_LIBRARY, new WeightedRandomChestContent(new ItemStack(skillbook_construction), 2, 6, 10));

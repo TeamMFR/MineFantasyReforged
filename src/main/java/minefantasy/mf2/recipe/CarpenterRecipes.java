@@ -381,6 +381,14 @@ public class CarpenterRecipes
 		Salvage.addSalvage(BlockListMF.repair_basic, new ItemStack(ComponentListMF.thread, 3), ComponentListMF.nail, Items.flint, Items.leather, new ItemStack(ComponentListMF.leather_strip, 2));
 		Salvage.addSalvage(BlockListMF.repair_advanced, BlockListMF.repair_basic, bronzePlate, new ItemStack(Items.slime_ball, 3), new ItemStack(Items.string, 3));
 		Salvage.addSalvage(BlockListMF.repair_ornate, BlockListMF.repair_advanced, new ItemStack(Items.gold_ingot, 4), Items.diamond, new ItemStack(Items.dye, 3, 4));
+		
+		KnowledgeListMF.trilogyRecipe = 
+		MineFantasyAPI.addShapelessCarpenterRecipe(artisanry, new ItemStack(ComponentListMF.artefacts, 1, 3), "smeltMaster", basic, "hands", -1, 1 , new Object[]
+		{
+			 new ItemStack(ComponentListMF.artefacts, 1, 0),
+			 new ItemStack(ComponentListMF.artefacts, 1, 1),
+			 new ItemStack(ComponentListMF.artefacts, 1, 2)
+		});
 	}
 	public static void assembleWoodBasic()
 	{
