@@ -7,6 +7,7 @@ import minefantasy.mf2.block.basic.BlockMythicDecor;
 import minefantasy.mf2.block.basic.BlockMythicOre;
 import minefantasy.mf2.block.basic.BlockOreMF;
 import minefantasy.mf2.block.basic.BlockPaneMF;
+import minefantasy.mf2.block.basic.BlockWorldGenMarker;
 import minefantasy.mf2.block.basic.ConstructionBlockMF;
 import minefantasy.mf2.block.crafting.BlockAnvilMF;
 import minefantasy.mf2.block.crafting.BlockBombBench;
@@ -231,6 +232,7 @@ public class BlockListMF
 	public static Block cruciblemaster_active = new BlockCrucible("master", 3, true).setAuto().setBlockUnbreakable().setLightLevel(12F);
 	
 	public static Block mythic_decor = new BlockMythicDecor();
+	public static Block WG_Mark = new BlockWorldGenMarker();
 	public static void load()
 	{
 		anvilStone = new BlockAnvilMF(BaseMaterialMF.getMaterial("stone"));

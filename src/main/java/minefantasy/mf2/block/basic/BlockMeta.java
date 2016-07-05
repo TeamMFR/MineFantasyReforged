@@ -3,7 +3,6 @@ package minefantasy.mf2.block.basic;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minefantasy.mf2.MineFantasyII;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -26,6 +25,8 @@ public abstract class BlockMeta extends Block
 		{
 			this.setHarvestLevel("pickaxe", 0);
 		}
+		this.setHardness(2.0F);
+		this.setResistance(2.0F);
 		this.setCreativeTab(CreativeTabs.tabBlock);
 	}
 	
@@ -55,5 +56,11 @@ public abstract class BlockMeta extends Block
 	public int getCount() 
 	{
 		return names.length;
+	}
+	
+	@Override
+	public int damageDropped(int meta)
+	{
+		return meta;
 	}
 }

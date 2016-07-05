@@ -21,6 +21,6 @@ public class WorldGenMFBase implements IWorldGenerator
 	{
 		WorldGenGeological.generate(random, chunkX, chunkZ, world);
 		WorldGenBiological.generate(random, chunkX, chunkZ, world);
-		WorldGenRuins.generate(random, chunkX, chunkZ, world);
+		WorldGenStructures.generate(random, chunkX, chunkZ, world);
 	}
 }

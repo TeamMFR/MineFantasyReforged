@@ -19,12 +19,14 @@ import net.minecraftforge.common.DungeonHooks;
 
 public class StructureGenAncientAlter extends StructureModuleMF
 {
-	private Random rand = new Random();
 	public StructureGenAncientAlter(World world, int x, int y, int z, int d) 
 	{
 		super(world, x, y, z, d);
 	}
-
+	StructureGenAncientAlter(World world, StructureCoordinates position)
+	{
+		super(world, position);
+	}
 	@Override
 	public void generate() 
 	{
@@ -39,11 +41,32 @@ public class StructureGenAncientAlter extends StructureModuleMF
 				Object[] array = getFoundation(radius, x, z);
 				if(array != null)
 				{
-					int m = (Boolean)array[1] ?  StructureGenAncientForge.getRandomMetadata(rand) : 0;
-					buildFoundation((Block)array[0], m, x, z, 32, 3, false);
+					int m = (Boolean)array[1] ?  -1 : 0;
+					buildFoundation((Block)array[0], m, x, -1, z, 32, 3, false);
 				}
 			}
 		}
+		for(int p = -1; p <= 1; p++)
+		{
+			placeBlock(Blocks.stone_brick_stairs, 0, -radius, 0, p, 0);
+			placeBlock(Blocks.stone_brick_stairs, 1, radius, 0, p, 0);
+			placeBlock(Blocks.stone_brick_stairs, 2, p, 0, -radius, 0);
+			placeBlock(Blocks.stone_brick_stairs, 3, p, 0, radius, 0);
+		}
+		placeBlock(BlockListMF.mythic_decor, 1, -radius, 0, -radius);
+		placeBlock(BlockListMF.mythic_decor, 1, radius, 0, -radius);
+		placeBlock(BlockListMF.mythic_decor, 1, -radius, 0, radius);
+		placeBlock(BlockListMF.mythic_decor, 1, radius, 0, radius);
+		
+		placeBlock(BlockListMF.mythic_decor, 0, -radius, 1, -radius);
+		placeBlock(BlockListMF.mythic_decor, 0, radius, 1, -radius);
+		placeBlock(BlockListMF.mythic_decor, 0, -radius, 1, radius);
+		placeBlock(BlockListMF.mythic_decor, 0, radius, 1, radius);
+		
+		placeBlock(BlockListMF.mythic_decor, 1, -radius, 2, -radius);
+		placeBlock(BlockListMF.mythic_decor, 1, radius, 2, -radius);
+		placeBlock(BlockListMF.mythic_decor, 1, -radius, 2, radius);
+		placeBlock(BlockListMF.mythic_decor, 1, radius, 2, radius);
 		
 		//CHEST
 		{
@@ -95,7 +118,7 @@ public class StructureGenAncientAlter extends StructureModuleMF
 
         if (tileentitymobspawner != null)
         {
-            tileentitymobspawner.func_145881_a().setEntityName("Silverfish");
+            tileentitymobspawner.func_145881_a().setEntityName("Enderman");
         }
         else
         {

@@ -21,6 +21,10 @@ public class StructureGenAFRoom extends StructureModuleMF
 	{
 		super(world, x, y, z, d);
 	}
+	public StructureGenAFRoom(World world, StructureCoordinates position)
+	{
+		super(world, position);
+	}
 
 	@Override
 	public void generate() {

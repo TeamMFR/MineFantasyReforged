@@ -9,30 +9,35 @@ import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 
-public class WorldGenAncientForge extends WorldGenStructureBase
+public class WorldGenDwarvenStronghold extends WorldGenStructureBase
 {
-	public WorldGenAncientForge()
+	public static final boolean debug_air = true;
+	public WorldGenDwarvenStronghold()
 	{		
 	}
 	@Override
 	protected StructureModuleMF getStartPiece(World world, int x, int y, int z, int direction)
 	{
-		return new StructureGenAncientForgeEntry(world, x, y, z, direction);
+		return new StructureGenDSEntry(world, x, y-1, z, direction);
 	}
 	@Override
 	protected boolean isBlockAcceptableOrigin(World world, int x, int y, int z) 
 	{
-		return world.getBlock(x, y, z).getMaterial().isSolid() && isValidGround(world, x, y, z);
+		return isValidGround(world, x, y, z) && world.canBlockSeeTheSky(x, y+2, z);
 	}
 	@Override
 	protected boolean canStructureBuild(StructureModuleMF piece) 
 	{
-		//SEARCH FOR CLIFF
-		for(int x = -1; x <= 1; x ++)
+		if(debug_air)
 		{
-			for(int y = 0; y < 3; y ++)
+			return true;
+		}
+		//SEARCH FOR CLIFF
+		for(int x = -3; x <= 3; x ++)
+		{
+			for(int y = 0; y < 5; y ++)
 			{
-				for(int z = 1; z <= 2; z ++)
+				for(int z = 4; z <= 8; z ++)
 				{
 					int[] pos = piece.offsetPos(x, y, z, piece.direction);
 					Material material = piece.worldObj.getBlock(pos[0], pos[1], pos[2]).getMaterial();
@@ -46,25 +51,17 @@ public class WorldGenAncientForge extends WorldGenStructureBase
 						return false;
 					}
 				}
-				for(int z = 0; z > -2; z--)
-				{
-					Block block = piece.getBlock(x, y, z);
-					if(block.getMaterial().isSolid())
-					{
-						return false;
-					}
-				}
 			}
 		}
 		return true;
 	}
 	@Override
-	protected boolean isDirectionRandom() {
+	protected boolean isDirectionRandom() 
+	{
 		return false;
 	}
 	@Override
-	protected int[] getYGenBounds(World world) 
-	{
-		return new int[]{64, 255};
+	protected int[] getYGenBounds(World world) {
+		return new int[]{60, 255};
 	}
 }

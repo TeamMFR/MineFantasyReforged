@@ -2,22 +2,21 @@ package minefantasy.mf2.mechanics.worldGen;
 
 import java.util.Random;
 
+import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientAlter;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientForge;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.world.World;
 
-public class WorldGenRuins 
+public class WorldGenStructures 
 {
-	public static float ancientForgeChance = 0.01F;
-	public static float ancientAlterChance = 0.05F;
 	public static void generate(Random seed, int chunkX, int chunkZ, World world) 
 	{
-		if(seed.nextFloat() < ancientForgeChance)
+		if(seed.nextFloat() < ConfigWorldGen.MFChance)
 		{
 			generateAncientForge(seed, chunkX, chunkZ, world);
 		}
-		if(seed.nextFloat() < ancientAlterChance)
+		if(seed.nextFloat() < ConfigWorldGen.MAChance)
 		{
 			generateAncientAlter(seed, chunkX, chunkZ, world);
 		}

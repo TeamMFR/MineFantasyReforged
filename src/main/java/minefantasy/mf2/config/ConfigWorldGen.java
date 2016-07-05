@@ -131,6 +131,12 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 	public static float ebonyMinRain;
 	public static float ebonyMaxRain;
 	
+	public static String structure = "6A: [Structure Gen] General";
+	public static int structureTickRate;
+	public static String ancientForge = "6B: [Structure Gen] Ancient Forge";
+	public static float MFChance;
+	public static String ancientAlter = "6C: [Structure Gen] Ancient Alter";
+	public static float MAChance;
 	
 	@Override
 	protected void loadConfig()
@@ -247,6 +253,10 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		ebonyMaxTemp = Float.parseFloat(config.get(ebony, "Ebony Tree Spawn Temp Max", 1.0D, "The maximum biome temperature ebony can spawn").getString());
 		ebonyMinRain = Float.parseFloat(config.get(ebony, "Ebony Tree Spawn Rain Min", 0.4D, "The minimal biome rainfall ebony can spawn").getString());
 		ebonyMaxRain = Float.parseFloat(config.get(ebony, "Ebony Tree Spawn Rain Max", 1.0D, "The maximum biome rainfall ebony can spawn").getString());
+		
+		structureTickRate = Integer.parseInt(config.get(structure, "Generation Tick rate", 1, "How many ticks (1/20seconds) for each section to generate").getString());
+		MFChance = Float.parseFloat(config.get(ancientForge, "Spawn Chance", 1.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
+		MAChance = Float.parseFloat(config.get(ancientAlter, "Spawn Chance", 5.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
 		
 	}
 

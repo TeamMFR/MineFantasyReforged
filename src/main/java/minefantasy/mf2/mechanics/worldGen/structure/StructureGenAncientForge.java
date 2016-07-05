@@ -14,7 +14,10 @@ public class StructureGenAncientForge extends StructureModuleMF
 	public StructureGenAncientForge(World world, int x, int y, int z, int d) {
 		super(world, x, y, z, d);
 	}
-
+	public StructureGenAncientForge(World world, StructureCoordinates position)
+	{
+		super(world, position);
+	}
 	@Override
 	public void generate()
 	{

@@ -14,6 +14,10 @@ public class StructureGenAncientForgeEntry extends StructureModuleMF
 	{
 		super(world, x, y, z, d);
 	}
+	public StructureGenAncientForgeEntry(World world, StructureCoordinates position)
+	{
+		super(world, position);
+	}
 
 	@Override
 	public void generate()
@@ -54,23 +58,5 @@ public class StructureGenAncientForgeEntry extends StructureModuleMF
 		
 		StructureModuleMF structure = new StructureGenAncientForge(worldObj, x, y, z, direction);
 		structure.generate();
-	}
-	
-	private int getStairDirection(int d) {
-		switch (d) {
-		case 0:
-			return 2;
-
-		case 1:
-			return 1;
-
-		case 2:
-			return 3;
-
-		case 3:
-			return 0;
-
-		}
-		return 0;
 	}
 }

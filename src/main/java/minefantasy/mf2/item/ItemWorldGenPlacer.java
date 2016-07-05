@@ -9,6 +9,7 @@ import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientAlter;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientForge;
+import minefantasy.mf2.mechanics.worldGen.structure.WorldGenDwarvenStronghold;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenStructureBase;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 
 public class ItemWorldGenPlacer extends Item
 {
-	private static final String[] types = new String[]{"AncientForge", "AncientAlter"};
+	private static final String[] types = new String[]{"AncientForge", "AncientAlter", "DwarvenStronghold"};
 	public ItemWorldGenPlacer() 
 	{
 		this.setCreativeTab(CreativeTabMF.tabMaterialsMF);
@@ -98,6 +99,10 @@ public class ItemWorldGenPlacer extends Item
 		if(meta == 1)
 		{
 			return new WorldGenAncientAlter();
+		}
+		if(meta == 2)
+		{
+			return new WorldGenDwarvenStronghold();
 		}
 		return new WorldGenAncientForge();
 	}
