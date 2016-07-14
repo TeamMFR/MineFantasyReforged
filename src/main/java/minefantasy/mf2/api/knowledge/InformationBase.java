@@ -36,7 +36,7 @@ public class InformationBase
     private final String idName;
     private ArrayList<SkillRequirement> skills = new ArrayList<SkillRequirement>();
     public String[] requirements = null;
-    private int artefactCount = 1;
+    private int artefactCount = 0;
 
     public InformationBase(String name, int x, int y, int artefacts, Item icon, InformationBase parent)
     {
@@ -75,7 +75,7 @@ public class InformationBase
             InformationList.maxDisplayRow = y;
         }
         this.parentInfo = parent;
-        this.artefactCount = Math.max(1, artefacts);
+        this.artefactCount = Math.max(0, artefacts);
     }
     
     public InformationBase addSkill(Skill skill, int level)
@@ -287,6 +287,10 @@ public class InformationBase
 	public int getArtefactCount() 
 	{
 		return artefactCount;
+	}
+	public boolean isEasy() 
+	{
+		return getPerk() || this.getArtefactCount() == 0 || easyResearch;
 	}
 }
 class SkillRequirement

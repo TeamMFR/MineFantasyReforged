@@ -1831,8 +1831,12 @@ stat.artefact.name=Artefact
 item.ancient_jewel.name=Ancient Jewel
 item.trilogy_jewel.name=Ancient Trilogy
 
-item.mythic_box.name=Mythic Box
-
+item.schem_gears.name=Cogwork Gears Schematics
+item.schem_forge.name=Advanced Forge Schematics
+item.schem_cogwork.name=Cogwork Frame Schematics
+item.schem_bomb.name=Dwarven Bomb Schematics
+item.schem_crossbow.name=Dwarven Crossbow Schematics
+item.schem_alloy.name=Composite Alloy Schematics
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /FOOD/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2013,9 +2017,6 @@ item.skillbook_engineering.desc=+%1$s Engineering
 item.skillbook_combat.name=Mixed Field Tactics
 item.skillbook_combat.desc=+%1$s Weaponry
 
-item.skillbook_dwarvern.name=Dwarvern Knowledge
-item.skillbook_gnomish.name=Gnomish Knowledge
-
 item.skillbook_artisanry2.name=Artisans through the ages
 item.skillbook_artisanry2.desc=Max Artisanry
 item.skillbook_construction2.name=Archive of Architecture
@@ -2040,6 +2041,7 @@ method.crucibleT2=Firebrick Crucible
 method.crucibleT3=Mythic Crucible
 method.crucibleT4=Masterwork Crucible
 method.quern=Quern
+info.hasKnowledge=Can Research
 
 gui.purchase=Purchase
 knowledge.guiSubtitle=This is the GUI

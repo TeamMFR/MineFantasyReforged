@@ -148,11 +148,7 @@ public class GuiKnowledge extends GuiScreen
 
         if (selected == null && p_146284_1_.id == 2)
         {
-        	boolean hasDwarvern = ResearchLogic.hasInfoUnlocked(mc.thePlayer, KnowledgeListMF.dwarvernKnowledge);
-        	boolean hasGnomish = ResearchLogic.hasInfoUnlocked(mc.thePlayer, KnowledgeListMF.gnomishKnowledge);
             currentPage++;
-            if(currentPage == 5 && !hasDwarvern){currentPage++;};
-            if(currentPage == 6 && !hasGnomish){currentPage++;};
             
             if (currentPage >= InformationPage.getInfoPages().size())
             {

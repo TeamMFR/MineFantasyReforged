@@ -20,6 +20,7 @@ import minefantasy.mf2.api.helpers.EntityHelper;
 import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.helpers.ToolHelper;
+import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.rpg.LevelupEvent;
 import minefantasy.mf2.api.rpg.RPGElements;
@@ -624,6 +625,7 @@ public class EventManagerMF
 		
 		if(event.itemStack != null)
 		{
+			boolean saidArtefact = false;
 			int[] ids = OreDictionary.getOreIDs(event.itemStack);
 			boolean hasInfo = false;
 			if(ids != null)
@@ -641,7 +643,20 @@ public class EventManagerMF
 							
 							CustomToolHelper.addComponentString(event.itemStack, event.toolTip, material);
 						}
-						if(displayOreDict)
+						if(s.startsWith("Artefact-"))
+						{
+							if(!saidArtefact)
+							{
+								String knowledge = s.substring(9).toLowerCase();
+								
+								if(!ResearchLogic.hasInfoUnlocked(event.entityPlayer, knowledge))
+								{
+									saidArtefact = true;
+									event.toolTip.add(EnumChatFormatting.AQUA + StatCollector.translateToLocal("info.hasKnowledge"));
+								}
+							}
+						}
+						else if(displayOreDict)
 						{
 							event.toolTip.add("oreDict: " + s);
 						}

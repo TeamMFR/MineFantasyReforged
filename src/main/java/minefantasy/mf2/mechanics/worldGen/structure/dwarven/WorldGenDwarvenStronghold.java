@@ -1,7 +1,9 @@
-package minefantasy.mf2.mechanics.worldGen.structure;
+package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import java.util.Random;
 
+import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
+import minefantasy.mf2.mechanics.worldGen.structure.WorldGenStructureBase;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -11,7 +13,10 @@ import net.minecraft.world.World;
 
 public class WorldGenDwarvenStronghold extends WorldGenStructureBase
 {
-	public static final boolean debug_air = true;
+	/**
+	 * A debug method used to allow strongholds to generate in the air, for easy observation of shape and size.
+	 */
+	public static final boolean debug_air = false;
 	public WorldGenDwarvenStronghold()
 	{		
 	}

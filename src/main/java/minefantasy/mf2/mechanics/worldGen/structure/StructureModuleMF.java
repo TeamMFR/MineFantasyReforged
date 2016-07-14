@@ -4,11 +4,10 @@ import java.util.Random;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityWorldGenMarker;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public abstract class StructureModuleMF 
 {
@@ -16,12 +15,16 @@ public abstract class StructureModuleMF
 	public final int yCoord;
 	public final int zCoord;
 	public final int direction;
-	protected final World worldObj;
+	public final World worldObj;
 	protected Random rand = new Random();
 	/**
 	 * How much longer can units be added
 	 */
 	public int lengthId;
+	/**
+	 * How many more branches can be added
+	 */
+	public int deviationCount;
 	
 	public StructureModuleMF(World world, StructureCoordinates position)
 	{
@@ -253,6 +256,7 @@ public abstract class StructureModuleMF
 		{
 			((TileEntityWorldGenMarker)tile).className = piece.getName();
 			((TileEntityWorldGenMarker)tile).length = lengthId - 1;
+			((TileEntityWorldGenMarker)tile).deviation = deviationCount;
 			((TileEntityWorldGenMarker)tile).prevID = Block.getIdFromBlock(block);
 			((TileEntityWorldGenMarker)tile).prevMeta = meta;
 		}
@@ -260,7 +264,7 @@ public abstract class StructureModuleMF
 	}
 	
 	
-	public static void placeStructure(String classname, int lengthID, World world, int x, int y, int z, int dir)
+	public static void placeStructure(String classname, int lengthID, int deviation, World world, int x, int y, int z, int dir)
 	{
 		try
         {
@@ -273,6 +277,7 @@ public abstract class StructureModuleMF
             	if(module != null && module.canGenerate())
         		{
             		module.lengthId = lengthID;
+            		module.deviationCount = deviation;
         			module.generate();
         		}
             }
@@ -300,15 +305,16 @@ public abstract class StructureModuleMF
 		}
 		return 0;
 	}
-}
-class StructureCoordinates
-{
-	public final int posX, posY, posZ, direction;
-	public StructureCoordinates(int x, int y, int z, int direction)
+	
+	public static class StructureCoordinates
 	{
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
-		this.direction = direction;
+		public final int posX, posY, posZ, direction;
+		public StructureCoordinates(int x, int y, int z, int direction)
+		{
+			this.posX = x;
+			this.posY = y;
+			this.posZ = z;
+			this.direction = direction;
+		}
 	}
 }

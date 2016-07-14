@@ -1,6 +1,8 @@
-package minefantasy.mf2.mechanics.worldGen.structure;
+package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -72,11 +74,6 @@ public class StructureGenDSStairs extends StructureModuleMF
 			for(int z = 0; z <= depth; z ++)
 			{
 				Object[] blockarray;
-				//FOUNDATION
-				if(this.yCoord >= 64)
-				{
-					this.buildFoundation(Blocks.stonebrick, -1, x, -1-z, z, 32, 4, false);
-				}
 				
 				//FLOOR
 				blockarray = getFloor(width_span, depth, x, z);
@@ -180,11 +177,19 @@ public class StructureGenDSStairs extends StructureModuleMF
 	}
 	protected Class<? extends StructureModuleMF> getRandomExtension() 
 	{
-		if(rand.nextInt(4) == 0)
+		if( rand.nextInt(20) == 0 && this.yCoord > 24)
+		{
+			return StructureGenDSStairs.class;
+		}
+		if(lengthId == 1)
+		{
+			return StructureGenDSRoom.class;
+		}
+		if(deviationCount > 0 && rand.nextInt(4) == 0)
 		{
 			return StructureGenDSIntersection.class;
 		}
-		return StructureGenDSStairs.class;
+		return StructureGenDSHall.class;
 	}
 	protected Object[] getTrim(int radius, int depth, int x, int z)
 	{

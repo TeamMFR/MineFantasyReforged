@@ -1,6 +1,7 @@
-package minefantasy.mf2.mechanics.worldGen.structure;
+package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
@@ -14,6 +15,7 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 	@Override
 	protected void buildNext(int width_span, int depth, int height) 
 	{
+		--deviationCount;
 		int offset = 0;
 		boolean[] intersection = getRandomIntersectionPattern();
 		if(intersection[0])
@@ -57,6 +59,9 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 		return 4;
 	}
 
+	protected void tryPlaceMinorRoom(int x, int y, int z, int d) 
+	{
+	}
 	@Override
 	protected Object[] getTrim(int radius, int depth, int x, int z)
 	{
@@ -149,6 +154,10 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 	
 	protected Class<? extends StructureModuleMF> getRandomExtension() 
 	{
+		if(lengthId == 1)
+		{
+			return StructureGenDSRoom.class;
+		}
 		return StructureGenDSHall.class;
 	}
 }

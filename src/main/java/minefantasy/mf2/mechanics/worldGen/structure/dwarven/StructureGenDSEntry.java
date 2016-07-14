@@ -1,6 +1,8 @@
-package minefantasy.mf2.mechanics.worldGen.structure;
+package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -60,7 +62,7 @@ public class StructureGenDSEntry extends StructureModuleMF
 				}
 				
 				//TRIM
-				blockarray = getCeiling2(width_span, depth, x, z);
+				blockarray = getTrim(width_span, depth, x, z);
 				if(blockarray != null)
 				{
 					int meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
@@ -68,7 +70,11 @@ public class StructureGenDSEntry extends StructureModuleMF
 					placeBlock((Block)blockarray[0], meta, x, height, z);
 					if((Block)blockarray[0] == BlockListMF.reinforced_stone_framed)
 					{
-						placeBlock(Blocks.torch, 0, x, height+3, z);
+						for(int h = height-1; h > 1; h --)
+						{
+							placeBlock(BlockListMF.reinforced_stone, 0, x, h, z);
+						}
+						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, 1, z);
 					}
 				}
 				
@@ -94,17 +100,24 @@ public class StructureGenDSEntry extends StructureModuleMF
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -1);
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -2);
 		
-		this.lengthId = 5;
-		mapStructure(0, 0, depth, StructureGenDSHall.class);
+		this.lengthId = 12;
+		this.deviationCount = 4;
+		mapStructure(0, 0, depth, StructureGenDSStairs.class);
 	}
 	
-	private Object[] getCeiling2(int radius, int depth, int x, int z)
+	private Object[] getTrim(int radius, int depth, int x, int z)
 	{
 		if(x == -radius || x == radius || z == depth || z == 0)
 		{
 			return null;
 		}
-		
+		if(x == -(radius-1) || x == (radius-1))
+		{
+			if(z == (int)Math.ceil( (float)depth / 2))
+			{
+				return new Object[]{BlockListMF.reinforced_stone_framed, false};
+			}
+		}
 		if(x == -(radius-1) || x == (radius-1) || z == (depth-1) || z == 1)
 		{
 			if((x == -(radius-1) && (z == (depth-1) || z == 1)) || (x == (radius-1) && (z == (depth-1) || z == 1)))

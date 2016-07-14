@@ -11,6 +11,7 @@ import minefantasy.mf2.api.knowledge.IArtefact;
 import minefantasy.mf2.api.knowledge.ResearchArtefacts;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.ToolListMF;
+import minefantasy.mf2.mechanics.worldGen.structure.LootTypes;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
@@ -31,7 +32,13 @@ public class ItemArtefact extends Item implements IArtefact
 		new Artefact("ancient_jewel", "mithril_jewel", 20, 2, MYTHIC, 2, "smeltMithril", "smeltMaster"),
 		new Artefact("ancient_jewel", "adamant_jewel", 20, 2, MYTHIC, 2, "smeltAdamantium", "smeltMaster"),
 		new Artefact("ancient_jewel", "master_jewel", 30, 2, MYTHIC,  1, "smeltMaster"),
-		new Artefact("trilogy_jewel", "trilogy_jewel", 3, null, 1) 
+		new Artefact("trilogy_jewel", "trilogy_jewel", 3, null, 1),
+		new Artefact("schem_bomb", "schem_bomb", 	50, 2, DWARVEN,  1, "bombObsidian", "mineObsidian"),
+		new Artefact("schem_crossbow", "schem_crossbow", 50, 2, DWARVEN,  1, "crossShaftAdvanced", "crossHeadAdvanced"),
+		new Artefact("schem_forge", "schem_forge", 	50, 2, DWARVEN,  1 , "advforge", "advcrucible"),
+		new Artefact("schem_gears", "schem_gears", 	50, 2, DWARVEN,  1, "cogArmour"),
+		new Artefact("schem_cogwork", "schem_cogwork",  50, 2, DWARVEN,  1 , "cogArmour"),
+		new Artefact("schem_alloy", "schem_alloy",  50, 2, DWARVEN,  1 , "compPlate"),
 	};
 	
 	@SideOnly(Side.CLIENT)

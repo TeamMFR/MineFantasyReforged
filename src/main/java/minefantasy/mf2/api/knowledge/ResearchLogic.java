@@ -54,7 +54,7 @@ public class ResearchLogic
 	
 	public static boolean hasInfoUnlocked(EntityPlayer player, String basename)
     {
-		InformationBase base = InformationList.nameMap.get(basename);
+		InformationBase base = getResearch(basename);
 		if(base != null)
 		{
 			return hasInfoUnlocked(player, base);

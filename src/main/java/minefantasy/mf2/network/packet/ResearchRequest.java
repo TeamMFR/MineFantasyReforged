@@ -31,10 +31,10 @@ public class ResearchRequest extends PacketMF
 		researchID = packet.readInt();
 		username = ByteBufUtils.readUTF8String(packet);
 		
-		if (InformationBase.easyResearch && username != null && player.getCommandSenderName().equals(username)) 
+		if (username != null && player.getCommandSenderName().equals(username)) 
         {
             InformationBase research = InformationList.knowledgeList.get(researchID);
-            if(player != null && research != null)
+            if(player != null && research != null && research.isEasy())
             {
             	if(!player.worldObj.isRemote)
             	{

@@ -1,6 +1,8 @@
-package minefantasy.mf2.mechanics.worldGen.structure;
+package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
+import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -72,11 +74,6 @@ public class StructureGenDSHall extends StructureModuleMF
 			for(int z = 0; z <= depth; z ++)
 			{
 				Object[] blockarray;
-				//FOUNDATION
-				if(this.yCoord >= 64)
-				{
-					this.buildFoundation(Blocks.stonebrick, -1, x, -1, z, 32, 4, false);
-				}
 				
 				//FLOOR
 				blockarray = getFloor(width_span, depth, x, z);
@@ -129,6 +126,14 @@ public class StructureGenDSHall extends StructureModuleMF
 		{
 			buildNext(width_span, depth, height);
 		}
+		if(rand.nextInt(3) != 0)
+		{
+			tryPlaceMinorRoom((width_span), 0, (int)Math.floor((float) depth / 2), rotateLeft());
+		}
+		if(rand.nextInt(3) != 0)
+		{
+			tryPlaceMinorRoom(-(width_span), 0, (int)Math.floor((float) depth / 2), rotateRight());
+		}
 	}
 	
 	protected void buildDoorway(int width_span, int depth, int height) 
@@ -156,6 +161,15 @@ public class StructureGenDSHall extends StructureModuleMF
 			mapStructure(x, y, z, d, extension);
 		}
 	}
+	
+	protected void tryPlaceMinorRoom(int x, int y, int z, int d) 
+	{
+		Class extension = getRandomMinorRoom();
+		if(extension != null)
+		{
+			mapStructure(x, y, z, d, extension);
+		}
+	}
 	protected int getHeight() {
 		return 4;
 	}
@@ -165,13 +179,21 @@ public class StructureGenDSHall extends StructureModuleMF
 	protected int getWidthSpan() {
 		return 3;
 	}
+	protected Class<? extends StructureModuleMF> getRandomMinorRoom() 
+	{
+		return StructureGenDSRoomSml.class;
+	}
 	protected Class<? extends StructureModuleMF> getRandomExtension() 
 	{
-		if(rand.nextInt(4) == 0)
+		if(lengthId == 1)
+		{
+			return StructureGenDSRoom.class;
+		}
+		if(deviationCount > 0 && rand.nextInt(4) == 0)
 		{
 			return StructureGenDSIntersection.class;
 		}
-		if(rand.nextInt(8) == 0 || this.yCoord > 64)
+		if( rand.nextInt(8) == 0 && this.yCoord > 24)
 		{
 			return StructureGenDSStairs.class;
 		}

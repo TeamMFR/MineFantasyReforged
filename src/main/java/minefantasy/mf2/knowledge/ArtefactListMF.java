@@ -4,7 +4,10 @@ import minefantasy.mf2.api.knowledge.InformationBase;
 import minefantasy.mf2.api.knowledge.ResearchArtefacts;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.item.ItemArtefact;
+import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.item.list.CustomToolListMF;
+import minefantasy.mf2.item.list.ToolListMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -23,14 +26,70 @@ public class ArtefactListMF
 
 	private static void addEngineering() 
 	{
+		add(KnowledgeListMF.blackpowder, ComponentListMF.nitre, ComponentListMF.sulfur, Items.coal, Items.gunpowder);
+		add(KnowledgeListMF.advblackpowder, Items.glowstone_dust, Items.redstone);
+		add(KnowledgeListMF.tungsten, ComponentListMF.oreTungsten, BlockListMF.oreTungsten);
+		add(KnowledgeListMF.coke, Items.coal, Items.redstone);
+		add(KnowledgeListMF.spyglass, ComponentListMF.bronze_gears, Blocks.glass);
+		add(KnowledgeListMF.parachute, Items.feather, Blocks.wool);
+		add(KnowledgeListMF.syringe, Items.potionitem);
+		add(KnowledgeListMF.engTanner, ComponentListMF.bronze_gears);
+		add(KnowledgeListMF.bombarrow, Items.feather, ComponentListMF.blackpowder);
+		add(KnowledgeListMF.bpress, ComponentListMF.bronze_gears, Blocks.lever);
+		add(KnowledgeListMF.bombs, ComponentListMF.blackpowder, Items.redstone, Items.string);
+		add(KnowledgeListMF.shrapnel, Items.flint);
+		add(KnowledgeListMF.firebomb, ComponentListMF.dragon_heart, Items.magma_cream);
+		add(KnowledgeListMF.stickybomb, Items.slime_ball);
+		add(KnowledgeListMF.mineCeramic, ComponentListMF.blackpowder, Blocks.stone_pressure_plate);
+		add(KnowledgeListMF.bombIron, Items.iron_ingot);
+		add(KnowledgeListMF.mineIron, Items.iron_ingot);
+		add(KnowledgeListMF.bombObsidian, Blocks.obsidian);
+		add(KnowledgeListMF.mineObsidian, Blocks.obsidian);
+		add(KnowledgeListMF.bombCrystal, Items.diamond);
+		add(KnowledgeListMF.mineCrystal, Items.diamond);
+		
+		add(KnowledgeListMF.crossbows, Items.string, ComponentListMF.plank, Blocks.lever);
+		add(KnowledgeListMF.crossShaftAdvanced, ComponentListMF.tungsten_gears);
+		add(KnowledgeListMF.crossHeadAdvanced, ComponentListMF.tungsten_gears);
+		add(KnowledgeListMF.crossAmmo, ComponentListMF.tungsten_gears);
+		add(KnowledgeListMF.crossScope, ToolListMF.spyglass);
+		add(KnowledgeListMF.crossBayonet, CustomToolListMF.standard_dagger);
 	}
 
 	private static void addProvisioning() 
 	{
+		add(KnowledgeListMF.jerky, FoodListMF.generic_meat_uncooked);
+		add(KnowledgeListMF.saussage, FoodListMF.generic_meat_uncooked, FoodListMF.guts);
+		add(KnowledgeListMF.sandwitch, FoodListMF.generic_meat_uncooked, FoodListMF.cheese_slice, Items.bread);
+		add(KnowledgeListMF.sandwitchBig, FoodListMF.generic_meat_uncooked, FoodListMF.cheese_slice, Items.bread);
+		
+		add(KnowledgeListMF.meatpie, FoodListMF.generic_meat_uncooked, FoodListMF.pastry);
+		add(KnowledgeListMF.shepardpie, FoodListMF.generic_meat_uncooked, Items.potato, FoodListMF.pastry);
+		add(KnowledgeListMF.berrypie, FoodListMF.berries, FoodListMF.pastry);
+		add(KnowledgeListMF.applepie, Items.apple, FoodListMF.pastry);
+		
+		add(KnowledgeListMF.sweetroll, Items.sugar, FoodListMF.berries, FoodListMF.sugarpot);
+		add(KnowledgeListMF.eclair, Items.egg, new ItemStack(Items.dye, 1, 3), FoodListMF.pastry);
+		add(KnowledgeListMF.cheeseroll, Items.bread, FoodListMF.cheese_slice);
+		
+		add(KnowledgeListMF.cake, FoodListMF.flour, Items.egg);
+		add(KnowledgeListMF.carrotcake, FoodListMF.flour, Items.egg, Items.carrot);
+		add(KnowledgeListMF.chococake, FoodListMF.flour, Items.egg, new ItemStack(Items.dye, 1, 3));
+		add(KnowledgeListMF.bfcake, FoodListMF.flour, Items.egg, new ItemStack(Items.dye, 1, 3), FoodListMF.berriesJuicy);
+		
+		add(KnowledgeListMF.bandageadv, Blocks.wool, Items.leather);
 	}
 
 	private static void addConstruction() 
 	{
+		add(KnowledgeListMF.refined_planks, ComponentListMF.nail);
+		add(KnowledgeListMF.clay_wall, Items.clay_ball, ComponentListMF.nail);
+		add(KnowledgeListMF.paint_brush, Blocks.wool);
+		add(KnowledgeListMF.decorated_stone, Items.iron_ingot, BlockListMF.reinforced_stone);
+		add(KnowledgeListMF.bed_roll, Items.bed);
+		add(KnowledgeListMF.ammo_box, Blocks.chest);
+		add(KnowledgeListMF.big_box, Blocks.chest);
+		
 	}
 
 	private static void addArtisanry() 
