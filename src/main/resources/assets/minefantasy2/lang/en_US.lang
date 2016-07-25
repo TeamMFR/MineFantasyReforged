@@ -2097,7 +2097,7 @@ knowledge.gettingStarted.desc=From the ground-up
 knowledge.gettingStarted.1=This is where you start working on MineFantasy. At this stage, it's recommended you at least have a hole to live in and somewhere to build, as well you should have a supply of wood, coal, copper, stone and hide. With these resources you can begin. To start in your world you will need to ready the three main processes.
 knowledge.gettingStarted.2=Crafting blocks require some interaction on your part to function. First: Set up the recipe as instructed(heating items for anvils). Then select the correct tool with the correct tier (such as fists, knives, hammers, etc). You will then need to click the block with the item keeping hits about a second apart until it finishes.
 
-knowledge.gettingStarted.hcc=$hHardcore Crafting-$r^Hardcore crafting appears to be active. Regular tools are less effective and its recommended that primitive tools are crafted. See the Artisanry section for all the tools.^To start off: Punch some stone... no really, break stone bare-handed (meaning no item held) and Sharp Rocks will be dropped. Use these to break some leaves for vines and sticks, and logs for wood.
+knowledge.gettingStarted.hcc=$hHardcore Crafting-$r^Hardcore crafting appears to be active. Regular tools are less effective and its recommended that primitive tools are crafted. See the Artisanry section for all the tools.^To start off: Punch some stone... no really, break stone bare-handed (meaning no item held) and Sharp Rocks will be dropped.^Use these to break some leaves for vines and sticks, and logs for wood.
 
 knowledge.gettingStarted.fire=$hFirepit-$r^Before you get to work, you need a fire, one of these should provide flame and a place to cook if you have meat.^Right-click with timber to add fuel, and firestarter to light.
 knowledge.gettingStarted.food=Also place one of these stove tops on top of the fire. You then need to right-click raw food (mainly meat) to place them on the plate.
@@ -2105,9 +2105,8 @@ knowledge.gettingStarted.food=Also place one of these stove tops on top of the f
 knowledge.gettingStarted.carpenter=$hCarpenter Bench-$r^The carpenter bench is a basic crafting table for a selection of recipes. The tools needed for this vary and some recipes require bare fists. See the crafting tools section for more information on tools.
 
 knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathered some hide you can't use. Tanning is a simple method of creating leather from hide.^To start off, build a shabby tanning rack and a stone knife. These tools are poor quality and should be upgraded when convenient.
-
-knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic
-knowledge.gettingStarted.forging.2=firestarter (Dry rocks-Craft-Tools), and wear an apron too!
+	
+knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic firestarter (Dry rocks-Craft-Tools), and wear an apron too!
 
 knowledge.gettingStarted.3=Now you need some leather strips for tools. Gather 2 copper, 2 planks and 1 leather to craft a set of copper shears.
 knowledge.gettingStarted.4=With these shears, you can cut leather to strips on the carpenter's bench OR a tanning rack by right-clicking them on the block with leather on it.
@@ -2594,38 +2593,48 @@ knowledge.etools.1=Engineering could be a delicate trade in some aspects. For th
 
 knowledge.ecomponents=Components and Commodities
 knowledge.ecomponents.desc=For Engineering
+
 knowledge.ecomponents.1=For engineering, there's some nifty ways you can join components. However, you may need to find some alternative commodities for doing such. It's worthwhile to make a few of these for when their needed.
+
 knowledge.ecomponents.2=Most engineered objects aren't just forged. Construction usually takes pre-forged components and attatching them together. Components however are mostly used for specific purposes, and are better made on-site (Unless you intend to mass produce). 
 
 knowledge.coke=Coke
 knowledge.coke.desc=Refined Fuels
+
 knowledge.coke.1=Alone, Coal is just full of impurities which reflect on poor burning capabilities. With much refinement, and the use of redstone, charcoal can be burned at a rate that completely removes all imperfections and leaves the coal in its purest form, for optimal fuel use. This process only works with charcoal however.
 
 knowledge.tungsten=Wolframite Smithing
 knowledge.tungsten.desc=Machine-Worthy Metal
-knowledge.tungsten.1=There's always a limit to using iron based materials in engineering; It just cannot handle the stress some machines have applied. Wolframite is a rare metal found within lower layers of stone. The ore itself can be found in rare occasions, but can also be found by use of a handpick.
+
+knowledge.tungsten.1=There's always a limit to using iron based materials in engineering; It just cannot handle the stress some machines have applied. Wolframite is a rare metal found within lower layers of stone. The ore itself can be found in some occasions, but can also be found by use of a handpick.
+
 knowledge.tungsten.2=If you use a high enough tier (such as encrusted) below layer 16: It is possible to mine raw Wolframite ore.^After that, it's only a matter of refining it. Wolframite requires to be melted down with large amounts of coal and flux to separate the ore.
+
 knowledge.tungsten.3=Although this material is highly valued to engineers, it does require some decent smithing skills to refine the ore, making it even more difficult to acquire.
 
 knowledge.engTanner=Advanced Tanner
 knowledge.engTanner.desc=Easy Tanning
-knowledge.engTanner.1=Tanning is probably one of the most tiring methods of production, now you can make it easier!^This tanning rack is able to slice and dice clean hide for you. Just place the item as usual than right-click the top.
+
+knowledge.engTanner.1=Tanning is probably one of the most tiring methods of production. Now with some proper mechanical methods you can make it easier!^This tanning rack is able to slice and dice clean hide for you. Just place the item as usual than right-click the top.
 
 knowledge.advcrucible=Auto Crucible
 knowledge.advcrucible.desc=Easy Alloys
-knowledge.advcrucible.1=The technology of the crucible is rather low tec but now it is well known that harvesting the refined metals can be tedious.^These crucibles will be able to divide and cool the refined metals, ready for pickup.
+
+knowledge.advcrucible.1=These schematics found highlight an interesting secret behind dwarven metalworks. Through study into smelting technology, it appears there is a mechanical system that can shape and cool off metal into ingots without effort. If a crucible were to be fitted with this system, it would improve production indeed.
 
 knowledge.advforge=Advanced Forge
 knowledge.advforge.desc=Full control
-knowledge.advforge.1=Although making a basic forge is able to get anything done, its not very fuel-efficient. This redstone powered furnace allows you full control on if its lit or not. Apply a redstone signal to light it, cut the signal to extinguish.^This seems to produce heavy pollution though.
+
+knowledge.advforge.1=These dwarven schematics also appear to have a design of forge which as such a well-controlled method of burning fuel that it can be controlled with a redstone signal.^This forge can be easily switched on and off, saving fuel consumption.
 
 knowledge.blackpowder=Explosives
 knowledge.blackpowder.desc=Boom!
-knowledge.blackpowder.1=Using generic gunpowder and TNT to blow things up may be satisfying but it makes one hell of a mess. It is possible however to create devices with more controlled explosions that limit the environmental damage.^Blackpowder is an explosive substance capable of doing large damage while limiting
-knowledge.blackpowder.2=the destruction of blocks.^It's not world-shatteringly powerful like the stuff creepers use.^Blackpowder is made from various minerals found while mining.
+
+knowledge.blackpowder.1=Using generic gunpowder and TNT to blow things up may be satisfying but it makes one hell of a mess. It is possible however to create devices with more controlled explosions that limit the environmental damage.^Blackpowder is an explosive substance capable of doing large damage while limiting the destruction of blocks.^It's not world-shatteringly powerful like the stuff creepers use.^Blackpowder is made from various minerals found while mining.
 
 knowledge.advblackpowder=Refined Blackpowder
 knowledge.advblackpowder.desc=Ka Boom!
+
 knowledge.advblackpowder.1=Blackpowder has proven useful for explosive creation but sometimes you may need more of a blast.^Through the use of redstone and glowstone: you can beef-up the power of blackpowder to increase damage.
 
 knowledge.climber=Climbing Pick
@@ -2647,9 +2656,13 @@ knowledge.syringe.1=Drinking potions is slow and awkward in emergencies. Syringe
 
 knowledge.bombs=Bomb Crafting
 knowledge.bombs.desc=Explosion Delivery
+
 knowledge.bombs.1=What use is blackpowder without something to put it in? Well these little gadgets will do serious damage to a small area.^Bomb crafting is more... experimental than other works. First of all: you need a workstation set up.
+
 knowledge.bombs.2=Now put that down... Wherever.^With this table you will be able to create both bombs and mines. Bombs can be thrown by holding right-click for a short time and they will explode at after a time. Mines however will be placed with holding right click and explode when something steps near them.
+
 knowledge.bombs.3=Bombs and Mines require 3-4 components in their creation.^The casing$h[1]$r determines the damage and range of the device. Powder$h[2]$r will modify damage. Filling$h[3]$r can be empty and is used to add effects to the bomb. Finally the fuse$h[4]$r determines the time until detonation.
+
 knowledge.bombs.4=To craft a bomb: simply put components in their respective slots for example cermic casing, blackpowder and a short fuse. then click the block to make a single bomb.
 
 knowledge.crossbows=Crossbow Crafting
@@ -2674,10 +2687,13 @@ knowledge.crossHeads.heavy=A heavy-duty, reinforced crossbow head. This has a ma
 
 knowledge.crossHeadAdvanced=Advanced Crossbow Arms
 knowledge.crossHeadAdvanced.desc=Precision over speed
-knowledge.crossHeads.advanced=The Advanced crossbow head incorperates a complex design that focuses the bolt down a straight path. This head is stiff and hard to reload but can fire bolts with much less spread.
+
+knowledge.crossHeads.advanced=This set of dwarven crossbow schematics consists of a steel cross capable of releasing a powerful force. With the right materials and tools, it is possible to create your own.^Although slow, this crossbow head should be able to fire bolts with deadly power and accuracy.
+
 knowledge.crossShaftAdvanced=Advanced Crossbow Stock
 knowledge.crossShaftAdvanced.desc=Recoil Control
-knowledge.crossShafts.advanced=Upgraded from a regular stock, this heavy iron stock is capable of absorbing the energy from firing a crossbow, granting great recoil reduction.
+
+knowledge.crossShafts.advanced=For what appears to be based off a regular wooden stock: this dwarven crossbow includes a metal design. Although heavy, it appears to contain a spring-loaded system for absorbing recoil.
 
 knowledge.crossAmmo=Repeating Crossbow
 knowledge.crossAmmo.desc=Expanded capacity
@@ -2705,7 +2721,9 @@ knowledge.shrapnel.1=Bombs seem all well and good so far, but there seems to be 
 
 knowledge.firebomb=Firey Explosions
 knowledge.firebomb.desc=Deadly Incineration
+
 knowledge.firebomb.1=Adding shrapnel to bombs is very effective at elimiting ones fellow critters of the land. But there can be more insane carnage.^A mixture of magma cream can release a massive blast of pure flame upon detonation. Refined magma cream burns at such a high temperature few can withstand its blast.
+
 knowledge.firebomb.2=How it works is the magma cream (being a mixture of burning embers and sticky slime) is able to keep a self-sustaining flame while remaining as a spreadable substance. Additional blaze powder then reacts with a dragon heart to release a magical catalyst that increases the temperature of the flame.
 knowledge.firebomb.3=Incineration bombs may be expensive, but their extremely effective against armour.
 
@@ -2727,14 +2745,17 @@ knowledge.mineIron.1=Ceramic casings may bit too sensetive. Iron bomb casings no
 
 knowledge.bombObsidian=Obisidian Bomb Casing
 knowledge.bombObsidian.desc=Sealing in the freshness
-knowledge.bombObsidian.1=You've taken one step with iron bombs, but why not go further?^Obsidian bombs restrict the blast so much the range is tiny, but the resulting blast is highly damaging.
+
+knowledge.bombObsidian.1=This set of bomb schematics appears to consist of a casing made from obsidian. This casing though hard is designed with fracture points for a more controlled explosion. These would yield high damage over smaller range.
 
 knowledge.mineObsidian=Obisidian Mine Casing
 knowledge.mineObsidian.desc=Sealing in the freshness
-knowledge.mineObsidian.1=Mines may not be as useful as bombs, but they can pack a suprising punch.^Obsidian mines are hard and not very sensetive. These are only set off when something practically is standing on it... But that just means more of a lethal result.
+
+knowledge.mineObsidian.1=This is a dwarven design of a mine casing. The design incorporates a hard obsidian casing with fracture points in particular areas. The explosion dealt from this would yield large damage over a smaller area.
 
 knowledge.bombCrystal=Crystal Bomb Casing
 knowledge.bombCrystal.desc=Stylish
+
 knowledge.bombCrystal.1=Reducing the blast radius to focus more on damage seems decent, but why not increase the blast radius?^Glass casings have no resistence meaning all the power spreads as far as possible.^And add some diamond into the mix so the shards cause more damage anyway!
 
 knowledge.mineCrystal=Crystal Mine Casing
@@ -2755,8 +2776,11 @@ $hUse of Cogworks$r^
 
 knowledge.cogArmour=Cogwork Suit
 knowledge.cogArmour.desc=Power Armor
-knowledge.cogArmour.1=For real protection, there's always a limit your body can take, limiting your choice for heavy armour.^Cogwork armour is a separate, extremely powerful suit of armour which can carry enourmous amounts of weight, capable of carrying extremely heavy equipment.
-knowledge.cogArmour.2=Each suit of cogwork armour can stand on its self, and is not equipped, rather ridden. There are a wide range of benefits gained from these suits, but mobility is extremely reduced due to its shear size.
+
+knowledge.cogArmour.1=This appears to be a real discovery, and seems to highlight why dwarven ruins had particularly large halls. These are schematics for an advanced set of gears which can replicate human movement into a heavy exoskeleton. What this reveals is a massive suit of armour capable of making the wearer nearly invulnerable to damage.^Cogwork armour is the pinnacle of dwarven engineering and capable of carrying huge amounts of weight. The only downside however is powering the suit, as it requires pure burning fuel and a lot of it.
+
+knowledge.cogArmour.2=Though no actual suits have been found in ruins, the assembly systems remain in-tact and they appear to be more than capable of fitting a suit to something more human sized.
+
 knowledge.cogArmour.station=$hCrafting Station$r^A crafting station is necessary for any construction or modification to take place. Cogwork crafting stations are made from a frame and pulley system. To start off, built three posts 4 blocks tall with a single one in the middle-top.
 //Example
 knowledge.cogwork_station=Crafting Station
@@ -2776,8 +2800,8 @@ knowledge.cogArmour.removal=Although plating is removed when the suit is broken,
 
 knowledge.compPlate=Composite Alloy
 knowledge.compPlate.desc=Powerful all-rounder
-knowledge.compPlate.1=When weight and clutter aren't an issue, there's more time to focus on the performance of armour. Regular metals by themselves have ups and downs and it's hard to get it perfect.
-knowledge.compPlate.2=This composite alloy combines multiple materials to create a hard, and solid material that is better than the sum of its parts. This alloy can compete with materials higher than its own. This can then be added to cogwork frames to create a suit of powerful protection.
+
+knowledge.compPlate.1=So far, most alloys have simply been a matter of mixing them together in a pot. This dwarven design of alloy appears to be different, layering multiple materials together into a plate. Although not as efficient at making tools, the applications for armour would be very efficient, although heavy.^It is obvious this particular alloy was designed to be used with the cogwork armour.
 
 knowledge.refined_planks=Refined Planks
 knowledge.refined_planks.desc=Structually stable
@@ -2848,7 +2872,7 @@ knowledge.generic_meat.1=There's a lot of meat out there. But sometimes, it shou
 
 knowledge.stew=Stew
 knowledge.stew.desc=Kind of bland
-knowledge.stew.1=You're no cook... not yet anyway. Stew is the food of the novice. Just throw some diced meat in a bowl and call it a meal! Stew can be made from steak, chicken, pork wolf, horse and even fish.
+knowledge.stew.1=You're no cook... not yet anyway. Stew is the food of the novice. Just throw some diced meat in a bowl and call it a meal! Stew can be made from generic meat.
 
 knowledge.jerky=Jerky
 knowledge.jerky.desc=For the traveller
@@ -3000,28 +3024,4 @@ knowledge.firstaid.1=You need to be fast when tending to some injuries and need 
 knowledge.doctor=Doctor
 knowledge.doctor.desc=Duty to benefit
 knowledge.doctor.1=Your constant use of aiding your fellow humans has yielded you experience in medicine.^Bandages heal 50% more damage.
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/DWARVERN TEXT/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-knowledge.title=
-knowledge.title.desc=
-knowledge.title.1=
-
-
-knowledge.dwarvernKnowledge=Dwarvern Knowledge
-knowledge.dwarvernKnowledge.desc=Expert Artisans
-knowledge.dwarvernKnowledge.1=
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/GNOMISH TEXT/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-knowledge.title=
-knowledge.title.desc=
-knowledge.title.1=
-
-knowledge.gnomishKnowledge=Gnomish Knowledge
-knowledge.gnomishKnowledge.desc=Expert Engineers
-knowledge.gnomishKnowledge.1=
 

@@ -270,6 +270,6 @@ public class ComponentListMF
 		RandomOre.addOre(new ItemStack(oreSilver),            1.5F, Blocks.stone, 0, 0, 32,  false);
 		RandomOre.addOre(new ItemStack(oreGold),              1F, Blocks.stone, 0, 0, 32,  false);
 		
-		RandomOre.addOre(new ItemStack(oreTungsten),          1F, Blocks.stone, 3, 0, 16,  false, "tungsten");
+		RandomOre.addOre(new ItemStack(oreTungsten),          2F, Blocks.stone, 3, 0, 16,  false, "tungsten");
 	}
 }

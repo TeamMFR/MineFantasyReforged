@@ -1,9 +1,10 @@
 package minefantasy.mf2.item.armour;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.IElementalResistance;
@@ -11,13 +12,15 @@ import minefantasy.mf2.api.armour.ItemArmourMFBase;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.client.render.armour.ModelFullplate;
+import minefantasy.mf2.config.ConfigClient;
 import minefantasy.mf2.item.list.ArmourListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
-import minefantasy.mf2.material.MetalMaterial;
 import minefantasy.mf2.mechanics.CombatMechanics;
 import minefantasy.mf2.util.MFLogUtil;
+import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -30,12 +33,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistance
 {
+	@SideOnly(Side.CLIENT)
+	private static ModelBiped fullplate = new ModelFullplate(1.0F);
+	
 	private int itemRarity;
 	protected BaseMaterialMF baseMaterial;
 	
@@ -54,16 +57,6 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 	{
 		this(name, material, AD, slot, tex, rarity);
 		this.suitBulk = customBulk;
-	}
-	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
-	{
-		String tex = "minefantasy2:textures/models/armour/"+design.getName().toLowerCase()+"/"+texture;
-		if(type == null && canColour())//bottom layer
-		{
-			return tex + "_cloth.png";
-		}
-		return tex+".png";
 	}
 	@Override
 	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot)
@@ -463,4 +456,48 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
     	list.add(CustomMaterial.getWeightString(mass));
 		super.addInformation(item, user, list, full);
 	}
+	
+
+	@Override
+	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	{
+		if(entity instanceof EntityPlayer && armorType < 2 && design == ArmourDesign.FIELDPLATE && ConfigClient.customModel)
+		{
+			return getArmourTextureName(stack, entity, slot, type) + "_S.png";
+		}
+		return getArmourTextureName(stack, entity, slot, type) + ".png";
+	}
+	public String getArmourTextureName(ItemStack stack, Entity entity, int slot, String type)
+	{
+		String tex = "minefantasy2:textures/models/armour/"+design.getName().toLowerCase()+"/"+texture;
+		if(type == null && canColour())//bottom layer
+		{
+			return tex + "_cloth";
+		}
+		return tex;
+	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
+    {
+		ModelBiped model = this.design == ArmourDesign.FIELDPLATE ?  fullplate : null;
+		if( !(entityLiving instanceof EntityPlayer) || armorType >= 2 || model == null || !ConfigClient.customModel)
+		{
+			return super.getArmorModel(entityLiving, itemStack, armorSlot);
+		}
+		
+		if(entityLiving != null)
+		{
+			model.heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
+		}
+		model.bipedHead.showModel = (this.armorType == 0);
+		model.bipedHeadwear.showModel = (this.armorType == 0);
+		
+		model.bipedCloak.showModel = (this.armorType == 1);
+		model.bipedBody.showModel = (this.armorType == 1);
+		model.bipedLeftArm.showModel = (this.armorType == 1);
+		model.bipedRightArm.showModel = (this.armorType == 1);
+        return model;
+    }
 }

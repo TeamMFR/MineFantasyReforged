@@ -14,9 +14,6 @@ public class InformationList
 	public static InformationPage engineering = new InformationPage("infoPage.engineering", SkillList.engineering).registerInfoPage();
 	public static InformationPage mastery = new InformationPage("infoPage.mastery", null).registerInfoPage();
 	
-	public static InformationPage dwarvern = new InformationPage("infoPage.dwarvern", SkillList.artisanry).registerInfoPage();
-	public static InformationPage gnomish = new InformationPage("infoPage.gnomish", SkillList.engineering).registerInfoPage();
-	
     /** Is the smallest column used to display a achievement on the GUI. */
     public static int minDisplayColumn;
     /** Is the smallest row used to display a achievement on the GUI. */

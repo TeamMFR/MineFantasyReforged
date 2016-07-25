@@ -51,14 +51,14 @@ public class ItemCustomArmour extends ItemArmourMF
     }
 	
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
+	public String getArmourTextureName(ItemStack stack, Entity entity, int slot, String type)
 	{
 		String tex = "minefantasy2:textures/models/armour/custom/" + craftDesign + "/"+texture;
 		if(type == null)//bottom layer
 		{
-			return tex +".png";//COLOUR LAYER
+			return tex;//COLOUR LAYER
 		}
-		return tex +"_detail.png";//STATIC LAYER
+		return tex +"_detail";//STATIC LAYER
 	}
 
 	@Override
@@ -105,15 +105,30 @@ public class ItemCustomArmour extends ItemArmourMF
 		ArrayList<ItemStack> mats = OreDictionary.getOres("ingot"+plating);
 		if(MineFantasyII.isDebug() || (mats != null && !mats.isEmpty()))
 		{
-			addSuit(list, plating);
+			addSuits(list, plating);
 		}
 	}
-	public static void addSuit(List list, String material) 
+	public static void addSuits(List list, String material) 
 	{
 		list.add(CustomArmourListMF.standard_chain_helmet.construct(material));
 		list.add(CustomArmourListMF.standard_chain_chest.construct(material));
 		list.add(CustomArmourListMF.standard_chain_legs.construct(material));
 		list.add(CustomArmourListMF.standard_chain_boots.construct(material));
+		
+		list.add(CustomArmourListMF.standard_scale_helmet.construct(material));
+		list.add(CustomArmourListMF.standard_scale_chest.construct(material));
+		list.add(CustomArmourListMF.standard_scale_legs.construct(material));
+		list.add(CustomArmourListMF.standard_scale_boots.construct(material));
+		
+		list.add(CustomArmourListMF.standard_splint_helmet.construct(material));
+		list.add(CustomArmourListMF.standard_splint_chest.construct(material));
+		list.add(CustomArmourListMF.standard_splint_legs.construct(material));
+		list.add(CustomArmourListMF.standard_splint_boots.construct(material));
+		
+		list.add(CustomArmourListMF.standard_plate_helmet.construct(material));
+		list.add(CustomArmourListMF.standard_plate_chest.construct(material));
+		list.add(CustomArmourListMF.standard_plate_legs.construct(material));
+		list.add(CustomArmourListMF.standard_plate_boots.construct(material));
 	}
 	
 	@Override
@@ -127,27 +142,9 @@ public class ItemCustomArmour extends ItemArmourMF
     	{
 			CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
 			
-			if(MineFantasyII.isDebug() || customMat.getItem() != null)
+			if(customMat.getItem() != null)
 			{
-				list.add(CustomArmourListMF.standard_scale_helmet.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_scale_chest.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_scale_legs.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_scale_boots.construct(customMat.name));
-				
-				list.add(CustomArmourListMF.standard_chain_helmet.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_chain_chest.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_chain_legs.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_chain_boots.construct(customMat.name));
-				
-				list.add(CustomArmourListMF.standard_splint_helmet.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_splint_chest.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_splint_legs.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_splint_boots.construct(customMat.name));
-				
-				list.add(CustomArmourListMF.standard_plate_helmet.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_plate_chest.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_plate_legs.construct(customMat.name));
-				list.add(CustomArmourListMF.standard_plate_boots.construct(customMat.name));
+				addSuits(list, customMat.name);
 			}
     	}
     }
