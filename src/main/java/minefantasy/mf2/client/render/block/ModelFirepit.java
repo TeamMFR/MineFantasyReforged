@@ -86,8 +86,7 @@ public class ModelFirepit extends ModelBase
   {
       Base.render(f);
       
-      if(pit != null)
-      if(pit.fuel > 0 || pit.getWorldObj() == null)
+      if(pit == null || pit.fuel > 0)
       {
   	    Plank1.render(f);
   	    Plank2.render(f);

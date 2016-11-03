@@ -13,11 +13,13 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 import net.minecraftforge.client.IItemRenderer.ItemRendererHelper;
@@ -33,7 +35,6 @@ public class TileEntityRackRenderer extends TileEntitySpecialRenderer
     
     public void renderAModelAt(TileEntityRack tile, double d, double d1, double d2, float f) 
     {
-        if (tile != null);
         int i = 0;
         if (tile.getWorldObj() != null)
         {
@@ -130,6 +131,33 @@ public class TileEntityRackRenderer extends TileEntitySpecialRenderer
         
 
     }
+    
+    public void renderInvModel(CustomMaterial material, String tex, double d, double d1, double d2, float f) 
+    {
+        int j = 0;
+        
+        GL11.glPushMatrix();//Start all
+        GL11.glTranslatef((float) d + 0.5F, (float) d1+1F, (float) d2 + 0.5F);
+        GL11.glRotatef(j+180, 0.0F, 1.0F, 0.0F);
+        GL11.glScalef(1.0F, -1F, -1F);
+        float itemsStart = -(3F/16F);
+        float itemsGap = 4F/16F;
+        
+        GL11.glColor3f((float)material.colourRGB[0]/255F, (float)material.colourRGB[1]/255F, (float)material.colourRGB[2]/255F);
+        
+        bindTextureByName("textures/models/tileentity/"+tex+"_base.png"); //texture
+        model.renderModel(0.0625F); 
+        
+        GL11.glColor3f(1F, 1F, 1F);
+        
+        bindTextureByName("textures/models/tileentity/"+tex+"_detail.png"); //texture
+        model.renderModel(0.0625F); 
+        
+        GL11.glPopMatrix(); //end all
+        
+
+    }
+    
 	private float getRotationForItem(Item item) {
 		String classname = item.getClass().getName();
 		if(classname.endsWith("ItemCrossbow") || classname.endsWith("ItemBlunderbuss") || classname.endsWith("ItemBlowgun") || classname.endsWith("ItemMusket"))
@@ -139,6 +167,16 @@ public class TileEntityRackRenderer extends TileEntitySpecialRenderer
 		return -45F;
 	}
 
+	@Override
+	protected void bindTexture(ResourceLocation p_147499_1_)
+	{
+	    TextureManager texturemanager = TileEntityRendererDispatcher.instance.field_147553_e;
+
+	    if (texturemanager != null)
+	    {
+	        texturemanager.bindTexture(p_147499_1_);
+	    }
+	}
 	private void bindTextureByName(String image)
     {
     	bindTexture(TextureHelperMF.getResource(image));

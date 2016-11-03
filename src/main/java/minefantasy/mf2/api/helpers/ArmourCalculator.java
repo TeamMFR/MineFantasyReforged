@@ -51,12 +51,12 @@ public class ArmourCalculator
 	/**
 	 * What affects stamina regen, and what affects stamina cost
 	 */
-	public static final float[]ACArray = new float[]{20F, 50F};
+	public static final float[]encumberanceArray = new float[]{10F, 40F};
 	/**
 	 * When your movement starts and peaks at slowing down
 	 */
 	public static final float slowAmount = 10F;
-	public static final float[] moveSpeedThreshold = new float[]{35F, 100F};
+	public static final float[] moveSpeedThreshold = new float[]{30F, 40F};
 
 	/**
 	 * Gets the default using the items ArmourClass
@@ -135,11 +135,12 @@ public class ArmourCalculator
 	public static float getSpeedModForWeight(EntityLivingBase user)
 	{
 		float mod = 0.0F;
-		float mass = getTotalWeightOfWorn(user, true) - moveSpeedThreshold[0];
-		float max = moveSpeedThreshold[1] - moveSpeedThreshold[0];
+		float min = moveSpeedThreshold[0];
+		float max = moveSpeedThreshold[1]-min;
+		float mass = getTotalWeightOfWorn(user, true) - min;
 		if(mass > 0 && max > 0)
 		{
-			mod -= (mass/max)*slowAmount*slowRate;//80kg = -10%
+			mod -= (mass/max)*slowAmount*slowRate;
 		}
 		return mod;
 	}
@@ -286,6 +287,11 @@ public class ArmourCalculator
 	}
 	public static float[] getRatioForSource(DamageSource source)
 	{
+		if(source.isMagicDamage() || source.isFireDamage() || source == DamageSource.starve)
+		{
+			return null;
+		}
+		
 		if(source.isExplosion() || source == DamageSource.anvil || source == DamageSource.fallingBlock)
 		{
 			return new float[]{0, 1, 0};//blunt
@@ -305,6 +311,7 @@ public class ArmourCalculator
 			}
 			return getRatioForIndirect(damager);
 		}
+		
 		return new float[]{0, 1, 0};
 	}
 

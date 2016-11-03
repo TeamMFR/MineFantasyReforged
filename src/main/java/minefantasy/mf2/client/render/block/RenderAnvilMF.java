@@ -1,18 +1,16 @@
 package minefantasy.mf2.client.render.block;
 
-import minefantasy.mf2.block.crafting.BlockAnvilMF;
-import minefantasy.mf2.block.tileentity.TileEntityAnvilMF;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import minefantasy.mf2.block.crafting.BlockAnvilMF;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
 
 public class RenderAnvilMF implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityAnvilMFRenderer renderAnvil = new TileEntityAnvilMFRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(!(block instanceof BlockAnvilMF))return;
@@ -20,7 +18,7 @@ public class RenderAnvilMF implements ISimpleBlockRenderingHandler
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		BlockAnvilMF anvil = (BlockAnvilMF)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityAnvilMF(anvil.getTier(), anvil.material.name).setDisplay(), 0.0D, 0.0D, 0.0D, 0.0F);
+		renderAnvil.renderModelAt(anvil.material.name, 0, 0.0F, 0.0F, 0.0F, 0.0F, 0);
 		GL11.glPopMatrix();
 	}
 

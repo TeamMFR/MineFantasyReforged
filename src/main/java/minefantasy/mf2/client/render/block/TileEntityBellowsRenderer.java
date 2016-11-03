@@ -28,6 +28,29 @@ public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer
 		this.renderModelAt(tile, i, d, d1, d2, f);
     }
     
+    public void renderInvModel(double d, double d1, double d2, float f) 
+    {
+		int j = 90;
+
+        model.rotate(0);
+    	bindTextureByName("textures/models/tileentity/bellows.png"); //texture
+        
+        GL11.glPushMatrix(); //start
+        float scale = 1.0F;
+        float yOffset = 1.525F;
+        GL11.glTranslatef((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); //size
+        GL11.glRotatef(j, 0.0F, 1.0F, 0.0F); //rotate based on metadata
+        GL11.glScalef(scale, -scale, -scale); //if you read this comment out this line and you can see what happens
+        GL11.glPushMatrix();
+        float level = 0F;
+        model.renderModel(0, 0.0625F); 
+        
+        GL11.glPopMatrix();
+        GL11.glColor3f(255, 255, 255);
+        GL11.glPopMatrix(); //end
+
+    }
+    
 	public void renderModelAt(TileEntityBellows tile, int meta, double d, double d1, double d2, float f) 
     {
 		int i = meta;

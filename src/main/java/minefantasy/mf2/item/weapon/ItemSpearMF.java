@@ -39,6 +39,12 @@ public class ItemSpearMF extends ItemWeaponMF implements IExtendedReachWeapon
 	}
     
     @Override
+	public boolean isHeavyWeapon()
+	{
+		return true;
+	}
+    
+    @Override
 	public boolean isOffhandHandDual(ItemStack off) 
     {
 		return false;
@@ -181,7 +187,7 @@ public class ItemSpearMF extends ItemWeaponMF implements IExtendedReachWeapon
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return spearRatio;
+		return piercingDamage;
 	}
 	@Override
 	public boolean canCounter()

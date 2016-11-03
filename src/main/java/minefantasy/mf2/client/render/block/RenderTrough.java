@@ -1,5 +1,9 @@
 package minefantasy.mf2.client.render.block;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.decor.BlockTrough;
 import minefantasy.mf2.block.tileentity.decor.TileEntityTrough;
 import net.minecraft.block.Block;
@@ -7,20 +11,17 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 public class RenderTrough implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityTroughRenderer invModel = new TileEntityTroughRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(block == null || !(block instanceof BlockTrough))return;
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockTrough forge = (BlockTrough)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityTrough(), 0.0D, 0.0D, 0.0D, 0.0F);
+		BlockTrough trough = (BlockTrough)block;
+		invModel.renderInvModel(trough.getFullTexName(), CustomMaterial.getMaterial("refinedWood"), 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

@@ -12,11 +12,12 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderFirepit implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityFirepitRenderer invModel = new TileEntityFirepitRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityFirepit(), 0.0D, 0.0D, 0.0D, 0.0F);
+		invModel.renderInvModel(0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

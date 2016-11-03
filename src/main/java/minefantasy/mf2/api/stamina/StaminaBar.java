@@ -47,7 +47,7 @@ public class StaminaBar
 	 * The decay modifier before being scaled by difficulty
 	 */
 	public static float decayModifierCfg = 1.0F;
-	public static float decayModifierBase = 0.75F;
+	public static float decayModifierBase = 0.5F;
 	public static float configRegenModifier = 1.0F;
 	public static float pauseModifier = 1.0F;
 	public static float configArmourWeightModifier = 1.0F;
@@ -490,14 +490,14 @@ public class StaminaBar
 					armourMod += (((IWornStaminaItem)armour.getItem()).getDecayModifier(user, armour));
 				}
 			}
-			float min = 0F;
-			float max = 50F;
-			float mass = ArmourCalculator.getTotalWeightOfWorn(user, false);
+			float min = ArmourCalculator.encumberanceArray[0];
+			float max = ArmourCalculator.encumberanceArray[1];
+			float mass = ArmourCalculator.getTotalWeightOfWorn(user, false) - min;
 			
-			if(mass > 0)
+			if(mass > 0F)
 			{
 				float modifiers = AM * configArmourWeightModifier* armourWeightModifier;
-				armourMod += (mass/100F);
+				armourMod += ( (mass+min) / max);
 			}
 			value *= armourMod;
 		}
@@ -518,12 +518,12 @@ public class StaminaBar
 					armourMod += ((IWornStaminaItem)armour.getItem()).getDecayModifier(user, armour);
 				}
 			}
-			float min = 0F;
-			float max = 50F;
+			float min = ArmourCalculator.encumberanceArray[0];
+			float max = ArmourCalculator.encumberanceArray[1];
 			float mass = ArmourCalculator.getTotalWeightOfWorn(user, false)-min;
 			if(mass > 0)
 			{
-				value *= (1+(mass/max*configArmourWeightModifier*(armourWeightModifierClimbing-1)));
+				value *= (1+( (min+mass) / max * configArmourWeightModifier*(armourWeightModifierClimbing-1)));
 			}
 			value *= armourMod;
 		}
@@ -545,7 +545,7 @@ public class StaminaBar
 			}
 			if(countArmour)
 			{
-				float AM = 0F;
+				float AM = 1.0F;
 				if(user instanceof EntityPlayer)
 				{
 					AM = getPerkArmModifier(value, (EntityPlayer)user);
@@ -563,7 +563,9 @@ public class StaminaBar
 				float weightMod = ArmourCalculator.getTotalWeightOfWorn(user, false)*bulkModifier*configBulk;
 				if(weightMod > 0)
 				{
-					value /= (1.0F+(weightMod/30F * AM));//30kg = half regen speed 60kg is a third
+					float min = ArmourCalculator.encumberanceArray[0];
+					float max = ArmourCalculator.encumberanceArray[1];
+					value /= (1.0F+( (min+weightMod) / (max/2) * AM * 0.5F));
 				}
 				value *= armourMod;
 			}

@@ -79,7 +79,7 @@ public class ItemMaceMF extends ItemWeaponMF
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return maceRatio;
+		return crushingDamage;
 	}
 	/**
 	 * gets the time after being hit your guard will be let down

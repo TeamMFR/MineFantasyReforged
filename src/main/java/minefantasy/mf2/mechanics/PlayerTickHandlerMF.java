@@ -83,11 +83,6 @@ public class PlayerTickHandlerMF
         		}
         	}
         	*/
-        	//CLIENT
-        	if(event.player.worldObj.isRemote)
-        	{
-        		playSounds(event.player);
-        	}
         	//DRAGON EVENT
         	if(!event.player.worldObj.isRemote)
         	{
@@ -268,10 +263,6 @@ public class PlayerTickHandlerMF
 		return true;
 	}
 
-	private void playSounds(EntityPlayer user)
-	{
-	}
-	
 	private void applyBalance(EntityPlayer entityPlayer) 
 	{
         float weight = 2.0F;
@@ -346,38 +337,38 @@ public class PlayerTickHandlerMF
 	public static int getDragonTier(EntityPlayer player)
 	{
 		int kills = getDragonEnemyPoints(player);
-		if(kills < 10)
+		if(kills < 5)
 		{
 			return 0;//Young 100%
 		}
-		if(kills < 20)
+		if(kills < 10)
 		{
-			if(rand.nextInt(3) == 0)return 1;//33% chance for Adult
-			return 0;//Young
-		}
-		if(kills < 35)
-		{
-			if(rand.nextInt(3) == 0)return 0;//33% chance for Young
+			if(rand.nextInt(5) == 0)return 0;//20% chance for Young
 			return 1;//Adult
 		}
-		if(kills < 50)
+		if(kills < 15)
 		{
 			if(rand.nextInt(10) == 0)return 0;//10% chance for Young
+			return 1;//Adult
+		}
+		if(kills < 25)
+		{
+			if(rand.nextInt(20) == 0)return 0;//5% chance for Young
 			if(rand.nextInt(10) == 0)return 2;//10% chance for Mature
 			return 1;//Adult
 		}
-		if(kills < 60)
+		if(kills < 35)
 		{
 			if(rand.nextInt(4) == 0)return 2;//25% chance for Mature
 			return 1;//Adult
 		}
-		if(kills >= 70)
+		if(kills >= 50)
 		{
 			if(rand.nextInt(10) == 0)return 1;//10% chance for Adult
 			if(rand.nextInt(5) == 0)return 3;//20% chance Elder
 			return 2;//Mature
 		}
-		if(kills > 100)
+		if(kills > 75)
 		{
 			if(rand.nextInt(100) == 0)return 4;//1% chance Ancient
 			if(rand.nextInt(2) == 0)return 3;//50% chance Elder
@@ -418,7 +409,7 @@ public class PlayerTickHandlerMF
 	{
 		if(StaminaBar.isSystemActive)
 		{
-			StaminaBar.modifyStaminaValue(player, 500F);
+			StaminaBar.setStaminaValue(player, StaminaBar.getBaseMaxStamina(player));
 		}
 		if(player.getEntityData().hasKey(chunkCoords + "_x"))
 		{
@@ -428,10 +419,8 @@ public class PlayerTickHandlerMF
 	
 	private void tryResetBed(EntityPlayer player)
 	{
-		boolean t = false;
 		if(player.getEntityData().hasKey(resetBed))
 		{
-			t = true;
 			player.getEntityData().removeTag(resetBed);
 			resetBedPosition(player);
 		}
@@ -450,6 +439,7 @@ public class PlayerTickHandlerMF
 	{
 		if(player.getEntityData().hasKey(chunkCoords + "_x"))
 		{
+			MFLogUtil.logDebug("Reset bed data for " + player.getCommandSenderName());
 			int x = player.getEntityData().getInteger(chunkCoords + "_x");
 			int y = player.getEntityData().getInteger(chunkCoords + "_y");
 			int z = player.getEntityData().getInteger(chunkCoords + "_z");

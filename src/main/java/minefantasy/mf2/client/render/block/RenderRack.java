@@ -3,6 +3,7 @@ package minefantasy.mf2.client.render.block;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.decor.BlockTrough;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
@@ -13,14 +14,15 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderRack implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityRackRenderer invModel = new TileEntityRackRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(block == null || !(block instanceof BlockRack))return;
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockRack forge = (BlockRack)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityRack(), 0.0D, 0.0D, 0.0D, 0.0F);
+		BlockRack rack = (BlockRack)block;
+		invModel.renderInvModel(CustomMaterial.getMaterial("refinedWood"), rack.getFullTexName(), 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

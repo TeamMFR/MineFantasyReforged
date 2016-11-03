@@ -87,7 +87,7 @@ public class ItemWarhammerMF extends ItemHeavyWeaponMF
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return hammerRatio;
+		return crushingDamage;
 	}
 	/**
 	 * gets the time after being hit your guard will be let down

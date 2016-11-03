@@ -12,6 +12,7 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderTanningRack implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityTanningRackRenderer invModel = new TileEntityTanningRackRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(!(block instanceof BlockTanningRack))return;
@@ -19,7 +20,7 @@ public class RenderTanningRack implements ISimpleBlockRenderingHandler
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 		BlockTanningRack rack = (BlockTanningRack)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityTanningRack(rack.tier, rack.tex), 0.0D, 0.0D, 0.0D, 0.0F);
+		invModel.renderInvModel(rack.tex, rack.tex.equalsIgnoreCase("metal"), 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

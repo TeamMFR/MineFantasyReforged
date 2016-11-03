@@ -173,7 +173,7 @@ public class ItemWaraxeMF extends ItemWeaponMF
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return waraxeRatio;
+		return hackingDamage;
 	}
 	@Override
 	public float getPenetrationLevel(Object implement)
@@ -206,7 +206,7 @@ public class ItemWaraxeMF extends ItemWeaponMF
 	@Override
 	public float[] getCounterRatio()
 	{
-		return spearRatio;
+		return piercingDamage;
 	}
 	@Override
 	public float getCounterDamage()

@@ -13,14 +13,15 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderBloomery implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityBloomeryRenderer invModel = new TileEntityBloomeryRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(block == null || !(block instanceof BlockBloomery))return;
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockBloomery forge = (BlockBloomery)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityBloomery(), 0.0D, 0.0D, 0.0D, 0.0F);
+		BlockBloomery bloomery = (BlockBloomery)block;
+		invModel.renderInvModel("bloomery_basic", 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

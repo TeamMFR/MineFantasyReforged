@@ -2,12 +2,17 @@ package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
+import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.material.WoodMaterial;
+import minefantasy.mf2.mechanics.worldGen.structure.LootTypes;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ChestGenHooks;
 
 public class StructureGenDSRoomSml2 extends StructureModuleMF
 {
@@ -178,11 +183,21 @@ public class StructureGenDSRoomSml2 extends StructureModuleMF
 		placeBlock(Blocks.stone_brick_stairs, this.getStairDirection(direction), -(width-1), 1, 3);
 		
 		
-		placeBlock(BlockListMF.crate_basic, rotateLeft(), width-3, 1, 7);
-		TileEntityAmmoBox crate = (TileEntityAmmoBox)this.getTileEntity(width-3, 1, 7, direction);
-		if(crate != null)
-		{
-			crate.setMaterial(WoodMaterial.getMaterial("ScrapWood"));
-		}
+		placeChest(width-3, 1, 7, rotateLeft(), LootTypes.DWARVEN_HOME_RICH);
+	}
+	private void placeChest(int x, int y, int z, int d, String loot)
+	{
+		placeBlock(Blocks.chest, d, x, y, z);
+        TileEntityChest tile = (TileEntityChest)getTileEntity(x, y, z, direction);
+
+        if (tile != null)
+        {
+            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(loot, rand), tile, 2+rand.nextInt(3));
+            if(rand.nextInt(10) == 0)
+            {
+	            int slot = rand.nextInt(tile.getSizeInventory());
+	            tile.setInventorySlotContents(slot, ChestGenHooks.getOneItem(ItemArtefact.DWARVEN, rand));
+            }
+        }
 	}
 }

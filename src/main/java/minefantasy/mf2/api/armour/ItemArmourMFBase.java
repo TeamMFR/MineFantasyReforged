@@ -138,7 +138,7 @@ public class ItemArmourMFBase extends ItemArmor implements ISpecialArmor, IArmou
 	
 	private float getACForBurn() 
 	{
-		return armourWeight >= ArmourCalculator.ACArray[1] ? 0.1F : armourWeight >= ArmourCalculator.ACArray[0] ? 0.05F : 0F;
+		return armourWeight >= ArmourCalculator.encumberanceArray[1] ? 0.1F : armourWeight >= ArmourCalculator.encumberanceArray[0] ? 0.05F : 0F;
 	}
 	public float getUnblockableResistance(ItemStack item, DamageSource source)
 	{

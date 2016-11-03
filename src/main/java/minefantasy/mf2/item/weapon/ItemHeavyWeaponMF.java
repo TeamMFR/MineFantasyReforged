@@ -28,6 +28,11 @@ public abstract class ItemHeavyWeaponMF extends ItemWeaponMF implements IExtende
 	}
 
 	@Override
+	public boolean isHeavyWeapon()
+	{
+		return true;
+	}
+	@Override
 	public boolean isOffhandHandDual(ItemStack off)
 	{
 		return false;
@@ -84,7 +89,7 @@ public abstract class ItemHeavyWeaponMF extends ItemWeaponMF implements IExtende
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return heavyRatio;
+		return hvySlashingDamage;
 	}
 	@Override
 	public float getParryStaminaDecay(DamageSource source, ItemStack weapon)

@@ -56,8 +56,8 @@ public class BaseMaterialMF
 		leatherapron = addArmourSpecificMaterial("LeatherApron",  0, 10 ,       1.5F,        0,        0.50F, 0);
 		hide =  addArmourSpecificMaterial("Hide",   	     	   0, 100 ,     1.5F,        0,        1.00F, 0);
 		rough = addArmourSpecificMaterial("RoughLeather",    	   0, 150 ,     1.5F,        1,        1.00F, 0);
-		reinforced = addArmourSpecificMaterial("StrongLeather",   1, 250,       2.3F,        1,        1.00F, 5);
-		padding =  addArmourSpecificMaterial("Padded",   	       1, 100 ,     2.3F,        0,        0.50F, 5);
+		reinforced = addArmourSpecificMaterial("StrongLeather",   1, 250,       2.0F,        1,        1.00F, 5);
+		padding =  addArmourSpecificMaterial("Padded",   	       1, 200 ,     2.0F,        0,        1.00F, 5);
 		studded = addArmourSpecificMaterial("StudLeather",        1, 500,       2.5F,        5,        1.20F, 15);
 		scaled = addArmourSpecificMaterial("ScaleLeather",        2, 1000,      2.8F,        8,        1.50F, 25);
 		dragonscale = addArmourSpecificMaterial("Dragonscale",    3, 3000,      5F,        20,       1.20F, 85).setRarity(2);

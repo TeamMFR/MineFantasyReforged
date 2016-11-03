@@ -465,7 +465,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 
         if (tile != null)
         {
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(loot, rand), tile, 5+rand.nextInt(10));
+            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(loot, rand), tile, 5+rand.nextInt(5));
             if(rand.nextInt(5) == 0)
             {
 	            int slot = rand.nextInt(tile.getSizeInventory());

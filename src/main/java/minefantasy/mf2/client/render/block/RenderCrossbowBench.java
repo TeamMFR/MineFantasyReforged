@@ -1,6 +1,8 @@
 package minefantasy.mf2.client.render.block;
 
-import minefantasy.mf2.block.crafting.BlockCrossbowBench;
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import minefantasy.mf2.block.crafting.BlockCrossbowBench;
 import minefantasy.mf2.block.tileentity.TileEntityCrossbowBench;
 import net.minecraft.block.Block;
@@ -8,17 +10,14 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 public class RenderCrossbowBench implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityCrossbowBenchRenderer invModel = new TileEntityCrossbowBenchRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCrossbowBench(), 0.0D, 0.0D, 0.0D, 0.0F);
+		invModel.renderModelAt("carpenter_crossbow", 0, 0F, 0F, 0F, 0F, 0);
 		GL11.glPopMatrix();
 	}
 

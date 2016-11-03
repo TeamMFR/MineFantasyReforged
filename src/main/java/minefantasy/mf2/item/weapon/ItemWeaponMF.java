@@ -44,6 +44,7 @@ import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import mods.battlegear2.api.weapons.IExtendedReachWeapon;
 import mods.battlegear2.api.weapons.IHitTimeModifier;
 import mods.battlegear2.api.weapons.IPenetrateWeapon;
+import mods.battlegear2.api.weapons.WeaponRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -121,6 +122,14 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 		if(material == ToolMaterial.WOOD)
 		{
 			baseDamage = 0F;
+		}
+		if(isHeavyWeapon())
+		{
+			WeaponRegistry.addTwoHanded(new ItemStack(this));
+		}
+		else
+		{
+			WeaponRegistry.addDualWeapon(new ItemStack(this));
 		}
 	}
 	
@@ -249,9 +258,14 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 	@Override
 	public boolean sheatheOnBack(ItemStack item)
 	{
+		return isHeavyWeapon();
+	}
+	
+	public boolean isHeavyWeapon()
+	{
 		return false;
 	}
-
+	
 	@Override
 	public boolean isOffhandHandDual(ItemStack off)
 	{
@@ -419,7 +433,7 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 	@Override
 	public float getStaminaDrainOnHit(EntityLivingBase user, ItemStack item)
 	{
-		return 5F * getStaminaMod() * getWeightModifier(item);
+		return 2F * getStaminaMod() * getWeightModifier(item);
 	}
 
 	protected float getStaminaMod() 
@@ -587,16 +601,15 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 		return getWeaponRatio(implement);
 	}
 	
-	protected float[] swordRatio = new float[]{1F, 0F, 0F};
-	protected float[] maceRatio = new float[]{0F, 1F, 0F};
-	protected float[] hammerRatio = new float[]{0F, 1F, 0F};
+	protected float[] slashingDamage = new float[]{1F, 0F, 0F};
+	protected float[] crushingDamage = new float[]{0F, 1F, 0F};
 	
-	protected float[] waraxeRatio = new float[]{4F, 1F, 0F};
-	protected float[] battleaxeRatio = new float[]{3F, 1F, 0F};
+	protected float[] hackingDamage = new float[]{4F, 1F, 0F};
+	protected float[] hvyHackingDamage = new float[]{3F, 1F, 0F};
 	
-	protected float[] spearRatio = new float[]{0F, 0F, 1F};
-	protected float[] lanceRatio = new float[]{0F, 1F, 9F};
-	protected float[] heavyRatio = new float[]{9F, 1F, 0F};
+	protected float[] piercingDamage = new float[]{0F, 0F, 1F};
+	protected float[] hvyPiercingDamage = new float[]{0F, 1F, 9F};
+	protected float[] hvySlashingDamage = new float[]{9F, 1F, 0F};
 	private float	materialWeight  = 1.0F;
 	
 	protected static int speedModHeavy = 5;
@@ -923,5 +936,6 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 	public boolean isSpecialRender(ItemStack item) {
 		return false;
 	}
+	
 	public String designType = "standard";
 }

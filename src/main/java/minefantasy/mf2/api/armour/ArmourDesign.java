@@ -15,20 +15,20 @@ public class ArmourDesign
 	public static HashMap<String, ArmourDesign>designs = new HashMap<String, ArmourDesign>();
 	//                                                            Reg         Name        Prot     Dura    Weight   Bulk                  Ctg    Bnt  Png
 	public static final ArmourDesign CLOTH = new ArmourDesign(   "clothing", "Clothing",  1.0F,    1.0F,    0F,     0.25F).calibrateTraits(0.5F, 1.0F,  0.5F).setWeightGroup(light);//Weak
-	public static final ArmourDesign LEATHER = new ArmourDesign( "leather",  "Leather",   1.0F,    1.0F,   10F,     0.25F).calibrateTraits(0.7F, 1.0F, 0.5F).setWeightGroup(light);//Slightly better blunt
-	public static final ArmourDesign PADDING = new ArmourDesign( "padding",  "Padding",   1.0F,    1.0F,   12F,     1.00F).calibrateTraits(0.7F, 1.2F, 0.5F).setWeightGroup(light);//Blunt resistent
 	public static final ArmourDesign SOLID = new ArmourDesign(   "default",  "Basic",     1.0F,    1.0F,   40F,     1.00F).setWeightGroup(medium);//Basic Armour
 	public static final ArmourDesign MAIL = new ArmourDesign(    "mail",     "Mail",      1.0F,    1.0F,   35F,     0.75F).calibrateTraits(1.0F, 0.7F, 0.9F).setWeightGroup(medium);//Vulnerable to blunt
 	public static final ArmourDesign PLATE = new ArmourDesign(   "plate",    "Plate",     1.5F,    1.0F,   60F,     1.00F).calibrateTraits(1.0F, 1.0F, 0.6F).setWeightGroup(heavy);//Vulnerable to piercing
 	
 	//LIGHT ARMOUR
-	public static final ArmourDesign STUDDED = new ArmourDesign("studded", "Studded",    	   0.8F, 1.0F, 8F , 0.25F).calibrateTraits(0.85F, 1.0F, 0.9F).setWeightGroup(light);//20kg, Vulnerable to blunt
+	public static final ArmourDesign LEATHER = new ArmourDesign( "leather",  "Leather",   	   1.0F, 1.0F, 10F,     0.25F).calibrateTraits(0.7F, 1.0F, 0.5F).setWeightGroup(light);//Slightly better blunt
+	public static final ArmourDesign PADDING = new ArmourDesign( "padding",  "Padding",   	   1.0F, 1.0F, 10F,     1.00F).calibrateTraits(0.6F, 1.2F, 0.4F).setWeightGroup(light);//10kg, Blunt resistent
+	public static final ArmourDesign STUDDED = new ArmourDesign("studded", "Studded",    	   0.8F, 1.0F, 10F , 0.25F).calibrateTraits(0.85F, 1.0F, 0.9F).setWeightGroup(light);//10kg, Vulnerable to blunt
 	//MEDIUM ARMOUR
-	public static final ArmourDesign SCALEMAIL = new ArmourDesign("scalemail", "Scalemail",    1.0F, 1.0F, 12F, 0.30F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(medium);//30kg, Average
-	public static final ArmourDesign CHAINMAIL = new ArmourDesign("chainmail",  "Chainmail",   1.0F, 1.0F, 12F, 0.65F).calibrateTraits(1.20F, 0.60F, 1.20F).setWeightGroup(medium);//30kg, Less blunt more piercing
+	public static final ArmourDesign SCALEMAIL = new ArmourDesign("scalemail", "Scalemail",    1.0F, 1.0F, 8F, 0.30F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(medium);//20kg, Average
+	public static final ArmourDesign CHAINMAIL = new ArmourDesign("chainmail",  "Chainmail",   1.0F, 1.0F, 8F, 0.65F).calibrateTraits(1.20F, 0.60F, 1.20F).setWeightGroup(medium);//20kg, Less blunt more piercing
 	//HEAVY ARMOUR
-	public static final ArmourDesign SPLINTMAIL = new ArmourDesign("splintmail","Splintmail",  1.2F, 1.0F, 20F, 0.75F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);//50kg, Average
-	public static final ArmourDesign FIELDPLATE = new ArmourDesign("fieldplate", "Fieldplate", 1.2F, 1.0F, 24F, 1.00F).calibrateTraits(1.25F, 1.25F, 1.00F).setWeightGroup(heavy);//60kg, Vulnerable to piercing
+	public static final ArmourDesign SPLINTMAIL = new ArmourDesign("splintmail","Splintmail",  1.2F, 1.0F, 12F, 0.75F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);//30kg, Average
+	public static final ArmourDesign FIELDPLATE = new ArmourDesign("fieldplate", "Fieldplate", 1.2F, 1.0F, 16F, 1.00F).calibrateTraits(1.25F, 1.25F, 1.00F).setWeightGroup(heavy);//40kg, Vulnerable to piercing
 	
 	public static final ArmourDesign COGWORK = new ArmourDesign("cogwork",   "Cogwork",   	   3.0F, 5.0F, 48F, 2.00F).calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);//120kg, Massive Protection
 	//ArmourCalculator

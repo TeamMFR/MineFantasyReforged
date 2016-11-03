@@ -1,5 +1,8 @@
 package minefantasy.mf2.client.render.block;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import minefantasy.mf2.block.crafting.BlockCarpenter;
 import minefantasy.mf2.block.tileentity.TileEntityCarpenterMF;
 import net.minecraft.block.Block;
@@ -7,17 +10,14 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 public class RenderCarpenter implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityCarpenterRenderer invModel = new TileEntityCarpenterRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityCarpenterMF(0), 0.0D, 0.0D, 0.0D, 0.0F);
+		invModel.renderModelAt("carpenter", 0, 0F, 0F, 0F, 0F, 0);
 		GL11.glPopMatrix();
 	}
 

@@ -46,7 +46,7 @@ public class ItemLance extends ItemSpearMF
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return lanceRatio;
+		return hvyPiercingDamage;
 	}
 	
 	@Override

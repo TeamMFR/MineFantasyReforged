@@ -13,6 +13,8 @@ import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -268,9 +270,9 @@ public class ForgedArmourRecipes
 		KnowledgeListMF.plateHelmetR.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_helmet.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			"RMR",
+			" R ",
 			"PHP",
-			"RMR",
+			" R ",
 			
 			'M', mail,
 			'R', rivet,
@@ -281,9 +283,8 @@ public class ForgedArmourRecipes
 		KnowledgeListMF.plateChestR.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_chest.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			"RPMPR",
-			"RMCMR",
-			" RPR ",
+			"RP PR",
+			"RPCPR",
 			
 			'M', mail,
 			'R', rivet,
@@ -295,7 +296,7 @@ public class ForgedArmourRecipes
 		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_legs.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
 			"RPLPR",
-			"RM MR",
+			"RP PR",
 			
 			'M', mail,
 			'R', rivet,
@@ -306,9 +307,8 @@ public class ForgedArmourRecipes
 		KnowledgeListMF.plateBootsR.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_boots.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			" P ",
-			"RBR",
-			" M ",
+			"R R",
+			"PBP",
 			
 			'M', mail,
 			'R', rivet,
@@ -318,16 +318,16 @@ public class ForgedArmourRecipes
 		
 		
 		Salvage.addSalvage(CustomArmourListMF.standard_plate_helmet.construct(material.name),helm,
-				mail, mail, plate, plate,//2 Mail, 2 Plate
-				rivet, rivet, rivet, rivet);//4 Rivet
+				plate, plate,//2 Plate
+				rivet, rivet);// Rivet
 		Salvage.addSalvage(CustomArmourListMF.standard_plate_chest.construct(material.name),chest,
-				mail, mail, mail, plate, plate, plate,//3 Mail, 3 Plate
-				rivet, rivet, rivet, rivet, rivet, rivet);// 6 Rivet
+				plate, plate, plate, plate,//4 Plate
+				rivet, rivet, rivet, rivet);// 4 Rivet
 		Salvage.addSalvage(CustomArmourListMF.standard_plate_legs.construct(material.name),legs,
-				mail, mail, plate, plate,//2 Mail, 2 Plate
+				plate, plate, plate, plate,//4 Plate
 				rivet, rivet, rivet, rivet);//4 Rivet
 		Salvage.addSalvage(CustomArmourListMF.standard_plate_boots.construct(material.name),boots,
-				mail, plate,//1 Mail, 1 Plate
+				plate, plate,//2 Plate
 				rivet, rivet);//2 Rivet
 	}
 	
@@ -424,9 +424,12 @@ public class ForgedArmourRecipes
 		KnowledgeListMF.plateRecipes.add(
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.plate.createComm(material.name), "smelt"+material.name, true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
+			"FF",
 			"II",
+			'F', ComponentListMF.flux,
 			'I', ingot
 		}));
+		
 		Salvage.addSalvage(ComponentListMF.plate.createComm(material.name), salvage, salvage);
 	}
 }

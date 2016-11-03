@@ -62,7 +62,7 @@ public class ModelBloomery extends ModelBase
     base.render(f);
     body.render(f);
     
-    if(bloomery.hasBloom)
+    if(bloomery != null && bloomery.hasBloom)
     {
     	bloom.render(f);
     }

@@ -119,7 +119,11 @@ public class ModelForge extends ModelBase
 
 	public void renderModel(TileEntityForge forge, float f, boolean hasFuel, float height)
 	{
-		boolean[] sides = forge.showSides();
+		boolean[] sides = new boolean[]{true, true, true, true};
+		if(forge != null)
+		{
+			sides = forge.showSides();
+		}
 
 		if (sides[0])
 			front.render(f);

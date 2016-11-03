@@ -27,6 +27,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -486,10 +487,28 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 		{
 			return super.getArmorModel(entityLiving, itemStack, armorSlot);
 		}
-		
 		if(entityLiving != null)
 		{
 			model.heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
+			model.aimedBow = false;
+			if(entityLiving instanceof EntityPlayer)
+			{
+				EntityPlayer player = (EntityPlayer)entityLiving;
+				ItemStack held = player.getHeldItem();
+				if (held != null && player.getItemInUseCount() > 0)
+		        {
+		            EnumAction enumaction = held.getItemUseAction();
+		            
+		            if (enumaction == EnumAction.block)
+		            {
+		                model.heldItemRight = 3;
+		            }
+		            else if (enumaction == EnumAction.bow)
+		            {
+		                model.aimedBow = true;
+		            }
+		        }
+			}
 		}
 		model.bipedHead.showModel = (this.armorType == 0);
 		model.bipedHeadwear.showModel = (this.armorType == 0);

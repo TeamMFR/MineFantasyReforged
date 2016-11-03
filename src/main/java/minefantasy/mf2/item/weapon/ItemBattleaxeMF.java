@@ -168,7 +168,7 @@ public class ItemBattleaxeMF extends ItemHeavyWeaponMF
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return battleaxeRatio;
+		return hvyHackingDamage;
 	}
 	@Override
 	public float getPenetrationLevel(Object implement)
@@ -203,7 +203,7 @@ public class ItemBattleaxeMF extends ItemHeavyWeaponMF
 	@Override
 	public float[] getCounterRatio()
 	{
-		return maceRatio;
+		return crushingDamage;
 	}
 	@Override
 	public float getCounterDamage()

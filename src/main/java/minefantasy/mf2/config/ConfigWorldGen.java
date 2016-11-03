@@ -258,8 +258,8 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		
 		structureTickRate = Integer.parseInt(config.get(structure, "Generation Tick rate", 1, "How many ticks (1/20seconds) for each section to generate").getString());
 		MFChance = Float.parseFloat(config.get(ancientForge, "Spawn Chance", 1.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
-		MAChance = Float.parseFloat(config.get(ancientAlter, "Spawn Chance", 5.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
-		DSChance = Float.parseFloat(config.get(dwarvenSH, "Spawn Chance", 5.0E-3D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
+		MAChance = Float.parseFloat(config.get(ancientAlter, "Spawn Chance", 1.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
+		DSChance = Float.parseFloat(config.get(dwarvenSH, "Spawn Chance", 1.0E-3D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
 	}
 
 }

@@ -13,11 +13,12 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderBombBench implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityBombBenchRenderer invModel = new TileEntityBombBenchRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityBombBench(), 0.0D, 0.0D, 0.0D, 0.0F);
+		invModel.renderModelAt("carpenter_bomb", 0, 0F, 0F, 0F, 0F, 0);
 		GL11.glPopMatrix();
 	}
 

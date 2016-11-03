@@ -264,7 +264,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 	
 	public void onInventoryChanged()
 	{
-		MFLogUtil.logDebug("Anvil: Control Inv Tick");
 		if(!resetRecipe)
 		{
 			updateCraftingData();

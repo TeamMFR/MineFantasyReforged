@@ -230,7 +230,6 @@ public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICa
 	
 	public void onInventoryChanged()
 	{
-		MFLogUtil.logDebug("Carpenter: Control Inv Tick");
 		if(!resetRecipe)
 		{
 			updateCraftingData();

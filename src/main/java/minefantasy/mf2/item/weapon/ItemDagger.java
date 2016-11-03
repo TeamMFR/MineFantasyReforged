@@ -119,7 +119,12 @@ public class ItemDagger extends ItemWeaponMF
 	@Override
 	public float[] getCounterRatio()
 	{
-		return spearRatio;
+		return piercingDamage;
+	}
+	@Override
+	protected float[] getWeaponRatio(ItemStack implement)
+	{
+		return piercingDamage;
 	}
 	@Override
 	public float getCounterDamage()

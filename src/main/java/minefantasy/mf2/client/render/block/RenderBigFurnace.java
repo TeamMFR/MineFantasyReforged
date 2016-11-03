@@ -1,5 +1,8 @@
 package minefantasy.mf2.client.render.block;
 
+import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import minefantasy.mf2.block.refining.BlockBigFurnace;
 import minefantasy.mf2.block.tileentity.TileEntityBigFurnace;
 import net.minecraft.block.Block;
@@ -7,20 +10,17 @@ import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.world.IBlockAccess;
 
-import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
-
 public class RenderBigFurnace implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityBigFurnaceRenderer invModel = new TileEntityBigFurnaceRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(block == null || !(block instanceof BlockBigFurnace))return;
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockBigFurnace forge = (BlockBigFurnace)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityBigFurnace().setBlockType(block), 0.0D, 0.0D, 0.0D, 0.0F);
+		BlockBigFurnace furnace = (BlockBigFurnace)block;
+		invModel.renderInvModel(furnace.isHeater, furnace.isHeater ? "furnace_heater" : "furnace_rock", 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

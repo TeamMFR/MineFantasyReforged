@@ -13,14 +13,15 @@ import net.minecraft.world.IBlockAccess;
 
 public class RenderAmmoBox implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityAmmoBoxRenderer invModel = new TileEntityAmmoBoxRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		if(block == null || !(block instanceof BlockAmmoBox))return;
 		
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockAmmoBox forge = (BlockAmmoBox)block;
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityAmmoBox(forge.getFullTexName(), CustomMaterial.getMaterial("RefinedWood"), forge.storageType), 0.0D, 0.0D, 0.0D, 0.0F);
+		BlockAmmoBox box = (BlockAmmoBox)block;
+		invModel.renderInvModel(box.getFullTexName(), box.storageType, CustomMaterial.getMaterial("refinedWood"), 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

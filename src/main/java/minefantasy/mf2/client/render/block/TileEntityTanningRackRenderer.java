@@ -6,12 +6,15 @@ import minefantasy.mf2.block.tileentity.TileEntityTanningRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -77,6 +80,39 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer
 
     }
     
+    public void renderInvModel(String tex, boolean isAuto, double d, double d1, double d2, float f) {
+        int j = 90;
+        bindTextureByName("textures/models/tileentity/tanner"+tex+".png"); 
+        GL11.glPushMatrix();
+        GL11.glTranslatef((float) d + 0.5F, (float) d1+1.45F, (float) d2 + 0.5F);
+        GL11.glRotatef(j, 0.0F, 1.0F, 0.0F);
+        GL11.glScalef(1.0F, -1F, -1F); 
+    	if(isAuto)
+    	{
+    		engmodel.renderModel(0.0625F);
+    		GL11.glPushMatrix();
+    		engmodel.renderBlade(0.0625F);
+    		GL11.glPopMatrix();
+    		engmodel.renderLever(0.0625F);
+    	}
+    	else
+    	{
+    		model.renderModel(0.0625F);
+    	}
+        GL11.glPopMatrix();
+        
+
+    }
+    @Override
+	protected void bindTexture(ResourceLocation p_147499_1_)
+	{
+	    TextureManager texturemanager = TileEntityRendererDispatcher.instance.field_147553_e;
+
+	    if (texturemanager != null)
+	    {
+	        texturemanager.bindTexture(p_147499_1_);
+	    }
+	}
     private void bindTextureByName(String image)
     {
     	bindTexture(TextureHelperMF.getResource(image));

@@ -13,11 +13,12 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 
 public class RenderResearch implements ISimpleBlockRenderingHandler 
 {
+	private static final TileEntityResearchRenderer invModel = new TileEntityResearchRenderer();
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(new TileEntityResearch(), 0.0D, 0.0D, 0.0D, 0.0F);
+		invModel.renderModelAt("researchTable", 0, 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 

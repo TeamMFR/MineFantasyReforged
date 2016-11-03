@@ -149,7 +149,7 @@ public class ItemKatanaMF extends ItemHeavyWeaponMF
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return swordRatio;
+		return slashingDamage;
 	}
 	
 	@Override
@@ -160,7 +160,7 @@ public class ItemKatanaMF extends ItemHeavyWeaponMF
 	@Override
 	public float[] getCounterRatio()
 	{
-		return spearRatio;
+		return piercingDamage;
 	}
 	@Override
 	public float getCounterDamage()

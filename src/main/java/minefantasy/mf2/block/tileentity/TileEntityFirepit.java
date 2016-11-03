@@ -16,6 +16,7 @@ import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.network.packet.FirepitPacket;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
@@ -89,7 +90,8 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
 			{
 				if(worldObj.getBlock(xCoord, yCoord, zCoord) != BlockListMF.firepit)
 				{
-					System.out.println("No Block");
+					worldObj.removeTileEntity(xCoord, yCoord, zCoord);
+					MFLogUtil.logWarn("Firepit missing block");
 				}
 			}
 		}

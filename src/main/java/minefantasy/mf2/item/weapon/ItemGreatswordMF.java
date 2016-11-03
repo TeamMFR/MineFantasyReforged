@@ -125,7 +125,7 @@ public class ItemGreatswordMF extends ItemHeavyWeaponMF
 	@Override
 	public float[] getCounterRatio()
 	{
-		return maceRatio;
+		return crushingDamage;
 	}
 	@Override
 	public float getCounterDamage()

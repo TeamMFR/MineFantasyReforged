@@ -88,14 +88,14 @@ public class ItemHalbeardMF extends ItemSpearMF
 	{
 		if(user.isSprinting())
 		{
-			return spearRatio;
+			return piercingDamage;
 		}
 		return getWeaponRatio(implement);
 	}
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement)
 	{
-		return battleaxeRatio;
+		return hvyHackingDamage;
 	}
 	
 	@Override
