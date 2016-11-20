@@ -257,9 +257,9 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		ebonyMaxRain = Float.parseFloat(config.get(ebony, "Ebony Tree Spawn Rain Max", 1.0D, "The maximum biome rainfall ebony can spawn").getString());
 		
 		structureTickRate = Integer.parseInt(config.get(structure, "Generation Tick rate", 1, "How many ticks (1/20seconds) for each section to generate").getString());
-		MFChance = Float.parseFloat(config.get(ancientForge, "Spawn Chance", 1.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
+		MFChance = Float.parseFloat(config.get(ancientForge, "Spawn Chance", 1.5E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
 		MAChance = Float.parseFloat(config.get(ancientAlter, "Spawn Chance", 1.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
-		DSChance = Float.parseFloat(config.get(dwarvenSH, "Spawn Chance", 1.0E-3D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
+		DSChance = Float.parseFloat(config.get(dwarvenSH, "Spawn Chance", 3.0E-3D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
 	}
 
 }

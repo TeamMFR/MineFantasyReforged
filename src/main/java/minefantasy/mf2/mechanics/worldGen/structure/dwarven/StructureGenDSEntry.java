@@ -100,8 +100,8 @@ public class StructureGenDSEntry extends StructureModuleMF
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -1);
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -2);
 		
-		this.lengthId = 12;
-		this.deviationCount = 4;
+		this.lengthId = 10;
+		this.deviationCount = 3;
 		mapStructure(0, 0, depth, StructureGenDSStairs.class);
 	}
 	

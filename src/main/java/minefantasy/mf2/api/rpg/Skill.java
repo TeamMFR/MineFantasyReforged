@@ -82,7 +82,6 @@ public class Skill
 		}
 		value += xp;
 		skill.setInteger("xp", value);
-		System.out.println("XP: " + value + " / " + max);
 		
 		if(value >= max)
 		{

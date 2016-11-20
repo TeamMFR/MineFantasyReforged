@@ -12,7 +12,6 @@ import minefantasy.mf2.api.armour.ItemArmourMFBase;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
-import minefantasy.mf2.client.render.armour.ModelFullplate;
 import minefantasy.mf2.config.ConfigClient;
 import minefantasy.mf2.item.list.ArmourListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
@@ -38,7 +37,7 @@ import net.minecraft.util.IIcon;
 public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistance
 {
 	@SideOnly(Side.CLIENT)
-	private static ModelBiped fullplate = new ModelFullplate(1.0F);
+	private static Object fullplate;
 	
 	private int itemRarity;
 	protected BaseMaterialMF baseMaterial;
@@ -482,8 +481,17 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 	@SideOnly(Side.CLIENT)
     public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
     {
-		ModelBiped model = this.design == ArmourDesign.FIELDPLATE ?  fullplate : null;
-		if( !(entityLiving instanceof EntityPlayer) || armorType >= 2 || model == null || !ConfigClient.customModel)
+		if( !(entityLiving instanceof EntityPlayer) || armorType >= 2 || !ConfigClient.customModel)
+		{
+			return super.getArmorModel(entityLiving, itemStack, armorSlot);
+		}
+		
+		if(fullplate == null)
+		{
+			fullplate = new minefantasy.mf2.client.render.armour.ModelFullplate(1.0F);
+		}
+		ModelBiped model = this.design == ArmourDesign.FIELDPLATE ?  (ModelBiped)fullplate : null;
+		if( model == null)
 		{
 			return super.getArmorModel(entityLiving, itemStack, armorSlot);
 		}

@@ -331,10 +331,10 @@ public class CarpenterRecipes
 			'W', Blocks.wool,
 			'S', ComponentListMF.thread,
 		});
-		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 0), ArmourListMF.armourItem(ArmourListMF.leather, 1, 0), new ItemStack(ComponentListMF.thread, 4), new ItemStack(Items.wheat, 3), Blocks.wool);
-		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 1), ArmourListMF.armourItem(ArmourListMF.leather, 1, 1), new ItemStack(ComponentListMF.thread, 4), new ItemStack(Items.wheat, 3), Blocks.wool);
-		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 2), ArmourListMF.armourItem(ArmourListMF.leather, 1, 2), new ItemStack(ComponentListMF.thread, 4), new ItemStack(Items.wheat, 3), Blocks.wool);
-		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 3), ArmourListMF.armourItem(ArmourListMF.leather, 1, 3), new ItemStack(ComponentListMF.thread, 4), new ItemStack(Items.wheat, 3), Blocks.wool);
+		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 0), ArmourListMF.armourItem(ArmourListMF.leather, 1, 0), new ItemStack(ComponentListMF.thread, 3), Blocks.wool);
+		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 1), ArmourListMF.armourItem(ArmourListMF.leather, 1, 1), new ItemStack(ComponentListMF.thread, 3), Blocks.wool);
+		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 2), ArmourListMF.armourItem(ArmourListMF.leather, 1, 2), new ItemStack(ComponentListMF.thread, 3), Blocks.wool);
+		Salvage.addSalvage(ArmourListMF.armourItem(ArmourListMF.leather, 4, 3), ArmourListMF.armourItem(ArmourListMF.leather, 1, 3), new ItemStack(ComponentListMF.thread, 3), Blocks.wool);
 				
 		KnowledgeListMF.repairBasicR =
 		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(BlockListMF.repair_basic), "repair_basic", sewing, "needle", 1, 20 , new Object[]

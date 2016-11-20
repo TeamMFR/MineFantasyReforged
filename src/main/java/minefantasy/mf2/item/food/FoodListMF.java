@@ -27,8 +27,6 @@ public class FoodListMF
 	public static Item generic_meat_mince_uncooked = (new ItemFoodMF("generic_meat_mince_uncooked", 2, 0.2F, true)).setContainerItem(ComponentListMF.clay_pot);
 	public static Item generic_meat_mince_cooked = (new ItemFoodMF("generic_meat_mince_cooked", 	5, 0.5F, true)).setContainerItem(ComponentListMF.clay_pot);
 	
-	public static Item tea_leaf = (new ItemFoodMF("tea_leaf", 1, 0F, false));
-	public static Item spice_mild = (new ItemFoodMF("spice_mild", 1, 0F, false)).setContainerItem(ComponentListMF.clay_pot);
 	public static Item flour = new ItemComponentMF("flour", 0).setCreativeTab(CreativeTabMF.tabFood).setContainerItem(ComponentListMF.clay_pot);
 	public static Item breadcrumbs = new ItemComponentMF("breadcrumbs", 0).setCreativeTab(CreativeTabMF.tabFood).setContainerItem(ComponentListMF.clay_pot);
 	public static Item guts = new ItemComponentMF("guts", 0).setCreativeTab(CreativeTabMF.tabFood);
@@ -43,7 +41,6 @@ public class FoodListMF
 	//T1 (basic mixing)
 	//Util: Roast, Prep Block (Stone-Bronze Age)
 	public static Item stew = (new ItemFoodMF("stew"    , 5, 1.0F,  false, 0)).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.bowl).setMaxStackSize(1);
-	public static Item salad = (new ItemFoodMF("salad"  , 5,  1.0F, false, 0)).setFoodStats(1, 0.0F, 1.0F, 0.0F).setReturnItem(Items.bowl).setMaxStackSize(1);
 	public static Item oats = (new ItemFoodMF("oats"    , 5,  1.0F, false, 0)).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.bowl).setMaxStackSize(1);
 	
 	//T2 (Basic baking, stone oven, processed mixing)

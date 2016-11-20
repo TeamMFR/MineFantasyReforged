@@ -1876,15 +1876,12 @@ item.pie_tray_uncooked.name=Clay Pie Tray
 item.flour.name=Flour
 item.sugarpot.name=Sugar Pot
 item.bread_uncooked.name=Uncooked Bread
-item.tea_leaf.name=Tea Leaf
-item.spice_mild.name=Mild Spice
 item.guts.name=Guts
 
 item.raw_bread.name=Bread Dough
 item.dough.name=Dough
 item.pastry.name=Pastry
 item.stew.name=Stew
-item.salad.name=Salad
 item.oats.name=Oats
 
 item.curds.name=Curds

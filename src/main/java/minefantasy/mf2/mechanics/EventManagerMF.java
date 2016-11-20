@@ -44,6 +44,7 @@ import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.network.packet.LevelupPacket;
 import minefantasy.mf2.network.packet.SkillPacket;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.entity.Entity;
@@ -331,7 +332,6 @@ public class EventManagerMF
     {
 		if(event.entity.isDead)
 		{
-			event.setCanceled(true);
 			return;
 		}
 		if(event.entity instanceof EntityItem && !(event.entity instanceof EntityItemUnbreakable))
@@ -345,8 +345,9 @@ public class EventManagerMF
 					event.world.spawnEntityInWorld(newEntity);
 					eitem.setDead();
 				}
-				if(eitem.getEntityItem().getUnlocalizedName().contains("dragon"))
+				if(isDragonforge(eitem.getEntityItem()))
 				{
+					MFLogUtil.logDebug("Found dragon heart");
 					EntityItem newEntity = new EntityItemUnbreakable(event.world, eitem);
 					event.world.spawnEntityInWorld(newEntity);
 					eitem.setDead();
@@ -354,6 +355,11 @@ public class EventManagerMF
 			}
 		}
     }
+	private boolean isDragonforge(ItemStack itemstack) 
+	{
+		return itemstack.getItem() == ComponentListMF.dragon_heart;
+	}
+
 	public void alterDrops(EntityLivingBase dropper, LivingDropsEvent event)
 	{
 		ArrayList<ItemStack> meats = new ArrayList<ItemStack>();

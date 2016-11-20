@@ -189,6 +189,7 @@ public class ItemLootSack extends Item
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.emerald), 1, 2, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.ender_pearl), 1, 2, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.talisman_lesser), 1, 4, 10));
+		addRecords(loot, 2);		
 		
 		loot = EXQUISITE; //Many books, Highly sought commodities
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 2, 5, 5));
@@ -205,5 +206,23 @@ public class ItemLootSack extends Item
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.ingots[18]), 1, 4, 20));//Wolframite
 		
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.golden_apple, 1, 1), 1, 1, 10));
+		addRecords(loot, 5);
+		
+	}
+
+	private static void addRecords(String loot, int rarity)
+	{
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_11), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_13), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_blocks), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_cat), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_chirp), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_far), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_mall), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_mellohi), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_stal), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_strad), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_wait), 1, 1, rarity));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_ward), 1, 1, rarity));
 	}
 }

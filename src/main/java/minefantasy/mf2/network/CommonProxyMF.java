@@ -145,7 +145,6 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler
 	{
 		AmmoMechanicsMF.addHandler(new ArrowFireFlint());
 		AmmoMechanicsMF.addHandler(new ArrowFirerMF());
-		EntityListMF.register();
 		registerTileEntities();
 		SmokeMechanics.handler = this;
 	}
@@ -215,6 +214,8 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler
 		}
 	}
 
-	public void postInit() {
+	public void postInit()
+	{
+		EntityListMF.register();
 	}
 }

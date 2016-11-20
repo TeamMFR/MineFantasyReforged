@@ -148,10 +148,6 @@ public class EntityItemUnbreakable extends EntityItem
     }
 	private boolean isBreakable() 
 	{
-		if(getEntityItem() != null)
-		{
-			return getEntityItem().getUnlocalizedName().contains("dragon");
-		}
 		return false;
 	}
 	private void searchForOtherItemsNearby()

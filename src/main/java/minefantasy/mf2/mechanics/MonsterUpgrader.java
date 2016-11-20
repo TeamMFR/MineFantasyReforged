@@ -90,11 +90,11 @@ public class MonsterUpgrader
 						}
 					}
 				}
-				if(rand.nextFloat()*(zombieKnightChance*ConfigHardcore.zombieWepChance) < diff)
+				if(rand.nextFloat()*(zombieKnightChance) < diff)
 				{
 					createZombieKnight((EntityZombie)mob);
 				}
-				else if(rand.nextFloat()*(zombieBruteChance*ConfigHardcore.zombieWepChance) < diff)
+				else if(rand.nextFloat()*(zombieBruteChance) < diff)
 				{
 					createZombieBrute((EntityZombie)mob);
 				}
@@ -108,14 +108,14 @@ public class MonsterUpgrader
 		{
 			if(mob.riddenByEntity == null)
 			{
-				if(rand.nextFloat()*(witchRiderChance*ConfigHardcore.zombieWepChance) < diff)
+				if(rand.nextFloat()*(witchRiderChance) < diff)
 				{
 					EntityWitch rider = new EntityWitch(mob.worldObj);
 					rider.setPosition(mob.posX, mob.posY, mob.posZ);
 					mob.worldObj.spawnEntityInWorld(rider);
 					rider.mountEntity(mob);
 				}
-				else if(rand.nextFloat()*(creeperJockeyChance*ConfigHardcore.zombieWepChance) < diff)
+				else if(rand.nextFloat()*(creeperJockeyChance) < diff)
 				{
 					EntityCreeper rider = new EntityCreeper(mob.worldObj);
 					rider.setPosition(mob.posX, mob.posY, mob.posZ);

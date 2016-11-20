@@ -487,7 +487,7 @@ public class CombatMechanics
 				{
 					onWeaponHit(user, weapon, target, damage);
 				}
-				if(RPGElements.isSystemActive && user instanceof EntityPlayer )
+				if(RPGElements.isSystemActive && user instanceof EntityPlayer && !user.worldObj.isRemote)
 				{
 					SkillList.combat.addXP((EntityPlayer)user, (int)(damage/5F));
 				}

@@ -81,8 +81,8 @@ public class BlockListMF
 	public static Block oreClay = new BlockOreMF("oreClay", 0, 0, Items.clay_ball, 1, 4, 1, Material.ground).setHardness(0.5F).setStepSound(Block.soundTypeGravel);
 	public static Block oreCoalRich = new BlockOreMF("oreCoalRich", 2, 1, Items.coal, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
 	
-	public static Block mud_brick = new BasicBlockMF("mud_brick", Material.ground).setHardness(1.0F).setResistance(0.5F).setStepSound(Block.soundTypePiston);
-	public static Block mud_pavement = new BasicBlockMF("mud_pavement", Material.ground).setHardness(0.5F).setStepSound(Block.soundTypePiston);
+	public static Block mud_brick = new BasicBlockMF("mud_brick", Material.ground).setHardness(1.0F).setResistance(0.5F);
+	public static Block mud_pavement = new BasicBlockMF("mud_pavement", Material.ground).setHardness(0.5F);
 	
 	public static Block cobble_brick = new BasicBlockMF("cobble_brick", Material.rock).setHardness(2.5F).setResistance(12.0F).setStepSound(Block.soundTypePiston);
 	public static Block cobble_pavement = new BasicBlockMF("cobble_pavement", Material.rock).setHardness(2.0F).setResistance(10.0F).setStepSound(Block.soundTypePiston);

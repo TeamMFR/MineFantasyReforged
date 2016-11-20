@@ -17,7 +17,7 @@ import minefantasy.mf2.material.BaseMaterialMF;
 public class ItemClothingMF extends ItemArmourMF
 {
 	@SideOnly(Side.CLIENT)
-	private ModelBiped model = new ModelBiped(0.25F);
+	private Object model;
 	/**
 	 * @param piece 0head, 1body, 2legs, 3boots
 	 */
@@ -46,12 +46,16 @@ public class ItemClothingMF extends ItemArmourMF
 		{
 			return super.getArmorModel(entityLiving, itemStack, armorSlot);
 		}
+		if(model == null)
+		{
+			model = new ModelBiped(0.25F);
+		}
 		
 		if(entityLiving != null)
 		{
-			model.heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
+			((ModelBiped)model).heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
 		}
-        return model;
+        return (ModelBiped)model;
     }
 	
 }
