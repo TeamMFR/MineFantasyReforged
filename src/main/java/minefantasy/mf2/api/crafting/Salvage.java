@@ -63,10 +63,10 @@ public class Salvage
     	float chanceModifier = 1.25F;//80% Succcess rate
     	float chance = dropRate*durability;//Modifier for skill and durability
     	
-    	return dropItems(user, entryList, chanceModifier, chance);
+    	return dropItems(item, user, entryList, chanceModifier, chance);
     }
 
-	private static List<ItemStack> dropItems(EntityPlayer user, Object[] entryList, float chanceModifier, float chance) 
+	private static List<ItemStack> dropItems(ItemStack mainItem, EntityPlayer user, Object[] entryList, float chanceModifier, float chance) 
 	{
 		List<ItemStack>items = new ArrayList<ItemStack>();
 		for(Object entry : entryList)
@@ -75,22 +75,22 @@ public class Salvage
 			{
 	    		if(entry instanceof Item && random.nextFloat()*chanceModifier < chance)
 	    		{
-	    			items = dropItemStack(user, items, new ItemStack((Item)entry), chanceModifier, chance);
+	    			items = dropItemStack(mainItem, user, items, new ItemStack((Item)entry), chanceModifier, chance);
 	    		}
 	    		if(entry instanceof Block && random.nextFloat()*chanceModifier < chance)
 	    		{
-	    			items = dropItemStack(user, items, new ItemStack((Block)entry), chanceModifier, chance);
+	    			items = dropItemStack(mainItem, user, items, new ItemStack((Block)entry), chanceModifier, chance);
 	    		}
 	    		if(entry instanceof ItemStack)
 	    		{
-	    			items = dropItemStack(user, items, (ItemStack)entry, chanceModifier, chance);
+	    			items = dropItemStack(mainItem, user, items, (ItemStack)entry, chanceModifier, chance);
 	    		}
 			}
     	}
 		return items;
 	}
 	
-	private static List<ItemStack> dropItemStack(EntityPlayer user, List<ItemStack>items, ItemStack entry, float chanceModifier, float chance) 
+	private static List<ItemStack> dropItemStack(ItemStack mainItem, EntityPlayer user, List<ItemStack>items, ItemStack entry, float chanceModifier, float chance) 
 	{
 		for(int a = 0; a < entry.stackSize; a++)
 		{
@@ -106,6 +106,7 @@ public class Salvage
 				{
 					ItemStack newitem = entry.copy();
 					newitem.stackSize = 1;
+					newitem = CustomToolHelper.tryDeconstruct(newitem, mainItem);
 					items.add(newitem);
 				}
 			}
@@ -127,7 +128,13 @@ public class Salvage
 		{
 			return specific;
 		}
-		return salvageList.get(CustomToolHelper.getReferenceName(item, "any"));
+		Object[] specific2 = salvageList.get(CustomToolHelper.getReferenceName(item, "any"));
+		if(specific2 != null)
+		{
+			return specific2;
+		}
+		
+		return salvageList.get(CustomToolHelper.getReferenceName(item, "any", false));
     }
 	private static boolean doesMatch(ItemStack item1, ItemStack item2)
     {

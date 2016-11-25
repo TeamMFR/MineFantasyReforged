@@ -260,5 +260,21 @@
     "sounds": [
         "blocks/furnace_close"
       ]
+    },
+	
+	"entity.cogwork.idle": {
+    "category": "neutral",
+    "sounds": [
+        "entity/cogwork_idle0",
+		"entity/cogwork_idle1",
+		"entity/cogwork_idle2"
+      ]
+    },
+	
+	"entity.cogwork.toot": {
+    "category": "neutral",
+    "sounds": [
+        "entity/cogwork_toot"
+      ]
     }
 }

@@ -8,8 +8,6 @@ import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.rpg.Skill;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -66,7 +64,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe
      * Used to check if a recipe matches current crafting inventory
      */
     @Override
-	public boolean matches(InventoryCrafting par1InventoryCrafting)
+	public boolean matches(AnvilCraftMatrix matrix)
     {
         ArrayList var2 = new ArrayList(this.recipeItems);
 
@@ -74,7 +72,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe
         {
             for (int var4 = 0; var4 <= globalHeight; ++var4)
             {
-                ItemStack inputItem = par1InventoryCrafting.getStackInRowAndColumn(var4, var3);
+                ItemStack inputItem = matrix.getStackInRowAndColumn(var4, var3);
 
                 if (inputItem != null)
                 {
@@ -150,7 +148,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe
      * Returns an Item that is the result of this recipe
      */
     @Override
-	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+	public ItemStack getCraftingResult(AnvilCraftMatrix par1AnvilCraftMatrix)
     {
         return this.recipeOutput.copy();
     }
@@ -205,5 +203,11 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe
 	public Skill getSkill() 
 	{
 		return skillUsed;
+	}
+
+	@Override
+	public boolean useCustomTiers() 
+	{
+		return false;
 	}
 }

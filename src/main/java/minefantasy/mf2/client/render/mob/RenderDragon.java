@@ -20,6 +20,7 @@ public class RenderDragon extends RenderLiving
 	private static ModelBase dragonModel = new ModelDragon();
 	private static ModelBase venomModel = new ModelVenomDragon();
 	private static ModelBase frostModel = new ModelFrostDragon();
+	private static ModelBase ashModel = new ModelAshDragon();
 	public RenderDragon(float shadow)
     {
         super(dragonModel, shadow);
@@ -43,7 +44,7 @@ public class RenderDragon extends RenderLiving
     public void doRender(EntityLiving entity, double x, double y, double z, float f, float f1)
     {
     	String breed = ((EntityDragon)entity).getType().breedName;
-    	this.mainModel = breed.equalsIgnoreCase("white") ? frostModel : breed.equalsIgnoreCase("green") ? venomModel : dragonModel;
+    	this.mainModel = breed.equalsIgnoreCase("ash") ? ashModel : breed.equalsIgnoreCase("white") ? frostModel : breed.equalsIgnoreCase("green") ? venomModel : dragonModel;
     	super.doRender(entity, x, y, z, f, 1);
     	BossStatus.setBossStatus((EntityDragon)entity, ((EntityDragon)entity).getType().tier == 4);
     }

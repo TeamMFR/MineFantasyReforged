@@ -3,6 +3,7 @@ package minefantasy.mf2.api.crafting.anvil;
 import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +14,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author AnonymousProductions
  *
  */
-public class ShapedAnvilRecipes implements IAnvilRecipe
+public class CustomToolRecipe implements IAnvilRecipe
 {
     /** How many horizontal slots this recipe is wide. */
 	public int recipeWidth;
@@ -39,7 +40,7 @@ public class ShapedAnvilRecipes implements IAnvilRecipe
 	public final String research;
 	public final Skill skillUsed;
 
-    public ShapedAnvilRecipes(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvi, float exp, boolean hot, String research, Skill skill)
+    public CustomToolRecipe(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvi, float exp, boolean hot, String research, Skill skill)
     {
     	this.outputHot = hot;
         this.recipeWidth = wdth;
@@ -106,6 +107,8 @@ public class ShapedAnvilRecipes implements IAnvilRecipe
      */
     protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b)
     {
+    	String wood = null;
+    	String metal = null;
         for (int var5 = 0; var5 < ShapelessAnvilRecipes.globalWidth; ++var5)
         {
             for (int var6 = 0; var6 < ShapelessAnvilRecipes.globalHeight; ++var6)
@@ -130,6 +133,38 @@ public class ShapedAnvilRecipes implements IAnvilRecipe
 
                 if (inputItem != null || recipeItem != null)
                 {
+                	String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
+                	String component_metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
+               
+                	if(component_metal != null)//CHECK CUSTOM METAL
+                	{
+                		if(metal == null)
+                		{
+                			metal = component_metal;
+                		}
+                		else
+                		{
+                			if(!metal.equalsIgnoreCase(component_metal))
+                			{
+                				return false;
+                			}
+                		}
+                	}
+                	
+                	if(component_wood != null)//CHECK CUSTOM WOOD
+                	{
+                		if(wood == null)
+                		{
+                			wood = component_wood;
+                		}
+                		else
+                		{
+                			if(!wood.equalsIgnoreCase(component_wood))
+                			{
+                				return false;
+                			}
+                		}
+                	}
                 	//HEATING
                 	if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) 
                 	{
@@ -167,11 +202,26 @@ public class ShapedAnvilRecipes implements IAnvilRecipe
                 }
             }
         }
-
+    	if(!modifyTiers(matrix, metal))
+    	{
+    		modifyTiers(matrix, wood);
+    	}
+        
         return true;
     }
 
-    protected ItemStack getHotItem(ItemStack item) 
+    private boolean modifyTiers(AnvilCraftMatrix matrix, String tier) 
+    {
+    	CustomMaterial material = CustomMaterial.getMaterial(tier);
+    	if(material != null)
+    	{
+    		matrix.modifyTier(material.crafterTier, material.crafterAnvilTier, (int)(recipeTime * material.craftTimeModifier));
+    		return true;
+    	}
+    	return false;
+	}
+
+	protected ItemStack getHotItem(ItemStack item) 
     {
     	if(item == null)return null;
     	if(!(item.getItem() instanceof IHotItem))
@@ -201,7 +251,26 @@ public class ShapedAnvilRecipes implements IAnvilRecipe
     @Override
 	public ItemStack getCraftingResult(AnvilCraftMatrix matrix)
     {
-        return recipeOutput.copy();
+        ItemStack result = recipeOutput.copy();
+        String wood = null;
+        String metal = null;
+        for(int i = 0; i < matrix.getSizeInventory(); i++)
+        {
+        	ItemStack item = matrix.getStackInSlot(i);
+        	String component_wood = CustomToolHelper.getComponentMaterial(item, "wood");
+        	String component_metal = CustomToolHelper.getComponentMaterial(item, "metal");
+        	if(wood == null && component_wood != null){wood = component_wood;}
+        	if(metal == null && component_metal != null){metal = component_metal;}
+        }
+        if(metal != null)
+        {
+        	CustomMaterial.addMaterial(result, CustomToolHelper.slot_main, metal);
+        }
+        if(wood != null)
+        {
+        	CustomMaterial.addMaterial(result, CustomToolHelper.slot_haft, wood);
+        }
+        return result;
     }
 
     /**
@@ -240,10 +309,10 @@ public class ShapedAnvilRecipes implements IAnvilRecipe
 	{
 		return skillUsed;
 	}
-
+	
 	@Override
-	public boolean useCustomTiers()
+	public boolean useCustomTiers() 
 	{
-		return false;
+		return true;
 	}
 }

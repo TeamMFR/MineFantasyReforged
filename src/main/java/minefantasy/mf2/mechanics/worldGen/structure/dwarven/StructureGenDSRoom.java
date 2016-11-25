@@ -1,12 +1,17 @@
 package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import minefantasy.mf2.item.ItemArtefact;
+import minefantasy.mf2.item.gadget.ItemBomb;
+import minefantasy.mf2.item.gadget.ItemMine;
+import minefantasy.mf2.material.WoodMaterial;
 import minefantasy.mf2.mechanics.worldGen.structure.LootTypes;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -300,6 +305,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		tryPlaceMinorRoom(-width_span, 0, zOffset, rotateRight());
 		tryPlaceMinorRoom(-width_span, 0, depth-zOffset, rotateRight());
+		this.placeSpawner(0, 1, depth-5);
 	}
 	public void generateStudy()
 	{
@@ -333,6 +339,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 			placeBlock(Blocks.double_stone_slab, 0, -1+x, 1, (int)Math.floor((float)depth/2)-1);
 			placeBlock(Blocks.double_stone_slab, 0, -1+x, 1, (int)Math.ceil((float)depth/2)+1);
 		}
+		this.placeSpawner(0, 1, depth/2, "Silverfish");
 	}
 	
 	public void generateArmoury()
@@ -373,9 +380,18 @@ public class StructureGenDSRoom extends StructureModuleMF
 				}
 			}
 		}
+		this.placeSpawner(0, 1, z, "CaveSpider");
+		this.placeBlock(Blocks.web, 0, -1, 1, z);
+		this.placeBlock(Blocks.web, 0, 1, 1, z);
+		this.placeBlock(Blocks.web, 0, 0, 2, z);
+		this.placeBlock(Blocks.web, 0, 1, 2, z);
+		this.placeBlock(Blocks.web, 0, -1, 2, z);
+		this.placeBlock(Blocks.web, 0, 0, 3, z);
+		this.placeBlock(Blocks.web, 0, 0, 1, z+1);
+		this.placeBlock(Blocks.web, 0, 0, 1, z-1);
+		
 		placeChest(-(width-2), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
 		placeChest(-(width-3), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
-		
 		placeChest((width-2), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
 		placeChest((width-3), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
 		
@@ -385,11 +401,25 @@ public class StructureGenDSRoom extends StructureModuleMF
 			{
 				if(getBlock(-(width-1), y, z1).getMaterial().isReplaceable())
 				{
-					placeBlock(Blocks.stone_slab, 3, -(width-1), y, z1);
+					if(y == 1 || y == 3)
+					{
+						placeAmmoBox(-(width-1), y, z1, rotateRight(), LootTypes.DWARVEN_AMMO);
+					}
+					else
+					{
+						placeBlock(Blocks.stone_slab, 11, -(width-1), y, z1);
+					}
 				}
 				if(getBlock((width-1), y, z1).getMaterial().isReplaceable())
 				{
-					placeBlock(Blocks.stone_slab, 3, (width-1), y, z1);
+					if(y == 1 || y == 3)
+					{
+						placeAmmoBox((width-1), y, z1, rotateLeft(), LootTypes.DWARVEN_AMMO);
+					}
+					else
+					{
+						placeBlock(Blocks.stone_slab, 11, (width-1), y, z1);
+					}
 				}
 			}
 		}
@@ -437,6 +467,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		placeMiscMachine1(-(width-2)*position, 0, depth-3);
 		placeMiscMachine1(-(width-2)*position, 0, 3);
+		this.placeSpawner(0, 1, depth/2);
 	}
 	
 	private void placeMiscMachine1(int x, int y, int z)
@@ -471,6 +502,24 @@ public class StructureGenDSRoom extends StructureModuleMF
 	            int slot = rand.nextInt(tile.getSizeInventory());
 	            tile.setInventorySlotContents(slot, ChestGenHooks.getOneItem(ItemArtefact.DWARVEN, rand));
             }
+        }
+	}
+	private void placeAmmoBox(int x, int y, int z, int d, String loot)
+	{
+		placeBlock(BlockListMF.ammo_box_basic, d, x, y, z);
+        TileEntityAmmoBox tile = (TileEntityAmmoBox)getTileEntity(x, y, z, direction);
+
+        if (tile != null)
+        {
+            ItemStack ammo = ChestGenHooks.getOneItem(loot, rand);
+            tile.setMaterial(WoodMaterial.getMaterial("RefinedWood"));
+            tile.ammo = ammo;
+            tile.stock = ammo.getMaxStackSize() * (rand.nextInt(2) + 1) + (ammo.stackSize > 1 ? rand.nextInt(ammo.stackSize) : 0);
+            if(ammo.getItem() instanceof ItemBomb || ammo.getItem() instanceof ItemMine)
+            {
+            	tile.stock = Math.max(1, tile.stock / 4);
+            }
+            ammo = null;
         }
 	}
 	protected void tryPlaceMinorRoom(int x, int y, int z, int d) 

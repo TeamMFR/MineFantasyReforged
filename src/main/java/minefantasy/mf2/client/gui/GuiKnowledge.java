@@ -130,7 +130,7 @@ public class GuiKnowledge extends GuiScreen
     		{
     			player.openGui(MineFantasyII.instance, 1, player.worldObj, 0, highlighted.ID, 0);
     		}
-    		else if(InformationBase.easyResearch && ResearchLogic.canPurchase(player, highlighted))
+    		else if(highlighted.isEasy() && ResearchLogic.canPurchase(player, highlighted))
     		{
     			selected = highlighted;
     			setPurchaseAvailable(player);

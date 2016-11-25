@@ -2,7 +2,6 @@ package minefantasy.mf2.config;
 
 import java.util.Arrays;
 
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.CustomArmourEntry;
 import minefantasy.mf2.api.armour.CustomDamageRatioEntry;
@@ -34,14 +33,15 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 		
 		String AAdesc = 
 		"This will register items under a certain 'Design' calculating the variables itself.\n Each entry has it's own line:\n" +
-		"Order itemid|Design|WeightModifier \n" +
+		"Order itemid|Design|WeightGroup|WeightModifier \n" +
 		"The WeightModifier alters the weight for heavier or lighter materials keep it at 1.0 unless you have a special material (like mithril and adamamantium)\n" +
 		"Designs can be any that are registered: MineFantasy designs are 'clothing', 'leather', 'mail', 'default'(that's just basic metal armour), and 'plate'\n" +
+		"WeightGroup refers to whether it is light medium or heavy armour \n" +
 		"EXAMPLE (This is what vanilla gold is registered under) \n" +
-		"314|default|2.0 \n"+
-		"315|default|2.0 \n"+
-		"316|default|2.0 \n"+
-		"317|default|2.0 \n"+
+		"minecraft:golden_helmet|default|medium|2.0 \n"+
+		"minecraft:golden_chestplate|default|medium|2.0 \n"+
+		"minecraft:golden_leggings|default|medium|2.0 \n"+
+		"minecraft:golden_boots|default|medium|2.0 \n"+
 		"The 2.0 means it is 2x heavier than other vanilla armours \n"+
 		"This does not override existing MF armours \n";
 		
@@ -65,8 +65,10 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 	    "Though mod-added armours have absolutely no support, and never can without being specifically coded to \n" +
 	    "MineFantasy armours will take these variables and function differently on the values. But weapon items can \n" +
 	    "be added to the list: Put each entry on it's own line set out like this: \n" +
-	    "id|cutting|blunt \n" +
-	    "id is the item id (you need to find it out yourself), cutting and blunt are the ratio. \n" +
+	    "id|cutting|pierce|blunt \n" +
+	    "id is the item id as a string (you need to find it out yourself), cutting and blunt are the ratio. \n" +
+	    "EXAMPLE (for example... making a stick to piercing damage) \n" +
+		"minecraft:stick|0|1.0|0 \n"+
 	    "The difference between the ratio is what determines damage 1|0 means 100% cutting damage, 3|1 means it's 3 cutting to 1 blunt (or 75%, 25%). use whatever numbers you need to make the ratio.";
 		
 	    customDamagerList = config.get(CATEGORY_WEPS, "Custom Damage Ratios", new String[0], damageDesc).getStringList();
@@ -115,7 +117,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 			MFLogUtil.logWarn("Could not define armour design '" + design + "' for item id: " + Item.getIdFromItem(piece));
 			return;
 		}
-		CustomArmourEntry.registerItem(piece, AC, weight);
+		CustomArmourEntry.registerItem(piece, AC, weight, AC.getGroup());
 	}
 
 	private static ArmourDesign getClassFor(String name)
@@ -132,8 +134,9 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 	{
 		String temp = "";
 		int phase = 0;
-		int id = 0;
+		String id = "";
 		ArmourDesign AD = null;
+		String weightGroup = "medium";
 		float weight = 1.0F;
 		for(int a = 0; a < config.length(); a ++)
 		{
@@ -145,7 +148,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 			{
 				if(phase == 0)
 				{
-					id = Integer.valueOf(temp);
+					id = temp;
 					temp = "";
 					phase ++;
 				}
@@ -161,14 +164,20 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 				}
 				else if(phase == 2)
 				{
+					weightGroup = temp;
+					temp = "";
+					phase ++;
+				}
+				else if(phase == 3)
+				{
 					weight = Float.valueOf(temp);
 					temp = "";
 					
-					Item piece = Item.getItemById(id);
+					Item piece = getItemFromString(id);
 					if(AD != null && piece != null)
 					{
-						CustomArmourEntry.registerItem(piece, AD, weight);
-						MFLogUtil.logDebug("Added Armour: " + piece.getUnlocalizedName() + " To " + AD.getName() + " modified weight is " + weight);
+						CustomArmourEntry.registerItem(piece, AD, weight, weightGroup);
+						MFLogUtil.logDebug("Added Armour: " + piece.getUnlocalizedName() + "(" + AD.getName() + ") To " + weightGroup + " armour category... Modified weight is " + weight);
 					}
 					phase = 0;
 				}
@@ -188,7 +197,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 	{
 		String temp = "";
 		int phase = 0;
-		int id = 0;
+		String id = "";
 		float eff = 6.0F;
 		
 		for(int a = 0; a < config.length(); a ++)
@@ -201,7 +210,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 			{
 				if(phase == 0)
 				{
-					id = Integer.valueOf(temp);
+					id = temp;
 					temp = "";
 					phase ++;
 				}
@@ -210,7 +219,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 					eff = Float.valueOf(temp);
 					temp = "";
 					
-					Item hoe = Item.getItemById(id);
+					Item hoe = getItemFromString(id);
 					if(hoe != null)
 					{
 						CustomHoeEntry.registerItem(hoe, eff);
@@ -233,9 +242,10 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 	{
 		String temp = "";
 		int phase = 0;
-		int id = 0;
+		String id = "";
 		float cut = 0;
 		float blunt = 0;
+		float pierce = 0;
 		
 		for(int a = 0; a < config.length(); a ++)
 		{
@@ -247,7 +257,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 			{
 				if(phase == 0)
 				{
-					id = Integer.valueOf(temp);
+					id = temp;
 					temp = "";
 					phase ++;
 				}
@@ -259,14 +269,20 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 				}
 				else if(phase == 2)
 				{
+					pierce = Float.valueOf(temp);
+					temp = "";
+					phase ++;
+				}
+				else if(phase == 3)
+				{
 					blunt = Float.valueOf(temp);
 					temp = "";
 					
-					Item weapon = Item.getItemById(id);
+					Item weapon = getItemFromString(id);
 					if(weapon != null)
 					{
-						CustomDamageRatioEntry.registerItem(weapon, new float[]{cut, blunt});
-						MFLogUtil.logDebug("Added Custom weapon: " + id + " With Ratio " + cut + ":" + blunt);
+						CustomDamageRatioEntry.registerItem(weapon, new float[]{cut, blunt, pierce});
+						MFLogUtil.logDebug("Added Custom weapon: " + id + " With Ratio " + cut + ":" + pierce + ":" + blunt);
 					}
 					phase = 0;
 				}
@@ -287,6 +303,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 		int phase = 0;
 		String id = "";
 		float cut = 0;
+		float pierce = 0;
 		float blunt = 0;
 		
 		for(int a = 0; a < config.length(); a ++)
@@ -311,11 +328,17 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 				}
 				else if(phase == 2)
 				{
+					pierce = Float.valueOf(temp);
+					temp = "";
+					phase ++;
+				}
+				else if(phase == 3)
+				{
 					blunt = Float.valueOf(temp);
 					temp = "";
 					
-					CustomDamageRatioEntry.registerEntity(id, new float[]{cut, blunt});
-					MFLogUtil.logDebug("Added Custom entity: " + id + " With Ratio " + cut + ":" + blunt);
+					CustomDamageRatioEntry.registerEntity(id, new float[]{cut, blunt, pierce});
+					MFLogUtil.logDebug("Added Custom entity: " + id + " With Ratio " + cut + ":" + pierce + ":" + blunt);
 					phase = 0;
 				}
 			}
@@ -327,5 +350,11 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 				}
 			}
 		}
+	}
+	
+	private static Item getItemFromString(String id)
+	{
+		Object object = Item.itemRegistry.getObject(id);
+		return object != null && object instanceof Item ? (Item)object : null;
 	}
 }

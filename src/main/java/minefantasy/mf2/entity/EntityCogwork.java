@@ -7,12 +7,13 @@ import minefantasy.mf2.api.armour.IPowerArmour;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.PowerArmour;
+import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
-import minefantasy.mf2.block.crafting.BlockCogwork;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigArmour;
 import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.network.ClientProxyMF;
 import minefantasy.mf2.network.packet.CogworkControlPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -32,6 +33,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.common.ForgeHooks;
 
 public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 {
@@ -133,6 +135,13 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         fuel = MathHelper.clamp_float(fuel, 0F, maxfuel);
         setFuel(fuel);
         
+      /*  if(isSprinting())
+        {
+        	if(riddenByEntity == null || this.getMoveForward() <= 0 || !isPowered())
+        	{
+        		setSprinting(false);
+        	}
+        }*/
         if(this.riddenByEntity != null)
         {
         	stepHeight = general_step_height;
@@ -200,13 +209,28 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         	this.prevRotationYawHead = this.prevRotationYaw;
         	this.swingProgress = this.swingProgressInt = 0;
         }
+        if(jumpTimer > 0)
+        {
+        	--jumpTimer;
+        }
         onPortalTick();
     }
 	
-	private float getFuelDecay() 
+	/**
+	 * Modifier for actions and fuel decay (weight of the suit)
+	 */
+	private float getFuelCost()
 	{
 		float mass = this.getWeight();
 		return mass/200F;
+	}
+	/**
+	 * Rate of constant fuel droppage
+	 * @return
+	 */
+	private float getFuelDecay() 
+	{
+		return getFuelCost() * (isSprinting() ? 3.0F : 1.0F);
 	}
 	private void damageBlock(Block block, int x, int y, int z, int blockMetadata)
 	{
@@ -261,15 +285,70 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 			float forward = ((EntityPlayer)riddenByEntity).moveForward;
 			float strafe = ((EntityPlayer)riddenByEntity).moveStrafing;
 			
-			if(riddenByEntity instanceof EntityClientPlayerMP && forward != forwardControl || strafe != strafeControl)
+			if(riddenByEntity instanceof EntityClientPlayerMP)
 			{
-				this.forwardControl = forward;
-				this.strafeControl = strafe;
-				((EntityClientPlayerMP)riddenByEntity).sendQueue.addToSendQueue(new CogworkControlPacket(this).generatePacket());
+				boolean jump = ClientProxyMF.isUserJumping(riddenByEntity);
+				if(jump != jumpControl || forward != forwardControl || strafe != strafeControl)
+				{
+					this.forwardControl = forward;
+					this.strafeControl = strafe;
+					this.jumpControl = jump;
+					
+					((EntityClientPlayerMP)riddenByEntity).sendQueue.addToSendQueue(new CogworkControlPacket(this).generatePacket());
+				}
 			}
 		}
+		if(ticksExisted % 100 == 0)
+		{
+			if(rand.nextInt(20) == 0)
+			{
+				this.playSound("minefantasy2:entity.cogwork.toot", 0.5F, 1.0F);
+			}
+			this.playSound("minefantasy2:entity.cogwork.idle", 0.5F, 0.75F + rand.nextFloat()*0.5F);
+		}
+	
+		if (!worldObj.isRemote)
+        {
+			if(this.jumpControl && jumpTimer == 0)
+			{
+				this.jumpTimer = 10;
+			}
+            if (!this.isInWater() && !this.handleLavaMovement())
+            {
+                if (this.onGround && jumpTimer == 5)
+                {
+                    this.jump();
+                }
+            }
+        }
 	}
+	protected void jump()
+    {
+		spendFuel(5F);
+		worldObj.playSoundEffect(posX, posY, posZ, "tile.piston.out", 2.0F, 1.0F);
+        this.motionY = 0.41999998688697815D;
+        if (this.isSprinting())
+        {
+            float f = this.rotationYaw * 0.017453292F;
+            this.motionX -= (double)(MathHelper.sin(f) * 0.2F);
+            this.motionZ += (double)(MathHelper.cos(f) * 0.2F);
+        }
+        this.isAirBorne = true;
+        ForgeHooks.onLivingJump(this);
+    }
+	
+	private void spendFuel(float cost) 
+	{
+		this.setFuel(Math.max(0F, getFuel() - cost*getFuelCost()) );
+	}
+	@Override
+	public boolean isSprinting()
+    {
+        return isPowered() && forwardControl > 0 && riddenByEntity != null && riddenByEntity.isSprinting();
+    }
 	private float forwardControl, strafeControl;
+	private boolean jumpControl;
+	private int jumpTimer = 0;
 	
 	public void setMoveForward(float f)
 	{
@@ -286,6 +365,14 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	public float getMoveStrafe()
 	{
 		return strafeControl;
+	}
+	public void setJumpControl(boolean b)
+	{
+		this.jumpControl = b;;
+	}
+	public boolean getJumpControl()
+	{
+		return jumpControl;
 	}
 	protected void applyEntityAttributes()
     {
@@ -309,7 +396,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	@Override
 	public double getMountedYOffset()
 	{
-		return 0.7D;
+		return 0.825D;
 	}
 	@Override
 	public boolean canBeCollidedWith()
@@ -551,6 +638,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         }
     }
 	
+	private float getSpeedModifier() 
+	{
+		return isSprinting() ? 2.0F : 1.0F;
+	}
 	public void moveCogwork(float p_70612_1_, float p_70612_2_)
     {
         double d0;
@@ -583,6 +674,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
             else
             {
                 f4 = this.jumpMovementFactor;
+            }
+            if(isSprinting())
+            {
+            	f4 *= 2.0F;
             }
 
             this.moveFlying(p_70612_1_, p_70612_2_, f4);
@@ -900,6 +995,21 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 		noMoveTime = 10;
         return newShockwave(x, y, z, power, false, grief);
     }
+	
+	@Override
+	protected void collideWithEntity(Entity hit)
+    {
+		super.collideWithEntity(hit);
+		if(!isSprinting() || !isPowered() || hit == riddenByEntity)
+		{
+			return;
+		}
+		this.playSound(this.getHurtSound(), this.getSoundVolume(), this.getSoundPitch());
+		float modifier = width*width*height / hit.width*hit.width*hit.height;//compare volume
+		float force = (float)Math.hypot(motionX, motionZ) * modifier;
+		TacticalManager.knockbackEntity(hit, this, force, force/4F);
+		hit.attackEntityFrom(DamageSource.causeMobDamage( (riddenByEntity != null && riddenByEntity instanceof EntityLivingBase) ? (EntityLivingBase)riddenByEntity : this), force);
+    }
 
     /**
      * returns a new explosion. Does initiation (at time of writing Explosion is not finished)
@@ -940,8 +1050,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 		}
 		return 0;
 	}
-    private static final float base_frame_weight = 120F;
-    public static final float base_armour_units = 64F;
+    private static final float base_frame_weight = 100F;
+    public static final float base_armour_units = 30F;
     
 	public float getWeight() 
 	{

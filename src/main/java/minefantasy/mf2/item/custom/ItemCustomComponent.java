@@ -8,6 +8,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.entity.EntityCogwork;
@@ -21,24 +22,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 
-public class ItemCustomComponent extends Item 
+public class ItemCustomComponent extends Item implements ITieredComponent
 {
 	@SideOnly(Side.CLIENT)
 	public IIcon baseTex;
 	private String name;
 	private float mass;
 	
-	public ItemCustomComponent(String name)
+	public ItemCustomComponent(String name, String type)
 	{
-		this(name, -1F);
+		this(name, -1F, type);
 	}
-	public ItemCustomComponent(String name, float mass)
+	public ItemCustomComponent(String name, float mass, String type)
 	{
 		this.name = name;
 		this.setCreativeTab(CreativeTabMF.tabMaterials);
 		GameRegistry.registerItem(this, "custom_"+name, MineFantasyII.MODID);
 		this.setUnlocalizedName(name);
 		this.mass=mass;
+		this.materialType = type;
 	}
 	private boolean canDamage = false;;
 	public ItemCustomComponent setCanDamage()
@@ -188,5 +190,11 @@ public class ItemCustomComponent extends Item
 		ItemStack item = new ItemStack(this, stack, damage);
 		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
 		return item;
+	}
+	private final String materialType;
+	@Override
+	public String getMaterialType(ItemStack item) 
+	{
+		return materialType;
 	}
 }

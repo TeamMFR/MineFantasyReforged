@@ -6,6 +6,7 @@ import cpw.mods.fml.common.network.ByteBufUtils;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
+import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.material.CustomMaterial;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -424,18 +425,25 @@ public class CustomToolHelper
 	}
 	public static String getReferenceName(ItemStack item, String dam) 
 	{
+		return getReferenceName(item, dam, true);
+	}
+	public static String getReferenceName(ItemStack item, String dam, boolean tiered) 
+	{
 		String reference = item.getUnlocalizedName().toLowerCase() + "_@" + dam;
 		
-		CustomMaterial base = getCustomPrimaryMaterial(item);
-		CustomMaterial haft = getCustomSecondaryMaterial(item);
-		
-		if(base != null)
+		if(tiered)
 		{
-			reference += "_"+base.name.toLowerCase();
-		}
-		if(haft != null)
-		{
-			reference += "_"+haft.name.toLowerCase();
+			CustomMaterial base = getCustomPrimaryMaterial(item);
+			CustomMaterial haft = getCustomSecondaryMaterial(item);
+			
+			if(base != null)
+			{
+				reference += "_"+base.name.toLowerCase();
+			}
+			if(haft != null)
+			{
+				reference += "_"+haft.name.toLowerCase();
+			}
 		}
 		
 		return reference;
@@ -506,6 +514,49 @@ public class CustomToolHelper
 		}
 		
 		return null;
+	}
+	
+	public static String getComponentMaterial(ItemStack item, String type)
+	{
+		if(type == null) return null;
+		
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
+		if(material != null)
+		{
+			return material.type.equalsIgnoreCase(type) ? material.name : null;
+		}
+		return null;
+	}
+	public static boolean hasAnyMaterial(ItemStack item) 
+	{
+		return getCustomPrimaryMaterial(item) != null || getCustomSecondaryMaterial(item) != null;
+	}
+	public static ItemStack tryDeconstruct(ItemStack newitem, ItemStack mainItem) 
+	{
+		String type = null;
+		if(newitem != null && newitem.getItem() instanceof ITieredComponent)
+		{
+			type = ((ITieredComponent)newitem.getItem()).getMaterialType(newitem);
+		}
+		
+		if(type != null)
+		{
+			CustomMaterial primary = CustomToolHelper.getCustomPrimaryMaterial(mainItem);
+			CustomMaterial secondary = CustomToolHelper.getCustomSecondaryMaterial(mainItem);
+			
+			if(primary != null && primary.type.equalsIgnoreCase(type))
+			{
+				CustomMaterial.addMaterial(newitem, slot_main, primary.name);
+			}
+			else
+			{
+				if(secondary != null && secondary.type.equalsIgnoreCase(type))
+				{
+					CustomMaterial.addMaterial(newitem, slot_main, secondary.name);
+				}
+			}
+		}
+		return newitem;
 	}
 	
 }

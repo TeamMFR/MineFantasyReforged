@@ -77,7 +77,7 @@ public class StructureGenAFRoom extends StructureModuleMF
 			int z = depth/2;
 			
 			placeChest(0, 1, depth-1, lootType);
-			placeSpawner(0, 1, z);
+			placeSpawner(0, 1, z, "Silverfish");
 			
 			for(int x2 = -1; x2 <= 1; x2++)
 			{
@@ -109,21 +109,6 @@ public class StructureGenAFRoom extends StructureModuleMF
         }
 	}
 	
-	private void placeSpawner(int x, int y, int z)
-	{
-		int[] coords = this.offsetPos(x, y, z, direction);
-		worldObj.setBlock(coords[0], coords[1], coords[2], Blocks.mob_spawner, 0, 2);
-        TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)worldObj.getTileEntity(coords[0], coords[1], coords[2]);
-
-        if (tileentitymobspawner != null)
-        {
-            tileentitymobspawner.func_145881_a().setEntityName("Silverfish");
-        }
-        else
-        {
-            System.err.println("Failed to fetch mob spawner entity at (" + coords[0] + ", " + coords[1] + ", " + coords[2] + ")");
-        }
-	}
 	private String lootType = ChestGenHooks.DUNGEON_CHEST;
 	public StructureModuleMF setLoot(String loot) 
 	{

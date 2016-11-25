@@ -1,5 +1,7 @@
 package minefantasy.mf2.network;
 
+import org.lwjgl.input.Keyboard;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -116,6 +118,7 @@ import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.mechanics.ExtendedReachMF;
 import minefantasy.mf2.mechanics.PlayerTickHandlerMF;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -363,5 +366,10 @@ public class ClientProxyMF extends CommonProxyMF
 		//GNOMISH
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.gnomish_saw, new RenderSaw());
 		*/
+	}
+
+	public static boolean isUserJumping(Entity user) 
+	{
+		return user == Minecraft.getMinecraft().thePlayer && Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
 	}
 }

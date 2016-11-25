@@ -177,6 +177,7 @@ public class RenderPowerArmour extends RendererLivingEntity
             {
             	GL11.glTranslatef(0F, -0.5F, 0F);
             }
+            GL11.glTranslatef(0F, -0.125F, 0F);
 
             GL11.glEnable(GL11.GL_ALPHA_TEST);
             this.mainModel.setLivingAnimations(entity, f7, f6, f1);

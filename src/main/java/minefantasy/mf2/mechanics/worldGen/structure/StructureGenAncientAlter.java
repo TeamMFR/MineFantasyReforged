@@ -76,7 +76,7 @@ public class StructureGenAncientAlter extends StructureModuleMF
 			
 			placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, y+1, z);
 			placeChest(0, y+2, z, lootType);
-			placeSpawner(0, y, z);
+			placeSpawner(0, y, z, "Enderman");
 		}
 	}
 	
@@ -110,21 +110,6 @@ public class StructureGenAncientAlter extends StructureModuleMF
         }
 	}
 	
-	private void placeSpawner(int x, int y, int z)
-	{
-		int[] coords = this.offsetPos(x, y, z, direction);
-		worldObj.setBlock(coords[0], coords[1], coords[2], Blocks.mob_spawner, 0, 2);
-        TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)worldObj.getTileEntity(coords[0], coords[1], coords[2]);
-
-        if (tileentitymobspawner != null)
-        {
-            tileentitymobspawner.func_145881_a().setEntityName("Enderman");
-        }
-        else
-        {
-            System.err.println("Failed to fetch mob spawner entity at (" + coords[0] + ", " + coords[1] + ", " + coords[2] + ")");
-        }
-	}
 	private String lootType = ChestGenHooks.DUNGEON_CHEST;
 	public StructureModuleMF setLoot(String loot) 
 	{

@@ -11,19 +11,22 @@ import net.minecraft.world.World;
 
 public class WorldGenStructures 
 {
-	public static void generate(Random seed, int chunkX, int chunkZ, World world) 
+	public static void generate(Random seed, int chunkX, int chunkZ, World world, int dimension) 
 	{
-		if(seed.nextFloat() < ConfigWorldGen.MFChance)
+		if(dimension == 0)
 		{
-			generateAncientForge(seed, chunkX, chunkZ, world);
-		}
-		if(seed.nextFloat() < ConfigWorldGen.MAChance)
-		{
-			generateAncientAlter(seed, chunkX, chunkZ, world);
-		}
-		if(seed.nextFloat() < ConfigWorldGen.DSChance)
-		{
-			generateDwarvenStronghold(seed, chunkX, chunkZ, world);
+			if(seed.nextFloat() < ConfigWorldGen.MFChance)
+			{
+				generateAncientForge(seed, chunkX, chunkZ, world);
+			}
+			if(seed.nextFloat() < ConfigWorldGen.MAChance)
+			{
+				generateAncientAlter(seed, chunkX, chunkZ, world);
+			}
+			if(seed.nextFloat() < ConfigWorldGen.DSChance)
+			{
+				generateDwarvenStronghold(seed, chunkX, chunkZ, world);
+			}
 		}
 	}
 	private static void generateAncientForge(Random seed, int chunkX, int chunkZ, World world) 

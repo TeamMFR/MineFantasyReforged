@@ -34,30 +34,30 @@ public class ForgedArmourRecipes
     		
     		for(ItemStack ingot: OreDictionary.getOres("ingot"+customMat.name))
     		{
-    			addMetalComponents(customMat, ingot);
+    			addIngotComponents(customMat, ingot);
     		}
-    		addMetalComponents(customMat);
-    		assembleChainmail(customMat);
-    		assembleScalemail(customMat);
-    		assembleSplintmail(customMat);
-    		assembleFieldplate(customMat);
-    		assembleCogPlating(customMat);
     	}
+		addMetalComponents();
+		assembleChainmail();
+		assembleScalemail();
+		assembleSplintmail();
+		assembleFieldplate();
+		assembleCogPlating();
 	}
 	
-	private static void assembleChainmail(CustomMaterial material)
+	private static void assembleChainmail()
 	{
 		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 2, 0);
 		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 2, 1);
 		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 2, 2);
 		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 2, 3);
 		
-		ItemStack mail = ComponentListMF.chainmesh.createComm(material.name);
+		Item mail = ComponentListMF.chainmesh;
 		Item rivet = ComponentListMF.rivet;
 		
 		int time = 20;
 		KnowledgeListMF.mailHelmetR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_chain_helmet.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_helmet), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RMR",
 			"MPM",
@@ -69,7 +69,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 30;
 		KnowledgeListMF.mailChestR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_chain_chest.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_chest), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RM MR",
 			"RMPMR",
@@ -81,7 +81,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.mailLegsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_chain_legs.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_legs), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RMPMR",
 			"RM MR",
@@ -92,7 +92,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 10;
 		KnowledgeListMF.mailBootsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_chain_boots.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_boots), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"R R",
 			"MPM",
@@ -101,33 +101,33 @@ public class ForgedArmourRecipes
 			'M', mail,
 			'P', new ItemStack(boots, 1, 0)
 		}));
-		Salvage.addSalvage(CustomArmourListMF.standard_chain_helmet.construct(material.name),helm,
+		Salvage.addSalvage(CustomArmourListMF.standard_chain_helmet,helm,
 				mail, mail, mail, mail,//4 Mail
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_chain_chest.construct(material.name),chest,
+		Salvage.addSalvage(CustomArmourListMF.standard_chain_chest,chest,
 				mail, mail, mail, mail, mail, mail,//6 Mail
 				rivet, rivet, rivet, rivet, rivet, rivet);// 6 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_chain_legs.construct(material.name),legs,
+		Salvage.addSalvage(CustomArmourListMF.standard_chain_legs,legs,
 				mail, mail, mail, mail,//4 Mail
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_chain_boots.construct(material.name),boots,
+		Salvage.addSalvage(CustomArmourListMF.standard_chain_boots,boots,
 				mail, mail,//2 Mail
 				rivet, rivet);//2 Rivet
 	}
 	
-	private static void assembleScalemail(CustomMaterial material)
+	private static void assembleScalemail()
 	{
 		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 2, 0);
 		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 2, 1);
 		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 2, 2);
 		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 2, 3);
 		
-		ItemStack mail = ComponentListMF.scalemesh.createComm(material.name);
+		ItemStack mail = new ItemStack(ComponentListMF.scalemesh);
 		Item rivet = ComponentListMF.rivet;
 		
 		int time = 20;
 		KnowledgeListMF.scaleHelmetR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_scale_helmet.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_helmet), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RMR",
 			"MPM",
@@ -139,7 +139,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 30;
 		KnowledgeListMF.scaleChestR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_scale_chest.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_chest), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RM MR",
 			"RMPMR",
@@ -151,7 +151,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.scaleLegsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_scale_legs.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_legs), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RMPMR",
 			"RM MR",
@@ -162,7 +162,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 10;
 		KnowledgeListMF.scaleBootsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_scale_boots.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_boots), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"R R",
 			"MPM",
@@ -171,33 +171,33 @@ public class ForgedArmourRecipes
 			'M', mail,
 			'P', new ItemStack(boots, 1, 0)
 		}));
-		Salvage.addSalvage(CustomArmourListMF.standard_scale_helmet.construct(material.name),helm,
+		Salvage.addSalvage(CustomArmourListMF.standard_scale_helmet,helm,
 				mail, mail, mail, mail,//4 Mail
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_scale_chest.construct(material.name),chest,
+		Salvage.addSalvage(CustomArmourListMF.standard_scale_chest,chest,
 				mail, mail, mail, mail, mail, mail,//6 Mail
 				rivet, rivet, rivet, rivet, rivet, rivet);// 6 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_scale_legs.construct(material.name),legs,
+		Salvage.addSalvage(CustomArmourListMF.standard_scale_legs,legs,
 				mail, mail, mail, mail,//4 Mail
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_scale_boots.construct(material.name),boots,
+		Salvage.addSalvage(CustomArmourListMF.standard_scale_boots,boots,
 				mail, mail,//2 Mail
 				rivet, rivet);//2 Rivet
 	}
 	
-	private static void assembleSplintmail(CustomMaterial material)
+	private static void assembleSplintmail()
 	{
 		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 4, 0);
 		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 4, 1);
 		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 4, 2);
 		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 4, 3);
 		
-		ItemStack mail = ComponentListMF.splintmesh.createComm(material.name);
+		ItemStack mail = new ItemStack(ComponentListMF.splintmesh);
 		Item rivet = ComponentListMF.rivet;
 		
 		int time = 20;
 		KnowledgeListMF.splintHelmetR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_splint_helmet.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_helmet), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RMR",
 			"MPM",
@@ -209,7 +209,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 30;
 		KnowledgeListMF.splintChestR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_splint_chest.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_chest), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RM MR",
 			"RMPMR",
@@ -221,7 +221,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.splintLegsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_splint_legs.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_legs), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RMPMR",
 			"RM MR",
@@ -232,7 +232,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 10;
 		KnowledgeListMF.splintBootsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_splint_boots.construct(material.name), "craftArmourMedium", true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_boots), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
 		{
 			"R R",
 			"MPM",
@@ -241,182 +241,175 @@ public class ForgedArmourRecipes
 			'M', mail,
 			'P', new ItemStack(boots, 1, 0)
 		}));
-		Salvage.addSalvage(CustomArmourListMF.standard_splint_helmet.construct(material.name),helm,
+		Salvage.addSalvage(CustomArmourListMF.standard_splint_helmet,helm,
 				mail, mail, mail, mail,//4 Mail
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_splint_chest.construct(material.name),chest,
+		Salvage.addSalvage(CustomArmourListMF.standard_splint_chest,chest,
 				mail, mail, mail, mail, mail, mail,//6 Mail
 				rivet, rivet, rivet, rivet, rivet, rivet);// 6 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_splint_legs.construct(material.name),legs,
+		Salvage.addSalvage(CustomArmourListMF.standard_splint_legs,legs,
 				mail, mail, mail, mail,//4 Mail
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_splint_boots.construct(material.name),boots,
+		Salvage.addSalvage(CustomArmourListMF.standard_splint_boots,boots,
 				mail, mail,//2 Mail
 				rivet, rivet);//2 Rivet
 	}
 	
-	private static void assembleFieldplate(CustomMaterial material)
+	private static void assembleFieldplate()
 	{
 		Item helm = ArmourListMF.armourItem(ArmourListMF.leather, 4, 0);
 		Item chest = ArmourListMF.armourItem(ArmourListMF.leather, 4, 1);
 		Item legs = ArmourListMF.armourItem(ArmourListMF.leather, 4, 2);
 		Item boots = ArmourListMF.armourItem(ArmourListMF.leather, 4, 3);
 		
-		ItemStack mail = ComponentListMF.chainmesh.createComm(material.name);
-		ItemStack plate = ComponentListMF.plate.createComm(material.name);
+		ItemStack plate = new ItemStack(ComponentListMF.plate);
 		Item rivet = ComponentListMF.rivet;
 		
 		int time = 40;
 		KnowledgeListMF.plateHelmetR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_helmet.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_helmet), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
 		{
 			" R ",
 			"PHP",
 			" R ",
 			
-			'M', mail,
 			'R', rivet,
 			'P', plate,
 			'H', new ItemStack(helm, 1, 0),
 		}));
 		time = 60;
 		KnowledgeListMF.plateChestR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_chest.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_chest), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
 		{
 			"RP PR",
 			"RPCPR",
 			
-			'M', mail,
 			'R', rivet,
 			'P', plate,
 			'C', new ItemStack(chest, 1, 0),
 		}));
 		time = 40;
 		KnowledgeListMF.plateLegsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_legs.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_legs), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
 		{
 			"RPLPR",
 			"RP PR",
 			
-			'M', mail,
 			'R', rivet,
 			'P', plate,
 			'L', new ItemStack(legs, 1, 0),
 		}));
 		time = 20;
 		KnowledgeListMF.plateBootsR.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, CustomArmourListMF.standard_plate_boots.construct(material.name), "craftArmourHeavy", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_boots), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
 		{
 			"R R",
 			"PBP",
 			
-			'M', mail,
 			'R', rivet,
 			'P', plate,
 			'B', new ItemStack(boots, 1, 0),
 		}));
 		
 		
-		Salvage.addSalvage(CustomArmourListMF.standard_plate_helmet.construct(material.name),helm,
+		Salvage.addSalvage(CustomArmourListMF.standard_plate_helmet,helm,
 				plate, plate,//2 Plate
 				rivet, rivet);// Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_plate_chest.construct(material.name),chest,
+		Salvage.addSalvage(CustomArmourListMF.standard_plate_chest,chest,
 				plate, plate, plate, plate,//4 Plate
 				rivet, rivet, rivet, rivet);// 4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_plate_legs.construct(material.name),legs,
+		Salvage.addSalvage(CustomArmourListMF.standard_plate_legs,legs,
 				plate, plate, plate, plate,//4 Plate
 				rivet, rivet, rivet, rivet);//4 Rivet
-		Salvage.addSalvage(CustomArmourListMF.standard_plate_boots.construct(material.name),boots,
+		Salvage.addSalvage(CustomArmourListMF.standard_plate_boots ,boots,
 				plate, plate,//2 Plate
 				rivet, rivet);//2 Rivet
+		
 	}
 	
 	
-	private static void assembleCogPlating(CustomMaterial material)
+	private static void assembleCogPlating()
 	{
-		ItemStack product = ComponentListMF.cogwork_armour.createComm(material.name);
 		
-		ItemStack minorPiece = ComponentListMF.plate.createComm(material.name);
-		ItemStack majorPiece = ComponentListMF.plate_huge.createComm(material.name);
+		ItemStack minorPiece = new ItemStack(ComponentListMF.plate);
+		ItemStack majorPiece = new ItemStack(ComponentListMF.plate_huge);
 		
-		for(ItemStack ingot: OreDictionary.getOres("ingot"+material.name))
+		int time = 4;
+		KnowledgeListMF.hugePlateR.add(
+		MineFantasyAPI.addAnvilToolRecipe(engineering, majorPiece, "cogArmour", true, "hvyhammer", 0, 0, time, new Object[]
 		{
-			int time = 4;
-			KnowledgeListMF.hugePlateR.add(
-			MineFantasyAPI.addAnvilRecipe(engineering, majorPiece, "cogArmour", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
-			{
-				"RRRR",
-				"IIII",
-				'R', ComponentListMF.rivet,
-				'I', ingot
-			}));
+			" RR ",
+			"RIIR",
+			'R', ComponentListMF.rivet,
+			'I', minorPiece
+		}));
+		
+		Salvage.addSalvage(majorPiece,
+				minorPiece, minorPiece,
+				new ItemStack(ComponentListMF.rivet, 4)
+				);
+		
+		
+		time = 25;
+		KnowledgeListMF.cogPlateR.add(
+		MineFantasyAPI.addAnvilToolRecipe(engineering, new ItemStack(ComponentListMF.cogwork_armour), "cogArmour", true, "hvyhammer", 0, 0, time, new Object[]
+		{
+			"  P  ",
+			"pPPPp",
+			"p P p",
+			" pPp ",
 			
-			Salvage.addSalvage(majorPiece,
-					material.getItem(), material.getItem(), material.getItem(), material.getItem(),
-					new ItemStack(ComponentListMF.rivet, 4)
-					);
-			
-			
-			time = 25;
-			KnowledgeListMF.cogPlateR.add(
-			MineFantasyAPI.addAnvilRecipe(engineering, product, "cogArmour", true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
-			{
-				"  P  ",
-				"pPPPp",
-				"p P p",
-				" pPp ",
-				
-				'p', ingot,
-				'P', majorPiece,
-			}));
-		}
-		Salvage.addSalvage(product,
-				material.getItem(), material.getItem(), material.getItem(), material.getItem(),material.getItem(),material.getItem(),
+			'p', minorPiece,
+			'P', majorPiece,
+		}));
+		
+		Salvage.addSalvage(ComponentListMF.cogwork_armour,
+				minorPiece, minorPiece, minorPiece, minorPiece, minorPiece, minorPiece,
 				majorPiece, majorPiece, majorPiece, majorPiece, majorPiece, majorPiece
 				);
 	}
 	
-	private static void addMetalComponents(CustomMaterial material)
+	private static void addMetalComponents()
 	{
-		ItemStack salvage = material.getItem();
+		Item hunk = ComponentListMF.metalHunk;
 		
 		int time = 3;
 		KnowledgeListMF.mailRecipes.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.chainmesh.createComm(material.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.chainmesh), "", true, "hammer", 0, 0, time, new Object[]
 		{
 			" H ",
 			"H H",
 			" H ",
 			
-			'H', ComponentListMF.metalHunk.createComm(material.name)
+			'H', hunk
 		}));
 		time = 3;
 		KnowledgeListMF.scaleRecipes.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.scalemesh.createComm(material.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.scalemesh), "", true, "hammer", 0, 0, time, new Object[]
 		{
 			"HHH",
 			" H ",
 			
-			'H', ComponentListMF.metalHunk.createComm(material.name)
+			'H', hunk
 		}));
 		time = 4;
 		KnowledgeListMF.splintRecipes.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.splintmesh.createComm(material.name), "smelt"+material.name, true, "hammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.splintmesh), "", true, "hammer", 0, 0, time, new Object[]
 		{
 			"RHR",
 			" H ",
 			" H ",
 			" H ",
 			
-			'H', ComponentListMF.metalHunk.createComm(material.name),
+			'H', hunk,
 			'R', ComponentListMF.rivet,
 		}));
 		
-		Salvage.addSalvage(ComponentListMF.chainmesh.createComm(material.name), salvage);
-		Salvage.addSalvage(ComponentListMF.scalemesh.createComm(material.name), salvage);
-		Salvage.addSalvage(ComponentListMF.splintmesh.createComm(material.name), salvage, ComponentListMF.rivet, ComponentListMF.rivet);
+		Salvage.addSalvage(ComponentListMF.chainmesh, hunk);
+		Salvage.addSalvage(ComponentListMF.scalemesh, hunk);
+		Salvage.addSalvage(ComponentListMF.splintmesh, hunk, ComponentListMF.rivet, ComponentListMF.rivet);
 	}
-	private static void addMetalComponents(CustomMaterial material, ItemStack ingot)
+	private static void addIngotComponents(CustomMaterial material, ItemStack ingot)
 	{
 		ItemStack salvage = material.getItem();
 		

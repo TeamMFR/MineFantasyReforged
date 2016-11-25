@@ -1,15 +1,14 @@
 package minefantasy.mf2.entity.mob;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import minefantasy.mf2.entity.EntityDragonBreath;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.world.World;
 
 public abstract class DragonBreath 
@@ -17,12 +16,14 @@ public abstract class DragonBreath
 	public static ArrayList<DragonBreath> projectiles = new ArrayList<DragonBreath>();
 	
 	public static int nextID = 0;
-	public static DragonBreath fire, frost, poison;
+	protected Random random = new Random();
+	public static DragonBreath fire, frost, poison, ash;
 	public static void init()
 	{
 		fire = new FireBreath("fire");
 		frost = new FrostBreath("frost");
 		poison = new PoisonBreath("poison");
+		ash = new AshBreath("ash");
 	}
 	
 	public int id = 0;

@@ -9,7 +9,6 @@ import java.util.List;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.block.Block;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -40,10 +39,18 @@ public class CraftingManagerAnvil
         System.out.println("MineFantasy: Anvil recipes initiating");
     }
 
+    public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp, String tool, int hammer, int anvil, int time, Object ... input)
+    {
+    	return addRecipe(result, skill, research, hot, exp, tool, hammer, anvil, time, (byte)0, input);
+    }
+    public IAnvilRecipe addToolRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp, String tool, int hammer, int anvil, int time, Object ... input)
+    {
+    	return addRecipe(result, skill, research, hot, exp, tool, hammer, anvil, time, (byte)1, input);
+    }
     /**
      * Adds a recipe. See spreadsheet on first page for details.
      */
-    public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp, String tool, int hammer, int anvil, int time, Object ... input)
+    private IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp, String tool, int hammer, int anvil, int time, byte recipeType, Object ... input)
     {
         String var3 = "";
         int var4 = 0;
@@ -115,7 +122,15 @@ public class CraftingManagerAnvil
             }
         }
 
-        IAnvilRecipe recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, hot, research, skill);
+        IAnvilRecipe recipe;
+        if(recipeType == (byte)1)
+        {
+        	recipe = new CustomToolRecipe(var5, var6, var15, result, tool, time, hammer, anvil, exp, hot, research, skill);
+        }
+        else
+        {
+        	recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, hot, research, skill);
+        }
         this.recipes.add(recipe);
         return recipe;
     }
@@ -153,7 +168,7 @@ public class CraftingManagerAnvil
         this.recipes.add(recipe);
         return recipe;
     }
-    public ItemStack findMatchingRecipe(InventoryCrafting matrix)
+    public ItemStack findMatchingRecipe(AnvilCraftMatrix matrix)
     {
         int var2 = 0;
         ItemStack var3 = null;
@@ -229,7 +244,7 @@ public class CraftingManagerAnvil
 		return false;
 	}
 
-	public ItemStack findMatchingRecipe(IAnvil anvil, InventoryCrafting matrix)
+	public ItemStack findMatchingRecipe(IAnvil anvil, AnvilCraftMatrix matrix)
     {
     	int time = 200;
     	int anvi = 1;
@@ -298,9 +313,12 @@ public class CraftingManagerAnvil
 	            hot = var13.outputHot();
 	            toolType = var13.getToolType();
 	            
-	            anvil.setForgeTime(time);
-	            anvil.setHammerUsed(hammer);
-	            anvil.setRequiredAnvil(anvi);
+	            if(!var13.useCustomTiers())
+	            {
+		            anvil.setForgeTime(time);
+		            anvil.setHammerUsed(hammer);
+		            anvil.setRequiredAnvil(anvi);
+	            }
 	            anvil.setHotOutput(hot);
 	            anvil.setToolType(toolType);
 	            anvil.setResearch(var13.getResearch());

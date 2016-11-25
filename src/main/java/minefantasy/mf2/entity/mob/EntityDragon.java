@@ -5,6 +5,8 @@ import java.util.List;
 
 import minefantasy.mf2.api.armour.IArmourPenetrationMob;
 import minefantasy.mf2.api.armour.IArmouredEntity;
+import minefantasy.mf2.api.helpers.ArmourCalculator;
+import minefantasy.mf2.api.helpers.PowerArmour;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.config.ConfigMobs;
 import minefantasy.mf2.entity.EntityDragonBreath;
@@ -347,8 +349,12 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
 
         if (this.targetedEntity == null)
         {
-            this.targetedEntity = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
-
+            EntityPlayer closest = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
+            if(closest != null && canAttackEntity(closest))
+            {
+            	targetedEntity = closest;
+            	closest = null;
+            }
             if (this.targetedEntity != null)
             {
                 this.moveToTarget();
@@ -525,9 +531,9 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
 	public void setEntityToAttack(Class enClass) 
     {
         List list = worldObj.getEntitiesWithinAABB(enClass, AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(getAggro(), getAggro(), getAggro()));
-        if (!list.isEmpty()) 
+        while (!list.isEmpty()) 
         {
-            Entity target = (Entity) list.get(worldObj.rand.nextInt(list.size()));
+            Entity target = (Entity) list.get(0);
             if (canAttackEntity(target))
             {
             	double r = getAggro();
@@ -535,10 +541,16 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
             	if(getDisengageTime() <= 0 && inRange)
             	{
             		setTarget(target);
+            		list.clear();
             	}
-            } else 
+            	else
+            	{
+            		list.remove(0);
+            	}
+            } 
+            else 
             {
-                list.remove(target);
+                list.remove(0);
             }
         }
     }
@@ -549,12 +561,17 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
     }
     private boolean canAttackEntity(Entity target)
     {
+    	if(this.getType().isBlind() && !this.canHearEntity(target) )
+    	{
+    		return false;
+    	}
     	if(getDisengageTime() > 0)
     	{
     		return false;
     	}
         if(!this.canEntityBeSeen(target))return false;
-        if (target instanceof EntityDragon || target == this.riddenByEntity) {
+        if (target instanceof EntityDragon || target == this.riddenByEntity) 
+        {
             return false;
         }
         if (target instanceof EntityPlayer) {
@@ -953,5 +970,38 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
 			}
 		}
 		return 0;
+	}
+	private boolean canHearEntity(Entity target)
+	{
+		if(target instanceof EntityLivingBase && PowerArmour.isWearingCogwork((EntityLivingBase)target)) return true;
+		
+		double distance = getDistanceToEntity(target);
+		
+		
+		if(distance < width/2)
+		{
+			return true;//touching
+		}
+		if(distance < 16 && this.getAttackTarget() != null && getAttackTarget() == target)
+		{
+			return true;//Smell
+		}
+		float tarSpeed = (float)Math.hypot (target.motionX, target.motionZ);
+		
+		if(tarSpeed < 0.1F)
+		{
+			return false;
+		}
+		if(target instanceof EntityLivingBase)
+		{
+			return getSound((EntityLivingBase)target, tarSpeed) >= distance;
+		}
+		return true;
+	}
+
+	private double getSound(EntityLivingBase target, float speed) 
+	{
+		float value = 10F * (60F + ArmourCalculator.getTotalWeightOfWorn(target, false)) * speed;
+		return value;
 	}
 }

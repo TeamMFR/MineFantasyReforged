@@ -117,7 +117,7 @@ public class KnowledgeListMF
         //ENGINEERING - Highly Expensive
         etools = (new InformationBase("etools", 					    3, 0, 0, CustomToolListMF.standard_spanner, (InformationBase)null)).registerStat().setPage(engineering).setUnlocked();
         ecomponents = (new InformationBase("ecomponents",             5, 0, 0, ComponentListMF.bolt, etools)).registerStat().setPage(engineering).setUnlocked();
-        tungsten = (new InformationBase("tungsten",             	  8, -1, 1, ComponentListMF.ingots[18], ecomponents)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20).addSkill(SkillList.artisanry, 35);
+        tungsten = (new InformationBase("tungsten",             	  8, -1, 1, ComponentListMF.ingots[18], ecomponents)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20).addSkill(SkillList.artisanry, 20);
         coke = (new InformationBase("coke",             	 		  4, -1, 2, ComponentListMF.coke, ecomponents)).registerStat().setPage(engineering);
         climber = (new InformationBase("climber",             		7, 0, 1, ToolListMF.climbing_pick_basic, ecomponents)).registerStat().setPage(engineering).setUnlocked();
         spyglass = (new InformationBase("spyglass",             		8, 1, 2, new ItemStack(ToolListMF.spyglass, 1, 2), climber)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 5);
@@ -139,11 +139,11 @@ public class KnowledgeListMF
         bombCeramic = (new InformationBase("bombCeramic", 		    2, 3, 0, ComponentListMF.bomb_casing, bombs)).registerStat().setUnlocked().setPage(engineering);
         bombIron = (new InformationBase("bombIron", 				    4, 5, 1, ComponentListMF.bomb_casing_iron, bombCeramic)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
         bombObsidian = (new InformationBase("bombObsidian", 		    4, 7, 2, ComponentListMF.bomb_casing_obsidian, bombIron)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 35);
-        bombCrystal = (new InformationBase("bombCrystal", 		    2, 9, 1, ComponentListMF.bomb_casing_crystal, bombObsidian)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 80);
+        bombCrystal = (new InformationBase("bombCrystal", 		    2, 9, 1, ComponentListMF.bomb_casing_crystal, bombObsidian)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
         mineCeramic = (new InformationBase("mineCeramic", 		   -2, 3, 2,  ComponentListMF.mine_casing, bombs)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 15);
         mineIron = (new InformationBase("mineIron", 				   -4, 5, 1, ComponentListMF.mine_casing_iron, mineCeramic)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
         mineObsidian = (new InformationBase("mineObsidian", 		   -4, 7, 2, ComponentListMF.mine_casing_obsidian, mineIron)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 35);
-        mineCrystal = (new InformationBase("mineCrystal", 		   -2, 9, 1, ComponentListMF.mine_casing_crystal, mineObsidian)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 80);
+        mineCrystal = (new InformationBase("mineCrystal", 		   -2, 9, 1, ComponentListMF.mine_casing_crystal, mineObsidian)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
         
         crossbows = (new InformationBase("crossbows", 					-4,  0, 3, BlockListMF.crossbowBench, null)).registerStat().setPage(engineering).setSpecial().addSkill(SkillList.engineering, 0);
         crossShafts = (new InformationBase("crossShafts", 				-6,  2, 0, ComponentListMF.crossbow_stock_wood, crossbows)).registerStat().setPage(engineering).setUnlocked();
@@ -154,8 +154,8 @@ public class KnowledgeListMF
         crossAmmo = (new InformationBase("crossAmmo", 					-5,  3, 1, ComponentListMF.cross_ammo, crossShafts)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 30);
         crossScope = (new InformationBase("crossScope", 				-7,  3, 1, ComponentListMF.cross_scope, crossShafts)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
         
-        cogArmour = (new InformationBase("cogArmour",             	 	10, -1, 2, BlockListMF.cogwork_helm, tungsten)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 85);
-        compPlate = (new InformationBase("compPlate",             	 	10, -3, 1, ComponentListMF.ingotCompositeAlloy, cogArmour)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 90).addSkill(SkillList.artisanry, 50);
+        cogArmour = (new InformationBase("cogArmour",             	 	8, -3, 2, BlockListMF.cogwork_helm, tungsten)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 60);
+        compPlate = (new InformationBase("compPlate",             	 	10, -3, 1, ComponentListMF.ingotCompositeAlloy, tungsten)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 50).addSkill(SkillList.artisanry, 40);
         
         repair_basic = (new InformationBase("repair_basic",  		   8, 0, 2, BlockListMF.repair_basic, (InformationBase)null)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10);
         repair_advanced = (new InformationBase("repair_advanced",    10, 0,  3, BlockListMF.repair_advanced, repair_basic)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 25);

@@ -102,6 +102,8 @@ public class CustomMaterial
 	 */
 	public static CustomMaterial getMaterial(String name)
 	{
+		if(name == null)return null;
+		
 		return materialList.get(name.toLowerCase());
 	}
 	

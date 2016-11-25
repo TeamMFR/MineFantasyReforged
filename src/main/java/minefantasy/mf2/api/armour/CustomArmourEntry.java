@@ -18,7 +18,7 @@ public class CustomArmourEntry
 	 */
 	public static void registerItem(Item piece, ArmourDesign template)
 	{
-		registerItem(piece, template, 1.0F);
+		registerItem(piece, template, 1.0F, template.getGroup());
 	}
 	/**
 	 * Registers an item to a template of an ArmourDesign, while dividing the suit into the 4 pieces
@@ -27,14 +27,14 @@ public class CustomArmourEntry
 	 * @param template the ArmourDesign to work off
 	 * @param weightMod the multiplier for the tier weight if a tier is heavier or lighter
 	 */
-	public static void registerItem(Item piece, ArmourDesign template, float weightMod)
+	public static void registerItem(Item piece, ArmourDesign template, float weightMod, String weightType)
 	{
 		float divider = 0.25F;
 		if(piece instanceof ItemArmor)
 		{
 			divider = ArmourCalculator.sizes[((ItemArmor)piece).armorType];
 		}
-		registerItem(piece, template.getWeight() * weightMod, template.getBulk()*divider, template.getGroup());
+		registerItem(piece, template.getWeight() * weightMod, template.getBulk()*divider, weightType);
 	}
 	/**
 	 * Registeres a piece (called by code or config)
@@ -58,7 +58,7 @@ public class CustomArmourEntry
 	{
 		int id = Item.getIdFromItem(piece);
 		
-		MineFantasyAPI.debugMsg("Added Custom armour: " + piece.getUnlocalizedName() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
+		MineFantasyAPI.debugMsg("Added Custom "+AC+" armour: " + piece.getUnlocalizedName() + "(" + id + ") Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
 		entries.put(id, new CustomArmourEntry(id, weight, bulk, alterSpeed, AC));
 	}
 	

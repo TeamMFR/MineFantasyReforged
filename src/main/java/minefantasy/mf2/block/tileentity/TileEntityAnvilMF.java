@@ -1,11 +1,10 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.crafting.IQualityBalance;
+import minefantasy.mf2.api.crafting.anvil.AnvilCraftMatrix;
 import minefantasy.mf2.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mf2.api.crafting.anvil.IAnvil;
 import minefantasy.mf2.api.crafting.anvil.ShapelessAnvilRecipes;
@@ -15,21 +14,17 @@ import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
-import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.Skill;
-import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.container.ContainerAnvilMF;
 import minefantasy.mf2.item.armour.ItemArmourMF;
 import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.mechanics.PlayerTickHandlerMF;
-import minefantasy.mf2.mechanics.worldGen.WorldGenMFBase;
 import minefantasy.mf2.network.packet.AnvilPacket;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -37,8 +32,6 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityBeacon;
-import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.WorldServer;
 
 public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil, IQualityBalance
@@ -48,7 +41,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 	private Random rand = new Random();
 	private int	ticksExisted;
 	private ContainerAnvilMF syncAnvil;
-	private InventoryCrafting craftMatrix;
+	private AnvilCraftMatrix craftMatrix;
 	private String lastPlayerHit = "";
 	private String toolTypeRequired = "hammer";
 	private String researchRequired = "";
@@ -836,7 +829,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 	public void setContainer(ContainerAnvilMF container)
 	{
 		syncAnvil = container;
-		craftMatrix = new InventoryCrafting(syncAnvil, ShapelessAnvilRecipes.globalWidth, ShapelessAnvilRecipes.globalHeight);
+		craftMatrix = new AnvilCraftMatrix(this, syncAnvil, ShapelessAnvilRecipes.globalWidth, ShapelessAnvilRecipes.globalHeight);
 	}
 	public boolean shouldRenderCraftMetre()
 	{

@@ -14,7 +14,7 @@ import net.minecraft.world.biome.BiomeGenBase;
 
 public class WorldGenBiological 
 {
-	public static void generate(Random seed, int chunkX, int chunkZ, World world) 
+	public static void generate(Random seed, int chunkX, int chunkZ, World world, int dimension) 
 	{
 		boolean debug = world.getWorldInfo().getTerrainType() == WorldType.FLAT && MineFantasyII.isDebug();
 		

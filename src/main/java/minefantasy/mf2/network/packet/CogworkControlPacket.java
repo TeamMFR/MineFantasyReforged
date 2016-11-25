@@ -13,12 +13,14 @@ public class CogworkControlPacket extends PacketMF
 	public static final String packetName = "MF2_CogworkCtrl";
 	private EntityCogwork suit;
 	private float forward, strafe;
+	private boolean isJumping;
 
 	public CogworkControlPacket(EntityCogwork suit)
 	{
 		this.suit = suit;
 		this.forward = suit.getMoveForward();
 		this.strafe = suit.getMoveStrafe();
+		this.isJumping = suit.getJumpControl();
 	}
 
 	public CogworkControlPacket() {
@@ -30,6 +32,7 @@ public class CogworkControlPacket extends PacketMF
 		int id = packet.readInt();
 		forward = packet.readFloat();
 		strafe = packet.readFloat();
+		isJumping = packet.readBoolean();
 		Entity entity = player.worldObj.getEntityByID(id);
 		
 		if (entity != null && entity instanceof EntityCogwork) 
@@ -37,6 +40,7 @@ public class CogworkControlPacket extends PacketMF
 			suit = (EntityCogwork)entity;
 			suit.setMoveForward(forward);
 			suit.setMoveStrafe(strafe);
+			suit.setJumpControl(isJumping);
         }
 	}
 
@@ -52,5 +56,6 @@ public class CogworkControlPacket extends PacketMF
 		packet.writeInt(suit.getEntityId());
 		packet.writeFloat(forward);
 		packet.writeFloat(strafe);
+		packet.writeBoolean(isJumping);
 	}
 }

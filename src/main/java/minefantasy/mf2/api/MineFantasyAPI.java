@@ -111,6 +111,23 @@ public class MineFantasyAPI
 	{
 		return addAnvilRecipe(skill, result, research, hot, "hammer", hammerType, anvil, forgeTime, input);
 	}
+	/**
+	 * A special tier-sensitive recipe system for tools
+	 * @param skill the Skill used
+	 * @param result what item comes out (basic itemstack)
+	 * @param research what research is used
+	 * @param hot whether it requires quenching
+	 * @param toolType the tool used (hammer or hvyHammer)
+	 * @param hammerType the tier of hammer
+	 * @param anvil the tier of anvil
+	 * @param forgeTime the time it takes to forge
+	 * @param input the items input
+	 * @return
+	 */
+	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input)
+	{
+		return CraftingManagerAnvil.getInstance().addToolRecipe(result, skill, research, hot, 0F, toolType, hammerType, anvil, forgeTime, input);
+	}
 	
 	/**
 	 * Adds a shaped recipe for carpenter benches with all variables

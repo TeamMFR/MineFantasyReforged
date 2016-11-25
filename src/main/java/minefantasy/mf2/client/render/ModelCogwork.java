@@ -1,5 +1,7 @@
 package minefantasy.mf2.client.render;
 
+import org.lwjgl.opengl.GL11;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -8,8 +10,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 
-public class ModelCogwork extends ModelBiped {
-
+public class ModelCogwork extends ModelBiped 
+{
+	ModelRenderer rightfoot;
+    ModelRenderer leftfoot;
+    
 	ModelRenderer headMask;
 	ModelRenderer bodyBack;
 	ModelRenderer rightarmPauldron;
@@ -34,11 +39,7 @@ public class ModelCogwork extends ModelBiped {
 	{
 		this.textureWidth = texWidth;
 		this.textureHeight = texHeight;
-		this.bipedCloak = new ModelRenderer(this, 0, 0);
-		this.bipedCloak.addBox(-5.0F, 0.0F, -1.0F, 10, 16, 1, scale);
-		this.bipedEars = new ModelRenderer(this, 24, 0);
-		this.bipedEars.addBox(-3.0F, -6.0F, -1.0F, 6, 6, 1, scale);
-
+//FRAME
 		this.bipedHead = new ModelRenderer(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, scale);
 		this.bipedHead.setRotationPoint(0.0F, 0F + offset, 0.0F);
@@ -61,15 +62,27 @@ public class ModelCogwork extends ModelBiped {
 		this.bipedLeftArm.setRotationPoint(5.0F, 2.0F + offset, 0.0F);
 
 		this.bipedRightLeg = new ModelRenderer(this, 0, 16);
-		this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, scale);
+		this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 8, 4, scale);
 		this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F + offset, 0.0F);
 
 		this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
 		this.bipedLeftLeg.mirror = true;
-		this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 12, 4, scale);
+		this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 8, 4, scale);
 		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + offset, 0.0F);
 
-//HEAD
+		rightfoot = new ModelRenderer(this, 0, 53);
+		rightfoot.addBox(-2F, 0F, -3F, 4, 4, 5, scale);
+		rightfoot.setRotationPoint(0F, 10F, 0F);
+		rightfoot.setTextureSize(128, 64);
+		setRotation(rightfoot, 0F, 0F, 0F);
+		
+		leftfoot = new ModelRenderer(this, 0, 53);
+		leftfoot.mirror = true;
+		leftfoot.addBox(-2F, 0F, -3F, 4, 4, 5, scale);
+		leftfoot.setRotationPoint(0F, 10F, 0F);
+		leftfoot.setTextureSize(128, 64);
+  
+//HEAD ARMOUR
 		headMask = new ModelRenderer(this, 76, 18);
 		headMask.addBox(-2F, -3.5F, -6.5F, 4, 5, 3, scale);
 		headMask.setRotationPoint(0F, 0F, 0F);
@@ -81,7 +94,7 @@ public class ModelCogwork extends ModelBiped {
 		headArmour.setTextureSize(128, 64);
 		setRotation(headArmour, 0F, 0F, 0F);
 		
-//BODY
+//BODY ARMOUR
 		bodyBack = new ModelRenderer(this, 34, 32);
 		bodyBack.addBox(-3.5F, -0.5F, 4F, 7, 9, 3, scale);
 		bodyBack.setRotationPoint(0F, 0F, 0F);
@@ -94,7 +107,7 @@ public class ModelCogwork extends ModelBiped {
 		bodyArmour.setTextureSize(128, 64);
 		setRotation(bodyArmour, 0F, 0F, 0F);
 		
-//ARMS
+//ARMS ARMOUR
 		leftarmPauldron = new ModelRenderer(this, 76, 27);
 		leftarmPauldron.mirror = true;
 		leftarmPauldron.addBox(0F, -4F, -3F, 5, 5, 6, scale);
@@ -121,7 +134,7 @@ public class ModelCogwork extends ModelBiped {
 		rightarmArmour.setTextureSize(128, 64);
 		setRotation(rightarmArmour, 0F, 0F, 0F);
 
-//LEGS
+//LEGS ARMOUR
 		rightlegArmour = new ModelRenderer(this, 56, 16);
 		rightlegArmour.addBox(-2.5F, -0.5F, -2.5F, 5, 9, 5, scale);
 		rightlegArmour.setRotationPoint(0F, 0F, 0F);
@@ -147,6 +160,8 @@ public class ModelCogwork extends ModelBiped {
 
 		this.bipedLeftLeg.addChild(leftlegArmour);
 		this.bipedRightLeg.addChild(rightlegArmour);
+		this.bipedLeftLeg.addChild(leftfoot);
+		this.bipedRightLeg.addChild(rightfoot);
 
 		this.bipedHead.addChild(headArmour);
 		this.bipedHeadwear.addChild(headMask);

@@ -5,9 +5,12 @@ import java.util.Random;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityWorldGenMarker;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.common.DungeonHooks;
 
 public abstract class StructureModuleMF 
 {
@@ -316,5 +319,24 @@ public abstract class StructureModuleMF
 			this.posZ = z;
 			this.direction = direction;
 		}
+	}
+	
+	public void placeSpawner(int x, int y, int z)
+	{
+		placeSpawner(x, y, z, DungeonHooks.getRandomDungeonMob(rand));
+	}
+	public void placeSpawner(int x, int y, int z, String mob)
+	{
+		this.placeBlock(Blocks.mob_spawner, 0, x, y, z);
+		TileEntityMobSpawner tileentitymobspawner = (TileEntityMobSpawner)getTileEntity(x, y, z, direction);
+
+        if (tileentitymobspawner != null)
+        {
+            tileentitymobspawner.func_145881_a().setEntityName(mob);
+        }
+        else
+        {
+        	this.placeBlock(Blocks.air, 0, x, y, z);
+        }
 	}
 }

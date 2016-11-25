@@ -15,12 +15,12 @@ public class WorldGenMFBase implements IWorldGenerator
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider) 
 	{
-		generate(random, chunkX, chunkZ, world);
+		generate(random, chunkX, chunkZ, world, world.provider.dimensionId);
 	}
-	public void generate(Random random, int chunkX, int chunkZ, World world) 
+	public void generate(Random random, int chunkX, int chunkZ, World world, int dimension) 
 	{
-		WorldGenGeological.generate(random, chunkX, chunkZ, world);
-		WorldGenBiological.generate(random, chunkX, chunkZ, world);
-		WorldGenStructures.generate(random, chunkX, chunkZ, world);
+		WorldGenGeological.generate(random, chunkX, chunkZ, world, dimension);
+		WorldGenBiological.generate(random, chunkX, chunkZ, world, dimension);
+		WorldGenStructures.generate(random, chunkX, chunkZ, world, dimension);
 	}
 }

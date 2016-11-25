@@ -4,39 +4,27 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.item.list.ToolListMF;
-import minefantasy.mf2.item.tool.ItemPickMF;
-import minefantasy.mf2.material.MetalMaterial;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 /**
  * @author Anonymous Productions
  */
-public class ItemComponentMF extends Item 
+public class ItemComponentMF extends Item implements ITieredComponent
 {
 	protected String name;
 	public ItemComponentMF(int rarity)
@@ -233,13 +221,14 @@ public class ItemComponentMF extends Item
 	//===================================================== CUSTOM START =============================================================\\
 	private boolean isCustom = false;
 	private float unitCount = 1;
-	public ItemComponentMF setCustom(float units)
+	public ItemComponentMF setCustom(float units, String type)
 	{
 		canRepair = false;
 		this.unitCount = units;
 		setTextureName("minefantasy2:custom/component/"+name);
 		isCustom = true;
 		this.setHasSubtypes(true);
+		this.materialType = type;
 		return this;
 	}
 
@@ -319,5 +308,11 @@ public class ItemComponentMF extends Item
     	String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
     	return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
+    private String materialType;
+    @Override
+	public String getMaterialType(ItemStack item)
+    {
+		return materialType;
+	}
     //====================================================== CUSTOM END ==============================================================\\
 }

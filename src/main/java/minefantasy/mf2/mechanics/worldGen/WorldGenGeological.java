@@ -13,7 +13,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 
 public class WorldGenGeological 
 {
-	public static void generate(Random seed, int chunkX, int chunkZ, World world) 
+	public static void generate(Random seed, int chunkX, int chunkZ, World world, int dimension) 
 	{
 		generateOre(seed, chunkX, chunkZ, world, BlockListMF.oreCopper, Blocks.stone, ConfigWorldGen.copperSize, ConfigWorldGen.copperFrequencyMin, ConfigWorldGen.copperFrequencyMax, ConfigWorldGen.copperRarity, ConfigWorldGen.copperLayerMin, ConfigWorldGen.copperLayerMax);
 		generateOre(seed, chunkX, chunkZ, world, BlockListMF.oreTin,    Blocks.stone, ConfigWorldGen.tinSize, ConfigWorldGen.tinFrequencyMin, ConfigWorldGen.tinFrequencyMax, ConfigWorldGen.tinRarity, ConfigWorldGen.tinLayerMin, ConfigWorldGen.tinLayerMax);

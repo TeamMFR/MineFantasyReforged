@@ -57,7 +57,7 @@ public class MineFantasyII
 {
 	public static final String MODID = "minefantasy2";
 	public static final String NAME = "MineFantasyII";
-	public static final String VERSION = "Alpha_2.8.1";
+	public static final String VERSION = "Alpha_2.8.2";
 	public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
 	
     @SidedProxy(clientSide = "minefantasy.mf2.network.ClientProxyMF", serverSide = "minefantasy.mf2.network.CommonProxyMF")
@@ -129,10 +129,10 @@ public class MineFantasyII
     	CustomArmourEntry.registerItem(Items.chainmail_leggings, ArmourDesign.MAIL);
     	CustomArmourEntry.registerItem(Items.chainmail_boots, ArmourDesign.MAIL);
     	
-    	CustomArmourEntry.registerItem(Items.golden_helmet, ArmourDesign.SOLID, 1.5F);
-    	CustomArmourEntry.registerItem(Items.golden_chestplate, ArmourDesign.SOLID, 1.5F);
-    	CustomArmourEntry.registerItem(Items.golden_leggings, ArmourDesign.SOLID, 1.5F);
-    	CustomArmourEntry.registerItem(Items.golden_boots, ArmourDesign.SOLID, 1.5F);
+    	CustomArmourEntry.registerItem(Items.golden_helmet, ArmourDesign.SOLID, 1.5F, "medium");
+    	CustomArmourEntry.registerItem(Items.golden_chestplate, ArmourDesign.SOLID, 1.5F, "medium");
+    	CustomArmourEntry.registerItem(Items.golden_leggings, ArmourDesign.SOLID, 1.5F, "medium");
+    	CustomArmourEntry.registerItem(Items.golden_boots, ArmourDesign.SOLID, 1.5F, "medium");
     	
     	ConfigItemRegistry.readCustoms();
     	

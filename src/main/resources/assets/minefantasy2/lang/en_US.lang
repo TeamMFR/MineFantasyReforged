@@ -60,13 +60,15 @@ entity.MF_Minotaur.name=Minefantasy Minotaur
 entity.MF_Dragon.name=Minefantasy Dragon
 death.attack.dragonstomp=%1$s was stomped by a Dragon
 death.attack.humanstomp=%1$s was stomped by %2$s
-death.attack.fireblast=%1$s was roasted by %2$s
-death.attack.fireblastBase=%1$s was roasted
+death.attack.fireblast=%1$s was incinerated by %2$s
+death.attack.fireblastBase=%1$s was incinerated
 death.attack.blastfurn=%1$s was incinerated by a Blast Furnace
 death.attack.frostblast=%1$s was frozen by %2$s
 death.attack.frostblastBase=%1$s was frozen
 death.attack.acidblast=%1$s was Vaporised by %2$s
 death.attack.acidblastBase=%1$s was Vaporised
+death.attack.ashblast=%1$s was Suffocated by %2$s
+death.attack.ashblastBase=%1$s was Suffocated
 
 death.attack.mob.pound=%1$s was pounded by a %2$s
 death.attack.mob.gore=%1$s was gored by a %2$s
@@ -80,6 +82,7 @@ entity.dragonbreed.red.name=Red
 entity.dragonbreed.white.name=Frost
 entity.dragonbreed.black.name=Dire
 entity.dragonbreed.green.name=Green
+entity.dragonbreed.ash.name=Ash
 
 entity.dragon_young.name=Young %1$s Dragon
 entity.dragon.name=%1$s Dragon

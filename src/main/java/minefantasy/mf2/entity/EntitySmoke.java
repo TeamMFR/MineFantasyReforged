@@ -1,17 +1,16 @@
 package minefantasy.mf2.entity;
 
+import java.util.List;
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-
 import minefantasy.mf2.api.armour.IGasProtector;
 import minefantasy.mf2.api.helpers.PowerArmour;
 import net.minecraft.block.Block;
-import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -243,7 +242,7 @@ public class EntitySmoke extends Entity
             	{
             		EntityLivingBase hit = (EntityLivingBase)pos.entityHit;
             		
-            		if(canPoison(hit))
+            		if(canPoison(hit, rand))
             		{
 	            		hit.addPotionEffect(new PotionEffect(Potion.hunger.id, 20, 0));
 	            		if(rand.nextInt(20) == 0)
@@ -271,9 +270,11 @@ public class EntitySmoke extends Entity
         }
     }
 
-    private boolean canPoison(EntityLivingBase hit)
+    public static boolean canPoison(Entity hit, Random rand)
     {
-    	ItemStack helmet = hit.getEquipmentInSlot(4);
+    	if(!(hit instanceof EntityLivingBase))return false;
+    	
+    	ItemStack helmet = ((EntityLivingBase)hit).getEquipmentInSlot(4);
     	if(helmet != null && helmet.getItem() instanceof IGasProtector)
     	{
     		float prot = ((IGasProtector)helmet.getItem()).getGasProtection(helmet);
@@ -282,11 +283,11 @@ public class EntitySmoke extends Entity
     			return false;
     		}
     	}
-    	if(PowerArmour.isWearingCogwork(hit))
+    	if(PowerArmour.isWearingCogwork( (EntityLivingBase)hit))
     	{
     		return false;
     	}
-		return hit.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
+		return ((EntityLivingBase)hit).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD;
 	}
 
 	/**
