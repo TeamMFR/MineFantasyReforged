@@ -39,7 +39,7 @@ public class KnowledgeListMF
 	//BASICS -FREE
 	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney, tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker, dragons, minotaurs;
 	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, bigfurn, blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel, smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
-    public static InformationBase bellows, trough, forge, anvil, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, /*craftOrnateWeapons, craftAdvOrnateWeapons,*/ craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
+    public static InformationBase bellows, trough, forge, anvil, bar, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, /*craftOrnateWeapons, craftAdvOrnateWeapons,*/ craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
 	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner, advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb, stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian, mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo, crossScope, crossBayonet, cogArmour, compPlate;
     public static InformationBase constructionPts, refined_planks, reinforced_stone, clay_wall, glass, brickworks, decorated_stone, bars, thatch, easyRefine, paint_brush, tool_rack, food_box, ammo_box, big_box, bed_roll;
     public static InformationBase toughness, fitness, armourpro, parrypro, counteratt, autoparry, scrapper, firstaid, doctor;
@@ -99,12 +99,13 @@ public class KnowledgeListMF
         trough = (new InformationBase("trough", 					 	 0, -2,0, BlockListMF.trough_wood, bellows)).registerStat().setPage(artisanry).setUnlocked();
         forge = (new InformationBase("forge", 						 0, 0, 0, BlockListMF.forge, (InformationBase)null)).registerStat().setPage(artisanry).setUnlocked();
         anvil = (new InformationBase("anvil", 						-1, 0, 0, BlockListMF.anvil[1], forge)).registerStat().setPage(artisanry).setUnlocked().setSpecial();
+        bar = (new InformationBase("bar", 						-1, 2, 0, ComponentListMF.bar, anvil)).registerStat().setPage(artisanry).setUnlocked();
         apron = (new InformationBase("apron", 						-1, -1, 0, ArmourListMF.leatherapron, anvil)).registerStat().setPage(artisanry).setUnlocked();
-        craftTools = (new InformationBase("craftTools", 				-3, 2, 0, CustomToolListMF.standard_pick, anvil)).registerStat().setPage(artisanry).setUnlocked();
+        craftTools = (new InformationBase("craftTools", 				-3, 2, 0, CustomToolListMF.standard_pick, bar)).registerStat().setPage(artisanry).setUnlocked();
         craftAdvTools = (new InformationBase("craftAdvTools", 		-5, 2, 0, CustomToolListMF.standard_hvypick, craftTools)).registerStat().setPage(artisanry).setUnlocked();
-        craftWeapons = (new InformationBase("craftWeapons", 			-3, 1, 5, CustomToolListMF.standard_sword, anvil)).registerStat().setPage(artisanry).setUnlocked();
+        craftWeapons = (new InformationBase("craftWeapons", 			-3, 1, 5, CustomToolListMF.standard_sword, bar)).registerStat().setPage(artisanry).setUnlocked();
         craftAdvWeapons = (new InformationBase("craftAdvWeapons",     -5, 1, 0, CustomToolListMF.standard_battleaxe, craftWeapons)).registerStat().setPage(artisanry).setUnlocked();
-        arrows = (new InformationBase("arrows", 		  		   		 -3, 4, 0, CustomToolListMF.standard_arrow, anvil)).registerStat().setPage(artisanry).setUnlocked();
+        arrows = (new InformationBase("arrows", 		  		   		 -3, 4, 0, CustomToolListMF.standard_arrow, bar)).registerStat().setPage(artisanry).setUnlocked();
         
         //craftOrnateWeapons = (new InformationBase("craftOrnateWeapons",  			-3, -1, 10, CustomToolListMF.dragonforged_sword, craftWeapons)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 25);
         //craftAdvOrnateWeapons = (new InformationBase("craftAdvOrnateWeapons", 	-5, -1, 15, CustomToolListMF.dragonforged_battleaxe, craftOrnateWeapons)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 30);
@@ -235,9 +236,9 @@ public class KnowledgeListMF
     public static final ArrayList<IRecipe> plankRecipe = new ArrayList<IRecipe>();
     public static final ArrayList<IRecipe> stoneBricksR = new ArrayList<IRecipe>();
     
-    public static final ArrayList<IAnvilRecipe> hunkR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> bucketR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> ingotR = new ArrayList<IAnvilRecipe>();
+    public static IAnvilRecipe hunkR, ingotR, bucketR;
+    public static final ArrayList<IAnvilRecipe> barR = new ArrayList<IAnvilRecipe>();
+    public static final ArrayList<IAnvilRecipe> baringotR = new ArrayList<IAnvilRecipe>();
     
     public static final ArrayList<IAnvilRecipe> talismanRecipe = new ArrayList<IAnvilRecipe>();
     public static ICarpenterRecipe artBookR, conBookR, proBookR, engBookR, comBookR, artBook2R, conBook2R, proBook2R, engBook2R, comBook2R;
@@ -245,10 +246,8 @@ public class KnowledgeListMF
     
     public static ICarpenterRecipe fireclayR, fireBrickR, fireBricksR, fireBrickStairR, refinedPlankBlockR, clayWallR, bSalvageR, tannerRecipe, stoneAnvilRecipe, forgeRecipe, apronRecipe, woodTroughRecipe;
     public static ICarpenterRecipe researchTableRecipe, framedGlassR, windowR, thatchR, thatchStairR;
-    public static IAnvilRecipe smokePipeR, framedStoneR, iframedStoneR, fluxR;
+    public static IAnvilRecipe smokePipeR, framedStoneR, iframedStoneR, fluxR, nailR, rivetR;
     public static final ArrayList<IAnvilRecipe> barsR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> nailR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> rivetR = new ArrayList<IAnvilRecipe>();
     
     public static IAnvilRecipe tinderboxR, flintAndSteelR;
     public static ICarpenterRecipe lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR, stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR, boneNeedleR, stoneKnifeR, quernR, stoneovenRecipe;
@@ -286,49 +285,14 @@ public class KnowledgeListMF
     public static final ArrayList<IAnvilRecipe> ornateWepsR = new ArrayList<IAnvilRecipe>();
     public static final ArrayList<IAnvilRecipe> advOrnateWepsR = new ArrayList<IAnvilRecipe>();
     
-    public static final ArrayList<IAnvilRecipe> pickR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> axeR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> spadeR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> hoeR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> shearsR = new ArrayList<IAnvilRecipe>();
+    public static IAnvilRecipe pickR, axeR, spadeR, hoeR, shearsR;
+    public static IAnvilRecipe daggerR, swordR, waraxeR, maceR, spearR, bowR, katanaR, gswordR, whammerR, battleaxeR, halbeardR, lanceR;
+    public static IAnvilRecipe trowR, hvyPickR, hvyShovelR, handpickR, scytheR, mattockR;
+    public static IAnvilRecipe hammerR, tongsR, hvyHammerR, needleR, sawsR, knifeR, spannerR;
+    public static IAnvilRecipe arrowheadR, bodkinheadR, broadheadR, crossBoltR;
     
-    public static final ArrayList<IAnvilRecipe> daggerR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> swordR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> waraxeR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> maceR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> spearR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> bowR = new ArrayList<IAnvilRecipe>();
-    
-    public static final ArrayList<IAnvilRecipe> katanaR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> gswordR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> whammerR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> battleaxeR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> halbeardR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> lanceR = new ArrayList<IAnvilRecipe>();
-    
-    public static final ArrayList<IAnvilRecipe> trowR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> hvyShovelR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> handpickR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> hvyPickR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> scytheR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> matockR = new ArrayList<IAnvilRecipe>();
-    
-    public static final ArrayList<IAnvilRecipe> hammerR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> tongsR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> hvyHammerR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> needleR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> sawsR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> knifeR = new ArrayList<IAnvilRecipe>();
-    
-    public static final ArrayList<IAnvilRecipe> arrowheadR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> bodkinheadR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> broadheadR = new ArrayList<IAnvilRecipe>();
-    public static final ArrayList<IAnvilRecipe> crossBoltR = new ArrayList<IAnvilRecipe>();
-    public static ICarpenterRecipe fletchingR;
+    public static ICarpenterRecipe fletchingR, malletR, spoonR;
     public static final ArrayList<ICarpenterRecipe> arrowR = new ArrayList<ICarpenterRecipe>();
-    public static final ArrayList<ICarpenterRecipe> malletR = new ArrayList<ICarpenterRecipe>();
-    public static final ArrayList<ICarpenterRecipe> spoonR = new ArrayList<ICarpenterRecipe>();
-    public static ArrayList<IAnvilRecipe> spannerRecipe = new ArrayList<IAnvilRecipe>();
     
     public static IAnvilRecipe ironPrepR, ironPrepR2, coalPrepR;
     public static IAnvilRecipe blastChamR, blastHeatR, bigFurnR, bigHeatR;

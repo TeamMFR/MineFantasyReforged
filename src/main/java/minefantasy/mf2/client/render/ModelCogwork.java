@@ -71,14 +71,14 @@ public class ModelCogwork extends ModelBiped
 		this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F + offset, 0.0F);
 
 		rightfoot = new ModelRenderer(this, 0, 53);
-		rightfoot.addBox(-2F, 0F, -3F, 4, 4, 5, scale);
+		rightfoot.addBox(-2F, 0F, -3F, 4, 3, 5, scale);
 		rightfoot.setRotationPoint(0F, 10F, 0F);
 		rightfoot.setTextureSize(128, 64);
 		setRotation(rightfoot, 0F, 0F, 0F);
 		
 		leftfoot = new ModelRenderer(this, 0, 53);
 		leftfoot.mirror = true;
-		leftfoot.addBox(-2F, 0F, -3F, 4, 4, 5, scale);
+		leftfoot.addBox(-2F, 0F, -3F, 4, 3, 5, scale);
 		leftfoot.setRotationPoint(0F, 10F, 0F);
 		leftfoot.setTextureSize(128, 64);
   

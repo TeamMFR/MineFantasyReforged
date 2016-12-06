@@ -11,6 +11,7 @@ import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.block.decor.BlockComponent;
 import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
@@ -20,7 +21,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
+import net.minecraft.world.World;
 
 public class ItemCustomComponent extends Item implements ITieredComponent
 {
@@ -106,13 +109,7 @@ public class ItemCustomComponent extends Item implements ITieredComponent
 	@Override
     public String getItemStackDisplayName(ItemStack tool)
     {
-    	CustomMaterial head = getBase(tool);
-    	String matString = "??";
-    	if(head != null)
-    	{
-    		matString = StatCollector.translateToLocal("material."+head.name.toLowerCase() + ".name");
-    	}
-    	return StatCollector.translateToLocalFormatted("item.commodity_"+ name +".name", matString);
+		return CustomToolHelper.getLocalisedName(tool, "item.commodity_"+name+".name");
     }
 	
 	public CustomMaterial getBase(ItemStack component)
@@ -197,4 +194,37 @@ public class ItemCustomComponent extends Item implements ITieredComponent
 	{
 		return materialType;
 	}
+	//STORAGE
+	private String blocktex;
+	private String storageType;
+	
+	public ItemCustomComponent setStoragePlacement(String type, String tex)
+	{
+		this.blocktex = tex;
+		this.storageType = type;
+		return this;
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
+    {
+		if(!world.isRemote && storageType != null)
+		{
+	        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
+	
+	        if (movingobjectposition == null)
+	        {
+	            return item;
+	        }
+	        else
+	        {
+	        	if(BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition))
+	        	{
+	        		--item.stackSize;
+	        		return item;
+	        	}
+	        }
+		}
+		return item;
+    }
 }

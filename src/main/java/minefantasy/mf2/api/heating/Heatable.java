@@ -1,11 +1,9 @@
 package minefantasy.mf2.api.heating;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import minefantasy.mf2.MineFantasyII;
-import net.minecraft.item.Item;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.material.CustomMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -18,17 +16,17 @@ public class Heatable
 	/**
 	 * The min heat the ingot must be to forge with mesured in celcius
 	 */
-	public final int minTemperature;
+	private final int minTemperature;
 
 	/**
 	 * The heat when it becomes unstable mesured in celcius
 	 */
-	public final int unstableTemperature;
+	private final int unstableTemperature;
 
 	/**
 	 * The max heat until the ingot is destroyed mesured in celcius
 	 */
-	public final int maxTemperature;
+	private final int maxTemperature;
 
 	/**
 	 * The item that's used
@@ -225,5 +223,24 @@ public class Heatable
 			s = item.getItem().getUnlocalizedName() + "_"+item.getItemDamage();
 		}
 		return s;
+	}
+	
+	public int getWorkableStat(ItemStack item)
+	{
+		if(this.minTemperature == -1)
+		{
+			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
+			if(material != null)return  material.getHeatableStats()[0];
+		}
+		return this.minTemperature;
+	}
+	public int getUnstableStat(ItemStack item)
+	{
+		if(this.unstableTemperature == -1)
+		{
+			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
+			if(material != null)return  material.getHeatableStats()[1];
+		}
+		return this.unstableTemperature;
 	}
 }

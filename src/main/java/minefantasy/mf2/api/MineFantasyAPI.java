@@ -23,6 +23,7 @@ import minefantasy.mf2.api.refine.AlloyRecipes;
 import minefantasy.mf2.api.refine.BigFurnaceRecipes;
 import minefantasy.mf2.api.refine.BlastFurnaceRecipes;
 import minefantasy.mf2.api.rpg.Skill;
+import minefantasy.mf2.item.archery.ItemArrowMF;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -127,6 +128,34 @@ public class MineFantasyAPI
 	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input)
 	{
 		return CraftingManagerAnvil.getInstance().addToolRecipe(result, skill, research, hot, 0F, toolType, hammerType, anvil, forgeTime, input);
+	}
+	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, Item result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input)
+	{
+		return addAnvilToolRecipe(skill, new ItemStack(result), research, hot, toolType, hammerType, anvil, forgeTime, input);
+	}
+	
+	/**
+	 * Adds a shaped recipe for carpenter benches sensetive to tiers
+	 * 
+	 * @param result The output item (basic itemstack)
+	 * @param sound The sound it makes ("minefantasy2:blocks.carpentermallet"), "step.wood", etc
+	 * @param experience the experience gained from crafting
+	 * @param toolType the tool type required to hit
+	 * @param toolTier the tools tier required for creation:
+	 * @param craftTime The time taken to craft(default is 200. each hit is about 100)
+	 * @param input The input for the item (Exactly the same as regular recipes)
+	 */
+	public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, ItemStack result, String research, String sound, String toolType, int toolTier, int craftTime, Object... input)
+	{
+		return CraftingManagerCarpenter.getInstance().addToolRecipe(result, skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
+	}
+	public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, String sound, String toolType, int toolTier, int craftTime, Object... input)
+	{
+		return CraftingManagerCarpenter.getInstance().addToolRecipe(new ItemStack(result), skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
+	}
+	public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, String sound, int craftTime, Object... input)
+	{
+		return CraftingManagerCarpenter.getInstance().addToolRecipe(new ItemStack(result), skill, research, sound, 0F, "hands", -1, -1, craftTime, input);
 	}
 	
 	/**

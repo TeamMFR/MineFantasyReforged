@@ -3,15 +3,13 @@ package minefantasy.mf2.block.tileentity;
 import java.util.List;
 import java.util.Random;
 
-import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.api.crafting.carpenter.CarpenterCraftMatrix;
 import minefantasy.mf2.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenter;
 import minefantasy.mf2.api.crafting.carpenter.ShapelessCarpenterRecipes;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
-import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.Skill;
-import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.container.ContainerCarpenterMF;
 import minefantasy.mf2.item.armour.ItemArmourMF;
 import minefantasy.mf2.network.packet.CarpenterPacket;
@@ -34,7 +32,7 @@ public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICa
 	private Random rand = new Random();
 	private int	ticksExisted;
 	private ContainerCarpenterMF syncCarpenter;
-	private InventoryCrafting craftMatrix;
+	private CarpenterCraftMatrix craftMatrix;
 	private String lastPlayerHit = "";
 	private String toolTypeRequired = "hands";
 	private String craftSound = "step.wood";
@@ -605,7 +603,7 @@ public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICa
 	public void setContainer(ContainerCarpenterMF container)
 	{
 		syncCarpenter = container;
-		craftMatrix = new InventoryCrafting(syncCarpenter, ShapelessCarpenterRecipes.globalWidth, ShapelessCarpenterRecipes.globalHeight);
+		craftMatrix = new CarpenterCraftMatrix(this, syncCarpenter, ShapelessCarpenterRecipes.globalWidth, ShapelessCarpenterRecipes.globalHeight);
 	}
 	public boolean shouldRenderCraftMetre()
 	{

@@ -34,6 +34,7 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.food"), new EntryPageRecipeBase(KnowledgeListMF.cooktopRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneovenRecipe));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.tanning"), new EntryPageRecipeCarpenter(KnowledgeListMF.tannerRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneKnifeR));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.forging"), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneAnvilRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.forgeRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneHammerR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneTongsR), new EntryPageRecipeBase(KnowledgeListMF.dryrocksR), new EntryPageRecipeCarpenter(KnowledgeListMF.apronRecipe));
+		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.forgingbars"), new EntryPageRecipeAnvil(KnowledgeListMF.barR));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.3"), new EntryPageRecipeAnvil(KnowledgeListMF.shearsR), new EntryPageText("knowledge.gettingStarted.4"), new EntryPageText("knowledge.gettingStarted.5"), new EntryPageRecipeAnvil(KnowledgeListMF.hammerR), new EntryPageRecipeAnvil(KnowledgeListMF.tongsR), new EntryPageText("knowledge.gettingStarted.6"));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.upgrade"), new EntryPageRecipeCarpenter(KnowledgeListMF.researchTableRecipe), new EntryPageText("knowledge.gettingStarted.7"));
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.10"), new EntryPageRecipeCarpenter(KnowledgeListMF.potRecipe), new EntryPageSmelting(ComponentListMF.clay_pot_uncooked, ComponentListMF.clay_pot), new EntryPageRecipeCarpenter(KnowledgeListMF.quernR), new EntryPageText("knowledge.gettingStarted.11"), new EntryPageText("knowledge.gettingStarted.12"));
@@ -111,6 +112,7 @@ public class KnowledgePageRegistry
 		}
 		KnowledgeListMF.crucible2.addPages(assembleSimpleImgPage("fire_crucible_example", "knowledge.crucible2.1"), new EntryPageGrind(new ItemStack(ComponentListMF.kaolinite), new ItemStack(ComponentListMF.kaolinite_dust)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireclayR), new EntryPageRecipeCarpenter(KnowledgeListMF.advCrucibleRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBricksR), assembleSimpleImgPage("fire_crucible", "knowledge.crucible2.blocks"));
 		
+		KnowledgeListMF.bar.addPages(new EntryPageText("knowledge.bar.1"), new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
 		KnowledgeListMF.smeltCopper.addPages(new EntryPageText("knowledge.smeltCopper.1"));
 		KnowledgeListMF.smeltBronze.addPages(new EntryPageText("knowledge.smeltBronze.1"));
 		if(ConfigHardcore.HCCreduceIngots)
@@ -183,7 +185,7 @@ public class KnowledgePageRegistry
 	    	KnowledgeListMF.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.hcc"));
 	    }
 	    
-	    KnowledgeListMF.etools.addPages(new EntryPageText("knowledge.etools.1"), new EntryPageRecipeAnvil(KnowledgeListMF.spannerRecipe), new EntryPageRecipeAnvil(KnowledgeListMF.eatoolsR));
+	    KnowledgeListMF.etools.addPages(new EntryPageText("knowledge.etools.1"), new EntryPageRecipeAnvil(KnowledgeListMF.spannerR), new EntryPageRecipeAnvil(KnowledgeListMF.eatoolsR));
 	    KnowledgeListMF.ecomponents.addPages(new EntryPageText("knowledge.ecomponents.1"), new EntryPageRecipeAnvil(KnowledgeListMF.boltR), new EntryPageText("knowledge.ecomponents.2"), new EntryPageRecipeAnvil(KnowledgeListMF.iframeR), new EntryPageRecipeAnvil(KnowledgeListMF.bgearR), new EntryPageRecipeAnvil(KnowledgeListMF.tgearR), new EntryPageRecipeAnvil(KnowledgeListMF.istrutR), new EntryPageRecipeAnvil(KnowledgeListMF.stubeR));
 	    KnowledgeListMF.tungsten.addPages(new EntryPageText("knowledge.tungsten.1"), new EntryPageText("knowledge.tungsten.2"), new EntryPageText("knowledge.tungsten.3"), new EntryPageCrucible(KnowledgeListMF.wolframiteR));
 	    KnowledgeListMF.climber.addPages(new EntryPageText("knowledge.climber.1"), new EntryPageRecipeAnvil(KnowledgeListMF.climbPickbR), new EntryPageText("knowledge.climber.2"));

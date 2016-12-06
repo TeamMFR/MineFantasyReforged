@@ -80,7 +80,7 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe
      * Used to check if a recipe matches current crafting inventory
      */
     @Override
-	public boolean matches(InventoryCrafting matrix)
+	public boolean matches(CarpenterCraftMatrix matrix)
     {
         for (int var2 = 0; var2 <= ShapelessCarpenterRecipes.globalWidth - this.recipeWidth; ++var2)
         {
@@ -163,7 +163,7 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe
      * Returns an Item that is the result of this recipe
      */
     @Override
-	public ItemStack getCraftingResult(InventoryCrafting matrix)
+	public ItemStack getCraftingResult(CarpenterCraftMatrix matrix)
     {
         return recipeOutput.copy();
     }

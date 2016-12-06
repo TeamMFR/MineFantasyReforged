@@ -62,8 +62,8 @@ public class MetalMaterial extends CustomMaterial
 		
 		//Standard Mats  Name          	T  Dur     Flx 	 Shp   	Rst		 Wg
 		getOrAddMetal("Bronze", 		1, 1.5F,   1.0F, 1.5F,  20F, 	3.0F, 		207, 165, 118).setCrafterTiers(1).setMeltingPoint(120);
-		getOrAddMetal("Iron", 			2, 2.0F,   1.0F, 2.0F,  20F,	2.5F, 		120,  95,  95).setCrafterTiers(2).setMeltingPoint(120).setArmourStats(1.0F, 1.0F, 1.0F);//Standard
-		getOrAddMetal("RefinedIron", 	2, 2.0F,   0.8F, 2.0F,  20F,	2.5F, 		120, 100, 110).setCrafterTiers(2).setMeltingPoint(120).setArmourStats(1.1F, 0.8F, 1.1F);//Less Blunt for more cutting/piercing
+		getOrAddMetal("Iron", 			2, 2.0F,   1.0F, 2.0F,  20F,	2.5F, 		140, 120, 100).setCrafterTiers(2).setMeltingPoint(120).setArmourStats(1.0F, 1.0F, 1.0F);//Standard
+		getOrAddMetal("RefinedIron", 	2, 2.0F,   0.8F, 2.0F,  20F,	2.5F, 		120, 95, 95).setCrafterTiers(2).setMeltingPoint(120).setArmourStats(1.1F, 0.8F, 1.1F);//Less Blunt for more cutting/piercing
 		getOrAddMetal("Steel", 			3, 3.0F,   1.0F, 2.5F,  30F,	2.5F, 		168, 168, 168).setCrafterTiers(3).setMeltingPoint(125);
 		getOrAddMetal("Encrusted", 		4, 8.0F,   1.0F, 3.0F,  35F,	3.0F, 		64, 255, 255).setCrafterTiers(3).setMeltingPoint(150).setArmourStats(1.0F, 1.0F, 1.2F);//Better Piercing
 		getOrAddMetal("Obsidian", 	    4, 8.0F,   1.0F, 3.0F,  35F,	3.0F, 		90 , 45 , 90).setCrafterTiers(3).setMeltingPoint(180).setArmourStats(1.0F, 1.3F, 1.0F);//Better Blunt
@@ -112,7 +112,8 @@ public class MetalMaterial extends CustomMaterial
     	}
 		
 		MineFantasyAPI.setHeatableStats(ComponentListMF.rivet, 100, 200, 300);
-		MineFantasyAPI.setHeatableStats(ComponentListMF.metalHunk, 50, 500, 1000);
+		MineFantasyAPI.setHeatableStats(ComponentListMF.metalHunk, -1, -1, -1);
+		MineFantasyAPI.setHeatableStats(ComponentListMF.bar, -1, -1, -1);
 	}
 	
 	@Override

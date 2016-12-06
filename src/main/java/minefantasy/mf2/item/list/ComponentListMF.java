@@ -171,6 +171,7 @@ public class ComponentListMF
 	public static ItemCustomComponent bodkinhead = new ItemCustomComponent("bodkinhead", 1/4F, "metal");
 	public static ItemCustomComponent broadhead = new ItemCustomComponent("broadhead", 1/4F, "metal");
 	public static ItemCustomComponent cogwork_armour = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(CreativeTabMF.tabGadget).setMaxStackSize(1);
+	public static ItemCustomComponent bar = new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar");
 	
 	public static Item flux_pot = new ItemComponentMF("flux_pot", 0).setContainerItem(clay_pot);
 	public static Item coal_flux = new ItemComponentMF("coal_flux", 0);

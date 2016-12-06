@@ -17,6 +17,7 @@ import minefantasy.mf2.block.tileentity.TileEntityBombBench;
 import minefantasy.mf2.block.tileentity.TileEntityBombPress;
 import minefantasy.mf2.block.tileentity.TileEntityCarpenterMF;
 import minefantasy.mf2.block.tileentity.TileEntityChimney;
+import minefantasy.mf2.block.tileentity.TileEntityComponent;
 import minefantasy.mf2.block.tileentity.TileEntityCrossbowBench;
 import minefantasy.mf2.block.tileentity.TileEntityCrucible;
 import minefantasy.mf2.block.tileentity.TileEntityFirepit;
@@ -51,7 +52,6 @@ import minefantasy.mf2.client.render.HudHandlerMF;
 import minefantasy.mf2.client.render.RenderArrowMF;
 import minefantasy.mf2.client.render.RenderBombIcon;
 import minefantasy.mf2.client.render.RenderBow;
-import minefantasy.mf2.client.render.RenderPowerArmour;
 import minefantasy.mf2.client.render.RenderCrossbow;
 import minefantasy.mf2.client.render.RenderDragonBreath;
 import minefantasy.mf2.client.render.RenderFireBlast;
@@ -59,6 +59,7 @@ import minefantasy.mf2.client.render.RenderHeavyWeapon;
 import minefantasy.mf2.client.render.RenderLance;
 import minefantasy.mf2.client.render.RenderMine;
 import minefantasy.mf2.client.render.RenderParachute;
+import minefantasy.mf2.client.render.RenderPowerArmour;
 import minefantasy.mf2.client.render.RenderSaw;
 import minefantasy.mf2.client.render.RenderShrapnel;
 import minefantasy.mf2.client.render.RenderSpear;
@@ -89,6 +90,7 @@ import minefantasy.mf2.client.render.block.TileEntityBloomeryRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBombBenchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mf2.client.render.block.TileEntityCarpenterRenderer;
+import minefantasy.mf2.client.render.block.TileEntityComponentRenderer;
 import minefantasy.mf2.client.render.block.TileEntityCrossbowBenchRenderer;
 import minefantasy.mf2.client.render.block.TileEntityFirepitRenderer;
 import minefantasy.mf2.client.render.block.TileEntityForgeRenderer;
@@ -202,6 +204,8 @@ public class ClientProxyMF extends CommonProxyMF
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer());
 		RenderingRegistry.registerBlockHandler(new RenderSmokePipe());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChimney.class, new TileEntitySmokePipeRenderer());
+		
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer());
 	}
 	
 	public void registerEntityRenderer()
@@ -367,9 +371,11 @@ public class ClientProxyMF extends CommonProxyMF
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.gnomish_saw, new RenderSaw());
 		*/
 	}
-
-	public static boolean isUserJumping(Entity user) 
+	/**
+	 * Is the player trying to jump (assuming no screens are open)
+	 */
+	public static boolean isUserJumpCommand(Entity user) 
 	{
-		return user == Minecraft.getMinecraft().thePlayer && Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
+		return Minecraft.getMinecraft().currentScreen == null && user == Minecraft.getMinecraft().thePlayer && Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
 	}
 }

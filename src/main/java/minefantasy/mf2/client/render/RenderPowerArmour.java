@@ -177,8 +177,11 @@ public class RenderPowerArmour extends RendererLivingEntity
             {
             	GL11.glTranslatef(0F, -0.5F, 0F);
             }
-            GL11.glTranslatef(0F, -0.125F, 0F);
-
+            if(suit != null)
+            {
+            	GL11.glTranslatef(0F, -0.15625F, 0F);
+            }
+            
             GL11.glEnable(GL11.GL_ALPHA_TEST);
             this.mainModel.setLivingAnimations(entity, f7, f6, f1);
             GL11.glColor3f(1.0F, 1.0F, 1.0F);
@@ -523,7 +526,6 @@ public class RenderPowerArmour extends RendererLivingEntity
     protected void renderPlayerItems(AbstractClientPlayer player, float offset)
     {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        //renderCogworkItems(player, offset);
         super.renderArrowsStuckInEntity(player, offset);
         float f2;
         float f4;

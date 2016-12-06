@@ -12,6 +12,7 @@ import minefantasy.mf2.block.crafting.BlockResearchStation;
 import minefantasy.mf2.block.crafting.BlockRoast;
 import minefantasy.mf2.block.crafting.BlockTanningRack;
 import minefantasy.mf2.block.decor.BlockAmmoBox;
+import minefantasy.mf2.block.decor.BlockComponent;
 import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.decor.BlockTrough;
 import minefantasy.mf2.block.refining.BlockBellows;
@@ -117,6 +118,7 @@ public class ConfigClient extends ConfigurationBaseMF
 		BlockRack.rack_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Rack", -115).getString());
 		BlockAmmoBox.ammo_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Ammo Box", -116).getString());
 		BlockChimney.pipe_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Smoke Pipe", -117).getString());
+		BlockComponent.component_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Component Storage", -118).getString());
 		
 		EventManagerMF.displayOreDict = Boolean.parseBoolean(config.get(CATEGORY_DEBUG, "Show Debug OreDict", false, "Displays a list of Ore Dictionary entries to tooltips").getString());
 	}

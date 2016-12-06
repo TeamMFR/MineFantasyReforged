@@ -8,6 +8,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.item.heatable.ItemHeated;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -429,7 +431,7 @@ public class CustomToolHelper
 	}
 	public static String getReferenceName(ItemStack item, String dam, boolean tiered) 
 	{
-		String reference = item.getUnlocalizedName().toLowerCase() + "_@" + dam;
+		String reference = Item.itemRegistry.getNameForObject(item.getItem()).toLowerCase() + "_@" + dam;
 		
 		if(tiered)
 		{
@@ -518,7 +520,12 @@ public class CustomToolHelper
 	
 	public static String getComponentMaterial(ItemStack item, String type)
 	{
-		if(type == null) return null;
+		if(item == null || type == null) return null;
+		
+		if(item.getItem() instanceof ItemHeated)
+		{
+			return getComponentMaterial(ItemHeated.getItem(item), type);
+		}
 		
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
 		if(material != null)

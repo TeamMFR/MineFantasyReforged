@@ -1,8 +1,5 @@
 package minefantasy.mf2.recipe;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.crafting.Salvage;
@@ -23,6 +20,7 @@ import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -1750,54 +1748,43 @@ public class CarpenterRecipes
 	{
 		String basic = CarpenterRecipes.basic;
 		
-		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-		Iterator iteratorWood = wood.iterator();
+		float time = 4;
+		Item plank = ComponentListMF.plank;
 		
-		while(iteratorWood.hasNext())
+		KnowledgeListMF.spoonR =
+		MineFantasyAPI.addCarpenterToolRecipe(artisanry, CustomToolListMF.standard_spoon, "", basic, "hands", -1, 1+(int)(1*time), new Object[]{
+			"W",
+			"S",
+			'W', plank,
+			'S', Items.stick
+		});
+		Salvage.addSalvage(CustomToolListMF.standard_spoon, plank, Items.stick);
+		KnowledgeListMF.malletR =
+		MineFantasyAPI.addCarpenterToolRecipe(artisanry, CustomToolListMF.standard_mallet, "", basic, "hands", -1, 1+(int)(2*time), new Object[]{
+			"WW",
+			" S",
+			'W', plank,
+			'S', Items.stick
+		});
+		Salvage.addSalvage(CustomToolListMF.standard_mallet, plank, plank, Items.stick);
+		Salvage.addSalvage(CustomToolListMF.standard_spoon, plank, Items.stick);
+		
+		KnowledgeListMF.refinedPlankR.add( 
+		MineFantasyAPI.addCarpenterRecipe(construction, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"), "", basic, "hands", -1, 1 , new Object[]
 		{
-			CustomMaterial material = (CustomMaterial) iteratorWood.next();
-			float time = material.hardness*4;
-			ItemStack plank = ((ItemComponentMF) ComponentListMF.plank).construct(material.name);
-			
-			KnowledgeListMF.spoonR.add(
-				MineFantasyAPI.addCarpenterRecipe(artisanry, CustomToolListMF.standard_spoon.construct(material.name), "", basic, "hands", -1, 1+(int)(1*time), new Object[]{
-					"W",
-					"S",
-					'W', plank,
-					'S', Items.stick
-				})	
-			);
-			Salvage.addSalvage(CustomToolListMF.standard_spoon.construct(material.name), plank, Items.stick);
-			KnowledgeListMF.malletR.add(
-				MineFantasyAPI.addCarpenterRecipe(artisanry, CustomToolListMF.standard_mallet.construct(material.name), "", basic, "hands", -1, 1+(int)(2*time), new Object[]{
-					"WW",
-					" S",
-					'W', plank,
-					'S', Items.stick
-				})	
-			);
-			Salvage.addSalvage(CustomToolListMF.standard_mallet.construct(material.name), plank, plank, Items.stick);
-			
-			if(material.tier == 1)
-			{
-				KnowledgeListMF.refinedPlankR.add( 
-				MineFantasyAPI.addCarpenterRecipe(construction, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"), "", basic, "hands", -1, 1 , new Object[]
-				{
-					"O",
-					"P",
-					'O', ComponentListMF.plant_oil,
-					'P', ((ItemComponentMF)ComponentListMF.plank).construct(material.name)
-				}));
-				KnowledgeListMF.easyPaintPlank.add(
-				MineFantasyAPI.addCarpenterRecipe(construction, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood", 4), "paint_brush", sewing, "brush", -1, 2 , new Object[]
-				{
-					" O  ",
-					"PPPP",
-					'O', ComponentListMF.plant_oil,
-					'P',  ((ItemComponentMF)ComponentListMF.plank).construct(material.name)
-				}));
-			}
-		}
+			"O",
+			"P",
+			'O', ComponentListMF.plant_oil,
+			'P', ((ItemComponentMF)ComponentListMF.plank)
+		}));
+		KnowledgeListMF.easyPaintPlank.add(
+		MineFantasyAPI.addCarpenterRecipe(construction, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood", 4), "paint_brush", sewing, "brush", -1, 2 , new Object[]
+		{
+			" O  ",
+			"PPPP",
+			'O', ComponentListMF.plant_oil,
+			'P',  ((ItemComponentMF)ComponentListMF.plank)
+		}));
 	}
 	
 	static void tryAddSawPlanks(ItemStack planks, CustomMaterial material)

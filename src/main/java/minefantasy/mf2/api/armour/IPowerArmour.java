@@ -11,4 +11,10 @@ public interface IPowerArmour {
 
 	boolean isPowered();
 
+	/**
+	 * Is armour covering a particular limb
+	 * @param limb (head, body, left_arm, right_arm, left_leg, right_leg)
+	 */
+	boolean isArmoured(String limb);
+
 }

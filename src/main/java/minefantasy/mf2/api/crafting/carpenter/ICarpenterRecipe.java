@@ -1,7 +1,6 @@
 package minefantasy.mf2.api.crafting.carpenter;
 
 import minefantasy.mf2.api.rpg.Skill;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,12 +13,12 @@ public interface ICarpenterRecipe
     /**
      * Used to check if a recipe matches current crafting inventory
      */
-    boolean matches(InventoryCrafting var1);
+    boolean matches(CarpenterCraftMatrix var1);
 
     /**
      * Returns an Item that is the result of this recipe
      */
-    ItemStack getCraftingResult(InventoryCrafting var1);
+    ItemStack getCraftingResult(CarpenterCraftMatrix var1);
     int getCraftTime();
     /**
      * Returns the size of the recipe area

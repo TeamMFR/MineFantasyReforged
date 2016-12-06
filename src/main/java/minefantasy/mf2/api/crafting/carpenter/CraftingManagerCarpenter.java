@@ -8,7 +8,6 @@ import java.util.List;
 
 import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.block.Block;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -43,6 +42,17 @@ public class CraftingManagerCarpenter
      * Adds a recipe. See spreadsheet on first page for details.
      */
     public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, String sound, float exp, String tool, int hammer, int anvil, int time, Object ... input)
+    {
+    	return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte)0, input);
+    }
+    public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, String sound, float exp, String tool, int hammer, int anvil, int time, Object ... input)
+    {
+    	return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte)1, input);
+    }
+    /**
+     * Adds a recipe. See spreadsheet on first page for details.
+     */
+    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, String sound, float exp, String tool, int hammer, int anvil, int time, byte id, Object ... input)
     {
         String var3 = "";
         int var4 = 0;
@@ -113,8 +123,16 @@ public class CraftingManagerCarpenter
                 var15[var9] = null;
             }
         }
-
-        ICarpenterRecipe recipe = new ShapedCarpenterRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
+        ICarpenterRecipe recipe;
+        
+        if(id == (byte)1)
+        {
+        	recipe = new CustomToolRecipeCarpenter(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
+        }
+        else
+        {
+        	recipe = new ShapedCarpenterRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
+        }
         this.recipes.add(recipe);
         return recipe;
     }
@@ -152,7 +170,7 @@ public class CraftingManagerCarpenter
         this.recipes.add(recipe);
         return recipe;
     }
-    public ItemStack findMatchingRecipe(InventoryCrafting matrix)
+    public ItemStack findMatchingRecipe(CarpenterCraftMatrix matrix)
     {
         int var2 = 0;
         ItemStack var3 = null;
@@ -215,7 +233,7 @@ public class CraftingManagerCarpenter
     
     
     
-    public ItemStack findMatchingRecipe(ICarpenter bench, InventoryCrafting matrix)
+    public ItemStack findMatchingRecipe(ICarpenter bench, CarpenterCraftMatrix matrix)
     {
     	int time = 200;
     	int anvi = 1;

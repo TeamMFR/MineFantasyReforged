@@ -287,7 +287,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 			
 			if(riddenByEntity instanceof EntityClientPlayerMP)
 			{
-				boolean jump = ClientProxyMF.isUserJumping(riddenByEntity);
+				boolean jump = ClientProxyMF.isUserJumpCommand(riddenByEntity);
 				if(jump != jumpControl || forward != forwardControl || strafe != strafeControl)
 				{
 					this.forwardControl = forward;
@@ -315,7 +315,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 			}
             if (!this.isInWater() && !this.handleLavaMovement())
             {
-                if (this.onGround && jumpTimer == 5)
+                if (this.onGround && jumpTimer == 8)
                 {
                     this.jump();
                 }
@@ -396,7 +396,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	@Override
 	public double getMountedYOffset()
 	{
-		return 0.825D;
+		return 0.8625D;
 	}
 	@Override
 	public boolean canBeCollidedWith()
@@ -1134,4 +1134,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
         }
 		super.travelToDimension(id);
     }
+	@Override
+	public boolean isArmoured(String piece)
+	{
+		return isFullyArmoured();
+	}
 }

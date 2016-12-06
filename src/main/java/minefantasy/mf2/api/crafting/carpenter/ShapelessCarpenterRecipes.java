@@ -6,7 +6,6 @@ import java.util.List;
 
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.rpg.Skill;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -65,7 +64,7 @@ public class ShapelessCarpenterRecipes implements ICarpenterRecipe
      * Used to check if a recipe matches current crafting inventory
      */
     @Override
-	public boolean matches(InventoryCrafting par1InventoryCrafting)
+	public boolean matches(CarpenterCraftMatrix par1InventoryCrafting)
     {
         ArrayList var2 = new ArrayList(this.recipeItems);
 
@@ -129,7 +128,7 @@ public class ShapelessCarpenterRecipes implements ICarpenterRecipe
      * Returns an Item that is the result of this recipe
      */
     @Override
-	public ItemStack getCraftingResult(InventoryCrafting par1InventoryCrafting)
+	public ItemStack getCraftingResult(CarpenterCraftMatrix par1InventoryCrafting)
     {
         return this.recipeOutput.copy();
     }

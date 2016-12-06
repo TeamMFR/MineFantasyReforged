@@ -233,7 +233,6 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		}
 		else if(temperature > 0)
 		{
-			ItemStack heated = ItemHeated.createHotItem(item);
 			this.setInventorySlotContents(slot, ItemHeated.createHotItem(item));
 				
 		}
@@ -689,7 +688,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		else if(contents.getItem() instanceof ItemHeated)
 		{
 			ItemStack hot = Heatable.getItem(contents);
-			if(hot != null && hot.isItemEqual(held) && contents.stackSize < contents.getMaxStackSize())
+			if(hot != null && hot.isItemEqual(held) && ItemStack.areItemStackTagsEqual(held, hot) && contents.stackSize < contents.getMaxStackSize())
 			{
 				contents.stackSize ++;
 				return true;

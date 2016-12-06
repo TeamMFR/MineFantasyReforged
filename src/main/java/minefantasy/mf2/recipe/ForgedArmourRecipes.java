@@ -26,17 +26,6 @@ public class ForgedArmourRecipes
 	private static final Skill construction = SkillList.construction;
 	public static void init() 
 	{
-		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-		Iterator iteratorMetal = metal.iterator();
-		while(iteratorMetal.hasNext())
-    	{
-    		CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-    		
-    		for(ItemStack ingot: OreDictionary.getOres("ingot"+customMat.name))
-    		{
-    			addIngotComponents(customMat, ingot);
-    		}
-    	}
 		addMetalComponents();
 		assembleChainmail();
 		assembleScalemail();
@@ -372,6 +361,7 @@ public class ForgedArmourRecipes
 	private static void addMetalComponents()
 	{
 		Item hunk = ComponentListMF.metalHunk;
+		Item bar = ComponentListMF.bar;
 		
 		int time = 3;
 		KnowledgeListMF.mailRecipes.add(
@@ -404,25 +394,19 @@ public class ForgedArmourRecipes
 			'H', hunk,
 			'R', ComponentListMF.rivet,
 		}));
-		
-		Salvage.addSalvage(ComponentListMF.chainmesh, hunk);
-		Salvage.addSalvage(ComponentListMF.scalemesh, hunk);
-		Salvage.addSalvage(ComponentListMF.splintmesh, hunk, ComponentListMF.rivet, ComponentListMF.rivet);
-	}
-	private static void addIngotComponents(CustomMaterial material, ItemStack ingot)
-	{
-		ItemStack salvage = material.getItem();
-		
-		int time = 4;
+		time = 4;
 		KnowledgeListMF.plateRecipes.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.plate.createComm(material.name), "smelt"+material.name, true, "hvyhammer", material.crafterTier, material.crafterAnvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, ComponentListMF.plate, "", true, "hvyhammer", 0, 0, time, new Object[]
 		{
 			"FF",
 			"II",
 			'F', ComponentListMF.flux,
-			'I', ingot
+			'I', bar
 		}));
 		
-		Salvage.addSalvage(ComponentListMF.plate.createComm(material.name), salvage, salvage);
+		Salvage.addSalvage(ComponentListMF.chainmesh, hunk);
+		Salvage.addSalvage(ComponentListMF.scalemesh, hunk);
+		Salvage.addSalvage(ComponentListMF.splintmesh, hunk, ComponentListMF.rivet, ComponentListMF.rivet);
+		Salvage.addSalvage(ComponentListMF.plate, bar, bar);
 	}
 }

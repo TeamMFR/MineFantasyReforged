@@ -94,8 +94,8 @@ public class ItemHeated extends Item implements IHotItem
 			nbt.setTag(Heatable.NBT_Item, save);
 			
 			nbt.setBoolean(Heatable.NBT_ShouldDisplay, true);
-			setWorkTemp(out, stats.minTemperature);
-			setUnstableTemp(out, stats.unstableTemperature);
+			setWorkTemp(out, stats.getWorkableStat(item));
+			setUnstableTemp(out, stats.getUnstableStat(item));
 	
 			return out;
 		}
@@ -297,12 +297,26 @@ public class ItemHeated extends Item implements IHotItem
 		int red = getRedOnHeat(heatPer);
 		int green = getGreenOnHeat(heatPer);
 		int blue = getBlueOnHeat(heatPer);
-
-		if (heat > 0) {
-			return GuiHelper.getColourForRGB(red, green, blue);
+		
+		float curr_red = 1.0F;
+		float curr_green = 1.0F;
+		float curr_blue = 1.0F;
+		
+		ItemStack held = getItem(item);
+		if(held != null)
+		{
+			int colour = held.getItem().getColorFromItemStack(held, 0);
+			
+			curr_red = (float)(colour >> 16 & 255) / 255.0F;
+            curr_green = (float)(colour >> 8 & 255) / 255.0F;
+            curr_blue = (float)(colour & 255) / 255.0F;
+            
+            red = (int) ((float)red * curr_red);
+            green = (int) ((float)green * curr_green);
+            blue = (int) ((float)blue * curr_blue);
 		}
-
-		return Color.WHITE.getRGB();
+		
+		return GuiHelper.getColourForRGB(red, green, blue);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -310,11 +324,15 @@ public class ItemHeated extends Item implements IHotItem
 		return true;
 	}
 
-	private int getRedOnHeat(double percent) {
+	private int getRedOnHeat(double percent)
+	{
+		if(percent <= 0)return 255;
 		return 255;
 	}
 
-	private int getGreenOnHeat(double percent) {
+	private int getGreenOnHeat(double percent) 
+	{
+		if(percent <= 0)return 255;
 		if (percent > 100)
 			percent = 100;
 		if (percent < 0)
@@ -327,7 +345,10 @@ public class ItemHeated extends Item implements IHotItem
 		}
 	}
 
-	private int getBlueOnHeat(double percent) {
+	private int getBlueOnHeat(double percent) 
+	{
+		if(percent <= 0)return 255;
+		
 		if (percent > 100)
 			percent = 100;
 		if (percent < 0)

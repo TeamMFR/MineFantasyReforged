@@ -103,6 +103,7 @@ item.haft.name=Haft
 item.commodity_hunk.name=%1$s Hunk
 item.commodity_scrap.name=%1$s Scrap
 item.commodity_plate.name=%1$s Plate
+item.commodity_bar.name=%1$s Bar
 item.commodity_plate_huge.name=Huge %1$s Plate
 item.commodity_chainmesh.name=%1$s Chain Mesh
 item.commodity_scalemesh.name=%1$s Scales Mesh
@@ -2108,7 +2109,8 @@ knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathe
 	
 knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic firestarter (Dry rocks-Craft-Tools), and wear an apron too!
 
-knowledge.gettingStarted.3=Now you need some leather strips for tools. Gather 2 copper, 2 planks and 1 leather to craft a set of copper shears.
+knowledge.gettingStarted.forgingbars=Most recipes use bars rather than ingots. A bar is an easy to forge component made from metal. Create bars from placing a hot ingot on an anvil and hammering them.
+knowledge.gettingStarted.3=Now you need some leather strips for tools. Gather 2 copper (crafted into bars), 2 planks and 1 leather to craft a set of copper shears.
 knowledge.gettingStarted.4=With these shears, you can cut leather to strips on the carpenter's bench OR a tanning rack by right-clicking them on the block with leather on it.
 
 knowledge.gettingStarted.5=At this point: You now should have access to leather, copper, planks and strips. It is now possible to upgrade that stone hammer!
@@ -2167,7 +2169,7 @@ knowledge.commodities.refinedplank=Some timber can be refined with a simple mixt
 
 knowledge.commodities.flux=Flux is commonly used in refining metals. Standard flux can be used in devices such as blast furnaces for refining ingots. Strong flux is used in advanced alloys.
 
-knowledge.commodities.hunks=For the smaller creations, hunks are used. You can turn ingots into hunks, and back to ingots.
+knowledge.commodities.hunks=For the smaller creations, hunks are used. You can turn bars into hunks, and back to bars.
 
 knowledge.commodities.nail=Nails are basic items used in woodworking. They can be made from Copper, Tin, Bronze, Iron or Steel. (This doesn't affect quality, just amount made)
 
@@ -2256,6 +2258,10 @@ knowledge.fastblade.info=
 knowledge.axe.info=
 knowledge.blunt.info=
 knowledge.polearms.info=
+
+knowledge.bar=Metal Bar
+knowledge.bar.desc=Standardised shaping
+knowledge.bar.1=An ingot may be used for your standard crafting and trading needs but their too thick for easy forging. Bars are produced from ingots to create a standardised, easy to reforge commodity, allowing easy setup and production of items. Bars are used in artisanry in particular over ingots for this reason.^A bar can be reconverted to an ingot with the application of flux.
 
 knowledge.smeltCopper=Copper Smithing
 knowledge.smeltCopper.desc=Tier %1$s, Common material
