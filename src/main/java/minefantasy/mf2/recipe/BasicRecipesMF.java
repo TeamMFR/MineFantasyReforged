@@ -179,8 +179,6 @@ public class BasicRecipesMF
 			}
 		}
 		
-		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.iron_prep, new ItemStack(ComponentListMF.ingots[3]));
-		
 		KnowledgeListMF.fireclayR = 
 		MineFantasyAPI.addBasicCarpenterRecipe(new ItemStack(ComponentListMF.fireclay, 4), new Object[]
 		{

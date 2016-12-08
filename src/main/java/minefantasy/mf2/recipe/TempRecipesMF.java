@@ -31,30 +31,18 @@ public class TempRecipesMF
     		assembleWoodVariations(customMat);
     	}
 		
-		GameRegistry.addRecipe(new ItemStack(Items.bucket, 1), new Object[]
-		{
-			"I I",
-			" I ",
-			'I', ComponentListMF.ingots[1],
-		});
 		//RESOURCES
 		
-		ArrayList<ItemStack> steels = OreDictionary.getOres("ingotSteel");
-		ArrayList<ItemStack> bronzes = OreDictionary.getOres("ingotBronze");
-		ArrayList<ItemStack> silvers = OreDictionary.getOres("ingotSilver");
-		ArrayList<ItemStack> blacks = OreDictionary.getOres("ingotBlackSteel");
+		ItemStack steel = ComponentListMF.bar("Steel");
 		
-		for(ItemStack steel: steels)
+		GameRegistry.addRecipe(new ItemStack(Blocks.rail, 64), new Object[]
 		{
-			GameRegistry.addRecipe(new ItemStack(Blocks.rail, 64), new Object[]
-			{
-				"I I",
-				"ISI",
-				"I I",
-				'I', steel,
-				'S', Items.stick,
-			});
-		}
+			"I I",
+			"ISI",
+			"I I",
+			'I', steel,
+			'S', Items.stick,
+		});
 		
 		GameRegistry.addShapedRecipe(new ItemStack(Blocks.cobblestone), new Object[]
 		{

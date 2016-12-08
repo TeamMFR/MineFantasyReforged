@@ -5,6 +5,7 @@ import java.util.Random;
 
 import minefantasy.mf2.api.heating.TongsHelper;
 import minefantasy.mf2.api.stamina.StaminaBar;
+import minefantasy.mf2.block.decor.BlockComponent;
 import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
@@ -38,14 +39,13 @@ public class ItemJug extends ItemComponentMF
     {
 		if(type.equalsIgnoreCase("uncooked"))
 		{
-			return item;
+			return super.onItemRightClick(item, world, player);
 		}
 		if(type.equalsIgnoreCase("empty"))
 		{
 			return rightClickEmpty(item, world, player);
 		}
-		player.setItemInUse(item, getMaxItemUseDuration(item));
-		return item;
+		return useFilled(item, world, player);
     }
 	
 	@Override
@@ -108,7 +108,7 @@ public class ItemJug extends ItemComponentMF
 
         if (movingobjectposition == null)
         {
-            return item;
+            return super.onItemRightClick(item, world, player);
         }
         else
         {
@@ -120,20 +120,21 @@ public class ItemJug extends ItemComponentMF
 
                 if (!world.canMineBlock(player, i, j, k))
                 {
-                    return item;
+                    return super.onItemRightClick(item, world, player);
                 }
 
                 if (!player.canPlayerEdit(i, j, k, movingobjectposition.sideHit, item))
                 {
-                    return item;
+                    return super.onItemRightClick(item, world, player);
                 }
 
                 if (isWaterSource(world, i, j, k))
                 {
                 	gather(item, world, player);
+                	return item;
                 }
             }
-            return item;
+            return super.onItemRightClick(item, world, player);
         }
 	}
 
@@ -153,5 +154,29 @@ public class ItemJug extends ItemComponentMF
     private boolean isWaterSource(World world, int i, int j, int k)
     {
 		return TongsHelper.getWaterSource(world, i, j, k) >= 0;
+	}
+    
+	public ItemStack useFilled(ItemStack item, World world, EntityPlayer user) 
+	{
+		if (!world.isRemote && storageType != null)
+		{
+			MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
+
+			if (movingobjectposition == null) 
+			{
+				return item;
+			} 
+			else 
+			{
+				int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition);
+				if (placed > 0) 
+				{
+					item.stackSize -= placed;
+					return item;
+				}
+			}
+		}
+		user.setItemInUse(item, getMaxItemUseDuration(item));
+		return item;
 	}
 }

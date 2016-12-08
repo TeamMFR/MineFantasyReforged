@@ -23,6 +23,7 @@ import minefantasy.mf2.block.tileentity.TileEntityFirepit;
 import minefantasy.mf2.block.tileentity.TileEntityForge;
 import minefantasy.mf2.block.tileentity.TileEntityQuern;
 import minefantasy.mf2.block.tileentity.TileEntityResearch;
+import minefantasy.mf2.block.tileentity.TileEntityRoad;
 import minefantasy.mf2.block.tileentity.TileEntityRoast;
 import minefantasy.mf2.block.tileentity.TileEntityTanningRack;
 import minefantasy.mf2.block.tileentity.TileEntityWorldGenMarker;
@@ -175,6 +176,7 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler
 		GameRegistry.registerTileEntity(TileEntityAmmoBox.class, "MF_AmmoBox");
 		GameRegistry.registerTileEntity(TileEntityWorldGenMarker.class, "MF_WorldGenFlag");
 		GameRegistry.registerTileEntity(TileEntityComponent.class, "MF_ComponentTile");
+		GameRegistry.registerTileEntity(TileEntityRoad.class, "MF_Road");
 	}
 
 

@@ -1,22 +1,32 @@
-package minefantasy.mf2.client.render.block;
-
-import java.util.Random;
+package minefantasy.mf2.client.render.block.component;
 
 import org.lwjgl.opengl.GL11;
 
 import minefantasy.mf2.api.helpers.TextureHelperMF;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.tileentity.TileEntityComponent;
-import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
+import minefantasy.mf2.client.render.block.component.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityComponentRenderer extends TileEntitySpecialRenderer
 {
+	private ModelBarStack bars;
+    private ModelSheetStack sheets;
+    private ModelPlankStack planks;
+    private ModelPotStack pots;
+    private ModelBigPlateStack bigplates;
+    private ModelJugStack jugs;
+    
     public TileEntityComponentRenderer() 
     {
         this.bars = new ModelBarStack();
+        this.sheets = new ModelSheetStack();
+        this.planks = new ModelPlankStack();
+        this.pots = new ModelPotStack();
+        this.bigplates = new ModelBigPlateStack();
+        this.jugs = new ModelJugStack();
     }
 
 	public void renderModelAt(TileEntityComponent tile, double d, double d1, double d2, float f) 
@@ -61,6 +71,26 @@ public class TileEntityComponentRenderer extends TileEntitySpecialRenderer
     	{
     		bars.render(stackSize, f);
     	}
+    	if(type.equalsIgnoreCase("sheet"))
+    	{
+    		sheets.render(stackSize, f);
+    	}
+    	if(type.equalsIgnoreCase("plank"))
+    	{
+    		planks.render(stackSize, f);
+    	}
+    	if(type.equalsIgnoreCase("pot"))
+    	{
+    		pots.render(stackSize, f);
+    	}
+    	if(type.equalsIgnoreCase("bigplate"))
+    	{
+    		bigplates.render(stackSize, f);
+    	}
+    	if(type.equalsIgnoreCase("jug"))
+    	{
+    		jugs.render(stackSize, f);
+    	}
 	}
 
 	private void bindTextureByName(String image)
@@ -72,6 +102,4 @@ public class TileEntityComponentRenderer extends TileEntitySpecialRenderer
         renderModelAt((TileEntityComponent) tileentity, d, d1, d2, f); //where to render
     }
 	
-    private ModelBarStack bars;
-    private Random random = new Random();
 }

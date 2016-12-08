@@ -11,6 +11,7 @@ import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.block.decor.BlockComponent;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -21,6 +22,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
 /**
  * @author Anonymous Productions
  */
@@ -315,4 +318,39 @@ public class ItemComponentMF extends Item implements ITieredComponent
 		return materialType;
 	}
     //====================================================== CUSTOM END ==============================================================\\
+
+  //STORAGE
+    protected String blocktex;
+  	protected String storageType;
+  	
+  	public ItemComponentMF setStoragePlacement(String type, String tex)
+  	{
+  		this.blocktex = tex;
+  		this.storageType = type;
+  		return this;
+  	}
+  	
+  	@Override
+  	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
+      {
+  		if(!world.isRemote && storageType != null)
+  		{
+  	        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
+  	
+  	        if (movingobjectposition == null)
+  	        {
+  	            return item;
+  	        }
+  	        else
+  	        {
+  	        	int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition);
+  	        	if(placed > 0)
+  	        	{
+  	        		item.stackSize -= placed;
+  	        		return item;
+  	        	}
+  	        }
+  		}
+  		return item;
+      }
 }

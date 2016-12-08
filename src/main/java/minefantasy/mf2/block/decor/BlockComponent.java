@@ -22,6 +22,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -99,6 +100,15 @@ public class BlockComponent extends BlockContainer
 			((TileEntityComponent)tile).interact(user, held, leftClick);
 		}
     }
+	@Override
+	public void onNeighborBlockChange(World world, int x, int y, int z, Block block)
+	{
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if(tile != null && tile instanceof TileEntityComponent)
+		{
+			((TileEntityComponent)tile).checkStack();
+		}
+	}
 	private Random rand = new Random();
 	
 	private static TileEntityComponent getTile(World world, int x, int y, int z) 
@@ -111,23 +121,36 @@ public class BlockComponent extends BlockContainer
 		return null;
 	}
 	
-	public static boolean placeComponent(ItemStack item, World world, int x, int y, int z, String type, String tex, int dir)
+	public static int placeComponent(EntityPlayer user, ItemStack item, World world, int x, int y, int z, String type, String tex, int dir)
 	{
-		if(world.isAirBlock(x, y, z) && world.isSideSolid(x, y-1, z, ForgeDirection.UP))
+		if(world.isAirBlock(x, y, z) && canBuildOn(world, x, y-1, z))
 		{
 			world.setBlock(x, y, z, BlockListMF.components, dir, 2);
+			
+			int max = getStorageSize(type);
+			int size = user.isSneaking() ? Math.min(item.stackSize, max) : 1;
 			
 			TileEntityComponent tile = new TileEntityComponent();
 			ItemStack newitem = item.copy();
 			newitem.stackSize = 1;
-			tile.setItem(newitem, type, tex, getStorageSize(type));
+			tile.setItem(newitem, type, tex, max, size);
 			world.setTileEntity(x, y, z, tile);
-			return true;
+			return size;
 		}
-		return false;
+		return 0;
 	}
 
-	public static boolean useComponent(ItemStack item, String type, String tex, World world, EntityPlayer user, MovingObjectPosition movingobjectposition) 
+	public static boolean canBuildOn(World world, int x, int y, int z) 
+	{
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if(tile != null && tile instanceof TileEntityComponent)
+		{
+			return ((TileEntityComponent)tile).isFull();
+		}
+		return world.isSideSolid(x, y, z, ForgeDirection.UP);
+	}
+
+	public static int useComponent(ItemStack item, String type, String tex, World world, EntityPlayer user, MovingObjectPosition movingobjectposition) 
 	{
 		if (movingobjectposition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
         {
@@ -168,19 +191,22 @@ public class BlockComponent extends BlockContainer
             if (user.canPlayerEdit(i, j, k, movingobjectposition.sideHit, item))
             {
             	int l = MathHelper.floor_double((double)(user.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-                return placeComponent(item, user.worldObj, i, j, k, type, tex, l);
+                return placeComponent(user, item, user.worldObj, i, j, k, type, tex, l);
             }
         }
-		return false;
+		return 0;
 	}
 
 	public static int getStorageSize(String id) 
 	{
 		if(id == null)return 0;
 		
-		if(id.equalsIgnoreCase("bar")) return 32;
-		if(id.equalsIgnoreCase("timber")) return 32;
+		if(id.equalsIgnoreCase("bar")) return 64;
+		if(id.equalsIgnoreCase("plank")) return 64;
+		if(id.equalsIgnoreCase("pot")) return 64;
+		if(id.equalsIgnoreCase("jug")) return 32;
 		if(id.equalsIgnoreCase("sheet")) return 16;
+		if(id.equalsIgnoreCase("bigplate")) return 8;
 		
 		return 0;
 	}
@@ -260,4 +286,30 @@ public class BlockComponent extends BlockContainer
             }
         }
 	}
+	
+	private AxisAlignedBB getBoundingBox(World world, int x, int y, int z)
+	{
+		float height = 1.0F;
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if(tile != null && tile instanceof TileEntityComponent)
+		{
+			height = ((TileEntityComponent)tile).getBlockHeight();
+		}
+		return AxisAlignedBB.getBoundingBox(x + 0.0625D, y + 0D, z + 0.0625D, x + 0.9375D, y + height, z + 0.9375D);
+	}
+	@Override
+	public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
+    {
+		return getBoundingBox(world, x, y, z);
+    }
+
+    /**
+     * Returns the bounding box of the wired rectangular prism to render.
+     */
+    @SideOnly(Side.CLIENT)
+    @Override
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z)
+    {
+    	return getBoundingBox(world, x, y, z);
+    }
 }

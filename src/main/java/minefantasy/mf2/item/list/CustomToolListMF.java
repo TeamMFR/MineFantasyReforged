@@ -13,6 +13,7 @@ import minefantasy.mf2.item.tool.ItemSpadeMF;
 import minefantasy.mf2.item.tool.advanced.ItemHandpick;
 import minefantasy.mf2.item.tool.advanced.ItemHvyPick;
 import minefantasy.mf2.item.tool.advanced.ItemHvyShovel;
+import minefantasy.mf2.item.tool.advanced.ItemMattock;
 import minefantasy.mf2.item.tool.advanced.ItemScythe;
 import minefantasy.mf2.item.tool.advanced.ItemTrowMF;
 import minefantasy.mf2.item.tool.crafting.ItemBasicCraftTool;
@@ -52,6 +53,7 @@ public class CustomToolListMF
 	public static ItemHandpick standard_handpick;
 	public static ItemTrowMF  standard_trow;
 	public static ItemScythe standard_scythe;
+	public static ItemMattock standard_mattock;
 	
 	public static ItemHammer standard_hammer, standard_hvyhammer;
 	public static ItemTongs standard_tongs;
@@ -141,6 +143,7 @@ public class CustomToolListMF
 		standard_trow = (ItemTrowMF) new ItemTrowMF(design+"_trow", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
 		standard_hvyshovel = (ItemHvyShovel) new ItemHvyShovel(design+"_hvyshovel", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
 		standard_scythe = (ItemScythe) new ItemScythe(design+"_scythe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
+		standard_mattock = (ItemMattock) new ItemMattock(design+"_mattock", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
 		//Standard Crafters
 		 tab = CreativeTabMF.tabCraftTool;
 		standard_hammer = (ItemHammer) new ItemHammer(design+"_hammer", ToolMaterial.IRON, false, 0, 0).setCustom(design).setCreativeTab(tab);

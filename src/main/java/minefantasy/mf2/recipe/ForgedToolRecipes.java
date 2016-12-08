@@ -3,13 +3,13 @@ package minefantasy.mf2.recipe;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.api.MineFantasyAPI;
+import minefantasy.mf2.api.crafting.BasicTierRecipe;
 import minefantasy.mf2.api.crafting.Salvage;
-import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.rpg.Skill;
 import minefantasy.mf2.api.rpg.SkillList;
-import minefantasy.mf2.item.list.ArmourListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -19,10 +19,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
-import minefantasy.mf2.item.ItemComponentMF;
 
 public class ForgedToolRecipes 
 {
+	public static boolean easyBars = false;
+	
 	private static final Skill artisanry = SkillList.artisanry;
 	private static final Skill engineering = SkillList.engineering;
 	private static final Skill construction = SkillList.construction;
@@ -46,25 +47,49 @@ public class ForgedToolRecipes
     		ItemStack bar =  ComponentListMF.bar.createComm(customMat.name);
     		for(ItemStack ingot: OreDictionary.getOres("ingot"+customMat.name))
     		{
-    			KnowledgeListMF.barR.add(
-    			MineFantasyAPI.addAnvilRecipe(artisanry, bar, "smelt"+customMat.name, true, "hammer", customMat.crafterTier, customMat.crafterAnvilTier, (int)(2*customMat.craftTimeModifier), new Object[]
-				{
-					"I",
-					'I', ingot,
-				}));
+    			if(easyBars)
+    			{
+    				KnowledgeListMF.barRE.add(
+	    			GameRegistry.addShapedRecipe( ComponentListMF.bar.createComm(customMat.name), new Object[]
+					{
+						"I",
+						'I', ingot,
+					}));
+    			}
+    			else
+    			{
+	    			KnowledgeListMF.barR.add(
+	    			MineFantasyAPI.addAnvilRecipe(artisanry, bar, "smelt"+customMat.name, true, "hammer", customMat.crafterTier, customMat.crafterAnvilTier, (int)(customMat.craftTimeModifier/2F), new Object[]
+					{
+						"I",
+						'I', ingot,
+					}));
+    			}
     		}
     		
     		ItemStack defaultIngot = customMat.getItem();
     		if(defaultIngot != null)
     		{
-    			KnowledgeListMF.baringotR.add(
-    			MineFantasyAPI.addAnvilRecipe(artisanry, defaultIngot, "", true, "hammer", customMat.crafterTier, customMat.crafterAnvilTier, (int)(2*customMat.craftTimeModifier), new Object[]
-				{
-					"F", 
-					"I",
-					'I', bar,
-					'F', ComponentListMF.flux
-				}));
+    			if(easyBars)
+    			{
+    				KnowledgeListMF.baringotRE.add(
+	    			BasicTierRecipe.add(defaultIngot, new Object[]
+					{
+						"I",
+						'I', ComponentListMF.bar.createComm(customMat.name),
+					}));
+    			}
+    			else
+    			{
+	    			KnowledgeListMF.baringotR.add(
+	    			MineFantasyAPI.addAnvilRecipe(artisanry, defaultIngot, "", true, "hammer", customMat.crafterTier, customMat.crafterAnvilTier, (int)(customMat.craftTimeModifier/2F), new Object[]
+					{
+						"F", 
+						"I",
+						'I', bar,
+						'F', ComponentListMF.flux
+					}));
+    			}
     		}
     	}
 		
@@ -422,6 +447,24 @@ public class ForgedToolRecipes
 				plank, plank, plank, plank,
 				strip,
 				rivet, rivet);
+		
+		time = 14;
+		KnowledgeListMF.mattockR =
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, CustomToolListMF.standard_mattock, "", true, "hammer", 0, 0, time, new Object[]
+		{
+			"L I",
+			"PPI",
+			"LIR",
+			
+			'I', bar,
+			'P', plank,
+			'L', strip,
+			'R', rivet
+		});
+		Salvage.addSalvage(CustomToolListMF.standard_mattock,
+				bar, bar, bar, rivet,
+				plank, plank,
+				strip, strip);
 	}
 	
 	

@@ -39,6 +39,11 @@ public class ForgingRecipes
 		ForgedArmourRecipes.init();
 		addCogworkParts();
 		
+		ItemStack ironbar = ComponentListMF.bar("Iron");
+		ItemStack steelbar = ComponentListMF.bar("Steel");
+		ItemStack goldbar = ComponentListMF.bar("Gold");
+		ItemStack silverbar = ComponentListMF.bar("Silver");
+		
 		//MISC
 		BaseMaterialMF material;
 		int time;
@@ -59,31 +64,22 @@ public class ForgingRecipes
 		});
 		
 		time = 3;
-		for(ItemStack ingot: OreDictionary.getOres("ingotSteel"))
+		KnowledgeListMF.encrustedR = 
+		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.bar("Encrusted"), "smeltEncrusted", true, material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			IAnvilRecipe recipe = 
-			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.ingots[5]), "smeltEncrusted", true, material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
-			{
-				"D",
-				"I",
-				'D', ComponentListMF.diamond_shards,
-				'I', ingot,
-			});
-			if(ingot.getItem() instanceof ItemComponentMF)
-			{
-				Salvage.addSalvage(ComponentListMF.ingots[5], ComponentListMF.ingots[4], ComponentListMF.diamond_shards);
-			}
-			if(KnowledgeListMF.encrustedR == null)
-			{
-				KnowledgeListMF.encrustedR = recipe;
-			}
-		}
+			"D",
+			"I",
+			'D', ComponentListMF.diamond_shards,
+			'I', ComponentListMF.bar("Steel"),
+		});
+		Salvage.addSalvage(ComponentListMF.ingots[5], ComponentListMF.ingots[4], ComponentListMF.diamond_shards);
+		Salvage.addSalvage(ComponentListMF.bar("Encrusted"), ComponentListMF.bar("Steel"), ComponentListMF.diamond_shards);
 		
 		material = BaseMaterialMF.pigiron;
 		for(ItemStack ore: OreDictionary.getOres("ingotPigIron"))
 		{
 			KnowledgeListMF.steelR = 
-			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.ingots[4], 1), "smeltSteel", true, 1, 1, 5, new Object[]
+			MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.bar("Steel"), "smeltSteel", true, 1, 1, 5, new Object[]
 			{
 				"H",
 				'H', ore
@@ -260,39 +256,23 @@ public class ForgingRecipes
 				Blocks.furnace);
 		
 		
-		for(ItemStack silver : OreDictionary.getOres("ingotSilver"))
-		{
-			addOrnate(silver);
-		}
-		addNails("Copper", 1);
-		addNails("Tin", 1);
-		addNails("Bronze", 2);
-		addNails("Iron", 4);
-		addNails("Steel", 8);
-		
 		IAnvilRecipe[] anvilRecs = new IAnvilRecipe[BlockListMF.anvils.length];
 		for(int id = 0; id < BlockListMF.anvils.length; id ++)
 		{
 			time = 8;
 			material = BaseMaterialMF.getMaterial(BlockListMF.anvils[id]);
+			ItemStack bar = ComponentListMF.bar(material.name);
 			
-			for(ItemStack ingot: OreDictionary.getOres("ingot"+material.name))
+			anvilRecs[id] = 
+			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(BlockListMF.anvil[id]), "smelt"+material.name, false, "hammer", material.hammerTier-1, material.anvilTier-1, (int)(time*material.craftTimeModifier), new Object[]
 			{
-				IAnvilRecipe recipe = 
-				MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(BlockListMF.anvil[id]), "smelt"+material.name, false, "hammer", material.hammerTier-1, material.anvilTier-1, (int)(time*material.craftTimeModifier), new Object[]
-				{
-					" II",
-					"III",
-					" I ",
-					'I', ingot,
-				});
-				anvilRecs[id] = recipe;
-				
-				if(ingot.getItem() instanceof ItemComponentMF || ingot.getItem() == Items.iron_ingot)
-				{
-					Salvage.addSalvage(BlockListMF.anvil[id], new ItemStack(ingot.getItem(), 6));
-				}
-			}
+				" II",
+				"III",
+				" I ",
+				'I', bar,
+			});
+			
+			Salvage.addSalvage(BlockListMF.anvil[id], ComponentListMF.bar(material.name, 6));
 		}
 		recipeMap.put("anvilCrafting", anvilRecs);
 		
@@ -369,29 +349,26 @@ public class ForgingRecipes
 			"GIG",
 			" G ",
 			'L', new ItemStack(Items.dye, 1, 4),
-			'I', Items.iron_ingot,
-			'G', Items.gold_ingot,
+			'I', ironbar,
+			'G', goldbar,
 		}));
-		for(ItemStack silver: OreDictionary.getOres("ingotSilver"))
+		KnowledgeListMF.talismanRecipe.add(
+		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_lesser), "", true, "hammer", -1, -1, 20, new Object[]
 		{
-			KnowledgeListMF.talismanRecipe.add(
-			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_lesser), "", true, "hammer", -1, -1, 20, new Object[]
-			{
-				"LSL",
-				"SIS",
-				" S ",
-				'L', new ItemStack(Items.dye, 1, 4),
-				'I', Items.iron_ingot,
-				'S', silver,
-			}));
-		}
+			"LSL",
+			"SIS",
+			" S ",
+			'L', new ItemStack(Items.dye, 1, 4),
+			'I', ironbar,
+			'S', silverbar,
+		}));
 		KnowledgeListMF.greatTalismanRecipe =
 		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_greater), "", true, "hammer", 1, 1, 50, new Object[]
 		{
 			"GSG",
 			"DTD",
 			"GDG",
-			'G', Items.gold_ingot,
+			'G', goldbar,
 			'D', Items.diamond,
 			'T', ComponentListMF.talisman_lesser,
 			'S', Items.nether_star,
@@ -408,11 +385,11 @@ public class ForgingRecipes
 			" R ",
 			"I I",
 			" I ",
-			'I', Items.iron_ingot,
+			'I', ironbar,
 			'R', ComponentListMF.rivet,
 		});
 		Salvage.addSalvage(FoodListMF.cake_tin, 
-				Items.iron_ingot, Items.iron_ingot, Items.iron_ingot
+				ComponentListMF.bar("Iron", 3)
 				, ComponentListMF.rivet);
 		
 		KnowledgeListMF.coalfluxR = 
@@ -437,10 +414,6 @@ public class ForgingRecipes
 				ComponentListMF.leather_strip
 				, ComponentListMF.rivet);
 	}
-
-	private static void addOrnate(ItemStack silver)
-	{
-	}
 	
 	private static Item getStrips(BaseMaterialMF material)
 	{
@@ -453,6 +426,14 @@ public class ForgingRecipes
 	
 	private static void addEngineering() 
 	{	
+		ItemStack copper = ComponentListMF.bar("Copper");
+		ItemStack bronze = ComponentListMF.bar("Bronze");
+		ItemStack iron = ComponentListMF.bar("Iron");
+		ItemStack steel = ComponentListMF.bar("Steel");
+		ItemStack tungsten = ComponentListMF.bar("Tungsten");
+		ItemStack blacksteel = ComponentListMF.bar("BlackSteel");
+		
+		
 		ItemStack bronzeHunk = ComponentListMF.metalHunk.createComm("bronze");
 		ItemStack ironHunk = ComponentListMF.metalHunk.createComm("iron");
 		ItemStack steelHunk = ComponentListMF.metalHunk.createComm("steel");
@@ -491,7 +472,7 @@ public class ForgingRecipes
 			"SIS",
 			'T', ToolListMF.engin_anvil_tools,
 			'R', ComponentListMF.rivet,
-			'I', Items.iron_ingot,
+			'I', iron,
 			'S', steelHunk,
 		});
 		time = 8;
@@ -513,25 +494,22 @@ public class ForgingRecipes
 			" S ",
 			" S ",
 			'T', ToolListMF.engin_anvil_tools,
-			'I', Items.iron_ingot,
+			'I', iron,
 			'S', steelHunk,
 		});
-		for(ItemStack steel: OreDictionary.getOres("ingotSteel"))
+		time = 35;
+		KnowledgeListMF.climbPickbR = 
+		MineFantasyAPI.addAnvilRecipe(engineering, new ItemStack(ToolListMF.climbing_pick_basic), "climber", true, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			time = 35;
-			KnowledgeListMF.climbPickbR = 
-			MineFantasyAPI.addAnvilRecipe(engineering, new ItemStack(ToolListMF.climbing_pick_basic), "climber", true, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
-			{
-				"L SR",
-				"IISR",
-				"L T ",
-				'R', ComponentListMF.rivet,
-				'T', ToolListMF.engin_anvil_tools,
-				'I', Items.iron_ingot,
-				'S', steel,
-				'L', getStrips(material),
-			});
-		}
+			"L SR",
+			"IISR",
+			"L T ",
+			'R', ComponentListMF.rivet,
+			'T', ToolListMF.engin_anvil_tools,
+			'I', iron,
+			'S', steel,
+			'L', getStrips(material),
+		});
 		time = 5;
 		KnowledgeListMF.bgearR = 
 		MineFantasyAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMF.bronze_gears), "ecomponents", true, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
@@ -541,7 +519,7 @@ public class ForgingRecipes
 			"BIB",
 			" B ",
 			'T', ToolListMF.engin_anvil_tools,
-			'I', Items.iron_ingot,
+			'I', iron,
 			'B', bronzeHunk,
 		});
 		time = 8;
@@ -557,28 +535,22 @@ public class ForgingRecipes
 			'W', tungstenHunk,
 			'G', ComponentListMF.bronze_gears,
 		});
-		for(ItemStack copper: OreDictionary.getOres("ingotCopper"))
+		time = 5;
+		material = BaseMaterialMF.compositeAlloy;
+		KnowledgeListMF.compPlateR =
+		MineFantasyAPI.addAnvilRecipe(engineering, ComponentListMF.bar("CompositeAlloy"), "cogArmour", true, "hvyhammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			for(ItemStack steel: OreDictionary.getOres("ingotSteel"))
-			{
-			time = 5;
-			material = BaseMaterialMF.compositeAlloy;
-			KnowledgeListMF.compPlateR =
-			MineFantasyAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMF.ingotCompositeAlloy), "cogArmour", true, "hvyhammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
-			{
-				" T ",
-				" S ",
-				"RWR",
-				" C ",
-				
-				'R', ComponentListMF.rivet,
-				'T', ToolListMF.engin_anvil_tools,
-				'C', copper,
-				'W', tungstenHunk,
-				'S', steel,
-			});
-			}
-		}
+			" T ",
+			" S ",
+			"RWR",
+			" C ",
+			
+			'R', ComponentListMF.rivet,
+			'T', ToolListMF.engin_anvil_tools,
+			'C', copper,
+			'W', tungstenHunk,
+			'S', steel,
+		});
 		material = BaseMaterialMF.iron;
 		
 		time = 5;
@@ -682,26 +654,27 @@ public class ForgingRecipes
 		
 		Salvage.addSalvage(ComponentListMF.iron_strut, 
 				steelHunk, steelHunk, steelHunk, steelHunk,
-				new ItemStack(Items.iron_ingot, 2), new ItemStack(ComponentListMF.rivet, 2));
+				ComponentListMF.bar("Iron", 2), new ItemStack(ComponentListMF.rivet, 2));
 		
 		Salvage.addSalvage(ComponentListMF.steel_tube, 
 				steelHunk, steelHunk, steelHunk, steelHunk,
 				new ItemStack(ComponentListMF.rivet, 2));
 		
-		Salvage.addSalvage(ToolListMF.climbing_pick_basic, new ItemStack(Items.iron_ingot, 2), new ItemStack(ComponentListMF.ingots[4], 2), new ItemStack(ComponentListMF.rivet, 2), new ItemStack(ComponentListMF.leather_strip, 2));
+		Salvage.addSalvage(ToolListMF.climbing_pick_basic, ComponentListMF.bar("Iron", 2), ComponentListMF.bar("Steel", 2), new ItemStack(ComponentListMF.rivet, 2), new ItemStack(ComponentListMF.leather_strip, 2));
 		
 		Salvage.addSalvage(ComponentListMF.bronze_gears,
 				bronzeHunk, bronzeHunk, bronzeHunk, bronzeHunk
-				,Items.iron_ingot);
+				,iron);
 		
 		Salvage.addSalvage(ComponentListMF.tungsten_gears, 
 				tungstenHunk, tungstenHunk, tungstenHunk, tungstenHunk,
 				ComponentListMF.bronze_gears);
 		
-		Salvage.addSalvage(ComponentListMF.ingotCompositeAlloy, ComponentListMF.ingots[0], ComponentListMF.ingots[4], tungstenHunk, new ItemStack(ComponentListMF.rivet, 2));
+		Salvage.addSalvage(ComponentListMF.bar("CompositeAlloy"), copper, steel, tungstenHunk, new ItemStack(ComponentListMF.rivet, 2));
+		Salvage.addSalvage(ComponentListMF.ingotCompositeAlloy, copper, steel, tungstenHunk, new ItemStack(ComponentListMF.rivet, 2));
 		
 		Salvage.addSalvage(ComponentListMF.bomb_casing_iron, ironHunk, ironHunk);
-		Salvage.addSalvage(ComponentListMF.mine_casing_iron, ironHunk, ironHunk, ComponentListMF.rivet, Items.iron_ingot);
+		Salvage.addSalvage(ComponentListMF.mine_casing_iron, ironHunk, ironHunk, ComponentListMF.rivet, iron);
 		Salvage.addSalvage(ComponentListMF.bomb_casing_arrow, 
 				ironHunk, ironHunk, ironHunk, ironHunk, 
 				new ItemStack(Items.redstone, 2), ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"), ComponentListMF.fletching);
@@ -711,7 +684,7 @@ public class ForgingRecipes
 				new ItemStack(Items.redstone, 2), ComponentListMF.fletching);
 		
 		Salvage.addSalvage(ComponentListMF.bomb_casing_obsidian, blacksteelHunk, blacksteelHunk, new ItemStack(ComponentListMF.rivet, 2));
-		Salvage.addSalvage(ComponentListMF.mine_casing_obsidian, blacksteelHunk, blacksteelHunk, Items.iron_ingot, ComponentListMF.rivet);
+		Salvage.addSalvage(ComponentListMF.mine_casing_obsidian, blacksteelHunk, blacksteelHunk, iron, ComponentListMF.rivet);
 		
 		Salvage.addSalvage(ComponentListMF.cross_bayonet, 
 				ironHunk, ironHunk, ironHunk, ironHunk, 
@@ -720,27 +693,21 @@ public class ForgingRecipes
 	private static void addConstruction() 
 	{
 		BaseMaterialMF material = BaseMaterialMF.tin;
+		ItemStack tin = ComponentListMF.bar("Tin");
 		int time = 10;
-		for(ItemStack tin: OreDictionary.getOres("ingotTin"))
+		KnowledgeListMF.brushRecipe = 
+		MineFantasyAPI.addAnvilRecipe(engineering, new ItemStack(ToolListMF.paint_brush), "paint_brush", true, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
 		{
-			KnowledgeListMF.brushRecipe = 
-			MineFantasyAPI.addAnvilRecipe(engineering, new ItemStack(ToolListMF.paint_brush), "paint_brush", true, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
-			{
-				"W",
-				"I",
-				"P",
-				
-				'W', Blocks.wool,
-				'I', tin,
-				'P', ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"),
-			});
-		}
+			"W",
+			"I",
+			"P",
+			
+			'W', Blocks.wool,
+			'I', tin,
+			'P', ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"),
+		});
 		
-		Salvage.addSalvage(ToolListMF.paint_brush, Blocks.wool, ComponentListMF.ingots[1], ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"));
-	}
-	
-	private static void addNails(String name, int count) 
-	{
+		Salvage.addSalvage(ToolListMF.paint_brush, Blocks.wool, tin, ((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"));
 	}
 	
 	private static void addCogworkParts() 

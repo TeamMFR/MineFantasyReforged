@@ -261,9 +261,9 @@ public class ToolListMF
 		
 		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(new ItemStack(skillbook_artisanry),   	1, 1 , 40));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(new ItemStack(Items.coal), 				5, 17, 100));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(new ItemStack(Items.iron_ingot), 			1, 4 , 50));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(ComponentListMF.bar("Iron"), 			1, 4 , 50));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(new ItemStack(Items.leather), 			1, 4 , 80));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(new ItemStack(ComponentListMF.ingots[4]), 1, 6,  40));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_FORGE, new WeightedRandomChestContent(ComponentListMF.bar("Steel"), 1, 6,  40));
 		
 		ChestGenHooks.addItem(LootTypes.DWARVEN_ARMOURY, new WeightedRandomChestContent(new ItemStack(BlockListMF.repair_basic), 		1, 1,  100));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_ARMOURY, new WeightedRandomChestContent(new ItemStack(BlockListMF.repair_advanced), 	1, 1,  50));
@@ -283,9 +283,9 @@ public class ToolListMF
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.bone), 	1, 9,  80));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.emerald), 	1, 1,  20));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.diamond), 	1, 1,  20));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.iron_ingot), 1, 4,  30));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.gold_ingot), 	1, 4,  20));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(ComponentListMF.ingots[8]), 	1, 4,  20));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(ComponentListMF.bar("Iron"), 1, 4,  30));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(ComponentListMF.bar("Gold"), 	1, 4,  20));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 	1, 4,  20));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.bucket), 	1, 1,  80));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.clock), 	1, 1,  20));
 		
@@ -295,9 +295,9 @@ public class ToolListMF
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.bone), 	1, 9,  10));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.emerald), 	1, 1,  50));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.diamond), 	1, 1,  50));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.iron_ingot), 1, 4,  30));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.gold_ingot), 	1, 4,  50));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(ComponentListMF.ingots[8]), 	1, 4,  50));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(ComponentListMF.bar("Iron"), 1, 4,  30));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(ComponentListMF.bar("Gold"), 	1, 4,  50));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 	1, 4,  50));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.bucket), 	1, 1,  20));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.clock), 	1, 1,  40));
 	}

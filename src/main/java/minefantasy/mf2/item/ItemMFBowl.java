@@ -29,7 +29,7 @@ public class ItemMFBowl extends ItemComponentMF
 
         if (movingobjectposition == null)
         {
-            return item;
+            return super.onItemRightClick(item, world, player);
         }
         else
         {
@@ -41,22 +41,22 @@ public class ItemMFBowl extends ItemComponentMF
 
                 if (!world.canMineBlock(player, i, j, k))
                 {
-                    return item;
+                    return super.onItemRightClick(item, world, player);
                 }
 
                 if (!player.canPlayerEdit(i, j, k, movingobjectposition.sideHit, item))
                 {
-                    return item;
+                    return super.onItemRightClick(item, world, player);
                 }
 
                 if (isWaterSource(world, i, j, k))
                 {
                 	gather(item, world, player);
+                	return item;
                 }
             }
-
-            return item;
         }
+        return super.onItemRightClick(item, world, player);
     }
     
 	private  Random rand = new Random();

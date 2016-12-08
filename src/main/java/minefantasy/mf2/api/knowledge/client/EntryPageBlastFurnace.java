@@ -38,6 +38,11 @@ public class EntryPageBlastFurnace extends EntryPage
 		this.output = out;
 	}
 	
+	public EntryPageBlastFurnace(Item i1, ItemStack i2)
+	{
+		this(new ItemStack(i1), i2);
+	}
+	
 	public EntryPageBlastFurnace(Item i1, Item i2)
 	{
 		this(new ItemStack(i1), new ItemStack(i2));

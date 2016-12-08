@@ -23,10 +23,30 @@ public class SmeltingRecipesMF {
 
 	public static void init() 
 	{
+		ItemStack copper = ComponentListMF.bar("Copper");
+		ItemStack tin = ComponentListMF.bar("Tin");
+		ItemStack bronze = ComponentListMF.bar("Bronze");
+		ItemStack iron = ComponentListMF.bar("Iron");
+		ItemStack pigiron = ComponentListMF.bar("RefinedIron");
+		ItemStack steel = ComponentListMF.bar("Steel");
+		ItemStack diamond = ComponentListMF.bar("Encrusted");
+		ItemStack tungsten = ComponentListMF.bar("Tungsten");
+		ItemStack obsidian = ComponentListMF.bar("Obsidian");
+		ItemStack black = ComponentListMF.bar("BlackSteel");
+		ItemStack red = ComponentListMF.bar("RedSteel");
+		ItemStack blue = ComponentListMF.bar("BlueSteel");
+		ItemStack gold = ComponentListMF.bar("Gold");
+		ItemStack silver = ComponentListMF.bar("Silver");
+		ItemStack mithril = ComponentListMF.bar("Mithril");
+		ItemStack adamant = ComponentListMF.bar("Adamantium");
+		ItemStack mithium = ComponentListMF.bar("Mithium");
+		ItemStack ignotumite = ComponentListMF.bar("Ignotumite");
+		ItemStack enderforge = ComponentListMF.bar("Enderforge");
+		
 		KnowledgeListMF.reStone =
 		MineFantasyAPI.addRatioAlloy(1, new ItemStack(BlockListMF.reinforced_stone, 4), 1, new Object[]
 		{
-			Blocks.stone,Blocks.stone,Blocks.stone,Blocks.stone, ComponentListMF.fireclay, Items.iron_ingot, ComponentListMF.obsidian_rock
+			Blocks.stone,Blocks.stone,Blocks.stone,Blocks.stone, ComponentListMF.fireclay, iron, ComponentListMF.obsidian_rock
 		});
 		if(ConfigHardcore.HCCreduceIngots)
 		{
@@ -41,24 +61,24 @@ public class SmeltingRecipesMF {
 			BloomRecipe.addRecipe(new ItemStack(Blocks.iron_ore), new ItemStack(Items.iron_ingot));
 			BloomRecipe.addRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Items.gold_ingot));
 			
-			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.iron_ore), new ItemStack(Items.iron_ingot), 0);
-			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Items.gold_ingot), 0);
+			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.iron_ore), iron, 0);
+			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.gold_ore), gold, 0);
 		}
 		
-		refineRawOre(ComponentListMF.oreCopper, ComponentListMF.ingots[0]);
-		refineRawOre(ComponentListMF.oreTin, ComponentListMF.ingots[1]);
-		refineRawOre(ComponentListMF.oreIron, Items.iron_ingot);
-		refineRawOre(ComponentListMF.oreSilver, ComponentListMF.ingots[8]);
-		refineRawOre(ComponentListMF.oreGold, Items.gold_ingot);
+		refineRawOre(ComponentListMF.oreCopper, ComponentListMF.ingots[0], copper);
+		refineRawOre(ComponentListMF.oreTin, ComponentListMF.ingots[1], tin);
+		refineRawOre(ComponentListMF.oreIron, Items.iron_ingot, iron);
+		refineRawOre(ComponentListMF.oreSilver, ComponentListMF.ingots[8], silver);
+		refineRawOre(ComponentListMF.oreGold, Items.gold_ingot, gold);
 		
-		MineFantasyAPI.addRatioAlloy(3, new ItemStack(ComponentListMF.ingots[2], 3), 0, new Object[]
+		MineFantasyAPI.addRatioAlloy(3, ComponentListMF.bar("bronze", 3), 0, new Object[]
 		{
 			ComponentListMF.oreCopper, ComponentListMF.oreCopper, ComponentListMF.oreTin
 		});
 		
-		refineRawOre(BlockListMF.oreCopper, ComponentListMF.ingots[0], 0.4F);
-		refineRawOre(BlockListMF.oreTin, ComponentListMF.ingots[1], 0.5F);
-		refineRawOre(BlockListMF.oreSilver, ComponentListMF.ingots[8], 0.9F);
+		refineRawOre(BlockListMF.oreCopper, ComponentListMF.ingots[0], copper, 0.4F);
+		refineRawOre(BlockListMF.oreTin, ComponentListMF.ingots[1], tin, 0.5F);
+		refineRawOre(BlockListMF.oreSilver, ComponentListMF.ingots[8], silver, 0.9F);
 		
 		GameRegistry.addSmelting(BlockListMF.oreBorax, new ItemStack(ComponentListMF.flux_strong, 4), 0.25F);
 		GameRegistry.addSmelting(BlockListMF.oreTungsten, new ItemStack(ComponentListMF.oreTungsten, 1), 0.25F);
@@ -69,8 +89,8 @@ public class SmeltingRecipesMF {
 		
 		//ALLOY
 		KnowledgeListMF.bronze = 
-		MineFantasyAPI.addRatioAlloy(3, new ItemStack(ComponentListMF.ingots[2], 3), new Object[]{
-			ComponentListMF.ingots[0], ComponentListMF.ingots[0], ComponentListMF.ingots[1]
+		MineFantasyAPI.addRatioAlloy(3, ComponentListMF.bar("bronze", 3), new Object[]{
+			copper, copper, tin
 		});
 		
 		ArrayList<ItemStack> pigs = OreDictionary.getOres("ingotPigIron");
@@ -79,124 +99,95 @@ public class SmeltingRecipesMF {
 		ArrayList<ItemStack> silvers = OreDictionary.getOres("ingotSilver");
 		ArrayList<ItemStack> blacks = OreDictionary.getOres("ingotBlackSteel");
 		
-		for(ItemStack steel: steels)
+		KnowledgeListMF.obsidalloy =
+		MineFantasyAPI.addRatioAlloy(1, obsidian, 1, new Object[]{
+			steel, 
+			ComponentListMF.obsidian_rock, ComponentListMF.obsidian_rock, ComponentListMF.obsidian_rock, ComponentListMF.obsidian_rock, 
+			ComponentListMF.flux_strong
+		});
+		KnowledgeListMF.black =
+		MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[6], 2), 1, new Object[]
 		{
-			KnowledgeListMF.obsidalloy =
-			MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[19]), 1, new Object[]{
-				steel, 
-				ComponentListMF.obsidian_rock, ComponentListMF.obsidian_rock, ComponentListMF.obsidian_rock, ComponentListMF.obsidian_rock, 
-				ComponentListMF.flux_strong
-			});
-			
-			for(ItemStack bronze: bronzes)
-			{
-				Alloy[] alloy =
-				MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[6], 2), 1, new Object[]{
-					steel, steel, bronze, bronze, ComponentListMF.obsidian_rock
-				});
-				if(KnowledgeListMF.black == null)
-				{
-					KnowledgeListMF.black = alloy;
-				}
-			}
-		}
+			steel, steel, bronze, bronze, ComponentListMF.obsidian_rock
+		});
+		
 		KnowledgeListMF.wolframiteR =
-		MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[18]), 1, new Object[]{
+		MineFantasyAPI.addRatioAlloy(1, tungsten, 1, new Object[]{
 			Items.coal, Items.coal, Items.coal, Items.coal, ComponentListMF.oreTungsten, ComponentListMF.flux_strong, ComponentListMF.flux_strong, ComponentListMF.flux_strong, ComponentListMF.flux_strong
 		});
-		MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[18]), 1, new Object[]{
+		MineFantasyAPI.addRatioAlloy(1, tungsten, 1, new Object[]{
 			Items.coal, Items.coal, Items.coal, Items.coal, BlockListMF.oreTungsten, ComponentListMF.flux_strong, ComponentListMF.flux_strong, ComponentListMF.flux_strong, ComponentListMF.flux_strong
 		});
 				
 		if(!ConfigHardcore.HCCreduceIngots)
 		{
-			for(ItemStack ingot: pigs)
+			KnowledgeListMF.steel = 
+			MineFantasyAPI.addRatioAlloy(9, steel, 1, new Object[]
 			{
-				Alloy[] alloy = 
-				MineFantasyAPI.addRatioAlloy(9, new ItemStack(ComponentListMF.ingots[4]), 1, new Object[]
-				{
-					ingot
-				});
-				if(KnowledgeListMF.steel == null)
-				{
-					KnowledgeListMF.steel = alloy;
-				}
-			}
-		}
-		for(ItemStack steel: blacks)
-		{
-			Alloy[] alloy = 
-			MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[9]), 1, new Object[]
-			{
-				steel, Items.gold_ingot, Items.redstone, ComponentListMF.flux_strong, Items.blaze_powder
+				pigiron
 			});
-			if(KnowledgeListMF.red == null)
-			{
-				KnowledgeListMF.red = alloy;
-			}
-			for(ItemStack silver: silvers)
-			{
-				alloy = 
-				MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[11]), 1, new Object[]
-				{
-					steel, silver, new ItemStack(Items.dye, 1, 4), ComponentListMF.flux_strong, Items.blaze_powder
-				});
-				if(KnowledgeListMF.blue == null)
-				{
-					KnowledgeListMF.blue = alloy;
-				}
-			}
 		}
+		KnowledgeListMF.red = 
+		MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[9]), 1, new Object[]
+		{
+			steel, gold, Items.redstone, ComponentListMF.flux_strong, Items.blaze_powder
+		});
+		
+		KnowledgeListMF.blue = 
+		MineFantasyAPI.addRatioAlloy(1, new ItemStack(ComponentListMF.ingots[11]), 1, new Object[]
+		{
+			steel, silver, new ItemStack(Items.dye, 1, 4), ComponentListMF.flux_strong, Items.blaze_powder
+		});
+		
 		KnowledgeListMF.adamantium = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[13], 2), 2, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, ComponentListMF.bar("adamantium", 2), 2, new Object[]
 		{
-			BlockListMF.oreMythic, Items.gold_ingot, Items.gold_ingot
+			BlockListMF.oreMythic, gold, gold
 		});
-		for(ItemStack silver: silvers)
+		
+		KnowledgeListMF.mithril = 
+		MineFantasyAPI.addRatioAlloy(2, ComponentListMF.bar("mithril", 2), new Object[]
 		{
-			Alloy[] alloy = 
-			MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[14], 2), 2, new Object[]
-			{
-				BlockListMF.oreMythic, silver, silver
-			});
-			if(KnowledgeListMF.mithril == null)
-			{
-				KnowledgeListMF.mithril = alloy;
-			}
-		}
+			BlockListMF.oreMythic, silver, silver
+		});
+		
 		KnowledgeListMF.ignotumite = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[15], 1), 3, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, ignotumite, 3, new Object[]
 		{
-			ComponentListMF.ingots[13], ComponentListMF.ingots[13], Items.emerald, Items.blaze_powder
+			adamant, adamant, Items.emerald, Items.blaze_powder
 		});
+		
 		KnowledgeListMF.mithium = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[16], 1), 3, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, mithium, 3, new Object[]
 		{
-			ComponentListMF.ingots[14], ComponentListMF.ingots[14], ComponentListMF.diamond_shards, Items.ghast_tear
+			mithril, mithril, ComponentListMF.diamond_shards, Items.ghast_tear
 		});
+		
 		KnowledgeListMF.enderforge = 
-		MineFantasyAPI.addRatioAlloy(2, new ItemStack(ComponentListMF.ingots[17], 1), 3, new Object[]
+		MineFantasyAPI.addRatioAlloy(2, enderforge, 3, new Object[]
 		{
-			ComponentListMF.ingots[13], ComponentListMF.ingots[14], Items.ender_pearl, Items.ender_pearl
+			adamant, mithril, Items.ender_pearl, Items.ender_pearl
 		});
-		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[6], new ItemStack(ComponentListMF.ingots[7]));
-		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[9], new ItemStack(ComponentListMF.ingots[10]));
-		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[11], new ItemStack(ComponentListMF.ingots[12]));
+		
+		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.iron_prep, ComponentListMF.bar("RefinedIron"));
+		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[6], black);
+		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[9], red);
+		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[11], blue);
 	}
 
-	private static void refineRawOre(Item ore, Item ingot)
+	private static void refineRawOre(Item ore, Item ingot, ItemStack bar)
 	{
-		refineRawOre(ore, ingot, 0F);
+		refineRawOre(ore, ingot, bar, 0F);
 	}
-	private static void refineRawOre(Block ore, Item ingot)
+	private static void refineRawOre(Block ore, Item ingot, ItemStack bar)
 	{
-		refineRawOre(ore, ingot, 0F);
+		refineRawOre(ore, ingot, bar, 0F);
 	}
-	private static void refineRawOre(Block ore, Item ingot, float xp)
+	private static void refineRawOre(Block ore, Item ingot, ItemStack bar, float xp)
 	{
-		refineRawOre(Item.getItemFromBlock(ore), ingot, xp);
+		refineRawOre(Item.getItemFromBlock(ore), ingot, bar, xp);
 	}
-	private static void refineRawOre(Item ore, Item ingot, float xp)
+	private static void refineRawOre(Item ore, Item ingot, ItemStack bar, float xp)
 	{
 		if(ConfigHardcore.HCCreduceIngots)
 		{
@@ -206,7 +197,7 @@ public class SmeltingRecipesMF {
 		{
 			GameRegistry.addSmelting(ore, new ItemStack(ingot), xp);
 		}
-		BigFurnaceRecipes.addRecipe(new ItemStack(ore), new ItemStack(ingot), 0);
+		BigFurnaceRecipes.addRecipe(new ItemStack(ore), bar, 0);
 	}
 
 }

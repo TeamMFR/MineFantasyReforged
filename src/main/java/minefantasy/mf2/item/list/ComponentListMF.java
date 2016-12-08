@@ -57,16 +57,16 @@ public class ComponentListMF
 	
 
 	
-	public static Item clay_pot = new ItemMFBowl("clay_pot");
+	public static Item clay_pot = new ItemMFBowl("clay_pot").setStoragePlacement("pot", "pot");
 	public static Item clay_pot_uncooked = new ItemComponentMF("clay_pot_uncooked", 0);
-	public static Item ingot_mould = new ItemComponentMF("ingot_mould");
+	public static Item ingot_mould = new ItemComponentMF("ingot_mould").setStoragePlacement("bar", "mould");
 	public static Item ingot_mould_uncooked = new ItemComponentMF("ingot_mould_uncooked", 0);
 	public static Item pie_tray_uncooked = new ItemComponentMF("pie_tray_uncooked", 0);
 	
 	public static ItemComponentMF[] ingots = new ItemComponentMF[ingotMats.length];
 	
 	
-	public static Item plank = new ItemComponentMF("plank").setCustom(1, "wood");
+	public static ItemComponentMF plank = new ItemComponentMF("plank").setCustom(1, "wood").setStoragePlacement("plank", "plank");
 	public static Item vine = new ItemComponentMF("vine", -1);
 	public static Item sharp_rock = new ItemComponentMF("sharp_rock", -1);
 	
@@ -105,7 +105,7 @@ public class ComponentListMF
 	public static Item kaolinite_dust = new ItemComponentMF("kaolinite_dust", 0).setContainerItem(clay_pot);
 	public static Item fireclay = new ItemComponentMF("fireclay", 0);
 	public static Item fireclay_brick = new ItemComponentMF("fireclay_brick", 0);
-	public static Item strong_brick = new ItemComponentMF("strong_brick", 0);
+	public static Item strong_brick = new ItemComponentMF("strong_brick", 0).setStoragePlacement("bar", "firebrick");
 	
 	public static Item hideSmall = new ItemComponentMF("hideSmall", 0);
 	public static Item hideMedium = new ItemComponentMF("hideMedium", 0);
@@ -131,7 +131,7 @@ public class ComponentListMF
 	
 	public static Item hotItem = new ItemHeated();
 	
-	public static Item plant_oil = new ItemComponentMF("plant_oil", 0).setContainerItem(FoodListMF.jug_empty);
+	public static Item plant_oil = new ItemComponentMF("plant_oil", 0).setStoragePlacement("jug", "jugoil").setContainerItem(FoodListMF.jug_empty);
 	
 	public static Item talisman_lesser= new ItemComponentMF("talisman_lesser", 1);
 	public static Item talisman_greater= new ItemComponentMF("talisman_greater", 3);
@@ -161,11 +161,11 @@ public class ComponentListMF
 	public static Item cross_ammo = new ItemCrossbowPart("cross_ammo", "mod").addCapacity(5).addSpread(2.00F);
 	public static Item cross_scope = new ItemCrossbowPart("cross_scope", "mod").setScope(0.75F);
 	
-	public static ItemCustomComponent chainmesh = new ItemCustomComponent("chainmesh", 1F, "metal");
-	public static ItemCustomComponent scalemesh = new ItemCustomComponent("scalemesh", 1F, "metal");
-	public static ItemCustomComponent splintmesh = new ItemCustomComponent("splintmesh", 1F, "metal");
-	public static ItemCustomComponent plate = new ItemCustomComponent("plate", 2F, "metal");
-	public static ItemCustomComponent plate_huge = new ItemCustomComponent("plate_huge", 8F, "metal");
+	public static ItemCustomComponent chainmesh = new ItemCustomComponent("chainmesh", 1F, "metal").setStoragePlacement("sheet", "mail");
+	public static ItemCustomComponent scalemesh = new ItemCustomComponent("scalemesh", 1F, "metal").setStoragePlacement("sheet", "scale");
+	public static ItemCustomComponent splintmesh = new ItemCustomComponent("splintmesh", 1F, "metal").setStoragePlacement("sheet", "splint");
+	public static ItemCustomComponent plate = new ItemCustomComponent("plate", 2F, "metal").setStoragePlacement("sheet", "plate");
+	public static ItemCustomComponent plate_huge = new ItemCustomComponent("plate_huge", 8F, "metal").setStoragePlacement("bigplate", "bigplate");
 	public static ItemCustomComponent metalHunk = new ItemCustomComponent("hunk", 0.25F, "metal");
 	public static ItemCustomComponent arrowhead = new ItemCustomComponent("arrowhead", 1/4F, "metal");
 	public static ItemCustomComponent bodkinhead = new ItemCustomComponent("bodkinhead", 1/4F, "metal");
@@ -181,8 +181,8 @@ public class ComponentListMF
 	public static Item gold_coin = new ItemComponentMF("gold_coin", 0);
 	
 	public static Item hinge = new ItemComponentMF("hinge", 0);
-	public static Item plank_cut = new ItemComponentMF("plank_cut").setCustom(1, "wood");
-	public static Item plank_pane = new ItemComponentMF("plank_pane").setCustom(6, "wood");
+	public static Item plank_cut = new ItemComponentMF("plank_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
+	public static Item plank_pane = new ItemComponentMF("plank_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
 	
 	public static Item cogwork_pulley = new ItemComponentMF("cogwork_pulley", 1).setCreativeTab(CreativeTabMF.tabGadget);
 	
@@ -272,5 +272,15 @@ public class ComponentListMF
 		RandomOre.addOre(new ItemStack(oreGold),              1F, Blocks.stone, 0, 0, 32,  false);
 		
 		RandomOre.addOre(new ItemStack(oreTungsten),          2F, Blocks.stone, 3, 0, 16,  false, "tungsten");
+	}
+	
+	public static ItemStack bar(String material)
+	{
+		return bar(material, 1);
+	}
+
+	public static ItemStack bar(String material, int stackSize) 
+	{
+		return bar.createComm(material, stackSize);
 	}
 }

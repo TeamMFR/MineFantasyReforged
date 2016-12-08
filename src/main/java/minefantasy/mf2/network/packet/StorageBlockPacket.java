@@ -14,7 +14,7 @@ public class StorageBlockPacket extends PacketMF
 	private int[] coords = new int[3];
 	private ItemStack component;
 	private String type, tex, materialName;
-	private int stackSize;
+	private int stackSize, max;
 
 	public StorageBlockPacket(TileEntityComponent tile)
 	{
@@ -24,6 +24,7 @@ public class StorageBlockPacket extends PacketMF
 		this.materialName = tile.material != null ? tile.material.name : "steel";
 		this.component = tile.item;
 		this.stackSize = tile.stackSize;
+		this.max = tile.max;
 	}
 	public StorageBlockPacket() {
 	}
@@ -38,6 +39,7 @@ public class StorageBlockPacket extends PacketMF
         materialName = ByteBufUtils.readUTF8String(packet);
         component = ByteBufUtils.readItemStack(packet);
         stackSize = packet.readInt();
+        max = packet.readInt();
         
         if(entity != null && entity instanceof TileEntityComponent)
         {
@@ -47,6 +49,7 @@ public class StorageBlockPacket extends PacketMF
 	        tile.material = CustomMaterial.getMaterial(materialName);
 	        tile.item = this.component;
 	        tile.stackSize = this.stackSize;
+	        tile.max = this.max;
         }
 	}
 
@@ -68,5 +71,6 @@ public class StorageBlockPacket extends PacketMF
 		ByteBufUtils.writeUTF8String(packet, materialName);
 		ByteBufUtils.writeItemStack(packet, component);
 		packet.writeInt(stackSize);
+		packet.writeInt(max);
 	}
 }

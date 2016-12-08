@@ -218,11 +218,12 @@ public class ItemCustomComponent extends Item implements ITieredComponent
 	        }
 	        else
 	        {
-	        	if(BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition))
-	        	{
-	        		--item.stackSize;
-	        		return item;
-	        	}
+	        	int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition);
+  	        	if(placed > 0)
+  	        	{
+  	        		item.stackSize -= placed;
+  	        		return item;
+  	        	}
 	        }
 		}
 		return item;

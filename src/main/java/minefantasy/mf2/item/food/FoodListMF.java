@@ -78,7 +78,7 @@ public class FoodListMF
 	
 	//MISC
 	public static Item cake_tin = new ItemComponentMF("cake_tin", 0).setCreativeTab(CreativeTabMF.tabFood);
-	public static Item pie_tray = new ItemComponentMF("pie_tin", 0).setCreativeTab(CreativeTabMF.tabFood);
+	public static Item pie_tray = new ItemComponentMF("pie_tin", 0).setStoragePlacement("bigplate", "tray").setCreativeTab(CreativeTabMF.tabFood);
 	public static Item icing = new ItemComponentMF("icing", 0).setCreativeTab(CreativeTabMF.tabFood).setContainerItem(ComponentListMF.clay_pot);
 	public static Item custard = new ItemComponentMF("custard", 0).setCreativeTab(CreativeTabMF.tabFood).setContainerItem(ComponentListMF.clay_pot);
 	public static Item coca_powder = new ItemComponentMF("coca_powder", 0).setCreativeTab(CreativeTabMF.tabFood).setContainerItem(ComponentListMF.clay_pot);
@@ -123,9 +123,9 @@ public class FoodListMF
 	public static Item raw_bread = new ItemUnfinishedFood("raw_bread").setMaxStackSize(64);
 	
 	public static Item jug_uncooked = new ItemJug("uncooked");
-	public static Item jug_empty = new ItemJug("empty");
-	public static Item jug_water = new ItemJug("water").setContainerItem(jug_empty);
-	public static Item jug_milk = new ItemJug("milk").setContainerItem(jug_empty);
+	public static Item jug_empty = new ItemJug("empty").setStoragePlacement("jug", "jug");
+	public static Item jug_water = new ItemJug("water").setStoragePlacement("jug", "jugwater").setContainerItem(jug_empty);
+	public static Item jug_milk = new ItemJug("milk").setStoragePlacement("jug", "jugmilk").setContainerItem(jug_empty);
 	
 	public static Item burnt_food = new ItemBurntFood("burnt_food");
 	public static Item burnt_pot = new ItemBurntFood("burnt_pot").setContainerItem(ComponentListMF.clay_pot);

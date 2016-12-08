@@ -13,6 +13,7 @@ import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.material.MetalMaterial;
+import minefantasy.mf2.recipe.ForgedToolRecipes;
 import minefantasy.mf2.recipe.ForgingRecipes;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -22,6 +23,10 @@ public class KnowledgePageRegistry
 {
 	public static void registerPages()
 	{
+		ItemStack pigiron = ComponentListMF.bar("RefinedIron");
+		ItemStack black = ComponentListMF.bar("BlackSteel");
+		ItemStack red = ComponentListMF.bar("RedSteel");
+		ItemStack blue = ComponentListMF.bar("BlueSteel");
 		if(ConfigHardcore.HCCallowRocks)
 		{
 			KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.hcc"), new EntryPageRecipeBase(KnowledgeListMF.carpenterRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stonePickR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneHammerR), new EntryPageRecipeCarpenter(KnowledgeListMF.sharpRocksR));
@@ -55,6 +60,16 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.plank"), new EntryPageRecipeBase(KnowledgeListMF.plankRecipe), new EntryPageRecipeBase(KnowledgeListMF.stickRecipe));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.refinedplank"),  new EntryPageRecipeCarpenter(KnowledgeListMF.jugRecipe), new EntryPageSmelting(FoodListMF.jug_uncooked, FoodListMF.jug_empty), new EntryPageRecipeBase(KnowledgeListMF.plantOilR), new EntryPageRecipeCarpenter(KnowledgeListMF.refinedPlankR));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.flux"), new EntryPageRecipeAnvil(KnowledgeListMF.fluxR));
+		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.bar.1"));
+		if(ForgedToolRecipes.easyBars)
+		{
+			KnowledgeListMF.commodities.addPages(new EntryPageRecipeBase(KnowledgeListMF.barRE), new EntryPageRecipeBase(KnowledgeListMF.baringotRE));
+		}
+		else
+		{
+			KnowledgeListMF.commodities.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
+		}
+		
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.hunks"), new EntryPageRecipeAnvil(KnowledgeListMF.hunkR), new EntryPageRecipeAnvil(KnowledgeListMF.ingotR));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.nail"), new EntryPageRecipeAnvil(KnowledgeListMF.nailR));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.rivet"), new EntryPageRecipeAnvil(KnowledgeListMF.rivetR));
@@ -112,7 +127,15 @@ public class KnowledgePageRegistry
 		}
 		KnowledgeListMF.crucible2.addPages(assembleSimpleImgPage("fire_crucible_example", "knowledge.crucible2.1"), new EntryPageGrind(new ItemStack(ComponentListMF.kaolinite), new ItemStack(ComponentListMF.kaolinite_dust)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireclayR), new EntryPageRecipeCarpenter(KnowledgeListMF.advCrucibleRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBricksR), assembleSimpleImgPage("fire_crucible", "knowledge.crucible2.blocks"));
 		
-		KnowledgeListMF.bar.addPages(new EntryPageText("knowledge.bar.1"), new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
+		KnowledgeListMF.bar.addPages(new EntryPageText("knowledge.bar.1"));
+		if(ForgedToolRecipes.easyBars)
+		{
+			KnowledgeListMF.bar.addPages(new EntryPageRecipeBase(KnowledgeListMF.barRE), new EntryPageRecipeBase(KnowledgeListMF.baringotRE));
+		}
+		else
+		{
+			KnowledgeListMF.bar.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
+		}
 		KnowledgeListMF.smeltCopper.addPages(new EntryPageText("knowledge.smeltCopper.1"));
 		KnowledgeListMF.smeltBronze.addPages(new EntryPageText("knowledge.smeltBronze.1"));
 		if(ConfigHardcore.HCCreduceIngots)
@@ -128,7 +151,7 @@ public class KnowledgePageRegistry
 		}
 		KnowledgeListMF.smeltBronze.addPages(new EntryPageCrucible(KnowledgeListMF.bronze));
 		KnowledgeListMF.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.2"));
-		KnowledgeListMF.smeltPig.addPages(new EntryPageText("knowledge.smeltPig.1"), new EntryPageRecipeAnvil(KnowledgeListMF.ironPrepR), new EntryPageRecipeAnvil(KnowledgeListMF.ironPrepR2), new EntryPageBlastFurnace(ComponentListMF.iron_prep, ComponentListMF.ingots[3]), new EntryPageText("knowledge.blastfurn.9"));
+		KnowledgeListMF.smeltPig.addPages(new EntryPageText("knowledge.smeltPig.1"), new EntryPageRecipeAnvil(KnowledgeListMF.ironPrepR), new EntryPageRecipeAnvil(KnowledgeListMF.ironPrepR2), new EntryPageBlastFurnace(ComponentListMF.iron_prep, pigiron), new EntryPageText("knowledge.blastfurn.9"));
 		KnowledgeListMF.smeltSteel.addPages(new EntryPageText("knowledge.smeltSteel.1"), new EntryPageRecipeAnvil(KnowledgeListMF.steelR));
 		if(!ConfigHardcore.HCCreduceIngots)
 		{
@@ -290,6 +313,7 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.trow.info"), new EntryPageRecipeAnvil(KnowledgeListMF.trowR));
 	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.hvyshovel.info"), new EntryPageRecipeAnvil(KnowledgeListMF.hvyShovelR));
 	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.scythe.info"), new EntryPageRecipeAnvil(KnowledgeListMF.scytheR));
+	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.mattock.info"), new EntryPageRecipeAnvil(KnowledgeListMF.mattockR), new EntryPageText("knowledge.mattock.use"));
 	    
 	    KnowledgeListMF.firemaker.addPages(new EntryPageText("knowledge.dryrocks.info"), new EntryPageRecipeBase(KnowledgeListMF.dryrocksR));
 	    KnowledgeListMF.firemaker.addPages(new EntryPageText("knowledge.tinderbox.info"), new EntryPageRecipeAnvil(KnowledgeListMF.tinderboxR));
@@ -330,9 +354,9 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.arrowsBroad.addPages(new EntryPageText("knowledge.arrowsBroad.1"));
 	    KnowledgeListMF.arrowsBroad.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.broadheadR));
 	    
-	    KnowledgeListMF.smeltBlackSteel.addPages(new EntryPageText("knowledge.smeltBlackSteel.1"), new EntryPageRecipeAnvil(KnowledgeListMF.obsidianHunkR), new EntryPageCrucible(KnowledgeListMF.black), new EntryPageBlastFurnace(ComponentListMF.ingots[6], ComponentListMF.ingots[7]));
-	    KnowledgeListMF.smeltRedSteel.addPages(new EntryPageText("knowledge.smeltRedSteel.1"), new EntryPageCrucible(KnowledgeListMF.red), new EntryPageBlastFurnace(ComponentListMF.ingots[9], ComponentListMF.ingots[10]));
-	    KnowledgeListMF.smeltBlueSteel.addPages(new EntryPageText("knowledge.smeltBlueSteel.1"), new EntryPageCrucible(KnowledgeListMF.blue), new EntryPageBlastFurnace(ComponentListMF.ingots[11], ComponentListMF.ingots[12]));
+	    KnowledgeListMF.smeltBlackSteel.addPages(new EntryPageText("knowledge.smeltBlackSteel.1"), new EntryPageRecipeAnvil(KnowledgeListMF.obsidianHunkR), new EntryPageCrucible(KnowledgeListMF.black), new EntryPageBlastFurnace(ComponentListMF.ingots[6], black));
+	    KnowledgeListMF.smeltRedSteel.addPages(new EntryPageText("knowledge.smeltRedSteel.1"), new EntryPageCrucible(KnowledgeListMF.red), new EntryPageBlastFurnace(ComponentListMF.ingots[9], red));
+	    KnowledgeListMF.smeltBlueSteel.addPages(new EntryPageText("knowledge.smeltBlueSteel.1"), new EntryPageCrucible(KnowledgeListMF.blue), new EntryPageBlastFurnace(ComponentListMF.ingots[11], blue));
 	    KnowledgeListMF.smeltAdamant.addPages(new EntryPageText("knowledge.smeltAdamantium.1"), new EntryPageText("knowledge.smeltAdamantium.2"), new EntryPageCrucible(KnowledgeListMF.adamantium));
 	    KnowledgeListMF.smeltMithril.addPages(new EntryPageText("knowledge.smeltMithril.1"), new EntryPageText("knowledge.smeltMithril.2"), new EntryPageCrucible(KnowledgeListMF.mithril));
 	    

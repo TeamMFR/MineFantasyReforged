@@ -5,16 +5,15 @@ import java.util.Random;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
-
 import minefantasy.mf2.block.list.BlockListMF;
-import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.block.tileentity.TileEntityRoad;
+import minefantasy.mf2.item.tool.advanced.ItemMattock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
@@ -25,19 +24,8 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-/**
- *
- * @author Anonymous Productions
- * 
- * Sources are provided for educational reasons.
- * though small bits of code, or methods can be used in your own creations.
- * 
- * ROAD META: (0 and up)
- * Dirt, Sand, Cobblestone, Stone, Gravel
- */
-public class BlockRoad extends Block
+public class BlockRoad extends BlockContainer
 {
-    
     public BlockRoad(String name, float f)
     {
         super(Material.ground);
@@ -58,15 +46,21 @@ public class BlockRoad extends Block
     @Override
     public IIcon getIcon(int side, int meta)
     {
-    	if(meta == 2)
-    	{
-    		return BlockListMF.limestone.getIcon(side, 1);
-    	}
-    	if(meta == 1)
-    	{
-    		return Blocks.sand.getIcon(side, 0);
-    	}
     	return Blocks.dirt.getIcon(side, 0);
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side)
+    {
+    	TileEntity tile = world.getTileEntity(x, y, z);
+    	if(tile != null && tile instanceof TileEntityRoad)
+    	{
+    		Block surface =  ((TileEntityRoad)tile).getBaseBlock();
+    		int surface_m = ((TileEntityRoad)tile).surface[1];
+    		return surface.getIcon(side, surface_m);
+    	}
+        return this.getIcon(side, world.getBlockMetadata(x, y, z));
     }
 
     /**
@@ -103,8 +97,13 @@ public class BlockRoad extends Block
     	super.updateTick(world, x, y, z, random);
     }
     
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1, float f2)
     {
+    	TileEntityRoad tile = getTile(world, x, y, z);
+    	if(tile == null)return false;
+    	
+    	boolean isLocked = tile.isLocked;
         ItemStack itemstack = player.getHeldItem();
         if(itemstack != null)
         {
@@ -112,38 +111,61 @@ public class BlockRoad extends Block
         	{
         		return false;
         	}
-        	
-        	Block block = Block.getBlockFromItem(itemstack.getItem());
-        	if(itemstack.getItem() instanceof ItemBlock && block != null)
-    		{
-        		if(upgradeRoad(world, x, y, z, 4, itemstack, block))
-        		{
-        			if(!player.capabilities.isCreativeMode && !world.isRemote)
-        			{
-        				itemstack.stackSize --;
-        				if(itemstack.stackSize <= 0)
-        				{
-        					player.setCurrentItemOrArmor(0, null);
-        				}
-        			}
-        			return true;
-    			}
-    		}
-    		
-    		if(itemstack.getItem() instanceof ItemSpade)
+        	if(!isLocked)
+        	{
+	        	Block block = Block.getBlockFromItem(itemstack.getItem());
+	        	if(itemstack.getItem() instanceof ItemBlock && block != null)
+	    		{
+	        		if(upgradeRoad(world, x, y, z, 4, itemstack, block))
+	        		{
+	        			if(!player.capabilities.isCreativeMode && !world.isRemote)
+	        			{
+	        				itemstack.stackSize --;
+	        				if(itemstack.stackSize <= 0)
+	        				{
+	        					player.setCurrentItemOrArmor(0, null);
+	        				}
+	        			}
+	        			return true;
+	    			}
+	    		}
+	    		
+	    		if(itemstack.getItem() instanceof ItemSpade)
+	            {
+	    			if(this == BlockListMF.road)
+	    			{
+	    				if(!world.isRemote)
+	    				{
+	    					int m = world.getBlockMetadata(x, y, z);
+	    					world.setBlock(x, y, z, BlockListMF.lowroad, m, 2);
+	    				}
+	                	return true;
+	                }
+	        	}
+        	}
+        	if(!world.isRemote && itemstack.getItem() instanceof ItemMattock)
             {
-    			if(this == BlockListMF.road)
-    			{
-    				if(!world.isRemote)
-    				{
-    					int m = world.getBlockMetadata(x, y, z);
-    					world.setBlock(x, y, z, BlockListMF.lowroad, m, 2);
-    				}
-                	return true;
-                }
+        		tile.isLocked = !isLocked;
+        		tile.sendPacketToClients();
+        		player.swingItem();
         	}
         }
-        return false;
+        return true;
+    }
+    private TileEntityRoad getTile(World world, int x, int y, int z) 
+    {
+    	TileEntity tile = world.getTileEntity(x, y, z);
+    	if(tile != null && tile instanceof TileEntityRoad)
+    	{
+    		return (TileEntityRoad)tile;
+    	}
+    	return null;
+	}
+
+	public Item getItemDropped(int meta, Random rand, int fortune)
+    {
+    	Block drop = meta == 1 ? Blocks.sand : Blocks.dirt;
+    	return Item.getItemFromBlock(drop);
     }
     /**
      * Resets the Texture
@@ -152,24 +174,11 @@ public class BlockRoad extends Block
      */
     private boolean upgradeRoad(World world, int x, int y, int z, int r, ItemStack held, Block block) 
     {
-    	int nm = -1;
-    	if(block == BlockListMF.limestone)
-    	{
-    		nm = 2;
-    	}
-    	if(block == Blocks.dirt)
-    	{
-    		nm = 0;
-    	}
-    	if(block == Blocks.sand)
-    	{
-    		nm = 1;
-    	}
-    	if(held == null)
+    	if(!block.isNormalCube())
     	{
     		return false;
     	}
-    	if(nm < 0)
+    	if(held == null)
     	{
     		return false;
     	}
@@ -185,11 +194,15 @@ public class BlockRoad extends Block
 					int m = world.getBlockMetadata(x+x2, y+y2, z+z2);
 					if((id == BlockListMF.road || id == BlockListMF.lowroad))
 					{
-						if(getDistance(x+x2, y+y2, z+z2, x, y, z) < r*1)
+						if(getDistance(x+x2, y+y2, z+z2, x, y, z) < r)
 						{
 							flag = true;
 							{
-								world.setBlockMetadataWithNotify(x+x2, y+y2, z+z2, nm, 2);
+								TileEntity tile = world.getTileEntity(x+x2, y+y2, z+z2);
+								if(tile != null && tile instanceof TileEntityRoad && !((TileEntityRoad)tile).isLocked)
+								{
+									((TileEntityRoad)tile).setSurface(block, held.getItemDamage());
+								}
 							}
 						}
 					}
@@ -206,4 +219,10 @@ public class BlockRoad extends Block
         double var11 = posZ - z;
         return (double)MathHelper.sqrt_double(var7 * var7 + var9 * var9 + var11 * var11);
     }
+
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) 
+	{
+		return new TileEntityRoad();
+	}
 }

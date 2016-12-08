@@ -9,7 +9,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.network.packet.RoadPacket;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -20,7 +19,8 @@ import net.minecraft.world.WorldServer;
 
 public class TileEntityRoad extends TileEntity
 {
-	public int[] surface = new int[2];
+	public int[] surface = new int[]{3, 0};
+	public boolean isLocked = false;
 	private int ticksExisted;
 	private Random rand = new Random();
 	
@@ -36,7 +36,7 @@ public class TileEntityRoad extends TileEntity
 		if(!worldObj.isRemote)
 		{
 			++ticksExisted;
-			if(ticksExisted % 20 == 0)
+			if(ticksExisted == 20 || ticksExisted % 1200 == 0)
 			{
 				sendPacketToClients();
 			}
@@ -56,9 +56,8 @@ public class TileEntityRoad extends TileEntity
 		worldObj.playSoundEffect(xCoord, yCoord, zCoord, "dig.grass", 0.5F, 1.0F);
 		surface[0] = Block.getIdFromBlock(id);
 		surface[1] = meta;
-		refresh();
-		
 		sendPacketToClients();
+		refreshSurface();
 	}
 
 	public void sendPacketToClients()
@@ -87,12 +86,14 @@ public class TileEntityRoad extends TileEntity
 		super.writeToNBT(nbt);
 		
 		nbt.setIntArray("surface", surface);
+		nbt.setBoolean("isLocked", isLocked);
     }
 	public void readFromNBT(NBTTagCompound nbt)
     {
 		super.readFromNBT(nbt);
 		
 		surface = nbt.getIntArray("surface");
+		isLocked = nbt.getBoolean("isLocked");
     }
 
 	public int[] getSurface() 
@@ -109,8 +110,18 @@ public class TileEntityRoad extends TileEntity
 		return true;
 	}
 
-	public void refresh() 
+	public void refreshSurface() 
 	{
-		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, worldObj.getBlock(xCoord, yCoord, zCoord), 2);
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+	
+	public Block getBaseBlock()
+	{
+		if(surface[0] <= 0)
+		{
+			return Blocks.dirt;
+		}
+		Block block = Block.getBlockById(surface[0]);
+		return block != null ? block : Blocks.dirt;
 	}
 }

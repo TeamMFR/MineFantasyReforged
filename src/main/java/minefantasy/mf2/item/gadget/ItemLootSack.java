@@ -165,7 +165,7 @@ public class ItemLootSack extends Item
 		
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.coal), 4, 12, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(((ItemComponentMF)ComponentListMF.plank).construct("OakWood"), 1, 8, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.iron_ingot), 1, 4, 20));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Iron"), 1, 4, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.leather), 1, 4, 20));
 		
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.string), 1, 2, 10));
@@ -182,8 +182,8 @@ public class ItemLootSack extends Item
 		
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.kaolinite), 1, 8, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.dye, 1, 4), 1, 8, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.gold_ingot), 1, 4, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.ingots[8]), 1, 4, 20));//Silver
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Gold"), 1, 4, 20));
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 1, 4, 20));//Silver
 		
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.diamond), 1, 2, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.emerald), 1, 2, 10));
@@ -203,7 +203,7 @@ public class ItemLootSack extends Item
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.diamond), 4, 8, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.emerald), 4, 8, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.ender_eye), 4, 8, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.ingots[18]), 1, 4, 20));//Wolframite
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 1, 4, 20));//Wolframite
 		
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.golden_apple, 1, 1), 1, 1, 10));
 		addRecords(loot, 5);
