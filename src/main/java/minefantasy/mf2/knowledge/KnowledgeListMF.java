@@ -240,9 +240,6 @@ public class KnowledgeListMF
     public static final ArrayList<IAnvilRecipe> barR = new ArrayList<IAnvilRecipe>();
     public static final ArrayList<IAnvilRecipe> baringotR = new ArrayList<IAnvilRecipe>();
     
-    public static final ArrayList<IRecipe> barRE = new ArrayList<IRecipe>();
-    public static final ArrayList<IRecipe> baringotRE = new ArrayList<IRecipe>();
-    
     public static final ArrayList<IAnvilRecipe> talismanRecipe = new ArrayList<IAnvilRecipe>();
     public static ICarpenterRecipe artBookR, conBookR, proBookR, engBookR, comBookR, artBook2R, conBook2R, proBook2R, engBook2R, comBook2R;
     public static IAnvilRecipe greatTalismanRecipe;

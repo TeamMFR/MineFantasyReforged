@@ -44,11 +44,8 @@ public class MineFantasyAPI
 	public static boolean isInDebugMode;
 	
 	@SideOnly(Side.CLIENT)
-	public static FontRenderer fontRenderer;
-	@SideOnly(Side.CLIENT)
 	public static void init()
 	{
-		fontRenderer = new FontRenderer(Minecraft.getMinecraft().gameSettings, new ResourceLocation("minefantasy2:textures/font/standard.png"), Minecraft.getMinecraft().renderEngine, false);
 	}
 	public static void debugMsg(String msg)
 	{

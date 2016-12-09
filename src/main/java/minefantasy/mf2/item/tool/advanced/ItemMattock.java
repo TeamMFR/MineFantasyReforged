@@ -73,6 +73,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial
             Block ground = world.getBlock(x, y, z);
             int groundmeta = world.getBlockMetadata(x, y, z);
             Block above = world.getBlock(x, y + 1, z);
+            int meta = ground == Blocks.sand ? 1 : 0;
 
             if (facing == 0 || above != Blocks.air)
             {
@@ -93,7 +94,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial
                 }
                 else
                 {
-                    world.setBlock(x, y, z, var13, 0, 2);
+                    world.setBlock(x, y, z, var13, meta, 2);
                     
                     TileEntityRoad road = new TileEntityRoad();
                     road.setWorldObj(world);

@@ -171,7 +171,7 @@ public class ComponentListMF
 	public static ItemCustomComponent bodkinhead = new ItemCustomComponent("bodkinhead", 1/4F, "metal");
 	public static ItemCustomComponent broadhead = new ItemCustomComponent("broadhead", 1/4F, "metal");
 	public static ItemCustomComponent cogwork_armour = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(CreativeTabMF.tabGadget).setMaxStackSize(1);
-	public static ItemCustomComponent bar = new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar");
+	public static ItemCustomComponent bar = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(CreativeTabMF.tabMaterialsMF);
 	
 	public static Item flux_pot = new ItemComponentMF("flux_pot", 0).setContainerItem(clay_pot);
 	public static Item coal_flux = new ItemComponentMF("coal_flux", 0);
@@ -222,17 +222,17 @@ public class ComponentListMF
 
 	private static void initFuels() 
 	{
-		MineFantasyFuels.addForgeFuel(new ItemStack(Items.coal, 1, 0), 900, 150);//	150C , 45s
-		MineFantasyFuels.addForgeFuel(new ItemStack(Items.coal, 1, 1), 1200, 180);//	180C , 1m
-		MineFantasyFuels.addForgeFuel(Items.blaze_powder, 200, 300, true);//			300C , 10s
-		MineFantasyFuels.addForgeFuel(Items.blaze_rod,    300, 300, true);//			300C , 15s
-		MineFantasyFuels.addForgeFuel(Items.fire_charge,  1200, 350,true);//			350C , 1m
-		MineFantasyFuels.addForgeFuel(Items.lava_bucket,  2400, 500, true);//			500C , 2m
-		MineFantasyFuels.addForgeFuel(Items.magma_cream,  2400, 400, true, true);//				400C , 2m
+		MineFantasyFuels.addForgeFuel(new ItemStack(Items.coal, 1, 0), 900, 1500);//	1500C , 45s
+		MineFantasyFuels.addForgeFuel(new ItemStack(Items.coal, 1, 1), 1200, 1800);//	1800C , 1m
+		MineFantasyFuels.addForgeFuel(Items.blaze_powder, 200, 3000, true);//			3000C , 10s
+		MineFantasyFuels.addForgeFuel(Items.blaze_rod,    300, 3000, true);//			3000C , 15s
+		MineFantasyFuels.addForgeFuel(Items.fire_charge,  1200, 3500,true);//			3500C , 1m
+		MineFantasyFuels.addForgeFuel(Items.lava_bucket,  2400, 5000, true);//			5000C , 2m
+		MineFantasyFuels.addForgeFuel(Items.magma_cream,  2400, 4000, true, true);//		4000C , 2m
 		
-		MineFantasyFuels.addForgeFuel(ComponentListMF.coalDust, 200, 150);//				150C , 10s
-		MineFantasyFuels.addForgeFuel(ComponentListMF.coke, 1200, 250, false, true);//					250C , 1m
-		MineFantasyFuels.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 500, true, true);//	500C , 2m
+		MineFantasyFuels.addForgeFuel(ComponentListMF.coalDust, 200, 1500);//				1500C , 10s
+		MineFantasyFuels.addForgeFuel(ComponentListMF.coke, 1200, 2500, false, true);//					2500C , 1m
+		MineFantasyFuels.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 5000, true, true);//	5000C , 2m
 	}
 
 	private static void addRandomDrops()

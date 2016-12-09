@@ -21,7 +21,6 @@ import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.mechanics.PlayerTickHandlerMF;
 import minefantasy.mf2.network.packet.AnvilPacket;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -260,7 +259,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 		if(!resetRecipe)
 		{
 			updateCraftingData();
-			MFLogUtil.logDebug("Anvil: Optimised Inv Tick");
 			resetRecipe = true;
 		}
 	}
@@ -379,7 +377,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
             	{
             		addXP(lastHit);
             		inventory[output].stackSize += out.stackSize;
-            		MFLogUtil.logDebug("StackSize = " + inventory[output].stackSize);
             		consumeResources();
             	}
 			}
@@ -413,7 +410,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 		float baseXP = this.progressMax / 10F;
 		baseXP /= (1.0F + getAbsoluteBalance());
 		
-		MFLogUtil.logDebug("Add " + baseXP + " to " + skillUsed.skillName);
 		skillUsed.addXP(smith, (int)baseXP + 1);
 	}
 	private ItemStack modifyArmour(ItemStack result)
@@ -525,9 +521,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 		}
 		if(totalItems > 0 && totalPts > 0)
 		{
-			MFLogUtil.logDebug("Modify Quality: " + totalItems + " x " + totalPts);
 			totalPts /= totalItems;
-			MFLogUtil.logDebug("= "+totalPts);
 			ToolHelper.setQuality(result, ToolHelper.getQualityLevel(result)+totalPts);
 			if(totalPts <= -85F)
 			{
@@ -912,12 +906,10 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 	private ItemStack damageItem(ItemStack item)
 	{
 		float itemdam = getItemDamage();
-		MFLogUtil.logDebug("Dam= "+itemdam);
 		if(itemdam > 0.5F)
 		{
 			setTrait(item, "MF_Inferior");
 			float q = 100F*(0.75F-(itemdam-0.5F));
-			MFLogUtil.logDebug("Fail: " + q);
 			ToolHelper.setQuality(item, Math.max(10F, q));
 		}
 		float damage = itemdam * item.getMaxDamage();
@@ -987,7 +979,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 		{
 			leftHit = 0.1F + (0.01F*rand.nextInt(11));
 			rightHit = 0.1F + (0.01F*rand.nextInt(11));
-			MFLogUtil.logDebug("Reset Hits: " + leftHit + "|" + rightHit);
 		}
 	}
 	@Override

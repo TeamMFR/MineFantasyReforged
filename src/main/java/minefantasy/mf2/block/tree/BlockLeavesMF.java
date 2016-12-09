@@ -5,6 +5,7 @@ import java.util.Random;
 import minefantasy.mf2.block.list.BlockListMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
@@ -26,12 +27,12 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable
     }
     public BlockLeavesMF(String baseWood, int droprate)
     {
-        super();
-        this.setTickRandomly(true);
-        name = baseWood.toLowerCase() + "_leaves";
+        this.name = baseWood.toLowerCase() + "_leaves";
 		GameRegistry.registerBlock(this, name);
 		this.dropRate = droprate;
-		setBlockName(name);
+		this.setTickRandomly(true);
+		this.setBlockName(name);
+		this.setBlockTextureName("minefantasy2:tree/"+name);
     }
 
     @SideOnly(Side.CLIENT)
@@ -79,15 +80,25 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable
         return 0;
     }
     
+	@SideOnly(Side.CLIENT)
+	private IIcon opaque_icon;
+	
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta)
     {
-    	return Blocks.leaves.getIcon(side, meta);
+    	return Blocks.leaves.isOpaqueCube() ? opaque_icon : blockIcon;
     }
 	@Override
 	public String[] func_150125_e() 
 	{
 		return new String[]{""};
 	}
+	@SideOnly(Side.CLIENT)
+	@Override
+    public void registerBlockIcons(IIconRegister reg)
+    {
+		super.registerBlockIcons(reg);
+		this.opaque_icon = reg.registerIcon(this.getTextureName()+"_opaque");
+    }
 }

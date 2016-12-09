@@ -11,6 +11,7 @@ import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientAlter;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenStructureBase;
 import minefantasy.mf2.mechanics.worldGen.structure.dwarven.WorldGenDwarvenStronghold;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -106,4 +107,10 @@ public class ItemWorldGenPlacer extends Item
 		}
 		return new WorldGenAncientForge();
 	}
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister reg)
+    {
+    }
 }

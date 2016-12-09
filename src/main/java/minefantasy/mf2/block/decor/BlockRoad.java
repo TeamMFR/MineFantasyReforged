@@ -8,9 +8,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityRoad;
 import minefantasy.mf2.item.tool.advanced.ItemMattock;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -29,10 +31,12 @@ public class BlockRoad extends BlockContainer
     public BlockRoad(String name, float f)
     {
         super(Material.ground);
+        this.setStepSound(Block.soundTypeGravel);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f/16F, 1.0F);
         this.setLightOpacity(0);
         GameRegistry.registerBlock(this, name);
 		setBlockName(name);
+		setHardness(0.5F);
     }
     
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int x, int y, int z)
@@ -46,7 +50,7 @@ public class BlockRoad extends BlockContainer
     @Override
     public IIcon getIcon(int side, int meta)
     {
-    	return Blocks.dirt.getIcon(side, 0);
+    	return meta == 1 ? Blocks.sand.getIcon(side,  0) : Blocks.dirt.getIcon(side, 0);
     }
     
     @Override
@@ -56,9 +60,12 @@ public class BlockRoad extends BlockContainer
     	TileEntity tile = world.getTileEntity(x, y, z);
     	if(tile != null && tile instanceof TileEntityRoad)
     	{
-    		Block surface =  ((TileEntityRoad)tile).getBaseBlock();
-    		int surface_m = ((TileEntityRoad)tile).surface[1];
-    		return surface.getIcon(side, surface_m);
+    		if(((TileEntityRoad)tile).surface[0] > 0)
+    		{
+	    		Block surface =  ((TileEntityRoad)tile).getBaseBlock();
+	    		int surface_m = ((TileEntityRoad)tile).surface[1];
+	    		return surface.getIcon(side, surface_m);
+    		}
     	}
         return this.getIcon(side, world.getBlockMetadata(x, y, z));
     }
@@ -145,14 +152,13 @@ public class BlockRoad extends BlockContainer
         	}
         	if(!world.isRemote && itemstack.getItem() instanceof ItemMattock)
             {
-        		tile.isLocked = !isLocked;
-        		tile.sendPacketToClients();
-        		player.swingItem();
+        		toggleLocks(world, x, y, z, 4);
         	}
         }
-        return true;
+        return !tile.isLocked;
     }
-    private TileEntityRoad getTile(World world, int x, int y, int z) 
+
+	private TileEntityRoad getTile(World world, int x, int y, int z) 
     {
     	TileEntity tile = world.getTileEntity(x, y, z);
     	if(tile != null && tile instanceof TileEntityRoad)
@@ -162,6 +168,7 @@ public class BlockRoad extends BlockContainer
     	return null;
 	}
 
+	@Override
 	public Item getItemDropped(int meta, Random rand, int fortune)
     {
     	Block drop = meta == 1 ? Blocks.sand : Blocks.dirt;
@@ -196,11 +203,11 @@ public class BlockRoad extends BlockContainer
 					{
 						if(getDistance(x+x2, y+y2, z+z2, x, y, z) < r)
 						{
-							flag = true;
 							{
 								TileEntity tile = world.getTileEntity(x+x2, y+y2, z+z2);
 								if(tile != null && tile instanceof TileEntityRoad && !((TileEntityRoad)tile).isLocked)
 								{
+									flag = true;
 									((TileEntityRoad)tile).setSurface(block, held.getItemDamage());
 								}
 							}
@@ -210,6 +217,38 @@ public class BlockRoad extends BlockContainer
 			}
 		}
 		return flag;
+	}
+    private boolean toggleLocks(World world, int x, int y, int z, int r) 
+    {
+    	boolean flag = false;
+    	TileEntityRoad tile = getTile(world, x, y, z);
+    	if(tile == null)
+    	{
+    		return false;
+    	}
+		flag = !tile.isLocked;
+		tile.isLocked = flag;
+		tile.sendPacketToClients();
+		
+    	for(int x2 = -r; x2 <= r; x2 ++)
+		{
+			for(int y2 = -r; y2 <= r; y2 ++)
+			{
+				for(int z2 = -r; z2 <= r; z2 ++)
+				{
+					if(getDistance(x+x2, y+y2, z+z2, x, y, z) < r)
+					{
+						TileEntityRoad tile2 = getTile(world, x+x2, y+y2, z+z2);
+						if(tile2 != null)
+						{
+							tile2.isLocked = flag;
+							tile2.sendPacketToClients();
+						}
+					}
+				}
+			}
+		}
+    	return true;
 	}
 
 	public double getDistance(double x, double y, double z, int posX, int posY, int posZ)
@@ -225,4 +264,9 @@ public class BlockRoad extends BlockContainer
 	{
 		return new TileEntityRoad();
 	}
+	@SideOnly(Side.CLIENT)
+	@Override
+    public void registerBlockIcons(IIconRegister reg)
+    {
+    }
 }

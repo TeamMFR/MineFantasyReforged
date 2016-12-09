@@ -76,15 +76,12 @@ public class ForgingRecipes
 		Salvage.addSalvage(ComponentListMF.bar("Encrusted"), ComponentListMF.bar("Steel"), ComponentListMF.diamond_shards);
 		
 		material = BaseMaterialMF.pigiron;
-		for(ItemStack ore: OreDictionary.getOres("ingotPigIron"))
+		KnowledgeListMF.steelR = 
+		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.bar("Steel"), "smeltSteel", true, 1, 1, 5, new Object[]
 		{
-			KnowledgeListMF.steelR = 
-			MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.bar("Steel"), "smeltSteel", true, 1, 1, 5, new Object[]
-			{
-				"H",
-				'H', ore
-			});
-		}
+			"H",
+			'H', ComponentListMF.bar("RefinedIron")
+		});
 		KnowledgeListMF.fluxR =
 		MineFantasyAPI.addAnvilRecipe(null, new ItemStack(ComponentListMF.flux, 4), "", false, -1, -1, 2, new Object[]
 		{
@@ -150,12 +147,12 @@ public class ForgingRecipes
 		{
 			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.iron_prep), "blastfurn", false, material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]{
 				"IFI",
-				'I', Items.iron_ingot,
+				'I', ComponentListMF.bar("iron"),
 				'F', ComponentListMF.flux,
 			});
 			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.iron_prep, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]{
 				"IFI",
-				'I', Items.iron_ingot,
+				'I', ComponentListMF.bar("iron"),
 				'F', ComponentListMF.flux_strong,
 			});
 		}

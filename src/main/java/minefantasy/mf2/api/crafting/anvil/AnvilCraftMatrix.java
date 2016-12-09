@@ -19,5 +19,9 @@ public class AnvilCraftMatrix extends InventoryCrafting
 		anvil.setRequiredAnvil(anvilTier);
 		anvil.setForgeTime(craftTime);
 	}
+	public void modifyResearch(String name)
+	{
+		anvil.setResearch(name);
+	}
 
 }

@@ -19,7 +19,7 @@ import net.minecraft.world.WorldServer;
 
 public class TileEntityRoad extends TileEntity
 {
-	public int[] surface = new int[]{3, 0};
+	public int[] surface = new int[]{0, 0};
 	public boolean isLocked = false;
 	private int ticksExisted;
 	private Random rand = new Random();

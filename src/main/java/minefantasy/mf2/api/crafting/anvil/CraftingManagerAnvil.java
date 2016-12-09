@@ -321,7 +321,10 @@ public class CraftingManagerAnvil
 	            }
 	            anvil.setHotOutput(hot);
 	            anvil.setToolType(toolType);
-	            anvil.setResearch(var13.getResearch());
+	            if(!var13.getResearch().equalsIgnoreCase("tier"))
+	            {
+	            	anvil.setResearch(var13.getResearch());
+	            }
 	            anvil.setSkill(var13.getSkill());
 	            
 	            return var13.getCraftingResult(matrix);

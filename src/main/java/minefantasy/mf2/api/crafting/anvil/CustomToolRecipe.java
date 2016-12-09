@@ -122,15 +122,15 @@ public class CustomToolRecipe extends ShapedAnvilRecipes
                 }
             }
         }
-    	if(!modifyTiers(matrix, metal))
+    	if(!modifyTiers(matrix, metal, true))
     	{
-    		modifyTiers(matrix, wood);
+    		modifyTiers(matrix, wood, false);
     	}
         
         return true;
     }
 
-    private boolean modifyTiers(AnvilCraftMatrix matrix, String tier) 
+    private boolean modifyTiers(AnvilCraftMatrix matrix, String tier, boolean isMain) 
     {
     	CustomMaterial material = CustomMaterial.getMaterial(tier);
     	if(material != null)
@@ -138,6 +138,10 @@ public class CustomToolRecipe extends ShapedAnvilRecipes
     		int newTier = recipeHammer <0 ? recipeHammer : material.crafterTier;
     		int newAnvil = anvil <0 ? anvil : material.crafterAnvilTier;
     		matrix.modifyTier(newTier, newAnvil, (int)(recipeTime * material.craftTimeModifier));
+    		if(isMain)
+    		{
+    			matrix.modifyResearch("smelt"+material.name);
+    		}
     		return true;
     	}
     	return false;

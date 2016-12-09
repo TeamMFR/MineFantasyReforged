@@ -199,7 +199,8 @@ public class ItemHeated extends Item implements IHotItem
 		return heat + unit;
 	}
 
-	private String getWorkString(ItemStack heated, ItemStack item) {
+	private String getWorkString(ItemStack heated, ItemStack item) 
+	{
 		byte stage = Heatable.getHeatableStage(item);
 		switch (stage) {
 			case 1:

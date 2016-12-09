@@ -16,7 +16,6 @@ public class ConfigCrafting extends ConfigurationBaseMF
 	{
 		allowIronResmelt =  Boolean.parseBoolean(config.get(CATEGORY_REFINING, "Allow Iron ingots to make Pig Iron", false, "If you're not resoureful: you can allow iron ingots to make prepared iron for refining.").getString());
 		TileEntityBlastFH.maxFurnaceHeight =  Integer.parseInt(config.get(CATEGORY_REFINING, "Max Blast Furnace Height", 16, "The max amount of chambers a blast furnace can read").getString());
-		ForgedToolRecipes.easyBars = Boolean.parseBoolean(config.get(CATEGORY_REFINING, "Easy Bars", false, "Change the recipe so bars can be converted to and from ingots by hand without anvil. Useful in updating old worlds").getString());
 		CookRecipe.canCookBasics = Boolean.parseBoolean(config.get(CATEGORY_COOKING, "Cook non-mf food on cooktop", true, "This means non-mf food cooked in a furnace can work on a cooking plate").getString());
 	}
 

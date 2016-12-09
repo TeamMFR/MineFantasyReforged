@@ -102,12 +102,19 @@ public class ItemComponentMF extends Item implements ITieredComponent
 		if(isCustom)
     	{
     		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
+    		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
     		Iterator iteratorWood = wood.iterator();
     		while(iteratorWood.hasNext())
         	{
     			CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
 				list.add( this.construct(customMat.name) );
 				list.add( ((ItemComponentMF)ComponentListMF.plank_pane).construct(customMat.name) );
+        	}
+    		Iterator iteratorMetal = metal.iterator();
+    		while(iteratorMetal.hasNext())
+        	{
+    			CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
+				list.add( ComponentListMF.bar(customMat.name) );
         	}
     	}
 		

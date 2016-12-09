@@ -36,7 +36,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 	public float fuel;
 	public float maxFuel = 6000;//5m
 	public float temperature, fuelTemperature;
-	public static final float maxTemperature = 1000;
+	public static final float maxTemperature = 5000;
 	private Random rand = new Random();
 	private int ticksExisted;
 	public float dragonHeartPower = 0F;
@@ -96,7 +96,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		
 		if(temperature < maxTemp)
 		{
-			float amount = 0.2F;
+			float amount = 2.0F;
 			temperature += amount;
 			if(temperature > maxTemp)
 			{
@@ -105,10 +105,10 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		}
 		else if(temperature > maxTemp && rand.nextInt(20) == 0)
 		{
-			--temperature;
+			temperature -= 10;
 		}
 		
-		if(isBurning && temperature > 100 && rand.nextInt(20) == 0 && !isOutside())
+		if(isBurning && temperature > 250 && rand.nextInt(20) == 0 && !isOutside())
 		{
 			int val = this.getTier() == 1 ? 3 : 1;
 			if(this.hasBlockAbove())
@@ -240,7 +240,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 
 	private float getStackModifier(int stackSize) 
 	{
-		float mod = 1F + (float)stackSize / 8F;//1x to 9x
+		float mod = 1F + (float)stackSize / 16F;//1x to 5x
 		return mod;
 	}
 
@@ -486,7 +486,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 	}
 	public int getMaxTemp() 
 	{
-		return 1000;
+		return (int) maxTemperature;
 	}
 	public boolean addFuel(ForgeFuel stats, boolean hand, int tier)
 	{
@@ -599,7 +599,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		justShared = 5;
 		if(temperature < max)
         {
-        	temperature = Math.min(max, temperature + (50F*powerLevel));
+        	temperature = Math.min(max, temperature + (500F*powerLevel));
         }
 		
 		for(int a = 0; a < 10; a ++)

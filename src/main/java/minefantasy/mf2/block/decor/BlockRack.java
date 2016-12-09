@@ -389,4 +389,9 @@ public class BlockRack extends BlockWoodDecor
     	player.openGui(MineFantasyII.instance, 0, world, tile.xCoord, tile.yCoord, tile.zCoord);
 		return false;
 	}
+    @SideOnly(Side.CLIENT)
+	@Override
+    public void registerBlockIcons(IIconRegister reg)
+    {
+    }
 }

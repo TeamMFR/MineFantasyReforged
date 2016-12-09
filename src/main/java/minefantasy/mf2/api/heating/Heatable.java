@@ -10,7 +10,7 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Heatable 
 {
-	public static final int forgeMaximumMetalHeat = 500;
+	public static final int forgeMaximumMetalHeat = 5000;
 	public static boolean requiresHeating = true;
 	public static HashMap<String, Heatable> registerList = new HashMap<String, Heatable>();
 	/**

@@ -61,14 +61,7 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.refinedplank"),  new EntryPageRecipeCarpenter(KnowledgeListMF.jugRecipe), new EntryPageSmelting(FoodListMF.jug_uncooked, FoodListMF.jug_empty), new EntryPageRecipeBase(KnowledgeListMF.plantOilR), new EntryPageRecipeCarpenter(KnowledgeListMF.refinedPlankR));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.flux"), new EntryPageRecipeAnvil(KnowledgeListMF.fluxR));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.bar.1"));
-		if(ForgedToolRecipes.easyBars)
-		{
-			KnowledgeListMF.commodities.addPages(new EntryPageRecipeBase(KnowledgeListMF.barRE), new EntryPageRecipeBase(KnowledgeListMF.baringotRE));
-		}
-		else
-		{
-			KnowledgeListMF.commodities.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
-		}
+		KnowledgeListMF.commodities.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
 		
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.hunks"), new EntryPageRecipeAnvil(KnowledgeListMF.hunkR), new EntryPageRecipeAnvil(KnowledgeListMF.ingotR));
 		KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.nail"), new EntryPageRecipeAnvil(KnowledgeListMF.nailR));
@@ -128,14 +121,7 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.crucible2.addPages(assembleSimpleImgPage("fire_crucible_example", "knowledge.crucible2.1"), new EntryPageGrind(new ItemStack(ComponentListMF.kaolinite), new ItemStack(ComponentListMF.kaolinite_dust)), new EntryPageRecipeCarpenter(KnowledgeListMF.fireclayR), new EntryPageRecipeCarpenter(KnowledgeListMF.advCrucibleRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.fireBricksR), assembleSimpleImgPage("fire_crucible", "knowledge.crucible2.blocks"));
 		
 		KnowledgeListMF.bar.addPages(new EntryPageText("knowledge.bar.1"));
-		if(ForgedToolRecipes.easyBars)
-		{
-			KnowledgeListMF.bar.addPages(new EntryPageRecipeBase(KnowledgeListMF.barRE), new EntryPageRecipeBase(KnowledgeListMF.baringotRE));
-		}
-		else
-		{
-			KnowledgeListMF.bar.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
-		}
+		KnowledgeListMF.bar.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.barR), new EntryPageRecipeAnvil(KnowledgeListMF.baringotR));
 		KnowledgeListMF.smeltCopper.addPages(new EntryPageText("knowledge.smeltCopper.1"));
 		KnowledgeListMF.smeltBronze.addPages(new EntryPageText("knowledge.smeltBronze.1"));
 		if(ConfigHardcore.HCCreduceIngots)
