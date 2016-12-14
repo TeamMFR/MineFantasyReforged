@@ -117,7 +117,7 @@ public class CustomToolRecipeCarpenter extends ShapedCarpenterRecipes
     	CustomMaterial material = CustomMaterial.getMaterial(tier);
     	if(material != null)
     	{
-    		int newTier = recipeHammer <0 ? recipeHammer : material.crafterTier;
+    		int newTier = recipeHammer <0 ? material.crafterTier : recipeHammer;
     		matrix.modifyTier(newTier, (int)(recipeTime * material.craftTimeModifier));
     		return true;
     	}

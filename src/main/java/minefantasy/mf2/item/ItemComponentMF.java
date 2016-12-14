@@ -318,11 +318,11 @@ public class ItemComponentMF extends Item implements ITieredComponent
     	String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
     	return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
-    private String materialType;
+    private String materialType = null;
     @Override
 	public String getMaterialType(ItemStack item)
     {
-		return materialType;
+		return isCustom ? materialType : null;
 	}
     //====================================================== CUSTOM END ==============================================================\\
 

@@ -274,9 +274,11 @@ public class ToolListMF
 		
 		ChestGenHooks.addItem(LootTypes.DWARVEN_AMMO, new WeightedRandomChestContent(CustomToolListMF.standard_bolt.construct("Iron"), 1, 1, 100));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_AMMO, new WeightedRandomChestContent(CustomToolListMF.standard_bolt.construct("Encrusted"), 1, 1, 20));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_AMMO, new WeightedRandomChestContent(bomb_custom.createBomb((byte)2, (byte)1, (byte)0, (byte)0, 1), 1, 1, 25));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_AMMO, new WeightedRandomChestContent(mine_custom.createMine((byte)2, (byte)1, (byte)0, (byte)0, 1), 1, 1, 25));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_AMMO, new WeightedRandomChestContent(bomb_custom.createBomb((byte)1, (byte)1, (byte)0, (byte)0, 1), 1, 1, 25));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_AMMO, new WeightedRandomChestContent(mine_custom.createMine((byte)1, (byte)1, (byte)0, (byte)0, 1), 1, 1, 25));
 		
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(loot_sack), 		1, 1,  40));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(loot_sack_uc), 		1, 1,  10));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.book), 	1, 4,  60));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.bowl), 	1, 6,  100));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(ComponentListMF.clay_pot), 	1, 7,  100));
@@ -289,9 +291,11 @@ public class ToolListMF
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.bucket), 	1, 1,  80));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME, new WeightedRandomChestContent(new ItemStack(Items.clock), 	1, 1,  20));
 		
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(loot_sack_uc), 		1, 1,  40));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(loot_sack_rare), 		1, 1,  10));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.book), 	1, 4,  20));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.bowl), 	1, 6,  30));
-		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(ComponentListMF.clay_pot), 	1, 7,  40));
+		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(ComponentListMF.clay_pot), 	1, 7,  20));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.bone), 	1, 9,  10));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.emerald), 	1, 1,  50));
 		ChestGenHooks.addItem(LootTypes.DWARVEN_HOME_RICH, new WeightedRandomChestContent(new ItemStack(Items.diamond), 	1, 1,  50));

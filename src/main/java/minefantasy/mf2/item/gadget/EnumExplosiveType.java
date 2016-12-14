@@ -2,9 +2,9 @@ package minefantasy.mf2.item.gadget;
 
 public enum EnumExplosiveType
 {
-	BASIC("basic",       24F, 5.5F),
-	SHRAPNEL("shrapnel", 32F, 5.5F),
-	FIRE("fire",         40F, 5.5F);
+	BASIC("basic",       24F, 1.0F),
+	SHRAPNEL("shrapnel", 32F, 1.0F),
+	FIRE("fire",         40F, 1.0F);
 	
 	public String name;
 	public float damage;

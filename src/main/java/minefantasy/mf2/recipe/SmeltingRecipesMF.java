@@ -19,8 +19,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class SmeltingRecipesMF {
-
+public class SmeltingRecipesMF 
+{
 	public static void init() 
 	{
 		ItemStack copper = ComponentListMF.bar("Copper");
@@ -58,27 +58,22 @@ public class SmeltingRecipesMF {
 			{
 				MFLogUtil.logWarn("Failed to remove Ore smelting!");
 			}
-			BloomRecipe.addRecipe(new ItemStack(Blocks.iron_ore), new ItemStack(Items.iron_ingot));
-			BloomRecipe.addRecipe(new ItemStack(Blocks.gold_ore), new ItemStack(Items.gold_ingot));
+			BloomRecipe.addRecipe(new ItemStack(Blocks.iron_ore), iron);
+			BloomRecipe.addRecipe(new ItemStack(Blocks.gold_ore), gold);
 			
 			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.iron_ore), iron, 0);
 			MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.gold_ore), gold, 0);
 		}
 		
-		refineRawOre(ComponentListMF.oreCopper, ComponentListMF.ingots[0], copper);
-		refineRawOre(ComponentListMF.oreTin, ComponentListMF.ingots[1], tin);
-		refineRawOre(ComponentListMF.oreIron, Items.iron_ingot, iron);
-		refineRawOre(ComponentListMF.oreSilver, ComponentListMF.ingots[8], silver);
-		refineRawOre(ComponentListMF.oreGold, Items.gold_ingot, gold);
+		refineRawOre(ComponentListMF.oreCopper, copper);
+		refineRawOre(ComponentListMF.oreTin, tin);
+		refineRawOre(ComponentListMF.oreIron, iron);
+		refineRawOre(ComponentListMF.oreSilver, silver);
+		refineRawOre(ComponentListMF.oreGold, gold);
 		
-		MineFantasyAPI.addRatioAlloy(3, ComponentListMF.bar("bronze", 3), 0, new Object[]
-		{
-			ComponentListMF.oreCopper, ComponentListMF.oreCopper, ComponentListMF.oreTin
-		});
-		
-		refineRawOre(BlockListMF.oreCopper, ComponentListMF.ingots[0], copper, 0.4F);
-		refineRawOre(BlockListMF.oreTin, ComponentListMF.ingots[1], tin, 0.5F);
-		refineRawOre(BlockListMF.oreSilver, ComponentListMF.ingots[8], silver, 0.9F);
+		refineRawOre(BlockListMF.oreCopper, copper, 0.4F);
+		refineRawOre(BlockListMF.oreTin, tin, 0.5F);
+		refineRawOre(BlockListMF.oreSilver, silver, 0.9F);
 		
 		GameRegistry.addSmelting(BlockListMF.oreBorax, new ItemStack(ComponentListMF.flux_strong, 4), 0.25F);
 		GameRegistry.addSmelting(BlockListMF.oreTungsten, new ItemStack(ComponentListMF.oreTungsten, 1), 0.25F);
@@ -92,12 +87,6 @@ public class SmeltingRecipesMF {
 		MineFantasyAPI.addRatioAlloy(3, ComponentListMF.bar("bronze", 3), new Object[]{
 			copper, copper, tin
 		});
-		
-		ArrayList<ItemStack> pigs = OreDictionary.getOres("ingotPigIron");
-		ArrayList<ItemStack> steels = OreDictionary.getOres("ingotSteel");
-		ArrayList<ItemStack> bronzes = OreDictionary.getOres("ingotBronze");
-		ArrayList<ItemStack> silvers = OreDictionary.getOres("ingotSilver");
-		ArrayList<ItemStack> blacks = OreDictionary.getOres("ingotBlackSteel");
 		
 		KnowledgeListMF.obsidalloy =
 		MineFantasyAPI.addRatioAlloy(1, obsidian, 1, new Object[]{
@@ -175,27 +164,27 @@ public class SmeltingRecipesMF {
 		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[11], blue);
 	}
 
-	private static void refineRawOre(Item ore, Item ingot, ItemStack bar)
+	private static void refineRawOre(Item ore, ItemStack bar)
 	{
-		refineRawOre(ore, ingot, bar, 0F);
+		refineRawOre(ore, bar, 0F);
 	}
-	private static void refineRawOre(Block ore, Item ingot, ItemStack bar)
+	private static void refineRawOre(Block ore, ItemStack bar)
 	{
-		refineRawOre(ore, ingot, bar, 0F);
+		refineRawOre(ore, bar, 0F);
 	}
-	private static void refineRawOre(Block ore, Item ingot, ItemStack bar, float xp)
+	private static void refineRawOre(Block ore, ItemStack bar, float xp)
 	{
-		refineRawOre(Item.getItemFromBlock(ore), ingot, bar, xp);
+		refineRawOre(Item.getItemFromBlock(ore), bar, xp);
 	}
-	private static void refineRawOre(Item ore, Item ingot, ItemStack bar, float xp)
+	private static void refineRawOre(Item ore, ItemStack bar, float xp)
 	{
 		if(ConfigHardcore.HCCreduceIngots)
 		{
-			BloomRecipe.addRecipe(ore, new ItemStack(ingot));
+			BloomRecipe.addRecipe(ore, bar);
 		}
 		else
 		{
-			GameRegistry.addSmelting(ore, new ItemStack(ingot), xp);
+			GameRegistry.addSmelting(ore, bar, xp);
 		}
 		BigFurnaceRecipes.addRecipe(new ItemStack(ore), bar, 0);
 	}

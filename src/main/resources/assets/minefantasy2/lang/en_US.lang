@@ -413,63 +413,12 @@ item.fireclay.name=Fire Clay
 item.fireclay_brick.name=Fire Clay Brick
 item.strong_brick.name=Fire Brick
 
-item.hunkCopper.name=Copper Nugget
-item.hunkTin.name=Tin Nugget
-item.hunkBronze.name=Bronze Nugget
-item.hunkIron.name=Iron Nugget
-item.hunkPigIron.name=Pig Iron Nugget
-item.hunkSteel.name=Steel Nugget
-item.hunkEncrusted.name=Encrusted Nugget
-item.hunkSilver.name=Silver Nugget
-item.hunkGold.name=Gold Nugget
-item.hunkPureGold.name=Pure Gold Nugget
-item.hunkRedSteel.name=Red Steel Nugget
-
-item.hunkBlackSteel.name=Black Steel Nugget
-item.hunkBlueSteel.name=Blue Steel Nugget
-item.hunkAdamantium.name=Adamantium Nugget
-item.hunkMithril.name=Mithril Nugget
-item.hunkIgnotumite.name=Ignotumite Nugget
-item.hunkMithium.name=Mithium Nugget
-item.hunkEnder.name=Enderforge Nugget
-item.hunkTungsten.name=Wolframite Nugget
-
 item.oreCopper.name=Raw Copper Ore
 item.oreTin.name=Raw Tin Ore
 item.oreIron.name=Raw Iron Ore
 item.oreSilver.name=Raw Silver Ore
 item.oreGold.name=Raw Gold Ore
 item.oreTungsten.name=Raw Wolframite
-
-item.plateBronze.name=Bronze Plate
-item.plateIron.name=Iron Plate
-item.plateSteel.name=Steel Plate
-item.plateEncrusted.name=Encrusted Plate
-item.plateBlackSteel.name=Black Steel Plate
-
-item.plateRedSteel.name=Red Steel Plate
-item.plateBlueSteel.name=Blue Steel Plate
-item.plateAdamantium.name=Adamantium Plate
-item.plateMithril.name=Mithril Plate
-item.plateIgnotumite.name=Ignotumite Plate
-item.plateMithium.name=Mithium Plate
-item.plateEnder.name=Enderforge Plate
-item.ingotCompositeAlloy.name=Composite Alloy Ingot
-
-item.chainmeshCopper.name=Copper Chain Mesh
-item.chainmeshBronze.name=Bronze Chain Mesh
-item.chainmeshIron.name=Iron Chain Mesh
-item.chainmeshSteel.name=Steel Chain Mesh
-item.chainmeshEncrusted.name=Encrusted Chain Mesh
-item.chainmeshBlackSteel.name=Black Steel Chain Mesh
-
-item.chainmeshRedSteel.name=Red Steel Chain Mesh
-item.chainmeshBlueSteel.name=Blue Steel Chain Mesh
-item.chainmeshAdamantium.name=Adamantium Chain Mesh
-item.chainmeshMithril.name=Mithril Chain Mesh
-item.chainmeshIgnotumite.name=Ignotumite Chain Mesh
-item.chainmeshMithium.name=Mithium Chain Mesh
-item.chainmeshEnder.name=Enderforge Chain Mesh
 
 item.dragon_heart.name=Dragon Heart
 
@@ -1250,6 +1199,7 @@ knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathe
 knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic firestarter (Dry rocks-Craft-Tools), and wear an apron too!
 
 knowledge.gettingStarted.forgingbars=Most recipes use bars rather than ingots. A bar is an easy to forge component made from metal. Create bars from placing a hot ingot on an anvil and hammering them.
+knowledge.gettingStarted.flux=Flux is an important purification agent for metalworks. Primarily this is used for the treatment of metals in the forging process and some alloy creation. Flux is required or hunks and plates, required for some tools and armour.^The best source of flux is limestone. Make sure to keep a look out in your travels.
 knowledge.gettingStarted.3=Now you need some leather strips for tools. Gather 2 copper (crafted into bars), 2 planks and 1 leather to craft a set of copper shears.
 knowledge.gettingStarted.4=With these shears, you can cut leather to strips on the carpenter's bench OR a tanning rack by right-clicking them on the block with leather on it.
 
@@ -1309,7 +1259,7 @@ knowledge.commodities.refinedplank=Some timber can be refined with a simple mixt
 
 knowledge.commodities.flux=Flux is commonly used in refining metals. Standard flux can be used in devices such as blast furnaces for refining ingots. Strong flux is used in advanced alloys.
 
-knowledge.commodities.hunks=For the smaller creations, hunks are used. You can turn bars into hunks, and back to bars.
+knowledge.commodities.hunks=For the smaller creations, hunks are used. You can turn bars into hunks with the application of flux.
 
 knowledge.commodities.nail=Nails are basic items used in woodworking. They can be made from Copper, Tin, Bronze, Iron or Steel. (This doesn't affect quality, just amount made)
 
@@ -1401,7 +1351,7 @@ knowledge.polearms.info=
 
 knowledge.bar=Metal Bar
 knowledge.bar.desc=Standardised shaping
-knowledge.bar.1=An ingot may be used for your standard crafting and trading needs but their too thick for easy forging. Bars are produced from ingots to create a standardised, easy to reforge commodity, allowing easy setup and production of items. Bars are used in artisanry in particular over ingots for this reason.^A bar can be reconverted to an ingot with the application of flux.
+knowledge.bar.1=An ingot may be used for your standard crafting and trading needs but their too thick for easy forging. Bars are produced from ingots to create a standardised, easy to reforge commodity, allowing easy setup and production of items. Bars are used in artisanry in particular over ingots for this reason.^A bar can be reconverted to an ingot with a similar method.
 
 knowledge.smeltCopper=Copper Smithing
 knowledge.smeltCopper.desc=Tier %1$s, Common material

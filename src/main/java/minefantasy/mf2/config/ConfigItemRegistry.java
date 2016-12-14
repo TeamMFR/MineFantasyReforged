@@ -5,6 +5,7 @@ import java.util.Arrays;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.CustomArmourEntry;
 import minefantasy.mf2.api.armour.CustomDamageRatioEntry;
+import minefantasy.mf2.api.crafting.CustomCrafterEntry;
 import minefantasy.mf2.api.farming.CustomHoeEntry;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.item.Item;
@@ -20,6 +21,9 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 	
 	public static String[] hoeList = new String[0];
 	
+	public static final String CATEGORY_TOOL = "Tools";
+	
+	public static String[] crafterList = new String[0];
 	
 	public static final String CATEGORY_WEPS = "Weapon Register";
 	
@@ -58,6 +62,17 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 		hoeList = config.get(CATEGORY_FARM, "Hoe Registry", new String[0], hoeDesc).getStringList();
 	    Arrays.sort(hoeList);
 	    
+	    //Crafters
+	    
+	    String craftDesc = 
+		"This Registers items to a tool type and efficiency (such as hammer, hvyHammer, knife, saw, etc):\n" +
+		"Order itemid|efficiency|tier|tooltype \n" +
+		"tooltype can be hammer, hvyHammer, knife, shears, needle, spoon, mallet, saw, spanner \n" +
+		"efficiency is the measure of how fast it works (similar to dig speed)";
+		
+	    crafterList = config.get(CATEGORY_TOOL, "Crafter Registry", new String[0], craftDesc).getStringList();
+	    Arrays.sort(crafterList);
+	    
 	    //Weapons
 	    
 	    String damageDesc = 
@@ -93,6 +108,10 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 			for(String s: hoeList)
 		    {
 				breakdownLineForHoe(s);
+		    }
+			for(String s: crafterList)
+		    {
+				breakdownLineForCrafter(s);
 		    }
 			for(String s: customDamagerList)
 		    {
@@ -224,6 +243,65 @@ public class ConfigItemRegistry extends ConfigurationBaseMF
 					{
 						CustomHoeEntry.registerItem(hoe, eff);
 						MFLogUtil.logDebug("Added Hoe: " + id + " With Efficiency " + eff);
+					}
+					phase = 0;
+				}
+			}
+			else
+			{
+				if(config.charAt(a) != " ".charAt(0))
+				{
+					temp = temp + config.charAt(a);
+				}
+			}
+		}
+	}
+	
+	private static void breakdownLineForCrafter(String config) 
+	{
+		String temp = "";
+		int phase = 0;
+		String id = "";
+		String type = "";
+		int tier = -1;
+		float efficiency = 2.0F;
+		
+		for(int a = 0; a < config.length(); a ++)
+		{
+			if(a == config.length()-1)
+			{
+				temp = temp + config.charAt(a);
+			}
+			if(config.charAt(a) == "|".charAt(0) || a == config.length()-1)
+			{
+				if(phase == 0)
+				{
+					id = temp;
+					temp = "";
+					phase ++;
+				}
+				else if(phase == 1)
+				{
+					efficiency = Float.valueOf(temp);
+					temp = "";
+					phase ++;
+				}
+				else if(phase == 2)
+				{
+					tier = Integer.valueOf(temp);
+					temp = "";
+					phase ++;
+				}
+				else if(phase == 3)
+				{
+					type = temp;
+					temp = "";
+					
+					Item hoe = getItemFromString(id);
+					if(hoe != null)
+					{
+						CustomCrafterEntry.registerItem(hoe, type, efficiency, tier);
+						MFLogUtil.logDebug("Added Crafter: " + id + " as " + type + " for efficiency " + efficiency);
 					}
 					phase = 0;
 				}

@@ -135,8 +135,8 @@ public class CustomToolRecipe extends ShapedAnvilRecipes
     	CustomMaterial material = CustomMaterial.getMaterial(tier);
     	if(material != null)
     	{
-    		int newTier = recipeHammer <0 ? recipeHammer : material.crafterTier;
-    		int newAnvil = anvil <0 ? anvil : material.crafterAnvilTier;
+    		int newTier = recipeHammer <0 ? material.crafterTier : recipeHammer;
+    		int newAnvil = anvil <0 ? material.crafterAnvilTier : anvil;
     		matrix.modifyTier(newTier, newAnvil, (int)(recipeTime * material.craftTimeModifier));
     		if(isMain)
     		{

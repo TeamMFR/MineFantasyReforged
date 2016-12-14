@@ -59,10 +59,8 @@ public class ForgedToolRecipes
     			KnowledgeListMF.baringotR.add(
     			MineFantasyAPI.addAnvilRecipe(artisanry, defaultIngot, "smelt"+customMat.name, true, "hammer", -1, -1, (int)(customMat.craftTimeModifier/2F), new Object[]
 				{
-					"F", 
 					"I",
 					'I', bar,
-					'F', ComponentListMF.flux
 				}));
     		}
     	}
@@ -100,7 +98,9 @@ public class ForgedToolRecipes
 		KnowledgeListMF.hunkR =
 		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(hunk, 4), "", true, "hammer", 0, 0, time, new Object[]
 		{
+			"F",
 			"I",
+			'F', ComponentListMF.flux,
 			'I', bar,
 		});
 		
@@ -134,7 +134,7 @@ public class ForgedToolRecipes
 		int time = 10;
 		
 		KnowledgeListMF.nailR =
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.nail, 16), "", true, "hammer", -1, -1, time, new Object[]
+		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.nail, 16), "", true, "hammer", -1, -1, time, new Object[]
 		{
 			"HH",
 			" H",
@@ -143,7 +143,7 @@ public class ForgedToolRecipes
 			'H', hunk
 		});
 		KnowledgeListMF.rivetR =
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.rivet, 8), "", true, "hammer", -1, -1, time, new Object[]
+		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.rivet, 8), "", true, "hammer", -1, -1, time, new Object[]
 		{
 			"H H",
 			" H ",

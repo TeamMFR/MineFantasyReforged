@@ -261,7 +261,7 @@ public class ForgingRecipes
 			ItemStack bar = ComponentListMF.bar(material.name);
 			
 			anvilRecs[id] = 
-			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(BlockListMF.anvil[id]), "smelt"+material.name, false, "hammer", material.hammerTier-1, material.anvilTier-1, (int)(time*material.craftTimeModifier), new Object[]
+			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(BlockListMF.anvil[id]), "smelt"+material.name, false, "hammer", -1, -1, (int)(time*material.craftTimeModifier), new Object[]
 			{
 				" II",
 				"III",
@@ -435,7 +435,7 @@ public class ForgingRecipes
 		ItemStack ironHunk = ComponentListMF.metalHunk.createComm("iron");
 		ItemStack steelHunk = ComponentListMF.metalHunk.createComm("steel");
 		ItemStack tungstenHunk = ComponentListMF.metalHunk.createComm("tungsten");
-		ItemStack blacksteelHunk = ComponentListMF.metalHunk.createComm("blacksteel");
+		ItemStack obsidianHunk = ComponentListMF.metalHunk.createComm("obsidian");
 		
 		BaseMaterialMF material = BaseMaterialMF.steel;
 		int time = 15;
@@ -612,7 +612,7 @@ public class ForgingRecipes
 			"RIR",
 			'T', ToolListMF.engin_anvil_tools,
 			'O', Blocks.obsidian,
-			'I', blacksteelHunk,
+			'I', obsidianHunk,
 			'R', ComponentListMF.rivet,
 		});
 		KnowledgeListMF.mineCaseObsidianR = 
@@ -625,7 +625,7 @@ public class ForgingRecipes
 			'T', ToolListMF.engin_anvil_tools,
 			'O', Blocks.obsidian,
 			'P', Blocks.heavy_weighted_pressure_plate,
-			'I', blacksteelHunk,
+			'I', obsidianHunk,
 			'R', ComponentListMF.rivet,
 		});
 		time = 15;
@@ -680,8 +680,8 @@ public class ForgingRecipes
 				ironHunk, ironHunk, ironHunk, ironHunk, 
 				new ItemStack(Items.redstone, 2), ComponentListMF.fletching);
 		
-		Salvage.addSalvage(ComponentListMF.bomb_casing_obsidian, blacksteelHunk, blacksteelHunk, new ItemStack(ComponentListMF.rivet, 2));
-		Salvage.addSalvage(ComponentListMF.mine_casing_obsidian, blacksteelHunk, blacksteelHunk, iron, ComponentListMF.rivet);
+		Salvage.addSalvage(ComponentListMF.bomb_casing_obsidian, obsidianHunk, obsidianHunk, new ItemStack(ComponentListMF.rivet, 2));
+		Salvage.addSalvage(ComponentListMF.mine_casing_obsidian, obsidianHunk, obsidianHunk, iron, ComponentListMF.rivet);
 		
 		Salvage.addSalvage(ComponentListMF.cross_bayonet, 
 				ironHunk, ironHunk, ironHunk, ironHunk, 

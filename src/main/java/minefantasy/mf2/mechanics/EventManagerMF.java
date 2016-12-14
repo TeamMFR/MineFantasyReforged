@@ -449,9 +449,17 @@ public class EventManagerMF
 				}
 			}
 		}
-		if(weapon != null && (weapon.getItem() instanceof IHuntingItem))
+		if(weapon != null)
 		{
-			if(((IHuntingItem)weapon.getItem()).canRetrieveDrops(weapon))
+			String type = ToolHelper.getCrafterTool(weapon);
+			if(weapon.getItem() instanceof IHuntingItem)
+			{
+				if(((IHuntingItem)weapon.getItem()).canRetrieveDrops(weapon))
+				{
+					dead.getEntityData().setBoolean("hunterKill", true);
+				}
+			}
+			else if (type != null && type.equalsIgnoreCase("knife"))
 			{
 				dead.getEntityData().setBoolean("hunterKill", true);
 			}

@@ -190,7 +190,7 @@ public class TileEntityBloomery extends TileEntity implements IInventory
 					SkillList.artisanry.addXP(user, 1);
 				}
 				drop.stackSize = 1;
-				drop = ItemHeated.createHotItem(drop, 120);
+				drop = ItemHeated.createHotItem(drop, 1200);
 				entityDropItem(worldObj, xCoord, yCoord, zCoord, drop);
 				syncData();
 			}

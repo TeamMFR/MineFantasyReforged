@@ -1,15 +1,15 @@
 package minefantasy.mf2.api.helpers;
 
 import java.util.ArrayList;
-import java.util.Random;
 
+import minefantasy.mf2.api.crafting.CustomCrafterEntry;
 import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.api.tool.IToolMF;
 import minefantasy.mf2.api.weapon.ISharpenable;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
 
 public class ToolHelper
 {
@@ -17,16 +17,9 @@ public class ToolHelper
 	
 	public static boolean shouldShowTooltip(ItemStack tool)
 	{
-		if(tool != null)
-		{
-			if(tool.getItem() instanceof IToolMF)
-			{
-				return true;
-			}
-			//TODO Custom Tool Entries
-		}
+		String type = getCrafterTool(tool);
 		
-		return false;
+		return type != null && !type.equalsIgnoreCase("null") && !type.equalsIgnoreCase("hands");
 	}
 	public static float getCrafterEfficiency(ItemStack tool)
 	{
@@ -38,8 +31,7 @@ public class ToolHelper
 		{
 			return ((IToolMF)tool.getItem()).getEfficiency(tool);
 		}
-		//TODO Custom Tool Entries
-		return 1F;
+		return CustomCrafterEntry.getEntryEfficiency(tool);
 	}
 	public static int getCrafterTier(ItemStack tool)
 	{
@@ -51,8 +43,7 @@ public class ToolHelper
 		{
 			return ((IToolMF)tool.getItem()).getTier(tool);
 		}
-		//TODO Custom Tool Entries
-		return -1;
+		return CustomCrafterEntry.getEntryTier(tool);
 	}
 	public static String getCrafterTool(ItemStack tool)
 	{
@@ -64,8 +55,7 @@ public class ToolHelper
 		{
 			return ((IToolMF)tool.getItem()).getToolType(tool);
 		}
-		//TODO Custom Tool Entries
-		return "nothing";
+		return CustomCrafterEntry.getEntryType(tool);
 	}
 	
 	
