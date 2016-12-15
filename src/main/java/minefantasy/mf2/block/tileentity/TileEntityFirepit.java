@@ -228,9 +228,13 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
             Item item = input.getItem();
 
             if (i == Items.stick) return 600;//30Sec
-            if (i == ComponentListMF.plank)
+            if (i == ComponentListMF.plank || i == ComponentListMF.plank_cut)
             {
             	return (int)(200 * CustomToolHelper.getBurnModifier(input));
+            }
+            if (i == ComponentListMF.plank_pane)
+            {
+            	return (int)(600 * CustomToolHelper.getBurnModifier(input));
             }
             
             return 0;

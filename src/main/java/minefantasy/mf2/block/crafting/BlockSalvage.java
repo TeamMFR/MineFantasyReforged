@@ -103,6 +103,7 @@ public class BlockSalvage extends Block
 					if(junk.stackSize == 1)
 					{
 						AmmoMechanicsMF.dropAmmo(world, junk, x+0.5D, y+1.25D, z+0.5D);
+						AmmoMechanicsMF.dropAmmoCrate(world, junk, x+0.5D, y+1.25D, z+0.5D);
 					}
 					
 					--drop.getEntityItem().stackSize;

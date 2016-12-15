@@ -54,6 +54,11 @@ public class BasicRecipesMF
 			"S",
 			'S', ComponentListMF.plank
 		});
+		GameRegistry.addShapedRecipe(new ItemStack(Items.stick, 2), new Object[]
+		{
+			"S",
+			'S', ComponentListMF.plank_cut
+		});
 		
 		KnowledgeListMF.firepitRecipe =
 		GameRegistry.addShapedRecipe(new ItemStack(BlockListMF.firepit), new Object[]

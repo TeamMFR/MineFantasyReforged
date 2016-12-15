@@ -28,7 +28,7 @@ public class CustomCrafterEntry
 		{
 			return entry.type;
 		}
-		return "null";
+		return "nothing";
 	}
 	public static float getEntryEfficiency(ItemStack piece)
 	{

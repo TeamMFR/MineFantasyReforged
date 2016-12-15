@@ -5,9 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
-import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.api.weapon.IDamageType;
@@ -15,9 +20,6 @@ import minefantasy.mf2.api.weapon.IRackItem;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.farming.FarmingHelper;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import minefantasy.mf2.item.list.ToolListMF;
-import minefantasy.mf2.item.tool.ToolMaterialMF;
-import minefantasy.mf2.item.tool.crafting.ItemSaw;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -34,13 +36,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * @author Anonymous Productions
@@ -103,7 +98,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 								tryBreakFarmland(world, x+x2, y+y2-1, z+z2);
 								if(!entity.capabilities.isCreativeMode)
 								{
-									ItemSaw.tirePlayer(entity, 1F);
+									ItemLumberAxe.tirePlayer(entity, 1F);
 									for (ItemStack drop : items)
 						            {
 						                if (world.rand.nextFloat() <= 1.0F)
@@ -173,7 +168,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 	@Override
     public boolean onItemUse(ItemStack hoe, EntityPlayer player, World world, int x, int y, int z, int facing, float pitch, float yaw, float pan)
     {
-        if (!player.canPlayerEdit(x, y, z, facing, hoe) || !ItemSaw.canAcceptCost(player))
+        if (!player.canPlayerEdit(x, y, z, facing, hoe) || !ItemLumberAxe.canAcceptCost(player))
         {
             return false;
         }

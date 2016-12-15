@@ -154,7 +154,7 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
 				AmmoMechanicsMF.putAmmoOnFirearm(item, (loaded.stackSize > 0 ? loaded : null));
 			}
 			recoilUser(user, getFullValue(item, "recoil"));
-			AmmoMechanicsMF.damageFirearm(item, user, 1);
+			AmmoMechanicsMF.damageContainer(item, user, 1);
 		}
     	stopUse(item);
     }

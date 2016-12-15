@@ -837,6 +837,7 @@ item.standard_trow.name=%1$s Spade
 item.standard_hvyshovel.name=Heavy %1$s Shovel
 item.standard_scythe.name=%1$s Scythe
 item.standard_mattock.name=%1$s Mattock
+item.standard_lumber.name=%1$s Lumber Axe
 
 item.standard_scale_helmet.name=%1$s Scale Helmet
 item.standard_scale_chest.name=%1$s Scalemail
@@ -1619,6 +1620,8 @@ knowledge.scythe.info=$hScythe$r^Scythes can break grass or leaves within a larg
 
 knowledge.mattock.info=$hMattock$r^A commonly used tool for landscaping, a mattock is used for creating roads. Dirt, Grass or sand can be dug out and turned into a road. Blocks can then be placed on there to change their look.
 knowledge.mattock.use=Right-click with the mattock to turn a block into a road. you can then right-click any solid, cuboid block to change its texture. You can also right-click a shovel to turn it into a half block.^With a mattock in hand, Roads can be locked to prevent further modification with right-click. A red-icon on screen means the block cannot be edited, a green icon means it can. toggle this when you're working on the road.
+
+knowledge.lumber.info=$hLumber Axe$r^This heavy axe is used for ripping down forests with ease. The lumber axe is capable of demolishing a whole tree with a single break of a block. Larger trees use more durability and can drain the strength of the tool fast.
 
 knowledge.craftWeapons=Forged Weapons
 knowledge.craftWeapons.desc=For "Defense"

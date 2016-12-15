@@ -99,6 +99,32 @@ public class BlockAmmoBox extends BlockWoodDecor
         }
         super.onBlockPlacedBy(world, x, y, z, user, item);
     }
+    public static ItemStack getHeld(ItemStack item, boolean removeTag)
+    {
+    	if(item.hasTagCompound() && item.getTagCompound().hasKey(NBT_Ammo))
+	    {
+	    	ItemStack i = ItemStack.loadItemStackFromNBT(item.getTagCompound().getCompoundTag(NBT_Ammo));
+	    	if(removeTag)
+	    	{
+	    		item.getTagCompound().removeTag(NBT_Ammo);
+	    	}
+	    	return i;
+	    }
+    	return null;
+    }
+    public static int getStock(ItemStack item, boolean removeTag)
+    {
+    	if(item.hasTagCompound() && item.getTagCompound().hasKey(NBT_Stock))
+	    {
+	    	int i = item.getTagCompound().getInteger(NBT_Stock);
+	    	if(removeTag)
+	    	{
+	    		item.getTagCompound().removeTag(NBT_Stock);
+	    	}
+	    	return i;
+	    }
+    	return 0;
+    }
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) 
 	{

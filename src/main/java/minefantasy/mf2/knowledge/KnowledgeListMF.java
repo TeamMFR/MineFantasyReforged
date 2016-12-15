@@ -287,7 +287,7 @@ public class KnowledgeListMF
     
     public static IAnvilRecipe pickR, axeR, spadeR, hoeR, shearsR;
     public static IAnvilRecipe daggerR, swordR, waraxeR, maceR, spearR, bowR, katanaR, gswordR, whammerR, battleaxeR, halbeardR, lanceR;
-    public static IAnvilRecipe trowR, hvyPickR, hvyShovelR, handpickR, scytheR, mattockR;
+    public static IAnvilRecipe trowR, hvyPickR, hvyShovelR, handpickR, scytheR, mattockR, lumberR;
     public static IAnvilRecipe hammerR, tongsR, hvyHammerR, needleR, sawsR, knifeR, spannerR;
     public static IAnvilRecipe arrowheadR, bodkinheadR, broadheadR, crossBoltR;
     

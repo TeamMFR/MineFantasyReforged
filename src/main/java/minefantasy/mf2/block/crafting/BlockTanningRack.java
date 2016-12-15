@@ -75,13 +75,11 @@ public class BlockTanningRack extends BlockContainer
     @Override
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer user)
     {
-        {
-        	TileEntityTanningRack tile = getTile(world, x, y, z);
-        	if(tile != null)
-        	{
-        		tile.interact(user, true, false);
-        	}
-        }
+    	TileEntityTanningRack tile = getTile(world, x, y, z);
+    	if(tile != null)
+    	{
+    		tile.interact(user, true, false);
+    	}
     }
     
     public Random rand = new Random();

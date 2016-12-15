@@ -339,25 +339,24 @@ public class ItemComponentMF extends Item implements ITieredComponent
   	
   	@Override
   	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
-      {
-  		if(!world.isRemote && storageType != null)
-  		{
-  	        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
-  	
-  	        if (movingobjectposition == null)
-  	        {
-  	            return item;
-  	        }
-  	        else
-  	        {
-  	        	int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition);
-  	        	if(placed > 0)
-  	        	{
-  	        		item.stackSize -= placed;
-  	        		return item;
-  	        	}
-  	        }
-  		}
-  		return item;
-      }
+	{
+		if (!world.isRemote && storageType != null)
+		{
+			MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
+
+			if (movingobjectposition == null) 
+			{
+				return item;
+			} else 
+			{
+				int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition);
+				if (placed > 0) 
+				{
+					item.stackSize -= placed;
+					return item;
+				}
+			}
+		}
+		return super.onItemRightClick(item, world, user);
+	}
 }

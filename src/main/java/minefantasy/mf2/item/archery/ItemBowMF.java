@@ -150,7 +150,7 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
                 var8.setFire(100);
             }
 
-            AmmoMechanicsMF.damageFirearm(item, player, 1);
+            AmmoMechanicsMF.damageContainer(item, player, 1);
             world.playSoundAtEntity(player, "minefantasy2:weapon.bowFire", 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + firepower * 0.5F);
 
             if (var5)

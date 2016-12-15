@@ -301,6 +301,7 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.hvyshovel.info"), new EntryPageRecipeAnvil(KnowledgeListMF.hvyShovelR));
 	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.scythe.info"), new EntryPageRecipeAnvil(KnowledgeListMF.scytheR));
 	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.mattock.info"), new EntryPageRecipeAnvil(KnowledgeListMF.mattockR), new EntryPageText("knowledge.mattock.use"));
+	    KnowledgeListMF.craftAdvTools.addPages(new EntryPageText("knowledge.lumber.info"), new EntryPageRecipeAnvil(KnowledgeListMF.lumberR));
 	    
 	    KnowledgeListMF.firemaker.addPages(new EntryPageText("knowledge.dryrocks.info"), new EntryPageRecipeBase(KnowledgeListMF.dryrocksR));
 	    KnowledgeListMF.firemaker.addPages(new EntryPageText("knowledge.tinderbox.info"), new EntryPageRecipeAnvil(KnowledgeListMF.tinderboxR));

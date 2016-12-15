@@ -335,6 +335,7 @@ public class ClientProxyMF extends CommonProxyMF
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.standard_spear, new RenderSpear());
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.standard_halbeard, new RenderSpear(true));
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.standard_lance, new RenderLance());
+		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.standard_lumber, new RenderHeavyWeapon().setBlunt());
 		
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.dragonforged_dagger, new RenderSword());
 		MinecraftForgeClient.registerItemRenderer(CustomToolListMF.dragonforged_sword, new RenderSword());

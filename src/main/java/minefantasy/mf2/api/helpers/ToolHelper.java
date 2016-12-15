@@ -19,7 +19,7 @@ public class ToolHelper
 	{
 		String type = getCrafterTool(tool);
 		
-		return type != null && !type.equalsIgnoreCase("null") && !type.equalsIgnoreCase("hands");
+		return type != null && !type.equalsIgnoreCase("nothing") && !type.equalsIgnoreCase("hands");
 	}
 	public static float getCrafterEfficiency(ItemStack tool)
 	{

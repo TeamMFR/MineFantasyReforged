@@ -73,20 +73,19 @@ public class ForgedToolRecipes
 			'F', Items.flint,
 			'S', Items.stick,
 			'W', Blocks.wool,
-			'I', Items.iron_ingot
+			'I', ComponentListMF.bar("Iron"),
 		});
-		for(ItemStack ingot: OreDictionary.getOres("ingotSteel"))
-		{
-			KnowledgeListMF.flintAndSteelR =
-			MineFantasyAPI.addAnvilRecipe(null, new ItemStack(Items.flint_and_steel), "", true, "hammer", 0, 0, 10, new Object[]{
-				"  F",
-				"IC ",
-				" I ",
-				'F', Items.flint,
-				'C', Items.coal,
-				'I', ingot
-			});
-		}
+		KnowledgeListMF.flintAndSteelR =
+		MineFantasyAPI.addAnvilRecipe(null, new ItemStack(Items.flint_and_steel), "", true, "hammer", 0, 0, 10, new Object[]{
+			"  F",
+			"IC ",
+			" I ",
+			'F', Items.flint,
+			'C', Items.coal,
+			'I', ComponentListMF.bar("Steel"),
+		});
+		Salvage.addSalvage(ToolListMF.tinderbox, Items.flint, Items.stick, Blocks.wool, ComponentListMF.bar("Iron"));
+		Salvage.addSalvage(Items.flint_and_steel, Items.flint, ComponentListMF.bar("Steel"));
 	}
 	
 	private static void addMetalComponents() 
@@ -438,6 +437,24 @@ public class ForgedToolRecipes
 		Salvage.addSalvage(CustomToolListMF.standard_mattock,
 				bar, bar, bar, rivet,
 				plank, plank,
+				strip, strip);
+		
+		time = 15;
+		KnowledgeListMF.lumberR =
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, CustomToolListMF.standard_lumber, "tier", true, "hvyHammer", 0, 0, time, new Object[]
+		{
+			"L IIR",
+			"PPPIR",
+			"L   R",
+			
+			'I', bar,
+			'P', plank,
+			'L', strip,
+			'R', rivet
+		});
+		Salvage.addSalvage(CustomToolListMF.standard_lumber,
+				bar, bar, bar, rivet, rivet, rivet,
+				plank, plank, plank,
 				strip, strip);
 	}
 	

@@ -3,6 +3,7 @@ package minefantasy.mf2.api.archery;
 import java.util.ArrayList;
 import java.util.List;
 
+import minefantasy.mf2.block.decor.BlockAmmoBox;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -202,6 +203,22 @@ public class AmmoMechanicsMF
 		return 1;
 	}
 
+	public static void dropAmmoCrate(World world, ItemStack crate, double x, double y, double z) 
+	{
+		ItemStack drop = BlockAmmoBox.getHeld(crate, true);
+		int stock = BlockAmmoBox.getStock(crate, true);
+		if(drop != null)
+		{
+			while(stock > 0)
+			{
+				int stackSize = Math.min(stock, drop.getMaxStackSize());
+				stock -= stackSize;
+				ItemStack newdrop = drop.copy();
+				newdrop.stackSize = stackSize;
+				entityDropItem(world,x, y, z, newdrop);
+			}
+		}
+	}
 	/**
 	 * Drops the loaded and storred ammo for an item, from coords
 	 */
@@ -223,9 +240,10 @@ public class AmmoMechanicsMF
 	/**
 	 * Drops the loaded and storred ammo for an item from a user
 	 */
-	public static void dropAmmo(World world, ItemStack firearm, EntityLivingBase user)
+	public static void dropContents(World world, ItemStack firearm, EntityLivingBase user)
 	{
 		dropAmmo(world, firearm, user.posX, user.posY+user.getEyeHeight(), user.posZ);
+		dropAmmoCrate(world, firearm, user.posX, user.posY+user.getEyeHeight(), user.posZ);
 	}
 	private static EntityItem entityDropItem(World world, double x, double y, double z, ItemStack item)
     {
@@ -242,21 +260,21 @@ public class AmmoMechanicsMF
         }
     }
 
-	public static void damageFirearm(ItemStack item, EntityPlayer user)
+	public static void damageContainer(ItemStack item, EntityPlayer user)
 	{
-		damageFirearm(item, user, 1);
+		damageContainer(item, user, 1);
 	}
 	/**
 	 * Damages a firearm, dropping inventory if broken
 	 */
-	public static void damageFirearm(ItemStack item, EntityPlayer user, int dam)
+	public static void damageContainer(ItemStack item, EntityPlayer user, int dam)
 	{
 		item.damageItem(dam, user);
 		if(!user.capabilities.isCreativeMode && item.stackSize == 0)
 		{
 			if(!user.worldObj.isRemote)
 			{
-				dropAmmo(user.worldObj, item, user);
+				dropContents(user.worldObj, item, user);
 			}
 			user.setCurrentItemOrArmor(0, null);
 		}
