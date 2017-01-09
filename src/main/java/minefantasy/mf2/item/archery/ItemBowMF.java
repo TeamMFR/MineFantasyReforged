@@ -341,7 +341,7 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 		}
 		float dam = getBowDamage(bow);
 		arrow.getEntityData().setFloat("MF_Bow_Damage", dam);
-		
+		arrow.getEntityData().setString("Design", designType);
 		return arrow;
 	}
 	
@@ -411,11 +411,13 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 	}
 	//===================================================== CUSTOM START =============================================================\\
 	private boolean isCustom = false;
+	private String designType = "standard";
 	public ItemBowMF setCustom(String designType)
 	{
 		canRepair = false;
 		setTextureName("minefantasy2:custom/bow/"+designType+"/"+name);
 		isCustom = true;
+		this.designType = designType;
 		return this;
 	}
 	public IIcon[] mainIcons = new IIcon[3];

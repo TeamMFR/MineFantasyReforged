@@ -17,7 +17,7 @@ public class ConfigTools extends ConfigurationBaseMF
 	{
 		handpickBonus = Float.parseFloat(config.get(CATEGORY_BONUS, "Handpick double-drop chance", 20F, "This is the percent value (0-100) handpicks double item drops").getString());
 		
-		hvyDropChance = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Heavy ruin-drop chance", 25F, "This is the percent value (0-100) heavy picks (and shovels) do NOT drop blocks on break").getString());
+		hvyDropChance = Float.parseFloat(config.get(CATEGORY_PENALTIES, "Heavy ruin-drop chance", 25F, "This is the percent value (0-100) heavy picks/shovels and lumber axe do NOT drop blocks on break").getString());
 	}
 
 }

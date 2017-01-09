@@ -69,9 +69,14 @@ public class CombatMechanics
 	public static final String parryCooldownNBT = "MF_Parry_Cooldown";
 	public static final String posthitCooldownNBT = "MF_PostHit";
 	private static Random rand = new Random();
-	public static final float	specialUndeadModifier	= 2.0F;
-	public static final float	specialDragonModifier	= 0.5F;
+	/** Damage done by silver to undead/witches*/
+	public static final float	specialUnholyModifier	= 2.0F;
+	/** Damage done by silver to werewolves*/
 	public static final float	specialWerewolfModifier	= 8.0F;
+	/** Damage done with dragonforged design to dragons*/
+	public static final float	specialDragonModifier	= 1.5F;
+	/** Damage done with ornate design to undead/witches*/
+	public static final float	specialOrnateModifier	= 1.5F;
 	public static boolean	swordSkeleton	= true;
 	
 	protected float jumpEvade_cost = 30;
@@ -264,6 +269,7 @@ public class CombatMechanics
 	private float modifyUserHitDamage(float dam, EntityLivingBase user, Entity source, boolean melee, Entity target, boolean properHit)
 	{
 		dam = modifyMobDamage(user, dam);
+		String special = "standard";
 		//Power Attack
 		if(melee)
 		{
@@ -289,18 +295,14 @@ public class CombatMechanics
 			{
 				dam /= 2F;
 			}
-			/*
-			if(RPGElements.isSystemActive && user instanceof EntityPlayer)
+		}
+		else
+		{
+			String arrowDesign = source.getEntityData().getString("Design");
+			if(arrowDesign != null && arrowDesign.length() > 0)
 			{
-				WeaponClass WC = WeaponClass.findClassForAny(user.getHeldItem());
-				if(WC != null)
-				{
-					float mod = RPGElements.getWeaponModifier((EntityPlayer) user, WC.parentSkill);
-					MFLogUtil.logDebug("Weapon Class: " + WC.name + ", mod = " + mod);
-					dam *= mod;
-				}
+				special = arrowDesign;
 			}
-			*/
 		}
 		if(user instanceof EntityLivingBase)
 		{
@@ -333,12 +335,20 @@ public class CombatMechanics
     		{
     			dam = hurtUndead(user, target, dam, properHit);
     		}
-    		if(!weapon.getUnlocalizedName().contains("dragonforged") && target instanceof EntityLivingBase && TacticalManager.isDragon((EntityLivingBase)target))
+    		String weaponType = CustomToolHelper.getCustomStyle(weapon);
+    		if(weaponType != null)
     		{
-    			dam *= specialDragonModifier;
+    			special = weaponType;
     		}
     	}
-    	
+    	if(special.equalsIgnoreCase("dragonforged") && TacticalManager.isDragon((EntityLivingBase)target))
+		{
+			dam *= specialDragonModifier;
+		}
+    	if(special.equalsIgnoreCase("ornate") && TacticalManager.isUnholyCreature((EntityLivingBase)target))
+		{
+			dam *= specialOrnateModifier;
+		}
 		return dam;
 	}
 	
@@ -444,7 +454,7 @@ public class CombatMechanics
     	if(entityHit instanceof EntityLivingBase && TacticalManager.isUnholyCreature((EntityLivingBase)entityHit))
 		{
     		EntityLivingBase living = (EntityLivingBase)entityHit;
-    		dam *= specialUndeadModifier;
+    		dam *= specialUnholyModifier;
     		if(properHit)
 			{
 	    		entityHit.playSound("random.fizz", 0.5F, 0.5F);

@@ -986,4 +986,12 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 	{
 		skillUsed = skill;
 	}
+	@Override
+	public int getRecipeHammer() {
+		return hammerTierRequired;
+	}
+	@Override
+	public int getRecipeAnvil() {
+		return anvilTierRequired;
+	}
 }

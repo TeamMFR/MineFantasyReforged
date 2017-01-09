@@ -250,7 +250,7 @@ public class KnowledgeListMF
     public static final ArrayList<IAnvilRecipe> barsR = new ArrayList<IAnvilRecipe>();
     
     public static IAnvilRecipe tinderboxR, flintAndSteelR;
-    public static ICarpenterRecipe lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR, stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR, boneNeedleR, stoneKnifeR, quernR, stoneovenRecipe;
+    public static ICarpenterRecipe dirtRockR, lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR, stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR, boneNeedleR, stoneKnifeR, quernR, stoneovenRecipe;
     
     public static Alloy[] reStone, bronze, steel, obsidalloy, black, red, blue, mithril, adamantium, ignotumite, mithium, enderforge, wolframiteR;
     public static IAnvilRecipe coalfluxR, encrustedR, steelR, obsidianHunkR, diamondR;

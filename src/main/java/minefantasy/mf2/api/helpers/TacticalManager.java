@@ -465,8 +465,13 @@ public class TacticalManager
 		}
 		return false;
 	}
-	public static boolean isUnholyCreature(EntityLivingBase entityHit) 
+	public static boolean isUnholyCreature(Entity entityHit) 
 	{
+		if(entityHit == null || !(entityHit instanceof EntityLivingBase))
+		{
+			return false;
+		}
+		
 		if(((EntityLivingBase)entityHit).isEntityUndead())
 		{
 			return true;
@@ -479,10 +484,18 @@ public class TacticalManager
 		{
 			return true;
 		}
+		if(entityHit.getClass().getName().contains("Werewolf"))
+		{
+			return true;
+		}
 		return false;
 	}
-	public static boolean isDragon(EntityLivingBase entityHit) 
+	public static boolean isDragon(Entity entityHit) 
 	{
+		if(entityHit == null || !(entityHit instanceof EntityLivingBase))
+		{
+			return false;
+		}
 		if(entityHit instanceof net.minecraft.entity.boss.EntityDragon)
 		{
 			return true;

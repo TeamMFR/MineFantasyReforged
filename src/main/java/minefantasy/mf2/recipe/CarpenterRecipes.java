@@ -1614,6 +1614,13 @@ public class CarpenterRecipes
 	}
 	private static void addPrimitive() 
 	{
+		KnowledgeListMF.dirtRockR =
+		MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMF.sharp_rock), "", "minecraft:dig.gravel", "hands", -1, 1, new Object[]
+		{
+			"D",
+			'D', Blocks.dirt,
+		});
+		
 		KnowledgeListMF.stonePickR =
 		MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ToolListMF.pickStone), "", primitive, "hands", -1, 5, new Object[]
 		{

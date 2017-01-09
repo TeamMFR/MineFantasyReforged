@@ -1,6 +1,5 @@
 package minefantasy.mf2.item.armour;
 
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,7 +38,7 @@ public class ItemClothingMF extends ItemArmourMF
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
+    public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
     {
 		
 		if(!ConfigClient.customModel)
@@ -48,14 +47,14 @@ public class ItemClothingMF extends ItemArmourMF
 		}
 		if(model == null)
 		{
-			model = new ModelBiped(0.25F);
+			model = new net.minecraft.client.model.ModelBiped(0.25F);
 		}
 		
 		if(entityLiving != null)
 		{
-			((ModelBiped)model).heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
+			((net.minecraft.client.model.ModelBiped)model).heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
 		}
-        return (ModelBiped)model;
+        return (net.minecraft.client.model.ModelBiped)model;
     }
 	
 }

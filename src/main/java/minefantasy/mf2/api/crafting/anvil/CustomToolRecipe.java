@@ -126,7 +126,6 @@ public class CustomToolRecipe extends ShapedAnvilRecipes
     	{
     		modifyTiers(matrix, wood, false);
     	}
-        
         return true;
     }
 

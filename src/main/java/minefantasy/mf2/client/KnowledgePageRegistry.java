@@ -29,7 +29,7 @@ public class KnowledgePageRegistry
 		ItemStack blue = ComponentListMF.bar("BlueSteel");
 		if(ConfigHardcore.HCCallowRocks)
 		{
-			KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.hcc"), new EntryPageRecipeBase(KnowledgeListMF.carpenterRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.stonePickR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneHammerR), new EntryPageRecipeCarpenter(KnowledgeListMF.sharpRocksR));
+			KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.hcc"), new EntryPageRecipeBase(KnowledgeListMF.carpenterRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.dirtRockR), new EntryPageRecipeCarpenter(KnowledgeListMF.stonePickR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneHammerR), new EntryPageRecipeCarpenter(KnowledgeListMF.sharpRocksR));
 			KnowledgeListMF.gettingStarted.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.stoneSpearR), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneAxeR));
 		}
 		KnowledgeListMF.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.1"), new EntryPageText("knowledge.gettingStarted.2"));

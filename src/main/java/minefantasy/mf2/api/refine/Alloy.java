@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import minefantasy.mf2.api.crafting.MineFantasyFuels;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.material.CustomMaterial;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -56,7 +58,7 @@ public class Alloy{
 				{
 					ItemStack checkItem = (ItemStack) iterator.next();
 
-					if (itemstack.isItemEqual(checkItem)
+					if (itemstack.isItemEqual(checkItem) && areMaterialsEqual(itemstack, checkItem)
 					&& (checkItem.getItemDamage() == OreDictionary.WILDCARD_VALUE || itemstack.getItemDamage() == checkItem.getItemDamage())) 
 					{
 						matches = true;
@@ -81,7 +83,22 @@ public class Alloy{
 		return checkRecipe.isEmpty();
 	}
 
-    private boolean areBothCarbon(ItemStack item1, ItemStack item2) 
+    private boolean areMaterialsEqual(ItemStack itemstack, ItemStack checkItem) 
+    {
+    	CustomMaterial material1 = CustomToolHelper.getCustomPrimaryMaterial(itemstack);
+    	CustomMaterial material2 = CustomToolHelper.getCustomPrimaryMaterial(checkItem);
+    	if(material1 == null && material2 == null)
+    	{
+    		return true;
+    	}
+    	if(material1 != null && material2 != null)
+    	{
+    		return material1 == material2;
+    	}
+		return false;
+	}
+
+	private boolean areBothCarbon(ItemStack item1, ItemStack item2) 
     {
 		return MineFantasyFuels.isCarbon(item1) && MineFantasyFuels.isCarbon(item2);
 	}

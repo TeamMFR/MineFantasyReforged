@@ -495,6 +495,11 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IBossDisplayDa
             {
                 return false;
             }
+            Block block = worldObj.getBlock((int)d4, (int)d5, (int)d6);
+            if(block.getMaterial().isLiquid())
+            {
+            	return false;
+            }
         }
 
         return true;

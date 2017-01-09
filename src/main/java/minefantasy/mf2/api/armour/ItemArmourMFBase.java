@@ -111,6 +111,7 @@ public class ItemArmourMFBase extends ItemArmor implements ISpecialArmor, IArmou
 		{
 			AC *= getUnblockableResistance(armour, source);
 		}
+		AC *= getSpecialModifier(armour, source);
 		//AC = ToolHelper.modifyArmourRating(armour, AC);
 		
 		if(player.getEntityData().hasKey("MF_ZombieArmour"))
@@ -136,6 +137,9 @@ public class ItemArmourMFBase extends ItemArmor implements ISpecialArmor, IArmou
 		return new ArmorProperties(0, percent, Integer.MAX_VALUE);
 	}
 	
+	private float getSpecialModifier(ItemStack armour, DamageSource source) {
+		return 1.0F;
+	}
 	private float getACForBurn() 
 	{
 		return armourWeight >= ArmourCalculator.encumberanceArray[1] ? 0.1F : armourWeight >= ArmourCalculator.encumberanceArray[0] ? 0.05F : 0F;

@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -18,15 +19,19 @@ public class Salvage
 {
 	private static Random random = new Random();
 	private static HashMap<String, Object[]> salvageList = new HashMap<String, Object[]>();
+	private static HashMap<String, Item>sharedSalvage = new HashMap<String, Item>();
 	
-	
+	public static void shareSalvage(Item item1, Item item2)
+	{
+		sharedSalvage.put(CustomToolHelper.getSimpleReferenceName(item1), item2);
+	}
 	public static void addSalvage(Block input, Object... components)
 	{
 		addSalvage(Item.getItemFromBlock(input), components);
 	}
 	public static void addSalvage(Item input, Object... components)
 	{
-		addSalvage(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), components);
+		salvageList.put(CustomToolHelper.getSimpleReferenceName(input), components);
 	}
 	public static void addSalvage(ItemStack item, Object...components)
     {
@@ -115,6 +120,14 @@ public class Salvage
 	}
 	public static Object[] getSalvage(ItemStack item)
     {
+		//SHARED
+		Item shared = sharedSalvage.get(CustomToolHelper.getReferenceName(item, "any", false));
+		if(shared != null)
+		{
+			MFLogUtil.logDebug("Found shared: " + shared.getUnlocalizedName());
+			return getSalvage(new ItemStack(shared));
+		}
+				
 		if(item != null && item.getItem() instanceof ISpecialSalvage)
 		{
 			Object[] special = ((ISpecialSalvage)item.getItem()).getSalvage(item);

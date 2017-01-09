@@ -214,9 +214,13 @@ public class InformationBase
 		if(success && !user.worldObj.isRemote)
 		{
 			user.worldObj.playSoundAtEntity(user, "minefantasy2:updateResearch", 1.0F, 1.0F);
+			if(getPerk())
+			{
+				user.worldObj.playSoundAtEntity(user, "random.levelup", 1.0F, 1.0F);
+			}
 		}
 		
-		if(easyResearch)
+		if(isEasy())
 		{
 			ResearchLogic.tryUnlock(user, this);
 		}

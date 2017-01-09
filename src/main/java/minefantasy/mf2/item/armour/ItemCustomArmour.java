@@ -8,9 +8,12 @@ import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
+import minefantasy.mf2.mechanics.CombatMechanics;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -29,12 +32,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemCustomArmour extends ItemArmourMF
 {
 	private String craftDesign;
+	private String specialDesign;
 	public ItemCustomArmour(String craftDesign, String name, ArmourDesign AD, int slot, String tex, int rarity)
 	{
 		super(craftDesign + "_"+name, BaseMaterialMF.iron, AD, slot, craftDesign + "_"+tex, rarity);
 		this.setTextureName("minefantasy2:custom/apparel/" + craftDesign + "/"+craftDesign+"_"+name);
 		this.craftDesign = craftDesign;
 		canRepair = false;
+	}
+	public ItemCustomArmour setSpecial(String special)
+	{
+		this.specialDesign = special;
+		return this;
 	}
 	@Override
 	public void damageArmor(EntityLivingBase entity, ItemStack stack, DamageSource source, int damage, int slot)
@@ -194,5 +203,24 @@ public class ItemCustomArmour extends ItemArmourMF
 	
 	public boolean isCustom() {
 		return true;
+	}
+	
+	private float getSpecialModifier(ItemStack armour, DamageSource source) 
+	{
+		if(this.specialDesign.equalsIgnoreCase("dragonforged"))
+		{
+			if(source != null && TacticalManager.isDragon(source.getEntity()))
+			{
+				return CombatMechanics.specialDragonModifier;
+			}
+		}
+		if(this.specialDesign.equalsIgnoreCase("ornate"))
+		{
+			if(source != null && TacticalManager.isUnholyCreature(source.getEntity()))
+			{
+				return CombatMechanics.specialOrnateModifier;
+			}
+		}
+		return 1.0F;
 	}
 }

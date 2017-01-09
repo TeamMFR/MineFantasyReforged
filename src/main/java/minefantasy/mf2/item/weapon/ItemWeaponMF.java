@@ -13,6 +13,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
+import minefantasy.mf2.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
@@ -71,7 +72,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 
 //Made this extend the sword class (allows them to be enchanted)
-public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, IDamageType, IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IBattlegearWeapon, IToolMaterial, IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem
+public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType, IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IBattlegearWeapon, IToolMaterial, IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem
 {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 
@@ -938,4 +939,9 @@ public abstract class ItemWeaponMF extends ItemSword implements IPowerAttack, ID
 	}
 	
 	public String designType = "standard";
+	@Override
+	public String getDesign(ItemStack item)
+	{
+		return designType;
+	}
 }

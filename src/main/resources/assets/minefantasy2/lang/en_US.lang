@@ -321,7 +321,7 @@ item.ingotEncrusted.name=Encrusted Ingot
 item.ingotObsidian.name=Obsidian Ingot
 item.ingotSilver.name=Silver Ingot
 item.ingotPureGold.name=Pure Gold Ingot
-
+item.ingotCompositeAlloy.name=Composite Alloyed Ingot
 item.ingotBlackSteelWeak.name=Unrefined Black Steel
 item.ingotBlueSteelWeak.name=Unrefined Blue Steel
 item.ingotRedSteelWeak.name=Unrefined Red Steel
@@ -868,56 +868,63 @@ item.standard_spoon.name=%1$s Spoon
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /DRAGONFORGE/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-item.dragonforged_dagger.name=%1$s Dragonforge Dagger
-item.dragonforged_sword.name=%1$s Dragonforge Sword
-item.dragonforged_mace.name=%1$s Dragonforge Mace
-item.dragonforged_waraxe.name=%1$s Dragonforge Waraxe
-item.dragonforged_spear.name=%1$s Dragonforge Spear
-item.dragonforged_katana.name=%1$s Dragonforge Katana
-item.dragonforged_greatsword.name=%1$s Dragonforge Greatsword
-item.dragonforged_warhammer.name=%1$s Dragonforge Warhammer
-item.dragonforged_battleaxe.name=%1$s Dragonforge Battleaxe
-item.dragonforged_halbeard.name=%1$s Dragonforge Halbeard
-item.dragonforged_lance.name=%1$s Dragonforge Lance
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/DWARVEN/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-item.dwarven_pick.name=%1$s Dwarven Pickaxe
-item.dwarven_axe.name=%1$s Dwarven Axe
-item.dwarven_spade.name=%1$s Dwarven Spade
-item.dwarven_hoe.name=%1$s Dwarven Hoe
+item.dragonforged_pick.name=Dragonforged %1$s Pickaxe
+item.dragonforged_axe.name=Dragonforged %1$s Axe
+item.dragonforged_spade.name=Dragonforged %1$s Shovel
+item.dragonforged_hoe.name=Dragonforged %1$s Hoe
 
-item.dwarven_dagger.name=%1$s Dwarven Dagger
-item.dwarven_sword.name=%1$s Dwarven Sword
-item.dwarven_mace.name=%1$s Dwarven Mace
-item.dwarven_waraxe.name=%1$s Dwarven Waraxe
-
-item.dwarven_greatsword.name=%1$s Dwarven Greatsword
-item.dwarven_warhammer.name=%1$s Dwarven Maul
-item.dwarven_battleaxe.name=%1$s Dwarven Battleaxe
-item.dwarven_katana.name=%1$s Dwarven Cleaver
-item.dwarven_spear.name=%1$s Dwarven Glaive
-item.dwarven_halbeard.name=%1$s Dwarven Halbeard
-
-item.dwarven_handpick.name=%1$s Dwarven Handpick
-item.dwarven_hvypick.name=Heavy %1$s Dwarven Pickaxe
-item.dwarven_trow.name=%1$s Dwarven Spade
-item.dwarven_hvyshovel.name=Heavy %1$s Dwarven Shovel
-item.dwarven_scythe.name=%1$s Dwarven Scythe
-item.dwarven_mattock.name=%1$s Dwarven Mattock
+item.dragonforged_shears.name=Dragonforged %1$s Shears
+item.dragonforged_knife.name=Dragonforged %1$s Knife
+item.dragonforged_needle.name=Dragonforged %1$s Needle
+item.dragonforged_hammer.name=Dragonforged %1$s Hammer
+item.dragonforged_hvyhammer.name=Heavy Dragonforged %1$s Hammer
+item.dragonforged_tongs.name=Dragonforged %1$s Tongs
+item.dragonforged_saw.name=Dragonforged %1$s Saw
+item.dragonforged_spanner.name=Dragonforged %1$s Spanner
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/GNOMISH/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-item.gnomish_hammer.name=%1$s Gnomish Hammer
-item.gnomish_hvyhammer.name=Heavy %1$s Gnomish Hammer
-item.gnomish_tongs.name=%1$s Gnomish Tongs
-item.gnomish_needle.name=%1$s Gnomish Needle
-item.gnomish_shears.name=%1$s Gnomish Shears
-item.gnomish_knife.name=%1$s Gnomish Knife
-item.gnomish_saw.name=%1$s Gnomish Saw
+item.dragonforged_dagger.name=Dragonforged %1$s Dagger
+item.dragonforged_sword.name=Dragonforged %1$s Sword
+item.dragonforged_mace.name=Dragonforged %1$s Mace
+item.dragonforged_waraxe.name=Dragonforged %1$s Waraxe
+item.dragonforged_spear.name=Dragonforged %1$s Spear
 
+item.dragonforged_katana.name=Dragonforged %1$s Katana
+item.dragonforged_greatsword.name=Dragonforged %1$s Greatsword
+item.dragonforged_warhammer.name=Dragonforged %1$s Warhammer
+item.dragonforged_battleaxe.name=Dragonforged %1$s Battleaxe
+item.dragonforged_halbeard.name=Dragonforged %1$s Halbeard
+item.dragonforged_lance.name=Dragonforged %1$s Lance
+
+item.dragonforged_handpick.name=Dragonforged %1$s Handpick
+item.dragonforged_hvypick.name=Heavy Dragonforged %1$s Pickaxe
+item.dragonforged_trow.name=Dragonforged %1$s Spade
+item.dragonforged_hvyshovel.name=Heavy Dragonforged %1$s Shovel
+item.dragonforged_scythe.name=Dragonforged %1$s Scythe
+item.dragonforged_mattock.name=Dragonforged %1$s Mattock
+item.dragonforged_lumber.name=Dragonforged %1$s Lumber Axe
+
+item.dragonforged_scale_helmet.name=Dragonforged %1$s Scale Helmet
+item.dragonforged_scale_chest.name=Dragonforged %1$s Scalemail
+item.dragonforged_scale_legs.name=Dragonforged %1$s Scale Leggings
+item.dragonforged_scale_boots.name=Dragonforged %1$s Scale Boots
+
+item.dragonforged_chain_helmet.name=Dragonforged %1$s Coif
+item.dragonforged_chain_chest.name=Dragonforged %1$s Chainmail
+item.dragonforged_chain_legs.name=Dragonforged %1$s Chain Leggings
+item.dragonforged_chain_boots.name=Dragonforged %1$s Chain Boots
+
+item.dragonforged_splint_helmet.name=Dragonforged %1$s Splint Helmet
+item.dragonforged_splint_chest.name=Dragonforged %1$s Splintmail
+item.dragonforged_splint_legs.name=Dragonforged %1$s Splint Leggings
+item.dragonforged_splint_boots.name=Dragonforged %1$s Splint Boots
+
+item.dragonforged_plate_helmet.name=Dragonforged %1$s Great Helm
+item.dragonforged_plate_chest.name=Dragonforged %1$s Curiass
+item.dragonforged_plate_legs.name=Dragonforged %1$s Greaves
+item.dragonforged_plate_boots.name=Dragonforged %1$s Sabatons
+
+item.dragonforged_bow.name=Dragonforged %1$s Bow
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /ARTEFACT/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

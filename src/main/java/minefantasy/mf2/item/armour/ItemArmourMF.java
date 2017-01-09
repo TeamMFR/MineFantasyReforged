@@ -19,7 +19,6 @@ import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.mechanics.CombatMechanics;
 import minefantasy.mf2.util.MFLogUtil;
-import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -162,31 +161,7 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 			list.add(new ItemStack(item));
 		}
 	}
-	
-	@Override
-	protected float getACModifier(EntityLivingBase player, ItemStack armour, DamageSource source, double damage) 
-	{
-		if(source.getSourceOfDamage() != null && source.getSourceOfDamage() instanceof EntityLivingBase)
-		{
-			if(isUndedEfficient())
-			{
-				if(((EntityLivingBase)source.getSourceOfDamage()).isEntityUndead())
-				{
-					return CombatMechanics.specialUndeadModifier;
-				}
-				if(source.getSourceOfDamage().getClass().getName().contains("Werewolf"))
-				{
-					return CombatMechanics.specialWerewolfModifier;
-				}
-			}
-		}
-		return 1.0F;
-	}
 
-	private boolean isUndedEfficient()
-	{
-		return baseMaterial == BaseMaterialMF.silver || baseMaterial == BaseMaterialMF.ornate;
-	}
 	@SideOnly(Side.CLIENT)
     private IIcon clothIcon;
 	@SideOnly(Side.CLIENT)
@@ -479,7 +454,7 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 	
 	@Override
 	@SideOnly(Side.CLIENT)
-    public ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
+    public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, int armorSlot)
     {
 		if( !(entityLiving instanceof EntityPlayer) || armorType >= 2 || !ConfigClient.customModel)
 		{
@@ -490,7 +465,7 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 		{
 			fullplate = new minefantasy.mf2.client.render.armour.ModelFullplate(1.0F);
 		}
-		ModelBiped model = this.design == ArmourDesign.FIELDPLATE ?  (ModelBiped)fullplate : null;
+		net.minecraft.client.model.ModelBiped model = this.design == ArmourDesign.FIELDPLATE ?  (net.minecraft.client.model.ModelBiped)fullplate : null;
 		if( model == null)
 		{
 			return super.getArmorModel(entityLiving, itemStack, armorSlot);

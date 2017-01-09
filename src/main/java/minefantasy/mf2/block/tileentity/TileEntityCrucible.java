@@ -56,7 +56,7 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		
 		if (isHot && canSmelt()) 
 		{
-			progress += (temperature/60F);
+			progress += (temperature/600F);
 			if (progress >= progressMax) 
 			{
 				progress = 0;

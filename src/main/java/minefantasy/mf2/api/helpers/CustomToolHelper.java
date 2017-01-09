@@ -7,9 +7,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mf2.api.crafting.ITieredComponent;
+import minefantasy.mf2.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.item.heatable.ItemHeated;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -425,13 +425,15 @@ public class CustomToolHelper
 		
 		return getReferenceName(item, dam);
 	}
+	
+	
 	public static String getReferenceName(ItemStack item, String dam) 
 	{
 		return getReferenceName(item, dam, true);
 	}
 	public static String getReferenceName(ItemStack item, String dam, boolean tiered) 
 	{
-		String reference = Item.itemRegistry.getNameForObject(item.getItem()).toLowerCase() + "_@" + dam;
+		String reference = getSimpleReferenceName(item.getItem(), dam);
 		
 		if(tiered)
 		{
@@ -450,6 +452,17 @@ public class CustomToolHelper
 		
 		return reference;
 	}
+	public static String getSimpleReferenceName(Item item, String dam) 
+	{
+		String reference = Item.itemRegistry.getNameForObject(item).toLowerCase() + "_@" + dam;
+		return reference;
+	}
+	
+	public static String getSimpleReferenceName(Item item) 
+	{
+		return getSimpleReferenceName(item, "any");
+	}
+	
 	public static boolean areToolsSame(ItemStack item1, ItemStack item2) 
 	{
 		CustomMaterial main1 = getCustomPrimaryMaterial(item1);
@@ -564,6 +577,14 @@ public class CustomToolHelper
 			}
 		}
 		return newitem;
+	}
+	public static String getCustomStyle(ItemStack weapon)
+	{
+		if(weapon != null && weapon.getItem() instanceof ISpecialDesign)
+		{
+			return ((ISpecialDesign)weapon.getItem()).getDesign(weapon);
+		}
+		return null;
 	}
 	
 }

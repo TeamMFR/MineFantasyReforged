@@ -17,4 +17,6 @@ public interface IAnvil {
 	void setToolType(String toolType);
 	void setSkill(Skill skill);
 	public void setResearch(String research);
+	int getRecipeHammer();
+	int getRecipeAnvil();
 }

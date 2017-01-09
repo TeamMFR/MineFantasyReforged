@@ -84,7 +84,10 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem
 		{
 			Block newblock = world.getBlock(x, y, z);
 			breakSurrounding(item, world, newblock, x, y, z, user);
-			newblock.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), EnchantmentHelper.getFortuneModifier(user));
+			if(rand.nextFloat()*100F < (100F - ConfigTools.hvyDropChance))
+			{
+				newblock.dropBlockAsItem(world, x, y, z, world.getBlockMetadata(x, y, z), EnchantmentHelper.getFortuneModifier(user));
+			}
 			world.setBlockToAir(x, y, z);
 			item.damageItem(1, user);
 			

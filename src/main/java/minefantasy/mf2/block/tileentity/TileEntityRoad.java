@@ -3,16 +3,12 @@ package minefantasy.mf2.block.tileentity;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.io.ByteArrayDataInput;
-
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.network.packet.RoadPacket;
 import net.minecraft.block.Block;
+import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
@@ -33,13 +29,17 @@ public class TileEntityRoad extends TileEntity
 	{
 		super.updateEntity();
 		
+		++ticksExisted;
 		if(!worldObj.isRemote)
 		{
-			++ticksExisted;
-			if(ticksExisted == 20 || ticksExisted % 1200 == 0)
+			if(ticksExisted % 1200 == 0)
 			{
 				sendPacketToClients();
 			}
+		}
+		else if(ticksExisted == 20)
+		{
+			requestPacket();
 		}
 	}
 	
@@ -71,7 +71,15 @@ public class TileEntityRoad extends TileEntity
 			((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new RoadPacket(this).generatePacket());
 		}
 	}
-	
+	public void requestPacket()
+	{
+		if(!worldObj.isRemote)return;
+		EntityPlayer player = MineFantasyII.proxy.getClientPlayer();
+		if(player != null)
+		{
+			((EntityClientPlayerMP)player).sendQueue.addToSendQueue(new RoadPacket(this).request().generatePacket());
+		}
+	}	
 	private boolean blockChange(int id, int meta)
 	{
 		if(id != surface[0])return true;

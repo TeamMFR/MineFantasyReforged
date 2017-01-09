@@ -24,4 +24,12 @@ public class AnvilCraftMatrix extends InventoryCrafting
 		anvil.setResearch(name);
 	}
 
+	public int getTier() {
+		return anvil.getRecipeHammer();
+	}
+
+	public int getAnvilTier() {
+		return anvil.getRecipeAnvil();
+	}
+
 }

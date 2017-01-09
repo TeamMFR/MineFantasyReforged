@@ -55,6 +55,7 @@ import minefantasy.mf2.mechanics.CombatMechanics;
 import minefantasy.mf2.mechanics.EventManagerMF;
 import minefantasy.mf2.mechanics.MonsterUpgrader;
 import minefantasy.mf2.mechanics.PlayerTickHandlerMF;
+import minefantasy.mf2.network.packet.PacketMF;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -222,4 +223,5 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler
 	{
 		EntityListMF.register();
 	}
+
 }
