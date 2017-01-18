@@ -468,7 +468,7 @@ public class ForgedToolRecipes
 		
 		int time = 10;
 		KnowledgeListMF.hammerR =
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, CustomToolListMF.standard_hammer, "tier", true, "hammer", -1, -1, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, CustomToolListMF.standard_hammer, "tier", true, "hammer", 0, 0, time, new Object[]
 		{
 			"I",
 			"L",

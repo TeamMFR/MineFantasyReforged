@@ -46,7 +46,7 @@ public class ForgedArmourRecipes
 		
 		int time = 20;
 		KnowledgeListMF.mailHelmetR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_helmet), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_helmet), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RMR",
 			"MPM",
@@ -58,7 +58,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 30;
 		KnowledgeListMF.mailChestR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_chest), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_chest), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RM MR",
 			"RMPMR",
@@ -70,7 +70,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.mailLegsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_legs), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_legs), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RMPMR",
 			"RM MR",
@@ -81,7 +81,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 10;
 		KnowledgeListMF.mailBootsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_boots), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_chain_boots), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"R R",
 			"MPM",
@@ -116,7 +116,7 @@ public class ForgedArmourRecipes
 		
 		int time = 20;
 		KnowledgeListMF.scaleHelmetR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_helmet), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_helmet), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RMR",
 			"MPM",
@@ -128,7 +128,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 30;
 		KnowledgeListMF.scaleChestR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_chest), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_chest), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RM MR",
 			"RMPMR",
@@ -140,7 +140,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.scaleLegsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_legs), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_legs), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RMPMR",
 			"RM MR",
@@ -151,7 +151,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 10;
 		KnowledgeListMF.scaleBootsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_boots), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_scale_boots), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"R R",
 			"MPM",
@@ -186,7 +186,7 @@ public class ForgedArmourRecipes
 		
 		int time = 20;
 		KnowledgeListMF.splintHelmetR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_helmet), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_helmet), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RMR",
 			"MPM",
@@ -198,7 +198,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 30;
 		KnowledgeListMF.splintChestR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_chest), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_chest), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RM MR",
 			"RMPMR",
@@ -210,7 +210,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.splintLegsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_legs), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_legs), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RMPMR",
 			"RM MR",
@@ -221,7 +221,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 10;
 		KnowledgeListMF.splintBootsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_boots), "craftArmourMedium", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_splint_boots), "craftArmourMedium", true, "hammer", -1, -1, time, new Object[]
 		{
 			"R R",
 			"MPM",
@@ -256,7 +256,7 @@ public class ForgedArmourRecipes
 		
 		int time = 40;
 		KnowledgeListMF.plateHelmetR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_helmet), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_helmet), "craftArmourHeavy", false, "hammer", -1, -1, time, new Object[]
 		{
 			" R ",
 			"PHP",
@@ -268,7 +268,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 60;
 		KnowledgeListMF.plateChestR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_chest), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_chest), "craftArmourHeavy", false, "hammer", -1, -1, time, new Object[]
 		{
 			"RP PR",
 			"RPCPR",
@@ -279,7 +279,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 40;
 		KnowledgeListMF.plateLegsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_legs), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_legs), "craftArmourHeavy", false, "hammer", -1, -1, time, new Object[]
 		{
 			"RPLPR",
 			"RP PR",
@@ -290,7 +290,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 20;
 		KnowledgeListMF.plateBootsR.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_boots), "craftArmourHeavy", false, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(CustomArmourListMF.standard_plate_boots), "craftArmourHeavy", false, "hammer", -1, -1, time, new Object[]
 		{
 			"R R",
 			"PBP",
@@ -325,7 +325,7 @@ public class ForgedArmourRecipes
 		
 		int time = 4;
 		KnowledgeListMF.hugePlateR.add(
-		MineFantasyAPI.addAnvilToolRecipe(engineering, majorPiece, "cogArmour", true, "hvyhammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(engineering, majorPiece, "cogArmour", true, "hvyhammer", -1, -1, time, new Object[]
 		{
 			" RR ",
 			"RIIR",
@@ -341,7 +341,7 @@ public class ForgedArmourRecipes
 		
 		time = 25;
 		KnowledgeListMF.cogPlateR.add(
-		MineFantasyAPI.addAnvilToolRecipe(engineering, new ItemStack(ComponentListMF.cogwork_armour), "cogArmour", true, "hvyhammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(engineering, new ItemStack(ComponentListMF.cogwork_armour), "cogArmour", true, "hvyhammer", -1, -1, time, new Object[]
 		{
 			"  P  ",
 			"pPPPp",
@@ -365,7 +365,7 @@ public class ForgedArmourRecipes
 		
 		int time = 3;
 		KnowledgeListMF.mailRecipes.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.chainmesh), "", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.chainmesh), "", true, "hammer", -1, -1, time, new Object[]
 		{
 			" H ",
 			"H H",
@@ -375,7 +375,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 3;
 		KnowledgeListMF.scaleRecipes.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.scalemesh), "", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.scalemesh), "", true, "hammer", -1, -1, time, new Object[]
 		{
 			"HHH",
 			" H ",
@@ -384,7 +384,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 4;
 		KnowledgeListMF.splintRecipes.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.splintmesh), "", true, "hammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, new ItemStack(ComponentListMF.splintmesh), "", true, "hammer", -1, -1, time, new Object[]
 		{
 			"RHR",
 			" H ",
@@ -396,7 +396,7 @@ public class ForgedArmourRecipes
 		}));
 		time = 4;
 		KnowledgeListMF.plateRecipes.add(
-		MineFantasyAPI.addAnvilToolRecipe(artisanry, ComponentListMF.plate, "", true, "hvyhammer", 0, 0, time, new Object[]
+		MineFantasyAPI.addAnvilToolRecipe(artisanry, ComponentListMF.plate, "", true, "hvyhammer", -1, -1, time, new Object[]
 		{
 			"FF",
 			"II",

@@ -259,7 +259,7 @@ public class BlockForge extends BlockContainer
 					}
     				return true;
     			}
-    			if(!world.isRemote && ResearchLogic.hasInfoUnlocked(user, KnowledgeListMF.smeltDragonforge) && held.getItem() == ComponentListMF.dragon_heart && tile.temperature >= TileEntityForge.dragonHeat)
+    			if(!world.isRemote && ResearchLogic.hasInfoUnlocked(user, KnowledgeListMF.smeltDragonforge) && held.getItem() == ComponentListMF.dragon_heart)
     			{
     				if(user.getHeldItem().stackSize == 1)
     				{

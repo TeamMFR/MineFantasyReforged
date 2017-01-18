@@ -31,8 +31,6 @@ public final class CreativeTabMF extends CreativeTabs
 	public static CreativeTabs tabFood = new CreativeTabMF(CreativeTabs.getNextID(), "MFfood", 11);
 	public static CreativeTabs tabDragonforged = new CreativeTabMF(CreativeTabs.getNextID(), "MFdragonforged", 12);
 	public static CreativeTabs tabOldTools = new CreativeTabMF(CreativeTabs.getNextID(), "MFOld", 13);
-	//public static CreativeTabs tabDwarven = new CreativeTabMF(CreativeTabs.getNextID(), "MFdwarven", 14);
-	//public static CreativeTabs tabGnomish = new CreativeTabMF(CreativeTabs.getNextID(), "MFgnomish", 15);
 	
 	
 	private int type;
@@ -66,7 +64,6 @@ public final class CreativeTabMF extends CreativeTabs
 	@Override
 	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		// TODO Auto-generated method stub
 		return CustomToolListMF.standard_axe;
 	}
 }

@@ -11,6 +11,7 @@ import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.entity.mob.EntityDragon;
+import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.mechanics.CombatMechanics;
@@ -143,10 +144,23 @@ public class ItemCustomArmour extends ItemArmourMF
 	@Override
     public void getSubItems(Item item, CreativeTabs tab, List list)
     {
-		if(this != CustomArmourListMF.standard_chain_boots)return;
-		
 		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 		Iterator iteratorMetal = metal.iterator();
+		if(this.getCreativeTab() != CreativeTabMF.tabArmour)
+		{
+			while(iteratorMetal.hasNext())
+	    	{
+				CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
+				
+				if(customMat.getItem() != null)
+				{
+					list.add(construct(customMat.name));
+				}
+	    	}
+			return;
+		}
+		if(this != CustomArmourListMF.standard_chain_boots)return;
+		
 		while(iteratorMetal.hasNext())
     	{
 			CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();

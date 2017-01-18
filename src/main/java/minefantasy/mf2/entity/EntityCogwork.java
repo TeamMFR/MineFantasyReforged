@@ -675,6 +675,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
             {
                 f4 = this.jumpMovementFactor;
             }
+            if(riddenByEntity == null)
+            {
+            	f4 = 0F;
+            }
             if(isSprinting())
             {
             	f4 *= 2.0F;
@@ -838,7 +842,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	@Override
 	public float getAIMoveSpeed()
 	{
-		return riddenByEntity == null ? 0F : super.getAIMoveSpeed();
+		return riddenByEntity == null ? 1F : super.getAIMoveSpeed();
 	}
 	@Override
 	public boolean isFullyArmoured() {

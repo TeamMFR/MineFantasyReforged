@@ -404,7 +404,7 @@ item.mine_casing_obsidian.name=Obsidian Mine Casing
 item.bomb_casing_crystal.name=Crystal Bomb Casing
 item.mine_casing_crystal.name=Crystal Mine Casing
 item.bomb_casing_arrow.name=Arrow Bomb Casing
-item.bomb_casing_bolt.name=Bolt Bomb Casing
+item.bomb_casing_bolt.name=Quarrel Bomb Casing
 
 item.clay_brick.name=Clay Brick
 item.kaolinite.name=Kaolinite
@@ -453,7 +453,7 @@ bomb.component.filling=Filling
 bomb.component.bombcase=Bomb Case
 bomb.component.minecase=Mine Case
 bomb.component.arrow=Arrow Case
-bomb.component.bolt=Bolt Case
+bomb.component.bolt=Quarrel Case
 bomb.component.fuse=Fuse
 bomb.component.powder=Powder
 
@@ -468,7 +468,7 @@ item.bomb_basic.name=Basic Bomb
 item.bomb_shrapnel.name=Shrapnel Bomb
 item.bomb_fire.name=Incineration Bomb
 item.exploding_arrow.name=Bomb Arrow
-item.exploding_bolt.name=Explosive Bolt
+item.exploding_bolt.name=Explosive Quarrel
 
 item.mine_basic.name=Basic Mine
 item.mine_shrapnel.name=Shrapnel Mine
@@ -840,17 +840,17 @@ item.standard_mattock.name=%1$s Mattock
 item.standard_lumber.name=%1$s Lumber Axe
 
 item.standard_scale_helmet.name=%1$s Scale Helmet
-item.standard_scale_chest.name=%1$s Scalemail
+item.standard_scale_chest.name=%1$s Scale Suit
 item.standard_scale_legs.name=%1$s Scale Leggings
 item.standard_scale_boots.name=%1$s Scale Boots
 
 item.standard_chain_helmet.name=%1$s Coif
-item.standard_chain_chest.name=%1$s Chainmail
-item.standard_chain_legs.name=%1$s Chain Leggings
-item.standard_chain_boots.name=%1$s Chain Boots
+item.standard_chain_chest.name=%1$s Mail Suit
+item.standard_chain_legs.name=%1$s Mail Leggings
+item.standard_chain_boots.name=%1$s Mail Boots
 
 item.standard_splint_helmet.name=%1$s Splint Helmet
-item.standard_splint_chest.name=%1$s Splintmail
+item.standard_splint_chest.name=%1$s Splint Suit
 item.standard_splint_legs.name=%1$s Splint Leggings
 item.standard_splint_boots.name=%1$s Splint Boots
 
@@ -861,7 +861,7 @@ item.standard_plate_boots.name=%1$s Sabatons
 
 item.standard_bow.name=%1$s Bow
 item.standard_arrow.name=%1$s Arrow
-item.standard_bolt.name=%1$s Bolt
+item.standard_bolt.name=%1$s Quarrel
 
 item.standard_mallet.name=%1$s Mallet
 item.standard_spoon.name=%1$s Spoon 
@@ -905,21 +905,21 @@ item.dragonforged_mattock.name=Dragonforged %1$s Mattock
 item.dragonforged_lumber.name=Dragonforged %1$s Lumber Axe
 
 item.dragonforged_scale_helmet.name=Dragonforged %1$s Scale Helmet
-item.dragonforged_scale_chest.name=Dragonforged %1$s Scalemail
+item.dragonforged_scale_chest.name=Dragonforged %1$s Scale Suit
 item.dragonforged_scale_legs.name=Dragonforged %1$s Scale Leggings
 item.dragonforged_scale_boots.name=Dragonforged %1$s Scale Boots
 
 item.dragonforged_chain_helmet.name=Dragonforged %1$s Coif
-item.dragonforged_chain_chest.name=Dragonforged %1$s Chainmail
-item.dragonforged_chain_legs.name=Dragonforged %1$s Chain Leggings
-item.dragonforged_chain_boots.name=Dragonforged %1$s Chain Boots
+item.dragonforged_chain_chest.name=Dragonforged %1$s Mail Suit
+item.dragonforged_chain_legs.name=Dragonforged %1$s Mail Leggings
+item.dragonforged_chain_boots.name=Dragonforged %1$s Mail Boots
 
 item.dragonforged_splint_helmet.name=Dragonforged %1$s Splint Helmet
-item.dragonforged_splint_chest.name=Dragonforged %1$s Splintmail
+item.dragonforged_splint_chest.name=Dragonforged %1$s Splint Suit
 item.dragonforged_splint_legs.name=Dragonforged %1$s Splint Leggings
 item.dragonforged_splint_boots.name=Dragonforged %1$s Splint Boots
 
-item.dragonforged_plate_helmet.name=Dragonforged %1$s Great Helm
+item.dragonforged_plate_helmet.name=Dragonforged %1$s Bascinet
 item.dragonforged_plate_chest.name=Dragonforged %1$s Curiass
 item.dragonforged_plate_legs.name=Dragonforged %1$s Greaves
 item.dragonforged_plate_boots.name=Dragonforged %1$s Sabatons
@@ -1397,7 +1397,7 @@ knowledge.smeltBlackSteel.1=Every material has its limit, now you have found the
 knowledge.smeltDragonforge=Dragonforge Smithing
 knowledge.smeltDragonforge.desc=Well forged
 
-knowledge.smeltDragonforge.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.
+knowledge.smeltDragonforge.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.^Unlike other designs; dragonforged items require this ritual take place for the craft to work.
 
 knowledge.smeltBlueSteel=Blue Steel Smithing
 knowledge.smeltBlueSteel.desc=Tier %1$s, Common material
@@ -1528,7 +1528,7 @@ knowledge.anvil.2=Anvils are simple to craft and can be recycled in a furnace.^P
 
 knowledge.anvil.3=Crafting items can be complicated, there are two stages to crafting.^Firstly some items(mostly metal ingots and hunks) need to be heated in the $hForge$r. If an items heatable, it needs to be heated.^Secondly is the recipe itself: Start by assembling the components on the
 
-knowledge.anvil.4=grid$h[3]$r (just as you're used to), then: equip a proper hammer (either heavy or normal depending on the recipe). Hammers need to be the proper tier but anvil tier affects quality, Tiers will appear above the title$h[1]$r.^Hit the anvil with the hammer by clicking. The progress bar$h[2]$r will now fill in, when finished: The result appears in the output slot$h[4]$r.^Some items will be hot, you can right-click them on water or a cauldron(shift click), to cool them.
+knowledge.anvil.4=grid$h[3]$r then: equip a proper hammer (either heavy or normal depending on the recipe). Each recipe has a recommended tier of hammer and anvil. Hammers will yield unpredictable results on quality if a low tier and anvils will make quality crafting harder on low tiers. Tiers will appear above the title$h[1]$r.^Hit the anvil with the hammer by clicking. The progress bar$h[2]$r will now fill in, when finished: The result appears in the output slot$h[4]$r.^Some items will be hot, you can right-click them on water or a cauldron(shift click), to cool them.
 
 knowledge.anvil.5=To pick up finished items: right-click with tongs, tongs only take items from the final output slot. Holding hot items will burn you, so when you need to pick something off the forge, right-click it with tongs, then the anvil to place.
 

@@ -7,9 +7,8 @@ import minefantasy.mf2.mechanics.CombatMechanics;
 public class ConfigMobs extends ConfigurationBaseMF
 {
 	public static final String BASIC = "1-1: Basic Entities";
-	public static int entityID;
 	public static final String MOB_DRAGON = "2-4: DRAGON";
-	//public static int dragonID;
+	
 	public static int youngdragonHP, dragonHP, diredragonHP, elderdragonHP, ancientdragonHP;
 	public static int youngdragonMD, dragonMD, diredragonMD, elderdragonMD, ancientdragonMD;
 	public static int youngdragonFD, dragonFD, diredragonFD, elderdragonFD, ancientdragonFD;
@@ -22,7 +21,6 @@ public class ConfigMobs extends ConfigurationBaseMF
 	public static boolean dragonMSG;
 	
 	public static final String MOB_MINOTAUR = "5-5: MINOTAUR";
-	//public static int dragonID;
 	public static int minotaurHP, frostminotaurHP, netherminotaurHP;
 	public static int minotaurMD, frostminotaurMD, netherminotaurMD;
 	public static int minotaurGD, frostminotaurGD, netherminotaurGD;
@@ -35,11 +33,6 @@ public class ConfigMobs extends ConfigurationBaseMF
 	@Override
 	protected void loadConfig()
 	{
-		entityID =  Integer.parseInt(config.get(BASIC, "1: Basic Entity ID", -1, "Where MF Entities start (Each entity adds 1) set to -1 for auto-assign").getString());
-		
-		//DragonBreed
-		//dragonID =  Integer.parseInt(config.get(MOB_DRAGON, "1A: Dragon ID", 200, "The ID For dragons").getString());
-		
 		youngdragonHP =  Integer.parseInt(config.get(MOB_DRAGON, 	"2Aa: Health", 60, "Young Dragon Stats").getString());
 		youngdragonMD =  Integer.parseInt(config.get(MOB_DRAGON, 	"2Ab: Bite dmg", 4).getString());
 		youngdragonFD =  Integer.parseInt(config.get(MOB_DRAGON, 	"2Ab: Fire dmg", 2).getString());

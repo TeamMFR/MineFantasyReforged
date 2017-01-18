@@ -20,24 +20,20 @@ public class EntityListMF
 {
 	public static void register()
 	{
-		int IDBase = ConfigMobs.entityID;
-		boolean auto = IDBase == -1;
+		addEntity(EntityArrowMF.class, "arrowMF", 1, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
+		addEntity(EntityBomb.class, "bombMF", 2, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
+		addEntity(EntityShrapnel.class, "shrapnel_mf", 3, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
+		addEntity(EntityFireBlast.class, "fire_blast", 4, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
+		addEntity(EntitySmoke.class, "smoke_mf", 5, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
+		addEntity(EntityItemUnbreakable.class, "special_eitem_mf", 6, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
 		
-		addEntity(EntityArrowMF.class, "arrowMF", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 1 : 20);++IDBase;
-		addEntity(EntityBomb.class, "bombMF", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 1 : 20);++IDBase;
-		addEntity(EntityShrapnel.class, "shrapnel_mf", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 1 : 20);++IDBase;
-		addEntity(EntityFireBlast.class, "fire_blast", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 2 : 20);++IDBase;
-		addEntity(EntitySmoke.class, "smoke_mf", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 2 : 20);++IDBase;
-		addEntity(EntityItemUnbreakable.class, "special_eitem_mf", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 2 : 20);++IDBase;
+		addEntity(EntityMine.class, "landmineMF", 7, 16, 10);
+		addEntity(EntityParachute.class, "parachute_mf", 8, 16, 20);
 		
-		addEntity(EntityMine.class, "landmineMF", auto ? autoAssign() : IDBase, 16, 10);++IDBase;
-		addEntity(EntityParachute.class, "parachute_mf", auto ? autoAssign() : IDBase, 16, 20);++IDBase;
+		addEntity(EntityDragonBreath.class, "dragonbreath", 9, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
 		
-		addEntity(EntityDragonBreath.class, "dragonbreath", auto ? autoAssign() : IDBase, 16, ConfigExperiment.dynamicArrows ? 2 : 20);++IDBase;
-		
-		MobListMF.register(auto, IDBase);
+		MobListMF.register();
 	}
-	
 	public static int autoAssign()
 	{
 		for(int a = 0; a <= 255; a++)
@@ -52,11 +48,6 @@ public class EntityListMF
 	}
 	private static void addEntity(Class<? extends Entity> entityClass, String entityName, int id, int range, int ticks)
     {
-            if (MineFantasyII.isDebug())
-            {
-            	System.out.println("MineFantasy: register basic entity " + entityClass + " with Mod ID " + id);
-            }
-            EntityRegistry.registerModEntity(entityClass, entityName, id, MineFantasyII.instance, range, ticks, true);
-            EntityList.addMapping(entityClass, entityName, id);
+        EntityRegistry.registerModEntity(entityClass, entityName, id, MineFantasyII.instance, range, ticks, true);
     }
 }

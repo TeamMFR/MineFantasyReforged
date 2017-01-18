@@ -31,7 +31,6 @@ import net.minecraft.world.WorldServer;
 
 public class TileEntityForge extends TileEntity implements IInventory, IBasicMetre, IHeatSource, IBellowsUseable
 {
-	public static final float dragonHeat = 200F; //200*
 	private ItemStack[] inv = new ItemStack[1];
 	public float fuel;
 	public float maxFuel = 6000;//5m

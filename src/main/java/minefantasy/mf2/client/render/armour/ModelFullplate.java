@@ -5,45 +5,64 @@ import net.minecraft.client.model.ModelRenderer;
 
 public class ModelFullplate extends ModelBiped 
 {
-	//ModelRenderer jaw;
 	ModelRenderer rightPauldron;
 	ModelRenderer leftPauldron;
-	//ModelRenderer ridge;
+	
+    ModelRenderer armetflange;
+    ModelRenderer armetjaw;
+    ModelRenderer bascinetRhorn;
+    ModelRenderer bascinetLhorn;
+    ModelRenderer bascinetface;
 
 	public ModelFullplate(float f)
 	{
 		super(f, 0F, 64, 64);
 
-		/*
-		jaw = new ModelRenderer(this, 0, 32);
-		jaw.addBox(-3.5F, -4.5F, -4F, 7, 4, 2, f);
-		jaw.setRotationPoint(0F, -0.5F, 0F);
-		jaw.setTextureSize(64, 64);
-		setRotation(jaw, 0.3316126F, 0F, 0F);
-		*/
-		
 		rightPauldron = new ModelRenderer(this, 40, 32);
 		rightPauldron.addBox(-3.5F, -3.5F, -2.5F, 5, 5, 5, f);
-		//rightPauldron.setRotationPoint(-5F, 2F, 0F);
+
 		rightPauldron.setTextureSize(64, 64);
 		setRotation(rightPauldron, 0F, 0F, -0.418879F);
 		
 		leftPauldron = new ModelRenderer(this, 40, 32);
 		leftPauldron.mirror = true;
 		leftPauldron.addBox(-1.5F, -3.5F, -2.5F, 5, 5, 5, f);
-		//leftPauldron.setRotationPoint(5F, 2F, 0F);
+
 		leftPauldron.setTextureSize(64, 64);
 		setRotation(leftPauldron, 0F, 0F, 0.418879F);
-		/*
-		ridge = new ModelRenderer(this, 0, 38);
-		ridge.addBox(-1F, -8.5F, -4.5F, 2, 8, 8, f);
-		ridge.setRotationPoint(0F, 0F, 0F);
-		ridge.setTextureSize(64, 64);
-		*/
+
+		armetflange = new ModelRenderer(this, 0, 38);
+		armetflange.addBox(-1F, -8.5F, -3.5F, 2, 8, 8);
+		armetflange.setRotationPoint(0F, 0F, 0F);
+
+		armetjaw = new ModelRenderer(this, 0, 32);
+		armetjaw.addBox(-3.5F, -5F, -4F, 7, 4, 2);
+		armetjaw.setRotationPoint(0F, 0F, 0F);
+		setRotation(armetjaw, 0.3316126F, 0F, 0F);
+
+		bascinetface = new ModelRenderer(this, 0, 54);
+		bascinetface.addBox(-2.5F, -5F, -7F, 5, 4, 3);
+		bascinetface.setRotationPoint(0F, 0F, 0F);
+		setRotation(bascinetface, 0.3316126F, 0F, 0F);
+
+		bascinetLhorn = new ModelRenderer(this, 0, 0);
+		bascinetLhorn.mirror = true;
+		bascinetLhorn.addBox(0F, -14F, -3F, 2, 6, 2);
+		bascinetLhorn.setRotationPoint(0F, 0F, 0F);
+		setRotation(bascinetLhorn, -0.7853982F, 0.4363323F, 0F);
+
+		bascinetRhorn = new ModelRenderer(this, 0, 0);
+		bascinetRhorn.addBox(-2F, -14F, -3F, 2, 6, 2);
+		bascinetRhorn.setRotationPoint(0F, 0F, 0F);
+		setRotation(bascinetRhorn, -0.7853982F, -0.4363323F, 0F);
+
 		this.bipedRightArm.addChild(rightPauldron);
 		this.bipedLeftArm.addChild(leftPauldron);
-		//this.bipedHead.addChild(ridge);
-		//this.bipedHead.addChild(jaw);
+		this.bipedHead.addChild(armetflange);
+		this.bipedHead.addChild(armetjaw);
+		this.bipedHead.addChild(bascinetface);
+		this.bipedHead.addChild(bascinetLhorn);
+		this.bipedHead.addChild(bascinetRhorn);
 		
 		this.bipedLeftLeg.showModel = this.bipedRightLeg.showModel = this.bipedEars.showModel = false;
 	}

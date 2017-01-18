@@ -18,18 +18,7 @@ import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.CustomArmourEntry;
 import minefantasy.mf2.block.list.BlockListMF;
-import minefantasy.mf2.config.ConfigArmour;
-import minefantasy.mf2.config.ConfigClient;
-import minefantasy.mf2.config.ConfigCrafting;
-import minefantasy.mf2.config.ConfigExperiment;
-import minefantasy.mf2.config.ConfigFarming;
-import minefantasy.mf2.config.ConfigHardcore;
-import minefantasy.mf2.config.ConfigItemRegistry;
-import minefantasy.mf2.config.ConfigMobs;
-import minefantasy.mf2.config.ConfigStamina;
-import minefantasy.mf2.config.ConfigTools;
-import minefantasy.mf2.config.ConfigWeapon;
-import minefantasy.mf2.config.ConfigWorldGen;
+import minefantasy.mf2.config.*;
 import minefantasy.mf2.item.gadget.ItemLootSack;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -57,7 +46,7 @@ public class MineFantasyII
 {
 	public static final String MODID = "minefantasy2";
 	public static final String NAME = "MineFantasyII";
-	public static final String VERSION = "Alpha_2.8.9";
+	public static final String VERSION = "Alpha_2.8.10";
 	public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
 	
     @SidedProxy(clientSide = "minefantasy.mf2.network.ClientProxyMF", serverSide = "minefantasy.mf2.network.CommonProxyMF")
@@ -95,13 +84,13 @@ public class MineFantasyII
     	proxy.preInit();
     	
     	RecipeRemover.removeRecipes();
+    	ToolListMF.load();
+    	ComponentListMF.load();
     }
 
     @EventHandler
     public void load(FMLInitializationEvent evt)
     {
-    	ToolListMF.load();
-    	ComponentListMF.load();
         MinecraftForge.EVENT_BUS.register(this);
         proxy.registerMain();
         GameRegistry.registerWorldGenerator(worldGenManager, 0);

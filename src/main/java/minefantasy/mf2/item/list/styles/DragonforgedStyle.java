@@ -72,10 +72,10 @@ public class DragonforgedStyle
 	
 	public static ItemBowMF dragonforged_bow;
 	
-	//public static ItemCustomArmour dragonforged_scale_helmet, dragonforged_scale_chest, dragonforged_scale_legs, dragonforged_scale_boots;
-	//public static ItemCustomArmour dragonforged_chain_helmet, dragonforged_chain_chest, dragonforged_chain_legs, dragonforged_chain_boots;
-	//public static ItemCustomArmour dragonforged_splint_helmet, dragonforged_splint_chest, dragonforged_splint_legs, dragonforged_splint_boots;
-	//public static ItemCustomArmour dragonforged_plate_helmet, dragonforged_plate_chest, dragonforged_plate_legs, dragonforged_plate_boots;
+	public static ItemCustomArmour dragonforged_scale_helmet, dragonforged_scale_chest, dragonforged_scale_legs, dragonforged_scale_boots;
+	public static ItemCustomArmour dragonforged_chain_helmet, dragonforged_chain_chest, dragonforged_chain_legs, dragonforged_chain_boots;
+	public static ItemCustomArmour dragonforged_splint_helmet, dragonforged_splint_chest, dragonforged_splint_legs, dragonforged_splint_boots;
+	public static ItemCustomArmour dragonforged_plate_helmet, dragonforged_plate_chest, dragonforged_plate_legs, dragonforged_plate_boots;
 	
 	public static void load() 
 	{
@@ -122,16 +122,15 @@ public class DragonforgedStyle
 		dragonforged_tongs = (ItemTongs) new ItemTongs(design+"_tongs", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
 		dragonforged_spanner = (ItemSpanner) new ItemSpanner(design+"_spanner", 0, 0).setCustom(design).setCreativeTab(tab);
 		
-		/*
-		dragonforged_scale_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, 0, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		dragonforged_scale_chest = (ItemCustomArmour) new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, 1, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-	    dragonforged_scale_legs = (ItemCustomArmour) new ItemCustomArmour(design, "scale_legs", ArmourDesign.SCALEMAIL, 2, "scale_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		dragonforged_scale_boots = (ItemCustomArmour) new ItemCustomArmour(design, "scale_boots", ArmourDesign.SCALEMAIL, 3, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		
 		dragonforged_chain_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "chain_helmet", ArmourDesign.CHAINMAIL, 0, "chain_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		dragonforged_chain_chest = (ItemCustomArmour) new ItemCustomArmour(design, "chain_chest", ArmourDesign.CHAINMAIL, 1, "chain_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		dragonforged_chain_legs = (ItemCustomArmour) new ItemCustomArmour(design, "chain_legs", ArmourDesign.CHAINMAIL, 2, "chain_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		dragonforged_chain_boots = (ItemCustomArmour) new ItemCustomArmour(design, "chain_boots", ArmourDesign.CHAINMAIL, 3, "chain_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+
+		dragonforged_scale_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, 0, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+		dragonforged_scale_chest = (ItemCustomArmour) new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, 1, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+	    dragonforged_scale_legs = (ItemCustomArmour) new ItemCustomArmour(design, "scale_legs", ArmourDesign.SCALEMAIL, 2, "scale_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+		dragonforged_scale_boots = (ItemCustomArmour) new ItemCustomArmour(design, "scale_boots", ArmourDesign.SCALEMAIL, 3, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		
 		dragonforged_splint_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "splint_helmet", ArmourDesign.SPLINTMAIL, 0, "splint_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		dragonforged_splint_chest = (ItemCustomArmour) new ItemCustomArmour(design, "splint_chest", ArmourDesign.SPLINTMAIL, 1, "splint_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
@@ -142,7 +141,6 @@ public class DragonforgedStyle
 		dragonforged_plate_chest = (ItemCustomArmour) new ItemCustomArmour(design, "plate_chest", ArmourDesign.FIELDPLATE, 1, "plate_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		dragonforged_plate_legs = (ItemCustomArmour) new ItemCustomArmour(design, "plate_legs", ArmourDesign.FIELDPLATE, 2, "plate_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
 		dragonforged_plate_boots = (ItemCustomArmour) new ItemCustomArmour(design, "plate_boots", ArmourDesign.FIELDPLATE, 3, "plate_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-	*/
 	}
 	
 	public static void loadCrafting()
@@ -182,12 +180,11 @@ public class DragonforgedStyle
 		SpecialForging.addDragonforgeCraft(CustomToolListMF.standard_needle, dragonforged_needle);
 		SpecialForging.addDragonforgeCraft(CustomToolListMF.standard_knife, dragonforged_knife);
 		
-		/*
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_chain_boots, dragonforged_chain_boots);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_chain_legs, dragonforged_chain_legs);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_chain_chest, dragonforged_chain_chest);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_chain_helmet, dragonforged_chain_helmet);
-		
+
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_scale_boots, dragonforged_scale_boots);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_scale_legs, dragonforged_scale_legs);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_scale_chest, dragonforged_scale_chest);
@@ -197,11 +194,10 @@ public class DragonforgedStyle
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_splint_legs, dragonforged_splint_legs);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_splint_chest, dragonforged_splint_chest);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_splint_helmet, dragonforged_splint_helmet);
-		
+	
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_plate_boots, dragonforged_plate_boots);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_plate_legs, dragonforged_plate_legs);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_plate_chest, dragonforged_plate_chest);
 		SpecialForging.addDragonforgeCraft(CustomArmourListMF.standard_plate_helmet, dragonforged_plate_helmet);
-		*/
 	}
 }

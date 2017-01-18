@@ -371,14 +371,12 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 	@Override
 	public boolean offhandAttackEntity(OffhandAttackEvent event,
 			ItemStack mainhandItem, ItemStack offhandItem) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean offhandClickAir(PlayerInteractEvent event,
 			ItemStack mainhandItem, ItemStack offhandItem) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

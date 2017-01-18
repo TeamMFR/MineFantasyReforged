@@ -285,15 +285,24 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 			if(worldObj.isRemote)
 				return true;
 			
-			if(doesPlayerKnowCraft(user) && canCraft() && toolType.equalsIgnoreCase(toolTypeRequired) && hammerTier >= hammerTierRequired)
+			if(doesPlayerKnowCraft(user) && canCraft() && toolType.equalsIgnoreCase(toolTypeRequired))
 			{
+				float mod = 1.0F;
+				if(hammerTier <= hammerTierRequired)
+				{
+					mod = 2.0F;
+					if(rand.nextInt(5) == 0)
+					{
+						reassignHitValues();
+					}
+				}
 				if(rightClick)
 				{
-					this.qualityBalance += rightHit;
+					this.qualityBalance += (rightHit*mod);
 				}
 				else
 				{
-					this.qualityBalance -= leftHit;
+					this.qualityBalance -= (leftHit*mod);
 				}
 				if(qualityBalance >= 1.0F || qualityBalance <= -1.0F)
 				{

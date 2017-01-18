@@ -1103,8 +1103,9 @@ public class EventManagerMF
 	@SubscribeEvent
 	public void renderEntity (RenderPlayerEvent.Specials.Pre event)
 	{
+		Minecraft mc = Minecraft.getMinecraft();
 		boolean showHeld = true;
-		if(PowerArmour.isWearingCogwork(event.entityPlayer))
+		if(PowerArmour.isWearingCogwork(event.entityPlayer) && mc.gameSettings.thirdPersonView != 0)
 		{
 			IPowerArmour cogwork = (IPowerArmour)event.entity.ridingEntity;
 			showHeld = !cogwork.isArmoured("right_arm");
@@ -1115,7 +1116,7 @@ public class EventManagerMF
 	@SubscribeEvent
 	public void renderEntity (RenderLivingEvent.Pre event)
 	{
-		if(!(event.renderer instanceof RenderPowerArmour) && event.entity instanceof EntityPlayer)
+		if(!(event.renderer instanceof RenderPowerArmour))
 		{
 			boolean renderHead = false;
 			boolean renderBody = false;
@@ -1125,7 +1126,7 @@ public class EventManagerMF
 			boolean renderRightLeg = false;
 			Minecraft mc = Minecraft.getMinecraft();
 			
-			if(!(event.entity == mc.thePlayer && ( mc.currentScreen instanceof GuiContainerCreative ||mc.currentScreen instanceof GuiInventory) ) && PowerArmour.isWearingCogwork(event.entity))
+			if(event.entity instanceof EntityPlayer && !(event.entity == mc.thePlayer && ( mc.currentScreen instanceof GuiContainerCreative ||mc.currentScreen instanceof GuiInventory) ) && PowerArmour.isWearingCogwork(event.entity) && mc.gameSettings.thirdPersonView != 0)
 			{
 				IPowerArmour cogwork = (IPowerArmour)event.entity.ridingEntity;
 				renderHead = cogwork.isArmoured("left_leg");
