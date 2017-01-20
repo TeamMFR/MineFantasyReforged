@@ -790,7 +790,7 @@ public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, 
     
     public ItemWeaponMF modifyBaseDamage(float mod)
     {
-    	this.baseDamage += mod;
+    	this.baseDamage = Math.max(1.0F, baseDamage + mod);
     	return this;
     }
     public ItemWeaponMF setBaseDamage(float baseDamage)

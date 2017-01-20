@@ -6,6 +6,7 @@ import minefantasy.mf2.item.archery.EnumBowType;
 import minefantasy.mf2.item.archery.ItemArrowMF;
 import minefantasy.mf2.item.archery.ItemBowMF;
 import minefantasy.mf2.item.list.styles.DragonforgedStyle;
+import minefantasy.mf2.item.list.styles.OrnateStyle;
 import minefantasy.mf2.item.tool.ItemAxeMF;
 import minefantasy.mf2.item.tool.ItemHoeMF;
 import minefantasy.mf2.item.tool.ItemPickMF;
@@ -88,7 +89,7 @@ public class CustomToolListMF
 		standard_lance = new ItemLance(design+"_lance", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab);
 		
 		tab = CreativeTabMF.tabArcher;
-		standard_bow = (ItemBowMF) new ItemBowMF(design+"_bow", EnumBowType.COMPOSITE).setCustom(design).setCreativeTab(tab);
+		standard_bow = (ItemBowMF) new ItemBowMF(design+"_bow", EnumBowType.SHORTBOW).setCustom(design).setCreativeTab(tab);
 		standard_bolt = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BOLT, 20).setCustom(design).setAmmoType("bolt").setCreativeTab(tab);
 		standard_arrow = (ItemArrowMF) new ItemArrowMF(design, ArrowType.NORMAL, 16).setCustom(design).setCreativeTab(tab);
 		standard_arrow_bodkin = (ItemArrowMF) new ItemArrowMF(design, ArrowType.BODKIN, 16).setCustom(design).setCreativeTab(tab);
@@ -124,5 +125,6 @@ public class CustomToolListMF
 		standard_mallet = (ItemBasicCraftTool) new ItemBasicCraftTool(design+"_mallet", "mallet", 0, 64).setCustom(design).setCreativeTab(tab);
 		
 		DragonforgedStyle.load();
+		OrnateStyle.load();
 	}
 }

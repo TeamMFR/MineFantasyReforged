@@ -185,7 +185,7 @@ material.tin.name=Tin
 
 material.bronze.name=Bronze
 material.iron.name=Iron
-material.refinediron.name=Refined Iron
+material.refinediron.name=Pig Iron
 material.steel.name=Steel
 material.tungsten.name=Wolframite
 material.obsidian.name=Obsidian
@@ -421,6 +421,7 @@ item.oreGold.name=Raw Gold Ore
 item.oreTungsten.name=Raw Wolframite
 
 item.dragon_heart.name=Dragon Heart
+item.ornate_items.name=Ornate Crest
 
 item.iron_frame.name=Iron Frame
 item.iron_strut.name=Iron Strut
@@ -707,7 +708,8 @@ itemGroup.MFcrafttool=[MF] Crafting Tools
 itemGroup.MFore=[MF] Ores
 itemGroup.MFfood=[MF] Food
 itemGroup.MFOld=[MF] Primitive Items
-itemGroup.MFdragonforged=[MF] Dragonforged Weapon
+itemGroup.MFdragonforged=[MF] Dragonforged Style
+itemGroup.MFornate=[MF] Ornate Style
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /FIRESTARTER/
@@ -865,6 +867,8 @@ item.standard_bolt.name=%1$s Quarrel
 
 item.standard_mallet.name=%1$s Mallet
 item.standard_spoon.name=%1$s Spoon 
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /DRAGONFORGE/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -925,6 +929,69 @@ item.dragonforged_plate_legs.name=Dragonforged %1$s Greaves
 item.dragonforged_plate_boots.name=Dragonforged %1$s Sabatons
 
 item.dragonforged_bow.name=Dragonforged %1$s Bow
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ORNATE/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.ornate_pick.name=Ornate %1$s Pickaxe
+item.ornate_axe.name=Ornate %1$s Axe
+item.ornate_spade.name=Ornate %1$s Shovel
+item.ornate_hoe.name=Ornate %1$s Hoe
+
+item.ornate_shears.name=Ornate %1$s Shears
+item.ornate_knife.name=Ornate %1$s Knife
+item.ornate_needle.name=Ornate %1$s Needle
+item.ornate_hammer.name=Ornate %1$s Hammer
+item.ornate_hvyhammer.name=Heavy Ornate %1$s Hammer
+item.ornate_tongs.name=Ornate %1$s Tongs
+item.ornate_saw.name=Ornate %1$s Saw
+item.ornate_spanner.name=Ornate %1$s Spanner
+
+
+item.ornate_dagger.name=Ornate %1$s Dagger
+item.ornate_sword.name=Ornate %1$s Sword
+item.ornate_mace.name=Ornate %1$s Mace
+item.ornate_waraxe.name=Ornate %1$s Waraxe
+item.ornate_spear.name=Ornate %1$s Spear
+
+item.ornate_katana.name=Ornate %1$s Katana
+item.ornate_greatsword.name=Ornate %1$s Greatsword
+item.ornate_warhammer.name=Ornate %1$s Warhammer
+item.ornate_battleaxe.name=Ornate %1$s Battleaxe
+item.ornate_halbeard.name=Ornate %1$s Halbeard
+item.ornate_lance.name=Ornate %1$s Lance
+
+item.ornate_handpick.name=Ornate %1$s Handpick
+item.ornate_hvypick.name=Heavy Ornate %1$s Pickaxe
+item.ornate_trow.name=Ornate %1$s Spade
+item.ornate_hvyshovel.name=Heavy Ornate %1$s Shovel
+item.ornate_scythe.name=Ornate %1$s Scythe
+item.ornate_mattock.name=Ornate %1$s Mattock
+item.ornate_lumber.name=Ornate %1$s Lumber Axe
+
+item.ornate_scale_helmet.name=Ornate %1$s Scale Helmet
+item.ornate_scale_chest.name=Ornate %1$s Scale Suit
+item.ornate_scale_legs.name=Ornate %1$s Scale Leggings
+item.ornate_scale_boots.name=Ornate %1$s Scale Boots
+
+item.ornate_chain_helmet.name=Ornate %1$s Coif
+item.ornate_chain_chest.name=Ornate %1$s Mail Suit
+item.ornate_chain_legs.name=Ornate %1$s Mail Leggings
+item.ornate_chain_boots.name=Ornate %1$s Mail Boots
+
+item.ornate_splint_helmet.name=Ornate %1$s Splint Helmet
+item.ornate_splint_chest.name=Ornate %1$s Splint Suit
+item.ornate_splint_legs.name=Ornate %1$s Splint Leggings
+item.ornate_splint_boots.name=Ornate %1$s Splint Boots
+
+item.ornate_plate_helmet.name=Ornate %1$s Armet
+item.ornate_plate_chest.name=Ornate %1$s Curiass
+item.ornate_plate_legs.name=Ornate %1$s Greaves
+item.ornate_plate_boots.name=Ornate %1$s Sabatons
+
+item.ornate_bow.name=Ornate %1$s Bow
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /ARTEFACT/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1394,10 +1461,16 @@ knowledge.smeltBlackSteel=Black Steel Smithing
 knowledge.smeltBlackSteel.desc=Tier %1$s, Common material
 knowledge.smeltBlackSteel.1=Every material has its limit, now you have found the right balance between bronze and iron alloys to perfect a new material. Black steel is extremely strong and far exceeds anything discovered thus far, although it can be difficult to produce and work, it may not be a decent replacement for iron.^This takes a two stage process, bringing together processes done thus far. Black steel can be made in a crucible of reasonable quality, and the ingots can be further refined in a blast furnace. The final result is a new dark, powerful material.
 
-knowledge.smeltDragonforge=Dragonforge Smithing
-knowledge.smeltDragonforge.desc=Well forged
+knowledge.craftOrnate=Ornate Style
+knowledge.craftOrnate.desc=Worthy of clensing
 
-knowledge.smeltDragonforge.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.^Unlike other designs; dragonforged items require this ritual take place for the craft to work.
+knowledge.craftOrnate.1=With the proper materials and time, it is possible to create more decorative varients of weapon, tool and armour. Ornate items are far more powerful against the unholy such as undead.^An ornate crest is used to craft these. place a single crest in the output slot of anvils then craft an appropriate item. When crafting finishes: an ornate item will be crafted.
+
+knowledge.smeltDragonforge=Dragonforge Style
+knowledge.smeltDragonforge.desc=Crude and powerful
+
+knowledge.smeltDragonforge.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.
+knowledge.smeltDragonforge.2=Unlike other designs; dragonforged items require this ritual take place for the craft to work.
 
 knowledge.smeltBlueSteel=Blue Steel Smithing
 knowledge.smeltBlueSteel.desc=Tier %1$s, Common material

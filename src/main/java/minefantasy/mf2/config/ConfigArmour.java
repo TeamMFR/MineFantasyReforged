@@ -33,6 +33,6 @@ public class ConfigArmour extends ConfigurationBaseMF
 		cogworkFuelUnits = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Fuel Modifier", 1F, "Modify the amount of fuel added to cogworks").getString());
 		EntityCogwork.health_modifier = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Durability Modifier", 1.0F, "Modify the relative durability of cogwork armour").getString());
 		EntityCogwork.rating_modifier = Float.parseFloat(config.get(CATEGORY_COGWORK, "Cogwork Armour Modifier", 1.0F, "Modify the relative armour rating of cogwork armour").getString());
-		EntityCogwork.allowedBulk = Integer.parseInt(config.get(CATEGORY_COGWORK, "Worn Apparel Restrict", 2, "-1: can't wear armour with cogwork, 0=Can enter cogwork with light armour, 1=can enter with medium, 2=can enter in any armour").getString());
+		EntityCogwork.allowedBulk = Integer.parseInt(config.get(CATEGORY_COGWORK, "Worn Apparel Restrict", 0, "-1: can't wear armour with cogwork, 0=Can enter cogwork with light armour, 1=can enter with medium, 2=can enter in any armour").getString());
 	}
 }

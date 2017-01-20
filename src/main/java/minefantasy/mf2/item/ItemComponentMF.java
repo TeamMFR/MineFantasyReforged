@@ -181,6 +181,7 @@ public class ItemComponentMF extends Item implements ITieredComponent
 		add(list, ComponentListMF.fireclay_brick);
 		add(list, ComponentListMF.strong_brick);
 		add(list, ComponentListMF.dragon_heart);
+		add(list, ComponentListMF.ornate_items);
 		
 		add(list, ComponentListMF.talisman_lesser);
 		add(list, ComponentListMF.talisman_greater);

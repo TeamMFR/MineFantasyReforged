@@ -20,6 +20,7 @@ import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.list.styles.DragonforgedStyle;
+import minefantasy.mf2.item.list.styles.OrnateStyle;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.util.MFLogUtil;
@@ -45,6 +46,7 @@ public class BasicRecipesMF
 		SalvageRecipes.init();
 		CookingRecipes.init();
 		DragonforgedStyle.loadCrafting();
+		OrnateStyle.loadCrafting();
 		GameRegistry.addRecipe(new RecipeArmourDyeMF());
 		
 		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");

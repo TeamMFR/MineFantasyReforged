@@ -3,7 +3,6 @@ package minefantasy.mf2.item.archery;
 import minefantasy.mf2.api.archery.IArrowHandler;
 import minefantasy.mf2.api.archery.ISpecialBow;
 import minefantasy.mf2.entity.EntityArrowMF;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -27,7 +26,7 @@ public class ArrowFirerMF implements IArrowHandler
 		float maxCharge = 20F;
 		if(bow != null && bow.getItem() instanceof ISpecialBow)
 		{
-			maxCharge = ((ISpecialBow)bow.getItem()).getMaxCharge();
+			//maxCharge = ((ISpecialBow)bow.getItem()).getMaxCharge();
 		}
 		else
 		{
@@ -45,8 +44,14 @@ public class ArrowFirerMF implements IArrowHandler
         }
         
 		ItemArrowMF ammo = (ItemArrowMF)arrow.getItem();
-		//TODO Arrow entity instance
-        EntityArrowMF entArrow = ammo.getFiredArrow(new EntityArrowMF(world, user, firepower*2.0F), arrow);
+		float spread = 1.0F;
+		if(bow != null && bow.getItem() instanceof ISpecialBow)
+		{
+			firepower *= ((ISpecialBow)bow.getItem()).getRange(bow);
+			spread = ((ISpecialBow)bow.getItem()).getSpread(bow);
+		}
+		
+        EntityArrowMF entArrow = ammo.getFiredArrow(new EntityArrowMF(world, user, spread, firepower*2.0F), arrow);
 
         int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.power.effectId, bow);
         entArrow.setPower(1+(0.25F*var9));

@@ -19,7 +19,6 @@ import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.tool.ToolMaterialMF;
 import minefantasy.mf2.material.BaseMaterialMF;
-import minefantasy.mf2.util.MFLogUtil;
 import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
 import mods.battlegear2.api.weapons.IBattlegearWeapon;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -331,17 +330,24 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 	@Override
 	public Entity modifyArrow(ItemStack bow, Entity arrow) 
 	{
-		if (getMaterial() == BaseMaterialMF.getMaterial("dragonforge").getToolConversion())
+		if(this.isCustom)
 		{
-			arrow.setFire(60);
+			CustomMaterial custom = CustomToolHelper.getCustomPrimaryMaterial(bow);
+			if(custom != null)
+			{
+				if(custom.name.equalsIgnoreCase("silver"))
+				{
+					arrow.getEntityData().setBoolean("MF_Silverbow", true);
+				}
+			}
 		}
-		if (getMaterial() == BaseMaterialMF.getMaterial("silver").getToolConversion() || getMaterial() == BaseMaterialMF.getMaterial("ornate").getToolConversion())
-		{
-			arrow.getEntityData().setBoolean("MF_Silverbow", true);
-		}
+		
+		
 		float dam = getBowDamage(bow);
+		
 		arrow.getEntityData().setFloat("MF_Bow_Damage", dam);
 		arrow.getEntityData().setString("Design", designType);
+		
 		return arrow;
 	}
 	
@@ -543,6 +549,16 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 	public float getBowDamage(ItemStack item) 
 	{
 		return CustomToolHelper.getBowDamage(item, baseDamage) * model.damageModifier;
+	}
+	@Override
+	public float getRange(ItemStack item) 
+	{
+		return model.velocity;
+	}
+	@Override
+	public float getSpread(ItemStack item) 
+	{
+		return model.spread;
 	}
 	//====================================================== CUSTOM END ==============================================================\\
 	@Override

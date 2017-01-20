@@ -44,17 +44,12 @@ public class SkillPacket extends PacketMF
 		int skillMaxXp = packet.readInt();
 		
 		username = ByteBufUtils.readUTF8String(packet);
-		if (username != null) 
+		if (username != null && player.getCommandSenderName().equalsIgnoreCase(username)) 
         {
-            EntityPlayer entity = player.worldObj .getPlayerEntityByName(username);
-            if(entity != null)
-            {
-            	MFLogUtil.logDebug("Skill Packet Recieved: " + name + " L" + skillLvl + " " + skillXp + "/" + skillMaxXp);
-            	NBTTagCompound tag = RPGElements.getSkill(player, name);
-            	tag.setInteger("level", skillLvl);
-            	tag.setInteger("xp", skillXp);
-            	tag.setInteger("xpMax", skillMaxXp);
-            }
+        	NBTTagCompound tag = RPGElements.getSkill(player, name);
+        	tag.setInteger("level", skillLvl);
+        	tag.setInteger("xp", skillXp);
+        	tag.setInteger("xpMax", skillMaxXp);
         }
 	}
 

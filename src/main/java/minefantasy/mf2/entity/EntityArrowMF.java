@@ -189,21 +189,21 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 	 * direction.
 	 */
 	@Override
-	public void setThrowableHeading(double x, double y, double z, float angle, float power)
+	public void setThrowableHeading(double x, double y, double z, float power, float spread)
 	{
 		float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
 		x /= f2;
 		y /= f2;
 		z /= f2;
 		x += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1)
-				* 0.007499999832361937D * power;
+				* 0.007499999832361937D * spread;
 		y += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1)
-				* 0.007499999832361937D * power;
+				* 0.007499999832361937D * spread;
 		z += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1)
-				* 0.007499999832361937D * power;
-		x *= angle;
-		y *= angle;
-		z *= angle;
+				* 0.007499999832361937D * spread;
+		x *= power;
+		y *= power;
+		z *= power;
 		this.motionX = x;
 		this.motionY = y;
 		this.motionZ = z;
@@ -621,6 +621,16 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 		}
 	}
 
+	private float getModifiedVelocity() 
+	{
+		String s = "MF_Bow_Velocity";
+		if(getEntityData().hasKey(s))
+		{
+			return getEntityData().getFloat(s);
+		}
+		return 1.0F;
+	}
+
 	private boolean isExplosive() 
 	{
 		return getEntityData().hasKey("Explosive");
@@ -837,7 +847,6 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 		}
 		if(getEntityData().hasKey("MF_Bow_Damage"))
 		{
-			MFLogUtil.logDebug("Arrow DMG: " + dam + " x Bow DMG: " + getEntityData().getFloat("MF_Bow_Damage"));
 			dam *= getEntityData().getFloat("MF_Bow_Damage");
 		}
 		return dam;

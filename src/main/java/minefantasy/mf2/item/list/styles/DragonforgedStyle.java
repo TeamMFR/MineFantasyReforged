@@ -2,11 +2,8 @@ package minefantasy.mf2.item.list.styles;
 
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.crafting.exotic.SpecialForging;
-import minefantasy.mf2.item.archery.ArrowType;
 import minefantasy.mf2.item.archery.EnumBowType;
-import minefantasy.mf2.item.archery.ItemArrowMF;
 import minefantasy.mf2.item.archery.ItemBowMF;
-import minefantasy.mf2.item.armour.ItemArmourMF;
 import minefantasy.mf2.item.armour.ItemCustomArmour;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
@@ -23,7 +20,6 @@ import minefantasy.mf2.item.tool.advanced.ItemLumberAxe;
 import minefantasy.mf2.item.tool.advanced.ItemMattock;
 import minefantasy.mf2.item.tool.advanced.ItemScythe;
 import minefantasy.mf2.item.tool.advanced.ItemTrowMF;
-import minefantasy.mf2.item.tool.crafting.ItemBasicCraftTool;
 import minefantasy.mf2.item.tool.crafting.ItemHammer;
 import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
 import minefantasy.mf2.item.tool.crafting.ItemNeedle;
@@ -45,9 +41,12 @@ import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class DragonforgedStyle 
 {
+	public static ToolMaterial dragonforged = EnumHelper.addToolMaterial("dragonforged", 2, 250, 6.0F, 2.0F, 15);
+	
 	public static ItemWeaponMF dragonforged_sword, dragonforged_waraxe, dragonforged_mace, dragonforged_dagger, dragonforged_spear;
 	public static ItemWeaponMF dragonforged_greatsword, dragonforged_battleaxe, dragonforged_warhammer, dragonforged_katana, dragonforged_halbeard, dragonforged_lance;
 	public static ItemPickMF dragonforged_pick;
@@ -81,7 +80,7 @@ public class DragonforgedStyle
 	{
 		String design = "dragonforged";
 		CreativeTabs tab = CreativeTabMF.tabDragonforged;
-		ToolMaterial mat = BaseMaterialMF.dragonforge.getToolConversion();
+		ToolMaterial mat = dragonforged;
 		
 		dragonforged_dagger = new ItemDagger(design+"_dagger", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
 		dragonforged_sword = new ItemSwordMF(design+"_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
@@ -96,7 +95,7 @@ public class DragonforgedStyle
 		dragonforged_lance = new ItemLance(design+"_lance", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
 		
 		
-		dragonforged_bow = (ItemBowMF) new ItemBowMF(design+"_bow", EnumBowType.COMPOSITE).setCustom(design).setCreativeTab(tab);
+		dragonforged_bow = (ItemBowMF) new ItemBowMF(design+"_bow", EnumBowType.SHORTBOW).setCustom(design).setCreativeTab(tab);
 		
 		//Tools
 		dragonforged_pick = (ItemPickMF) new ItemPickMF(design+"_pick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);

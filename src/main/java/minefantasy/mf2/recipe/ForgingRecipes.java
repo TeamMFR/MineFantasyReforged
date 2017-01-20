@@ -410,6 +410,19 @@ public class ForgingRecipes
 		Salvage.addSalvage(ComponentListMF.hinge, 
 				ComponentListMF.leather_strip
 				, ComponentListMF.rivet);
+		
+		time = 10;
+		KnowledgeListMF.crestR =
+		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.ornate_items), "craftOrnate", false, "hammer", material.hammerTier, material.anvilTier, (int)(time*material.craftTimeModifier), new Object[]
+		{
+			" G ",
+			"SLS",
+			" G ",
+			'G', goldbar,
+			'S', silverbar,
+			'L', new ItemStack(Items.dye, 1, 4)
+			
+		});
 	}
 	
 	private static Item getStrips(BaseMaterialMF material)

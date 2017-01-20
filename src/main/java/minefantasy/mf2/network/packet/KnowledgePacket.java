@@ -52,11 +52,11 @@ public class KnowledgePacket extends PacketMF
         	{
         		Object[] entry = (Object[])researches.next();
         		InformationBase base = (InformationBase) entry[0];
+        		ResearchLogic.setArtefactCount(base.getUnlocalisedName(), player, (Integer)entry[2]);
         		if((Boolean) entry[1])
         		{
-        			ResearchLogic.tryUnlock(player, base);
+        			ResearchLogic.forceUnlock(player, base);
         		}
-        		ResearchLogic.setArtefactCount(base.getUnlocalisedName(), player, (Integer)entry[2]);
         	}
         }
         packet.clear();

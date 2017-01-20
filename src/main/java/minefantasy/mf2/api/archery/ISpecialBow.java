@@ -15,4 +15,6 @@ public interface ISpecialBow
 	 */
 	public Entity modifyArrow(ItemStack bow, Entity arrow);
 	public float getMaxCharge();
+	public float getRange(ItemStack bow);
+	public float getSpread(ItemStack bow);
 }

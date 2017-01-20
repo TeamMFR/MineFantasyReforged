@@ -41,19 +41,15 @@ public class LevelupPacket extends PacketMF
 		int skillLvl = packet.readInt();
 		
 		username = ByteBufUtils.readUTF8String(packet);
-		if (username != null) 
+		if (username != null && player.getCommandSenderName().equalsIgnoreCase(username)) 
         {
-            EntityPlayer entity = player.worldObj .getPlayerEntityByName(username);
-            if(entity != null && player == entity)
-            {
-            	Skill skill = RPGElements.getSkillByName(name);
-            	
-            	if(skill != null)
-            	{
-	            	player.playSound("random.levelup", 1.0F, 0.5F);
-	        		player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("rpg.levelup", skill.getDisplayName().toLowerCase(), skillLvl)));
-            	}
-            }
+        	Skill skill = RPGElements.getSkillByName(name);
+        	
+        	if(skill != null)
+        	{
+            	player.playSound("random.levelup", 1.0F, 0.5F);
+        		player.addChatMessage(new ChatComponentText(StatCollector.translateToLocalFormatted("rpg.levelup", skill.getDisplayName().toLowerCase(), skillLvl)));
+        	}
         }
 	}
 

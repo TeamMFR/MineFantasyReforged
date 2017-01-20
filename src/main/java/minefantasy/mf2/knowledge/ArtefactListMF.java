@@ -148,6 +148,9 @@ public class ArtefactListMF
 		add(KnowledgeListMF.craftArmourHeavy, Items.leather, Blocks.wool, Items.feather);
 		add(KnowledgeListMF.smeltDragonforge, ComponentListMF.dragon_heart);
 		
+		add(KnowledgeListMF.craftOrnate, new ItemStack(Items.dye, 1, 4));
+		
+		
 		add(KnowledgeListMF.arrowsBodkin, Items.feather);
 		add(KnowledgeListMF.arrowsBroad, Items.feather, Items.flint);
 		

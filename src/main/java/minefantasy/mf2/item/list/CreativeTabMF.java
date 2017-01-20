@@ -30,7 +30,8 @@ public final class CreativeTabMF extends CreativeTabs
 	public static CreativeTabs tabOres = new CreativeTabMF(CreativeTabs.getNextID(), "MFore", 10);
 	public static CreativeTabs tabFood = new CreativeTabMF(CreativeTabs.getNextID(), "MFfood", 11);
 	public static CreativeTabs tabDragonforged = new CreativeTabMF(CreativeTabs.getNextID(), "MFdragonforged", 12);
-	public static CreativeTabs tabOldTools = new CreativeTabMF(CreativeTabs.getNextID(), "MFOld", 13);
+	public static CreativeTabs tabOrnate = new CreativeTabMF(CreativeTabs.getNextID(), "MFornate", 13);
+	public static CreativeTabs tabOldTools = new CreativeTabMF(CreativeTabs.getNextID(), "MFOld", 14);
 	
 	
 	private int type;
@@ -57,7 +58,8 @@ public final class CreativeTabMF extends CreativeTabs
 			case 10: return new ItemStack(BlockListMF.oreCopper);
 			case 11: return new ItemStack(FoodListMF.sweetroll);
 			case 12: return new ItemStack(ComponentListMF.dragon_heart);
-			case 13: return new ItemStack(ToolListMF.pickStone);
+			case 13: return new ItemStack(ComponentListMF.ornate_items);
+			case 14: return new ItemStack(ToolListMF.pickStone);
 		}
 		return new ItemStack(ComponentListMF.ingots[3]);
 	}

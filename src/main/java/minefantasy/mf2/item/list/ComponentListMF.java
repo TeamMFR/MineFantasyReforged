@@ -14,6 +14,7 @@ import minefantasy.mf2.item.ItemFilledMould;
 import minefantasy.mf2.item.ItemHide;
 import minefantasy.mf2.item.ItemMFBowl;
 import minefantasy.mf2.item.ItemRawOreMF;
+import minefantasy.mf2.item.ItemSpecialDesign;
 import minefantasy.mf2.item.custom.ItemCustomComponent;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.gadget.ItemBombComponent;
@@ -114,7 +115,7 @@ public class ComponentListMF
 	public static Item rawhideMedium = new ItemHide("rawhideMedium", hideMedium, 1.5F);
 	public static Item rawhideLarge = new ItemHide("rawhideLarge", hideLarge, 3.0F);
 	
-	public static Item dragon_heart = new ItemComponentMF("dragon_heart", 1);
+	public static Item dragon_heart = new ItemSpecialDesign("dragon_heart", 1, "dragon");
 	
 	public static Item leather_strip = new ItemComponentMF("leather_strip", 0);
 	public static Item nail = new ItemComponentMF("nail", 0);
@@ -187,6 +188,9 @@ public class ComponentListMF
 	public static Item cogwork_pulley = new ItemComponentMF("cogwork_pulley", 1).setCreativeTab(CreativeTabMF.tabGadget);
 	
 	public static Item artefacts = new ItemArtefact("artefact_any");
+	
+	public static Item ornate_items = new ItemSpecialDesign("ornate_items", 1, "ornate");
+	
 	public static void load() 
 	{
 		WoodMaterial.init();

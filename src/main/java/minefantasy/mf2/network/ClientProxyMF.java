@@ -23,6 +23,7 @@ import minefantasy.mf2.entity.mob.*;
 import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.list.styles.DragonforgedStyle;
+import minefantasy.mf2.item.list.styles.OrnateStyle;
 import minefantasy.mf2.mechanics.ExtendedReachMF;
 import minefantasy.mf2.mechanics.PlayerTickHandlerMF;
 import net.minecraft.client.Minecraft;
@@ -260,6 +261,24 @@ public class ClientProxyMF extends CommonProxyMF
 		MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_lumber, new RenderHeavyWeapon().setBlunt());
 		MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_saw, new RenderSaw());
 		MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_bow, new RenderBow(false));
+	
+		//ORNATE
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_dagger, new RenderSword());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_sword, new RenderSword());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_waraxe, new RenderSword().setAxe());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_mace, new RenderSword());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_warhammer, new RenderHeavyWeapon().setBlunt());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_battleaxe, new RenderHeavyWeapon().setBlunt().setParryable());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_greatsword, new RenderHeavyWeapon().setGreatsword().setParryable());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_katana, new RenderHeavyWeapon().setKatana().setParryable());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_spear, new RenderSpear());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_halbeard, new RenderSpear(true));
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_lance, new RenderLance());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_scythe, new RenderHeavyWeapon().setBlunt());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_lumber, new RenderHeavyWeapon().setBlunt());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_saw, new RenderSaw());
+		MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_bow, new RenderBow(false));
+	
 	}
 	/**
 	 * Is the player trying to jump (assuming no screens are open)

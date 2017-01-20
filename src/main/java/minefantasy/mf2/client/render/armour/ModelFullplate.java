@@ -8,8 +8,10 @@ public class ModelFullplate extends ModelBiped
 	ModelRenderer rightPauldron;
 	ModelRenderer leftPauldron;
 	
-    ModelRenderer armetflange;
+    ModelRenderer armetridge;
     ModelRenderer armetjaw;
+    ModelRenderer armetface;
+    
     ModelRenderer bascinetRhorn;
     ModelRenderer bascinetLhorn;
     ModelRenderer bascinetface;
@@ -31,15 +33,27 @@ public class ModelFullplate extends ModelBiped
 		leftPauldron.setTextureSize(64, 64);
 		setRotation(leftPauldron, 0F, 0F, 0.418879F);
 
-		armetflange = new ModelRenderer(this, 0, 38);
-		armetflange.addBox(-1F, -8.5F, -3.5F, 2, 8, 8);
-		armetflange.setRotationPoint(0F, 0F, 0F);
+		armetridge = new ModelRenderer(this, 0, 38);
+		armetridge.addBox(-1F, -8.5F, -3.5F, 2, 8, 8);
+		armetridge.setRotationPoint(0F, 0F, 0F);
 
 		armetjaw = new ModelRenderer(this, 0, 32);
 		armetjaw.addBox(-3.5F, -5F, -4F, 7, 4, 2);
 		armetjaw.setRotationPoint(0F, 0F, 0F);
 		setRotation(armetjaw, 0.3316126F, 0F, 0F);
 
+	  	armetface = new ModelRenderer(this, 20, 32);
+      	armetface.addBox(-2.5F, -2.5F, -2.6F, 5, 4, 5);
+      	armetface.setRotationPoint(0F, -1F, -5F);
+	  	setRotation(armetface, 0F, 0.7853982F, 0F);
+		 
+	  	/*
+		armetface = new ModelRenderer(this, 20, 32);
+		armetface.addBox(-2.5F, -2.5F, -2.6F, 5, 4, 5);
+		armetface.setRotationPoint(0F, -0.5F, -4F);
+		setRotation(armetface, 0.2617994F, 0.7853982F, 0.2617994F);
+		*/
+	  	
 		bascinetface = new ModelRenderer(this, 0, 54);
 		bascinetface.addBox(-2.5F, -5F, -7F, 5, 4, 3);
 		bascinetface.setRotationPoint(0F, 0F, 0F);
@@ -58,8 +72,11 @@ public class ModelFullplate extends ModelBiped
 
 		this.bipedRightArm.addChild(rightPauldron);
 		this.bipedLeftArm.addChild(leftPauldron);
-		this.bipedHead.addChild(armetflange);
+		
+		this.bipedHead.addChild(armetridge);
 		this.bipedHead.addChild(armetjaw);
+		this.bipedHead.addChild(armetface);
+		
 		this.bipedHead.addChild(bascinetface);
 		this.bipedHead.addChild(bascinetLhorn);
 		this.bipedHead.addChild(bascinetRhorn);

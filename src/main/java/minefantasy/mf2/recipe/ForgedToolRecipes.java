@@ -46,7 +46,7 @@ public class ForgedToolRecipes
     		for(ItemStack ingot: OreDictionary.getOres("ingot"+customMat.name))
     		{
     			KnowledgeListMF.barR.add(
-    			MineFantasyAPI.addAnvilRecipe(artisanry, bar, "smelt"+customMat.name, true, "hammer", -1, -1, (int)(customMat.craftTimeModifier/2F), new Object[]
+    			MineFantasyAPI.addAnvilRecipe(artisanry, bar, "", true, "hammer", -1, -1, (int)(customMat.craftTimeModifier/2F), new Object[]
 				{
 					"I",
 					'I', ingot,
@@ -57,7 +57,7 @@ public class ForgedToolRecipes
     		if(defaultIngot != null)
     		{
     			KnowledgeListMF.baringotR.add(
-    			MineFantasyAPI.addAnvilRecipe(artisanry, defaultIngot, "smelt"+customMat.name, true, "hammer", -1, -1, (int)(customMat.craftTimeModifier/2F), new Object[]
+    			MineFantasyAPI.addAnvilRecipe(artisanry, defaultIngot, "", true, "hammer", -1, -1, (int)(customMat.craftTimeModifier/2F), new Object[]
 				{
 					"I",
 					'I', bar,

@@ -41,7 +41,7 @@ public class SmeltingRecipesMF
 		ItemStack adamant = ComponentListMF.bar("Adamantium");
 		ItemStack mithium = ComponentListMF.bar("Mithium");
 		ItemStack ignotumite = ComponentListMF.bar("Ignotumite");
-		ItemStack enderforge = ComponentListMF.bar("Enderforge");
+		ItemStack enderforge = ComponentListMF.bar("Ender");
 		
 		KnowledgeListMF.reStone =
 		MineFantasyAPI.addRatioAlloy(1, new ItemStack(BlockListMF.reinforced_stone, 4), 1, new Object[]

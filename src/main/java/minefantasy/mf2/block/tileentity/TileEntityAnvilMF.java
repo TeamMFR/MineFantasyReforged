@@ -288,7 +288,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 			if(doesPlayerKnowCraft(user) && canCraft() && toolType.equalsIgnoreCase(toolTypeRequired))
 			{
 				float mod = 1.0F;
-				if(hammerTier <= hammerTierRequired)
+				if(hammerTier < hammerTierRequired)
 				{
 					mod = 2.0F;
 					if(rand.nextInt(5) == 0)
@@ -376,7 +376,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
             		getNBT(result).setString("MF_CraftedByName", lastPlayerHit);
             	}
             	ItemStack out = ItemHeated.createHotItem(result, temp);
-            	if(inventory[output] == null)
+            	if(inventory[output] == null || (inventory[output].stackSize == 1 && SpecialForging.getItemDesign(inventory[output]) != null) )
             	{
             		addXP(lastHit);
             		this.inventory[output] = out;
@@ -490,6 +490,19 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 			if(nbt != null)
 			{
 				result.setTagCompound((NBTTagCompound) nbt);
+			}
+		}
+		else
+		{
+			Item special = SpecialForging.getSpecialCraft(SpecialForging.getItemDesign(inventory[getSizeInventory()-1]), result);
+			if(special != null)
+			{
+				NBTBase nbt = !(result.hasTagCompound()) ? null : result.getTagCompound().copy();
+				result = new ItemStack(special, result.stackSize, result.getItemDamage());
+				if(nbt != null)
+				{
+					result.setTagCompound((NBTTagCompound) nbt);
+				}
 			}
 		}
 		
@@ -723,7 +736,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
 					resSlot = heated;
 				}
 			}
-			if(!resSlot.isItemEqual(result))
+			if(!resSlot.isItemEqual(result) && (SpecialForging.getItemDesign(resSlot) == null || resSlot.stackSize >1) )
 			{
 				return false;
 			}

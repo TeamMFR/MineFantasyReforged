@@ -851,6 +851,19 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage)
 	{
+		return attackEntityFrom(source, damage, true);
+	}
+	/**
+	 * Modified attackEntityFrom
+	 * @param shouldPass is used to determine if the wearer should take the hit
+	 */
+	public boolean attackEntityFrom(DamageSource source, float damage, boolean shouldPass)
+	{
+		if(shouldPass && this.riddenByEntity != null)
+		{
+			return this.riddenByEntity.attackEntityFrom(source, damage);
+		}
+		
 		if(source.isExplosion())
 		{
 			this.noMoveTime = 20;
@@ -876,7 +889,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 		
 		if(user != this)
 		{
-			this.attackEntityFrom(src, damage);
+			this.attackEntityFrom(src, damage, false);
 		}
 		
 		float AC = 2.0F;

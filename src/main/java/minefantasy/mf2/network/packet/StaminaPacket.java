@@ -30,16 +30,12 @@ public class StaminaPacket extends PacketMF
         value[3] = packet.readFloat();
         username = ByteBufUtils.readUTF8String(packet);
         
-        if (username != null) 
+        if (username != null && player.getCommandSenderName().equalsIgnoreCase(username)) 
         {
-            EntityPlayer entity = player.worldObj .getPlayerEntityByName(username);
-            if(entity != null)
-            {
-	            StaminaBar.setStaminaValue(entity, value[0]);
-	            StaminaBar.setMaxStamina(entity, value[1]);
-	            StaminaBar.setFlashTime(entity, value[2]);
-	            StaminaBar.setBonusStamina(entity, value[3]);
-            }
+            StaminaBar.setStaminaValue(player, value[0]);
+            StaminaBar.setMaxStamina(player, value[1]);
+            StaminaBar.setFlashTime(player, value[2]);
+            StaminaBar.setBonusStamina(player, value[3]);
          }
 	}
 

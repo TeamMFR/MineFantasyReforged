@@ -39,7 +39,7 @@ public class KnowledgeListMF
 	//BASICS -FREE
 	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney, tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker, dragons, minotaurs;
 	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, bigfurn, blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel, smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
-    public static InformationBase bellows, trough, forge, anvil, bar, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, /*craftOrnateWeapons, craftAdvOrnateWeapons,*/ craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
+    public static InformationBase bellows, trough, forge, anvil, bar, apron, craftTools, craftAdvTools, craftWeapons, craftAdvWeapons, arrows, craftOrnate, craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin, arrowsBroad, repair_basic, repair_advanced, repair_ornate;
 	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner, advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb, stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian, mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo, crossScope, crossBayonet, cogArmour, compPlate;
     public static InformationBase constructionPts, refined_planks, reinforced_stone, clay_wall, glass, brickworks, decorated_stone, bars, thatch, easyRefine, paint_brush, tool_rack, food_box, ammo_box, big_box, bed_roll;
     public static InformationBase toughness, fitness, armourpro, parrypro, counteratt, autoparry, scrapper, firstaid, doctor;
@@ -83,7 +83,7 @@ public class KnowledgeListMF
         encrusted = (new InformationBase("smeltEncrusted",  			6, 5, 2, ComponentListMF.diamond_shards, smeltSteel)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 35).setDescriptValues(getMetalTier("encrusted"));
         obsidian = (new InformationBase("smeltObsidian",  				6, 3, 2, ComponentListMF.ingots[19], smeltSteel)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 40).setDescriptValues(getMetalTier("obsidian"));
         smeltBlackSteel = (new InformationBase("smeltBlackSteel",		4, 7, 3, ComponentListMF.ingots[7], smeltSteel)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50).setDescriptValues(getMetalTier("blacksteel"));
-        smeltDragonforge = (new InformationBase("smeltDragonforge",	6, 7, 1, ComponentListMF.dragon_heart, null)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
+        smeltDragonforge = (new InformationBase("smeltDragonforge",	-4, -1, 1, ComponentListMF.dragon_heart, null)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
         smeltRedSteel = (new InformationBase("smeltRedSteel", 		3, 9, 5, ComponentListMF.ingots[10], smeltBlackSteel)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 65).setDescriptValues(getMetalTier("redsteel"));
         smeltBlueSteel = (new InformationBase("smeltBlueSteel", 		5, 9, 5, ComponentListMF.ingots[12], smeltBlackSteel)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 65).setDescriptValues(getMetalTier("bluesteel"));
         smeltMithril = (new InformationBase("smeltMithril", 			5, 12, 3, ComponentListMF.ingots[14], null)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 75).setDescriptValues(getMetalTier("mithril"));
@@ -107,8 +107,7 @@ public class KnowledgeListMF
         craftAdvWeapons = (new InformationBase("craftAdvWeapons",     -5, 1, 0, CustomToolListMF.standard_battleaxe, craftWeapons)).registerStat().setPage(artisanry).setUnlocked();
         arrows = (new InformationBase("arrows", 		  		   		 -3, 4, 0, CustomToolListMF.standard_arrow, bar)).registerStat().setPage(artisanry).setUnlocked();
         
-        //craftOrnateWeapons = (new InformationBase("craftOrnateWeapons",  			-3, -1, 10, CustomToolListMF.dragonforged_sword, craftWeapons)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 25);
-        //craftAdvOrnateWeapons = (new InformationBase("craftAdvOrnateWeapons", 	-5, -1, 15, CustomToolListMF.dragonforged_battleaxe, craftOrnateWeapons)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 30);
+        craftOrnate = (new InformationBase("craftOrnate",  			-3, -1, 1, ComponentListMF.ornate_items, null)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 35);
         craftArmourLight = (new InformationBase("craftArmourLight", 			-3, 3, 1, ArmourListMF.armour(ArmourListMF.leather, 3, 1), anvil)).registerStat().setPage(artisanry).setUnlocked();
         craftArmourMedium = (new InformationBase("craftArmourMedium", 		-4, 3, 1, CustomArmourListMF.standard_chain_chest, craftArmourLight)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 0);
         craftArmourHeavy = (new InformationBase("craftArmourHeavy",       	-5, 3, 3, CustomArmourListMF.standard_plate_chest, craftArmourMedium)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10);
@@ -236,7 +235,7 @@ public class KnowledgeListMF
     public static final ArrayList<IRecipe> plankRecipe = new ArrayList<IRecipe>();
     public static final ArrayList<IRecipe> stoneBricksR = new ArrayList<IRecipe>();
     
-    public static IAnvilRecipe hunkR, ingotR, bucketR;
+    public static IAnvilRecipe hunkR, ingotR, bucketR, crestR;
     public static final ArrayList<IAnvilRecipe> barR = new ArrayList<IAnvilRecipe>();
     public static final ArrayList<IAnvilRecipe> baringotR = new ArrayList<IAnvilRecipe>();
     

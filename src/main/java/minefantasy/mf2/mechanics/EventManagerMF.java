@@ -1140,7 +1140,7 @@ public class EventManagerMF
 			if(event.renderer instanceof RenderPlayer)
 			{
 				RenderPlayer RP = (RenderPlayer)event.renderer;
-				ModelBiped[] layers = new ModelBiped[]{RP.modelBipedMain, RP.modelArmor, RP.modelArmorChestplate};
+				ModelBiped[] layers = new ModelBiped[]{RP.modelArmor, RP.modelArmorChestplate};
 				
 				for(ModelBiped model : layers)
 				{

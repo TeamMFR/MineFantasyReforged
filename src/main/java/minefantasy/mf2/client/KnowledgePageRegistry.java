@@ -163,8 +163,9 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.anvil.addPages(assembleSimpleImgPage("smithy_example", "knowledge.anvil.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneAnvilRecipe), new EntryPageRecipeAnvil(ForgingRecipes.recipeMap.get("anvilCrafting")), new EntryPageText( "knowledge.anvil.2"), new EntryPageImage("textures/gui/knowledge/anvilGuiExample.png", 128, 128, ""), new EntryPageText( "knowledge.anvil.3"), new EntryPageText( "knowledge.anvil.4"), new EntryPageText( "knowledge.anvil.5"));
 		KnowledgeListMF.anvil.addPages(new EntryPageText("knowledge.anvil.6"), new EntryPageImage("textures/gui/knowledge/qualityExample.png", 128, 128, "knowledge.anvil.7"));
 				
-	    KnowledgeListMF.smeltDragonforge.addPages(new EntryPageText("knowledge.smeltDragonforge.1"));
-	   
+	    KnowledgeListMF.smeltDragonforge.addPages(new EntryPageText("knowledge.smeltDragonforge.1"), new EntryPageText("knowledge.smeltDragonforge.2"));
+	    KnowledgeListMF.craftOrnate.addPages(new EntryPageText("knowledge.craftOrnate.1"), new EntryPageRecipeAnvil(KnowledgeListMF.crestR));
+	    
 	    KnowledgeListMF.craftArmourLight.addPages(new EntryPageText("knowledge.craftArmourLight.1"), new EntryPageText("knowledge.craftArmourLight.2"), new EntryPageRecipeCarpenter(KnowledgeListMF.roughHelmetR), new EntryPageRecipeCarpenter(KnowledgeListMF.roughChestR), new EntryPageRecipeCarpenter(KnowledgeListMF.roughLegsR), new EntryPageRecipeCarpenter(KnowledgeListMF.roughBootsR));
 	    KnowledgeListMF.craftArmourLight.addPages(new EntryPageText("knowledge.craftArmourLight.3"));
 	    KnowledgeListMF.craftArmourLight.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.padding[0]), new EntryPageRecipeCarpenter(KnowledgeListMF.padding[1]), new EntryPageRecipeCarpenter(KnowledgeListMF.padding[2]), new EntryPageRecipeCarpenter(KnowledgeListMF.padding[3]));

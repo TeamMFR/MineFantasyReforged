@@ -24,6 +24,12 @@ public class ResearchLogic
 		}
 		return false;
     }
+	public static void forceUnlock(EntityPlayer player, InformationBase base)
+    {
+		NBTTagCompound nbt = getNBT(player);
+		nbt.setBoolean("Research_" + base.getUnlocalisedName(), true);
+    }
+	
 	public static boolean tryUnlock(EntityPlayer player, InformationBase base)
     {
 		if(base.isPreUnlocked() || !canUnlockInfo(player, base))
