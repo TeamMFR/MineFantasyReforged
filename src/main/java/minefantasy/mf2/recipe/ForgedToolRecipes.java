@@ -215,10 +215,8 @@ public class ForgedToolRecipes
 		MineFantasyAPI.addCarpenterToolRecipe(artisanry, CustomToolListMF.standard_arrow, "arrows", "dig.wood", 1, new Object[]
 		{
 			"H",
-			"S",
 			"F",
 			
-			'S', Items.stick,
 			'F', ComponentListMF.fletching,
 			'H', ComponentListMF.arrowhead
 		}));
@@ -226,10 +224,8 @@ public class ForgedToolRecipes
 		MineFantasyAPI.addCarpenterToolRecipe(artisanry, CustomToolListMF.standard_arrow_bodkin, "arrowsBodkin", "dig.wood", 1, new Object[]
 		{
 			"H",
-			"S",
 			"F",
 			
-			'S', Items.stick,
 			'F', ComponentListMF.fletching,
 			'H', ComponentListMF.bodkinhead
 		}));
@@ -237,16 +233,14 @@ public class ForgedToolRecipes
 		MineFantasyAPI.addCarpenterToolRecipe(artisanry, CustomToolListMF.standard_arrow_broad, "arrowsBroad", "dig.wood", 1, new Object[]
 		{
 			"H",
-			"S",
 			"F",
 			
-			'S', Items.stick,
 			'F', ComponentListMF.fletching,
 			'H', ComponentListMF.broadhead
 		}));
-		Salvage.addSalvage(CustomToolListMF.standard_arrow, ComponentListMF.arrowhead, Items.stick, ComponentListMF.fletching);
-		Salvage.addSalvage(CustomToolListMF.standard_arrow_bodkin, ComponentListMF.bodkinhead, Items.stick, ComponentListMF.fletching);
-		Salvage.addSalvage(CustomToolListMF.standard_arrow_broad, ComponentListMF.broadhead, Items.stick, ComponentListMF.fletching);
+		Salvage.addSalvage(CustomToolListMF.standard_arrow, ComponentListMF.arrowhead, ComponentListMF.fletching);
+		Salvage.addSalvage(CustomToolListMF.standard_arrow_bodkin, ComponentListMF.bodkinhead, ComponentListMF.fletching);
+		Salvage.addSalvage(CustomToolListMF.standard_arrow_broad, ComponentListMF.broadhead, ComponentListMF.fletching);
 		
 	}
 

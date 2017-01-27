@@ -218,7 +218,6 @@ public class ItemComponentMF extends Item implements ITieredComponent
     }
     
     @Override
-    
     public void addInformation(ItemStack item, EntityPlayer user, List list, boolean extra) 
     {
     	

@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.archery.IArrowMF;
 import minefantasy.mf2.api.archery.IArrowRetrieve;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.helpers.TacticalManager;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.weapon.IDamageType;
 import minefantasy.mf2.config.ConfigExperiment;
@@ -15,6 +16,7 @@ import minefantasy.mf2.config.ConfigWeapon;
 import minefantasy.mf2.item.archery.ArrowType;
 import minefantasy.mf2.item.gadget.EnumExplosiveType;
 import minefantasy.mf2.item.gadget.EnumPowderType;
+import minefantasy.mf2.mechanics.CombatMechanics;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -399,9 +401,10 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 				if (movingobjectposition.entityHit != null) 
 				{
 					f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ) / velocityModifier;
-                   // int k = MathHelper.ceiling_double_int((double)f2 * (this.getHitDamage()/3F));
 					
 					float dam = Math.max(0.1F, this.getHitDamage() * firepower);//(getDamageModifier()*power) / 10F * (float)k;
+					
+					dam *= getDamageModifier(movingobjectposition.entityHit);
 					
 					if (this.getIsCritical())
 					{
@@ -619,6 +622,12 @@ public class EntityArrowMF extends EntityArrow implements IProjectile, IDamageTy
 			this.setPosition(this.posX, this.posY, this.posZ);
 			this.func_145775_I();
 		}
+	}
+
+	private float getDamageModifier(Entity target) 
+	{
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(getArrowStack());
+		return CombatMechanics.getSpecialModifier(material, "standard", target, true);
 	}
 
 	private float getModifiedVelocity() 

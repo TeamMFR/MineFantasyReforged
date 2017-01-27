@@ -2,46 +2,16 @@ package minefantasy.mf2.item.list.styles;
 
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.crafting.exotic.SpecialForging;
-import minefantasy.mf2.item.archery.ArrowType;
-import minefantasy.mf2.item.archery.EnumBowType;
-import minefantasy.mf2.item.archery.ItemArrowMF;
-import minefantasy.mf2.item.archery.ItemBowMF;
+import minefantasy.mf2.item.archery.*;
 import minefantasy.mf2.item.armour.ItemArmourMF;
 import minefantasy.mf2.item.armour.ItemCustomArmour;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.item.list.CustomToolListMF;
-import minefantasy.mf2.item.tool.ItemAxeMF;
-import minefantasy.mf2.item.tool.ItemHoeMF;
-import minefantasy.mf2.item.tool.ItemPickMF;
-import minefantasy.mf2.item.tool.ItemShearsMF;
-import minefantasy.mf2.item.tool.ItemSpadeMF;
-import minefantasy.mf2.item.tool.advanced.ItemHandpick;
-import minefantasy.mf2.item.tool.advanced.ItemHvyPick;
-import minefantasy.mf2.item.tool.advanced.ItemHvyShovel;
-import minefantasy.mf2.item.tool.advanced.ItemLumberAxe;
-import minefantasy.mf2.item.tool.advanced.ItemMattock;
-import minefantasy.mf2.item.tool.advanced.ItemScythe;
-import minefantasy.mf2.item.tool.advanced.ItemTrowMF;
-import minefantasy.mf2.item.tool.crafting.ItemBasicCraftTool;
-import minefantasy.mf2.item.tool.crafting.ItemHammer;
-import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
-import minefantasy.mf2.item.tool.crafting.ItemNeedle;
-import minefantasy.mf2.item.tool.crafting.ItemSaw;
-import minefantasy.mf2.item.tool.crafting.ItemSpanner;
-import minefantasy.mf2.item.tool.crafting.ItemTongs;
-import minefantasy.mf2.item.weapon.ItemBattleaxeMF;
-import minefantasy.mf2.item.weapon.ItemDagger;
-import minefantasy.mf2.item.weapon.ItemGreatswordMF;
-import minefantasy.mf2.item.weapon.ItemHalbeardMF;
-import minefantasy.mf2.item.weapon.ItemKatanaMF;
-import minefantasy.mf2.item.weapon.ItemLance;
-import minefantasy.mf2.item.weapon.ItemMaceMF;
-import minefantasy.mf2.item.weapon.ItemSpearMF;
-import minefantasy.mf2.item.weapon.ItemSwordMF;
-import minefantasy.mf2.item.weapon.ItemWaraxeMF;
-import minefantasy.mf2.item.weapon.ItemWarhammerMF;
-import minefantasy.mf2.item.weapon.ItemWeaponMF;
+import minefantasy.mf2.item.tool.*;
+import minefantasy.mf2.item.tool.advanced.*;
+import minefantasy.mf2.item.tool.crafting.*;
+import minefantasy.mf2.item.weapon.*;
 import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item.ToolMaterial;
@@ -85,6 +55,7 @@ public class OrnateStyle
 		String design = "ornate";
 		CreativeTabs tab = CreativeTabMF.tabOrnate;
 		ToolMaterial mat = ornate;
+		float ratingMod = 0.8F;
 		
 		ornate_dagger = new ItemDagger(design+"_dagger", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1);
 		ornate_sword = new ItemSwordMF(design+"_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1);
@@ -99,51 +70,51 @@ public class OrnateStyle
 		ornate_lance = new ItemLance(design+"_lance", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1);
 		
 		
-		ornate_bow = (ItemBowMF) new ItemBowMF(design+"_bow", EnumBowType.SHORTBOW).setCustom(design).setCreativeTab(tab);
+		ornate_bow = (ItemBowMF) new ItemBowMF(design+"_bow", mat, EnumBowType.SHORTBOW, 1).setCustom(design).setCreativeTab(tab);
 		
 		//Tools
-		ornate_pick = (ItemPickMF) new ItemPickMF(design+"_pick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_axe = (ItemAxeMF) new ItemAxeMF(design+"_axe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_spade = (ItemSpadeMF) new ItemSpadeMF(design+"_spade", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_hoe = (ItemHoeMF) new ItemHoeMF(design+"_hoe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
+		ornate_pick = (ItemPickMF) new ItemPickMF(design+"_pick", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_axe = (ItemAxeMF) new ItemAxeMF(design+"_axe", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_spade = (ItemSpadeMF) new ItemSpadeMF(design+"_spade", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_hoe = (ItemHoeMF) new ItemHoeMF(design+"_hoe", mat, 0).setCustom(design).setCreativeTab(tab);
 		
-		ornate_handpick = (ItemHandpick) new ItemHandpick(design+"_handpick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_hvypick = (ItemHvyPick) new ItemHvyPick(design+"_hvypick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_trow = (ItemTrowMF) new ItemTrowMF(design+"_trow", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_hvyshovel = (ItemHvyShovel) new ItemHvyShovel(design+"_hvyshovel", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_scythe = (ItemScythe) new ItemScythe(design+"_scythe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_mattock = (ItemMattock) new ItemMattock(design+"_mattock", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-		ornate_lumber = (ItemLumberAxe) new ItemLumberAxe(design+"_lumber", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
+		ornate_handpick = (ItemHandpick) new ItemHandpick(design+"_handpick", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_hvypick = (ItemHvyPick) new ItemHvyPick(design+"_hvypick", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_trow = (ItemTrowMF) new ItemTrowMF(design+"_trow", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_hvyshovel = (ItemHvyShovel) new ItemHvyShovel(design+"_hvyshovel", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_scythe = (ItemScythe) new ItemScythe(design+"_scythe", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_mattock = (ItemMattock) new ItemMattock(design+"_mattock", mat, 0).setCustom(design).setCreativeTab(tab);
+		ornate_lumber = (ItemLumberAxe) new ItemLumberAxe(design+"_lumber", mat, 0).setCustom(design).setCreativeTab(tab);
 		
 		//Crafters
-		ornate_hammer = (ItemHammer) new ItemHammer(design+"_hammer", ToolMaterial.IRON, false, 0, 0).setCustom(design).setCreativeTab(tab);
-		ornate_hvyhammer = (ItemHammer) new ItemHammer(design+"_hvyhammer", ToolMaterial.IRON, true, 0, 0).setCustom(design).setCreativeTab(tab);
-		ornate_shears = (ItemShearsMF) new ItemShearsMF(design+"_shears", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
-		ornate_knife = (ItemKnifeMF) new ItemKnifeMF(design+"_knife", ToolMaterial.IRON, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
-		ornate_needle = (ItemNeedle) new ItemNeedle(design+"_needle", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
-		ornate_saw = (ItemSaw) new ItemSaw(design+"_saw", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
-		ornate_tongs = (ItemTongs) new ItemTongs(design+"_tongs", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
+		ornate_hammer = (ItemHammer) new ItemHammer(design+"_hammer", mat, false, 0, 0).setCustom(design).setCreativeTab(tab);
+		ornate_hvyhammer = (ItemHammer) new ItemHammer(design+"_hvyhammer", mat, true, 0, 0).setCustom(design).setCreativeTab(tab);
+		ornate_shears = (ItemShearsMF) new ItemShearsMF(design+"_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+		ornate_knife = (ItemKnifeMF) new ItemKnifeMF(design+"_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
+		ornate_needle = (ItemNeedle) new ItemNeedle(design+"_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+		ornate_saw = (ItemSaw) new ItemSaw(design+"_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+		ornate_tongs = (ItemTongs) new ItemTongs(design+"_tongs", mat, 0).setCustom(design).setCreativeTab(tab);
 		ornate_spanner = (ItemSpanner) new ItemSpanner(design+"_spanner", 0, 0).setCustom(design).setCreativeTab(tab);
 		
-		ornate_chain_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "chain_helmet", ArmourDesign.CHAINMAIL, 0, "chain_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_chain_chest = (ItemCustomArmour) new ItemCustomArmour(design, "chain_chest", ArmourDesign.CHAINMAIL, 1, "chain_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_chain_legs = (ItemCustomArmour) new ItemCustomArmour(design, "chain_legs", ArmourDesign.CHAINMAIL, 2, "chain_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_chain_boots = (ItemCustomArmour) new ItemCustomArmour(design, "chain_boots", ArmourDesign.CHAINMAIL, 3, "chain_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+		ornate_chain_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "chain_helmet", ArmourDesign.CHAINMAIL, 0, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_chain_chest = (ItemCustomArmour) new ItemCustomArmour(design, "chain_chest", ArmourDesign.CHAINMAIL, 1, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_chain_legs = (ItemCustomArmour) new ItemCustomArmour(design, "chain_legs", ArmourDesign.CHAINMAIL, 2, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_chain_boots = (ItemCustomArmour) new ItemCustomArmour(design, "chain_boots", ArmourDesign.CHAINMAIL, 3, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
-		ornate_scale_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, 0, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_scale_chest = (ItemCustomArmour) new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, 1, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-	    ornate_scale_legs = (ItemCustomArmour) new ItemCustomArmour(design, "scale_legs", ArmourDesign.SCALEMAIL, 2, "scale_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_scale_boots = (ItemCustomArmour) new ItemCustomArmour(design, "scale_boots", ArmourDesign.SCALEMAIL, 3, "scale_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+		ornate_scale_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, 0, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_scale_chest = (ItemCustomArmour) new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, 1, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+	    ornate_scale_legs = (ItemCustomArmour) new ItemCustomArmour(design, "scale_legs", ArmourDesign.SCALEMAIL, 2, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_scale_boots = (ItemCustomArmour) new ItemCustomArmour(design, "scale_boots", ArmourDesign.SCALEMAIL, 3, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		
-		ornate_splint_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "splint_helmet", ArmourDesign.SPLINTMAIL, 0, "splint_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_splint_chest = (ItemCustomArmour) new ItemCustomArmour(design, "splint_chest", ArmourDesign.SPLINTMAIL, 1, "splint_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_splint_legs = (ItemCustomArmour) new ItemCustomArmour(design, "splint_legs", ArmourDesign.SPLINTMAIL, 2, "splint_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_splint_boots = (ItemCustomArmour) new ItemCustomArmour(design, "splint_boots", ArmourDesign.SPLINTMAIL, 3, "splint_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+		ornate_splint_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "splint_helmet", ArmourDesign.SPLINTMAIL, 0, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_splint_chest = (ItemCustomArmour) new ItemCustomArmour(design, "splint_chest", ArmourDesign.SPLINTMAIL, 1, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_splint_legs = (ItemCustomArmour) new ItemCustomArmour(design, "splint_legs", ArmourDesign.SPLINTMAIL, 2, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_splint_boots = (ItemCustomArmour) new ItemCustomArmour(design, "splint_boots", ArmourDesign.SPLINTMAIL, 3, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		
-		ornate_plate_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "plate_helmet", ArmourDesign.FIELDPLATE, 0, "plate_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_plate_chest = (ItemCustomArmour) new ItemCustomArmour(design, "plate_chest", ArmourDesign.FIELDPLATE, 1, "plate_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_plate_legs = (ItemCustomArmour) new ItemCustomArmour(design, "plate_legs", ArmourDesign.FIELDPLATE, 2, "plate_layer_2", 0).setSpecial("Dragonforged").setCreativeTab(tab);
-		ornate_plate_boots = (ItemCustomArmour) new ItemCustomArmour(design, "plate_boots", ArmourDesign.FIELDPLATE, 3, "plate_layer_1", 0).setSpecial("Dragonforged").setCreativeTab(tab);
+		ornate_plate_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "plate_helmet", ArmourDesign.FIELDPLATE, 0, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_plate_chest = (ItemCustomArmour) new ItemCustomArmour(design, "plate_chest", ArmourDesign.FIELDPLATE, 1, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_plate_legs = (ItemCustomArmour) new ItemCustomArmour(design, "plate_legs", ArmourDesign.FIELDPLATE, 2, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ornate_plate_boots = (ItemCustomArmour) new ItemCustomArmour(design, "plate_boots", ArmourDesign.FIELDPLATE, 3, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 	}
 	
 	public static void loadCrafting()

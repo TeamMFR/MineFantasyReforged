@@ -4,14 +4,12 @@ import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.block.decor.ItemBedMF;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigHardcore;
-import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.item.ItemBandage;
 import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.ItemResearchBook;
 import minefantasy.mf2.item.ItemSkillBook;
 import minefantasy.mf2.item.ItemWorldGenPlacer;
 import minefantasy.mf2.item.food.FoodListMF;
-import minefantasy.mf2.item.gadget.ItemArtefactLoot;
 import minefantasy.mf2.item.gadget.ItemBomb;
 import minefantasy.mf2.item.gadget.ItemClimbingPick;
 import minefantasy.mf2.item.gadget.ItemCrossbow;
@@ -23,6 +21,7 @@ import minefantasy.mf2.item.gadget.ItemMine;
 import minefantasy.mf2.item.gadget.ItemParachute;
 import minefantasy.mf2.item.gadget.ItemSpyglass;
 import minefantasy.mf2.item.gadget.ItemSyringe;
+import minefantasy.mf2.item.gadget.MobSpawnerMF;
 import minefantasy.mf2.item.tool.ItemAxeMF;
 import minefantasy.mf2.item.tool.ItemHoeMF;
 import minefantasy.mf2.item.tool.ItemLighterMF;
@@ -125,6 +124,7 @@ public class ToolListMF
 	public static Item bedroll = new ItemBedMF("bedroll");
 	
 	public static Item debug_place = new ItemWorldGenPlacer();
+	public static Item debug_mob = new MobSpawnerMF();
 	public static void load() 
 	{
 		if(ConfigHardcore.HCCWeakItems)

@@ -335,7 +335,7 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.craftAdvWeapons.addPages(new EntryPageText("knowledge.lance.info"), new EntryPageRecipeAnvil(KnowledgeListMF.lanceR));
 	    
 	    KnowledgeListMF.arrows.addPages(new EntryPageText("knowledge.arrows.1"));
-	    KnowledgeListMF.arrows.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.fletchingR));
+	    KnowledgeListMF.arrows.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.fletchingR), new EntryPageRecipeCarpenter(KnowledgeListMF.fletchingR2));
 	    KnowledgeListMF.arrows.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.arrowheadR));
 	    KnowledgeListMF.arrows.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.arrowR));
 	    KnowledgeListMF.arrowsBodkin.addPages(new EntryPageText("knowledge.arrowsBodkin.1"));

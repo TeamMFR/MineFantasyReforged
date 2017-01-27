@@ -73,8 +73,8 @@ public class MetalMaterial extends CustomMaterial
 		getOrAddMetal("RedSteel",       6, 8.0F,   0.8F, 6.0F,  50F,	3.5F, 		219,  56,  56).setCrafterTiers(5).setMeltingPoint(2000).setArmourStats(0.9F, 0.9F, 1.2F);//Better AC and Piercing
 		
 		//Precious Mats
-		getOrAddMetal("Silver", 	    0, 1.0F,   1.0F, 0.0F,  10F, 	3.5F, 		155, 206, 205).setMeltingPoint(1200);
-		getOrAddMetal("Gold", 		    0, 1.0F,   1.0F, 0.0F,  10F, 	3.5F, 		243, 222,  49).setMeltingPoint(1200);
+		getOrAddMetal("Silver", 	    0, 2.5F,   1.0F, 0.0F,  40F, 	3.5F, 		155, 206, 205).setMeltingPoint(1200);
+		getOrAddMetal("Gold", 		    0, 2.0F,   1.0F, 0.0F,  40F, 	3.5F, 		243, 222,  49).setMeltingPoint(1200);
 		
 		//Mythic Mats  Name          	T  Dur     Flx 	 Shp   	Rst		 Wg
 		getOrAddMetal("Mithril",        7, 10.0F,  0.8F, 7.0F,  90F,	2.0F, 		250, 180, 250).setMeltingPoint(2500).setCrafterTiers(6).setRarity(1);
@@ -83,12 +83,12 @@ public class MetalMaterial extends CustomMaterial
 		getOrAddMetal("Ignotumite",     8, 15.0F,  0.8F, 14.0F, 85F,	3.5F, 		20 , 255, 100).setMeltingPoint(3000).setCrafterTiers(7).setRarity(2).setUnbreakable();
 		getOrAddMetal("Ender",          8, 15.0F,  0.8F, 12.0F, 90F,	3.0F, 		255, 63 , 243).setMeltingPoint(3000).setCrafterTiers(7).setRarity(2).setUnbreakable();
 		
-		//Non MF
+		//Non-MF
 		getOrAddMetal("StainlessSteel", 3, 5.0F,   1.0F, 2.5F,  40F,	2.5F, 		188, 188, 198).setMeltingPoint(1600).setCrafterTiers(3);
 		getOrAddMetal("Titanium",       6, 10.0F,  1.0F, 4.0F,  50F,	1.0F, 		190, 190, 160).setMeltingPoint(2000).setCrafterTiers(3);
+		
 		getOrAddMetal("Thaumium", 		4, 4.0F,   1.0F, 3.0F,  65F,	2.5F, 		115, 65 , 183).setMeltingPoint(1500).setCrafterTiers(3);
 		getOrAddMetal("Void", 		    4, 10.0F,  2.0F, 4.0F,  75F,	1.0F, 		75 , 45 , 75).setMeltingPoint(1800).setCrafterTiers(3);
-		
 		getOrAddMetal("Manasteel", 		2, 3.0F,   1.0F, 2.0F,  40F,	2.5F, 		88 , 195, 231).setMeltingPoint(1500).setArmourStats(1.0F, 1.2F, 1.0F).setCrafterTiers(2);//More Resistant, Stronger than iron
 		getOrAddMetal("ElvenElementium",3, 4.0F,   1.0F, 2.5F,  40F,	2.5F, 		235, 108, 235).setMeltingPoint(1800).setArmourStats(1.1F, 1.0F, 1.1F).setCrafterTiers(2);//Similar to Manasteel, Slightly stronger
 		getOrAddMetal("Terrasteel", 	4, 6.0F,   1.0F, 4.0F,  40F,	2.5F, 		88 , 250, 150).setMeltingPoint(1500).setArmourStats(1.0F, 0.9F, 1.0F).setCrafterTiers(3);

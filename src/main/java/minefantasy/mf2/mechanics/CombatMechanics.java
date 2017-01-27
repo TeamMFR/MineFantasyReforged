@@ -331,24 +331,9 @@ public class CombatMechanics
     			dam = ((IDamageModifier)weapon.getItem()).modifyDamage(weapon, user, target, dam, properHit);
     		}
     		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(weapon);
-    		if(material != null && material.name.equalsIgnoreCase("silver"))
-    		{
-    			dam = hurtUndead(user, target, dam, properHit);
-    		}
     		String weaponType = CustomToolHelper.getCustomStyle(weapon);
-    		if(weaponType != null)
-    		{
-    			special = weaponType;
-    		}
+    		dam *= getSpecialModifier(material, weaponType, target, true);
     	}
-    	if(special.equalsIgnoreCase("dragonforged") && TacticalManager.isDragon((EntityLivingBase)target))
-		{
-			dam *= specialDragonModifier;
-		}
-    	if(special.equalsIgnoreCase("ornate") && TacticalManager.isUnholyCreature((EntityLivingBase)target))
-		{
-			dam *= specialOrnateModifier;
-		}
 		return dam;
 	}
 	
@@ -439,49 +424,18 @@ public class CombatMechanics
 		}
 		return dam + getStrengthEnhancement(user);
 	}
-
-	private boolean isMaterialUndeadKiller(ItemStack weapon, ToolMaterial material) 
-    {
-		CustomMaterial mat = CustomToolHelper.getCustomPrimaryMaterial(weapon);
-		if(mat != null && mat.name.equalsIgnoreCase("silver"))
-		{
-			return true;
-		}
-		return material == BaseMaterialMF.silver.getToolConversion() || material == BaseMaterialMF.ornate.getToolConversion();
-	}
-	private float hurtUndead(Entity entityHitting, Entity entityHit, float dam, boolean properHit) 
-    {
-    	if(entityHit instanceof EntityLivingBase && TacticalManager.isUnholyCreature((EntityLivingBase)entityHit))
-		{
-    		EntityLivingBase living = (EntityLivingBase)entityHit;
-    		dam *= specialUnholyModifier;
-    		if(properHit)
-			{
-	    		entityHit.playSound("random.fizz", 0.5F, 0.5F);
-	    		living.addPotionEffect(new PotionEffect(Potion.weakness.id, 1200, 2));
-	    		if(rand.nextInt(10) == 0)
-	    		{
-	    			living.setFire(3);
-	    		}
-	    		if(living.getHealth() <= living.getHealth()/2F && rand.nextInt(20) == 0)
-	    		{
-	    			dam *= 100F;
-	    			living.worldObj.createExplosion(living, living.posX, living.posY+living.getEyeHeight(), living.posZ, 0.0F, false);
-	    		}
-			}
-		}
-		if(entityHit.getClass().getName().contains("Werewolf"))
-		{
-			dam *= specialWerewolfModifier;
-			
-			if(properHit)
-			{
-	    		entityHit.playSound("random.fizz", 0.6F, 0.5F);
-			}
-		}
-    	return dam;
-	}
 	
+	public static void applyUndeadBane(EntityLivingBase living) 
+	{
+		living.playSound("random.fizz", 0.5F, 0.5F);
+		living.addPotionEffect(new PotionEffect(Potion.weakness.id, 1200, 2));
+		living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200, 2));
+		if(rand.nextInt(5) == 0)
+		{
+			living.setFire(3);
+		}
+	}
+
 	private void onOfficialHit(DamageSource src, EntityLivingBase target, float damage)
 	{
 		Entity source = src.getSourceOfDamage();
@@ -1091,5 +1045,54 @@ public class CombatMechanics
 			mod += 3F;
 		}
 		return Math.max(-0.5F, mod);
+	}
+	
+	public static float getSpecialModifier(CustomMaterial material, String design, Entity target, boolean addEffect)
+	{
+		if(target == null)return 1.0F;
+		
+		float modifier = 1.0F;
+		
+		if(design != null)
+		{
+			if(design.equalsIgnoreCase("dragonforged"))
+			{
+				if(TacticalManager.isDragon(target))
+				{
+					modifier *= specialDragonModifier;
+				}
+			}
+			
+			if(design.equalsIgnoreCase("ornate"))
+			{
+				if(TacticalManager.isUnholyCreature(target))
+				{
+					modifier *= specialOrnateModifier;
+				}
+			}
+		}
+		
+		if(material != null)
+		{
+			if(isSilverishMaterial(material.name) && target instanceof EntityLivingBase)
+			{
+				if(target.getClass().getName().contains("Werewolf"))
+				{
+					modifier *= specialWerewolfModifier;
+					applyUndeadBane((EntityLivingBase)target);
+				}
+				else if(TacticalManager.isUnholyCreature(target))
+				{
+					modifier *= specialUnholyModifier;
+					applyUndeadBane((EntityLivingBase)target);
+				}
+			}
+		}
+		
+		return modifier;
+	}
+	public static boolean isSilverishMaterial(String material)
+	{
+		return material.equalsIgnoreCase("silver");
 	}
 }

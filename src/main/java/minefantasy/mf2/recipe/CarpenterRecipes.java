@@ -1164,12 +1164,22 @@ public class CarpenterRecipes
 	{
 		//Fletching
 		KnowledgeListMF.fletchingR = 
-		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ComponentListMF.fletching, 8), "arrows", chopping, 4, new Object[]
+		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ComponentListMF.fletching, 16), "arrows", chopping, 4, new Object[]
 		{
-			"PFP",
-			" P ",
+			"T",
+			"F",
+			
 			'F', Items.feather,
+			'T', ComponentListMF.plank,
+		});
+		KnowledgeListMF.fletchingR2 = 
+		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ComponentListMF.fletching, 4), "arrows", chopping, 4, new Object[]
+		{
+			" T ",
+			"PPP",
+			
 			'P', Items.paper,
+			'T', ComponentListMF.plank,
 		});
 		
 		//BOMBS

@@ -15,6 +15,7 @@ import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.mechanics.CombatMechanics;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -32,18 +33,18 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemCustomArmour extends ItemArmourMF
 {
-	private String craftDesign;
-	private String specialDesign;
+	private String specialDesign = "standard";
+	private float ratingModifier = 1.0F;
 	public ItemCustomArmour(String craftDesign, String name, ArmourDesign AD, int slot, String tex, int rarity)
 	{
 		super(craftDesign + "_"+name, BaseMaterialMF.iron, AD, slot, craftDesign + "_"+tex, rarity);
 		this.setTextureName("minefantasy2:custom/apparel/" + craftDesign + "/"+craftDesign+"_"+name);
-		this.craftDesign = craftDesign;
+		this.specialDesign = craftDesign;
 		canRepair = false;
 	}
-	public ItemCustomArmour setSpecial(String special)
+	public ItemCustomArmour modifyRating(float rating)
 	{
-		this.specialDesign = special;
+		this.ratingModifier = rating;
 		return this;
 	}
 	@Override
@@ -63,7 +64,7 @@ public class ItemCustomArmour extends ItemArmourMF
 	@Override
 	public String getArmourTextureName(ItemStack stack, Entity entity, int slot, String type)
 	{
-		String tex = "minefantasy2:textures/models/armour/custom/" + craftDesign + "/"+texture;
+		String tex = "minefantasy2:textures/models/armour/custom/" + specialDesign + "/"+texture;
 		if(type == null)//bottom layer
 		{
 			return tex;//COLOUR LAYER
@@ -219,22 +220,18 @@ public class ItemCustomArmour extends ItemArmourMF
 		return true;
 	}
 	
-	private float getSpecialModifier(ItemStack armour, DamageSource source) 
+	@Override
+	protected float getSpecialModifier(ItemStack armour, DamageSource source) 
 	{
-		if(this.specialDesign.equalsIgnoreCase("dragonforged"))
-		{
-			if(source != null && TacticalManager.isDragon(source.getEntity()))
-			{
-				return CombatMechanics.specialDragonModifier;
-			}
-		}
-		if(this.specialDesign.equalsIgnoreCase("ornate"))
-		{
-			if(source != null && TacticalManager.isUnholyCreature(source.getEntity()))
-			{
-				return CombatMechanics.specialOrnateModifier;
-			}
-		}
-		return 1.0F;
+		float modifier = CombatMechanics.getSpecialModifier(this.getCustomMaterial(armour), this.specialDesign, source.getEntity(), false);
+		
+		MFLogUtil.logDebug("Modifier = " + modifier);
+		
+		return super.getSpecialModifier(armour, source) * modifier;
+	}
+	@Override
+	protected float getProtectionRatio(ItemStack item) 
+	{
+		return super.getProtectionRatio(item)*ratingModifier;
 	}
 }

@@ -290,7 +290,7 @@ public class KnowledgeListMF
     public static IAnvilRecipe hammerR, tongsR, hvyHammerR, needleR, sawsR, knifeR, spannerR;
     public static IAnvilRecipe arrowheadR, bodkinheadR, broadheadR, crossBoltR;
     
-    public static ICarpenterRecipe fletchingR, malletR, spoonR;
+    public static ICarpenterRecipe fletchingR, fletchingR2, malletR, spoonR;
     public static final ArrayList<ICarpenterRecipe> arrowR = new ArrayList<ICarpenterRecipe>();
     
     public static IAnvilRecipe ironPrepR, ironPrepR2, coalPrepR;

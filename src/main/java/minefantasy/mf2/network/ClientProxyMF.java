@@ -129,6 +129,7 @@ public class ClientProxyMF extends CommonProxyMF
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, new RenderDragon(2F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
 	}
 	
 	@Override

@@ -149,16 +149,16 @@ public class ComponentListMF
 	
 	public static Item ingot_mould_filled = new ItemFilledMould();
 	
-	public static Item crossbow_stock_wood = new ItemCrossbowPart("cross_stock_wood",   "stock").addSpeed(1.0F).addRecoil(0.5F);
-	public static Item crossbow_stock_iron = new ItemCrossbowPart("cross_stock_iron",   "stock").addSpeed(1.0F).addRecoil(-0.5F).addDurability(150);
-	public static Item crossbow_handle_wood = new ItemCrossbowPart("cross_handle_wood", "stock").addSpeed(0.5F).addRecoil(1.5F).addSpread(1.0F).setHandCrossbow(true);
+	public static Item crossbow_stock_wood = new ItemCrossbowPart("cross_stock_wood",   "stock").addSpeed(1.0F).addRecoil(0F);
+	public static Item crossbow_stock_iron = new ItemCrossbowPart("cross_stock_iron",   "stock").addSpeed(1.0F).addRecoil(-2F).addDurability(150);
+	public static Item crossbow_handle_wood = new ItemCrossbowPart("cross_handle_wood", "stock").addSpeed(0.5F).addRecoil(2F).addSpread(1.0F).setHandCrossbow(true);
 	
-	public static Item cross_arms_basic = new ItemCrossbowPart("cross_arms_basic", 		 "mechanism").addPower(1.00F).addSpeed(0.50F).addRecoil(1.00F).addSpread(1.00F);
-	public static Item cross_arms_light = new ItemCrossbowPart("cross_arms_light", 		 "mechanism").addPower(0.85F).addSpeed(0.25F).addRecoil(0.50F).addSpread(0.50F);
-	public static Item cross_arms_heavy = new ItemCrossbowPart("cross_arms_heavy", 		 "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(1.50F).addSpread(2.00F);
-	public static Item cross_arms_advanced = new ItemCrossbowPart("cross_arms_advanced", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(2.50F).addSpread(0.25F).addDurability(150);
+	public static Item cross_arms_basic = new ItemCrossbowPart("cross_arms_basic", 		 "mechanism").addPower(1.00F).addSpeed(0.50F).addRecoil(4F).addSpread(1.00F);
+	public static Item cross_arms_light = new ItemCrossbowPart("cross_arms_light", 		 "mechanism").addPower(0.85F).addSpeed(0.25F).addRecoil(2F).addSpread(0.50F);
+	public static Item cross_arms_heavy = new ItemCrossbowPart("cross_arms_heavy", 		 "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(8F).addSpread(2.00F);
+	public static Item cross_arms_advanced = new ItemCrossbowPart("cross_arms_advanced", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(6F).addSpread(0.25F).addDurability(150);
 	
-	public static Item cross_bayonet = new ItemCrossbowPart("cross_bayonet", "muzzle").addBash(4.0F).addRecoil(-0.5F).addSpeed(0.5F);
+	public static Item cross_bayonet = new ItemCrossbowPart("cross_bayonet", "muzzle").addBash(4.0F).addRecoil(-1F).addSpeed(0.5F);
 	public static Item cross_ammo = new ItemCrossbowPart("cross_ammo", "mod").addCapacity(5).addSpread(2.00F);
 	public static Item cross_scope = new ItemCrossbowPart("cross_scope", "mod").setScope(0.75F);
 	

@@ -5,9 +5,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.config.ConfigMobs;
 import minefantasy.mf2.entity.EntityCogwork;
-import minefantasy.mf2.entity.mob.DragonBreath;
-import minefantasy.mf2.entity.mob.EntityDragon;
-import minefantasy.mf2.entity.mob.EntityMinotaur;
+import minefantasy.mf2.entity.mob.*;
 import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -25,6 +23,7 @@ public class MobListMF
 		addEntity(10, EntityDragon.class, "MF_Dragon");
 		addEntity(11, EntityMinotaur.class, "MF_Minotaur");
 		addEntity(12, EntityCogwork.class, "MF_CogSuit");
+		addEntity(13, EntityHound.class, "MF_Hound");
 		
 		addSpawn(EntityDragon.class, 1, 1, 1, EnumCreatureType.monster, Type.NETHER);
 		if(ConfigMobs.minotaurSpawnrate > 0)
@@ -39,7 +38,7 @@ public class MobListMF
 	
 	private static void addEntity(int IDBase, Class<? extends Entity> entityClass, String entityName)
     {
-		EntityRegistry.registerModEntity(entityClass, entityName, IDBase, MineFantasyII.instance, 128, 20, true);
+		EntityRegistry.registerModEntity(entityClass, entityName, IDBase, MineFantasyII.instance, 128, 1, true);
     }
     
     public static void addSpawn(Class <? extends EntityLiving > entityClass, int weightedProb, int min, int max, EnumCreatureType typeOfCreature)

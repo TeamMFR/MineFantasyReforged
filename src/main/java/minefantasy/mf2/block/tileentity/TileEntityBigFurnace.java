@@ -6,6 +6,7 @@ import java.util.Random;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.heating.ForgeItemHandler;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.refine.BigFurnaceRecipes;
 import minefantasy.mf2.api.refine.IBellowsUseable;
 import minefantasy.mf2.api.refine.SmokeMechanics;
@@ -325,7 +326,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 	
 	private int getMaxTime() 
 	{
-		return (int) 1.0E+4;
+		return (int) 1.0E+5;
 	}
 	private void smeltItem(int input, int output)
 	{
@@ -360,7 +361,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 		{
 			return true;
 		}
-		if(out.isItemEqual(res))
+		if(out.isItemEqual(res) && CustomToolHelper.doesMatchForRecipe(out, res))
 		{
 			int max = res.getMaxStackSize();
 			if((out.stackSize + res.stackSize) > max)

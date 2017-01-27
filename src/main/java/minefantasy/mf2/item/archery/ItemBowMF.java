@@ -65,6 +65,7 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
     {
 		this(name, (int)(mat.getMaxUses()*type.durabilityModifier), type, mat.getDamageVsEntity(), rarity);
 		material = mat;
+		this.enchantmentLvl = mat.getEnchantability();
     }
 	
     private ItemBowMF(String name, int dura, EnumBowType type, float damage, int rarity)
@@ -256,10 +257,11 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 	/**
      * Return the enchantability factor of the item, most of the time is based on material.
      */
+	private int enchantmentLvl = 1;
     @Override
 	public int getItemEnchantability()
     {
-        return 1;
+        return enchantmentLvl;
     }
     
     @Override
@@ -304,10 +306,6 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 		return rarity[lvl];
 	}
 	
-	private ToolMaterial getMaterial() 
-	{
-		return material;
-	}
 	
 	private EnumRarity rarity(ItemStack item, int lvl)
 	{

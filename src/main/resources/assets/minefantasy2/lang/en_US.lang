@@ -94,6 +94,16 @@ event.dragonnear.name=A Dragon Prowls, take cover or stay to fight!
 event.dragonnear.forge.name=Your crafts insult dragon kind!
 event.dragonaway.name=The Dragon leaves... For now...
 
+entity.hound.name=Hound
+
+item.spawn_dragon.name=Spawn Dragon
+item.spawn_dragon.desc=Deadly winged reptiles.
+item.spawn_minotaur.name=Spawn Minotaur
+item.spawn_minotaur.desc=Brutal and mindless.
+item.spawn_hound.name=Spawn Hound
+item.spawn_hound.desc=Highly capable canines with variable traits.
+item.spawn_cogwork.name=Spawn Cogwork Suit
+item.spawn_cogwork.desc=Mechanical suit of superior strength
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 /TOOL LIST/
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1760,7 +1770,7 @@ knowledge.spoon.info=$hSpoon$r^Spoons. Used for cooking, generally mixing... Wha
 knowledge.arrows=Fletching
 knowledge.arrows.desc=Arrow crafting
 
-knowledge.arrows.1=Crafting arrows can take some time, but still remains moderately low-cost. There are three components to an arrow: The head which you make out of metal. The fletching is made of paper and feathers to guide the arrow. And the shaft is just a stick!
+knowledge.arrows.1=Crafting arrows can take some time, but still remains moderately low-cost. You can make many different arrow heads from any metal. Arrow shafts can be crafted with paper or feathers, but feathers are more effective. Attach the heads to their shafts on a carpenter bench. 
 
 knowledge.arrowsBodkin=Bodkin Arrows
 knowledge.arrowsBodkin.desc=Light and fast

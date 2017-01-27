@@ -189,7 +189,7 @@ public class ItemCrossbow extends Item implements IFirearm, IDisplayMFAmmo, IDam
     	float str = CombatMechanics.getStrengthEnhancement(user)+1;
     	value /= str;
     	
-    	float angle = value*10F;
+    	float angle = value;
     	user.rotationPitch -= itemRand.nextFloat()*angle;
     	user.rotationYawHead += itemRand.nextFloat()*angle-0.5F;
 	}
