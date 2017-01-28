@@ -1,6 +1,7 @@
 package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.entity.mob.EntityMinotaur;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
@@ -99,6 +100,10 @@ public class StructureGenDSEntry extends StructureModuleMF
 		placeBlock(BlockListMF.reinforced_stone, 0, -2, 0, -2);
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -1);
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -2);
+		
+		EntityMinotaur mob = new EntityMinotaur(worldObj);
+		this.placeEntity(mob, 0, 1, depth/2);
+		mob.onManualSpawn(1);
 		
 		this.lengthId = 10;
 		this.deviationCount = 3;

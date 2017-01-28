@@ -804,7 +804,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	@Override
     protected String getHurtSound()
     {
-        return "";
+        return "mob.irongolem.hurt";
     }
 	
     private boolean alternateStep;

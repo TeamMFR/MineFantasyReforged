@@ -2,6 +2,7 @@ package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
+import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.material.WoodMaterial;
 import minefantasy.mf2.mechanics.worldGen.structure.LootTypes;

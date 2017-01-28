@@ -97,15 +97,18 @@ public class KnowledgePageRegistry
 		KnowledgeListMF.plants.addPages(assembleImgPage("ironbark", BlockListMF.log_ironbark));
 		KnowledgeListMF.plants.addPages(assembleImgPage("ebony", BlockListMF.log_ebony));
 		
-		KnowledgeListMF.minotaurs.addPages(new EntryPageText("knowledge.minotaurs.1"));
+		KnowledgeListMF.minotaurs.addPages(new EntryPageText("knowledge.minotaurs.1"), new EntryPageText("knowledge.minotaurs.2"), new EntryPageText("knowledge.minotaurs.3"), new EntryPageText("knowledge.minotaurs.4"));
 		KnowledgeListMF.minotaurs.addPages(assembleMobDesc("minotaur"));
 		KnowledgeListMF.minotaurs.addPages(assembleMobDesc("minotaur_frost"));
 		KnowledgeListMF.minotaurs.addPages(assembleMobDesc("minotaur_dread"));
+		KnowledgeListMF.minotaurs.addPages(new EntryPageText("knowledge.minotaurs.combat"));
 		
 		KnowledgeListMF.dragons.addPages(new EntryPageText("knowledge.dragons.1"), new EntryPageText("knowledge.dragons.2"));
 		KnowledgeListMF.dragons.addPages(assembleMobDesc("red_dragon"));
 		KnowledgeListMF.dragons.addPages(assembleMobDesc("blue_dragon"));
 		KnowledgeListMF.dragons.addPages(assembleMobDesc("green_dragon"));
+		KnowledgeListMF.dragons.addPages(assembleMobDesc("ash_dragon"));
+		KnowledgeListMF.dragons.addPages(new EntryPageText("knowledge.dragons.combat"));
 		
 		KnowledgeListMF.chimney.addPages(new EntryPageText("knowledge.chimney.1"), new EntryPageRecipeCarpenter(KnowledgeListMF.chimneyRecipe), new EntryPageText("knowledge.chimney.2"), new EntryPageRecipeCarpenter(KnowledgeListMF.wideChimneyRecipe), new EntryPageText("knowledge.chimney.3"), new EntryPageRecipeCarpenter(KnowledgeListMF.extractChimneyRecipe));
 		KnowledgeListMF.chimney.addPages(new EntryPageText("knowledge.chimney.pipe"), new EntryPageRecipeAnvil(KnowledgeListMF.smokePipeR));

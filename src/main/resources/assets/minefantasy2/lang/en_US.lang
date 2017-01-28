@@ -74,9 +74,20 @@ death.attack.mob.pound=%1$s was pounded by a %2$s
 death.attack.mob.gore=%1$s was gored by a %2$s
 death.attack.mob.beserk=%1$s was torn apart by a %2$s
 
-entity.minotaur.name=Minotaur
-entity.frostminotaur.name=Frost Minotaur
-entity.dredminotaur.name=Dread Minotaur
+entity.minotaur.name=Lesser Minotaur
+entity.minotaur_guard.name=Minotaur Warrior
+entity.minotaur_elite.name=Elite Minotaur
+entity.minotaur_boss.name=Minotaur Warlord
+
+entity.frostminotaur.name=Lesser Frost Minotaur
+entity.frostminotaur_guard.name=Frost Minotaur Warrior
+entity.frostminotaur_elite.name=Elite Frost Minotaur
+entity.frostminotaur_boss.name=Frost Minotaur Warlord
+
+entity.dredminotaur.name=Lesser Dread Minotaur
+entity.dreadminotaur_guard.name=Dread Minotaur Bruiser
+entity.dreadminotaur_elite.name=Dread Minotaur Punisher
+entity.dreadminotaur_boss.name=Dread Minotaur Death Overlord
 
 entity.dragonbreed.red.name=Red
 entity.dragonbreed.white.name=Frost
@@ -1233,19 +1244,23 @@ knowledge.title.1=
 knowledge.minotaurs=Minotaur
 knowledge.minotaurs.desc=Horrible Abominations
 
-knowledge.minotaurs.1=Few creatures match the strength and rage of a minotaur. Legend has it these creatures were once human and cow before being fused into this new, horrible form. Minotaurs are omnivores have an extremely short temper.^A minotaur is powerful enough to rip someone to shreds within seconds if their set off, and are able to heal quickly. Fortunately enough their rather stupid making it easy to outsmart them!
+knowledge.minotaurs.1=Few creatures match the strength and rage of a minotaur. Legend has it these creatures were once human and cow before being fused into this new, horrible form. Minotaurs are omnivores have an extremely short temper.^Regardless of origins, a minotaur is powerful enough to rip someone to shreds within seconds if their set off, are able to heal quickly from the blood of their foes, and (in some cases) show signs of organisation.
+knowledge.minotaurs.2=$hLesser Minotaur-$r^It may be common sight to see lesser minotaurs in the wild proving a threat to those unfortunate enough to come close.^These creatures are little more than beasts yet provide a misconception of actual minotaur behavior. Lesser minotaurs either have no home or are set out to scavenge for their greater counterparts.
+knowledge.minotaurs.3=$hGreater Minotaur-$r^Greater minotaurs are found dwelling in dwarven complexes underground providing a challenge to explorers.^The minotaurs that are housed within these ruins are more organised and deadly. Standard minotaur warriors are brutal and armed while the elite and warlords that can be found deeper within ruins are powerful foes. It shall be made clear that ruins should be explored only by the prepared. One warrior may prove a challenge, but a group? few have survived.
+knowledge.minotaurs.4=$hSpecies-$r^There are three known species of minotaur found in both wild and ruin. There is no difference to the behavior or living patterns of minotaurs of different species but physical properties do vary. 
+knowledge.minotaurs.combat=$hCombat-$r^The best advice that could be given to fighting off a minotaur would be range. Don't let them get close enough to hit you, even the strongest armour buckles under the force of their fury. Many minotaurs are heavily armoured as well but both hide and plate are vulnerable to piercing attacks a spear would be capable of exploiting both these weaknesses. Spears, explosives, distance and heavy armour give the best chances of survival.
 
 knowledge.mob.minotaur.name=Brown Minotaur
 
-knowledge.minotaur.1=Brown-fur minotaurs are the more common species in the overworld. They are found to have excessive strength and prove to be a powerful foe. Standard minotaurs lack intelligence and seem to bumble about without purpose.
+knowledge.minotaur.1=Brown-fur minotaurs are the more common species in the overworld. They are found to have excessive strength and prove to be a powerful foe. Standard minotaurs have no natural armour but are still hard to kill.
 
 knowledge.mob.minotaur_frost.name=Frost Minotaur
 
-knowledge.minotaur_frost.1=Found in colder regions, these Minotaurs appear to be tougher than the brown minotaurs from the warmer parts. The Albino minotaur is difficult to see in the snow and can unleash a devistating rage on the unsuspecting traveller.
+knowledge.minotaur_frost.1=Found in colder regions, these Minotaurs appear to have thicker hide than the brown minotaurs, resulting in natural armour. The Albino minotaur is difficult to see in the snow and can unleash a devistating rage on the unsuspecting traveller.
 
 knowledge.mob.minotaur_dread.name=Dread Minotaur
 
-knowledge.minotaur_dread.1=Not as much is known about what some call the Dread Minotaur. Denizens of the nether, dread minotaurs wield iron weapons and patrol the hallowed grounds with fierce rage. Strangely, these minotaurs seem much more disciplined than their overworld counterparts...
+knowledge.minotaur_dread.1=Not as much is known about what some call the Dread Minotaur. Denizens of the nether, dark-grey or black fur, powerfully thick skin, and immunity to fire. This species are far hardier than their overworld cousins.
 
 knowledge.dragons=Dragons
 knowledge.dragons.desc=Death from above
@@ -1255,16 +1270,18 @@ knowledge.dragons.1=Dragons are proud but destructive reptiles found stalking th
 knowledge.dragons.2=face. The skin of these reptiles are so strong that most weapons are ineffective. Special dragonforged weapons can be made to penetrate their powerful scales.^ Dragons are hunted for their hearts, which have been useful for skilled artisans. Young dragon hearts aren't worth anything however and only older dragons are hunted for these purposes.
 
 knowledge.mob.red_dragon.name=Red Dragon
-
 knowledge.red_dragon.1=The most common form, red dragons have the capability of breathing fire. Many have fallen to these creatures and entire villages have gone up in flames. They use their breath more sparingly than other dragons, but appear to be extremely aggressive with their bite.
 
 knowledge.mob.blue_dragon.name=Frost Dragon
-
 knowledge.blue_dragon.1=With homes in the colder regions, Frost dragons get their name from the icy winds they are able to breathe out, freezing their foes. The frost dragon isn't seen as destructive or fearsome as their cousins, but are still deadly.
 
 knowledge.mob.green_dragon.name=Green Dragon
-
 knowledge.green_dragon.1=Green dragons, also known as "Venom Dragons" have a filthy, gruesome nature. They fly mainly in swampland, but can also come out in the rain. Green dragons emit a deadly acid from their breath, decaying armour and poisoning their victim.
+
+knowledge.mob.ash_dragon.name=Ash Dragon
+knowledge.ash_dragon.1=Ash dragons are found in the hot and dry such as deserts and can be easily identified by their two legs (rather than four). Ash dragons are blind, and require the use of sound and smell to track their target. keep your distance and remain quiet to avoid attack.
+
+knowledge.dragons.combat=$hCombat-$r^Dragons may be fast and have the sky advantage, but they have a few weaknesses to exploit. Firstly is the ability to leave and return the battlefield, you are best to pay attention and avoid losing sight of your foe. As the dragon swoops, make your strike. A proerly lined ranged attack will grant an advantage when it takes off again. As well as that: specialised dragonforged items may be crafted to give an edge to the battle.
 
 knowledge.gettingStarted=Getting Started
 knowledge.gettingStarted.desc=From the ground-up

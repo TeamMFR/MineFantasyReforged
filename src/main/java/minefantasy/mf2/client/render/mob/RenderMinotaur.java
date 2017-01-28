@@ -35,6 +35,7 @@ public class RenderMinotaur extends RenderBiped
 	public RenderMinotaur(ModelBiped model, float shadow)
     {
         super(model, shadow);
+        
     }
     
     @Override

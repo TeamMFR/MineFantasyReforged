@@ -1,6 +1,7 @@
 package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.entity.mob.EntityMinotaur;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -149,6 +150,11 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 		
 		placeBlock(BlockListMF.reinforced_stone, 0, -2, 4, 0);
 		placeBlock(BlockListMF.reinforced_stone, 0, 2,  4, 0);
+		
+		EntityMinotaur mob = new EntityMinotaur(worldObj);
+		this.placeEntity(mob, 0, 0, depth/2);
+		mob.onManualSpawn(1);
+		
 	}
 	
 	

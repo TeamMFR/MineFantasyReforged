@@ -26,6 +26,9 @@ public class ModelMinotaur extends ModelBiped
     ModelRenderer bipedRightForearm;
     ModelRenderer shoulders;
     ModelRenderer trapezius;
+    
+    ModelRenderer helmet;
+    ModelRenderer armour;
   
   public ModelMinotaur()
   {
@@ -153,6 +156,17 @@ public class ModelMinotaur extends ModelBiped
 	  bipedRightFoot.addBox(-3F, 13F, -2F, 4, 7, 5);
 	  bipedRightFoot.setRotationPoint(-3F, 4F, 0F);
 	  bipedRightFoot.setTextureSize(128, 128);
+	  
+	  //ARMOUR
+	  helmet = new ModelRenderer(this, 74, 98);
+      helmet.addBox(-2.5F, -3.5F, -5.5F, 5, 6, 6);
+      helmet.setRotationPoint(0F, -9F, -2F);
+      
+	  armour = new ModelRenderer(this, 86, 103);
+      armour.setTextureOffset(86, 103).addBox(-5.5F, -0.5F, -5.5F, 11, 15, 10);//chest
+      armour.setTextureOffset(90, 77).addBox(-4.5F, -4.5F, -2.5F, 9, 16, 10);//back
+      armour.setTextureOffset(34, 110).addBox(-8F, -1.5F, -5F, 16, 8, 10);//shoulders
+      armour.setRotationPoint(0F, -8F, 1F);
   }
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {
@@ -183,7 +197,6 @@ public class ModelMinotaur extends ModelBiped
 		{
 			Lhorn2.render(f5);
 		}
-		
 		bipedHead.render(f5);
 		bipedLeftLeg.render(f5);
 		bipedRightLeg.render(f5);
@@ -196,6 +209,9 @@ public class ModelMinotaur extends ModelBiped
 		bipedLeftLeg.render(f5);
 		Mane.render(f5);
 		trapezius.render(f5);
+		
+		armour.render(f5);
+		helmet.render(f5);
 	}
 
     public void setRotationAngles(EntityMinotaur mino, float f, float f1, float f2, float f3, float f4, float f5)
@@ -265,7 +281,7 @@ public class ModelMinotaur extends ModelBiped
         {
         	bipedLeftArm.rotateAngleX = (float) Math.toRadians(180F);
         }
-        if(mino.getAttack() == 3)//if is power attack
+        if(mino.getAttack() == 3 && mino.getHeldItem() == null)//if is power attack
         {
         	bipedLeftArm.rotateAngleX = (float) Math.toRadians(-135F);
         	bipedRightArm.rotateAngleX = (float) Math.toRadians(-135F);
@@ -283,6 +299,9 @@ public class ModelMinotaur extends ModelBiped
         joinBlocks(trapezius, bipedBody);
         joinBlocks2(bipedLeftForearm, bipedLeftArm);
         joinBlocks2(bipedRightForearm, bipedRightArm);
+        
+        joinBlocks(armour, bipedBody);
+        joinBlocks2(helmet, bipedHead);
     }
     private void joinBlocks(ModelRenderer model, ModelRenderer anchor)
     {

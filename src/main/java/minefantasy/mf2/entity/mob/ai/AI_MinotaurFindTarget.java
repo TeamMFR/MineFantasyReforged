@@ -43,6 +43,10 @@ public class AI_MinotaurFindTarget extends EntityAITarget
         {
             public boolean isEntityApplicable(Entity target)
             {
+            	if(target instanceof EntityMinotaur)
+            	{
+            		return false;
+            	}
                 return !(target instanceof EntityLivingBase) ? false : (selector != null && !selector.isEntityApplicable(target) ? false : AI_MinotaurFindTarget.this.isSuitableTarget((EntityLivingBase)target, false));
             }
         };
@@ -60,14 +64,13 @@ public class AI_MinotaurFindTarget extends EntityAITarget
         else
         {
             double d0 = this.getTargetDistance();
-            if(minotaur.getRageLevel() < 10)
-        	{
-        		d0 = 1.0D;
-        	}
-            else if(minotaur.getRageLevel() < 100)
-        	{
-        		d0 = 6.0D;
-        	}
+            if(minotaur.isDocile())//Docile are less aggro when calm
+            {
+	            if(minotaur.getRageLevel() < 10)
+	        	{
+	        		d0 = 1.5D;
+	        	}
+            }
             
             List list = this.taskOwner.worldObj.selectEntitiesWithinAABB(this.targetClass, this.taskOwner.boundingBox.expand(d0, 4.0D, d0), this.targetEntitySelector);
             Collections.sort(list, this.theNearestAttackableTargetSorter);

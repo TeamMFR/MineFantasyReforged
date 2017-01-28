@@ -4,10 +4,13 @@ import java.util.Random;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityWorldGenMarker;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DungeonHooks;
@@ -127,6 +130,17 @@ public abstract class StructureModuleMF
 	{
 		int[] offset = offsetPos(xo, yo, zo, dir);
 		worldObj.setBlock(offset[0], offset[1], offset[2], id, meta, 2);
+	}
+	
+	public void placeEntity(Entity entity, int x, int y, int z)
+	{
+		placeEntity(entity, x, y, z, direction);
+	}
+	public void placeEntity(Entity entity, int xo, int yo, int zo, int dir)
+	{
+		int[] offset = offsetPos(xo, yo, zo, dir);
+		entity.setLocationAndAngles(offset[0]+0.5D, offset[1]+entity.height-1.0F, offset[2]+0.5D, MathHelper.wrapAngleTo180_float(worldObj.rand.nextFloat() * 360.0F), 0.0F);
+		worldObj.spawnEntityInWorld(entity);
 	}
 	
 	protected void buildFoundation(Block block, int meta, int x, int z) 
