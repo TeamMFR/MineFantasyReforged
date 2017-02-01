@@ -28,6 +28,7 @@ import minefantasy.mf2.block.decor.BlockBedMF;
 import minefantasy.mf2.block.decor.BlockComponent;
 import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.decor.BlockRoad;
+import minefantasy.mf2.block.decor.BlockSchematic;
 import minefantasy.mf2.block.decor.BlockTrough;
 import minefantasy.mf2.block.food.BlockBerryBush;
 import minefantasy.mf2.block.food.BlockCakeMF;
@@ -235,6 +236,7 @@ public class BlockListMF
 	public static Block mythic_decor = new BlockMythicDecor();
 	public static Block WG_Mark = new BlockWorldGenMarker();
 	public static Block components = new BlockComponent();
+	public static Block schematic_general = new BlockSchematic("schematic_general");
 	public static void load()
 	{
 		anvilStone = new BlockAnvilMF(BaseMaterialMF.getMaterial("stone"));

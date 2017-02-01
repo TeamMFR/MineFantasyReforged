@@ -139,6 +139,7 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 	public static float MAChance;
 	public static String dwarvenSH = "6D: [Structure Gen] Dwarven Stronghold";
 	public static float DSChance;
+	public static int DSLength, DSDeviations;
 	
 	@Override
 	protected void loadConfig()
@@ -260,6 +261,10 @@ public class ConfigWorldGen extends ConfigurationBaseMF
 		MFChance = Float.parseFloat(config.get(ancientForge, "Spawn Chance", 1.5E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
 		MAChance = Float.parseFloat(config.get(ancientAlter, "Spawn Chance", 1.0E-2D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
 		DSChance = Float.parseFloat(config.get(dwarvenSH, "Spawn Chance", 3.0E-3D, "The chance for this structure to generate in a chunk. (0=never, 1.0=always)").getString());
+		
+		DSLength = Integer.parseInt(config.get(dwarvenSH, "Stronghold max length", 10, "Max amount of halls making the length of dwarf strongholds (some may be smaller or larger, but this is a guideline)").getString());
+		DSDeviations = Integer.parseInt(config.get(dwarvenSH, "Stronghold max deviations", 2, "Max amount of intersections in dwarf stronghold hallways (not including Crossroads or living hubs). This can significantly increase complexity of strongholds and in turn lag when generating").getString());
+		
 	}
 
 }

@@ -29,6 +29,7 @@ public class ModelMinotaur extends ModelBiped
     
     ModelRenderer helmet;
     ModelRenderer armour;
+    ModelRenderer warlordhelm;
   
   public ModelMinotaur()
   {
@@ -167,6 +168,10 @@ public class ModelMinotaur extends ModelBiped
       armour.setTextureOffset(90, 77).addBox(-4.5F, -4.5F, -2.5F, 9, 16, 10);//back
       armour.setTextureOffset(34, 110).addBox(-8F, -1.5F, -5F, 16, 8, 10);//shoulders
       armour.setRotationPoint(0F, -8F, 1F);
+      
+      warlordhelm = new ModelRenderer(this, 46, 97);
+      warlordhelm.addBox(-3.5F, -2F, -10F, 7, 6, 7);
+      warlordhelm.setRotationPoint(-32F, -9F, -2F);
   }
   private void setRotation(ModelRenderer model, float x, float y, float z)
   {
@@ -212,6 +217,7 @@ public class ModelMinotaur extends ModelBiped
 		
 		armour.render(f5);
 		helmet.render(f5);
+		warlordhelm.render(f5);
 	}
 
     public void setRotationAngles(EntityMinotaur mino, float f, float f1, float f2, float f3, float f4, float f5)
@@ -302,6 +308,7 @@ public class ModelMinotaur extends ModelBiped
         
         joinBlocks(armour, bipedBody);
         joinBlocks2(helmet, bipedHead);
+        joinBlocks2(warlordhelm, bipedHead);
     }
     private void joinBlocks(ModelRenderer model, ModelRenderer anchor)
     {

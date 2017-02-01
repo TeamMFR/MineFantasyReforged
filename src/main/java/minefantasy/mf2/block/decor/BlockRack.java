@@ -158,6 +158,14 @@ public class BlockRack extends BlockWoodDecor
     /**
      * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z, side, hitX, hitY, hitZ, block metadata
      */
+    /**
+     * Convert standard South, West, North, East to rack's (North, South, East, West)
+     */
+    public static int getDirection(int dir)
+    {
+    	int[] directions = new int[]{3, 4, 2, 5};
+    	return directions[Math.min(3, dir)];
+    }
     @Override
     public int onBlockPlaced(World p_149660_1_, int p_149660_2_, int p_149660_3_, int p_149660_4_, int p_149660_5_, float p_149660_6_, float p_149660_7_, float p_149660_8_, int p_149660_9_)
     {

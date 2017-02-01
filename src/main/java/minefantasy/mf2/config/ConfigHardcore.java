@@ -3,6 +3,7 @@ package minefantasy.mf2.config;
 import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.knowledge.InformationBase;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
+import minefantasy.mf2.block.tileentity.TileEntityRoast;
 import minefantasy.mf2.hunger.HungerSystemMF;
 import minefantasy.mf2.mechanics.CombatMechanics;
 
@@ -51,6 +52,7 @@ public class ConfigHardcore extends ConfigurationBaseMF
 		lessHunt = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Reduce Meat Drops", false, "This will alter the stack size of animal meat drops, meaning they only drop 1 every time").getString());
 		preventCook = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Prevent furnace food", false, "Stop food from being cooked in a furnace").getString());
 		HungerSystemMF.slowdownRate = Integer.parseInt(config.get(CATEGORY_FOOD, "Hunger slow rate", 3, "how many added points per haunch is slows by. Default is 3: meaning it's takes 3 additional haunches to remove 1, meaning each haunch takes 4 times to be removed").getString());
+		TileEntityRoast.enableOverheat = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Burn at high temperature", true, "Cooking food on a stove or oven will automatically burn at high temperatures").getString());
 		
 		upgradeZombieWep = Boolean.parseBoolean(config.get(CATEGORY_MOB, "Give Zombie Weapon", true, "Zombies have a chance on spawning with forged iron weapons, It also controls some zombies having MF armour").getString());
 		zombieWepChance = Float.parseFloat(config.get(CATEGORY_MOB, "Zombie Weapon Spawn Chance Modifier", 1.0F, "Chance for Zombies to have forged weapons, increased with difficulty").getString());

@@ -78,6 +78,7 @@ public class StructureGenAncientAlter extends StructureModuleMF
 			placeChest(0, y+2, z, lootType);
 			placeSpawner(0, y, z, "Enderman");
 		}
+		
 	}
 	
 	private Object[] getFoundation(int radius, int x, int z)

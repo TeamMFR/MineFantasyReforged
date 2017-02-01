@@ -1,9 +1,13 @@
 package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
+import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
+import minefantasy.mf2.entity.mob.MinotaurBreed;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -103,10 +107,9 @@ public class StructureGenDSEntry extends StructureModuleMF
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth/2);
-		mob.onManualSpawn(1);
+		mob.worldGenTier(1);
 		
-		this.lengthId = 10;
-		this.deviationCount = 3;
+		this.lengthId = -99;
 		mapStructure(0, 0, depth, StructureGenDSStairs.class);
 	}
 	

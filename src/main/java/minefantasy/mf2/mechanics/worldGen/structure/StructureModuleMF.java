@@ -4,7 +4,6 @@ import java.util.Random;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityWorldGenMarker;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -12,7 +11,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DungeonHooks;
 
 public abstract class StructureModuleMF 
@@ -20,6 +18,9 @@ public abstract class StructureModuleMF
 	public final int xCoord;
 	public final int yCoord;
 	public final int zCoord;
+	/**
+	 * (0-3) South, West, North, East
+	 */
 	public final int direction;
 	public final World worldObj;
 	protected Random rand = new Random();
@@ -103,7 +104,22 @@ public abstract class StructureModuleMF
 		}
 		return 0;
 	}
-	
+	/**
+	 * Places a block and rotates it on it's base direction for pregen
+	 * designed not to override the worldGen marker
+	 * @param id The blockID
+	 * @param meta the block metadata
+	 * @param x The x offset(relation to xCoord)
+	 * @param y The y offset(relation to yCoord)
+	 * @param z The z offset(relation to zCoord)
+	 */
+	public void pregenPlaceBlock(Block id, int meta, int x, int y, int z)
+	{
+		if(! (x == 0 && y== 0 && z == 0))
+		{
+			placeBlock(id, meta, x, y, z, direction);
+		}
+	}
 	/**
 	 * Places a block and rotates it on it's base direction
 	 * @param id The blockID
@@ -262,6 +278,10 @@ public abstract class StructureModuleMF
 	}
 	protected void mapStructure(int x, int y, int z, int dir, Class<?extends StructureModuleMF> piece)
 	{
+		mapStructure(x, y, z, dir, piece, 0);
+	}
+	protected void mapStructure(int x, int y, int z, int dir, Class<?extends StructureModuleMF> piece, int delay)
+	{
 		int[] offset = offsetPos(x, y, z, this.direction);
 		
 		Block block = worldObj.getBlock(offset[0], offset[1], offset[2]);
@@ -276,6 +296,7 @@ public abstract class StructureModuleMF
 			((TileEntityWorldGenMarker)tile).deviation = deviationCount;
 			((TileEntityWorldGenMarker)tile).prevID = Block.getIdFromBlock(block);
 			((TileEntityWorldGenMarker)tile).prevMeta = meta;
+			((TileEntityWorldGenMarker)tile).ticks -= delay;
 		}
 		block = null;
 	}

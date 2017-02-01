@@ -337,6 +337,16 @@ public class CustomToolHelper
     	}
     	return StatCollector.translateToLocalFormatted(unlocalName, StatCollector.translateToLocal("material."+name + ".name"));
 	}
+	public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) 
+	{
+		if(recipeItem == null)
+		{
+			return inputItem == null;
+		}
+		if(inputItem == null)return false;
+			
+		return recipeItem.isItemEqual(inputItem) && doesMainMatchForRecipe(recipeItem, inputItem) && doesHaftMatchForRecipe(recipeItem, inputItem);
+	}
 	/**
 	 * Checks if two items' materials match
 	 */

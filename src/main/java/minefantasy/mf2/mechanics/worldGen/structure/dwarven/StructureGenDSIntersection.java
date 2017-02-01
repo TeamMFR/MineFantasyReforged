@@ -153,17 +153,17 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 0, depth/2);
-		mob.onManualSpawn(1);
+		mob.worldGenTier(1);
 		
 	}
 	
-	
+	@Override
 	protected Class<? extends StructureModuleMF> getRandomExtension() 
 	{
 		if(lengthId == 1)
 		{
 			return StructureGenDSRoom.class;
 		}
-		return StructureGenDSHall.class;
+		return rand.nextInt(3) == 0 ? StructureGenDSStairs.class : StructureGenDSHall.class;
 	}
 }

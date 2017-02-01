@@ -251,7 +251,7 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
 	public int getHeat() 
 	{
 		if(!isBurning())return 0;
-		return Functions.getIntervalWave1_i(ticksExisted, 30, 100, 200);
+		return Functions.getIntervalWave1_i(ticksExisted, 30, 100, 200);//100*-300*
 	}
 	
 	private void sendPacketToClients()

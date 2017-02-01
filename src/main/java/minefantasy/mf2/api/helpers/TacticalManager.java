@@ -2,23 +2,16 @@ package minefantasy.mf2.api.helpers;
 
 import java.util.Random;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import minefantasy.mf2.api.MineFantasyAPI;
-import minefantasy.mf2.api.armour.IArmouredEntity;
-import minefantasy.mf2.api.armour.ISpecialArmourMF;
 import minefantasy.mf2.api.armour.IElementalResistance;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.api.weapon.IParryable;
+import minefantasy.mf2.api.weapon.ISpecialCombatMob;
 import minefantasy.mf2.entity.EntityArrowMF;
 import minefantasy.mf2.mechanics.CombatMechanics;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -109,7 +102,7 @@ public class TacticalManager
 		}
 		else
 		{
-			if(!isMobBlocking(user))
+			if(!isMobBlocking(user) && didParrySucceed(user, source))
 			{
 				return false;
 			}
@@ -168,16 +161,21 @@ public class TacticalManager
 		{
 			return false;//If burning and can't take the heat.. can't block!
 		}
-		if(rand.nextInt(5) == 0)
-		{
-			return false;
-		}
 		if(user.getHeldItem() != null)
 		{
 			return user.getHeldItem().getItem().getItemUseAction(user.getHeldItem()) == EnumAction.block;
 		}
 		return false;
 	}
+	private static boolean didParrySucceed(EntityLivingBase user, DamageSource source)
+	{
+		if(user instanceof ISpecialCombatMob)
+		{
+			return ((ISpecialCombatMob)user).canParry(source);
+		}
+		return rand.nextInt(5) != 0;
+	}
+	
 	public static float getHighgroundModifier(Entity target, Entity hitter, float value)
 	{
 		if(target == null || hitter == null)

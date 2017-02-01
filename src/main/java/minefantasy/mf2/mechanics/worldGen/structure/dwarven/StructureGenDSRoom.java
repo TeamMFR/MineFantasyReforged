@@ -1,11 +1,17 @@
 package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
+import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
+import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
+import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
 import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.item.gadget.ItemBomb;
 import minefantasy.mf2.item.gadget.ItemMine;
+import minefantasy.mf2.item.list.CustomToolListMF;
+import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.material.WoodMaterial;
 import minefantasy.mf2.mechanics.worldGen.structure.LootTypes;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
@@ -13,6 +19,7 @@ import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
@@ -21,7 +28,7 @@ import net.minecraftforge.common.ChestGenHooks;
 public class StructureGenDSRoom extends StructureModuleMF
 {
 	private String type = "Basic";
-	private static final String[] possible_types = new String[]{"Living", "Armoury", "Forge", "Study"};
+	private static final String[] possible_types = new String[]{"Living","Forge","Study","Armoury"};
 	public StructureGenDSRoom(World world, StructureCoordinates position)
 	{
 		super(world, position);
@@ -34,7 +41,20 @@ public class StructureGenDSRoom extends StructureModuleMF
 	}
 	private void randomiseType() 
 	{
-		type = possible_types[rand.nextInt(possible_types.length)];
+		type = geRandomType();
+	}
+	/**
+	 * @return
+	 * 10% for Armoury----20& for Forge----30% for Study----40% for Living 
+	 */
+	private String geRandomType() 
+	{
+		int c = rand.nextInt(10);
+		if(c == 0)return "Armoury";//0 (10%)
+		else if(c < 3) return "Forge";//1,2 (20%)
+		else if(c < 6) return "Study";//3,4,5 (30%)
+		
+		return "Living";//6,7,8,9 (40%)
 	}
 	@Override
 	public boolean canGenerate() 
@@ -126,7 +146,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 					{
 						for(int h = height-1; h > 1; h --)
 						{
-							placeBlock(BlockListMF.reinforced_stone, 0, x, h, z);
+							placeBlock(h == 4 ? Blocks.glowstone : BlockListMF.reinforced_stone, 0, x, h, z);
 						}
 						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, 1, z);
 					}
@@ -181,7 +201,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 	{
 		if(type.equalsIgnoreCase("Forge"))
 		{
-			return 8;
+			return 7;
 		}
 		return 5;
 	}
@@ -193,7 +213,8 @@ public class StructureGenDSRoom extends StructureModuleMF
 		}
 		return 13;
 	}
-	protected int getWidthSpan() {
+	protected int getWidthSpan()
+	{
 		return 5;
 	}
 	protected Class<? extends StructureModuleMF> getRandomExtension() 
@@ -301,18 +322,25 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		int zOffset = 4;
 		
-		tryPlaceMinorRoom(width_span, 0, zOffset, rotateLeft());
-		tryPlaceMinorRoom(width_span, 0, depth-zOffset, rotateLeft());
+		boolean hall1 = rand.nextInt(4) == 0, hall2 = rand.nextInt(4) == 0, hall3 = rand.nextInt(3) != 0;
+		int offset1 = hall1 ? width_span+1 : width_span;
+		int offset2 = hall2 ? -(width_span+1) : -width_span;
+		int offset3 = hall3 ? depth+1 : depth;
 		
-		tryPlaceMinorRoom(-width_span, 0, zOffset, rotateRight());
-		tryPlaceMinorRoom(-width_span, 0, depth-zOffset, rotateRight());
+		tryPlaceMinorRoom(width_span, 0, zOffset, rotateLeft(), false);
+		tryPlaceMinorRoom(offset1, 0, depth-zOffset, rotateLeft(), hall1);
+		
+		tryPlaceMinorRoom(-width_span, 0, zOffset, rotateRight(), false);
+		tryPlaceMinorRoom(offset2, 0, depth-zOffset, rotateRight(), hall2);
+		tryPlaceMinorRoom(0, 0, offset3, direction, hall3);
 		//this.placeSpawner(0, 1, depth-5);
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth-5);
-		mob.onManualSpawn(2);
+		mob.worldGenTier(1);
 		
 	}
+	
 	public void generateStudy()
 	{
 		int width = getWidthSpan();
@@ -345,10 +373,12 @@ public class StructureGenDSRoom extends StructureModuleMF
 			placeBlock(Blocks.double_stone_slab, 0, -1+x, 1, (int)Math.floor((float)depth/2)-1);
 			placeBlock(Blocks.double_stone_slab, 0, -1+x, 1, (int)Math.ceil((float)depth/2)+1);
 		}
+		placeBlock(BlockListMF.schematic_general, 0, 0, 2, (int)Math.floor((float)depth/2)-1);
+		placeBlock(BlockListMF.schematic_general, 1, 0, 2,  (int)Math.ceil((float)depth/2)+1);
 		//this.placeSpawner(0, 1, depth/2, "Silverfish");
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth/2);
-		mob.onManualSpawn(2);
+		mob.worldGenTier(2);
 	}
 	
 	public void generateArmoury()
@@ -433,12 +463,42 @@ public class StructureGenDSRoom extends StructureModuleMF
 				}
 			}
 		}
-		
+		for(int z1 = 0; z1 < 4; z1 ++)
+		{
+			placeRack((width-1), 2, depth-2-z1, rotateRight());
+			placeRack(-(width-1), 2, depth-2-z1, rotateLeft());
+		}
+		placeBlock(BlockListMF.schematic_general, 3, -2, 2, depth-1);
+		placeBlock(BlockListMF.schematic_general, 4, 2, 2, depth-1);
+		placeBlock(BlockListMF.reinforced_stone, 0, -2, 1, depth-1);
+		placeBlock(BlockListMF.reinforced_stone, 0, 2, 1, depth-1);
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, z);
-		mob.onManualSpawn(3);
+		mob.worldGenTier(3);
 	}
 	
+	private void placeRack(int x, int y, int z, int newDirection) 
+	{
+		placeBlock(BlockListMF.rack_wood, BlockRack.getDirection(newDirection), x, y, z);
+		TileEntity tile = this.getTileEntity(x, y, z, direction);
+		if(tile != null && tile instanceof TileEntityRack)
+		{
+			setupRack((TileEntityRack)tile);
+		}
+	}
+	private void setupRack(TileEntityRack rack) 
+	{
+		rack.setMaterial(CustomMaterial.getMaterial("ScrapWood"));
+		ItemWeaponMF[] items = new ItemWeaponMF[]{CustomToolListMF.standard_sword, CustomToolListMF.standard_waraxe, CustomToolListMF.standard_mace, CustomToolListMF.standard_dagger};
+		for(int i = 0; i < rack.getSizeInventory(); i ++)
+		{
+			if(rand.nextInt(3) != 0)
+			{
+				ItemWeaponMF loot = items[rand.nextInt(items.length)];
+				rack.setInventorySlotContents(i, loot.construct("Iron", "ScrapWood"));
+			}
+		}
+	}
 	private void generateForge() 
 	{
 		boolean reverseForge = rand.nextBoolean();
@@ -458,7 +518,6 @@ public class StructureGenDSRoom extends StructureModuleMF
 		placeBlock(BlockListMF.chimney_pipe, 0, ( (width-1)*position), 3, z+2);
 		placeBlock(BlockListMF.chimney_pipe, 0, ( (width-1)*position), 4, z+2);
 		placeBlock(BlockListMF.chimney_pipe, 0, ( (width-1)*position), 5, z+2);
-		placeBlock(BlockListMF.chimney_stone, 0, ( (width-1)*position), 6, z+2);
 		
 		int chestFacing = position < 0 ? rotateLeft() : rotateRight();
 		placeChest((-(width-2)*position), 1, z, chestFacing, LootTypes.DWARVEN_FORGE);
@@ -468,6 +527,11 @@ public class StructureGenDSRoom extends StructureModuleMF
 		placeBlock(BlockListMF.forge, 0, ( (width-1)*position), 1, z-1);
 		placeBlock(Blocks.air, 0, ( (width-1)*position), 2, z);
 		placeBlock(Blocks.air, 0, ( (width-1)*position), 2, z-1);
+		
+		placeBlock(BlockListMF.schematic_general, 2,( (width-1)*position), 2, z+2);
+		placeBlock(BlockListMF.schematic_general, 5,( (width-1)*position), 2, z-3);
+		placeBlock(BlockListMF.reinforced_stone, 0, ( (width-1)*position), 1, z+2);
+		placeBlock(BlockListMF.reinforced_stone, 0, ( (width-1)*position), 1, z-3);
 		
 		placeBlock(BlockListMF.reinforced_stone_framed, 0, ( (width-1)*position), 1, z-2);
 		placeBlock(BlockListMF.reinforced_stone_framed, 0, ( (width-1)*position), 1, z+1);
@@ -485,7 +549,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth/2);
-		mob.onManualSpawn(2);
+		mob.worldGenTier(2);
 		
 	}
 	
@@ -516,11 +580,6 @@ public class StructureGenDSRoom extends StructureModuleMF
         if (tile != null)
         {
             WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(loot, rand), tile, 5+rand.nextInt(5));
-            if(rand.nextInt(5) == 0)
-            {
-	            int slot = rand.nextInt(tile.getSizeInventory());
-	            tile.setInventorySlotContents(slot, ChestGenHooks.getOneItem(ItemArtefact.DWARVEN, rand));
-            }
         }
 	}
 	private void placeAmmoBox(int x, int y, int z, int d, String loot)
@@ -541,9 +600,9 @@ public class StructureGenDSRoom extends StructureModuleMF
             ammo = null;
         }
 	}
-	protected void tryPlaceMinorRoom(int x, int y, int z, int d) 
+	protected void tryPlaceMinorRoom(int x, int y, int z, int d, boolean hall) 
 	{
-		Class extension = StructureGenDSRoomSml2.class;
+		Class extension = hall ? StructureGenDSHall.class : StructureGenDSRoomSml2.class;
 		if(extension != null)
 		{
 			mapStructure(x, y, z, d, extension);

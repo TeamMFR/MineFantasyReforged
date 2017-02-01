@@ -2,6 +2,7 @@ package minefantasy.mf2.block.tileentity.blastfurnace;
 
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.crafting.MineFantasyFuels;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.block.refining.BlockBFH;
 import minefantasy.mf2.block.tileentity.TileEntityCrucible;
 import minefantasy.mf2.config.ConfigHardcore;
@@ -115,7 +116,7 @@ public class TileEntityBlastFH extends TileEntityBlastFC
 					crucible.setInventorySlotContents(slot, result);
 					return;
 				}
-				else if(crucible.getStackInSlot(slot).isItemEqual(result))
+				else if(CustomToolHelper.areEqual(crucible.getStackInSlot(slot), result))
 				{
 					int freeSpace = crucible.getStackInSlot(slot).getMaxStackSize() - crucible.getStackInSlot(slot).stackSize;
 					if(freeSpace >= result.stackSize)

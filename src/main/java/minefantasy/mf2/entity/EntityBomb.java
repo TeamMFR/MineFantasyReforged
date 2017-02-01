@@ -17,6 +17,7 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -62,7 +63,6 @@ public class EntityBomb extends Entity
         this.prevPosY = posY;
         this.prevPosZ = posZ;
     }
-
  
     private int getFuseTime()
 	{

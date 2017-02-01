@@ -361,6 +361,7 @@ public class KnowledgePageRegistry
 	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.1"), new EntryPageRecipeBase(KnowledgeListMF.firepitRecipe));
 	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.2"), new EntryPageRecipeBase(KnowledgeListMF.cooktopRecipe));
 	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.3"), new EntryPageRecipeCarpenter(KnowledgeListMF.stoneovenRecipe));
+	    KnowledgeListMF.firepit.addPages(new EntryPageText("knowledge.firepit.4"));
 	    		
 	    KnowledgeListMF.cookingutensil.addPages(new EntryPageText("knowledge.cookingutensil.1"), new EntryPageRecipeAnvil(KnowledgeListMF.caketinRecipe), new EntryPageRecipeCarpenter(KnowledgeListMF.pieTrayRecipe), new EntryPageSmelting(ComponentListMF.pie_tray_uncooked, FoodListMF.pie_tray));
 	    KnowledgeListMF.salt.addPages(new EntryPageText("knowledge.salt.1"), new EntryPageSmelting(new ItemStack(FoodListMF.bowl_water_salt), new ItemStack(FoodListMF.salt)));

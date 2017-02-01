@@ -265,7 +265,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 				}
 				else
 				{
-					if(inv[a].isItemEqual(spec))
+					if(CustomToolHelper.areEqual(inv[a], spec))
 					{
 						if(inv[a].stackSize < inv[a].getMaxStackSize())
 						{
@@ -293,7 +293,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 			}
 			else
 			{
-				if(inv[output].isItemEqual(res))
+				if(CustomToolHelper.areEqual(inv[output], res))
 				{
 					int spaceLeft = inv[output].getMaxStackSize() - inv[output].stackSize;
 					
@@ -338,7 +338,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 		}
 		else
 		{
-			if(inv[output].isItemEqual(res))
+			if(CustomToolHelper.areEqual(inv[output], res))
 			{
 				inv[output].stackSize += res.stackSize;
 			}
@@ -361,7 +361,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 		{
 			return true;
 		}
-		if(out.isItemEqual(res) && CustomToolHelper.doesMatchForRecipe(out, res))
+		if(CustomToolHelper.areEqual(out, res))
 		{
 			int max = res.getMaxStackSize();
 			if((out.stackSize + res.stackSize) > max)

@@ -51,7 +51,7 @@ public class TileEntityRoast extends TileEntity implements IInventory, IHeatUser
 		{
 			if(recipe != null && temp > 0 && maxProgress > 0 && temp > recipe.minTemperature)
 			{
-				if(recipe.canBurn && temp > recipe.maxTemperature)
+				if(enableOverheat && recipe.canBurn && temp > recipe.maxTemperature)
 				{
 					setInventorySlotContents(0, recipe.burnt.copy());
 					updateRecipe();
@@ -70,6 +70,11 @@ public class TileEntityRoast extends TileEntity implements IInventory, IHeatUser
 					,0F, 0F, 0F);
 		}
 	}
+	/**
+	 * Enable high temperatures ruin cooking
+	 */
+	public static boolean enableOverheat = true;
+	
 	private int getTemp() 
 	{
 		TileEntity tile = worldObj.getTileEntity(xCoord, yCoord-1, zCoord);

@@ -19,6 +19,7 @@ import minefantasy.mf2.api.weapon.IDamageModifier;
 import minefantasy.mf2.api.weapon.IKnockbackWeapon;
 import minefantasy.mf2.api.weapon.IParryable;
 import minefantasy.mf2.api.weapon.IPowerAttack;
+import minefantasy.mf2.api.weapon.ISpecialCombatMob;
 import minefantasy.mf2.api.weapon.ISpecialEffect;
 import minefantasy.mf2.api.weapon.IWeaponSpeed;
 import minefantasy.mf2.api.weapon.IWeightedWeapon;
@@ -35,7 +36,6 @@ import minefantasy.mf2.item.weapon.ItemKatanaMF;
 import minefantasy.mf2.item.weapon.ItemWaraxeMF;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
-import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.network.packet.DodgeCommand;
 import minefantasy.mf2.network.packet.ParryPacket;
 import minefantasy.mf2.util.MFLogUtil;
@@ -49,7 +49,6 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -709,6 +708,10 @@ public class CombatMechanics
 		if(parry != null)
 		{
 			parry.onParry(source, user, attacker, dam);
+		}
+		if(user instanceof ISpecialCombatMob)
+		{
+			((ISpecialCombatMob)user).onParry(source, attacker, dam);
 		}
 		
 		boolean groundBlock = user.onGround;

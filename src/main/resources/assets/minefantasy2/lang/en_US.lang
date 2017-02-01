@@ -2177,8 +2177,9 @@ knowledge.cheeseroll.1=Cheese goes well with bread. Put some cheese in a roll to
 knowledge.firepit=Firepit and Stoves
 knowledge.firepit.desc=Basic cooking
 knowledge.firepit.1=The firepit is the easist way to steadily provide flame for cooking and lighting purposes and can be made with litte cost.^To create a fire, place a firepit block and right-click timber items to add fuel, then right-click with a firestarter.
-knowledge.firepit.2=Stovetops are used to cook food, these must be placed on top of a heat source (firepit or forge).^Right-click raw food ontop of the plate to place it, and wait until it cooks, try not to overcook it. If you use a forge, be careful not to make it too hot (plain coal should do).
-knowledge.firepit.3=Ovens are able to cook baked items such as bread as well as that of a normal cooktop.^Ovens are also required to make ceramics out of clay making them useful in cooking as well as other crafts.
+knowledge.firepit.2=Stovetops are used to cook food, these must be placed on top of a heat source (firepit or forge).^Right-click raw food ontop of the plate to place it, and wait until it cooks, try not to overcook it. Some recipes such as cakes require more steady temperature. use of a forge and coal dust can give a proper temperature for these purposes.
+knowledge.firepit.3=Ovens are able to cook baked items such as bread as well as that of a normal cooktop.^Ovens are also required to make ceramics out of clay making them useful in cooking as well as other crafts, provided the temperature is very high, such as coal in a forge.
+knowledge.firepit.4=When cooking: use a firepit for basic cooking, a forge with coal dust for advanced cooking, and a forge with standard fuel (like coal) for ceramics.
 
 knowledge.cookingutensil=Cooking Utensils
 knowledge.cookingutensil.desc=Tools for cooking

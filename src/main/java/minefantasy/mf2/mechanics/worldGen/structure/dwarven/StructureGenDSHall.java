@@ -126,6 +126,10 @@ public class StructureGenDSHall extends StructureModuleMF
 		{
 			buildNext(width_span, depth, height);
 		}
+		else
+		{
+			mapStructure(0, 0, depth, StructureGenDSRoom.class);
+		}
 		if(rand.nextInt(3) != 0)
 		{
 			tryPlaceMinorRoom((width_span), 0, (int)Math.floor((float) depth / 2), rotateLeft());
@@ -133,6 +137,10 @@ public class StructureGenDSHall extends StructureModuleMF
 		if(rand.nextInt(3) != 0)
 		{
 			tryPlaceMinorRoom(-(width_span), 0, (int)Math.floor((float) depth / 2), rotateRight());
+		}
+		if(this instanceof StructureGenDSIntersection || this.lengthId % 2 == 0)
+		{
+			placeBlock(Blocks.glowstone, 0, 0, height+1, depth/2);
 		}
 	}
 	
@@ -191,9 +199,9 @@ public class StructureGenDSHall extends StructureModuleMF
 		}
 		if(deviationCount > 0 && rand.nextInt(4) == 0)
 		{
-			return StructureGenDSIntersection.class;
+			return rand.nextInt(12) == 0 ? StructureGenDSCrossroads.class : StructureGenDSIntersection.class;
 		}
-		if( rand.nextInt(8) == 0 && this.yCoord > 24)
+		if( rand.nextInt(16) == 0 && this.yCoord > 24)
 		{
 			return StructureGenDSStairs.class;
 		}

@@ -3,6 +3,7 @@ package minefantasy.mf2.block.tileentity.blastfurnace;
 import java.util.Random;
 
 import minefantasy.mf2.api.crafting.MineFantasyFuels;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.refine.BlastFurnaceRecipes;
 import minefantasy.mf2.api.refine.ISmokeCarrier;
 import minefantasy.mf2.api.refine.SmokeMechanics;
@@ -72,7 +73,7 @@ public class TileEntityBlastFC extends TileEntity implements IInventory, ISidedI
 					tile.setInventorySlotContents(a, copy);
 					this.decrStackSize(a, 1);
 				}
-				else if(theirSlot.isItemEqual(mySlot))
+				else if(CustomToolHelper.areEqual(theirSlot, mySlot))
 				{
 					if((theirSlot.stackSize) < getMaxStackSizeForDistribute())
 					{

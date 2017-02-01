@@ -1,6 +1,5 @@
 package minefantasy.mf2.item;
 
-import java.util.HashMap;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -9,16 +8,19 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.knowledge.IArtefact;
 import minefantasy.mf2.api.knowledge.ResearchArtefacts;
+import minefantasy.mf2.block.decor.BlockSchematic;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.ToolListMF;
-import minefantasy.mf2.mechanics.worldGen.structure.LootTypes;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class ItemArtefact extends Item implements IArtefact
@@ -33,12 +35,12 @@ public class ItemArtefact extends Item implements IArtefact
 		new Artefact("ancient_jewel", "adamant_jewel", 20, 2, MYTHIC, 2, "smeltAdamantium", "smeltMaster"),
 		new Artefact("ancient_jewel", "master_jewel", 30, 2, MYTHIC,  1, "smeltMaster"),
 		new Artefact("trilogy_jewel", "trilogy_jewel", 3, null, 1),
-		new Artefact("schem_bomb", "schem_bomb", 	50, 2, DWARVEN,  1, "bombObsidian", "mineObsidian"),
-		new Artefact("schem_crossbow", "schem_crossbow", 50, 2, DWARVEN,  1, "crossShaftAdvanced", "crossHeadAdvanced"),
-		new Artefact("schem_forge", "schem_forge", 	50, 2, DWARVEN,  1 , "advforge", "advcrucible"),
-		new Artefact("schem_gears", "schem_gears", 	50, 2, DWARVEN,  1, "cogArmour"),
-		new Artefact("schem_cogwork", "schem_cogwork",  50, 2, DWARVEN,  1 , "cogArmour"),
-		new Artefact("schem_alloy", "schem_alloy",  50, 2, DWARVEN,  1 , "compPlate"),
+		new Artefact("schem_bomb", "schem_bomb", 	50, 2, null,  1, "bombObsidian", "mineObsidian"),
+		new Artefact("schem_crossbow", "schem_crossbow", 50, 2, null,  1, "crossShaftAdvanced", "crossHeadAdvanced"),
+		new Artefact("schem_forge", "schem_forge", 	50, 2, null,  1 , "advforge", "advcrucible"),
+		new Artefact("schem_gears", "schem_gears", 	50, 2, null,  1, "cogArmour"),
+		new Artefact("schem_cogwork", "schem_cogwork",  50, 2, null,  1 , "cogArmour"),
+		new Artefact("schem_alloy", "schem_alloy",  50, 2, null,  1 , "compPlate"),
 	};
 	
 	@SideOnly(Side.CLIENT)
@@ -122,6 +124,30 @@ public class ItemArtefact extends Item implements IArtefact
 	{
 		return getArtefact(item).time;
 	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
+    {
+		int meta = item.getItemDamage();
+		if(!world.isRemote && meta > 3)
+		{
+	        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
+	
+	        if (movingobjectposition == null)
+	        {
+	            return item;
+	        }
+	        else
+	        {
+  	        	if(BlockSchematic.useSchematic(item, world, user, movingobjectposition))
+  	        	{
+  	        		item.stackSize --;
+  	        		return item;
+  	        	}
+	        }
+		}
+		return item;
+    }
 }
 class Artefact
 {

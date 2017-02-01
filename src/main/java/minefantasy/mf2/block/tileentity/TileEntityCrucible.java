@@ -3,6 +3,7 @@ package minefantasy.mf2.block.tileentity;
 import java.util.Random;
 
 import minefantasy.mf2.api.crafting.IHeatUser;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.AlloyRecipes;
 import minefantasy.mf2.api.refine.SmokeMechanics;
@@ -126,7 +127,7 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 			inv[getOutSlot()] = itemstack.copy();
 		} 
 		
-		else if (inv[getOutSlot()].isItemEqual(itemstack)) 
+		else if ( CustomToolHelper.areEqual(inv[getOutSlot()], itemstack) )
 		{
 			inv[getOutSlot()].stackSize += itemstack.stackSize;
 		}
@@ -173,7 +174,7 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
 		if (inv[getOutSlot()] == null)
 			return true;
 		if (inv[getOutSlot()] != null
-				&& inv[getOutSlot()].isItemEqual(result)
+				&& CustomToolHelper.areEqual(inv[getOutSlot()], result)
 				&& inv[getOutSlot()].stackSize < (inv[getOutSlot()]
 						.getMaxStackSize() - (result.stackSize - 1)))
 			return true;

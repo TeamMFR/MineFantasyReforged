@@ -28,6 +28,7 @@ import minefantasy.mf2.api.weapon.IKnockbackWeapon;
 import minefantasy.mf2.api.weapon.IParryable;
 import minefantasy.mf2.api.weapon.IPowerAttack;
 import minefantasy.mf2.api.weapon.IRackItem;
+import minefantasy.mf2.api.weapon.ISpecialCombatMob;
 import minefantasy.mf2.api.weapon.ISpecialEffect;
 import minefantasy.mf2.api.weapon.IWeaponClass;
 import minefantasy.mf2.api.weapon.IWeaponSpeed;
@@ -553,7 +554,7 @@ public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, 
 	@Override
 	public boolean canUserParry(EntityLivingBase user)
 	{
-		return user instanceof EntityPlayer || (canAnyMobParry() || rand.nextFloat() < 0.20F);
+		return user instanceof EntityPlayer || user instanceof ISpecialCombatMob || (canAnyMobParry() || rand.nextFloat() < 0.20F);
 	}
 
 	protected boolean canAnyMobParry() 

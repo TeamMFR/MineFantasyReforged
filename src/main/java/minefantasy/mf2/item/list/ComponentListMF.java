@@ -234,9 +234,10 @@ public class ComponentListMF
 		MineFantasyFuels.addForgeFuel(Items.lava_bucket,  2400, 5000, true);//			5000C , 2m
 		MineFantasyFuels.addForgeFuel(Items.magma_cream,  2400, 4000, true, true);//		4000C , 2m
 		
-		MineFantasyFuels.addForgeFuel(ComponentListMF.coalDust, 200, 1500);//				1500C , 10s
 		MineFantasyFuels.addForgeFuel(ComponentListMF.coke, 1200, 2500, false, true);//					2500C , 1m
 		MineFantasyFuels.addForgeFuel(ComponentListMF.magma_cream_refined, 2400, 5000, true, true);//	5000C , 2m
+		
+		MineFantasyFuels.addForgeFuel(ComponentListMF.coalDust, 1200, 180);//				180C , 60s
 	}
 
 	private static void addRandomDrops()

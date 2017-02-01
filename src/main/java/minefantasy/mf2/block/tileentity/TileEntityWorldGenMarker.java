@@ -15,12 +15,13 @@ public class TileEntityWorldGenMarker extends TileEntity
 	@Override
 	public void updateEntity()
 	{
-		if(!worldObj.isRemote && ticks >= getSpawnTime() && areChunksLoaded())
+		if(!worldObj.isRemote && areChunksLoaded() && ticks >= getSpawnTime())
 		{
 			Block block = Block.getBlockById(prevID);
 			worldObj.setBlock(xCoord, yCoord, zCoord, block != null ? block : Blocks.air, prevMeta, 2);
 			StructureModuleMF.placeStructure(className, length, deviation, worldObj, xCoord, yCoord, zCoord, this.getBlockMetadata());
 		}
+		
 		++ticks;
 	}
 	

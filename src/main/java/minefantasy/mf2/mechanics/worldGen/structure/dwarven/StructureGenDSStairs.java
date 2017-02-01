@@ -133,6 +133,18 @@ public class StructureGenDSStairs extends StructureModuleMF
 		//DOORWAY
 		buildDoorway(width_span, depth, height);
 		
+		if(lengthId == -100)
+		{
+			this.lengthId = -99;
+			if(yCoord > 64 || rand.nextInt(2) == 0)
+			{
+				mapStructure(0, -depth, depth, StructureGenDSStairs.class);
+			}
+			else
+			{
+				mapStructure(0, -depth, depth, StructureGenDSCrossroads.class);
+			}
+		}
 		++lengthId;
 		if(lengthId > 0)
 		{
@@ -156,7 +168,15 @@ public class StructureGenDSStairs extends StructureModuleMF
 	}
 	protected void buildNext(int width_span, int depth, int height) 
 	{
-		tryPlaceHall(0, -depth, depth, direction);
+		if(rand.nextInt(3) == 0)
+		{
+			++lengthId;
+			mapStructure(0, -depth, depth, StructureGenDSStairs.class);
+		}
+		else
+		{
+			tryPlaceHall(0, -depth, depth, direction);
+		}
 	}
 	protected void tryPlaceHall(int x, int y, int z, int d) 
 	{
