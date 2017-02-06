@@ -155,4 +155,11 @@ public class MinotaurBreed
 		}
 		return 0;//BROWN
 	}
+	/**
+	 * What environment is a particular structure
+	 */
+	public static int getEnvironment(String subtype) 
+	{
+		return subtype.equalsIgnoreCase("Frost") ? (byte)2 : subtype.equalsIgnoreCase("Nether") ? (byte)1 : (byte)0;
+	}
 }
