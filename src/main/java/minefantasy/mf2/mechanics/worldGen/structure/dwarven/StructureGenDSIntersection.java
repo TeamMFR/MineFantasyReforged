@@ -2,6 +2,7 @@ package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
+import minefantasy.mf2.entity.mob.MinotaurBreed;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -92,7 +93,7 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 		{
 			return new Object[]{BlockListMF.reinforced_stone, false};
 		}
-		return new Object[]{Blocks.stonebrick, true};
+		return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	@Override
 	protected Object[] getFloor(int radius, int depth, int x, int z)
@@ -113,7 +114,7 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 	}
 	
 	@Override
-	protected Object[] getWalls(int radius, int depth, int x, int z)
+	protected Object[] getWalls(int radius, int height, int depth, int x, int y, int z)
 	{
 		if(x == -radius || x == radius || z == depth || z == 0)
 		{
@@ -122,7 +123,7 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 				return new Object[]{BlockListMF.reinforced_stone, false};
 			}
 			
-			return new Object[]{Blocks.stonebrick, true};
+			return y == height/2 ? new Object[]{BlockListMF.reinforced_stone, "Hall"} : new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}
@@ -153,8 +154,8 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 0, depth/2);
-		mob.worldGenTier(1);
-		
+		mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 1);
 	}
 	
 	@Override
@@ -164,6 +165,6 @@ public class StructureGenDSIntersection extends StructureGenDSHall
 		{
 			return StructureGenDSRoom.class;
 		}
-		return rand.nextInt(3) == 0 ? StructureGenDSStairs.class : StructureGenDSHall.class;
+		return (yCoord >= StructureGenDSStairs.minLevel && rand.nextInt(3) == 0) ? StructureGenDSStairs.class : StructureGenDSHall.class;
 	}
 }

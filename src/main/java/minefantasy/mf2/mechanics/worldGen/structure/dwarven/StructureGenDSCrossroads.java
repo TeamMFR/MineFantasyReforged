@@ -7,6 +7,7 @@ import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
+import minefantasy.mf2.entity.mob.MinotaurBreed;
 import minefantasy.mf2.item.ItemArtefact;
 import minefantasy.mf2.item.gadget.ItemBomb;
 import minefantasy.mf2.item.gadget.ItemMine;
@@ -38,6 +39,10 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 	@Override
 	public boolean canGenerate() 
 	{
+		if(lengthId == -100)
+		{
+			return true;
+		}
 		int width_span = getWidthSpan();
 		int depth = getDepthSpan();
 		int height = getHeight();
@@ -68,12 +73,12 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 		{
 			return true;
 		}
-		return ((float) emptySpaces / (float)filledSpaces) < 0.25F;//at least 75% full
+		return ((float) emptySpaces / (float)(emptySpaces+filledSpaces) ) < WorldGenDwarvenStronghold.maxAir;//at least 75% full
 	}
 	
 	private boolean allowBuildOverBlock(Block block)
 	{
-		if(block == Blocks.stonebrick || block == BlockListMF.reinforced_stone)
+		if(block == BlockListMF.reinforced_stone_bricks || block == BlockListMF.reinforced_stone)
 		{
 			return false;
 		}
@@ -125,13 +130,22 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 				blockarray = getTrim(width_span, depth, x, z);
 				if(blockarray != null)
 				{
-					int meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
+					int meta = 0;
+					if(blockarray[1] instanceof Integer)
+					{
+						meta = (Integer)blockarray[1];
+					}
+					if(blockarray[1] instanceof Boolean)
+					{
+						meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
+					}
 					placeBlock((Block)blockarray[0], meta, x, height, z);
+					placeBlock(BlockListMF.reinforced_stone, meta, x, 4, z);
 					if((Block)blockarray[0] == BlockListMF.reinforced_stone_framed)
 					{
 						for(int h = height-1; h > 1; h --)
 						{
-							placeBlock(h == 4 ? Blocks.glowstone : BlockListMF.reinforced_stone, 0, x, h, z);
+							placeBlock(h == 5 ? Blocks.glowstone : BlockListMF.reinforced_stone, h==2 ? 1 : 0, x, h, z);
 						}
 						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, 1, z);
 					}
@@ -191,7 +205,12 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 			{
 				return new Object[]{BlockListMF.reinforced_stone_framed, false};
 			}
-			return new Object[]{BlockListMF.reinforced_stone, false};
+			int m = 0;
+			if(x == 0 || z == 5 || z == (depth-5))
+			{
+				m = 1;
+			}
+			return new Object[]{BlockListMF.reinforced_stone, m};
 		}
 		return null;
 	}
@@ -205,7 +224,7 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 		{
 			return new Object[]{BlockListMF.reinforced_stone, false};
 		}
-		return new Object[]{Blocks.stonebrick, true};
+		return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	
 	private Object[] getFloor(int radius, int depth, int x, int z)
@@ -234,7 +253,7 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 				return new Object[]{BlockListMF.reinforced_stone, false};
 			}
 			
-			return new Object[]{Blocks.stonebrick, true};
+			return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}
@@ -288,7 +307,8 @@ public class StructureGenDSCrossroads extends StructureModuleMF
 	{
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, x, y, z);
-		mob.worldGenTier(tier);
+		mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), tier);
 	}
 	protected void tryPlaceCrossroadHall(int x, int y, int z, int d, boolean stair, int delay) 
 	{

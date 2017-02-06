@@ -70,10 +70,8 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
             this.equipmentDropChances[i] = 1F;
         }
 	}
-	public void worldGenTier(int tier)
+	public void worldGenTier(int species, int tier)
 	{
-		int species = MinotaurBreed.getEnvironment(this);
-		
     	setMob(species, tier);
     	setLoadout();
     	if(tier > 0)

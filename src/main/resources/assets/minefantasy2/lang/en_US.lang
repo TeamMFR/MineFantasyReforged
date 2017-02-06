@@ -628,8 +628,14 @@ tile.nailed_planks.name=Nailed Planks
 tile.refined_planks.name=Refined Planks
 tile.nailed_planks_stair.name=Nailed Plank Stairs
 tile.refined_planks_stair.name=Refined Plank Stairs
-tile.reinforced_stone.name=Reinforced Stone
-tile.reinforced_stone_bricks.name=Reinforced Stone Bricks
+
+tile.reinforced_stone_base.name=Reinforced Stone
+tile.reinforced_stone_engraved.name=Engraved Reinforced Stone
+
+tile.reinforced_stone_bricks_base.name=Reinforced Stone Bricks
+tile.reinforced_stone_bricks_cracked.name=Worn Reinforced Stone Bricks
+tile.reinforced_stone_bricks_mossy.name=Mossy Reinforced Stone Bricks
+
 tile.reinforced_stone_framed.name=Framed Reinforced Stone
 tile.reinforced_stone_stair.name=Reinforced Stone Steps
 tile.reinforced_stone_brick_stair.name=Reinforced Stone Brick Steps

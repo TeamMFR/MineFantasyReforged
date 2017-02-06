@@ -5,9 +5,8 @@ import minefantasy.mf2.block.decor.BlockRack;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
-import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
-import minefantasy.mf2.item.ItemArtefact;
+import minefantasy.mf2.entity.mob.MinotaurBreed;
 import minefantasy.mf2.item.gadget.ItemBomb;
 import minefantasy.mf2.item.gadget.ItemMine;
 import minefantasy.mf2.item.list.CustomToolListMF;
@@ -89,12 +88,12 @@ public class StructureGenDSRoom extends StructureModuleMF
 		{
 			return true;
 		}
-		return ((float) emptySpaces / (float)filledSpaces) < 0.25F;//at least 75% full
+		return ((float) emptySpaces / (float)(emptySpaces+filledSpaces) ) < WorldGenDwarvenStronghold.maxAir;//at least 75% full
 	}
 	
 	private boolean allowBuildOverBlock(Block block)
 	{
-		if(block == Blocks.stonebrick || block == BlockListMF.reinforced_stone)
+		if(block == BlockListMF.reinforced_stone_bricks || block == BlockListMF.reinforced_stone)
 		{
 			return false;
 		}
@@ -146,7 +145,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 					{
 						for(int h = height-1; h > 1; h --)
 						{
-							placeBlock(h == 4 ? Blocks.glowstone : BlockListMF.reinforced_stone, 0, x, h, z);
+							placeBlock(h == 4 ? Blocks.glowstone : BlockListMF.reinforced_stone, h == 2 ? 1 : 0, x, h, z);
 						}
 						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, 1, z);
 					}
@@ -264,7 +263,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 		{
 			return new Object[]{BlockListMF.reinforced_stone, false};
 		}
-		return new Object[]{Blocks.stonebrick, true};
+		return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	
 	private Object[] getFloor(int radius, int depth, int x, int z)
@@ -301,7 +300,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 				return new Object[]{BlockListMF.reinforced_stone, false};
 			}
 			
-			return new Object[]{Blocks.stonebrick, true};
+			return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}
@@ -322,7 +321,7 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		int zOffset = 4;
 		
-		boolean hall1 = rand.nextInt(4) == 0, hall2 = rand.nextInt(4) == 0, hall3 = rand.nextInt(3) != 0;
+		boolean hall1 = rand.nextInt(3) == 0, hall2 = rand.nextInt(3) == 0, hall3 = rand.nextInt(3) == 0;
 		int offset1 = hall1 ? width_span+1 : width_span;
 		int offset2 = hall2 ? -(width_span+1) : -width_span;
 		int offset3 = hall3 ? depth+1 : depth;
@@ -337,7 +336,8 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth-5);
-		mob.worldGenTier(1);
+		mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 1);
 		
 	}
 	
@@ -378,7 +378,8 @@ public class StructureGenDSRoom extends StructureModuleMF
 		//this.placeSpawner(0, 1, depth/2, "Silverfish");
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth/2);
-		mob.worldGenTier(2);
+		mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 2);
 	}
 	
 	public void generateArmoury()
@@ -419,17 +420,6 @@ public class StructureGenDSRoom extends StructureModuleMF
 				}
 			}
 		}
-		/*
-		this.placeSpawner(0, 1, z, "CaveSpider");
-		this.placeBlock(Blocks.web, 0, -1, 1, z);
-		this.placeBlock(Blocks.web, 0, 1, 1, z);
-		this.placeBlock(Blocks.web, 0, 0, 2, z);
-		this.placeBlock(Blocks.web, 0, 1, 2, z);
-		this.placeBlock(Blocks.web, 0, -1, 2, z);
-		this.placeBlock(Blocks.web, 0, 0, 3, z);
-		this.placeBlock(Blocks.web, 0, 0, 1, z+1);
-		this.placeBlock(Blocks.web, 0, 0, 1, z-1);
-		*/
 		placeChest(-(width-2), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
 		placeChest(-(width-3), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
 		placeChest((width-2), 1, z-1, direction, LootTypes.DWARVEN_ARMOURY);
@@ -474,7 +464,8 @@ public class StructureGenDSRoom extends StructureModuleMF
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 1, depth-1);
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, z);
-		mob.worldGenTier(3);
+		mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 3);
 	}
 	
 	private void placeRack(int x, int y, int z, int newDirection) 
@@ -549,7 +540,8 @@ public class StructureGenDSRoom extends StructureModuleMF
 		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth/2);
-		mob.worldGenTier(2);
+		mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 2);
 		
 	}
 	

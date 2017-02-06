@@ -2,9 +2,9 @@ package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
 import java.util.Random;
 
+import minefantasy.mf2.entity.mob.MinotaurBreed;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenStructureBase;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
@@ -14,26 +14,44 @@ import net.minecraft.world.World;
 public class WorldGenDwarvenStronghold extends WorldGenStructureBase
 {
 	/**
+	 * Max percentage of air blocks allowed for structures to build
+	 */
+	public static float maxAir = 0.25F;
+	/**
 	 * A debug method used to allow strongholds to generate in the air, for easy observation of shape and size.
 	 */
 	public static final boolean debug_air = false;
+	private boolean isSurfaceBuild = false;
 	public WorldGenDwarvenStronghold()
 	{		
+	}
+	public void setSurfaceMode(boolean flag)
+	{
+		isSurfaceBuild = flag;
 	}
 	@Override
 	protected StructureModuleMF getStartPiece(World world, int x, int y, int z, int direction)
 	{
-		return new StructureGenDSEntry(world, x, y-1, z, direction);
+		return new StructureGenDSEntry(world, x, y-1, z, direction, isSurfaceBuild);
+		/*
+		if(startPiece == null)
+		{
+			startPiece = new StructureGenDSEntry(world, x, y-1, z, direction, isSurfaceBuild);
+		}
+		startPiece.direction = direction;
+		return startPiece;
+		 *
+		 */
 	}
 	@Override
 	protected boolean isBlockAcceptableOrigin(World world, int x, int y, int z) 
 	{
-		return isValidGround(world, x, y, z) && world.canBlockSeeTheSky(x, y+2, z);
+		return isValidGround(world, x, y, z);// && world.canBlockSeeTheSky(x, y+2, z);
 	}
 	@Override
 	protected boolean canStructureBuild(StructureModuleMF piece) 
 	{
-		if(debug_air)
+		if(debug_air || isSurfaceBuild)
 		{
 			return true;
 		}
@@ -63,7 +81,7 @@ public class WorldGenDwarvenStronghold extends WorldGenStructureBase
 	@Override
 	protected boolean isDirectionRandom() 
 	{
-		return false;
+		return isSurfaceBuild;
 	}
 	@Override
 	protected int[] getYGenBounds(World world) {

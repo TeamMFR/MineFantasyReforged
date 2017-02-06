@@ -14,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
@@ -167,5 +168,42 @@ public class BlockBerryBush extends BlockBush implements IShearable
     public int getRenderType()
     {
         return 0;
+    }
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getRenderColor(int i)
+    {
+        return ColorizerFoliage.getFoliageColorBasic();
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getBlockColor()
+    {
+        double d0 = 0.5D;
+        double d1 = 1.0D;
+        return ColorizerFoliage.getFoliageColor(d0, d1);
+    }
+    
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int colorMultiplier(IBlockAccess world, int x, int y, int z)
+    {
+        int l = 0;
+        int i1 = 0;
+        int j1 = 0;
+
+        for (int k1 = -1; k1 <= 1; ++k1)
+        {
+            for (int l1 = -1; l1 <= 1; ++l1)
+            {
+                int i2 = world.getBiomeGenForCoords(x + l1, z + k1).getBiomeFoliageColor(x + l1, y, z + k1);
+                l += (i2 & 16711680) >> 16;
+                i1 += (i2 & 65280) >> 8;
+                j1 += i2 & 255;
+            }
+        }
+
+        return (l / 9 & 255) << 16 | (i1 / 9 & 255) << 8 | j1 / 9 & 255;
     }
 }

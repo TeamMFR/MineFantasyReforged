@@ -45,8 +45,11 @@ public abstract class WorldGenStructureBase extends WorldGenerator
 			    		}
 		    		}
 	    		}
+	    		building = null;
+	    		return false;
 	    	}
 		}
+		building = null;
         return false;
     }
 	

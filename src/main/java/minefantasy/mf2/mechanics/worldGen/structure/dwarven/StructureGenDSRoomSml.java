@@ -66,11 +66,11 @@ public class StructureGenDSRoomSml extends StructureModuleMF
 		{
 			return true;
 		}
-		return ((float) emptySpaces / (float)filledSpaces) < 0.25F;//at least 75% full
+		return ((float) emptySpaces / (float)(emptySpaces+filledSpaces) ) < WorldGenDwarvenStronghold.maxAir;//at least 75% full
 	}
 	private boolean allowBuildOverBlock(Block block)
 	{
-		if(block == Blocks.stonebrick || block == BlockListMF.reinforced_stone)
+		if(block == BlockListMF.reinforced_stone_bricks || block == BlockListMF.reinforced_stone)
 		{
 			return false;
 		}
@@ -124,7 +124,7 @@ public class StructureGenDSRoomSml extends StructureModuleMF
 		placeBlock(BlockListMF.reinforced_stone, 		0, 1, 2, -1);
 		placeBlock(BlockListMF.reinforced_stone_framediron, 0, 1, 3, -1);
 		
-		placeBlock(BlockListMF.reinforced_stone, 0, 0, 3, -1);
+		placeBlock(BlockListMF.reinforced_stone, 1, 0, 3, -1);
 		placeBlock(Blocks.air, 0, 0, 1, -1);
 		placeBlock(Blocks.air, 0, 0, 2, -1);
 		
@@ -145,7 +145,7 @@ public class StructureGenDSRoomSml extends StructureModuleMF
 		{
 			return new Object[]{BlockListMF.reinforced_stone, false};
 		}
-		return new Object[]{Blocks.stonebrick, true};
+		return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	private Object[] getWalls(int width, int depth, int x, int z)
 	{
@@ -156,7 +156,7 @@ public class StructureGenDSRoomSml extends StructureModuleMF
 				return new Object[]{BlockListMF.reinforced_stone, false};
 			}
 			
-			return new Object[]{Blocks.stonebrick, true};
+			return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}
@@ -170,8 +170,8 @@ public class StructureGenDSRoomSml extends StructureModuleMF
 		
 		for(int x = width-1; x >= (width-4); x --)
 		{
-			placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 1, 4);
-			placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 2, 4);
+			placeBlock(BlockListMF.reinforced_stone_bricks, StructureGenAncientForge.getRandomMetadata(rand), x, 1, 4);
+			placeBlock(BlockListMF.reinforced_stone_bricks, StructureGenAncientForge.getRandomMetadata(rand), x, 2, 4);
 			placeBlock(Blocks.stone_slab, 0, x, 3, 4);
 		}
 		placeBlock(Blocks.stone_slab, 0, width-1, 1, 6);

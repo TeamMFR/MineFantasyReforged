@@ -11,6 +11,7 @@ import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientAlter;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenStructureBase;
 import minefantasy.mf2.mechanics.worldGen.structure.dwarven.WorldGenDwarvenStronghold;
+import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,9 +25,11 @@ import net.minecraft.world.World;
 public class ItemWorldGenPlacer extends Item
 {
 	private static final String[] types = new String[]{"AncientForge", "AncientAlter", "DwarvenStronghold"};
+	public IIcon[] icons;
+	
 	public ItemWorldGenPlacer() 
 	{
-		this.setCreativeTab(CreativeTabMF.tabMaterialsMF);
+		this.setCreativeTab(CreativeTabs.tabMisc);
 		GameRegistry.registerItem(this, "PlaceWorldGenMF", MineFantasyII.MODID);
 		this.setHasSubtypes(true);
 	}
@@ -70,7 +73,35 @@ public class ItemWorldGenPlacer extends Item
         else 
         {	
         	if(!world.isRemote)
-        	getWorldGen(item.getItemDamage()).generate(world, itemRand, x, y, z);
+        	{
+        		WorldGenStructureBase wg = getWorldGen(item.getItemDamage());
+        		if(wg instanceof WorldGenDwarvenStronghold)
+        		{
+        			WorldGenDwarvenStronghold ds = (WorldGenDwarvenStronghold)wg;
+        			MFLogUtil.logDebug("DS: Try Cliff Build");
+        			if(!ds.generate(world, itemRand, x, y, z))
+        			{
+        				MFLogUtil.logDebug("Failed... DS: Try Surface Build");
+        				ds.setSurfaceMode(true);
+        				if(ds.generate(world, itemRand, x, y, z))
+        				{
+        					MFLogUtil.logDebug("Success... DS: Placed Surface Build");
+        				}
+        				else
+        				{
+        					MFLogUtil.logDebug("Failed... DS: No Build Placed");
+        				}
+        			}
+        			else
+    				{
+    					MFLogUtil.logDebug("Success... DS: Placed Cliff Build");
+    				}
+        		}
+        		else
+        		{
+        			wg.generate(world, itemRand, x, y, z);
+        		}
+        	}	
             return true;
         }
     }
@@ -89,12 +120,6 @@ public class ItemWorldGenPlacer extends Item
         list.add(new ItemStack(item, 1, id));
     }
 	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamage(int i)
-	{
-		return Items.nether_star.getIconFromDamage(i);
-	}
 	private WorldGenStructureBase getWorldGen(int meta)
 	{
 		if(meta == 1)
@@ -110,7 +135,18 @@ public class ItemWorldGenPlacer extends Item
 	
 	@Override
 	@SideOnly(Side.CLIENT)
+    public IIcon getIconFromDamage(int d)
+    {
+		return icons[Math.min(icons.length-1, d)];
+    }
+	@SideOnly(Side.CLIENT)
+	@Override
     public void registerIcons(IIconRegister reg)
     {
+		icons = new IIcon[types.length];
+		for(int i = 0; i < types.length; i ++)
+		{
+			icons[i] = reg.registerIcon("minefantasy2:Other/generate_"+types[i]);
+		}
     }
 }

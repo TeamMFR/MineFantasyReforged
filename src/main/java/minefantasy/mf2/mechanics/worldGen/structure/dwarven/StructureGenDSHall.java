@@ -1,5 +1,7 @@
 package minefantasy.mf2.mechanics.worldGen.structure.dwarven;
 
+import java.util.Random;
+
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
@@ -52,12 +54,12 @@ public class StructureGenDSHall extends StructureModuleMF
 		{
 			return true;
 		}
-		return ((float) emptySpaces / (float)filledSpaces) < 0.25F;//at least 75% full
+		return ((float) emptySpaces / (float)(emptySpaces+filledSpaces) ) < WorldGenDwarvenStronghold.maxAir;//at least 75% full
 	}
 	
 	private boolean allowBuildOverBlock(Block block)
 	{
-		if(block == Blocks.stonebrick || block == BlockListMF.reinforced_stone)
+		if(block == BlockListMF.reinforced_stone_bricks || block == BlockListMF.reinforced_stone)
 		{
 			return false;
 		}
@@ -85,10 +87,22 @@ public class StructureGenDSHall extends StructureModuleMF
 				//WALLS
 				for(int y = 1; y <= height+1; y ++)
 				{
-					blockarray = getWalls(width_span, depth, x, z);
+					blockarray = getWalls(width_span, height, depth, x, y, z);
 					if(blockarray != null)
 					{
-						int meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
+						int meta = 0;
+						if(blockarray[1] instanceof Integer)
+						{
+							meta = (Integer)blockarray[1];
+						}
+						if(blockarray[1] instanceof Boolean)
+						{
+							meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
+						}
+						if(blockarray[1] instanceof String)
+						{
+							meta = (String)blockarray[1]=="Hall" ? getRandomEngravedWall(rand) : 0;
+						}
 						placeBlock((Block)blockarray[0], meta, x, y, z);
 					}
 				}
@@ -110,7 +124,7 @@ public class StructureGenDSHall extends StructureModuleMF
 					{
 						for(int h = height-1; h > 1; h --)
 						{
-							placeBlock(BlockListMF.reinforced_stone, 0, x, h, z);
+							placeBlock(BlockListMF.reinforced_stone, h==2 ? 1 : 0, x, h, z);
 						}
 						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, 1, z);
 					}
@@ -199,9 +213,9 @@ public class StructureGenDSHall extends StructureModuleMF
 		}
 		if(deviationCount > 0 && rand.nextInt(4) == 0)
 		{
-			return rand.nextInt(12) == 0 ? StructureGenDSCrossroads.class : StructureGenDSIntersection.class;
+			return StructureGenDSIntersection.class;
 		}
-		if( rand.nextInt(16) == 0 && this.yCoord > 24)
+		if( rand.nextInt(16) == 0 && this.yCoord >= StructureGenDSStairs.minLevel)
 		{
 			return StructureGenDSStairs.class;
 		}
@@ -226,7 +240,7 @@ public class StructureGenDSHall extends StructureModuleMF
 	}
 	protected Object[] getCeiling(int radius, int depth, int x, int z)
 	{
-		return new Object[]{Blocks.stonebrick, true};
+		return x == 0 ? new Object[]{BlockListMF.reinforced_stone, false} : new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	
 	protected Object[] getFloor(int radius, int depth, int x, int z)
@@ -246,7 +260,7 @@ public class StructureGenDSHall extends StructureModuleMF
 		return new Object[]{floor, false};
 	}
 	
-	protected Object[] getWalls(int radius, int depth, int x, int z)
+	protected Object[] getWalls(int radius, int height, int depth, int x, int y, int z)
 	{
 		if(x != -radius && x != radius && z == 0)
 		{
@@ -254,7 +268,7 @@ public class StructureGenDSHall extends StructureModuleMF
 		}
 		if(x == -radius || x == radius || z == depth)
 		{
-			return new Object[]{Blocks.stonebrick, true};
+			return y == height/2 ? new Object[]{BlockListMF.reinforced_stone, "Hall"} : new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}
@@ -266,4 +280,8 @@ public class StructureGenDSHall extends StructureModuleMF
 		return this;
 	}
 	protected static Block floor = BlockListMF.cobble_pavement;
+	public static int getRandomEngravedWall(Random rand)
+	{
+		return 2 + rand.nextInt(3);
+	}
 }

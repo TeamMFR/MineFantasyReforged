@@ -10,7 +10,7 @@ import net.minecraft.world.chunk.Chunk;
 
 public class TileEntityWorldGenMarker extends TileEntity
 {
-	public String className;
+	public String className, type;
 	public int ticks = 0, length = 0, deviation = 0, prevID, prevMeta;
 	@Override
 	public void updateEntity()
@@ -19,7 +19,7 @@ public class TileEntityWorldGenMarker extends TileEntity
 		{
 			Block block = Block.getBlockById(prevID);
 			worldObj.setBlock(xCoord, yCoord, zCoord, block != null ? block : Blocks.air, prevMeta, 2);
-			StructureModuleMF.placeStructure(className, length, deviation, worldObj, xCoord, yCoord, zCoord, this.getBlockMetadata());
+			StructureModuleMF.placeStructure(className, type, length, deviation, worldObj, xCoord, yCoord, zCoord, this.getBlockMetadata());
 		}
 		
 		++ticks;
@@ -49,6 +49,7 @@ public class TileEntityWorldGenMarker extends TileEntity
 		super.readFromNBT(nbt);
 		
 		className = nbt.getString("ClassDirectory");
+		type = nbt.getString("SubType");
 		length = nbt.getInteger("LengthPosition");
 		deviation = nbt.getInteger("Deviation");
 		prevID = nbt.getInteger("prevID");
@@ -61,6 +62,7 @@ public class TileEntityWorldGenMarker extends TileEntity
 		super.writeToNBT(nbt);
 		
 		nbt.setString("ClassDirectory", className);
+		nbt.setString("SubType", type);
 		nbt.setInteger("LengthPosition", length);
 		nbt.setInteger("prevID", prevID);
 		nbt.setInteger("prevMeta", prevMeta);

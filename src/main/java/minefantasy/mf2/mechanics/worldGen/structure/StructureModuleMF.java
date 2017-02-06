@@ -32,6 +32,7 @@ public abstract class StructureModuleMF
 	 * How many more branches can be added
 	 */
 	public int deviationCount;
+	protected String subtype = "Normal";
 	
 	public StructureModuleMF(World world, StructureCoordinates position)
 	{
@@ -146,6 +147,15 @@ public abstract class StructureModuleMF
 	{
 		int[] offset = offsetPos(xo, yo, zo, dir);
 		worldObj.setBlock(offset[0], offset[1], offset[2], id, meta, 2);
+	}
+	
+	public void placeBlockIfAir(Block id, int meta, int xo, int yo, int zo)
+	{
+		int[] offset = offsetPos(xo, yo, zo, direction);
+		if(worldObj.getBlock(offset[0], offset[1], offset[2]).isReplaceable(worldObj, offset[0], offset[1], offset[2]))
+		{
+			worldObj.setBlock(offset[0], offset[1], offset[2], id, meta, 2);
+		}
 	}
 	
 	public void placeEntity(Entity entity, int x, int y, int z)
@@ -297,12 +307,13 @@ public abstract class StructureModuleMF
 			((TileEntityWorldGenMarker)tile).prevID = Block.getIdFromBlock(block);
 			((TileEntityWorldGenMarker)tile).prevMeta = meta;
 			((TileEntityWorldGenMarker)tile).ticks -= delay;
+			((TileEntityWorldGenMarker)tile).type = this.subtype;
 		}
 		block = null;
 	}
 	
 	
-	public static void placeStructure(String classname, int lengthID, int deviation, World world, int x, int y, int z, int dir)
+	public static void placeStructure(String classname, String subtype, int lengthID, int deviation, World world, int x, int y, int z, int dir)
 	{
 		try
         {
@@ -312,11 +323,15 @@ public abstract class StructureModuleMF
             {
             	StructureModuleMF module = (StructureModuleMF)oclass.getConstructor(new Class[] {World.class, StructureCoordinates.class}).newInstance(world, new StructureCoordinates(x, y, z, dir));
             	
-            	if(module != null && module.canGenerate())
+            	if(module != null)
         		{
+            		module.subtype = subtype;
             		module.lengthId = lengthID;
             		module.deviationCount = deviation;
-        			module.generate();
+        			if(module.canGenerate())
+        			{
+        				module.generate();
+        			}
         		}
             }
         }

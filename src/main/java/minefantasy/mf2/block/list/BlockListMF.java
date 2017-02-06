@@ -7,6 +7,7 @@ import minefantasy.mf2.block.basic.BlockMythicDecor;
 import minefantasy.mf2.block.basic.BlockMythicOre;
 import minefantasy.mf2.block.basic.BlockOreMF;
 import minefantasy.mf2.block.basic.BlockPaneMF;
+import minefantasy.mf2.block.basic.BlockReinforcedStone;
 import minefantasy.mf2.block.basic.BlockWorldGenMarker;
 import minefantasy.mf2.block.basic.ConstructionBlockMF;
 import minefantasy.mf2.block.crafting.BlockAnvilMF;
@@ -162,8 +163,8 @@ public class BlockListMF
 	public static Block refined_planks_stair = new ConstructionBlockMF.StairsConstBlock("refined_planks_stair", refined_planks).register("refined_planks_stair");
 	public static Block nailed_planks_stair = new ConstructionBlockMF.StairsConstBlock("nailed_planks_stair", nailed_planks).register("nailed_planks_stair");
 	
-	public static Block reinforced_stone = new BasicBlockMF("reinforced_stone", Material.rock).setHardness(2.0F).setResistance(15F).setStepSound(Block.soundTypeStone);
-	public static Block reinforced_stone_bricks = new BasicBlockMF("reinforced_stone_bricks", Material.rock).setHardness(2.0F).setResistance(15F).setStepSound(Block.soundTypeStone);
+	public static Block reinforced_stone = new BlockReinforcedStone("reinforced_stone", "base", "engraved", "dshall_0", "dshall_1", "dshall_2").setHardness(2.0F).setResistance(15F).setStepSound(Block.soundTypeStone);
+	public static Block reinforced_stone_bricks = new BlockReinforcedStone("reinforced_stone_bricks", "base", "mossy", "cracked").setHardness(2.0F).setResistance(15F).setStepSound(Block.soundTypeStone);
 	public static Block reinforced_stone_framed = new BasicBlockMF("reinforced_stone_framed", Material.rock).setHardness(2.5F).setResistance(20F).setStepSound(Block.soundTypeStone);
 	public static Block reinforced_stone_framediron = new BasicBlockMF("reinforced_stone_framediron", Material.rock).setHardness(2.5F).setResistance(20F).setStepSound(Block.soundTypeStone).setBlockName("reinforced_stone_framed");
 	

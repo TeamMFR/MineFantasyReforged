@@ -10,6 +10,10 @@ import net.minecraftforge.common.ChestGenHooks;
 
 public class StructureGenDSStairs extends StructureModuleMF
 {
+	/**
+	 * The minimal height for a stairway to be created
+	 */
+	public static final int minLevel = 20;
 	public StructureGenDSStairs(World world, StructureCoordinates position)
 	{
 		super(world, position);
@@ -21,6 +25,11 @@ public class StructureGenDSStairs extends StructureModuleMF
 	@Override
 	public boolean canGenerate() 
 	{
+		if(lengthId == -100)
+		{
+			return true;
+		}
+		
 		int width_span = getWidthSpan();
 		int depth = getDepthSpan();
 		int height = getHeight();
@@ -52,12 +61,12 @@ public class StructureGenDSStairs extends StructureModuleMF
 		{
 			return true;
 		}
-		return ((float) emptySpaces / (float)filledSpaces) < 0.25F;//at least 75% full
+		return ((float) emptySpaces / (float)(emptySpaces+filledSpaces) ) < WorldGenDwarvenStronghold.maxAir;//at least 75% full
 	}
 	
 	private boolean allowBuildOverBlock(Block block)
 	{
-		if(block == Blocks.stonebrick || block == BlockListMF.reinforced_stone)
+		if(block == BlockListMF.reinforced_stone_bricks || block == BlockListMF.reinforced_stone)
 		{
 			return false;
 		}
@@ -81,6 +90,9 @@ public class StructureGenDSStairs extends StructureModuleMF
 				{
 					int meta = (Integer)blockarray[1];
 					placeBlock((Block)blockarray[0], meta, x, -z-1, z);
+					
+					placeBlock(BlockListMF.reinforced_stone_bricks, StructureGenAncientForge.getRandomMetadata(rand), x, -z-2, z);
+					
 					if(x == (width_span-1) || x == -(width_span-1))
 					{
 						placeBlock(BlockListMF.reinforced_stone, 0, x, -z, z);
@@ -93,10 +105,22 @@ public class StructureGenDSStairs extends StructureModuleMF
 				//WALLS
 				for(int y = 0; y <= height+1; y ++)
 				{
-					blockarray = getWalls(width_span, depth, x, z);
+					blockarray = getWalls(width_span, height, depth, x, y, z);
 					if(blockarray != null)
 					{
-						int meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
+						int meta = 0;
+						if(blockarray[1] instanceof Integer)
+						{
+							meta = (Integer)blockarray[1];
+						}
+						if(blockarray[1] instanceof Boolean)
+						{
+							meta = (Boolean)blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
+						}
+						if(blockarray[1] instanceof String)
+						{
+							meta = (String)blockarray[1]=="Hall" ? StructureGenDSHall.getRandomEngravedWall(rand) : 0;
+						}
 						placeBlock((Block)blockarray[0], meta, x, y-z, z);
 					}
 				}
@@ -121,7 +145,7 @@ public class StructureGenDSStairs extends StructureModuleMF
 						
 						for(int h = height-1; h > 1; h --)
 						{
-							placeBlock(BlockListMF.reinforced_stone, 0, x, h-z-1, z);
+							placeBlock(BlockListMF.reinforced_stone, h==2 ? 1 : 0, x, h-z-1, z);
 						}
 						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, -z, z);
 					}
@@ -136,7 +160,7 @@ public class StructureGenDSStairs extends StructureModuleMF
 		if(lengthId == -100)
 		{
 			this.lengthId = -99;
-			if(yCoord > 64 || rand.nextInt(2) == 0)
+			if( (yCoord > 64 && rand.nextInt(3) != 0)  || (yCoord >= 56 && rand.nextInt(3) == 0))
 			{
 				mapStructure(0, -depth, depth, StructureGenDSStairs.class);
 			}
@@ -145,7 +169,7 @@ public class StructureGenDSStairs extends StructureModuleMF
 				mapStructure(0, -depth, depth, StructureGenDSCrossroads.class);
 			}
 		}
-		++lengthId;
+		++lengthId;//Stairs don't count toward length
 		if(lengthId > 0)
 		{
 			buildNext(width_span, depth, height);
@@ -168,9 +192,8 @@ public class StructureGenDSStairs extends StructureModuleMF
 	}
 	protected void buildNext(int width_span, int depth, int height) 
 	{
-		if(rand.nextInt(3) == 0)
+		if(lengthId > 1 && rand.nextInt(3) == 0 && yCoord >= minLevel)
 		{
-			++lengthId;
 			mapStructure(0, -depth, depth, StructureGenDSStairs.class);
 		}
 		else
@@ -230,7 +253,7 @@ public class StructureGenDSStairs extends StructureModuleMF
 	}
 	protected Object[] getCeiling(int radius, int depth, int x, int z)
 	{
-		return new Object[]{Blocks.stonebrick, true};
+		return x == 0 ? new Object[]{BlockListMF.reinforced_stone, false} : new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	
 	protected Object[] getFloor(int radius, int depth, int x, int z)
@@ -254,7 +277,7 @@ public class StructureGenDSStairs extends StructureModuleMF
 		return new Object[]{BlockListMF.cobble_pavement, 0};
 	}
 	
-	protected Object[] getWalls(int radius, int depth, int x, int z)
+	protected Object[] getWalls(int radius, int height, int depth, int x, int y, int z)
 	{
 		if(x != -radius && x != radius && z == 0)
 		{
@@ -262,7 +285,7 @@ public class StructureGenDSStairs extends StructureModuleMF
 		}
 		if(x == -radius || x == radius || z == depth)
 		{
-			return new Object[]{Blocks.stonebrick, true};
+			return y == height/2 ? new Object[]{BlockListMF.reinforced_stone, "Hall"} : new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}

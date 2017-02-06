@@ -7,7 +7,6 @@ import minefantasy.mf2.entity.mob.EntityMinotaur;
 import minefantasy.mf2.entity.mob.MinotaurBreed;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mf2.mechanics.worldGen.structure.StructureModuleMF;
-import minefantasy.mf2.util.MFLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
@@ -15,17 +14,22 @@ import net.minecraftforge.common.ChestGenHooks;
 
 public class StructureGenDSEntry extends StructureModuleMF
 {
+	public boolean isSurfaceBuild;
 	public StructureGenDSEntry(World world, StructureCoordinates position)
 	{
 		super(world, position);
 	}
-	public StructureGenDSEntry(World world, int x, int y, int z, int direction) 
+	public StructureGenDSEntry(World world, int x, int y, int z, int direction, boolean surface) 
 	{
 		super(world, x, y, z, direction);
+		this.isSurfaceBuild = surface;
 	}
 	@Override
 	public void generate() 
 	{
+		int environment = MinotaurBreed.getEnvironment(worldObj, xCoord, zCoord, 0);
+		subtype = environment == 2 ? "Frost" : "Normal";
+		
 		int width_span = 4;
 		int depth = 10;
 		int height = 5;
@@ -77,7 +81,7 @@ public class StructureGenDSEntry extends StructureModuleMF
 					{
 						for(int h = height-1; h > 1; h --)
 						{
-							placeBlock(BlockListMF.reinforced_stone, 0, x, h, z);
+							placeBlock(BlockListMF.reinforced_stone, h==2 ? 1 : 0, x, h, z);
 						}
 						placeBlock(BlockListMF.reinforced_stone_framed, 0, x, 1, z);
 					}
@@ -93,8 +97,8 @@ public class StructureGenDSEntry extends StructureModuleMF
 			{
 				placeBlock(Blocks.air, 0, x, y, 0);
 			}
-			placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 0, -1);
-			placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 0, -2);
+			placeBlock(BlockListMF.reinforced_stone_bricks, StructureGenAncientForge.getRandomMetadata(rand), x, 0, -1);
+			placeBlock(BlockListMF.reinforced_stone_bricks, StructureGenAncientForge.getRandomMetadata(rand), x, 0, -2);
 			
 			placeBlock(BlockListMF.reinforced_stone, 0, x, -1, -1);
 			placeBlock(BlockListMF.reinforced_stone, 0, x, -1, -2);
@@ -105,14 +109,49 @@ public class StructureGenDSEntry extends StructureModuleMF
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -1);
 		placeBlock(BlockListMF.reinforced_stone, 0, 2, 0, -2);
 		
+		placeDoorway(-1, width_span, height, depth);
+		placeDoorway(1, width_span, height, depth);
+		placeBlock(BlockListMF.reinforced_stone, 0, 0, height-1, -3);
+		placeBlock(BlockListMF.reinforced_stone, 0, 0, height,  -1);
+		
 		EntityMinotaur mob = new EntityMinotaur(worldObj);
 		this.placeEntity(mob, 0, 1, depth/2);
-		mob.worldGenTier(1);
+		mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 1);
 		
 		this.lengthId = -99;
 		mapStructure(0, 0, depth, StructureGenDSStairs.class);
+		
+		if(isSurfaceBuild)
+		{
+			mapStructure(-width_span, 0, depth-1, rotateRight(), StructureDSSurfaceAppendage.class);
+			mapStructure(-width_span, 0, 2, rotateRight(), StructureDSSurfaceAppendage.class);
+			
+			mapStructure(width_span, 0, depth-1, rotateLeft(), StructureDSSurfaceAppendage.class);
+			mapStructure(width_span, 0, 2, rotateLeft(), StructureDSSurfaceAppendage.class);
+		}
 	}
 	
+	private void placeDoorway(int mod, int width_span, int height, int depth) 
+	{
+		int h = height;
+		placeBlock(BlockListMF.reinforced_stone, 0, 3*mod, 1, -1);
+		placeBlock(BlockListMF.reinforced_stone, 0, 3*mod, 1, -2);
+		for(int y = 1; y < h; y ++)
+		{
+			placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, y, -3);
+		}
+		placeBlock(BlockListMF.reinforced_stone, 0, 1*mod, height-1, -3);
+		
+		placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, height, -3);
+		placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, height, -2);
+		placeBlock(BlockListMF.reinforced_stone, 0, 1*mod, height, -1);
+		placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, height, -1);
+		placeBlock(BlockListMF.reinforced_stone, 0, 3*mod, height, -1);
+		
+		placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, height+1, -1);
+		placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, height+2, -1);
+		placeBlock(BlockListMF.reinforced_stone, 0, 2*mod, height+2, 0);
+	}
 	private Object[] getTrim(int radius, int depth, int x, int z)
 	{
 		if(x == -radius || x == radius || z == depth || z == 0)
@@ -146,7 +185,7 @@ public class StructureGenDSEntry extends StructureModuleMF
 		{
 			return new Object[]{BlockListMF.reinforced_stone, false};
 		}
-		return new Object[]{Blocks.stonebrick, true};
+		return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	
 	private Object[] getFloor(int radius, int depth, int x, int z)
@@ -178,7 +217,7 @@ public class StructureGenDSEntry extends StructureModuleMF
 				}
 			}
 		}
-		return new Object[]{Blocks.stonebrick, true};
+		return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 	}
 	
 	private Object[] getWalls(int radius, int depth, int x, int z)
@@ -190,7 +229,7 @@ public class StructureGenDSEntry extends StructureModuleMF
 				return new Object[]{BlockListMF.reinforced_stone, false};
 			}
 			
-			return new Object[]{Blocks.stonebrick, true};
+			return new Object[]{BlockListMF.reinforced_stone_bricks, true};
 		}
 		return new Object[]{Blocks.air, false};
 	}
