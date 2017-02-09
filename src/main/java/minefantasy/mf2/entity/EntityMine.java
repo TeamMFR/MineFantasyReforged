@@ -3,11 +3,13 @@ package minefantasy.mf2.entity;
 import java.util.Iterator;
 import java.util.List;
 
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.item.gadget.EnumCasingType;
 import minefantasy.mf2.item.gadget.EnumExplosiveType;
 import minefantasy.mf2.item.gadget.EnumFuseType;
 import minefantasy.mf2.item.gadget.EnumPowderType;
 import minefantasy.mf2.item.list.ToolListMF;
+import minefantasy.mf2.util.BukkitUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -260,6 +262,11 @@ public class EntityMine extends Entity
                 while (splashDamage.hasNext())
                 {
                     Entity entityHit = (Entity)splashDamage.next();
+                    
+            		if(MineFantasyII.isBukkitServer() && BukkitUtils.cantDamage(thrower != null ? thrower:this, entityHit)) {
+            			continue;
+            		}
+                    
                     double distanceToEntity = this.getDistanceToEntity(entityHit);
 
                     double radius = getRangeOfBlast()* getPowderType().rangeModifier;

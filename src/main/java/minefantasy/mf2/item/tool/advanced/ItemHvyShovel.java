@@ -17,6 +17,7 @@ import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.config.ConfigTools;
 import minefantasy.mf2.item.list.CreativeTabMF;
+import minefantasy.mf2.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -82,6 +83,10 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial
 								
 								if((above == null || !above.getMaterial().isSolid()) && newblock != null && user instanceof EntityPlayer && ForgeHooks.canHarvestBlock(newblock, (EntityPlayer) user, m) && ForgeHooks.isToolEffective(item, newblock, m))
 								{
+									if((MineFantasyII.isBukkitServer() && BukkitUtils.cantBreakBlock((EntityPlayer) user, blockX, blockY, blockZ)) ) {
+										continue;
+									}
+									
 									if(rand.nextFloat()*100F < (100F - ConfigTools.hvyDropChance))
 									{
 										newblock.dropBlockAsItem(world, blockX, blockY, blockZ, m, EnchantmentHelper.getFortuneModifier(user));

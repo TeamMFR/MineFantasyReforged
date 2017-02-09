@@ -20,6 +20,7 @@ import minefantasy.mf2.api.weapon.IRackItem;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.farming.FarmingHelper;
 import minefantasy.mf2.item.list.CreativeTabMF;
+import minefantasy.mf2.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -88,6 +89,10 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 						Material m = block.getMaterial();
 						if(canCutMaterial(m, block.getBlockHardness(world, x+x2, y+y2, z+z2), leaf))
 						{
+							if((MineFantasyII.isBukkitServer() && BukkitUtils.cantBreakBlock(entity, x+x2, y+y2, z+z2)) ) {
+								continue;
+							}
+							
 							if(getDistance(x+x2, y+y2, z+z2, x, y, z) < r*1)
 							{
 								flag = true;

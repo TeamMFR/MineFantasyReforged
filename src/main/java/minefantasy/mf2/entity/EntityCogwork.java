@@ -189,7 +189,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour
 	            {
 	                this.worldObj.spawnParticle("blockcrack_" + Block.getIdFromBlock(block) + "_" + this.worldObj.getBlockMetadata(i, j, k), this.posX + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, this.boundingBox.minY + 0.1D, this.posZ + ((double)this.rand.nextFloat() - 0.5D) * (double)this.width, 4.0D * ((double)this.rand.nextFloat() - 0.5D), 0.5D, ((double)this.rand.nextFloat() - 0.5D) * 4.0D);
 	            }
-	            if(!worldObj.isRemote &&  ConfigArmour.cogworkGrief)
+	            if(!worldObj.isRemote && ConfigArmour.cogworkGrief)
 	            {
 	            	damageBlock(block, i, j, k, worldObj.getBlockMetadata(i, j, k));
 	            	block = this.worldObj.getBlock(i, j+1, k);

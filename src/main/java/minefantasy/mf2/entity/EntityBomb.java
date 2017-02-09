@@ -5,11 +5,13 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.item.gadget.EnumCasingType;
 import minefantasy.mf2.item.gadget.EnumExplosiveType;
 import minefantasy.mf2.item.gadget.EnumFuseType;
 import minefantasy.mf2.item.gadget.EnumPowderType;
 import minefantasy.mf2.mechanics.CombatMechanics;
+import minefantasy.mf2.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,7 +19,6 @@ import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityChicken;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.DamageSource;
@@ -303,8 +304,12 @@ public class EntityBomb extends Entity
                 while (splashDamage.hasNext())
                 {
                     Entity entityHit = (Entity)splashDamage.next();
-                    double distanceToEntity = this.getDistanceToEntity(entityHit);
 
+            		if(MineFantasyII.isBukkitServer() && BukkitUtils.cantDamage(thrower != null ? thrower:this, entityHit)) {
+            			continue;
+            		}
+            		
+                    double distanceToEntity = this.getDistanceToEntity(entityHit);
                     double radius = getRangeOfBlast();
                     if (distanceToEntity < radius)
                     {
@@ -319,6 +324,7 @@ public class EntityBomb extends Entity
                     	}
                     	if(!(entityHit instanceof EntityItem))
                     	{
+                    		
                     		DamageSource source = causeBombDamage(this, thrower != null ? thrower:this);
                     		source.setExplosion();
                     		if(getFilling() == 2)

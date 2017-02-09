@@ -2,11 +2,13 @@ package minefantasy.mf2.item.tool.advanced;
 
 import java.util.Random;
 
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.api.weapon.IRackItem;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.config.ConfigTools;
 import minefantasy.mf2.item.tool.ItemAxeMF;
+import minefantasy.mf2.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -82,6 +84,10 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem
 	{
 		if(maxLogs > 0 && isLog(world, x, y, z, orient, orientM))
 		{
+			if(MineFantasyII.isBukkitServer() && BukkitUtils.cantBreakBlock((EntityPlayer)user, x, y, z)) {
+				return;
+			}
+			
 			Block newblock = world.getBlock(x, y, z);
 			breakSurrounding(item, world, newblock, x, y, z, user);
 			if(rand.nextFloat()*100F < (100F - ConfigTools.hvyDropChance))
@@ -102,10 +108,7 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem
 					}
 				}
 			}
-			if(user instanceof EntityPlayer)
-			{
-				tirePlayer(user, 0.5F);
-			}
+		    tirePlayer(user, 0.5F);
 		}
 	}
 
