@@ -15,6 +15,8 @@ public class ConfigHardcore extends ConfigurationBaseMF
 	public static boolean HCCWeakItems = true;
 	public static boolean HCCallowRocks = true;
 	public static boolean HCCRemoveCraft = true;
+	public static boolean HCCRemoveBooksCraft = false;
+	public static boolean HCCRemoveTalismansCraft = false;
 	
 	public static final String CATEGORY_RESEARCH = "2: Research";
 	
@@ -43,6 +45,8 @@ public class ConfigHardcore extends ConfigurationBaseMF
 		HCCWeakItems = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Weaken Basic items", true, "This will significantly reduce the durability of basic items (made on basic crafting table), they can still be crafted but are practically useless.").getString());
 		HCCallowRocks = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Allow Stone-Age", true, "Allows punching stone for sharp rocks, and using them on leaves for sticks/vines: These make primitive stone tools").getString());
 		HCCRemoveCraft = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Remove Recipes", true, "Some recipes (Such as Bread, or Flint and Steel) will be removed, since MF has its own recipe for such items.").getString());
+		HCCRemoveBooksCraft = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Remove Books Recipes", false, "Skill books recipes will be disabled, but you still can find them it the world.").getString());
+		HCCRemoveTalismansCraft = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Remove Talismans Recipes", false, "Research talismans recipes will be disabled, but you still can find them it the world.").getString());
 		
 		ResearchLogic.knowledgelyr = Integer.parseInt(config.get(CATEGORY_RESEARCH, "###CHANGE RESEARCH ID###", 0, "This changes the research ID, removing all entries").getString());
 		InformationBase.unlockAll = Boolean.parseBoolean(config.get(CATEGORY_RESEARCH, "Unlock entries", false, "If you don't want to research, this will unlock all entries.").getString());

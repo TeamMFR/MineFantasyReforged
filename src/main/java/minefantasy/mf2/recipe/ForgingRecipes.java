@@ -1,20 +1,16 @@
 package minefantasy.mf2.recipe;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.crafting.Salvage;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
-import minefantasy.mf2.api.crafting.exotic.SpecialForging;
-import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.rpg.Skill;
 import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.config.ConfigCrafting;
+import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ArmourListMF;
@@ -26,7 +22,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ForgingRecipes
 {
@@ -339,37 +334,39 @@ public class ForgingRecipes
 				}
 			}
 		}
-		KnowledgeListMF.talismanRecipe.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_lesser), "", true, "hammer", -1, -1, 20, new Object[]
-		{
-			"LGL",
-			"GIG",
-			" G ",
-			'L', new ItemStack(Items.dye, 1, 4),
-			'I', ironbar,
-			'G', goldbar,
-		}));
-		KnowledgeListMF.talismanRecipe.add(
-		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_lesser), "", true, "hammer", -1, -1, 20, new Object[]
-		{
-			"LSL",
-			"SIS",
-			" S ",
-			'L', new ItemStack(Items.dye, 1, 4),
-			'I', ironbar,
-			'S', silverbar,
-		}));
-		KnowledgeListMF.greatTalismanRecipe =
-		MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_greater), "", true, "hammer", 1, 1, 50, new Object[]
-		{
-			"GSG",
-			"DTD",
-			"GDG",
-			'G', goldbar,
-			'D', Items.diamond,
-			'T', ComponentListMF.talisman_lesser,
-			'S', Items.nether_star,
-		});
+		if(!ConfigHardcore.HCCRemoveTalismansCraft) {
+			KnowledgeListMF.talismanRecipe.add(
+			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_lesser), "", true, "hammer", -1, -1, 20, new Object[]
+			{
+				"LGL",
+				"GIG",
+				" G ",
+				'L', new ItemStack(Items.dye, 1, 4),
+				'I', ironbar,
+				'G', goldbar,
+			}));
+			KnowledgeListMF.talismanRecipe.add(
+			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_lesser), "", true, "hammer", -1, -1, 20, new Object[]
+			{
+				"LSL",
+				"SIS",
+				" S ",
+				'L', new ItemStack(Items.dye, 1, 4),
+				'I', ironbar,
+				'S', silverbar,
+			}));
+			KnowledgeListMF.greatTalismanRecipe =
+			MineFantasyAPI.addAnvilRecipe(artisanry, new ItemStack(ComponentListMF.talisman_greater), "", true, "hammer", 1, 1, 50, new Object[]
+			{
+				"GSG",
+				"DTD",
+				"GDG",
+				'G', goldbar,
+				'D', Items.diamond,
+				'T', ComponentListMF.talisman_lesser,
+				'S', Items.nether_star,
+			});
+		}
 		
 		addEngineering();
 		addConstruction();
