@@ -6,7 +6,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 
 public class AlloyRecipes {
-	private static List<Alloy>alloys = new ArrayList();
+	public static List<Alloy>alloys = new ArrayList();
 	
 	public static Alloy addAlloy(ItemStack out, int level, List in)
 	{
