@@ -5,6 +5,7 @@ forge.fuel.name=~Fuel~
 vehicle.fuel.name=Fuel: %1$s
 info.bow.reload=Right-Click while sneaking to open firearm.
 info.firearm.ammo=%1$s/%2$s
+info.tooltip.moreinfo=Hold [%1$s] for more information.
 
 attribute.kit.salvage.name=Salvage Modifier
 

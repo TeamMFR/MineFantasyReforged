@@ -10,6 +10,7 @@ forge.fuel.name=~Топливо~
 vehicle.fuel.name=Топливо: %1$s
 info.bow.reload="Присесть" + ПКМ для перезарядки
 info.firearm.ammo=%1$s/%2$s
+info.tooltip.moreinfo=Удерживайте [%1$s] для доп. информации
 
 attribute.kit.salvage.name=Эффективность разбора
 
