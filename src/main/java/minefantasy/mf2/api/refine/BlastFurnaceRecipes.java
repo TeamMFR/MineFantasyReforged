@@ -15,7 +15,7 @@ public class BlastFurnaceRecipes
 {
     private static final BlastFurnaceRecipes smeltingBase = new BlastFurnaceRecipes();
     /** The list of smelting results. */
-    private Map smeltingList = new HashMap();
+    private Map<ItemStack, ItemStack> smeltingList = new HashMap<ItemStack, ItemStack>();
 
     /**
      * Used to call methods addSmelting and getSmeltingResult.
@@ -71,7 +71,7 @@ public class BlastFurnaceRecipes
         return p_151397_2_.getItem() == p_151397_1_.getItem() && (p_151397_2_.getItemDamage() == 32767 || p_151397_2_.getItemDamage() == p_151397_1_.getItemDamage());
     }
 
-    public Map getSmeltingList()
+    public Map<ItemStack, ItemStack> getSmeltingList()
     {
         return this.smeltingList;
     }

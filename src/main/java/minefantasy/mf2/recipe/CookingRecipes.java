@@ -25,7 +25,7 @@ public class CookingRecipes
 		bake(FoodListMF.dough, FoodListMF.breadroll, 						150, 300, 10, 20, true);
 		bake(FoodListMF.raw_bread, Items.bread, 							150, 300, 20, 40, true);
 		bake(FoodListMF.curds, FoodListMF.cheese_pot, 						100, 300, 60, 20, false);
-		bake(FoodListMF.sweetroll_raw, FoodListMF.sweetroll_uniced, 		180, 250, 20, 10, true);
+		bake(FoodListMF.sweetroll_raw, FoodListMF.sweetroll_uniced, 		150, 250, 20, 10, true);
 		
 		bake(FoodListMF.pie_pumpkin_uncooked, FoodListMF.pie_pumpkin_cooked,150, 300, 20, 20, FoodListMF.burnt_pie);
 		bake(FoodListMF.pie_apple_uncooked, FoodListMF.pie_apple_cooked, 	150, 300, 25, 20, FoodListMF.burnt_pie);
@@ -33,12 +33,12 @@ public class CookingRecipes
 		bake(FoodListMF.pie_meat_uncooked, FoodListMF.pie_meat_cooked, 		150, 300, 30, 20, FoodListMF.burnt_pie);
 		bake(FoodListMF.pie_shepard_uncooked, FoodListMF.pie_shepard_cooked,150, 300, 30, 20, FoodListMF.burnt_pie);
 		
-		bake(FoodListMF.cake_simple_raw, FoodListMF.cake_simple_raw, 		180, 250, 30, 30, FoodListMF.burnt_cake);
-		bake(FoodListMF.cake_raw, FoodListMF.cake_raw, 						180, 250, 40, 20, FoodListMF.burnt_cake);
-		bake(FoodListMF.cake_choc_raw, FoodListMF.cake_choc_raw, 			180, 250, 40, 20, FoodListMF.burnt_cake);
-		bake(FoodListMF.cake_carrot_raw, FoodListMF.cake_carrot_raw, 		180, 250, 40, 20, FoodListMF.burnt_cake);
-		bake(FoodListMF.cake_bf_raw, FoodListMF.cake_bf_raw, 				180, 250, 50, 10 , FoodListMF.burnt_cake);
-		bake(FoodListMF.eclair_raw, FoodListMF.eclair_uniced, 				180, 250, 60, 5 , true);
+		bake(FoodListMF.cake_simple_raw, FoodListMF.cake_simple_uniced, 		150, 250, 30, 30, FoodListMF.burnt_cake);
+		bake(FoodListMF.cake_raw, FoodListMF.cake_uniced, 						150, 250, 40, 20, FoodListMF.burnt_cake);
+		bake(FoodListMF.cake_choc_raw, FoodListMF.cake_choc_uniced, 			150, 250, 40, 20, FoodListMF.burnt_cake);
+		bake(FoodListMF.cake_carrot_raw, FoodListMF.cake_carrot_uniced, 		150, 250, 40, 20, FoodListMF.burnt_cake);
+		bake(FoodListMF.cake_bf_raw, FoodListMF.cake_bf_uniced, 				150, 250, 50, 10 , FoodListMF.burnt_cake);
+		bake(FoodListMF.eclair_raw, FoodListMF.eclair_uniced, 				150, 250, 60, 5 , true);
 		
 		addCeramics();
 		MineFantasyAPI.addCookingRecipe(new ItemStack(FoodListMF.generic_meat_mince_uncooked),

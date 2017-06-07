@@ -15,8 +15,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Alloy{
 	public final List recipeItems;
-	private final ItemStack recipeOutput;
-	private final int level;
+	public final ItemStack recipeOutput;
+	public final int level;
 	private Map props = new HashMap();
 	
 	public Alloy(ItemStack output, int requiredLevel, List items)
