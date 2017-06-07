@@ -53,7 +53,7 @@ Temporary Items
 .gradle/2.0/taskArtifacts/cache.properties
 .gradle/2.0/taskArtifacts/cache.properties.lock
 *.bin
-.gradle/gradle.log
+.gradle/*
 .project
 .settings/org.eclipse.jdt.core.prefs
 CREDITS-fml.txt
