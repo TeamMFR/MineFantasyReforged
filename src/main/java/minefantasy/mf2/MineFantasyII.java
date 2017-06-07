@@ -210,6 +210,6 @@ public class MineFantasyII {
 	 * Determines if a player name is that of a MF modder
 	 */
 	public static boolean isNameModder(String name) {
-		return name.equals("Galactic_Hiker") || name.equals("tim4200");
+		return name.equals("Galactic_Hiker") || name.equals("tim4200") || name.equals("Sirse");
 	}
 }
