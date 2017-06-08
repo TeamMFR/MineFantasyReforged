@@ -74,7 +74,9 @@ public class ForgingRecipes
 		KnowledgeListMF.steelR = 
 		MineFantasyAPI.addAnvilRecipe(artisanry, ComponentListMF.bar("Steel"), "smeltSteel", true, 1, 1, 5, new Object[]
 		{
+			"C",
 			"H",
+			'C', ComponentListMF.coalDust,
 			'H', ComponentListMF.bar("RefinedIron")
 		});
 		KnowledgeListMF.fluxR =

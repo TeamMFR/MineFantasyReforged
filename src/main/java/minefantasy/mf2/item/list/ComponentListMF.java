@@ -286,6 +286,10 @@ public class ComponentListMF
 
 	public static ItemStack bar(String material, int stackSize) 
 	{
+		if(material.equalsIgnoreCase("RefinedIron")) {
+			material = "PigIron";
+		}
+		
 		return bar.createComm(material, stackSize);
 	}
 }
