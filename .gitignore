@@ -50,31 +50,15 @@ Temporary Items
 # MCP Files
 # =========================
 .classpath
-.gradle/2.0/taskArtifacts/cache.properties
-.gradle/2.0/taskArtifacts/cache.properties.lock
 *.bin
 .gradle/*
 .project
-.settings/org.eclipse.jdt.core.prefs
-CREDITS-fml.txt
+.settings/*
 *.location
-eclipse/.metadata/.plugins/org.eclipse.core.resources/.root/0.tree
-eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.core.resources.prefs
-eclipse/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.debug.ui.prefs
+eclipse/*
 *.prefs
-eclipse/.metadata/.plugins/org.eclipse.debug.core/.launches/Client.launch
 *.launch
-eclipse/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml
-*.jar
-forge-1.8-11.14.0.1299-changelog.txt
-README.txt
-MinecraftForge-License.txt
-MinecraftForge-Credits.txt
 gradlew
-gradle/wrapper/gradle-wrapper.properties
 *.bat
-LICENSE-fml.txt
-forge-1.7.10-10.13.2.1230-changelog.txt
 bin/*
 eclipse/*
-/bin/
