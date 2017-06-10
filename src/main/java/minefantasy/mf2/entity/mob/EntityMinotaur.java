@@ -409,6 +409,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
     @Override
     protected String getDeathSound()
     {
+        return "mob.cow.death";
     }
     @Override
     public float getSoundPitch()
