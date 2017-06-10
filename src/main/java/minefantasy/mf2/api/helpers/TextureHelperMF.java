@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL11;
 import com.google.common.collect.Maps;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import minefantasy.mf2.util.MFLogUtil;
 
 public class TextureHelperMF 
 {
@@ -28,7 +29,7 @@ public class TextureHelperMF
 
         if (resourcelocation == null)
         {
-        	System.out.println("MineFantasy: Added Resource: " + directory);
+        	MFLogUtil.logDebug("MineFantasy: Added Resource: " + directory);
         	
             resourcelocation = new ResourceLocation("minefantasy2", directory);
             resourceList.put(directory, resourcelocation);
