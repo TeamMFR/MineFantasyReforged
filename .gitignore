@@ -60,5 +60,15 @@ eclipse/*
 *.launch
 gradlew
 *.bat
-bin/*
 eclipse/*
+/bin/
+
+# Minecraft-related
+asm/
+saves/
+config/
+options.txt
+usercache.json
+usernamecache.json
+logs/
+crash-reports/
