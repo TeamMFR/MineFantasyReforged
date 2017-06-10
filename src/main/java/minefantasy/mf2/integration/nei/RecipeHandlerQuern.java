@@ -66,6 +66,7 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 				CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipePair.inputStack, recipePair.outputStack);
 				arecipes.add(cachedRecipe);
 			}
+			return;
 		}
 		
 		QuernRecipes output = QuernRecipes.getResult(ingredient);

@@ -1014,7 +1014,7 @@ public class EventManagerMF
     public void startUseItem(PlayerUseItemEvent.Start event)
     {
     	EntityPlayer player = event.entityPlayer;
-    	if(event.item.getItemUseAction() == EnumAction.block)
+    	if(event.item != null && event.item.getItemUseAction() == EnumAction.block)
     	{
     		if((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock  && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player))
     		{
