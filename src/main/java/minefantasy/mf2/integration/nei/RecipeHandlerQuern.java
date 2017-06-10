@@ -46,7 +46,7 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 	public void drawBackground(int recipe) {
 		GL11.glColor4f(1, 1, 1, 1);
 		GuiDraw.changeTexture(getGuiTexture());
-		GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 122, 80);
+		GuiDraw.drawTexturedModalRect(0, 0, 5, 0, 122, 80);
 	}
 
 	@Override
@@ -61,6 +61,13 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
+		if(ingredient.getItem().equals(ComponentListMF.clay_pot)) {
+			for (RecipePair recipePair : recipeList) {
+				CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipePair.inputStack, recipePair.outputStack);
+				arecipes.add(cachedRecipe);
+			}
+		}
+		
 		QuernRecipes output = QuernRecipes.getResult(ingredient);
 		if (output != null) {
 			CachedQuernRecipe recipe = new CachedQuernRecipe(ingredient, output.result);
@@ -95,9 +102,9 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 		private PositionedStack inputStack;
 
 		private CachedQuernRecipe(ItemStack ingredient, ItemStack result) {
-			inputStack = new PositionedStack(ingredient, 81, 9);
-			potStack = new PositionedStack(new ItemStack(ComponentListMF.clay_pot), 81, 32);
-			resultStack = new PositionedStack(result, 81, 55);
+			inputStack = new PositionedStack(ingredient, 76, 9);
+			potStack = new PositionedStack(new ItemStack(ComponentListMF.clay_pot), 76, 32);
+			resultStack = new PositionedStack(result, 76, 55);
 		}
 
 		@Override

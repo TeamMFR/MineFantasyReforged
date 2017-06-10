@@ -19,7 +19,7 @@ public class RecipeHandlerTanning extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return "minefantasy2:textures/gui/quern.png";
+		return "minefantasy2:textures/gui/quern.png"; //need to draw texture
 	}
 
 	@Override

@@ -51,7 +51,7 @@ public class RecipeHandlerBloom extends TemplateRecipeHandler {
 	public void drawBackground(int recipe) {
 		GL11.glColor4f(1, 1, 1, 1);
 		GuiDraw.changeTexture(getGuiTexture());
-		GuiDraw.drawTexturedModalRect(0, 0, 5, 11, 166, 89);
+		GuiDraw.drawTexturedModalRect(0, 0, 0, 11, 176, 89);
 	}
 
 	@Override

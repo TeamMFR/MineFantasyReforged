@@ -31,7 +31,7 @@ public class RecipeHandlerBlastFurnace extends TemplateRecipeHandler {
 	public void drawBackground(int recipe) {
 		GL11.glColor4f(1, 1, 1, 1);
 		GuiDraw.changeTexture(getGuiTexture());
-		GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 133, 112);
+		GuiDraw.drawTexturedModalRect(0, 0, 5, 0, 133, 112);
 	}
 
 	@Override
@@ -68,8 +68,8 @@ public class RecipeHandlerBlastFurnace extends TemplateRecipeHandler {
 		private PositionedStack output;
 
 		private CachedBlastFurnaceRecipe(ItemStack inputStack, ItemStack outputStack) {
-			input = new PositionedStack(inputStack, 80, 30);
-			output = new PositionedStack(outputStack, 80, 68);
+			input = new PositionedStack(inputStack, 75, 30);
+			output = new PositionedStack(outputStack, 75, 68);
 		}
 
 		@Override

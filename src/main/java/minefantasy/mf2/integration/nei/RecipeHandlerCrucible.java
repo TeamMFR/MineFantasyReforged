@@ -16,9 +16,11 @@ import net.minecraft.util.StatCollector;
 
 public class RecipeHandlerCrucible extends TemplateRecipeHandler {
 
+	private String recipeName = "method.crucible";
+
 	@Override
 	public String getRecipeName() {
-		return StatCollector.translateToLocal("method.crucible"); //TODO: Tiered naming
+		return StatCollector.translateToLocal(recipeName);
 	}
 
 	@Override
@@ -59,13 +61,7 @@ public class RecipeHandlerCrucible extends TemplateRecipeHandler {
 		CachedAlloyRecipe cachedRecipe = (CachedAlloyRecipe) arecipes.get(recipe);
 		GL11.glColor4f(1, 1, 1, 1);
 		GuiDraw.changeTexture(getTexture(cachedRecipe.tier));
-		GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 151, 94);
-	}
-
-	@Override
-	public void drawExtras(int recipe) {
-		CachedAlloyRecipe cachedRecipe = (CachedAlloyRecipe) arecipes.get(recipe);
-		GuiDraw.drawString("Required tier: " + cachedRecipe.tier, 10, 98, -16777216, false);
+		GuiDraw.drawTexturedModalRect(0, 0, 5, 0, 151, 94);
 	}
 
 	private String getTexture(int tier) {
@@ -87,7 +83,7 @@ public class RecipeHandlerCrucible extends TemplateRecipeHandler {
 		@SuppressWarnings("unchecked")
 		private CachedAlloyRecipe(Alloy alloy) {
 			setIngridients(alloy.recipeItems);
-			output = new PositionedStack(alloy.recipeOutput, 129, 32);
+			output = new PositionedStack(alloy.recipeOutput, 124, 32);
 			tier = alloy.level;
 		}
 
@@ -101,7 +97,7 @@ public class RecipeHandlerCrucible extends TemplateRecipeHandler {
 							continue;
 						}
 
-						PositionedStack stack = new PositionedStack(currentStack, 62 + x * 18, 14 + y * 18);
+						PositionedStack stack = new PositionedStack(currentStack, 57 + x * 18, 14 + y * 18);
 						ingredients.add(stack);
 					}
 				}
@@ -117,6 +113,5 @@ public class RecipeHandlerCrucible extends TemplateRecipeHandler {
 		public PositionedStack getResult() {
 			return output;
 		}
-
 	}
 }
