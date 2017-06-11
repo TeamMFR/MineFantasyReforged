@@ -3,6 +3,7 @@ package minefantasy.mf2;
 import java.io.File;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -32,6 +33,7 @@ import minefantasy.mf2.config.ConfigStamina;
 import minefantasy.mf2.config.ConfigTools;
 import minefantasy.mf2.config.ConfigWeapon;
 import minefantasy.mf2.config.ConfigWorldGen;
+import minefantasy.mf2.integration.minetweaker.MTCompat;
 import minefantasy.mf2.item.gadget.ItemLootSack;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -114,6 +116,10 @@ public class MineFantasyII {
 			eventChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(channel);
 			eventChannel.register(packetHandler);
 			packetHandler.channels.put(channel, eventChannel);
+		}
+		
+		if(Loader.isModLoaded("MineTweaker3")) {
+			MTCompat.loadTweakers();
 		}
 	}
 

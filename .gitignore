@@ -72,3 +72,5 @@ usercache.json
 usernamecache.json
 logs/
 crash-reports/
+scripts/
+*.log
