@@ -120,7 +120,7 @@ import minefantasy.mf2.entity.EntitySmoke;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.entity.mob.EntityHound;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
-import minefantasy.mf2.integration.nei.NEIPlugin;
+import minefantasy.mf2.integration.nei.NEIConfig;
 import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.list.styles.DragonforgedStyle;
@@ -152,10 +152,6 @@ public class ClientProxyMF extends CommonProxyMF {
 	@Override
 	public void registerMain() {
 		super.registerMain();
-
-		if (Loader.isModLoaded("NotEnoughItems")) {
-			NEIModContainer.plugins.add(new NEIPlugin());
-		}
 	}
 
 	@Override
