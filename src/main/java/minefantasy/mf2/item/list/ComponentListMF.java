@@ -208,11 +208,6 @@ public class ComponentListMF
 			
 			ingots[a] = new ItemComponentMF("ingot"+name, rarity);
 			OreDictionary.registerOre("ingot"+name, ingots[a]);
-			
-			if(name.equalsIgnoreCase("PigIron"))
-			{
-				OreDictionary.registerOre("ingotRefinedIron", ingots[a]);
-			}
 		}
 		
 		addRandomDrops();

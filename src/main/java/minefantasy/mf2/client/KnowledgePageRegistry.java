@@ -23,7 +23,7 @@ public class KnowledgePageRegistry
 {
 	public static void registerPages()
 	{
-		ItemStack pigiron = ComponentListMF.bar("RefinedIron");
+		ItemStack pigiron = ComponentListMF.bar("PigIron");
 		ItemStack black = ComponentListMF.bar("BlackSteel");
 		ItemStack red = ComponentListMF.bar("RedSteel");
 		ItemStack blue = ComponentListMF.bar("BlueSteel");

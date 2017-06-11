@@ -77,7 +77,7 @@ public class ForgingRecipes
 			"C",
 			"H",
 			'C', ComponentListMF.coalDust,
-			'H', ComponentListMF.bar("RefinedIron")
+			'H', ComponentListMF.bar("PigIron")
 		});
 		KnowledgeListMF.fluxR =
 		MineFantasyAPI.addAnvilRecipe(null, new ItemStack(ComponentListMF.flux, 4), "", false, -1, -1, 2, new Object[]

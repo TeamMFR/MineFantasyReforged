@@ -27,7 +27,7 @@ public class SmeltingRecipesMF
 		ItemStack tin = ComponentListMF.bar("Tin");
 		ItemStack bronze = ComponentListMF.bar("Bronze");
 		ItemStack iron = ComponentListMF.bar("Iron");
-		ItemStack pigiron = ComponentListMF.bar("RefinedIron");
+		ItemStack pigiron = ComponentListMF.bar("PigIron");
 		ItemStack steel = ComponentListMF.bar("Steel");
 		ItemStack diamond = ComponentListMF.bar("Encrusted");
 		ItemStack tungsten = ComponentListMF.bar("Tungsten");
@@ -158,7 +158,7 @@ public class SmeltingRecipesMF
 			adamant, mithril, Items.ender_pearl, Items.ender_pearl
 		});
 		
-		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.iron_prep, ComponentListMF.bar("RefinedIron"));
+		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.iron_prep, ComponentListMF.bar("PigIron"));
 		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[6], black);
 		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[9], red);
 		MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[11], blue);

@@ -207,7 +207,7 @@ material.tin.name=Tin
 
 material.bronze.name=Bronze
 material.iron.name=Iron
-material.refinediron.name=Pig Iron
+material.pigiron.name=Pig Iron
 material.steel.name=Steel
 material.tungsten.name=Wolframite
 material.obsidian.name=Obsidian

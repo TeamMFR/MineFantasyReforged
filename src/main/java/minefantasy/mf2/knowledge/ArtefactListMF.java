@@ -106,7 +106,7 @@ public class ArtefactListMF
 		add(KnowledgeListMF.crucible2, ComponentListMF.fireclay);
 		add(KnowledgeListMF.blastfurn, Items.iron_ingot, Blocks.iron_ore, Blocks.furnace, BlockListMF.bloomery, BlockListMF.limestone, ComponentListMF.kaolinite);
 		add(KnowledgeListMF.bigfurn, Items.iron_ingot, Blocks.furnace, BlockListMF.bloomery, ComponentListMF.kaolinite, Items.coal);
-		for(ItemStack pig: OreDictionary.getOres("ingotRefinedIron"))
+		for(ItemStack pig: OreDictionary.getOres("ingotPigIron"))
 		{
 			add(KnowledgeListMF.smeltSteel, pig);
 		}

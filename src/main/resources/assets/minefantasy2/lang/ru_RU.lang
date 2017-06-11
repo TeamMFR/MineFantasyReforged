@@ -213,7 +213,7 @@ material.tin.name=Олово
 
 material.bronze.name=Бронза
 material.iron.name=Железо
-material.refinediron.name=Чугун
+material.pigiron.name=Чугун
 material.steel.name=Сталь
 material.tungsten.name=Вольфрам
 material.obsidian.name=Обсидиан
