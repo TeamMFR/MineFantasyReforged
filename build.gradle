@@ -32,6 +32,11 @@ repositories {
         url = "http://chickenbones.net/maven/"
     }
 	
+	ivy {
+        name "MineTweaker3"
+        artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-[revision].[ext]"
+    }
+	
     flatDir {
 		dirs 'lib'
 	}
@@ -39,6 +44,7 @@ repositories {
 
 dependencies {
     compile name: 'bukkit-1.7.10'
+	compile name: 'MineTweaker3', version: "Dev-1.7.10-3.0.10B", ext: 'jar'
 	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
 	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
