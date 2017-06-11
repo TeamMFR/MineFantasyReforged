@@ -143,6 +143,9 @@ public class CustomMaterial
 		{
 			if(nbt.hasKey(slot))
 			{
+				if(nbt.getString(slot).equalsIgnoreCase("refinediron")) { //fix old namings, it can be removed later
+					nbt.setString(slot, "pigiron");
+				}
 				return getMaterial(nbt.getString(slot));
 			}
 		}
