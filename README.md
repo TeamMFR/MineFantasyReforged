@@ -1,2 +1,3 @@
-# MineFantasy2 (2.6.10+)
-Try keep it neat
+# MineFantasy2 Unofficial
+
+Unofficial MineFantasy 2 fork aimed for cross-mod integration, bug fixes, stability and perfomance tweaks.
