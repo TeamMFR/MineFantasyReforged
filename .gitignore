@@ -58,8 +58,6 @@ Temporary Items
 eclipse/*
 *.prefs
 *.launch
-gradlew
-*.bat
 eclipse/*
 /bin/
 
