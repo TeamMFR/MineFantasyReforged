@@ -101,7 +101,7 @@ public class InformationPage
     
     public static String getTitle(int index)
     {
-        return StatCollector.translateToLocal(index == -1 ? "Basic" : getInfoPage(index).getName());
+        return StatCollector.translateToLocal(index == -1 ? "infoPage.basic" : getInfoPage(index).getName());
     }
     public static Skill getSkill(int index)
     {
