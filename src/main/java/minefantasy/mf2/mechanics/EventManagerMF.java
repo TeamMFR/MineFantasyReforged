@@ -81,7 +81,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -91,6 +90,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
@@ -126,7 +126,6 @@ public class EventManagerMF {
 			dropper.entityDropItem(new ItemStack(drop), 0.0F);
 		}
 		if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-			EntityAgeable a;
 			if (rand.nextFloat() * (1 + event.lootingLevel) < 0.05F) {
 				dropper.entityDropItem(new ItemStack(FoodListMF.guts), 0.0F);
 			}
@@ -462,9 +461,9 @@ public class EventManagerMF {
 
 	@SubscribeEvent
 	public void breakBlock(BreakEvent event) {
-		Block block = event.block;
+		// Block block = event.block;
 		Block base = event.world.getBlock(event.x, event.y - 1, event.z);
-		int meta = event.blockMetadata;
+		// int meta = event.blockMetadata;
 
 		if (base != null && base == Blocks.farmland && FarmingHelper.didHarvestRuinBlock(event.world, false)) {
 			event.world.setBlock(event.x, event.y - 1, event.z, Blocks.dirt);
@@ -475,13 +474,12 @@ public class EventManagerMF {
 	}
 
 	public void playerMineBlock(BlockEvent.BreakEvent event) {
-		if (event.getPlayer() == null)
+		EntityPlayer player = event.getPlayer();
+
+		if (player == null || player.capabilities.isCreativeMode || player instanceof FakePlayer) //TODO
 			return;
 
-		if (event.getPlayer().capabilities.isCreativeMode)
-			return;
-
-		ItemStack held = event.getPlayer().getHeldItem();
+		ItemStack held = player.getHeldItem();
 		Block broken = event.block;
 
 		if (broken != null && ConfigHardcore.HCCallowRocks) {
@@ -501,11 +499,11 @@ public class EventManagerMF {
 			}
 		}
 
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(event.getPlayer()) && ConfigStamina.affectMining) {
+		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(player) && ConfigStamina.affectMining) {
 			float points = 2.0F * ConfigStamina.miningSpeed;
-			ItemWeaponMF.applyFatigue(event.getPlayer(), points, 20F);
+			ItemWeaponMF.applyFatigue(player, points, 20F);
 
-			if (points > 0 && !StaminaBar.isAnyStamina(event.getPlayer(), false)) {
+			if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
 				event.getPlayer().addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 1));
 			}
 		}
@@ -729,36 +727,6 @@ public class EventManagerMF {
 	public void loadChunk(ChunkEvent.Load event) {
 	}
 
-	private void dropItem(World world, ItemStack itemstack, double x, double y, double z) {
-		if (itemstack != null) {
-			float f = EventManagerMF.rand.nextFloat() * 0.8F + 0.1F;
-			float f1 = EventManagerMF.rand.nextFloat() * 0.8F + 0.1F;
-			float f2 = EventManagerMF.rand.nextFloat() * 0.8F + 0.1F;
-
-			while (itemstack.stackSize > 0) {
-				int j1 = EventManagerMF.rand.nextInt(21) + 10;
-
-				if (j1 > itemstack.stackSize) {
-					j1 = itemstack.stackSize;
-				}
-
-				itemstack.stackSize -= j1;
-				EntityItem entityitem = new EntityItem(world, (float) x + f, (float) y + f1, (float) z + f2,
-						new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-				if (itemstack.hasTagCompound()) {
-					entityitem.getEntityItem().setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
-				}
-
-				float f3 = 0.05F;
-				entityitem.motionX = (float) EventManagerMF.rand.nextGaussian() * f3;
-				entityitem.motionY = (float) EventManagerMF.rand.nextGaussian() * f3 + 0.2F;
-				entityitem.motionZ = (float) EventManagerMF.rand.nextGaussian() * f3;
-				world.spawnEntityInWorld(entityitem);
-			}
-		}
-	}
-
 	public static String getRegisterName(Entity entity) {
 		String s = EntityList.getEntityString(entity);
 
@@ -842,10 +810,6 @@ public class EventManagerMF {
 		return 0;
 	}
 
-	private boolean isEntityMoving(EntityLivingBase entity) {
-		return Math.hypot(entity.motionX, entity.motionZ) > 0.05F;
-	}
-
 	@SubscribeEvent
 	public void clonePlayer(PlayerEvent.Clone event) {
 		EntityPlayer origin = event.original;
@@ -864,11 +828,6 @@ public class EventManagerMF {
 				event.setCanceled(true);
 			}
 		}
-	}
-
-	private boolean canItemBlock(ItemStack item) {
-		// TODO Auto-generated method stub
-		return true;
 	}
 
 	@SubscribeEvent
