@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 
 public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
 
-	private int hammer, anvil, /*craft,*/ time, width, height;
+	private int hammer, anvil, /* craft, */ time, width, height;
 	private float exp;
 	private IItemStack result;
 	private IIngredient[][] ingreds;

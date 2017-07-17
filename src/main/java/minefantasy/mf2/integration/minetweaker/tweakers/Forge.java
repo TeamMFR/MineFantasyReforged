@@ -3,7 +3,6 @@ package minefantasy.mf2.integration.minetweaker.tweakers;
 import minefantasy.mf2.api.heating.Heatable;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
-import minetweaker.annotations.ModOnly;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
@@ -12,27 +11,27 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.minefantasy.Forge")
 public class Forge {
-	
+
 	@ZenMethod
-	public static void addHeatableItem(IIngredient input, int min, int unstable, int max){
-		MineTweakerAPI.apply(new heatableItemAction(input,min,unstable,max));
+	public static void addHeatableItem(IIngredient input, int min, int unstable, int max) {
+		MineTweakerAPI.apply(new heatableItemAction(input, min, unstable, max));
 	}
-	
-	public static class heatableItemAction implements IUndoableAction{
-		
+
+	public static class heatableItemAction implements IUndoableAction {
+
 		IIngredient input;
 		int min, unstable, max;
-		
+
 		public heatableItemAction(IIngredient input, int min, int unstable, int max) {
 			this.input = input;
 			this.min = min;
 			this.unstable = unstable;
 			this.max = max;
 		}
-		
+
 		@Override
 		public void apply() {
-			for(IItemStack s : input.getItems()){
+			for (IItemStack s : input.getItems()) {
 				Heatable.addItem(MineTweakerMC.getItemStack(s), min, unstable, max);
 			}
 		}
@@ -59,11 +58,11 @@ public class Forge {
 
 		@Override
 		public void undo() {
-			for(IItemStack s : input.getItems()){
+			for (IItemStack s : input.getItems()) {
 				Heatable.registerList.remove(Heatable.getRegistrationForItem(MineTweakerMC.getItemStack(s)));
 			}
 		}
-		
+
 	}
-	
+
 }

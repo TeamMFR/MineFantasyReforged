@@ -30,7 +30,7 @@ public class RecipeHandlerCarpenter extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return"minefantasy2:textures/gui/knowledge/carpenterGrid.png";
+		return "minefantasy2:textures/gui/knowledge/carpenterGrid.png";
 	}
 
 	@Override

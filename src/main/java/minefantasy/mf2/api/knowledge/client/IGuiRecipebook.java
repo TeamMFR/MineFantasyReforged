@@ -1,7 +1,6 @@
 package minefantasy.mf2.api.knowledge.client;
 
-public interface IGuiRecipebook
-{
+public interface IGuiRecipebook {
 
 	int getWidth();
 

@@ -11,31 +11,29 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
-public abstract class DragonBreath 
-{
+public abstract class DragonBreath {
 	public static ArrayList<DragonBreath> projectiles = new ArrayList<DragonBreath>();
-	
+
 	public static int nextID = 0;
 	protected Random random = new Random();
 	public static DragonBreath fire, frost, poison, ash;
-	public static void init()
-	{
+
+	public static void init() {
 		fire = new FireBreath("fire");
 		frost = new FrostBreath("frost");
 		poison = new PoisonBreath("poison");
 		ash = new AshBreath("ash");
 	}
-	
+
 	public int id = 0;
 	public final String name;
-	public DragonBreath(String name) 
-	{
+
+	public DragonBreath(String name) {
 		this.name = name;
 		register();
 	}
-	
-	public void register()
-	{
+
+	public void register() {
 		this.id = nextID;
 		projectiles.add(this);
 		++nextID;
@@ -43,7 +41,7 @@ public abstract class DragonBreath
 
 	public abstract DamageSource getDamageSource(EntityDragonBreath breath, EntityLivingBase shooter);
 
-	public boolean shouldExpand(){
+	public boolean shouldExpand() {
 		return true;
 	}
 
@@ -53,17 +51,16 @@ public abstract class DragonBreath
 
 	@SideOnly(Side.CLIENT)
 	public abstract String getTexture(EntityDragonBreath instance);
-	
+
 	public void onHitEntity(Entity entityHit, EntityDragonBreath instance) {
-		entityHit.attackEntityFrom(getDamageSource(instance, instance.shootingEntity), modifyDamage(entityHit, instance.getDamage()));
+		entityHit.attackEntityFrom(getDamageSource(instance, instance.shootingEntity),
+				modifyDamage(entityHit, instance.getDamage()));
 	}
-	
-	public float modifyDamage(Entity hit, float dam)
-	{
+
+	public float modifyDamage(Entity hit, float dam) {
 		return dam;
 	}
 
-	public void hitBlock(World world, EntityDragonBreath instance, int x, int y, int z, boolean impact) 
-	{
+	public void hitBlock(World world, EntityDragonBreath instance, int x, int y, int z, boolean impact) {
 	}
 }

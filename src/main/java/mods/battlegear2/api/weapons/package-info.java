@@ -2,4 +2,3 @@
 package mods.battlegear2.api.weapons;
 
 import cpw.mods.fml.common.API;
-

@@ -2,12 +2,10 @@ package minefantasy.mf2.network;
 
 import org.lwjgl.input.Keyboard;
 
-import codechicken.nei.NEIModContainer;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.helpers.ClientTickHandler;
 import minefantasy.mf2.api.knowledge.InformationList;
@@ -120,7 +118,6 @@ import minefantasy.mf2.entity.EntitySmoke;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.entity.mob.EntityHound;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
-import minefantasy.mf2.integration.nei.NEIConfig;
 import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.list.styles.DragonforgedStyle;
@@ -214,7 +211,9 @@ public class ClientProxyMF extends CommonProxyMF {
 
 	public void registerEntityRenderer() {
 		RenderingRegistry.registerEntityRenderingHandler(EntityArrowMF.class, new RenderArrowMF());
-		RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, new RenderBombIcon());// Switch to RenderBomb when syncing is fixed
+		RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, new RenderBombIcon());// Switch to RenderBomb
+																									// when syncing is
+																									// fixed
 		RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, new RenderMine());
 		RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, new RenderShrapnel("shrapnel"));
 		RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, new RenderFireBlast());
@@ -239,7 +238,7 @@ public class ClientProxyMF extends CommonProxyMF {
 		Minecraft mc = Minecraft.getMinecraft();
 		if (ID == 0) {
 			TileEntity tile = world.getTileEntity(x, y, z);
-			//int meta = world.getBlockMetadata(x, y, z);
+			// int meta = world.getBlockMetadata(x, y, z);
 
 			if (tile == null) {
 				return null;

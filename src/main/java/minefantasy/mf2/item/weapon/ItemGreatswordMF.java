@@ -12,124 +12,117 @@ import net.minecraft.util.DamageSource;
 /**
  * @author Anonymous Productions
  */
-public class ItemGreatswordMF extends ItemHeavyWeaponMF
-{
+public class ItemGreatswordMF extends ItemHeavyWeaponMF {
 	private Random rand = new Random();
+
 	/**
-	 * Greatswords are heavy counterparts to swords, with added damage, knockback and parrying arc
+	 * Greatswords are heavy counterparts to swords, with added damage, knockback
+	 * and parrying arc
 	 */
-    public ItemGreatswordMF(String name, ToolMaterial material, int rarity, float weight)
-    {
-    	super(material, name, rarity, weight);
-    }
-	
+	public ItemGreatswordMF(String name, ToolMaterial material, int rarity, float weight) {
+		super(material, name, rarity, weight);
+	}
+
 	@Override
-	public boolean canBlock() 
-	{
+	public boolean canBlock() {
 		return true;
 	}
-	
+
 	/**
 	 * Determines if the weapon can parry
 	 */
 	@Override
-	public boolean canWeaponParry() 
-	{
+	public boolean canWeaponParry() {
 		return true;
 	}
-	
+
 	@Override
-	public boolean canWeaponEvade() 
-	{
+	public boolean canWeaponEvade() {
 		return true;
 	}
-	
+
 	@Override
-	protected int getParryDamage(float dam) 
-	{
+	protected int getParryDamage(float dam) {
 		return 1;
 	}
+
 	/**
 	 * gets the time after being hit your guard will be let down
 	 */
 	@Override
-	public int getParryCooldown(EntityLivingBase user) 
-	{
+	public int getParryCooldown(EntityLivingBase user) {
 		return 12;
 	}
+
 	/**
 	 * Gets the angle the weapon can parry
 	 */
 	@Override
-	public float getParryAngleModifier(EntityLivingBase user) 
-	{
+	public float getParryAngleModifier(EntityLivingBase user) {
 		return 1.5F;
 	}
+
 	/**
 	 * Gets the multiplier for the parry threshold
+	 * 
 	 * @return
 	 */
 	@Override
-	public float getParryDamageModifier(EntityLivingBase user) 
-	{
+	public float getParryDamageModifier(EntityLivingBase user) {
 		return user instanceof EntityPlayer ? 3.0F : 1.5F;
 	}
+
 	@Override
-	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) 
-	{
-		blocker.worldObj.playSoundAtEntity(blocker, "mob.zombie.metal", 1.0F, 0.75F + (rand.nextFloat()*0.5F));
+	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
+		blocker.worldObj.playSoundAtEntity(blocker, "mob.zombie.metal", 1.0F, 0.75F + (rand.nextFloat() * 0.5F));
 		return true;
 	}
-	
+
 	@Override
-	public float getBalance()
-	{
+	public float getBalance() {
 		return 0.5F;
 	}
+
 	@Override
-	protected boolean canAnyMobParry() 
-	{
+	protected boolean canAnyMobParry() {
 		return true;
 	}
+
 	@Override
-	public int modifyHitTime(EntityLivingBase user, ItemStack item)
-	{
+	public int modifyHitTime(EntityLivingBase user, ItemStack item) {
 		return super.modifyHitTime(user, item) + speedModSword;
 	}
+
 	/**
 	 * gets the time after being hit your guard will be let down
 	 */
 	@Override
-	public int getParryCooldown(DamageSource source, float dam, ItemStack weapon) 
-	{
+	public int getParryCooldown(DamageSource source, float dam, ItemStack weapon) {
 		return swordParryTime + heavyParryTime;
 	}
-	
+
 	@Override
-	protected float getStaminaMod() 
-	{
-		return heavyStaminaCost*swordStaminaCost;
+	protected float getStaminaMod() {
+		return heavyStaminaCost * swordStaminaCost;
 	}
-	
+
 	@Override
-	public WeaponClass getWeaponClass() 
-	{
+	public WeaponClass getWeaponClass() {
 		return WeaponClass.BLADE;
 	}
-	
+
 	@Override
-	public boolean canCounter()
-	{
+	public boolean canCounter() {
 		return true;
 	}
+
 	@Override
-	public float[] getCounterRatio()
-	{
+	public float[] getCounterRatio() {
 		return crushingDamage;
 	}
+
 	@Override
-	public float getCounterDamage()
-	{
+	public float getCounterDamage() {
 		return 0.5F;
 	}
 }

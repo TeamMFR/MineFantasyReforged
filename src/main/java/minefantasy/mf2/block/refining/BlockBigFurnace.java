@@ -24,173 +24,156 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBigFurnace extends BlockContainer
-{
-    /**
-     * Is the random generator used by furnace to drop the inventory contents in random directions.
-     */
-    private Random rand = new Random();
-    public final boolean isHeater;
-    public final int tier;
+public class BlockBigFurnace extends BlockContainer {
+	/**
+	 * Is the random generator used by furnace to drop the inventory contents in
+	 * random directions.
+	 */
+	private Random rand = new Random();
+	public final boolean isHeater;
+	public final int tier;
 
-    /**
-     * This flag is used to prevent the furnace inventory to be dropped upon block removal, is used internally when the
-     * furnace block changes from idle to active and vice-versa.
-     */
-    private static boolean keepFurnaceInventory = false;
+	/**
+	 * This flag is used to prevent the furnace inventory to be dropped upon block
+	 * removal, is used internally when the furnace block changes from idle to
+	 * active and vice-versa.
+	 */
+	private static boolean keepFurnaceInventory = false;
 	public static int furn_RI = 114;
 
-    public BlockBigFurnace(String name, boolean isHeater, int tier)
-    {
-        super(Material.rock);
-        this.isHeater = isHeater;
-        this.tier = tier;
-        this.setCreativeTab(CreativeTabMF.tabUtil);
-        GameRegistry.registerBlock(this, name);
+	public BlockBigFurnace(String name, boolean isHeater, int tier) {
+		super(Material.rock);
+		this.isHeater = isHeater;
+		this.tier = tier;
+		this.setCreativeTab(CreativeTabMF.tabUtil);
+		GameRegistry.registerBlock(this, name);
 		setBlockName(name);
 		this.setStepSound(Block.soundTypeStone);
 		this.setHardness(3.5F);
 		this.setResistance(2F);
-    }
-    
-    @Override
-    public IIcon getIcon(int side, int meta)
-    {
-    	return BlockListMF.firebricks.getIcon(side, meta);
-    }
-    
-    public boolean isOpaqueCube() {
-        return false;
-    }
+	}
 
-    public boolean renderAsNormalBlock() {
-        return false;
-    }
-   
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return BlockListMF.firebricks.getIcon(side, meta);
+	}
 
-    @Override
-    public int getLightValue(IBlockAccess world, int x, int y, int z)
-    {
-    	TileEntity tile = world.getTileEntity(x, y, z);
-    	if(tile != null && tile instanceof TileEntityBigFurnace)
-    	{
-    		if(((TileEntityBigFurnace)tile).isBurning())
-    		{
-    			return 10;
-    		}
-    	}
-    	return super.getLightValue(world, x, y, z);
-    }
-    /**
-     * Called whenever the block is added into the world. Args: world, x, y, z
-     */
-    public void onBlockAdded(World world, int x, int y, int z)
-    {
-        super.onBlockAdded(world, x, y, z);
-    }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderType()
-    {
-    	return furn_RI;
-    }
+	public boolean isOpaqueCube() {
+		return false;
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1, float f2)
-    {
-        if (world.isRemote)
-        {
-            return true;
-        }
-        else
-        {
-            TileEntityBigFurnace tile = (TileEntityBigFurnace)world.getTileEntity(x, y, z);
+	public boolean renderAsNormalBlock() {
+		return false;
+	}
 
-            ItemStack item = player.getHeldItem();
-            
-            if (tile != null)
-            {
-    			player.openGui(MineFantasyII.instance, 0, world, x, y, z);
-            }
+	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		TileEntity tile = world.getTileEntity(x, y, z);
+		if (tile != null && tile instanceof TileEntityBigFurnace) {
+			if (((TileEntityBigFurnace) tile).isBurning()) {
+				return 10;
+			}
+		}
+		return super.getLightValue(world, x, y, z);
+	}
 
-            return true;
-        }
-    }
+	/**
+	 * Called whenever the block is added into the world. Args: world, x, y, z
+	 */
+	public void onBlockAdded(World world, int x, int y, int z) {
+		super.onBlockAdded(world, x, y, z);
+	}
 
-    /**
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getRenderType() {
+		return furn_RI;
+	}
 
-    /**
-     * Returns the TileEntity used by this block.
-     */
-    public TileEntity createNewTileEntity(World world, int meta)
-    {
-        return new TileEntityBigFurnace();
-    }
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int i, float f, float f1,
+			float f2) {
+		if (world.isRemote) {
+			return true;
+		} else {
+			TileEntityBigFurnace tile = (TileEntityBigFurnace) world.getTileEntity(x, y, z);
 
-    /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack item) {
-        int dir = MathHelper.floor_double((double) (entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+			ItemStack item = player.getHeldItem();
 
-        world.setBlockMetadataWithNotify(x, y, z, dir, 2);
-    }
+			if (tile != null) {
+				player.openGui(MineFantasyII.instance, 0, world, x, y, z);
+			}
 
-    /**
-     * Called whenever the block is removed.
-     */
-    @Override
-    public void breakBlock(World world, int x, int y, int z, Block i1, int i2)
-    {
-        if (!keepFurnaceInventory)
-        {
-            TileEntityBigFurnace tile = (TileEntityBigFurnace)world.getTileEntity(x, y, z);
+			return true;
+		}
+	}
 
-            if (tile != null)
-            {
-                for (int var6 = 0; var6 < tile.getSizeInventory(); ++var6)
-                {
-                    ItemStack var7 = tile.getStackInSlot(var6);
+	/**
+	 * 
+	 * /** Returns the TileEntity used by this block.
+	 */
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileEntityBigFurnace();
+	}
 
-                    if (var7 != null)
-                    {
-                        float var8 = this.rand.nextFloat() * 0.8F + 0.1F;
-                        float var9 = this.rand.nextFloat() * 0.8F + 0.1F;
-                        float var10 = this.rand.nextFloat() * 0.8F + 0.1F;
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	@Override
+	public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack item) {
+		int dir = MathHelper.floor_double(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-                        while (var7.stackSize > 0)
-                        {
-                            int var11 = this.rand.nextInt(21) + 10;
+		world.setBlockMetadataWithNotify(x, y, z, dir, 2);
+	}
 
-                            if (var11 > var7.stackSize)
-                            {
-                                var11 = var7.stackSize;
-                            }
+	/**
+	 * Called whenever the block is removed.
+	 */
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block i1, int i2) {
+		if (!keepFurnaceInventory) {
+			TileEntityBigFurnace tile = (TileEntityBigFurnace) world.getTileEntity(x, y, z);
 
-                            var7.stackSize -= var11;
-                            EntityItem var12 = new EntityItem(world, (double)((float)x + var8), (double)((float)y + var9), (double)((float)z + var10), new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+			if (tile != null) {
+				for (int var6 = 0; var6 < tile.getSizeInventory(); ++var6) {
+					ItemStack var7 = tile.getStackInSlot(var6);
 
-                            if (var7.hasTagCompound())
-                            {
-                            	 var12.getEntityItem().setTagCompound((NBTTagCompound)var7.getTagCompound().copy());
-                            }
+					if (var7 != null) {
+						float var8 = this.rand.nextFloat() * 0.8F + 0.1F;
+						float var9 = this.rand.nextFloat() * 0.8F + 0.1F;
+						float var10 = this.rand.nextFloat() * 0.8F + 0.1F;
 
-                            float var13 = 0.05F;
-                            var12.motionX = (double)((float)this.rand.nextGaussian() * var13);
-                            var12.motionY = (double)((float)this.rand.nextGaussian() * var13 + 0.2F);
-                            var12.motionZ = (double)((float)this.rand.nextGaussian() * var13);
-                            world.spawnEntityInWorld(var12);
-                        }
-                    }
-                }
-            }
-        }
+						while (var7.stackSize > 0) {
+							int var11 = this.rand.nextInt(21) + 10;
 
-        super.breakBlock(world, x, y, z, i1, i2);
-    }
+							if (var11 > var7.stackSize) {
+								var11 = var7.stackSize;
+							}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void registerBlockIcons(IIconRegister reg){}
+							var7.stackSize -= var11;
+							EntityItem var12 = new EntityItem(world, x + var8, y + var9, z + var10,
+									new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
+
+							if (var7.hasTagCompound()) {
+								var12.getEntityItem().setTagCompound((NBTTagCompound) var7.getTagCompound().copy());
+							}
+
+							float var13 = 0.05F;
+							var12.motionX = (float) this.rand.nextGaussian() * var13;
+							var12.motionY = (float) this.rand.nextGaussian() * var13 + 0.2F;
+							var12.motionZ = (float) this.rand.nextGaussian() * var13;
+							world.spawnEntityInWorld(var12);
+						}
+					}
+				}
+			}
+		}
+
+		super.breakBlock(world, x, y, z, i1, i2);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerBlockIcons(IIconRegister reg) {
+	}
 }

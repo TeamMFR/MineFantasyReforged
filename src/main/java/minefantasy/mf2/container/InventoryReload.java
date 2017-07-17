@@ -5,41 +5,33 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class InventoryReload implements IInventory 
-{
+public class InventoryReload implements IInventory {
 	private ItemStack weapon;
-	public InventoryReload(ItemStack weapon)
-	{
+
+	public InventoryReload(ItemStack weapon) {
 		this.weapon = weapon;
 	}
-	
+
 	@Override
-	public int getSizeInventory() 
-	{
+	public int getSizeInventory() {
 		return 1;
 	}
 
 	@Override
-	public ItemStack getStackInSlot(int i)
-	{
+	public ItemStack getStackInSlot(int i) {
 		return AmmoMechanicsMF.getAmmo(weapon);
 	}
 
 	@Override
-	public ItemStack decrStackSize(int slot, int num) 
-	{
+	public ItemStack decrStackSize(int slot, int num) {
 		ItemStack ammo = AmmoMechanicsMF.getAmmo(weapon);
-		if(ammo != null)
-		{
+		if (ammo != null) {
 			ItemStack ammo2 = ammo.copy();
 			ammo.stackSize -= num;
 			ammo2.stackSize = num;
-			if(ammo.stackSize > 0)
-			{
+			if (ammo.stackSize > 0) {
 				setInventorySlotContents(slot, ammo);
-			}
-			else
-			{
+			} else {
 				setInventorySlotContents(slot, null);
 			}
 			return ammo2;
@@ -53,14 +45,10 @@ public class InventoryReload implements IInventory
 	}
 
 	@Override
-	public void setInventorySlotContents(int slot, ItemStack item)
-	{
-		if(item != null)
-		{
+	public void setInventorySlotContents(int slot, ItemStack item) {
+		if (item != null) {
 			AmmoMechanicsMF.setAmmo(weapon, item);
-		}
-		else
-		{
+		} else {
 			AmmoMechanicsMF.removeAmmo(weapon);
 		}
 	}

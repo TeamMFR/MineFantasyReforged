@@ -8,22 +8,24 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderAnvilMF implements ISimpleBlockRenderingHandler 
-{
+public class RenderAnvilMF implements ISimpleBlockRenderingHandler {
 	private static final TileEntityAnvilMFRenderer renderAnvil = new TileEntityAnvilMFRenderer();
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		if(!(block instanceof BlockAnvilMF))return;
-		
+		if (!(block instanceof BlockAnvilMF))
+			return;
+
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockAnvilMF anvil = (BlockAnvilMF)block;
+		BlockAnvilMF anvil = (BlockAnvilMF) block;
 		renderAnvil.renderModelAt(anvil.material.name, 0, 0.0F, 0.0F, 0.0F, 0.0F, 0);
 		GL11.glPopMatrix();
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+			RenderBlocks renderer) {
 		return false;
 	}
 

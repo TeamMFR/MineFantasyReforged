@@ -57,7 +57,7 @@ public class RecipeHandlerBigFurnace extends TemplateRecipeHandler {
 		GuiDraw.changeTexture(getGuiTexture());
 		GuiDraw.drawTexturedModalRect(0, 0, 5, 11, 166, 63);
 	}
-	
+
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
 		for (RecipePair recipePair : recipeList) {
@@ -94,7 +94,7 @@ public class RecipeHandlerBigFurnace extends TemplateRecipeHandler {
 
 		private BigFurnaceRecipe(ItemStack inputStack, ItemStack outputStack) {
 			input = new PositionedStack(inputStack, 31, 15);
-			output = new PositionedStack(outputStack, 102, 16); //Hell of a perfectionist
+			output = new PositionedStack(outputStack, 102, 16); // Hell of a perfectionist
 		}
 
 		@Override

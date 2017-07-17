@@ -1,40 +1,32 @@
 package minefantasy.mf2.api.helpers;
 
 import java.util.List;
-import java.util.Random;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
-public final class RenderHelper
-{
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.settings.KeyBinding;
 
-	public static void renderTooltip(int x, int y, List<String> tooltipData) 
-	{
+public final class RenderHelper {
+
+	public static void renderTooltip(int x, int y, List<String> tooltipData) {
 		int color = 0x505000ff;
 		int color2 = 0xf0100010;
 
 		renderTooltip(x, y, tooltipData, color, color2);
 	}
 
-	public static void renderTooltipOrange(int x, int y, List<String> tooltipData) 
-	{
+	public static void renderTooltipOrange(int x, int y, List<String> tooltipData) {
 		int color = 0x50a06600;
 		int color2 = 0xf01e1200;
 
 		renderTooltip(x, y, tooltipData, color, color2);
 	}
 
-	public static void renderTooltipGreen(int x, int y, List<String> tooltipData)
-	{
+	public static void renderTooltipGreen(int x, int y, List<String> tooltipData) {
 		int color = 0x5000a000;
 		int color2 = 0xf0001e00;
 
@@ -43,7 +35,7 @@ public final class RenderHelper
 
 	public static void renderTooltip(int x, int y, List<String> tooltipData, int colour, int color2) {
 		boolean lighting = GL11.glGetBoolean(GL11.GL_LIGHTING);
-		if(lighting)
+		if (lighting)
 			net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
 
 		if (!tooltipData.isEmpty()) {
@@ -83,7 +75,7 @@ public final class RenderHelper
 			}
 			GL11.glEnable(GL11.GL_DEPTH_TEST);
 		}
-		if(!lighting)
+		if (!lighting)
 			net.minecraft.client.renderer.RenderHelper.disableStandardItemLighting();
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 	}
@@ -121,7 +113,8 @@ public final class RenderHelper
 		drawTexturedModalRect(par1, par2, z, par3, par4, par5, par6, 0.00390625F, 0.00390625F);
 	}
 
-	public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6, float f, float f1) {
+	public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6,
+			float f, float f1) {
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
 		tessellator.addVertexWithUV(par1 + 0, par2 + par6, z, (par3 + 0) * f, (par4 + par6) * f1);
@@ -134,8 +127,8 @@ public final class RenderHelper
 	public static String getKeyDisplayString(String keyName) {
 		String key = null;
 		KeyBinding[] keys = Minecraft.getMinecraft().gameSettings.keyBindings;
-		for(KeyBinding otherKey : keys)
-			if(otherKey.getKeyDescription().equals(keyName)) {
+		for (KeyBinding otherKey : keys)
+			if (otherKey.getKeyDescription().equals(keyName)) {
 				key = Keyboard.getKeyName(otherKey.getKeyCode());
 				break;
 			}

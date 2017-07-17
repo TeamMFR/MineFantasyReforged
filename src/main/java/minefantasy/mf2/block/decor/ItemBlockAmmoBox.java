@@ -19,61 +19,51 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
-public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock
-{
-	public ItemBlockAmmoBox(Block base) 
-	{
+public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
+	public ItemBlockAmmoBox(Block base) {
 		super(base);
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@Override
-    public void addInformation(ItemStack item, EntityPlayer user, List list, boolean info)
-	{
-		if(item.hasTagCompound() && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Ammo) && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Stock))
-		{
-			ItemStack ammo = ItemStack.loadItemStackFromNBT(item.getTagCompound().getCompoundTag(BlockAmmoBox.NBT_Ammo));
+	public void addInformation(ItemStack item, EntityPlayer user, List list, boolean info) {
+		if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Ammo)
+				&& item.getTagCompound().hasKey(BlockAmmoBox.NBT_Stock)) {
+			ItemStack ammo = ItemStack
+					.loadItemStackFromNBT(item.getTagCompound().getCompoundTag(BlockAmmoBox.NBT_Ammo));
 			int stock = item.getTagCompound().getInteger(BlockAmmoBox.NBT_Stock);
-			if(ammo != null)
-			{
+			if (ammo != null) {
 				list.add(ammo.getDisplayName() + " x" + stock);
 			}
 		}
-		CustomMaterial material = CustomMaterial.getMaterialFor(item,CustomToolHelper.slot_main);
-		if(material != null)
-		{
-			list.add(StatCollector.translateToLocalFormatted("attribute.box.capacity.name", TileEntityAmmoBox.getCapacity(material.tier)));
+		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
+		if (material != null) {
+			list.add(StatCollector.translateToLocalFormatted("attribute.box.capacity.name",
+					TileEntityAmmoBox.getCapacity(material.tier)));
 		}
 	}
-	
+
 	@Override
-    public void getSubItems(Item item, CreativeTabs tab, List list)
-    {
-		if(MineFantasyII.isDebug())
-		{
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		if (MineFantasyII.isDebug()) {
 			ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 			Iterator iteratorWood = wood.iterator();
-			while(iteratorWood.hasNext())
-	    	{
+			while (iteratorWood.hasNext()) {
 				CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
-				list.add( this.construct(customMat.name) );
-	    	}
+				list.add(this.construct(customMat.name));
+			}
+		} else {
+			list.add(this.construct("RefinedWood"));
 		}
-		else
-		{
-			list.add( this.construct("RefinedWood"));
-		}
-    }
-	
-	private ItemStack construct(String name) 
-	{
+	}
+
+	private ItemStack construct(String name) {
 		return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item)
-    {
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
 		return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
-    }
+	}
 }

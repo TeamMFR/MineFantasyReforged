@@ -92,7 +92,7 @@ public class TweakedShapedCBRecipes implements ICarpenterRecipe {
 					return false;
 				ItemStack stack = inv.getStackInRowAndColumn(x, y);
 
-				//int a = y + x * 4;
+				// int a = y + x * 4;
 				if (stack == null && this.ingreds[y][x] == null) {
 					continue;
 				}

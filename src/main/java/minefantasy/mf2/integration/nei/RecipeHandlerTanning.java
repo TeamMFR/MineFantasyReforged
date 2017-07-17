@@ -19,7 +19,7 @@ public class RecipeHandlerTanning extends TemplateRecipeHandler {
 
 	@Override
 	public String getGuiTexture() {
-		return "minefantasy2:textures/gui/quern.png"; //need to draw texture
+		return "minefantasy2:textures/gui/quern.png"; // need to draw texture
 	}
 
 	@Override
@@ -45,9 +45,10 @@ public class RecipeHandlerTanning extends TemplateRecipeHandler {
 	@Override
 	public void drawExtras(int recipe) {
 		TanningPair cachedRecipe = (TanningPair) this.arecipes.get(recipe);
-		GuiDraw.drawString(String.format("%s: %s", StatCollector.translateToLocal("nei.method.tanning.tool"), cachedRecipe.toolType), 10, 85, -16777216, false);
+		GuiDraw.drawString(String.format("%s: %s", StatCollector.translateToLocal("nei.method.tanning.tool"),
+				cachedRecipe.toolType), 10, 85, -16777216, false);
 	}
-	
+
 	@Override
 	public int recipiesPerPage() {
 		return 1;

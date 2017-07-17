@@ -1,32 +1,31 @@
 package minefantasy.mf2.client.render.block;
 
-import minefantasy.mf2.block.refining.BlockBloomery;
-import minefantasy.mf2.block.tileentity.TileEntityBloomery;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.world.IBlockAccess;
-
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
+import minefantasy.mf2.block.refining.BlockBloomery;
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
 
-public class RenderBloomery implements ISimpleBlockRenderingHandler 
-{
+public class RenderBloomery implements ISimpleBlockRenderingHandler {
 	private static final TileEntityBloomeryRenderer invModel = new TileEntityBloomeryRenderer();
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		if(block == null || !(block instanceof BlockBloomery))return;
-		
+		if (block == null || !(block instanceof BlockBloomery))
+			return;
+
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		BlockBloomery bloomery = (BlockBloomery)block;
+		BlockBloomery bloomery = (BlockBloomery) block;
 		invModel.renderInvModel("bloomery_basic", 0F, 0F, 0F, 0F);
 		GL11.glPopMatrix();
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+			RenderBlocks renderer) {
 		return false;
 	}
 

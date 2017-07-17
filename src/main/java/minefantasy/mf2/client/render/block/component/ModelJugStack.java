@@ -3,26 +3,20 @@ package minefantasy.mf2.client.render.block.component;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelJugStack extends ModelBase 
-{
+public class ModelJugStack extends ModelBase {
 	private ModelRenderer[] jug = new ModelRenderer[32];
-	
-	public ModelJugStack()
-	{
+
+	public ModelJugStack() {
 		textureWidth = 32;
-		textureHeight =16;
+		textureHeight = 16;
 		int i = 0;
-		for(int y = 0; y < 2; y ++)
-		{
-			for(int z = 0; z < 4; z ++)
-			{
-				for(int x = 0; x < 4; x ++)
-				{
+		for (int y = 0; y < 2; y++) {
+			for (int z = 0; z < 4; z++) {
+				for (int x = 0; x < 4; x++) {
 					float xCoord = -8F + (x * 4F);
 					float yCoord = 8F - (y * 8F);
 					float zCoord = 8F - (z * 4F);
 
-					
 					jug[i] = new ModelRenderer(this, 0, 4);
 					jug[i].addBox(0F, 2F, -3F, 3, 6, 3);
 					jug[i].setTextureOffset(12, 0);
@@ -36,18 +30,17 @@ public class ModelJugStack extends ModelBase
 				}
 			}
 		}
-		
+
 	}
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-	public void render(int stackSize, float f)
-	{
-		for(int i = 0; i < stackSize; i ++)
-		{
+
+	public void render(int stackSize, float f) {
+		for (int i = 0; i < stackSize; i++) {
 			jug[i].render(f);
 		}
 	}

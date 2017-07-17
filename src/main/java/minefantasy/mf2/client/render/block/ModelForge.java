@@ -12,8 +12,7 @@ import net.minecraft.entity.Entity;
  *         Sources are provided for educational reasons. though small bits of
  *         code, or methods can be used in your own creations.
  */
-public class ModelForge extends ModelBase
-{
+public class ModelForge extends ModelBase {
 	// fields
 	ModelRenderer Back;
 	ModelRenderer Right;
@@ -26,8 +25,7 @@ public class ModelForge extends ModelBase
 	ModelRenderer cornerFL;
 	ModelRenderer fuel;
 
-	public ModelForge() 
-	{
+	public ModelForge() {
 		textureWidth = 64;
 		textureHeight = 64;
 
@@ -95,8 +93,7 @@ public class ModelForge extends ModelBase
 		setRotation(fuel, 0F, 0F, 0F);
 	}
 
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		Back.render(f5);
 		Right.render(f5);
@@ -110,18 +107,15 @@ public class ModelForge extends ModelBase
 		fuel.render(f5);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) 
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void renderModel(TileEntityForge forge, float f, boolean hasFuel, float height)
-	{
-		boolean[] sides = new boolean[]{true, true, true, true};
-		if(forge != null)
-		{
+	public void renderModel(TileEntityForge forge, float f, boolean hasFuel, float height) {
+		boolean[] sides = new boolean[] { true, true, true, true };
+		if (forge != null) {
 			sides = forge.showSides();
 		}
 
@@ -149,9 +143,8 @@ public class ModelForge extends ModelBase
 		if (sides[0] || sides[1])
 			cornerFL.render(f);
 		Base.render(f);
-		if(hasFuel)
-		{
-			fuel.offsetY = -height*0.3F +0.3F;
+		if (hasFuel) {
+			fuel.offsetY = -height * 0.3F + 0.3F;
 			fuel.render(f);
 		}
 	}

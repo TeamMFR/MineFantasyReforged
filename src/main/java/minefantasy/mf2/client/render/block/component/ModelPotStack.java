@@ -3,21 +3,16 @@ package minefantasy.mf2.client.render.block.component;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelPotStack extends ModelBase 
-{
+public class ModelPotStack extends ModelBase {
 	private ModelRenderer[] pot = new ModelRenderer[64];
-	
-	public ModelPotStack()
-	{
+
+	public ModelPotStack() {
 		textureWidth = 16;
 		textureHeight = 8;
 		int i = 0;
-		for(int y = 0; y < 4; y ++)
-		{
-			for(int z = 0; z < 4; z ++)
-			{
-				for(int x = 0; x < 4; x ++)
-				{
+		for (int y = 0; y < 4; y++) {
+			for (int z = 0; z < 4; z++) {
+				for (int x = 0; x < 4; x++) {
 					float xCoord = -8F + (x * 4F);
 					float yCoord = 12F - (y * 4F);
 					float zCoord = 8F - (z * 4F);
@@ -32,18 +27,17 @@ public class ModelPotStack extends ModelBase
 				}
 			}
 		}
-		
+
 	}
-	private void setRotation(ModelRenderer model, float x, float y, float z)
-	{
+
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
-	public void render(int stackSize, float f)
-	{
-		for(int i = 0; i < stackSize; i ++)
-		{
+
+	public void render(int stackSize, float f) {
+		for (int i = 0; i < stackSize; i++) {
 			pot[i].render(f);
 		}
 	}

@@ -10,13 +10,13 @@ public interface IRackItem {
 	float getOffsetX(ItemStack itemstack);
 
 	float getOffsetY(ItemStack itemstack);
-	
+
 	float getOffsetZ(ItemStack itemstack);
 
 	float getRotationOffset(ItemStack itemstack);
 
 	boolean canHang(TileEntityRack rack, ItemStack item, int slot);
-	
+
 	boolean isSpecialRender(ItemStack item);
 
 }

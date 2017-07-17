@@ -7,35 +7,31 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-
-public class SlotCrucibleOut extends Slot
-{
+public class SlotCrucibleOut extends Slot {
 	private TileEntityCrucible tile;
 	private int slotNum;
-	public SlotCrucibleOut(TileEntityCrucible parent, int id, int x, int y)
-	{
+
+	public SlotCrucibleOut(TileEntityCrucible parent, int id, int x, int y) {
 		super(parent, id, x, y);
-		this.tile=parent;
+		this.tile = parent;
 		this.slotNum = id;
 	}
-	
+
 	@Override
-	public boolean canTakeStack(EntityPlayer player)
-	{
+	public boolean canTakeStack(EntityPlayer player) {
 		return canTakeStack();
 	}
-	public boolean canTakeStack()
-	{	
+
+	public boolean canTakeStack() {
 		ItemStack slot = tile.getStackInSlot(slotNum);
-		if(slot != null && slot.getItem() instanceof ItemBlock)
-		{
+		if (slot != null && slot.getItem() instanceof ItemBlock) {
 			return true;
 		}
 		return !ConfigHardcore.HCCreduceIngots || tile.isAuto();
 	}
+
 	@Override
-	public boolean isItemValid(ItemStack item)
-    {
+	public boolean isItemValid(ItemStack item) {
 		return true;
-    }
+	}
 }

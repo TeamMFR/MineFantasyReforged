@@ -15,31 +15,31 @@ import stanhebben.zenscript.annotations.ZenMethod;
 
 @ZenClass("mods.minefantasy.Crucible")
 public class Crucible {
-	
+
 	@ZenMethod
-	public static void addAlloy(IItemStack out, int level, int dupe, IIngredient[] ingred){
+	public static void addAlloy(IItemStack out, int level, int dupe, IIngredient[] ingred) {
 		MineTweakerAPI.apply(new AlloyAction(out, level, ingred, dupe));
 	}
-	
-	private static class AlloyAction extends OneWayAction{
-		
+
+	private static class AlloyAction extends OneWayAction {
+
 		private IItemStack out;
 		private int level;
 		private List<IIngredient> ingreds;
 		private int dupe;
 		Alloy a;
-		
+
 		public AlloyAction(IItemStack out, int level, IIngredient[] ingreds, int dupe) {
 			this.out = out;
 			this.level = level;
 			this.ingreds = new ArrayList<IIngredient>();
 			this.dupe = dupe;
-			for(IIngredient i : ingreds){
+			for (IIngredient i : ingreds) {
 				this.ingreds.add(i);
 			}
 			a = new TweakedAlloyRecipe(out, level, this.ingreds);
 		}
-		
+
 		@Override
 		public void apply() {
 			AlloyRecipes.addAlloy(a);
@@ -54,7 +54,7 @@ public class Crucible {
 		public Object getOverrideKey() {
 			return null;
 		}
-		
+
 	}
 
 }

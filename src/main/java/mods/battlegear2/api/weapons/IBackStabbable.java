@@ -6,9 +6,10 @@ public interface IBackStabbable {
 
 	/**
 	 * Action to perform on back stabbing
+	 * 
 	 * @param entityHit
 	 * @param entityHitting
-     * @return true if it adds an hitting action
+	 * @return true if it adds an hitting action
 	 */
 	public boolean onBackStab(EntityLivingBase entityHit, EntityLivingBase entityHitting);
 }

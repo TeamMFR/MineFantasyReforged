@@ -9,86 +9,75 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
 
-public abstract class TileEntityWoodDecor extends TileEntity 
-{
+public abstract class TileEntityWoodDecor extends TileEntity {
 	private String tex;
 	private CustomMaterial material;
-	
-	public TileEntityWoodDecor(String tex)
-	{
+
+	public TileEntityWoodDecor(String tex) {
 		this.tex = tex;
 		this.material = CustomMaterial.getMaterial("RefinedWood");
 	}
-	
-	public TileEntityWoodDecor(String tex, CustomMaterial material)
-	{
+
+	public TileEntityWoodDecor(String tex, CustomMaterial material) {
 		this.tex = tex;
 		this.material = material;
 	}
-	
-	public CustomMaterial getMaterial()
-	{
+
+	public CustomMaterial getMaterial() {
 		return this.material != null ? this.material : trySetMaterial("RefinedWood");
 	}
-	public String getMaterialName() 
-	{
+
+	public String getMaterialName() {
 		return this.material != null ? material.name : "RefinedWood";
 	}
-	public void setMaterial(CustomMaterial material)
-	{
+
+	public void setMaterial(CustomMaterial material) {
 		this.material = material;
 	}
-	public CustomMaterial trySetMaterial(String materialName)
-	{
+
+	public CustomMaterial trySetMaterial(String materialName) {
 		CustomMaterial material = CustomMaterial.getMaterial(materialName);
-		if(material != null)
-		{
+		if (material != null) {
 			this.material = material;
 		}
 		return this.material;
 	}
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
+	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setString("Material", this.getMaterialName());
 	}
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		this.trySetMaterial(nbt.getString("Material"));
 	}
 
-	public int getCapacity() 
-	{
+	public int getCapacity() {
 		CustomMaterial material = getMaterial();
-		if(material != null)
-		{
+		if (material != null) {
 			return getCapacity(material.tier);
 		}
 		return getCapacity(0);
 	}
-	public static int getCapacity(int tier) 
-	{
-		return (tier)*4 + 4;
+
+	public static int getCapacity(int tier) {
+		return (tier) * 4 + 4;
 	}
 
-	public String getTexName()
-	{
-		if(worldObj != null)
-		{
+	public String getTexName() {
+		if (worldObj != null) {
 			Block block = worldObj.getBlock(xCoord, yCoord, zCoord);
-			if(block instanceof BlockWoodDecor)
-			{
-				this.tex = ((BlockWoodDecor)block).getFullTexName();
+			if (block instanceof BlockWoodDecor) {
+				this.tex = ((BlockWoodDecor) block).getFullTexName();
 			}
 		}
 		return tex;
 	}
 
-	public void sendPacketToClient(EntityPlayer player) 
-	{
-		((WorldServer)worldObj).getEntityTracker().func_151248_b(player, new WoodDecorPacket(this).generatePacket());
+	public void sendPacketToClient(EntityPlayer player) {
+		((WorldServer) worldObj).getEntityTracker().func_151248_b(player, new WoodDecorPacket(this).generatePacket());
 	}
 }

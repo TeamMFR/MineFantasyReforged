@@ -13,21 +13,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
 @SideOnly(Side.CLIENT)
-public class ClientItemsMF
-{
+public class ClientItemsMF {
 
-	public static boolean showSpecials(ItemStack item, EntityPlayer user, List<String> list, boolean fullInfo)
-	{
-		if(GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak))
-    	{
+	public static boolean showSpecials(ItemStack item, EntityPlayer user, List<String> list, boolean fullInfo) {
+		if (GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak)) {
 			return true;
-    	}
-    	else
-    	{
-    		String keyname = Keyboard.getKeyName(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
-    		list.add(StatCollector.translateToLocalFormatted("info.tooltip.moreinfo", keyname.toUpperCase()));
-    		return false;
-    	}
+		} else {
+			String keyname = Keyboard.getKeyName(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
+			list.add(StatCollector.translateToLocalFormatted("info.tooltip.moreinfo", keyname.toUpperCase()));
+			return false;
+		}
 	}
 
 }

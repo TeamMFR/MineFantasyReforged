@@ -4,15 +4,13 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import minefantasy.mf2.block.crafting.BlockBombPress;
-import minefantasy.mf2.block.tileentity.TileEntityBombPress;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderBombPress implements ISimpleBlockRenderingHandler 
-{
+public class RenderBombPress implements ISimpleBlockRenderingHandler {
 	private static final TileEntityBombPressRenderer invModel = new TileEntityBombPressRenderer();
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
 		GL11.glPushMatrix();
@@ -22,7 +20,8 @@ public class RenderBombPress implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+			RenderBlocks renderer) {
 		return false;
 	}
 

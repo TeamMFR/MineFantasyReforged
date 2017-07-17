@@ -8,46 +8,40 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.chunk.Chunk;
 
-public class TileEntityWorldGenMarker extends TileEntity
-{
+public class TileEntityWorldGenMarker extends TileEntity {
 	public String className, type;
 	public int ticks = 0, length = 0, deviation = 0, prevID, prevMeta;
+
 	@Override
-	public void updateEntity()
-	{
-		if(!worldObj.isRemote && areChunksLoaded() && ticks >= getSpawnTime())
-		{
+	public void updateEntity() {
+		if (!worldObj.isRemote && areChunksLoaded() && ticks >= getSpawnTime()) {
 			Block block = Block.getBlockById(prevID);
 			worldObj.setBlock(xCoord, yCoord, zCoord, block != null ? block : Blocks.air, prevMeta, 2);
-			StructureModuleMF.placeStructure(className, type, length, deviation, worldObj, xCoord, yCoord, zCoord, this.getBlockMetadata());
+			StructureModuleMF.placeStructure(className, type, length, deviation, worldObj, xCoord, yCoord, zCoord,
+					this.getBlockMetadata());
 		}
-		
+
 		++ticks;
 	}
-	
-	private boolean areChunksLoaded()
-	{
-		return chunkLoaded(0, 0) &&
-				chunkLoaded(-16, 0) &&
-				chunkLoaded(16, 0) &&
-				chunkLoaded(0, -16) &&
-				chunkLoaded(0, 16);
+
+	private boolean areChunksLoaded() {
+		return chunkLoaded(0, 0) && chunkLoaded(-16, 0) && chunkLoaded(16, 0) && chunkLoaded(0, -16)
+				&& chunkLoaded(0, 16);
 	}
-	private boolean chunkLoaded(int x, int z)
-	{
+
+	private boolean chunkLoaded(int x, int z) {
 		Chunk chunk = worldObj.getChunkFromBlockCoords(x, z);
 		return chunk != null && chunk.isChunkLoaded;
 	}
-	
-	private int getSpawnTime() 
-	{
+
+	private int getSpawnTime() {
 		return ConfigWorldGen.structureTickRate;
 	}
+
 	@Override
-	public void readFromNBT(NBTTagCompound nbt)
-	{
+	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		
+
 		className = nbt.getString("ClassDirectory");
 		type = nbt.getString("SubType");
 		length = nbt.getInteger("LengthPosition");
@@ -55,12 +49,11 @@ public class TileEntityWorldGenMarker extends TileEntity
 		prevID = nbt.getInteger("prevID");
 		prevMeta = nbt.getInteger("prevMeta");
 	}
-	
+
 	@Override
-	public void writeToNBT(NBTTagCompound nbt)
-	{
+	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		
+
 		nbt.setString("ClassDirectory", className);
 		nbt.setString("SubType", type);
 		nbt.setInteger("LengthPosition", length);

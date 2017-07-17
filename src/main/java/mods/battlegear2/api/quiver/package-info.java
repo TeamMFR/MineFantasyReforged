@@ -2,4 +2,3 @@
 package mods.battlegear2.api.quiver;
 
 import cpw.mods.fml.common.API;
-

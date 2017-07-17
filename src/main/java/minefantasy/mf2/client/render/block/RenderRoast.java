@@ -8,15 +8,15 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 
-public class RenderRoast implements ISimpleBlockRenderingHandler 
-{
+public class RenderRoast implements ISimpleBlockRenderingHandler {
 	private static final TileEntityRoastRenderer invModel = new TileEntityRoastRenderer();
+
 	@Override
 	public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-		if(!(block instanceof BlockRoast))return;
-		BlockRoast roast = (BlockRoast)block;
-		if(roast.isOven())
-		{
+		if (!(block instanceof BlockRoast))
+			return;
+		BlockRoast roast = (BlockRoast) block;
+		if (roast.isOven()) {
 			GL11.glPushMatrix();
 			GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
 			invModel.renderInvModel(roast.tex, true, 0F, 0F, 0F, 0F);
@@ -25,7 +25,8 @@ public class RenderRoast implements ISimpleBlockRenderingHandler
 	}
 
 	@Override
-	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+	public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId,
+			RenderBlocks renderer) {
 		return false;
 	}
 

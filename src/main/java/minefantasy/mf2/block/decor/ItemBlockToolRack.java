@@ -9,50 +9,38 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
-import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.StatCollector;
 
-public class ItemBlockToolRack extends ItemBlock 
-{
-	public ItemBlockToolRack(Block base) 
-	{
+public class ItemBlockToolRack extends ItemBlock {
+	public ItemBlockToolRack(Block base) {
 		super(base);
 	}
-	
+
 	@Override
-    public void getSubItems(Item item, CreativeTabs tab, List list)
-    {
-		if(MineFantasyII.isDebug())
-		{
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		if (MineFantasyII.isDebug()) {
 			ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 			Iterator iteratorWood = wood.iterator();
-			while(iteratorWood.hasNext())
-	    	{
+			while (iteratorWood.hasNext()) {
 				CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
-				list.add( this.construct(customMat.name) );
-	    	}
+				list.add(this.construct(customMat.name));
+			}
+		} else {
+			list.add(this.construct("RefinedWood"));
 		}
-		else
-		{
-			list.add( this.construct("RefinedWood"));
-		}
-    }
-	
-	private ItemStack construct(String name) 
-	{
+	}
+
+	private ItemStack construct(String name) {
 		return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item)
-    {
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
 		return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
-    }
+	}
 }

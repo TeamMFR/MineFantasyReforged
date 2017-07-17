@@ -180,25 +180,23 @@ public class ModelHound extends ModelBase {
 
 	/**
 	 * Used for easily adding entity-dependent animations. The second and third
-	 * float params here are the same second and third as in the
-	 * setRotationAngles method.
+	 * float params here are the same second and third as in the setRotationAngles
+	 * method.
 	 */
 	@Override
-	public void setLivingAnimations(EntityLivingBase living, float step1, float step2, float z)
-	{
+	public void setLivingAnimations(EntityLivingBase living, float step1, float step2, float z) {
 		EntityHound var5 = (EntityHound) living;
 
 		float walk1 = MathHelper.cos(step1 * 0.6662F + (float) Math.PI) * 1.4F * step2;
 		float walk2 = MathHelper.cos(step1 * 0.6662F) * 1.4F * step2;
-		
+
 		if (var5.isAngry()) {
 			this.Tail.rotateAngleY = 0F;
 		} else {
 			this.Tail.rotateAngleY = MathHelper.cos(step1 * 0.6662F) * 1.4F * step2;
 		}
 
-		if (var5.isSitting())
-		{
+		if (var5.isSitting()) {
 			float dig = 0;
 			this.Mane.setRotationPoint(-1F, 16F, -2F);
 			this.Mane.rotateAngleX = ((float) Math.PI * 2F / 5F);
@@ -214,8 +212,7 @@ public class ModelHound extends ModelBase {
 			this.Leg3.setRotationPoint(-2.49F, 17F, -4F);
 			this.Leg4.rotateAngleX = 5.811947F - dig;
 			this.Leg4.setRotationPoint(0.51F, 17F, -4F);
-		} 
-		else //WALK
+		} else // WALK
 		{
 			this.Body.setRotationPoint(0F, 14F, 2F);
 			this.Body.rotateAngleX = ((float) Math.PI / 2F);
@@ -227,15 +224,13 @@ public class ModelHound extends ModelBase {
 			this.Leg3.setRotationPoint(-2.5F, 16F, -4F);
 			this.Leg4.setRotationPoint(0.5F, 16F, -4F);
 
-			if(var5.isChild() || var5.isSprinting())//Alternate run
+			if (var5.isChild() || var5.isSprinting())// Alternate run
 			{
 				this.Leg1.rotateAngleX = walk1;
 				this.Leg2.rotateAngleX = walk1;
 				this.Leg3.rotateAngleX = walk2;
 				this.Leg4.rotateAngleX = walk2;
-			}
-			else
-			{
+			} else {
 				this.Leg2.rotateAngleX = walk1;
 				this.Leg3.rotateAngleX = walk1;
 				this.Leg1.rotateAngleX = walk2;

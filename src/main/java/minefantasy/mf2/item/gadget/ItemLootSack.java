@@ -2,9 +2,9 @@ package minefantasy.mf2.item.gadget;
 
 import java.util.Random;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.block.list.BlockListMF;
-import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -17,52 +17,45 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
-import cpw.mods.fml.common.registry.GameRegistry;
 
-public class ItemLootSack extends Item 
-{
-	public static final String COMMON         = "commonLootBag";
-	public static final String VALUABLE       = "valuableLootBag";
-	public static final String EXQUISITE           = "exquisiteLootBag";
-	
+public class ItemLootSack extends Item {
+	public static final String COMMON = "commonLootBag";
+	public static final String VALUABLE = "valuableLootBag";
+	public static final String EXQUISITE = "exquisiteLootBag";
+
 	protected int amount, tier;
 	protected String pool;
-	public ItemLootSack(String name, int amount, int tier)
-	{
-        this.setCreativeTab(CreativeTabMF.tabGadget);
-        this.amount = amount;
-        this.tier = tier;
-        pool = tier == 0 ? COMMON : tier == 1 ? VALUABLE : EXQUISITE;
-        setTextureName("minefantasy2:Other/"+name);
+
+	public ItemLootSack(String name, int amount, int tier) {
+		this.setCreativeTab(CreativeTabMF.tabGadget);
+		this.amount = amount;
+		this.tier = tier;
+		pool = tier == 0 ? COMMON : tier == 1 ? VALUABLE : EXQUISITE;
+		setTextureName("minefantasy2:Other/" + name);
 		GameRegistry.registerItem(this, name, MineFantasyII.MODID);
 		this.setUnlocalizedName(name);
 	}
-	
+
 	@Override
-	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
-	{
-		if(user.isSwingInProgress)return item;
-		
+	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user) {
+		if (user.isSwingInProgress)
+			return item;
+
 		user.swingItem();
-		if (!user.capabilities.isCreativeMode)
-        {
-            --item.stackSize;
-        }
+		if (!user.capabilities.isCreativeMode) {
+			--item.stackSize;
+		}
 		user.playSound("mob.horse.leather", 1.0F, 1.5F);
-		
-		if(!world.isRemote)
-		{
+
+		if (!world.isRemote) {
 			ChestGenHooks gen = ChestGenHooks.getInfo(pool);
 			IInventory inv = new Loot(amount);
 			Random rand = new Random();
 			WeightedRandomChestContent.generateChestContents(rand, gen.getItems(rand), inv, 1 + rand.nextInt(amount));
-			for(int a = 0; a < inv.getSizeInventory(); a++)
-			{
-				if(inv.getStackInSlot(a) != null)
-				{
+			for (int a = 0; a < inv.getSizeInventory(); a++) {
+				if (inv.getStackInSlot(a) != null) {
 					ItemStack drop = inv.getStackInSlot(a);
-					if(!user.inventory.addItemStackToInventory(drop))
-					{
+					if (!user.inventory.addItemStackToInventory(drop)) {
 						user.entityDropItem(drop, 0F);
 					}
 				}
@@ -70,22 +63,21 @@ public class ItemLootSack extends Item
 		}
 		return item;
 	}
+
 	@Override
-    public EnumRarity getRarity(ItemStack item)
-    {
-    	return tier == 0 ? EnumRarity.common : tier == 1 ? EnumRarity.uncommon : EnumRarity.epic;
-    }
-	
-	public static class Loot implements IInventory
-	{
+	public EnumRarity getRarity(ItemStack item) {
+		return tier == 0 ? EnumRarity.common : tier == 1 ? EnumRarity.uncommon : EnumRarity.epic;
+	}
+
+	public static class Loot implements IInventory {
 		public ItemStack[] contents;
-		public Loot(int count)
-		{
+
+		public Loot(int count) {
 			contents = new ItemStack[count];
 		}
+
 		@Override
-		public int getSizeInventory() 
-		{
+		public int getSizeInventory() {
 			return contents.length;
 		}
 
@@ -95,8 +87,7 @@ public class ItemLootSack extends Item
 		}
 
 		@Override
-		public ItemStack decrStackSize(int slot, int num)
-		{
+		public ItemStack decrStackSize(int slot, int num) {
 			contents[slot].stackSize -= num;
 			return contents[slot];
 		}
@@ -107,14 +98,12 @@ public class ItemLootSack extends Item
 		}
 
 		@Override
-		public void setInventorySlotContents(int slot,
-				ItemStack item) {
+		public void setInventorySlotContents(int slot, ItemStack item) {
 			contents[slot] = item;
 		}
 
 		@Override
-		public String getInventoryName() 
-		{
+		public String getInventoryName() {
 			return null;
 		}
 
@@ -131,7 +120,7 @@ public class ItemLootSack extends Item
 		@Override
 		public void markDirty() {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -151,67 +140,85 @@ public class ItemLootSack extends Item
 		public boolean isItemValidForSlot(int p_94041_1_, ItemStack p_94041_2_) {
 			return false;
 		}
-		
+
 	}
-	public static void addItems() 
-	{
-		String loot = COMMON; //Some books, Commodities
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 1, 1, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_construction), 1, 1, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_provisioning), 1, 1, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_engineering), 1, 1, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_combat), 1, 1, 5));
+
+	public static void addItems() {
+		String loot = COMMON; // Some books, Commodities
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 1, 1, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_construction), 1, 1, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_provisioning), 1, 1, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_engineering), 1, 1, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_combat), 1, 1, 5));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(BlockListMF.repair_basic), 1, 1, 10));
-		
+
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.coal), 4, 12, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(((ItemComponentMF)ComponentListMF.plank).construct("OakWood"), 1, 8, 20));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(ComponentListMF.plank.construct("OakWood"), 1, 8, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Iron"), 1, 4, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.leather), 1, 4, 20));
-		
+
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.string), 1, 2, 10));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(((ItemComponentMF)ComponentListMF.plank).construct("RefinedWood"), 1, 2, 10));
-		
-		
-		loot = VALUABLE; //Books, Valued commodities
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 1, 3, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_construction), 1, 3, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_provisioning), 1, 3, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_engineering), 1, 3, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_combat), 1, 3, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(BlockListMF.repair_advanced), 1, 1, 2));
-		
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(ComponentListMF.plank.construct("RefinedWood"), 1, 2, 10));
+
+		loot = VALUABLE; // Books, Valued commodities
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 1, 3, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_construction), 1, 3, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_provisioning), 1, 3, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_engineering), 1, 3, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_combat), 1, 3, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(BlockListMF.repair_advanced), 1, 1, 2));
+
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.kaolinite), 1, 8, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.dye, 1, 4), 1, 8, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Gold"), 1, 4, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 1, 4, 20));//Silver
-		
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 1, 4, 20));// Silver
+
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.diamond), 1, 2, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.emerald), 1, 2, 10));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.ender_pearl), 1, 2, 10));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.talisman_lesser), 1, 4, 10));
-		addRecords(loot, 2);		
-		
-		loot = EXQUISITE; //Many books, Highly sought commodities
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 2, 5, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_construction), 2, 5, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_provisioning), 2, 5, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_engineering), 2, 5, 5));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_combat), 2, 5, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ComponentListMF.talisman_lesser), 1, 4, 10));
+		addRecords(loot, 2);
+
+		loot = EXQUISITE; // Many books, Highly sought commodities
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_artisanry), 2, 5, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_construction), 2, 5, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_provisioning), 2, 5, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_engineering), 2, 5, 5));
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ToolListMF.skillbook_combat), 2, 5, 5));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(BlockListMF.repair_ornate), 1, 1, 5));
-		
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(ComponentListMF.flux_strong), 12, 32, 20));
+
+		ChestGenHooks.addItem(loot,
+				new WeightedRandomChestContent(new ItemStack(ComponentListMF.flux_strong), 12, 32, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.diamond), 4, 8, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.emerald), 4, 8, 20));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.ender_eye), 4, 8, 20));
-		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 1, 4, 20));//Wolframite
-		
+		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(ComponentListMF.bar("Silver"), 1, 4, 20));// Wolframite
+
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.golden_apple, 1, 1), 1, 1, 10));
 		addRecords(loot, 5);
-		
+
 	}
 
-	private static void addRecords(String loot, int rarity)
-	{
+	private static void addRecords(String loot, int rarity) {
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_11), 1, 1, rarity));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_13), 1, 1, rarity));
 		ChestGenHooks.addItem(loot, new WeightedRandomChestContent(new ItemStack(Items.record_blocks), 1, 1, rarity));

@@ -1,7 +1,5 @@
 package minefantasy.mf2.client.render;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
@@ -10,11 +8,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 
-public class ModelCogwork extends ModelBiped 
-{
+public class ModelCogwork extends ModelBiped {
 	ModelRenderer rightfoot;
-    ModelRenderer leftfoot;
-    
+	ModelRenderer leftfoot;
+
 	ModelRenderer headMask;
 	ModelRenderer bodyBack;
 	ModelRenderer rightarmPauldron;
@@ -26,7 +23,7 @@ public class ModelCogwork extends ModelBiped
 	ModelRenderer headArmour;
 	ModelRenderer bodyArmour;
 
-	//RenderCogwork
+	// RenderCogwork
 	public ModelCogwork() {
 		this(1F);
 	}
@@ -35,11 +32,10 @@ public class ModelCogwork extends ModelBiped
 		this(scale, -2F * scale, 128, 64);
 	}
 
-	public ModelCogwork(float scale, float offset, int texWidth, int texHeight)
-	{
+	public ModelCogwork(float scale, float offset, int texWidth, int texHeight) {
 		this.textureWidth = texWidth;
 		this.textureHeight = texHeight;
-//FRAME
+		// FRAME
 		this.bipedHead = new ModelRenderer(this, 0, 0);
 		this.bipedHead.addBox(-4.0F, -8.0F, -4.0F, 8, 8, 8, scale);
 		this.bipedHead.setRotationPoint(0.0F, 0F + offset, 0.0F);
@@ -75,14 +71,14 @@ public class ModelCogwork extends ModelBiped
 		rightfoot.setRotationPoint(0F, 10F, 0F);
 		rightfoot.setTextureSize(128, 64);
 		setRotation(rightfoot, 0F, 0F, 0F);
-		
+
 		leftfoot = new ModelRenderer(this, 0, 53);
 		leftfoot.mirror = true;
 		leftfoot.addBox(-2F, 0F, -3F, 4, 3, 5, scale);
 		leftfoot.setRotationPoint(0F, 10F, 0F);
 		leftfoot.setTextureSize(128, 64);
-  
-//HEAD ARMOUR
+
+		// HEAD ARMOUR
 		headMask = new ModelRenderer(this, 76, 18);
 		headMask.addBox(-2F, -3.5F, -6.5F, 4, 5, 3, scale);
 		headMask.setRotationPoint(0F, 0F, 0F);
@@ -93,8 +89,8 @@ public class ModelCogwork extends ModelBiped
 		headArmour.setRotationPoint(0F, 0F, 0F);
 		headArmour.setTextureSize(128, 64);
 		setRotation(headArmour, 0F, 0F, 0F);
-		
-//BODY ARMOUR
+
+		// BODY ARMOUR
 		bodyBack = new ModelRenderer(this, 34, 32);
 		bodyBack.addBox(-3.5F, -0.5F, 4F, 7, 9, 3, scale);
 		bodyBack.setRotationPoint(0F, 0F, 0F);
@@ -106,8 +102,8 @@ public class ModelCogwork extends ModelBiped
 		bodyArmour.setRotationPoint(0F, 0F, 0F);
 		bodyArmour.setTextureSize(128, 64);
 		setRotation(bodyArmour, 0F, 0F, 0F);
-		
-//ARMS ARMOUR
+
+		// ARMS ARMOUR
 		leftarmPauldron = new ModelRenderer(this, 76, 27);
 		leftarmPauldron.mirror = true;
 		leftarmPauldron.addBox(0F, -4F, -3F, 5, 5, 6, scale);
@@ -120,21 +116,21 @@ public class ModelCogwork extends ModelBiped
 		rightarmPauldron.setRotationPoint(0F, 0F, 0F);
 		rightarmPauldron.setTextureSize(128, 64);
 		setRotation(rightarmPauldron, 0F, 0F, -0.2792527F);
-		
+
 		leftarmArmour = new ModelRenderer(this, 76, 38);
 		leftarmArmour.mirror = true;
 		leftarmArmour.addBox(-1.0F, -2.5F, -2.5F, 5, 9, 5, scale);
 		leftarmArmour.setRotationPoint(0F, 0F, 0F);
 		leftarmArmour.setTextureSize(128, 64);
 		setRotation(leftarmArmour, 0F, -0F, 0F);
-		
+
 		rightarmArmour = new ModelRenderer(this, 76, 38);
 		rightarmArmour.addBox(-4F, -2.5F, -2.5F, 5, 9, 5, scale);
 		rightarmArmour.setRotationPoint(0F, 0F, 0F);
 		rightarmArmour.setTextureSize(128, 64);
 		setRotation(rightarmArmour, 0F, 0F, 0F);
 
-//LEGS ARMOUR
+		// LEGS ARMOUR
 		rightlegArmour = new ModelRenderer(this, 56, 16);
 		rightlegArmour.addBox(-2.5F, -0.5F, -2.5F, 5, 9, 5, scale);
 		rightlegArmour.setRotationPoint(0F, 0F, 0F);
@@ -147,8 +143,8 @@ public class ModelCogwork extends ModelBiped
 		leftlegArmour.setRotationPoint(0F, 0F, 0F);
 		leftlegArmour.setTextureSize(128, 64);
 		setRotation(leftlegArmour, 0F, -0F, 0F);
-		
-//GROUPING
+
+		// GROUPING
 		this.bipedBody.addChild(bodyArmour);
 		this.bipedBody.addChild(bodyBack);
 
@@ -174,43 +170,38 @@ public class ModelCogwork extends ModelBiped
 	}
 
 	@Override
-	public void render(Entity entity, float f1, float f2, float f3, float f4, float f5, float scale) 
-	{
+	public void render(Entity entity, float f1, float f2, float f3, float f4, float f5, float scale) {
 		heldItemRight = 0;
 		aimedBow = false;
 		boolean isEmpty = true;
 		boolean isWornByPlayer = false;
-		if (entity instanceof EntityPlayer) 
-		{
+		if (entity instanceof EntityPlayer) {
 			isEmpty = false;
 			boolean CP = Minecraft.getMinecraft().thePlayer == entity;
 			isWornByPlayer = Minecraft.getMinecraft().gameSettings.thirdPersonView == 0 && CP;
-			
+
 			EntityPlayer player = (EntityPlayer) entity;
-			
+
 			ItemStack itemstack = player.getHeldItem();
 			heldItemRight = itemstack == null ? 0 : 1;
-			if (itemstack != null && player.getItemInUseCount() > 0)
-	        {
-	            EnumAction enumaction = itemstack.getItemUseAction();
-	            
-	            if (enumaction == EnumAction.block)
-	            {
-	                heldItemRight = 3;
-	            }
-	            else if (enumaction == EnumAction.bow)
-	            {
-	                aimedBow = true;
-	            }
-	        }
+			if (itemstack != null && player.getItemInUseCount() > 0) {
+				EnumAction enumaction = itemstack.getItemUseAction();
+
+				if (enumaction == EnumAction.block) {
+					heldItemRight = 3;
+				} else if (enumaction == EnumAction.bow) {
+					aimedBow = true;
+				}
+			}
 		}
 		this.setRotationAngles(f1, f2, isEmpty ? 0F : f3, f4, f5, scale, entity);
 		bipedHead.rotationPointY = bipedHeadwear.rotationPointY = -2F;
-		this.bipedBody.rotationPointZ = this.bipedLeftLeg.rotationPointZ = this.bipedRightLeg.rotationPointZ = isWornByPlayer ? 6F : 0F;
+		this.bipedBody.rotationPointZ = this.bipedLeftLeg.rotationPointZ = this.bipedRightLeg.rotationPointZ = isWornByPlayer
+				? 6F
+				: 0F;
 		this.bipedLeftArm.isHidden = this.bipedRightArm.isHidden = this.leftarmArmour.isHidden = this.rightarmArmour.isHidden = isWornByPlayer;
-		
-		if(!isWornByPlayer)
-		{
+
+		if (!isWornByPlayer) {
 			this.bipedHead.render(scale);
 			this.bipedHeadwear.render(scale);
 		}

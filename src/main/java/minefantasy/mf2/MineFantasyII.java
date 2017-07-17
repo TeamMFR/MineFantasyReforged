@@ -80,7 +80,7 @@ public class MineFantasyII {
 		new ConfigArmour().setConfig(getCfg(event, "Armours"));
 		new ConfigExperiment().setConfig(getCfg(event, "Specials"));
 		new ConfigHardcore().setConfig(getCfg(event, "Hardcore"));
-	    new ConfigIntegration().setConfig(getCfg(event, "Integration"));
+		new ConfigIntegration().setConfig(getCfg(event, "Integration"));
 		new ConfigTools().setConfig(getCfg(event, "Tools"));
 		new ConfigWeapon().setConfig(getCfg(event, "Weapons"));
 		new ConfigStamina().setConfig(getCfg(event, "Stamina_System"));
@@ -115,8 +115,8 @@ public class MineFantasyII {
 			eventChannel.register(packetHandler);
 			packetHandler.channels.put(channel, eventChannel);
 		}
-		
-		if(Loader.isModLoaded("MineTweaker3") && ConfigIntegration.mtIntegration) {
+
+		if (Loader.isModLoaded("MineTweaker3") && ConfigIntegration.mtIntegration) {
 			MTCompat.loadTweakers();
 		}
 	}

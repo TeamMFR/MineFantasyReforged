@@ -3,12 +3,10 @@ package minefantasy.mf2.client.render.block.component;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSheetStack extends ModelBase 
-{
+public class ModelSheetStack extends ModelBase {
 	private ModelRenderer[] sheet = new ModelRenderer[16];
 
-	public ModelSheetStack()
-	{
+	public ModelSheetStack() {
 		textureWidth = 64;
 		textureHeight = 16;
 
@@ -16,13 +14,13 @@ public class ModelSheetStack extends ModelBase
 		sheet[0].addBox(-7F, 0F, -7F, 14, 1, 14);
 		sheet[0].setRotationPoint(0F, 15F, 0F);
 		sheet[0].setTextureSize(64, 16);
-		
+
 		setRotation(sheet[0], 0F, 0F, 0F);
 		sheet[1] = new ModelRenderer(this, 0, 0);
 		sheet[1].addBox(-7F, 0F, -7F, 14, 1, 14);
 		sheet[1].setRotationPoint(0F, 14F, 0F);
 		sheet[1].setTextureSize(64, 16);
-		
+
 		setRotation(sheet[1], 0F, -0.122173F, 0F);
 		sheet[2] = new ModelRenderer(this, 0, 0);
 		sheet[2].addBox(-7F, 0F, -7F, 14, 1, 14);
@@ -96,17 +94,14 @@ public class ModelSheetStack extends ModelBase
 		setRotation(sheet[15], 0F, 0F, 0F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) 
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void render(int stackSize, float f) 
-	{
-		for (int i = 0; i < stackSize; i++) 
-		{
+	public void render(int stackSize, float f) {
+		for (int i = 0; i < stackSize; i++) {
 			sheet[i].render(f);
 		}
 	}

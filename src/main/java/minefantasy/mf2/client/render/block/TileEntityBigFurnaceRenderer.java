@@ -14,26 +14,21 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 
-
 /**
  *
  * @author Anonymous Productions
  * 
- * Sources are provided for educational reasons.
- * though small bits of code, or methods can be used in your own creations.
+ *         Sources are provided for educational reasons. though small bits of
+ *         code, or methods can be used in your own creations.
  */
-public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer
-{
-	public TileEntityBigFurnaceRenderer()
-	{
+public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
+	public TileEntityBigFurnaceRenderer() {
 		model = new ModelBigFurnace();
 	}
 
-	public void renderAModelAt(TileEntityBigFurnace tile, double d, double d1, double d2, float f)
-	{
+	public void renderAModelAt(TileEntityBigFurnace tile, double d, double d1, double d2, float f) {
 		int i = 1;
-		if (tile.hasWorldObj()) 
-		{
+		if (tile.hasWorldObj()) {
 			i = tile.getBlockMetadata();
 		}
 
@@ -74,7 +69,7 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer
 		model.renderModel(display, 0.0625F);
 
 		float sc = 0.75F;
-		float angle = 90F / 20F * (float) tile.doorAngle;
+		float angle = 90F / 20F * tile.doorAngle;
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-pixel(8), -pixel(12), 0);
 		if (tile.isHeater()) {
@@ -97,8 +92,7 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer
 
 	}
 
-	public void renderInvModel(boolean heater, String type, double d, double d1, double d2, float f) 
-	{
+	public void renderInvModel(boolean heater, String type, double d, double d1, double d2, float f) {
 		int j = 90;
 
 		bindTextureByName("textures/models/tileentity/" + type + ".png"); // texture
@@ -135,80 +129,75 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer
 		GL11.glPopMatrix(); // end
 
 	}
-	private void bindTextureByName(String image)
-	{
+
+	private void bindTextureByName(String image) {
 		bindTexture(TextureHelperMF.getResource(image));
 	}
 
-public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
-renderAModelAt((TileEntityBigFurnace) tileentity, d, d1, d2, f); //where to render
-}
+	public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
+		renderAModelAt((TileEntityBigFurnace) tileentity, d, d1, d2, f); // where to render
+	}
 
+	private void renderDoor(int x, int y, int w, int h, int tw, int th) {
+		Minecraft mc = Minecraft.getMinecraft();
 
-private void renderDoor(int x, int y, int w, int h, int tw, int th) {
-	Minecraft mc = Minecraft.getMinecraft();
-	
-	float f = 0.01F / (float)tw;
-    float f1 = 0.01F / (float)th;
-    
-	float x1 = (float)x / (float)tw + f;
-	float x2 = (float)(x + w) / tw - f;
-	float y1 = (float)y / th + f1;
-	float y2 = (float)(y + h) / th - f1;
-    
-    Tessellator image = Tessellator.instance;
-    float xPos = 0.5F;
-    float yPos = 0.0F;
-    GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-    GL11.glTranslatef(-xPos, -yPos, pixel(0.5F));
-    float var13 = 1F;
-    GL11.glScalef(var13, var13, var13);
-    GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-    GL11.glTranslatef(-1F, -1F, 0.0F);
-    ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, tw, th, 0.0625F);
-    
+		float f = 0.01F / tw;
+		float f1 = 0.01F / th;
 
-}
-@Override
-protected void bindTexture(ResourceLocation p_147499_1_)
-{
-    TextureManager texturemanager = TileEntityRendererDispatcher.instance.field_147553_e;
+		float x1 = (float) x / (float) tw + f;
+		float x2 = (float) (x + w) / tw - f;
+		float y1 = (float) y / th + f1;
+		float y2 = (float) (y + h) / th - f1;
 
-    if (texturemanager != null)
-    {
-        texturemanager.bindTexture(p_147499_1_);
-    }
-}
+		Tessellator image = Tessellator.instance;
+		float xPos = 0.5F;
+		float yPos = 0.0F;
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glTranslatef(-xPos, -yPos, pixel(0.5F));
+		float var13 = 1F;
+		GL11.glScalef(var13, var13, var13);
+		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+		GL11.glTranslatef(-1F, -1F, 0.0F);
+		ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, tw, th, 0.0625F);
 
-private void renderDoorHeater(int x, int y, int w, int h, int tw, int th) {
-	Minecraft mc = Minecraft.getMinecraft();
-	
-	float f = 0.01F / (float)tw;
-    float f1 = 0.01F / (float)th;
-    
-	float x1 = (float)x / (float)tw + f;
-	float x2 = (float)(x + w) / tw - f;
-	float y1 = (float)y / th + f1;
-	float y2 = (float)(y + h) / th - f1;
-    
-    Tessellator image = Tessellator.instance;
-    float xPos = 0.5F;
-    float yPos = 1.0F;
-    GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-    GL11.glTranslatef(-xPos, -yPos, pixel(0.5F));
-    float var13 = 1F;
-    GL11.glScalef(var13, var13, var13);
-    GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-    GL11.glTranslatef(-1F, -1F, 0.0F);
-    ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, tw, th, 0.0625F);
-    
+	}
 
-}
-public float pixel(float count)
-{
-	return count * 0.0625F;
-}
+	@Override
+	protected void bindTexture(ResourceLocation p_147499_1_) {
+		TextureManager texturemanager = TileEntityRendererDispatcher.instance.field_147553_e;
 
+		if (texturemanager != null) {
+			texturemanager.bindTexture(p_147499_1_);
+		}
+	}
 
-private ModelBigFurnace model;
+	private void renderDoorHeater(int x, int y, int w, int h, int tw, int th) {
+		Minecraft mc = Minecraft.getMinecraft();
+
+		float f = 0.01F / tw;
+		float f1 = 0.01F / th;
+
+		float x1 = (float) x / (float) tw + f;
+		float x2 = (float) (x + w) / tw - f;
+		float y1 = (float) y / th + f1;
+		float y2 = (float) (y + h) / th - f1;
+
+		Tessellator image = Tessellator.instance;
+		float xPos = 0.5F;
+		float yPos = 1.0F;
+		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+		GL11.glTranslatef(-xPos, -yPos, pixel(0.5F));
+		float var13 = 1F;
+		GL11.glScalef(var13, var13, var13);
+		GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+		GL11.glTranslatef(-1F, -1F, 0.0F);
+		ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, tw, th, 0.0625F);
+
+	}
+
+	public float pixel(float count) {
+		return count * 0.0625F;
+	}
+
+	private ModelBigFurnace model;
 }

@@ -47,7 +47,7 @@ public class RecipeHandlerBloom extends TemplateRecipeHandler {
 		return 1;
 	}
 
-    @Override
+	@Override
 	public void drawBackground(int recipe) {
 		GL11.glColor4f(1, 1, 1, 1);
 		GuiDraw.changeTexture(getGuiTexture());
@@ -56,7 +56,7 @@ public class RecipeHandlerBloom extends TemplateRecipeHandler {
 
 	@Override
 	public void loadCraftingRecipes(ItemStack result) {
-		Map<ItemStack, ItemStack> recipes = (Map<ItemStack, ItemStack>) BloomRecipe.recipeList;
+		Map<ItemStack, ItemStack> recipes = BloomRecipe.recipeList;
 		for (Entry<ItemStack, ItemStack> recipe : recipes.entrySet()) {
 			if (CustomToolHelper.areEqual(recipe.getValue(), result)) {
 				arecipes.add(new SmeltingPair(recipe.getKey(), recipe.getValue()));
@@ -73,7 +73,7 @@ public class RecipeHandlerBloom extends TemplateRecipeHandler {
 			arecipes.add(arecipe);
 		}
 	}
-	
+
 	private static void findFuels() {
 		afuels = new ArrayList<FuelPair>();
 		for (ForgeFuel fuel : ForgeItemHandler.forgeFuel) {
@@ -91,16 +91,16 @@ public class RecipeHandlerBloom extends TemplateRecipeHandler {
 			this.stack = new PositionedStack(fuel, 75, 57, false);
 		}
 	}
-	
+
 	private class SmeltingPair extends CachedRecipe {
 		private PositionedStack ingred;
 		private PositionedStack result;
 
-		private  SmeltingPair(ItemStack ingred, ItemStack result) {
+		private SmeltingPair(ItemStack ingred, ItemStack result) {
 			this.ingred = new PositionedStack(ingred, 75, 19);
 			this.result = new PositionedStack(result, 120, 29);
 		}
-		
+
 		@Override
 		public List<PositionedStack> getIngredients() {
 			return getCycledIngredients(cycleticks / 48, Arrays.asList(ingred));

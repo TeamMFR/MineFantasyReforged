@@ -53,7 +53,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
 				if (recipe == null) {
 					continue;
 				}
-				
+
 				arecipes.add(recipe);
 			}
 		}
@@ -85,7 +85,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
 		} else if (irecipe instanceof ShapelessAnvilRecipes) {
 			return new CachedAnvilRecipe((ShapelessAnvilRecipes) irecipe);
 		}
-		
+
 		return null;
 	}
 

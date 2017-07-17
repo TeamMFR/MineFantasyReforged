@@ -3,15 +3,13 @@ package minefantasy.mf2.client.render.block.component;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelBigPlateStack extends ModelBase 
-{
+public class ModelBigPlateStack extends ModelBase {
 	private ModelRenderer[] sheet = new ModelRenderer[8];
 
-	public ModelBigPlateStack()
-	{
+	public ModelBigPlateStack() {
 		textureWidth = 64;
 		textureHeight = 16;
-		
+
 		sheet[0] = new ModelRenderer(this, 0, 0);
 		sheet[0].addBox(-6.5F, 0F, -6.5F, 13, 2, 13);
 		sheet[0].setRotationPoint(0F, 14F, 0F);
@@ -61,17 +59,14 @@ public class ModelBigPlateStack extends ModelBase
 		setRotation(sheet[7], 0F, 0.0698132F, 0F);
 	}
 
-	private void setRotation(ModelRenderer model, float x, float y, float z) 
-	{
+	private void setRotation(ModelRenderer model, float x, float y, float z) {
 		model.rotateAngleX = x;
 		model.rotateAngleY = y;
 		model.rotateAngleZ = z;
 	}
 
-	public void render(int stackSize, float f) 
-	{
-		for (int i = 0; i < stackSize; i++) 
-		{
+	public void render(int stackSize, float f) {
+		for (int i = 0; i < stackSize; i++) {
 			sheet[i].render(f);
 		}
 	}

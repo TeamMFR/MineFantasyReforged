@@ -3,20 +3,17 @@ package minefantasy.mf2.api.heating;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class TongsHelper 
-{
+public class TongsHelper {
 	/**
 	 * Determines if an item is held
 	 */
-	public static boolean hasHeldItem(ItemStack tongs)
-	{
+	public static boolean hasHeldItem(ItemStack tongs) {
 		NBTTagCompound nbt = getNBT(tongs);
 
 		return nbt.hasKey("Held") && nbt.getBoolean("Held");
@@ -27,10 +24,8 @@ public class TongsHelper
 	 * 
 	 * @return
 	 */
-	public static ItemStack clearHeldItem(ItemStack tongs, EntityLivingBase user) 
-	{
-		if (!user.worldObj.isRemote) 
-		{
+	public static ItemStack clearHeldItem(ItemStack tongs, EntityLivingBase user) {
+		if (!user.worldObj.isRemote) {
 			NBTTagCompound nbt = getNBT(tongs);
 			nbt.setBoolean("Held", false);
 		}
@@ -42,10 +37,8 @@ public class TongsHelper
 	/**
 	 * Picks up an item
 	 */
-	public static boolean trySetHeldItem(ItemStack tongs, ItemStack item)
-	{
-		if (item == null || item.getItem() == null || !isHotItem(item) || item.getItem() instanceof ItemBlock) 
-		{
+	public static boolean trySetHeldItem(ItemStack tongs, ItemStack item) {
+		if (item == null || item.getItem() == null || !isHotItem(item) || item.getItem() instanceof ItemBlock) {
 			return false;
 		}
 		NBTTagCompound nbt = getNBT(tongs);
@@ -58,13 +51,10 @@ public class TongsHelper
 	}
 
 	/**
-	 * Used to determine if an item burns you when held, and if tongs can pick
-	 * it up
+	 * Used to determine if an item burns you when held, and if tongs can pick it up
 	 */
-	public static boolean isHotItem(ItemStack item)
-	{
-		if (item.getItem() instanceof IHotItem)
-		{
+	public static boolean isHotItem(ItemStack item) {
+		if (item.getItem() instanceof IHotItem) {
 			return ((IHotItem) item.getItem()).isHot(item);
 		}
 		return false;
@@ -73,10 +63,8 @@ public class TongsHelper
 	/**
 	 * Determines if it can be cooled in a water source
 	 */
-	public static boolean isCoolableItem(ItemStack item) 
-	{
-		if (item.getItem() instanceof IHotItem)
-		{
+	public static boolean isCoolableItem(ItemStack item) {
+		if (item.getItem() instanceof IHotItem) {
 			return ((IHotItem) item.getItem()).isCoolable(item);
 		}
 		return false;
@@ -87,12 +75,9 @@ public class TongsHelper
 	 */
 	public static ItemStack getHeldItem(ItemStack tongs) {
 		NBTTagCompound nbt = getNBT(tongs);
-		if (nbt.hasKey("Held"))
-		{
-			if (nbt.getBoolean("Held")) 
-			{
-				if(nbt.hasKey("Saved"))
-				{
+		if (nbt.hasKey("Held")) {
+			if (nbt.getBoolean("Held")) {
+				if (nbt.hasKey("Saved")) {
 					NBTTagCompound save = nbt.getCompoundTag("Saved");
 					return ItemStack.loadItemStackFromNBT(save);
 				}
@@ -110,10 +95,8 @@ public class TongsHelper
 	public static ItemStack getHeldItemTongs(ItemStack tongs) {
 		NBTTagCompound nbt = getNBT(tongs);
 		if (nbt.hasKey("Held")) {
-			if (nbt.getBoolean("Held"))
-			{
-				if(nbt.hasKey("Saved"))
-				{
+			if (nbt.getBoolean("Held")) {
+				if (nbt.hasKey("Saved")) {
 					NBTTagCompound save = nbt.getCompoundTag("Saved");
 					return ItemStack.loadItemStackFromNBT(save);
 				}
@@ -131,16 +114,13 @@ public class TongsHelper
 		}
 		return item.getTagCompound();
 	}
-	
-	public static float getWaterSource(World world, int i, int j, int k) 
-	{
+
+	public static float getWaterSource(World world, int i, int j, int k) {
 		float special = TongsHelper.getQuenced(world, i, j, k);
-		if(special >= 0)
-		{
+		if (special >= 0) {
 			return special;
 		}
-		if (world.getBlock(i, j, k).getMaterial() == Material.water)
-		{
+		if (world.getBlock(i, j, k).getMaterial() == Material.water) {
 			world.setBlockToAir(i, j, k);
 			return 25F;
 		}
@@ -149,15 +129,15 @@ public class TongsHelper
 		}
 		return -1F;
 	}
+
 	public static boolean isCauldron(World world, int x, int y, int z) {
 		return world.getBlock(x, y, z) == Blocks.cauldron && world.getBlockMetadata(x, y, z) > 0;
 	}
-	public static float getQuenced(World world, int x, int y, int z)
-	{
+
+	public static float getQuenced(World world, int x, int y, int z) {
 		TileEntity tile = world.getTileEntity(x, y, z);
-		if(tile != null && tile instanceof IQuenchBlock)
-		{
-			return ((IQuenchBlock)tile).quench();
+		if (tile != null && tile instanceof IQuenchBlock) {
+			return ((IQuenchBlock) tile).quench();
 		}
 		return -1F;
 	}

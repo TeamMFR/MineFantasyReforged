@@ -1,71 +1,62 @@
 package minefantasy.mf2.item.gadget;
 
-import java.util.HashMap;
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mf2.item.ItemComponentMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemCrossbowPart extends ItemComponentMF implements ICrossbowPart
-{
+public class ItemCrossbowPart extends ItemComponentMF implements ICrossbowPart {
 	private int tier;
 	private String type, partname;
 	public IIcon modelIcon;
-	
-	public ItemCrossbowPart(String name, String type)
-	{
+
+	public ItemCrossbowPart(String name, String type) {
 		this(name, type, ICrossbowPart.components.size(), name);
 	}
-	
-	public ItemCrossbowPart(String name, String type, int tier)
-	{
+
+	public ItemCrossbowPart(String name, String type, int tier) {
 		this(name, type, tier, name);
 	}
-	public ItemCrossbowPart(String name, String type, int tier, String model)
-	{
+
+	public ItemCrossbowPart(String name, String type, int tier, String model) {
 		super(name, 0);
 		this.setFull3D();
 		this.type = type;
 		this.tier = tier;
-		this.partname=model;
+		this.partname = model;
 		MineFantasyAPI.registerCrossbowPart(this);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack item, EntityPlayer user, List list, boolean fullInfo)
-	{
-		list.add(EnumChatFormatting.GOLD +   StatCollector.translateToLocal("crossbow.component.name"));
+	public void addInformation(ItemStack item, EntityPlayer user, List list, boolean fullInfo) {
+		list.add(EnumChatFormatting.GOLD + StatCollector.translateToLocal("crossbow.component.name"));
 		list.add(EnumChatFormatting.ITALIC + StatCollector.translateToLocal("crossbow.component." + type));
 		list.add(EnumChatFormatting.DARK_GRAY + StatCollector.translateToLocal(getUnlocalizedName() + ".desc"));
 	}
-	
+
 	@Override
-	public String getComponentType()
-	{
+	public String getComponentType() {
 		return type;
 	}
 
 	@Override
-	public int getID()
-	{
+	public int getID() {
 		return tier;
 	}
 
-	public static ICrossbowPart getPart(String type, int id)
-	{
-		return components.get(type+id);
+	public static ICrossbowPart getPart(String type, int id) {
+		return components.get(type + id);
 	}
 
 	@Override
@@ -73,86 +64,93 @@ public class ItemCrossbowPart extends ItemComponentMF implements ICrossbowPart
 	public IIcon getIcon() {
 		return modelIcon;
 	}
-	
-	@Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {
-		super.registerIcons(reg);
-		modelIcon = reg.registerIcon("minefantasy2:gun/"+type+"/"+partname);
-    }
 
 	@Override
-	public String getUnlocalisedName() 
-	{
-		if(this == ComponentListMF.cross_arms_basic)
-		{
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		super.registerIcons(reg);
+		modelIcon = reg.registerIcon("minefantasy2:gun/" + type + "/" + partname);
+	}
+
+	@Override
+	public String getUnlocalisedName() {
+		if (this == ComponentListMF.cross_arms_basic) {
 			return null;
 		}
-		return "crosspart."+type+"."+partname;
+		return "crosspart." + type + "." + partname;
 	}
 
 	private int capacity = 0, durability = 50;
 	private float power, spread, recoil, speed, bash, zoom;
-	public ItemCrossbowPart addPower(float power)
-	{
+
+	public ItemCrossbowPart addPower(float power) {
 		this.power = power;
 		return this;
 	}
-	public ItemCrossbowPart setScope(float zoom)
-	{
+
+	public ItemCrossbowPart setScope(float zoom) {
 		this.zoom = zoom;
 		return this;
 	}
-	public ItemCrossbowPart addSpread(float spread)
-	{
+
+	public ItemCrossbowPart addSpread(float spread) {
 		this.spread = spread;
 		return this;
 	}
-	public ItemCrossbowPart addRecoil(float recoil)
-	{
+
+	public ItemCrossbowPart addRecoil(float recoil) {
 		this.recoil = recoil;
 		return this;
 	}
-	public ItemCrossbowPart addSpeed(float speed)
-	{
+
+	public ItemCrossbowPart addSpeed(float speed) {
 		this.speed = speed;
 		return this;
 	}
-	public ItemCrossbowPart addBash(float bash)
-	{
+
+	public ItemCrossbowPart addBash(float bash) {
 		this.bash = bash;
 		return this;
 	}
-	public ItemCrossbowPart addCapacity(int capacity)
-	{
+
+	public ItemCrossbowPart addCapacity(int capacity) {
 		this.capacity = capacity;
 		return this;
 	}
-	public ItemCrossbowPart addDurability(int durability)
-	{
+
+	public ItemCrossbowPart addDurability(int durability) {
 		this.durability = durability;
 		return this;
 	}
-	public ItemCrossbowPart setHandCrossbow(boolean flag)
-	{
+
+	public ItemCrossbowPart setHandCrossbow(boolean flag) {
 		this.isHandle = flag;
 		return this;
 	}
+
 	@Override
-	public float getModifier(String type) 
-	{
-		if(type.equalsIgnoreCase("power"))return power;
-		if(type.equalsIgnoreCase("spread"))return spread;
-		if(type.equalsIgnoreCase("recoil"))return recoil;
-		if(type.equalsIgnoreCase("speed"))return speed;
-		if(type.equalsIgnoreCase("capacity"))return capacity;
-		if(type.equalsIgnoreCase("bash"))return bash;
-		if(type.equalsIgnoreCase("zoom"))return zoom;
-		if(type.equalsIgnoreCase("durability"))return durability;
+	public float getModifier(String type) {
+		if (type.equalsIgnoreCase("power"))
+			return power;
+		if (type.equalsIgnoreCase("spread"))
+			return spread;
+		if (type.equalsIgnoreCase("recoil"))
+			return recoil;
+		if (type.equalsIgnoreCase("speed"))
+			return speed;
+		if (type.equalsIgnoreCase("capacity"))
+			return capacity;
+		if (type.equalsIgnoreCase("bash"))
+			return bash;
+		if (type.equalsIgnoreCase("zoom"))
+			return zoom;
+		if (type.equalsIgnoreCase("durability"))
+			return durability;
 		return 0F;
 	}
+
 	private boolean isHandle = false;
+
 	@Override
 	public boolean makesSmallWeapon() {
 		return isHandle;

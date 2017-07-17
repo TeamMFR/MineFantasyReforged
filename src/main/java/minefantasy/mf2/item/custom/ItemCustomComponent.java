@@ -25,207 +25,185 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class ItemCustomComponent extends Item implements ITieredComponent
-{
+public class ItemCustomComponent extends Item implements ITieredComponent {
 	@SideOnly(Side.CLIENT)
 	public IIcon baseTex;
 	private String name;
 	private float mass;
-	
-	public ItemCustomComponent(String name, String type)
-	{
+
+	public ItemCustomComponent(String name, String type) {
 		this(name, -1F, type);
 	}
-	public ItemCustomComponent(String name, float mass, String type)
-	{
+
+	public ItemCustomComponent(String name, float mass, String type) {
 		this.name = name;
 		this.setCreativeTab(CreativeTabMF.tabMaterials);
-		GameRegistry.registerItem(this, "custom_"+name, MineFantasyII.MODID);
+		GameRegistry.registerItem(this, "custom_" + name, MineFantasyII.MODID);
 		this.setUnlocalizedName(name);
-		this.mass=mass;
+		this.mass = mass;
 		this.materialType = type;
 	}
+
 	private boolean canDamage = false;;
-	public ItemCustomComponent setCanDamage()
-	{
+
+	public ItemCustomComponent setCanDamage() {
 		this.canDamage = true;
 		this.setHasSubtypes(false);
 		return this;
 	}
+
 	@Override
-	public boolean isDamageable()
-    {
+	public boolean isDamageable() {
 		return canDamage;
-    }
+	}
+
 	@Override
-	public boolean isRepairable()
-    {
-        return false;
-    }
-	
+	public boolean isRepairable() {
+		return false;
+	}
+
 	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List list) 
-	{
-		if (tab != CreativeTabMF.tabMaterialsMF) 
-		{
+	public void getSubItems(Item item, CreativeTabs tab, List list) {
+		if (tab != CreativeTabMF.tabMaterialsMF) {
 			ArrayList<CustomMaterial> wood = CustomMaterial.getList("metal");
 			Iterator iteratorWood = wood.iterator();
-			while (iteratorWood.hasNext()) 
-			{
+			while (iteratorWood.hasNext()) {
 				CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
 				list.add(this.createComm(customMat.name));
 			}
 		}
 	}
-	 
-	public float getWeightInKg(ItemStack tool)
-    {
-    	CustomMaterial base = getBase(tool);
-    	if(base != null)
-    	{
-    		return base.density * mass;
-    	}
-    	return mass;
-    }
- 
+
+	public float getWeightInKg(ItemStack tool) {
+		CustomMaterial base = getBase(tool);
+		if (base != null) {
+			return base.density * mass;
+		}
+		return mass;
+	}
+
 	@Override
 	@SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack tool, EntityPlayer user, List list, boolean fullInfo)
-    {
-    	super.addInformation(tool, user, list, fullInfo);
-    	if(!canDamage)
-    	{
-    		CustomToolHelper.addComponentString(tool, list, getBase(tool), mass);
-    	}
-    	if(this == ComponentListMF.cogwork_armour)
-    	{
-    		int AR = EntityCogwork.getArmourRating(getBase(tool));
-    		list.add(StatCollector.translateToLocal("attribute.armour.protection") + " " + AR);
-    		if(mass > 0)
-    		list.add(CustomMaterial.getWeightString(getWeightInKg(tool)));
-    	}
-    }
-	 
+	public void addInformation(ItemStack tool, EntityPlayer user, List list, boolean fullInfo) {
+		super.addInformation(tool, user, list, fullInfo);
+		if (!canDamage) {
+			CustomToolHelper.addComponentString(tool, list, getBase(tool), mass);
+		}
+		if (this == ComponentListMF.cogwork_armour) {
+			int AR = EntityCogwork.getArmourRating(getBase(tool));
+			list.add(StatCollector.translateToLocal("attribute.armour.protection") + " " + AR);
+			if (mass > 0)
+				list.add(CustomMaterial.getWeightString(getWeightInKg(tool)));
+		}
+	}
+
 	@Override
-    public String getItemStackDisplayName(ItemStack tool)
-    {
-		return CustomToolHelper.getLocalisedName(tool, "item.commodity_"+name+".name");
-    }
-	
-	public CustomMaterial getBase(ItemStack component)
-	{
+	public String getItemStackDisplayName(ItemStack tool) {
+		return CustomToolHelper.getLocalisedName(tool, "item.commodity_" + name + ".name");
+	}
+
+	public CustomMaterial getBase(ItemStack component) {
 		return CustomToolHelper.getCustomPrimaryMaterial(component);
 	}
-	
-	@Override
-    @SideOnly(Side.CLIENT)
-    public int getRenderPasses(int metadata)
-    {
-        return 1;
-    }
-    
+
 	@Override
 	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack item, int layer)
-    {
-		CustomMaterial base = getBase(item);
-    	if(base != null)
-    	{
-    		return base.getColourInt();
-    	}
-    	return super.getColorFromItemStack(item, layer);
-    }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(ItemStack item, int layer)
-    {
-		return baseTex;
-    }
-    
-    @Override
-	@SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses()
-    {
-    	return true;
-    }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister reg)
-    {
-        baseTex = reg.registerIcon("minefantasy2:custom/component/"+name);
-    }
-    
-    public ItemStack createComm(String base) 
-	{
-    	return createComm(base, 1);
+	public int getRenderPasses(int metadata) {
+		return 1;
 	}
-	public ItemStack createComm(String base, int stack) 
-	{
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getColorFromItemStack(ItemStack item, int layer) {
+		CustomMaterial base = getBase(item);
+		if (base != null) {
+			return base.getColourInt();
+		}
+		return super.getColorFromItemStack(item, layer);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(ItemStack item, int layer) {
+		return baseTex;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public boolean requiresMultipleRenderPasses() {
+		return true;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IIconRegister reg) {
+		baseTex = reg.registerIcon("minefantasy2:custom/component/" + name);
+	}
+
+	public ItemStack createComm(String base) {
+		return createComm(base, 1);
+	}
+
+	public ItemStack createComm(String base, int stack) {
 		return createComm(base, stack, 0);
 	}
-	public ItemStack createComm(String base, int stack, float damage) 
-	{
+
+	public ItemStack createComm(String base, int stack, float damage) {
 		ItemStack item = new ItemStack(this, stack);
 		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
 		int maxdam = this.getMaxDamage(item);
-		
-		item.setItemDamage( (int) ((float)maxdam*damage));
+
+		item.setItemDamage((int) (maxdam * damage));
 		return item;
 	}
-	
+
 	@Override
-	public int getMaxDamage(ItemStack stack)
-	{
-		if(canDamage)
-		{
+	public int getMaxDamage(ItemStack stack) {
+		if (canDamage) {
 			return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 		}
 		return super.getMaxDamage(stack);
 	}
-	public ItemStack createComm(String base, int stack, int damage) 
-	{
+
+	public ItemStack createComm(String base, int stack, int damage) {
 		ItemStack item = new ItemStack(this, stack, damage);
 		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
 		return item;
 	}
+
 	private final String materialType;
+
 	@Override
-	public String getMaterialType(ItemStack item) 
-	{
+	public String getMaterialType(ItemStack item) {
 		return materialType;
 	}
-	//STORAGE
+
+	// STORAGE
 	private String blocktex;
 	private String storageType;
-	
-	public ItemCustomComponent setStoragePlacement(String type, String tex)
-	{
+
+	public ItemCustomComponent setStoragePlacement(String type, String tex) {
 		this.blocktex = tex;
 		this.storageType = type;
 		return this;
 	}
-	
+
 	@Override
-	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user)
-    {
-		if(!world.isRemote && storageType != null)
-		{
-	        MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
-	
-	        if (movingobjectposition == null)
-	        {
-	            return item;
-	        }
-	        else
-	        {
-	        	int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, movingobjectposition);
-  	        	if(placed > 0)
-  	        	{
-  	        		item.stackSize -= placed;
-  	        		return item;
-  	        	}
-	        }
+	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer user) {
+		if (!world.isRemote && storageType != null) {
+			MovingObjectPosition movingobjectposition = this.getMovingObjectPositionFromPlayer(world, user, false);
+
+			if (movingobjectposition == null) {
+				return item;
+			} else {
+				int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user,
+						movingobjectposition);
+				if (placed > 0) {
+					item.stackSize -= placed;
+					return item;
+				}
+			}
 		}
 		return item;
-    }
+	}
 }
