@@ -214,6 +214,7 @@ public class MonsterUpgrader
 		{
 			weapon = CustomToolListMF.standard_spear;
 		}
+		
 		if(mob != null && weapon != null)
 		{
 			mob.setCurrentItemOrArmor(0, weapon.construct(tier,"OakWood"));
