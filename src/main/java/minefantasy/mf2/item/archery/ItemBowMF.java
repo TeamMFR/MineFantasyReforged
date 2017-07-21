@@ -45,7 +45,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, IBattlegearWeapon, IFirearm {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	private final EnumBowType model;
-	private ToolMaterial material = ToolMaterial.WOOD;
 	private int itemRarity;
 	private float baseDamage = 1.0F;
 	private String name;
@@ -56,7 +55,6 @@ public class ItemBowMF extends ItemBow implements ISpecialBow, IDisplayMFAmmo, I
 
 	public ItemBowMF(String name, ToolMaterial mat, EnumBowType type, int rarity) {
 		this(name, (int) (mat.getMaxUses() * type.durabilityModifier), type, mat.getDamageVsEntity(), rarity);
-		material = mat;
 		this.enchantmentLvl = mat.getEnchantability();
 	}
 

@@ -494,7 +494,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		return worldObj.getBlock(xCoord + x, yCoord + y, zCoord + z) instanceof BlockForge;
 	}
 
-	public void syncData() {
+	private void syncData() {
 
 		if (worldObj.isRemote)
 			return;
@@ -539,7 +539,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		if (fuel <= 0)
 			return;
 
-		int share = 2;
+		// int share = 2;
 		TileEntity tile = worldObj.getTileEntity(xCoord + x, yCoord, zCoord + z);
 		if (tile == null)
 			return;
@@ -569,15 +569,14 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		return tile != null && tile instanceof TileEntityFurnace;
 	}
 
-	private void averageAllItems() {
-		/*
-		 * int temp = 0; int items = 0; for(ItemStack item: inv) { if(item != null &&
-		 * item.getItem() instanceof IHotItem) { ++items; temp +=
-		 * ItemHeated.getTemp(item); } } int average = (int)((float)temp / items);
-		 * for(ItemStack item: inv) { if(item != null && item.getItem() instanceof
-		 * IHotItem) { ItemHeated.setTemp(item, average); } }
-		 */
-	}
+	/*
+	 * private void averageAllItems() { /* int temp = 0; int items = 0;
+	 * for(ItemStack item: inv) { if(item != null && item.getItem() instanceof
+	 * IHotItem) { ++items; temp += ItemHeated.getTemp(item); } } int average =
+	 * (int)((float)temp / items); for(ItemStack item: inv) { if(item != null &&
+	 * item.getItem() instanceof IHotItem) { ItemHeated.setTemp(item, average); } }
+	 * }
+	 */
 
 	public boolean tryAddHeatable(ItemStack held) {
 		ItemStack contents = inv[0];

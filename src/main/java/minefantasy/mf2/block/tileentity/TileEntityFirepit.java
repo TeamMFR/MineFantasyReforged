@@ -189,8 +189,8 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
 			return 0;
 		} else {
 			Item i = input.getItem();
-			int d = input.getItemDamage();
-			Item item = input.getItem();
+			/*int d = input.getItemDamage();
+			Item item = input.getItem();*/
 
 			if (i == Items.stick)
 				return 600;// 30Sec

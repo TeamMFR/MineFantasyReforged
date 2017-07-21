@@ -163,10 +163,10 @@ public class PlayerTickHandlerMF {
 			int i = ConfigMobs.dragonInterval;
 			float chance = ConfigMobs.dragonChance;
 
-			if (this.getDragonEnemyPoints(player) >= 100) {
+			if (PlayerTickHandlerMF.getDragonEnemyPoints(player) >= 100) {
 				i /= 2;// twice as frequent
 			}
-			if (this.getDragonEnemyPoints(player) >= 50) {
+			if (PlayerTickHandlerMF.getDragonEnemyPoints(player) >= 50) {
 				chance *= 2;// twice the chance
 			}
 			if (!player.worldObj.isRemote && player.worldObj.getTotalWorldTime() % i == 0
@@ -198,8 +198,8 @@ public class PlayerTickHandlerMF {
 				player.addChatMessage(new ChatComponentText(
 						EnumChatFormatting.GOLD + StatCollector.translateToLocal("event.dragonnear.name")));
 
-				List list = player.worldObj.playerEntities;
-				Iterator players = list.iterator();
+				List<?> list = player.worldObj.playerEntities;
+				Iterator<?> players = list.iterator();
 				while (players.hasNext()) {
 					Object instance = players.next();
 					if (instance != null && instance instanceof EntityPlayer) {

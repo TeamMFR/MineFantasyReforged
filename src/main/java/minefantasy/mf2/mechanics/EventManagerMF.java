@@ -223,13 +223,14 @@ public class EventManagerMF {
 	}
 
 	private int getHideSizeFor(EntityLivingBase mob) {
-		if (mob.getClass().getName().endsWith("EntityCow") || mob.getClass().getName().endsWith("EntityHorse")) {
+		String mobName = mob.getClass().getName();
+		if (mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
 			return 3;
 		}
-		if (mob.getClass().getName().endsWith("EntitySheep")) {
+		if (mobName.endsWith("EntitySheep")) {
 			return 2;
 		}
-		if (mob.getClass().getName().endsWith("EntityPig")) {
+		if (mobName.endsWith("EntityPig")) {
 			return 1;
 		}
 
@@ -246,9 +247,9 @@ public class EventManagerMF {
 	}
 
 	private boolean shouldAnimalDropHide(EntityLivingBase mob) {
-		if (mob.getClass().getName().endsWith("EntityWolf") || mob.getClass().getName().endsWith("EntityPig")
-				|| mob.getClass().getName().endsWith("EntitySheep") || mob.getClass().getName().endsWith("EntityCow")
-				|| mob.getClass().getName().endsWith("EntityHorse")) {
+		String mobName = mob.getClass().getName();
+		if (mobName.endsWith("EntityWolf") || mobName.endsWith("EntityPig") || mobName.endsWith("EntitySheep")
+				|| mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
 			return true;
 		}
 		if (mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig
@@ -279,7 +280,7 @@ public class EventManagerMF {
 		if (dropper != null && useArrows && ConfigExperiment.stickArrows && !dropper.worldObj.isRemote) {
 			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowEffectsMF.getStuckArrows(dropper);
 			if (stuckArrows != null && !stuckArrows.isEmpty()) {
-				Iterator list = stuckArrows.iterator();
+				Iterator<ItemStack> list = stuckArrows.iterator();
 
 				while (list.hasNext()) {
 					ItemStack arrow = (ItemStack) list.next();
@@ -468,17 +469,15 @@ public class EventManagerMF {
 		if (base != null && base == Blocks.farmland && FarmingHelper.didHarvestRuinBlock(event.world, false)) {
 			event.world.setBlock(event.x, event.y - 1, event.z, Blocks.dirt);
 		}
-		if (event.getPlayer() != null) {
+
+		EntityPlayer player = event.getPlayer();
+		if (player != null && !player.capabilities.isCreativeMode && !(player instanceof FakePlayer)) {
 			playerMineBlock(event);
 		}
 	}
 
 	public void playerMineBlock(BlockEvent.BreakEvent event) {
 		EntityPlayer player = event.getPlayer();
-
-		if (player == null || player.capabilities.isCreativeMode || player instanceof FakePlayer) //TODO
-			return;
-
 		ItemStack held = player.getHeldItem();
 		Block broken = event.block;
 
@@ -504,7 +503,7 @@ public class EventManagerMF {
 			ItemWeaponMF.applyFatigue(player, points, 20F);
 
 			if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
-				event.getPlayer().addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 1));
+				player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 1));
 			}
 		}
 	}
@@ -618,7 +617,7 @@ public class EventManagerMF {
 		addDamageType(list, blunt, "blunt");
 	}
 
-	private void addDamageType(List list, int value, String name) {
+	private void addDamageType(List<String> list, int value, String name) {
 		if (value > 0) {
 			String s = StatCollector.translateToLocal("attribute.weapon." + name);
 			if (value < 100) {
@@ -628,7 +627,7 @@ public class EventManagerMF {
 		}
 	}
 
-	public static void addArmourDT(ItemStack armour, EntityPlayer user, List list, boolean extra) {
+	public static void addArmourDT(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
 		list.add("");
 		String AC = ArmourCalculator.getArmourClass(armour);
 		if (AC != null) {
@@ -640,7 +639,7 @@ public class EventManagerMF {
 		addSingleDT(armour, user, 1, list, extra);
 	}
 
-	public static void addSingleDT(ItemStack armour, EntityPlayer user, int id, List list, boolean extra) {
+	public static void addSingleDT(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra) {
 		int slot = ((ItemArmor) armour.getItem()).armorType;
 		String attatch = "";
 
@@ -664,7 +663,7 @@ public class EventManagerMF {
 		}
 	}
 
-	public static void addArmourDR(ItemStack armour, EntityPlayer user, List list, boolean extra) {
+	public static void addArmourDR(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
 		list.add("");
 		String AC = ArmourCalculator.getArmourClass(armour);
 		if (AC != null) {
@@ -682,7 +681,7 @@ public class EventManagerMF {
 		}
 	}
 
-	public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List list, boolean extra,
+	public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra,
 			boolean advanced) {
 		int slot = ((ItemArmor) armour.getItem()).armorType;
 		String attatch = "";
@@ -723,9 +722,9 @@ public class EventManagerMF {
 		list.add(StatCollector.translateToLocal("attribute.mfcrafteff.name") + ": " + efficiency);
 	}
 
-	@SubscribeEvent
+	/*@SubscribeEvent
 	public void loadChunk(ChunkEvent.Load event) {
-	}
+	}*/
 
 	public static String getRegisterName(Entity entity) {
 		String s = EntityList.getEntityString(entity);
