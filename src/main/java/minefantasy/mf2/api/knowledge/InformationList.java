@@ -26,7 +26,7 @@ public class InformationList {
 	/** Is the biggest row used to display a achievement on the GUI. */
 	public static int maxDisplayRow;
 	/** Holds a list of all registered achievements. */
-	public static List<InformationBase> knowledgeList = new ArrayList();
+	public static List<InformationBase> knowledgeList = new ArrayList<InformationBase>();
 	public static HashMap<String, InformationBase> nameMap = new HashMap<String, InformationBase>();
 
 	/**

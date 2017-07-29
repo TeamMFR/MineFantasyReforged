@@ -61,18 +61,21 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
 	@Override
 	public void loadUsageRecipes(ItemStack ingredient) {
-		if (ingredient.getItem().equals(ComponentListMF.clay_pot)) {
-			for (RecipePair recipePair : recipeList) {
-				CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipePair.inputStack, recipePair.outputStack);
-				arecipes.add(cachedRecipe);
+		if (ingredient != null) {
+			if (ingredient.getItem().equals(ComponentListMF.clay_pot)) {
+				for (RecipePair recipePair : recipeList) {
+					CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipePair.inputStack,
+							recipePair.outputStack);
+					arecipes.add(cachedRecipe);
+				}
+				return;
 			}
-			return;
-		}
 
-		QuernRecipes output = QuernRecipes.getResult(ingredient);
-		if (output != null) {
-			CachedQuernRecipe recipe = new CachedQuernRecipe(ingredient, output.result);
-			arecipes.add(recipe);
+			QuernRecipes output = QuernRecipes.getResult(ingredient);
+			if (output != null) {
+				CachedQuernRecipe recipe = new CachedQuernRecipe(ingredient, output.result);
+				arecipes.add(recipe);
+			}
 		}
 	}
 
