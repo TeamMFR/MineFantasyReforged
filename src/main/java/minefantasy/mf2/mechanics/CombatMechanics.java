@@ -44,6 +44,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -85,7 +86,7 @@ public class CombatMechanics {
 		EntityLivingBase hitter = getHitter(event.source);
 		int spd = EventManagerMF.getHitspeedTime(hitter);
 		if (hitter != null && !hitter.worldObj.isRemote) {
-			if (spd > 0 && !(event.entityLiving instanceof EntityPlayer)) {
+			if (spd > 0 && !(event.entityLiving instanceof EntityPlayer || event.entityLiving instanceof EntityEnderman)) {
 				event.setCanceled(true);
 				return;
 			}
@@ -235,8 +236,8 @@ public class CombatMechanics {
 				hit.extinguish();
 			}
 		}
-		dam = onUserHit(hit, hitter, src, dam, properHit);
-		return dam;
+
+		return onUserHit(hit, hitter, src, dam, properHit);
 	}
 
 	private boolean isSkeleton(Entity target) {
