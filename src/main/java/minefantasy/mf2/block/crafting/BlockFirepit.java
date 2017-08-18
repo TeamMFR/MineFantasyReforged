@@ -11,7 +11,6 @@ import minefantasy.mf2.item.list.CreativeTabMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,17 +42,6 @@ public class BlockFirepit extends BlockContainer {
 	@Override
 	public int quantityDropped(Random rand) {
 		return 0;
-	}
-
-	@Override
-	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
-		if (world.isRemote) {
-			return;
-		}
-
-		TileEntityFirepit firepit = (TileEntityFirepit) world.getTileEntity(x, y, z);
-		if (firepit != null && player.getHeldItem() != null) {
-		}
 	}
 
 	@Override
@@ -159,6 +147,16 @@ public class BlockFirepit extends BlockContainer {
 		return false;
 	}
 
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
+		TileEntityFirepit firepit = (TileEntityFirepit) world.getTileEntity(x, y, z);
+		if (firepit != null && firepit.isBurning()) {
+			world.spawnParticle("smoke", x + 0.5D, y + 0.5D, z + 0.5D, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle("flame", x + 0.5D, y + 0.5D, z + 0.5D, 0.0D, 0.0D, 0.0D);
+			world.playSound(x, y, z, "fire.fire", 1.0F + random.nextFloat(), random.nextFloat() * 0.7F + 0.3F, false);
+		}
+	}
+
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
 		if (world.getBlockMetadata(x, y, z) == 1) {
@@ -213,10 +211,5 @@ public class BlockFirepit extends BlockContainer {
 			}
 		}
 		super.breakBlock(world, x, y, z, block, meta);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerBlockIcons(IIconRegister reg) {
 	}
 }
