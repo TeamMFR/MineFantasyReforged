@@ -15,6 +15,7 @@ import minefantasy.mf2.api.crafting.anvil.ShapelessAnvilRecipes;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -32,7 +33,9 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
 
 	@Override
 	public void drawBackground(int recipe) {
-		GL11.glColor4f(1, 1, 1, 1);
+		GL11.glEnable(GL11.GL_BLEND);
+		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GuiDraw.changeTexture(getGuiTexture());
 		GuiDraw.drawTexturedModalRect(0, 0, 5, 22, 166, 147);
 	}

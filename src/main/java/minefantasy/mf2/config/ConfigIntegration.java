@@ -16,9 +16,9 @@ public class ConfigIntegration extends ConfigurationBaseMF {
 
 	@Override
 	protected void loadConfig() {
-		neiIntegration = Boolean.getBoolean(
+		neiIntegration = Boolean.parseBoolean(
 				config.get(CATEGORY_MODS, "NEI Integration", true, "Enable Not Enough Items integration").getString());
-		mtIntegration = Boolean.getBoolean(
+		mtIntegration = Boolean.parseBoolean(
 				config.get(CATEGORY_MODS, "MT Integration", true, "Enable MineTweaker (CraftTweaker) integration")
 						.getString());
 

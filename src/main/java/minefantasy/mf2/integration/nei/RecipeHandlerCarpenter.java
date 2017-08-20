@@ -15,6 +15,7 @@ import minefantasy.mf2.api.crafting.carpenter.ShapelessCarpenterRecipes;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
@@ -81,7 +82,9 @@ public class RecipeHandlerCarpenter extends TemplateRecipeHandler {
 
 	@Override
 	public void drawBackground(int recipe) {
-		GL11.glColor3f(255, 255, 255);
+		GL11.glEnable(GL11.GL_BLEND);
+		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
+		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		GuiDraw.changeTexture(getGuiTexture());
 		GuiDraw.drawTexturedModalRect(0, 0, 5, 33, 166, 171);
 	}
@@ -117,8 +120,8 @@ public class RecipeHandlerCarpenter extends TemplateRecipeHandler {
 		public void setIngredients(List<PositionedStack> items) {
 			ingredients.clear();
 			for (int ingred = 0; ingred < items.size(); ingred++) {
-				MFPositionedStack stack = new MFPositionedStack(items.get(ingred), 41 + stackorder[ingred][0] * 18,
-						47 + stackorder[ingred][1] * 18);
+				MFPositionedStack stack = new MFPositionedStack(items.get(ingred), 41 + stackorder[ingred][0] * 23,
+						47 + stackorder[ingred][1] * 12);
 				stack.setMaxSize(1);
 				ingredients.add(stack);
 			}
@@ -130,7 +133,7 @@ public class RecipeHandlerCarpenter extends TemplateRecipeHandler {
 					if (items[y * width + x] == null)
 						continue;
 
-					MFPositionedStack stack = new MFPositionedStack(items[y * width + x], 41 + x * 18, 47 + y * 18,
+					MFPositionedStack stack = new MFPositionedStack(items[y * width + x], 41 + x * 23, 47 + y * 23,
 							false);
 					stack.setMaxSize(1);
 					ingredients.add(stack);

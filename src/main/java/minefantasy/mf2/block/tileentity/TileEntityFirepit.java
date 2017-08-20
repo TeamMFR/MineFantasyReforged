@@ -41,7 +41,7 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
 	public void updateEntity() {
 		super.updateEntity();
 		if (worldObj.isRemote) {
-			if (isLit() && fuel > 0) {
+			if (isBurning()) {
 				fuel--;
 			}
 			return;
@@ -117,6 +117,7 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
 	public void setLit(boolean lit) {
 		if (worldObj != null) {
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, lit ? 1 : 0, 2);
+			worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 		}
 		ticksExisted = 0;
 	}
