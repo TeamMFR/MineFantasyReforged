@@ -94,7 +94,7 @@ public class CarpenterRecipes {
 				30, new Object[] { " II ", "SSIN", "  I ", 'N', ComponentListMF.nail, 'S', ComponentListMF.plank, 'I',
 						Blocks.planks, });
 		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ToolListMF.maceTraining), nailHammer, "knife", 1, 35,
-				new Object[] { "  II ", "SSIIN", 'N', ComponentListMF.nail, 'S', ComponentListMF.plank, 'I',
+				new Object[] { "  II", "SSII", "  N ", 'N', ComponentListMF.nail, 'S', ComponentListMF.plank, 'I',
 						Blocks.planks, });
 		MineFantasyAPI.addCarpenterRecipe(artisanry, new ItemStack(ToolListMF.spearTraining), nailHammer, "knife", 1,
 				20, new Object[] { "  N ", "SSSI", "  N ", 'N', ComponentListMF.nail, 'S', ComponentListMF.plank, 'I',
