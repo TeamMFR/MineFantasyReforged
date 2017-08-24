@@ -1,10 +1,8 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.network.packet.RoadPacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +10,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TileEntityRoad extends TileEntity {
 	public int[] surface = new int[] { 0, 0 };
@@ -54,11 +54,15 @@ public class TileEntityRoad extends TileEntity {
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new RoadPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player, new RoadPacket(this).generatePacket());
 		}
+		*/
 	}
 
 	public void requestPacket() {

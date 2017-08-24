@@ -1,7 +1,5 @@
 package minefantasy.mf2.item.armour;
 
-import java.util.List;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -31,6 +29,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+
+import java.util.List;
 
 public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistance {
 	@SideOnly(Side.CLIENT)

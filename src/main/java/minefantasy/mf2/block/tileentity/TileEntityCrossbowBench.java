@@ -1,14 +1,12 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import minefantasy.mf2.api.crafting.IBasicMetre;
 import minefantasy.mf2.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.network.packet.CrossbowBenchPacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -18,6 +16,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TileEntityCrossbowBench extends TileEntity implements IInventory, ISidedInventory, IBasicMetre {
 	/**
@@ -92,12 +92,16 @@ public class TileEntityCrossbowBench extends TileEntity implements IInventory, I
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new CrossbowBenchPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 					new CrossbowBenchPacket(this).generatePacket());
 		}
+		*/
 	}
 
 	public void onInventoryChanged() {

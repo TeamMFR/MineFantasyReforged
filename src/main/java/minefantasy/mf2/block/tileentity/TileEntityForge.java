@@ -1,8 +1,5 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.crafting.IBasicMetre;
@@ -17,6 +14,7 @@ import minefantasy.mf2.block.refining.BlockForge;
 import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.network.packet.ForgePacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,6 +26,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TileEntityForge extends TileEntity implements IInventory, IBasicMetre, IHeatSource, IBellowsUseable {
 	private ItemStack[] inv = new ItemStack[1];
@@ -499,11 +499,15 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new ForgePacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player, new ForgePacket(this).generatePacket());
 		}
+		*/
 	}
 
 	int justShared;

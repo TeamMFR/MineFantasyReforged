@@ -1,8 +1,5 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.crafting.MineFantasyFuels;
@@ -17,6 +14,7 @@ import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.network.packet.BloomeryPacket;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -27,6 +25,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TileEntityBloomery extends TileEntity implements IInventory {
 	private ItemStack[] inv = new ItemStack[3];
@@ -90,12 +90,15 @@ public class TileEntityBloomery extends TileEntity implements IInventory {
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new BloomeryPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 					new BloomeryPacket(this).generatePacket());
 		}
+		*/
 	}
 
 	private int ticksExisted;

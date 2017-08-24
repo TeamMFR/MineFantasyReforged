@@ -1,7 +1,5 @@
 package minefantasy.mf2.block.tileentity.decor;
 
-import java.util.List;
-
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IAmmo;
 import minefantasy.mf2.api.archery.IFirearm;
@@ -12,6 +10,7 @@ import minefantasy.mf2.block.decor.BlockAmmoBox;
 import minefantasy.mf2.item.ItemBandage;
 import minefantasy.mf2.item.gadget.ItemSyringe;
 import minefantasy.mf2.network.packet.AmmoBoxPacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
@@ -196,12 +195,16 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements IBasicMetr
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new AmmoBoxPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player, new AmmoBoxPacket(this).generatePacket());
 			super.sendPacketToClient(player);
 		}
+		*/
 	}
 
 	public int getMaxAmmo(ItemStack ammo) {
