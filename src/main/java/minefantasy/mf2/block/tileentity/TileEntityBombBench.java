@@ -1,8 +1,5 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import minefantasy.mf2.api.crafting.IBasicMetre;
 import minefantasy.mf2.api.crafting.engineer.IBombComponent;
 import minefantasy.mf2.api.helpers.ToolHelper;
@@ -13,6 +10,7 @@ import minefantasy.mf2.item.gadget.ItemExplodingArrow;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.network.packet.BombBenchPacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -25,6 +23,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TileEntityBombBench extends TileEntity implements IInventory, ISidedInventory, IBasicMetre {
 	private ItemStack[] inv = new ItemStack[6];
@@ -147,12 +147,16 @@ public class TileEntityBombBench extends TileEntity implements IInventory, ISide
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new BombBenchPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 					new BombBenchPacket(this).generatePacket());
 		}
+		*/
 	}
 
 	private boolean areItemsEqual(ItemStack bomb1, ItemStack bomb2) {

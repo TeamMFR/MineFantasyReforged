@@ -1,11 +1,10 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.decor.BlockComponent;
 import minefantasy.mf2.network.packet.StorageBlockPacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -125,12 +124,16 @@ public class TileEntityComponent extends TileEntity {
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new StorageBlockPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 					new StorageBlockPacket(this).generatePacket());
 		}
+		*/
 	}
 
 	public boolean isFull() {

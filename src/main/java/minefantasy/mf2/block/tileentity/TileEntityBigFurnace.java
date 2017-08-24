@@ -1,8 +1,5 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.api.heating.ForgeItemHandler;
@@ -14,6 +11,7 @@ import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.refining.BlockBigFurnace;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.network.packet.BigFurnacePacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +29,8 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.Random;
 
 public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable, IInventory, ISidedInventory {
 
@@ -617,12 +617,15 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
 
 	private void sendPacketToClients() {
 		if (!worldObj.isRemote) {
+			NetworkUtils.sendToWatchers(new BigFurnacePacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+			/*
 			List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 			for (int i = 0; i < players.size(); i++) {
 				EntityPlayer player = players.get(i);
 				((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 						new BigFurnacePacket(this).generatePacket());
 			}
+			*/
 		}
 	}
 
