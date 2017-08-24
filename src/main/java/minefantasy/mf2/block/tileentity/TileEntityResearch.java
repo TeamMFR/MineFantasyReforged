@@ -1,9 +1,5 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import minefantasy.mf2.api.crafting.IBasicMetre;
 import minefantasy.mf2.api.knowledge.IArtefact;
 import minefantasy.mf2.api.knowledge.InformationBase;
@@ -11,6 +7,7 @@ import minefantasy.mf2.api.knowledge.ResearchArtefacts;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.network.packet.ResearchTablePacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
@@ -20,6 +17,9 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.WorldServer;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class TileEntityResearch extends TileEntity implements IInventory, IBasicMetre {
 	private ItemStack[] items = new ItemStack[1];
@@ -165,12 +165,16 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new ResearchTablePacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 					new ResearchTablePacket(this).generatePacket());
 		}
+		*/
 	}
 
 	@Override

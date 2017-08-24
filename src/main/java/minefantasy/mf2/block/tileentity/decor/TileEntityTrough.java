@@ -1,10 +1,9 @@
 package minefantasy.mf2.block.tileentity.decor;
 
-import java.util.List;
-
 import minefantasy.mf2.api.heating.IQuenchBlock;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.network.packet.TroughPacket;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -121,12 +120,17 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new TroughPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+		super.sendPacketToClient();
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player, new TroughPacket(this).generatePacket());
 			super.sendPacketToClient(player);
 		}
+		*/
 	}
 
 }

@@ -1,8 +1,5 @@
 package minefantasy.mf2.block.tileentity;
 
-import java.util.List;
-import java.util.Random;
-
 import minefantasy.mf2.api.crafting.carpenter.CarpenterCraftMatrix;
 import minefantasy.mf2.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenter;
@@ -14,6 +11,7 @@ import minefantasy.mf2.container.ContainerCarpenterMF;
 import minefantasy.mf2.item.armour.ItemArmourMF;
 import minefantasy.mf2.network.packet.CarpenterPacket;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.NetworkUtils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -23,6 +21,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICarpenter {
 	private int tier;
@@ -351,12 +351,16 @@ public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICa
 		if (worldObj.isRemote)
 			return;
 
+		NetworkUtils.sendToWatchers(new CarpenterPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
+
+		/*
 		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
 		for (int i = 0; i < players.size(); i++) {
 			EntityPlayer player = players.get(i);
 			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
 					new CarpenterPacket(this).generatePacket());
 		}
+		*/
 	}
 
 	public String resName = "<No Project Set>";
