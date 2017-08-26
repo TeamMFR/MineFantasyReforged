@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 public abstract class PacketMF {
 
 	public final FMLProxyPacket generatePacket() {
-		ByteBuf buf = Unpooled.buffer();
+		ByteBuf buf = Unpooled.buffer(16);
 		write(buf);
 		return new FMLProxyPacket(buf, getChannel());
 	}
