@@ -52,7 +52,7 @@ public class ItemSkillBook extends ItemComponentMF {
 				if (isMax) {
 					skill.manualLvlUp(user, 100);
 				} else {
-					skill.addXP(user, skill.getLvlXP(lvl, user));
+					skill.addXP(user, world.rand.nextInt(skill.getLvlXP(lvl, user)));
 				}
 				used = true;
 			}
