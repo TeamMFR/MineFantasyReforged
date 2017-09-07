@@ -57,7 +57,7 @@ import net.minecraftforge.common.config.Configuration;
 /**
  * @author Anonymous Productions
  */
-@Mod(modid = MineFantasyII.MODID, name = MineFantasyII.NAME, dependencies = "required-after:Forge@[7.0,);required-after:FML@[5.0.5,);after:NotEnoughItems", version = MineFantasyII.VERSION)
+@Mod(modid = MineFantasyII.MODID, name = MineFantasyII.NAME, dependencies = "required-after:Forge@[7.0,);required-after:FML@[5.0.5,);after:NotEnoughItems;after:MineTweaker3", version = MineFantasyII.VERSION)
 public class MineFantasyII {
 	public static final String MODID = "minefantasy2";
 	public static final String NAME = "MineFantasyII";
