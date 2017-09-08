@@ -86,8 +86,7 @@ public class Salvage {
 			ItemStack entry, float chanceModifier, float chance) {
 		for (int a = 0; a < entry.stackSize; a++) {
 			if (random.nextFloat() * chanceModifier < chance) {
-				items.add(entry.copy());
-				/*boolean canSalvage = true;
+				boolean canSalvage = true;
 
 				if (entry.getItem() instanceof ISalvageDrop) {
 					canSalvage = ((ISalvageDrop) entry.getItem()).canSalvage(user, entry);
@@ -95,9 +94,9 @@ public class Salvage {
 				if (canSalvage) {
 					ItemStack newitem = entry.copy();
 					newitem.stackSize = 1;
-					newitem = CustomToolHelper.tryDeconstruct(newitem, mainItem);
+					//newitem = CustomToolHelper.tryDeconstruct(newitem, mainItem);
 					items.add(newitem);
-				}*/
+				}
 			}
 		}
 		return items;
