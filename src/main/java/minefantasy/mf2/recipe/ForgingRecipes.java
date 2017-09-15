@@ -57,7 +57,7 @@ public class ForgingRecipes {
 				(int) (time * material.craftTimeModifier),
 				new Object[] { "D", "I", 'D', ComponentListMF.diamond_shards, 'I', ComponentListMF.bar("Steel"), });
 		Salvage.addSalvage(ComponentListMF.ingots[5], ComponentListMF.ingots[4], ComponentListMF.diamond_shards);
-		Salvage.addSalvage(ComponentListMF.bar("Encrusted"), ComponentListMF.bar("Steel"),
+		Salvage.addSalvage(ComponentListMF.bar("Encrusted"), ComponentListMF.ingots[4],
 				ComponentListMF.diamond_shards);
 
 		material = BaseMaterialMF.pigiron;

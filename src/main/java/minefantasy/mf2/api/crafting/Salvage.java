@@ -94,7 +94,7 @@ public class Salvage {
 				if (canSalvage) {
 					ItemStack newitem = entry.copy();
 					newitem.stackSize = 1;
-					//newitem = CustomToolHelper.tryDeconstruct(newitem, mainItem);
+					newitem = CustomToolHelper.tryDeconstruct(newitem, mainItem);
 					items.add(newitem);
 				}
 			}
