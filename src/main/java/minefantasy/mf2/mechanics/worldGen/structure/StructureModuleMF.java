@@ -4,6 +4,7 @@ import java.util.Random;
 
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.tileentity.TileEntityWorldGenMarker;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
@@ -12,6 +13,8 @@ import net.minecraft.tileentity.TileEntityMobSpawner;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DungeonHooks;
+
+import javax.xml.bind.annotation.XmlSchema;
 
 public abstract class StructureModuleMF {
 	public final int xCoord;
@@ -22,7 +25,7 @@ public abstract class StructureModuleMF {
 	 */
 	public final int direction;
 	public final World worldObj;
-	protected Random rand = new Random();
+	protected XSTRandom rand = new XSTRandom();
 	/**
 	 * How much longer can units be added
 	 */

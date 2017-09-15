@@ -1,7 +1,6 @@
 package minefantasy.mf2.mechanics.worldGen;
 
-import java.util.Random;
-
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.block.list.BlockListMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
@@ -11,14 +10,14 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.util.ForgeDirection;
 
+import java.util.Random;
+
 public class WorldGenMFTree extends WorldGenAbstractTree {
 	/**
 	 * Contains three sets of two values that provide complimentary indices for a
 	 * given 'major' index - 1 and 2 for 0, 0 and 2 for 1, and 0 and 1 for 2.
 	 */
 	static final byte[] otherCoordPairs = new byte[] { (byte) 2, (byte) 0, (byte) 0, (byte) 1, (byte) 2, (byte) 1 };
-	/** random seed for GenBigTree */
-	Random rand = new Random();
 	/** Reference to the World object. */
 	World worldObj;
 	int[] basePos = new int[] { 0, 0, 0 };
@@ -104,8 +103,8 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
 				--i1;
 			} else {
 				for (double d0 = 0.5D; j1 < i; ++j1) {
-					double d1 = this.scaleWidth * f * (this.rand.nextFloat() + 0.328D);
-					double d2 = this.rand.nextFloat() * 2.0D * Math.PI;
+					double d1 = this.scaleWidth * f * (MineFantasyII.random.nextFloat() + 0.328D);
+					double d2 = MineFantasyII.random.nextFloat() * 2.0D * Math.PI;
 					int k1 = MathHelper.floor_double(d1 * Math.sin(d2) + this.basePos[0] + d0);
 					int l1 = MathHelper.floor_double(d1 * Math.cos(d2) + this.basePos[2] + d0);
 					int[] aint1 = new int[] { k1, j, l1 };
@@ -433,13 +432,13 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
 	public boolean generate(World world, Random rand, int x, int y, int z) {
 		this.worldObj = world;
 		long l = rand.nextLong();
-		this.rand.setSeed(l);
+		MineFantasyII.random.setSeed(l);
 		this.basePos[0] = x;
 		this.basePos[1] = y;
 		this.basePos[2] = z;
 
 		if (this.heightLimit == 0) {
-			this.heightLimit = 5 + this.rand.nextInt(this.heightLimitLimit);
+			this.heightLimit = 5 + MineFantasyII.random.nextInt(this.heightLimitLimit);
 		}
 
 		if (!this.validTreeLocation()) {

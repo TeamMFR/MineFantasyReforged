@@ -49,6 +49,7 @@ import minefantasy.mf2.recipe.BasicRecipesMF;
 import minefantasy.mf2.recipe.RecipeRemover;
 import minefantasy.mf2.util.BukkitUtils;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.init.Items;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
@@ -70,6 +71,9 @@ public class MineFantasyII {
 
 	@Instance(MODID)
 	public static MineFantasyII instance;
+
+	//Up to 30% faster random implementation.
+	public static XSTRandom random = new XSTRandom();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {

@@ -3,7 +3,6 @@ package minefantasy.mf2.mechanics;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.relauncher.Side;
@@ -107,14 +106,13 @@ import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class EventManagerMF {
-	public static Random rand = new Random();
 
 	@SubscribeEvent
 	public void tryDropItems(LivingDropsEvent event) {
 		EntityLivingBase dropper = event.entityLiving;
 
 		if (dropper instanceof EntityChicken) {
-			int dropCount = 1 + rand.nextInt(event.lootingLevel + 1 * 4);
+			int dropCount = 1 + MineFantasyII.random.nextInt(event.lootingLevel + 1 * 4);
 
 			for (int a = 0; a < dropCount; a++) {
 				dropper.entityDropItem(new ItemStack(Items.feather), 0.0F);
@@ -126,7 +124,7 @@ public class EventManagerMF {
 			dropper.entityDropItem(new ItemStack(drop), 0.0F);
 		}
 		if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-			if (rand.nextFloat() * (1 + event.lootingLevel) < 0.05F) {
+			if (MineFantasyII.random.nextFloat() * (1 + event.lootingLevel) < 0.05F) {
 				dropper.entityDropItem(new ItemStack(FoodListMF.guts), 0.0F);
 			}
 		}
@@ -140,9 +138,9 @@ public class EventManagerMF {
 			}
 		}
 		if (getRegisterName(dropper).contains("Horse")) {
-			int dropCount = rand.nextInt(3 + event.lootingLevel);
+			int dropCount = MineFantasyII.random.nextInt(3 + event.lootingLevel);
 			if (ConfigHardcore.lessHunt) {
-				dropCount = 1 + rand.nextInt(event.lootingLevel + 1);
+				dropCount = 1 + MineFantasyII.random.nextInt(event.lootingLevel + 1);
 			}
 
 			Item meat = dropper.isBurning() ? FoodListMF.horse_cooked : FoodListMF.horse_raw;
@@ -151,9 +149,9 @@ public class EventManagerMF {
 			}
 		}
 		if (getRegisterName(dropper).contains("Wolf")) {
-			int dropCount = rand.nextInt(3 + event.lootingLevel);
+			int dropCount = MineFantasyII.random.nextInt(3 + event.lootingLevel);
 			if (ConfigHardcore.lessHunt) {
-				dropCount = 1 + rand.nextInt(event.lootingLevel + 1);
+				dropCount = 1 + MineFantasyII.random.nextInt(event.lootingLevel + 1);
 			}
 
 			Item meat = dropper.isBurning() ? FoodListMF.wolf_cooked : FoodListMF.wolf_raw;
@@ -403,14 +401,14 @@ public class EventManagerMF {
 			return;
 		Item book = null;
 		if (id == 0) {
-			float chance = rand.nextFloat();
+			float chance = MineFantasyII.random.nextFloat();
 			if (chance > 0.75F) {
 				book = ToolListMF.skillbook_engineering;
 			} else {
 				book = ToolListMF.skillbook_provisioning;
 			}
-		} else if (id == 1 && rand.nextInt(5) == 0) {
-			float chance = rand.nextFloat();
+		} else if (id == 1 && MineFantasyII.random.nextInt(5) == 0) {
+			float chance = MineFantasyII.random.nextFloat();
 			if (chance > 0.9F) {
 				book = ToolListMF.skillbook_engineering;
 			} else if (chance > 0.6F) {
@@ -420,8 +418,8 @@ public class EventManagerMF {
 			} else {
 				book = ToolListMF.skillbook_provisioning;
 			}
-		} else if (id == 2 && rand.nextInt(25) == 0) {
-			float chance = rand.nextFloat();
+		} else if (id == 2 && MineFantasyII.random.nextInt(25) == 0) {
+			float chance = MineFantasyII.random.nextFloat();
 			if (chance > 0.9F) {
 				book = ToolListMF.skillbook_engineering;
 			} else if (chance > 0.6F) {
@@ -484,16 +482,16 @@ public class EventManagerMF {
 		if (broken != null && ConfigHardcore.HCCallowRocks) {
 			if (broken == Blocks.stone && held == null) {
 				entityDropItem(event.world, event.x, event.y, event.z,
-						new ItemStack(ComponentListMF.sharp_rock, rand.nextInt(3) + 1));
+						new ItemStack(ComponentListMF.sharp_rock, MineFantasyII.random.nextInt(3) + 1));
 			}
 			if (broken instanceof BlockLeavesBase && held != null && held.getItem() == ComponentListMF.sharp_rock) {
-				if (rand.nextInt(5) == 0) {
+				if (MineFantasyII.random.nextInt(5) == 0) {
 					entityDropItem(event.world, event.x, event.y, event.z,
-							new ItemStack(Items.stick, rand.nextInt(3) + 1));
+							new ItemStack(Items.stick, MineFantasyII.random.nextInt(3) + 1));
 				}
-				if (rand.nextInt(3) == 0) {
+				if (MineFantasyII.random.nextInt(3) == 0) {
 					entityDropItem(event.world, event.x, event.y, event.z,
-							new ItemStack(ComponentListMF.vine, rand.nextInt(3) + 1));
+							new ItemStack(ComponentListMF.vine, MineFantasyII.random.nextInt(3) + 1));
 				}
 			}
 		}
@@ -754,9 +752,9 @@ public class EventManagerMF {
 				}
 				if (entity.ticksExisted % 15 == 0) {
 					entity.limbSwing = 2.0F;
-					float x = (float) (entity.posX + (rand.nextFloat() - 0.5F) / 4F);
-					float y = (float) (entity.posY + entity.getEyeHeight() + (rand.nextFloat() - 0.5F) / 4F);
-					float z = (float) (entity.posZ + (rand.nextFloat() - 0.5F) / 4F);
+					float x = (float) (entity.posX + (MineFantasyII.random.nextFloat() - 0.5F) / 4F);
+					float y = (float) (entity.posY + entity.getEyeHeight() + (MineFantasyII.random.nextFloat() - 0.5F) / 4F);
+					float z = (float) (entity.posZ + (MineFantasyII.random.nextFloat() - 0.5F) / 4F);
 					entity.worldObj.spawnParticle("reddust", x, y, z, 0F, 0F, 0F);
 				}
 			}

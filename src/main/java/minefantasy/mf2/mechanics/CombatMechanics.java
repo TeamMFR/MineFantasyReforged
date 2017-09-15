@@ -1,28 +1,15 @@
 package minefantasy.mf2.mechanics;
 
-import java.util.Map;
-import java.util.Random;
-
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.IElementalResistance;
-import minefantasy.mf2.api.helpers.ArmourCalculator;
-import minefantasy.mf2.api.helpers.ArrowEffectsMF;
-import minefantasy.mf2.api.helpers.CustomToolHelper;
-import minefantasy.mf2.api.helpers.PowerArmour;
-import minefantasy.mf2.api.helpers.TacticalManager;
+import minefantasy.mf2.api.helpers.*;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.api.stamina.StaminaBar;
-import minefantasy.mf2.api.weapon.IDamageModifier;
-import minefantasy.mf2.api.weapon.IKnockbackWeapon;
-import minefantasy.mf2.api.weapon.IParryable;
-import minefantasy.mf2.api.weapon.IPowerAttack;
-import minefantasy.mf2.api.weapon.ISpecialCombatMob;
-import minefantasy.mf2.api.weapon.ISpecialEffect;
-import minefantasy.mf2.api.weapon.IWeaponSpeed;
-import minefantasy.mf2.api.weapon.IWeightedWeapon;
+import minefantasy.mf2.api.weapon.*;
 import minefantasy.mf2.config.ConfigArmour;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigStamina;
@@ -30,11 +17,7 @@ import minefantasy.mf2.config.ConfigWeapon;
 import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.entity.Shockwave;
 import minefantasy.mf2.entity.mob.EntityMinotaur;
-import minefantasy.mf2.item.weapon.ItemBattleaxeMF;
-import minefantasy.mf2.item.weapon.ItemDagger;
-import minefantasy.mf2.item.weapon.ItemKatanaMF;
-import minefantasy.mf2.item.weapon.ItemWaraxeMF;
-import minefantasy.mf2.item.weapon.ItemWeaponMF;
+import minefantasy.mf2.item.weapon.*;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.network.packet.DodgeCommand;
 import minefantasy.mf2.network.packet.ParryPacket;
@@ -64,10 +47,11 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 
+import java.util.Map;
+
 public class CombatMechanics {
 	public static final String parryCooldownNBT = "MF_Parry_Cooldown";
 	public static final String posthitCooldownNBT = "MF_PostHit";
-	private static Random rand = new Random();
 	/** Damage done by silver to undead/witches */
 	public static final float specialUnholyModifier = 2.0F;
 	/** Damage done by silver to werewolves */
@@ -259,7 +243,7 @@ public class CombatMechanics {
 				if (isSkeleton(target)) {
 					dam *= 1.5F;
 					if (properHit) {
-						if (rand.nextInt(2) == 0) {
+						if (MineFantasyII.random.nextInt(2) == 0) {
 							target.entityDropItem(new ItemStack(Items.bone), 0.5F);
 						}
 					}
@@ -374,7 +358,7 @@ public class CombatMechanics {
 		living.playSound("random.fizz", 0.5F, 0.5F);
 		living.addPotionEffect(new PotionEffect(Potion.weakness.id, 1200, 2));
 		living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200, 2));
-		if (rand.nextInt(5) == 0) {
+		if (MineFantasyII.random.nextInt(5) == 0) {
 			living.setFire(3);
 		}
 	}
@@ -504,10 +488,10 @@ public class CombatMechanics {
 							* (dam + 1F) * parryFatigue * weaponFatigue);
 					if (parry == null) {
 						user.worldObj.playSoundAtEntity(user, getDefaultParrySound(weapon), 1.0F,
-								1.25F + (rand.nextFloat() * 0.5F));
+								1.25F + (MineFantasyII.random.nextFloat() * 0.5F));
 					} else if (!parry.playCustomParrySound(user, entityHitting, weapon)) {
 						user.worldObj.playSoundAtEntity(user, "mob.zombie.metal", 1.0F,
-								1.25F + (rand.nextFloat() * 0.5F));
+								1.25F + (MineFantasyII.random.nextFloat() * 0.5F));
 					}
 					if (user instanceof EntityPlayer) {
 						((EntityPlayer) user).stopUsingItem();
@@ -647,7 +631,7 @@ public class CombatMechanics {
 				return false;
 			}
 		} else {
-			if (rand.nextInt(10) != 0)// Mobs can evade
+			if (MineFantasyII.random.nextInt(10) != 0)// Mobs can evade
 			{
 				return false;
 			}
@@ -868,9 +852,9 @@ public class CombatMechanics {
 		double moveZ = victim.getEntityData().getDouble("MF2_PanicZ");
 		victim.setJumping(true);
 
-		if ((moveX == 0 && moveZ == 0) || rand.nextInt(directionTimer) == 0) {
-			moveX = (rand.nextDouble() - 0.5D) * 0.85D * speed;
-			moveZ = (rand.nextDouble() - 0.5D) * 0.85D * speed;
+		if ((moveX == 0 && moveZ == 0) || MineFantasyII.random.nextInt(directionTimer) == 0) {
+			moveX = (MineFantasyII.random.nextDouble() - 0.5D) * 0.85D * speed;
+			moveZ = (MineFantasyII.random.nextDouble() - 0.5D) * 0.85D * speed;
 
 			victim.getEntityData().setDouble("MF2_PanicX", moveX);
 			victim.getEntityData().setDouble("MF2_PanicZ", moveZ);

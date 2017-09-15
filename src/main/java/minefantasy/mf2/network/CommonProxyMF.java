@@ -5,6 +5,7 @@ import java.util.Random;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.refine.ISmokeHandler;
 import minefantasy.mf2.api.refine.SmokeMechanics;
@@ -174,17 +175,14 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler {
 		return null;
 	}
 
-	public static int renderID = -1;
-	private static Random rand = new Random();
-
 	@Override
 	public void spawnSmoke(World world, double x, double y, double z, int value) {
 		for (int a = 0; a < value; a++) {
 			float sprayRange = 0.005F;
-			float sprayX = (rand.nextFloat() * sprayRange) - (sprayRange / 2);
-			float sprayZ = (rand.nextFloat() * sprayRange) - (sprayRange / 2);
+			float sprayX = (MineFantasyII.random.nextFloat() * sprayRange) - (sprayRange / 2);
+			float sprayZ = (MineFantasyII.random.nextFloat() * sprayRange) - (sprayRange / 2);
 			float height = 0.001F;
-			if (rand.nextInt(2) == 0) {
+			if (MineFantasyII.random.nextInt(2) == 0) {
 				EntitySmoke smoke = new EntitySmoke(world, x, y - 0.5D, z, sprayX, height, sprayZ);
 				world.spawnEntityInWorld(smoke);
 			}

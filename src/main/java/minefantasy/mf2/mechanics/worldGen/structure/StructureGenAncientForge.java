@@ -8,8 +8,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class StructureGenAncientForge extends StructureModuleMF {
-	private Random rand = new Random();
-
 	public StructureGenAncientForge(World world, int x, int y, int z, int d) {
 		super(world, x, y, z, d);
 	}

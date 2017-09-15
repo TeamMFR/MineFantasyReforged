@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ChestGenHooks;
 
 public class StructureGenAFRoom extends StructureModuleMF {
-	private Random rand = new Random();
 
 	public StructureGenAFRoom(World world, int x, int y, int z, int d) {
 		super(world, x, y, z, d);

@@ -7,8 +7,6 @@ import net.minecraft.world.World;
 
 public class StructureGenAncientForgeEntry extends StructureModuleMF {
 
-	private Random rand = new Random();
-
 	public StructureGenAncientForgeEntry(World world, int x, int y, int z, int d) {
 		super(world, x, y, z, d);
 	}

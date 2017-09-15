@@ -7,6 +7,7 @@ import java.util.Random;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IFirearm;
 import minefantasy.mf2.api.heating.IHotItem;
@@ -37,7 +38,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.EnumDifficulty;
 
 public class PlayerTickHandlerMF {
-	private static Random rand = new Random();
 	private static ItemStack lastStack;
 
 	// SPRINT JUMPING
@@ -170,7 +170,7 @@ public class PlayerTickHandlerMF {
 				chance *= 2;// twice the chance
 			}
 			if (!player.worldObj.isRemote && player.worldObj.getTotalWorldTime() % i == 0
-					&& rand.nextFloat() * 100F < chance) {
+					&& MineFantasyII.random.nextFloat() * 100F < chance) {
 				spawnDragon(player);
 			}
 		}
@@ -303,38 +303,38 @@ public class PlayerTickHandlerMF {
 			return 0;// Young 100%
 		}
 		if (kills < 10) {
-			if (rand.nextInt(5) == 0)
+			if (MineFantasyII.random.nextInt(5) == 0)
 				return 0;// 20% chance for Young
 			return 1;// Adult
 		}
 		if (kills < 15) {
-			if (rand.nextInt(10) == 0)
+			if (MineFantasyII.random.nextInt(10) == 0)
 				return 0;// 10% chance for Young
 			return 1;// Adult
 		}
 		if (kills < 25) {
-			if (rand.nextInt(20) == 0)
+			if (MineFantasyII.random.nextInt(20) == 0)
 				return 0;// 5% chance for Young
-			if (rand.nextInt(10) == 0)
+			if (MineFantasyII.random.nextInt(10) == 0)
 				return 2;// 10% chance for Mature
 			return 1;// Adult
 		}
 		if (kills < 35) {
-			if (rand.nextInt(4) == 0)
+			if (MineFantasyII.random.nextInt(4) == 0)
 				return 2;// 25% chance for Mature
 			return 1;// Adult
 		}
 		if (kills >= 50) {
-			if (rand.nextInt(10) == 0)
+			if (MineFantasyII.random.nextInt(10) == 0)
 				return 1;// 10% chance for Adult
-			if (rand.nextInt(5) == 0)
+			if (MineFantasyII.random.nextInt(5) == 0)
 				return 3;// 20% chance Elder
 			return 2;// Mature
 		}
 		if (kills > 75) {
-			if (rand.nextInt(100) == 0)
+			if (MineFantasyII.random.nextInt(100) == 0)
 				return 4;// 1% chance Ancient
-			if (rand.nextInt(2) == 0)
+			if (MineFantasyII.random.nextInt(2) == 0)
 				return 3;// 50% chance Elder
 			return 2;// Mature
 		}

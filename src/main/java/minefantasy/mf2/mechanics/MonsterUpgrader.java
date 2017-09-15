@@ -3,6 +3,7 @@ package minefantasy.mf2.mechanics;
 import java.util.Random;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.item.list.CustomArmourListMF;
@@ -27,7 +28,6 @@ public class MonsterUpgrader {
 	private static final float creeperJockeyChance = 60F;
 	private static final float witchRiderChance = 100F;
 
-	private static Random rand = new Random();
 	public static final String zombieArmourNBT = "MF_ZombieArmour";
 
 	public void upgradeMob(EntityLivingBase mob) {
@@ -36,8 +36,8 @@ public class MonsterUpgrader {
 		if (ConfigHardcore.upgradeZombieWep) {
 			if (mob instanceof EntitySkeleton) {
 				if (((EntitySkeleton) mob).getSkeletonType() == 1) {
-					giveEntityWeapon(mob, "Diamond", rand.nextInt(8));
-				} else if (CombatMechanics.swordSkeleton && rand.nextInt(3) == 0) {
+					giveEntityWeapon(mob, "Diamond", MineFantasyII.random.nextInt(8));
+				} else if (CombatMechanics.swordSkeleton && MineFantasyII.random.nextInt(3) == 0) {
 					mob.setCurrentItemOrArmor(0, CustomToolListMF.standard_sword.construct("Bronze", "OakWood"));
 					((EntitySkeleton) mob).setCombatTask();
 				}
@@ -45,7 +45,7 @@ public class MonsterUpgrader {
 				String tier = "Iron";
 				if (mob instanceof EntityPigZombie) {
 					tier = "Obsidian";
-					giveEntityWeapon(mob, tier, rand.nextInt(7));
+					giveEntityWeapon(mob, tier, MineFantasyII.random.nextInt(7));
 					if (mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null) {
 						mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
 					}
@@ -58,18 +58,18 @@ public class MonsterUpgrader {
 					} else {
 						float mod = diff >= 2 ? ConfigHardcore.zombieWepChance * 2
 								: diff < 1 ? ConfigHardcore.zombieWepChance / 2 : ConfigHardcore.zombieWepChance;
-						float chance = rand.nextFloat() * 100F * mod;
+						float chance = MineFantasyII.random.nextFloat() * 100F * mod;
 						if (chance >= (100F - zombieWepChance)) {
-							giveEntityWeapon(mob, tier, rand.nextInt(5));
+							giveEntityWeapon(mob, tier, MineFantasyII.random.nextInt(5));
 							if (mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null) {
 								mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
 							}
 						}
 					}
 				}
-				if (rand.nextFloat() * (zombieKnightChance) < diff) {
+				if (MineFantasyII.random.nextFloat() * (zombieKnightChance) < diff) {
 					createZombieKnight((EntityZombie) mob);
-				} else if (rand.nextFloat() * (zombieBruteChance) < diff) {
+				} else if (MineFantasyII.random.nextFloat() * (zombieBruteChance) < diff) {
 					createZombieBrute((EntityZombie) mob);
 				} else if (ConfigHardcore.fastZombies) {
 					mob.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3F);
@@ -77,12 +77,12 @@ public class MonsterUpgrader {
 			}
 		} else if (mob instanceof EntitySpider) {
 			if (mob.riddenByEntity == null) {
-				if (rand.nextFloat() * (witchRiderChance) < diff) {
+				if (MineFantasyII.random.nextFloat() * (witchRiderChance) < diff) {
 					EntityWitch rider = new EntityWitch(mob.worldObj);
 					rider.setPosition(mob.posX, mob.posY, mob.posZ);
 					mob.worldObj.spawnEntityInWorld(rider);
 					rider.mountEntity(mob);
-				} else if (rand.nextFloat() * (creeperJockeyChance) < diff) {
+				} else if (MineFantasyII.random.nextFloat() * (creeperJockeyChance) < diff) {
 					EntityCreeper rider = new EntityCreeper(mob.worldObj);
 					rider.setPosition(mob.posX, mob.posY, mob.posZ);
 					mob.worldObj.spawnEntityInWorld(rider);
