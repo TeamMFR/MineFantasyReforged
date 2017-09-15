@@ -8,7 +8,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.RenderLivingEvent;
 
-public abstract class ItemHorseArmorMFBase extends Item {
+public class ItemHorseArmorMFBase extends Item {
+
+    public ArmourMaterialMF armorMaterial;
+    public ArmourDesign armorDesign;
+    public String armorTexture;
+
+    public ItemHorseArmorMFBase(String name, ArmourMaterialMF material, ArmourDesign design, String texture) {
+        this.setUnlocalizedName(name);
+        armorMaterial = material;
+        armorDesign = design;
+        armorTexture = texture;
+    }
 
     /**
      * Used to calculate the amount of protection this item should provide the horse with.
@@ -18,7 +29,9 @@ public abstract class ItemHorseArmorMFBase extends Item {
      * @return int: An integer based representation of the armor points which should be given
      *         to a horse by this armor item.
      */
-    public abstract int getArmorValue (EntityHorse horse, ItemStack stack);
+    public int getArmorValue (EntityHorse horse, ItemStack stack) {
+        return 0;
+    }
 
     /**
      * Called every time an EntityHorse updates while wearing this piece of armor. Allows for
@@ -27,7 +40,9 @@ public abstract class ItemHorseArmorMFBase extends Item {
      * @param horse: An instance of the horse which is currently wearing this piece of armor.
      * @param stack: An instance of the ItemStack currently in the horse's armor slot.
      */
-    public abstract void onHorseUpdate (EntityHorse horse, ItemStack stack);
+    public void onHorseUpdate (EntityHorse horse, ItemStack stack) {
+
+    }
 
     /**
      * Called when a horse wearing this piece of armor has been hurt.
@@ -38,7 +53,9 @@ public abstract class ItemHorseArmorMFBase extends Item {
      * @param damage: The amount of damage that the horse received.
      * @return boolean: If true, the horse will not be hurt and the event will be canceled.
      */
-    public abstract boolean onHorseDamaged (EntityHorse horse, ItemStack stack, DamageSource source, float damage);
+    public boolean onHorseDamaged (EntityHorse horse, ItemStack stack, DamageSource source, float damage) {
+        return true;
+    }
 
     /**
      * Used to provide a resource path for the armor's texture. Textures follow the same rules
@@ -51,7 +68,9 @@ public abstract class ItemHorseArmorMFBase extends Item {
      *         EG: testmod:textures/entity/horse/armor/horse_armor_test.png
      */
     @SideOnly(Side.CLIENT)
-    public abstract String getArmorTexture (EntityHorse horse, ItemStack stack);
+    public String getArmorTexture (EntityHorse horse, ItemStack stack) {
+        return armorTexture;
+    }
 
     /**
      * Allows for special rendering code to be done, when a horse is rendered with this piece
@@ -64,6 +83,8 @@ public abstract class ItemHorseArmorMFBase extends Item {
      *            render events. 0:pre 1:post 2:special-pre 3:special-post
      */
     @SideOnly(Side.CLIENT)
-    public abstract void onHorseRendered (EntityHorse horse, ItemStack armorStack, RenderLivingEvent event, byte flag);
+    public void onHorseRendered (EntityHorse horse, ItemStack armorStack, RenderLivingEvent event, byte flag) {
+
+    }
 
 }

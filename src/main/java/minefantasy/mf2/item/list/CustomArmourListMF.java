@@ -3,6 +3,8 @@ package minefantasy.mf2.item.list;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.item.armour.ItemArmourMF;
 import minefantasy.mf2.item.armour.ItemCustomArmour;
+import minefantasy.mf2.item.armour.ItemHorseArmorMF;
+import minefantasy.mf2.material.BaseMaterialMF;
 import net.minecraft.creativetab.CreativeTabs;
 
 public class CustomArmourListMF {
@@ -11,6 +13,8 @@ public class CustomArmourListMF {
 	public static ItemArmourMF standard_splint_helmet, standard_splint_chest, standard_splint_legs,
 			standard_splint_boots;
 	public static ItemArmourMF standard_plate_helmet, standard_plate_chest, standard_plate_legs, standard_plate_boots;
+
+	public static ItemHorseArmorMF standart_horse_armor;
 
 	public static void load() {
 		String design = "standard";
@@ -51,5 +55,6 @@ public class CustomArmourListMF {
 		standard_plate_boots = (ItemArmourMF) new ItemCustomArmour(design, "plate_boots", ArmourDesign.FIELDPLATE, 3,
 				"plate_layer_1", 0).setCreativeTab(tab);
 
+		standart_horse_armor = new ItemHorseArmorMF("horse_armor", BaseMaterialMF.getMaterial("steel"), ArmourDesign.FIELDPLATE, "", 0);
 	}
 }
