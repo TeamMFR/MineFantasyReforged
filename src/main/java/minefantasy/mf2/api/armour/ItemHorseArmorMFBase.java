@@ -1,16 +1,14 @@
 package minefantasy.mf2.api.armour;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-
 import net.minecraftforge.client.event.RenderLivingEvent;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
-public abstract class ItemHorseArmorMFBase extends Item implements ISpecialArmourMF {
+public abstract class ItemHorseArmorMFBase extends Item {
 
     /**
      * Used to calculate the amount of protection this item should provide the horse with.

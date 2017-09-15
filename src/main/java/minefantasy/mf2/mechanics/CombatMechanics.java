@@ -3,6 +3,7 @@ package minefantasy.mf2.mechanics;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.IElementalResistance;
+import minefantasy.mf2.api.armour.ItemHorseArmorMFBase;
 import minefantasy.mf2.api.helpers.*;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
@@ -30,6 +31,7 @@ import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -129,6 +131,7 @@ public class CombatMechanics {
 	public void onHit(LivingHurtEvent event) {
 		DamageSource src = event.source;
 		EntityLivingBase hit = event.entityLiving;
+
 		if (src != null && src == DamageSource.fall) {
 			onFall(hit, event.ammount);
 		}
@@ -173,6 +176,17 @@ public class CombatMechanics {
 			}
 		}
 		event.ammount = damage;
+
+		//Horses has own damage watcher
+		if (hit instanceof EntityHorse) {
+			EntityHorse horse = (EntityHorse) event.entity;
+			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
+
+			if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMFBase) {
+				ItemHorseArmorMFBase armor = (ItemHorseArmorMFBase) customArmor.getItem();
+				event.setCanceled(armor.onHorseDamaged(horse, customArmor, event.source, event.ammount));
+			}
+		}
 	}
 
 	private void onFall(EntityLivingBase fallen, float height) {

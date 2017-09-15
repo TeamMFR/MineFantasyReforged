@@ -11,6 +11,7 @@ import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.IPowerArmour;
 import minefantasy.mf2.api.armour.ISpecialArmourMF;
 import minefantasy.mf2.api.armour.ItemArmourMFBase;
+import minefantasy.mf2.api.armour.ItemHorseArmorMFBase;
 import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.heating.TongsHelper;
 import minefantasy.mf2.api.helpers.ArmourCalculator;
@@ -29,6 +30,7 @@ import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.api.tool.IHuntingItem;
 import minefantasy.mf2.api.tool.ISmithTongs;
 import minefantasy.mf2.api.weapon.WeaponClass;
+import minefantasy.mf2.asm.ASMHelper;
 import minefantasy.mf2.client.render.RenderPowerArmour;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigHardcore;
@@ -38,6 +40,7 @@ import minefantasy.mf2.entity.EntityItemUnbreakable;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.farming.FarmingHelper;
 import minefantasy.mf2.item.ClientItemsMF;
+import minefantasy.mf2.item.armour.ItemHorseArmorMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -102,7 +105,6 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class EventManagerMF {
@@ -740,6 +742,16 @@ public class EventManagerMF {
 			return;
 		}
 		EntityLivingBase entity = event.entityLiving;
+
+		if (ASMHelper.isASMEnabled && entity instanceof EntityHorse) {
+			EntityHorse horse = (EntityHorse) entity;
+			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
+			if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMF) {
+				ItemHorseArmorMF armor = (ItemHorseArmorMF) customArmor.getItem();
+				armor.onHorseUpdate(horse, customArmor);
+			}
+		}
+
 		float lowHp = entity.getMaxHealth() / 5F;
 		int injury = getInjuredTime(entity);
 
@@ -771,8 +783,8 @@ public class EventManagerMF {
 		}
 		tickHitSpeeds(event.entityLiving);
 
-		if (event.entity.ticksExisted == 1 && event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
-		}
+		/*if (event.entity.ticksExisted == 1 && event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
+		}*/
 
 	}
 
@@ -936,6 +948,35 @@ public class EventManagerMF {
 					model.bipedLeftLeg.isHidden = renderLeftLeg;
 					model.bipedRightLeg.isHidden = renderRightLeg;
 				}
+			}
+		}
+		triggerHorseRenderHook(event, (byte) 0);
+	}
+
+	@SubscribeEvent
+	public void renderEntity (RenderLivingEvent.Post event) {
+		triggerHorseRenderHook(event, (byte) 1);
+	}
+
+	@SubscribeEvent
+	public void renderEntity (RenderLivingEvent.Specials.Pre event) {
+		triggerHorseRenderHook(event, (byte) 2);
+	}
+
+	@SubscribeEvent
+	public void renderEntity (RenderLivingEvent.Specials.Post event) {
+		triggerHorseRenderHook(event, (byte) 3);
+	}
+
+	public void triggerHorseRenderHook(RenderLivingEvent event, byte flag) {
+		if(ASMHelper.isASMEnabled && event.entity instanceof EntityHorse) {
+			EntityHorse horse = (EntityHorse) event.entity;
+			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
+
+			if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMFBase) {
+
+				ItemHorseArmorMFBase armor = (ItemHorseArmorMFBase) customArmor.getItem();
+				armor.onHorseRendered(horse, customArmor, event, flag);
 			}
 		}
 	}
