@@ -56,6 +56,15 @@ dependencies {
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
+	manifest {
+        attributes "FMLCorePlugin": "minefantasy.mf2.asm.MFLoadingPlugin", "FMLCorePluginContainsFMLMod": "true"
+    }
+}
+
+jar {
+	manifest {
+        attributes "FMLCorePlugin": "minefantasy.mf2.asm.MFLoadingPlugin", "FMLCorePluginContainsFMLMod": "true"
+    }
 }
 
 tasks.build.dependsOn('deobfJar')
