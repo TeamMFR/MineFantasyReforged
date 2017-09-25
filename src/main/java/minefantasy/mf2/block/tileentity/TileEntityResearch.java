@@ -7,7 +7,7 @@ import minefantasy.mf2.api.knowledge.ResearchArtefacts;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.network.packet.ResearchTablePacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;

@@ -14,7 +14,7 @@ import minefantasy.mf2.block.refining.BlockForge;
 import minefantasy.mf2.item.heatable.ItemHeated;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.network.packet.ForgePacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

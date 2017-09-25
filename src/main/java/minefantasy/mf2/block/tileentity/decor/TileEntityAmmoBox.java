@@ -10,7 +10,7 @@ import minefantasy.mf2.block.decor.BlockAmmoBox;
 import minefantasy.mf2.item.ItemBandage;
 import minefantasy.mf2.item.gadget.ItemSyringe;
 import minefantasy.mf2.network.packet.AmmoBoxPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;

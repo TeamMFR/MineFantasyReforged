@@ -3,7 +3,7 @@ package minefantasy.mf2.block.tileentity.decor;
 import minefantasy.mf2.api.helpers.BlockPositionHelper;
 import minefantasy.mf2.api.weapon.IRackItem;
 import minefantasy.mf2.network.packet.TileInventoryPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

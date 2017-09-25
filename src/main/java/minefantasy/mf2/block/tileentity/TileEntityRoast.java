@@ -8,7 +8,7 @@ import minefantasy.mf2.api.crafting.IHeatUser;
 import minefantasy.mf2.block.crafting.BlockRoast;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.network.packet.TileInventoryPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -974,7 +974,6 @@ public class EventManagerMF {
 			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
 
 			if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMFBase) {
-
 				ItemHorseArmorMFBase armor = (ItemHorseArmorMFBase) customArmor.getItem();
 				armor.onHorseRendered(horse, customArmor, event, flag);
 			}

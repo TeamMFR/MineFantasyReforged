@@ -3,7 +3,7 @@ package minefantasy.mf2.block.tileentity.decor;
 import minefantasy.mf2.api.heating.IQuenchBlock;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.network.packet.TroughPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

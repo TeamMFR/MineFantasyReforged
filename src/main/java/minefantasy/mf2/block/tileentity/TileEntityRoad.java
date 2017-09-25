@@ -2,7 +2,7 @@ package minefantasy.mf2.block.tileentity;
 
 import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.network.packet.RoadPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayer;

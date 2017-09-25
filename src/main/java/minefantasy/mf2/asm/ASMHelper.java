@@ -133,41 +133,6 @@ public final class ASMHelper {
         return ret.get(0);
     }
 
-    /**
-     * Removes a specific set of instructions (the needle) from a much larger set of
-     * instructions (the hay stack). Be cautious when using this method, as it is almost never
-     * a good idea to remove instructions.
-     *
-     * @param haystack: A large list of instructions which is being searched through.
-     * @param needle:   A specific list of instructions which are to be removed from the larger
-     *                  instruction list.
-     */
-    public static void removeNeedleFromHaystack(InsnList haystack, InsnList needle) {
-
-        int firstInd = haystack.indexOf(findFirstNodeFromNeedle(haystack, needle));
-        int lastInd = haystack.indexOf(findLastNodeFromNeedle(haystack, needle));
-        List<AbstractInsnNode> realNeedle = new ArrayList<AbstractInsnNode>();
-
-        for (int i = firstInd; i <= lastInd; i++)
-            realNeedle.add(haystack.get(i));
-
-        for (AbstractInsnNode node : realNeedle)
-            haystack.remove(node);
-    }
-
-    /**
-     * Checks if an instruction can be ignored. While this typically isn't needed, there may be
-     * some cases where you want to ignore LabelNodes and LineNumberNodes. This method will
-     * help with that.
-     *
-     * @param insn: The AbstractInsnNode to check against.
-     * @return boolean: True if it okay to ignore this instruction, false if it not okay.
-     */
-    public static boolean canIgnoreInstruction(AbstractInsnNode insn) {
-
-        return (insn instanceof LabelNode || insn instanceof LineNumberNode);
-    }
-
     public static class InvalidNeedleException extends RuntimeException {
 
         /**

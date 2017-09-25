@@ -3,7 +3,7 @@ package minefantasy.mf2.block.tileentity.decor;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.block.decor.BlockWoodDecor;
 import minefantasy.mf2.network.packet.WoodDecorPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

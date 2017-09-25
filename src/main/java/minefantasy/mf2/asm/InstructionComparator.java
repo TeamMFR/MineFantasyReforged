@@ -11,31 +11,6 @@ import static org.objectweb.asm.tree.AbstractInsnNode.*;
 
 public final class InstructionComparator {
 
-    // TODO: Add documentation
-    public static InsnList getImportantList(InsnList list) {
-
-        if (list.size() == 0)
-            return list;
-
-        HashMap<LabelNode, LabelNode> labels = new HashMap<LabelNode, LabelNode>();
-
-        for (AbstractInsnNode insn = list.getFirst(); insn != null; insn = insn.getNext())
-            if (insn instanceof LabelNode)
-                labels.put((LabelNode) insn, (LabelNode) insn);
-
-        InsnList importantNodeList = new InsnList();
-
-        for (AbstractInsnNode insn = list.getFirst(); insn != null; insn = insn.getNext()) {
-
-            if (insn instanceof LabelNode || insn instanceof LineNumberNode)
-                continue;
-
-            importantNodeList.add(insn.clone(labels));
-        }
-
-        return importantNodeList;
-    }
-
     /**
      * Compares whether or not two instructions are equal.
      *

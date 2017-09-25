@@ -1,4 +1,4 @@
-package minefantasy.mf2.util;
+package minefantasy.mf2.network;
 
 import cpw.mods.fml.relauncher.ReflectionHelper;
 import net.minecraft.network.Packet;

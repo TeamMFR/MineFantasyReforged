@@ -6,7 +6,7 @@ import minefantasy.mf2.api.helpers.ToolHelper;
 import minefantasy.mf2.api.rpg.SkillList;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.network.packet.CrossbowBenchPacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;

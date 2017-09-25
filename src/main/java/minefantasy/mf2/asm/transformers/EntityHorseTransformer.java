@@ -1,4 +1,4 @@
-/* Based on @SanAndreasP code */
+// Based on @SanAndreasP code (from Bookshelf lib)
 
 package minefantasy.mf2.asm.transformers;
 

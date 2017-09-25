@@ -11,7 +11,7 @@ import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.block.refining.BlockBigFurnace;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.network.packet.BigFurnacePacket;
-import minefantasy.mf2.util.NetworkUtils;
+import minefantasy.mf2.network.NetworkUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

@@ -387,7 +387,7 @@ public class ItemArmourMF extends ItemArmourMFBase implements IElementalResistan
 	}
 
 	public String getArmourTextureName(ItemStack stack, Entity entity, int slot, String type) {
-		String tex = "minefantasy2:textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
+		String tex = "minefantasy2:textures/models/armour/custom/" + design.getName().toLowerCase() + "/" + texture;
 		if (type == null && canColour())// bottom layer
 		{
 			return tex + "_cloth";

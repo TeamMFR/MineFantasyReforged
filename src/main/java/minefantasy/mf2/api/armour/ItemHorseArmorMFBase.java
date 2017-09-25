@@ -2,11 +2,14 @@ package minefantasy.mf2.api.armour;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minefantasy.mf2.api.helpers.CustomToolHelper;
+import minefantasy.mf2.api.material.CustomMaterial;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import org.lwjgl.opengl.GL11;
 
 public class ItemHorseArmorMFBase extends Item {
 
@@ -19,6 +22,9 @@ public class ItemHorseArmorMFBase extends Item {
         armorMaterial = material;
         armorDesign = design;
         armorTexture = texture;
+
+        float baseDura = material.durability * design.getDurability() / 2F;
+        this.setMaxDamage((int) baseDura);
     }
 
     /**
@@ -40,9 +46,7 @@ public class ItemHorseArmorMFBase extends Item {
      * @param horse: An instance of the horse which is currently wearing this piece of armor.
      * @param stack: An instance of the ItemStack currently in the horse's armor slot.
      */
-    public void onHorseUpdate (EntityHorse horse, ItemStack stack) {
-
-    }
+    public void onHorseUpdate (EntityHorse horse, ItemStack stack) {}
 
     /**
      * Called when a horse wearing this piece of armor has been hurt.
@@ -54,6 +58,7 @@ public class ItemHorseArmorMFBase extends Item {
      * @return boolean: If true, the horse will not be hurt and the event will be canceled.
      */
     public boolean onHorseDamaged (EntityHorse horse, ItemStack stack, DamageSource source, float damage) {
+        stack.damageItem((int)(damage / 5F) + 1, horse);
         return true;
     }
 
@@ -82,9 +87,23 @@ public class ItemHorseArmorMFBase extends Item {
      * @param flag: A convenient flag which can be used to easily switch between the different
      *            render events. 0:pre 1:post 2:special-pre 3:special-post
      */
+
+    /*
+                this.bindEntityTexture(p_77036_1_);
+            this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
+            Item customArmor = p_77036_1_.getDataWatcher().getWatchableObjectItemStack(23).getItem();
+            if(customArmor != null && customArmor instanceof ItemHorseArmorMFBase) {
+                CustomMaterial material = CustomMaterial.getMaterial("Ignotumite");
+                if (material != null) {
+                    this.bindTexture(TextureHelperMF.getResource("textures/models/animal/horse/armor/standard_plate_layer_1.png"));
+                    GL11.glColor3f(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
+                    this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
+                }
+            }
+     */
+
     @SideOnly(Side.CLIENT)
     public void onHorseRendered (EntityHorse horse, ItemStack armorStack, RenderLivingEvent event, byte flag) {
-
     }
 
 }
