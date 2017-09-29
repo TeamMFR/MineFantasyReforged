@@ -91,7 +91,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         for (IAnvilRecipe irecipe : (List<IAnvilRecipe>) CraftingManagerAnvil.getInstance().getRecipeList()) {
-            if (ResearchLogic.hasInfoUnlocked(Minecraft.getMinecraft().thePlayer, irecipe.getResearch())) {
+            if (!ResearchLogic.hasInfoUnlocked(Minecraft.getMinecraft().thePlayer, irecipe.getResearch())) {
                 continue;
             }
 
