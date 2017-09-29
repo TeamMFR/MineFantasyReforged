@@ -11,7 +11,7 @@ public class MFLoadingPlugin implements IFMLLoadingPlugin, IClassTransformer {
 
     @Override
     public String[] getASMTransformerClass() {
-        ASMHelper.isASMEnabled = true;
+        ASMHelper.isASMEnabled = false;
         /* TODO
         Config option for ASM patches
          */
@@ -44,9 +44,9 @@ public class MFLoadingPlugin implements IFMLLoadingPlugin, IClassTransformer {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] classBytes) {
-        if (transformedName.equals("net.minecraft.entity.passive.EntityHorse")) {
+        /*if (transformedName.equals("net.minecraft.entity.passive.EntityHorse")) {
             return EntityHorseTransformer.transform(name, transformedName, classBytes);
-        }
+        }*/
 
         return classBytes;
     }
