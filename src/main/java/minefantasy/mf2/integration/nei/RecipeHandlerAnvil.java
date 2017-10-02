@@ -10,6 +10,8 @@ import minefantasy.mf2.api.crafting.anvil.ShapedAnvilRecipes;
 import minefantasy.mf2.api.crafting.anvil.ShapelessAnvilRecipes;
 import minefantasy.mf2.api.crafting.exotic.ISpecialCraftItem;
 import minefantasy.mf2.api.crafting.exotic.SpecialForging;
+import minefantasy.mf2.api.heating.Heatable;
+import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
@@ -56,6 +58,10 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
     public void loadCraftingRecipes(ItemStack inputStack) {
         ItemStack hiddenStack = null;
 
+        if(inputStack.getItem() instanceof IHotItem) {
+            inputStack = Heatable.getItem(inputStack);
+        }
+
         if(ResearchLogic.hasInfoUnlocked(Minecraft.getMinecraft().thePlayer, KnowledgeListMF.smeltDragonforge)) {
             for (Map.Entry<Item, Item> entry : SpecialForging.dragonforgeCrafts.entrySet()) {
                 if (CustomToolHelper.areEqual(new ItemStack(entry.getValue()), inputStack)) {
@@ -90,6 +96,10 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
     @SuppressWarnings("unchecked")
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
+        if(ingredient.getItem() instanceof IHotItem) {
+            ingredient = Heatable.getItem(ingredient);
+        }
+
         for (IAnvilRecipe irecipe : (List<IAnvilRecipe>) CraftingManagerAnvil.getInstance().getRecipeList()) {
             if (!ResearchLogic.hasInfoUnlocked(Minecraft.getMinecraft().thePlayer, irecipe.getResearch())) {
                 continue;
@@ -123,7 +133,11 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
         private final ArrayList<PositionedStack> ingredients = new ArrayList<PositionedStack>();
 
         private CachedAnvilRecipe(ShapedAnvilRecipes recipe, ItemStack inputStack) {
-            this.inputStack = inputStack;
+            if(inputStack != null) {
+                this.inputStack = inputStack;
+            } else {
+                this.inputStack = recipe.getRecipeOutput();
+            }
             setShapedRecipeIngredients(recipe.recipeWidth, recipe.recipeHeight, recipe.recipeItems);
         }
 
@@ -138,7 +152,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
                         continue;
                     }
 
-                    ItemStack cachedStack = (ItemStack) items[y * width + x];
+                    ItemStack cachedStack = ((ItemStack) items[y * width + x]).copy();
                     if (cachedStack.getItem() instanceof ITieredComponent) {
                         String componentType = ((ITieredComponent) cachedStack.getItem()).getMaterialType(cachedStack);
                         if (componentType != null) {
