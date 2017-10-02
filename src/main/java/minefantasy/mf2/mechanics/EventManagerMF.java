@@ -953,16 +953,19 @@ public class EventManagerMF {
 		triggerHorseRenderHook(event, (byte) 0);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void renderEntity (RenderLivingEvent.Post event) {
 		triggerHorseRenderHook(event, (byte) 1);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void renderEntity (RenderLivingEvent.Specials.Pre event) {
 		triggerHorseRenderHook(event, (byte) 2);
 	}
 
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void renderEntity (RenderLivingEvent.Specials.Post event) {
 		triggerHorseRenderHook(event, (byte) 3);
