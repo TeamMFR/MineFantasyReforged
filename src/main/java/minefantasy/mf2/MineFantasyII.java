@@ -62,7 +62,7 @@ import net.minecraftforge.common.config.Configuration;
 public class MineFantasyII {
 	public static final String MODID = "minefantasy2";
 	public static final String NAME = "MineFantasyII";
-	public static final String VERSION = "Alpha_2.8.14.2u";
+	public static final String VERSION = "Alpha_2.8.14.3u";
 	public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
 
 	@SidedProxy(clientSide = "minefantasy.mf2.network.ClientProxyMF", serverSide = "minefantasy.mf2.network.CommonProxyMF")
