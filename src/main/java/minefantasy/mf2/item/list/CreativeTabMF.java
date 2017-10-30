@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minefantasy.mf2.block.list.BlockListMF;
 import minefantasy.mf2.item.food.FoodListMF;
-import minefantasy.mf2.item.gadget.MobSpawnerMF;
 import minefantasy.mf2.item.weapon.ItemSwordMF;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

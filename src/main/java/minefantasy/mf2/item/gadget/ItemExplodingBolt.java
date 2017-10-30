@@ -1,7 +1,5 @@
 package minefantasy.mf2.item.gadget;
 
-import java.util.List;
-
 import minefantasy.mf2.api.crafting.ISpecialSalvage;
 import minefantasy.mf2.entity.EntityArrowMF;
 import minefantasy.mf2.item.archery.ArrowType;
@@ -16,61 +14,63 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 
+import java.util.List;
+
 public class ItemExplodingBolt extends ItemArrowMF implements ISpecialSalvage {
 
-	public ItemExplodingBolt() {
-		super("exploding_bolt", 1, BaseMaterialMF.iron.getToolConversion(), ArrowType.EXPLOSIVEBOLT);
-		setCreativeTab(CreativeTabMF.tabGadget);
-		setAmmoType("bolt");
-		setMaxStackSize(20);
-	}
+    public ItemExplodingBolt() {
+        super("exploding_bolt", 1, BaseMaterialMF.iron.getToolConversion(), ArrowType.EXPLOSIVEBOLT);
+        setCreativeTab(CreativeTabMF.tabGadget);
+        setAmmoType("bolt");
+        setMaxStackSize(20);
+    }
 
-	@Override
-	public EntityArrowMF getFiredArrow(EntityArrowMF instance, ItemStack arrow) {
-		instance = super.getFiredArrow(instance, arrow);
-		instance.canBePickedUp = 0;
-		return instance.setBombStats(ItemBomb.getPowder(arrow), ItemBomb.getFilling(arrow));
-	}
+    public static ItemStack createBombArrow(byte powder, byte filling) {
+        ItemStack arrow = new ItemStack(ToolListMF.exploding_bolt);
 
-	@Override
-	public void addInformation(ItemStack item, EntityPlayer user, List list, boolean fullInfo) {
-		super.addInformation(item, user, list, fullInfo);
+        ItemBomb.setFilling(arrow, filling);
+        ItemBomb.setPowder(arrow, powder);
 
-		EnumExplosiveType fill = EnumExplosiveType.getType(ItemBomb.getFilling(item));
-		EnumPowderType powder = EnumPowderType.getType(ItemBomb.getPowder(item));
+        return arrow;
+    }
 
-		int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
-		float range = fill.range * powder.rangeModifier * 0.5F;
+    @Override
+    public EntityArrowMF getFiredArrow(EntityArrowMF instance, ItemStack arrow) {
+        instance = super.getFiredArrow(instance, arrow);
+        instance.canBePickedUp = 0;
+        return instance.setBombStats(ItemBomb.getPowder(arrow), ItemBomb.getFilling(arrow));
+    }
 
-		list.add(StatCollector.translateToLocal(ToolListMF.bomb_custom.getUnlocalizedName(item) + ".name"));
-		list.add(StatCollector.translateToLocal("bomb.powder." + powder.name + ".name"));
-		list.add("");
-		list.add(StatCollector.translateToLocal("bomb.damage.name") + ": " + damage);
-		list.add(StatCollector.translateToLocalFormatted("bomb.range.metric.name", range));
-	}
+    @Override
+    public void addInformation(ItemStack item, EntityPlayer user, List list, boolean fullInfo) {
+        super.addInformation(item, user, list, fullInfo);
 
-	public static ItemStack createBombArrow(byte powder, byte filling) {
-		ItemStack arrow = new ItemStack(ToolListMF.exploding_bolt);
+        EnumExplosiveType fill = EnumExplosiveType.getType(ItemBomb.getFilling(item));
+        EnumPowderType powder = EnumPowderType.getType(ItemBomb.getPowder(item));
 
-		ItemBomb.setFilling(arrow, filling);
-		ItemBomb.setPowder(arrow, powder);
+        int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
+        float range = fill.range * powder.rangeModifier * 0.5F;
 
-		return arrow;
-	}
+        list.add(StatCollector.translateToLocal(ToolListMF.bomb_custom.getUnlocalizedName(item) + ".name"));
+        list.add(StatCollector.translateToLocal("bomb.powder." + powder.name + ".name"));
+        list.add("");
+        list.add(StatCollector.translateToLocal("bomb.damage.name") + ": " + damage);
+        list.add(StatCollector.translateToLocalFormatted("bomb.range.metric.name", range));
+    }
 
-	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		for (byte pdr = 0; pdr < 2; pdr++) {
-			for (byte fill = 0; fill < 3; fill++) {
-				list.add(createBombArrow(pdr, fill));
-			}
-		}
-	}
+    @Override
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
+        for (byte pdr = 0; pdr < 2; pdr++) {
+            for (byte fill = 0; fill < 3; fill++) {
+                list.add(createBombArrow(pdr, fill));
+            }
+        }
+    }
 
-	@Override
-	public Object[] getSalvage(ItemStack item) {
-		return new Object[] { ComponentListMF.bomb_casing_bolt,
-				ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
-				ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)), };
-	}
+    @Override
+    public Object[] getSalvage(ItemStack item) {
+        return new Object[]{ComponentListMF.bomb_casing_bolt,
+                ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
+                ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)),};
+    }
 }

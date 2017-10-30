@@ -6,7 +6,7 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.MethodNode;
 
-import static minefantasy.mf2.asm.Mappings.*;
+import static minefantasy.mf2.asm.Mappings.shouldRenderPass;
 
 public class RenderHorseTransformer {
 

@@ -5,24 +5,24 @@ import net.minecraft.entity.player.EntityPlayer;
 
 /**
  * Interface added to {@link EntityPlayer} to support offhand management
- * 
+ *
  * @author GotoLink
  */
 public interface IBattlePlayer {
 
-	public void swingOffItem();
+    public void swingOffItem();
 
-	public float getOffSwingProgress(float frame);
+    public float getOffSwingProgress(float frame);
 
-	public void attackTargetEntityWithCurrentOffItem(Entity target);
+    public void attackTargetEntityWithCurrentOffItem(Entity target);
 
-	public boolean isBattlemode();
+    public boolean isBattlemode();
 
-	public boolean isBlockingWithShield();
+    public boolean isBlockingWithShield();
 
-	public void setBlockingWithShield(boolean block);
+    public void setBlockingWithShield(boolean block);
 
-	public int getSpecialActionTimer();
+    public int getSpecialActionTimer();
 
-	public void setSpecialActionTimer(int time);
+    public void setSpecialActionTimer(int time);
 }

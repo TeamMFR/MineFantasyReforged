@@ -2,12 +2,12 @@ package minefantasy.mf2.api.knowledge.client;
 
 public interface IGuiRecipebook {
 
-	int getWidth();
+    int getWidth();
 
-	int getHeight();
+    int getHeight();
 
-	int getLeft();
+    int getLeft();
 
-	int getTop();
+    int getTop();
 
 }

@@ -4,43 +4,41 @@ import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
 
 /**
- * 
  * @author AnonymousProductions
- *
  */
 public interface ICarpenterRecipe {
-	/**
-	 * Used to check if a recipe matches current crafting inventory
-	 */
-	boolean matches(CarpenterCraftMatrix var1);
+    /**
+     * Used to check if a recipe matches current crafting inventory
+     */
+    boolean matches(CarpenterCraftMatrix var1);
 
-	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	ItemStack getCraftingResult(CarpenterCraftMatrix var1);
+    /**
+     * Returns an Item that is the result of this recipe
+     */
+    ItemStack getCraftingResult(CarpenterCraftMatrix var1);
 
-	int getCraftTime();
+    int getCraftTime();
 
-	/**
-	 * Returns the size of the recipe area
-	 */
-	int getRecipeSize();
+    /**
+     * Returns the size of the recipe area
+     */
+    int getRecipeSize();
 
-	int getRecipeHammer();
+    int getRecipeHammer();
 
-	float getExperiance();
+    float getExperiance();
 
-	int getAnvil();
+    int getAnvil();
 
-	boolean outputHot();
+    boolean outputHot();
 
-	String getToolType();
+    String getToolType();
 
-	String getSound();
+    String getSound();
 
-	ItemStack getRecipeOutput();
+    ItemStack getRecipeOutput();
 
-	String getResearch();
+    String getResearch();
 
-	Skill getSkill();
+    Skill getSkill();
 }

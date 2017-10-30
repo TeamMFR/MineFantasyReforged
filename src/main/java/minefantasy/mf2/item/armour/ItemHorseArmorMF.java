@@ -1,6 +1,5 @@
 package minefantasy.mf2.item.armour;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -9,18 +8,12 @@ import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.ItemHorseArmorMFBase;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.material.CustomMaterial;
-import minefantasy.mf2.client.render.mob.RenderVanillaHorse;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.material.BaseMaterialMF;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelHorse;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-import net.minecraftforge.client.event.RenderLivingEvent;
-import sun.java2d.pipe.RenderingEngine;
 
 public class ItemHorseArmorMF extends ItemHorseArmorMFBase {
 

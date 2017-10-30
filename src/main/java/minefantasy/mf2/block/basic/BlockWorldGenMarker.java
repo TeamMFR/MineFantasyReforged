@@ -9,15 +9,15 @@ import net.minecraft.world.World;
 
 public class BlockWorldGenMarker extends BlockContainer {
 
-	public BlockWorldGenMarker() {
-		super(Material.air);
-		this.setBlockUnbreakable();
-		GameRegistry.registerBlock(this, "WorldGenFlag");
-	}
+    public BlockWorldGenMarker() {
+        super(Material.air);
+        this.setBlockUnbreakable();
+        GameRegistry.registerBlock(this, "WorldGenFlag");
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityWorldGenMarker();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileEntityWorldGenMarker();
+    }
 
 }

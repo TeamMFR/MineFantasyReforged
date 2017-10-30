@@ -1,179 +1,180 @@
 package minefantasy.mf2.api.crafting.carpenter;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
- * 
  * @author AnonymousProductions
- *
  */
 public class ShapelessCarpenterRecipes implements ICarpenterRecipe {
-	public static final int globalWidth = 4;
-	public static final int globalHeight = 4;
+    public static final int globalWidth = 4;
+    public static final int globalHeight = 4;
+    /**
+     * Is a List of ItemStack that composes the recipe.
+     */
+    public final List recipeItems;
+    /**
+     * Is the ItemStack that you get when craft the recipe.
+     */
+    private final ItemStack recipeOutput;
+    private final boolean outputHot;
+    private final int recipeHammer;
 
-	/** Is the ItemStack that you get when craft the recipe. */
-	private final ItemStack recipeOutput;
+    /**
+     * The Block Tier Required
+     */
+    private final int blockTier;
 
-	private final boolean outputHot;
-	/** Is a List of ItemStack that composes the recipe. */
-	public final List recipeItems;
+    private final int recipeTime;
+    private final float recipeExperiance;
+    private final String toolType;
+    private final String soundOfCraft;
+    private final String research;
+    private final Skill skillUsed;
 
-	private final int recipeHammer;
+    public ShapelessCarpenterRecipes(ItemStack output, String toolType, float exp, int hammer, int anvi, int time,
+                                     List components, boolean hot, String sound, String research, Skill skill) {
+        this.research = research;
+        this.outputHot = hot;
+        this.recipeOutput = output;
+        this.blockTier = anvi;
+        this.recipeItems = components;
+        this.recipeHammer = hammer;
+        this.recipeTime = time;
+        this.recipeExperiance = exp;
+        this.toolType = toolType;
+        this.soundOfCraft = sound;
+        this.skillUsed = skill;
+    }
 
-	/** The Block Tier Required */
-	private final int blockTier;
+    public static int getTemp(ItemStack item) {
+        NBTTagCompound tag = getNBT(item);
 
-	private final int recipeTime;
-	private final float recipeExperiance;
-	private final String toolType;
-	private final String soundOfCraft;
-	private final String research;
-	private final Skill skillUsed;
+        if (tag.hasKey("MFtemp"))
+            return tag.getInteger("MFtemp");
 
-	public ShapelessCarpenterRecipes(ItemStack output, String toolType, float exp, int hammer, int anvi, int time,
-			List components, boolean hot, String sound, String research, Skill skill) {
-		this.research = research;
-		this.outputHot = hot;
-		this.recipeOutput = output;
-		this.blockTier = anvi;
-		this.recipeItems = components;
-		this.recipeHammer = hammer;
-		this.recipeTime = time;
-		this.recipeExperiance = exp;
-		this.toolType = toolType;
-		this.soundOfCraft = sound;
-		this.skillUsed = skill;
-	}
+        return 0;
+    }
 
-	@Override
-	public ItemStack getRecipeOutput() {
-		return this.recipeOutput;
-	}
+    private static NBTTagCompound getNBT(ItemStack item) {
+        if (!item.hasTagCompound())
+            item.setTagCompound(new NBTTagCompound());
+        return item.getTagCompound();
+    }
 
-	/**
-	 * Used to check if a recipe matches current crafting inventory
-	 */
-	@Override
-	public boolean matches(CarpenterCraftMatrix par1InventoryCrafting) {
-		ArrayList var2 = new ArrayList(this.recipeItems);
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.recipeOutput;
+    }
 
-		for (int var3 = 0; var3 <= globalWidth; ++var3) {
-			for (int var4 = 0; var4 <= globalHeight; ++var4) {
-				ItemStack inputItem = par1InventoryCrafting.getStackInRowAndColumn(var4, var3);
+    /**
+     * Used to check if a recipe matches current crafting inventory
+     */
+    @Override
+    public boolean matches(CarpenterCraftMatrix par1InventoryCrafting) {
+        ArrayList var2 = new ArrayList(this.recipeItems);
 
-				if (inputItem != null) {
-					boolean var6 = false;
-					Iterator var7 = var2.iterator();
+        for (int var3 = 0; var3 <= globalWidth; ++var3) {
+            for (int var4 = 0; var4 <= globalHeight; ++var4) {
+                ItemStack inputItem = par1InventoryCrafting.getStackInRowAndColumn(var4, var3);
 
-					while (var7.hasNext()) {
-						ItemStack recipeItem = (ItemStack) var7.next();
+                if (inputItem != null) {
+                    boolean var6 = false;
+                    Iterator var7 = var2.iterator();
 
-						if (inputItem == null) {
-							return false;
-						}
-						if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
-							return false;
-						}
-						if (inputItem.getItem() == recipeItem.getItem()
-								&& (recipeItem.getItemDamage() == OreDictionary.WILDCARD_VALUE
-										|| inputItem.getItemDamage() == recipeItem.getItemDamage())) {
-							var6 = true;
-							var2.remove(recipeItem);
-							break;
-						}
-					}
+                    while (var7.hasNext()) {
+                        ItemStack recipeItem = (ItemStack) var7.next();
 
-					if (!var6) {
-						return false;
-					}
-				}
-			}
-		}
+                        if (inputItem == null) {
+                            return false;
+                        }
+                        if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
+                            return false;
+                        }
+                        if (inputItem.getItem() == recipeItem.getItem()
+                                && (recipeItem.getItemDamage() == OreDictionary.WILDCARD_VALUE
+                                || inputItem.getItemDamage() == recipeItem.getItemDamage())) {
+                            var6 = true;
+                            var2.remove(recipeItem);
+                            break;
+                        }
+                    }
 
-		return var2.isEmpty();
-	}
+                    if (!var6) {
+                        return false;
+                    }
+                }
+            }
+        }
 
-	public static int getTemp(ItemStack item) {
-		NBTTagCompound tag = getNBT(item);
+        return var2.isEmpty();
+    }
 
-		if (tag.hasKey("MFtemp"))
-			return tag.getInteger("MFtemp");
+    /**
+     * Returns an Item that is the result of this recipe
+     */
+    @Override
+    public ItemStack getCraftingResult(CarpenterCraftMatrix par1InventoryCrafting) {
+        return this.recipeOutput.copy();
+    }
 
-		return 0;
-	}
+    /**
+     * Returns the size of the recipe area
+     */
+    @Override
+    public int getRecipeSize() {
+        return this.recipeItems.size();
+    }
 
-	private static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
-	}
+    @Override
+    public int getCraftTime() {
+        return this.recipeTime;
+    }
 
-	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	@Override
-	public ItemStack getCraftingResult(CarpenterCraftMatrix par1InventoryCrafting) {
-		return this.recipeOutput.copy();
-	}
+    @Override
+    public int getRecipeHammer() {
+        return this.recipeHammer;
+    }
 
-	/**
-	 * Returns the size of the recipe area
-	 */
-	@Override
-	public int getRecipeSize() {
-		return this.recipeItems.size();
-	}
+    @Override
+    public float getExperiance() {
+        return this.recipeExperiance;
+    }
 
-	@Override
-	public int getCraftTime() {
-		return this.recipeTime;
-	}
+    @Override
+    public int getAnvil() {
+        return this.blockTier;
+    }
 
-	@Override
-	public int getRecipeHammer() {
-		return this.recipeHammer;
-	}
+    @Override
+    public boolean outputHot() {
+        return outputHot;
+    }
 
-	@Override
-	public float getExperiance() {
-		return this.recipeExperiance;
-	}
+    @Override
+    public String getToolType() {
+        return toolType;
+    }
 
-	@Override
-	public int getAnvil() {
-		return this.blockTier;
-	}
+    @Override
+    public String getSound() {
+        return soundOfCraft;
+    }
 
-	@Override
-	public boolean outputHot() {
-		return outputHot;
-	}
+    @Override
+    public String getResearch() {
+        return research;
+    }
 
-	@Override
-	public String getToolType() {
-		return toolType;
-	}
-
-	@Override
-	public String getSound() {
-		return soundOfCraft;
-	}
-
-	@Override
-	public String getResearch() {
-		return research;
-	}
-
-	@Override
-	public Skill getSkill() {
-		return skillUsed;
-	}
+    @Override
+    public Skill getSkill() {
+        return skillUsed;
+    }
 }

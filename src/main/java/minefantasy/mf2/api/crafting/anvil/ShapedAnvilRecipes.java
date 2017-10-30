@@ -9,212 +9,214 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
- * 
  * @author AnonymousProductions
- *
  */
 public class ShapedAnvilRecipes implements IAnvilRecipe {
-	/** How many horizontal slots this recipe is wide. */
-	public int recipeWidth;
+    public final int recipeHammer;
+    public final boolean outputHot;
+    /**
+     * The Anvil needed to craft
+     */
+    public final int anvil;
+    public final int recipeTime;
+    public final float recipeExperiance;
+    public final String toolType;
+    public final String research;
+    public final Skill skillUsed;
+    /**
+     * How many horizontal slots this recipe is wide.
+     */
+    public int recipeWidth;
+    /**
+     * How many vertical slots this recipe uses.
+     */
+    public int recipeHeight;
+    /**
+     * Is a array of ItemStack that composes the recipe.
+     */
+    public ItemStack[] recipeItems;
+    /**
+     * Is the ItemStack that you get when craft the recipe.
+     */
+    public ItemStack recipeOutput;
 
-	public final int recipeHammer;
+    public ShapedAnvilRecipes(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time,
+                              int hammer, int anvi, float exp, boolean hot, String research, Skill skill) {
+        this.outputHot = hot;
+        this.recipeWidth = wdth;
+        this.anvil = anvi;
+        this.recipeHeight = heit;
+        this.recipeItems = inputs;
+        this.recipeOutput = output;
+        this.recipeTime = time;
+        this.recipeHammer = hammer;
+        this.recipeExperiance = exp;
+        this.toolType = toolType;
+        this.research = research;
+        this.skillUsed = skill;
+    }
 
-	public final boolean outputHot;
-	/** How many vertical slots this recipe uses. */
-	public int recipeHeight;
+    private static NBTTagCompound getNBT(ItemStack item) {
+        if (!item.hasTagCompound())
+            item.setTagCompound(new NBTTagCompound());
+        return item.getTagCompound();
+    }
 
-	/** The Anvil needed to craft */
-	public final int anvil;
+    @Override
+    public ItemStack getRecipeOutput() {
+        return this.recipeOutput;
+    }
 
-	/** Is a array of ItemStack that composes the recipe. */
-	public ItemStack[] recipeItems;
+    @Override
+    public int getCraftTime() {
+        return recipeTime;
+    }
 
-	/** Is the ItemStack that you get when craft the recipe. */
-	public ItemStack recipeOutput;
+    @Override
+    public float getExperiance() {
+        return this.recipeExperiance;
+    }
 
-	public final int recipeTime;
-	public final float recipeExperiance;
-	public final String toolType;
-	public final String research;
-	public final Skill skillUsed;
+    @Override
+    public int getRecipeHammer() {
+        return recipeHammer;
+    }
 
-	public ShapedAnvilRecipes(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time,
-			int hammer, int anvi, float exp, boolean hot, String research, Skill skill) {
-		this.outputHot = hot;
-		this.recipeWidth = wdth;
-		this.anvil = anvi;
-		this.recipeHeight = heit;
-		this.recipeItems = inputs;
-		this.recipeOutput = output;
-		this.recipeTime = time;
-		this.recipeHammer = hammer;
-		this.recipeExperiance = exp;
-		this.toolType = toolType;
-		this.research = research;
-		this.skillUsed = skill;
-	}
+    /**
+     * Used to check if a recipe matches current crafting inventory
+     */
+    @Override
+    public boolean matches(AnvilCraftMatrix matrix) {
+        for (int var2 = 0; var2 <= ShapelessAnvilRecipes.globalWidth - this.recipeWidth; ++var2) {
+            for (int var3 = 0; var3 <= ShapelessAnvilRecipes.globalHeight - this.recipeHeight; ++var3) {
+                if (this.checkMatch(matrix, var2, var3, true)) {
+                    return true;
+                }
 
-	@Override
-	public ItemStack getRecipeOutput() {
-		return this.recipeOutput;
-	}
+                if (this.checkMatch(matrix, var2, var3, false)) {
+                    return true;
+                }
+            }
+        }
 
-	@Override
-	public int getCraftTime() {
-		return recipeTime;
-	}
+        return false;
+    }
 
-	@Override
-	public float getExperiance() {
-		return this.recipeExperiance;
-	}
+    /**
+     * Checks if the region of a crafting inventory is match for the recipe.
+     */
+    protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b) {
+        for (int var5 = 0; var5 < ShapelessAnvilRecipes.globalWidth; ++var5) {
+            for (int var6 = 0; var6 < ShapelessAnvilRecipes.globalHeight; ++var6) {
+                int var7 = var5 - x;
+                int var8 = var6 - y;
+                ItemStack recipeItem = null;
 
-	@Override
-	public int getRecipeHammer() {
-		return recipeHammer;
-	}
+                if (var7 >= 0 && var8 >= 0 && var7 < this.recipeWidth && var8 < this.recipeHeight) {
+                    if (b) {
+                        recipeItem = this.recipeItems[this.recipeWidth - var7 - 1 + var8 * this.recipeWidth];
+                    } else {
+                        recipeItem = this.recipeItems[var7 + var8 * this.recipeWidth];
+                    }
+                }
 
-	/**
-	 * Used to check if a recipe matches current crafting inventory
-	 */
-	@Override
-	public boolean matches(AnvilCraftMatrix matrix) {
-		for (int var2 = 0; var2 <= ShapelessAnvilRecipes.globalWidth - this.recipeWidth; ++var2) {
-			for (int var3 = 0; var3 <= ShapelessAnvilRecipes.globalHeight - this.recipeHeight; ++var3) {
-				if (this.checkMatch(matrix, var2, var3, true)) {
-					return true;
-				}
+                ItemStack inputItem = matrix.getStackInRowAndColumn(var5, var6);
 
-				if (this.checkMatch(matrix, var2, var3, false)) {
-					return true;
-				}
-			}
-		}
+                if (inputItem != null || recipeItem != null) {
+                    // HEATING
+                    if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
+                        return false;
+                    }
+                    if (!Heatable.isWorkable(inputItem)) {
+                        return false;
+                    }
+                    inputItem = getHotItem(inputItem);
 
-		return false;
-	}
+                    if (inputItem == null && recipeItem != null || inputItem != null && recipeItem == null) {
+                        return false;
+                    }
 
-	/**
-	 * Checks if the region of a crafting inventory is match for the recipe.
-	 */
-	protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b) {
-		for (int var5 = 0; var5 < ShapelessAnvilRecipes.globalWidth; ++var5) {
-			for (int var6 = 0; var6 < ShapelessAnvilRecipes.globalHeight; ++var6) {
-				int var7 = var5 - x;
-				int var8 = var6 - y;
-				ItemStack recipeItem = null;
+                    if (inputItem == null) {
+                        return false;
+                    }
 
-				if (var7 >= 0 && var8 >= 0 && var7 < this.recipeWidth && var8 < this.recipeHeight) {
-					if (b) {
-						recipeItem = this.recipeItems[this.recipeWidth - var7 - 1 + var8 * this.recipeWidth];
-					} else {
-						recipeItem = this.recipeItems[var7 + var8 * this.recipeWidth];
-					}
-				}
+                    if (recipeItem.getItem() != inputItem.getItem()) {
+                        return false;
+                    }
 
-				ItemStack inputItem = matrix.getStackInRowAndColumn(var5, var6);
+                    if (recipeItem.getItemDamage() != OreDictionary.WILDCARD_VALUE
+                            && recipeItem.getItemDamage() != inputItem.getItemDamage()) {
+                        return false;
+                    }
+                    if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
+                        return false;
+                    }
+                }
+            }
+        }
 
-				if (inputItem != null || recipeItem != null) {
-					// HEATING
-					if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
-						return false;
-					}
-					if (!Heatable.isWorkable(inputItem)) {
-						return false;
-					}
-					inputItem = getHotItem(inputItem);
+        return true;
+    }
 
-					if (inputItem == null && recipeItem != null || inputItem != null && recipeItem == null) {
-						return false;
-					}
+    protected ItemStack getHotItem(ItemStack item) {
+        if (item == null)
+            return null;
+        if (!(item.getItem() instanceof IHotItem)) {
+            return item;
+        }
 
-					if (inputItem == null) {
-						return false;
-					}
+        ItemStack hotItem = Heatable.getItem(item);
 
-					if (recipeItem.getItem() != inputItem.getItem()) {
-						return false;
-					}
+        if (hotItem != null) {
+            return hotItem;
+        }
 
-					if (recipeItem.getItemDamage() != OreDictionary.WILDCARD_VALUE
-							&& recipeItem.getItemDamage() != inputItem.getItemDamage()) {
-						return false;
-					}
-					if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
-						return false;
-					}
-				}
-			}
-		}
+        return item;
+    }
 
-		return true;
-	}
+    /**
+     * Returns an Item that is the result of this recipe
+     */
+    @Override
+    public ItemStack getCraftingResult(AnvilCraftMatrix matrix) {
+        return recipeOutput.copy();
+    }
 
-	protected ItemStack getHotItem(ItemStack item) {
-		if (item == null)
-			return null;
-		if (!(item.getItem() instanceof IHotItem)) {
-			return item;
-		}
+    /**
+     * Returns the size of the recipe area
+     */
+    @Override
+    public int getRecipeSize() {
+        return this.recipeWidth * this.recipeHeight;
+    }
 
-		ItemStack hotItem = Heatable.getItem(item);
+    @Override
+    public int getAnvil() {
+        return anvil;
+    }
 
-		if (hotItem != null) {
-			return hotItem;
-		}
+    @Override
+    public boolean outputHot() {
+        return this.outputHot;
+    }
 
-		return item;
-	}
+    @Override
+    public String getToolType() {
+        return toolType;
+    }
 
-	private static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
-	}
+    @Override
+    public String getResearch() {
+        return research;
+    }
 
-	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	@Override
-	public ItemStack getCraftingResult(AnvilCraftMatrix matrix) {
-		return recipeOutput.copy();
-	}
+    @Override
+    public Skill getSkill() {
+        return skillUsed;
+    }
 
-	/**
-	 * Returns the size of the recipe area
-	 */
-	@Override
-	public int getRecipeSize() {
-		return this.recipeWidth * this.recipeHeight;
-	}
-
-	@Override
-	public int getAnvil() {
-		return anvil;
-	}
-
-	@Override
-	public boolean outputHot() {
-		return this.outputHot;
-	}
-
-	@Override
-	public String getToolType() {
-		return toolType;
-	}
-
-	@Override
-	public String getResearch() {
-		return research;
-	}
-
-	@Override
-	public Skill getSkill() {
-		return skillUsed;
-	}
-
-	@Override
-	public boolean useCustomTiers() {
-		return false;
-	}
+    @Override
+    public boolean useCustomTiers() {
+        return false;
+    }
 }

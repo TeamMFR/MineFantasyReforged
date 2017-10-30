@@ -4,7 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;
 
 public interface ISpecialCombatMob {
-	boolean canParry(DamageSource source);
+    boolean canParry(DamageSource source);
 
-	void onParry(DamageSource source, Entity attacker, float dam);
+    void onParry(DamageSource source, Entity attacker, float dam);
 }

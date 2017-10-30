@@ -4,43 +4,41 @@ import minefantasy.mf2.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
 
 /**
- * 
  * @author AnonymousProductions
- *
  */
 public interface IAnvilRecipe {
-	/**
-	 * Used to check if a recipe matches current crafting inventory
-	 */
-	boolean matches(AnvilCraftMatrix var1);
+    /**
+     * Used to check if a recipe matches current crafting inventory
+     */
+    boolean matches(AnvilCraftMatrix var1);
 
-	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	ItemStack getCraftingResult(AnvilCraftMatrix var1);
+    /**
+     * Returns an Item that is the result of this recipe
+     */
+    ItemStack getCraftingResult(AnvilCraftMatrix var1);
 
-	int getCraftTime();
+    int getCraftTime();
 
-	/**
-	 * Returns the size of the recipe area
-	 */
-	int getRecipeSize();
+    /**
+     * Returns the size of the recipe area
+     */
+    int getRecipeSize();
 
-	int getRecipeHammer();
+    int getRecipeHammer();
 
-	float getExperiance();
+    float getExperiance();
 
-	int getAnvil();
+    int getAnvil();
 
-	boolean outputHot();
+    boolean outputHot();
 
-	String getToolType();
+    String getToolType();
 
-	String getResearch();
+    String getResearch();
 
-	ItemStack getRecipeOutput();
+    ItemStack getRecipeOutput();
 
-	Skill getSkill();
+    Skill getSkill();
 
-	boolean useCustomTiers();
+    boolean useCustomTiers();
 }

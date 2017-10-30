@@ -6,11 +6,11 @@ import net.minecraft.block.material.Material;
 
 public class BlockPaneMF extends BlockPane {
 
-	public BlockPaneMF(String name, String frontTex, String sideTex, Material material, boolean recoverable) {
-		super("minefantasy2:basic/" + frontTex, "minefantasy2:basic/" + sideTex, material, recoverable);
+    public BlockPaneMF(String name, String frontTex, String sideTex, Material material, boolean recoverable) {
+        super("minefantasy2:basic/" + frontTex, "minefantasy2:basic/" + sideTex, material, recoverable);
 
-		GameRegistry.registerBlock(this, name);
-		setBlockName(name);
-	}
+        GameRegistry.registerBlock(this, name);
+        setBlockName(name);
+    }
 
 }

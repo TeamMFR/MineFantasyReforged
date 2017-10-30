@@ -24,10 +24,10 @@ public class CustomMaterialHandler {
 
     private static class RegisterCustomMaterial implements IUndoableAction {
 
-        public CustomMaterial material;
         private final String type, name;
         private final int tier;
         private final float hardness, durability, flexibility, sharpness, resistance, density;
+        public CustomMaterial material;
 
         public RegisterCustomMaterial(String type, String name, int tier, float hardness, float durability,
                                       float flexibility, float sharpness, float resistance, float density) {

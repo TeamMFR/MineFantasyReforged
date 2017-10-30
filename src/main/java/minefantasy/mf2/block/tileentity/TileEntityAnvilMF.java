@@ -35,6 +35,14 @@ import java.util.Random;
 
 public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil, IQualityBalance {
     public int tier;
+    public String resName = "<No Project Set>";
+    public float progressMax;
+    public float progress;
+    public String texName = "";
+    public float qualityBalance = 0F;
+    public float thresholdPosition = 0.1F;
+    public float leftHit = 0F;
+    public float rightHit = 0F;
     private ItemStack[] inventory;
     private Random rand = new Random();
     private int ticksExisted;
@@ -46,6 +54,10 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
     private boolean outputHot = false;
     private Skill skillUsed;
     private boolean resetRecipe = false;
+    private boolean isFakeAnvil = false;
+    private ItemStack recipe;
+    private int hammerTierRequired;
+    private int anvilTierRequired;
 
     public TileEntityAnvilMF() {
         this(0, "Iron");
@@ -57,8 +69,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
         texName = name;
         setContainer(new ContainerAnvilMF(this));
     }
-
-    private boolean isFakeAnvil = false;
 
     public TileEntityAnvilMF setDisplay() {
         isFakeAnvil = true;
@@ -562,8 +572,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
         NetworkUtils.sendToWatchers(new AnvilPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
     }
 
-    public String resName = "<No Project Set>";
-
     public String getResultName() {
         if (!worldObj.isRemote && recipe != null && recipe.getDisplayName() != null) {
             resName = recipe.getDisplayName();
@@ -693,12 +701,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
         return false;
     }
 
-    private ItemStack recipe;
-    public float progressMax;
-    public float progress;
-    private int hammerTierRequired;
-    private int anvilTierRequired;
-
     @Override
     public void setForgeTime(int i) {
         progressMax = i;
@@ -751,14 +753,9 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
         return true;
     }
 
-    public String texName = "";
-
     public String getTextureName() {
         return texName;
     }
-
-    public float qualityBalance = 0F;
-    public float thresholdPosition = 0.1F;
 
     @Override
     public float getMarkerPosition() {
@@ -860,9 +857,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
             }
         }
     }
-
-    public float leftHit = 0F;
-    public float rightHit = 0F;
 
     private void reassignHitValues() {
         if (!worldObj.isRemote) {

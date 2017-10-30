@@ -3,19 +3,15 @@ package minefantasy.mf2.integration.nei;
 import codechicken.lib.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import minefantasy.mf2.api.crafting.ITieredComponent;
 import minefantasy.mf2.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mf2.api.crafting.anvil.ShapedAnvilRecipes;
 import minefantasy.mf2.api.crafting.anvil.ShapelessAnvilRecipes;
-import minefantasy.mf2.api.crafting.exotic.ISpecialCraftItem;
 import minefantasy.mf2.api.crafting.exotic.SpecialForging;
 import minefantasy.mf2.api.heating.Heatable;
 import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
-import minefantasy.mf2.api.material.CustomMaterial;
-import minefantasy.mf2.item.ItemSpecialDesign;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -59,11 +55,11 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
     public void loadCraftingRecipes(ItemStack inputStack) {
         ItemStack hiddenStack = null;
 
-        if(inputStack.getItem() instanceof IHotItem) {
+        if (inputStack.getItem() instanceof IHotItem) {
             inputStack = Heatable.getItem(inputStack);
         }
 
-        if(ResearchLogic.hasInfoUnlocked(Minecraft.getMinecraft().thePlayer, KnowledgeListMF.smeltDragonforge)) {
+        if (ResearchLogic.hasInfoUnlocked(Minecraft.getMinecraft().thePlayer, KnowledgeListMF.smeltDragonforge)) {
             for (Map.Entry<Item, Item> entry : SpecialForging.dragonforgeCrafts.entrySet()) {
                 if (CustomToolHelper.areEqual(new ItemStack(entry.getValue()), inputStack)) {
                     hiddenStack = CustomToolHelper.tryDeconstruct(new ItemStack(entry.getKey()), inputStack);
@@ -104,7 +100,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
     @SuppressWarnings("unchecked")
     @Override
     public void loadUsageRecipes(ItemStack ingredient) {
-        if(ingredient.getItem() instanceof IHotItem) {
+        if (ingredient.getItem() instanceof IHotItem) {
             ingredient = Heatable.getItem(ingredient);
         }
 
@@ -137,13 +133,13 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
     //TODO: Implement wood permutations, add additional helper method for custom material support in crafting and usage handlers
     private class CachedAnvilRecipe extends CachedRecipe {
 
-        private ItemStack inputStack;
         private final ArrayList<PositionedStack> ingredients = new ArrayList<PositionedStack>();
+        private ItemStack inputStack;
         private IAnvilRecipe iAnvilRecipe;
 
         private CachedAnvilRecipe(ShapedAnvilRecipes recipe, ItemStack inputStack) {
             iAnvilRecipe = recipe;
-            if(inputStack != null) {
+            if (inputStack != null) {
                 this.inputStack = inputStack;
                 this.inputStack.stackSize = recipe.getRecipeOutput().stackSize;
             } else {

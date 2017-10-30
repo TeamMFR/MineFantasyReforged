@@ -13,38 +13,38 @@ import net.minecraft.item.ItemStack;
  * @author Anonymous Productions
  */
 public class ItemUnfinishedFood extends Item {
-	public ItemUnfinishedFood(String name) {
-		this(name, 0);
-	}
+    private int itemRarity;
 
-	public ItemUnfinishedFood(String name, int rarity) {
-		super();
-		setMaxStackSize(1);
-		itemRarity = rarity;
-		setTextureName("minefantasy2:food/unfinished/" + name);
-		this.setCreativeTab(CreativeTabMF.tabFood);
-		GameRegistry.registerItem(this, "MF_UFood" + name, MineFantasyII.MODID);
-		this.setUnlocalizedName(name);
-	}
+    public ItemUnfinishedFood(String name) {
+        this(name, 0);
+    }
 
-	private int itemRarity;
+    public ItemUnfinishedFood(String name, int rarity) {
+        super();
+        setMaxStackSize(1);
+        itemRarity = rarity;
+        setTextureName("minefantasy2:food/unfinished/" + name);
+        this.setCreativeTab(CreativeTabMF.tabFood);
+        GameRegistry.registerItem(this, "MF_UFood" + name, MineFantasyII.MODID);
+        this.setUnlocalizedName(name);
+    }
 
-	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		int lvl = itemRarity + 1;
+    @Override
+    public EnumRarity getRarity(ItemStack item) {
+        int lvl = itemRarity + 1;
 
-		if (item.isItemEnchanted()) {
-			if (lvl == 0) {
-				lvl++;
-			}
-			lvl++;
-		}
-		if (lvl >= ToolListMF.rarity.length) {
-			lvl = ToolListMF.rarity.length - 1;
-		}
-		return ToolListMF.rarity[lvl];
-	}
+        if (item.isItemEnchanted()) {
+            if (lvl == 0) {
+                lvl++;
+            }
+            lvl++;
+        }
+        if (lvl >= ToolListMF.rarity.length) {
+            lvl = ToolListMF.rarity.length - 1;
+        }
+        return ToolListMF.rarity[lvl];
+    }
 
-	public void onCrafted(EntityPlayer user, ItemStack item) {
-	}
+    public void onCrafted(EntityPlayer user, ItemStack item) {
+    }
 }

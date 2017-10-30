@@ -1,12 +1,7 @@
 package minefantasy.mf2.item.tool.crafting;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,254 +27,254 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.common.ForgeHooks;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * @author Anonymous Productions
  */
 public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMF, IRackItem {
-	private float hitDamage;
-	private float baseDamage;
-	private String name;
-	private int tier;
+    protected int itemRarity;
+    private float hitDamage;
+    private float baseDamage;
+    private String name;
+    private int tier;
+    // ===================================================== CUSTOM START
+    // =============================================================\\
+    private boolean isCustom = false;
+    private float efficiencyMod = 1.0F;
+    private IIcon detailTex = null;
+    private IIcon haftTex = null;
 
-	/**
-	 */
-	public ItemSaw(String name, ToolMaterial material, int rarity, int tier) {
-		super(material);
-		this.tier = tier;
-		itemRarity = rarity;
-		setCreativeTab(CreativeTabMF.tabOldTools);
-		this.hitDamage = (2.0F + material.getDamageVsEntity()) / 2F;
-		setTextureName("minefantasy2:Tool/Crafting/" + name);
-		GameRegistry.registerItem(this, name, MineFantasyII.MODID);
-		this.setUnlocalizedName(name);
-		this.name = name;
-		this.setHarvestLevel("axe", material.getHarvestLevel());
-	}
+    /**
+     */
+    public ItemSaw(String name, ToolMaterial material, int rarity, int tier) {
+        super(material);
+        this.tier = tier;
+        itemRarity = rarity;
+        setCreativeTab(CreativeTabMF.tabOldTools);
+        this.hitDamage = (2.0F + material.getDamageVsEntity()) / 2F;
+        setTextureName("minefantasy2:Tool/Crafting/" + name);
+        GameRegistry.registerItem(this, name, MineFantasyII.MODID);
+        this.setUnlocalizedName(name);
+        this.name = name;
+        this.setHarvestLevel("axe", material.getHarvestLevel());
+    }
 
-	@Override
-	public ToolMaterial getMaterial() {
-		return toolMaterial;
-	}
+    @Override
+    public ToolMaterial getMaterial() {
+        return toolMaterial;
+    }
 
-	@Override
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-				new AttributeModifier(field_111210_e, "Tool modifier", this.hitDamage, 0));
-		return multimap;
-	}
+    @Override
+    public Multimap getItemAttributeModifiers() {
+        Multimap multimap = super.getItemAttributeModifiers();
+        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+                new AttributeModifier(field_111210_e, "Tool modifier", this.hitDamage, 0));
+        return multimap;
+    }
 
-	@Override
-	public float[] getDamageRatio(Object... implement) {
-		return new float[] { 1, 0, 0 };
-	}
+    @Override
+    public float[] getDamageRatio(Object... implement) {
+        return new float[]{1, 0, 0};
+    }
 
-	@Override
-	public String getToolType(ItemStack item) {
-		return "saw";
-	}
+    @Override
+    public String getToolType(ItemStack item) {
+        return "saw";
+    }
 
-	@Override
-	public float getPenetrationLevel(Object implement) {
-		return 0.5F;
-	}
+    @Override
+    public float getPenetrationLevel(Object implement) {
+        return 0.5F;
+    }
 
-	// ===================================================== CUSTOM START
-	// =============================================================\\
-	private boolean isCustom = false;
+    public ItemSaw setCustom(String s) {
+        canRepair = false;
+        setTextureName("minefantasy2:custom/tool/" + s + "/" + name);
+        isCustom = true;
+        return this;
+    }
 
-	public ItemSaw setCustom(String s) {
-		canRepair = false;
-		setTextureName("minefantasy2:custom/tool/" + s + "/" + name);
-		isCustom = true;
-		return this;
-	}
+    public ItemSaw setBaseDamage(float baseDamage) {
+        this.baseDamage = baseDamage;
+        return this;
+    }
 
-	public ItemSaw setBaseDamage(float baseDamage) {
-		this.baseDamage = baseDamage;
-		return this;
-	}
+    @Override
+    public float getEfficiency(ItemStack item) {
+        return CustomToolHelper.getEfficiency(item, toolMaterial.getEfficiencyOnProperMaterial(), efficiencyMod);
+    }
 
-	@Override
-	public float getEfficiency(ItemStack item) {
-		return CustomToolHelper.getEfficiency(item, toolMaterial.getEfficiencyOnProperMaterial(), efficiencyMod);
-	}
+    @Override
+    public int getTier(ItemStack item) {
+        return CustomToolHelper.getCrafterTier(item, tier);
+    }
 
-	@Override
-	public int getTier(ItemStack item) {
-		return CustomToolHelper.getCrafterTier(item, tier);
-	}
+    public ItemSaw setEfficiencyMod(float efficiencyMod) {
+        this.efficiencyMod = efficiencyMod;
+        return this;
+    }
 
-	private float efficiencyMod = 1.0F;
+    @Override
+    public Multimap getAttributeModifiers(ItemStack item) {
+        Multimap map = HashMultimap.create();
+        map.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+                new AttributeModifier(field_111210_e, "Weapon modifier", getMeleeDamage(item), 0));
 
-	public ItemSaw setEfficiencyMod(float efficiencyMod) {
-		this.efficiencyMod = efficiencyMod;
-		return this;
-	}
+        return map;
+    }
 
-	@Override
-	public Multimap getAttributeModifiers(ItemStack item) {
-		Multimap map = HashMultimap.create();
-		map.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-				new AttributeModifier(field_111210_e, "Weapon modifier", getMeleeDamage(item), 0));
+    /**
+     * Gets a stack-sensitive value for the melee dmg
+     */
+    protected float getMeleeDamage(ItemStack item) {
+        return baseDamage + CustomToolHelper.getMeleeDamage(item, toolMaterial.getDamageVsEntity());
+    }
 
-		return map;
-	}
+    protected float getWeightModifier(ItemStack stack) {
+        return CustomToolHelper.getWeightModifier(stack, 1.0F);
+    }
 
-	/**
-	 * Gets a stack-sensitive value for the melee dmg
-	 */
-	protected float getMeleeDamage(ItemStack item) {
-		return baseDamage + CustomToolHelper.getMeleeDamage(item, toolMaterial.getDamageVsEntity());
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister reg) {
+        if (isCustom) {
+            haftTex = reg.registerIcon(this.getIconString() + "_haft");
+            detailTex = reg.registerIcon(this.getIconString() + "_detail");
 
-	protected float getWeightModifier(ItemStack stack) {
-		return CustomToolHelper.getWeightModifier(stack, 1.0F);
-	}
+        }
+        super.registerIcons(reg);
+    }
 
-	private IIcon detailTex = null;
-	private IIcon haftTex = null;
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean requiresMultipleRenderPasses() {
+        return isCustom;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg) {
-		if (isCustom) {
-			haftTex = reg.registerIcon(this.getIconString() + "_haft");
-			detailTex = reg.registerIcon(this.getIconString() + "_detail");
+    // Returns the number of render passes this item has.
+    @Override
+    public int getRenderPasses(int metadata) {
+        return 3;
+    }
 
-		}
-		super.registerIcons(reg);
-	}
+    @Override
+    public IIcon getIcon(ItemStack stack, int pass) {
+        if (isCustom && pass == 1 && haftTex != null) {
+            return haftTex;
+        }
+        if (isCustom && pass == 2 && detailTex != null) {
+            return detailTex;
+        }
+        return super.getIcon(stack, pass);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses() {
-		return isCustom;
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public int getColorFromItemStack(ItemStack item, int layer) {
+        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
+    }
 
-	// Returns the number of render passes this item has.
-	@Override
-	public int getRenderPasses(int metadata) {
-		return 3;
-	}
+    @Override
+    public int getMaxDamage(ItemStack stack) {
+        return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
+    }
 
-	@Override
-	public IIcon getIcon(ItemStack stack, int pass) {
-		if (isCustom && pass == 1 && haftTex != null) {
-			return haftTex;
-		}
-		if (isCustom && pass == 2 && detailTex != null) {
-			return detailTex;
-		}
-		return super.getIcon(stack, pass);
-	}
+    public ItemStack construct(String main, String haft) {
+        return CustomToolHelper.construct(this, main, haft);
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack item, int layer) {
-		return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-	}
+    @Override
+    public EnumRarity getRarity(ItemStack item) {
+        return CustomToolHelper.getRarity(item, itemRarity);
+    }
 
-	@Override
-	public int getMaxDamage(ItemStack stack) {
-		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
-	}
+    @Override
+    public float getDigSpeed(ItemStack stack, Block block, int meta) {
+        if (!ForgeHooks.isToolEffective(stack, block, meta)) {
+            return this.func_150893_a(stack, block);
+        }
+        return CustomToolHelper.getEfficiency(stack, super.getDigSpeed(stack, block, meta), efficiencyMod);
+    }
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
+    public float func_150893_a(ItemStack stack, Block block) {
+        float base = super.func_150893_a(stack, block);
+        return base <= 1.0F ? base
+                : CustomToolHelper.getEfficiency(stack, this.efficiencyOnProperMaterial, efficiencyMod);
+    }
 
-	protected int itemRarity;
+    @Override
+    public int getHarvestLevel(ItemStack stack, String toolClass) {
+        return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass));
+    }
 
-	@Override
-	public EnumRarity getRarity(ItemStack item) {
-		return CustomToolHelper.getRarity(item, itemRarity);
-	}
+    @Override
+    public void getSubItems(Item item, CreativeTabs tab, List list) {
+        if (isCustom) {
+            ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+            Iterator iteratorMetal = metal.iterator();
+            while (iteratorMetal.hasNext()) {
+                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
+                if (MineFantasyII.isDebug() || customMat.getItem() != null) {
+                    list.add(this.construct(customMat.name, "OakWood"));
+                }
+            }
+        } else {
+            super.getSubItems(item, tab, list);
+        }
+    }
 
-	@Override
-	public float getDigSpeed(ItemStack stack, Block block, int meta) {
-		if (!ForgeHooks.isToolEffective(stack, block, meta)) {
-			return this.func_150893_a(stack, block);
-		}
-		return CustomToolHelper.getEfficiency(stack, super.getDigSpeed(stack, block, meta), efficiencyMod);
-	}
+    @Override
+    public void addInformation(ItemStack item, EntityPlayer user, List list, boolean extra) {
+        if (isCustom) {
+            CustomToolHelper.addInformation(item, list);
+        }
+        super.addInformation(item, user, list, extra);
+    }
 
-	public float func_150893_a(ItemStack stack, Block block) {
-		float base = super.func_150893_a(stack, block);
-		return base <= 1.0F ? base
-				: CustomToolHelper.getEfficiency(stack, this.efficiencyOnProperMaterial, efficiencyMod);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public String getItemStackDisplayName(ItemStack item) {
+        String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
+        return CustomToolHelper.getLocalisedName(item, unlocalName);
+    }
+    // ====================================================== CUSTOM END
+    // ==============================================================\\
 
-	@Override
-	public int getHarvestLevel(ItemStack stack, String toolClass) {
-		return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass));
-	}
+    @Override
+    public float getScale(ItemStack itemstack) {
+        return 1.0F;
+    }
 
-	@Override
-	public void getSubItems(Item item, CreativeTabs tab, List list) {
-		if (isCustom) {
-			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-			Iterator iteratorMetal = metal.iterator();
-			while (iteratorMetal.hasNext()) {
-				CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-				if (MineFantasyII.isDebug() || customMat.getItem() != null) {
-					list.add(this.construct(customMat.name, "OakWood"));
-				}
-			}
-		} else {
-			super.getSubItems(item, tab, list);
-		}
-	}
+    @Override
+    public float getOffsetX(ItemStack itemstack) {
+        return 0;
+    }
 
-	@Override
-	public void addInformation(ItemStack item, EntityPlayer user, List list, boolean extra) {
-		if (isCustom) {
-			CustomToolHelper.addInformation(item, list);
-		}
-		super.addInformation(item, user, list, extra);
-	}
+    @Override
+    public float getOffsetY(ItemStack itemstack) {
+        return 9F / 16F;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public String getItemStackDisplayName(ItemStack item) {
-		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
-		return CustomToolHelper.getLocalisedName(item, unlocalName);
-	}
-	// ====================================================== CUSTOM END
-	// ==============================================================\\
+    @Override
+    public float getOffsetZ(ItemStack itemstack) {
+        return 0;
+    }
 
-	@Override
-	public float getScale(ItemStack itemstack) {
-		return 1.0F;
-	}
+    @Override
+    public float getRotationOffset(ItemStack itemstack) {
+        return 90F;
+    }
 
-	@Override
-	public float getOffsetX(ItemStack itemstack) {
-		return 0;
-	}
+    @Override
+    public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
+        return true;
+    }
 
-	@Override
-	public float getOffsetY(ItemStack itemstack) {
-		return 9F / 16F;
-	}
-
-	@Override
-	public float getOffsetZ(ItemStack itemstack) {
-		return 0;
-	}
-
-	@Override
-	public float getRotationOffset(ItemStack itemstack) {
-		return 90F;
-	}
-
-	@Override
-	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
-		return true;
-	}
-
-	@Override
-	public boolean isSpecialRender(ItemStack item) {
-		return false;
-	}
+    @Override
+    public boolean isSpecialRender(ItemStack item) {
+        return false;
+    }
 }
