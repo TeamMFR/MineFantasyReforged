@@ -63,7 +63,7 @@ public class RPGElements {
 	}
 
 	public static Skill getSkillByName(String name) {
-		return skillsMap.get(name);
+		return skillsMap.get(name.toLowerCase());
 	}
 
 	public static int getLevel(EntityPlayer player, Skill skill) {

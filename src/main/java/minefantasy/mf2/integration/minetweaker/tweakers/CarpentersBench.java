@@ -2,8 +2,8 @@ package minefantasy.mf2.integration.minetweaker.tweakers;
 
 import minefantasy.mf2.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;
+import minefantasy.mf2.api.rpg.RPGElements;
 import minefantasy.mf2.api.rpg.Skill;
-import minefantasy.mf2.integration.minetweaker.Skills;
 import minefantasy.mf2.integration.minetweaker.TweakedShapedCBRecipes;
 import minefantasy.mf2.integration.minetweaker.TweakedShapelessCBRecipes;
 import minetweaker.IUndoableAction;
@@ -20,14 +20,14 @@ public class CarpentersBench {
 	@ZenMethod
 	public static void addShapedRecipe(@NotNull IItemStack output, String skill, String research, String sound,
 			double exp, String tool, int hammer, int anvil, int time, IIngredient[][] ingreds) {
-		MineTweakerAPI.apply(new CarpentersAction(output, Skills.getFromString(skill).getSkill(), research, sound,
+		MineTweakerAPI.apply(new CarpentersAction(output, RPGElements.getSkillByName(skill), research, sound,
 				(float) exp, tool, hammer, anvil, time, ingreds));
 	}
 
 	@ZenMethod
 	public static void addShapelessRecipe(@NotNull IItemStack output, String skill, String research, String sound,
 			double exp, String tool, int hammer, int anvil, int time, IIngredient[] ingreds) {
-		MineTweakerAPI.apply(new CarpentersAction(output, Skills.getFromString(skill).getSkill(), research, sound,
+		MineTweakerAPI.apply(new CarpentersAction(output, RPGElements.getSkillByName(skill), research, sound,
 				(float) exp, tool, hammer, anvil, time, ingreds));
 	}
 
