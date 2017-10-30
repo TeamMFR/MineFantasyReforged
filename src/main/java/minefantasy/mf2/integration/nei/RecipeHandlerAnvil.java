@@ -15,6 +15,7 @@ import minefantasy.mf2.api.heating.IHotItem;
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.item.ItemSpecialDesign;
 import minefantasy.mf2.knowledge.KnowledgeListMF;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -72,8 +73,15 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
 
         /*if (inputStack.getItem() instanceof ISpecialCraftItem) {
             for (Map.Entry<String, Item> entry : SpecialForging.specialCrafts.entrySet()) {
-                if (CustomToolHelper.areEqual(new ItemStack(entry.getValue()), inputStack)) {
-                    hiddenStack = CustomToolHelper.tryDeconstruct(, inputStack);
+                ItemStack dragonForgedStack = new ItemStack(entry.getValue());
+                if (CustomToolHelper.areEqual(dragonForgedStack, inputStack)) {
+                    String design = ((ISpecialCraftItem)entry.getValue()).getDesign(dragonForgedStack);
+                    for (IAnvilRecipe irecipe : (List<IAnvilRecipe>) CraftingManagerAnvil.getInstance().getRecipeList()) {
+                        ItemStack ingridient = new ItemStack(SpecialForging.getSpecialCraft(design, irecipe.getRecipeOutput()));
+                        if(ingridient != null) {
+                            hiddenStack = CustomToolHelper.tryDeconstruct(ingridient, inputStack);
+                        }
+                    }
                 }
             }
         }*/
@@ -131,10 +139,13 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
 
         private ItemStack inputStack;
         private final ArrayList<PositionedStack> ingredients = new ArrayList<PositionedStack>();
+        private IAnvilRecipe iAnvilRecipe;
 
         private CachedAnvilRecipe(ShapedAnvilRecipes recipe, ItemStack inputStack) {
+            iAnvilRecipe = recipe;
             if(inputStack != null) {
                 this.inputStack = inputStack;
+                this.inputStack.stackSize = recipe.getRecipeOutput().stackSize;
             } else {
                 this.inputStack = recipe.getRecipeOutput();
             }
@@ -142,6 +153,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
         }
 
         private CachedAnvilRecipe(ShapelessAnvilRecipes recipe) {
+            iAnvilRecipe = recipe;
             inputStack = recipe.getRecipeOutput();
         }
 
@@ -153,23 +165,7 @@ public class RecipeHandlerAnvil extends TemplateRecipeHandler {
                     }
 
                     ItemStack cachedStack = ((ItemStack) items[y * width + x]).copy();
-                    if (cachedStack.getItem() instanceof ITieredComponent) {
-                        String componentType = ((ITieredComponent) cachedStack.getItem()).getMaterialType(cachedStack);
-                        if (componentType != null) {
-                            if (componentType.equalsIgnoreCase("metal")) {
-                                CustomMaterial resultPrimaryMaterial = CustomToolHelper.getCustomPrimaryMaterial(inputStack);
-                                if (resultPrimaryMaterial != null) {
-                                    CustomMaterial.addMaterial(cachedStack, CustomToolHelper.slot_main, resultPrimaryMaterial.name);
-                                }
-                            }
-                            if (componentType.equalsIgnoreCase("wood")) {
-                                CustomMaterial resultSecondaryMaterial = CustomToolHelper.getCustomSecondaryMaterial(inputStack);
-                                if (resultSecondaryMaterial != null) {
-                                    CustomMaterial.addMaterial(cachedStack, CustomToolHelper.slot_main, resultSecondaryMaterial.name);
-                                }
-                            }
-                        }
-                    }
+                    NEIHelper.fillMaterials(iAnvilRecipe, cachedStack, inputStack);
                     PositionedStack stack = new PositionedStack(cachedStack, 31 + x * 18, 54 + y * 18, false);
                     stack.setMaxSize(1);
                     ingredients.add(stack);

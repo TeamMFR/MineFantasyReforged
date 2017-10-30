@@ -1,11 +1,7 @@
 package minefantasy.mf2.integration.minetweaker;
 
-import minefantasy.mf2.integration.minetweaker.tweakers.Anvil;
-import minefantasy.mf2.integration.minetweaker.tweakers.Bloomery;
-import minefantasy.mf2.integration.minetweaker.tweakers.CarpentersBench;
-import minefantasy.mf2.integration.minetweaker.tweakers.Crucible;
-import minefantasy.mf2.integration.minetweaker.tweakers.Forge;
-import minefantasy.mf2.integration.minetweaker.tweakers.TanningRack;
+import minefantasy.mf2.integration.minetweaker.helpers.MaterialExpansion;
+import minefantasy.mf2.integration.minetweaker.tweakers.*;
 import minetweaker.MineTweakerAPI;
 
 /* 
@@ -15,8 +11,8 @@ import minetweaker.MineTweakerAPI;
 
 public class MTCompat {
 
-	private static final Class<?>[] tweakers = { Anvil.class, Bloomery.class, CarpentersBench.class, Crucible.class,
-			Forge.class, TanningRack.class };
+	private static final Class<?>[] tweakers = { Anvil.class, Bloomery.class, CarpentersBench.class, CustomMaterialHandler.class, Crucible.class,
+			Forge.class, MaterialExpansion.class, TanningRack.class };
 
 	public static void loadTweakers() {
 		for (Class<?> tweaker : tweakers) {

@@ -76,34 +76,4 @@ public class ItemHorseArmorMFBase extends Item {
     public String getArmorTexture (EntityHorse horse, ItemStack stack) {
         return armorTexture;
     }
-
-    /**
-     * Allows for special rendering code to be done, when a horse is rendered with this piece
-     * of armor on.
-     *
-     * @param horse: An instance of the EntityHorse that is wearing the armor.
-     * @param armorStack: An instance of the ItemStack which is in the armor slot.
-     * @param event: Access to the RenderLivingEvent being called.
-     * @param flag: A convenient flag which can be used to easily switch between the different
-     *            render events. 0:pre 1:post 2:special-pre 3:special-post
-     */
-
-    /*
-                this.bindEntityTexture(p_77036_1_);
-            this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
-            Item customArmor = p_77036_1_.getDataWatcher().getWatchableObjectItemStack(23).getItem();
-            if(customArmor != null && customArmor instanceof ItemHorseArmorMFBase) {
-                CustomMaterial material = CustomMaterial.getMaterial("Ignotumite");
-                if (material != null) {
-                    this.bindTexture(TextureHelperMF.getResource("textures/models/animal/horse/armor/standard_plate_layer_1.png"));
-                    GL11.glColor3f(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
-                    this.mainModel.render(p_77036_1_, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, p_77036_7_);
-                }
-            }
-     */
-
-    @SideOnly(Side.CLIENT)
-    public void onHorseRendered (EntityHorse horse, ItemStack armorStack, RenderLivingEvent event, byte flag) {
-    }
-
 }

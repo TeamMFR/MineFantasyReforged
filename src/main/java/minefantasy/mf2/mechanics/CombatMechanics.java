@@ -178,7 +178,7 @@ public class CombatMechanics {
 		event.ammount = damage;
 
 		//Horses has own damage watcher
-		if (hit instanceof EntityHorse) {
+		/*if (hit instanceof EntityHorse) {
 			EntityHorse horse = (EntityHorse) event.entity;
 			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
 
@@ -186,7 +186,7 @@ public class CombatMechanics {
 				ItemHorseArmorMFBase armor = (ItemHorseArmorMFBase) customArmor.getItem();
 				event.setCanceled(armor.onHorseDamaged(horse, customArmor, event.source, event.ammount));
 			}
-		}
+		}*/
 	}
 
 	private void onFall(EntityLivingBase fallen, float height) {

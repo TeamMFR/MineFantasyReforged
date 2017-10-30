@@ -1,5 +1,8 @@
 package minefantasy.mf2.network;
 
+import minefantasy.mf2.client.render.mob.*;
+import net.minecraft.client.model.ModelHorse;
+import net.minecraft.entity.passive.EntityHorse;
 import org.lwjgl.input.Keyboard;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -101,11 +104,6 @@ import minefantasy.mf2.client.render.block.TileEntitySmokePipeRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mf2.client.render.block.TileEntityTroughRenderer;
 import minefantasy.mf2.client.render.block.component.TileEntityComponentRenderer;
-import minefantasy.mf2.client.render.mob.ModelHound;
-import minefantasy.mf2.client.render.mob.ModelMinotaur;
-import minefantasy.mf2.client.render.mob.RenderDragon;
-import minefantasy.mf2.client.render.mob.RenderHound;
-import minefantasy.mf2.client.render.mob.RenderMinotaur;
 import minefantasy.mf2.entity.EntityArrowMF;
 import minefantasy.mf2.entity.EntityBomb;
 import minefantasy.mf2.entity.EntityCogwork;
@@ -226,6 +224,7 @@ public class ClientProxyMF extends CommonProxyMF {
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class,
 				new RenderMinotaur(new ModelMinotaur(), 1.5F));
 		RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityHorse.class, new RenderVanillaHorse(new ModelHorse(), 0.75F));
 	}
 
 	@Override

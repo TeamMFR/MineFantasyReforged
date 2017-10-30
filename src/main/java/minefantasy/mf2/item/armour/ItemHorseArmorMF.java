@@ -1,5 +1,6 @@
 package minefantasy.mf2.item.armour;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -11,14 +12,15 @@ import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.client.render.mob.RenderVanillaHorse;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.material.BaseMaterialMF;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelHorse;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderHorse;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.RenderLivingEvent;
+import sun.java2d.pipe.RenderingEngine;
 
 public class ItemHorseArmorMF extends ItemHorseArmorMFBase {
 
@@ -91,14 +93,5 @@ public class ItemHorseArmorMF extends ItemHorseArmorMFBase {
     @Override
     public String getArmorTexture(EntityHorse horse, ItemStack stack) {
         return "minefantasy2:textures/models/animal/horse/armor/standard_plate_layer_1.png";
-    }
-
-    private final RenderVanillaHorse renderHorse = new RenderVanillaHorse(new ModelHorse(), 0.75F);
-
-    @Override
-    public void onHorseRendered (EntityHorse horse, ItemStack armorStack, RenderLivingEvent event, byte flag) {
-        //If horse wearing our armor we are should use own render implementation due to vanilla restrictions.
-        //I just hope what you are not used other mods which works with vanilla horse renderer. Yep, this is very invasive way to color textures.
-        //event.setCanceled(true);
     }
 }

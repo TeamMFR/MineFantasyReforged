@@ -1,32 +1,27 @@
 package minefantasy.mf2.asm;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-import minefantasy.mf2.asm.transformers.EntityHorseTransformer;
-import net.minecraft.launchwrapper.IClassTransformer;
 
 import java.util.Map;
 
+@IFMLLoadingPlugin.SortingIndex(1001)
+@IFMLLoadingPlugin.TransformerExclusions("minefantasy.mf2.asm")
 @IFMLLoadingPlugin.MCVersion("1.7.10")
-public class MFLoadingPlugin implements IFMLLoadingPlugin, IClassTransformer {
+public class MFLoadingPlugin implements IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        ASMHelper.isASMEnabled = false;
-        /* TODO
-        Config option for ASM patches
-         */
-        return new String[]{this.getClass().getName()};
+        ASMHelper.isASMEnabled = true;
+        return new String[]{MFClassTransformer.class.getName()};
     }
 
     @Override
     public String getModContainerClass() {
-
         return null;
     }
 
     @Override
     public String getSetupClass() {
-
         return null;
     }
 
@@ -38,16 +33,6 @@ public class MFLoadingPlugin implements IFMLLoadingPlugin, IClassTransformer {
 
     @Override
     public String getAccessTransformerClass() {
-
         return null;
-    }
-
-    @Override
-    public byte[] transform(String name, String transformedName, byte[] classBytes) {
-        /*if (transformedName.equals("net.minecraft.entity.passive.EntityHorse")) {
-            return EntityHorseTransformer.transform(name, transformedName, classBytes);
-        }*/
-
-        return classBytes;
     }
 }

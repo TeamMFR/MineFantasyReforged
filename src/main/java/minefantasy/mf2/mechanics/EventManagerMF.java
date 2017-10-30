@@ -950,36 +950,5 @@ public class EventManagerMF {
 				}
 			}
 		}
-		triggerHorseRenderHook(event, (byte) 0);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void renderEntity (RenderLivingEvent.Post event) {
-		triggerHorseRenderHook(event, (byte) 1);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void renderEntity (RenderLivingEvent.Specials.Pre event) {
-		triggerHorseRenderHook(event, (byte) 2);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void renderEntity (RenderLivingEvent.Specials.Post event) {
-		triggerHorseRenderHook(event, (byte) 3);
-	}
-
-	public void triggerHorseRenderHook(RenderLivingEvent event, byte flag) {
-		if(ASMHelper.isASMEnabled && event.entity instanceof EntityHorse) {
-			EntityHorse horse = (EntityHorse) event.entity;
-			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
-
-			if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMFBase) {
-				ItemHorseArmorMFBase armor = (ItemHorseArmorMFBase) customArmor.getItem();
-				armor.onHorseRendered(horse, customArmor, event, flag);
-			}
-		}
 	}
 }

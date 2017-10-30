@@ -24,8 +24,8 @@ public class EntityHorseTransformer {
         transformEntityInit(ASMHelper.getMethodFromClass(horseClass, entityInit, "()V"));
         transformIsValidArmor(ASMHelper.getMethodFromClass(horseClass, isArmorItem, "(Lnet/minecraft/item/Item;)Z"));
 
-        if (ASMHelper.hasClassMethodName(horseClass, setHorseTexturePaths))
-            transformSetHorseTexturePaths(ASMHelper.getMethodFromClass(horseClass, setHorseTexturePaths, "()V"));
+       /* if (ASMHelper.hasClassMethodName(horseClass, setHorseTexturePaths))
+            transformSetHorseTexturePaths(ASMHelper.getMethodFromClass(horseClass, setHorseTexturePaths, "()V"));*/
 
         return ASMHelper.createByteArrayFromClass(horseClass, ClassWriter.COMPUTE_FRAMES | ClassWriter.COMPUTE_MAXS);
     }

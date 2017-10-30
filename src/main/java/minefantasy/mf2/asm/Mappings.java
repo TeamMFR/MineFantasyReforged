@@ -38,6 +38,9 @@ public class Mappings {
     public static String hasTagCompound;
     public static String getColorFromItemStack;
 
+    public static String renderHorse;
+    public static String shouldRenderPass;
+
     public Mappings() {
 
         // Fields
@@ -75,5 +78,8 @@ public class Mappings {
         getTagCompound = ASMHelper.getAppropriateMapping("getTagCompound", "func_77978_p");
         hasTagCompound = ASMHelper.getAppropriateMapping("hasTagCompound", "func_77942_o");
         getColorFromItemStack = ASMHelper.getAppropriateMapping("getColorFromItemStack", "func_82790_a");
+
+        renderHorse = ASMHelper.getAppropriateMapping("RenderHorse", "bnv");
+        shouldRenderPass = ASMHelper.getAppropriateMapping("shouldRenderPass", "func_77032_a");
     }
 }
