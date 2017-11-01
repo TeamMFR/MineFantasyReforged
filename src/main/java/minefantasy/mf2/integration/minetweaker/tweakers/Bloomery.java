@@ -6,24 +6,53 @@ import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
+import minetweaker.mc1710.item.MCItemStack;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ZenClass("mods.minefantasy.Bloomery")
 public class Bloomery {
 
     @ZenMethod
     public static void addRecipe(IItemStack result, IIngredient input) {
-        MineTweakerAPI.apply(new addBloomRecipe(result, input));
+        MineTweakerAPI.apply(new AddRecipeAction(result, input));
     }
 
-    public static class addBloomRecipe implements IUndoableAction {
+    @ZenMethod
+    public static void remove(IIngredient output, IIngredient input) {
+        if (output == null)
+            throw new IllegalArgumentException("Output value cannot be null");
 
+        HashMap<ItemStack, ItemStack> recipeList = BloomRecipe.recipeList;
+
+        List<ItemStack> toRemove = new ArrayList<ItemStack>();
+        List<ItemStack> toRemoveValues = new ArrayList<ItemStack>();
+        for (Map.Entry<ItemStack, ItemStack> entry : recipeList.entrySet()) {
+            if (output.matches(new MCItemStack(entry.getValue()))
+                    && (input == null || input.matches(new MCItemStack(entry.getKey())))) {
+                toRemove.add(entry.getKey());
+                toRemoveValues.add(entry.getValue());
+            }
+        }
+
+        if (!toRemove.isEmpty()) {
+            MineTweakerAPI.apply(new RemoveAction(toRemove, toRemoveValues));
+        } else {
+            MineTweakerAPI.logWarning("No bloomery recipes for " + output.toString());
+        }
+    }
+
+    private static class AddRecipeAction implements IUndoableAction {
         IItemStack result;
         IIngredient input;
 
-        public addBloomRecipe(IItemStack result, IIngredient input) {
+        public AddRecipeAction(IItemStack result, IIngredient input) {
             this.result = result;
             this.input = input;
         }
@@ -38,7 +67,7 @@ public class Bloomery {
 
         @Override
         public String describe() {
-            return "Adding Bloomery Recipe That Results In " + result.getDisplayName();
+            return "Adding bloomery recipe for " + result.getDisplayName();
         }
 
         @Override
@@ -53,7 +82,7 @@ public class Bloomery {
 
         @Override
         public String describeUndo() {
-            return "STAHP UNDOOOOIN MAH RECIPES";
+            return "Removing furnace recipe for " + result.getDisplayName();
         }
 
         @Override
@@ -61,6 +90,50 @@ public class Bloomery {
             BloomRecipe.recipeList.remove(input);
         }
 
+    }
+
+    private static class RemoveAction implements IUndoableAction {
+        private final List<ItemStack> items;
+        private final List<ItemStack> values;
+
+        public RemoveAction(List<ItemStack> items, List<ItemStack> values) {
+            this.items = items;
+            this.values = values;
+        }
+
+        @Override
+        public void apply() {
+            for (ItemStack item : items) {
+                BloomRecipe.recipeList.remove(item);
+            }
+        }
+
+        @Override
+        public boolean canUndo() {
+            return true;
+        }
+
+        @Override
+        public void undo() {
+            for (int i = 0; i < items.size(); i++) {
+                BloomRecipe.recipeList.put(items.get(i), values.get(i));
+            }
+        }
+
+        @Override
+        public String describe() {
+            return "Removing " + items.size() + " bloomery recipes";
+        }
+
+        @Override
+        public String describeUndo() {
+            return "Restoring " + items.size() + " bloomery recipes";
+        }
+
+        @Override
+        public Object getOverrideKey() {
+            return null;
+        }
     }
 
 }

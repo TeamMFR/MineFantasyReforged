@@ -3,9 +3,14 @@ package minefantasy.mf2.api.armour;
 import java.util.HashMap;
 
 public class ArmourDesign {
+    public static HashMap<String, ArmourDesign> designs = new HashMap<String, ArmourDesign>();
+
     public static final String light = "light";
     public static final String medium = "medium";
     public static final String heavy = "heavy";
+    // Weight: Above 50kg slows down and increases stamina decay, and classes as
+    // heavy armour
+    // Bulk: Above 0.0 means it slows stamina regen
     // Reg Name Prot Dura Weight Bulk Ctg Bnt Png
     public static final ArmourDesign CLOTH = new ArmourDesign("clothing", "Clothing", 1.0F, 1.0F, 0F, 0.25F)
             .calibrateTraits(0.5F, 1.0F, 0.5F).setWeightGroup(light);// Weak
@@ -34,10 +39,7 @@ public class ArmourDesign {
             .calibrateTraits(1.25F, 1.25F, 1.00F).setWeightGroup(heavy);// 40kg, Vulnerable to piercing
     public static final ArmourDesign COGWORK = new ArmourDesign("cogwork", "Cogwork", 4.0F, 8.0F, 30F, 2.00F)
             .calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(heavy);// >120kg, Massive Protection
-    // Weight: Above 50kg slows down and increases stamina decay, and classes as
-    // heavy armour
-    // Bulk: Above 0.0 means it slows stamina regen
-    public static HashMap<String, ArmourDesign> designs = new HashMap<String, ArmourDesign>();
+
     // ArmourCalculator
     private String name;
     private float durability;

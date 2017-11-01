@@ -99,14 +99,6 @@ public class TileEntityBloomery extends TileEntity implements IInventory {
             return;
 
         NetworkUtils.sendToWatchers(new BloomeryPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
-        /*
-		List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
-		for (int i = 0; i < players.size(); i++) {
-			EntityPlayer player = players.get(i);
-			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
-					new BloomeryPacket(this).generatePacket());
-		}
-		*/
     }
 
     /**
