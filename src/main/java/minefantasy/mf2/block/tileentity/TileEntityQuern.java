@@ -12,12 +12,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-import java.util.Random;
-
 public class TileEntityQuern extends TileEntity implements IInventory, ISidedInventory {
     public int turnAngle;
-    private ItemStack[] inv = new ItemStack[3];
-    private Random rand = new Random();
+    private ItemStack[] inv = new ItemStack[3]; //0 input, 1 pot, 2 output
     private int postUseTicks;
 
     public static final int getMaxRevs() {
@@ -68,11 +65,11 @@ public class TileEntityQuern extends TileEntity implements IInventory, ISidedInv
 
     public boolean onRevolutionComplete() {
         QuernRecipes result = this.getResult(inv[0]);
-        if (result != null && inv[1] != null && result.tier <= getTier()) {
+        if (result != null && (!result.consumePot || inv[1] != null) && result.tier <= getTier()) {
             ItemStack craft = result.result;
             if (canFitResult(craft)) {
                 if (!worldObj.isRemote) {
-                    return tryCraft(craft);
+                    return tryCraft(craft, result.consumePot);
                 } else {
                     worldObj.spawnParticle("smoke", xCoord + 0.5F, yCoord + 1F, zCoord + 0.5F, 0F, 0.2F, 0F);
                     return true;
@@ -100,7 +97,7 @@ public class TileEntityQuern extends TileEntity implements IInventory, ISidedInv
         return true;
     }
 
-    private boolean tryCraft(ItemStack result) {
+    private boolean tryCraft(ItemStack result, boolean consumePot) {
         worldObj.playSoundEffect(xCoord, yCoord, zCoord, "minefantasy2:block.craftprimitive", 0.5F, 1.2F);
         /*
 		 * if(rand.nextFloat() > 0.20F)//20% success rate {
@@ -109,8 +106,9 @@ public class TileEntityQuern extends TileEntity implements IInventory, ISidedInv
 		 */
         {
             this.decrStackSize(0, 1);
-            this.decrStackSize(1, 1);
-
+            if(consumePot) {
+                this.decrStackSize(1, 1);
+            }
             ItemStack out = inv[2];
             if (out == null) {
                 this.setInventorySlotContents(2, result.copy());

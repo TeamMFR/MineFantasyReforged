@@ -109,7 +109,5 @@ public class Anvil {
         public void undo() {
             CraftingManagerAnvil.getInstance().recipes.remove(r);
         }
-
     }
-
 }

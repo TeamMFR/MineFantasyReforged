@@ -288,29 +288,29 @@ public class CarpenterRecipes {
     }
 
     private static void addDusts() {
-        QuernRecipes.addRecipe(new ItemStack(Items.dye, 1, 3), new ItemStack(FoodListMF.coca_powder), 0);// ItemDye
-        QuernRecipes.addRecipe(Items.wheat, new ItemStack(FoodListMF.flour), 0);
-        QuernRecipes.addRecipe(Items.reeds, new ItemStack(FoodListMF.sugarpot), 0);
-        QuernRecipes.addRecipe(FoodListMF.breadroll, new ItemStack(FoodListMF.breadcrumbs), 0);
+        QuernRecipes.addRecipe(new ItemStack(Items.dye, 1, 3), new ItemStack(FoodListMF.coca_powder), 0, true);// ItemDye
+        QuernRecipes.addRecipe(Items.wheat, new ItemStack(FoodListMF.flour), 0, true);
+        QuernRecipes.addRecipe(Items.reeds, new ItemStack(FoodListMF.sugarpot), 0, true);
+        QuernRecipes.addRecipe(FoodListMF.breadroll, new ItemStack(FoodListMF.breadcrumbs), 0, true);
 
         QuernRecipes.addRecipe(FoodListMF.generic_meat_uncooked, new ItemStack(FoodListMF.generic_meat_mince_uncooked),
-                0);
+                0, true);
         QuernRecipes.addRecipe(FoodListMF.generic_meat_strip_uncooked,
-                new ItemStack(FoodListMF.generic_meat_mince_uncooked), 0);
+                new ItemStack(FoodListMF.generic_meat_mince_uncooked), 0, true);
         QuernRecipes.addRecipe(FoodListMF.generic_meat_chunk_uncooked,
-                new ItemStack(FoodListMF.generic_meat_mince_uncooked), 0);
-        QuernRecipes.addRecipe(FoodListMF.generic_meat_cooked, new ItemStack(FoodListMF.generic_meat_mince_cooked), 0);
+                new ItemStack(FoodListMF.generic_meat_mince_uncooked), 0, true);
+        QuernRecipes.addRecipe(FoodListMF.generic_meat_cooked, new ItemStack(FoodListMF.generic_meat_mince_cooked), 0, true);
         QuernRecipes.addRecipe(FoodListMF.generic_meat_strip_cooked,
-                new ItemStack(FoodListMF.generic_meat_mince_cooked), 0);
+                new ItemStack(FoodListMF.generic_meat_mince_cooked), 0, true);
         QuernRecipes.addRecipe(FoodListMF.generic_meat_chunk_cooked,
-                new ItemStack(FoodListMF.generic_meat_mince_cooked), 0);
+                new ItemStack(FoodListMF.generic_meat_mince_cooked), 0, true);
 
-        QuernRecipes.addRecipe(Items.coal, new ItemStack(ComponentListMF.coalDust), 0);
-        QuernRecipes.addRecipe(new ItemStack(Items.coal, 1, 1), new ItemStack(ComponentListMF.coalDust), 0);
-        QuernRecipes.addRecipe(ComponentListMF.kaolinite, new ItemStack(ComponentListMF.kaolinite_dust), 0);
-        QuernRecipes.addRecipe(Items.flint, new ItemStack(ComponentListMF.shrapnel), 0);
+        QuernRecipes.addRecipe(Items.coal, new ItemStack(ComponentListMF.coalDust), 0, true);
+        QuernRecipes.addRecipe(new ItemStack(Items.coal, 1, 1), new ItemStack(ComponentListMF.coalDust), 0, true);
+        QuernRecipes.addRecipe(ComponentListMF.kaolinite, new ItemStack(ComponentListMF.kaolinite_dust), 0, true);
+        QuernRecipes.addRecipe(Items.flint, new ItemStack(ComponentListMF.shrapnel), 0, true);
 
-        QuernRecipes.addRecipe(ComponentListMF.flux, new ItemStack(ComponentListMF.flux_pot), 0);
+        QuernRecipes.addRecipe(ComponentListMF.flux, new ItemStack(ComponentListMF.flux_pot), 0, true);
 
         KnowledgeListMF.pieTrayRecipe = MineFantasyAPI.addCarpenterRecipe(null,
                 new ItemStack(ComponentListMF.pie_tray_uncooked), "", basic, "hands", -1, 10,

@@ -12,7 +12,7 @@ import minetweaker.MineTweakerAPI;
 public class MTCompat {
 
     private static final Class<?>[] tweakers = {Anvil.class, Bloomery.class, CarpentersBench.class, CustomMaterialHandler.class, Crucible.class,
-            Forge.class, MaterialExpansion.class, TanningRack.class};
+            Forge.class, MaterialExpansion.class, TanningRack.class, Quern.class};
 
     public static void loadTweakers() {
         for (Class<?> tweaker : tweakers) {

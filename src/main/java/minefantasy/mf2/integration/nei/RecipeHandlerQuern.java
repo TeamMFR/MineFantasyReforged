@@ -15,17 +15,6 @@ import java.util.ArrayList;
 
 public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
-    private static ArrayList<RecipePair> recipeList;
-
-    @Override
-    public TemplateRecipeHandler newInstance() {
-        if (recipeList == null || recipeList.isEmpty()) {
-            fillRecipeList();
-        }
-
-        return super.newInstance();
-    }
-
     @Override
     public String getRecipeName() {
         return StatCollector.translateToLocal("method.quern");
@@ -50,9 +39,9 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        for (RecipePair recipeInpit : recipeList) {
-            if (CustomToolHelper.areEqual(recipeInpit.outputStack, result)) {
-                CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipeInpit.inputStack, result);
+        for(QuernRecipes recipe : QuernRecipes.recipeList) {
+            if(CustomToolHelper.areEqual(recipe.result, result)) {
+                CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipe);
                 arecipes.add(cachedRecipe);
             }
         }
@@ -62,9 +51,8 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
     public void loadUsageRecipes(ItemStack ingredient) {
         if (ingredient != null) {
             if (ingredient.getItem().equals(ComponentListMF.clay_pot)) {
-                for (RecipePair recipePair : recipeList) {
-                    CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipePair.inputStack,
-                            recipePair.outputStack);
+                for (QuernRecipes recipe : QuernRecipes.recipeList) {
+                    CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipe);
                     arecipes.add(cachedRecipe);
                 }
                 return;
@@ -72,57 +60,38 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
             QuernRecipes output = QuernRecipes.getResult(ingredient);
             if (output != null) {
-                CachedQuernRecipe recipe = new CachedQuernRecipe(ingredient, output.result);
+                CachedQuernRecipe recipe = new CachedQuernRecipe(output);
                 arecipes.add(recipe);
             }
         }
     }
 
-    private void fillRecipeList() {
-        recipeList = new ArrayList<RecipePair>();
-        for (ItemStack item : ItemList.items) {
-            QuernRecipes tempRecipe = QuernRecipes.getResult(item);
-            if (tempRecipe != null) {
-                recipeList.add(new RecipePair(item, tempRecipe.result));
-            }
-        }
-    }
-
-    private static class RecipePair {
-        private ItemStack inputStack;
-        private ItemStack outputStack;
-
-        private RecipePair(ItemStack input, ItemStack output) {
-            inputStack = input;
-            outputStack = output;
-        }
-    }
-
     private class CachedQuernRecipe extends CachedRecipe {
+        private ItemStack input, output;
+        private boolean consumePot;
 
-        private PositionedStack resultStack;
-        private PositionedStack potStack;
-        private PositionedStack inputStack;
-
-        private CachedQuernRecipe(ItemStack ingredient, ItemStack result) {
-            inputStack = new PositionedStack(ingredient, 76, 9);
-            potStack = new PositionedStack(new ItemStack(ComponentListMF.clay_pot), 76, 32);
-            resultStack = new PositionedStack(result, 76, 55);
+        private CachedQuernRecipe(QuernRecipes recipe) {
+            input = recipe.input;
+            output = recipe.result;
+            consumePot = recipe.consumePot;
         }
 
         @Override
         public PositionedStack getIngredient() {
-            return inputStack;
+            return new PositionedStack(input, 76, 9);
         }
 
         @Override
         public PositionedStack getOtherStack() {
-            return potStack;
+            if(consumePot) {
+                return new PositionedStack(new ItemStack(ComponentListMF.clay_pot), 76, 32);
+            }
+            return null;
         }
 
         @Override
         public PositionedStack getResult() {
-            return resultStack;
+            return new PositionedStack(output, 76, 55);
         }
     }
 }

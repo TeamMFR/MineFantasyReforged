@@ -535,7 +535,15 @@ public class MineFantasyAPI {
     }
 
     public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output) {
-        return QuernRecipes.addRecipe(input, output, 1);
+        return addQuernRecipe(input, output, 1, true);
+    }
+
+    public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output, int tier) {
+        return addQuernRecipe(input, output, tier, true);
+    }
+
+    public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output, int tier, boolean consumePot) {
+        return QuernRecipes.addRecipe(input, output, tier, consumePot);
     }
 
     public static BigFurnaceRecipes addFurnaceRecipe(ItemStack input, ItemStack output, int tier) {
