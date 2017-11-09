@@ -5,10 +5,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class QuernRecipes {
-    public static ArrayList<QuernRecipes> recipeList = new ArrayList<QuernRecipes>();
+    public static HashSet<QuernRecipes> recipeList = new HashSet<QuernRecipes>();
     public final ItemStack input, result;
     public final boolean consumePot;
     public final int tier;
@@ -45,7 +45,7 @@ public class QuernRecipes {
         return null;
     }
 
-    private static boolean doesMatch(ItemStack item1, ItemStack item2) {
+    public static boolean doesMatch(ItemStack item1, ItemStack item2) {
         return item2.getItem() == item1.getItem() && (item2.getItemDamage() == OreDictionary.WILDCARD_VALUE
                 || item2.getItemDamage() == item1.getItemDamage());
     }

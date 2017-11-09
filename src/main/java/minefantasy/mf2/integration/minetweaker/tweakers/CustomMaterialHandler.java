@@ -1,8 +1,8 @@
 package minefantasy.mf2.integration.minetweaker.tweakers;
 
 import minefantasy.mf2.api.material.CustomMaterial;
-import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
+import minetweaker.OneWayAction;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -22,7 +22,7 @@ public class CustomMaterialHandler {
         return CustomMaterial.getMaterial(materialName);
     }
 
-    private static class RegisterCustomMaterial implements IUndoableAction {
+    private static class RegisterCustomMaterial extends OneWayAction {
 
         private final String type, name;
         private final int tier;
@@ -48,23 +48,8 @@ public class CustomMaterialHandler {
         }
 
         @Override
-        public boolean canUndo() {
-            return false;
-        }
-
-        @Override
-        public void undo() {
-
-        }
-
-        @Override
         public String describe() {
             return "Registers custom material for MF crafting system";
-        }
-
-        @Override
-        public String describeUndo() {
-            return "Impossible to remove registered CustomMaterials!";
         }
 
         @Override

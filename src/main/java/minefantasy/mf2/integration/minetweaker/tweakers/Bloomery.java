@@ -82,7 +82,7 @@ public class Bloomery {
 
         @Override
         public String describeUndo() {
-            return "Removing furnace recipe for " + result.getDisplayName();
+            return "Removing bloomery recipe for " + result.getDisplayName();
         }
 
         @Override

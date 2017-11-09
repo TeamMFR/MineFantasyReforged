@@ -36,6 +36,7 @@ import minefantasy.mf2.recipe.RecipeRemover;
 import minefantasy.mf2.util.BukkitUtils;
 import minefantasy.mf2.util.MFLogUtil;
 import minefantasy.mf2.util.XSTRandom;
+import minetweaker.MineTweakerAPI;
 import net.minecraft.init.Items;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
@@ -193,6 +194,10 @@ public class MineFantasyII {
         if (event.getSide() != Side.CLIENT && isBukkitServer()) {
             MFLogUtil.log("Bukkit has been detected");
             BukkitUtils.onServerStarted();
+        }
+
+        if (Loader.isModLoaded("MineTweaker3") && ConfigIntegration.mtIntegration) {
+            MTCompat.registerCommands();
         }
     }
 

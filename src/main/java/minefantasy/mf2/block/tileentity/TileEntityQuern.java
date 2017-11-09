@@ -100,23 +100,23 @@ public class TileEntityQuern extends TileEntity implements IInventory, ISidedInv
     private boolean tryCraft(ItemStack result, boolean consumePot) {
         worldObj.playSoundEffect(xCoord, yCoord, zCoord, "minefantasy2:block.craftprimitive", 0.5F, 1.2F);
         /*
-		 * if(rand.nextFloat() > 0.20F)//20% success rate {
+         * if(rand.nextFloat() > 0.20F)//20% success rate {
 		 * worldObj.playSoundEffect(xCoord, yCoord, zCoord, "dig.gravel", 1.0F, 0.5F);
 		 * return false; } else
 		 */
-        {
-            this.decrStackSize(0, 1);
-            if(consumePot) {
-                this.decrStackSize(1, 1);
-            }
-            ItemStack out = inv[2];
-            if (out == null) {
-                this.setInventorySlotContents(2, result.copy());
-            } else {
-                out.stackSize += result.stackSize;
-            }
-            return true;
+
+        this.decrStackSize(0, 1);
+        if (consumePot) {
+            this.decrStackSize(1, 1);
         }
+        ItemStack out = inv[2];
+        if (out == null) {
+            this.setInventorySlotContents(2, result.copy());
+        } else {
+            out.stackSize += result.stackSize;
+        }
+        return true;
+
     }
 
     @Override

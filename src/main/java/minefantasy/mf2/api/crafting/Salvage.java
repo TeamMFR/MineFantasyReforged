@@ -2,6 +2,7 @@ package minefantasy.mf2.api.crafting;
 
 import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -14,9 +15,9 @@ import java.util.List;
 import java.util.Random;
 
 public class Salvage {
-    private static Random random = new Random();
-    private static HashMap<String, Object[]> salvageList = new HashMap<String, Object[]>();
-    private static HashMap<String, Item> sharedSalvage = new HashMap<String, Item>();
+    private static XSTRandom random = new XSTRandom();
+    public static HashMap<String, Object[]> salvageList = new HashMap<String, Object[]>();
+    public static HashMap<String, Item> sharedSalvage = new HashMap<String, Item>();
 
     public static void shareSalvage(Item item1, Item item2) {
         sharedSalvage.put(CustomToolHelper.getSimpleReferenceName(item1), item2);
