@@ -23,16 +23,18 @@ public class TanningRecipe {
         this.toolType = toolType;
     }
 
-    public static void addRecipe(Object input, float time, ItemStack output) {
-        addRecipe(input, time, -1, output);
+    public static TanningRecipe addRecipe(Object input, float time, ItemStack output) {
+        return addRecipe(input, time, -1, output);
     }
 
-    public static void addRecipe(Object input, float time, int tier, ItemStack output) {
-        addRecipe(input, time, tier, "knife", output);
+    public static TanningRecipe addRecipe(Object input, float time, int tier, ItemStack output) {
+        return addRecipe(input, time, tier, "knife", output);
     }
 
-    public static void addRecipe(Object input, float time, int tier, String toolType, ItemStack output) {
-        recipeList.add(new TanningRecipe(convertItem(input), time, tier, toolType, output));
+    public static TanningRecipe addRecipe(Object input, float time, int tier, String toolType, ItemStack output) {
+        TanningRecipe recipe = new TanningRecipe(convertItem(input), time, tier, toolType, output);
+        recipeList.add(recipe);
+        return recipe;
     }
 
     public static ItemStack convertItem(Object input) {

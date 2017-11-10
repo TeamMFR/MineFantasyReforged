@@ -152,10 +152,6 @@ public class MineFantasyII {
             eventChannel.register(packetHandler);
             packetHandler.channels.put(channel, eventChannel);
         }
-
-        if (Loader.isModLoaded("MineTweaker3") && ConfigIntegration.mtIntegration) {
-            MTCompat.loadTweakers();
-        }
     }
 
     @EventHandler

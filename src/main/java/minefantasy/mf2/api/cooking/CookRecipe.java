@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import java.util.HashMap;
 
 public class CookRecipe {
-    private static final HashMap<String, CookRecipe> recipeList = new HashMap<String, CookRecipe>();
+    public static final HashMap<String, CookRecipe> recipeList = new HashMap<String, CookRecipe>();
     public static Item burnt_food = null;
     public static boolean canCookBasics = true;
     public final int maxTemperature, minTemperature, time;

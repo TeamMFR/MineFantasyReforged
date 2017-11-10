@@ -1,5 +1,6 @@
 package minefantasy.mf2.api.crafting.refine;
 
+import minefantasy.mf2.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -37,16 +38,11 @@ public class QuernRecipes {
     public static QuernRecipes getResult(ItemStack input) {
         if (input != null) {
             for (QuernRecipes recipes : recipeList) {
-                if (doesMatch(input, recipes.input)) {
+                if (Utils.doesMatch(input, recipes.input)) {
                     return recipes;
                 }
             }
         }
         return null;
-    }
-
-    public static boolean doesMatch(ItemStack item1, ItemStack item2) {
-        return item2.getItem() == item1.getItem() && (item2.getItemDamage() == OreDictionary.WILDCARD_VALUE
-                || item2.getItemDamage() == item1.getItemDamage());
     }
 }

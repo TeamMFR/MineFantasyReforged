@@ -8,6 +8,8 @@ import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import minetweaker.mc1710.item.MCItemStack;
 import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.NotNull;
+import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -25,7 +27,7 @@ public class Bloomery {
     }
 
     @ZenMethod
-    public static void remove(IIngredient output, IIngredient input) {
+    public static void remove(@NotNull IIngredient output, @Optional IIngredient input) {
         if (output == null)
             throw new IllegalArgumentException("Output value cannot be null");
 

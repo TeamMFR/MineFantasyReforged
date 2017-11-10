@@ -19,11 +19,6 @@ public class SalvageTweaker {
         MineTweakerAPI.apply(new AddSalvageAction(output, input));
     }
 
-    @ZenMethod
-    public static void shareSalvage() {
-
-    }
-
     private static class AddSalvageAction implements IUndoableAction {
         private final IItemStack output;
         private final IIngredient input;
@@ -49,6 +44,43 @@ public class SalvageTweaker {
         @Override
         public void undo() {
             Salvage.salvageList.remove(input);
+        }
+
+        @Override
+        public String describe() {
+            return null;
+        }
+
+        @Override
+        public String describeUndo() {
+            return null;
+        }
+
+        @Override
+        public Object getOverrideKey() {
+            return null;
+        }
+    }
+
+    private static class RemoveAction implements IUndoableAction {
+
+        public RemoveAction() {
+
+        }
+
+        @Override
+        public void apply() {
+
+        }
+
+        @Override
+        public boolean canUndo() {
+            return false;
+        }
+
+        @Override
+        public void undo() {
+
         }
 
         @Override

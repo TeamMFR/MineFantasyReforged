@@ -1,4 +1,4 @@
-package minefantasy.mf2.integration.minetweaker;
+package minefantasy.mf2.integration.minetweaker.helpers;
 
 import minefantasy.mf2.api.crafting.carpenter.CarpenterCraftMatrix;
 import minefantasy.mf2.api.crafting.carpenter.ICarpenterRecipe;

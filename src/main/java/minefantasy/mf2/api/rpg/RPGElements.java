@@ -1,6 +1,7 @@
 package minefantasy.mf2.api.rpg;
 
 import minefantasy.mf2.api.helpers.PlayerTagData;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -14,8 +15,8 @@ public class RPGElements {
     public static float levelSpeedModifier = 1.0F;
     public static float levelUpModifier = 1.5F;
     private static HashMap<String, Skill> skillsMap = new HashMap<String, Skill>();
-    private static ArrayList<Skill> skillsList = new ArrayList<Skill>();
-    private static Random rand = new Random();
+    public static ArrayList<Skill> skillsList = new ArrayList<Skill>();
+    private static XSTRandom rand = new XSTRandom();
 
     static {
         if (isSystemActive) {

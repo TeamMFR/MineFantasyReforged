@@ -10,10 +10,11 @@ import java.util.HashMap;
 
 public class BigFurnaceRecipes {
     public static HashMap<String, BigFurnaceRecipes> recipeList = new HashMap<String, BigFurnaceRecipes>();
-    public final ItemStack result;
+    public final ItemStack input, result;
     public final int tier;
 
     public BigFurnaceRecipes(ItemStack input, ItemStack output, int tier) {
+        this.input = input;
         this.result = output;
         this.tier = tier;
     }

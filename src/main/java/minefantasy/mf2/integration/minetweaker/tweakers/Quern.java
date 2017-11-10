@@ -8,6 +8,8 @@ import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import minetweaker.mc1710.item.MCItemStack;
 import net.minecraft.item.ItemStack;
+import stanhebben.zenscript.annotations.NotNull;
+import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -17,33 +19,15 @@ import java.util.ArrayList;
 public class Quern {
 
     @ZenMethod
-    public static void addRecipe(IItemStack result, IIngredient input) {
-        addRecipe(result, input, 0, true);
+    public static void addRecipe(IItemStack output, IIngredient input, @Optional int tier, @Optional boolean consumePot) {
+        MineTweakerAPI.apply(new AddRecipeAction(output, input, tier, consumePot));
     }
 
     @ZenMethod
-    public static void addRecipe(IItemStack result, IIngredient input, int tier) {
-        addRecipe(result, input, tier, true);
-    }
-
-    @ZenMethod
-    public static void addRecipe(IItemStack result, IIngredient input, int tier, boolean consumePot) {
-        MineTweakerAPI.apply(new AddRecipeAction(result, input, tier, consumePot));
-    }
-
-    @ZenMethod
-    public static void remove(IIngredient result){
-        remove(result, null);
-    }
-
-    @ZenMethod
-    public static void remove(IIngredient result, IIngredient input) {
-        if (result == null)
-            throw new IllegalArgumentException("Output value cannot be null");
-
+    public static void remove(@NotNull IIngredient output, @Optional IIngredient input) {
         ArrayList<QuernRecipes> recipesToRemove = new ArrayList<QuernRecipes>();
         for (QuernRecipes recipes : QuernRecipes.recipeList) {
-            if (result.matches(new MCItemStack(recipes.result)) && (input == null || input.matches(new MCItemStack(recipes.input)))) {
+            if (output.matches(new MCItemStack(recipes.result)) && (input == null || input.matches(new MCItemStack(recipes.input)))) {
                 recipesToRemove.add(recipes);
             }
         }
@@ -52,14 +36,14 @@ public class Quern {
     }
 
     private static class AddRecipeAction implements IUndoableAction {
-        private final IItemStack result;
+        private final IItemStack output;
         private final IIngredient input;
         private final int tier;
         private final boolean consumePot;
         private final ArrayList<QuernRecipes> recipesToRemove = new ArrayList<QuernRecipes>();
 
         public AddRecipeAction(IItemStack result, IIngredient input, int tier, boolean consumePot) {
-            this.result = result;
+            this.output = result;
             this.input = input;
             this.tier = tier;
             this.consumePot = consumePot;
@@ -69,7 +53,7 @@ public class Quern {
         public void apply() {
             for (IItemStack stack : input.getItems()) {
                 ItemStack s = MineTweakerMC.getItemStack(stack);
-                recipesToRemove.add(QuernRecipes.addRecipe(s, MineTweakerMC.getItemStack(result), this.tier, consumePot));
+                recipesToRemove.add(QuernRecipes.addRecipe(s, MineTweakerMC.getItemStack(output), this.tier, consumePot));
             }
         }
 
@@ -88,12 +72,12 @@ public class Quern {
 
         @Override
         public String describe() {
-            return "Adding quern recipe for " + result.getDisplayName();
+            return "Adding quern recipe for " + output.getDisplayName();
         }
 
         @Override
         public String describeUndo() {
-            return "Removing quern recipe for " + result.getDisplayName();
+            return "Removing quern recipe for " + output.getDisplayName();
         }
 
         @Override

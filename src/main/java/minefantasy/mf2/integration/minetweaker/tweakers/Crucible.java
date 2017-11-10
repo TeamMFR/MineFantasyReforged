@@ -2,7 +2,7 @@ package minefantasy.mf2.integration.minetweaker.tweakers;
 
 import minefantasy.mf2.api.refine.Alloy;
 import minefantasy.mf2.api.refine.AlloyRecipes;
-import minefantasy.mf2.integration.minetweaker.TweakedAlloyRecipe;
+import minefantasy.mf2.integration.minetweaker.helpers.TweakedAlloyRecipe;
 import minetweaker.MineTweakerAPI;
 import minetweaker.OneWayAction;
 import minetweaker.api.item.IIngredient;

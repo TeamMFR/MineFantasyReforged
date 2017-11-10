@@ -1,6 +1,7 @@
 package minefantasy.mf2.network;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minefantasy.mf2.MineFantasyII;
@@ -13,13 +14,16 @@ import minefantasy.mf2.block.tileentity.blastfurnace.TileEntityBlastFH;
 import minefantasy.mf2.block.tileentity.decor.TileEntityAmmoBox;
 import minefantasy.mf2.block.tileentity.decor.TileEntityRack;
 import minefantasy.mf2.block.tileentity.decor.TileEntityTrough;
+import minefantasy.mf2.config.ConfigIntegration;
 import minefantasy.mf2.container.*;
 import minefantasy.mf2.entity.EntitySmoke;
 import minefantasy.mf2.entity.list.EntityListMF;
 import minefantasy.mf2.hunger.HungerSystemMF;
+import minefantasy.mf2.integration.minetweaker.MTCompat;
 import minefantasy.mf2.item.archery.ArrowFireFlint;
 import minefantasy.mf2.item.archery.ArrowFirerMF;
 import minefantasy.mf2.mechanics.*;
+import minetweaker.MineTweakerAPI;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -94,6 +98,10 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler {
         AmmoMechanicsMF.addHandler(new ArrowFirerMF());
         registerTileEntities();
         SmokeMechanics.handler = this;
+        if (Loader.isModLoaded("MineTweaker3") && ConfigIntegration.mtIntegration) {
+            MTCompat.loadTweakers();
+            MineTweakerAPI.registerRemover(new MTCompat());
+        }
     }
 
     protected void registerTileEntities() {

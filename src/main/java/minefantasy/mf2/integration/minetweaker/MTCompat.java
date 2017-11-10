@@ -1,6 +1,5 @@
 package minefantasy.mf2.integration.minetweaker;
 
-import minefantasy.mf2.integration.minetweaker.helpers.MTCommands;
 import minefantasy.mf2.integration.minetweaker.helpers.MaterialExpansion;
 import minefantasy.mf2.integration.minetweaker.tweakers.*;
 import minetweaker.IRecipeRemover;
@@ -8,30 +7,40 @@ import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.minecraft.MineTweakerMC;
 
-public class MTCompat /*implements IRecipeRemover */{
-
-    private static final Class<?>[] tweakers = {Anvil.class, Bloomery.class, CarpentersBench.class, CustomMaterialHandler.class, Crucible.class,
-            Forge.class, MaterialExpansion.class, TanningRack.class, Quern.class, SalvageTweaker.class};
+public class MTCompat implements IRecipeRemover {
 
     private static final String[] COMMAND_DESC = {
-            "    MineFantasy commands:",
-            "      /minetweaker mf materials",
-            "        Lists all MF materials"
+            "MineFantasy commands:",
+            "   /minetweaker mf materials",
+            "   Lists all MF materials",
+            "   /minetweaker mf skills",
+            "   Lists all MF skills"
     };
 
     public static void loadTweakers() {
-        for (Class<?> tweaker : tweakers) {
-            MineTweakerAPI.registerClass(tweaker);
-        }
+        MineTweakerAPI.registerClass(Anvil.class);
+        MineTweakerAPI.registerClass(Bloomery.class);
+        MineTweakerAPI.registerClass(BigFurnace.class);
+        MineTweakerAPI.registerClass(BlastFurnace.class);
+        MineTweakerAPI.registerClass(CarpentersBench.class);
+        MineTweakerAPI.registerClass(CustomMaterialHandler.class);
+        MineTweakerAPI.registerClass(Cooking.class);
+        MineTweakerAPI.registerClass(Crucible.class);
+        MineTweakerAPI.registerClass(Forge.class);
+        MineTweakerAPI.registerClass(MaterialExpansion.class);
+        MineTweakerAPI.registerClass(TanningRack.class);
+        MineTweakerAPI.registerClass(Quern.class);
+        MineTweakerAPI.registerClass(SalvageTweaker.class);
     }
 
     public static void registerCommands() {
         MineTweakerAPI.server.addMineTweakerCommand("mf", COMMAND_DESC, new MTCommands());
     }
 
-   /* @Override
+    @Override
     public void remove(IIngredient iIngredient) {
         Bloomery.remove(iIngredient, null);
         Quern.remove(iIngredient, null);
-    }*/
+        TanningRack.remove(iIngredient, null);
+    }
 }

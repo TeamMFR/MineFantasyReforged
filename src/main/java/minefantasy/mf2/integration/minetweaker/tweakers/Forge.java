@@ -14,15 +14,14 @@ public class Forge {
 
     @ZenMethod
     public static void addHeatableItem(IIngredient input, int min, int unstable, int max) {
-        MineTweakerAPI.apply(new heatableItemAction(input, min, unstable, max));
+        MineTweakerAPI.apply(new AddHeatableAction(input, min, unstable, max));
     }
 
-    public static class heatableItemAction implements IUndoableAction {
+    private static class AddHeatableAction implements IUndoableAction {
+        private final IIngredient input;
+        private final int min, unstable, max;
 
-        IIngredient input;
-        int min, unstable, max;
-
-        public heatableItemAction(IIngredient input, int min, int unstable, int max) {
+        public AddHeatableAction(IIngredient input, int min, int unstable, int max) {
             this.input = input;
             this.min = min;
             this.unstable = unstable;
@@ -62,7 +61,5 @@ public class Forge {
                 Heatable.registerList.remove(Heatable.getRegistrationForItem(MineTweakerMC.getItemStack(s)));
             }
         }
-
     }
-
 }

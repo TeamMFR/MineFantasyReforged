@@ -1,4 +1,4 @@
-package minefantasy.mf2.integration.minetweaker;
+package minefantasy.mf2.integration.minetweaker.helpers;
 
 import minefantasy.mf2.api.crafting.anvil.AnvilCraftMatrix;
 import minefantasy.mf2.api.crafting.anvil.IAnvilRecipe;
@@ -8,21 +8,21 @@ import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import net.minecraft.item.ItemStack;
 
-public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
+public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
 
     private int hammer, anvil, /* craft, */
             time, width, height;
     private float exp;
     private IItemStack result;
-    private IIngredient[] ingreds;
+    private IIngredient[][] ingreds;
     private Skill s;
     private String research, tool;
     private boolean hot;
 
-    public TweakedShapelessAnvilRecipe(IIngredient[] input, IItemStack output, String tool, int time, int hammer,
-                                       int anvil, float exp, boolean hot, String research, Skill s) {
+    public TweakedShapedAnvilRecipe(IIngredient[][] input, IItemStack output, String tool, int time, int hammer,
+                                    int anvil, float exp, boolean hot, String research, Skill s) {
         this.height = 4;
-        this.width = 4;
+        this.width = 6;
         this.ingreds = input;
         this.result = output;
         this.tool = tool;
@@ -32,7 +32,7 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
         this.hot = hot;
         this.research = research;
         this.s = s;
-        this.time = 1;
+        this.time = time;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
 
     @Override
     public Skill getSkill() {
-        return s;
+        return this.s;
     }
 
     @Override
@@ -87,44 +87,33 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
 
     @Override
     public boolean matches(AnvilCraftMatrix inv) {
-        boolean matches[] = new boolean[this.ingreds.length];
-        boolean items[][] = new boolean[6][4];
-        for (int a = 0; a < this.ingreds.length; a++) {
-            IIngredient i = this.ingreds[a];
-            for (IItemStack s : i.getItems()) {
-                ItemStack ingred = MineTweakerMC.getItemStack(s);
-                boolean found = false;
-                for (int x = 0; x < 6; x++) {
-                    for (int y = 0; y < 4; y++) {
-                        ItemStack stack = inv.getStackInRowAndColumn(x, y);
-                        if (stack == null)
-                            continue;
-                        if (stack.getItem() == ingred.getItem() && stack.getItemDamage() == ingred.getItemDamage()
-                                && !items[x][y]) {
-                            matches[a] = true;
-                            items[x][y] = true;
-                            found = true;
-                            break;
-                        }
-                    }
-                    if (found)
-                        break;
-                }
-                if (found)
-                    break;
-            }
-        }
-        boolean isMatch = true;
-        for (boolean b : matches)
-            if (!b)
-                isMatch = false;
+        boolean matches = true;
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 4; y++) {
-                if (!items[x][y] && inv.getStackInRowAndColumn(x, y) != null)
-                    isMatch = false;
+                if (!matches)
+                    return false;
+                ItemStack stack = inv.getStackInRowAndColumn(x, y);
+
+                // int a = y + x * 4;
+                if (stack == null && this.ingreds[y][x] == null) {
+                    continue;
+                }
+                boolean hasMatch = false;
+                if (stack != null && this.ingreds[y][x] != null) {
+                    for (IItemStack i : this.ingreds[y][x].getItems()) {
+                        ItemStack ingred = MineTweakerMC.getItemStack(i);
+                        if (stack.getItem() == ingred.getItem() && stack.getItemDamage() == stack.getItemDamage()) {
+                            hasMatch = true;
+                        }
+                    }
+                } else {
+                    matches = false;
+                }
+                if (!hasMatch)
+                    matches = false;
             }
         }
-        return isMatch;
+        return matches;
     }
 
     @Override
