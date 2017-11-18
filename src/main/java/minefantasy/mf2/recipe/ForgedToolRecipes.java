@@ -271,7 +271,7 @@ public class ForgedToolRecipes {
                 true, "hammer", -1, -1, time, new Object[]{"I ", "PL",
 
                         'I', bar, 'P', plank, 'L', strip,});
-        Salvage.addSalvage(CustomToolListMF.standard_knife, bar, bar, plank, strip);
+        Salvage.addSalvage(CustomToolListMF.standard_knife, bar, plank, strip);
 
         time = 12;
         KnowledgeListMF.shearsR = MineFantasyAPI.addAnvilToolRecipe(artisanry, CustomToolListMF.standard_shears, "tier",
