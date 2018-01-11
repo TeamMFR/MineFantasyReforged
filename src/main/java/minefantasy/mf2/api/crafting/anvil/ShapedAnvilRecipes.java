@@ -87,13 +87,9 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
      */
     @Override
     public boolean matches(AnvilCraftMatrix matrix) {
-        for (int var2 = 0; var2 <= ShapelessAnvilRecipes.globalWidth - this.recipeWidth; ++var2) {
-            for (int var3 = 0; var3 <= ShapelessAnvilRecipes.globalHeight - this.recipeHeight; ++var3) {
-                if (this.checkMatch(matrix, var2, var3, true)) {
-                    return true;
-                }
-
-                if (this.checkMatch(matrix, var2, var3, false)) {
+        for (int x = 0; x <= ShapelessAnvilRecipes.globalWidth - this.recipeWidth; ++x) {
+            for (int y = 0; y <= ShapelessAnvilRecipes.globalHeight - this.recipeHeight; ++y) {
+                if (this.checkMatch(matrix, x, y, true) || this.checkMatch(matrix, x, y, false)) {
                     return true;
                 }
             }
@@ -106,21 +102,21 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
      * Checks if the region of a crafting inventory is match for the recipe.
      */
     protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b) {
-        for (int var5 = 0; var5 < ShapelessAnvilRecipes.globalWidth; ++var5) {
-            for (int var6 = 0; var6 < ShapelessAnvilRecipes.globalHeight; ++var6) {
-                int var7 = var5 - x;
-                int var8 = var6 - y;
+        for (int matrixX = 0; matrixX < ShapelessAnvilRecipes.globalWidth; ++matrixX) {
+            for (int matrixY = 0; matrixY < ShapelessAnvilRecipes.globalHeight; ++matrixY) {
+                int recipeX = matrixX - x;
+                int recipeY = matrixY - y;
                 ItemStack recipeItem = null;
 
-                if (var7 >= 0 && var8 >= 0 && var7 < this.recipeWidth && var8 < this.recipeHeight) {
+                if (recipeX >= 0 && recipeY >= 0 && recipeX < this.recipeWidth && recipeY < this.recipeHeight) {
                     if (b) {
-                        recipeItem = this.recipeItems[this.recipeWidth - var7 - 1 + var8 * this.recipeWidth];
+                        recipeItem = this.recipeItems[this.recipeWidth - recipeX - 1 + recipeY * this.recipeWidth];
                     } else {
-                        recipeItem = this.recipeItems[var7 + var8 * this.recipeWidth];
+                        recipeItem = this.recipeItems[recipeX + recipeY * this.recipeWidth];
                     }
                 }
 
-                ItemStack inputItem = matrix.getStackInRowAndColumn(var5, var6);
+                ItemStack inputItem = matrix.getStackInRowAndColumn(matrixX, matrixY);
 
                 if (inputItem != null || recipeItem != null) {
                     // HEATING

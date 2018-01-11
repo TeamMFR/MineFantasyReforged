@@ -1,6 +1,5 @@
 package minefantasy.mf2.mechanics.worldGen;
 
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.block.list.BlockListMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
@@ -109,8 +108,8 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
                 --i1;
             } else {
                 for (double d0 = 0.5D; j1 < i; ++j1) {
-                    double d1 = this.scaleWidth * f * (MineFantasyII.random.nextFloat() + 0.328D);
-                    double d2 = MineFantasyII.random.nextFloat() * 2.0D * Math.PI;
+                    double d1 = this.scaleWidth * f * (worldObj.rand.nextFloat() + 0.328D);
+                    double d2 = worldObj.rand.nextFloat() * 2.0D * Math.PI;
                     int k1 = MathHelper.floor_double(d1 * Math.sin(d2) + this.basePos[0] + d0);
                     int l1 = MathHelper.floor_double(d1 * Math.cos(d2) + this.basePos[2] + d0);
                     int[] aint1 = new int[]{k1, j, l1};
@@ -438,13 +437,13 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
     public boolean generate(World world, Random rand, int x, int y, int z) {
         this.worldObj = world;
         long l = rand.nextLong();
-        MineFantasyII.random.setSeed(l);
+        world.rand.setSeed(l);
         this.basePos[0] = x;
         this.basePos[1] = y;
         this.basePos[2] = z;
 
         if (this.heightLimit == 0) {
-            this.heightLimit = 5 + MineFantasyII.random.nextInt(this.heightLimitLimit);
+            this.heightLimit = 5 + world.rand.nextInt(this.heightLimitLimit);
         }
 
         if (!this.validTreeLocation()) {

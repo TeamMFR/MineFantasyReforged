@@ -16,6 +16,7 @@ public class CookRecipe {
     public final boolean isBaking;
     public final ItemStack output, burnt;
     public final boolean canBurn;
+
     public CookRecipe(ItemStack output, ItemStack burnt, int min, int max, int time, boolean bake, boolean burn) {
         this.output = output;
         this.burnt = burnt;

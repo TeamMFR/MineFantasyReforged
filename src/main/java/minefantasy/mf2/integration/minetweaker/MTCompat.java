@@ -5,7 +5,6 @@ import minefantasy.mf2.integration.minetweaker.tweakers.*;
 import minetweaker.IRecipeRemover;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
-import minetweaker.api.minecraft.MineTweakerMC;
 
 public class MTCompat implements IRecipeRemover {
 

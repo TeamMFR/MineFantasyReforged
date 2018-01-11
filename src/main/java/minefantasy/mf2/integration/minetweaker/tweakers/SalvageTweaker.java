@@ -1,7 +1,6 @@
 package minefantasy.mf2.integration.minetweaker.tweakers;
 
 import minefantasy.mf2.api.crafting.Salvage;
-import minefantasy.mf2.api.helpers.CustomToolHelper;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;

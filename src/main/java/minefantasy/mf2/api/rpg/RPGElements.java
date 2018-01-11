@@ -7,15 +7,14 @@ import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 
 public class RPGElements {
     private static final String statsName = "RPGStats_MF";
     public static boolean isSystemActive = true;
     public static float levelSpeedModifier = 1.0F;
     public static float levelUpModifier = 1.5F;
-    private static HashMap<String, Skill> skillsMap = new HashMap<String, Skill>();
     public static ArrayList<Skill> skillsList = new ArrayList<Skill>();
+    private static HashMap<String, Skill> skillsMap = new HashMap<String, Skill>();
     private static XSTRandom rand = new XSTRandom();
 
     static {

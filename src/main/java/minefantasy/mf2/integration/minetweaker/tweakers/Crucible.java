@@ -7,6 +7,7 @@ import minetweaker.MineTweakerAPI;
 import minetweaker.OneWayAction;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
+import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -17,19 +18,19 @@ import java.util.List;
 public class Crucible {
 
     @ZenMethod
-    public static void addAlloy(IItemStack out, int level, int dupe, IIngredient[] ingred) {
-        MineTweakerAPI.apply(new AlloyAction(out, level, ingred, dupe));
+    public static void addAlloy(IItemStack out, @Optional int level, int dupe, IIngredient[] ingred) {
+        MineTweakerAPI.apply(new AddAlloyAction(out, level, ingred, dupe));
     }
 
-    private static class AlloyAction extends OneWayAction {
+    private static class AddAlloyAction extends OneWayAction {
 
-        Alloy a;
+        private Alloy alloy;
         private IItemStack out;
         private int level;
         private List<IIngredient> ingreds;
         private int dupe;
 
-        public AlloyAction(IItemStack out, int level, IIngredient[] ingreds, int dupe) {
+        public AddAlloyAction(IItemStack out, int level, IIngredient[] ingreds, int dupe) {
             this.out = out;
             this.level = level;
             this.ingreds = new ArrayList<IIngredient>();
@@ -37,12 +38,12 @@ public class Crucible {
             for (IIngredient i : ingreds) {
                 this.ingreds.add(i);
             }
-            a = new TweakedAlloyRecipe(out, level, this.ingreds);
+            alloy = new TweakedAlloyRecipe(out, level, this.ingreds);
         }
 
         @Override
         public void apply() {
-            AlloyRecipes.addAlloy(a);
+            AlloyRecipes.addAlloy(alloy);
         }
 
         @Override

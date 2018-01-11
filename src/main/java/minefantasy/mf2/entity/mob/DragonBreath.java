@@ -19,6 +19,7 @@ public abstract class DragonBreath {
     public final String name;
     public int id = 0;
     protected Random random = new Random();
+
     public DragonBreath(String name) {
         this.name = name;
         register();

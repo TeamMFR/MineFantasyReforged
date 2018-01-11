@@ -40,10 +40,10 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
             progressMax = 2000;
         }
 
-		/*
+        /*
          * int time = 400; for(int a = 1; a < getSizeInventory()-1; a ++) { if(inv[a] !=
-		 * null) { time += 50; } } if(!worldObj.isRemote) { progressMax = time; }
-		 */
+         * null) { time += 50; } } if(!worldObj.isRemote) { progressMax = time; }
+         */
 
         if (isHot && canSmelt()) {
             progress += (temperature / 600F);

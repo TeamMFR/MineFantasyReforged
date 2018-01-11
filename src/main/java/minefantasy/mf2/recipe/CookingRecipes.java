@@ -93,7 +93,6 @@ public class CookingRecipes {
                 new ItemStack(FoodListMF.generic_meat_mince_cooked), 0);
         GameRegistry.addSmelting(FoodListMF.bowl_water_salt, new ItemStack(FoodListMF.salt), 0);
         GameRegistry.addSmelting(FoodListMF.saussage_raw, new ItemStack(FoodListMF.saussage_cooked), 0);
-
     }
 
     private static void addCeramics() {
@@ -108,7 +107,9 @@ public class CookingRecipes {
     }
 
     private static CookRecipe bakeCeramic(Item clay, Item ceramic, int temp, int time) {
-        GameRegistry.addSmelting(clay, new ItemStack(ceramic), 0F);
+        if (!ConfigHardcore.preventCook) {
+            GameRegistry.addSmelting(clay, new ItemStack(ceramic), 0F);
+        }
         return MineFantasyAPI.addCookingRecipe(new ItemStack(clay), new ItemStack(ceramic), null, temp, 1000, time, 0,
                 true, false);
 

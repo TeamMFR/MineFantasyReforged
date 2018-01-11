@@ -1,7 +1,6 @@
 package minefantasy.mf2.mechanics;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.armour.IElementalResistance;
 import minefantasy.mf2.api.helpers.*;
 import minefantasy.mf2.api.knowledge.ResearchLogic;
@@ -22,6 +21,7 @@ import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.network.packet.DodgeCommand;
 import minefantasy.mf2.network.packet.ParryPacket;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -72,6 +72,7 @@ public class CombatMechanics {
     private static final float parryFatigue = 5F;
     public static boolean swordSkeleton = true;
     private static boolean debugParry = true;
+    private static XSTRandom random = new XSTRandom();
     protected float jumpEvade_cost = 30;
     protected float evade_cost = 10;
 
@@ -115,7 +116,7 @@ public class CombatMechanics {
         living.playSound("random.fizz", 0.5F, 0.5F);
         living.addPotionEffect(new PotionEffect(Potion.weakness.id, 1200, 2));
         living.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 1200, 2));
-        if (MineFantasyII.random.nextInt(5) == 0) {
+        if (random.nextInt(5) == 0) {
             living.setFire(3);
         }
     }
@@ -218,9 +219,9 @@ public class CombatMechanics {
         double moveZ = victim.getEntityData().getDouble("MF2_PanicZ");
         victim.setJumping(true);
 
-        if ((moveX == 0 && moveZ == 0) || MineFantasyII.random.nextInt(directionTimer) == 0) {
-            moveX = (MineFantasyII.random.nextDouble() - 0.5D) * 0.85D * speed;
-            moveZ = (MineFantasyII.random.nextDouble() - 0.5D) * 0.85D * speed;
+        if ((moveX == 0 && moveZ == 0) || random.nextInt(directionTimer) == 0) {
+            moveX = (random.nextDouble() - 0.5D) * 0.85D * speed;
+            moveZ = (random.nextDouble() - 0.5D) * 0.85D * speed;
 
             victim.getEntityData().setDouble("MF2_PanicX", moveX);
             victim.getEntityData().setDouble("MF2_PanicZ", moveZ);
@@ -480,7 +481,7 @@ public class CombatMechanics {
                 if (isSkeleton(target)) {
                     dam *= 1.5F;
                     if (properHit) {
-                        if (MineFantasyII.random.nextInt(2) == 0) {
+                        if (random.nextInt(2) == 0) {
                             target.entityDropItem(new ItemStack(Items.bone), 0.5F);
                         }
                     }
@@ -597,10 +598,10 @@ public class CombatMechanics {
     }
 
     private void onArrowHit(Entity arrow, Entity target, Entity shooter, float damage) {
-		/*
-		 * if(RPGElements.isSystemActive && shooter instanceof EntityPlayer) {
-		 * SkillList.archery.addXP((EntityPlayer) shooter, (int)damage); }
-		 */
+        /*
+         * if(RPGElements.isSystemActive && shooter instanceof EntityPlayer) {
+         * SkillList.archery.addXP((EntityPlayer) shooter, (int)damage); }
+         */
     }
 
     private float onUserHit(EntityLivingBase user, Entity entityHitting, DamageSource source, float dam,
@@ -661,10 +662,10 @@ public class CombatMechanics {
                             * (dam + 1F) * parryFatigue * weaponFatigue);
                     if (parry == null) {
                         user.worldObj.playSoundAtEntity(user, getDefaultParrySound(weapon), 1.0F,
-                                1.25F + (MineFantasyII.random.nextFloat() * 0.5F));
+                                1.25F + (random.nextFloat() * 0.5F));
                     } else if (!parry.playCustomParrySound(user, entityHitting, weapon)) {
                         user.worldObj.playSoundAtEntity(user, "mob.zombie.metal", 1.0F,
-                                1.25F + (MineFantasyII.random.nextFloat() * 0.5F));
+                                1.25F + (random.nextFloat() * 0.5F));
                     }
                     if (user instanceof EntityPlayer) {
                         ((EntityPlayer) user).stopUsingItem();
@@ -759,10 +760,10 @@ public class CombatMechanics {
      */
     private int onParry(DamageSource source, EntityLivingBase user, Entity attacker, float dam, float prevDam,
                         IParryable parry) {
-		/*
-		 * if(RPGElements.isSystemActive && user instanceof EntityPlayer) {
-		 * SkillList.block.addXP((EntityPlayer)user, 10 + (int)prevDam*2); }
-		 */
+        /*
+         * if(RPGElements.isSystemActive && user instanceof EntityPlayer) {
+         * SkillList.block.addXP((EntityPlayer)user, 10 + (int)prevDam*2); }
+         */
         if (RPGElements.isSystemActive && user instanceof EntityPlayer) {
             SkillList.combat.addXP((EntityPlayer) user, (int) (prevDam / 3F));
         }
@@ -804,7 +805,7 @@ public class CombatMechanics {
                 return false;
             }
         } else {
-            if (MineFantasyII.random.nextInt(10) != 0)// Mobs can evade
+            if (random.nextInt(10) != 0)// Mobs can evade
             {
                 return false;
             }

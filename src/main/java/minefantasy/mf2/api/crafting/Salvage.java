@@ -12,12 +12,11 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class Salvage {
-    private static XSTRandom random = new XSTRandom();
     public static HashMap<String, Object[]> salvageList = new HashMap<String, Object[]>();
     public static HashMap<String, Item> sharedSalvage = new HashMap<String, Item>();
+    private static XSTRandom random = new XSTRandom();
 
     public static void shareSalvage(Item item1, Item item2) {
         sharedSalvage.put(CustomToolHelper.getSimpleReferenceName(item1), item2);

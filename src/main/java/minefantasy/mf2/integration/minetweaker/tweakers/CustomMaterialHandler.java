@@ -52,13 +52,13 @@ public class CustomMaterialHandler {
 
         @Override
         public boolean canUndo() {
-            return true;
+            return false;
         }
 
         @Override
         public void undo() {
-            CustomMaterial.materialList.remove(this.name);
-            CustomMaterial.getList(this.type).remove(this.material);
+            /*CustomMaterial.materialList.remove(this.name);
+            CustomMaterial.getList(this.type).remove(this.material);*/
         }
 
         @Override
@@ -68,7 +68,8 @@ public class CustomMaterialHandler {
 
         @Override
         public String describeUndo() {
-            return "Removing custom material";
+            /*return "Removing custom material";*/
+            return null;
         }
 
         @Override

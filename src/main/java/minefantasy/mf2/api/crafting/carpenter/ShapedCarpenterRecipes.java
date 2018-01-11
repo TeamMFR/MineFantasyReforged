@@ -17,7 +17,7 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe {
      */
     public final int blockTier;
     public final int recipeTime;
-    public final float recipeExperiance;
+    public final float recipeExperience;
     public final String toolType;
     public final String soundOfCraft;
     public final String research;
@@ -50,7 +50,7 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe {
         this.recipeOutput = output;
         this.recipeTime = time;
         this.recipeHammer = hammer;
-        this.recipeExperiance = exp;
+        this.recipeExperience = exp;
         this.toolType = toolType;
         this.soundOfCraft = sound;
         this.skillUsed = skill;
@@ -68,7 +68,7 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe {
 
     @Override
     public float getExperiance() {
-        return this.recipeExperiance;
+        return this.recipeExperience;
     }
 
     @Override

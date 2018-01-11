@@ -179,7 +179,7 @@ public class XSTRandom extends Random {
      *   } while (bits - val + (bound-1) < 0);
      *   return val;
      * }}</pre>
-     *
+     * <p>
      * <p>The hedge "approx
      * imately" is used in the foregoing description only because the next
      * method is only approximately an unbiased source of independently chosen

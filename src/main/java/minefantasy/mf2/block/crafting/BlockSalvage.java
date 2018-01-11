@@ -85,11 +85,11 @@ public class BlockSalvage extends Block {
         ItemStack held = user.getHeldItem();
         String toolType = ToolHelper.getCrafterTool(held);
 
-		/*
+        /*
          * Block above = world.getBlock(x, y+1, z); if(above != null) {
-		 * if(salvageBlock(world, user, above, x, y, z)) { world.setBlockToAir(x, y+1,
-		 * z); return true; } }
-		 */
+         * if(salvageBlock(world, user, above, x, y, z)) { world.setBlockToAir(x, y+1,
+         * z); return true; } }
+         */
 
         EntityItem drop = getDrop(world, x, y, z);
         if (drop != null && !user.isSwingInProgress) {
@@ -114,14 +114,14 @@ public class BlockSalvage extends Block {
         }
         return false;
     }
-	/*
-	 * private boolean salvageBlock(World world, EntityPlayer user, Block junk, int
-	 * x, int y, int z) { List<ItemStack> salvage = Salvage.salvageBlock(junk,
-	 * dropLevel);
-	 * 
-	 * if(salvage != null) { dropSalvage(world, x, y, z, salvage);
-	 * world.playAuxSFX(1021, x, y, z, 0); return true; } return false; }
-	 */
+    /*
+     * private boolean salvageBlock(World world, EntityPlayer user, Block junk, int
+     * x, int y, int z) { List<ItemStack> salvage = Salvage.salvageBlock(junk,
+     * dropLevel);
+     *
+     * if(salvage != null) { dropSalvage(world, x, y, z, salvage);
+     * world.playAuxSFX(1021, x, y, z, 0); return true; } return false; }
+     */
 
     private boolean salvageItem(World world, EntityPlayer user, ItemStack junk, int x, int y, int z) {
         float modifier = 0.5F;

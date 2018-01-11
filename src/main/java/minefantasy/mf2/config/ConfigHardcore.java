@@ -73,7 +73,7 @@ public class ConfigHardcore extends ConfigurationBaseMF {
                         "This will alter the stack size of animal meat drops, meaning they only drop 1 every time")
                 .getString());
         preventCook = Boolean.parseBoolean(
-                config.get(CATEGORY_FOOD, "Prevent furnace food", false, "Stop food from being cooked in a furnace")
+                config.get(CATEGORY_FOOD, "Prevent furnace food", false, "Stop food and ceramic from being cooked in a furnace")
                         .getString());
         HungerSystemMF.slowdownRate = Integer.parseInt(config.get(CATEGORY_FOOD, "Hunger slow rate", 3,
                 "how many added points per haunch is slows by. Default is 3: meaning it's takes 3 additional haunches to remove 1, meaning each haunch takes 4 times to be removed")

@@ -83,7 +83,7 @@ public class Alloy {
         return false;
     }
 
-    private boolean areBothCarbon(ItemStack item1, ItemStack item2) {
+    public boolean areBothCarbon(ItemStack item1, ItemStack item2) {
         return MineFantasyFuels.isCarbon(item1) && MineFantasyFuels.isCarbon(item2);
     }
 

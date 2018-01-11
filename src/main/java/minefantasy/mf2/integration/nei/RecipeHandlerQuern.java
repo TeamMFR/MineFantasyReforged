@@ -1,7 +1,6 @@
 package minefantasy.mf2.integration.nei;
 
 import codechicken.lib.gui.GuiDraw;
-import codechicken.nei.ItemList;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import minefantasy.mf2.api.crafting.refine.QuernRecipes;
@@ -10,8 +9,6 @@ import minefantasy.mf2.item.list.ComponentListMF;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
 
 public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
@@ -39,8 +36,8 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
     @Override
     public void loadCraftingRecipes(ItemStack result) {
-        for(QuernRecipes recipe : QuernRecipes.recipeList) {
-            if(CustomToolHelper.areEqual(recipe.result, result)) {
+        for (QuernRecipes recipe : QuernRecipes.recipeList) {
+            if (CustomToolHelper.areEqual(recipe.result, result)) {
                 CachedQuernRecipe cachedRecipe = new CachedQuernRecipe(recipe);
                 arecipes.add(cachedRecipe);
             }
@@ -83,7 +80,7 @@ public class RecipeHandlerQuern extends TemplateRecipeHandler {
 
         @Override
         public PositionedStack getOtherStack() {
-            if(consumePot) {
+            if (consumePot) {
                 return new PositionedStack(new ItemStack(ComponentListMF.clay_pot), 76, 32);
             }
             return null;

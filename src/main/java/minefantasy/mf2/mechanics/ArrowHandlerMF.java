@@ -60,10 +60,10 @@ public class ArrowHandlerMF {
             return;
         }
 
-		/*
+        /*
          * Checks over registered arrows and finds one to load The Quiver can be used to
-		 * determine this
-		 */
+         * determine this
+         */
         ItemStack arrowToFire = AmmoMechanicsMF.reloadBow(bow);
         if (arrowToFire != null) {
             user.setItemInUse(bow, bow.getMaxItemUseDuration());// Starts pullback
@@ -77,13 +77,13 @@ public class ArrowHandlerMF {
                 return;
             }
         }
-		/*
-		 * for(int a = 0; a < AmmoMechanicsMF.arrows.size(); a ++) { ItemStack arrow =
-		 * AmmoMechanicsMF.arrows.get(a); if(user.inventory.hasItemStack(arrow)) {
-		 * user.setItemInUse(bow, bow.getMaxItemUseDuration());//Starts pullback
-		 * loadArrow(user, bow, arrow);//adds the arrow to NBT for rendering and later
-		 * use event.setCanceled(true); return; } }
-		 */
+        /*
+         * for(int a = 0; a < AmmoMechanicsMF.arrows.size(); a ++) { ItemStack arrow =
+         * AmmoMechanicsMF.arrows.get(a); if(user.inventory.hasItemStack(arrow)) {
+         * user.setItemInUse(bow, bow.getMaxItemUseDuration());//Starts pullback
+         * loadArrow(user, bow, arrow);//adds the arrow to NBT for rendering and later
+         * use event.setCanceled(true); return; } }
+         */
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)

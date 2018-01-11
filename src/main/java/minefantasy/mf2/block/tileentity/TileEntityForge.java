@@ -560,14 +560,14 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
         return 0;
     }
 
-	/*
-	 * private void averageAllItems() { /* int temp = 0; int items = 0;
-	 * for(ItemStack item: inv) { if(item != null && item.getItem() instanceof
-	 * IHotItem) { ++items; temp += ItemHeated.getTemp(item); } } int average =
-	 * (int)((float)temp / items); for(ItemStack item: inv) { if(item != null &&
-	 * item.getItem() instanceof IHotItem) { ItemHeated.setTemp(item, average); } }
-	 * }
-	 */
+    /*
+     * private void averageAllItems() { /* int temp = 0; int items = 0;
+     * for(ItemStack item: inv) { if(item != null && item.getItem() instanceof
+     * IHotItem) { ++items; temp += ItemHeated.getTemp(item); } } int average =
+     * (int)((float)temp / items); for(ItemStack item: inv) { if(item != null &&
+     * item.getItem() instanceof IHotItem) { ItemHeated.setTemp(item, average); } }
+     * }
+     */
 
     public boolean hasBlockAbove() {
         if (worldObj == null)

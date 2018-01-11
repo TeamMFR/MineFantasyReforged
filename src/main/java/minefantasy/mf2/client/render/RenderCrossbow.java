@@ -251,11 +251,11 @@ public class RenderCrossbow implements IItemRenderer {
         float var11 = 0.3F;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         /*
-		 * GL11.glTranslatef(-var10, -var11, 0.0F); float var12 = 1.5F;
-		 * GL11.glScalef(var12, var12, var12); GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
-		 * GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F); GL11.glTranslatef(-0.9375F,
-		 * -0.0625F, 0.0F);
-		 */
+         * GL11.glTranslatef(-var10, -var11, 0.0F); float var12 = 1.5F;
+         * GL11.glScalef(var12, var12, var12); GL11.glRotatef(50.0F, 0.0F, 1.0F, 0.0F);
+         * GL11.glRotatef(335.0F, 0.0F, 0.0F, 1.0F); GL11.glTranslatef(-0.9375F,
+         * -0.0625F, 0.0F);
+         */
 
         GL11.glScalef(scale, scale, scale);
         ItemRenderer.renderItemIn2D(tessellator, x2, y1, x1, y2, (icon.getIconWidth()), (icon.getIconHeight()),

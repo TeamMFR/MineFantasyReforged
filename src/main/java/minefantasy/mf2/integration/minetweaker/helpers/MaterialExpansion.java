@@ -2,8 +2,14 @@ package minefantasy.mf2.integration.minetweaker.helpers;
 
 import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.material.CustomMaterial;
+import minefantasy.mf2.api.rpg.SkillList;
+import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mf2.knowledge.KnowledgeListMF;
 import minefantasy.mf2.material.MetalMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.NotNull;
+import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenExpansion;
 import stanhebben.zenscript.annotations.ZenMethod;
 
@@ -53,5 +59,19 @@ public class MaterialExpansion {
     @ZenMethod("modifyCraftTime")
     public static CustomMaterial modifyCraftTime(@NotNull CustomMaterial material, float time) {
         return material.modifyCraftTime(time);
+    }
+
+    @ZenMethod("initRecipes")
+    public static CustomMaterial initRecipes(@NotNull CustomMaterial material, @Optional String oreDictEntry) {
+        if (oreDictEntry == null) {
+            oreDictEntry = "ingot" + material.name;
+        }
+
+        ItemStack bar = ComponentListMF.bar.createComm(material.name);
+        for (ItemStack ingot : OreDictionary.getOres(oreDictEntry)) {
+            KnowledgeListMF.barR.add(MineFantasyAPI.addAnvilRecipe(SkillList.artisanry, bar, "", true, "hammer", -1, -1,
+                    (int) (material.craftTimeModifier / 2F), new Object[]{"I", 'I', ingot,}));
+        }
+        return material;
     }
 }

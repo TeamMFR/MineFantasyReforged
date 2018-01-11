@@ -8,22 +8,21 @@ import minetweaker.api.item.IItemStack;
 import minetweaker.api.minecraft.MineTweakerMC;
 import net.minecraft.item.ItemStack;
 
+import java.util.List;
+
 public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
 
-    private int hammer, anvil, /* craft, */
-            time, width, height;
+    private int hammer, anvil, time, recipeWidth, recipeHeight;
     private float exp;
     private IItemStack result;
-    private IIngredient[][] ingreds;
-    private Skill s;
+    private IIngredient[][] ingredients;
+    private Skill skill;
     private String research, tool;
     private boolean hot;
 
     public TweakedShapedAnvilRecipe(IIngredient[][] input, IItemStack output, String tool, int time, int hammer,
-                                    int anvil, float exp, boolean hot, String research, Skill s) {
-        this.height = 4;
-        this.width = 6;
-        this.ingreds = input;
+                                    int anvil, float exp, boolean hot, String research, Skill skill) {
+        this.ingredients = input;
         this.result = output;
         this.tool = tool;
         this.hammer = hammer;
@@ -31,8 +30,9 @@ public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
         this.exp = exp;
         this.hot = hot;
         this.research = research;
-        this.s = s;
+        this.skill = skill;
         this.time = time;
+        calculateRecipeSize();
     }
 
     @Override
@@ -67,7 +67,7 @@ public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
 
     @Override
     public int getRecipeSize() {
-        return this.width * this.height;
+        return this.recipeWidth * this.recipeHeight;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
 
     @Override
     public Skill getSkill() {
-        return this.s;
+        return this.skill;
     }
 
     @Override
@@ -86,34 +86,49 @@ public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
     }
 
     @Override
-    public boolean matches(AnvilCraftMatrix inv) {
-        boolean matches = true;
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 4; y++) {
-                if (!matches)
+    public boolean matches(AnvilCraftMatrix matrix) {
+        for (int x = 0; x <= this.recipeWidth; ++x) {
+            for (int y = 0; y <= this.recipeHeight; ++y) {
+                ItemStack inputItem = matrix.getStackInRowAndColumn(x, y);
+                /*if(x >= this.recipeWidth || y >= this.recipeHeight) {
                     return false;
-                ItemStack stack = inv.getStackInRowAndColumn(x, y);
+                }*/
 
-                // int a = y + x * 4;
-                if (stack == null && this.ingreds[y][x] == null) {
-                    continue;
+                if (inputItem == null && ingredients[x][y] != null || inputItem != null && ingredients[x][y] == null) {
+                    return false;
                 }
-                boolean hasMatch = false;
-                if (stack != null && this.ingreds[y][x] != null) {
-                    for (IItemStack i : this.ingreds[y][x].getItems()) {
-                        ItemStack ingred = MineTweakerMC.getItemStack(i);
-                        if (stack.getItem() == ingred.getItem() && stack.getItemDamage() == stack.getItemDamage()) {
-                            hasMatch = true;
-                        }
-                    }
-                } else {
-                    matches = false;
+
+                IIngredient recipeStack = ingredients[x][y];
+
+                if (!isInList(inputItem, ingredients[x][y].getItems())) {
+                    return false;
                 }
-                if (!hasMatch)
-                    matches = false;
             }
         }
-        return matches;
+
+        return true;
+    }
+
+    private boolean isInList(ItemStack inputStack, List<IItemStack> items) {
+        for (IItemStack i : items) {
+            ItemStack recipeStack = MineTweakerMC.getItemStack(i);
+            if (inputStack.getItem() == recipeStack.getItem() && inputStack.getItemDamage() == recipeStack.getItemDamage()) {
+                /*if (!CustomToolHelper.doesMatchForRecipe(inputStack, recipeStack)) {
+                    return false;
+                }*/
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void calculateRecipeSize() {
+        this.recipeHeight = this.ingredients.length;
+        for (int x = 0; x < this.recipeHeight; x++) {
+            if (this.ingredients[x] != null && this.ingredients[x].length > this.recipeWidth) {
+                this.recipeWidth = this.ingredients[x].length;
+            }
+        }
     }
 
     @Override
@@ -123,7 +138,6 @@ public class TweakedShapedAnvilRecipe implements IAnvilRecipe {
 
     @Override
     public boolean useCustomTiers() {
-        // TODO Auto-generated method stub
         return false;
     }
 

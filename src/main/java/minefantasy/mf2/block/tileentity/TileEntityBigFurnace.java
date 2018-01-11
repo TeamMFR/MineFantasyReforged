@@ -398,11 +398,11 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
     public ItemStack getSpecialResult() {
         return null;
         /*
-		 * ItemStack[] input = new ItemStack[4]; for(int a = 0; a < 4; a ++) { input[a]
-		 * = inv[a]; } Alloy alloy = SpecialFurnaceRecipes.getResult(input); if(alloy !=
-		 * null) { if(alloy.getLevel() <= getSmeltLevel()) { return
-		 * SpecialFurnaceRecipes.getResult(input).getRecipeOutput(); } } return null;
-		 */
+         * ItemStack[] input = new ItemStack[4]; for(int a = 0; a < 4; a ++) { input[a]
+         * = inv[a]; } Alloy alloy = SpecialFurnaceRecipes.getResult(input); if(alloy !=
+         * null) { if(alloy.getLevel() <= getSmeltLevel()) { return
+         * SpecialFurnaceRecipes.getResult(input).getRecipeOutput(); } } return null;
+         */
     }
 
     public int getSizeInventory() {
@@ -624,12 +624,12 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
         }
     }
 
-	/*
-	 * @Override public void recievePacket(ByteArrayDataInput data) { fuel =
-	 * data.readInt(); progress = data.readInt(); direction = data.readInt(); heat =
-	 * data.readInt(); int burn = data.readInt(); isBurningClient = burn == 1;
-	 * justShared = data.readInt(); doorAngle = data.readInt(); }
-	 */
+    /*
+     * @Override public void recievePacket(ByteArrayDataInput data) { fuel =
+     * data.readInt(); progress = data.readInt(); direction = data.readInt(); heat =
+     * data.readInt(); int burn = data.readInt(); isBurningClient = burn == 1;
+     * justShared = data.readInt(); doorAngle = data.readInt(); }
+     */
 
     public int getBlockMetadata() {
         if (worldObj == null)

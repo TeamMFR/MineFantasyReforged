@@ -3,7 +3,6 @@ package minefantasy.mf2.mechanics;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.archery.IFirearm;
 import minefantasy.mf2.api.heating.IHotItem;
@@ -23,6 +22,7 @@ import minefantasy.mf2.item.gadget.ItemCrossbow;
 import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,6 +37,8 @@ public class PlayerTickHandlerMF {
     private static String stepNBT = "MF_LastStep";
     private static String chunkCoords = "MF_BedPos";
     private static String resetBed = "MF_Resetbed";
+
+    private static XSTRandom random = new XSTRandom();
 
     public static void spawnDragon(EntityPlayer player) {
         spawnDragon(player, 64);
@@ -92,38 +94,38 @@ public class PlayerTickHandlerMF {
             return 0;// Young 100%
         }
         if (kills < 10) {
-            if (MineFantasyII.random.nextInt(5) == 0)
+            if (random.nextInt(5) == 0)
                 return 0;// 20% chance for Young
             return 1;// Adult
         }
         if (kills < 15) {
-            if (MineFantasyII.random.nextInt(10) == 0)
+            if (random.nextInt(10) == 0)
                 return 0;// 10% chance for Young
             return 1;// Adult
         }
         if (kills < 25) {
-            if (MineFantasyII.random.nextInt(20) == 0)
+            if (random.nextInt(20) == 0)
                 return 0;// 5% chance for Young
-            if (MineFantasyII.random.nextInt(10) == 0)
+            if (random.nextInt(10) == 0)
                 return 2;// 10% chance for Mature
             return 1;// Adult
         }
         if (kills < 35) {
-            if (MineFantasyII.random.nextInt(4) == 0)
+            if (random.nextInt(4) == 0)
                 return 2;// 25% chance for Mature
             return 1;// Adult
         }
         if (kills >= 50) {
-            if (MineFantasyII.random.nextInt(10) == 0)
+            if (random.nextInt(10) == 0)
                 return 1;// 10% chance for Adult
-            if (MineFantasyII.random.nextInt(5) == 0)
+            if (random.nextInt(5) == 0)
                 return 3;// 20% chance Elder
             return 2;// Mature
         }
         if (kills > 75) {
-            if (MineFantasyII.random.nextInt(100) == 0)
+            if (random.nextInt(100) == 0)
                 return 4;// 1% chance Ancient
-            if (MineFantasyII.random.nextInt(2) == 0)
+            if (random.nextInt(2) == 0)
                 return 3;// 50% chance Elder
             return 2;// Mature
         }
@@ -196,13 +198,13 @@ public class PlayerTickHandlerMF {
                 }
             }
             /*
-			 * if(RPGElements.isSystemActive) { if(event.player.isSprinting() &&
-			 * event.player.ticksExisted % 10 == 0) {
-			 * SkillList.athletics.addXP(event.player, 1); } else
-			 * if(event.player.isSneaking() && TacticalManager.isEntityMoving(event.player)
-			 * && event.player.ticksExisted % 10 == 0) { SkillList.sneak.addXP(event.player,
-			 * 1); } }
-			 */
+             * if(RPGElements.isSystemActive) { if(event.player.isSprinting() &&
+             * event.player.ticksExisted % 10 == 0) {
+             * SkillList.athletics.addXP(event.player, 1); } else
+             * if(event.player.isSneaking() && TacticalManager.isEntityMoving(event.player)
+             * && event.player.ticksExisted % 10 == 0) { SkillList.sneak.addXP(event.player,
+             * 1); } }
+             */
             // DRAGON EVENT
             if (!event.player.worldObj.isRemote) {
                 tickDragonSpawner(event.player);
@@ -298,7 +300,7 @@ public class PlayerTickHandlerMF {
                 chance *= 2;// twice the chance
             }
             if (!player.worldObj.isRemote && player.worldObj.getTotalWorldTime() % i == 0
-                    && MineFantasyII.random.nextFloat() * 100F < chance) {
+                    && random.nextFloat() * 100F < chance) {
                 spawnDragon(player);
             }
         }

@@ -45,12 +45,12 @@ public class CarpenterRecipes {
 
     public static void init() {
         /*
-		 * ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood"); Iterator
-		 * iteratorWood = wood.iterator(); while(iteratorWood.hasNext()) {
-		 * CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
-		 * 
-		 * }
-		 */
+         * ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood"); Iterator
+         * iteratorWood = wood.iterator(); while(iteratorWood.hasNext()) {
+         * CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
+         *
+         * }
+         */
         assembleWoodBasic();
         CustomWoodRecipes.init();
         addDusts();

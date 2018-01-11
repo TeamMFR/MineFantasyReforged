@@ -1,12 +1,12 @@
 package minefantasy.mf2.mechanics;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import minefantasy.mf2.MineFantasyII;
 import minefantasy.mf2.api.material.CustomMaterial;
 import minefantasy.mf2.config.ConfigHardcore;
 import minefantasy.mf2.item.list.CustomArmourListMF;
 import minefantasy.mf2.item.list.CustomToolListMF;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.*;
@@ -21,14 +21,16 @@ public class MonsterUpgrader {
     private static final float creeperJockeyChance = 60F;
     private static final float witchRiderChance = 100F;
 
+    private static XSTRandom random = new XSTRandom();
+
     public void upgradeMob(EntityLivingBase mob) {
         int diff = mob.worldObj.difficultySetting.getDifficultyId();
 
         if (ConfigHardcore.upgradeZombieWep) {
             if (mob instanceof EntitySkeleton) {
                 if (((EntitySkeleton) mob).getSkeletonType() == 1) {
-                    giveEntityWeapon(mob, "Diamond", MineFantasyII.random.nextInt(8));
-                } else if (CombatMechanics.swordSkeleton && MineFantasyII.random.nextInt(3) == 0) {
+                    giveEntityWeapon(mob, "Diamond", random.nextInt(8));
+                } else if (CombatMechanics.swordSkeleton && random.nextInt(3) == 0) {
                     mob.setCurrentItemOrArmor(0, CustomToolListMF.standard_sword.construct("Bronze", "OakWood"));
                     ((EntitySkeleton) mob).setCombatTask();
                 }
@@ -36,7 +38,7 @@ public class MonsterUpgrader {
                 String tier = "Iron";
                 if (mob instanceof EntityPigZombie) {
                     tier = "Obsidian";
-                    giveEntityWeapon(mob, tier, MineFantasyII.random.nextInt(7));
+                    giveEntityWeapon(mob, tier, random.nextInt(7));
                     if (mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null) {
                         mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
                     }
@@ -49,18 +51,18 @@ public class MonsterUpgrader {
                     } else {
                         float mod = diff >= 2 ? ConfigHardcore.zombieWepChance * 2
                                 : diff < 1 ? ConfigHardcore.zombieWepChance / 2 : ConfigHardcore.zombieWepChance;
-                        float chance = MineFantasyII.random.nextFloat() * 100F * mod;
+                        float chance = random.nextFloat() * 100F * mod;
                         if (chance >= (100F - zombieWepChance)) {
-                            giveEntityWeapon(mob, tier, MineFantasyII.random.nextInt(5));
+                            giveEntityWeapon(mob, tier, random.nextInt(5));
                             if (mob.getEntityAttribute(SharedMonsterAttributes.attackDamage) != null) {
                                 mob.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0F);
                             }
                         }
                     }
                 }
-                if (MineFantasyII.random.nextFloat() * (zombieKnightChance) < diff) {
+                if (random.nextFloat() * (zombieKnightChance) < diff) {
                     createZombieKnight((EntityZombie) mob);
-                } else if (MineFantasyII.random.nextFloat() * (zombieBruteChance) < diff) {
+                } else if (random.nextFloat() * (zombieBruteChance) < diff) {
                     createZombieBrute((EntityZombie) mob);
                 } else if (ConfigHardcore.fastZombies) {
                     mob.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3F);
@@ -68,12 +70,12 @@ public class MonsterUpgrader {
             }
         } else if (mob instanceof EntitySpider) {
             if (mob.riddenByEntity == null) {
-                if (MineFantasyII.random.nextFloat() * (witchRiderChance) < diff) {
+                if (random.nextFloat() * (witchRiderChance) < diff) {
                     EntityWitch rider = new EntityWitch(mob.worldObj);
                     rider.setPosition(mob.posX, mob.posY, mob.posZ);
                     mob.worldObj.spawnEntityInWorld(rider);
                     rider.mountEntity(mob);
-                } else if (MineFantasyII.random.nextFloat() * (creeperJockeyChance) < diff) {
+                } else if (random.nextFloat() * (creeperJockeyChance) < diff) {
                     EntityCreeper rider = new EntityCreeper(mob.worldObj);
                     rider.setPosition(mob.posX, mob.posY, mob.posZ);
                     mob.worldObj.spawnEntityInWorld(rider);

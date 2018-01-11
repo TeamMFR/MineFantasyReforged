@@ -1,6 +1,5 @@
 package minefantasy.mf2.integration.minetweaker.helpers;
 
-import minefantasy.mf2.api.crafting.MineFantasyFuels;
 import minefantasy.mf2.api.refine.Alloy;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
@@ -55,10 +54,6 @@ public class TweakedAlloyRecipe extends Alloy {
                 empty = false;
         }
         return empty;
-    }
-
-    private boolean areBothCarbon(ItemStack item1, ItemStack item2) {
-        return MineFantasyFuels.isCarbon(item1) && MineFantasyFuels.isCarbon(item2);
     }
 
 }

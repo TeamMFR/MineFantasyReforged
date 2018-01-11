@@ -361,10 +361,10 @@ public class MineFantasyHUD extends Gui {
             this.drawTexturedModalRect(xPos, yPos, 0, 10, 81, 5);
         }
         /*
-		 * else if(StaminaBar.getBonusStaminaRegenTicks(player) > 0 &&
-		 * player.ticksExisted % 10 < 5) { this.drawTexturedModalRect(xPos, yPos, 0, 15,
-		 * 81, 5); }
-		 */
+         * else if(StaminaBar.getBonusStaminaRegenTicks(player) > 0 &&
+         * player.ticksExisted % 10 < 5) { this.drawTexturedModalRect(xPos, yPos, 0, 15,
+         * 81, 5); }
+         */
 
         String stamTxt = (int) staminaAt + " / " + (int) staminaMax;
         boolean bonus = StaminaBar.getBonusStamina(player) > 0;

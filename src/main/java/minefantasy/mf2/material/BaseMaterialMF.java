@@ -32,13 +32,13 @@ public class BaseMaterialMF {
     public static BaseMaterialMF cogworks, compositeAlloy;// Engineer
     private static float ACrounding = 10F; // round to nearest 10
     /*
-	 * WOOD(0, 59, 2.0F, 0.0F, 15), STONE(1, 131, 4.0F, 1.0F, 5), IRON(2, 250, 6.0F,
-	 * 2.0F, 14), EMERALD(3, 1561, 8.0F, 3.0F, 10), GOLD(0, 32, 12.0F, 0.0F, 22);
-	 * 
-	 * To get variables: X = sword damage, Y = Armour Ratio(+1 of value), Z = Damage
-	 * 
-	 * X = Z * Y Y = X / Z Z = X / Y
-	 */
+     * WOOD(0, 59, 2.0F, 0.0F, 15), STONE(1, 131, 4.0F, 1.0F, 5), IRON(2, 250, 6.0F,
+     * 2.0F, 14), EMERALD(3, 1561, 8.0F, 3.0F, 10), GOLD(0, 32, 12.0F, 0.0F, 22);
+     *
+     * To get variables: X = sword damage, Y = Armour Ratio(+1 of value), Z = Damage
+     *
+     * X = Z * Y Y = X / Z Z = X / Y
+     */
     // Rounding off to nearest 0.5 makes about an 0.03 difference, but the AR is
     // cleaner
     // Hardness isn't added, it calculats armour itself to match sharpness
@@ -93,6 +93,7 @@ public class BaseMaterialMF {
     // SPECIALS
     private ArmourMaterialMF armourConversion;
     private ToolMaterial toolConversion;
+
     public BaseMaterialMF(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness,
                           int enchantment, float weight, int lvl) {
         this.requiredLevel = lvl;

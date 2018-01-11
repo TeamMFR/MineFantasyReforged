@@ -138,10 +138,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         fuel = MathHelper.clamp_float(fuel, 0F, maxfuel);
         setFuel(fuel);
 
-		/*
+        /*
          * if(isSprinting()) { if(riddenByEntity == null || this.getMoveForward() <= 0
-		 * || !isPowered()) { setSprinting(false); } }
-		 */
+         * || !isPowered()) { setSprinting(false); } }
+         */
         if (this.riddenByEntity != null) {
             stepHeight = general_step_height;
             updateRider();

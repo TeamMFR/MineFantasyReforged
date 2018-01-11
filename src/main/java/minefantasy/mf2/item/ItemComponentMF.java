@@ -35,22 +35,23 @@ public class ItemComponentMF extends Item implements ITieredComponent {
     protected String blocktex;
     protected String storageType;
 
-	/*
+    /*
      * private int itemRarity;
-	 * 
-	 * @Override public EnumRarity getRarity(ItemStack item) { int lvl =
-	 * itemRarity+1;
-	 * 
-	 * if(item.isItemEnchanted()) { if(lvl == 0) { lvl++; } lvl ++; } if(lvl >=
-	 * ToolListMF.rarity.length) { lvl = ToolListMF.rarity.length-1; } return
-	 * ToolListMF.rarity[lvl]; }
-	 */
+     *
+     * @Override public EnumRarity getRarity(ItemStack item) { int lvl =
+     * itemRarity+1;
+     *
+     * if(item.isItemEnchanted()) { if(lvl == 0) { lvl++; } lvl ++; } if(lvl >=
+     * ToolListMF.rarity.length) { lvl = ToolListMF.rarity.length-1; } return
+     * ToolListMF.rarity[lvl]; }
+     */
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
     private float unitCount = 1;
     private IIcon componentTex = null;
     private String materialType = null;
+
     public ItemComponentMF(int rarity) {
         itemRarity = rarity;
     }

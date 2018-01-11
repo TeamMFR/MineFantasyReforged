@@ -581,9 +581,9 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
     private int getAttackSpeed() {
         return 0;
         /*
-		 * if(rage >= 100) { return 10; } if(rage > 80) { return 15; } if(rage > 50) {
-		 * return 20; } if(rage > 25) { return 30; } return 35;
-		 */
+         * if(rage >= 100) { return 10; } if(rage > 80) { return 15; } if(rage > 50) {
+         * return 20; } if(rage > 25) { return 30; } return 35;
+         */
     }
 
     @Override

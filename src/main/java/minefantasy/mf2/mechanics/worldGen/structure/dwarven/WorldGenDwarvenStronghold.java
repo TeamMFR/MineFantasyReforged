@@ -28,11 +28,11 @@ public class WorldGenDwarvenStronghold extends WorldGenStructureBase {
     protected StructureModuleMF getStartPiece(World world, int x, int y, int z, int direction) {
         return new StructureGenDSEntry(world, x, y - 1, z, direction, isSurfaceBuild);
         /*
-		 * if(startPiece == null) { startPiece = new StructureGenDSEntry(world, x, y-1,
-		 * z, direction, isSurfaceBuild); } startPiece.direction = direction; return
-		 * startPiece;
-		 *
-		 */
+         * if(startPiece == null) { startPiece = new StructureGenDSEntry(world, x, y-1,
+         * z, direction, isSurfaceBuild); } startPiece.direction = direction; return
+         * startPiece;
+         *
+         */
     }
 
     @Override

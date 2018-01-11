@@ -32,7 +32,7 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
         this.hot = hot;
         this.research = research;
         this.s = s;
-        this.time = 1;
+        this.time = time;
     }
 
     @Override

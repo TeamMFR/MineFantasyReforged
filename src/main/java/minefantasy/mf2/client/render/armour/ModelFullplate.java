@@ -45,11 +45,11 @@ public class ModelFullplate extends ModelBiped {
         armetface.setRotationPoint(0F, -1F, -5F);
         setRotation(armetface, 0F, 0.7853982F, 0F);
 
-		/*
+        /*
          * armetface = new ModelRenderer(this, 20, 32); armetface.addBox(-2.5F, -2.5F,
-		 * -2.6F, 5, 4, 5); armetface.setRotationPoint(0F, -0.5F, -4F);
-		 * setRotation(armetface, 0.2617994F, 0.7853982F, 0.2617994F);
-		 */
+         * -2.6F, 5, 4, 5); armetface.setRotationPoint(0F, -0.5F, -4F);
+         * setRotation(armetface, 0.2617994F, 0.7853982F, 0.2617994F);
+         */
 
         bascinetface = new ModelRenderer(this, 0, 54);
         bascinetface.addBox(-2.5F, -5F, -7F, 5, 4, 3);

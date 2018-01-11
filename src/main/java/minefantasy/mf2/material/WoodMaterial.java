@@ -65,31 +65,31 @@ public class WoodMaterial extends CustomMaterial {
         getOrAddWood("SilverwoodWood", 2, 1.00F, 3.50F, 2.20F, 75F, 0.8F, 224, 220, 208).setCrafterTiers(2);
         getOrAddWood("GreatwoodWood", 2, 1.20F, 1.50F, 1.00F, 50F, 1.5F, 37, 25, 23).setCrafterTiers(2);
         /*
-		 * //OTHERS. playing around with, mainly forestry getOrAddWood("PineWood", 0, 1,
-		 * 1, 1, 1, 1, 1, 189, 147, 63); getOrAddWood("CherryWood", 0, 1, 1, 1, 1, 1, 1,
-		 * 162, 116, 47); getOrAddWood("PapayaWood", 0, 1, 1, 1, 1, 1, 1, 214, 194, 91);
-		 * getOrAddWood("CitrusWood", 0, 1, 1, 1, 1, 1, 1, 142, 153, 27);
-		 * getOrAddWood("PoplarWood", 0, 1, 1, 1, 1, 1, 1, 198, 198, 107);
-		 * getOrAddWood("MapleWood", 0, 1, 1, 1, 1, 1, 1, 158, 99, 39);
-		 * getOrAddWood("MahoeWood", 0, 1, 1, 1, 1, 1, 1, 111, 138, 158);
-		 * getOrAddWood("GreenheartWood", 0, 1, 1, 1, 1, 1, 1, 65, 103, 77);
-		 * getOrAddWood("PalmWood", 0, 1, 1, 1, 1, 1, 1, 195, 114, 56);
-		 * getOrAddWood("LimeWood", 0, 1, 1, 1, 1, 1, 1, 190, 147, 96);
-		 * getOrAddWood("BalsaWood", 0, 1, 1, 1, 1, 1, 1, 159, 152, 143);
-		 * getOrAddWood("WalnutWood", 0, 1, 1, 1, 1, 1, 1, 85, 69, 55);
-		 * getOrAddWood("KapokWood", 0, 1, 1, 1, 1, 1, 1, 99, 95, 45);
-		 * getOrAddWood("ChestnutWood", 0, 1, 1, 1, 1, 1, 1, 156, 147, 74);
-		 * getOrAddWood("BaobabWood", 0, 1, 1, 1, 1, 1, 1, 116, 126, 84);
-		 * getOrAddWood("LarchWood", 0, 1, 1, 1, 1, 1, 1, 200, 143, 122);
-		 * getOrAddWood("WillowWood", 0, 1, 1, 1, 1, 1, 1, 149, 152, 74);
-		 * getOrAddWood("TeakWood", 0, 1, 1, 1, 1, 1, 1, 111, 107, 91);
-		 * getOrAddWood("SequoiaWood", 0, 1, 1, 1, 1, 1, 1, 123, 81, 75);
-		 * getOrAddWood("MahoganyWood", 0, 1, 1, 1, 1, 1, 1, 95, 56, 49);
-		 * getOrAddWood("WengeWood", 0, 1, 1, 1, 1, 1, 1, 76, 72, 62);
-		 * getOrAddWood("RedwoodWood", 0, 1, 1, 1, 1, 1, 1, 148, 104, 55);
-		 * getOrAddWood("FirWood", 0, 1, 1, 1, 1, 1, 1, 114, 111, 63);
-		 * getOrAddWood("PurpleHeartWood", 0, 1, 1, 1, 1, 1, 1, 55, 25, 49);
-		 */
+         * //OTHERS. playing around with, mainly forestry getOrAddWood("PineWood", 0, 1,
+         * 1, 1, 1, 1, 1, 189, 147, 63); getOrAddWood("CherryWood", 0, 1, 1, 1, 1, 1, 1,
+         * 162, 116, 47); getOrAddWood("PapayaWood", 0, 1, 1, 1, 1, 1, 1, 214, 194, 91);
+         * getOrAddWood("CitrusWood", 0, 1, 1, 1, 1, 1, 1, 142, 153, 27);
+         * getOrAddWood("PoplarWood", 0, 1, 1, 1, 1, 1, 1, 198, 198, 107);
+         * getOrAddWood("MapleWood", 0, 1, 1, 1, 1, 1, 1, 158, 99, 39);
+         * getOrAddWood("MahoeWood", 0, 1, 1, 1, 1, 1, 1, 111, 138, 158);
+         * getOrAddWood("GreenheartWood", 0, 1, 1, 1, 1, 1, 1, 65, 103, 77);
+         * getOrAddWood("PalmWood", 0, 1, 1, 1, 1, 1, 1, 195, 114, 56);
+         * getOrAddWood("LimeWood", 0, 1, 1, 1, 1, 1, 1, 190, 147, 96);
+         * getOrAddWood("BalsaWood", 0, 1, 1, 1, 1, 1, 1, 159, 152, 143);
+         * getOrAddWood("WalnutWood", 0, 1, 1, 1, 1, 1, 1, 85, 69, 55);
+         * getOrAddWood("KapokWood", 0, 1, 1, 1, 1, 1, 1, 99, 95, 45);
+         * getOrAddWood("ChestnutWood", 0, 1, 1, 1, 1, 1, 1, 156, 147, 74);
+         * getOrAddWood("BaobabWood", 0, 1, 1, 1, 1, 1, 1, 116, 126, 84);
+         * getOrAddWood("LarchWood", 0, 1, 1, 1, 1, 1, 1, 200, 143, 122);
+         * getOrAddWood("WillowWood", 0, 1, 1, 1, 1, 1, 1, 149, 152, 74);
+         * getOrAddWood("TeakWood", 0, 1, 1, 1, 1, 1, 1, 111, 107, 91);
+         * getOrAddWood("SequoiaWood", 0, 1, 1, 1, 1, 1, 1, 123, 81, 75);
+         * getOrAddWood("MahoganyWood", 0, 1, 1, 1, 1, 1, 1, 95, 56, 49);
+         * getOrAddWood("WengeWood", 0, 1, 1, 1, 1, 1, 1, 76, 72, 62);
+         * getOrAddWood("RedwoodWood", 0, 1, 1, 1, 1, 1, 1, 148, 104, 55);
+         * getOrAddWood("FirWood", 0, 1, 1, 1, 1, 1, 1, 114, 111, 63);
+         * getOrAddWood("PurpleHeartWood", 0, 1, 1, 1, 1, 1, 1, 55, 25, 49);
+         */
 
     }
 

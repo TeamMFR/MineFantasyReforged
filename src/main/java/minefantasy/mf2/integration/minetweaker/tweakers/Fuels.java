@@ -1,7 +1,6 @@
 package minefantasy.mf2.integration.minetweaker.tweakers;
 
 import minetweaker.api.item.IItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 

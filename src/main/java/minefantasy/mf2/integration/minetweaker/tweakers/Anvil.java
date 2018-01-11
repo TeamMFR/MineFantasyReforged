@@ -34,7 +34,7 @@ public class Anvil {
 
     public static class AnvilAction implements IUndoableAction {
 
-        IItemStack out;
+        IItemStack output;
         Skill s;
         String research, tool;
         boolean hot;
@@ -43,14 +43,11 @@ public class Anvil {
         IIngredient[][] ingreds;
         IIngredient[] ingreds2;
         boolean shaped;
-        IAnvilRecipe r;
-
-        // private static final char[] chars =
-        // {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        IAnvilRecipe recipe;
 
         public AnvilAction(IItemStack out, Skill s, String research, boolean hot, float exp, String tool, int hammer,
                            int anvil, int time, IIngredient[][] ingreds) {
-            this.out = out;
+            this.output = out;
             this.s = s;
             this.research = research;
             this.tool = tool;
@@ -61,12 +58,12 @@ public class Anvil {
             this.time = time;
             this.ingreds = ingreds;
             this.shaped = true;
-            r = new TweakedShapedAnvilRecipe(ingreds, out, tool, time, hammer, anvil, exp, hot, research, s);
+            recipe = new TweakedShapedAnvilRecipe(ingreds, out, tool, time, hammer, anvil, exp, hot, research, s);
         }
 
         public AnvilAction(IItemStack out, Skill s, String research, boolean hot, float exp, String tool, int hammer,
                            int anvil, int time, IIngredient[] ingreds) {
-            this.out = out;
+            this.output = out;
             this.s = s;
             this.research = research;
             this.tool = tool;
@@ -77,17 +74,17 @@ public class Anvil {
             this.time = time;
             this.ingreds2 = ingreds;
             this.shaped = false;
-            r = new TweakedShapelessAnvilRecipe(ingreds2, out, tool, time, hammer, anvil, exp, hot, research, s);
+            recipe = new TweakedShapelessAnvilRecipe(ingreds2, out, tool, time, hammer, anvil, exp, hot, research, s);
         }
 
         @Override
         public void apply() {
-            CraftingManagerAnvil.getInstance().recipes.add(r);
+            CraftingManagerAnvil.getInstance().recipes.add(recipe);
         }
 
         @Override
         public String describe() {
-            return "Adding a " + (hot ? "hot" : "") + " Anvil Recipe resulting in " + MineTweakerMC.getItemStack(out);
+            return "Adding a " + (hot ? "hot" : "") + " Anvil Recipe resulting in " + MineTweakerMC.getItemStack(output);
         }
 
         @Override
@@ -107,7 +104,7 @@ public class Anvil {
 
         @Override
         public void undo() {
-            CraftingManagerAnvil.getInstance().recipes.remove(r);
+            CraftingManagerAnvil.getInstance().recipes.remove(recipe);
         }
     }
 }

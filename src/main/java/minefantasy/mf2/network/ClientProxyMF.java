@@ -30,9 +30,7 @@ import minefantasy.mf2.item.list.styles.OrnateStyle;
 import minefantasy.mf2.mechanics.ExtendedReachMF;
 import minefantasy.mf2.mechanics.PlayerTickHandlerMF;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelHorse;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -65,12 +63,12 @@ public class ClientProxyMF extends CommonProxyMF {
     @Override
     public void registerMain() {
         super.registerMain();
+        registerRenders();
     }
 
     @Override
     public void postInit() {
         super.postInit();
-        registerRenders();
         MineFantasyAPI.init();
         KnowledgePageRegistry.registerPages();
     }
@@ -142,7 +140,6 @@ public class ClientProxyMF extends CommonProxyMF {
         RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class,
                 new RenderMinotaur(new ModelMinotaur(), 1.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
-        RenderingRegistry.registerEntityRenderingHandler(EntityHorse.class, new RenderVanillaHorse(new ModelHorse(), 0.75F));
     }
 
     @Override

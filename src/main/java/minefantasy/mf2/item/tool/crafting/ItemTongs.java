@@ -196,14 +196,14 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs {
         return detailTex != null ? detailTex : super.getIcon(stack, pass);
     }
     /*
-	 * @Override
-	 * 
-	 * @SideOnly(Side.CLIENT) public IIcon getIcon(ItemStack stack, int renderPass)
-	 * { ItemStack item = TongsHelper.getHeldItem(stack);
-	 * 
-	 * if (renderPass == 0 && item != null) { return item.getItem().getIcon(item,
-	 * renderPass); } return itemIcon; }
-	 */
+     * @Override
+     *
+     * @SideOnly(Side.CLIENT) public IIcon getIcon(ItemStack stack, int renderPass)
+     * { ItemStack item = TongsHelper.getHeldItem(stack);
+     *
+     * if (renderPass == 0 && item != null) { return item.getItem().getIcon(item,
+     * renderPass); } return itemIcon; }
+     */
 
     @Override
     public int getRenderPasses(int metadata) {

@@ -19,7 +19,6 @@ import minefantasy.mf2.api.stamina.StaminaBar;
 import minefantasy.mf2.api.tool.IHuntingItem;
 import minefantasy.mf2.api.tool.ISmithTongs;
 import minefantasy.mf2.api.weapon.WeaponClass;
-import minefantasy.mf2.asm.ASMHelper;
 import minefantasy.mf2.client.render.RenderPowerArmour;
 import minefantasy.mf2.config.ConfigExperiment;
 import minefantasy.mf2.config.ConfigHardcore;
@@ -29,7 +28,6 @@ import minefantasy.mf2.entity.EntityItemUnbreakable;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.farming.FarmingHelper;
 import minefantasy.mf2.item.ClientItemsMF;
-import minefantasy.mf2.item.armour.ItemHorseArmorMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
 import minefantasy.mf2.item.list.ToolListMF;
@@ -37,6 +35,7 @@ import minefantasy.mf2.item.weapon.ItemWeaponMF;
 import minefantasy.mf2.network.packet.LevelupPacket;
 import minefantasy.mf2.network.packet.SkillPacket;
 import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeavesBase;
 import net.minecraft.client.Minecraft;
@@ -83,6 +82,8 @@ public class EventManagerMF {
     public static final String hitspeedNBT = "MF_HitCooldown";
     public static final String injuredNBT = "MF_Injured";
     public static boolean displayOreDict = false;
+
+    private static XSTRandom random = new XSTRandom();
 
     public static void addArmourDT(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
         list.add("");
@@ -210,7 +211,7 @@ public class EventManagerMF {
         EntityLivingBase dropper = event.entityLiving;
 
         if (dropper instanceof EntityChicken) {
-            int dropCount = 1 + MineFantasyII.random.nextInt(event.lootingLevel + 1 * 4);
+            int dropCount = 1 + random.nextInt(event.lootingLevel + 1 * 4);
 
             for (int a = 0; a < dropCount; a++) {
                 dropper.entityDropItem(new ItemStack(Items.feather), 0.0F);
@@ -222,7 +223,7 @@ public class EventManagerMF {
             dropper.entityDropItem(new ItemStack(drop), 0.0F);
         }
         if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-            if (MineFantasyII.random.nextFloat() * (1 + event.lootingLevel) < 0.05F) {
+            if (random.nextFloat() * (1 + event.lootingLevel) < 0.05F) {
                 dropper.entityDropItem(new ItemStack(FoodListMF.guts), 0.0F);
             }
         }
@@ -236,9 +237,9 @@ public class EventManagerMF {
             }
         }
         if (getRegisterName(dropper).contains("Horse")) {
-            int dropCount = MineFantasyII.random.nextInt(3 + event.lootingLevel);
+            int dropCount = random.nextInt(3 + event.lootingLevel);
             if (ConfigHardcore.lessHunt) {
-                dropCount = 1 + MineFantasyII.random.nextInt(event.lootingLevel + 1);
+                dropCount = 1 + random.nextInt(event.lootingLevel + 1);
             }
 
             Item meat = dropper.isBurning() ? FoodListMF.horse_cooked : FoodListMF.horse_raw;
@@ -247,9 +248,9 @@ public class EventManagerMF {
             }
         }
         if (getRegisterName(dropper).contains("Wolf")) {
-            int dropCount = MineFantasyII.random.nextInt(3 + event.lootingLevel);
+            int dropCount = random.nextInt(3 + event.lootingLevel);
             if (ConfigHardcore.lessHunt) {
-                dropCount = 1 + MineFantasyII.random.nextInt(event.lootingLevel + 1);
+                dropCount = 1 + random.nextInt(event.lootingLevel + 1);
             }
 
             Item meat = dropper.isBurning() ? FoodListMF.wolf_cooked : FoodListMF.wolf_raw;
@@ -499,14 +500,14 @@ public class EventManagerMF {
             return;
         Item book = null;
         if (id == 0) {
-            float chance = MineFantasyII.random.nextFloat();
+            float chance = random.nextFloat();
             if (chance > 0.75F) {
                 book = ToolListMF.skillbook_engineering;
             } else {
                 book = ToolListMF.skillbook_provisioning;
             }
-        } else if (id == 1 && MineFantasyII.random.nextInt(5) == 0) {
-            float chance = MineFantasyII.random.nextFloat();
+        } else if (id == 1 && random.nextInt(5) == 0) {
+            float chance = random.nextFloat();
             if (chance > 0.9F) {
                 book = ToolListMF.skillbook_engineering;
             } else if (chance > 0.6F) {
@@ -516,8 +517,8 @@ public class EventManagerMF {
             } else {
                 book = ToolListMF.skillbook_provisioning;
             }
-        } else if (id == 2 && MineFantasyII.random.nextInt(25) == 0) {
-            float chance = MineFantasyII.random.nextFloat();
+        } else if (id == 2 && random.nextInt(25) == 0) {
+            float chance = random.nextFloat();
             if (chance > 0.9F) {
                 book = ToolListMF.skillbook_engineering;
             } else if (chance > 0.6F) {
@@ -584,16 +585,16 @@ public class EventManagerMF {
         if (broken != null && ConfigHardcore.HCCallowRocks) {
             if (broken == Blocks.stone && held == null) {
                 entityDropItem(event.world, event.x, event.y, event.z,
-                        new ItemStack(ComponentListMF.sharp_rock, MineFantasyII.random.nextInt(3) + 1));
+                        new ItemStack(ComponentListMF.sharp_rock, random.nextInt(3) + 1));
             }
             if (broken instanceof BlockLeavesBase && held != null && held.getItem() == ComponentListMF.sharp_rock) {
-                if (MineFantasyII.random.nextInt(5) == 0) {
+                if (random.nextInt(5) == 0) {
                     entityDropItem(event.world, event.x, event.y, event.z,
-                            new ItemStack(Items.stick, MineFantasyII.random.nextInt(3) + 1));
+                            new ItemStack(Items.stick, random.nextInt(3) + 1));
                 }
-                if (MineFantasyII.random.nextInt(3) == 0) {
+                if (random.nextInt(3) == 0) {
                     entityDropItem(event.world, event.x, event.y, event.z,
-                            new ItemStack(ComponentListMF.vine, MineFantasyII.random.nextInt(3) + 1));
+                            new ItemStack(ComponentListMF.vine, random.nextInt(3) + 1));
                 }
             }
         }
@@ -743,15 +744,6 @@ public class EventManagerMF {
         }
         EntityLivingBase entity = event.entityLiving;
 
-        if (ASMHelper.isASMEnabled && entity instanceof EntityHorse) {
-            EntityHorse horse = (EntityHorse) entity;
-            ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
-            if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMF) {
-                ItemHorseArmorMF armor = (ItemHorseArmorMF) customArmor.getItem();
-                armor.onHorseUpdate(horse, customArmor);
-            }
-        }
-
         float lowHp = entity.getMaxHealth() / 5F;
         int injury = getInjuredTime(entity);
 
@@ -764,9 +756,9 @@ public class EventManagerMF {
                 }
                 if (entity.ticksExisted % 15 == 0) {
                     entity.limbSwing = 2.0F;
-                    float x = (float) (entity.posX + (MineFantasyII.random.nextFloat() - 0.5F) / 4F);
-                    float y = (float) (entity.posY + entity.getEyeHeight() + (MineFantasyII.random.nextFloat() - 0.5F) / 4F);
-                    float z = (float) (entity.posZ + (MineFantasyII.random.nextFloat() - 0.5F) / 4F);
+                    float x = (float) (entity.posX + (random.nextFloat() - 0.5F) / 4F);
+                    float y = (float) (entity.posY + entity.getEyeHeight() + (random.nextFloat() - 0.5F) / 4F);
+                    float z = (float) (entity.posZ + (random.nextFloat() - 0.5F) / 4F);
                     entity.worldObj.spawnParticle("reddust", x, y, z, 0F, 0F, 0F);
                 }
             }

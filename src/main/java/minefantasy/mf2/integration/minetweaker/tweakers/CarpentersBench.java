@@ -44,7 +44,7 @@ public class CarpentersBench {
         ICarpenterRecipe r;
 
         // private static final char[] chars =
-        // {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
+        // {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','recipe','s','t','u','v','w','x','y','z'};
 
         public CarpentersAction(IItemStack out, Skill s, String research, String sound, float exp, String tool,
                                 int hammer, int anvil, int time, IIngredient[][] ingreds) {
