@@ -71,14 +71,10 @@ public class CookRecipe {
             return null;
 
         CookRecipe result = recipeList.get(CustomToolHelper.getReferenceName(item));
-        if (result != null && !result.isBaking || oven) {
+        if (result != null && result.isBaking == oven) {
             return result;
-        } else {
-            result = recipeList.get(CustomToolHelper.getReferenceName(item));
-            if (result != null && !result.isBaking || oven) {
-                return result;
-            }
         }
+
         if (canCookBasics) {
             ItemStack recipe = FurnaceRecipes.smelting().getSmeltingResult(item);
             if (recipe != null && recipe.getItem() instanceof ItemFood) {
