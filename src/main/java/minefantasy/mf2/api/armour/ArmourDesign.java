@@ -24,9 +24,9 @@ public class ArmourDesign {
     public static final ArmourDesign LEATHER = new ArmourDesign("leather", "Leather", 1.0F, 1.0F, 10F, 0.25F)
             .calibrateTraits(0.7F, 1.0F, 0.5F).setWeightGroup(light);// Slightly better blunt
     public static final ArmourDesign PADDING = new ArmourDesign("padding", "Padding", 1.0F, 1.0F, 10F, 1.00F)
-            .calibrateTraits(0.6F, 1.2F, 0.4F).setWeightGroup(light);// 10kg, Blunt resistent
+            .calibrateTraits(0.85F, 0.9F, 0.6F).setWeightGroup(light);// 10kg, Cutting resistant
     public static final ArmourDesign STUDDED = new ArmourDesign("studded", "Studded", 0.8F, 1.0F, 10F, 0.25F)
-            .calibrateTraits(0.85F, 1.0F, 0.9F).setWeightGroup(light);// 10kg, Vulnerable to blunt
+            .calibrateTraits(0.6F, 1.2F, 0.9F).setWeightGroup(light);// 10kg, Blunt protection
     // MEDIUM ARMOUR
     public static final ArmourDesign SCALEMAIL = new ArmourDesign("scalemail", "Scalemail", 1.0F, 1.0F, 8F, 0.30F)
             .calibrateTraits(1.00F, 1.00F, 1.00F).setWeightGroup(medium);// 20kg, Average

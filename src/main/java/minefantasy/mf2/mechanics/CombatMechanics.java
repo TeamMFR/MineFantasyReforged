@@ -389,7 +389,7 @@ public class CombatMechanics {
 
             if (event.source instanceof EntityDamageSource && !(event.source instanceof EntityDamageSourceIndirect)
                     && !event.source.damageType.equals("battlegearExtra")) {
-                Entity entityHitter = ((EntityDamageSource) event.source).getEntity();
+                Entity entityHitter = event.source.getEntity();
 
                 if (entityHitter instanceof EntityLivingBase) {
                     EntityLivingBase attacker = (EntityLivingBase) entityHitter;
@@ -400,17 +400,6 @@ public class CombatMechanics {
             }
         }
         event.ammount = damage;
-
-        //Horses has own damage watcher
-        /*if (hit instanceof EntityHorse) {
-			EntityHorse horse = (EntityHorse) event.entity;
-			ItemStack customArmor = horse.getDataWatcher().getWatchableObjectItemStack(23);
-
-			if (customArmor != null && customArmor.getItem() instanceof ItemHorseArmorMFBase) {
-				ItemHorseArmorMFBase armor = (ItemHorseArmorMFBase) customArmor.getItem();
-				event.setCanceled(armor.onHorseDamaged(horse, customArmor, event.source, event.ammount));
-			}
-		}*/
     }
 
     private void onFall(EntityLivingBase fallen, float height) {
