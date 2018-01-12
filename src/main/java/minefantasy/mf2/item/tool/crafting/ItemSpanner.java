@@ -1,8 +1,13 @@
 package minefantasy.mf2.item.tool.crafting;
 
+import buildcraft.api.tools.IToolWrench;
+import cofh.api.item.IToolHammer;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
+import cpw.mods.fml.common.Optional.Interface;
+import cpw.mods.fml.common.Optional.InterfaceList;
+import cpw.mods.fml.common.Optional.Method;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,6 +21,7 @@ import minefantasy.mf2.item.list.CreativeTabMF;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,7 +39,13 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDamageType {
+
+@InterfaceList({
+        @Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "BuildCraft|Core"),
+        @Interface(iface = "cofh.api.item.IToolHammer", modid = "CoFHCore")
+})
+
+public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDamageType, IToolWrench, IToolHammer {
     protected int itemRarity;
     private ToolMaterial material;
     private int tier;
@@ -235,6 +247,34 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDa
         String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
+
     // ====================================================== CUSTOM END
     // ==============================================================\\
+
+    /* BuildCraft wrench support */
+    @Override
+    @Method(modid = "BuildCraft|Core")
+    public boolean canWrench(EntityPlayer player, int x, int y, int z) {
+        return true;
+    }
+
+    @Override
+    @Method(modid = "BuildCraft|Core")
+    public void wrenchUsed(EntityPlayer player, int x, int y, int z) {
+        player.getCurrentEquippedItem().damageItem(1, player);
+        player.swingItem();
+    }
+
+    /* COFH mods wrench support */
+    @Override
+    @Method(modid = "CoFHCore")
+    public boolean isUsable(ItemStack item, EntityLivingBase user, int x, int y, int z) {
+        return user instanceof EntityPlayer;
+    }
+
+    @Override
+    @Method(modid = "CoFHCore")
+    public void toolUsed(ItemStack item, EntityLivingBase user, int x, int y, int z) {
+        item.damageItem(1, user);
+    }
 }

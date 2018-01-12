@@ -98,5 +98,4 @@ public class ConfigHardcore extends ConfigurationBaseMF {
         CombatMechanics.swordSkeleton = Boolean.parseBoolean(
                 config.get(CATEGORY_MOB, "Skeleton Swords", true, "Some Skeletons use swords").getString());
     }
-
 }

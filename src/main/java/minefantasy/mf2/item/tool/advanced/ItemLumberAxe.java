@@ -137,6 +137,10 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem {
                         int blockZ = z + z1 + FD.offsetZ;
 
                         if (!(x1 + FD.offsetX == 0 && y1 + FD.offsetY == 0 && z1 + FD.offsetZ == 0)) {
+                            if (MineFantasyII.isBukkitServer() && BukkitUtils.cantBreakBlock((EntityPlayer) user, blockX, blockY, blockZ)) {
+                                break;
+                            }
+
                             Block newblock = world.getBlock(blockX, blockY, blockZ);
                             int m = world.getBlockMetadata(blockX, blockY, blockZ);
 
