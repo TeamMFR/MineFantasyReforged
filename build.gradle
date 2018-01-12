@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'idea'
 
-version = "2.8.14.3u"
+version = "2.8.14.4u"
 group= "minefantasy.mf2.minefantasy2"
 archivesBaseName = "MineFantasyII"
 
