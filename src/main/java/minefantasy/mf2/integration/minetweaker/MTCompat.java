@@ -1,12 +1,12 @@
 package minefantasy.mf2.integration.minetweaker;
 
+import cpw.mods.fml.common.Optional;
 import minefantasy.mf2.integration.minetweaker.helpers.MaterialExpansion;
 import minefantasy.mf2.integration.minetweaker.tweakers.*;
-import minetweaker.IRecipeRemover;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 
-public class MTCompat implements IRecipeRemover {
+public class MTCompat {
 
     private static final String[] COMMAND_DESC = {
             "MineFantasy commands:",
@@ -30,16 +30,21 @@ public class MTCompat implements IRecipeRemover {
         MineTweakerAPI.registerClass(TanningRack.class);
         MineTweakerAPI.registerClass(Quern.class);
         MineTweakerAPI.registerClass(SalvageTweaker.class);
+        MineTweakerAPI.registerRemover(new MFRecipeRemover());
     }
 
     public static void registerCommands() {
         MineTweakerAPI.server.addMineTweakerCommand("mf", COMMAND_DESC, new MTCommands());
     }
 
-    @Override
-    public void remove(IIngredient iIngredient) {
-        Bloomery.remove(iIngredient, null);
-        Quern.remove(iIngredient, null);
-        TanningRack.remove(iIngredient, null);
+    @Optional.Interface(iface = "minetweaker.IRecipeRemover", modid = "MineTweaker3")
+    public static class MFRecipeRemover implements minetweaker.IRecipeRemover {
+        @Optional.Method(modid = "MineTweaker3")
+        @Override
+        public void remove(IIngredient iIngredient) {
+            Bloomery.remove(iIngredient, null);
+            Quern.remove(iIngredient, null);
+            TanningRack.remove(iIngredient, null);
+        }
     }
 }

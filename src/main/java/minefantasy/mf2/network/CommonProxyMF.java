@@ -100,7 +100,6 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler {
         SmokeMechanics.handler = this;
         if (Loader.isModLoaded("MineTweaker3") && ConfigIntegration.mtIntegration) {
             MTCompat.loadTweakers();
-            MineTweakerAPI.registerRemover(new MTCompat());
         }
     }
 

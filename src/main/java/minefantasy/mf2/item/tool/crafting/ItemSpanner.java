@@ -18,7 +18,8 @@ import minefantasy.mf2.api.tier.IToolMaterial;
 import minefantasy.mf2.api.tool.IToolMF;
 import minefantasy.mf2.api.weapon.IDamageType;
 import minefantasy.mf2.item.list.CreativeTabMF;
-import net.minecraft.block.Block;
+import minefantasy.mf2.util.Utils;
+import net.minecraft.block.*;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,11 +31,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.util.ForgeDirection;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Anonymous Productions
@@ -42,7 +43,7 @@ import java.util.List;
 
 @InterfaceList({
         @Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "BuildCraft|Core"),
-        @Interface(iface = "cofh.api.item.IToolHammer", modid = "CoFHCore")
+        @Interface(iface = "cofh.api.item.IToolHammer", modid = "CoFHAPI|item")
 })
 
 public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDamageType, IToolWrench, IToolHammer {
@@ -51,12 +52,13 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDa
     private int tier;
     private float baseDamage;
     private String name;
-    // ===================================================== CUSTOM START
-    // =============================================================\\
     private boolean isCustom = false;
     private float efficiencyMod = 1.0F;
     private IIcon detailTex = null;
     private IIcon haftTex = null;
+
+    private final Set<Class<? extends Block>> shiftRotations = new HashSet<Class<? extends Block>>();
+    private final Set<Class<? extends Block>> blacklistedRotations = new HashSet<Class<? extends Block>>();
 
     public ItemSpanner(String name, int rarity, int tier) {
         super(2.0F, ToolMaterial.IRON, Sets.newHashSet(new Block[]{}));
@@ -69,6 +71,48 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDa
         setTextureName("minefantasy2:Tool/Crafting/" + name);
         GameRegistry.registerItem(this, name, MineFantasyII.MODID);
         this.setUnlocalizedName(name);
+
+        shiftRotations.add(BlockLever.class);
+        shiftRotations.add(BlockButton.class);
+        shiftRotations.add(BlockChest.class);
+        blacklistedRotations.add(BlockBed.class);
+    }
+
+    @Override
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+        Block block = world.getBlock(x, y, z);
+
+        if (block == null || isClass(blacklistedRotations, block.getClass())) {
+            return false;
+        }
+
+        if (player.isSneaking() != isClass(shiftRotations, block.getClass())) {
+            return false;
+        }
+
+        if (block instanceof BlockChest && Utils.getOtherDoubleChest(world.getTileEntity(x, y, z)) != null) {
+            return false;
+        }
+
+        if (block.rotateBlock(world, x, y, z, ForgeDirection.getOrientation(side))) {
+            player.swingItem();
+            return !world.isRemote;
+        }
+        return false;
+    }
+
+    private boolean isClass(Set<Class<? extends Block>> set, Class<? extends Block> cls) {
+        for (Class<? extends Block> shift : set) {
+            if (shift.isAssignableFrom(cls)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean doesSneakBypassUse(World world, int x, int y, int z, EntityPlayer player) {
+        return true;
     }
 
     @Override
@@ -248,9 +292,6 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDa
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
 
-    // ====================================================== CUSTOM END
-    // ==============================================================\\
-
     /* BuildCraft wrench support */
     @Override
     @Method(modid = "BuildCraft|Core")
@@ -267,13 +308,13 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMF, IDa
 
     /* COFH mods wrench support */
     @Override
-    @Method(modid = "CoFHCore")
+    @Method(modid = "CoFHAPI|item")
     public boolean isUsable(ItemStack item, EntityLivingBase user, int x, int y, int z) {
         return user instanceof EntityPlayer;
     }
 
     @Override
-    @Method(modid = "CoFHCore")
+    @Method(modid = "CoFHAPI|item")
     public void toolUsed(ItemStack item, EntityLivingBase user, int x, int y, int z) {
         item.damageItem(1, user);
     }

@@ -42,6 +42,18 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
         return ToolHelper.setDuraOnQuality(stack, super.getMaxDamage());
     }
 
+    @Override
+    public boolean onItemUse(ItemStack item, EntityPlayer user, World world, int x, int y, int z, int side, float f,
+                             float f1, float f2) {
+        if (user.canPlayerEdit(x, y, z, side, item) && ResearchLogic.hasInfoUnlocked(user, "paint_brush")) {
+            if (!user.isSwingInProgress && user.inventory.hasItem(ComponentListMF.plant_oil)) {
+                Block block = world.getBlock(x, y, z);
+                return onUsedWithBlock(world, x, y, z, block, item, user);
+            }
+        }
+        return false;
+    }
+
     private boolean onUsedWithBlock(World world, int x, int y, int z, Block block, ItemStack item, EntityPlayer user) {
         Block newBlock = null;
         int meta = world.getBlockMetadata(x, y, z);
@@ -68,21 +80,6 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
             item.damageItem(1, user);
             world.setBlock(x, y, z, newBlock);
             world.setBlockMetadataWithNotify(x, y, z, meta, 2);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onItemUse(ItemStack item, EntityPlayer user, World world, int x, int y, int z, int side, float f,
-                             float f1, float f2) {
-        if (!ResearchLogic.hasInfoUnlocked(user, "paint_brush")) {
-            return false;
-        }
-        if (!user.canPlayerEdit(x, y, z, side, item)) {
-            return false;
-        } else if (!user.isSwingInProgress && user.inventory.hasItem(ComponentListMF.plant_oil)) {
-            Block block = world.getBlock(x, y, z);
-            return onUsedWithBlock(world, x, y, z, block, item, user);
         }
         return false;
     }
