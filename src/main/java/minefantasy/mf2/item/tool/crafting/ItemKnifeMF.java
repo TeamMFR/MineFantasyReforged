@@ -11,30 +11,34 @@ import minefantasy.mf2.api.tool.IHuntingItem;
 import minefantasy.mf2.api.tool.IToolMF;
 import minefantasy.mf2.api.weapon.WeaponClass;
 import minefantasy.mf2.item.weapon.ItemWeaponMF;
+import minefantasy.mf2.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IShearable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author Anonymous Productions
  */
 public class ItemKnifeMF extends ItemWeaponMF implements IToolMF, IHuntingItem {
     protected int itemRarity;
-    private Random rand = new Random();
     private int tier;
     private float baseDamage;
     // ===================================================== CUSTOM START
@@ -51,6 +55,36 @@ public class ItemKnifeMF extends ItemWeaponMF implements IToolMF, IHuntingItem {
         super(material, name, rarity, weight);
         this.tier = tier;
         setTextureName("minefantasy2:Tool/Crafting/" + name);
+    }
+
+    @Override
+    public boolean onBlockStartBreak(ItemStack itemstack, int x, int y, int z, EntityPlayer player) {
+        if (!player.worldObj.isRemote) {
+            Block block = player.worldObj.getBlock(x, y, z);
+            if (block instanceof IShearable) {
+                IShearable target = (IShearable) block;
+                if (target.isShearable(itemstack, player.worldObj, x, y, z)) {
+                    XSTRandom rand = new XSTRandom();
+                    if(rand.nextInt(10) < 3) { //knife has reduced drop and can't be used to shear entity's
+                        ArrayList<ItemStack> drops = target.onSheared(itemstack, player.worldObj, x, y, z,
+                                EnchantmentHelper.getEnchantmentLevel(Enchantment.fortune.effectId, itemstack));
+                        for (ItemStack stack : drops) {
+                            float f = 0.7F;
+                            double d = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+                            double d1 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+                            double d2 = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;
+                            EntityItem entityitem = new EntityItem(player.worldObj, (double) x + d, (double) y + d1, (double) z + d2, stack);
+                            entityitem.delayBeforeCanPickup = 10;
+                            player.worldObj.spawnEntityInWorld(entityitem);
+                        }
+
+                        itemstack.damageItem(1, player);
+                        player.addStat(StatList.mineBlockStatArray[Block.getIdFromBlock(block)], 1);
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     @Override
