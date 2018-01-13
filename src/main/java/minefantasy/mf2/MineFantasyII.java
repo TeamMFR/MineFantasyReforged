@@ -49,7 +49,7 @@ import java.io.File;
 public class MineFantasyII {
     public static final String MODID = "minefantasy2";
     public static final String NAME = "MineFantasyII";
-    public static final String VERSION = "Alpha_2.8.14.4u";
+    public static final String VERSION = "Alpha_2.8.14.5u";
     public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
 
     @SidedProxy(clientSide = "minefantasy.mf2.network.ClientProxyMF", serverSide = "minefantasy.mf2.network.CommonProxyMF")
