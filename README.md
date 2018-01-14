@@ -1,9 +1,11 @@
-# MineFantasy2 Unofficial ![Travis CI](https://travis-ci.org/Sirse/MineFantasyII-Cont.svg?branch=master)
+# MineFantasy2 Unofficial [![Travis CI](https://travis-ci.org/Sirse/MineFantasyII-Cont.svg?branch=master)](https://travis-ci.org/Sirse/MineFantasyII-Cont) [![CurseForge](http://cf.way2muchnoise.eu/minefantasy2.svg)](https://minecraft.curseforge.com/projects/minefantasy2) 
 
-Unofficial MineFantasy 2 fork aimed for cross-mod integration, bug fixes, stability and perfomance tweaks.
+Unofficial, but approved MineFantasy 2 fork aimed for cross-mod integration, bug fixes, stability and perfomance tweaks.
 
-Downloads are avaliable on [releases page](https://github.com/Sirse/MineFantasyII-Cont/releases)
+### Useful links:
 
-Feedback are needed! If you found an issue, please, [report it!](https://github.com/Sirse/MineFantasyII-Cont/issues)
+- Join a discussion at [our Minecraft forum thread](minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/wip-mods/2467203-minefantasy2-alpha)
+- Downloads are avaliable on [releases page](https://github.com/Sirse/MineFantasyII-Cont/releases)
+- Feedback are needed! If you found an issue, please, [report it!](https://github.com/Sirse/MineFantasyII-Cont/issues)
 
 #### Also, you are can support MineFantasy II Unofficial developing [via donation!](https://www.paypal.me/sirse)
