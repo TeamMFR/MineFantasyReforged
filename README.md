@@ -1,4 +1,4 @@
-# MineFantasy2 Unofficial [![Travis CI](https://travis-ci.org/Sirse/MineFantasyII-Cont.svg?branch=master)](https://travis-ci.org/Sirse/MineFantasyII-Cont) [![CurseForge](https://cf.way2muchnoise.eu/minefantasy2.svg)](https://minecraft.curseforge.com/projects/minefantasy2) 
+# MineFantasy2 Unofficial [![Travis CI](https://travis-ci.org/Sirse/MineFantasyII-Cont.svg?branch=master)](https://travis-ci.org/Sirse/MineFantasyII-Cont) [![CurseForge](http://cf.way2muchnoise.eu/minefantasy2.svg)](https://minecraft.curseforge.com/projects/minefantasy2) 
 
 Unofficial, but approved MineFantasy 2 fork aimed for cross-mod integration, bug fixes, stability and perfomance tweaks.
 
