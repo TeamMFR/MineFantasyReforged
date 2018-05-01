@@ -45,7 +45,7 @@ import java.io.File;
 /**
  * @author Anonymous Productions
  */
-@Mod(modid = MineFantasyII.MODID, name = MineFantasyII.NAME, dependencies = "required-after:Forge@[7.0,);" + "required-after:FML@[5.0.5,);" + "after:NotEnoughItems;" + "after:MineTweaker3;" + "after:BuildCraft|Core;" + "after:CoFHCore" + "after:battlegear2", version = MineFantasyII.VERSION)
+@Mod(modid = MineFantasyII.MODID, name = MineFantasyII.NAME, dependencies = "required-after:Forge@[7.0,);" + "required-after:FML@[5.0.5,);" + "after:NotEnoughItems;" + "after:MineTweaker3;" + "after:BuildCraft|Core;" + "after:CoFHCore;" + "after:battlegear2", version = MineFantasyII.VERSION)
 public class MineFantasyII {
     public static final String MODID = "minefantasy2";
     public static final String NAME = "MineFantasyII";
@@ -59,29 +59,14 @@ public class MineFantasyII {
     @Instance(MODID)
     public static MineFantasyII instance;
 
-    private static boolean isBGLoaded;
     private static boolean isBukkitServer;
 
     private static Configuration getCfg(FMLPreInitializationEvent event, String name) {
         return new Configuration(new File(event.getModConfigurationDirectory(), "MineFantasyII/" + name + ".cfg"));
     }
 
-    public static boolean isBGLoaded() {
-        return isBGLoaded;
-    }
-
     public static boolean isBukkitServer() {
         return isBukkitServer;
-    }
-
-    public static boolean setIsBGLoaded() {
-        try {
-            Class.forName("mods.battlegear2.Battlegear");
-            // return Loader.isModLoaded("battlegear2");
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-        return true;
     }
 
     public static boolean setIsBukkitServer() {
@@ -206,7 +191,6 @@ public class MineFantasyII {
     }
 
     private void addModFlags() {
-        isBGLoaded = setIsBGLoaded();
         isBukkitServer = setIsBukkitServer();
     }
 }

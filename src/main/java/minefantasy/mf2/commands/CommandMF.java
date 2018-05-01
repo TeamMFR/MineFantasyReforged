@@ -13,7 +13,6 @@ import net.minecraft.util.StatCollector;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CommandMF implements ICommand {
 
@@ -25,7 +24,17 @@ public class CommandMF implements ICommand {
     }};
 
     public CommandMF() {
-        materials = CustomMaterial.materialList.values().stream().filter(material -> material.type.equalsIgnoreCase("wood") || material.type.equalsIgnoreCase("metal")).collect(Collectors.toList());
+        materials = setupMaterialsList();
+    }
+
+    private List setupMaterialsList() {
+        List materials = new ArrayList<String>();
+        for(CustomMaterial material : CustomMaterial.materialList.values()) {
+            if(material.type.equalsIgnoreCase("wood") || material.type.equalsIgnoreCase("metal")) {
+                materials.add(material);
+            }
+        }
+        return materials;
     }
 
     @Override

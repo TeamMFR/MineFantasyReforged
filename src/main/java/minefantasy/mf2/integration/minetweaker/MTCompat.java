@@ -1,7 +1,6 @@
 package minefantasy.mf2.integration.minetweaker;
 
 import cpw.mods.fml.common.Optional;
-import minefantasy.mf2.integration.minetweaker.helpers.MaterialExpansion;
 import minefantasy.mf2.integration.minetweaker.tweakers.*;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
@@ -22,11 +21,9 @@ public class MTCompat {
         MineTweakerAPI.registerClass(BigFurnace.class);
         MineTweakerAPI.registerClass(BlastFurnace.class);
         MineTweakerAPI.registerClass(CarpentersBench.class);
-        MineTweakerAPI.registerClass(CustomMaterialHandler.class);
         MineTweakerAPI.registerClass(Cooking.class);
         MineTweakerAPI.registerClass(Crucible.class);
         MineTweakerAPI.registerClass(Forge.class);
-        MineTweakerAPI.registerClass(MaterialExpansion.class);
         MineTweakerAPI.registerClass(TanningRack.class);
         MineTweakerAPI.registerClass(Quern.class);
         MineTweakerAPI.registerClass(SalvageTweaker.class);
