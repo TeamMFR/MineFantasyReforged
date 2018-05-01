@@ -1,5 +1,6 @@
 package minefantasy.mf2.item.archery;
 
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,7 +14,6 @@ import minefantasy.mf2.entity.EntityArrowMF;
 import minefantasy.mf2.item.list.CreativeTabMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.mechanics.MFArrowDispenser;
-import mods.battlegear2.api.quiver.QuiverArrowRegistry;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -86,7 +86,9 @@ public class ItemArrowMF extends Item implements IArrowMF, IAmmo {
         GameRegistry.registerItem(this, "MF_Com_" + name, MineFantasyII.MODID);
 
         AmmoMechanicsMF.addArrow(new ItemStack(this));
-        QuiverArrowRegistry.addArrowToRegistry(new ItemStack(this), null);
+        if(Loader.isModLoaded("battlegear2")) {
+            mods.battlegear2.api.quiver.QuiverArrowRegistry.addArrowToRegistry(new ItemStack(this), null);
+        }
         BlockDispenser.dispenseBehaviorRegistry.putObject(this, dispenser);
     }
 

@@ -1,11 +1,10 @@
 package minefantasy.mf2.client.render;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.Loader;
 import minefantasy.mf2.api.archery.AmmoMechanicsMF;
 import minefantasy.mf2.api.helpers.TextureHelperMF;
 import minefantasy.mf2.item.archery.ItemBowMF;
-import mods.battlegear2.api.quiver.IArrowContainer2;
-import mods.battlegear2.api.quiver.QuiverArrowRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
@@ -117,10 +116,12 @@ public class RenderBow implements IItemRenderer {
 
             }
 
-            ItemStack quiver = QuiverArrowRegistry.getArrowContainer(item, (EntityPlayer) entityLivingBase);
-            if (quiver != null) {
-                arrowStack = ((IArrowContainer2) quiver.getItem()).getStackInSlot(quiver,
-                        ((IArrowContainer2) quiver.getItem()).getSelectedSlot(quiver));
+            if(Loader.isModLoaded("battlegear2")) {
+                ItemStack quiver = mods.battlegear2.api.quiver.QuiverArrowRegistry.getArrowContainer(item, (EntityPlayer) entityLivingBase);
+                if (quiver != null) {
+                    arrowStack = ((mods.battlegear2.api.quiver.IArrowContainer2) quiver.getItem()).getStackInSlot(quiver,
+                            ((mods.battlegear2.api.quiver.IArrowContainer2) quiver.getItem()).getSelectedSlot(quiver));
+                }
             }
 
             if (timer == 0) {

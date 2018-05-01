@@ -6,10 +6,7 @@ import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.FMLEventChannel;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -18,6 +15,7 @@ import minefantasy.mf2.api.MineFantasyAPI;
 import minefantasy.mf2.api.armour.ArmourDesign;
 import minefantasy.mf2.api.armour.CustomArmourEntry;
 import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mf2.commands.CommandMF;
 import minefantasy.mf2.config.*;
 import minefantasy.mf2.integration.minetweaker.MTCompat;
 import minefantasy.mf2.item.gadget.ItemLootSack;
@@ -35,7 +33,9 @@ import minefantasy.mf2.recipe.BasicRecipesMF;
 import minefantasy.mf2.recipe.RecipeRemover;
 import minefantasy.mf2.util.BukkitUtils;
 import minefantasy.mf2.util.MFLogUtil;
+import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -45,11 +45,11 @@ import java.io.File;
 /**
  * @author Anonymous Productions
  */
-@Mod(modid = MineFantasyII.MODID, name = MineFantasyII.NAME, dependencies = "required-after:Forge@[7.0,);" + "required-after:FML@[5.0.5,);" + "after:NotEnoughItems;" + "after:MineTweaker3;" + "after:BuildCraft|Core;" + "after:CoFHCore", version = MineFantasyII.VERSION)
+@Mod(modid = MineFantasyII.MODID, name = MineFantasyII.NAME, dependencies = "required-after:Forge@[7.0,);" + "required-after:FML@[5.0.5,);" + "after:NotEnoughItems;" + "after:MineTweaker3;" + "after:BuildCraft|Core;" + "after:CoFHCore" + "after:battlegear2", version = MineFantasyII.VERSION)
 public class MineFantasyII {
     public static final String MODID = "minefantasy2";
     public static final String NAME = "MineFantasyII";
-    public static final String VERSION = "Alpha_2.8.14.5u";
+    public static final String VERSION = "@VERSION@";
     public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
 
     @SidedProxy(clientSide = "minefantasy.mf2.network.ClientProxyMF", serverSide = "minefantasy.mf2.network.CommonProxyMF")
@@ -179,6 +179,11 @@ public class MineFantasyII {
         proxy.postInit();
         proxy.registerTickHandlers();
         MetalMaterial.addHeatables();
+    }
+
+    @EventHandler
+    public void serverLoad(FMLServerStartingEvent event) {
+        event.registerServerCommand(new CommandMF());
     }
 
     @EventHandler

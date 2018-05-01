@@ -2,6 +2,7 @@ package minefantasy.mf2.item.weapon;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -24,8 +25,12 @@ import minefantasy.mf2.item.list.ToolListMF;
 import minefantasy.mf2.item.tool.crafting.ItemKnifeMF;
 import minefantasy.mf2.material.BaseMaterialMF;
 import minefantasy.mf2.util.MFLogUtil;
-import mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent;
-import mods.battlegear2.api.weapons.*;
+import mods.battlegear2.api.weapons.IBackStabbable;
+import mods.battlegear2.api.weapons.IBattlegearWeapon;
+import mods.battlegear2.api.weapons.IExtendedReachWeapon;
+import mods.battlegear2.api.weapons.IHitTimeModifier;
+import mods.battlegear2.api.weapons.IPenetrateWeapon;
+import mods.battlegear2.api.weapons.WeaponRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -52,6 +57,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+@Optional.InterfaceList(value = {
+        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IBackStabbable", modid = "battlegear2"),
+        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IBattlegearWeapon", modid = "battlegear2"),
+        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IExtendedReachWeapon", modid = "battlegear2"),
+        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IHitTimeModifier", modid = "battlegear2"),
+        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IPenetrateWeapon", modid = "battlegear2"),
+        @Optional.Interface(iface = "mods.battlegear2.api.weapons.WeaponRegistry", modid = "battlegear2")
+})
 
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
@@ -345,7 +359,8 @@ public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, 
     }
 
     @Override
-    public boolean offhandAttackEntity(OffhandAttackEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
+    @Optional.Method(modid = "battlegear2")
+    public boolean offhandAttackEntity(mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
         return true;
     }
 
