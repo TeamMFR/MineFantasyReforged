@@ -12,7 +12,7 @@ public class RenderBigFurnace implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        if (block == null || !(block instanceof BlockBigFurnace))
+        if (!(block instanceof BlockBigFurnace))
             return;
 
         GL11.glPushMatrix();

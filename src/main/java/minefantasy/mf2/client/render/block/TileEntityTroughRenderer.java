@@ -12,7 +12,6 @@ import java.util.Random;
 
 public class TileEntityTroughRenderer extends TileEntitySpecialRenderer {
     private ModelTrough model;
-    private Random random = new Random();
 
     public TileEntityTroughRenderer() {
         model = new ModelTrough();
@@ -83,7 +82,7 @@ public class TileEntityTroughRenderer extends TileEntitySpecialRenderer {
 
     }
 
-    public void renderInvModel(String tex, CustomMaterial material, double d, double d1, double d2, float f) {
+    public void renderInvModel(String tex, CustomMaterial material, double d, double d1, double d2) {
         int j = 90;
 
         GL11.glPushMatrix(); // start
@@ -93,7 +92,6 @@ public class TileEntityTroughRenderer extends TileEntitySpecialRenderer {
         GL11.glRotatef(j, 0.0F, 1.0F, 0.0F); // rotate based on metadata
         GL11.glScalef(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
         GL11.glPushMatrix();
-        float level = 0F;
 
         GL11.glColor3f(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
 

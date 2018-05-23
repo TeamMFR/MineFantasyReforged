@@ -26,7 +26,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ComponentListMF {
     public static final String[] ingotMats = new String[]{"copper", "tin", "bronze", "pigiron", "steel", "encrusted",
             "blacksteelweak", "blacksteel", "silver", "redsteelweak", "redsteel", "bluesteelweak", "bluesteel",
-            "adamantium", "mithril", "ignotumite", "mithium", "ender", "tungsten", "obsidian",};
+            "adamantium", "mithril", "ignotumite", "mithium", "ender", "tungsten", "obsidian"};
 
     public static Item clay_pot = new ItemMFBowl("clay_pot").setStoragePlacement("pot", "pot");
     public static Item clay_pot_uncooked = new ItemComponentMF("clay_pot_uncooked", 0);

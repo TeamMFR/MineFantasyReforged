@@ -12,7 +12,7 @@ public class RenderBellows implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        if (block == null || !(block instanceof BlockBellows))
+        if (!(block instanceof BlockBellows))
             return;
 
         GL11.glPushMatrix();

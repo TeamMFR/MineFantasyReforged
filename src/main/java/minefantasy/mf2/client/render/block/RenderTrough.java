@@ -13,13 +13,13 @@ public class RenderTrough implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        if (block == null || !(block instanceof BlockTrough))
+        if (!(block instanceof BlockTrough))
             return;
 
         GL11.glPushMatrix();
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         BlockTrough trough = (BlockTrough) block;
-        invModel.renderInvModel(trough.getFullTexName(), CustomMaterial.getMaterial("refinedWood"), 0F, 0F, 0F, 0F);
+        invModel.renderInvModel(trough.getFullTexName(), CustomMaterial.getMaterial("refinedWood"), 0F, 0F, 0F);
         GL11.glPopMatrix();
     }
 

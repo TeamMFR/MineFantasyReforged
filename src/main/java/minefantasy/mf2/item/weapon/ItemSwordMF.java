@@ -6,14 +6,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 
-import java.util.Random;
-
 /**
  * @author Anonymous Productions
  */
 public class ItemSwordMF extends ItemWeaponMF {
-    private Random rand = new Random();
-
     /**
      * Swords are the average weapon. They do regular damage and are extremely
      * effective at parrying balancing both attack and defense

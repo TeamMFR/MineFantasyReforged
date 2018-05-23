@@ -2,6 +2,7 @@ package minefantasy.mf2.item.weapon;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -57,16 +58,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-@Optional.InterfaceList(value = {
-        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IBackStabbable", modid = "battlegear2"),
-        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IBattlegearWeapon", modid = "battlegear2"),
-        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IExtendedReachWeapon", modid = "battlegear2"),
-        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IHitTimeModifier", modid = "battlegear2"),
-        @Optional.Interface(iface = "mods.battlegear2.api.weapons.IPenetrateWeapon", modid = "battlegear2"),
-        @Optional.Interface(iface = "mods.battlegear2.api.weapons.WeaponRegistry", modid = "battlegear2")
-})
-
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
         IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IBattlegearWeapon, IToolMaterial,
@@ -157,10 +148,12 @@ public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, 
         if (material == ToolMaterial.WOOD) {
             baseDamage = 0F;
         }
-        if (isHeavyWeapon()) {
-            WeaponRegistry.addTwoHanded(new ItemStack(this));
-        } else {
-            WeaponRegistry.addDualWeapon(new ItemStack(this));
+        if(Loader.isModLoaded("battlegear2")) {
+            if (isHeavyWeapon()) {
+                WeaponRegistry.addTwoHanded(new ItemStack(this));
+            } else {
+                WeaponRegistry.addDualWeapon(new ItemStack(this));
+            }
         }
     }
 

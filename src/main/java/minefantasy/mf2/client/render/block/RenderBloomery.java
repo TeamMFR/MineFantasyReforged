@@ -12,7 +12,7 @@ public class RenderBloomery implements ISimpleBlockRenderingHandler {
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        if (block == null || !(block instanceof BlockBloomery))
+        if (!(block instanceof BlockBloomery))
             return;
 
         GL11.glPushMatrix();

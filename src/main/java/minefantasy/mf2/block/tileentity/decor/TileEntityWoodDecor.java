@@ -80,10 +80,4 @@ public abstract class TileEntityWoodDecor extends TileEntity {
     public void sendPacketToClient() {
         NetworkUtils.sendToWatchers(new WoodDecorPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
     }
-
-	/*
-    public void sendPacketToClient(EntityPlayer player){
-		((WorldServer) worldObj).getEntityTracker().func_151248_b(player, new WoodDecorPacket(this).generatePacket());
-	}
-	*/
 }

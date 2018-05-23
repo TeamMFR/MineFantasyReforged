@@ -23,7 +23,6 @@ public class BlockTrough extends BlockWoodDecor {
     public BlockTrough(String name) {
         super(name);
         this.setBlockBounds(0F, 0F, 0F, 1.0F, (7F / 16F), 1.0F);
-
         GameRegistry.registerBlock(this, ItemBlockTrough.class, name);
         setBlockName(name);
         this.setHardness(1F);

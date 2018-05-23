@@ -15,17 +15,8 @@ import net.minecraft.util.Vec3;
 
 import java.util.List;
 
-/**
- * This class exists because minecraft hunger seems to decrease faster than
- * windows stock
- */
 public class ExtendedReachMF {
-    // SPRINT JUMPING
-    // DEFAULT:= 0:22 (50seconds till starve, 35s till nosprint) (16m in MC time for
-    // 4 missing bars)
-    // SLOW=5: = 2:20 (5mins till starve, 3:30 till nosprint) (1h 40m in MC time for
-    // 4 missing bars)
-    // EXHAUSTION SCALE = 3.0F = 1hunger
+
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {

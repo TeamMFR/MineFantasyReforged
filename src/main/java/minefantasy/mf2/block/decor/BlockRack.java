@@ -32,10 +32,7 @@ import static net.minecraftforge.common.util.ForgeDirection.*;
  * code, or methods can be used in your own creations.
  */
 public class BlockRack extends BlockWoodDecor {
-
-    private static final float thickness = 5F / 16F;
     public static int rack_RI = 115;
-    private Random rand = new Random();
 
     public BlockRack(String name) {
         super(name);
@@ -300,12 +297,12 @@ public class BlockRack extends BlockWoodDecor {
                 ItemStack var7 = tile.getStackInSlot(var6);
 
                 if (var7 != null) {
-                    float var8 = this.rand.nextFloat() * 0.8F + 0.1F;
-                    float var9 = this.rand.nextFloat() * 0.8F + 0.1F;
-                    float var10 = this.rand.nextFloat() * 0.8F + 0.1F;
+                    float var8 = world.rand.nextFloat() * 0.8F + 0.1F;
+                    float var9 = world.rand.nextFloat() * 0.8F + 0.1F;
+                    float var10 = world.rand.nextFloat() * 0.8F + 0.1F;
 
                     while (var7.stackSize > 0) {
-                        int var11 = this.rand.nextInt(21) + 10;
+                        int var11 = world.rand.nextInt(21) + 10;
 
                         if (var11 > var7.stackSize) {
                             var11 = var7.stackSize;
@@ -320,9 +317,9 @@ public class BlockRack extends BlockWoodDecor {
                         }
 
                         float var13 = 0.05F;
-                        var12.motionX = (float) this.rand.nextGaussian() * var13;
-                        var12.motionY = (float) this.rand.nextGaussian() * var13 + 0.2F;
-                        var12.motionZ = (float) this.rand.nextGaussian() * var13;
+                        var12.motionX = (float) world.rand.nextGaussian() * var13;
+                        var12.motionY = (float) world.rand.nextGaussian() * var13 + 0.2F;
+                        var12.motionZ = (float) world.rand.nextGaussian() * var13;
                         world.spawnEntityInWorld(var12);
                     }
                 }
