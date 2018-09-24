@@ -415,8 +415,11 @@ public class CustomToolHelper {
     }
 
     public static String getSimpleReferenceName(Item item, String dam) {
-        String reference = Item.itemRegistry.getNameForObject(item).toLowerCase() + "_@" + dam;
-        return reference;
+        String reference = Item.itemRegistry.getNameForObject(item);
+        if (reference == null) {
+            return "";
+        }
+        return reference.toLowerCase() + "_@" + dam;
     }
 
     public static String getSimpleReferenceName(Item item) {

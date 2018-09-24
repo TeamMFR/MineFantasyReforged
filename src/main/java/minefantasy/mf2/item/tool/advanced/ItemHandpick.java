@@ -40,7 +40,6 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial {
     protected int itemRarity;
     private String name;
     private float baseDamage = 1F;
-    private Random rand = new Random();
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
@@ -62,26 +61,27 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial {
     @Override
     public boolean onBlockDestroyed(ItemStack item, World world, Block block, int x, int y, int z,
                                     EntityLivingBase user) {
-        boolean silk = EnchantmentHelper.getSilkTouchModifier(user);
-        int m = world.getBlockMetadata(x, y, z);
-        ArrayList<ItemStack> drops = block.getDrops(world, x, y, z, 0, m);
-
-        if (!silk && drops != null && !drops.isEmpty()) {
-            Iterator<ItemStack> list = drops.iterator();
-            while (list.hasNext()) {
-                ItemStack drop = list.next();
-                if (isOre(block, m) && !drop.isItemEqual(new ItemStack(block, 1, m))
-                        && !(drop.getItem() instanceof ItemBlock) && rand.nextFloat() < getDoubleDropChance()) {
-                    dropItem(world, x, y, z, drop.copy());
-                }
-            }
-        }
-
         if (!world.isRemote) {
             int meta = world.getBlockMetadata(x, y, z);
             int harvestlvl = this.getMaterial().getHarvestLevel();
             int fortune = EnchantmentHelper.getFortuneModifier(user);
+            boolean silk = EnchantmentHelper.getSilkTouchModifier(user);
 
+            //double drop logic (ignores fortune enchantment)
+            ArrayList<ItemStack> drops = block.getDrops(world, x, y, z, meta, 0);
+
+            if (!silk && drops != null && !drops.isEmpty()) {
+                Iterator<ItemStack> list = drops.iterator();
+                while (list.hasNext()) {
+                    ItemStack drop = list.next();
+                    if (isOre(block, meta) && !drop.isItemEqual(new ItemStack(block, 1, meta))
+                            && !(drop.getItem() instanceof ItemBlock) && world.rand.nextFloat() < getDoubleDropChance()) {
+                        dropItem(world, x, y, z, drop.copy());
+                    }
+                }
+            }
+
+            //special drop logic
             ArrayList<ItemStack> specialdrops = RandomOre.getDroppedItems(user, block, meta, harvestlvl, fortune, silk,
                     y);
 
