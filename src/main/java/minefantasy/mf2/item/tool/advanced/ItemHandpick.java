@@ -67,8 +67,8 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial {
             int fortune = EnchantmentHelper.getFortuneModifier(user);
             boolean silk = EnchantmentHelper.getSilkTouchModifier(user);
 
-            //double drop logic (ignores fortune enchantment)
-            ArrayList<ItemStack> drops = block.getDrops(world, x, y, z, meta, 0);
+            //double drop logic
+            ArrayList<ItemStack> drops = block.getDrops(world, x, y, z, meta, ConfigTools.handpickFortune ? fortune : 0);
 
             if (!silk && drops != null && !drops.isEmpty()) {
                 Iterator<ItemStack> list = drops.iterator();
