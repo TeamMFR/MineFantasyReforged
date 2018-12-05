@@ -18,6 +18,7 @@ import minefantasy.mf2.container.*;
 import minefantasy.mf2.entity.EntitySmoke;
 import minefantasy.mf2.entity.list.EntityListMF;
 import minefantasy.mf2.hunger.HungerSystemMF;
+import minefantasy.mf2.integration.CustomStone;
 import minefantasy.mf2.integration.minetweaker.MTCompat;
 import minefantasy.mf2.item.archery.ArrowFireFlint;
 import minefantasy.mf2.item.archery.ArrowFirerMF;
@@ -162,6 +163,7 @@ public class CommonProxyMF implements IGuiHandler, ISmokeHandler {
     }
 
     public void postInit() {
+        CustomStone.init();
         EntityListMF.register();
     }
 

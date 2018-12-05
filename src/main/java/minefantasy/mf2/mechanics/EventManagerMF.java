@@ -27,6 +27,7 @@ import minefantasy.mf2.entity.EntityCogwork;
 import minefantasy.mf2.entity.EntityItemUnbreakable;
 import minefantasy.mf2.entity.mob.EntityDragon;
 import minefantasy.mf2.farming.FarmingHelper;
+import minefantasy.mf2.integration.CustomStone;
 import minefantasy.mf2.item.ClientItemsMF;
 import minefantasy.mf2.item.food.FoodListMF;
 import minefantasy.mf2.item.list.ComponentListMF;
@@ -81,7 +82,7 @@ public class EventManagerMF {
 
     public static final String hitspeedNBT = "MF_HitCooldown";
     public static final String injuredNBT = "MF_Injured";
-    public static boolean displayOreDict = false;
+    public static boolean displayOreDict;
 
     private static XSTRandom random = new XSTRandom();
 
@@ -185,7 +186,6 @@ public class EventManagerMF {
             time--;
             user.getEntityData().setInteger(hitspeedNBT, time);
         }
-
     }
 
     public static void setHitTime(EntityLivingBase user, int time) {
@@ -380,7 +380,7 @@ public class EventManagerMF {
                 Iterator<ItemStack> list = stuckArrows.iterator();
 
                 while (list.hasNext()) {
-                    ItemStack arrow = (ItemStack) list.next();
+                    ItemStack arrow = list.next();
                     if (arrow != null) {
                         dropper.entityDropItem(arrow, 0.0F);
                     }
@@ -583,11 +583,11 @@ public class EventManagerMF {
         Block broken = event.block;
 
         if (broken != null && ConfigHardcore.HCCallowRocks) {
-            if (broken == Blocks.stone && held == null) {
+            if (held == null && CustomStone.isStone(broken)) {
                 entityDropItem(event.world, event.x, event.y, event.z,
                         new ItemStack(ComponentListMF.sharp_rock, random.nextInt(3) + 1));
             }
-            if (broken instanceof BlockLeavesBase && held != null && held.getItem() == ComponentListMF.sharp_rock) {
+            if (held != null && held.getItem() == ComponentListMF.sharp_rock && broken instanceof BlockLeavesBase) {
                 if (random.nextInt(5) == 0) {
                     entityDropItem(event.world, event.x, event.y, event.z,
                             new ItemStack(Items.stick, random.nextInt(3) + 1));
@@ -599,7 +599,7 @@ public class EventManagerMF {
             }
         }
 
-        if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(player) && ConfigStamina.affectMining) {
+        if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player)) {
             float points = 2.0F * ConfigStamina.miningSpeed;
             ItemWeaponMF.applyFatigue(player, points, 20F);
 
@@ -615,9 +615,8 @@ public class EventManagerMF {
             entityitem.delayBeforeCanPickup = 10;
             world.spawnEntityInWorld(entityitem);
             return entityitem;
-        } else {
-            return null;
         }
+        return null;
     }
 
     private void addKillTo(EntityPlayer hunter, String type) {
