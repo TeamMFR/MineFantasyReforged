@@ -75,19 +75,33 @@ public class KnowledgePageRegistry {
         KnowledgeListMF.research.addPages(new EntryPageText("knowledge.research.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMF.researchTableRecipe),
                 new EntryPageText("knowledge.research.2"));
-        KnowledgeListMF.talisman.addPages(new EntryPageText("knowledge.talisman.1"),
-                new EntryPageRecipeAnvil(KnowledgeListMF.talismanRecipe),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.artBookR),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.conBookR),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.proBookR),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.engBookR),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.comBookR), new EntryPageText("knowledge.talisman.2"),
-                new EntryPageRecipeAnvil(KnowledgeListMF.greatTalismanRecipe));
-        KnowledgeListMF.talisman.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.artBook2R),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.conBook2R),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.proBook2R),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.engBook2R),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.comBook2R));
+
+        //IDKH to make it look not ugly without significant code changes
+        KnowledgeListMF.talisman.addPages(new EntryPageText("knowledge.talisman.1"));
+        if (!ConfigHardcore.HCCRemoveTalismansCraft) {
+            KnowledgeListMF.talisman.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.talismanRecipe));
+        }
+        if (!ConfigHardcore.HCCRemoveBooksCraft) {
+            KnowledgeListMF.talisman.addPages(new EntryPageRecipeCarpenter(KnowledgeListMF.artBookR),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.conBookR),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.proBookR),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.engBookR),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.comBookR));
+        }
+        KnowledgeListMF.talisman.addPages(
+                new EntryPageText("knowledge.talisman.2"));
+        if (!ConfigHardcore.HCCRemoveTalismansCraft) {
+            KnowledgeListMF.talisman.addPages(new EntryPageRecipeAnvil(KnowledgeListMF.greatTalismanRecipe));
+        }
+        if (!ConfigHardcore.HCCRemoveBooksCraft) {
+            KnowledgeListMF.talisman.addPages(
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.artBook2R),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.conBook2R),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.proBook2R),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.engBook2R),
+                    new EntryPageRecipeCarpenter(KnowledgeListMF.comBook2R));
+        }
+
         KnowledgeListMF.stamina.addPages(new EntryPageText("knowledge.stamina.1"));
         KnowledgeListMF.combat.addPages(new EntryPageText("knowledge.combat.1"),
                 new EntryPageText("knowledge.parry.info"), new EntryPageText("knowledge.advparry.info"),
