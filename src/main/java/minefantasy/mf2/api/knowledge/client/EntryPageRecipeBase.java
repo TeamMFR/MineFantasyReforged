@@ -14,7 +14,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -22,12 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryPageRecipeBase extends EntryPage {
-    public static int switchRate = 15;
     private Minecraft mc = Minecraft.getMinecraft();
-    private IRecipe[] recipes = new IRecipe[]{};
+    private IRecipe[] recipes;
     private int recipeID;
-    private boolean shapelessRecipe = false;
-    private boolean oreDictRecipe = false;
     private ItemStack tooltipStack;
 
     public EntryPageRecipeBase(List<IRecipe> recipes) {
@@ -53,7 +49,7 @@ public class EntryPageRecipeBase extends EntryPage {
         this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/craftGrid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
-        IRecipe recipe = recipes[recipeID];
+        IRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method.workbench") + ">";
         mc.fontRenderer.drawSplitString(cft,
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
@@ -77,8 +73,9 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, IRecipe recipe) {
-        shapelessRecipe = false;
-        oreDictRecipe = false;
+        if (recipe == null) {
+            return;
+        }
 
         if (recipe instanceof ShapedRecipes) {
             ShapedRecipes shaped = (ShapedRecipes) recipe;
@@ -103,8 +100,6 @@ public class EntryPageRecipeBase extends EntryPage {
                                 true, posX, posY, mx, my);
                 }
             }
-
-            oreDictRecipe = true;
         } else if (recipe instanceof ShapelessRecipes) {
             ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
 
@@ -122,8 +117,6 @@ public class EntryPageRecipeBase extends EntryPage {
                     }
                 }
             }
-
-            shapelessRecipe = true;
         } else if (recipe instanceof ShapelessOreRecipe) {
             ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
 
@@ -143,9 +136,6 @@ public class EntryPageRecipeBase extends EntryPage {
                     }
                 }
             }
-
-            shapelessRecipe = true;
-            oreDictRecipe = true;
         }
 
         renderResult(parent, recipe.getRecipeOutput(), false, posX, posY, mx, my);
@@ -209,7 +199,6 @@ public class EntryPageRecipeBase extends EntryPage {
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;
         }
-        boolean mouseDown = Mouse.isButtonDown(0);
 
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);

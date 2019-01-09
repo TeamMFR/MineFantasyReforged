@@ -40,7 +40,7 @@ public class EntryPageCrucible extends EntryPage {
         this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/crucible.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
-        Alloy recipe = recipes[recipeID];
+        Alloy recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method." + getName() + "") + ">";
         mc.fontRenderer.drawSplitString(cft,
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
@@ -71,6 +71,9 @@ public class EntryPageCrucible extends EntryPage {
     }
 
     private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, Alloy recipe) {
+        if (recipe == null) {
+            return;
+        }
         drawGrid:
         {
             for (int y = 0; y < 3; y++) {

@@ -9,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StatCollector;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -54,9 +53,7 @@ public class EntryPageRecipeBloom extends EntryPage {
                 parsedTooltip.add(s_);
                 first = false;
             }
-
             minefantasy.mf2.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-
         }
 
     }
@@ -90,7 +87,6 @@ public class EntryPageRecipeBloom extends EntryPage {
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;
         }
-        boolean mouseDown = Mouse.isButtonDown(0);
 
         GL11.glPushMatrix();
         GL11.glEnable(GL11.GL_BLEND);

@@ -16,18 +16,17 @@ import net.minecraft.util.StatCollector;
 import java.util.ArrayList;
 
 public class InformationBase {
-    public static boolean easyResearch = false;
-    public static boolean unlockAll = false;
-    public static Item scroll;
-    private static int nextID = 0;
+    public static boolean easyResearch;
+    public static boolean unlockAll;
+    private static int nextID;
     public final int displayColumn;
     public final int displayRow;
     public final InformationBase parentInfo;
     public final ItemStack theItemStack;
     private final String description;
     private final String idName;
-    public int ID = 0;
-    public String[] requirements = null;
+    public int ID;
+    public String[] requirements;
     /**
      * Returns the fully description of the achievement - ready to be displayed on
      * screen.
@@ -38,9 +37,9 @@ public class InformationBase {
     private IStatStringFormat statStringFormatter;
     private boolean isSpecial;
     private boolean isPerk;
-    private ArrayList<SkillRequirement> skills = new ArrayList<SkillRequirement>();
-    private int artefactCount = 0;
-    private ArrayList<EntryPage> pages = new ArrayList<EntryPage>();
+    private ArrayList<SkillRequirement> skills = new ArrayList<>();
+    private int artefactCount;
+    private ArrayList<EntryPage> pages = new ArrayList<>();
 
     public InformationBase(String name, int x, int y, int artefacts, Item icon, InformationBase parent) {
         this(name, x, y, artefacts, new ItemStack(icon), parent);

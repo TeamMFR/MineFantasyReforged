@@ -20,12 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryPageRecipeAnvil extends EntryPage {
-    public static int switchRate = 15;
     private Minecraft mc = Minecraft.getMinecraft();
-    private IAnvilRecipe[] recipes = new IAnvilRecipe[]{};
+    private IAnvilRecipe[] recipes;
     private int recipeID;
-    private boolean shapelessRecipe = false;
-    private boolean oreDictRecipe = false;
     private ItemStack tooltipStack;
 
     public EntryPageRecipeAnvil(List<IAnvilRecipe> recipes) {
@@ -34,7 +31,6 @@ public class EntryPageRecipeAnvil extends EntryPage {
             array[a] = recipes.get(a);
         }
         this.recipes = array;
-
     }
 
     public EntryPageRecipeAnvil(IAnvilRecipe... recipes) {
@@ -51,7 +47,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
         this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/anvilGrid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
-        IAnvilRecipe recipe = recipes[recipeID];
+        IAnvilRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method.anvil") + ">";
         mc.fontRenderer.drawSplitString(cft,
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
@@ -78,8 +74,6 @@ public class EntryPageRecipeAnvil extends EntryPage {
     private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, IAnvilRecipe recipe) {
         if (recipe == null)
             return;
-        shapelessRecipe = false;
-        oreDictRecipe = false;
 
         GL11.glColor3f(255, 255, 255);
         GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX + 34, posY + 51, true,
@@ -112,8 +106,6 @@ public class EntryPageRecipeAnvil extends EntryPage {
                     }
                 }
             }
-
-            shapelessRecipe = true;
         }
         renderResult(parent, recipe.getRecipeOutput(), false, posX, posY, mx, my, recipe.outputHot());
     }

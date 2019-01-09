@@ -56,23 +56,25 @@ public class CommandMF implements ICommand {
     public void processCommand(ICommandSender iCommandSender, String[] strings) {
         if (iCommandSender instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) iCommandSender;
-            if (strings[0].equalsIgnoreCase("edit")) {
-                ItemStack equippedItem = player.getCurrentEquippedItem();
-                if (equippedItem == null) {
-                    player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("command.invalid.item")));
-                    return;
-                }
+            if (strings.length > 0) {
+                if (strings[0].equalsIgnoreCase("edit")) {
+                    ItemStack equippedItem = player.getCurrentEquippedItem();
+                    if (equippedItem == null) {
+                        player.addChatMessage(new ChatComponentText(StatCollector.translateToLocal("command.invalid.item")));
+                        return;
+                    }
 
-                switch (strings[1]) {
-                    case "material":
-                        processEditMaterialCommand(strings, player, equippedItem);
-                        break;
-                    case "quality":
-                        processQualityCommand(strings, player, equippedItem);
-                        break;
-                    case "unbreakable":
-                        processUnbreakableCommand(strings, player, equippedItem);
-                        break;
+                    switch (strings[1]) {
+                        case "material":
+                            processEditMaterialCommand(strings, player, equippedItem);
+                            break;
+                        case "quality":
+                            processQualityCommand(strings, player, equippedItem);
+                            break;
+                        case "unbreakable":
+                            processUnbreakableCommand(strings, player, equippedItem);
+                            break;
+                    }
                 }
             }
         }

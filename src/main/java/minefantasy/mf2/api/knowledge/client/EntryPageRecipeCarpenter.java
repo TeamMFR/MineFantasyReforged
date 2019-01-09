@@ -52,7 +52,7 @@ public class EntryPageRecipeCarpenter extends EntryPage {
                 .bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/carpenterGrid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
-        ICarpenterRecipe recipe = recipes[recipeID];
+        ICarpenterRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
         String cft = "<" + StatCollector.translateToLocal("method.carpenter") + ">";
         mc.fontRenderer.drawSplitString(cft,
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);

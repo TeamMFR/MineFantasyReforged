@@ -6,9 +6,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.item.crafting.IRecipe;
 
 public class EntryPageCraft extends EntryPage {
-    public static int switchRate = 15;
     private Minecraft mc = Minecraft.getMinecraft();
-    private IRecipe[] recipes = new IRecipe[]{};
+    private IRecipe[] recipes;
     private int recipeID;
 
     public EntryPageCraft(IRecipe... recipes) {
@@ -24,12 +23,14 @@ public class EntryPageCraft extends EntryPage {
         this.mc.getTextureManager().bindTexture(TextureHelperMF.getResource("textures/gui/knowledge/craftGrid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
-        IRecipe recipe = recipes[recipeID];
+        IRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
         renderRecipe(parent, x, y, f, posX, posY, recipe);
-
     }
 
     private void renderRecipe(GuiScreen parent, int x, int y, float f, int posX, int posY, IRecipe recipe) {
+        if(recipe == null) {
+            return;
+        }
         // TODO: Render Grid
     }
 
