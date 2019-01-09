@@ -108,7 +108,7 @@ public class CustomToolRecipe extends ShapedAnvilRecipes {
             int newAnvil = anvil < 0 ? material.crafterAnvilTier : anvil;
             matrix.modifyTier(newTier, newAnvil, (int) (recipeTime * material.craftTimeModifier));
             if (isMain) {
-                matrix.modifyResearch("smelt" + material.name);
+                matrix.modifyResearch("smelt" + material.getName());
             }
             return true;
         }

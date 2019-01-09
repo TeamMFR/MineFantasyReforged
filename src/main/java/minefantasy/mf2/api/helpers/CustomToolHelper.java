@@ -240,14 +240,14 @@ public class CustomToolHelper {
             CustomMaterial main = getCustomPrimaryMaterial(item);
             if (main != null) {
                 String matName = StatCollector.translateToLocal(
-                        StatCollector.translateToLocal("material." + main.name.toLowerCase() + ".name"));
+                        StatCollector.translateToLocal("material." + main.getName() + ".name"));
                 list.add(EnumChatFormatting.GOLD + matName);
             }
         }
 
         if (haft != null) {
             String matName = StatCollector.translateToLocalFormatted("item.mod_haft.name",
-                    StatCollector.translateToLocal("material." + haft.name.toLowerCase() + ".name"));
+                    StatCollector.translateToLocal("material." + haft.getName() + ".name"));
             list.add(EnumChatFormatting.GOLD + matName);
         }
 
@@ -269,7 +269,7 @@ public class CustomToolHelper {
         CustomMaterial metals = getCustomPrimaryMaterial(item);
         if (metals != null) {
             String matName = StatCollector.translateToLocalFormatted("item.mod_joint.name",
-                    StatCollector.translateToLocal("material." + metals.name.toLowerCase() + ".name"));
+                    StatCollector.translateToLocal("material." + metals.getName() + ".name"));
             list.add(EnumChatFormatting.GOLD + matName);
         }
 
@@ -283,7 +283,7 @@ public class CustomToolHelper {
         CustomMaterial base = getCustomSecondaryMaterial(item);
         String name = "any";
         if (base != null) {
-            name = base.name.toLowerCase();
+            name = base.getName();
         }
         return StatCollector.translateToLocalFormatted(unlocalName,
                 StatCollector.translateToLocal("material." + name + ".name"));
@@ -297,7 +297,7 @@ public class CustomToolHelper {
         CustomMaterial base = getCustomPrimaryMaterial(item);
         String name = "any";
         if (base != null) {
-            name = base.name.toLowerCase();
+            name = base.getName();
         }
         return StatCollector.translateToLocalFormatted(unlocalName,
                 StatCollector.translateToLocal("material." + name + ".name"));
@@ -404,10 +404,10 @@ public class CustomToolHelper {
             CustomMaterial haft = getCustomSecondaryMaterial(item);
 
             if (base != null) {
-                reference += "_" + base.name.toLowerCase();
+                reference += "_" + base.getName();
             }
             if (haft != null) {
-                reference += "_" + haft.name.toLowerCase();
+                reference += "_" + haft.getName();
             }
         }
 
@@ -465,8 +465,8 @@ public class CustomToolHelper {
         CustomMaterial main1 = getCustomPrimaryMaterial(stack);
         CustomMaterial haft1 = getCustomSecondaryMaterial(stack);
 
-        ByteBufUtils.writeUTF8String(packet, main1 != null ? main1.name : "null");
-        ByteBufUtils.writeUTF8String(packet, haft1 != null ? haft1.name : "null");
+        ByteBufUtils.writeUTF8String(packet, main1 != null ? main1.getName() : "null");
+        ByteBufUtils.writeUTF8String(packet, haft1 != null ? haft1.getName() : "null");
     }
 
     public static ItemStack readFromPacket(ByteBuf packet) {

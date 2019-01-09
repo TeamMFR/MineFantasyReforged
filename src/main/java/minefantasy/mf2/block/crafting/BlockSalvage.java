@@ -166,9 +166,8 @@ public class BlockSalvage extends Block {
             entityitem.delayBeforeCanPickup = 10;
             world.spawnEntityInWorld(entityitem);
             return entityitem;
-        } else {
-            return null;
         }
+        return null;
     }
 
     private EntityItem getDrop(World world, int x, int y, int z) {

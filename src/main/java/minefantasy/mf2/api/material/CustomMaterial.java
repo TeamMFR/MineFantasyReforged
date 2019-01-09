@@ -21,7 +21,7 @@ public class CustomMaterial {
     public static final int[] flameResistArray = new int[]{100, 300};
     public static HashMap<String, CustomMaterial> materialList = new HashMap<String, CustomMaterial>();
     public static HashMap<String, ArrayList<CustomMaterial>> typeList = new HashMap<String, ArrayList<CustomMaterial>>();
-    public final String type, name;
+    public final String name, type;
     public ArrayList<ItemStack> items = new ArrayList<ItemStack>();
     /**
      * The material colour
@@ -75,6 +75,20 @@ public class CustomMaterial {
     }
 
     /**
+     * Gets material name
+     */
+    public String getName() {
+        return name.toLowerCase();
+    }
+
+    /**
+     * Gets material type
+     */
+    public String getType() {
+        return type.toLowerCase();
+    }
+
+    /**
      * Gets a material by name
      */
     public static CustomMaterial getMaterial(String name) {
@@ -118,9 +132,6 @@ public class CustomMaterial {
         NBTTagCompound nbt = getNBT(item, false);
         if (nbt != null) {
             if (nbt.hasKey(slot)) {
-                if (nbt.getString(slot).equalsIgnoreCase("refinediron")) { // fix old namings, it can be removed later
-                    nbt.setString(slot, "pigiron");
-                }
                 return getMaterial(nbt.getString(slot));
             }
         }
@@ -143,7 +154,7 @@ public class CustomMaterial {
 
     public static ArrayList<CustomMaterial> getList(String type) {
         if (typeList.get(type) == null) {
-            typeList.put(type, new ArrayList<CustomMaterial>());
+            typeList.put(type, new ArrayList<>());
         }
         return typeList.get(type);
     }
@@ -196,7 +207,7 @@ public class CustomMaterial {
     }
 
     public CustomMaterial register() {
-        materialList.put(name.toLowerCase(), this);
+        materialList.put(this.getName(), this);
         getList(type).add(this);
         return this;
     }
@@ -258,8 +269,8 @@ public class CustomMaterial {
     // false is a non-unique value, this should not be used when youre not sure if
     // the material is a wood
     public boolean isHardwood() {
-        if (this.name.toLowerCase().contains("wood")) {
-            if (this.name.toLowerCase().contains("yew")) {// Yew is a softwood but has a higher hardness value
+        if (this.getName().contains("wood")) {
+            if (this.getName().contains("yew")) {// Yew is a softwood but has a higher hardness value
                 return false;
             }
             return this.hardness > 3.3;
@@ -275,7 +286,7 @@ public class CustomMaterial {
     // A rating BELOW 8.0 means that the wood is not suitable for a bow and this
     // funtion will return zero
     private float getBowRating() {
-        if (this.name.toLowerCase().contains("wood")) {
+        if (this.getName().contains("wood")) {
             float mid = (0.83F * (this.durability / this.flexibility));
             float result = (10F * this.flexibility * mid * mid) / this.density;
             return result > 8.0F ? result : 0;
