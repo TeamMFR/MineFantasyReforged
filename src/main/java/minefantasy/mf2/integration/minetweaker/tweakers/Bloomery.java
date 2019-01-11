@@ -22,15 +22,12 @@ import java.util.Map;
 public class Bloomery {
 
     @ZenMethod
-    public static void addRecipe(IItemStack result, IIngredient input) {
+    public static void addRecipe(@NotNull IItemStack result, @NotNull IIngredient input) {
         MineTweakerAPI.apply(new AddRecipeAction(result, input));
     }
 
     @ZenMethod
     public static void remove(@NotNull IIngredient output, @Optional IIngredient input) {
-        if (output == null)
-            throw new IllegalArgumentException("Output value cannot be null");
-
         HashMap<ItemStack, ItemStack> recipeList = BloomRecipe.recipeList;
 
         List<ItemStack> toRemove = new ArrayList<ItemStack>();

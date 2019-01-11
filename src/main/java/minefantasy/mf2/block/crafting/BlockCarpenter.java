@@ -70,25 +70,21 @@ public class BlockCarpenter extends BlockContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer user, int side, float xOffset,
                                     float yOffset, float zOffset) {
-        {
-            TileEntityCarpenterMF tile = getTile(world, x, y, z);
-            if (tile != null
-                    && (world.isAirBlock(x, y + 1, z) || !world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))) {
-                if (side != 1 || !tile.tryCraft(user) && !world.isRemote) {
-                    user.openGui(MineFantasyII.instance, 0, world, x, y, z);
-                }
+        TileEntityCarpenterMF tile = getTile(world, x, y, z);
+        if (tile != null
+                && (world.isAirBlock(x, y + 1, z) || !world.isSideSolid(x, y + 1, z, ForgeDirection.DOWN))) {
+            if (side != 1 || !tile.tryCraft(user) && !world.isRemote) {
+                user.openGui(MineFantasyII.instance, 0, world, x, y, z);
             }
-            return true;
         }
+        return true;
     }
 
     @Override
     public void onBlockClicked(World world, int x, int y, int z, EntityPlayer user) {
-        {
-            TileEntityCarpenterMF tile = getTile(world, x, y, z);
-            if (tile != null) {
-                tile.tryCraft(user);
-            }
+        TileEntityCarpenterMF tile = getTile(world, x, y, z);
+        if (tile != null) {
+            tile.tryCraft(user);
         }
     }
 

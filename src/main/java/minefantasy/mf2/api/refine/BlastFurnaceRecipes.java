@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,10 +21,14 @@ public class BlastFurnaceRecipes {
     }
 
     /**
-     * Used to call methods addSmelting and getSmeltingResult.
+     * Used to call methods addRecipe, removeRecipe and getSmeltingResult
      */
     public static BlastFurnaceRecipes smelting() {
         return smeltingBase;
+    }
+
+    public Map<ItemStack, ItemStack> getSmeltingList() {
+        return this.smeltingList;
     }
 
     public void addRecipe(Block input, ItemStack output) {
@@ -36,6 +41,21 @@ public class BlastFurnaceRecipes {
 
     public void addRecipe(ItemStack input, ItemStack output) {
         this.smeltingList.put(input, output);
+    }
+
+    public void removeRecipe(@Nullable ItemStack input, ItemStack output) {
+        if (output != null) {
+            for (Iterator<Map.Entry<ItemStack, ItemStack>> it = this.smeltingList.entrySet().iterator(); it.hasNext(); ) {
+                Map.Entry<ItemStack, ItemStack> entry = it.next();
+                if (input != null && !this.compareItemStacks(entry.getKey(), input)) {
+                    continue;
+                }
+
+                if (compareItemStacks(entry.getValue(), output)) {
+                    it.remove();
+                }
+            }
+        }
     }
 
     /**
@@ -51,17 +71,13 @@ public class BlastFurnaceRecipes {
             }
 
             entry = (Entry) iterator.next();
-        } while (!this.func_151397_a(input, (ItemStack) entry.getKey()));
+        } while (!this.compareItemStacks(input, (ItemStack) entry.getKey()));
 
         return (ItemStack) entry.getValue();
     }
 
-    private boolean func_151397_a(ItemStack p_151397_1_, ItemStack p_151397_2_) {
+    private boolean compareItemStacks(ItemStack p_151397_1_, ItemStack p_151397_2_) {
         return p_151397_2_.getItem() == p_151397_1_.getItem()
                 && (p_151397_2_.getItemDamage() == 32767 || p_151397_2_.getItemDamage() == p_151397_1_.getItemDamage());
-    }
-
-    public Map<ItemStack, ItemStack> getSmeltingList() {
-        return this.smeltingList;
     }
 }

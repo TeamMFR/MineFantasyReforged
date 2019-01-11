@@ -275,7 +275,7 @@ public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICa
             int output = getOutputSlotNum();
 
             if (this.inventory[output] == null) {
-                if (result.getMaxStackSize() == 1 && lastPlayerHit.length() > 0) {
+                if (result.getMaxStackSize() == 1 && !lastPlayerHit.isEmpty()) {
                     getNBT(result).setString("MF_CraftedByName", lastPlayerHit);
                 }
                 this.inventory[output] = result;
@@ -494,9 +494,6 @@ public class TileEntityCarpenterMF extends TileEntity implements IInventory, ICa
     }
 
     public boolean canCraft() {
-        if (worldObj.isRemote) {
-            // return canCraft == 1;
-        }
         if (progressMax > 0 && recipe != null && recipe instanceof ItemStack) {
             return this.canFitResult(recipe);
         }
