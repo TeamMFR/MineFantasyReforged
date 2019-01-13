@@ -40,13 +40,13 @@ public class ForgedToolRecipes {
             CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
             ItemStack bar = ComponentListMF.bar.createComm(customMat.name);
             for (ItemStack ingot : OreDictionary.getOres("ingot" + customMat.name)) {
-                KnowledgeListMF.barR.add(MineFantasyAPI.addAnvilRecipe(artisanry, bar, "", true, "hammer", -1, -1,
+                KnowledgeListMF.barR.add(MineFantasyAPI.addAnvilRecipe(null, bar, "", true, "hammer", -1, -1,
                         (int) (customMat.craftTimeModifier / 2F), new Object[]{"I", 'I', ingot,}));
             }
 
             ItemStack defaultIngot = customMat.getItem();
             if (defaultIngot != null) {
-                KnowledgeListMF.baringotR.add(MineFantasyAPI.addAnvilRecipe(artisanry, defaultIngot, "", true, "hammer",
+                KnowledgeListMF.baringotR.add(MineFantasyAPI.addAnvilRecipe(null, defaultIngot, "", true, "hammer",
                         -1, -1, (int) (customMat.craftTimeModifier / 2F), new Object[]{"I", 'I', bar,}));
             }
         }

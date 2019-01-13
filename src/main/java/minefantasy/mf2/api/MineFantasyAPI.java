@@ -60,35 +60,25 @@ public class MineFantasyAPI {
         }
     }
 
-    /**
-     * Adds a shaped recipe for anvils with all variables
-     *
-     * @param result     The output item
-     * @param hot        True if the result is hot(Does not apply to blocks)
-     * @param experiance the experiance gained from crafting
-     * @param toolType   the tool type required to hit ("hammer", "hvyHammer", etc)
-     * @param hammerType the hammer tier required for creation:
-     * @param anvil      the anvil required bronze 0, iron 1, steel 2
-     * @param forgeTime  The time taken to forge(default is 200. each hit is about 100)
-     * @param input      The input for the item (Exactly the same as regular recipes)
-     */
-    public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, String toolType, int hammerType,
-                                      int anvil, int forgeTime, Object... input) {
-        CraftingManagerAnvil.getInstance().addRecipe(result, skill, "", hot, toolType, hammerType, anvil, forgeTime,
-                input);
-    }
-
-    /**
-     * {@link MineFantasyAPI#addCarpenterRecipe}
-     */
     public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, int hammerType, int anvil,
                                       int forgeTime, Object... input) {
         addAnvilRecipe(skill, result, hot, "hammer", hammerType, anvil, forgeTime, input);
     }
 
+    public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, String toolType, int hammerType,
+                                      int anvil, int forgeTime, Object... input) {
+        addAnvilRecipe(skill, result, "", hot, toolType, hammerType, anvil, forgeTime,
+                input);
+    }
+
+    public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot,
+                                              int hammerType, int anvil, int forgeTime, Object... input) {
+        return addAnvilRecipe(skill, result, research, hot, "hammer", hammerType, anvil, forgeTime, input);
+    }
+
     /**
      * Adds a shaped recipe for anvils with all variables
-     *
+     * @param skill      The skill required for crafting
      * @param result     The output item
      * @param research   The research required
      * @param hot        True if the result is hot(Does not apply to blocks)
@@ -102,14 +92,6 @@ public class MineFantasyAPI {
                                               String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
         return CraftingManagerAnvil.getInstance().addRecipe(result, skill, research, hot, toolType, hammerType,
                 anvil, forgeTime, input);
-    }
-
-    /**
-     * {@link MineFantasyAPI#addCarpenterRecipe}
-     */
-    public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot,
-                                              int hammerType, int anvil, int forgeTime, Object... input) {
-        return addAnvilRecipe(skill, result, research, hot, "hammer", hammerType, anvil, forgeTime, input);
     }
 
     /**
@@ -141,13 +123,13 @@ public class MineFantasyAPI {
     /**
      * Adds a shaped recipe for carpenter benches sensetive to tiers
      *
-     * @param result     The output item (basic itemstack)
-     * @param sound      The sound it makes ("minefantasy2:blocks.carpentermallet"),
-     *                   "step.wood", etc
-     * @param toolType   the tool type required to hit
-     * @param toolTier   the tools tier required for creation:
-     * @param craftTime  The time taken to craft(default is 200. each hit is about 100)
-     * @param input      The input for the item (Exactly the same as regular recipes)
+     * @param result    The output item (basic itemstack)
+     * @param sound     The sound it makes ("minefantasy2:blocks.carpentermallet"),
+     *                  "step.wood", etc
+     * @param toolType  the tool type required to hit
+     * @param toolTier  the tools tier required for creation:
+     * @param craftTime The time taken to craft(default is 200. each hit is about 100)
+     * @param input     The input for the item (Exactly the same as regular recipes)
      */
     public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, ItemStack result, String research, String sound,
                                                           String toolType, int toolTier, int craftTime, Object... input) {
