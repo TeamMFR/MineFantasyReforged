@@ -20,15 +20,15 @@ public class Anvil {
 
     @ZenMethod
     public static void addShapedRecipe(@NotNull IItemStack output, String skill, String research, boolean hot,
-                                       double exp, String tool, int hammer, int anvil, int time, IIngredient[][] ingreds) {
-        MineTweakerAPI.apply(new AnvilAction(output, RPGElements.getSkillByName(skill), research, hot, (float) exp,
+                                       String tool, int hammer, int anvil, int time, IIngredient[][] ingreds) {
+        MineTweakerAPI.apply(new AnvilAction(output, RPGElements.getSkillByName(skill), research, hot,
                 tool, hammer, anvil, time, ingreds));
     }
 
     @ZenMethod
     public static void addShapelessRecipe(@NotNull IItemStack output, String skill, String research, boolean hot,
-                                          double exp, String tool, int hammer, int anvil, int time, IIngredient[] ingreds) {
-        MineTweakerAPI.apply(new AnvilAction(output, RPGElements.getSkillByName(skill), research, hot, (float) exp,
+                                          String tool, int hammer, int anvil, int time, IIngredient[] ingreds) {
+        MineTweakerAPI.apply(new AnvilAction(output, RPGElements.getSkillByName(skill), research, hot,
                 tool, hammer, anvil, time, ingreds));
     }
 
@@ -38,43 +38,40 @@ public class Anvil {
         Skill s;
         String research, tool;
         boolean hot;
-        float exp;
         int hammer, anvil, time;
         IIngredient[][] ingreds;
         IIngredient[] ingreds2;
         boolean shaped;
         IAnvilRecipe recipe;
 
-        public AnvilAction(IItemStack out, Skill s, String research, boolean hot, float exp, String tool, int hammer,
+        public AnvilAction(IItemStack out, Skill s, String research, boolean hot, String tool, int hammer,
                            int anvil, int time, IIngredient[][] ingreds) {
             this.output = out;
             this.s = s;
             this.research = research;
             this.tool = tool;
             this.hot = hot;
-            this.exp = exp;
             this.hammer = hammer;
             this.anvil = anvil;
             this.time = time;
             this.ingreds = ingreds;
             this.shaped = true;
-            recipe = new TweakedShapedAnvilRecipe(ingreds, out, tool, time, hammer, anvil, exp, hot, research, s);
+            recipe = new TweakedShapedAnvilRecipe(ingreds, out, tool, time, hammer, anvil, hot, research, s);
         }
 
-        public AnvilAction(IItemStack out, Skill s, String research, boolean hot, float exp, String tool, int hammer,
+        public AnvilAction(IItemStack out, Skill s, String research, boolean hot, String tool, int hammer,
                            int anvil, int time, IIngredient[] ingreds) {
             this.output = out;
             this.s = s;
             this.research = research;
             this.tool = tool;
             this.hot = hot;
-            this.exp = exp;
             this.hammer = hammer;
             this.anvil = anvil;
             this.time = time;
             this.ingreds2 = ingreds;
             this.shaped = false;
-            recipe = new TweakedShapelessAnvilRecipe(ingreds2, out, tool, time, hammer, anvil, exp, hot, research, s);
+            recipe = new TweakedShapelessAnvilRecipe(ingreds2, out, tool, time, hammer, anvil, hot, research, s);
         }
 
         @Override

@@ -116,7 +116,7 @@ public class TileEntityComponent extends TileEntity {
             nbt.setTag("ItemSave", itemsave);
         }
         if (material != null) {
-            nbt.setString("MaterialName", material.name);
+            nbt.setString("MaterialName", material.getName());
         }
     }
 
@@ -125,15 +125,6 @@ public class TileEntityComponent extends TileEntity {
             return;
 
         NetworkUtils.sendToWatchers(new StorageBlockPacket(this).generatePacket(), (WorldServer) worldObj, this.xCoord, this.zCoord);
-
-		/*
-        List<EntityPlayer> players = ((WorldServer) worldObj).playerEntities;
-		for (int i = 0; i < players.size(); i++) {
-			EntityPlayer player = players.get(i);
-			((WorldServer) worldObj).getEntityTracker().func_151248_b(player,
-					new StorageBlockPacket(this).generatePacket());
-		}
-		*/
     }
 
     public boolean isFull() {

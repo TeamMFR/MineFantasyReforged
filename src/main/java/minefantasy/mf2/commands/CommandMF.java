@@ -93,7 +93,7 @@ public class CommandMF implements ICommand {
         }
 
         String slot = material.type.equalsIgnoreCase("metal") ? CustomToolHelper.slot_main : CustomToolHelper.slot_haft;
-        CustomMaterial.addMaterial(equippedItem, slot, material.name);
+        CustomMaterial.addMaterial(equippedItem, slot, material.getName());
         onSuccess(player);
     }
 

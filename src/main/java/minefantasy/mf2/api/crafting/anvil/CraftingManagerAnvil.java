@@ -34,20 +34,20 @@ public class CraftingManagerAnvil {
         return instance;
     }
 
-    public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp, String tool,
+    public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool,
                                   int hammer, int anvil, int time, Object... input) {
-        return addRecipe(result, skill, research, hot, exp, tool, hammer, anvil, time, (byte) 0, input);
+        return addRecipe(result, skill, research, hot, tool, hammer, anvil, time, (byte) 0, input);
     }
 
-    public IAnvilRecipe addToolRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp,
+    public IAnvilRecipe addToolRecipe(ItemStack result, Skill skill, String research, boolean hot,
                                       String tool, int hammer, int anvil, int time, Object... input) {
-        return addRecipe(result, skill, research, hot, exp, tool, hammer, anvil, time, (byte) 1, input);
+        return addRecipe(result, skill, research, hot, tool, hammer, anvil, time, (byte) 1, input);
     }
 
     /**
      * Adds a recipe. See spreadsheet on first page for details.
      */
-    private IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, float exp, String tool,
+    private IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool,
                                    int hammer, int anvil, int time, byte recipeType, Object... input) {
         String var3 = "";
         int var4 = 0;
@@ -106,10 +106,10 @@ public class CraftingManagerAnvil {
 
         IAnvilRecipe recipe;
         if (recipeType == (byte) 1) {
-            recipe = new CustomToolRecipe(var5, var6, var15, result, tool, time, hammer, anvil, exp, hot, research,
+            recipe = new CustomToolRecipe(var5, var6, var15, result, tool, time, hammer, anvil, hot, research,
                     skill);
         } else {
-            recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, hot, research,
+            recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, hot, research,
                     skill);
         }
         this.recipes.add(recipe);
@@ -117,7 +117,7 @@ public class CraftingManagerAnvil {
     }
 
     public IAnvilRecipe addShapelessRecipe(ItemStack output, Skill skill, String research, boolean hot,
-                                           float experience, String tool, int hammer, int anvil, int time, Object... input) {
+                                           String tool, int hammer, int anvil, int time, Object... input) {
         ArrayList var3 = new ArrayList();
         Object[] var4 = input;
         int var5 = input.length;
@@ -138,7 +138,7 @@ public class CraftingManagerAnvil {
             }
         }
 
-        IAnvilRecipe recipe = new ShapelessAnvilRecipes(output, tool, experience, hammer, anvil, time, var3, hot,
+        IAnvilRecipe recipe = new ShapelessAnvilRecipes(output, tool, hammer, anvil, time, var3, hot,
                 research, skill);
         this.recipes.add(recipe);
         return recipe;

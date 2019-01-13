@@ -36,7 +36,7 @@ public abstract class TileEntityWoodDecor extends TileEntity {
     }
 
     public String getMaterialName() {
-        return this.material != null ? material.name : "RefinedWood";
+        return this.material != null ? material.getName() : "RefinedWood";
     }
 
     public CustomMaterial trySetMaterial(String materialName) {

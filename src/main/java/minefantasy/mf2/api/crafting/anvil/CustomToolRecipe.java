@@ -12,8 +12,8 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class CustomToolRecipe extends ShapedAnvilRecipes {
     public CustomToolRecipe(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time,
-                            int hammer, int anvi, float exp, boolean hot, String research, Skill skill) {
-        super(wdth, heit, inputs, output, toolType, time, hammer, anvi, exp, hot, research, skill);
+                            int hammer, int anvi, boolean hot, String research, Skill skill) {
+        super(wdth, heit, inputs, output, toolType, time, hammer, anvi, hot, research, skill);
     }
 
     /**

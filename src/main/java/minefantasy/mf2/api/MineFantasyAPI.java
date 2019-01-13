@@ -74,7 +74,7 @@ public class MineFantasyAPI {
      */
     public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, String toolType, int hammerType,
                                       int anvil, int forgeTime, Object... input) {
-        CraftingManagerAnvil.getInstance().addRecipe(result, skill, "", hot, 0F, toolType, hammerType, anvil, forgeTime,
+        CraftingManagerAnvil.getInstance().addRecipe(result, skill, "", hot, toolType, hammerType, anvil, forgeTime,
                 input);
     }
 
@@ -92,7 +92,6 @@ public class MineFantasyAPI {
      * @param result     The output item
      * @param research   The research required
      * @param hot        True if the result is hot(Does not apply to blocks)
-     * @param experiance the experiance gained from crafting
      * @param toolType   the tool type required to hit ("hammer", "hvyHammer", etc)
      * @param hammerType the hammer tier required for creation:
      * @param anvil      the anvil required bronze 0, iron 1, steel 2
@@ -101,7 +100,7 @@ public class MineFantasyAPI {
      */
     public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot,
                                               String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-        return CraftingManagerAnvil.getInstance().addRecipe(result, skill, research, hot, 0F, toolType, hammerType,
+        return CraftingManagerAnvil.getInstance().addRecipe(result, skill, research, hot, toolType, hammerType,
                 anvil, forgeTime, input);
     }
 
@@ -129,7 +128,7 @@ public class MineFantasyAPI {
      */
     public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot,
                                                   String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-        return CraftingManagerAnvil.getInstance().addToolRecipe(result, skill, research, hot, 0F, toolType, hammerType,
+        return CraftingManagerAnvil.getInstance().addToolRecipe(result, skill, research, hot, toolType, hammerType,
                 anvil, forgeTime, input);
     }
 
@@ -145,7 +144,6 @@ public class MineFantasyAPI {
      * @param result     The output item (basic itemstack)
      * @param sound      The sound it makes ("minefantasy2:blocks.carpentermallet"),
      *                   "step.wood", etc
-     * @param experience the experience gained from crafting
      * @param toolType   the tool type required to hit
      * @param toolTier   the tools tier required for creation:
      * @param craftTime  The time taken to craft(default is 200. each hit is about 100)

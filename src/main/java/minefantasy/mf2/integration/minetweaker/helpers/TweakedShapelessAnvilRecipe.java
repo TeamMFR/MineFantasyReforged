@@ -12,7 +12,6 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
 
     private int hammer, anvil, /* craft, */
             time, width, height;
-    private float exp;
     private IItemStack result;
     private IIngredient[] ingreds;
     private Skill s;
@@ -20,7 +19,7 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
     private boolean hot;
 
     public TweakedShapelessAnvilRecipe(IIngredient[] input, IItemStack output, String tool, int time, int hammer,
-                                       int anvil, float exp, boolean hot, String research, Skill s) {
+                                       int anvil, boolean hot, String research, Skill s) {
         this.height = 4;
         this.width = 4;
         this.ingreds = input;
@@ -28,7 +27,6 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
         this.tool = tool;
         this.hammer = hammer;
         this.anvil = anvil;
-        this.exp = exp;
         this.hot = hot;
         this.research = research;
         this.s = s;
@@ -48,11 +46,6 @@ public class TweakedShapelessAnvilRecipe implements IAnvilRecipe {
     @Override
     public ItemStack getCraftingResult(AnvilCraftMatrix arg0) {
         return this.getRecipeOutput().copy();
-    }
-
-    @Override
-    public float getExperiance() {
-        return exp;
     }
 
     @Override

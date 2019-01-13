@@ -34,13 +34,12 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
      */
     public final int anvil;
     public final int recipeTime;
-    public final float recipeExperiance;
     public final String toolType;
     public final String research;
     public final Skill skillUsed;
     private final int recipeHammer;
 
-    public ShapelessAnvilRecipes(ItemStack output, String toolType, float exp, int hammer, int anvi, int time,
+    public ShapelessAnvilRecipes(ItemStack output, String toolType, int hammer, int anvi, int time,
                                  List components, boolean hot, String research, Skill skill) {
         this.outputHot = hot;
         this.recipeOutput = output;
@@ -48,7 +47,6 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
         this.recipeItems = components;
         this.recipeHammer = hammer;
         this.recipeTime = time;
-        this.recipeExperiance = exp;
         this.toolType = toolType;
         this.research = research;
         this.skillUsed = skill;
@@ -157,11 +155,6 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
     @Override
     public int getRecipeHammer() {
         return this.recipeHammer;
-    }
-
-    @Override
-    public float getExperiance() {
-        return this.recipeExperiance;
     }
 
     @Override

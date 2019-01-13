@@ -279,7 +279,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
                 worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, "minefantasy2:block.anvilsucceed",
                         0.25F, rightClick ? 1.2F : 1.0F);
                 float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItem()) * (rightClick ? 0.75F : 1.0F);
-                float toolEfficiency = efficiency;
 
                 if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
                     efficiency *= (0.5F - user.swingProgress);
@@ -326,7 +325,7 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
                 result = modifyArmour(result);
             }
 
-            if (result.getMaxStackSize() == 1 && lastPlayerHit.length() > 0) {
+            if (result.getMaxStackSize() == 1 && !lastPlayerHit.isEmpty()) {
                 getNBT(result).setString("MF_CraftedByName", lastPlayerHit);
             }
 
@@ -687,10 +686,6 @@ public class TileEntityAnvilMF extends TileEntity implements IInventory, IAnvil,
     }
 
     public boolean canCraft() {
-        if (worldObj.isRemote) {
-            // return canCraft == 1;
-        }
-
         if (this.isMythicRecipe() && !this.isMythicReady()) {
             return false;
         }

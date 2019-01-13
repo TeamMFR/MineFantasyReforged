@@ -19,7 +19,6 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
      */
     public final int anvil;
     public final int recipeTime;
-    public final float recipeExperiance;
     public final String toolType;
     public final String research;
     public final Skill skillUsed;
@@ -41,7 +40,7 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
     public ItemStack recipeOutput;
 
     public ShapedAnvilRecipes(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time,
-                              int hammer, int anvi, float exp, boolean hot, String research, Skill skill) {
+                              int hammer, int anvi, boolean hot, String research, Skill skill) {
         this.outputHot = hot;
         this.recipeWidth = wdth;
         this.anvil = anvi;
@@ -50,7 +49,6 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
         this.recipeOutput = output;
         this.recipeTime = time;
         this.recipeHammer = hammer;
-        this.recipeExperiance = exp;
         this.toolType = toolType;
         this.research = research;
         this.skillUsed = skill;
@@ -70,11 +68,6 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
     @Override
     public int getCraftTime() {
         return recipeTime;
-    }
-
-    @Override
-    public float getExperiance() {
-        return this.recipeExperiance;
     }
 
     @Override

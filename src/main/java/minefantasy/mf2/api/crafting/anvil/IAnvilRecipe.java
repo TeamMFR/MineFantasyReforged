@@ -26,8 +26,6 @@ public interface IAnvilRecipe {
 
     int getRecipeHammer();
 
-    float getExperiance();
-
     int getAnvil();
 
     boolean outputHot();
