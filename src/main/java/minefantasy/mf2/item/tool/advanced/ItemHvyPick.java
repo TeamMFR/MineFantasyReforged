@@ -80,7 +80,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial {
 
                             if (newblock != null && user instanceof EntityPlayer
                                     && ForgeHooks.canHarvestBlock(newblock, (EntityPlayer) user, m)
-                                    && ForgeHooks.isToolEffective(item, newblock, m)) {
+                                    /*&& ForgeHooks.isToolEffective(item, newblock, m)*/) {
                                 if ((MineFantasyII.isBukkitServer()
                                         && BukkitUtils.cantBreakBlock((EntityPlayer) user, blockX, blockY, blockZ))) {
                                     continue;
