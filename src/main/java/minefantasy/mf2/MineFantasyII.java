@@ -122,6 +122,7 @@ public class MineFantasyII {
 
     @EventHandler
     public void load(FMLInitializationEvent evt) {
+        System.out.print("THIS IS A FUCKING TEST!");
         MinecraftForge.EVENT_BUS.register(this);
         proxy.registerMain();
         GameRegistry.registerWorldGenerator(worldGenManager, 0);

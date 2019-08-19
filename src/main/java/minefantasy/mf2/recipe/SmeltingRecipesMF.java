@@ -41,16 +41,19 @@ public class SmeltingRecipesMF {
                 new Object[]{Blocks.stone, Blocks.stone, Blocks.stone, Blocks.stone, ComponentListMF.fireclay, iron,
                         ComponentListMF.obsidian_rock});
         if (ConfigHardcore.HCCreduceIngots) {
-            if (MineFantasyAPI.removeSmelting(Blocks.iron_ore) && MineFantasyAPI.removeSmelting(Blocks.gold_ore)) {
-                MFLogUtil.logDebug("Removed Ore Smelting (Hardcore Ingots");
-            } else {
-                MFLogUtil.logWarn("Failed to remove Ore smelting!");
-            }
             BloomRecipe.addRecipe(new ItemStack(Blocks.iron_ore), iron);
             BloomRecipe.addRecipe(new ItemStack(Blocks.gold_ore), gold);
 
             MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.iron_ore), iron, 0);
             MineFantasyAPI.addFurnaceRecipe(new ItemStack(Blocks.gold_ore), gold, 0);
+
+            if(ConfigHardcore.HCCRemoveCraft) {
+              if (MineFantasyAPI.removeSmelting(Blocks.iron_ore) && MineFantasyAPI.removeSmelting(Blocks.gold_ore)) {
+                  MFLogUtil.logDebug("Removed Ore Smelting (Hardcore Ingots)");
+              } else {
+                  MFLogUtil.logWarn("Failed to remove Ore smelting!");
+              }
+            }
         }
 
         refineRawOre(ComponentListMF.oreCopper, copper);
@@ -114,7 +117,7 @@ public class SmeltingRecipesMF {
         KnowledgeListMF.enderforge = MineFantasyAPI.addRatioAlloy(2, enderforge, 3,
                 new Object[]{adamant, mithril, Items.ender_pearl, Items.ender_pearl});
 
-        MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.iron_prep, ComponentListMF.bar("PigIron"));
+        MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.iron_prep, pigiron);
         MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[6], black);
         MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[9], red);
         MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[11], blue);
