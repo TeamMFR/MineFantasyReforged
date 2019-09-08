@@ -146,7 +146,8 @@ public class KnowledgePageRegistry {
         KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.leatherstrip"),
                 new EntryPageRecipeCarpenter(KnowledgeListMF.lStripsR));
         KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.thread"),
-                new EntryPageRecipeCarpenter(KnowledgeListMF.threadR),
+                new EntryPageRecipeCarpenter(KnowledgeListMF.threadR1),
+                new EntryPageRecipeCarpenter(KnowledgeListMF.threadR2),
                 new EntryPageRecipeCarpenter(KnowledgeListMF.stringR));
         KnowledgeListMF.commodities.addPages(new EntryPageText("knowledge.commodities.bucket"),
                 new EntryPageRecipeAnvil(KnowledgeListMF.bucketR));

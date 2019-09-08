@@ -77,8 +77,10 @@ public class CarpenterRecipes {
         }
         Salvage.addSalvage(ToolListMF.dryrocks, Blocks.cobblestone);
 
-        KnowledgeListMF.threadR = MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMF.thread, 4),
+        KnowledgeListMF.threadR1 = MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMF.thread, 4),
                 "commodities", sewing, "hands", -1, 5, new Object[]{"W", "S", 'W', Blocks.wool, 'S', Items.stick,});
+        KnowledgeListMF.threadR2 = MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMF.thread),
+                "commodities", sewing, "hands", -1, 5, new Object[]{" V ", "VSV", " V ", 'S', Items.stick, 'V', ComponentListMF.vine});
         KnowledgeListMF.stringR = MineFantasyAPI.addCarpenterRecipe(null, new ItemStack(Items.string), "commodities",
                 sewing, "hands", -1, 10, new Object[]{"T", "T", "T", "T", 'T', ComponentListMF.thread});
 
