@@ -269,4 +269,22 @@ public class ComponentListMF {
     public static ItemStack bar(String material, int stackSize) {
         return bar.createComm(material, stackSize);
     }
+
+    public static ItemStack ingot(String material) {
+        return ingot(material, 1);
+    }
+    public static ItemStack ingot(String material, int stackSize) {
+        if (material.equals("iron")) {
+            return new ItemStack(Items.iron_ingot);
+        } else if (material.equals("gold")) {
+            return new ItemStack(Items.gold_ingot);
+        } else {
+          for (int i=0;i<ingotMats.length;i++) {
+              if (ingotMats[i].equals(material)) {
+                  return new ItemStack(ingots[i], 1);
+              }
+          }
+        }
+        return null;
+    }
 }

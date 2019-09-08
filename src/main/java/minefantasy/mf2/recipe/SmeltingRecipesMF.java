@@ -56,15 +56,15 @@ public class SmeltingRecipesMF {
             }
         }
 
-        refineRawOre(ComponentListMF.oreCopper, copper);
-        refineRawOre(ComponentListMF.oreTin, tin);
-        refineRawOre(ComponentListMF.oreIron, iron);
-        refineRawOre(ComponentListMF.oreSilver, silver);
-        refineRawOre(ComponentListMF.oreGold, gold);
+        refineRawOre(ComponentListMF.oreCopper, "copper");
+        refineRawOre(ComponentListMF.oreTin, "tin");
+        refineRawOre(ComponentListMF.oreIron, "iron");
+        refineRawOre(ComponentListMF.oreSilver, "silver");
+        refineRawOre(ComponentListMF.oreGold, "gold");
 
-        refineRawOre(BlockListMF.oreCopper, copper, 0.4F);
-        refineRawOre(BlockListMF.oreTin, tin, 0.5F);
-        refineRawOre(BlockListMF.oreSilver, silver, 0.9F);
+        refineRawOre(BlockListMF.oreCopper, "copper", 0.4F);
+        refineRawOre(BlockListMF.oreTin, "tin", 0.5F);
+        refineRawOre(BlockListMF.oreSilver, "silver", 0.9F);
 
         GameRegistry.addSmelting(BlockListMF.oreBorax, new ItemStack(ComponentListMF.flux_strong, 4), 0.25F);
         GameRegistry.addSmelting(BlockListMF.oreTungsten, new ItemStack(ComponentListMF.oreTungsten, 1), 0.25F);
@@ -123,21 +123,26 @@ public class SmeltingRecipesMF {
         MineFantasyAPI.addBlastFurnaceRecipe(ComponentListMF.ingots[11], blue);
     }
 
-    private static void refineRawOre(Item ore, ItemStack bar) {
-        refineRawOre(ore, bar, 0F);
+    private static void refineRawOre(Item ore, String mname) {
+        refineRawOre(ore, mname, 0F);
     }
 
-    private static void refineRawOre(Block ore, ItemStack bar) {
-        refineRawOre(ore, bar, 0F);
+    private static void refineRawOre(Block ore, String mname) {
+        refineRawOre(ore, mname, 0F);
     }
 
-    private static void refineRawOre(Block ore, ItemStack bar, float xp) {
-        refineRawOre(Item.getItemFromBlock(ore), bar, xp);
+    private static void refineRawOre(Block ore, String mname, float xp) {
+        refineRawOre(Item.getItemFromBlock(ore), mname, xp);
     }
 
-    private static void refineRawOre(Item ore, ItemStack bar, float xp) {
+    private static void refineRawOre(Item ore, String mname, float xp) {
+        ItemStack bar = ComponentListMF.bar(mname);
+        ItemStack ingot = ComponentListMF.ingot(mname);
         if (ConfigHardcore.HCCreduceIngots) {
             BloomRecipe.addRecipe(ore, bar);
+            if(!ConfigHardcore.HCCRemoveCraft) {
+              GameRegistry.addSmelting(ore, ingot, xp);
+            }
         } else {
             GameRegistry.addSmelting(ore, bar, xp);
         }
