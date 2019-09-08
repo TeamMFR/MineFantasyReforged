@@ -100,11 +100,11 @@ public abstract class ItemWeaponMF extends ItemSword implements ISpecialDesign, 
     protected float heavyParryFatigue = 2.0F;
     protected float daggerStaminaCost = 0.50F;
     protected float swordStaminaCost = 1.00F;
-    protected float katanaStaminaCost = 0.75F;
+    protected float katanaStaminaCost = 0.85F;
     protected float axeStaminaCost = 1.20F;
-    protected float maceStaminaCost = 1.30F;
+    protected float maceStaminaCost = 1.50F;
     protected float spearStaminaCost = 1.40F;
-    protected float heavyStaminaCost = 1.50F;
+    protected float heavyStaminaCost = 2.50F;
     protected int itemRarity;
     /**
      * The damage of the weapon without material modifiers

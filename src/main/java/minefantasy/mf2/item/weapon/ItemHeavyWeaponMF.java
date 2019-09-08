@@ -54,7 +54,7 @@ public abstract class ItemHeavyWeaponMF extends ItemWeaponMF implements IExtende
 
     @Override
     public float getBalance() {
-        return 0.75F;
+        return 0.50F;
     }
 
     @Override
