@@ -18,9 +18,9 @@ buildscript {
 apply plugin: 'forge'
 apply plugin: 'idea'
 
-version = "2.8.14.6_1"
+version = "2.8.14.6"
 group= "minefantasy.mf2.minefantasy2"
-archivesBaseName = "MineFantasyII_k1r0s_patch"
+archivesBaseName = "MineFantasyII"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
