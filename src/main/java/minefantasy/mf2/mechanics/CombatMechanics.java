@@ -307,6 +307,10 @@ public class CombatMechanics {
         boolean powerArmour = PowerArmour.isFullyArmoured(hit);
         float damage = modifyDamage(src, world, hit, event.ammount, false);
 
+        if(hitter instanceof EntityPlayer) {
+          applyHeavyBalance(hitter);
+        }
+
         if (event.source.isProjectile() && !event.source.isFireDamage()) {
             if (powerArmour || (damage < event.ammount && hit.getTotalArmorValue() > 0))// only if dam has been reduced
             {
@@ -338,6 +342,16 @@ public class CombatMechanics {
             if (hitTime > 0)
                 EventManagerMF.setHitTime(hitter, hitTime);
         }
+    }
+
+    private void applyHeavyBalance(EntityLivingBase hitter) {
+      if (!ConfigWeapon.useBalance) return;
+      if (hitter.getHeldItem() != null && hitter.getHeldItem().getItem() instanceof ItemWeaponMF) {
+          ItemWeaponMF hitterWeapon = ((ItemWeaponMF) hitter.getHeldItem().getItem());
+          if (hitterWeapon.isHeavyWeapon()) {
+              TacticalManager.throwPlayerOffBalance((EntityPlayer) hitter, hitterWeapon.getBalance(), true);
+          }
+      }
     }
 
     /**
