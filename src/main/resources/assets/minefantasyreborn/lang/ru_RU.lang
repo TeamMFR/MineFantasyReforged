@@ -1,0 +1,2254 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//Русификация подготовлена: Ardghal, Sirse, SkySwifty (Alter)
+//Специально для проекта ZonaSumraka.RU
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/INFORMATION/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+forge.fuel.name=~Топливо~
+vehicle.fuel.name=Топливо: %1$s
+info.bow.reload="Присесть" + ПКМ для перезарядки
+info.firearm.ammo=%1$s/%2$s
+info.tooltip.moreinfo=Удерживайте [%1$s] для доп. информации
+
+attribute.kit.salvage.name=Эффективность разбора
+
+attribute.kit.repairRate.name=Шанс починки
+attribute.kit.repairRate_enchant.name=Шанс починки (Зачарованные вещи) 
+attribute.kit.repairRate_normal.name=Шанс починки (Не зачарованные вещи) 
+
+attribute.kit.repairChance.name=Шанс успешной починки
+attribute.kit.breakChance.name=Шанс поломки набора
+
+attribute.inferior.name=Плохого качества
+attribute.superior.name=Отличного качества
+
+item.infobook.name=Книга исследований
+item.research_scroll.name=Свиток исследований
+item.research_scroll_complete.name=Завершённое исследование
+
+item.talisman_lesser.name=Малый талисман знания
+item.talisman_greater.name=Большой талисман знания
+
+prospect.canmine=Вы можете добыть это! (Инструмент: %1$s | Блок: %2$s)
+prospect.cannotmine=Вы не можете добыть это! (Инструмент: %1$s | Блок: %2$s)
+gui.information=Исследование
+information.discovered=Исследовано
+information.buy=Нажмите для исследования
+knowledge.unknownUse=Вы не знаете, как использовать это!
+knowledge.known=Вы уже знаете это.
+
+infoPage.basic=Основы
+infoPage.artisanry=Кузнечное дело
+infoPage.construction=Строительное дело
+infoPage.provisioning=Ремесло снабжения
+infoPage.engineering=Инженерное дело
+infoPage.mastery=Мастерство
+infoPage.dwarvern=Знания гномов
+infoPage.gnomish=Гномские секреты
+
+knowledge.unlocked=Исследование завершено
+
+vehicle.noArmour=Вы не можете использовать этот костюм, когда носите что-либо.
+vehicle.tooBigArmour=Ваша броня слишком объёмна и вы не влезаете в костюм.
+
+research.noskill=Вы сможете изучить что-то из этого, пока не достигнете более высокого уровня.
+research.null=Больше нечего изучать
+
+research.addArtefact=Добавлено знание: %1$s (%2$s/%3$s)
+research.finishResearch=Исследовано: "%1$s"
+research.cluecount= (%1$s/%2$s)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/MOBS/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+entity.MF_Minotaur.name=Минотавр
+entity.MF_Dragon.name=Дракон
+death.attack.dragonstomp=%1$s был растоптан драконом.
+death.attack.humanstomp=%1$s был растоптан %2$s
+death.attack.fireblast=%1$s был испепелён %2$s
+death.attack.fireblastBase=%1$s обратился в пепел
+death.attack.blastfurn=%1$s сгорел в доменной печи
+death.attack.frostblast=%1$s был заморожен %2$s
+death.attack.frostblastBase=%1$s замёрз насмерть
+death.attack.acidblast=%1$s был испарён %2$s
+death.attack.acidblastBase=%1$s испарился
+death.attack.ashblast=%1$s задохнулся от пепла %2$s
+death.attack.ashblastBase=%1$s задохнулся от пепла
+
+death.attack.mob.pound=%1$s был растоптан %2$s
+death.attack.mob.gore=%1$s был поднят на рога%2$s
+death.attack.mob.beserk=%1$s был разорван %2$s
+
+entity.minotaur.name=Минотавр
+entity.minotaur_guard.name=Минотавр-защитник
+entity.minotaur_elite.name=Элитный минотавр
+entity.minotaur_boss.name=Минотавр-воевода
+
+entity.frostminotaur.name=Ледяной минотавр
+entity.frostminotaur_guard.name=Ледяной минотавр-защитник
+entity.frostminotaur_elite.name=Элитный ледяной минотавр
+entity.frostminotaur_boss.name=Ледяной минотавр-воевода
+
+entity.dredminotaur.name=Ужасный минотавр
+entity.dreadminotaur_guard.name=Ужасный минотавр-защитник
+entity.dreadminotaur_elite.name=Ужасный минотавр-палач
+entity.dreadminotaur_boss.name=Ужасный минотавр-воевода
+
+entity.dragonbreed.red.name=Красный
+entity.dragonbreed.white.name=Ледяной
+entity.dragonbreed.black.name=Чёрный
+entity.dragonbreed.green.name=Зелёный
+entity.dragonbreed.ash.name=Пепельный
+
+entity.dragon_young.name=Молодой %1$s дракон
+entity.dragon.name=%1$s дракон
+entity.dragon_mature.name=Взрослый %1$s дракон
+entity.dragon_elder.name=Старейший %1$s дракон
+entity.dragon_ancient.name=Древний %1$s дракон
+
+event.dragonnear.name=Дракон в небе! Ищите укрытие, или приготовьтесь к бою!
+event.dragonnear.forge.name=Это ремесло нанесло оскорбление всей расе драконов!
+event.dragonaway.name=Дракон улетел... Пока что...
+
+entity.hound.name=Гончая
+
+item.spawn_dragon.name=Дракон
+item.spawn_dragon.desc=Смертоносные летающие рептилии
+item.spawn_minotaur.name=Минотавр
+item.spawn_minotaur.desc=Жестокий и беспощадный.
+item.spawn_hound.name=Гончая
+item.spawn_hound.desc=Умная собака с острыми клыками
+item.spawn_cogwork.name=Механическая броня
+item.spawn_cogwork.desc=Максимум защиты
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/TOOL LIST/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.tool_pick.name=%1$s кирка
+item.commodity_plank.name=%1$s брусок
+item.haft.name=Рукоять
+item.commodity_hunk.name=%1$s кусок
+item.commodity_scrap.name=%1$s лом
+item.commodity_plate.name=%1$s пластина
+item.commodity_bar.name=Чушка "%1$s"
+item.commodity_plate_huge.name=Большая %1$s пластина
+item.commodity_chainmesh.name=%1$s кольчужная сетка
+item.commodity_scalemesh.name=%1$s чешуйчатая сетка
+item.commodity_splintmesh.name=%1$s пластинчатая сетка
+item.commodity_plateheavy.name=Тяжёлая пластина из "%1$s"
+item.commodity_arrowhead.name=%1$s наконечник
+item.commodity_bodkinhead.name=Конусовидный наконечник "%1$s"
+item.commodity_broadhead.name=Широкий наконечник "%1$s"
+item.commodity_cogwork_armour.name=Механическая броня "%1$s"
+
+item.mod_plating.name=%1$s панцирная
+item.mod_head.name=%1$s Голова
+item.mod_haft.name=Рукоять "%1$s"
+item.mod_joint.name=Плечи "%1$s"
+
+component.head.name=%1$s Head
+component.shaft.name=%1$s Shaft
+component.grip.name=%1$s Grip
+component.brace.name=%1$s Brace
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/MATERIAL LIST/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+materialtype.wood.name=Дерево (lvl %1$s)
+materialtype.leather.name=Кожа (lvl %1$s)
+materialtype.metal.name=Металл (lvl %1$s)
+materialtype.workable.name=Темп. ковки: %1$s°C - %2$s°C
+
+materialtype.resist.name=Сопротивление %1$s
+materialtype.fireresist.name=Сопротивление огню %1$s
+materialtype.maxtemp.name=Темп. плавления: %1$s°C
+material.any.name=Any
+
+WOOD
+material.scrapwood.name=Древесные отходы
+material.oakwood.name=Дуб
+material.birchwood.name=Берёза
+material.sprucewood.name=Ель
+material.acaciawood.name=Акация
+material.junglewood.name=Тропическое дерево
+material.refinedwood.name=Очищенная древесина
+material.ironbarkwood.name=Эвкалипт
+material.ebonywood.name=Эбеновое дерево
+material.darkoakwood.name=Тёмный дуб
+material.pinewood.name=Сосна
+material.cherrywood.name=Вишня
+material.poplarwood.name=Тополь
+material.maplewood.name=Maple
+material.mahoewood.name=Махо
+material.greenheartwood.name=Зеленосердечное дерево
+material.palmwood.name=Пальма
+material.limewood.name=Липа
+material.balsawood.name=Бальза
+material.walnutwood.name=Ореховое дерево
+material.chestnutwood.name=Каштан
+material.larchwood.name=Лиственница
+material.willowwood.name=Ива
+material.teakwood.name=Тик
+material.sequoiawood.name=Секвойя
+material.mahoganywood.name=Красное дерево
+material.wengewood.name=Венге
+material.redwoodwood.name=Красное дерево
+material.firwood.name=Ель
+material.purpleheartwood.name=Пурпурносердечное дерево
+material.silverwoodwood.name=Серебряное дерево
+material.greatwoodwood.name=Великое дерево
+material.yewwood.name=Тис
+
+
+
+LEATHER
+material.leather.name=Кожа
+material.hardleather.name=Грубая кожа
+material.minotaurskin.name=Кожа минотавра
+material.dragonskin.name=Драконья кожа
+
+METAL
+material.copper.name=Медь
+material.tin.name=Олово
+
+material.bronze.name=Бронза
+material.iron.name=Железо
+material.pigiron.name=Чугун
+material.steel.name=Сталь
+material.tungsten.name=Вольфрам
+material.obsidian.name=Обсидиан
+material.encrusted.name=Алмаз
+material.blacksteel.name=Чёрная сталь
+material.redsteel.name=Красная сталь
+material.bluesteel.name=Голубая сталь
+
+material.adamantium.name=Адамантий
+material.mithril.name=Мифрил
+material.ignotumite.name=Игнотумит
+material.mithium.name=Мифий
+material.ender.name=Сталь Края
+
+PRECIOUS
+material.gold.name=Золото
+material.silver.name=Серебро
+
+NON-MF
+material.bismuth.name=Висмут
+material.bismuthbronze.name=Висмутовая бронза
+material.nickel.name=Никель
+material.titanium.name=Титан
+material.stainlesssteel.name=Нержавеющая сталь
+
+ALLOY
+material.compositealloy.name=Композитный слиток
+
+MOD
+material.thaumium.name=Таум металл
+material.void.name=Пустотный металл
+material.manasteel.name=Манафрам
+material.elvenelementium.name=Элементиум
+material.terrasteel.name=Терразий
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ITEM STATS/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+prefix.hotitem.name=Горячий %1$s
+state.workable=Готовый к работе
+state.unstable=Перегретый
+attribute.weightt.name=Вес: %1$sт
+attribute.weightKg.name=Вес: %1$sкг
+attribute.weightg.name=Вес: %1$sг
+attribute.nomfcrafttier.name=Другой разряд
+attribute.mfcrafttier.name=Уровень
+attribute.mfcrafttool.name=Ремесл. инструмент:
+attribute.mfcrafteff.name=Эффективность крафта
+attribute.mfcraftedbyname.name=Ремесленник
+tooltype.hammer=Молот
+tooltype.hvyHammer=Тяжёлый молот
+tooltype.saw=Пила
+tooltype.knife=Нож
+tooltype.needle=Игла
+tooltype.mallet=Киянка
+tooltype.spoon=Ложка
+tooltype.hands=Кулак 
+tooltype.spanner=Гаечный ключ
+tooltype.shears=Ножницы
+tooltype.brush=Кисть
+
+tooltype.anvil=Наковальня
+tooltype.carpenter=Плотницкий верстак
+
+attribute.weapon.penetrateArmor=Проникновение
+attribute.weapon.daze=Дробящий урон
+attribute.weapon.extendedReach=Радиус
+attribute.weapon.attackSpeed=Скорость атаки
+attribute.weapon.backstab=Удар в спину
+attribute.weapon.mountedBonus=Удар в седле
+attribute.weapon.joustDam=Удар на скаку
+attribute.shield.block.time=s блокирование
+attribute.shield.arrow.count=Стрелы
+attribute.quiver.arrow.empty=Пусто
+attribute.quiver.arrow.count=Стрелы
+
+attribute.armour.protection=Уровень защиты
+attribute.armour.light=Лёгкая броня
+attribute.armour.medium=Средняя броня
+attribute.armour.heavy=Тяжёлая броня
+attribute.weight.name=Масса
+
+attribute.bowPower.name=Модификатор урона x%1$s
+attribute.arrowPower.name=Урон
+
+attribute.armour.rating.0=Режущий урон:
+attribute.armour.rating.1=Дробящий урон:
+attribute.armour.rating.2=Колющий урон:
+
+attribute.armour.cuttingresistance=Сопротивление режущему оружию
+attribute.armour.bluntresistance=Сопротивление дробящему оружию
+attribute.armour.piercingresistance=Сопротивление колющему оружию
+
+attribute.weapon.cutting=Режущий урон
+attribute.weapon.blunt=Дробящий урон
+attribute.weapon.piercing=Колющий урон
+
+attribute.armour.dtcutting=Максимальный режущий урон
+attribute.armour.dtblunt=Максимальный дробящий урон
+attribute.armour.dtpiercing=Максимальный колющий урон
+
+arrow.head.normal.name=Обычный наконечник
+arrow.head.bodkin.name=Конусовидный наконечник
+arrow.head.broad.name=Широкий наконечник
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/COMMODITY/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.plank.name=Брусок
+item.plant_oil.name=Растительное масло
+item.plankRefined.name=Пропитанный брусок
+item.rivet.name=Заклёпки
+item.nail.name=Гвозди
+item.thread.name=Волокно
+item.lime_rock.name=Известняковый камень
+item.borax_rock.name=Залежи боракса
+item.flux.name=Флюс
+item.flux_strong.name=Крепкий флюс
+item.coal_prep.name=Подготовленный уголь
+item.coke.name=Кокс
+item.blackpowder.name=Чёрный порох
+item.blackpowder_advanced.name=Продвинутый чёрный порох
+item.bolt.name=Болты
+item.flux_pot.name=Горшочек флюса
+item.coal_flux.name=Угольный флюс
+
+item.ingotCopper.name=Медный слиток
+item.ingotTin.name=Оловянный слиток
+item.ingotBronze.name=Бронзовый слиток
+item.ingotPigIron.name=Чугунный слиток
+item.ingotSteel.name=Стальной слиток
+item.ingotEncrusted.name=Драгоценный слиток
+item.ingotObsidian.name=Обсидиановый слиток
+item.ingotSilver.name=Серебряный слиток
+item.ingotPureGold.name=Слиток чистого золота
+item.ingotCompositeAlloy.name=Слиток композитного сплава
+item.ingotBlackSteelWeak.name=Необработанная чёрная сталь
+item.ingotBlueSteelWeak.name=Необработанная голубая сталь
+item.ingotRedSteelWeak.name=Необработанная красная сталь
+
+item.ingotRedSteel.name=Слиток красной стали
+item.ingotBlackSteel.name=Слиток чёрной стали
+item.ingotBlueSteel.name=Слиток голубой стали
+
+item.ingotAdamantium.name=Адамантиевый слиток
+item.ingotMithril.name=Мифриловый слиток
+
+item.ingotIgnotumite.name=Игнотумитовый слиток
+item.ingotMithium.name=Мифиевый слиток
+
+item.ingotEnder.name=Слиток стали Края
+
+item.ingotTungsten.name=Вольфрамовый слиток
+
+item.loot_sack.name=Добыча
+item.loot_sack_uc.name=Ценная добыча
+item.loot_sack_rare.name=Драгоценная добыча
+
+item.copper_coin.name=Медная монета
+item.silver_coin.name=Серебряная монета
+item.gold_coin.name=Золотая монета
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/COMPONENT/
+item.ingot_mould.name=Литейная форма
+item.ingot_mould_uncooked.name=Необожжённая литейная форма
+
+item.clay_pot.name=Горшок
+item.clay_pot_uncooked.name=Необожжённый горшок
+
+item.jug_empty.name=Пустой кувшин
+item.jug_uncooked.name=Необожжённый кувшин
+item.jug_water.name=Кувшин с водой
+item.jug_milk.name=Кувшин с молоком
+
+tile.salvage_basic.name=Простой разборочный верстак
+tile.salvage_advanced.name=Продвинутый разборочный верстак
+
+tile.repair_basic.name=Базовый рем. набор
+tile.repair_advanced.name=Продвинутый рем. набор
+tile.repair_ornate.name=Украшенный рем. набор
+
+item.rawhideSmall.name=Малая шкура
+item.rawhideMedium.name=Средняя шкура
+item.rawhideLarge.name=Большая шкура
+
+item.leather_strip.name=Полоска кожи
+item.hideSmall.name=Чистая малая шкура
+item.hideMedium.name=Чистая средняя шкура
+item.hideLarge.name=Чистая большая шкура
+
+item.vine.name=Лоза
+item.sharp_rock.name=Острый камень
+
+item.iron_prep.name=Обработанное железо
+item.diamond_shards.name=Алмазные осколки
+item.diamond_dust.name=Алмазная пыль
+item.obsidian_rock.name=Обсидиановый осколок
+item.fletching.name=Оперение
+
+item.coalDust.name=Угольная пыль
+item.nitre.name=Селитра
+item.sulfur.name=Сера
+item.bomb_casing_uncooked.name=Необожжённый глиняный корпус бомбы
+item.bomb_casing.name=Глиняный корпус бомбы
+item.mine_casing_uncooked.name=Необожжённый глиняный корпус мины
+item.mine_casing.name=Глиняный корпус мины
+item.shrapnel.name=Шрапнель
+item.magma_cream_refined.name=Очищенная магма
+item.bomb_fuse.name=Фитиль
+item.bomb_fuse_long.name=Длинный фитиль
+item.bomb_casing_iron.name=Железный корпус бомбы
+item.mine_casing_iron.name=Железный корпус мины
+item.bomb_casing_obsidian.name=Обсидиановый корпус бомбы
+item.mine_casing_obsidian.name=Обсидиановый корпус мины
+item.bomb_casing_crystal.name=Кристальный корпус бомбы
+item.mine_casing_crystal.name=Кристальный корпус мины
+item.bomb_casing_arrow.name=Корпус бомбы со стрелами
+item.bomb_casing_bolt.name=Корпус бомбы с болтами
+
+item.clay_brick.name=Глиняный кирпич
+item.kaolinite.name=Каолинит
+item.kaolinite_dust.name=Каолинитовая пыль
+item.fireclay.name=Огнеупорная глина
+item.fireclay_brick.name=Огнеупорный глиняный кирпич
+item.strong_brick.name=Огнеупорный кирпич
+
+item.oreCopper.name=Необработанная медная руда
+item.oreTin.name=Необработанная оловянная руда
+item.oreIron.name=Необработанная железная руда
+item.oreSilver.name=Необработанная серебряная руда
+item.oreGold.name=Необработанная золотая руда
+item.oreTungsten.name=Необработанный вольфрам
+
+item.dragon_heart.name=Сердце дракона
+item.ornate_items.name=Декоративный герб
+
+item.iron_frame.name=Железная рама
+item.iron_strut.name=Железная распорка
+item.bronze_gears.name=Бронзовые шестерёнки
+item.tungsten_gears.name=Вольфрамовые шестерёнки
+item.steel_tube.name=Стальная трубка
+item.cogwork_shaft.name=Вал механической брони
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/GADGET/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.spyglass.name=Подзорная труба
+item.climbing_pick_basic.name=Альпеншток
+item.parachute.name=Парашют
+item.syringe_empty.name=Пустой шприц
+
+tile.cogwork_helm.name=Механический шлем
+tile.cogwork_chest.name=Механический нагрудник
+tile.cogwork_legs.name=Механические поножи
+tile.frame_block.name=Остов
+tile.cogwork_builder.name=Крюк
+
+item.cogwork_pulley.name=Шкив механической брони
+
+bomb.component.name=Компонент бомбы
+bomb.component.filling=Наполнение
+bomb.component.bombcase=Корпус бомбы
+bomb.component.minecase=Корпус мины
+bomb.component.arrow=Корпус стрелы
+bomb.component.bolt=Корпус болтами
+bomb.component.fuse=Фитиль
+bomb.component.powder=Порох
+
+crossbow.component.name=Деталь арбалета
+crossbow.component.stock=Ложе
+crossbow.component.mechanism=Механизм
+crossbow.component.mod=Модификация
+crossbow.component.muzzle=Дуло
+
+item.bomb_crude.name=Грубая бомба
+item.bomb_basic.name=Обычная бомба
+item.bomb_shrapnel.name=Осколочная бомба
+item.bomb_fire.name=Зажигательная бомба
+item.exploding_arrow.name=Взрывная стрела
+item.exploding_bolt.name=Взрывной болт
+
+item.mine_basic.name=Обычная мина
+item.mine_shrapnel.name=Осколочная мина
+item.mine_fire.name=Зажигательная мина
+
+death.attack.mine=%1$s подорвался на мине
+death.attack.bomb.thrown=%1$s был взорван %2$s
+death.attack.bomb=%1$s был взорван бомбой
+death.attack.bomb.suicide=%1$s подорвал себя... Мда.
+
+bomb.powder.blackpowder.name=Пороховой заряд
+bomb.powder.advBlackpowder.name=Продвинутый пороховой заряд
+bomb.fuse.basic.name=Обычный фитиль
+bomb.fuse.long.name=Длинный фитиль
+bomb.case.crude.name=Бумажный корпус
+bomb.case.ceramic.name=Керамический корпус
+bomb.case.iron.name=Железный корпус
+bomb.case.obsidian.name=Обсидиановый корпус
+bomb.case.crystal.name=Кристальный корпус
+bomb.damage.name=Урон взрывом
+bomb.range.metric.name=Радиус поражения: %1$s м
+bomb.fusetime.name=Время детонации: %1$s сек
+bomb.case.sticky=Липкий корпус
+
+gui.bombcraftmf.name=Изготовление бомбы
+gui.crossbowcraftmf.name=Изготовление арбалета
+
+attribute.crossbow.power.name=Урон: x%1$s
+attribute.crossbow.speed.name=Перезарядка: %1$s сек.
+attribute.crossbow.spread.name=Дальность: x%1$s
+attribute.crossbow.recoil.name=Отдача: x%1$s
+attribute.crossbow.capacity.name=Боезапас: %1$s
+attribute.crossbow.bash.name=Урон вблизи: %1$s
+
+crosspart.stock.cross_stock_wood=Деревянный
+crosspart.stock.cross_stock_iron=Железный
+crosspart.stock.cross_handle_wood=Ручной
+crosspart.mechanism.cross_arms_light=Лёгкий арбалет
+crosspart.mechanism.cross_arms_heavy=Тяжёлый арбалет
+crosspart.mechanism.cross_arms_advanced=Улучшенный арбалет
+crosspart.mod.cross_ammo=Магазин
+crosspart.mod.cross_scope=Прицел
+
+item.cross_stock_wood.name=Ложа 
+item.cross_handle_wood.name=Малая ложа
+item.cross_stock_iron.name=Железная ложа
+item.cross_arms_light.name=Лёгкие плечи арбалета
+item.cross_arms_basic.name=Плечи арбалета
+item.cross_arms_heavy.name=Тяжёлые плечи арбалета
+item.cross_arms_advanced.name=Продвинутые плечи арбалета
+item.cross_ammo.name=Магазинный механизм арбалета
+item.cross_scope.name=Прицел арбалета
+item.cross_bayonet.name=Арбалетный штык
+
+item.cross_stock_wood.desc=Без улучшений
+item.cross_handle_wood.desc=Быстрая перезарядка, большая отдача и дальность
+item.cross_stock_iron.desc=Гасит отдачу
+item.cross_arms_light.desc=Меньше мощность и отдача, почти не влияет на вес
+item.cross_arms_basic.desc=Без улучшений
+item.cross_arms_heavy.desc=Больше мощность и отдача. Достаточно большой вес
+item.cross_arms_advanced.desc=Большая мощность и точность, но высокая отдача и большой вес
+item.cross_ammo.desc=Шестизарядный магазин, увеличенная дальность
+item.cross_scope.desc=Даёт возможность вести прицельный огонь
+item.cross_bayonet.desc=Повышенный урон в ближнем бою, снижает отдачу, медленная перезарядка
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ORES/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+tile.oreCopper.name=Медная руда
+tile.oreTin.name=Оловянная руда
+tile.oreSilver.name=Серебряная руда
+tile.oreTungsten.name=Вольфрамовая руда
+tile.oreMythic.name=Мифиевая руда
+tile.oreMythicPure.name=Чистая мифиевая руда
+
+tile.oreClay.name=Глиняные залежи
+tile.oreBorax.name=Залежи боракса
+tile.oreKaolinite.name=Залежи каолинита
+tile.oreNitre.name=Залежи селитры
+tile.oreSulfur.name=Залежи серы
+tile.oreCoalRich.name=Богатые углём залежи
+
+tile.window.name=Окно
+tile.window_pane.name=Оконное стекло
+tile.mud_pavement.name=Грубые грязевые кирпичи
+tile.mud_pavement_stair.name=Ступеньки из грубых грязевых кирпичей
+tile.mud_brick.name=Грязевые кирпичи
+tile.mud_brick_stair.name=Ступеньки из грязевых кирпичей
+tile.thatch.name=Соломенная крыша
+tile.thatch_stair.name=Скат соломенной крыши
+
+tile.limestone.name=Известняк
+tile.limestone_cobblestone.name=Известняковый булыжник
+tile.limestone_brick.name=Известняковые кирпичи
+tile.limestone_pavement.name=Известняковая мозаика
+tile.limestone_stair.name=Известняковые ступеньки
+tile.limestone_cobblestone_stair.name=Ступеньки из известнякового булыжника
+tile.limestone_brick_stair.name=Ступеньки из известнякового кирпича
+tile.limestone_pavement_stair.name=Ступеньки из известняковой мозаики
+
+tile.slate.name=Сланец
+tile.slate_cobblestone.name=Сланцевый булыжник
+tile.slate_brick.name=Сланцевые кирпичи
+tile.slate_pavement.name=Сланцевая мозаика
+tile.slate_stair.name=Сланцевые ступеньки
+tile.slate_cobblestone_stair.name=Ступеньки из сланцевого булыжника
+tile.slate_brick_stair.name=Ступеньки из сланцевого кирпича
+tile.slate_pavement_stair.name=Ступеньки из сланцевой мозаики
+
+tile.framed_glass.name=Обрамлённое стекло
+tile.framed_pane.name=Обрамлённое оконное стекло
+tile.firebricks.name=Огнеупорные кирпичи
+tile.firebrick_stair.name=Ступеньки из огнеупорного кирпича
+tile.cobble_pavement.name=Булыжниковая мозаика
+tile.cobble_pavement_stair.name=Ступеньки из булыжниковой мозаики
+tile.cobble_brick.name=Булыжниковые кирпичи
+tile.cobble_brick_stair.name=Ступеньки из булыжникового кирпича
+tile.clayWall.name=Глиняная стена
+tile.ironbark_log.name=Эвкалиптовая древесина
+tile.ebony_log.name=Эбеновая древесина
+tile.yew_log.name=Тисовая древесина
+tile.ironbark_leaves.name=Эвкалиптовая листва
+tile.ebony_leaves.name=Листва эбенового дерева
+tile.yew_leaves.name=Тисовая листва
+tile.ironbark_sapling.name=Саженец эвкалипта
+tile.ebony_sapling.name=Саженец эбенового дерева
+tile.yew_sapling.name=Тисовый саженец
+tile.ironbark_planks.name=Эвкалиптовые доски
+tile.ebony_planks.name=Эбеновые доски
+tile.yew_planks.name=Тисовые доски
+tile.ironbark_stair.name=Эвкалиптовые ступеньки
+tile.ebony_stair.name=Ступеньки из эбони
+tile.yew_stair.name=Ступеньки из тиса
+
+tile.nailed_planks.name=Оббитые доски
+tile.refined_planks.name=Очищенные доски
+tile.nailed_planks_stair.name=Оббитые ступеньки
+tile.refined_planks_stair.name=Очищенные ступеньки
+tile.reinforced_stone.name=Укреплённый камень
+tile.reinforced_stone_bricks.name=Кирпичи из укреплённого камня
+tile.reinforced_stone_framed.name=Обрамлённый укреплённый камень
+
+tile.reinforced_stone_base.name=Укреплённый камень
+tile.reinforced_stone_engraved.name=Резной укреплённый камень
+tile.reinforced_stone_bricks_base.name=Кирпичи из укреплённого камня
+tile.reinforced_stone_bricks_cracked.name=Потресканные кирпичи из укреплённого камня
+tile.reinforced_stone_bricks_mossy.name=Замшелые кирпичи из укреплённого камня
+
+tile.reinforced_stone_stair.name=Ступеньки из укреплённого камня
+tile.reinforced_stone_brick_stair.name=Ступеньки из укреплённых каменных кирпичей
+
+tile.bronze_bars.name=Бронзовые прутья
+tile.iron_bars.name=Железные прутья
+tile.steel_bars.name=Стальные прутья
+tile.dragonforge_bars.name=Прутья из драконьей стали
+tile.redsteel_bars.name=Прутья из красной стали
+tile.blacksteel_bars.name=Прутья из чёрной стали
+tile.bluesteel_bars.name=Прутья из голубой стали
+
+tile.copper_block.name=Медный блок
+tile.tin_block.name=Оловянный блок
+tile.silver_block.name=Серебряный блок
+tile.pigiron_block.name=Чугунный блок
+
+tile.bronze_block.name=Бронзовый блок
+tile.steel_block.name=Стальной блок
+tile.dragonforge_block.name=Блок драконьей стали
+tile.redsteel_block.name=Блок красной стали
+tile.blacksteel_block.name=Блок чёрной стали
+tile.bluesteel_block.name=Блок голубой стали
+
+ttile.adamantium_block.name=Адамантиевый блок
+tile.mithril_block.name=Мифриловый блок
+tile.ignotumite_block.name=Игнотумитовый блок
+tile.mithium_block.name=Мифиевый блок
+
+tile.ender_block.name=Блок стали Края
+
+tile.forge.stone.name=Каменный горн
+tile.forge.metal.name=Продвинутый горн
+tile.bloomery.name=Домница
+tile.crucible.stone.name=Каменный тигель
+tile.crucible.fireclay.name=Огнеупорный тигель
+tile.crucible.auto.name=Продвинутый тигель
+tile.crucible.mythic.name=Древний тигель
+tile.crucible.master.name=Мастерский древний тигель
+
+tile.chimney.stone.name=Каменная дымовая труба
+tile.chimney.stone.wide.name=Широкая каменная дымовая труба
+tile.chimney.stone_extractor.wide.name=Каменная вытяжка
+tile.chimney.pipe.name=Дымовая труба
+tile.bellows.name=Меха
+tile.tanner.name=Ветхий дубильный станок
+tile.tannerStrong.name=Дубильный станок
+tile.tannerMetal.name=Продвинутый дубильный станок
+tile.bombBench.name=Стол изготовления бомб
+tile.crossbowBench.name=Стол изготовления арбалетов
+tile.bombPress.name=Бомбовый пресс
+tile.carpenterBench.name=Плотницкий верстак
+tile.researchStation.name=Исследовательская станция
+tile.quern.name=Ручная мельница
+tile.anvilStone.name=Каменная наковальня
+tile.anvilBronze.name=Бронзовая наковальня
+tile.anvilIron.name=Железная наковальня
+tile.anvilSteel.name=Стальная наковальня
+tile.anvilBlackSteel.name=Наковальня из чёрной стали
+tile.anvilRedSteel.name=Наковальня из красной стали
+tile.anvilBlueSteel.name=Наковальня из голубой стали
+tile.furnace_stone.name=Печь
+tile.furnace_heater.name=Топка
+tile.blastfurnchamber.name=Камера доменной печи
+tile.blastfurnheater.name=Топка доменной печи
+
+tile.firepit.name=Костёр
+tile.food_roast_basic.name=Плита
+tile.food_oven_basic.name=Каменная печь
+
+tile.rack_wood.name=%1$s стойка для инструментов
+tile.food_box_basic.name=%1$s ящик для провианта
+tile.ammo_box_basic.name=%1$s ящик для боеприпасов
+tile.crate_basic.name=%1$s ящик
+tile.trough_wood.name=%1$s корыто
+attribute.box.capacity.name=Вместимость: %1$s стаков
+attribute.fill.capacity.name=Вместимость: %1$s
+attribute.fill=Заполнено x%1$s
+
+item.bedroll.name=Лежанка
+tile.bedroll.name=Лежанка
+
+tile.framed_end.name=Обрамлённый мифический камень
+tile.decorated_end.name=Декоративный мифический камень
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/TABS/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+itemGroup.forgedtool=[MF] Кованые инструменты
+itemGroup.forgedweapon=[MF] Кованое оружие
+itemGroup.forgedarmour=[MF] Кованая броня
+itemGroup.MFGadgets=[MF] Изобретения
+itemGroup.MFUtil=[MF] Полезные блоки
+itemGroup.MFBows=[MF] Луки
+itemGroup.MFMaterials=[MF] Материалы
+itemGroup.MFadvancedtool=[MF] Продвинутые инструменты
+itemGroup.MFcrafttool=[MF] Инструменты крафта
+itemGroup.MFore=[MF] Руды
+itemGroup.MFfood=[MF] Еда
+itemGroup.MFOld=[MF] Примитивные инструменты
+itemGroup.MFdragonforged=[MF] Оружие из драконьей стали
+itemGroup.MFornate=[MF] Украшенная амуниция
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/FIRESTARTER/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.dryrocks.name=Сухие камни
+item.tinderbox.name=Трутница
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/BANDAGE/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.bandage_crude.name=Грубая перевязка
+item.bandage_wool.name=Шерстяная перевязка
+item.bandage_tough.name=Отличная перевязка
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/TRAINING/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.training_sword.name=Тренировочный меч
+item.training_waraxe.name=Тренировочный боевой топор
+item.training_mace.name=Тренировочная булава
+item.training_spear.name=Тренировочное копьё
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/LEATHER STUFF/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.hide_helmet.name=Сыромятный шлем
+item.hide_chest.name=Сыромятный нагрудник
+item.hide_legs.name=Сыромятные поножи
+item.hide_boots.name=Сыромятные сапоги
+
+item.roughleather_helmet.name=Грубый кожаный шлем
+item.roughleather_chest.name=Грубый кожаный нагрудник
+item.roughleather_legs.name=Грубые кожаные поножи
+item.roughleather_boots.name=Грубые кожаные сапоги
+
+item.strongleather_helmet.name=Укреплённый кожаный шлем
+item.strongleather_chest.name=Укреплённый кожаный нагрудник
+item.strongleather_legs.name=Укреплённые кожаные поножи
+item.strongleather_boots.name=Укреплённые кожаные сапоги
+
+item.studleather_helmet.name=Клёпаный шлем
+item.studleather_chest.name=Клёпаный нагрудник
+item.studleather_legs.name=Клёпаные поножи
+item.studleather_boots.name=Клёпаные сапоги
+
+item.scaleleather_helmet.name=Чешуйчатый шлем
+item.scaleleather_chest.name=Чешуйчатый нагрудник
+item.scaleleather_legs.name=Чешуйчатые поножи
+item.scaleleather_boots.name=Чешуйчатые сапоги
+
+item.padded_helmet.name=Подбитый шлем
+item.padded_chest.name=Подбитый нагрудник
+item.padded_legs.name=Подбитые поножи
+item.padded_boots.name=Подбитые сапоги
+
+item.leatherapron.name=Фартук кузнеца
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/WOOD STUFF/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.malletWood.name=Деревянная киянка
+item.spoonWood.name=Деревянная ложка
+item.paint_brush.name=Кисть
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/STONE STUFF/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.stone_pick.name=Каменная кирка
+item.stone_axe.name=Каменный топор
+item.stone_hoe.name=Каменная мотыга
+item.stone_spade.name=Каменная лопата
+
+item.stone_knife.name=Каменный нож
+item.stone_hammer.name=Каменный молот
+item.stone_tongs.name=Каменные клещи
+item.bone_needle.name=Костяная игла
+
+item.stone_sword.name=Каменный меч
+item.stone_waraxe.name=Каменный боевой топор
+item.stone_mace.name=Каменная булава
+item.stone_spear.name=Каменное копьё
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/STANDARD/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+languagecfg.tooltiptier=true
+//You can move the main tier to the tooltip if this is true, make sure to remove "%1$s " instnaces if you do this
+
+item.standard_pick.name=Кирка
+item.standard_axe.name=Топор
+item.standard_spade.name=Лопата
+item.standard_hoe.name=Мотыга
+
+item.standard_shears.name=Ножницы
+item.standard_knife.name=Нож
+item.standard_needle.name=Игла
+item.standard_hammer.name=Молот
+item.standard_hvyhammer.name=Тяжёлый  молот
+item.standard_tongs.name=Клещи
+item.standard_saw.name=Пила
+item.standard_spanner.name=Гаечный ключ
+
+
+item.standard_dagger.name=Кинжал
+item.standard_sword.name=Меч
+item.standard_mace.name=Булава
+item.standard_waraxe.name=Боевой топор
+item.standard_spear.name=Копьё
+
+item.standard_katana.name=Катана
+item.standard_greatsword.name=Двуручный меч
+item.standard_warhammer.name=Боевой молот
+item.standard_battleaxe.name=Секира
+item.standard_halbeard.name=Алебарда
+item.standard_lance.name=Рыцарское копьё
+
+item.standard_handpick.name=Малая кирка
+item.standard_hvypick.name=Тяжёлая кирка
+item.standard_trow.name=Малая лопата
+item.standard_hvyshovel.name=Тяжёлая лопата
+item.standard_scythe.name=Коса
+item.standard_mattock.name=Киркомотыга
+item.standard_lumber.name=Топор дровосека
+
+item.standard_scale_helmet.name=Чешуйчатый шлем
+item.standard_scale_chest.name=Чешуйчатый нагрудник
+item.standard_scale_legs.name=Чешуйчатые поножи
+item.standard_scale_boots.name=Чешуйчатые сапоги
+
+item.standard_chain_helmet.name=Кольчужный шлем
+item.standard_chain_chest.name=Кольчужный нагрудник
+item.standard_chain_legs.name=Кольчужные поножи
+item.standard_chain_boots.name=Кольчужные сапоги
+
+item.standard_splint_helmet.name=Шинный шлем
+item.standard_splint_chest.name=Шинный нагрудник
+item.standard_splint_legs.name=Шинные поножи
+item.standard_splint_boots.name=Шинные сапоги
+
+item.standard_plate_helmet.name=Латный шлем
+item.standard_plate_chest.name=Латная кираса
+item.standard_plate_legs.name=Латные поножи
+item.standard_plate_boots.name=Латные сапоги
+
+item.standard_bow.name=Лук
+item.standard_arrow.name=Стрела
+item.standard_bolt.name=Болт
+
+item.standard_mallet.name=Киянка
+item.standard_spoon.name=Ложка
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/DRAGONFORGE/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.dragonforged_pick.name=Драконокованая кирка
+item.dragonforged_axe.name=Драконокованый топор
+item.dragonforged_spade.name=Драконокованая лопата
+item.dragonforged_hoe.name=Драконокованая мотыга
+
+item.dragonforged_shears.name=Драконокованые ножницы
+item.dragonforged_knife.name=Драконокованый нож
+item.dragonforged_needle.name=Драконокованая игла
+item.dragonforged_hammer.name=Драконокованый молот
+item.dragonforged_hvyhammer.name=Тяжёлый драконокованый молот
+item.dragonforged_tongs.name=Драконокованые клещи
+item.dragonforged_saw.name=Драконокованая пила
+item.dragonforged_spanner.name=Драконокованый гаечный ключ
+
+
+item.dragonforged_dagger.name=Драконокованый кинжал
+item.dragonforged_sword.name=Драконокованый меч
+item.dragonforged_mace.name=Драконокованая булава
+item.dragonforged_waraxe.name=Драконокованый боевой топор
+item.dragonforged_spear.name=Драконокованое копьё
+
+item.dragonforged_katana.name=Драконокованая катана
+item.dragonforged_greatsword.name=Драконокованый двуручный меч
+item.dragonforged_warhammer.name=Драконокованый боевой молот
+item.dragonforged_battleaxe.name=Драконокованая секира
+item.dragonforged_halbeard.name=Драконокованая алебарда
+item.dragonforged_lance.name=Драконокованое рыцарское копьё
+
+item.dragonforged_handpick.name=Драконокованая малая кирка
+item.dragonforged_hvypick.name=Тяжёлая драконокованая кирка
+item.dragonforged_trow.name=Лёгкая драконокованая лопата
+item.dragonforged_hvyshovel.name=Тяжёлая драконокованая лопата
+item.dragonforged_scythe.name=Драконокованая коса
+item.dragonforged_mattock.name=Драконокованая киркомотыга
+item.dragonforged_lumber.name=Драконокованый топор дровосека
+
+item.dragonforged_scale_helmet.name=Драконокованый чешуйчатый шлем
+item.dragonforged_scale_chest.name=Драконокованый чешуйчатый нагрудник
+item.dragonforged_scale_legs.name=Драконокованые чешуйчатые поножи
+item.dragonforged_scale_boots.name=Драконокованые чешуйчатые сапоги
+
+item.dragonforged_chain_helmet.name=Драконокованый кольчужный шлем
+item.dragonforged_chain_chest.name=Драконокованый кольчужный нагрудник
+item.dragonforged_chain_legs.name=Драконокованые  кольчужные поножи
+item.dragonforged_chain_boots.name=Драконокованые кольчужные сапоги
+
+item.dragonforged_splint_helmet.name=Драконокованый шинный шлем
+item.dragonforged_splint_chest.name=Драконокованый шинный нагрудник
+item.dragonforged_splint_legs.name=Драконокованые шинные поножи
+item.dragonforged_splint_boots.name=Драконокованые шинные сапоги
+
+item.dragonforged_plate_helmet.name=Драконокованый бацинет
+item.dragonforged_plate_chest.name=Драконокованый кираса
+item.dragonforged_plate_legs.name=Драконокованые ножные латы
+item.dragonforged_plate_boots.name=Драконокованые латные сапоги
+
+item.dragonforged_bow.name=Драконокованый лук
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ORNATE/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.ornate_pick.name=Украшенная кирка
+item.ornate_axe.name=Украшенный топор
+item.ornate_spade.name=Украшенная лопата
+item.ornate_hoe.name=Украшенная мотыга
+
+item.ornate_shears.name=Украшенные ножницы
+item.ornate_knife.name=Украшенный нож
+item.ornate_needle.name=Украшенная игла
+item.ornate_hammer.name=Украшенный молот
+item.ornate_hvyhammer.name=Тяжёлый украшенный молот
+item.ornate_tongs.name=Украшенные клещи
+item.ornate_saw.name=Украшенная пила
+item.ornate_spanner.name=Украшенный гаечный ключ
+
+item.ornate_dagger.name=Украшенный кинжал
+item.ornate_sword.name=Украшенный меч
+item.ornate_mace.name=Украшенная булава
+item.ornate_waraxe.name=Украшенный боевой топор
+item.ornate_spear.name=Украшенное копьё
+
+item.ornate_katana.name=Украшенная катана
+item.ornate_greatsword.name=Украшенный двуручный меч
+item.ornate_warhammer.name=Украшенный боевой молот
+item.ornate_battleaxe.name=Украшенная секира
+item.ornate_halbeard.name=Украшенная алебарда
+item.ornate_lance.name=Украшенное рыцарское копьё
+
+item.ornate_handpick.name=Украшенная малая кирка
+item.ornate_hvypick.name=Украшенная тяжёлая кирка
+item.ornate_trow.name=Украшенная лопата
+item.ornate_hvyshovel.name=Украшенная тяжёлая лопата
+item.ornate_scythe.name=Украшенная коса
+item.ornate_mattock.name=Украшенная киркомотыга
+item.ornate_lumber.name=Украшенный топор дровосека
+
+item.ornate_scale_helmet.name=Украшенный чешуйчатый шлем
+item.ornate_scale_chest.name=Украшенный чешуйчатый нагрудник
+item.ornate_scale_legs.name=Украшенные чешуйчатые поножи
+item.ornate_scale_boots.name=Украшенные чешуйчатые сапоги
+
+item.ornate_chain_helmet.name=Украшенный кольчужный шлем
+item.ornate_chain_chest.name=Украшенный кольчужный нагрудник
+item.ornate_chain_legs.name=Украшенные кольчужные поножи
+item.ornate_chain_boots.name=Украшенные кольчужные сапоги
+
+item.ornate_splint_helmet.name=Украшенный шинный шлем
+item.ornate_splint_chest.name=Украшенный шинный нагрудник
+item.ornate_splint_legs.name=Украшенные шинные поножи
+item.ornate_splint_boots.name=Украшенные шинные сапоги
+
+#Нет перевода слова Armet, оставил шлем.
+item.ornate_plate_helmet.name=Украшенный латный шлем
+item.ornate_plate_chest.name=Украшенная кираса
+item.ornate_plate_legs.name=Украшенные ножные латы
+item.ornate_plate_boots.name=Украшенные латные сапоги
+
+item.ornate_bow.name=Украшенный лук
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ARTEFACT/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+stat.artefact.name=Артефакт
+item.ancient_jewel.name=Древнее сокровище
+item.trilogy_jewel.name=Тройное сокровище
+
+item.schem_gears.name=Чертежи механизмов механической брони
+item.schem_forge.name=Чертежи продвинутого горна
+item.schem_cogwork.name=Чертежи корпуса механической брони
+item.schem_bomb.name=Чертежи гномьей бомбы
+item.schem_crossbow.name=Чертежи гномьего арбалета
+item.schem_alloy.name=Чертежи композитного металла
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/FOOD/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.berries.name=Ягоды
+item.berriesJuicy.name=Сочные ягоды
+item.generic_meat_uncooked.name=Сырое обычное мясо
+item.generic_meat_cooked.name=Приготовленное обычное мясо
+item.generic_meat_strip_uncooked.name=Сырые мясные полоски
+item.generic_meat_strip_cooked.name=Приготовленные мясные полоски
+item.generic_meat_chunk_uncooked.name=Сырые мясные кусочки
+item.generic_meat_chunk_cooked.name=Приготовленные мясные кусочки
+item.generic_meat_mince_uncooked.name=Сырой фарш
+item.generic_meat_mince_cooked.name=Приготовленный фарш
+item.burnt_food.name=Сгоревшая еда
+item.burnt_pot.name=Сгоревшая еда
+item.burnt_cake.name=Сгоревший торт
+item.burnt_pie.name=Сгоревший пирог
+
+tile.berries.name=Ягодный куст
+item.breadcrumbs.name=Хлебные крошки
+item.breadroll.name=Рулет
+item.breadslice.name=Кусочек хлеба
+item.horse_raw.name=Сырая конина
+item.horse_cooked.name=Приготовленная конина
+item.wolf_raw.name=Сырая волчатина
+item.wolf_cooked.name=Приготовленная волчатина
+item.mutton_raw.name=Сырая баранина
+item.mutton_cooked.name=Приготовленная баранина
+item.spider_raw.name=Сырое паучье мясо
+item.spider_cooked.name=Приготовленное паучье мясо
+
+item.bowl_water_salt.name=Солёная вода
+item.salt.name=Соль
+item.cake_tin.name=Форма для торта
+item.pie_tin.name=Форма для пирога
+item.pie_tray_uncooked.name=Необожжённая форма для пирога
+item.flour.name=Мука
+item.sugarpot.name=Сахарница
+item.bread_uncooked.name=Хлебная заготовка
+item.guts.name=Кишки
+
+item.raw_bread.name=Сырой хлеба
+item.dough.name=Тесто
+item.pastry.name=Тесто для торта
+item.stew.name=Тушёнка
+item.oats.name=Овёс
+
+item.curds.name=Творог
+item.cheese_pot.name=Горшок сыра
+
+item.jerky.name=Вяленое мясо
+item.cheese_roll.name=Сырный рулет
+item.sweetroll.name=Сладкий рулет
+item.sandwitch.name=Бутерброд
+
+tile.pie_meat.name=Мясной пирог
+tile.pie_apple.name=Яблочный пирог
+tile.pie_berry.name=Ягодный пирог
+tile.pie_shepards.name=Пастуший пирог
+
+item.meatpie_slice.name=Кусок мясного пирога
+item.pieslice_apple.name=Кусок яблочного пирога
+item.pieslice_berry.name=Кусок ягодного пирога
+item.pieslice_shepards.name=Кусок пастушьего пирога
+
+item.chicken_roast.name=Жаркое с курицей
+item.pork_roast.name=Жаркое со свининой
+item.beef_roast.name=Жаркое с говядиной
+item.mutton_roast.name=Жаркое с бараниной
+
+tile.cake_vanilla.name=Торт
+tile.cake_carrot.name=Морковный торт
+tile.cake_chocolate.name=Шоколадный торт
+tile.cake_bf.name=Торт "Чернолесье"
+
+item.cake_slice.name=Кусок торта
+item.carrotcake_slice.name=Кусок морковного торта
+item.choccake_slice.name=Кусок шоколадного торта
+item.bfcake_slice.name=Кусок "Чернолесья"
+
+item.coca_powder.name=Какао-порошок
+item.chocolate.name=Шоколадный
+item.chocchips.name=Шоколадные кусочки
+item.eclair.name=Эклер
+item.eclair_raw.name=Эклерное тесто
+item.eclair_uniced.name=Свежеиспечённый эклер
+item.eclair_empty.name=Пустой эклер
+item.saussage_cooked.name=Приготовленная сосиска
+item.saussage_raw.name=Сырая сосиска
+tile.cheese.name=Сырная голова
+item.cheese_slice.name=Кусок сыра
+item.sushi.name=Суши
+item.curry.name=Карри
+item.pizza_basic.name=Пицца
+item.sweetroll_raw.name=Тесто для сладкого рулета
+item.sweetroll_uniced.name=Свежеиспечённый сладкий рулет
+item.icing.name=Сахарная глазурь
+item.custard.name=Заварной крем
+
+item.cake_raw.name=Жидкое тесто для торта
+item.cake_simple_raw.name=Жидкое тесто простого торта
+item.cake_carrot_raw.name=Жидкое тесто морковного торта
+item.cake_choc_raw.name=Жидкое тесто шоколадного торта
+item.cake_bf_raw.name=Жидкое тесто торта "Чернолесье"
+
+item.cake_uniced.name=Свежеиспечённый торт
+item.cake_simple_uniced.name=Свежеиспечённый простой торт
+item.cake_carrot_uniced.name=Свежеиспечённый морковный торт
+item.cake_choc_uniced.name=Свежеиспечённый шоколадный торт
+item.cake_bf_uniced.name=Свежеиспечённое "Чернолесье"
+
+item.pie_meat_uncooked.name=Тесто мясного пирога
+item.pie_apple_uncooked.name=Тесто яблочного пирога
+item.pie_berry_uncooked.name=Тесто ягодного пирога
+item.pie_shepard_uncooked.name=Тесто пастушьего пирога
+item.pie_pumpkin_uncooked.name=Тесто тыквенного пирога
+
+item.pie_meat_cooked.name=Приготовленный мясной пирог
+item.pie_apple_cooked.name=Приготовленный яблочный пирог
+item.pie_berry_cooked.name=Приготовленный ягодный пирог
+item.pie_shepard_cooked.name=Приготовленный пастуший пирог
+item.pie_pumpkin_cooked.name=Приготовленный тыквенный пирог
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/FOOD STATS/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+food.stat.list.name=При поедании:
+food.stat.hunger.name=+%1$s сытости
+food.stat.staminaPlus.name=Восстанавливает %1$s выносливости
+food.stat.staminabuffHours.name=Бонус %1$s выносливости на %2$s ч.
+food.stat.staminabuffMinutes.name=Бонус %1$s выносливости на %2$s мин.
+food.stat.staminabuffSeconds.name=Бонус %1$s выносливости на %2$s сек.
+food.stat.saturationMinutes.name=Насыщение на %1$s мин.
+food.stat.saturationSeconds.name=Насыщение на %1$s сек.
+food.stat.saturation.name=Насыщение: %1$s pts
+food.stat.staminabuffRegenMinutes.name=Восстанавливает %1$s выносливости/сек на %2$s мин.
+food.stat.staminabuffRegenSeconds.name=Восстанавливает %1$s выносливости/сек на %2$s сек.
+food.stat.cure.poison=Лечит отравление
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/CONSTRUCTION/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.hinge.name=Петля
+item.commodity_plank_cut.name=Распиленный %1$s брусок
+item.commodity_plank_pane.name=%1$s брусчатая панель
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/RPG/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+rpg.levelup=Ваш навык %1$s повысился до %2$s уровня.
+rpg.required=Требует "%2$s" ур. %1$s
+rpg.skillmod=Модификатор умения: +
+
+skill.lowskill=Ваш навык недостаточно высок!
+skill.value=Уровень %1$s
+
+skill.list.basic=Основные навыки
+skill.list.craft=Навыки крафта
+skill.list.combat=Боевые навыки
+
+skill.artisanry.name=Кузнечное дело
+skill.construction.name=Строительное дело
+skill.provisioning.name=Ремесло снабжения
+skill.engineering.name=Инженерное дело
+skill.combat.name=Мастерство
+
+item.skillbook_artisanry.name=Искусство кузнечного дела
+item.skillbook_artisanry.desc=+%1$s к кузнечному делу
+item.skillbook_construction.name=Секреты строительства
+item.skillbook_construction.desc=+%1$s к строительному делу
+item.skillbook_provisioning.name=Накорми деревню
+item.skillbook_provisioning.desc=+%1$s к ремеслу снабжения
+item.skillbook_engineering.name=Продвинутые механизмы
+item.skillbook_engineering.desc=+%1$s к инженерному делу
+item.skillbook_combat.name=Смешанные боевые тактики
+item.skillbook_combat.desc=+%1$s к мастерству
+
+item.skillbook_artisanry2.name=Кузнецы спустя века
+item.skillbook_artisanry2.desc=Максимальный уровень кузнечного дела
+item.skillbook_construction2.name=Секреты инженера
+item.skillbook_construction2.desc=Максимальный уровень строительного дела
+item.skillbook_provisioning2.name=История Торговли
+item.skillbook_provisioning2.desc=Максимальный уровень ремесла снабжения
+item.skillbook_engineering2.name=Лексикон инженера
+item.skillbook_engineering2.desc=Максимальный уровень инженерного дела
+item.skillbook_combat2.name=Повесть о великой войне
+item.skillbook_combat2.desc=Максимальный уровень мастерства
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/KNOWLEDGE INFORMATION/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+method.workbench=Базовый верстак
+method.furnace=Выплавка
+method.bloomery=Домница
+method.blastfurnace=Доменная печь
+method.anvil=Наковальня
+method.carpenter=Плотницкий верстак
+method.crucible=Тигель
+method.crucibleT2=Огнеупорный тигель
+method.crucibleT3=Мифический тигель
+method.crucibleT4=Мастерский тигель
+method.quern=Ручная мельница
+info.hasKnowledge=Можно изучить
+
+gui.purchase=Покупка
+knowledge.guiSubtitle=Это GUI
+knowledge.basicstructure=Базовая структура
+knowledge.example=Пример
+knowledge.rightclickspanner=ПКМ гаечным ключом
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/KNOWLEDGE TEXT/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+knowledge.title=
+knowledge.title.desc=
+knowledge.title.1=
+
+knowledge.minotaurs=Минотавр
+knowledge.minotaurs.desc=Ужасные монстры
+
+knowledge.minotaurs.1=Немногие существа могут тягаться с минотаврами силой и яростью. Легенда гласит, что эти существа были людьми и коровами, пока не стали тем, чем являются сейчас. Минотавры всеядные и достаточно вспыльчивые существа.^Минотавры чрезвычайно сильны и быстры - они способны мгновенно убить зазевавшуюся жертву, так же они удивительно быстро восстанавливаются после ранений. Минотавры не обладают высоким интеллектом, однако, некоторые из них собираются в группы и живут согласно строгой иерархии.
+knowledge.minotaurs.2=$hLesser Minotaur-$r^It may be common sight to see lesser minotaurs in the wild proving a threat to those unfortunate enough to come close.^These creatures are little more than beasts yet provide a misconception of actual minotaur behavior. Lesser minotaurs either have no home or are set out to scavenge for their greater counterparts.
+knowledge.minotaurs.3=$hGreater Minotaur-$r^Greater minotaurs are found dwelling in dwarven complexes underground providing a challenge to explorers.^The minotaurs that are housed within these ruins are more organised and deadly. Standard minotaur warriors are brutal and armed while the elite and warlords that can be found deeper within ruins are powerful foes. It shall be made clear that ruins should be explored only by the prepared. One warrior may prove a challenge, but a group? few have survived.
+knowledge.minotaurs.4=$hSpecies-$r^There are three known species of minotaur found in both wild and ruin. There is no difference to the behavior or living patterns of minotaurs of different species but physical properties do vary. 
+knowledge.minotaurs.combat=$hCombat-$r^The best advice that could be given to fighting off a minotaur would be range. Don't let them get close enough to hit you, even the strongest armour buckles under the force of their fury. Many minotaurs are heavily armoured as well but both hide and plate are vulnerable to piercing attacks a spear would be capable of exploiting both these weaknesses. Spears, explosives, distance and heavy armour give the best chances of survival.
+
+knowledge.mob.minotaur.name=Коричневый минотавр
+
+knowledge.minotaur.1=В основном, в нашем мире обитает именно этот вид минотавров. Они чрезвычайно сильны, быстры, выносливы. Обычным минотаврам недостаёт интеллекта, и они бесцельно бродят по миру.
+knowledge.minotaur.1=Brown-fur minotaurs are the more common species in the overworld. They are found to have excessive strength and prove to be a powerful foe. Standard minotaurs have no natural armour but are still hard to kill.
+
+knowledge.mob.minotaur_frost.name=Снежный минотавр
+
+knowledge.minotaur_frost.1=Обитает в холодных регионах. Эти минотавры считаются более опасными, чем коричневые. Минотавра-альбиноса очень трудно заметить в снежной местности, что создаёт проблему для всех путешественников.
+knowledge.minotaur_frost.1=Found in colder regions, these Minotaurs appear to have thicker hide than the brown minotaurs, resulting in natural armour. The Albino minotaur is difficult to see in the snow and can unleash a devistating rage on the unsuspecting traveller.
+
+knowledge.mob.minotaur_dread.name=Яростный минотавр
+
+knowledge.minotaur_dread.1=Доподлинно неизвестно, кто начал их так называть. Жители Нижнего Мира вооружённые железным оружием, яростно патрулирующие пустоши. Удивительно, но когда их несколько, они действуют сообща.
+knowledge.minotaur_dread.1=Not as much is known about what some call the Dread Minotaur. Denizens of the nether, dark-grey or black fur, powerfully thick skin, and immunity to fire. This species are far hardier than their overworld cousins.
+
+knowledge.dragons=Драконы
+knowledge.dragons.desc=Смерть с небес
+
+knowledge.dragons.1=Драконы гордые, но разрушительные рептилии, высматривающие свою добычу сверху. В мире есть достаточно много видов драконов, сильно различающися своими способностями. Поглядывайте в небо и будьте внимательны в своих путешествиях во избежание фатальных столкновений.^Каждый дракон, несомненно, опасен способностью изрыгать смертоносные вещества.
+
+knowledge.dragons.2=Чем старше дракон, тем он опаснее. Кожа этих рептилий неимоверно прочная, поэтому многое оружие может быть бесполезно в борьбе с ними. Оружие из драконьей стали наоборот, очень даже эффективно против драконов.^ Драконы охотятся за сердцами павших сородичей, которые могут быть использованы специально обученными кузнецами. Сердца молодых драконов не подходят для создания чего-либо, поэтому следует охотиться на взрослых особей, если Вы встали на путь драконоборца.
+
+knowledge.mob.red_dragon.name=Красный дракон
+knowledge.red_dragon.1=Самый распространённый вид, имеет способность изрыгать пламя. Не один человек пал жертвой таких драконов, и не одна деревня исчезла в их огне.
+
+knowledge.mob.blue_dragon.name=Ледяной дракон
+knowledge.blue_dragon.1=Обитающие в очень холодных регионах, эти драконы научились изрыгать ледяные ветры, замораживающие врагов. Ледяные драконы не несут особых разрушений как красные драконы, но считаются более опасными.
+
+knowledge.mob.green_dragon.name=Зелёный дракон
+knowledge.green_dragon.1=Зелёные драконы так же известны как "Ядовитые драконы". Они обитают в наиболее влажных местностях типа болот, озёр и морей. Способны изрыгать кислоту, разъедающую броню и отравляющую жертву.
+
+knowledge.mob.ash_dragon.name=Ash Dragon
+knowledge.ash_dragon.1=Ash dragons are found in the hot and dry such as deserts and can be easily identified by their two legs (rather than four). Ash dragons are blind, and require the use of sound and smell to track their target. keep your distance and remain quiet to avoid attack.
+
+knowledge.dragons.combat=$hCombat-$r^Dragons may be fast and have the sky advantage, but they have a few weaknesses to exploit. Firstly is the ability to leave and return the battlefield, you are best to pay attention and avoid losing sight of your foe. As the dragon swoops, make your strike. A proerly lined ranged attack will grant an advantage when it takes off again. As well as that: specialised dragonforged items may be crafted to give an edge to the battle.
+
+knowledge.gettingStarted=Начало развития
+knowledge.gettingStarted.desc=С нуля
+
+knowledge.gettingStarted.1=Отсюда и пойдёт Ваше изучение мода MineFantasy. Для начала, рекомендуется создать хотя бы простенькое убежище, а так же запастись деревом, углём, медью, шкурами и камнем. Для жизни в этом мире придётся научиться трём действиям.
+knowledge.gettingStarted.2=Изготовление блоков требует особых взаимодействий. Сначала выстройте рецепт так, как это требуется (для наковален придётся нагревать некоторые ресурсы). Затем выберите соответствующий инструмент с нужным уровнем(такой как ваши руки, ножи, молоты и т.д.). Затем нужно щёлкнуть по блоку этим инструментом, удерживая нажатой клавишу как минимум секунду до готовности продукта Вашей деятельности. 
+
+knowledge.gettingStarted.hcc=$hКаменный век-$r^ Ванильные инструменты выключены, инструменты делаются из камня по специальным рецептам, а также куются. Рецепты кованых инструментов находятся в разделе кузнечного дела.^Для получения острых камней необходимо разбить рукой блок камня (не держа в руке никаких предметов) Используйте острый камень в руке чтобы добыть лозу из блоков листвы, а также для получения палок.
+
+knowledge.gettingStarted.fire=$hКостёр$r^Перед тем, как начать работать, вам потребуется костёр, который обеспечит вас огнём и позволит пожарить немного мяса.^Подкиньте дров (любых пиломатериалов) ПКМ, затем разожгите огонь сухими камнями или трутницей.
+knowledge.gettingStarted.food=Для готовки разместите плиту или каменную печь над костром. Размещать еду (в основном, сырое мясо) можно при помощи ПКМ.^Приятного аппетита!
+
+knowledge.gettingStarted.carpenter=$hСтол плотника$r^ Это базовый стол для создания ваших поделок. Для его использования потребуется множество инструментов, включая ваши голые руки. 
+
+knowledge.gettingStarted.tanning=$hДубление$r^Это способ переработки шкур в кожу. ^Для начала соберите непрочный станок для обработки кожи и каменный нож. Это не самые лучшие инструменты и их стоило бы улучшать в дальнейшем.
+
+knowledge.gettingStarted.forging=$hКовка$r^Это основной вид крафта. Для начала стоит сделать каменный горн, наковальню и необходимые инструменты. Располагайте наковальню возле воды и горна. Вкладка кузнечного ремесла содержит исчерпывающую информацию по ковке. Убедитесь в наличии базовых инструментов для добычи огня (Сухие камни), и кузнечного фартука!
+
+knowledge.gettingStarted.forgingbars=Большинство рецептов требует использование чушек, а не слитков. Чушка - это простой компонент, изготавливаемый из металла. Нужно лишь положить слиток на наковальню и немного поработать молотком. Таким же способом вы сможете изготовить слиток из чушки.
+knowledge.gettingStarted.flux=Флюс - важный реактив для очистки металлов. В первую очередь он используется для обработки металлов в процессе ковки, так же он потребуется для некоторых сплавов. Так же он пригодится при крафте кусков и пластин металлов, для некоторых инструментов и брони.^Лучший источник флюса - известняк. Старайтесь запасаться им!
+knowledge.gettingStarted.3=Для изготовления инструментов понадобятся кожаные полосы. Для этого изготовьте медные ножницы.
+knowledge.gettingStarted.4=Благодаря им, Вы можете разрезать кожу на полосы на плотницком верстаке или прямо на дубильном станке.
+
+knowledge.gettingStarted.5=Теперь у вас есть доступ ко всему необходимому, чтобы наконец улучшить свой каменный молот.
+
+knowledge.gettingStarted.6=С установленным горном можно выковать медные инструменты. Проверьте секцию кованых инструментов для просмотра альтернатив медному инструментарию.
+
+knowledge.gettingStarted.upgrade=$hUpgrading-$r^ Книга и стол исследований помогут вам постичь новые рецепты и умения, но перед этим нужно создать стол исследований.
+
+knowledge.gettingStarted.7=Этот стол позволяет превратить свитки исследований в завершённые исследования. Однако для этого Вам надо где-то достать свиток. ^Откройте свою книгу - в ней находится большое количество доступных исследований, подсвеченных зелёным цветом. Попробуйте к примеру технологию изготовления лёгкой брони на вкладке кузнечного ремесла.
+
+
+knowledge.gettingStarted.10=Во множестве ремёсел вам придётся столкнуться с порошками, которые вы будете делать при помощи ручной мельницы.
+
+knowledge.gettingStarted.11=Попробуйте работать с бронзой, тигли, как Вы видите, уже доступны Вам. Для этого Вам необходим 5 уровень кузнечного дела. ^Как только вы изучили основы работы с бронзой, улучшите свои инструменты и приготовьтесь к последующему прогрессу!
+
+knowledge.gettingStarted.12=$hРазборка$r^Вы можете создать верстак для разборки предметов.^С его помощью можно разобрать большинство предметов (Vanilla и MineFantasy), но с некоторыми потерями.
+knowledge.gettingStarted.13=Для использования просто бросьте предмет на разборочный верстак и нажмите ПКМ по нему.
+
+knowledge.dust=Мельница
+knowledge.dust.desc=Изготовление порошков
+knowledge.dust.1=Вы можете держать в руках сыпучие вещества, но как предотвратить их просыпание? Глиняные горшки подойдут для хранения порошков, большинство из которых изготавливается с помощью ручной мельницы, в то время как некоторые рецепты могут потребовать иных орудий. Например:
+knowledge.dust.quern=Как использовать мельницу: всё что Вам нужно, это поместить горшочек в середину, подходящий ресурс сверху, и нажимать ЛКМ-ПКМ по мельнице.
+knowledge.dust.icing=Некоторые рецепты для еды требуют ложки, а не пестика.
+
+knowledge.research=Книга исследований
+knowledge.research.desc=Следим за продвижением
+
+knowledge.research.1=В этой книге содержится большинство знаний, начиная с кулинарных рецептов, и заканчивая сложными типами брони. Исследование есть способ найти нечто скрытое в мире и использовать в своих работах. Большинство того ,что Вы могли бы сделать, должно быть изучено, и при надлежащем уровне ремесла секрет будет раскрыт.^Для начала, стоит сделать исследовательскую станцию. Ваш навык и предметы исследований откроют Вам новые знания.
+
+//Table recipe
+
+knowledge.research.2=При наличии стола исследований, у Вас появится возможность изучать Mine Fantasy раздел за разделом. С версией 2.8 поменялась система изучений с привычных свитков на изучение предметов. Чтобы изучить что-то, положите в стол предмет с пометкой "Можно изучить", и нажимайте ЛКМ-ПКМ. Помните - для того, чтобы изучить что-то, возможно, нужен более высокий уровень определённого ремесла.
+
+knowledge.carpenter=Стол плотника
+knowledge.carpenter.desc=Простой крафт
+knowledge.carpenter.1=В основном тут происходит крафт, связанный с деревом. Для крафта на этом столе используется множество различных инструментов. Для его использования сложите рецепт и медленно кликайте по столу нужным инструментом.
+
+knowledge.salvage=Верстак для разборки предметов
+knowledge.salvage.desc=Всегда перерабатывайте!
+knowledge.salvage.1=Если у вас есть ненужные вещи, которые вы не используете, да и выбросить жалко, Вы можете разобрать их на составные части. ^Вы можете разобрать только ванильные предметы и предметы из MF.
+knowledge.salvage.2=Для разбора просто бросьте предмет наверх столика и нажмите ПКМ по нему. Помните, что есть шанс порчи и пропажи некоторых компонентов!
+knowledge.salvage.3=Использование молота или пилы при разборке увеличивает шанс получения составных компонентов.
+
+knowledge.talisman=Талисманы знаний
+knowledge.talisman.desc=Читаем легко!
+knowledge.talisman.1=Обычно для получения знаний используется стол исследований, но это занимает много времени и требует много усилий. Талисманы ускоряют этот процесс при помощи клика ПКМ по столу с талисманом в руке.
+knowledge.talisman.2=Большие талисманы очень редки, но имеют бесконечное количество использований.
+
+knowledge.commodities=Повседневные вещи
+knowledge.commodities.desc=Разные полезности
+knowledge.commodities.1=Это базовые вещи, не являющиеся мусором.^^Иными словами, они часто используются в рецептах, поэтому их стоит хранить в достаточных количествах. 
+
+knowledge.commodities.plank=Бруски - это прекрасные, крупные куски древесины, которые используются практически везде.
+
+knowledge.commodities.refinedplank=Древесина может быть обработана, что повышает её качество. Она используется для более продвинутых вещей.
+
+knowledge.commodities.flux=Флюс часто используется для обработки металлов. Стандартный флюс используется в очистных печах, в то время как насыщенный флюс используют для получения продвинутых сплавов. 
+
+knowledge.commodities.hunks=Куски металла используются для небольших вещей. Они делаются из слитков и могут быть превращены обратно в слитки.
+
+knowledge.commodities.nail=Гвозди - базовая вещь для работы с деревом. Для их создания необязательно изучать технологию изготовления железных вещей.
+
+knowledge.commodities.rivet=Заклёпки сходны с гвоздями, но применяются в работе с металлом.
+
+knowledge.commodities.leatherstrip=Полоски кожи используются при изготовлении инструментов.
+
+knowledge.commodities.thread=Волокно используется в швейных рецептах и может быть превращено в нить.
+
+knowledge.commodities.bucket=Вёдра делаются из металла. Чем выше уровень металла, тем больше вёдер.
+
+knowledge.plants=Фитоценоз
+knowledge.plants.desc=Органические ресурсы
+knowledge.plants.1=Бросьте взгляд на поверхность! Здесь, в растениях, скрыто множество полезных ресурсов!^Здесь вы можете найти список растений, которые не дадут вам погибнуть от голода и обеспечат полезными ресурсами.
+knowledge.plants.2=Деревья дают вам различные виды древесины, причём каждый из них лучше для определённых целей. Здесь приведён список деревьев, которые вы встретите в мире.
+knowledge.yew.1=Тис очень распространён в лесах, чаще всего вы встретите одиночные деревья. Свойства тиса лучше, чем у любого другого дерева, но ещё из него получаются превосходные луки.
+
+knowledge.ironbark.1=Этот вид эвкалипта - узнаваемое дерево, которое редко можно встретить в лесах, его грубая серая кора с оранжеватой древесиной сильно выделяется. Его древесина достаточно прочна и подходит для создания крепких предметов.
+
+knowledge.ebony.1=Эбеновое дерево - огромное и редкое. Они встречаются в умеренном климате и дают крепчайшую древесину, узнать их можно по размеру и специфическому цвету коры.
+
+knowledge.berry=Ягоды
+knowledge.berry.desc=Здоровый перекус
+knowledge.berry.1=Ягоды растут во всём мире, но только при условии наличия подходящих влажности и температуры. Чаще всего вы можете найти их в лесах.^Сочные (фиолетовые) ягоды менее распространены и ядовиты.
+
+knowledge.ores=Руды и минералы
+knowledge.ores.desc=Полезные ресурсы
+knowledge.ores.1=Есть некое количество генерируемых руд. Все можно так или иначе переплавить в слитки.
+knowledge.ores.copper=Медная руда встречается между уровнями 48-96. Её можно легко переплавить в слитки и перековать их в инструменты.^Также медь используется для получения бронзы.
+knowledge.ores.tin=Олово встречается в два раза реже меди и в том же ареале высот.^Переплавляется в слитки для дальнейшего получения бронзы.
+knowledge.ores.silver=Серебро находится в том же ареале высот, что и золото. Вначале оно не очень полезно, но впоследствии оно может стать очень нужным материалом.
+knowledge.ores.wolframite=Вольфрамит - редкий металл, используемый для высокотехнологичных инженерных изысканий. Может быть найден в слоях <16 Y, в одиночных жилах.
+knowledge.ores.mythic=Мало кто знает о "мифиевой руде", что находится в слоях коренной породы. Эта руда издаёт странные звуки, но неизвестно по какой причине.
+
+knowledge.ores.2=Минералы также генерируются в мире, но в отличие от руд они не могут быть переплавлены в слитки.
+knowledge.minerals.clay=Также как и песок, глина может быть найдена возле земли. Также можно найти глиносодержащие почвы. 
+knowledge.minerals.kaolinite=Колинит имеет специфическое использование - в смеси с глиной он увеличивает прочность кирпичей. 
+knowledge.minerals.limestone=Известняк - хороший источник флюса, генерирующийся крупными залежами. 
+knowledge.minerals.borax=Являющийся относительно редким минералом, боракс превосходный источник обогащённого флюса. 
+knowledge.minerals.nitre=Селитра часто встречается в пещерах и используется для изготовления взрывчатки.
+knowledge.minerals.sulfur=Сера встречается глубого под землёй рядом со скоплениями лавы и используется для изготовления взрывчатки.
+
+knowledge.chimney=Дым и трубы
+knowledge.chimney.desc=Я... задыхаюсь?
+
+knowledge.chimney.1=Неоспоримым фактом является то, что сжигание топлива производит газ. А ещё то, что дышать им не очень-то и полезно для Ваших лёгких. В любом случае, трубы помогут
+
+knowledge.chimney.2=убрать дым от вас и направить его высоко в небо! Оставьте его для тех, кто будет погибать от парникового эффекта парой сотен лет позже.
+
+knowledge.chimney.3=Вытяжные трубы таже могут быть использованы для непрямого поглощения газа. ^Это значит, что они смогут отводить дым в пределах одного блока над его источником.
+
+knowledge.chimney.pipe=Дымовые трубы могут транспортировать газ по всей системе. Труба должна быть присоединена к дымоходу, иначе она вытягивать дым не будет.
+
+knowledge.chimney.pipe.2=Лучше всего ставить трубы поверх устройства(пр. домница), чтобы ремесленнику они не мешали в работе.
+
+knowledge.tanning=Выделка шкур
+knowledge.tanning.desc=И мёртвые животные могут послужить
+
+knowledge.tanning.1=Кожа является очень ценным ресурсом, потому что она нужна практически для всего. ^Выделка кожи - это простой метод очистки сырой шкуры до состояния, в котором она становится пригодной для использования.^ Для этого понадобятся дубильный станок и нож.
+
+knowledge.tanning.2=Для выделки кожи её необходимо сначала очистить. Кликните со шкурой в руках ПКМ по воде или же соедените её с флюсом в сетке крафта. После очистки поместите шкуру на дубильный станок и обработайте её ножом.
+
+knowledge.stamina=Механика выносливости
+knowledge.stamina.desc=Держи себя в форме!
+
+knowledge.stamina.1=Не так уж просто бегать целый день или махать киркой в шахте, и механика выносливости проследит за этим.^Выносливость отображается зелёной шкалой внизу экрана и уменьшается при определённых действиях. Восстанавливается она сама собой, но скорость её восстановления зависит от экипированных вещей, а также от еды из мода. 
+
+knowledge.combat=Боевая механика
+knowledge.combat.desc=Чуть больше возможностей убить ближнего своего
+
+knowledge.combat.1=Вы могли заметить, что простое махание мечом перестало быть эффективным. Сражения теперь были модифицированы и используют более сложные техники боя.^Между прочим, эти техники могут использовать не только люди, но и вооружённые монстры, а значит, что зомби с мечом теперь куда опаснее.
+
+knowledge.parry.info=$hПарирование и блокирование$r^Удерживая ПКМ с большей частью оружия в руках, вы блокируете. Однако теперь блок стал куда эффективнее. Когда вы блокируете прямую атаку, Вы снижаете урон от атак, и иногда вовсе можете свести его к нулю. Клинковые виды оружия лучше всего справляются с этой задачей. ^Рекомендуется блокировать удары, а не принимать их открытой грудью, это может спасти Вам жизнь.^ Однако атака после парирования имеет уменьшенный урон.
+
+
+knowledge.advparry.info=$hУмение парирования$r^Если парирование удалось, а Вы держите shift, Вы продвинетесь вперёд, и возможно даже за спину оппонента, что позволит Вам нанести свой удар. Это потребляет выносливость, но может дать Вам шанс перехватить инициативу в бою. Это возможно также и в прыжке.
+
+knowledge.poweratt.info=$hСиловые атаки$r^Удерживая shift в падении, Вы можете нанести силовую атаку, увеличивающую урон и пробивающую блок, но потребляющую выносливость. Также попытка силового удара может быть прервана получением урона. 
+
+knowledge.dodge.info=$hУклонение$r^В некоторых случаях, лучше избежать удар противника. Если Вы маневрируете из стороны в сторону или отступаете в защите, Вы выполните быстрый отскок. Это умение расходует выносливость и невыполнимо в тяжёлой броне.
+
+knowledge.armour.info=$hВыбор брони$r^Есть три основных типа брони - лёгкая, средняя, тяжёлая. Если Вы хотите быстро передвигаться и маневрировать в бою, используйте лёгкую броню. Если нужна максимальная защита, подойдёт тяжёлая броня. Средняя броня сочетает хорошую защиту и подвижность.
+
+knowledge.blade.info=
+knowledge.fastblade.info=
+knowledge.axe.info=
+knowledge.blunt.info=
+knowledge.polearms.info=
+
+knowledge.bar=Чушки
+knowledge.bar.desc=Стандартизированная форма
+knowledge.bar.1=Слитки могут использоваться для грубых поделок и торговли, но они слишком крупные для ковки. Решение - чушки. Они просты в обработке, их легко переплавить, можно поставить производство на поток!.^Чушки могут быть переделаны в слитки таким же способом.
+
+knowledge.smeltCopper=Работа с медью
+knowledge.smeltCopper.desc=Уровень %1$s, обычный материал
+knowledge.smeltCopper.1=Это Ваш первый материал на тернистом пути постижения премудростей кузнечного ремесла.^Да, Вы делаете мусор, но зато он Ваш!
+
+knowledge.smeltBronze=Работа с бронзой
+knowledge.smeltBronze.desc=Уровень %1$s, обычный материал
+knowledge.smeltBronze.1=Смешивая медь с оловом, Вы получаете бронзу. Этот сплав намного лучше меди.
+
+knowledge.smeltIron=Работа с железом
+knowledge.smeltIron.desc=Уровень %1$s, обычный материал
+knowledge.smeltIron.1=Железо очень распространённая руда, что делает её очень полезной. Железные орудия не очень хороши, но лучше бронзовых. 
+knowledge.smeltIron.2=Выплавка железа в слитки готовые к ковке не такая уж и сложная задача, но определённый уровень ремесла используется для нормальной работы. Вы усвоили пару уроков кузнечного дела, чтобы делать железные инструменты.
+
+knowledge.smeltPig=Чугун
+knowledge.smeltPig.desc=Переработка железа
+knowledge.smeltPig.1=Железо имеет много недостатков, но очистная печь позволяет устранить их.^Чугун используется для создания стали.
+
+knowledge.smeltSteel=Работа со сталью
+knowledge.smeltSteel.desc=Уровень %1$s, обычный материал
+knowledge.smeltSteel.1=Наконец-то Вы получили очень хороший, но вместе с тем дорогой материал.^Сталь делается путём перековки на наковальне или выплавки в огнеупорном тигле. Она - Ваш лучший друг!.
+
+knowledge.smeltEncrusted=Инкрустирование
+knowledge.smeltEncrusted.desc=Уровень %1$s, экзотический материал
+knowledge.smeltEncrusted.1=Почему бы не использовать эффективнось стали совместно с крепостью алмаза? Инкрустированные инструменты куда лучше стальных.^А теперь покажите миру свои прекрасные новые инструменты (в надежде, что их не отберут).
+
+knowledge.smeltObsidian=Работа с обсидианом
+knowledge.smeltObsidian.desc=Уровень %1$s, экзотический материал
+knowledge.smeltObsidian.1=Обсидиан в своей природной форме экстримально устойчив к температуре, что делает его непригодным к обработке. Однако, его смесь с сталью по определённой технологии может отличный материал
+
+knowledge.smeltBlackSteel=Работа с чёрной сталью
+knowledge.smeltBlackSteel.desc=Уровень %1$s, обычный материал
+knowledge.smeltBlackSteel.1=Теперь можно очистить сталь до более хорошего материала. Этот материал впитал в себя весь Ваш предыдущий опыт, и теперь Вы можете создавать ещё более хорошие вещи.
+
+knowledge.craftOrnate=Украшение
+knowledge.craftOrnate.desc=Заслуживает ухода
+
+knowledge.craftOrnate.1=С подходящими материалами и наличием времени можно создавать более изысканные варианты оружия, брони и инструментов. Инкрустированные вещи более эффективны против нечисти (например, зомби).^Декоративный герб используется для создания таких предметов. Поместите украшение в выходящий слот наковальни и начинайте ковать. В итоге, у Вас получится украшенный предмет.
+
+knowledge.smeltDragonforge=Драконокованый
+knowledge.smeltDragonforge.desc=Грубо и мощно
+
+knowledge.smeltDragonforge.1=Драконы - жестокие создания, битва с ними требует подготовки и опыта. Благодаря вашим стараниям, вы можете обратить их оружие против них самих! Драконокованые предметы куда сильнее поражает драконов.^Начните создавать любое оружие. В старых сказаниях говорится, что сердце дракона наделяет металл мощью, когда те объяты пламенем.
+knowledge.smeltDragonforge.2=Драконокованые предметы, в отличие от других видов, требуют проведения этого ритуала на открытом воздухе.
+
+knowledge.smeltBlueSteel=Работа с голубой сталью
+knowledge.smeltBlueSteel.desc=Уровень %1$s, обычный материал
+
+knowledge.smeltBlueSteel.1=Вы научились изготавливать голубую сталь, крайне лёгкий металл. 
+
+knowledge.smeltRedSteel=Работа с красной сталью
+knowledge.smeltRedSteel.desc=Уровень %1$s, обычный материал
+
+knowledge.smeltRedSteel.1= Красная сталь - очень тяжёлый материал, быстро потребляющий Вашу выносливость, но в то же время крайне прочный.
+
+knowledge.smeltMithril=Работа с мифрилом
+knowledge.smeltMithril.desc=Уровень %1$s, экзотический материал
+
+knowledge.smeltMithril.1=Мифиевая руда крайне странная: в зависимости от метода её обработки результат разный. При смешивании лёгких элементов, серебра и мифиевой руды, Вы можете создать Мифрил. ^Мифрил отличается завидной лёгкостью.
+
+knowledge.smeltMithril.2=Из строк "Схематического Талисмана" стало известно, что серебро можно применять с мифием для создания более лёгкого материала.^Кажется, такое знание бесполезно, но это далеко не так.
+
+
+knowledge.smeltAdamantium=Работа с адамантием
+knowledge.smeltAdamantium.desc=Уровень %1$s, экзотический материал
+
+knowledge.smeltAdamantium.1=Мифиевая руда крайне странная: в зависимости от метода её обработки результат разный. Смешивая тяжёлые металлы с золотом и мифием, вы получаете крайне тяжёлый и крепкий металл. 
+
+knowledge.smeltAdamantium.2=Из строк "Схематического Талисмана" стало известно, что золото можно применять с мифием для создания более прочного и тяжёлого материала. Золото играет важную роль в трансформации мифиевой руды в другой металл. ^Кажется, такое знание бесполезно, но это далеко не так.
+
+knowledge.smeltMaster=Мастерская обработка мифиевой руды
+knowledge.smeltMaster.desc=Новые горизонты
+
+knowledge.smeltMaster.1=Производство материалов из мифия одно дело. А вот правильное - совсем другое. Вы можете создать мифрил и адамантий, но эти материалы - мусор в сравнении со всем потенциалом мифиевой руды.
+
+knowledge.smeltMaster.2=Мастерство позволяет Вам создавать новые, могущественные материалы, раскрывающие всю мощь, заключённую в мифиевой руде. ^Мастерства не так уж и легко добиться. Теперь станет намного сложнее удерживать качество продукта ковки.
+
+knowledge.smeltMaster.3=Но не только: хотя бы лёгкая тень несовершенства омрачит результат. А истинное совершенство станет практически неуничтожимым!
+
+knowledge.smeltIgnotumite=Работа с игнотумитом
+knowledge.smeltIgnotumite.desc=Уровень %1$s, материал мастеров своего дела
+
+knowledge.smeltIgnotumite.1=Адамантий крайне мощен, но он не достигает своих истинных высот. Мифий содержит в себе множество элементов, и их разделение позволяет превратить адамантиум в игнотумит. 
+
+knowledge.smeltMithium=Работа с мифием
+knowledge.smeltMithium.desc=Уровень %1$s, материал мастеров своего дела
+
+knowledge.smeltMithium.1=Мифрил - крайне лёгкий и достаточно прочный материал, но, видимо, у него гораздо более большой потенциал. Вам предстоит попробовать выплавить чистый мифий...
+
+knowledge.smeltEnder=Работа со сталью Края
+knowledge.smeltEnderforge.desc=Уровень %1$s, материал мастеров своего дела
+
+knowledge.smeltEnderforge.1=В существах из Края всегда было что-то странное... Сталь края сочетает в себе мифрил и адамантиум и концентрирует их силы через потусторонний жемчуг...
+
+knowledge.coalflux=Угольный флюс
+knowledge.coalflux.desc=Лучше значит дешевле.
+knowledge.coalflux.1=Угольный флюс ничем не уступает обычному углю, это было доказано кузнецами давным давно. Он выдаёт больше жара, медленнее сгорает, и создаётся проще простого!^Чтобы сделать угольный флюс, нужно смешать обычный уголь и флюс. Это вещество может быть использовано в домницах и любых других устройствах Mine Fantasy, но не как топливо(не как ванильный уголь).
+
+knowledge.bigfurn=Большая печь
+knowledge.bigfurn.desc=Массовое производство
+
+knowledge.bigfurn.1=Процесс очистки базовых металлов и материалов сейчас достиг небывалых высот. Домницы - прошлый век, ведь они медленные, и дают на выходе металл не очищенный.^Большую печь рекомендуется обложить огнеупорной глиной в целях пожарной безопасности.
+
+knowledge.bigfurn.2=Эта печь переплавляет сразу 4 предмета за короткий срок времени. Печь имеет простой дизайн, но этого достаточно, чтобы работать с ней, нужно лишь положить уголь и металлы.
+
+knowledge.bigfurn.heater=Чтобы начать работу, отправьте уголь в топку. Печь заработает, и чем выше будет температура в топке, тем быстрее печь будет плавить металл. Для безопасности, следует обложить топку огнеупорной глиной.
+
+knowledge.bigfurn.top=Разместите саму печь над топкой. Если Вы будете регулировать температуру, печь будет работать наиболее эффективно.В целях пожарной безопасности обложите печь огнеупорной глиной.
+
+knowledge.bigfurn.structure=Когда Вы сделали печь, обложили её огнеупорным материалом, можете создавать впритык к ней другие печи, они будут работать как одна.
+
+knowledge.blastfurn=Очистка металла
+knowledge.blastfurn.desc=Больше, чем переплавка
+
+knowledge.blastfurn.1=Иногда выплавка металла из руды попросту не может дать Вам необходимый эффект, и тогда Вам потребуется очистная печь.^ Каждая такая печь может быть построена практически с любой высотой и обрабатывать сразу несколько ресурсов одновременно. 
+
+knowledge.blastfurn.2=Перед строительством печи нужно позаботиться о достойном каркасе.^ Огнеупорный кирпич должен выдерживать эти огромные температуры и используются для облицовки печи. 
+#Firebrick Recipes
+knowledge.blastfurn.3=Печь состоит из двух типов блоков - топок и камер. Одна топка может обслуживать до 16 камер печи. 
+#Furnace Recipes
+knowledge.blastfurn.4=Имея огнеупорный кирпич, топку и камеру, Вы может построить очистную печь.^Для начала, поставьте топку на землю.^Если под топкой находится тигель, он будет собирать в себя отходы топки. ^ Также оставьте достаточно места (около четырёх блоков) со всех сторон. 
+knowledge.blastfurn.5=Топка должна иметь как минимум по одному блоку огнеупорного кирпича у каждого из своих четырёх углов. Желательно не закрывать боговые стороны топки. ^Теперь можно построить саму шахту очистной печи над топкой, прикрывая её со всех четырёх сторон огнеупорным кирпичом. Верх должен быть открыт для свободного выхода дыма.
+#Structure
+knowledge.blastfurn.6=Использование очистной печи очень простое, но потребляет огромное количество топлива.^Сначала положите материал (такой как подготовленное железо) в нижний слот и уголь в верхний слот в самую верхнюю камеру. 
+knowledge.blastfurn.7=Если всё сделано верно, ресурсы провалятся в шахту и распределятся среди камер по одной штуке. Только после этого стоит положить топливо в топку, оно сгорает вне зависимости от того, есть ли что печи очищать! По окончанию процесса каждая из камер произведёт по одной единице вещей, а изменение давления в топке вызовет выброс пламени.^Главное - не закрывать путь этим выбросам, иначе печь может взорваться. А также желательно не держать возле печи возгораемых объектов!
+
+knowledge.blastfurn.hcc=$hHardcore Crafting-$r^ Крайне желательно ставить тигель под топкой, иначе можно потерять часть ресурсов!
+
+#Prepared Iron
+
+knowledge.blastfurn.9=Подготовленная железная руда используется для производства чугуна.^Чугун можно переделать в сталь.^Можно использовать обогащённый флюс для того, чтобы удвоить выход продукта, но он - редкость, и должен использоваться мудро.
+
+knowledge.bloomery=Домница
+knowledge.bloomery.desc=Ранняя работа с металлами
+
+knowledge.bloomery.1=Домница поможет переплавить руду в слитки.
+
+knowledge.bloomery.2=Для использования домницы положите в неё уголь и руду в пропорции 1:1 и подожгите её. Домница должна быть под открытым небом! Также можно вывести от домницы трубу к небу. Чем больше материала - тем дольше она плавит.
+
+knowledge.bloomery.3=Когда переплавка окончена, отобразится масса переплавленного металла. Ударяйте по ней молотом, пока не получите все слитки. 
+
+knowledge.crucible=Легирование
+knowledge.crucible.desc=Смешивая металлы
+
+knowledge.crucible.1=Не так долго Вы можете полагаться на один металл. Для дальнейшего прогресса потребуется тигель.^Он создан для плавки металлов и последующего создания сплавов.
+
+knowledge.crucible.2=Для функционирования, тигель должен иметь источник тепла под собой (Такой как $hForge$r). Так же можно использовать лаву, но процесс пойдёт куда медленнее.^ Рецепты для сплавов не имеют чёткой формы, главное - пропорции. Например: 3 бронзы = 2 меди + 1 олово. Это значит, что Вы кладёте олово в один слот, а медь - в два и на выходе Вы получаете бронзу. Но Вы можете положить 4 меди и 2 олова и получить 6 бронзы и так далее...
+
+knowledge.crucible.hcc=$hHardcore Crafting-$r^Для того, чтобы достать слиток из тигля, используйте ПКМ литейную форму, которую после нужно остудить в воде.^Внимание! Если вы сломаете тигель, то вся продукция будет утеряна!
+
+knowledge.crucible2=Продвинутое легирование
+knowledge.crucible2.desc=Больше сплавов для Бога сплавов!
+knowledge.crucible2.1=Огнеупорные блоки доказали свою полезность.Создание тигля из такого материала означает, что он сможет выдерживать куда большие температуры и производить новые сплавы.^Тигли из огнеупорной глины намного лучше простых.
+
+knowledge.crucible2.blocks=Чтобы обезопасить работу, рекомендуется обложить тигель с четырёх сторон огнеупорными кирпичами.
+
+knowledge.apron=Кузнечный фартук
+knowledge.apron.desc=Защитная одежда
+
+knowledge.apron.1=Что-то подсказывает Вам, что горн и слитки нагреваются. Возможно это "что-то" - Ваш горький опыт и прожжённая плоть на Вашем пузе. Тогда специально для вас - кузнечный фартук. Одеяние кузнеца состоит из рубахи, фартука и перчаток. Без этого предметы в Вашем инвентаре могут сгореть.
+
+knowledge.anvil=Ковка
+knowledge.anvil.desc=Основы работы с металлами
+
+knowledge.anvil.1=Ковка - самый распространённый способ для крафта чго-либо.^Этот процесс включает в себя горн для нагрева металлов и ковку на наковальне с помощью молотов. Внимание! Остужение продукта ковки без щипцов и в открытой воде ведёт к поломке предмета! Используйте корыта и клещи.
+
+#Recipe
+
+knowledge.anvil.2=Наковальни крайне просты для крафта и также могут быть разсплавлены в печах.^Расположите наковальню неподалёку от воды и горна. Нажатие ПКМ без молота в руке или по боковой стороне накованьни откроет её интерфейс.
+
+#Gui
+
+knowledge.anvil.3=Изготовление вещей может показаться сложным, оно имеет две стадии. ^Сперва некоторые вещи должны быть разогреты в $hгорне$r. Если предмет нагреваемый, его нужно разогреть.^Во-вторых, нужно выложить сам рецепт. Начните выкладывать его
+
+knowledge.anvil.4=в сетке$h[3]$r затем: возьмите подходящий молот (тяжёлый или обычный, в зависимости от рецепта). Каждый рецепт имеет рекомендации по уровню молота и наковальни. Молоты низкого уровня непредсказуемы по качеству результата, а низкоуровневые наковальни усложняют крафт качественных вещей. Уровни будут отображаться над заголовком$h[1]$r.^Бейте молотком по наковальне. Шкала програсса$h[2]$r будет заполняться, а по завершению результат крафта появится в слоте$h[4]$r.^Некоторые вещи будут горячими, поэтому их надо остудить в воде нажатием ПКМ или в котле (удерживая shift).
+knowledge.anvil.5=Для того, чтобы взять с наковальни разогретую вещь, используйте клещи. Горячие предметы могут нанести вам увечья, используйте клещи, чтобы взять что-либо из горна и перенести на наковальню! 
+
+knowledge.anvil.6=При ковке следите за уровнем качества. Задача состоит в том, чтобы держать маркер подальше от краёв. Если он достигнет одного из них, это разрушит рецепт. При изготовлении повреждаемых вещей уровень срока службы также зависит от уровня качества, а именно от того, вышел ли маркер за края обозначенных отметок.^Как Вы видите, на шкале качества есть 2 зелёные отметки, которые повреждают объект в случае, если маркер находится за их пределами. Разделяйте удары на удары молотом ЛКМ и ПКМ. Также заметьте, что маркер медленнее движется вправо, чем влево.
+
+#Quality
+knowledge.anvil.7=Если ударить с зажатой клавишей SHIFT, то маркер отбросится назад (что даст вам немного времени), однако, не достигайте 0, иначе это разрушит предмет.
+
+knowledge.forge=Горн
+knowledge.forge.desc=Становится жарковато
+
+knowledge.forge.1=Горн крайне простое устройство, всего лишь положите в него топливо ПКМ, и зажгите его сухими камнями или зажигалкой. .^Теперь положите в него слитки и держитесь от огня подальше!
+
+knowledge.forge.2=Горн разогревается до разных температур в зависимости от вида топлива температура зависит от последнего добавленного предмета. $hКузнечные меха$r могут быть использованы для временного повышения температуры.^Поместите нагреваемые предметы в горн и их температура начнёт медленно подниматься.
+
+knowledge.forge.3=$y"Готовые к использованию"$r вещи можно использовать на наковальне, $d"Перегретые"$r же слишком горячи для этого.^Используйте различные виды топлива и кузнечные меха для получения нужной температурой и следите за разогреваемыми предметами.^Внимание: если над горном расположен тигель или что-то вроде него, горн использоваться для разогрева не может!
+
+knowledge.bellows=Кузнечные меха
+knowledge.bellows.desc=Раздувая огонь
+
+knowledge.bellows.1=Иногда температуры недостаточно, или разогрев происходит слишком долго. Использование более качественных видов топлива же может быть дорогим.^Кузнечные меха же могут временно поднять температуру до 50%. Для использования поставьте их рядом с горном, направив их на него, и нажимайте ПКМ.
+
+knowledge.trough=Корыто
+knowledge.trough.desc=Готовы к полосканию!
+
+knowledge.trough.1=Ходить далеко за водой не очень удобно, да и обычные источники воды разрушаются при полоскании предметов. Корыто - лучший способ остудить горячие предметы, достаточно лишь нажать ПКМ клещами или горячими предметами по корыту с водой. Чтобы наполнить корыто, нажмите ПКМ по нему держа в руке ведро с водой. Только не переполните его!.^После полоскания, предмет потеряет некоторый запас прочности.^Корыто так же может быть наполнено, если нажать ПКМ по блоку с водой.
+
+knowledge.trough.2=С кучкой гвоздей и набольшими усилиями можно собрать корыто, которое практически не будет протекать. В этом случае стоит уделить внимание и качеству древесины, чтобы создать идеальное изделие.
+
+knowledge.repair_basic=Ремонтные наборы
+knowledge.repair_basic.desc=Держим инструменты в хорошем состоянии
+
+knowledge.repair_basic.1=Инструменты и многие другие вещи имеют свойство ломаться. Имея немного кожи и гвоздей, Вы найдёте способ исправить это.^Простые ремонтные наборы чинят любые вещи, но с некоторым шансом. Так же есть вероятность поломки, но это лучше, чем ничего. Конечно, более продвинутые наборы чинят вещи эффективнее...^Для использования нажимайте ПКМ по рем.набору держа в руке поломанный предмет.^P.S: Глупо чинить чернильницу с пером, как это делает Alter.
+
+knowledge.repair_advanced=Продвинутая починка
+knowledge.repair_advanced.desc=Уже куда лучше
+
+knowledge.repair_advanced.1=Эти новые ремонтные наборы, хотя и дороже, но могут починить большее количество вещей до поломки. ^Также они восстанавливают больше прочности.
+
+knowledge.repair_ornate=Украшенный ремонтный набор
+knowledge.repair_ornate.desc=Починка зачарованных инструментов
+
+knowledge.repair_ornate.1=Как известно, зачарованный предмет плохо поддаётся починке.^Однако этот ремонтный набор может всё исправить, может, потому что он крайне дорогой?^Ох уж эти жадные чары...
+
+knowledge.craftArmourBasic=Базовая броня
+knowledge.craftArmourBasic.desc=Да я это никогда не одену!
+knowledge.craftArmourBasic.1=Неплохо бы во что-то одеться, начиная исследовать этот мир. Эта броня ненадёжна, но лучше, чем ничего.
+
+knowledge.craftArmourLight=Лёгкая броня
+knowledge.craftArmourLight.desc=Дешёвая и удобная
+
+knowledge.craftArmourLight.1=Лёгкая броня имеет небольшой вес, и делается из небольшого количества материалов. Пусть она не даст отличной защиты, но в ней Вы без затруднений можете применять особые боевые навыки.^Лёгкая броня - лучший выбор для боя, где нужна скорость и маневренность.
+knowledge.craftArmourLight.2=Грубая кожаная броня является самой простой лёгкой бронёй. Может она и плохо защищает, но из неё делаются более сложные типы брони.
+knowledge.craftArmourLight.3=Подбитая броня хорошо подходит для защиты от дробящего оружия. Так же, она является неободимым компонентом для создания тяжёлой брони.
+knowledge.craftArmourLight.4=Укреплённая и клёпаная броня являются улучшенными версиями грубой кожаной брони. Укреплённая кожаная броня необходима для создания средней брони.
+knowledge.craftArmourMedium=Средняя броня
+knowledge.craftArmourMedium.desc=Сбалансированная защита
+
+knowledge.craftArmourMedium.1=Защита уже лучше, но и восстановление выносливости уменьшено вдвое. Не самая хорошая защита от колющего удара. 
+
+knowledge.craftArmourMedium.scale=Чешуйчатая броня может быть сделана как альтернатива кольчуге. Такая броня сбалансированно защищает от всех видов урона, но не очень эффективна против колющего и режущего урона.
+
+knowledge.craftArmourHeavy=Тяжёлая броня
+knowledge.craftArmourHeavy.desc=Мощная, но неподвижная.
+
+knowledge.craftArmourHeavy.1=Вы получили защиту превосходящую среднюю броню, но она сковывает Ваши движения. Средняя броня имеет ряд преимуществ, но это может быть способом для дальнейшего улучшения.^Через изучение анатомии некоторых диких животных, Вы пришли к выводу: Выглядит очевидным использование шерсти и перьев для большей эффективности, а части подбитой брони могут дать своеобразные преимущества.^Теперь Вы знаете, как создать тяжёлую броню, которую не каждый сможет носить без затруднений. 
+knowledge.craftArmourHeavy.2=Тяжёлая броня создаётся с уже готовой подбитой брони. Подбитая броня обеспечивает мягкий защитный слой под основными элементами брони.
+
+knowledge.craftArmourHeavy.splint=Шинная броня не кажется тяжёлой, как латные доспехи. Но, разумеется, шинная броня в разы превосходит среднюю броню, и защищает от всех типов урона.
+knowledge.craftArmourHeavy.plate=Латная броня превосходно защищает воина, но она сильно сковывает движения. Да и чтобы сделать её придётся попотеть.
+knowledge.craftHCCTools=Примитивные инструменты
+knowledge.craftHCCTools.desc=Каменный век
+
+knowledge.craftHCCTools.1=До того, как получить металл, нужно использовать примитивные инструменты из камня, которые делаются на плотницком верстаке.^Каждое примитивное орудие требует 3 компонента:^Острые камни добываются разбиванием голыми руками блоков камня.^Лоза получается при разбивании блоков листвы острым камнем.
+
+knowledge.craftHCCTools.2=Палки добываются тем же способом, что и лоза.^Острые камни также добываются из булыжника, но для этого нужен молот.
+
+knowledge.craftHCCTools.3=С этими материалами Вы можете изготовить свои первые инструменты. Рекомендуем сначала изготовить кирку, так как с её помощью можно получать камень.
+
+knowledge.craftTools=Кованые инструменты
+knowledge.craftTools.desc=Крафт для жизни
+knowledge.craftTools.1=Вы всю жизнь будете бегать с палкой и примотанным к ней камнем? ^Кованые инструменты годятся на большее, да и прочность у них выше.
+
+knowledge.craftAdvTools=Продвинутые инструменты
+knowledge.craftAdvTools.desc=Подходят для своих задач
+
+knowledge.craftAdvTools.1=Помимо стандартных существуют и другие полезные инструменты. Так, например, малая кирка имеет шанс выпадения различных полезных ресурсов при разрушении обычного или адского камня.
+
+knowledge.hvypick.info=Тяжёлая кирка - для настоящих мужчин! Она копает область 3x3x3 блока, но с меньшим дропом. Подходит для копания крупных подземных тоннелей.
+
+knowledge.trow.info=Эта маленькая лопата работает почти также, как и малая кирка, но с другим лутом и другими блоками, такими как земля или трава. 
+
+knowledge.hvyshovel.info=Несмотря, что она больше похожа на дверь на ручке, вещь это довольно полезная.^Действует тяжёлая лопата почти также, как и тяжёлая кирка, но по отношению к земле.
+
+knowledge.scythe.info=Косы позволяют скашивать траву, урожай и листву. 
+
+knowledge.mattock.info=$hКиркомотыга$r^В основном используемая для ландшафтного дизайна, киркомотыга поможет вам создавать дороги на основе блоков травы и земли. Вы можете разместить любой блок на дороге, чтобы изменить её внешний вид.
+knowledge.mattock.use=ПКМ с киркомотыгой по блоку создаст дорогу. Так же вы можете кликнуть ПКМ любым блоком, чтобы изменить текстуру дороги. Более того, дорога может стать полублоком, если кликнуть по ней ПКМ с лопатой.^С киркомотыгой в руке мы можете заблокировать дорогу от случайных изменений лопатой или блоком: переключение режимов осуществляется ПКМ, красная иконка означает, что блок не может быть изменён, зелёная - наоборот.
+
+knowledge.lumber.info=$hТопор дровосека$r^Этот тяжёлый топор создан для быстрой и простой вырубки лесов, с его помощью вы можете срубить всё дерево целиком, разрушив всего один блок. Большие деревья рубить сложно, поэтому топор будет поврежаться быстрее.
+
+knowledge.craftWeapons=Кованое оружие
+knowledge.craftWeapons.desc=Для "обороны"
+
+knowledge.craftWeapons.1=Что это? Деревянный меч? Ты им и ребёнка не напугаешь. Но потренироваться можно.^Разные стили боя подходят к разному оружию. Попробуйте всё!
+
+knowledge.sword.info=Старый добрый меч, который крайне хорошо блокирует удар. К нему подходит стиль блокирования и быстрых контратак.
+
+knowledge.mace.info=Металлический шар на ручке, которым является булава, не очень подходит для блокирования, а вот для пробивания черепов и тяжёлой брони он в самый раз!
+
+knowledge.waraxe.info=Боевой топор - это брутальный способ убить ближнего своего, к тому же имеющий бонус при разбеге и при ударе в прыжке.
+
+knowledge.spear.info=А вот если вам не хочется сходиться в ближнем бою, то копьё поможет Вам удержать Вашего противника на приличной дистанции. ^Копья наносят хороший урон при разбеге.
+
+knowledge.bow.info=Стандартный лук, но почему-то сделанный из металла. Он достаточно прочен и силён для ведения дистанционного боя.
+
+knowledge.craftAdvWeapons=Тяжёлое оружие
+knowledge.craftAdvWeapons.desc=Размер имеет значение
+
+knowledge.craftAdvWeapons.1=Конечно же мы верим в то, что Вы никого не хотите убивать, поэтому вот Вам ещё больше оружия чтобы расправиться с ближним с ещё большей жестокостью.
+
+knowledge.greatsword.info=Тяжёлый и плоский клинок. Это лучшее оружие для самозащиты.
+
+knowledge.warhammer.info=Если пробитые черепа - это Ваш конёк, то боевой молот Вам более чем подходит!
+
+knowledge.battleaxe.info=Секиры ещё лучше боевых топоров. Больше ярости берсерка!
+
+knowledge.halbeard.info=Что если прикрепить топор к копью? Выйдет алебарда. Ей можно рубить вблизи и колоть при разбеге.
+
+knowledge.lance.info=Копьё всадника практически бесполезно для пеших атак, но при достаточной скорости перемещения верхом наносят огромный урон.^ Прекрасный выбор для рыцарского турнира или штурмовой кавалерии.
+
+knowledge.firemaker=Разведение огня
+knowledge.firemaker.desc=СОЖГИ ИХ ВСЕХ!
+knowledge.dryrocks.info=Сухие камни это базовый инструмент для разведения огня, они не создают блоков огня, но ими можно разжечь горн.
+knowledge.tinderbox.info=Трутница является хорошим средством для разведения огня, к тому же она более долговечная чем сухие камни. It still may take a few tries to get a flame, but the extra uses pays off.
+knowledge.flintsteel.info=Разумеется, огниво лучшее средство для разведения огня. Имеет самую большую прочность.
+
+knowledge.craftCrafters=Изготовление инструменов
+knowledge.craftCrafters.desc=крафт для крафта
+
+knowledge.craftCrafters.1=Это инструменты для крафта. Многие рецепты требуют взаимодействия этих инструментов с блоками.
+knowledge.hvyhammer.info=Тяжёлые молоты сходны с молотами, но используются для ковки каких-либо больших предметов.
+
+knowledge.tongs.info=Клещи нужны для переноски горячих предметов с места на место.
+
+knowledge.knife.info=Ножи могут быть использованы как в выделке шкур, так и в приготовлении пищи.
+
+knowledge.saw.info=Пилы распиливают дерево куда эффективнее. Положите доски на стол плотника и пилите.
+
+knowledge.needle.info=Иглы нужны для рецептов, связанных с пошивом.
+
+knowledge.mallet.info=Киянки используются там, где использовать молоты - это уж слишком.
+
+knowledge.spoon.info=Ложки... Серьёзно, вам ещё и про ложку рассказывать? Используется для перемешивания и готовки. Всё.
+
+knowledge.arrows=Изготовление стрел
+knowledge.arrows.desc=Чтобы лук не валялся без дела
+
+knowledge.arrows.1=Создание стрел занимает время, но при этом достаточно дешевое. Вы можете создать множество вариаций стрел, используя разные металлы. Оперение стрел можно создавать из бумаги или перьев, но последние куда эффективней. Собрать стрелы можно на плотницком верстаке.
+
+knowledge.arrowsBodkin=Конические стрелы
+knowledge.arrowsBodkin.desc=Лёгкие и быстрые
+
+knowledge.arrowsBodkin.1=Эти стрелы наносят меньше урона, но летят они дальше и точнее.
+
+knowledge.arrowsBroad=Широкоглавые стрелы
+knowledge.arrowsBroad.desc=Тяжёлые и мощные
+
+knowledge.arrowsBroad.1=Куда более низкая дальность и скорость полёта, не мешает их широким и тяжёлым наконечникам перемалывать металлическую броню, кости и плоть.
+
+knowledge.etools=Инженерные инструменты
+knowledge.etools.desc=Инструменты для изобретательных
+knowledge.etools.1=Для попыток освоить инженерное дело, Вам понадобятся специальные инструменты.
+
+knowledge.ecomponents=Компоненты и основные материалы
+knowledge.ecomponents.desc=Для создания сложных вещей
+
+knowledge.ecomponents.1=Для инженерного дела требуется новый способ соединения частей предметов. И эти компоненты стоят того!
+
+knowledge.ecomponents.2=Большинство объектов в этом ремесле не выковываются целиком, а составляются путём соединения заранее выкованных деталей. 
+
+knowledge.coke=Кокс
+knowledge.coke.desc=Очищенное топливо
+
+knowledge.coke.1=Обычный уголь полон всяческих примесей, которые не дают огню хорошо разгореться. После небольшой обработки и добавления красной пыли, древесный уголь будет гореть эффективнее, ведь теперь он будет чистейшим. Этот процесс доступен только для древесного угля.
+
+knowledge.tungsten=Вольфрам
+knowledge.tungsten.desc=Для сложных конструкций
+
+knowledge.tungsten.1=У всех когда-то наступает момент, когда железо становится недостаточно пригодным для создания чего-либо; Это весьма трудно - найти хорошую замену. И не важно, будет это железо или носки(забудем). Вольфрам - редкий металл, находящийся в нижних слоях каменной породы. Вольфрамовая руда может быть обнаружена в виде жилки в 1 блок, но так же может быть случайно добыта с помощью малой кирки.
+
+knowledge.tungsten.2=Если у Вас высокоуровневые инструменты(как минимум инкрустированные), Вы можете добыть вольфрам ниже 16 блоков. Вольфрам может быть расплавлен(оно и понятно), но потребуется много топлива.
+
+knowledge.tungsten.3=Несмотря на то, что этот материал предназначен только для инженерии, необходимо иметь должный уровень кузнечного дела чтобы обработать вольфрам, что создаёт дополнительные трудности.
+
+knowledge.engTanner=Улучшенный дубильный станок
+knowledge.engTanner.desc=Лёгкая обработка кожи
+
+knowledge.engTanner.1=Выделка кож довольно монотонное занятие, но Вы нашли способ упростить его.^Этот станок может как обрабатывать кожу, так и резать её. Всё, что нужно - поместить материал на станок и щёлкнуть ПКМ по станку.
+
+knowledge.advcrucible=Продвинутый тигель
+knowledge.advcrucible.desc=Делаем сплавы легко!
+
+knowledge.advcrucible.1=Чертежи этого тигеля, в основном, содержат интересные секреты гномов по обработке металлов. Через исследование технологий выплавки, можно организовать автоматическую переплавку металлов. Если тигель установлен в систему, можно начинать работу.
+
+knowledge.advforge=Улучшенный горн
+knowledge.advforge.desc=Полный контроль
+
+knowledge.advforge.1=Чертежи гномов позволяют создать горн, контролируемый сигналом красного факела!^Приспособьте к нему рычаг и зажгите (или погасите) его!
+
+knowledge.blackpowder=Взрывчатка
+knowledge.blackpowder.desc=Бум!
+
+knowledge.blackpowder.1=Теперь Вы можете создавать устройства, позволяющие доставить взрывчатку под ноги Вашим друзьям и недругам издалека. ^Оружейный порох - крайне нестабильная субстанция, производящая взрыв и повреждения, изготавливающаяся из различных материалов.
+
+knowledge.advblackpowder=Очищенный оружейный порох
+knowledge.advblackpowder.desc=Кабум!
+
+knowledge.advblackpowder.1=Нужно больше веселья?^С помощью использования редстоуна и светопыли Вы можете усилить качества пороха.
+
+knowledge.climber=Альпеншток
+knowledge.climber.desc=Поднимайся!
+knowledge.climber.1=Становится невыносимым блуждать в горах, ища путь наверх? Не нравится беспомощно падать в пропасть? Альпеншток позволит Вам цеплиться за цельные блоки.
+knowledge.climber.2=Для того, чтобы зацепиться за блок, нажмите ПКМ и удерживайте его. После этого, не отпуская ПКМ, удерживайте shift и ЛКМ, чтобы спускаться, или просто зажмите ЛКМ для того, чтобы подниматься вверх. Следите за выносливостью!
+
+knowledge.spyglass=Подзорная труба
+knowledge.spyglass.desc=Что это там вдали?
+knowledge.spyglass.1=Подзорная труба позволяет взглянуть на мир по-другому. Shift + ПКМ меняет приближение.
+
+knowledge.parachute=Парашют
+knowledge.parachute.desc=Если падать высоко 
+knowledge.parachute.1= Он позволяет Вам безопасно спуститься с высоты.
+
+knowledge.syringe=Шприц
+knowledge.syringe.desc=Вколол и пошёл
+knowledge.syringe.1=Вколоть зелье себе в руку куда быстрее, чем его пить, и выигранное время может оказаться бесценным. Также Shift + ПКМ позволяет использовать шприц на других.
+
+knowledge.bombs=Изготовление бомб
+knowledge.bombs.desc=Пальцы себе не оторвите!
+
+knowledge.bombs.1=Какой смысл во взрывчатке, если её некуда положить? Эти небольшие приспособления нанесут хороший урон в небольшом радиусе.^Это более эксперементальное ремесло, чем другие. Сперва Вам нужно оборудовать рабочее место.
+
+knowledge.bombs.2=С этим столом Вы сможете изготавливать как бомбы, так и мины. Бомбы можно бросить, удерживая ПКМ, и они взорвутся через некоторое время. ПКМ с миной в руках устанавливает её на землю, и она взрывается, когда кто-то наступает на неё.
+
+knowledge.bombs.3=Бомбы и мины требуют 3-4 компонента при создании.^Оболочка$h[1]$r определяет урон и зону поражения. Взрывчатка$h[2]$r увеличивает урон. Наполнение$h[3]$r может быть пустым и используется для придания бомбе дополнительного поражающего эффекта. Фитиль $h[4]$r определяет время до детонации.
+
+knowledge.bombs.4=Для крафта бомбы положите компоненты в соответствующие слоты, после чего щёлкните по столу. 
+
+knowledge.crossbows=Изготовление арбалетов
+knowledge.crossbows.desc=Смертельные снаряды
+knowledge.crossbows.1=Арбалеты - отличная замена лукам. Конечно, арбалет более медленный, чем лук, на него можно нацепить различные обвесы, дающие различные преимущества.
+knowledge.crossbows.2=Чтобы сделать арбалет, Вам понадобится соответствующий верстак.^На нём Вы должны комбинировать детали, чтобы собрать полноценное оружие. Арбалет состоит из четырёх частей(Ложа, Дуги, Мод и Дуло). 
+knowledge.crossbows.3=Поставьте где-нибудь верстак для изготовления арбалетов. Теперь Вам нужно создать детали для него(смотрим рецепты).Ложа и дуги используются во всех арбалетах. Ложа влияет на отдачу, скорость перезарядки, а короткая рукоять повышает скорость перезарядки и снижает точность.
+knowledge.crossbows.4=Вы можете улучшить арбалет. Достаточно добавить обвес в слот "Мод" или "Дуло". В "Мод" цепляется прицел, а в "Дуло" штык-нож. Лучше не устанавливать обвес, если в том нет нужды.
+knowledge.crossbows.5=Для сборки арбалета разместите детали в соответствующие слоты верстака (похоже на создание бомбы) и используйте гаечный ключ.
+knowledge.crossbows.6=По окончанию: теперь у Вас есть арбалет. Арбалеты работают почти как луки и выпускают болт тогда, когда заряжены. Shift+ПКМ чтобы открыть инвентарь арбалета. Сюда помещаются болты для арбалета, и когда Вы нажмёте ПКМ, арбалет зарядится.
+
+knowledge.crossShafts=Ложа арбалета
+knowledge.crossShafts.desc=Основной компонент
+knowledge.crossShafts.handle=Рукояти подходят для создания миниатюрных арбалетов. Малые размеры повышают скорость перезарядки, понижая точность и повышая отдачу.
+knowledge.crossShafts.stock=Ложа является полномасштабной рукоятью арбалета, с высокой отдачей, в отличии от миниатюрной рукояти. Из-за большого размера скорость перезарядки достаточно низкая.
+
+knowledge.crossHeads=Дуги арбалета
+knowledge.crossHeads.desc=Основной компонент
+knowledge.crossHeads.light=Лёгкие дуги ускоряют перезарядку, снижая урон. 
+knowledge.crossHeads.medium=Арбалетные дуги стандартного размера. Сбалансированный урон и скорость перезарядки.
+knowledge.crossHeads.heavy=Тяжёлые, укреплённые дуги арбалета. Огромная отдача и низкая скорость перезарядки компенсируется высоким уроном.
+
+knowledge.crossHeadAdvanced=Продвинутые дуги арбалета
+knowledge.crossHeadAdvanced.desc=Лучше, значит... лучше.
+
+knowledge.crossHeads.advanced=Эти гномьи чертежи арбалетных дуг способны дать оружию огромную силу. С нужными материалами и инструментами становится возможным создать для себя эту деталь.^Очень низкая скорость перезарядки компенсируется колоссально высоким уроном и точностью.
+
+knowledge.crossShaftAdvanced=Продвинутая ложа арбалета
+knowledge.crossShaftAdvanced.desc=Контролируем отдачу.
+
+knowledge.crossShafts.advanced=На основе обычного ложа: эта деталь гномами сделана из металла. Конечно, она тяжёлая, но всё же, подпружиненная система позволяет гасить отдачу.
+
+knowledge.crossAmmo=Магазин арбалета
+knowledge.crossAmmo.desc=Многозарядное устройство
+knowledge.crossAmmo.1=Арбалеты долго перезаряжаются после каждого выстрела, и чтобы закончить своё (грязное) дело, Вам может понадобиться ещё несколько выстрелов. Магазин, помещённый в слот "модификации", даст возможность сделать больше выстрелов перед перезарядкой, снижая, конечно, точность.
+
+knowledge.crossScope=Прицел арбалета
+knowledge.crossScope.desc=Примитивный снайпер
+knowledge.crossScope.1=Порой, бывает так, что цель слишком далеко, и расчитать траекторию полёта стрелы бывает трудно. В этом Вам поможет прицел для арбалета. Подзорная труба станетт полноценным прицелом, если поместить её в слот "модификации".
+
+knowledge.crossBayonet=Штык-нож арбалета
+knowledge.crossBayonet.desc=Ближний бой
+knowledge.crossBayonet.1=Во время перезарядки арбалета, уходит драгоценное время. А если нужно вступить в ближний бой? . Штык-нож помещается в слот "дула", и повышает урон в ближнем бою.
+
+knowledge.bpress=Бомбовый пресс
+knowledge.bpress.desc=Массовое производство
+knowledge.bpress.1=Производство бомб может быть очень долгим и нудным. Это устройство может выполнять работу за вас. Поместите пресс над столом для крафта бомб и нажмите на рычаг, и бомба будет собрана.
+
+knowledge.bombarrow=Наконечники со взрывчаткой
+knowledge.bombarrow.desc=Летучая смерть
+knowledge.bombarrow.1=Эти маленькие оболочки могут быть начинены взрывчаткой и прикреплены к стреле. К тому же, фитиль тут не нужен. 
+
+knowledge.shrapnel=Бомбы со шрапнелью
+knowledge.shrapnel.desc=Простая начинка
+knowledge.shrapnel.1=Бомбы хороши, но их можно улучшить.^Шрапнель можно добавить в соответствующий слот, чтобы увеличить урон.
+
+knowledge.firebomb=Огненный взрыв
+knowledge.firebomb.desc=Смертельное пламя
+
+knowledge.firebomb.1=Шрапнель эффективна для уничтожения врагов по одному, но смесь сгустка магмы может вызвать выброс высокотемпературного огня при детонации. 
+
+knowledge.firebomb.2=Сгусток магмы - горючее и жидкое вещество, а драконье сердце может магически увеличить силу взрыва.
+knowledge.firebomb.3=Такие бомбы дороги, но крайне эффективны против брони, которая гарантирует хорошую прожарку плоти.
+
+knowledge.bombCeramic=Керамическая оболочка для бомбы
+knowledge.bombCeramic.desc=Простейшие бомбы
+knowledge.bombCeramic.1=Керамическая оболочка хрупка и даёт не слишком сильный поражающий эффект, но средний радиус действия.
+
+knowledge.mineCeramic=Керамическая оболочка для мины
+knowledge.mineCeramic.desc=Простейшие мины
+knowledge.mineCeramic.1=Керамическая оболочка хрупка и даёт не слишком сильный поражающий эффект, но средний радиус действия.
+
+knowledge.bombIron=Железная оболочка для бомбы
+knowledge.bombIron.desc=Компактный взрыв
+knowledge.bombIron.1=Железная оболочка более прочная и радиус взрыва меньше, но зато силы во взрыв вложено куда больше.
+
+knowledge.mineIron=Железная оболочка для мины
+knowledge.mineIron.desc=Компактный взрыв
+knowledge.mineIron.1=Железная оболочка более прочная и радиус взрыва меньше, но зато силы во взрыв вложено куда больше. Также эта оболочка не так чувствительна, как керамическая.
+
+knowledge.bombObsidian=Обсидиановая оболочка для бомбы
+knowledge.bombObsidian.desc=Превращаем ближнего в кровавое мессиво
+
+knowledge.bombObsidian.1=Высокая прочность обсидиана даёт мощнейший взрыв, но с очень маленьким радиусом.
+
+knowledge.mineObsidian=Обсидиановая оболочка для мины
+knowledge.mineObsidian.desc=Превращаем ближнего в кровавое мессиво
+
+knowledge.mineObsidian.1=Высокая прочность обсидиана даёт мощнейший взрыв, но с очень маленьким радиусом. Чувствительность уменьшена и мины взрываются тогда, когда кто-то стоит на них. Что практически всегда приводит к летальному исходу.
+
+knowledge.bombCrystal=Кристаллическая оболочка для бомбы
+knowledge.bombCrystal.desc=Стильно!
+
+knowledge.bombCrystal.1=Хрупкая стеклянная оболочка не даёт большой силы взрыву, но радиус поражения огромен! Не забудьте добавить алмазной пыли для того, чтобы осколки были крепче и наносили больше урона.
+
+knowledge.mineCrystal=Кристаллическая оболочка для мины
+knowledge.mineCrystal.desc=Дорого-богато!
+knowledge.mineCrystal.1=Хрупкая стеклянная оболочка не даёт большой силы взрыву и очень чувствительна к приближению, но радиус поражения огромен! Не забудьте добавить алмазной пыли для того, чтобы осколки были крепче и наносили больше урона.
+
+knowledge.bombFuse=Фитили для бомб
+knowledge.bombFuse.desc=Отложенный взрыв
+knowledge.bombFuse.1=Что такое бомба без фитиля? Скорее всего, после этого эксперимента Вы не сможете ответить на этот вопрос. Фитиль отвечает за то, сколько времени пройдёт от активации до детонации.
+knowledge.bombFuse.2=Также можно сделать длинный фитиль, что означает, что бомбу можно кинуть дальше! А вот перспективы его применения в сборке мин так себе... 
+
+knowledge.stickybomb=Клейкие бомбы
+knowledge.stickybomb.desc=Лови!
+knowledge.stickybomb.1=Эти бомбы прилипают к цели и разносят её в кровавые ошмётки.
+knowledge.stickybomb.2=Для изготовления оставьте бомбу в слоте готовой продукции и щёлкните по столу со сгустком слизи в руке. Один сгусток слизи может быть использован на целый стак!
+
+$hUse of Cogworks$r^
+
+knowledge.cogArmour=Механическая броня
+knowledge.cogArmour.desc=Растоптай их!
+
+knowledge.cogArmour.1=Данное открытие объясняет, почему гномьи руины состоят из больших коридоров! Это чертежи приспособления с кучей механизмов, которые повторяют действия человека, подобно огромному экзоскелету. Выглядит как большой бронированный костюм, способный сделать носителя неуязвимым ко всем типам урона.^Механическая броня является венцом творения гномов, и способна переносить огромный вес. Единственный минус механической брони в том, что для работы она требует много чистого топлива.
+
+knowledge.cogArmour.2=Ни одного экземпляра механической брони не было найдено, но системы, обнаруженные в гномьих крепостях, теоретически, могут облачить в механическую броню кого-нибудь, ростом не выше человека.
+
+knowledge.cogArmour.station=$hМеханическая станция$r^Механическая станция необходима для экипирования или улучшения механической брони. Механическая станция состоит из остова и шкива, представляет из себя 3 остова высотой в 4 блока, со скрепляющим остовом по середине.
+//Example
+knowledge.cogwork_station=Механическая станция
+knowledge.cogArmour.station.2=Когда станция готова, Вам нужно сделать шкив, затем нажать ПКМ по центральному остову для его установки. Убедитесь, что шкив расположен в нужном месте, ведь после установки его нельзя будет снять.
+//Pulley Recipe
+knowledge.cogArmour.crafting=Для создания механической брони: Вам нужно три блока - шлем, нагрудник и поножи. Разместите их на механической станции. Затем, нажмите ПКМ гаечным ключом по нагруднику.
+//Piece Recipes
+knowledge.cogArmour.armour=$hБроневые элементы$r^Для того, чтобы разместить броню на каркас, Вам нужно сделать её. Для этого потребуется много металла, поэтому рекомендуется использовать что-то вроде стали. Броня устанавливается через нажатие ПКМ по каркасу костюма. Так же Вам понадобится 16 болтов которые расходуются перед установкой брони. Броню можно легко снять с помощью гаечного ключа.
+//Armour Recipe
+knowledge.cogArmour.fuel=$hЗаправка$r^Механическая броня потребляет только чистое топливо(кокс или магму). ПКМ по костюму, чтобы заправить его топливом.^Чем тяжелее защита на механической броне, тем больше топлива она потребляет.
+knowledge.cogArmour.advantage=$hПреимущества$r^Небронированная механическая броня защищает носителя от дыма, урона от падений, увеличивает наносимый урон и снижает затраты выносливости.
+knowledge.cogArmour.advantage.2=Бронированный костюм даёт почти стопроцентную защиту, возможность дышать под водой. Также, защищает от отравления/иссушения и делает носителя неуязвимым к огню.
+knowledge.cogArmour.advantage.3=Броня по-прежнему может получать урон от огня, в зависимости от температуры плавления материала, более высокий уровень прочности делает броню долговечной, но всё же, временами придётся снимать её для починки.
+knowledge.cogArmour.disadvantage=Носитель не может прыгать, но может подняться на 1 блок выше, движения более скованные, и нет возможности красться.(да ладно?)
+knowledge.cogArmour.disadvantage.2=Взрывы так же наносят урон броне, и могут ошеломить носителя на секунду.
+knowledge.cogArmour.removal=Защитное покрытие снимается, когда костюм сломан. Каркас механической брони можно сломать с помощью гаечного ключа(ЛКМ), так же, он может быть разрушен в огне или лаве.
+
+knowledge.compPlate=Композитный металл
+knowledge.compPlate.desc=Универсал
+
+knowledge.compPlate.1=Пока, многие сплавы получаются путём простого плавления и смешивания. Технологии гномов, связанные со сплавами, кардинально отличаются от тех, которыми пользуются люди. Материалы просто смешиваются и собираются в одну пластину. Конечно, для инструментов композитные сплавы не подойдут, но показывают максимальную эффективность при создании брони, особенно тяжёлой.^Помимо этого, композитные сплавы используются в создании механической брони.
+
+knowledge.refined_planks=Пропитанные бруски
+knowledge.refined_planks.desc=Структурно стабильны
+knowledge.refined_planks.1=Пропитанные бруски более прочные, и лучше подходят для строительства. Достаточно лишь скрепить их гвоздями(см. Оббитые доски). Этот блок не может быть демонтирован.^Вы можете пропитать маслом обычные бруски.
+
+knowledge.constructionPts=Строительные материалы
+knowledge.constructionPts.desc=Деревянные заготовки
+knowledge.constructionPts.1=Дерево должно быть напилено и заготовлено другими способами, чтобы начать работу с ним. Материалы имеют разные формы и размер, необходимые для строительства.^Бруски отлично подойдут для мебели и т.п., когда из металла следует делать гвозди.
+
+knowledge.reinforced_stone=Укреплённый камень
+knowledge.reinforced_stone.desc=Выдерживая удары судьбы
+knowledge.reinforced_stone.1=Характеристики камня могут быть улучшены с помощью его споавки с обсидианом и каолинитом. 
+
+knowledge.clay_wall=Глиняная панель
+knowledge.clay_wall.desc=Декоративные стены
+knowledge.clay_wall.1=Декоративная стена, и этим всё сказано.
+
+knowledge.glass=Стеклянные блоки
+knowledge.glass.desc=Декоративные окна
+knowledge.glass.1=Стекло красиво, но хрупко. Но если поместить его в деревянную раму, его можно изъять без его разрушения.
+
+knowledge.brickworks=Основы каменной кладки
+knowledge.brickworks.desc=Больше камня
+knowledge.brickworks.1=Есть больше возможностей строить из камня. Из него и грязи можно сделать ещё и мостовую.
+
+knowledge.bars=Металлические прутья
+knowledge.bars.desc=Прочное ограждение
+knowledge.bars.1=Решётки из различных металлов. А решётка из драконьей стали ещё и будет нестерпимо жечь всех, кто прикоснулся к ней.
+
+knowledge.thatch=Солома
+knowledge.thatch.desc=Мягкая крыша
+knowledge.thatch.1=Простая крыша из соломы.
+
+knowledge.paint_brush=Кисть
+knowledge.paint_brush.desc=Тут не докрасили...
+knowledge.paint_brush.1=Порой не хочется сидеть за плотницким верстаком и маслом обрабатывать бруски. Вам на помощь придёт кисть.^Кистью с маслом можно пропитывать как бруски, так и целые блоки.
+knowledge.paint_brush.2=$hКистью по миру$r^Долго и нудно пропитывать доски на верстаке, Вы можете делать это прямо в игре, одним взмахом волшебной... кисточки. Имея в инвентаре масло, жмите ПКМ по блокам навроде оббитых досок, чтобы превратить их в пропитанные доски.
+
+knowledge.decorated_stone=Декоративный камень
+knowledge.decorated_stone.desc=Отделываем металлом
+knowledge.decorated_stone.1=Камень в больших количествах выглядит пресно, и Вы изучили способы укрепления его металлом, что добавляет немного стиля Вашим стенам.
+
+knowledge.tool_rack=Стеллаж для инструментов
+knowledge.tool_rack.desc=Храним оборудование
+knowledge.tool_rack.1=Многие инструменты могут понадобиться, но их не окажется под рукой. На стеллажи можно вешать инструменты для быстрого доступа.^ПКМ инструментом по стеллажу, чтобы поместить его, и ПКМ рукой, чтобы взять.^Тяжёлое оружие требует второй стеллаж снизу, и древковое сверху.
+knowledge.tool_rack.rules=*Тяжёлое оружие требует ещё один стеллаж снизу.^*Древковое оружие требует стеллажи сверху и снизу.^*Полноразмерные арбалеты считаются тяжёлым оружием.^*Арбалет нельзя повесить на крайний крючок.
+
+knowledge.bed_roll=Лежанка
+knowledge.bed_roll.desc=Выбор путешественника
+knowledge.bed_roll.1=Когда Вы в путешествии, Вам обязательно захочется поспать. Лежанка решает эту проблему и, к тому же, не переносит точку дома.
+
+knowledge.food_box=Продовольственный ящик
+knowledge.food_box.desc=Еда в безопасности
+knowledge.food_box.1=Еда и медикаменты должны быть всегда под рукой. Продовольственные ящики позволяют хранить еду и перевязки в количестве до стака. Нажмите ПКМ, чтобы убрать в ящик предмет, и ПКМ с голыми руками, чтобы его достать.
+
+knowledge.ammo_box=Ящик для боеприпасов
+knowledge.ammo_box.desc=Всегда под рукой
+knowledge.ammo_box.1=Боеприпасы всегда должны быть под рукой, особенно когда враг у ворот, и Вам прострелили колено. Такие ящики вмещают до 8 стаков стрел/болтов/бомб/мин. Нажмите ПКМ, чтобы убрать в ящик предмет, и ПКМ с голыми руками, чтобы его достать.
+knowledge.ammo_box.2=Если сломать заполненный ящик, его содержимое не выпадет, и не пропадёт. Так что можно смело переносить ящики с боеприпасами.
+
+knowledge.big_box=Ящик для хранения
+knowledge.big_box.desc=Некуда девать.
+knowledge.big_box.1=Действует точно по тому же принципу, что и продовольственный ящик, только в ящик для хранения можно поместить любой предмет. Нажмите ПКМ, чтобы убрать в ящик предмет, и ПКМ с голыми руками, чтобы его достать.
+
+knowledge.generic_meat=Обычное мясо
+knowledge.generic_meat.desc=Хорошо для всех рецептов
+knowledge.generic_meat.1=Приготавливается из многих видов мяса для более удобного хранения и использования в рецептах. 
+
+knowledge.stew=Фарш
+knowledge.stew.desc=Вкусная смесь
+knowledge.stew.1= Это еда для новичка, смесь измельчённого мяса. 
+
+knowledge.jerky=Вяленое мясо
+knowledge.jerky.desc=Специально для путешественника
+knowledge.jerky.1=Эта еда хорошо восстанавливает выносливость, а также достаточно компактна в хранении. Идеально для долгих путешествий.
+
+knowledge.saussage=Сосиска
+knowledge.saussage.desc=Мясо!
+knowledge.saussage.1=Сосиски лучше вяленого и копчёного мяса! Только свежее, вкусное, упакованное... умм... Да, в кишки животных.
+
+knowledge.sandwitch=Бутерброды
+knowledge.sandwitch.desc=Просто и вкусно
+knowledge.sandwitch.1=Несмотря на то, что будерброды не стакаются, они могут быть использованы дважды.
+
+knowledge.sandwitchBig=Большой бутерброд
+knowledge.sandwitchBig.desc=Для хороших работников
+knowledge.sandwitchBig.1=Зачем резать хлеб на ломтики, когда можно положить много начинки между больших кусков хлеба? 4 использования. Папа может!
+
+knowledge.meatpie=Мясной пирог
+knowledge.meatpie.desc=Сытно и прекрасно
+knowledge.meatpie.1=Это сытная еда, дающая бонус к выносливости. Просто поставьте пирог куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.shepardpie=Пастуший пирог
+knowledge.shepardpie.desc=Впрочем, остальные его тоже едят
+knowledge.shepardpie.1=Даже лучше мясного, ещё и с картошкой! Даёт большой бонус к выносливости. Просто поставьте пирог куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.salt=Соль
+knowledge.salt.desc=Добавить по вкусу
+knowledge.salt.1=Для получения соли сначала добудьте немного солёной воды. ^Зачерпните её глиняным горшком. Солёная вода находится над блоками песка. Затем выпарьте воду!
+knowledge.salt.2=Горшки позволяют носить соль и не рассыпать её.
+
+knowledge.jug=Кувшин
+knowledge.jug.desc=Хранилище для жидкостей
+knowledge.jug.1=Для переноски жидкостей вполне подойдёт глиняный кувшин. В нём можно хранить молоко, воду и масло.
+knowledge.jug.2=Молоко не может быть получено напрямую от коров, его необходимо переливать из вёдер.
+
+knowledge.bread=Хлеб и тесто
+knowledge.bread.desc=Вкусные зёрна
+knowledge.bread.1=Хлеб - скудная пища сам по себе, но теперь его можно использовать и с другой едой. Мука используется для производства различных видов теста.
+knowledge.bread.other=Некоторые продукты (как, например, хлеб) имеют альтернативные рецепты, но будут хуже, чем еда MineFantasy
+
+knowledge.oats=Каша
+knowledge.oats.desc=Просто, но полезно
+knowledge.oats.1=Смесь натуральных зерновых
+
+knowledge.icing=Сахар
+knowledge.icing.desc=Не слипнется!
+knowledge.icing.1=Для хранения сахара лучше использовать глиняные горшки, а не носить его в кармане вместе с грязью и слизью.
+knowledge.icing.2=Некоторую еду невозможно представить без глазури, и сахар просто необходим!
+
+knowledge.sweetroll=Сладкий рулет
+knowledge.sweetroll.desc=Не отдавай его Бучу!
+knowledge.sweetroll.1=Вкусный рулетик, дающий бонусы к выносливости, да ещё и используемый дважды.
+
+knowledge.eclair=Эклер
+knowledge.eclair.desc=Шикуем!
+knowledge.eclair.1=Теперь можно и повыделываться.^К тому же, это пироженое может быть использовано 4 раза.
+
+knowledge.cake=Торт
+knowledge.cake.desc=Сделанный правильно!
+knowledge.cake.1=Большой торт, положительно влияющий на выносливость. Просто поставьте его куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.carrotcake=Морковный пирог
+knowledge.carrotcake.desc=Невкусно, но полезно
+knowledge.carrotcake.1=Стандартный пирог, но с морковью. Просто поставьте пирог куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.chococake=Шоколадный торт
+knowledge.chococake.desc=Привет, жирок!
+knowledge.chococake.1=Торт, покрытый шоколадом. Просто поставьте его куда-нибудь, и используйте на нём нож, чтобы получить его кусок! 
+
+knowledge.bfcake=Торт "Чернолесье"
+knowledge.bfcake.desc=Красиво и празднично
+knowledge.bfcake.1=Покрыт шоколадом и ягодами, очень хорошо влияет на выносливость. Просто поставьте его куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.berrypie=Ягодный пирог
+knowledge.berrypie.desc=Простой десерт
+knowledge.berrypie.1=Ягодный пирог, то - что надо! Просто поставьте пирог куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.applepie=Яблочный пирог
+knowledge.applepie.desc=Простой десерт
+knowledge.applepie.1=Похож на ягодный, но чуть лучше. Просто поставьте пирог куда-нибудь, и используйте на нём нож, чтобы получить его кусок!
+
+knowledge.cheese=Сыр
+knowledge.cheese.desc=Вкусномолочный продукт
+knowledge.cheese.1=Сыр - продукт обработки молока и используется во многих рецептах. Просто поместите его куда-нибудь, и используйте на нём нож, чтобы получить кусок сыра.
+
+knowledge.cheeseroll=Сырный рулет
+knowledge.cheeseroll.desc=Лёгкая закуска
+knowledge.cheeseroll.1=Сыр хорошо идёт с хлебом. Поместите его в рулет, чтобы придать немного вкуса.
+
+knowledge.firepit=Костёр и плита
+knowledge.firepit.desc=Основы приготовления пищи
+knowledge.firepit.1=Костёр - самое простое средство для приготовления пищи.^Чтобы разжечь костёр, поставьте где-нибудь костровище, наложите туда брусков(ПКМ) и зажгите, к примеру, сухими камнями(ПКМ).
+knowledge.firepit.2=Плиты хорошо подходят для приготовления пищи, их следует разместить над костром или горном.^Укладывайте сырую еду на плиту и приглядывайте за ней, иначе сгорит. Некоторые рецепты (например, тортов) требуют требуют низкой температуры, для достижения которой отлично подойдёт угольная пыль.
+knowledge.firepit.3=Печи позволяют готовить как обычную еду, так и что-то более изысканное (например, хлеб).^Так же в печах можно обжаривать ваши глиняные поделки, просто повысив температуру (более горючим топливом).
+knowledge.firepit.4=Используйте костёр для простых рецептов, а для более сложных - горн, растопленный на угольной пыли. Для обжига керамики потребуется обычное топливо, например, уголь.
+
+knowledge.cookingutensil=Инструменты для готовки
+knowledge.cookingutensil.desc=Повару - хороший инструмент!
+knowledge.cookingutensil.1=Для готовки нужны особые вещи, такие как формы для выпекания тортов и пирогов. Для инструментов смотрите вкладку базовых инструментов.
+
+knowledge.bandage=Повязки
+knowledge.bandage.desc=Первая помощь
+knowledge.bandage.1=Иногда недостаточно прикрикнуть на тяжелораненого и сказать ему заткнуться и сжевать четырёх жареных кур. Используйте повязку ПКМ. Врочем, она не поможет, если Вы истощены, горите, тонете или вообще умерли. Такие вещи надо и самим понимать.
+
+knowledge.bandageadv=Крепкие повязки
+knowledge.bandageadv.desc=Качественная медпомощь
+knowledge.bandageadv.1=Эти дорогие, но качественные повязки могут залатать серьёзные повреждения.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/MASTERY TEXT/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+knowledge.title=
+knowledge.title.desc=
+knowledge.title.1=
+
+knowledge.fitness=Выносливость
+knowledge.fitness.desc=Оставайтесь в форме
+knowledge.fitness.1=Ваш самый главный враг в бою - ваше же тщедушное тело. Однако теперь после долгих и частых нагрузок Вы устаёте на 25% медленнее.
+
+knowledge.toughness=Сила
+knowledge.toughness.desc=Выкуси!
+knowledge.toughness.1=Ваше постоянное участие в битвах научило вас не подставлять под удар жизненно важные органы.^Урон уменьшен на 25%.
+
+knowledge.armourpro=Мастерство ношения брони
+knowledge.armourpro.desc=Почувствуй разницу
+knowledge.armourpro.1=С прошествием времени Вы научились так двигаться в броне, чтобы меньше уставать.^Влияние брони на Вашу выносливость снижено.
+
+knowledge.parrypro=Тактика парирования
+knowledge.parrypro.desc=Следите за движениями
+knowledge.parrypro.1=Позиция на поле боя - важное преимущество.^Удерживание shift при парировании позволяет Вам прыгнуть вперёд, парируя удар, и переместиться за спину к оппоненту.
+
+knowledge.counteratt=Контратака
+knowledge.counteratt.desc=Ответный удар
+knowledge.counteratt.1=Парирование защищает вас, но нарушает Ваше рановесие, но теперь Вы достаточно опытны, чтобы обратить недостаток в преимущество.^Сразу после парирования Вы можете атаковать, нанеся чуть меньший урон, чем обычно.
+knowledge.counteratt.2=Мечи, кинжалы и катаны могут выполнить коющий удар.^Боевые топоры выполняют дробящий удар.^Тяжёлое оружие наносит сильный удар.^Дробящее оружие и шестовое оружие не даёт эффекта.
+
+knowledge.autoparry=Парирование на рефлексах
+knowledge.autoparry.desc=Всегда готов!
+knowledge.autoparry.1=Ваша постоянная практика привела к выработке рефлексов.^Вы можете парировать атаки без нажатия ПКМ, но под меньшим углом.
+
+knowledge.scrapper=Мусорщик
+knowledge.scrapper.desc=Возьми всё это!
+knowledge.scrapper.1=Ваши начинания в ремесленном деле не прошли даром, теперь вы понимаете, что некоторые вещи можно использовать дважды. ^Теперь вы возвращаете больше сырья при разборке.
+
+knowledge.firstaid=Первая помощь
+knowledge.firstaid.desc=Склонен к ранениям
+knowledge.firstaid.1=Вы должны быть предельно быстры и аккуратны во время перевязки, чтобы вы или ваш пациент не истекли кровью. ^Повязки теперь накладываются значительно быстрее.
+
+knowledge.doctor=Доктор
+knowledge.doctor.desc=Спасая жизни
+knowledge.doctor.1=Постоянная врачебная практика помогла Вам увеличить эффективность использования повязок. Теперь вы излечиваете ими на 50% лучше.
+

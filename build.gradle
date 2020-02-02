@@ -1,73 +1,64 @@
 buildscript {
     repositories {
-        mavenCentral()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
+        jcenter()
+        maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle.forge'
+//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+
+
+repositories {
+    maven {
+        name "LatvianModder Ivy"
+        url = "https://maven.latmod.com/"
+    }
+    maven {
+        url "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        url "http://tehnut.info/maven"
+    }
+    maven {
+        url 'http://minecraft.curseforge.com/api/maven/'
+    }
+    maven {
+        url 'http://chickenbones.net/maven/'
+    }
+    flatDir {
+        dirs 'libs'
     }
 }
 
-apply plugin: 'forge'
-apply plugin: 'idea'
+version = "1.0"
+group = "minefantasy.mfr.MineFantasyReborn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "MineFantasyReborn"
 
-version = "2.8.14.6"
-group= "minefantasy.mf2.minefantasy2"
-archivesBaseName = "MineFantasyII"
-
-sourceCompatibility = targetCompatibility = '1.8'
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
 minecraft {
-    version = "1.7.10-10.13.4.1614-1.7.10"
+    version = "1.12.2-14.23.5.2847"
+    mappings = "snapshot_20171003"
     runDir = "run"
-    replace "@VERSION@", project.version
-}
 
-idea { module { inheritOutputDirs = true } }
 
-repositories {
-    maven {
-        name = "chickenbones"
-        url = "http://chickenbones.net/maven/"
-    }
-
-	ivy {
-        name "MineTweaker3"
-        artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-[revision].[ext]"
-    }
-
-    flatDir {
-		dirs 'lib'
-	}
+    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
 dependencies {
-    compile name: 'bukkit-1.7.10'
-	compile name: 'MineTweaker3', version: "Dev-1.7.10-3.0.10B", ext: 'jar'
-	compile "codechicken:CodeChickenLib:1.7.10-1.1.3.140:dev"
-	compile "codechicken:CodeChickenCore:1.7.10-1.0.7.47:dev"
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
+
+    //deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.3.358:deobf"
+
 }
 
-task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier = 'deobf'
-}
-
-tasks.build.dependsOn('deobfJar')
-
-processResources
-{
+processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -75,12 +66,12 @@ processResources
     // replace stuff in mcmod.info, nothing else
     from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
-
+                
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
-
-    // copy everything else, thats not the mcmod.info
+        
+    // copy everything else except the mcmod.info
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }

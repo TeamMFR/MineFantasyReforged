@@ -1,0 +1,87 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/INFORMATION/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+knowledge.craftArmourBasic=Basic Armour
+knowledge.craftArmourBasic.desc=Nothing fancy
+knowledge.craftArmourBasic.1=When you first start out in this world, you may want something to wear. These Armours don't offer much protection but their better than nothing.
+
+knowledge.craftArmourLight=Light Armour
+
+knowledge.craftArmourMedium=Medium Armour
+
+knowledge.craftArmourHeavy=Heavy Armour
+
+knowledge.armourpro=Armour Proficiency
+knowledge.armourpro.1=After all this time, your core has become stronger.^Armour penalty to stamina cost is halved.
+
+knowledge.cogArmour.desc=Power Armour
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ITEM STATS/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+attribute.weapon.penetrateArmor=Armour Penetration
+attribute.armour.protection=Armour Rating
+attribute.armour.light=Light Armour
+attribute.armour.medium=Medium Armour
+attribute.armour.heavy=Heavy Armour
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/COMPONENT/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.nitre.name=Nitre
+tile.oreNitre.name=Nitre Deposit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/ARMOUR/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+itemGroup.forgedarmour=[MF] Forged Armour
+
+item.hide_chest.name=Hide Armour
+item.roughleather_chest.name=Rough Leather Armour
+item.strongleather_chest.name=Reinforced Leather Armour
+item.studleather_chest.name=Studded Armour
+item.scaleleather_chest.name=Scaled Armour
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/TOOL/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+item.stone_pick.name=Stone Pick
+item.copper_pick.name=Copper Pick
+item.bronze_pick.name=Bronze Pick
+item.iron_pick.name=Iron Pick
+item.steel_pick.name=Steel Pick
+item.dragonforge_pick.name=Dragonforge Pick
+item.encrusted_pick.name=Encrusted Pick
+
+item.redsteel_pick.name=Red Steel Pick
+item.blacksteel_pick.name=Black Steel Pick
+item.bluesteel_pick.name=Blue Steel Pick
+
+item.adamantium_pick.name=Adamantium Pick
+item.mithril_pick.name=Mithril Pick
+
+item.ignotumite_pick.name=Ignotumite Pick
+item.mithium_pick.name=Mithium Pick
+
+item.ender_pick.name=Enderforge Pick
+
+item.dwarven_pick.name=%1$s Dwarven Pick
+item.dwarven_hvypick.name=Heavy %1$s Dwarven Pick
+item.standard_pick.name=%1$s Pick
+item.standard_hvypick.name=Heavy %1$s Pick
+
+item.bronze_hvypick.name=Heavy Bronze Pick
+item.iron_hvypick.name=Heavy Iron Pick
+item.steel_hvypick.name=Heavy Steel Pick
+item.dragonforge_hvypick.name=Heavy Dragonforge Pick
+item.encrusted_hvypick.name=Heavy Encrusted Pick
+
+item.redsteel_hvypick.name=Heavy Red Steel Pick
+item.blacksteel_hvypick.name=Heavy Black Steel Pick
+item.bluesteel_hvypick.name=Heavy Blue Steel Pick
+
+item.adamantium_hvypick.name=Heavy Adamantium Pick
+item.mithril_hvypick.name=Heavy Mithril Pick
+
+item.ignotumite_hvypick.name=Heavy Ignotumite Pick
+item.mithium_hvypick.name=Heavy Mithium Pick
+
+item.ender_hvypick.name=Heavy Enderforge Pick

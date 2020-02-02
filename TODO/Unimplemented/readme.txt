@@ -1,1 +1,0 @@
-Models by @basiliskboy (http://www.minecraftforum.net/members/basiliskboy)
