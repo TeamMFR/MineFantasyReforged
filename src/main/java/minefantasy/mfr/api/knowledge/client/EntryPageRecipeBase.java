@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.knowledge.client;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
@@ -56,7 +57,7 @@ public class EntryPageRecipeBase extends EntryPage {
         renderRecipe(parent, x, y, f, posX, posY, recipe);
 
         if (tooltipStack != null) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
+            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
             List<String> parsedTooltip = new ArrayList();
             boolean first = true;
 
@@ -82,18 +83,19 @@ public class EntryPageRecipeBase extends EntryPage {
 
             for (int y = 0; y < shaped.recipeHeight; y++) {
                 for (int x = 0; x < shaped.recipeWidth; x++) {
-                    renderItemAtGridPos(parent, x, y, shaped.recipeItems[y * shaped.recipeWidth + x], true, posX, posY,
+                    renderItemAtGridPos(parent, x, y, shaped.recipeItems.get(y * shaped.recipeWidth + x), true, posX, posY,
                             mx, my);
                 }
             }
         } else if (recipe instanceof ShapedOreRecipe) {
             ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
-            int width = (Integer) ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 4);
-            int height = (Integer) ReflectionHelper.getPrivateValue(ShapedOreRecipe.class, shaped, 5);
+            int width = shaped.getRecipeWidth();
+            int height = shaped.getRecipeHeight();
 
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    Object input = shaped.getInput()[y * width + x];
+                    //used to be shaped.getInput[y * width + x] Might not be correct co
+                    Object input = shaped.getIngredients().get(y * width + x);
                     if (input != null)
                         renderItemAtGridPos(parent, x, y,
                                 input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0),
@@ -195,7 +197,7 @@ public class EntryPageRecipeBase extends EntryPage {
 
     public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
                            int my) {
-        RenderEntityItem render = new RenderEntityItem();
+        RenderEntityItem render = new RenderEntityItem();render.
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;
         }

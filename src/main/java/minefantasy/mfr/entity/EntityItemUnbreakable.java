@@ -1,13 +1,17 @@
 package minefantasy.mfr.entity;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 import java.util.Iterator;
 
@@ -17,9 +21,9 @@ public class EntityItemUnbreakable extends EntityItem {
     }
 
     public EntityItemUnbreakable(World world, EntityItem parent) {
-        super(world, parent.posX, parent.posY, parent.posZ, parent.getEntityItem());
+        super(world, parent.posX, parent.posY, parent.posZ, parent.getItem());
         this.mimicSpeed(parent);
-        delayBeforeCanPickup = parent.delayBeforeCanPickup;
+        setPickupDelay(ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, parent, "pickupDelay"));
         isImmuneToFire = true;
     }
 
@@ -46,35 +50,45 @@ public class EntityItemUnbreakable extends EntityItem {
             }
         }
 
-        if (this.getEntityItem() == null) {
-            this.setDead();
+        if (getItem() == null) {
+            setDead();
         } else {
-            this.onEntityUpdate();
+            onEntityUpdate();
 
-            if (this.delayBeforeCanPickup > 0) {
-                --this.delayBeforeCanPickup;
+            int pickupDelay = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "pickupDelay");
+            if (pickupDelay > 0) {
+                this.setPickupDelay(pickupDelay -1);
             }
 
-            this.prevPosX = this.posX;
-            this.prevPosY = this.posY;
-            this.prevPosZ = this.posZ;
+            prevPosX = posX;
+            prevPosY = posY;
+            prevPosZ = posZ;
             if (!isBreakable() && posY <= 1.0F) {
                 motionY = 0D;
             } else {
                 this.motionY -= 0.03999999910593033D;
             }
-            this.noClip = this.func_145771_j(this.posX, (this.boundingBox.minY + this.boundingBox.maxY) / 2.0D,
-                    this.posZ);
-            this.moveEntity(this.motionX, this.motionY, this.motionZ);
-            boolean flag = (int) this.prevPosX != (int) this.posX || (int) this.prevPosY != (int) this.posY
-                    || (int) this.prevPosZ != (int) this.posZ;
+            //just a guess that this function is pushOutOfBlocks
+            noClip = pushOutOfBlocks(posX,
+                    (getCollisionBoundingBox().minY + getCollisionBoundingBox().maxY) / 2.0D,
+                    posZ);
+
+            //again just a guess
+            this.move(MoverType.SELF, motionX, motionY, motionZ);//this.moveEntity(this.motionX, this.motionY, this.motionZ);
+
+            boolean flag = (int) prevPosX != (int) posX || (int) prevPosY != (int) posY
+                    || (int) prevPosZ != (int) posZ;
 
             if (flag || this.ticksExisted % 25 == 0) {
-                if (this.world.getBlock(MathHelper.floor_double(this.posX), MathHelper.floor_double(this.posY),
-                        MathHelper.floor_double(this.posZ)).getMaterial() == Material.lava) {
-                    this.motionY = 0.20000000298023224D;
-                    this.motionX = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
-                    this.motionZ = (this.rand.nextFloat() - this.rand.nextFloat()) * 0.2F;
+                IBlockState blockState = world.getBlockState(
+                        new BlockPos(
+                                MathHelper.floor(posX),
+                                MathHelper.floor(posY),
+                                MathHelper.floor(posZ)));
+                if (blockState.getMaterial() == Material.LAVA) {
+                    motionY = 0.20000000298023224D;
+                    motionX = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
+                    motionZ = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
                 }
 
                 if (!this.world.isRemote) {
@@ -84,10 +98,17 @@ public class EntityItemUnbreakable extends EntityItem {
 
             float f = 0.98F;
 
-            if (this.onGround) {
-                f = this.world.getBlock(MathHelper.floor_double(this.posX),
-                        MathHelper.floor_double(this.boundingBox.minY) - 1,
-                        MathHelper.floor_double(this.posZ)).slipperiness * 0.98F;
+            if (onGround) {
+
+                IBlockState blockState = world.getBlockState(
+                        new BlockPos(
+                                MathHelper.floor(posX),
+                                MathHelper.floor(getCollisionBoundingBox().minY) -1,
+                                MathHelper.floor(posZ)));
+
+                //parameters are all nulls because function ignores them and just returns slipperiness
+                float splipperiness = blockState.getBlock().getSlipperiness(null, null, null, null);
+                f = splipperiness * 0.98F;
             }
 
             this.motionX *= f;
@@ -98,12 +119,13 @@ public class EntityItemUnbreakable extends EntityItem {
                 this.motionY *= -0.5D;
             }
 
-            ++this.age;
+            int age = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "age");
+            ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, this, age-1, "age");
 
             ItemStack item = getDataWatcher().getWatchableObjectItemStack(10);
 
             if (isBreakable()) {
-                if (!this.world.isRemote && this.age >= lifespan) {
+                if (!this.world.isRemote && age >= lifespan) {
                     if (item != null) {
                         ItemExpireEvent event = new ItemExpireEvent(this,
                                 (item.getItem() == null ? 6000 : item.getItem().getEntityLifespan(item, world)));
@@ -130,7 +152,7 @@ public class EntityItemUnbreakable extends EntityItem {
 
     private void searchForOtherItemsNearby() {
         Iterator iterator = this.world
-                .getEntitiesWithinAABB(EntityItem.class, this.boundingBox.expand(0.5D, 0.0D, 0.5D)).iterator();
+                .getEntitiesWithinAABB(EntityItem.class, getCollisionBoundingBox().expand(0.5D, 0.0D, 0.5D)).iterator();
 
         while (iterator.hasNext()) {
             EntityItem entityitem = (EntityItem) iterator.next();

@@ -64,7 +64,7 @@ public class PlayerTickHandlerMF {
             dragon.fireBreathCooldown = 200;
 
             if (ConfigMobs.dragonMSG && !player.world.isRemote) {
-                player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.translateToLocal("event.dragonnear.name"));
+                player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.translateToLocal("event.dragonnear.name")));
 
                 List<?> list = player.world.playerEntities;
                 Iterator<?> players = list.iterator();

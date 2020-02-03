@@ -73,16 +73,16 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
     public EntityArrowMFR(World world) {
         super(world);
-        this.renderDistanceWeight = 10.0D;
+        setRenderDistanceWeight(10.0D);
         this.setSize(0.5F, 0.5F);
     }
 
     public EntityArrowMFR(World world, double x, double y, double z) {
         super(world);
-        this.renderDistanceWeight = 10.0D;
+        setRenderDistanceWeight(10.0D);
         this.setSize(0.5F, 0.5F);
         this.setPosition(x, y, z);
-        this.yOffset = 0.0F;
+        //this.yOffset = 0.0F;
     }
 
     /**
@@ -91,7 +91,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
      */
     public EntityArrowMFR(World world, EntityLivingBase shooter, EntityLivingBase target, float accuracy, float power) {
         super(world);
-        this.renderDistanceWeight = 10.0D;
+        setRenderDistanceWeight(10.0D);
         this.shootingEntity = shooter;
 
         this.firepower = power;
@@ -666,7 +666,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         return false;
     }
 
-    @Override
+    //@Override
     @SideOnly(Side.CLIENT)
     public float getShadowSize() {
         return 0.0F;

@@ -132,7 +132,7 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem {
                 for (int y1 = -2; y1 <= 2; y1++) {
                     for (int z1 = -2; z1 <= 2; z1++) {
                         EnumFacing facing = getFacingFor(user, pos);
-                        BlockPos blockPos = pos.add(x1 +facing.getFrontOffsetX(), y1 + facing.getFrontOffsetY(),z1 + facing.getFrontOffsetZ()  )
+                        BlockPos blockPos = pos.add(x1 +facing.getFrontOffsetX(), y1 + facing.getFrontOffsetY(),z1 + facing.getFrontOffsetZ()  );
 
                         if (!(x1 + facing.getFrontOffsetX() == 0 && y1 + facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
                             if (MineFantasyReborn.isBukkitServer() && BukkitUtils.cantBreakBlock((EntityPlayer) user, blockPos)) {

@@ -1,9 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
-import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import minefantasy.mfr.block.crafting.BlockTanningRack;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 

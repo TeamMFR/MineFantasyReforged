@@ -58,7 +58,7 @@ public class MobSpawnerMF extends ItemComponentMFR {
     }
 
     @Override
-    public boolean onItemUse(ItemStack item, EntityPlayer user, World world, BlockPos pos;,
+    public boolean onItemUse(ItemStack item, EntityPlayer user, World world, BlockPos pos,
                              int face, float ox, float oy, float oz) {
         if (world.isRemote) {
             return true;

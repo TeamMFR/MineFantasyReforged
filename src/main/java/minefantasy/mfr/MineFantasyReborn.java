@@ -12,8 +12,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = MineFantasyReborn.MODID, name = MineFantasyReborn.NAME, version = MineFantasyReborn.VERSION, dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP)
-public class MineFantasyReborn
-{
+public class MineFantasyReborn {
     public static final String MODID = "minefantasyreborn";
     public static final String NAME = "MineFantasyReborn";
     public static final String VERSION = "1.0.0";

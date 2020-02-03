@@ -103,7 +103,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 
                                 List<ItemStack> items = block.getDrops(world, pos.add(x2, y2, z2), block.getDefaultState(), 1);
                                 world.setBlockToAir(pos.add(x2,y2,z2));
-                                world.playSound(entity,pos.add(x2,y2,z2), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F ));
+                                world.playSound(entity,pos.add(x2,y2,z2), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
                                 tryBreakFarmland(world, pos.add(x2,y2,z2));
                                 if (!entity.capabilities.isCreativeMode) {
                                     ItemLumberAxe.tirePlayer(entity, 1F);

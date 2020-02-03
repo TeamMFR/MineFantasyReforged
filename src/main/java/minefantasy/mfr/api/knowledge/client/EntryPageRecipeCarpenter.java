@@ -9,6 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
@@ -59,7 +60,7 @@ public class EntryPageRecipeCarpenter extends EntryPage {
         renderRecipe(parent, x, y, f, posX, posY, recipe);
 
         if (tooltipStack != null) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
+            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
             List<String> parsedTooltip = new ArrayList();
             boolean first = true;
 
@@ -171,6 +172,8 @@ public class EntryPageRecipeCarpenter extends EntryPage {
 
     public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
                            int my) {
+        //TODO not sure how to fix this. Maybe use ItemRenderer e.g.
+        //ItemRenderer renderer = new ItemRenderer(gui.mc);
         RenderItem render = new RenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;
