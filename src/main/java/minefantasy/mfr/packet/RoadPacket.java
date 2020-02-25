@@ -29,7 +29,7 @@ public class RoadPacket extends PacketMF {
 
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
-        this.coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
+        this.coords = new BlockPos(packet.readInt(), packet.readInt(), packet.readInt());
         isRequest = packet.readBoolean();
 
         TileEntity entity = player.world.getTileEntity(coords);
@@ -59,9 +59,7 @@ public class RoadPacket extends PacketMF {
 
     @Override
     public void write(ByteBuf packet) {
-        for (int a = 0; a < coords.toLong(); a++) {
-            packet.writeInt(coords[a]);
-        }
+        packet.writeLong(coords.toLong());
         packet.writeBoolean(isRequest);
 
         if (!isRequest) {

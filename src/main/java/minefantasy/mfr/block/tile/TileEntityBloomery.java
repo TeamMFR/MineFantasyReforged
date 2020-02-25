@@ -18,7 +18,7 @@ import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.item.heatable.ItemHeated;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.packet.BloomeryPacket;
 import minefantasy.mfr.util.MFRLogUtil;

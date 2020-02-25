@@ -36,12 +36,6 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.MFRLogUtil;
-import mods.battlegear2.api.weapons.IBackStabbable;
-import mods.battlegear2.api.weapons.IBattlegearWeapon;
-import mods.battlegear2.api.weapons.IExtendedReachWeapon;
-import mods.battlegear2.api.weapons.IHitTimeModifier;
-import mods.battlegear2.api.weapons.IPenetrateWeapon;
-import mods.battlegear2.api.weapons.WeaponRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -69,7 +63,7 @@ import java.util.UUID;
 
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
-        IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IBattlegearWeapon, IToolMaterial,
+        IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
         IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     public static float axeAPModifier = -0.1F;
@@ -154,13 +148,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
         if (material == ToolMaterial.WOOD) {
             baseDamage = 0F;
-        }
-        if(Loader.isModLoaded("battlegear2")) {
-            if (isHeavyWeapon()) {
-                WeaponRegistry.addTwoHanded(new ItemStack(this));
-            } else {
-                WeaponRegistry.addDualWeapon(new ItemStack(this));
-            }
         }
     }
 
@@ -296,91 +283,25 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             CustomToolHelper.addInformation(weapon, list);
         }
 
-        if (this instanceof IExtendedReachWeapon || this instanceof IPenetrateWeapon
-                || this instanceof IHitTimeModifier) {
+        if (this instanceof IExtendedReachWeapon) {
             list.add("");
 
-            if (this instanceof IPenetrateWeapon) {
+            float reach = ((IExtendedReachWeapon) this).getReachModifierInBlocks(weapon);
+
+            if (reach > 0) {
                 list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
-                        "attribute.modifier.plus." + 1, decimal_format.format(getAPDamText()),
-                        I18n.translateToLocal("attribute.weapon.penetrateArmor")));
-            }
-
-            if (this instanceof IExtendedReachWeapon) {
-                float reach = ((IExtendedReachWeapon) this).getReachModifierInBlocks(weapon);
-
-                if (reach > 0) {
-                    list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
-                            "attribute.modifier.plus." + 0, decimal_format.format(reach),
-                            I18n.translateToLocal("attribute.weapon.extendedReach")));
-                } else {
-                    list.add(TextFormatting.RED + I18n.translateToLocalFormatted(
-                            "attribute.modifier.take." + 0, decimal_format.format(-1 * reach),
-                            I18n.translateToLocal("attribute.weapon.extendedReach")));
-                }
-            }
-
-            if (this instanceof IHitTimeModifier) {
-                int hitMod = ((IHitTimeModifier) this).getHitTime(weapon, null);
-                if (hitMod > 0) {
-                    list.add(TextFormatting.RED + I18n.translateToLocalFormatted(
-                            "attribute.modifier.take." + 1, decimal_format.format(hitMod / 10F * 100),
-                            I18n.translateToLocal("attribute.weapon.attackSpeed")));
-                } else {
-                    list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
-                            "attribute.modifier.plus." + 1, decimal_format.format(-(float) hitMod / 10F * 100),
-                            I18n.translateToLocal("attribute.weapon.attackSpeed")));
-                }
-            }
-
-            if (this instanceof IBackStabbable) {
-                list.add(TextFormatting.GOLD + I18n.translateToLocal("attribute.weapon.backstab"));
-
+                        "attribute.modifier.plus." + 0, decimal_format.format(reach),
+                        I18n.translateToLocal("attribute.weapon.extendedReach")));
+            } else {
+                list.add(TextFormatting.RED + I18n.translateToLocalFormatted(
+                        "attribute.modifier.take." + 0, decimal_format.format(-1 * reach),
+                        I18n.translateToLocal("attribute.weapon.extendedReach")));
             }
         }
     }
 
     protected float getAPDamText() {
         return 0F;
-    }
-
-    @Override
-    public boolean sheatheOnBack(ItemStack item) {
-        return isHeavyWeapon();
-    }
-
-    public boolean isHeavyWeapon() {
-        return false;
-    }
-
-    @Override
-    public boolean isOffhandHandDual(ItemStack off) {
-        return true;
-    }
-
-    @Override
-    @Optional.Method(modid = "battlegear2")
-    public boolean offhandAttackEntity(mods.battlegear2.api.PlayerEventChild.OffhandAttackEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
-        return true;
-    }
-
-    @Override
-    public boolean offhandClickAir(PlayerInteractEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
-        return true;
-    }
-
-    @Override
-    public boolean offhandClickBlock(PlayerInteractEvent event, ItemStack mainhandItem, ItemStack offhandItem) {
-        return true;
-    }
-
-    @Override
-    public void performPassiveEffects(Side effectiveSide, ItemStack mainhandItem, ItemStack offhandItem) {
-    }
-
-    @Override
-    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
-        return offhand != null;
     }
 
     protected void addXp(EntityLivingBase user, int chance) {
@@ -704,12 +625,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
     protected float getWeightModifier(ItemStack stack) {
         return CustomToolHelper.getWeightModifier(stack, materialWeight);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
     }
 
     @Override

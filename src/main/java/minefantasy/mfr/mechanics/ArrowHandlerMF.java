@@ -1,5 +1,7 @@
 package minefantasy.mfr.mechanics;
 
+import minefantasy.mfr.init.SoundsMFR;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
@@ -136,8 +138,7 @@ public class ArrowHandlerMF {
                     if (!user.capabilities.isCreativeMode) {
                         bow.damageItem(1, user);
                     }
-                    world.playSoundAtEntity(user, "minefantasy2:weapon.bowFire", 0.5F,
-                            1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
+                    world.playSound(user, user.getPosition(), SoundsMFR.BOW_FIRE, SoundCategory.NEUTRAL, 0.5F, 1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
                     loadArrow(user, bow, null);
                     event.setCanceled(true);
                     AmmoMechanicsMFR.consumeAmmo(user, bow);
@@ -148,8 +149,7 @@ public class ArrowHandlerMF {
     }
 
     private boolean getIsInfinite(EntityPlayer user, ItemStack bow) {
-        return user.capabilities.isCreativeMode
-                || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, bow) > 0;
+        return user.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(51), bow) > 0;
     }
 
     // Used to take an item/subId from the inventory

@@ -1,5 +1,8 @@
 package minefantasy.mfr.mechanics;
 
+import net.minecraft.entity.monster.AbstractSkeleton;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import minefantasy.mfr.api.material.CustomMaterial;
@@ -33,11 +36,11 @@ public class MonsterUpgrader {
         int diff = mob.world.getDifficulty().getDifficultyId();
 
         if (ConfigHardcore.upgradeZombieWep) {
-            if (mob instanceof EntitySkeleton) {
-                if (((EntitySkeleton) mob).getSkeletonType() == 1) {
+            if (mob instanceof AbstractSkeleton) {
+                if ((mob) instanceof EntityWitherSkeleton) {
                     giveEntityWeapon(mob, "Diamond", random.nextInt(8));
                 } else if (CombatMechanics.swordSkeleton && random.nextInt(3) == 0) {
-                    mob.setCurrentItemOrArmor(0, CustomToolListMFR.standard_sword.construct("Bronze", "OakWood"));
+                    mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, CustomToolListMFR.standard_sword.construct("Bronze", "OakWood"));
                     ((EntitySkeleton) mob).setCombatTask();
                 }
             } else if (mob instanceof EntityZombie) {
@@ -49,7 +52,7 @@ public class MonsterUpgrader {
                         mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
                     }
                 } else {
-                    if (mob.getHeldItem() != null && mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
+                    if (mob.getHeldItemMainhand() != null && mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
                         giveEntityWeapon(mob, tier, 0);
                         if (mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null) {
                             mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
@@ -89,7 +92,7 @@ public class MonsterUpgrader {
                 }
             }
         } else {
-            if (mob.getHeldItem() != null && mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
+            if (mob.getHeldItemMainhand() != null && mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
                 giveEntityWeapon(mob, "iron", 0);
             }
         }
@@ -107,9 +110,8 @@ public class MonsterUpgrader {
             lootId = 1;
             tier = "encrusted";
         }
-        mob.setVillager(false);
         mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
-        mob.setCurrentItemOrArmor(0, CustomToolListMFR.standard_greatsword.construct(tier, "OakWood"));
+        mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, CustomToolListMFR.standard_greatsword.construct(tier, "OakWood"));
         setArmour(mob, 1, tier);
         mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
         mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -117,16 +119,16 @@ public class MonsterUpgrader {
 
     private void setArmour(EntityLivingBase mob, int id, String tier) {
         if (id == 1) {
-            mob.setCurrentItemOrArmor(1, CustomArmourListMFR.standard_plate_boots.construct(tier));
-            mob.setCurrentItemOrArmor(2, CustomArmourListMFR.standard_plate_legs.construct(tier));
-            mob.setCurrentItemOrArmor(3, CustomArmourListMFR.standard_plate_chest.construct(tier));
-            mob.setCurrentItemOrArmor(4, CustomArmourListMFR.standard_plate_helmet.construct(tier));
+            mob.setItemStackToSlot(EntityEquipmentSlot.FEET, CustomArmourListMFR.standard_plate_boots.construct(tier));
+            mob.setItemStackToSlot(EntityEquipmentSlot.LEGS, CustomArmourListMFR.standard_plate_legs.construct(tier));
+            mob.setItemStackToSlot(EntityEquipmentSlot.CHEST, CustomArmourListMFR.standard_plate_chest.construct(tier));
+            mob.setItemStackToSlot(EntityEquipmentSlot.HEAD, CustomArmourListMFR.standard_plate_helmet.construct(tier));
             return;
         }
-        mob.setCurrentItemOrArmor(1, CustomArmourListMFR.standard_chain_boots.construct(tier));
-        mob.setCurrentItemOrArmor(2, CustomArmourListMFR.standard_chain_legs.construct(tier));
-        mob.setCurrentItemOrArmor(3, CustomArmourListMFR.standard_chain_chest.construct(tier));
-        mob.setCurrentItemOrArmor(4, CustomArmourListMFR.standard_chain_helmet.construct(tier));
+        mob.setItemStackToSlot(EntityEquipmentSlot.FEET, CustomArmourListMFR.standard_chain_boots.construct(tier));
+        mob.setItemStackToSlot(EntityEquipmentSlot.LEGS, CustomArmourListMFR.standard_chain_legs.construct(tier));
+        mob.setItemStackToSlot(EntityEquipmentSlot.CHEST, CustomArmourListMFR.standard_chain_chest.construct(tier));
+        mob.setItemStackToSlot(EntityEquipmentSlot.HEAD, CustomArmourListMFR.standard_chain_helmet.construct(tier));
     }
 
     private void createZombieBrute(EntityZombie mob) {
@@ -139,7 +141,7 @@ public class MonsterUpgrader {
             tier = "encrusted";
         }
         mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
-        mob.setCurrentItemOrArmor(0, CustomToolListMFR.standard_waraxe.construct(tier, "OakWood"));
+        mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, CustomToolListMFR.standard_waraxe.construct(tier, "OakWood"));
         setArmour(mob, 0, tier);
         mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35F);
         mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -167,7 +169,7 @@ public class MonsterUpgrader {
         }
 
         if (mob != null && weapon != null) {
-            mob.setCurrentItemOrArmor(0, weapon.construct(tier, "OakWood"));
+            mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, weapon.construct(tier, "OakWood"));
         }
     }
 

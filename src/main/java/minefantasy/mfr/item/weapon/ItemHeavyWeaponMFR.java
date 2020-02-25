@@ -1,6 +1,6 @@
 package minefantasy.mfr.item.weapon;
 
-import mods.battlegear2.api.weapons.IExtendedReachWeapon;
+import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -19,26 +19,6 @@ public abstract class ItemHeavyWeaponMFR extends ItemWeaponMFR implements IExten
     public ItemHeavyWeaponMFR(Item.ToolMaterial material, String named, int rarity, float weight) {
         super(material, named, rarity, weight);
         setMaxDamage((int) (getMaxDamage() * 1.5F));
-    }
-
-    @Override
-    public boolean sheatheOnBack(ItemStack item) {
-        return true;
-    }
-
-    @Override
-    public boolean isHeavyWeapon() {
-        return true;
-    }
-
-    @Override
-    public boolean isOffhandHandDual(ItemStack off) {
-        return false;
-    }
-
-    @Override
-    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
-        return false;
     }
 
     public int getParryCooldown(EntityLivingBase user) {

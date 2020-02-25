@@ -8,7 +8,6 @@ import minefantasy.mfr.item.gadget.EnumExplosiveType;
 import minefantasy.mfr.item.gadget.EnumFuseType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import minefantasy.mfr.item.list.ToolListMF;
-import minefantasy.mfr.util.BukkitUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -241,11 +240,6 @@ public class EntityMine extends Entity {
 
                 while (splashDamage.hasNext()) {
                     Entity entityHit = (Entity) splashDamage.next();
-
-                    if (MineFantasyII.isBukkitServer()
-                            && BukkitUtils.cantDamage(thrower != null ? thrower : this, entityHit)) {
-                        continue;
-                    }
 
                     double distanceToEntity = this.getDistanceToEntity(entityHit);
 

@@ -35,7 +35,7 @@ public class StaminaMechanics {
                 StaminaBar.getFlashTime(entity), StaminaBar.getBonusStamina(entity)};
         float[] values = new float[]{StaminaBar.getStaminaValue(entity), StaminaBar.getTotalMaxStamina(entity)};
         if (entity.world.isRemote && ConfigClient.playBreath) {
-            if (!StaminaBar.isPercentStamAvailable(entity, 0.2F, false) && !entity.isInsideOfMaterial(Material.water)) {
+            if (!StaminaBar.isPercentStamAvailable(entity, 0.2F, false) && !entity.isInsideOfMaterial(Material.WATER)) {
                 if (entity.ticksExisted % 20 == 0) {
                     entity.playSound(SoundEvents.ENTITY_BLAZE_AMBIENT, 0.1F, 1.8F);
                 }
@@ -75,9 +75,9 @@ public class StaminaMechanics {
         // out of stamina
         if (values[0] <= 0) {
             if (ConfigStamina.affectSpeed) {
-                entity.addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 2));
+                entity.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 2));
             }
-            entity.addPotionEffect(new PotionEffect(Potion.hunger.id, 2));
+            entity.addPotionEffect(new PotionEffect(Potion.getPotionById(17), 2));
             // Drain air when exhausted, you will drown faster
             if (isInWater(entity) && entity.getAir() > -20 && entity.ticksExisted % 20 == 0) {
                 entity.setAir(entity.getAir() - 1);
@@ -147,7 +147,7 @@ public class StaminaMechanics {
         if (StaminaBar.getIdleTime(user) > 0) {
             return 0;
         }
-        if (isInWater(user) && user.getActivePotionEffect(Potion.waterBreathing) == null) {
+        if (isInWater(user) && user.getActivePotionEffect(Potion.getPotionById(13)) == null) {
             return 0;// can't catch your breath when underwater
         }
         // The base time it takes to regen
@@ -208,7 +208,7 @@ public class StaminaMechanics {
     }
 
     public static float getWeaponModifier(EntityLivingBase user) {
-        ItemStack weapon = user.getHeldItem();
+        ItemStack weapon = user.getHeldItemMainhand();
         float value = 0.0F;
 
         if (weapon != null) {

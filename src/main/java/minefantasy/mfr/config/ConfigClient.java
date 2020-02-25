@@ -107,26 +107,6 @@ public class ConfigClient extends ConfigurationBaseMF {
         CF_yPos = Integer.parseInt(config
                 .get(GUI_CAFUEL, "Y Position", -4, "The Offset value away from the orient (-)up, (+)down").getString());
 
-        BlockAnvilMF.anvil_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Anvil", -100).getString());
-        BlockCarpenter.carpenter_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Carpenter", -101).getString());
-        BlockBombBench.bomb_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Bomb Bench", -102).getString());
-        BlockTanningRack.tanner_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Tanning Rack", -103).getString());
-        BlockForge.forge_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Forge", -104).getString());
-        BlockBellows.bellows_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Bellows", -105).getString());
-        BlockResearchStation.research_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "ResearchTable", -106).getString());
-        BlockBombPress.bpress_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Bomb Press", -107).getString());
-        BlockTrough.trough_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Trough", -108).getString());
-        BlockBloomery.bloomery_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Bloomery", -109).getString());
-        BlockCrossbowBench.crossBench_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Crossbow Bench", -110).getString());
-        BlockQuern.quern_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Quern", -111).getString());
-        BlockFirepit.firepit_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Firepit", -112).getString());
-        BlockRoast.roast_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Roast", -113).getString());
-        BlockBigFurnace.furn_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Big Furnace", -114).getString());
-        BlockRack.rack_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Rack", -115).getString());
-        BlockAmmoBox.ammo_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Ammo Box", -116).getString());
-        BlockChimney.pipe_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Smoke Pipe", -117).getString());
-        BlockComponent.component_RI = Integer.parseInt(config.get(CATEGORY_BLOCK, "Component Storage", -118).getString());
-
         EventManagerMFR.displayOreDict = Boolean.parseBoolean(config.get(CATEGORY_DEBUG, "Show Debug OreDict", false,
                 "Displays a list of Ore Dictionary entries to tooltips").getString());
     }

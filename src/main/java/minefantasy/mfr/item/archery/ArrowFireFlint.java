@@ -6,6 +6,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -34,26 +35,26 @@ public class ArrowFireFlint implements IArrowHandler {
             firepower = 1.0F;
         }
 
-        EntityArrow entArrow = new EntityArrow(world, user, firepower * 2.0F);
+        EntityArrow entArrow = new EntityTippedArrow(world, user);
 
-        int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentID(), bow);
+        int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(48), bow);
 
         if (var9 > 0) {
             entArrow.setDamage(entArrow.getDamage() + var9 * 0.5D + 0.5D);
         }
 
-        int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.punch.effectId, bow);
+        int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(49), bow);
 
         if (var10 > 0) {
             entArrow.setKnockbackStrength(var10);
         }
 
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.flame.effectId, bow) > 0) {
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(50), bow) > 0) {
             entArrow.setFire(100);
         }
 
         if (infinite) {
-            entArrow.canBePickedUp = 2;
+            entArrow.pickupStatus = EntityArrow.PickupStatus.DISALLOWED;
         }
 
         if (bow != null && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {

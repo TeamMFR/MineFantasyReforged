@@ -1,20 +1,26 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
-import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mfr.init.ComponentListMFR;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.monster.EntityCaveSpider;
+import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenAFRoom extends StructureModuleMFR {
 
-    private String lootType = ChestGenHooks.DUNGEON_CHEST;
+    private ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
     private boolean hasTrinket = false;
 
-    public StructureGenAFRoom(World world, int x, int y, int z, int d) {
-        super(world, x, y, z, d);
+    public StructureGenAFRoom(World world, BlockPos pos, int d) {
+        super(world, pos, d);
     }
 
     public StructureGenAFRoom(World world, StructureCoordinates position) {
@@ -28,21 +34,21 @@ public class StructureGenAFRoom extends StructureModuleMFR {
         // FLOOR
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
-                placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 0, z);
+                placeBlock(Blocks.STONEBRICK,new BlockPos( x, 0, z));
             }
         }
 
         // CEIL
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
-                placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 5, z);
+                placeBlock(Blocks.STONEBRICK, new BlockPos(x, 5, z));
             }
         }
         // INT
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
                 for (int y = 1; y <= 4; y++) {
-                    placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, y, z);
+                    placeBlock(Blocks.STONEBRICK, new BlockPos(x, y, z));
                 }
             }
         }
@@ -50,7 +56,7 @@ public class StructureGenAFRoom extends StructureModuleMFR {
         for (int x = (-width / 2) + 1; x <= (width / 2) - 1; x++) {
             for (int z = 1; z <= depth - 1; z++) {
                 for (int y = 1; y <= 4; y++) {
-                    placeBlock(Blocks.air, 0, x, y, z);
+                    placeBlock(Blocks.AIR, new BlockPos(x, y, z));
                 }
             }
         }
@@ -61,37 +67,36 @@ public class StructureGenAFRoom extends StructureModuleMFR {
             int y = 0;
             int z = depth / 2;
 
-            placeChest(0, 1, depth - 1, lootType);
-            placeSpawner(0, 1, z, "Silverfish");
+            placeChest(new BlockPos(0, 1, depth - 1), lootType);
+            placeSpawner(new BlockPos(0, 1, z), EntityList.getKey(EntitySilverfish.class));
 
             for (int x2 = -1; x2 <= 1; x2++) {
-                placeBlock(Blocks.air, 0, x2, 1, 0);
-                placeBlock(Blocks.air, 0, x2, 2, 0);
+                placeBlock(Blocks.AIR, new BlockPos(x2, 1, 0));
+                placeBlock(Blocks.AIR,new BlockPos(x2, 2, 0));
             }
-            placeBlock(Blocks.air, 0, 0, 3, 0);
+            placeBlock(Blocks.AIR, new BlockPos(0, 3, 0));
 
         }
     }
 
-    private void placeChest(int x, int y, int z, String loot) {
-        int[] coords = this.offsetPos(x, y, z, direction);
-        world.setBlock(coords[0], coords[1], coords[2], Blocks.chest, direction, 2);
-        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(coords[0], coords[1], coords[2]);
+    private void placeChest(BlockPos pos, ResourceLocation loot) {
+        BlockPos coords = this.offsetPos(pos, direction);
+        world.setBlockState(coords, (IBlockState) Blocks.CHEST, direction);
+        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(coords);
 
         if (tileentitychest != null) {
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(loot, rand), tileentitychest,
-                    ChestGenHooks.getCount(loot, rand));
+            tileentitychest.setLootTable(loot, 2 + rand.nextInt(3));
             if (hasTrinket) {
                 // North = -z, South = +z
-                int sp = world.getSpawnPoint().posZ;
-                int item = (coords[2] < sp) ? 1 : 0;
+                int sp = world.getSpawnPoint().getZ();
+                int item = (coords.getY() < sp) ? 1 : 0;
                 int artId = rand.nextInt(tileentitychest.getSizeInventory());
-                tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMF.artefacts, 1, item));
+                tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.artefacts, 1, item));
             }
         }
     }
 
-    public StructureModuleMFR setLoot(String loot) {
+    public StructureModuleMFR setLoot(ResourceLocation loot) {
         this.lootType = loot;
         return this;
     }

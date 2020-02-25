@@ -33,11 +33,6 @@ public class ItemKatanaMFR extends ItemHeavyWeaponMFR {
         return true;
     }
 
-    @Override
-    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
-        return true;
-    }
-
     /**
      * Determines if the weapon can parry
      */

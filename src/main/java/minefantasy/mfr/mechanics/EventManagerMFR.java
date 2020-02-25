@@ -1,17 +1,18 @@
 package minefantasy.mfr.mechanics;
 
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.armour.ItemArmourMFRBase;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.api.helpers.*;
+import minefantasy.mfr.api.helpers.ArmourCalculator;
+import minefantasy.mfr.api.helpers.ArrowEffectsMF;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
+import minefantasy.mfr.api.helpers.EntityHelper;
+import minefantasy.mfr.api.helpers.PowerArmour;
+import minefantasy.mfr.api.helpers.TacticalManager;
+import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.LevelupEvent;
@@ -29,11 +30,10 @@ import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.farming.FarmingHelper;
-import minefantasy.mfr.integration.CustomStone;
-import minefantasy.mfr.item.ClientItemsMFR;
-import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.item.ClientItemsMF;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.packet.LevelupPacket;
 import minefantasy.mfr.packet.SkillPacket;
@@ -68,6 +68,8 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -77,6 +79,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
@@ -87,6 +92,7 @@ import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
@@ -95,6 +101,9 @@ import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
@@ -122,11 +131,11 @@ public class EventManagerMFR {
     }
 
     public static void addSingleDT(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra) {
-        int slot = ((ItemArmor) armour.getItem()).armorType;
+        EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
         String attatch = "";
 
         int rating = (int) (ArmourCalculator.getDTForDisplayPiece(armour, id) * 100F);
-        int equipped = (int) (ArmourCalculator.getDTForDisplayPiece(user.getCurrentArmor(3 - slot), id) * 100F);
+        int equipped = (int) (ArmourCalculator.getDTForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
 
         if (rating > 0 || equipped > 0) {
             if (equipped > 0 && rating != equipped) {
@@ -164,12 +173,12 @@ public class EventManagerMFR {
     }
 
     public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra,
-                                   boolean advanced) {
-        int slot = ((ItemArmor) armour.getItem()).armorType;
+            boolean advanced) {
+        EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
         String attatch = "";
 
         int rating = (int) (ArmourCalculator.getDRForDisplayPiece(armour, id) * 100F);
-        int equipped = (int) (ArmourCalculator.getDRForDisplayPiece(user.getCurrentArmor(3 - slot), id) * 100F);
+        int equipped = (int) (ArmourCalculator.getDRForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
 
         if (rating > 0 || equipped > 0) {
             if (equipped > 0 && rating != equipped) {
@@ -286,7 +295,7 @@ public class EventManagerMFR {
         if (dropper instanceof EntitySkeleton) {
             EntitySkeleton skeleton = (EntitySkeleton) dropper;
 
-            if ((skeleton.getHeldItem() == null || !(skeleton.getHeldItem().getItem() instanceof ItemBow))
+            if ((skeleton.getHeldItemMainhand() == null || !(skeleton.getHeldItemMainhand().getItem() instanceof ItemBow))
                     && event.getDrops() != null && !event.getDrops().isEmpty()) {
                 Iterator<EntityItem> list = event.getDrops().iterator();
 
@@ -354,7 +363,7 @@ public class EventManagerMFR {
             return 1;
         }
 
-        int size = mob.myEntitySize.ordinal() + 1;
+        int size = (int) (mob.width + mob.height + 1);
         if (size <= 1) {
             return 0;
         }
@@ -382,12 +391,12 @@ public class EventManagerMFR {
     @SubscribeEvent
     public void onDeath(LivingDeathEvent event) {
         if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityDragon && event.getSource() != null
-                && event.getSource().getEntity() != null && event.getSource().getEntity() instanceof EntityPlayer) {
-            PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getEntity());
+                && event.getSource().getImmediateSource() != null && event.getSource().getImmediateSource() instanceof EntityPlayer) {
+            PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getImmediateSource());
         }
         if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer && event.getSource() != null
-                && event.getEntity().getEntity() != null && event.getSource().getEntity() instanceof EntityDragon) {
-            PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getSource(), -1);
+                && event.getEntity() != null && event.getSource().getImmediateSource() instanceof EntityDragon) {
+            PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getEntity(), -1);
         }
         Entity dropper = event.getEntity();
 
@@ -497,10 +506,10 @@ public class EventManagerMFR {
         if (dead instanceof EntityZombie) {
             dropBook(dead, 2);
         }
-        if (source != null && source.getEntity() != null) {
-            if (source.getEntity() instanceof EntityLivingBase) {
-                hunter = (EntityLivingBase) source.getEntity();
-                weapon = hunter.getHeldItem();
+        if (source != null && source.getImmediateSource() != null) {
+            if (source.getImmediateSource() instanceof EntityLivingBase) {
+                hunter = (EntityLivingBase) source.getImmediateSource();
+                weapon = hunter.getHeldItemMainhand();
                 if (hunter instanceof EntityPlayer) {
                     addKill((EntityPlayer) hunter, dead);
                 }
@@ -573,9 +582,8 @@ public class EventManagerMFR {
     public void useHoe(UseHoeEvent event) {
         Block block = (Block) event.getWorld().getBlockState(event.getPos());
         if (block != Blocks.FARMLAND && FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
-            event.getEntityPlayer().swingItem();
-            event.getWorld().playAuxSFXAtEntity(event.entityPlayer, 2001, event.x, event.y, event.z,
-                    Block.getIdFromBlock(block) + (event.getWorld().getBlockState(event.getPos()) << 12));
+            event.getEntityPlayer().swingArm(event.getEntityPlayer().getActiveHand());
+            event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL, SoundCategory.AMBIENT, 12, 1F );
             event.setCanceled(true);
         }
     }
@@ -602,21 +610,19 @@ public class EventManagerMFR {
 
     public void playerMineBlock(BlockEvent.BreakEvent event) {
         EntityPlayer player = event.getPlayer();
-        ItemStack held = player.getHeldItem();
-        Block broken = event.block;
+        ItemStack held = player.getHeldItemMainhand();
+        Block broken = (Block) event.getState();
 
         if (broken != null && ConfigHardcore.HCCallowRocks) {
-            if (held == null && CustomStone.isStone(broken)) {
-                entityDropItem(event.getWorld(), event.getPos(),
-                        new ItemStack(ComponentListMFR.sharp_rock, random.nextInt(3) + 1));
+            if (held == null) {
+                entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.sharp_rock, random.nextInt(3) + 1));
             }
             if (held != null && held.getItem() == ComponentListMFR.sharp_rock && broken instanceof BlockLeaves) {
                 if (random.nextInt(5) == 0) {
                     entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
                 }
                 if (random.nextInt(3) == 0) {
-                    entityDropItem(event.getWorld(), event.getPos(),
-                            new ItemStack(ComponentListMFR.vine, random.nextInt(3) + 1));
+                    entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.vine, random.nextInt(3) + 1));
                 }
             }
         }
@@ -626,14 +632,14 @@ public class EventManagerMFR {
             ItemWeaponMFR.applyFatigue(player, points, 20F);
 
             if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
-                player.addPotionEffect(new PotionEffect(Potion.digSlowdown.id, 100, 1));
+                player.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 100, 1));
             }
         }
     }
 
-    public EntityItem entityDropItem(World world, int x, int y, int z, ItemStack item) {
+    public EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {
         if (item.getCount() != 0 && item.getItem() != null) {
-            EntityItem entityitem = new EntityItem(world, x + 0.5D, y + 0.5D, z + 0.5D, item);
+            EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, item);
             entityitem.setPickupDelay(10);
             world.spawnEntity(entityitem);
             return entityitem;
@@ -697,9 +703,9 @@ public class EventManagerMFR {
                 }
             }
             if (event.getItemStack().getItem() instanceof ItemArmor
-                    && (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase) || ClientItemsMFR.showSpecials(
-                    event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.showAdvancedItemTooltips))) {
-                addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.showAdvancedItemTooltips);
+                    && (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase) || ClientItemsMF.showSpecials(
+                    event.getItemStack(), event.getEntityPlayer().world, event.getToolTip(), event.getFlags()))) {
+                addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
             }
             if (ArmourCalculator.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
                 displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
@@ -784,7 +790,7 @@ public class EventManagerMFR {
                 }
             }
             if (!entity.world.isRemote && entity.getHealth() <= (lowHp / 2) && entity.getRNG().nextInt(200) == 0) {
-                entity.addPotionEffect(new PotionEffect(Potion.confusion.id, 100, 50));
+                entity.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 100, 50));
             }
         }
         if (injury > 0 && !entity.world.isRemote) {
@@ -825,10 +831,8 @@ public class EventManagerMFR {
     public void levelup(LevelupEvent event) {
         EntityPlayer player = event.thePlayer;
         if (!player.world.isRemote) {
-            ((WorldServer) player.world).getEntityTracker().func_151248_b(player,
-                    new LevelupPacket(player, event.theSkill, event.theLevel).generatePacket());
-            ((WorldServer) player.world).getEntityTracker().func_151248_b(player,
-                    new SkillPacket(player, event.theSkill).generatePacket());
+            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new LevelupPacket(player, event.theSkill, event.theLevel).generatePacket());
+            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new SkillPacket(player, event.theSkill).generatePacket());
         }
     }
 
@@ -836,8 +840,7 @@ public class EventManagerMFR {
     public void syncSkill(SyncSkillEvent event) {
         EntityPlayer player = event.thePlayer;
         if (!player.world.isRemote) {
-            ((WorldServer) player.world).getEntityTracker().func_151248_b(player,
-                    new SkillPacket(player, event.theSkill).generatePacket());
+            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new SkillPacket(player, event.theSkill).generatePacket());
         }
     }
 
@@ -847,7 +850,7 @@ public class EventManagerMFR {
 
         EntityItem drop = event.getItem();
         ItemStack item = drop.getItem();
-        ItemStack held = player.getHeldItem();
+        ItemStack held = player.getHeldItemMainhand();
 
         if (held != null && held.getItem() instanceof ISmithTongs) {
             if (!TongsHelper.hasHeldItem(held)) {
@@ -890,7 +893,7 @@ public class EventManagerMFR {
             IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
             showHeld = !cogwork.isArmoured("right_arm");
         }
-        event.renderItem = showHeld;
+        event.setRenderItem(showHeld);
     }
 
     @SideOnly(Side.CLIENT)
@@ -919,11 +922,11 @@ public class EventManagerMFR {
 
             if (event.getRenderer() instanceof RenderPlayer) {
                 RenderPlayer RP = (RenderPlayer) event.getRenderer();
-                ModelBiped[] layers = new ModelBiped[]{RP.modelArmor, RP.modelArmorChestplate};
+                ModelBiped[] layers = new ModelBiped[]{RP.getMainModel()};
 
                 for (ModelBiped model : layers) {
-                    model.bipedHead.isHidden = model.bipedHeadwear.isHidden = model.bipedEars.isHidden = renderHead;
-                    model.bipedBody.isHidden = model.bipedCloak.isHidden = renderBody;
+                    model.bipedHead.isHidden = model.bipedHeadwear.isHidden = model.bipedHead.isHidden = renderHead;
+                    model.bipedBody.isHidden = renderBody;
 
                     model.bipedLeftArm.isHidden = renderLeftArm;
                     model.bipedRightArm.isHidden = renderRightArm;

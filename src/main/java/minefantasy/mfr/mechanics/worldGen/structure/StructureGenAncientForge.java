@@ -1,15 +1,17 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
-import minefantasy.mf2.block.list.BlockListMF;
+import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.world.storage.loot.LootTableList;
 
 import java.util.Random;
 
 public class StructureGenAncientForge extends StructureModuleMFR {
-    public StructureGenAncientForge(World world, int x, int y, int z, int d) {
-        super(world, x, y, z, d);
+    public StructureGenAncientForge(World world, BlockPos pos, int d) {
+        super(world, pos, d);
     }
 
     public StructureGenAncientForge(World world, StructureCoordinates position) {
@@ -29,28 +31,28 @@ public class StructureGenAncientForge extends StructureModuleMFR {
 
     @Override
     public void generate() {
-        placeBlock(Blocks.stonebrick, getRandomMetadata(rand), 0, 0, -1);
+        placeBlock(Blocks.STONEBRICK, new BlockPos(0, 0, -1));
 
         int width = 14;
         int depth = 16;
         // FLOOR
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
-                placeBlock(Blocks.stonebrick, getRandomMetadata(rand), x, 0, z);
+                placeBlock(Blocks.STONEBRICK, new BlockPos(x, 0, z));
             }
         }
 
         // CEIL
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
-                placeBlock(Blocks.stonebrick, getRandomMetadata(rand), x, 5, z);
+                placeBlock(Blocks.STONEBRICK, new BlockPos(x, 5, z));
             }
         }
         // WALLS
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
                 for (int y = 1; y <= 4; y++) {
-                    placeBlock(Blocks.stonebrick, getRandomMetadata(rand), x, y, z);
+                    placeBlock(Blocks.STONEBRICK, new BlockPos(x, y, z));
                 }
             }
         }
@@ -59,7 +61,7 @@ public class StructureGenAncientForge extends StructureModuleMFR {
             for (int z = 1; z <= depth - 1; z++) {
                 for (int y = 1; y <= 4; y++) {
                     if (x % 4 != 0 || z % 4 != 0)
-                        placeBlock(Blocks.air, 0, x, y, z);
+                        placeBlock(Blocks.AIR, new BlockPos(x, y, z));
                 }
             }
         }
@@ -68,7 +70,7 @@ public class StructureGenAncientForge extends StructureModuleMFR {
         for (int x = -3; x <= 3; x++) {
             for (int z = 5; z <= 11; z++) {
                 for (int y = -3; y <= 0; y++) {
-                    placeBlock(y == 0 ? BlockListMF.mythic_decor : Blocks.obsidian, 0, x, y, z);
+                    placeBlock(y == 0 ? BlockListMFR.MYTHIC_DECOR : Blocks.OBSIDIAN, new BlockPos(x, y, z));
                 }
             }
         }
@@ -76,62 +78,62 @@ public class StructureGenAncientForge extends StructureModuleMFR {
         for (int x = -2; x <= 2; x++) {
             for (int z = 6; z <= 10; z++) {
                 for (int y = -2; y <= 0; y++) {
-                    placeBlock(Blocks.air, 0, x, y, z);
+                    placeBlock(Blocks.AIR, new BlockPos(x, y, z));
                 }
             }
         }
         // LAVA
         for (int x = -2; x <= 2; x++) {
             for (int z = 6; z <= 10; z++) {
-                placeBlock(Blocks.lava, 0, x, -2, z);
+                placeBlock(Blocks.LAVA, new BlockPos(x, -2, z));
             }
         }
-        placeBlock(Blocks.air, 0, 0, 2, depth / 2);
-        placeBlock(Blocks.air, 0, 0, 3, depth / 2);
-        placeBlock(Blocks.air, 0, 0, 4, depth / 2);
+        placeBlock(Blocks.AIR, new BlockPos(0, 2, depth / 2));
+        placeBlock(Blocks.AIR, new BlockPos(0, 3, depth / 2));
+        placeBlock(Blocks.AIR, new BlockPos(0, 4, depth / 2));
 
-        placeBlock(BlockListMF.mythic_decor, 1, -3, 0, depth / 2);
-        placeBlock(BlockListMF.mythic_decor, 1, +3, 0, depth / 2);
-        placeBlock(BlockListMF.mythic_decor, 1, 0, 0, depth / 2 + 3);
-        placeBlock(BlockListMF.mythic_decor, 1, 0, 0, depth / 2 - 3);
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-3, 0, depth / 2));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(+3, 0, depth / 2));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(0, 0, depth / 2 + 3));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(0, 0, depth / 2 - 3));
 
-        placeBlock(BlockListMF.mythic_decor, 1, -3, 0, depth / 2 - 3);
-        placeBlock(BlockListMF.mythic_decor, 1, -3, 0, depth / 2 + 3);
-        placeBlock(BlockListMF.mythic_decor, 1, +3, 0, depth / 2 - 3);
-        placeBlock(BlockListMF.mythic_decor, 1, +3, 0, depth / 2 + 3);
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-3, 0, depth / 2 - 3));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-3, 0, depth / 2 + 3));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(+3, 0, depth / 2 - 3));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(+3, 0, depth / 2 + 3));
 
-        placeBlock(Blocks.obsidian, 0, 0, 0, depth / 2);
-        placeBlock(Blocks.obsidian, 0, 0, 0, depth / 2 - 1);
-        placeBlock(Blocks.obsidian, 0, 0, 0, depth / 2 - 2);
+        placeBlock(Blocks.OBSIDIAN, new BlockPos(0, 0, depth / 2));
+        placeBlock(Blocks.OBSIDIAN, new BlockPos(0, 0, depth / 2 - 1));
+        placeBlock(Blocks.OBSIDIAN, new BlockPos(0, 0, depth / 2 - 2));
 
-        placeBlock(BlockListMF.cruciblemythic, 0, 0, 1, depth / 2);
-        placeBlock(Blocks.end_portal_frame, 0, 3, 0, depth / 2 - 1);
-        placeBlock(Blocks.end_portal_frame, 0, -3, 0, depth / 2 - 1);
-        placeBlock(Blocks.end_portal_frame, 0, -1, 0, depth / 2 + 3);
-        placeBlock(Blocks.end_portal_frame, 0, -1, 0, depth / 2 - 3);
+        placeBlock(BlockListMFR.CRUCIBLE_MYTHIC, new BlockPos(0, 1, depth / 2));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(3, 0, depth / 2 - 1));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(-3, 0, depth / 2 - 1));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(-1, 0, depth / 2 + 3));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(-1, 0, depth / 2 - 3));
 
-        placeBlock(Blocks.end_portal_frame, 0, 3, 0, depth / 2 + 1);
-        placeBlock(Blocks.end_portal_frame, 0, -3, 0, depth / 2 + 1);
-        placeBlock(Blocks.end_portal_frame, 0, 1, 0, depth / 2 + 3);
-        placeBlock(Blocks.end_portal_frame, 0, 1, 0, depth / 2 - 3);
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(3, 0, depth / 2 + 1));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(-3, 0, depth / 2 + 1));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(1, 0, depth / 2 + 3));
+        placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(1, 0, depth / 2 - 3));
 
         for (int y = 0; y < 4; y++) {
-            placeBlock(Blocks.air, 0, 0, y + 1, depth / 2 - 4);
+            placeBlock(Blocks.AIR, new BlockPos(0, y + 1, depth / 2 - 4));
         }
-        placeBlock(Blocks.glowstone, 0, 0, 5, depth / 2);
-        placeBlock(Blocks.air, 0, 0, 1, 0);
-        placeBlock(Blocks.air, 0, 0, 2, 0);
+        placeBlock(Blocks.GLOWSTONE, new BlockPos(0, 5, depth / 2));
+        placeBlock(Blocks.AIR, new BlockPos(0, 1, 0));
+        placeBlock(Blocks.AIR, new BlockPos(0, 2, 0));
 
-        getRandomForge(0, 0, depth, direction).generate();
+        getRandomForge(new BlockPos(0, 0, depth), direction).generate();
 
-        getRandomForge(width / 2, 0, depth / 2, rotateLeft()).generate();
-        getRandomForge(-width / 2, 0, depth / 2, rotateRight()).generate();
+        getRandomForge(new BlockPos(width / 2, 0, depth / 2), rotateLeft()).generate();
+        getRandomForge(new BlockPos(-width / 2, 0, depth / 2), rotateRight()).generate();
 
     }
 
-    private StructureModuleMFR getRandomForge(int x, int y, int z, int newDirection) {
-        int[] coord = this.offsetPos(x, y, z, direction);
-        StructureGenAFRoom room = new StructureGenAFRoom(world, coord[0], coord[1], coord[2], newDirection);
+    private StructureModuleMFR getRandomForge(BlockPos pos, int newDirection) {
+        BlockPos coord = this.offsetPos(pos, direction);
+        StructureGenAFRoom room = new StructureGenAFRoom(world, coord, newDirection);
 
         if (newDirection == direction) {
             room.giveTrinket();
@@ -141,14 +143,14 @@ public class StructureGenAncientForge extends StructureModuleMFR {
         return room;
     }
 
-    private String getRandomLoot() {
+    private ResourceLocation getRandomLoot() {
         int i = rand.nextInt(3);
         if (i == 0) {
-            return rand.nextBoolean() ? ChestGenHooks.STRONGHOLD_CORRIDOR : ChestGenHooks.STRONGHOLD_CROSSING;
+            return rand.nextBoolean() ? LootTableList.CHESTS_STRONGHOLD_CORRIDOR : LootTableList.CHESTS_STRONGHOLD_CROSSING;
         }
         if (i == 1) {
-            return rand.nextBoolean() ? ChestGenHooks.PYRAMID_DESERT_CHEST : ChestGenHooks.PYRAMID_JUNGLE_CHEST;
+            return rand.nextBoolean() ? LootTableList.CHESTS_DESERT_PYRAMID : LootTableList.CHESTS_JUNGLE_TEMPLE;
         }
-        return ChestGenHooks.DUNGEON_CHEST;
+        return LootTableList.CHESTS_SIMPLE_DUNGEON;
     }
 }

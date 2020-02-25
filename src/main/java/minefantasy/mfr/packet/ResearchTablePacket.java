@@ -4,15 +4,16 @@ import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.block.tile.TileEntityResearch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 
 public class ResearchTablePacket extends PacketMF {
     public static final String packetName = "MF2_ResearchTblPkt";
-    private int[] coords = new int[3];
+    private BlockPos coords;
     private int id;
     private float[] progress = new float[2];
 
     public ResearchTablePacket(TileEntityResearch tile) {
-        coords = new int[]{tile.xCoord, tile.yCoord, tile.zCoord};
+        coords = tile.getPos();
         id = tile.researchID;
         progress = new float[]{tile.progress, tile.maxProgress};
         if (progress[1] <= 0) {
@@ -25,8 +26,8 @@ public class ResearchTablePacket extends PacketMF {
 
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
-        coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
-        TileEntity entity = player.worldObj.getTileEntity(coords[0], coords[1], coords[2]);
+        coords = new BlockPos(packet.readInt(), packet.readInt(), packet.readInt());
+        TileEntity entity = player.world.getTileEntity(coords);
         float prog1 = packet.readFloat();
         float prog2 = packet.readFloat();
         int ID = packet.readInt();
@@ -50,9 +51,7 @@ public class ResearchTablePacket extends PacketMF {
 
     @Override
     public void write(ByteBuf packet) {
-        for (int a = 0; a < coords.length; a++) {
-            packet.writeInt(coords[a]);
-        }
+        packet.writeLong(coords.toLong());
         packet.writeFloat(progress[0]);
         packet.writeFloat(progress[1]);
         packet.writeInt(id);

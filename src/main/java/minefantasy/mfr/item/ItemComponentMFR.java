@@ -16,14 +16,12 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.decor.BlockComponent;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -230,23 +228,6 @@ public class ItemComponentMFR extends Item implements ITieredComponent {
 
     protected float getWeightModifier(ItemStack stack) {
         return CustomToolHelper.getWeightModifier(stack, 1.0F);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    //// Probably not the cleanest way to do this, but I decided to because for this
-    //// item,
-    /// the color will always be only one layer from only one material
-
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        // return CustomToolHelper.getColourFromItemStack(item, layer,
-        // super.getColorFromItemStack(item, layer));
-        if (isCustom) {
-            CustomMaterial mat = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-            if (mat != null)
-                return mat.getColourInt();
-        }
-        return super.getColorFromItemStack(item, layer);
     }
 
     @Override

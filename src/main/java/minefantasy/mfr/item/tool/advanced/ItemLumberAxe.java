@@ -1,12 +1,10 @@
 package minefantasy.mfr.item.tool.advanced;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.item.tool.ItemAxeMF;
-import minefantasy.mfr.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -94,9 +92,6 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem {
 
     private void breakChain(World world, BlockPos pos, ItemStack item, IBlockState state, EntityLivingBase user, int maxLogs, Block orient) {
         if (maxLogs > 0 && isLog(world, pos, orient)) {
-            if (MineFantasyReborn.isBukkitServer() && BukkitUtils.cantBreakBlock((EntityPlayer) user, pos)) {
-                return;
-            }
 
             IBlockState newblock = world.getBlockState(pos);
             breakSurrounding(item, world, newblock, pos, user);
@@ -135,9 +130,6 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem {
                         BlockPos blockPos = pos.add(x1 +facing.getFrontOffsetX(), y1 + facing.getFrontOffsetY(),z1 + facing.getFrontOffsetZ()  );
 
                         if (!(x1 + facing.getFrontOffsetX() == 0 && y1 + facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
-                            if (MineFantasyReborn.isBukkitServer() && BukkitUtils.cantBreakBlock((EntityPlayer) user, blockPos)) {
-                                break;
-                            }
 
                             Block newblock = world.getBlockState(blockPos).getBlock();
 

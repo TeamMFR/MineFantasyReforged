@@ -1,5 +1,6 @@
 package minefantasy.mfr.packet;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.api.material.CustomMaterial;
@@ -10,13 +11,13 @@ import net.minecraft.tileentity.TileEntity;
 
 public class StorageBlockPacket extends PacketMF {
     public static final String packetName = "MF2_StoragePkt";
-    private int[] coords = new int[3];
+    private BlockPos coords;
     private ItemStack component;
     private String type, tex, materialName;
     private int stackSize, max;
 
     public StorageBlockPacket(TileEntityComponent tile) {
-        this.coords = new int[]{tile.xCoord, tile.yCoord, tile.zCoord};
+        this.coords = tile.getPos();
         this.type = tile.type;
         this.tex = tile.tex;
         this.materialName = tile.material != null ? tile.material.name : "steel";
@@ -30,8 +31,8 @@ public class StorageBlockPacket extends PacketMF {
 
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
-        coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
-        TileEntity entity = player.world.getTileEntity(coords[0], coords[1], coords[2]);
+        coords = new BlockPos(packet.readInt(), packet.readInt(), packet.readInt());
+        TileEntity entity = player.world.getTileEntity(coords);
         type = ByteBufUtils.readUTF8String(packet);
         tex = ByteBufUtils.readUTF8String(packet);
         materialName = ByteBufUtils.readUTF8String(packet);
@@ -57,9 +58,7 @@ public class StorageBlockPacket extends PacketMF {
 
     @Override
     public void write(ByteBuf packet) {
-        for (int a = 0; a < coords.length; a++) {
-            packet.writeInt(coords[a]);
-        }
+        packet.writeLong(coords.toLong());
         ByteBufUtils.writeUTF8String(packet, type);
         ByteBufUtils.writeUTF8String(packet, tex);
         ByteBufUtils.writeUTF8String(packet, materialName);

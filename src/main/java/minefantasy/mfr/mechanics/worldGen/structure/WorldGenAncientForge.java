@@ -2,6 +2,7 @@ package minefantasy.mfr.mechanics.worldGen.structure;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -10,8 +11,8 @@ public class WorldGenAncientForge extends WorldGenStructureBase {
     }
 
     @Override
-    protected StructureModuleMFR getStartPiece(World world, int x, int y, int z, int direction) {
-        return new StructureGenAncientForgeEntry(world, x, y, z, direction);
+    protected StructureModuleMFR getStartPiece(World world, BlockPos pos, int direction) {
+        return new StructureGenAncientForgeEntry(world, pos, direction);
     }
 
     @Override
@@ -25,8 +26,8 @@ public class WorldGenAncientForge extends WorldGenStructureBase {
         for (int x = -1; x <= 1; x++) {
             for (int y = 0; y < 3; y++) {
                 for (int z = 1; z <= 2; z++) {
-                    int[] pos = piece.offsetPos(x, y, z, piece.direction);
-                    Material material = piece.world.getBlockState(pos[0], pos[1], pos[2]).getMaterial();
+                    BlockPos pos = piece.offsetPos(new BlockPos(x, y, z), piece.direction);
+                    Material material = piece.world.getBlockState(pos).getMaterial();
 
                     if (!material.isOpaque()) {
                         return false;
@@ -36,8 +37,8 @@ public class WorldGenAncientForge extends WorldGenStructureBase {
                     }
                 }
                 for (int z = 0; z > -2; z--) {
-                    Block block = piece.getBlock(x, y, z);
-                    if (block.getMaterial().isSolid()) {
+                    IBlockState state = piece.getBlock(new BlockPos(x, y, z));
+                    if (state.getMaterial().isSolid()) {
                         return false;
                     }
                 }

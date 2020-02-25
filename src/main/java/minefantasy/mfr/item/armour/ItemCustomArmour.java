@@ -86,7 +86,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
     }
 
     @Override
-    public String getArmourTextureName(ItemStack stack, Entity entity, int slot, String type) {
+    public String getArmourTextureName(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
         String tex = "minefantasy2:textures/models/armour/custom/" + specialDesign + "/" + texture;
         if (type == null)// bottom layer
         {
@@ -153,8 +153,8 @@ public class ItemCustomArmour extends ItemArmourMFR {
     }
 
     @Override
-    public float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
-        float baseWeight = armourWeight * ArmourCalculator.sizes[slot.getIndex()];
+    public float getPieceWeight(ItemStack item) {
+        float baseWeight = armourWeight * ArmourCalculator.sizes[getEquipmentSlot().getIndex()];
         CustomMaterial material = this.getCustomMaterial(item);
         if (material != null) {
             baseWeight *= material.density;

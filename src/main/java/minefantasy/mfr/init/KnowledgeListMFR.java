@@ -1,4 +1,4 @@
-package minefantasy.mfr.knowledge;
+package minefantasy.mfr.init;
 
 import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;

@@ -61,7 +61,7 @@ public class AI_MinotaurFindTarget extends EntityAITarget {
                 }
             }
 
-            List list = this.taskOwner.world.selectEntitiesWithinAABB(this.targetClass,
+            List list = this.taskOwner.world.getEntitiesWithinAABB(this.targetClass,
                     this.taskOwner.getCollisionBoundingBox().expand(d0, 4.0D, d0), this.targetEntitySelector);
             Collections.sort(list, this.theNearestAttackableTargetSorter);
 

@@ -284,16 +284,12 @@ public class ItemFoodMF extends ItemFood {
         {
             ItemStack left = getLeftOver(food);
             if (left != null) {
-                if (food.getCount() == 1) {
-                    return left;
-                }
                 if (!consumer.inventory.addItemStackToInventory(left) && !consumer.world.isRemote) {
                     consumer.entityDropItem(left, 1.0F);
                 }
             }
             food.shrink(1);
         }
-        return food;
     }
 
     protected ItemStack getLeftOver(ItemStack food) {

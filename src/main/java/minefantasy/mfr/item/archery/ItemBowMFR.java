@@ -18,6 +18,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
@@ -122,7 +123,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
                 firepower = 1.0F;
             }
 
-            EntityArrow var8 = new EntityArrow(world, player, firepower * 2.0F);
+            EntityArrow var8 = new EntityTippedArrow(world, player);
 
             if (firepower == 1.0F) {
                 var8.setIsCritical(true);

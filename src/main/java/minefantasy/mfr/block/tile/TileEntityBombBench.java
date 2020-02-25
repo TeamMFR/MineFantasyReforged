@@ -9,7 +9,7 @@ import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.item.gadget.ItemBomb;
 import minefantasy.mfr.item.gadget.ItemExplodingArrow;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.packet.BombBenchPacket;
 import net.minecraft.entity.item.EntityItem;

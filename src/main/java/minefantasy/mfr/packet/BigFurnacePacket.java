@@ -4,14 +4,15 @@ import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.block.tile.TileEntityBigFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 
 public class BigFurnacePacket extends PacketMF {
     public static final String packetName = "MF2_BigfurnPkt";
-    private int[] coords = new int[3];
+    private BlockPos coords;
     private int fuel, progress, burn, doorAngle;
 
     public BigFurnacePacket(TileEntityBigFurnace tile) {
-        coords = new int[]{tile.xCoord, tile.yCoord, tile.zCoord};
+        coords = tile.getPos();
         fuel = tile.fuel;
         progress = tile.progress;
         // heat = (int)tile.heat;
@@ -25,7 +26,7 @@ public class BigFurnacePacket extends PacketMF {
 
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
-        coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
+        coords = new BlockPos(packet.readInt(), packet.readInt(), packet.readInt());
 
         fuel = packet.readInt();
         progress = packet.readInt();
@@ -34,7 +35,7 @@ public class BigFurnacePacket extends PacketMF {
         // justShared = packet.readInt();
         doorAngle = packet.readInt();
 
-        TileEntity entity = player.worldObj.getTileEntity(coords[0], coords[1], coords[2]);
+        TileEntity entity = player.world.getTileEntity(coords);
 
         if (entity != null && entity instanceof TileEntityBigFurnace) {
             TileEntityBigFurnace tile = (TileEntityBigFurnace) entity;
@@ -45,7 +46,7 @@ public class BigFurnacePacket extends PacketMF {
             // tile.justShared = justShared;
             tile.doorAngle = doorAngle;
 
-            if (tile.getWorldObj().isRemote) {
+            if (tile.getWorld().isRemote) {
                 tile.isBurningClient = (burn == 1);
             }
         }
@@ -58,9 +59,7 @@ public class BigFurnacePacket extends PacketMF {
 
     @Override
     public void write(ByteBuf packet) {
-        for (int a = 0; a < coords.length; a++) {
-            packet.writeInt(coords[a]);
-        }
+        packet.writeLong(coords.toLong());
         packet.writeInt(fuel);
         packet.writeInt(progress);
         // packet.writeInt(heat);

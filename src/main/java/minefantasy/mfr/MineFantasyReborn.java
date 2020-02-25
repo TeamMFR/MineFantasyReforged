@@ -23,6 +23,13 @@ public class MineFantasyReborn {
     @Mod.Instance
     public static MineFantasyReborn instance;
 
+    /**
+     * Determines if a player name is that of a MF modder
+     */
+    public static boolean isNameModder(String name) {
+        return name.equals("Galactic_Hiker") || name.equals("tim4200") || name.equals("Sirse") || name.equals("ThatPolishKid99");
+    }
+
     private static Logger logger;
     public static boolean isDebug() {
         return ConfigExperiment.debug.equals("AU32-Db42-Acf6-Ggh9-9E8d");

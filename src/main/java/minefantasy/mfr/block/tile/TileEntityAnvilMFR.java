@@ -16,7 +16,7 @@ import minefantasy.mfr.container.ContainerAnvilMF;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
 import minefantasy.mfr.item.heatable.ItemHeated;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.packet.AnvilPacket;
@@ -34,10 +34,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.WorldServer;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class TileEntityAnvilMFR extends TileEntity implements IInventory, IAnvil, IQualityBalance {

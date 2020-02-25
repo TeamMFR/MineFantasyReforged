@@ -33,7 +33,6 @@ public class CustomToolListMFR {
     public static ItemKnifeMFR standard_knife;
     public static ItemNeedle standard_needle;
     public static ItemSaw standard_saw;
-    public static ItemSpanner standard_spanner;
     public static ItemBasicCraftTool standard_spoon, standard_mallet;
 
     public static ItemBowMFR standard_bow;
@@ -112,8 +111,6 @@ public class CustomToolListMFR {
         standard_saw = (ItemSaw) new ItemSaw(design + "_saw", ToolMaterial.IRON, 0, 0).setCustom(design)
                 .setCreativeTab(tab);
         standard_tongs = (ItemTongs) new ItemTongs(design + "_tongs", ToolMaterial.IRON, 0).setCustom(design)
-                .setCreativeTab(tab);
-        standard_spanner = (ItemSpanner) new ItemSpanner(design + "_spanner", 0, 0).setCustom(design)
                 .setCreativeTab(tab);
 
         standard_spoon = (ItemBasicCraftTool) new ItemBasicCraftTool(design + "_spoon", "spoon", 0, 64)

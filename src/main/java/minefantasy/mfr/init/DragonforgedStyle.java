@@ -37,7 +37,6 @@ public class DragonforgedStyle {
     public static ItemKnifeMFR dragonforged_knife;
     public static ItemNeedle dragonforged_needle;
     public static ItemSaw dragonforged_saw;
-    public static ItemSpanner dragonforged_spanner;
 
     public static ItemBowMFR dragonforged_bow;
 
@@ -116,8 +115,6 @@ public class DragonforgedStyle {
                 .setCreativeTab(tab);
         dragonforged_saw = (ItemSaw) new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab);
         dragonforged_tongs = (ItemTongs) new ItemTongs(design + "_tongs", mat, 0).setCustom(design).setCreativeTab(tab);
-        dragonforged_spanner = (ItemSpanner) new ItemSpanner(design + "_spanner", 0, 0).setCustom(design)
-                .setCreativeTab(tab);
 
         dragonforged_chain_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "chain_helmet",
                 ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
@@ -182,7 +179,6 @@ public class DragonforgedStyle {
         SpecialForging.addDragonforgeCraft(CustomToolListMFR.standard_mattock, dragonforged_mattock);
         SpecialForging.addDragonforgeCraft(CustomToolListMFR.standard_spade, dragonforged_spade);
         SpecialForging.addDragonforgeCraft(CustomToolListMFR.standard_scythe, dragonforged_scythe);
-        SpecialForging.addDragonforgeCraft(CustomToolListMFR.standard_spanner, dragonforged_spanner);
         SpecialForging.addDragonforgeCraft(CustomToolListMFR.standard_lumber, dragonforged_lumber);
 
         SpecialForging.addDragonforgeCraft(CustomToolListMFR.standard_hammer, dragonforged_hammer);

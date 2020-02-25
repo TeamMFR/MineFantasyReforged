@@ -69,16 +69,6 @@ public class ContainerBigFurnace extends Container {
     }
 
     @Override
-    public void addCraftingToCrafters(Container icrafting) {
-        super.addCraftingToCrafters(icrafting);
-        icrafting.updateProgressBar( 0, smelter.progress);
-        icrafting.updateProgressBar( 1, smelter.fuel);
-        icrafting.updateProgressBar( 2, smelter.maxFuel);
-        icrafting.updateProgressBar( 3, (int) smelter.heat);
-        icrafting.updateProgressBar( 4, (int) smelter.maxHeat);
-    }
-
-    @Override
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 

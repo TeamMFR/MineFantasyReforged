@@ -327,7 +327,7 @@ public class TileEntityCarpenterMFR extends TileEntity implements IInventory, IC
             }
         }
         if (colour != -1 && canColour) {
-            item.func_82813_b(result, colour);
+            item.setColor(result, colour);
         }
         return result;
     }

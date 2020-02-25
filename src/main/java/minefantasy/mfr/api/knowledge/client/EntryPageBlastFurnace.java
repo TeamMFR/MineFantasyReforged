@@ -4,7 +4,8 @@ import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderEntityItem;
+import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
@@ -47,7 +48,7 @@ public class EntryPageBlastFurnace extends EntryPage {
 
         renderRecipe(parent, x, y, f, posX, posY);
         if (tooltipStack != null) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, false);
+            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
             List<String> parsedTooltip = new ArrayList();
             boolean first = true;
 
@@ -89,7 +90,7 @@ public class EntryPageBlastFurnace extends EntryPage {
 
     public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
                            int my) {
-        RenderEntityItem render = new RenderEntityItem();
+        RenderItem render = Minecraft.getMinecraft().getRenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;
         }
@@ -99,10 +100,8 @@ public class EntryPageBlastFurnace extends EntryPage {
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        render.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer,
-                Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
-        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer,
-                Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
+        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
+        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
         RenderHelper.disableStandardItemLighting();
         GL11.glPopMatrix();
 

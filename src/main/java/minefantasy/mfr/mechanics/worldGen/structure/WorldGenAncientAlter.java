@@ -1,5 +1,6 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WorldGenAncientAlter extends WorldGenStructureBase {
@@ -7,14 +8,14 @@ public class WorldGenAncientAlter extends WorldGenStructureBase {
     }
 
     @Override
-    protected StructureModuleMFR getStartPiece(World world, int x, int y, int z, int direction) {
-        return new StructureGenAncientAlter(world, x, y, z, direction);
+    protected StructureModuleMFR getStartPiece(World world, BlockPos pos, int direction) {
+        return new StructureGenAncientAlter(world, pos, direction);
     }
 
     @Override
-    protected boolean isBlockAcceptableOrigin(World world, int x, int y, int z) {
-        return world.getBlock(x, y, z).getMaterial().isSolid() && isValidGround(world, x, y, z)
-                && world.canBlockSeeTheSky(x, y + 2, z);
+    protected boolean isBlockAcceptableOrigin(World world, BlockPos pos) {
+        return world.getBlockState(pos).getMaterial().isSolid() && isValidGround(world, pos)
+                && world.canBlockSeeSky(pos.add(0,2,0));
     }
 
     @Override

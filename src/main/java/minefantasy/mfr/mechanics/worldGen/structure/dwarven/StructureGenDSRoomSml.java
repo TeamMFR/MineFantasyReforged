@@ -159,7 +159,7 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
         placeChest(new BlockPos(width - 3, 1, 6), rotateLeft(), LootTypes.DWARVEN_HOME);
     }
 
-    private void placeChest(BlockPos pos, int d, String loot) {
+    private void placeChest(BlockPos pos, int d, ResourceLocation loot) {
         placeBlock(Blocks.CHEST, pos, d);
         TileEntityChest tile = (TileEntityChest) getTileEntity(pos, direction);
 

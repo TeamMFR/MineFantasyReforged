@@ -9,7 +9,6 @@ import minefantasy.mfr.item.gadget.EnumExplosiveType;
 import minefantasy.mfr.item.gadget.EnumFuseType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import minefantasy.mfr.mechanics.CombatMechanics;
-import minefantasy.mfr.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -278,11 +277,6 @@ public class EntityBomb extends Entity {
 
                 while (splashDamage.hasNext()) {
                     Entity entityHit = (Entity) splashDamage.next();
-
-                    if (MineFantasyReborn.isBukkitServer()
-                            && BukkitUtils.cantDamage(thrower != null ? thrower : this, entityHit)) {
-                        continue;
-                    }
 
                     double distanceToEntity = this.getDistanceToEntity(entityHit);
                     double radius = getRangeOfBlast();

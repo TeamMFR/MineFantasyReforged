@@ -4,14 +4,15 @@ import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.block.tile.decor.TileEntityTrough;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 
 public class TroughPacket extends PacketMF {
     public static final String packetName = "MF2_TroughPacket";
-    private int[] coords = new int[3];
+    private BlockPos coords;
     private int fill;
 
     public TroughPacket(TileEntityTrough tile) {
-        coords = new int[]{tile.xCoord, tile.yCoord, tile.zCoord};
+        coords = tile.getPos();
         fill = tile.fill;
     }
 
@@ -20,8 +21,8 @@ public class TroughPacket extends PacketMF {
 
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
-        coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
-        TileEntity entity = player.worldObj.getTileEntity(coords[0], coords[1], coords[2]);
+        coords = new BlockPos(packet.readInt(), packet.readInt(), packet.readInt());
+        TileEntity entity = player.world.getTileEntity(coords);
         int newFill = packet.readInt();
 
         if (entity != null && entity instanceof TileEntityTrough) {
@@ -37,9 +38,7 @@ public class TroughPacket extends PacketMF {
 
     @Override
     public void write(ByteBuf packet) {
-        for (int a = 0; a < coords.length; a++) {
-            packet.writeInt(coords[a]);
-        }
+        packet.writeLong(coords.toLong());
         packet.writeInt(fill);
     }
 }

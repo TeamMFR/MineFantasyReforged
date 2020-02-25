@@ -8,7 +8,6 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -81,10 +80,6 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial {
                             if (newblock != null && user instanceof EntityPlayer
                                     && ForgeHooks.canHarvestBlock(newblock.getBlock(), (EntityPlayer) user, world, blockPos)
                                     /*&& ForgeHooks.isToolEffective(item, newblock, m)*/) {
-                                if ((MineFantasyReborn.isBukkitServer()
-                                        && BukkitUtils.cantBreakBlock((EntityPlayer) user, blockPos))) {
-                                    continue;
-                                }
 
                                 if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
                                     newblock.getBlock().dropBlockAsItem(world, pos, newblock, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item));
@@ -145,12 +140,6 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial {
 
     protected float getWeightModifier(ItemStack stack) {
         return CustomToolHelper.getWeightModifier(stack, 1.0F);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
     }
 
     @Override

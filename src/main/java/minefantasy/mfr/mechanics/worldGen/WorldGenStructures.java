@@ -1,11 +1,13 @@
 package minefantasy.mfr.mechanics.worldGen;
 
-import minefantasy.mf2.config.ConfigWorldGen;
-import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientAlter;
-import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientForge;
-import minefantasy.mf2.mechanics.worldGen.structure.dwarven.WorldGenDwarvenStronghold;
-import minefantasy.mf2.util.MFLogUtil;
+import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.mechanics.worldGen.structure.WorldGenAncientAlter;
+import minefantasy.mfr.mechanics.worldGen.structure.WorldGenAncientForge;
+import minefantasy.mfr.mechanics.worldGen.structure.dwarven.WorldGenDwarvenStronghold;
+import minefantasy.mfr.util.MFRLogUtil;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -36,15 +38,13 @@ public class WorldGenStructures {
      * Used in testing to determine the potential areas for dwarven entries
      */
     private static void placeGridBeacon(World world, int chunkX, int chunkZ) {
-        int x = (16 * chunkX);
-        int z = (16 * chunkZ);
-        int y = world.getTopSolidOrLiquidBlock(x, z) + 1;
+        int y = world.getTopSolidOrLiquidBlock(new BlockPos((16 * chunkX),1,(16 * chunkZ))).getY();
         for (int x1 = 0; x1 < 3; x1++) {
             for (int z1 = 0; z1 < 3; z1++) {
-                world.setBlock(x + x1, y, z + z1, (x == 0 && z == 0) ? Blocks.gold_block : Blocks.iron_block);
+                world.setBlockState(new BlockPos((16 * chunkX) + x1, y, (16 * chunkZ) + z1), (IBlockState) (((16 * chunkX) == 0 && (16 * chunkZ) == 0) ? Blocks.GOLD_BLOCK : Blocks.IRON_BLOCK));
             }
         }
-        world.setBlock(x + 1, y + 1, z + 1, Blocks.beacon);
+        world.setBlockState(new BlockPos((16 * chunkX) + 1, y + 1, (16 * chunkZ) + 1), (IBlockState) Blocks.BEACON);
     }
 
     private static boolean confineToGrid(int chunkX, int chunkZ, int chunkSize) {
@@ -57,8 +57,8 @@ public class WorldGenStructures {
         WorldGenAncientForge forge = new WorldGenAncientForge();
         for (int x1 = 0; x1 < 16; x1++) {
             for (int z1 = 0; z1 < 16; z1++) {
-                if (forge.generate(world, seed, x + x1, 0, z + z1)) {
-                    MFLogUtil.logDebug("Placed Ancient Forge at " + x + x1 + " " + z + z1);
+                if (forge.generate(world, seed, new BlockPos(x + x1, 0, z + z1))) {
+                    MFRLogUtil.logDebug("Placed Ancient Forge at " + x + x1 + " " + z + z1);
                     return;
                 }
             }
@@ -72,9 +72,9 @@ public class WorldGenStructures {
         WorldGenDwarvenStronghold stronghold = new WorldGenDwarvenStronghold();
         for (int x1 = 0; x1 < 16; x1++) {
             for (int z1 = 0; z1 < 16; z1++) {
-                if (stronghold.generate(world, seed, x + x1, 0, z + z1)) {
+                if (stronghold.generate(world, seed, new BlockPos(x + x1, 0, z + z1))) {
                     ++strongholdCount;
-                    MFLogUtil.logDebug("Placed Dwarven Stronghold in wall at " + x + x1 + " " + z + z1);
+                    MFRLogUtil.logDebug("Placed Dwarven Stronghold in wall at " + x + x1 + " " + z + z1);
                     String s = "Gen: " + strongholdCount + " Strongholds in " + chunkCount + " Chunks = "
                             + ((float) strongholdCount / (float) chunkCount * 100F) + "% cases";
                     System.out.println(s);
@@ -85,9 +85,9 @@ public class WorldGenStructures {
         stronghold.setSurfaceMode(true);
         int x1 = seed.nextInt(16);
         int z1 = seed.nextInt(16);
-        if (stronghold.generate(world, seed, x + x1, 0, z + z1)) {
+        if (stronghold.generate(world, seed, new BlockPos(x + x1, 0, z + z1))) {
             ++strongholdCount;
-            MFLogUtil.logDebug("Placed Dwarven Stronghold on ground at " + x + x1 + " " + z + z1);
+            MFRLogUtil.logDebug("Placed Dwarven Stronghold on ground at " + x + x1 + " " + z + z1);
             String s = "Gen: " + strongholdCount + " Strongholds in " + chunkCount + " Chunks = "
                     + ((float) strongholdCount / (float) chunkCount * 100F) + "% cases";
             System.out.println(s);
@@ -97,7 +97,7 @@ public class WorldGenStructures {
     }
 
     private static void generateAncientAlter(Random seed, int chunkX, int chunkZ, World world) {
-        int spawnZ = world.getSpawnPoint().posZ;
+        int spawnZ = world.getSpawnPoint().getZ();
         int spawnChunkZ = (int) (spawnZ / 16F);
 
         if (chunkZ == spawnChunkZ) {
@@ -108,8 +108,8 @@ public class WorldGenStructures {
             for (int x1 = 0; x1 < 16; x1++) {
                 // for(int z1 = 0; z1 < 16; z1++)
                 {
-                    if (ruin.generate(world, seed, x + x1, 0, spawnZ)) {
-                        MFLogUtil.logDebug("Placed Ancient Alter at " + x + x1 + " " + spawnZ);
+                    if (ruin.generate(world, seed, new BlockPos(x + x1, 0, spawnZ))) {
+                        MFRLogUtil.logDebug("Placed Ancient Alter at " + x + x1 + " " + spawnZ);
                         return;
                     }
                 }

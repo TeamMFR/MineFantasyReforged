@@ -4,6 +4,7 @@ import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -39,11 +40,12 @@ public class StructureGenDSStairs extends StructureModuleMFR {
         for (int x = -width_span; x <= width_span; x++) {
             for (int y = 0; y <= height; y++) {
                 for (int z = 1; z <= depth; z++) {
-                    Block block = this.getBlock(x, y - z, z);
-                    if (!allowBuildOverBlock(block) || this.isUnbreakable(x, y - z, z, direction)) {
+                    BlockPos pos = new BlockPos(x, y, z);
+                    IBlockState state = this.getBlock(pos.add(0,-z,0));
+                    if (!allowBuildOverBlock(state.getBlock()) || this.isUnbreakable(pos.add(0,-z,0), direction)) {
                         return false;
                     }
-                    if (!block.getMaterial(block.getDefaultState()).isSolid()) {
+                    if (!state.getMaterial().isSolid()) {
                         ++emptySpaces;
                     } else {
                         ++filledSpaces;
@@ -79,56 +81,40 @@ public class StructureGenDSStairs extends StructureModuleMFR {
                 // FLOOR
                 blockarray = getFloor(width_span, depth, x, z);
                 if (blockarray != null) {
-                    int meta = (Integer) blockarray[1];
-                    placeBlock((Block) blockarray[0], meta, x, -z - 1, z);
-
-                    placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS, StructureGenAncientForge.getRandomMetadata(rand), x,
-                            -z - 2, z);
+                    placeBlock((Block) blockarray[0], new BlockPos(x, -z - 1, z));
+                    placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS, new BlockPos(x, -z - 2, z));
 
                     if (x == (width_span - 1) || x == -(width_span - 1)) {
-                        placeBlock(BlockListMFR.REINFORCED_STONE, 0, x, -z, z);
+                        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(x, -z, z) );
                     } else {
-                        placeBlock(Blocks.AIR, 0, x, -z, z);
+                        placeBlock(Blocks.AIR,new BlockPos(x, -z, z) );
                     }
                 }
                 // WALLS
                 for (int y = 0; y <= height + 1; y++) {
                     blockarray = getWalls(width_span, height, depth, x, y, z);
                     if (blockarray != null) {
-                        int meta = 0;
-                        if (blockarray[1] instanceof Integer) {
-                            meta = (Integer) blockarray[1];
-                        }
-                        if (blockarray[1] instanceof Boolean) {
-                            meta = (Boolean) blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
-                        }
-                        if (blockarray[1] instanceof String) {
-                            meta = (String) blockarray[1] == "Hall" ? StructureGenDSHall.getRandomEngravedWall(rand)
-                                    : 0;
-                        }
-                        placeBlock((Block) blockarray[0], meta, x, y - z, z);
+                        placeBlock((Block) blockarray[0], new BlockPos(x, y - z, z) );
                     }
                 }
                 // CEILING
                 blockarray = getCeiling(width_span, depth, x, z);
                 if (blockarray != null) {
-                    int meta = (Boolean) blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
-                    placeBlock((Block) blockarray[0], meta, x, height + 1 - z, z);
+                    placeBlock((Block) blockarray[0], new BlockPos(x, height + 1 - z, z) );
                 }
 
                 // TRIM
                 blockarray = getTrim(width_span, depth, x, z);
                 if (blockarray != null) {
-                    int meta = (Boolean) blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
-                    placeBlock((Block) blockarray[0], meta, x, height - z, z);
-                    if ((Block) blockarray[0] == BlockListMFR.REINFORCED_STONE_FRAMED) {
-                        placeBlock(BlockListMFR.REINFORCED_STONE, 0, x, height - z, z);
-                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, 0, x, height - z - 1, z);
+                    placeBlock((Block) blockarray[0], new BlockPos(x, height - z, z) );
+                    if (blockarray[0] == BlockListMFR.REINFORCED_STONE_FRAMED) {
+                        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(x, height - z, z) );
+                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(x, height - z - 1, z) );
 
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(BlockListMFR.REINFORCED_STONE, h == 2 ? 1 : 0, x, h - z - 1, z);
+                            placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos( x, h - z - 1, z));
                         }
-                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, 0, x, -z, z);
+                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(x, -z, z) );
                     }
                 }
 
@@ -141,9 +127,9 @@ public class StructureGenDSStairs extends StructureModuleMFR {
         if (lengthId == -100) {
             this.lengthId = -99;
             if ((pos.getY() > 64 && rand.nextInt(3) != 0) || (pos.getY() >= 56 && rand.nextInt(3) == 0)) {
-                mapStructure(0, -depth, depth, StructureGenDSStairs.class);
+                mapStructure(new BlockPos(0, -depth, depth), StructureGenDSStairs.class);
             } else {
-                mapStructure(0, -depth, depth, StructureGenDSCrossroads.class);
+                mapStructure(new BlockPos(0, -depth, depth), StructureGenDSCrossroads.class);
             }
         }
         ++lengthId;// Stairs don't count toward length
@@ -156,25 +142,25 @@ public class StructureGenDSStairs extends StructureModuleMFR {
         for (int x = -1; x <= 1; x++) {
             for (int y = 1; y <= 3; y++) {
                 for (int z = 0; z >= -1; z--) {
-                    placeBlock(Blocks.AIR, 0, x, y, z);
+                    placeBlock(Blocks.AIR, new BlockPos(x, y, z) );
                 }
             }
-            placeBlock(BlockListMFR.COBBLE_PAVEMENT_STAIR, getStairDirection(reverse()), x, 0, -1);
+            placeBlock(BlockListMFR.COBBLE_PAVEMENT_STAIR, new BlockPos(x, 0, -1) );
         }
     }
 
     protected void buildNext(int width_span, int depth, int height) {
         if (lengthId > 1 && rand.nextInt(3) == 0 && pos.getY() >= minLevel) {
-            mapStructure(0, -depth, depth, StructureGenDSStairs.class);
+            mapStructure(new BlockPos(0, -depth, depth), StructureGenDSStairs.class);
         } else {
-            tryPlaceHall(0, -depth, depth, direction);
+            tryPlaceHall(new BlockPos(0, -depth, depth), direction);
         }
     }
 
-    protected void tryPlaceHall(int x, int y, int z, int d) {
+    protected void tryPlaceHall(BlockPos pos, int d) {
         Class extension = getRandomExtension();
         if (extension != null) {
-            mapStructure(x, y, z, d, extension);
+            mapStructure(pos, d, extension);
         }
     }
 

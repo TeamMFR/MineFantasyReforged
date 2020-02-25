@@ -108,6 +108,7 @@ public class ToolListMFR {
         CustomToolListMFR.load();
         CustomArmourListMFR.load();
 
+        new WeightedRandomChestContent(item, min, max, weight)
         ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(skillbook_artisanry), 1, 5, 50));
         ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(skillbook_construction), 1, 1, 10));
         ChestGenHooks.addItem(ChestGenHooks.VILLAGE_BLACKSMITH, new WeightedRandomChestContent(new ItemStack(ArmourListMFR.leatherapron), 1, 1, 10));
