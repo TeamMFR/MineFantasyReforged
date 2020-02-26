@@ -147,12 +147,6 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-    }
-
-    @Override
     public int getMaxDamage(ItemStack stack) {
         return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
     }

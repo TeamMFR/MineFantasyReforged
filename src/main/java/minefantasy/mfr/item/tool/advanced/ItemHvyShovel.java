@@ -8,7 +8,6 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.util.BukkitUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -86,10 +85,6 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial {
                                         && newblock != null && user instanceof EntityPlayer
                                         && ForgeHooks.canHarvestBlock(newblock.getBlock(), (EntityPlayer) user, world, pos)
                                         && ForgeHooks.isToolEffective(world, pos, item)) {
-                                    if ((MineFantasyReborn.isBukkitServer() && BukkitUtils
-                                            .cantBreakBlock((EntityPlayer) user, blockPos))) {
-                                        continue;
-                                    }
 
                                     if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
                                         newblock.getBlock().dropBlockAsItem(world, blockPos, state, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item));

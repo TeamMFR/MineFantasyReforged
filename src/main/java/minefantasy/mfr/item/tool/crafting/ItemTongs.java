@@ -166,22 +166,6 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        ItemStack held = TongsHelper.getHeldItem(item);
-        boolean hasHeld = held != null;
-        int baseLayer = hasHeld ? 1 : 0;
-        if (hasHeld) // Bottom Layer
-        {
-            if (layer == 0) {
-                return held.getItem().getColorFromItemStack(held, 0);
-            }
-            return CustomToolHelper.getColourFromItemStack(item, layer - 1, super.getColorFromItemStack(item, layer));
-        }
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-    }
-
-    @Override
     public int getMaxDamage(ItemStack stack) {
         return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
     }
@@ -226,7 +210,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs {
                 }
             }
         } else {
-            super.getSubItems( tab, items);
+            super.getSubItems(tab, items);
         }
     }
 

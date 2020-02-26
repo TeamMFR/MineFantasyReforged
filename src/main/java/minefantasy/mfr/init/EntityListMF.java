@@ -1,4 +1,4 @@
-package minefantasy.mfr.entity.list;
+package minefantasy.mfr.init;
 
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import minefantasy.mfr.MineFantasyReborn;

@@ -37,7 +37,6 @@ public class OrnateStyle {
     public static ItemKnifeMFR ornate_knife;
     public static ItemNeedle ornate_needle;
     public static ItemSaw ornate_saw;
-    public static ItemSpanner ornate_spanner;
 
     public static ItemBowMFR ornate_bow;
 
@@ -108,7 +107,6 @@ public class OrnateStyle {
                 .setCreativeTab(tab);
         ornate_saw = (ItemSaw) new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab);
         ornate_tongs = (ItemTongs) new ItemTongs(design + "_tongs", mat, 0).setCustom(design).setCreativeTab(tab);
-        ornate_spanner = (ItemSpanner) new ItemSpanner(design + "_spanner", 0, 0).setCustom(design).setCreativeTab(tab);
 
         ornate_chain_helmet = (ItemCustomArmour) new ItemCustomArmour(design, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD,
                 "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
@@ -175,7 +173,6 @@ public class OrnateStyle {
         SpecialForging.addSpecialCraft(id, CustomToolListMFR.standard_mattock, ornate_mattock);
         SpecialForging.addSpecialCraft(id, CustomToolListMFR.standard_spade, ornate_spade);
         SpecialForging.addSpecialCraft(id, CustomToolListMFR.standard_scythe, ornate_scythe);
-        SpecialForging.addSpecialCraft(id, CustomToolListMFR.standard_spanner, ornate_spanner);
         SpecialForging.addSpecialCraft(id, CustomToolListMFR.standard_lumber, ornate_lumber);
 
         SpecialForging.addSpecialCraft(id, CustomToolListMFR.standard_hammer, ornate_hammer);

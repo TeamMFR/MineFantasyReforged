@@ -7,6 +7,7 @@ import minefantasy.mfr.item.gadget.ItemMine;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
+import net.minecraft.dispenser.IPosition;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -15,7 +16,7 @@ public class BombDispenser implements IBehaviorDispenseItem {
 
     @Override
     public ItemStack dispense(IBlockSource dispenser, ItemStack item) {
-        EnumFacing direction = BlockDispenser.func_149937_b(dispenser.getBlockMetadata());
+        IPosition direction = BlockDispenser.getDispensePosition(dispenser);
         // BlockDispenser
         if (item == null)
             return null;
@@ -24,13 +25,13 @@ public class BombDispenser implements IBehaviorDispenseItem {
             ItemBomb itembomb = (ItemBomb) item.getItem();
             World world = dispenser.getWorld();
 
-            double posX = dispenser.getX() + (direction.getFrontOffsetX() / 2F);
-            double posY = dispenser.getY() + (direction.getFrontOffsetY() / 2F);
-            double posZ = dispenser.getZ() + (direction.getFrontOffsetZ() / 2F);
+            double posX = dispenser.getX() + (direction.getX() / 2F);
+            double posY = dispenser.getY() + (direction.getY() / 2F);
+            double posZ = dispenser.getZ() + (direction.getY() / 2F);
 
-            double xVelocity = +direction.getFrontOffsetX();
-            double yVelocity = +direction.getFrontOffsetY();
-            double zVelocity = +direction.getFrontOffsetZ();
+            double xVelocity = +direction.getX();
+            double yVelocity = +direction.getY();
+            double zVelocity = +direction.getZ();
             float velocityModifier = 1.5F;
 
             if (!world.isRemote) {
@@ -38,7 +39,7 @@ public class BombDispenser implements IBehaviorDispenseItem {
                         ItemBomb.getFuse(item), ItemBomb.getPowder(item));
                 bomb.setPosition(posX, posY, posZ);
                 bomb.setThrowableHeading(xVelocity, yVelocity, zVelocity, 1.0F, velocityModifier);
-                world.spawnEntityInWorld(bomb);
+                world.spawnEntity(bomb);
                 if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
                     bomb.getEntityData().setBoolean("stickyBomb", true);
                 }
@@ -50,13 +51,13 @@ public class BombDispenser implements IBehaviorDispenseItem {
             ItemMine itembomb = (ItemMine) item.getItem();
             World world = dispenser.getWorld();
 
-            double posX = dispenser.getX() + (direction.getFrontOffsetX() / 2F);
-            double posY = dispenser.getY() + (direction.getFrontOffsetY() / 2F);
-            double posZ = dispenser.getZ() + (direction.getFrontOffsetZ() / 2F);
+            double posX = dispenser.getX() + (direction.getX() / 2F);
+            double posY = dispenser.getY() + (direction.getY() / 2F);
+            double posZ = dispenser.getZ() + (direction.getZ() / 2F);
 
-            double xVelocity = +direction.getFrontOffsetX();
-            double yVelocity = +direction.getFrontOffsetY();
-            double zVelocity = +direction.getFrontOffsetZ();
+            double xVelocity = +direction.getX();
+            double yVelocity = +direction.getY();
+            double zVelocity = +direction.getZ();
             float velocityModifier = 0.5F;
 
             if (!world.isRemote) {
@@ -64,7 +65,7 @@ public class BombDispenser implements IBehaviorDispenseItem {
                         ItemBomb.getFuse(item), ItemBomb.getPowder(item));
                 bomb.setPosition(posX, posY, posZ);
                 bomb.setThrowableHeading(xVelocity, yVelocity, zVelocity, 1.0F, velocityModifier);
-                world.spawnEntityInWorld(bomb);
+                world.spawnEntity(bomb);
                 if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
                     bomb.getEntityData().setBoolean("stickyBomb", true);
                 }

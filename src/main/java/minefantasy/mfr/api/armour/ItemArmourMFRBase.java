@@ -267,6 +267,6 @@ public class ItemArmourMFRBase extends ItemArmor implements ISpecialArmor, IArmo
 
 	@Override
 	public float getPieceWeight(ItemStack item) {
-		return  armourWeight * ArmourCalculator.sizes[piece.getIndex()];
+		return  armourWeight * ArmourCalculator.sizes[getEquipmentSlot().getIndex()];
 	}
 }

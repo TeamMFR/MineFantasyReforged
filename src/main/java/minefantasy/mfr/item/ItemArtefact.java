@@ -143,8 +143,7 @@ class Artefact {
             }
         }
         if (lootType != null) {
-            ChestGenHooks.addItem(lootType,
-                    new WeightedRandomChestContent(new ItemStack(item, 1, id), 1, 1, dropWeight));
+            ChestGenHooks.addItem(lootType, new WeightedRandomChestContent(new ItemStack(item, 1, id), 1, 1, dropWeight));
         }
     }
 }

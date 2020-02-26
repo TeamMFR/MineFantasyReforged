@@ -13,7 +13,7 @@ import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.item.armour.ItemApron;
 import minefantasy.mfr.item.tool.ItemLighterMF;
 import minefantasy.mfr.item.tool.crafting.ItemTongs;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

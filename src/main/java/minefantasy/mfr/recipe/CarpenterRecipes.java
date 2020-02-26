@@ -17,7 +17,7 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

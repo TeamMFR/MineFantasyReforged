@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -136,31 +137,31 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
     }
 
     private void buildHomeFurnishings(int width, int depth, int height) {
-        placeBlock(Blocks.FURNACE, rotateLeft(), width, 2, 2);
-        placeBlock(Blocks.DOUBLE_STONE_SLAB, 0, width - 3, 1, 1);
-        placeBlock(Blocks.DOUBLE_STONE_SLAB, 0, width - 3, 1, 2);
+        placeBlock(Blocks.FURNACE, new BlockPos( width, 2, 2));
+        placeBlock(Blocks.DOUBLE_STONE_SLAB, new BlockPos(width - 3, 1, 1));
+        placeBlock(Blocks.DOUBLE_STONE_SLAB,new BlockPos(width - 3, 1, 2));
 
         for (int x = width - 1; x >= (width - 4); x--) {
-            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS, StructureGenAncientForge.getRandomMetadata(rand), x, 1, 5);
-            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS, StructureGenAncientForge.getRandomMetadata(rand), x, 2, 5);
-            placeBlock(Blocks.STONE_SLAB, 0, x, 3, 5);
+            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS, new BlockPos(x, 1, 5) );
+            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS,new BlockPos(x, 2, 5) );
+            placeBlock(Blocks.STONE_SLAB, new BlockPos(x, 3, 5) );
         }
-        placeBlock(Blocks.STONE_SLAB, 0, width - 1, 1, 7);
-        placeBlock(Blocks.STONE_SLAB, 0, width - 2, 1, 7);
-        placeBlock(Blocks.STONE_SLAB, 0, width - 1, 1, 8);
-        placeBlock(Blocks.STONE_SLAB, 0, width - 2, 1, 8);
-        placeBlock(Blocks.CAULDRON, 0, width - 2, 1, 1);
+        placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 1, 1, 7) );
+        placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 2, 1, 7) );
+        placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 1, 1, 8) );
+        placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 2, 1, 8) );
+        placeBlock(Blocks.CAULDRON, new BlockPos(width - 2, 1, 1) );
 
-        placeBlock(Blocks.STONE_BRICK_STAIRS, this.getStairDirection(reverse()), -(width - 1), 1, 1);
-        placeBlock(Blocks.STONE_SLAB, 8, -(width - 1), 1, 2);
-        placeBlock(Blocks.STONE_BRICK_STAIRS, this.getStairDirection(direction), -(width - 1), 1, 3);
+        placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(-(width - 1), 1, 1));
+        placeBlock(Blocks.STONE_SLAB, new BlockPos(-(width - 1), 1, 2) );
+        placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(-(width - 1), 1, 3) );
 
-        placeChest(width - 3, 1, 7, rotateLeft(), LootTypes.DWARVEN_HOME_RICH);
+        placeChest(new BlockPos(width - 3, 1, 7), rotateLeft(), LootTypes.DWARVEN_HOME_RICH);
     }
 
-    private void placeChest(int x, int y, int z, int d, String loot) {
-        placeBlock(Blocks.CHEST, d, x, y, z);
-        TileEntityChest tile = (TileEntityChest) getTileEntity(x, y, z, direction);
+    private void placeChest(BlockPos pos, int d, ResourceLocation loot) {
+        placeBlock(Blocks.CHEST, pos, d);
+        TileEntityChest tile = (TileEntityChest) getTileEntity(pos, direction);
 
         if (tile != null) {
             tile.setLootTable(loot, 2 + rand.nextInt(3));

@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.render;
 
+import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
@@ -27,7 +28,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
-public class RenderPowerArmour extends RendererLivingEntity {
+public class RenderPowerArmour extends RenderLivingBase {
     private static final ResourceLocation RES_ITEM_GLINT = new ResourceLocation(
             "textures/misc/enchanted_item_glint.png");
     protected ModelBiped cogworkSuit;

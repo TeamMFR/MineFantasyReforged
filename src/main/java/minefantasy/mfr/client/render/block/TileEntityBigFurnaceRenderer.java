@@ -80,10 +80,10 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
         GL11.glRotatef(90, 0, 1, 0);
         if (tile.isHeater()) {
             GL11.glRotatef(angle, 1F, 0, 0);
-            renderDoorHeater(0, 54, 12, 8, 128, 64);
+            renderDoorHeater();
         } else {
             GL11.glRotatef(-angle, 1F, 0, 0);
-            renderDoor(0, 54, 12, 8, 128, 64);
+            renderDoor();
         }
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -118,10 +118,10 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
         GL11.glRotatef(90, 0, 1, 0);
         if (heater) {
             GL11.glRotatef(angle, 1F, 0, 0);
-            renderDoorHeater(0, 54, 12, 8, 128, 64);
+            renderDoorHeater();
         } else {
             GL11.glRotatef(-angle, 1F, 0, 0);
-            renderDoor(0, 54, 12, 8, 128, 64);
+            renderDoor();
         }
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -138,18 +138,7 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
         renderAModelAt((TileEntityBigFurnace) tileentity, d, d1, d2, f); // where to render
     }
 
-    private void renderDoor(int x, int y, int w, int h, int tw, int th) {
-        Minecraft mc = Minecraft.getMinecraft();
-
-        float f = 0.01F / tw;
-        float f1 = 0.01F / th;
-
-        float x1 = (float) x / (float) tw + f;
-        float x2 = (float) (x + w) / tw - f;
-        float y1 = (float) y / th + f1;
-        float y2 = (float) (y + h) / th - f1;
-
-        Tessellator image = Tessellator.getInstance();
+    private void renderDoor() {
         float xPos = 0.5F;
         float yPos = 0.0F;
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
@@ -158,7 +147,6 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
         GL11.glScalef(var13, var13, var13);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         GL11.glTranslatef(-1F, -1F, 0.0F);
-        ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, tw, th, 0.0625F);
 
     }
 
@@ -171,16 +159,7 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
         }
     }
 
-    private void renderDoorHeater(int x, int y, int w, int h, int tw, int th) {
-        Minecraft mc = Minecraft.getMinecraft();
-
-        float f = 0.01F / tw;
-        float f1 = 0.01F / th;
-
-        float x1 = (float) x / (float) tw + f;
-        float x2 = (float) (x + w) / tw - f;
-        float y1 = (float) y / th + f1;
-        float y2 = (float) (y + h) / th - f1;
+    private void renderDoorHeater() {
 
         Tessellator image = Tessellator.getInstance();
         float xPos = 0.5F;
@@ -191,7 +170,6 @@ public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
         GL11.glScalef(var13, var13, var13);
         GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
         GL11.glTranslatef(-1F, -1F, 0.0F);
-        ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, tw, th, 0.0625F);
 
     }
 

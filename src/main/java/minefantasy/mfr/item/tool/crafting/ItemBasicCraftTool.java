@@ -50,12 +50,6 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-    }
-
-    @Override
     public ToolMaterial getMaterial() {
         return toolMaterial;
     }

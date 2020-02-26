@@ -9,7 +9,7 @@ import minefantasy.mfr.block.decor.BlockWoodDecor;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

@@ -5,16 +5,16 @@ import minefantasy.mfr.block.tile.TileEntityChimney;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 
 public class ChimneyPacket extends PacketMF {
     public static final String packetName = "MF2_ChimneyPacket";
-    private int[] coords = new int[3];
-    private int block, meta;
+    private BlockPos coords;
+    private int block;
 
     public ChimneyPacket(TileEntityChimney tile) {
-        coords = new int[]{tile.xCoord, tile.yCoord, tile.zCoord};
+        coords = tile.getPos();
         block = Block.getIdFromBlock(tile.maskBlock);
-        meta = tile.blockMetadata;
     }
 
     public ChimneyPacket() {
@@ -22,8 +22,8 @@ public class ChimneyPacket extends PacketMF {
 
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
-        coords = new int[]{packet.readInt(), packet.readInt(), packet.readInt()};
-        TileEntity entity = player.worldObj.getTileEntity(coords[0], coords[1], coords[2]);
+        coords = new BlockPos(packet.readInt(), packet.readInt(), packet.readInt());
+        TileEntity entity = player.world.getTileEntity(coords);
 
         if (entity != null && entity instanceof TileEntityChimney) {
             TileEntityChimney tile = (TileEntityChimney) entity;
@@ -41,10 +41,7 @@ public class ChimneyPacket extends PacketMF {
 
     @Override
     public void write(ByteBuf packet) {
-        for (int a = 0; a < coords.length; a++) {
-            packet.writeInt(coords[a]);
-        }
+        packet.writeLong(coords.toLong());
         packet.writeInt(block);
-        packet.writeInt(meta);
     }
 }

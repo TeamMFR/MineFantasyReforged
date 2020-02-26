@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

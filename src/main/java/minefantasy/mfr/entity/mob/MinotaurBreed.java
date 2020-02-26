@@ -1,8 +1,9 @@
 package minefantasy.mfr.entity.mob;
 
 import minefantasy.mfr.config.ConfigMobs;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -143,10 +144,10 @@ public class MinotaurBreed {
         if (dimension == -1)
             return 1;// NETHER
 
-        BiomeGenBase biome = world.getBiomeGenForCoords(x, z);
+        Biome biome = world.getBiome(new BlockPos(x, 0, z));
         if (biome != null) {
-            if (biome.getEnableSnow() || biome.temperature <= 0.25F
-                    || biome.getTempCategory() == BiomeGenBase.TempCategory.COLD) {
+            if (biome.getEnableSnow() || biome.getDefaultTemperature() <= 0.25F
+                    || biome.getTempCategory() == Biome.TempCategory.COLD) {
                 return 2;// FROST
             }
         }

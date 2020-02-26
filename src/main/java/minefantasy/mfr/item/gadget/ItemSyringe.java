@@ -16,6 +16,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
+import net.minecraft.item.ItemSplashPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionHelper;
@@ -23,6 +24,7 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -142,7 +144,7 @@ public class ItemSyringe extends ItemPotion {
                 s1 = s1 + ".postfix";
                 return s + I18n.translateToLocal(s1).trim();
             } else {
-                s1 = PotionUtils.getPotionColor(item.getItemDamage());
+                s1 = PotionUtils.getPotionFromItem(item).toString();
                 return I18n.translateToLocal(s1).trim() + " " + super.getItemStackDisplayName(item);
             }
         }
@@ -150,7 +152,7 @@ public class ItemSyringe extends ItemPotion {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs tab, List list) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
         int sub;
 
         if (potionMap.isEmpty()) {
@@ -174,22 +176,9 @@ public class ItemSyringe extends ItemPotion {
                                 i1 = k | 64;
                             }
                         }
-
-                        List list1 = PotionHelper.getPotionEffects(i1, false);
-
-                        if (list1 != null && !list1.isEmpty() && !ItemPotion.isSplash(i1)) {
-                            potionMap.put(list1, Integer.valueOf(i1));
-                        }
                     }
                 }
             }
-        }
-
-        Iterator iterator = potionMap.values().iterator();
-
-        while (iterator.hasNext()) {
-            sub = ((Integer) iterator.next()).intValue();
-            list.add(new ItemStack(item, 1, sub));
         }
     }
 }

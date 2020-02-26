@@ -1,5 +1,6 @@
 package minefantasy.mfr.mechanics;
 
+import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;

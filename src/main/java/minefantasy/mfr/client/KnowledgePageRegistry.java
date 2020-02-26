@@ -7,7 +7,7 @@ import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.recipe.ForgingRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

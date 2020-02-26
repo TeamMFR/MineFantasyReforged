@@ -1,13 +1,5 @@
 package minefantasy.mfr.mechanics;
 
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
-import net.minecraftforge.fml.common.gameevent.TickEvent;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.heating.IHotItem;
@@ -21,18 +13,27 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.entity.mob.EntityDragon;
-import minefantasy.mfr.item.armour.ItemApron;
-import minefantasy.mfr.init.ItemFoodMFR;
-import minefantasy.mfr.item.gadget.ItemCrossbow;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.item.armour.ItemApron;
+import minefantasy.mfr.item.food.ItemFoodMF;
+import minefantasy.mfr.item.gadget.ItemCrossbow;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.Iterator;
 import java.util.List;
@@ -59,8 +60,7 @@ public class PlayerTickHandlerMF {
             player.world.spawnEntity(dragon);
             dragon.setDragon(tier);
             dragon.disengage(100);
-            player.world.playSound(dragon.posX, dragon.posY - 16D, dragon.posZ, "mob.enderdragon.growl", 3.0F,
-                    1.5F);
+            player.world.playSound(dragon.posX, dragon.posY - 16D, dragon.posZ, SoundEvents.ENTITY_ENDERDRAGON_GROWL, SoundCategory.AMBIENT, 3.0F, 1.5F, true);
             dragon.fireBreathCooldown = 200;
 
             if (ConfigMobs.dragonMSG && !player.world.isRemote) {
@@ -184,7 +184,7 @@ public class PlayerTickHandlerMF {
     @SubscribeEvent
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
-            ItemStack held = event.player.getHeldItem();
+            ItemStack held = event.player.getHeldItemMainhand();
             if (held != null) {
                 int parry = ItemWeaponMFR.getParry(held);
                 if (parry > 0) {
@@ -221,7 +221,7 @@ public class PlayerTickHandlerMF {
 
         if (event.phase == TickEvent.Phase.START) {
             applyBalance(event.player);
-            ItemFoodMFR.onTick(event.player);
+            ItemFoodMF.onTick(event.player);
 
             if (!event.player.world.isRemote
                     && !(!ConfigHardcore.HCChotBurn && ItemApron.isUserProtected(event.player))
@@ -235,7 +235,7 @@ public class PlayerTickHandlerMF {
                 }
             }
             if (event.player.world.isRemote) {
-                ItemStack item = event.player.getHeldItem();
+                ItemStack item = event.player.getHeldItemMainhand();
                 if (lastStack == null && item != null) {
                     if (item.getItem() instanceof IFirearm) {
                         NBTTagCompound nbt = AmmoMechanicsMFR.getNBT(item);

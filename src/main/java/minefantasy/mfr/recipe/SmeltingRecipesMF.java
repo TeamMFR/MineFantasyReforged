@@ -7,7 +7,7 @@ import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

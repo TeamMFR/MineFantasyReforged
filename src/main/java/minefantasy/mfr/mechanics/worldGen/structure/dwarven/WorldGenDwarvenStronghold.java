@@ -50,7 +50,7 @@ public class WorldGenDwarvenStronghold extends WorldGenStructureBase {
         for (int x = -3; x <= 3; x++) {
             for (int y = 0; y < 5; y++) {
                 for (int z = 4; z <= 8; z++) {
-                    BlockPos pos = piece.offsetPos(x, y, z, piece.direction);
+                    BlockPos pos = piece.offsetPos(new BlockPos(x, y, z), piece.direction);
                     Material material = piece.world.getBlockState(pos).getMaterial();
 
                     if (!material.isOpaque()) {

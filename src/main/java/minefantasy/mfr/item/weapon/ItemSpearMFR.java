@@ -1,11 +1,10 @@
 package minefantasy.mfr.item.weapon;
 
 import minefantasy.mfr.api.helpers.TacticalManager;
+import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.SoundsMFR;
-import mods.battlegear2.api.shield.IShield;
-import mods.battlegear2.api.weapons.IExtendedReachWeapon;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

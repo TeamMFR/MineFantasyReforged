@@ -1,20 +1,24 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
-import minefantasy.mf2.block.list.BlockListMF;
-import minefantasy.mf2.item.list.ComponentListMF;
+import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.ComponentListMFR;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityList;
+import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
-import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
+import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenAncientAlter extends StructureModuleMFR {
-    private String lootType = ChestGenHooks.DUNGEON_CHEST;
+    private ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
 
-    public StructureGenAncientAlter(World world, int x, int y, int z, int d) {
-        super(world, x, y, z, d);
+    public StructureGenAncientAlter(World world, BlockPos pos, int d) {
+        super(world,pos, d);
     }
 
     StructureGenAncientAlter(World world, StructureCoordinates position) {
@@ -27,35 +31,34 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
         // FLOOR
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
-                placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, 0, z);
+                placeBlock(Blocks.STONEBRICK, new BlockPos(x, 0, z));
 
                 Object[] array = getFoundation(radius, x, z);
                 if (array != null) {
-                    int m = (Boolean) array[1] ? -1 : 0;
-                    buildFoundation((Block) array[0], m, x, -1, z, 32, 3, false);
+                    buildFoundation((Block) array[0], new BlockPos(x, -1, z), 32, 3, false);
                 }
             }
         }
         for (int p = -1; p <= 1; p++) {
-            placeBlock(Blocks.stone_brick_stairs, 0, -radius, 0, p, 0);
-            placeBlock(Blocks.stone_brick_stairs, 1, radius, 0, p, 0);
-            placeBlock(Blocks.stone_brick_stairs, 2, p, 0, -radius, 0);
-            placeBlock(Blocks.stone_brick_stairs, 3, p, 0, radius, 0);
+            placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(-radius, 0, p), 0);
+            placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(radius, 0, p), 0);
+            placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(p, 0, -radius), 0);
+            placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(p, 0, radius), 0);
         }
-        placeBlock(BlockListMF.mythic_decor, 1, -radius, 0, -radius);
-        placeBlock(BlockListMF.mythic_decor, 1, radius, 0, -radius);
-        placeBlock(BlockListMF.mythic_decor, 1, -radius, 0, radius);
-        placeBlock(BlockListMF.mythic_decor, 1, radius, 0, radius);
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-radius, 0, -radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(radius, 0, -radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-radius, 0, radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(radius, 0, radius));
 
-        placeBlock(BlockListMF.mythic_decor, 0, -radius, 1, -radius);
-        placeBlock(BlockListMF.mythic_decor, 0, radius, 1, -radius);
-        placeBlock(BlockListMF.mythic_decor, 0, -radius, 1, radius);
-        placeBlock(BlockListMF.mythic_decor, 0, radius, 1, radius);
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-radius, 1, -radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(radius, 1, -radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-radius, 1, radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(radius, 1, radius));
 
-        placeBlock(BlockListMF.mythic_decor, 1, -radius, 2, -radius);
-        placeBlock(BlockListMF.mythic_decor, 1, radius, 2, -radius);
-        placeBlock(BlockListMF.mythic_decor, 1, -radius, 2, radius);
-        placeBlock(BlockListMF.mythic_decor, 1, radius, 2, radius);
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-radius, 2, -radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(radius, 2, -radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(-radius, 2, radius));
+        placeBlock(BlockListMFR.MYTHIC_DECOR, new BlockPos(radius, 2, radius));
 
         // CHEST
         {
@@ -63,9 +66,9 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
             int y = 0;
             int z = 0;
 
-            placeBlock(Blocks.stonebrick, StructureGenAncientForge.getRandomMetadata(rand), x, y + 1, z);
-            placeChest(0, y + 2, z, lootType);
-            placeSpawner(0, y, z, "Enderman");
+            placeBlock(Blocks.STONEBRICK, new BlockPos(x, y + 1, z));
+            placeChest(new BlockPos(0, y + 2, z), lootType);
+            placeSpawner(new BlockPos(0, y, z), EntityList.getKey(EntityEnderman.class));
         }
 
     }
@@ -81,32 +84,31 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
             return null;
 
         if (x == 0 && z == -radius)
-            return new Object[]{Blocks.obsidian, false};
+            return new Object[]{Blocks.OBSIDIAN, false};
         if (x == 0 && z == radius)
-            return new Object[]{Blocks.obsidian, false};
+            return new Object[]{Blocks.OBSIDIAN, false};
         if (x == -radius && z == 0)
-            return new Object[]{Blocks.obsidian, false};
+            return new Object[]{Blocks.OBSIDIAN, false};
         if (x == radius && z == 0)
-            return new Object[]{Blocks.obsidian, false};
+            return new Object[]{Blocks.OBSIDIAN, false};
 
-        return new Object[]{Blocks.stonebrick, true};
+        return new Object[]{Blocks.STONEBRICK, true};
     }
 
-    private void placeChest(int x, int y, int z, String loot) {
-        int[] coords = this.offsetPos(x, y, z, direction);
-        world.setBlock(coords[0], coords[1], coords[2], Blocks.chest, direction, 2);
-        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(coords[0], coords[1], coords[2]);
+    private void placeChest(BlockPos pos, ResourceLocation loot) {
+        BlockPos coords = this.offsetPos(pos, direction);
+        world.setBlockState(coords, (IBlockState) Blocks.CHEST, direction);
+        TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(coords);
 
         if (tileentitychest != null) {
-            WeightedRandomChestContent.generateChestContents(rand, ChestGenHooks.getItems(loot, rand), tileentitychest,
-                    ChestGenHooks.getCount(loot, rand));
+            tileentitychest.setLootTable(loot, 2 + rand.nextInt(3));
 
             int artId = rand.nextInt(tileentitychest.getSizeInventory());
-            tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMF.artefacts, 1, 2));
+            tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.artefacts, 1, 2));
         }
     }
 
-    public StructureModuleMFR setLoot(String loot) {
+    public StructureModuleMFR setLoot(ResourceLocation loot) {
         this.lootType = loot;
         return this;
     }

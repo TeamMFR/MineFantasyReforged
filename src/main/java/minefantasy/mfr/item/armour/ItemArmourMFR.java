@@ -364,7 +364,7 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
     @Override
     @SideOnly(Side.CLIENT)
     public net.minecraft.client.model.ModelBiped getArmorModel(EntityLivingBase entityLiving, ItemStack itemStack, EntityEquipmentSlot armorSlot, ModelBiped model) {
-        if (!(entityLiving instanceof EntityPlayer) || armorType >= 2 || !ConfigClient.customModel) {
+        if (!(entityLiving instanceof EntityPlayer) || armorType == EntityEquipmentSlot.LEGS || armorType == EntityEquipmentSlot.FEET || !ConfigClient.customModel) {
             return super.getArmorModel(entityLiving, itemStack, armorSlot, model);
         }
 
@@ -375,32 +375,14 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
                 ? (net.minecraft.client.model.ModelBiped) fullplate
                 : null;
         if (model == null) {
-            return super.getArmorModel(entityLiving, itemStack, armorSlot);
+            return super.getArmorModel(entityLiving, itemStack, armorSlot, model);
         }
-        if (entityLiving != null) {
-            model.heldItemRight = entityLiving.getHeldItem() != null ? 1 : 0;
-            model.aimedBow = false;
-            if (entityLiving instanceof EntityPlayer) {
-                EntityPlayer player = (EntityPlayer) entityLiving;
-                ItemStack held = player.getHeldItem();
-                if (held != null && player.getItemInUseCount() > 0) {
-                    EnumAction enumaction = held.getItemUseAction();
+        model.bipedHead.showModel = (this.armorType == EntityEquipmentSlot.HEAD);
+        model.bipedHeadwear.showModel = (this.armorType == EntityEquipmentSlot.HEAD);
 
-                    if (enumaction == EnumAction.block) {
-                        model.heldItemRight = 3;
-                    } else if (enumaction == EnumAction.bow) {
-                        model.aimedBow = true;
-                    }
-                }
-            }
-        }
-        model.bipedHead.showModel = (this.armorType == 0);
-        model.bipedHeadwear.showModel = (this.armorType == 0);
-
-        model.bipedCloak.showModel = (this.armorType == 1);
-        model.bipedBody.showModel = (this.armorType == 1);
-        model.bipedLeftArm.showModel = (this.armorType == 1);
-        model.bipedRightArm.showModel = (this.armorType == 1);
+        model.bipedBody.showModel = (this.armorType == EntityEquipmentSlot.CHEST);
+        model.bipedLeftArm.showModel = (this.armorType == EntityEquipmentSlot.CHEST);
+        model.bipedRightArm.showModel = (this.armorType == EntityEquipmentSlot.CHEST);
         return model;
     }
 }

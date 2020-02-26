@@ -4,6 +4,7 @@ import minefantasy.mfr.entity.mob.EntityHound;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
@@ -95,8 +96,8 @@ public class AI_HoundFollow extends EntityAIBase {
                                 for (int i1 = 0; i1 <= 4; ++i1) {
                                     if ((l < 1 || i1 < 1 || l > 3 || i1 > 3)
                                             && World.doesBlockHaveSolidTopSurface(this.theWorld, i + l, k - 1, j + i1)
-                                            && !this.theWorld.getBlock(i + l, k, j + i1).isNormalCube()
-                                            && !this.theWorld.getBlock(i + l, k + 1, j + i1).isNormalCube()) {
+                                            && !this.theWorld.getBlockState(new BlockPos(i + l, k, j + i1)).isNormalCube()
+                                            && !this.theWorld.getBlockState(new BlockPos(i + l, k + 1, j + i1)).isNormalCube()) {
                                         this.thePet.setLocationAndAngles(i + l + 0.5F, k, j + i1 + 0.5F,
                                                 this.thePet.rotationYaw, this.thePet.rotationPitch);
                                         this.petPathfinder.clearPathEntity();
