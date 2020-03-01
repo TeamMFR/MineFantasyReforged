@@ -60,7 +60,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
     }
 
     @Override
-    public void drawScreen(int x, int y, float f) {
+    public void drawScreen(int x, int y, float ticks) {
         boolean onTick = false;
 
         boolean currTick = mc.world.getTotalWorldTime() % 10 == 0;// has a second passed
@@ -73,13 +73,13 @@ public class GuiKnowledgeEntry extends GuiScreen {
         }
         lastTick = currTick;
 
-        drawPage(x, y, f, currentPage, -(bookImageWidth / 2), "left_page", onTick);
-        drawPage(x, y, f, currentPage + 1, (bookImageWidth / 2), "right_page", onTick);
+        drawPage(x, y, ticks, currentPage, -(bookImageWidth / 2), "left_page", onTick);
+        drawPage(x, y, ticks, currentPage + 1, (bookImageWidth / 2), "right_page", onTick);
 
-        super.drawScreen(x, y, f);
+        super.drawScreen(x, y, ticks);
     }
 
-    public void drawPage(int x, int y, float f, int num, int offset, String tex, boolean onTick) {
+    public void drawPage(int x, int y, float ticks, int num, int offset, String tex, boolean onTick) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL11.GL_BLEND);
         OpenGlHelper.glBlendFunc(770, 771, 1, 0);
@@ -94,8 +94,8 @@ public class GuiKnowledgeEntry extends GuiScreen {
         if (num < infoBase.getPages().size()) {
             EntryPage page = infoBase.getPages().get(num);
             if (page != null) {
-                page.preRender(this, x, y, f, xPoint, yPoint, onTick);
-                page.render(this, x, y, f, xPoint, yPoint, onTick);
+                page.preRender(this, x, y, ticks, xPoint, yPoint, onTick);
+                page.render(this, x, y, ticks, xPoint, yPoint, onTick);
             }
         }
 

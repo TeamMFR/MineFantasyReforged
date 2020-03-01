@@ -492,7 +492,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 
     }
 
-    private void placeChest(BlockPos pos, int d, String loot) {
+    private void placeChest(BlockPos pos, int d, ResourceLocation dwarvenArmoury) {
         placeBlock(Blocks.CHEST,pos, d);
         TileEntityChest tile = (TileEntityChest) getTileEntity(pos, direction);
 
@@ -501,12 +501,13 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         }
     }
 
-    private void placeAmmoBox(BlockPos pos, int d, String loot) {
+    private void placeAmmoBox(BlockPos pos, int d, ResourceLocation dwarvenAmmo) {
         placeBlock(BlockListMFR.AMMO_BOX_BASIC, pos, d);
         TileEntityAmmoBox tile = (TileEntityAmmoBox) getTileEntity(pos, direction);
-
+        
+        // FIXME
         if (tile != null) {
-            ItemStack ammo = ChestGenHooks.getOneItem(loot, rand);
+            ItemStack ammo = ChestGenHooks.getOneItem(dwarvenAmmo, rand);
             tile.setMaterial(WoodMaterial.getMaterial("RefinedWood"));
             tile.ammo = ammo;
             tile.stock = ammo.getMaxStackSize() * (rand.nextInt(2) + 1)
