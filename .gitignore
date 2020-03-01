@@ -20,3 +20,7 @@ build
 # other
 eclipse
 run
+gradle.build.forge
+gradle.build.ori
+
+/eclipse
