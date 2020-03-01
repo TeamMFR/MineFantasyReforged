@@ -213,8 +213,6 @@ public class EntryPageRecipeBase extends EntryPage {
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        // Might need to look at this in MC1.7.10 to figure out what this did; 
-        // nothing like it exists for rendering items now.
         render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
         render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
         RenderHelper.disableStandardItemLighting();

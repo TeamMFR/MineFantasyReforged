@@ -506,7 +506,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         TileEntityAmmoBox tile = (TileEntityAmmoBox) getTileEntity(pos, direction);
         
         // FIXME
-        if (tile != null) {//*	
+        if (tile != null) {
             ItemStack ammo = ChestGenHooks.getOneItem(dwarvenAmmo, rand);
             tile.setMaterial(WoodMaterial.getMaterial("RefinedWood"));
             tile.ammo = ammo;
@@ -516,7 +516,6 @@ public class StructureGenDSRoom extends StructureModuleMFR {
                 tile.stock = Math.max(1, tile.stock / 4);
             }
             ammo = null;
-            //*/
         }
     }
 
