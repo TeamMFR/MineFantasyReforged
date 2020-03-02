@@ -2,7 +2,9 @@ package minefantasy.mfr.api.helpers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.settings.KeyBinding;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -79,29 +81,29 @@ public final class RenderHelper {
         GL11.glColor4f(1F, 1F, 1F, 1F);
     }
 
-    public static void drawGradientRect(int par1, int par2, float z, int par3, int par4, int par5, int par6) {
-        float var7 = (par5 >> 24 & 255) / 255F;
-        float var8 = (par5 >> 16 & 255) / 255F;
-        float var9 = (par5 >> 8 & 255) / 255F;
-        float var10 = (par5 & 255) / 255F;
-        float var11 = (par6 >> 24 & 255) / 255F;
-        float var12 = (par6 >> 16 & 255) / 255F;
-        float var13 = (par6 >> 8 & 255) / 255F;
-        float var14 = (par6 & 255) / 255F;
+    public static void drawGradientRect(int x1, int y, float z, int x2, int color1, int color2, int color3) {
+        int vertexIndex1 = (color2 >> 24 & 255) / 255;
+        float red1 = (color2 >> 16 & 255) / 255F;
+        float blue1 = (color2 >> 8 & 255) / 255F;
+        float green1 = (color2 & 255) / 255F;
+        int vertexIndex2 = (color3 >> 24 & 255) / 255;
+        float red2 = (color3 >> 16 & 255) / 255F;
+        float blue2 = (color3 >> 8 & 255) / 255F;
+        float green2 = (color3 & 255) / 255F;
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glShadeModel(GL11.GL_SMOOTH);
-        Tessellator var15 = Tessellator.getInstance();
-        var15.startDrawingQuads();
-        var15.setColorRGBA_F(var8, var9, var10, var7);
-        var15.addVertex(par3, par2, z);
-        var15.addVertex(par1, par2, z);
-        var15.setColorRGBA_F(var12, var13, var14, var11);
-        var15.addVertex(par1, par4, z);
-        var15.addVertex(par3, par4, z);
-        var15.draw();
+        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        bufferBuilder.putColorRGB_F(red1, blue1, green1, vertexIndex1);
+        bufferBuilder.pos(x2, y, z);
+        bufferBuilder.pos(x1, y, z);
+        bufferBuilder.putColorRGB_F(red2, blue2, green2, vertexIndex2);
+        bufferBuilder.pos(x1, color1, z);
+        bufferBuilder.pos(x2, color1, z);
+        bufferBuilder.finishDrawing();
         GL11.glShadeModel(GL11.GL_FLAT);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
@@ -113,14 +115,15 @@ public final class RenderHelper {
     }
 
     public static void drawTexturedModalRect(int par1, int par2, float z, int par3, int par4, int par5, int par6,
-                                             float f, float f1) {
-        Tessellator tessellator = Tessellator.getInstance();
-        tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(par1 + 0, par2 + par6, z, (par3 + 0) * f, (par4 + par6) * f1);
-        tessellator.addVertexWithUV(par1 + par5, par2 + par6, z, (par3 + par5) * f, (par4 + par6) * f1);
-        tessellator.addVertexWithUV(par1 + par5, par2 + 0, z, (par3 + par5) * f, (par4 + 0) * f1);
-        tessellator.addVertexWithUV(par1 + 0, par2 + 0, z, (par3 + 0) * f, (par4 + 0) * f1);
-        tessellator.draw();
+            float f, float f1) {
+        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        bufferBuilder.pos(par1, par2 + par6, z).tex((par3) * f, (par4 + par6) * f1);
+        bufferBuilder.pos(par1, par2 + par6, z).tex((par3) * f, (par4 + par6) * f1);
+        bufferBuilder.pos(par1 + par5, par2 + par6, z).tex((par3 + par5) * f, (par4 + par6) * f1);
+        bufferBuilder.pos(par1 + par5, par2, z).tex((par3 + par5) * f, (par4) * f1);
+        bufferBuilder.pos(par1, par2, z).tex((par3) * f, (par4) * f1);
+        bufferBuilder.finishDrawing();
     }
 
     public static String getKeyDisplayString(String keyName) {
