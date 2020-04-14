@@ -254,8 +254,8 @@ public class ModelMinotaur extends ModelBiped {
         Lhorn2.rotateAngleX = bipedHead.rotateAngleX;
         Lhorn2.rotateAngleY = bipedHead.rotateAngleY;
 
-        if (onGround > -9990F) {
-            float f6 = onGround;
+        if (swingProgress > -9990F) {
+            float f6 = swingProgress;
             bipedBody.rotateAngleY = MathHelper.sin(MathHelper.sqrt(f6) * 3.141593F * 2.0F) * 0.2F;
             bipedRightArm.rotationPointZ = MathHelper.sin(bipedBody.rotateAngleY) * 5F;
             bipedRightArm.rotationPointX = -MathHelper.cos(bipedBody.rotateAngleY) * 5F;
@@ -264,15 +264,15 @@ public class ModelMinotaur extends ModelBiped {
             bipedRightArm.rotateAngleY += bipedBody.rotateAngleY;
             bipedLeftArm.rotateAngleY += bipedBody.rotateAngleY;
             bipedLeftArm.rotateAngleX += bipedBody.rotateAngleY;
-            f6 = 1.0F - onGround;
+            f6 = 1.0F - swingProgress;
             f6 *= f6;
             f6 *= f6;
             f6 = 1.0F - f6;
             float f8 = MathHelper.sin(f6 * 3.141593F);
-            float f10 = MathHelper.sin(onGround * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
+            float f10 = MathHelper.sin(swingProgress * 3.141593F) * -(bipedHead.rotateAngleX - 0.7F) * 0.75F;
             bipedRightArm.rotateAngleX -= f8 * 1.2D + f10;
             bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
-            bipedRightArm.rotateAngleZ = MathHelper.sin(onGround * 3.141593F) * -0.4F;
+            bipedRightArm.rotateAngleZ = MathHelper.sin(swingProgress * 3.141593F) * -0.4F;
         }
         if (mino.getRidingEntity() != null) {
             bipedLeftArm.rotateAngleX = (float) Math.toRadians(180F);

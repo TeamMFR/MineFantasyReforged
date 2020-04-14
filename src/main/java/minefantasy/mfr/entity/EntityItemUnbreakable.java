@@ -13,8 +13,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
-import java.util.Iterator;
-
 public class EntityItemUnbreakable extends EntityItem {
     public EntityItemUnbreakable(World world) {
         super(world);
@@ -43,12 +41,7 @@ public class EntityItemUnbreakable extends EntityItem {
 
     @Override
     public void onUpdate() {
-        ItemStack stack = this.getDataWatcher().getWatchableObjectItemStack(10);
-        if (stack != null && stack.getItem() != null) {
-            if (stack.getItem().onEntityItemUpdate(this)) {
-                return;
-            }
-        }
+        if (getItem().getItem().onEntityItemUpdate(this)) return;
 
         if (getItem() == null) {
             setDead();
@@ -90,10 +83,6 @@ public class EntityItemUnbreakable extends EntityItem {
                     motionX = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
                     motionZ = (rand.nextFloat() - rand.nextFloat()) * 0.2F;
                 }
-
-                if (!this.world.isRemote) {
-                    this.searchForOtherItemsNearby();
-                }
             }
 
             float f = 0.98F;
@@ -122,7 +111,7 @@ public class EntityItemUnbreakable extends EntityItem {
             int age = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "age");
             ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, this, age-1, "age");
 
-            ItemStack item = getDataWatcher().getWatchableObjectItemStack(10);
+            ItemStack item = this.getItem();
 
             if (isBreakable()) {
                 if (!this.world.isRemote && age >= lifespan) {
@@ -148,23 +137,5 @@ public class EntityItemUnbreakable extends EntityItem {
 
     private boolean isBreakable() {
         return false;
-    }
-
-    private void searchForOtherItemsNearby() {
-        Iterator iterator = this.world
-                .getEntitiesWithinAABB(EntityItem.class, getCollisionBoundingBox().expand(0.5D, 0.0D, 0.5D)).iterator();
-
-        while (iterator.hasNext()) {
-            EntityItem entityitem = (EntityItem) iterator.next();
-            this.combineItems(entityitem);
-        }
-    }
-
-    @Override
-    public void playSound(String sound, float volume, float pitch) {
-        if (sound.equalsIgnoreCase("random.fizz")) {
-            return;
-        }
-        this.world.playSoundAtEntity(this, sound, volume, pitch);
     }
 }

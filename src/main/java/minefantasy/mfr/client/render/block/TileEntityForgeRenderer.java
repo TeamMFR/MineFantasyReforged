@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class TileEntityForgeRenderer extends TileEntitySpecialRenderer {
+public class TileEntityForgeRenderer extends TileEntitySpecialRenderer<TileEntityForge> {
     private ModelForge model;
     private ModelForgeTop topModel;
     private Random random = new Random();

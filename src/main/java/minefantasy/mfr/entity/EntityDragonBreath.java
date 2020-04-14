@@ -1,10 +1,15 @@
 package minefantasy.mfr.entity;
 
 import minefantasy.mfr.entity.mob.DragonBreath;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -13,6 +18,7 @@ import java.util.Random;
 
 public class EntityDragonBreath extends EntityFireball {
     private static final float size = 0.75F;
+    private static final DataParameter<Integer> TYPE_ID = EntityDataManager.<Integer>createKey(Entity.class, DataSerializers.VARINT);
     private final int typeId = 2;
     public Random rand = new Random();
     private DragonBreath breath;
@@ -29,7 +35,6 @@ public class EntityDragonBreath extends EntityFireball {
         this.setSize(1.0F, 1.0F);
         this.setLocationAndAngles(shooter.posX, shooter.posY, shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.yOffset = 0.0F;
         this.motionX = this.motionY = this.motionZ = 0.0D;
         xVelocity += this.rand.nextGaussian() * spread;
         yVelocity += this.rand.nextGaussian() * spread;
@@ -42,7 +47,7 @@ public class EntityDragonBreath extends EntityFireball {
 
     @Override
     protected void entityInit() {
-        dataWatcher.addObject(typeId, 0);
+        dataManager.register(TYPE_ID, 0);
     }
 
     @Override
@@ -50,11 +55,11 @@ public class EntityDragonBreath extends EntityFireball {
     }
 
     public int getType() {
-        return dataWatcher.getWatchableObjectInt(typeId);
+        return dataManager.get(TYPE_ID);
     }
 
     public EntityDragonBreath setType(int type) {
-        dataWatcher.updateObject(typeId, type);
+        dataManager.set(TYPE_ID, type);
         return this;
     }
 
@@ -76,7 +81,8 @@ public class EntityDragonBreath extends EntityFireball {
                         int i = (int) posX + x;
                         int j = (int) posY + y;
                         int k = (int) posZ + z;
-                        getBreath().hitBlock(world, this, i, j, k, false);
+                        BlockPos breathPos = new BlockPos(i,j,k);
+                        getBreath().hitBlock(world, world.getBlockState(breathPos),this, breathPos, false);
                     }
                 }
             }
@@ -122,7 +128,8 @@ public class EntityDragonBreath extends EntityFireball {
                     case EAST:
                         ++i;
                 }
-                getBreath().hitBlock(world, this, i, j, k, true);
+                BlockPos breathPos = new BlockPos(i, j, k);
+                getBreath().hitBlock(world, world.getBlockState(breathPos),this, breathPos, true);
             }
 
             this.setDead();

@@ -1,9 +1,13 @@
 package minefantasy.mfr.entity;
 
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentProtection;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -14,8 +18,10 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.world.ChunkPosition;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -25,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class Shockwave {// Explosion
     /**
@@ -48,7 +55,7 @@ public class Shockwave {// Explosion
     private int maxRange = 16;
     private Random explosionRNG = new Random();
     private World world;
-    private Map field_77288_k = new HashMap();
+    private final Map<EntityPlayer, Vec3d> playerKnockbackMap;
     private String type;
 
     public Shockwave(String type, World world, Entity cause, double x, double y, double z, float power) {
@@ -59,6 +66,7 @@ public class Shockwave {// Explosion
         this.explosionY = y;
         this.explosionZ = z;
         this.type = type;
+        this.playerKnockbackMap = Maps.<EntityPlayer, Vec3d>newHashMap();
     }
 
     /**
@@ -66,7 +74,7 @@ public class Shockwave {// Explosion
      */
     public void initiate() {
         float f = this.explosionSize;
-        HashSet hashset = new HashSet();
+        Set<BlockPos> set = Sets.<BlockPos>newHashSet();
         int i;
         int j;
         int k;
@@ -95,10 +103,11 @@ public class Shockwave {// Explosion
                             int j1 = MathHelper.floor(d5);
                             int k1 = MathHelper.floor(d6);
                             int l1 = MathHelper.floor(d7);
-                            Block block = this.world.getBlock(j1, k1, l1);
+                            BlockPos pos = new BlockPos(j1, k1, l1);
+                            IBlockState state = this.world.getBlockState(pos);
 
-                            if (block.getMaterial() == Material.glass) {
-                                hashset.add(new ChunkPosition(j1, k1, l1));
+                            if (state.getMaterial() == Material.GLASS) {
+                                set.add(pos);
                             }
 
                             d5 += d0 * f2;
@@ -110,7 +119,7 @@ public class Shockwave {// Explosion
             }
         }
 
-        this.affectedBlockPositions.addAll(hashset);
+        this.affectedBlockPositions.addAll(set);
         this.explosionSize *= 2.0F;
         i = MathHelper.floor(this.explosionX - this.explosionSize - 1.0D);
         j = MathHelper.floor(this.explosionX + this.explosionSize + 1.0D);
@@ -120,7 +129,7 @@ public class Shockwave {// Explosion
         int j2 = MathHelper.floor(this.explosionZ + this.explosionSize + 1.0D);
         List list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder,
                 new AxisAlignedBB(i, k, l, j, i2, j2));
-        Vec3 vec3 = Vec3.createVectorHelper(this.explosionX, this.explosionY, this.explosionZ);
+        Vec3d vec3 = new Vec3d(this.explosionX, this.explosionY, this.explosionZ);
 
         for (int i1 = 0; i1 < list.size(); ++i1) {
             Entity entity = (Entity) list.get(i1);
@@ -140,13 +149,18 @@ public class Shockwave {// Explosion
                     double d11 = (1.0D - d4) * d10;
                     float damage = ((int) ((d11 * d11 + d11) / 2.0D * 8.0D * this.explosionSize + 1.0D));
                     entity.attackEntityFrom(getExplosionSource(), Math.min(64F, 4F + (damage / 2F)));
-                    double d8 = EnchantmentProtection.func_92092_a(entity, d11);
+                    double d8 = EnchantmentProtection.getBlastDamageReduction((EntityLivingBase) entity, d11);
                     entity.motionX += d5 * d8;
                     entity.motionY += d6 * d8;
                     entity.motionZ += d7 * d8;
+                    if (entity instanceof EntityPlayer)
+                    {
+                        EntityPlayer entityplayer = (EntityPlayer)entity;
 
-                    if (entity instanceof EntityPlayer) {
-                        this.field_77288_k.put(entity, Vec3.createVectorHelper(d5 * d11, d6 * d11, d7 * d11));
+                        if (!entityplayer.isSpectator() && (!entityplayer.isCreative() || !entityplayer.capabilities.isFlying))
+                        {
+                            this.playerKnockbackMap.put((EntityPlayer) entity, new Vec3d(d5 * d11, d6 * d11, d7 * d11));
+                        }
                     }
                 }
             }
@@ -170,21 +184,22 @@ public class Shockwave {// Explosion
         }
 
         Iterator iterator;
-        ChunkPosition chunkposition;
+        ChunkPos chunkposition;
         int i;
         int j;
         int k;
-        Block block;
+        IBlockState state;
 
         if (this.isSmoking) {
             iterator = this.affectedBlockPositions.iterator();
 
             while (iterator.hasNext()) {
-                chunkposition = (ChunkPosition) iterator.next();
-                i = chunkposition.chunkPosX;
-                j = chunkposition.chunkPosY;
-                k = chunkposition.chunkPosZ;
-                block = this.world.getBlock(i, j, k);
+                chunkposition = (ChunkPos) iterator.next();
+                i = chunkposition.x;
+                j = 0;
+                k = chunkposition.z;
+                BlockPos pos = new BlockPos(chunkposition.x, 0, chunkposition.z);
+                state = this.world.getBlockState(pos);
 
                 if (flag) {
                     double d0 = i + this.world.rand.nextFloat();
@@ -207,10 +222,9 @@ public class Shockwave {// Explosion
                     this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, d0, d1, d2, d3, d4, d5);
                 }
 
-                if (isGriefing && block.getMaterial() == Material.glass) {
-                    this.world.setBlockToAir(i, j, k);
-                    this.world.playSoundEffect(i, j, k, "break.glass", 1.0F,
-                            0.75F + (explosionRNG.nextFloat() * 0.5F));
+                if (isGriefing && state.getMaterial() == Material.GLASS) {
+                    this.world.setBlockToAir(pos);
+                    this.world.playSound(i, j, k, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.BLOCKS, 1.0F, 0.75F + (explosionRNG.nextFloat() * 0.5F), true);
                 }
             }
         }
@@ -219,23 +233,19 @@ public class Shockwave {// Explosion
             iterator = this.affectedBlockPositions.iterator();
 
             while (iterator.hasNext()) {
-                chunkposition = (ChunkPosition) iterator.next();
-                i = chunkposition.chunkPosX;
-                j = chunkposition.chunkPosY;
-                k = chunkposition.chunkPosZ;
-                block = this.world.getBlock(i, j, k);
-                Block block1 = this.world.getBlock(i, j - 1, k);
+                chunkposition = (ChunkPos) iterator.next();
+                i = chunkposition.x;
+                j = 0;
+                k = chunkposition.z;
+                BlockPos pos = new BlockPos(i, j, k);
+                state = this.world.getBlockState(pos);
+                IBlockState state1 = this.world.getBlockState(pos.add(0,-1,0));
 
-                if (block.getMaterial() == Material.air && block1.func_149730_j()
-                        && this.explosionRNG.nextInt(3) == 0) {
-                    this.world.setBlock(i, j, k, Blocks.fire);
+                if (state.getMaterial() == Material.AIR && state1.isOpaqueCube() && this.explosionRNG.nextInt(3) == 0) {
+                    this.world.setBlockState(pos, (IBlockState) Blocks.FIRE);
                 }
             }
         }
-    }
-
-    public Map func_77277_b() {
-        return this.field_77288_k;
     }
 
     public DamageSource getExplosionSource() {

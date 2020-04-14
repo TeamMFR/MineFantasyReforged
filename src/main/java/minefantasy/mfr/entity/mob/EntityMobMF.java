@@ -5,16 +5,30 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIHurtByTarget;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.UUID;
+
 public abstract class EntityMobMF extends EntityCreature implements IMob {
+    /** Above zero if this Mob is Angry. */
+    private int angerLevel;
+    private UUID angerTargetUUID;
+
     public EntityMobMF(World world) {
         super(world);
         this.experienceValue = 5;
@@ -28,10 +42,10 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
     @Override
     public void onLivingUpdate() {
         this.updateArmSwingProgress();
-        float f = this.getBrightness(1.0F);
+        float f = this.getBrightness();
 
         if (f > 0.5F) {
-            this.entityAge += 2;
+            this.idleTime += 2;
         }
 
         super.onLivingUpdate();
@@ -51,23 +65,51 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
     }
 
     @Override
-    protected String getSwimSound() {
-        return "game.hostile.swim";
+    protected SoundEvent getSwimSound() {
+        return SoundEvents.ENTITY_HOSTILE_SWIM;
     }
 
     @Override
-    protected String getSplashSound() {
-        return "game.hostile.swim.splash";
+    protected SoundEvent getSplashSound() {
+        return SoundEvents.ENTITY_HOSTILE_SPLASH;
     }
 
     /**
-     * Finds the closest player within 16 blocks to attack, or null if this Entity
-     * isn't interested in attacking (Animals, Spiders at day, peaceful PigZombies).
+     * Hint to AI tasks that we were attacked by the passed EntityLivingBase and should retaliate. Is not guaranteed to
+     * change our actual active target (for example if we are currently busy attacking someone else)
      */
-    @Override
-    protected Entity findPlayerToAttack() {
-        EntityPlayer entityplayer = this.world.getClosestVulnerablePlayerToEntity(this, 16.0D);
-        return entityplayer != null && this.canEntityBeSeen(entityplayer) ? entityplayer : null;
+    public void setRevengeTarget(@Nullable EntityLivingBase livingBase)
+    {
+        super.setRevengeTarget(livingBase);
+
+        if (livingBase != null)
+        {
+            this.angerTargetUUID = livingBase.getUniqueID();
+        }
+    }
+
+    protected void applyEntityAI()
+    {
+        this.targetTasks.addTask(1, new EntityMobMF.AIHurtByAggressor(this));
+        this.targetTasks.addTask(2, new EntityMobMF.AITargetAggressor(this));
+    }
+
+    protected void updateAITasks()
+    {
+        if (this.isAngry())
+        {
+            --this.angerLevel;
+        }
+
+        if (this.angerLevel > 0 && this.angerTargetUUID != null && this.getRevengeTarget() == null)
+        {
+            EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.angerTargetUUID);
+            this.setRevengeTarget(entityplayer);
+            this.attackingPlayer = entityplayer;
+            this.recentlyHit = this.getRevengeTimer();
+        }
+
+        super.updateAITasks();
     }
 
     /**
@@ -75,14 +117,14 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
      */
     @Override
     public boolean attackEntityFrom(DamageSource source, float dam) {
-        if (this.isEntityInvulnerable()) {
+        if (this.isEntityInvulnerable(source)) {
             return false;
         } else if (super.attackEntityFrom(source, dam)) {
-            Entity entity = source.getEntity();
+            Entity entity = source.getImmediateSource();
 
-            if (this.riddenByEntity != entity && this.ridingEntity != entity) {
+            if (this.getRidingEntity() != entity && this.getRidingEntity() != entity) {
                 if (entity != this) {
-                    this.entityToAttack = entity;
+                    this.attackEntity(entity, dam);
                 }
 
                 return true;
@@ -95,24 +137,44 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
     }
 
     /**
-     * Returns the sound this mob makes when it is hurt.
+     * Causes this mob to become angry at the supplied Entity (which will be a player).
      */
-    @Override
-    protected String getHurtSound() {
-        return "game.hostile.hurt";
+    private void becomeAngryAt(Entity entity)
+    {
+        this.angerLevel = 400 + this.rand.nextInt(400);
+
+        if (entity instanceof EntityLivingBase)
+        {
+            this.setRevengeTarget((EntityLivingBase)entity);
+        }
+    }
+
+    public boolean isAngry()
+    {
+        return this.angerLevel > 0;
     }
 
     /**
-     * Returns the sound this mob makes on death.
+     * Returns the sound this mob makes when it is hurt.
      */
     @Override
-    protected String getDeathSound() {
-        return "game.hostile.die";
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return SoundEvents.ENTITY_HOSTILE_HURT;
+    }
+
+
+    @Override
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_HOSTILE_DEATH;
     }
 
     @Override
-    protected String func_146067_o(int distance) {
-        return distance > 4 ? "game.hostile.hurt.fall.big" : "game.hostile.hurt.fall.small";
+    public void fall(float distance, float damageMultiplier){
+        if (distance > 4){
+            playSound(SoundEvents.ENTITY_HOSTILE_BIG_FALL, 1.0F, 1.0F);
+        } else{
+            playSound(SoundEvents.ENTITY_HOSTILE_SMALL_FALL, 1.0F, 1.0F);
+        }
     }
 
     @Override
@@ -125,16 +187,15 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
         int i = 0;
 
         if (target instanceof EntityLivingBase) {
-            f += EnchantmentHelper.getEnchantmentModifierLiving(this, (EntityLivingBase) target);
-            i += EnchantmentHelper.getKnockbackModifier(this, (EntityLivingBase) target);
+            f = EnchantmentHelper.getModifierForCreature(this.getHeldItemMainhand(), ((EntityLivingBase)target).getCreatureAttribute());
+            i += EnchantmentHelper.getKnockbackModifier((EntityLivingBase) target);
         }
 
         boolean flag = target.attackEntityFrom(DamageSource.causeMobDamage(this), f);
 
         if (flag) {
             if (i > 0) {
-                target.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 0.1D,
-                        MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
+                target.addVelocity(-MathHelper.sin(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F, 0.1D, MathHelper.cos(this.rotationYaw * (float) Math.PI / 180.0F) * i * 0.5F);
                 this.motionX *= 0.6D;
                 this.motionZ *= 0.6D;
             }
@@ -146,10 +207,10 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
             }
 
             if (target instanceof EntityLivingBase) {
-                EnchantmentHelper.func_151384_a((EntityLivingBase) target, this);
+                EnchantmentHelper.applyThornEnchantments((EntityLivingBase) target, this);
             }
 
-            EnchantmentHelper.func_151385_b(this, target);
+            EnchantmentHelper.applyArthropodEnchantments(this, target);
         }
 
         return flag;
@@ -159,11 +220,10 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
      * Basic mob attack. Default to touch of death in EntityCreature. Overridden by
      * each mob to define their attack.
      */
-    @Override
+
     protected void attackEntity(Entity target, float dam) {
-        if (this.attackTime <= 0 && dam < 2.0F && target.boundingBox.maxY > this.boundingBox.minY
-                && target.boundingBox.minY < this.boundingBox.maxY) {
-            this.attackTime = 20;
+        if ( dam < 2.0F && target.getEntityBoundingBox().maxY > this.getEntityBoundingBox().minY
+                && target.getEntityBoundingBox().minY < this.getEntityBoundingBox().maxY) {
             this.attackEntityAsMob(target);
         }
     }
@@ -181,19 +241,17 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
      * Checks to make sure the light is not too bright where the mob is spawning
      */
     protected boolean isValidLightLevel() {
-        int i = MathHelper.floor_double(this.posX);
-        int j = MathHelper.floor_double(this.boundingBox.minY);
-        int k = MathHelper.floor_double(this.posZ);
+        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(Objects.requireNonNull(this.getCollisionBoundingBox()).minY), MathHelper.floor(this.posZ));
 
-        if (this.world.getLightFromNeighborsFor(EnumSkyBlock.SKY, i, j, k) > this.rand.nextInt(32)) {
+        if (this.world.getLightFromNeighborsFor(EnumSkyBlock.SKY, pos) > this.rand.nextInt(32)) {
             return false;
         } else {
-            int l = this.world.getLight(i, j, k);
+            int l = this.world.getLight(pos);
 
             if (this.world.isThundering()) {
                 int i1 = this.world.getSkylightSubtracted();
                 this.world.setSkylightSubtracted(10);
-                l = this.world.getLight(i, j, k);
+                l = this.world.getLight(pos);
                 this.world.setSkylightSubtracted(i1);
             }
 
@@ -211,6 +269,44 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
                 && super.getCanSpawnHere();
     }
 
+    public void writeEntityToNBT(NBTTagCompound compound)
+    {
+        super.writeEntityToNBT(compound);
+        compound.setShort("Anger", (short)this.angerLevel);
+
+        if (this.angerTargetUUID != null)
+        {
+            compound.setString("HurtBy", this.angerTargetUUID.toString());
+        }
+        else
+        {
+            compound.setString("HurtBy", "");
+        }
+    }
+
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound compound)
+    {
+        super.readEntityFromNBT(compound);
+        this.angerLevel = compound.getShort("Anger");
+        String s = compound.getString("HurtBy");
+
+        if (!s.isEmpty())
+        {
+            this.angerTargetUUID = UUID.fromString(s);
+            EntityPlayer entityplayer = this.world.getPlayerEntityByUUID(this.angerTargetUUID);
+            this.setRevengeTarget(entityplayer);
+
+            if (entityplayer != null)
+            {
+                this.attackingPlayer = entityplayer;
+                this.recentlyHit = this.getRevengeTimer();
+            }
+        }
+    }
+
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
@@ -218,7 +314,41 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
     }
 
     @Override
-    protected boolean func_146066_aG() {
+    protected boolean canDropLoot() {
         return true;
+    }
+
+    static class AIHurtByAggressor extends EntityAIHurtByTarget
+    {
+        public AIHurtByAggressor(EntityMobMF mobMF)
+        {
+            super(mobMF, true);
+        }
+
+        protected void setEntityAttackTarget(EntityCreature creatureIn, EntityLivingBase entityLivingBaseIn)
+        {
+            super.setEntityAttackTarget(creatureIn, entityLivingBaseIn);
+
+            if (creatureIn instanceof EntityMobMF)
+            {
+                ((EntityMobMF)creatureIn).becomeAngryAt(entityLivingBaseIn);
+            }
+        }
+    }
+
+    static class AITargetAggressor extends EntityAINearestAttackableTarget<EntityPlayer>
+    {
+        public AITargetAggressor(EntityMobMF p_i45829_1_)
+        {
+            super(p_i45829_1_, EntityPlayer.class, true);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute()
+        {
+            return ((EntityMobMF)this.taskOwner).isAngry() && super.shouldExecute();
+        }
     }
 }

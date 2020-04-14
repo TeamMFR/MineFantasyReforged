@@ -1,24 +1,21 @@
 package minefantasy.mfr.entity;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IArrowRetrieve;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.item.archery.ArrowType;
 import minefantasy.mfr.item.gadget.EnumExplosiveType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import minefantasy.mfr.mechanics.CombatMechanics;
+import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,17 +26,30 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.play.server.S2BPacketChangeGameState;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageType, IArrowRetrieve {
-    private final int texture_dw = 18;
+    private static final DataParameter<String> ARROW_TYPE = EntityDataManager.<String>createKey(EntityArrowMFR.class, DataSerializers.STRING);
     /**
      * 1 if the player can pick up the arrow
      */
@@ -70,6 +80,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
      */
     private int knockbackStrength;
     private float power = 0F;
+    private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityArrow.class, DataSerializers.BYTE);
 
     public EntityArrowMFR(World world) {
         super(world);
@@ -113,7 +124,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             this.setLocationAndAngles(shooter.posX + d4, this.posY, shooter.posZ + d5, f2, f3);
             this.setRenderYawOffset(0.0F);
             float f4 = (float) d3 * 0.2F;
-            this.setThrowableHeading(d0, d1 + f4, d2, accuracy, power);
+            this.shoot(d0, d1 + f4, d2, accuracy, power);
         }
     }
 
@@ -144,7 +155,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
         this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
         this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-        this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, power * 1.5F, spread);
+        this.shoot(this.motionX, this.motionY, this.motionZ, power * 1.5F, spread);
     }
 
     public static DamageSource causeBombDamage(Entity bomb, Entity user) {
@@ -173,8 +184,8 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
     @Override
     protected void entityInit() {
-        this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));// Critical
-        this.dataWatcher.addObject(texture_dw, "steel_arrow");
+        this.dataManager.register(CRITICAL, Byte.valueOf((byte)0));// Critical
+        this.dataManager.register(ARROW_TYPE, "steel_arrow");
     }
 
     /**
@@ -182,7 +193,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
      * direction.
      */
     @Override
-    public void setThrowableHeading(double x, double y, double z, float power, float spread) {
+    public void shoot(double x, double y, double z, float power, float spread) {
         float f2 = MathHelper.sqrt(x * x + y * y + z * z);
         x /= f2;
         y /= f2;
@@ -203,24 +214,15 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     }
 
     /**
-     * Sets the position and rotation. Only difference from the other one is no
-     * bounding on the rotation. Args: posX, posY, posZ, yaw, pitch
+     * Set the position and rotation values directly without any clamping.
      */
     @Override
     @SideOnly(Side.CLIENT)
-    public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int i) {
+    public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport) {
         this.setPosition(x, y, z);
         this.setRotation(yaw, pitch);
     }
 
-    /**
-     * Sets the position and rotation. Only difference from the other one is no
-     * bounding on the rotation. Args: posX, posY, posZ, yaw, pitch
-     */
-    public void setPositionAndRotation(double x, double y, double z, float yaw, float pitch, int i) {
-        this.setPosition(x, y, z);
-        this.setRotation(yaw, pitch);
-    }
 
     /**
      * Sets the velocity to the args. Args: x, y, z
@@ -260,14 +262,14 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(this.motionY, f) * 180.0D / Math.PI);
         }
 
-        IBlockState block = this.world.getBlockState(this.getPosition());
+        BlockPos blockpos = new BlockPos(this.xTile, this.yTile, this.zTile);
+        IBlockState state = this.world.getBlockState(blockpos);
+        Block block = state.getBlock();
 
-        if (block.getMaterial() != Material.AIR) {
-            block.setBlockBoundsBasedOnState(this.world, this.xTile, this.yTile, this.zTile);
-            AxisAlignedBB axisalignedbb = block.getCollisionBoundingBox(this.world,this.getPosition());
+        if (state.getMaterial() != Material.AIR) {
+            AxisAlignedBB axisalignedbb = state.getCollisionBoundingBox(this.world, blockpos);
 
-            if (axisalignedbb != null
-                    && axisalignedbb.contains(Vec3d.createVectorHelper(this.posX, this.posY, this.posZ))) {
+            if (axisalignedbb != null && axisalignedbb.contains(new Vec3d(this.posX, this.posY, this.posZ))) {
                 this.inGround = true;
             }
         }
@@ -277,8 +279,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         }
 
         if (this.inGround) {
-            BlockPos blockPos = (BlockPos) this.world.getBlockState(this.getPosition());
-            int j = blockPos.getY();
+            int j = block.getMetaFromState(state);
 
             if (block == this.inBlock && j == this.inData) {
                 ++this.ticksInGround;
@@ -296,17 +297,14 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             }
         } else {
             ++this.ticksInAir;
-            Vec3 vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            Vec3 vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY,
-                    this.posZ + this.motionZ);
-            MovingObjectPosition movingobjectposition = this.worldObj.func_147447_a(vec31, vec3, false, true, false);
-            vec31 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            vec3 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY,
-                    this.posZ + this.motionZ);
+            Vec3d vec31 = new Vec3d(this.posX, this.posY, this.posZ);
+            Vec3d vec3 = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            RayTraceResult rayTraceResult = this.world.rayTraceBlocks(vec31, vec3, false, true, false);
+            vec31 = new Vec3d(this.posX, this.posY, this.posZ);
+            vec3 = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
-            if (movingobjectposition != null) {
-                vec3 = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord,
-                        movingobjectposition.hitVec.zCoord);
+            if (rayTraceResult != null) {
+                vec3 = new Vec3d(rayTraceResult.hitVec.x, rayTraceResult.hitVec.y, rayTraceResult.hitVec.z);
             }
 
             Entity entity = null;
@@ -322,10 +320,10 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                 if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5)) {
                     f1 = 0.3F;
                     AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expand(f1, f1, f1);
-                    MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
+                    RayTraceResult rayTraceResult1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
-                    if (movingobjectposition1 != null) {
-                        double d1 = vec31.distanceTo(movingobjectposition1.hitVec);
+                    if (rayTraceResult1 != null) {
+                        double d1 = vec31.distanceTo(rayTraceResult1.hitVec);
 
                         if (d1 < d0 || d0 == 0.0D) {
                             entity = entity1;
@@ -336,33 +334,33 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             }
 
             if (entity != null) {
-                movingobjectposition = new MovingObjectPosition(entity);
+                rayTraceResult = new RayTraceResult(entity);
             }
 
-            if (movingobjectposition != null && movingobjectposition.entityHit != null
-                    && movingobjectposition.entityHit instanceof EntityPlayer) {
-                EntityPlayer entityplayer = (EntityPlayer) movingobjectposition.entityHit;
+            if (rayTraceResult != null && rayTraceResult.entityHit != null
+                    && rayTraceResult.entityHit instanceof EntityPlayer) {
+                EntityPlayer entityplayer = (EntityPlayer) rayTraceResult.entityHit;
 
                 if (entityplayer.capabilities.disableDamage || this.shootingEntity instanceof EntityPlayer
                         && !((EntityPlayer) this.shootingEntity).canAttackPlayer(entityplayer)) {
-                    movingobjectposition = null;
+                    rayTraceResult = null;
                 }
             }
 
             float f2;
             float f4;
 
-            if (movingobjectposition != null) {
+            if (rayTraceResult != null) {
                 if (isExplosive()) {
                     explode();
                 }
-                if (movingobjectposition.entityHit != null) {
+                if (rayTraceResult.entityHit != null) {
                     f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ) / velocityModifier;
 
                     float dam = Math.max(0.1F, this.getHitDamage() * firepower);// (getDamageModifier()*power) / 10F *
                     // (float)k;
 
-                    dam *= getDamageModifier(movingobjectposition.entityHit);
+                    dam *= getDamageModifier(rayTraceResult.entityHit);
 
                     if (this.getIsCritical()) {
                         dam *= (rand.nextFloat() * 0.5F) + 1.0F;
@@ -376,8 +374,8 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                         damagesource = DamageSource.causeArrowDamage(this, this.shootingEntity);
                     }
 
-                    if (this.isBurning() && !(movingobjectposition.entityHit instanceof EntityEnderman)) {
-                        movingobjectposition.entityHit.setFire(5);
+                    if (this.isBurning() && !(rayTraceResult.entityHit instanceof EntityEnderman)) {
+                        rayTraceResult.entityHit.setFire(5);
                     }
                     if (isExplosive()) {
                         dam = this.getExplosionDamage();
@@ -386,10 +384,10 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                             damagesource.setFireDamage();
                         }
                     }
-                    if (movingobjectposition.entityHit.attackEntityFrom(damagesource, dam)) {
-                        onHitEntity(movingobjectposition.entityHit, dam);
-                        if (movingobjectposition.entityHit instanceof EntityLivingBase) {
-                            EntityLivingBase entitylivingbase = (EntityLivingBase) movingobjectposition.entityHit;
+                    if (rayTraceResult.entityHit.attackEntityFrom(damagesource, dam)) {
+                        onHitEntity(rayTraceResult.entityHit, dam);
+                        if (rayTraceResult.entityHit instanceof EntityLivingBase) {
+                            EntityLivingBase entitylivingbase = (EntityLivingBase) rayTraceResult.entityHit;
 
                             if (!this.world.isRemote) {
                                 entitylivingbase.setArrowCountInEntity(entitylivingbase.getArrowCountInEntity() + 1);
@@ -399,29 +397,25 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                                 f4 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 
                                 if (f4 > 0.0F) {
-                                    movingobjectposition.entityHit.addVelocity(
+                                    rayTraceResult.entityHit.addVelocity(
                                             this.motionX * this.knockbackStrength * 0.6000000238418579D / f4, 0.1D,
                                             this.motionZ * this.knockbackStrength * 0.6000000238418579D / f4);
                                 }
                             }
 
                             if (this.shootingEntity != null && this.shootingEntity instanceof EntityLivingBase) {
-                                EnchantmentHelper.func_151384_a(entitylivingbase, this.shootingEntity);
-                                EnchantmentHelper.func_151385_b((EntityLivingBase) this.shootingEntity,
-                                        entitylivingbase);
+                                EnchantmentHelper.applyThornEnchantments(entitylivingbase, this.shootingEntity);
+                                EnchantmentHelper.applyArthropodEnchantments((EntityLivingBase)this.shootingEntity, entitylivingbase);
                             }
 
-                            if (this.shootingEntity != null && movingobjectposition.entityHit != this.shootingEntity
-                                    && movingobjectposition.entityHit instanceof EntityPlayer
-                                    && this.shootingEntity instanceof EntityPlayerMP) {
-                                ((EntityPlayerMP) this.shootingEntity).playerNetServerHandler
-                                        .sendPacket(new S2BPacketChangeGameState(6, 0.0F));
+                            if (this.shootingEntity != null && rayTraceResult.entityHit != this.shootingEntity && rayTraceResult.entityHit instanceof EntityPlayer && this.shootingEntity instanceof EntityPlayerMP) {
+                                ((EntityPlayerMP)this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
                             }
                         }
 
                         playHitSound();
 
-                        if (!(movingobjectposition.entityHit instanceof EntityEnderman)) {
+                        if (!(rayTraceResult.entityHit instanceof EntityEnderman)) {
                             this.setDead();
                         }
                     } else {
@@ -436,16 +430,17 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                         setDead();
                     }
                 } else {
-                    this.xTile = movingobjectposition.blockX;
-                    this.yTile = movingobjectposition.blockY;
-                    this.zTile = movingobjectposition.blockZ;
+                    BlockPos blockPos = rayTraceResult.getBlockPos();
+                    this.xTile = blockPos.getX();
+                    this.yTile = blockPos.getY();
+                    this.zTile = blockPos.getZ();
+                    IBlockState state1 = this.world.getBlockState(blockPos);
                     this.inBlock = block;
-                    this.inData = this.world.getBlockState(this.getPosition());
-                    this.motionX = ((float) (movingobjectposition.hitVec.xCoord - this.posX));
-                    this.motionY = ((float) (movingobjectposition.hitVec.yCoord - this.posY));
-                    this.motionZ = ((float) (movingobjectposition.hitVec.zCoord - this.posZ));
-                    f2 = MathHelper.sqrt_double(
-                            this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+                    this.inData = this.inBlock.getMetaFromState(state1);
+                    this.motionX = ((float) (rayTraceResult.hitVec.x - this.posX));
+                    this.motionY = ((float) (rayTraceResult.hitVec.y - this.posY));
+                    this.motionZ = ((float) (rayTraceResult.hitVec.z - this.posZ));
+                    f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
                     this.posX -= this.motionX / f2 * 0.05000000074505806D;
                     this.posY -= this.motionY / f2 * 0.05000000074505806D;
                     this.posZ -= this.motionZ / f2 * 0.05000000074505806D;
@@ -454,8 +449,8 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                     this.arrowShake = 7;
                     this.setIsCritical(false);
 
-                    if (this.inBlock.getMaterial() != Material.air) {
-                        this.inBlock.onEntityCollidedWithBlock(this.worldObj, this.xTile, this.yTile, this.zTile, this);
+                    if (state1.getMaterial() != Material.AIR) {
+                        this.inBlock.onEntityCollidedWithBlock(this.world, blockPos, state1, this);
                     }
                     if (isMagicArrow()) {
                         setDead();
@@ -465,14 +460,14 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                     }
                 }
                 if (getEntityData().hasKey("hasBroken_MFArrow")) {
-                    worldObj.playSoundAtEntity(this, "random.break", 1.0F, 1.0F);
+                    world.playSound(blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F, true);
                     setDead();
                 }
             }
 
             if (isMagicArrow()) {
                 for (i = 0; i < 4; ++i) {
-                    this.worldObj.spawnParticle("reddust", this.posX + this.motionX * i / 4.0D,
+                    this.world.spawnParticle(EnumParticleTypes.REDSTONE, this.posX + this.motionX * i / 4.0D,
                             this.posY + this.motionY * i / 4.0D, this.posZ + this.motionZ * i / 4.0D, -this.motionX,
                             -this.motionY + 0.2D, -this.motionZ);
                 }
@@ -480,7 +475,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
             if (this.getIsCritical()) {
                 for (i = 0; i < 4; ++i) {
-                    this.worldObj.spawnParticle("crit", this.posX + this.motionX * i / 4.0D,
+                    this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * i / 4.0D,
                             this.posY + this.motionY * i / 4.0D, this.posZ + this.motionZ * i / 4.0D, -this.motionX,
                             -this.motionY + 0.2D, -this.motionZ);
                 }
@@ -489,7 +484,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
-            f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
             for (this.rotationPitch = (float) (Math.atan2(this.motionY, f2) * 180.0D / Math.PI); this.rotationPitch
@@ -517,7 +512,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             if (this.isInWater()) {
                 for (int l = 0; l < 4; ++l) {
                     f4 = 0.25F;
-                    this.worldObj.spawnParticle("bubble", this.posX - this.motionX * f4, this.posY - this.motionY * f4,
+                    this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * f4, this.posY - this.motionY * f4,
                             this.posZ - this.motionZ * f4, this.motionX, this.motionY, this.motionZ);
                 }
 
@@ -533,7 +528,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             this.motionZ *= f3;
             this.motionY -= f1 * getGravityModifier();
             this.setPosition(this.posX, this.posY, this.posZ);
-            this.func_145775_I();
+            this.doBlockCollisions();
         }
     }
 
@@ -555,20 +550,20 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     }
 
     private void playHitSound() {
-        if (worldObj.isRemote || playedSound)
+        if (world.isRemote || playedSound)
             return;
         float pitch = 1.0F / (this.rand.nextFloat() * 0.2F + 0.9F);
         if (this.arrowtype != null && this.arrowtype == ArrowType.BROADHEAD) {
             pitch *= 0.75F;
         }
-        this.playSound("minefantasy2:weapon.arrowHit", 0.5F, pitch);
+        this.playSound(SoundsMFR.ARROW_HIT, 0.5F, pitch);
         playedSound = true;
     }
 
     private void onHitEntity(Entity entityHit, float dam) {
         ItemStack arrow = getArrowStack();
-        if (arrow != null && arrow.getItem() instanceof IArrowMF) {
-            ((IArrowMF) arrow.getItem()).onHitEntity(this, shootingEntity, entityHit, dam);
+        if (arrow != null && arrow.getItem() instanceof IArrowMFR) {
+            ((IArrowMFR) arrow.getItem()).onHitEntity(this, shootingEntity, entityHit, dam);
         }
     }
 
@@ -640,7 +635,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
      */
     @Override
     public void onCollideWithPlayer(EntityPlayer player) {
-        if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0) {
+        if (!this.world.isRemote && this.inGround && this.arrowShake <= 0) {
             boolean canPickUp = this.canBePickedUp == 1
                     || this.canBePickedUp == 2 && player.capabilities.isCreativeMode;
 
@@ -649,7 +644,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             }
 
             if (canPickUp) {
-                this.playSound("random.pop", 0.2F,
+                this.playSound(SoundEvents.BLOCK_LAVA_POP, 0.2F,
                         ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
                 player.onItemPickup(this, 1);
                 this.setDead();
@@ -691,24 +686,16 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     }
 
     /**
-     * If returns false, the item will not inflict any damage against entities.
-     */
-    @Override
-    public boolean canAttackWithItem() {
-        return false;
-    }
-
-    /**
      * [New Method] Whether the arrow has a stream of critical hit particles flying
      * behind it. Called by chance
      */
     public void setCritical(boolean flag) {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+        byte b0 = this.dataManager.get(CRITICAL);
 
         if (flag) {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 | 1)));
+            this.dataManager.set(CRITICAL, Byte.valueOf((byte) (b0 | 1)));
         } else {
-            this.dataWatcher.updateObject(16, Byte.valueOf((byte) (b0 & -2)));
+            this.dataManager.set(CRITICAL, Byte.valueOf((byte) (b0 & -2)));
         }
     }
 
@@ -717,7 +704,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
      */
     @Override
     public boolean getIsCritical() {
-        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+        byte b0 = this.dataManager.get(CRITICAL);
         return (b0 & 1) != 0;
     }
 
@@ -733,8 +720,8 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         float dam = 2.0F;
         ItemStack arrowStack = getArrowStack();
         if (arrowStack != null) {
-            if (arrowStack.getItem() instanceof IArrowMF) {
-                dam = ((IArrowMF) arrowStack.getItem()).getDamageModifier(arrowStack);
+            if (arrowStack.getItem() instanceof IArrowMFR) {
+                dam = ((IArrowMFR) arrowStack.getItem()).getDamageModifier(arrowStack);
             }
         }
         if (getEntityData().hasKey("MF_Bow_Damage")) {
@@ -746,8 +733,8 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     public float getGravityModifier() {
         ItemStack arrowStack = getArrowStack();
         if (arrowStack != null) {
-            if (arrowStack.getItem() instanceof IArrowMF) {
-                return ((IArrowMF) arrowStack.getItem()).getGravityModifier(arrowStack);
+            if (arrowStack.getItem() instanceof IArrowMFR) {
+                return ((IArrowMFR) arrowStack.getItem()).getGravityModifier(arrowStack);
             }
         }
         return 1.0F;
@@ -756,8 +743,8 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     public float getBreakChance() {
         ItemStack arrowStack = getArrowStack();
         if (arrowStack != null) {
-            if (arrowStack.getItem() instanceof IArrowMF) {
-                return ((IArrowMF) arrowStack.getItem()).getBreakChance(this, arrowStack);
+            if (arrowStack.getItem() instanceof IArrowMFR) {
+                return ((IArrowMFR) arrowStack.getItem()).getBreakChance(this, arrowStack);
             }
         }
         return 1.0F;
@@ -772,12 +759,14 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         return getArrowStack();
     }
 
-    private ItemStack getArrowStack() {
+
+    @Override
+    protected ItemStack getArrowStack() {
         if (getEntityData().hasKey("MF_ArrowItem")) {
             NBTTagCompound heldArrow = getEntityData().getCompoundTag("MF_ArrowItem");
-            return ItemStack.loadItemStackFromNBT(heldArrow);
+            return new ItemStack(heldArrow.getCompoundTag("MF_ArrowItem"));
         }
-        return new ItemStack(Items.arrow);
+        return new ItemStack(Items.ARROW);
     }
 
     /**
@@ -792,14 +781,14 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     }
 
     private void updateTex(String tex) {
-        dataWatcher.updateObject(texture_dw, tex);
+        dataManager.set(ARROW_TYPE, tex);
     }
 
     private String getCustomTex() {
         try {
-            return dataWatcher.getWatchableObjectString(texture_dw);
+            return dataManager.get(ARROW_TYPE);
         } catch (Exception e) {
-            MFLogUtil.logWarn("Arrow Failed To Load Texture");
+            MFRLogUtil.logWarn("Arrow Failed To Load Texture");
             return "steel_arrow";
         }
     }
@@ -869,19 +858,19 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
     }
 
     public void explode() {
-        worldObj.playSoundAtEntity(this, "random.explode", 0.3F, 10F - 5F);
-        worldObj.createExplosion(this, posX, posY, posZ, 0, false);
-        if (!this.worldObj.isRemote) {
+        world.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.AMBIENT, 0.3F, 10F - 5F, true);
+        world.createExplosion(this, posX, posY, posZ, 0, false);
+        if (!this.world.isRemote) {
             double area = getRangeOfBlast() * 2D;
-            AxisAlignedBB var3 = this.boundingBox.expand(area, area / 2, area);
-            List var4 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var3);
+            AxisAlignedBB var3 = this.getEntityBoundingBox().expand(area, area / 2, area);
+            List var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, var3);
 
             if (var4 != null && !var4.isEmpty()) {
                 Iterator splashDamage = var4.iterator();
 
                 while (splashDamage.hasNext()) {
                     Entity entityHit = (Entity) splashDamage.next();
-                    double distanceToEntity = this.getDistanceToEntity(entityHit);
+                    double distanceToEntity = this.getDistance(entityHit);
 
                     double radius = getRangeOfBlast();
                     if (distanceToEntity < radius) {
@@ -913,14 +902,12 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         if (filling > 0) {
             for (int a = 0; a < 16; a++) {
                 float range = 0.6F;
-                EntityShrapnel shrapnel = new EntityShrapnel(worldObj, posX, posY + 0.5D, posZ,
-                        (rand.nextDouble() - 0.5) * range, (rand.nextDouble() - 0.5) * range,
-                        (rand.nextDouble() - 0.5) * range);
+                EntityShrapnel shrapnel = new EntityShrapnel(world, posX, posY + 0.5D, posZ, (rand.nextDouble() - 0.5) * range, (rand.nextDouble() - 0.5) * range, (rand.nextDouble() - 0.5) * range);
 
                 if (filling == 2) {
                     shrapnel.setFire(10);
                 }
-                worldObj.spawnEntityInWorld(shrapnel);
+                world.spawnEntity(shrapnel);
             }
         }
     }

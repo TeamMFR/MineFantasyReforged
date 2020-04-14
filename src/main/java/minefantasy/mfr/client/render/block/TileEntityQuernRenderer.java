@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class TileEntityQuernRenderer extends TileEntitySpecialRenderer {
+public class TileEntityQuernRenderer extends TileEntitySpecialRenderer<TileEntityQuern> {
     private ModelQuern model;
     private Random random = new Random();
 

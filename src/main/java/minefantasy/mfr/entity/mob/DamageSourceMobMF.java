@@ -2,9 +2,9 @@ package minefantasy.mfr.entity.mob;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EntityDamageSource;
-import net.minecraft.util.IChatComponent;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 
 public class DamageSourceMobMF extends EntityDamageSource {
     protected Entity damageSourceEntity;
@@ -17,13 +17,13 @@ public class DamageSourceMobMF extends EntityDamageSource {
     }
 
     @Override
-    public Entity getEntity() {
+    public Entity getTrueSource() {
         return this.damageSourceEntity;
     }
 
     @Override
-    public IChatComponent func_151519_b(EntityLivingBase target) {
-        String s = "death.attack." + this.damageType + "." + attackName;
-        return new ChatComponentTranslation(s, new Object[]{target.func_145748_c_(), this.damageSourceEntity.func_145748_c_()});
+    public ITextComponent getDeathMessage(EntityLivingBase target) {
+        String string = "death.attack." + this.damageType + "." + attackName;
+        return new TextComponentTranslation(string, target.getDisplayName(), this.damageSourceEntity.getDisplayName()) {};
     }
 }

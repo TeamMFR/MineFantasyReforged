@@ -1,7 +1,8 @@
 package minefantasy.mfr.entity.mob;
 
 import minefantasy.mfr.config.ConfigMobs;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -106,28 +107,26 @@ public class DragonBreed {
 
     public static int getRandomDragon(EntityDragon dragon, int tier) {
         ArrayList<DragonBreed> pool = breeds[tier];
-        BiomeGenBase biome = dragon.worldObj.getBiomeGenForCoords((int) (dragon.posX), (int) (dragon.posZ));
-        int id = getIdForBiome(biome,
-                dragon.worldObj.canLightningStrikeAt((int) dragon.posX, (int) dragon.posY, (int) dragon.posZ),
-                dragon.dimension);
+        Biome biome = dragon.world.getBiome(new BlockPos((int) (dragon.posX),0, (int) (dragon.posZ)));
+        int id = getIdForBiome(biome, dragon.world.canBlockSeeSky(new BlockPos((int) dragon.posX, (int) dragon.posY, (int) dragon.posZ)), dragon.dimension);
         if (id >= pool.size()) {
             id = pool.size() - 1;
         }
         return id;
     }
 
-    private static int getIdForBiome(BiomeGenBase biome, boolean isRaining, int dimension) {
+    private static int getIdForBiome(Biome biome, boolean isRaining, int dimension) {
         if (dimension == -1) {
             return rand.nextBoolean() ? 3 : 0;// Ash or Fire
         }
-        BiomeGenBase.TempCategory category = biome.getTempCategory();
-        if (!biome.func_150559_j() && !biome.canSpawnLightningBolt())
+        Biome.TempCategory category = biome.getTempCategory();
+        if (!biome.isSnowyBiome() && !biome.canRain())
             return 3;// Ash
-        if (biome.getEnableSnow() || biome.temperature <= 0.25F || category == BiomeGenBase.TempCategory.COLD)
+        if (biome.getEnableSnow() || biome.getDefaultTemperature() <= 0.25F || category == Biome.TempCategory.COLD)
             return 1;// Frost
-        if (biome.isHighHumidity() || (category == BiomeGenBase.TempCategory.MEDIUM && isRaining))
+        if (biome.isHighHumidity() || (category == Biome.TempCategory.MEDIUM && isRaining))
             return 2;// Poison
-        if (category == BiomeGenBase.TempCategory.OCEAN)
+        if (category == Biome.TempCategory.OCEAN)
             return 2;// Poison
         return 0;// Fire
     }

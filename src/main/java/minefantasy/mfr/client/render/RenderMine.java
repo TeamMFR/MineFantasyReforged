@@ -1,22 +1,24 @@
 package minefantasy.mfr.client.render;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.entity.EntityMine;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BlockRendererDispatcher;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderMine extends Render {
-    private RenderBlocks blockRenderer = new RenderBlocks();
+    private BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
 
     public RenderMine() {
+        super(Minecraft.getMinecraft().getRenderManager());
         this.shadowSize = 0.25F;
     }
 
@@ -29,11 +31,11 @@ public class RenderMine extends Render {
 
         this.bindEntityTexture(mine);
         GL11.glScalef(0.5F, 0.25F, 0.5F);
-        this.blockRenderer.renderBlockAsItem(block, 0, mine.getBrightness(f1));
+        this.blockrendererdispatcher.renderBlockBrightness(block.getDefaultState(), mine.getBrightness());
 
         GL11.glTranslatef(0F, 0.3F, 0F);
         GL11.glScalef(0.5F, 1.0F, 0.5F);
-        this.blockRenderer.renderBlockAsItem(block, 0, mine.getBrightness(f1));
+        this.blockrendererdispatcher.renderBlockBrightness(block.getDefaultState(), mine.getBrightness());
 
         GL11.glPopMatrix();
     }
@@ -43,7 +45,7 @@ public class RenderMine extends Render {
      * you call Render.bindEntityTexture.
      */
     protected ResourceLocation getEntityTexture(EntityMine p_110775_1_) {
-        return TextureMap.locationBlocksTexture;
+        return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }
 
     /**

@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.render;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
@@ -16,6 +17,7 @@ public class RenderParachute extends Render {
     protected ModelBase modelParachute;
 
     public RenderParachute() {
+        super(Minecraft.getMinecraft().getRenderManager());
         this.shadowSize = 1F;
         this.modelParachute = new ModelParachute();
     }

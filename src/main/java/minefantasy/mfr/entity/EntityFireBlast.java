@@ -3,12 +3,24 @@ package minefantasy.mfr.entity;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+
+import java.util.Objects;
 
 public class EntityFireBlast extends EntityFireball {
     private static final float size = 0.75F;
@@ -51,17 +63,17 @@ public class EntityFireBlast extends EntityFireball {
                         int i = (int) posX + x;
                         int j = (int) posY + y;
                         int k = (int) posZ + z;
-
-                        if (!world.isRemote && canBlockCatchFire(i, j - 1, k) && world.isAirBlock(i, j, k)
+                        BlockPos breathPos = new BlockPos(i, j, k);
+                        if (!world.isRemote && canBlockCatchFire(breathPos.add(0, -1,0)) && world.isAirBlock(breathPos)
                                 && rand.nextFloat() < getPyro()) {
-                            this.world.setBlockState(i, j, k, Blocks.fire);
+                            this.world.setBlockState(breathPos, (IBlockState) Blocks.FIRE);
                         }
                     }
                 }
             }
         }
-        AxisAlignedBB bb = this.boundingBox.expand(1D, 1D, 1D);
-        if (!worldObj.isRemote)
+        AxisAlignedBB bb = Objects.requireNonNull(this.getCollisionBoundingBox()).expand(1D, 1D, 1D);
+        if (!world.isRemote)
             this.destroyBlocksInAABB(bb);
     }
 
@@ -75,45 +87,43 @@ public class EntityFireBlast extends EntityFireball {
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition pos) {
-        if (!this.worldObj.isRemote) {
-            if (pos.entityHit != null) {
-                if (!pos.entityHit.isImmuneToFire()) {
-                    pos.entityHit.setFire(isPreset("Dragon") ? 2 : 4);
-                    pos.entityHit.attackEntityFrom(causeFireblastDamage(), getDamage());
+    protected void onImpact(RayTraceResult rayTraceResult) {
+        if (!this.world.isRemote) {
+            if (rayTraceResult.entityHit != null) {
+                if (!rayTraceResult.entityHit.isImmuneToFire()) {
+                    rayTraceResult.entityHit.setFire(isPreset("Dragon") ? 2 : 4);
+                    rayTraceResult.entityHit.attackEntityFrom(causeFireblastDamage(), getDamage());
                 }
             } else {
-                int i = pos.blockX;
-                int j = pos.blockY;
-                int k = pos.blockZ;
+                BlockPos pos = rayTraceResult.getBlockPos();
 
-                switch (pos.sideHit) {
-                    case 0:
-                        --j;
+                switch (rayTraceResult.sideHit) {
+                    case DOWN:
+                        pos.add(0,-1,0);
                         break;
-                    case 1:
-                        ++j;
+                    case UP:
+                        pos.add(0,1,0);
                         break;
-                    case 2:
-                        --k;
+                    case NORTH:
+                        pos.add(0,0,-1);
                         break;
-                    case 3:
-                        ++k;
+                    case SOUTH:
+                        pos.add(0,0,1);
                         break;
-                    case 4:
-                        --i;
+                    case WEST:
+                        pos.add(-1,0,0);
                         break;
-                    case 5:
-                        ++i;
+                    case EAST:
+                        pos.add(1,0,0);
                 }
 
-                if (!worldObj.isRemote && this.worldObj.isAirBlock(i, j, k) && rand.nextFloat() < getPyro()) {
-                    this.worldObj.setBlock(i, j, k, Blocks.fire);
+                if (!world.isRemote && this.world.isAirBlock(pos) && rand.nextFloat() < getPyro()) {
+                    this.world.setBlockState(pos, (IBlockState) Blocks.FIRE);
                 }
-                boolean tnt = worldObj.getBlock(pos.blockX, pos.blockY, pos.blockZ).getMaterial() == Material.tnt;
+                boolean tnt = world.getBlockState(pos).getMaterial() == Material.TNT;
                 if (isPreset("BlastFurnace") && (rand.nextInt(50) == 0) || tnt) {
-                    boolean solid = worldObj.isBlockNormalCubeDefault(pos.blockX, pos.blockY, pos.blockZ, false);
-                    worldObj.newExplosion(this, posX, posY, posZ, solid ? 1.5F : 0.5F, true, true);
+                    boolean solid = world.isBlockFullCube(pos);
+                    world.newExplosion(this, posX, posY, posZ, solid ? 1.5F : 0.5F, true, true);
                 }
             }
 
@@ -188,12 +198,12 @@ public class EntityFireBlast extends EntityFireball {
         return false;
     }
 
-    public boolean canBlockCatchFire(int x, int y, int z) {
-        return canCatchFire(x, y, z, UP);
+    public boolean canBlockCatchFire(BlockPos pos) {
+        return canCatchFire(pos, EnumFacing.UP);
     }
 
-    public boolean canCatchFire(int x, int y, int z, ForgeDirection face) {
-        return worldObj.getBlock(x, y, z).isFlammable(worldObj, x, y, z, face);
+    public boolean canCatchFire(BlockPos pos, EnumFacing facing) {
+        return world.getBlockState(pos).getBlock().isFlammable(world, pos, facing);
     }
 
     public EntityFireBlast preset(String string) {
@@ -202,28 +212,29 @@ public class EntityFireBlast extends EntityFireball {
     }
 
     private boolean destroyBlocksInAABB(AxisAlignedBB box) {
-        int var2 = MathHelper.floor_double(box.minX);
-        int var3 = MathHelper.floor_double(box.minY);
-        int var4 = MathHelper.floor_double(box.minZ);
-        int var5 = MathHelper.floor_double(box.maxX);
-        int var6 = MathHelper.floor_double(box.maxY);
-        int var7 = MathHelper.floor_double(box.maxZ);
+        int var2 = MathHelper.floor(box.minX);
+        int var3 = MathHelper.floor(box.minY);
+        int var4 = MathHelper.floor(box.minZ);
+        int var5 = MathHelper.floor(box.maxX);
+        int var6 = MathHelper.floor(box.maxY);
+        int var7 = MathHelper.floor(box.maxZ);
         boolean var8 = false;
         boolean var9 = false;
 
         for (int var10 = var2; var10 <= var5; ++var10) {
             for (int var11 = var3; var11 <= var6; ++var11) {
                 for (int var12 = var4; var12 <= var7; ++var12) {
-                    Material var13 = this.worldObj.getBlock(var10, var11, var12).getMaterial();
+                    BlockPos pos = new BlockPos(var10, var11, var12);
+                    Material var13 = this.world.getBlockState(pos).getMaterial();
 
                     if (var13 != null) {
-                        if (var13 == Material.glass) {
+                        if (var13 == Material.GLASS) {
                             var9 = true;
-                            this.worldObj.setBlockToAir(var10, var11, var12);
-                        } else if (var13 == Material.tnt) {
+                            this.world.setBlockToAir(pos);
+                        } else if (var13 == Material.TNT) {
                             var9 = true;
-                            this.worldObj.setBlockToAir(var10, var11, var12);
-                            this.worldObj.createExplosion(this, var10, var11, var12, 4.0F, true);
+                            this.world.setBlockToAir(pos);
+                            this.world.createExplosion(this, var10, var11, var12, 4.0F, true);
                         } else {
                             var8 = true;
                         }
@@ -236,9 +247,9 @@ public class EntityFireBlast extends EntityFireball {
             double var16 = box.minX + (box.maxX - box.minX) * this.rand.nextFloat();
             double var17 = box.minY + (box.maxY - box.minY) * this.rand.nextFloat();
             double var14 = box.minZ + (box.maxZ - box.minZ) * this.rand.nextFloat();
-            this.worldObj.spawnParticle("largeexplode", var16, var17, var14, 0.0D, 0.0D, 0.0D);
+            this.world.spawnParticle(EnumParticleTypes.EXPLOSION_LARGE, var16, var17, var14, 0.0D, 0.0D, 0.0D);
             for (int a = 0; a < 1 + rand.nextInt(4); a++)
-                this.worldObj.playSoundAtEntity(this, "dig.glass", 1F, 1F);
+                this.world.playSound(var16, var17, var14, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT, 1F, 1F, true);
         }
 
         return var8;

@@ -1,44 +1,85 @@
 package minefantasy.mfr.proxy;
 
-import minefantasy.mfr.MineFantasyReborn;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.helpers.ClientTickHandler;
 import minefantasy.mfr.api.knowledge.InformationList;
-import minefantasy.mfr.block.tile.*;
+import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.block.tile.TileEntityBellows;
+import minefantasy.mfr.block.tile.TileEntityBigFurnace;
+import minefantasy.mfr.block.tile.TileEntityBloomery;
+import minefantasy.mfr.block.tile.TileEntityBombBench;
+import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
+import minefantasy.mfr.block.tile.TileEntityCrucible;
+import minefantasy.mfr.block.tile.TileEntityForge;
+import minefantasy.mfr.block.tile.TileEntityQuern;
+import minefantasy.mfr.block.tile.TileEntityResearch;
+import minefantasy.mfr.block.tile.TileEntityTanningRack;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
 import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
 import minefantasy.mfr.client.KnowledgePageRegistry;
-import minefantasy.mfr.client.gui.*;
-import minefantasy.mfr.client.render.*;
-import minefantasy.mfr.client.render.block.*;
-import minefantasy.mfr.client.render.block.component.TileEntityComponentRenderer;
-import minefantasy.mfr.client.render.mob.*;
-import minefantasy.mfr.entity.*;
+import minefantasy.mfr.client.gui.GuiAnvilMF;
+import minefantasy.mfr.client.gui.GuiBigFurnace;
+import minefantasy.mfr.client.gui.GuiBlastChamber;
+import minefantasy.mfr.client.gui.GuiBlastHeater;
+import minefantasy.mfr.client.gui.GuiBloomery;
+import minefantasy.mfr.client.gui.GuiBombBench;
+import minefantasy.mfr.client.gui.GuiCarpenterMF;
+import minefantasy.mfr.client.gui.GuiCrossbowBench;
+import minefantasy.mfr.client.gui.GuiCrucible;
+import minefantasy.mfr.client.gui.GuiForge;
+import minefantasy.mfr.client.gui.GuiKnowledge;
+import minefantasy.mfr.client.gui.GuiKnowledgeEntry;
+import minefantasy.mfr.client.gui.GuiQuern;
+import minefantasy.mfr.client.gui.GuiReload;
+import minefantasy.mfr.client.gui.GuiResearchBlock;
+import minefantasy.mfr.client.render.AnimationHandlerMF;
+import minefantasy.mfr.client.render.HudHandlerMF;
+import minefantasy.mfr.client.render.RenderArrowMF;
+import minefantasy.mfr.client.render.RenderBombIcon;
+import minefantasy.mfr.client.render.RenderDragonBreath;
+import minefantasy.mfr.client.render.RenderFireBlast;
+import minefantasy.mfr.client.render.RenderMine;
+import minefantasy.mfr.client.render.RenderParachute;
+import minefantasy.mfr.client.render.RenderPowerArmour;
+import minefantasy.mfr.client.render.RenderShrapnel;
+import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
+import minefantasy.mfr.client.render.block.TileEntityForgeRenderer;
+import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
+import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
+import minefantasy.mfr.client.render.mob.ModelHound;
+import minefantasy.mfr.client.render.mob.ModelMinotaur;
+import minefantasy.mfr.client.render.mob.RenderDragon;
+import minefantasy.mfr.client.render.mob.RenderHound;
+import minefantasy.mfr.client.render.mob.RenderMinotaur;
+import minefantasy.mfr.entity.EntityArrowMFR;
+import minefantasy.mfr.entity.EntityBomb;
+import minefantasy.mfr.entity.EntityCogwork;
+import minefantasy.mfr.entity.EntityDragonBreath;
+import minefantasy.mfr.entity.EntityFireBlast;
+import minefantasy.mfr.entity.EntityMine;
+import minefantasy.mfr.entity.EntityParachute;
+import minefantasy.mfr.entity.EntityShrapnel;
+import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.init.DragonforgedStyle;
-import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.mechanics.ExtendedReachMFR;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
-import minefantasy.mfr.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.lwjgl.input.Keyboard;
@@ -86,30 +127,16 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(new HudHandlerMF());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnvilMFR.class, new TileEntityAnvilMFRRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCarpenterMFR.class, new TileEntityCarpenterRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBombBench.class, new TileEntityBombBenchRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityForge.class, new TileEntityForgeRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new TileEntityBellowsRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityResearch.class, new TileEntityResearchRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTrough.class, new TileEntityTroughRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBombPress.class, new TileEntityBombPressRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBloomery.class, new TileEntityBloomeryRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCrossbowBench.class, new TileEntityCrossbowBenchRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFirepit.class, new TileEntityFirepitRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChimney.class, new TileEntitySmokePipeRenderer());
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer());
     }
 
     public void registerEntityRenderer() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, new RenderArrowMF());
+        RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, new RenderArrowMF(Minecraft.getMinecraft().getRenderManager()));
         RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, new RenderBombIcon());// Switch to RenderBomb
         // when syncing is
         // fixed
@@ -122,8 +149,7 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour());
 
         RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, new RenderDragon(2F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class,
-                new RenderMinotaur(new ModelMinotaur(), 1.5F));
+        RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));
         RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
     }
 

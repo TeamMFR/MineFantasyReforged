@@ -1,7 +1,5 @@
 package minefantasy.mfr.init;
 
-import net.minecraft.world.biome.Biome;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityCogwork;
@@ -12,9 +10,10 @@ import minefantasy.mfr.entity.mob.EntityMinotaur;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
-import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class MobListMF {
     public static void register() {
@@ -40,16 +39,16 @@ public class MobListMF {
 
     public static void addSpawn(Class<? extends EntityLiving> entityClass, int weightedProb, int min, int max,
                                 EnumCreatureType typeOfCreature) {
-        for (Biome biome : Biome.getBiomeGenArray()) {
+        for (Biome biome : Biome.REGISTRY) {
             if (biome != null) {
-                if (BiomeDictionary.isBiomeRegistered(biome)) {
-                    if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.END)) {
+                if (BiomeDictionary.hasAnyType(biome)) {
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END)) {
                         return;
                     }
-                    if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.NETHER)) {
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER)) {
                         return;
                     }
-                    if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM)) {
+                    if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.MUSHROOM)) {
                         return;
                     }
                 }
@@ -61,10 +60,10 @@ public class MobListMF {
 
     public static void addSpawn(Class<? extends EntityLiving> entityClass, int weightedProb, int min, int max,
                                 EnumCreatureType typeOfCreature, BiomeDictionary.Type type) {
-        for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
+        for (Biome biome : Biome.REGISTRY) {
             if (biome != null) {
-                if (BiomeDictionary.isBiomeRegistered(biome)) {
-                    if (BiomeDictionary.isBiomeOfType(biome, type)) {
+                if (BiomeDictionary.hasAnyType(biome)) {
+                    if (BiomeDictionary.hasType(biome, type)) {
                         EntityRegistry.addSpawn(entityClass, weightedProb, min, max, typeOfCreature, biome);
                     }
                 }

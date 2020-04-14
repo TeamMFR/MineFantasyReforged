@@ -1,10 +1,13 @@
 package minefantasy.mfr.entity;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.armour.IGasProtector;
@@ -29,10 +32,10 @@ public class EntitySmoke extends Entity {
     public double accelerationX;
     public double accelerationY;
     public double accelerationZ;
-    private int field_145795_e = -1;
-    private int field_145793_f = -1;
-    private int field_145794_g = -1;
-    private Block field_145796_h;
+    private int posX = -1;
+    private int posY = -1;
+    private int posZ = -1;
+    private IBlockState state;
     private boolean inGround;
     private int ticksAlive;
     private int ticksInAir;
@@ -76,11 +79,6 @@ public class EntitySmoke extends Entity {
         return false;
     }
 
-    @Override
-    public boolean canAttackWithItem() {
-        return false;
-    }
-
     protected void entityInit() {
     }
 
@@ -101,14 +99,13 @@ public class EntitySmoke extends Entity {
      */
     public void onUpdate() {
         if (!this.world.isRemote && (this.shootingEntity != null && this.shootingEntity.isDead
-                || !this.world.blockExists((int) this.posX, (int) this.posY, (int) this.posZ))) {
+                || !this.world.isBlockLoaded(this.getPosition()))) {
             this.setDead();
         } else {
             super.onUpdate();
 
             if (this.inGround) {
-                if (this.world.getBlock(this.field_145795_e, this.field_145793_f,
-                        this.field_145794_g) == this.field_145796_h) {
+                if (this.world.getBlockState(new BlockPos(this.posX, this.posY, this.posZ)) == this.state) {
                     ++this.ticksAlive;
 
                     if (this.ticksAlive == 600) {
@@ -128,22 +125,19 @@ public class EntitySmoke extends Entity {
                 ++this.ticksInAir;
             }
 
-            Vec3 vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            Vec3 vec31 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY,
-                    this.posZ + this.motionZ);
+            Vec3d vec3 = new Vec3d(this.posX, this.posY, this.posZ);
+            Vec3d vec31 = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
             RayTraceResult movingobjectposition = this.world.rayTraceBlocks(vec3, vec31);
-            vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            vec31 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY,
-                    this.posZ + this.motionZ);
+            vec3 = new Vec3d(this.posX, this.posY, this.posZ);
+            vec31 = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (movingobjectposition != null) {
-                vec31 = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord,
-                        movingobjectposition.hitVec.zCoord);
+                vec31 = new Vec3d(movingobjectposition.hitVec.x, movingobjectposition.hitVec.y, movingobjectposition.hitVec.z);
             }
 
             Entity entity = null;
             List list = this.world.getEntitiesWithinAABBExcludingEntity(this,
-                    this.getCollisionBoundingBox().addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+                    this.getCollisionBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
 
             for (int i = 0; i < list.size(); ++i) {
@@ -264,10 +258,10 @@ public class EntitySmoke extends Entity {
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     public void writeEntityToNBT(NBTTagCompound nbt) {
-        nbt.setShort("xTile", (short) this.field_145795_e);
-        nbt.setShort("yTile", (short) this.field_145793_f);
-        nbt.setShort("zTile", (short) this.field_145794_g);
-        nbt.setByte("inTile", (byte) Block.getIdFromBlock(this.field_145796_h));
+        nbt.setShort("xTile", (short) this.posX);
+        nbt.setShort("yTile", (short) this.posY);
+        nbt.setShort("zTile", (short) this.posZ);
+        nbt.setByte("inTile", (byte) Block.getIdFromBlock(this.state.getBlock()));
         nbt.setByte("inGround", (byte) (this.inGround ? 1 : 0));
         nbt.setTag("direction", this.newDoubleNBTList(new double[]{this.motionX, this.motionY, this.motionZ}));
     }
@@ -276,17 +270,17 @@ public class EntitySmoke extends Entity {
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     public void readEntityFromNBT(NBTTagCompound nbt) {
-        this.field_145795_e = nbt.getShort("xTile");
-        this.field_145793_f = nbt.getShort("yTile");
-        this.field_145794_g = nbt.getShort("zTile");
-        this.field_145796_h = Block.getBlockById(nbt.getByte("inTile") & 255);
+        this.posX = nbt.getShort("xTile");
+        this.posY = nbt.getShort("yTile");
+        this.posZ = nbt.getShort("zTile");
+        this.state = Block.getBlockById(nbt.getByte("inTile") & 255).getDefaultState();
         this.inGround = nbt.getByte("inGround") == 1;
 
         if (nbt.hasKey("direction", 9)) {
             NBTTagList nbttaglist = nbt.getTagList("direction", 6);
-            this.motionX = nbttaglist.func_150309_d(0);
-            this.motionY = nbttaglist.func_150309_d(1);
-            this.motionZ = nbttaglist.func_150309_d(2);
+            this.motionX = nbttaglist.getDoubleAt(0);
+            this.motionY = nbttaglist.getDoubleAt(1);
+            this.motionZ = nbttaglist.getDoubleAt(2);
         } else {
             this.setDead();
         }

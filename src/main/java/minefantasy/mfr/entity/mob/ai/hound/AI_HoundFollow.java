@@ -1,28 +1,33 @@
 package minefantasy.mfr.entity.mob.ai.hound;
 
 import minefantasy.mfr.entity.mob.EntityHound;
+import net.minecraft.block.state.BlockFaceShape;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.pathfinding.PathNodeType;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class AI_HoundFollow extends EntityAIBase {
-    World theWorld;
+    World world;
     float maxDist;
     float minDist;
     private EntityHound thePet;
     private EntityLivingBase theOwner;
-    private double field_75336_f;
+    private double followSpeed;
     private PathNavigate petPathfinder;
-    private int field_75343_h;
+    private int timeToRecalcPath;
+    private float oldWaterCost;
     private boolean field_75344_i;
 
-    public AI_HoundFollow(EntityHound dog, double p_i1625_2_, float min, float max) {
+    public AI_HoundFollow(EntityHound dog, double followSpeedIn, float min, float max) {
         this.thePet = dog;
-        this.theWorld = dog.world;
-        this.field_75336_f = p_i1625_2_;
+        this.world = dog.world;
+        this.followSpeed = followSpeedIn;
         this.petPathfinder = dog.getNavigator();
         this.minDist = min;
         this.maxDist = max;
@@ -60,9 +65,9 @@ public class AI_HoundFollow extends EntityAIBase {
      * Execute a one shot task or start executing a continuous task
      */
     public void startExecuting() {
-        this.field_75343_h = 0;
-        this.field_75344_i = this.thePet.getNavigator().getAvoidsWater();
-        this.thePet.getNavigator().setAvoidsWater(false);
+        this.timeToRecalcPath = 0;
+        this.oldWaterCost = this.thePet.getPathPriority(PathNodeType.WATER);
+        this.thePet.setPathPriority(PathNodeType.WATER, 0.0F);
     }
 
     /**
@@ -70,8 +75,8 @@ public class AI_HoundFollow extends EntityAIBase {
      */
     public void resetTask() {
         this.theOwner = null;
-        this.petPathfinder.clearPathEntity();
-        this.thePet.getNavigator().setAvoidsWater(this.field_75344_i);
+        this.petPathfinder.clearPath();
+        this.thePet.setPathPriority(PathNodeType.WATER, this.oldWaterCost);
     }
 
     /**
@@ -81,10 +86,10 @@ public class AI_HoundFollow extends EntityAIBase {
         this.thePet.getLookHelper().setLookPositionWithEntity(this.theOwner, 10.0F, this.thePet.getVerticalFaceSpeed());
 
         if (!this.thePet.isSitting() && this.thePet.shouldFollowOwner()) {
-            if (--this.field_75343_h <= 0) {
-                this.field_75343_h = 10;
+            if (--this.timeToRecalcPath <= 0) {
+                this.timeToRecalcPath = 10;
 
-                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.field_75336_f)) {
+                if (!this.petPathfinder.tryMoveToEntityLiving(this.theOwner, this.followSpeed)) {
                     if (!this.thePet.getLeashed()) {
                         if (this.thePet.getDistanceSq(this.theOwner) >= 144.0D)// Teleport
                         {
@@ -94,13 +99,9 @@ public class AI_HoundFollow extends EntityAIBase {
 
                             for (int l = 0; l <= 4; ++l) {
                                 for (int i1 = 0; i1 <= 4; ++i1) {
-                                    if ((l < 1 || i1 < 1 || l > 3 || i1 > 3)
-                                            && World.doesBlockHaveSolidTopSurface(this.theWorld, i + l, k - 1, j + i1)
-                                            && !this.theWorld.getBlockState(new BlockPos(i + l, k, j + i1)).isNormalCube()
-                                            && !this.theWorld.getBlockState(new BlockPos(i + l, k + 1, j + i1)).isNormalCube()) {
-                                        this.thePet.setLocationAndAngles(i + l + 0.5F, k, j + i1 + 0.5F,
-                                                this.thePet.rotationYaw, this.thePet.rotationPitch);
-                                        this.petPathfinder.clearPathEntity();
+                                    if ((l < 1 || i1 < 1 || l > 3 || i1 > 3) && this.isTeleportFriendlyBlock(i, j, k, l, i1)){
+                                        this.thePet.setLocationAndAngles(i + l + 0.5F, k, j + i1 + 0.5F, this.thePet.rotationYaw, this.thePet.rotationPitch);
+                                        this.petPathfinder.clearPath();
                                         return;
                                     }
                                 }
@@ -110,5 +111,12 @@ public class AI_HoundFollow extends EntityAIBase {
                 }
             }
         }
+    }
+
+    protected boolean isTeleportFriendlyBlock(int x, int p_192381_2_, int y, int p_192381_4_, int p_192381_5_)
+    {
+        BlockPos blockpos = new BlockPos(x + p_192381_4_, y - 1, p_192381_2_ + p_192381_5_);
+        IBlockState iblockstate = this.world.getBlockState(blockpos);
+        return iblockstate.getBlockFaceShape(this.world, blockpos, EnumFacing.DOWN) == BlockFaceShape.SOLID && iblockstate.canEntitySpawn(this.thePet) && this.world.isAirBlock(blockpos.up()) && this.world.isAirBlock(blockpos.up(2));
     }
 }

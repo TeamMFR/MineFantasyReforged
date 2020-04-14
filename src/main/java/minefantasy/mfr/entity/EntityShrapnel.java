@@ -1,6 +1,9 @@
 package minefantasy.mfr.entity;
 
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -9,10 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class EntityShrapnel extends Entity implements IDamageType {
         this.setSize(1.0F, 1.0F);
         this.setLocationAndAngles(x, y, z, this.rotationYaw, this.rotationPitch);
         this.setPosition(x, y, z);
-        double d6 = MathHelper.sqrt_double(xv * xv + yv * yv + zv * zv);
+        double d6 = MathHelper.sqrt(xv * xv + yv * yv + zv * zv);
         this.accelerationX = xv / d6 * 0.1D;
         this.accelerationY = yv / d6 * 0.1D;
         this.accelerationZ = zv / d6 * 0.1D;
@@ -52,12 +52,11 @@ public class EntityShrapnel extends Entity implements IDamageType {
         this.setSize(1.0F, 1.0F);
         this.setLocationAndAngles(shooter.posX, shooter.posY, shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.yOffset = 0.0F;
         this.motionX = this.motionY = this.motionZ = 0.0D;
         x += this.rand.nextGaussian() * 0.4D;
         y += this.rand.nextGaussian() * 0.4D;
         z += this.rand.nextGaussian() * 0.4D;
-        double d3 = MathHelper.sqrt_double(x * x + y * y + z * z);
+        double d3 = MathHelper.sqrt(x * x + y * y + z * z);
         this.accelerationX = x / d3 * 0.1D;
         this.accelerationY = y / d3 * 0.1D;
         this.accelerationZ = z / d3 * 0.1D;
@@ -75,7 +74,7 @@ public class EntityShrapnel extends Entity implements IDamageType {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double dist) {
-        double d1 = this.boundingBox.getAverageEdgeLength() * 4.0D;
+        double d1 = this.getCollisionBoundingBox().getAverageEdgeLength() * 4.0D;
         d1 *= 64.0D;
         return dist < d1 * d1;
     }
@@ -86,7 +85,7 @@ public class EntityShrapnel extends Entity implements IDamageType {
     @Override
     public void onUpdate() {
         if (!this.world.isRemote && (this.shootingEntity != null && this.shootingEntity.isDead
-                || !this.world.blockExists((int) this.posX, (int) this.posY, (int) this.posZ))) {
+                || !this.world.isBlockLoaded(this.getPosition()))) {
             this.setDead();
         } else {
             super.onUpdate();
@@ -106,22 +105,19 @@ public class EntityShrapnel extends Entity implements IDamageType {
                     setDead();
             }
 
-            Vec3 vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            Vec3 vec31 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY,
-                    this.posZ + this.motionZ);
-            MovingObjectPosition movingobjectposition = this.worldObj.rayTraceBlocks(vec3, vec31);
-            vec3 = Vec3.createVectorHelper(this.posX, this.posY, this.posZ);
-            vec31 = Vec3.createVectorHelper(this.posX + this.motionX, this.posY + this.motionY,
-                    this.posZ + this.motionZ);
+            Vec3d vec3 = new Vec3d(this.posX, this.posY, this.posZ);
+            Vec3d vec31 =  new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+            RayTraceResult rayTraceResult = this.world.rayTraceBlocks(vec3, vec31);
+            vec3 =  new Vec3d(this.posX, this.posY, this.posZ);
+            vec31 =  new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
-            if (movingobjectposition != null) {
-                vec31 = Vec3.createVectorHelper(movingobjectposition.hitVec.xCoord, movingobjectposition.hitVec.yCoord,
-                        movingobjectposition.hitVec.zCoord);
+            if (rayTraceResult != null) {
+                vec31 = new Vec3d(rayTraceResult.hitVec.x, rayTraceResult.hitVec.y, rayTraceResult.hitVec.z);
             }
 
             Entity entity = null;
             List list = this.world.getEntitiesWithinAABBExcludingEntity(this,
-                    this.boundingBox.addCoord(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+                    this.getCollisionBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
 
             for (int i = 0; i < list.size(); ++i) {
@@ -130,11 +126,11 @@ public class EntityShrapnel extends Entity implements IDamageType {
                 if (entity1.canBeCollidedWith()
                         && (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25)) {
                     float f = 0.3F;
-                    AxisAlignedBB axisalignedbb = entity1.boundingBox.expand(f, f, f);
-                    MovingObjectPosition movingobjectposition1 = axisalignedbb.calculateIntercept(vec3, vec31);
+                    AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().expand(f, f, f);
+                    RayTraceResult rayTraceResult1 = axisalignedbb.calculateIntercept(vec3, vec31);
 
-                    if (movingobjectposition1 != null) {
-                        double d1 = vec3.distanceTo(movingobjectposition1.hitVec);
+                    if (rayTraceResult1 != null) {
+                        double d1 = vec3.distanceTo(rayTraceResult1.hitVec);
 
                         if (d1 < d0 || d0 == 0.0D) {
                             entity = entity1;
@@ -145,17 +141,17 @@ public class EntityShrapnel extends Entity implements IDamageType {
             }
 
             if (entity != null) {
-                movingobjectposition = new MovingObjectPosition(entity);
+                rayTraceResult = new RayTraceResult(entity);
             }
 
-            if (movingobjectposition != null) {
-                this.onImpact(movingobjectposition);
+            if (rayTraceResult != null) {
+                this.onImpact(rayTraceResult);
             }
 
             this.posX += this.motionX;
             this.posY += this.motionY;
             this.posZ += this.motionZ;
-            float f1 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
+            float f1 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float) (Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) + 90.0F;
 
             for (this.rotationPitch = (float) (Math.atan2(f1, this.motionY) * 180.0D / Math.PI)
@@ -211,7 +207,7 @@ public class EntityShrapnel extends Entity implements IDamageType {
     /**
      * Called when this EntityFireball hits a block or entity.
      */
-    protected void onImpact(MovingObjectPosition hitPos) {
+    protected void onImpact(RayTraceResult hitPos) {
         if (isBurning() && hitPos.entityHit != null) {
             hitPos.entityHit.setFire(1);
         }
@@ -244,9 +240,9 @@ public class EntityShrapnel extends Entity implements IDamageType {
 
         if (p_70037_1_.hasKey("direction", 9)) {
             NBTTagList nbttaglist = p_70037_1_.getTagList("direction", 6);
-            this.motionX = nbttaglist.func_150309_d(0);
-            this.motionY = nbttaglist.func_150309_d(1);
-            this.motionZ = nbttaglist.func_150309_d(2);
+            this.motionX = nbttaglist.getDoubleAt(0);
+            this.motionY = nbttaglist.getDoubleAt(1);
+            this.motionZ = nbttaglist.getDoubleAt(2);
         } else {
             this.setDead();
         }
@@ -266,23 +262,17 @@ public class EntityShrapnel extends Entity implements IDamageType {
         return 1.0F;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getShadowSize() {
-        return 0.0F;
-    }
-
     /**
      * Gets how bright this entity is.
      */
     @Override
-    public float getBrightness(float p_70013_1_) {
+    public float getBrightness() {
         return 1.0F;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public int getBrightnessForRender(float p_70070_1_) {
+    public int getBrightnessForRender() {
         return 15728880;
     }
 

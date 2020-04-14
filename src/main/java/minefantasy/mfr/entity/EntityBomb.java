@@ -1,33 +1,40 @@
 package minefantasy.mfr.entity;
 
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.MineFantasyReborn;
+import akka.japi.pf.FI;
+import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.item.gadget.EnumCasingType;
 import minefantasy.mfr.item.gadget.EnumExplosiveType;
 import minefantasy.mfr.item.gadget.EnumFuseType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import minefantasy.mfr.mechanics.CombatMechanics;
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.ai.EntityAIAttackOnCollide;
+import net.minecraft.entity.MoverType;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityChicken;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class EntityBomb extends Entity {
-    private final int typeId = 2;
+    private static final DataParameter<Byte> FILLING = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> CASING = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> FUSE = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> POWDER = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
     /**
      * How long the fuse is
      */
@@ -39,7 +46,6 @@ public class EntityBomb extends Entity {
         this.fuse = getFuseTime();
         this.preventEntitySpawning = true;
         this.setSize(0.5F, 0.5F);
-        this.yOffset = this.height / 2.0F;
     }
 
     public EntityBomb(World world, EntityLivingBase thrower) {
@@ -77,7 +83,7 @@ public class EntityBomb extends Entity {
     }
 
     public void setThrowableHeading(double x, double y, double z, float offset, float force) {
-        float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
+        float f2 = MathHelper.sqrt(x * x + y * y + z * z);
         x /= f2;
         y /= f2;
         z /= f2;
@@ -90,7 +96,7 @@ public class EntityBomb extends Entity {
         this.motionX = x;
         this.motionY = y;
         this.motionZ = z;
-        float f3 = MathHelper.sqrt_double(x * x + z * z);
+        float f3 = MathHelper.sqrt(x * x + z * z);
         this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
         this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f3) * 180.0D / Math.PI);
     }
@@ -105,10 +111,10 @@ public class EntityBomb extends Entity {
 
     @Override
     protected void entityInit() {
-        dataWatcher.addObject(typeId, (byte) 0);
-        dataWatcher.addObject(typeId + 1, (byte) 0);
-        dataWatcher.addObject(typeId + 2, (byte) 0);
-        dataWatcher.addObject(typeId + 3, (byte) 0);
+        dataManager.set(FILLING, (byte) 0);
+        dataManager.set(CASING, (byte) 0);
+        dataManager.set(FUSE, (byte) 0);
+        dataManager.set(POWDER, (byte) 0);
     }
 
     /**
@@ -138,7 +144,7 @@ public class EntityBomb extends Entity {
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
         this.motionY -= (0.03999999910593033D * getGravityModifier());
-        this.moveEntity(this.motionX, this.motionY, this.motionZ);
+        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.9800000190734863D;
         this.motionY *= 0.9800000190734863D;
         this.motionZ *= 0.9800000190734863D;
@@ -149,14 +155,13 @@ public class EntityBomb extends Entity {
             this.motionZ *= d;
             this.motionY *= -0.99D;
         }
-        List collide = world.getEntitiesWithinAABBExcludingEntity(this, boundingBox);
+        List collide = world.getEntitiesWithinAABBExcludingEntity(this, getCollisionBox(this));
         if (!collide.isEmpty() && !(thrower != null && collide.contains(thrower))) {
             if (isSticky()) {
                 Object object = collide.get(0);
                 if (object instanceof Entity && object != this) {
-                    if (this.ridingEntity == null && ((Entity) object).riddenByEntity == null
-                            && canStick((Entity) object)) {
-                        this.mountEntity((Entity) object);
+                    if (this.getRidingEntity() == null && !((Entity) object).isBeingRidden() && canStick((Entity) object)) {
+                        this.startRiding((Entity) object);
                         this.fuse = getFuseTime();
                     }
                 }
@@ -175,9 +180,9 @@ public class EntityBomb extends Entity {
             this.world.spawnParticle(EnumParticleTypes.FLAME, this.posX, this.posY + 0.125D, this.posZ, 0.0D, 0.0D, 0.0D);
         }
 
-        if (!world.isRemote && this.ridingEntity != null && ridingEntity instanceof EntityLivingBase) {
-            if (!(ridingEntity instanceof EntityChicken)) {
-                CombatMechanics.panic((EntityLivingBase) ridingEntity, 1.0F, 30);
+        if (!world.isRemote && this.getRidingEntity() != null && getRidingEntity() instanceof EntityLivingBase) {
+            if (!(getRidingEntity() instanceof EntityChicken)) {
+                CombatMechanics.panic((EntityLivingBase) getRidingEntity(), 1.0F, 30);
             }
         }
         if (isStuckInBlock()) {
@@ -190,24 +195,24 @@ public class EntityBomb extends Entity {
     }
 
     @Override
-    public void mountEntity(Entity object) {
-        super.mountEntity(object);
+    public boolean startRiding(Entity object) {
+        super.startRiding(object);
 
         if (object instanceof EntityChicken) {
             EntityChicken chook = (EntityChicken) object;
-            Entity target = world.findNearestEntityWithinAABB(IMob.class, chook.boundingBox.expand(64, 8, 64),
-                    chook);
+            Entity target = world.findNearestEntityWithinAABB(Entity.class, chook.getEntityBoundingBox().expand(64, 8, 64), chook);
             if (target != null) {
                 if (target instanceof EntityLivingBase) {
                     chook.setCustomNameTag("Suicide Chook!");
                     fuse = getFuseTime() * 2;
-                    chook.getNavigator().clearPathEntity();
+                    chook.getNavigator().clearPath();
                     chook.setAttackTarget((EntityLivingBase) target);
-                    chook.targetTasks.addTask(1, new EntityAIAttackOnCollide(chook, IMob.class, 1.25D, true));
+                    chook.targetTasks.addTask(1, new EntityAINearestAttackableTarget(chook, IMob.class, true, true));
                     chook.setAIMoveSpeed(0.5F);
                 }
             }
         }
+        return  true;
     }
 
     private boolean isStuckInBlock() {
@@ -243,12 +248,6 @@ public class EntityBomb extends Entity {
         this.fuse = nbt.getByte("Fuse");
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getShadowSize() {
-        return 0.25F;
-    }
-
     /**
      * returns null or the entityliving it was placed or ignited by
      */
@@ -265,11 +264,11 @@ public class EntityBomb extends Entity {
     }
 
     public void explode() {
-        world.playSoundAtEntity(this, "random.explode", 0.3F, 10F - 5F);
+        world.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.AMBIENT, 0.3F, 10F - 5F, true);
         world.createExplosion(this, posX, posY, posZ, 0, false);
         if (!this.world.isRemote) {
             double area = getRangeOfBlast() * 2D;
-            AxisAlignedBB var3 = this.boundingBox.expand(area, area / 2, area);
+            AxisAlignedBB var3 = this.getEntityBoundingBox().expand(area, area / 2, area);
             List var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, var3);
 
             if (var4 != null && !var4.isEmpty()) {
@@ -278,7 +277,7 @@ public class EntityBomb extends Entity {
                 while (splashDamage.hasNext()) {
                     Entity entityHit = (Entity) splashDamage.next();
 
-                    double distanceToEntity = this.getDistanceToEntity(entityHit);
+                    double distanceToEntity = this.getDistance(entityHit);
                     double radius = getRangeOfBlast();
                     if (distanceToEntity < radius) {
                         float dam = getDamage();
@@ -298,7 +297,7 @@ public class EntityBomb extends Entity {
                             if (getFilling() == 2) {
                                 source.setFireDamage();
                             }
-                            if (ridingEntity != null && entityHit == ridingEntity) {
+                            if (getRidingEntity() != null && entityHit == getRidingEntity()) {
                                 dam *= 1.5F;
                             }
                             if (entityHit.attackEntityFrom(source, dam)) {
@@ -345,32 +344,30 @@ public class EntityBomb extends Entity {
     }
 
     public boolean canEntityBeSeen(Entity entity) {
-        return this.world.rayTraceBlocks(
-                Vec3.createVectorHelper(this.posX, this.posY + this.getEyeHeight(), this.posZ),
-                Vec3.createVectorHelper(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
+        return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + this.getEyeHeight(), this.posZ), new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
     }
 
     public byte getFilling() {
-        return dataWatcher.getWatchableObjectByte(typeId);
+        return dataManager.get(FILLING);
     }
 
     public byte getCasing() {
-        return dataWatcher.getWatchableObjectByte(typeId + 1);
+        return dataManager.get(CASING);
     }
 
     public byte getFuse() {
-        return dataWatcher.getWatchableObjectByte(typeId + 2);
+        return dataManager.get(FUSE);
     }
 
     public byte getPowder() {
-        return dataWatcher.getWatchableObjectByte(typeId + 3);
+        return dataManager.get(POWDER);
     }
 
-    public EntityBomb setType(byte fill, byte casing, byte fuse, byte powder) {
-        dataWatcher.updateObject(typeId, fill);
-        dataWatcher.updateObject(typeId + 1, casing);
-        dataWatcher.updateObject(typeId + 2, fuse);
-        dataWatcher.updateObject(typeId + 3, powder);
+    public EntityBomb setType(byte filling, byte casing, byte fuse, byte powder) {
+        dataManager.set(FILLING, filling);
+        dataManager.set(CASING, casing);
+        dataManager.set(FUSE, fuse);
+        dataManager.set(POWDER, powder);
 
         this.fuse = getFuseType().time;
 
@@ -391,37 +388,5 @@ public class EntityBomb extends Entity {
 
     private EnumPowderType getPowderType() {
         return EnumPowderType.getType(getPowder());
-    }
-
-    public boolean isAABBInSolid(AxisAlignedBB field) {
-        int i = MathHelper.floor_double(field.minX);
-        int j = MathHelper.floor_double(field.maxX + 1.0D);
-        int k = MathHelper.floor_double(field.minY);
-        int l = MathHelper.floor_double(field.maxY + 1.0D);
-        int i1 = MathHelper.floor_double(field.minZ);
-        int j1 = MathHelper.floor_double(field.maxZ + 1.0D);
-
-        for (int k1 = i; k1 < j; ++k1) {
-            for (int l1 = k; l1 < l; ++l1) {
-                for (int i2 = i1; i2 < j1; ++i2) {
-                    Block block = world.getBlockState(k1, l1, i2);
-
-                    if (block.getMaterial().isSolid()) {
-                        int j2 = world.getBlockState(k1, l1, i2);
-                        double d0 = l1 + 1;
-
-                        if (j2 < 8) {
-                            d0 = l1 + 1 - j2 / 8.0D;
-                        }
-
-                        if (d0 >= field.minY) {
-                            return true;
-                        }
-                    }
-                }
-            }
-        }
-
-        return false;
     }
 }

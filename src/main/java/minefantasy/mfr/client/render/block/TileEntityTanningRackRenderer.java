@@ -16,14 +16,12 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer {
+public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<TileEntityTanningRack> {
 
-    private ModelTanningRack model;
     private ModelEngTanningRack engmodel;
 
     public TileEntityTanningRackRenderer() {
         engmodel = new ModelEngTanningRack();
-        model = new ModelTanningRack();
     }
 
     public void renderAModelAt(TileEntityTanningRack tile, double d, double d1, double d2, float f) {
@@ -67,8 +65,6 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer {
             GL11.glPopMatrix();
             engmodel.rotateLever(tile.acTime);
             engmodel.renderLever(0.0625F);
-        } else {
-            model.renderModel(0.0625F);
         }
         renderHungItem(tile, d, d1, d2, f);
         GL11.glPopMatrix();
@@ -88,8 +84,6 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer {
             engmodel.renderBlade(0.0625F);
             GL11.glPopMatrix();
             engmodel.renderLever(0.0625F);
-        } else {
-            model.renderModel(0.0625F);
         }
         GL11.glPopMatrix();
 

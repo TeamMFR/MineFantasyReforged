@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class TileEntityAmmoBoxRenderer extends TileEntitySpecialRenderer {
+public class TileEntityAmmoBoxRenderer extends TileEntitySpecialRenderer<TileEntityAmmoBox> {
     private ModelAmmoBox modelbig, model, modelsml;
     private Random random = new Random();
 

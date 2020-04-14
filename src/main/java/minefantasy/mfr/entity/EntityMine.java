@@ -1,29 +1,37 @@
 package minefantasy.mfr.entity;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.gadget.EnumCasingType;
 import minefantasy.mfr.item.gadget.EnumExplosiveType;
 import minefantasy.mfr.item.gadget.EnumFuseType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
-import minefantasy.mfr.item.list.ToolListMF;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MathHelper;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class EntityMine extends Entity {
+    private static final DataParameter<Byte> FILLING = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> CASING = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> FUSE = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<Byte> POWDER = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
     private static DamageSource mineDmg = new DamageSource("mine").setExplosion();
     private static DamageSource mineFireDmg = new DamageSource("mine").setExplosion().setFireDamage();
     private final int typeId = 2;
@@ -37,7 +45,6 @@ public class EntityMine extends Entity {
         super(world);
         this.preventEntitySpawning = true;
         this.setSize(0.5F, 0.25F);
-        this.yOffset = this.height / 2.0F;
     }
 
     public EntityMine(World world, EntityLivingBase thrower) {
@@ -66,24 +73,23 @@ public class EntityMine extends Entity {
     }
 
     @Override
-    public boolean interactFirst(EntityPlayer user) {
+    public boolean processInitialInteract(EntityPlayer user, EnumHand hand) {
         if (user.isSneaking()) {
             // DISARM
             setDead();
-            user.swingItem();
-            if (!worldObj.isRemote) {
-                ItemStack item = ToolListMF.mine_custom.createMine(getCasing(), getFilling(), getFuse(), getPowder(),
-                        1);
+            user.swingArm(hand);
+            if (!world.isRemote) {
+                ItemStack item = ToolListMFR.mine_custom.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
                 if (!user.inventory.addItemStackToInventory(item)) {
                     this.entityDropItem(item, 0.0F);
                 }
             }
         }
-        return super.interactFirst(user);
+        return super.processInitialInteract(user, hand);
     }
 
     public void setThrowableHeading(double x, double y, double z, float offset, float force) {
-        float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
+        float f2 = MathHelper.sqrt(x * x + y * y + z * z);
         x /= f2;
         y /= f2;
         z /= f2;
@@ -96,7 +102,7 @@ public class EntityMine extends Entity {
         this.motionX = x;
         this.motionY = y;
         this.motionZ = z;
-        float f3 = MathHelper.sqrt_double(x * x + z * z);
+        float f3 = MathHelper.sqrt(x * x + z * z);
         this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
         this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f3) * 180.0D / Math.PI);
     }
@@ -111,10 +117,10 @@ public class EntityMine extends Entity {
 
     @Override
     protected void entityInit() {
-        dataWatcher.addObject(typeId, (byte) 0);
-        dataWatcher.addObject(typeId + 1, (byte) 0);
-        dataWatcher.addObject(typeId + 2, (byte) 0);
-        dataWatcher.addObject(typeId + 3, (byte) 0);
+        dataManager.set(FILLING, (byte) 0);
+        dataManager.set(CASING, (byte) 0);
+        dataManager.set(FUSE, (byte) 0);
+        dataManager.set(POWDER, (byte) 0);
     }
 
     /**
@@ -144,7 +150,7 @@ public class EntityMine extends Entity {
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
         this.motionY -= (0.03999999910593033D * getCase().weightModifier);
-        this.moveEntity(this.motionX, this.motionY, this.motionZ);
+        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
         this.motionX *= 0.9800000190734863D;
         this.motionY *= 0.9800000190734863D;
         this.motionZ *= 0.9800000190734863D;
@@ -161,21 +167,20 @@ public class EntityMine extends Entity {
         double radius = Math.max(1.0D, getRangeOfBlast() - 1.5D);
 
         if (ticksExisted % 5 == 0) {
-            List<EntityLivingBase> list = worldObj.getEntitiesWithinAABB(EntityLivingBase.class,
-                    boundingBox.expand(radius * 2, radius, radius * 2));
+            List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expand(radius * 2, radius, radius * 2));
             if (fuse == 0 && !list.isEmpty()) {
                 boolean detonate = false;
                 Iterator i = list.iterator();
                 while (i.hasNext()) {
                     EntityLivingBase e = (EntityLivingBase) i.next();
-                    if (e.getDistanceToEntity(this) < radius) {
+                    if (e.getDistance(this) < radius) {
                         detonate = true;
                         break;
                     }
                 }
 
                 if (detonate) {
-                    worldObj.playSoundEffect(posX, posY, posZ, "game.tnt.primed", 1.0F, 0.75F);
+                    world.playSound(posX, posY, posZ, SoundEvents.ENTITY_TNT_PRIMED, SoundCategory.BLOCKS, 1.0F, 0.75F, true);
                     --fuse;
                 }
             }
@@ -186,7 +191,7 @@ public class EntityMine extends Entity {
             if (fuse < -10) {
                 this.setDead();
 
-                if (!this.worldObj.isRemote) {
+                if (!this.world.isRemote) {
                     this.explode();
                 }
             }
@@ -195,7 +200,7 @@ public class EntityMine extends Entity {
 
     private void explode2() {
         float power = 5.0F;
-        this.worldObj.createExplosion(this, this.posX, this.posY, this.posZ, power, false);
+        this.world.createExplosion(this, this.posX, this.posY, this.posZ, power, false);
     }
 
     /**
@@ -214,11 +219,6 @@ public class EntityMine extends Entity {
         this.fuse = nbt.getByte("Fuse");
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public float getShadowSize() {
-        return 0.25F;
-    }
 
     /**
      * returns null or the entityliving it was placed or ignited by
@@ -228,12 +228,12 @@ public class EntityMine extends Entity {
     }
 
     public void explode() {
-        worldObj.playSoundAtEntity(this, "random.explode", 0.3F, 10F - 5F);
-        worldObj.createExplosion(this, posX, posY, posZ, 0, false);
-        if (!this.worldObj.isRemote) {
+        world.playSound(this.posX, this.posY, this.posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL,0.3F, 10F - 5F, true);
+        world.createExplosion(this, posX, posY, posZ, 0, false);
+        if (!this.world.isRemote) {
             double area = getRangeOfBlast() * 2D * getPowderType().rangeModifier;
-            AxisAlignedBB var3 = this.boundingBox.expand(area, area / 2, area);
-            List var4 = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, var3);
+            AxisAlignedBB AABB = this.getEntityBoundingBox().expand(area, area / 2, area);
+            List var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
 
             if (var4 != null && !var4.isEmpty()) {
                 Iterator splashDamage = var4.iterator();
@@ -241,7 +241,7 @@ public class EntityMine extends Entity {
                 while (splashDamage.hasNext()) {
                     Entity entityHit = (Entity) splashDamage.next();
 
-                    double distanceToEntity = this.getDistanceToEntity(entityHit);
+                    double distanceToEntity = this.getDistance(entityHit);
 
                     double radius = getRangeOfBlast() * getPowderType().rangeModifier;
                     if (distanceToEntity < radius) {
@@ -274,14 +274,12 @@ public class EntityMine extends Entity {
         if (t > 0) {
             for (int a = 0; a < 16; a++) {
                 float range = 0.6F;
-                EntityShrapnel shrapnel = new EntityShrapnel(worldObj, posX, posY + 0.5D, posZ,
-                        (rand.nextDouble() - 0.5) * (range / 2), (rand.nextDouble()) * range,
-                        (rand.nextDouble() - 0.5) * (range / 2));
+                EntityShrapnel shrapnel = new EntityShrapnel(world, posX, posY + 0.5D, posZ, (rand.nextDouble() - 0.5) * (range / 2), (rand.nextDouble()) * range, (rand.nextDouble() - 0.5) * (range / 2));
 
                 if (t == 2) {
                     shrapnel.setFire(10);
                 }
-                worldObj.spawnEntityInWorld(shrapnel);
+                world.spawnEntity(shrapnel);
             }
         }
     }
@@ -304,32 +302,30 @@ public class EntityMine extends Entity {
     }
 
     public boolean canEntityBeSeen(Entity entity) {
-        return this.worldObj.rayTraceBlocks(
-                Vec3.createVectorHelper(this.posX, this.posY + this.getEyeHeight(), this.posZ),
-                Vec3.createVectorHelper(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
+        return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + this.getEyeHeight(), this.posZ), new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
     }
 
     public byte getFilling() {
-        return dataWatcher.getWatchableObjectByte(typeId);
+        return dataManager.get(FILLING);
     }
 
     public byte getCasing() {
-        return dataWatcher.getWatchableObjectByte(typeId + 1);
+        return dataManager.get(CASING);
     }
 
     public byte getFuse() {
-        return dataWatcher.getWatchableObjectByte(typeId + 2);
+        return dataManager.get(FUSE);
     }
 
     public byte getPowder() {
-        return dataWatcher.getWatchableObjectByte(typeId + 3);
+        return dataManager.get(POWDER);
     }
 
-    public EntityMine setType(byte fill, byte casing, byte fuse, byte powder) {
-        dataWatcher.updateObject(typeId, fill);
-        dataWatcher.updateObject(typeId + 1, casing);
-        dataWatcher.updateObject(typeId + 2, fuse);
-        dataWatcher.updateObject(typeId + 3, powder);
+    public EntityMine setType(byte filling, byte casing, byte fuse, byte powder) {
+        dataManager.set(FILLING, filling);
+        dataManager.set(CASING, casing);
+        dataManager.set(FUSE, fuse);
+        dataManager.set(POWDER, powder);
 
         this.fuse = getFuseType().time;
 

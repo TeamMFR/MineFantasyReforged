@@ -172,8 +172,7 @@ public class ModelCogwork extends ModelBiped {
 
     @Override
     public void render(Entity entity, float f1, float f2, float f3, float f4, float f5, float scale) {
-        heldItemRight = 0;
-        aimedBow = false;
+        rightArmPose = ArmPose.EMPTY;
         boolean isEmpty = true;
         boolean isWornByPlayer = false;
         if (entity instanceof EntityPlayer) {
@@ -184,14 +183,14 @@ public class ModelCogwork extends ModelBiped {
             EntityPlayer player = (EntityPlayer) entity;
 
             ItemStack itemstack = player.getHeldItem(EnumHand.MAIN_HAND);
-            heldItemRight = itemstack == null ? 0 : 1;
+            rightArmPose = itemstack == null ? ArmPose.EMPTY : ArmPose.ITEM;
             if (itemstack != null && player.getItemInUseCount() > 0) {
                 EnumAction enumaction = itemstack.getItemUseAction();
 
                 if (enumaction == EnumAction.BLOCK) {
-                    heldItemRight = 3;
+                    rightArmPose = ArmPose.BLOCK;
                 } else if (enumaction == EnumAction.BOW) {
-                    aimedBow = true;
+                    rightArmPose = ArmPose.BOW_AND_ARROW;
                 }
             }
         }
