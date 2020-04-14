@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL12;
  * Sources are provided for educational reasons. though small bits of
  * code, or methods can be used in your own creations.
  */
-public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer {
+public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer<TileEntityBigFurnace> {
     private ModelBigFurnace model;
 
     public TileEntityBigFurnaceRenderer() {

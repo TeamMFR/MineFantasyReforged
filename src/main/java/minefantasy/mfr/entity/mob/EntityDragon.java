@@ -1,50 +1,62 @@
 package minefantasy.mfr.entity.mob;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.armour.IArmourPenetrationMob;
 import minefantasy.mfr.api.armour.IArmouredEntity;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.PowerArmour;
-import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import minefantasy.mfr.entity.Shockwave;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.boss.IBossDisplayData;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.List;
 
-public class EntityDragon extends EntityFlyingMF
-        implements IMob, IBossDisplayData, IArmouredEntity, IArmourPenetrationMob {
-    private static final int dataID = 12;
+public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntity, IArmourPenetrationMob {
+    private static final DataParameter<Byte> TERRESTRIAL = EntityDataManager.<Byte>createKey(EntityDragon.class, DataSerializers.BYTE);
+    private static final DataParameter<Float> JAW_MOVEMENT = EntityDataManager.<Float>createKey(EntityDragon.class, DataSerializers.FLOAT);
+    private static final DataParameter<Float> NECK_ANGLE = EntityDataManager.<Float>createKey(EntityDragon.class, DataSerializers.FLOAT);
+    private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager.<Integer>createKey(EntityDragon.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> BREED = EntityDataManager.<Integer>createKey(EntityDragon.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> TIER = EntityDataManager.<Integer>createKey(EntityDragon.class, DataSerializers.VARINT);
     public static int interestTimeSeconds = 90;
     public static float heartChance = 1.0F;
-    public int courseChangeCooldown;
     public double waypointX;
     public double waypointY;
     public double waypointZ;
     public int fireBreathCooldown;
     private Entity targetedEntity;
-    private int attackCounter;
     private int fireBreathTick;
     private Entity lastEnemy;
     private int interestTime;
@@ -70,7 +82,7 @@ public class EntityDragon extends EntityFlyingMF
     public void setDragon(int tier) {
         setTier(tier);
         setBreed(DragonBreed.getRandomDragon(this, tier));
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(getType().health);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getType().health);
         setHealth(getMaxHealth());
         this.setSize(3.0F * getScale(), 2.0F * getScale());
         stepHeight = 1.25F + (tier * 0.25F);
@@ -78,9 +90,10 @@ public class EntityDragon extends EntityFlyingMF
     }
 
     @Override
-    public IEntityLivingData onSpawnWithEgg(IEntityLivingData data) {
+    @Nullable
+    public IEntityLivingData onInitialSpawn(DifficultyInstance instance, IEntityLivingData data) {
         setDragon(getRandomTier());
-        return super.onSpawnWithEgg(data);
+        return super.onInitialSpawn(instance, data);
     }
 
     private int getRandomTier() {
@@ -104,18 +117,18 @@ public class EntityDragon extends EntityFlyingMF
 
     protected void entityInit() {
         super.entityInit();
-        this.dataWatcher.addObject(dataID, Byte.valueOf((byte) 0));
-        this.dataWatcher.addObject(dataID + 1, Float.valueOf(0F));
-        this.dataWatcher.addObject(dataID + 2, Float.valueOf(0F));
-        this.dataWatcher.addObject(dataID + 3, Integer.valueOf(0));
-        this.dataWatcher.addObject(dataID + 4, Integer.valueOf(0));
-        this.dataWatcher.addObject(dataID + 5, Integer.valueOf(rand.nextInt(5)));
+        this.dataManager.register(TERRESTRIAL, Byte.valueOf((byte)0));
+        this.dataManager.register(JAW_MOVEMENT, Float.valueOf(0F));
+        this.dataManager.register(NECK_ANGLE, Float.valueOf(0F));
+        this.dataManager.register(DISENGAGE_TIME, Integer.valueOf(0));
+        this.dataManager.register(BREED, Integer.valueOf(0));
+        this.dataManager.register(TIER, Integer.valueOf(rand.nextInt(5)));
     }
 
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(ConfigMobs.dragonHP);
-        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(1.5D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigMobs.dragonHP);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(1.5D);
     }
 
     @Override
@@ -130,7 +143,7 @@ public class EntityDragon extends EntityFlyingMF
         if (!isTerrestrial()) {
             this.fallDistance = 0;
         }
-        if (!worldObj.isRemote) {
+        if (!world.isRemote) {
             if (isInWater()) {
                 if (rand.nextFloat() < 0.8F) {
                     getJumpHelper().setJumping();
@@ -197,24 +210,23 @@ public class EntityDragon extends EntityFlyingMF
             int maxTime = ((getHealth() > (getMaxHealth() * 0.75F)) ? time : time * 2) * 20;
             if (dimension != -1) {
                 ++interestTime;
-                if (interestTime > maxTime && worldObj.canBlockSeeTheSky((int) posX, (int) posY, (int) posZ)
+                if (interestTime > maxTime && world.canBlockSeeSky(new BlockPos(posX, posY,  posZ))
                         && posY > 128F) {
                     if (ConfigMobs.dragonMSG) {
-                        List list = worldObj.playerEntities;
+                        List list = world.playerEntities;
                         Iterator players = list.iterator();
                         while (players.hasNext()) {
                             Object instance = players.next();
                             if (instance != null && instance instanceof EntityPlayer) {
-                                if (((EntityPlayer) instance).getDistanceToEntity(this) < 128D) {
-                                    ((EntityPlayer) instance).addChatMessage(new ChatComponentText(
-                                            StatCollector.translateToLocal("event.dragonaway.name")));
+                                if (((EntityPlayer) instance).getDistance(this) < 128D) {
+                                    ((EntityPlayer) instance).sendMessage(new TextComponentString(I18n.translateToLocal("event.dragonaway.name")) {});
                                 }
                             }
                         }
                     }
                     this.setDead();
                 }
-                if (interestTime > maxTime - 60 && worldObj.canBlockSeeTheSky((int) posX, (int) posY, (int) posZ)) {
+                if (interestTime > maxTime - 60 && world.canBlockSeeSky(new BlockPos(posX, posY,  posZ))) {
                     this.waypointY = this.posY + 4D;
                 }
             }
@@ -234,7 +246,7 @@ public class EntityDragon extends EntityFlyingMF
             if (wingTick == 20) {
                 wingTick = 0;
                 if (!isTerrestrial())
-                    worldObj.playSoundAtEntity(this, "mob.enderdragon.flap", 0.5F, 1.5F);
+                    world.playSound(posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.HOSTILE, 1, 1, true);
             }
             int i = (120 / 20) * wingTick;
             wingFlap = -40 + i;
@@ -250,160 +262,157 @@ public class EntityDragon extends EntityFlyingMF
 
         for (int a = 0; a < spread; a++) {
             double xAngle = this.targetedEntity.posX - this.posX;
-            double yAngle = this.targetedEntity.boundingBox.minY + this.targetedEntity.height / 2.0F
+            double yAngle = this.targetedEntity.getCollisionBoundingBox().minY + this.targetedEntity.height / 2.0F
                     - (this.posY + this.height / 2.0F);
             double zAngle = this.targetedEntity.posZ - this.posZ;
             double power = 1.0D;
-            Vec3 var20 = this.getLook(1.0F);
+            Vec3d var20 = this.getLook(1.0F);
             Entity breath = getBreath(xAngle, yAngle, zAngle);
-            breath.posX = this.posX + var20.xCoord * power;
+            breath.posX = this.posX + var20.x * power;
             breath.posY = this.posY + this.height / 2.0F + 0.5D;
-            breath.posZ = this.posZ + var20.zCoord * power;
-            this.worldObj.spawnEntityInWorld(breath);
+            breath.posZ = this.posZ + var20.z * power;
+            this.world.spawnEntity(breath);
         }
     }
 
     private Entity getBreath(double xAngle, double yAngle, double zAngle) {
-        return new EntityDragonBreath(this.worldObj, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage)
+        return new EntityDragonBreath(this.world, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage)
                 .setType(getType().rangedAttack.id);
     }
 
-    @Override
-    protected void updateEntityActionState() {
-        if (!this.worldObj.isRemote && this.worldObj.difficultySetting == EnumDifficulty.PEACEFUL) {
-            this.setDead();
-        }
-
-        this.despawnEntity();
-        double d0 = this.waypointX - this.posX;
-        double d1 = this.waypointY - this.posY;
-        double d2 = this.waypointZ - this.posZ;
-        double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-
-        if (d3 < 1.0D || d3 > 3600.0D) {
-            this.waypointX = this.posX + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
-            this.waypointY = this.posY + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
-            this.waypointZ = this.posZ + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
-        }
-
-        if (this.courseChangeCooldown-- <= 0) {
-            this.courseChangeCooldown += this.rand.nextInt(5) + 2;
-            d3 = MathHelper.sqrt_double(d3);
-            double flyspd = getFlightSpeed();
-            if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3)) {
-                this.motionX += d0 / d3 * 0.5D * flyspd;
-                this.motionY += d1 / d3 * 0.5D * flyspd;
-                this.motionZ += d2 / d3 * 0.5D * flyspd;
-            } else {
-                this.waypointX = this.posX;
-                this.waypointY = this.posY;
-                this.waypointZ = this.posZ;
-            }
-        }
-
-        if (this.targetedEntity != null && this.targetedEntity.isDead) {
-            this.targetedEntity = null;
-        }
-
-        if (this.targetedEntity == null) {
-            EntityPlayer closest = this.worldObj.getClosestVulnerablePlayerToEntity(this, 100.0D);
-            if (closest != null && canAttackEntity(closest)) {
-                targetedEntity = closest;
-                closest = null;
-            }
-            if (this.targetedEntity != null) {
-                this.moveToTarget();
-            }
-        }
-
-        if (this.targetedEntity != null && this.targetedEntity.isDead) {
-            this.targetedEntity = null;
-        }
-
-        if (this.targetedEntity == null) {
-            this.setEntityToAttack(EntityPlayer.class);
-        }
-        if (ConfigMobs.dragonKillNPC && this.targetedEntity == null) {
-            this.setEntityToAttack(EntityLiving.class);
-        }
-
-        double var9 = 200.0D;
-
-        if (this.targetedEntity != null && getDisengageTime() <= 0
-                && this.targetedEntity.getDistanceSqToEntity(this) < var9 * var9) {
-            if (!worldObj.isRemote && !this.canEntityBeSeen(this.targetedEntity) && getDisengageTime() <= 0
-                    && (targetedEntity instanceof EntityPlayer ? rand.nextInt(40) == 0 : true)) {
-                disengage(200);
-                return;
-            }
-            float range = getAttackRange();
-
-            double var11 = this.targetedEntity.posX - this.posX;
-            double var13 = this.targetedEntity.boundingBox.minY + this.targetedEntity.height / 2.0F
-                    - (this.posY + this.height / 2.0F);
-            double var15 = this.targetedEntity.posZ - this.posZ;
-            this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(var11, var15)) * 180.0F / (float) Math.PI;
-
-            boolean inRangeOfAttack = this.targetedEntity.getDistanceToEntity(this) < (range * getScale())
-                    && this.canEntityBeSeen(targetedEntity);
-            boolean inRangeOfLeap = onGround && this.targetedEntity.getDistanceToEntity(this) > range * 2
-                    && this.targetedEntity.getDistanceToEntity(this) < range * 8;
-            boolean inRangeOfFire = this.targetedEntity.getDistanceToEntity(this) > range
-                    && this.targetedEntity.getDistanceToEntity(this) < range * 6 && fireBreathCooldown <= 0;
-
-            if (this.canEntityBeSeen(this.targetedEntity) && inRangeOfFire) {
-                this.fireBreathTick = getType().fireTimer;
-
-                fireBreathCooldown = 600 + getBreathCooldown() + rand.nextInt(getBreathCooldown());
-                worldObj.playSoundAtEntity(this, "minefantasy2:mob.dragon.fire", 1, 1);
-                setJawMove(20);
-            }
-            if (this.canEntityBeSeen(this.targetedEntity) && inRangeOfLeap && rand.nextInt(100) == 0) {
-                TacticalManager.lungeEntity(this, targetedEntity, 3.0F, 1.5F);
-            }
-            if (fallDistance <= 0 && this.canEntityBeSeen(this.targetedEntity) && inRangeOfAttack) {
-                if ((targetedEntity.isSneaking() && !targetedEntity.onGround) || this.attackCounter <= 0) {
-                    if (targetedEntity.isRiding() && posY > (targetedEntity.posY)) {
-                        targetedEntity.mountEntity(null);
-                        targetedEntity.motionY = 1.0F;
-                        targetedEntity.motionX = this.motionX;
-                        targetedEntity.motionZ = this.motionZ;
-                        if (targetedEntity instanceof EntityLivingBase) {
-                            ((EntityLivingBase) targetedEntity)
-                                    .addPotionEffect(new PotionEffect(Potion.confusion.id, 200, 5));
-                            ((EntityLivingBase) targetedEntity)
-                                    .addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 200, 5));
-                            ((EntityLivingBase) targetedEntity)
-                                    .addPotionEffect(new PotionEffect(Potion.weakness.id, 200, 2));
-                        }
-                    }
-                    attackEntity(targetedEntity, this.getAttackStrength(targetedEntity));
-                    this.attackCounter = getAttackTime();
-                    setJawMove(40);
-                    if (getHealth() <= this.getLowHPThreshold()) {
-                        disengage(50);
-                    }
-                    worldObj.playSoundAtEntity(this, "minefantasy2:mob.dragon.bite", 1, 1);
-                }
-            }
-            if (this.attackCounter > 0) {
-                --this.attackCounter;
-            }
-            if (this.canEntityBeSeen(this.targetedEntity) && !inRangeOfAttack) {
-                this.faceEntity(targetedEntity, 1F, 1F);
-                waypointX = targetedEntity.posX;
-                waypointY = targetedEntity.posY;
-                waypointZ = targetedEntity.posZ;
-            }
-        } else {
-            this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(this.motionX, this.motionZ)) * 180.0F
-                    / (float) Math.PI;
-
-            if (this.attackCounter > 0) {
-                --this.attackCounter;
-            }
-        }
-    }
+//    @Override
+//    protected void updateEntityActionState() {
+//        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+//            this.setDead();
+//        }
+//
+//        this.despawnEntity();
+//        double d0 = this.waypointX - this.posX;
+//        double d1 = this.waypointY - this.posY;
+//        double d2 = this.waypointZ - this.posZ;
+//        double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+//
+//        if (d3 < 1.0D || d3 > 3600.0D) {
+//            this.waypointX = this.posX + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+//            this.waypointY = this.posY + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+//            this.waypointZ = this.posZ + (this.rand.nextFloat() * 2.0F - 1.0F) * 16.0F;
+//        }
+//
+//        if (this.courseChangeCooldown-- <= 0) {
+//            this.courseChangeCooldown += this.rand.nextInt(5) + 2;
+//            d3 = MathHelper.sqrt(d3);
+//            double flyspd = getFlightSpeed();
+//            if (this.isCourseTraversable(this.waypointX, this.waypointY, this.waypointZ, d3)) {
+//                this.motionX += d0 / d3 * 0.5D * flyspd;
+//                this.motionY += d1 / d3 * 0.5D * flyspd;
+//                this.motionZ += d2 / d3 * 0.5D * flyspd;
+//            } else {
+//                this.waypointX = this.posX;
+//                this.waypointY = this.posY;
+//                this.waypointZ = this.posZ;
+//            }
+//        }
+//
+//        if (this.targetedEntity != null && this.targetedEntity.isDead) {
+//            this.targetedEntity = null;
+//        }
+//
+//        if (this.targetedEntity == null) {
+//            EntityPlayer closest = this.world.getNearestAttackablePlayer(this, 100.0D, 100.0D);
+//            if (closest != null && canAttackEntity(closest)) {
+//                targetedEntity = closest;
+//                closest = null;
+//            }
+//            if (this.targetedEntity != null) {
+//                this.moveToTarget();
+//            }
+//        }
+//
+//        if (this.targetedEntity != null && this.targetedEntity.isDead) {
+//            this.targetedEntity = null;
+//        }
+//
+//        if (this.targetedEntity == null) {
+//            this.setEntityToAttack(EntityPlayer.class);
+//        }
+//        if (ConfigMobs.dragonKillNPC && this.targetedEntity == null) {
+//            this.setEntityToAttack(EntityLiving.class);
+//        }
+//
+//        double var9 = 200.0D;
+//
+//        if (this.targetedEntity != null && getDisengageTime() <= 0
+//                && this.targetedEntity.getDistanceSq(this) < var9 * var9) {
+//            if (!world.isRemote && !this.canEntityBeSeen(this.targetedEntity) && getDisengageTime() <= 0
+//                    && (targetedEntity instanceof EntityPlayer ? rand.nextInt(40) == 0 : true)) {
+//                disengage(200);
+//                return;
+//            }
+//            float range = getAttackRange();
+//
+//            double var11 = this.targetedEntity.posX - this.posX;
+//            double var13 = Objects.requireNonNull(this.targetedEntity.getCollisionBoundingBox()).minY + this.targetedEntity.height / 2.0F
+//                    - (this.posY + this.height / 2.0F);
+//            double var15 = this.targetedEntity.posZ - this.posZ;
+//            this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(var11, var15)) * 180.0F / (float) Math.PI;
+//
+//            boolean inRangeOfAttack = this.targetedEntity.getDistance(this) < (range * getScale())
+//                    && this.canEntityBeSeen(targetedEntity);
+//            boolean inRangeOfLeap = onGround && this.targetedEntity.getDistance(this) > range * 2
+//                    && this.targetedEntity.getDistance(this) < range * 8;
+//            boolean inRangeOfFire = this.targetedEntity.getDistance(this) > range
+//                    && this.targetedEntity.getDistance(this) < range * 6 && fireBreathCooldown <= 0;
+//
+//            if (this.canEntityBeSeen(this.targetedEntity) && inRangeOfFire) {
+//                this.fireBreathTick = getType().fireTimer;
+//
+//                fireBreathCooldown = 600 + getBreathCooldown() + rand.nextInt(getBreathCooldown());
+//                world.playSoundAtEntity(this, "minefantasy2:mob.dragon.fire", 1, 1);
+//                setJawMove(20);
+//            }
+//            if (this.canEntityBeSeen(this.targetedEntity) && inRangeOfLeap && rand.nextInt(100) == 0) {
+//                TacticalManager.lungeEntity(this, targetedEntity, 3.0F, 1.5F);
+//            }
+//            if (fallDistance <= 0 && this.canEntityBeSeen(this.targetedEntity) && inRangeOfAttack) {
+//                if ((targetedEntity.isSneaking() && !targetedEntity.onGround) || this.attackCounter <= 0) {
+//                    if (targetedEntity.isRiding() && posY > (targetedEntity.posY)) {
+//                        targetedEntity.dismountRidingEntity();
+//                        targetedEntity.motionY = 1.0F;
+//                        targetedEntity.motionX = this.motionX;
+//                        targetedEntity.motionZ = this.motionZ;
+//                        if (targetedEntity instanceof EntityLivingBase) {
+//                            ((EntityLivingBase) targetedEntity).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 200, 5));
+//                            ((EntityLivingBase) targetedEntity).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 200, 5));
+//                            ((EntityLivingBase) targetedEntity).addPotionEffect(new PotionEffect(Potion.getPotionById(18), 200, 2));
+//                        }
+//                    }
+//                    attackEntity(targetedEntity, this.getAttackStrength(targetedEntity));
+//                    this.attackCounter = getAttackTime();
+//                    setJawMove(40);
+//                    if (getHealth() <= this.getLowHPThreshold()) {
+//                        disengage(50);
+//                    }
+//                    world.playSoundAtEntity(this, "minefantasy2:mob.dragon.bite", 1, 1);
+//                }
+//            }
+//            if (this.attackCounter > 0) {
+//                --this.attackCounter;
+//            }
+//            if (this.canEntityBeSeen(this.targetedEntity) && !inRangeOfAttack) {
+//                this.faceEntity(targetedEntity, 1F, 1F);
+//                waypointX = targetedEntity.posX;
+//                waypointY = targetedEntity.posY;
+//                waypointZ = targetedEntity.posZ;
+//            }
+//        } else {
+//            this.renderYawOffset = this.rotationYaw = -((float) Math.atan2(this.motionX, this.motionZ)) * 180.0F
+//                    / (float) Math.PI;
+//
+//            if (this.attackCounter > 0) {
+//                --this.attackCounter;
+//            }
+//        }
+//    }
 
     private float getAttackRange() {
         return 6.0F;
@@ -433,16 +442,16 @@ public class EntityDragon extends EntityFlyingMF
         double d4 = (this.waypointX - this.posX) / distance;
         double d5 = (this.waypointY - this.posY) / distance;
         double d6 = (this.waypointZ - this.posZ) / distance;
-        AxisAlignedBB axisalignedbb = this.boundingBox.copy();
+        AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox();
 
         for (int i = 1; i < distance; ++i) {
             axisalignedbb.offset(d4, d5, d6);
 
-            if (!this.worldObj.getCollidingBoundingBoxes(this, axisalignedbb).isEmpty()) {
+            if (!this.world.getCollisionBoxes(this, axisalignedbb).isEmpty()) {
                 return false;
             }
-            Block block = worldObj.getBlock((int) d4, (int) d5, (int) d6);
-            if (block.getMaterial().isLiquid()) {
+            IBlockState blockState = world.getBlockState(new BlockPos(d4,  d5, d6));
+            if (blockState.getMaterial().isLiquid()) {
                 return false;
             }
         }
@@ -459,7 +468,7 @@ public class EntityDragon extends EntityFlyingMF
             setNeckAngle(10);
             damage = 2.0F;
         }
-        worldObj.playSoundAtEntity(this, "minefantasy2:mob.dragon.bite", 1, 1);
+        world.playSound(posX, posY, posZ, SoundsMFR.DRAGON_BITE, SoundCategory.HOSTILE, 1, 1, true);
         entity.attackEntityFrom(DamageSource.causeMobDamage(this), damage);
     }
 
@@ -474,14 +483,12 @@ public class EntityDragon extends EntityFlyingMF
     }
 
     public void setEntityToAttack(Class enClass) {
-        List list = worldObj.getEntitiesWithinAABB(enClass,
-                AxisAlignedBB.getBoundingBox(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(getAggro(),
-                        getAggro(), getAggro()));
+        List list = world.getEntitiesWithinAABB(enClass, new AxisAlignedBB(posX, posY, posZ, posX + 1.0D, posY + 1.0D, posZ + 1.0D).expand(getAggro(), getAggro(), getAggro()));
         while (!list.isEmpty()) {
             Entity target = (Entity) list.get(0);
             if (canAttackEntity(target)) {
                 double r = getAggro();
-                boolean inRange = this.getDistanceToEntity(target) <= r;
+                boolean inRange = this.getDistance(target) <= r;
                 if (getDisengageTime() <= 0 && inRange) {
                     setTarget(target);
                     list.clear();
@@ -507,7 +514,7 @@ public class EntityDragon extends EntityFlyingMF
         }
         if (!this.canEntityBeSeen(target))
             return false;
-        if (target instanceof EntityDragon || target == this.riddenByEntity) {
+        if (target instanceof EntityDragon || this.isBeingRidden()) {
             return false;
         }
         if (target instanceof EntityPlayer) {
@@ -523,7 +530,7 @@ public class EntityDragon extends EntityFlyingMF
 
     @Override
     public boolean attackEntityFrom(DamageSource source, float damage) {
-        if (source.getEntity() != null) {
+        if (source.getTrueSource() != null) {
             this.interestTime = 0;
         }
         if (getDisengageTime() <= 0 && this.getHealth() < getLowHPThreshold()) {
@@ -532,18 +539,18 @@ public class EntityDragon extends EntityFlyingMF
         if (source.isFireDamage())
             return false;
 
-        if (source == DamageSource.inWall)
+        if (source == DamageSource.IN_WALL)
             return false;
 
-        if (source.getEntity() != null && source.getEntity() instanceof EntityPlayer) {
+        if (source.getTrueSource() != null && source.getTrueSource() instanceof EntityPlayer) {
             if (getDisengageTime() <= 0 && getAttackTarget() == null || damage > 16
                     || (targetedEntity != null && !(targetedEntity instanceof EntityPlayer)))
-                setTarget(source.getEntity());
+                setTarget(source.getTrueSource());
         }
 
-        if (source.getEntity() != null) {
+        if (source.getTrueSource() != null) {
             if (getDisengageTime() <= 0 && getAttackTarget() == null)
-                setTarget(source.getEntity());
+                setTarget(source.getTrueSource());
         }
         return super.attackEntityFrom(source, damage);
     }
@@ -560,21 +567,22 @@ public class EntityDragon extends EntityFlyingMF
     }
 
     @Override
-    protected String getLivingSound() {
-        return "minefantasy2:mob.dragon.say";
+    protected SoundEvent getAmbientSound()
+    {
+        return SoundsMFR.DRAGON_SAY;
     }
 
     @Override
-    protected void func_145780_a(int x, int y, int z, Block floor) {
-        this.playSound("minefantasy2:mob.dragon.step", 1.0F, 1.0F);
+    protected void playStepSound(BlockPos pos, Block floor) {
+        this.playSound(SoundsMFR.DRAGON_STEP, 1.0F, 1.0F);
     }
 
     /**
      * Returns the sound this mob makes when it is hurt.
      */
     @Override
-    protected String getHurtSound() {
-        return "minefantasy2:mob.dragon.hurt";
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundsMFR.DRAGON_HURT;
     }
 
     /**
@@ -591,7 +599,7 @@ public class EntityDragon extends EntityFlyingMF
     }
 
     protected Item getDropItem() {
-        return ComponentListMF.dragon_heart;
+        return ComponentListMFR.dragon_heart;
     }
 
     /**
@@ -608,19 +616,19 @@ public class EntityDragon extends EntityFlyingMF
         }
         if (getTier() == 4)// ANCIENT
         {
-            this.dropItem(Items.nether_star, 1);
+            this.dropItem(Items.NETHER_STAR, 1);
         }
         if (didDropHeart(this.getTier())) {
-            this.dropItem(ComponentListMF.dragon_heart, 1);
+            this.dropItem(ComponentListMFR.dragon_heart, 1);
         }
     }
 
     private Item getLoot(int tier) {
         if (tier == 4)// Ancient
         {
-            return ToolListMF.loot_sack_rare;
+            return ToolListMFR.loot_sack_rare;
         }
-        return ToolListMF.loot_sack_uc;// Any
+        return ToolListMFR.loot_sack_uc;// Any
     }
 
     private boolean didDropHeart(int tier) {
@@ -669,7 +677,7 @@ public class EntityDragon extends EntityFlyingMF
      */
     @Override
     public boolean getCanSpawnHere() {
-        return super.getCanSpawnHere() && this.worldObj.difficultySetting != EnumDifficulty.PEACEFUL;
+        return super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
     }
 
     /**
@@ -720,37 +728,37 @@ public class EntityDragon extends EntityFlyingMF
 
     @SideOnly(Side.CLIENT)
     public float getJawMove() {
-        return dataWatcher.getWatchableObjectFloat(dataID + 1);
+        return dataManager.get(JAW_MOVEMENT);
     }
 
     public void setJawMove(float i) {
-        dataWatcher.updateObject(dataID + 1, i);
+        dataManager.set(JAW_MOVEMENT, i);
     }
 
     @SideOnly(Side.CLIENT)
     public float getNeckAngle() {
-        return dataWatcher.getWatchableObjectFloat(dataID + 2);
+        return dataManager.get(NECK_ANGLE);
     }
 
     public void setNeckAngle(float i) {
-        dataWatcher.updateObject(dataID + 2, i);
+        dataManager.set(NECK_ANGLE, i);
     }
 
     public int getDisengageTime() {
-        return dataWatcher.getWatchableObjectInt(dataID + 3);
+        return dataManager.get(DISENGAGE_TIME);
     }
 
     public void setDisengageTime(int i) {
-        dataWatcher.updateObject(dataID + 3, i);
+        dataManager.set(DISENGAGE_TIME, i);
     }
 
     @Override
     public boolean isTerrestrial() {
-        return dataWatcher.getWatchableObjectByte(dataID) == 1;
+        return dataManager.get(TERRESTRIAL) == 1;
     }
 
     public void setTerrestrial(boolean flag) {
-        dataWatcher.updateObject(dataID, (byte) (flag ? 1 : 0));
+        dataManager.set(TERRESTRIAL, (byte) (flag ? 1 : 0));
     }
 
     public double wingAngle() {
@@ -783,25 +791,25 @@ public class EntityDragon extends EntityFlyingMF
     }
 
     public int getBreed() {
-        return dataWatcher.getWatchableObjectInt(dataID + 4);
+        return dataManager.get(BREED);
     }
 
     public void setBreed(int i) {
-        dataWatcher.updateObject(dataID + 4, i);
+        dataManager.set(BREED, i);
     }
 
     public int getTier() {
-        return dataWatcher.getWatchableObjectInt(dataID + 5);
+        return dataManager.get(TIER);
     }
 
     public void setTier(int i) {
-        dataWatcher.updateObject(dataID + 5, i);
+        dataManager.set(TIER, i);
     }
 
     public String getCommandSenderName() {
-        String tierName = StatCollector.translateToLocal("entity." + getType().name + ".name");
-        String breedName = StatCollector.translateToLocal("entity.dragonbreed." + getType().breedName + ".name");
-        return StatCollector.translateToLocalFormatted(tierName, breedName);
+        String tierName = I18n.translateToLocal("entity." + getType().name + ".name");
+        String breedName = I18n.translateToLocal("entity.dragonbreed." + getType().breedName + ".name");
+        return I18n.translateToLocalFormatted(tierName, breedName);
     }
 
     public float getScale() {
@@ -817,9 +825,9 @@ public class EntityDragon extends EntityFlyingMF
      * finished)
      */
     public Shockwave newShockwave(double x, double y, double z, float power, boolean fire, boolean smoke) {
-        Shockwave explosion = new Shockwave("dragonstomp", worldObj, this, x, y, z, power);
+        Shockwave explosion = new Shockwave("dragonstomp", world, this, x, y, z, power);
         explosion.isFlaming = fire;
-        explosion.isGriefing = worldObj.getGameRules().getGameRuleBooleanValue("mobGriefing");
+        explosion.isGriefing = world.getGameRules().getBoolean("mobGriefing");
         explosion.isSmoking = smoke;
         explosion.initiate();
         explosion.decorateWave(true);
@@ -868,7 +876,7 @@ public class EntityDragon extends EntityFlyingMF
         if (target instanceof EntityLivingBase && PowerArmour.isWearingCogwork((EntityLivingBase) target))
             return true;
 
-        double distance = getDistanceToEntity(target);
+        double distance = getDistance(target);
 
         if (distance < width / 2) {
             return true;// touching

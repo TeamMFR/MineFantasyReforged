@@ -6,9 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 public class MFRLogUtil {
 
-    public static final Logger MF_LOGGER = FMLLog.getLogger();
+    public static final Logger MFR_LOGGER = FMLLog.getLogger();
 
-    public static final String PREFIX = "[MineFantasyII]: ";
+    public static final String PREFIX = "[MineFantasyReborn]: ";
 
     public static void log(String mes) {
         FMLLog.info(PREFIX + mes);

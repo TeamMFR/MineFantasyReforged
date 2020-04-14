@@ -41,7 +41,7 @@ public class AI_HoundBeg extends EntityAIBase {
      * Execute a one shot task or start executing a continuous task
      */
     public void startExecuting() {
-        this.theWolf.func_70918_i(true);
+        this.theWolf.setBegging(true);
         this.field_75384_e = 40 + this.theWolf.getRNG().nextInt(40);
     }
 
@@ -49,7 +49,7 @@ public class AI_HoundBeg extends EntityAIBase {
      * Resets the task
      */
     public void resetTask() {
-        this.theWolf.func_70918_i(false);
+        this.theWolf.setBegging(false);
         this.thePlayer = null;
     }
 

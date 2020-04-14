@@ -1,49 +1,61 @@
 package minefantasy.mfr.entity.mob.ai;
 
+import com.google.common.base.Predicate;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import net.minecraft.command.IEntitySelector;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITarget;
+import net.minecraft.util.EntitySelectors;
+import net.minecraft.util.math.AxisAlignedBB;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AI_MinotaurFindTarget extends EntityAITarget {
+public class AI_MinotaurFindTarget<T extends EntityLivingBase> extends EntityAITarget {
     private final Class targetClass;
     private final int targetChance;
-    private final AI_MinotaurFindTarget.Sorter theNearestAttackableTargetSorter;
-    private final IEntitySelector targetEntitySelector;
+    protected final Predicate <? super T > targetEntitySelector;
+    protected final EntityAINearestAttackableTarget.Sorter sorter;
+    protected T targetEntity;
     private final EntityMinotaur minotaur;
-    private EntityLivingBase targetEntity;
 
     public AI_MinotaurFindTarget(EntityMinotaur mob, Class target, int chance, boolean sight) {
         this(mob, target, chance, sight, false);
     }
 
     public AI_MinotaurFindTarget(EntityMinotaur mob, Class target, int chance, boolean sight, boolean nearby) {
-        this(mob, target, chance, sight, nearby, (IEntitySelector) null);
+        this(mob, target, chance, sight, nearby, null);
     }
 
-    public AI_MinotaurFindTarget(EntityMinotaur mob, Class target, int chance, boolean sight, boolean nearby,
-                                 final IEntitySelector selector) {
+    public AI_MinotaurFindTarget(EntityMinotaur mob, Class target, int chance, boolean sight, boolean nearby, @Nullable final Predicate <? super T > targetSelector) {
         super(mob, sight, nearby);
         this.minotaur = mob;
         this.targetClass = target;
         this.targetChance = chance;
-        this.theNearestAttackableTargetSorter = new AI_MinotaurFindTarget.Sorter(mob);
+        this.sorter = new EntityAINearestAttackableTarget.Sorter(mob);
         this.setMutexBits(1);
-        this.targetEntitySelector = new IEntitySelector() {
-            public boolean isEntityApplicable(Entity target) {
-                if (target instanceof EntityMinotaur) {
+        this.targetEntitySelector = new Predicate<T>()
+        {
+            public boolean apply(@Nullable T p_apply_1_)
+            {
+                if (p_apply_1_ == null)
+                {
                     return false;
                 }
-                return !(target instanceof EntityLivingBase) ? false
-                        : (selector != null && !selector.isEntityApplicable(target) ? false
-                        : AI_MinotaurFindTarget.this.isSuitableTarget((EntityLivingBase) target, false));
+                else if (targetSelector != null && !targetSelector.apply(p_apply_1_))
+                {
+                    return false;
+                }
+                else
+                {
+                    return EntitySelectors.NOT_SPECTATING.apply(p_apply_1_) && AI_MinotaurFindTarget.this.isSuitableTarget(p_apply_1_, false);
+                }
             }
         };
+
     }
 
     /**
@@ -61,17 +73,24 @@ public class AI_MinotaurFindTarget extends EntityAITarget {
                 }
             }
 
-            List list = this.taskOwner.world.getEntitiesWithinAABB(this.targetClass,
-                    this.taskOwner.getCollisionBoundingBox().expand(d0, 4.0D, d0), this.targetEntitySelector);
-            Collections.sort(list, this.theNearestAttackableTargetSorter);
+            List<T> list = this.taskOwner.world.<T>getEntitiesWithinAABB(this.targetClass, this.getTargetableArea(this.getTargetDistance()), this.targetEntitySelector);
 
-            if (list.isEmpty()) {
+            if (list.isEmpty())
+            {
                 return false;
-            } else {
-                this.targetEntity = (EntityLivingBase) list.get(0);
+            }
+            else
+            {
+                Collections.sort(list, this.sorter);
+                this.targetEntity = list.get(0);
                 return true;
             }
         }
+    }
+
+    protected AxisAlignedBB getTargetableArea(double targetDistance)
+    {
+        return this.taskOwner.getEntityBoundingBox().grow(targetDistance, 4.0D, targetDistance);
     }
 
     /**

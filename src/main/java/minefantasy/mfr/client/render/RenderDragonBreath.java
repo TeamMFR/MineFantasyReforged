@@ -1,5 +1,7 @@
 package minefantasy.mfr.client.render;
 
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
@@ -16,6 +18,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderDragonBreath extends Render {
     public RenderDragonBreath() {
+        super(Minecraft.getMinecraft().getRenderManager());
     }
 
     /**
@@ -42,11 +45,10 @@ public class RenderDragonBreath extends Render {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor3f(1, 1, 1);
-        Minecraft.getMinecraft().getTextureManager()
-                .bindTexture(TextureHelperMFR.getResource(breath.getTextureName() + ".png"));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureHelperMFR.getResource(breath.getTextureName() + ".png"));
         GL11.glDepthMask(false);
-        Tessellator tessellator = Tessellator.getInstance();
-        this.renderImg(breath, tessellator);
+        BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
+        this.renderImg(breath, bufferBuilder);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glColor3f(1, 1, 1);
@@ -58,10 +60,10 @@ public class RenderDragonBreath extends Render {
      * you call Render.bindEntityTexture.
      */
     protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-        return TextureMap.locationItemsTexture;
+        return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }
 
-    private void renderImg(EntityDragonBreath breath, Tessellator tessellator) {
+    private void renderImg(EntityDragonBreath breath, BufferBuilder bufferBuilder) {
         float x1 = 0;
         float x2 = 1;
         float y1 = 0;
@@ -72,12 +74,12 @@ public class RenderDragonBreath extends Render {
         GL11.glRotatef(180.0F - this.renderManager.playerViewY, 0.0F, 1.0F, 0.0F);
         GL11.glRotatef(-this.renderManager.playerViewX, 1.0F, 0.0F, 0.0F);
         GL11.glRotatef(breath.ticksExisted * 36, 0.0F, 0.0F, 0.1F);
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 1.0F, 0.0F);
-        tessellator.addVertexWithUV(0.0F - f5, 0.0F - f6, 0.0D, x1, y2);
-        tessellator.addVertexWithUV(f4 - f5, 0.0F - f6, 0.0D, x2, y2);
-        tessellator.addVertexWithUV(f4 - f5, f4 - f6, 0.0D, x2, y1);
-        tessellator.addVertexWithUV(0.0F - f5, f4 - f6, 0.0D, x1, y1);
-        tessellator.draw();
+        bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        bufferBuilder.putNormal(0.0F, 1.0F, 0.0F);
+        bufferBuilder.pos(0.0F - f5, 0.0F - f6, 0.0D).tex(x1, y2);
+        bufferBuilder.pos(f4 - f5, 0.0F - f6, 0.0D).tex(x2, y2);
+        bufferBuilder.pos(f4 - f5, f4 - f6, 0.0D).tex(x2, y1);
+        bufferBuilder.pos(0.0F - f5, f4 - f6, 0.0D).tex(x1, y1);
+        bufferBuilder.finishDrawing();
     }
 }

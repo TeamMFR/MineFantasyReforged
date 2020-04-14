@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.render;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.entity.Render;
@@ -9,6 +10,7 @@ import net.minecraft.util.ResourceLocation;
 @SideOnly(Side.CLIENT)
 public class RenderFireBlast extends Render {
     public RenderFireBlast() {
+        super(Minecraft.getMinecraft().getRenderManager());
         this.shadowSize = 0F;
     }
 

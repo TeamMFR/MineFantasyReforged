@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.render.mob;
 
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
@@ -15,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 @SideOnly(Side.CLIENT)
 public class RenderHound extends RenderLiving {
     public RenderHound(ModelBase modelbase) {
-        super(modelbase, 1.0F);
+        super(Minecraft.getMinecraft().getRenderManager(), modelbase, 1.0F);
         this.setRenderPassModel(modelbase);
     }
 
@@ -31,15 +32,14 @@ public class RenderHound extends RenderLiving {
      */
     protected int shouldRenderPass(EntityHound hound, int layer, float f) {
         if (layer == 0 && hound.getWolfShaking()) {
-            float f1 = hound.getBrightness(f) * hound.getShadingWhileShaking(f);
+            float f1 = hound.getBrightness() * hound.getShadingWhileShaking(f);
             this.bindTexture("hound");
             GL11.glColor3f(f1, f1, f1);
             return 1;
         } else if (layer == 1 && hound.isTamed()) {
             this.bindTexture("collar");
             int j = hound.getCollarColor();
-            GL11.glColor3f(EntitySheep.fleeceColorTable[j][0], EntitySheep.fleeceColorTable[j][1],
-                    EntitySheep.fleeceColorTable[j][2]);
+            GL11.glColor3f(EntitySheep.fleeceColorTable[j][0], EntitySheep.fleeceColorTable[j][1], EntitySheep.fleeceColorTable[j][2]);
             return 1;
         } else {
             return -1;

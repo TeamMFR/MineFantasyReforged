@@ -545,7 +545,7 @@ public class ArmourCalculator {
         return 0.5F;
     }
 
-    public static void damageArmour(EntityPlayer user, int dura) {
+    public static void damageArmour(EntityLivingBase user, int dura) {
         Iterable<ItemStack> armour = user.getArmorInventoryList();
         for (ItemStack stack: armour) {
             if (armour != null) {
@@ -558,7 +558,7 @@ public class ArmourCalculator {
                 }
                 if (stack.getItemDamage() >= stack.getMaxDamage()) {
                     user.setItemStackToSlot(EntityEquipmentSlot.valueOf(stack.getDisplayName()), null);
-                    user.world.playSound(user, user.getPosition(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    user.world.playSound((EntityPlayer) user, user.getPosition(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
             }
         }

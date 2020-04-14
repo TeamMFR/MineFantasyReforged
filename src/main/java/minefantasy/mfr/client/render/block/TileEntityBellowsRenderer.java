@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer {
+public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer<TileEntityBellows> {
     private ModelBellows model;
     private Random random = new Random();
 

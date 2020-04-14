@@ -34,7 +34,7 @@ public class RenderPowerArmour extends RenderLivingBase {
     protected ModelBiped cogworkSuit;
 
     public RenderPowerArmour() {
-        super(new ModelCogwork(1F), 1.5F);
+        super(Minecraft.getMinecraft().getRenderManager(), new ModelCogwork(1F), 1.5F);
         this.cogworkSuit = (ModelBiped) this.mainModel;
     }
 
