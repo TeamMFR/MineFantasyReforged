@@ -23,7 +23,7 @@ public class MFArrowDispenser extends BehaviorDefaultDispenseItem {
         if (item.getItem() instanceof ItemArrowMFR) {
             ItemArrowMFR arrowitem = (ItemArrowMFR) item.getItem();
             EntityArrowMFR arrow = arrowitem.getFiredArrow(new EntityArrowMFR(world, posX, posY, posZ), item);
-            arrow.setThrowableHeading(direction.getX(), direction.getY() + 0.1F, direction.getZ(), this.getPower(), this.getSpread());
+            arrow.shoot(direction.getX(), direction.getY() + 0.1F, direction.getZ(), this.getPower(), this.getSpread());
             world.spawnEntity(arrow);
             arrow.canBePickedUp = 1;
             item.splitStack(1);

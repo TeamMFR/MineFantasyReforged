@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.gui;
 
+import minefantasy.mfr.init.SoundsMFR;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
@@ -16,6 +17,8 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
+import java.io.IOException;
 
 @SideOnly(Side.CLIENT)
 public class GuiKnowledgeEntry extends GuiScreen {
@@ -124,11 +127,11 @@ public class GuiKnowledgeEntry extends GuiScreen {
     }
 
     @Override
-    protected void keyTyped(char p_73869_1_, int p_73869_2_) {
-        if (p_73869_2_ == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
+    protected void keyTyped(char typedChar, int keyCode) throws IOException {
+        if (keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
             mc.player.openGui(MineFantasyReborn.instance, 1, mc.player.world, 0, -1, 0);
         } else {
-            super.keyTyped(p_73869_1_, p_73869_2_);
+            super.keyTyped(typedChar, keyCode);
         }
     }
 
@@ -151,8 +154,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
          */
         public void drawButton(Minecraft mc, int x, int y) {
             if (this.visible) {
-                boolean flag = x >= this.xPosition && y >= this.yPosition && x < this.xPosition + this.width
-                        && y < this.yPosition + this.height;
+                boolean flag = x >= this.x && y >= this.y && x < this.x + this.width && y < this.y + this.height;
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
                 mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/book.png"));
                 int k = 0;
@@ -166,14 +168,14 @@ public class GuiKnowledgeEntry extends GuiScreen {
                     l += 10;
                 }
 
-                this.drawTexturedModalRect(this.xPosition, this.yPosition, k, l, 18, 10);
+                this.drawTexturedModalRect(this.x, this.y, k, l, 18, 10);
             }
         }
 
         @Override
-        public void func_146113_a(SoundHandler snd) {
-            snd.playSound(
-                    PositionedSoundRecord.func_147674_a(new ResourceLocation("minefantasy2:block.flipPage"), 1.0F));
+        public void playPressSound(SoundHandler soundHandler) {
+            soundHandler.playSound(
+                    PositionedSoundRecord.getMasterRecord(SoundsMFR.FLIP_PAGE, 1.0F));
         }
     }
 }

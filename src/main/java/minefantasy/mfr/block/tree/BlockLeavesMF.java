@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -36,7 +35,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable {
         this.name = baseWood.toLowerCase() + "_leaves";
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.dropRate = droprate;
         this.setTickRandomly(true);
     }

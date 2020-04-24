@@ -47,7 +47,7 @@ public class BlockRepairKit extends Block {
         name = "repair_" + name;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setSoundType(SoundType.CLOTH);
         this.setHardness(1F);
         this.setResistance(0F);

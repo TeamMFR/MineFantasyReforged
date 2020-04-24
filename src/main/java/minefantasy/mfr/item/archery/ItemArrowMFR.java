@@ -8,10 +8,7 @@ import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
@@ -81,7 +78,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
         }
         itemRarity = rarity;
         setRegistryName("MF_Com_" + name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setCreativeTab(CreativeTabMFR.tabOldTools);
         AmmoMechanicsMFR.addArrow(new ItemStack(this));

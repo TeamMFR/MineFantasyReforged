@@ -45,7 +45,7 @@ public class BlockRack extends BlockWoodDecor {
 		setResistance(1.0F);
 		GameRegistry.findRegistry(Block.class).register(this);
 		setRegistryName(name);
-		setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+		setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
 		this.setCreativeTab(CreativeTabMFR.tabUtil);
 	}
 
@@ -255,18 +255,18 @@ public class BlockRack extends BlockWoodDecor {
 						}
 
 						stack.setCount(stack.getCount() - randomNumber);
-						EntityItem item = new EntityItem(world, x + var8, y + var9, z + var10,
+						EntityItem item = new EntityItem(world, pos.getX() + var8, pos.getY() + var9, pos.getZ() + var10,
 								new ItemStack(stack.getItem(), randomNumber, stack.getItemDamage()));
 
 						if (stack.hasTagCompound()) {
-							item.getEntityItem().setTagCompound((NBTTagCompound) stack.getTagCompound().copy());
+							item.getItem().setTagCompound(stack.getTagCompound().copy());
 						}
 
 						float var13 = 0.05F;
 						item.motionX = (float) world.rand.nextGaussian() * var13;
 						item.motionY = (float) world.rand.nextGaussian() * var13 + 0.2F;
 						item.motionZ = (float) world.rand.nextGaussian() * var13;
-						world.spawnEntityInWorld(item);
+						world.spawnEntity(item);
 					}
 				}
 			}
@@ -274,55 +274,13 @@ public class BlockRack extends BlockWoodDecor {
 		super.breakBlock(world, pos, state);
 	}
 	
-//	@Override
-//	public void breakBlock(World world, int x, int y, int z, Block block, int meta) {
-//		TileEntityRack tile = (TileEntityRack) world.getTileEntity(x, y, z);
-//
-//		if (tile != null) {
-//			for (int var6 = 0; var6 < tile.getSizeInventory(); ++var6) {
-//				ItemStack var7 = tile.getStackInSlot(var6);
-//
-//				if (var7 != null) {
-//					float var8 = world.rand.nextFloat() * 0.8F + 0.1F;
-//					float var9 = world.rand.nextFloat() * 0.8F + 0.1F;
-//					float var10 = world.rand.nextFloat() * 0.8F + 0.1F;
-//
-//					while (var7.stackSize > 0) {
-//						int var11 = world.rand.nextInt(21) + 10;
-//
-//						if (var11 > var7.stackSize) {
-//							var11 = var7.stackSize;
-//						}
-//
-//						var7.stackSize -= var11;
-//						EntityItem var12 = new EntityItem(world, x + var8, y + var9, z + var10,
-//								new ItemStack(var7.getItem(), var11, var7.getItemDamage()));
-//
-//						if (var7.hasTagCompound()) {
-//							var12.getEntityItem().setTagCompound((NBTTagCompound) var7.getTagCompound().copy());
-//						}
-//
-//						float var13 = 0.05F;
-//						var12.motionX = (float) world.rand.nextGaussian() * var13;
-//						var12.motionY = (float) world.rand.nextGaussian() * var13 + 0.2F;
-//						var12.motionZ = (float) world.rand.nextGaussian() * var13;
-//						world.spawnEntityInWorld(var12);
-//					}
-//				}
-//			}
-//		}
-//
-//		super.breakBlock(world, x, y, z, block, meta);
-//	}
-	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user,
-			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityRack tile = (TileEntityRack) world.getTileEntity(pos);
 		if (world.isRemote) {
-			int slot = tile.getSlotFor(hitX,hitZ);
+			int slot = tile.getSlotFor(hitX,hitZ, user);
 			if (slot >= 0 && slot < 4) {
-				((EntityPlayerMP) user).comasendQueue.addToSendQueue(new RackCommand(slot, user, tile).generatePacket());
+				((EntityPlayerMP) user).connection.sendPacket(new RackCommand(slot, user, tile).generatePacket());
 			}
 		}
 

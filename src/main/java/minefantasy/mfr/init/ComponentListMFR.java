@@ -22,9 +22,7 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author Anonymous Productions
  */
 public class ComponentListMFR {
-	public static final String[] ingotMats = new String[]{"copper", "tin", "bronze", "pigiron", "steel", "encrusted",
-			"blacksteelweak", "blacksteel", "silver", "redsteelweak", "redsteel", "bluesteelweak", "bluesteel",
-			"adamantium", "mithril", "ignotumite", "mithium", "ender", "tungsten", "obsidian"};
+	public static final String[] ingotMats = new String[]{"copper", "tin", "bronze", "pigiron", "steel", "encrusted", "blacksteelweak", "blacksteel", "silver", "redsteelweak", "redsteel", "bluesteelweak", "bluesteel", "adamantium", "mithril", "ignotumite", "mithium", "ender", "tungsten", "obsidian"};
 
 	public static Item clay_pot = new ItemMFBowl("clay_pot").setStoragePlacement("pot", "pot");
 	public static Item clay_pot_uncooked = new ItemComponentMFR("clay_pot_uncooked", 0);
@@ -46,13 +44,10 @@ public class ComponentListMFR {
 	public static Item sulfur = new ItemComponentMFR("sulfur", 0);
 	public static Item iron_prep = new ItemComponentMFR("iron_prep", 0);
 	public static Item blackpowder = new ItemBombComponent("blackpowder", 0, "powder", 0).setContainerItem(clay_pot);
-	public static Item blackpowder_advanced = new ItemBombComponent("blackpowder_advanced", 1, "powder", 1)
-			.setContainerItem(clay_pot);
+	public static Item blackpowder_advanced = new ItemBombComponent("blackpowder_advanced", 1, "powder", 1).setContainerItem(clay_pot);
 	public static Item fletching = new ItemComponentMFR("fletching", 0);
-	public static Item shrapnel = new ItemBombComponent("shrapnel", 0, "filling", 1)
-			.setContainerItem(ComponentListMFR.clay_pot);
-	public static Item magma_cream_refined = new ItemBombComponent("magma_cream_refined", 1, "filling", 2)
-			.setContainerItem(clay_pot);
+	public static Item shrapnel = new ItemBombComponent("shrapnel", 0, "filling", 1).setContainerItem(ComponentListMFR.clay_pot);
+	public static Item magma_cream_refined = new ItemBombComponent("magma_cream_refined", 1, "filling", 2).setContainerItem(clay_pot);
 	public static Item bomb_fuse = new ItemBombComponent("bomb_fuse", 0, "fuse", 0);
 	public static Item bomb_fuse_long = new ItemBombComponent("bomb_fuse_long", 0, "fuse", 1);
 	public static Item bomb_casing_uncooked = new ItemComponentMFR("bomb_casing_uncooked", 0);
@@ -120,45 +115,30 @@ public class ComponentListMFR {
 
 	public static Item ingot_mould_filled = new ItemFilledMould();
 
-	public static Item crossbow_stock_wood = new ItemCrossbowPart("cross_stock_wood", "stock").addSpeed(1.0F)
-			.addRecoil(0F);
-	public static Item crossbow_stock_iron = new ItemCrossbowPart("cross_stock_iron", "stock").addSpeed(1.0F)
-			.addRecoil(-2F).addDurability(150);
-	public static Item crossbow_handle_wood = new ItemCrossbowPart("cross_handle_wood", "stock").addSpeed(0.5F)
-			.addRecoil(2F).addSpread(1.0F).setHandCrossbow(true);
+	public static Item crossbow_stock_wood = new ItemCrossbowPart("cross_stock_wood", "stock").addSpeed(1.0F).addRecoil(0F);
+	public static Item crossbow_stock_iron = new ItemCrossbowPart("cross_stock_iron", "stock").addSpeed(1.0F).addRecoil(-2F).addDurability(150);
+	public static Item crossbow_handle_wood = new ItemCrossbowPart("cross_handle_wood", "stock").addSpeed(0.5F).addRecoil(2F).addSpread(1.0F).setHandCrossbow(true);
 
-	public static Item cross_arms_basic = new ItemCrossbowPart("cross_arms_basic", "mechanism").addPower(1.00F)
-			.addSpeed(0.50F).addRecoil(4F).addSpread(1.00F);
-	public static Item cross_arms_light = new ItemCrossbowPart("cross_arms_light", "mechanism").addPower(0.85F)
-			.addSpeed(0.25F).addRecoil(2F).addSpread(0.50F);
-	public static Item cross_arms_heavy = new ItemCrossbowPart("cross_arms_heavy", "mechanism").addPower(1.15F)
-			.addSpeed(1.00F).addRecoil(8F).addSpread(2.00F);
-	public static Item cross_arms_advanced = new ItemCrossbowPart("cross_arms_advanced", "mechanism").addPower(1.15F)
-			.addSpeed(1.00F).addRecoil(6F).addSpread(0.25F).addDurability(150);
+	public static Item cross_arms_basic = new ItemCrossbowPart("cross_arms_basic", "mechanism").addPower(1.00F).addSpeed(0.50F).addRecoil(4F).addSpread(1.00F);
+	public static Item cross_arms_light = new ItemCrossbowPart("cross_arms_light", "mechanism").addPower(0.85F).addSpeed(0.25F).addRecoil(2F).addSpread(0.50F);
+	public static Item cross_arms_heavy = new ItemCrossbowPart("cross_arms_heavy", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(8F).addSpread(2.00F);
+	public static Item cross_arms_advanced = new ItemCrossbowPart("cross_arms_advanced", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(6F).addSpread(0.25F).addDurability(150);
 
-	public static Item cross_bayonet = new ItemCrossbowPart("cross_bayonet", "muzzle").addBash(4.0F).addRecoil(-1F)
-			.addSpeed(0.5F);
+	public static Item cross_bayonet = new ItemCrossbowPart("cross_bayonet", "muzzle").addBash(4.0F).addRecoil(-1F).addSpeed(0.5F);
 	public static Item cross_ammo = new ItemCrossbowPart("cross_ammo", "mod").addCapacity(5).addSpread(2.00F);
 	public static Item cross_scope = new ItemCrossbowPart("cross_scope", "mod").setScope(0.75F);
 
-	public static ItemCustomComponent chainmesh = new ItemCustomComponent("chainmesh", 1F, "metal")
-			.setStoragePlacement("sheet", "mail");
-	public static ItemCustomComponent scalemesh = new ItemCustomComponent("scalemesh", 1F, "metal")
-			.setStoragePlacement("sheet", "scale");
-	public static ItemCustomComponent splintmesh = new ItemCustomComponent("splintmesh", 1F, "metal")
-			.setStoragePlacement("sheet", "splint");
-	public static ItemCustomComponent plate = new ItemCustomComponent("plate", 2F, "metal").setStoragePlacement("sheet",
-			"plate");
-	public static ItemCustomComponent plate_huge = new ItemCustomComponent("plate_huge", 8F, "metal")
-			.setStoragePlacement("bigplate", "bigplate");
+	public static ItemCustomComponent chainmesh = new ItemCustomComponent("chainmesh", 1F, "metal").setStoragePlacement("sheet", "mail");
+	public static ItemCustomComponent scalemesh = new ItemCustomComponent("scalemesh", 1F, "metal").setStoragePlacement("sheet", "scale");
+	public static ItemCustomComponent splintmesh = new ItemCustomComponent("splintmesh", 1F, "metal").setStoragePlacement("sheet", "splint");
+	public static ItemCustomComponent plate = new ItemCustomComponent("plate", 2F, "metal").setStoragePlacement("sheet", "plate");
+	public static ItemCustomComponent plate_huge = new ItemCustomComponent("plate_huge", 8F, "metal").setStoragePlacement("bigplate", "bigplate");
 	public static ItemCustomComponent metalHunk = new ItemCustomComponent("hunk", 0.25F, "metal");
 	public static ItemCustomComponent arrowhead = new ItemCustomComponent("arrowhead", 1 / 4F, "metal");
 	public static ItemCustomComponent bodkinhead = new ItemCustomComponent("bodkinhead", 1 / 4F, "metal");
 	public static ItemCustomComponent broadhead = new ItemCustomComponent("broadhead", 1 / 4F, "metal");
-	public static ItemCustomComponent cogwork_armour = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour",
-			30F, "metal").setCanDamage().setCreativeTab(CreativeTabMFR.tabGadget).setMaxStackSize(1);
-	public static ItemCustomComponent bar = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal")
-			.setStoragePlacement("bar", "bar").setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
+	public static ItemCustomComponent cogwork_armour = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(CreativeTabMFR.tabGadget).setMaxStackSize(1);
+	public static ItemCustomComponent bar = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
 
 	public static Item flux_pot = new ItemComponentMFR("flux_pot", 0).setContainerItem(clay_pot);
 	public static Item coal_flux = new ItemComponentMFR("coal_flux", 0);
@@ -168,13 +148,10 @@ public class ComponentListMFR {
 	public static Item gold_coin = new ItemComponentMFR("gold_coin", 0);
 
 	public static Item hinge = new ItemComponentMFR("hinge", 0);
-	public static Item plank_cut = new ItemComponentMFR("plank_cut").setCustom(1, "wood").setStoragePlacement("plank",
-			"plankcut");
-	public static Item plank_pane = new ItemComponentMFR("plank_pane").setCustom(6, "wood").setStoragePlacement("sheet",
-			"woodpane");
+	public static Item plank_cut = new ItemComponentMFR("plank_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
+	public static Item plank_pane = new ItemComponentMFR("plank_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
 
-	public static Item cogwork_pulley = new ItemComponentMFR("cogwork_pulley", 1)
-			.setCreativeTab(CreativeTabMFR.tabGadget);
+	public static Item cogwork_pulley = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(CreativeTabMFR.tabGadget);
 
 	public static Item artefacts = new ItemArtefact("artefact_any");
 

@@ -48,7 +48,7 @@ public class BlockFirepit extends BlockContainer {
         String name = "firepit";
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setLightOpacity(0);
         setHardness(2F);
         this.setCreativeTab(CreativeTabMFR.tabUtil);

@@ -56,7 +56,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
         super(material);
         itemRarity = rarity;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));
@@ -100,7 +100,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
                     TileEntityRoad road = new TileEntityRoad();
                     road.setWorld(world);
                     world.setTileEntity(pos, road);
-                    road.setSurface(ground, groundmeta);
+                    road.setSurface(ground, groundmeta.getBlock());
                     mattock.damageItem(1, player);
                     return EnumActionResult.PASS;
                 }

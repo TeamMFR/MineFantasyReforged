@@ -43,7 +43,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
         this.name = name;
         toolType = type;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setMaxDamage(uses);
         this.setMaxStackSize(1);

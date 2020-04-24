@@ -1,6 +1,7 @@
 package minefantasy.mfr.client.render.mob;
 
 import com.mojang.authlib.GameProfile;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,7 +29,7 @@ import java.util.UUID;
 @SideOnly(Side.CLIENT)
 public class RenderMinotaur extends RenderBiped {
     public RenderMinotaur(ModelBiped model, float shadow) {
-        super(model, shadow);
+        super(Minecraft.getMinecraft().getRenderManager(), model, shadow);
 
     }
 

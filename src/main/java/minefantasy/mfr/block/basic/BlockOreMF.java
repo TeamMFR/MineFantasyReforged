@@ -9,7 +9,6 @@ import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
@@ -46,7 +45,7 @@ public class BlockOreMF extends Block {
         this.dropMax = max;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         setSoundType(SoundType.STONE);
         if (material == Material.ROCK) {
             this.setHarvestLevel("pickaxe", harvestLevel);

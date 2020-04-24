@@ -27,7 +27,7 @@ public class ConstructionBlockMF extends Block {
         super(material);
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(unlocName);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + unlocName);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + unlocName);
 
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         for (int i = 0; i < m_names.length; i++) {
@@ -102,7 +102,7 @@ public class ConstructionBlockMF extends Block {
             super(state);
             GameRegistry.findRegistry(Block.class).register(this);
             setRegistryName(unlocalizedName);
-            setUnlocalizedName(MineFantasyReborn.MODID + "." + unlocalizedName);
+            setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + unlocalizedName);
             this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
             this.setLightOpacity(0);// They seem to render shadows funny
             this.base = baseBlock;
@@ -119,7 +119,7 @@ public class ConstructionBlockMF extends Block {
         public Block register(String name) {
             GameRegistry.findRegistry(Block.class).register(this);
             setRegistryName(name);
-            setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+            setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
             return this;
         }
     }

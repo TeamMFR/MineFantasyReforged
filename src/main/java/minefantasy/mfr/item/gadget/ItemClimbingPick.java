@@ -17,7 +17,6 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -40,7 +39,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
         super(material);
         itemRarity = rarity;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setCreativeTab(CreativeTabMFR.tabGadget);
         setMaxDamage(material.getMaxUses());

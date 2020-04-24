@@ -1,8 +1,11 @@
 package minefantasy.mfr.block.tile.decor;
 
+import minefantasy.mfr.api.helpers.BlockPositionHelper;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.packet.TileInventoryPacket;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -13,6 +16,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 
 import java.util.List;
@@ -198,16 +202,16 @@ public class TileEntityRack extends TileEntityWoodDecor implements IInventory {
     /*
      * North: WEST: 0=2 South: SOUTH: 1=1 West: EAST: 2=3 East: NORTH: 3=0
      */
-    public int getSlotFor(float x, float y) {
-        int direction = world.getBlockState(pos);
-        EnumFacing FD = EnumFacing.getDirectionFromEntityLiving();
+    public int getSlotFor(float x, float y, EntityPlayer user) {
+        int direction = Block.getStateId(world.getBlockState(pos));
+        EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, user);
         float offset = 1F / 16F;
 
         float x1 = 0.0F + offset;
         float x2 = 1.0F - offset;
         float y1 = 0.0F;
         float y2 = 1.0F;
-        if (FD == EnumFacing.EAST || FD == EnumFacing.WEST) {
+        if (facing == EnumFacing.EAST || facing == EnumFacing.WEST) {
             x1 = 0.0F;
             x2 = 1.0F;
             y1 = 0.0F + offset;

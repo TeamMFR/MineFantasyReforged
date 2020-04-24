@@ -1,11 +1,11 @@
 package minefantasy.mfr.init;
 
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.entity.*;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
 
 public class EntityListMF {
     public static void register() {
@@ -24,19 +24,19 @@ public class EntityListMF {
         MobListMF.register();
     }
 
-    public static int autoAssign() {
-        for (int a = 0; a <= 255; a++) {
-            if (!EntityList.isMatchingName().containsKey(Integer.valueOf(a))) {
-                System.out.println("MineFantasy: Autoassigned EntityID " + a);
-                return a;
-            }
-        }
-        throw new IllegalArgumentException(
-                "MineFantasy: No Available Entity ID!, you can try manually adding them in Config/Mobs.cfg");
-    }
+//    public static int autoAssign() {
+//        for (int a = 0; a <= 255; a++) {
+//            if (!EntityList.isMatchingName().containsKey(Integer.valueOf(a))) {
+//                System.out.println("MineFantasy: Autoassigned EntityID " + a);
+//                return a;
+//            }
+//        }
+//        throw new IllegalArgumentException(
+//                "MineFantasy: No Available Entity ID!, you can try manually adding them in Config/Mobs.cfg");
+//    }
 
-    private static void addEntity(Class<? extends Entity> entityClass, String entityName, int id, int range,
-                                  int ticks) {
-        EntityRegistry.registerModEntity(entityClass, entityName, id, MineFantasyReborn.instance, range, ticks, true);
+    private static void addEntity(Class<? extends Entity> entityClass, String entityName, int id, int range, int ticks) {
+        ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, entityName);
+        EntityRegistry.registerModEntity(registryName, entityClass, entityName, id, MineFantasyReborn.instance, range, ticks, true);
     }
 }

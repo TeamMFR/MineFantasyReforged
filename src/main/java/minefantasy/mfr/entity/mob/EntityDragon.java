@@ -18,6 +18,7 @@ import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -33,6 +34,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -62,6 +65,7 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
     private int interestTime;
     @SideOnly(Side.CLIENT)
     private int wingFlap, wingTick;
+    private final BossInfoServer bossInfo = (BossInfoServer)(new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS)).setDarkenSky(true);
 
     public EntityDragon(World world) {
         super(world);
@@ -251,6 +255,8 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
             int i = (120 / 20) * wingTick;
             wingFlap = -40 + i;
         }
+
+        this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
     }
 
     private int getInterestTime() {
@@ -278,6 +284,26 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
     private Entity getBreath(double xAngle, double yAngle, double zAngle) {
         return new EntityDragonBreath(this.world, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage)
                 .setType(getType().rangedAttack.id);
+    }
+
+    /**
+     * Add the given player to the list of players tracking this entity. For instance, a player may track a boss in
+     * order to view its associated boss bar.
+     */
+    public void addTrackingPlayer(EntityPlayerMP player)
+    {
+        super.addTrackingPlayer(player);
+        this.bossInfo.addPlayer(player);
+    }
+
+    /**
+     * Removes the given player from the list of players tracking this entity. See {@link Entity#addTrackingPlayer} for
+     * more information on tracking.
+     */
+    public void removeTrackingPlayer(EntityPlayerMP player)
+    {
+        super.removeTrackingPlayer(player);
+        this.bossInfo.removePlayer(player);
     }
 
 //    @Override
@@ -714,6 +740,20 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
         setTier(nbt.getInteger("Tier"));
         interestTime = nbt.getInteger("interestTime");
 
+        if (this.hasCustomName())
+        {
+            this.bossInfo.setName(this.getDisplayName());
+        }
+
+    }
+
+    /**
+     * Sets the custom name tag for this entity
+     */
+    public void setCustomNameTag(String name)
+    {
+        super.setCustomNameTag(name);
+        this.bossInfo.setName(this.getDisplayName());
     }
 
     @SideOnly(Side.CLIENT)

@@ -1,6 +1,8 @@
 package minefantasy.mfr.client.render.mob;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
@@ -17,7 +19,6 @@ import org.lwjgl.opengl.GL11;
 public class RenderHound extends RenderLiving {
     public RenderHound(ModelBase modelbase) {
         super(Minecraft.getMinecraft().getRenderManager(), modelbase, 1.0F);
-        this.setRenderPassModel(modelbase);
     }
 
     /**
@@ -38,8 +39,13 @@ public class RenderHound extends RenderLiving {
             return 1;
         } else if (layer == 1 && hound.isTamed()) {
             this.bindTexture("collar");
-            int j = hound.getCollarColor();
-            GL11.glColor3f(EntitySheep.fleeceColorTable[j][0], EntitySheep.fleeceColorTable[j][1], EntitySheep.fleeceColorTable[j][2]);
+            int i = hound.ticksExisted / 25 + hound.getEntityId();
+            int j = EnumDyeColor.values().length;
+            int k = i % j;
+            EnumDyeColor collarColor = hound.getCollarColor();
+            float[] afloat1 = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(k));
+            float[] afloat2 = EntitySheep.getDyeRgb(collarColor);
+            GlStateManager.color(afloat1[0] * (1.0F - f) + afloat2[0] * f, afloat1[1] * (1.0F - f) + afloat2[1] * f, afloat1[2] * (1.0F - f) + afloat2[2] * f);
             return 1;
         } else {
             return -1;

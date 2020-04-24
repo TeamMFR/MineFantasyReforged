@@ -30,22 +30,22 @@ public class ItemMFBowl extends ItemComponentMFR {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack item = player.getHeldItem(hand);
-        RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+        RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-        if (movingobjectposition == null) {
+        if (rayTraceResult == null) {
             return super.onItemRightClick(world, player, hand);
         } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
-                if (!world.canMineBlockBody(player, movingobjectposition.getBlockPos())) {
+                if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
                     return super.onItemRightClick(world, player, hand);
                 }
 
-                if (!player.canPlayerEdit(movingobjectposition.getBlockPos(), movingobjectposition.sideHit, item)) {
+                if (!player.canPlayerEdit(rayTraceResult.getBlockPos(), rayTraceResult.sideHit, item)) {
                     return super.onItemRightClick(world, player, hand);
                 }
 
-                if (isWaterSource(world, movingobjectposition.getBlockPos())) {
+                if (isWaterSource(world, rayTraceResult.getBlockPos())) {
                     gather(item, world, player);
                     return ActionResult.newResult(EnumActionResult.PASS, item);
                 }

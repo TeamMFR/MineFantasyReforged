@@ -67,7 +67,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         itemRarity = rarity;
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.maxStackSize = 1;
@@ -218,11 +218,11 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         return CustomToolHelper.getWeightModifier(stack, 1.0F);
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-    }
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public int getColorFromItemStack(ItemStack item, int layer) {
+//        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
+//    }
 
     @Override
     public int getMaxDamage(ItemStack stack) {

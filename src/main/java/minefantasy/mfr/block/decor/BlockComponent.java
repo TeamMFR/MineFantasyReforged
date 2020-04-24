@@ -35,7 +35,7 @@ public class BlockComponent extends BlockContainer {
         super(Material.CIRCUITS);
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName("");
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + "MF_ComponentStorage");
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "MF_ComponentStorage");
         this.setHardness(1F);
         this.setResistance(1F);
         new AxisAlignedBB(1 / 16F, 0F, 1 / 16F, 15 / 16F, 12 / 16F, 15 / 16F);

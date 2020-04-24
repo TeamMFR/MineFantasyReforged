@@ -59,7 +59,7 @@ public class ItemFoodMF extends ItemFood {
         hungerLevel = hunger;
         saturationLevel = saturation;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setCreativeTab(CreativeTabMFR.tabFood);
     }

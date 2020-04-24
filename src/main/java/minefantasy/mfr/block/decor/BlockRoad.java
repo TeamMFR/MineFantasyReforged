@@ -22,6 +22,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -32,20 +33,19 @@ public class BlockRoad extends BlockContainer {
     public BlockRoad(String name, float f) {
         super(Material.GROUND);
         this.setSoundType(SoundType.GROUND);
-        this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, f / 16F, 1.0F);
         this.setLightOpacity(0);
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         setHardness(0.5F);
     }
 
     @Override
-    public AxisAlignedBB addCollisionBoxToList(BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, AxisAlignedBB blockBox) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         if (this == BlockListMFR.LOW_ROAD)
-            return AxisAlignedBB.getBoundingBox(x + 0, y + 0, z + 0, x + 1, y + 0.5, z + 1);
+            return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 0.5, pos.getZ() + 1);
 
-        return AxisAlignedBB.getBoundingBox(x + 0, y + 0, z + 0, x + 1, y + 1, z + 1);
+        return new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
     }
 
     /**
@@ -140,6 +140,7 @@ public class BlockRoad extends BlockContainer {
         if (!block.isNormalCube(block.getDefaultState())) {
             return false;
         }
+        Block heldBlock = Block.getBlockById(held.getItemDamage());
         if (held == null) {
             return false;
         }
@@ -156,7 +157,7 @@ public class BlockRoad extends BlockContainer {
                                 if (tile != null && tile instanceof TileEntityRoad
                                         && !((TileEntityRoad) tile).isLocked) {
                                     flag = true;
-                                    ((TileEntityRoad) tile).setSurface(block, held.getItemDamage());
+                                    ((TileEntityRoad) tile).setSurface(block, heldBlock);
                                 }
                             }
                         }

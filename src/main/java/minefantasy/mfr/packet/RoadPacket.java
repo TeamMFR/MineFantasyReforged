@@ -2,6 +2,7 @@ package minefantasy.mfr.packet;
 
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.block.tile.TileEntityRoad;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -9,7 +10,7 @@ import net.minecraft.util.math.BlockPos;
 public class RoadPacket extends PacketMF {
     public static final String packetName = "MF2_RoadPacket";
     private BlockPos coords;
-    private int[] surface;
+    private Block surface;
     private boolean isLocked;
     private boolean isRequest = false;
 
@@ -39,11 +40,10 @@ public class RoadPacket extends PacketMF {
             if (isRequest) {
                 tile.sendPacketToClients();
             } else {
-                int s0 = packet.readInt();
-                int s1 = packet.readInt();
+                int block = packet.readInt();
                 this.isLocked = packet.readBoolean();
 
-                tile.surface = new int[]{s0, s1};
+                tile.surface = Block.getBlockById(block);
                 tile.isLocked = this.isLocked;
 
                 tile.refreshSurface();
@@ -63,8 +63,7 @@ public class RoadPacket extends PacketMF {
         packet.writeBoolean(isRequest);
 
         if (!isRequest) {
-            packet.writeInt(surface[0]);
-            packet.writeInt(surface[1]);
+            packet.writeInt(Block.getIdFromBlock(surface));
             packet.writeBoolean(this.isLocked);
         }
     }

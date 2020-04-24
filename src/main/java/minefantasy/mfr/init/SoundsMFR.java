@@ -12,8 +12,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import java.util.ArrayList;
 import java.util.List;
 
-@ObjectHolder(MineFantasyReborn.MODID)
-@Mod.EventBusSubscriber(modid = MineFantasyReborn.MODID)
+@ObjectHolder(MineFantasyReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 
 public class SoundsMFR {
 	private static final List<SoundEvent> sounds = new ArrayList<>();
@@ -72,7 +72,7 @@ public class SoundsMFR {
 	}
 
 	private static SoundEvent createSoundEvent(String soundName) {
-		ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MODID, soundName);
+		ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, soundName);
 		SoundEvent soundEvent = new SoundEvent(registryName).setRegistryName(registryName);
 		sounds.add(soundEvent);
 		return  soundEvent;
