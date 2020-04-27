@@ -277,8 +277,6 @@ public class KnowledgeListMFR {
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 20);
 
         // ENGINEERING - Highly Expensive
-        etools = (new InformationBase("etools", 3, 0, 0, CustomToolListMFR.standard_spanner, (InformationBase) null))
-                .registerStat().setPage(engineering).setUnlocked();
         ecomponents = (new InformationBase("ecomponents", 5, 0, 0, ComponentListMFR.bolt, etools)).registerStat()
                 .setPage(engineering).setUnlocked();
         tungsten = (new InformationBase("tungsten", 8, -1, 1, ComponentListMFR.ingots[18], ecomponents)).registerStat()

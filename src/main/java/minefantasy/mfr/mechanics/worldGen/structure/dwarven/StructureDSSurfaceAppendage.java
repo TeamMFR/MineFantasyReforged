@@ -1,9 +1,7 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
-import minefantasy.mfr.block.decor.BlockRack;
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.LootTypes;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
+import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -12,7 +10,6 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureDSSurfaceAppendage extends StructureModuleMFR {
     private String type;
@@ -206,7 +203,7 @@ public class StructureDSSurfaceAppendage extends StructureModuleMFR {
         placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 1, 1, depth - 1) );
         placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 2, 1, depth - 1) );
 
-        placeChest(new BlockPos(width - 3, 1, depth - 1), LootTypes.DWARVEN_HOME);
+        placeChest(new BlockPos(width - 3, 1, depth - 1), LootRegistryMFR.DWARVEN_HOME);
 
         for (int x = -(width - 1); x < width; x++) {
             for (int z = 1; z < depth; z++) {

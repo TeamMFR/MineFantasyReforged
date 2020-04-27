@@ -3,6 +3,7 @@ package minefantasy.mfr.commands;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
+import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class CommandMF implements ICommand {
+public class CommandMF extends CommandBase {
 
     private final List materials;
 
@@ -43,9 +44,9 @@ public class CommandMF implements ICommand {
     }
 
     @Override
-    public void processCommand(ICommandSender iCommandSender, String[] strings) {
-        if (iCommandSender instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) iCommandSender;
+    public void execute(MinecraftServer server, ICommandSender sender, String[] strings) {
+        if (sender instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) sender;
             if (strings.length > 0) {
                 if (strings[0].equalsIgnoreCase("edit")) {
                     ItemStack equippedItem = player.getHeldItemMainhand();
@@ -93,10 +94,10 @@ public class CommandMF implements ICommand {
             equippedItem = ToolHelper.setQuality(equippedItem, qualityLvl);
             //this is only approximate trait calculation
             if (qualityLvl <= 50) {
-                equippedItem.stackTagCompound.setBoolean("MF_Inferior", true);
+                equippedItem.getTagCompound().setBoolean("MF_Inferior", true);
             }
             if (qualityLvl >= 150) {
-                equippedItem.stackTagCompound.setBoolean("MF_Inferior", false);
+                equippedItem.getTagCompound().setBoolean("MF_Inferior", false);
             }
             onSuccess(player);
         }
@@ -113,12 +114,7 @@ public class CommandMF implements ICommand {
     }
 
     @Override
-    public boolean canCommandSenderUseCommand(ICommandSender iCommandSender) {
-        return true;
-    }
-
-    @Override
-    public List addTabCompletionOptions(ICommandSender iCommandSender, String[] strings) {
+    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] strings, @Nullable BlockPos targetPos) {
         if (strings[0].equalsIgnoreCase("edit")) {
             if (strings.length == 2) {
                 return Arrays.asList("material", "quality", "unbreakable");
@@ -154,18 +150,8 @@ public class CommandMF implements ICommand {
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
-
-    }
-
-    @Override
     public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
         return false;
-    }
-
-    @Override
-    public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, @Nullable BlockPos targetPos) {
-        return null;
     }
 
     @Override

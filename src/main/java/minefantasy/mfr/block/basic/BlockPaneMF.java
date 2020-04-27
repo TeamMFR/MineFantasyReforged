@@ -13,7 +13,7 @@ public class BlockPaneMF extends BlockPane {
         super(material, recoverable);
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
     }
 
     public BlockPaneMF setBlockSoundType(SoundType soundType) {

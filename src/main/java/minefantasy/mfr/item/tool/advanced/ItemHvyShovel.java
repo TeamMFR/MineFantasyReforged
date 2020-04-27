@@ -59,7 +59,7 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setMaxDamage(material.getMaxUses());
     }
@@ -154,11 +154,11 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial {
         return CustomToolHelper.getWeightModifier(stack, 1.0F);
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public int getColorFromItemStack(ItemStack item, int layer) {
-        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-    }
+//    @Override
+//    @SideOnly(Side.CLIENT)
+//    public int getColorFromItemStack(ItemStack item, int layer) {
+//        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
+//    }
 
     @Override
     public int getMaxDamage(ItemStack stack) {

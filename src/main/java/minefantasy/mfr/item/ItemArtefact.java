@@ -15,10 +15,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,7 +45,7 @@ public class ItemArtefact extends Item implements IArtefact {
     public ItemArtefact(String name, int rarity) {
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         this.setHasSubtypes(true);
     }
@@ -141,9 +139,6 @@ class Artefact {
             for (String research : this.researches) {
                 ResearchArtefacts.addArtefact(new ItemStack(item, 1, id), research.toLowerCase());
             }
-        }
-        if (lootType != null) {
-            ChestGenHooks.addItem(lootType, new WeightedRandomChestContent(new ItemStack(item, 1, id), 1, 1, dropWeight));
         }
     }
 }

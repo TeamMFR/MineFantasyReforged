@@ -32,14 +32,10 @@ public class ArmourListMFR {
             float bulk = baseMat.weight;
             ArmourDesign design = baseMat == BaseMaterialMFR.padding ? ArmourDesign.PADDING : ArmourDesign.LEATHER;
 
-            leather[id + 0] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD,
-                    matName.toLowerCase() + "_layer_1", rarity, bulk);
-            leather[id + 1] = new ItemArmourMFR(matName.toLowerCase() + "_chest", baseMat, design, EntityEquipmentSlot.CHEST,
-                    matName.toLowerCase() + "_layer_1", rarity, bulk);
-            leather[id + 2] = new ItemArmourMFR(matName.toLowerCase() + "_legs", baseMat, design, EntityEquipmentSlot.LEGS,
-                    matName.toLowerCase() + "_layer_2", rarity, bulk);
-            leather[id + 3] = new ItemArmourMFR(matName.toLowerCase() + "_boots", baseMat, design, EntityEquipmentSlot.FEET,
-                    matName.toLowerCase() + "_layer_1", rarity, bulk);
+            leather[id + 0] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD, matName.toLowerCase() + "_layer_1", rarity, bulk);
+            leather[id + 1] = new ItemArmourMFR(matName.toLowerCase() + "_chest", baseMat, design, EntityEquipmentSlot.CHEST, matName.toLowerCase() + "_layer_1", rarity, bulk);
+            leather[id + 2] = new ItemArmourMFR(matName.toLowerCase() + "_legs", baseMat, design, EntityEquipmentSlot.LEGS, matName.toLowerCase() + "_layer_2", rarity, bulk);
+            leather[id + 3] = new ItemArmourMFR(matName.toLowerCase() + "_boots", baseMat, design, EntityEquipmentSlot.FEET, matName.toLowerCase() + "_layer_1", rarity, bulk);
         }
     }
 

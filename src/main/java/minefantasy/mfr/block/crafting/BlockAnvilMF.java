@@ -54,7 +54,7 @@ public class BlockAnvilMF extends BlockContainer {
         this.tier = material.tier;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setSoundType(SoundType.METAL);
         this.setHardness(material.hardness + 1 / 2F);
         this.setResistance(material.hardness + 1);

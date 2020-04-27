@@ -59,7 +59,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         setMaxDamage(material.getMaxUses());
     }

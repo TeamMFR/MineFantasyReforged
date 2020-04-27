@@ -275,8 +275,8 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
         }
     }
 
-    private static Item getItemFromString(ResourceLocation id) {
-        Object object = Item.REGISTRY.getObject(id);
+    private static Item getItemFromString(String id) {
+        Object object = Item.REGISTRY.getObject(new ResourceLocation(id));
         return object != null && object instanceof Item ? (Item) object : null;
     }
 

@@ -17,12 +17,12 @@ public class TileEntityComponentRenderer extends TileEntitySpecialRenderer {
     private ModelJugStack jugs;
 
     public TileEntityComponentRenderer() {
-        this.bars = new ModelBarStack();
-        this.sheets = new ModelSheetStack();
-        this.planks = new ModelPlankStack();
-        this.pots = new ModelPotStack();
-        this.bigplates = new ModelBigPlateStack();
-        this.jugs = new ModelJugStack();
+        bars = new ModelBarStack();
+        sheets = new ModelSheetStack();
+        planks = new ModelPlankStack();
+        pots = new ModelPotStack();
+        bigplates = new ModelBigPlateStack();
+        jugs = new ModelJugStack();
     }
 
     public void renderModelAt(TileEntityComponent tile, double d, double d1, double d2, float f) {

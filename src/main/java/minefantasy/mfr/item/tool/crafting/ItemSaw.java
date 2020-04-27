@@ -59,7 +59,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.hitDamage = (2.0F + material.getAttackDamage()) / 2F;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
         this.name = name;
         this.setHarvestLevel("axe", material.getHarvestLevel());

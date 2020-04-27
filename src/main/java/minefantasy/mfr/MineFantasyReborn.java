@@ -34,7 +34,6 @@ import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
@@ -52,13 +51,12 @@ import net.minecraftforge.fml.common.network.FMLEventChannel;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
-import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = MineFantasyReborn.MODID, name = MineFantasyReborn.NAME, version = MineFantasyReborn.VERSION, dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP)
+@Mod(modid = MineFantasyReborn.MOD_ID, name = MineFantasyReborn.NAME, version = MineFantasyReborn.VERSION, dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP)
 public class MineFantasyReborn {
-    public static final String MODID = "minefantasyreborn";
+    public static final String MOD_ID = "minefantasyreborn";
     public static final String NAME = "MineFantasyReborn";
     public static final String VERSION = "1.0.0";
     public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
@@ -155,7 +153,6 @@ public class MineFantasyReborn {
         KnowledgeListMFR.init();
         ArtefactListMFR.init();
         BasicRecipesMF.init();
-        ItemLootSack.addItems();
         proxy.postInit(postEvent);
         proxy.registerTickHandlers();
         MetalMaterial.addHeatables();

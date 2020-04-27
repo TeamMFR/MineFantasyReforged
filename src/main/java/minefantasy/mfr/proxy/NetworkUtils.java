@@ -22,8 +22,8 @@ public class NetworkUtils {
     static {
         try {
             playerInstanceClass = PlayerInteractionManager.class.getDeclaredClasses()[0];
-            getOrCreateChunkWatcher = ReflectionHelper.findMethod(PlayerInteractionManager.class, null, new String[]{"func_72690_a", "getOrCreateChunkWatcher"}, int.class, int.class, boolean.class);
-            sendToAllPlayersWatchingChunk = ReflectionHelper.findMethod(playerInstanceClass, null, new String[]{"func_151251_a", "sendToAllPlayersWatchingChunk"}, Packet.class);
+            getOrCreateChunkWatcher = ReflectionHelper.findMethod(PlayerInteractionManager.class, null, "getOrCreateChunkWatcher", int.class, int.class, boolean.class);
+            sendToAllPlayersWatchingChunk = ReflectionHelper.findMethod(playerInstanceClass, null, "sendToAllPlayersWatchingChunk"  , Packet.class);
             getOrCreateChunkWatcher.setAccessible(true);
             sendToAllPlayersWatchingChunk.setAccessible(true);
         } catch (Exception ex) {
@@ -33,7 +33,7 @@ public class NetworkUtils {
 
     public static void sendToWatchers(Packet packet, WorldServer world, BlockPos pos) {
         try {
-            Object playerInstance = getOrCreateChunkWatcher.invoke(world.getPlayerManager(), pos.getX() >> 4, pos.getZ() >> 4, false);
+            Object playerInstance = getOrCreateChunkWatcher.invoke(world.getPlayerChunkMap(), pos.getX() >> 4, pos.getZ() >> 4, false);
             if (playerInstance != null)
                 sendToAllPlayersWatchingChunk.invoke(playerInstance, packet);
         } catch (Exception ex) {

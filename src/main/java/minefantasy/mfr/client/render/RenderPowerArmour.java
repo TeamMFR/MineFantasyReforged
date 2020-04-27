@@ -11,8 +11,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
@@ -41,11 +39,6 @@ public class RenderPowerArmour extends RenderLivingBase {
     public static boolean isFirstPersonRender(EntityLivingBase entity) {
         Minecraft mc = Minecraft.getMinecraft();
         return mc.gameSettings.thirdPersonView == 0 && entity == mc.player;
-    }
-
-    @Override
-    protected boolean func_110813_b(EntityLivingBase entity) {
-        return false;
     }
 
     /**
@@ -104,23 +97,9 @@ public class RenderPowerArmour extends RenderLivingBase {
 
         GL11.glPushMatrix();
         GL11.glDisable(GL11.GL_CULL_FACE);
-        this.mainModel.onGround = this.renderSwingProgress(entity, f1);
-
-        if (this.renderPassModel != null) {
-            this.renderPassModel.onGround = this.mainModel.onGround;
-        }
-
-        this.mainModel.isRiding = entity.isRiding();
-
-        if (this.renderPassModel != null) {
-            this.renderPassModel.isRiding = this.mainModel.isRiding;
-        }
-
+        this.mainModel.swingProgress = this.getSwingProgress(entity, f1);
+        this.mainModel.isRiding = entity.isRiding() && (entity.getRidingEntity() != null && entity.getRidingEntity().shouldRiderSit());
         this.mainModel.isChild = entity.isChild();
-
-        if (this.renderPassModel != null) {
-            this.renderPassModel.isChild = this.mainModel.isChild;
-        }
 
         try {
             float f2 = this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, f1);
@@ -131,7 +110,7 @@ public class RenderPowerArmour extends RenderLivingBase {
                 EntityLivingBase entitylivingbase1 = (EntityLivingBase) entity.getRidingEntity();
                 f2 = this.interpolateRotation(entitylivingbase1.prevRenderYawOffset, entitylivingbase1.renderYawOffset,
                         f1);
-                f4 = MathHelper.wrapAngleTo180_float(f3 - f2);
+                f4 = MathHelper.wrapDegrees(f3 - f2);
 
                 if (f4 < -85.0F) {
                     f4 = -85.0F;
@@ -151,7 +130,7 @@ public class RenderPowerArmour extends RenderLivingBase {
             float f13 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * f1;
             this.renderLivingAt(entity, x, y, z);
             f4 = this.handleRotationFloat(entity, f1);
-            this.rotateCorpse(entity, f4, f2, f1);
+            this.applyRotations(entity, f4, f2, f1);
             float f5 = 0.0625F;
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);
             GL11.glScalef(-1.0F, -1.0F, 1.0F);
@@ -247,7 +226,7 @@ public class RenderPowerArmour extends RenderLivingBase {
             if (!isFrame && !isFirstPersonRender(entity)) {
                 this.renderEquippedItems(entity, f1);
             }
-            float f14 = entity.getBrightness(f1);
+            float f14 = entity.getBrightness();
             j = this.getColorMultiplier(entity, f14, f1);
             OpenGlHelper.setActiveTexture(OpenGlHelper.lightmapTexUnit);
             GL11.glDisable(GL11.GL_TEXTURE_2D);
@@ -359,7 +338,7 @@ public class RenderPowerArmour extends RenderLivingBase {
         }
     }
 
-    private float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
+     protected float interpolateRotation(float p_77034_1_, float p_77034_2_, float p_77034_3_) {
         float f3;
 
         for (f3 = p_77034_2_ - p_77034_1_; f3 < -180.0F; f3 += 360.0F) {
@@ -385,7 +364,7 @@ public class RenderPowerArmour extends RenderLivingBase {
     protected void renderCogworkItems(EntityLivingBase entity, float offset) {
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         // RenderBiped
-        ItemStack itemstack = entity.getHeldItem();
+        ItemStack itemstack = entity.getHeldItemMainhand();
         Item item;
         float f1;
 

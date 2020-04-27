@@ -17,7 +17,8 @@ import net.minecraft.world.WorldServer;
 import java.util.Random;
 
 public class TileEntityRoad extends TileEntity {
-    public int[] surface = new int[]{0, 0};
+    public Block surface;
+    public Block newSurface;
     public boolean isLocked = false;
     private int ticksExisted;
     private Random rand = new Random();
@@ -38,16 +39,16 @@ public class TileEntityRoad extends TileEntity {
         }
     }
 
-    public void setSurface(Block id, IBlockState state) {
+    public void setSurface(Block block, Block heldBlock) {
         if (world == null) {
             return;
         }
-        if (id == Blocks.GRASS) {
-            id = Blocks.DIRT;
+        if (block == Blocks.GRASS) {
+            block = Blocks.DIRT;
         }
         world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_GRAVEL_STEP, SoundCategory.AMBIENT, 0.5F, 1.0F, true);
-        surface[0] = Block.getIdFromBlock(id);
-        surface[1] = state;
+        surface = block;
+        newSurface = heldBlock;
         sendPacketToClients();
         refreshSurface();
     }
@@ -72,14 +73,14 @@ public class TileEntityRoad extends TileEntity {
             return;
         EntityPlayer player = MineFantasyReborn.proxy.getClientPlayer();
         if (player != null) {
-            ((EntityPlayerMP) player).sendQueue.addToSendQueue(new RoadPacket(this).request().generatePacket());
+            ((EntityPlayerMP) player).connection.sendPacket(new RoadPacket(this).request().generatePacket());
         }
     }
 
-    private boolean blockChange(int id, int meta) {
-        if (id != surface[0])
+    private boolean blockChange(IBlockState id, IBlockState meta) {
+        if (id != surface)
             return true;
-        if (meta != surface[1])
+        if (meta != newSurface)
             return true;
 
         return false;
@@ -88,7 +89,7 @@ public class TileEntityRoad extends TileEntity {
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
-        nbt.setIntArray("surface", surface);
+        nbt.setInteger("surface", Block.getIdFromBlock(surface));
         nbt.setBoolean("isLocked", isLocked);
         return nbt;
     }
@@ -96,11 +97,11 @@ public class TileEntityRoad extends TileEntity {
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
-        surface = nbt.getIntArray("surface");
+        surface = Block.getBlockById(nbt.getInteger("surface"));
         isLocked = nbt.getBoolean("isLocked");
     }
 
-    public int[] getSurface() {
+    public Block getSurface() {
         return surface;
     }
 
@@ -112,14 +113,14 @@ public class TileEntityRoad extends TileEntity {
     }
 
     public void refreshSurface() {
-        world.markBlockForUpdate(xCoord, yCoord, zCoord);
+        world.markChunkDirty(pos, this);
     }
 
     public Block getBaseBlock() {
-        if (surface[0] <= 0) {
+        if (surface == Blocks.DIRT) {
             return Blocks.DIRT;
         }
-        Block block = Block.getBlockById(surface[0]);
+        Block block = surface;
         return block != null ? block : Blocks.DIRT;
     }
 }

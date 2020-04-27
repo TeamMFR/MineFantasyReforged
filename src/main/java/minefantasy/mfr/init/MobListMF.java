@@ -10,6 +10,7 @@ import minefantasy.mfr.entity.mob.EntityMinotaur;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
@@ -34,7 +35,8 @@ public class MobListMF {
     }
 
     private static void addEntity(int IDBase, Class<? extends Entity> entityClass, String entityName) {
-        EntityRegistry.registerModEntity(entityClass, entityName, IDBase, MineFantasyReborn.instance, 128, 1, true);
+        ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, entityName);
+        EntityRegistry.registerModEntity(registryName, entityClass, entityName, IDBase, MineFantasyReborn.instance, 128, 1, true);
     }
 
     public static void addSpawn(Class<? extends EntityLiving> entityClass, int weightedProb, int min, int max,

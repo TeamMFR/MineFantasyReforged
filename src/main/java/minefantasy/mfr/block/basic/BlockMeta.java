@@ -18,7 +18,7 @@ public abstract class BlockMeta extends Block {
         this.names = names;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         if (material == Material.ROCK) {
             this.setHarvestLevel("pickaxe", 0);
         }

@@ -35,7 +35,7 @@ public class ItemHeated extends Item implements IHotItem {
 
     public ItemHeated() {
         GameRegistry.findRegistry(Item.class).register(this);
-        this.setUnlocalizedName(MineFantasyReborn.MODID + ".MF_Hot_Item");
+        this.setUnlocalizedName(MineFantasyReborn.MOD_ID + ".MF_Hot_Item");
         this.setHasSubtypes(true);
         this.setMaxStackSize(64);
     }
@@ -274,17 +274,17 @@ public class ItemHeated extends Item implements IHotItem {
         float curr_blue = 1.0F;
 
         ItemStack held = getItem(item);
-        if (held != null) {
-            int colour = item.getItem().getColorFromItemStack(held, 0);
-
-            curr_red = (colour >> 16 & 255) / 255.0F;
-            curr_green = (colour >> 8 & 255) / 255.0F;
-            curr_blue = (colour & 255) / 255.0F;
-
-            red = (int) (red * curr_red);
-            green = (int) (green * curr_green);
-            blue = (int) (blue * curr_blue);
-        }
+//        if (held != null) {
+//            int colour = item.getItem().getColorFromItemStack(held, 0);
+//
+//            curr_red = (colour >> 16 & 255) / 255.0F;
+//            curr_green = (colour >> 8 & 255) / 255.0F;
+//            curr_blue = (colour & 255) / 255.0F;
+//
+//            red = (int) (red * curr_red);
+//            green = (int) (green * curr_green);
+//            blue = (int) (blue * curr_blue);
+//        }
 
         return GuiHelper.getColourForRGB(red, green, blue);
     }

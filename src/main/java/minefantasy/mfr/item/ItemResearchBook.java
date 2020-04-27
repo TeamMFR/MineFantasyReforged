@@ -25,7 +25,7 @@ public class ItemResearchBook extends Item {
         setMaxStackSize(1);
         setCreativeTab(CreativeTabMFR.tabGadget);
         setRegistryName("MF_ResearchBook");
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + "infobook");
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "infobook");
         GameRegistry.findRegistry(Item.class).register(this);
         setContainerItem(this);
     }

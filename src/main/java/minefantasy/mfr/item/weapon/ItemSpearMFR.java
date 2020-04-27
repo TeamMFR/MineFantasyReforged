@@ -36,26 +36,6 @@ public class ItemSpearMFR extends ItemWeaponMFR implements IExtendedReachWeapon 
     }
 
     @Override
-    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
-        return offhand == null || offhand.getItem() == Items.SHIELD;
-    }
-
-    @Override
-    public boolean isHeavyWeapon() {
-        return true;
-    }
-
-    @Override
-    public boolean isOffhandHandDual(ItemStack off) {
-        return false;
-    }
-
-    @Override
-    public boolean sheatheOnBack(ItemStack item) {
-        return true;
-    }
-
-    @Override
     public float getReachModifierInBlocks(ItemStack stack) {
         return 3.0F;
     }

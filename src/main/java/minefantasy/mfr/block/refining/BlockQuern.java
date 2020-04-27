@@ -33,7 +33,7 @@ public class BlockQuern extends BlockContainer {
         this.type = type;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName("MF_Grind_" + type);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + type);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + type);
         this.setSoundType(SoundType.STONE);
         this.setHardness(5F);
         this.setResistance(5F);

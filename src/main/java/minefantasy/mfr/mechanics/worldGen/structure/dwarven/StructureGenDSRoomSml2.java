@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.LootTypes;
+import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
@@ -156,7 +156,7 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
         placeBlock(Blocks.STONE_SLAB, new BlockPos(-(width - 1), 1, 2) );
         placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(-(width - 1), 1, 3) );
 
-        placeChest(new BlockPos(width - 3, 1, 7), rotateLeft(), LootTypes.DWARVEN_HOME_RICH);
+        placeChest(new BlockPos(width - 3, 1, 7), rotateLeft(), LootRegistryMFR.DWARVEN_HOME_RICH);
     }
 
     private void placeChest(BlockPos pos, int d, ResourceLocation loot) {

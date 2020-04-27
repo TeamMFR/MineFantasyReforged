@@ -1,6 +1,7 @@
 package minefantasy.mfr.block.tree;
 
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -28,7 +29,7 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
         super(Material.PLANTS);
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         setSoundType(SoundType.GROUND);
         float f = 0.4F;
         new AxisAlignedBB(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
@@ -43,54 +44,47 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
      * Ticks the block if it's been scheduled
      */
     @Override
-    public void updateTick(World world, int x, int y, int z, Random rand) {
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
         if (!world.isRemote) {
-            super.updateTick(world, x, y, z, rand);
+            super.updateTick(world, pos, state, rand);
 
-            if (world.getBlockLightValue(x, y + 1, z) >= 9 && rand.nextFloat() * 100F < (14.30F) / growthModifier) {
-                this.initGrow(world, x, y, z, rand);
+            if (world.getLight(pos.add(0,1,0)) >= 9 && rand.nextFloat() * 100F < (14.30F) / growthModifier) {
+                this.initGrow(world, pos, rand);
             }
         }
     }
 
-    public void initGrow(World world, int x, int y, int z, Random rand) {
-        int l = world.getBlockMetadata(x, y, z);
+    public void initGrow(World world, BlockPos pos, Random rand) {
+        IBlockState state = world.getBlockState(pos);
 
-        if ((l & 8) == 0) {
-            world.setBlockMetadataWithNotify(x, y, z, l | 8, 4);
+        if (state == this.getDefaultState()) {
+            world.setBlockState(pos, state, 4);
         } else {
-            this.tryGrow(world, x, y, z, rand);
+            this.tryGrow(world, pos, rand);
         }
     }
 
-    public void tryGrow(World world, int x, int y, int z, Random rand) {
-        if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, rand, x, y, z))
+    public void tryGrow(World world, BlockPos pos, Random rand) {
+        if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, rand, pos))
             return;
-        int l = world.getBlockMetadata(x, y, z) & 7;
+        IBlockState state = world.getBlockState(pos);
         Object treegen = new WorldGenMFTree(true, log, leaves);
-        int i1 = 0;
-        int j1 = 0;
+
         boolean flag = false;
 
-        Block block = Blocks.air;
-        world.setBlock(x, y, z, block, 0, 4);
+        IBlockState newBlock = (Blocks.AIR).getDefaultState();
+        world.setBlockState(pos, newBlock, 1);
 
-        if (!((WorldGenerator) treegen).generate(world, rand, x + i1, y, z + j1)) {
+        if (!((WorldGenerator) treegen).generate(world, rand, pos)) {
             if (flag) {
-                world.setBlock(x + i1, y, z + j1, this, l, 4);
-                world.setBlock(x + i1 + 1, y, z + j1, this, l, 4);
-                world.setBlock(x + i1, y, z + j1 + 1, this, l, 4);
-                world.setBlock(x + i1 + 1, y, z + j1 + 1, this, l, 4);
+                world.setBlockState(pos, state, 4);
+                world.setBlockState(pos, state, 4);
+                world.setBlockState(pos.add(0,0,1), state, 4);
+                world.setBlockState(pos.add(1,0,1), state, 4);
             } else {
-                world.setBlock(x, y, z, this, l, 4);
+                world.setBlockState(pos, state, 4);
             }
         }
-    }
-
-    public boolean func_149880_a(World p_149880_1_, int p_149880_2_, int p_149880_3_, int p_149880_4_,
-                                 int p_149880_5_) {
-        return p_149880_1_.getBlock(p_149880_2_, p_149880_3_, p_149880_4_) == this
-                && (p_149880_1_.getBlockMetadata(p_149880_2_, p_149880_3_, p_149880_4_) & 7) == p_149880_5_;
     }
 
     /**
@@ -98,21 +92,6 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
      */
     public int damageDropped(IBlockState state) {
         return MathHelper.clamp(state.hashCode() & 7, 0, 5);
-    }
-
-    public boolean func_149851_a(World p_149851_1_, int p_149851_2_, int p_149851_3_, int p_149851_4_,
-                                 boolean p_149851_5_) {
-        return true;
-    }
-
-    public boolean func_149852_a(World p_149852_1_, Random p_149852_2_, int p_149852_3_, int p_149852_4_,
-                                 int p_149852_5_) {
-        return p_149852_1_.rand.nextFloat() < (0.45D) / growthModifier;
-    }
-
-    public void func_149853_b(World p_149853_1_, Random p_149853_2_, int p_149853_3_, int p_149853_4_,
-                              int p_149853_5_) {
-        this.initGrow(p_149853_1_, p_149853_3_, p_149853_4_, p_149853_5_, p_149853_2_);
     }
 
     @Override

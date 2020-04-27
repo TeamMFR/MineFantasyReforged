@@ -55,7 +55,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.tier = tier;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         GameRegistry.findRegistry(Item.class).register(this);
     }
 

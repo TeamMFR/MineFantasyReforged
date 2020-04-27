@@ -58,7 +58,7 @@ public class BlockForge extends BlockContainer {
         this.isActive = isActive;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName("MF_Forge" + tex + (isActive ? "Active" : ""));
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + "forge." + tex);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "forge." + tex);
         this.setSoundType(SoundType.STONE);
         this.setHardness(5F);
         this.setResistance(8F);

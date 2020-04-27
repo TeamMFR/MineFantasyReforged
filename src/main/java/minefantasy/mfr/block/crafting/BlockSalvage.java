@@ -42,7 +42,7 @@ public class BlockSalvage extends Block {
         name = "salvage_" + name;
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setSoundType(SoundType.ANVIL);
         this.setHardness(2F);
         this.setResistance(1F);

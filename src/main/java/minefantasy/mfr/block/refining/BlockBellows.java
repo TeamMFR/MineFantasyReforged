@@ -36,7 +36,7 @@ public class BlockBellows extends BlockContainer {
         super(Material.WOOD);
         GameRegistry.findRegistry(Block.class).register(this);
         setRegistryName("MF_Bellows");
-        setUnlocalizedName(MineFantasyReborn.MODID + "." + "bellows");
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "bellows");
         this.setHardness(1F);
         this.setResistance(0.5F);
         this.setCreativeTab(CreativeTabMFR.tabUtil);

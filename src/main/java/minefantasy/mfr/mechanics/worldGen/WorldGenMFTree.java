@@ -3,6 +3,7 @@ package minefantasy.mfr.mechanics.worldGen;
 import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -23,7 +24,7 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
      * Reference to the World object.
      */
     World world;
-    int[] basePos = new int[]{0, 0, 0};
+    BlockPos basePos = new BlockPos(0, 0, 0);
     int heightLimit;
     int height;
     double heightAttenuation = 0.618D;
@@ -90,13 +91,13 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
         }
 
         int[][] aint = new int[i * this.heightLimit][4];
-        int j = this.basePos[1] + this.heightLimit - this.leafDistanceLimit;
+        int j = this.basePos.getY() + this.heightLimit - this.leafDistanceLimit;
         int k = 1;
-        int l = this.basePos[1] + this.height;
-        int i1 = j - this.basePos[1];
-        aint[0][0] = this.basePos[0];
+        int l = this.basePos.getY() + this.height;
+        int i1 = j - this.basePos.getY();
+        aint[0][0] = this.basePos.getX();
         aint[0][1] = j;
-        aint[0][2] = this.basePos[2];
+        aint[0][2] = this.basePos.getZ();
         aint[0][3] = l;
         --j;
 
@@ -111,15 +112,15 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
                 for (double d0 = 0.5D; j1 < i; ++j1) {
                     double d1 = this.scaleWidth * f * (world.rand.nextFloat() + 0.328D);
                     double d2 = world.rand.nextFloat() * 2.0D * Math.PI;
-                    int k1 = MathHelper.floor(d1 * Math.sin(d2) + this.basePos[0] + d0);
-                    int l1 = MathHelper.floor(d1 * Math.cos(d2) + this.basePos[2] + d0);
+                    int k1 = MathHelper.floor(d1 * Math.sin(d2) + this.basePos.getX() + d0);
+                    int l1 = MathHelper.floor(d1 * Math.cos(d2) + this.basePos.getZ() + d0);
                     int[] aint1 = new int[]{k1, j, l1};
                     int[] aint2 = new int[]{k1, j + this.leafDistanceLimit, l1};
 
                     if (this.checkBlockLine(aint1, aint2) == -1) {
-                        int[] aint3 = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]};
-                        double d3 = Math.sqrt(Math.pow(Math.abs(this.basePos[0] - aint1[0]), 2.0D)
-                                + Math.pow(Math.abs(this.basePos[2] - aint1[2]), 2.0D));
+                        int[] aint3 = new int[]{this.basePos.getX(), this.basePos.getY(), this.basePos.getZ()};
+                        double d3 = Math.sqrt(Math.pow(Math.abs(this.basePos.getX() - aint1[0]), 2.0D)
+                                + Math.pow(Math.abs(this.basePos.getZ() - aint1[2]), 2.0D));
                         double d4 = d3 * this.branchSlope;
 
                         if (aint1[1] - d4 > l) {
@@ -151,7 +152,8 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
         int l = (int) (f + 0.618D);
         byte b1 = otherCoordPairs[b];
         byte b2 = otherCoordPairs[b + 3];
-        BlockPos aint1 = new BlockPos(0, 0, 0);
+        int[] aint = new int[]{pos.getX(), pos.getY(), pos.getZ()};
+        int[] aint1 = new int[]{0, 0, 0};
         int i1 = -l;
         int j1 = -l;
 
@@ -166,13 +168,14 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
                     ++j1;
                 } else {
                     aint1[b2] = aint[b2] + j1;
-                    Block block1 = this.world.getBlockState(aint1[0], aint1[1], aint1[2]);
+                    BlockPos aint1Pos = new BlockPos(aint1[0], aint1[1], aint1[2]);
+                    IBlockState state = this.world.getBlockState(aint1Pos);
+                    Block block1 = this.world.getBlockState(aint1Pos).getBlock();
 
-                    if (!block1.isAir(world, aint1[0], aint1[1], aint1[2])
-                            && !block1.isLeaves(world, aint1[0], aint1[1], aint1[2])) {
+                    if (!block1.isAir(state, world, aint1Pos) && !block1.isLeaves(state, world, aint1Pos)) {
                         ++j1;
                     } else {
-                        this.setBlockAndNotifyAdequately(this.world, aint1[0], aint1[1], aint1[2], block, leafMeta);
+                        this.setBlockAndNotifyAdequately(this.world, aint1Pos, state);
                         ++j1;
                     }
                 }
@@ -213,16 +216,16 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
     /**
      * Generates the leaves surrounding an individual entry in the leafNodes list.
      */
-    void generateLeafNode(int x, int y, int z) {
-        int l = y;
+    void generateLeafNode(BlockPos pos) {
+        int l = pos.getY();
 
-        for (int i1 = y + this.leafDistanceLimit; l < i1; ++l) {
-            float f = this.leafSize(l - y);
-            this.generateLeaf(x, l, z, f, (byte) 1, this.leaves);
+        for (int i1 = pos.getY() + this.leafDistanceLimit; l < i1; ++l) {
+            float f = this.leafSize(l - pos.getY());
+            this.generateLeaf(pos, f, (byte) 1, this.leaves);
         }
     }
 
-    void func_150530_a(int[] x, int[] y, Block block) {
+    void generateTrunk(int[] x, int[] y, Block block) {
         int[] aint2 = new int[]{0, 0, 0};
         byte b0 = 0;
         byte b1;
@@ -268,7 +271,7 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
                     }
                 }
 
-                this.setBlockAndNotifyAdequately(this.world, aint3[0], aint3[1], aint3[2], block, b5);
+                this.setBlockAndNotifyAdequately(this.world, new BlockPos(aint3[0], aint3[1], aint3[2]), block.getDefaultState());
             }
         }
     }
@@ -283,7 +286,7 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
             int k = this.leafNodes[i][0];
             int l = this.leafNodes[i][1];
             int i1 = this.leafNodes[i][2];
-            this.generateLeafNode(k, l, i1);
+            this.generateLeafNode(new BlockPos(k, l, i1));
         }
     }
 
@@ -300,24 +303,24 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
      * double-sized trunks by changing a field that is always 1 to 2.
      */
     void generateTrunk() {
-        int i = this.basePos[0];
-        int j = this.basePos[1];
-        int k = this.basePos[1] + this.height;
-        int l = this.basePos[2];
+        int i = this.basePos.getX();
+        int j = this.basePos.getY();
+        int k = this.basePos.getY() + this.height;
+        int l = this.basePos.getZ();
         int[] aint = new int[]{i, j, l};
         int[] aint1 = new int[]{i, k, l};
-        this.func_150530_a(aint, aint1, this.log);
+        this.generateTrunk(aint, aint1, this.log);
 
         if (this.trunkSize == 2) {
             ++aint[0];
             ++aint1[0];
-            this.func_150530_a(aint, aint1, this.log);
+            this.generateTrunk(aint, aint1, this.log);
             ++aint[2];
             ++aint1[2];
-            this.func_150530_a(aint, aint1, this.log);
+            this.generateTrunk(aint, aint1, this.log);
             aint[0] += -1;
             aint1[0] += -1;
-            this.func_150530_a(aint, aint1, this.log);
+            this.generateTrunk(aint, aint1, this.log);
         }
     }
 
@@ -329,14 +332,14 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
         int i = 0;
         int j = this.leafNodes.length;
 
-        for (int[] aint = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]}; i < j; ++i) {
+        for (int[] aint = new int[]{this.basePos.getX(), this.basePos.getY(), this.basePos.getZ()}; i < j; ++i) {
             int[] aint1 = this.leafNodes[i];
             int[] aint2 = new int[]{aint1[0], aint1[1], aint1[2]};
             aint[1] = aint1[3];
-            int k = aint[1] - this.basePos[1];
+            int k = aint[1] - this.basePos.getY();
 
             if (this.leafNodeNeedsBase(k)) {
-                this.func_150530_a(aint, aint2, this.log);
+                this.generateTrunk(aint, aint2, this.log);
             }
         }
     }
@@ -346,13 +349,13 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
      * the second, returning the distance (in blocks) before a non-air, non-leaf
      * block is encountered and/or the end is encountered.
      */
-    int checkBlockLine(int[] p_76496_1_, int[] p_76496_2_) {
+    int checkBlockLine(int[] intArray1, int[] intArray2) {
         int[] aint2 = new int[]{0, 0, 0};
         byte b0 = 0;
         byte b1;
 
         for (b1 = 0; b0 < 3; ++b0) {
-            aint2[b0] = p_76496_2_[b0] - p_76496_1_[b0];
+            aint2[b0] = intArray2[b0] - intArray1[b0];
 
             if (Math.abs(aint2[b0]) > Math.abs(aint2[b1])) {
                 b1 = b0;
@@ -379,12 +382,11 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
             int j;
 
             for (j = aint2[b1] + b4; i != j; i += b4) {
-                aint3[b1] = p_76496_1_[b1] + i;
-                aint3[b2] = MathHelper.floor(p_76496_1_[b2] + i * d0);
-                aint3[b3] = MathHelper.floor(p_76496_1_[b3] + i * d1);
-                Block block = this.world.getBlock(aint3[0], aint3[1], aint3[2]);
+                aint3[b1] = intArray1[b1] + i;
+                aint3[b2] = MathHelper.floor(intArray1[b2] + i * d0);
+                aint3[b3] = MathHelper.floor(intArray1[b3] + i * d1);
 
-                if (!this.isReplaceable(world, aint3[0], aint3[1], aint3[2])) {
+                if (!this.isReplaceable(world, new BlockPos(aint3[0], aint3[1], aint3[2]))) {
                     break;
                 }
             }
@@ -398,12 +400,12 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
      * tree, spanning basePos to to the height limit, is valid.
      */
     boolean validTreeLocation() {
-        int[] aint = new int[]{this.basePos[0], this.basePos[1], this.basePos[2]};
-        int[] aint1 = new int[]{this.basePos[0], this.basePos[1] + this.heightLimit - 1, this.basePos[2]};
-        Block block = this.world.getBlock(this.basePos[0], this.basePos[1] - 1, this.basePos[2]);
+        int[] aint = new int[]{this.basePos.getX(), this.basePos.getY(), this.basePos.getZ()};
+        int[] aint1 = new int[]{this.basePos.getX(), this.basePos.getY() + this.heightLimit - 1, this.basePos.getZ()};
+        BlockPos validateTreePos = this.basePos.add(0, -1, 0);
+        IBlockState state = this.world.getBlockState(validateTreePos);
 
-        boolean isSoil = block.canSustainPlant(world, basePos[0], basePos[1] - 1, basePos[2], EnumFacing.UP,
-                (BlockSapling) Blocks.SAPLING);
+        boolean isSoil = state.getBlock().canSustainPlant(state, world, validateTreePos, EnumFacing.UP, (BlockSapling) Blocks.SAPLING);
         if (!isSoil) {
             return false;
         } else {
@@ -434,13 +436,11 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
         this.leafDensity = p_76487_5_;
     }
 
-    public boolean generate(World world, Random rand, int x, int y, int z) {
+    @Override
+    public boolean generate(World world, Random rand, BlockPos pos) {
         this.world = world;
         long l = rand.nextLong();
         world.rand.setSeed(l);
-        this.basePos[0] = x;
-        this.basePos[1] = y;
-        this.basePos[2] = z;
 
         if (this.heightLimit == 0) {
             this.heightLimit = 5 + world.rand.nextInt(this.heightLimitLimit);

@@ -1,18 +1,17 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.decor.BlockRack;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
+import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.item.gadget.ItemBomb;
 import minefantasy.mfr.item.gadget.ItemMine;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.material.WoodMaterial;
-import minefantasy.mfr.mechanics.worldGen.structure.LootTypes;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
@@ -24,10 +23,10 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSRoom extends StructureModuleMFR {
-    private static final String[] possible_types = new String[]{"Living", "Forge", "Study", "Armoury"};
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
     protected Block floor_block = BlockListMFR.COBBLE_PAVEMENT;
     private String type = "Basic";
@@ -306,8 +305,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             int ystart = 1;
             if (z == (int) Math.ceil((float) depth / 2) + 1 || z == (int) Math.floor((float) depth / 2) - 1) {
                 ystart = 3;
-                placeChest(new BlockPos(-(width - 1), 1, z), rotateLeft(), LootTypes.DWARVEN_STUDY);
-                placeChest(new BlockPos(width - 1, 1, z), rotateRight(), LootTypes.DWARVEN_STUDY);
+                placeChest(new BlockPos(-(width - 1), 1, z), rotateLeft(), LootRegistryMFR.DWARVEN_STUDY);
+                placeChest(new BlockPos(width - 1, 1, z), rotateRight(), LootRegistryMFR.DWARVEN_STUDY);
             }
             for (int y = ystart; y < height; y++) {
                 if (getBlock(new BlockPos(-(width - 1), y, z)).getBlock().isReplaceable(world, pos)) {
@@ -362,23 +361,23 @@ public class StructureGenDSRoom extends StructureModuleMFR {
                 }
             }
         }
-        placeChest(new BlockPos(-(width - 2), 1, z - 1), direction, LootTypes.DWARVEN_ARMOURY);
-        placeChest(new BlockPos(-(width - 3), 1, z- 1) , direction, LootTypes.DWARVEN_ARMOURY);
-        placeChest(new BlockPos((width - 2), 1, z - 1), direction, LootTypes.DWARVEN_ARMOURY);
-        placeChest(new BlockPos((width - 3), 1, z - 1), direction, LootTypes.DWARVEN_ARMOURY);
+        placeChest(new BlockPos(-(width - 2), 1, z - 1), direction, LootRegistryMFR.DWARVEN_ARMOURY);
+        placeChest(new BlockPos(-(width - 3), 1, z- 1) , direction, LootRegistryMFR.DWARVEN_ARMOURY);
+        placeChest(new BlockPos((width - 2), 1, z - 1), direction, LootRegistryMFR.DWARVEN_ARMOURY);
+        placeChest(new BlockPos((width - 3), 1, z - 1), direction, LootRegistryMFR.DWARVEN_ARMOURY);
 
         for (int z1 = 1; z1 < z; z1++) {
             for (int y = 1; y < height; y++) {
                 if (getBlock(new BlockPos(-(width - 1), y, z1)).getBlock().isReplaceable(world, pos)) {
                     if (y == 1 || y == 3) {
-                        placeAmmoBox(new BlockPos(-(width - 1), y, z1), rotateRight(), LootTypes.DWARVEN_AMMO);
+                        placeChest(new BlockPos(-(width - 1), y, z1), rotateRight(), LootRegistryMFR.DWARVEN_HOME);
                     } else {
                         placeBlock(Blocks.STONE_SLAB, new BlockPos(-(width - 1), y, z1) );
                     }
                 }
                 if (getBlock(new BlockPos((width - 1), y, z1)).getBlock().isReplaceable(world, pos)) {
                     if (y == 1 || y == 3) {
-                        placeAmmoBox(new BlockPos((width - 1), y, z1), rotateLeft(), LootTypes.DWARVEN_AMMO);
+                        placeChest(new BlockPos((width - 1), y, z1), rotateLeft(), LootRegistryMFR.DWARVEN_HOME);
                     } else {
                         placeBlock(Blocks.STONE_SLAB, new BlockPos((width - 1), y, z), 1);
                     }
@@ -439,8 +438,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 5, z + 2) );
 
         int chestFacing = position < 0 ? rotateLeft() : rotateRight();
-        placeChest(new BlockPos((-(width - 2) * position), 1, z), chestFacing, LootTypes.DWARVEN_FORGE);
-        placeChest(new BlockPos((-(width - 2) * position), 1, z - 1), chestFacing, LootTypes.DWARVEN_FORGE);
+        placeChest(new BlockPos((-(width - 2) * position), 1, z), chestFacing, LootRegistryMFR.DWARVEN_FORGE);
+        placeChest(new BlockPos((-(width - 2) * position), 1, z - 1), chestFacing, LootRegistryMFR.DWARVEN_FORGE);
 
         placeBlock(BlockListMFR.FORGE,new BlockPos(((width - 1) * position), 1, z) );
         placeBlock(BlockListMFR.FORGE, new BlockPos(((width - 1) * position), 1, z - 1) );
@@ -493,10 +492,12 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private void placeChest(BlockPos pos, int d, ResourceLocation dwarvenArmoury) {
+
         placeBlock(Blocks.CHEST,pos, d);
         TileEntityChest tile = (TileEntityChest) getTileEntity(pos, direction);
 
         if (tile != null) {
+
             tile.setLootTable(lootType, 5 + rand.nextInt(5));
         }
     }
