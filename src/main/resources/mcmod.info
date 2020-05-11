@@ -1,14 +1,14 @@
 [
 {
-  "modid": "minefantasyreborn",
-  "name": "MineFantasy Reborn",
-  "description": "MineFantasy Reborn, bringing MineFantasy to 1.12.2",
+  "modid": "examplemod",
+  "name": "Example Mod",
+  "description": "Example placeholder mod.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["Anonymous", "ThatPolishKid99"],
-  "credits": "Anonymous, for the original MineFantasy and MineFantasy 2",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
