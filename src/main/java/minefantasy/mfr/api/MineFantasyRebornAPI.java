@@ -133,17 +133,17 @@ public class MineFantasyRebornAPI {
      * @param craftTime The time taken to craft(default is 200. each hit is about 100)
      * @param input     The input for the item (Exactly the same as regular recipes)
      */
-    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, ItemStack result, String research, String sound,
+    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, ItemStack result, String research, SoundEvent sound,
                                                           String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addToolRecipe(result, skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, String sound,
+    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, SoundEvent sound,
                                                           String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addToolRecipe(new ItemStack(result), skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, String sound,
+    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, SoundEvent sound,
                                                           int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addToolRecipe(new ItemStack(result), skill, research, sound, 0F, "hands", -1, -1, craftTime, input);
     }
@@ -161,7 +161,7 @@ public class MineFantasyRebornAPI {
      * @param input      The input for the item (Exactly the same as regular recipes)
      */
 
-    public static void addCarpenterRecipe(Skill skill, ItemStack result, String sound, String toolType, int toolTier,
+    public static void addCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, String toolType, int toolTier,
                                           int craftTime, Object... input) {
         CraftingManagerCarpenter.getInstance().addRecipe(result, skill, "", sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
@@ -170,7 +170,7 @@ public class MineFantasyRebornAPI {
      * {@link MineFantasyAPI#addCarpenterRecipe}
      */
 
-    public static void addCarpenterRecipe(Skill skill, ItemStack result, String sound, int craftTime, Object... input) {
+    public static void addCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, int craftTime, Object... input) {
         addCarpenterRecipe(skill, result, "", sound, "hands", -1, craftTime, input);
     }
 
@@ -197,7 +197,7 @@ public class MineFantasyRebornAPI {
      * hit with bare hands
      */
     public static ICarpenterRecipe addBasicCarpenterRecipe(ItemStack result, Object... input) {
-        return CraftingManagerCarpenter.getInstance().addRecipe(result, null, "", "dig.wood", 0F, "hands", -1, -1, 1,
+        return CraftingManagerCarpenter.getInstance().addRecipe(result, null, "", SoundEvents.BLOCK_WOOD_HIT, 0F, "hands", -1, -1, 1,
                 input);
     }
 
@@ -215,7 +215,7 @@ public class MineFantasyRebornAPI {
      * @param input      The input for the item (Exactly the same as regular recipes)
      */
 
-    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, String sound,
+    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound,
                                                       String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addRecipe(result, skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
@@ -224,7 +224,7 @@ public class MineFantasyRebornAPI {
      * {@link MineFantasyAPI#addCarpenterRecipe}
      */
 
-    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, String sound,
+    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound,
                                                       int craftTime, Object... input) {
         return addCarpenterRecipe(skill, result, research, sound, "hands", -1, craftTime, input);
     }

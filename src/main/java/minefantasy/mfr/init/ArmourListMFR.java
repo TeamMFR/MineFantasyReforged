@@ -1,5 +1,6 @@
 package minefantasy.mfr.init;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.item.armour.ItemApron;
@@ -9,20 +10,28 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
  * @author Anonymous Productions
  */
+@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class ArmourListMFR {
-    public static final String[] leathermats = new String[]{"hide", "roughleather", "strongleather", "studleather",
-            "padded",};
-    public static ArmourMaterialMFR LEATHER = new ArmourMaterialMFR("Leather", 5, 0.30F, 18, 1.00F);
-    public static ArmourMaterialMFR APRON = new ArmourMaterialMFR("Apron", 6, 0.30F, 0, 1.00F);
-    public static ItemArmourMFR[] leather = new ItemArmourMFR[leathermats.length * 4];
-    public static ItemArmourMFR leatherapron;
+    public static final String[] leathermats = new String[]{"hide", "roughleather", "strongleather", "studleather", "padded",};
+    public static ArmourMaterialMFR LEATHER_MAT;
+    public static ArmourMaterialMFR APRON;
+    public static ItemArmourMFR[] LEATHER;
+    public static ItemArmourMFR LEATHER_APRON;
 
-    public static void load() {
-        leatherapron = new ItemApron("leatherapron", BaseMaterialMFR.leatherapron, "leatherapron_layer_1", 0);
+
+    public static void init(){
+        LEATHER_MAT = new ArmourMaterialMFR("Leather", 5, 0.30F, 18, 1.00F);
+        APRON = new ArmourMaterialMFR("Apron", 6, 0.30F, 0, 1.00F);
+        LEATHER = new ItemArmourMFR[leathermats.length * 4];
+        LEATHER_APRON = new ItemApron("leatherapron", BaseMaterialMFR.leatherapron, "leatherapron_layer_1", 0);
 
         for (int a = 0; a < leathermats.length; a++) {
             BaseMaterialMFR baseMat = BaseMaterialMFR.getMaterial(leathermats[a]);
@@ -32,11 +41,19 @@ public class ArmourListMFR {
             float bulk = baseMat.weight;
             ArmourDesign design = baseMat == BaseMaterialMFR.padding ? ArmourDesign.PADDING : ArmourDesign.LEATHER;
 
-            leather[id + 0] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD, matName.toLowerCase() + "_layer_1", rarity, bulk);
-            leather[id + 1] = new ItemArmourMFR(matName.toLowerCase() + "_chest", baseMat, design, EntityEquipmentSlot.CHEST, matName.toLowerCase() + "_layer_1", rarity, bulk);
-            leather[id + 2] = new ItemArmourMFR(matName.toLowerCase() + "_legs", baseMat, design, EntityEquipmentSlot.LEGS, matName.toLowerCase() + "_layer_2", rarity, bulk);
-            leather[id + 3] = new ItemArmourMFR(matName.toLowerCase() + "_boots", baseMat, design, EntityEquipmentSlot.FEET, matName.toLowerCase() + "_layer_1", rarity, bulk);
+            LEATHER[id + 0] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD, matName.toLowerCase() + "_layer_1", rarity, bulk);
+            LEATHER[id + 1] = new ItemArmourMFR(matName.toLowerCase() + "_chest", baseMat, design, EntityEquipmentSlot.CHEST, matName.toLowerCase() + "_layer_1", rarity, bulk);
+            LEATHER[id + 2] = new ItemArmourMFR(matName.toLowerCase() + "_legs", baseMat, design, EntityEquipmentSlot.LEGS, matName.toLowerCase() + "_layer_2", rarity, bulk);
+            LEATHER[id + 3] = new ItemArmourMFR(matName.toLowerCase() + "_boots", baseMat, design, EntityEquipmentSlot.FEET, matName.toLowerCase() + "_layer_1", rarity, bulk);
         }
+    }
+
+    @SubscribeEvent
+    public static void registerItem(RegistryEvent.Register<Item> event) {
+        IForgeRegistry<Item> registry = event.getRegistry();
+
+        registry.registerAll(LEATHER);
+        registry.register(LEATHER_APRON);
     }
 
     public static ItemStack armour(ItemArmourMFR[] pool, int tier, int piece) {

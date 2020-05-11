@@ -22,11 +22,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import java.util.Random;
 
 public class BlockRepairKit extends Block {
-    protected float repairLevel;
-    protected float successRate;
-    protected float breakChance;
-    protected boolean isOrnate = false;
-    protected float repairLevelEnchant = 0.0F;
+    public float repairLevel;
+    public float successRate;
+    public float breakChance;
+    public boolean isOrnate = false;
+    public float repairLevelEnchant = 0.0F;
     private String type;
     private Random rand = new Random();
     AxisAlignedBB BlockBB = new AxisAlignedBB(1F / 16F, 0F, 1F / 16F, 15F / 16F, 6F / 16F, 15F / 16F);
@@ -45,7 +45,7 @@ public class BlockRepairKit extends Block {
         this.breakChance = breakChance;
         this.type = name;
         name = "repair_" + name;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setSoundType(SoundType.CLOTH);

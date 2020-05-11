@@ -43,7 +43,7 @@ public class BlockOreMF extends Block {
         this.rarity = rarity;
         this.dropMin = min;
         this.dropMax = max;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         setSoundType(SoundType.STONE);
@@ -51,7 +51,6 @@ public class BlockOreMF extends Block {
             this.setHarvestLevel("pickaxe", harvestLevel);
         }
         this.setCreativeTab(CreativeTabMFR.tabOres);
-        OreDictionary.registerOre(name, this);
     }
 
     public BlockOreMF setBlockSoundType(SoundType soundType) {

@@ -40,7 +40,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
         itemRarity = rarity;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         setCreativeTab(CreativeTabMFR.tabGadget);
         setMaxDamage(material.getMaxUses());
     }
@@ -68,10 +68,10 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
             }
             lvl++;
         }
-        if (lvl >= ToolListMFR.rarity.length) {
-            lvl = ToolListMFR.rarity.length - 1;
+        if (lvl >= ToolListMFR.RARITY.length) {
+            lvl = ToolListMFR.RARITY.length - 1;
         }
-        return ToolListMFR.rarity[lvl];
+        return ToolListMFR.RARITY[lvl];
     }
 
     @Override

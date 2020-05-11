@@ -11,7 +11,7 @@ public class BlockPaneMF extends BlockPane {
 
     public BlockPaneMF(String name, Material material, boolean recoverable) {
         super(material, recoverable);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
     }

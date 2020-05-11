@@ -38,11 +38,11 @@ public class BlockCakeMF extends Block {
 
     public BlockCakeMF(String name, Item slice) {
         super(Material.CAKE);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         cakeSlice = slice;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(BITES, Integer.valueOf(0)));
+
         this.setTickRandomly(true);
         setCreativeTab(CreativeTabMFR.tabFood);
     }

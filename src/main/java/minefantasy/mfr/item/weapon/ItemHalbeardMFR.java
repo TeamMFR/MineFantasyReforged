@@ -25,11 +25,6 @@ public class ItemHalbeardMFR extends ItemSpearMFR {
     }
 
     @Override
-    public boolean allowOffhand(ItemStack mainhand, ItemStack offhand) {
-        return false;
-    }
-
-    @Override
     public float getReachModifierInBlocks(ItemStack stack) {
         return 3.0F;
     }

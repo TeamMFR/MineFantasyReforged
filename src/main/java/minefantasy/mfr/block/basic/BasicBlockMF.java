@@ -25,7 +25,7 @@ public class BasicBlockMF extends Block {
 
     public BasicBlockMF(String name, Material material, Object drop) {
         super(material);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         if (material == Material.ROCK) {

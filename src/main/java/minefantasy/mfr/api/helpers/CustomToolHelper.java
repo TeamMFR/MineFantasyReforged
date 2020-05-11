@@ -414,7 +414,7 @@ public class CustomToolHelper {
     }
 
     public static String getSimpleReferenceName(Item item, String dam) {
-        String reference = Item.REGISTRY.getNameForObject(item).toString();
+        String reference = String.valueOf(Item.REGISTRY.getNameForObject(item));
         if (reference == null) {
             return "";
         }

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 public class ResearchArtefacts {
     public static void addArtefact(Object input, InformationBase research) {
-        addArtefact(input, research.getUnlocalisedName());
+        if (research != null){
+            addArtefact(input, research.getUnlocalisedName());
+        }
     }
 
     public static void addArtefact(Object input, String research) {

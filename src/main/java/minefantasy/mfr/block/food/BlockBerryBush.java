@@ -2,7 +2,6 @@ package minefantasy.mfr.block.food;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.FoodListMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,7 +19,6 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,14 +27,13 @@ import java.util.Random;
 
 public class BlockBerryBush extends BlockBush implements IShearable {
     @SideOnly(Side.CLIENT)
-    protected int field_150127_b;
-    int[] field_150128_a;
+
     private Random rand = new Random();
 
 
     public BlockBerryBush(String name) {
         super(Material.LEAVES);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setTickRandomly(true);
@@ -72,7 +69,7 @@ public class BlockBerryBush extends BlockBush implements IShearable {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-            ItemStack itemstack = rand.nextInt(10) == 0 ? new ItemStack(FoodListMFR.berriesJuicy) : new ItemStack(FoodListMFR.berries, 1);
+            ItemStack itemstack = rand.nextInt(10) == 0 ? new ItemStack(FoodListMFR.BERRIES_JUICY) : new ItemStack(FoodListMFR.BERRIES, 1);
             if (itemstack != null) {
                 float f = this.rand.nextFloat() * 0.8F + 0.1F;
                 float f1 = this.rand.nextFloat() * 0.8F + 0.1F;

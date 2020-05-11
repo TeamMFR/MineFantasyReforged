@@ -52,7 +52,7 @@ public class ItemCrossbow extends Item
         String name = "MF_CrossbowCustom";
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setFull3D();
         this.setMaxDamage(150);
@@ -129,7 +129,7 @@ public class ItemCrossbow extends Item
         if (action.equalsIgnoreCase("reload")) {
             if (storage == null && infinity) {
                 shouldConsume = false;
-                storage = CustomToolListMFR.standard_bolt.construct("Magic");
+                storage = CustomToolListMFR.STANDARD_BOLT.construct("Magic");
             }
             if (storage != null)// RELOAD
             {
@@ -270,17 +270,17 @@ public class ItemCrossbow extends Item
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.crossbow_handle_wood,
-                (ICrossbowPart) ComponentListMFR.cross_arms_basic));
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.crossbow_stock_wood,
-                (ICrossbowPart) ComponentListMFR.cross_arms_light));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_HANDLE_WOOD,
+                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_BASIC));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
+                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_LIGHT));
 
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.crossbow_stock_wood,
-                (ICrossbowPart) ComponentListMFR.cross_arms_basic, (ICrossbowPart) ComponentListMFR.cross_ammo));
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.crossbow_stock_wood,
-                (ICrossbowPart) ComponentListMFR.cross_arms_heavy, (ICrossbowPart) ComponentListMFR.cross_bayonet));
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.crossbow_stock_iron,
-                (ICrossbowPart) ComponentListMFR.cross_arms_advanced, (ICrossbowPart) ComponentListMFR.cross_scope));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
+                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_BASIC, (ICrossbowPart) ComponentListMFR.CROSS_AMMO));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
+                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_HEAVY, (ICrossbowPart) ComponentListMFR.CROSS_BAYONET));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_IRON,
+                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_ADVANCED, (ICrossbowPart) ComponentListMFR.CROSS_SCOPE));
     }
 
     public String getNameModifier(ItemStack item, String partname) {

@@ -62,7 +62,7 @@ public class ItemCrossbowPart extends ItemComponentMFR implements ICrossbowPart 
 
     @Override
     public String getUnlocalisedName() {
-        if (this == ComponentListMFR.cross_arms_basic) {
+        if (this == ComponentListMFR.CROSS_ARMS_BASIC) {
             return null;
         }
         return "crosspart." + type + "." + partname;

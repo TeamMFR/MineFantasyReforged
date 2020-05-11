@@ -43,7 +43,7 @@ public class BlockBigFurnace extends BlockContainer {
 
     public BlockBigFurnace(String name, boolean isHeater, int tier) {
         super(Material.ROCK);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.isHeater = isHeater;

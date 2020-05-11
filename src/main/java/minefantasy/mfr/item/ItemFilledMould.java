@@ -31,7 +31,7 @@ public class ItemFilledMould extends ItemComponentMFR {
     }
 
     public static ItemStack createMould(ItemStack fill) {
-        ItemStack mould = new ItemStack(ComponentListMFR.ingot_mould_filled);
+        ItemStack mould = new ItemStack(ComponentListMFR.INGOT_MOULD_FILLED);
         NBTTagCompound nbt = getOrCreateNBT(mould);
         NBTTagCompound save = new NBTTagCompound();
         fill.writeToNBT(save);
@@ -93,7 +93,7 @@ public class ItemFilledMould extends ItemComponentMFR {
                     }
 
                     if (!world.isRemote) {
-                        ItemStack mould = new ItemStack(ComponentListMFR.ingot_mould);
+                        ItemStack mould = new ItemStack(ComponentListMFR.INGOT_MOULD);
                         if (!world.getBlockState(rayTraceResult.getBlockPos().add(0,1,0)).getMaterial().isSolid()) {
                             dropItem(world, rayTraceResult.getBlockPos().add(0,1,0), drop);
                             dropItem(world, rayTraceResult.getBlockPos().add(0,1,0), mould);

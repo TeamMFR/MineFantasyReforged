@@ -10,8 +10,6 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.translation.I18n;
@@ -29,7 +27,7 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
     }
 
     public static ItemStack createBombArrow(byte powder, byte filling) {
-        ItemStack arrow = new ItemStack(ToolListMFR.exploding_bolt);
+        ItemStack arrow = new ItemStack(ToolListMFR.EXPLODING_BOLT);
 
         ItemBomb.setFilling(arrow, filling);
         ItemBomb.setPowder(arrow, powder);
@@ -54,7 +52,7 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
         int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
         float range = fill.range * powder.rangeModifier * 0.5F;
 
-        list.add(I18n.translateToLocal(ToolListMFR.bomb_custom.getUnlocalizedName(item) + ".name"));
+        list.add(I18n.translateToLocal(ToolListMFR.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
         list.add(I18n.translateToLocal("bomb.powder." + powder.name + ".name"));
         list.add("");
         list.add(I18n.translateToLocal("bomb.damage.name") + ": " + damage);
@@ -72,7 +70,7 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
 
     @Override
     public Object[] getSalvage(ItemStack item) {
-        return new Object[]{ComponentListMFR.bomb_casing_bolt,
+        return new Object[]{ComponentListMFR.BOMB_CASING_BOLT,
                 ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
                 ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)),};
     }

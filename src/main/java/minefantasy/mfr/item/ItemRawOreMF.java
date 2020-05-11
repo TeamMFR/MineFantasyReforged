@@ -11,6 +11,6 @@ public class ItemRawOreMF extends ItemComponentMFR {
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
     }
 }

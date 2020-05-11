@@ -3,7 +3,6 @@ package minefantasy.mfr.entity.mob;
 import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -33,7 +32,6 @@ import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -53,7 +51,6 @@ import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -130,9 +127,9 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 
     public ItemWeaponMFR getRandomWeapon() {
         if (getTier() == 3) {
-            return OrnateStyle.ornate_greatsword;
+            return OrnateStyle.ORNATE_GREATSWORD;
         }
-        ItemWeaponMFR[] list = new ItemWeaponMFR[]{CustomToolListMFR.standard_greatsword, CustomToolListMFR.standard_katana, CustomToolListMFR.standard_battleaxe, CustomToolListMFR.standard_warhammer, CustomToolListMFR.standard_spear, CustomToolListMFR.standard_halbeard};
+        ItemWeaponMFR[] list = new ItemWeaponMFR[]{CustomToolListMFR.STANDARD_GREATSWORD, CustomToolListMFR.STANDARD_KATANA, CustomToolListMFR.STANDARD_BATTLEAXE, CustomToolListMFR.STANDARD_WARHAMMER, CustomToolListMFR.STANDARD_SPEAR, CustomToolListMFR.STANDARD_HALBEARD};
         return list[rand.nextInt(list.length)];
     }
 
@@ -307,7 +304,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
         }
         count = rand.nextInt(looting + 4) + 1;
         for (int a = 0; a < count; a++) {
-            this.dropItem(ComponentListMFR.rawhideLarge, 1);
+            this.dropItem(ComponentListMFR.RAWHIDE_LARGE, 1);
         }
         count = rand.nextInt(looting + 2) + 1;
         for (int a = 0; a < count; a++) {
@@ -318,12 +315,12 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
     private Item getLoot() {
         int breed = getTier();
         if (breed > 2) {
-            return ToolListMFR.loot_sack_rare;
+            return ToolListMFR.LOOT_SACK_RARE;
         }
         if (breed > 0) {
-            return ToolListMFR.loot_sack_uc;
+            return ToolListMFR.LOOT_SACK_UC;
         }
-        return ToolListMFR.loot_sack;
+        return ToolListMFR.LOOT_SACK;
     }
 
     private int getLootCount() {
@@ -402,7 +399,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 
 
     protected Item getDropItem() {
-        return ComponentListMFR.hideLarge;
+        return ComponentListMFR.HIDE_LARGE;
     }
 
     public double getHeadChargeAngle() {

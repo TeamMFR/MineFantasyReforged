@@ -9,9 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 public abstract class PacketMF {
 
     public final FMLProxyPacket generatePacket() {
-        ByteBuf buf = Unpooled.buffer(16);
+        PacketBuffer buf = new PacketBuffer(Unpooled.buffer(16));
         write(buf);
-        return new FMLProxyPacket((PacketBuffer) buf, getChannel());
+        return new FMLProxyPacket(buf, getChannel());
     }
 
     public abstract String getChannel();

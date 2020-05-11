@@ -35,7 +35,7 @@ public class TileEntityQuern extends TileEntity implements IInventory, ISidedInv
     }
 
     public static boolean isPot(ItemStack item) {
-        return item != null && item.getItem() == ComponentListMFR.clay_pot;
+        return item != null && item.getItem() == ComponentListMFR.CLAY_POT;
     }
 
     @Override
@@ -194,7 +194,7 @@ public class TileEntityQuern extends TileEntity implements IInventory, ISidedInv
         if (item != null && getResult(item) != null) {
             return slot == 0;
         }
-        if (item != null && item.getItem() == ComponentListMFR.clay_pot) {
+        if (item != null && item.getItem() == ComponentListMFR.CLAY_POT) {
             return slot == 1;
         }
         return false;

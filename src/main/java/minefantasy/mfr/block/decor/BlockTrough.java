@@ -28,7 +28,7 @@ public class BlockTrough extends BlockWoodDecor {
 
     public BlockTrough(String name) {
         super(name);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setHardness(1F);

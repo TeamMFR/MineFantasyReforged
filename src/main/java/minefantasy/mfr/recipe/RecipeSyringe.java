@@ -1,11 +1,15 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.init.ToolListMFR;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
 
 public class RecipeSyringe implements IRecipe {
     /**
@@ -20,12 +24,12 @@ public class RecipeSyringe implements IRecipe {
             ItemStack itemstack1 = matrix.getStackInSlot(i);
 
             if (itemstack1 != null) {
-                if (itemstack1.getItem() == ToolListMFR.syringe_empty) {
+                if (itemstack1.getItem() == ToolListMFR.SYRINGE_EMPTY) {
                     syringe = itemstack1;
                 } else if (itemstack1.getItem() instanceof ItemPotion) {
                     ItemPotion potion = (ItemPotion) itemstack1.getItem();
 
-                    if (potion.isSplash(itemstack1.getItemDamage())) {
+                    if (potion == Items.SPLASH_POTION){
                         return false;
                     }
 
@@ -49,12 +53,12 @@ public class RecipeSyringe implements IRecipe {
             ItemStack itemstack1 = matrix.getStackInSlot(i);
 
             if (itemstack1 != null) {
-                if (itemstack1.getItem() == ToolListMFR.syringe_empty) {
+                if (itemstack1.getItem() == ToolListMFR.SYRINGE_EMPTY) {
                     syringe = itemstack1;
                 } else if (itemstack1.getItem() instanceof ItemPotion) {
                     ItemPotion potion = (ItemPotion) itemstack1.getItem();
 
-                    if (potion.isSplash(itemstack1.getItemDamage())) {
+                    if (itemstack1.getItem() == Items.SPLASH_POTION) {
                         return null;
                     }
 
@@ -63,21 +67,34 @@ public class RecipeSyringe implements IRecipe {
             }
         }
         if (syringe != null && filler != null) {
-            return new ItemStack(ToolListMFR.syringe, 1, filler.getItemDamage());
+            return new ItemStack(ToolListMFR.SYRINGE, 1, filler.getItemDamage());
         }
         return null;
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     @Override
-    public int getRecipeSize() {
-        return 10;
+    public boolean canFit(int width, int height) {
+        return width >= 5 && height >= 5;
     }
 
     @Override
     public ItemStack getRecipeOutput() {
+        return null;
+    }
+
+    @Override
+    public IRecipe setRegistryName(ResourceLocation name) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public ResourceLocation getRegistryName() {
+        return null;
+    }
+
+    @Override
+    public Class<IRecipe> getRegistryType() {
         return null;
     }
 }

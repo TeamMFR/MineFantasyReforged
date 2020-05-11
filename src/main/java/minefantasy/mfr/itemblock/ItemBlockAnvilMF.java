@@ -1,16 +1,15 @@
-package minefantasy.mfr.block.crafting;
+package minefantasy.mfr.itemblock;
 
+import minefantasy.mfr.block.crafting.BlockAnvilMF;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemBlockAnvilMF extends ItemBlock {
+public class ItemBlockAnvilMF extends ItemBlockBase {
     private BlockAnvilMF anvil;
 
     public ItemBlockAnvilMF(Block block) {

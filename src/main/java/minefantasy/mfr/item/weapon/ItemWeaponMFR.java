@@ -139,7 +139,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         setCreativeTab(CreativeTabMFR.tabOldTools);
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
 
         this.baseDamage = 4 + getDamageModifier();
 
@@ -503,18 +503,18 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             super.getSubItems(tab, items);
             return;
         }
-        if (this != ToolListMFR.swordTraining) {
+        if (this != ToolListMFR.TRAINING_SWORD) {
             return;
         }
-        items.add(new ItemStack(ToolListMFR.swordTraining));
-        items.add(new ItemStack(ToolListMFR.waraxeTraining));
-        items.add(new ItemStack(ToolListMFR.maceTraining));
-        items.add(new ItemStack(ToolListMFR.spearTraining));
+        items.add(new ItemStack(ToolListMFR.TRAINING_SWORD));
+        items.add(new ItemStack(ToolListMFR.TRAINING_WARAXE));
+        items.add(new ItemStack(ToolListMFR.TRAINING_MACE));
+        items.add(new ItemStack(ToolListMFR.TRAINING_SPEAR));
 
-        items.add(new ItemStack(ToolListMFR.swordStone));
-        items.add(new ItemStack(ToolListMFR.waraxeStone));
-        items.add(new ItemStack(ToolListMFR.maceStone));
-        items.add(new ItemStack(ToolListMFR.spearStone));
+        items.add(new ItemStack(ToolListMFR.STONE_SWORD));
+        items.add(new ItemStack(ToolListMFR.STONE_WARAXE));
+        items.add(new ItemStack(ToolListMFR.STONE_MACE));
+        items.add(new ItemStack(ToolListMFR.STONE_SPEAR));
     }
 
     private void addSet(List list, Item[] items) {
@@ -598,7 +598,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(UUID.fromString(slot.getName()), "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
 
         return map;
     }

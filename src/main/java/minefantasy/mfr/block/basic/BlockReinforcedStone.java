@@ -12,8 +12,8 @@ public class BlockReinforcedStone extends BlockMeta {
     public BlockReinforcedStone(String name, String... alternates) {
         super(name, Material.ROCK, alternates);
         this.currentName = name;
-        GameRegistry.findRegistry(Block.class).register(this);
-        setRegistryName(name);
+
+       // setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
     }
 

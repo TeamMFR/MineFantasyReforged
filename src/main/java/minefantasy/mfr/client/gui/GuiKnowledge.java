@@ -1,5 +1,7 @@
 package minefantasy.mfr.client.gui;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
@@ -29,6 +31,7 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -39,12 +42,9 @@ public class GuiKnowledge extends GuiScreen {
     private static final int field_146571_z = InformationList.minDisplayRow * 24 - 112;
     private static final int field_146559_A = InformationList.maxDisplayColumn * 24 - 77;
     private static final int field_146560_B = InformationList.maxDisplayRow * 24 - 77;
-    private static final ResourceLocation screenTex = new ResourceLocation(
-            "minefantasy2:textures/gui/knowledge/knowledge.png");
-    private static final ResourceLocation buyTex = new ResourceLocation(
-            "minefantasy2:textures/gui/knowledge/purchase.png");
-    private static final ResourceLocation skillTex = new ResourceLocation(
-            "minefantasy2:textures/gui/knowledge/skilllist.png");
+    private static final ResourceLocation screenTex = new ResourceLocation("minefantasy2:textures/gui/knowledge/knowledge.png");
+    private static final ResourceLocation buyTex = new ResourceLocation("minefantasy2:textures/gui/knowledge/purchase.png");
+    private static final ResourceLocation skillTex = new ResourceLocation("minefantasy2:textures/gui/knowledge/skilllist.png");
     protected static int field_146555_f = 256;
     protected static int field_146557_g = 202;
     protected static int field_146563_h;
@@ -63,7 +63,7 @@ public class GuiKnowledge extends GuiScreen {
     public int buyHeight = 72;
     int offsetByX = 70;
     int offsetByY = 0;
-    private RenderItem itemrender = new RenderItem();
+    private RenderItem itemrender = Minecraft.getMinecraft().getRenderItem();
     private InformationBase selected = null;
     private InformationBase highlighted = null;
     private GuiButton button;
@@ -103,22 +103,19 @@ public class GuiKnowledge extends GuiScreen {
         int j1 = (this.height - GuiKnowledge.field_146557_g) / 2 + offsetByY;
 
         this.buttonList.clear();
-        this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 101, 80, 20,
-                I18n.format("gui.done", new Object[0])));
+        this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 101, I18n.format("gui.done")));
         this.buttonList.add(button = new GuiButton(2, (width - field_146555_f) / 2 + 24, height / 2 + 101, 125, 20,
                 InformationPage.getTitle(currentPage)));
 
         int purchasex = i1 + (field_146555_f - buyWidth) / 2;
         int purchasey = j1 + (field_146557_g - buyHeight) / 2;
         // PURCHASE SCREEN
-        this.buttonList.add(new GuiOptionButton(3, purchasex + 19, purchasey + 47, 80, 20,
-                I18n.format("gui.purchase", new Object[0])));
-        this.buttonList.add(new GuiOptionButton(4, purchasex + 125, purchasey + 47, 80, 20,
-                I18n.format("gui.cancel", new Object[0])));
+        this.buttonList.add(new GuiOptionButton(3, purchasex + 19, purchasey + 47, I18n.format("gui.purchase", new Object[0])));
+        this.buttonList.add(new GuiOptionButton(4, purchasex + 125, purchasey + 47, I18n.format("gui.cancel", new Object[0])));
     }
 
     @Override
-    protected void mouseClicked(int x, int y, int button) {
+    protected void mouseClicked(int x, int y, int button) throws IOException {
         if (selected == null && button == 0 && highlighted != null) {
             if (ResearchLogic.hasInfoUnlocked(player, highlighted) && !highlighted.getPages().isEmpty()) {
                 player.openGui(MineFantasyReborn.instance, 1, player.world, 0, highlighted.ID, 0);
@@ -146,8 +143,7 @@ public class GuiKnowledge extends GuiScreen {
         }
 
         if (p_146284_1_.id == 3 && selected != null) {
-            ((EntityPlayerMP) player).sendQueue
-                    .addToSendQueue(new ResearchRequest(player, selected.ID).generatePacket());
+            ((EntityPlayerMP) player).connection.sendPacket(new ResearchRequest(player, selected.ID).generatePacket());
             selected = null;
         }
         if (p_146284_1_.id == 4 && selected != null) {
@@ -160,7 +156,7 @@ public class GuiKnowledge extends GuiScreen {
      * KeyListener.keyTyped(KeyEvent e).
      */
     @Override
-    protected void keyTyped(char p_73869_1_, int p_73869_2_) {
+    protected void keyTyped(char p_73869_1_, int p_73869_2_) throws IOException {
         if (p_73869_2_ == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
             this.mc.displayGuiScreen((GuiScreen) null);
             this.mc.setIngameFocus();
@@ -338,13 +334,6 @@ public class GuiKnowledge extends GuiScreen {
         for (i3 = 0; i3 * f1 - l2 < 155.0F; ++i3) {
             float f3 = 0.6F - (j2 + i3) / 25.0F * 0.3F;
             GL11.glColor4f(f3, f3, f3, 1.0F);
-
-            for (j3 = 0; j3 * f2 - k2 < 224.0F; ++j3) {
-                IIcon iicon = Blocks.planks.getIcon(0, 0);
-
-                this.mc.getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-                this.drawTexturedModelRectFromIcon(j3 * 16 - k2, i3 * 16 - l2, iicon, 16, 16);
-            }
         }
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -394,7 +383,7 @@ public class GuiKnowledge extends GuiScreen {
         }
 
         InformationBase achievement = null;
-        RenderItem renderitem = new RenderItem();
+        RenderItem renderitem = Minecraft.getMinecraft().getRenderItem();
         float f4 = (mx - k1) * GuiKnowledge.field_146570_r;
         float f5 = (my - l1) * GuiKnowledge.field_146570_r;
         RenderHelper.enableGUIStandardItemLighting();
@@ -451,19 +440,14 @@ public class GuiKnowledge extends GuiScreen {
                 if (!ResearchLogic.canUnlockInfo(player, achievement2)) {
                     f6 = 0.1F;
                     GL11.glColor4f(f6, f6, f6, 1.0F);
-                    renderitem.renderWithColor = false;
                 }
 
                 GL11.glDisable(GL11.GL_LIGHTING); // Forge: Make sure Lighting is disabled. Fixes MC-33065
                 GL11.glEnable(GL11.GL_CULL_FACE);
-                renderitem.renderItemAndEffectIntoGUI(this.mc.fontRenderer, this.mc.getTextureManager(),
-                        achievement2.theItemStack, i5 + 3, j5 + 3);
+                renderitem.renderItemAndEffectIntoGUI(achievement2.theItemStack, i5 + 3, j5 + 3);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
                 GL11.glDisable(GL11.GL_LIGHTING);
 
-                if (!ResearchLogic.canUnlockInfo(player, achievement2)) {
-                    renderitem.renderWithColor = true;
-                }
 
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -509,13 +493,13 @@ public class GuiKnowledge extends GuiScreen {
                     s1 = I18n.format("achievement.unknown", new Object[0]);
                     j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
                     s = (new TextComponentString("achievement.requires" + new Object[]{achievement.parentInfo.getDisplayName()})).getUnformattedText();
-                    k4 = this.fontRenderer.splitStringWidth(s, j4);
+                    k4 = this.fontRenderer.getWordWrappedHeight(s, j4);
                     this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k4 + 12 + 3, -1073741824, -1073741824);
                     this.fontRenderer.drawSplitString(s, i5, j5 + 12, j4, -9416624);
                 } else if (researchVisibility < 3) {
                     j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
                     s = (new TextComponentString("achievement.requires" + new Object[]{achievement.parentInfo.getDisplayName()})).getUnformattedText();
-                    k4 = this.fontRenderer.splitStringWidth(s, j4);
+                    k4 = this.fontRenderer.getWordWrappedHeight(s, j4);
                     this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k4 + 12 + 3, -1073741824, -1073741824);
                     this.fontRenderer.drawSplitString(s, i5, j5 + 12, j4, -9416624);
                 } else {
@@ -523,7 +507,7 @@ public class GuiKnowledge extends GuiScreen {
                 }
             } else {
                 j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
-                int k5 = this.fontRenderer.splitStringWidth(s2, j4);
+                int k5 = this.fontRenderer.getWordWrappedHeight(s2, j4);
 
                 if (ResearchLogic.hasInfoUnlocked(player, achievement)
                         || ResearchLogic.canUnlockInfo(player, achievement)) {
@@ -589,8 +573,8 @@ public class GuiKnowledge extends GuiScreen {
                 if (requirements != null) {
                     offset += (19 * requirements.length);
                 }
-                ((GuiButton) buttonList.get(2)).yPosition = purchasey + 47 + offset;
-                ((GuiButton) buttonList.get(3)).yPosition = purchasey + 47 + offset;
+                ((GuiButton) buttonList.get(2)).y = purchasey + 47 + offset;
+                ((GuiButton) buttonList.get(3)).y = purchasey + 47 + offset;
             }
             int red = GuiHelper.getColourForRGB(220, 0, 0);
             int white = 16777215;

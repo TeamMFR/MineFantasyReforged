@@ -42,12 +42,12 @@ public class CraftingManagerCarpenter {
     /**
      * Adds a recipe. See spreadsheet on first page for details.
      */
-    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, String sound, float exp,
+    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp,
                                       String tool, int hammer, int anvil, int time, Object... input) {
         return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 0, input);
     }
 
-    public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, String sound, float exp,
+    public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp,
                                           String tool, int hammer, int anvil, int time, Object... input) {
         return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 1, input);
     }

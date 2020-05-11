@@ -34,8 +34,9 @@ public class ItemHeated extends Item implements IHotItem {
     public static boolean renderDynamicHotIngotRendering = true;
 
     public ItemHeated() {
-        GameRegistry.findRegistry(Item.class).register(this);
-        this.setUnlocalizedName(MineFantasyReborn.MOD_ID + ".MF_Hot_Item");
+        String name = "hot_item";
+        setRegistryName(name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setHasSubtypes(true);
         this.setMaxStackSize(64);
     }
@@ -88,7 +89,7 @@ public class ItemHeated extends Item implements IHotItem {
     public static ItemStack createHotItem(ItemStack item, boolean ignoreStats) {
         Heatable stats = Heatable.loadStats(item);
         if (stats != null) {
-            ItemStack out = new ItemStack(ComponentListMFR.hotItem, item.getCount());
+            ItemStack out = new ItemStack(ComponentListMFR.HOT_ITEM, item.getCount());
             NBTTagCompound nbt = getNBT(out);
             NBTTagCompound save = new NBTTagCompound();
             item.writeToNBT(save);
@@ -100,7 +101,7 @@ public class ItemHeated extends Item implements IHotItem {
 
             return out;
         } else if (ignoreStats) {
-            ItemStack out = new ItemStack(ComponentListMFR.hotItem, item.getCount());
+            ItemStack out = new ItemStack(ComponentListMFR.HOT_ITEM, item.getCount());
             NBTTagCompound nbt = getNBT(out);
             NBTTagCompound save = new NBTTagCompound();
             item.writeToNBT(save);

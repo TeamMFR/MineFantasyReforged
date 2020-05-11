@@ -1,9 +1,8 @@
-package minefantasy.mfr.block.food;
+package minefantasy.mfr.itemblock;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 
-public class ItemBlockBerries extends ItemBlock {
+public class ItemBlockBerries extends ItemBlockBase {
     public ItemBlockBerries(Block block) {
         super(block);
         setHasSubtypes(true);

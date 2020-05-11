@@ -6,6 +6,7 @@ import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -41,7 +43,7 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     @Override
-    public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
+    public void render(GuiScreen parent, int x, int y, float ticks, int posX, int posY, boolean onTick) {
         if (onTick) {
             tickRecipes();
         }
@@ -54,7 +56,7 @@ public class EntryPageRecipeBase extends EntryPage {
         String cft = "<" + I18n.translateToLocal("method.workbench") + ">";
         mc.fontRenderer.drawSplitString(cft,
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
-        renderRecipe(parent, x, y, f, posX, posY, recipe);
+        renderRecipe(parent, x, y, ticks, posX, posY, recipe);
 
         if (tooltipStack != null) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
@@ -78,12 +80,15 @@ public class EntryPageRecipeBase extends EntryPage {
             return;
         }
 
+        ItemStack[] ingredients;
+
         if (recipe instanceof ShapedRecipes) {
             ShapedRecipes shaped = (ShapedRecipes) recipe;
 
             for (int y = 0; y < shaped.recipeHeight; y++) {
                 for (int x = 0; x < shaped.recipeWidth; x++) {
-                    renderItemAtGridPos(parent, x, y, shaped.recipeItems.get(y * shaped.recipeWidth + x), true, posX, posY,
+                    ingredients = shaped.recipeItems.get(y * shaped.recipeWidth + x).getMatchingStacks();
+                    renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX, posY,
                             mx, my);
                 }
             }
@@ -113,8 +118,8 @@ public class EntryPageRecipeBase extends EntryPage {
 
                         if (index >= shapeless.recipeItems.size())
                             break drawGrid;
-
-                        renderItemAtGridPos(parent, x, y, (ItemStack) shapeless.recipeItems.get(index), true, posX,
+                        ingredients = shapeless.recipeItems.get(index).getMatchingStacks();
+                        renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX,
                                 posY, mx, my);
                     }
                 }
@@ -128,10 +133,10 @@ public class EntryPageRecipeBase extends EntryPage {
                     for (int x = 0; x < 3; x++) {
                         int index = y * 3 + x;
 
-                        if (index >= shapeless.getRecipeSize())
+                        if (index >= shapeless.getIngredients().size())
                             break drawGrid;
 
-                        Object input = shapeless.getInput().get(index);
+                        Object input = shapeless.getIngredients().get(index);
                         if (input != null)
                             renderItemAtGridPos(parent, x, y, input instanceof ItemStack ? (ItemStack) input
                                     : ((ArrayList<ItemStack>) input).get(0), true, posX, posY, mx, my);
@@ -152,7 +157,7 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-                             int mx, int my) {
+            int mx, int my) {
         if (stack == null || stack.getItem() == null)
             return;
         stack = stack.copy();
@@ -170,7 +175,7 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer,
-                                    int xOrigin, int yOrigin, int mx, int my) {
+            int xOrigin, int yOrigin, int mx, int my) {
         if (stack == null || stack.getItem() == null)
             return;
         stack = stack.copy();
@@ -196,8 +201,8 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-                           int my) {
-        RenderEntityItem render = new RenderEntityItem();render.
+            int my) {
+        RenderItem render = Minecraft.getMinecraft().getRenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;
         }
@@ -208,10 +213,8 @@ public class EntryPageRecipeBase extends EntryPage {
         RenderHelper.enableGUIStandardItemLighting();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        render.renderItemAndEffectIntoGUI(Minecraft.getMinecraft().fontRenderer,
-                Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
-        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer,
-                Minecraft.getMinecraft().getTextureManager(), stack, xPos, yPos);
+        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
+        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
         RenderHelper.disableStandardItemLighting();
         GL11.glPopMatrix();
 

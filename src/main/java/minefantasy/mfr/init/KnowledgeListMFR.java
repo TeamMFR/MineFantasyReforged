@@ -8,7 +8,6 @@ import minefantasy.mfr.api.knowledge.InformationPage;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.init.*;
 import minefantasy.mfr.material.MetalMaterial;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -148,9 +147,9 @@ public class KnowledgeListMFR {
                 .registerStat().setUnlocked();
         gettingStarted = (new InformationBase("gettingStarted", 0, 0, 0, Items.BOOK, (InformationBase) null))
                 .registerStat().setUnlocked();
-        research = (new InformationBase("research", 1, 1, 0, ToolListMFR.researchBook, (InformationBase) null))
+        research = (new InformationBase("research", 1, 1, 0, ToolListMFR.RESEARCH_BOOK, (InformationBase) null))
                 .registerStat().setUnlocked();
-        talisman = (new InformationBase("talisman", 4, 2, 0, ComponentListMFR.talisman_lesser, research)).registerStat()
+        talisman = (new InformationBase("talisman", 4, 2, 0, ComponentListMFR.TALISMAN_LESSER, research)).registerStat()
                 .setUnlocked();
         ores = (new InformationBase("ores", 1, -2, 0, BlockListMFR.ORE_COPPER, (InformationBase) null)).registerStat()
                 .setUnlocked();
@@ -159,20 +158,20 @@ public class KnowledgeListMFR {
                 .registerStat().setUnlocked();
         tanning = (new InformationBase("tanning", 0, -2, 0, Items.LEATHER, (InformationBase) null)).registerStat()
                 .setUnlocked().setSpecial();
-        commodities = (new InformationBase("commodities", -1, -2, 0, ComponentListMFR.nail, (InformationBase) null))
+        commodities = (new InformationBase("commodities", -1, -2, 0, ComponentListMFR.NAIL, (InformationBase) null))
                 .registerStat().setUnlocked();
-        dust = (new InformationBase("dust", -1, -3, 0, ComponentListMFR.clay_pot, commodities)).registerStat()
+        dust = (new InformationBase("dust", -1, -3, 0, ComponentListMFR.CLAY_POT, commodities)).registerStat()
                 .setUnlocked();
-        craftCrafters = (new InformationBase("craftCrafters", -1, 1, 0, CustomToolListMFR.standard_hammer,
+        craftCrafters = (new InformationBase("craftCrafters", -1, 1, 0, CustomToolListMFR.STANDARD_HAMMER,
                 (InformationBase) null)).registerStat().setUnlocked();
         stamina = (new InformationBase("stamina", -3, 1, 0, Items.FEATHER, craftCrafters)).registerStat().setUnlocked();
         combat = (new InformationBase("combat", -5, 2, 0, Items.IRON_SWORD, stamina)).registerStat().setUnlocked();
         craftArmourBasic = (new InformationBase("craftArmourBasic", -5, 0, 5,
-                ArmourListMFR.armour(ArmourListMFR.leather, 0, 1), combat)).registerStat().setUnlocked();
+                ArmourListMFR.armour(ArmourListMFR.LEATHER, 0, 1), combat)).registerStat().setUnlocked();
         firemaker = (new InformationBase("firemaker", 5, 1, 0, Items.FLINT_AND_STEEL, (InformationBase) null))
                 .registerStat().setUnlocked();
 
-        dragons = (new InformationBase("dragons", -1, 3, 0, ComponentListMFR.dragon_heart, (InformationBase) null))
+        dragons = (new InformationBase("dragons", -1, 3, 0, ComponentListMFR.DRAGON_HEART, (InformationBase) null))
                 .registerStat().setUnlocked();
         minotaurs = (new InformationBase("minotaurs", 1, 3, 0, Items.BEEF, (InformationBase) null)).registerStat()
                 .setUnlocked();
@@ -185,59 +184,59 @@ public class KnowledgeListMFR {
         crucible2 = (new InformationBase("crucible2", 6, 0, 1, BlockListMFR.CRUCIBLE_ADV_ACTIVE, crucible)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 40);
 
-        smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, ComponentListMFR.ingots[0], (InformationBase) null))
+        smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, ComponentListMFR.COPPER_INGOT, (InformationBase) null))
                 .registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier("copper"));
-        smeltBronze = (new InformationBase("smeltBronze", 1, 2, 2, ComponentListMFR.ingots[2], crucible)).registerStat()
+        smeltBronze = (new InformationBase("smeltBronze", 1, 2, 2, ComponentListMFR.BRONZE_INGOT, crucible)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 5).setDescriptValues(getMetalTier("bronze"));
         smeltIron = (new InformationBase("smeltIron", 1, 4, 1, Items.IRON_INGOT, null)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 10).setDescriptValues(getMetalTier("iron"));
-        coalflux = (new InformationBase("coalflux", 1, 6, 2, ComponentListMFR.coal_flux, smeltIron)).registerStat()
+        coalflux = (new InformationBase("coalflux", 1, 6, 2, ComponentListMFR.COAL_FLUX, smeltIron)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 15);
         blastfurn = (new InformationBase("blastfurn", 2, 5, 5, BlockListMFR.BLAST_HEATER_ACTIVE, smeltIron))
                 .registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 25);
         bigfurn = (new InformationBase("bigfurn", 0, 5, 4, BlockListMFR.FURNACE_STONE, smeltIron)).registerStat()
                 .setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 10);
-        smeltPig = (new InformationBase("smeltPig", 3, 3, 0, ComponentListMFR.ingots[3], blastfurn)).registerStat()
+        smeltPig = (new InformationBase("smeltPig", 3, 3, 0, ComponentListMFR.PIG_IRON_INGOT, blastfurn)).registerStat()
                 .setPage(artisanry).setUnlocked().addSkill(SkillList.artisanry, 25);
-        smeltSteel = (new InformationBase("smeltSteel", 4, 5, 1, ComponentListMFR.ingots[4], smeltPig)).registerStat()
+        smeltSteel = (new InformationBase("smeltSteel", 4, 5, 1, ComponentListMFR.STEEL_INGOT, smeltPig)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 25).setDescriptValues(getMetalTier("Steel"));
-        encrusted = (new InformationBase("smeltEncrusted", 6, 5, 2, ComponentListMFR.diamond_shards, smeltSteel))
+        encrusted = (new InformationBase("smeltEncrusted", 6, 5, 2, ComponentListMFR.DIAMOND_SHARDS, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 35)
                 .setDescriptValues(getMetalTier("encrusted"));
-        obsidian = (new InformationBase("smeltObsidian", 6, 3, 2, ComponentListMFR.ingots[19], smeltSteel))
+        obsidian = (new InformationBase("smeltObsidian", 6, 3, 2, ComponentListMFR.OBSIDIAN_INGOT, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 40)
                 .setDescriptValues(getMetalTier("obsidian"));
-        smeltBlackSteel = (new InformationBase("smeltBlackSteel", 4, 7, 3, ComponentListMFR.ingots[7], smeltSteel))
+        smeltBlackSteel = (new InformationBase("smeltBlackSteel", 4, 7, 3, ComponentListMFR.BLACK_STEEL_INGOT, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50)
                 .setDescriptValues(getMetalTier("blacksteel"));
-        smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, ComponentListMFR.dragon_heart, null))
+        smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, ComponentListMFR.DRAGON_HEART, null))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
-        smeltRedSteel = (new InformationBase("smeltRedSteel", 3, 9, 5, ComponentListMFR.ingots[10], smeltBlackSteel))
+        smeltRedSteel = (new InformationBase("smeltRedSteel", 3, 9, 5, ComponentListMFR.RED_STEEL_INGOT, smeltBlackSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 65)
                 .setDescriptValues(getMetalTier("redsteel"));
-        smeltBlueSteel = (new InformationBase("smeltBlueSteel", 5, 9, 5, ComponentListMFR.ingots[12], smeltBlackSteel))
+        smeltBlueSteel = (new InformationBase("smeltBlueSteel", 5, 9, 5, ComponentListMFR.BLUE_STEEL_INGOT, smeltBlackSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 65)
                 .setDescriptValues(getMetalTier("bluesteel"));
-        smeltMithril = (new InformationBase("smeltMithril", 5, 12, 3, ComponentListMFR.ingots[14], null)).registerStat()
+        smeltMithril = (new InformationBase("smeltMithril", 5, 12, 3, ComponentListMFR.MITHRIL_INGOT, null)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 75).setDescriptValues(getMetalTier("mithril"));
-        smeltAdamant = (new InformationBase("smeltAdamantium", 3, 12, 3, ComponentListMFR.ingots[13], null))
+        smeltAdamant = (new InformationBase("smeltAdamantium", 3, 12, 3, ComponentListMFR.ADAMANTIUM_INGOT, null))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 75)
                 .setDescriptValues(getMetalTier("adamantium"));
 
-        smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(ComponentListMFR.artefacts, 1, 3),
+        smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(ComponentListMFR.ARTEFACTS, 1, 3),
                 (InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry,
                 100);
-        smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, ComponentListMFR.ingots[15], smeltMaster))
+        smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, ComponentListMFR.IGNOTUMITE_INGOT, smeltMaster))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 100)
                 .setDescriptValues(getMetalTier("ignotumite"));
-        smeltMithium = (new InformationBase("smeltMithium", 6, 15, 3, ComponentListMFR.ingots[16], smeltMaster))
+        smeltMithium = (new InformationBase("smeltMithium", 6, 15, 3, ComponentListMFR.MITHIUM_INGOT, smeltMaster))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 100)
                 .setDescriptValues(getMetalTier("mithium"));
-        smeltEnderforge = (new InformationBase("smeltEnder", 4, 16, 3, ComponentListMFR.ingots[17], smeltMaster))
+        smeltEnderforge = (new InformationBase("smeltEnder", 4, 16, 3, ComponentListMFR.ENDER_INGOT, smeltMaster))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 100)
                 .setDescriptValues(getMetalTier("ender"));
 
-        craftHCCTools = (new InformationBase("craftHCCTools", -1, -2, 0, ToolListMFR.pickStone, (InformationBase) null))
+        craftHCCTools = (new InformationBase("craftHCCTools", -1, -2, 0, ToolListMFR.STONE_PICK, (InformationBase) null))
                 .registerStat().setPage(artisanry).setUnlocked();
         bellows = (new InformationBase("bellows", 0, -1, 0, BlockListMFR.BELLOWS, (InformationBase) null)).registerStat()
                 .setPage(artisanry).setUnlocked();
@@ -245,51 +244,53 @@ public class KnowledgeListMFR {
                 .setPage(artisanry).setUnlocked();
         forge = (new InformationBase("forge", 0, 0, 0, BlockListMFR.FORGE, (InformationBase) null)).registerStat()
                 .setPage(artisanry).setUnlocked();
-        anvil = (new InformationBase("anvil", -1, 0, 0, BlockListMFR.ANVIL[1], forge)).registerStat().setPage(artisanry)
+        anvil = (new InformationBase("anvil", -1, 0, 0, BlockListMFR.ANVIL_IRON, forge)).registerStat().setPage(artisanry)
                 .setUnlocked().setSpecial();
-        bar = (new InformationBase("bar", -1, 2, 0, ComponentListMFR.bar, anvil)).registerStat().setPage(artisanry)
+        bar = (new InformationBase("bar", -1, 2, 0, ComponentListMFR.BAR, anvil)).registerStat().setPage(artisanry)
                 .setUnlocked();
-        apron = (new InformationBase("apron", -1, -1, 0, ArmourListMFR.leatherapron, anvil)).registerStat()
+        apron = (new InformationBase("apron", -1, -1, 0, ArmourListMFR.LEATHER_APRON, anvil)).registerStat()
                 .setPage(artisanry).setUnlocked();
-        craftTools = (new InformationBase("craftTools", -3, 2, 0, CustomToolListMFR.standard_pick, bar)).registerStat()
+        craftTools = (new InformationBase("craftTools", -3, 2, 0, CustomToolListMFR.STANDARD_PICK, bar)).registerStat()
                 .setPage(artisanry).setUnlocked();
-        craftAdvTools = (new InformationBase("craftAdvTools", -5, 2, 0, CustomToolListMFR.standard_hvypick, craftTools))
+        craftAdvTools = (new InformationBase("craftAdvTools", -5, 2, 0, CustomToolListMFR.STANDARD_HVYPICK, craftTools))
                 .registerStat().setPage(artisanry).setUnlocked();
-        craftWeapons = (new InformationBase("craftWeapons", -3, 1, 5, CustomToolListMFR.standard_sword, bar))
+        craftWeapons = (new InformationBase("craftWeapons", -3, 1, 5, CustomToolListMFR.STANDARD_SWORD, bar))
                 .registerStat().setPage(artisanry).setUnlocked();
-        craftAdvWeapons = (new InformationBase("craftAdvWeapons", -5, 1, 0, CustomToolListMFR.standard_battleaxe,
+        craftAdvWeapons = (new InformationBase("craftAdvWeapons", -5, 1, 0, CustomToolListMFR.STANDARD_BATTLEAXE,
                 craftWeapons)).registerStat().setPage(artisanry).setUnlocked();
-        arrows = (new InformationBase("arrows", -3, 4, 0, CustomToolListMFR.standard_arrow, bar)).registerStat()
+        arrows = (new InformationBase("arrows", -3, 4, 0, CustomToolListMFR.STANDARD_ARROW, bar)).registerStat()
                 .setPage(artisanry).setUnlocked();
 
-        craftOrnate = (new InformationBase("craftOrnate", -3, -1, 1, ComponentListMFR.ornate_items, null)).registerStat()
+        craftOrnate = (new InformationBase("craftOrnate", -3, -1, 1, ComponentListMFR.ORNATE_ITEMS, null)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 35);
         craftArmourLight = (new InformationBase("craftArmourLight", -3, 3, 1,
-                ArmourListMFR.armour(ArmourListMFR.leather, 3, 1), anvil)).registerStat().setPage(artisanry)
+                ArmourListMFR.armour(ArmourListMFR.LEATHER, 3, 1), anvil)).registerStat().setPage(artisanry)
                 .setUnlocked();
-        craftArmourMedium = (new InformationBase("craftArmourMedium", -4, 3, 1, CustomArmourListMFR.standard_chain_chest,
+        craftArmourMedium = (new InformationBase("craftArmourMedium", -4, 3, 1, CustomArmourListMFR.STANDARD_CHAIN_CHEST,
                 craftArmourLight)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 0);
-        craftArmourHeavy = (new InformationBase("craftArmourHeavy", -5, 3, 3, CustomArmourListMFR.standard_plate_chest,
+        craftArmourHeavy = (new InformationBase("craftArmourHeavy", -5, 3, 3, CustomArmourListMFR.STANDARD_PLATE_CHEST,
                 craftArmourMedium)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10);
-        arrowsBodkin = (new InformationBase("arrowsBodkin", -4, 5, 1, CustomToolListMFR.standard_arrow_bodkin, arrows))
+        arrowsBodkin = (new InformationBase("arrowsBodkin", -4, 5, 1, CustomToolListMFR.STANDARD_ARROW_BODKIN, arrows))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10);
-        arrowsBroad = (new InformationBase("arrowsBroad", -5, 5, 2, CustomToolListMFR.standard_arrow_broad, arrows))
+        arrowsBroad = (new InformationBase("arrowsBroad", -5, 5, 2, CustomToolListMFR.STANDARD_ARROW_BROAD, arrows))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 20);
 
         // ENGINEERING - Highly Expensive
-        ecomponents = (new InformationBase("ecomponents", 5, 0, 0, ComponentListMFR.bolt, etools)).registerStat()
+        etools = (new InformationBase("etools", 3, 0, 0, CustomToolListMFR.STANDARD_SPANNER, (InformationBase) null))
+                .registerStat().setPage(engineering).setUnlocked();
+        ecomponents = (new InformationBase("ecomponents", 5, 0, 0, ComponentListMFR.BOLT, etools)).registerStat()
                 .setPage(engineering).setUnlocked();
-        tungsten = (new InformationBase("tungsten", 8, -1, 1, ComponentListMFR.ingots[18], ecomponents)).registerStat()
+        tungsten = (new InformationBase("tungsten", 8, -1, 1, ComponentListMFR.TUNGSTEN_INGOT, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 20).addSkill(SkillList.artisanry, 20);
-        coke = (new InformationBase("coke", 4, -1, 2, ComponentListMFR.coke, ecomponents)).registerStat()
+        coke = (new InformationBase("coke", 4, -1, 2, ComponentListMFR.COKE, ecomponents)).registerStat()
                 .setPage(engineering);
-        climber = (new InformationBase("climber", 7, 0, 1, ToolListMFR.climbing_pick_basic, ecomponents)).registerStat()
+        climber = (new InformationBase("climber", 7, 0, 1, ToolListMFR.CLIMBING_PICK_BASIC, ecomponents)).registerStat()
                 .setPage(engineering).setUnlocked();
-        spyglass = (new InformationBase("spyglass", 8, 1, 2, new ItemStack(ToolListMFR.spyglass, 1, 2), climber))
+        spyglass = (new InformationBase("spyglass", 8, 1, 2, new ItemStack(ToolListMFR.SPYGLASS, 1, 2), climber))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 5);
-        parachute = (new InformationBase("parachute", 9, 2, 2, ToolListMFR.parachute, climber)).registerStat()
+        parachute = (new InformationBase("parachute", 9, 2, 2, ToolListMFR.PARACHUTE, climber)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 10);
-        syringe = (new InformationBase("syringe", 5, -2, 1, ToolListMFR.syringe_empty, ecomponents)).registerStat()
+        syringe = (new InformationBase("syringe", 5, -2, 1, ToolListMFR.SYRINGE_EMPTY, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 25);
         engTanner = (new InformationBase("engTanner", 5, 2, 1, BlockListMFR.ENG_TANNER, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 40).addSkill(SkillList.artisanry, 25);
@@ -298,61 +299,61 @@ public class KnowledgeListMFR {
         advforge = (new InformationBase("advforge", 9, 3, 1, BlockListMFR.FORGE_METAL, advcrucible)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 75).addSkill(SkillList.artisanry, 50);
 
-        blackpowder = (new InformationBase("blackpowder", 0, 0, 4, ComponentListMFR.blackpowder, (InformationBase) null))
+        blackpowder = (new InformationBase("blackpowder", 0, 0, 4, ComponentListMFR.BLACKPOWDER, (InformationBase) null))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 0);
-        advblackpowder = (new InformationBase("advblackpowder", 2, -2, 2, ComponentListMFR.blackpowder_advanced,
+        advblackpowder = (new InformationBase("advblackpowder", 2, -2, 2, ComponentListMFR.BLACKPOWDER_ADVANCED,
                 blackpowder)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 50);
-        bombs = (new InformationBase("bombs", 0, 2, 3, ToolListMFR.bomb_custom, blackpowder)).registerStat()
+        bombs = (new InformationBase("bombs", 0, 2, 3, ToolListMFR.BOMB_CUSTOM, blackpowder)).registerStat()
                 .setPage(engineering).setSpecial().addSkill(SkillList.engineering, 10);
         bpress = (new InformationBase("bpress", -1, 1, 2, BlockListMFR.BOMB_PRESS, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 30);
-        bombarrow = (new InformationBase("bombarrow", 1, 1, 2, ToolListMFR.exploding_arrow, bombs)).registerStat()
+        bombarrow = (new InformationBase("bombarrow", 1, 1, 2, ToolListMFR.EXPLODING_ARROW, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 40);
-        bombFuse = (new InformationBase("bombFuse", 2, 2, 0, ComponentListMFR.bomb_fuse, bombs)).registerStat()
+        bombFuse = (new InformationBase("bombFuse", 2, 2, 0, ComponentListMFR.BOMB_FUSE, bombs)).registerStat()
                 .setUnlocked().setPage(engineering);
-        shrapnel = (new InformationBase("shrapnel", 0, 4, 1, ComponentListMFR.shrapnel, bombs)).registerStat()
+        shrapnel = (new InformationBase("shrapnel", 0, 4, 1, ComponentListMFR.SHRAPNEL, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 25);
         firebomb = (new InformationBase("firebomb", 0, 6, 2, Items.BLAZE_POWDER, shrapnel)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 85);
         stickybomb = (new InformationBase("stickybomb", -2, 2, 1, Items.SLIME_BALL, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 50);
-        bombCeramic = (new InformationBase("bombCeramic", 2, 3, 0, ComponentListMFR.bomb_casing, bombs)).registerStat()
+        bombCeramic = (new InformationBase("bombCeramic", 2, 3, 0, ComponentListMFR.BOMB_CASING, bombs)).registerStat()
                 .setUnlocked().setPage(engineering);
-        bombIron = (new InformationBase("bombIron", 4, 5, 1, ComponentListMFR.bomb_casing_iron, bombCeramic))
+        bombIron = (new InformationBase("bombIron", 4, 5, 1, ComponentListMFR.BOMB_CASING_IRON, bombCeramic))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
-        bombObsidian = (new InformationBase("bombObsidian", 4, 7, 2, ComponentListMFR.bomb_casing_obsidian, bombIron))
+        bombObsidian = (new InformationBase("bombObsidian", 4, 7, 2, ComponentListMFR.BOMB_CASING_OBSIDIAN, bombIron))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 35);
-        bombCrystal = (new InformationBase("bombCrystal", 2, 9, 1, ComponentListMFR.bomb_casing_crystal, bombObsidian))
+        bombCrystal = (new InformationBase("bombCrystal", 2, 9, 1, ComponentListMFR.BOMB_CASING_CRYSTAL, bombObsidian))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
-        mineCeramic = (new InformationBase("mineCeramic", -2, 3, 2, ComponentListMFR.mine_casing, bombs)).registerStat()
+        mineCeramic = (new InformationBase("mineCeramic", -2, 3, 2, ComponentListMFR.MINE_CASING, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 15);
-        mineIron = (new InformationBase("mineIron", -4, 5, 1, ComponentListMFR.mine_casing_iron, mineCeramic))
+        mineIron = (new InformationBase("mineIron", -4, 5, 1, ComponentListMFR.MINE_CASING_IRON, mineCeramic))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
-        mineObsidian = (new InformationBase("mineObsidian", -4, 7, 2, ComponentListMFR.mine_casing_obsidian, mineIron))
+        mineObsidian = (new InformationBase("mineObsidian", -4, 7, 2, ComponentListMFR.MINE_CASING_OBSIDIAN, mineIron))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 35);
-        mineCrystal = (new InformationBase("mineCrystal", -2, 9, 1, ComponentListMFR.mine_casing_crystal, mineObsidian))
+        mineCrystal = (new InformationBase("mineCrystal", -2, 9, 1, ComponentListMFR.MINE_CASING_CRYSTAL, mineObsidian))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
 
         crossbows = (new InformationBase("crossbows", -4, 0, 3, BlockListMFR.CROSSBOW_BENCH, null)).registerStat()
                 .setPage(engineering).setSpecial().addSkill(SkillList.engineering, 0);
-        crossShafts = (new InformationBase("crossShafts", -6, 2, 0, ComponentListMFR.crossbow_stock_wood, crossbows))
+        crossShafts = (new InformationBase("crossShafts", -6, 2, 0, ComponentListMFR.CROSSBOW_STOCK_WOOD, crossbows))
                 .registerStat().setPage(engineering).setUnlocked();
-        crossShaftAdvanced = (new InformationBase("crossShaftAdvanced", -6, 4, 2, ComponentListMFR.crossbow_stock_iron,
+        crossShaftAdvanced = (new InformationBase("crossShaftAdvanced", -6, 4, 2, ComponentListMFR.CROSSBOW_STOCK_IRON,
                 crossShafts)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
-        crossHeads = (new InformationBase("crossHeads", -2, -2, 0, ComponentListMFR.cross_arms_basic, crossbows))
+        crossHeads = (new InformationBase("crossHeads", -2, -2, 0, ComponentListMFR.CROSS_ARMS_BASIC, crossbows))
                 .registerStat().setPage(engineering).setUnlocked();
-        crossHeadAdvanced = (new InformationBase("crossHeadAdvanced", -3, -3, 2, ComponentListMFR.cross_arms_advanced,
+        crossHeadAdvanced = (new InformationBase("crossHeadAdvanced", -3, -3, 2, ComponentListMFR.CROSS_ARMS_ADVANCED,
                 crossHeads)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 30);
-        crossBayonet = (new InformationBase("crossBayonet", -1, -3, 1, ComponentListMFR.cross_bayonet, crossHeads))
+        crossBayonet = (new InformationBase("crossBayonet", -1, -3, 1, ComponentListMFR.CROSS_BAYONET, crossHeads))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 10);
-        crossAmmo = (new InformationBase("crossAmmo", -5, 3, 1, ComponentListMFR.cross_ammo, crossShafts)).registerStat()
+        crossAmmo = (new InformationBase("crossAmmo", -5, 3, 1, ComponentListMFR.CROSS_AMMO, crossShafts)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 30);
-        crossScope = (new InformationBase("crossScope", -7, 3, 1, ComponentListMFR.cross_scope, crossShafts))
+        crossScope = (new InformationBase("crossScope", -7, 3, 1, ComponentListMFR.CROSS_SCOPE, crossShafts))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
 
         cogArmour = (new InformationBase("cogArmour", 8, -3, 2, BlockListMFR.COGWORK_HELM, tungsten)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 60);
-        compPlate = (new InformationBase("compPlate", 10, -3, 1, ComponentListMFR.ingotCompositeAlloy, tungsten))
+        compPlate = (new InformationBase("compPlate", 10, -3, 1, ComponentListMFR.INGOT_COMPOSITE_ALLOY, tungsten))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 50)
                 .addSkill(SkillList.artisanry, 40);
 
@@ -363,7 +364,7 @@ public class KnowledgeListMFR {
         repair_ornate = (new InformationBase("repair_ornate", 12, 2, 3, BlockListMFR.REPAIR_ORNATE, repair_advanced))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
 
-        constructionPts = (new InformationBase("constructionPts", 0, 0, 0, ComponentListMFR.plank_cut,
+        constructionPts = (new InformationBase("constructionPts", 0, 0, 0, ComponentListMFR.PLANK_CUT,
                 (InformationBase) null)).registerStat().setPage(construction).setUnlocked();
         reinforced_stone = (new InformationBase("reinforced_stone", 1, 0, 0, BlockListMFR.REINFORCED_STONE,
                 (InformationBase) null)).registerStat().setPage(construction).setUnlocked();
@@ -371,7 +372,7 @@ public class KnowledgeListMFR {
                 .setPage(construction).setUnlocked();
         brickworks = (new InformationBase("brickworks", 3, 0, 0, BlockListMFR.COBBLE_BRICK, reinforced_stone))
                 .registerStat().setPage(construction).setUnlocked();
-        bars = (new InformationBase("bars", 0, 3, 0, BlockListMFR.BARS[2], glass)).registerStat().setPage(construction)
+        bars = (new InformationBase("bars", 0, 3, 0, BlockListMFR.STEEL_BARS, glass)).registerStat().setPage(construction)
                 .setUnlocked();
         thatch = (new InformationBase("thatch", 0, -3, 0, BlockListMFR.THATCH, clay_wall)).registerStat()
                 .setPage(construction).setUnlocked();
@@ -386,7 +387,7 @@ public class KnowledgeListMFR {
 
 //        bed_roll = (new InformationBase("bed_roll", 2, 3, 1, BlockListMFR.bedroll, (InformationBase) null)).registerStat()
 //                .setPage(construction).setUnlocked();
-        tool_rack = (new InformationBase("tool_rack", 2, 2, 0, BlockListMFR.RACK_WOOD, (InformationBase) null))
+        tool_rack = (new InformationBase("tool_rack", 2, 2, 0, BlockListMFR.TOOL_RACK_WOOD, (InformationBase) null))
                 .registerStat().setPage(construction).setUnlocked();
         food_box = (new InformationBase("food_box", 2, 4, 1, BlockListMFR.FOOD_BOX_BASIC, tool_rack)).registerStat()
                 .setPage(construction).setUnlocked();
@@ -396,43 +397,43 @@ public class KnowledgeListMFR {
                 .setPage(construction).addSkill(SkillList.construction, 25);
 
         // COOKING -The Cheapest
-        cookingutensil = (new InformationBase("cookingutensil", -1, 0, 0, FoodListMFR.pie_tray, (InformationBase) null))
+        cookingutensil = (new InformationBase("cookingutensil", -1, 0, 0, FoodListMFR.PIE_TRAY, (InformationBase) null))
                 .registerStat().setPage(provisioning).setUnlocked();
         firepit = (new InformationBase("firepit", 0, 0, 0, BlockListMFR.FIREPIT, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
 
-        generic_meat = (new InformationBase("generic_meat", 0, -1, 0, FoodListMFR.generic_meat_uncooked,
+        generic_meat = (new InformationBase("generic_meat", 0, -1, 0, FoodListMFR.GENERIC_MEAT_UNCOOKED,
                 (InformationBase) null)).registerStat().setPage(provisioning).setUnlocked();
-        stew = (new InformationBase("stew", 0, -3, 0, FoodListMFR.stew, generic_meat)).registerStat()
+        stew = (new InformationBase("stew", 0, -3, 0, FoodListMFR.STEW, generic_meat)).registerStat()
                 .setPage(provisioning).setUnlocked();
-        jerky = (new InformationBase("jerky", 0, -5, 1, FoodListMFR.jerky, stew)).registerStat().setPage(provisioning)
+        jerky = (new InformationBase("jerky", 0, -5, 1, FoodListMFR.JERKY, stew)).registerStat().setPage(provisioning)
                 .addSkill(SkillList.provisioning, 10);
-        saussage = (new InformationBase("saussage", 2, -5, 2, FoodListMFR.saussage_cooked, jerky)).registerStat()
+        saussage = (new InformationBase("saussage", 2, -5, 2, FoodListMFR.SAUSAGE_COOKED, jerky)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 35);
-        sandwitch = (new InformationBase("sandwitch", 1, -7, 3, FoodListMFR.sandwitch_meat, jerky)).registerStat()
+        sandwitch = (new InformationBase("sandwitch", 1, -7, 3, FoodListMFR.SANDWITCH_MEAT, jerky)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
-        sandwitchBig = (new InformationBase("sandwitchBig", 3, -7, 3, FoodListMFR.sandwitch_big, sandwitch))
+        sandwitchBig = (new InformationBase("sandwitchBig", 3, -7, 3, FoodListMFR.SANDWITCH_BIG, sandwitch))
                 .registerStat().setPage(provisioning).addSkill(SkillList.provisioning, 25);
         meatpie = (new InformationBase("meatpie", -1, -7, 2, BlockListMFR.PIE_MEAT, jerky)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 35);
         shepardpie = (new InformationBase("shepardpie", -2, -9, 3, BlockListMFR.PIE_SHEPARDS, meatpie)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 80);
-        bread = (new InformationBase("bread", 1, 0, 0, FoodListMFR.breadroll, (InformationBase) null)).registerStat()
+        bread = (new InformationBase("bread", 1, 0, 0, FoodListMFR.BREADROLL, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
-        oats = (new InformationBase("oats", 3, 0, 0, FoodListMFR.oats, bread)).registerStat().setPage(provisioning)
+        oats = (new InformationBase("oats", 3, 0, 0, FoodListMFR.OATS, bread)).registerStat().setPage(provisioning)
                 .setUnlocked();
 
-        salt = (new InformationBase("salt", -2, -2, 0, FoodListMFR.salt, (InformationBase) null)).registerStat()
+        salt = (new InformationBase("salt", -2, -2, 0, FoodListMFR.SALT, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
-        jug = (new InformationBase("jug", -1, -2, 0, FoodListMFR.jug_water, (InformationBase) null)).registerStat()
+        jug = (new InformationBase("jug", -1, -2, 0, FoodListMFR.JUG_WATER, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
-        berry = (new InformationBase("berry", 0, 1, 0, FoodListMFR.berries, (InformationBase) null)).registerStat()
+        berry = (new InformationBase("berry", 0, 1, 0, FoodListMFR.BERRIES, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
-        icing = (new InformationBase("icing", -1, 2, 0, FoodListMFR.icing, berry)).registerStat().setPage(provisioning)
+        icing = (new InformationBase("icing", -1, 2, 0, FoodListMFR.ICING, berry)).registerStat().setPage(provisioning)
                 .setUnlocked();
-        sweetroll = (new InformationBase("sweetroll", 0, 3, 2, FoodListMFR.sweetroll, berry)).registerStat()
+        sweetroll = (new InformationBase("sweetroll", 0, 3, 2, FoodListMFR.SWEETROLL, berry)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
-        eclair = (new InformationBase("eclair", 2, 3, 3, FoodListMFR.eclair, sweetroll)).registerStat()
+        eclair = (new InformationBase("eclair", 2, 3, 3, FoodListMFR.ECLAIR, sweetroll)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 75);
         cake = (new InformationBase("cake", 0, 5, 2, BlockListMFR.CAKE_VANILLA, sweetroll)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 25);
@@ -449,30 +450,30 @@ public class KnowledgeListMFR {
 
         cheese = (new InformationBase("cheese", 1, -1, 0, BlockListMFR.CHEESE_WHEEL, (InformationBase) null))
                 .registerStat().setPage(provisioning).setUnlocked();
-        cheeseroll = (new InformationBase("cheeseroll", 3, -1, 2, FoodListMFR.cheese_roll, cheese)).registerStat()
+        cheeseroll = (new InformationBase("cheeseroll", 3, -1, 2, FoodListMFR.CHEESE_ROLL, cheese)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
 
-        bandage = (new InformationBase("bandage", -3, 0, 0, ToolListMFR.bandage_wool, (InformationBase) null))
+        bandage = (new InformationBase("bandage", -3, 0, 0, ToolListMFR.BANDAGE_WOOL, (InformationBase) null))
                 .registerStat().setPage(provisioning).setUnlocked();
-        bandageadv = (new InformationBase("bandageadv", -5, -1, 2, ToolListMFR.bandage_tough, bandage)).registerStat()
+        bandageadv = (new InformationBase("bandageadv", -5, -1, 2, ToolListMFR.BANDAGE_TOUGH, bandage)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 40);
 
         // MASTERY
-        toughness = (new InformationBase("toughness", -1, 0, 0, CustomArmourListMFR.standard_plate_helmet,
+        toughness = (new InformationBase("toughness", -1, 0, 0, CustomArmourListMFR.STANDARD_PLATE_HELMET,
                 (InformationBase) null)).registerStat().setPage(mastery).addSkill(SkillList.combat, 10).setPerk();
-        fitness = (new InformationBase("fitness", 1, 0, 0, ComponentListMFR.dragon_heart, (InformationBase) null))
+        fitness = (new InformationBase("fitness", 1, 0, 0, ComponentListMFR.DRAGON_HEART, (InformationBase) null))
                 .registerStat().setPage(mastery).addSkill(SkillList.combat, 20).setPerk();
         armourpro = (new InformationBase("armourpro", 2, -1, 0, Items.DIAMOND_CHESTPLATE, fitness)).registerStat()
                 .setPage(mastery).addSkill(SkillList.combat, 60).setPerk();
         parrypro = (new InformationBase("parrypro", -2, -1, 0, Items.IRON_SWORD, toughness)).registerStat()
                 .setPage(mastery).addSkill(SkillList.combat, 20).setPerk();
-        counteratt = (new InformationBase("counteratt", -1, -2, 0, CustomToolListMFR.standard_waraxe, parrypro))
+        counteratt = (new InformationBase("counteratt", -1, -2, 0, CustomToolListMFR.STANDARD_WARAXE, parrypro))
                 .registerStat().setPage(mastery).addSkill(SkillList.combat, 25).setPerk();
-        autoparry = (new InformationBase("autoparry", -3, -2, 0, CustomToolListMFR.standard_sword, parrypro))
+        autoparry = (new InformationBase("autoparry", -3, -2, 0, CustomToolListMFR.STANDARD_SWORD, parrypro))
                 .registerStat().setPage(mastery).addSkill(SkillList.combat, 50).setPerk();
-        firstaid = (new InformationBase("firstaid", 0, 1, 0, ToolListMFR.bandage_wool, (InformationBase) null))
+        firstaid = (new InformationBase("firstaid", 0, 1, 0, ToolListMFR.BANDAGE_WOOL, (InformationBase) null))
                 .registerStat().setPage(mastery).addSkill(SkillList.provisioning, 25).setPerk();
-        doctor = (new InformationBase("doctor", 0, 3, 0, ToolListMFR.syringe, firstaid)).registerStat().setPage(mastery)
+        doctor = (new InformationBase("doctor", 0, 3, 0, ToolListMFR.SYRINGE, firstaid)).registerStat().setPage(mastery)
                 .addSkill(SkillList.provisioning, 50).setPerk();
         scrapper = (new InformationBase("scrapper", 0, -1, 0, BlockListMFR.SALVAGE_BASIC, (InformationBase) null))
                 .registerStat().setPage(mastery).addSkill(SkillList.artisanry, 35).setPerk();

@@ -27,7 +27,7 @@ public class BlockCogwork extends BlockDirectional {
     public BlockCogwork(String name, boolean helmet) {
         super(Material.CIRCUITS);
         this.isMain = helmet;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "block" + name );
         this.name = name;

@@ -7,7 +7,6 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.item.tool.crafting.ItemTongs;
 import minefantasy.mfr.material.BaseMaterialMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -24,7 +23,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -52,7 +50,7 @@ public class BlockAnvilMF extends BlockContainer {
         this.material = material;
         String name = "anvil" + material.name;
         this.tier = material.tier;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setSoundType(SoundType.METAL);
@@ -100,7 +98,7 @@ public class BlockAnvilMF extends BlockContainer {
 
         // GRAB
         if (grabbed == null) {
-            if (result != null && result.getItem() == ComponentListMFR.hotItem) {
+            if (result != null && result.getItem() == ComponentListMFR.HOT_ITEM) {
                 if (TongsHelper.trySetHeldItem(held, result)) {
                     tile.setInventorySlotContents(tile.getSizeInventory() - 1, null);
                     return true;

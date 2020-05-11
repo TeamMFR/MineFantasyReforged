@@ -28,7 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -47,7 +46,7 @@ public class BlockCrucible extends BlockContainer {
         this.tier = tier;
         this.type = tex;
         this.isActive = isActive;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName( "MF_Crucible" + tex + (isActive ? "Active" : ""));
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "crucible." + tex);
         this.setSoundType(SoundType.STONE);
@@ -176,7 +175,7 @@ public class BlockCrucible extends BlockContainer {
         TileEntityCrucible tile = getTile(world, pos);
         if (tile != null) {
             ItemStack held = user.getHeldItem(hand);
-            if (held != null && held.getItem() == ComponentListMFR.artefacts && held.getItemDamage() == 3) {
+            if (held != null && held.getItem() == ComponentListMFR.ARTEFACTS && held.getItemDamage() == 3) {
                 if (tier == 2 && isActive) {
                     held.shrink(1);
                     if (held.getCount() <= 0) {
@@ -193,7 +192,7 @@ public class BlockCrucible extends BlockContainer {
                 BlockCrucible.updateFurnaceBlockState(tile.isCoated(), world, pos);
             }
             ItemStack out = tile.getStackInSlot(tile.getSizeInventory() - 1);
-            if (held != null && held.getItem() == ComponentListMFR.ingot_mould && out != null
+            if (held != null && held.getItem() == ComponentListMFR.INGOT_MOULD && out != null
                     && !(out.getItem() instanceof ItemBlock)) {
                 ItemStack result = out.copy();
                 result.setCount(1);

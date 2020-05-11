@@ -380,7 +380,7 @@ public class ArmourCalculator {
             return null;
         }
         if (armour.getItem() instanceof IArmourMFR) {
-            return ((IArmourMFR) armour.getItem()).getSuitWeigthType(armour);
+            return ((IArmourMFR) armour.getItem()).getSuitWeightType(armour);
         }
         return CustomArmourEntry.getArmourClass(armour);
     }

@@ -13,7 +13,7 @@ public class BlockMetalMF extends Block {
         super(Material.IRON);
 
         String name = material.name.toLowerCase() + "_block";
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setHarvestLevel("pickaxe", material.harvestLevel);

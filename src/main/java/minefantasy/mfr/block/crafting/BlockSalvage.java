@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockSalvage extends Block {
-    protected float dropLevel;
+    public float dropLevel;
     private String type;
     private Random rand = new Random();
 
@@ -40,7 +40,7 @@ public class BlockSalvage extends Block {
         this.dropLevel = dropLevel;
         this.type = name;
         name = "salvage_" + name;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setSoundType(SoundType.ANVIL);

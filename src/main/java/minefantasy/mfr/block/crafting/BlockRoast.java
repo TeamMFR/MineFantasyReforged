@@ -35,7 +35,7 @@ public class BlockRoast extends BlockContainer {
         this.tex = tex;
         this.tier = tier;
         String name = "food_" + (isOven ? "oven" : "roast") + "_" + tex;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setHardness(1.5F);

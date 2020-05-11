@@ -375,7 +375,7 @@ public class PlayerTickHandlerMF {
             if (player.capabilities.isCreativeMode)
                 return;
 
-            player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.researchBook));
+            player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.RESEARCH_BOOK));
         }
         if (RPGElements.isSystemActive) {
             RPGElements.initSkills(player);

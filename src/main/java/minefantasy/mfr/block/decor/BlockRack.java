@@ -43,7 +43,7 @@ public class BlockRack extends BlockWoodDecor {
 
 		setHardness(1.0F);
 		setResistance(1.0F);
-		GameRegistry.findRegistry(Block.class).register(this);
+
 		setRegistryName(name);
 		setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
 		this.setCreativeTab(CreativeTabMFR.tabUtil);

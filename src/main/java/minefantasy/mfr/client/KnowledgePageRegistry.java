@@ -66,7 +66,7 @@ public class KnowledgePageRegistry {
                 new EntryPageText("knowledge.gettingStarted.7"));
         KnowledgeListMFR.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.10"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.potRecipe),
-                new EntryPageSmelting(ComponentListMFR.clay_pot_uncooked, ComponentListMFR.clay_pot),
+                new EntryPageSmelting(ComponentListMFR.CLAY_POT_UNCOOKED, ComponentListMFR.CLAY_POT),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.quernR), new EntryPageText("knowledge.gettingStarted.11"),
                 new EntryPageText("knowledge.gettingStarted.12"));
         KnowledgeListMFR.gettingStarted.addPages(new EntryPageRecipeCarpenter(KnowledgeListMFR.bSalvageR),
@@ -128,7 +128,7 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeBase(KnowledgeListMFR.stickRecipe));
         KnowledgeListMFR.commodities.addPages(new EntryPageText("knowledge.commodities.refinedplank"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.jugRecipe),
-                new EntryPageSmelting(FoodListMFR.jug_uncooked, FoodListMFR.jug_empty),
+                new EntryPageSmelting(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY),
                 new EntryPageRecipeBase(KnowledgeListMFR.plantOilR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.refinedPlankR));
         KnowledgeListMFR.commodities.addPages(new EntryPageText("knowledge.commodities.flux"),
@@ -153,22 +153,22 @@ public class KnowledgePageRegistry {
 
         KnowledgeListMFR.dust.addPages(new EntryPageText("knowledge.dust.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.potRecipe),
-                new EntryPageSmelting(ComponentListMFR.clay_pot_uncooked, ComponentListMFR.clay_pot),
+                new EntryPageSmelting(ComponentListMFR.CLAY_POT_UNCOOKED, ComponentListMFR.CLAY_POT),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.quernR), new EntryPageText("knowledge.dust.quern"));
         KnowledgeListMFR.dust.addPages(
-                new EntryPageGrind(new ItemStack(Items.COAL), new ItemStack(ComponentListMFR.coalDust)),
-                new EntryPageGrind(new ItemStack(ComponentListMFR.kaolinite),
-                        new ItemStack(ComponentListMFR.kaolinite_dust)),
-                new EntryPageGrind(new ItemStack(Items.WHEAT), new ItemStack(FoodListMFR.flour)),
-                new EntryPageGrind(new ItemStack(Items.DYE, 1, 3), new ItemStack(FoodListMFR.coca_powder)));
+                new EntryPageGrind(new ItemStack(Items.COAL), new ItemStack(ComponentListMFR.COAL_DUST)),
+                new EntryPageGrind(new ItemStack(ComponentListMFR.KAOLINITE),
+                        new ItemStack(ComponentListMFR.KAOLINITE_DUST)),
+                new EntryPageGrind(new ItemStack(Items.WHEAT), new ItemStack(FoodListMFR.FLOUR)),
+                new EntryPageGrind(new ItemStack(Items.DYE, 1, 3), new ItemStack(FoodListMFR.COCA_POWDER)));
         KnowledgeListMFR.dust.addPages(new EntryPageText("knowledge.dust.icing"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.spoonR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.icingRecipe));
 
         KnowledgeListMFR.ores.addPages(new EntryPageText("knowledge.ores.1"), new EntryPageText(""));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("copper", BlockListMFR.ORE_COPPER, ComponentListMFR.ingots[0]));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("tin", BlockListMFR.ORE_TIN, ComponentListMFR.ingots[1]));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("silver", BlockListMFR.ORE_SILVER, ComponentListMFR.ingots[8]));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("copper", BlockListMFR.ORE_COPPER, ComponentListMFR.COPPER_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("tin", BlockListMFR.ORE_TIN, ComponentListMFR.TIN_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("silver", BlockListMFR.ORE_SILVER, ComponentListMFR.SILVER_INGOT));
         KnowledgeListMFR.ores.addPages(assembleOreDesc("wolframite", BlockListMFR.ORE_TUNGSTEN));
         KnowledgeListMFR.ores.addPages(new EntryPageCrucible(KnowledgeListMFR.wolframiteR));
         KnowledgeListMFR.ores.addPages(assembleOreDesc("mythic", BlockListMFR.ORE_MYTHIC));
@@ -225,11 +225,11 @@ public class KnowledgePageRegistry {
         if (ConfigHardcore.HCCreduceIngots) {
             KnowledgeListMFR.crucible.addPages(new EntryPageText("knowledge.crucible.hcc"),
                     new EntryPageRecipeCarpenter(KnowledgeListMFR.mouldRecipe),
-                    new EntryPageSmelting(ComponentListMFR.ingot_mould_uncooked, ComponentListMFR.ingot_mould));
+                    new EntryPageSmelting(ComponentListMFR.INGOT_MOULD_UNCOOKED, ComponentListMFR.INGOT_MOULD));
         }
         KnowledgeListMFR.crucible2.addPages(assembleSimpleImgPage("fire_crucible_example", "knowledge.crucible2.1"),
-                new EntryPageGrind(new ItemStack(ComponentListMFR.kaolinite),
-                        new ItemStack(ComponentListMFR.kaolinite_dust)),
+                new EntryPageGrind(new ItemStack(ComponentListMFR.KAOLINITE),
+                        new ItemStack(ComponentListMFR.KAOLINITE_DUST)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireclayR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.advCrucibleRecipe),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireBricksR),
@@ -243,21 +243,21 @@ public class KnowledgePageRegistry {
         if (ConfigHardcore.HCCreduceIngots) {
             KnowledgeListMFR.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.1"));
             KnowledgeListMFR.smeltCopper.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.ORE_COPPER),
-                    new ItemStack(ComponentListMFR.ingots[0])));
+                    new ItemStack(ComponentListMFR.COPPER_INGOT)));
             KnowledgeListMFR.smeltBronze.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.ORE_TIN),
-                    new ItemStack(ComponentListMFR.ingots[1])));
+                    new ItemStack(ComponentListMFR.TIN_INGOT)));
         } else {
             KnowledgeListMFR.smeltCopper.addPages(new EntryPageSmelting(new ItemStack(BlockListMFR.ORE_COPPER),
-                    new ItemStack(ComponentListMFR.ingots[0])));
+                    new ItemStack(ComponentListMFR.COPPER_INGOT)));
             KnowledgeListMFR.smeltBronze.addPages(
-                    new EntryPageSmelting(new ItemStack(BlockListMFR.ORE_TIN), new ItemStack(ComponentListMFR.ingots[1])));
+                    new EntryPageSmelting(new ItemStack(BlockListMFR.ORE_TIN), new ItemStack(ComponentListMFR.TIN_INGOT)));
         }
         KnowledgeListMFR.smeltBronze.addPages(new EntryPageCrucible(KnowledgeListMFR.bronze));
         KnowledgeListMFR.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.2"));
         KnowledgeListMFR.smeltPig.addPages(new EntryPageText("knowledge.smeltPig.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.ironPrepR),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.ironPrepR2),
-                new EntryPageBlastFurnace(ComponentListMFR.iron_prep, pigiron),
+                new EntryPageBlastFurnace(ComponentListMFR.IRON_PREP, pigiron),
                 new EntryPageText("knowledge.blastfurn.9"));
         KnowledgeListMFR.smeltSteel.addPages(new EntryPageText("knowledge.smeltSteel.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.steelR));
@@ -353,18 +353,18 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeAnvil(KnowledgeListMFR.plateBootsR));
 
         KnowledgeListMFR.coalflux.addPages(new EntryPageText("knowledge.coalflux.1"),
-                new EntryPageGrind(new ItemStack(ComponentListMFR.flux), new ItemStack(ComponentListMFR.flux_pot)),
+                new EntryPageGrind(new ItemStack(ComponentListMFR.FLUX), new ItemStack(ComponentListMFR.FLUX_POT)),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.coalfluxR));
 
         KnowledgeListMFR.bigfurn.addPages(assembleSimpleImgPage("furnace_example", "knowledge.bigfurn.1"),
                 new EntryPageText("knowledge.bigfurn.2"));
         KnowledgeListMFR.bigfurn.addPages(
-                new EntryPageGrind(new ItemStack(ComponentListMFR.kaolinite),
-                        new ItemStack(ComponentListMFR.kaolinite_dust)),
+                new EntryPageGrind(new ItemStack(ComponentListMFR.KAOLINITE),
+                        new ItemStack(ComponentListMFR.KAOLINITE_DUST)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireclayR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireBrickR),
-                new EntryPageSmelting(new ItemStack(ComponentListMFR.fireclay_brick),
-                        new ItemStack(ComponentListMFR.strong_brick)),
+                new EntryPageSmelting(new ItemStack(ComponentListMFR.FIRECLAY_BRICK),
+                        new ItemStack(ComponentListMFR.STRONG_BRICK)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireBricksR));
         KnowledgeListMFR.bigfurn.addPages(new EntryPageText("knowledge.bigfurn.heater"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.bigHeatR),
@@ -376,12 +376,12 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.1"),
                 new EntryPageText("knowledge.blastfurn.2"));
         KnowledgeListMFR.blastfurn.addPages(
-                new EntryPageGrind(new ItemStack(ComponentListMFR.kaolinite),
-                        new ItemStack(ComponentListMFR.kaolinite_dust)),
+                new EntryPageGrind(new ItemStack(ComponentListMFR.KAOLINITE),
+                        new ItemStack(ComponentListMFR.KAOLINITE_DUST)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireclayR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireBrickR),
-                new EntryPageSmelting(new ItemStack(ComponentListMFR.fireclay_brick),
-                        new ItemStack(ComponentListMFR.strong_brick)),
+                new EntryPageSmelting(new ItemStack(ComponentListMFR.FIRECLAY_BRICK),
+                        new ItemStack(ComponentListMFR.STRONG_BRICK)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireBricksR));
         KnowledgeListMFR.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.3"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.blastChamR),
@@ -425,10 +425,10 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.advancedForgeR));
         KnowledgeListMFR.coke.addPages(new EntryPageText("knowledge.coke.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.coalPrepR),
-                new EntryPageSmelting(ComponentListMFR.coal_prep, ComponentListMFR.coke));
+                new EntryPageSmelting(ComponentListMFR.COAL_PREP, ComponentListMFR.COKE));
 
         KnowledgeListMFR.blackpowder.addPages(new EntryPageText("knowledge.blackpowder.1"),
-                new EntryPageGrind(new ItemStack(Items.COAL), new ItemStack(ComponentListMFR.coalDust)),
+                new EntryPageGrind(new ItemStack(Items.COAL), new ItemStack(ComponentListMFR.COAL_DUST)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.blackpowderRec),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.crudeBombR));
         KnowledgeListMFR.advblackpowder.addPages(new EntryPageText("knowledge.advblackpowder.1"),
@@ -443,13 +443,13 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeAnvil(KnowledgeListMFR.bombarrowR),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.bombBoltR));
         KnowledgeListMFR.shrapnel.addPages(new EntryPageText("knowledge.shrapnel.1"),
-                new EntryPageGrind(new ItemStack(Items.FLINT), new ItemStack(ComponentListMFR.shrapnel)));
+                new EntryPageGrind(new ItemStack(Items.FLINT), new ItemStack(ComponentListMFR.SHRAPNEL)));
         KnowledgeListMFR.firebomb.addPages(new EntryPageText("knowledge.firebomb.1"),
                 new EntryPageText("knowledge.firebomb.2"), new EntryPageText("knowledge.firebomb.3"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.magmaRefinedR));
         KnowledgeListMFR.bombCeramic.addPages(new EntryPageText("knowledge.bombCeramic.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.bombCaseCeramicR),
-                new EntryPageSmelting(ComponentListMFR.bomb_casing_uncooked, ComponentListMFR.bomb_casing));
+                new EntryPageSmelting(ComponentListMFR.BOMB_CASING_UNCOOKED, ComponentListMFR.BOMB_CASING));
         KnowledgeListMFR.bombIron.addPages(new EntryPageText("knowledge.bombIron.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.bombCaseIronR));
         KnowledgeListMFR.bombObsidian.addPages(new EntryPageText("knowledge.bombObsidian.1"),
@@ -459,7 +459,7 @@ public class KnowledgePageRegistry {
 
         KnowledgeListMFR.mineCeramic.addPages(new EntryPageText("knowledge.mineCeramic.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.mineCaseCeramicR),
-                new EntryPageSmelting(ComponentListMFR.mine_casing_uncooked, ComponentListMFR.mine_casing));
+                new EntryPageSmelting(ComponentListMFR.MINE_CASING_UNCOOKED, ComponentListMFR.MINE_CASING));
         KnowledgeListMFR.mineIron.addPages(new EntryPageText("knowledge.mineIron.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.mineCaseIronR));
         KnowledgeListMFR.mineObsidian.addPages(new EntryPageText("knowledge.mineObsidian.1"),
@@ -561,15 +561,15 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.thatchStairR));
         KnowledgeListMFR.bars.addPages(new EntryPageText("knowledge.bars.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.barsR));
-        KnowledgeListMFR.paint_brush.addPages(new EntryPageText("knowledge.paint_brush.1"),
-                new EntryPageRecipeAnvil(KnowledgeListMFR.brushRecipe),
-                new EntryPageRecipeCarpenter(KnowledgeListMFR.easyPaintPlank));
+//        KnowledgeListMFR.paint_brush.addPages(new EntryPageText("knowledge.paint_brush.1"),
+//                new EntryPageRecipeAnvil(KnowledgeListMFR.brushRecipe),
+//                new EntryPageRecipeCarpenter(KnowledgeListMFR.easyPaintPlank));
         KnowledgeListMFR.decorated_stone.addPages(new EntryPageText("knowledge.decorated_stone.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.framedStoneR),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.iframedStoneR));
 
-        KnowledgeListMFR.bed_roll.addPages(new EntryPageText("knowledge.bed_roll.1"),
-                new EntryPageRecipeCarpenter(KnowledgeListMFR.bedrollR));
+//        KnowledgeListMFR.bed_roll.addPages(new EntryPageText("knowledge.bed_roll.1"),
+//                new EntryPageRecipeCarpenter(KnowledgeListMFR.bedrollR));
         KnowledgeListMFR.tool_rack.addPages(new EntryPageText("knowledge.tool_rack.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.rackRecipe),
                 new EntryPageText("knowledge.tool_rack.rules"));
@@ -585,7 +585,7 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.constructionPts.addPages(new EntryPageRecipeCarpenter(KnowledgeListMFR.plankPaneR));
         KnowledgeListMFR.constructionPts.addPages(new EntryPageRecipeAnvil(KnowledgeListMFR.hingeRecipe));
         KnowledgeListMFR.constructionPts.addPages(new EntryPageRecipeCarpenter(KnowledgeListMFR.jugRecipe),
-                new EntryPageSmelting(FoodListMFR.jug_uncooked, FoodListMFR.jug_empty),
+                new EntryPageSmelting(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY),
                 new EntryPageRecipeBase(KnowledgeListMFR.plantOilR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.refinedPlankR));
 
@@ -695,12 +695,12 @@ public class KnowledgePageRegistry {
 
         KnowledgeListMFR.smeltBlackSteel.addPages(new EntryPageText("knowledge.smeltBlackSteel.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.obsidianHunkR), new EntryPageCrucible(KnowledgeListMFR.black),
-                new EntryPageBlastFurnace(ComponentListMFR.ingots[6], black));
+                new EntryPageBlastFurnace(ComponentListMFR.BLACK_STEEL_WEAK_INGOT, black));
         KnowledgeListMFR.smeltRedSteel.addPages(new EntryPageText("knowledge.smeltRedSteel.1"),
-                new EntryPageCrucible(KnowledgeListMFR.red), new EntryPageBlastFurnace(ComponentListMFR.ingots[9], red));
+                new EntryPageCrucible(KnowledgeListMFR.red), new EntryPageBlastFurnace(ComponentListMFR.RED_STEEL_WEAK_INGOT, red));
         KnowledgeListMFR.smeltBlueSteel.addPages(new EntryPageText("knowledge.smeltBlueSteel.1"),
                 new EntryPageCrucible(KnowledgeListMFR.blue),
-                new EntryPageBlastFurnace(ComponentListMFR.ingots[11], blue));
+                new EntryPageBlastFurnace(ComponentListMFR.BLUE_STEEL_WEAK_INGOT, blue));
         KnowledgeListMFR.smeltAdamant.addPages(new EntryPageText("knowledge.smeltAdamantium.1"),
                 new EntryPageText("knowledge.smeltAdamantium.2"), new EntryPageCrucible(KnowledgeListMFR.adamantium));
         KnowledgeListMFR.smeltMithril.addPages(new EntryPageText("knowledge.smeltMithril.1"),
@@ -727,12 +727,12 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.cookingutensil.addPages(new EntryPageText("knowledge.cookingutensil.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.caketinRecipe),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.pieTrayRecipe),
-                new EntryPageSmelting(ComponentListMFR.pie_tray_uncooked, FoodListMFR.pie_tray));
+                new EntryPageSmelting(ComponentListMFR.PIE_TRAY_UNCOOKED, FoodListMFR.PIE_TRAY));
         KnowledgeListMFR.salt.addPages(new EntryPageText("knowledge.salt.1"),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.bowl_water_salt), new ItemStack(FoodListMFR.salt)));
+                new EntryPageSmelting(new ItemStack(FoodListMFR.BOWL_WATER_SALT), new ItemStack(FoodListMFR.SALT)));
         KnowledgeListMFR.jug.addPages(new EntryPageText("knowledge.jug.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.jugRecipe),
-                new EntryPageSmelting(FoodListMFR.jug_uncooked, FoodListMFR.jug_empty),
+                new EntryPageSmelting(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY),
                 new EntryPageText("knowledge.jug.2"), new EntryPageRecipeBase(KnowledgeListMFR.waterJugR),
                 new EntryPageRecipeBase(KnowledgeListMFR.milkJugR));
 
@@ -740,17 +740,17 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.meatRecipes),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.meatStripR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.meatHunkR),
-                new EntryPageGrind(new ItemStack(FoodListMFR.generic_meat_uncooked),
-                        new ItemStack(FoodListMFR.generic_meat_mince_uncooked)));
+                new EntryPageGrind(new ItemStack(FoodListMFR.GENERIC_MEAT_UNCOOKED),
+                        new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_UNCOOKED)));
         KnowledgeListMFR.stew.addPages(new EntryPageText("knowledge.stew.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.stewRecipe));
         KnowledgeListMFR.jerky.addPages(new EntryPageText("knowledge.jerky.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.jerkyRecipe));
         KnowledgeListMFR.saussage.addPages(new EntryPageText("knowledge.saussage.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.gutsRecipe),
-                new EntryPageGrind(new ItemStack(FoodListMFR.breadroll), new ItemStack(FoodListMFR.breadcrumbs)),
+                new EntryPageGrind(new ItemStack(FoodListMFR.BREADROLL), new ItemStack(FoodListMFR.BREADCRUMBS)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.saussageR), new EntryPageSmelting(
-                        new ItemStack(FoodListMFR.saussage_raw), new ItemStack(FoodListMFR.saussage_cooked)));
+                        new ItemStack(FoodListMFR.SAUSAGE_RAW), new ItemStack(FoodListMFR.SAUSAGE_COOKED)));
         KnowledgeListMFR.sandwitch.addPages(new EntryPageText("knowledge.sandwitch.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.breadSliceR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.sandwitchRecipe));
@@ -758,31 +758,31 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.sandwitchBigRecipe));
         KnowledgeListMFR.meatpie.addPages(new EntryPageText("knowledge.meatpie.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.meatPieRecipe),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.pie_meat_uncooked),
-                        new ItemStack(FoodListMFR.pie_meat_cooked)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.PIE_MEAT_UNCOOKED),
+                        new ItemStack(FoodListMFR.PIE_MEAT_COOKED)),
                 new EntryPageRecipeBase(KnowledgeListMFR.meatpieOut));
         KnowledgeListMFR.shepardpie.addPages(new EntryPageText("knowledge.shepardpie.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.shepardRecipe),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.pie_shepard_uncooked),
-                        new ItemStack(FoodListMFR.pie_shepard_cooked)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.PIE_SHEPARD_UNCOOKED),
+                        new ItemStack(FoodListMFR.PIE_SHEPARD_COOKED)),
                 new EntryPageRecipeBase(KnowledgeListMFR.shepardOut));
 
         KnowledgeListMFR.bread.addPages(new EntryPageText("knowledge.bread.1"),
-                new EntryPageGrind(new ItemStack(Items.WHEAT), new ItemStack(FoodListMFR.flour)),
+                new EntryPageGrind(new ItemStack(Items.WHEAT), new ItemStack(FoodListMFR.FLOUR)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.doughRecipe),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.dough), new ItemStack(FoodListMFR.breadroll)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.DOUGH), new ItemStack(FoodListMFR.BREADROLL)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.breadRecipe),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.raw_bread), new ItemStack(Items.BREAD)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.RAW_BREAD), new ItemStack(Items.BREAD)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.pastryRecipe),
-                new EntryPageGrind(new ItemStack(FoodListMFR.breadroll), new ItemStack(FoodListMFR.breadcrumbs)));
+                new EntryPageGrind(new ItemStack(FoodListMFR.BREADROLL), new ItemStack(FoodListMFR.BREADCRUMBS)));
         KnowledgeListMFR.bread.addPages(new EntryPageText("knowledge.bread.other"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.pumpPieR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.pie_pumpkin_uncooked),
-                        new ItemStack(FoodListMFR.pie_pumpkin_cooked)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.PIE_PUMPKIN_UNCOOKED),
+                        new ItemStack(FoodListMFR.PIE_PUMPKIN_COOKED)),
                 new EntryPageRecipeBase(KnowledgeListMFR.pumpPieOut));
         KnowledgeListMFR.bread.addPages(new EntryPageRecipeCarpenter(KnowledgeListMFR.simpCakeR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.cake_simple_raw),
-                        new ItemStack(FoodListMFR.cake_simple_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.CAKE_SIMPLE_RAW),
+                        new ItemStack(FoodListMFR.CAKE_SIMPLE_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.simpCakeOut));
 
         KnowledgeListMFR.oats.addPages(new EntryPageText("knowledge.oats.1"),
@@ -790,49 +790,49 @@ public class KnowledgePageRegistry {
 
         KnowledgeListMFR.berry.addPages(assembleImgPage("berry", BlockListMFR.BERRY_BUSH));
         KnowledgeListMFR.icing.addPages(new EntryPageText("knowledge.icing.1"),
-                new EntryPageGrind(new ItemStack(Items.REEDS), new ItemStack(FoodListMFR.sugarpot)),
+                new EntryPageGrind(new ItemStack(Items.REEDS), new ItemStack(FoodListMFR.SUGAR_POT)),
                 new EntryPageRecipeBase(KnowledgeListMFR.sugarRecipe), new EntryPageText("knowledge.icing.2"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.icingRecipe));
         KnowledgeListMFR.sweetroll.addPages(new EntryPageText("knowledge.sweetroll.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.sweetrollRecipe),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.sweetroll_raw),
-                        new ItemStack(FoodListMFR.sweetroll_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.SWEETROLL_RAW),
+                        new ItemStack(FoodListMFR.SWEETROLL_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.iceSR));
         KnowledgeListMFR.cake.addPages(new EntryPageText("knowledge.cake.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.cakeR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.cake_raw), new ItemStack(FoodListMFR.cake_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.CAKE_RAW), new ItemStack(FoodListMFR.CAKE_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.cakeI));
         KnowledgeListMFR.carrotcake.addPages(new EntryPageText("knowledge.carrotcake.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.carrotCakeR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.cake_carrot_raw),
-                        new ItemStack(FoodListMFR.cake_carrot_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.CAKE_CARROT_RAW),
+                        new ItemStack(FoodListMFR.CAKE_CARROT_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.carrotCakeI));
         KnowledgeListMFR.chococake.addPages(new EntryPageText("knowledge.chococake.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.chocoRecipe),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.chocoCakeR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.cake_choc_raw),
-                        new ItemStack(FoodListMFR.cake_choc_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.CAKE_CHOC_RAW),
+                        new ItemStack(FoodListMFR.CAKE_CHOC_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.chocoCakeI));
         KnowledgeListMFR.bfcake.addPages(new EntryPageText("knowledge.bfcake.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.chocoRecipe),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.bfCakeR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.cake_bf_raw), new ItemStack(FoodListMFR.cake_bf_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.CAKE_BF_RAW), new ItemStack(FoodListMFR.CAKE_BF_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.bfCakeI));
         KnowledgeListMFR.berrypie
                 .addPages(new EntryPageText("knowledge.berrypie.1"),
                         new EntryPageRecipeCarpenter(KnowledgeListMFR.berryR),
-                        new EntryPageSmelting(new ItemStack(FoodListMFR.pie_berry_uncooked),
-                                new ItemStack(FoodListMFR.pie_berry_cooked)),
+                        new EntryPageSmelting(new ItemStack(FoodListMFR.PIE_BERRY_UNCOOKED),
+                                new ItemStack(FoodListMFR.PIE_BERRY_COOKED)),
                         new EntryPageRecipeBase(KnowledgeListMFR.berryOut));
         KnowledgeListMFR.applepie
                 .addPages(new EntryPageText("knowledge.applepie.1"),
                         new EntryPageRecipeCarpenter(KnowledgeListMFR.appleR),
-                        new EntryPageSmelting(new ItemStack(FoodListMFR.pie_apple_uncooked),
-                                new ItemStack(FoodListMFR.pie_apple_cooked)),
+                        new EntryPageSmelting(new ItemStack(FoodListMFR.PIE_APPLE_UNCOOKED),
+                                new ItemStack(FoodListMFR.PIE_APPLE_COOKED)),
                         new EntryPageRecipeBase(KnowledgeListMFR.appleOut));
         KnowledgeListMFR.eclair.addPages(new EntryPageText("knowledge.eclair.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.eclairDoughR),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.eclair_raw), new ItemStack(FoodListMFR.eclair_uniced)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.ECLAIR_RAW), new ItemStack(FoodListMFR.ECLAIR_UNICED)),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.chocoRecipe),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.eclairIceR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.custardRecipe),
@@ -840,7 +840,7 @@ public class KnowledgePageRegistry {
 
         KnowledgeListMFR.cheese.addPages(new EntryPageText("knowledge.cheese.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.curdRecipe),
-                new EntryPageSmelting(new ItemStack(FoodListMFR.curds), new ItemStack(FoodListMFR.cheese_pot)),
+                new EntryPageSmelting(new ItemStack(FoodListMFR.CURDS), new ItemStack(FoodListMFR.CHEESE_POT)),
                 new EntryPageRecipeBase(KnowledgeListMFR.cheeseOut));
         KnowledgeListMFR.cheeseroll.addPages(new EntryPageText("knowledge.cheeseroll.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.cheeserollR));

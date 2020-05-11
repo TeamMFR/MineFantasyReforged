@@ -1,8 +1,5 @@
 package minefantasy.mfr.block.basic;
 
-import minefantasy.mfr.MineFantasyReborn;
-import net.minecraft.block.Block;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.block.tile.TileEntityWorldGenMarker;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -11,10 +8,11 @@ import net.minecraft.world.World;
 
 public class BlockWorldGenMarker extends BlockContainer {
 
-    public BlockWorldGenMarker() {
+    public BlockWorldGenMarker(String name) {
         super(Material.AIR);
         this.setBlockUnbreakable();
-        GameRegistry.findRegistry(Block.class).register(this);
+        setRegistryName(name);
+
     }
 
     @Override

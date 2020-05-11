@@ -45,7 +45,7 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
         baseMaterial = material;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         setCreativeTab(CreativeTabMFR.tabArmour);
 
         itemRarity = rarity;
@@ -116,10 +116,10 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
         if (design == ArmourDesign.PLATE) {
             lvl++;
         }
-        if (lvl >= ToolListMFR.rarity.length) {
-            lvl = ToolListMFR.rarity.length - 1;
+        if (lvl >= ToolListMFR.RARITY.length) {
+            lvl = ToolListMFR.RARITY.length - 1;
         }
-        return ToolListMFR.rarity[lvl];
+        return ToolListMFR.RARITY[lvl];
     }
 
     @Override
@@ -129,11 +129,11 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (this != ArmourListMFR.leather[0]) {
+        if (this != ArmourListMFR.LEATHER[0]) {
             return;
         }
-        items.add(new ItemStack(ArmourListMFR.leatherapron));
-        addSet(items, ArmourListMFR.leather);
+        items.add(new ItemStack(ArmourListMFR.LEATHER_APRON));
+        addSet(items, ArmourListMFR.LEATHER);
     }
 
     private void addSet(List list, Item[] items) {
@@ -239,14 +239,14 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
     }
 
     @Override
-    public String getSuitWeigthType(ItemStack item) {
+    public String getSuitWeightType(ItemStack item) {
         if (design == ArmourDesign.MAIL) {
             return "medium";
         }
         if (design == ArmourDesign.PLATE) {
             return "heavy";
         }
-        return super.getSuitWeigthType(item);
+        return super.getSuitWeightType(item);
     }
 
     public ItemStack construct(String plate) {

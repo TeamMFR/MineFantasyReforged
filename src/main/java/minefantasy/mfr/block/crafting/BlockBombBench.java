@@ -32,7 +32,7 @@ public class BlockBombBench extends BlockContainer {
 
     public BlockBombBench() {
         super(Material.WOOD);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("bombBench");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "MF_BombCrafter");
         this.setSoundType(SoundType.STONE);

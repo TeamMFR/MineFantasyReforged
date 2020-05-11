@@ -18,12 +18,21 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.init.ArmourListMFR;
 import minefantasy.mfr.init.ArtefactListMFR;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.CustomArmourListMFR;
+import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.DragonforgedStyle;
+import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.init.OreDictListMFR;
+import minefantasy.mfr.init.OrnateStyle;
+import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.gadget.ItemLootSack;
+import minefantasy.mfr.item.AdvancedFuelHandlerMF;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.mechanics.worldGen.WorldGenBiological;
@@ -31,7 +40,6 @@ import minefantasy.mfr.mechanics.worldGen.WorldGenMFBase;
 import minefantasy.mfr.packet.PacketHandlerMF;
 import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.BasicRecipesMF;
-import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
@@ -106,17 +114,25 @@ public class MineFantasyReborn {
         MineFantasyRebornAPI.isInDebugMode = isDebug();
         MFRLogUtil.log("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
 
-        proxy.preInit(preEvent);
 
-        RecipeRemover.removeRecipes();
+        BlockListMFR.init();
+
+        ArmourListMFR.init();
+
+        LootRegistryMFR.load();
+
+        BlockListMFR.load();
+        FoodListMFR.load();
         ToolListMFR.load();
         ComponentListMFR.load();
+
+        proxy.preInit(preEvent);
     }
 
     @EventHandler
-    public void load(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(this);
-        proxy.registerMain();
+
         GameRegistry.registerWorldGenerator(worldGenManager, 0);
 
         packetHandler = new PacketHandlerMF();
@@ -126,10 +142,11 @@ public class MineFantasyReborn {
             eventChannel.register(packetHandler);
             packetHandler.channels.put(channel, eventChannel);
         }
+        proxy.registerMain();
     }
 
     @EventHandler
-    public void modsLoaded(FMLPostInitializationEvent postEvent) {
+    public void postInit(FMLPostInitializationEvent postEvent) {
         CustomArmourEntry.registerItem(Items.LEATHER_HELMET, ArmourDesign.LEATHER);
         CustomArmourEntry.registerItem(Items.LEATHER_CHESTPLATE, ArmourDesign.LEATHER);
         CustomArmourEntry.registerItem(Items.LEATHER_LEGGINGS, ArmourDesign.LEATHER);
@@ -150,12 +167,16 @@ public class MineFantasyReborn {
         for (Biome biome : Biome.REGISTRY) {
             registerBiomeStuff(biome);
         }
+
         KnowledgeListMFR.init();
-        ArtefactListMFR.init();
         BasicRecipesMF.init();
-        proxy.postInit(postEvent);
+
         proxy.registerTickHandlers();
         MetalMaterial.addHeatables();
+
+        OreDictListMFR.registerOreDictEntries();
+
+        proxy.postInit(postEvent);
     }
 
     @EventHandler
@@ -171,7 +192,7 @@ public class MineFantasyReborn {
     private void registerBiomeStuff(Biome biome) {
         if (WorldGenBiological.isBiomeInConstraint(biome, ConfigWorldGen.berryMinTemp, ConfigWorldGen.berryMaxTemp,
                 ConfigWorldGen.berryMinRain, ConfigWorldGen.berryMaxRain)) {
-            biome.addFlower((IBlockState) BlockListMFR.BERRY_BUSH, 5);
+            biome.addFlower( BlockListMFR.BERRY_BUSH.getDefaultState(), 5);
         }
     }
 }

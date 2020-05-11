@@ -33,7 +33,7 @@ public class BlockComponent extends BlockContainer {
 
     public BlockComponent() {
         super(Material.CIRCUITS);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "MF_ComponentStorage");
         this.setHardness(1F);

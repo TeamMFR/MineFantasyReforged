@@ -19,7 +19,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * @author Anonymous Productions
@@ -51,7 +50,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
     public EnumActionResult onItemUse(EntityPlayer user, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack item = user.getHeldItem(hand);
         if (user.canPlayerEdit(pos, facing, item) && ResearchLogic.hasInfoUnlocked(user, "paint_brush")) {
-            if (!user.isSwingInProgress && user.inventory.hasItemStack( new ItemStack(ComponentListMFR.plant_oil))) {
+            if (!user.isSwingInProgress && user.inventory.hasItemStack( new ItemStack(ComponentListMFR.PLANT_OIL))) {
                 Block block = world.getBlockState(pos).getBlock();
                 if (onUsedWithBlock(world, pos, block, item, user)) {
                     return EnumActionResult.PASS;
@@ -70,7 +69,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
         if (newBlock != null) {
 
             user.inventory.removeStackFromSlot(EntityEquipmentSlot.MAINHAND.getIndex());
-            ItemStack jug = new ItemStack(FoodListMFR.jug_empty);
+            ItemStack jug = new ItemStack(FoodListMFR.JUG_EMPTY);
 
             if (!user.inventory.addItemStackToInventory(jug) && !world.isRemote) {
                 user.entityDropItem(jug, 0F);

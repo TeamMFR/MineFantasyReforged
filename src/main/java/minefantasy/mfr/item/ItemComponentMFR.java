@@ -68,7 +68,7 @@ public class ItemComponentMFR extends Item implements ITieredComponent {
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
     }
 
     @Override
@@ -78,15 +78,15 @@ public class ItemComponentMFR extends Item implements ITieredComponent {
             return;
         }
 
-        if (this != ComponentListMFR.plank) {
+        if (this != ComponentListMFR.PLANK) {
             return;
         }
 
-        for (Item ingot : ComponentListMFR.ingots) {
-            if (ingot == ComponentListMFR.ingots[3]) {
+        for (Item ingot : ComponentListMFR.INGOTS) {
+            if (ingot == ComponentListMFR.INGOTS[3]) {
                 add(items, Items.IRON_INGOT);
             }
-            if (ingot == ComponentListMFR.ingots[7]) {
+            if (ingot == ComponentListMFR.INGOTS[7]) {
                 add(items, Items.GOLD_INGOT);
             }
             add(items, ingot);
@@ -95,112 +95,108 @@ public class ItemComponentMFR extends Item implements ITieredComponent {
         if (isCustom) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorWood = wood.iterator();
-            while (iteratorWood.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
+            for (CustomMaterial customMat : wood) {
                 items.add(this.construct(customMat.name));
-                items.add(((ItemComponentMFR) ComponentListMFR.plank_pane).construct(customMat.name));
+                items.add(((ItemComponentMFR) ComponentListMFR.PLANK_PANE).construct(customMat.name));
             }
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
+            for (CustomMaterial customMat : metal) {
                 items.add(ComponentListMFR.bar(customMat.name));
             }
         }
 
-        add(items, ComponentListMFR.nail);
-        add(items, ComponentListMFR.rivet);
-        add(items, ComponentListMFR.thread);
-        add(items, ComponentListMFR.clay_pot_uncooked);
-        add(items, ComponentListMFR.clay_pot);
-        add(items, ComponentListMFR.ingot_mould_uncooked);
-        add(items, ComponentListMFR.ingot_mould);
+        add(items, ComponentListMFR.NAIL);
+        add(items, ComponentListMFR.RIVET);
+        add(items, ComponentListMFR.THREAD);
+        add(items, ComponentListMFR.CLAY_POT_UNCOOKED);
+        add(items, ComponentListMFR.CLAY_POT);
+        add(items, ComponentListMFR.INGOT_MOULD_UNCOOKED);
+        add(items, ComponentListMFR.INGOT_MOULD);
 
-        add(items, ComponentListMFR.leather_strip);
-        add(items, ComponentListMFR.rawhideSmall);
-        add(items, ComponentListMFR.rawhideMedium);
-        add(items, ComponentListMFR.rawhideLarge);
-        add(items, ComponentListMFR.hideSmall);
-        add(items, ComponentListMFR.hideMedium);
-        add(items, ComponentListMFR.hideLarge);
+        add(items, ComponentListMFR.LEATHER_STRIP);
+        add(items, ComponentListMFR.RAWHIDE_SMALL);
+        add(items, ComponentListMFR.RAWHIDE_MEDIUM);
+        add(items, ComponentListMFR.RAWHIDE_LARGE);
+        add(items, ComponentListMFR.HIDE_SMALL);
+        add(items, ComponentListMFR.HIDE_MEDIUM);
+        add(items, ComponentListMFR.HIDE_LARGE);
 
-        add(items, ComponentListMFR.oreCopper);
-        add(items, ComponentListMFR.oreTin);
-        add(items, ComponentListMFR.oreIron);
-        add(items, ComponentListMFR.oreSilver);
-        add(items, ComponentListMFR.oreGold);
-        add(items, ComponentListMFR.oreTungsten);
+        add(items, ComponentListMFR.ORE_COPPER);
+        add(items, ComponentListMFR.ORE_TIN);
+        add(items, ComponentListMFR.ORE_IRON);
+        add(items, ComponentListMFR.ORE_SILVER);
+        add(items, ComponentListMFR.ORE_GOLD);
+        add(items, ComponentListMFR.ORE_TUNGSTEN);
 
-        add(items, ComponentListMFR.flux);
-        add(items, ComponentListMFR.flux_strong);
-        add(items, ComponentListMFR.flux_pot);
-        add(items, ComponentListMFR.coal_flux);
-        add(items, ComponentListMFR.coke);
-        add(items, ComponentListMFR.diamond_shards);
-        add(items, ComponentListMFR.fletching);
-        add(items, ComponentListMFR.plant_oil);
+        add(items, ComponentListMFR.FLUX);
+        add(items, ComponentListMFR.FLUX_STRONG);
+        add(items, ComponentListMFR.FLUX_POT);
+        add(items, ComponentListMFR.COAL_FLUX);
+        add(items, ComponentListMFR.COKE);
+        add(items, ComponentListMFR.DIAMOND_SHARDS);
+        add(items, ComponentListMFR.FLETCHING);
+        add(items, ComponentListMFR.PLANT_OIL);
 
-        add(items, ComponentListMFR.coalDust);
-        add(items, ComponentListMFR.iron_prep);
-        add(items, ComponentListMFR.obsidian_rock);
-        add(items, ComponentListMFR.sulfur);
-        add(items, ComponentListMFR.nitre);
-        add(items, ComponentListMFR.blackpowder);
-        add(items, ComponentListMFR.blackpowder_advanced);
-        add(items, ComponentListMFR.bomb_fuse);
-        add(items, ComponentListMFR.bomb_fuse_long);
-        add(items, ComponentListMFR.shrapnel);
-        add(items, ComponentListMFR.magma_cream_refined);
-        add(items, ComponentListMFR.bomb_casing_uncooked);
-        add(items, ComponentListMFR.bomb_casing);
-        add(items, ComponentListMFR.mine_casing_uncooked);
-        add(items, ComponentListMFR.mine_casing);
-        add(items, ComponentListMFR.bomb_casing_iron);
-        add(items, ComponentListMFR.mine_casing_iron);
-        add(items, ComponentListMFR.bomb_casing_obsidian);
-        add(items, ComponentListMFR.mine_casing_obsidian);
-        add(items, ComponentListMFR.bomb_casing_crystal);
-        add(items, ComponentListMFR.mine_casing_crystal);
-        add(items, ComponentListMFR.bomb_casing_arrow);
-        add(items, ComponentListMFR.bomb_casing_bolt);
+        add(items, ComponentListMFR.COAL_DUST);
+        add(items, ComponentListMFR.IRON_PREP);
+        add(items, ComponentListMFR.OBSIDIAN_ROCK);
+        add(items, ComponentListMFR.SULFUR);
+        add(items, ComponentListMFR.NITRE);
+        add(items, ComponentListMFR.BLACKPOWDER);
+        add(items, ComponentListMFR.BLACKPOWDER_ADVANCED);
+        add(items, ComponentListMFR.BOMB_FUSE);
+        add(items, ComponentListMFR.BOMB_FUSE_LONG);
+        add(items, ComponentListMFR.SHRAPNEL);
+        add(items, ComponentListMFR.MAGMA_CREAM_REFINED);
+        add(items, ComponentListMFR.BOMB_CASING_UNCOOKED);
+        add(items, ComponentListMFR.BOMB_CASING);
+        add(items, ComponentListMFR.MINE_CASING_UNCOOKED);
+        add(items, ComponentListMFR.MINE_CASING);
+        add(items, ComponentListMFR.BOMB_CASING_IRON);
+        add(items, ComponentListMFR.MINE_CASING_IRON);
+        add(items, ComponentListMFR.BOMB_CASING_OBSIDIAN);
+        add(items, ComponentListMFR.MINE_CASING_OBSIDIAN);
+        add(items, ComponentListMFR.BOMB_CASING_CRYSTAL);
+        add(items, ComponentListMFR.MINE_CASING_CRYSTAL);
+        add(items, ComponentListMFR.BOMB_CASING_ARROW);
+        add(items, ComponentListMFR.BOMB_CASING_BOLT);
 
-        add(items, ComponentListMFR.clay_brick);
-        add(items, ComponentListMFR.kaolinite);
-        add(items, ComponentListMFR.kaolinite_dust);
-        add(items, ComponentListMFR.fireclay);
-        add(items, ComponentListMFR.fireclay_brick);
-        add(items, ComponentListMFR.strong_brick);
-        add(items, ComponentListMFR.dragon_heart);
-        add(items, ComponentListMFR.ornate_items);
+        add(items, ComponentListMFR.CLAY_BRICK);
+        add(items, ComponentListMFR.KAOLINITE);
+        add(items, ComponentListMFR.KAOLINITE_DUST);
+        add(items, ComponentListMFR.FIRECLAY);
+        add(items, ComponentListMFR.FIRECLAY_BRICK);
+        add(items, ComponentListMFR.STRONG_BRICK);
+        add(items, ComponentListMFR.DRAGON_HEART);
+        add(items, ComponentListMFR.ORNATE_ITEMS);
 
-        add(items, ComponentListMFR.talisman_lesser);
-        add(items, ComponentListMFR.talisman_greater);
+        add(items, ComponentListMFR.TALISMAN_LESSER);
+        add(items, ComponentListMFR.TALISMAN_GREATER);
 
-        add(items, ComponentListMFR.bolt);
-        add(items, ComponentListMFR.iron_frame);
-        add(items, ComponentListMFR.iron_strut);
-        add(items, ComponentListMFR.steel_tube);
-        add(items, ComponentListMFR.bronze_gears);
-        add(items, ComponentListMFR.tungsten_gears);
-        add(items, ComponentListMFR.cogwork_shaft);
-        add(items, ComponentListMFR.ingotCompositeAlloy);
+        add(items, ComponentListMFR.BOLT);
+        add(items, ComponentListMFR.IRON_FRAME);
+        add(items, ComponentListMFR.IRON_STRUT);
+        add(items, ComponentListMFR.STEEL_TUBE);
+        add(items, ComponentListMFR.BRONZE_GEARS);
+        add(items, ComponentListMFR.TUNGSTEN_GEARS);
+        add(items, ComponentListMFR.COGWORK_SHAFT);
+        add(items, ComponentListMFR.INGOT_COMPOSITE_ALLOY);
 
-        add(items, ComponentListMFR.crossbow_handle_wood);
-        add(items, ComponentListMFR.crossbow_stock_wood);
-        add(items, ComponentListMFR.crossbow_stock_iron);
+        add(items, ComponentListMFR.CROSSBOW_HANDLE_WOOD);
+        add(items, ComponentListMFR.CROSSBOW_STOCK_WOOD);
+        add(items, ComponentListMFR.CROSSBOW_STOCK_IRON);
 
-        add(items, ComponentListMFR.cross_arms_basic);
-        add(items, ComponentListMFR.cross_arms_light);
-        add(items, ComponentListMFR.cross_arms_heavy);
-        add(items, ComponentListMFR.cross_arms_advanced);
+        add(items, ComponentListMFR.CROSS_ARMS_BASIC);
+        add(items, ComponentListMFR.CROSS_ARMS_LIGHT);
+        add(items, ComponentListMFR.CROSS_ARMS_HEAVY);
+        add(items, ComponentListMFR.CROSS_ARMS_ADVANCED);
 
-        add(items, ComponentListMFR.cross_ammo);
-        add(items, ComponentListMFR.cross_scope);
-        add(items, ComponentListMFR.cross_bayonet);
+        add(items, ComponentListMFR.CROSS_AMMO);
+        add(items, ComponentListMFR.CROSS_SCOPE);
+        add(items, ComponentListMFR.CROSS_BAYONET);
 
-        add(items, ComponentListMFR.copper_coin);
-        add(items, ComponentListMFR.silver_coin);
-        add(items, ComponentListMFR.gold_coin);
+        add(items, ComponentListMFR.COPPER_COIN);
+        add(items, ComponentListMFR.SILVER_COIN);
+        add(items, ComponentListMFR.GOLD_COIN);
     }
 
     private void add(List list, Item item) {

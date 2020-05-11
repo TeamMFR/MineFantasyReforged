@@ -5,10 +5,13 @@ import net.minecraft.block.BlockColored;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 
 public class RecipeArmourDyeMF implements IRecipe {
@@ -91,8 +94,7 @@ public class RecipeArmourDyeMF implements IRecipe {
                         return null;
                     }
 
-                    float[] afloat = EntitySheep.fleeceColorTable[BlockColored
-                            .func_150032_b(itemstack1.getItemDamage())];
+                    float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(k));
                     int j1 = (int) (afloat[0] * 255.0F);
                     int k1 = (int) (afloat[1] * 255.0F);
                     l1 = (int) (afloat[2] * 255.0F);
@@ -118,21 +120,34 @@ public class RecipeArmourDyeMF implements IRecipe {
             l = (int) (l * f / f1);
             l1 = (k << 8) + i1;
             l1 = (l1 << 8) + l;
-            itemarmor.func_82813_b(itemstack, l1);
+            itemarmor.setColor(itemstack, l1);
             return itemstack;
         }
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     @Override
-    public int getRecipeSize() {
-        return 10;
+    public boolean canFit(int width, int height) {
+        return width >= 5 && height >= 5;
     }
 
     @Override
     public ItemStack getRecipeOutput() {
+        return null;
+    }
+
+    @Override
+    public IRecipe setRegistryName(ResourceLocation name) {
+        return null;
+    }
+
+    @Nullable
+    @Override
+    public ResourceLocation getRegistryName() {
+        return null;
+    }
+
+    @Override
+    public Class<IRecipe> getRegistryType() {
         return null;
     }
 }

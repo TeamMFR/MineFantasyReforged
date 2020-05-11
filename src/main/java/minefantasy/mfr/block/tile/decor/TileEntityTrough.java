@@ -39,8 +39,8 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
                     addCapacity(bucket);
                     return true;
                 }
-                if (held.getItem() == FoodListMFR.jug_water) {
-                    givePlayerItem(user, held, new ItemStack(FoodListMFR.jug_empty));
+                if (held.getItem() == FoodListMFR.JUG_WATER) {
+                    givePlayerItem(user, held, new ItemStack(FoodListMFR.JUG_EMPTY));
                     addCapacity(jug);
                     return true;
                 }

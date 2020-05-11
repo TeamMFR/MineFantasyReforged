@@ -29,8 +29,8 @@ public class ItemLootSack extends Item {
         this.amount = amount;
         this.tier = tier;
         pool = tier == 0 ? LootRegistryMFR.LOOT_SACK_COMMON : tier == 1 ? LootRegistryMFR.LOOT_SACK_VALUABLE : LootRegistryMFR.LOOT_SACK_EXQUISITE;
-        GameRegistry.findRegistry(Item.class).register(this);
-        this.setUnlocalizedName(name);
+        setRegistryName(name);
+        setUnlocalizedName(name);
     }
 
     @Override

@@ -180,7 +180,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
     }
 
     private void modifyItem(ItemStack item, int slot) {
-        if (item.getItem() == ComponentListMFR.hotItem) {
+        if (item.getItem() == ComponentListMFR.HOT_ITEM) {
             int temp = ItemHeated.getTemp(item);
             if (temp > temperature) {
                 int i = (int) (temperature / 5F);

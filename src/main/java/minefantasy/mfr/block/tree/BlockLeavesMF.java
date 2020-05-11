@@ -33,7 +33,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable {
 
     public BlockLeavesMF(String baseWood, int droprate) {
         this.name = baseWood.toLowerCase() + "_leaves";
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.dropRate = droprate;

@@ -7,6 +7,10 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class Utils {
 
+    public static <T> T nullValue() {
+        return null;
+    }
+
     public static boolean doesMatch(ItemStack item1, ItemStack item2) {
         return item2.getItem() == item1.getItem() && (item2.getItemDamage() == OreDictionary.WILDCARD_VALUE
                 || item2.getItemDamage() == item1.getItemDamage());

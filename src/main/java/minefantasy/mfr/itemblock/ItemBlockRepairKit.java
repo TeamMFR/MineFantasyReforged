@@ -1,17 +1,16 @@
-package minefantasy.mfr.block.crafting;
+package minefantasy.mfr.itemblock;
 
+import minefantasy.mfr.block.crafting.BlockRepairKit;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemBlockRepairKit extends ItemBlock {
+public class ItemBlockRepairKit extends ItemBlockBase {
     private BlockRepairKit kit;
 
     public ItemBlockRepairKit(Block base) {

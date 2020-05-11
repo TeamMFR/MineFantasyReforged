@@ -448,14 +448,14 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                 return false;
             }
             if (this.isUnderRepairFrame()) {
-                if (getPlating() == null && item.getItem() == ComponentListMFR.cogwork_armour) {
+                if (getPlating() == null && item.getItem() == ComponentListMFR.COGWORK_ARMOUR) {
                     CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
                     if (material != null) {
                         this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 1.0F, 1.0F);
                         int boltCount = this.getBolts();
                         if (boltCount < maxBolts) {
-                            if (!user.isSwingInProgress && user.capabilities.isCreativeMode || user.inventory.hasItemStack(new ItemStack(ComponentListMFR.bolt))) {
-                                int slot = user.inventory.getSlotFor(new ItemStack(ComponentListMFR.bolt));
+                            if (!user.isSwingInProgress && user.capabilities.isCreativeMode || user.inventory.hasItemStack(new ItemStack(ComponentListMFR.BOLT))) {
+                                int slot = user.inventory.getSlotFor(new ItemStack(ComponentListMFR.BOLT));
                                 user.inventory.decrStackSize(slot, 1);
                                 ++boltCount;
                                 setBolts(boltCount);
@@ -482,7 +482,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                     int boltCount = this.getBolts();
                     if (boltCount > 0) {
                         if (!world.isRemote) {
-                            ItemStack bolt = new ItemStack(ComponentListMFR.bolt, boltCount);
+                            ItemStack bolt = new ItemStack(ComponentListMFR.BOLT, boltCount);
                             if (!user.capabilities.isCreativeMode && !user.inventory.addItemStackToInventory(bolt)) {
                                 this.entityDropItem(bolt, 0.0F);
                             }
@@ -491,7 +491,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                     }
                     float damagePercent = 1F - (getHealth() / getMaxHealth());
                     if (!world.isRemote) {
-                        ItemStack armour = ComponentListMFR.cogwork_armour.createComm(getPlating().name, 1, damagePercent);
+                        ItemStack armour = ComponentListMFR.COGWORK_ARMOUR.createComm(getPlating().name, 1, damagePercent);
                         if (!user.capabilities.isCreativeMode && !user.inventory.addItemStackToInventory(armour)) {
                             this.entityDropItem(armour, 0.0F);
                         }

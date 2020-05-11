@@ -2,9 +2,7 @@ package minefantasy.mfr.mechanics.worldGen.structure;
 
 import minefantasy.mfr.init.ComponentListMFR;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
-import net.minecraft.entity.monster.EntityCaveSpider;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -91,7 +89,7 @@ public class StructureGenAFRoom extends StructureModuleMFR {
                 int sp = world.getSpawnPoint().getZ();
                 int item = (coords.getY() < sp) ? 1 : 0;
                 int artId = rand.nextInt(tileentitychest.getSizeInventory());
-                tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.artefacts, 1, item));
+                tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ARTEFACTS, 1, item));
             }
         }
     }

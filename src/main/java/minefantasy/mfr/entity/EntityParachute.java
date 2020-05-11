@@ -137,7 +137,7 @@ public class EntityParachute extends Entity {
                 }
 
                 if (!flag) {
-                    this.dropItemWithOffset(ToolListMFR.parachute, 1, 0.0F);
+                    this.dropItemWithOffset(ToolListMFR.PARACHUTE, 1, 0.0F);
                 }
 
                 this.setDead();
@@ -339,7 +339,7 @@ public class EntityParachute extends Entity {
                     }
 
                     for (l = 0; l < 2; ++l) {
-                        this.dropItemWithOffset(ComponentListMFR.leather_strip, 1, 0.0F);
+                        this.dropItemWithOffset(ComponentListMFR.LEATHER_STRIP, 1, 0.0F);
                     }
                 }
             } else {
@@ -434,7 +434,7 @@ public class EntityParachute extends Entity {
             if (this.fallDistance > 0.0F || onGround) {
                 if (!this.world.isRemote && !this.isDead) {
                     this.setDead();
-                    this.dropItemWithOffset(ToolListMFR.parachute, 1, 0.0F);
+                    this.dropItemWithOffset(ToolListMFR.PARACHUTE, 1, 0.0F);
                 }
 
                 this.fallDistance = 0.0F;

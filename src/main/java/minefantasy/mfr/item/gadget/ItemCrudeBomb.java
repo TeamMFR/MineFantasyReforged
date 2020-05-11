@@ -32,12 +32,12 @@ public class ItemCrudeBomb extends ItemBomb implements ISpecialSalvage {
 
     @Override
     public EnumRarity getRarity(ItemStack item) {
-        return ToolListMFR.poor;
+        return ToolListMFR.POOR;
     }
 
     @Override
     public Object[] getSalvage(ItemStack item) {
-        return new Object[]{Items.PAPER, ComponentListMFR.thread, ComponentListMFR.blackpowder};
+        return new Object[]{Items.PAPER, ComponentListMFR.THREAD, ComponentListMFR.BLACKPOWDER};
     }
 
     @Override

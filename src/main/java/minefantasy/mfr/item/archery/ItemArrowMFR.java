@@ -79,7 +79,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
         itemRarity = rarity;
         setRegistryName("MF_Com_" + name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         setCreativeTab(CreativeTabMFR.tabOldTools);
         AmmoMechanicsMFR.addArrow(new ItemStack(this));
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, dispenser);

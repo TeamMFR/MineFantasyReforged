@@ -1,22 +1,19 @@
-package minefantasy.mfr.block.decor;
+package minefantasy.mfr.itemblock;
 
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
-public class ItemBlockToolRack extends ItemBlock {
+public class ItemBlockToolRack extends ItemBlockBase {
     public ItemBlockToolRack(Block base) {
         super(base);
     }
