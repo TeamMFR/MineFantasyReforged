@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 
 public class SalvageRecipes {
     public static void init() {
-        ItemStack ironHunk = ComponentListMFR.metalHunk.createComm("iron");
+        ItemStack ironHunk = ComponentListMFR.METAL_HUNK.createComm("iron");
         Salvage.addSalvage(Items.WOODEN_PICKAXE, new ItemStack(Items.STICK, 2), new ItemStack(Blocks.PLANKS, 3));
         Salvage.addSalvage(Items.WOODEN_AXE, new ItemStack(Items.STICK, 2), new ItemStack(Blocks.PLANKS, 3));
         Salvage.addSalvage(Items.WOODEN_SHOVEL, new ItemStack(Items.STICK, 2), new ItemStack(Blocks.PLANKS, 1));

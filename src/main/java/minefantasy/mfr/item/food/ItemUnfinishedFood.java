@@ -25,9 +25,8 @@ public class ItemUnfinishedFood extends Item {
         itemRarity = rarity;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setCreativeTab(CreativeTabMFR.tabFood);
-        this.setUnlocalizedName(name);
     }
 
     @Override
@@ -40,10 +39,10 @@ public class ItemUnfinishedFood extends Item {
             }
             lvl++;
         }
-        if (lvl >= ToolListMFR.rarity.length) {
-            lvl = ToolListMFR.rarity.length - 1;
+        if (lvl >= ToolListMFR.RARITY.length) {
+            lvl = ToolListMFR.RARITY.length - 1;
         }
-        return ToolListMFR.rarity[lvl];
+        return ToolListMFR.RARITY[lvl];
     }
 
     public void onCrafted(EntityPlayer user, ItemStack item) {

@@ -391,7 +391,7 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
         ItemStack res = FurnaceRecipes.instance().getSmeltingResult(item);// If no special: try vanilla
         if (res != null) {
             if (res.getItem() instanceof ItemFood || item.getItem() instanceof ItemFood) {
-                return new ItemStack(FoodListMFR.burnt_food, 1, 1);
+                return new ItemStack(FoodListMFR.BURNT_FOOD, 1, 1);
             }
             return res;
         }

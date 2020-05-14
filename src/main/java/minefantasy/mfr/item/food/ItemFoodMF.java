@@ -60,7 +60,7 @@ public class ItemFoodMF extends ItemFood {
         saturationLevel = saturation;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         setCreativeTab(CreativeTabMFR.tabFood);
     }
 
@@ -122,7 +122,7 @@ public class ItemFoodMF extends ItemFood {
             }
         }
 
-        if (this == FoodListMFR.berriesJuicy) {
+        if (this == FoodListMFR.BERRIES_JUICY) {
             PotionEffect poison = consumer.getActivePotionEffect(Potion.getPotionById(19));
             if (poison != null) {
                 poison.addCurativeItem(food);
@@ -178,7 +178,7 @@ public class ItemFoodMF extends ItemFood {
 
     public ItemFoodMF setSaturation(float amount) {
         hasEffect = true;
-        this.mfSaturation = amount * FoodListMFR.satModifier;
+        this.mfSaturation = amount * FoodListMFR.SAT_MODIFIER;
         return this;
     }
 
@@ -239,7 +239,7 @@ public class ItemFoodMF extends ItemFood {
                 }
             }
         }
-        if (this == FoodListMFR.berriesJuicy) {
+        if (this == FoodListMFR.BERRIES_JUICY) {
             list.add(I18n.translateToLocal("food.stat.cure.poison"));
         }
     }
@@ -254,10 +254,10 @@ public class ItemFoodMF extends ItemFood {
             }
             lvl++;
         }
-        if (lvl >= ToolListMFR.rarity.length) {
-            lvl = ToolListMFR.rarity.length - 1;
+        if (lvl >= ToolListMFR.RARITY.length) {
+            lvl = ToolListMFR.RARITY.length - 1;
         }
-        return ToolListMFR.rarity[lvl];
+        return ToolListMFR.RARITY[lvl];
     }
 
     public ItemFoodMF setReturnItem(Item item) {

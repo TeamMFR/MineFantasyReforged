@@ -53,14 +53,14 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
     /**
      */
     public ItemSaw(String name, ToolMaterial material, int rarity, int tier) {
-        super(material);
+        super(material, material.getAttackDamage(), 1.0F);
         this.tier = tier;
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.hitDamage = (2.0F + material.getAttackDamage()) / 2F;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.name = name;
         this.setHarvestLevel("axe", material.getHarvestLevel());
     }
@@ -74,7 +74,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap multimap = super.getAttributeModifiers(slot,stack);
         multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(UUID.fromString(slot.getName()), "Tool modifier", getMeleeDamage(stack), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
         return multimap;
     }
 

@@ -2,30 +2,83 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.util.MFRLogUtil;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.RecipeFireworks;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 public class RecipeRemover {
-    public static void removeRecipes() {
-        MFRLogUtil.log("MineFantasy: Removing replaced recipes...");
-        for (int a = 0; a < CraftingManager.getInstance().getRecipeList().size(); a++) {
-            IRecipe rec = (IRecipe) CraftingManager.getInstance().getRecipeList().get(a);
-            if (rec.getRecipeOutput() != null && willRemoveItem(rec.getRecipeOutput(), ConfigHardcore.HCCRemoveCraft)) {
-                CraftingManager.getInstance().getRecipeList().remove(a);
+    public static class RegistrationHandler {
+
+        /**
+         * Remove crafting recipes.
+         *
+         * @param event The event
+         */
+        @SubscribeEvent(priority = EventPriority.LOWEST)
+        public static void removeRecipes(final RegistryEvent.Register<IRecipe> event) {
+            removeRecipes(Items.STICK);
+            if(ConfigHardcore.HCCRemoveCraft){
+                removeRecipes(Items.BREAD);
+                removeRecipes(Items.PUMPKIN_PIE);
+                removeRecipes(Items.CAKE);
+                removeRecipes(Items.FLINT_AND_STEEL);
+                removeRecipes(Items.BUCKET);
             }
         }
-    }
 
-    private static boolean willRemoveItem(ItemStack item, boolean HCC) {
-        if (item.getItem() == Items.STICK)
-            return true;
-
-        if (HCC) {
-            return item.getItem() == Items.BREAD || item.getItem() == Items.PUMPKIN_PIE || item.getItem() == Items.CAKE
-                    || item.getItem() == Items.FLINT_AND_STEEL || item.getItem() == Items.BUCKET;
+        private static void removeRecipes(final Item output) {
+            final int recipesRemoved = removeRecipes(recipe -> {
+                final ItemStack recipeOutput = recipe.getRecipeOutput();
+                return !recipeOutput.isEmpty() && recipeOutput.getItem() == output;
+            });
+            MFRLogUtil.log("MineFantasy: Removing replaced recipes...");
         }
-        return false;
+
+        /**
+         * Remove all crafting recipes that match the specified predicate.
+         *
+         * @param predicate The predicate
+         * @return The number of recipes removed
+         */
+        private static int removeRecipes(final Predicate<IRecipe> predicate) {
+            int recipesRemoved = 0;
+
+            final IForgeRegistry<IRecipe> registry = ForgeRegistries.RECIPES;
+            final List<IRecipe> toRemove = new ArrayList<>();
+
+            for (final IRecipe recipe : registry) {
+                if (predicate.test(recipe)) {
+                    toRemove.add(recipe);
+                    recipesRemoved++;
+                }
+            }
+
+            MFRLogUtil.log("Overriding recipes with dummy recipes, please ignore the following \"Dangerous alternative prefix\" warnings.");
+            toRemove.forEach(recipe -> {
+                final ResourceLocation registryName = Objects.requireNonNull(recipe.getRegistryName());
+                final IRecipe replacement = new DummyRecipe().setRegistryName(registryName);
+                registry.register(replacement);
+            });
+
+            return recipesRemoved;
+        }
     }
 }

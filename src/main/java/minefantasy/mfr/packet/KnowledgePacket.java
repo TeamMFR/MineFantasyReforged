@@ -38,10 +38,8 @@ public class KnowledgePacket extends PacketMF {
             }
         }
         username = UUID.fromString(ByteBufUtils.readUTF8String(packet));
-        if (username != null && player.getCommandSenderEntity().equals(username)) {
-            Iterator researches = completed.iterator();
-            while (researches.hasNext()) {
-                Object[] entry = (Object[]) researches.next();
+        if (player != null && player.getCommandSenderEntity().getUniqueID() == username) {
+            for (Object[] entry : completed) {
                 InformationBase base = (InformationBase) entry[0];
                 ResearchLogic.setArtefactCount(base.getUnlocalisedName(), player, (Integer) entry[2]);
                 if ((Boolean) entry[1]) {

@@ -6,7 +6,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.init.BlockListMFR;
@@ -25,7 +24,7 @@ public class BlockSchematic extends Block {
 
     public BlockSchematic(String name) {
         super(Material.CLOTH);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
     }
@@ -90,7 +89,7 @@ public class BlockSchematic extends Block {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return ComponentListMFR.artefacts;
+        return ComponentListMFR.ARTEFACTS;
     }
 
     @Override

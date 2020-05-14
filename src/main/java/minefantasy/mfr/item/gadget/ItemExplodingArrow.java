@@ -28,7 +28,7 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
     }
 
     public static ItemStack createBombArrow(byte powder, byte filling) {
-        return createBombArrow(ToolListMFR.exploding_arrow, powder, filling);
+        return createBombArrow(ToolListMFR.EXPLODING_ARROW, powder, filling);
     }
 
     public static ItemStack createBombArrow(Item design, byte powder, byte filling) {
@@ -61,7 +61,7 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
         int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
         float range = fill.range * powder.rangeModifier * 0.5F;
 
-        list.add(I18n.translateToLocal(ToolListMFR.bomb_custom.getUnlocalizedName(item) + ".name"));
+        list.add(I18n.translateToLocal(ToolListMFR.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
         list.add(I18n.translateToLocal("bomb.powder." + powder.name + ".name"));
         list.add("");
         list.add(I18n.translateToLocal("bomb.damage.name") + ": " + damage);
@@ -79,7 +79,7 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 
     @Override
     public Object[] getSalvage(ItemStack item) {
-        return new Object[]{ComponentListMFR.bomb_casing_arrow,
+        return new Object[]{ComponentListMFR.BOMB_CASING_ARROW,
                 ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
                 ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)),};
     }

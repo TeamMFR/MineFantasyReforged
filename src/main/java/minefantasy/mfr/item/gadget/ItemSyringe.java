@@ -11,12 +11,14 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionType;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -29,13 +31,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class ItemSyringe extends ItemPotion {
-    private static final Map potionMap = new LinkedHashMap();
 
     public ItemSyringe() {
         super();
@@ -43,7 +42,7 @@ public class ItemSyringe extends ItemPotion {
         String name = "syringe";
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setUnlocalizedName(name);
     }
@@ -52,7 +51,7 @@ public class ItemSyringe extends ItemPotion {
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(UUID.fromString(slot.getName()), "Weapon modifier", 0, 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0, 0));
 
         return map;
     }
@@ -71,10 +70,10 @@ public class ItemSyringe extends ItemPotion {
             item.shrink(1);
 
             if (item.getCount() <= 0) {
-                user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ToolListMFR.syringe_empty));
+                user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ToolListMFR.SYRINGE_EMPTY));
             } else {
-                if (!((EntityPlayer) user).inventory.addItemStackToInventory(new ItemStack(ToolListMFR.syringe_empty))) {
-                    user.entityDropItem(new ItemStack(ToolListMFR.syringe_empty), 0F);
+                if (!((EntityPlayer) user).inventory.addItemStackToInventory(new ItemStack(ToolListMFR.SYRINGE_EMPTY))) {
+                    user.entityDropItem(new ItemStack(ToolListMFR.SYRINGE_EMPTY), 0F);
                 }
             }
         }
@@ -102,11 +101,11 @@ public class ItemSyringe extends ItemPotion {
 
         if (!user.capabilities.isCreativeMode) {
             if (item.getCount() <= 0) {
-                return ActionResult.newResult(EnumActionResult.PASS,new ItemStack(ToolListMFR.syringe_empty));
+                return ActionResult.newResult(EnumActionResult.PASS,new ItemStack(ToolListMFR.SYRINGE_EMPTY));
             }
 
-            if (!user.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.syringe_empty))) {
-                user.entityDropItem(new ItemStack(ToolListMFR.syringe_empty), 0F);
+            if (!user.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.SYRINGE_EMPTY))) {
+                user.entityDropItem(new ItemStack(ToolListMFR.SYRINGE_EMPTY), 0F);
             }
         }
 
@@ -150,31 +149,10 @@ public class ItemSyringe extends ItemPotion {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        int sub;
-
-        if (potionMap.isEmpty()) {
-            for (int i = 0; i <= 15; ++i) {
-                for (sub = 0; sub <= 0; ++sub) {
-                    int k;
-
-                    if (sub == 0) {
-                        k = i | 8192;
-                    } else {
-                        k = i | 16384;
-                    }
-
-                    for (int l = 0; l <= 2; ++l) {
-                        int i1 = k;
-
-                        if (l != 0) {
-                            if (l == 1) {
-                                i1 = k | 32;
-                            } else if (l == 2) {
-                                i1 = k | 64;
-                            }
-                        }
-                    }
-                }
+        for (PotionType potiontype : PotionType.REGISTRY)
+        {
+            if (potiontype != PotionTypes.EMPTY) {
+                items.add(PotionUtils.addPotionToItemStack(new ItemStack(this), potiontype));
             }
         }
     }

@@ -46,7 +46,7 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
         this.name = name;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         this.mass = mass;
         this.materialType = type;
@@ -95,7 +95,7 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
         if (!canDamage) {
             CustomToolHelper.addComponentString(tool, list, getBase(tool), mass);
         }
-        if (this == ComponentListMFR.cogwork_armour) {
+        if (this == ComponentListMFR.COGWORK_ARMOUR) {
             int AR = EntityCogwork.getArmourRating(getBase(tool));
             list.add(I18n.translateToLocal("attribute.armour.protection") + " " + AR);
             if (mass > 0)

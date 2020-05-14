@@ -81,13 +81,13 @@ public class EntryPageRecipeBase extends EntryPage {
         }
 
         ItemStack[] ingredients;
-        
+
         if (recipe instanceof ShapedRecipes) {
             ShapedRecipes shaped = (ShapedRecipes) recipe;
 
             for (int y = 0; y < shaped.recipeHeight; y++) {
                 for (int x = 0; x < shaped.recipeWidth; x++) {
-                	ingredients = shaped.recipeItems.get(y * shaped.recipeWidth + x).getMatchingStacks();
+                    ingredients = shaped.recipeItems.get(y * shaped.recipeWidth + x).getMatchingStacks();
                     renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX, posY,
                             mx, my);
                 }
@@ -157,7 +157,7 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-                             int mx, int my) {
+            int mx, int my) {
         if (stack == null || stack.getItem() == null)
             return;
         stack = stack.copy();
@@ -175,7 +175,7 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer,
-                                    int xOrigin, int yOrigin, int mx, int my) {
+            int xOrigin, int yOrigin, int mx, int my) {
         if (stack == null || stack.getItem() == null)
             return;
         stack = stack.copy();
@@ -201,7 +201,7 @@ public class EntryPageRecipeBase extends EntryPage {
     }
 
     public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-                           int my) {
+            int my) {
         RenderItem render = Minecraft.getMinecraft().getRenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;

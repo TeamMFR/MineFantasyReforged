@@ -1,10 +1,8 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.item.weapon.ItemSwordMF;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public final class CreativeTabMFR extends CreativeTabs {
@@ -35,40 +33,40 @@ public final class CreativeTabMFR extends CreativeTabs {
     public ItemStack getIconItemStack() {
         switch (type) {
             case 1:
-                return CustomToolListMFR.standard_axe.construct("Steel", "OakWood");
+                return CustomToolListMFR.STANDARD_AXE.construct("Steel", "OakWood");
             case 2:
-                return ( CustomToolListMFR.standard_sword).construct("Steel", "OakWood");
+                return (CustomToolListMFR.STANDARD_SWORD).construct("Steel", "OakWood");
             case 3:
-                return CustomArmourListMFR.standard_plate_helmet.construct("Steel");
+                return new ItemStack(CustomArmourListMFR.STANDARD_PLATE_HELMET);
             case 4:
-                return CustomToolListMFR.standard_bow.construct("Steel", "OakWood");
+                return CustomToolListMFR.STANDARD_BOW.construct("Steel", "OakWood");
             case 5:
-                return new ItemStack(BlockListMFR.ANVIL[1]);
+                return new ItemStack(BlockListMFR.ANVIL_IRON);
             case 6:
-                return new ItemStack(ToolListMFR.bomb_custom);
+                return new ItemStack(ToolListMFR.BOMB_CUSTOM);
             case 7:
-                return ComponentListMFR.plank.construct("OakWood");
+                return ComponentListMFR.PLANK.construct("OakWood");
             case 8:
-                return CustomToolListMFR.standard_handpick.construct("Steel", "OakWood");
+                return CustomToolListMFR.STANDARD_HANDPICK.construct("Steel", "OakWood");
             case 9:
-                return CustomToolListMFR.standard_hammer.construct("Steel", "OakWood");
+                return CustomToolListMFR.STANDARD_HAMMER.construct("Steel", "OakWood");
             case 10:
                 return new ItemStack(BlockListMFR.ORE_COPPER);
             case 11:
-                return new ItemStack(FoodListMFR.sweetroll);
+                return new ItemStack(FoodListMFR.SWEETROLL);
             case 12:
-                return new ItemStack(ComponentListMFR.dragon_heart);
+                return new ItemStack(ComponentListMFR.DRAGON_HEART);
             case 13:
-                return new ItemStack(ComponentListMFR.ornate_items);
+                return new ItemStack(ComponentListMFR.ORNATE_ITEMS);
             case 14:
-                return new ItemStack(ToolListMFR.pickStone);
+                return new ItemStack(ToolListMFR.STONE_PICK);
         }
-        return new ItemStack(ComponentListMFR.ingots[3]);
+        return new ItemStack(ComponentListMFR.PIG_IRON_INGOT);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public ItemStack getTabIconItem() {
-        return new ItemStack(CustomToolListMFR.standard_axe);
+        return new ItemStack(CustomToolListMFR.STANDARD_AXE);
     }
 }

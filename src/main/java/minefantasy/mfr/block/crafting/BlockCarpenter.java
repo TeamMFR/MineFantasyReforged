@@ -34,7 +34,7 @@ public class BlockCarpenter extends BlockContainer {
 
     public BlockCarpenter() {
         super(Material.WOOD);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("carpenterBench");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "MF_CarpenterBench");
         this.setSoundType(SoundType.WOOD);

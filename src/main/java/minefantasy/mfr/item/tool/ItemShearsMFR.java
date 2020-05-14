@@ -48,7 +48,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
         this.setMaxDamage(material.getMaxUses());
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
     }
 
     public ItemShearsMFR setCustom(String s) {

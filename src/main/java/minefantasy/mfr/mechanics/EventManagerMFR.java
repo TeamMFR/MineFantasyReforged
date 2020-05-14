@@ -22,7 +22,6 @@ import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.ISmithTongs;
 import minefantasy.mfr.api.weapon.WeaponClass;
-import minefantasy.mfr.client.render.RenderPowerArmour;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigStamina;
@@ -42,10 +41,6 @@ import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityList;
@@ -86,7 +81,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -251,12 +245,12 @@ public class EventManagerMFR {
         }
         if (dropper.getEntityData().hasKey("MF_LootDrop")) {
             int id = dropper.getEntityData().getInteger("MF_LootDrop");
-            Item drop = id == 0 ? ToolListMFR.loot_sack : id == 1 ? ToolListMFR.loot_sack_uc : ToolListMFR.loot_sack_rare;
+            Item drop = id == 0 ? ToolListMFR.LOOT_SACK : id == 1 ? ToolListMFR.LOOT_SACK_UC : ToolListMFR.LOOT_SACK_RARE;
             dropper.entityDropItem(new ItemStack(drop), 0.0F);
         }
         if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
             if (random.nextFloat() * (1 + event.getLootingLevel()) < 0.05F) {
-                dropper.entityDropItem(new ItemStack(FoodListMFR.guts), 0.0F);
+                dropper.entityDropItem(new ItemStack(FoodListMFR.GUTS), 0.0F);
             }
         }
         if (dropper instanceof IAnimals && !(dropper instanceof IMob)) {
@@ -274,7 +268,7 @@ public class EventManagerMFR {
                 dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
             }
 
-            Item meat = dropper.isBurning() ? FoodListMFR.horse_cooked : FoodListMFR.horse_raw;
+            Item meat = dropper.isBurning() ? FoodListMFR.HORSE_COOKED : FoodListMFR.HORSE_RAW;
             for (int a = 0; a < dropCount; a++) {
                 dropper.entityDropItem(new ItemStack(meat), 0.0F);
             }
@@ -285,7 +279,7 @@ public class EventManagerMFR {
                 dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
             }
 
-            Item meat = dropper.isBurning() ? FoodListMFR.wolf_cooked : FoodListMFR.wolf_raw;
+            Item meat = dropper.isBurning() ? FoodListMFR.WOLF_COOKED : FoodListMFR.WOLF_RAW;
             for (int a = 0; a < dropCount; a++) {
                 dropper.entityDropItem(new ItemStack(meat), 0.0F);
             }
@@ -334,8 +328,8 @@ public class EventManagerMFR {
     }
 
     private Item getHideFor(EntityLivingBase mob) {
-        Item[] hide = new Item[]{ComponentListMFR.rawhideSmall, ComponentListMFR.rawhideMedium,
-                ComponentListMFR.rawhideLarge};
+        Item[] hide = new Item[]{ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM,
+                ComponentListMFR.RAWHIDE_LARGE};
         int size = getHideSizeFor(mob);
         if (mob.isChild()) {
             size--;
@@ -447,7 +441,7 @@ public class EventManagerMFR {
     }
 
     private boolean isDragonforge(ItemStack itemstack) {
-        return itemstack.getItem() == ComponentListMFR.dragon_heart;
+        return itemstack.getItem() == ComponentListMFR.DRAGON_HEART;
     }
 
     public void alterDrops(EntityLivingBase dropper, LivingDropsEvent event) {
@@ -534,31 +528,31 @@ public class EventManagerMFR {
         if (id == 0) {
             float chance = random.nextFloat();
             if (chance > 0.75F) {
-                book = ToolListMFR.skillbook_engineering;
+                book = ToolListMFR.SKILLBOOK_ENGINEERING;
             } else {
-                book = ToolListMFR.skillbook_provisioning;
+                book = ToolListMFR.SKILLBOOK_PROVISIONING;
             }
         } else if (id == 1 && random.nextInt(5) == 0) {
             float chance = random.nextFloat();
             if (chance > 0.9F) {
-                book = ToolListMFR.skillbook_engineering;
+                book = ToolListMFR.SKILLBOOK_ENGINEERING;
             } else if (chance > 0.6F) {
-                book = ToolListMFR.skillbook_artisanry;
+                book = ToolListMFR.SKILLBOOK_ARTISANRY;
             } else if (chance > 0.3F) {
-                book = ToolListMFR.skillbook_construction;
+                book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
             } else {
-                book = ToolListMFR.skillbook_provisioning;
+                book = ToolListMFR.SKILLBOOK_PROVISIONING;
             }
         } else if (id == 2 && random.nextInt(25) == 0) {
             float chance = random.nextFloat();
             if (chance > 0.9F) {
-                book = ToolListMFR.skillbook_engineering;
+                book = ToolListMFR.SKILLBOOK_ENGINEERING;
             } else if (chance > 0.6F) {
-                book = ToolListMFR.skillbook_artisanry;
+                book = ToolListMFR.SKILLBOOK_ARTISANRY;
             } else if (chance > 0.3F) {
-                book = ToolListMFR.skillbook_construction;
+                book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
             } else {
-                book = ToolListMFR.skillbook_provisioning;
+                book = ToolListMFR.SKILLBOOK_PROVISIONING;
             }
         }
         if (book != null) {
@@ -615,14 +609,14 @@ public class EventManagerMFR {
 
         if (broken != null && ConfigHardcore.HCCallowRocks) {
             if (held == null) {
-                entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.sharp_rock, random.nextInt(3) + 1));
+                entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
             }
-            if (held != null && held.getItem() == ComponentListMFR.sharp_rock && broken instanceof BlockLeaves) {
+            if (held != null && held.getItem() == ComponentListMFR.SHARP_ROCK && broken instanceof BlockLeaves) {
                 if (random.nextInt(5) == 0) {
                     entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
                 }
                 if (random.nextInt(3) == 0) {
-                    entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.vine, random.nextInt(3) + 1));
+                    entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.VINE, random.nextInt(3) + 1));
                 }
             }
         }
@@ -655,15 +649,17 @@ public class EventManagerMFR {
 
     @SubscribeEvent
     public void setTooltip(ItemTooltipEvent event) {
-        if (!event.getEntity().world.isRemote) {
+        if (event.getEntity() != null && !event.getEntity().world.isRemote) {
             return;
         }
 
-        if (event.getItemStack() != null) {
+        ItemStack eventStack = event.getItemStack();
+
+        if (!eventStack.isEmpty()) {
             boolean saidArtefact = false;
             int[] ids = OreDictionary.getOreIDs(event.getItemStack());
             boolean hasInfo = false;
-            if (ids != null) {
+            if (ids != null && event.getEntityPlayer() != null) {
                 for (int id : ids) {
                     String s = OreDictionary.getOreName(id);
                     if (s != null) {
@@ -702,10 +698,12 @@ public class EventManagerMFR {
                             .add(TextFormatting.GREEN + I18n.translateToLocal("attribute.superior.name"));
                 }
             }
-            if (event.getItemStack().getItem() instanceof ItemArmor
-                    && (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase) || ClientItemsMF.showSpecials(
-                    event.getItemStack(), event.getEntityPlayer().world, event.getToolTip(), event.getFlags()))) {
-                addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
+            if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null){
+                if (event.getItemStack().getItem() instanceof ItemArmor
+                        && (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase) ||  ClientItemsMF.showSpecials(
+                        event.getItemStack(), event.getEntityPlayer().world, event.getToolTip(), event.getFlags()))) {
+                    addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
+                }
             }
             if (ArmourCalculator.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
                 displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
@@ -896,44 +894,45 @@ public class EventManagerMFR {
         event.setRenderItem(showHeld);
     }
 
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void renderEntity(RenderLivingEvent.Pre event) {
-        if (!(event.getRenderer() instanceof RenderPowerArmour)) {
-            boolean renderHead = false;
-            boolean renderBody = false;
-            boolean renderLeftArm = false;
-            boolean renderRightArm = false;
-            boolean renderLeftLeg = false;
-            boolean renderRightLeg = false;
-            Minecraft mc = Minecraft.getMinecraft();
-
-            if (event.getEntity() instanceof EntityPlayer && !(event.getEntity() == mc.player
-                    && (mc.currentScreen instanceof GuiContainerCreative || mc.currentScreen instanceof GuiInventory))
-                    && PowerArmour.isWearingCogwork(event.getEntity()) && mc.gameSettings.thirdPersonView != 0) {
-                IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
-                renderHead = cogwork.isArmoured("left_leg");
-                renderBody = cogwork.isArmoured("right_leg");
-                renderLeftArm = cogwork.isArmoured("left_arm");
-                renderRightArm = cogwork.isArmoured("right_arm");
-                renderLeftLeg = cogwork.isArmoured("left_leg");
-                renderRightLeg = cogwork.isArmoured("right_leg");
-            }
-
-            if (event.getRenderer() instanceof RenderPlayer) {
-                RenderPlayer RP = (RenderPlayer) event.getRenderer();
-                ModelBiped[] layers = new ModelBiped[]{RP.getMainModel()};
-
-                for (ModelBiped model : layers) {
-                    model.bipedHead.isHidden = model.bipedHeadwear.isHidden = model.bipedHead.isHidden = renderHead;
-                    model.bipedBody.isHidden = renderBody;
-
-                    model.bipedLeftArm.isHidden = renderLeftArm;
-                    model.bipedRightArm.isHidden = renderRightArm;
-                    model.bipedLeftLeg.isHidden = renderLeftLeg;
-                    model.bipedRightLeg.isHidden = renderRightLeg;
-                }
-            }
-        }
-    }
+//    @SideOnly(Side.CLIENT)
+//    @SubscribeEvent
+//    public void renderEntity(RenderLivingEvent.Pre event) {
+//        if (!(event.getRenderer() instanceof RenderPowerArmour)) {
+//            boolean renderHead = false;
+//            boolean renderBody = false;
+//            boolean renderLeftArm = false;
+//            boolean renderRightArm = false;
+//            boolean renderLeftLeg = false;
+//            boolean renderRightLeg = false;
+//            Minecraft mc = Minecraft.getMinecraft();
+//
+//            if (event.getEntity() instanceof EntityPlayer && !(event.getEntity() == mc.player
+//                    && (mc.currentScreen instanceof GuiContainerCreative || mc.currentScreen instanceof GuiInventory))
+//                    && PowerArmour.isWearingCogwork(event.getEntity()) && mc.gameSettings.thirdPersonView != 0) {
+//                IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
+//                renderHead = cogwork.isArmoured("left_leg");
+//                renderBody = cogwork.isArmoured("right_leg");
+//                renderLeftArm = cogwork.isArmoured("left_arm");
+//                renderRightArm = cogwork.isArmoured("right_arm");
+//                renderLeftLeg = cogwork.isArmoured("left_leg");
+//                renderRightLeg = cogwork.isArmoured("right_leg");
+//            }
+//
+//            if (event.getRenderer() instanceof RenderPlayer) {
+//                RenderPlayer RP = (RenderPlayer) event.getRenderer();
+//                ModelBiped[] layers = new ModelBiped[]{RP.getMainModel()};
+//
+//                for (ModelBiped model : layers) {
+//                    model.bipedHead.isHidden = model.bipedHeadwear.isHidden = model.bipedHead.isHidden = renderHead;
+//                    model.bipedBody.isHidden = renderBody;
+//
+//                    model.bipedLeftArm.isHidden = renderLeftArm;
+//                    model.bipedRightArm.isHidden = renderRightArm;
+//                    model.bipedLeftLeg.isHidden = renderLeftLeg;
+//                    model.bipedRightLeg.isHidden = renderRightLeg;
+//                }
+//            }
+//        }
+//    }
+    //TODO: Fix if necessary with RenderPowerArmour
 }

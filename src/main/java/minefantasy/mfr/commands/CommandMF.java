@@ -22,16 +22,10 @@ import java.util.List;
 
 public class CommandMF extends CommandBase {
 
-    private final List materials;
-
     private final List aliases = new ArrayList<String>() {{
         add("mf");
         add("minefantasy");
     }};
-
-    public CommandMF() {
-        materials = setupMaterialsList();
-    }
 
     private List setupMaterialsList() {
         List materials = new ArrayList<String>();
@@ -122,7 +116,7 @@ public class CommandMF extends CommandBase {
 
             if (strings.length == 3) {
                 if (strings[2].equalsIgnoreCase("material")) {
-                    return materials;
+                    return  setupMaterialsList();
                 }
 
                 if (strings[2].equalsIgnoreCase("unbreakable")) {
@@ -136,18 +130,15 @@ public class CommandMF extends CommandBase {
 
     @Override
     public String getName() {
-        return null;
+        return "CommandMF";
     }
 
     @Override
     public String getUsage(ICommandSender sender) {
-        return null;
+        return "command.MF.usage";
     }
 
-    @Override
-    public List<String> getAliases() {
-        return null;
-    }
+
 
     @Override
     public boolean checkPermission(MinecraftServer server, ICommandSender sender) {
@@ -156,11 +147,6 @@ public class CommandMF extends CommandBase {
 
     @Override
     public boolean isUsernameIndex(String[] strings, int i) {
-        return false;
-    }
-
-    @Override
-    public int compareTo(ICommand o) {
-        return 0;
+        return i == 1;
     }
 }

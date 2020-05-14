@@ -20,7 +20,7 @@ public class ItemParachute extends Item {
         this.maxStackSize = 1;
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setUnlocalizedName(name);
     }

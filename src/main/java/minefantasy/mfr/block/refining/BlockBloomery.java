@@ -31,7 +31,7 @@ public class BlockBloomery extends BlockContainer {
 
     public BlockBloomery() {
         super(Material.ROCK);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("MF_Bloomery");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "bloomery");
         this.setSoundType(SoundType.STONE);

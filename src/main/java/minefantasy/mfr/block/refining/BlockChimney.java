@@ -42,7 +42,7 @@ public class BlockChimney extends BlockContainer {
         } else {
           wideBB = new AxisAlignedBB(1F / 4F, 0, 1F / 4F, 3F / 4F, 1F, 3F / 4F);
         }
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("MF_Chimney_" + type + (isWide ? "_Wide" : "_Thin"));
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + ("chimney." + type + (isWide ? ".wide" : "")));
         this.setSoundType(SoundType.METAL);

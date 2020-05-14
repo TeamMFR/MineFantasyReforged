@@ -27,10 +27,8 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
 
     public BlockSaplingMF(String baseWood, Block log, Block leaves, float growthModifier) {
         super(Material.PLANTS);
-        GameRegistry.findRegistry(Block.class).register(this);
-        setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        setSoundType(SoundType.GROUND);
+
+
         float f = 0.4F;
         new AxisAlignedBB(0.5F - f, 0.0F, 0.5F - f, 0.5F + f, f * 2.0F, 0.5F + f);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
@@ -38,6 +36,9 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
         name = baseWood.toLowerCase() + "_sapling";
         this.log = log;
         this.leaves = leaves;
+        setRegistryName(name);
+        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setSoundType(SoundType.GROUND);
     }
 
     /**

@@ -33,13 +33,13 @@ public class ItemBandage extends Item {
         setCreativeTab(CreativeTabMFR.tabGadget);
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
     }
 
     @Override
     public EnumRarity getRarity(ItemStack item) {
         if (healPwr <= 5) {
-            return ToolListMFR.poor;
+            return ToolListMFR.POOR;
         }
         return super.getRarity(item);
     }

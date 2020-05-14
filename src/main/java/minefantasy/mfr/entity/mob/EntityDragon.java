@@ -625,7 +625,7 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
     }
 
     protected Item getDropItem() {
-        return ComponentListMFR.dragon_heart;
+        return ComponentListMFR.DRAGON_HEART;
     }
 
     /**
@@ -645,16 +645,16 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
             this.dropItem(Items.NETHER_STAR, 1);
         }
         if (didDropHeart(this.getTier())) {
-            this.dropItem(ComponentListMFR.dragon_heart, 1);
+            this.dropItem(ComponentListMFR.DRAGON_HEART, 1);
         }
     }
 
     private Item getLoot(int tier) {
         if (tier == 4)// Ancient
         {
-            return ToolListMFR.loot_sack_rare;
+            return ToolListMFR.LOOT_SACK_RARE;
         }
-        return ToolListMFR.loot_sack_uc;// Any
+        return ToolListMFR.LOOT_SACK_UC;// Any
     }
 
     private boolean didDropHeart(int tier) {

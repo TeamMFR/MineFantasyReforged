@@ -18,5 +18,5 @@ public interface IArmourMFR {
      *
      * @return "light" "medium" or "heavy"
      */
-    public String getSuitWeigthType(ItemStack item);
+    public String getSuitWeightType(ItemStack item);
 }

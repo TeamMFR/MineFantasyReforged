@@ -66,7 +66,8 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<Til
             engmodel.rotateLever(tile.acTime);
             engmodel.renderLever(0.0625F);
         }
-        renderHungItem(tile, d, d1, d2, f);
+        //renderHungItem(tile, d, d1, d2, f);
+        //TODO fix renderHungItem
         GL11.glPopMatrix();
 
     }
@@ -106,29 +107,30 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<Til
         renderAModelAt((TileEntityTanningRack) tileentity, d, d1, d2, f);
     }
 
-    private void renderHungItem(TileEntityTanningRack tile, double d, double d1, double d2, float f) {
-        Minecraft mc = Minecraft.getMinecraft();
-        ItemStack itemstack = tile.getStackInSlot(0);
-        if (itemstack != null && itemstack.getItem().getIconFromDamage(itemstack.getItemDamage()) != null) {
-            Item item = itemstack.getItem();
-            mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-
-            Tessellator image = Tessellator.instance;
-            IIcon index = item.getIconFromDamage(itemstack.getItemDamage());
-            float x1 = index.getMinU();
-            float x2 = index.getMaxU();
-            float y1 = index.getMinV();
-            float y2 = index.getMaxV();
-            float xPos = 0.5F;
-            float yPos = -0.5F;
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-            GL11.glTranslatef(-xPos, -yPos, 0.0F);
-            float var13 = 1F;
-            GL11.glScalef(var13, var13, var13);
-            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-            GL11.glTranslatef(-1F, -1F, 0.0F);
-            ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, index.getIconWidth(), index.getIconHeight(), 0.0625F);
-        }
-
-    }
+//    private void renderHungItem(TileEntityTanningRack tile, double d, double d1, double d2, float f) {
+    ////        Minecraft mc = Minecraft.getMinecraft();
+    ////        ItemStack itemstack = tile.getStackInSlot(0);
+    ////        if (itemstack != null && itemstack.getItem().getIconFromDamage(itemstack.getItemDamage()) != null) {
+    ////            Item item = itemstack.getItem();
+    ////            mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
+    ////
+    ////            Tessellator image = Tessellator.instance;
+    ////            IIcon index = item.getIconFromDamage(itemstack.getItemDamage());
+    ////            float x1 = index.getMinU();
+    ////            float x2 = index.getMaxU();
+    ////            float y1 = index.getMinV();
+    ////            float y2 = index.getMaxV();
+    ////            float xPos = 0.5F;
+    ////            float yPos = -0.5F;
+    ////            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+    ////            GL11.glTranslatef(-xPos, -yPos, 0.0F);
+    ////            float var13 = 1F;
+    ////            GL11.glScalef(var13, var13, var13);
+    ////            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+    ////            GL11.glTranslatef(-1F, -1F, 0.0F);
+    ////            ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, index.getIconWidth(), index.getIconHeight(), 0.0625F);
+    ////        }
+    ////
+    ////    }
+    //TODO Render Item in Rack
 }

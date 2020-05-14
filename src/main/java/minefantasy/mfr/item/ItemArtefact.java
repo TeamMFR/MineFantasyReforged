@@ -46,7 +46,7 @@ public class ItemArtefact extends Item implements IArtefact {
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setHasSubtypes(true);
     }
 
@@ -77,10 +77,10 @@ public class ItemArtefact extends Item implements IArtefact {
             }
             lvl++;
         }
-        if (lvl >= ToolListMFR.rarity.length) {
-            lvl = ToolListMFR.rarity.length - 1;
+        if (lvl >= ToolListMFR.RARITY.length) {
+            lvl = ToolListMFR.RARITY.length - 1;
         }
-        return ToolListMFR.rarity[lvl];
+        return ToolListMFR.RARITY[lvl];
     }
 
     public void registerAll() {

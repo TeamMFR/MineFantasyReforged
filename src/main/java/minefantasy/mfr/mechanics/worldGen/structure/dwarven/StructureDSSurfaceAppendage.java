@@ -156,7 +156,7 @@ public class StructureDSSurfaceAppendage extends StructureModuleMFR {
                     return new Object[]{BlockListMFR.REINFORCED_STONE, false};
                 }
             }
-            return new Object[]{BlockListMFR.BARS[0], false};
+            return new Object[]{BlockListMFR.BRONZE_BARS, false};
         }
         return null;
     }
@@ -181,11 +181,11 @@ public class StructureDSSurfaceAppendage extends StructureModuleMFR {
     private void decorateTower(int width, int depth, int height) {
         for (int y = 1; y <= height; y++) {
             if (y >= 2 && y <= (height - 2) && (y < (height / 2) - 1 || y > (height / 2) + 1)) {
-                this.placeBlock(BlockListMFR.BARS[0], new BlockPos(-width, y, depth / 2) );
-                this.placeBlock(BlockListMFR.BARS[0], new BlockPos(width, y, depth / 2) );
-                this.placeBlock(BlockListMFR.BARS[0], new BlockPos(0, y, depth) );
+                this.placeBlock(BlockListMFR.BRONZE_BARS, new BlockPos(-width, y, depth / 2) );
+                this.placeBlock(BlockListMFR.BRONZE_BARS, new BlockPos(width, y, depth / 2) );
+                this.placeBlock(BlockListMFR.BRONZE_BARS, new BlockPos(0, y, depth) );
                 if (y > (height / 2) + 1) {
-                    this.placeBlock(BlockListMFR.BARS[0], new BlockPos(0, y, 0) );
+                    this.placeBlock(BlockListMFR.BRONZE_BARS, new BlockPos(0, y, 0) );
                 }
             }
             this.placeBlock(Blocks.LADDER, new BlockPos( -1, y, 1));

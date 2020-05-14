@@ -241,7 +241,7 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
      * Checks to make sure the light is not too bright where the mob is spawning
      */
     protected boolean isValidLightLevel() {
-        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(Objects.requireNonNull(this.getCollisionBoundingBox()).minY), MathHelper.floor(this.posZ));
+        BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
 
         if (this.world.getLightFromNeighborsFor(EnumSkyBlock.SKY, pos) > this.rand.nextInt(32)) {
             return false;

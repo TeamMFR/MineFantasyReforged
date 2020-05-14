@@ -1,6 +1,7 @@
 package minefantasy.mfr.block.basic;
 
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.itemblock.ItemBlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ConstructionBlockMF extends Block {
 
     public static final String[] m_names = new String[]{"", "_cobblestone", "_brick", "_pavement"};
-    public Block[] stairblocks = new Block[4];
+
 
     public ConstructionBlockMF(String unlocName) {
         this(unlocName, new String[]{"", "_cobblestone", "_brick", "_pavement"});
@@ -25,15 +26,11 @@ public class ConstructionBlockMF extends Block {
 
     public ConstructionBlockMF(String unlocName, Material material, String... types) {
         super(material);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(unlocName);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + unlocName);
 
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-        for (int i = 0; i < m_names.length; i++) {
-            GameRegistry.findRegistry(Block.class).register(stairblocks[i] = new StairsConstBlock(unlocName + m_names[i] + "_stair", this).setHardness(1.5F).setResistance(10F));
-        }
-
         setHardness(1.5F);
         setResistance(10F);
         if (material == Material.ROCK) {
@@ -46,19 +43,13 @@ public class ConstructionBlockMF extends Block {
 
     @Override
     public Block setHardness(float level) {
-        if (stairblocks != null) {
-            for (Block stairblock : stairblocks)
-                stairblock.setHardness(level);
-        }
+
         return super.setHardness(level);
     }
 
     @Override
     public Block setResistance(float level) {
-        if (stairblocks != null) {
-            for (Block stairblock : stairblocks)
-                stairblock.setResistance(level);
-        }
+
         return super.setResistance(level);
     }
 
@@ -100,7 +91,7 @@ public class ConstructionBlockMF extends Block {
 
         public StairsConstBlock(String unlocalizedName, Block baseBlock, IBlockState state) {
             super(state);
-            GameRegistry.findRegistry(Block.class).register(this);
+
             setRegistryName(unlocalizedName);
             setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + unlocalizedName);
             this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
@@ -116,11 +107,31 @@ public class ConstructionBlockMF extends Block {
 //            GameRegistry.addRecipe(new ItemStack(this, 4), new Object[]{"B  ", "BB ", "BBB", 'B', this.base});
 //        }
 
-        public Block register(String name) {
-            GameRegistry.findRegistry(Block.class).register(this);
-            setRegistryName(name);
-            setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-            return this;
+    }
+
+    public static class ItemConstBlock extends ItemBlockBase {
+
+        public ItemConstBlock(Block block) {
+            super(block);
+        }
+
+        @Override
+        public String getUnlocalizedName(ItemStack stack) {
+            switch (stack.getItemDamage()) {
+                case 1:
+                    return this.getUnlocalizedName() + "_cobblestone";
+                case 2:
+                    return this.getUnlocalizedName() + "_brick";
+                case 3:
+                    return this.getUnlocalizedName() + "_pavement";
+                default:
+                    return this.getUnlocalizedName();
+            }
+        }
+
+        @Override
+        public int getMetadata(int d) {
+            return d;
         }
     }
 }

@@ -2,28 +2,22 @@ package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.LootRegistryMFR;
-import minefantasy.mfr.item.gadget.ItemBomb;
-import minefantasy.mfr.item.gadget.ItemMine;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSRoom extends StructureModuleMFR {
@@ -356,7 +350,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             for (int y = 2; y < height; y++) {
                 if (x < -1 || x > 1 || y > 3) {
                     if (getBlock(new BlockPos(x, y, z)).getBlock().isReplaceable(world, pos)) {
-                        placeBlock(BlockListMFR.BARS[0], new BlockPos(x, y, z) );
+                        placeBlock(BlockListMFR.BRONZE_BARS, new BlockPos(x, y, z) );
                     }
                 }
             }
@@ -399,7 +393,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private void placeRack(BlockPos pos, int newDirection) {
-        placeBlock(BlockListMFR.RACK_WOOD, pos, newDirection );
+        placeBlock(BlockListMFR.TOOL_RACK_WOOD, pos, newDirection );
         TileEntity tile = this.getTileEntity(pos, direction);
         if (tile != null && tile instanceof TileEntityRack) {
             setupRack((TileEntityRack) tile);
@@ -408,8 +402,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 
     private void setupRack(TileEntityRack rack) {
         rack.setMaterial(CustomMaterial.getMaterial("ScrapWood"));
-        ItemWeaponMFR[] items = new ItemWeaponMFR[]{CustomToolListMFR.standard_sword, CustomToolListMFR.standard_waraxe,
-                CustomToolListMFR.standard_mace, CustomToolListMFR.standard_dagger};
+        ItemWeaponMFR[] items = new ItemWeaponMFR[]{CustomToolListMFR.STANDARD_SWORD, CustomToolListMFR.STANDARD_WARAXE,
+                CustomToolListMFR.STANDARD_MACE, CustomToolListMFR.STANDARD_DAGGER};
         for (int i = 0; i < rack.getSizeInventory(); i++) {
             if (rand.nextInt(3) != 0) {
                 ItemWeaponMFR loot = items[rand.nextInt(items.length)];
@@ -458,7 +452,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, new BlockPos(((width - 1) * position), 3, z - 2)) ;
         placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, new BlockPos(((width - 1) * position), 3, z + 1) );
 
-        placeBlock(BlockListMFR.ANVIL[1], new BlockPos(position * 2, 1, z));
+        placeBlock(BlockListMFR.ANVIL_IRON, new BlockPos(position * 2, 1, z));
         placeBlock(Blocks.CAULDRON, new BlockPos(position * 2, 1, z - 1));
 
         placeMiscMachine1(new BlockPos(-(width - 2) * position, 0, depth - 3));

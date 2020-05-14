@@ -9,7 +9,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MetalMaterial extends CustomMaterial {
     public MetalMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness,
@@ -121,9 +120,7 @@ public class MetalMaterial extends CustomMaterial {
 
     public static void addHeatables() {
         ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-        Iterator iteratorMetal = metal.iterator();
-        while (iteratorMetal.hasNext()) {
-            CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
+        for (CustomMaterial customMat : metal) {
             int[] stats = customMat.getHeatableStats();
             MFRLogUtil.logDebug(
                     "Set Heatable Stats for " + customMat.name + ": " + stats[0] + "," + stats[1] + "," + stats[2]);
@@ -132,9 +129,9 @@ public class MetalMaterial extends CustomMaterial {
             MineFantasyRebornAPI.setHeatableStats("hunk" + customMat.name, stats[0], stats[1], stats[2]);
         }
 
-        MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.rivet, 1000, 2000, 3000);
-        MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.metalHunk, -1, -1, -1);
-        MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.bar, -1, -1, -1);
+        MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.RIVET, 1000, 2000, 3000);
+        MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.METAL_HUNK, -1, -1, -1);
+        MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.BAR, -1, -1, -1);
     }
 
     @Override

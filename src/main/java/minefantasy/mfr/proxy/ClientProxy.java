@@ -43,7 +43,6 @@ import minefantasy.mfr.client.render.RenderDragonBreath;
 import minefantasy.mfr.client.render.RenderFireBlast;
 import minefantasy.mfr.client.render.RenderMine;
 import minefantasy.mfr.client.render.RenderParachute;
-import minefantasy.mfr.client.render.RenderPowerArmour;
 import minefantasy.mfr.client.render.RenderShrapnel;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
@@ -53,13 +52,10 @@ import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mfr.client.render.block.component.TileEntityComponentRenderer;
 import minefantasy.mfr.client.render.mob.ModelHound;
-import minefantasy.mfr.client.render.mob.ModelMinotaur;
 import minefantasy.mfr.client.render.mob.RenderDragon;
 import minefantasy.mfr.client.render.mob.RenderHound;
-import minefantasy.mfr.client.render.mob.RenderMinotaur;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.entity.EntityBomb;
-import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import minefantasy.mfr.entity.EntityFireBlast;
 import minefantasy.mfr.entity.EntityMine;
@@ -68,7 +64,6 @@ import minefantasy.mfr.entity.EntityShrapnel;
 import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
-import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.mechanics.ExtendedReachMFR;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import net.minecraft.client.Minecraft;
@@ -148,10 +143,10 @@ public class ClientProxy extends CommonProxy {
         RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, new RenderFireBlast());
         RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, new RenderDragonBreath());
         RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
-        RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour());
+        //RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour()); //TODO: Fix if necessary
 
         RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, new RenderDragon(2F));
-        RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));
+       // RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));//TODO: Fix if necessary
         RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
     }
 

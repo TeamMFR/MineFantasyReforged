@@ -37,7 +37,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -56,7 +55,7 @@ public class BlockForge extends BlockContainer {
         this.tier = tier;
         this.type = tex;
         this.isActive = isActive;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("MF_Forge" + tex + (isActive ? "Active" : ""));
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "forge." + tex);
         this.setSoundType(SoundType.STONE);
@@ -212,7 +211,7 @@ public class BlockForge extends BlockContainer {
                     return true;
                 }
                 if (!world.isRemote && ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.smeltDragonforge)
-                        && held.getItem() == ComponentListMFR.dragon_heart) {
+                        && held.getItem() == ComponentListMFR.DRAGON_HEART) {
                     if (user.getHeldItem(hand).getCount() == 1) {
                         user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
                     } else {
@@ -235,7 +234,7 @@ public class BlockForge extends BlockContainer {
 
         // GRAB
         if (grabbed == null) {
-            if (contents != null && contents.getItem() == ComponentListMFR.hotItem) {
+            if (contents != null && contents.getItem() == ComponentListMFR.HOT_ITEM) {
                 if (TongsHelper.trySetHeldItem(held, contents)) {
                     tile.setInventorySlotContents(0, null);
                     return true;

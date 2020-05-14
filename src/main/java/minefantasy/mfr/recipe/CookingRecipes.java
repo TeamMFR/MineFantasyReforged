@@ -12,37 +12,37 @@ import net.minecraft.item.ItemStack;
 
 public class CookingRecipes {
     public static void init() {
-        cookMeat(FoodListMFR.horse_raw, FoodListMFR.horse_cooked);
-        cookMeat(FoodListMFR.wolf_raw, FoodListMFR.wolf_cooked);
-        cookMeat(FoodListMFR.saussage_raw, FoodListMFR.saussage_cooked);
-        cookMeat(FoodListMFR.generic_meat_uncooked, FoodListMFR.generic_meat_cooked);
-        cookMeat(FoodListMFR.generic_meat_strip_uncooked, FoodListMFR.generic_meat_strip_cooked);
-        cookMeat(FoodListMFR.generic_meat_chunk_uncooked, FoodListMFR.generic_meat_chunk_cooked);
+        cookMeat(FoodListMFR.HORSE_RAW, FoodListMFR.HORSE_COOKED);
+        cookMeat(FoodListMFR.WOLF_RAW, FoodListMFR.WOLF_COOKED);
+        cookMeat(FoodListMFR.SAUSAGE_RAW, FoodListMFR.SAUSAGE_COOKED);
+        cookMeat(FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.GENERIC_MEAT_COOKED);
+        cookMeat(FoodListMFR.GENERIC_MEAT_STRIP_UNCOOKED, FoodListMFR.GENERIC_MEAT_STRIP_COOKED);
+        cookMeat(FoodListMFR.GENERIC_MEAT_CHUNK_UNCOOKED, FoodListMFR.GENERIC_MEAT_CHUNK_COOKED);
 
-        bake(FoodListMFR.dough, FoodListMFR.breadroll, 150, 300, 10, 20, true);
-        bake(FoodListMFR.raw_bread, Items.BREAD, 150, 300, 20, 40, true);
-        bake(FoodListMFR.curds, FoodListMFR.cheese_pot, 100, 300, 60, 20, false);
-        bake(FoodListMFR.sweetroll_raw, FoodListMFR.sweetroll_uniced, 150, 250, 20, 10, true);
+        bake(FoodListMFR.DOUGH, FoodListMFR.BREADROLL, 150, 300, 10, 20, true);
+        bake(FoodListMFR.RAW_BREAD, Items.BREAD, 150, 300, 20, 40, true);
+        bake(FoodListMFR.CURDS, FoodListMFR.CHEESE_POT, 100, 300, 60, 20, false);
+        bake(FoodListMFR.SWEETROLL_RAW, FoodListMFR.SWEETROLL_UNICED, 150, 250, 20, 10, true);
 
-        bake(FoodListMFR.pie_pumpkin_uncooked, FoodListMFR.pie_pumpkin_cooked, 150, 300, 20, 20, FoodListMFR.burnt_pie);
-        bake(FoodListMFR.pie_apple_uncooked, FoodListMFR.pie_apple_cooked, 150, 300, 25, 20, FoodListMFR.burnt_pie);
-        bake(FoodListMFR.pie_berry_uncooked, FoodListMFR.pie_berry_cooked, 150, 300, 25, 20, FoodListMFR.burnt_pie);
-        bake(FoodListMFR.pie_meat_uncooked, FoodListMFR.pie_meat_cooked, 150, 300, 30, 20, FoodListMFR.burnt_pie);
-        bake(FoodListMFR.pie_shepard_uncooked, FoodListMFR.pie_shepard_cooked, 150, 300, 30, 20, FoodListMFR.burnt_pie);
+        bake(FoodListMFR.PIE_PUMPKIN_UNCOOKED, FoodListMFR.PIE_PUMPKIN_COOKED, 150, 300, 20, 20, FoodListMFR.BURNT_PIE);
+        bake(FoodListMFR.PIE_APPLE_UNCOOKED, FoodListMFR.PIE_APPLE_COOKED, 150, 300, 25, 20, FoodListMFR.BURNT_PIE);
+        bake(FoodListMFR.PIE_BERRY_UNCOOKED, FoodListMFR.PIE_BERRY_COOKED, 150, 300, 25, 20, FoodListMFR.BURNT_PIE);
+        bake(FoodListMFR.PIE_MEAT_UNCOOKED, FoodListMFR.PIE_MEAT_COOKED, 150, 300, 30, 20, FoodListMFR.BURNT_PIE);
+        bake(FoodListMFR.PIE_SHEPARD_UNCOOKED, FoodListMFR.PIE_SHEPARD_COOKED, 150, 300, 30, 20, FoodListMFR.BURNT_PIE);
 
-        bake(FoodListMFR.cake_simple_raw, FoodListMFR.cake_simple_uniced, 150, 250, 30, 30, FoodListMFR.burnt_cake);
-        bake(FoodListMFR.cake_raw, FoodListMFR.cake_uniced, 150, 250, 40, 20, FoodListMFR.burnt_cake);
-        bake(FoodListMFR.cake_choc_raw, FoodListMFR.cake_choc_uniced, 150, 250, 40, 20, FoodListMFR.burnt_cake);
-        bake(FoodListMFR.cake_carrot_raw, FoodListMFR.cake_carrot_uniced, 150, 250, 40, 20, FoodListMFR.burnt_cake);
-        bake(FoodListMFR.cake_bf_raw, FoodListMFR.cake_bf_uniced, 150, 250, 50, 10, FoodListMFR.burnt_cake);
-        bake(FoodListMFR.eclair_raw, FoodListMFR.eclair_uniced, 150, 250, 60, 5, true);
+        bake(FoodListMFR.CAKE_SIMPLE_RAW, FoodListMFR.CAKE_SIMPLE_UNICED, 150, 250, 30, 30, FoodListMFR.BURNT_CAKE);
+        bake(FoodListMFR.CAKE_RAW, FoodListMFR.CAKE_UNICED, 150, 250, 40, 20, FoodListMFR.BURNT_CAKE);
+        bake(FoodListMFR.CAKE_CHOC_RAW, FoodListMFR.CAKE_CHOC_UNICED, 150, 250, 40, 20, FoodListMFR.BURNT_CAKE);
+        bake(FoodListMFR.CAKE_CARROT_RAW, FoodListMFR.CAKE_CARROT_UNICED, 150, 250, 40, 20, FoodListMFR.BURNT_CAKE);
+        bake(FoodListMFR.CAKE_BF_RAW, FoodListMFR.CAKE_BF_UNICED, 150, 250, 50, 10, FoodListMFR.BURNT_CAKE);
+        bake(FoodListMFR.ECLAIR_RAW, FoodListMFR.ECLAIR_UNICED, 150, 250, 60, 5, true);
 
         addCeramics();
-        MineFantasyRebornAPI.addCookingRecipe(new ItemStack(FoodListMFR.generic_meat_mince_uncooked),
-                new ItemStack(FoodListMFR.generic_meat_mince_cooked), new ItemStack(FoodListMFR.burnt_pot), 100, 200, 10,
+        MineFantasyRebornAPI.addCookingRecipe(new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_UNCOOKED),
+                new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_COOKED), new ItemStack(FoodListMFR.BURNT_POT), 100, 200, 10,
                 false);
 
-        MineFantasyRebornAPI.addCookingRecipe(new ItemStack(FoodListMFR.bowl_water_salt), new ItemStack(FoodListMFR.salt), 100,
+        MineFantasyRebornAPI.addCookingRecipe(new ItemStack(FoodListMFR.BOWL_WATER_SALT), new ItemStack(FoodListMFR.SALT), 100,
                 200, 2, false, false);
 
         if (!ConfigHardcore.preventCook) {
@@ -67,7 +67,7 @@ public class CookingRecipes {
 
     private static CookRecipe bake(Item in, Item out, int mint, int maxt, int time, int burn_time, boolean burn) {
         return MineFantasyRebornAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out),
-                new ItemStack(FoodListMFR.burnt_food), mint, maxt, time, burn_time, true, burn);
+                new ItemStack(FoodListMFR.BURNT_FOOD), mint, maxt, time, burn_time, true, burn);
     }
 
 /*
@@ -84,28 +84,25 @@ public class CookingRecipes {
     }
 
     private static void smeltFood() {
-        GameRegistry.addSmelting(FoodListMFR.horse_raw, new ItemStack(FoodListMFR.horse_cooked), 0.2F);
-        GameRegistry.addSmelting(FoodListMFR.wolf_raw, new ItemStack(FoodListMFR.wolf_cooked), 0.2F);
-        GameRegistry.addSmelting(FoodListMFR.generic_meat_uncooked, new ItemStack(FoodListMFR.generic_meat_cooked), 0);
-        GameRegistry.addSmelting(FoodListMFR.generic_meat_strip_uncooked,
-                new ItemStack(FoodListMFR.generic_meat_strip_cooked), 0);
-        GameRegistry.addSmelting(FoodListMFR.generic_meat_chunk_uncooked,
-                new ItemStack(FoodListMFR.generic_meat_chunk_cooked), 0);
-        GameRegistry.addSmelting(FoodListMFR.generic_meat_mince_uncooked,
-                new ItemStack(FoodListMFR.generic_meat_mince_cooked), 0);
-        GameRegistry.addSmelting(FoodListMFR.bowl_water_salt, new ItemStack(FoodListMFR.salt), 0);
-        GameRegistry.addSmelting(FoodListMFR.saussage_raw, new ItemStack(FoodListMFR.saussage_cooked), 0);
+        GameRegistry.addSmelting(FoodListMFR.HORSE_RAW, new ItemStack(FoodListMFR.HORSE_COOKED), 0.2F);
+        GameRegistry.addSmelting(FoodListMFR.WOLF_RAW, new ItemStack(FoodListMFR.WOLF_COOKED), 0.2F);
+        GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_COOKED), 0);
+        GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_STRIP_COOKED), 0);
+        GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_CHUNK_COOKED), 0);
+        GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_MINCE_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_COOKED), 0);
+        GameRegistry.addSmelting(FoodListMFR.BOWL_WATER_SALT, new ItemStack(FoodListMFR.SALT), 0);
+        GameRegistry.addSmelting(FoodListMFR.SAUSAGE_RAW, new ItemStack(FoodListMFR.SAUSAGE_COOKED), 0);
     }
 
     private static void addCeramics() {
-        bakeCeramic(ComponentListMFR.clay_pot_uncooked, ComponentListMFR.clay_pot, 1000, 5);
-        bakeCeramic(FoodListMFR.jug_uncooked, FoodListMFR.jug_empty, 1000, 5);
-        bakeCeramic(ComponentListMFR.pie_tray_uncooked, FoodListMFR.pie_tray, 1000, 10);
-        bakeCeramic(ComponentListMFR.ingot_mould_uncooked, ComponentListMFR.ingot_mould, 1000, 5);
-        bakeCeramic(ComponentListMFR.mine_casing_uncooked, ComponentListMFR.mine_casing, 1000, 10);
-        bakeCeramic(ComponentListMFR.bomb_casing_uncooked, ComponentListMFR.bomb_casing, 1000, 10);
+        bakeCeramic(ComponentListMFR.CLAY_POT_UNCOOKED, ComponentListMFR.CLAY_POT, 1000, 5);
+        bakeCeramic(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY, 1000, 5);
+        bakeCeramic(ComponentListMFR.PIE_TRAY_UNCOOKED, FoodListMFR.PIE_TRAY, 1000, 10);
+        bakeCeramic(ComponentListMFR.INGOT_MOULD_UNCOOKED, ComponentListMFR.INGOT_MOULD, 1000, 5);
+        bakeCeramic(ComponentListMFR.MINE_CASING_UNCOOKED, ComponentListMFR.MINE_CASING, 1000, 10);
+        bakeCeramic(ComponentListMFR.BOMB_CASING_UNCOOKED, ComponentListMFR.BOMB_CASING, 1000, 10);
 
-        bakeCeramic(ComponentListMFR.fireclay_brick, ComponentListMFR.strong_brick, 1500, 5);
+        bakeCeramic(ComponentListMFR.FIRECLAY_BRICK, ComponentListMFR.STRONG_BRICK, 1500, 5);
     }
 
     private static CookRecipe bakeCeramic(Item clay, Item ceramic, int temp, int time) {

@@ -41,7 +41,7 @@ public class BlockBFH extends BlockContainer {
     public BlockBFH(boolean isActive) {
         super(Material.ANVIL);
         this.isActive = isActive;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(isActive ? "MF_BlastHeaterActive" : "MF_BlastHeater");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "blastfurnheater");
         this.setSoundType(SoundType.METAL);

@@ -16,7 +16,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -124,7 +123,7 @@ public class ItemJug extends ItemComponentMFR {
             world.playSound(player, player.getPosition(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
             item.shrink(1);
             EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ,
-                    new ItemStack(FoodListMFR.jug_water));
+                    new ItemStack(FoodListMFR.JUG_WATER));
             world.spawnEntity(resultItem);
         }
     }

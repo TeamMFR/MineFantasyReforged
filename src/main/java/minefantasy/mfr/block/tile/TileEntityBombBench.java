@@ -270,16 +270,16 @@ public class TileEntityBombBench extends TileEntity implements IInventory, ISide
 
     private Item getDesignCrafted(String type) {
         if (type.equalsIgnoreCase("bombcase")) {
-            return ToolListMFR.bomb_custom;
+            return ToolListMFR.BOMB_CUSTOM;
         }
         if (type.equalsIgnoreCase("minecase")) {
-            return ToolListMFR.mine_custom;
+            return ToolListMFR.MINE_CUSTOM;
         }
         if (type.equalsIgnoreCase("arrow")) {
-            return ToolListMFR.exploding_arrow;
+            return ToolListMFR.EXPLODING_ARROW;
         }
         if (type.equalsIgnoreCase("bolt")) {
-            return ToolListMFR.exploding_bolt;
+            return ToolListMFR.EXPLODING_BOLT;
         }
         return null;
     }

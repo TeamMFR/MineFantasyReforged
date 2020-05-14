@@ -17,7 +17,6 @@ import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.oredict.OreDictionary;
@@ -47,25 +46,25 @@ public class ItemCustomArmour extends ItemArmourMFR {
     }
 
     public static void addSuits(List list, String material) {
-        list.add(CustomArmourListMFR.standard_chain_helmet.construct(material));
-        list.add(CustomArmourListMFR.standard_chain_chest.construct(material));
-        list.add(CustomArmourListMFR.standard_chain_legs.construct(material));
-        list.add(CustomArmourListMFR.standard_chain_boots.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_HELMET.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_CHEST.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_LEGS.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_BOOTS.construct(material));
 
-        list.add(CustomArmourListMFR.standard_scale_helmet.construct(material));
-        list.add(CustomArmourListMFR.standard_scale_chest.construct(material));
-        list.add(CustomArmourListMFR.standard_scale_legs.construct(material));
-        list.add(CustomArmourListMFR.standard_scale_boots.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_HELMET.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_CHEST.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_LEGS.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_BOOTS.construct(material));
 
-        list.add(CustomArmourListMFR.standard_splint_helmet.construct(material));
-        list.add(CustomArmourListMFR.standard_splint_chest.construct(material));
-        list.add(CustomArmourListMFR.standard_splint_legs.construct(material));
-        list.add(CustomArmourListMFR.standard_splint_boots.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SPLINT_HELMET.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SPLINT_CHEST.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SPLINT_LEGS.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SPLINT_BOOTS.construct(material));
 
-        list.add(CustomArmourListMFR.standard_plate_helmet.construct(material));
-        list.add(CustomArmourListMFR.standard_plate_chest.construct(material));
-        list.add(CustomArmourListMFR.standard_plate_legs.construct(material));
-        list.add(CustomArmourListMFR.standard_plate_boots.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_PLATE_HELMET.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_PLATE_CHEST.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_PLATE_LEGS.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_PLATE_BOOTS.construct(material));
     }
 
     public ItemCustomArmour modifyRating(float rating) {
@@ -140,7 +139,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
             }
             return;
         }
-        if (this != CustomArmourListMFR.standard_chain_boots)
+        if (this != CustomArmourListMFR.STANDARD_CHAIN_BOOTS)
             return;
 
         while (iteratorMetal.hasNext()) {

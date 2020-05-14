@@ -21,9 +21,12 @@ public class PlayerTagData {
     }
 
     public static NBTTagCompound getPersistedData(EntityPlayer user) {
-        if (!user.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
-            user.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
+        if (user != null){
+            if (!user.getEntityData().hasKey(EntityPlayer.PERSISTED_NBT_TAG)) {
+                user.getEntityData().setTag(EntityPlayer.PERSISTED_NBT_TAG, new NBTTagCompound());
+            }
+            return (NBTTagCompound) (user.getEntityData().getTag(EntityPlayer.PERSISTED_NBT_TAG));
         }
-        return (NBTTagCompound) (user.getEntityData().getTag(EntityPlayer.PERSISTED_NBT_TAG));
+        return null;
     }
 }

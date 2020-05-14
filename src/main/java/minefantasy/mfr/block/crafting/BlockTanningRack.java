@@ -34,7 +34,7 @@ public class BlockTanningRack extends BlockContainer {
         this.tier = tier;
         this.tex = tex;
         String name = "tanner" + tex;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setHardness(1F + 0.5F * tier);

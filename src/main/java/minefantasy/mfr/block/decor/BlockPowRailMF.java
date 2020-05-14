@@ -21,7 +21,7 @@ public class BlockPowRailMF extends BlockRailPowered {
     public BlockPowRailMF(BaseMaterialMFR material, String type) {
         super();
         String name = type + "_rail";
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         this.setHarvestLevel("pickaxe", material.harvestLevel);

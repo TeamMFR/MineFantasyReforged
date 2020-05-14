@@ -28,7 +28,7 @@ public class ItemWorldGenPlacer extends Item {
         this.setCreativeTab(CreativeTabs.MISC);
         setRegistryName("PlaceWorldGenMF");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "PlaceWorldGenMF");
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setHasSubtypes(true);
     }
 

@@ -150,7 +150,7 @@ public class TileEntityCrossbowBench extends TileEntity implements IInventory, I
         if (stock == null || head == null)
             return null;
 
-        return ToolListMFR.crossbow_custom.constructCrossbow(stock, head, mod, muzzle);
+        return ToolListMFR.CROSSBOW_CUSTOM.constructCrossbow(stock, head, mod, muzzle);
     }
 
     @Override

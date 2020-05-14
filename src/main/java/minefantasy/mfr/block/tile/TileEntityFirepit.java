@@ -53,10 +53,10 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
             Item i = input.getItem();
             if (i == Items.STICK)
                 return 600;// 30Sec
-            if (i == ComponentListMFR.plank || i == ComponentListMFR.plank_cut) {
+            if (i == ComponentListMFR.PLANK || i == ComponentListMFR.PLANK_CUT) {
                 return (int) (200 * CustomToolHelper.getBurnModifier(input));
             }
-            if (i == ComponentListMFR.plank_pane) {
+            if (i == ComponentListMFR.PLANK_PANE) {
                 return (int) (600 * CustomToolHelper.getBurnModifier(input));
             }
 
@@ -243,7 +243,7 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
                     chance += (int) ((float) skill / 4);
                 }
                 boolean success = (rand.nextFloat() * 100) < chance;
-                ItemStack creation = success ? result.copy() : new ItemStack(FoodListMFR.burnt_food);
+                ItemStack creation = success ? result.copy() : new ItemStack(FoodListMFR.BURNT_FOOD);
                 dropItem(player, creation);
                 SkillList.provisioning.addXP(player, success ? 2 : 1);
                 return true;

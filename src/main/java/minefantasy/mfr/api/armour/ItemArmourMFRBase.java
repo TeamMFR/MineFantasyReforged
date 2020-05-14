@@ -208,7 +208,7 @@ public class ItemArmourMFRBase extends ItemArmor implements ISpecialArmor, IArmo
     }
 
     @Override
-    public String getSuitWeigthType(ItemStack item) {
+    public String getSuitWeightType(ItemStack item) {
         return design.getGroup();
     }
 

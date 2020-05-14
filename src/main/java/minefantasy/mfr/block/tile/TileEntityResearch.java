@@ -132,10 +132,10 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
 
     private void addProgress(EntityPlayer user) {
         ItemStack held = user.getHeldItemMainhand();
-        if (held != null && (held.getItem() == ComponentListMFR.talisman_lesser
-                || held.getItem() == ComponentListMFR.talisman_greater)) {
+        if (held != null && (held.getItem() == ComponentListMFR.TALISMAN_LESSER
+                || held.getItem() == ComponentListMFR.TALISMAN_GREATER)) {
             progress = maxProgress;
-            if (!user.capabilities.isCreativeMode && held.getItem() == ComponentListMFR.talisman_lesser) {
+            if (!user.capabilities.isCreativeMode && held.getItem() == ComponentListMFR.TALISMAN_LESSER) {
                 held.shrink(1);
                 if (held.getCount() <= 0) {
                     user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);

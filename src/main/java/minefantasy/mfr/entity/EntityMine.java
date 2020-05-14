@@ -79,7 +79,7 @@ public class EntityMine extends Entity {
             setDead();
             user.swingArm(hand);
             if (!world.isRemote) {
-                ItemStack item = ToolListMFR.mine_custom.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
+                ItemStack item = ToolListMFR.MINE_CUSTOM.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
                 if (!user.inventory.addItemStackToInventory(item)) {
                     this.entityDropItem(item, 0.0F);
                 }

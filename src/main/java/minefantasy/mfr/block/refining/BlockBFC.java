@@ -30,7 +30,7 @@ public class BlockBFC extends BlockContainer {
 
     public BlockBFC() {
         super(Material.ANVIL);
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName("MF_BlastChamber");
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "blastfurnchamber");
         this.setSoundType(SoundType.METAL);

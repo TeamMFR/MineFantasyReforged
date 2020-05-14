@@ -16,7 +16,7 @@ public abstract class BlockMeta extends Block {
     public BlockMeta(String name, Material material, String... names) {
         super(material);
         this.names = names;
-        GameRegistry.findRegistry(Block.class).register(this);
+
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
         if (material == Material.ROCK) {

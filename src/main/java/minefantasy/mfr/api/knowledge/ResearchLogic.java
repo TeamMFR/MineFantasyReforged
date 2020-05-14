@@ -42,13 +42,16 @@ public class ResearchLogic {
     }
 
     public static boolean hasInfoUnlocked(EntityPlayer player, InformationBase base) {
-        if (base.isPreUnlocked())
-            return base.parentInfo == null || hasInfoUnlocked(player, base.parentInfo);
+        if (player != null){
+            if (base.isPreUnlocked())
+                return base.parentInfo == null || hasInfoUnlocked(player, base.parentInfo);
 
-        NBTTagCompound nbt = getNBT(player);
-        String basename = base.getUnlocalisedName();
-        if (nbt.hasKey("Research_" + basename)) {
-            return nbt.getBoolean("Research_" + basename);
+            NBTTagCompound nbt = getNBT(player);
+            String basename = base.getUnlocalisedName();
+            if (nbt.hasKey("Research_" + basename)) {
+                return nbt.getBoolean("Research_" + basename);
+            }
+            return false;
         }
         return false;
     }
@@ -74,21 +77,24 @@ public class ResearchLogic {
     }
 
     private static NBTTagCompound getNBT(EntityPlayer player) {
-        NBTTagCompound persistant = PlayerTagData.getPersistedData(player);
-        if (!persistant.hasKey(KnowledgeNBT)) {
-            NBTTagCompound tag = new NBTTagCompound();
-            tag.setInteger("Layer", knowledgelyr);
-            persistant.setTag(KnowledgeNBT, tag);
-        }
-        NBTTagCompound load = persistant.getCompoundTag(KnowledgeNBT);
-        if (load.getInteger("Layer") != knowledgelyr) {
-            persistant.removeTag(KnowledgeNBT);
+        if(player != null){
+            NBTTagCompound persistant = PlayerTagData.getPersistedData(player);
+            if (!persistant.hasKey(KnowledgeNBT)) {
+                NBTTagCompound tag = new NBTTagCompound();
+                tag.setInteger("Layer", knowledgelyr);
+                persistant.setTag(KnowledgeNBT, tag);
+            }
+            NBTTagCompound load = persistant.getCompoundTag(KnowledgeNBT);
+            if (load.getInteger("Layer") != knowledgelyr) {
+                persistant.removeTag(KnowledgeNBT);
 
-            NBTTagCompound tag = new NBTTagCompound();
-            tag.setInteger("Layer", knowledgelyr);
-            persistant.setTag(KnowledgeNBT, tag);
+                NBTTagCompound tag = new NBTTagCompound();
+                tag.setInteger("Layer", knowledgelyr);
+                persistant.setTag(KnowledgeNBT, tag);
+            }
+            return load;
         }
-        return load;
+        return null;
     }
 
     /**

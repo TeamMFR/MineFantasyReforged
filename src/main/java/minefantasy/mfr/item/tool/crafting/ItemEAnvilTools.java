@@ -16,7 +16,7 @@ public class ItemEAnvilTools extends Item {
 
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
         this.setMaxDamage(uses);
         setMaxStackSize(1);
     }

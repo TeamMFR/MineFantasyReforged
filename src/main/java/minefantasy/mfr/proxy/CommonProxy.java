@@ -131,36 +131,35 @@ public class CommonProxy implements IGuiHandler, ISmokeHandler{
     public void registerMain() {
         AmmoMechanicsMFR.addHandler(new ArrowFireFlint());
         AmmoMechanicsMFR.addHandler(new ArrowFirerMF());
-        registerTileEntities();
         SmokeMechanics.handler = this;
     }
 
-    protected void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityAnvilMFR.class, "MFR_Anvil");
-        GameRegistry.registerTileEntity(TileEntityCarpenterMFR.class, "MFR_CarpenterBench");
-        GameRegistry.registerTileEntity(TileEntityBombBench.class, "MFR_BombBench");
-        GameRegistry.registerTileEntity(TileEntityCrossbowBench.class, "MFR_CrossbowBench");
-        GameRegistry.registerTileEntity(TileEntityBlastFC.class, "MFR_BlastChamber");
-        GameRegistry.registerTileEntity(TileEntityBlastFH.class, "MFR_BlastHeater");
-        GameRegistry.registerTileEntity(TileEntityCrucible.class, "MFR_Crucible");
-        GameRegistry.registerTileEntity(TileEntityChimney.class, "MFR_Chimney");
-        GameRegistry.registerTileEntity(TileEntityTanningRack.class, "MFR_Tanner");
-        GameRegistry.registerTileEntity(TileEntityForge.class, "MFR_Forge");
-        GameRegistry.registerTileEntity(TileEntityBellows.class, "MFR_Bellows");
-        GameRegistry.registerTileEntity(TileEntityResearch.class, "MFR_Research");
-        GameRegistry.registerTileEntity(TileEntityTrough.class, "MFR_Trough");
-        GameRegistry.registerTileEntity(TileEntityBombPress.class, "MFR_BombPress");
-        GameRegistry.registerTileEntity(TileEntityBloomery.class, "MFR_Bloomery");
-        GameRegistry.registerTileEntity(TileEntityQuern.class, "MFR_Quern");
-        GameRegistry.registerTileEntity(TileEntityFirepit.class, "MFR_Firepit");
-        GameRegistry.registerTileEntity(TileEntityRoast.class, "MFR_SpitRoast");
-        GameRegistry.registerTileEntity(TileEntityBigFurnace.class, "MFR_BigFurnace");
-        GameRegistry.registerTileEntity(TileEntityRack.class, "MFR_Rack");
-        GameRegistry.registerTileEntity(TileEntityAmmoBox.class, "MFR_AmmoBox");
-        GameRegistry.registerTileEntity(TileEntityWorldGenMarker.class, "MFR_WorldGenFlag");
-        GameRegistry.registerTileEntity(TileEntityComponent.class, "MFR_ComponentTile");
-        GameRegistry.registerTileEntity(TileEntityRoad.class, "MFR_Road");
-    }
+//    protected void registerTileEntities() {
+//        GameRegistry.registerTileEntity(TileEntityAnvilMFR.class, "MFR_Anvil");
+//        GameRegistry.registerTileEntity(TileEntityCarpenterMFR.class, "MFR_CarpenterBench");
+//        GameRegistry.registerTileEntity(TileEntityBombBench.class, "MFR_BombBench");
+//        GameRegistry.registerTileEntity(TileEntityCrossbowBench.class, "MFR_CrossbowBench");
+//        GameRegistry.registerTileEntity(TileEntityBlastFC.class, "MFR_BlastChamber");
+//        GameRegistry.registerTileEntity(TileEntityBlastFH.class, "MFR_BlastHeater");
+//        GameRegistry.registerTileEntity(TileEntityCrucible.class, "MFR_Crucible");
+//        GameRegistry.registerTileEntity(TileEntityChimney.class, "MFR_Chimney");
+//        GameRegistry.registerTileEntity(TileEntityTanningRack.class, "MFR_Tanner");
+//        GameRegistry.registerTileEntity(TileEntityForge.class, "MFR_Forge");
+//        GameRegistry.registerTileEntity(TileEntityBellows.class, "MFR_Bellows");
+//        GameRegistry.registerTileEntity(TileEntityResearch.class, "MFR_Research");
+//        GameRegistry.registerTileEntity(TileEntityTrough.class, "MFR_Trough");
+//        GameRegistry.registerTileEntity(TileEntityBombPress.class, "MFR_BombPress");
+//        GameRegistry.registerTileEntity(TileEntityBloomery.class, "MFR_Bloomery");
+//        GameRegistry.registerTileEntity(TileEntityQuern.class, "MFR_Quern");
+//        GameRegistry.registerTileEntity(TileEntityFirepit.class, "MFR_Firepit");
+//        GameRegistry.registerTileEntity(TileEntityRoast.class, "MFR_SpitRoast");
+//        GameRegistry.registerTileEntity(TileEntityBigFurnace.class, "MFR_BigFurnace");
+//        GameRegistry.registerTileEntity(TileEntityRack.class, "MFR_Rack");
+//        GameRegistry.registerTileEntity(TileEntityAmmoBox.class, "MFR_AmmoBox");
+//        GameRegistry.registerTileEntity(TileEntityWorldGenMarker.class, "MFR_WorldGenFlag");
+//        GameRegistry.registerTileEntity(TileEntityComponent.class, "MFR_ComponentTile");
+//        GameRegistry.registerTileEntity(TileEntityRoad.class, "MFR_Road");
+//    }
 
     public void preInit(FMLPreInitializationEvent e) {
     }
@@ -172,11 +171,6 @@ public class CommonProxy implements IGuiHandler, ISmokeHandler{
         MinecraftForge.EVENT_BUS.register(new CombatMechanics());
         MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
         MinecraftForge.EVENT_BUS.register(new ArrowHandlerMF());
-    }
-
-
-    public void init(FMLInitializationEvent e){
-
     }
 
     public EntityPlayer getClientPlayer() {

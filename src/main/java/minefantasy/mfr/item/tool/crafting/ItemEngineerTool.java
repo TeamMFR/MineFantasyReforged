@@ -34,7 +34,7 @@ public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMF
 
         setRegistryName(name);
         setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
-        GameRegistry.findRegistry(Item.class).register(this);
+
     }
 
     @Override
@@ -47,10 +47,10 @@ public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMF
             }
             lvl++;
         }
-        if (lvl >= ToolListMFR.rarity.length) {
-            lvl = ToolListMFR.rarity.length - 1;
+        if (lvl >= ToolListMFR.RARITY.length) {
+            lvl = ToolListMFR.RARITY.length - 1;
         }
-        return ToolListMFR.rarity[lvl];
+        return ToolListMFR.RARITY[lvl];
     }
 
     @Override
