@@ -454,7 +454,7 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
             this.generateLeaves();
             this.generateTrunk();
             this.generateLeafNodeBases();
-            this.world.setBlockState(new BlockPos(x, y, z), log.getDefaultState());
+            this.world.setBlockState(pos, log.getDefaultState());
             this.world = null; // Fix vanilla Mem leak, holds latest world
             return true;
         }

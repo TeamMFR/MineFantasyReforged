@@ -88,6 +88,6 @@ public class ItemHide extends ItemComponentMFR {
     }
 
     public boolean isCauldron(World world, BlockPos pos) {
-        return world.getBlockState(pos) == Blocks.CAULDRON;
+        return world.getBlockState(pos).getBlock() == Blocks.CAULDRON;
     }
 }

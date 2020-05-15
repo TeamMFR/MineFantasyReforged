@@ -152,7 +152,7 @@ public class TileEntityTanningRack extends TileEntity implements IInventory, ITi
         if (world == null) {
             return tex.equalsIgnoreCase("metal");
         }
-        return world.getBlockState(pos) instanceof BlockEngineerTanner;
+        return world.getBlockState(pos).getBlock() instanceof BlockEngineerTanner;
     }
 
     private void tryDecrMainItem(EntityPlayer player) {
@@ -335,7 +335,7 @@ public class TileEntityTanningRack extends TileEntity implements IInventory, ITi
     }
 
     private boolean isShabbyRack() {
-        return world.getBlockState(pos) == BlockListMFR.TANNER;
+        return world.getBlockState(pos).getBlock() == BlockListMFR.TANNER;
     }
 
     private void dropItem(ItemStack itemstack) {

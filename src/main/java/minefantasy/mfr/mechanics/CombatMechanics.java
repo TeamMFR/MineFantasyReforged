@@ -687,7 +687,7 @@ public class CombatMechanics {
 
             Iterable<ItemStack> armour = user.getArmorInventoryList();
             for (ItemStack stack: armour) {
-                if (stack != null) {
+                if (stack != null && !stack.isEmpty() && stack.getItem() != Items.AIR) {
                     int dura = (int) (dam) + 1;
                     if (!user.world.isRemote && !isArmourFireImmune(stack, source)) {
                         MFRLogUtil.logDebug("Armour Flame Damage: " + dura);
@@ -705,7 +705,7 @@ public class CombatMechanics {
             }
 
             for (ItemStack stack: armour) {
-                if (stack != null) {
+                if (stack != null && !stack.isEmpty() && stack.getItem() != Items.AIR) {
                     int dura = (int) (dam) + 1;
                     if (!user.world.isRemote && !isArmourFireImmune(stack, source)) {
                         MFRLogUtil.logDebug("Armour Flame Damage: " + dura);

@@ -511,7 +511,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
     }
 
     private boolean isForge(int x, int y, int z) {
-        return world.getBlockState(pos.add(x,y,z)) instanceof BlockForge;
+        return world.getBlockState(pos.add(x,y,z)).getBlock() instanceof BlockForge;
     }
 
     private void syncData() {

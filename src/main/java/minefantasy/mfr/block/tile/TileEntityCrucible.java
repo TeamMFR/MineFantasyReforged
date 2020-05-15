@@ -217,7 +217,7 @@ public class TileEntityCrucible extends TileEntity implements IInventory, ISided
     }
 
     private boolean isFirebrick(int x, int y, int z) {
-        return world.getBlockState(pos.add(x,y,z)) == BlockListMFR.FIREBRICKS;
+        return world.getBlockState(pos.add(x,y,z)).getBlock() == BlockListMFR.FIREBRICKS;
     }
     // INVENTORY
 

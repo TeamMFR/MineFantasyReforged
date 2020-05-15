@@ -2,17 +2,22 @@ package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.item.gadget.ItemBomb;
+import minefantasy.mfr.item.gadget.ItemMine;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
@@ -493,24 +498,6 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         if (tile != null) {
 
             tile.setLootTable(lootType, 5 + rand.nextInt(5));
-        }
-    }
-
-    private void placeAmmoBox(BlockPos pos, int d, ResourceLocation dwarvenAmmo) {
-        placeBlock(BlockListMFR.AMMO_BOX_BASIC, pos, d);
-        TileEntityAmmoBox tile = (TileEntityAmmoBox) getTileEntity(pos, direction);
-        
-        // FIXME
-        if (tile != null) {
-            ItemStack ammo = ChestGenHooks.getOneItem(dwarvenAmmo, rand);
-            tile.setMaterial(WoodMaterial.getMaterial("RefinedWood"));
-            tile.ammo = ammo;
-            tile.stock = ammo.getMaxStackSize() * (rand.nextInt(2) + 1)
-                    + (ammo.getCount() > 1 ? rand.nextInt(ammo.getCount()) : 0);
-            if (ammo.getItem() instanceof ItemBomb || ammo.getItem() instanceof ItemMine) {
-                tile.stock = Math.max(1, tile.stock / 4);
-            }
-            ammo = null;
         }
     }
 

@@ -37,7 +37,7 @@ public final class CreativeTabMFR extends CreativeTabs {
             case 2:
                 return (CustomToolListMFR.STANDARD_SWORD).construct("Steel", "OakWood");
             case 3:
-                return new ItemStack(CustomArmourListMFR.STANDARD_PLATE_HELMET);
+                return CustomArmourListMFR.STANDARD_PLATE_HELMET.construct("Steel");
             case 4:
                 return CustomToolListMFR.STANDARD_BOW.construct("Steel", "OakWood");
             case 5:

@@ -141,7 +141,7 @@ public class Shockwave {// Explosion
                 d7 = entity.posZ - this.explosionZ;
                 double d9 = MathHelper.sqrt(d5 * d5 + d6 * d6 + d7 * d7);
 
-                if (d9 != 0.0D) {
+                if (d9 != 0.0D && entity.getCollisionBoundingBox() != null) {
                     d5 /= d9;
                     d6 /= d9;
                     d7 /= d9;

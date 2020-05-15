@@ -574,7 +574,7 @@ public class EventManagerMFR {
 
     @SubscribeEvent
     public void useHoe(UseHoeEvent event) {
-        Block block = (Block) event.getWorld().getBlockState(event.getPos());
+        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
         if (block != Blocks.FARMLAND && FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
             event.getEntityPlayer().swingArm(event.getEntityPlayer().getActiveHand());
             event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL, SoundCategory.AMBIENT, 12, 1F );
@@ -585,7 +585,7 @@ public class EventManagerMFR {
     @SubscribeEvent
     public void breakBlock(BreakEvent event) {
         // Block block = event.block;
-        Block base = (Block) event.getWorld().getBlockState(event.getPos().add(0,-1,0));
+        Block base = event.getWorld().getBlockState(event.getPos().down()).getBlock();
         // int meta = event.blockMetadata;
 
         if (base != null && base == Blocks.FARMLAND && FarmingHelper.didHarvestRuinBlock(event.getWorld(), false)) {

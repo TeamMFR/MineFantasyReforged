@@ -131,7 +131,7 @@ public class TongsHelper {
     }
 
     public static boolean isCauldron(World world, BlockPos pos) {
-        return world.getBlockState(pos) == Blocks.CAULDRON;
+        return world.getBlockState(pos).getBlock() == Blocks.CAULDRON;
     }
 
     public static float getQuenced(World world, BlockPos pos) {

@@ -611,7 +611,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
             float f2 = 0.91F;
 
             if (this.onGround) {
-                f2 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
+				f2 = this.world
+						.getBlockState(new BlockPos(MathHelper.floor(this.posX),
+								MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
 
             float f3 = 0.16277136F / (f2 * f2 * f2);

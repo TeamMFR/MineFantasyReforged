@@ -66,8 +66,8 @@ public class BlockRoad extends BlockContainer {
 
     @Override
     public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
-        if (world.getBlockState(pos.add(0,-1,0)) == Blocks.GRASS) {
-            world.setBlockState(pos.add(0,-1,0), (IBlockState) Blocks.GRASS, 2);
+        if (world.getBlockState(pos.add(0,-1,0)).getBlock() == Blocks.GRASS) {
+            world.setBlockState(pos.add(0,-1,0),  Blocks.GRASS.getDefaultState(), 2);
         }
         super.updateTick(world, pos, state, rand);
     }

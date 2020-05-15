@@ -150,7 +150,7 @@ public abstract class StructureModuleMFR {
      */
     public void placeBlock(Block block, BlockPos pos, int dir) {
         BlockPos offset = offsetPos(pos, dir);
-        world.setBlockState(pos, (IBlockState) block, 2);
+        world.setBlockState(pos, block.getDefaultState(), 2);
     }
 
     public void placeBlockIfAir(IBlockState state, BlockPos pos) {
@@ -278,9 +278,9 @@ public abstract class StructureModuleMFR {
     protected void mapStructure(BlockPos pos, int dir, Class<? extends StructureModuleMFR> piece, int delay) {
         BlockPos offset = offsetPos(pos, this.direction);
 
-        Block block = (Block) world.getBlockState(offset);
+        Block block = world.getBlockState(offset).getBlock();
 
-        world.setBlockState(offset, (IBlockState) BlockListMFR.WG_MARK, 2);
+        world.setBlockState(offset, BlockListMFR.WG_MARK.getDefaultState(), 2);
         TileEntity tile = world.getTileEntity(offset);
         if (tile != null && tile instanceof TileEntityWorldGenMarker) {
             ((TileEntityWorldGenMarker) tile).className = piece.getName();

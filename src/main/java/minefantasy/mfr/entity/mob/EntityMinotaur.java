@@ -266,7 +266,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
                     for (int z = -radius; z <= radius; z++) {
                         BlockPos pos = new BlockPos(posX + x, posY + y, posZ + z);
                         if (rand.nextInt(10) == 0) {
-                            if (world.getBlockState(pos) == BlockListMFR.BERRY_BUSH && world.getBlockState(pos) == Blocks.AIR) {
+                            if (world.getBlockState(pos).getBlock() == BlockListMFR.BERRY_BUSH && world.getBlockState(pos).getBlock() == Blocks.AIR) {
                                 getNavigator().tryMoveToXYZ(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0.6F);
                                 return;
                             }

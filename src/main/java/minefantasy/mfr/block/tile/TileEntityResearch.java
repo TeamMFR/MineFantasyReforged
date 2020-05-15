@@ -157,7 +157,7 @@ public class TileEntityResearch extends TileEntity implements IInventory, IBasic
         for (int x = -8; x <= 8; x++) {
             for (int y = -8; y <= 8; y++) {
                 for (int z = -8; z <= 8; z++) {
-                    if (world.getBlockState(pos.add(x,y,z)) == Blocks.BOOKSHELF) {
+                    if (world.getBlockState(pos.add(x,y,z)).getBlock() == Blocks.BOOKSHELF) {
                         ++books;
                     }
                 }

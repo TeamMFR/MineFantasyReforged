@@ -49,8 +49,8 @@ public class BlockCogwork extends BlockDirectional {
 
     public boolean tryBuild(EntityPlayer builder, World world, BlockPos pos) {
         if (isMain && PowerArmour.isStationBlock(world, pos.add(0,2,0))
-                && world.getBlockState(pos.add(0,-1,0)) == BlockListMFR.COGWORK_LEGS
-                && world.getBlockState(pos.add(0,1,0)) == BlockListMFR.COGWORK_HELM) {
+                && world.getBlockState(pos.add(0,-1,0)).getBlock() == BlockListMFR.COGWORK_LEGS
+                && world.getBlockState(pos.add(0,1,0)).getBlock() == BlockListMFR.COGWORK_HELM) {
             if (!world.isRemote) {
                 world.setBlockState(pos, getDefaultState());
                 world.setBlockState(pos.add(0,-1,0), getDefaultState());

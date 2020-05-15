@@ -45,26 +45,26 @@ public class ItemCustomArmour extends ItemArmourMFR {
         }
     }
 
-    public static void addSuits(List list, String material) {
-        list.add(CustomArmourListMFR.STANDARD_CHAIN_HELMET.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_CHAIN_CHEST.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_CHAIN_LEGS.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_CHAIN_BOOTS.construct(material));
+    public static void addSuits(List<ItemStack> list, String material) {
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_HELMET).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_CHEST).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_LEGS).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_BOOTS).construct(material));
 
-        list.add(CustomArmourListMFR.STANDARD_SCALE_HELMET.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_SCALE_CHEST.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_SCALE_LEGS.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_SCALE_BOOTS.construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_HELMET).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_CHEST).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_LEGS).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_BOOTS).construct(material));
 
-        list.add(CustomArmourListMFR.STANDARD_SPLINT_HELMET.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_SPLINT_CHEST.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_SPLINT_LEGS.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_SPLINT_BOOTS.construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_HELMET).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_CHEST).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_LEGS).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_BOOTS).construct(material));
 
-        list.add(CustomArmourListMFR.STANDARD_PLATE_HELMET.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_PLATE_CHEST.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_PLATE_LEGS.construct(material));
-        list.add(CustomArmourListMFR.STANDARD_PLATE_BOOTS.construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_HELMET).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_CHEST).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_LEGS).construct(material));
+        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_BOOTS).construct(material));
     }
 
     public ItemCustomArmour modifyRating(float rating) {

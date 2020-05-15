@@ -26,7 +26,7 @@ public class WorldGenBush extends WorldGenerator {
                     position.getY() + rand.nextInt(4) - rand.nextInt(4),
                     position.getZ() + rand.nextInt(8) - rand.nextInt(8));
 
-            if (world.isAirBlock(pos) && world.getBlockState(pos.add(0,-1,0)) == Blocks.GRASS
+            if (world.isAirBlock(pos) && world.getBlockState(pos.add(0,-1,0)).getBlock() == Blocks.GRASS
                     && block.canPlaceBlockAt(world, pos)) {
                 world.setBlockState(pos, (IBlockState) block, meta);
             }
