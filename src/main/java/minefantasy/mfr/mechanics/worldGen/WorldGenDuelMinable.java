@@ -3,6 +3,7 @@ package minefantasy.mfr.mechanics.worldGen;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -17,15 +18,15 @@ public class WorldGenDuelMinable extends WorldGenerator {
      * The number of blocks to generate.
      */
     private int veinSize;
-    private Block bed;
+    private Predicate<IBlockState> bed;
     private int oreMeta, specialMeta;
     private float chanceForSpecial;
 
     public WorldGenDuelMinable(Block main, int number, Block extra, float chance) {
-        this(main, 0, number, Blocks.STONE, extra, 0, chance);
+        this(main, 0, number, BlockMatcher.forBlock(Blocks.STONE), extra, 0, chance);
     }
 
-    public WorldGenDuelMinable(Block main, int mainMeta, int number, Block target, Block extra, int extraMeta,
+    public WorldGenDuelMinable(Block main, int mainMeta, int number, Predicate<IBlockState> target, Block extra, int extraMeta,
                                float chance) {
         this.ore = main;
         this.oreMeta = mainMeta;
@@ -71,7 +72,7 @@ public class WorldGenDuelMinable extends WorldGenerator {
 
                                 BlockPos pos = new BlockPos(k2, l2, i3);
                                 if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D
-                                        && world.getBlockState(pos).getBlock().isReplaceableOreGen(world.getBlockState(pos), world, pos, (Predicate<IBlockState>) bed)) {
+                                        && world.getBlockState(pos).getBlock().isReplaceableOreGen(world.getBlockState(pos), world, pos, bed)) {
                                     if (seed.nextFloat() < chanceForSpecial) {
                                         world.setBlockState(pos, (IBlockState) this.specialOre, specialMeta);// Special Block
                                     } else {

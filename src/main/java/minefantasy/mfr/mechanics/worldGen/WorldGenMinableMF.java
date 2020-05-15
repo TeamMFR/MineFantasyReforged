@@ -3,6 +3,7 @@ package minefantasy.mfr.mechanics.worldGen;
 import com.google.common.base.Predicate;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -18,20 +19,20 @@ public class WorldGenMinableMF extends WorldGenerator {
 	 * The number of blocks to generate.
 	 */
 	private int numberOfBlocks;
-	private Block beddingBlock;
+	private Predicate<IBlockState> beddingBlock;
 	private int mineableBlockMeta;
 
 	public WorldGenMinableMF(Block ore, int size) {
-		this(ore, size, Blocks.STONE);
+		this(ore, size, BlockMatcher.forBlock(Blocks.STONE));
 	}
 
-	public WorldGenMinableMF(Block ore, int size, Block bed) {
+	public WorldGenMinableMF(Block ore, int size, Predicate<IBlockState> bed) {
 		this.oreBlock = ore;
 		this.numberOfBlocks = size;
 		this.beddingBlock = bed;
 	}
 
-	public WorldGenMinableMF(Block block, int meta, int number, Block target) {
+	public WorldGenMinableMF(Block block, int meta, int number, Predicate<IBlockState> target) {
 		this(block, number, target);
 		this.mineableBlockMeta = meta;
 	}
@@ -74,11 +75,9 @@ public class WorldGenMinableMF extends WorldGenerator {
 								BlockPos orePos = new BlockPos(oreX, oreY, oreZ);
 								double d14 = (oreZ + 0.5D - d8) / (d10 / 2.0D);
 
-								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && world.getBlockState(orePos).getBlock()
-										.isReplaceableOreGen(world.getBlockState(orePos), world, orePos,
-												(Predicate<IBlockState>) beddingBlock)) {
+								if (d12 * d12 + d13 * d13 + d14 * d14 < 1.0D && world.getBlockState(orePos).getBlock().isReplaceableOreGen(world.getBlockState(orePos), world, orePos, beddingBlock)) {
 									success = true;
-									world.setBlockState(orePos, (IBlockState) this.oreBlock, 2);
+									world.setBlockState(orePos, this.oreBlock.getDefaultState(), 2);
 								}
 							}
 						}

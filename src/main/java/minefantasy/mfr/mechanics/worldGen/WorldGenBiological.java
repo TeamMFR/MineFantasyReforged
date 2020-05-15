@@ -1,10 +1,12 @@
 package minefantasy.mfr.mechanics.worldGen;
 
+import com.google.common.base.Predicate;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
@@ -71,7 +73,7 @@ public class WorldGenBiological {
 		}
 	}
 
-	private static void generateOreWithNeighbour(Random seed, int chunkX, int chunkZ, World world, Block ore, Block bed,
+	private static void generateOreWithNeighbour(Random seed, int chunkX, int chunkZ, World world, Block ore, Predicate<IBlockState> bed,
 			Material neighbour, int size, int frequencyMin, int frequencyMax, float rarity, int layerMin,
 			int layerMax) {
 		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
@@ -81,14 +83,14 @@ public class WorldGenBiological {
 						chunkZ * 16 + seed.nextInt(16));
 
 				if (isNeibourNear(world, pos, neighbour)) {
-					if ((new WorldGenMinableMF(ore, size, bed)).generate(world, seed, pos)) {
+					if ((new 	WorldGenMinableMF(ore, size, bed)).generate(world, seed, pos)) {
 					}
 				}
 			}
 		}
 	}
 
-	private static void generateOreWithNeighbour(Random seed, int chunkX, int chunkZ, World world, Block ore, Block bed,
+	private static void generateOreWithNeighbour(Random seed, int chunkX, int chunkZ, World world, Block ore, Predicate<IBlockState> bed,
 			Block neighbour, int size, int frequencyMin, int frequencyMax, float rarity, int layerMin, int layerMax) {
 		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
 		if (seed.nextFloat() < rarity) {
