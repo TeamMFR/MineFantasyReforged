@@ -26,7 +26,6 @@ public class HitSoundPacket extends PacketMF {
     @Override
     public void process(ByteBuf packet, EntityPlayer player) {
         entId = packet.readInt();
-        Objects.equals(sound.getRegistryName(), ByteBufUtils.readUTF8String(packet));
         Entity entity = player.world.getEntityByID(entId);
         if (entity != null) {
             if (ConfigClient.playHitsound) {

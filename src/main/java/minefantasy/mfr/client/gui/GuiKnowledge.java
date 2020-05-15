@@ -236,13 +236,10 @@ public class GuiKnowledge extends GuiScreen {
                 GuiKnowledge.field_146573_x = field_146560_B - 1;
             }
 
+            GL11.glDisable(GL11.GL_DEPTH_TEST);
             this.drawDefaultBackground();
             this.renderMainPage(mx, my, f);
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
             this.drawOverlay();
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
         }
         if (buttonList.get(2) != null) {
             ((GuiButton) buttonList.get(2)).visible = selected != null;
@@ -311,7 +308,6 @@ public class GuiKnowledge extends GuiScreen {
         GL11.glTranslatef(k1, l1, -200.0F);
         GL11.glScalef(1.0F / GuiKnowledge.field_146570_r, 1.0F / GuiKnowledge.field_146570_r, 0.0F);
         GL11.glEnable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
 
@@ -387,7 +383,6 @@ public class GuiKnowledge extends GuiScreen {
         float f4 = (mx - k1) * GuiKnowledge.field_146570_r;
         float f5 = (my - l1) * GuiKnowledge.field_146570_r;
         RenderHelper.enableGUIStandardItemLighting();
-        GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_COLOR_MATERIAL);
         int i5;
@@ -442,11 +437,9 @@ public class GuiKnowledge extends GuiScreen {
                     GL11.glColor4f(f6, f6, f6, 1.0F);
                 }
 
-                GL11.glDisable(GL11.GL_LIGHTING); // Forge: Make sure Lighting is disabled. Fixes MC-33065
                 GL11.glEnable(GL11.GL_CULL_FACE);
                 renderitem.renderItemAndEffectIntoGUI(achievement2.theItemStack, i5 + 3, j5 + 3);
                 GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                GL11.glDisable(GL11.GL_LIGHTING);
 
 
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -534,7 +527,6 @@ public class GuiKnowledge extends GuiScreen {
         }
 
         GL11.glEnable(GL11.GL_DEPTH_TEST);
-        GL11.glEnable(GL11.GL_LIGHTING);
         RenderHelper.disableStandardItemLighting();
     }
 

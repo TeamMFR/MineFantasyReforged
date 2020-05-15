@@ -37,7 +37,7 @@ public class SkillPacket extends PacketMF {
         int skillMaxXp = packet.readInt();
 
         username = UUID.fromString(ByteBufUtils.readUTF8String(packet));
-        if (username != null && player.getCommandSenderEntity().equals(username)) {
+        if (username != null && player.getCommandSenderEntity() != null && player.getCommandSenderEntity().equals(username)) {
             NBTTagCompound tag = RPGElements.getSkill(player, name);
             tag.setInteger("level", skillLvl);
             tag.setInteger("xp", skillXp);
