@@ -605,7 +605,7 @@ public class EventManagerMFR {
     public void playerMineBlock(BlockEvent.BreakEvent event) {
         EntityPlayer player = event.getPlayer();
         ItemStack held = player.getHeldItemMainhand();
-        Block broken = (Block) event.getState();
+        Block broken = event.getState().getBlock();
 
         if (broken != null && ConfigHardcore.HCCallowRocks) {
             if (held == null) {

@@ -21,31 +21,9 @@ public class HitSoundGenerator {
         if (WC != null) {
             type = WC.getSound();
             if (!target.world.isRemote) {
-                ((WorldServer) target.world).getEntityTracker().sendToTracking(target, new HitSoundPacket(getSound(type,material), target).generatePacket());
+                ((WorldServer) target.world).getEntityTracker().sendToTracking(target, new HitSoundPacket(type,material, target).generatePacket());
             }
         }
-    }
-
-    public static SoundEvent getSound (String type, String material){
-        if (type.equals("blunt") && material.equals("wood")){
-            return SoundsMFR.BLUNT_WOOD;
-        }
-        if (type.equals("blunt") && material.equals("metal")){
-            return SoundsMFR.BLUNT_METAL;
-        }
-        if (type.equals("blunt") && material.equals("stone")){
-            return SoundsMFR.BLUNT_STONE;
-        }
-        if (type.equals("blade") && material.equals("wood")){
-            return SoundsMFR.BLADE_WOOD;
-        }
-        if (type.equals("blade") && material.equals("metal")){
-            return SoundsMFR.BLADE_METAL;
-        }
-        if (type.equals("blade") && material.equals("stone")){
-            return SoundsMFR.BLADE_STONE;
-        }
-        return null;
     }
 
     public static String getMaterial(String material, ItemStack itemstack) {

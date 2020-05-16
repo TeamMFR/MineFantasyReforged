@@ -6,6 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -29,7 +30,7 @@ public class TextureHelperMFR {
         if (resourcelocation == null) {
             MFRLogUtil.logDebug("MineFantasy: Added Resource: " + directory);
 
-            resourcelocation = new ResourceLocation("minefantasy2", directory);
+            resourcelocation = new ResourceLocation(MineFantasyReborn.MOD_ID, directory);
             resourceList.put(directory, resourcelocation);
         }
 

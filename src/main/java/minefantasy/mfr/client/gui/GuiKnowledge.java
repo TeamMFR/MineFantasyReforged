@@ -42,11 +42,11 @@ public class GuiKnowledge extends GuiScreen {
     private static final int field_146571_z = InformationList.minDisplayRow * 24 - 112;
     private static final int field_146559_A = InformationList.maxDisplayColumn * 24 - 77;
     private static final int field_146560_B = InformationList.maxDisplayRow * 24 - 77;
-    private static final ResourceLocation screenTex = new ResourceLocation("minefantasy2:textures/gui/knowledge/knowledge.png");
-    private static final ResourceLocation buyTex = new ResourceLocation("minefantasy2:textures/gui/knowledge/purchase.png");
-    private static final ResourceLocation skillTex = new ResourceLocation("minefantasy2:textures/gui/knowledge/skilllist.png");
-    protected static int field_146555_f = 256;
-    protected static int field_146557_g = 202;
+    private static final ResourceLocation screenTex = new ResourceLocation(MineFantasyReborn.MOD_ID,"textures/gui/knowledge/knowledge.png");
+    private static final ResourceLocation buyTex = new ResourceLocation(MineFantasyReborn.MOD_ID,"textures/gui/knowledge/purchase.png");
+    private static final ResourceLocation skillTex = new ResourceLocation(MineFantasyReborn.MOD_ID,"textures/gui/knowledge/skilllist.png");
+    protected static int informationWidth = 256;
+    protected static int informationHeight = 202;
     protected static int field_146563_h;
     protected static int field_146564_i;
     protected static float field_146570_r = 1.0F;
@@ -99,16 +99,16 @@ public class GuiKnowledge extends GuiScreen {
      */
     @Override
     public void initGui() {
-        int i1 = (this.width - GuiKnowledge.field_146555_f) / 2 + offsetByX;
-        int j1 = (this.height - GuiKnowledge.field_146557_g) / 2 + offsetByY;
+        int i1 = (this.width - GuiKnowledge.informationWidth) / 2 + offsetByX;
+        int j1 = (this.height - GuiKnowledge.informationHeight) / 2 + offsetByY;
 
         this.buttonList.clear();
         this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 101, I18n.format("gui.done")));
-        this.buttonList.add(button = new GuiButton(2, (width - field_146555_f) / 2 + 24, height / 2 + 101, 125, 20,
+        this.buttonList.add(button = new GuiButton(2, (width - informationWidth) / 2 + 24, height / 2 + 101, 125, 20,
                 InformationPage.getTitle(currentPage)));
 
-        int purchasex = i1 + (field_146555_f - buyWidth) / 2;
-        int purchasey = j1 + (field_146557_g - buyHeight) / 2;
+        int purchasex = i1 + (informationWidth - buyWidth) / 2;
+        int purchasey = j1 + (informationHeight - buyHeight) / 2;
         // PURCHASE SCREEN
         this.buttonList.add(new GuiOptionButton(3, purchasex + 19, purchasey + 47, I18n.format("gui.purchase", new Object[0])));
         this.buttonList.add(new GuiOptionButton(4, purchasex + 125, purchasey + 47, I18n.format("gui.cancel", new Object[0])));
@@ -174,8 +174,8 @@ public class GuiKnowledge extends GuiScreen {
             int k;
 
             if (selected == null && Mouse.isButtonDown(0)) {
-                k = (this.width - GuiKnowledge.field_146555_f) / 2 + offsetByX;
-                int l = (this.height - GuiKnowledge.field_146557_g) / 2 + offsetByY;
+                k = (this.width - GuiKnowledge.informationWidth) / 2 + offsetByX;
+                int l = (this.height - GuiKnowledge.informationHeight) / 2 + offsetByY;
                 int i1 = k + 8;
                 int j1 = l + 17;
 
@@ -210,10 +210,10 @@ public class GuiKnowledge extends GuiScreen {
 
             if (GuiKnowledge.field_146570_r != f4) {
                 float f6 = f4 - GuiKnowledge.field_146570_r;
-                float f5 = f4 * GuiKnowledge.field_146555_f;
-                float f1 = f4 * GuiKnowledge.field_146557_g;
-                float f2 = GuiKnowledge.field_146570_r * GuiKnowledge.field_146555_f;
-                float f3 = GuiKnowledge.field_146570_r * GuiKnowledge.field_146557_g;
+                float f5 = f4 * GuiKnowledge.informationWidth;
+                float f1 = f4 * GuiKnowledge.informationHeight;
+                float f2 = GuiKnowledge.field_146570_r * GuiKnowledge.informationWidth;
+                float f3 = GuiKnowledge.field_146570_r * GuiKnowledge.informationHeight;
                 GuiKnowledge.field_146567_u -= (f2 - f5) * 0.5F;
                 GuiKnowledge.field_146566_v -= (f3 - f1) * 0.5F;
                 GuiKnowledge.field_146565_w = GuiKnowledge.field_146569_s = GuiKnowledge.field_146567_u;
@@ -270,8 +270,8 @@ public class GuiKnowledge extends GuiScreen {
     }
 
     protected void drawOverlay() {
-        int i = (this.width - GuiKnowledge.field_146555_f) / 2 + offsetByX;
-        int j = (this.height - GuiKnowledge.field_146557_g) / 2 + offsetByY;
+        int i = (this.width - GuiKnowledge.informationWidth) / 2 + offsetByX;
+        int j = (this.height - GuiKnowledge.informationHeight) / 2 + offsetByY;
 
         this.fontRenderer.drawString(I18n.format("gui.information", new Object[0]), i + 15, j + 5, 4210752);
     }
@@ -298,8 +298,8 @@ public class GuiKnowledge extends GuiScreen {
             l = field_146560_B - 1;
         }
 
-        int i1 = (this.width - GuiKnowledge.field_146555_f) / 2 + offsetByX;
-        int j1 = (this.height - GuiKnowledge.field_146557_g) / 2 + offsetByY;
+        int i1 = (this.width - GuiKnowledge.informationWidth) / 2 + offsetByX;
+        int j1 = (this.height - GuiKnowledge.informationHeight) / 2 + offsetByY;
         int k1 = i1 + 16;
         int l1 = j1 + 17;
         this.zLevel = 0.0F;
@@ -455,7 +455,7 @@ public class GuiKnowledge extends GuiScreen {
         GL11.glPopMatrix();
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(screenTex);
-        this.drawTexturedModalRect(i1, j1, 0, 0, GuiKnowledge.field_146555_f, GuiKnowledge.field_146557_g);
+        this.drawTexturedModalRect(i1, j1, 0, 0, GuiKnowledge.informationWidth, GuiKnowledge.informationHeight);
 
         this.zLevel = 0.0F;
         GL11.glDepthFunc(GL11.GL_LEQUAL);
@@ -463,8 +463,8 @@ public class GuiKnowledge extends GuiScreen {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         if (selected != null) {
-            int purchasex = i1 + (field_146555_f - buyWidth) / 2;
-            int purchasey = j1 + (field_146557_g - buyHeight) / 2;
+            int purchasex = i1 + (informationWidth - buyWidth) / 2;
+            int purchasey = j1 + (informationHeight - buyHeight) / 2;
             renderPurchaseScreen(purchasex, purchasey, mx, my);
         }
         drawSkillList();
@@ -558,8 +558,8 @@ public class GuiKnowledge extends GuiScreen {
             this.drawTexturedModalRect(x, y + 27 + (size * 19), 0, 46, buyWidth, 26);// Bottom
 
             if (buttonList.get(2) != null && buttonList.get(3) != null) {
-                int j1 = (this.height - GuiKnowledge.field_146557_g) / 2;
-                int purchasey = j1 + (field_146557_g - buyHeight) / 2;
+                int j1 = (this.height - GuiKnowledge.informationHeight) / 2;
+                int purchasey = j1 + (informationHeight - buyHeight) / 2;
 
                 int offset = -19;
                 if (requirements != null) {
@@ -599,8 +599,8 @@ public class GuiKnowledge extends GuiScreen {
 
         int skillWidth = 143;
         int skillHeight = 156;
-        int x = (this.width - GuiKnowledge.field_146555_f) / 2 - skillWidth + offsetByX;
-        int y = (this.height - GuiKnowledge.field_146557_g) / 2 + offsetByY;
+        int x = (this.width - GuiKnowledge.informationWidth) / 2 - skillWidth + offsetByX;
+        int y = (this.height - GuiKnowledge.informationHeight) / 2 + offsetByY;
         this.mc.getTextureManager().bindTexture(skillTex);
 
         this.drawTexturedModalRect(x, y, 0, 0, skillWidth, skillHeight);
