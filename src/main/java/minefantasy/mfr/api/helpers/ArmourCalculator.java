@@ -1,6 +1,7 @@
 package minefantasy.mfr.api.helpers;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.EnumHand;
@@ -9,6 +10,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.armour.*;
 import minefantasy.mfr.api.weapon.IDamageType;
+import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
@@ -153,7 +155,7 @@ public class ArmourCalculator {
         float weight = 0.0F;
 
             Iterable<ItemStack> armour = user.getArmorInventoryList();
-            for (ItemStack stack: armour) {
+            for (ItemStack stack : armour) {
                 if (!considerSpeed || shouldArmourAlterSpeed(stack)) {
                     weight += getPieceWeight(stack);
                 }
@@ -163,7 +165,9 @@ public class ArmourCalculator {
     }
 
     public static float getPieceWeight(ItemStack item) {
-        if (item == null) {
+
+//    	MFRLogUtil.log("Weigth in calculation: "+ item.getItem().getUnlocalizedName());
+        if (item == null || item.getItem() == Items.AIR) {
             return 0.0F;
         }
         if (item.getItem() instanceof IArmourMFR) {
@@ -173,11 +177,11 @@ public class ArmourCalculator {
     }
 
     private static boolean shouldArmourAlterSpeed(ItemStack armour) {
-        if (armour == null) {
+        if (armour == null || armour == ItemStack.EMPTY) {
             return false;
         }
 
-        return armour.getItem() instanceof IArmourMFR || CustomArmourEntry.doesPieceSlowDown(armour);
+        return armour.getItem() instanceof IArmourMFR && CustomArmourEntry.doesPieceSlowDown(armour);
     }
 
     public static float convertKgToIbs(float kg) {

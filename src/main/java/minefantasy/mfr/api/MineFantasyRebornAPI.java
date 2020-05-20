@@ -1,6 +1,8 @@
 package minefantasy.mfr.api;
 
 import com.google.common.collect.Lists;
+
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -8,6 +10,7 @@ import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
@@ -29,6 +32,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
+import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -55,13 +59,12 @@ public class MineFantasyRebornAPI {
     }
 
     public static void removeAllRecipes(Item result) {
-        List recipeList = Lists.newArrayList(ForgeRegistries.RECIPES.getValuesCollection());
-        for (int i = 0; i < recipeList.size(); i++) {
-            IRecipe recipe = (IRecipe) recipeList.get(i);
-            if (recipe != null && recipe.getRecipeOutput() != null && recipe.getRecipeOutput().getItem() == result) {
-                debugMsg("Removed Recipe for " + recipe.getRecipeOutput().getDisplayName());
-            }
-        }
+    	for (IRecipe recipe : ForgeRegistries.RECIPES) {
+			if (recipe.getRecipeOutput().getItem() == result
+					&& !ForgeRegistries.RECIPES.getKey(recipe).getResourceDomain().equals(MineFantasyReborn.MOD_ID)) {
+				((IForgeRegistryModifiable) ForgeRegistries.RECIPES).remove(ForgeRegistries.RECIPES.getKey(recipe));
+			}
+		}
     }
 
     public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, int hammerType, int anvil,

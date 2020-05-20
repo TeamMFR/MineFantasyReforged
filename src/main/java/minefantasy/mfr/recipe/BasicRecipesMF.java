@@ -31,12 +31,7 @@ public class BasicRecipesMF {
 
 	@SubscribeEvent
 	public static void registerItem(RegistryEvent.Register<IRecipe> event) {
-		for (IRecipe recipe : ForgeRegistries.RECIPES) {
-			if (recipe.getRecipeOutput().getItem() == Items.STICK
-					&& !ForgeRegistries.RECIPES.getKey(recipe).getResourceDomain().equals(MineFantasyReborn.MOD_ID)) {
-				((IForgeRegistryModifiable) ForgeRegistries.RECIPES).remove(ForgeRegistries.RECIPES.getKey(recipe));
-			}
-		}
+		MineFantasyRebornAPI.removeAllRecipes(Items.STICK);
 	}
 
 	public static void init() {

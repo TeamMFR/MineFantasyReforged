@@ -106,793 +106,807 @@ import java.util.List;
 
 public class EventManagerMFR {
 
-    public static final String hitspeedNBT = "MF_HitCooldown";
-    public static final String injuredNBT = "MF_Injured";
-    public static boolean displayOreDict;
-
-    private static XSTRandom random = new XSTRandom();
-
-    public static void addArmourDT(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
-        list.add("");
-        String AC = ArmourCalculator.getArmourClass(armour);
-        if (AC != null) {
-            list.add(I18n.translateToLocal("attribute.armour." + AC));
-        }
-        list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection"));
-        addSingleDT(armour, user, 0, list, extra);
-        addSingleDT(armour, user, 2, list, extra);
-        addSingleDT(armour, user, 1, list, extra);
-    }
-
-    public static void addSingleDT(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra) {
-        EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
-        String attatch = "";
-
-        int rating = (int) (ArmourCalculator.getDTForDisplayPiece(armour, id) * 100F);
-        int equipped = (int) (ArmourCalculator.getDTForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
-
-        if (rating > 0 || equipped > 0) {
-            if (equipped > 0 && rating != equipped) {
-                float d = rating - equipped;
-                if (d > 0) {
-                    attatch += TextFormatting.DARK_GREEN;
-                }
-                if (d < 0) {
-                    attatch += TextFormatting.RED;
-                }
-                String d2 = ItemWeaponMFR.decimal_format.format(d);
-                attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
-            }
-            list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.rating." + id) + " "
-                    + rating + attatch);
-        }
-    }
-
-    public static void addArmourDR(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
-        list.add("");
-        String AC = ArmourCalculator.getArmourClass(armour);
-        if (AC != null) {
-            list.add(I18n.translateToLocal("attribute.armour." + AC));
-        }
-        if (armour.getItem() instanceof ISpecialArmourMFR) {
-            if (ArmourCalculator.advancedDamageTypes) {
-                list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection"));
-                addSingleDR(armour, user, 0, list, extra, true);
-                addSingleDR(armour, user, 2, list, extra, true);
-                addSingleDR(armour, user, 1, list, extra, true);
-            } else {
-                addSingleDR(armour, user, 0, list, extra, false);
-            }
-        }
-    }
-
-    public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra,
-            boolean advanced) {
-        EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
-        String attatch = "";
-
-        int rating = (int) (ArmourCalculator.getDRForDisplayPiece(armour, id) * 100F);
-        int equipped = (int) (ArmourCalculator.getDRForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
-
-        if (rating > 0 || equipped > 0) {
-            if (equipped > 0 && rating != equipped) {
-                float d = rating - equipped;
-                if (d > 0) {
-                    attatch += TextFormatting.DARK_GREEN;
-                }
-                if (d < 0) {
-                    attatch += TextFormatting.RED;
-                }
-                String d2 = ItemWeaponMFR.decimal_format.format(d);
-                attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
-            }
-            if (advanced) {
-                list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.rating." + id) + " "
-                        + rating + attatch);
-            } else {
-                list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection") + ": "
-                        + rating + attatch);
-            }
-        }
-    }
-
-    public static String getRegisterName(Entity entity) {
-        String s = EntityList.getEntityString(entity);
-
-        if (s == null) {
-            s = "generic";
-        }
-
-        return s;
-    }
-
-    public static void tickHitSpeeds(EntityLivingBase user) {
-        int time = getHitspeedTime(user);
-        if (time > 0) {
-            time--;
-            user.getEntityData().setInteger(hitspeedNBT, time);
-        }
-    }
-
-    public static void setHitTime(EntityLivingBase user, int time) {
-        user.getEntityData().setInteger(hitspeedNBT, time);
-    }
-
-    public static int getHitspeedTime(Entity entity) {
-        if (entity != null && entity.getEntityData().hasKey(hitspeedNBT)) {
-            return entity.getEntityData().getInteger(hitspeedNBT);
-        }
-        return 0;
-    }
-
-    public static int getInjuredTime(Entity entity) {
-        if (entity.getEntityData().hasKey(injuredNBT)) {
-            return entity.getEntityData().getInteger(injuredNBT);
-        }
-        return 0;
-    }
-
-    @SubscribeEvent
-    public void tryDropItems(LivingDropsEvent event) {
-        EntityLivingBase dropper = event.getEntityLiving();
-
-        if (dropper instanceof EntityChicken) {
-            int dropCount = 1 + random.nextInt(event.getLootingLevel() + 1 * 4);
-
-            for (int a = 0; a < dropCount; a++) {
-                dropper.entityDropItem(new ItemStack(Items.FEATHER), 0.0F);
-            }
-        }
-        if (dropper.getEntityData().hasKey("MF_LootDrop")) {
-            int id = dropper.getEntityData().getInteger("MF_LootDrop");
-            Item drop = id == 0 ? ToolListMFR.LOOT_SACK : id == 1 ? ToolListMFR.LOOT_SACK_UC : ToolListMFR.LOOT_SACK_RARE;
-            dropper.entityDropItem(new ItemStack(drop), 0.0F);
-        }
-        if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
-            if (random.nextFloat() * (1 + event.getLootingLevel()) < 0.05F) {
-                dropper.entityDropItem(new ItemStack(FoodListMFR.GUTS), 0.0F);
-            }
-        }
-        if (dropper instanceof IAnimals && !(dropper instanceof IMob)) {
-            if (ConfigHardcore.hunterKnife && !dropper.getEntityData().hasKey("hunterKill")) {
-                event.setCanceled(true);
-                return;
-            }
-            if (ConfigHardcore.lessHunt) {
-                alterDrops(dropper, event);
-            }
-        }
-        if (getRegisterName(dropper).contains("Horse")) {
-            int dropCount = random.nextInt(3 + event.getLootingLevel());
-            if (ConfigHardcore.lessHunt) {
-                dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
-            }
-
-            Item meat = dropper.isBurning() ? FoodListMFR.HORSE_COOKED : FoodListMFR.HORSE_RAW;
-            for (int a = 0; a < dropCount; a++) {
-                dropper.entityDropItem(new ItemStack(meat), 0.0F);
-            }
-        }
-        if (getRegisterName(dropper).contains("Wolf")) {
-            int dropCount = random.nextInt(3 + event.getLootingLevel());
-            if (ConfigHardcore.lessHunt) {
-                dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
-            }
-
-            Item meat = dropper.isBurning() ? FoodListMFR.WOLF_COOKED : FoodListMFR.WOLF_RAW;
-            for (int a = 0; a < dropCount; a++) {
-                dropper.entityDropItem(new ItemStack(meat), 0.0F);
-            }
-        }
-        dropLeather(event.getEntityLiving(), event);
-
-        if (dropper instanceof EntitySkeleton) {
-            EntitySkeleton skeleton = (EntitySkeleton) dropper;
-
-            if ((skeleton.getHeldItemMainhand() == null || !(skeleton.getHeldItemMainhand().getItem() instanceof ItemBow))
-                    && event.getDrops() != null && !event.getDrops().isEmpty()) {
-                Iterator<EntityItem> list = event.getDrops().iterator();
-
-                while (list.hasNext()) {
-                    EntityItem entItem = list.next();
-                    ItemStack drop = entItem.getItem();
-
-                    if (drop.getItem() == Items.ARROW) {
-                        entItem.setDead();
-                    }
-                }
-            }
-        }
-    }
-
-    private void dropLeather(EntityLivingBase mob, LivingDropsEvent event) {
-        boolean dropHide = shouldAnimalDropHide(mob);
-        Item hide = getHideFor(mob);
-
-        if (event.getDrops() != null && !event.getDrops().isEmpty()) {
-            Iterator<EntityItem> list = event.getDrops().iterator();
-
-            while (list.hasNext()) {
-                EntityItem entItem = list.next();
-                ItemStack drop = entItem.getItem();
-
-                if (drop.getItem() == Items.LEATHER) {
-                    entItem.setDead();
-                    dropHide = true;
-                }
-            }
-        }
-        if (dropHide && hide != null && !(ConfigHardcore.hunterKnife && !mob.getEntityData().hasKey("hunterKill"))) {
-            mob.entityDropItem(new ItemStack(hide), 0.0F);
-        }
-    }
-
-    private Item getHideFor(EntityLivingBase mob) {
-        Item[] hide = new Item[]{ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM,
-                ComponentListMFR.RAWHIDE_LARGE};
-        int size = getHideSizeFor(mob);
-        if (mob.isChild()) {
-            size--;
-        }
-
-        if (size <= 0) {
-            return null;
-        }
-        if (size > hide.length) {
-            size = hide.length;
-        }
-
-        return hide[size - 1];
-    }
-
-    private int getHideSizeFor(EntityLivingBase mob) {
-        String mobName = mob.getClass().getName();
-        if (mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
-            return 3;
-        }
-        if (mobName.endsWith("EntitySheep")) {
-            return 2;
-        }
-        if (mobName.endsWith("EntityPig")) {
-            return 1;
-        }
-
-        int size = (int) (mob.width + mob.height + 1);
-        if (size <= 1) {
-            return 0;
-        }
-        if (size == 2) {
-            return 1;
-        } else if (size <= 4) {
-            return 2;
-        }
-        return 3;
-    }
-
-    private boolean shouldAnimalDropHide(EntityLivingBase mob) {
-        String mobName = mob.getClass().getName();
-        if (mobName.endsWith("EntityWolf") || mobName.endsWith("EntityPig") || mobName.endsWith("EntitySheep")
-                || mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
-            return true;
-        }
-        if (mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig
-                || mob instanceof EntitySheep || mob instanceof EntityHorse) {
-            return true;
-        }
-        return false;
-    }
-
-    @SubscribeEvent
-    public void onDeath(LivingDeathEvent event) {
-        if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityDragon && event.getSource() != null
-                && event.getSource().getImmediateSource() != null && event.getSource().getImmediateSource() instanceof EntityPlayer) {
-            PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getImmediateSource());
-        }
-        if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer && event.getSource() != null
-                && event.getEntity() != null && event.getSource().getImmediateSource() instanceof EntityDragon) {
-            PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getEntity(), -1);
-        }
-        Entity dropper = event.getEntity();
-
-        boolean useArrows = true;
-        try {
-            Class.forName("minefantasy.mf2.api.helpers.ArrowEffectsMF");
-        } catch (Exception e) {
-            useArrows = false;
-        }
-        if (dropper != null && useArrows && ConfigExperiment.stickArrows && !dropper.world.isRemote) {
-            ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowEffectsMF.getStuckArrows(dropper);
-            if (stuckArrows != null && !stuckArrows.isEmpty()) {
-                Iterator<ItemStack> list = stuckArrows.iterator();
-
-                while (list.hasNext()) {
-                    ItemStack arrow = list.next();
-                    if (arrow != null) {
-                        dropper.entityDropItem(arrow, 0.0F);
-                    }
-                }
-            }
-        }
-
-    }
-
-    @SubscribeEvent
-    public void spawnEntity(EntityJoinWorldEvent event) {
-        if (event.getEntity().isDead) {
-            return;
-        }
-        if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemUnbreakable)) {
-            EntityItem eitem = (EntityItem) event.getEntity();
-            if (eitem.getItem() != null) {
-                if (eitem.getItem().hasTagCompound()
-                        && eitem.getItem().getTagCompound().hasKey("Unbreakable")) {
-                    EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
-                    event.getWorld().spawnEntity(newEntity);
-                    eitem.setDead();
-                }
-                if (isDragonforge(eitem.getItem())) {
-                    MFRLogUtil.logDebug("Found dragon heart");
-                    EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
-                    event.getWorld().spawnEntity(newEntity);
-                    eitem.setDead();
-                }
-            }
-        }
-    }
-
-    private boolean isDragonforge(ItemStack itemstack) {
-        return itemstack.getItem() == ComponentListMFR.DRAGON_HEART;
-    }
-
-    public void alterDrops(EntityLivingBase dropper, LivingDropsEvent event) {
-        ArrayList<ItemStack> meats = new ArrayList<ItemStack>();
-
-        if (event.getDrops() != null && !event.getDrops().isEmpty()) {
-            Iterator<EntityItem> list = event.getDrops().iterator();
-
-            while (list.hasNext()) {
-                EntityItem entItem = list.next();
-                ItemStack drop = entItem.getItem();
-                boolean dropItem = true;
-
-                if (drop.getItem() instanceof ItemFood) {
-                    entItem.setDead();
-
-                    if (!meats.isEmpty()) {
-                        for (int a = 0; a < meats.size(); a++) {
-                            ItemStack compare = meats.get(a);
-                            if (drop.isItemEqual(compare)) {
-                                dropItem = false;
-                            }
-                        }
-                    }
-                    if (dropItem) {
-                        drop.setCount(1);
-                        if (event.getLootingLevel() > 0) {
-                            drop.grow(dropper.getRNG().nextInt(event.getLootingLevel() + 1));
-                        }
-                        meats.add(drop.copy());
-                    }
-                }
-            }
-
-            for (int a = 0; a < meats.size(); a++) {
-                ItemStack meat = meats.get(a);
-                dropper.entityDropItem(meat, 0.0F);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void killEntity(LivingDeathEvent event) {
-        // killsCount
-        EntityLivingBase dead = event.getEntityLiving();
-        EntityLivingBase hunter = null;
-        ItemStack weapon = null;
-        DamageSource source = event.getSource();
-
-        if (dead instanceof EntityWitch) {
-            dropBook(dead, 0);
-        }
-        if (dead instanceof EntityVillager) {
-            dropBook(dead, 1);
-        }
-        if (dead instanceof EntityZombie) {
-            dropBook(dead, 2);
-        }
-        if (source != null && source.getImmediateSource() != null) {
-            if (source.getImmediateSource() instanceof EntityLivingBase) {
-                hunter = (EntityLivingBase) source.getImmediateSource();
-                weapon = hunter.getHeldItemMainhand();
-                if (hunter instanceof EntityPlayer) {
-                    addKill((EntityPlayer) hunter, dead);
-                }
-            }
-        }
-        if (weapon != null) {
-            String type = ToolHelper.getCrafterTool(weapon);
-            if (weapon.getItem() instanceof IHuntingItem) {
-                if (((IHuntingItem) weapon.getItem()).canRetrieveDrops(weapon)) {
-                    dead.getEntityData().setBoolean("hunterKill", true);
-                }
-            } else if (type != null && type.equalsIgnoreCase("knife")) {
-                dead.getEntityData().setBoolean("hunterKill", true);
-            }
-        }
-    }
-
-    private void dropBook(EntityLivingBase dead, int id) {
-        if (dead.world.isRemote)
-            return;
-        Item book = null;
-        if (id == 0) {
-            float chance = random.nextFloat();
-            if (chance > 0.75F) {
-                book = ToolListMFR.SKILLBOOK_ENGINEERING;
-            } else {
-                book = ToolListMFR.SKILLBOOK_PROVISIONING;
-            }
-        } else if (id == 1 && random.nextInt(5) == 0) {
-            float chance = random.nextFloat();
-            if (chance > 0.9F) {
-                book = ToolListMFR.SKILLBOOK_ENGINEERING;
-            } else if (chance > 0.6F) {
-                book = ToolListMFR.SKILLBOOK_ARTISANRY;
-            } else if (chance > 0.3F) {
-                book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
-            } else {
-                book = ToolListMFR.SKILLBOOK_PROVISIONING;
-            }
-        } else if (id == 2 && random.nextInt(25) == 0) {
-            float chance = random.nextFloat();
-            if (chance > 0.9F) {
-                book = ToolListMFR.SKILLBOOK_ENGINEERING;
-            } else if (chance > 0.6F) {
-                book = ToolListMFR.SKILLBOOK_ARTISANRY;
-            } else if (chance > 0.3F) {
-                book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
-            } else {
-                book = ToolListMFR.SKILLBOOK_PROVISIONING;
-            }
-        }
-        if (book != null) {
-            dead.entityDropItem(new ItemStack(book), 0F);
-        }
-    }
-
-    private void addKill(EntityPlayer hunter, EntityLivingBase dead) {
-        addKillTo(hunter, "killsCount");
-        if (dead instanceof IMob) {
-            addKillTo(hunter, "killsCountMob");
-        } else if (dead instanceof IAnimals) {
-            addKillTo(hunter, "killsCountAnimal");
-        }
-        if (dead instanceof EntityPlayer) {
-            addKillTo(hunter, "killsCountPlayer");
-        }
-    }
-
-    @SubscribeEvent
-    public void useHoe(UseHoeEvent event) {
-        Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
-        if (block != Blocks.FARMLAND && FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
-            event.getEntityPlayer().swingArm(event.getEntityPlayer().getActiveHand());
-            event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL, SoundCategory.AMBIENT, 12, 1F );
-            event.setCanceled(true);
-        }
-    }
-
-    @SubscribeEvent
-    public void breakBlock(BreakEvent event) {
-        // Block block = event.block;
-        Block base = event.getWorld().getBlockState(event.getPos().down()).getBlock();
-        // int meta = event.blockMetadata;
-
-        if (base != null && base == Blocks.FARMLAND && FarmingHelper.didHarvestRuinBlock(event.getWorld(), false)) {
-            event.getWorld().setBlockState(event.getPos().add(0,-1,0), Blocks.DIRT.getDefaultState());
-        }
-
-        EntityPlayer player = event.getPlayer();
-        if (player != null && !player.capabilities.isCreativeMode && !(player instanceof FakePlayer)) {
-            playerMineBlock(event);
-        }
-    }
-
-	/*@SubscribeEvent
-    public void loadChunk(ChunkEvent.Load event) {
-	}*/
-
-    public void playerMineBlock(BlockEvent.BreakEvent event) {
-        EntityPlayer player = event.getPlayer();
-        ItemStack held = player.getHeldItemMainhand();
-        Block broken = event.getState().getBlock();
-
-        if (broken != null && ConfigHardcore.HCCallowRocks) {
-            if (held == null) {
-                entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
-            }
-            if (held != null && held.getItem() == ComponentListMFR.SHARP_ROCK && broken instanceof BlockLeaves) {
-                if (random.nextInt(5) == 0) {
-                    entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
-                }
-                if (random.nextInt(3) == 0) {
-                    entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.VINE, random.nextInt(3) + 1));
-                }
-            }
-        }
-
-        if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player)) {
-            float points = 2.0F * ConfigStamina.miningSpeed;
-            ItemWeaponMFR.applyFatigue(player, points, 20F);
-
-            if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
-                player.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 100, 1));
-            }
-        }
-    }
-
-    public EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {
-        if (item.getCount() != 0 && item.getItem() != null) {
-            EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, item);
-            entityitem.setPickupDelay(10);
-            world.spawnEntity(entityitem);
-            return entityitem;
-        }
-        return null;
-    }
-
-    private void addKillTo(EntityPlayer hunter, String type) {
-        int kills = hunter.getEntityData().hasKey(type) ? hunter.getEntityData().getInteger(type) : 0;
-        kills++;
-        hunter.getEntityData().setInteger(type, kills);
-    }
-
-    @SubscribeEvent
-    public void setTooltip(ItemTooltipEvent event) {
-        if (event.getEntity() != null && !event.getEntity().world.isRemote) {
-            return;
-        }
-
-        ItemStack eventStack = event.getItemStack();
-
-        if (!eventStack.isEmpty()) {
-            boolean saidArtefact = false;
-            int[] ids = OreDictionary.getOreIDs(event.getItemStack());
-            boolean hasInfo = false;
-            if (ids != null && event.getEntityPlayer() != null) {
-                for (int id : ids) {
-                    String s = OreDictionary.getOreName(id);
-                    if (s != null) {
-                        if (!hasInfo && s.startsWith("ingot")) {
-                            String s2 = s.substring(5, s.length());
-                            CustomMaterial material = CustomMaterial.getMaterial(s2);
-                            if (material != null)
-                                hasInfo = true;
-
-                            CustomToolHelper.addComponentString(event.getItemStack(), event.getToolTip(), material);
-                        }
-                        if (s.startsWith("Artefact-")) {
-                            if (!saidArtefact) {
-                                String knowledge = s.substring(9).toLowerCase();
-
-                                if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge)) {
-                                    saidArtefact = true;
-                                    event.getToolTip().add(TextFormatting.AQUA
-                                            + I18n.translateToLocal("info.hasKnowledge"));
-                                }
-                            }
-                        } else if (displayOreDict) {
-                            event.getToolTip().add("oreDict: " + s);
-                        }
-                    }
-                }
-            }
-
-            if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_Inferior")) {
-                if (event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
-                    event.getToolTip()
-                            .add(TextFormatting.RED + I18n.translateToLocal("attribute.inferior.name"));
-                }
-                if (!event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
-                    event.getToolTip()
-                            .add(TextFormatting.GREEN + I18n.translateToLocal("attribute.superior.name"));
-                }
-            }
-            if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null){
-                if (event.getItemStack().getItem() instanceof ItemArmor
-                        && (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase) ||  ClientItemsMF.showSpecials(
-                        event.getItemStack(), event.getEntityPlayer().world, event.getToolTip(), event.getFlags()))) {
-                    addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
-                }
-            }
-            if (ArmourCalculator.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
-                displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
-            }
-            if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
-                showCrafterTooltip(event.getItemStack(), event.getToolTip());
-            }
-            if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_CraftedByName")) {
-                String name = event.getItemStack().getTagCompound().getString("MF_CraftedByName");
-                boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
-
-                event.getToolTip().add((special ? TextFormatting.GREEN : "")
-                        + I18n.translateToLocal("attribute.mfcraftedbyname.name") + ": " + name
-                        + TextFormatting.GRAY);
-            }
-            WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
-            if (WC != null && RPGElements.isSystemActive && WC.parentSkill != null) {
-                event.getToolTip().add(I18n.translateToLocal("weaponclass." + WC.name.toLowerCase()));
-                float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
-                if (skillMod > 100)
-                    event.getToolTip().add(I18n.translateToLocal("rpg.skillmod")
-                            + ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
-
-            }
-        }
-    }
-
-    private void displayWeaponTraits(float[] ratio, List<String> list) {
-        int cutting = (int) (ratio[0] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
-        int piercing = (int) (ratio[2] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
-        int blunt = (int) (ratio[1] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
-
-        addDamageType(list, cutting, "cutting");
-        addDamageType(list, piercing, "piercing");
-        addDamageType(list, blunt, "blunt");
-    }
-
-    private void addDamageType(List<String> list, int value, String name) {
-        if (value > 0) {
-            String s = I18n.translateToLocal("attribute.weapon." + name);
-            if (value < 100) {
-                s += " " + value + "%";
-            }
-            list.add(s);
-        }
-    }
-
-    private void showCrafterTooltip(ItemStack tool, List<String> list) {
-        String toolType = ToolHelper.getCrafterTool(tool);
-        int tier = ToolHelper.getCrafterTier(tool);
-        float efficiency = ToolHelper.getCrafterEfficiency(tool);
-
-        list.add(I18n.translateToLocal("attribute.mfcrafttool.name") + ": "
-                + I18n.translateToLocal("tooltype." + toolType));
-        list.add(I18n.translateToLocal("attribute.mfcrafttier.name") + ": " + tier);
-        list.add(I18n.translateToLocal("attribute.mfcrafteff.name") + ": " + efficiency);
-    }
-
-    @SubscribeEvent
-    public void updateEntity(LivingUpdateEvent event) {
-        if (event.getEntity() instanceof EntityCogwork) {
-            return;
-        }
-        EntityLivingBase entity = event.getEntityLiving();
-
-        float lowHp = entity.getMaxHealth() / 5F;
-        int injury = getInjuredTime(entity);
-
-        if (ConfigHardcore.critLimp && (entity instanceof EntityLiving
-                || !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
-            if (entity.getHealth() <= lowHp || injury > 0) {
-                if (entity.getRNG().nextInt(10) == 0 && entity.onGround && !entity.isRiding()) {
-                    entity.motionX = 0F;
-                    entity.motionZ = 0F;
-                }
-                if (entity.ticksExisted % 15 == 0) {
-                    entity.limbSwing = 2.0F;
-                    float x = (float) (entity.posX + (random.nextFloat() - 0.5F) / 4F);
-                    float y = (float) (entity.posY + entity.getEyeHeight() + (random.nextFloat() - 0.5F) / 4F);
-                    float z = (float) (entity.posZ + (random.nextFloat() - 0.5F) / 4F);
-                    entity.world.spawnParticle(EnumParticleTypes.REDSTONE, x, y, z, 0F, 0F, 0F);
-                }
-            }
-            if (!entity.world.isRemote && entity.getHealth() <= (lowHp / 2) && entity.getRNG().nextInt(200) == 0) {
-                entity.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 100, 50));
-            }
-        }
-        if (injury > 0 && !entity.world.isRemote) {
-            injury--;
-            entity.getEntityData().setInteger(injuredNBT, injury);
-        }
-        if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity)) {
-            StaminaMechanics.tickEntity(event.getEntityLiving());
-        }
-        tickHitSpeeds(event.getEntityLiving());
-
-		/*if (event.entity.ticksExisted == 1 && event.entity instanceof EntityPlayer && !event.entity.worldObj.isRemote) {
-		}*/
-
-    }
-
-    @SubscribeEvent
-    public void clonePlayer(PlayerEvent.Clone event) {
-        EntityPlayer origin = event.getOriginal();
-        EntityPlayer spawn = event.getEntityPlayer();
-        if (origin != null && spawn != null) {
-            EntityHelper.cloneNBT(origin, spawn);
-        }
-    }
-
-    @SubscribeEvent
-    public void startUseItem(LivingEntityUseItemEvent.Start event) {
-        EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-        if (event.getItem() != null && event.getItem().getItemUseAction() == EnumAction.BLOCK) {
-            if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock
-                    && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
-                event.setCanceled(true);
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void levelup(LevelupEvent event) {
-        EntityPlayer player = event.thePlayer;
-        if (!player.world.isRemote) {
-            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new LevelupPacket(player, event.theSkill, event.theLevel).generatePacket());
-            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new SkillPacket(player, event.theSkill).generatePacket());
-        }
-    }
-
-    @SubscribeEvent
-    public void syncSkill(SyncSkillEvent event) {
-        EntityPlayer player = event.thePlayer;
-        if (!player.world.isRemote) {
-            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new SkillPacket(player, event.theSkill).generatePacket());
-        }
-    }
-
-    @SubscribeEvent
-    public void itemEvent(EntityItemPickupEvent event) {
-        EntityPlayer player = event.getEntityPlayer();
-
-        EntityItem drop = event.getItem();
-        ItemStack item = drop.getItem();
-        ItemStack held = player.getHeldItemMainhand();
-
-        if (held != null && held.getItem() instanceof ISmithTongs) {
-            if (!TongsHelper.hasHeldItem(held)) {
-                if (isHotItem(item)) {
-                    if (TongsHelper.trySetHeldItem(held, item)) {
-                        drop.setDead();
-
-                        if (event.isCancelable()) {
-                            event.setCanceled(true);
-                        }
-                        return;
-                    }
-                }
-            }
-        }
-        {
-            if (ConfigHardcore.HCChotBurn && item != null && isHotItem(item)) {
-                if (event.isCancelable()) {
-                    event.setCanceled(true);
-                }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public void wakeUp(PlayerWakeUpEvent event) {
-        PlayerTickHandlerMF.wakeUp(event.getEntityPlayer());
-    }
-
-    private boolean isHotItem(ItemStack item) {
-        return item != null && (item.getItem() instanceof IHotItem);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @SubscribeEvent
-    public void renderEntity(RenderPlayerEvent.Specials.Pre event) {
-        Minecraft mc = Minecraft.getMinecraft();
-        boolean showHeld = true;
-        if (PowerArmour.isWearingCogwork(event.getEntityPlayer()) && mc.gameSettings.thirdPersonView != 0) {
-            IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
-            showHeld = !cogwork.isArmoured("right_arm");
-        }
-        event.setRenderItem(showHeld);
-    }
+	public static final String hitspeedNBT = "MF_HitCooldown";
+	public static final String injuredNBT = "MF_Injured";
+	public static boolean displayOreDict;
+
+	private static XSTRandom random = new XSTRandom();
+
+	public static void addArmourDT(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
+		list.add("");
+		String AC = ArmourCalculator.getArmourClass(armour);
+		if (AC != null) {
+			list.add(I18n.translateToLocal("attribute.armour." + AC));
+		}
+		list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection"));
+		addSingleDT(armour, user, 0, list, extra);
+		addSingleDT(armour, user, 2, list, extra);
+		addSingleDT(armour, user, 1, list, extra);
+	}
+
+	public static void addSingleDT(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra) {
+		EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
+		String attatch = "";
+
+		int rating = (int) (ArmourCalculator.getDTForDisplayPiece(armour, id) * 100F);
+		int equipped = (int) (ArmourCalculator.getDTForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
+
+		if (rating > 0 || equipped > 0) {
+			if (equipped > 0 && rating != equipped) {
+				float d = rating - equipped;
+				if (d > 0) {
+					attatch += TextFormatting.DARK_GREEN;
+				}
+				if (d < 0) {
+					attatch += TextFormatting.RED;
+				}
+				String d2 = ItemWeaponMFR.decimal_format.format(d);
+				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
+			}
+			list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.rating." + id) + " " + rating
+					+ attatch);
+		}
+	}
+
+	public static void addArmourDR(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
+		list.add("");
+		String AC = ArmourCalculator.getArmourClass(armour);
+		if (AC != null) {
+			list.add(I18n.translateToLocal("attribute.armour." + AC));
+		}
+		if (armour.getItem() instanceof ISpecialArmourMFR) {
+			if (ArmourCalculator.advancedDamageTypes) {
+				list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection"));
+				addSingleDR(armour, user, 0, list, extra, true);
+				addSingleDR(armour, user, 2, list, extra, true);
+				addSingleDR(armour, user, 1, list, extra, true);
+			} else {
+				addSingleDR(armour, user, 0, list, extra, false);
+			}
+		}
+	}
+
+	public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra,
+			boolean advanced) {
+		EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
+		String attatch = "";
+
+		int rating = (int) (ArmourCalculator.getDRForDisplayPiece(armour, id) * 100F);
+		int equipped = (int) (ArmourCalculator.getDRForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
+
+		if (rating > 0 || equipped > 0) {
+			if (equipped > 0 && rating != equipped) {
+				float d = rating - equipped;
+				if (d > 0) {
+					attatch += TextFormatting.DARK_GREEN;
+				}
+				if (d < 0) {
+					attatch += TextFormatting.RED;
+				}
+				String d2 = ItemWeaponMFR.decimal_format.format(d);
+				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
+			}
+			if (advanced) {
+				list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.rating." + id) + " " + rating
+						+ attatch);
+			} else {
+				list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection") + ": " + rating
+						+ attatch);
+			}
+		}
+	}
+
+	public static String getRegisterName(Entity entity) {
+		String s = EntityList.getEntityString(entity);
+
+		if (s == null) {
+			s = "generic";
+		}
+
+		return s;
+	}
+
+	public static void tickHitSpeeds(EntityLivingBase user) {
+		int time = getHitspeedTime(user);
+		if (time > 0) {
+			time--;
+			user.getEntityData().setInteger(hitspeedNBT, time);
+		}
+	}
+
+	public static void setHitTime(EntityLivingBase user, int time) {
+		user.getEntityData().setInteger(hitspeedNBT, time);
+	}
+
+	public static int getHitspeedTime(Entity entity) {
+		if (entity != null && entity.getEntityData().hasKey(hitspeedNBT)) {
+			return entity.getEntityData().getInteger(hitspeedNBT);
+		}
+		return 0;
+	}
+
+	public static int getInjuredTime(Entity entity) {
+		if (entity.getEntityData().hasKey(injuredNBT)) {
+			return entity.getEntityData().getInteger(injuredNBT);
+		}
+		return 0;
+	}
+
+	@SubscribeEvent
+	public void tryDropItems(LivingDropsEvent event) {
+		EntityLivingBase dropper = event.getEntityLiving();
+
+		if (dropper instanceof EntityChicken) {
+			int dropCount = 1 + random.nextInt(event.getLootingLevel() + 1 * 4);
+
+			for (int a = 0; a < dropCount; a++) {
+				dropper.entityDropItem(new ItemStack(Items.FEATHER), 0.0F);
+			}
+		}
+		if (dropper.getEntityData().hasKey("MF_LootDrop")) {
+			int id = dropper.getEntityData().getInteger("MF_LootDrop");
+			Item drop = id == 0 ? ToolListMFR.LOOT_SACK
+					: id == 1 ? ToolListMFR.LOOT_SACK_UC : ToolListMFR.LOOT_SACK_RARE;
+			dropper.entityDropItem(new ItemStack(drop), 0.0F);
+		}
+		if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
+			if (random.nextFloat() * (1 + event.getLootingLevel()) < 0.05F) {
+				dropper.entityDropItem(new ItemStack(FoodListMFR.GUTS), 0.0F);
+			}
+		}
+		if (dropper instanceof IAnimals && !(dropper instanceof IMob)) {
+			if (ConfigHardcore.hunterKnife && !dropper.getEntityData().hasKey("hunterKill")) {
+				event.setCanceled(true);
+				return;
+			}
+			if (ConfigHardcore.lessHunt) {
+				alterDrops(dropper, event);
+			}
+		}
+		if (getRegisterName(dropper).contains("Horse")) {
+			int dropCount = random.nextInt(3 + event.getLootingLevel());
+			if (ConfigHardcore.lessHunt) {
+				dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
+			}
+
+			Item meat = dropper.isBurning() ? FoodListMFR.HORSE_COOKED : FoodListMFR.HORSE_RAW;
+			for (int a = 0; a < dropCount; a++) {
+				dropper.entityDropItem(new ItemStack(meat), 0.0F);
+			}
+		}
+		if (getRegisterName(dropper).contains("Wolf")) {
+			int dropCount = random.nextInt(3 + event.getLootingLevel());
+			if (ConfigHardcore.lessHunt) {
+				dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
+			}
+
+			Item meat = dropper.isBurning() ? FoodListMFR.WOLF_COOKED : FoodListMFR.WOLF_RAW;
+			for (int a = 0; a < dropCount; a++) {
+				dropper.entityDropItem(new ItemStack(meat), 0.0F);
+			}
+		}
+		dropLeather(event.getEntityLiving(), event);
+
+		if (dropper instanceof EntitySkeleton) {
+			EntitySkeleton skeleton = (EntitySkeleton) dropper;
+
+			if ((skeleton.getHeldItemMainhand() == null
+					|| !(skeleton.getHeldItemMainhand().getItem() instanceof ItemBow)) && event.getDrops() != null
+					&& !event.getDrops().isEmpty()) {
+				Iterator<EntityItem> list = event.getDrops().iterator();
+
+				while (list.hasNext()) {
+					EntityItem entItem = list.next();
+					ItemStack drop = entItem.getItem();
+
+					if (drop.getItem() == Items.ARROW) {
+						entItem.setDead();
+					}
+				}
+			}
+		}
+	}
+
+	private void dropLeather(EntityLivingBase mob, LivingDropsEvent event) {
+		boolean dropHide = shouldAnimalDropHide(mob);
+		Item hide = getHideFor(mob);
+
+		if (event.getDrops() != null && !event.getDrops().isEmpty()) {
+			Iterator<EntityItem> list = event.getDrops().iterator();
+
+			while (list.hasNext()) {
+				EntityItem entItem = list.next();
+				ItemStack drop = entItem.getItem();
+
+				if (drop.getItem() == Items.LEATHER) {
+					entItem.setDead();
+					dropHide = true;
+				}
+			}
+		}
+		if (dropHide && hide != null && !(ConfigHardcore.hunterKnife && !mob.getEntityData().hasKey("hunterKill"))) {
+			mob.entityDropItem(new ItemStack(hide), 0.0F);
+		}
+	}
+
+	private Item getHideFor(EntityLivingBase mob) {
+		Item[] hide = new Item[] { ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM,
+				ComponentListMFR.RAWHIDE_LARGE };
+		int size = getHideSizeFor(mob);
+		if (mob.isChild()) {
+			size--;
+		}
+
+		if (size <= 0) {
+			return null;
+		}
+		if (size > hide.length) {
+			size = hide.length;
+		}
+
+		return hide[size - 1];
+	}
+
+	private int getHideSizeFor(EntityLivingBase mob) {
+		String mobName = mob.getClass().getName();
+		if (mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
+			return 3;
+		}
+		if (mobName.endsWith("EntitySheep")) {
+			return 2;
+		}
+		if (mobName.endsWith("EntityPig")) {
+			return 1;
+		}
+
+		int size = (int) (mob.width + mob.height + 1);
+		if (size <= 1) {
+			return 0;
+		}
+		if (size == 2) {
+			return 1;
+		} else if (size <= 4) {
+			return 2;
+		}
+		return 3;
+	}
+
+	private boolean shouldAnimalDropHide(EntityLivingBase mob) {
+		String mobName = mob.getClass().getName();
+		if (mobName.endsWith("EntityWolf") || mobName.endsWith("EntityPig") || mobName.endsWith("EntitySheep")
+				|| mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
+			return true;
+		}
+		if (mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig
+				|| mob instanceof EntitySheep || mob instanceof EntityHorse) {
+			return true;
+		}
+		return false;
+	}
+
+	@SubscribeEvent
+	public void onDeath(LivingDeathEvent event) {
+		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityDragon
+				&& event.getSource() != null && event.getSource().getImmediateSource() != null
+				&& event.getSource().getImmediateSource() instanceof EntityPlayer) {
+			PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getImmediateSource());
+		}
+		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer
+				&& event.getSource() != null && event.getEntity() != null
+				&& event.getSource().getImmediateSource() instanceof EntityDragon) {
+			PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getEntity(), -1);
+		}
+		Entity dropper = event.getEntity();
+
+		boolean useArrows = true;
+		try {
+			Class.forName("minefantasy.mf2.api.helpers.ArrowEffectsMF");
+		} catch (Exception e) {
+			useArrows = false;
+		}
+		if (dropper != null && useArrows && ConfigExperiment.stickArrows && !dropper.world.isRemote) {
+			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowEffectsMF.getStuckArrows(dropper);
+			if (stuckArrows != null && !stuckArrows.isEmpty()) {
+				Iterator<ItemStack> list = stuckArrows.iterator();
+
+				while (list.hasNext()) {
+					ItemStack arrow = list.next();
+					if (arrow != null) {
+						dropper.entityDropItem(arrow, 0.0F);
+					}
+				}
+			}
+		}
+
+	}
+
+	@SubscribeEvent
+	public void spawnEntity(EntityJoinWorldEvent event) {
+		if (event.getEntity().isDead) {
+			return;
+		}
+		if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemUnbreakable)) {
+			EntityItem eitem = (EntityItem) event.getEntity();
+			if (eitem.getItem() != null) {
+				if (eitem.getItem().hasTagCompound() && eitem.getItem().getTagCompound().hasKey("Unbreakable")) {
+					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
+					event.getWorld().spawnEntity(newEntity);
+					eitem.setDead();
+				}
+				if (isDragonforge(eitem.getItem())) {
+					MFRLogUtil.logDebug("Found dragon heart");
+					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
+					event.getWorld().spawnEntity(newEntity);
+					eitem.setDead();
+				}
+			}
+		}
+	}
+
+	private boolean isDragonforge(ItemStack itemstack) {
+		return itemstack.getItem() == ComponentListMFR.DRAGON_HEART;
+	}
+
+	public void alterDrops(EntityLivingBase dropper, LivingDropsEvent event) {
+		ArrayList<ItemStack> meats = new ArrayList<ItemStack>();
+
+		if (event.getDrops() != null && !event.getDrops().isEmpty()) {
+			Iterator<EntityItem> list = event.getDrops().iterator();
+
+			while (list.hasNext()) {
+				EntityItem entItem = list.next();
+				ItemStack drop = entItem.getItem();
+				boolean dropItem = true;
+
+				if (drop.getItem() instanceof ItemFood) {
+					entItem.setDead();
+
+					if (!meats.isEmpty()) {
+						for (int a = 0; a < meats.size(); a++) {
+							ItemStack compare = meats.get(a);
+							if (drop.isItemEqual(compare)) {
+								dropItem = false;
+							}
+						}
+					}
+					if (dropItem) {
+						drop.setCount(1);
+						if (event.getLootingLevel() > 0) {
+							drop.grow(dropper.getRNG().nextInt(event.getLootingLevel() + 1));
+						}
+						meats.add(drop.copy());
+					}
+				}
+			}
+
+			for (int a = 0; a < meats.size(); a++) {
+				ItemStack meat = meats.get(a);
+				dropper.entityDropItem(meat, 0.0F);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void killEntity(LivingDeathEvent event) {
+		// killsCount
+		EntityLivingBase dead = event.getEntityLiving();
+		EntityLivingBase hunter = null;
+		ItemStack weapon = null;
+		DamageSource source = event.getSource();
+
+		if (dead instanceof EntityWitch) {
+			dropBook(dead, 0);
+		}
+		if (dead instanceof EntityVillager) {
+			dropBook(dead, 1);
+		}
+		if (dead instanceof EntityZombie) {
+			dropBook(dead, 2);
+		}
+		if (source != null && source.getImmediateSource() != null) {
+			if (source.getImmediateSource() instanceof EntityLivingBase) {
+				hunter = (EntityLivingBase) source.getImmediateSource();
+				weapon = hunter.getHeldItemMainhand();
+				if (hunter instanceof EntityPlayer) {
+					addKill((EntityPlayer) hunter, dead);
+				}
+			}
+		}
+		if (weapon != null) {
+			String type = ToolHelper.getCrafterTool(weapon);
+			if (weapon.getItem() instanceof IHuntingItem) {
+				if (((IHuntingItem) weapon.getItem()).canRetrieveDrops(weapon)) {
+					dead.getEntityData().setBoolean("hunterKill", true);
+				}
+			} else if (type != null && type.equalsIgnoreCase("knife")) {
+				dead.getEntityData().setBoolean("hunterKill", true);
+			}
+		}
+	}
+
+	private void dropBook(EntityLivingBase dead, int id) {
+		if (dead.world.isRemote)
+			return;
+		Item book = null;
+		if (id == 0) {
+			float chance = random.nextFloat();
+			if (chance > 0.75F) {
+				book = ToolListMFR.SKILLBOOK_ENGINEERING;
+			} else {
+				book = ToolListMFR.SKILLBOOK_PROVISIONING;
+			}
+		} else if (id == 1 && random.nextInt(5) == 0) {
+			float chance = random.nextFloat();
+			if (chance > 0.9F) {
+				book = ToolListMFR.SKILLBOOK_ENGINEERING;
+			} else if (chance > 0.6F) {
+				book = ToolListMFR.SKILLBOOK_ARTISANRY;
+			} else if (chance > 0.3F) {
+				book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
+			} else {
+				book = ToolListMFR.SKILLBOOK_PROVISIONING;
+			}
+		} else if (id == 2 && random.nextInt(25) == 0) {
+			float chance = random.nextFloat();
+			if (chance > 0.9F) {
+				book = ToolListMFR.SKILLBOOK_ENGINEERING;
+			} else if (chance > 0.6F) {
+				book = ToolListMFR.SKILLBOOK_ARTISANRY;
+			} else if (chance > 0.3F) {
+				book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
+			} else {
+				book = ToolListMFR.SKILLBOOK_PROVISIONING;
+			}
+		}
+		if (book != null) {
+			dead.entityDropItem(new ItemStack(book), 0F);
+		}
+	}
+
+	private void addKill(EntityPlayer hunter, EntityLivingBase dead) {
+		addKillTo(hunter, "killsCount");
+		if (dead instanceof IMob) {
+			addKillTo(hunter, "killsCountMob");
+		} else if (dead instanceof IAnimals) {
+			addKillTo(hunter, "killsCountAnimal");
+		}
+		if (dead instanceof EntityPlayer) {
+			addKillTo(hunter, "killsCountPlayer");
+		}
+	}
+
+	@SubscribeEvent
+	public void useHoe(UseHoeEvent event) {
+		Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
+		if (block != Blocks.FARMLAND
+				&& FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
+			event.getEntityPlayer().swingArm(event.getEntityPlayer().getActiveHand());
+			event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL,
+					SoundCategory.AMBIENT, 12, 1F);
+			event.setCanceled(true);
+		}
+	}
+
+	@SubscribeEvent
+	public void breakBlock(BreakEvent event) {
+		// Block block = event.block;
+		Block base = event.getWorld().getBlockState(event.getPos().down()).getBlock();
+		// int meta = event.blockMetadata;
+
+		if (base != null && base == Blocks.FARMLAND && FarmingHelper.didHarvestRuinBlock(event.getWorld(), false)) {
+			event.getWorld().setBlockState(event.getPos().add(0, -1, 0), Blocks.DIRT.getDefaultState());
+		}
+
+		EntityPlayer player = event.getPlayer();
+		if (player != null && !player.capabilities.isCreativeMode && !(player instanceof FakePlayer)) {
+			playerMineBlock(event);
+		}
+	}
+
+	/*
+	 * @SubscribeEvent public void loadChunk(ChunkEvent.Load event) { }
+	 */
+
+	public void playerMineBlock(BlockEvent.BreakEvent event) {
+		EntityPlayer player = event.getPlayer();
+		ItemStack held = player.getHeldItemMainhand();
+		Block broken = event.getState().getBlock();
+
+		if (broken != null && ConfigHardcore.HCCallowRocks) {
+			if (held == null) {
+				entityDropItem(event.getWorld(), event.getPos(),
+						new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
+			}
+			if (held != null && held.getItem() == ComponentListMFR.SHARP_ROCK && broken instanceof BlockLeaves) {
+				if (random.nextInt(5) == 0) {
+					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
+				}
+				if (random.nextInt(3) == 0) {
+					entityDropItem(event.getWorld(), event.getPos(),
+							new ItemStack(ComponentListMFR.VINE, random.nextInt(3) + 1));
+				}
+			}
+		}
+
+		if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player)) {
+			float points = 2.0F * ConfigStamina.miningSpeed;
+			ItemWeaponMFR.applyFatigue(player, points, 20F);
+
+			if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
+				player.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 100, 1));
+			}
+		}
+	}
+
+	public EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {
+		if (item.getCount() != 0 && item.getItem() != null) {
+			EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+					item);
+			entityitem.setPickupDelay(10);
+			world.spawnEntity(entityitem);
+			return entityitem;
+		}
+		return null;
+	}
+
+	private void addKillTo(EntityPlayer hunter, String type) {
+		int kills = hunter.getEntityData().hasKey(type) ? hunter.getEntityData().getInteger(type) : 0;
+		kills++;
+		hunter.getEntityData().setInteger(type, kills);
+	}
+
+	@SubscribeEvent
+	public void setTooltip(ItemTooltipEvent event) {
+		if (event.getEntity() != null && !event.getEntity().world.isRemote) {
+			return;
+		}
+
+		ItemStack eventStack = event.getItemStack();
+
+		if (!eventStack.isEmpty()) {
+			boolean saidArtefact = false;
+			int[] ids = OreDictionary.getOreIDs(event.getItemStack());
+			boolean hasInfo = false;
+			if (ids != null && event.getEntityPlayer() != null) {
+				for (int id : ids) {
+					String s = OreDictionary.getOreName(id);
+					if (s != null) {
+						if (!hasInfo && s.startsWith("ingot")) {
+							String s2 = s.substring(5, s.length());
+							CustomMaterial material = CustomMaterial.getMaterial(s2);
+							if (material != null)
+								hasInfo = true;
+
+							CustomToolHelper.addComponentString(event.getItemStack(), event.getToolTip(), material);
+						}
+						if (s.startsWith("Artefact-")) {
+							if (!saidArtefact) {
+								String knowledge = s.substring(9).toLowerCase();
+
+								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge)) {
+									saidArtefact = true;
+									event.getToolTip()
+											.add(TextFormatting.AQUA + I18n.translateToLocal("info.hasKnowledge"));
+								}
+							}
+						} else if (displayOreDict) {
+							event.getToolTip().add("oreDict: " + s);
+						}
+					}
+				}
+			}
+
+			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_Inferior")) {
+				if (event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
+					event.getToolTip().add(TextFormatting.RED + I18n.translateToLocal("attribute.inferior.name"));
+				}
+				if (!event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
+					event.getToolTip().add(TextFormatting.GREEN + I18n.translateToLocal("attribute.superior.name"));
+				}
+			}
+			if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null) {
+				if (event.getItemStack().getItem() instanceof ItemArmor
+						&& (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase)
+								|| ClientItemsMF.showSpecials(event.getItemStack(), event.getEntityPlayer().world,
+										event.getToolTip(), event.getFlags()))) {
+					addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(),
+							event.getFlags().isAdvanced());
+				}
+			}
+			if (ArmourCalculator.advancedDamageTypes
+					&& ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
+				displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
+			}
+			if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
+				showCrafterTooltip(event.getItemStack(), event.getToolTip());
+			}
+			if (event.getItemStack().hasTagCompound()
+					&& event.getItemStack().getTagCompound().hasKey("MF_CraftedByName")) {
+				String name = event.getItemStack().getTagCompound().getString("MF_CraftedByName");
+				boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
+
+				event.getToolTip().add((special ? TextFormatting.GREEN : "")
+						+ I18n.translateToLocal("attribute.mfcraftedbyname.name") + ": " + name + TextFormatting.GRAY);
+			}
+			WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
+			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != null) {
+				event.getToolTip().add(I18n.translateToLocal("weaponclass." + WC.name.toLowerCase()));
+				float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
+				if (skillMod > 100)
+					event.getToolTip().add(I18n.translateToLocal("rpg.skillmod")
+							+ ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
+
+			}
+		}
+	}
+
+	private void displayWeaponTraits(float[] ratio, List<String> list) {
+		int cutting = (int) (ratio[0] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
+		int piercing = (int) (ratio[2] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
+		int blunt = (int) (ratio[1] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
+
+		addDamageType(list, cutting, "cutting");
+		addDamageType(list, piercing, "piercing");
+		addDamageType(list, blunt, "blunt");
+	}
+
+	private void addDamageType(List<String> list, int value, String name) {
+		if (value > 0) {
+			String s = I18n.translateToLocal("attribute.weapon." + name);
+			if (value < 100) {
+				s += " " + value + "%";
+			}
+			list.add(s);
+		}
+	}
+
+	private void showCrafterTooltip(ItemStack tool, List<String> list) {
+		String toolType = ToolHelper.getCrafterTool(tool);
+		int tier = ToolHelper.getCrafterTier(tool);
+		float efficiency = ToolHelper.getCrafterEfficiency(tool);
+
+		list.add(I18n.translateToLocal("attribute.mfcrafttool.name") + ": "
+				+ I18n.translateToLocal("tooltype." + toolType));
+		list.add(I18n.translateToLocal("attribute.mfcrafttier.name") + ": " + tier);
+		list.add(I18n.translateToLocal("attribute.mfcrafteff.name") + ": " + efficiency);
+	}
+
+	@SubscribeEvent
+	public void updateEntity(LivingUpdateEvent event) {
+		if (event.getEntity() instanceof EntityCogwork) {
+			return;
+		}
+		EntityLivingBase entity = event.getEntityLiving();
+
+		float lowHp = entity.getMaxHealth() / 5F;
+		int injury = getInjuredTime(entity);
+
+		if (ConfigHardcore.critLimp && (entity instanceof EntityLiving
+				|| !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
+			if (entity.getHealth() <= lowHp || injury > 0) {
+				if (entity.getRNG().nextInt(10) == 0 && entity.onGround && !entity.isRiding()) {
+					entity.motionX = 0F;
+					entity.motionZ = 0F;
+				}
+				if (entity.ticksExisted % 15 == 0) {
+					entity.limbSwing = 2.0F;
+					float x = (float) (entity.posX + (random.nextFloat() - 0.5F) / 4F);
+					float y = (float) (entity.posY + entity.getEyeHeight() + (random.nextFloat() - 0.5F) / 4F);
+					float z = (float) (entity.posZ + (random.nextFloat() - 0.5F) / 4F);
+					entity.world.spawnParticle(EnumParticleTypes.REDSTONE, x, y, z, 0F, 0F, 0F);
+				}
+			}
+			if (!entity.world.isRemote && entity.getHealth() <= (lowHp / 2) && entity.getRNG().nextInt(200) == 0) {
+				entity.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 100, 50));
+			}
+		}
+		if (injury > 0 && !entity.world.isRemote) {
+			injury--;
+			entity.getEntityData().setInteger(injuredNBT, injury);
+		}
+		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity)) {
+			StaminaMechanics.tickEntity(event.getEntityLiving());
+		}
+		tickHitSpeeds(event.getEntityLiving());
+
+		/*
+		 * if (event.entity.ticksExisted == 1 && event.entity instanceof EntityPlayer &&
+		 * !event.entity.worldObj.isRemote) { }
+		 */
+
+	}
+
+	@SubscribeEvent
+	public void clonePlayer(PlayerEvent.Clone event) {
+		EntityPlayer origin = event.getOriginal();
+		EntityPlayer spawn = event.getEntityPlayer();
+		if (origin != null && spawn != null) {
+			EntityHelper.cloneNBT(origin, spawn);
+		}
+	}
+
+	@SubscribeEvent
+	public void startUseItem(LivingEntityUseItemEvent.Start event) {
+		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
+		if (event.getItem() != null && event.getItem().getItemUseAction() == EnumAction.BLOCK) {
+			if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock
+					&& !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void levelup(LevelupEvent event) {
+		EntityPlayer player = event.thePlayer;
+		if (!player.world.isRemote) {
+			((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player,
+					new LevelupPacket(player, event.theSkill, event.theLevel).generatePacket());
+			((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player,
+					new SkillPacket(player, event.theSkill).generatePacket());
+		}
+	}
+
+	@SubscribeEvent
+	public void syncSkill(SyncSkillEvent event) {
+		EntityPlayer player = event.thePlayer;
+		if (!player.world.isRemote) {
+			((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player,
+					new SkillPacket(player, event.theSkill).generatePacket());
+		}
+	}
+
+	@SubscribeEvent
+	public void itemEvent(EntityItemPickupEvent event) {
+		EntityPlayer player = event.getEntityPlayer();
+
+		EntityItem drop = event.getItem();
+		ItemStack item = drop.getItem();
+		ItemStack held = player.getHeldItemMainhand();
+
+		if (held != null && held.getItem() instanceof ISmithTongs) {
+			if (!TongsHelper.hasHeldItem(held)) {
+				if (isHotItem(item)) {
+					if (TongsHelper.trySetHeldItem(held, item)) {
+						drop.setDead();
+
+						if (event.isCancelable()) {
+							event.setCanceled(true);
+						}
+						return;
+					}
+				}
+			}
+		}
+		{
+			if (ConfigHardcore.HCChotBurn && item != null && isHotItem(item)) {
+				if (event.isCancelable()) {
+					event.setCanceled(true);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void wakeUp(PlayerWakeUpEvent event) {
+		PlayerTickHandlerMF.wakeUp(event.getEntityPlayer());
+	}
+
+	private boolean isHotItem(ItemStack item) {
+		return item != null && (item.getItem() instanceof IHotItem);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void renderEntity(RenderPlayerEvent.Specials.Pre event) {
+		Minecraft mc = Minecraft.getMinecraft();
+		boolean showHeld = true;
+		if (PowerArmour.isWearingCogwork(event.getEntityPlayer()) && mc.gameSettings.thirdPersonView != 0) {
+			IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
+			showHeld = !cogwork.isArmoured("right_arm");
+		}
+		event.setRenderItem(showHeld);
+	}
 
 //    @SideOnly(Side.CLIENT)
 //    @SubscribeEvent
@@ -934,5 +948,5 @@ public class EventManagerMFR {
 //            }
 //        }
 //    }
-    //TODO: Fix if necessary with RenderPowerArmour
+	// TODO: Fix if necessary with RenderPowerArmour
 }

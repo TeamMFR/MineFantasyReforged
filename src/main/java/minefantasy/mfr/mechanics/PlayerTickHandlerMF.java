@@ -1,5 +1,6 @@
 package minefantasy.mfr.mechanics;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.heating.IHotItem;
@@ -257,6 +258,7 @@ public class PlayerTickHandlerMF {
                 lastStack = item;
             }
 
+            ArmourCalculator.updateWeights(event.player);
             float weight = ArmourCalculator.getTotalWeightOfWorn(event.player, false);
             if (weight > 100F) {
                 if (event.player.isInWater()) {
@@ -267,6 +269,7 @@ public class PlayerTickHandlerMF {
     }
 
     private void onStep(EntityPlayer player, boolean alternateStep) {
+    	MFRLogUtil.log("Weight: "+ArmourCalculator.getTotalWeightOfWorn(player, false));
         if (ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50) {
             player.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
         }

@@ -75,7 +75,7 @@ public class SoundsMFR {
 		ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, soundName);
 		SoundEvent soundEvent = new SoundEvent(registryName).setRegistryName(registryName);
 		sounds.add(soundEvent);
-		return  soundEvent;
+		return soundEvent;
 	}
 
 }
