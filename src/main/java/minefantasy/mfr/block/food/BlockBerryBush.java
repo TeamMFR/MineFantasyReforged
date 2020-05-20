@@ -35,7 +35,7 @@ public class BlockBerryBush extends BlockBush implements IShearable {
         super(Material.LEAVES);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabs.DECORATIONS);
         this.setHardness(0.3F);

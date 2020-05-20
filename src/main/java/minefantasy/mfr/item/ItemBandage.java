@@ -32,7 +32,7 @@ public class ItemBandage extends Item {
         setMaxStackSize(16);
         setCreativeTab(CreativeTabMFR.tabGadget);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
     }
 

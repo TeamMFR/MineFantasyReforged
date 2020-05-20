@@ -18,7 +18,7 @@ public class ItemSpyglass extends Item implements IScope {
 
     public ItemSpyglass() {
         setRegistryName("spyglass");
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "spyglass");
+        setUnlocalizedName("spyglass");
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setHasSubtypes(true);

@@ -40,7 +40,7 @@ public class BlockCakeMF extends Block {
         super(Material.CAKE);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         cakeSlice = slice;
 
         this.setTickRandomly(true);

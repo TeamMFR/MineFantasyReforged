@@ -44,7 +44,7 @@ public class BlockChimney extends BlockContainer {
         }
 
         setRegistryName("MF_Chimney_" + type + (isWide ? "_Wide" : "_Thin"));
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + ("chimney." + type + (isWide ? ".wide" : "")));
+        setUnlocalizedName(("chimney." + type + (isWide ? ".wide" : "")));
         this.setSoundType(SoundType.METAL);
         this.setHardness(5F);
         this.setResistance(10F);

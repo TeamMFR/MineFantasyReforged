@@ -14,7 +14,7 @@ public class BlockReinforcedStone extends BlockMeta {
         this.currentName = name;
 
        // setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
     }
 
     public BlockReinforcedStone setBlockSoundType(SoundType soundType) {

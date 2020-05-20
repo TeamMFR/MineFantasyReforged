@@ -33,7 +33,7 @@ public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMF
         setCreativeTab(CreativeTabMFR.tabCraftTool);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
     }
 

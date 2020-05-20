@@ -45,7 +45,7 @@ public class BlockOreMF extends Block {
         this.dropMax = max;
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         setSoundType(SoundType.STONE);
         if (material == Material.ROCK) {
             this.setHarvestLevel("pickaxe", harvestLevel);

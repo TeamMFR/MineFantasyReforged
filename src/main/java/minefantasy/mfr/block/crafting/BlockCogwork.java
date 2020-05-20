@@ -29,7 +29,7 @@ public class BlockCogwork extends BlockDirectional {
         this.isMain = helmet;
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "block" + name );
+        setUnlocalizedName("block" + name );
         this.name = name;
         this.setTickRandomly(true);
         this.name = name;

@@ -51,7 +51,7 @@ public class ItemCrossbow extends Item
     public ItemCrossbow() {
         String name = "MF_CrossbowCustom";
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setFull3D();

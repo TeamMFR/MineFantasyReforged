@@ -45,7 +45,7 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
     public ItemCustomComponent(String name, float mass, String type) {
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         this.mass = mass;

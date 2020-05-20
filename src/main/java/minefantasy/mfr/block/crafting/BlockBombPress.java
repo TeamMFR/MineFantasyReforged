@@ -33,7 +33,7 @@ public class BlockBombPress extends BlockContainer {
         super(Material.IRON);
 
         setRegistryName("bombPress");
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "MF_BombPress");
+        setUnlocalizedName("MF_BombPress");
         this.setSoundType(SoundType.METAL);
         this.setHardness(5F);
         this.setResistance(2F);

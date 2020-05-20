@@ -45,7 +45,7 @@ public class ItemArtefact extends Item implements IArtefact {
     public ItemArtefact(String name, int rarity) {
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setHasSubtypes(true);
     }

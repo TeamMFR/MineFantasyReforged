@@ -138,7 +138,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         this.material = material;
         setCreativeTab(CreativeTabMFR.tabOldTools);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
 
         this.baseDamage = 4 + getDamageModifier();

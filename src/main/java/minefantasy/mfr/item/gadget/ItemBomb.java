@@ -38,7 +38,7 @@ public class ItemBomb extends Item implements ISpecialSalvage, IAmmo {
     public ItemBomb(String name) {
         this.maxStackSize = 16;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());

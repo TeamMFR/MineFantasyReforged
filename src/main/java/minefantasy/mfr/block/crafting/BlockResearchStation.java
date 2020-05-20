@@ -30,7 +30,7 @@ public class BlockResearchStation extends BlockContainer {
         super(Material.WOOD);
 
         setRegistryName("researchStation");
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." +  "MF_Research");
+        setUnlocalizedName( "MF_Research");
         this.setSoundType(SoundType.WOOD);
         this.setHardness(5F);
         this.setResistance(2F);

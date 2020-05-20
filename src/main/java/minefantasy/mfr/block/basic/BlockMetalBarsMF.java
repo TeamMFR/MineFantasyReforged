@@ -24,7 +24,7 @@ public class BlockMetalBarsMF extends BlockPane {
         String name = material.name.toLowerCase() + "_bars";
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHarvestLevel("pickaxe", material.harvestLevel);
         this.setSoundType(SoundType.METAL);
         this.setHardness(material.hardness + 1 / 2F);

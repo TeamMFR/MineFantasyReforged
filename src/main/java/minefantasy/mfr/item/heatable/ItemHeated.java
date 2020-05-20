@@ -36,7 +36,7 @@ public class ItemHeated extends Item implements IHotItem {
     public ItemHeated() {
         String name = "hot_item";
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHasSubtypes(true);
         this.setMaxStackSize(64);
     }

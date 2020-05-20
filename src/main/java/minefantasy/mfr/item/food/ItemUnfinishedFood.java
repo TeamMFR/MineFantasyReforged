@@ -24,7 +24,7 @@ public class ItemUnfinishedFood extends Item {
         setMaxStackSize(1);
         itemRarity = rarity;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabFood);
     }

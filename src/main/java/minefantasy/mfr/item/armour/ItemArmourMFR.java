@@ -44,7 +44,7 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
         super(name, material.getArmourConversion(), AD, slot, tex);
         baseMaterial = material;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabArmour);
 

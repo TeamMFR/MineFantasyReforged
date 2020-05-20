@@ -21,7 +21,7 @@ public class ItemLighterMF extends Item implements ILighter {
 
     public ItemLighterMF(String name, float chance, int uses) {
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         setMaxDamage(uses);
         this.chance = chance;

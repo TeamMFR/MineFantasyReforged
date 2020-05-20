@@ -43,7 +43,7 @@ public class ItemHoeMF extends ItemHoe implements IToolMaterial {
         this.name = name;
         this.toolMaterial = material;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
     }
 

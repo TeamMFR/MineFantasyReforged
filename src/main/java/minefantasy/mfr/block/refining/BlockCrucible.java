@@ -48,7 +48,7 @@ public class BlockCrucible extends BlockContainer {
         this.isActive = isActive;
 
         setRegistryName( "MF_Crucible" + tex + (isActive ? "Active" : ""));
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "crucible." + tex);
+        setUnlocalizedName("crucible." + tex);
         this.setSoundType(SoundType.STONE);
         this.setHardness(8F);
         this.setResistance(8F);

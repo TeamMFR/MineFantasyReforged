@@ -48,7 +48,7 @@ public class BlockAmmoBox extends BlockWoodDecor {
         this.name = name;
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHardness(0.5F);
         this.setResistance(2F);
         this.setCreativeTab(CreativeTabMFR.tabUtil);

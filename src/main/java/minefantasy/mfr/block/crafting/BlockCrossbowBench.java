@@ -34,7 +34,7 @@ public class BlockCrossbowBench extends BlockContainer {
         super(Material.WOOD);
 
         setRegistryName("crossbowBench");
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + "MF_CrossbowCrafter");
+        setUnlocalizedName("MF_CrossbowCrafter");
         this.setSoundType(SoundType.STONE);
         this.setHardness(5F);
         this.setResistance(2F);

@@ -41,7 +41,7 @@ public class ItemSyringe extends ItemPotion {
         this.setMaxStackSize(16);
         String name = "syringe";
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setUnlocalizedName(name);

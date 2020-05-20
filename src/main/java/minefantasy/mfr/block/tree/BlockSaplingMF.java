@@ -37,7 +37,7 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
         this.log = log;
         this.leaves = leaves;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         setSoundType(SoundType.GROUND);
     }
 

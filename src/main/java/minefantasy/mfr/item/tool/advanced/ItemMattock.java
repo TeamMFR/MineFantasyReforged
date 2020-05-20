@@ -56,7 +56,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
         super(material);
         itemRarity = rarity;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));

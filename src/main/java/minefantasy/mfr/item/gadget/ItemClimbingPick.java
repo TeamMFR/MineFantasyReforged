@@ -39,7 +39,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
         super(material);
         itemRarity = rarity;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabGadget);
         setMaxDamage(material.getMaxUses());

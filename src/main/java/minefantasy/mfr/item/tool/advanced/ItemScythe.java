@@ -67,7 +67,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         itemRarity = rarity;
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.maxStackSize = 1;

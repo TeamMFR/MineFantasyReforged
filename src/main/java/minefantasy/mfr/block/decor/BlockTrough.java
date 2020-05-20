@@ -30,7 +30,7 @@ public class BlockTrough extends BlockWoodDecor {
         super(name);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHardness(1F);
         this.setResistance(0.5F);
         this.setCreativeTab(CreativeTabMFR.tabUtil);

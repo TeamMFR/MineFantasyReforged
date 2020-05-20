@@ -47,7 +47,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setMaxDamage(material.getMaxUses());
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
     }
 

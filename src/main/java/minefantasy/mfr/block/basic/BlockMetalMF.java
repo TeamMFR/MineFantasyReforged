@@ -15,7 +15,7 @@ public class BlockMetalMF extends Block {
         String name = material.name.toLowerCase() + "_block";
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHarvestLevel("pickaxe", material.harvestLevel);
         this.setSoundType(SoundType.METAL);
         this.setHardness(material.hardness + 1 / 2F);

@@ -42,7 +42,7 @@ public class BlockSalvage extends Block {
         name = "salvage_" + name;
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setSoundType(SoundType.ANVIL);
         this.setHardness(2F);
         this.setResistance(1F);

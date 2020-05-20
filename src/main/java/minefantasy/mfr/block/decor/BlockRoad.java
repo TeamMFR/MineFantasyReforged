@@ -36,7 +36,7 @@ public class BlockRoad extends BlockContainer {
         this.setLightOpacity(0);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         setHardness(0.5F);
     }
 

@@ -23,7 +23,7 @@ public class BlockPowRailMF extends BlockRailPowered {
         String name = type + "_rail";
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHarvestLevel("pickaxe", material.harvestLevel);
         this.setSoundType(SoundType.METAL);
         this.setHardness(material.hardness + 1 / 2F);

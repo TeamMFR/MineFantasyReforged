@@ -22,11 +22,10 @@ import java.util.List;
 public class ItemResearchBook extends Item {
     public ItemResearchBook() {
         super();
-        String name = "research_book";
         setMaxStackSize(1);
         setCreativeTab(CreativeTabMFR.tabGadget);
-        setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setRegistryName("research_book");
+        setUnlocalizedName("infobook");
 
         setContainerItem(this);
     }

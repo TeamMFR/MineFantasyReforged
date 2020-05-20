@@ -66,7 +66,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setMaxDamage(getMaxDamage() / 5);
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
     }
 

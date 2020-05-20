@@ -24,11 +24,11 @@ public class ConstructionBlockMF extends Block {
         this(unlocName, Material.ROCK, types);
     }
 
-    public ConstructionBlockMF(String unlocName, Material material, String... types) {
+    public ConstructionBlockMF(String name, Material material, String... types) {
         super(material);
 
-        setRegistryName(unlocName);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + unlocName);
+        setRegistryName(name);
+        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         setHardness(1.5F);
@@ -89,11 +89,11 @@ public class ConstructionBlockMF extends Block {
     public static class StairsConstBlock extends BlockStairs {
         private final Block base;
 
-        public StairsConstBlock(String unlocalizedName, Block baseBlock, IBlockState state) {
+        public StairsConstBlock(String name, Block baseBlock, IBlockState state) {
             super(state);
 
-            setRegistryName(unlocalizedName);
-            setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + unlocalizedName);
+            setRegistryName(name);
+            setUnlocalizedName(name);
             this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
             this.setLightOpacity(0);// They seem to render shadows funny
             this.base = baseBlock;

@@ -26,7 +26,7 @@ public class BlockSchematic extends Block {
         super(Material.CLOTH);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
     }
 
     public static boolean useSchematic(ItemStack item, World world, EntityPlayer user, RayTraceResult movingobjectposition) {

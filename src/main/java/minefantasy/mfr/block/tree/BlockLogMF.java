@@ -22,7 +22,7 @@ public class BlockLogMF extends BlockLog {
         name = baseWood.toLowerCase() + "_log";
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.setHarvestLevel("axe", 0);
         this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
     }

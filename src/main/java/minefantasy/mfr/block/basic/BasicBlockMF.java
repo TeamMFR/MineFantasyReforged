@@ -27,7 +27,7 @@ public class BasicBlockMF extends Block {
         super(material);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         if (material == Material.ROCK) {
             this.setHarvestLevel("pickaxe", 0);
         }

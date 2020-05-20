@@ -15,7 +15,7 @@ public class ItemEAnvilTools extends Item {
         setCreativeTab(CreativeTabMFR.tabCraftTool);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         this.setMaxDamage(uses);
         setMaxStackSize(1);

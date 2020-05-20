@@ -60,7 +60,7 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
 
         setMaxDamage(material.getMaxUses());
     }

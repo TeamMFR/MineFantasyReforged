@@ -45,7 +45,7 @@ public class BlockBigFurnace extends BlockContainer {
         super(Material.ROCK);
 
         setRegistryName(name);
-        setUnlocalizedName(MineFantasyReborn.MOD_ID + "." + name);
+        setUnlocalizedName(name);
         this.isHeater = isHeater;
         this.tier = tier;
         this.setCreativeTab(CreativeTabMFR.tabUtil);
