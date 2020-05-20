@@ -195,6 +195,9 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList list) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {

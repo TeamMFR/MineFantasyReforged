@@ -270,6 +270,9 @@ public class ItemCrossbow extends Item
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_HANDLE_WOOD,
                 (ICrossbowPart) ComponentListMFR.CROSS_ARMS_BASIC));
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,

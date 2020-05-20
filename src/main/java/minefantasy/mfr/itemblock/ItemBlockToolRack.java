@@ -20,6 +20,9 @@ public class ItemBlockToolRack extends ItemBlockBase {
 
     @Override
     public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(itemIn)) {
+            return;
+        }
         if (MineFantasyReborn.isDebug()) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
             Iterator iteratorWood = wood.iterator();

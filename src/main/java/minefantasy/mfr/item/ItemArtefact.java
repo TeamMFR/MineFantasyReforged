@@ -62,6 +62,9 @@ public class ItemArtefact extends Item implements IArtefact {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         for (int i = 0; i < types.length; i++) {
             items.add(items.get(i));
         }

@@ -70,6 +70,9 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (tab != CreativeTabMFR.tabMaterialsMFR) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("metal");
             Iterator iteratorWood = wood.iterator();

@@ -70,6 +70,9 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         for (byte pdr = 0; pdr < 2; pdr++) {
             for (byte fill = 0; fill < 3; fill++) {
                 items.add(createBombArrow(pdr, fill));

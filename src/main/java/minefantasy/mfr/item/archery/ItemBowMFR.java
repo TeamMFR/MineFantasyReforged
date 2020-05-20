@@ -357,6 +357,9 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (isCustom) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
             Iterator iteratorWood = wood.iterator();

@@ -304,6 +304,9 @@ public class ItemFoodMF extends ItemFood {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         ItemStack food = items.get(1);
         if (this.getUnlocalizedName().contains("stew")) {
             setLeftOver(food, new ItemStack(Items.BOWL));

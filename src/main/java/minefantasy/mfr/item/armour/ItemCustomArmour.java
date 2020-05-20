@@ -127,6 +127,9 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
         Iterator iteratorMetal = metal.iterator();
         if (this.getCreativeTab() != CreativeTabMFR.tabArmour) {

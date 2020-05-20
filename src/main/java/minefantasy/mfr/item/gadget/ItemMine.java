@@ -178,6 +178,9 @@ public class ItemMine extends Item implements ISpecialSalvage, IAmmo {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         items.add(createMine((byte) 0, (byte) 0, (byte) 0, (byte) 0, 1));
         items.add(createMine((byte) 0, (byte) 1, (byte) 0, (byte) 0, 1));
         items.add(createMine((byte) 0, (byte) 2, (byte) 0, (byte) 0, 1));

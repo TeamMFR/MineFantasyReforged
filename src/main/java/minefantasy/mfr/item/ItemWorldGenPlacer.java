@@ -71,6 +71,9 @@ public class ItemWorldGenPlacer extends Item {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         for (int id = 0; id < types.length; id++)
             items.add(items.get(id));
     }
