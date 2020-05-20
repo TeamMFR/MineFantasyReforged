@@ -27,6 +27,9 @@ public class ItemCrudeBomb extends ItemBomb implements ISpecialSalvage {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         items.add(new ItemStack(this));
     }
 

@@ -73,6 +73,9 @@ public class ItemComponentMFR extends Item implements ITieredComponent {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (this.getCreativeTab() != CreativeTabMFR.tabMaterialsMFR) {
             super.getSubItems(tab, items);
             return;

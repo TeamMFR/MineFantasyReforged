@@ -205,6 +205,9 @@ public class ItemBomb extends Item implements ISpecialSalvage, IAmmo {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         items.add(createBomb((byte) 0, (byte) 0, (byte) 0, (byte) 0, 1));
         items.add(createBomb((byte) 0, (byte) 1, (byte) 0, (byte) 0, 1));
         items.add(createBomb((byte) 0, (byte) 2, (byte) 0, (byte) 0, 1));

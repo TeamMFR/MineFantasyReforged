@@ -235,6 +235,9 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             Iterator iteratorMetal = metal.iterator();

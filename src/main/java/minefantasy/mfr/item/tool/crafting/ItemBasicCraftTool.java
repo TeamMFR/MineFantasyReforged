@@ -92,6 +92,9 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (isCustom) {
             items.add(this.construct("OakWood"));
             items.add(this.construct("IronbarkWood"));

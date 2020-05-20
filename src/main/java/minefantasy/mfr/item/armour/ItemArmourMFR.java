@@ -129,6 +129,9 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+        if (!isInCreativeTab(tab)) {
+            return;
+        }
         if (this != ArmourListMFR.LEATHER[0]) {
             return;
         }
