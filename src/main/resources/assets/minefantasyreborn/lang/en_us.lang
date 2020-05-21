@@ -1052,6 +1052,7 @@ item.jerky.name=Jerky
 item.cheese_roll.name=Cheese Roll
 item.sweetroll.name=Sweetroll
 item.sandwitch.name=Sandwitch
+item.sandwitch_big.name=Big Sandwitch
 
 tile.pie_meat.name=Meat Pie
 tile.pie_apple.name=Apple Pie
