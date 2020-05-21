@@ -11,6 +11,8 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -48,7 +50,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem {
+public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem, IClientRegister {
     protected int itemRarity;
     private Random rand = new Random();
     private ToolMaterial toolMaterial;
@@ -322,5 +324,10 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     @Override
     public boolean isSpecialRender(ItemStack item) {
         return false;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

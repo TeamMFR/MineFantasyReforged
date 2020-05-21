@@ -31,7 +31,9 @@ import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -69,7 +71,7 @@ import java.util.Random;
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
         IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
-        IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem {
+        IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     public static float axeAPModifier = -0.1F;
     protected static int speedModHeavy = 5;
@@ -148,12 +150,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         setRegistryName(name);
         setUnlocalizedName(name);
 
-
         this.baseDamage = 4 + getDamageModifier();
 
         if (material == ToolMaterial.WOOD) {
             baseDamage = 0F;
         }
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     public static int getParry(ItemStack item) {
@@ -716,4 +719,10 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     public String getDesign(ItemStack item) {
         return designType;
     }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
 }

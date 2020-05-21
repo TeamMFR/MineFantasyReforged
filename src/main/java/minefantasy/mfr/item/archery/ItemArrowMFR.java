@@ -1,10 +1,14 @@
 package minefantasy.mfr.item.archery;
 
 
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.render.ModelHelper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -32,7 +36,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
+public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
     public static final MFArrowDispenser dispenser = new MFArrowDispenser();
     protected float damage;
@@ -211,6 +215,12 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
         int maxUses = CustomToolHelper.getMaxDamage(arrow, arrowMat.getMaxUses());
         return 1F / (maxUses / 150);
     }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
     // ====================================================== CUSTOM END
     // ==============================================================\\
 }

@@ -7,6 +7,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -33,7 +35,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemSpadeMF extends ItemSpade implements IToolMaterial {
+public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private String name;
     private float baseDamage = 1F;
@@ -160,4 +162,9 @@ public class ItemSpadeMF extends ItemSpade implements IToolMaterial {
     }
     // ====================================================== CUSTOM END
     // ==============================================================\\
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
 }

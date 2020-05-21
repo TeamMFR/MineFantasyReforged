@@ -1,5 +1,7 @@
 package minefantasy.mfr.item.tool;
 
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +18,7 @@ import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemLighterMF extends Item implements ILighter {
+public class ItemLighterMF extends Item implements ILighter, IClientRegister {
     private float chance;
 
     public ItemLighterMF(String name, float chance, int uses) {
@@ -72,5 +74,10 @@ public class ItemLighterMF extends Item implements ILighter {
             }
             return true;
         }
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

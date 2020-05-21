@@ -8,6 +8,8 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -45,7 +47,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemTrowMF extends ItemSpade implements IToolMaterial {
+public class ItemTrowMF extends ItemSpade implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private String name;
     private float baseDamage = 1F;
@@ -222,6 +224,12 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial {
         String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
     // ====================================================== CUSTOM END
     // ==============================================================\\
 }

@@ -1,6 +1,7 @@
 package minefantasy.mfr.item.custom;
 
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemCustomComponent extends Item implements ITieredComponent {
+public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent {
     private final String materialType;
     private String name;
     private float mass;
@@ -43,9 +44,8 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
     }
 
     public ItemCustomComponent(String name, float mass, String type) {
+        super(name);
         this.name = name;
-        setRegistryName(name);
-        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         this.mass = mass;

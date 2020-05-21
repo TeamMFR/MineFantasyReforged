@@ -109,11 +109,13 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
         Multimap map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
 
+        if (slot == EntityEquipmentSlot.MAINHAND) {
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
+        }
         return map;
     }
 
