@@ -1,24 +1,18 @@
 package minefantasy.mfr.item.food;
 
-import minefantasy.mfr.hunger.HungerSystemMFR;
-import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.item.ClientItemsMF;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.stamina.StaminaBar;
+import minefantasy.mfr.hunger.HungerSystemMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import net.minecraft.creativetab.CreativeTabs;
+import minefantasy.mfr.item.ClientItemsMF;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -26,14 +20,18 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class ItemFoodMF extends ItemFood {
+public class ItemFoodMF extends ItemFood implements IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     private static final String eatDelayNBT = "MF_EatenFoodDelay";
     private static final String leftOverNbt = "MF_Food_leftover";
@@ -62,6 +60,7 @@ public class ItemFoodMF extends ItemFood {
         setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabFood);
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     public ItemFoodMF(String name, int hunger, float saturation, boolean isMeat, int rarity) {
@@ -301,18 +300,19 @@ public class ItemFoodMF extends ItemFood {
         }
         return getContainerItem(food);
     }
-
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(tab)) {
-            return;
-        }
-        ItemStack food = items.get(1);
-        if (this.getUnlocalizedName().contains("stew")) {
-            setLeftOver(food, new ItemStack(Items.BOWL));
-        }
-        items.add(food);
-    }
+//
+//    @Override
+//    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+//        if (!isInCreativeTab(tab)) {
+//            rNeturn;
+    ////        }
+    ////        //ItemStack food = items.get(0);
+    ////        // TODO: this should be in its own childclass
+    ////        //        if (this.getUnlocalizedame().contains("stew")) {
+//        //            setLeftOver(food, new ItemStack(Items.BOWL));
+//        //        }
+//        //        items.add(food);
+//    }
 
     public ItemFoodMF setEatTime(int i) {
         useTime = i;
@@ -330,5 +330,11 @@ public class ItemFoodMF extends ItemFood {
             return food;
         }
         return super.onItemRightClick( world, user, hand);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

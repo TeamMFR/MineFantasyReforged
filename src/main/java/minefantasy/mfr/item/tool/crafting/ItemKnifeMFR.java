@@ -39,7 +39,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Anonymous Productions
@@ -48,8 +47,6 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
     protected int itemRarity;
     private int tier;
     private float baseDamage;
-    // ===================================================== CUSTOM START
-    // =============================================================\\
     private boolean isCustom = false;
     private float efficiencyMod = 1.0F;
 
@@ -156,9 +153,10 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        super.getAttributeModifiers(slot, stack);
         Multimap map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }

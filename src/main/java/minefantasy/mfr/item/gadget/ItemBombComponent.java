@@ -1,22 +1,22 @@
 package minefantasy.mfr.item.gadget;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.crafting.ISalvageDrop;
 import minefantasy.mfr.api.crafting.engineer.IBombComponent;
 import minefantasy.mfr.item.ItemComponentMFR;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class ItemBombComponent extends ItemComponentMFR implements IBombComponent, ISalvageDrop {
+public class ItemBombComponent extends ItemComponentMFR implements IBombComponent, ISalvageDrop  {
     private static HashMap<String, Item> components = new HashMap<String, Item>();
 
     private byte tier;

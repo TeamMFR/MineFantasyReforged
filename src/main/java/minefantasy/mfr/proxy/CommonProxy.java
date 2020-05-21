@@ -4,29 +4,17 @@ import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.refine.ISmokeHandler;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
-import minefantasy.mfr.block.tile.TileEntityBellows;
 import minefantasy.mfr.block.tile.TileEntityBigFurnace;
 import minefantasy.mfr.block.tile.TileEntityBloomery;
 import minefantasy.mfr.block.tile.TileEntityBombBench;
-import minefantasy.mfr.block.tile.TileEntityBombPress;
 import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
-import minefantasy.mfr.block.tile.TileEntityChimney;
-import minefantasy.mfr.block.tile.TileEntityComponent;
 import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
 import minefantasy.mfr.block.tile.TileEntityCrucible;
-import minefantasy.mfr.block.tile.TileEntityFirepit;
 import minefantasy.mfr.block.tile.TileEntityForge;
 import minefantasy.mfr.block.tile.TileEntityQuern;
 import minefantasy.mfr.block.tile.TileEntityResearch;
-import minefantasy.mfr.block.tile.TileEntityRoad;
-import minefantasy.mfr.block.tile.TileEntityRoast;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
-import minefantasy.mfr.block.tile.TileEntityWorldGenMarker;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
 import minefantasy.mfr.container.ContainerAnvilMF;
 import minefantasy.mfr.container.ContainerBigFurnace;
 import minefantasy.mfr.container.ContainerBlastChamber;
@@ -41,8 +29,8 @@ import minefantasy.mfr.container.ContainerQuern;
 import minefantasy.mfr.container.ContainerReload;
 import minefantasy.mfr.container.ContainerResearch;
 import minefantasy.mfr.entity.EntitySmoke;
-import minefantasy.mfr.init.EntityListMF;
 import minefantasy.mfr.hunger.HungerSystemMFR;
+import minefantasy.mfr.init.EntityListMF;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.archery.ArrowFireFlint;
 import minefantasy.mfr.item.archery.ArrowFirerMF;
@@ -58,12 +46,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.IGuiHandler;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 /**
  * @author Anonymous Productions
  */
@@ -197,4 +182,19 @@ public class CommonProxy implements IGuiHandler, ISmokeHandler{
         EntityListMF.register();
     }
 
+    public void addClientRegister(IClientRegister register) {
+        //NOOP for commonProxy
+    }
+
+	public void preInit() {
+		//NOOP for commonProxy
+	}
+
+	public void init() {
+		//NOOP for commonProxy
+	}
+
+	public void postInit() {
+		//NOOP for commonProxy
+	}
 }

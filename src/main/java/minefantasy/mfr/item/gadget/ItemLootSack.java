@@ -2,10 +2,10 @@ package minefantasy.mfr.item.gadget;
 
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -14,23 +14,21 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 import java.util.Random;
 
-public class ItemLootSack extends Item {
+public class ItemLootSack extends ItemBaseMFR {
 
     protected int amount, tier;
     protected ResourceLocation pool;
 
     public ItemLootSack(String name, int amount, int tier) {
+        super(name);
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.amount = amount;
         this.tier = tier;
         pool = tier == 0 ? LootRegistryMFR.LOOT_SACK_COMMON : tier == 1 ? LootRegistryMFR.LOOT_SACK_VALUABLE : LootRegistryMFR.LOOT_SACK_EXQUISITE;
-        setRegistryName(name);
-        setUnlocalizedName(name);
     }
 
     @Override
