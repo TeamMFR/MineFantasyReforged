@@ -12,6 +12,7 @@ import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
@@ -33,7 +34,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
@@ -223,7 +223,7 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
                             Object instance = players.next();
                             if (instance != null && instance instanceof EntityPlayer) {
                                 if (((EntityPlayer) instance).getDistance(this) < 128D) {
-                                    ((EntityPlayer) instance).sendMessage(new TextComponentString(I18n.translateToLocal("event.dragonaway.name")) {});
+                                    ((EntityPlayer) instance).sendMessage(new TextComponentString(I18n.format("event.dragonaway.name")) {});
                                 }
                             }
                         }
@@ -847,9 +847,9 @@ public class EntityDragon extends EntityFlyingMF implements IMob, IArmouredEntit
     }
 
     public String getCommandSenderName() {
-        String tierName = I18n.translateToLocal("entity." + getType().name + ".name");
-        String breedName = I18n.translateToLocal("entity.dragonbreed." + getType().breedName + ".name");
-        return I18n.translateToLocalFormatted(tierName, breedName);
+        String tierName = I18n.format(("entity." + getType().name + ".name"));
+        String breedName = I18n.format(("entity.dragonbreed." + getType().breedName + ".name"));
+        return I18n.format(tierName, breedName);
     }
 
     public float getScale() {

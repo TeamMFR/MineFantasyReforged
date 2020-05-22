@@ -51,6 +51,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     public ItemShearsMFR setCustom(String s) {

@@ -34,7 +34,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -84,8 +84,9 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         itemRarity = rarity;
         setRegistryName(name);
         setUnlocalizedName(name);
-
         setCreativeTab(CreativeTabMFR.tabOldTools);
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -194,7 +195,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
             desc.add(TextFormatting.DARK_GRAY + ammo.getDisplayName() + " x" + ammo.getCount());
         }
 
-        desc.add(TextFormatting.BLUE + I18n.translateToLocalFormatted("attribute.bowPower.name",
+        desc.add(TextFormatting.BLUE + I18n.format("attribute.bowPower.name",
                 decimal_format.format(getBowDamage(item))));
     }
 

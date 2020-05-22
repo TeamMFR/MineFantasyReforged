@@ -7,7 +7,7 @@ import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 import java.util.UUID;
 
@@ -40,7 +40,7 @@ public class LevelupPacket extends PacketMF {
 
             if (skill != null) {
                 player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 0.5F);
-                player.sendMessage(new TextComponentString(I18n.translateToLocalFormatted("rpg.levelup",
+                player.sendMessage(new TextComponentString(I18n.format("rpg.levelup",
                         skill.getDisplayName().toLowerCase(), skillLvl)));
             }
         }

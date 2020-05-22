@@ -1,9 +1,9 @@
 package minefantasy.mfr.api.rpg;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.MinecraftForge;
 
 public class Skill {
@@ -129,6 +129,6 @@ public class Skill {
     }
 
     public String getDisplayName() {
-        return I18n.translateToLocal("skill." + skillName + ".name");
+        return I18n.format("skill." + skillName + ".name");
     }
 }

@@ -56,6 +56,7 @@ public class ItemAxeMF extends ItemAxe implements IToolMaterial, IClientRegister
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override

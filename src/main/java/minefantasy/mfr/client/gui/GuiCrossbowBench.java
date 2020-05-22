@@ -7,7 +7,7 @@ import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
 import minefantasy.mfr.container.ContainerCrossbowBench;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -26,7 +26,7 @@ public class GuiCrossbowBench extends GuiContainer {
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        String s = I18n.translateToLocal("tile.crossbowBench.name");
+        String s = I18n.format("tile.crossbowBench.name");
         // this.fontRendererObj.drawString(s, 10, 6, 0);
 
         int xPoint = (this.width - this.xSize) / 2;

@@ -1,5 +1,6 @@
 package minefantasy.mfr.item.tool.crafting;
 
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.ToolHelper;
@@ -10,12 +11,10 @@ import net.minecraft.item.ItemStack;
 /**
  * @author Anonymous Productions
  */
-public class ItemEAnvilTools extends Item {
+public class ItemEAnvilTools extends ItemBaseMFR {
     public ItemEAnvilTools(String name, int uses) {
+        super(name);
         setCreativeTab(CreativeTabMFR.tabCraftTool);
-
-        setRegistryName(name);
-        setUnlocalizedName(name);
 
         this.setMaxDamage(uses);
         setMaxStackSize(1);

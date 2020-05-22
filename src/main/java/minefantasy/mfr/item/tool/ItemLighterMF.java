@@ -1,5 +1,6 @@
 package minefantasy.mfr.item.tool;
 
+import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
@@ -18,13 +19,11 @@ import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemLighterMF extends Item implements ILighter, IClientRegister {
+public class ItemLighterMF extends ItemBaseMFR implements ILighter {
     private float chance;
 
     public ItemLighterMF(String name, float chance, int uses) {
-        setRegistryName(name);
-        setUnlocalizedName(name);
-
+        super(name);
         setMaxDamage(uses);
         this.chance = chance;
         this.setMaxStackSize(1);
@@ -74,10 +73,5 @@ public class ItemLighterMF extends Item implements ILighter, IClientRegister {
             }
             return true;
         }
-    }
-
-    @Override
-    public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
     }
 }

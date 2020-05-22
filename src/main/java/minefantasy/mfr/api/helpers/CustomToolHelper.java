@@ -12,7 +12,7 @@ import minefantasy.mfr.item.heatable.ItemHeated;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -238,15 +238,15 @@ public class CustomToolHelper {
         if (materialOnTooltip()) {
             CustomMaterial main = getCustomPrimaryMaterial(item);
             if (main != null) {
-                String matName = I18n.translateToLocal(
-                        I18n.translateToLocal("material." + main.getName() + ".name"));
+                String matName = I18n.format(
+                        I18n.format("material." + main.getName() + ".name"));
                 list.add(TextFormatting.GOLD + matName);
             }
         }
 
         if (haft != null) {
-            String matName = I18n.translateToLocalFormatted("item.mod_haft.name",
-                    I18n.translateToLocal("material." + haft.getName() + ".name"));
+            String matName = I18n.format("item.mod_haft.name",
+                    I18n.format("material." + haft.getName() + ".name"));
             list.add(TextFormatting.GOLD + matName);
         }
 
@@ -258,7 +258,7 @@ public class CustomToolHelper {
      * @return
      */
     public static boolean materialOnTooltip() {
-        String cfg = I18n.translateToLocal("languagecfg.tooltiptier");
+        String cfg = I18n.format("languagecfg.tooltiptier");
         return cfg.equalsIgnoreCase("true");
     }
 
@@ -267,8 +267,8 @@ public class CustomToolHelper {
 
         CustomMaterial metals = getCustomPrimaryMaterial(item);
         if (metals != null) {
-            String matName = I18n.translateToLocalFormatted("item.mod_joint.name",
-                    I18n.translateToLocal("material." + metals.getName() + ".name"));
+            String matName = I18n.format("item.mod_joint.name",
+                    I18n.format("material." + metals.getName() + ".name"));
             list.add(TextFormatting.GOLD + matName);
         }
 
@@ -276,7 +276,7 @@ public class CustomToolHelper {
 
     public static String getWoodenLocalisedName(ItemStack item, String unlocalName) {
         if (materialOnTooltip()) {
-            I18n.translateToLocal(unlocalName);
+            I18n.format(unlocalName);
         }
 
         CustomMaterial base = getCustomSecondaryMaterial(item);
@@ -284,13 +284,13 @@ public class CustomToolHelper {
         if (base != null) {
             name = base.getName();
         }
-        return I18n.translateToLocalFormatted(unlocalName,
-                I18n.translateToLocal("material." + name + ".name"));
+        return I18n.format(unlocalName,
+                I18n.format("material." + name + ".name"));
     }
 
     public static String getLocalisedName(ItemStack item, String unlocalName) {
         if (materialOnTooltip()) {
-            I18n.translateToLocal(unlocalName);
+            I18n.format(unlocalName);
         }
 
         CustomMaterial base = getCustomPrimaryMaterial(item);
@@ -298,8 +298,8 @@ public class CustomToolHelper {
         if (base != null) {
             name = base.getName();
         }
-        return I18n.translateToLocalFormatted(unlocalName,
-                I18n.translateToLocal("material." + name + ".name"));
+        return I18n.format(unlocalName,
+                I18n.format("material." + name + ".name"));
     }
 
     public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) {
@@ -368,7 +368,7 @@ public class CustomToolHelper {
             if (base.isHeatable()) {
                 int maxTemp = base.getHeatableStats()[0];
                 int beyondMax = base.getHeatableStats()[1];
-                list.add(I18n.translateToLocalFormatted("materialtype.workable.name", maxTemp, beyondMax));
+                list.add(I18n.format("materialtype.workable.name", maxTemp, beyondMax));
             }
         }
     }

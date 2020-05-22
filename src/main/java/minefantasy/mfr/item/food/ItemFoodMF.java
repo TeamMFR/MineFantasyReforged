@@ -23,7 +23,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -60,6 +60,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
         setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabFood);
+
         MineFantasyReborn.proxy.addClientRegister(this);
     }
 
@@ -204,42 +205,42 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack food, World world, List list, ITooltipFlag flag) {
         super.addInformation(food, world, list, flag);
-        list.add(I18n.translateToLocalFormatted("food.stat.hunger.name", hungerLevel));
+        list.add(I18n.format("food.stat.hunger.name", hungerLevel));
 
         if (hasEffect && ClientItemsMF.showSpecials(food, world, list, flag)) {
             list.add("");
-            list.add(TextFormatting.WHITE + I18n.translateToLocal("food.stat.list.name"));
+            list.add(TextFormatting.WHITE + I18n.format("food.stat.list.name"));
             if (mfSaturation > 0) {
-                list.add(I18n.translateToLocalFormatted("food.stat.saturation.name",
+                list.add(I18n.format("food.stat.saturation.name",
                         decimal_format.format(mfSaturation)));
             }
             if (staminaRestore > 0) {
-                list.add(I18n.translateToLocalFormatted("food.stat.staminaPlus.name", (int) staminaRestore));
+                list.add(I18n.format("food.stat.staminaPlus.name", (int) staminaRestore));
             }
             if (staminaBuff > 0) {
                 if (staminaInHours) {
-                    list.add(I18n.translateToLocalFormatted("food.stat.staminabuffHours.name",
+                    list.add(I18n.format("food.stat.staminabuffHours.name",
                             decimal_format.format(staminaBuff), decimal_format.format(staminaSeconds / 3600F)));
                 } else if (staminaInMinutes) {
-                    list.add(I18n.translateToLocalFormatted("food.stat.staminabuffMinutes.name",
+                    list.add(I18n.format("food.stat.staminabuffMinutes.name",
                             decimal_format.format(staminaBuff), decimal_format.format(staminaSeconds / 60F)));
                 } else {
-                    list.add(I18n.translateToLocalFormatted("food.stat.staminabuffSeconds.name",
+                    list.add(I18n.format("food.stat.staminabuffSeconds.name",
                             decimal_format.format(staminaBuff), decimal_format.format(staminaSeconds)));
                 }
             }
             if (staminaRegenBuff > 0) {
                 if (staminaRegenInMinutes) {
-                    list.add(I18n.translateToLocalFormatted("food.stat.staminabuffRegenMinutes.name",
+                    list.add(I18n.format("food.stat.staminabuffRegenMinutes.name",
                             decimal_format.format(staminaRegenBuff), decimal_format.format(staminaRegenSeconds / 60F)));
                 } else {
-                    list.add(I18n.translateToLocalFormatted("food.stat.staminabuffRegenSeconds.name",
+                    list.add(I18n.format("food.stat.staminabuffRegenSeconds.name",
                             decimal_format.format(staminaRegenBuff), decimal_format.format(staminaRegenSeconds)));
                 }
             }
         }
         if (this == FoodListMFR.BERRIES_JUICY) {
-            list.add(I18n.translateToLocal("food.stat.cure.poison"));
+            list.add(I18n.format("food.stat.cure.poison"));
         }
     }
 

@@ -115,9 +115,9 @@ public class GuiKnowledge extends GuiScreen {
 		int purchasey = j1 + (informationHeight - buyHeight) / 2;
 		// PURCHASE SCREEN
 		this.buttonList.add(
-				new GuiOptionButton(3, purchasex + 19, purchasey + 47, I18n.format("gui.purchase", new Object[0])));
+				new GuiOptionButton(3, purchasex + 19, purchasey + 47, I18n.format("gui.purchase")));
 		this.buttonList
-				.add(new GuiOptionButton(4, purchasex + 125, purchasey + 47, I18n.format("gui.cancel", new Object[0])));
+				.add(new GuiOptionButton(4, purchasex + 125, purchasey + 47, I18n.format("gui.cancel")));
 	}
 
 	@Override
@@ -279,7 +279,7 @@ public class GuiKnowledge extends GuiScreen {
 		int i = (this.width - GuiKnowledge.informationWidth) / 2 + offsetByX;
 		int j = (this.height - GuiKnowledge.informationHeight) / 2 + offsetByY;
 
-		this.fontRenderer.drawString(I18n.format("gui.information", new Object[0]), i + 15, j + 5, 4210752);
+		this.fontRenderer.drawString(I18n.format("gui.information"), i + 15, j + 5, 4210752);
 	}
 
 	protected void renderMainPage(int mx, int my, float f) {
@@ -488,7 +488,7 @@ public class GuiKnowledge extends GuiScreen {
 				int k4;
 
 				if (researchVisibility == 3) {
-					s1 = I18n.format("achievement.unknown", new Object[0]);
+					s1 = I18n.format("achievement.unknown");
 					j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
 					s = (new TextComponentString(
 							"achievement.requires" + new Object[] { achievement.parentInfo.getDisplayName() }))
@@ -520,11 +520,11 @@ public class GuiKnowledge extends GuiScreen {
 				this.fontRenderer.drawSplitString(s2, i5, j5 + 12, j4, -6250336);
 
 				if (ResearchLogic.hasInfoUnlocked(player, achievement)) {
-					this.fontRenderer.drawStringWithShadow(I18n.format("information.discovered", new Object[0]), i5,
+					this.fontRenderer.drawStringWithShadow(I18n.format("information.discovered"), i5,
 							j5 + k5 + 4, -7302913);
 				} else if (InformationBase.easyResearch && ResearchLogic.canUnlockInfo(player, achievement)) {
 					this.fontRenderer.drawStringWithShadow(
-							net.minecraft.util.text.translation.I18n.translateToLocal("information.buy"), i5,
+							I18n.format("information.buy"), i5,
 							j5 + k5 + 4, -7302913);
 				}
 			}
@@ -584,7 +584,7 @@ public class GuiKnowledge extends GuiScreen {
 
 			if (hasScroll) {
 				mc.fontRenderer.drawStringWithShadow(
-						net.minecraft.util.text.translation.I18n.translateToLocal("knowledge.hasScroll"), x + 20,
+						I18n.format("knowledge.has_scroll"), x + 20,
 						y + 32, red);
 			} else {
 				for (int a = 0; a < requirements.length; a++) {

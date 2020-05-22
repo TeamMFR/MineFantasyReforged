@@ -1,9 +1,9 @@
 package minefantasy.mfr.material;
 
 import minefantasy.mfr.api.material.CustomMaterial;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
@@ -96,7 +96,7 @@ public class WoodMaterial extends CustomMaterial {
 
     @Override
     public String getMaterialString() {
-        return I18n.translateToLocalFormatted("materialtype." + this.type + ".name", this.tier);
+        return I18n.format("materialtype." + this.type + ".name", this.tier);
     }
 
     @Override

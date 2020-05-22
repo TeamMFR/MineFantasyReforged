@@ -47,6 +47,7 @@ public class ItemHoeMF extends ItemHoe implements IToolMaterial, IClientRegister
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override

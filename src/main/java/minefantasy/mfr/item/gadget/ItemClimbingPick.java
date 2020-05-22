@@ -1,5 +1,8 @@
 package minefantasy.mfr.item.gadget;
 
+import codechicken.lib.render.ModelHelper;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -31,7 +34,7 @@ import java.util.Random;
 /**
  * @author Anonymous Productions
  */
-public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
+public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
     private Random rand = new Random();
     private int itemRarity;
 
@@ -43,6 +46,8 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
 
         setCreativeTab(CreativeTabMFR.tabGadget);
         setMaxDamage(material.getMaxUses());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     public static boolean tryPerformAbility(EntityLivingBase user, float points) {
@@ -203,5 +208,10 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial {
     @Override
     public int getMaxItemUseDuration(ItemStack item) {
         return Integer.MAX_VALUE;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

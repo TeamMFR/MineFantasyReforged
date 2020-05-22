@@ -12,6 +12,7 @@ import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -27,7 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -60,6 +60,7 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -91,10 +92,10 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
 
                 int HL = CustomToolHelper.getHarvestLevel(item, toolMaterial.getHarvestLevel());
                 if (blockTier > HL) {
-                    String msg = I18n.translateToLocalFormatted("prospect.cannotmine", HL, blockTier);
+                    String msg = I18n.format("prospect.cannotmine", HL, blockTier);
                     player.sendMessage(new TextComponentString(TextFormatting.RED + msg));
                 } else {
-                    String msg = I18n.translateToLocalFormatted("prospect.canmine", HL, blockTier);
+                    String msg = I18n.format("prospect.canmine", HL, blockTier);
                     player.sendMessage(new TextComponentString(TextFormatting.GREEN + msg));
                 }
             }
@@ -125,10 +126,14 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }

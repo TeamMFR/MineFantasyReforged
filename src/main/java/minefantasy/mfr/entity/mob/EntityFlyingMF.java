@@ -61,7 +61,8 @@ public abstract class EntityFlyingMF extends EntityLiving {
 			}
 
 			float f3 = 0.16277136F / (f2 * f2 * f2);
-			this.moveRelative(strafe, up, forward, this.onGround ? 0.1F * f3 : 0.02F);
+			// TODO: fixme - this currently causes server crash
+//			this.moveRelative(strafe, up, forward, this.onGround ? 0.1F * f3 : 0.02F);
 			f2 = 0.91F;
 
 			if (this.onGround) {

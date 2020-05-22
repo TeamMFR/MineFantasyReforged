@@ -12,7 +12,7 @@ import minefantasy.mfr.container.ContainerCarpenterMFR;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -35,7 +35,7 @@ public class GuiCarpenterMF extends GuiContainer {
     protected void drawGuiContainerForegroundLayer(int x, int y) {
         boolean knowsCraft = tile.doesPlayerKnowCraft(mc.player);
         String s = MineFantasyReborn.isDebug() ? "Carpenter Bench Crafting"
-                : knowsCraft ? I18n.translateToLocal(tile.getResultName()) : "????";
+                : knowsCraft ? I18n.format(tile.getResultName()) : "????";
         this.fontRenderer.drawString(s, 10, 8, 0);
 
         int xPoint = (this.width - this.xSize) / 2;
@@ -44,21 +44,21 @@ public class GuiCarpenterMF extends GuiContainer {
         if (knowsCraft && !tile.resName.equalsIgnoreCase("")) {
             if (tile.getToolNeeded() != null) {
                 if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-                    String s2 = I18n.translateToLocal("tooltype." + tile.getToolNeeded()) + ", "
+                    String s2 = I18n.format("tooltype." + tile.getToolNeeded()) + ", "
                             + (tile.getToolTierNeeded() > -1
-                            ? I18n.translateToLocal("attribute.mfcrafttier.name") + " "
+                            ? I18n.format("attribute.mfcrafttier.name") + " "
                             + tile.getToolTierNeeded()
-                            : I18n.translateToLocal("attribute.nomfcrafttier.name"));
+                            : I18n.format("attribute.nomfcrafttier.name"));
                     this.fontRenderer.drawStringWithShadow(s2, -18, -12,
                             isToolSufficient() ? 16777215 : GuiHelper.getColourForRGB(150, 0, 0));
                 }
             }
             if (x < xPoint + regularXSize + 20 && x > xPoint + regularXSize && y < yPoint + 20 && y > yPoint) {
-                String s2 = I18n.translateToLocal("tooltype.carpenter") + ", "
+                String s2 = I18n.format("tooltype.carpenter") + ", "
                         + (tile.getCarpenterTierNeeded() > -1
-                        ? I18n.translateToLocal("attribute.mfcrafttier.name") + " "
+                        ? I18n.format("attribute.mfcrafttier.name") + " "
                         + tile.getCarpenterTierNeeded()
-                        : I18n.translateToLocal("attribute.nomfcrafttier.name"));
+                        : I18n.format("attribute.nomfcrafttier.name"));
                 this.fontRenderer.drawStringWithShadow(s2, regularXSize - fontRenderer.getStringWidth(s2) + 18,
                         -12, 16777215);
             }

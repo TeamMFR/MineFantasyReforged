@@ -9,6 +9,8 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -36,7 +38,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR {
+public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, IClientRegister {
     protected int itemRarity;
     private ToolMaterial material;
     private int tier;
@@ -57,10 +59,15 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR {
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.5D, 0));
@@ -156,5 +163,10 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR {
     @Override
     public ToolMaterial getMaterial() {
         return toolMaterial;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

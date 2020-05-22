@@ -1,5 +1,6 @@
 package minefantasy.mfr.item.gadget;
 
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -14,15 +15,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemParachute extends Item {
+public class ItemParachute extends ItemBaseMFR {
     public ItemParachute() {
-        String name = "parachute";
+        super("parachute");
         this.maxStackSize = 1;
-        setRegistryName(name);
-        setUnlocalizedName(name);
-
         this.setCreativeTab(CreativeTabMFR.tabGadget);
-        this.setUnlocalizedName(name);
     }
 
     @Override

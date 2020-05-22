@@ -12,6 +12,7 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.packet.BombBenchPacket;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,7 +27,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.WorldServer;
 
 import java.util.Random;
@@ -437,7 +437,7 @@ public class TileEntityBombBench extends TileEntity implements IInventory, ISide
 
     @Override
     public String getLocalisedName() {
-        return I18n.translateToLocal("tile.bombBench.name");
+        return I18n.format("tile.bombBench.name");
     }
 
     @Override

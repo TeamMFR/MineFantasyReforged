@@ -5,6 +5,8 @@ info.bow.reload=Right-Click while sneaking to open firearm.
 info.firearm.ammo=%1$s/%2$s
 info.tooltip.moreinfo=Hold [%1$s] for more information.
 
+achievement.unknown=achievement.unknown
+
 attribute.kit.salvage.name=Salvage Modifier
 
 attribute.kit.repairRate.name=Repair Value
@@ -31,6 +33,7 @@ information.discovered=Researched
 information.buy=Click for Research
 knowledge.unknownUse=You don't know how to use this!
 knowledge.known=You already know this
+knowledge.has_scroll=knowledge.has_scroll
 
 infoPage.basic=Basic Information
 infoPage.artisanry=Artisanry
@@ -87,7 +90,7 @@ entity.dreadminotaur_guard.name=Dread Minotaur Bruiser
 entity.dreadminotaur_elite.name=Dread Minotaur Punisher
 entity.dreadminotaur_boss.name=Dread Minotaur Death Overlord
 
-entity.dragonbreed.red.name=Red
+entity.gu.red.name=Red
 entity.dragonbreed.white.name=Frost
 entity.dragonbreed.black.name=Dire
 entity.dragonbreed.green.name=Green

@@ -26,6 +26,7 @@ import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
@@ -239,7 +239,7 @@ public class MineFantasyHUD extends Gui {
         int yPosAR = orientationAR[1] + ConfigClient.AR_yPos;
         int y = 8;
         if (ArmourCalculator.advancedDamageTypes) {
-            mc.fontRenderer.drawStringWithShadow(I18n.translateToLocal("attribute.armour.protection"), xPosAR,
+            mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.protection"), xPosAR,
                     yPosAR, Color.WHITE.getRGB());
             displayTraitValue(xPosAR, yPosAR + 8, orientationAR, 0, player, base);
             displayTraitValue(xPosAR, yPosAR + 16, orientationAR, 2, player, base);
@@ -287,7 +287,7 @@ public class MineFantasyHUD extends Gui {
         if (held != null && (held.getItem() instanceof IDisplayMFRAmmo)) {
             ItemStack arrow = AmmoMechanicsMFR.getAmmo(held);
 
-            String text = I18n.translateToLocal("info.bow.reload");
+            String text = I18n.format("info.bow.reload");
             if (arrow != null) {
                 text = arrow.getDisplayName() + " x" + arrow.getCount();
             }
@@ -302,7 +302,7 @@ public class MineFantasyHUD extends Gui {
             ItemStack ammo = AmmoMechanicsMFR.getArrowOnBow(held);
             int ammocount = ammo == null ? 0 : ammo.getCount();
             if (cap > 1) {
-                String ammostring = I18n.translateToLocalFormatted("info.firearm.ammo", ammocount, cap);
+                String ammostring = I18n.format("info.firearm.ammo", ammocount, cap);
                 mc.fontRenderer.drawStringWithShadow(ammostring, xPosAC, yPosAC + 10, Color.WHITE.getRGB());
             }
         }
@@ -310,14 +310,14 @@ public class MineFantasyHUD extends Gui {
 
     private void displayTraitValue(int xPosAR, int yPosAR, int[] orientationAR, int id, EntityPlayer player, int base) {
         float AR = (int) (ArmourCalculator.getDRDisplay(player, id) * 100F) + base;
-        mc.fontRenderer.drawStringWithShadow(I18n.translateToLocal("attribute.armour.rating." + id) + " "
+        mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.rating." + id) + " "
                 + ItemWeaponMFR.decimal_format.format(AR), xPosAR, yPosAR, Color.WHITE.getRGB());
     }
 
     private void displayGeneralAR(int xPosAR, int yPosAR, int[] orientationAR, EntityPlayer player, int base) {
         float AR = ((int) (ArmourCalculator.getDRDisplay(player, 0) * 100F) + base);
 
-        mc.fontRenderer.drawStringWithShadow(I18n.translateToLocal("attribute.armour.protection") + ": "
+        mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.protection") + ": "
                 + ItemWeaponMFR.decimal_format.format(AR), xPosAR, yPosAR, Color.WHITE.getRGB());
     }
 

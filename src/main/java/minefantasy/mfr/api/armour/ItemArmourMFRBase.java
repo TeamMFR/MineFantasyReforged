@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -162,14 +162,14 @@ public class ItemArmourMFRBase extends ItemArmor implements ISpecialArmor, IArmo
         if (getProtectionRatio(item) != ratio) {
             if (getProtectionRatio(item) > ratio) {
                 float percent = (ratio / getProtectionRatio(item)) - 1F;
-                list.add(TextFormatting.RED + I18n.translateToLocalFormatted(
+                list.add(TextFormatting.RED + I18n.format(
                         "attribute.modifier.take." + 1, decimal_format.format(-percent * 100),
-                        I18n.translateToLocal("attribute.armour." + name)));
+                        I18n.format("attribute.armour." + name)));
             } else {
                 float percent = (ratio / getProtectionRatio(item)) - 1F;
-                list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
+                list.add(TextFormatting.DARK_GREEN + I18n.format(
                         "attribute.modifier.plus." + 1, decimal_format.format(percent * 100),
-                        I18n.translateToLocal("attribute.armour." + name)));
+                        I18n.format("attribute.armour." + name)));
             }
         }
     }

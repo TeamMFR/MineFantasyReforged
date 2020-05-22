@@ -8,7 +8,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -34,9 +34,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
     private String name;
     private float mass;
     private boolean canDamage = false;
-    // STORAGE
     private String blocktex;
-    ;
     private String storageType;
 
     public ItemCustomComponent(String name, String type) {
@@ -100,7 +98,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
         }
         if (this == ComponentListMFR.COGWORK_ARMOUR) {
             int AR = EntityCogwork.getArmourRating(getBase(tool));
-            list.add(I18n.translateToLocal("attribute.armour.protection") + " " + AR);
+            list.add(I18n.format("attribute.armour.protection") + " " + AR);
             if (mass > 0)
                 list.add(CustomMaterial.getWeightString(getWeightInKg(tool)));
         }

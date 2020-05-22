@@ -10,6 +10,8 @@ import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -39,7 +41,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem {
+public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem, IClientRegister {
     protected int itemRarity;
     private float hitDamage;
     private float baseDamage;
@@ -63,6 +65,8 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 
         this.name = name;
         this.setHarvestLevel("axe", material.getHarvestLevel());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -72,6 +76,10 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 
     @Override
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap multimap = super.getAttributeModifiers(slot,stack);
         multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
@@ -232,5 +240,10 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
     @Override
     public boolean isSpecialRender(ItemStack item) {
         return false;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

@@ -1,6 +1,7 @@
 package minefantasy.mfr.block.tile;
 
 import minefantasy.mfr.init.SoundsMFR;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
@@ -30,7 +31,6 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 
@@ -483,11 +483,11 @@ public class TileEntityBigFurnace extends TileEntity implements IBellowsUseable,
         String tier = "";
 
         if (isHeater()) {
-            return I18n.translateToLocal("tile.furnace.name") + " "
-                    + I18n.translateToLocal("block.furnace.heater");
+            return I18n.format("tile.furnace.name") + " "
+                    + I18n.format("block.furnace.heater");
         }
 
-        return tier + " " + I18n.translateToLocal("tile.furnace.name");
+        return tier + " " + I18n.format("tile.furnace.name");
     }
 
     public int getSmeltLevel() {

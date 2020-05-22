@@ -34,6 +34,7 @@ import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -57,7 +58,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -297,13 +297,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             float reach = ((IExtendedReachWeapon) this).getReachModifierInBlocks(weapon);
 
             if (reach > 0) {
-                list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
+                list.add(TextFormatting.DARK_GREEN + I18n.format(
                         "attribute.modifier.plus." + 0, decimal_format.format(reach),
-                        I18n.translateToLocal("attribute.weapon.extendedReach")));
+                        I18n.format("attribute.weapon.extendedReach")));
             } else {
-                list.add(TextFormatting.RED + I18n.translateToLocalFormatted(
+                list.add(TextFormatting.RED + I18n.format(
                         "attribute.modifier.take." + 0, decimal_format.format(-1 * reach),
-                        I18n.translateToLocal("attribute.weapon.extendedReach")));
+                        I18n.format("attribute.weapon.extendedReach")));
             }
         }
     }
@@ -613,6 +613,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         if (slot != EntityEquipmentSlot.MAINHAND) {
             return super.getAttributeModifiers(slot, stack);
         }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));

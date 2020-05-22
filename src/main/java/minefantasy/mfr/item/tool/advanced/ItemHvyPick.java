@@ -65,6 +65,8 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
         setUnlocalizedName(name);
 
         setMaxDamage(material.getMaxUses());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -130,6 +132,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
         if (slot != EntityEquipmentSlot.MAINHAND) {
             return super.getAttributeModifiers(slot, stack);
         }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));

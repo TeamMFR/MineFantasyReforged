@@ -1,10 +1,10 @@
 package minefantasy.mfr.api.material;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.text.DecimalFormat;
@@ -177,7 +177,7 @@ public class CustomMaterial {
             s = "attribute.weightt.name";
             mass = (int) (mass / 1000F);
         }
-        return I18n.translateToLocalFormatted(s, decimal_format.format(mass));
+        return I18n.format(s, decimal_format.format(mass));
     }
 
     public CustomMaterial setCrafterTiers(int tier) {
@@ -228,7 +228,7 @@ public class CustomMaterial {
 
     @SideOnly(Side.CLIENT)
     public String getMaterialString() {
-        return I18n.translateToLocalFormatted("materialtype." + this.type + ".name", this.crafterTier);
+        return I18n.format("materialtype." + this.type + ".name", this.crafterTier);
     }
 
     public float getArmourProtection(int id) {

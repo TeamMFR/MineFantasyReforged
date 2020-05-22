@@ -1,9 +1,12 @@
 package minefantasy.mfr.item.tool.crafting;
 
+import codechicken.lib.model.ModelRegistryHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -59,7 +62,7 @@ import java.util.UUID;
         @Interface(iface = "cofh.api.item.IToolHammer", modid = "CoFHAPI|item")
 })
 
-public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType {
+public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
     protected int itemRarity;
     private ToolMaterial material;
     private int tier;
@@ -87,6 +90,8 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
         shiftRotations.add(BlockButton.class);
         shiftRotations.add(BlockChest.class);
         blacklistedRotations.add(BlockBed.class);
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -171,9 +176,13 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }
@@ -265,5 +274,10 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
     public String getItemStackDisplayName(ItemStack item) {
         String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
         return CustomToolHelper.getLocalisedName(item, unlocalName);
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

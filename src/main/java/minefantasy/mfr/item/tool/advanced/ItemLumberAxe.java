@@ -23,7 +23,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 import java.util.Random;
 
-public class ItemLumberAxe extends ItemAxeMF implements IRackItem, IClientRegister {
+public class ItemLumberAxe extends ItemAxeMF implements IRackItem {
     private Random rand = new Random();
 
     public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {
@@ -153,10 +153,4 @@ public class ItemLumberAxe extends ItemAxeMF implements IRackItem, IClientRegist
     private EnumFacing getFacingFor(EntityLivingBase user, BlockPos pos) {
         return EnumFacing.getDirectionFromEntityLiving(pos, user);// TODO: FD
     }
-
-    @Override
-    public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
-    }
-
 }

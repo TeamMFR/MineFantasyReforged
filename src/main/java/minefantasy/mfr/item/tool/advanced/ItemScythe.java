@@ -74,6 +74,8 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.maxStackSize = 1;
         this.setMaxDamage(material.getMaxUses());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -201,10 +203,14 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }

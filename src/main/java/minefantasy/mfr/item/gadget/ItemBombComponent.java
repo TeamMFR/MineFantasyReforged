@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -40,8 +40,8 @@ public class ItemBombComponent extends ItemComponentMFR implements IBombComponen
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World world, List tooltip, ITooltipFlag flag) {
-        tooltip.add(TextFormatting.GOLD + I18n.translateToLocal("bomb.component.name"));
-        tooltip.add(TextFormatting.ITALIC + I18n.translateToLocal("bomb.component." + type));
+        tooltip.add(TextFormatting.GOLD + I18n.format("bomb.component.name"));
+        tooltip.add(TextFormatting.ITALIC + I18n.format("bomb.component." + type));
     }
 
     @Override

@@ -10,6 +10,8 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -40,7 +42,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDamageType {
+public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
     protected int itemRarity;
     private ToolMaterial material;
     private int tier;
@@ -64,6 +66,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -110,8 +113,11 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
 
     @Override
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
-        Multimap map = HashMultimap.create();
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
 
+        Multimap map = HashMultimap.create();
         if (slot == EntityEquipmentSlot.MAINHAND) {
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
@@ -206,6 +212,9 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
         String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
-    // ====================================================== CUSTOM END
-    // ==============================================================\\
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
 }

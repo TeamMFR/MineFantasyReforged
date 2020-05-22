@@ -19,7 +19,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -61,7 +61,7 @@ public class BlockBombPress extends BlockContainer {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.bombs)) {
             if (world.isRemote)
-                user.sendMessage(new TextComponentString(I18n.translateToLocal("knowledge.unknownUse")));
+                user.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
             return false;
         }
         TileEntityBombPress tile = getTile(world, pos);

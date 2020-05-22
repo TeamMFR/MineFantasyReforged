@@ -66,6 +66,8 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 
         this.setUnlocalizedName(name);
         setMaxDamage(material.getMaxUses());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
