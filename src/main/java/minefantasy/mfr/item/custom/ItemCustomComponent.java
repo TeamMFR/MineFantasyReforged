@@ -1,13 +1,14 @@
 package minefantasy.mfr.item.custom;
 
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,14 +29,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemCustomComponent extends Item implements ITieredComponent {
+public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent {
     private final String materialType;
     private String name;
     private float mass;
     private boolean canDamage = false;
-    // STORAGE
     private String blocktex;
-    ;
     private String storageType;
 
     public ItemCustomComponent(String name, String type) {
@@ -43,9 +42,8 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
     }
 
     public ItemCustomComponent(String name, float mass, String type) {
+        super(name);
         this.name = name;
-        setRegistryName(name);
-        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
         this.mass = mass;
@@ -100,7 +98,7 @@ public class ItemCustomComponent extends Item implements ITieredComponent {
         }
         if (this == ComponentListMFR.COGWORK_ARMOUR) {
             int AR = EntityCogwork.getArmourRating(getBase(tool));
-            list.add(I18n.translateToLocal("attribute.armour.protection") + " " + AR);
+            list.add(I18n.format("attribute.armour.protection") + " " + AR);
             if (mass > 0)
                 list.add(CustomMaterial.getWeightString(getWeightInKg(tool)));
         }

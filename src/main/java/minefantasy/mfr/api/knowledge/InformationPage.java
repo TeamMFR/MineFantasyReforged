@@ -1,7 +1,7 @@
 package minefantasy.mfr.api.knowledge;
 
 import minefantasy.mfr.api.rpg.Skill;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -83,7 +83,7 @@ public class InformationPage {
     }
 
     public static String getTitle(int index) {
-        return I18n.translateToLocal(index == -1 ? "infoPage.basic" : getInfoPage(index).getName());
+        return I18n.format(index == -1 ? "infoPage.basic" : getInfoPage(index).getName());
     }
 
     public static Skill getSkill(int index) {

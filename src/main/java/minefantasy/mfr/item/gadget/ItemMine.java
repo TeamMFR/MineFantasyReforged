@@ -5,6 +5,7 @@ import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityMine;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.mechanics.BombDispenser;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.util.ITooltipFlag;
@@ -22,22 +23,21 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
-public class ItemMine extends Item implements ISpecialSalvage, IAmmo {
+public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
     private static final String powderNBT = "MineFantasy_PowderType";
     private static final String fuseNBT = "MineFantasy_FuseType";
     private static final String fillingNBT = "MineFantasy_ExplosiveType";
     private static final String casingNBT = "MineFantasy_CaseType";
 
     public ItemMine(String name) {
+        super(name);
         this.maxStackSize = 16;
-        setRegistryName(name);
-        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());
@@ -157,13 +157,13 @@ public class ItemMine extends Item implements ISpecialSalvage, IAmmo {
         float range = fill.range * casing.rangeModifier * powder.rangeModifier;
         float fusetime = fuse.time / 20F;
 
-        list.add(I18n.translateToLocal("bomb.case." + casing.name + ".name"));
-        list.add(I18n.translateToLocal("bomb.powder." + powder.name + ".name"));
-        list.add(I18n.translateToLocal("bomb.fuse." + fuse.name + ".name"));
+        list.add(I18n.format("bomb.case." + casing.name + ".name"));
+        list.add(I18n.format("bomb.powder." + powder.name + ".name"));
+        list.add(I18n.format("bomb.fuse." + fuse.name + ".name"));
         list.add("");
-        list.add(I18n.translateToLocalFormatted("bomb.fusetime.name", fusetime));
-        list.add(I18n.translateToLocal("bomb.damage.name") + ": " + damage);
-        list.add(I18n.translateToLocalFormatted("bomb.range.metric.name", range));
+        list.add(I18n.format("bomb.fusetime.name", fusetime));
+        list.add(I18n.format("bomb.damage.name") + ": " + damage);
+        list.add(I18n.format("bomb.range.metric.name", range));
     }
 
     @Override

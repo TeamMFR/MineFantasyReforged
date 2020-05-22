@@ -10,7 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -30,9 +30,9 @@ public class ItemLance extends ItemSpearMFR {
     public void addInformation(ItemStack weapon, World world, List list, ITooltipFlag flag) {
         super.addInformation(weapon, world, list, flag);
 
-        list.add(TextFormatting.BLUE + I18n.translateToLocalFormatted("attribute.modifier.plus." + 0,
+        list.add(TextFormatting.BLUE + I18n.format("attribute.modifier.plus." + 0,
                 decimal_format.format(getJoustDamage(weapon)),
-                I18n.translateToLocal("attribute.weapon.joustDam")));
+                I18n.format("attribute.weapon.joustDam")));
     }
 
     @Override

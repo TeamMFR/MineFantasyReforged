@@ -10,6 +10,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -32,7 +34,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
@@ -48,7 +50,7 @@ import java.util.Iterator;
 import java.util.List;
 
 @Optional.Interface(iface = "mods.battlegear2.api.weapons.IBattlegearWeapon", modid = "battlegear2")
-public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm {
+public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
     private final EnumBowType model;
     private int itemRarity;
@@ -82,8 +84,9 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         itemRarity = rarity;
         setRegistryName(name);
         setUnlocalizedName(name);
-
         setCreativeTab(CreativeTabMFR.tabOldTools);
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -192,7 +195,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
             desc.add(TextFormatting.DARK_GRAY + ammo.getDisplayName() + " x" + ammo.getCount());
         }
 
-        desc.add(TextFormatting.BLUE + I18n.translateToLocalFormatted("attribute.bowPower.name",
+        desc.add(TextFormatting.BLUE + I18n.format("attribute.bowPower.name",
                 decimal_format.format(getBowDamage(item))));
     }
 
@@ -393,4 +396,11 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     public float getMaxCharge() {
         return model.chargeTime;
     }
+
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
 }

@@ -1,6 +1,8 @@
 package minefantasy.mfr.item.tool.crafting;
 
 import com.google.common.collect.Sets;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.MineFantasyReborn;
@@ -18,7 +20,7 @@ import net.minecraft.item.ItemTool;
 /**
  * @author Anonymous Productions
  */
-public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType {
+public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
     private ToolMaterial material;
     private int tier;
     private String toolType;
@@ -35,6 +37,7 @@ public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMF
         setRegistryName(name);
         setUnlocalizedName(name);
 
+  //      MineFantasyReborn.proxy.addClientRegister(this); unused item?
     }
 
     @Override
@@ -86,5 +89,10 @@ public class ItemEngineerTool extends ItemTool implements IToolMaterial, IToolMF
     @Override
     public float getPenetrationLevel(Object implement) {
         return 0F;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

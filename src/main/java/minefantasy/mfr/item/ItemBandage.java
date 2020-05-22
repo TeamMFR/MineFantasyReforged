@@ -1,39 +1,33 @@
 package minefantasy.mfr.item;
 
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.mechanics.EventManagerMFR;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-public class ItemBandage extends Item {
+public class ItemBandage extends ItemBaseMFR {
     private static final String healingID = "MF_Bandage_progress";
     private String name;
     private float healPwr;
     private float secondsToUse = 5F;
 
-    public ItemBandage(String id, float healAmount) {
-        super();
-        name = id;
+    public ItemBandage(String name, float healAmount) {
+        super(name);
+        this.name = name;
         healPwr = healAmount;
         setMaxStackSize(16);
         setCreativeTab(CreativeTabMFR.tabGadget);
-        setRegistryName(name);
-        setUnlocalizedName(name);
-
     }
 
     @Override

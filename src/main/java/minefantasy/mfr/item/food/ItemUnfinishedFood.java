@@ -1,18 +1,16 @@
 package minefantasy.mfr.item.food;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 /**
  * @author Anonymous Productions
  */
-public class ItemUnfinishedFood extends Item {
+public class ItemUnfinishedFood extends ItemBaseMFR {
     private int itemRarity;
 
     public ItemUnfinishedFood(String name) {
@@ -20,11 +18,9 @@ public class ItemUnfinishedFood extends Item {
     }
 
     public ItemUnfinishedFood(String name, int rarity) {
-        super();
+        super(name);
         setMaxStackSize(1);
         itemRarity = rarity;
-        setRegistryName(name);
-        setUnlocalizedName(name);
 
         this.setCreativeTab(CreativeTabMFR.tabFood);
     }

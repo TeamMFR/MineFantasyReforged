@@ -1,6 +1,7 @@
 package minefantasy.mfr.block.tile;
 
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,7 +28,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.WorldServer;
 
 import java.util.Random;
@@ -494,7 +494,7 @@ public class TileEntityForge extends TileEntity implements IInventory, IBasicMet
 
     @Override
     public String getLocalisedName() {
-        return (int) this.temperature + "C " + I18n.translateToLocal(
+        return (int) this.temperature + "C " + I18n.format(
                 workableState >= 2 ? "state.unstable" : workableState == 1 ? "state.workable" : "forge.fuel.name");
     }
 

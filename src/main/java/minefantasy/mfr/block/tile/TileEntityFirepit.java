@@ -28,7 +28,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -215,7 +215,7 @@ public class TileEntityFirepit extends TileEntity implements IBasicMetre, IHeatS
             s += "0";
         }
 
-        return "150C " + I18n.translateToLocal("forge.fuel.name") + " " + mins + ":" + s + seconds;
+        return "150C " + I18n.format("forge.fuel.name") + " " + mins + ":" + s + seconds;
     }
 
     public void extinguish(Block block, int meta) {

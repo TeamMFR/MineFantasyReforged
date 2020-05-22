@@ -12,7 +12,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -52,11 +52,11 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
         int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
         float range = fill.range * powder.rangeModifier * 0.5F;
 
-        list.add(I18n.translateToLocal(ToolListMFR.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
-        list.add(I18n.translateToLocal("bomb.powder." + powder.name + ".name"));
+        list.add(I18n.format(ToolListMFR.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
+        list.add(I18n.format("bomb.powder." + powder.name + ".name"));
         list.add("");
-        list.add(I18n.translateToLocal("bomb.damage.name") + ": " + damage);
-        list.add(I18n.translateToLocalFormatted("bomb.range.metric.name", range));
+        list.add(I18n.format("bomb.damage.name") + ": " + damage);
+        list.add(I18n.format("bomb.range.metric.name", range));
     }
 
     @Override

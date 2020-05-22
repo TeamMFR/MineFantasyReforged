@@ -24,7 +24,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -49,6 +49,10 @@ public class ItemSyringe extends ItemPotion {
 
     @Override
     public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0, 0));
@@ -128,7 +132,7 @@ public class ItemSyringe extends ItemPotion {
     @Override
     public String getItemStackDisplayName(ItemStack item) {
         if (item.getItemDamage() == 0) {
-            return I18n.translateToLocal("item.syringe_empty.name");
+            return I18n.format("item.syringe_empty.name");
         } else {
             String s = "";
 
@@ -138,10 +142,10 @@ public class ItemSyringe extends ItemPotion {
             if (list != null && !list.isEmpty()) {
                 s1 = ((PotionEffect) list.get(0)).getEffectName();
                 s1 = s1 + ".postfix";
-                return s + I18n.translateToLocal(s1).trim();
+                return s + I18n.format(s1).trim();
             } else {
                 s1 = PotionUtils.getPotionFromItem(item).toString();
-                return I18n.translateToLocal(s1).trim() + " " + super.getItemStackDisplayName(item);
+                return I18n.format(s1).trim() + " " + super.getItemStackDisplayName(item);
             }
         }
     }

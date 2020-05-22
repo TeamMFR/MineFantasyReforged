@@ -8,6 +8,7 @@ import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.packet.CrossbowBenchPacket;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -19,7 +20,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.WorldServer;
 
 import java.util.Random;
@@ -299,7 +299,7 @@ public class TileEntityCrossbowBench extends TileEntity implements IInventory, I
 
     @Override
     public String getLocalisedName() {
-        return I18n.translateToLocal("tile.crossbowBench.name");
+        return I18n.format("tile.crossbowBench.name");
     }
 
     @Override

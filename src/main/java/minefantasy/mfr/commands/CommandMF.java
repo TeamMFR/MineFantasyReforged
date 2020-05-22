@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class CommandMF extends CommandBase {
                 if (strings[0].equalsIgnoreCase("edit")) {
                     ItemStack equippedItem = player.getHeldItemMainhand();
                     if (equippedItem == null) {
-                        player.sendMessage(new TextComponentString(I18n.translateToLocal("command.invalid.item")));
+                        player.sendMessage(new TextComponentString(I18n.format("command.invalid.item")));
                         return;
                     }
 
@@ -67,13 +67,13 @@ public class CommandMF extends CommandBase {
 
     private void processEditMaterialCommand(String[] strings, EntityPlayer player, ItemStack equippedItem) {
         if (!CustomToolHelper.hasAnyMaterial(equippedItem)) {
-            player.sendMessage(new TextComponentString(I18n.translateToLocal("command.invalid.item")));
+            player.sendMessage(new TextComponentString(I18n.format("command.invalid.item")));
             return;
         }
 
         CustomMaterial material = CustomMaterial.getMaterial(strings[2]);
         if (material == null) {
-            player.sendMessage(new TextComponentString(I18n.translateToLocal("command.edit.invalid.material")));
+            player.sendMessage(new TextComponentString(I18n.format("command.edit.invalid.material")));
             return;
         }
 
@@ -104,7 +104,7 @@ public class CommandMF extends CommandBase {
     }
 
     private void onSuccess(EntityPlayer player) {
-        player.sendMessage(new TextComponentString(I18n.translateToLocal("command.edit.success")));
+        player.sendMessage(new TextComponentString(I18n.format("command.edit.success")));
     }
 
     @Override

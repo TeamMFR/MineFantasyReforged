@@ -1,9 +1,9 @@
 package minefantasy.mfr.init;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class CreativeTabMFR extends CreativeTabs {
     public static CreativeTabs tabTool = new CreativeTabMFR(CreativeTabs.getNextID(), "forgedtool", 1);
@@ -24,7 +24,7 @@ public final class CreativeTabMFR extends CreativeTabs {
     private int type;
 
     CreativeTabMFR(int id, String item, int t) {
-        super(id, item);
+        super(item);
         type = t;
     }
 

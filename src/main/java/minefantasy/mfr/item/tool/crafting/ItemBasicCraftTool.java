@@ -1,6 +1,8 @@
 package minefantasy.mfr.item.tool.crafting;
 
 import com.google.common.collect.Sets;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -25,7 +27,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType {
+public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
     protected int itemRarity;
     private int tier;
     private String name;
@@ -47,6 +49,8 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 
         setMaxDamage(uses);
         this.setMaxStackSize(1);
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -129,5 +133,10 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
     @Override
     public EnumRarity getRarity(ItemStack item) {
         return CustomToolHelper.getRarity(item, itemRarity);
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

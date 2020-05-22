@@ -49,7 +49,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
 
         this.buttonList.clear();
         this.buttonList.add(this.buttonDone = new GuiButton(0, this.width / 2 - 100,
-                4 + yPoint + this.bookImageHeight - 16, 200, 20, I18n.format("gui.done", new Object[0])));
+                4 + yPoint + this.bookImageHeight - 16, 200, 20, I18n.format("gui.done")));
         this.buttonList.add(this.buttonNextPage = new GuiKnowledgeEntry.NextPageButton(1, xPoint + bookImageWidth - 22,
                 yPoint + 209, true));
         this.buttonList.add(this.buttonPreviousPage = new GuiKnowledgeEntry.NextPageButton(2,

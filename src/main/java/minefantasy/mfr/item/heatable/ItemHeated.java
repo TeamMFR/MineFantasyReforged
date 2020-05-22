@@ -6,6 +6,7 @@ import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +22,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -30,13 +31,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.awt.*;
 import java.util.List;
 
-public class ItemHeated extends Item implements IHotItem {
+public class ItemHeated extends ItemBaseMFR implements IHotItem {
     public static boolean renderDynamicHotIngotRendering = true;
 
     public ItemHeated() {
-        String name = "hot_item";
-        setRegistryName(name);
-        setUnlocalizedName(name);
+        super("hot_item");
         this.setHasSubtypes(true);
         this.setMaxStackSize(64);
     }
@@ -157,7 +156,7 @@ public class ItemHeated extends Item implements IHotItem {
         ItemStack item = getItem(stack);
         if (item != null)
             name = item.getItem().getItemStackDisplayName(item);
-        return I18n.translateToLocalFormatted("prefix.hotitem.name", name);
+        return I18n.format("prefix.hotitem.name", name);
     }
 
     @Override
@@ -198,9 +197,9 @@ public class ItemHeated extends Item implements IHotItem {
         byte stage = Heatable.getHeatableStage(item);
         switch (stage) {
             case 1:
-                return TextFormatting.YELLOW + I18n.translateToLocal("state.workable");
+                return TextFormatting.YELLOW + I18n.format("state.workable");
             case 2:
-                return TextFormatting.RED + I18n.translateToLocal("state.unstable");
+                return TextFormatting.RED + I18n.format("state.unstable");
         }
         return "";
     }

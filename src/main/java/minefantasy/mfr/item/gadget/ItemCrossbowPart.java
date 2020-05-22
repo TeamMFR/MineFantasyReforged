@@ -4,10 +4,10 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.item.ItemComponentMFR;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -45,9 +45,9 @@ public class ItemCrossbowPart extends ItemComponentMFR implements ICrossbowPart 
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack item, World world, List list, ITooltipFlag fullInfo) {
-        list.add(TextFormatting.GOLD + I18n.translateToLocal("crossbow.component.name"));
-        list.add(TextFormatting.ITALIC + I18n.translateToLocal("crossbow.component." + type));
-        list.add(TextFormatting.DARK_GRAY + I18n.translateToLocal(getUnlocalizedName() + ".desc"));
+        list.add(TextFormatting.GOLD + I18n.format("crossbow.component.name"));
+        list.add(TextFormatting.ITALIC + I18n.format("crossbow.component." + type));
+        list.add(TextFormatting.DARK_GRAY + I18n.format(getUnlocalizedName() + ".desc"));
     }
 
     @Override

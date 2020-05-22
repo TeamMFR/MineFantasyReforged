@@ -30,7 +30,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -65,7 +65,7 @@ public class PlayerTickHandlerMF {
             dragon.fireBreathCooldown = 200;
 
             if (ConfigMobs.dragonMSG && !player.world.isRemote) {
-                player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.translateToLocal("event.dragonnear.name")));
+                player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
 
                 List<?> list = player.world.playerEntities;
                 Iterator<?> players = list.iterator();
@@ -73,7 +73,7 @@ public class PlayerTickHandlerMF {
                     Object instance = players.next();
                     if (instance != null && instance instanceof EntityPlayer) {
                         if (((EntityPlayer) instance).getDistance(player) < 256D && instance != player) {
-                            ((EntityPlayer) instance).sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.translateToLocal("event.dragonnear.name")));
+                            ((EntityPlayer) instance).sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
                         }
                     }
                 }

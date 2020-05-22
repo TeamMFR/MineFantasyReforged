@@ -1,37 +1,34 @@
 package minefantasy.mfr.item;
 
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.decor.BlockComponent;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author Anonymous Productions
  */
-public class ItemComponentMFR extends Item implements ITieredComponent {
+public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
     protected String name;
     protected int itemRarity;
     // STORAGE
@@ -54,21 +51,16 @@ public class ItemComponentMFR extends Item implements ITieredComponent {
     private boolean isCustom = false;
     private String materialType = null;
 
-    public ItemComponentMFR(int rarity) {
-        itemRarity = rarity;
-    }
-
     public ItemComponentMFR(String name) {
         this(name, 0);
     }
 
     public ItemComponentMFR(String name, int rarity) {
+        super(name);
         itemRarity = rarity;
         this.name = name;
+        this.name = name;
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
-        setRegistryName(name);
-        setUnlocalizedName(name);
-
     }
 
     @Override

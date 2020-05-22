@@ -2,19 +2,6 @@ package minefantasy.mfr.item.weapon;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
@@ -25,15 +12,30 @@ import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.api.weapon.*;
+import minefantasy.mfr.api.weapon.IDamageModifier;
+import minefantasy.mfr.api.weapon.IDamageType;
+import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
+import minefantasy.mfr.api.weapon.IKnockbackWeapon;
+import minefantasy.mfr.api.weapon.IParryable;
+import minefantasy.mfr.api.weapon.IPowerAttack;
+import minefantasy.mfr.api.weapon.IRackItem;
+import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
+import minefantasy.mfr.api.weapon.IWeaponClass;
+import minefantasy.mfr.api.weapon.IWeaponSpeed;
+import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -42,6 +44,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -50,18 +53,25 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
         IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
-        IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem {
+        IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     public static float axeAPModifier = -0.1F;
     protected static int speedModHeavy = 5;
@@ -140,12 +150,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         setRegistryName(name);
         setUnlocalizedName(name);
 
-
         this.baseDamage = 4 + getDamageModifier();
 
         if (material == ToolMaterial.WOOD) {
             baseDamage = 0F;
         }
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     public static int getParry(ItemStack item) {
@@ -286,13 +297,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             float reach = ((IExtendedReachWeapon) this).getReachModifierInBlocks(weapon);
 
             if (reach > 0) {
-                list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
+                list.add(TextFormatting.DARK_GREEN + I18n.format(
                         "attribute.modifier.plus." + 0, decimal_format.format(reach),
-                        I18n.translateToLocal("attribute.weapon.extendedReach")));
+                        I18n.format("attribute.weapon.extendedReach")));
             } else {
-                list.add(TextFormatting.RED + I18n.translateToLocalFormatted(
+                list.add(TextFormatting.RED + I18n.format(
                         "attribute.modifier.take." + 0, decimal_format.format(-1 * reach),
-                        I18n.translateToLocal("attribute.weapon.extendedReach")));
+                        I18n.format("attribute.weapon.extendedReach")));
             }
         }
     }
@@ -598,10 +609,14 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }
@@ -705,4 +720,10 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     public String getDesign(ItemStack item) {
         return designType;
     }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
 }

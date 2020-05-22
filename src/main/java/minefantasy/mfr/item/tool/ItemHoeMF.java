@@ -5,6 +5,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,7 +29,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemHoeMF extends ItemHoe implements IToolMaterial {
+public class ItemHoeMF extends ItemHoe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private String name;
     private ToolMaterial toolMaterial;
@@ -45,6 +47,7 @@ public class ItemHoeMF extends ItemHoe implements IToolMaterial {
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -121,4 +124,9 @@ public class ItemHoeMF extends ItemHoe implements IToolMaterial {
     }
     // ====================================================== CUSTOM END
     // ==============================================================\\
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
 }

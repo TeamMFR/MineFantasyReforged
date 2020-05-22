@@ -3,7 +3,7 @@ package minefantasy.mfr.api.knowledge.client;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 public class EntryPageText extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
@@ -21,9 +21,9 @@ public class EntryPageText extends EntryPage {
 
     @Override
     public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        String local = I18n.translateToLocal(paragraph);
+        String local = I18n.format(paragraph);
         if (additional != null && additional.length > 0) {
-            local = I18n.translateToLocalFormatted(paragraph, additional);
+            local = I18n.format(paragraph, additional);
         }
         String text = "";
         String temp = "";

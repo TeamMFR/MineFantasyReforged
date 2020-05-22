@@ -1,11 +1,11 @@
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/INFORMATION/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# INFORMATION
 forge.fuel.name=~Fuel~
 vehicle.fuel.name=Fuel: %1$s
 info.bow.reload=Right-Click while sneaking to open firearm.
 info.firearm.ammo=%1$s/%2$s
 info.tooltip.moreinfo=Hold [%1$s] for more information.
+
+achievement.unknown=achievement.unknown
 
 attribute.kit.salvage.name=Salvage Modifier
 
@@ -33,6 +33,7 @@ information.discovered=Researched
 information.buy=Click for Research
 knowledge.unknownUse=You don't know how to use this!
 knowledge.known=You already know this
+knowledge.has_scroll=knowledge.has_scroll
 
 infoPage.basic=Basic Information
 infoPage.artisanry=Artisanry
@@ -54,9 +55,8 @@ research.null=There is nothing to learn from this.
 research.addArtefact=Added Knowledge to %1$s (%2$s/%3$s)
 research.finishResearch=Finished Research for %1$s
 research.cluecount= (%1$s/%2$s)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/MOBS/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# MOBS
 entity.MF_Minotaur.name=Minefantasy Minotaur
 entity.MF_Dragon.name=Minefantasy Dragon
 death.attack.dragonstomp=%1$s was stomped by a Dragon
@@ -90,7 +90,7 @@ entity.dreadminotaur_guard.name=Dread Minotaur Bruiser
 entity.dreadminotaur_elite.name=Dread Minotaur Punisher
 entity.dreadminotaur_boss.name=Dread Minotaur Death Overlord
 
-entity.dragonbreed.red.name=Red
+entity.gu.red.name=Red
 entity.dragonbreed.white.name=Frost
 entity.dragonbreed.black.name=Dire
 entity.dragonbreed.green.name=Green
@@ -116,9 +116,9 @@ item.spawn_hound.name=Spawn Hound
 item.spawn_hound.desc=Highly capable canines with variable traits.
 item.spawn_cogwork.name=Spawn Cogwork Suit
 item.spawn_cogwork.desc=Mechanical suit of superior strength
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/TOOL LIST/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# TOOL LIST
+
 item.tool_pick.name=%1$s Pick
 item.commodity_plank.name=%1$s Timber
 item.haft.name=Haft
@@ -145,9 +145,8 @@ component.head.name=%1$s Head
 component.shaft.name=%1$s Shaft
 component.grip.name=%1$s Grip
 component.brace.name=%1$s Brace
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/MATERIAL LIST/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# MATERIAL LIST
 materialtype.wood.name=Tier %1$s Wood
 materialtype.leather.name=Tier %1$s Leather
 materialtype.metal.name=Tier %1$s Metal
@@ -158,7 +157,7 @@ materialtype.fireresist.name=%1$s Fire Resistance
 materialtype.maxtemp.name=%1$s*C Melting Point
 material.any.name=Any
 
-WOOD
+# WOOD
 material.scrapwood.name=Scrap
 material.oakwood.name=Oak
 material.birchwood.name=Birch
@@ -195,13 +194,13 @@ material.yewwood.name=Yew
 
 
 
-LEATHER
+# LEATHER
 material.leather.name=Leather
 material.hardleather.name=Hardened Leather
 material.minotaurskin.name=Minotaur Leather
 material.dragonskin.name=Dragon Skin
 
-METAL
+# METAL
 material.copper.name=Copper
 material.tin.name=Tin
 
@@ -222,29 +221,29 @@ material.ignotumite.name=Ignotumite
 material.mithium.name=Mithium
 material.ender.name=Enderforge
 
-PRECIOUS
+# PRECIOUS
 material.gold.name=Golden
 material.silver.name=Silver
 
-NON-MF
+# NON-MF
 material.bismuth.name=Bismuth
 material.bismuthbronze.name=Bismuth Bronze
 material.nickel.name=Nickel
 material.titanium.name=Titanium
 material.stainlesssteel.name=Stainless Steel
 
-ALLOY
+# ALLOY
 material.compositealloy.name=Composite Alloyed
 
-MOD
+# MOD
 material.thaumium.name=Thaumium
 material.void.name=Void
 material.manasteel.name=Manasteel
 material.elvenelementium.name=Elementium
 material.terrasteel.name=Terrasteel
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/ITEM STATS/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ITEM STATS
+
 prefix.hotitem.name=Hot %1$s
 state.workable=Workable
 state.unstable=Unstable
@@ -313,9 +312,9 @@ arrow.head.bodkin.name=Bodkin Head
 arrow.head.broad.name=Broad Head
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/COMMODITY/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# COMMODITY
+
 item.plank.name=Timber
 item.plant_oil.name=Plant Oil
 item.plankRefined.name=Refined Timber
@@ -334,33 +333,33 @@ item.bolt.name=Bolts
 item.flux_pot.name=Fine Flux
 item.coal_flux.name=Coal Flux
 
-item.ingotCopper.name=Copper Ingot
-item.ingotTin.name=Tin Ingot
-item.ingotBronze.name=Bronze Ingot
-item.ingotPigIron.name=Pig Iron Ingot
-item.ingotSteel.name=Steel Ingot
-item.ingotEncrusted.name=Encrusted Ingot
-item.ingotObsidian.name=Obsidian Ingot
-item.ingotSilver.name=Silver Ingot
-item.ingotPureGold.name=Pure Gold Ingot
-item.ingotCompositeAlloy.name=Composite Alloyed Ingot
-item.ingotBlackSteelWeak.name=Unrefined Black Steel
-item.ingotBlueSteelWeak.name=Unrefined Blue Steel
-item.ingotRedSteelWeak.name=Unrefined Red Steel
+item.ingot_copper.name=_copper _ingot
+item.ingot_tin.name=_tin _ingot
+item.ingot_bronze.name=_bronze _ingot
+item.ingot_pig_iron.name=_pig _iron _ingot
+item.ingot_steel.name=_steel _ingot
+item.ingot_encrusted.name=_encrusted _ingot
+item.ingot_obsidian.name=_obsidian _ingot
+item.ingot_silver.name=_silver _ingot
+item.ingot_pure_gold.name=_pure _gold _ingot
+item.ingot_composite_alloy.name=_composite _alloyed _ingot
+item.ingot_black_steel_weak.name=_unrefined _black _steel
+item.ingot_blue_steel_weak.name=_unrefined _blue _steel
+item.ingot_red_steel_weak.name=_unrefined _red _steel
 
-item.ingotRedSteel.name=Red Steel Ingot
-item.ingotBlackSteel.name=Black Steel Ingot
-item.ingotBlueSteel.name=Blue Steel Ingot
+item.ingot_red_steel.name=_red _steel _ingot
+item.ingot_black_steel.name=_black _steel _ingot
+item.ingot_blue_steel.name=_blue _steel _ingot
 
-item.ingotAdamantium.name=Adamantium Ingot
-item.ingotMithril.name=Mithril Ingot
+item.ingot_adamantium.name=_adamantium _ingot
+item.ingot_mithril.name=_mithril _ingot
 
-item.ingotIgnotumite.name=Ignotumite Ingot
-item.ingotMithium.name=Mithium Ingot
+item.ingot_ignotumite.name=_ignotumite _ingot
+item.ingot_mithium.name=_mithium _ingot
 
-item.ingotEnder.name=Enderforge Ingot
+item.ingot_ender.name=_enderforge _ingot
 
-item.ingotTungsten.name=Wolframite Ingot
+item.ingot_tungsten.name=_wolframite _ingot
 
 item.loot_sack.name=Loot
 item.loot_sack_uc.name=Valuable Loot
@@ -370,8 +369,8 @@ item.copper_coin.name=Copper Coin
 item.silver_coin.name=Silver Coin
 item.gold_coin.name=Gold Coin
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/COMPONENT/
+
+# COMPONENT
 item.ingot_mould.name=Ingot Mould
 item.ingot_mould_uncooked.name=Raw Ingot Mould
 
@@ -390,14 +389,14 @@ tile.repair_basic.name=Basic Repair Kit
 tile.repair_advanced.name=Advanced Repair Kit
 tile.repair_ornate.name=Ornate Repair Kit
 
-item.rawhideSmall.name=Small Hide
-item.rawhideMedium.name=Medium Hide
-item.rawhideLarge.name=Large Hide
+item.rawhide_small.name=_small _hide
+item.rawhide_medium.name=_medium _hide
+item.rawhide_large.name=_large _hide
 
 item.leather_strip.name=Leather Strip
-item.hideSmall.name=Clean Small Hide
-item.hideMedium.name=Clean Medium Hide
-item.hideLarge.name=Clean Large Hide
+item.hide_small.name=Clean Small Hide
+item.hide_medium.name=Clean Medium Hide
+item.hide_large.name=Clean Large Hide
 
 item.vine.name=Vine
 item.sharp_rock.name=Sharp Rock
@@ -408,7 +407,7 @@ item.diamond_dust.name=Diamond Dust
 item.obsidian_rock.name=Obsidian Rock
 item.fletching.name=Fletching
 
-item.coalDust.name=Coal Dust
+item.coal_dust.name=Coal Dust
 item.nitre.name=Niter
 item.sulfur.name=Sulfur
 item.bomb_casing_uncooked.name=Clay Bomb Casing
@@ -435,12 +434,12 @@ item.fireclay.name=Fire Clay
 item.fireclay_brick.name=Fire Clay Brick
 item.strong_brick.name=Fire Brick
 
-item.oreCopper.name=Raw Copper Ore
-item.oreTin.name=Raw Tin Ore
-item.oreIron.name=Raw Iron Ore
-item.oreSilver.name=Raw Silver Ore
-item.oreGold.name=Raw Gold Ore
-item.oreTungsten.name=Raw Wolframite
+item.ore_copper.name=Raw Copper Ore
+item.ore_tin.name=Raw Tin Ore
+item.ore_iron.name=Raw Iron Ore
+item.ore_silver.name=Raw Silver Ore
+item.ore_gold.name=Raw Gold Ore
+item.ore_tungsten.name=Raw Wolframite
 
 item.dragon_heart.name=Dragon Heart
 item.ornate_items.name=Ornate Crest
@@ -451,13 +450,8 @@ item.bronze_gears.name=Bronze Cogworks
 item.tungsten_gears.name=Intricate Cogworks
 item.steel_tube.name=Steel Tube
 item.cogwork_shaft.name=Cogwork Shaft
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/GADGET/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# GADGET
 item.spyglass.name=Spyglass
 item.climbing_pick_basic.name=Climbing Pick
 item.parachute.name=Parachute
@@ -556,9 +550,9 @@ item.cross_arms_advanced.desc=More accuracy and power, but slow with high recoil
 item.cross_ammo.desc=6x shot capacity, increased spread.
 item.cross_scope.desc=Allows zoom function.
 item.cross_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/ORES/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ORES
+
 tile.oreCopper.name=Copper Ore
 tile.oreTin.name=Tin Ore
 tile.oreSilver.name=Silver Ore
@@ -721,9 +715,8 @@ tile.bedroll.name=Bedroll
 
 tile.framed_end.name=Framed Mythic Stone
 tile.decorated_end.name=Decorated Mythic Stone
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/TABS/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# TABS
 itemGroup.forgedtool=[MF] Forged Tools
 itemGroup.forgedweapon=[MF] Forged Weapons
 itemGroup.forgedarmour=[MF] Forged Armor
@@ -739,33 +732,24 @@ itemGroup.MFOld=[MF] Primitive Items
 itemGroup.MFdragonforged=[MF] Dragonforged Style
 itemGroup.MFornate=[MF] Ornate Style
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/FIRESTARTER/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# FIRESTARTER
 item.dryrocks.name=Dry Rocks
 item.tinderbox.name=Tinderbox
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/BANDAGE/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# BANDAGE
 item.bandage_crude.name=Crude Bandage
 item.bandage_wool.name=Wool Bandage
 item.bandage_tough.name=Strong Bandage
 
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/TRAINING/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TRAINING
 item.training_sword.name=Training Sword
 item.training_waraxe.name=Training Waraxe
 item.training_mace.name=Training Mace
 item.training_spear.name=Training Spear
 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/LEATHER STUFF/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# LEATHER STUFF
 item.hide_helmet.name=Hide Headress
 item.hide_chest.name=Hide Armor
 item.hide_legs.name=Hide Skirt
@@ -798,20 +782,12 @@ item.padded_boots.name=Padded Boots
 
 item.leatherapron.name=Leather Blacksmith Attire
 
-
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/WOOD STUFF/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# WOOD STUFF
 item.malletWood.name=Wooden Mallet
 item.spoonWood.name=Wooden Spoon
 item.paint_brush.name=Paint Brush
 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/STONE STUFF/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# STONE STUFF
 item.stone_pick.name=Stone Pickaxe
 item.stone_axe.name=Stone Axe
 item.stone_hoe.name=Stone Hoe
@@ -827,11 +803,10 @@ item.stone_waraxe.name=Stone Waraxe
 item.stone_mace.name=Stone Club
 item.stone_spear.name=Stone Spear
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/STANDARD/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# STANDARD
 languagecfg.tooltiptier=false
-//You can move the main tier to the tooltip if this is true, make sure to remove "%1$s " instnaces if you do this
+# /You can move the main tier to the tooltip if this is true, make sure to remove "%1$s " instnaces if you do this
 
 item.standard_pick.name=%1$s Pickaxe
 item.standard_axe.name=%1$s Axe
@@ -896,10 +871,7 @@ item.standard_bolt.name=%1$s Quarrel
 item.standard_mallet.name=%1$s Mallet
 item.standard_spoon.name=%1$s Spoon 
 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/DRAGONFORGE/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# DRAGONFORGE
 item.dragonforged_pick.name=Dragonforged %1$s Pickaxe
 item.dragonforged_axe.name=Dragonforged %1$s Axe
 item.dragonforged_spade.name=Dragonforged %1$s Shovel
@@ -958,9 +930,7 @@ item.dragonforged_plate_boots.name=Dragonforged %1$s Sabatons
 
 item.dragonforged_bow.name=Dragonforged %1$s Bow
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/ORNATE/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ORNATE
 item.ornate_pick.name=Ornate %1$s Pickaxe
 item.ornate_axe.name=Ornate %1$s Axe
 item.ornate_spade.name=Ornate %1$s Shovel
@@ -1020,9 +990,8 @@ item.ornate_plate_boots.name=Ornate %1$s Sabatons
 item.ornate_bow.name=Ornate %1$s Bow
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/ARTEFACT/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# ARTEFACT
 stat.artefact.name=Artefact
 item.ancient_jewel.name=Ancient Jewel
 item.trilogy_jewel.name=Ancient Trilogy
@@ -1033,11 +1002,10 @@ item.schem_cogwork.name=Cogwork Frame Schematics
 item.schem_bomb.name=Dwarven Bomb Schematics
 item.schem_crossbow.name=Dwarven Crossbow Schematics
 item.schem_alloy.name=Composite Alloy Schematics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/FOOD/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# FOOD
 item.berries.name=Berries
-item.berriesJuicy.name=Juicy Berries
+item.berries_juicy.name=Juicy Berries
 item.generic_meat_uncooked.name=Raw Generic Meat
 item.generic_meat_cooked.name=Cooked Generic Meat
 item.generic_meat_strip_uncooked.name=Raw Meat Strips
@@ -1054,7 +1022,7 @@ item.burnt_pie.name=Burnt Food
 tile.berries.name=Berry Bush
 item.breadcrumbs.name=Bread Crumbs
 item.breadroll.name=Bread Roll
-item.breadslice.name=Bread Slice
+item.bread_slice.name=Bread Slice
 item.horse_raw.name=Raw Horse Meat
 item.horse_cooked.name=Cooked Horse Meat
 item.wolf_raw.name=Raw Wolf Chop
@@ -1070,7 +1038,7 @@ item.cake_tin.name=Cake Tin
 item.pie_tin.name=Pie Tray
 item.pie_tray_uncooked.name=Clay Pie Tray
 item.flour.name=Flour
-item.sugarpot.name=Sugar Pot
+item.sugar_pot.name=Sugar Pot
 item.bread_uncooked.name=Uncooked Bread
 item.guts.name=Guts
 
@@ -1087,6 +1055,7 @@ item.jerky.name=Jerky
 item.cheese_roll.name=Cheese Roll
 item.sweetroll.name=Sweetroll
 item.sandwitch.name=Sandwitch
+item.sandwitch_big.name=Big Sandwitch
 
 tile.pie_meat.name=Meat Pie
 tile.pie_apple.name=Apple Pie
@@ -1115,7 +1084,7 @@ item.bfcake_slice.name=Black-Forest Cake Slice
 
 item.coca_powder.name=Coca Powder
 item.chocolate.name=Chocolate
-item.chocchips.name=Chocolate Chips
+item.choc_chips.name=Chocolate Chips
 item.eclair.name=Eclair
 item.eclair_raw.name=Eclair Dough
 item.eclair_uniced.name=Uniced Eclair
@@ -1156,9 +1125,8 @@ item.pie_berry_cooked.name=Cooked Berry Pie
 item.pie_shepard_cooked.name=Cooked Shepards Pie
 item.pie_pumpkin_cooked.name=Cooked Pumpkin Pie
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/FOOD STATS/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# FOOD STATS
 food.stat.list.name=On Eaten:
 food.stat.hunger.name=+%1$s Hunger
 food.stat.staminaPlus.name=Restore %1$s Stamina
@@ -1172,16 +1140,15 @@ food.stat.staminabuffRegenMinutes.name=Regen %1$s stamina/second for %2$s mins
 food.stat.staminabuffRegenSeconds.name=Regen %1$s stamina/second for %2$s secs
 food.stat.cure.poison=Cure Poison
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/CONSTRUCTION/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# CONSTRUCTION
 item.hinge.name=Hinge
 item.commodity_plank_cut.name=Cut %1$s Timber
 item.commodity_plank_pane.name=%1$s Timber Pane
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/RPG/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# RPG
+
 rpg.levelup=Your %1$s skill has increased to %2$s
 rpg.required=Requires %1$s %2$s
 rpg.skillmod=Skill Modifier: +
@@ -1220,9 +1187,9 @@ item.skillbook_engineering2.name=Engineers' Lexicon
 item.skillbook_engineering2.desc=Max Engineering
 item.skillbook_combat2.name=Great War Journal
 item.skillbook_combat2.desc=Max Weaponry
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/KNOWLEDGE INFORMATION/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# KNOWLEDGE INFORMATION
+
 method.workbench=Basic Workbench
 method.furnace=Smelting
 method.bloomery=Bloomery
@@ -1241,12 +1208,11 @@ knowledge.guiSubtitle=This is the GUI
 knowledge.basicstructure=Basic Structure
 knowledge.example=Example
 knowledge.rightclickspanner=Right-Click spanner
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/KNOWLEDGE TEXT/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-knowledge.title=
-knowledge.title.desc=
-knowledge.title.1=
+
+# KNOWLEDGE TEXT
+#knowledge.title=  DUPLICATE
+#knowledge.title.desc= DUPLICATE
+#knowledge.title.1= DUPLICATE
 
 knowledge.minotaurs=Minotaur
 knowledge.minotaurs.desc=Horrible Abominations
@@ -1304,7 +1270,7 @@ knowledge.gettingStarted.food=Also place one of these stove tops on top of the f
 knowledge.gettingStarted.carpenter=$hCarpenter Bench-$r^The carpenter bench is a basic crafting table for a selection of recipes. The tools needed for this vary and some recipes require bare fists. See the crafting tools section for more information on tools.
 
 knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathered some hide you can't use. Tanning is a simple method of creating leather from hide.^To start off, build a shabby tanning rack and a stone knife. These tools are poor quality and should be upgraded when convenient.
-	
+
 knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic firestarter (Dry rocks-Craft-Tools), and wear an apron too!
 
 knowledge.gettingStarted.forgingbars=Most recipes use bars rather than ingots. A bar is an easy to forge component made from metal. Create bars from placing a hot ingot on an anvil and hammering them.
@@ -1339,7 +1305,7 @@ knowledge.research.desc=Keeping track
 
 knowledge.research.1=There is a lot out there in the world to discover, all you have to do is find it. Research is a method of finding what’s hidden within the world and using it to better your own works. Most of what you can do or make must be researched, and requires both skill and study to uncover its secrets.^To begin research, you enter without knowing what you may find. A research table must be crafted, and used to study items. Depending on your skill and what items you study may unlock some clues to new knowledge.
 
-//Table recipe
+# /Table recipe
 
 knowledge.research.2=With a research table placed, you are able to study items to uncover new knowledge. You require a certain amount of skill to unlock information, assuming your skill is high enough and you have appropriate prior knowledge, you may gain a clue to your research. Once you get all the clues for research will it be unlocked, you can view your progress with the research book.^If you lack the skill to discover anything new, keep the item and return later on when you discover and learn more.
 
@@ -1991,7 +1957,7 @@ knowledge.stickybomb.desc=Catch this!
 knowledge.stickybomb.1=Sticky bombs- as the name might suggest, are bombs that are sticky. And with this amazing trait: will attatch themselves to whatever poor sod gets in its way.^So what you have here is a bomb that does a lot of damage sticking to someone! Which never stops being funny.
 knowledge.stickybomb.2=To create these: Leave(or put) a bomb in the output slot and right-click the block with a slime ball. A single slimeball can coat a stack of any size.
 
-$hUse of Cogworks$r^
+# Use of Cogworks
 
 knowledge.cogArmour=Cogwork Suit
 knowledge.cogArmour.desc=Power Armor
@@ -2001,14 +1967,14 @@ knowledge.cogArmour.1=This appears to be a real discovery, and seems to highligh
 knowledge.cogArmour.2=Though no actual suits have been found in ruins, the assembly systems remain in-tact and they appear to be more than capable of fitting a suit to something more human sized.
 
 knowledge.cogArmour.station=$hCrafting Station$r^A crafting station is necessary for any construction or modification to take place. Cogwork crafting stations are made from a frame and pulley system. To start off, built three posts 4 blocks tall with a single one in the middle-top.
-//Example
+# Example
 knowledge.cogwork_station=Crafting Station
 knowledge.cogArmour.station.2=With the frame set up, you need to craft the pulley, when this is made, right-click the top block of the frame to install it. Ensure you have the frame in the right place, there's no way to return the pulley after installation.
-//Pulley Recipe
+# Pulley Recipe
 knowledge.cogArmour.crafting=To craft cogwork armour: you need the three blocks (Helmet, Chest and Legs). Stack these on top of each other inside the frame. Then right-click the chest with a spanner.
-//Piece Recipes
+# Piece Recipes
 knowledge.cogArmour.armour=$hPlating$r^To add plating, you need to craft a plating item. Each set of plates cost a lot of ingots, and is recommended to use simple materials like steel. These can be installed by right-clicking a suit in a frame. You also need 16 bolts, which will be consumed before plating can be added. plating can easily be removed with a spanner.
-//Armour Recipe
+# Armour Recipe
 knowledge.cogArmour.fuel=$hRefueling$r^Cogwork armour only takes refined fuels (coke or magma cream). Right-click the suit to add fuel.^The heavier the armour on the suit, the faster fuel decays.
 knowledge.cogArmour.advantage=$hAdvantages$r^An unarmoured suit can give immunity to smoke, remove fall damage, increase attack damage and eliminate stamina decay.
 knowledge.cogArmour.advantage.2=When fitted with plating: the suit is sealed, you will gain a huge armour bonus and be able to breathe underwater. The suit is also able to remove poison/wither damage and make the wearer immune to fire.
@@ -2105,9 +2071,9 @@ knowledge.sandwitch=Sandwitches
 knowledge.sandwitch.desc=Simple
 knowledge.sandwitch.1=A piece of meat in between some bread, how could you not have known this before! Sandwitches though not stackable can be eaten twice.
 
-knowledge.sandwitchBig=Big Sandwitch
-knowledge.sandwitchBig.desc=Extra long
-knowledge.sandwitchBig.1=You can now make sandwitches out of whole loafs of bread with more filling. These have 4 uses.
+knowledge.sandwitch_big=Big Sandwitch
+knowledge.sandwitch_big.desc=Extra long
+knowledge.sandwitch_big.1=You can now make sandwitches out of whole loafs of bread with more filling. These have 4 uses.
 
 knowledge.meatpie=Meat Pie
 knowledge.meatpie.desc=Hearty and filling
@@ -2200,10 +2166,7 @@ knowledge.bandageadv=Strong Bandages
 knowledge.bandageadv.desc=Tough Stuff
 knowledge.bandageadv.1=These advanced leather bandages heal much more damage. They can be costly however.
 
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/MASTERY TEXT/
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# MASTERY TEXT
 knowledge.title=
 knowledge.title.desc=
 knowledge.title.1=

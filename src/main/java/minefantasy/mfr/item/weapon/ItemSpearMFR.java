@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -45,9 +45,9 @@ public class ItemSpearMFR extends ItemWeaponMFR implements IExtendedReachWeapon 
         super.addInformation(item, world, list, flag);
 
         if (material != Item.ToolMaterial.WOOD) {
-            list.add(TextFormatting.DARK_GREEN + I18n.translateToLocalFormatted(
+            list.add(TextFormatting.DARK_GREEN + I18n.format(
                     "attribute.modifier.plus." + 0, decimal_format.format(getMountedDamage()),
-                    I18n.translateToLocal("attribute.weapon.mountedBonus")));
+                    I18n.format("attribute.weapon.mountedBonus")));
         }
     }
 

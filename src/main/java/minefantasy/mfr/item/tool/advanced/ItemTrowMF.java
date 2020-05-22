@@ -8,6 +8,8 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -45,7 +47,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemTrowMF extends ItemSpade implements IToolMaterial {
+public class ItemTrowMF extends ItemSpade implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private String name;
     private float baseDamage = 1F;
@@ -63,6 +65,8 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial {
         setUnlocalizedName(name);
 
         setMaxDamage(material.getMaxUses());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -137,10 +141,14 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial {
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }
@@ -222,6 +230,12 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial {
         String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
     // ====================================================== CUSTOM END
     // ==============================================================\\
 }

@@ -1,6 +1,7 @@
 package minefantasy.mfr.api.knowledge;
 
 import minefantasy.mfr.init.SoundsMFR;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,7 +15,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.IStatType;
-import net.minecraft.util.text.translation.I18n;
 
 import java.util.ArrayList;
 
@@ -138,9 +138,9 @@ public class InformationBase {
 
     @SideOnly(Side.CLIENT)
     public String getDescription() {
-        String localised = I18n.translateToLocal(this.description);
+        String localised = I18n.format(this.description);
         if (descriptValues != null && descriptValues.length > 0) {
-            localised = I18n.translateToLocalFormatted(description, descriptValues);
+            localised = I18n.format(description, descriptValues);
         }
         String text = this.statStringFormatter != null ? this.statStringFormatter.format(Integer.parseInt(localised)) : localised;
 
@@ -158,15 +158,15 @@ public class InformationBase {
 
     @SideOnly(Side.CLIENT)
     public String getDisplayName() {
-        String name = this.statStringFormatter != null ? this.statStringFormatter.format(Integer.parseInt(I18n.translateToLocal("knowledge." + this.idName)))
-                : I18n.translateToLocal("knowledge." + this.idName);
+        String name = this.statStringFormatter != null ? this.statStringFormatter.format(Integer.parseInt(I18n.format("knowledge." + this.idName)))
+                : I18n.format("knowledge." + this.idName);
 
         if (!easyResearch) {
             EntityPlayer player = Minecraft.getMinecraft().player;
             if (player != null && !ResearchLogic.hasInfoUnlocked(player, this)) {
                 int artefacts = ResearchLogic.getArtefactCount(this.idName, player);
                 int max = this.getArtefactCount();
-                name += I18n.translateToLocalFormatted("research.cluecount", artefacts, max);
+                name += I18n.format("research.cluecount", artefacts, max);
             }
         }
 
@@ -243,7 +243,7 @@ public class InformationBase {
             requirements = new String[skills.size()];
             for (int id = 0; id < skills.size(); id++) {
                 SkillRequirement requirement = skills.get(id);
-                requirements[id] = I18n.translateToLocalFormatted("rpg.required", requirement.level,
+                requirements[id] = I18n.format("rpg.required", requirement.level,
                         requirement.skill.getDisplayName());
             }
         }

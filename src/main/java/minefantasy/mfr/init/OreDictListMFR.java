@@ -14,6 +14,7 @@ public class OreDictListMFR {
 
 	public static void registerOreDictEntries() {
 
+		// TODO: fix registry names: camelCase -> snake_case
 		OreDictionary.registerOre("oreCopper", BlockListMFR.ORE_COPPER);
 		OreDictionary.registerOre("oreTin", BlockListMFR.ORE_TIN);
 		OreDictionary.registerOre("oreSilver", BlockListMFR.ORE_SILVER);
@@ -62,31 +63,31 @@ public class OreDictListMFR {
 			}
 		}
 
-		OreDictionary.registerOre("ingotCopper", ComponentListMFR.COPPER_INGOT);
-		OreDictionary.registerOre("ingotTin", ComponentListMFR.TIN_INGOT);
-		OreDictionary.registerOre("ingotBronze", ComponentListMFR.BRONZE_INGOT);
-		OreDictionary.registerOre("ingotPigIron", ComponentListMFR.PIG_IRON_INGOT);
-		OreDictionary.registerOre("ingotSteel", ComponentListMFR.STEEL_INGOT);
-		OreDictionary.registerOre("ingotEncrusted", ComponentListMFR.ENCRUSTED_INGOT);
-		OreDictionary.registerOre("ingotBlackSteel", ComponentListMFR.BLACK_STEEL_INGOT);
-		OreDictionary.registerOre("ingotSilver", ComponentListMFR.SILVER_INGOT);
-		OreDictionary.registerOre("ingotRedSteel", ComponentListMFR.RED_STEEL_INGOT);
-		OreDictionary.registerOre("ingotBlueSteel", ComponentListMFR.BLUE_STEEL_INGOT);
-		OreDictionary.registerOre("ingotAdamantium", ComponentListMFR.ADAMANTIUM_INGOT);
-		OreDictionary.registerOre("ingotMithril", ComponentListMFR.MITHRIL_INGOT);
-		OreDictionary.registerOre("ingotIgnotumite", ComponentListMFR.IGNOTUMITE_INGOT);
-		OreDictionary.registerOre("ingotMithium", ComponentListMFR.MITHIUM_INGOT);
-		OreDictionary.registerOre("ingotEnder", ComponentListMFR.ENDER_INGOT);
-		OreDictionary.registerOre("ingotTungsten", ComponentListMFR.TUNGSTEN_INGOT);
-		OreDictionary.registerOre("ingotObsidian", ComponentListMFR.OBSIDIAN_INGOT);
-		OreDictionary.registerOre("ingotCompositeAlloy", ComponentListMFR.INGOT_COMPOSITE_ALLOY);
-		OreDictionary.registerOre("ingotIron", Items.IRON_INGOT);
-		OreDictionary.registerOre("ingotGold", Items.GOLD_INGOT);
+		OreDictionary.registerOre("ingot_copper", ComponentListMFR.COPPER_INGOT);
+		OreDictionary.registerOre("ingot_tin", ComponentListMFR.TIN_INGOT);
+		OreDictionary.registerOre("ingot_bronze", ComponentListMFR.BRONZE_INGOT);
+		OreDictionary.registerOre("ingot_pig_iron", ComponentListMFR.PIG_IRON_INGOT);
+		OreDictionary.registerOre("ingot_steel", ComponentListMFR.STEEL_INGOT);
+		OreDictionary.registerOre("ingot_encrusted", ComponentListMFR.ENCRUSTED_INGOT);
+		OreDictionary.registerOre("ingot_black_steel", ComponentListMFR.BLACK_STEEL_INGOT);
+		OreDictionary.registerOre("ingot_silver", ComponentListMFR.SILVER_INGOT);
+		OreDictionary.registerOre("ingot_red_steel", ComponentListMFR.RED_STEEL_INGOT);
+		OreDictionary.registerOre("ingot_blue_steel", ComponentListMFR.BLUE_STEEL_INGOT);
+		OreDictionary.registerOre("ingot_adamantium", ComponentListMFR.ADAMANTIUM_INGOT);
+		OreDictionary.registerOre("ingot_mithril", ComponentListMFR.MITHRIL_INGOT);
+		OreDictionary.registerOre("ingot_ignotumite", ComponentListMFR.IGNOTUMITE_INGOT);
+		OreDictionary.registerOre("ingot_mithium", ComponentListMFR.MITHIUM_INGOT);
+		OreDictionary.registerOre("ingot_ender", ComponentListMFR.ENDER_INGOT);
+		OreDictionary.registerOre("ingot_tungsten", ComponentListMFR.TUNGSTEN_INGOT);
+		OreDictionary.registerOre("ingot_obsidian", ComponentListMFR.OBSIDIAN_INGOT);
+		OreDictionary.registerOre("ingot_composite_alloy", ComponentListMFR.INGOT_COMPOSITE_ALLOY);
+		OreDictionary.registerOre("ingot_iron", Items.IRON_INGOT);
+		OreDictionary.registerOre("ingot_gold", Items.GOLD_INGOT);
 
 		((ItemArtefact) ComponentListMFR.ARTEFACTS).registerAll();
 
-		String meatRaw = "rawMeat";
-		String cookedMeat = "cookedMeat";
+		String meatRaw = "raw_meat";
+		String cookedMeat = "cooked_meat";
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_BEEF);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_CHICKEN);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_PORKCHOP);

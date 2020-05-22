@@ -23,7 +23,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -43,13 +43,13 @@ public class MobSpawnerMF extends ItemComponentMFR {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack item, @Nullable World world, List list, ITooltipFlag flagIn) {
-        list.add(I18n.translateToLocal("item.spawn_" + types[Math.min(types.length - 1, item.getItemDamage())] + ".desc"));
+        list.add(I18n.format("item.spawn_" + types[Math.min(types.length - 1, item.getItemDamage())] + ".desc"));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack item) {
-        return I18n.translateToLocal("item.spawn_" + types[Math.min(types.length - 1, item.getItemDamage())] + ".name");
+        return I18n.format("item.spawn_" + types[Math.min(types.length - 1, item.getItemDamage())] + ".name");
     }
 
     @Override

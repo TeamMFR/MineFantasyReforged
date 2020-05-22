@@ -11,6 +11,8 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -48,7 +50,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem {
+public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem, IClientRegister {
     protected int itemRarity;
     private Random rand = new Random();
     private ToolMaterial toolMaterial;
@@ -72,6 +74,8 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.maxStackSize = 1;
         this.setMaxDamage(material.getMaxUses());
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -199,10 +203,14 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }
@@ -322,5 +330,10 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     @Override
     public boolean isSpecialRender(ItemStack item) {
         return false;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

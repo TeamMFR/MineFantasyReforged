@@ -6,6 +6,8 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -28,7 +30,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR {
+public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
     protected int itemRarity;
     private ToolMaterial toolMaterial;
     private int tier;
@@ -49,6 +51,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
         setRegistryName(name);
         setUnlocalizedName(name);
 
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     public ItemShearsMFR setCustom(String s) {
@@ -139,5 +142,10 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
     @Override
     public ToolMaterial getMaterial() {
         return toolMaterial;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
     }
 }

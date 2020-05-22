@@ -7,11 +7,11 @@ import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.decor.BlockAmmoBox;
 import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -38,7 +38,7 @@ public class ItemBlockAmmoBox extends ItemBlockBase implements IStorageBlock {
         }
         CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
         if (material != null) {
-            tooltip.add(I18n.translateToLocalFormatted("attribute.box.capacity.name",
+            tooltip.add(I18n.format("attribute.box.capacity.name",
                     TileEntityAmmoBox.getCapacity(material.tier)));
         }
     }

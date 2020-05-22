@@ -9,6 +9,8 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.block.tile.TileEntityRoad;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -43,7 +45,7 @@ import java.util.UUID;
 /**
  * @author Anonymous Productions
  */
-public class ItemMattock extends ItemPickaxe implements IToolMaterial {
+public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private String name;
     // ===================================================== CUSTOM START
@@ -61,6 +63,8 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));
         this.name = name;
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     @Override
@@ -127,10 +131,14 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
     }
 
     @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack item) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+        if (slot != EntityEquipmentSlot.MAINHAND) {
+            return super.getAttributeModifiers(slot, stack);
+        }
+
         Multimap map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(item), 0));
+                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
         return map;
     }
@@ -203,7 +211,9 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial {
         String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
-    // ====================================================== CUSTOM END
-    // ==============================================================\\
 
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
 }

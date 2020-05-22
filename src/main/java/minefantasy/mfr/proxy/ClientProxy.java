@@ -79,12 +79,31 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
 /**
  * @author Anonymous Productions
  */
-public class ClientProxy extends CommonProxy {
+@SideOnly(Side.CLIENT)
+public class ClientProxy extends ClientProxyBase {
+    @Override
+    public void preInit() {
+        super.preInit();
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @Override
+    public void init() {
+        super.init();
+    }
+
+    @Override
+    public void postInit() {
+        super.postInit();
+    }
 
     /**
      * Is the player trying to jump (assuming no screens are open)

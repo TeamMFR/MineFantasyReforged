@@ -24,7 +24,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -146,7 +146,7 @@ public class BlockBFH extends BlockContainer {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.blastfurn)) {
             if (world.isRemote)
-                user.sendMessage(new TextComponentString(I18n.translateToLocal("knowledge.unknownUse")));
+                user.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
             return false;
         }
         TileEntityBlastFH tile = getTile(world, pos);

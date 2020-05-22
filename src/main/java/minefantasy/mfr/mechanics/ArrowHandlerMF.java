@@ -47,6 +47,9 @@ public class ArrowHandlerMF {
         return bow.getTagCompound();
     }
 
+
+    // TODO: Replace deprecated methods
+
     /**
      * When the arrow is pulled back it initiates
      */

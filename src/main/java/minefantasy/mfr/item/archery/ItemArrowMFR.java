@@ -1,10 +1,15 @@
 package minefantasy.mfr.item.archery;
 
 
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.render.ModelHelper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -22,7 +27,7 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -32,7 +37,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
+public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
     public static final MFArrowDispenser dispenser = new MFArrowDispenser();
     protected float damage;
@@ -83,6 +88,8 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         AmmoMechanicsMFR.addArrow(new ItemStack(this));
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, dispenser);
+
+        MineFantasyReborn.proxy.addClientRegister(this);
     }
 
     private ToolMaterial convertMaterial(ToolMaterial material) {
@@ -92,6 +99,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
         return material;
     }
 
+    // TODO: remove/fix this hack
     private String convertName(String name) {
         if (name.equalsIgnoreCase("ornate")) {
             return "silver";
@@ -186,13 +194,13 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
             CustomToolHelper.addInformation(item, list);
         }
         super.addInformation(item, world, list, flag);
-        list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.arrowPower.name") + ": "
+        list.add(TextFormatting.BLUE + I18n.format("attribute.arrowPower.name") + ": "
                 + decimal_format.format(getDamageModifier(item)));
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack item) {
-        String name = ("" + I18n.translateToLocal(this.getUnlocalizedNameInefficiently(item) + ".name"))
+        String name = ("" + I18n.format(this.getUnlocalizedNameInefficiently(item) + ".name"))
                 .trim();
 
         if (isCustom)
@@ -200,7 +208,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
 
         if (design != ArrowType.NORMAL && design != ArrowType.EXPLOSIVE && design != ArrowType.BOLT
                 && design != ArrowType.EXPLOSIVEBOLT) {
-            name += " (" + I18n.translateToLocal("arrow.head." + design.name.toLowerCase() + ".name") + ")";
+            name += " (" + I18n.format("arrow.head." + design.name.toLowerCase() + ".name") + ")";
         }
 
         return name;
@@ -211,6 +219,12 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo {
         int maxUses = CustomToolHelper.getMaxDamage(arrow, arrowMat.getMaxUses());
         return 1F / (maxUses / 150);
     }
+
+    @Override
+    public void registerClient() {
+        ModelLoaderHelper.registerItem(this);
+    }
+
     // ====================================================== CUSTOM END
     // ==============================================================\\
 }

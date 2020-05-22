@@ -5,7 +5,7 @@ import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 
 public class EntryPageImage extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
@@ -28,7 +28,7 @@ public class EntryPageImage extends EntryPage {
 
     @Override
     public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        String local = I18n.translateToLocal(paragraph);
+        String local = I18n.format(paragraph);
         String text = "";
         String temp = "";
         boolean prefix = false;

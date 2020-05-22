@@ -17,6 +17,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.item.archery.ItemArrowMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import net.minecraft.client.util.ITooltipFlag;
@@ -36,22 +37,20 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
-public class ItemCrossbow extends Item
+public class ItemCrossbow extends ItemBaseMFR
         implements IFirearm, IDisplayMFRAmmo, IDamageModifier, IRackItem, IDamageType, IScope, ISpecialSalvage {
     private static final String partNBT = "MineFantasy_GunPiece_";
     public static String useTypeNBT = "MF_ActionInUse";
     private String[] fullParts = new String[]{"mod", "muzzle", "mechanism", "stock"};
 
     public ItemCrossbow() {
-        String name = "MF_CrossbowCustom";
-        setRegistryName(name);
-        setUnlocalizedName(name);
+        super("mf_crossbowcustom");
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setFull3D();
@@ -219,14 +218,14 @@ public class ItemCrossbow extends Item
     public void addInformation(ItemStack item, World world, List list, ITooltipFlag fullInfo) {
         super.addInformation(item, world, list, fullInfo);
 
-        list.add(I18n.translateToLocalFormatted("attribute.crossbow.power.name", getFullValue(item, "power")));
-        list.add(I18n.translateToLocalFormatted("attribute.crossbow.speed.name", getFullValue(item, "speed")));
-        list.add(I18n.translateToLocalFormatted("attribute.crossbow.recoil.name",
+        list.add(I18n.format("attribute.crossbow.power.name", getFullValue(item, "power")));
+        list.add(I18n.format("attribute.crossbow.speed.name", getFullValue(item, "speed")));
+        list.add(I18n.format("attribute.crossbow.recoil.name",
                 getFullValue(item, "recoil")));
-        list.add(I18n.translateToLocalFormatted("attribute.crossbow.spread.name",
+        list.add(I18n.format("attribute.crossbow.spread.name",
                 getFullValue(item, "spread")));
-        list.add(I18n.translateToLocalFormatted("attribute.crossbow.capacity.name", getAmmoCapacity(item)));
-        list.add(I18n.translateToLocalFormatted("attribute.crossbow.bash.name", getMeleeDmg(item)));
+        list.add(I18n.format("attribute.crossbow.capacity.name", getAmmoCapacity(item)));
+        list.add(I18n.format("attribute.crossbow.bash.name", getMeleeDmg(item)));
     }
 
     public String getItemStackDisplayName(ItemStack item) {
@@ -291,7 +290,7 @@ public class ItemCrossbow extends Item
         if (part != null) {
             String name = part.getUnlocalisedName();
             if (name != null) {
-                return I18n.translateToLocal(name);
+                return I18n.format(name);
             }
         }
         return null;

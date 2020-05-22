@@ -7,7 +7,7 @@ import minefantasy.mfr.block.tile.TileEntityBombBench;
 import minefantasy.mfr.container.ContainerBombBench;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
@@ -26,7 +26,7 @@ public class GuiBombBench extends GuiContainer {
      */
     @Override
     protected void drawGuiContainerForegroundLayer(int x, int y) {
-        String s = I18n.translateToLocal("tile.bombBench.name");
+        String s = I18n.format("tile.bombBench.name");
         // this.fontRendererObj.drawString(s, 10, 6, 0);
 
         int xPoint = (this.width - this.xSize) / 2;

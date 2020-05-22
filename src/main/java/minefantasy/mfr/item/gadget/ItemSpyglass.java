@@ -2,6 +2,7 @@ package minefantasy.mfr.item.gadget;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
@@ -14,11 +15,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemSpyglass extends Item implements IScope {
+public class ItemSpyglass extends ItemBaseMFR implements IScope {
 
     public ItemSpyglass() {
-        setRegistryName("spyglass");
-        setUnlocalizedName("spyglass");
+        super("spyglass");
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setHasSubtypes(true);

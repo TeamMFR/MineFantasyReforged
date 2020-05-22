@@ -21,7 +21,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -44,12 +44,12 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
         if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockTrough.NBT_fill)) {
             int stock = item.getTagCompound().getInteger(BlockTrough.NBT_fill);
             if (stock > 0) {
-                list.add(I18n.translateToLocalFormatted("attribute.fill", stock));
+                list.add(I18n.format("attribute.fill", stock));
             }
         }
         CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
         if (material != null) {
-            list.add(I18n.translateToLocalFormatted("attribute.fill.capacity.name",
+            list.add(I18n.format("attribute.fill.capacity.name",
                     TileEntityTrough.getCapacity(material.tier) * TileEntityTrough.capacityScale));
         }
     }

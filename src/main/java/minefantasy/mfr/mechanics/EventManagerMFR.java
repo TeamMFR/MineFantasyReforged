@@ -70,15 +70,17 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
+import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.client.event.RenderPlayerEvent;
@@ -116,9 +118,9 @@ public class EventManagerMFR {
 		list.add("");
 		String AC = ArmourCalculator.getArmourClass(armour);
 		if (AC != null) {
-			list.add(I18n.translateToLocal("attribute.armour." + AC));
+			list.add(I18n.format("attribute.armour." + AC));
 		}
-		list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection"));
+		list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection"));
 		addSingleDT(armour, user, 0, list, extra);
 		addSingleDT(armour, user, 2, list, extra);
 		addSingleDT(armour, user, 1, list, extra);
@@ -143,7 +145,7 @@ public class EventManagerMFR {
 				String d2 = ItemWeaponMFR.decimal_format.format(d);
 				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
 			}
-			list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.rating." + id) + " " + rating
+			list.add(TextFormatting.BLUE + I18n.format("attribute.armour.rating." + id) + " " + rating
 					+ attatch);
 		}
 	}
@@ -152,11 +154,11 @@ public class EventManagerMFR {
 		list.add("");
 		String AC = ArmourCalculator.getArmourClass(armour);
 		if (AC != null) {
-			list.add(I18n.translateToLocal("attribute.armour." + AC));
+			list.add(I18n.format("attribute.armour." + AC));
 		}
 		if (armour.getItem() instanceof ISpecialArmourMFR) {
 			if (ArmourCalculator.advancedDamageTypes) {
-				list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection"));
+				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection"));
 				addSingleDR(armour, user, 0, list, extra, true);
 				addSingleDR(armour, user, 2, list, extra, true);
 				addSingleDR(armour, user, 1, list, extra, true);
@@ -187,10 +189,10 @@ public class EventManagerMFR {
 				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
 			}
 			if (advanced) {
-				list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.rating." + id) + " " + rating
+				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.rating." + id) + " " + rating
 						+ attatch);
 			} else {
-				list.add(TextFormatting.BLUE + I18n.translateToLocal("attribute.armour.protection") + ": " + rating
+				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection") + ": " + rating
 						+ attatch);
 			}
 		}
@@ -580,8 +582,9 @@ public class EventManagerMFR {
 		Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
 		if (block != Blocks.FARMLAND
 				&& FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
-			event.getEntityPlayer().swingArm(event.getEntityPlayer().getActiveHand());
-			event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL,
+			EntityPlayer player = event.getEntityPlayer();
+			player.swingArm(player.isHandActive() ? player.getActiveHand() : (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoe ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND));
+			event.getWorld().playSound(player, event.getPos(), SoundEvents.ITEM_HOE_TILL,
 					SoundCategory.AMBIENT, 12, 1F);
 			event.setCanceled(true);
 		}
@@ -686,7 +689,7 @@ public class EventManagerMFR {
 								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge)) {
 									saidArtefact = true;
 									event.getToolTip()
-											.add(TextFormatting.AQUA + I18n.translateToLocal("info.hasKnowledge"));
+											.add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
 								}
 							}
 						} else if (displayOreDict) {
@@ -698,10 +701,10 @@ public class EventManagerMFR {
 
 			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_Inferior")) {
 				if (event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
-					event.getToolTip().add(TextFormatting.RED + I18n.translateToLocal("attribute.inferior.name"));
+					event.getToolTip().add(TextFormatting.RED + I18n.format("attribute.inferior.name"));
 				}
 				if (!event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
-					event.getToolTip().add(TextFormatting.GREEN + I18n.translateToLocal("attribute.superior.name"));
+					event.getToolTip().add(TextFormatting.GREEN + I18n.format("attribute.superior.name"));
 				}
 			}
 			if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null) {
@@ -726,14 +729,14 @@ public class EventManagerMFR {
 				boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
 
 				event.getToolTip().add((special ? TextFormatting.GREEN : "")
-						+ I18n.translateToLocal("attribute.mfcraftedbyname.name") + ": " + name + TextFormatting.GRAY);
+						+ I18n.format("attribute.mfcraftedbyname.name") + ": " + name + TextFormatting.GRAY);
 			}
 			WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
 			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != null) {
-				event.getToolTip().add(I18n.translateToLocal("weaponclass." + WC.name.toLowerCase()));
+				event.getToolTip().add(I18n.format("weaponclass." + WC.name.toLowerCase()));
 				float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
 				if (skillMod > 100)
-					event.getToolTip().add(I18n.translateToLocal("rpg.skillmod")
+					event.getToolTip().add(I18n.format("rpg.skillmod")
 							+ ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
 
 			}
@@ -752,7 +755,7 @@ public class EventManagerMFR {
 
 	private void addDamageType(List<String> list, int value, String name) {
 		if (value > 0) {
-			String s = I18n.translateToLocal("attribute.weapon." + name);
+			String s = I18n.format("attribute.weapon." + name);
 			if (value < 100) {
 				s += " " + value + "%";
 			}
@@ -765,10 +768,10 @@ public class EventManagerMFR {
 		int tier = ToolHelper.getCrafterTier(tool);
 		float efficiency = ToolHelper.getCrafterEfficiency(tool);
 
-		list.add(I18n.translateToLocal("attribute.mfcrafttool.name") + ": "
-				+ I18n.translateToLocal("tooltype." + toolType));
-		list.add(I18n.translateToLocal("attribute.mfcrafttier.name") + ": " + tier);
-		list.add(I18n.translateToLocal("attribute.mfcrafteff.name") + ": " + efficiency);
+		list.add(I18n.format("attribute.mfcrafttool.name") + ": "
+				+ I18n.format("tooltype." + toolType));
+		list.add(I18n.format("attribute.mfcrafttier.name") + ": " + tier);
+		list.add(I18n.format("attribute.mfcrafteff.name") + ": " + efficiency);
 	}
 
 	@SubscribeEvent

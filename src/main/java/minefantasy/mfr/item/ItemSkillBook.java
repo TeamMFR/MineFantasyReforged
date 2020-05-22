@@ -15,7 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -42,9 +42,9 @@ public class ItemSkillBook extends ItemComponentMFR {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
         if (isMax) {
-            list.add(I18n.translateToLocal("item." + name + ".desc"));
+            list.add(I18n.format("item." + name + ".desc"));
         } else {
-            list.add(I18n.translateToLocalFormatted("item." + name + ".desc", 1));
+            list.add(I18n.format("item." + name + ".desc", 1));
         }
     }
 

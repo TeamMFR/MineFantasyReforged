@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -8,7 +9,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.text.translation.I18n;
 import org.lwjgl.input.Keyboard;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class ClientItemsMF {
             return true;
         } else {
             String keyname = Keyboard.getKeyName(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
-            list.add(I18n.translateToLocalFormatted("info.tooltip.moreinfo", keyname.toUpperCase()));
+            list.add(I18n.format("info.tooltip.moreinfo", keyname.toUpperCase()));
             return false;
         }
     }
