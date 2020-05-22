@@ -580,8 +580,9 @@ public class EventManagerMFR {
 		Block block = event.getWorld().getBlockState(event.getPos()).getBlock();
 		if (block != Blocks.FARMLAND
 				&& FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
-			event.getEntityPlayer().swingArm(event.getEntityPlayer().getActiveHand());
-			event.getWorld().playSound(event.getEntityPlayer(), event.getPos(), SoundEvents.ITEM_HOE_TILL,
+			EntityPlayer player = event.getEntityPlayer();
+			player.swingArm(player.isHandActive() ? player.getActiveHand() : (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoe ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND));
+			event.getWorld().playSound(player, event.getPos(), SoundEvents.ITEM_HOE_TILL,
 					SoundCategory.AMBIENT, 12, 1F);
 			event.setCanceled(true);
 		}
