@@ -3,7 +3,7 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
-import minefantasy.mfr.api.armour.ItemArmourMFRBase;
+import minefantasy.mfr.item.armour.ItemArmourBaseMFR;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
@@ -32,7 +32,7 @@ import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.ClientItemsMF;
+import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.packet.LevelupPacket;
 import minefantasy.mfr.packet.SkillPacket;
@@ -70,7 +70,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
-import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -583,7 +582,7 @@ public class EventManagerMFR {
 		if (block != Blocks.FARMLAND
 				&& FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
 			EntityPlayer player = event.getEntityPlayer();
-			player.swingArm(player.isHandActive() ? player.getActiveHand() : (player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemHoe ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND));
+			player.swingArm(player.isHandActive() ? player.getActiveHand() : (player.getHeldItem(EnumHand.MAIN_HAND) == event.getCurrent() ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND));
 			event.getWorld().playSound(player, event.getPos(), SoundEvents.ITEM_HOE_TILL,
 					SoundCategory.AMBIENT, 12, 1F);
 			event.setCanceled(true);
@@ -709,8 +708,8 @@ public class EventManagerMFR {
 			}
 			if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null) {
 				if (event.getItemStack().getItem() instanceof ItemArmor
-						&& (!(event.getItemStack().getItem() instanceof ItemArmourMFRBase)
-								|| ClientItemsMF.showSpecials(event.getItemStack(), event.getEntityPlayer().world,
+						&& (!(event.getItemStack().getItem() instanceof ItemArmourBaseMFR)
+								|| ClientItemsMFR.showSpecials(event.getItemStack(), event.getEntityPlayer().world,
 										event.getToolTip(), event.getFlags()))) {
 					addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(),
 							event.getFlags().isAdvanced());

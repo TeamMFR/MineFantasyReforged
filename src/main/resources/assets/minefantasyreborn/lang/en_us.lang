@@ -389,9 +389,9 @@ tile.repair_basic.name=Basic Repair Kit
 tile.repair_advanced.name=Advanced Repair Kit
 tile.repair_ornate.name=Ornate Repair Kit
 
-item.rawhide_small.name=_small _hide
-item.rawhide_medium.name=_medium _hide
-item.rawhide_large.name=_large _hide
+item.rawhide_small.name=Small Hide
+item.rawhide_medium.name=Medium Hide
+item.rawhide_large.name=Large Hide
 
 item.leather_strip.name=Leather Strip
 item.hide_small.name=Clean Small Hide

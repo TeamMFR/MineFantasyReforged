@@ -40,7 +40,7 @@ public class OrnateStyle {
     public static final ItemWeaponMFR ORNATE_HALBEARD = Utils.nullValue();
     public static final ItemWeaponMFR ORNATE_LANCE = Utils.nullValue();
     public static final ItemPickMF ORNATE_PICK = Utils.nullValue();
-    public static final ItemAxeMF ORNATE_AXE = Utils.nullValue();
+    public static final ItemAxe ORNATE_AXE = Utils.nullValue();
     public static final ItemSpadeMF ORNATE_SPADE = Utils.nullValue();
     public static final ItemHoeMF ORNATE_HOE = Utils.nullValue();
     public static final ItemHvyPick ORNATE_HVYPICK = Utils.nullValue();
@@ -54,7 +54,7 @@ public class OrnateStyle {
     public static final ItemHammer ORNATE_HAMMER = Utils.nullValue();
     public static final ItemHammer ORNATE_HVYHAMMER = Utils.nullValue();
     public static final ItemTongs ORNATE_TONGS = Utils.nullValue();
-    public static final ItemShearsMFR ORNATE_SHEARS = Utils.nullValue();
+    public static final ItemShears ORNATE_SHEARS = Utils.nullValue();
     public static final ItemKnifeMFR ORNATE_KNIFE = Utils.nullValue();
     public static final ItemNeedle ORNATE_NEEDLE = Utils.nullValue();
     public static final ItemSaw ORNATE_SAW = Utils.nullValue();
@@ -90,22 +90,22 @@ public class OrnateStyle {
         
         // Weapons
         registry.register(new ItemDagger(design + "_dagger", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemSwordMF(design + "_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemWaraxeMFR(design + "_waraxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemMaceMFR(design + "_mace", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemSpearMFR(design + "_spear", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemKatanaMFR(design + "_katana", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemGreatswordMFR(design + "_greatsword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemBattleaxeMFR(design + "_battleaxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemWarhammerMFR(design + "_warhammer", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
-        registry.register(new ItemHalbeardMFR(design + "_halbeard", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemSword(design + "_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemWaraxe(design + "_waraxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemMace(design + "_mace", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemSpear(design + "_spear", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemKatana(design + "_katana", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemGreatsword(design + "_greatsword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemBattleaxe(design + "_battleaxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemWarhammer(design + "_warhammer", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
+        registry.register(new ItemHalbeard(design + "_halbeard", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
         registry.register(new ItemLance(design + "_lance", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(-1));
 
         registry.register(new ItemBowMFR(design + "_bow", mat, EnumBowType.SHORTBOW, 1).setCustom(design).setCreativeTab(tab));
 
         // Tools
         registry.register(new ItemPickMF(design + "_pick", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemAxeMF(design + "_axe", mat, 0).setCustom(design).setCreativeTab(tab));
+        registry.register(new ItemAxe(design + "_axe", mat, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemSpadeMF(design + "_spade", mat, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemHoeMF(design + "_hoe", mat, 0).setCustom(design).setCreativeTab(tab));
 
@@ -120,7 +120,7 @@ public class OrnateStyle {
         // Crafters
         registry.register(new ItemHammer(design + "_hammer", mat, false, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemHammer(design + "_hvyhammer", mat, true, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemShearsMFR(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab));
+        registry.register(new ItemShears(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemKnifeMFR(design + "_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemNeedle(design + "_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab));

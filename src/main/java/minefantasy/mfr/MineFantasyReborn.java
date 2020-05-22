@@ -135,6 +135,7 @@ public class MineFantasyReborn {
 			packetHandler.channels.put(channel, eventChannel);
 		}
 		proxy.registerMain();
+		proxy.init();
 	}
 
 	@EventHandler

@@ -1,6 +1,8 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_hammer"
+        "layer0": "minefantasyreborn:items/dragonforged_hammer",
+        "layer1": "minefantasyreborn:items/dragonforged_hammer_detail",
+        "layer2": "minefantasyreborn:items/dragonforged_hammer_haft"
     }
 }

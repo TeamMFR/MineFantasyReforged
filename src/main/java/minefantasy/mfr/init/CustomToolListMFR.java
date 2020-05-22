@@ -35,7 +35,7 @@ public class CustomToolListMFR {
     public static final ItemWeaponMFR STANDARD_HALBEARD = Utils.nullValue();
     public static final ItemWeaponMFR STANDARD_LANCE = Utils.nullValue();
     public static final ItemPickMF STANDARD_PICK = Utils.nullValue();
-    public static final ItemAxeMF STANDARD_AXE = Utils.nullValue();
+    public static final ItemAxe STANDARD_AXE = Utils.nullValue();
     public static final ItemSpadeMF STANDARD_SPADE = Utils.nullValue();
     public static final ItemHoeMF STANDARD_HOE = Utils.nullValue();
     public static final ItemHvyPick STANDARD_HVYPICK = Utils.nullValue();
@@ -49,7 +49,7 @@ public class CustomToolListMFR {
     public static final ItemHammer STANDARD_HAMMER = Utils.nullValue();
     public static final ItemHammer STANDARD_HVYHAMMER = Utils.nullValue();
     public static final ItemTongs STANDARD_TONGS = Utils.nullValue();
-    public static final ItemShearsMFR STANDARD_SHEARS = Utils.nullValue();
+    public static final ItemShears STANDARD_SHEARS = Utils.nullValue();
     public static final ItemKnifeMFR STANDARD_KNIFE = Utils.nullValue();
     public static final ItemNeedle STANDARD_NEEDLE = Utils.nullValue();
     public static final ItemSaw STANDARD_SAW = Utils.nullValue();
@@ -72,15 +72,15 @@ public class CustomToolListMFR {
 
         // Standard Weapons
         registry.register(new ItemDagger(design + "_dagger", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemSwordMF(design + "_sword", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemWaraxeMFR(design + "_waraxe", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemMaceMFR(design + "_mace", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemSpearMFR(design + "_spear", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemKatanaMFR(design + "_katana", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemGreatswordMFR(design + "_greatsword", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemBattleaxeMFR(design + "_battleaxe", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemWarhammerMFR(design + "_warhammer", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
-        registry.register(new ItemHalbeardMFR(design + "_halbeard", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemSword(design + "_sword", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemWaraxe(design + "_waraxe", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemMace(design + "_mace", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemSpear(design + "_spear", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemKatana(design + "_katana", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemGreatsword(design + "_greatsword", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemBattleaxe(design + "_battleaxe", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemWarhammer(design + "_warhammer", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
+        registry.register(new ItemHalbeard(design + "_halbeard", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
         registry.register(new ItemLance(design + "_lance", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab));
 
         tab = CreativeTabMFR.tabArcher;
@@ -93,7 +93,7 @@ public class CustomToolListMFR {
         // Standard Tools
         tab = CreativeTabMFR.tabTool;
         registry.register(new ItemPickMF(design + "_pick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemAxeMF(design + "_axe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab));
+        registry.register(new ItemAxe(design + "_axe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemSpadeMF(design + "_spade", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemHoeMF(design + "_hoe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab));
 
@@ -110,7 +110,7 @@ public class CustomToolListMFR {
         tab = CreativeTabMFR.tabCraftTool;
         registry.register(new ItemHammer(design + "_hammer", ToolMaterial.IRON, false, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemHammer(design + "_hvyhammer", ToolMaterial.IRON, true, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemShearsMFR(design + "_shears", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab));
+        registry.register(new ItemShears(design + "_shears", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemKnifeMFR(design + "_knife", ToolMaterial.IRON, 0, 1F, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemNeedle(design + "_needle", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemSaw(design + "_saw", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab));

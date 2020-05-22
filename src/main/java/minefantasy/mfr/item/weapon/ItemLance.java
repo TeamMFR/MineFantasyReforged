@@ -5,7 +5,6 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
@@ -18,7 +17,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemLance extends ItemSpearMFR {
+public class ItemLance extends ItemSpear {
     /**
      */
     public ItemLance(String name, Item.ToolMaterial material, int rarity, float weight) {

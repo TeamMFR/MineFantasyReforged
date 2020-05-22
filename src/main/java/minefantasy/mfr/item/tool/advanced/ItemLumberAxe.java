@@ -4,9 +4,7 @@ import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigTools;
-import minefantasy.mfr.item.tool.ItemAxeMF;
-import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.item.tool.ItemAxe;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -23,7 +21,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 import java.util.Random;
 
-public class ItemLumberAxe extends ItemAxeMF implements IRackItem {
+public class ItemLumberAxe extends ItemAxe implements IRackItem {
     private Random rand = new Random();
 
     public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {

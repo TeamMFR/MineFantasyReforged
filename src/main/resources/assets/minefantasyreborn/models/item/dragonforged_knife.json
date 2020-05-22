@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_knife"
+        "layer0": "minefantasyreborn:items/dragonforged_knife",
+        "layer1": "minefantasyreborn:items/dragonforged_knife_detail",
+        "layer2": "minefantasyreborn:items/dragonforged_knife_haft"
     }
 }
