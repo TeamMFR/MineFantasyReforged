@@ -895,13 +895,13 @@ public class CombatMechanics {
     }
 
     private boolean isAxe(ItemStack held) {
-        return held != null && held.getItem() instanceof ItemWaraxeMFR
-                || held != null && held.getItem() instanceof ItemBattleaxeMFR;
+        return held != null && held.getItem() instanceof ItemWaraxe
+                || held != null && held.getItem() instanceof ItemBattleaxe;
     }
 
     private boolean isFastblade(ItemStack held) {
         return held != null && held.getItem() instanceof ItemDagger
-                || held != null && held.getItem() instanceof ItemKatanaMFR;
+                || held != null && held.getItem() instanceof ItemKatana;
     }
 
     private void applyBalance(EntityPlayer entityPlayer) {

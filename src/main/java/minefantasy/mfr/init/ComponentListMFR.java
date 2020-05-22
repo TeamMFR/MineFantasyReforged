@@ -11,8 +11,8 @@ import minefantasy.mfr.item.ItemArtefact;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.item.ItemFilledMould;
 import minefantasy.mfr.item.ItemHide;
-import minefantasy.mfr.item.ItemMFBowl;
-import minefantasy.mfr.item.ItemRawOreMF;
+import minefantasy.mfr.item.ItemBowl;
+import minefantasy.mfr.item.ItemRawOre;
 import minefantasy.mfr.item.ItemSpecialDesign;
 import minefantasy.mfr.item.custom.ItemCustomComponent;
 import minefantasy.mfr.item.gadget.ItemBombComponent;
@@ -198,7 +198,7 @@ public class ComponentListMFR {
 	public static void registerItem(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
-		registry.register(new ItemMFBowl("clay_pot").setStoragePlacement("pot", "pot"));
+		registry.register(new ItemBowl("clay_pot").setStoragePlacement("pot", "pot"));
 		registry.register(new ItemComponentMFR("clay_pot_uncooked", 0));
 		registry.register(new ItemComponentMFR("ingot_mould").setStoragePlacement("bar", "mould"));
 		registry.register(new ItemComponentMFR("ingot_mould_uncooked", 0));
@@ -283,12 +283,12 @@ public class ComponentListMFR {
 		registry.register(new ItemComponentMFR("thread", 0));
 		registry.register(new ItemComponentMFR("obsidian_rock", 0));
 
-		registry.register(new ItemRawOreMF("ore_copper", -1));
-		registry.register(new ItemRawOreMF("ore_tin", -1));
-		registry.register(new ItemRawOreMF("ore_iron", 0));
-		registry.register(new ItemRawOreMF("ore_silver", 0));
-		registry.register(new ItemRawOreMF("ore_gold", 0));
-		registry.register(new ItemRawOreMF("ore_tungsten", 1));
+		registry.register(new ItemRawOre("ore_copper", -1));
+		registry.register(new ItemRawOre("ore_tin", -1));
+		registry.register(new ItemRawOre("ore_iron", 0));
+		registry.register(new ItemRawOre("ore_silver", 0));
+		registry.register(new ItemRawOre("ore_gold", 0));
+		registry.register(new ItemRawOre("ore_tungsten", 1));
 
 		registry.register(new ItemHeated());
 

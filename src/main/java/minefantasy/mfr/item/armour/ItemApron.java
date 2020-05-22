@@ -5,7 +5,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
-public class ItemApron extends ItemClothingMFR {
+public class ItemApron extends ItemClothing {
     public ItemApron(String name, BaseMaterialMFR material, String tex, int rarity) {
         super(name, material, EntityEquipmentSlot.CHEST, tex, rarity);
     }

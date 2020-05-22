@@ -39,7 +39,7 @@ public class DragonforgedStyle {
     public static final ItemWeaponMFR DRAGONFORGED_HALBEARD = Utils.nullValue();
     public static final ItemWeaponMFR DRAGONFORGED_LANCE = Utils.nullValue();
     public static final ItemPickMF DRAGONFORGED_PICK = Utils.nullValue();
-    public static final ItemAxeMF DRAGONFORGED_AXE = Utils.nullValue();
+    public static final ItemAxe DRAGONFORGED_AXE = Utils.nullValue();
     public static final ItemSpadeMF DRAGONFORGED_SPADE = Utils.nullValue();
     public static final ItemHoeMF DRAGONFORGED_HOE = Utils.nullValue();
     public static final ItemHvyPick DRAGONFORGED_HVYPICK = Utils.nullValue();
@@ -53,7 +53,7 @@ public class DragonforgedStyle {
     public static final ItemHammer DRAGONFORGED_HAMMER = Utils.nullValue();
     public static final ItemHammer DRAGONFORGED_HVYHAMMER = Utils.nullValue();
     public static final ItemTongs DRAGONFORGED_TONGS = Utils.nullValue();
-    public static final ItemShearsMFR DRAGONFORGED_SHEARS = Utils.nullValue();
+    public static final ItemShears DRAGONFORGED_SHEARS = Utils.nullValue();
     public static final ItemKnifeMFR DRAGONFORGED_KNIFE = Utils.nullValue();
     public static final ItemNeedle DRAGONFORGED_NEEDLE = Utils.nullValue();
     public static final ItemSaw DRAGONFORGED_SAW = Utils.nullValue();
@@ -89,22 +89,22 @@ public class DragonforgedStyle {
 
         // Weapons
         registry.register(new ItemDagger(design + "_dagger", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemSwordMF(design + "_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemWaraxeMFR(design + "_waraxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemMaceMFR(design + "_mace", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemSpearMFR(design + "_spear", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemKatanaMFR(design + "_katana", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemGreatswordMFR(design + "_greatsword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemBattleaxeMFR(design + "_battleaxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemWarhammerMFR(design + "_warhammer", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemHalbeardMFR(design + "_halbeard", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemSword(design + "_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemWaraxe(design + "_waraxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemMace(design + "_mace", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemSpear(design + "_spear", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemKatana(design + "_katana", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemGreatsword(design + "_greatsword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemBattleaxe(design + "_battleaxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemWarhammer(design + "_warhammer", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        registry.register(new ItemHalbeard(design + "_halbeard", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
         registry.register(new ItemLance(design + "_lance", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
 
         registry.register(new ItemBowMFR(design + "_bow", mat, EnumBowType.SHORTBOW, 1).setCustom(design).setCreativeTab(tab));
 
         // Tools
         registry.register(new ItemPickMF(design + "_pick", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemAxeMF(design + "_axe", mat, 0).setCustom(design).setCreativeTab(tab));
+        registry.register(new ItemAxe(design + "_axe", mat, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemSpadeMF(design + "_spade", mat, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemHoeMF(design + "_hoe", mat, 0).setCustom(design).setCreativeTab(tab));
 
@@ -120,7 +120,7 @@ public class DragonforgedStyle {
         // Crafters
         registry.register(new ItemHammer(design + "_hammer", mat, false, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemHammer(design + "_hvyhammer", mat, true, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemShearsMFR(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab));
+        registry.register(new ItemShears(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemKnifeMFR(design + "_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemNeedle(design + "_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab));
         registry.register(new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab));

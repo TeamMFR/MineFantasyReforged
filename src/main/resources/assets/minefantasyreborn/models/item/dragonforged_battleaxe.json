@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_battleaxe"
+        "layer0": "minefantasyreborn:items/dragonforged_battleaxe",
+        "layer1": "minefantasyreborn:items/dragonforged_battleaxe_detail",
+        "layer2": "minefantasyreborn:items/dragonforged_battleaxe_haft"
     }
 }

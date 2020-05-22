@@ -20,7 +20,7 @@ import minefantasy.mfr.item.gadget.ItemParachute;
 import minefantasy.mfr.item.gadget.ItemSpyglass;
 import minefantasy.mfr.item.gadget.ItemSyringe;
 import minefantasy.mfr.item.gadget.MobSpawnerMF;
-import minefantasy.mfr.item.tool.ItemAxeMF;
+import minefantasy.mfr.item.tool.ItemAxe;
 import minefantasy.mfr.item.tool.ItemHoeMF;
 import minefantasy.mfr.item.tool.ItemLighterMF;
 import minefantasy.mfr.item.tool.ItemPickMF;
@@ -31,10 +31,10 @@ import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.item.tool.crafting.ItemNeedle;
 import minefantasy.mfr.item.tool.crafting.ItemPaintBrush;
 import minefantasy.mfr.item.tool.crafting.ItemTongs;
-import minefantasy.mfr.item.weapon.ItemMaceMFR;
-import minefantasy.mfr.item.weapon.ItemSpearMFR;
-import minefantasy.mfr.item.weapon.ItemSwordMF;
-import minefantasy.mfr.item.weapon.ItemWaraxeMFR;
+import minefantasy.mfr.item.weapon.ItemMace;
+import minefantasy.mfr.item.weapon.ItemSpear;
+import minefantasy.mfr.item.weapon.ItemSword;
+import minefantasy.mfr.item.weapon.ItemWaraxe;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Items;
@@ -132,23 +132,23 @@ public class ToolListMFR {
     public static void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> registry = event.getRegistry();
 
-        registry.register(new ItemSwordMF("training_sword", ToolMaterial.WOOD, -1, 0.8F));
-        registry.register(new ItemWaraxeMFR("training_waraxe", ToolMaterial.WOOD, -1, 0.8F));
-        registry.register(new ItemMaceMFR("training_mace", ToolMaterial.WOOD, -1, 0.8F));
-        registry.register(new ItemSpearMFR("training_spear", ToolMaterial.WOOD, -1, 0.8F));
+        registry.register(new ItemSword("training_sword", ToolMaterial.WOOD, -1, 0.8F));
+        registry.register(new ItemWaraxe("training_waraxe", ToolMaterial.WOOD, -1, 0.8F));
+        registry.register(new ItemMace("training_mace", ToolMaterial.WOOD, -1, 0.8F));
+        registry.register(new ItemSpear("training_spear", ToolMaterial.WOOD, -1, 0.8F));
 
         registry.register(new ItemKnifeMFR("stone_knife", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 3.5F, 0));
         registry.register(new ItemHammer("stone_hammer", BaseMaterialMFR.getMaterial("stone").getToolConversion(), false, -1, 0));
         registry.register(new ItemTongs("stone_tongs", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1));
         registry.register(new ItemNeedle("bone_needle", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 0));
         registry.register(new ItemPickMF("stone_pick", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1));
-        registry.register(new ItemAxeMF("stone_axe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1));
+        registry.register(new ItemAxe("stone_axe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1));
         registry.register(new ItemSpadeMF("stone_spade", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1));
         registry.register(new ItemHoeMF("stone_hoe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1));
-        registry.register(new ItemSwordMF("stone_sword", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
-        registry.register(new ItemMaceMFR("stone_mace", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
-        registry.register(new ItemWaraxeMFR("stone_waraxe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
-        registry.register(new ItemSpearMFR("stone_spear", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
+        registry.register(new ItemSword("stone_sword", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
+        registry.register(new ItemMace("stone_mace", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
+        registry.register(new ItemWaraxe("stone_waraxe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
+        registry.register(new ItemSpear("stone_spear", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F));
 
         registry.register(new ItemBandage("bandage_crude", 5F));
         registry.register(new ItemBandage("bandage_wool", 8F));

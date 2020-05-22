@@ -1,6 +1,8 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_hvypick"
+        "layer0": "minefantasyreborn:items/dragonforged_hvypick",
+        "layer1": "minefantasyreborn:items/dragonforged_hvypick_detail",
+        "layer2": "minefantasyreborn:items/dragonforged_hvypick_haft"
     }
 }

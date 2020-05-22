@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_bow_standby"
+        "layer0": "minefantasyreborn:items/dragonforged_bow_standby",
+        "layer1": "minefantasyreborn:items/dragonforged_bow_standby_detail",
+        "layer2": "minefantasyreborn:items/dragonforged_bow_standby_haft"
     }
 }

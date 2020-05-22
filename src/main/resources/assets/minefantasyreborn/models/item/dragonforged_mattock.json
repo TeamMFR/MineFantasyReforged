@@ -1,6 +1,8 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_mattock"
+        "layer0": "minefantasyreborn:items/dragonforged_mattock",
+        "layer1": "minefantasyreborn:items/dragonforged_mattock_detail",
+        "layer2": "minefantasyreborn:items/dragonforged_mattock_haft"
     }
 }

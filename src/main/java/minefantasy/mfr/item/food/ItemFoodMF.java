@@ -6,7 +6,7 @@ import minefantasy.mfr.hunger.HungerSystemMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.ClientItemsMF;
+import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
@@ -207,7 +207,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
         super.addInformation(food, world, list, flag);
         list.add(I18n.format("food.stat.hunger.name", hungerLevel));
 
-        if (hasEffect && ClientItemsMF.showSpecials(food, world, list, flag)) {
+        if (hasEffect && ClientItemsMFR.showSpecials(food, world, list, flag)) {
             list.add("");
             list.add(TextFormatting.WHITE + I18n.format("food.stat.list.name"));
             if (mfSaturation > 0) {
