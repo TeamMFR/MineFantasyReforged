@@ -1,4 +1,6 @@
--------------------------------------------
+
+# MineFantasy Reborn  ![Mod Build](https://github.com/TeamMFR/MineFantasy-reborn/workflows/Mod%20Build/badge.svg)
+
 Source installation information for modders
 -------------------------------------------
 This code follows the Minecraft Forge installation methodology. It will apply
