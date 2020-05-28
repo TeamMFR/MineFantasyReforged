@@ -59,16 +59,16 @@ public class SmeltingRecipesMF {
         refineRawOre(ComponentListMFR.ORE_SILVER, silver);
         refineRawOre(ComponentListMFR.ORE_GOLD, gold);
 
-        refineRawOre(BlockListMFR.ORE_COPPER, copper, 0.4F);
-        refineRawOre(BlockListMFR.ORE_TIN, tin, 0.5F);
-        refineRawOre(BlockListMFR.ORE_SILVER, silver, 0.9F);
+        refineRawOre(BlockListMFR.COPPER_ORE, copper, 0.4F);
+        refineRawOre(BlockListMFR.TIN_ORE, tin, 0.5F);
+        refineRawOre(BlockListMFR.SILVER_ORE, silver, 0.9F);
 
-        GameRegistry.addSmelting(BlockListMFR.ORE_BORAX, new ItemStack(ComponentListMFR.FLUX_STRONG, 4), 0.25F);
-        GameRegistry.addSmelting(BlockListMFR.ORE_TUNGSTEN, new ItemStack(ComponentListMFR.ORE_TUNGSTEN, 1), 0.25F);
-        GameRegistry.addSmelting(BlockListMFR.ORE_KAOLINITE, new ItemStack(ComponentListMFR.KAOLINITE), 0.25F);
-        GameRegistry.addSmelting(BlockListMFR.ORE_NITRE, new ItemStack(ComponentListMFR.NITRE, 4), 0.25F);
-        GameRegistry.addSmelting(BlockListMFR.ORE_SULFUR, new ItemStack(ComponentListMFR.SULFUR, 4), 0.25F);
-        GameRegistry.addSmelting(BlockListMFR.ORE_CLAY, new ItemStack(Items.CLAY_BALL, 4), 0.25F);
+        GameRegistry.addSmelting(BlockListMFR.BORAX_ORE, new ItemStack(ComponentListMFR.FLUX_STRONG, 4), 0.25F);
+        GameRegistry.addSmelting(BlockListMFR.TUNGSTEN_ORE, new ItemStack(ComponentListMFR.ORE_TUNGSTEN, 1), 0.25F);
+        GameRegistry.addSmelting(BlockListMFR.KAOLINITE_ORE, new ItemStack(ComponentListMFR.KAOLINITE), 0.25F);
+        GameRegistry.addSmelting(BlockListMFR.NITRE_ORE, new ItemStack(ComponentListMFR.NITRE, 4), 0.25F);
+        GameRegistry.addSmelting(BlockListMFR.SULFUR_ORE, new ItemStack(ComponentListMFR.SULFUR, 4), 0.25F);
+        GameRegistry.addSmelting(BlockListMFR.CLAY_ORE, new ItemStack(Items.CLAY_BALL, 4), 0.25F);
 
         // ALLOY
         KnowledgeListMFR.bronze = MineFantasyRebornAPI.addRatioAlloy(3, ComponentListMFR.bar("bronze", 3),
@@ -85,7 +85,7 @@ public class SmeltingRecipesMF {
                         ComponentListMFR.FLUX_STRONG, ComponentListMFR.FLUX_STRONG, ComponentListMFR.FLUX_STRONG,
                         ComponentListMFR.FLUX_STRONG});
         MineFantasyRebornAPI.addRatioAlloy(1, tungsten, 1,
-                new Object[]{Items.COAL, Items.COAL, Items.COAL, Items.COAL, BlockListMFR.ORE_TUNGSTEN,
+                new Object[]{Items.COAL, Items.COAL, Items.COAL, Items.COAL, BlockListMFR.TUNGSTEN_ORE,
                         ComponentListMFR.FLUX_STRONG, ComponentListMFR.FLUX_STRONG, ComponentListMFR.FLUX_STRONG,
                         ComponentListMFR.FLUX_STRONG});
 
@@ -100,10 +100,10 @@ public class SmeltingRecipesMF {
                         Items.BLAZE_POWDER});
 
         KnowledgeListMFR.adamantium = MineFantasyRebornAPI.addRatioAlloy(2, ComponentListMFR.bar("adamantium", 2), 2,
-                new Object[]{BlockListMFR.ORE_MYTHIC, gold, gold});
+                new Object[]{BlockListMFR.MYTHIC_ORE, gold, gold});
 
         KnowledgeListMFR.mithril = MineFantasyRebornAPI.addRatioAlloy(2, ComponentListMFR.bar("mithril", 2),
-                new Object[]{BlockListMFR.ORE_MYTHIC, silver, silver});
+                new Object[]{BlockListMFR.MYTHIC_ORE, silver, silver});
 
         KnowledgeListMFR.ignotumite = MineFantasyRebornAPI.addRatioAlloy(2, ignotumite, 3,
                 new Object[]{adamant, adamant, Items.EMERALD, Items.BLAZE_POWDER});

@@ -2,7 +2,6 @@ package minefantasy.mfr.init;
 
 import minefantasy.mfr.item.AdvancedFuelHandlerMF;
 import minefantasy.mfr.item.ItemArtefact;
-import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -15,17 +14,17 @@ public class OreDictListMFR {
 	public static void registerOreDictEntries() {
 
 		// TODO: fix registry names: camelCase -> snake_case
-		OreDictionary.registerOre("oreCopper", BlockListMFR.ORE_COPPER);
-		OreDictionary.registerOre("oreTin", BlockListMFR.ORE_TIN);
-		OreDictionary.registerOre("oreSilver", BlockListMFR.ORE_SILVER);
-		OreDictionary.registerOre("oreMythic", BlockListMFR.ORE_MYTHIC);
-		OreDictionary.registerOre("oreKaolinite", BlockListMFR.ORE_KAOLINITE);
-		OreDictionary.registerOre("oreNitre", BlockListMFR.ORE_NITRE);
-		OreDictionary.registerOre("oreSulfur", BlockListMFR.ORE_SULFUR);
-		OreDictionary.registerOre("oreBorax", BlockListMFR.ORE_BORAX);
-		OreDictionary.registerOre("oreTungsten", BlockListMFR.ORE_TUNGSTEN);
-		OreDictionary.registerOre("oreClay", BlockListMFR.ORE_CLAY);
-		OreDictionary.registerOre("oreCoalRich", BlockListMFR.ORE_COAL_RICH);
+		OreDictionary.registerOre("copper_ore", BlockListMFR.COPPER_ORE);
+		OreDictionary.registerOre("tin_ore", BlockListMFR.TIN_ORE);
+		OreDictionary.registerOre("silver_ore", BlockListMFR.SILVER_ORE);
+		OreDictionary.registerOre("mythic_ore", BlockListMFR.MYTHIC_ORE);
+		OreDictionary.registerOre("kaolinite_ore", BlockListMFR.KAOLINITE_ORE);
+		OreDictionary.registerOre("borax_ore", BlockListMFR.NITRE_ORE);
+		OreDictionary.registerOre("sulfur_ore", BlockListMFR.SULFUR_ORE);
+		OreDictionary.registerOre("borax_ore", BlockListMFR.BORAX_ORE);
+		OreDictionary.registerOre("tungsten_ore", BlockListMFR.TUNGSTEN_ORE);
+		OreDictionary.registerOre("clay_ore", BlockListMFR.CLAY_ORE);
+		OreDictionary.registerOre("coal_rich_ore", BlockListMFR.COAL_RICH_ORE);
 
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.LIMESTONE, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(BlockListMFR.LIMESTONE, 1, 0));
@@ -36,7 +35,7 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.FRAMED_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
 
 		OreDictionary.registerOre("planksOakWood", new ItemStack(Blocks.PLANKS, 1, 0));
 		OreDictionary.registerOre("planksSpruceWood", new ItemStack(Blocks.PLANKS, 1, 1));

@@ -553,19 +553,19 @@ item.cross_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
 
 # ORES
 
-tile.oreCopper.name=Copper Ore
-tile.oreTin.name=Tin Ore
-tile.oreSilver.name=Silver Ore
-tile.oreTungsten.name=Wolframite Ore
-tile.oreMythic.name=Mythic Ore
-tile.oreMythicPure.name=Pure Mythic Ore
+tile.copper_ore.name=Copper Ore
+tile.tin_ore.name=Tin Ore
+tile.silver_ore.name=Silver Ore
+tile.tungsten_ore.name=Wolframite Ore
+tile.mythic_ore.name=Mythic Ore
+tile.mythic_pure_ore.name=Pure Mythic Ore
 
-tile.oreClay.name=Clay Bearing Dirt
-tile.oreBorax.name=Borax Deposit
-tile.oreKaolinite.name=Kaolinite Deposit
-tile.oreNitre.name=Niter Deposit
-tile.oreSulfur.name=Sulfur Deposit
-tile.oreCoalRich.name=Rich Coal Deposit
+tile.clay_ore.name=Clay Bearing Dirt
+tile.borax_ore.name=Borax Deposit
+tile.kaolinite_ore.name=Kaolinite Deposit
+tile.nitre_ore.name=Niter Deposit
+tile.sulfur_ore.name=Sulfur Deposit
+tile.coal_rich_ore.name=Rich Coal Deposit
 
 tile.window.name=Window
 tile.window_pane.name=Window Pane
@@ -1238,7 +1238,7 @@ knowledge.minotaur_dread.1=Not as much is known about what some call the Dread M
 knowledge.dragons=Dragons
 knowledge.dragons.desc=Death from above
 
-knowledge.dragons.1=Dragons are proud but destructive reptiles found stalking their prey from above. Many breeds of dragon are found in the world, varying greatly in their offensive capabilities. Keep an eye on the skies when travelling to avoid an ill omen.^Each dragon has a unique ability to emit deadly substances from their breath, though the actual mechanics behind this still remain unknown, it’s always a decent idea to prepare for these dangers.^ Although their young may be easy to kill, the elder dragons are powerful monsters to
+knowledge.dragons.1=Dragons are proud but destructive reptiles found stalking their prey from above. Many breeds of dragon are found in the world, varying greatly in their offensive capabilities. Keep an eye on the skies when travelling to avoid an ill omen.^Each dragon has a unique ability to emit deadly substances from their breath, though the actual mechanics behind this still remain unknown, itï¿½s always a decent idea to prepare for these dangers.^ Although their young may be easy to kill, the elder dragons are powerful monsters to
 
 knowledge.dragons.2=face. The skin of these reptiles are so strong that most weapons are ineffective. Special dragonforged weapons can be made to penetrate their powerful scales.^ Dragons are hunted for their hearts, which have been useful for skilled artisans. Young dragon hearts aren't worth anything however and only older dragons are hunted for these purposes.
 
@@ -1303,7 +1303,7 @@ knowledge.dust.icing=Some food based recipes (like Icing) are made from multiple
 knowledge.research=Research Book
 knowledge.research.desc=Keeping track
 
-knowledge.research.1=There is a lot out there in the world to discover, all you have to do is find it. Research is a method of finding what’s hidden within the world and using it to better your own works. Most of what you can do or make must be researched, and requires both skill and study to uncover its secrets.^To begin research, you enter without knowing what you may find. A research table must be crafted, and used to study items. Depending on your skill and what items you study may unlock some clues to new knowledge.
+knowledge.research.1=There is a lot out there in the world to discover, all you have to do is find it. Research is a method of finding whatï¿½s hidden within the world and using it to better your own works. Most of what you can do or make must be researched, and requires both skill and study to uncover its secrets.^To begin research, you enter without knowing what you may find. A research table must be crafted, and used to study items. Depending on your skill and what items you study may unlock some clues to new knowledge.
 
 # /Table recipe
 
@@ -1439,7 +1439,7 @@ knowledge.smeltBronze.1=With further refinement; both tin and copper are able to
 knowledge.smeltIron=Iron Smithing
 knowledge.smeltIron.desc=Tier %1$s, Common material
 knowledge.smeltIron.1=After some study on local rock formations, it appears rich levels of iron ore can be found. With correct refinement, the metal can be separated from the stone and formed into an ingot.^Iron is stronger than bronze and far more common, allowing for a low-cost and practical material.
-knowledge.smeltIron.2=Smelting iron into workable ingots isn’t too difficult, but a certain level of skill is used to work it into a decent shape. You have refined some smithing techniques to enable proper construction of iron tools.
+knowledge.smeltIron.2=Smelting iron into workable ingots isnï¿½t too difficult, but a certain level of skill is used to work it into a decent shape. You have refined some smithing techniques to enable proper construction of iron tools.
 
 knowledge.smeltPig=Pig Iron
 knowledge.smeltPig.desc=Iron preparation
@@ -1475,34 +1475,34 @@ knowledge.smeltDragonforge.2=Unlike other designs; dragonforged items require th
 knowledge.smeltBlueSteel=Blue Steel Smithing
 knowledge.smeltBlueSteel.desc=Tier %1$s, Common material
 
-knowledge.smeltBlueSteel.1=With further research into complex alloys, black steel seem to be nearing the peak of capability. However it seems apparent that some improvements can be made to the weight of the alloy. By mixing lapis lazuli and silver you can remove some particular elements from black steel and refine it to a much more lightweight material. How this works isn’t fully understood, but it should provide a decent upgrade.
+knowledge.smeltBlueSteel.1=With further research into complex alloys, black steel seem to be nearing the peak of capability. However it seems apparent that some improvements can be made to the weight of the alloy. By mixing lapis lazuli and silver you can remove some particular elements from black steel and refine it to a much more lightweight material. How this works isnï¿½t fully understood, but it should provide a decent upgrade.
 
 knowledge.smeltRedSteel=Red Steel Smithing
 knowledge.smeltRedSteel.desc=Tier %1$s, Common material
 
-knowledge.smeltRedSteel.1=Black steel is nearing the limits of metal capabilities and doesn’t appear to be getting much better. Although after studying the effects of redstone and gold had revealed an unusual reaction take place. Redstone when mixed with gold appears to draw material such as black steel closer together, improving strength and weight. An alloy can be developed using this method to create a superior alloy with unimaginable strength.
+knowledge.smeltRedSteel.1=Black steel is nearing the limits of metal capabilities and doesnï¿½t appear to be getting much better. Although after studying the effects of redstone and gold had revealed an unusual reaction take place. Redstone when mixed with gold appears to draw material such as black steel closer together, improving strength and weight. An alloy can be developed using this method to create a superior alloy with unimaginable strength.
 
 knowledge.smeltMithril=Mithril Smithing
 knowledge.smeltMithril.desc=Tier %1$s, Exotic material
 
-knowledge.smeltMithril.1=This mythic ore you found is very strange indeed. Any form of alterations made to this significantly changes its physical properties. You have found that interacting silver seems to alter its mass and hardness, but you don’t know why or how to control it.^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, that’s the theory anyway.
+knowledge.smeltMithril.1=This mythic ore you found is very strange indeed. Any form of alterations made to this significantly changes its physical properties. You have found that interacting silver seems to alter its mass and hardness, but you donï¿½t know why or how to control it.^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, thatï¿½s the theory anyway.
 
-knowledge.smeltMithril.2=From the readings of this “schematic talisman” it appears possible to use silver to force the mythic ore into a particular lightweight design. Seemingly the silver takes a large part in turning mythic ore into mithril.^It seems the trinket itself however, though complicated has no purpose.
+knowledge.smeltMithril.2=From the readings of this ï¿½schematic talismanï¿½ it appears possible to use silver to force the mythic ore into a particular lightweight design. Seemingly the silver takes a large part in turning mythic ore into mithril.^It seems the trinket itself however, though complicated has no purpose.
 
 
 knowledge.smeltAdamantium=Adamantium Smithing
 knowledge.smeltAdamantium.desc=Tier %1$s, Exotic material
 
-knowledge.smeltAdamantium.1=Mythic ore seems to follow its own rules and research into its properties have yielded strange results… upon exposing gold to this material, it increases greatly in density, becoming hard and heavy, this baffles you. ^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, that’s the theory anyway.
+knowledge.smeltAdamantium.1=Mythic ore seems to follow its own rules and research into its properties have yielded strange resultsï¿½ upon exposing gold to this material, it increases greatly in density, becoming hard and heavy, this baffles you. ^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, thatï¿½s the theory anyway.
 
-knowledge.smeltAdamantium.2=From the readings of this “schematic talisman” it appears possible to use gold to force the mythic ore into its green, heavy state. Gold must play a part in the transformation of mythic ore into this particular set of chemistry. ^It seems the trinket itself however, though complicated has no purpose.
+knowledge.smeltAdamantium.2=From the readings of this ï¿½schematic talismanï¿½ it appears possible to use gold to force the mythic ore into its green, heavy state. Gold must play a part in the transformation of mythic ore into this particular set of chemistry. ^It seems the trinket itself however, though complicated has no purpose.
 
 knowledge.smeltMaster=Masterwork Mythics
 knowledge.smeltMaster.desc=The next level
 
 knowledge.smeltMaster.1=Your seeing some patterns emerging here. Whatever civilisation left these talismans behind appear to use them as a basic form of storing information, though it seems a book would have done just fine, but why judge.^You have found a new one, similar to the rest with the anvil shaped edges on a barbed shield shape, this follows the same set of instructions as the previously found artefacts. However with all three of these; it appears that they fit together like a puzzle. The master talisman appears to be carried by an elite artisan, with the two apprentices carrying the
 
-knowledge.smeltMaster.2=lesser talismans. There are also markings on the back of the master talisman describing a combined piece being placed into a working mythic crucible… This may be able to improve the crucible in some way.^The interesting part is the locations you have found these artefacts. Though the master talisman could be found anywhere, the lesser talismans were found depending on geographical location. Further south regions had the mithril workers while the northern regions had the adamantium workers.This pattern reinforces the idea that the mythic works were formed
+knowledge.smeltMaster.2=lesser talismans. There are also markings on the back of the master talisman describing a combined piece being placed into a working mythic crucibleï¿½ This may be able to improve the crucible in some way.^The interesting part is the locations you have found these artefacts. Though the master talisman could be found anywhere, the lesser talismans were found depending on geographical location. Further south regions had the mithril workers while the northern regions had the adamantium workers.This pattern reinforces the idea that the mythic works were formed
 
 knowledge.smeltMaster.3=between different cultures in different regions. This has no effect on what forges can create what materials however, so their design must be the same.^In any case; this trilogy appears to hold great power and likely comes from the master artisans from both regions, perhaps using it on an active crucible may allow further refinements.
 
@@ -1519,7 +1519,7 @@ knowledge.smeltMithium.1=This material is a purer form of regular mithril in the
 knowledge.smeltEnder=Enderforge Smithing
 knowledge.smeltEnderforge.desc=Tier %1$s, Master material
 
-knowledge.smeltEnderforge.1=There's always been something strange about those ender creatures... And this discovery may lead to their origins, perhaps they were the ones that created these artefacts, can’t explain how though, ender creatures don’t appear too civilised.^Enderforge appears to be designed as a compromise between the two materials of mithril and adamantium, taking the best from both to create a new material. It appears that ender pearls can act as a catalyst to form these two materials together.^This can only be made in a master crucible.
+knowledge.smeltEnderforge.1=There's always been something strange about those ender creatures... And this discovery may lead to their origins, perhaps they were the ones that created these artefacts, canï¿½t explain how though, ender creatures donï¿½t appear too civilised.^Enderforge appears to be designed as a compromise between the two materials of mithril and adamantium, taking the best from both to create a new material. It appears that ender pearls can act as a catalyst to form these two materials together.^This can only be made in a master crucible.
 
 knowledge.coalflux=Coal Flux
 knowledge.coalflux.desc=Conservative
@@ -1634,17 +1634,17 @@ knowledge.trough.2=With some nails and a little bit of effort, troughs can be as
 knowledge.repair_basic=Repair Kits
 knowledge.repair_basic.desc=Keeping tools in condition
 
-knowledge.repair_basic.1=Tools get damaged a lot, and replacing them is wasteful. You’ve been studying various bits of leather and some nails and had found a new use for them.^Simple materials with some tools should be enough to repair some items, it’s not perfect but seems to be better than nothing. Perhaps more research would yield something more effective.^To use: right-click damaged items onto a placed kit, the kit has a chance of breaking.
+knowledge.repair_basic.1=Tools get damaged a lot, and replacing them is wasteful. Youï¿½ve been studying various bits of leather and some nails and had found a new use for them.^Simple materials with some tools should be enough to repair some items, itï¿½s not perfect but seems to be better than nothing. Perhaps more research would yield something more effective.^To use: right-click damaged items onto a placed kit, the kit has a chance of breaking.
 
 knowledge.repair_advanced=Advanced Repairing
 knowledge.repair_advanced.desc=Better conditioning
 
-knowledge.repair_advanced.1=You’ve taken a look at this strange slime produced by the gelatinous cubes. Whatever their made of seems to stick like no one’s business. And this silk from the local giant spiders is extremely strong and sticky as well.^Together they should be able to upgrade one of these repair kits for more effective use.
+knowledge.repair_advanced.1=Youï¿½ve taken a look at this strange slime produced by the gelatinous cubes. Whatever their made of seems to stick like no oneï¿½s business. And this silk from the local giant spiders is extremely strong and sticky as well.^Together they should be able to upgrade one of these repair kits for more effective use.
 
 knowledge.repair_ornate=Ornate Repair Kits
 knowledge.repair_ornate.desc=Enchantment Repair
 
-knowledge.repair_ornate.1=Magical items seem to play by their own rules here… Stuff just doesn’t stick to them. It however appears that gold and diamond can counteract these effects. If the tools are used with these materials in a particular way, they may be able to repair enchanted items.^This also offers some increased effectiveness over a regular advanced repair kit.
+knowledge.repair_ornate.1=Magical items seem to play by their own rules hereï¿½ Stuff just doesnï¿½t stick to them. It however appears that gold and diamond can counteract these effects. If the tools are used with these materials in a particular way, they may be able to repair enchanted items.^This also offers some increased effectiveness over a regular advanced repair kit.
 
 knowledge.craftArmourBasic=Basic Armor
 knowledge.craftArmourBasic.desc=Nothing fancy

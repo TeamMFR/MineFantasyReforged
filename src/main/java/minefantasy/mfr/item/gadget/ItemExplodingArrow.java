@@ -22,7 +22,7 @@ import java.util.List;
 public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage {
 
     public ItemExplodingArrow() {
-        super("exploding_arrow", 1, BaseMaterialMFR.iron.getToolConversion(), ArrowType.EXPLOSIVE);
+        super("exploding_arrow", 1, BaseMaterialMFR.IRON.getToolConversion(), ArrowType.EXPLOSIVE);
         setCreativeTab(CreativeTabMFR.tabGadget);
         setMaxStackSize(16);
     }

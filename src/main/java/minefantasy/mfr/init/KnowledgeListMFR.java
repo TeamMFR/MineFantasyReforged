@@ -151,7 +151,7 @@ public class KnowledgeListMFR {
                 .registerStat().setUnlocked();
         talisman = (new InformationBase("talisman", 4, 2, 0, ComponentListMFR.TALISMAN_LESSER, research)).registerStat()
                 .setUnlocked();
-        ores = (new InformationBase("ores", 1, -2, 0, BlockListMFR.ORE_COPPER, (InformationBase) null)).registerStat()
+        ores = (new InformationBase("ores", 1, -2, 0, BlockListMFR.COPPER_ORE, (InformationBase) null)).registerStat()
                 .setUnlocked();
         plants = (new InformationBase("plants", 1, -3, 0, BlockListMFR.LOG_IRONBARK, ores)).registerStat().setUnlocked();
         chimney = (new InformationBase("chimney", 0, 2, 0, BlockListMFR.CHIMNEY_STONE, (InformationBase) null))

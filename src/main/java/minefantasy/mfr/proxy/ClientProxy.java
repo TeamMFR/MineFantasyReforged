@@ -19,6 +19,7 @@ import minefantasy.mfr.block.tile.TileEntityTanningRack;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
 import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.gui.GuiAnvilMF;
@@ -100,9 +101,8 @@ public class ClientProxy extends ClientProxyBase {
     public void init() {
         super.init();
 
-        System.out.println("herehere");
+        BlockColorsMFR.init();
         ItemColorsMFR.init();
-        System.out.println("hereafter");
     }
 
     @Override

@@ -2,7 +2,6 @@ package minefantasy.mfr.init;
 
 import minefantasy.mfr.api.knowledge.InformationBase;
 import minefantasy.mfr.api.knowledge.ResearchArtefacts;
-import minefantasy.mfr.item.ItemArtefact;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -19,7 +18,7 @@ public class ArtefactListMFR {
     private static void addEngineering() {
         add(KnowledgeListMFR.blackpowder, ComponentListMFR.NITRE, ComponentListMFR.SULFUR, Items.COAL, Items.GUNPOWDER);
         add(KnowledgeListMFR.advblackpowder, Items.GLOWSTONE_DUST, Items.REDSTONE);
-        add(KnowledgeListMFR.tungsten, ComponentListMFR.ORE_TUNGSTEN, BlockListMFR.ORE_TUNGSTEN);
+        add(KnowledgeListMFR.tungsten, ComponentListMFR.ORE_TUNGSTEN, BlockListMFR.TUNGSTEN_ORE);
         add(KnowledgeListMFR.coke, Items.COAL, Items.REDSTONE);
         add(KnowledgeListMFR.spyglass, ComponentListMFR.BRONZE_GEARS, Blocks.GLASS);
         add(KnowledgeListMFR.parachute, Items.FEATHER, Blocks.WOOL);
@@ -115,9 +114,9 @@ public class ArtefactListMFR {
         }
 
         for (ItemStack silver : OreDictionary.getOres("ingot_silver")) {
-            add(KnowledgeListMFR.smeltMithril, BlockListMFR.ORE_MYTHIC, silver);
+            add(KnowledgeListMFR.smeltMithril, BlockListMFR.MYTHIC_ORE, silver);
         }
-        add(KnowledgeListMFR.smeltAdamant, BlockListMFR.ORE_MYTHIC, Items.GOLD_INGOT);
+        add(KnowledgeListMFR.smeltAdamant, BlockListMFR.MYTHIC_ORE, Items.GOLD_INGOT);
 
         for (ItemStack mithril : OreDictionary.getOres("ingot_mithril")) {
             add(KnowledgeListMFR.smeltMithium, mithril, Items.GHAST_TEAR, Items.DIAMOND);

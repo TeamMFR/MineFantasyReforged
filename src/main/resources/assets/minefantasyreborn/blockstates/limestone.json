@@ -1,0 +1,12 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreborn:blocks/limestone"
+        },
+        "model": "cube_all"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

@@ -3,6 +3,7 @@ package minefantasy.mfr.block.basic;
 import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -44,6 +45,16 @@ public class BasicBlockMF extends Block {
     @SideOnly(Side.CLIENT)
     public boolean isOpaqueCube(IBlockState state) {
         return this.blockMaterial != Material.GLASS;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        if (this.blockMaterial == Material.GLASS){
+            return BlockRenderLayer.CUTOUT;
+        }
+        return BlockRenderLayer.SOLID;
     }
 
     @Override

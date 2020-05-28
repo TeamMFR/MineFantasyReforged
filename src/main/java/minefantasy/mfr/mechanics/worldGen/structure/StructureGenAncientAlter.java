@@ -97,7 +97,7 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
 
     private void placeChest(BlockPos pos, ResourceLocation loot) {
         BlockPos coords = this.offsetPos(pos, direction);
-        world.setBlockState(coords, (IBlockState) Blocks.CHEST, direction);
+        world.setBlockState(coords, Blocks.CHEST.getDefaultState(), direction);
         TileEntityChest tileentitychest = (TileEntityChest) world.getTileEntity(coords);
 
         if (tileentitychest != null) {

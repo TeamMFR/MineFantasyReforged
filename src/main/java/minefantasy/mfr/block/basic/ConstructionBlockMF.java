@@ -53,20 +53,6 @@ public class ConstructionBlockMF extends Block {
         return super.setResistance(level);
     }
 
-    // public Item getItemDropped(int meta, Random rand, int i) { return null; };
-
-//    public void addConstructRecipes() {
-//        GameRegistry.addSmelting(new ItemStack(this, 1, 1), new ItemStack(this, 1, 0), 0);
-//        GameRegistry.addRecipe(new ItemStack(this, 4, 3), new Object[]{"XX", "XX", 'X', new ItemStack(this, 1, 1)});
-//        GameRegistry.addRecipe(new ItemStack(this, 4, 2),
-//                new Object[]{"X X", "   ", "X X", 'X', new ItemStack(this, 1, 1)});
-//        GameRegistry.addRecipe(new ItemStack(this, 1, 1), new Object[]{"X", 'X', new ItemStack(this, 1, 2)});
-//        GameRegistry.addRecipe(new ItemStack(this, 1, 1), new Object[]{"X", 'X', new ItemStack(this, 1, 3)});
-//        for (int i = 0; i < 4; i++)
-//            GameRegistry.addRecipe(new ItemStack(stairblocks[i], 4),
-//                    new Object[]{"  X", " XX", "XXX", 'X', new ItemStack(this, 1, i)});
-//    }
-
     @Override
     public int damageDropped(IBlockState state) {
         if (state == state.getBlock())
@@ -102,10 +88,6 @@ public class ConstructionBlockMF extends Block {
         public StairsConstBlock(String unlocalizedName, Block baseBlock) {
             this(unlocalizedName, baseBlock, baseBlock.getDefaultState());
         }
-
-//        public void addRecipe() {
-//            GameRegistry.addRecipe(new ItemStack(this, 4), new Object[]{"B  ", "BB ", "BBB", 'B', this.base});
-//        }
 
     }
 

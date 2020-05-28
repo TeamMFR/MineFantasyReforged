@@ -16,8 +16,8 @@ public class ToolMaterialMF {
     // Basics stage1
 
     public static boolean isUnbreakable(ToolMaterial toolMaterial) {
-        return toolMaterial == BaseMaterialMFR.enderforge.getToolConversion()
-                || toolMaterial == BaseMaterialMFR.ignotumite.getToolConversion()
-                || toolMaterial == BaseMaterialMFR.mithium.getToolConversion();
+        return toolMaterial == BaseMaterialMFR.ENDERFORGE.getToolConversion()
+                || toolMaterial == BaseMaterialMFR.IGNOTUMITE.getToolConversion()
+                || toolMaterial == BaseMaterialMFR.MITHIUM.getToolConversion();
     }
 }

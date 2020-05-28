@@ -5,6 +5,8 @@ import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -22,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockLeavesMF extends BlockLeaves implements IShearable {
+
+
     private String name;
     private Block sapling;
     private int dropRate;
@@ -38,11 +42,42 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable {
         setUnlocalizedName(name);
         this.dropRate = droprate;
         this.setTickRandomly(true);
+        setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
     }
 
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return Blocks.LEAVES.shouldSideBeRendered(state, blockAccess, pos, side);
+    }
+
+    @Override
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        int i = 0;
+
+        if (!state.getValue(DECAYABLE).booleanValue())
+        {
+            i |= 4;
+        }
+
+        if (state.getValue(CHECK_DECAY).booleanValue())
+        {
+            i |= 8;
+        }
+
+        return i;
     }
 
     @Override

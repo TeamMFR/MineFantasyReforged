@@ -51,7 +51,7 @@ public final class CreativeTabMFR extends CreativeTabs {
             case 9:
                 return CustomToolListMFR.STANDARD_HAMMER.construct("Steel", "OakWood");
             case 10:
-                return new ItemStack(BlockListMFR.ORE_COPPER);
+                return new ItemStack(BlockListMFR.COPPER_ORE);
             case 11:
                 return new ItemStack(FoodListMFR.SWEETROLL);
             case 12:

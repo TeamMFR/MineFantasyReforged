@@ -210,18 +210,18 @@ public class ComponentListMFR {
 		registry.register(new ItemComponentMFR("pig_iron_ingot", BaseMaterialMFR.getMaterial("pig_iron").rarity));
 		registry.register(new ItemComponentMFR("steel_ingot", BaseMaterialMFR.getMaterial("steel").rarity));
 		registry.register(new ItemComponentMFR("encrusted_ingot", BaseMaterialMFR.getMaterial("encrusted").rarity));
-		registry.register(new ItemComponentMFR("black_steel_weak_ingot", BaseMaterialMFR.getMaterial("black_steel_weak").rarity));
+		registry.register(new ItemComponentMFR("black_steel_weak_ingot", BaseMaterialMFR.getMaterial("weak_black_steel").rarity));
 		registry.register(new ItemComponentMFR("black_steel_ingot", BaseMaterialMFR.getMaterial("black_steel").rarity));
 		registry.register(new ItemComponentMFR("silver_ingot", BaseMaterialMFR.getMaterial("silver").rarity));
-		registry.register(new ItemComponentMFR("red_steel_weak_ingot", BaseMaterialMFR.getMaterial("red_steel_weak").rarity));
+		registry.register(new ItemComponentMFR("red_steel_weak_ingot", BaseMaterialMFR.getMaterial("weak_red_steel").rarity));
 		registry.register(new ItemComponentMFR("red_steel_ingot", BaseMaterialMFR.getMaterial("red_steel").rarity));
-		registry.register(new ItemComponentMFR("blue_steel_weak_ingot", BaseMaterialMFR.getMaterial("blue_steel_weak").rarity));
+		registry.register(new ItemComponentMFR("blue_steel_weak_ingot", BaseMaterialMFR.getMaterial("weak_blue_steel").rarity));
 		registry.register(new ItemComponentMFR("blue_steel_ingot", BaseMaterialMFR.getMaterial("blue_steel").rarity));
 		registry.register(new ItemComponentMFR("adamantium_ingot", BaseMaterialMFR.getMaterial("adamantium").rarity));
 		registry.register(new ItemComponentMFR("mithril_ingot", BaseMaterialMFR.getMaterial("mithril").rarity));
 		registry.register(new ItemComponentMFR("ignotumite_ingot", BaseMaterialMFR.getMaterial("ignotumite").rarity));
 		registry.register(new ItemComponentMFR("mithium_ingot", BaseMaterialMFR.getMaterial("mithium").rarity));
-		registry.register(new ItemComponentMFR("ender_ingot", BaseMaterialMFR.getMaterial("ender").rarity));
+		registry.register(new ItemComponentMFR("ender_ingot", BaseMaterialMFR.getMaterial("enderforge").rarity));
 		registry.register(new ItemComponentMFR("tungsten_ingot", BaseMaterialMFR.getMaterial("tungsten").rarity));
 		registry.register(new ItemComponentMFR("obsidian_ingot", BaseMaterialMFR.getMaterial("obsidian").rarity));
 

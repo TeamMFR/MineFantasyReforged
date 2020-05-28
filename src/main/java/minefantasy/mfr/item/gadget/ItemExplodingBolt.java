@@ -20,7 +20,7 @@ import java.util.List;
 public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
 
     public ItemExplodingBolt() {
-        super("exploding_bolt", 1, BaseMaterialMFR.iron.getToolConversion(), ArrowType.EXPLOSIVEBOLT);
+        super("exploding_bolt", 1, BaseMaterialMFR.IRON.getToolConversion(), ArrowType.EXPLOSIVEBOLT);
         setCreativeTab(CreativeTabMFR.tabGadget);
         setAmmoType("bolt");
         setMaxStackSize(20);

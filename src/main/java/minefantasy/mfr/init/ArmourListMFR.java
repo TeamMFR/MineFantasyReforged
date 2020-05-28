@@ -20,7 +20,7 @@ import net.minecraftforge.registries.IForgeRegistry;
  */
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class ArmourListMFR {
-    public static final String[] leathermats = new String[]{"hide", "roughleather", "strongleather", "studleather", "padded",};
+    public static final String[] leathermats = new String[]{"hide", "rough_leather", "strong_leather", "stud_leather", "padded",};
     public static ArmourMaterialMFR LEATHER_MAT;
     public static ArmourMaterialMFR APRON;
     public static ItemArmourMFR[] LEATHER;
@@ -28,10 +28,10 @@ public class ArmourListMFR {
 
 
     public static void init(){
-        LEATHER_MAT = new ArmourMaterialMFR("Leather", 5, 0.30F, 18, 1.00F);
-        APRON = new ArmourMaterialMFR("Apron", 6, 0.30F, 0, 1.00F);
+        LEATHER_MAT = new ArmourMaterialMFR("leather", 5, 0.30F, 18, 1.00F);
+        APRON = new ArmourMaterialMFR("apron", 6, 0.30F, 0, 1.00F);
         LEATHER = new ItemArmourMFR[leathermats.length * 4];
-        LEATHER_APRON = new ItemApron("leatherapron", BaseMaterialMFR.leatherapron, "leatherapron_layer_1", 0);
+        LEATHER_APRON = new ItemApron("leather_apron", BaseMaterialMFR.LEATHER_APRON, "leatherapron_layer_1", 0);
 
         for (int a = 0; a < leathermats.length; a++) {
             BaseMaterialMFR baseMat = BaseMaterialMFR.getMaterial(leathermats[a]);
@@ -39,7 +39,7 @@ public class ArmourListMFR {
             int rarity = baseMat.rarity;
             int id = a * 4;
             float bulk = baseMat.weight;
-            ArmourDesign design = baseMat == BaseMaterialMFR.padding ? ArmourDesign.PADDING : ArmourDesign.LEATHER;
+            ArmourDesign design = baseMat == BaseMaterialMFR.PADDING ? ArmourDesign.PADDING : ArmourDesign.LEATHER;
 
             LEATHER[id + 0] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD, matName.toLowerCase() + "_layer_1", rarity, bulk);
             LEATHER[id + 1] = new ItemArmourMFR(matName.toLowerCase() + "_chest", baseMat, design, EntityEquipmentSlot.CHEST, matName.toLowerCase() + "_layer_1", rarity, bulk);
@@ -73,8 +73,8 @@ public class ArmourListMFR {
     }
 
     public static boolean isUnbreakable(BaseMaterialMFR material, EntityLivingBase user) {
-        if (material == BaseMaterialMFR.enderforge || material == BaseMaterialMFR.ignotumite
-                || material == BaseMaterialMFR.mithium) {
+        if (material == BaseMaterialMFR.ENDERFORGE || material == BaseMaterialMFR.IGNOTUMITE
+                || material == BaseMaterialMFR.MITHIUM) {
             return true;
         }
         return false;

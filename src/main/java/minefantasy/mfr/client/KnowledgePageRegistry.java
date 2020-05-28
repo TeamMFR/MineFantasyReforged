@@ -166,19 +166,19 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.icingRecipe));
 
         KnowledgeListMFR.ores.addPages(new EntryPageText("knowledge.ores.1"), new EntryPageText(""));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("copper", BlockListMFR.ORE_COPPER, ComponentListMFR.COPPER_INGOT));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("tin", BlockListMFR.ORE_TIN, ComponentListMFR.TIN_INGOT));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("silver", BlockListMFR.ORE_SILVER, ComponentListMFR.SILVER_INGOT));
-        KnowledgeListMFR.ores.addPages(assembleOreDesc("wolframite", BlockListMFR.ORE_TUNGSTEN));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("copper", BlockListMFR.COPPER_ORE, ComponentListMFR.COPPER_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("tin", BlockListMFR.TIN_ORE, ComponentListMFR.TIN_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("silver", BlockListMFR.SILVER_ORE, ComponentListMFR.SILVER_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDesc("wolframite", BlockListMFR.TUNGSTEN_ORE));
         KnowledgeListMFR.ores.addPages(new EntryPageCrucible(KnowledgeListMFR.wolframiteR));
-        KnowledgeListMFR.ores.addPages(assembleOreDesc("mythic", BlockListMFR.ORE_MYTHIC));
+        KnowledgeListMFR.ores.addPages(assembleOreDesc("mythic", BlockListMFR.MYTHIC_ORE));
         KnowledgeListMFR.ores.addPages(new EntryPageText("knowledge.ores.2"));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("clay", BlockListMFR.ORE_CLAY));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("kaolinite", BlockListMFR.ORE_KAOLINITE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("clay", BlockListMFR.CLAY_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("kaolinite", BlockListMFR.KAOLINITE_ORE));
         KnowledgeListMFR.ores.addPages(assembleMineralDesc("limestone", BlockListMFR.LIMESTONE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("borax", BlockListMFR.ORE_BORAX));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("nitre", BlockListMFR.ORE_NITRE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("sulfur", BlockListMFR.ORE_SULFUR));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("borax", BlockListMFR.BORAX_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("nitre", BlockListMFR.NITRE_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("sulfur", BlockListMFR.SULFUR_ORE));
 
         KnowledgeListMFR.plants.addPages(new EntryPageText("knowledge.plants.1"));
         KnowledgeListMFR.plants.addPages(assembleImgPage("berry", BlockListMFR.BERRY_BUSH));
@@ -242,15 +242,15 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.smeltBronze.addPages(new EntryPageText("knowledge.smeltBronze.1"));
         if (ConfigHardcore.HCCreduceIngots) {
             KnowledgeListMFR.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.1"));
-            KnowledgeListMFR.smeltCopper.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.ORE_COPPER),
+            KnowledgeListMFR.smeltCopper.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.COPPER_ORE),
                     new ItemStack(ComponentListMFR.COPPER_INGOT)));
-            KnowledgeListMFR.smeltBronze.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.ORE_TIN),
+            KnowledgeListMFR.smeltBronze.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.TIN_ORE),
                     new ItemStack(ComponentListMFR.TIN_INGOT)));
         } else {
-            KnowledgeListMFR.smeltCopper.addPages(new EntryPageSmelting(new ItemStack(BlockListMFR.ORE_COPPER),
+            KnowledgeListMFR.smeltCopper.addPages(new EntryPageSmelting(new ItemStack(BlockListMFR.COPPER_ORE),
                     new ItemStack(ComponentListMFR.COPPER_INGOT)));
             KnowledgeListMFR.smeltBronze.addPages(
-                    new EntryPageSmelting(new ItemStack(BlockListMFR.ORE_TIN), new ItemStack(ComponentListMFR.TIN_INGOT)));
+                    new EntryPageSmelting(new ItemStack(BlockListMFR.TIN_ORE), new ItemStack(ComponentListMFR.TIN_INGOT)));
         }
         KnowledgeListMFR.smeltBronze.addPages(new EntryPageCrucible(KnowledgeListMFR.bronze));
         KnowledgeListMFR.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.2"));

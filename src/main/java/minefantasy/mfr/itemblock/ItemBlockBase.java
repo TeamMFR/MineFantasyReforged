@@ -1,7 +1,9 @@
 package minefantasy.mfr.itemblock;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.model.ModelLoader;
 
 public class ItemBlockBase extends ItemBlock {
 
@@ -10,5 +12,6 @@ public class ItemBlockBase extends ItemBlock {
 
 		//noinspection ConstantConditions
 		setRegistryName(block.getRegistryName());
+		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
 	}
 }

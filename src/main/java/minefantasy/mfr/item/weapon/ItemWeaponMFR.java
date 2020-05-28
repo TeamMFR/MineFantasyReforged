@@ -377,7 +377,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
             return true;
         }
-        if (material == BaseMaterialMFR.stone.getToolConversion()) {
+        if (material == BaseMaterialMFR.STONE.getToolConversion()) {
             blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
             return true;
         }

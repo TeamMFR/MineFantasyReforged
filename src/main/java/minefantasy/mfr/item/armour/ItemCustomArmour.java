@@ -30,7 +30,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
     private float ratingModifier = 1.0F;
 
     public ItemCustomArmour(String craftDesign, String name, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
-        super(craftDesign + "_" + name, BaseMaterialMFR.iron, AD, slot, craftDesign + "_" + tex, rarity);
+        super(craftDesign + "_" + name, BaseMaterialMFR.IRON, AD, slot, craftDesign + "_" + tex, rarity);
         this.specialDesign = craftDesign;
         canRepair = false;
     }

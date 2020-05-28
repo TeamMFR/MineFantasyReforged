@@ -101,18 +101,18 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(modid=MineFantasyReborn.MOD_ID)
 public class BlockListMFR {
 
-	public static Block ORE_COPPER = Utils.nullValue();
-	public static Block ORE_TIN = Utils.nullValue();
-	public static Block ORE_SILVER = Utils.nullValue();
-	public static Block ORE_MYTHIC = Utils.nullValue();
+	public static Block COPPER_ORE = Utils.nullValue();
+	public static Block TIN_ORE = Utils.nullValue();
+	public static Block SILVER_ORE = Utils.nullValue();
+	public static Block MYTHIC_ORE = Utils.nullValue();
 
-	public static Block ORE_KAOLINITE = Utils.nullValue();
-	public static Block ORE_NITRE = Utils.nullValue();
-	public static Block ORE_SULFUR = Utils.nullValue();
-	public static Block ORE_BORAX = Utils.nullValue();
-	public static Block ORE_TUNGSTEN = Utils.nullValue();
-	public static Block ORE_CLAY = Utils.nullValue();
-	public static Block ORE_COAL_RICH = Utils.nullValue();
+	public static Block KAOLINITE_ORE = Utils.nullValue();
+	public static Block NITRE_ORE = Utils.nullValue();
+	public static Block SULFUR_ORE = Utils.nullValue();
+	public static Block BORAX_ORE = Utils.nullValue();
+	public static Block TUNGSTEN_ORE = Utils.nullValue();
+	public static Block CLAY_ORE = Utils.nullValue();
+	public static Block COAL_RICH_ORE = Utils.nullValue();
 
 	public static Block MUD_BRICK = Utils.nullValue();
 	public static Block MUD_PAVEMENT = Utils.nullValue();
@@ -122,13 +122,20 @@ public class BlockListMFR {
 
 	public static Block WINDOW = Utils.nullValue();
 	public static Block FRAMED_GLASS = Utils.nullValue();
-	public static Block FRAMED_PANE = Utils.nullValue();
+	public static Block FRAMED_GLASS_PANE = Utils.nullValue();
 	public static Block WINDOW_PANE = Utils.nullValue();
 
 	public static Block THATCH = Utils.nullValue();
 	public static Block THATCH_STAIR = Utils.nullValue();
 
 	public static Block LIMESTONE = Utils.nullValue();
+	public static Block LIMESTONE_COBBLE = Utils.nullValue();
+	public static Block LIMESTONE_BRICK = Utils.nullValue();
+	public static Block LIMESTONE_PAVEMENT = Utils.nullValue();
+	public static Block LIMESTONE_STAIRS = Utils.nullValue();
+	public static Block LIMESTONE_COBBLE_STAIRS = Utils.nullValue();
+	public static Block LIMESTONE_BRICK_STAIRS = Utils.nullValue();
+	public static Block LIMESTONE_PAVEMENT_STAIRS = Utils.nullValue();
 
 	public static Block FIREBRICKS = Utils.nullValue();
 	public static Block CLAY_WALL = Utils.nullValue();
@@ -295,18 +302,18 @@ public class BlockListMFR {
 
 	public static void init() {
 
-		ORE_COPPER = new BlockOreMF("oreCopper", 0, -1).setHardness(2.0F).setResistance(3.0F);
-		ORE_TIN = new BlockOreMF("oreTin", 0).setHardness(2.5F).setResistance(4.0F);
-		ORE_SILVER = new BlockOreMF("oreSilver", 2).setHardness(3.0F).setResistance(5.0F);
-		ORE_MYTHIC = new BlockMythicOre("oreMythic", false).setHardness(10.0F).setResistance(100.0F);
+		COPPER_ORE = new BlockOreMF("copper_ore", 0, -1).setHardness(2.0F).setResistance(3.0F);
+		TIN_ORE = new BlockOreMF("tin_ore", 0).setHardness(2.5F).setResistance(4.0F);
+		SILVER_ORE = new BlockOreMF("silver_ore", 2).setHardness(3.0F).setResistance(5.0F);
+		MYTHIC_ORE = new BlockMythicOre("mythic_ore", false).setHardness(10.0F).setResistance(100.0F);
 
-		ORE_KAOLINITE = new BlockOreMF("oreKaolinite", 1, 0, ComponentListMFR.KAOLINITE, 1, 1, 1).setHardness(3.0F).setResistance(5.0F);
-		ORE_NITRE = new BlockOreMF("oreNitre", 2, 0, ComponentListMFR.NITRE, 1, 2, 1).setHardness(3.0F).setResistance(5.0F);
-		ORE_SULFUR = new BlockOreMF("oreSulfur", 2, 0, ComponentListMFR.SULFUR, 1, 4, 2).setHardness(3.0F).setResistance(2.0F);
-		ORE_BORAX = new BlockOreMF("oreBorax", 2, 1, ComponentListMFR.FLUX_STRONG, 1, 8, 4).setHardness(3.0F).setResistance(2.0F);
-		ORE_TUNGSTEN = new BlockOreMF("oreTungsten", 3, 1, ComponentListMFR.ORE_TUNGSTEN, 1, 1, 4).setHardness(4.0F).setResistance(2.5F);
-		ORE_CLAY = new BlockOreMF("oreClay", 0, 0, Items.CLAY_BALL, 1, 4, 1, Material.GROUND).setBlockSoundType(SoundType.GROUND).setHardness(0.5F);
-		ORE_COAL_RICH = new BlockOreMF("oreCoalRich", 2, 1, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
+		KAOLINITE_ORE = new BlockOreMF("kaolinite_ore", 1, 0, ComponentListMFR.KAOLINITE, 1, 1, 1).setHardness(3.0F).setResistance(5.0F);
+		NITRE_ORE = new BlockOreMF("nitre_ore", 2, 0, ComponentListMFR.NITRE, 1, 2, 1).setHardness(3.0F).setResistance(5.0F);
+		SULFUR_ORE = new BlockOreMF("sulfur_ore", 2, 0, ComponentListMFR.SULFUR, 1, 4, 2).setHardness(3.0F).setResistance(2.0F);
+		BORAX_ORE = new BlockOreMF("borax_ore", 2, 1, ComponentListMFR.FLUX_STRONG, 1, 8, 4).setHardness(3.0F).setResistance(2.0F);
+		TUNGSTEN_ORE = new BlockOreMF("tungsten_ore", 3, 1, ComponentListMFR.ORE_TUNGSTEN, 1, 1, 4).setHardness(4.0F).setResistance(2.5F);
+		CLAY_ORE = new BlockOreMF("clay_ore", 0, 0, Items.CLAY_BALL, 1, 4, 1, Material.GROUND).setBlockSoundType(SoundType.GROUND).setHardness(0.5F);
+		COAL_RICH_ORE = new BlockOreMF("coal_rich_ore", 2, 1, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
 
 		MUD_BRICK = new BasicBlockMF("mud_brick", Material.GROUND).setHardness(1.0F).setResistance(0.5F);
 		MUD_PAVEMENT = new BasicBlockMF("mud_pavement", Material.GROUND).setHardness(0.5F);
@@ -316,46 +323,54 @@ public class BlockListMFR {
 
 		WINDOW = new BasicBlockMF("window", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.1F);
 		FRAMED_GLASS = new BasicBlockMF("framed_glass", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.2F);
-		FRAMED_PANE = new BlockPaneMF("framed_pane", Material.GLASS, true).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.1F);
+		FRAMED_GLASS_PANE = new BlockPaneMF("framed_glass_pane", Material.GLASS, true).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.1F);
 		WINDOW_PANE = new BlockPaneMF("window_pane",  Material.GLASS,true).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.2F);
 
 		THATCH = new BasicBlockMF("thatch", Material.LEAVES).setBlockSoundType(SoundType.GROUND).setHardness(1.0F);
-		THATCH_STAIR = new ConstructionBlockMF.StairsConstBlock("thatch_stair", THATCH);
+		THATCH_STAIR = new ConstructionBlockMF.StairsConstBlock("thatch_stairs", THATCH);
 
-		LIMESTONE = new ConstructionBlockMF("limestone").setHardness(1.2F).setResistance(8F);
+		LIMESTONE = new BasicBlockMF("limestone", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_COBBLE = new BasicBlockMF("limestone_cobble", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_BRICK = new BasicBlockMF("limestone_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_PAVEMENT = new BasicBlockMF("limestone_pavement", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		
+		LIMESTONE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_stairs", LIMESTONE);
+		LIMESTONE_COBBLE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_cobble_stairs", LIMESTONE_COBBLE);
+		LIMESTONE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_brick_stairs", LIMESTONE_BRICK);
+		LIMESTONE_PAVEMENT_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_pavement_stairs", LIMESTONE_PAVEMENT);
 
 		FIREBRICKS = new BasicBlockMF("firebricks", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(5.0F).setResistance(15.0F);
-		CLAY_WALL = new BasicBlockMF("clayWall", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(1.0F).setResistance(1.0F);
+		CLAY_WALL = new BasicBlockMF("clay_wall", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(1.0F).setResistance(1.0F);
 
-		IRON_BARS = new BlockMetalBarsMF(BaseMaterialMFR.iron);
-		BRONZE_BARS = new BlockMetalBarsMF(BaseMaterialMFR.bronze);
-		STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.steel);
-		BLACK_STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.blacksteel);
-		RED_STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.redsteel);
-		BLUE_STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.bluesteel);
+		IRON_BARS = new BlockMetalBarsMF(BaseMaterialMFR.IRON);
+		BRONZE_BARS = new BlockMetalBarsMF(BaseMaterialMFR.BRONZE);
+		STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.STEEL);
+		BLACK_STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.BLACK_STEEL);
+		RED_STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.RED_STEEL);
+		BLUE_STEEL_BARS = new BlockMetalBarsMF(BaseMaterialMFR.BLUE_STEEL);
 
-		COPPER_STORAGE = new BlockMetalMF(BaseMaterialMFR.copper);
-		TIN_STORAGE = new BlockMetalMF(BaseMaterialMFR.tin);
-		SILVER_STORAGE = new BlockMetalMF(BaseMaterialMFR.silver);
-		BRONZE_STORAGE = new BlockMetalMF(BaseMaterialMFR.bronze);
-		PIG_IRON_STORAGE = new BlockMetalMF(BaseMaterialMFR.pigiron);
-		STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.steel);
-		BLACK_STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.blacksteel);
-		RED_STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.redsteel);
-		BLUE_STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.bluesteel);
-		ADAMANTIUM_STORAGE = new BlockMetalMF(BaseMaterialMFR.adamantium);
-		MITHRIL_STORAGE = new BlockMetalMF(BaseMaterialMFR.mithril);
-		IGNOTUMITE_STORAGE = new BlockMetalMF(BaseMaterialMFR.ignotumite);
-		MITHIUM_STORAGE = new BlockMetalMF(BaseMaterialMFR.mithium);
-		ENDER_STORAGE = new BlockMetalMF(BaseMaterialMFR.enderforge);
+		COPPER_STORAGE = new BlockMetalMF(BaseMaterialMFR.COPPER);
+		TIN_STORAGE = new BlockMetalMF(BaseMaterialMFR.TIN);
+		SILVER_STORAGE = new BlockMetalMF(BaseMaterialMFR.SILVER);
+		BRONZE_STORAGE = new BlockMetalMF(BaseMaterialMFR.BRONZE);
+		PIG_IRON_STORAGE = new BlockMetalMF(BaseMaterialMFR.PIG_IRON);
+		STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.STEEL);
+		BLACK_STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.BLACK_STEEL);
+		RED_STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.RED_STEEL);
+		BLUE_STEEL_STORAGE = new BlockMetalMF(BaseMaterialMFR.BLUE_STEEL);
+		ADAMANTIUM_STORAGE = new BlockMetalMF(BaseMaterialMFR.ADAMANTIUM);
+		MITHRIL_STORAGE = new BlockMetalMF(BaseMaterialMFR.MITHRIL);
+		IGNOTUMITE_STORAGE = new BlockMetalMF(BaseMaterialMFR.IGNOTUMITE);
+		MITHIUM_STORAGE = new BlockMetalMF(BaseMaterialMFR.MITHIUM);
+		ENDER_STORAGE = new BlockMetalMF(BaseMaterialMFR.ENDERFORGE);
 
-		ANVIL_STONE = new BlockAnvilMF(BaseMaterialMFR.stone);
-		ANVIL_BRONZE = new BlockAnvilMF(BaseMaterialMFR.bronze);
-		ANVIL_IRON = new BlockAnvilMF(BaseMaterialMFR.iron);
-		ANVIL_STEEL = new BlockAnvilMF(BaseMaterialMFR.steel);
-		ANVIL_BLACK_STEEL = new BlockAnvilMF(BaseMaterialMFR.blacksteel);
-		ANVIL_BLUE_STEEL = new BlockAnvilMF(BaseMaterialMFR.bluesteel);
-		ANVIL_RED_STEEL = new BlockAnvilMF(BaseMaterialMFR.redsteel);
+		ANVIL_STONE = new BlockAnvilMF(BaseMaterialMFR.STONE);
+		ANVIL_BRONZE = new BlockAnvilMF(BaseMaterialMFR.BRONZE);
+		ANVIL_IRON = new BlockAnvilMF(BaseMaterialMFR.IRON);
+		ANVIL_STEEL = new BlockAnvilMF(BaseMaterialMFR.STEEL);
+		ANVIL_BLACK_STEEL = new BlockAnvilMF(BaseMaterialMFR.BLACK_STEEL);
+		ANVIL_BLUE_STEEL = new BlockAnvilMF(BaseMaterialMFR.BLUE_STEEL);
+		ANVIL_RED_STEEL = new BlockAnvilMF(BaseMaterialMFR.RED_STEEL);
 		
 		CARPENTER = new BlockCarpenter();
 		BOMB_BENCH = new BlockBombBench();
@@ -407,8 +422,8 @@ public class BlockListMFR {
 
 		REFINED_PLANKS = new BasicBlockMF("refined_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(2.5F).setResistance(10F);
 		NAILED_PLANKS = new BasicBlockMF("nailed_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(1.5F).setResistance(7F);
-		REFINED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("refined_planks_stair", REFINED_PLANKS);
-		NAILED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("nailed_planks_stair", NAILED_PLANKS);
+		REFINED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("refined_planks_stairs", REFINED_PLANKS);
+		NAILED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("nailed_planks_stairs", NAILED_PLANKS);
 
 		REINFORCED_STONE = new BlockReinforcedStone("reinforced_stone", "base", "engraved", "dshall_0", "dshall_1", "dshall_2").setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_BRICKS = new BlockReinforcedStone("reinforced_stone_bricks", "base", "mossy", "cracked").setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
@@ -427,6 +442,7 @@ public class BlockListMFR {
 
 		SALVAGE_BASIC = new BlockSalvage("basic", 1.0F);
 		BLOOMERY = new BlockBloomery();
+
 		LOG_YEW = new BlockLogMF("yew").setHardness(2F).setResistance(6F);
 		LOG_IRONBARK = new BlockLogMF("ironbark").setHardness(3F).setResistance(8F);
 		LOG_EBONY = new BlockLogMF("ebony").setHardness(5F).setResistance(10F);
@@ -445,17 +461,17 @@ public class BlockListMFR {
 
 		QUERN = new BlockQuern("quern");
 
-		MUD_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("mud_brick_stair", MUD_BRICK);
-		MUD_PAVEMENT_STAIR = new ConstructionBlockMF.StairsConstBlock("mud_pavement_stair", MUD_PAVEMENT);
-		COBBLE_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("cobble_brick_stair", COBBLE_BRICK);
-		COBBLE_PAVEMENT_STAIR = new ConstructionBlockMF.StairsConstBlock("cobble_pavement_stair", COBBLE_PAVEMENT);
-		FIREBRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("firebrick_stair", FIREBRICKS);
-		REINFORCED_STONE_STAIR = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_stair", REINFORCED_STONE);
-		REINFORCED_STONE_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_brick_stair", REINFORCED_STONE_BRICKS);
+		MUD_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("mud_brick_stairs", MUD_BRICK);
+		MUD_PAVEMENT_STAIR = new ConstructionBlockMF.StairsConstBlock("mud_pavement_stairs", MUD_PAVEMENT);
+		COBBLE_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("cobble_brick_stairs", COBBLE_BRICK);
+		COBBLE_PAVEMENT_STAIR = new ConstructionBlockMF.StairsConstBlock("cobble_pavement_stairs", COBBLE_PAVEMENT);
+		FIREBRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("firebrick_stairs", FIREBRICKS);
+		REINFORCED_STONE_STAIR = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_stairs", REINFORCED_STONE);
+		REINFORCED_STONE_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_brick_stairs", REINFORCED_STONE_BRICKS);
 
-		YEW_STAIR = new ConstructionBlockMF.StairsConstBlock("yew_stair", YEW_PLANKS);
-		IRONBARK_STAIR = new ConstructionBlockMF.StairsConstBlock("ironbark_stair", IRONBARK_PLANKS);
-		EBONY_STAIR = new ConstructionBlockMF.StairsConstBlock("ebony_stair", EBONY_PLANKS);
+		YEW_STAIR = new ConstructionBlockMF.StairsConstBlock("yew_stairs", YEW_PLANKS);
+		IRONBARK_STAIR = new ConstructionBlockMF.StairsConstBlock("ironbark_stairs", IRONBARK_PLANKS);
+		EBONY_STAIR = new ConstructionBlockMF.StairsConstBlock("ebony_stairs", EBONY_PLANKS);
 
 		FIREPIT = new BlockFirepit();
 		ROAST = new BlockRoast(0, "basic", false);
@@ -490,18 +506,18 @@ public class BlockListMFR {
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
-		registry.register(ORE_COPPER);
-		registry.register(ORE_TIN);
-		registry.register(ORE_SILVER);
-		registry.register(ORE_MYTHIC);
+		registry.register(COPPER_ORE);
+		registry.register(TIN_ORE);
+		registry.register(SILVER_ORE);
+		registry.register(MYTHIC_ORE);
 
-		registry.register(ORE_KAOLINITE);
-		registry.register(ORE_NITRE);
-		registry.register(ORE_SULFUR);
-		registry.register(ORE_BORAX);
-		registry.register(ORE_TUNGSTEN);
-		registry.register(ORE_CLAY);
-		registry.register(ORE_COAL_RICH);
+		registry.register(KAOLINITE_ORE);
+		registry.register(NITRE_ORE);
+		registry.register(SULFUR_ORE);
+		registry.register(BORAX_ORE);
+		registry.register(TUNGSTEN_ORE);
+		registry.register(CLAY_ORE);
+		registry.register(COAL_RICH_ORE);
 
 		registry.register(MUD_BRICK);
 		registry.register(MUD_PAVEMENT);
@@ -511,13 +527,21 @@ public class BlockListMFR {
 
 		registry.register(WINDOW);
 		registry.register(FRAMED_GLASS);
-		registry.register(FRAMED_PANE);
+		registry.register(FRAMED_GLASS_PANE);
 		registry.register(WINDOW_PANE);
 
 		registry.register(THATCH);
 		registry.register(THATCH_STAIR);
 
 		registry.register(LIMESTONE);
+		registry.register(LIMESTONE_COBBLE);
+		registry.register(LIMESTONE_BRICK);
+		registry.register(LIMESTONE_PAVEMENT);
+
+		registry.register(LIMESTONE_STAIRS);
+		registry.register(LIMESTONE_COBBLE_STAIRS);
+		registry.register(LIMESTONE_BRICK_STAIRS);
+		registry.register(LIMESTONE_PAVEMENT_STAIRS);
 
 		registry.register(FIREBRICKS);
 		registry.register(CLAY_WALL);
@@ -716,18 +740,18 @@ public class BlockListMFR {
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
-		registry.register(new ItemBlockOreMF(ORE_COPPER));
-		registry.register(new ItemBlockOreMF(ORE_TIN));
-		registry.register(new ItemBlockOreMF(ORE_SILVER));
-		registry.register(new ItemBlockOreMF(ORE_MYTHIC));
+		registry.register(new ItemBlockOreMF(COPPER_ORE));
+		registry.register(new ItemBlockOreMF(TIN_ORE));
+		registry.register(new ItemBlockOreMF(SILVER_ORE));
+		registry.register(new ItemBlockOreMF(MYTHIC_ORE));
 
-		registry.register(new ItemBlockOreMF(ORE_KAOLINITE));
-		registry.register(new ItemBlockOreMF(ORE_NITRE));
-		registry.register(new ItemBlockOreMF(ORE_SULFUR));
-		registry.register(new ItemBlockOreMF(ORE_BORAX));
-		registry.register(new ItemBlockOreMF(ORE_TUNGSTEN));
-		registry.register(new ItemBlockOreMF(ORE_CLAY));
-		registry.register(new ItemBlockOreMF(ORE_COAL_RICH));
+		registry.register(new ItemBlockOreMF(KAOLINITE_ORE));
+		registry.register(new ItemBlockOreMF(NITRE_ORE));
+		registry.register(new ItemBlockOreMF(SULFUR_ORE));
+		registry.register(new ItemBlockOreMF(BORAX_ORE));
+		registry.register(new ItemBlockOreMF(TUNGSTEN_ORE));
+		registry.register(new ItemBlockOreMF(CLAY_ORE));
+		registry.register(new ItemBlockOreMF(COAL_RICH_ORE));
 
 		registry.register(new ItemBlockBase(MUD_BRICK));
 		registry.register(new ItemBlockBase(MUD_PAVEMENT));
@@ -737,13 +761,21 @@ public class BlockListMFR {
 
 		registry.register(new ItemBlockBase(WINDOW));
 		registry.register(new ItemBlockBase(FRAMED_GLASS));
-		registry.register(new ItemBlockBase(FRAMED_PANE));
+		registry.register(new ItemBlockBase(FRAMED_GLASS_PANE));
 		registry.register(new ItemBlockBase(WINDOW_PANE));
 
 		registry.register(new ItemBlockBase(THATCH));
 		registry.register(new ItemBlockBase(THATCH_STAIR));
 
 		registry.register(new ItemBlockBase(LIMESTONE));
+		registry.register(new ItemBlockBase(LIMESTONE_COBBLE));
+		registry.register(new ItemBlockBase(LIMESTONE_BRICK));
+		registry.register(new ItemBlockBase(LIMESTONE_PAVEMENT));
+
+		registry.register(new ItemBlockBase(LIMESTONE_STAIRS));
+		registry.register(new ItemBlockBase(LIMESTONE_COBBLE_STAIRS));
+		registry.register(new ItemBlockBase(LIMESTONE_BRICK_STAIRS));
+		registry.register(new ItemBlockBase(LIMESTONE_PAVEMENT_STAIRS));
 
 		registry.register(new ItemBlockBase(FIREBRICKS));
 		registry.register(new ItemBlockBase(CLAY_WALL));
@@ -906,8 +938,6 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(WG_MARK));
 		registry.register(new ItemBlockBase(COMPONENTS));
 		registry.register(new ItemBlockBase(SCHEMATIC_GENERAL));
-
-
 	}
 
 	@SubscribeEvent

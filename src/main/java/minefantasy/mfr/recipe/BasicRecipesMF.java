@@ -22,9 +22,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class BasicRecipesMF {
@@ -135,7 +133,7 @@ public class BasicRecipesMF {
 				new ItemStack(BlockListMFR.FIREBRICKS), "BB", "BB", 'B', ComponentListMFR.STRONG_BRICK);
 		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(
 				new ItemStack(BlockListMFR.FIREBRICK_STAIR), "B ", "BB", 'B', ComponentListMFR.STRONG_BRICK);
-		BaseMaterialMFR mat = BaseMaterialMFR.iron;
+		BaseMaterialMFR mat = BaseMaterialMFR.IRON;
 
 		// GameRegistry.addShapelessRecipe(new ItemStack(ComponentListMFR.hideSmall),
 		// new Object[]{ComponentListMFR.rawhideSmall, ComponentListMFR.flux});

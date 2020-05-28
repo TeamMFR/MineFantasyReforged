@@ -23,13 +23,52 @@ public class BaseMaterialMFR {
      */
     private static final float swordDam = 5F;
     public static HashMap<String, BaseMaterialMFR> materialMap = new HashMap<String, BaseMaterialMFR>();
-    public static BaseMaterialMFR linen, wool, leatherapron, hide, rough, reinforced, padding, studded, scaled,
-            dragonscale;// Cloth and leather
-    public static BaseMaterialMFR stone, tin, pigiron, silver, gold, ornate, weakblacksteel, weakredsteel, weakbluesteel,
-            tungsten;// Misc Mats
-    public static BaseMaterialMFR copper, bronze, iron, steel, encrusted, obsidian, blacksteel, bluesteel, redsteel,
-            dragonforge, adamantium, mithril, ignotumite, mithium, enderforge;// Tiers
-    public static BaseMaterialMFR cogworks, compositeAlloy;// Engineer
+
+    // Cloth and leather
+    public static BaseMaterialMFR LINEN;
+    public static BaseMaterialMFR WOOL;
+    public static BaseMaterialMFR LEATHER_APRON;
+    public static BaseMaterialMFR HIDE;
+    public static BaseMaterialMFR ROUGH;
+    public static BaseMaterialMFR REINFORCED;
+    public static BaseMaterialMFR PADDING;
+    public static BaseMaterialMFR STUDDED;
+    public static BaseMaterialMFR SCALED;
+    public static BaseMaterialMFR DRAGONSCALE;
+
+    // Misc Mats
+    public static BaseMaterialMFR STONE;
+    public static BaseMaterialMFR TIN;
+    public static BaseMaterialMFR PIG_IRON;
+    public static BaseMaterialMFR SILVER;
+    public static BaseMaterialMFR GOLD;
+    public static BaseMaterialMFR ORNATE;
+    public static BaseMaterialMFR WEAK_BLACK_STEEL;
+    public static BaseMaterialMFR WEAK_RED_STEEL;
+    public static BaseMaterialMFR WEAK_BLUE_STEEL;
+    public static BaseMaterialMFR TUNGSTEN;
+
+    // Tiers
+    public static BaseMaterialMFR COPPER;
+    public static BaseMaterialMFR BRONZE;
+    public static BaseMaterialMFR IRON;
+    public static BaseMaterialMFR STEEL;
+    public static BaseMaterialMFR ENCRUSTED;
+    public static BaseMaterialMFR OBSIDIAN;
+    public static BaseMaterialMFR BLACK_STEEL;
+    public static BaseMaterialMFR BLUE_STEEL;
+    public static BaseMaterialMFR RED_STEEL;
+    public static BaseMaterialMFR DRAGONFORGE;
+    public static BaseMaterialMFR ADAMANTIUM;
+    public static BaseMaterialMFR MITHRIL;
+    public static BaseMaterialMFR IGNOTUMITE;
+    public static BaseMaterialMFR MITHIUM;
+    public static BaseMaterialMFR ENDERFORGE;
+
+    // Engineer
+    public static BaseMaterialMFR COGWORKS;
+    public static BaseMaterialMFR COMPOSITE_ALLOY;
+
     private static float ACrounding = 10F; // round to nearest 10
     /*
      * WOOD(0, 59, 2.0F, 0.0F, 15), STONE(1, 131, 4.0F, 1.0F, 5), IRON(2, 250, 6.0F,
@@ -109,73 +148,61 @@ public class BaseMaterialMFR {
 
     public static void init() {
         // LEATHER AND CLOTH
-        linen = addArmourSpecificMaterial("Linen", 0, 10, 0.1F, 0, 1.00F, 0);
-        wool = addArmourSpecificMaterial("Wool", 1, 15, 0.1F, 0, 1.00F, 5);
+        LINEN = addArmourSpecificMaterial("linen", 0, 10, 0.1F, 0, 1.00F, 0);
+        WOOL = addArmourSpecificMaterial("wool", 1, 15, 0.1F, 0, 1.00F, 5);
 
-        leatherapron = addArmourSpecificMaterial("LeatherApron", 0, 10, 1.5F, 0, 0.50F, 0);
-        hide = addArmourSpecificMaterial("Hide", 0, 100, 1.5F, 0, 1.00F, 0);
-        rough = addArmourSpecificMaterial("RoughLeather", 0, 150, 1.5F, 1, 1.00F, 0);
-        reinforced = addArmourSpecificMaterial("StrongLeather", 1, 250, 2.0F, 1, 1.00F, 5);
-        padding = addArmourSpecificMaterial("Padded", 1, 200, 2.0F, 0, 1.00F, 5);
-        studded = addArmourSpecificMaterial("StudLeather", 1, 500, 2.5F, 5, 1.20F, 15);
-        scaled = addArmourSpecificMaterial("ScaleLeather", 2, 1000, 2.8F, 8, 1.50F, 25);
-        dragonscale = addArmourSpecificMaterial("Dragonscale", 3, 3000, 5F, 20, 1.20F, 85).setRarity(2);
+        LEATHER_APRON = addArmourSpecificMaterial("leather_apron", 0, 10, 1.5F, 0, 0.50F, 0);
+        HIDE = addArmourSpecificMaterial("hide", 0, 100, 1.5F, 0, 1.00F, 0);
+        ROUGH = addArmourSpecificMaterial("rough_leather", 0, 150, 1.5F, 1, 1.00F, 0);
+        REINFORCED = addArmourSpecificMaterial("strong_leather", 1, 250, 2.0F, 1, 1.00F, 5);
+        PADDING = addArmourSpecificMaterial("padded", 1, 200, 2.0F, 0, 1.00F, 5);
+        STUDDED = addArmourSpecificMaterial("stud_leather", 1, 500, 2.5F, 5, 1.20F, 15);
+        SCALED = addArmourSpecificMaterial("scale_leather", 2, 1000, 2.8F, 8, 1.50F, 25);
+        DRAGONSCALE = addArmourSpecificMaterial("dragonscale", 3, 3000, 5F, 20, 1.20F, 85).setRarity(2);
 
         // name Tier dura, harvest sharpness enchant weight
         // MISC
-        weakblacksteel = addMaterial("black_steel_weak", -1, 250, 4, 2.0F, 0, 1.00F, 40).setForgeStats(4, 4, 4.0F, 150,
-                500);
-        weakredsteel = addMaterial("red_steel_weak", -1, 400, 5, 3.0F, 0, 1.10F, 65).setForgeStats(4, 4, 4.0F, 200, 500);
-        weakbluesteel = addMaterial("blue_steel_weak", -1, 300, 5, 2.5F, 0, 0.90F, 65).setForgeStats(4, 4, 4.0F, 175,
-                500);
-        stone = addMaterial("stone", 0, 50, 0, 0.1F, 0.0F, 0, 2.00F, 0).setForgeStats(0, 0, 0.75F, 0, 0);
-        tin = addMaterial("tin", 0, 100, 0, 0.2F, 5, 0.80F, 0).setForgeStats(0, 0, 0, 85, 100);
-        pigiron = addMaterial("pig_iron", 0, 250, 0, 1.5F, 3, 1.00F, 0).setForgeStats(2, 2, 2.0F, 100, 400);
-        silver = addMaterial("silver", -1, 150, 0, 0.0F, 10, 0.70F, 0).setForgeStats(1, 1, 3F, 90, 120);
-        gold = addMaterial("gold", -1, 150, 0, 0.0F, 25, 1.50F, 0).setForgeStats(1, 1, 3F, 90, 120);
-        // goldPure = addMaterial("PureGold", -1, 50 , 0, 0.0F, 50, 2.00F,
-        // 0).setRarity(1);
-        ornate = addMaterial("ornate", -1, 300, 0, 0.0F, 30, 1.00F, 30).setRarity(1).setForgeStats(1, 1, 4F, 120, 150);
-        tungsten = addMaterial("tungsten", 2, 600, 3, 4F, 5, 1.50F, 0).setRarity(1).setForgeStats(3, 3, 5.0F, 150, 300);
+        WEAK_BLACK_STEEL = addMaterial("weak_black_steel", -1, 250, 4, 2.0F, 0, 1.00F, 40).setForgeStats(4, 4, 4.0F, 150, 500);
+        WEAK_RED_STEEL = addMaterial("weak_red_steel", -1, 400, 5, 3.0F, 0, 1.10F, 65).setForgeStats(4, 4, 4.0F, 200, 500);
+        WEAK_BLUE_STEEL = addMaterial("weak_blue_steel", -1, 300, 5, 2.5F, 0, 0.90F, 65).setForgeStats(4, 4, 4.0F, 175, 500);
+        STONE = addMaterial("stone", 0, 50, 0, 0.1F, 0.0F, 0, 2.00F, 0).setForgeStats(0, 0, 0.75F, 0, 0);
+        TIN = addMaterial("tin", 0, 100, 0, 0.2F, 5, 0.80F, 0).setForgeStats(0, 0, 0, 85, 100);
+        PIG_IRON = addMaterial("pig_iron", 0, 250, 0, 1.5F, 3, 1.00F, 0).setForgeStats(2, 2, 2.0F, 100, 400);
+        SILVER = addMaterial("silver", -1, 150, 0, 0.0F, 10, 0.70F, 0).setForgeStats(1, 1, 3F, 90, 120);
+        GOLD = addMaterial("gold", -1, 150, 0, 0.0F, 25, 1.50F, 0).setForgeStats(1, 1, 3F, 90, 120);
+        // goldPure = addMaterial("PureGold", -1, 50 , 0, 0.0F, 50, 2.00F, 0).setRarity(1);
+        ORNATE = addMaterial("ornate", -1, 300, 0, 0.0F, 30, 1.00F, 30).setRarity(1).setForgeStats(1, 1, 4F, 120, 150);
+        TUNGSTEN = addMaterial("tungsten", 2, 600, 3, 4F, 5, 1.50F, 0).setRarity(1).setForgeStats(3, 3, 5.0F, 150, 300);
 
         // TIERS
         // Basic / Common Materials (0-2) Levels 0-50
-        copper = addMaterial("copper", 0, 200, 1, 1.0F, 5, 1.00F, 0).setForgeStats(0, 0, 1.0F, 95, 250); // lvl 0-4
-        bronze = addMaterial("bronze", 1, 300, 2, 1.5F, 5, 1.00F, 5).setForgeStats(1, 1, 2.5F, 100, 250); // lvl 5-14
-        iron = addMaterial("iron", 2, 500, 2, 2.0F, 5, 1.00F, 15).setForgeStats(2, 2, 2.0F, 90, 250); // lvl 15-24
-        steel = addMaterial("steel", 3, 750, 2, 2.5F, 10, 1.00F, 25).setForgeStats(3, 3, 2.5F, 120, 250); // lvl 25-39
-        encrusted = addMaterial("encrusted", 3, 2000, 3, 3.5F, 25, 1.00F, 40).setForgeStats(3, 3, 5.0F, 130, 240); // lvl
-        // 40-49
-        obsidian = addMaterial("obsidian", 3, 2000, 3, 3.5F, 25, 1.00F, 40).setForgeStats(3, 3, 5.0F, 130, 240); // lvl
-        // 40-49
+        COPPER = addMaterial("copper", 0, 200, 1, 1.0F, 5, 1.00F, 0).setForgeStats(0, 0, 1.0F, 95, 250); // lvl 0-4
+        BRONZE = addMaterial("bronze", 1, 300, 2, 1.5F, 5, 1.00F, 5).setForgeStats(1, 1, 2.5F, 100, 250); // lvl 5-14
+        IRON = addMaterial("iron", 2, 500, 2, 2.0F, 5, 1.00F, 15).setForgeStats(2, 2, 2.0F, 90, 250); // lvl 15-24
+        STEEL = addMaterial("steel", 3, 750, 2, 2.5F, 10, 1.00F, 25).setForgeStats(3, 3, 2.5F, 120, 250); // lvl 25-39
+        ENCRUSTED = addMaterial("encrusted", 3, 2000, 3, 3.5F, 25, 1.00F, 40).setForgeStats(3, 3, 5.0F, 130, 240); // lvl 40-49
+        OBSIDIAN = addMaterial("obsidian", 3, 2000, 3, 3.5F, 25, 1.00F, 40).setForgeStats(3, 3, 5.0F, 130, 240); // lvl 40-49
+
         // Advanced Materials (3 - 4) Levels 50-75
-        blacksteel = addMaterial("black_steel", 4, 1500, 4, 4.0F, 12, 1.00F, 50).setForgeStats(4, 4, 4.0F, 150, 350);// lvl
-        // 50
-        dragonforge = addMaterial("dragonforge", 4, 1500, 4, 5.0F, 14, 1.00F, 60).setForgeStats(4, 4, 8.0F, 250, 350)
-                .setRarity(1).setResistances(100F, 0F);// lvl 60
-        redsteel = addMaterial("red_steel", 5, 2000, 5, 6.0F, 1, 1.15F, 75).setForgeStats(5, 5, 6.5F, 200, 350)
-                .setResistances(20F, 0F);// lvl 75
-        bluesteel = addMaterial("blue_steel", 5, 1800, 5, 5.0F, 20, 0.75F, 75).setForgeStats(5, 5, 4.5F, 175, 325)
-                .setResistances(0F, 20F);// lvl 75
+        BLACK_STEEL = addMaterial("black_steel", 4, 1500, 4, 4.0F, 12, 1.00F, 50).setForgeStats(4, 4, 4.0F, 150, 350);// lvl 50
+        DRAGONFORGE = addMaterial("dragonforge", 4, 1500, 4, 5.0F, 14, 1.00F, 60).setForgeStats(4, 4, 8.0F, 250, 350).setRarity(1).setResistances(100F, 0F);// lvl 60
+        RED_STEEL = addMaterial("red_steel", 5, 2000, 5, 6.0F, 1, 1.15F, 75).setForgeStats(5, 5, 6.5F, 200, 350).setResistances(20F, 0F);// lvl 75
+        BLUE_STEEL = addMaterial("blue_steel", 5, 1800, 5, 5.0F, 20, 0.75F, 75).setForgeStats(5, 5, 4.5F, 175, 325).setResistances(0F, 20F);// lvl 75
+
         // Mythic Materials (5) Levels 75-100
-        adamantium = addMaterial("adamantium", 6, 3000, 6, 8.0F, 10, 1.25F, 90).setForgeStats(6, 5, 9.0F, 300, 400)
-                .setRarity(1).setResistances(35F, 0F);// lvl 90
-        mithril = addMaterial("mithril", 6, 2500, 6, 7.0F, 30, 0.50F, 90).setForgeStats(6, 5, 6.0F, 280, 400)
-                .setRarity(1).setResistances(0F, 35F);// lvl 90
+        ADAMANTIUM = addMaterial("adamantium", 6, 3000, 6, 8.0F, 10, 1.25F, 90).setForgeStats(6, 5, 9.0F, 300, 400).setRarity(1).setResistances(35F, 0F);// lvl 90
+        MITHRIL = addMaterial("mithril", 6, 2500, 6, 7.0F, 30, 0.50F, 90).setForgeStats(6, 5, 6.0F, 280, 400).setRarity(1).setResistances(0F, 35F);// lvl 90
+
         // Masterwork Materials (6) Level 100
-        ignotumite = addMaterial("ignotumite", 7, 1000, 7, 14.0F, 20, 2.00F, 100).setForgeStats(7, 5, 15.0F, 350, 400)
-                .setRarity(2).setResistances(50F, 0F);// High damage, heavy, fire resist lvl 100
-        mithium = addMaterial("mithium", 7, 1000, 7, 10.0F, 40, 0.25F, 100).setForgeStats(7, 5, 15.0F, 330, 400)
-                .setRarity(2).setResistances(0F, 50F);// Low damage, light, magic resist lvl 100
-        enderforge = addMaterial("ender", 7, 1000, 7, 12.0F, 20, 1.00F, 100).setForgeStats(7, 5, 15.0F, 400, 450)
-                .setRarity(2).setResistances(25F, 25F);// Middle lvl 100
+        IGNOTUMITE = addMaterial("ignotumite", 7, 1000, 7, 14.0F, 20, 2.00F, 100).setForgeStats(7, 5, 15.0F, 350, 400).setRarity(2).setResistances(50F, 0F);// High damage, heavy, fire resist lvl 100
+        MITHIUM = addMaterial("mithium", 7, 1000, 7, 10.0F, 40, 0.25F, 100).setForgeStats(7, 5, 15.0F, 330, 400).setRarity(2).setResistances(0F, 50F);// Low damage, light, magic resist lvl 100
+        ENDERFORGE = addMaterial("enderforge", 7, 1000, 7, 12.0F, 20, 1.00F, 100).setForgeStats(7, 5, 15.0F, 400, 450).setRarity(2).setResistances(25F, 25F);// Middle lvl 100
+
         // Engineer Materials
         // steel = addMaterial("Steel", 3, 750, 2, 2.5F, 10, 1.00F, 25).setForgeStats(3,
         // 3, 2.5F, 120, 250); //lvl 25-39
-        cogworks = addArmourSpecificMaterial("Cogworks", 4, 500, 1.0F, 10, 1.00F, 85).setForgeStats(3, 3, 2.5F, 120,
-                250);
-        compositeAlloy = addArmourSpecificMaterial("CompositeAlloy", 4, 1800, 4.0F, 10, 2.00F, 85)
-                .setForgeStats(3, 3, 2.5F, 120, 250).setResistances(95F, 85F);
+        COGWORKS = addArmourSpecificMaterial("cogworks", 4, 500, 1.0F, 10, 1.00F, 85).setForgeStats(3, 3, 2.5F, 120, 250);
+        COMPOSITE_ALLOY = addArmourSpecificMaterial("composite_alloy", 4, 1800, 4.0F, 10, 2.00F, 85).setForgeStats(3, 3, 2.5F, 120, 250).setResistances(95F, 85F);
 
     }
 
