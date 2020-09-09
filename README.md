@@ -1,6 +1,6 @@
 # MineFantasy Reborn &nbsp; ![Mod Build](https://github.com/TeamMFR/MineFantasy-reborn/workflows/Mod%20Build/badge.svg)
 
-Source installation information for modders
+Source installation information for modders  
 -------------------------------------------
 This code follows the Minecraft Forge installation methodology. It will apply
 some small patches to the vanilla MCP source code, giving you and it access 
