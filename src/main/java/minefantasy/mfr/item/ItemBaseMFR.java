@@ -13,7 +13,7 @@ public class ItemBaseMFR extends Item implements IClientRegister {
 		setUnlocalizedName(name);
 		setRegistryName(new ResourceLocation(MineFantasyReborn.MOD_ID, name));
 
-		MineFantasyReborn.proxy.addClientRegister(this);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package minefantasy.mfr.api.crafting.carpenter;
 
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.block.Block;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
@@ -29,7 +28,7 @@ public class CraftingManagerCarpenter {
 
     private CraftingManagerCarpenter() {
         Collections.sort(this.recipes, new RecipeSorterCarpenter(this));
-        System.out.println("MineFantasy: Anvil recipes initiating");
+        System.out.println("MineFantasy: Carpenter recipes initiating");
     }
 
     /**
@@ -42,22 +41,19 @@ public class CraftingManagerCarpenter {
     /**
      * Adds a recipe. See spreadsheet on first page for details.
      */
-    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp,
-                                      String tool, int hammer, int anvil, int time, Object... input) {
+    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, Object... input) {
         return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 0, input);
     }
 
-    public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp,
-                                          String tool, int hammer, int anvil, int time, Object... input) {
+    public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, Object... input) {
         return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 1, input);
     }
 
     /**
      * Adds a recipe. See spreadsheet on first page for details.
      */
-    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp,
-                                      String tool, int hammer, int anvil, int time, byte id, Object... input) {
-        String var3 = "";
+    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, byte id, Object... input) {
+        StringBuilder recipeString = new StringBuilder();
         int var4 = 0;
         int var5 = 0;
         int var6 = 0;
@@ -72,14 +68,14 @@ public class CraftingManagerCarpenter {
                 String var11 = var8[var10];
                 ++var6;
                 var5 = var11.length();
-                var3 = var3 + var11;
+                recipeString.append(var11);
             }
         } else {
             while (input[var4] instanceof String) {
                 String var13 = (String) input[var4++];
                 ++var6;
                 var5 = var13.length();
-                var3 = var3 + var13;
+                recipeString.append(var13);
             }
         }
 
@@ -87,7 +83,7 @@ public class CraftingManagerCarpenter {
 
         for (var14 = new HashMap(); var4 < input.length; var4 += 2) {
             Character var16 = (Character) input[var4];
-            ItemStack var17 = null;
+            ItemStack var17 = ItemStack.EMPTY;
 
             if (input[var4 + 1] instanceof Item) {
                 var17 = new ItemStack((Item) input[var4 + 1], 1, 32767);
@@ -103,29 +99,26 @@ public class CraftingManagerCarpenter {
         ItemStack[] var15 = new ItemStack[var5 * var6];
 
         for (var9 = 0; var9 < var5 * var6; ++var9) {
-            char var18 = var3.charAt(var9);
+            char var18 = recipeString.charAt(var9);
 
             if (var14.containsKey(Character.valueOf(var18))) {
                 var15[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
             } else {
-                var15[var9] = null;
+                var15[var9] = ItemStack.EMPTY;
             }
         }
         ICarpenterRecipe recipe;
 
         if (id == (byte) 1) {
-            recipe = new CustomToolRecipeCarpenter(var5, var6, var15, result, tool, time, hammer, anvil, exp, false,
-                    sound, research, skill);
+            recipe = new CustomToolRecipeCarpenter(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
         } else {
-            recipe = new ShapedCarpenterRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound,
-                    research, skill);
+            recipe = new ShapedCarpenterRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
         }
         this.recipes.add(recipe);
         return recipe;
     }
 
-    public ICarpenterRecipe addShapelessRecipe(ItemStack output, Skill skill, String research, SoundEvent sound,
-                                               float experience, String tool, int hammer, int anvil, int time, Object... input) {
+    public ICarpenterRecipe addShapelessRecipe(ItemStack output, Skill skill, String research, SoundEvent sound, float experience, String tool, int hammer, int anvil, int time, Object... input) {
         ArrayList var3 = new ArrayList();
         Object[] var4 = input;
         int var5 = input.length;
@@ -146,21 +139,20 @@ public class CraftingManagerCarpenter {
             }
         }
 
-        ICarpenterRecipe recipe = new ShapelessCarpenterRecipes(output, tool, experience, hammer, anvil, time, var3,
-                false, sound, research, skill);
+        ICarpenterRecipe recipe = new ShapelessCarpenterRecipes(output, tool, experience, hammer, anvil, time, var3, false, sound, research, skill);
         this.recipes.add(recipe);
         return recipe;
     }
 
     public ItemStack findMatchingRecipe(CarpenterCraftMatrix matrix) {
         int var2 = 0;
-        ItemStack var3 = null;
-        ItemStack var4 = null;
+        ItemStack var3 = ItemStack.EMPTY;
+        ItemStack var4 = ItemStack.EMPTY;
 
         for (int var5 = 0; var5 < matrix.getSizeInventory(); ++var5) {
             ItemStack var6 = matrix.getStackInSlot(var5);
 
-            if (var6 != null) {
+            if (!var6.isEmpty()) {
                 if (var2 == 0) {
                     var3 = var6;
                 }
@@ -192,7 +184,7 @@ public class CraftingManagerCarpenter {
 
             do {
                 if (!var11.hasNext()) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
 
                 var13 = (ICarpenterRecipe) var11.next();
@@ -203,26 +195,26 @@ public class CraftingManagerCarpenter {
     }
 
     public ItemStack findMatchingRecipe(ICarpenter bench, CarpenterCraftMatrix matrix) {
-        int time = 200;
-        int anvi = 1;
-        boolean hot = false;
-        int hammer = 0;
+        int time;
+        int anvil;
+        boolean hot;
+        int hammer;
         int var2 = 0;
-        String toolType = "hands";
-        SoundEvent sound = SoundEvents.BLOCK_WOOD_HIT;
-        ItemStack var3 = null;
-        ItemStack var4 = null;
+        String toolType;
+        SoundEvent sound;
+        ItemStack var3 = ItemStack.EMPTY;
+        ItemStack var4 = ItemStack.EMPTY;
 
         for (int var5 = 0; var5 < matrix.getSizeInventory(); ++var5) {
-            ItemStack var6 = matrix.getStackInSlot(var5);
+            ItemStack matrixSlot = matrix.getStackInSlot(var5);
 
-            if (var6 != null) {
+            if (!matrixSlot.isEmpty()) {
                 if (var2 == 0) {
-                    var3 = var6;
+                    var3 = matrixSlot;
                 }
 
                 if (var2 == 1) {
-                    var4 = var6;
+                    var4 = matrixSlot;
                 }
 
                 ++var2;
@@ -243,37 +235,37 @@ public class CraftingManagerCarpenter {
 
             return new ItemStack(var3.getItem(), 1, var9);
         } else {
-            Iterator var11 = this.recipes.iterator();
-            ICarpenterRecipe var13 = null;
+            Iterator recipesIterator = this.recipes.iterator();
+            ICarpenterRecipe iCarpenterRecipe = null;
 
-            while (var11.hasNext()) {
-                ICarpenterRecipe rec = (ICarpenterRecipe) var11.next();
+            while (recipesIterator.hasNext()) {
+                ICarpenterRecipe rec = (ICarpenterRecipe) recipesIterator.next();
 
                 if (rec.matches(matrix)) {
-                    var13 = rec;
+                    iCarpenterRecipe = rec;
                 }
             }
 
-            if (var13 != null) {
-                time = var13.getCraftTime();
-                hammer = var13.getRecipeHammer();
-                anvi = var13.getAnvil();
-                hot = var13.outputHot();
-                toolType = var13.getToolType();
-                sound = var13.getSound();
+            if (iCarpenterRecipe != null) {
+                time = iCarpenterRecipe.getCraftTime();
+                hammer = iCarpenterRecipe.getRecipeHammer();
+                anvil = iCarpenterRecipe.getAnvil();
+                hot = iCarpenterRecipe.outputHot();
+                toolType = iCarpenterRecipe.getToolType();
+                sound = iCarpenterRecipe.getSound();
 
                 bench.setForgeTime(time);
                 bench.setToolTier(hammer);
-                bench.setRequiredCarpenter(anvi);
+                bench.setRequiredCarpenter(anvil);
                 bench.setHotOutput(hot);
                 bench.setToolType(toolType);
                 bench.setCraftingSound(sound);
-                bench.setResearch(var13.getResearch());
-                bench.setSkill(var13.getSkill());
+                bench.setResearch(iCarpenterRecipe.getResearch());
+                bench.setSkill(iCarpenterRecipe.getSkill());
 
-                return var13.getCraftingResult(matrix);
+                return iCarpenterRecipe.getCraftingResult(matrix);
             }
-            return null;
+            return ItemStack.EMPTY;
         }
     }
 

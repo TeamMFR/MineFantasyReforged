@@ -1,8 +1,8 @@
-package minefantasy.mfr.block.tile.decor;
+package minefantasy.mfr.tile.decor;
 
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.TileInventoryPacket;
+import minefantasy.mfr.network.TileInventoryPacket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

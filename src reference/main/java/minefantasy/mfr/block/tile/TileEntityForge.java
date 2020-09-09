@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumParticleTypes;
@@ -17,7 +17,7 @@ import minefantasy.mfr.block.refining.BlockForge;
 import minefantasy.mfr.item.heatable.ItemHeated;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.ForgePacket;
+import minefantasy.mfr.network.ForgePacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

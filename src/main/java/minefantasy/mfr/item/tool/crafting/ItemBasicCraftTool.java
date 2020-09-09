@@ -6,7 +6,6 @@ import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
@@ -50,7 +49,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
         setMaxDamage(uses);
         this.setMaxStackSize(1);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     @Override

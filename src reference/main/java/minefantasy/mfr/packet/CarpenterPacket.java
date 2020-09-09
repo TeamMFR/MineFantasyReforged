@@ -1,9 +1,9 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenterMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 

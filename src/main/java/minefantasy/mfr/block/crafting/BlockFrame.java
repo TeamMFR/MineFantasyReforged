@@ -76,8 +76,7 @@ public class BlockFrame extends BasicBlockMF {
     }
 
     private boolean tryBuild(EntityPlayer player, World world, BlockPos pos) {
-        if (PowerArmour.isBasicStationFrame(world, pos)
-                && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(ComponentListMFR.COGWORK_PULLEY)))) {
+        if (PowerArmour.isBasicStationFrame(world, pos) && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(ComponentListMFR.COGWORK_PULLEY)))) {
             if (!player.capabilities.isCreativeMode) {
                 player.inventory.removeStackFromSlot(1);
             }

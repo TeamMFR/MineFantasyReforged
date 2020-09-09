@@ -9,7 +9,7 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.network.ClientProxyMFR;
-import minefantasy.mfr.packet.CogworkControlPacket;
+import minefantasy.mfr.network.CogworkControlPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.entity.EntityClientPlayerMP;

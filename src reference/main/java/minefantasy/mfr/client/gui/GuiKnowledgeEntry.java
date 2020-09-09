@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.gui;
+package minefantasy.mfr.gui;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

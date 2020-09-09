@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.block.tile.TileEntityCrucible;
+import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.config.ConfigHardcore;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;

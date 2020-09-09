@@ -5,18 +5,22 @@ import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IQualityBalance;
-import minefantasy.mfr.api.helpers.*;
+import minefantasy.mfr.api.helpers.ArmourCalculator;
+import minefantasy.mfr.api.helpers.GuiHelper;
+import minefantasy.mfr.api.helpers.PowerArmour;
+import minefantasy.mfr.api.helpers.TextureHelperMFR;
+import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.stamina.StaminaBar;
-import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
-import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
-import minefantasy.mfr.block.tile.TileEntityRoad;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.item.gadget.IScope;
 import minefantasy.mfr.item.tool.advanced.ItemMattock;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
+import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -32,9 +36,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
@@ -58,9 +62,9 @@ public class MineFantasyHUD extends Gui {
         if (mc.player != null) {
             EntityPlayer player = mc.player;
 
-            if (this.mc.gameSettings.thirdPersonView == 0) {
-                if (player.getHeldItem(EnumHand.MAIN_HAND) != null && player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IScope) {
-                    renderScope(player.getHeldItem(EnumHand.MAIN_HAND), player);
+            if (mc.gameSettings.thirdPersonView == 0) {
+                if (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() instanceof IScope) {
+                    renderScope(player.getHeldItemMainhand());
                 }
                 if (player.getRidingEntity() != null && player.getRidingEntity() instanceof EntityCogwork) {
                     renderPowerHelmet(player, (EntityCogwork) player.getRidingEntity());
@@ -73,8 +77,7 @@ public class MineFantasyHUD extends Gui {
         if (mc.player != null) {
             EntityPlayer player = mc.player;
 
-            if (mc.currentScreen != null
-                    && (mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative)) {
+            if ((mc.currentScreen instanceof GuiInventory || mc.currentScreen instanceof GuiContainerCreative)) {
                 renderArmourRating(player);
             } else {
                 renderAmmo(player);
@@ -84,7 +87,7 @@ public class MineFantasyHUD extends Gui {
                 renderStaminaBar(player);
             }
             Entity highlight = getClickedEntity(partialTicks, mouseX, mouseY);
-            if (highlight != null && highlight instanceof EntityCogwork) {
+            if (highlight instanceof EntityCogwork) {
                 lookAtCogwork((EntityCogwork) highlight);
             }
 
@@ -134,7 +137,7 @@ public class MineFantasyHUD extends Gui {
         GL11.glPopMatrix();
     }
 
-    private void renderScope(ItemStack item, EntityPlayer user) {
+    private void renderScope(ItemStack item) {
         if (item.getItem() instanceof IFirearm) {
             float factor = ((IScope) item.getItem()).getZoom(item);
             if (factor > 0.1F) {
@@ -283,12 +286,12 @@ public class MineFantasyHUD extends Gui {
         int xPosAR = orientationAR[0] + ConfigClient.AR_xPos;
         int yPosAR = orientationAR[1] + ConfigClient.AR_yPos;
 
-        ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
-        if (held != null && (held.getItem() instanceof IDisplayMFRAmmo)) {
+        ItemStack held = player.getHeldItemMainhand();
+        if (!held.isEmpty() && (held.getItem() instanceof IDisplayMFRAmmo)) {
             ItemStack arrow = AmmoMechanicsMFR.getAmmo(held);
 
             String text = I18n.format("info.bow.reload");
-            if (arrow != null) {
+            if (!arrow.isEmpty()) {
                 text = arrow.getDisplayName() + " x" + arrow.getCount();
             }
             int[] orientationAC = getOrientsFor(width, height, ConfigClient.AC_xOrient, ConfigClient.AC_yOrient);
@@ -300,7 +303,7 @@ public class MineFantasyHUD extends Gui {
             int cap = ((IDisplayMFRAmmo) held.getItem()).getAmmoCapacity(held);
 
             ItemStack ammo = AmmoMechanicsMFR.getArrowOnBow(held);
-            int ammocount = ammo == null ? 0 : ammo.getCount();
+            int ammocount = ammo == ItemStack.EMPTY ? 0 : ammo.getCount();
             if (cap > 1) {
                 String ammostring = I18n.format("info.firearm.ammo", ammocount, cap);
                 mc.fontRenderer.drawStringWithShadow(ammostring, xPosAC, yPosAC + 10, Color.WHITE.getRGB());
@@ -358,7 +361,7 @@ public class MineFantasyHUD extends Gui {
         String stamTxt = (int) staminaAt + " / " + (int) staminaMax;
         boolean bonus = StaminaBar.getBonusStamina(player) > 0;
 
-        if (mc.currentScreen != null && mc.currentScreen instanceof GuiInventory) {
+        if (mc.currentScreen instanceof GuiInventory) {
             mc.fontRenderer.drawStringWithShadow(stamTxt, xPos + 41 - (mc.fontRenderer.getStringWidth(stamTxt) / 2),
                     yPos - 2, bonus ? Color.CYAN.getRGB() : Color.WHITE.getRGB());
         }
@@ -446,7 +449,7 @@ public class MineFantasyHUD extends Gui {
     }
 
     private void renderCraftMetre(World world, EntityPlayer player, TileEntityTanningRack tile) {
-        boolean knowsCraft = tile.doesPlayerKnowCraft(player);
+        boolean knowsCraft = tile.doesPlayerKnowCraft();
         GL11.glPushMatrix();
         ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
         int width = scaledresolution.getScaledWidth();
@@ -460,8 +463,8 @@ public class MineFantasyHUD extends Gui {
         this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, tile.getProgressBar(160), 3);
 
         String s = knowsCraft ? tile.getResultName() : "????";
-        ItemStack result = tile.items[1];
-        if (result != null && result.getCount() > 1) {
+        ItemStack result = tile.getInventory().getStackInSlot(1);
+        if (!result.isEmpty() && result.getCount() > 1) {
             s += " x" + result.getCount();
         }
         mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
@@ -531,8 +534,8 @@ public class MineFantasyHUD extends Gui {
     }
 
     private void renderRoad(World world, EntityPlayer player, TileEntityRoad tile) {
-        if (mc.player.getHeldItem(EnumHand.MAIN_HAND) != null) {
-            if (mc.player.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof ItemMattock) {
+        if (!mc.player.getHeldItemMainhand().isEmpty()) {
+            if (mc.player.getHeldItemMainhand().getItem() instanceof ItemMattock) {
                 GL11.glPushMatrix();
                 ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
                 int width = scaledresolution.getScaledWidth();

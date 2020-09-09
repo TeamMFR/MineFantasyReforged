@@ -22,7 +22,7 @@ public class ModelBellows extends ModelBase {
 
     public ModelBellows() {
         textureWidth = 64;
-        textureHeight = 32;
+        textureHeight = 64;
 
         Flap4 = new ModelRenderer(this, 0, 23);
         Flap4.addBox(0F, 0F, -4F, 10, 1, 8);
@@ -68,32 +68,20 @@ public class ModelBellows extends ModelBase {
         setRotation(Top, 0F, 0F, -0.5235988F);
     }
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        Flap4.render(f5);
-        Handle.render(f5);
-        Flap1.render(f5);
-        Flap2.render(f5);
-        Flap3.render(f5);
-        Base.render(f5);
-        Top.render(f5);
-    }
-
     private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
 
-    public void renderModel(int press, float f) {
-        Flap4.render(f);
-        Handle.render(f);
-        Flap1.render(f);
-        Flap2.render(f);
-        Flap3.render(f);
-        Base.render(f);
-        Top.render(f);
+    public void renderModel(float scale) {
+        Flap4.render(scale);
+        Handle.render(scale);
+        Flap1.render(scale);
+        Flap2.render(scale);
+        Flap3.render(scale);
+        Base.render(scale);
+        Top.render(scale);
     }
 
     public void rotate(int p) {

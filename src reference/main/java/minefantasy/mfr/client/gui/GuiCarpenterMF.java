@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.gui;
+package minefantasy.mfr.gui;
 
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.relauncher.Side;
@@ -7,7 +7,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenterMFR;
 import minefantasy.mfr.container.ContainerCarpenterMFR;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

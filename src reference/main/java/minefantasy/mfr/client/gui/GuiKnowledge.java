@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.gui;
+package minefantasy.mfr.gui;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;
@@ -15,7 +15,7 @@ import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.knowledge.KnowledgeListMFR;
-import minefantasy.mfr.packet.ResearchRequest;
+import minefantasy.mfr.network.ResearchRequest;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;

@@ -1,7 +1,5 @@
 package minefantasy.mfr;
 
-import java.io.File;
-
 import codechicken.lib.CodeChickenLib;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.armour.ArmourDesign;
@@ -23,16 +21,20 @@ import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.init.ArmourListMFR;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.CustomArmourListMFR;
+import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.init.OreDictListMFR;
+import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.mechanics.worldGen.WorldGenBiological;
 import minefantasy.mfr.mechanics.worldGen.WorldGenMFBase;
-import minefantasy.mfr.packet.PacketHandlerMF;
+import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -49,10 +51,10 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.minecraftforge.fml.common.network.FMLEventChannel;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+
+import java.io.File;
 
 @Mod(modid = MineFantasyReborn.MOD_ID, name = MineFantasyReborn.NAME, version = MineFantasyReborn.VERSION, dependencies = "required:forge@[0.000.000.001,);"
 		+ CodeChickenLib.MOD_VERSION_DEP)
@@ -63,11 +65,10 @@ public class MineFantasyReborn {
 	public static final WorldGenMFBase worldGenManager = new WorldGenMFBase();
 
 	@SidedProxy(clientSide = "minefantasy.mfr.proxy.ClientProxy", serverSide = "minefantasy.mfr.proxy.ServerProxy")
-	public static CommonProxy proxy;
-	public static PacketHandlerMF packetHandler;
+	public static CommonProxy PROXY;
 
 	@Mod.Instance
-	public static MineFantasyReborn instance;
+	public static MineFantasyReborn INSTANCE;
 
 	private static Configuration getCfg(FMLPreInitializationEvent event, String name) {
 		return new Configuration(new File(event.getModConfigurationDirectory(), "MineFantasyReborn/" + name + ".cfg"));
@@ -86,7 +87,8 @@ public class MineFantasyReborn {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent preEvent) {
-		NetworkRegistry.INSTANCE.registerGuiHandler(instance, proxy);
+		NetworkHandler.INSTANCE.registerNetwork();
+
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			new ConfigClient().setConfig(getCfg(preEvent, "Client"));
 		}
@@ -103,22 +105,34 @@ public class MineFantasyReborn {
 		new ConfigCrafting().setConfig(getCfg(preEvent, "Crafting"));
 		new ConfigMobs().setConfig(getCfg(preEvent, "Mobs"));
 
-		BaseMaterialMFR.init();
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
 		MFRLogUtil.log("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
 
+		BaseMaterialMFR.init();
+
+		ComponentListMFR.init();
+		ToolListMFR.init();
+		CustomToolListMFR.init();
+		CustomArmourListMFR.init();
+		ArmourListMFR.init();
+		FoodListMFR.init();
+		DragonforgedStyle.init();
+		OrnateStyle.init();
+
 		BlockListMFR.init();
 
-		ArmourListMFR.init();
 
 		LootRegistryMFR.load();
-
 		BlockListMFR.load();
-		FoodListMFR.load();
-		ToolListMFR.load();
 		ComponentListMFR.load();
+		ToolListMFR.load();
+		FoodListMFR.load();
 
-		proxy.preInit(preEvent);
+		PROXY.registerTickHandlers();
+
+		PROXY.registerMain();
+
+		PROXY.preInit(preEvent);
 	}
 
 	@EventHandler
@@ -127,15 +141,8 @@ public class MineFantasyReborn {
 
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
 
-		packetHandler = new PacketHandlerMF();
-		FMLEventChannel eventChannel;
-		for (String channel : packetHandler.packetList.keySet()) {
-			eventChannel = NetworkRegistry.INSTANCE.newEventDrivenChannel(channel);
-			eventChannel.register(packetHandler);
-			packetHandler.channels.put(channel, eventChannel);
-		}
-		proxy.registerMain();
-		proxy.init();
+
+		PROXY.init();
 	}
 
 	@EventHandler
@@ -164,12 +171,11 @@ public class MineFantasyReborn {
 		KnowledgeListMFR.init();
 		BasicRecipesMF.init();
 
-		proxy.registerTickHandlers();
 		MetalMaterial.addHeatables();
 
 		OreDictListMFR.registerOreDictEntries();
 
-		proxy.postInit(postEvent);
+		PROXY.postInit(postEvent);
 	}
 
 	@EventHandler

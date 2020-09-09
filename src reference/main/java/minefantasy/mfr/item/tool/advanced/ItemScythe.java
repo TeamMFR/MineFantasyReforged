@@ -8,7 +8,7 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.util.BukkitUtils;

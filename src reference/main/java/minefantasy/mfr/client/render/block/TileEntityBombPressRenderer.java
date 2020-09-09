@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityBombPress;
+import minefantasy.mfr.tile.TileEntityBombPress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.player.EntityPlayer;

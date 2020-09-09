@@ -64,12 +64,12 @@ public class AmmoMechanicsMFR {
      * Gets the arrow loaded on the bow used for rendering and firing
      */
     public static ItemStack getArrowOnBow(ItemStack bow) {
-        if (bow != null && bow.hasTagCompound()) {
+        if (!bow.isEmpty() && bow.hasTagCompound()) {
             if (bow.getTagCompound().hasKey(arrowOnBowNBT)) {
                 return new ItemStack(bow.getTagCompound().getCompoundTag(arrowOnBowNBT));
             }
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -77,18 +77,18 @@ public class AmmoMechanicsMFR {
      */
     public static ItemStack reloadBow(ItemStack bow) {
         if (!bow.hasTagCompound()) {
-            return null;
+            return ItemStack.EMPTY;
         }
         if (bow.getTagCompound().hasKey(savedAmmoNBT)) {
             ItemStack ammo = new ItemStack(bow.getTagCompound().getCompoundTag(savedAmmoNBT));
 
-            if (ammo != null) {
+            if (!ammo.isEmpty()) {
                 ItemStack arrow = ammo.copy();
                 arrow.setCount(1);
                 return arrow;
             }
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -99,7 +99,7 @@ public class AmmoMechanicsMFR {
         if (user.capabilities.isCreativeMode) {
             return;
         }
-        if (ammo != null) {
+        if (!ammo.isEmpty()) {
             ammo.shrink(1);
             if (ammo.getCount() > 0) {
                 setAmmo(bow, ammo);
@@ -114,12 +114,12 @@ public class AmmoMechanicsMFR {
      */
     public static ItemStack getAmmo(ItemStack bow) {
         if (!bow.hasTagCompound()) {
-            return null;
+            return ItemStack.EMPTY;
         }
         if (bow.getTagCompound().hasKey(savedAmmoNBT)) {
             return new ItemStack(bow.getTagCompound().getCompoundTag(savedAmmoNBT));
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -128,7 +128,7 @@ public class AmmoMechanicsMFR {
     public static void setAmmo(ItemStack bow, ItemStack ammo) {
         NBTTagCompound nbt = getNBT(bow);
 
-        if (ammo != null) {
+        if (!ammo.isEmpty()) {
             NBTTagCompound save = new NBTTagCompound();
             ammo.writeToNBT(save);
             nbt.setTag(savedAmmoNBT, save);
@@ -149,7 +149,7 @@ public class AmmoMechanicsMFR {
     }
 
     public static boolean isDepleted(ItemStack firearm) {
-        return getGunAmmoCount(firearm) == 0 && getAmmo(firearm) == null && EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(51), firearm) == 0;
+        return getGunAmmoCount(firearm) == 0 && getAmmo(firearm) == ItemStack.EMPTY && EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(51), firearm) == 0;
     }
 
     public static boolean isFirearmLoaded(ItemStack firearm) {
@@ -167,7 +167,7 @@ public class AmmoMechanicsMFR {
     }
 
     public static int getGunAmmoCount(ItemStack item) {
-        if (getArrowOnBow(item) == null) {
+        if (getArrowOnBow(item) == ItemStack.EMPTY) {
             return 0;
         }
         NBTTagCompound nbt = getNBT(item);
@@ -198,13 +198,13 @@ public class AmmoMechanicsMFR {
     public static void dropAmmo(World world, ItemStack firearm, double x, double y, double z) {
         ItemStack ammo = AmmoMechanicsMFR.getAmmo(firearm);
         ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(firearm);
-        if (ammo != null) {
+        if (!ammo.isEmpty()) {
             entityDropItem(world, x, y, z, ammo);
-            AmmoMechanicsMFR.setAmmo(firearm, null);
+            AmmoMechanicsMFR.setAmmo(firearm, ItemStack.EMPTY);
         }
-        if (loaded != null) {
+        if (!loaded.isEmpty()) {
             entityDropItem(world, x, y, z, loaded);
-            AmmoMechanicsMFR.putAmmoOnFirearm(firearm, null);
+            AmmoMechanicsMFR.putAmmoOnFirearm(firearm, ItemStack.EMPTY);
         }
     }
 
@@ -217,7 +217,7 @@ public class AmmoMechanicsMFR {
     }
 
     private static EntityItem entityDropItem(World world, double x, double y, double z, ItemStack item) {
-        if (item.getCount() != 0 && item.getItem() != null) {
+        if (item.getCount() != 0 && !item.isEmpty()) {
             EntityItem entityitem = new EntityItem(world, x, y, z, item);
             entityitem.setPickupDelay(10);
             world.spawnEntity(entityitem);
@@ -240,7 +240,7 @@ public class AmmoMechanicsMFR {
             if (!user.world.isRemote) {
                 dropContents(user.world, item, user);
             }
-            user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+            user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
         }
     }
 }

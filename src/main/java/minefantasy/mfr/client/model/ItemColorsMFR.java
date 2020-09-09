@@ -1,15 +1,9 @@
 package minefantasy.mfr.client.model;
 
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.tool.ItemAxe;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemMap;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block.basic;
 
-import minefantasy.mfr.block.tile.TileEntityWorldGenMarker;
+import minefantasy.mfr.tile.TileEntityWorldGenMarker;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

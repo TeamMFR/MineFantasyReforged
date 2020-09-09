@@ -1,0 +1,36 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreborn:trough",
+        "textures": {"texture": "minefantasyreborn:blocks/trough_basic"}
+    },
+    "variants": {
+        "normal": [{}],
+        "fill_count": {
+            "0": {},
+            "1": {
+                "submodel": "minefantasyreborn:water_1"
+            },
+            "2": {
+                "submodel": "minefantasyreborn:water_2"
+            },
+            "3": {
+                "submodel": "minefantasyreborn:water_3"
+            },
+            "4": {
+                "submodel": "minefantasyreborn:water_4"
+            },
+            "5": {
+                "submodel": "minefantasyreborn:water_5"
+            },
+            "6": {
+                "submodel": "minefantasyreborn:water_6"
+            }
+        },
+        "facing=north": { "y": 0 },
+        "facing=south": { "y": 180 },
+        "facing=west":  { "y": 270 },
+        "facing=east":  { "y": 90 }
+    }
+}

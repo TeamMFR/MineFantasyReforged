@@ -1,0 +1,14 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreborn:stone_chimney_thin",
+        "textures": {
+            "top": "minefantasyreborn:blocks/chimney_stone_top",
+            "sides": "minefantasyreborn:blocks/chimney_stone_side"
+        }
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

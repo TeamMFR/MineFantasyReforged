@@ -1,4 +1,4 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;

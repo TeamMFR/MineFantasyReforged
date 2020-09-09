@@ -2,21 +2,23 @@ package minefantasy.mfr.block.decor;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.tile.decor.TileEntityWoodDecor;
-import net.minecraft.block.BlockContainer;
+import minefantasy.mfr.block.basic.BlockTileEntity;
+import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
+import javax.annotation.Nonnull;
 
-public abstract class BlockWoodDecor extends BlockContainer {
+public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor> {
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
     private final String texture;
 
     public BlockWoodDecor(String texture) {
@@ -24,8 +26,16 @@ public abstract class BlockWoodDecor extends BlockContainer {
         this.texture = texture;
     }
 
+    @Nonnull
     @Override
-    public abstract TileEntity createNewTileEntity(World world, int meta);
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return null;
+    }
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
@@ -36,33 +46,6 @@ public abstract class BlockWoodDecor extends BlockContainer {
                 tile.setMaterial(material);
             }
         }
-    }
-
-    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityWoodDecor tile = getTile(world, pos);
-
-        ItemStack itemstack = new ItemStack(getItemDropped(state, world.rand, 0), 1, damageDropped(state));
-
-        itemstack = modifyDrop(tile, itemstack);
-
-        if (tile != null) {
-            if (itemstack != null) {
-                float f = world.rand.nextFloat() * 0.8F + 0.1F;
-                float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
-                float f2 = world.rand.nextFloat() * 0.8F + 0.1F;
-
-                EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, itemstack);
-
-                float f3 = 0.05F;
-                entityitem.motionX = (float) world.rand.nextGaussian() * f3;
-                entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
-                world.spawnEntity(entityitem);
-            }
-        }
-
-        super.breakBlock(world, pos, state);
     }
 
     protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {
@@ -78,12 +61,6 @@ public abstract class BlockWoodDecor extends BlockContainer {
             return (TileEntityWoodDecor) tile;
         }
         return null;
-    }
-
-    @Override
-    public ArrayList<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-        ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-        return ret;
     }
 
     public String getFullTexName() {

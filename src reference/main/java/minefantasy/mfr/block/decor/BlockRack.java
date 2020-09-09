@@ -1,6 +1,6 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.block.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityComponent;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -12,9 +12,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.packet.RackCommand;
+import minefantasy.mfr.network.RackCommand;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.client.renderer.texture.IIconRegister;

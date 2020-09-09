@@ -9,7 +9,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

@@ -15,8 +15,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import javax.annotation.Nullable;
+
 @SideOnly(Side.CLIENT)
-public class RenderDragonBreath extends Render {
+public class RenderDragonBreath extends Render<EntityDragonBreath> {
     public RenderDragonBreath() {
         super(Minecraft.getMinecraft().getRenderManager());
     }
@@ -29,11 +31,8 @@ public class RenderDragonBreath extends Render {
      * func_76986_a(T entity, double d, double d1, double d2, float f, float f1).
      * But JAD is pre 1.5 so doesn't do that.
      */
-    public void doRender(Entity entity, double x, double y, double z, float f, float f1) {
-        if (!(entity instanceof EntityDragonBreath))
-            return;
-        EntityDragonBreath breath = (EntityDragonBreath) entity;
-        if (breath.isInvisible())
+    public void doRender(EntityDragonBreath entity, double x, double y, double z, float f, float f1) {
+        if (entity.isInvisible())
             return;
 
         GL11.glPushMatrix();
@@ -45,21 +44,19 @@ public class RenderDragonBreath extends Render {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor3f(1, 1, 1);
-        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureHelperMFR.getResource(breath.getTextureName() + ".png"));
+        Minecraft.getMinecraft().getTextureManager().bindTexture(TextureHelperMFR.getResource(entity.getTextureName() + ".png"));
         GL11.glDepthMask(false);
         BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-        this.renderImg(breath, bufferBuilder);
+        this.renderImg(entity, bufferBuilder);
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glColor3f(1, 1, 1);
         GL11.glPopMatrix();
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless
-     * you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
+    @Nullable
+    @Override
+    protected ResourceLocation getEntityTexture(EntityDragonBreath entity) {
         return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }
 

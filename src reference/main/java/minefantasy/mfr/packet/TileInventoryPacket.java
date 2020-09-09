@@ -1,4 +1,4 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

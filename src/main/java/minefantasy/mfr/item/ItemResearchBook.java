@@ -43,7 +43,7 @@ public class ItemResearchBook extends ItemBaseMFR {
             ResearchLogic.syncData(user);
             RPGElements.syncAll(user);
         }
-        user.openGui(MineFantasyReborn.instance, 1, world, 0, -1, 0);
+        user.openGui(MineFantasyReborn.INSTANCE, 1, world, 0, -1, 0);
         return ActionResult.newResult(EnumActionResult.PASS, user.getHeldItem(hand));
     }
 

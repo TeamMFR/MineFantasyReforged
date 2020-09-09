@@ -1,8 +1,8 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.RoadPacket;
+import minefantasy.mfr.network.RoadPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

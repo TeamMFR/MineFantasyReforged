@@ -23,7 +23,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -32,7 +31,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -40,7 +38,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author Anonymous Productions
@@ -65,13 +62,13 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRe
 
         setMaxDamage(material.getMaxUses());
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     @Override
     public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
         if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)
-                && ItemLumberAxe.canAcceptCost(user)) {
+                && ItemLumberAxeMFR.canAcceptCost(user)) {
             int range = 2;
             for (int x1 = -range; x1 <= range; x1++) {
                 // for(int y1 = -1; y1 <= 1; y1 ++)
@@ -95,7 +92,7 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRe
                                     }
                                     world.setBlockToAir(pos);
                                     item.damageItem(1, user);
-                                    ItemLumberAxe.tirePlayer(user, 1F);
+                                    ItemLumberAxeMFR.tirePlayer(user, 1F);
                                 }
                             }
                         }

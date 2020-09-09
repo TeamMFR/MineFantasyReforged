@@ -1,7 +1,7 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
+import minefantasy.mfr.tile.TileEntityCrossbowBench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

@@ -3,6 +3,7 @@ package minefantasy.mfr.container;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
+import minefantasy.mfr.container.slots.SlotReload;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;

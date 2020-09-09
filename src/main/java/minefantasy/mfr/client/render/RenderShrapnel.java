@@ -15,8 +15,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import javax.annotation.Nullable;
+
 @SideOnly(Side.CLIENT)
-public class RenderShrapnel extends Render {
+public class RenderShrapnel extends Render<EntityShrapnel> {
     private String tex;
 
     public RenderShrapnel(String tex) {
@@ -24,13 +26,8 @@ public class RenderShrapnel extends Render {
         this.tex = tex;
     }
 
-    @Override
-    public void doRender(Entity entity, double x, double y, double z, float xr, float yr) {
-        if (entity instanceof EntityShrapnel) {
-            render(entity, ((EntityShrapnel) entity).getTexture(), x, y, z, xr, yr);
-        } else {
-            render(entity, this.tex, x, y, z, xr, yr);
-        }
+    public void doRender(EntityShrapnel entity, double x, double y, double z, float xr, float yr) {
+        render(entity, entity.getTexture(), x, y, z, xr, yr);
     }
 
     public void render(Entity entity, String tex, double x, double y, double z, float xr, float yr) {
@@ -94,12 +91,13 @@ public class RenderShrapnel extends Render {
         GL11.glPopMatrix();
     }
 
-    @Override
-    protected ResourceLocation getEntityTexture(Entity entity) {
-        return null;
-    }
-
     private void loadTexture(String image) {
         bindTexture(TextureHelperMFR.getResource(image));
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getEntityTexture(EntityShrapnel entity) {
+        return null;
     }
 }

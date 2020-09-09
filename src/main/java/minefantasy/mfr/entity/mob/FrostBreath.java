@@ -1,21 +1,22 @@
 package minefantasy.mfr.entity.mob;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityDragonBreath;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
-import net.minecraft.potion.Potion;
+import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FrostBreath extends DragonBreath {
 
@@ -41,7 +42,7 @@ public class FrostBreath extends DragonBreath {
             if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity((EntityLivingBase) target)) {
                 StaminaBar.modifyStaminaValue((EntityLivingBase) target, -1F);
             }
-            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 100, 2));
+            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));
         }
     }
 
@@ -56,19 +57,19 @@ public class FrostBreath extends DragonBreath {
         if (!world.isRemote && (impact || instance.rand.nextInt(20) == 0)) {
             if (ConfigMobs.dragonGriefGeneral && world.isAirBlock(pos.add(0,1,0))) {
                 if (hit.isSideSolid(world, pos, EnumFacing.UP)) {
-                    world.setBlockState(pos.add(0,1,0), (IBlockState) Blocks.SNOW_LAYER);
+                    world.setBlockState(pos.add(0,1,0), Blocks.SNOW_LAYER.getDefaultState());
                 }
-
+                Block block = hit.getBlock();
                 if (!world.getGameRules().getBoolean("mobGriefing"))
                     return;
-                if (hit == Blocks.WATER || hit == Blocks.FLOWING_WATER) {
-                    world.setBlockState(pos, (IBlockState) Blocks.ICE);
+                if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
+                    world.setBlockState(pos, Blocks.ICE.getDefaultState());
                 }
-                if (hit == Blocks.WATER || hit == Blocks.LAVA) {
-                    world.setBlockState(pos, (IBlockState) Blocks.OBSIDIAN);
+                if (block == Blocks.WATER || block == Blocks.LAVA) {
+                    world.setBlockState(pos,  Blocks.OBSIDIAN.getDefaultState());
                 }
-                if (hit == Blocks.WATER || hit == Blocks.FLOWING_LAVA) {
-                    world.setBlockState(pos, (IBlockState) Blocks.COBBLESTONE);
+                if (block == Blocks.WATER || block == Blocks.FLOWING_LAVA) {
+                    world.setBlockState(pos,  Blocks.COBBLESTONE.getDefaultState());
                 }
             }
         }

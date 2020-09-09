@@ -1,9 +1,9 @@
-package minefantasy.mfr.block.tile.decor;
+package minefantasy.mfr.tile.decor;
 
 import minefantasy.mfr.api.heating.IQuenchBlock;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.TroughPacket;
+import minefantasy.mfr.network.TroughPacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;

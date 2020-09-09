@@ -2,7 +2,6 @@ package minefantasy.mfr.api.helpers;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.armour.IElementalResistance;
-import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IParryable;
@@ -14,12 +13,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EnumHand;
@@ -95,7 +94,7 @@ public class TacticalManager {
                 && !StaminaBar.isAnyStamina(user, false)) {
             return false;
         }
-        if (user.getHeldItemMainhand() != null && !canWeaponBlock(user.getHeldItemMainhand())) {
+        if (!user.getHeldItemMainhand().isEmpty() && !canWeaponBlock(user.getHeldItemMainhand())) {
             return false;
         }
         if (user instanceof EntityPlayer) {
@@ -115,12 +114,12 @@ public class TacticalManager {
             return false;
         }
         int confusion = 0;
-        if (user.getActivePotionEffect(Potion.getPotionById(9)) != null) {
-            confusion = user.getActivePotionEffect(Potion.getPotionById(9)).getAmplifier() + 1;
+        if (user.getActivePotionEffect(MobEffects.NAUSEA) != null) {
+            confusion = user.getActivePotionEffect(MobEffects.NAUSEA).getAmplifier() + 1;
         }
         float arc = 20;// DEFAULT
 
-        if (weapon != null && weapon.getItem() instanceof IParryable) {
+        if (!weapon.isEmpty() && weapon.getItem() instanceof IParryable) {
             IParryable parry = (IParryable) weapon.getItem();
             if (!parry.canUserParry(user)) {
                 return false;
@@ -155,7 +154,7 @@ public class TacticalManager {
         if (!user.isImmuneToFire() && user.isBurning()) {
             return false;// If burning and can't take the heat.. can't block!
         }
-        if (user.getHeldItem(EnumHand.MAIN_HAND) != null) {
+        if (!user.getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
             return user.getHeldItem(EnumHand.MAIN_HAND).getItem().getItemUseAction(user.getHeldItem(EnumHand.MAIN_HAND)) == EnumAction.BLOCK;
         }
         return false;
@@ -289,7 +288,7 @@ public class TacticalManager {
 
         Iterable<ItemStack> armour = user.getArmorInventoryList();
         for (ItemStack stack: armour) {
-            if (stack != null && stack.getItem() instanceof IElementalResistance) {
+            if (!stack.isEmpty()  && stack.getItem() instanceof IElementalResistance) {
                 float modifier = ((IElementalResistance) stack.getItem()).getMagicResistance(stack, source);
                 modifier *= ArmourCalculator.sizes[3 - ((ItemArmor) stack.getItem()).armorType.getIndex()];
                 resistance -= modifier;
@@ -307,7 +306,7 @@ public class TacticalManager {
 
         Iterable<ItemStack> armour = user.getArmorInventoryList();
         for (ItemStack stack: armour) {
-            if (stack != null && stack.getItem() instanceof IElementalResistance) {
+            if (!stack.isEmpty() && stack.getItem() instanceof IElementalResistance) {
                 float modifier = ((IElementalResistance) stack.getItem()).getFireResistance(stack, source);
                 modifier *= ArmourCalculator.sizes[3 - ((ItemArmor) stack.getItem()).armorType.getIndex()];
 
@@ -319,7 +318,7 @@ public class TacticalManager {
 
     public static boolean resistArrow(EntityLivingBase user, DamageSource source, float dam) {
         Entity hitter = source.getTrueSource();
-        if (hitter == null || !isArrow(hitter)) {
+        if (!isArrow(hitter)) {
             return false;
         }
 
@@ -328,7 +327,7 @@ public class TacticalManager {
 
         Iterable<ItemStack> armour = user.getArmorInventoryList();
         for (ItemStack stack: armour) {
-            if (stack != null && stack.getItem() instanceof IElementalResistance) {
+            if (!stack.isEmpty() && stack.getItem() instanceof IElementalResistance) {
                 float modifier = ((IElementalResistance) stack.getItem()).getArrowDeflection(stack, source);
                 modifier *= ArmourCalculator.sizes[((ItemArmor) stack.getItem()).armorType.getIndex()];
 
@@ -359,7 +358,7 @@ public class TacticalManager {
 
         Iterable<ItemStack> armour = user.getArmorInventoryList();
         for (ItemStack stack: armour) {
-            if (stack != null && stack.getItem() instanceof IElementalResistance) {
+            if (!stack.isEmpty() && stack.getItem() instanceof IElementalResistance) {
                 float modifier = ((IElementalResistance) stack.getItem()).getBaseResistance(stack, source);
                 modifier *= ArmourCalculator.sizes[((ItemArmor) stack.getItem()).armorType.getIndex()];
                 resistance -= modifier;
@@ -470,16 +469,16 @@ public class TacticalManager {
      * @param steal    If the attacker should wield the target's weapon
      */
     public static boolean tryDisarm(EntityLivingBase attacker, EntityLivingBase target, boolean steal) {
-        if (target.getHeldItemMainhand() == null) {
+        if (target.getHeldItemMainhand().isEmpty()) {
             return false;
         }
 
-        if (attacker != null && steal && attacker.getHeldItemMainhand() == null) {
+        if (attacker != null && steal && attacker.getHeldItemMainhand().isEmpty()) {
             attacker.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, target.getHeldItemMainhand().copy());
         } else {
             target.entityDropItem(target.getActiveItemStack(), 1.0F);
         }
-        target.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+        target.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
         return true;
     }
 

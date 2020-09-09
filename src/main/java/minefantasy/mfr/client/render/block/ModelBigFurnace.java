@@ -1,111 +1,110 @@
 package minefantasy.mfr.client.render.block;
+// Made with Blockbench 3.6.5
 
+import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class ModelBigFurnace extends ModelBase {
-    ModelRenderer Wall4t;
-    ModelRenderer Wall1;
-    ModelRenderer Wall2;
-    ModelRenderer Top;
-    ModelRenderer Wall3;
-    ModelRenderer Wall4;
-    ModelRenderer lava;
-    ModelRenderer Base;
-    ModelRenderer contents;
+	private final ModelRenderer Wall4t;
+	private final ModelRenderer Wall1;
+	private final ModelRenderer Wall2;
+	private final ModelRenderer Top;
+	private final ModelRenderer Wall3;
+	private final ModelRenderer Wall4;
+	private final ModelRenderer lava;
+	private final ModelRenderer Base;
+	private final ModelRenderer contents;
+	public final ModelRenderer Door;
 
-    public ModelBigFurnace() {
-        textureWidth = 128;
-        textureHeight = 64;
+	public ModelBigFurnace() {
+		textureWidth = 128;
+		textureHeight = 64;
 
-        Wall4t = new ModelRenderer(this, 76, 50);
-        Wall1 = new ModelRenderer(this, 0, 27);
-        Wall2 = new ModelRenderer(this, 0, 27);
-        Top = new ModelRenderer(this, 0, 0);
-        Wall3 = new ModelRenderer(this, 48, 50);
-        Wall4 = new ModelRenderer(this, 76, 60);
-        lava = new ModelRenderer(this, 26, 27);
-        Base = new ModelRenderer(this, 0, 0);
-        contents = new ModelRenderer(this, 0, 41);
+		Wall4t = new ModelRenderer(this);
+		Wall4t.setRotationPoint(0.0F, 11.5F, -7.0F);
+		setRotationAngle(Wall4t, 0.0F, 0.0F, 0.0F);
+		Wall4t.setTextureOffset(76, 50).addBox(-6.0F, -1.5F, -1.0F, 12, 3, 2, true);
 
-        Wall4t.addBox(-6F, -12F, -8F, 12, 3, 2);
-        Wall4t.setRotationPoint(0F, 0F, 0F);
-        Wall4t.setTextureSize(128, 64);
-        Wall4t.mirror = true;
-        setRotation(Wall4t, 0F, 1.570796F, 0F);
+		Wall1 = new ModelRenderer(this);
+		Wall1.setRotationPoint(7.0F, 16.0F, 0.0F);
+		setRotationAngle(Wall1, 0.0F, 1.5708F, 0.0F);
+		Wall1.setTextureOffset(0, 27).addBox(-8.0F, -6.0F, -1.0F, 16, 12, 2, true);
 
-        Wall1.addBox(-8F, -12F, 6F, 16, 12, 2);
-        Wall1.setRotationPoint(0F, 0F, 0F);
-        Wall1.setTextureSize(128, 64);
-        Wall1.mirror = true;
-        setRotation(Wall1, 0F, 3.141593F, 0F);
+		Wall2 = new ModelRenderer(this);
+		Wall2.setRotationPoint(-6.0F, 16.0F, 0.0F);
+		setRotationAngle(Wall2, 0.0F, -1.5708F, 0.0F);
+		Wall2.setTextureOffset(0, 27).addBox(-8.0F, -6.0F, 0.0F, 16, 12, 2, true);
 
-        Wall2.addBox(-8F, -12F, 6F, 16, 12, 2);
-        Wall2.setRotationPoint(0F, 0F, 0F);
-        Wall2.setTextureSize(128, 64);
-        Wall2.mirror = true;
-        setRotation(Wall2, 0F, 0F, 0F);
+		Top = new ModelRenderer(this);
+		Top.setRotationPoint(0.0F, 9.0F, 0.0F);
+		Top.setTextureOffset(0, 0).addBox(-8.0F, -1.0F, -8.0F, 16, 2, 16, true);
 
-        Top.addBox(-8F, -14F, -8F, 16, 2, 16);
-        Top.setRotationPoint(0F, 0F, 0F);
-        Top.setTextureSize(128, 64);
-        Top.mirror = true;
-        setRotation(Top, 0F, 0F, 0F);
+		Wall3 = new ModelRenderer(this);
+		Wall3.setRotationPoint(0.0F, 16.0F, 7.0F);
+		setRotationAngle(Wall3, 0.0F, 0.0F, 0.0F);
+		Wall3.setTextureOffset(48, 50).addBox(-6.0F, -6.0F, -1.0F, 12, 12, 2, true);
 
-        Wall3.addBox(-6F, -12F, 6F, 12, 12, 2);
-        Wall3.setRotationPoint(0F, 0F, 0F);
-        Wall3.setTextureSize(128, 64);
-        Wall3.mirror = true;
-        setRotation(Wall3, 0F, 1.570796F, 0F);
+		Wall4 = new ModelRenderer(this);
+		Wall4.setRotationPoint(0.0F, 21.0F, -7.0F);
+		setRotationAngle(Wall4, 0.0F, 0.0F, 0.0F);
+		Wall4.setTextureOffset(76, 60).addBox(-6.0F, -1.0F, -1.0F, 12, 2, 2, true);
 
-        Wall4.addBox(-6F, -2F, -8F, 12, 2, 2);
-        Wall4.setRotationPoint(0F, 0F, 0F);
-        Wall4.setTextureSize(128, 64);
-        Wall4.mirror = true;
-        setRotation(Wall4, 0F, 1.570796F, 0F);
+		lava = new ModelRenderer(this);
+		lava.setRotationPoint(0.0F, 20.0F, 0.0F);
+		lava.setTextureOffset(26, 27).addBox(-5.0F, 0.0F, -5.0F, 10, 0, 10, true);
 
-        lava.addBox(-5F, -2F, -5F, 10, 0, 10);
-        lava.setRotationPoint(0F, 0F, 0F);
-        lava.setTextureSize(128, 64);
-        lava.mirror = true;
-        setRotation(lava, 0F, 0F, 0F);
+		Base = new ModelRenderer(this);
+		Base.setRotationPoint(0.0F, 23.0F, 0.0F);
+		setRotationAngle(Base, 3.1416F, 0.0F, 0.0F);
+		Base.setTextureOffset(0, 0).addBox(-8.0F, -1.0F, -8.0F, 16, 2, 16, true);
 
-        Base.addBox(-8F, -2F, -8F, 16, 2, 16);
-        Base.setRotationPoint(0F, 0F, 0F);
-        Base.setTextureSize(128, 64);
-        Base.mirror = true;
-        setRotation(Base, 3.141593F, 0F, 0F);
+		contents = new ModelRenderer(this);
+		contents.setRotationPoint(0.0F, 21.5F, 0.0F);
+		contents.setTextureOffset(0, 41).addBox(-6.0F, -0.5F, -6.0F, 12, 1, 12, true);
 
-        contents.addBox(-6F, -1F, -6F, 12, 1, 12);
-        contents.setRotationPoint(0F, 0F, 0F);
-        contents.setTextureSize(128, 64);
-        contents.mirror = true;
-        setRotation(contents, 0F, 0F, 0F);
-    }
+		Door = new ModelRenderer(this);
+		Door.setRotationPoint(0.0F, 21.0F, -7.0F);
+		Door.setTextureOffset(73, 15).addBox(-1.1F, -9.0F, -6.0F, 1, 9, 12, false);
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        renderModel(false, f5);
-    }
+	}
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
-    }
+	public void renderModel(boolean lit, float angle, float f) {
+		if (lit) {
+			lava.render(f);
+		}
 
-    public void renderModel(boolean lit, float f) {
-        if (lit) {
-            lava.render(f);
-        }
-        Top.render(f);
-        contents.render(f);
-        Base.render(f);
-        Wall4t.render(f);
-        Wall1.render(f);
-        Wall2.render(f);
-        Wall3.render(f);
-        Wall4.render(f);
-    }
+		setRotationAngle(Door, 0.0F, -1.5708F, angle);
+		Door.renderWithRotation(f);
+
+		Top.render(f);
+		contents.render(f);
+		Base.render(f);
+		Wall4t.render(f);
+		Wall1.render(f);
+		Wall2.render(f);
+		Wall3.render(f);
+		Wall4.render(f);
+
+	}
+
+	public void renderModel(float f) {
+		Top.render(f);
+		Base.render(f);
+		Wall4t.render(f);
+		Wall1.render(f);
+		Wall2.render(f);
+		Wall3.render(f);
+		Wall4.render(f);
+		Door.render(f);
+	}
+
+	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
+	}
 }

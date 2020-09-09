@@ -1,6 +1,5 @@
 package minefantasy.mfr.item.tool.crafting;
 
-import codechicken.lib.model.ModelRegistryHelper;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -18,7 +17,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.Optional.Interface;
 import net.minecraftforge.fml.common.Optional.InterfaceList;
-import net.minecraftforge.fml.common.Optional.Method;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
@@ -34,7 +32,6 @@ import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLever;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -51,7 +48,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author Anonymous Productions
@@ -91,7 +87,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
         shiftRotations.add(BlockChest.class);
         blacklistedRotations.add(BlockBed.class);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     @Override

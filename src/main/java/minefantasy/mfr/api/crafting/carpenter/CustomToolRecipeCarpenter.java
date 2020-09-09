@@ -19,8 +19,8 @@ public class CustomToolRecipeCarpenter extends ShapedCarpenterRecipes {
     private boolean checkMatch(CarpenterCraftMatrix matrix, int x, int y, boolean b) {
         String wood = null;
         String metal = null;
-        for (int var5 = 0; var5 < ShapelessCarpenterRecipes.globalWidth; ++var5) {
-            for (int var6 = 0; var6 < ShapelessCarpenterRecipes.globalHeight; ++var6) {
+        for (int var5 = 0; var5 < ShapelessCarpenterRecipes.GLOBAL_WIDTH; ++var5) {
+            for (int var6 = 0; var6 < ShapelessCarpenterRecipes.GLOBAL_HEIGHT; ++var6) {
                 int var7 = var5 - x;
                 int var8 = var6 - y;
                 ItemStack recipeItem = null;

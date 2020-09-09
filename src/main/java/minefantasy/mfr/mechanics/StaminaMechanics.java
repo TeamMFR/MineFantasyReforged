@@ -6,24 +6,26 @@ import minefantasy.mfr.api.stamina.IStaminaWeapon;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigStamina;
-import minefantasy.mfr.packet.StaminaPacket;
+import minefantasy.mfr.network.HitSoundPacket;
+import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.network.StaminaPacket;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.WorldServer;
 
 public class StaminaMechanics {
     private static boolean hurtAdreneline = true;
-    private static int bowSeconds = 30;
 
     public static void tickEntity(EntityLivingBase entity) {
         if (entity.ticksExisted % 20 == 0) {
@@ -75,16 +77,16 @@ public class StaminaMechanics {
         // out of stamina
         if (values[0] <= 0) {
             if (ConfigStamina.affectSpeed) {
-                entity.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 2));
+                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2));
             }
-            entity.addPotionEffect(new PotionEffect(Potion.getPotionById(17), 2));
+            entity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 2));
             // Drain air when exhausted, you will drown faster
             if (isInWater(entity) && entity.getAir() > -20 && entity.ticksExisted % 20 == 0) {
                 entity.setAir(entity.getAir() - 1);
             }
             if (entity instanceof EntityPlayer && TacticalManager.shouldStaminaBlock) {
-                if (((EntityPlayer) entity).isHandActive() && (entity.getHeldItem(EnumHand.MAIN_HAND) != null && entity.getHeldItem(EnumHand.MAIN_HAND).getItemUseAction() == EnumAction.BLOCK)) {
-                    ((EntityPlayer) entity).stopActiveHand();
+                if (entity.isHandActive() && (!entity.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && entity.getHeldItem(EnumHand.MAIN_HAND).getItemUseAction() == EnumAction.BLOCK)) {
+                    entity.stopActiveHand();
                 }
             }
         }
@@ -113,7 +115,7 @@ public class StaminaMechanics {
 
     private static void syncStamina(EntityPlayer player, float[] stam) {
         if (!player.world.isRemote) {
-            ((WorldServer) player.world).getEntityTracker().sendToTracking(player, new StaminaPacket(stam, player).generatePacket());
+            NetworkHandler.sendToPlayer((EntityPlayerMP) player, new StaminaPacket(stam, player));
         }
     }
 
@@ -130,9 +132,10 @@ public class StaminaMechanics {
             value += value += (5F / sprintingSeconds) * ConfigStamina.sprintModifier;
         }
         if (user instanceof EntityPlayer) {
-            if (user.getHeldItem(EnumHand.MAIN_HAND) != null && ((EntityPlayer) user).isHandActive() && ConfigStamina.bowModifier > 0) {
+            if (!user.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && user.isHandActive() && ConfigStamina.bowModifier > 0) {
                 if (user.getHeldItem(EnumHand.MAIN_HAND).getItemUseAction() == EnumAction.BOW) {
                     // Item gets factored in with bow
+                    int bowSeconds = 30;
                     value += StaminaBar.getDefaultMax(user) / 20F / bowSeconds * ConfigStamina.bowModifier;
                 }
             }
@@ -147,7 +150,7 @@ public class StaminaMechanics {
         if (StaminaBar.getIdleTime(user) > 0) {
             return 0;
         }
-        if (isInWater(user) && user.getActivePotionEffect(Potion.getPotionById(13)) == null) {
+        if (isInWater(user) && user.getActivePotionEffect(MobEffects.WATER_BREATHING) == null) {
             return 0;// can't catch your breath when underwater
         }
         // The base time it takes to regen
@@ -211,7 +214,7 @@ public class StaminaMechanics {
         ItemStack weapon = user.getHeldItemMainhand();
         float value = 0.0F;
 
-        if (weapon != null) {
+        if (!weapon.isEmpty()) {
             value = 2F;
 
             if (weapon.getItem() instanceof IStaminaWeapon) {

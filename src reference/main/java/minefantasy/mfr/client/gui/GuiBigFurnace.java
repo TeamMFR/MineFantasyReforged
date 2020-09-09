@@ -1,7 +1,7 @@
-package minefantasy.mfr.client.gui;
+package minefantasy.mfr.gui;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.container.ContainerBigFurnace;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;

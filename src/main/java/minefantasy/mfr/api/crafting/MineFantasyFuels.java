@@ -44,7 +44,7 @@ public class MineFantasyFuels {
      * How many smelts (blast furn or bloomery) this can give as carbon
      */
     public static int getCarbon(ItemStack item) {
-        if (item == null)
+        if (item == ItemStack.EMPTY)
             return 0;
 
         for (int i : OreDictionary.getOreIDs(item)) {

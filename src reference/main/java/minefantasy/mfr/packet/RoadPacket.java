@@ -1,7 +1,7 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.block.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityRoad;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.knowledge.IArtefact;
@@ -8,7 +8,7 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.ResearchTablePacket;
+import minefantasy.mfr.network.ResearchTablePacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;

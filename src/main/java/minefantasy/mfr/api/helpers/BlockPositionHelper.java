@@ -17,9 +17,9 @@ public class BlockPositionHelper {
      * @param yBound2   the y max boundry of the block
      * @param xSlots    the slot count x
      * @param ySlots    the slot count y
-     * @param direction the direction the block is facing
+     * @param facing the facing the block is facing
      */
-    public static int[] getCoordsFor(float clickX, float clickY, float xBound, float xBound2, float yBound, float yBound2, int xSlots, int ySlots, int direction) {
+    public static int[] getCoordsFor(float clickX, float clickY, float xBound, float xBound2, float yBound, float yBound2, int xSlots, int ySlots, EnumFacing facing) {
         if (clickX < xBound || clickX > xBound2 || clickY < yBound || clickY > yBound2) {
             return null;
         }
@@ -51,7 +51,7 @@ public class BlockPositionHelper {
                 ySlot = yT;
             }
         }
-        return translateCoords(xSlot, ySlot, xSlots, ySlots, direction);
+        return translateCoords(xSlot, ySlot, xSlots, ySlots, facing);
     }
 
     /**
@@ -61,10 +61,9 @@ public class BlockPositionHelper {
      * @param y    the slot y
      * @param maxX the slot count x
      * @param maxY the slot count y
-     * @param direction  the facing direction
+     * @param facing  the facing facing
      */
-    public static int[] translateCoords(int x, int y, int maxX, int maxY, int direction) {
-        EnumFacing facing = EnumFacing.getFacingFromVector(x, y, direction);
+    public static int[] translateCoords(int x, int y, int maxX, int maxY, EnumFacing facing) {
         if (facing == EnumFacing.NORTH) {
             int newX = (maxX - x - 1);
             int newY = (maxY - y - 1);

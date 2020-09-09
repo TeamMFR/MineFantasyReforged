@@ -6,7 +6,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.block.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -22,7 +22,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -32,7 +31,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -40,7 +38,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * @author Anonymous Productions
@@ -64,7 +61,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
         this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));
         this.name = name;
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     @Override

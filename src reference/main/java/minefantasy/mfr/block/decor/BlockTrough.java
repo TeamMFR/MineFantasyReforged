@@ -1,8 +1,8 @@
 package minefantasy.mfr.block.decor;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
-import minefantasy.mfr.block.tile.decor.TileEntityWoodDecor;
+import minefantasy.mfr.tile.decor.TileEntityTrough;
+import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;

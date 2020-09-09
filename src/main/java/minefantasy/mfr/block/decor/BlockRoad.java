@@ -1,7 +1,6 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.item.tool.advanced.ItemMattock;
 import net.minecraft.block.Block;
@@ -24,9 +23,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.List;
 import java.util.Random;
 
 public class BlockRoad extends BlockContainer {

@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.crafting;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.TileEntityTanningRack;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

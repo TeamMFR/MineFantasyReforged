@@ -23,7 +23,7 @@ public class TongsHelper {
     /**
      * Empties the item
      *
-     * @return
+     * @return ItemStack
      */
     public static ItemStack clearHeldItem(ItemStack tongs, EntityLivingBase user) {
         if (!user.world.isRemote) {
@@ -39,7 +39,7 @@ public class TongsHelper {
      * Picks up an item
      */
     public static boolean trySetHeldItem(ItemStack tongs, ItemStack item) {
-        if (item == null || item.getItem() == null || !isHotItem(item) || item.getItem() instanceof ItemBlock) {
+        if (item.isEmpty() || item.getItem() == null || !isHotItem(item) || item.getItem() instanceof ItemBlock) {
             return false;
         }
         NBTTagCompound nbt = getNBT(tongs);
@@ -84,7 +84,7 @@ public class TongsHelper {
                 }
             }
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -102,7 +102,7 @@ public class TongsHelper {
                 }
             }
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -136,7 +136,7 @@ public class TongsHelper {
 
     public static float getQuenced(World world, BlockPos pos) {
         TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof IQuenchBlock) {
+        if (tile instanceof IQuenchBlock) {
             return ((IQuenchBlock) tile).quench();
         }
         return -1F;

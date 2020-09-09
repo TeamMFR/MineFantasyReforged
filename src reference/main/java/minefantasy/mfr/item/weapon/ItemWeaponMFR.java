@@ -29,7 +29,7 @@ import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.weapon.*;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;

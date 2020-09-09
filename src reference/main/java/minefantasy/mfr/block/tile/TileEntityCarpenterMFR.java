@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.carpenter.CarpenterCraftMatrix;
 import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
@@ -10,7 +10,7 @@ import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerCarpenterMFR;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.CarpenterPacket;
+import minefantasy.mfr.network.CarpenterPacket;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

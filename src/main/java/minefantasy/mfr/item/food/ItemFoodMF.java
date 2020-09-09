@@ -9,21 +9,21 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -61,7 +61,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
 
         setCreativeTab(CreativeTabMFR.tabFood);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     public ItemFoodMF(String name, int hunger, float saturation, boolean isMeat, int rarity) {
@@ -123,7 +123,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
         }
 
         if (this == FoodListMFR.BERRIES_JUICY) {
-            PotionEffect poison = consumer.getActivePotionEffect(Potion.getPotionById(19));
+            PotionEffect poison = consumer.getActivePotionEffect(MobEffects.POISON);
             if (poison != null) {
                 poison.addCurativeItem(food);
                 consumer.curePotionEffects(food);
@@ -283,7 +283,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
         } else// Food
         {
             ItemStack left = getLeftOver(food);
-            if (left != null) {
+            if (!left.isEmpty()) {
                 if (!consumer.inventory.addItemStackToInventory(left) && !consumer.world.isRemote) {
                     consumer.entityDropItem(left, 1.0F);
                 }

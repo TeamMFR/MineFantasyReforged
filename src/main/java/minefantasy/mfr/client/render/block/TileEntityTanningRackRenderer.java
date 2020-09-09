@@ -1,22 +1,23 @@
 package minefantasy.mfr.client.render.block;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
+import codechicken.lib.render.item.IItemRenderer;
+import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.block.crafting.BlockTanningRack;
+import minefantasy.mfr.tile.TileEntityTanningRack;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.item.Item;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.animation.FastTESR;
+import net.minecraftforge.common.model.IModelState;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
-public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<TileEntityTanningRack> {
+public class TileEntityTanningRackRenderer <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
 
     private ModelEngTanningRack engmodel;
 
@@ -24,38 +25,22 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<Til
         engmodel = new ModelEngTanningRack();
     }
 
-    public void renderAModelAt(TileEntityTanningRack tile, double d, double d1, double d2, float f) {
-        if (tile != null)
-            ;
-        int i = 0;
-        if (tile.getWorld() != null) {
-            i = tile.getBlockMetadata();
+    @Override
+    public void renderTileEntityFast(T te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+        renderAModelAt((TileEntityTanningRack) te, x, y, z);
+    }
+
+    public void renderAModelAt(TileEntityTanningRack tile, double d, double d1, double d2) {
+        EnumFacing facing = EnumFacing.NORTH;
+        if (tile.hasWorld()) {
+            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+            facing = state.getValue(BlockTanningRack.FACING);
         }
 
-        int j = 90 * i;
-
-        if (i == 0) {
-            j = 0;
-        }
-
-        if (i == 1) {
-            j = 270;
-        }
-
-        if (i == 2) {
-            j = 180;
-        }
-
-        if (i == 3) {
-            j = 90;
-        }
-        if (i == 4) {
-            j = 90;
-        }
-        bindTextureByName("textures/models/tileentity/tanner" + tile.tex + ".png");
+        this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/tanner_metal.png"));
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.45F, (float) d2 + 0.5F);
-        GL11.glRotatef(j, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
         GL11.glScalef(1.0F, -1F, -1F);
         if (tile.isAutomated()) {
             engmodel.renderModel(0.0625F);
@@ -66,17 +51,17 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<Til
             engmodel.rotateLever(tile.acTime);
             engmodel.renderLever(0.0625F);
         }
-        //renderHungItem(tile, d, d1, d2, f);
-        //TODO fix renderHungItem
+
+        renderHungItem(tile);
+
         GL11.glPopMatrix();
 
     }
 
-    public void renderInvModel(String tex, boolean isAuto, double d, double d1, double d2, float f) {
+    public void renderInvModel(boolean isAuto, double x, double y, double z) {
         int j = 90;
-        bindTextureByName("textures/models/tileentity/tanner" + tex + ".png");
         GL11.glPushMatrix();
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.45F, (float) d2 + 0.5F);
+        GL11.glTranslatef((float) x + 0.5F, (float) y + 1.45F, (float) z + 0.5F);
         GL11.glRotatef(j, 0.0F, 1.0F, 0.0F);
         GL11.glScalef(1.0F, -1F, -1F);
         if (isAuto) {
@@ -91,46 +76,41 @@ public class TileEntityTanningRackRenderer extends TileEntitySpecialRenderer<Til
     }
 
     @Override
-    protected void bindTexture(ResourceLocation p_147499_1_) {
-        TextureManager texturemanager = TileEntityRendererDispatcher.instance.renderEngine;
+    public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
 
-        if (texturemanager != null) {
-            texturemanager.bindTexture(p_147499_1_);
+        GlStateManager.pushMatrix();
+
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/tanner_metal.png"));
+
+        renderInvModel(true, 0F, 0F, 0F);
+
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        GlStateManager.popMatrix();
+    }
+
+    private void renderHungItem(TileEntityTanningRack tile) {
+        ItemStack stack = tile.getInventory().getStackInSlot(0);
+        if (!stack.isEmpty()) {
+            GL11.glScalef(0.9F, 0.9F, 0.9F);
+            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
+            GL11.glTranslatef(0.0F, -1.1F, 0.0F);
+            Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
         }
     }
 
-    private void bindTextureByName(String image) {
-        bindTexture(TextureHelperMFR.getResource(image));
+    @Override
+    public IModelState getTransforms() {
+        return TransformUtils.DEFAULT_BLOCK;
     }
 
-    public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
-        renderAModelAt((TileEntityTanningRack) tileentity, d, d1, d2, f);
+    @Override
+    public boolean isAmbientOcclusion() {
+        return false;
     }
 
-//    private void renderHungItem(TileEntityTanningRack tile, double d, double d1, double d2, float f) {
-    ////        Minecraft mc = Minecraft.getMinecraft();
-    ////        ItemStack itemstack = tile.getStackInSlot(0);
-    ////        if (itemstack != null && itemstack.getItem().getIconFromDamage(itemstack.getItemDamage()) != null) {
-    ////            Item item = itemstack.getItem();
-    ////            mc.renderEngine.bindTexture(TextureMap.locationItemsTexture);
-    ////
-    ////            Tessellator image = Tessellator.instance;
-    ////            IIcon index = item.getIconFromDamage(itemstack.getItemDamage());
-    ////            float x1 = index.getMinU();
-    ////            float x2 = index.getMaxU();
-    ////            float y1 = index.getMinV();
-    ////            float y2 = index.getMaxV();
-    ////            float xPos = 0.5F;
-    ////            float yPos = -0.5F;
-    ////            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-    ////            GL11.glTranslatef(-xPos, -yPos, 0.0F);
-    ////            float var13 = 1F;
-    ////            GL11.glScalef(var13, var13, var13);
-    ////            GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-    ////            GL11.glTranslatef(-1F, -1F, 0.0F);
-    ////            ItemRenderer.renderItemIn2D(image, x2, y1, x1, y2, index.getIconWidth(), index.getIconHeight(), 0.0625F);
-    ////        }
-    ////
-    ////    }
-    //TODO Render Item in Rack
+    @Override
+    public boolean isGui3d() {
+        return true;
+    }
 }

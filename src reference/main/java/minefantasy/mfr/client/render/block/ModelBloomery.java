@@ -1,67 +1,57 @@
-package minefantasy.mfr.client.render.block;
+// Made with Blockbench 3.5.2
+// Exported for Minecraft version 1.15
+// Paste this class into your mod and generate all required imports
 
-import minefantasy.mfr.block.tile.TileEntityBloomery;
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 
-/**
- * @author Anonymous Productions
- * <p>
- * Sources are provided for educational reasons. though small bits of
- * code, or methods can be used in your own creations.
- */
-public class ModelBloomery extends ModelBase {
-    // fields
-    ModelRenderer top;
-    ModelRenderer base;
-    ModelRenderer neck;
-    ModelRenderer body;
-    ModelRenderer bloom;
+public class custom_model extends EntityModel<Entity> {
+	private final ModelRenderer top;
+	private final ModelRenderer base;
+	private final ModelRenderer neck;
+	private final ModelRenderer body;
+	private final ModelRenderer bloom;
 
-    public ModelBloomery() {
-        textureWidth = 128;
-        textureHeight = 64;
+	public custom_model() {
+		textureWidth = 128;
+		textureHeight = 64;
 
-        top = new ModelRenderer(this, 84, 43);
-        top.addBox(-5.5F, 0F, -5.5F, 11, 2, 11);
-        top.setRotationPoint(0F, 0F, 0F);
-        top.setTextureSize(128, 64);
+		top = new ModelRenderer(this);
+		top.setRotationPoint(0.0F, 0.0F, 0.0F);
+		top.setTextureOffset(84, 43).addBox(-5.5F, 0.0F, -5.5F, 11.0F, 2.0F, 11.0F, 0.0F, false);
 
-        base = new ModelRenderer(this, 0, 0);
-        base.addBox(-9F, 14F, -9F, 18, 2, 18);
-        base.setRotationPoint(0F, 0F, 0F);
-        base.setTextureSize(128, 64);
+		base = new ModelRenderer(this);
+		base.setRotationPoint(0.0F, 0.0F, 0.0F);
+		base.setTextureOffset(0, 0).addBox(-9.0F, 14.0F, -9.0F, 18.0F, 2.0F, 18.0F, 0.0F, false);
 
-        neck = new ModelRenderer(this, 0, 46);
-        neck.addBox(-7F, 2F, -7F, 14, 3, 14);
-        neck.setRotationPoint(0F, 0F, 0F);
-        neck.setTextureSize(128, 64);
+		neck = new ModelRenderer(this);
+		neck.setRotationPoint(0.0F, 0.0F, 0.0F);
+		neck.setTextureOffset(0, 46).addBox(-7.0F, 2.0F, -7.0F, 14.0F, 3.0F, 14.0F, 0.0F, false);
 
-        body = new ModelRenderer(this, 64, 11);
-        body.addBox(-8F, 5F, -8F, 16, 9, 16);
-        body.setRotationPoint(0F, 0F, 0F);
-        body.setTextureSize(128, 64);
+		body = new ModelRenderer(this);
+		body.setRotationPoint(0.0F, 0.0F, 0.0F);
+		body.setTextureOffset(64, 11).addBox(-8.0F, 5.0F, -8.0F, 16.0F, 9.0F, 16.0F, 0.0F, false);
 
-        bloom = new ModelRenderer(this, 0, 20);
-        bloom.addBox(-4F, -4F, -4F, 8, 8, 8);
-        bloom.setRotationPoint(0F, 6F, 0F);
-        bloom.setTextureSize(128, 64);
-    }
+		bloom = new ModelRenderer(this);
+		bloom.setRotationPoint(0.0F, 6.0F, 0.0F);
+		bloom.setTextureOffset(0, 20).addBox(-4.0F, -4.0F, -4.0F, 8.0F, 8.0F, 8.0F, 0.0F, false);
+	}
 
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-    }
+	@Override
+	public void setRotationAngles(Entity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch){
+		//previously the render function, render code was moved to a method below
+	}
 
-    public void renderModel(TileEntityBloomery bloomery, float f) {
-        base.render(f);
-        body.render(f);
+	@Override
+	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha){
+		top.render(matrixStack, buffer, packedLight, packedOverlay);
+		base.render(matrixStack, buffer, packedLight, packedOverlay);
+		neck.render(matrixStack, buffer, packedLight, packedOverlay);
+		body.render(matrixStack, buffer, packedLight, packedOverlay);
+		bloom.render(matrixStack, buffer, packedLight, packedOverlay);
+	}
 
-        if (bloomery != null && bloomery.hasBloom) {
-            bloom.render(f);
-        } else {
-            neck.render(f);
-            top.render(f);
-        }
-    }
+	public void setRotationAngle(ModelRenderer modelRenderer, float x, float y, float z) {
+		modelRenderer.rotateAngleX = x;
+		modelRenderer.rotateAngleY = y;
+		modelRenderer.rotateAngleZ = z;
+	}
 }

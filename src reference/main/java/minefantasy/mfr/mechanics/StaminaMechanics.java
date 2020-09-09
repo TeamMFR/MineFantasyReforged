@@ -6,7 +6,7 @@ import minefantasy.mfr.api.stamina.IStaminaWeapon;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigStamina;
-import minefantasy.mfr.packet.StaminaPacket;
+import minefantasy.mfr.network.StaminaPacket;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

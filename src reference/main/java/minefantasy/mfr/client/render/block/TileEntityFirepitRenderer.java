@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityFirepit;
+import minefantasy.mfr.tile.TileEntityFirepit;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

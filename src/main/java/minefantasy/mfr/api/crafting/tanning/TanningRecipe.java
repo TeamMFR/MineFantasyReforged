@@ -9,7 +9,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.ArrayList;
 
 public class TanningRecipe {
-    public static final ArrayList<TanningRecipe> recipeList = new ArrayList<TanningRecipe>();
+    public static final ArrayList<TanningRecipe> recipeList = new ArrayList<>();
     public int tier;
     public float time;
     public ItemStack input, output;
@@ -48,18 +48,16 @@ public class TanningRecipe {
             return new ItemStack((Block) input, 1, OreDictionary.WILDCARD_VALUE);
         }
         MFRLogUtil.logWarn("Tanning Recipe found invalid item!");
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public static TanningRecipe getRecipe(ItemStack item) {
-        if (item == null)
+        if (item.isEmpty())
             return null;
 
-        for (int a = 0; a < recipeList.size(); a++) {
-            TanningRecipe recipe = recipeList.get(a);
+        for (TanningRecipe recipe : recipeList) {
             if (recipe.input.getItem() == item.getItem()) {
-                if (recipe.input.getItemDamage() == OreDictionary.WILDCARD_VALUE
-                        || recipe.input.getItemDamage() == item.getItemDamage()) {
+                if (recipe.input.getItemDamage() == OreDictionary.WILDCARD_VALUE || recipe.input.getItemDamage() == item.getItemDamage()) {
                     return recipe;
                 }
             }

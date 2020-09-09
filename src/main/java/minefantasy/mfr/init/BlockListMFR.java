@@ -9,6 +9,7 @@ import minefantasy.mfr.block.basic.BlockMythicOre;
 import minefantasy.mfr.block.basic.BlockOreMF;
 import minefantasy.mfr.block.basic.BlockPaneMF;
 import minefantasy.mfr.block.basic.BlockReinforcedStone;
+import minefantasy.mfr.block.basic.BlockTileEntity;
 import minefantasy.mfr.block.basic.BlockWorldGenMarker;
 import minefantasy.mfr.block.basic.ConstructionBlockMF;
 import minefantasy.mfr.block.crafting.BlockAnvilMF;
@@ -21,7 +22,7 @@ import minefantasy.mfr.block.crafting.BlockEngineerTanner;
 import minefantasy.mfr.block.crafting.BlockFirepit;
 import minefantasy.mfr.block.crafting.BlockFrame;
 import minefantasy.mfr.block.crafting.BlockRepairKit;
-import minefantasy.mfr.block.crafting.BlockResearchStation;
+import minefantasy.mfr.block.crafting.BlockResearchBench;
 import minefantasy.mfr.block.crafting.BlockRoast;
 import minefantasy.mfr.block.crafting.BlockSalvage;
 import minefantasy.mfr.block.crafting.BlockTanningRack;
@@ -33,44 +34,27 @@ import minefantasy.mfr.block.decor.BlockSchematic;
 import minefantasy.mfr.block.decor.BlockTrough;
 import minefantasy.mfr.block.food.BlockBerryBush;
 import minefantasy.mfr.block.food.BlockCakeMF;
+import minefantasy.mfr.block.food.BlockCheeseWheel;
 import minefantasy.mfr.block.food.BlockPie;
-import minefantasy.mfr.block.refining.BlockBFC;
-import minefantasy.mfr.block.refining.BlockBFH;
 import minefantasy.mfr.block.refining.BlockBellows;
 import minefantasy.mfr.block.refining.BlockBigFurnace;
+import minefantasy.mfr.block.refining.BlockBlastChamber;
+import minefantasy.mfr.block.refining.BlockBlastHeater;
 import minefantasy.mfr.block.refining.BlockBloomery;
 import minefantasy.mfr.block.refining.BlockChimney;
+import minefantasy.mfr.block.refining.BlockChimneyPipe;
 import minefantasy.mfr.block.refining.BlockCrucible;
 import minefantasy.mfr.block.refining.BlockForge;
 import minefantasy.mfr.block.refining.BlockQuern;
-import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
-import minefantasy.mfr.block.tile.TileEntityBellows;
-import minefantasy.mfr.block.tile.TileEntityBerryBush;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
-import minefantasy.mfr.block.tile.TileEntityBloomery;
-import minefantasy.mfr.block.tile.TileEntityBombBench;
-import minefantasy.mfr.block.tile.TileEntityBombPress;
-import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
-import minefantasy.mfr.block.tile.TileEntityChimney;
-import minefantasy.mfr.block.tile.TileEntityComponent;
-import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
-import minefantasy.mfr.block.tile.TileEntityCrucible;
-import minefantasy.mfr.block.tile.TileEntityFirepit;
-import minefantasy.mfr.block.tile.TileEntityForge;
-import minefantasy.mfr.block.tile.TileEntityQuern;
-import minefantasy.mfr.block.tile.TileEntityResearch;
-import minefantasy.mfr.block.tile.TileEntityRoad;
-import minefantasy.mfr.block.tile.TileEntityRoast;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
-import minefantasy.mfr.block.tile.TileEntityWorldGenMarker;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
 import minefantasy.mfr.block.tree.BlockLeavesMF;
 import minefantasy.mfr.block.tree.BlockLogMF;
 import minefantasy.mfr.block.tree.BlockSaplingMF;
+import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
+import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
+import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mfr.itemblock.ItemBlockAmmoBox;
 import minefantasy.mfr.itemblock.ItemBlockAnvilMF;
 import minefantasy.mfr.itemblock.ItemBlockBase;
@@ -79,9 +63,35 @@ import minefantasy.mfr.itemblock.ItemBlockCake;
 import minefantasy.mfr.itemblock.ItemBlockOreMF;
 import minefantasy.mfr.itemblock.ItemBlockRepairKit;
 import minefantasy.mfr.itemblock.ItemBlockSalvage;
+import minefantasy.mfr.itemblock.ItemBlockSpecialRender;
 import minefantasy.mfr.itemblock.ItemBlockToolRack;
 import minefantasy.mfr.itemblock.ItemBlockTrough;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityBellows;
+import minefantasy.mfr.tile.TileEntityBerryBush;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
+import minefantasy.mfr.tile.TileEntityBloomery;
+import minefantasy.mfr.tile.TileEntityBombBench;
+import minefantasy.mfr.tile.TileEntityBombPress;
+import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityChimney;
+import minefantasy.mfr.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityCrossbowBench;
+import minefantasy.mfr.tile.TileEntityCrucible;
+import minefantasy.mfr.tile.TileEntityFirepit;
+import minefantasy.mfr.tile.TileEntityForge;
+import minefantasy.mfr.tile.TileEntityQuern;
+import minefantasy.mfr.tile.TileEntityResearchBench;
+import minefantasy.mfr.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityRoast;
+import minefantasy.mfr.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.TileEntityWorldGenMarker;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
+import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityTrough;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -192,14 +202,12 @@ public class BlockListMFR {
 
 	public static Block BLAST_CHAMBER = Utils.nullValue();
 	public static Block BLAST_HEATER = Utils.nullValue();
-	public static Block BLAST_HEATER_ACTIVE = Utils.nullValue();
 
-	public static Block CRUCIBLE = Utils.nullValue();
-	public static Block CRUCIBLE_ACTIVE = Utils.nullValue();
-	public static Block CRUCIBLE_ADV = Utils.nullValue();
-	public static Block CRUCIBLE_ADV_ACTIVE = Utils.nullValue();
+	public static Block CRUCIBLE_STONE = Utils.nullValue();
+	public static Block CRUCIBLE_FIRECLAY = Utils.nullValue();
 	public static Block CRUCIBLE_AUTO = Utils.nullValue();
-	public static Block CRUCIBLE_AUTO_ACTIVE = Utils.nullValue();
+	public static Block CRUCIBLE_MYTHIC = Utils.nullValue();
+	public static Block CRUCIBLE_MASTER = Utils.nullValue();
 
 	public static Block CHIMNEY_STONE = Utils.nullValue();
 	public static Block CHIMNEY_STONE_WIDE = Utils.nullValue();
@@ -207,17 +215,17 @@ public class BlockListMFR {
 	public static Block CHIMNEY_PIPE = Utils.nullValue();
 
 	public static Block TANNER = Utils.nullValue();
+	public static Block TANNER_REFINED = Utils.nullValue();
+	public static BlockTileEntity<TileEntityTanningRack> TANNER_METAL = Utils.nullValue();
 
 	public static Block FORGE = Utils.nullValue();
-	public static Block FORGE_ACTIVE = Utils.nullValue();
 	public static Block FORGE_METAL = Utils.nullValue();
-	public static Block FORGE_METAL_ACTIVE = Utils.nullValue();
 
 	public static Block REPAIR_BASIC = Utils.nullValue();
 	public static Block REPAIR_ADVANCED = Utils.nullValue();
 	public static Block REPAIR_ORNATE = Utils.nullValue();
 
-	public static Block BELLOWS = Utils.nullValue();
+	public static BlockTileEntity<TileEntityBellows> BELLOWS = Utils.nullValue();
 
 	public static Block REFINED_PLANKS = Utils.nullValue();
 	public static Block NAILED_PLANKS = Utils.nullValue();
@@ -229,12 +237,10 @@ public class BlockListMFR {
 	public static Block REINFORCED_STONE_FRAMED = Utils.nullValue();
 	public static Block REINFORCED_STONE_FRAMED_IRON = Utils.nullValue();
 
-	public static Block ADV_TANNER = Utils.nullValue();
 	public static Block RESEARCH = Utils.nullValue();
 	public static Block TROUGH_WOOD = Utils.nullValue();
-	public static Block ENG_TANNER = Utils.nullValue();
 
-	public static Block BOMB_PRESS = Utils.nullValue();
+	public static BlockTileEntity<TileEntityBombPress> BOMB_PRESS = Utils.nullValue();
 
 	public static Block ROAD = Utils.nullValue();
 	public static Block LOW_ROAD = Utils.nullValue();
@@ -257,7 +263,7 @@ public class BlockListMFR {
 	public static Block IRONBARK_PLANKS = Utils.nullValue();
 	public static Block EBONY_PLANKS = Utils.nullValue();
 
-	public static Block QUERN = Utils.nullValue();
+	public static BlockTileEntity<TileEntityQuern> QUERN = Utils.nullValue();
 
 	public static Block MUD_BRICK_STAIR = Utils.nullValue();
 	public static Block MUD_PAVEMENT_STAIR = Utils.nullValue();
@@ -272,27 +278,23 @@ public class BlockListMFR {
 	public static Block EBONY_STAIR = Utils.nullValue();
 
 	public static Block FIREPIT = Utils.nullValue();
-	public static Block ROAST = Utils.nullValue();
-	public static Block OVEN_STONE = Utils.nullValue();
+	public static Block STOVE = Utils.nullValue();
+	public static Block OVEN = Utils.nullValue();
 
-	public static Block FURNACE_HEATER = Utils.nullValue();
-	public static Block FURNACE_STONE = Utils.nullValue();
+	public static BlockTileEntity<TileEntityBigFurnace> FURNACE_HEATER = Utils.nullValue();
+	public static BlockTileEntity<TileEntityBigFurnace> FURNACE_STONE = Utils.nullValue();
 
 	public static Block TOOL_RACK_WOOD = Utils.nullValue();
-	public static Block FOOD_BOX_BASIC = Utils.nullValue();
-	public static Block AMMO_BOX_BASIC = Utils.nullValue();
-	public static Block CRATE_BASIC = Utils.nullValue();
+
+	public static BlockAmmoBox FOOD_BOX_BASIC = Utils.nullValue();
+	public static BlockAmmoBox AMMO_BOX_BASIC = Utils.nullValue();
+	public static BlockAmmoBox CRATE_BASIC = Utils.nullValue();
 
 	public static Block COGWORK_HELM = Utils.nullValue();
 	public static Block COGWORK_LEGS = Utils.nullValue();
 	public static Block COGWORK_CHEST = Utils.nullValue();
 	public static Block FRAME_BLOCK = Utils.nullValue();
 	public static Block COGWORK_BUILDER = Utils.nullValue();
-
-	public static Block CRUCIBLE_MYTHIC = Utils.nullValue();
-	public static Block CRUCIBLE_MYTHIC_ACTIVE = Utils.nullValue();
-	public static Block CRUCIBLE_MASTER = Utils.nullValue();
-	public static Block CRUCIBLE_MASTER_ACTIVE = Utils.nullValue();
 
 	public static Block MYTHIC_DECOR = Utils.nullValue();
 	public static Block WG_MARK = Utils.nullValue();
@@ -376,7 +378,7 @@ public class BlockListMFR {
 		BOMB_BENCH = new BlockBombBench();
 		CROSSBOW_BENCH = new BlockCrossbowBench();
 
-		CHEESE_WHEEL = new BlockCakeMF("cheese", FoodListMFR.CHEESE_SLICE).setCheese();
+		CHEESE_WHEEL = new BlockCheeseWheel("cheese_wheel", FoodListMFR.CHEESE_SLICE);
 
 		CAKE_VANILLA = new BlockCakeMF("cake_vanilla", FoodListMFR.CAKE_SLICE);
 		CAKE_CARROT = new BlockCakeMF("cake_carrot", FoodListMFR.CARROTCAKE_SLICE);
@@ -391,28 +393,27 @@ public class BlockListMFR {
 		PIE_SHEPARDS = new BlockPie("pie_shepards", FoodListMFR.PIESLICE_SHEPARDS);
 
 		BERRY_BUSH = new BlockBerryBush("berry_bush");
-		BLAST_CHAMBER = new BlockBFC();
-		BLAST_HEATER = new BlockBFH(false);
-		BLAST_HEATER_ACTIVE = new BlockBFH(true).setLightLevel(10F);
 
-		CRUCIBLE = new BlockCrucible("stone", 0, false);
-		CRUCIBLE_ACTIVE = new BlockCrucible("stone", 0, true).setLightLevel(12F);
-		CRUCIBLE_ADV = new BlockCrucible("fireclay", 1, false);
-		CRUCIBLE_ADV_ACTIVE = new BlockCrucible("fireclay", 1, true).setLightLevel(12F);
+		BLAST_CHAMBER = new BlockBlastChamber();
+		BLAST_HEATER = new BlockBlastHeater();
+
+		CRUCIBLE_STONE = new BlockCrucible("stone", 0, false);
+		CRUCIBLE_FIRECLAY = new BlockCrucible("fireclay", 1, false);
 		CRUCIBLE_AUTO = new BlockCrucible("auto", 1, false).setAuto().setHardness(12F);
-		CRUCIBLE_AUTO_ACTIVE = new BlockCrucible("auto", 1, true).setAuto().setHardness(12F).setLightLevel(12F);
+		CRUCIBLE_MYTHIC = new BlockCrucible("mythic", 2, false).setAuto().setBlockUnbreakable();
+		CRUCIBLE_MASTER = new BlockCrucible("master", 3, false).setAuto().setBlockUnbreakable();
 
 		CHIMNEY_STONE = new BlockChimney("stone", false, false, 5);
 		CHIMNEY_STONE_WIDE = new BlockChimney("stone", true, false, 10);
 		CHIMNEY_STONE_EXTRACTOR = new BlockChimney("stone_extractor", true, true, 15);
-		CHIMNEY_PIPE = new BlockChimney("pipe", false, false, 10).setPipe();
+		CHIMNEY_PIPE = new BlockChimneyPipe(false, 10).setPipe();
 
 		TANNER = new BlockTanningRack(0, "");
+		TANNER_REFINED = new BlockTanningRack(1, "_refined");
+		TANNER_METAL = new BlockEngineerTanner(2, "_metal");
 
-		FORGE = new BlockForge("stone", 0, false);
-		FORGE_ACTIVE = new BlockForge("stone", 0, true);
-		FORGE_METAL = new BlockForge("metal", 1, false);
-		FORGE_METAL_ACTIVE = new BlockForge("metal", 1, true);
+		FORGE = new BlockForge("stone", 0);
+		FORGE_METAL = new BlockForge("metal", 1);
 
 		REPAIR_BASIC = new BlockRepairKit("basic", 0.25F, 0.05F, 0.2F);
 		REPAIR_ADVANCED = new BlockRepairKit("advanced", 1.0F, 0.2F, 0.05F);
@@ -430,10 +431,8 @@ public class BlockListMFR {
 		REINFORCED_STONE_FRAMED = new BasicBlockMF("reinforced_stone_framed", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(20F);
 		REINFORCED_STONE_FRAMED_IRON = new BasicBlockMF("reinforced_stone_framed_iron", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(20F);
 
-		ADV_TANNER = new BlockTanningRack(1, "Strong");
-		RESEARCH = new BlockResearchStation();
+		RESEARCH = new BlockResearchBench();
 		TROUGH_WOOD = new BlockTrough("trough_wood");
-		ENG_TANNER = new BlockEngineerTanner(2, "Metal");
 
 		BOMB_PRESS = new BlockBombPress();
 
@@ -474,13 +473,14 @@ public class BlockListMFR {
 		EBONY_STAIR = new ConstructionBlockMF.StairsConstBlock("ebony_stairs", EBONY_PLANKS);
 
 		FIREPIT = new BlockFirepit();
-		ROAST = new BlockRoast(0, "basic", false);
-		OVEN_STONE = new BlockRoast(0, "basic", true);
+		STOVE = new BlockRoast(false);
+		OVEN = new BlockRoast(true);
 
 		FURNACE_HEATER = new BlockBigFurnace("furnace_heater", true, -1);
 		FURNACE_STONE = new BlockBigFurnace("furnace_stone", false, 0);
 
 		TOOL_RACK_WOOD = new BlockRack("rack_wood");
+
 		FOOD_BOX_BASIC = new BlockAmmoBox("food_box_basic", (byte) 0);
 		AMMO_BOX_BASIC = new BlockAmmoBox("ammo_box_basic", (byte) 1);
 		CRATE_BASIC = new BlockAmmoBox("crate_basic", (byte) 2);
@@ -490,11 +490,6 @@ public class BlockListMFR {
 		COGWORK_CHEST = new BlockCogwork("cogwork_chest", true);
 		FRAME_BLOCK = new BlockFrame("frame_block");
 		COGWORK_BUILDER = new BlockFrame("cogwork_builder", FRAME_BLOCK).setCogworkHolder();
-
-		CRUCIBLE_MYTHIC = new BlockCrucible("mythic", 2, false).setAuto().setBlockUnbreakable();
-		CRUCIBLE_MYTHIC_ACTIVE = new BlockCrucible("mythic", 2, true).setAuto().setBlockUnbreakable().setLightLevel(12F);
-		CRUCIBLE_MASTER = new BlockCrucible("master", 3, false).setAuto().setBlockUnbreakable();
-		CRUCIBLE_MASTER_ACTIVE = new BlockCrucible("master", 3, true).setAuto().setBlockUnbreakable().setLightLevel(12F);
 
 		MYTHIC_DECOR = new BlockMythicDecor();
 		WG_MARK = new BlockWorldGenMarker("world_gen_flag");
@@ -635,7 +630,7 @@ public class BlockListMFR {
 
 		registry.register(SALVAGE_BASIC);
 
-		registry.register(OVEN_STONE);
+		registry.register(OVEN);
 
 		//Tile Entities
 
@@ -659,21 +654,15 @@ public class BlockListMFR {
 		registerTile(TileEntityBerryBush.class, "berry_bush_tile");
 
 		registry.register(BLAST_CHAMBER);
-		registerTile(TileEntityBlastFC.class, "blast_furnace_chamber_tile");
+		registerTile(TileEntityBlastChamber.class, "blast_furnace_chamber_tile");
 		registry.register(BLAST_HEATER);
-		registry.register(BLAST_HEATER_ACTIVE);
-		registerTile(TileEntityBlastFH.class, "blast_furnace_heater_tile");
+		registerTile(TileEntityBlastHeater.class, "blast_furnace_heater_tile");
 
-		registry.register(CRUCIBLE);
-		registry.register(CRUCIBLE_ACTIVE);
-		registry.register(CRUCIBLE_ADV);
-		registry.register(CRUCIBLE_ADV_ACTIVE);
+		registry.register(CRUCIBLE_STONE);
+		registry.register(CRUCIBLE_FIRECLAY);
 		registry.register(CRUCIBLE_AUTO);
-		registry.register(CRUCIBLE_AUTO_ACTIVE);
 		registry.register(CRUCIBLE_MYTHIC);
-		registry.register(CRUCIBLE_MYTHIC_ACTIVE);
 		registry.register(CRUCIBLE_MASTER);
-		registry.register(CRUCIBLE_MASTER_ACTIVE);
 		registerTile(TileEntityCrucible.class, "crucible_tile");
 
 		registry.register(CHIMNEY_STONE);
@@ -683,21 +672,19 @@ public class BlockListMFR {
 		registerTile(TileEntityChimney.class, "chimney_tile");
 
 		registry.register(TANNER);
-		registry.register(ADV_TANNER);
-		registry.register(ENG_TANNER);
+		registry.register(TANNER_REFINED);
+		registry.register(TANNER_METAL);
 		registerTile(TileEntityTanningRack.class, "tanning_rack_tile");
 
 		registry.register(FORGE);
-		registry.register(FORGE_ACTIVE);
 		registry.register(FORGE_METAL);
-		registry.register(FORGE_METAL_ACTIVE);
 		registerTile(TileEntityForge.class, "forge_tile");
 
 		registry.register(BELLOWS);
 		registerTile(TileEntityBellows.class, "bellows_tile");
 
 		registry.register(RESEARCH);
-		registerTile(TileEntityResearch.class, "research_table_tile");
+		registerTile(TileEntityResearchBench.class, "research_table_tile");
 		registry.register(BOMB_PRESS);
 		registerTile(TileEntityBombPress.class, "bomb_press_tile");
 
@@ -713,7 +700,7 @@ public class BlockListMFR {
 
 		registry.register(FIREPIT);
 		registerTile(TileEntityFirepit.class, "firepit_tile");
-		registry.register(ROAST);
+		registry.register(STOVE);
 		registerTile(TileEntityRoast.class, "roast_tile");
 
 		registry.register(FURNACE_HEATER);
@@ -831,14 +818,12 @@ public class BlockListMFR {
 
 		registry.register(new ItemBlockBase(BLAST_CHAMBER));
 		registry.register(new ItemBlockBase(BLAST_HEATER));
-		registry.register(new ItemBlockBase(BLAST_HEATER_ACTIVE));
 
-		registry.register(new ItemBlockBase(CRUCIBLE));
-		registry.register(new ItemBlockBase(CRUCIBLE_ACTIVE));
-		registry.register(new ItemBlockBase(CRUCIBLE_ADV));
-		registry.register(new ItemBlockBase(CRUCIBLE_ADV_ACTIVE));
+		registry.register(new ItemBlockBase(CRUCIBLE_STONE));
+		registry.register(new ItemBlockBase(CRUCIBLE_FIRECLAY));
 		registry.register(new ItemBlockBase(CRUCIBLE_AUTO));
-		registry.register(new ItemBlockBase(CRUCIBLE_AUTO_ACTIVE));
+		registry.register(new ItemBlockBase(CRUCIBLE_MYTHIC));
+		registry.register(new ItemBlockBase(CRUCIBLE_MASTER));
 
 		registry.register(new ItemBlockBase(CHIMNEY_STONE));
 		registry.register(new ItemBlockBase(CHIMNEY_STONE_WIDE));
@@ -846,17 +831,17 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(CHIMNEY_PIPE));
 
 		registry.register(new ItemBlockBase(TANNER));
+		registry.register(new ItemBlockBase(TANNER_REFINED));
+		registry.register(new ItemBlockSpecialRender(TANNER_METAL, new TileEntityTanningRackRenderer<>()));
 
 		registry.register(new ItemBlockBase(FORGE));
-		registry.register(new ItemBlockBase(FORGE_ACTIVE));
 		registry.register(new ItemBlockBase(FORGE_METAL));
-		registry.register(new ItemBlockBase(FORGE_METAL_ACTIVE));
 
 		registry.register(new ItemBlockRepairKit(REPAIR_BASIC));
 		registry.register(new ItemBlockRepairKit(REPAIR_ADVANCED));
 		registry.register(new ItemBlockRepairKit(REPAIR_ORNATE));
 
-		registry.register(new ItemBlockBase(BELLOWS));
+		registry.register(new ItemBlockSpecialRender(BELLOWS, new TileEntityBellowsRenderer<>()));
 
 		registry.register(new ItemBlockBase(REFINED_PLANKS));
 		registry.register(new ItemBlockBase(NAILED_PLANKS));
@@ -868,12 +853,10 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED_IRON));
 
-		registry.register(new ItemBlockBase(ADV_TANNER));
 		registry.register(new ItemBlockBase(RESEARCH));
 		registry.register(new ItemBlockTrough(TROUGH_WOOD));
-		registry.register(new ItemBlockBase(ENG_TANNER));
 
-		registry.register(new ItemBlockBase(BOMB_PRESS));
+		registry.register(new ItemBlockSpecialRender(BOMB_PRESS, new TileEntityBombPressRenderer<>()));
 
 		registry.register(new ItemBlockBase(ROAD));
 		registry.register(new ItemBlockBase(LOW_ROAD));
@@ -897,7 +880,7 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(IRONBARK_PLANKS));
 		registry.register(new ItemBlockBase(EBONY_PLANKS));
 
-		registry.register(new ItemBlockBase(QUERN));
+		registry.register(new ItemBlockSpecialRender(QUERN, new TileEntityQuernRenderer<>()));
 
 		registry.register(new ItemBlockBase(MUD_BRICK_STAIR));
 		registry.register(new ItemBlockBase(MUD_PAVEMENT_STAIR));
@@ -912,27 +895,23 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(EBONY_STAIR));
 
 		registry.register(new ItemBlockBase(FIREPIT));
-		registry.register(new ItemBlockBase(ROAST));
-		registry.register(new ItemBlockBase(OVEN_STONE));
+		registry.register(new ItemBlockBase(STOVE));
+		registry.register(new ItemBlockBase(OVEN));
 
-		registry.register(new ItemBlockBase(FURNACE_HEATER));
-		registry.register(new ItemBlockBase(FURNACE_STONE));
+		registry.register(new ItemBlockSpecialRender(FURNACE_HEATER, new TileEntityBigFurnaceRenderer<>()));
+		registry.register(new ItemBlockSpecialRender(FURNACE_STONE, new TileEntityBigFurnaceRenderer<>()));
 
 		registry.register(new ItemBlockToolRack(TOOL_RACK_WOOD));
-		registry.register(new ItemBlockAmmoBox(FOOD_BOX_BASIC));
-		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC));
-		registry.register(new ItemBlockAmmoBox(CRATE_BASIC));
+
+		registry.register(new ItemBlockAmmoBox(FOOD_BOX_BASIC, new TileEntityAmmoBoxRenderer<>()));
+		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC, new TileEntityAmmoBoxRenderer<>()));
+		registry.register(new ItemBlockAmmoBox(CRATE_BASIC, new TileEntityAmmoBoxRenderer<>()));
 
 		registry.register(new ItemBlockBase(COGWORK_HELM));
 		registry.register(new ItemBlockBase(COGWORK_LEGS));
 		registry.register(new ItemBlockBase(COGWORK_CHEST));
 		registry.register(new ItemBlockBase(FRAME_BLOCK));
 		registry.register(new ItemBlockBase(COGWORK_BUILDER));
-
-		registry.register(new ItemBlockBase(CRUCIBLE_MYTHIC));
-		registry.register(new ItemBlockBase(CRUCIBLE_MYTHIC_ACTIVE));
-		registry.register(new ItemBlockBase(CRUCIBLE_MASTER));
-		registry.register(new ItemBlockBase(CRUCIBLE_MASTER_ACTIVE));
 
 		registry.register(new ItemBlockBase(MYTHIC_DECOR));
 		registry.register(new ItemBlockBase(WG_MARK));

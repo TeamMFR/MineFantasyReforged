@@ -2,13 +2,12 @@ package minefantasy.mfr.item.weapon;
 
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -38,7 +37,7 @@ public class ItemMace extends ItemWeaponMFR {
     public void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam) {
         if (!user.world.isRemote && user.getRNG().nextInt(5) == 0) {
             if (hit instanceof EntityLivingBase) {
-                ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 100, 1));
+                ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 1));
             }
         }
         super.onProperHit(user, weapon, hit, dam);

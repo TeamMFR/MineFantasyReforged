@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.render.block;
 
-import minefantasy.mfr.block.tile.TileEntityQuern;
+import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -48,8 +48,7 @@ public class ModelQuern extends ModelBase {
 
     public void renderModel(TileEntityQuern quern, float f) {
         if (quern != null) {
-            top.rotateAngleY = handle.rotateAngleY = (float) (Math.PI * quern.turnAngle) / TileEntityQuern.getMaxRevs()
-                    * 2;
+            top.rotateAngleY = handle.rotateAngleY = (float) (Math.PI * quern.turnAngle) / TileEntityQuern.getMaxRevs() * 2;
         }
 
         base.render(f);
@@ -58,4 +57,10 @@ public class ModelQuern extends ModelBase {
         handle.render(f);
     }
 
+    public void renderModel(float f) {
+        base.render(f);
+        top.render(f);
+        core.render(f);
+        handle.render(f);
+    }
 }

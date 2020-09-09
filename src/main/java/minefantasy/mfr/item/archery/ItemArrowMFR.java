@@ -1,19 +1,15 @@
 package minefantasy.mfr.item.archery;
 
 
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.render.ModelHelper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
@@ -89,7 +85,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         AmmoMechanicsMFR.addArrow(new ItemStack(this));
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, dispenser);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     private ToolMaterial convertMaterial(ToolMaterial material) {

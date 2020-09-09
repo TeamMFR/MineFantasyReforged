@@ -1,61 +1,51 @@
 package minefantasy.mfr.container;
 
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.block.tile.TileEntityForge;
+import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerForge extends Container {
+import javax.annotation.Nonnull;
+
+public class ContainerForge extends ContainerBase {
     private TileEntityForge tile;
     private int lastTemp;
 
-    public ContainerForge(InventoryPlayer user, TileEntityForge tile) {
+    public ContainerForge(InventoryPlayer inventoryPlayer, TileEntityForge tile) {
+        super(inventoryPlayer, tile);
         this.tile = tile;
-        int width = 3;
-        int height = 3;
 
-        this.addSlotToContainer(new Slot(tile, 0, 70 + 18, 14 + 18));
-        int i;
+        this.addSlotToContainer(new SlotItemHandler(this.tile.inventory, 0, 70 + 18, 14 + 18));
 
-        for (i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(user, j + i * 9 + 9, 8 + j * 18, 93 + i * 18));
-            }
-        }
-
-        for (i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(user, i, 8 + i * 18, 151));
-        }
+        addPlayerSlots(inventoryPlayer, 8, 151);
     }
 
     @Override
     public void detectAndSendChanges() {
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            Container icrafting = (Container) this.listeners.get(i);
+        for (IContainerListener listener : this.listeners) {
 
             if (this.lastTemp != (int) tile.temperature) {
-                icrafting.updateProgressBar(0, (int) tile.temperature);
+                listener.sendWindowProperty(this,0, (int) tile.temperature);
             }
         }
         this.lastTemp = (int) tile.temperature;
 
         for (int i = 0; i < this.inventorySlots.size(); ++i) {
-            ItemStack itemstack = ((Slot) this.inventorySlots.get(i)).getStack();
-            ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);
+            ItemStack itemstack = this.inventorySlots.get(i).getStack();
+            ItemStack itemstack1 = this.inventoryItemStacks.get(i);
 
             if (!ItemStack.areItemStacksEqual(itemstack1, itemstack)) {
-                tile.onInventoryChanged();
 
-                itemstack1 = itemstack == null ? null : itemstack.copy();
+                itemstack1 = itemstack == ItemStack.EMPTY ? ItemStack.EMPTY : itemstack.copy();
                 this.inventoryItemStacks.set(i, itemstack1);
 
-                for (int j = 0; j < this.listeners.size(); ++j) {
-                    ((InventoryCrafting) this.listeners.get(j)).setInventorySlotContents( i, itemstack1);
+                for (IContainerListener listener : this.listeners) {
+                    (listener).sendSlotContents(this, i, itemstack1);
                 }
             }
         }
@@ -74,11 +64,12 @@ public class ContainerForge extends Container {
         return this.tile.isUsableByPlayer(player);
     }
 
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(EntityPlayer user, int currentSlot) {
-        int slotCount = tile.getSizeInventory();
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(currentSlot);
+        int slotCount = tile.getInventory().getSlots();
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(currentSlot);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
@@ -86,14 +77,14 @@ public class ContainerForge extends Container {
 
             if (currentSlot < slotCount) {
                 if (!this.mergeItemStack(itemstack1, slotCount, this.inventorySlots.size(), false)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             } else if (!this.mergeItemStack(true, itemstack1, 0, slotCount, false)) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             if (itemstack1.getCount() <= 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
@@ -121,10 +112,10 @@ public class ContainerForge extends Container {
 
         if (allowStack && item.isStackable()) {
             while (item.getCount() > 0 && (!goBackwards && k < maxSlot || goBackwards && k >= minSlot)) {
-                slot = (Slot) this.inventorySlots.get(k);
+                slot = this.inventorySlots.get(k);
                 itemstack1 = slot.getStack();
 
-                if (itemstack1 != null && itemstack1.getItem() == item.getItem()
+                if (!itemstack1.isEmpty() && itemstack1.getItem() == item.getItem()
                         && (!item.getHasSubtypes() || item.getItemDamage() == itemstack1.getItemDamage())
                         && ItemStack.areItemStackTagsEqual(item, itemstack1)) {
                     int l = itemstack1.getCount() + item.getCount();
@@ -158,10 +149,10 @@ public class ContainerForge extends Container {
             }
 
             while (!goBackwards && k < maxSlot || goBackwards && k >= minSlot) {
-                slot = (Slot) this.inventorySlots.get(k);
+                slot = this.inventorySlots.get(k);
                 itemstack1 = slot.getStack();
 
-                if (itemstack1 == null) {
+                if (itemstack1.isEmpty()) {
                     ItemStack i2 = item.copy();
                     i2.setCount(1);
                     slot.putStack(i2);

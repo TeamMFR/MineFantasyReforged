@@ -1,6 +1,6 @@
 package minefantasy.mfr.block.crafting;
 
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumFacing;

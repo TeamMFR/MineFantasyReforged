@@ -36,7 +36,7 @@ public class MobListMF {
 
     private static void addEntity(int IDBase, Class<? extends Entity> entityClass, String entityName) {
         ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, entityName);
-        EntityRegistry.registerModEntity(registryName, entityClass, entityName, IDBase, MineFantasyReborn.instance, 128, 1, true);
+        EntityRegistry.registerModEntity(registryName, entityClass, entityName, IDBase, MineFantasyReborn.INSTANCE, 128, 1, true);
     }
 
     public static void addSpawn(Class<? extends EntityLiving> entityClass, int weightedProb, int min, int max,

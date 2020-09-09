@@ -1,9 +1,9 @@
-package minefantasy.mfr.block.tile.blastfurnace;
+package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.block.refining.BlockBFH;
-import minefantasy.mfr.block.tile.TileEntityCrucible;
+import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.entity.EntityFireBlast;
 import net.minecraft.entity.item.EntityItem;

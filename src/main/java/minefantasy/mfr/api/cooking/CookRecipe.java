@@ -9,7 +9,7 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import java.util.HashMap;
 
 public class CookRecipe {
-    public static final HashMap<String, CookRecipe> recipeList = new HashMap<String, CookRecipe>();
+    public static final HashMap<String, CookRecipe> recipeList = new HashMap<>();
     public static Item burnt_food = null;
     public static boolean canCookBasics = true;
     public final int maxTemperature, minTemperature, time;
@@ -63,13 +63,13 @@ public class CookRecipe {
         recipeList.put(CustomToolHelper.getReferenceName(in), recipe);
 
         if (canBurn) {
-            addRecipe(out, burnt, null, min, max, burntime, bake, false);
+            addRecipe(out, burnt, ItemStack.EMPTY, min, max, burntime, bake, false);
         }
         return recipe;
     }
 
     public static CookRecipe getResult(ItemStack item, boolean oven) {
-        if (item == null)
+        if (item.isEmpty())
             return null;
 
         CookRecipe result = recipeList.get(CustomToolHelper.getReferenceName(item));
@@ -79,7 +79,7 @@ public class CookRecipe {
 
         if (canCookBasics) {
             ItemStack recipe = FurnaceRecipes.instance().getSmeltingResult(item);
-            if (recipe != null && recipe.getItem() instanceof ItemFood) {
+            if (!recipe.isEmpty() && recipe.getItem() instanceof ItemFood) {
                 return new CookRecipe(recipe, new ItemStack(burnt_food), 100, 300, 20, false, true);
             }
         }

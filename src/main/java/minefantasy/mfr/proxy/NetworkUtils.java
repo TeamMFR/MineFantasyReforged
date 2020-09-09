@@ -1,5 +1,7 @@
 package minefantasy.mfr.proxy;
 
+import minefantasy.mfr.network.PacketMF;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraft.network.Packet;

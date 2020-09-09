@@ -113,8 +113,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         return item.getTagCompound();
     }
 
-    public static ItemStack createExplosive(Item item, byte casing, byte filling, byte fuse, byte powder, int stackSize,
-                                            boolean sticky) {
+    public static ItemStack createExplosive(Item item, byte casing, byte filling, byte fuse, byte powder, int stackSize, boolean sticky) {
         ItemStack bomb = new ItemStack(item, stackSize);
         setFilling(bomb, filling);
         setCasing(bomb, casing);
@@ -126,8 +125,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         return bomb;
     }
 
-    public static ItemStack createExplosive(Item item, byte casing, byte filling, byte fuse, byte powder,
-                                            int stackSize) {
+    public static ItemStack createExplosive(Item item, byte casing, byte filling, byte fuse, byte powder, int stackSize) {
         return createExplosive(item, casing, filling, fuse, powder, stackSize, false);
     }
 

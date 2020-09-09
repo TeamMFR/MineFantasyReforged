@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.block.tile.TileEntityBombBench;
+import minefantasy.mfr.tile.TileEntityBombBench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

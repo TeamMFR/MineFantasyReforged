@@ -1,8 +1,8 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.block.tile.decor.TileEntityWoodDecor;
+import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 

@@ -2,7 +2,7 @@ package minefantasy.mfr.block.decor;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.tile.decor.TileEntityWoodDecor;
+import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumHand;

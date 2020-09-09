@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.refining;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

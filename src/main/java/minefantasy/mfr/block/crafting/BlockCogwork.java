@@ -1,12 +1,10 @@
 package minefantasy.mfr.block.crafting;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -18,11 +16,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlockCogwork extends BlockDirectional {
-    private String name;
-    private boolean isMain = false;
+    private boolean isMain;
 
     public BlockCogwork(String name, boolean helmet) {
         super(Material.CIRCUITS);
@@ -30,9 +26,7 @@ public class BlockCogwork extends BlockDirectional {
 
         setRegistryName(name);
         setUnlocalizedName("block" + name );
-        this.name = name;
         this.setTickRandomly(true);
-        this.name = name;
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setHardness(1F);
         this.setResistance(5F);

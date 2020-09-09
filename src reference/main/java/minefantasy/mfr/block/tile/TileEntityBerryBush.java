@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.block.food.BlockBerryBush;
 import net.minecraft.nbt.NBTTagCompound;

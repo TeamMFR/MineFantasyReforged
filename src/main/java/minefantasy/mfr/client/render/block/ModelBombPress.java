@@ -24,7 +24,7 @@ public class ModelBombPress extends ModelBase {
 
     public ModelBombPress() {
         textureWidth = 64;
-        textureHeight = 32;
+        textureHeight = 64;
 
         frame4 = new ModelRenderer(this, 0, 0);
         frame4.addBox(-8F, 2F, 7F, 16, 2, 1);
@@ -79,13 +79,6 @@ public class ModelBombPress extends ModelBase {
         setRotation(Lever, -1.308997F, 0F, 0F);
     }
 
-    @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
-        super.render(entity, f, f1, f2, f3, f4, f5);
-        setRotationAngles(f, f1, f2, f3, f4, f5, entity);
-        renderModel(f5, 0F);
-    }
-
     private void setRotation(ModelRenderer model, float x, float y, float z) {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
@@ -94,8 +87,7 @@ public class ModelBombPress extends ModelBase {
 
     public void renderModel(float f, float f2) {
         Lever.rotateAngleX = handle.rotateAngleX = -0.75F + (0.55F * f2);
-        frame1.rotationPointY = frame2.rotationPointY = frame3.rotationPointY = frame4.rotationPointY = socket.rotationPointY = body.rotationPointY = (12F
-                * f2);
+        frame1.rotationPointY = frame2.rotationPointY = frame3.rotationPointY = frame4.rotationPointY = socket.rotationPointY = body.rotationPointY = (12F * f2);
         frame3.render(f);
         socket.render(f);
         frame2.render(f);

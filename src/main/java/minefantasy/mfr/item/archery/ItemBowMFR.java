@@ -40,7 +40,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import net.minecraftforge.fml.common.Optional;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -86,7 +85,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         setUnlocalizedName(name);
         setCreativeTab(CreativeTabMFR.tabOldTools);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     @Override
@@ -236,7 +235,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     }
 
     private void reloadBow(ItemStack item, EntityPlayer player) {
-        player.openGui(MineFantasyReborn.instance, 1, player.world, 1, 0, 0);
+        player.openGui(MineFantasyReborn.INSTANCE, 1, player.world, 1, 0, 0);
     }
 
     @Override

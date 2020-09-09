@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;

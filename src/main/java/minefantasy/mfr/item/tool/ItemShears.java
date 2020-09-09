@@ -48,7 +48,7 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     public ItemShears setCustom(String s) {

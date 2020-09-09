@@ -1,17 +1,26 @@
 package minefantasy.mfr.client.render.block;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
+import codechicken.lib.render.item.IItemRenderer;
+import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.block.decor.BlockAmmoBox;
+import minefantasy.mfr.block.refining.BlockBigFurnace;
+import minefantasy.mfr.itemblock.ItemBlockAmmoBox;
+import minefantasy.mfr.itemblock.ItemBlockSpecialRender;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemRenderer;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.animation.FastTESR;
+import net.minecraftforge.common.model.IModelState;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 /**
  * @author Anonymous Productions
@@ -19,161 +28,96 @@ import org.lwjgl.opengl.GL12;
  * Sources are provided for educational reasons. though small bits of
  * code, or methods can be used in your own creations.
  */
-public class TileEntityBigFurnaceRenderer extends TileEntitySpecialRenderer<TileEntityBigFurnace> {
+public class TileEntityBigFurnaceRenderer <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
     private ModelBigFurnace model;
-
     public TileEntityBigFurnaceRenderer() {
         model = new ModelBigFurnace();
     }
 
-    public void renderAModelAt(TileEntityBigFurnace tile, double d, double d1, double d2, float f) {
-        int i = 1;
+    @Override
+    public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
+
+        renderAModelAt((TileEntityBigFurnace) te, x, y, z, partialTick);
+    }
+
+    public void renderAModelAt(TileEntityBigFurnace tile, double d, double d1, double d2, float partialTicks) {
+        EnumFacing facing = EnumFacing.NORTH;
         if (tile.hasWorld()) {
-            i = tile.getBlockMetadata();
+            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+            facing = state.getValue(BlockBigFurnace.FACING);
         }
 
-        int j = 90 * i;
-
-        if (i == 0) {
-            j = 0;
-        }
-
-        if (i == 1) {
-            j = 270;
-        }
-
-        if (i == 2) {
-            j = 180;
-        }
-
-        if (i == 3) {
-            j = 90;
-        }
-        if (i == 4) {
-            j = 90;
-        }
-
-        String type = tile.getTexture();
-
-        bindTextureByName("textures/models/tileentity/" + type + ".png"); // texture
+        this.bindTexture(tile.getTexture());
 
         boolean display = tile.isBurning();
 
-        GL11.glPushMatrix(); // start
+        float doorAngle = tile.getPrevDoorAngle() + (tile.getDoorAngle() - tile.getPrevDoorAngle()) * partialTicks;
+
+        GlStateManager.pushMatrix(); // start
         float scale = 1.0F;
 
-        float offset = (1.0F - 0.0625F);
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + (0.0635F * 2F), (float) d2 + 0.5F); // size
-        GL11.glRotatef(j - 90, 0.0F, 1.0F, 0.0F);
-        GL11.glScalef(scale, -scale, -scale);
-        model.renderModel(display, 0.0625F);
+        GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F); // size
+        GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
+        GlStateManager.scale(scale, -scale, -scale);
 
-        float sc = 0.75F;
-        float angle = 90F / 20F * tile.doorAngle;
-        GL11.glPushMatrix();
-        GL11.glTranslatef(-pixel(8), -pixel(12), 0);
-        if (tile.isHeater()) {
-            GL11.glTranslatef(0, pixel(12), 0);
-        }
-        GL11.glPushMatrix();
-        GL11.glScalef(sc, sc, sc);
-        GL11.glRotatef(90, 0, 1, 0);
-        if (tile.isHeater()) {
-            GL11.glRotatef(angle, 1F, 0, 0);
-            renderDoorHeater();
-        } else {
-            GL11.glRotatef(-angle, 1F, 0, 0);
-            renderDoor();
-        }
-        GL11.glPopMatrix();
-        GL11.glPopMatrix();
 
-        GL11.glPopMatrix(); // end
+        model.renderModel(display, (float) ( 90F / 20F * -doorAngle / 180F * Math.PI), 0.0625F);
+
+        GlStateManager.popMatrix(); // end
 
     }
 
     public void renderInvModel(boolean heater, String type, double d, double d1, double d2, float f) {
-        int j = 90;
 
-        bindTextureByName("textures/models/tileentity/" + type + ".png"); // texture
-
-        GL11.glPushMatrix(); // start
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + type + ".png"));
+        GlStateManager.pushMatrix(); // start
         float scale = 1.0F;
 
-        float offset = (1.0F - 0.0625F);
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + (0.0635F * 2F), (float) d2 + 0.5F); // size
-        GL11.glRotatef(j - 90, 0.0F, 1.0F, 0.0F);
-        GL11.glScalef(scale, -scale, -scale);
-        model.renderModel(false, 0.0625F);
+        GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.5F , (float) d2 + 0.5F); // size
+        GlStateManager.rotate(180, 0.0F, 1.0F, 0.0F);
+        GlStateManager.scale(scale, -scale, -scale);
+        model.renderModel(false, 0F, 0.0625F);
 
-        float sc = 0.75F;
-        float angle = 0F;
-        GL11.glPushMatrix();
-        GL11.glTranslatef(-pixel(8), -pixel(12), 0);
-        if (heater) {
-            GL11.glTranslatef(0, pixel(12), 0);
-        }
-        GL11.glPushMatrix();
-        GL11.glScalef(sc, sc, sc);
-        GL11.glRotatef(90, 0, 1, 0);
-        if (heater) {
-            GL11.glRotatef(angle, 1F, 0, 0);
-            renderDoorHeater();
-        } else {
-            GL11.glRotatef(-angle, 1F, 0, 0);
-            renderDoor();
-        }
-        GL11.glPopMatrix();
-        GL11.glPopMatrix();
-
-        GL11.glPopMatrix(); // end
-
-    }
-
-    private void bindTextureByName(String image) {
-        bindTexture(TextureHelperMFR.getResource(image));
-    }
-
-    public void renderTileEntityAt(TileEntity tileentity, double d, double d1, double d2, float f) {
-        renderAModelAt((TileEntityBigFurnace) tileentity, d, d1, d2, f); // where to render
-    }
-
-    private void renderDoor() {
-        float xPos = 0.5F;
-        float yPos = 0.0F;
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glTranslatef(-xPos, -yPos, pixel(0.5F));
-        float var13 = 1F;
-        GL11.glScalef(var13, var13, var13);
-        GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        GL11.glTranslatef(-1F, -1F, 0.0F);
-
-    }
-
-    @Override
-    protected void bindTexture(ResourceLocation p_147499_1_) {
-        TextureManager texturemanager = TileEntityRendererDispatcher.instance.renderEngine;
-
-        if (texturemanager != null) {
-            texturemanager.bindTexture(p_147499_1_);
-        }
-    }
-
-    private void renderDoorHeater() {
-
-        Tessellator image = Tessellator.getInstance();
-        float xPos = 0.5F;
-        float yPos = 1.0F;
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glTranslatef(-xPos, -yPos, pixel(0.5F));
-        float var13 = 1F;
-        GL11.glScalef(var13, var13, var13);
-        GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-        GL11.glTranslatef(-1F, -1F, 0.0F);
+        GlStateManager.popMatrix(); // end
 
     }
 
     public float pixel(float count) {
         return count * 0.0625F;
+    }
+
+    @Override
+    public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
+        ItemBlock itemBlock;
+
+        BlockBigFurnace furnace = new BlockBigFurnace("furnace_stone", false, 0);
+
+        if (stack.getItem() instanceof ItemBlockSpecialRender){
+            itemBlock = (ItemBlock) stack.getItem();
+            furnace = (BlockBigFurnace) itemBlock.getBlock();
+        }
+
+        GlStateManager.pushMatrix();
+
+        renderInvModel(furnace.isHeater, furnace.isHeater ? "furnace_heater" : "furnace_rock", 0F, 0F, 0F, 0F);
+
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        GlStateManager.popMatrix();
+    }
+
+    @Override
+    public IModelState getTransforms() {
+        return TransformUtils.DEFAULT_BLOCK;
+    }
+
+    @Override
+    public boolean isAmbientOcclusion() {
+        return false;
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return true;
     }
 }

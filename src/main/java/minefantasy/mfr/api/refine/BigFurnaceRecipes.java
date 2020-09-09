@@ -34,7 +34,7 @@ public class BigFurnaceRecipes {
     }
 
     public static BigFurnaceRecipes getResult(ItemStack input) {
-        if (input == null)
+        if (input.isEmpty())
             return null;
 
         BigFurnaceRecipes specific = recipeList.get(CustomToolHelper.getReferenceName(input));

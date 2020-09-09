@@ -1,4 +1,4 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

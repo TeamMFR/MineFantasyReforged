@@ -1,9 +1,9 @@
-package minefantasy.mfr.client.gui;
+package minefantasy.mfr.gui;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.container.ContainerBlastChamber;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;

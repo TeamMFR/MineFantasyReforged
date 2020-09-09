@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.refining;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityBloomery;
+import minefantasy.mfr.tile.TileEntityBloomery;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.item.tool.ItemLighterMF;
 import net.minecraft.block.Block;

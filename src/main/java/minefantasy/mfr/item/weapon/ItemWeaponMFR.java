@@ -24,7 +24,7 @@ import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeaponSpeed;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
@@ -44,13 +44,13 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
@@ -156,7 +156,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             baseDamage = 0F;
         }
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     public static int getParry(ItemStack item) {
@@ -445,7 +445,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
                     for (int a = 0; a < 4; a++) {
                         hit.world.spawnParticle(EnumParticleTypes.REDSTONE, hit.posX, hit.posY + hit.getEyeHeight(), hit.posZ, rand.nextDouble() / 2D, rand.nextDouble() / 2D, rand.nextDouble() / 2D);
                     }
-                    ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(Potion.getPotionById(2), 100, 0));
+                    ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 0));
                 }
             }
         }

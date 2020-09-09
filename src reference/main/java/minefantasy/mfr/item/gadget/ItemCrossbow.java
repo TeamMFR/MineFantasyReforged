@@ -11,7 +11,7 @@ import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;

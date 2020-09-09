@@ -1,20 +1,20 @@
 package minefantasy.mfr.entity.mob;
 
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityDragonBreath;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PoisonBreath extends DragonBreath {
 
@@ -38,8 +38,8 @@ public class PoisonBreath extends DragonBreath {
         super.onHitEntity(target, instance);
         if (target instanceof EntityLivingBase) {
             float dam = instance.getDamage();
-            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.getPotionById(19), 40, (int) dam));
-            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 50, 10));
+            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.POISON, 40, (int) dam));
+            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 50, 10));
 
             if (instance.rand.nextInt(10) == 0) {
                 Iterable<ItemStack> equipment = target.getEquipmentAndArmor();

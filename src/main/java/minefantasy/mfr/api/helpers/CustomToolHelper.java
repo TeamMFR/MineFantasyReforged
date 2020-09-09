@@ -28,7 +28,7 @@ public class CustomToolHelper {
      * A bit of the new system, gets custom materials for the head
      */
     public static CustomMaterial getCustomPrimaryMaterial(ItemStack item) {
-        if (item == null)
+        if (item.isEmpty())
             return null;
 
         CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
@@ -39,7 +39,7 @@ public class CustomToolHelper {
     }
 
     public static CustomMaterial getCustomSecondaryMaterial(ItemStack item) {
-        if (item == null)
+        if (item.isEmpty())
             return null;
 
         CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);

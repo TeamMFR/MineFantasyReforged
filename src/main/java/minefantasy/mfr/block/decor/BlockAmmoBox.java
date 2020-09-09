@@ -1,40 +1,34 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
-import minefantasy.mfr.block.tile.decor.TileEntityWoodDecor;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
 import minefantasy.mfr.util.MFRLogUtil;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class BlockAmmoBox extends BlockWoodDecor {
     public static final String NBT_Ammo = "Ammo", NBT_Stock = "Stock";
-    public static int ammo_RI = 116;
     /**
      * Food-Ammo-All
      */
     public final byte storageType;
     public String name;
-    private Random rand = new Random();
-
     public BlockAmmoBox(String name, byte storageType) {
         this(name, name, storageType);
     }
@@ -55,6 +49,11 @@ public class BlockAmmoBox extends BlockWoodDecor {
     }
 
     @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityAmmoBox();
+    }
+
+    @Override
     public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos){
         float width = (storageType == 0 ? 8F : storageType == 1 ? 14F : 16F) / 16F;
         float height = (storageType == 0 ? 4F : storageType == 1 ? 8F : 9F) / 16F;
@@ -70,7 +69,7 @@ public class BlockAmmoBox extends BlockWoodDecor {
             }
             return i;
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public static int getStock(ItemStack item, boolean removeTag) {
@@ -89,29 +88,24 @@ public class BlockAmmoBox extends BlockWoodDecor {
         return false;
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public int getRenderType() {
-        return ammo_RI;
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
     }
 
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
 
-        TileEntityAmmoBox tile = getTile(world, pos);
+        TileEntityAmmoBox tile = (TileEntityAmmoBox) getTile(world, pos);
         if (tile != null) {
-            if (stack.hasTagCompound() && stack.getTagCompound().hasKey(NBT_Ammo)
-                    && stack.getTagCompound().hasKey(NBT_Stock)) {
-                tile.ammo = new ItemStack(stack.getTagCompound().getCompoundTag(NBT_Ammo));
+            if (stack.hasTagCompound() && stack.getTagCompound().hasKey(NBT_Ammo) && stack.getTagCompound().hasKey(NBT_Stock)) {
+                tile.inventoryStack = new ItemStack(stack.getTagCompound().getCompoundTag(NBT_Ammo));
                 tile.stock = stack.getTagCompound().getInteger(NBT_Stock);
 
             }
         }
         super.onBlockPlacedBy(world, pos, state, user, stack);
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityAmmoBox();
     }
 
     @Override
@@ -137,14 +131,14 @@ public class BlockAmmoBox extends BlockWoodDecor {
 
     private ItemStack modifyAmmo(TileEntityAmmoBox tile, ItemStack item) {
         if (tile != null && item != null) {
-            if (tile.ammo != null) {
+            if (tile.inventoryStack != null) {
                 NBTTagCompound nbt = new NBTTagCompound();
                 if (!item.hasTagCompound()) {
                     item.setTagCompound(new NBTTagCompound());
                 }
-                tile.ammo.writeToNBT(nbt);
+                tile.inventoryStack.writeToNBT(nbt);
 
-                MFRLogUtil.logDebug("Added Drop: " + tile.ammo.getDisplayName() + " x" + tile.stock);
+                MFRLogUtil.logDebug("Added Drop: " + tile.inventoryStack.getDisplayName() + " x" + tile.stock);
                 item.getTagCompound().setTag(NBT_Ammo, nbt);
                 item.getTagCompound().setInteger(NBT_Stock, tile.stock);
             }
@@ -152,11 +146,28 @@ public class BlockAmmoBox extends BlockWoodDecor {
         return item;
     }
 
-    private TileEntityAmmoBox getTile(World world, BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityAmmoBox) {
-            return (TileEntityAmmoBox) tile;
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+        {
+            enumfacing = EnumFacing.NORTH;
         }
-        return null;
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(FACING).getIndex();
+    }
+
+    @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
 }

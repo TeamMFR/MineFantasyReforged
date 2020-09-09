@@ -1,4 +1,4 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;

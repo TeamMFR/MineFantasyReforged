@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile.blastfurnace;
+package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.api.helpers.CustomToolHelper;

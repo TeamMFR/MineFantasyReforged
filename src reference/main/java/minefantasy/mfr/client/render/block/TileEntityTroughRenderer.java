@@ -2,7 +2,7 @@ package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
+import minefantasy.mfr.tile.decor.TileEntityTrough;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

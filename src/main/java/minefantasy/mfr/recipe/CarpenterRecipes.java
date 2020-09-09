@@ -67,15 +67,10 @@ public class CarpenterRecipes {
         } else {
             addNonPrimitiveStone();
         }
-        MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(ToolListMFR.RESEARCH_BOOK), "", sewing, "hands", -1, 1,
-                new Object[]{"B", 'B', Items.BOOK,});
+        MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(ToolListMFR.RESEARCH_BOOK), "", sewing, "hands", -1, 1, new Object[]{"B", 'B', Items.BOOK,});
 
         if (ConfigHardcore.HCCallowRocks) {
-            KnowledgeListMFR.sharpRocksR = MineFantasyRebornAPI.addCarpenterRecipe(null,
-                    new ItemStack(ComponentListMFR.SHARP_ROCK, 8), "", stonemason, "hammer", -1, 10,
-                    new Object[]{"S", 'S', Blocks.COBBLESTONE,});
-
-        } else {
+            KnowledgeListMFR.sharpRocksR = MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(ComponentListMFR.SHARP_ROCK, 8), "", stonemason, "hammer", -1, 10, new Object[]{"S", 'S', Blocks.COBBLESTONE,});
 
         }
         Salvage.addSalvage(ToolListMFR.DRY_ROCKS, Blocks.COBBLESTONE);
@@ -396,10 +391,10 @@ public class CarpenterRecipes {
                         'P', ComponentListMFR.PLANK,});
 
         KnowledgeListMFR.strongRackR = MineFantasyRebornAPI.addCarpenterRecipe(construction,
-                new ItemStack(BlockListMFR.ADV_TANNER), "", nailHammer, "hammer", 1, 80,
+                new ItemStack(BlockListMFR.TANNER_REFINED), "", nailHammer, "hammer", 1, 80,
                 new Object[]{"NNN", "PPP", "P P", "PPP", 'N', ComponentListMFR.NAIL, 'P',
                         ComponentListMFR.PLANK.construct("RefinedWood"),});
-        Salvage.addSalvage(BlockListMFR.ADV_TANNER, ComponentListMFR.PLANK.construct("RefinedWood", 8),
+        Salvage.addSalvage(BlockListMFR.TANNER_REFINED, ComponentListMFR.PLANK.construct("RefinedWood", 8),
                 new ItemStack(ComponentListMFR.NAIL, 3));
 
         MineFantasyRebornAPI.addCarpenterRecipe(construction, new ItemStack(BlockListMFR.REFINED_PLANKS), "paint_brush",
@@ -414,21 +409,21 @@ public class CarpenterRecipes {
     private static void addStonemason() {
         KnowledgeListMFR.quernR = MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(BlockListMFR.QUERN), "",
                 stonemason, "hammer", -1, 10, new Object[]{"FSF", "SSS", 'F', Items.FLINT, 'S', Blocks.STONE,});
-        KnowledgeListMFR.stoneovenRecipe = MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(BlockListMFR.OVEN_STONE),
+        KnowledgeListMFR.stoneovenRecipe = MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(BlockListMFR.OVEN),
                 "", stonemason, "hammer", -1, 10,
-                new Object[]{"S", "C", 'C', BlockListMFR.ROAST, 'S', Blocks.STONE,});
+                new Object[]{"S", "C", 'C', BlockListMFR.STOVE, 'S', Blocks.STONE,});
 
         KnowledgeListMFR.bloomeryR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry, new ItemStack(BlockListMFR.BLOOMERY),
                 "bloomery", stonemason, "hammer", -1, 10,
                 new Object[]{" S ", "S S", "SCS", 'C', Blocks.COAL_BLOCK, 'S', Blocks.STONE,});
         KnowledgeListMFR.crucibleRecipe = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                new ItemStack(BlockListMFR.CRUCIBLE), "crucible", stonemason, "hammer", -1, 20,
+                new ItemStack(BlockListMFR.CRUCIBLE_STONE), "crucible", stonemason, "hammer", -1, 20,
                 new Object[]{"SSS", "S S", "SSS", 'S', Blocks.STONE,});
         KnowledgeListMFR.advCrucibleRecipe = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                new ItemStack(BlockListMFR.CRUCIBLE_ADV), "crucible2", basic, 40,
-                new Object[]{"SSS", "SCS", "SSS", 'S', ComponentListMFR.FIRECLAY, 'C', BlockListMFR.CRUCIBLE});
-        Salvage.addSalvage(BlockListMFR.CRUCIBLE, new ItemStack(Blocks.STONE, 8));
-        Salvage.addSalvage(BlockListMFR.CRUCIBLE_ADV, new ItemStack(ComponentListMFR.FIRECLAY, 8), BlockListMFR.CRUCIBLE);
+                new ItemStack(BlockListMFR.CRUCIBLE_FIRECLAY), "crucible2", basic, 40,
+                new Object[]{"SSS", "SCS", "SSS", 'S', ComponentListMFR.FIRECLAY, 'C', BlockListMFR.CRUCIBLE_STONE});
+        Salvage.addSalvage(BlockListMFR.CRUCIBLE_STONE, new ItemStack(Blocks.STONE, 8));
+        Salvage.addSalvage(BlockListMFR.CRUCIBLE_FIRECLAY, new ItemStack(ComponentListMFR.FIRECLAY, 8), BlockListMFR.CRUCIBLE_STONE);
 
         KnowledgeListMFR.chimneyRecipe = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
                 new ItemStack(BlockListMFR.CHIMNEY_STONE, 8), "", stonemason, "hammer", -1, 30,
@@ -819,7 +814,7 @@ public class CarpenterRecipes {
                         ComponentListMFR.BOLT, 'S', Items.STRING, 'C', BlockListMFR.CARPENTER,});
 
         KnowledgeListMFR.engTannerR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(BlockListMFR.ENG_TANNER), "engTanner", spanner, "spanner", 3, 300,
+                new ItemStack(BlockListMFR.TANNER_METAL), "engTanner", spanner, "spanner", 3, 300,
                 new Object[]{"BLB", "SPS", "GGG", "SFS", 'S', ComponentListMFR.IRON_STRUT, 'B', ComponentListMFR.BOLT,
                         'F', ComponentListMFR.IRON_FRAME, 'L', Blocks.LEVER, 'P',
                         new ItemStack(CustomToolListMFR.STANDARD_KNIFE, 1, 0), 'G', ComponentListMFR.BRONZE_GEARS,});
@@ -832,7 +827,7 @@ public class CarpenterRecipes {
         ItemStack steelPlate = ComponentListMFR.PLATE.createComm("steel");
         KnowledgeListMFR.autoCrucibleR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
                 new ItemStack(BlockListMFR.CRUCIBLE_AUTO), "advcrucible", spanner, "spanner", 4, 200,
-                new Object[]{" T ", "PCP", "PGP", "BBB", 'B', ComponentListMFR.BOLT, 'C', BlockListMFR.CRUCIBLE_ADV, 'G',
+                new Object[]{" T ", "PCP", "PGP", "BBB", 'B', ComponentListMFR.BOLT, 'C', BlockListMFR.CRUCIBLE_FIRECLAY, 'G',
                         ComponentListMFR.TUNGSTEN_GEARS, 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'P', steelPlate});
         KnowledgeListMFR.spyglassR = MineFantasyRebornAPI.addCarpenterRecipe(engineering, new ItemStack(ToolListMFR.SPYGLASS),
                 "spyglass", spanner, "spanner", 1, 300,
@@ -860,7 +855,7 @@ public class CarpenterRecipes {
                 ComponentListMFR.TUNGSTEN_GEARS);
 
         Salvage.addSalvage(BlockListMFR.CRUCIBLE_AUTO, new ItemStack(ComponentListMFR.BOLT, 3),
-                ComponentListMFR.TUNGSTEN_GEARS, BlockListMFR.CRUCIBLE_ADV, steelPlate, steelPlate, steelPlate,
+                ComponentListMFR.TUNGSTEN_GEARS, BlockListMFR.CRUCIBLE_FIRECLAY, steelPlate, steelPlate, steelPlate,
                 steelPlate);
         Salvage.addSalvage(BlockListMFR.BOMB_BENCH, new ItemStack(ComponentListMFR.BOLT, 4), ComponentListMFR.IRON_FRAME,
                 BlockListMFR.CARPENTER);
@@ -869,7 +864,7 @@ public class CarpenterRecipes {
         Salvage.addSalvage(BlockListMFR.BOMB_PRESS, new ItemStack(ComponentListMFR.IRON_STRUT, 2),
                 new ItemStack(ComponentListMFR.BOLT, 2), new ItemStack(ComponentListMFR.BRONZE_GEARS, 2), Blocks.LEVER,
                 ComponentListMFR.IRON_FRAME);
-        Salvage.addSalvage(BlockListMFR.ENG_TANNER, new ItemStack(ComponentListMFR.IRON_STRUT, 4),
+        Salvage.addSalvage(BlockListMFR.TANNER_METAL, new ItemStack(ComponentListMFR.IRON_STRUT, 4),
                 new ItemStack(ComponentListMFR.BOLT, 2), new ItemStack(ComponentListMFR.BRONZE_GEARS, 3),
                 CustomToolListMFR.STANDARD_NEEDLE, Blocks.LEVER, ComponentListMFR.IRON_FRAME);
         Salvage.addSalvage(BlockListMFR.FORGE_METAL, new ItemStack(ComponentListMFR.BOLT, 4), blackPlate, blackPlate,

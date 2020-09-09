@@ -1,6 +1,5 @@
 package minefantasy.mfr.api.stamina;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.PowerArmour;
@@ -8,9 +7,9 @@ import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
@@ -101,8 +100,8 @@ public class StaminaBar {
             }
             level += user.getEntityData().getFloat(staminaRegenName);
         }
-        if (user.getActivePotionEffect(Potion.getPotionById(10)) != null) {
-            level += (user.getActivePotionEffect(Potion.getPotionById(10)).getAmplifier() + 1) * 2.5F;
+        if (user.getActivePotionEffect(MobEffects.REGENERATION) != null) {
+            level += (user.getActivePotionEffect(MobEffects.REGENERATION).getAmplifier() + 1) * 2.5F;
         }
         return level;
     }
@@ -219,11 +218,10 @@ public class StaminaBar {
      * @param user    the entity to buff
      * @param mod     the amount of stamina added
      * @param seconds the time it takes to wear off
-     * @return true if either time or modification is applied.
      */
-    public static boolean buffStamina(EntityLivingBase user, float mod, int seconds) {
+    public static void buffStamina(EntityLivingBase user, float mod, int seconds) {
         if (!isSystemActive) {
-            return false;
+            return;
         }
         boolean success = false;
         int ticks = seconds * 20;
@@ -235,12 +233,11 @@ public class StaminaBar {
             setBonusStaminaTicks(user, ticks);
             setBonusStamina(user, mod);
         }
-        return false;
     }
 
-    public static boolean buffStaminaRegen(EntityLivingBase user, float mod, int seconds) {
+    public static void buffStaminaRegen(EntityLivingBase user, float mod, int seconds) {
         if (!isSystemActive) {
-            return false;
+            return;
         }
         boolean success = false;
         int ticks = seconds * 20;
@@ -252,7 +249,6 @@ public class StaminaBar {
             setBonusStaminaRegenTicks(user, ticks);
             setBonusStaminaRegen(user, mod);
         }
-        return false;
     }
 
     /**
@@ -380,7 +376,7 @@ public class StaminaBar {
      * Checks if stamina is available
      *
      * @param onUse whether or not stamina is trying to be used
-     * @return
+     * @return isStaminaAvailable or not
      */
     public static boolean isStaminaAvailable(EntityLivingBase user, float level, boolean onUse) {
         if (getStaminaValue(user) >= level) {
@@ -419,15 +415,15 @@ public class StaminaBar {
         }
 
         if (countHeld) {
-            if (user.getHeldItem(EnumHand.MAIN_HAND) != null && user.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IHeldStaminaItem) {
-                value *= (((IHeldStaminaItem) user.getHeldItem(EnumHand.MAIN_HAND).getItem()).getDecayMod(user, user.getHeldItemMainhand()));
+            if (!user.getHeldItemMainhand().isEmpty() && user.getHeldItemMainhand().getItem() instanceof IHeldStaminaItem) {
+                value *= (((IHeldStaminaItem) user.getHeldItemMainhand().getItem()).getDecayMod(user, user.getHeldItemMainhand()));
             }
         }
         if (countArmour) {
             float armourMod = 1.0F;
             Iterable<ItemStack> armour = user.getArmorInventoryList();
             for (ItemStack stack: armour) {
-                if (stack != null && stack.getItem() instanceof IWornStaminaItem) {
+                if (!stack.isEmpty() && stack.getItem() instanceof IWornStaminaItem) {
                     armourMod += (((IWornStaminaItem) stack.getItem()).getDecayModifier(user, stack));
                 }
             }
@@ -451,7 +447,7 @@ public class StaminaBar {
             float armourMod = 1.0F;
             Iterable<ItemStack> armour = user.getArmorInventoryList();
             for (ItemStack stack: armour) {
-                if (stack != null && stack.getItem() instanceof IWornStaminaItem) {
+                if (!stack.isEmpty() && stack.getItem() instanceof IWornStaminaItem) {
                     armourMod += ((IWornStaminaItem) stack.getItem()).getDecayModifier(user, stack);
                 }
             }
@@ -471,9 +467,9 @@ public class StaminaBar {
 
         if (!TacticalManager.isImmuneToWeight(user)) {
             if (countHeld) {
-                if (user.getHeldItem(EnumHand.MAIN_HAND) != null && user.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IHeldStaminaItem) {
-                    value *= ((IHeldStaminaItem) user.getHeldItem(EnumHand.MAIN_HAND).getItem()).getRegenModifier(user,
-                            user.getHeldItem(EnumHand.MAIN_HAND));
+                if (!user.getHeldItemMainhand().isEmpty() && user.getHeldItemMainhand().getItem() instanceof IHeldStaminaItem) {
+                    value *= ((IHeldStaminaItem) user.getHeldItemMainhand().getItem()).getRegenModifier(user,
+                            user.getHeldItemMainhand());
                 }
             }
             if (countArmour) {
@@ -486,7 +482,7 @@ public class StaminaBar {
 
                 Iterable<ItemStack> armour = user.getArmorInventoryList();
                 for (ItemStack stack: armour) {
-                    if (stack != null && stack.getItem() instanceof IWornStaminaItem) {
+                    if (!stack.isEmpty() && stack.getItem() instanceof IWornStaminaItem) {
                         armourMod += ((IWornStaminaItem) stack.getItem()).getRegenModifier(user, stack);
                     }
                 }
@@ -511,9 +507,9 @@ public class StaminaBar {
 
         if (!TacticalManager.isImmuneToWeight(user)) {
             if (countHeld) {
-                if (user.getHeldItem(EnumHand.MAIN_HAND) != null && user.getHeldItem(EnumHand.MAIN_HAND).getItem() instanceof IHeldStaminaItem) {
-                    value *= ((IHeldStaminaItem) user.getHeldItem(EnumHand.MAIN_HAND).getItem()).getIdleModifier(user,
-                            user.getHeldItem(EnumHand.MAIN_HAND));
+                if (!user.getHeldItemMainhand().isEmpty() && user.getHeldItemMainhand().getItem() instanceof IHeldStaminaItem) {
+                    value *= ((IHeldStaminaItem) user.getHeldItemMainhand().getItem()).getIdleModifier(user,
+                            user.getHeldItemMainhand());
                 }
             }
             if (countArmour) {
@@ -521,7 +517,7 @@ public class StaminaBar {
 
                 Iterable<ItemStack> armour = user.getArmorInventoryList();
                 for (ItemStack stack: armour) {
-                    if (stack != null && stack.getItem() instanceof IWornStaminaItem) {
+                    if (!stack.isEmpty() && stack.getItem() instanceof IWornStaminaItem) {
                         armourMod += ((IWornStaminaItem) stack.getItem()).getIdleModifier(user, stack);
                     }
                 }

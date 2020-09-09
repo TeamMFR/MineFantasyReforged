@@ -2,41 +2,9 @@ package minefantasy.mfr.proxy;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.helpers.ClientTickHandler;
-import minefantasy.mfr.api.knowledge.InformationList;
-import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
-import minefantasy.mfr.block.tile.TileEntityBellows;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
-import minefantasy.mfr.block.tile.TileEntityBloomery;
-import minefantasy.mfr.block.tile.TileEntityBombBench;
-import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
-import minefantasy.mfr.block.tile.TileEntityComponent;
-import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
-import minefantasy.mfr.block.tile.TileEntityCrucible;
-import minefantasy.mfr.block.tile.TileEntityForge;
-import minefantasy.mfr.block.tile.TileEntityQuern;
-import minefantasy.mfr.block.tile.TileEntityResearch;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
-import minefantasy.mfr.client.KnowledgePageRegistry;
-import minefantasy.mfr.client.gui.GuiAnvilMF;
-import minefantasy.mfr.client.gui.GuiBigFurnace;
-import minefantasy.mfr.client.gui.GuiBlastChamber;
-import minefantasy.mfr.client.gui.GuiBlastHeater;
-import minefantasy.mfr.client.gui.GuiBloomery;
-import minefantasy.mfr.client.gui.GuiBombBench;
-import minefantasy.mfr.client.gui.GuiCarpenterMF;
-import minefantasy.mfr.client.gui.GuiCrossbowBench;
-import minefantasy.mfr.client.gui.GuiCrucible;
-import minefantasy.mfr.client.gui.GuiForge;
-import minefantasy.mfr.client.gui.GuiKnowledge;
-import minefantasy.mfr.client.gui.GuiKnowledgeEntry;
-import minefantasy.mfr.client.gui.GuiQuern;
-import minefantasy.mfr.client.gui.GuiReload;
-import minefantasy.mfr.client.gui.GuiResearchBlock;
 import minefantasy.mfr.client.render.AnimationHandlerMF;
 import minefantasy.mfr.client.render.HudHandlerMF;
 import minefantasy.mfr.client.render.RenderArrowMF;
@@ -46,13 +14,15 @@ import minefantasy.mfr.client.render.RenderFireBlast;
 import minefantasy.mfr.client.render.RenderMine;
 import minefantasy.mfr.client.render.RenderParachute;
 import minefantasy.mfr.client.render.RenderShrapnel;
+import minefantasy.mfr.client.render.RenderSmoke;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
-import minefantasy.mfr.client.render.block.TileEntityForgeRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
+import minefantasy.mfr.client.render.block.TileEntityRackRenderer;
+import minefantasy.mfr.client.render.block.TileEntityRoastRenderer;
 import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
-import minefantasy.mfr.client.render.block.component.TileEntityComponentRenderer;
 import minefantasy.mfr.client.render.mob.ModelHound;
 import minefantasy.mfr.client.render.mob.RenderDragon;
 import minefantasy.mfr.client.render.mob.RenderHound;
@@ -68,11 +38,17 @@ import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.mechanics.ExtendedReachMFR;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
+import minefantasy.mfr.tile.TileEntityBellows;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
+import minefantasy.mfr.tile.TileEntityBombPress;
+import minefantasy.mfr.tile.TileEntityQuern;
+import minefantasy.mfr.tile.TileEntityRoast;
+import minefantasy.mfr.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -124,12 +100,14 @@ public class ClientProxy extends ClientProxyBase {
 
     @Override
     public void preInit(FMLPreInitializationEvent e) {
+        registerRenders();
+        registerTickHandlers();
     }
 
     @Override
     public void registerMain() {
         super.registerMain();
-//        registerRenders();
+
     }
 
     @Override
@@ -148,14 +126,14 @@ public class ClientProxy extends ClientProxyBase {
         MinecraftForge.EVENT_BUS.register(new HudHandlerMF());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityForge.class, new TileEntityForgeRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new TileEntityBellowsRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer());
-
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new TileEntityBellowsRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBombPress.class, new TileEntityBombPressRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer<>());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer<>());
     }
 
     public void registerEntityRenderer() {
@@ -163,8 +141,8 @@ public class ClientProxy extends ClientProxyBase {
         RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, new RenderBomb());
         RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, new RenderMine());
         RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, new RenderShrapnel("shrapnel"));
-        RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, new RenderFireBlast());
-        RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, new RenderFireBlast());
+        RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, RenderFireBlast::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, RenderSmoke::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, new RenderDragonBreath());
         RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
         //RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour()); //TODO: Fix if necessary
@@ -179,72 +157,9 @@ public class ClientProxy extends ClientProxyBase {
         return Minecraft.getMinecraft().player;
     }
 
-    @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        Minecraft mc = Minecraft.getMinecraft();
-        if (ID == 0) {
-            TileEntity tile = world.getTileEntity(new BlockPos(x, y, z));
-            // int meta = world.getBlockMetadata(x, y, z);
+    private void registerRenders() {
+        registerEntityRenderer();
 
-            if (tile == null) {
-                return null;
-            }
-
-            if (tile instanceof TileEntityAnvilMFR) {
-                return new GuiAnvilMF(player.inventory, (TileEntityAnvilMFR) tile);
-            }
-            if (tile instanceof TileEntityCarpenterMFR) {
-                return new GuiCarpenterMF(player.inventory, (TileEntityCarpenterMFR) tile);
-            }
-            if (tile instanceof TileEntityBombBench) {
-                return new GuiBombBench(player.inventory, (TileEntityBombBench) tile);
-            }
-            if (tile instanceof TileEntityBlastFH) {
-                return new GuiBlastHeater(player.inventory, (TileEntityBlastFH) tile);
-            }
-            if (tile instanceof TileEntityBlastFC) {
-                return new GuiBlastChamber(player.inventory, (TileEntityBlastFC) tile);
-            }
-            if (tile instanceof TileEntityCrucible) {
-                return new GuiCrucible(player.inventory, (TileEntityCrucible) tile);
-            }
-            if (tile instanceof TileEntityForge) {
-                return new GuiForge(player.inventory, (TileEntityForge) tile);
-            }
-            if (tile instanceof TileEntityResearch) {
-                return new GuiResearchBlock(player.inventory, (TileEntityResearch) tile);
-            }
-            if (tile instanceof TileEntityBloomery) {
-                return new GuiBloomery(player.inventory, (TileEntityBloomery) tile);
-            }
-            if (tile instanceof TileEntityCrossbowBench) {
-                return new GuiCrossbowBench(player.inventory, (TileEntityCrossbowBench) tile);
-            }
-            if (tile instanceof TileEntityQuern) {
-                return new GuiQuern(player.inventory, (TileEntityQuern) tile);
-            }
-            if (tile instanceof TileEntityBigFurnace) {
-                return new GuiBigFurnace(player, (TileEntityBigFurnace) tile);
-            }
-            return null;
-        }
-        if (ID == 1) {
-            if (x == 0) {// GuiAchievements
-                if (y >= 0) {
-                    return new GuiKnowledgeEntry(mc.currentScreen, InformationList.knowledgeList.get(y));
-                }
-                return new GuiKnowledge(player);
-            }
-            if (x == 1 && player.getHeldItemMainhand() != null) {
-                return new GuiReload(player.inventory, player.getHeldItemMainhand());
-            }
-        }
-        return null;
-    }
-
-//    private void registerRenders() {
-//        registerEntityRenderer();
-//
 //        MinecraftForgeClient.registerItemRenderer(ToolListMFR.swordStone, new RenderSword());
 //        MinecraftForgeClient.registerItemRenderer(ToolListMFR.maceStone, new RenderSword());
 //        MinecraftForgeClient.registerItemRenderer(ToolListMFR.waraxeStone, new RenderSword().setAxe());
@@ -314,6 +229,6 @@ public class ClientProxy extends ClientProxyBase {
 //        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_lumber, new RenderHeavyWeapon().setBlunt());
 //        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_saw, new RenderSaw());
 //        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_bow, new RenderBow(false));
-//
-//    }
+
+    }
 }

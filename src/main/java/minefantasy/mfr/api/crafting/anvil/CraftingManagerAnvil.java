@@ -38,8 +38,7 @@ public class CraftingManagerAnvil {
         return instance;
     }
 
-    public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool,
-                                  int hammer, int anvil, int time, Object... input) {
+    public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, Object... input) {
         return addRecipe(result, skill, research, hot, tool, hammer, anvil, time, (byte) 0, input);
     }
 

@@ -1,39 +1,37 @@
 package minefantasy.mfr.block.food;
 
-import minefantasy.mfr.MineFantasyReborn;
-import net.minecraft.block.properties.PropertyInteger;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.item.food.ItemFoodMF;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.item.food.ItemFoodMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCakeMF extends Block {
     public static final PropertyInteger BITES = PropertyInteger.create("bites", 0, 8);
     protected static final AxisAlignedBB[] CAKE_AABB = new AxisAlignedBB[] {
-            new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.1875D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.3125D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.4375D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.5625D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.6875D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.8D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.925D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D),
-            new AxisAlignedBB(0.25D, 0.0D, 0.0625D, 0.9375D, 0.5D, 0.9375D)};
-    protected float height = 0.5F;
-    protected float width = 14F / 16F;
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 15D / 16D),  //0
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 13.5D / 16D),//1
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 12D / 16D),  //2
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 10.5D / 16D),//3
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 9D / 16D),   //4
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 7.5D / 16D), //5
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 6D / 16D),   //6
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 4.5D / 16D), //7
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 3D / 16D)    //8
+    };
     private Item cakeSlice;
 
     public BlockCakeMF(String name, Item slice) {
@@ -45,6 +43,28 @@ public class BlockCakeMF extends Block {
 
         this.setTickRandomly(true);
         setCreativeTab(CreativeTabMFR.tabFood);
+    }
+
+
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, BITES);
+    }
+
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     */
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(BITES, meta);
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     */
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(BITES);
     }
 
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -72,7 +92,7 @@ public class BlockCakeMF extends Block {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand,
             EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (ToolHelper.getCrafterTool(user.getHeldItem(EnumHand.MAIN_HAND)).equalsIgnoreCase("knife")) {
+        if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("knife")) {
             this.cutSlice(world, state, pos, user);
             return true;
         }
@@ -84,7 +104,7 @@ public class BlockCakeMF extends Block {
      */
     @Override
     public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-        if (ToolHelper.getCrafterTool(user.getHeldItem(EnumHand.MAIN_HAND)).equalsIgnoreCase("knife")) {
+        if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("knife")) {
             IBlockState state = world.getBlockState(pos);
             this.cutSlice(world, state, pos, user);
         }
@@ -104,8 +124,8 @@ public class BlockCakeMF extends Block {
         } else {
             world.setBlockState(pos, state.withProperty(BITES, Integer.valueOf(i + 1)), 3);
         }
-        if (user.getHeldItem(EnumHand.MAIN_HAND) != null) {
-            user.getHeldItem(EnumHand.MAIN_HAND).damageItem(1, user);
+        if (!user.getHeldItemMainhand().isEmpty()) {
+            user.getHeldItemMainhand().damageItem(1, user);
         }
     }
 
@@ -152,11 +172,5 @@ public class BlockCakeMF extends Block {
             return ((ItemFoodMF) cakeSlice).itemRarity;
         }
         return 0;
-    }
-
-    public Block setCheese() {
-        width = 0.5F;
-        height = 5F / 16F;
-        return this;
     }
 }

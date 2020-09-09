@@ -11,7 +11,7 @@ import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
@@ -29,7 +29,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -39,7 +38,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.List;
 
@@ -101,7 +99,7 @@ public class ItemCrossbow extends ItemBaseMFR
         ItemStack item = user.getHeldItem(hand);
         if (!world.isRemote && user.isSneaking() || AmmoMechanicsMFR.isDepleted(item))// OPEN INV
         {
-            user.openGui(MineFantasyReborn.instance, 1, user.world, 1, 0, 0);
+            user.openGui(MineFantasyReborn.INSTANCE, 1, user.world, 1, 0, 0);
             return ActionResult.newResult(EnumActionResult.FAIL, item);
         }
         ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);

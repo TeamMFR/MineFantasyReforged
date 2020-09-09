@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile.decor;
+package minefantasy.mfr.tile.decor;
 
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
@@ -10,7 +10,7 @@ import minefantasy.mfr.block.decor.BlockAmmoBox;
 import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.gadget.ItemSyringe;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.AmmoBoxPacket;
+import minefantasy.mfr.network.AmmoBoxPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

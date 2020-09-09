@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
-import minefantasy.mfr.block.tile.TileEntityWorldGenMarker;
+import minefantasy.mfr.tile.TileEntityWorldGenMarker;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;

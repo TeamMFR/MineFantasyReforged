@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
@@ -7,7 +7,7 @@ import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.block.refining.BlockCrucible;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFH;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEndPortalFrame;
 import net.minecraft.block.material.Material;

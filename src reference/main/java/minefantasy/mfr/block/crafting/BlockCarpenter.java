@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.crafting;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenterMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

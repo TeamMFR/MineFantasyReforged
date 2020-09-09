@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumParticleTypes;
@@ -12,7 +12,7 @@ import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.block.crafting.BlockRoast;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.TileInventoryPacket;
+import minefantasy.mfr.network.TileInventoryPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

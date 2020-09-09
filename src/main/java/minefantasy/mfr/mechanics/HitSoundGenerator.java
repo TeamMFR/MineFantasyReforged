@@ -1,14 +1,13 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.api.weapon.WeaponClass;
-import minefantasy.mfr.init.SoundsMFR;
-import minefantasy.mfr.packet.HitSoundPacket;
+import minefantasy.mfr.network.HitSoundPacket;
+import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.WorldServer;
 
 public class HitSoundGenerator {
@@ -21,7 +20,7 @@ public class HitSoundGenerator {
         if (WC != null) {
             type = WC.getSound();
             if (!target.world.isRemote) {
-                ((WorldServer) target.world).getEntityTracker().sendToTracking(target, new HitSoundPacket(type,material, target).generatePacket());
+                NetworkHandler.sendToAllTracking(target, new HitSoundPacket(type,material, target));
             }
         }
     }

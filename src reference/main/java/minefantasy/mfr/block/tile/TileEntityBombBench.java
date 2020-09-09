@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.IBombComponent;
@@ -11,7 +11,7 @@ import minefantasy.mfr.item.gadget.ItemExplodingArrow;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.knowledge.KnowledgeListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.BombBenchPacket;
+import minefantasy.mfr.network.BombBenchPacket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

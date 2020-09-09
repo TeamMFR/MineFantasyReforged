@@ -1,16 +1,17 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerAnvilMF extends Container {
+import javax.annotation.Nonnull;
+
+public class ContainerAnvilMF extends ContainerBase {
     private TileEntityAnvilMFR tile;
-    private boolean isGuiContainer = false;
+    private boolean isGuiContainer;
     private int xInvOffset = 28;
 
     public ContainerAnvilMF(TileEntityAnvilMFR tile) {
@@ -21,54 +22,42 @@ public class ContainerAnvilMF extends Container {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int slot = y * width + x;
-                this.addSlotToContainer(new Slot(tile, slot, 8 + x * 18, 38 + y * 18));
+                this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 8 + x * 18, 38 + y * 18));
             }
         }
-        this.addSlotToContainer(new Slot(tile, tile.getSizeInventory() - 1, 150, 65));
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 150, 65));
     }
 
-    public ContainerAnvilMF(InventoryPlayer user, TileEntityAnvilMFR tile) {
+    public ContainerAnvilMF(EntityPlayer player, TileEntityAnvilMFR tile) {
+        super(player.inventory, tile);
         isGuiContainer = true;
         this.tile = tile;
         int width = 6;
         int height = 4;
 
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                int slot = y * width + x;
-                this.addSlotToContainer(new Slot(tile, slot, 44 + x * 18, 39 + y * 18));
-            }
-        }
-        this.addSlotToContainer(new Slot(tile, tile.getSizeInventory() - 1, 214, 66));
-        int i;
+        addTileSlots(width, height, 44, 38);
 
-        for (i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(user, j + i * 9 + 9, 8 + j * 18 + xInvOffset, 128 + i * 18));
-            }
-        }
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 214, 66));
 
-        for (i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(user, i, 8 + i * 18 + xInvOffset, 186));
-        }
+        addPlayerSlots(player.inventory, 8 + xInvOffset, 186);
     }
 
     @Override
     public void detectAndSendChanges() {
         for (int i = 0; i < this.inventorySlots.size(); ++i) {
-            ItemStack itemstack = ((Slot) this.inventorySlots.get(i)).getStack();
-            ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);
+            ItemStack itemstack = this.inventorySlots.get(i).getStack();
+            ItemStack itemstack1 = this.inventoryItemStacks.get(i);
 
             if (!ItemStack.areItemStacksEqual(itemstack1, itemstack)) {
                 if (isGuiContainer) {
                     tile.onInventoryChanged();
                 }
 
-                itemstack1 = itemstack == null ? null : itemstack.copy();
+                itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
                 this.inventoryItemStacks.set(i, itemstack1);
 
-                for (int j = 0; j < this.listeners.size(); ++j) {
-                    ((InventoryCrafting) this.listeners.get(j)).setInventorySlotContents(i, itemstack1);
+                for (IContainerListener listener : this.listeners) {
+                    (listener).sendSlotContents(this, i, itemstack1);
                 }
             }
         }
@@ -79,11 +68,12 @@ public class ContainerAnvilMF extends Container {
         return this.tile.isUsableByPlayer(player);
     }
 
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(EntityPlayer user, int currentSlot) {
-        int slotCount = tile.getSizeInventory();
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(currentSlot);
+        int slotCount = tile.getInventory().getSlots();
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(currentSlot);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
@@ -91,14 +81,14 @@ public class ContainerAnvilMF extends Container {
 
             if (currentSlot < slotCount) {
                 if (!this.mergeItemStack(itemstack1, slotCount, this.inventorySlots.size(), false)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             } else if (!this.mergeItemStack(itemstack1, 0, slotCount - 1, false)) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             if (itemstack1.getCount() <= 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }

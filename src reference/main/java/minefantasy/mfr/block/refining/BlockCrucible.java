@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.refining;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityCrucible;
+import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;

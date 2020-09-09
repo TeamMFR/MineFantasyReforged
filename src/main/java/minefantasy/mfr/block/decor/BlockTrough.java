@@ -1,10 +1,10 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
-import minefantasy.mfr.block.tile.decor.TileEntityWoodDecor;
 import minefantasy.mfr.init.CreativeTabMFR;
-import net.minecraft.block.Block;
+import minefantasy.mfr.tile.decor.TileEntityTrough;
+import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,13 +18,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class BlockTrough extends BlockWoodDecor {
-    public static final String NBT_fill = "Fill_Level";
-    public static int trough_RI = 107;
+    private static final PropertyInteger FILL_COUNT = PropertyInteger.create("fill_count", 0, 6);
+    public static final String FILL_LEVEL = "fill_level";
 
     public BlockTrough(String name) {
         super(name);
@@ -37,6 +36,38 @@ public class BlockTrough extends BlockWoodDecor {
     }
 
     @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityTrough();
+    }
+
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FILL_COUNT);
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
+        TileEntityTrough tile = (TileEntityTrough) getTile(world, pos);
+        return state.withProperty(FILL_COUNT, tile.getFillCount());
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    public static void setActiveState(int fuelCount, World world, BlockPos pos){
+        world.setBlockState(pos, world.getBlockState(pos).withProperty(FILL_COUNT, fuelCount));
+    }
+
+    @Nonnull
+    @Override
+    public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY, final float hitZ, final int meta, final EntityLivingBase placer, final EnumHand hand) {
+        return getDefaultState().withProperty(FILL_COUNT, 0);
+    }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
@@ -46,26 +77,17 @@ public class BlockTrough extends BlockWoodDecor {
         return new AxisAlignedBB(0F, 0F, 0F, 1.0F, (7F / 16F), 1.0F);
     }
 
-    @SideOnly(Side.CLIENT)
-    public int getRenderType() {
-        return trough_RI;
-    }
-
     @Override
     public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack item) {
 
-        TileEntityTrough tile = getTile(world, pos);
+        TileEntityTrough tile = (TileEntityTrough) getTile(world, pos);
         if (tile != null) {
-            if (item.hasTagCompound() && item.getTagCompound().hasKey(NBT_fill)) {
-                tile.fill = item.getTagCompound().getInteger(NBT_fill);
+            if (item.hasTagCompound() && item.getTagCompound().hasKey(FILL_LEVEL)) {
+                tile.fill = item.getTagCompound().getInteger(FILL_LEVEL);
             }
+            setActiveState(tile.getFillCount(), world, pos);
         }
         super.onBlockPlacedBy(world, pos, state, user, item);
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityTrough();
     }
 
     @Override
@@ -82,22 +104,14 @@ public class BlockTrough extends BlockWoodDecor {
         return false;
     }
 
-    private TileEntityTrough getTile(World world, BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityTrough) {
-            return (TileEntityTrough) tile;
-        }
-        return null;
-    }
-
     @Override
     protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {
         return modifyFill((TileEntityTrough) tile, super.modifyDrop(tile, item));
     }
 
     private ItemStack modifyFill(TileEntityTrough tile, ItemStack item) {
-        if (tile != null && item != null) {
-            item.getTagCompound().setInteger(NBT_fill, tile.fill);
+        if (tile != null && !item.isEmpty()) {
+            item.getTagCompound().setInteger(FILL_LEVEL, tile.fill);
         }
         return item;
     }

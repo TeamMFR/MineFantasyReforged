@@ -2,22 +2,17 @@ package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.item.gadget.ItemBomb;
-import minefantasy.mfr.item.gadget.ItemMine;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.ResourceLocation;
@@ -409,10 +404,10 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         rack.setMaterial(CustomMaterial.getMaterial("ScrapWood"));
         ItemWeaponMFR[] items = new ItemWeaponMFR[]{CustomToolListMFR.STANDARD_SWORD, CustomToolListMFR.STANDARD_WARAXE,
                 CustomToolListMFR.STANDARD_MACE, CustomToolListMFR.STANDARD_DAGGER};
-        for (int i = 0; i < rack.getSizeInventory(); i++) {
+        for (int i = 0; i < rack.getInventory().getSlots(); i++) {
             if (rand.nextInt(3) != 0) {
                 ItemWeaponMFR loot = items[rand.nextInt(items.length)];
-                rack.setInventorySlotContents(i, loot.construct("Iron", "ScrapWood"));
+                rack.getInventory().setStackInSlot(i, loot.construct("Iron", "ScrapWood"));
             }
         }
     }

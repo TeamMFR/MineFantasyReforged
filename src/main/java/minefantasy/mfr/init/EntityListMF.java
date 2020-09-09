@@ -1,14 +1,28 @@
 package minefantasy.mfr.init;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.config.ConfigExperiment;
-import minefantasy.mfr.entity.*;
+import minefantasy.mfr.entity.EntityArrowMFR;
+import minefantasy.mfr.entity.EntityBomb;
+import minefantasy.mfr.entity.EntityDragonBreath;
+import minefantasy.mfr.entity.EntityFireBlast;
+import minefantasy.mfr.entity.EntityItemUnbreakable;
+import minefantasy.mfr.entity.EntityMine;
+import minefantasy.mfr.entity.EntityParachute;
+import minefantasy.mfr.entity.EntityShrapnel;
+import minefantasy.mfr.entity.EntitySmoke;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class EntityListMF {
-    public static void register() {
+    @SubscribeEvent
+    public static void register(RegistryEvent.Register<EntityEntry> event) {
         addEntity(EntityArrowMFR.class, "arrowMF", 1, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
         addEntity(EntityBomb.class, "bombMF", 2, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
         addEntity(EntityShrapnel.class, "shrapnel_mf", 3, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
@@ -24,19 +38,8 @@ public class EntityListMF {
         MobListMF.register();
     }
 
-//    public static int autoAssign() {
-//        for (int a = 0; a <= 255; a++) {
-//            if (!EntityList.isMatchingName().containsKey(Integer.valueOf(a))) {
-//                System.out.println("MineFantasy: Autoassigned EntityID " + a);
-//                return a;
-//            }
-//        }
-//        throw new IllegalArgumentException(
-//                "MineFantasy: No Available Entity ID!, you can try manually adding them in Config/Mobs.cfg");
-//    }
-
     private static void addEntity(Class<? extends Entity> entityClass, String entityName, int id, int range, int ticks) {
         ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, entityName);
-        EntityRegistry.registerModEntity(registryName, entityClass, entityName, id, MineFantasyReborn.instance, range, ticks, true);
+        EntityRegistry.registerModEntity(registryName, entityClass, entityName, id, MineFantasyReborn.INSTANCE, range, ticks, true);
     }
 }

@@ -2,7 +2,7 @@ package minefantasy.mfr.block.crafting;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.block.tile.TileEntityBombPress;
+import minefantasy.mfr.tile.TileEntityBombPress;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.knowledge.KnowledgeListMFR;
 import net.minecraft.block.Block;

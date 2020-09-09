@@ -1,18 +1,15 @@
 package minefantasy.mfr.item.gadget;
 
-import codechicken.lib.render.ModelHelper;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.stamina.StaminaBar;
@@ -47,7 +44,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
         setCreativeTab(CreativeTabMFR.tabGadget);
         setMaxDamage(material.getMaxUses());
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     public static boolean tryPerformAbility(EntityLivingBase user, float points) {

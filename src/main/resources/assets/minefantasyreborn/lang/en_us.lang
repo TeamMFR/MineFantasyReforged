@@ -665,11 +665,11 @@ tile.ender_block.name=Block of Enderforge
 tile.forge.stone.name=Stone Forge
 tile.forge.metal.name=Advanced Forge
 tile.bloomery.name=Bloomery
-tile.crucible.stone.name=Stone Crucible
-tile.crucible.fireclay.name=Fireclay Crucible
-tile.crucible.auto.name=Advanced Crucible
-tile.crucible.mythic.name=Ancient Crucible
-tile.crucible.master.name=Master Ancient Crucible
+tile.crucible_stone.name=Stone Crucible
+tile.crucible_fireclay.name=Fireclay Crucible
+tile.crucible_auto.name=Advanced Crucible
+tile.crucible_mythic.name=Ancient Crucible
+tile.crucible_master.name=Master Ancient Crucible
 
 tile.chimney.stone.name=Stone Chimney
 tile.chimney.stone.wide.name=Wide Stone Chimney

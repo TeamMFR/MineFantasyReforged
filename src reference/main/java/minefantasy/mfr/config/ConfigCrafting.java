@@ -1,7 +1,7 @@
 package minefantasy.mfr.config;
 
 import minefantasy.mfr.api.cooking.CookRecipe;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFH;
 
 public class ConfigCrafting extends ConfigurationBaseMF {
     public static final String CATEGORY_REFINING = "Refining";

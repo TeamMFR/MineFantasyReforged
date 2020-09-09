@@ -1,0 +1,21 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {"particle": "#fuel_texture"},
+	"elements": [
+		{
+			"name": "fuel",
+			"from": [0, 5.5, 0],
+			"to": [16, 5.5, 16],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [64, 16, 48, 16], "texture": "#fuel_texture"},
+				"east": {"uv": [80, 16, 64, 16], "texture": "#fuel_texture"},
+				"south": {"uv": [96, 16, 80, 16], "texture": "#fuel_texture"},
+				"west": {"uv": [48, 16, 32, 16], "texture": "#fuel_texture"},
+				"up": {"uv": [16, 16, 0, 0], "texture": "#fuel_texture"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#fuel_texture"}
+			}
+		}
+	]
+}

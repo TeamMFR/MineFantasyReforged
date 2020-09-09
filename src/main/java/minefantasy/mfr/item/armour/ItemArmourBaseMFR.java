@@ -62,7 +62,7 @@ public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmo
         baseRating = ArmourCalculator.translateToVanillaAR(getBaseAC() + 1F,
                 baseMaterial.getDamageReductionAmount(slot), 15);
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     public ItemArmourBaseMFR setDT(float DT) {

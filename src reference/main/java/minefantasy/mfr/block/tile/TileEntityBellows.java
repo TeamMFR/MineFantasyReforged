@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.init.SoundsMFR;

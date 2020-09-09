@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.util.EnumFacing;
@@ -17,7 +17,7 @@ import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.block.refining.BlockBigFurnace;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.BigFurnacePacket;
+import minefantasy.mfr.network.BigFurnacePacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

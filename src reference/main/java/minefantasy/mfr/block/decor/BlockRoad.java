@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.decor;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.item.tool.advanced.ItemMattock;
 import net.minecraft.block.Block;

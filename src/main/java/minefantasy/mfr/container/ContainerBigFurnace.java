@@ -1,15 +1,16 @@
 package minefantasy.mfr.container;
 
+import minefantasy.mfr.container.slots.SlotBigFurnanceOutput;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceOutput;
-import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.SlotItemHandler;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author Anonymous Productions
@@ -17,7 +18,7 @@ import net.minecraft.item.ItemStack;
  * Sources are provided for educational reasons. though small bits of
  * code, or methods can be used in your own creations.
  */
-public class ContainerBigFurnace extends Container {
+public class ContainerBigFurnace extends ContainerBase {
     public TileEntityBigFurnace smelter;
     public int lastProgress;
     public int lastFuel;
@@ -25,41 +26,33 @@ public class ContainerBigFurnace extends Container {
     public int lastHeat;
     public int lastMaxHeat;
 
-    public ContainerBigFurnace(EntityPlayer play, TileEntityBigFurnace tileentityfurnace) {
+    public ContainerBigFurnace(EntityPlayer player, TileEntityBigFurnace tile) {
+        super(player.inventory, tile);
         lastProgress = 0;
         lastFuel = 0;
         lastMaxFuel = 0;
         lastHeat = 0;
         lastMaxHeat = 0;
-        smelter = tileentityfurnace;
-        tileentityfurnace.openChest();
+        smelter = tile;
+        tile.openChest();
 
         if (smelter.isHeater()) {
-            addSlotToContainer(new Slot(smelter, 0, 59, 44));
+            addSlotToContainer(new SlotItemHandler(smelter.getInventory(), 0, 59, 44));
         } else {
             // IN
-            addSlotToContainer(new Slot(smelter, 0, 36, 26));
-            addSlotToContainer(new Slot(smelter, 1, 54, 26));
-            addSlotToContainer(new Slot(smelter, 2, 36, 44));
-            addSlotToContainer(new Slot(smelter, 3, 54, 44));
+            addSlotToContainer(new SlotItemHandler(smelter.getInventory(), 0, 36, 26));
+            addSlotToContainer(new SlotItemHandler(smelter.getInventory(), 1, 54, 26));
+            addSlotToContainer(new SlotItemHandler(smelter.getInventory(), 2, 36, 44));
+            addSlotToContainer(new SlotItemHandler(smelter.getInventory(), 3, 54, 44));
 
             // OUT
-            addSlotToContainer(new SlotFurnaceOutput(play, smelter, 4, 106, 26));
-            addSlotToContainer(new SlotFurnaceOutput(play, smelter, 5, 124, 26));
-            addSlotToContainer(new SlotFurnaceOutput(play, smelter, 6, 106, 44));
-            addSlotToContainer(new SlotFurnaceOutput(play, smelter, 7, 124, 44));
+            addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 4, 106, 26));
+            addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 5, 124, 26));
+            addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 6, 106, 44));
+            addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 7, 124, 44));
         }
 
-        // PLAYER INV
-        for (int i = 0; i < 3; i++) {
-            for (int k = 0; k < 9; k++) {
-                addSlotToContainer(new Slot(play.inventory, k + i * 9 + 9, 8 + k * 18, 84 + i * 18));
-            }
-        }
-
-        for (int j = 0; j < 9; j++) {
-            addSlotToContainer(new Slot(play.inventory, j, 8 + j * 18, 142));
-        }
+        addPlayerSlots(player.inventory, 8,142);
     }
 
     @Override
@@ -72,27 +65,26 @@ public class ContainerBigFurnace extends Container {
     public void detectAndSendChanges() {
         super.detectAndSendChanges();
 
-        for (int i = 0; i < this.listeners.size(); ++i) {
-            Container icrafting = (Container) this.listeners.get(i);
+        for (IContainerListener listener : this.listeners) {
 
             if (this.lastProgress != this.smelter.progress) {
-                icrafting.updateProgressBar(0, this.smelter.progress);
+                listener.sendWindowProperty(this, 0, this.smelter.progress);
             }
 
             if (this.lastFuel != this.smelter.fuel) {
-                icrafting.updateProgressBar(1, this.smelter.fuel);
+                listener.sendWindowProperty(this, 1, this.smelter.fuel);
             }
 
             if (this.lastMaxFuel != this.smelter.maxFuel) {
-                icrafting.updateProgressBar(2, this.smelter.maxFuel);
+                listener.sendWindowProperty(this, 2, this.smelter.maxFuel);
             }
 
             if (this.lastHeat != this.smelter.heat) {
-                icrafting.updateProgressBar(3, (int) this.smelter.heat);
+                listener.sendWindowProperty(this, 3, (int) this.smelter.heat);
             }
 
             if (this.lastMaxHeat != this.smelter.maxHeat) {
-                icrafting.updateProgressBar( 4, (int) this.smelter.maxHeat);
+                listener.sendWindowProperty(this, 4, (int) this.smelter.maxHeat);
             }
 
         }
@@ -127,18 +119,15 @@ public class ContainerBigFurnace extends Container {
         }
     }
 
-    public boolean canInteractWith(EntityPlayer entityplayer) {
-        return smelter.isUseableByPlayer(entityplayer);
-    }
-
+    @Nonnull
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int num) {
         int invSize = 8;
         if (smelter.isHeater()) {
             invSize = 1;
         }
-        ItemStack placedItem = null;
-        Slot slot = (Slot) this.inventorySlots.get(num);
+        ItemStack placedItem = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(num);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemSlot = slot.getStack();
@@ -147,7 +136,7 @@ public class ContainerBigFurnace extends Container {
             // Take
             if (num < invSize) {
                 if (!this.mergeItemStack(itemSlot, invSize, 36 + invSize, true)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
 
                 slot.onSlotChange(itemSlot, placedItem);
@@ -157,13 +146,13 @@ public class ContainerBigFurnace extends Container {
                 if (smelter.isHeater()) {
                     if (smelter.isItemFuel(itemSlot)) {
                         if (!this.mergeItemStack(itemSlot, 0, 1, false)) {
-                            return null;
+                            return ItemStack.EMPTY;
                         }
                     }
                 } else {
-                    if (smelter.getResult(itemSlot) != null) {
+                    if (!smelter.getResult(itemSlot).isEmpty()) {
                         if (!this.mergeItemStack(itemSlot, 0, 4, false)) {
-                            return null;
+                            return ItemStack.EMPTY;
                         }
                     }
                 }
@@ -172,13 +161,13 @@ public class ContainerBigFurnace extends Container {
             }
 
             if (itemSlot.getCount() == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
 
             if (itemSlot.getCount() == placedItem.getCount()) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             slot.onTake(player, itemSlot);

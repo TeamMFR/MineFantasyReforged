@@ -1,4 +1,4 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.entity.EntityCogwork;

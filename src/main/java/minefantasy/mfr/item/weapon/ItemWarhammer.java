@@ -6,9 +6,9 @@ import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -46,8 +46,8 @@ public class ItemWarhammer extends ItemHeavyWeapon {
             hit.world.createExplosion(user, hit.posX, hit.posY, hit.posZ, 0.0F, false);
             TacticalManager.knockbackEntity(hit, user, 2.0F, 1.5F);
             if (hit instanceof EntityLivingBase) {
-                ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(Potion.getPotionById(9), 200, 10));
-                ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(Potion.getPotionById(3), 200, 1));
+                ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 10));
+                ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(MobEffects.HASTE, 200, 1));
             }
         }
         super.onProperHit(user, weapon, hit, dam);

@@ -1,0 +1,150 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {"particle": "#texture"},
+	"elements": [
+		{
+			"name": "divider3",
+			"from": [7, 11, 11],
+			"to": [9, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 15.5, 1, 16], "texture": "#texture"},
+				"east": {"uv": [0, 15.5, 0.5, 16], "texture": "#texture"},
+				"south": {"uv": [1.5, 15.5, 2, 16], "texture": "#texture"},
+				"west": {"uv": [1, 15.5, 1.5, 16], "texture": "#texture"},
+				"up": {"uv": [1, 15.5, 0.5, 14.5], "texture": "#texture"},
+				"down": {"uv": [1.5, 14.5, 1, 15.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "divider2",
+			"from": [11, 11, 11],
+			"to": [13, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 15.5, 1, 16], "texture": "#texture"},
+				"east": {"uv": [0, 15.5, 0.5, 16], "texture": "#texture"},
+				"south": {"uv": [1.5, 15.5, 2, 16], "texture": "#texture"},
+				"west": {"uv": [1, 15.5, 1.5, 16], "texture": "#texture"},
+				"up": {"uv": [1, 15.5, 0.5, 14.5], "texture": "#texture"},
+				"down": {"uv": [1.5, 14.5, 1, 15.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "divider4",
+			"from": [3, 11, 11],
+			"to": [5, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 15.5, 1, 16], "texture": "#texture"},
+				"east": {"uv": [0, 15.5, 0.5, 16], "texture": "#texture"},
+				"south": {"uv": [1.5, 15.5, 2, 16], "texture": "#texture"},
+				"west": {"uv": [1, 15.5, 1.5, 16], "texture": "#texture"},
+				"up": {"uv": [1, 15.5, 0.5, 14.5], "texture": "#texture"},
+				"down": {"uv": [1.5, 14.5, 1, 15.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "divider5",
+			"from": [0, 11, 11],
+			"to": [1, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.75, 15.5, 1, 16], "texture": "#texture"},
+				"east": {"uv": [0.25, 15.5, 0.75, 16], "texture": "#texture"},
+				"south": {"uv": [1.5, 15.5, 1.75, 16], "texture": "#texture"},
+				"west": {"uv": [1, 15.5, 1.5, 16], "texture": "#texture"},
+				"up": {"uv": [1, 15.5, 0.75, 14.5], "texture": "#texture"},
+				"down": {"uv": [1.25, 14.5, 1, 15.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "divider1",
+			"from": [15, 11, 11],
+			"to": [16, 12, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 15.5, 0.75, 16], "texture": "#texture"},
+				"east": {"uv": [0, 15.5, 0.5, 16], "texture": "#texture"},
+				"south": {"uv": [1.25, 15.5, 1.5, 16], "texture": "#texture"},
+				"west": {"uv": [0.75, 15.5, 1.25, 16], "texture": "#texture"},
+				"up": {"uv": [0.75, 15.5, 0.5, 14.5], "texture": "#texture"},
+				"down": {"uv": [1, 14.5, 0.75, 15.5], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "strut_right",
+			"from": [0, 0, 14],
+			"to": [1, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 1, 0.75, 9], "texture": "#texture"},
+				"east": {"uv": [0, 1, 0.5, 9], "texture": "#texture"},
+				"south": {"uv": [1.25, 1, 1.5, 9], "texture": "#texture"},
+				"west": {"uv": [0.75, 1, 1.25, 9], "texture": "#texture"},
+				"up": {"uv": [0.75, 1, 0.5, 0], "texture": "#texture"},
+				"down": {"uv": [1, 0, 0.75, 1], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "strut_left",
+			"from": [15, 0, 14],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.5, 1, 0.75, 9], "texture": "#texture"},
+				"east": {"uv": [0, 1, 0.5, 9], "texture": "#texture"},
+				"south": {"uv": [1.25, 1, 1.5, 9], "texture": "#texture"},
+				"west": {"uv": [0.75, 1, 1.25, 9], "texture": "#texture"},
+				"up": {"uv": [0.75, 1, 0.5, 0], "texture": "#texture"},
+				"down": {"uv": [1, 0, 0.75, 1], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "beam_upper",
+			"from": [0, 11, 13],
+			"to": [16, 13, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.25, 15, 4.25, 16], "texture": "#texture"},
+				"east": {"uv": [0, 15, 0.25, 16], "texture": "#texture"},
+				"south": {"uv": [4.5, 15, 8.5, 16], "texture": "#texture"},
+				"west": {"uv": [4.25, 15, 4.5, 16], "texture": "#texture"},
+				"up": {"uv": [4.25, 15, 0.25, 14.5], "texture": "#texture"},
+				"down": {"uv": [8.25, 14.5, 4.25, 15], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "beam_lower",
+			"from": [0, 2, 13],
+			"to": [16, 3, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 8]},
+			"faces": {
+				"north": {"uv": [0.25, 15, 4.25, 15.5], "texture": "#texture"},
+				"east": {"uv": [0, 15, 0.25, 15.5], "texture": "#texture"},
+				"south": {"uv": [4.5, 15, 8.5, 15.5], "texture": "#texture"},
+				"west": {"uv": [4.25, 15, 4.5, 15.5], "texture": "#texture"},
+				"up": {"uv": [4.25, 15, 0.25, 14.5], "texture": "#texture"},
+				"down": {"uv": [8.25, 14.5, 4.25, 15], "texture": "#texture"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "dividers",
+			"origin": [8, 8, 8],
+			"children": [0, 1, 2, 3, 4]
+		},
+		{
+			"name": "struts",
+			"origin": [8, 8, 8],
+			"children": [5, 6]
+		},
+		{
+			"name": "beams",
+			"origin": [8, -8, 8],
+			"children": [7, 8]
+		}
+	]
+}

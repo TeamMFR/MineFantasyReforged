@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.refining;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityChimney;
+import minefantasy.mfr.tile.TileEntityChimney;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

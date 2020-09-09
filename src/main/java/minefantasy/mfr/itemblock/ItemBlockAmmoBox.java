@@ -1,18 +1,26 @@
 package minefantasy.mfr.itemblock;
 
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.render.item.IItemRenderer;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
+import minefantasy.mfr.block.basic.BlockTileEntity;
 import minefantasy.mfr.block.decor.BlockAmmoBox;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
-import net.minecraft.block.Block;
+import minefantasy.mfr.client.render.block.ModelDummyParticle;
+import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -21,9 +29,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ItemBlockAmmoBox extends ItemBlockBase implements IStorageBlock {
-    public ItemBlockAmmoBox(Block base) {
-        super(base);
+public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
+    public ItemBlockAmmoBox(BlockTileEntity block, IItemRenderer renderer) {
+        super(block);
+        //noinspection ConstantConditions
+        setRegistryName(block.getRegistryName());
+        ModelResourceLocation modelLocation = new ModelResourceLocation(block.getRegistryName(), "special");
+        ModelRegistryHelper.registerItemRenderer(this, renderer);
+        ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(block.getTexture()));
+        ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
+            @Override
+            @SideOnly(Side.CLIENT)
+            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+                return modelLocation;
+            }
+        });
     }
 
     @SideOnly(Side.CLIENT)
@@ -32,7 +52,7 @@ public class ItemBlockAmmoBox extends ItemBlockBase implements IStorageBlock {
         if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Ammo) && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Stock)) {
             ItemStack ammo = new ItemStack(item.getTagCompound().getCompoundTag(BlockAmmoBox.NBT_Ammo));
             int stock = item.getTagCompound().getInteger(BlockAmmoBox.NBT_Stock);
-            if (ammo != null) {
+            if (!ammo.isEmpty()) {
                 tooltip.add(ammo.getDisplayName() + " x" + stock);
             }
         }

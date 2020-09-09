@@ -44,7 +44,7 @@ public class BlastFurnaceRecipes {
     }
 
     public void removeRecipe(@Nullable ItemStack input, ItemStack output) {
-        if (output != null) {
+        if (!output.isEmpty()) {
             for (Iterator<Entry<ItemStack, ItemStack>> it = this.smeltingList.entrySet().iterator(); it.hasNext(); ) {
                 Entry<ItemStack, ItemStack> entry = it.next();
                 if (input != null && !this.compareItemStacks(entry.getKey(), input)) {
@@ -67,7 +67,7 @@ public class BlastFurnaceRecipes {
 
         do {
             if (!iterator.hasNext()) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             entry = (Entry) iterator.next();
@@ -76,8 +76,8 @@ public class BlastFurnaceRecipes {
         return (ItemStack) entry.getValue();
     }
 
-    private boolean compareItemStacks(ItemStack p_151397_1_, ItemStack p_151397_2_) {
-        return p_151397_2_.getItem() == p_151397_1_.getItem()
-                && (p_151397_2_.getItemDamage() == 32767 || p_151397_2_.getItemDamage() == p_151397_1_.getItemDamage());
+    private boolean compareItemStacks(ItemStack itemStack1, ItemStack itemStack2) {
+        return itemStack2.getItem() == itemStack1.getItem()
+                && (itemStack2.getItemDamage() == 32767 || itemStack2.getItemDamage() == itemStack1.getItemDamage());
     }
 }

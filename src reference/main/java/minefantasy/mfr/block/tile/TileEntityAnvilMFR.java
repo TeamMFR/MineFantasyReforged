@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.crafting.anvil.AnvilCraftMatrix;
@@ -19,7 +19,7 @@ import minefantasy.mfr.item.heatable.ItemHeated;
 import minefantasy.mfr.knowledge.KnowledgeListMFR;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.AnvilPacket;
+import minefantasy.mfr.network.AnvilPacket;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

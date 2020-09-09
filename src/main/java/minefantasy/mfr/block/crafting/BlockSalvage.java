@@ -1,6 +1,5 @@
 package minefantasy.mfr.block.crafting;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.helpers.ToolHelper;
@@ -23,22 +22,16 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class BlockSalvage extends Block {
     public float dropLevel;
-    private String type;
-    private Random rand = new Random();
 
     public BlockSalvage(String name, float dropLevel) {
         super(Material.WOOD);
 
         this.dropLevel = dropLevel;
-        this.type = name;
         name = "salvage_" + name;
 
         setRegistryName(name);
@@ -70,14 +63,6 @@ public class BlockSalvage extends Block {
         if (world.isRemote) {
             return true;
         }
-        ItemStack held = user.getHeldItem(hand);
-        String toolType = ToolHelper.getCrafterTool(held);
-
-        /*
-         * Block above = world.getBlock(x, y+1, z); if(above != null) {
-         * if(salvageBlock(world, user, above, x, y, z)) { world.setBlockToAir(x, y+1,
-         * z); return true; } }
-         */
 
         EntityItem drop = getDrop(world, pos);
         if (drop != null && !user.isSwingInProgress) {
@@ -102,14 +87,6 @@ public class BlockSalvage extends Block {
         }
         return false;
     }
-    /*
-     * private boolean salvageBlock(World world, EntityPlayer user, Block junk, int
-     * x, int y, int z) { List<ItemStack> salvage = Salvage.salvageBlock(junk,
-     * dropLevel);
-     *
-     * if(salvage != null) { dropSalvage(world, x, y, z, salvage);
-     * world.playAuxSFX(1021, x, y, z, 0); return true; } return false; }
-     */
 
     private boolean salvageItem(World world, EntityPlayer user, ItemStack junk, BlockPos pos) {
         float modifier = 0.5F;
@@ -138,9 +115,7 @@ public class BlockSalvage extends Block {
     }
 
     private void dropSalvage(World world, BlockPos pos, List<ItemStack> salvage, ItemStack junk) {
-        Iterator iterator = salvage.iterator();
-        while (iterator.hasNext()) {
-            ItemStack drop = (ItemStack) iterator.next();
+        for (ItemStack drop : salvage) {
             if (drop != null)// && !user.inventory.addItemStackToInventory(drop))
             {
                 entityDropItem(world, pos, drop);

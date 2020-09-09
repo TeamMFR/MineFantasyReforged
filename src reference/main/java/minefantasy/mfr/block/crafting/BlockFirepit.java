@@ -2,7 +2,7 @@ package minefantasy.mfr.block.crafting;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.tool.ILighter;
-import minefantasy.mfr.block.tile.TileEntityFirepit;
+import minefantasy.mfr.tile.TileEntityFirepit;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

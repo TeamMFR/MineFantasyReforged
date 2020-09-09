@@ -1,95 +1,120 @@
 package minefantasy.mfr.client.render.block;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityBellows;
+import codechicken.lib.render.CCModelState;
+import codechicken.lib.render.item.IItemRenderer;
+import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.block.refining.BlockBellows;
+import minefantasy.mfr.tile.TileEntityBellows;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.animation.FastTESR;
+import net.minecraftforge.common.model.IModelState;
+import net.minecraftforge.common.model.TRSRTransformation;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 
-public class TileEntityBellowsRenderer extends TileEntitySpecialRenderer<TileEntityBellows> {
+public class TileEntityBellowsRenderer  <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
     private ModelBellows model;
-    private Random random = new Random();
+    private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bellows.png");
 
     public TileEntityBellowsRenderer() {
         model = new ModelBellows();
     }
 
-    public void renderAModelAt(TileEntityBellows tile, double d, double d1, double d2, float f) {
-        int i = 0;
-        if (tile.getWorld() != null) {
-            i = tile.getBlockMetadata();
+    @Override
+    public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
+
+        renderModelAt((TileEntityBellows) te, x, y, z, partialTick);
+    }
+
+    public void renderModelAt(TileEntityBellows tile, double d, double d1, double d2, float f) {
+        EnumFacing facing = EnumFacing.NORTH;
+        if (tile.hasWorld()) {
+            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+            facing = state.getValue(BlockBellows.FACING);
         }
-        this.renderModelAt(tile, i, d, d1, d2, f);
+        if (facing == EnumFacing.EAST || facing == EnumFacing.WEST){
+            facing = facing.rotateYCCW();
+        }
+        else{
+            facing = facing.rotateY();
+        }
+
+        model.rotate(tile.press);
+        this.bindTexture(texture); //texture
+
+        GlStateManager.pushMatrix(); // start
+        float scale = 1.0F;
+        float yOffset = 1.525F;
+        GlStateManager.translate((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
+        GlStateManager.rotate(facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
+        GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
+        GlStateManager.pushMatrix();
+        model.renderModel(0.0625F);
+
+        GlStateManager.popMatrix();
+        GlStateManager.color(255, 255, 255);
+        GlStateManager.popMatrix(); // end
+
     }
 
     public void renderInvModel(double d, double d1, double d2, float f) {
         int j = 90;
 
         model.rotate(0);
-        bindTextureByName("textures/models/tileentity/bellows.png"); // texture
 
-        GL11.glPushMatrix(); // start
+        GlStateManager.pushMatrix(); // start
         float scale = 1.0F;
         float yOffset = 1.525F;
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
-        GL11.glRotatef(j, 0.0F, 1.0F, 0.0F); // rotate based on metadata
-        GL11.glScalef(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
-        GL11.glPushMatrix();
+        GlStateManager.translate((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
+        GlStateManager.rotate(j, 0.0F, 1.0F, 0.0F); // rotate based on metadata
+        GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
+        GlStateManager.pushMatrix();
         float level = 0F;
-        model.renderModel(0, 0.0625F);
+        model.renderModel(0.0625F);
 
-        GL11.glPopMatrix();
-        GL11.glColor3f(255, 255, 255);
-        GL11.glPopMatrix(); // end
+        GlStateManager.popMatrix();
+        GlStateManager.color(255, 255, 255);
+        GlStateManager.popMatrix(); // end
 
     }
 
-    public void renderModelAt(TileEntityBellows tile, int meta, double d, double d1, double d2, float f) {
-        int i = meta;
+    @Override
+    public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
 
-        int j = 90 * i;
+        GlStateManager.pushMatrix();
 
-        if (i == 1) {
-            j = 0;
-        }
+        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-        if (i == 2) {
-            j = 270;
-        }
+        renderInvModel(0F, 0F, 0F, 0F);
 
-        if (i == 3) {
-            j = 180;
-        }
-
-        if (i == 0) {
-            j = 90;
-        }
-        if (i == 0) {
-            j = 90;
-        }
-        model.rotate(tile.press);
-        bindTextureByName("textures/models/tileentity/bellows.png"); // texture
-
-        GL11.glPushMatrix(); // start
-        float scale = 1.0F;
-        float yOffset = 1.525F;
-        GL11.glTranslatef((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
-        GL11.glRotatef(j, 0.0F, 1.0F, 0.0F); // rotate based on metadata
-        GL11.glScalef(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
-        GL11.glPushMatrix();
-        float level = 0F;
-        model.renderModel(tile.press, 0.0625F);
-
-        GL11.glPopMatrix();
-        GL11.glColor3f(255, 255, 255);
-        GL11.glPopMatrix(); // end
-
+        GlStateManager.enableBlend();
+        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        GlStateManager.popMatrix();
     }
 
-    private void bindTextureByName(String image) {
-        Minecraft.getMinecraft().renderEngine.bindTexture(TextureHelperMFR.getResource(image));
+    @Override
+    public IModelState getTransforms() {
+        return TransformUtils.DEFAULT_BLOCK;
+    }
+
+    @Override
+    public boolean isAmbientOcclusion() {
+        return false;
+    }
+
+    @Override
+    public boolean isGui3d() {
+        return true;
     }
 }

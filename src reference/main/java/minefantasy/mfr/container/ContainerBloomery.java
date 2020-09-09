@@ -1,7 +1,7 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.block.tile.TileEntityBloomery;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
+import minefantasy.mfr.tile.TileEntityBloomery;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFC;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

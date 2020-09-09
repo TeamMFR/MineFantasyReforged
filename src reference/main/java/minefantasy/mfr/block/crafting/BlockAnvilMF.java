@@ -2,7 +2,7 @@ package minefantasy.mfr.block.crafting;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.block.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.item.tool.crafting.ItemTongs;

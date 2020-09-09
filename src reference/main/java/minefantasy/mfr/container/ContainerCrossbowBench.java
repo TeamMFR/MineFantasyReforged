@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.block.tile.TileEntityCrossbowBench;
+import minefantasy.mfr.tile.TileEntityCrossbowBench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

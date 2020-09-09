@@ -12,7 +12,9 @@ import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.SoundsMFR;
-import minefantasy.mfr.packet.CogworkControlPacket;
+import minefantasy.mfr.network.CogworkControlPacket;
+import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.network.RackCommandPacket;
 import minefantasy.mfr.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -300,8 +302,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                     this.forwardControl = forward;
                     this.strafeControl = strafe;
                     this.jumpControl = jump;
-
-                    ((EntityPlayerMP) getRidingEntity()).connection.sendPacket(new CogworkControlPacket(this).generatePacket());
+                    NetworkHandler.sendToPlayer((EntityPlayerMP) getRidingEntity(), new CogworkControlPacket(this, getRidingEntity()));
                 }
             }
         }

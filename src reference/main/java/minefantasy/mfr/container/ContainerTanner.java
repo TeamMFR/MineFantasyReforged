@@ -3,7 +3,7 @@ package minefantasy.mfr.container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.block.tile.TileEntityTanningRack;
+import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;

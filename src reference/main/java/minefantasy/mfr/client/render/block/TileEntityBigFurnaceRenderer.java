@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.block.tile.TileEntityBigFurnace;
+import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;

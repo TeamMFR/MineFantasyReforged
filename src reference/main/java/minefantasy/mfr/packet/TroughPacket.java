@@ -1,7 +1,7 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
+import minefantasy.mfr.tile.decor.TileEntityTrough;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 

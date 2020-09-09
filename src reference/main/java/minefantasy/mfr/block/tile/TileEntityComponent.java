@@ -1,10 +1,10 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.decor.BlockComponent;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.StorageBlockPacket;
+import minefantasy.mfr.network.StorageBlockPacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

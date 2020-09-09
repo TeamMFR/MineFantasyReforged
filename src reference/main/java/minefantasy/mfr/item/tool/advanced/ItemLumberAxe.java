@@ -3,7 +3,7 @@ package minefantasy.mfr.item.tool.advanced;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.item.tool.ItemAxeMF;
 import minefantasy.mfr.util.BukkitUtils;

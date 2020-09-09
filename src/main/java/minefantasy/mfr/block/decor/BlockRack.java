@@ -1,31 +1,29 @@
 package minefantasy.mfr.block.decor;
 
-import java.util.Random;
-
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.packet.RackCommand;
-import net.minecraft.block.Block;
+import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.network.RackCommandPacket;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 /**
  * @author Anonymous Productions
@@ -34,7 +32,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
  *         code, or methods can be used in your own creations.
  */
 public class BlockRack extends BlockWoodDecor {
-	public static EnumBlockRenderType rack_RI;
 
 	public static final PropertyDirection FACING = BlockDirectional.FACING;
 
@@ -49,60 +46,58 @@ public class BlockRack extends BlockWoodDecor {
 		this.setCreativeTab(CreativeTabMFR.tabUtil);
 	}
 
-	/**
-	 * Convert standard South, West, North, East to rack's (North, South, East,
-	 * West)
-	 */
-	public static int getDirection(int dir) {
-		int[] directions = new int[] { 3, 4, 2, 5 };
-		return directions[Math.min(3, dir)];
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
+
+
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityRack();
 	}
 
 	public static boolean interact(int slot, World world, TileEntityRack tile, EntityPlayer player) {
-		if (player.isSneaking()) {
-			player.openGui(MineFantasyReborn.instance, 0, world, tile.getPos().getX(), tile.getPos().getY(),
-					tile.getPos().getZ());
-			return false;
-		}
 
-		ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
-		if (held == null) {
-			ItemStack hung = tile.getStackInSlot(slot);
-			if (hung != null) {
-				if (!world.isRemote) {
+		ItemStack held = player.getHeldItemMainhand();
+		if (held.isEmpty()) {
+			ItemStack hung = tile.getInventory().getStackInSlot(slot);
+			if (!hung.isEmpty()) {
+				if (world.isRemote) {
 					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, hung);
-					tile.setInventorySlotContents(slot, null);
+					tile.getInventory().setStackInSlot(slot, ItemStack.EMPTY);
 					tile.syncItems();
 				}
 				player.swingArm(EnumHand.MAIN_HAND);
 				return true;
 			}
 		} else {
-			ItemStack hung = tile.getStackInSlot(slot);
+			ItemStack hung = tile.getInventory().getStackInSlot(slot);
 
-			if (hung == null && tile.canHang(player.getHeldItem(EnumHand.MAIN_HAND), slot)) {
-				if (!world.isRemote) {
-					tile.setInventorySlotContents(slot, player.getHeldItem(EnumHand.MAIN_HAND).copy());
-					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+			if (hung.isEmpty() && tile.canHang(player.getHeldItemMainhand(), slot)) {
+				if (world.isRemote) {
+					tile.getInventory().setStackInSlot(slot, player.getHeldItemMainhand().copy());
+					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 					tile.syncItems();
 				}
 				player.swingArm(EnumHand.MAIN_HAND);
 				return true;
-			} else if (held != null && hung != null) {
+			} else if (!held.isEmpty() && !hung.isEmpty()) {
 				if (hung.isItemEqual(held)) {
 					int space = hung.getMaxStackSize() - hung.getCount();
 
 					if (held.getCount() > space) {
-						if (!world.isRemote) {
+						if (world.isRemote) {
 							held.shrink(space);
 							hung.grow(space);
 						}
 						player.swingArm(EnumHand.MAIN_HAND);
 						return true;
 					} else {
-						if (!world.isRemote) {
+						if (world.isRemote) {
 							hung.grow(held.getCount());
-							player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+							player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 						}
 						player.swingArm(EnumHand.MAIN_HAND);
 						return true;
@@ -110,8 +105,6 @@ public class BlockRack extends BlockWoodDecor {
 				}
 			}
 		}
-		player.openGui(MineFantasyReborn.instance, 0, world, tile.getPos().getX(), tile.getPos().getY(),
-				tile.getPos().getZ());
 		return false;
 	}
 
@@ -152,14 +145,6 @@ public class BlockRack extends BlockWoodDecor {
 	 * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z,
 	 * side, hitX, hitY, hitZ, block metadata
 	 */
-
-	/**
-	 * The type of render function that is called for this block
-	 */
-	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state) {
-		return rack_RI;
-	}
 
 	/**
 	 * Checks to see if its valid to put this block at the specified coordinates.
@@ -212,7 +197,7 @@ public class BlockRack extends BlockWoodDecor {
 
 		if (!flag) {
 			this.dropBlockAsItem(tile.getWorld(), pos, getDefaultState(), 0);
-			;
+
 			tile.getWorld().setBlockToAir(pos);
 		}
 		super.onNeighborChange(world, pos, neighbor);
@@ -225,65 +210,42 @@ public class BlockRack extends BlockWoodDecor {
 	public int quantityDropped(Random rand) {
 		return 1;
 	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int m) {
-		return new TileEntityRack();
-	}
-
-	/**
-	 * Called whenever the block is removed.
-	 */
-	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		TileEntityRack tile = (TileEntityRack) world.getTileEntity(pos);
-
-		if (tile != null) {
-			for (int i = 0; i < tile.getSizeInventory(); ++i) {
-				ItemStack stack = tile.getStackInSlot(i);
-
-				if (stack != null) {
-					float var8 = world.rand.nextFloat() * 0.8F + 0.1F;
-					float var9 = world.rand.nextFloat() * 0.8F + 0.1F;
-					float var10 = world.rand.nextFloat() * 0.8F + 0.1F;
-
-					while (stack.getCount() > 0) {
-						int randomNumber = world.rand.nextInt(21) + 10;
-
-						if (randomNumber > stack.getCount()) {
-							randomNumber = stack.getCount();
-						}
-
-						stack.setCount(stack.getCount() - randomNumber);
-						EntityItem item = new EntityItem(world, pos.getX() + var8, pos.getY() + var9, pos.getZ() + var10,
-								new ItemStack(stack.getItem(), randomNumber, stack.getItemDamage()));
-
-						if (stack.hasTagCompound()) {
-							item.getItem().setTagCompound(stack.getTagCompound().copy());
-						}
-
-						float var13 = 0.05F;
-						item.motionX = (float) world.rand.nextGaussian() * var13;
-						item.motionY = (float) world.rand.nextGaussian() * var13 + 0.2F;
-						item.motionZ = (float) world.rand.nextGaussian() * var13;
-						world.spawnEntity(item);
-					}
-				}
-			}
-		}
-		super.breakBlock(world, pos, state);
-	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityRack tile = (TileEntityRack) world.getTileEntity(pos);
-		if (world.isRemote) {
-			int slot = tile.getSlotFor(hitX,hitZ, user);
+		if (!world.isRemote && tile != null) {
+			int slot = tile.getSlotFor(hitX, hitZ, facing);
 			if (slot >= 0 && slot < 4) {
-				((EntityPlayerMP) user).connection.sendPacket(new RackCommand(slot, user, tile).generatePacket());
+				NetworkHandler.sendToPlayer((EntityPlayerMP) player, new RackCommandPacket(slot, player, tile));
 			}
 		}
 
 		return true;
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta)
+	{
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+		{
+			enumfacing = EnumFacing.NORTH;
+		}
+
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state)
+	{
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	{
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 }

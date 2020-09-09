@@ -3,7 +3,7 @@ package minefantasy.mfr.client.render.block;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.block.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderBlocks;

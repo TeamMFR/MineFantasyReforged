@@ -1,22 +1,24 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.entity.MoverType;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import minefantasy.mfr.api.armour.IElementalResistance;
-import minefantasy.mfr.api.helpers.*;
+import minefantasy.mfr.api.helpers.ArmourCalculator;
+import minefantasy.mfr.api.helpers.ArrowEffectsMF;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
+import minefantasy.mfr.api.helpers.PowerArmour;
+import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.api.stamina.StaminaBar;
-import minefantasy.mfr.api.weapon.*;
+import minefantasy.mfr.api.weapon.IDamageModifier;
+import minefantasy.mfr.api.weapon.IKnockbackWeapon;
+import minefantasy.mfr.api.weapon.IParryable;
+import minefantasy.mfr.api.weapon.IPowerAttack;
+import minefantasy.mfr.api.weapon.ISpecialCombatMob;
+import minefantasy.mfr.api.weapon.ISpecialEffect;
+import minefantasy.mfr.api.weapon.IWeaponSpeed;
+import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigStamina;
@@ -24,28 +26,41 @@ import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.Shockwave;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.item.weapon.*;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.packet.DodgeCommand;
-import minefantasy.mfr.packet.ParryPacket;
+import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.item.weapon.ItemBattleaxe;
+import minefantasy.mfr.item.weapon.ItemDagger;
+import minefantasy.mfr.item.weapon.ItemKatana;
+import minefantasy.mfr.item.weapon.ItemWaraxe;
+import minefantasy.mfr.item.weapon.ItemWeaponMFR;
+import minefantasy.mfr.network.DodgeCommandPacket;
+import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.network.ParryPacket;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ISpecialArmor;
@@ -53,6 +68,7 @@ import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.Map;
 
@@ -121,8 +137,8 @@ public class CombatMechanics {
 
     public static void applyUndeadBane(EntityLivingBase living) {
         living.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 0.5F, 0.5F);
-        living.addPotionEffect(new PotionEffect(Potion.getPotionById(19), 1200, 2));
-        living.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 1200, 2));
+        living.addPotionEffect(new PotionEffect(MobEffects.POISON, 1200, 2));
+        living.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 1200, 2));
         if (random.nextInt(5) == 0) {
             living.setFire(3);
         }
@@ -147,7 +163,7 @@ public class CombatMechanics {
 
         if (!user.world.isRemote && user instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) user;
-            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new ParryPacket(ticks, player).generatePacket());
+            NetworkHandler.sendToPlayer((EntityPlayerMP) player, new ParryPacket(ticks, player));
         }
     }
 
@@ -192,7 +208,7 @@ public class CombatMechanics {
      */
     private static void commandDodge(EntityPlayer user, int type) {
         initDodge(user, type);
-        ((EntityPlayerMP) user).connection.sendPacket(new DodgeCommand(user, type).generatePacket());
+        NetworkHandler.sendToPlayer((EntityPlayerMP) user,new DodgeCommandPacket(user, type));
     }
 
     public static void initDodge(EntityPlayer user, int type) {
@@ -333,9 +349,9 @@ public class CombatMechanics {
         if (damage <= 0) {
             event.setCanceled(true);
         }
-        if (hitter != null && hitter instanceof EntityLivingBase) {
+        if (hitter != null) {
             int hitTime = 5;
-            if (hitter.getHeldItemMainhand() != null) {
+            if (!hitter.getHeldItemMainhand().isEmpty()) {
                 ItemStack weapon = hitter.getHeldItemMainhand();
                 if (weapon.getItem() instanceof IWeaponSpeed) {
                     hitTime += ((IWeaponSpeed) weapon.getItem()).modifyHitTime(hitter, weapon);
@@ -413,14 +429,13 @@ public class CombatMechanics {
         }
     }
 
-    public Shockwave newShockwave(Entity source, double x, double y, double z, float power, boolean fire,
+    public void newShockwave(Entity source, double x, double y, double z, float power, boolean fire,
             boolean smoke) {
         Shockwave explosion = new Shockwave("humanstomp", source.world, source, x, y, z, power);
         explosion.isFlaming = fire;
         explosion.isSmoking = smoke;
         explosion.initiate();
         explosion.decorateWave(true);
-        return explosion;
     }
 
     private float modifyDamage(DamageSource src, World world, EntityLivingBase hit, float dam, boolean properHit) {
@@ -435,7 +450,7 @@ public class CombatMechanics {
             dam = modifyPlayerDamage((EntityPlayer) hit, dam);
         }
 
-        if (source != null && hitter != null && hitter instanceof EntityLivingBase) {
+        if (source != null && hitter instanceof EntityLivingBase) {
             dam = modifyUserHitDamage(dam, (EntityLivingBase) hitter, source, hitter == source, hit, properHit);
         }
         if (src.isExplosion() && isSkeleton(hit)) {
@@ -487,12 +502,11 @@ public class CombatMechanics {
                 special = arrowDesign;
             }
         }
-        if (user instanceof EntityLivingBase) {
-            EntityLivingBase player = user;
+        if (user != null) {
 
             // TODO: Stamina Traits
             if (StaminaBar.isSystemActive) {
-                if (StaminaBar.getStaminaValue(player) <= 0) {
+                if (StaminaBar.getStaminaValue(user) <= 0) {
                     dam *= ConfigStamina.weaponDrain;
                 }
             }
@@ -502,7 +516,7 @@ public class CombatMechanics {
         }
 
         ItemStack weapon = user.getHeldItemMainhand();
-        if (weapon != null) {
+        if (!weapon.isEmpty()) {
             if (weapon.getItem() instanceof IDamageModifier) {
                 // TODO: IDamageModifier, this mods the damage for weapons
                 dam = ((IDamageModifier) weapon.getItem()).modifyDamage(weapon, user, target, dam, properHit);
@@ -517,7 +531,7 @@ public class CombatMechanics {
     private void onPowerAttack(float dam, EntityLivingBase user, Entity target, boolean properHit) {
         ItemStack weapon = user.getHeldItemMainhand();
         int ticks = 20;
-        if (weapon != null && weapon.getItem() instanceof IPowerAttack) {
+        if (!weapon.isEmpty() && weapon.getItem() instanceof IPowerAttack) {
             ((IPowerAttack) weapon.getItem()).onPowerAttack(dam, user, target, properHit);
             ticks = ((IPowerAttack) weapon.getItem()).getParryModifier(weapon, user, target);
         }
@@ -527,8 +541,8 @@ public class CombatMechanics {
             }
         }
         if (!user.world.isRemote) {
-            user.addPotionEffect(new PotionEffect(Potion.getPotionById(18), 20, 5));
-            user.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 20, 10));
+            user.addPotionEffect(new PotionEffect(MobEffects.POISON, 20, 5));
+            user.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 20, 10));
         }
         if (user instanceof EntityPlayer) {
             TacticalManager.lungeEntity(user, target, 0.5F, 0F);
@@ -549,11 +563,11 @@ public class CombatMechanics {
         Entity source = src.getImmediateSource();
         Entity hitter = src.getTrueSource();
 
-        if (source != null && hitter != null && hitter instanceof EntityLivingBase) {
+        if (source != null && hitter instanceof EntityLivingBase) {
             if (source == hitter) {
                 EntityLivingBase user = (EntityLivingBase) hitter;
                 ItemStack weapon = user.getHeldItemMainhand();
-                if (weapon != null) {
+                if (!weapon.isEmpty()) {
                     onWeaponHit(user, weapon, target, damage);
                 }
                 if (RPGElements.isSystemActive && user instanceof EntityPlayer && !user.world.isRemote) {
@@ -597,7 +611,7 @@ public class CombatMechanics {
 
     private float onUserHit(EntityLivingBase user, Entity entityHitting, DamageSource source, float dam, boolean properHit) {
         ItemStack weapon = user.getHeldItemMainhand();
-        if ((properHit || source.isProjectile()) && weapon != null && !source.isUnblockable()
+        if ((properHit || source.isProjectile()) && !weapon.isEmpty() && !source.isUnblockable()
                 && !source.isExplosion()) {
             float threshold = 10;// DEFAULT PARRY THRESHOLD
             float weaponFatigue = 2.0F;// DEFAULT FATIGUE
@@ -656,14 +670,14 @@ public class CombatMechanics {
                         user.world.playSound((EntityPlayer) user, user.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.NEUTRAL, 1.0F, 1.25F + (random.nextFloat() * 0.5F));
                     }
                     if (user instanceof EntityPlayer) {
-                        ((EntityPlayer) user).stopActiveHand();
+                        user.stopActiveHand();
                         ItemWeaponMFR.setParry(weapon, 20);
                     }
 
-                    if (entityHitting != null && entityHitting instanceof EntityLivingBase) {
+                    if (entityHitting instanceof EntityLivingBase) {
                         EntityLivingBase hitter = (EntityLivingBase) entityHitting;
                         int hitTime = 5;
-                        if (hitter.getHeldItemMainhand() != null) {
+                        if (!hitter.getHeldItemMainhand().isEmpty()) {
                             ItemStack attackingWep = hitter.getHeldItemMainhand();
                             if (attackingWep.getItem() instanceof IWeaponSpeed) {
                                 hitTime += ((IWeaponSpeed) attackingWep.getItem()).modifyHitTime(hitter, weapon);
@@ -687,7 +701,7 @@ public class CombatMechanics {
 
             Iterable<ItemStack> armour = user.getArmorInventoryList();
             for (ItemStack stack: armour) {
-                if (stack != null && !stack.isEmpty() && stack.getItem() != Items.AIR) {
+                if (!stack.isEmpty() && stack.getItem() != Items.AIR) {
                     int dura = (int) (dam) + 1;
                     if (!user.world.isRemote && !isArmourFireImmune(stack, source)) {
                         MFRLogUtil.logDebug("Armour Flame Damage: " + dura);
@@ -698,14 +712,14 @@ public class CombatMechanics {
                         }
                     }
                     if (stack.getItemDamage() >= stack.getMaxDamage()) {
-                        user.setItemStackToSlot(EntityEquipmentSlot.valueOf(stack.getDisplayName()), null);
-                        user.world.playSound(user.posX, user.posY + user.getEyeHeight() - (0.4F * EntityEquipmentSlot.valueOf(stack.getDisplayName()).getIndex() ), user.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F, true);
+                        user.setItemStackToSlot(EntityLiving.getSlotForItemStack(stack), ItemStack.EMPTY);
+                        user.world.playSound(user.posX, user.posY + user.getEyeHeight() - (0.4F), user.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F, true);
                     }
                 }
             }
 
             for (ItemStack stack: armour) {
-                if (stack != null && !stack.isEmpty() && stack.getItem() != Items.AIR) {
+                if (!stack.isEmpty() && stack.getItem() != Items.AIR) {
                     int dura = (int) (dam) + 1;
                     if (!user.world.isRemote && !isArmourFireImmune(stack, source)) {
                         MFRLogUtil.logDebug("Armour Flame Damage: " + dura);
@@ -716,15 +730,14 @@ public class CombatMechanics {
                         }
                     }
                     if (stack.getItemDamage() >= stack.getMaxDamage()) {
-                        user.setItemStackToSlot(EntityEquipmentSlot.valueOf(stack.getDisplayName()), null);
-                        user.world.playSound(user.posX, user.posY + user.getEyeHeight() - (0.4F * EntityEquipmentSlot.valueOf(stack.getDisplayName()).getIndex()), user.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F, true);
+                        user.setItemStackToSlot(stack.getItem().getEquipmentSlot(stack), ItemStack.EMPTY);
+                        user.world.playSound(user.posX, user.posY + user.getEyeHeight() - (0.4F), user.posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F, true);
                     }
                 }
             }
         }
 
-        if (dam > 0 && user instanceof EntityPlayer
-                || (entityHitting != null && entityHitting instanceof EntityPlayer)) {
+        if (dam > 0 && user instanceof EntityPlayer || (entityHitting instanceof EntityPlayer)) {
             if (!user.world.isRemote) {
                 String type = "Mixed";
                 float[] f = ArmourCalculator.getRatioForSource(source);
@@ -747,7 +760,7 @@ public class CombatMechanics {
     }
 
     private boolean isArmourFireImmune(ItemStack armour, DamageSource src) {
-        if (armour != null && armour.getItem() instanceof IElementalResistance) {
+        if (!armour.isEmpty() && armour.getItem() instanceof IElementalResistance) {
             return ((IElementalResistance) armour.getItem()).getFireResistance(armour, src) >= 100F;
         }
         return false;
@@ -851,7 +864,7 @@ public class CombatMechanics {
             {
                 EntityLivingBase tar = mob.getAttackTarget();
 
-                if (tar != null && tar instanceof EntityPlayer && ((EntityPlayer) tar).isActiveItemStackBlocking()) {
+                if (tar instanceof EntityPlayer && ((EntityPlayer) tar).isActiveItemStackBlocking()) {
                     double dist = mob.getDistanceSq(tar);
 
                     if (tar instanceof EntityZombie && mob.onGround && mob.getRNG().nextInt(10) == 0 && dist > 1D
@@ -895,13 +908,13 @@ public class CombatMechanics {
     }
 
     private boolean isAxe(ItemStack held) {
-        return held != null && held.getItem() instanceof ItemWaraxe
-                || held != null && held.getItem() instanceof ItemBattleaxe;
+        return !held.isEmpty() && held.getItem() instanceof ItemWaraxe
+                || !held.isEmpty() && held.getItem() instanceof ItemBattleaxe;
     }
 
     private boolean isFastblade(ItemStack held) {
-        return held != null && held.getItem() instanceof ItemDagger
-                || held != null && held.getItem() instanceof ItemKatana;
+        return !held.isEmpty() && held.getItem() instanceof ItemDagger
+                || !held.isEmpty() && held.getItem() instanceof ItemKatana;
     }
 
     private void applyBalance(EntityPlayer entityPlayer) {
@@ -909,7 +922,7 @@ public class CombatMechanics {
         ItemStack weapon = entityPlayer.getHeldItemMainhand();
         float balance = 0.0F;
 
-        if (weapon != null && weapon.getItem() instanceof IWeightedWeapon) {
+        if (!weapon.isEmpty() && weapon.getItem() instanceof IWeightedWeapon) {
             balance = ((IWeightedWeapon) weapon.getItem()).getBalance(entityPlayer);
         }
 

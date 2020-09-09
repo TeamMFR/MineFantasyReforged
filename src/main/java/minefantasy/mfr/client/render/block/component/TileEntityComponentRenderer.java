@@ -2,10 +2,9 @@ package minefantasy.mfr.client.render.block.component;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityComponent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 public class TileEntityComponentRenderer extends TileEntitySpecialRenderer {

@@ -82,8 +82,8 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe {
      */
     @Override
     public boolean matches(CarpenterCraftMatrix matrix) {
-        for (int var2 = 0; var2 <= ShapelessCarpenterRecipes.globalWidth - this.recipeWidth; ++var2) {
-            for (int var3 = 0; var3 <= ShapelessCarpenterRecipes.globalHeight - this.recipeHeight; ++var3) {
+        for (int var2 = 0; var2 <= ShapelessCarpenterRecipes.GLOBAL_WIDTH - this.recipeWidth; ++var2) {
+            for (int var3 = 0; var3 <= ShapelessCarpenterRecipes.GLOBAL_HEIGHT - this.recipeHeight; ++var3) {
                 if (this.checkMatch(matrix, var2, var3, true)) {
                     return true;
                 }
@@ -101,8 +101,8 @@ public class ShapedCarpenterRecipes implements ICarpenterRecipe {
      * Checks if the region of a crafting inventory is match for the recipe.
      */
     private boolean checkMatch(InventoryCrafting matrix, int x, int y, boolean b) {
-        for (int var5 = 0; var5 < ShapelessCarpenterRecipes.globalWidth; ++var5) {
-            for (int var6 = 0; var6 < ShapelessCarpenterRecipes.globalHeight; ++var6) {
+        for (int var5 = 0; var5 < ShapelessCarpenterRecipes.GLOBAL_WIDTH; ++var5) {
+            for (int var6 = 0; var6 < ShapelessCarpenterRecipes.GLOBAL_HEIGHT; ++var6) {
                 int var7 = var5 - x;
                 int var8 = var6 - y;
                 ItemStack recipeItem = null;

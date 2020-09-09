@@ -27,126 +27,187 @@ import net.minecraftforge.registries.IForgeRegistry;
 public class DragonforgedStyle {
     public static ToolMaterial DRAGONFORGED = EnumHelper.addToolMaterial("dragonforged", 2, 250, 6.0F, 2.0F, 15);
 
-    public static final ItemWeaponMFR DRAGONFORGED_SWORD = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_WARAXE = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_MACE = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_DAGGER = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_SPEAR = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_GREATSWORD = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_BATTLEAXE = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_WARHAMMER = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_KATANA = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_HALBEARD = Utils.nullValue();
-    public static final ItemWeaponMFR DRAGONFORGED_LANCE = Utils.nullValue();
-    public static final ItemPickMF DRAGONFORGED_PICK = Utils.nullValue();
-    public static final ItemAxe DRAGONFORGED_AXE = Utils.nullValue();
-    public static final ItemSpadeMF DRAGONFORGED_SPADE = Utils.nullValue();
-    public static final ItemHoeMF DRAGONFORGED_HOE = Utils.nullValue();
-    public static final ItemHvyPick DRAGONFORGED_HVYPICK = Utils.nullValue();
-    public static final ItemHvyShovel DRAGONFORGED_HVYSHOVEL = Utils.nullValue();
-    public static final ItemHandpick DRAGONFORGED_HANDPICK = Utils.nullValue();
-    public static final ItemTrowMF DRAGONFORGED_TROW = Utils.nullValue();
-    public static final ItemScythe DRAGONFORGED_SCYTHE = Utils.nullValue();
-    public static final ItemMattock DRAGONFORGED_MATTOCK = Utils.nullValue();
-    public static final ItemLumberAxe DRAGONFORGED_LUMBER = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_SWORD = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_WARAXE = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_MACE = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_DAGGER = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_SPEAR = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_GREATSWORD = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_BATTLEAXE = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_WARHAMMER = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_KATANA = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_HALBEARD = Utils.nullValue();
+    public static ItemWeaponMFR DRAGONFORGED_LANCE = Utils.nullValue();
+    public static ItemPickMF DRAGONFORGED_PICK = Utils.nullValue();
+    public static ItemAxeMFR DRAGONFORGED_AXE = Utils.nullValue();
+    public static ItemSpadeMF DRAGONFORGED_SPADE = Utils.nullValue();
+    public static ItemHoeMF DRAGONFORGED_HOE = Utils.nullValue();
+    public static ItemHvyPick DRAGONFORGED_HVYPICK = Utils.nullValue();
+    public static ItemHvyShovel DRAGONFORGED_HVYSHOVEL = Utils.nullValue();
+    public static ItemHandpick DRAGONFORGED_HANDPICK = Utils.nullValue();
+    public static ItemTrowMF DRAGONFORGED_TROW = Utils.nullValue();
+    public static ItemScythe DRAGONFORGED_SCYTHE = Utils.nullValue();
+    public static ItemMattock DRAGONFORGED_MATTOCK = Utils.nullValue();
+    public static ItemLumberAxeMFR DRAGONFORGED_LUMBER = Utils.nullValue();
 
-    public static final ItemHammer DRAGONFORGED_HAMMER = Utils.nullValue();
-    public static final ItemHammer DRAGONFORGED_HVYHAMMER = Utils.nullValue();
-    public static final ItemTongs DRAGONFORGED_TONGS = Utils.nullValue();
-    public static final ItemShears DRAGONFORGED_SHEARS = Utils.nullValue();
-    public static final ItemKnifeMFR DRAGONFORGED_KNIFE = Utils.nullValue();
-    public static final ItemNeedle DRAGONFORGED_NEEDLE = Utils.nullValue();
-    public static final ItemSaw DRAGONFORGED_SAW = Utils.nullValue();
-    public static final ItemSpanner DRAGONFORGED_SPANNER = Utils.nullValue();
+    public static ItemHammer DRAGONFORGED_HAMMER = Utils.nullValue();
+    public static ItemHammer DRAGONFORGED_HVYHAMMER = Utils.nullValue();
+    public static ItemTongs DRAGONFORGED_TONGS = Utils.nullValue();
+    public static ItemShears DRAGONFORGED_SHEARS = Utils.nullValue();
+    public static ItemKnifeMFR DRAGONFORGED_KNIFE = Utils.nullValue();
+    public static ItemNeedle DRAGONFORGED_NEEDLE = Utils.nullValue();
+    public static ItemSaw DRAGONFORGED_SAW = Utils.nullValue();
+    public static ItemSpanner DRAGONFORGED_SPANNER = Utils.nullValue();
 
-    public static final ItemBowMFR DRAGONFORGED_BOW = Utils.nullValue();
+    public static ItemBowMFR DRAGONFORGED_BOW = Utils.nullValue();
 
-    public static final ItemCustomArmour DRAGONFORGED_SCALE_HELMET = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SCALE_CHEST = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SCALE_LEGS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SCALE_BOOTS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_CHAIN_HELMET = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_CHAIN_CHEST = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_CHAIN_LEGS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_CHAIN_BOOTS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SPLINT_HELMET = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SPLINT_CHEST = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SPLINT_LEGS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_SPLINT_BOOTS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_PLATE_HELMET = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_PLATE_CHEST = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_PLATE_LEGS = Utils.nullValue();
-    public static final ItemCustomArmour DRAGONFORGED_PLATE_BOOTS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SCALE_HELMET = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SCALE_CHEST = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SCALE_LEGS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SCALE_BOOTS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_CHAIN_HELMET = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_CHAIN_CHEST = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_CHAIN_LEGS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_CHAIN_BOOTS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SPLINT_HELMET = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SPLINT_CHEST = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SPLINT_LEGS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_SPLINT_BOOTS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_PLATE_HELMET = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_PLATE_CHEST = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_PLATE_LEGS = Utils.nullValue();
+    public static ItemCustomArmour DRAGONFORGED_PLATE_BOOTS = Utils.nullValue();
 
-    @SubscribeEvent
-    public static void registerItem(RegistryEvent.Register<Item> event) {
-        IForgeRegistry<Item> registry = event.getRegistry();
-
+    public static void init() {
         String design = "dragonforged";
         CreativeTabs tab = CreativeTabMFR.tabDragonforged;
         ToolMaterial mat = DRAGONFORGED;
         float ratingMod = 1.2F;
 
         // Weapons
-        registry.register(new ItemDagger(design + "_dagger", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemSword(design + "_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemWaraxe(design + "_waraxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemMace(design + "_mace", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemSpear(design + "_spear", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemKatana(design + "_katana", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemGreatsword(design + "_greatsword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemBattleaxe(design + "_battleaxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemWarhammer(design + "_warhammer", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemHalbeard(design + "_halbeard", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
-        registry.register(new ItemLance(design + "_lance", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1));
+        DRAGONFORGED_SWORD = new ItemSword(design + "_sword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_WARAXE = new ItemWaraxe(design + "_waraxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_MACE = new ItemMace(design + "_mace", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_DAGGER = new ItemDagger(design + "_dagger", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_SPEAR = new ItemSpear(design + "_spear", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_GREATSWORD = new ItemGreatsword(design + "_greatsword", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_BATTLEAXE = new ItemBattleaxe(design + "_battleaxe", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_WARHAMMER = new ItemWarhammer(design + "_warhammer", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_KATANA = new ItemKatana(design + "_katana", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_HALBEARD = new ItemHalbeard(design + "_halbeard", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
+        DRAGONFORGED_LANCE = new ItemLance(design + "_lance", mat, 0, 1F).setCustom(design).setTab(tab).modifyBaseDamage(1);
 
-        registry.register(new ItemBowMFR(design + "_bow", mat, EnumBowType.SHORTBOW, 1).setCustom(design).setCreativeTab(tab));
+        DRAGONFORGED_BOW = (ItemBowMFR) new ItemBowMFR(design + "_bow", mat, EnumBowType.SHORTBOW, 1).setCustom(design).setCreativeTab(tab);
 
         // Tools
-        registry.register(new ItemPickMF(design + "_pick", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemAxe(design + "_axe", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemSpadeMF(design + "_spade", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemHoeMF(design + "_hoe", mat, 0).setCustom(design).setCreativeTab(tab));
+        DRAGONFORGED_PICK = (ItemPickMF) new ItemPickMF(design + "_pick", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_AXE = (ItemAxeMFR) new ItemAxeMFR(design + "_axe", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_SPADE = (ItemSpadeMF) new ItemSpadeMF(design + "_spade", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_HOE = (ItemHoeMF) new ItemHoeMF(design + "_hoe", mat, 0).setCustom(design).setCreativeTab(tab);
 
-        registry.register(new ItemHandpick(design + "_handpick", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemHvyPick(design + "_hvypick", mat, 0).setCustom(design).setCreativeTab(tab));
-
-        registry.register(new ItemTrowMF(design + "_trow", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemHvyShovel(design + "_hvyshovel", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemScythe(design + "_scythe", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemMattock(design + "_mattock", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemLumberAxe(design + "_lumber", mat, 0).setCustom(design).setCreativeTab(tab));
+        DRAGONFORGED_HVYPICK = (ItemHvyPick) new ItemHvyPick(design + "_hvypick", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_HVYSHOVEL = (ItemHvyShovel) new ItemHvyShovel(design + "_hvyshovel", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_HANDPICK = (ItemHandpick) new ItemHandpick(design + "_handpick", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_TROW = (ItemTrowMF) new ItemTrowMF(design + "_trow", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_SCYTHE = (ItemScythe) new ItemScythe(design + "_scythe", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_MATTOCK = (ItemMattock) new ItemMattock(design + "_mattock", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_LUMBER = (ItemLumberAxeMFR) new ItemLumberAxeMFR(design + "_lumber", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_HAMMER = (ItemHammer) new ItemHammer(design + "_hammer", mat, false, 0, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_HVYHAMMER = (ItemHammer) new ItemHammer(design + "_hvyhammer", mat, true, 0, 0).setCustom(design).setCreativeTab(tab);
 
         // Crafters
-        registry.register(new ItemHammer(design + "_hammer", mat, false, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemHammer(design + "_hvyhammer", mat, true, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemShears(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemKnifeMFR(design + "_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemNeedle(design + "_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemTongs(design + "_tongs", mat, 0).setCustom(design).setCreativeTab(tab));
-        registry.register(new ItemSpanner(design + "_spanner", 0, 0).setCustom(design).setCreativeTab(tab));
+        DRAGONFORGED_TONGS = (ItemTongs) new ItemTongs(design + "_tongs", mat, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_SHEARS = (ItemShears) new ItemShears(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_KNIFE = (ItemKnifeMFR) new ItemKnifeMFR(design + "_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_NEEDLE = (ItemNeedle) new ItemNeedle(design + "_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_SAW = (ItemSaw) new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_SPANNER = (ItemSpanner) new ItemSpanner(design + "_spanner", 0, 0).setCustom(design).setCreativeTab(tab);
 
         // Armours
-        registry.register(new ItemCustomArmour(design, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "chain_chest", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "chain_legs", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
+        DRAGONFORGED_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_SCALE_CHEST = (ItemCustomArmour) new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_SCALE_LEGS = (ItemCustomArmour) new ItemCustomArmour(design, "scale_legs", ArmourDesign.SCALEMAIL,EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(design, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
-        registry.register(new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "scale_legs", ArmourDesign.SCALEMAIL,EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
+        DRAGONFORGED_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(design, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_CHAIN_CHEST = (ItemCustomArmour) new ItemCustomArmour(design, "chain_chest", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_CHAIN_LEGS = (ItemCustomArmour) new ItemCustomArmour(design, "chain_legs", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(design, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
-        registry.register(new ItemCustomArmour(design, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "splint_chest", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "splint_legs", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
+        DRAGONFORGED_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(design, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_SPLINT_CHEST = (ItemCustomArmour) new ItemCustomArmour(design, "splint_chest", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_SPLINT_LEGS = (ItemCustomArmour) new ItemCustomArmour(design, "splint_legs", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(design, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
-        registry.register(new ItemCustomArmour(design, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "plate_chest", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "plate_legs", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab));
-        registry.register(new ItemCustomArmour(design, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab));
+        DRAGONFORGED_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(design, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_PLATE_CHEST = (ItemCustomArmour) new ItemCustomArmour(design, "plate_chest", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_PLATE_LEGS = (ItemCustomArmour) new ItemCustomArmour(design, "plate_legs", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+        DRAGONFORGED_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(design, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+    }
+    
+    @SubscribeEvent
+    public static void registerItem(RegistryEvent.Register<Item> event) {
+        IForgeRegistry<Item> registry = event.getRegistry();
+
+        // Weapons
+        registry.register(DRAGONFORGED_SWORD);
+        registry.register(DRAGONFORGED_WARAXE);
+        registry.register(DRAGONFORGED_MACE);
+        registry.register(DRAGONFORGED_DAGGER);
+        registry.register(DRAGONFORGED_SPEAR);
+        registry.register(DRAGONFORGED_GREATSWORD);
+        registry.register(DRAGONFORGED_BATTLEAXE);
+        registry.register(DRAGONFORGED_WARHAMMER);
+        registry.register(DRAGONFORGED_KATANA);
+        registry.register(DRAGONFORGED_HALBEARD);
+        registry.register(DRAGONFORGED_LANCE);
+
+        registry.register(DRAGONFORGED_BOW);
+
+        // Tools
+        registry.register(DRAGONFORGED_PICK);
+        registry.register(DRAGONFORGED_AXE);
+        registry.register(DRAGONFORGED_SPADE);
+        registry.register(DRAGONFORGED_HOE);
+
+        registry.register(DRAGONFORGED_HVYPICK);
+        registry.register(DRAGONFORGED_HVYSHOVEL);
+        registry.register(DRAGONFORGED_HANDPICK);
+        registry.register(DRAGONFORGED_TROW);
+        registry.register(DRAGONFORGED_SCYTHE);
+        registry.register(DRAGONFORGED_MATTOCK);
+        registry.register(DRAGONFORGED_LUMBER);
+        registry.register(DRAGONFORGED_HAMMER);
+        registry.register(DRAGONFORGED_HVYHAMMER);
+
+        // Crafters
+        registry.register(DRAGONFORGED_TONGS);
+        registry.register(DRAGONFORGED_SHEARS);
+        registry.register(DRAGONFORGED_KNIFE);
+        registry.register(DRAGONFORGED_NEEDLE);
+        registry.register(DRAGONFORGED_SAW);
+        registry.register(DRAGONFORGED_SPANNER);
+
+        // Armours
+        registry.register(DRAGONFORGED_SCALE_HELMET);
+        registry.register(DRAGONFORGED_SCALE_CHEST);
+        registry.register(DRAGONFORGED_SCALE_LEGS);
+        registry.register(DRAGONFORGED_SCALE_BOOTS);
+
+        registry.register(DRAGONFORGED_CHAIN_HELMET);
+        registry.register(DRAGONFORGED_CHAIN_CHEST);
+        registry.register(DRAGONFORGED_CHAIN_LEGS);
+        registry.register(DRAGONFORGED_CHAIN_BOOTS);
+
+        registry.register(DRAGONFORGED_SPLINT_HELMET);
+        registry.register(DRAGONFORGED_SPLINT_CHEST);
+        registry.register(DRAGONFORGED_SPLINT_LEGS);
+        registry.register(DRAGONFORGED_SPLINT_BOOTS);
+
+        registry.register(DRAGONFORGED_PLATE_HELMET);
+        registry.register(DRAGONFORGED_PLATE_CHEST);
+        registry.register(DRAGONFORGED_PLATE_LEGS);
+        registry.register(DRAGONFORGED_PLATE_BOOTS);
     }
 
     public static void loadCrafting() {

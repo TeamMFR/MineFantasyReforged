@@ -1,0 +1,25 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "minefantasyreborn:pie",
+        "textures": {
+            "bottom": "minefantasyreborn:blocks/pie_shepards_bottom",
+            "inner": "minefantasyreborn:blocks/pie_shepards_inner",
+            "side": "minefantasyreborn:blocks/pie_shepards_side",
+            "top": "minefantasyreborn:blocks/pie_shepards_top"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}],
+        "bites=0": { "model": "minefantasyreborn:pie" },
+        "bites=1": { "model": "minefantasyreborn:pie_bite_1" },
+        "bites=2": { "model": "minefantasyreborn:pie_bite_2" },
+        "bites=3": { "model": "minefantasyreborn:pie_bite_3" },
+        "bites=4": { "model": "minefantasyreborn:pie_bite_4" },
+        "bites=5": { "model": "minefantasyreborn:pie_bite_5" },
+        "bites=6": { "model": "minefantasyreborn:pie_bite_6" },
+        "bites=7": { "model": "minefantasyreborn:pie_bite_7" },
+        "bites=8": { "model": "minefantasyreborn:pie_bite_8" }
+    }
+}

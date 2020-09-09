@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.decor;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

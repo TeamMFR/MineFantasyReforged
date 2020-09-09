@@ -8,19 +8,18 @@ import net.minecraft.util.SoundEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * @author AnonymousProductions
  */
 public class ShapelessCarpenterRecipes implements ICarpenterRecipe {
-    public static final int globalWidth = 4;
-    public static final int globalHeight = 4;
+    public static final int GLOBAL_WIDTH = 4;
+    public static final int GLOBAL_HEIGHT = 4;
     /**
      * Is a List of ItemStack that composes the recipe.
      */
-    public final List recipeItems;
+    public final List<ItemStack> recipeItems;
     /**
      * Is the ItemStack that you get when craft the recipe.
      */
@@ -40,12 +39,11 @@ public class ShapelessCarpenterRecipes implements ICarpenterRecipe {
     private final String research;
     private final Skill skillUsed;
 
-    public ShapelessCarpenterRecipes(ItemStack output, String toolType, float exp, int hammer, int anvi, int time,
-                                     List components, boolean hot, SoundEvent sound, String research, Skill skill) {
+    public ShapelessCarpenterRecipes(ItemStack output, String toolType, float exp, int hammer, int anvil, int time, List<ItemStack> components, boolean hot, SoundEvent sound, String research, Skill skill) {
         this.research = research;
         this.outputHot = hot;
         this.recipeOutput = output;
-        this.blockTier = anvi;
+        this.blockTier = anvil;
         this.recipeItems = components;
         this.recipeHammer = hammer;
         this.recipeTime = time;
@@ -80,42 +78,37 @@ public class ShapelessCarpenterRecipes implements ICarpenterRecipe {
      */
     @Override
     public boolean matches(CarpenterCraftMatrix par1InventoryCrafting) {
-        ArrayList var2 = new ArrayList(this.recipeItems);
+        ArrayList<ItemStack> itemStacks = new ArrayList<>(this.recipeItems);
 
-        for (int var3 = 0; var3 <= globalWidth; ++var3) {
-            for (int var4 = 0; var4 <= globalHeight; ++var4) {
-                ItemStack inputItem = par1InventoryCrafting.getStackInRowAndColumn(var4, var3);
+        for (int i = 0; i <= GLOBAL_WIDTH; ++i) {
+            for (int j = 0; j <= GLOBAL_HEIGHT; ++j) {
+                ItemStack inputItem = par1InventoryCrafting.getStackInRowAndColumn(j, i);
 
-                if (inputItem != null) {
-                    boolean var6 = false;
-                    Iterator var7 = var2.iterator();
+                if (!inputItem.isEmpty()) {
+                    boolean check = false;
 
-                    while (var7.hasNext()) {
-                        ItemStack recipeItem = (ItemStack) var7.next();
-
-                        if (inputItem == null) {
+                    for (ItemStack recipeItem : itemStacks) {
+                        if (inputItem.isEmpty()) {
                             return false;
                         }
                         if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
                             return false;
                         }
-                        if (inputItem.getItem() == recipeItem.getItem()
-                                && (recipeItem.getItemDamage() == OreDictionary.WILDCARD_VALUE
-                                || inputItem.getItemDamage() == recipeItem.getItemDamage())) {
-                            var6 = true;
-                            var2.remove(recipeItem);
+                        if (inputItem.getItem() == recipeItem.getItem() && (recipeItem.getItemDamage() == OreDictionary.WILDCARD_VALUE || inputItem.getItemDamage() == recipeItem.getItemDamage())) {
+                            check = true;
+                            itemStacks.remove(recipeItem);
                             break;
                         }
                     }
 
-                    if (!var6) {
+                    if (!check) {
                         return false;
                     }
                 }
             }
         }
 
-        return var2.isEmpty();
+        return itemStacks.isEmpty();
     }
 
     /**

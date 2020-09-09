@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.init.SoundEvents;
@@ -16,11 +16,11 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFC;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.item.heatable.ItemHeated;
 import minefantasy.mfr.knowledge.KnowledgeListMFR;
 import minefantasy.mfr.proxy.NetworkUtils;
-import minefantasy.mfr.packet.BloomeryPacket;
+import minefantasy.mfr.network.BloomeryPacket;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -23,7 +23,7 @@ public class ToolHelper {
     }
 
     public static float getCrafterEfficiency(ItemStack tool) {
-        if (tool == null) {
+        if (tool.isEmpty()) {
             return 1F;
         }
         if (tool.getItem() instanceof IToolMFR) {
@@ -35,7 +35,7 @@ public class ToolHelper {
     // MATERIALS//
 
     public static int getCrafterTier(ItemStack tool) {
-        if (tool == null) {
+        if (tool.isEmpty()) {
             return 0;
         }
         if (tool.getItem() instanceof IToolMFR) {
@@ -47,7 +47,7 @@ public class ToolHelper {
     // QUALITY//
 
     public static String getCrafterTool(ItemStack tool) {
-        if (tool == null) {
+        if (tool.isEmpty()) {
             return "hands";
         }
         if (tool.getItem() instanceof IToolMFR) {
@@ -61,7 +61,7 @@ public class ToolHelper {
      * APPLIES TO IToolMaterial in api.
      */
     public static boolean isItemMaterial(ItemStack stack, ToolMaterial material) {
-        if (stack != null) {
+        if (!stack.isEmpty()) {
             // You need the item to implement this so it can see
             if (stack.getItem() instanceof IToolMaterial) {
                 IToolMaterial mat = (IToolMaterial) stack.getItem();
@@ -221,7 +221,7 @@ public class ToolHelper {
     }
 
     public static boolean canBeSharpened(ItemStack itemstack, float level) {
-        if (itemstack == null)
+        if (itemstack.isEmpty())
             return false;
         return false;
     }
@@ -251,7 +251,7 @@ public class ToolHelper {
     public static float[] getSharpnessTraits(ItemStack item) {
         float[] list = new float[]{100, 20F, 3F};
 
-        if (item != null && item.getItem() instanceof ISharpenable) {
+        if (!item.isEmpty() && item.getItem() instanceof ISharpenable) {
             ISharpenable instance = (ISharpenable) item.getItem();
             list[0] = instance.getMaxSharpness(item);
             list[1] = instance.getDamagePercentMax(item);

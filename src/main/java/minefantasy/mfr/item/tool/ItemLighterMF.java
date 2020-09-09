@@ -32,7 +32,7 @@ public class ItemLighterMF extends ItemBaseMFR implements ILighter {
 
     // 0 for N/A -1 for fail, 1 for succeed
     public static int tryUse(ItemStack held, EntityPlayer user) {
-        if (held == null)
+        if (held.isEmpty())
             return 0;
 
         if (held.getItem() instanceof ItemFlintAndSteel) {
@@ -62,8 +62,7 @@ public class ItemLighterMF extends ItemBaseMFR implements ILighter {
         } else {
             boolean success = user.getRNG().nextFloat() < chance;
             if (world.isAirBlock(pos)) {
-                world.playSound(user, pos, SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F,
-                        itemRand.nextFloat() * 0.4F + 0.8F);
+                world.playSound(user, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
                 if (success) {
                     world.setBlockState(pos, (IBlockState) Blocks.FIRE);
                 }

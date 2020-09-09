@@ -3,7 +3,7 @@ package minefantasy.mfr.container;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.block.tile.blastfurnace.TileEntityBlastFH;
+import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFH;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

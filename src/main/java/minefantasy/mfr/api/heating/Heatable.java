@@ -56,7 +56,7 @@ public class Heatable {
     }
 
     public static Heatable loadStats(ItemStack item) {
-        if (item == null)
+        if (item.isEmpty())
             return null;
 
         if (registerList.isEmpty())
@@ -80,10 +80,10 @@ public class Heatable {
      * 0 = nothing, 1 = soft, 2 = unstable
      */
     public static byte getHeatableStage(ItemStack item) {
-        if (item == null || !(item.getItem() instanceof IHotItem)) {
+        if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
             return 0;
         }
-        if (item != null && item.hasTagCompound()) {
+        if (!item.isEmpty() && item.hasTagCompound()) {
             int temp = getTemp(item);
             int work = item.getTagCompound().getInteger(NBT_WorkableTemp);
             int unstable = item.getTagCompound().getInteger(NBT_UnstableTemp);
@@ -96,7 +96,7 @@ public class Heatable {
     }
 
     public static int getWorkTemp(ItemStack item) {
-        if (item == null || !(item.getItem() instanceof IHotItem)) {
+        if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
             return 0;
         }
         NBTTagCompound tag = getNBT(item);
@@ -108,7 +108,7 @@ public class Heatable {
     }
 
     public static int getUnstableTemp(ItemStack item) {
-        if (item == null || !(item.getItem() instanceof IHotItem)) {
+        if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
             return 0;
         }
         NBTTagCompound tag = getNBT(item);
@@ -120,7 +120,7 @@ public class Heatable {
     }
 
     public static int getTemp(ItemStack item) {
-        if (item == null || !(item.getItem() instanceof IHotItem)) {
+        if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
             return 0;
         }
         NBTTagCompound tag = getNBT(item);
@@ -150,8 +150,8 @@ public class Heatable {
     }
 
     public static ItemStack getItem(ItemStack item) {
-        if (item == null || !(item.getItem() instanceof IHotItem)) {
-            return null;
+        if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
+            return ItemStack.EMPTY;
         }
         NBTTagCompound tag = getNBT(item);
 
@@ -159,7 +159,7 @@ public class Heatable {
             return new ItemStack(tag.getCompoundTag(NBT_Item));
         }
 
-        return null;
+        return ItemStack.EMPTY;
     }
 
     private static NBTTagCompound getNBT(ItemStack item) {
@@ -169,10 +169,10 @@ public class Heatable {
     }
 
     public static boolean isWorkable(ItemStack inputItem) {
-        if (inputItem == null || !(inputItem.getItem() instanceof IHotItem)) {
+        if (inputItem.isEmpty() || !(inputItem.getItem() instanceof IHotItem)) {
             return true;
         }
-        if (inputItem != null && inputItem.getItem() instanceof IHotItem) {
+        if (!inputItem.isEmpty() && inputItem.getItem() instanceof IHotItem) {
             return getHeatableStage(inputItem) == 1;
         }
         return true;

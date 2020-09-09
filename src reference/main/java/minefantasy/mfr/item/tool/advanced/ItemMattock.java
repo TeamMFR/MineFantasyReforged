@@ -6,7 +6,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.block.tile.TileEntityRoad;
+import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;

@@ -42,8 +42,7 @@ public class BasicRecipesMF {
 		CookingRecipes.init();
 		DragonforgedStyle.loadCrafting();
 		OrnateStyle.loadCrafting();
-		// GameRegistry.addRecipe(new RecipeArmourDyeMF()); //TODO Replace with proper
-		// recipe JSON
+		// GameRegistry.addRecipe(new RecipeArmourDyeMF()); //TODO Replace with proper recipe JSON
 
 		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 
@@ -124,15 +123,27 @@ public class BasicRecipesMF {
 //        }
 		// TODO Replace with proper recipe JSON for each metal block
 
-		KnowledgeListMFR.fireclayR = MineFantasyRebornAPI.addBasicCarpenterRecipe(
-				new ItemStack(ComponentListMFR.FIRECLAY, 4), " C ", "CDC", " C ", 'D', ComponentListMFR.KAOLINITE_DUST,
-				'C', Items.CLAY_BALL);
-		KnowledgeListMFR.fireBrickR = MineFantasyRebornAPI.addBasicCarpenterRecipe(
-				new ItemStack(ComponentListMFR.FIRECLAY_BRICK), "C", 'C', ComponentListMFR.FIRECLAY);
-		KnowledgeListMFR.fireBricksR = MineFantasyRebornAPI.addBasicCarpenterRecipe(
-				new ItemStack(BlockListMFR.FIREBRICKS), "BB", "BB", 'B', ComponentListMFR.STRONG_BRICK);
-		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(
-				new ItemStack(BlockListMFR.FIREBRICK_STAIR), "B ", "BB", 'B', ComponentListMFR.STRONG_BRICK);
+		KnowledgeListMFR.fireclayR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(ComponentListMFR.FIRECLAY, 4),
+				new Object[]{
+						" C ",
+						"CDC",
+						" C ",
+						'D', ComponentListMFR.KAOLINITE_DUST,
+						'C', Items.CLAY_BALL});
+		KnowledgeListMFR.fireBrickR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(ComponentListMFR.FIRECLAY_BRICK),
+				new Object[]{
+						"C",
+						'C', ComponentListMFR.FIRECLAY});
+		KnowledgeListMFR.fireBricksR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(BlockListMFR.FIREBRICKS),
+				new Object[]{
+						"BB",
+						"BB",
+						'B', ComponentListMFR.STRONG_BRICK});
+		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(BlockListMFR.FIREBRICK_STAIR),
+				new Object[]{
+						"B ",
+						"BB",
+						'B', ComponentListMFR.STRONG_BRICK});
 		BaseMaterialMFR mat = BaseMaterialMFR.IRON;
 
 		// GameRegistry.addShapelessRecipe(new ItemStack(ComponentListMFR.hideSmall),

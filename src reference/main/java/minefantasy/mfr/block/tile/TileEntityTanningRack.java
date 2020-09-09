@@ -1,4 +1,4 @@
-package minefantasy.mfr.block.tile;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
 import minefantasy.mfr.api.helpers.ToolHelper;

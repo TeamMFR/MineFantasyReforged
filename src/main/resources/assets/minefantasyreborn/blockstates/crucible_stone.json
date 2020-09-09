@@ -1,0 +1,16 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_bottom_top",
+        "textures": {
+            "particle": "minefantasyreborn:blocks/crucible_side_stone",
+            "bottom": "minefantasyreborn:blocks/crucible_side_stone",
+            "top": "minefantasyreborn:blocks/crucible_top_stone",
+            "side": "minefantasyreborn:blocks/crucible_side_stone"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

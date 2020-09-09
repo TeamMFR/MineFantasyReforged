@@ -4,15 +4,14 @@ import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.mechanics.EventManagerMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
@@ -83,9 +82,9 @@ public class ItemWaraxe extends ItemWeaponMFR {
                 TacticalManager.lungeEntity(entityHitting, entityHit, 2F, 0.1F);
             }
             if (properHit) {
-                if (!entityHit.isPotionActive(Potion.getPotionById(2))) {
-                    entityHit.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 400, 3));
-                    entityHit.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 200, 1));
+                if (!entityHit.isPotionActive(MobEffects.SLOWNESS)) {
+                    entityHit.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 400, 3));
+                    entityHit.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 1));
                 }
 
                 entityHitting.fallDistance -= fallBonus;
@@ -100,9 +99,9 @@ public class ItemWaraxe extends ItemWeaponMFR {
                     TacticalManager.lungeEntity(entityHitting, entityHit, 1F, 0.0F);
                 }
                 if (properHit) {
-                    if (!entityHit.isPotionActive(Potion.getPotionById(2))) {
-                        entityHit.addPotionEffect(new PotionEffect(Potion.getPotionById(2), 200, 3));
-                        entityHit.addPotionEffect(new PotionEffect(Potion.getPotionById(9), 100, 0));
+                    if (!entityHit.isPotionActive(MobEffects.SLOWNESS)) {
+                        entityHit.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 200, 3));
+                        entityHit.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 0));
                     }
                 }
             }

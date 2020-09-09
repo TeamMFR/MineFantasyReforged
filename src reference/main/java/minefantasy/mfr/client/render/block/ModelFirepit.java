@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.render.block;
 
-import minefantasy.mfr.block.tile.TileEntityFirepit;
+import minefantasy.mfr.tile.TileEntityFirepit;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;

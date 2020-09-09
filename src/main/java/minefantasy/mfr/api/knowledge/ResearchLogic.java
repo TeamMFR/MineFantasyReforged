@@ -1,13 +1,13 @@
 package minefantasy.mfr.api.knowledge;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.PlayerTagData;
-import minefantasy.mfr.packet.KnowledgePacket;
+import minefantasy.mfr.network.KnowledgePacket;
+import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ResearchLogic {
     public static final String KnowledgeNBT = "Knowledge";
@@ -121,7 +121,7 @@ public class ResearchLogic {
 
     public static void syncData(EntityPlayer player) {
         if (!player.world.isRemote) {
-            ((WorldServer) player.world).getEntityTracker().sendToTrackingAndSelf(player, new KnowledgePacket(player).generatePacket());
+            NetworkHandler.sendToAllTrackingChunk(player.world, player.chunkCoordX, player.chunkCoordZ, new KnowledgePacket(player));
         }
     }
 

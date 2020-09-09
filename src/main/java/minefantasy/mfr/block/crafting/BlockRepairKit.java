@@ -1,6 +1,5 @@
 package minefantasy.mfr.block.crafting;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
@@ -17,7 +16,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
 
@@ -27,15 +25,8 @@ public class BlockRepairKit extends Block {
     public float breakChance;
     public boolean isOrnate = false;
     public float repairLevelEnchant = 0.0F;
-    private String type;
     private Random rand = new Random();
     AxisAlignedBB BlockBB = new AxisAlignedBB(1F / 16F, 0F, 1F / 16F, 15F / 16F, 6F / 16F, 15F / 16F);
-
-
-    @Override
-    public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos){
-        return BlockBB;
-    }
 
     public BlockRepairKit(String name, float repairLevel, float rate, float breakChance) {
         super(Material.CLOTH);
@@ -43,8 +34,7 @@ public class BlockRepairKit extends Block {
         this.repairLevel = repairLevel;
         this.successRate = rate;
         this.breakChance = breakChance;
-        this.type = name;
-        name = "repair_" + name;
+        name = "repair_kit_" + name;
 
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -67,6 +57,11 @@ public class BlockRepairKit extends Block {
     }
 
     @Override
+    public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos){
+        return BlockBB;
+    }
+
+    @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (world.isRemote) {
             return true;
@@ -74,7 +69,7 @@ public class BlockRepairKit extends Block {
         ItemStack held = user.getHeldItem(hand);
         // held.getItem().isRepairable() Was used but new MF tools disable this to avoid
         // vanilla repairs
-        if (held != null && canRepair(held) && (!held.isItemEnchanted() || isOrnate)) {
+        if (!held.isEmpty() && canRepair(held) && (!held.isItemEnchanted() || isOrnate)) {
             if (rand.nextFloat() < successRate) {
                 boolean broken = rand.nextFloat() < breakChance;
 
@@ -97,7 +92,7 @@ public class BlockRepairKit extends Block {
     }
 
     private boolean canRepair(ItemStack held) {
-        if (held == null)
+        if (held.isEmpty())
             return false;
         if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != null)// Custom Tool
         {

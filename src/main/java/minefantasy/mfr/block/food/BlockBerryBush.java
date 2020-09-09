@@ -1,6 +1,5 @@
 package minefantasy.mfr.block.food;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.FoodListMFR;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
@@ -70,7 +69,7 @@ public class BlockBerryBush extends BlockBush implements IShearable {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
             ItemStack itemstack = rand.nextInt(10) == 0 ? new ItemStack(FoodListMFR.BERRIES_JUICY) : new ItemStack(FoodListMFR.BERRIES, 1);
-            if (itemstack != null) {
+            if (!itemstack.isEmpty()) {
                 float f = this.rand.nextFloat() * 0.8F + 0.1F;
                 float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
                 float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
@@ -110,11 +109,6 @@ public class BlockBerryBush extends BlockBush implements IShearable {
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return true;
-    }
-
-    @Override
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.MODEL;
     }
 
     @SideOnly(Side.CLIENT)

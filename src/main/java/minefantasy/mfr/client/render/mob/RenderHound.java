@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
-public class RenderHound extends RenderLiving {
+public class RenderHound extends RenderLiving<EntityHound> {
     public RenderHound(ModelBase modelbase) {
         super(Minecraft.getMinecraft().getRenderManager(), modelbase, 1.0F);
     }
@@ -24,6 +24,7 @@ public class RenderHound extends RenderLiving {
     /**
      * Defines what float the third param in setRotationAngles of ModelBase is
      */
+    @Override
     protected float handleRotationFloat(EntityHound mob, float f) {
         return mob.getTailRotation();
     }
@@ -60,6 +61,7 @@ public class RenderHound extends RenderLiving {
      * Returns the location of an entity's texture. Doesn't seem to be called unless
      * you call Render.bindEntityTexture.
      */
+    @Override
     protected ResourceLocation getEntityTexture(EntityHound p_110775_1_) {
         return TextureHelperMFR.getResource("textures/models/animal/hound/hound.png");
     }
@@ -69,20 +71,5 @@ public class RenderHound extends RenderLiving {
      */
     protected int shouldRenderPass(EntityLivingBase p_77032_1_, int p_77032_2_, float p_77032_3_) {
         return this.shouldRenderPass((EntityHound) p_77032_1_, p_77032_2_, p_77032_3_);
-    }
-
-    /**
-     * Defines what float the third param in setRotationAngles of ModelBase is
-     */
-    protected float handleRotationFloat(EntityLivingBase p_77044_1_, float p_77044_2_) {
-        return this.handleRotationFloat((EntityHound) p_77044_1_, p_77044_2_);
-    }
-
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless
-     * you call Render.bindEntityTexture.
-     */
-    protected ResourceLocation getEntityTexture(Entity p_110775_1_) {
-        return this.getEntityTexture((EntityHound) p_110775_1_);
     }
 }

@@ -179,9 +179,9 @@ public class KnowledgeListMFR {
         // ARTISANRY -From Not very to the most Expensive
         bloomery = (new InformationBase("bloomery", 4, -2, 0, BlockListMFR.BLOOMERY, crucible)).registerStat()
                 .setPage(artisanry).setUnlocked().setSpecial();
-        crucible = (new InformationBase("crucible", 4, 0, 0, BlockListMFR.CRUCIBLE, (InformationBase) null))
+        crucible = (new InformationBase("crucible", 4, 0, 0, BlockListMFR.CRUCIBLE_STONE, (InformationBase) null))
                 .registerStat().setPage(artisanry).setUnlocked().setSpecial();
-        crucible2 = (new InformationBase("crucible2", 6, 0, 1, BlockListMFR.CRUCIBLE_ADV_ACTIVE, crucible)).registerStat()
+        crucible2 = (new InformationBase("crucible2", 6, 0, 1, BlockListMFR.CRUCIBLE_FIRECLAY, crucible)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 40);
 
         smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, ComponentListMFR.COPPER_INGOT, (InformationBase) null))
@@ -192,7 +192,7 @@ public class KnowledgeListMFR {
                 .setPage(artisanry).addSkill(SkillList.artisanry, 10).setDescriptValues(getMetalTier("iron"));
         coalflux = (new InformationBase("coalflux", 1, 6, 2, ComponentListMFR.COAL_FLUX, smeltIron)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 15);
-        blastfurn = (new InformationBase("blastfurn", 2, 5, 5, BlockListMFR.BLAST_HEATER_ACTIVE, smeltIron))
+        blastfurn = (new InformationBase("blastfurn", 2, 5, 5, BlockListMFR.BLAST_HEATER, smeltIron))
                 .registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 25);
         bigfurn = (new InformationBase("bigfurn", 0, 5, 4, BlockListMFR.FURNACE_STONE, smeltIron)).registerStat()
                 .setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 10);
@@ -292,7 +292,7 @@ public class KnowledgeListMFR {
                 .setPage(engineering).addSkill(SkillList.engineering, 10);
         syringe = (new InformationBase("syringe", 5, -2, 1, ToolListMFR.SYRINGE_EMPTY, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 25);
-        engTanner = (new InformationBase("engTanner", 5, 2, 1, BlockListMFR.ENG_TANNER, ecomponents)).registerStat()
+        engTanner = (new InformationBase("engTanner", 5, 2, 1, BlockListMFR.TANNER_METAL, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 40).addSkill(SkillList.artisanry, 25);
         advcrucible = (new InformationBase("advcrucible", 7, 3, 1, BlockListMFR.CRUCIBLE_AUTO, engTanner)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 50).addSkill(SkillList.artisanry, 35);

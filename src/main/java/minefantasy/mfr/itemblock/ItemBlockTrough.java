@@ -5,7 +5,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.decor.BlockTrough;
-import minefantasy.mfr.block.tile.decor.TileEntityTrough;
+import minefantasy.mfr.tile.decor.TileEntityTrough;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
@@ -41,8 +41,8 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
     @SideOnly(Side.CLIENT)
     @Override
     public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
-        if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockTrough.NBT_fill)) {
-            int stock = item.getTagCompound().getInteger(BlockTrough.NBT_fill);
+        if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockTrough.FILL_LEVEL)) {
+            int stock = item.getTagCompound().getInteger(BlockTrough.FILL_LEVEL);
             if (stock > 0) {
                 list.add(I18n.format("attribute.fill", stock));
             }
@@ -119,7 +119,7 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
                 tier = material.tier;
             }
             NBTTagCompound nbt = getNBT(item);
-            nbt.setInteger(BlockTrough.NBT_fill, TileEntityTrough.getCapacity(tier) * TileEntityTrough.capacityScale);
+            nbt.setInteger(BlockTrough.FILL_LEVEL, TileEntityTrough.getCapacity(tier) * TileEntityTrough.capacityScale);
         }
         player.swingArm(EnumHand.MAIN_HAND);
 

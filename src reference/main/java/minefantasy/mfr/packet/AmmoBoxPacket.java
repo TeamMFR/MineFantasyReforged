@@ -1,8 +1,8 @@
-package minefantasy.mfr.packet;
+package minefantasy.mfr.network;
 
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.block.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;

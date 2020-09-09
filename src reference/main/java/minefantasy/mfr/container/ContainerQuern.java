@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.block.tile.TileEntityQuern;
+import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

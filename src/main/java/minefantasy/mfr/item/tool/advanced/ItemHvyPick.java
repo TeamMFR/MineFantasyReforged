@@ -23,16 +23,13 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -41,7 +38,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author Anonymous Productions
@@ -66,13 +62,13 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
 
         setMaxDamage(material.getMaxUses());
 
-        MineFantasyReborn.proxy.addClientRegister(this);
+        MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
     @Override
     public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
         if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)
-                && ItemLumberAxe.canAcceptCost(user)) {
+                && ItemLumberAxeMFR.canAcceptCost(user)) {
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int y1 = -1; y1 <= 1; y1++) {
                     for (int z1 = -1; z1 <= 1; z1++) {
@@ -91,7 +87,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
                                 }
                                 world.setBlockToAir(blockPos);
                                 item.damageItem(1, user);
-                                ItemLumberAxe.tirePlayer(user, 1F);
+                                ItemLumberAxeMFR.tirePlayer(user, 1F);
                             }
                         }
                     }

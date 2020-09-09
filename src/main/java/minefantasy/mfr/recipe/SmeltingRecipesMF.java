@@ -1,11 +1,10 @@
 package minefantasy.mfr.recipe;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.refine.BloomRecipe;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -14,6 +13,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class SmeltingRecipesMF {
     public static void init() {

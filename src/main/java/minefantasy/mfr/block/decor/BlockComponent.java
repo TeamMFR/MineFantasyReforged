@@ -1,9 +1,7 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.block.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.init.BlockListMFR;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -21,7 +19,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 

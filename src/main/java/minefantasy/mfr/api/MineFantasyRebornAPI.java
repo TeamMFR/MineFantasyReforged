@@ -1,15 +1,6 @@
 package minefantasy.mfr.api;
 
 import com.google.common.collect.Lists;
-
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.SoundEvent;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.fml.common.IFuelHandler;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
@@ -26,11 +17,16 @@ import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.SoundEvent;
+import net.minecraftforge.fml.common.IFuelHandler;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistryModifiable;
 
@@ -67,19 +63,15 @@ public class MineFantasyRebornAPI {
 		}
     }
 
-    public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, int hammerType, int anvil,
-                                      int forgeTime, Object... input) {
+    public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, int hammerType, int anvil, int forgeTime, Object... input) {
         addAnvilRecipe(skill, result, hot, "hammer", hammerType, anvil, forgeTime, input);
     }
 
-    public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, String toolType, int hammerType,
-                                      int anvil, int forgeTime, Object... input) {
-        addAnvilRecipe(skill, result, "", hot, toolType, hammerType, anvil, forgeTime,
-                input);
+    public static void addAnvilRecipe(Skill skill, ItemStack result, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
+        addAnvilRecipe(skill, result, "", hot, toolType, hammerType, anvil, forgeTime, input);
     }
 
-    public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot,
-                                              int hammerType, int anvil, int forgeTime, Object... input) {
+    public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot, int hammerType, int anvil, int forgeTime, Object... input) {
         return addAnvilRecipe(skill, result, research, hot, "hammer", hammerType, anvil, forgeTime, input);
     }
 
@@ -95,8 +87,7 @@ public class MineFantasyRebornAPI {
      * @param forgeTime  The time taken to forge(default is 200. each hit is about 100)
      * @param input      The input for the item (Exactly the same as regular recipes)
      */
-    public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot,
-                                              String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
+    public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
         return CraftingManagerAnvil.getInstance().addRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
     }
 
@@ -112,17 +103,14 @@ public class MineFantasyRebornAPI {
      * @param anvil      the tier of anvil
      * @param forgeTime  the time it takes to forge
      * @param input      the items input
-     * @return
+     * @return IAnvilRecipe
      */
-    public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot,
-                                                  String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
+    public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
         return CraftingManagerAnvil.getInstance().addToolRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
     }
 
-    public static IAnvilRecipe addAnvilToolRecipe(Skill skill, Item result, String research, boolean hot,
-                                                  String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-        return addAnvilToolRecipe(skill, new ItemStack(result), research, hot, toolType, hammerType, anvil, forgeTime,
-                input);
+    public static IAnvilRecipe addAnvilToolRecipe(Skill skill, Item result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
+        return addAnvilToolRecipe(skill, new ItemStack(result), research, hot, toolType, hammerType, anvil, forgeTime, input);
     }
 
     /**
@@ -136,62 +124,52 @@ public class MineFantasyRebornAPI {
      * @param craftTime The time taken to craft(default is 200. each hit is about 100)
      * @param input     The input for the item (Exactly the same as regular recipes)
      */
-    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, ItemStack result, String research, SoundEvent sound,
-                                                          String toolType, int toolTier, int craftTime, Object... input) {
+    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, ItemStack result, String research, SoundEvent sound, String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addToolRecipe(result, skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, SoundEvent sound,
-                                                          String toolType, int toolTier, int craftTime, Object... input) {
+    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, SoundEvent sound, String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addToolRecipe(new ItemStack(result), skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, SoundEvent sound,
-                                                          int craftTime, Object... input) {
+    public static ICarpenterRecipe addCarpenterToolRecipe(Skill skill, Item result, String research, SoundEvent sound, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addToolRecipe(new ItemStack(result), skill, research, sound, 0F, "hands", -1, -1, craftTime, input);
     }
 
-/*
+    /**
      * Adds a shaped recipe for carpenter benches with all variables
      *
      * @param result     The output item
-     * @param sound      The sound it makes ("minefantasy2:blocks.carpentermallet"),
-     *                   "step.wood", etc
-     * @param experience the experience gained from crafting
+     * @param sound      The sound it makes ("minefantasy2:blocks.carpentermallet"), "step.wood", etc
      * @param toolType   the tool type required to hit
      * @param toolTier   the tools tier required for creation:
      * @param craftTime  The time taken to craft(default is 200. each hit is about 100)
      * @param input      The input for the item (Exactly the same as regular recipes)
      */
-
-    public static void addCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, String toolType, int toolTier,
-                                          int craftTime, Object... input) {
+    public static void addCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, String toolType, int toolTier, int craftTime, Object... input) {
         CraftingManagerCarpenter.getInstance().addRecipe(result, skill, "", sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-/*
-     * {@link MineFantasyAPI#addCarpenterRecipe}
+    /**
+     * {@link MineFantasyRebornAPI#addCarpenterRecipe}
      */
-
     public static void addCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, int craftTime, Object... input) {
         addCarpenterRecipe(skill, result, "", sound, "hands", -1, craftTime, input);
     }
 
-/*
-     * {@link MineFantasyAPI#addCarpenterRecipe}
+    /**
+     * {@link MineFantasyRebornAPI#addCarpenterRecipe}
      */
-
     public static void addShapelessCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, String toolType,
-                                                   int toolTier, int craftTime, Object... input) {
+            int toolTier, int craftTime, Object... input) {
         CraftingManagerCarpenter.getInstance().addShapelessRecipe(result, skill, "", sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-/*
-     * {@link MineFantasyAPI#addCarpenterRecipe}
+    /**
+     * {@link MineFantasyRebornAPI#addCarpenterRecipe}
      */
-
     public static void addShapelessCarpenterRecipe(Skill skill, ItemStack result, SoundEvent sound, int craftTime,
-                                                   Object... input) {
+            Object... input) {
         addShapelessCarpenterRecipe(skill, result, sound, "hands", -1, craftTime, input);
     }
 
@@ -200,53 +178,42 @@ public class MineFantasyRebornAPI {
      * hit with bare hands
      */
     public static ICarpenterRecipe addBasicCarpenterRecipe(ItemStack result, Object... input) {
-        return CraftingManagerCarpenter.getInstance().addRecipe(result, null, "", SoundEvents.BLOCK_WOOD_HIT, 0F, "hands", -1, -1, 1,
-                input);
+        return CraftingManagerCarpenter.getInstance().addRecipe(result, null, "", SoundEvents.BLOCK_WOOD_HIT, 0F, "hands", -1, -1, 1, input);
     }
 
-/*
+    /**
      * Adds a shaped recipe for carpenter benches with all variables
      *
      * @param result     The output item
      * @param research   The research required
-     * @param sound      The sound it makes ("minefantasy2:blocks.carpentermallet"),
-     *                   "step.wood", etc
-     * @param experience the experience gained from crafting
+     * @param sound      The sound it makes ("minefantasy2:blocks.carpentermallet"), "step.wood", etc
      * @param toolType   the tool type required to hit
      * @param toolTier   the tools tier required for creation:
      * @param craftTime  The time taken to craft(default is 200. each hit is about 100)
      * @param input      The input for the item (Exactly the same as regular recipes)
      */
-
-    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound,
-                                                      String toolType, int toolTier, int craftTime, Object... input) {
+    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound, String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addRecipe(result, skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-/*
-     * {@link MineFantasyAPI#addCarpenterRecipe}
+    /**
+     * {@link MineFantasyRebornAPI#addCarpenterRecipe}
      */
-
-    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound,
-                                                      int craftTime, Object... input) {
+    public static ICarpenterRecipe addCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound, int craftTime, Object... input) {
         return addCarpenterRecipe(skill, result, research, sound, "hands", -1, craftTime, input);
     }
 
-/*
-     * {@link MineFantasyAPI#addCarpenterRecipe}
+    /**
+     * {@link MineFantasyRebornAPI#addCarpenterRecipe}
      */
-
-    public static ICarpenterRecipe addShapelessCarpenterRecipe(Skill skill, ItemStack result, String research,
-                                                               SoundEvent sound, String toolType, int toolTier, int craftTime, Object... input) {
+    public static ICarpenterRecipe addShapelessCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound, String toolType, int toolTier, int craftTime, Object... input) {
         return CraftingManagerCarpenter.getInstance().addShapelessRecipe(result, skill, research, sound, 0F, toolType, toolTier, -1, craftTime, input);
     }
 
-/*
-     * {@link MineFantasyAPI#addCarpenterRecipe}
+    /**
+     * {@link MineFantasyRebornAPI#addCarpenterRecipe}
      */
-
-    public static ICarpenterRecipe addShapelessCarpenterRecipe(Skill skill, ItemStack result, String research,
-                                                               SoundEvent sound, int craftTime, Object... input) {
+    public static ICarpenterRecipe addShapelessCarpenterRecipe(Skill skill, ItemStack result, String research, SoundEvent sound, int craftTime, Object... input) {
         return addShapelessCarpenterRecipe(skill, result, research, sound, "hands", -1, craftTime, input);
     }
 
@@ -307,15 +274,13 @@ public class MineFantasyRebornAPI {
         return AlloyRecipes.addRatioRecipe(out, level, convertList(in), dupe);
     }
 
-/*
+    /**
      * Adds an alloy with any smelter
      *
      * @param dupe  the amount of times the ratio can be added
      * @param out   The result
-     * @param level The minimal furnace level
      * @param in    The list of required items
      */
-
     public static Alloy[] addRatioAlloy(int dupe, ItemStack out, Object... in) {
         return AlloyRecipes.addRatioRecipe(out, 0, convertList(in), dupe);
     }
@@ -395,7 +360,7 @@ public class MineFantasyRebornAPI {
         if (object instanceof Block) {
             return new ItemStack((Block) object, 1, OreDictionary.WILDCARD_VALUE);
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
     /**
@@ -411,7 +376,7 @@ public class MineFantasyRebornAPI {
      * @param input can be an "Item", "Block" or "ItemStack"
      */
     public static boolean removeSmelting(Object input) {
-        ItemStack object = null;
+        ItemStack object = ItemStack.EMPTY;
         if (input instanceof Item) {
             object = new ItemStack((Item) input, 1, 32767);
         } else if (input instanceof Block) {
@@ -419,7 +384,7 @@ public class MineFantasyRebornAPI {
         } else if (input instanceof ItemStack) {
             object = (ItemStack) input;
         }
-        if (object != null) {
+        if (!object.isEmpty()) {
             return removeFurnaceInput(object);
         }
         return false;
@@ -442,8 +407,7 @@ public class MineFantasyRebornAPI {
     }
 
     private static boolean checkMatch(ItemStack item1, ItemStack item2) {
-        return item2.getItem() == item1.getItem()
-                && (item2.getItemDamage() == 32767 || item2.getItemDamage() == item1.getItemDamage());
+        return item2.getItem() == item1.getItem() && (item2.getItemDamage() == 32767 || item2.getItemDamage() == item1.getItemDamage());
     }
 
     /**
@@ -456,8 +420,7 @@ public class MineFantasyRebornAPI {
      * @param time            how many ticks until it finishes
      * @param requireBaking   whether it needs to be in an oven
      */
-    public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature,
-                                              int max_temperature, int time, boolean requireBaking) {
+    public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature, int max_temperature, int time, boolean requireBaking) {
         return CookRecipe.addRecipe(input, output, min_temperature, max_temperature, time, requireBaking, true);
     }
 
@@ -473,12 +436,11 @@ public class MineFantasyRebornAPI {
      * @param canBurn         false if it cannot burn by traditional means (such as if its in a
      *                        container)
      */
-    public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature,
-                                              int max_temperature, int time, boolean requireBaking, boolean canBurn) {
+    public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature, int max_temperature, int time, boolean requireBaking, boolean canBurn) {
         return CookRecipe.addRecipe(input, output, min_temperature, max_temperature, time, requireBaking, canBurn);
     }
 
-/*
+    /**
      * Add a cooking recipe
      *
      * @param input           what goes in
@@ -487,17 +449,13 @@ public class MineFantasyRebornAPI {
      * @param max_temperature maximum temperature until burn
      * @param time            how many ticks until it finishes
      * @param requireBaking   whether it needs to be in an oven
-     * @param canBurn         false if it cannot burn by traditional means (such as if its in a
-     *                        container)
      */
-
-    public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem,
-                                              int min_temperature, int max_temperature, int time, boolean requireBaking) {
+    public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem, int min_temperature, int max_temperature, int time, boolean requireBaking) {
         return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, requireBaking,
                 true);
     }
 
-/*
+    /**
      * Add a cooking recipe
      *
      * @param input           what goes in
@@ -507,18 +465,15 @@ public class MineFantasyRebornAPI {
      * @param time            how many ticks until it finishes
      * @param burn_time       how long until a finished product burns
      * @param requireBaking   whether it needs to be in an oven
-     * @param canBurn         false if it cannot burn by traditional means (such as if its in a
-     *                        container)
      */
-
     public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem,
-                                              int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking) {
+            int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking) {
         return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time,
                 requireBaking, true);
     }
 
     public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem,
-                                              int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking, boolean canBurn) {
+            int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking, boolean canBurn) {
         return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time,
                 requireBaking, canBurn);
     }
