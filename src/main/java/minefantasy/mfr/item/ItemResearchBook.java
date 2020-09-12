@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
@@ -38,13 +39,13 @@ public class ItemResearchBook extends ItemBaseMFR {
      * @return
      */
     @Override
-    public ActionResult<ItemStack> onItemRightClick( World world, EntityPlayer user, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick( World world, EntityPlayer player, EnumHand hand) {
         if (!world.isRemote) {
-            ResearchLogic.syncData(user);
-            RPGElements.syncAll(user);
+            ResearchLogic.syncData(player);
+            RPGElements.syncAll(player);
         }
-        user.openGui(MineFantasyReborn.INSTANCE, 1, world, 0, -1, 0);
-        return ActionResult.newResult(EnumActionResult.PASS, user.getHeldItem(hand));
+        player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RESEARCH_BOOK, world, 0, -1, 0);
+        return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));
     }
 
     @SideOnly(Side.CLIENT)

@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -28,7 +27,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
     /**
      * Is a List of ItemStack that composes the recipe.
      */
-    public final List recipeItems;
+    public final List<ItemStack> recipeItems;
     /**
      * The anvil Required
      */
@@ -39,8 +38,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
     public final Skill skillUsed;
     private final int recipeHammer;
 
-    public ShapelessAnvilRecipes(ItemStack output, String toolType, int hammer, int anvi, int time,
-                                 List components, boolean hot, String research, Skill skill) {
+    public ShapelessAnvilRecipes(ItemStack output, String toolType, int hammer, int anvi, int time, List<ItemStack> components, boolean hot, String research, Skill skill) {
         this.outputHot = hot;
         this.recipeOutput = output;
         this.anvil = anvi;
@@ -68,18 +66,17 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
      */
     @Override
     public boolean matches(AnvilCraftMatrix matrix) {
-        ArrayList var2 = new ArrayList(this.recipeItems);
+        ArrayList<ItemStack> var2 = new ArrayList<>(this.recipeItems);
 
-        for (int var3 = 0; var3 <= globalWidth; ++var3) {
-            for (int var4 = 0; var4 <= globalHeight; ++var4) {
-                ItemStack inputItem = matrix.getStackInRowAndColumn(var4, var3);
+        for (int column = 0; column <= globalWidth; ++column) {
+            for (int row = 0; row <= globalHeight; ++row) {
+                ItemStack inputItem = matrix.getStackInRowAndColumn(row, column);
 
-                if (inputItem != null) {
+                if (!inputItem.isEmpty()) {
                     boolean var6 = false;
-                    Iterator var7 = var2.iterator();
 
-                    while (var7.hasNext()) {
-                        ItemStack recipeItem = (ItemStack) var7.next();
+                    for (Object o : var2) {
+                        ItemStack recipeItem = (ItemStack) o;
 
                         // HEATING
                         if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
@@ -90,7 +87,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
                         }
                         inputItem = getHotItem(inputItem);
 
-                        if (inputItem == null) {
+                        if (inputItem.isEmpty()) {
                             return false;
                         }
                         if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
@@ -116,15 +113,15 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
     }
 
     protected ItemStack getHotItem(ItemStack item) {
-        if (item == null)
-            return null;
+        if (item.isEmpty())
+            return ItemStack.EMPTY;
         if (!(item.getItem() instanceof IHotItem)) {
             return item;
         }
 
         ItemStack hotItem = Heatable.getItem(item);
 
-        if (hotItem != null) {
+        if (!hotItem.isEmpty()) {
             return hotItem;
         }
 

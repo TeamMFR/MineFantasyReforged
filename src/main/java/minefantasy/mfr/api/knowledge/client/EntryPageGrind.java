@@ -1,15 +1,16 @@
 package minefantasy.mfr.api.knowledge.client;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
+import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -32,9 +33,9 @@ public class EntryPageGrind extends EntryPage {
 
     @Override
     public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        tooltipStack = null;
+        tooltipStack = ItemStack.EMPTY;
 
-        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/grindGrid.png"));
+        this.mc.getTextureManager().bindTexture( new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/grind_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
         String cft = "<" + I18n.format("method.quern") + ">";
@@ -42,9 +43,9 @@ public class EntryPageGrind extends EntryPage {
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
 
         renderRecipe(parent, x, y, f, posX, posY);
-        if (tooltipStack != null) {
+        if (!tooltipStack.isEmpty()) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList();
+            List<String> parsedTooltip = new ArrayList<>();
             boolean first = true;
 
             for (String s : tooltipData) {
@@ -65,9 +66,8 @@ public class EntryPageGrind extends EntryPage {
         renderResult(parent, input, false, posX, posY, mx, my);
     }
 
-    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-                             int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -83,8 +83,7 @@ public class EntryPageGrind extends EntryPage {
         renderItem(gui, xPos, yPos, stack1, accountForContainer, mx, my);
     }
 
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-                           int my) {
+    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
         RenderItem render = Minecraft.getMinecraft().getRenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;

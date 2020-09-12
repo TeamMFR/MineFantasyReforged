@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.knowledge.client;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.crafting.anvil.ShapedAnvilRecipes;
 import minefantasy.mfr.api.crafting.anvil.ShapelessAnvilRecipes;
@@ -13,6 +14,7 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
@@ -40,23 +42,22 @@ public class EntryPageRecipeAnvil extends EntryPage {
 
     @Override
     public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        tooltipStack = null;
+        tooltipStack = ItemStack.EMPTY;
         if (onTick) {
             tickRecipes();
         }
 
-        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/anvilGrid.png"));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/anvil_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
         IAnvilRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
         String cft = "<" + I18n.format("method.anvil") + ">";
-        mc.fontRenderer.drawSplitString(cft,
-                posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
+        mc.fontRenderer.drawSplitString(cft, posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
         renderRecipe(parent, x, y, f, posX, posY, recipe);
 
-        if (tooltipStack != null) {
+        if (!tooltipStack.isEmpty()) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList();
+            List<String> parsedTooltip = new ArrayList<>();
             boolean first = true;
 
             for (String s : tooltipData) {
@@ -77,8 +78,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
             return;
 
         GL11.glColor3f(255, 255, 255);
-        GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX + 34, posY + 51, true,
-                true);
+        GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX + 34, posY + 51, true, true);
         GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvil(), posX + 124, posY + 51, true, true);
 
         if (recipe instanceof ShapedAnvilRecipes) {
@@ -86,8 +86,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 
             for (int y = 0; y < shaped.recipeHeight; y++) {
                 for (int x = 0; x < shaped.recipeWidth; x++) {
-                    renderItemAtGridPos(parent, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true,
-                            posX, posY, mx, my);
+                    renderItemAtGridPos(parent, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true, posX, posY, mx, my);
                 }
             }
         } else if (recipe instanceof ShapelessAnvilRecipes) {
@@ -119,9 +118,8 @@ public class EntryPageRecipeAnvil extends EntryPage {
         }
     }
 
-    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-                             int mx, int my, boolean hot) {
-        if (stack == null || stack.getItem() == null)
+    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my, boolean hot) {
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -136,9 +134,8 @@ public class EntryPageRecipeAnvil extends EntryPage {
         renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my, hot);
     }
 
-    public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer,
-                                    int xOrigin, int yOrigin, int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+    public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
+        if (stack.isEmpty())
             return;
 
         boolean heatable = Heatable.canHeatItem(stack);
@@ -166,7 +163,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
             GL11.glPushMatrix();
             GL11.glColor3f(255, 255, 255);
             this.mc.getTextureManager()
-                    .bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/anvilGrid.png"));
+                    .bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/anvil_grid.png"));
             gui.drawTexturedModalRect(xPos, yPos, 248, 0, 8, 8);
             GL11.glPopMatrix();
         }

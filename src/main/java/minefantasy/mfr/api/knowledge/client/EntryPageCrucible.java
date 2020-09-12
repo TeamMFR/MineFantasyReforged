@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.knowledge.client;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.refine.Alloy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -18,12 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntryPageCrucible extends EntryPage {
-    public static int switchRate = 15;
     private Minecraft mc = Minecraft.getMinecraft();
-    private Alloy[] recipes = new Alloy[]{};
+    private Alloy[] recipes;
     private int recipeID;
-    private boolean shapelessRecipe = false;
-    private boolean oreDictRecipe = false;
     private int currTier;
     private ItemStack tooltipStack;
 
@@ -36,9 +34,9 @@ public class EntryPageCrucible extends EntryPage {
         if (onTick) {
             tickRecipes();
         }
-        tooltipStack = null;
+        tooltipStack = ItemStack.EMPTY;
 
-        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/crucible.png"));
+        this.mc.getTextureManager().bindTexture( new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/crucible.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
         Alloy recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
@@ -50,9 +48,9 @@ public class EntryPageCrucible extends EntryPage {
         }
         renderRecipe(parent, x, y, f, posX, posY, recipe);
 
-        if (tooltipStack != null) {
+        if (!tooltipStack.isEmpty()) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList();
+            List<String> parsedTooltip = new ArrayList<>();
             boolean first = true;
 
             for (String s : tooltipData) {
@@ -102,9 +100,8 @@ public class EntryPageCrucible extends EntryPage {
         }
     }
 
-    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-                             int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -122,7 +119,7 @@ public class EntryPageCrucible extends EntryPage {
 
     public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer,
                                     int xOrigin, int yOrigin, int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -138,8 +135,7 @@ public class EntryPageCrucible extends EntryPage {
         renderItem(gui, xPos + 15, yPos + 22, stack1, accountForContainer, mx, my);
     }
 
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-                           int my) {
+    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
         RenderItem render = Minecraft.getMinecraft().getRenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;

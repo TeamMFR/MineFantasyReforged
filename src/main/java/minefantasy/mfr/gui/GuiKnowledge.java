@@ -1,9 +1,13 @@
 package minefantasy.mfr.gui;
 
+import codechicken.lib.texture.TextureUtils;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderItem;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.relauncher.Side;
@@ -37,16 +41,13 @@ import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class GuiKnowledge extends GuiScreen {
-	private static final int field_146572_y = InformationList.minDisplayColumn * 24 - 112;
-	private static final int field_146571_z = InformationList.minDisplayRow * 24 - 112;
-	private static final int field_146559_A = InformationList.maxDisplayColumn * 24 - 77;
-	private static final int field_146560_B = InformationList.maxDisplayRow * 24 - 77;
-	private static final ResourceLocation screenTex = new ResourceLocation(MineFantasyReborn.MOD_ID,
-			"textures/gui/knowledge/knowledge.png");
-	private static final ResourceLocation buyTex = new ResourceLocation(MineFantasyReborn.MOD_ID,
-			"textures/gui/knowledge/purchase.png");
-	private static final ResourceLocation skillTex = new ResourceLocation(MineFantasyReborn.MOD_ID,
-			"textures/gui/knowledge/skilllist.png");
+	private static final int columnMin = InformationList.minDisplayColumn * 24 - 112;
+	private static final int rowMin = InformationList.minDisplayRow * 24 - 112;
+	private static final int columnMax = InformationList.maxDisplayColumn * 24 - 77;
+	private static final int rowMax = InformationList.maxDisplayRow * 24 - 77;
+	private static final ResourceLocation screenTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/knowledge.png");
+	private static final ResourceLocation buyTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/purchase.png");
+	private static final ResourceLocation skillTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/skill_list.png");
 	protected static int informationWidth = 256;
 	protected static int informationHeight = 202;
 	protected static int field_146563_h;
@@ -65,7 +66,6 @@ public class GuiKnowledge extends GuiScreen {
 	public int buyHeight = 72;
 	int offsetByX = 70;
 	int offsetByY = 0;
-	private RenderItem itemrender = Minecraft.getMinecraft().getRenderItem();
 	private InformationBase selected = null;
 	private InformationBase highlighted = null;
 	private GuiButton button;
@@ -123,7 +123,7 @@ public class GuiKnowledge extends GuiScreen {
 	protected void mouseClicked(int x, int y, int button) throws IOException {
 		if (selected == null && button == 0 && highlighted != null) {
 			if (ResearchLogic.hasInfoUnlocked(player, highlighted) && !highlighted.getPages().isEmpty()) {
-				player.openGui(MineFantasyReborn.INSTANCE, 1, player.world, 0, highlighted.ID, 0);
+				player.openGui(MineFantasyReborn.INSTANCE, NetworkHandler.GUI_RESEARCH_BOOK, player.world, 0, highlighted.ID, 0);
 			} else if (highlighted.isEasy() && ResearchLogic.canPurchase(player, highlighted)) {
 				selected = highlighted;
 				setPurchaseAvailable(player);
@@ -225,20 +225,20 @@ public class GuiKnowledge extends GuiScreen {
 				GuiKnowledge.field_146573_x = GuiKnowledge.field_146568_t = GuiKnowledge.field_146566_v;
 			}
 
-			if (GuiKnowledge.field_146565_w < field_146572_y) {
-				GuiKnowledge.field_146565_w = field_146572_y;
+			if (GuiKnowledge.field_146565_w < columnMin) {
+				GuiKnowledge.field_146565_w = columnMin;
 			}
 
-			if (GuiKnowledge.field_146573_x < field_146571_z) {
-				GuiKnowledge.field_146573_x = field_146571_z;
+			if (GuiKnowledge.field_146573_x < rowMin) {
+				GuiKnowledge.field_146573_x = rowMin;
 			}
 
-			if (GuiKnowledge.field_146565_w >= field_146559_A) {
-				GuiKnowledge.field_146565_w = field_146559_A - 1;
+			if (GuiKnowledge.field_146565_w >= columnMax) {
+				GuiKnowledge.field_146565_w = columnMax - 1;
 			}
 
-			if (GuiKnowledge.field_146573_x >= field_146560_B) {
-				GuiKnowledge.field_146573_x = field_146560_B - 1;
+			if (GuiKnowledge.field_146573_x >= rowMax) {
+				GuiKnowledge.field_146573_x = rowMax - 1;
 			}
 
 			GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -287,20 +287,20 @@ public class GuiKnowledge extends GuiScreen {
 		int l = MathHelper
 				.floor(GuiKnowledge.field_146568_t + (GuiKnowledge.field_146566_v - GuiKnowledge.field_146568_t) * f);
 
-		if (k < field_146572_y) {
-			k = field_146572_y;
+		if (k < columnMin) {
+			k = columnMin;
 		}
 
-		if (l < field_146571_z) {
-			l = field_146571_z;
+		if (l < rowMin) {
+			l = rowMin;
 		}
 
-		if (k >= field_146559_A) {
-			k = field_146559_A - 1;
+		if (k >= columnMax) {
+			k = columnMax - 1;
 		}
 
-		if (l >= field_146560_B) {
-			l = field_146560_B - 1;
+		if (l >= rowMax) {
+			l = rowMax - 1;
 		}
 
 		int i1 = (this.width - GuiKnowledge.informationWidth) / 2 + offsetByX;
@@ -335,6 +335,13 @@ public class GuiKnowledge extends GuiScreen {
 		for (i3 = 0; i3 * f1 - l2 < 155.0F; ++i3) {
 			float f3 = 0.6F - (j2 + i3) / 25.0F * 0.3F;
 			GL11.glColor4f(f3, f3, f3, 1.0F);
+
+			for (j3 = 0; j3 * f2 - k2 < 224.0F; ++j3) {
+				TextureAtlasSprite sprite = TextureUtils.getBlockTexture("planks_oak");
+
+				this.mc.getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+				this.drawTexturedModalRect(j3 * 16 - k2, i3 * 16 - l2, sprite, 16, 16);
+			}
 		}
 
 		GL11.glEnable(GL11.GL_DEPTH_TEST);

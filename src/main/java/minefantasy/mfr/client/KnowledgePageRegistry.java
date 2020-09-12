@@ -18,10 +18,10 @@ import net.minecraft.item.ItemStack;
 @SideOnly(Side.CLIENT)
 public class KnowledgePageRegistry {
     public static void registerPages() {
-        ItemStack pigiron = ComponentListMFR.bar("PigIron");
-        ItemStack black = ComponentListMFR.bar("BlackSteel");
-        ItemStack red = ComponentListMFR.bar("RedSteel");
-        ItemStack blue = ComponentListMFR.bar("BlueSteel");
+        ItemStack pig_iron = ComponentListMFR.bar("pig_iron");
+        ItemStack black = ComponentListMFR.bar("black_steel");
+        ItemStack red = ComponentListMFR.bar("red_steel");
+        ItemStack blue = ComponentListMFR.bar("blue_steel");
         if (ConfigHardcore.HCCallowRocks) {
             KnowledgeListMFR.gettingStarted.addPages(new EntryPageText("knowledge.gettingStarted.hcc"),
                     new EntryPageRecipeBase(KnowledgeListMFR.carpenterRecipe),
@@ -257,7 +257,7 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.smeltPig.addPages(new EntryPageText("knowledge.smeltPig.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.ironPrepR),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.ironPrepR2),
-                new EntryPageBlastFurnace(ComponentListMFR.IRON_PREP, pigiron),
+                new EntryPageBlastFurnace(ComponentListMFR.IRON_PREP, pig_iron),
                 new EntryPageText("knowledge.blastfurn.9"));
         KnowledgeListMFR.smeltSteel.addPages(new EntryPageText("knowledge.smeltSteel.1"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.steelR));
@@ -293,11 +293,11 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.stoneAnvilRecipe),
                 new EntryPageRecipeAnvil(ForgingRecipes.recipeMap.get("anvilCrafting")),
                 new EntryPageText("knowledge.anvil.2"),
-                new EntryPageImage("textures/gui/knowledge/anvilGuiExample.png", 128, 128, ""),
+                new EntryPageImage("textures/gui/knowledge/anvil_gui_example.png", 128, 128, ""),
                 new EntryPageText("knowledge.anvil.3"), new EntryPageText("knowledge.anvil.4"),
                 new EntryPageText("knowledge.anvil.5"));
         KnowledgeListMFR.anvil.addPages(new EntryPageText("knowledge.anvil.6"),
-                new EntryPageImage("textures/gui/knowledge/qualityExample.png", 128, 128, "knowledge.anvil.7"));
+                new EntryPageImage("textures/gui/knowledge/quality_example.png", 128, 128, "knowledge.anvil.7"));
 
         KnowledgeListMFR.smeltDragonforge.addPages(new EntryPageText("knowledge.smeltDragonforge.1"),
                 new EntryPageText("knowledge.smeltDragonforge.2"));
@@ -435,7 +435,7 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.advblackpowderRec));
         KnowledgeListMFR.bombs.addPages(new EntryPageText("knowledge.bombs.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.bombBenchCraft), new EntryPageText("knowledge.bombs.2"),
-                new EntryPageImage("textures/gui/knowledge/bombGuiExample.png", 128, 128, "knowledge.guiSubtitle"),
+                new EntryPageImage("textures/gui/knowledge/bomb_gui_example.png", 128, 128, "knowledge.guiSubtitle"),
                 new EntryPageText("knowledge.bombs.3"), new EntryPageText("knowledge.bombs.4"));
         KnowledgeListMFR.bpress.addPages(new EntryPageText("knowledge.bpress.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.bombPressCraft));

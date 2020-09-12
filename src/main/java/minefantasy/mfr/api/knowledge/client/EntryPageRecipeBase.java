@@ -1,6 +1,8 @@
 package minefantasy.mfr.api.knowledge.client;
 
+import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
@@ -47,9 +49,9 @@ public class EntryPageRecipeBase extends EntryPage {
         if (onTick) {
             tickRecipes();
         }
-        tooltipStack = null;
+        tooltipStack = ItemStack.EMPTY;
 
-        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/craftGrid.png"));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/craft_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
         IRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
@@ -58,9 +60,9 @@ public class EntryPageRecipeBase extends EntryPage {
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
         renderRecipe(parent, x, y, ticks, posX, posY, recipe);
 
-        if (tooltipStack != null) {
+        if (!tooltipStack.isEmpty()) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList();
+            List<String> parsedTooltip = new ArrayList<>();
             boolean first = true;
 
             for (String s : tooltipData) {
@@ -102,8 +104,7 @@ public class EntryPageRecipeBase extends EntryPage {
                     //used to be shaped.getInput[y * width + x] Might not be correct co
                     Object input = shaped.getIngredients().get(y * width + x);
                     if (input != null)
-                        renderItemAtGridPos(parent, x, y,
-                                input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0),
+                        renderItemAtGridPos(parent, x, y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0),
                                 true, posX, posY, mx, my);
                 }
             }
@@ -156,9 +157,8 @@ public class EntryPageRecipeBase extends EntryPage {
         }
     }
 
-    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-            int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -176,7 +176,7 @@ public class EntryPageRecipeBase extends EntryPage {
 
     public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer,
             int xOrigin, int yOrigin, int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -200,8 +200,7 @@ public class EntryPageRecipeBase extends EntryPage {
         return 36;
     }
 
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-            int my) {
+    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
         RenderItem render = Minecraft.getMinecraft().getRenderItem();
         if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
             tooltipStack = stack;

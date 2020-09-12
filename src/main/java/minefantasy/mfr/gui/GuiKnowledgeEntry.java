@@ -1,6 +1,7 @@
 package minefantasy.mfr.gui;
 
 import minefantasy.mfr.init.SoundsMFR;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
@@ -90,7 +91,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
         int xPoint = (this.width - this.bookImageWidth) / 2 + offset;
         int yPoint = (this.height - this.bookImageHeight) / 2;
 
-        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/" + tex + ".png"));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/" + tex + ".png"));
         this.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.bookImageWidth, this.bookImageHeight);
 
         if (num < infoBase.getPages().size()) {

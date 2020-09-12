@@ -20,7 +20,7 @@ public class EntryPageCraft extends EntryPage {
             tickRecipes();
         }
 
-        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/craftGrid.png"));
+        this.mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/craft_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
         IRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];

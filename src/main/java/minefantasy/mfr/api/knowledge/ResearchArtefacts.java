@@ -18,14 +18,14 @@ public class ResearchArtefacts {
     public static void addArtefact(Object input, String research) {
         ItemStack itemstack = convert(input);
 
-        if (itemstack != null) {
+        if (!itemstack.isEmpty()) {
             OreDictionary.registerOre("Artefact-" + research, itemstack);
         }
     }
 
     public static ArrayList<String> getResearchNames(ItemStack item) {
         ArrayList<String> names = new ArrayList<String>();
-        if (item == null)
+        if (item.isEmpty())
             return names;
 
         for (int i : OreDictionary.getOreIDs(item)) {
@@ -40,9 +40,8 @@ public class ResearchArtefacts {
 
     public static ItemStack convert(Object input) {
         if (input == null)
-            return null;
+            return ItemStack.EMPTY;
 
-        ItemStack itemstack = null;
         if (input instanceof ItemStack) {
             return (ItemStack) input;
         } else if (input instanceof Block) {
@@ -51,7 +50,7 @@ public class ResearchArtefacts {
             return new ItemStack((Item) input, 1, OreDictionary.WILDCARD_VALUE);
         }
 
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public static int useArtefact(ItemStack itemStack, InformationBase base, EntityPlayer user) {

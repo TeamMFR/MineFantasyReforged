@@ -1,6 +1,7 @@
 package minefantasy.mfr.network;
 
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.api.knowledge.InformationList;
 import minefantasy.mfr.gui.GuiAnvilMF;
 import minefantasy.mfr.gui.GuiBigFurnace;
 import minefantasy.mfr.gui.GuiBlastChamber;
@@ -11,7 +12,10 @@ import minefantasy.mfr.gui.GuiCarpenterMF;
 import minefantasy.mfr.gui.GuiCrossbowBench;
 import minefantasy.mfr.gui.GuiCrucible;
 import minefantasy.mfr.gui.GuiForge;
+import minefantasy.mfr.gui.GuiKnowledge;
+import minefantasy.mfr.gui.GuiKnowledgeEntry;
 import minefantasy.mfr.gui.GuiQuern;
+import minefantasy.mfr.gui.GuiReload;
 import minefantasy.mfr.gui.GuiResearchBench;
 import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
@@ -25,6 +29,7 @@ import minefantasy.mfr.tile.TileEntityQuern;
 import minefantasy.mfr.tile.TileEntityResearchBench;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -83,6 +88,9 @@ public class NetworkHandler implements IGuiHandler {
 	public static final int GUI_RESEARCH_BENCH = 10;
 	public static final int GUI_CROSSBOW_BENCH = 11;
 	public static final int GUI_ANVIL = 12;
+	public static final int GUI_RESEARCH_BOOK = 13;
+	public static final int GUI_RESEARCH_BOOK_ENTRY = 14;
+	public static final int GUI_RELOAD = 15;
 
 	private FMLEventChannel channel;
 
@@ -181,12 +189,14 @@ public class NetworkHandler implements IGuiHandler {
 					return ((TileEntityAnvilMFR) tileEntity).createContainer(player);
 			}
 		}
+
 		return null;
 	}
 
 	@Override
 	@Nullable
 	public Object getClientGuiElement(final int ID, final EntityPlayer player, final World world, final int x, final int y, final int z) {
+		Minecraft mc = Minecraft.getMinecraft();
 		final TileEntity tileEntity = world.getTileEntity(new BlockPos(x, y, z));
 
 		if (tileEntity != null) {
@@ -215,9 +225,20 @@ public class NetworkHandler implements IGuiHandler {
 					return new GuiCrossbowBench(((TileEntityCrossbowBench) tileEntity).createContainer(player), (TileEntityCrossbowBench) tileEntity);
 				case GUI_ANVIL:
 					return new GuiAnvilMF(((TileEntityAnvilMFR) tileEntity).createContainer(player), (TileEntityAnvilMFR) tileEntity);
-				default:
-					return null;
 			}
+		}
+		switch (ID){
+			case GUI_RESEARCH_BOOK:
+				if (x == 0) {
+					if (y >= 0) {
+						return new GuiKnowledgeEntry(mc.currentScreen, InformationList.knowledgeList.get(y));
+					}
+					return new GuiKnowledge(player);
+				}
+			case GUI_RELOAD:
+				if (x == 1 && !player.getHeldItemMainhand().isEmpty()) {
+					return new GuiReload(player.inventory, player.getHeldItemMainhand());
+				}
 		}
 		return null;
 	}

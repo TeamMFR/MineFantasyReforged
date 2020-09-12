@@ -1,11 +1,12 @@
 package minefantasy.mfr.api.knowledge.client;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.RenderHelper;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.TextFormatting;
 
 public class EntryPageImage extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
@@ -70,10 +71,9 @@ public class EntryPageImage extends EntryPage {
 
     @Override
     public void preRender(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        mc.renderEngine.bindTexture(TextureHelperMFR.getResource(image));
+        mc.renderEngine.bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, image));
         int xOffset = (universalBookImageWidth - sizes[0]) / 2;
-        RenderHelper.drawTexturedModalRect(posX + xOffset, posY + 15, 2, 0, 0, sizes[0], sizes[1], 1F / sizes[0],
-                1F / sizes[1]);
+        RenderHelper.drawTexturedModalRect(posX + xOffset, posY + 15, 2, 0, 0, sizes[0], sizes[1], 1F / sizes[0], 1F / sizes[1]);
     }
 
 }

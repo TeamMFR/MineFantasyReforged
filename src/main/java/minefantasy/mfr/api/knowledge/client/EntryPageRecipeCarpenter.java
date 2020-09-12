@@ -1,10 +1,10 @@
 package minefantasy.mfr.api.knowledge.client;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mfr.api.crafting.carpenter.ShapedCarpenterRecipes;
 import minefantasy.mfr.api.crafting.carpenter.ShapelessCarpenterRecipes;
 import minefantasy.mfr.api.helpers.GuiHelper;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -12,6 +12,7 @@ import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -47,10 +48,9 @@ public class EntryPageRecipeCarpenter extends EntryPage {
         if (onTick) {
             tickRecipes();
         }
-        tooltipStack = null;
+        tooltipStack = ItemStack.EMPTY;
 
-        this.mc.getTextureManager()
-                .bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/carpenterGrid.png"));
+        this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/carpenter_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
         ICarpenterRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
@@ -59,9 +59,9 @@ public class EntryPageRecipeCarpenter extends EntryPage {
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
         renderRecipe(parent, x, y, f, posX, posY, recipe);
 
-        if (tooltipStack != null) {
+        if (!tooltipStack.isEmpty()) {
             List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList();
+            List<String> parsedTooltip = new ArrayList<>();
             boolean first = true;
 
             for (String s : tooltipData) {
@@ -130,9 +130,8 @@ public class EntryPageRecipeCarpenter extends EntryPage {
         }
     }
 
-    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin,
-                             int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+    public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -148,9 +147,8 @@ public class EntryPageRecipeCarpenter extends EntryPage {
         renderItem(gui, xPos, yPos, stack1, accountForContainer, mx, my);
     }
 
-    public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer,
-                                    int xOrigin, int yOrigin, int mx, int my) {
-        if (stack == null || stack.getItem() == null)
+    public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
+        if (stack.isEmpty())
             return;
         stack = stack.copy();
 
@@ -170,8 +168,7 @@ public class EntryPageRecipeCarpenter extends EntryPage {
         renderItem(gui, xPos, yPos, stack1, accountForContainer, mx, my);
     }
 
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-                           int my) {
+    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
         //TODO not sure how to fix this. Maybe use ItemRenderer e.g.
         //ItemRenderer renderer = new ItemRenderer(gui.mc);
         RenderItem render = Minecraft.getMinecraft().getRenderItem();
@@ -187,7 +184,7 @@ public class EntryPageRecipeCarpenter extends EntryPage {
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer,stack, xPos, yPos, null);
+        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
         RenderHelper.disableStandardItemLighting();
         GL11.glPopMatrix();
 
