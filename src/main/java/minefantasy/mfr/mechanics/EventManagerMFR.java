@@ -31,6 +31,7 @@ import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.item.armour.ItemArmourBaseMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
@@ -605,7 +606,7 @@ public class EventManagerMFR {
 		Block broken = event.getState().getBlock();
 
 		if (broken != null && ConfigHardcore.HCCallowRocks) {
-			if (held.isEmpty()) {
+			if (held.isEmpty()&& CustomStone.isStone(broken)) {
 				entityDropItem(event.getWorld(), event.getPos(),
 						new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
 			}
