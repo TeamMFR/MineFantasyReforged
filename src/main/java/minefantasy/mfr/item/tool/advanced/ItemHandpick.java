@@ -46,7 +46,6 @@ import java.util.List;
  */
 public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
-    private String name;
     private float baseDamage = 1F;
     // ===================================================== CUSTOM START
     // =============================================================\\
@@ -57,7 +56,6 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
         super(material);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
-        this.name = name;
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -79,10 +77,8 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
             List<ItemStack> drops = blockState.getBlock().getDrops(world, pos, state, ConfigTools.handpickFortune ? fortune : 0);
 
             if (!silk && drops != null && !drops.isEmpty()) {
-                Iterator<ItemStack> list = drops.iterator();
-                while (list.hasNext()) {
-                    ItemStack drop = list.next();
-                    if (isOre(blockState.getBlock(), state) && !drop.isItemEqual(new ItemStack(blockState.getBlock(),1))
+                for (ItemStack drop : drops) {
+                    if (isOre(blockState.getBlock(), state) && !drop.isItemEqual(new ItemStack(blockState.getBlock(), 1))
                             && !(drop.getItem() instanceof ItemBlock) && world.rand.nextFloat() < getDoubleDropChance()) {
                         dropItem(world, pos, drop.copy());
                     }
@@ -93,12 +89,9 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
             ArrayList<ItemStack> specialdrops = RandomOre.getDroppedItems(user, blockState.getBlock(), state.getBlock().getMetaFromState(state), harvestlvl, fortune, silk, pos.getY());
 
             if (specialdrops != null && !specialdrops.isEmpty()) {
-                Iterator list = specialdrops.iterator();
 
-                while (list.hasNext()) {
-                    ItemStack newdrop = (ItemStack) list.next();
-
-                    if (newdrop != null) {
+                for (ItemStack newdrop : specialdrops) {
+                    if (!newdrop.isEmpty()) {
                         if (newdrop.getCount() < 1)
                             newdrop.setCount(1);
 
@@ -162,7 +155,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
         if (slot != EntityEquipmentSlot.MAINHAND) {
             return super.getAttributeModifiers(slot, stack);
         }
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -220,11 +213,9 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
@@ -233,7 +224,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

@@ -38,7 +38,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
     @Override
     public ItemStack getContainerItem(ItemStack item) {
         item.setItemDamage(item.getItemDamage() + 1);
-        return item.getItemDamage() >= item.getMaxDamage() ? null : item;
+        return item.getItemDamage() >= item.getMaxDamage() ? ItemStack.EMPTY : item;
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
     private boolean onUsedWithBlock(World world, BlockPos pos, Block block, ItemStack item, EntityPlayer user) {
         Block newBlock = null;
         ItemStack output = PaintOilRecipe.getPaintResult(new ItemStack(block, 1));
-        if (output != null && output.getItem() instanceof ItemBlock) {
+        if (!output.isEmpty() && output.getItem() instanceof ItemBlock) {
             newBlock = Block.getBlockFromItem(output.getItem());
         }
         if (newBlock != null) {

@@ -21,7 +21,7 @@ public class BaseMaterialMFR {
      * The base damage for swords used with players. (Swords are 4+dam, adding 1 dam
      * for player base hit dam)
      */
-    private static final float swordDam = 5F;
+    private static final float SWORD_DAMAGE = 5F;
     public static HashMap<String, BaseMaterialMFR> materialMap = new HashMap<String, BaseMaterialMFR>();
 
     // Cloth and leather
@@ -133,8 +133,7 @@ public class BaseMaterialMFR {
     private ArmourMaterialMFR armourConversion;
     private ToolMaterial toolConversion;
 
-    public BaseMaterialMFR(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness,
-                          int enchantment, float weight, int lvl) {
+    public BaseMaterialMFR(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantment, float weight, int lvl) {
         this.requiredLevel = lvl;
         this.name = name;
         this.tier = tier;
@@ -209,15 +208,13 @@ public class BaseMaterialMFR {
     /**
      * This method auto-calculates the Armour Rating to scale the damage
      */
-    public static BaseMaterialMFR addArmourSpecificMaterial(String name, int tier, int durability, float AC,
-                                                           int enchantment, float weight, int lvl) {
+    public static BaseMaterialMFR addArmourSpecificMaterial(String name, int tier, int durability, float AC, int enchantment, float weight, int lvl) {
         return addMaterial(name, tier, durability, -1, AC, -1, enchantment, weight, lvl);
     }
 
-    public static BaseMaterialMFR addMaterial(String name, int tier, int durability, int harvestLevel, float sharpness,
-                                             int enchantment, float weight, int lvl) {
-        float AC = 0;
-        AC = ((sharpness + swordDam) / armourVsSwordBalance) - 1.0F;
+    public static BaseMaterialMFR addMaterial(String name, int tier, int durability, int harvestLevel, float sharpness, int enchantment, float weight, int lvl) {
+        float AC;
+        AC = ((sharpness + SWORD_DAMAGE) / armourVsSwordBalance) - 1.0F;
         MFRLogUtil.logDebug("Added Ratio Armour Material " + name + " AR = " + AC);
         float initAc = AC;
 
@@ -230,10 +227,8 @@ public class BaseMaterialMFR {
         return addMaterial(name, tier, durability, harvestLevel, AC, sharpness, enchantment, weight, lvl);
     }
 
-    public static BaseMaterialMFR addMaterial(String name, int tier, int durability, int harvestLevel, float hardness,
-                                             float sharpness, int enchantment, float weight, int lvl) {
-        return register(new BaseMaterialMFR(name, tier, durability, harvestLevel, hardness, sharpness, enchantment,
-                weight, lvl));
+    public static BaseMaterialMFR addMaterial(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantment, float weight, int lvl) {
+        return register(new BaseMaterialMFR(name, tier, durability, harvestLevel, hardness, sharpness, enchantment, weight, lvl));
     }
 
     public static BaseMaterialMFR register(BaseMaterialMFR material) {

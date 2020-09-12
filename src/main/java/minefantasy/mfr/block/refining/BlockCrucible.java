@@ -67,7 +67,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
         TileEntityCrucible tile = (TileEntityCrucible) getTile(world, pos);
         if (tile != null) {
             ItemStack held = player.getHeldItem(hand);
-            if (!held.isEmpty() && held.getItem() == ComponentListMFR.ARTEFACTS && held.getItemDamage() == 3) {
+            if (!held.isEmpty() && held.getItem() == ComponentListMFR.ANCIENT_JEWEL_MASTER && held.getItemDamage() == 3) {
                 if (tier == 2 && isActive) {
                     held.shrink(1);
                     if (held.getCount() <= 0) {

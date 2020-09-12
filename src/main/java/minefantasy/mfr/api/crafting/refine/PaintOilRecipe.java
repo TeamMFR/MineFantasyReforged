@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class PaintOilRecipe {// FurnaceRecipes
-    public static HashMap<ItemStack, ItemStack> recipeList = new HashMap();
+    public static HashMap<ItemStack, ItemStack> recipeList = new HashMap<>();
 
     /**
      * Turn one specific meta block to another
@@ -33,18 +33,18 @@ public class PaintOilRecipe {// FurnaceRecipes
     }
 
     public static ItemStack getPaintResult(ItemStack item) {
-        Iterator iterator = recipeList.entrySet().iterator();
-        Entry entry;
+        Iterator<Entry<ItemStack, ItemStack>> iterator = recipeList.entrySet().iterator();
+        Entry<ItemStack, ItemStack> entry;
 
         do {
             if (!iterator.hasNext()) {
                 return null;
             }
 
-            entry = (Entry) iterator.next();
-        } while (!doesMatch(item, (ItemStack) entry.getKey()));
+            entry = iterator.next();
+        } while (!doesMatch(item, entry.getKey()));
 
-        return (ItemStack) entry.getValue();
+        return entry.getValue();
     }
 
     private static boolean doesMatch(ItemStack item1, ItemStack item2) {

@@ -212,7 +212,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
             Iterator iteratorMetal = metal.iterator();
             while (iteratorMetal.hasNext()) {
                 CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack() != null) {
                     items.add(this.construct(customMat.name));
                 }
             }

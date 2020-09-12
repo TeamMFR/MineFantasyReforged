@@ -194,17 +194,16 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         add(items, ComponentListMFR.GOLD_COIN);
     }
 
-    private void add(List list, Item item) {
+    private void add(List<ItemStack> list, Item item) {
         list.add(new ItemStack(item));
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
 
         super.addInformation(item, world, list, flag);
         if (isCustom) {
-            CustomToolHelper.addComponentString(item, list,
-                    CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main), this.unitCount);
+            CustomToolHelper.addComponentString(item, list, CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main), this.unitCount);
         }
     }
 

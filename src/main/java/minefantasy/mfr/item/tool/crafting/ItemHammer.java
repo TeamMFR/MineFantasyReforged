@@ -22,7 +22,6 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraft.util.NonNullList;
@@ -46,7 +45,6 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
     private int tier;
     private boolean heavy;
     private float baseDamage;
-    private String name;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
@@ -56,7 +54,6 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
         super(heavy ? 3.0F : 2.0F, 1.0F, material, Sets.newHashSet(new Block[]{}));
         this.heavy = heavy;
         this.material = material;
-        this.name = name;
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setMaxDamage(material.getMaxUses() * 2);
@@ -80,12 +77,6 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
     @Override
     public float[] getDamageRatio(Object... implement) {
         return new float[]{0, 1, 0};
-    }
-
-    private void addSet(List list, Item[] items) {
-        for (Item item : items) {
-            list.add(new ItemStack(item));
-        }
     }
 
     @Override
@@ -115,7 +106,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         if (slot == EntityEquipmentSlot.MAINHAND) {
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
@@ -184,11 +175,9 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
@@ -197,7 +186,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

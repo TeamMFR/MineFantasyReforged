@@ -3,16 +3,13 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.decor.BlockComponent;
-import minefantasy.mfr.network.ForgePacket;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.proxy.NetworkUtils;
 import minefantasy.mfr.network.StorageBlockPacket;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.WorldServer;
 
 public class TileEntityComponent extends TileEntity {
     public ItemStack item;
@@ -34,10 +31,10 @@ public class TileEntityComponent extends TileEntity {
     }
 
     public void interact(EntityPlayer user, ItemStack held, boolean leftClick) {
-        if (item != null && stackSize > 0) {
+        if (!item.isEmpty() && stackSize > 0) {
             if (leftClick)// Take
             {
-                if (held == null) {
+                if (held.isEmpty()) {
                     held = item.copy();
                     held.setCount(1);
                     user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, held);
@@ -49,11 +46,11 @@ public class TileEntityComponent extends TileEntity {
                         --stackSize;
                     }
                 }
-                if (item == null || stackSize <= 0) {
+                if (item.isEmpty() || stackSize <= 0) {
                     world.setBlockToAir(pos);
                     world.removeTileEntity(pos);
                 }
-            } else if (held != null)// PLACE
+            } else if (!held.isEmpty())// PLACE
             {
                 if (stackSize < max && item.isItemEqual(held) && ItemStack.areItemStackTagsEqual(item, held)) {
                     ++stackSize;
@@ -61,7 +58,7 @@ public class TileEntityComponent extends TileEntity {
                 }
 
                 if (held.getCount() <= 0) {
-                    user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+                    user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
                 }
             }
         }
@@ -92,15 +89,15 @@ public class TileEntityComponent extends TileEntity {
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
 
-        max = nbt.getInteger("MaxStack");
+        max = nbt.getInteger("max_stack");
         type = nbt.getString("type");
         tex = nbt.getString("tex");
-        stackSize = nbt.getInteger("StackSize");
+        stackSize = nbt.getInteger("stack_size");
 
-        NBTTagCompound itemsave = nbt.getCompoundTag("ItemSave");
+        NBTTagCompound itemsave = nbt.getCompoundTag("item_save");
         item = new ItemStack(itemsave);
-        if (nbt.hasKey("MaterialName")) {
-            this.material = CustomMaterial.getMaterial(nbt.getString("MaterialName"));
+        if (nbt.hasKey("material_name")) {
+            this.material = CustomMaterial.getMaterial(nbt.getString("material_name"));
         }
     }
 
@@ -108,18 +105,18 @@ public class TileEntityComponent extends TileEntity {
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
 
-        nbt.setInteger("MaxStack", max);
+        nbt.setInteger("max_stack", max);
         nbt.setString("type", type);
         nbt.setString("tex", tex);
-        nbt.setInteger("StackSize", stackSize);
+        nbt.setInteger("stack_size", stackSize);
 
         if (item != null) {
             NBTTagCompound itemsave = new NBTTagCompound();
             item.writeToNBT(itemsave);
-            nbt.setTag("ItemSave", itemsave);
+            nbt.setTag("item_save", itemsave);
         }
         if (material != null) {
-            nbt.setString("MaterialName", material.getName());
+            nbt.setString("material_name", material.getName());
         }
         return nbt;
     }
@@ -187,7 +184,7 @@ public class TileEntityComponent extends TileEntity {
 
             return f;
         }
-        if (type.equalsIgnoreCase("bigplate")) {
+        if (type.equalsIgnoreCase("big_plate")) {
             return Math.max(0.125F, stackSize * 0.125F);
         }
         if (type.equalsIgnoreCase("jug")) {

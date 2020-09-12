@@ -44,7 +44,6 @@ import java.util.List;
  */
 public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
-    private String name;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private float baseDamage = 1.0F;
@@ -59,7 +58,6 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));
-        this.name = name;
 
         MineFantasyReborn.PROXY.addClientRegister(this);
     }
@@ -133,7 +131,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -182,11 +180,9 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
@@ -195,7 +191,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

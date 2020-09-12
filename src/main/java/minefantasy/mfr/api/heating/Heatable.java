@@ -10,13 +10,13 @@ import java.util.HashMap;
 
 public class Heatable {
     public static final int forgeMaximumMetalHeat = 5000;
-    public static final String NBT_Item = "MFHeatable_ItemSave";
-    // public static final String NBT_ItemID = "MFHeatable_ItemID";
-    // public static final String NBT_SubID = "MFHeatable_SubID";
-    public static final String NBT_ShouldDisplay = "MFHeatable_DisplayTemperature";
-    public static final String NBT_CurrentTemp = "MFHeatable_Temperature";
-    public static final String NBT_WorkableTemp = "MFHeatable_WorkTemp";
-    public static final String NBT_UnstableTemp = "MFHeatable_UnstableTemp";
+    public static final String NBT_Item = "mf_heatable_item_save";
+    // public static final String NBT_ItemID = "mf_heatable_item_id";
+    // public static final String NBT_SubID = "mf_uheatable_sub_id";
+    public static final String NBT_ShouldDisplay = "mf_heatable_display_temperature";
+    public static final String NBT_CurrentTemp = "mf_heatable_temperature";
+    public static final String NBT_WorkableTemp = "mf_heatable_work_temp";
+    public static final String NBT_UnstableTemp = "mf_heatable_unstable_temp";
     public static boolean requiresHeating = true;
     public static HashMap<String, Heatable> registerList = new HashMap<String, Heatable>();
     /**

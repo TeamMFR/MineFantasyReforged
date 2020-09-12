@@ -44,7 +44,6 @@ import java.util.Random;
  */
 public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
-    private String name;
     private float baseDamage = 2F;
     private Random rand = new Random();
     // ===================================================== CUSTOM START
@@ -56,7 +55,6 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
         super(material);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
-        this.name = name;
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -129,7 +127,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -186,11 +184,9 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {

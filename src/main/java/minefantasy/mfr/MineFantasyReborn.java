@@ -19,6 +19,7 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.init.ArmourListMFR;
+import minefantasy.mfr.init.ArtefactListMFR;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
@@ -31,7 +32,9 @@ import minefantasy.mfr.init.OreDictListMFR;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.LeatherMaterial;
 import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.worldGen.WorldGenBiological;
 import minefantasy.mfr.mechanics.worldGen.WorldGenMFBase;
 import minefantasy.mfr.network.NetworkHandler;
@@ -109,6 +112,9 @@ public class MineFantasyReborn {
 		MFRLogUtil.log("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
 
 		BaseMaterialMFR.init();
+		WoodMaterial.init();
+		MetalMaterial.init();
+		LeatherMaterial.init();
 
 		ComponentListMFR.init();
 		ToolListMFR.init();
@@ -169,11 +175,12 @@ public class MineFantasyReborn {
 		}
 
 		KnowledgeListMFR.init();
+		ArtefactListMFR.init();
 		BasicRecipesMF.init();
 
-		MetalMaterial.addHeatables();
-
 		OreDictListMFR.registerOreDictEntries();
+
+		MetalMaterial.addHeatables();
 
 		PROXY.postInit(postEvent);
 	}

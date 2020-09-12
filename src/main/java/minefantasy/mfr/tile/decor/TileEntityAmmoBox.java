@@ -30,7 +30,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
     private int ticksExisted;
 
     public TileEntityAmmoBox() {
-        super("ammo_box_basic", CustomMaterial.getMaterial("RefinedWood"));
+        super("ammo_box_basic", CustomMaterial.getMaterial("refined_wood"));
     }
 
     public TileEntityAmmoBox(String tex, CustomMaterial material, byte size) {

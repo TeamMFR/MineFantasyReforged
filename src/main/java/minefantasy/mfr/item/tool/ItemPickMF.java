@@ -34,7 +34,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,7 +41,6 @@ import java.util.List;
  */
 public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
-    private String name;
     private float baseDamage = 2F;
     // ===================================================== CUSTOM START
     // =============================================================\\
@@ -53,7 +51,6 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
         super(material);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
-        this.name = name;
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -69,23 +66,23 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
         if (!world.isRemote)
             return item;
 
-        RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+        RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-        if (movingobjectposition == null) {
+        if (rayTraceResult == null) {
             return item;
         } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
-                if (!world.canMineBlockBody(player, movingobjectposition.getBlockPos())) {
+                if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
                     return item;
                 }
 
-                if (!player.canPlayerEdit(movingobjectposition.getBlockPos(), movingobjectposition.sideHit, item)) {
+                if (!player.canPlayerEdit(rayTraceResult.getBlockPos(), rayTraceResult.sideHit, item)) {
                     return item;
                 }
 
-                Block block = world.getBlockState(movingobjectposition.getBlockPos()).getBlock();
-                int blockTier = block.getHarvestLevel(world.getBlockState(movingobjectposition.getBlockPos()));
+                Block block = world.getBlockState(rayTraceResult.getBlockPos()).getBlock();
+                int blockTier = block.getHarvestLevel(world.getBlockState(rayTraceResult.getBlockPos()));
 
                 int HL = CustomToolHelper.getHarvestLevel(item, toolMaterial.getHarvestLevel());
                 if (blockTier > HL) {
@@ -128,7 +125,7 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -186,20 +183,18 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
-            super.getSubItems( tab, items);
+            super.getSubItems(tab, items);
         }
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

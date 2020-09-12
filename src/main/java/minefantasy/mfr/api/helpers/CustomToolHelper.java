@@ -1,19 +1,19 @@
 package minefantasy.mfr.api.helpers;
 
-import net.minecraft.util.text.TextFormatting;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.item.heatable.ItemHeated;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.network.ByteBufUtils;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 public class CustomToolHelper {
     public static final String slot_main = "main_metal";
     public static final String slot_haft = "haft_wood";
-    public static EnumRarity poor = EnumHelper.addRarity("Poor", TextFormatting.DARK_GRAY, "poor");
+    public static EnumRarity poor = EnumHelper.addRarity("poor", TextFormatting.DARK_GRAY, "poor");
     public static EnumRarity[] rarity = new EnumRarity[]{poor, EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
 
     /**
@@ -232,7 +232,7 @@ public class CustomToolHelper {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void addInformation(ItemStack item, List list) {
+    public static void addInformation(ItemStack item, List<String> list) {
         CustomMaterial haft = getCustomSecondaryMaterial(item);
 
         if (materialOnTooltip()) {
@@ -255,7 +255,7 @@ public class CustomToolHelper {
     /**
      * Gets if the language puts tiers in the tooltip, leaving the name blank
      *
-     * @return
+     * @return material boolean
      */
     public static boolean materialOnTooltip() {
         String cfg = I18n.format("languagecfg.tooltiptier");
@@ -263,7 +263,7 @@ public class CustomToolHelper {
     }
 
     @SideOnly(Side.CLIENT)
-    public static void addBowInformation(ItemStack item, List list) {
+    public static void addBowInformation(ItemStack item, List<String> list) {
 
         CustomMaterial metals = getCustomPrimaryMaterial(item);
         if (metals != null) {
@@ -354,11 +354,11 @@ public class CustomToolHelper {
         return true;
     }
 
-    public static void addComponentString(ItemStack tool, List list, CustomMaterial base) {
+    public static void addComponentString(ItemStack tool, List<String> list, CustomMaterial base) {
         addComponentString(tool, list, base, 1);
     }
 
-    public static void addComponentString(ItemStack tool, List list, CustomMaterial base, float units) {
+    public static void addComponentString(ItemStack tool, List<String> list, CustomMaterial base, float units) {
         if (base != null) {
             float mass = base.density * units;
             list.add(TextFormatting.GOLD + base.getMaterialString());
@@ -455,44 +455,8 @@ public class CustomToolHelper {
         return false;
     }
 
-    public static void writeToPacket(ByteBuf packet, ItemStack stack) {
-        packet.writeInt(stack != null ? Item.getIdFromItem(stack.getItem()) : 0);
-        packet.writeInt(stack != null ? stack.getCount() : 0);
-        packet.writeInt(stack != null ? stack.getItemDamage() : 0);
-        packet.writeInt((stack != null && stack.isItemEnchanted()) ? 1 : 0);
-
-        CustomMaterial main1 = getCustomPrimaryMaterial(stack);
-        CustomMaterial haft1 = getCustomSecondaryMaterial(stack);
-
-        ByteBufUtils.writeUTF8String(packet, main1 != null ? main1.getName() : "null");
-        ByteBufUtils.writeUTF8String(packet, haft1 != null ? haft1.getName() : "null");
-    }
-
-    public static ItemStack readFromPacket(ByteBuf packet) {
-        int id = packet.readInt();
-        int ss = packet.readInt();
-        int md = packet.readInt();
-        boolean ec = packet.readInt() == 1;
-        String main1 = ByteBufUtils.readUTF8String(packet);
-        String haft1 = ByteBufUtils.readUTF8String(packet);
-        Item item = Item.getItemById(id);
-
-        if (item != null && ss > 0) {
-            ItemStack stack = new ItemStack(item, ss, md);
-            if (!main1.equalsIgnoreCase("null")) {
-                CustomMaterial.addMaterial(stack, slot_main, main1);
-            }
-            if (!haft1.equalsIgnoreCase("null")) {
-                CustomMaterial.addMaterial(stack, slot_haft, haft1);
-            }
-            return stack;
-        }
-
-        return null;
-    }
-
     public static String getComponentMaterial(ItemStack item, String type) {
-        if (item == null || type == null)
+        if (item.isEmpty() || type == null)
             return null;
 
         if (item.getItem() instanceof ItemHeated) {
@@ -512,7 +476,7 @@ public class CustomToolHelper {
 
     public static ItemStack tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
         String type = null;
-        if (newitem != null && newitem.getItem() instanceof ITieredComponent) {
+        if (!newitem.isEmpty() && newitem.getItem() instanceof ITieredComponent) {
             type = ((ITieredComponent) newitem.getItem()).getMaterialType(newitem);
         }
 
@@ -532,7 +496,7 @@ public class CustomToolHelper {
     }
 
     public static String getCustomStyle(ItemStack weapon) {
-        if (weapon != null && weapon.getItem() instanceof ISpecialDesign) {
+        if (!weapon.isEmpty() && weapon.getItem() instanceof ISpecialDesign) {
             return ((ISpecialDesign) weapon.getItem()).getDesign(weapon);
         }
         return null;

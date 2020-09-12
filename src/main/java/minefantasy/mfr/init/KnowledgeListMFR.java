@@ -199,7 +199,7 @@ public class KnowledgeListMFR {
         smeltPig = (new InformationBase("smeltPig", 3, 3, 0, ComponentListMFR.PIG_IRON_INGOT, blastfurn)).registerStat()
                 .setPage(artisanry).setUnlocked().addSkill(SkillList.artisanry, 25);
         smeltSteel = (new InformationBase("smeltSteel", 4, 5, 1, ComponentListMFR.STEEL_INGOT, smeltPig)).registerStat()
-                .setPage(artisanry).addSkill(SkillList.artisanry, 25).setDescriptValues(getMetalTier("Steel"));
+                .setPage(artisanry).addSkill(SkillList.artisanry, 25).setDescriptValues(getMetalTier("steel"));
         encrusted = (new InformationBase("smeltEncrusted", 6, 5, 2, ComponentListMFR.DIAMOND_SHARDS, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 35)
                 .setDescriptValues(getMetalTier("encrusted"));
@@ -208,22 +208,22 @@ public class KnowledgeListMFR {
                 .setDescriptValues(getMetalTier("obsidian"));
         smeltBlackSteel = (new InformationBase("smeltBlackSteel", 4, 7, 3, ComponentListMFR.BLACK_STEEL_INGOT, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50)
-                .setDescriptValues(getMetalTier("blacksteel"));
+                .setDescriptValues(getMetalTier("black_steel"));
         smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, ComponentListMFR.DRAGON_HEART, null))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
         smeltRedSteel = (new InformationBase("smeltRedSteel", 3, 9, 5, ComponentListMFR.RED_STEEL_INGOT, smeltBlackSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 65)
-                .setDescriptValues(getMetalTier("redsteel"));
+                .setDescriptValues(getMetalTier("red_steel"));
         smeltBlueSteel = (new InformationBase("smeltBlueSteel", 5, 9, 5, ComponentListMFR.BLUE_STEEL_INGOT, smeltBlackSteel))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 65)
-                .setDescriptValues(getMetalTier("bluesteel"));
+                .setDescriptValues(getMetalTier("blue_steel"));
         smeltMithril = (new InformationBase("smeltMithril", 5, 12, 3, ComponentListMFR.MITHRIL_INGOT, null)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 75).setDescriptValues(getMetalTier("mithril"));
         smeltAdamant = (new InformationBase("smeltAdamantium", 3, 12, 3, ComponentListMFR.ADAMANTIUM_INGOT, null))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 75)
                 .setDescriptValues(getMetalTier("adamantium"));
 
-        smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(ComponentListMFR.ARTEFACTS, 1, 3),
+        smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_MASTER, 1, 3),
                 (InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry,
                 100);
         smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, ComponentListMFR.IGNOTUMITE_INGOT, smeltMaster))

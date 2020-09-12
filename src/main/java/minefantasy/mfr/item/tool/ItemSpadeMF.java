@@ -26,7 +26,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -34,7 +33,6 @@ import java.util.List;
  */
 public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegister {
     protected int itemRarity;
-    private String name;
     private float baseDamage = 1F;
     // ===================================================== CUSTOM START
     // =============================================================\\
@@ -45,7 +43,6 @@ public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegi
         super(material);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
-        this.name = name;
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -79,7 +76,7 @@ public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegi
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -136,11 +133,9 @@ public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegi
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
@@ -149,7 +144,7 @@ public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegi
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

@@ -52,7 +52,6 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     protected int itemRarity;
     private Random rand = new Random();
     private ToolMaterial toolMaterial;
-    private String name;
     private float baseDamage = 3.0F;
     // ===================================================== CUSTOM START
     // =============================================================\\
@@ -65,7 +64,6 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         this.toolMaterial = material;
         this.setFull3D();
         itemRarity = rarity;
-        this.name = name;
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -83,8 +81,8 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 
     private boolean cutGrass(World world, BlockPos pos, int r, EntityPlayer entity, boolean leaf) {
         boolean flag = false;
-        ItemStack item = entity.getHeldItem(EnumHand.MAIN_HAND);
-        if (item == null)
+        ItemStack item = entity.getHeldItemMainhand();
+        if (item.isEmpty())
             return false;
 
         for (int x2 = -r; x2 <= r; x2++) {
@@ -206,7 +204,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -266,11 +264,9 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
@@ -279,7 +275,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

@@ -12,8 +12,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictListMFR {
 
 	public static void registerOreDictEntries() {
-
-		// TODO: fix registry names: camelCase -> snake_case
 		OreDictionary.registerOre("copper_ore", BlockListMFR.COPPER_ORE);
 		OreDictionary.registerOre("tin_ore", BlockListMFR.TIN_ORE);
 		OreDictionary.registerOre("silver_ore", BlockListMFR.SILVER_ORE);
@@ -32,32 +30,32 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_BRICK, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_PAVEMENT, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("block_glass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("block_glass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("pane_glass", new ItemStack(BlockListMFR.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("pane_glass", new ItemStack(BlockListMFR.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("planksOakWood", new ItemStack(Blocks.PLANKS, 1, 0));
-		OreDictionary.registerOre("planksSpruceWood", new ItemStack(Blocks.PLANKS, 1, 1));
-		OreDictionary.registerOre("planksBirchWood", new ItemStack(Blocks.PLANKS, 1, 2));
-		OreDictionary.registerOre("planksJungleWood", new ItemStack(Blocks.PLANKS, 1, 3));
-		OreDictionary.registerOre("planksAcaciaWood", new ItemStack(Blocks.PLANKS, 1, 4));
-		OreDictionary.registerOre("planksDarkOakWood", new ItemStack(Blocks.PLANKS, 1, 5));
+		OreDictionary.registerOre("planks_oak_wood", new ItemStack(Blocks.PLANKS, 1, 0));
+		OreDictionary.registerOre("planks_spruce_wood", new ItemStack(Blocks.PLANKS, 1, 1));
+		OreDictionary.registerOre("planks_birch_wood", new ItemStack(Blocks.PLANKS, 1, 2));
+		OreDictionary.registerOre("planks_jungle_wood", new ItemStack(Blocks.PLANKS, 1, 3));
+		OreDictionary.registerOre("planks_acacia_wood", new ItemStack(Blocks.PLANKS, 1, 4));
+		OreDictionary.registerOre("planks_dark_oak_wood", new ItemStack(Blocks.PLANKS, 1, 5));
 
-		OreDictionary.registerOre("planksIronbarkWood", BlockListMFR.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planksEbonyWood", BlockListMFR.EBONY_PLANKS);
-		OreDictionary.registerOre("planksYewWood", BlockListMFR.YEW_PLANKS);
-		OreDictionary.registerOre("planksIronbarkWood", BlockListMFR.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planksEbonyWood", BlockListMFR.EBONY_PLANKS);
-		OreDictionary.registerOre("planksYewWood", BlockListMFR.YEW_PLANKS);
+		OreDictionary.registerOre("planks_ironbark_wood", BlockListMFR.IRONBARK_PLANKS);
+		OreDictionary.registerOre("planks_ebony_wood", BlockListMFR.EBONY_PLANKS);
+		OreDictionary.registerOre("planks_yew_wood", BlockListMFR.YEW_PLANKS);
+		OreDictionary.registerOre("planks_ironbark_wood", BlockListMFR.IRONBARK_PLANKS);
+		OreDictionary.registerOre("planks_ebony_wood", BlockListMFR.EBONY_PLANKS);
+		OreDictionary.registerOre("planks_yew_wood", BlockListMFR.YEW_PLANKS);
 
-		for (ItemStack plank : OreDictionary.getOres("plankWood")) {
-			if (plank.getItem().getClass().getName().contains("BlockWoodenDevice")) {
+		for (ItemStack plank : OreDictionary.getOres("plank_wood")) {
+			if (plank.getItem().getClass().getName().contains("block_wooden_device")) {
 				if (plank.getUnlocalizedName().equalsIgnoreCase("tile.blockWoodenDevice.6")) {
-					OreDictionary.registerOre("planksGreatwoodWood", plank);
+					OreDictionary.registerOre("planks_greatwood_wood", plank);
 				}
 				if (plank.getUnlocalizedName().equalsIgnoreCase("tile.blockWoodenDevice.7")) {
-					OreDictionary.registerOre("planksSilverwoodWood", plank);
+					OreDictionary.registerOre("planks_silverwood_wood", plank);
 				}
 			}
 		}
@@ -82,8 +80,6 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("ingot_composite_alloy", ComponentListMFR.INGOT_COMPOSITE_ALLOY);
 		OreDictionary.registerOre("ingot_iron", Items.IRON_INGOT);
 		OreDictionary.registerOre("ingot_gold", Items.GOLD_INGOT);
-
-		((ItemArtefact) ComponentListMFR.ARTEFACTS).registerAll();
 
 		String meatRaw = "raw_meat";
 		String cookedMeat = "cooked_meat";

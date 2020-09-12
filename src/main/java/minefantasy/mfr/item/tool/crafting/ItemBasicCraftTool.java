@@ -1,25 +1,24 @@
 package minefantasy.mfr.item.tool.crafting;
 
 import com.google.common.collect.Sets;
-import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.util.ModelLoaderHelper;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -29,19 +28,16 @@ import java.util.List;
 public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
     protected int itemRarity;
     private int tier;
-    private String name;
     private String toolType;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
-    private float efficiencyMod = 1.0F;
 
     public ItemBasicCraftTool(String name, String type, int tier, int uses) {
         super(1.0F, 1.0F, ToolMaterial.WOOD, Sets.newHashSet(new Block[]{}));
         this.tier = tier;
         setCreativeTab(CreativeTabMFR.tabCraftTool);
 
-        this.name = name;
         toolType = type;
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -65,12 +61,6 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
     @Override
     public float[] getDamageRatio(Object... implement) {
         return new float[]{0, 1, 0};
-    }
-
-    private void addSet(List list, Item[] items) {
-        for (Item item : items) {
-            list.add(new ItemStack(item));
-        }
     }
 
     @Override
@@ -99,21 +89,22 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
             return;
         }
         if (isCustom) {
-            items.add(this.construct("OakWood"));
-            items.add(this.construct("IronbarkWood"));
-            items.add(this.construct("EbonyWood"));
+            items.add(this.construct("oak_wood"));
+            items.add(this.construct("ironbark_wood"));
+            items.add(this.construct("ebony_wood"));
         } else {
             super.getSubItems(tab, items);
         }
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(item, world, list, flag);
     }
 
     @Override
     public float getEfficiency(ItemStack item) {
+        float efficiencyMod = 1.0F;
         return CustomToolHelper.getEfficiencyForHds(item, toolMaterial.getEfficiency(), efficiencyMod);
     }
 

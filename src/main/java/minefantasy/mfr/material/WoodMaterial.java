@@ -6,11 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-
 public class WoodMaterial extends CustomMaterial {
-    public WoodMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness,
-                        float resistance, float density) {
+    public WoodMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness, float resistance, float density) {
         super(name, "wood", tier, hardness, durability, flexibility, resistance, sharpness, density);
     }
 
@@ -24,8 +21,7 @@ public class WoodMaterial extends CustomMaterial {
      * @param resistance  Resistance to rot
      * @param density     How much a unit (timber plank) weighs in Kg
      */
-    public static CustomMaterial getOrAddWood(String name, int tier, float hardness, float durability,
-                                              float flexibility, float resistance, float density, int red, int green, int blue) {
+    public static CustomMaterial getOrAddWood(String name, int tier, float hardness, float durability, float flexibility, float resistance, float density, int red, int green, int blue) {
         if (getMaterial(name) != null) {
             return CustomMaterial.getMaterial(name);
         }
@@ -34,10 +30,8 @@ public class WoodMaterial extends CustomMaterial {
     }
 
     public static void init() {
-        new CustomMaterial("magic", "Magic", -1, 1F, 0F, 1F, 0F, 0F, 0F).setColour(157, 157, 255).register();
+        new CustomMaterial("magic", "magic", -1, 1F, 0F, 1F, 0F, 0F, 0F).setColour(157, 157, 255).register();
 
-        MetalMaterial.init();
-        LeatherMaterial.init();
         // Hardness-The Impact it can take. Used for armour rating, in this case
         // nothing.
         // Durability- how many uses it has, 1 pt per 250 uses (1/5th this adds to
@@ -48,23 +42,23 @@ public class WoodMaterial extends CustomMaterial {
         // Density- how much weight (Kg) does the timber plank weigh.
 
         // Name T Hds Dua Flx Rst Wgt R G B
-        getOrAddWood("ScrapWood", 0, 0.10F, 0.50F, 0.50F, 10F, 0.5F, 100, 95, 80);
+        getOrAddWood("scrap_wood", 0, 0.10F, 0.50F, 0.50F, 10F, 0.5F, 100, 95, 80);
 
-        getOrAddWood("OakWood", 1, 0.70F, 1.00F, 1.30F, 40F, 0.8F, 149, 119, 70).setCrafterTiers(1);
-        getOrAddWood("SpruceWood", 1, 0.20F, 0.90F, 1.00F, 20F, 0.4F, 102, 79, 47).setCrafterTiers(1);
-        getOrAddWood("BirchWood", 1, 0.50F, 0.90F, 1.30F, 10F, 0.7F, 200, 183, 122).setCrafterTiers(1);
-        getOrAddWood("JungleWood", 1, 0.40F, 1.00F, 1.20F, 50F, 0.6F, 159, 113, 74).setCrafterTiers(1);
-        getOrAddWood("AcaciaWood", 1, 0.50F, 1.20F, 1.00F, 20F, 0.6F, 173, 93, 50).setCrafterTiers(1);
-        getOrAddWood("DarkOakWood", 1, 1.20F, 1.50F, 1.30F, 50F, 1.0F, 62, 41, 18).setCrafterTiers(1);
+        getOrAddWood("oak_wood", 1, 0.70F, 1.00F, 1.30F, 40F, 0.8F, 149, 119, 70).setCrafterTiers(1);
+        getOrAddWood("spruce_wood", 1, 0.20F, 0.90F, 1.00F, 20F, 0.4F, 102, 79, 47).setCrafterTiers(1);
+        getOrAddWood("birch_wood", 1, 0.50F, 0.90F, 1.30F, 10F, 0.7F, 200, 183, 122).setCrafterTiers(1);
+        getOrAddWood("jungle_wood", 1, 0.40F, 1.00F, 1.20F, 50F, 0.6F, 159, 113, 74).setCrafterTiers(1);
+        getOrAddWood("acacia_wood", 1, 0.50F, 1.20F, 1.00F, 20F, 0.6F, 173, 93, 50).setCrafterTiers(1);
+        getOrAddWood("dark_oak_wood", 1, 1.20F, 1.50F, 1.30F, 50F, 1.0F, 62, 41, 18).setCrafterTiers(1);
 
-        getOrAddWood("RefinedWood", 2, 0.80F, 2.00F, 1.30F, 50F, 0.8F, 95, 40, 24).setCrafterTiers(2).setRarity(1);
-        getOrAddWood("YewWood", 2, 0.70F, 2.00F, 2.00F, 40F, 0.7F, 195, 138, 54).setCrafterTiers(2).setRarity(1);
-        getOrAddWood("IronbarkWood", 2, 0.90F, 3.50F, 1.10F, 50F, 0.9F, 202, 92, 29).setCrafterTiers(2).setRarity(1);
+        getOrAddWood("refined_wood", 2, 0.80F, 2.00F, 1.30F, 50F, 0.8F, 95, 40, 24).setCrafterTiers(2).setRarity(1);
+        getOrAddWood("yew_wood", 2, 0.70F, 2.00F, 2.00F, 40F, 0.7F, 195, 138, 54).setCrafterTiers(2).setRarity(1);
+        getOrAddWood("ironbark_wood", 2, 0.90F, 3.50F, 1.10F, 50F, 0.9F, 202, 92, 29).setCrafterTiers(2).setRarity(1);
 
-        getOrAddWood("EbonyWood", 3, 1.30F, 4.00F, 1.60F, 80F, 1.0F, 50, 46, 40).setCrafterTiers(3).setRarity(2);
+        getOrAddWood("ebony_wood", 3, 1.30F, 4.00F, 1.60F, 80F, 1.0F, 50, 46, 40).setCrafterTiers(3).setRarity(2);
 
-        getOrAddWood("SilverwoodWood", 2, 1.00F, 3.50F, 2.20F, 75F, 0.8F, 224, 220, 208).setCrafterTiers(2);
-        getOrAddWood("GreatwoodWood", 2, 1.20F, 1.50F, 1.00F, 50F, 1.5F, 37, 25, 23).setCrafterTiers(2);
+        getOrAddWood("silverwood_wood", 2, 1.00F, 3.50F, 2.20F, 75F, 0.8F, 224, 220, 208).setCrafterTiers(2);
+        getOrAddWood("greatwood_wood", 2, 1.20F, 1.50F, 1.00F, 50F, 1.5F, 37, 25, 23).setCrafterTiers(2);
         /*
          * //OTHERS. playing around with, mainly forestry getOrAddWood("PineWood", 0, 1,
          * 1, 1, 1, 1, 1, 189, 147, 63); getOrAddWood("CherryWood", 0, 1, 1, 1, 1, 1, 1,
@@ -100,7 +94,7 @@ public class WoodMaterial extends CustomMaterial {
     }
 
     @Override
-    public ItemStack getItem() {
+    public ItemStack getItemStack() {
         NonNullList<ItemStack> list = OreDictionary.getOres("planks" + name);
         if (list != null && !list.isEmpty()) {
             return list.get(0);

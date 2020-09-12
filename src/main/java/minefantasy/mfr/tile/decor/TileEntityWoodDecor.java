@@ -14,7 +14,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
     public TileEntityWoodDecor(String tex) {
         this.tex = tex;
-        this.material = CustomMaterial.getMaterial("RefinedWood");
+        this.material = CustomMaterial.getMaterial("refined_wood");
     }
 
     public TileEntityWoodDecor(String tex, CustomMaterial material) {
@@ -27,7 +27,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     }
 
     public CustomMaterial getMaterial() {
-        return this.material != null ? this.material : trySetMaterial("RefinedWood");
+        return this.material != null ? this.material : trySetMaterial("refined_wood");
     }
 
     public void setMaterial(CustomMaterial material) {
@@ -35,7 +35,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     }
 
     public String getMaterialName() {
-        return this.material != null ? material.getName() : "RefinedWood";
+        return this.material != null ? material.getName() : "refined_wood";
     }
 
     public CustomMaterial trySetMaterial(String materialName) {
@@ -49,14 +49,14 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setString("Material", this.getMaterialName());
+        nbt.setString("material", this.getMaterialName());
         return nbt;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        this.trySetMaterial(nbt.getString("Material"));
+        this.trySetMaterial(nbt.getString("material"));
     }
 
     public int getCapacity() {

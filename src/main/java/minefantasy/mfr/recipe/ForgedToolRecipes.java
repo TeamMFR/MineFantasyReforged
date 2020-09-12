@@ -1,6 +1,5 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.material.CustomMaterial;
@@ -42,7 +41,7 @@ public class ForgedToolRecipes {
                         (int) (customMat.craftTimeModifier / 2F), "I", 'I', ingot));
             }
 
-            ItemStack defaultIngot = customMat.getItem();
+            ItemStack defaultIngot = customMat.getItemStack();
             if (defaultIngot != null) {
                 KnowledgeListMFR.baringotR.add(MineFantasyRebornAPI.addAnvilRecipe(null, defaultIngot, "", true, "hammer", -1, -1, (int) (customMat.craftTimeModifier / 2F), "I", 'I', bar));
             }

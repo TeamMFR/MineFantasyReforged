@@ -8,10 +8,10 @@ import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.item.AdvancedFuelHandlerMF;
 import minefantasy.mfr.item.FuelHandlerMF;
 import minefantasy.mfr.item.ItemArtefact;
+import minefantasy.mfr.item.ItemBowl;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.item.ItemFilledMould;
 import minefantasy.mfr.item.ItemHide;
-import minefantasy.mfr.item.ItemBowl;
 import minefantasy.mfr.item.ItemRawOre;
 import minefantasy.mfr.item.ItemSpecialDesign;
 import minefantasy.mfr.item.custom.ItemCustomComponent;
@@ -19,7 +19,6 @@ import minefantasy.mfr.item.gadget.ItemBombComponent;
 import minefantasy.mfr.item.gadget.ItemCrossbowPart;
 import minefantasy.mfr.item.heatable.ItemHeated;
 import minefantasy.mfr.material.BaseMaterialMFR;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -190,7 +189,17 @@ public class ComponentListMFR {
 
 	public static Item COGWORK_PULLEY = Utils.nullValue();
 
-	public static Item ARTEFACTS = Utils.nullValue();
+	public static ItemArtefact ANCIENT_JEWEL_MITHRIL = Utils.nullValue();
+	public static ItemArtefact ANCIENT_JEWEL_ADAMANT = Utils.nullValue();
+	public static ItemArtefact ANCIENT_JEWEL_MASTER = Utils.nullValue();
+	public static ItemArtefact TRILOGY_JEWEL = Utils.nullValue();
+	public static ItemArtefact SCHEMATIC_BOMB = Utils.nullValue();
+	public static ItemArtefact SCHEMATIC_CROSSBOW = Utils.nullValue();
+	public static ItemArtefact SCHEMATIC_FORGE = Utils.nullValue();
+	public static ItemArtefact SCHEMATIC_GEARS = Utils.nullValue();
+	public static ItemArtefact SCHEMATIC_COGWORK = Utils.nullValue();
+	public static ItemArtefact SCHEMATIC_ALLOYS = Utils.nullValue();
+
 
 	public static Item ORNATE_ITEMS = Utils.nullValue();
 
@@ -345,7 +354,16 @@ public class ComponentListMFR {
 
 		COGWORK_PULLEY = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(CreativeTabMFR.tabGadget);
 
-		ARTEFACTS = new ItemArtefact("artefacts");
+		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, 2, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
+		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, 2, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
+		ANCIENT_JEWEL_MASTER =  new ItemArtefact("ancient_jewel_master", 30, 2, ItemArtefact.MYTHIC, 1, "smeltMaster");
+		TRILOGY_JEWEL = new ItemArtefact("trilogy_jewel", 3, null, 1);
+		SCHEMATIC_BOMB = new ItemArtefact("schematic_bomb", 50, 2, null, 1, "bombObsidian", "mineObsidian");
+		SCHEMATIC_CROSSBOW = new ItemArtefact("schematic_crossbow", 50, 2, null, 1, "crossShaftAdvanced", "crossHeadAdvanced");
+		SCHEMATIC_FORGE = new ItemArtefact("schematic_forge", 50, 2, null, 1, "advforge", "advcrucible");
+		SCHEMATIC_GEARS =  new ItemArtefact("schematic_gears", 50, 2, null, 1, "cogArmour");
+		SCHEMATIC_COGWORK = new ItemArtefact("schematic_cogwork", 50, 2, null, 1, "cogArmour");
+		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy",50, 2, null, 1, "compPlate");
 
 		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", 1, "ornate");
 	}
@@ -503,7 +521,16 @@ public class ComponentListMFR {
 
 		registry.register(COGWORK_PULLEY);
 
-		registry.register(ARTEFACTS);
+		registry.register(ANCIENT_JEWEL_MITHRIL);
+		registry.register(ANCIENT_JEWEL_ADAMANT);
+		registry.register(ANCIENT_JEWEL_MASTER);
+		registry.register(TRILOGY_JEWEL);
+		registry.register(SCHEMATIC_BOMB);
+		registry.register(SCHEMATIC_CROSSBOW);
+		registry.register(SCHEMATIC_FORGE);
+		registry.register(SCHEMATIC_GEARS);
+		registry.register(SCHEMATIC_COGWORK);
+		registry.register(SCHEMATIC_ALLOYS);
 
 		registry.register(ORNATE_ITEMS);
 	}
@@ -533,7 +560,6 @@ public class ComponentListMFR {
 				OBSIDIAN_INGOT
 		};
 
-		WoodMaterial.init();
 		Items.POTIONITEM.setContainerItem(Items.GLASS_BOTTLE);
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
 		MineFantasyRebornAPI.registerFuelHandler(new AdvancedFuelHandlerMF());

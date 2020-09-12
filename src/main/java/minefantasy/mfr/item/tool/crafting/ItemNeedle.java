@@ -37,10 +37,8 @@ import java.util.List;
  */
 public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, IClientRegister {
     protected int itemRarity;
-    private ToolMaterial material;
     private int tier;
     private float baseDamage;
-    private String name;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
@@ -48,8 +46,6 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 
     public ItemNeedle(String name, ToolMaterial material, int rarity, int tier) {
         super(0F, 1.0F, material, Sets.newHashSet(new Block[]{}));
-        this.material = material;
-        this.name = name;
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.tier = tier;
@@ -65,7 +61,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.5D, 0));
 
@@ -113,10 +109,8 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
                     items.add(this.construct(customMat.name));
                 }
             }
@@ -126,7 +120,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

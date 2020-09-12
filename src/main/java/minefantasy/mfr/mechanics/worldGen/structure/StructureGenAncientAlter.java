@@ -104,7 +104,7 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
             tileentitychest.setLootTable(loot, 2 + rand.nextInt(3));
 
             int artId = rand.nextInt(tileentitychest.getSizeInventory());
-            tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ARTEFACTS, 1, 2));
+            tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_MITHRIL, 1));
         }
     }
 

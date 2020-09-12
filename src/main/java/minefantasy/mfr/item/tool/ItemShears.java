@@ -21,7 +21,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -31,7 +30,6 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
     protected int itemRarity;
     private ToolMaterial toolMaterial;
     private int tier;
-    private String name;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
@@ -39,7 +37,6 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
 
     public ItemShears(String name, ToolMaterial material, int rarity, int tier) {
         super();
-        this.name = name;
         this.tier = tier;
         itemRarity = rarity;
         toolMaterial = material;
@@ -92,11 +89,9 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {
@@ -105,7 +100,7 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

@@ -24,7 +24,6 @@ import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeaponSpeed;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
-import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
@@ -32,6 +31,7 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.resources.I18n;
@@ -47,7 +47,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
@@ -64,7 +63,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -258,7 +256,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     /**
      * Gets the multiplier for the parry threshold
      *
-     * @return
+     * @return float Parry Damage Modifier
      */
     public float getParryDamageModifier(EntityLivingBase user) {
         return 1.0F;
@@ -267,7 +265,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     /**
      * Determines if the weapon can do those cool ninja evades
      *
-     * @return
+     * @return boolean canWeaponEvade
      */
     public boolean canWeaponEvade() {
         return true;
@@ -280,7 +278,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void addInformation(ItemStack weapon, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack weapon, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(weapon, world, list, flag);
 
         if (material == ToolMaterial.WOOD) {
@@ -432,10 +430,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     protected void hurtInRange(EntityLivingBase user, double range) {
         AxisAlignedBB bb = user.getEntityBoundingBox().expand(range, range, range);
         List<Entity> hurt = user.world.getEntitiesWithinAABBExcludingEntity(user, bb);
-        Iterator list = hurt.iterator();
-        while (list.hasNext()) {
-            Entity hit = (Entity) list.next();
-
+        for (Entity hit : hurt) {
             if (user.canEntityBeSeen(hit)) {
                 TacticalManager.knockbackEntity(hit, user, 1.5F, 0.2F);
                 if (StaminaBar.isSystemActive) {
@@ -503,11 +498,9 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItem() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
             return;
@@ -529,12 +522,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         items.add(new ItemStack(ToolListMFR.STONE_WARAXE));
         items.add(new ItemStack(ToolListMFR.STONE_MACE));
         items.add(new ItemStack(ToolListMFR.STONE_SPEAR));
-    }
-
-    private void addSet(List list, Item[] items) {
-        for (Item item : items) {
-            list.add(new ItemStack(item));
-        }
     }
 
     @Override
@@ -614,7 +601,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 

@@ -23,7 +23,7 @@ public class ItemEAnvilTools extends ItemBaseMFR {
     @Override
     public ItemStack getContainerItem(ItemStack item) {
         item.setItemDamage(item.getItemDamage() + 1);
-        return item.getItemDamage() >= item.getMaxDamage() ? null : item;
+        return item.getItemDamage() >= item.getMaxDamage() ? ItemStack.EMPTY : item;
     }
 
     @Override

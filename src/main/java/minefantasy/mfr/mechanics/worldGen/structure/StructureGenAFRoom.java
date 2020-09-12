@@ -89,7 +89,7 @@ public class StructureGenAFRoom extends StructureModuleMFR {
                 int sp = world.getSpawnPoint().getZ();
                 int item = (coords.getY() < sp) ? 1 : 0;
                 int artId = rand.nextInt(tileentitychest.getSizeInventory());
-                tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ARTEFACTS, 1, item));
+                tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_ADAMANT, 1, item));
             }
         }
     }

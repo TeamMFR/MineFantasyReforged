@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CustomMaterial {
-    public static final String NBTBase = "MF_CustomMaterials";
+    public static final String NBTBase = "mf_custom_materials";
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     public static final DecimalFormat decimal_format_grams = new DecimalFormat("#");
     /**
@@ -60,8 +60,7 @@ public class CustomMaterial {
     private float[] armourProtection = new float[]{1.0F, 1.0F, 1.0F};
     private boolean unbreakable = false;
 
-    public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility,
-                          float resistance, float sharpness, float density) {
+    public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density) {
         this.name = name;
         this.type = type;
         this.tier = tier;
@@ -116,8 +115,7 @@ public class CustomMaterial {
         if (getMaterial(name) != null) {
             return getMaterial(name);
         }
-        return new CustomMaterial(name, type, tier, hardness, durability, flexibility, sharpness, resistance, density)
-                .setColour(red, green, blue).register();
+        return new CustomMaterial(name, type, tier, hardness, durability, flexibility, sharpness, resistance, density).setColour(red, green, blue).register();
     }
 
     public static void addMaterial(ItemStack item, String slot, String material) {
@@ -139,7 +137,7 @@ public class CustomMaterial {
     }
 
     public static NBTTagCompound getNBT(ItemStack item, boolean createNew) {
-        if (item != null && item.hasTagCompound() && item.getTagCompound().hasKey(NBTBase)) {
+        if (!item.isEmpty() && item.hasTagCompound() && item.getTagCompound().hasKey(NBTBase)) {
             return (NBTTagCompound) item.getTagCompound().getTag(NBTBase);
         }
         if (createNew) {
@@ -153,9 +151,7 @@ public class CustomMaterial {
     }
 
     public static ArrayList<CustomMaterial> getList(String type) {
-        if (typeList.get(type) == null) {
-            typeList.put(type, new ArrayList<>());
-        }
+        typeList.computeIfAbsent(type, k -> new ArrayList<>());
         return typeList.get(type);
     }
 
@@ -235,8 +231,8 @@ public class CustomMaterial {
         return armourProtection[id];
     }
 
-    public ItemStack getItem() {
-        return null;
+    public ItemStack getItemStack() {
+        return ItemStack.EMPTY;
     }
 
     public CustomMaterial setMeltingPoint(float heat) {

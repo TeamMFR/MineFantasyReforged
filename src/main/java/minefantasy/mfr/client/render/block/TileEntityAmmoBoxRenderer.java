@@ -118,7 +118,7 @@ public class TileEntityAmmoBoxRenderer <T extends TileEntity> extends FastTESR<T
 
         GlStateManager.pushMatrix();
 
-        renderInvModel(box.getFullTexName(), box.storageType, CustomMaterial.getMaterial("refinedWood"), 0F, 0F, 0F, 0F);
+        renderInvModel(box.getFullTexName(), box.storageType, CustomMaterial.getMaterial("refined_wood"), 0F, 0F, 0F, 0F);
 
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);

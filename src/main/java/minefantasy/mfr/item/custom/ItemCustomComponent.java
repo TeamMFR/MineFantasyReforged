@@ -1,32 +1,28 @@
 package minefantasy.mfr.item.custom;
 
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.item.ItemBaseMFR;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.decor.BlockComponent;
 import minefantasy.mfr.entity.EntityCogwork;
+import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent {
@@ -73,9 +69,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
         }
         if (tab != CreativeTabMFR.tabMaterialsMFR) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("metal");
-            Iterator iteratorWood = wood.iterator();
-            while (iteratorWood.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
+            for (CustomMaterial customMat : wood) {
                 items.add(this.createComm(customMat.name));
             }
         }
@@ -91,7 +85,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack tool, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack tool, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(tool, world, list, flag);
         if (!canDamage) {
             CustomToolHelper.addComponentString(tool, list, getBase(tool), mass);

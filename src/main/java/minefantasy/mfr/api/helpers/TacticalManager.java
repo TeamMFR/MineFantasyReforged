@@ -154,8 +154,8 @@ public class TacticalManager {
         if (!user.isImmuneToFire() && user.isBurning()) {
             return false;// If burning and can't take the heat.. can't block!
         }
-        if (!user.getHeldItem(EnumHand.MAIN_HAND).isEmpty()) {
-            return user.getHeldItem(EnumHand.MAIN_HAND).getItem().getItemUseAction(user.getHeldItem(EnumHand.MAIN_HAND)) == EnumAction.BLOCK;
+        if (!user.getHeldItemMainhand().isEmpty()) {
+            return user.getHeldItemMainhand().getItem().getItemUseAction(user.getHeldItemMainhand()) == EnumAction.BLOCK;
         }
         return false;
     }

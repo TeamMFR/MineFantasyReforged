@@ -136,7 +136,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
             while (iteratorMetal.hasNext()) {
                 CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
 
-                if (customMat.getItem() != null) {
+                if (customMat.getItemStack() != null) {
                     items.add(construct(customMat.name));
                 }
             }
@@ -148,7 +148,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
         while (iteratorMetal.hasNext()) {
             CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
 
-            if (customMat.getItem() != null) {
+            if (customMat.getItemStack() != null) {
                 addSuits(items, customMat.name);
             }
         }
