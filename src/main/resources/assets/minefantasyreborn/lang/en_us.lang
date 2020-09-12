@@ -333,33 +333,33 @@ item.bolt.name=Bolts
 item.flux_pot.name=Fine Flux
 item.coal_flux.name=Coal Flux
 
-item.ingot_copper.name=_copper _ingot
-item.ingot_tin.name=_tin _ingot
-item.ingot_bronze.name=_bronze _ingot
-item.ingot_pig_iron.name=_pig _iron _ingot
-item.ingot_steel.name=_steel _ingot
-item.ingot_encrusted.name=_encrusted _ingot
-item.ingot_obsidian.name=_obsidian _ingot
-item.ingot_silver.name=_silver _ingot
-item.ingot_pure_gold.name=_pure _gold _ingot
-item.ingot_composite_alloy.name=_composite _alloyed _ingot
-item.ingot_black_steel_weak.name=_unrefined _black _steel
-item.ingot_blue_steel_weak.name=_unrefined _blue _steel
-item.ingot_red_steel_weak.name=_unrefined _red _steel
+item.copper_ingot.name=Copper Ingot
+item.tin_ingot.name=Tin Ingot
+item.bronze_ingot.name=Bronze Ingot
+item.pig_iron_ingot.name=Pig Iron Ingot
+item.steel_ingot.name=Steel Ingot
+item.encrusted_ingot.name=Encrusted Ingot
+item.obsidian_ingot.name=Obsidian Ingot
+item.silver_ingot.name=Silver Ingot
+item.pure_gold_ingot_ingot.name=Pure Gold Ingot
+item.composite_alloy_ingot.name=Composite Alloyed Ingot
+item.black_steel_weak_ingot.name=Unrefined Black Steel
+item.blue_steel_weak_ingot.name=Unrefined Blue Steel
+item.red_steel_weak_ingot.name=Unrefined Red Steel
 
-item.ingot_red_steel.name=_red _steel _ingot
-item.ingot_black_steel.name=_black _steel _ingot
-item.ingot_blue_steel.name=_blue _steel _ingot
+item.red_steel_ingot.name=Red Steel Ingot
+item.black_steel_ingot.name=Black Steel Ingot
+item.blue_steel_ingot.name=Blue Steel Ingot
 
-item.ingot_adamantium.name=_adamantium _ingot
-item.ingot_mithril.name=_mithril _ingot
+item.adamantium_ingot.name=Adamantium Ingot
+item.mithril_ingot.name=Mithril Ingot
 
-item.ingot_ignotumite.name=_ignotumite _ingot
-item.ingot_mithium.name=_mithium _ingot
+item.ignotumite_ingot.name=Ignotumite Ingot
+item.mithium_ingot.name=Mithium Ingot
 
-item.ingot_ender.name=_enderforge _ingot
+item.ender_ingot.name=Enderforge Ingot
 
-item.ingot_tungsten.name=_wolframite _ingot
+item.tungsten_ingot.name=Wolframite Ingot
 
 item.loot_sack.name=Loot
 item.loot_sack_uc.name=Valuable Loot
@@ -677,13 +677,13 @@ tile.chimney.stone_extractor.wide.name=Stone Extractor Chimney
 tile.chimney.pipe.name=Smoke Pipe
 tile.bellows.name=Bellows
 tile.tanner.name=Shabby Tanning Rack
-tile.tannerStrong.name=Tanning Rack
-tile.tannerMetal.name=Advanced Tanning Rack
-tile.bombBench.name=Bomb Crafting Table
+tile.tanner_strong.name=Tanning Rack
+tile.tanner_metal.name=Advanced Tanning Rack
+tile.bomb_bench.name=Bomb Crafting Table
 tile.crossbowBench.name=Crossbow Assembly Table
-tile.bombPress.name=Bomb Press
-tile.carpenterBench.name=Carpenter Bench
-tile.researchStation.name=Research Station
+tile.bomb_press.name=Bomb Press
+tile.carpenter_bench.name=Carpenter Bench
+tile.research_station.name=Research Station
 tile.quern.name=Quern
 tile.anvilStone.name=Stone Anvil
 tile.anvilBronze.name=Bronze Anvil
@@ -755,25 +755,25 @@ item.hide_chest.name=Hide Armor
 item.hide_legs.name=Hide Skirt
 item.hide_boots.name=Hide Boots
 
-item.roughleather_helmet.name=Rough Leather Helmet
-item.roughleather_chest.name=Rough Leather Armor
-item.roughleather_legs.name=Rough Leather Leggings
-item.roughleather_boots.name=Rough Leather Boots
+item.rough_leather_helmet.name=Rough Leather Helmet
+item.rough_leather_chest.name=Rough Leather Armor
+item.rough_leather_legs.name=Rough Leather Leggings
+item.rough_leather_boots.name=Rough Leather Boots
 
-item.strongleather_helmet.name=Reinforced Leather Helmet
-item.strongleather_chest.name=Reinforced Leather Armor
-item.strongleather_legs.name=Reinforced Leather Leggings
-item.strongleather_boots.name=Reinforced Leather Boots
+item.strong_leather_helmet.name=Reinforced Leather Helmet
+item.strong_leather_chest.name=Reinforced Leather Armor
+item.strong_leather_legs.name=Reinforced Leather Leggings
+item.strong_leather_boots.name=Reinforced Leather Boots
 
-item.studleather_helmet.name=Studded Helmet
-item.studleather_chest.name=Studded Armor
-item.studleather_legs.name=Studded Leggings
-item.studleather_boots.name=Studded Boots
+item.stud_leather_helmet.name=Studded Helmet
+item.stud_leather_chest.name=Studded Armor
+item.stud_leather_legs.name=Studded Leggings
+item.stud_leather_boots.name=Studded Boots
 
-item.scaleleather_helmet.name=Scaled Helmet
-item.scaleleather_chest.name=Scaled Armor
-item.scaleleather_legs.name=Scaled Leggings
-item.scaleleather_boots.name=Scaled Boots
+item.scale_leather_helmet.name=Scaled Helmet
+item.scale_leather_chest.name=Scaled Armor
+item.scale_leather_legs.name=Scaled Leggings
+item.scale_leather_boots.name=Scaled Boots
 
 item.padded_helmet.name=Padded Cap
 item.padded_chest.name=Gambeson
