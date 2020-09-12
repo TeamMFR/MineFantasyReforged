@@ -1,7 +1,6 @@
 package minefantasy.mfr.init;
 
 import minefantasy.mfr.item.AdvancedFuelHandlerMF;
-import minefantasy.mfr.item.ItemArtefact;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -60,26 +59,26 @@ public class OreDictListMFR {
 			}
 		}
 
-		OreDictionary.registerOre("ingot_copper", ComponentListMFR.COPPER_INGOT);
-		OreDictionary.registerOre("ingot_tin", ComponentListMFR.TIN_INGOT);
-		OreDictionary.registerOre("ingot_bronze", ComponentListMFR.BRONZE_INGOT);
-		OreDictionary.registerOre("ingot_pig_iron", ComponentListMFR.PIG_IRON_INGOT);
-		OreDictionary.registerOre("ingot_steel", ComponentListMFR.STEEL_INGOT);
-		OreDictionary.registerOre("ingot_encrusted", ComponentListMFR.ENCRUSTED_INGOT);
-		OreDictionary.registerOre("ingot_black_steel", ComponentListMFR.BLACK_STEEL_INGOT);
-		OreDictionary.registerOre("ingot_silver", ComponentListMFR.SILVER_INGOT);
-		OreDictionary.registerOre("ingot_red_steel", ComponentListMFR.RED_STEEL_INGOT);
-		OreDictionary.registerOre("ingot_blue_steel", ComponentListMFR.BLUE_STEEL_INGOT);
-		OreDictionary.registerOre("ingot_adamantium", ComponentListMFR.ADAMANTIUM_INGOT);
-		OreDictionary.registerOre("ingot_mithril", ComponentListMFR.MITHRIL_INGOT);
-		OreDictionary.registerOre("ingot_ignotumite", ComponentListMFR.IGNOTUMITE_INGOT);
-		OreDictionary.registerOre("ingot_mithium", ComponentListMFR.MITHIUM_INGOT);
-		OreDictionary.registerOre("ingot_ender", ComponentListMFR.ENDER_INGOT);
-		OreDictionary.registerOre("ingot_tungsten", ComponentListMFR.TUNGSTEN_INGOT);
-		OreDictionary.registerOre("ingot_obsidian", ComponentListMFR.OBSIDIAN_INGOT);
-		OreDictionary.registerOre("ingot_composite_alloy", ComponentListMFR.INGOT_COMPOSITE_ALLOY);
-		OreDictionary.registerOre("ingot_iron", Items.IRON_INGOT);
-		OreDictionary.registerOre("ingot_gold", Items.GOLD_INGOT);
+		OreDictionary.registerOre("copper_ingot", ComponentListMFR.COPPER_INGOT);
+		OreDictionary.registerOre("tin_ingot", ComponentListMFR.TIN_INGOT);
+		OreDictionary.registerOre("bronze_ingot", ComponentListMFR.BRONZE_INGOT);
+		OreDictionary.registerOre("pig_iron_ingot", ComponentListMFR.PIG_IRON_INGOT);
+		OreDictionary.registerOre("steel_ingot", ComponentListMFR.STEEL_INGOT);
+		OreDictionary.registerOre("encrusted_ingot", ComponentListMFR.ENCRUSTED_INGOT);
+		OreDictionary.registerOre("black_steel_ingot", ComponentListMFR.BLACK_STEEL_INGOT);
+		OreDictionary.registerOre("silver_ingot", ComponentListMFR.SILVER_INGOT);
+		OreDictionary.registerOre("red_steel_ingot", ComponentListMFR.RED_STEEL_INGOT);
+		OreDictionary.registerOre("blue_steel_ingot", ComponentListMFR.BLUE_STEEL_INGOT);
+		OreDictionary.registerOre("adamantium_ingot", ComponentListMFR.ADAMANTIUM_INGOT);
+		OreDictionary.registerOre("mithril_ingot", ComponentListMFR.MITHRIL_INGOT);
+		OreDictionary.registerOre("ignotumite_ingot", ComponentListMFR.IGNOTUMITE_INGOT);
+		OreDictionary.registerOre("mithium_ingot", ComponentListMFR.MITHIUM_INGOT);
+		OreDictionary.registerOre("ender_ingot", ComponentListMFR.ENDER_INGOT);
+		OreDictionary.registerOre("tungsten_ingot", ComponentListMFR.TUNGSTEN_INGOT);
+		OreDictionary.registerOre("obsidian_ingot", ComponentListMFR.OBSIDIAN_INGOT);
+		OreDictionary.registerOre("composite_alloy_ingot", ComponentListMFR.COMPOSITE_ALLOY_INGOT);
+		OreDictionary.registerOre("iron_ingot", Items.IRON_INGOT);
+		OreDictionary.registerOre("gold_ingot", Items.GOLD_INGOT);
 
 		String meatRaw = "raw_meat";
 		String cookedMeat = "cooked_meat";

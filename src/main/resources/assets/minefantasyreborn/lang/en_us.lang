@@ -158,22 +158,22 @@ materialtype.maxtemp.name=%1$s*C Melting Point
 material.any.name=Any
 
 # WOOD
-material.scrapwood.name=Scrap
-material.oakwood.name=Oak
-material.birchwood.name=Birch
-material.sprucewood.name=Spruce
-material.acaciawood.name=Acacia
-material.junglewood.name=Jungle
-material.refinedwood.name=Refined
-material.ironbarkwood.name=Ironbark
-material.ebonywood.name=Ebony
-material.darkoakwood.name=Dark Oak
-material.pinewood.name=Pine
-material.cherrywood.name=Cherry
-material.poplarwood.name=Poplar
-material.maplewood.name=Maple
-material.mahoewood.name=Mahoe
-material.greenheartwood.name=Green Heart
+material.scrap_wood.name=Scrap
+material.oak_wood.name=Oak
+material.birch_wood.name=Birch
+material.spruce_wood.name=Spruce
+material.acacia_wood.name=Acacia
+material.jungle_wood.name=Jungle
+material.refined_wood.name=Refined
+material.ironbark_wood.name=Ironbark
+material.ebony_wood.name=Ebony
+material.dark_oak_wood.name=Dark Oak
+material.pine_wood.name=Pine
+material.cherry_wood.name=Cherry
+material.poplar_wood.name=Poplar
+material.maple_wood.name=Maple
+material.mahoe_wood.name=Mahoe
+material.greenheart_wood.name=Green Heart
 material.palmwood.name=Palm
 material.limewood.name=Lime
 material.balsawood.name=Balsa
@@ -187,10 +187,10 @@ material.mahoganywood.name=Mahogany
 material.wengewood.name=Wenge
 material.redwoodwood.name=Redwood
 material.firwood.name=Fir
-material.purpleheartwood.name=Purple Heart
-material.silverwoodwood.name=Silverwood
-material.greatwoodwood.name=Greatwood
-material.yewwood.name=Yew
+material.purpleheart_wood.name=Purple Heart
+material.silverwood_wood.name=Silverwood
+material.greatwood_wood.name=Greatwood
+material.yew_wood.name=Yew
 
 
 
@@ -211,9 +211,9 @@ material.steel.name=Steel
 material.tungsten.name=Wolframite
 material.obsidian.name=Obsidian
 material.encrusted.name=Diamond
-material.blacksteel.name=Black Steel
-material.redsteel.name=Red Steel
-material.bluesteel.name=Blue Steel
+material.black_steel.name=Black Steel
+material.red_steel.name=Red Steel
+material.blue_steel.name=Blue Steel
 
 material.adamantium.name=Adamantium
 material.mithril.name=Mithril
@@ -230,16 +230,16 @@ material.bismuth.name=Bismuth
 material.bismuthbronze.name=Bismuth Bronze
 material.nickel.name=Nickel
 material.titanium.name=Titanium
-material.stainlesssteel.name=Stainless Steel
+material.stainless_steel.name=Stainless Steel
 
 # ALLOY
-material.compositealloy.name=Composite Alloyed
+material.composite_alloy.name=Composite Alloyed
 
 # MOD
 material.thaumium.name=Thaumium
 material.void.name=Void
 material.manasteel.name=Manasteel
-material.elvenelementium.name=Elementium
+material.elven_elementium.name=Elementium
 material.terrasteel.name=Terrasteel
 
 # ITEM STATS
@@ -345,7 +345,7 @@ item.pure_gold_ingot_ingot.name=Pure Gold Ingot
 item.composite_alloy_ingot.name=Composite Alloyed Ingot
 item.black_steel_weak_ingot.name=Unrefined Black Steel
 item.blue_steel_weak_ingot.name=Unrefined Blue Steel
-item.red_steel_weak_ingot.name=Unrefined Red Steel
+item.red_steel_weak_ingot.name=Unrefined Red Steelwith
 
 item.red_steel_ingot.name=Red Steel Ingot
 item.black_steel_ingot.name=Black Steel Ingot
@@ -385,9 +385,9 @@ item.jug_milk.name=Milk Jug
 tile.salvage_basic.name=Basic Salvage Station
 tile.salvage_advanced.name=Advanced Salvage Station
 
-tile.repair_basic.name=Basic Repair Kit
-tile.repair_advanced.name=Advanced Repair Kit
-tile.repair_ornate.name=Ornate Repair Kit
+tile.repair_kit_basic.name=Basic Repair Kit
+tile.repair_kit_advanced.name=Advanced Repair Kit
+tile.repair_kit_ornate.name=Ornate Repair Kit
 
 item.rawhide_small.name=Small Hide
 item.rawhide_medium.name=Medium Hide
@@ -529,27 +529,27 @@ crosspart.mechanism.cross_arms_advanced=Advanced
 crosspart.mod.cross_ammo=Repeating
 crosspart.mod.cross_scope=Scoped
 
-item.cross_stock_wood.name=Crossbow Stock
-item.cross_handle_wood.name=Crossbow Handle
-item.cross_stock_iron.name=Advanced Crossbow Stock
-item.cross_arms_light.name=Light Crossbow Arms
-item.cross_arms_basic.name=Crossbow Arms
-item.cross_arms_heavy.name=Heavy Crossbow Arms
-item.cross_arms_advanced.name=Advanced Crossbow Arms
-item.cross_ammo.name=Repeating Crossbow Mechanism
-item.cross_scope.name=Crossbow Scope
-item.cross_bayonet.name=Crossbow Bayonet
+item.crossbow_stock_wood.name=Crossbow Stock
+item.crossbow_handle_wood.name=Crossbow Handle
+item.crossbow_stock_iron.name=Advanced Crossbow Stock
+item.crossbow_arms_light.name=Light Crossbow Arms
+item.crossbow_arms_basic.name=Crossbow Arms
+item.crossbow_arms_heavy.name=Heavy Crossbow Arms
+item.crossbow_arms_advanced.name=Advanced Crossbow Arms
+item.crossbow_ammo.name=Repeating Crossbow Mechanism
+item.crossbow_scope.name=Crossbow Scope
+item.crossbow_bayonet.name=Crossbow Bayonet
 
-item.cross_stock_wood.desc=Standard.
-item.cross_handle_wood.desc=Easier reload, more recoil and spread.
-item.cross_stock_iron.desc=Dampens Recoil.
-item.cross_arms_light.desc=Less power and recoil, faster.
-item.cross_arms_basic.desc=Standard.
-item.cross_arms_heavy.desc=More power, slow with more recoil.
-item.cross_arms_advanced.desc=More accuracy and power, but slow with high recoil.
-item.cross_ammo.desc=6x shot capacity, increased spread.
-item.cross_scope.desc=Allows zoom function.
-item.cross_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
+item.crossbow_stock_wood.desc=Standard.
+item.crossbow_handle_wood.desc=Easier reload, more recoil and spread.
+item.crossbow_stock_iron.desc=Dampens Recoil.
+item.crossbow_arms_light.desc=Less power and recoil, faster.
+item.crossbow_arms_basic.desc=Standard.
+item.crossbow_arms_heavy.desc=More power, slow with more recoil.
+item.crossbow_arms_advanced.desc=More accuracy and power, but slow with high recoil.
+item.crossbow_ammo.desc=6x shot capacity, increased spread.
+item.crossbow_scope.desc=Allows zoom function.
+item.crossbow_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
 
 # ORES
 
@@ -597,11 +597,11 @@ tile.slate_pavement_stair.name=Slate Pavement Stairs
 tile.framed_glass.name=Framed Glass
 tile.framed_pane.name=Framed Glass Pane
 tile.firebricks.name=Fire Bricks
-tile.firebrick_stair.name=Fire Brick Steps
+tile.firebrick_stairs.name=Fire Brick Steps
 tile.cobble_pavement.name=Cobblestone Pavement
-tile.cobble_pavement_stair.name=Cobblestone Pavement Steps
+tile.cobble_pavement_stairs.name=Cobblestone Pavement Steps
 tile.cobble_brick.name=Cobblestone Bricks
-tile.cobble_brick_stair.name=Cobblestone Brick Steps
+tile.cobble_brick_stairs.name=Cobblestone Brick Steps
 tile.clayWall.name=Clay Wall Panel
 tile.ironbark_log.name=Ironbark Log
 tile.ebony_log.name=Ebony Log
@@ -615,14 +615,14 @@ tile.yew_sapling.name=Yew Sapling
 tile.ironbark_planks.name=Ironbark Planks
 tile.ebony_planks.name=Ebony Planks
 tile.yew_planks.name=Yew Planks
-tile.ironbark_stair.name=Ironbark Stairs
-tile.ebony_stair.name=Ebony Stairs
-tile.yew_stair.name=Yew Stairs
+tile.ironbark_stairs.name=Ironbark Stairs
+tile.ebony_stairs.name=Ebony Stairs
+tile.yew_stairs.name=Yew Stairs
 
 tile.nailed_planks.name=Nailed Planks
 tile.refined_planks.name=Refined Planks
-tile.nailed_planks_stair.name=Nailed Plank Stairs
-tile.refined_planks_stair.name=Refined Plank Stairs
+tile.nailed_planks_stairs.name=Nailed Plank Stairs
+tile.refined_planks_stairs.name=Refined Plank Stairs
 
 tile.reinforced_stone_base.name=Reinforced Stone
 tile.reinforced_stone_engraved.name=Engraved Reinforced Stone
@@ -632,8 +632,8 @@ tile.reinforced_stone_bricks_cracked.name=Worn Reinforced Stone Bricks
 tile.reinforced_stone_bricks_mossy.name=Mossy Reinforced Stone Bricks
 
 tile.reinforced_stone_framed.name=Framed Reinforced Stone
-tile.reinforced_stone_stair.name=Reinforced Stone Steps
-tile.reinforced_stone_brick_stair.name=Reinforced Stone Brick Steps
+tile.reinforced_stone_stairs.name=Reinforced Stone Steps
+tile.reinforced_stone_brick_stairs.name=Reinforced Stone Brick Steps
 
 tile.bronze_bars.name=Bronze Bars
 tile.iron_bars.name=Iron Bars
@@ -680,18 +680,18 @@ tile.tanner.name=Shabby Tanning Rack
 tile.tanner_strong.name=Tanning Rack
 tile.tanner_metal.name=Advanced Tanning Rack
 tile.bomb_bench.name=Bomb Crafting Table
-tile.crossbowBench.name=Crossbow Assembly Table
+tile.crossbow_bench.name=Crossbow Assembly Table
 tile.bomb_press.name=Bomb Press
 tile.carpenter_bench.name=Carpenter Bench
-tile.research_station.name=Research Station
+tile.research_bench.name=Research Bench
 tile.quern.name=Quern
-tile.anvilStone.name=Stone Anvil
-tile.anvilBronze.name=Bronze Anvil
-tile.anvilIron.name=Iron Anvil
-tile.anvilSteel.name=Steel Anvil
-tile.anvilBlackSteel.name=Black Steel Anvil
-tile.anvilRedSteel.name=Red Steel Anvil
-tile.anvilBlueSteel.name= Blue Steel Anvil
+tile.anvil_stone.name=Stone Anvil
+tile.anvil_bronze.name=Bronze Anvil
+tile.anvil_iron.name=Iron Anvil
+tile.anvil_steel.name=Steel Anvil
+tile.anvil_black_steel.name=_black _steel _anvil
+tile.anvil_red_steel.name=Red Steel Anvil
+tile.anvil_blue_steel.name= Blue Steel Anvil
 tile.furnace_stone.name=Furnace
 tile.furnace_heater.name=Furnace Heater
 tile.blastfurnchamber.name=Blast Furnace Chamber

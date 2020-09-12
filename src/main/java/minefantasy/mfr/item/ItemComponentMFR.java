@@ -174,7 +174,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         add(items, ComponentListMFR.BRONZE_GEARS);
         add(items, ComponentListMFR.TUNGSTEN_GEARS);
         add(items, ComponentListMFR.COGWORK_SHAFT);
-        add(items, ComponentListMFR.INGOT_COMPOSITE_ALLOY);
+        add(items, ComponentListMFR.COMPOSITE_ALLOY_INGOT);
 
         add(items, ComponentListMFR.CROSSBOW_HANDLE_WOOD);
         add(items, ComponentListMFR.CROSSBOW_STOCK_WOOD);

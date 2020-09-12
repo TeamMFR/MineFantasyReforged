@@ -293,7 +293,7 @@ public class ForgingRecipes {
         Salvage.addSalvage(ComponentListMFR.TUNGSTEN_GEARS, tungstenHunk, tungstenHunk, tungstenHunk, tungstenHunk, ComponentListMFR.BRONZE_GEARS);
 
         Salvage.addSalvage(ComponentListMFR.bar("CompositeAlloy"), copper, steel, tungstenHunk, new ItemStack(ComponentListMFR.RIVET, 2));
-        Salvage.addSalvage(ComponentListMFR.INGOT_COMPOSITE_ALLOY, copper, steel, tungstenHunk, new ItemStack(ComponentListMFR.RIVET, 2));
+        Salvage.addSalvage(ComponentListMFR.COMPOSITE_ALLOY_INGOT, copper, steel, tungstenHunk, new ItemStack(ComponentListMFR.RIVET, 2));
 
         Salvage.addSalvage(ComponentListMFR.BOMB_CASING_IRON, ironHunk, ironHunk);
         Salvage.addSalvage(ComponentListMFR.MINE_CASING_IRON, ironHunk, ironHunk, ComponentListMFR.RIVET, iron);

@@ -1,6 +1,6 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/copper_ingot"
+        "layer0": "minefantasyreborn:items/tin_ingot"
     }
 }

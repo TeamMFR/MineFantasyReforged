@@ -67,7 +67,7 @@ public class ComponentListMFR {
 	public static ItemComponentMFR TUNGSTEN_INGOT = Utils.nullValue();
 	public static ItemComponentMFR OBSIDIAN_INGOT = Utils.nullValue();
 	
-	public static Item INGOT_COMPOSITE_ALLOY = Utils.nullValue();
+	public static Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 
 	public static ItemComponentMFR PLANK = Utils.nullValue();
 	public static Item VINE = Utils.nullValue();
@@ -231,7 +231,7 @@ public class ComponentListMFR {
 		TUNGSTEN_INGOT = new ItemComponentMFR("tungsten_ingot", BaseMaterialMFR.getMaterial("tungsten").rarity);
 		OBSIDIAN_INGOT = new ItemComponentMFR("obsidian_ingot", BaseMaterialMFR.getMaterial("obsidian").rarity);
 
-		INGOT_COMPOSITE_ALLOY = new ItemComponentMFR("ingot_composite_alloy", 1);
+		COMPOSITE_ALLOY_INGOT = new ItemComponentMFR("composite_alloy_ingot", 1);
 
 		PLANK = new ItemComponentMFR("plank").setCustom(1, "wood").setStoragePlacement("plank","plank");
 		VINE = new ItemComponentMFR("vine", -1);
@@ -399,7 +399,7 @@ public class ComponentListMFR {
 		registry.register(TUNGSTEN_INGOT);
 		registry.register(OBSIDIAN_INGOT);
 
-		registry.register(INGOT_COMPOSITE_ALLOY);
+		registry.register(COMPOSITE_ALLOY_INGOT);
 
 		registry.register(PLANK);
 		registry.register(VINE);

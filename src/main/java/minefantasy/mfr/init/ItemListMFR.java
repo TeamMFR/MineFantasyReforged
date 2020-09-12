@@ -140,7 +140,7 @@
 //	public static final ItemComponentMFR TUNGSTEN_INGOT = Utils.nullValue();
 //	public static final ItemComponentMFR OBSIDIAN_INGOT = Utils.nullValue();
 //
-//	public static final Item INGOT_COMPOSITE_ALLOY = Utils.nullValue();
+//	public static final Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 //
 //	public static final ItemComponentMFR PLANK = Utils.nullValue();
 //	public static final Item VINE = Utils.nullValue();

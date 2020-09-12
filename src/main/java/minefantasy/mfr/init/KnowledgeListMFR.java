@@ -353,7 +353,7 @@ public class KnowledgeListMFR {
 
         cogArmour = (new InformationBase("cogArmour", 8, -3, 2, BlockListMFR.COGWORK_HELM, tungsten)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 60);
-        compPlate = (new InformationBase("compPlate", 10, -3, 1, ComponentListMFR.INGOT_COMPOSITE_ALLOY, tungsten))
+        compPlate = (new InformationBase("compPlate", 10, -3, 1, ComponentListMFR.COMPOSITE_ALLOY_INGOT, tungsten))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 50)
                 .addSkill(SkillList.artisanry, 40);
 
