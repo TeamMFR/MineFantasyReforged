@@ -118,6 +118,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName": "iron_bar",
                     "name": "minefantasyreborn:bar",
                     "functions": [
                         {
@@ -136,6 +137,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName": "gold_bar",
                     "name": "minefantasyreborn:bar",
                     "functions": [
                         {
@@ -154,6 +156,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName": "silver_bar",
                     "name": "minefantasyreborn:bar",
                     "functions": [
                         {

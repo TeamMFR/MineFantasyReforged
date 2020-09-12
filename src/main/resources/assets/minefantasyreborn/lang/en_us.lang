@@ -780,7 +780,7 @@ item.padded_chest.name=Gambeson
 item.padded_legs.name=Padded Leggings
 item.padded_boots.name=Padded Boots
 
-item.leatherapron.name=Leather Blacksmith Attire
+item.leather_apron.name=Leather Blacksmith Attire
 
 # WOOD STUFF
 item.malletWood.name=Wooden Mallet

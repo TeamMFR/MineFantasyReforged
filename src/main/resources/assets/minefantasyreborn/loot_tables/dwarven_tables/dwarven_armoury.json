@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:repair_basic",
+                    "name": "minefantasyreborn:repair_kit_basic",
                     "functions": [
                         {
                             "function": "set_count",
@@ -20,7 +20,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:repair_advanced",
+                    "name": "minefantasyreborn:repair_kit_advanced",
                     "functions": [
                         {
                             "function": "set_count",

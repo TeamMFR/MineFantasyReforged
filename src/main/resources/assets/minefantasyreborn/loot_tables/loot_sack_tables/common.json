@@ -76,7 +76,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:repair_basic",
+                    "name": "minefantasyreborn:repair_kit_basic",
                     "functions": [
                         {
                             "function": "set_count",
@@ -104,6 +104,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName:": "oak_wood_plank",
                     "name": "minefantasyreborn:plank",
                     "functions": [
                         {
@@ -168,6 +169,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName:": "refined_wood_plank",
                     "name": "minefantasyreborn:plank",
                     "functions": [
                         {

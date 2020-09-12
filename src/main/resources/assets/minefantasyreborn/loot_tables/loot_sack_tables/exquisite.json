@@ -76,7 +76,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:repair_ornate",
+                    "name": "minefantasyreborn:repair_kit_ornate",
                     "functions": [
                         {
                             "function": "set_count",

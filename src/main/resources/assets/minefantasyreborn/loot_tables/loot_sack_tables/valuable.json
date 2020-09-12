@@ -76,7 +76,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:repair_advanced",
+                    "name": "minefantasyreborn:repair_kit_advanced",
                     "functions": [
                         {
                             "function": "set_count",
@@ -122,6 +122,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName": "gold_bar",
                     "name": "minefantasyreborn:bar",
                     "functions": [
                         {
@@ -140,6 +141,7 @@
                 },
                 {
                     "type": "item",
+                    "entryName": "silver_bar",
                     "name": "minefantasyreborn:bar",
                     "functions": [
                         {

@@ -34,7 +34,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:leatherapron",
+                    "name": "minefantasyreborn:leather_apron",
                     "functions": [
                         {
                             "function": "set_count",
