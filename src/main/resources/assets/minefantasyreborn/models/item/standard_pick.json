@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_pick"
+        "layer0": "minefantasyreborn:items/standard_pick",
+        "layer1": "minefantasyreborn:items/standard_pick_haft",
+        "layer2": "minefantasyreborn:items/standard_pick_detail"
     }
 }

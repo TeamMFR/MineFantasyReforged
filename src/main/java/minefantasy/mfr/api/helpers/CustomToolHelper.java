@@ -116,9 +116,9 @@ public class CustomToolHelper {
     /**
      * Gets the colour for a layer
      *
-     * @param base is default colour 0 is base 1 is haft 2 is detail
+     * @param layer 0 is base, haft is 1, 2 is detail
      */
-    public static int getColourFromItemStack(ItemStack item, int layer, int base) {
+    public static int getColourFromItemStack(ItemStack item, int layer) {
         if (layer == 0) {
             CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
             if (material != null) {
@@ -131,7 +131,7 @@ public class CustomToolHelper {
                 return material.getColourInt();
             }
         }
-        return base;
+        return 0;
     }
 
     public static float getWeightModifier(ItemStack item, float base) {

@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_shears"
+        "layer0": "minefantasyreborn:items/standard_shears",
+        "layer2": "minefantasyreborn:items/standard_shears_detail"
     }
 }

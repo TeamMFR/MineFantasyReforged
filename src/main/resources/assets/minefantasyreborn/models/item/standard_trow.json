@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_trow"
+        "layer0": "minefantasyreborn:items/standard_trow",
+        "layer1": "minefantasyreborn:items/standard_trow_haft",
+        "layer2": "minefantasyreborn:items/standard_trow_detail"
     }
 }

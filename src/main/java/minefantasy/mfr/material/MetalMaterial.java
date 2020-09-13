@@ -37,7 +37,7 @@ public class MetalMaterial extends CustomMaterial {
     }
 
     public static CustomMaterial getOrAddMetal(String name, int tier, float hardness, float durability,
-                                               float flexibility, float sharpness, float resistance, float density, int red, int green, int blue) {
+            float flexibility, float sharpness, float resistance, float density, int red, int green, int blue) {
         if (getMaterial(name) != null) {
             return CustomMaterial.getMaterial(name);
         }

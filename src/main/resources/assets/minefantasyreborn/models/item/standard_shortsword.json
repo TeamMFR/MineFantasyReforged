@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_shortsword"
+        "layer0": "minefantasyreborn:items/standard_shortsword",
+        "layer1": "minefantasyreborn:items/standard_shortsword_haft",
+        "layer2": "minefantasyreborn:items/standard_shortsword_detail"
     }
 }

@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_hammer"
+        "layer0": "minefantasyreborn:items/standard_hammer",
+        "layer1": "minefantasyreborn:items/standard_hammer_haft",
+        "layer2": "minefantasyreborn:items/standard_hammer_detail"
     }
 }

@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_mace"
+        "layer0": "minefantasyreborn:items/standard_mace",
+        "layer1": "minefantasyreborn:items/standard_mace_haft",
+        "layer2": "minefantasyreborn:items/standard_mace_detail"
     }
 }
