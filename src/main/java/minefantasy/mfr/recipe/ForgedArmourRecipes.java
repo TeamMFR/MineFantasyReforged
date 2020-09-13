@@ -4,7 +4,7 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.init.ArmourListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
@@ -26,10 +26,10 @@ public class ForgedArmourRecipes {
     }
 
     private static void assembleChainmail() {
-        Item helm = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 0);
-        Item chest = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 1);
-        Item legs = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 2);
-        Item boots = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 3);
+        Item helm = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 0);
+        Item chest = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 1);
+        Item legs = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 2);
+        Item boots = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 3);
 
         Item mail = ComponentListMFR.CHAIN_MESH;
         Item rivet = ComponentListMFR.RIVET;
@@ -50,10 +50,10 @@ public class ForgedArmourRecipes {
     }
 
     private static void assembleScalemail() {
-        Item helm = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 0);
-        Item chest = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 1);
-        Item legs = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 2);
-        Item boots = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 3);
+        Item helm = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 0);
+        Item chest = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 1);
+        Item legs = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 2);
+        Item boots = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 3);
 
         ItemStack mail = new ItemStack(ComponentListMFR.SCALE_MESH);
         Item rivet = ComponentListMFR.RIVET;
@@ -73,10 +73,10 @@ public class ForgedArmourRecipes {
     }
 
     private static void assembleSplintmail() {
-        Item helm = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 0);
-        Item chest = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 1);
-        Item legs = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 2);
-        Item boots = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 3);
+        Item helm = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 0);
+        Item chest = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 1);
+        Item legs = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 2);
+        Item boots = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 3);
 
         ItemStack mail = new ItemStack(ComponentListMFR.SPLINT_MESH);
         Item rivet = ComponentListMFR.RIVET;
@@ -96,10 +96,10 @@ public class ForgedArmourRecipes {
     }
 
     private static void assembleFieldplate() {
-        Item helm = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 0);
-        Item chest = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 1);
-        Item legs = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 2);
-        Item boots = ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 3);
+        Item helm = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 0);
+        Item chest = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 1);
+        Item legs = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 2);
+        Item boots = LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 3);
 
         ItemStack plate = new ItemStack(ComponentListMFR.PLATE);
         Item rivet = ComponentListMFR.RIVET;

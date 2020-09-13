@@ -1,12 +1,13 @@
 package minefantasy.mfr.item.armour;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.init.ArmourListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
@@ -61,7 +62,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
         if (source.isFireDamage() && this.getFireResistance(stack, source) > 100F) {
             return;
         }
-        if (ArmourListMFR.isUnbreakable(baseMaterial, entity)) {
+        if (LeatherArmourListMFR.isUnbreakable(baseMaterial, entity)) {
             return;
         }
         initArmourDamage(entity, stack, damage);
@@ -129,11 +130,11 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
         if (!isInCreativeTab(tab)) {
             return;
         }
-        if (this != ArmourListMFR.LEATHER[0]) {
+        if (this != LeatherArmourListMFR.LEATHER[0]) {
             return;
         }
-        items.add(new ItemStack(ArmourListMFR.LEATHER_APRON));
-        addSet(items, ArmourListMFR.LEATHER);
+        items.add(new ItemStack(LeatherArmourListMFR.LEATHER_APRON));
+        addSet(items, LeatherArmourListMFR.LEATHER);
     }
 
     private void addSet(List list, Item[] items) {
@@ -352,7 +353,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
     }
 
     public String getArmourTextureName(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        String tex = "minefantasy2:textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
+        String tex = MineFantasyReborn.MOD_ID + ":textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
         if (type == null && canColour())// bottom layer
         {
             return tex + "_cloth";

@@ -59,6 +59,14 @@ dependencies {
 
 }
 
+
+// disabled for now, this prints all deprecated warnings to the console so that we can get rid of them eventually
+//allprojects {
+//    tasks.withType(JavaCompile) {
+//        options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+//    }
+//}
+
 processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version

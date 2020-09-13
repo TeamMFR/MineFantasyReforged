@@ -1,5 +1,6 @@
 package minefantasy.mfr.item.armour;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.material.BaseMaterialMFR;
@@ -24,7 +25,7 @@ public class ItemClothing extends ItemArmourMFR {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        String tex = "minefantasy2:textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
+        String tex = MineFantasyReborn.MOD_ID + "/models/armour/" + design.getName().toLowerCase() + "/" + texture;
         if (type == null && canColour())// bottom layer
         {
             return tex + "_cloth.png";

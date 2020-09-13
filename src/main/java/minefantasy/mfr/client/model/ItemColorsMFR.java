@@ -2,6 +2,7 @@ package minefantasy.mfr.client.model;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.OrnateStyle;
@@ -103,6 +104,8 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_WARAXE);
 		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_WARHAMMER);
 
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_BOW);
+
 		// Ornate tools
 		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_AXE);
 		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_HAMMER);
@@ -136,6 +139,74 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SWORD);
 		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_WARAXE);
 		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_WARHAMMER);
+
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_BOW);
+
+
+		/// ARMOUR ITEMS
+
+		// Standard armour
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SCALE_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_CHAIN_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_SPLINT_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColor,  CustomArmourListMFR.STANDARD_PLATE_BOOTS);
+
+		// Ornate armour
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SCALE_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_CHAIN_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_SPLINT_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColor, OrnateStyle.ORNATE_PLATE_BOOTS);
+
+		// Dragonforge armour
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SCALE_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_CHAIN_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_SPLINT_BOOTS);
+
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColor, DragonforgedStyle.DRAGONFORGED_PLATE_BOOTS);
 	}
 
 }

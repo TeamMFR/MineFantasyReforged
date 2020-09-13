@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/padded_boots"
+        "layer0": "minefantasyreborn:items/padded_boots",
+        "layer1": "minefantasyreborn:items/padded_boots_overlay"
     }
 }

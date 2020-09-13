@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreborn:items/strong_leather_helmet",
+        "layer1": "minefantasyreborn:items/strong_leather_helmet_overlay"
+    }
+}

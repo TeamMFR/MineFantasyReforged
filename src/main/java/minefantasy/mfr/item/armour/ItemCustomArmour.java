@@ -86,7 +86,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
     @Override
     public String getArmourTextureName(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        String tex = "minefantasy2:textures/models/armour/custom/" + specialDesign + "/" + texture;
+        String tex = MineFantasyReborn.MOD_ID + ":textures/models/armour/custom/" + specialDesign + "/" + texture;
         if (type == null)// bottom layer
         {
             return tex;// COLOUR LAYER

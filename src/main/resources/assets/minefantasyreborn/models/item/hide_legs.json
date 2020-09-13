@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/hide_legs"
+        "layer0": "minefantasyreborn:items/hide_legs",
+        "layer1": "minefantasyreborn:items/hide_legs_overlay"
     }
 }

@@ -1,7 +1,7 @@
 package minefantasy.mfr.recipe;
 
 
-import minefantasy.mfr.init.ArmourListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
@@ -125,89 +125,89 @@ public class CarpenterRecipes {
                         ToolListMFR.BANDAGE_WOOL});
 
         KnowledgeListMFR.roughHelmetR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 0), "craftArmourBasic", sewing, "needle", -1, 25,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 0), "craftArmourBasic", sewing, "needle", -1, 25,
                 new Object[]{"TLT", "S S", 'T', ComponentListMFR.THREAD, 'S', ComponentListMFR.LEATHER_STRIP, 'L',
                         Items.LEATHER});
         KnowledgeListMFR.roughChestR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 1), "craftArmourBasic", sewing, "needle", -1, 40,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 1), "craftArmourBasic", sewing, "needle", -1, 40,
                 new Object[]{"S S", "LLL", "TLT", 'T', ComponentListMFR.THREAD, 'S', ComponentListMFR.LEATHER_STRIP,
                         'L', Items.LEATHER});
         KnowledgeListMFR.roughLegsR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 2), "craftArmourBasic", sewing, "needle", -1, 35,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 2), "craftArmourBasic", sewing, "needle", -1, 35,
                 new Object[]{"TLT", "L L", "S S", 'T', ComponentListMFR.THREAD, 'S', ComponentListMFR.LEATHER_STRIP,
                         'L', Items.LEATHER});
         KnowledgeListMFR.roughBootsR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 3), "craftArmourBasic", sewing, "needle", -1, 20,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 3), "craftArmourBasic", sewing, "needle", -1, 20,
                 new Object[]{"T T", "S S", 'T', ComponentListMFR.THREAD, 'S', ComponentListMFR.LEATHER_STRIP,});
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 0),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 0),
                 new ItemStack(ComponentListMFR.THREAD, 2), new ItemStack(ComponentListMFR.LEATHER_STRIP, 2),
                 Items.LEATHER);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 1),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 1),
                 new ItemStack(ComponentListMFR.THREAD, 4), new ItemStack(ComponentListMFR.LEATHER_STRIP, 2),
                 new ItemStack(Items.LEATHER, 4));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 2),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 2),
                 new ItemStack(ComponentListMFR.THREAD, 4), new ItemStack(ComponentListMFR.LEATHER_STRIP, 2),
                 new ItemStack(Items.LEATHER, 3));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 3),
                 new ItemStack(ComponentListMFR.THREAD, 4), new ItemStack(ComponentListMFR.LEATHER_STRIP, 2));
 
         KnowledgeListMFR.reHelmetR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 0), "craftArmourLight", sewing, "needle", 1, 50,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 0), "craftArmourLight", sewing, "needle", 1, 50,
                 new Object[]{"TTT", "UPU", 'T', ComponentListMFR.THREAD, 'P',
-                        ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 0), 'U', Items.LEATHER});
+                        LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 0), 'U', Items.LEATHER});
         KnowledgeListMFR.reChestR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 1), "craftArmourLight", sewing, "needle", 1, 80,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 1), "craftArmourLight", sewing, "needle", 1, 80,
                 new Object[]{"TTT", "UPU", 'T', ComponentListMFR.THREAD, 'P',
-                        ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 1), 'U', Items.LEATHER});
+                        LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 1), 'U', Items.LEATHER});
         KnowledgeListMFR.reLegsR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 2), "craftArmourLight", sewing, "needle", 1, 70,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 2), "craftArmourLight", sewing, "needle", 1, 70,
                 new Object[]{"TTT", "UPU", 'T', ComponentListMFR.THREAD, 'P',
-                        ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 2), 'U', Items.LEATHER});
+                        LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 2), 'U', Items.LEATHER});
         KnowledgeListMFR.reBootsR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 3), "craftArmourLight", sewing, "needle", 1, 40,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 3), "craftArmourLight", sewing, "needle", 1, 40,
                 new Object[]{"TTT", "UPU", 'T', ComponentListMFR.THREAD, 'P',
-                        ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 3), 'U', Items.LEATHER});
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 0),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 0), new ItemStack(ComponentListMFR.THREAD, 3),
+                        LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 3), 'U', Items.LEATHER});
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 0),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 0), new ItemStack(ComponentListMFR.THREAD, 3),
                 new ItemStack(Items.LEATHER, 2));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 1),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 1), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 1),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 1), new ItemStack(ComponentListMFR.THREAD, 3),
                 new ItemStack(Items.LEATHER, 2));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 2),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 2), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 2),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 2), new ItemStack(ComponentListMFR.THREAD, 3),
                 new ItemStack(Items.LEATHER, 2));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 3),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 3), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 3),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 3), new ItemStack(ComponentListMFR.THREAD, 3),
                 new ItemStack(Items.LEATHER, 2));
 
         // PADDING
         KnowledgeListMFR.padding[0] = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 4, 0), "craftArmourLight", sewing, "needle", 1, 50,
-                new Object[]{" W ", "SPS", " S ", 'P', ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 0), 'W',
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 4, 0), "craftArmourLight", sewing, "needle", 1, 50,
+                new Object[]{" W ", "SPS", " S ", 'P', LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 0), 'W',
                         Blocks.WOOL, 'S', ComponentListMFR.THREAD,});
         KnowledgeListMFR.padding[1] = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 4, 1), "craftArmourLight", sewing, "needle", 1, 80,
-                new Object[]{" W ", "SPS", " S ", 'P', ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 1), 'W',
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 4, 1), "craftArmourLight", sewing, "needle", 1, 80,
+                new Object[]{" W ", "SPS", " S ", 'P', LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 1), 'W',
                         Blocks.WOOL, 'S', ComponentListMFR.THREAD,});
         KnowledgeListMFR.padding[2] = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 4, 2), "craftArmourLight", sewing, "needle", 1, 70,
-                new Object[]{" W ", "SPS", " S ", 'P', ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 2), 'W',
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 4, 2), "craftArmourLight", sewing, "needle", 1, 70,
+                new Object[]{" W ", "SPS", " S ", 'P', LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 2), 'W',
                         Blocks.WOOL, 'S', ComponentListMFR.THREAD,});
         KnowledgeListMFR.padding[3] = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 4, 3), "craftArmourLight", sewing, "needle", 1, 40,
-                new Object[]{" W ", "SPS", " S ", 'P', ArmourListMFR.armour(ArmourListMFR.LEATHER, 1, 3), 'W',
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 4, 3), "craftArmourLight", sewing, "needle", 1, 40,
+                new Object[]{" W ", "SPS", " S ", 'P', LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 1, 3), 'W',
                         Blocks.WOOL, 'S', ComponentListMFR.THREAD,});
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 0),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 0), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 0),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 0), new ItemStack(ComponentListMFR.THREAD, 3),
                 Blocks.WOOL);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 1),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 1), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 1),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 1), new ItemStack(ComponentListMFR.THREAD, 3),
                 Blocks.WOOL);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 2),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 2), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 2),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 2), new ItemStack(ComponentListMFR.THREAD, 3),
                 Blocks.WOOL);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 4, 3),
-                ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 1, 3), new ItemStack(ComponentListMFR.THREAD, 3),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 4, 3),
+                LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 3), new ItemStack(ComponentListMFR.THREAD, 3),
                 Blocks.WOOL);
 
         KnowledgeListMFR.repairBasicR = MineFantasyRebornAPI.addCarpenterRecipe(artisanry,
@@ -709,29 +709,29 @@ public class CarpenterRecipes {
         Salvage.addSalvage(BlockListMFR.THATCH_STAIR, new ItemStack(Blocks.TALLGRASS, 3, 1));
         Salvage.addSalvage(BlockListMFR.THATCH, new ItemStack(Blocks.TALLGRASS, 4, 1));
 
-        KnowledgeListMFR.apronRecipe = MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(ArmourListMFR.LEATHER_APRON),
+        KnowledgeListMFR.apronRecipe = MineFantasyRebornAPI.addCarpenterRecipe(null, new ItemStack(LeatherArmourListMFR.LEATHER_APRON),
                 "", sewing, "hands", -1, 1, new Object[]{"LCL", " L ", 'L', Items.LEATHER, 'C', Items.COAL,});
-        Salvage.addSalvage(ArmourListMFR.LEATHER_APRON, new ItemStack(Items.LEATHER, 3), Items.COAL);
+        Salvage.addSalvage(LeatherArmourListMFR.LEATHER_APRON, new ItemStack(Items.LEATHER, 3), Items.COAL);
 
         KnowledgeListMFR.hideHelmR = MineFantasyRebornAPI.addCarpenterRecipe(null,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 0, 0), "", sewing, "hands", -1, 1,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 0), "", sewing, "hands", -1, 1,
                 new Object[]{"H", "C", "H", 'H', ComponentListMFR.HIDE_SMALL, 'C', Blocks.WOOL,});
         KnowledgeListMFR.hideChestR = MineFantasyRebornAPI.addCarpenterRecipe(null,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 0, 1), "", sewing, "hands", -1, 1,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 1), "", sewing, "hands", -1, 1,
                 new Object[]{"H", "C", 'H', ComponentListMFR.HIDE_LARGE, 'C', Blocks.WOOL,});
         KnowledgeListMFR.hideLegsR = MineFantasyRebornAPI.addCarpenterRecipe(null,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 0, 2), "", sewing, "hands", -1, 1,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 2), "", sewing, "hands", -1, 1,
                 new Object[]{"H", "C", 'H', ComponentListMFR.HIDE_MEDIUM, 'C', Blocks.WOOL,});
         KnowledgeListMFR.hideBootsR = MineFantasyRebornAPI.addCarpenterRecipe(null,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 0, 3), "", sewing, "hands", -1, 1,
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 3), "", sewing, "hands", -1, 1,
                 new Object[]{"H", "C", 'H', ComponentListMFR.HIDE_SMALL, 'C', Blocks.WOOL,});
 
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 0, 0),
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 0, 0),
                 new ItemStack(ComponentListMFR.HIDE_SMALL, 2), Blocks.WOOL);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 0, 1), ComponentListMFR.HIDE_LARGE, Blocks.WOOL);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 0, 2), ComponentListMFR.HIDE_MEDIUM,
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 0, 1), ComponentListMFR.HIDE_LARGE, Blocks.WOOL);
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 0, 2), ComponentListMFR.HIDE_MEDIUM,
                 Blocks.WOOL);
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 0, 3), ComponentListMFR.HIDE_SMALL, Blocks.WOOL);
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 0, 3), ComponentListMFR.HIDE_SMALL, Blocks.WOOL);
     }
 
     public static void addCrossbows() {

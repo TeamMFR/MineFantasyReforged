@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreborn:items/rough_leather_chest",
+        "layer1": "minefantasyreborn:items/rough_leather_chest_overlay"
+    }
+}

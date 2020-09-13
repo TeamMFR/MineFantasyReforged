@@ -18,7 +18,7 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.init.ArmourListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.ArtefactListMFR;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
@@ -120,7 +120,7 @@ public class MineFantasyReborn {
 		ToolListMFR.init();
 		CustomToolListMFR.init();
 		CustomArmourListMFR.init();
-		ArmourListMFR.init();
+		LeatherArmourListMFR.init();
 		FoodListMFR.init();
 		DragonforgedStyle.init();
 		OrnateStyle.init();

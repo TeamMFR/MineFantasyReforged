@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_splint_boots"
+        "layer0": "minefantasyreborn:items/ornate_splint_boots",
+        "layer1": "minefantasyreborn:items/ornate_splint_boots_detail"
     }
 }

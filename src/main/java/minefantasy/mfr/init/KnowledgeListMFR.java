@@ -167,7 +167,7 @@ public class KnowledgeListMFR {
         stamina = (new InformationBase("stamina", -3, 1, 0, Items.FEATHER, craftCrafters)).registerStat().setUnlocked();
         combat = (new InformationBase("combat", -5, 2, 0, Items.IRON_SWORD, stamina)).registerStat().setUnlocked();
         craftArmourBasic = (new InformationBase("craftArmourBasic", -5, 0, 5,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 0, 1), combat)).registerStat().setUnlocked();
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 1), combat)).registerStat().setUnlocked();
         firemaker = (new InformationBase("firemaker", 5, 1, 0, Items.FLINT_AND_STEEL, (InformationBase) null))
                 .registerStat().setUnlocked();
 
@@ -248,7 +248,7 @@ public class KnowledgeListMFR {
                 .setUnlocked().setSpecial();
         bar = (new InformationBase("bar", -1, 2, 0, ComponentListMFR.BAR, anvil)).registerStat().setPage(artisanry)
                 .setUnlocked();
-        apron = (new InformationBase("apron", -1, -1, 0, ArmourListMFR.LEATHER_APRON, anvil)).registerStat()
+        apron = (new InformationBase("apron", -1, -1, 0, LeatherArmourListMFR.LEATHER_APRON, anvil)).registerStat()
                 .setPage(artisanry).setUnlocked();
         craftTools = (new InformationBase("craftTools", -3, 2, 0, CustomToolListMFR.STANDARD_PICK, bar)).registerStat()
                 .setPage(artisanry).setUnlocked();
@@ -264,7 +264,7 @@ public class KnowledgeListMFR {
         craftOrnate = (new InformationBase("craftOrnate", -3, -1, 1, ComponentListMFR.ORNATE_ITEMS, null)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 35);
         craftArmourLight = (new InformationBase("craftArmourLight", -3, 3, 1,
-                ArmourListMFR.armour(ArmourListMFR.LEATHER, 3, 1), anvil)).registerStat().setPage(artisanry)
+                LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 1), anvil)).registerStat().setPage(artisanry)
                 .setUnlocked();
         craftArmourMedium = (new InformationBase("craftArmourMedium", -4, 3, 1, CustomArmourListMFR.STANDARD_CHAIN_CHEST,
                 craftArmourLight)).registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 0);

@@ -10,7 +10,7 @@ import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.init.ArmourListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
@@ -61,21 +61,23 @@ public class ForgingRecipes {
         material = BaseMaterialMFR.IRON;
         // HELMET
         time = 10;
-        KnowledgeListMFR.studHelmetR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, ArmourListMFR.armour(ArmourListMFR.LEATHER, 3, 0), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 0));
-        // CHEST
-        time = 20;
-        KnowledgeListMFR.studChestR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, ArmourListMFR.armour(ArmourListMFR.LEATHER, 3, 1), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 1));
-        // LEGS
-        time = 15;
-        KnowledgeListMFR.studLegsR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, ArmourListMFR.armour(ArmourListMFR.LEATHER, 3, 2), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 2));
-        // BOOTS
-        time = 6;
-        KnowledgeListMFR.studBootsR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, ArmourListMFR.armour(ArmourListMFR.LEATHER, 3, 3), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 2, 3));
 
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 3, 0), ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 0), new ItemStack(ComponentListMFR.RIVET, 4));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 3, 1), ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 1), new ItemStack(ComponentListMFR.RIVET, 4));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 3, 2), ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 2), new ItemStack(ComponentListMFR.RIVET, 4));
-        Salvage.addSalvage(ArmourListMFR.armourItem(ArmourListMFR.LEATHER, 3, 3), ArmourListMFR.armour(ArmourListMFR.LEATHER, 2, 3), new ItemStack(ComponentListMFR.RIVET, 4));
+        // TODO fixme
+//        KnowledgeListMFR.studHelmetR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 0), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 0));
+//        // CHEST
+//        time = 20;
+//        KnowledgeListMFR.studChestR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 1), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 1));
+//        // LEGS
+//        time = 15;
+//        KnowledgeListMFR.studLegsR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 2), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 2));
+//        // BOOTS
+//        time = 6;
+//        KnowledgeListMFR.studBootsR = MineFantasyRebornAPI.addAnvilRecipe(artisanry, LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 3), "craftArmourLight", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " I ", "IAI", " I ", 'I', ComponentListMFR.RIVET, 'A', LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 2, 3));
+
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 3, 0), LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 0), new ItemStack(ComponentListMFR.RIVET, 4));
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 3, 1), LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 1), new ItemStack(ComponentListMFR.RIVET, 4));
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 3, 2), LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 2), new ItemStack(ComponentListMFR.RIVET, 4));
+        Salvage.addSalvage(LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 3, 3), LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 2, 3), new ItemStack(ComponentListMFR.RIVET, 4));
 
         time = 2;
         material = BaseMaterialMFR.IRON;

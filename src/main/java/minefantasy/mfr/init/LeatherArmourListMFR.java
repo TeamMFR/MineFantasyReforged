@@ -6,6 +6,7 @@ import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.item.armour.ItemApron;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -19,13 +20,37 @@ import net.minecraftforge.registries.IForgeRegistry;
  * @author Anonymous Productions
  */
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
-public class ArmourListMFR {
-    public static final String[] leathermats = new String[]{"hide", "rough_leather", "strong_leather", "stud_leather", "padded",};
+public class LeatherArmourListMFR {
+    public static final String[] leathermats = new String[]{"hide", "rough_leather", "strong_leather", "stud_leather", "padded"};
     public static ArmourMaterialMFR LEATHER_MAT;
     public static ArmourMaterialMFR APRON;
     public static ItemArmourMFR[] LEATHER;
     public static ItemArmourMFR LEATHER_APRON;
 
+	public static Item HIDE_HELMET = Utils.nullValue();
+	public static Item HIDE_CHEST = Utils.nullValue();
+	public static Item HIDE_LEGS = Utils.nullValue();
+	public static Item HIDE_BOOTS = Utils.nullValue();
+
+	public static Item ROUGH_LEATHER_HELMET = Utils.nullValue();
+	public static Item ROUGH_LEATHER_CHEST = Utils.nullValue();
+	public static Item ROUGH_LEATHER_LEGS = Utils.nullValue();
+	public static Item ROUGH_LEATHER_BOOTS = Utils.nullValue();
+
+	public static Item STRONG_LEATHER_HELMET = Utils.nullValue();
+	public static Item STRONG_LEATHER_CHEST = Utils.nullValue();
+	public static Item STRONG_LEATHER_LEGS = Utils.nullValue();
+	public static Item STRONG_LEATHER_BOOTS = Utils.nullValue();
+
+	public static Item STUD_LEATHER_HELMET = Utils.nullValue();
+	public static Item STUD_LEATHER_CHEST = Utils.nullValue();
+	public static Item STUD_LEATHER_LEGS = Utils.nullValue();
+	public static Item STUD_LEATHER_BOOTS = Utils.nullValue();
+
+	public static Item PADDED_LEATHER_HELMET = Utils.nullValue();
+	public static Item PADDED_LEATHER_CHEST = Utils.nullValue();
+	public static Item PADDED_LEATHER_LEGS = Utils.nullValue();
+	public static Item PADDED_LEATHER_BOOTS = Utils.nullValue();
 
     public static void init(){
         LEATHER_MAT = new ArmourMaterialMFR("leather", 5, 0.30F, 18, 1.00F);

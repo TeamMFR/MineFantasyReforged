@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_chain_chest"
+        "layer0": "minefantasyreborn:items/ornate_chain_chest",
+        "layer1": "minefantasyreborn:items/ornate_chain_chest_detail"
     }
 }
