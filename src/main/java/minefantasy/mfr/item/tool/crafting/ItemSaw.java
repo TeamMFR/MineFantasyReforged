@@ -77,7 +77,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap multimap = super.getAttributeModifiers(slot,stack);
+        Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot,stack);
         multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
         return multimap;
@@ -175,11 +175,9 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
+            for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || customMat.getItemStack() != null) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, "oak_wood"));
                 }
             }
         } else {

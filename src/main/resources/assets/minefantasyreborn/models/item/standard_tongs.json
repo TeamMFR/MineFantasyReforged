@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "minefantasyreborn:items/standard_tongs",
-        "layer2": "minefantasyreborn:items/standard_tongs_detail"
+        "layer1": "minefantasyreborn:items/standard_tongs_detail"
     }
 }

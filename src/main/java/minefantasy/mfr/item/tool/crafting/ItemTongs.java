@@ -151,7 +151,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
         map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
 
@@ -209,10 +209,8 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack() != null) {
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
                     items.add(this.construct(customMat.name));
                 }
             }

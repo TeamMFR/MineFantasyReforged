@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "minefantasyreborn:items/standard_needle",
-        "layer2": "minefantasyreborn:items/standard_needle_detail"
+        "layer1": "minefantasyreborn:items/standard_needle_detail"
     }
 }

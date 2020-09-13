@@ -2,7 +2,7 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "minefantasyreborn:items/dragonforged_axe",
-    "layer2": "minefantasyreborn:items/dragonforged_axe_haft",
-    "layer1": "minefantasyreborn:items/dragonforged_axe_detail"
+    "layer1": "minefantasyreborn:items/dragonforged_axe_haft",
+    "layer2": "minefantasyreborn:items/dragonforged_axe_detail"
   }
 }

@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "minefantasyreborn:items/standard_splint_boots",
-        "layer1": "minefantasyreborn:items/standard_splint_boots_detail"
+        "layer2": "minefantasyreborn:items/standard_splint_boots_detail"
     }
 }
