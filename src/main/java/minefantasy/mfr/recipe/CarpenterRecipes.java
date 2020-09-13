@@ -245,11 +245,11 @@ public class CarpenterRecipes {
         KnowledgeListMFR.nailPlanksR = MineFantasyRebornAPI.addCarpenterRecipe(construction,
                 new ItemStack(BlockListMFR.NAILED_PLANKS), "refined_planks", nailHammer, "hammer", 1, 5,
                 new Object[]{"N ", "PP", "PP", 'N', ComponentListMFR.NAIL, 'P',
-                        ComponentListMFR.PLANK.construct("OakWood"),});
+                        ComponentListMFR.PLANK.construct("oak_wood"),});
         KnowledgeListMFR.nailStairR = MineFantasyRebornAPI.addCarpenterRecipe(construction,
                 new ItemStack(BlockListMFR.NAILED_PLANKS_STAIR), "refined_planks", nailHammer, "hammer", 1, 5,
                 new Object[]{"N ", "P ", "PP", 'N', ComponentListMFR.NAIL, 'P',
-                        ComponentListMFR.PLANK.construct("OakWood"),});
+                        ComponentListMFR.PLANK.construct("oak_wood"),});
         KnowledgeListMFR.tannerRecipe = MineFantasyRebornAPI.addCarpenterRecipe(construction,
                 new ItemStack(BlockListMFR.TANNER), "", nailHammer, "hammer", -1, 10,
                 new Object[]{"PPP", "P P", "PPP", 'P', ComponentListMFR.PLANK,});

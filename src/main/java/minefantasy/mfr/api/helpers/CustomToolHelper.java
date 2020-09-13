@@ -50,7 +50,7 @@ public class CustomToolHelper {
     }
 
     public static ItemStack construct(Item base, String main) {
-        return construct(base, main, "OakWood");
+        return construct(base, main, "oak_wood");
     }
 
     public static ItemStack construct(Item base, String main, String haft) {

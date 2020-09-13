@@ -31,7 +31,7 @@ public class ItemBlockToolRack extends ItemBlockBase {
                 items.add(this.construct(customMat.name));
             }
         } else {
-            items.add(this.construct("RefinedWood"));
+            items.add(this.construct("refined_wood"));
         }
     }
 
