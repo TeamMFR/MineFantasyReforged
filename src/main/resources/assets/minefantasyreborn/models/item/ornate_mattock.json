@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_mattock"
+        "layer0": "minefantasyreborn:items/ornate_mattock",
+        "layer1": "minefantasyreborn:items/ornate_mattock_haft",
+        "layer2": "minefantasyreborn:items/ornate_mattock_detail"
     }
 }

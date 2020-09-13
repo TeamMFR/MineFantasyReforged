@@ -2,7 +2,7 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_lance",
-        "layer1": "minefantasyreborn:items/dragonforged_lance_detail",
-        "layer2": "minefantasyreborn:items/dragonforged_lance_haft"
+        "layer1": "minefantasyreborn:items/dragonforged_lance_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_lance_detail"
     }
 }

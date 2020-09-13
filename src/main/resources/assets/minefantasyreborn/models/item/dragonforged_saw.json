@@ -2,7 +2,7 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_saw",
-        "layer1": "minefantasyreborn:items/dragonforged_saw_detail",
-        "layer2": "minefantasyreborn:items/dragonforged_saw_haft"
+        "layer1": "minefantasyreborn:items/dragonforged_saw_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_saw_detail"
     }
 }

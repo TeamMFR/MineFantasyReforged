@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_tongs"
+        "layer0": "minefantasyreborn:items/dragonforged_tongs",
+        "layer1": "minefantasyreborn:items/dragonforged_tongs_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_tongs_detail"
     }
 }

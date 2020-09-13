@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_katana"
+        "layer0": "minefantasyreborn:items/ornate_katana",
+        "layer1": "minefantasyreborn:items/ornate_katana_haft",
+        "layer2": "minefantasyreborn:items/ornate_katana_detail"
     }
 }

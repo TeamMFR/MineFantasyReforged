@@ -2,7 +2,7 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_needle",
-        "layer1": "minefantasyreborn:items/dragonforged_needle_detail",
-        "layer2": "minefantasyreborn:items/dragonforged_needle_haft"
+        "layer1": "minefantasyreborn:items/dragonforged_needle_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_needle_detail"
     }
 }

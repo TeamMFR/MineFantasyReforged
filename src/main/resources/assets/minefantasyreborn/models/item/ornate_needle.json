@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_needle"
+        "layer0": "minefantasyreborn:items/ornate_needle",
+        "layer1": "minefantasyreborn:items/ornate_needle_detail"
     }
 }

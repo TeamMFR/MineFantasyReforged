@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_halbeard"
+        "layer0": "minefantasyreborn:items/ornate_halbeard",
+        "layer1": "minefantasyreborn:items/ornate_halbeard_haft",
+        "layer2": "minefantasyreborn:items/ornate_halbeard_detail"
     }
 }

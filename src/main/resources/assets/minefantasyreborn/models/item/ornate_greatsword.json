@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/handheld",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_greatsword"
+        "layer0": "minefantasyreborn:items/ornate_greatsword",
+        "layer1": "minefantasyreborn:items/ornate_greatsword_haft",
+        "layer2": "minefantasyreborn:items/ornate_greatsword_detail"
     }
 }

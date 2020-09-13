@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_axe"
+        "layer0": "minefantasyreborn:items/ornate_axe",
+        "layer1": "minefantasyreborn:items/ornate_axe_haft",
+        "layer2": "minefantasyreborn:items/ornate_axe_detail"
     }
 }

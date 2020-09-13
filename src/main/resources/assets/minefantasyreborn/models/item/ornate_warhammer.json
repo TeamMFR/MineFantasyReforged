@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_warhammer"
+        "layer0": "minefantasyreborn:items/ornate_warhammer",
+        "layer1": "minefantasyreborn:items/ornate_warhammer_haft",
+        "layer2": "minefantasyreborn:items/ornate_warhammer_detail"
     }
 }

@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_spear"
+        "layer0": "minefantasyreborn:items/ornate_spear",
+        "layer1": "minefantasyreborn:items/ornate_spear_haft",
+        "layer2": "minefantasyreborn:items/ornate_spear_detail"
     }
 }

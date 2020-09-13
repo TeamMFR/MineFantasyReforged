@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_spanner"
+        "layer0": "minefantasyreborn:items/dragonforged_spanner",
+        "layer1": "minefantasyreborn:items/dragonforged_spanner_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_spanner_detail"
     }
 }

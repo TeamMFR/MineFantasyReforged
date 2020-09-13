@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_bow_standby"
+        "layer0": "minefantasyreborn:items/ornate_bow_standby",
+        "layer1": "minefantasyreborn:items/ornate_bow_standby_haft",
+        "layer2": "minefantasyreborn:items/ornate_bow_standby_detail"
     }
 }

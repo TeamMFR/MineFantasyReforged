@@ -2,7 +2,7 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_greatsword",
-        "layer1": "minefantasyreborn:items/dragonforged_greatsword_detail",
-        "layer2": "minefantasyreborn:items/dragonforged_greatsword_haft"
+        "layer1": "minefantasyreborn:items/dragonforged_greatsword_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_greatsword_detail"
     }
 }

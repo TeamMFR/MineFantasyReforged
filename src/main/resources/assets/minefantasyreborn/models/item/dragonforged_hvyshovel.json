@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_hvyshovel"
+        "layer0": "minefantasyreborn:items/dragonforged_hvyshovel",
+        "layer1": "minefantasyreborn:items/dragonforged_hvyshovel_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_hvyshovel_detail"
     }
 }

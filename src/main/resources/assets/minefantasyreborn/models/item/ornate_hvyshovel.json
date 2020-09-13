@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_hvyshovel"
+        "layer0": "minefantasyreborn:items/ornate_hvyshovel",
+        "layer1": "minefantasyreborn:items/ornate_hvyshovel_haft",
+        "layer2": "minefantasyreborn:items/ornate_hvyshovel_detail"
     }
 }

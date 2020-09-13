@@ -1,6 +1,8 @@
 ﻿{
-    "parent": "item/handheld",
+    "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_scythe"
+        "layer0": "minefantasyreborn:items/ornate_scythe",
+        "layer1": "minefantasyreborn:items/ornate_scythe_haft",
+        "layer2": "minefantasyreborn:items/ornate_scythe_detail"
     }
 }

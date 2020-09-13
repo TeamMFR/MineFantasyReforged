@@ -2,7 +2,7 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_handpick",
-        "layer1": "minefantasyreborn:items/dragonforged_handpick_detail",
-        "layer2": "minefantasyreborn:items/dragonforged_handpick_haft"
+        "layer1": "minefantasyreborn:items/dragonforged_handpick_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_handpick_detail"
     }
 }

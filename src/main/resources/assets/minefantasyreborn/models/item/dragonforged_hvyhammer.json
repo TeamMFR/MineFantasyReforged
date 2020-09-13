@@ -2,7 +2,7 @@
     "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_hvyhammer",
-        "layer1": "minefantasyreborn:items/dragonforged_hvyhammer_detail",
-        "layer2": "minefantasyreborn:items/dragonforged_hvyhammer_haft"
+        "layer1": "minefantasyreborn:items/dragonforged_hvyhammer_haft",
+        "layer2": "minefantasyreborn:items/dragonforged_hvyhammer_detail"
     }
 }

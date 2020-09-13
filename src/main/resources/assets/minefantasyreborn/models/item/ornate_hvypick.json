@@ -1,6 +1,8 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/ornate_hvypick"
+        "layer0": "minefantasyreborn:items/ornate_hvypick",
+        "layer1": "minefantasyreborn:items/ornate_hvypick_haft",
+        "layer2": "minefantasyreborn:items/ornate_hvypick_detail"
     }
 }
