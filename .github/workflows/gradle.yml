@@ -32,4 +32,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPR_USER: ${{ secrets.GPR_USER }}
           GPR_API_KEY: ${{ secrets.GPR_TOKEN }}
-        run: ./gradlew build publish
+        run: |
+          chmod +x gradlew
+          ./gradlew publish
