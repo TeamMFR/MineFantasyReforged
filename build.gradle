@@ -2,16 +2,23 @@ buildscript {
     repositories {
         jcenter()
         maven { url = "https://files.minecraftforge.net/maven" }
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
+
+plugins {
+    id "maven-publish"
+    id "de.fuerstenau.buildconfig" version "1.1.8"
+}
+
+// We apply the 'forge' plugin, so ForgeGradle can do it's stuff.
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
-apply plugin: 'maven-publish'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-
 
 repositories {
     maven {
@@ -35,38 +42,39 @@ repositories {
     }
 }
 
-version = "1.0"
-group = "minefantasy.mfr.MineFantasyReborn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "MineFantasyReborn"
-
 sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
     sourceCompatibility = targetCompatibility = '1.8'
 }
 
 minecraft {
-    version = "1.12.2-14.23.5.2847"
-    mappings = "snapshot_20171003"
+    version = minecraft_version + "-" + forge_version
+    mappings = mcp_mappings
     runDir = "run"
+    replaceIn "MineFantasyReborn.java"
+    replace "@VERSION@", "${project.minecraft.version}-${project.major}.${project.minor}.${project.patch}." + getBuildNumber() + getStable()
 
-
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
+version = minecraft.version + "-" + project.major +"."+ project.minor +"."+ project.patch +"."+ getBuildNumber() + getStable()
+group = "minefantasy.mfr.MineFantasyReborn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "MineFantasyReborn"
 
 dependencies {
-
     //deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
     deobfCompile "codechicken:CodeChickenLib:1.12.2-3.2.3.358:deobf"
 
 }
 
+buildConfig {
+    appName = project.name       // sets value of NAME field
+    version = project.version // sets value of VERSION field,
 
-// disabled for now, this prints all deprecated warnings to the console so that we can get rid of them eventually
-//allprojects {
-//    tasks.withType(JavaCompile) {
-//        options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
-//    }
-//}
+    clsName = 'BuildConfig'      // sets the name of the BuildConfig class
+    packageName = 'minefantasy.mfr'  // sets the package of the BuildConfig class,
+    charset = 'UTF-8'            // sets charset of the generated class,
+
+    buildConfigField 'boolean', 'UNSTABLE', {isUnstable()}
+}
 
 processResources {
     // this will ensure that this task is redone when the versions change.
@@ -85,18 +93,49 @@ processResources {
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
 
-    publishing {
-        repositories {
-            maven {
-                name = "GitHubPackages"
-                url = "https://maven.pkg.github.com/TeamMFR/MineFantasy-reborn"
-                credentials {
-                    username = System.getenv("GITHUB_ACTOR")
-                    password = System.getenv("GITHUB_TOKEN")
-                }
+def getBuildNumber() {
+    if (System.getenv("BUILD_NUMBER") != null) {
+        return System.getenv("BUILD_NUMBER").toString()
+    }
+    return ""
+}
+
+def getStable() {
+    if (isUnstable()) {
+        return "unstable"
+    }
+    return ""
+}
+
+def isUnstable() {
+    return (System.getenv("GITHUB_REF") == null || System.getenv("GITHUB_REF").endsWith("-dev"));
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = "https://maven.pkg.github.com/TeamMFR/MineFantasy-reborn"
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
-
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
 }
+
+// TODO: check the deprecated warnings
+// running a regular Build could possibly show them too
+// disabled for now, this prints all deprecated warnings to the console so that we can get rid of them eventually
+//allprojects {
+//    tasks.withType(JavaCompile) {
+//        options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+//    }
+//}

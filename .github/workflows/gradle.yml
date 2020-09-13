@@ -16,17 +16,20 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-#      - name: Build with Gradle
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          GPR_USER: ${{ secrets.GPR_USER }}
-#          GPR_API_KEY: ${{ secrets.GPR_TOKEN }}
-#        run: |
-#          chmod +x gradlew
-#          ./gradlew clean
-#          ./gradlew setupCIWorkspace
-#          ./gradlew build publish
-##          ./gradlew build publish - no pkg publishing yet
+      - name: Generate build number
+        uses: einaregilsson/build-number@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build with Gradle
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_API_KEY: ${{ secrets.GPR_TOKEN }}
+        run: |
+          chmod +x gradlew
+          ./gradlew clean
+          ./gradlew setupCIWorkspace
+          ./gradlew build
       - name: Publish to Github Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -36,4 +39,4 @@ jobs:
           chmod +x gradlew
           ./gradlew clean
           ./gradlew setupCIWorkspace
-          ./gradlew publish
+          ./gradlew build publish
