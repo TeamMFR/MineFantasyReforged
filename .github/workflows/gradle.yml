@@ -27,3 +27,9 @@ jobs:
           ./gradlew setupCIWorkspace
           ./gradlew build
 #          ./gradlew build publish - no pkg publishing yet
+      - name: Publish to Github Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPR_USER: ${{ secrets.GPR_USER }}
+          GPR_API_KEY: ${{ secrets.GPR_TOKEN }}
+        run: ./gradlew build publish
