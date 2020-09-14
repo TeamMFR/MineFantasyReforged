@@ -121,7 +121,9 @@ public class ToolListMFR {
 
     public static Item PAINT_BRUSH = Utils.nullValue();
 
-    public static Item DEBUG_PLACE = Utils.nullValue();
+    public static Item DEBUG_PLACE_ANCIENT_FORGE = Utils.nullValue();
+    public static Item DEBUG_PLACE_ANCIENT_ALTER = Utils.nullValue();
+    public static Item DEBUG_PLACE_DWARVEN_STRONGHOLD = Utils.nullValue();
     public static Item DEBUG_MOB = Utils.nullValue();
 
     public static void init() {
@@ -187,7 +189,9 @@ public class ToolListMFR {
 
         PAINT_BRUSH = new ItemPaintBrush("paint_brush", 256);
 
-        DEBUG_PLACE = new ItemWorldGenPlacer();
+        DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "WorldGenAncientForge");
+        DEBUG_PLACE_ANCIENT_ALTER = new ItemWorldGenPlacer("world_gen_placer_ancient_alter", "WorldGenAncientAlter");
+        DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "WorldGenDwarvenStronghold");
         DEBUG_MOB = new MobSpawnerMF();
     }
 
@@ -257,7 +261,10 @@ public class ToolListMFR {
 
         registry.register(PAINT_BRUSH);
 
-        registry.register(DEBUG_PLACE);
+        registry.register(DEBUG_PLACE_ANCIENT_FORGE);
+        registry.register(DEBUG_PLACE_ANCIENT_ALTER);
+        registry.register(DEBUG_PLACE_DWARVEN_STRONGHOLD);
+
         registry.register(DEBUG_MOB);
     }
 

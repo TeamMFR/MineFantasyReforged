@@ -335,7 +335,7 @@
 //
 //	public static final Item PAINT_BRUSH = Utils.nullValue();
 //
-//	public static final Item DEBUG_PLACE = Utils.nullValue();
+//	public static final Item DEBUG_PLACE_ANCIENT_FORGE = Utils.nullValue();
 //	public static final Item DEBUG_MOB = Utils.nullValue();
 //
 //	//FoodListMFR

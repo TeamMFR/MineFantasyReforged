@@ -20,6 +20,7 @@ attribute.inferior.name=Inferior
 attribute.superior.name=Superior
 
 item.infobook.name=Research Book
+item.infobook.name=Research Book
 item.research_scroll.name=Research Scroll
 item.research_scroll_complete.name=Completed Research
 
@@ -311,7 +312,7 @@ arrow.head.normal.name=Regular Head
 arrow.head.bodkin.name=Bodkin Head
 arrow.head.broad.name=Broad Head
 
-
+item.world_gen_placer=World Gen Placer
 
 # COMMODITY
 
