@@ -1,6 +1,6 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/cross_handle_wood"
+        "layer0": "minefantasyreborn:items/schematic_alloy"
     }
 }
