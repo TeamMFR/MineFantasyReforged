@@ -112,10 +112,10 @@ public class CustomToolListMFR {
 
         tab = CreativeTabMFR.tabArcher;
         STANDARD_BOW = (ItemBowMFR) new ItemBowMFR(design + "_bow", EnumBowType.SHORTBOW).setCustom(design).setCreativeTab(tab);
-        STANDARD_ARROW = (ItemArrowMFR) new ItemArrowMFR(design + "_bolt", ArrowType.BOLT, 20).setCustom(design).setAmmoType("bolt").setCreativeTab(tab);
-        STANDARD_BOLT = (ItemArrowMFR) new ItemArrowMFR(design + "_arrow", ArrowType.NORMAL, 16).setCustom(design).setCreativeTab(tab);
-        STANDARD_ARROW_BODKIN = (ItemArrowMFR) new ItemArrowMFR(design + "_arrow_bodkin", ArrowType.BODKIN, 16).setCustom(design).setCreativeTab(tab);
-        STANDARD_ARROW_BROAD = (ItemArrowMFR) new ItemArrowMFR(design + "_arrow_broad", ArrowType.BROADHEAD, 16).setCustom(design).setCreativeTab(tab);
+        STANDARD_ARROW = (ItemArrowMFR) new ItemArrowMFR(design, ArrowType.BOLT, 20).setCustom(design).setAmmoType("bolt").setCreativeTab(tab);
+        STANDARD_BOLT = (ItemArrowMFR) new ItemArrowMFR(design, ArrowType.NORMAL, 16).setCustom(design).setCreativeTab(tab);
+        STANDARD_ARROW_BODKIN = (ItemArrowMFR) new ItemArrowMFR(design, ArrowType.BODKIN, 16).setCustom(design).setCreativeTab(tab);
+        STANDARD_ARROW_BROAD = (ItemArrowMFR) new ItemArrowMFR(design, ArrowType.BROADHEAD, 16).setCustom(design).setCreativeTab(tab);
     }
     
     @SubscribeEvent

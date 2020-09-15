@@ -56,7 +56,7 @@ public class MonsterUpgrader {
 						mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 					}
 				} else {
-					if (mob.getHeldItemMainhand() != null
+					if (!mob.getHeldItemMainhand().isEmpty()
 							&& mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
 						giveEntityWeapon(mob, tier, 0);
 						if (mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null) {
@@ -97,7 +97,7 @@ public class MonsterUpgrader {
 				}
 			}
 		} else {
-			if (mob.getHeldItemMainhand() != null
+			if (!mob.getHeldItemMainhand().isEmpty()
 					&& mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
 				giveEntityWeapon(mob, "iron", 0);
 			}
@@ -131,13 +131,13 @@ public class MonsterUpgrader {
 			ItemStack chest = ((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_CHEST).construct(tier);
 			ItemStack helmet = ((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_HELMET).construct(tier);
 
-			if (boots != null)
+			if (!boots.isEmpty())
 				mob.setItemStackToSlot(EntityEquipmentSlot.FEET, boots);
-			if (legs != null)
+			if (!legs.isEmpty())
 				mob.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
-			if (chest != null)
+			if (!chest.isEmpty())
 				mob.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
-			if (helmet != null)
+			if (!helmet.isEmpty())
 				mob.setItemStackToSlot(EntityEquipmentSlot.HEAD, helmet);
 			return;
 		}
@@ -147,13 +147,13 @@ public class MonsterUpgrader {
 		ItemStack chest = ((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_CHEST).construct(tier);
 		ItemStack helmet = ((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_HELMET).construct(tier);
 
-		if (boots != null)
+		if (!boots.isEmpty())
 			mob.setItemStackToSlot(EntityEquipmentSlot.FEET, boots);
-		if (legs != null)
+		if (!legs.isEmpty())
 			mob.setItemStackToSlot(EntityEquipmentSlot.LEGS, legs);
-		if (chest != null)
+		if (!chest.isEmpty())
 			mob.setItemStackToSlot(EntityEquipmentSlot.CHEST, chest);
-		if (helmet != null)
+		if (!helmet.isEmpty())
 			mob.setItemStackToSlot(EntityEquipmentSlot.HEAD, helmet);
 	}
 

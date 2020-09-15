@@ -407,7 +407,7 @@ public class EventManagerMFR {
 			if (!stuckArrows.isEmpty()) {
 
 				for (ItemStack arrow : stuckArrows) {
-					if (arrow != null) {
+					if (!arrow.isEmpty()) {
 						dropper.entityDropItem(arrow, 0.0F);
 					}
 				}
@@ -483,7 +483,7 @@ public class EventManagerMFR {
 		// killsCount
 		EntityLivingBase dead = event.getEntityLiving();
 		EntityLivingBase hunter = null;
-		ItemStack weapon = null;
+		ItemStack weapon = ItemStack.EMPTY;
 		DamageSource source = event.getSource();
 
 		if (dead instanceof EntityWitch) {
@@ -504,7 +504,7 @@ public class EventManagerMFR {
 				}
 			}
 		}
-		if (weapon != null) {
+		if (!weapon.isEmpty()) {
 			String type = ToolHelper.getCrafterTool(weapon);
 			if (weapon.getItem() instanceof IHuntingItem) {
 				if (((IHuntingItem) weapon.getItem()).canRetrieveDrops(weapon)) {
@@ -882,7 +882,7 @@ public class EventManagerMFR {
 	}
 
 	private boolean isHotItem(ItemStack item) {
-		return item != null && (item.getItem() instanceof IHotItem);
+		return !item.isEmpty() && (item.getItem() instanceof IHotItem);
 	}
 
 	@SideOnly(Side.CLIENT)

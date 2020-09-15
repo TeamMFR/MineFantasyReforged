@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_bolt"
+        "layer0": "minefantasyreborn:items/standard_bolt",
+        "layer1": "minefantasyreborn:items/standard_bolt_detail"
     }
 }

@@ -1,6 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/standard_scale_helmet"
+        "layer0": "minefantasyreborn:items/standard_scale_helmet",
+        "layer1": "minefantasyreborn:items/standard_scale_helmet_detail"
     }
 }

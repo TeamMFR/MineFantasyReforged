@@ -2,6 +2,7 @@ package minefantasy.mfr.network;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.knowledge.InformationList;
+import minefantasy.mfr.container.ContainerReload;
 import minefantasy.mfr.gui.GuiAnvilMF;
 import minefantasy.mfr.gui.GuiBigFurnace;
 import minefantasy.mfr.gui.GuiBlastChamber;
@@ -89,8 +90,7 @@ public class NetworkHandler implements IGuiHandler {
 	public static final int GUI_CROSSBOW_BENCH = 11;
 	public static final int GUI_ANVIL = 12;
 	public static final int GUI_RESEARCH_BOOK = 13;
-	public static final int GUI_RESEARCH_BOOK_ENTRY = 14;
-	public static final int GUI_RELOAD = 15;
+	public static final int GUI_RELOAD = 14;
 
 	private FMLEventChannel channel;
 
@@ -188,6 +188,9 @@ public class NetworkHandler implements IGuiHandler {
 				case GUI_ANVIL:
 					return ((TileEntityAnvilMFR) tileEntity).createContainer(player);
 			}
+		}
+		if (ID == GUI_RELOAD && x == 1 && !player.getHeldItemMainhand().isEmpty()){
+			return new ContainerReload(player.inventory, player.getHeldItemMainhand());
 		}
 
 		return null;

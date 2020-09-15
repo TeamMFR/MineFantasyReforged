@@ -34,7 +34,7 @@ public class WeaponClass {
     }
 
     public static WeaponClass getWeaponClass(ItemStack weapon) {
-        if (weapon == null) {
+        if (weapon.isEmpty()) {
             return WeaponClass.FIST;
         }
         if (weapon.getItem() instanceof IWeaponClass) {
@@ -44,7 +44,7 @@ public class WeaponClass {
     }
 
     public static WeaponClass findClassForAny(ItemStack weapon) {
-        if (weapon == null)
+        if (weapon.isEmpty())
             return FIST;
         if (weapon.getItem() instanceof IWeaponClass || weapon.getItem() instanceof ItemSword) {
             return getWeaponClass(weapon);

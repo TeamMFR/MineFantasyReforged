@@ -15,14 +15,13 @@ import net.minecraft.world.World;
 public class ArrowFirerMF implements IArrowHandler {
 
     @Override
-    public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge,
-                               boolean infinite) {
-        if (arrow == null || !(arrow.getItem() instanceof ItemArrowMFR)) {
+    public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge, boolean infinite) {
+        if (arrow.isEmpty() || !(arrow.getItem() instanceof ItemArrowMFR)) {
             return false;
         }
 
         float maxCharge = 20F;
-        if (bow != null && bow.getItem() instanceof ISpecialBow) {
+        if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
             // maxCharge = ((ISpecialBow)bow.getItem()).getMaxCharge();
         } else {
             return false;
@@ -38,7 +37,7 @@ public class ArrowFirerMF implements IArrowHandler {
 
         ItemArrowMFR ammo = (ItemArrowMFR) arrow.getItem();
         float spread = 1.0F;
-        if (bow != null && bow.getItem() instanceof ISpecialBow) {
+        if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
             firepower *= ((ISpecialBow) bow.getItem()).getRange(bow);
             spread = ((ISpecialBow) bow.getItem()).getSpread(bow);
         }
@@ -62,7 +61,7 @@ public class ArrowFirerMF implements IArrowHandler {
             entArrow.canBePickedUp = 2;
         }
 
-        if (bow != null && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
+        if (!bow.isEmpty() && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
             entArrow = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
         }
         if (!world.isRemote) {

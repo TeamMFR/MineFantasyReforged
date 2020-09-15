@@ -8,20 +8,19 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryBasic;
-import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.ItemStackHandler;
 
 public class ContainerReload extends Container {
-    private InventoryBasic weaponInv;
+    private ItemStackHandler weaponInv;
     private ItemStack weapon;
-    private ItemStack previousAmmo;
 
     public ContainerReload(InventoryPlayer user, ItemStack weapon) {
         this.weapon = weapon;
-        weaponInv = new InventoryBasic("reload", false, 1);
-        weaponInv.setInventorySlotContents(0, AmmoMechanicsMFR.getAmmo(weapon));
+        weaponInv = new ItemStackHandler(1);
+        weaponInv.setStackInSlot(0, AmmoMechanicsMFR.getAmmo(weapon));
         this.addSlotToContainer(new SlotReload(this, weaponInv, 0, 79, 11));
 
         int i;
@@ -52,24 +51,24 @@ public class ContainerReload extends Container {
     @Override
     public void detectAndSendChanges() {
         for (int i = 0; i < this.inventorySlots.size(); ++i) {
-            ItemStack itemstack = ((Slot) this.inventorySlots.get(i)).getStack();
-            ItemStack itemstack1 = (ItemStack) this.inventoryItemStacks.get(i);
+            ItemStack itemstack = this.inventorySlots.get(i).getStack();
+            ItemStack itemstack1 = this.inventoryItemStacks.get(i);
 
             if (!ItemStack.areItemStacksEqual(itemstack1, itemstack)) {
-                itemstack1 = itemstack == null ? null : itemstack.copy();
+                itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
                 this.inventoryItemStacks.set(i, itemstack1);
-                for (int j = 0; j < this.listeners.size(); ++j) {
-                    ((InventoryCrafting) this.listeners.get(j)).setInventorySlotContents(i, itemstack1);
+                for (IContainerListener listener : this.listeners) {
+                    (listener).sendSlotContents(this, i, itemstack1);
                 }
             }
         }
-        previousAmmo = weaponInv.getStackInSlot(0);
+        ItemStack previousAmmo = weaponInv.getStackInSlot(0);
     }
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer user, int clicked) {
-        ItemStack itemstack = null;
-        Slot slot = (Slot) this.inventorySlots.get(clicked);
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.inventorySlots.get(clicked);
 
         if (slot != null && slot.getHasStack()) {
             ItemStack itemstack1 = slot.getStack();
@@ -79,30 +78,30 @@ public class ContainerReload extends Container {
             {
                 if (canAccept(itemstack1)) {
                     if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
-                        return null;
+                        return ItemStack.EMPTY;
                     }
                 } else if (clicked >= 1 && clicked < 27)// INVENTORY
                 {
                     if (!this.mergeItemStack(itemstack1, 27, 36, false)) {
-                        return null;
+                        return ItemStack.EMPTY;
                     }
                 }
                 // BAR
                 else if (clicked >= 27 && clicked < 36 && !this.mergeItemStack(itemstack1, 1, 27, false)) {
-                    return null;
+                    return ItemStack.EMPTY;
                 }
             } else if (!this.mergeItemStack(itemstack1, 1, 36, false)) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             if (itemstack1.getCount() == 0) {
-                slot.putStack((ItemStack) null);
+                slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
 
             if (itemstack1.getCount() == itemstack.getCount()) {
-                return null;
+                return ItemStack.EMPTY;
             }
 
             slot.onTake(user, itemstack1);
@@ -113,11 +112,11 @@ public class ContainerReload extends Container {
 
     public boolean canAccept(ItemStack ammo) {
         String ammoType = "null";
-        if (ammo != null && ammo.getItem() instanceof IAmmo) {
+        if (!ammo.isEmpty() && ammo.getItem() instanceof IAmmo) {
             ammoType = ((IAmmo) ammo.getItem()).getAmmoType(ammo);
         }
 
-        if (weapon != null && weapon.getItem() instanceof IFirearm) {
+        if (!weapon.isEmpty() && weapon.getItem() instanceof IFirearm) {
             return ((IFirearm) weapon.getItem()).canAcceptAmmo(weapon, ammoType);
         }
 

@@ -26,7 +26,7 @@ public class HitSoundGenerator {
     }
 
     public static String getMaterial(String material, ItemStack itemstack) {
-        if (itemstack == null) {
+        if (itemstack.isEmpty()) {
             return "metal";
         }
         Item item = itemstack.getItem();

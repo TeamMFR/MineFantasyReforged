@@ -99,7 +99,7 @@ public class WoodMaterial extends CustomMaterial {
         if (list != null && !list.isEmpty()) {
             return list.get(0);
         }
-        return null;
+        return ItemStack.EMPTY;
     }
 
 }

@@ -18,8 +18,8 @@ public class BombDispenser implements IBehaviorDispenseItem {
     public ItemStack dispense(IBlockSource dispenser, ItemStack item) {
         IPosition direction = BlockDispenser.getDispensePosition(dispenser);
         // BlockDispenser
-        if (item == null)
-            return null;
+        if (item.isEmpty())
+            return ItemStack.EMPTY;
 
         if (item.getItem() instanceof ItemBomb) {
             ItemBomb itembomb = (ItemBomb) item.getItem();
@@ -61,8 +61,7 @@ public class BombDispenser implements IBehaviorDispenseItem {
             float velocityModifier = 0.5F;
 
             if (!world.isRemote) {
-                EntityMine bomb = new EntityMine(world).setType(ItemBomb.getFilling(item), ItemBomb.getCasing(item),
-                        ItemBomb.getFuse(item), ItemBomb.getPowder(item));
+                EntityMine bomb = new EntityMine(world).setType(ItemBomb.getFilling(item), ItemBomb.getCasing(item), ItemBomb.getFuse(item), ItemBomb.getPowder(item));
                 bomb.setPosition(posX, posY, posZ);
                 bomb.setThrowableHeading(xVelocity, yVelocity, zVelocity, 1.0F, velocityModifier);
                 world.spawnEntity(bomb);

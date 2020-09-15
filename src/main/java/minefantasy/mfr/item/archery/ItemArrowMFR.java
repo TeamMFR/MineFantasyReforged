@@ -67,8 +67,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         name = convertName(name);
         material = convertMaterial(material);
 
-        super.setUnlocalizedName((type == ArrowType.EXPLOSIVE || type == ArrowType.EXPLOSIVEBOLT) ? name
-                : type == ArrowType.BOLT ? (name + "_bolt") : (name + "_arrow"));
+        super.setUnlocalizedName((type == ArrowType.EXPLOSIVE || type == ArrowType.EXPLOSIVEBOLT) ? name : type == ArrowType.BOLT ? (name + "_bolt") : (name + "_arrow"));
         name = getName(name, type);
         design = type;
         arrowName = name;
@@ -78,7 +77,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
             damage = 1;
         }
         itemRarity = rarity;
-        setRegistryName("MF_Com_" + name);
+        setRegistryName(name);
         setUnlocalizedName(name);
 
         setCreativeTab(CreativeTabMFR.tabOldTools);
@@ -174,10 +173,8 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         }
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            Iterator iteratorMetal = metal.iterator();
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack() != null) {
+            for (CustomMaterial customMat : metal) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
                     items.add(this.construct(customMat.name));
                 }
             }
@@ -185,7 +182,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         }

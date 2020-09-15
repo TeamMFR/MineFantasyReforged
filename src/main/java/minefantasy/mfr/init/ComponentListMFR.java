@@ -70,6 +70,7 @@ public class ComponentListMFR {
 	public static Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 
 	public static ItemComponentMFR PLANK = Utils.nullValue();
+
 	public static Item VINE = Utils.nullValue();
 	public static Item SHARP_ROCK = Utils.nullValue();
 
@@ -234,6 +235,9 @@ public class ComponentListMFR {
 		COMPOSITE_ALLOY_INGOT = new ItemComponentMFR("composite_alloy_ingot", 1);
 
 		PLANK = new ItemComponentMFR("plank").setCustom(1, "wood").setStoragePlacement("plank","plank");
+		PLANK_CUT = new ItemComponentMFR("plank_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
+		PLANK_PANE = new ItemComponentMFR("plank_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
+
 		VINE = new ItemComponentMFR("vine", -1);
 		SHARP_ROCK = new ItemComponentMFR("sharp_rock", -1);
 
@@ -305,6 +309,7 @@ public class ComponentListMFR {
 		TALISMAN_GREATER = new ItemComponentMFR("talisman_greater", 3);
 
 		BOLT = new ItemComponentMFR("bolt", 0);
+
 		IRON_FRAME = new ItemComponentMFR("iron_frame", 0);
 		IRON_STRUT = new ItemComponentMFR("iron_strut", 0);
 		BRONZE_GEARS = new ItemComponentMFR("bronze_gears", 0);
@@ -338,6 +343,7 @@ public class ComponentListMFR {
 		ARROWHEAD = new ItemCustomComponent("arrowhead", 1 / 4F, "metal");
 		BODKIN_HEAD = new ItemCustomComponent("bodkin_head", 1 / 4F, "metal");
 		BROAD_HEAD = new ItemCustomComponent("broad_head", 1 / 4F, "metal");
+
 		COGWORK_ARMOUR = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(CreativeTabMFR.tabGadget).setMaxStackSize(1);
 		BAR = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
 
@@ -349,9 +355,6 @@ public class ComponentListMFR {
 		GOLD_COIN = new ItemComponentMFR("gold_coin", 0);
 
 		HINGE = new ItemComponentMFR("hinge", 0);
-		PLANK_CUT = new ItemComponentMFR("plank_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
-		PLANK_PANE = new ItemComponentMFR("plank_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
-
 		COGWORK_PULLEY = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(CreativeTabMFR.tabGadget);
 
 		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, 2, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
@@ -402,6 +405,9 @@ public class ComponentListMFR {
 		registry.register(COMPOSITE_ALLOY_INGOT);
 
 		registry.register(PLANK);
+		registry.register(PLANK_CUT);
+		registry.register(PLANK_PANE);
+
 		registry.register(VINE);
 		registry.register(SHARP_ROCK);
 
@@ -472,6 +478,7 @@ public class ComponentListMFR {
 		registry.register(TALISMAN_GREATER);
 
 		registry.register(BOLT);
+
 		registry.register(IRON_FRAME);
 		registry.register(IRON_STRUT);
 		registry.register(BRONZE_GEARS);
@@ -516,8 +523,6 @@ public class ComponentListMFR {
 		registry.register(GOLD_COIN);
 
 		registry.register(HINGE);
-		registry.register(PLANK_CUT);
-		registry.register(PLANK_PANE);
 
 		registry.register(COGWORK_PULLEY);
 

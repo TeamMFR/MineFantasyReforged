@@ -63,7 +63,7 @@ public class ContainerCrucible extends ContainerBase {
                 this.inventoryItemStacks.set(i, itemstack1);
 
                 for (IContainerListener listener : this.listeners) {
-                    ( listener).sendSlotContents(this, i, itemstack1);
+                    (listener).sendSlotContents(this, i, itemstack1);
                 }
             }
         }

@@ -68,10 +68,8 @@ public class PlayerTickHandlerMF {
                 player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
 
                 List<?> list = player.world.playerEntities;
-                Iterator<?> players = list.iterator();
-                while (players.hasNext()) {
-                    Object instance = players.next();
-                    if (instance != null && instance instanceof EntityPlayer) {
+                for (Object instance : list) {
+                    if (instance instanceof EntityPlayer) {
                         if (((EntityPlayer) instance).getDistance(player) < 256D && instance != player) {
                             ((EntityPlayer) instance).sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
                         }
@@ -186,7 +184,7 @@ public class PlayerTickHandlerMF {
     public void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             ItemStack held = event.player.getHeldItemMainhand();
-            if (held != null) {
+            if (!held.isEmpty()) {
                 int parry = ItemWeaponMFR.getParry(held);
                 if (parry > 0) {
                     ItemWeaponMFR.setParry(held, parry - 1);
@@ -229,7 +227,7 @@ public class PlayerTickHandlerMF {
                     && event.player.ticksExisted % 100 == 0) {
                 for (int a = 0; a < event.player.inventory.getSizeInventory(); a++) {
                     ItemStack item = event.player.inventory.getStackInSlot(a);
-                    if (item != null && item.getItem() instanceof IHotItem) {
+                    if (!item.isEmpty() && item.getItem() instanceof IHotItem) {
                         event.player.setFire(5);
                         event.player.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
                     }
@@ -237,7 +235,7 @@ public class PlayerTickHandlerMF {
             }
             if (event.player.world.isRemote) {
                 ItemStack item = event.player.getHeldItemMainhand();
-                if (lastStack == null && item != null) {
+                if (lastStack.isEmpty() && !item.isEmpty()) {
                     if (item.getItem() instanceof IFirearm) {
                         NBTTagCompound nbt = AmmoMechanicsMFR.getNBT(item);
                         if (nbt.hasKey(ItemCrossbow.useTypeNBT)
@@ -246,7 +244,7 @@ public class PlayerTickHandlerMF {
                         }
                     }
                 }
-                if (lastStack != null && (item == null || item != lastStack)) {
+                if (!lastStack.isEmpty() && (item.isEmpty() || item != lastStack)) {
                     if (lastStack.getItem() instanceof IFirearm) {
                         NBTTagCompound nbt = AmmoMechanicsMFR.getNBT(lastStack);
                         if (nbt.hasKey(ItemCrossbow.useTypeNBT)

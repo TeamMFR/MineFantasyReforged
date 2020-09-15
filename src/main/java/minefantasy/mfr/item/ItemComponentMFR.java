@@ -59,7 +59,6 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         super(name);
         itemRarity = rarity;
         this.name = name;
-        this.name = name;
         this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
     }
 
@@ -265,8 +264,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
             if (rayTraceResult == null) {
                 return ActionResult.newResult(EnumActionResult.PASS, item);
             } else {
-                int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user,
-                        rayTraceResult);
+                int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, rayTraceResult);
                 if (placed > 0) {
                     item.shrink(placed);
                     return ActionResult.newResult(EnumActionResult.PASS, item);

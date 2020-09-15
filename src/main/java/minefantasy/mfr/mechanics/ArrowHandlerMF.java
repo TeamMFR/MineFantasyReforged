@@ -1,22 +1,21 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.common.eventhandler.EventPriority;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.ArrowNockEvent;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ArrowHandlerMF {
     /**
@@ -28,7 +27,7 @@ public class ArrowHandlerMF {
         }
         NBTTagCompound nbt = getOrApplyNBT(bow);
 
-        if (arrow == null) {
+        if (arrow.isEmpty()) {
             nbt.removeTag("loadedArrow");
         } else {
             NBTTagCompound loaded = new NBTTagCompound();
@@ -47,9 +46,6 @@ public class ArrowHandlerMF {
         return bow.getTagCompound();
     }
 
-
-    // TODO: Replace deprecated methods
-
     /**
      * When the arrow is pulled back it initiates
      */
@@ -58,41 +54,14 @@ public class ArrowHandlerMF {
         EntityPlayer user = event.getEntityPlayer();
         ItemStack bow = event.getBow();
 
-        if (AmmoMechanicsMFR.arrows == null || AmmoMechanicsMFR.arrows.size() <= 0) {
-            if (getIsInfinite(event.getEntityPlayer(), event.getBow())) {
-                ReflectionHelper.setPrivateValue(EntityPlayer.class, user, event.getBow().getMaxItemUseDuration());
-                user.getDataManager().set(ReflectionHelper.getPrivateValue(EntityPlayer.class, user, "HAND_STATES","field_184621_as"), (byte) 1);// Starts pullback
-                event.setCanceled(true);
-            }
-            return;
-        }
-
         /*
          * Checks over registered arrows and finds one to load The Quiver can be used to
          * determine this
          */
         ItemStack arrowToFire = AmmoMechanicsMFR.reloadBow(bow);
-        if (arrowToFire != null) {
-            ReflectionHelper.setPrivateValue(EntityPlayer.class, user, event.getBow().getMaxItemUseDuration());
-            user.getDataManager().set(ReflectionHelper.getPrivateValue(EntityPlayer.class, user, "HAND_STATES","field_184621_as"), (byte) 1);// Starts pullback
+        if (!arrowToFire.isEmpty()) {
             loadArrow(user, bow, arrowToFire);// adds the arrow to NBT for rendering and later use
-            event.setCanceled(true);
-            return;
-        } else {
-            if (getIsInfinite(event.getEntityPlayer(), event.getBow())) {
-                ReflectionHelper.setPrivateValue(EntityPlayer.class, user, event.getBow().getMaxItemUseDuration());
-                user.getDataManager().set(ReflectionHelper.getPrivateValue(EntityPlayer.class, user, "HAND_STATES","field_184621_as"), (byte) 1);// Starts pullback
-                event.setCanceled(true);
-                return;
-            }
         }
-        /*
-         * for(int a = 0; a < AmmoMechanicsMF.arrows.size(); a ++) { ItemStack arrow =
-         * AmmoMechanicsMF.arrows.get(a); if(user.inventory.hasItemStack(arrow)) {
-         * user.setItemInUse(bow, bow.getMaxItemUseDuration());//Starts pullback
-         * loadArrow(user, bow, arrow);//adds the arrow to NBT for rendering and later
-         * use event.setCanceled(true); return; } }
-         */
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -130,7 +99,7 @@ public class ArrowHandlerMF {
 
         // Default is flint arrow
         ItemStack arrow = new ItemStack(Items.ARROW);
-        if (AmmoMechanicsMFR.getArrowOnBow(bow) != null) {
+        if (!AmmoMechanicsMFR.getArrowOnBow(bow).isEmpty()) {
             // if an arrow is on the bow, it uses that
             arrow = AmmoMechanicsMFR.getArrowOnBow(bow);
         }
@@ -142,8 +111,7 @@ public class ArrowHandlerMF {
                         bow.damageItem(1, user);
                     }
                     world.playSound(user, user.getPosition(), SoundsMFR.BOW_FIRE, SoundCategory.NEUTRAL, 0.5F, 1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
-                    loadArrow(user, bow, null);
-                    event.setCanceled(true);
+                    loadArrow(user, bow, ItemStack.EMPTY);
                     AmmoMechanicsMFR.consumeAmmo(user, bow);
                     break;
                 }
@@ -158,8 +126,8 @@ public class ArrowHandlerMF {
     // Used to take an item/subId from the inventory
     private boolean consumePlayerItem(EntityPlayer player, ItemStack item) {
         for (int a = 0; a < player.inventory.getSizeInventory(); a++) {
-            ItemStack i = player.inventory.getStackInSlot(a);
-            if (i != null && i.isItemEqual(item)) {
+            ItemStack stackInSlot = player.inventory.getStackInSlot(a);
+            if (!stackInSlot.isEmpty() && stackInSlot.isItemEqual(item)) {
                 player.inventory.decrStackSize(a, 1);
                 return true;
             }

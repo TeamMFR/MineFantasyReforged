@@ -137,7 +137,7 @@ public class ClientProxy extends ClientProxyBase {
     }
 
     public void registerEntityRenderer() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, new RenderArrowMF(Minecraft.getMinecraft().getRenderManager()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, RenderArrowMF::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, new RenderBomb());
         RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, new RenderMine());
         RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, new RenderShrapnel("shrapnel"));

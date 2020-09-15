@@ -12,7 +12,7 @@ public class ItemApron extends ItemClothing {
 
     public static boolean isUserProtected(EntityPlayer user) {
         ItemStack worn = user.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-        if (worn == null) {
+        if (worn.isEmpty()) {
             return false;
         }
         return worn.getItem() instanceof ItemApron;

@@ -1,18 +1,16 @@
 package minefantasy.mfr.container.slots;
 
 import minefantasy.mfr.container.ContainerReload;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class SlotReload extends Slot {
+public class SlotReload extends SlotItemHandler {
     private ContainerReload container;
-    private int slot;
 
-    public SlotReload(ContainerReload container, IInventory parent, int id, int x, int y) {
+    public SlotReload(ContainerReload container, ItemStackHandler parent, int id, int x, int y) {
         super(parent, id, x, y);
         this.container = container;
-        this.slot = id;
     }
 
     @Override

@@ -1,17 +1,15 @@
 package minefantasy.mfr.client.render;
 
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.entity.EntityArrowMFR;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -23,25 +21,23 @@ public class RenderArrowMF extends Render<EntityArrowMFR> {
         super(renderManager);
     }
 
-    @Nullable
     @Override
-    protected ResourceLocation getEntityTexture(EntityArrowMFR entity) {
-        return null;
+    @Nullable
+    protected ResourceLocation getEntityTexture(EntityArrowMFR arrow){
+        return new ResourceLocation("minefantasyreborn:textures/projectile/" + arrow.getTexture() + ".png");
     }
 
-    public void renderArrow(EntityArrowMFR arrow, double x, double y, double z, float xr, float yr) {
-        this.loadTexture(arrow.getTexture() + ".png");
+    public void doRender(EntityArrowMFR arrow, double x, double y, double z, float xr, float yr) {
+        this.bindEntityTexture(arrow);
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y, (float) z);
-        GL11.glRotatef(arrow.prevRotationYaw + (arrow.rotationYaw - arrow.prevRotationYaw) * yr - 90.0F, 0.0F, 1.0F,
-                0.0F);
-        GL11.glRotatef(arrow.prevRotationPitch + (arrow.rotationPitch - arrow.prevRotationPitch) * yr, 0.0F, 0.0F,
-                1.0F);
+        GL11.glRotatef(arrow.prevRotationYaw + (arrow.rotationYaw - arrow.prevRotationYaw) * yr - 90.0F, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(arrow.prevRotationPitch + (arrow.rotationPitch - arrow.prevRotationPitch) * yr, 0.0F, 0.0F, 1.0F);
         Tessellator var10 = Tessellator.getInstance();
         byte var11 = 0;
         float var12 = 0.0F;
         float var13 = 0.5F;
-        float var14 = (0 + var11 * 10) / 32.0F;
+        float var14 = (var11 * 10) / 32.0F;
         float var15 = (5 + var11 * 10) / 32.0F;
         float var16 = 0.0F;
         float var17 = 0.15625F;
@@ -88,9 +84,5 @@ public class RenderArrowMF extends Render<EntityArrowMFR> {
 
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
-    }
-
-    private void loadTexture(String image) {
-        bindTexture(TextureHelperMFR.getResource(image));
     }
 }

@@ -85,7 +85,7 @@ public class StaminaMechanics {
                 entity.setAir(entity.getAir() - 1);
             }
             if (entity instanceof EntityPlayer && TacticalManager.shouldStaminaBlock) {
-                if (entity.isHandActive() && (!entity.getHeldItem(EnumHand.MAIN_HAND).isEmpty() && entity.getHeldItem(EnumHand.MAIN_HAND).getItemUseAction() == EnumAction.BLOCK)) {
+                if (entity.isHandActive() && (!entity.getHeldItemMainhand().isEmpty() && entity.getHeldItemMainhand().getItemUseAction() == EnumAction.BLOCK)) {
                     entity.stopActiveHand();
                 }
             }

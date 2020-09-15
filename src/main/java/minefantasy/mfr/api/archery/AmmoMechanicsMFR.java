@@ -23,11 +23,11 @@ public class AmmoMechanicsMFR {
     /**
      * List of fireable arrows
      */
-    public static List<ItemStack> arrows = new ArrayList<ItemStack>();
+    public static List<ItemStack> arrows = new ArrayList<>();
     /**
      * List of handlers
      */
-    public static List<IArrowHandler> handlers = new ArrayList<IArrowHandler>();
+    public static List<IArrowHandler> handlers = new ArrayList<>();
 
     /**
      * Adds an arrow that can be fired

@@ -10,6 +10,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.util.ITooltipFlag;
@@ -48,7 +49,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@Optional.Interface(iface = "mods.battlegear2.api.weapons.IBattlegearWeapon", modid = "battlegear2")
 public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
     private final EnumBowType model;
@@ -185,16 +185,16 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List desc, ITooltipFlag flag) {
-        super.addInformation(item, world, desc, flag);
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+        super.addInformation(item, world, list, flag);
 
-        CustomToolHelper.addBowInformation(item, desc);
+        CustomToolHelper.addBowInformation(item, list);
         ItemStack ammo = AmmoMechanicsMFR.getAmmo(item);
-        if (ammo != null) {
-            desc.add(TextFormatting.DARK_GRAY + ammo.getDisplayName() + " x" + ammo.getCount());
+        if (!ammo.isEmpty()) {
+            list.add(TextFormatting.DARK_GRAY + ammo.getDisplayName() + " x" + ammo.getCount());
         }
 
-        desc.add(TextFormatting.BLUE + I18n.format("attribute.bowPower.name",
+        list.add(TextFormatting.BLUE + I18n.format("attribute.bowPower.name",
                 decimal_format.format(getBowDamage(item))));
     }
 
@@ -208,26 +208,27 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         ItemStack item = player.getHeldItem(hand);
         if (!world.isRemote && player.isSneaking() || AmmoMechanicsMFR.isDepleted(item)) {
             reloadBow(item, player);
-            return ActionResult.newResult(EnumActionResult.PASS, item);
+            return ActionResult.newResult(EnumActionResult.FAIL, item);
         }
-        ArrowNockEvent event = new ArrowNockEvent(player, item, hand, world, true);
-        MinecraftForge.EVENT_BUS.post(event);
-        if (event.isCanceled()) {
-            return event.getAction();
+        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(item, world, player, hand, AmmoMechanicsMFR.isFirearmLoaded(item));
+        if (ret != null) {
+            return ret;
+        }
+        if(AmmoMechanicsMFR.isFirearmLoaded(item)) {
+            player.setActiveHand(hand);
+            return new ActionResult<>(EnumActionResult.SUCCESS, item);
         }
         return ActionResult.newResult(EnumActionResult.FAIL, item);
-
-        // player.inventory.hasItem(Items.arrow)
     }
 
     public boolean canAccept(ItemStack ammo) {
         String ammoType = "null";
         ItemStack weapon = new ItemStack(this);
-        if (ammo != null && ammo.getItem() instanceof IAmmo) {
+        if (!ammo.isEmpty() && ammo.getItem() instanceof IAmmo) {
             ammoType = ((IAmmo) ammo.getItem()).getAmmoType(ammo);
         }
 
-        if (weapon != null && weapon.getItem() instanceof IFirearm) {
+        if (!weapon.isEmpty() && weapon.getItem() instanceof IFirearm) {
             return ((IFirearm) weapon.getItem()).canAcceptAmmo(weapon, ammoType);
         }
 
@@ -235,7 +236,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     }
 
     private void reloadBow(ItemStack item, EntityPlayer player) {
-        player.openGui(MineFantasyReborn.INSTANCE, 1, player.world, 1, 0, 0);
+        player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
     }
 
     @Override
@@ -364,14 +365,11 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         }
         if (isCustom) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-            Iterator iteratorWood = wood.iterator();
-            while (iteratorWood.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack() != null) {
-                    items.add(this.construct("Iron", customMat.name));
+            for (CustomMaterial customMat : wood) {
+                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct("iron", customMat.name));
                 }
             }
-            return;
         }
     }
 

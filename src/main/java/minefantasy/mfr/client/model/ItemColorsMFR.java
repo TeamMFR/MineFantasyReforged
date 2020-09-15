@@ -2,10 +2,13 @@ package minefantasy.mfr.client.model;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.OrnateStyle;
+import minefantasy.mfr.item.armour.ItemArmourMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -76,6 +79,12 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPEAR);
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_WARAXE);
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_WARHAMMER);
+
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_BOW);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_ARROW);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_ARROW_BODKIN);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_ARROW_BROAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_BOLT);
 
 		// Dragonforged tools
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_AXE);
@@ -214,6 +223,16 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_CHEST);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_LEGS);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_BOOTS);
+
+		//Leather Armours
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER_APRON);
+
+		///COMMODITIES
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_PANE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.COGWORK_ARMOUR);
 	}
 
 }
