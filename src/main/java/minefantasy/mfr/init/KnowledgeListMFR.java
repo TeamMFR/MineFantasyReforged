@@ -340,15 +340,15 @@ public class KnowledgeListMFR {
                 .registerStat().setPage(engineering).setUnlocked();
         crossShaftAdvanced = (new InformationBase("crossShaftAdvanced", -6, 4, 2, ComponentListMFR.CROSSBOW_STOCK_IRON,
                 crossShafts)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
-        crossHeads = (new InformationBase("crossHeads", -2, -2, 0, ComponentListMFR.CROSS_ARMS_BASIC, crossbows))
+        crossHeads = (new InformationBase("crossHeads", -2, -2, 0, ComponentListMFR.CROSSBOW_ARMS_BASIC, crossbows))
                 .registerStat().setPage(engineering).setUnlocked();
-        crossHeadAdvanced = (new InformationBase("crossHeadAdvanced", -3, -3, 2, ComponentListMFR.CROSS_ARMS_ADVANCED,
+        crossHeadAdvanced = (new InformationBase("crossHeadAdvanced", -3, -3, 2, ComponentListMFR.CROSSBOW_ARMS_ADVANCED,
                 crossHeads)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 30);
-        crossBayonet = (new InformationBase("crossBayonet", -1, -3, 1, ComponentListMFR.CROSS_BAYONET, crossHeads))
+        crossBayonet = (new InformationBase("crossBayonet", -1, -3, 1, ComponentListMFR.CROSSBOW_BAYONET, crossHeads))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 10);
-        crossAmmo = (new InformationBase("crossAmmo", -5, 3, 1, ComponentListMFR.CROSS_AMMO, crossShafts)).registerStat()
+        crossAmmo = (new InformationBase("crossAmmo", -5, 3, 1, ComponentListMFR.CROSSBOW_AMMO, crossShafts)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 30);
-        crossScope = (new InformationBase("crossScope", -7, 3, 1, ComponentListMFR.CROSS_SCOPE, crossShafts))
+        crossScope = (new InformationBase("crossScope", -7, 3, 1, ComponentListMFR.CROSSBOW_SCOPE, crossShafts))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
 
         cogArmour = (new InformationBase("cogArmour", 8, -3, 2, BlockListMFR.COGWORK_HELM, tungsten)).registerStat()

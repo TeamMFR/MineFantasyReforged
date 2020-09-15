@@ -179,14 +179,14 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         add(items, ComponentListMFR.CROSSBOW_STOCK_WOOD);
         add(items, ComponentListMFR.CROSSBOW_STOCK_IRON);
 
-        add(items, ComponentListMFR.CROSS_ARMS_BASIC);
-        add(items, ComponentListMFR.CROSS_ARMS_LIGHT);
-        add(items, ComponentListMFR.CROSS_ARMS_HEAVY);
-        add(items, ComponentListMFR.CROSS_ARMS_ADVANCED);
+        add(items, ComponentListMFR.CROSSBOW_ARMS_BASIC);
+        add(items, ComponentListMFR.CROSSBOW_ARMS_LIGHT);
+        add(items, ComponentListMFR.CROSSBOW_ARMS_HEAVY);
+        add(items, ComponentListMFR.CROSSBOW_ARMS_ADVANCED);
 
-        add(items, ComponentListMFR.CROSS_AMMO);
-        add(items, ComponentListMFR.CROSS_SCOPE);
-        add(items, ComponentListMFR.CROSS_BAYONET);
+        add(items, ComponentListMFR.CROSSBOW_AMMO);
+        add(items, ComponentListMFR.CROSSBOW_SCOPE);
+        add(items, ComponentListMFR.CROSSBOW_BAYONET);
 
         add(items, ComponentListMFR.COPPER_COIN);
         add(items, ComponentListMFR.SILVER_COIN);

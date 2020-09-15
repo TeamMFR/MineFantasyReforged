@@ -22,6 +22,7 @@ import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.RegistryEvent;
@@ -156,14 +157,14 @@ public class ComponentListMFR {
 	public static Item CROSSBOW_STOCK_IRON = Utils.nullValue();
 	public static Item CROSSBOW_HANDLE_WOOD = Utils.nullValue();
 
-	public static Item CROSS_ARMS_BASIC = Utils.nullValue();
-	public static Item CROSS_ARMS_LIGHT = Utils.nullValue();
-	public static Item CROSS_ARMS_HEAVY = Utils.nullValue();
-	public static Item CROSS_ARMS_ADVANCED = Utils.nullValue();
+	public static Item CROSSBOW_ARMS_BASIC = Utils.nullValue();
+	public static Item CROSSBOW_ARMS_LIGHT = Utils.nullValue();
+	public static Item CROSSBOW_ARMS_HEAVY = Utils.nullValue();
+	public static Item CROSSBOW_ARMS_ADVANCED = Utils.nullValue();
 
-	public static Item CROSS_BAYONET = Utils.nullValue();
-	public static Item CROSS_AMMO = Utils.nullValue();
-	public static Item CROSS_SCOPE = Utils.nullValue();
+	public static Item CROSSBOW_BAYONET = Utils.nullValue();
+	public static Item CROSSBOW_AMMO = Utils.nullValue();
+	public static Item CROSSBOW_SCOPE = Utils.nullValue();
 
 	public static ItemCustomComponent CHAIN_MESH = Utils.nullValue();
 	public static ItemCustomComponent SCALE_MESH = Utils.nullValue();
@@ -325,14 +326,14 @@ public class ComponentListMFR {
 		CROSSBOW_STOCK_IRON = new ItemCrossbowPart("crossbow_stock_iron", "stock").addSpeed(1.0F).addRecoil(-2F).addDurability(150);
 		CROSSBOW_HANDLE_WOOD = new ItemCrossbowPart("crossbow_handle_wood", "stock").addSpeed(0.5F).addRecoil(2F).addSpread(1.0F).setHandCrossbow(true);
 
-		CROSS_ARMS_BASIC = new ItemCrossbowPart("cross_arms_basic", "mechanism").addPower(1.00F).addSpeed(0.50F).addRecoil(4F).addSpread(1.00F);
-		CROSS_ARMS_LIGHT = new ItemCrossbowPart("cross_arms_light", "mechanism").addPower(0.85F).addSpeed(0.25F).addRecoil(2F).addSpread(0.50F);
-		CROSS_ARMS_HEAVY = new ItemCrossbowPart("cross_arms_heavy", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(8F).addSpread(2.00F);
-		CROSS_ARMS_ADVANCED = new ItemCrossbowPart("cross_arms_advanced", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(6F).addSpread(0.25F).addDurability(150);
+		CROSSBOW_ARMS_BASIC = new ItemCrossbowPart("crossbow_arms_basic", "mechanism").addPower(1.00F).addSpeed(0.50F).addRecoil(4F).addSpread(1.00F);
+		CROSSBOW_ARMS_LIGHT = new ItemCrossbowPart("crossbow_arms_light", "mechanism").addPower(0.85F).addSpeed(0.25F).addRecoil(2F).addSpread(0.50F);
+		CROSSBOW_ARMS_HEAVY = new ItemCrossbowPart("crossbow_arms_heavy", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(8F).addSpread(2.00F);
+		CROSSBOW_ARMS_ADVANCED = new ItemCrossbowPart("crossbow_arms_advanced", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(6F).addSpread(0.25F).addDurability(150);
 
-		CROSS_BAYONET = new ItemCrossbowPart("cross_bayonet", "muzzle").addBash(4.0F).addRecoil(-1F).addSpeed(0.5F);
-		CROSS_AMMO = new ItemCrossbowPart("cross_ammo", "mod").addCapacity(5).addSpread(2.00F);
-		CROSS_SCOPE = new ItemCrossbowPart("cross_scope", "mod").setScope(0.75F);
+		CROSSBOW_BAYONET = new ItemCrossbowPart("crossbow_bayonet", "muzzle").addBash(4.0F).addRecoil(-1F).addSpeed(0.5F);
+		CROSSBOW_AMMO = new ItemCrossbowPart("crossbow_ammo", "mod").addCapacity(5).addSpread(2.00F);
+		CROSSBOW_SCOPE = new ItemCrossbowPart("crossbow_scope", "mod").setScope(0.75F);
 
 		CHAIN_MESH = new ItemCustomComponent("chain_mesh", 1F, "metal").setStoragePlacement("sheet", "mail");
 		SCALE_MESH = new ItemCustomComponent("scale_mesh", 1F, "metal").setStoragePlacement("sheet", "scale");
@@ -357,16 +358,16 @@ public class ComponentListMFR {
 		HINGE = new ItemComponentMFR("hinge", 0);
 		COGWORK_PULLEY = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(CreativeTabMFR.tabGadget);
 
-		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, 2, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
-		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, 2, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
-		ANCIENT_JEWEL_MASTER =  new ItemArtefact("ancient_jewel_master", 30, 2, ItemArtefact.MYTHIC, 1, "smeltMaster");
-		TRILOGY_JEWEL = new ItemArtefact("trilogy_jewel", 3, null, 1);
-		SCHEMATIC_BOMB = new ItemArtefact("schematic_bomb", 50, 2, null, 1, "bombObsidian", "mineObsidian");
-		SCHEMATIC_CROSSBOW = new ItemArtefact("schematic_crossbow", 50, 2, null, 1, "crossShaftAdvanced", "crossHeadAdvanced");
-		SCHEMATIC_FORGE = new ItemArtefact("schematic_forge", 50, 2, null, 1, "advforge", "advcrucible");
-		SCHEMATIC_GEARS =  new ItemArtefact("schematic_gears", 50, 2, null, 1, "cogArmour");
-		SCHEMATIC_COGWORK = new ItemArtefact("schematic_cogwork", 50, 2, null, 1, "cogArmour");
-		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy",50, 2, null, 1, "compPlate");
+		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
+		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
+		ANCIENT_JEWEL_MASTER =  new ItemArtefact("ancient_jewel_master", 30, EnumRarity.EPIC, ItemArtefact.MYTHIC, 1, "smeltMaster");
+		TRILOGY_JEWEL = new ItemArtefact("trilogy_jewel", EnumRarity.EPIC, null, 1);
+		SCHEMATIC_BOMB = new ItemArtefact("schematic_bomb", 50, EnumRarity.RARE, null, 1, "bombObsidian", "mineObsidian");
+		SCHEMATIC_CROSSBOW = new ItemArtefact("schematic_crossbow", 50, EnumRarity.RARE, null, 1, "crossShaftAdvanced", "crossHeadAdvanced");
+		SCHEMATIC_FORGE = new ItemArtefact("schematic_forge", 50, EnumRarity.RARE, null, 1, "advforge", "advcrucible");
+		SCHEMATIC_GEARS =  new ItemArtefact("schematic_gears", 50, EnumRarity.RARE, null, 1, "cogArmour");
+		SCHEMATIC_COGWORK = new ItemArtefact("schematic_cogwork", 50, EnumRarity.RARE, null, 1, "cogArmour");
+		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy",50, EnumRarity.RARE, null, 1, "compPlate");
 
 		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", 1, "ornate");
 	}
@@ -494,14 +495,14 @@ public class ComponentListMFR {
 		registry.register(CROSSBOW_STOCK_IRON);
 		registry.register(CROSSBOW_HANDLE_WOOD);
 
-		registry.register(CROSS_ARMS_BASIC);
-		registry.register(CROSS_ARMS_LIGHT);
-		registry.register(CROSS_ARMS_HEAVY);
-		registry.register(CROSS_ARMS_ADVANCED);
+		registry.register(CROSSBOW_ARMS_BASIC);
+		registry.register(CROSSBOW_ARMS_LIGHT);
+		registry.register(CROSSBOW_ARMS_HEAVY);
+		registry.register(CROSSBOW_ARMS_ADVANCED);
 
-		registry.register(CROSS_BAYONET);
-		registry.register(CROSS_AMMO);
-		registry.register(CROSS_SCOPE);
+		registry.register(CROSSBOW_BAYONET);
+		registry.register(CROSSBOW_AMMO);
+		registry.register(CROSSBOW_SCOPE);
 
 		registry.register(CHAIN_MESH);
 		registry.register(SCALE_MESH);

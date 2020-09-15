@@ -271,16 +271,16 @@ public class ItemCrossbow extends ItemBaseMFR
             return;
         }
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_HANDLE_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_BASIC));
+                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC));
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_LIGHT));
+                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_LIGHT));
 
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_BASIC, (ICrossbowPart) ComponentListMFR.CROSS_AMMO));
+                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC, (ICrossbowPart) ComponentListMFR.CROSSBOW_AMMO));
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_HEAVY, (ICrossbowPart) ComponentListMFR.CROSS_BAYONET));
+                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_HEAVY, (ICrossbowPart) ComponentListMFR.CROSSBOW_BAYONET));
         items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_IRON,
-                (ICrossbowPart) ComponentListMFR.CROSS_ARMS_ADVANCED, (ICrossbowPart) ComponentListMFR.CROSS_SCOPE));
+                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_ADVANCED, (ICrossbowPart) ComponentListMFR.CROSSBOW_SCOPE));
     }
 
     public String getNameModifier(ItemStack item, String partname) {

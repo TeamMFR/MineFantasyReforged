@@ -278,7 +278,7 @@ public class ForgingRecipes {
         KnowledgeListMFR.mineCaseObsidianR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.MINE_CASING_OBSIDIAN, 2), "mineObsidian", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  T  ", "  P  ", " IRI ", "IRORI", 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'O', Blocks.OBSIDIAN, 'P', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 'I', obsidianHunk, 'R', ComponentListMFR.RIVET);
         time = 15;
         material = BaseMaterialMFR.STEEL;
-        KnowledgeListMFR.crossBayonetR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.CROSS_BAYONET), "crossBayonet", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "R R I", "PIII ", 'P', ComponentListMFR.PLANK.construct("RefinedWood"), 'I', ironHunk, 'R', ComponentListMFR.RIVET);
+        KnowledgeListMFR.crossBayonetR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.CROSSBOW_BAYONET), "crossBayonet", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "R R I", "PIII ", 'P', ComponentListMFR.PLANK.construct("RefinedWood"), 'I', ironHunk, 'R', ComponentListMFR.RIVET);
 
         Salvage.addSalvage(ToolListMFR.ENGIN_ANVIL_TOOLS, steelHunk, steelHunk, steelHunk, steelHunk, new ItemStack(ComponentListMFR.LEATHER_STRIP, 4));
 
@@ -306,7 +306,7 @@ public class ForgingRecipes {
         Salvage.addSalvage(ComponentListMFR.BOMB_CASING_OBSIDIAN, obsidianHunk, obsidianHunk, new ItemStack(ComponentListMFR.RIVET, 2));
         Salvage.addSalvage(ComponentListMFR.MINE_CASING_OBSIDIAN, obsidianHunk, obsidianHunk, iron, ComponentListMFR.RIVET);
 
-        Salvage.addSalvage(ComponentListMFR.CROSS_BAYONET, ironHunk, ironHunk, ironHunk, ironHunk, ComponentListMFR.PLANK.construct("RefinedWood"), new ItemStack(ComponentListMFR.RIVET, 2));
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_BAYONET, ironHunk, ironHunk, ironHunk, ironHunk, ComponentListMFR.PLANK.construct("RefinedWood"), new ItemStack(ComponentListMFR.RIVET, 2));
     }
 
     private static void addConstruction() {

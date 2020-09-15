@@ -478,7 +478,7 @@ bomb.component.powder=Powder
 crossbow.component.name=Crossbow Component
 crossbow.component.stock=Stock
 crossbow.component.mechanism=Arms
-crossbow.component.mod=Mod
+crossbow.component.mod=Modification
 crossbow.component.muzzle=Muzzle
 
 item.bomb_crude.name=Crude Bomb
@@ -995,14 +995,17 @@ item.ornate_bow.name=Ornate %1$s Bow
 # ARTEFACT
 stat.artefact.name=Artefact
 item.ancient_jewel.name=Ancient Jewel
+item.ancient_jewel_mithril.name=Ancient Jewel
+item.ancient_jewel_adamant.name=Ancient Jewel
+item.ancient_jewel_master.name=Ancient Jewel
 item.trilogy_jewel.name=Ancient Trilogy
 
-item.schem_gears.name=Cogwork Gears Schematics
-item.schem_forge.name=Advanced Forge Schematics
-item.schem_cogwork.name=Cogwork Frame Schematics
-item.schem_bomb.name=Dwarven Bomb Schematics
-item.schem_crossbow.name=Dwarven Crossbow Schematics
-item.schem_alloy.name=Composite Alloy Schematics
+item.schematic_gears.name=Cogwork Gears Schematics
+item.schematic_forge.name=Advanced Forge Schematics
+item.schematic_cogwork.name=Cogwork Frame Schematics
+item.schematic_bomb.name=Dwarven Bomb Schematics
+item.schematic_crossbow.name=Dwarven Crossbow Schematics
+item.schematic_alloy.name=Composite Alloy Schematics
 
 # FOOD
 item.berries.name=Berries

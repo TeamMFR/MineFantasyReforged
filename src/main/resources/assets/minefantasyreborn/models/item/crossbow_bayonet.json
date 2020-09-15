@@ -1,6 +1,6 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/cross_arms_basic"
+        "layer0": "minefantasyreborn:items/crossbow_bayonet"
     }
 }

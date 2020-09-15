@@ -751,43 +751,43 @@ public class CarpenterRecipes {
                         ComponentListMFR.IRON_STRUT, 'B', ComponentListMFR.BOLT,});
 
         KnowledgeListMFR.crossHeadLightR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(ComponentListMFR.CROSS_ARMS_LIGHT), "crossHeads", nailHammer, "hammer", 2, 200,
+                new ItemStack(ComponentListMFR.CROSSBOW_ARMS_LIGHT), "crossHeads", nailHammer, "hammer", 2, 200,
                 new Object[]{"PPP", "NSN", " P ", 'P', ComponentListMFR.PLANK.construct("RefinedWood"), 'N',
                         ComponentListMFR.NAIL, 'S', Items.STRING,});
         KnowledgeListMFR.crossHeadMediumR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(ComponentListMFR.CROSS_ARMS_BASIC), "crossHeads", nailHammer, "hammer", 2, 250,
+                new ItemStack(ComponentListMFR.CROSSBOW_ARMS_BASIC), "crossHeads", nailHammer, "hammer", 2, 250,
                 new Object[]{"NNN", "PAP", 'N', ComponentListMFR.NAIL, 'P',
-                        ComponentListMFR.PLANK.construct("RefinedWood"), 'A', ComponentListMFR.CROSS_ARMS_LIGHT,});
+                        ComponentListMFR.PLANK.construct("RefinedWood"), 'A', ComponentListMFR.CROSSBOW_ARMS_LIGHT,});
         KnowledgeListMFR.crossHeadHeavyR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(ComponentListMFR.CROSS_ARMS_HEAVY), "crossHeads", nailHammer, "hammer", 2, 350,
+                new ItemStack(ComponentListMFR.CROSSBOW_ARMS_HEAVY), "crossHeads", nailHammer, "hammer", 2, 350,
                 new Object[]{"NNN", "PAP", 'N', ComponentListMFR.NAIL, 'P',
-                        ComponentListMFR.PLANK.construct("RefinedWood"), 'A', ComponentListMFR.CROSS_ARMS_BASIC,});
+                        ComponentListMFR.PLANK.construct("RefinedWood"), 'A', ComponentListMFR.CROSSBOW_ARMS_BASIC,});
         KnowledgeListMFR.crossHeadAdvancedR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(ComponentListMFR.CROSS_ARMS_ADVANCED), "crossHeadAdvanced", nailHammer, "hammer", 2, 350,
+                new ItemStack(ComponentListMFR.CROSSBOW_ARMS_ADVANCED), "crossHeadAdvanced", nailHammer, "hammer", 2, 350,
                 new Object[]{"NRN", "RGR", " A ", 'G', ComponentListMFR.TUNGSTEN_GEARS, 'N', ComponentListMFR.NAIL, 'R',
-                        ComponentListMFR.STEEL_TUBE, 'A', ComponentListMFR.CROSS_ARMS_BASIC,});
+                        ComponentListMFR.STEEL_TUBE, 'A', ComponentListMFR.CROSSBOW_ARMS_BASIC,});
 
         KnowledgeListMFR.crossAmmoR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(ComponentListMFR.CROSS_AMMO), "crossAmmo", nailHammer, "hammer", 2, 200,
+                new ItemStack(ComponentListMFR.CROSSBOW_AMMO), "crossAmmo", nailHammer, "hammer", 2, 200,
                 new Object[]{"NNN", "P P", "PGP", "PPP", 'G', ComponentListMFR.TUNGSTEN_GEARS, 'P',
                         ComponentListMFR.PLANK.construct("RefinedWood"), 'N', ComponentListMFR.NAIL,});
         KnowledgeListMFR.crossScopeR = MineFantasyRebornAPI.addCarpenterRecipe(engineering,
-                new ItemStack(ComponentListMFR.CROSS_SCOPE), "crossScope", spanner, "spanner", 2, 150,
+                new ItemStack(ComponentListMFR.CROSSBOW_SCOPE), "crossScope", spanner, "spanner", 2, 150,
                 new Object[]{"BSB", "GP ", 'G', ComponentListMFR.TUNGSTEN_GEARS, 'S', ToolListMFR.SPYGLASS, 'P',
                         ComponentListMFR.PLANK.construct("RefinedWood"), 'B', ComponentListMFR.BOLT,});
-        Salvage.addSalvage(ComponentListMFR.CROSS_ARMS_LIGHT, new ItemStack(ComponentListMFR.NAIL, 2), Items.STRING,
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_ARMS_LIGHT, new ItemStack(ComponentListMFR.NAIL, 2), Items.STRING,
                 ComponentListMFR.PLANK.construct("RefinedWood", 4));
-        Salvage.addSalvage(ComponentListMFR.CROSS_ARMS_BASIC, new ItemStack(ComponentListMFR.NAIL, 3),
-                ComponentListMFR.CROSS_ARMS_LIGHT, ComponentListMFR.PLANK.construct("RefinedWood", 2));
-        Salvage.addSalvage(ComponentListMFR.CROSS_ARMS_HEAVY, new ItemStack(ComponentListMFR.NAIL, 3),
-                ComponentListMFR.CROSS_ARMS_BASIC, ComponentListMFR.PLANK.construct("RefinedWood", 2));
-        Salvage.addSalvage(ComponentListMFR.CROSS_ARMS_ADVANCED, ComponentListMFR.TUNGSTEN_GEARS,
-                new ItemStack(ComponentListMFR.NAIL, 2), ComponentListMFR.CROSS_ARMS_BASIC,
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_ARMS_BASIC, new ItemStack(ComponentListMFR.NAIL, 3),
+                ComponentListMFR.CROSSBOW_ARMS_LIGHT, ComponentListMFR.PLANK.construct("RefinedWood", 2));
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_ARMS_HEAVY, new ItemStack(ComponentListMFR.NAIL, 3),
+                ComponentListMFR.CROSSBOW_ARMS_BASIC, ComponentListMFR.PLANK.construct("RefinedWood", 2));
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_ARMS_ADVANCED, ComponentListMFR.TUNGSTEN_GEARS,
+                new ItemStack(ComponentListMFR.NAIL, 2), ComponentListMFR.CROSSBOW_ARMS_BASIC,
                 new ItemStack(ComponentListMFR.STEEL_TUBE, 3));
 
-        Salvage.addSalvage(ComponentListMFR.CROSS_SCOPE, ComponentListMFR.TUNGSTEN_GEARS, ToolListMFR.SPYGLASS,
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_SCOPE, ComponentListMFR.TUNGSTEN_GEARS, ToolListMFR.SPYGLASS,
                 new ItemStack(ComponentListMFR.BOLT, 2), ComponentListMFR.PLANK.construct("RefinedWood"));
-        Salvage.addSalvage(ComponentListMFR.CROSS_AMMO, ComponentListMFR.TUNGSTEN_GEARS,
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_AMMO, ComponentListMFR.TUNGSTEN_GEARS,
                 new ItemStack(ComponentListMFR.NAIL, 3), ComponentListMFR.PLANK.construct("RefinedWood", 7));
         Salvage.addSalvage(ComponentListMFR.CROSSBOW_HANDLE_WOOD, new ItemStack(ComponentListMFR.NAIL, 2),
                 ComponentListMFR.PLANK.construct("RefinedWood", 3));
