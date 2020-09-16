@@ -1,5 +1,6 @@
 package minefantasy.mfr.item.archery;
 
+import codechicken.lib.model.ModelRegistryHelper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
@@ -8,12 +9,16 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.client.render.RenderBow;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.Utils;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,6 +32,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -40,6 +46,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -433,6 +440,14 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     @Override
     public void registerClient() {
         ModelLoaderHelper.registerItem(this);
+
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelRegistryHelper.registerItemRenderer(this, new RenderBow());
+
+
     }
+
+
+
 
 }
