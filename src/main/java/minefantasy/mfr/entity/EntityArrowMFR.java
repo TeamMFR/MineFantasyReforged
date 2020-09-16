@@ -762,6 +762,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         return getArrowStack();
     }
 
+    @Override
     protected ItemStack getArrowStack() {
         if (getEntityData().hasKey("MF_ArrowItem")) {
             NBTTagCompound heldArrow = getEntityData().getCompoundTag("MF_ArrowItem");

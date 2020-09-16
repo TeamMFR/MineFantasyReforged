@@ -1,11 +1,11 @@
 package minefantasy.mfr.api.archery;
 
 import minefantasy.mfr.block.decor.BlockAmmoBox;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -149,7 +149,7 @@ public class AmmoMechanicsMFR {
     }
 
     public static boolean isDepleted(ItemStack firearm) {
-        return getGunAmmoCount(firearm) == 0 && getAmmo(firearm) == ItemStack.EMPTY && EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(51), firearm) == 0;
+        return getGunAmmoCount(firearm) == 0 && getAmmo(firearm) == ItemStack.EMPTY && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, firearm) == 0;
     }
 
     public static boolean isFirearmLoaded(ItemStack firearm) {

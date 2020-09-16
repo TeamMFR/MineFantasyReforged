@@ -1,7 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer1": "minefantasyreborn:items/dragonforged_bow_pulling_1",
+        "layer0": "minefantasyreborn:items/dragonforged_bow_pulling_1",
         "layer1": "minefantasyreborn:items/dragonforged_bow_pulling_1_haft",
         "layer2": "minefantasyreborn:items/dragonforged_bow_pulling_1_detail"
     }
