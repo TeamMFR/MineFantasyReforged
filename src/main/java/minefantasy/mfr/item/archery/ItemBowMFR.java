@@ -15,10 +15,7 @@ import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
-import minefantasy.mfr.util.Utils;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -29,10 +26,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -42,7 +38,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -50,10 +45,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +64,9 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
+    private boolean isPulling;
+    long startTime;
+    long endTime;
     private String designType = "standard";
 
     public ItemBowMFR(String name, EnumBowType type) {
@@ -92,19 +88,6 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         setUnlocalizedName(name);
         setCreativeTab(CreativeTabMFR.tabOldTools);
 
-        addPropertyOverride(new ResourceLocation(MineFantasyReborn.MOD_ID, "pull"),
-                Utils.IItemPropertyGetterFix.create((stack, world, entity) -> {
-                    if (entity == null) return 0.0f;
-
-                    final ItemStack activeItemStack = entity.getActiveItemStack();
-                    if (!activeItemStack.isEmpty() && activeItemStack.getItem() instanceof ItemBowMFR) {
-                        return (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20.0f;
-                    }
-
-                    return 0.0f;
-                })
-        );
-
         MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
@@ -123,6 +106,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
      */
     @Override
     public void onPlayerStoppedUsing(final ItemStack stack, final World worldIn, final EntityLivingBase entityLiving, final int timeLeft) {
+        isPulling = false;
+        endTime = worldIn.getWorldTime();
         final int charge = this.getMaxItemUseDuration(stack) - timeLeft;
         fireArrow(stack, worldIn, entityLiving, charge);
     }
@@ -164,6 +149,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
      */
     @Override
     public ActionResult<ItemStack> onItemRightClick(final World worldIn, final EntityPlayer playerIn, final EnumHand hand) {
+        isPulling = true;
+        startTime = worldIn.getWorldTime();
         return nockArrow(playerIn.getHeldItem(hand), worldIn, playerIn, hand);
     }
 
@@ -320,6 +307,10 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
         }
     }
 
+    public boolean isPulling(){
+        return isPulling;
+    }
+
     public int getDrawAmount(int timer) {
         float maxCharge = this.getMaxCharge();
         if (timer > (maxCharge * 0.9F))
@@ -440,10 +431,9 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     @Override
     public void registerClient() {
         ModelLoaderHelper.registerItem(this);
-
         ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-        ModelRegistryHelper.registerItemRenderer(this, new RenderBow());
-
+        ModelLoader.setCustomModelResourceLocation(this, 0, modelLocation);
+        ModelRegistryHelper.register(modelLocation, new RenderBow(() -> modelLocation));
 
     }
 

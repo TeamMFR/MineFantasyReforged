@@ -1,59 +1,82 @@
 package minefantasy.mfr.client.render;
-import codechicken.lib.render.CCModelState;
+
+import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
+import minefantasy.mfr.item.archery.ItemBowMFR;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntityChest;
 import net.minecraftforge.common.model.IModelState;
-import net.minecraftforge.common.model.TRSRTransformation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.EnumMap;
-import java.util.Map;
+import java.util.function.Supplier;
 
 @SideOnly(Side.CLIENT)
-public class RenderBow implements IItemRenderer {
-	private static final TileEntityChest CHEST_TE = new TileEntityChest();
+public class RenderBow extends WrappedItemModel implements IItemRenderer {
 
-	private static final IModelState TRANSFORMS;
-
-	static {
-		Map<TransformType, TRSRTransformation> map;
-		TRSRTransformation thirdPerson;
-
-		map = new EnumMap<>(TransformType.class);
-		thirdPerson = TransformUtils.create(0F, 2.5F, 0F, 75F, 45F, 0F, 0.375F);
-		map.put(TransformType.GUI, TransformUtils.create(0F, 0F, 0F, 30F, 45F, 0F, 0.625F));
-		map.put(TransformType.GROUND, TransformUtils.create(0F, 3F, 0F, 0F, 0F, 0F, 0.25F));
-		map.put(TransformType.FIXED, TransformUtils.create(0F, 0F, 0F, 0F, 0F, 0F, 0.5F));
-		map.put(TransformType.THIRD_PERSON_RIGHT_HAND, thirdPerson);
-		map.put(TransformType.THIRD_PERSON_LEFT_HAND, TransformUtils.flipLeft(thirdPerson));
-		map.put(TransformType.FIRST_PERSON_RIGHT_HAND, TransformUtils.create(0F, 0F, 0F, 0F, 45F, 0F, 0.4F));
-		map.put(TransformType.FIRST_PERSON_LEFT_HAND, TransformUtils.create(0F, 0F, 0F, 0F, 225F, 0F, 0.4F));
-		TRANSFORMS = new CCModelState(map);
+	public RenderBow(Supplier<ModelResourceLocation> wrappedModel) {
+		super(wrappedModel);
 	}
 
 	@Override
 	public void renderItem(ItemStack stack, TransformType transformType) {
+		ItemStack arrowStack = AmmoMechanicsMFR.getArrowOnBow(stack);
+
+		ItemBowMFR bow = null;
+		if (!stack.isEmpty() && stack.getItem() instanceof ItemBowMFR) {
+			bow = (ItemBowMFR) stack.getItem();
+		}
+
 		GlStateManager.pushMatrix();
+		for (int layer = 0; layer < 3; layer++) {
 
-		TileEntityRendererDispatcher.instance.render(CHEST_TE, 0D, 0D, 0D, 0F, 1F);
+			GlStateManager.pushMatrix();
+			int colour = CustomToolHelper.getColourFromItemStack(stack, layer);
+			float red = (colour >> 16 & 255) / 255.0F;
+			float green = (colour >> 8 & 255) / 255.0F;
+			float blue = (colour & 255) / 255.0F;
 
-		//Fixes issues with inventory rendering.
-		//The Portal renderer modifies blend and disables it.
-		//Vanillas inventory relies on the fact that items don't modify gl so it never bothers to set it again.
-		GlStateManager.enableBlend();
-		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+			GlStateManager.color(red, green, blue, 1.0F);
+			renderWrapped(stack);
+			GlStateManager.color(1F, 1F, 1F);
+			GlStateManager.popMatrix();
+		}
 		GlStateManager.popMatrix();
+
+
+
+		if (!arrowStack.isEmpty() && AmmoMechanicsMFR.isFirearmLoaded(stack) ) {
+
+			for (int layer = 0; layer < 3; layer++) {
+
+				GlStateManager.pushMatrix();
+
+				int colour = CustomToolHelper.getColourFromItemStack(arrowStack, layer);
+				float red = (colour >> 16 & 255) / 255.0F;
+				float green = (colour >> 8 & 255) / 255.0F;
+				float blue = (colour & 255) / 255.0F;
+
+				GlStateManager.color(red, green, blue, 1.0F);
+				GlStateManager.translate((4F / 16F) , (12F / 16F) ,8.1F/16F);
+				GlStateManager.rotate(90, 0, 0, 1);
+
+				Minecraft.getMinecraft().getRenderItem().renderItem(arrowStack, TransformType.NONE);
+
+				GlStateManager.color(1F, 1F, 1F);
+				GlStateManager.popMatrix();
+			}
+		}
 	}
 
 	@Override
 	public IModelState getTransforms() {
-		return TRANSFORMS;
+		return TransformUtils.DEFAULT_BOW;
 	}
 
 	@Override
