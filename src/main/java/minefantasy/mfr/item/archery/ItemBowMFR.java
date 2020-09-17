@@ -14,6 +14,7 @@ import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
@@ -28,7 +29,6 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -46,7 +46,6 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,8 +64,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
     // =============================================================\\
     private boolean isCustom = false;
     private boolean isPulling;
-    long startTime;
-    long endTime;
+    int drawTime;
     private String designType = "standard";
 
     public ItemBowMFR(String name, EnumBowType type) {
@@ -106,8 +104,6 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
      */
     @Override
     public void onPlayerStoppedUsing(final ItemStack stack, final World worldIn, final EntityLivingBase entityLiving, final int timeLeft) {
-        isPulling = false;
-        endTime = worldIn.getWorldTime();
         final int charge = this.getMaxItemUseDuration(stack) - timeLeft;
         fireArrow(stack, worldIn, entityLiving, charge);
     }
@@ -148,10 +144,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
      * Args: itemStack, world, entityPlayer
      */
     @Override
-    public ActionResult<ItemStack> onItemRightClick(final World worldIn, final EntityPlayer playerIn, final EnumHand hand) {
-        isPulling = true;
-        startTime = worldIn.getWorldTime();
-        return nockArrow(playerIn.getHeldItem(hand), worldIn, playerIn, hand);
+    public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand) {
+        return nockArrow(player.getHeldItem(hand), world, player, hand);
     }
 
     public boolean canAccept(ItemStack ammo) {
@@ -184,6 +178,30 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
             item.setTagCompound(new NBTTagCompound());
             item.getTagCompound().setInteger("Use", i);
         }
+        if  (isPulling){
+            drawTime += 1;
+        }
+        else{
+            drawTime = 0;
+        }
+    }
+
+    public float getDrawAmount() {
+        int delay = 34;
+        if (drawTime > (delay))
+            return 4F;
+        else if (drawTime > (delay - 1))
+            return 3F;
+        else if (drawTime > (delay - 2))
+            return 2F;
+        else if (drawTime > (delay - 3))
+            return 1F;
+
+        return 0;
+    }
+
+    public void setPulling(boolean isPulling){
+        this.isPulling = isPulling;
     }
 
     /**
@@ -305,22 +323,6 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
                 player.addStat(StatList.getObjectUseStats(this));
             }
         }
-    }
-
-    public boolean isPulling(){
-        return isPulling;
-    }
-
-    public int getDrawAmount(int timer) {
-        float maxCharge = this.getMaxCharge();
-        if (timer > (maxCharge * 0.9F))
-            return 2;
-        else if (timer > (maxCharge * 0.65F))
-            return 1;
-        else if (timer > 0)
-            return 0;
-
-        return -2;
     }
 
     @Override

@@ -49,29 +49,34 @@ public class RenderBow extends WrappedItemModel implements IItemRenderer {
 		}
 		GlStateManager.popMatrix();
 
+		if (bow != null){
+			if (!arrowStack.isEmpty() && AmmoMechanicsMFR.isFirearmLoaded(stack)) {
+				bow.setPulling(true);
+				for (int layer = 0; layer < 3; layer++) {
 
+					GlStateManager.pushMatrix();
 
-		if (!arrowStack.isEmpty() && AmmoMechanicsMFR.isFirearmLoaded(stack) ) {
+					int colour = CustomToolHelper.getColourFromItemStack(arrowStack, layer);
+					float red = (colour >> 16 & 255) / 255.0F;
+					float green = (colour >> 8 & 255) / 255.0F;
+					float blue = (colour & 255) / 255.0F;
 
-			for (int layer = 0; layer < 3; layer++) {
+					GlStateManager.color(red, green, blue, 1.0F);
 
-				GlStateManager.pushMatrix();
+					GlStateManager.translate((4F + bow.getDrawAmount()) / 16F, (12F - bow.getDrawAmount()) / 16F,8.1F/16F);
+					GlStateManager.rotate(90, 0, 0, 1);
 
-				int colour = CustomToolHelper.getColourFromItemStack(arrowStack, layer);
-				float red = (colour >> 16 & 255) / 255.0F;
-				float green = (colour >> 8 & 255) / 255.0F;
-				float blue = (colour & 255) / 255.0F;
+					Minecraft.getMinecraft().getRenderItem().renderItem(arrowStack, TransformType.NONE);
+					GlStateManager.color(1F, 1F, 1F);
 
-				GlStateManager.color(red, green, blue, 1.0F);
-				GlStateManager.translate((4F / 16F) , (12F / 16F) ,8.1F/16F);
-				GlStateManager.rotate(90, 0, 0, 1);
-
-				Minecraft.getMinecraft().getRenderItem().renderItem(arrowStack, TransformType.NONE);
-
-				GlStateManager.color(1F, 1F, 1F);
-				GlStateManager.popMatrix();
+					GlStateManager.popMatrix();
+				}
+			}
+			else{
+				bow.setPulling(false);
 			}
 		}
+
 	}
 
 	@Override
