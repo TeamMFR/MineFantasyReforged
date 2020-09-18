@@ -41,7 +41,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
         super(name);
         this.name = name;
 
-        this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
+        this.setCreativeTab(CreativeTabs.MATERIALS);
         this.mass = mass;
         this.materialType = type;
     }

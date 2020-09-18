@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.render;
+package minefantasy.mfr.client.render.entity;
 
 import minefantasy.mfr.entity.EntityMine;
 import net.minecraft.block.Block;

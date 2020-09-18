@@ -172,9 +172,11 @@ public class ComponentListMFR {
 	public static ItemCustomComponent PLATE = Utils.nullValue();
 	public static ItemCustomComponent PLATE_HUGE = Utils.nullValue();
 	public static ItemCustomComponent METAL_HUNK = Utils.nullValue();
+
 	public static ItemCustomComponent ARROWHEAD = Utils.nullValue();
 	public static ItemCustomComponent BODKIN_HEAD = Utils.nullValue();
 	public static ItemCustomComponent BROAD_HEAD = Utils.nullValue();
+
 	public static ItemCustomComponent COGWORK_ARMOUR = Utils.nullValue();
 	public static ItemCustomComponent BAR = Utils.nullValue();
 

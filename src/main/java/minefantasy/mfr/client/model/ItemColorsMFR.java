@@ -232,7 +232,21 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_PANE);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);
+
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.COGWORK_ARMOUR);
+
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.CHAIN_MESH);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.SCALE_MESH);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.SPLINT_MESH);
+
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.METAL_HUNK);
+
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLATE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLATE_HUGE);
+
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.ARROWHEAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BROAD_HEAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BODKIN_HEAD);
 	}
 
 }

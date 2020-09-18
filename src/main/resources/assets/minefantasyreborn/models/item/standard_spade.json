@@ -1,5 +1,5 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/standard_spade",
         "layer1": "minefantasyreborn:items/standard_spade_haft",

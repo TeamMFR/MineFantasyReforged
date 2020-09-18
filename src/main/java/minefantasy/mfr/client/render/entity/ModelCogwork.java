@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.render;
+package minefantasy.mfr.client.render.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;

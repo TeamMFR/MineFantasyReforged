@@ -1,5 +1,5 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/dragonforged_lumber",
         "layer1": "minefantasyreborn:items/dragonforged_lumber_haft",

@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.render;
+package minefantasy.mfr.client.render.entity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
@@ -7,7 +7,6 @@ import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.entity.EntityParachute;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;

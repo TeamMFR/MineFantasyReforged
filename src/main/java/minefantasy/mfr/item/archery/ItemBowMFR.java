@@ -9,7 +9,7 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.client.render.RenderBow;
+import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.network.NetworkHandler;

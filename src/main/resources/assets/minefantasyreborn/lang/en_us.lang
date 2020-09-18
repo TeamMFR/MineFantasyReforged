@@ -20,7 +20,6 @@ attribute.inferior.name=Inferior
 attribute.superior.name=Superior
 
 item.infobook.name=Research Book
-item.infobook.name=Research Book
 item.research_scroll.name=Research Scroll
 item.research_scroll_complete.name=Completed Research
 
@@ -123,18 +122,18 @@ item.spawn_cogwork.desc=Mechanical suit of superior strength
 item.tool_pick.name=%1$s Pick
 item.commodity_plank.name=%1$s Timber
 item.haft.name=Haft
-item.commodity_hunk.name=%1$s Hunk
+item.commodity_metal_hunk.name=%1$s Hunk
 item.commodity_scrap.name=%1$s Scrap
 item.commodity_plate.name=%1$s Plate
 item.commodity_bar.name=%1$s Bar
 item.commodity_plate_huge.name=Huge %1$s Plate
-item.commodity_chainmesh.name=%1$s Chain Mesh
-item.commodity_scalemesh.name=%1$s Scales Mesh
-item.commodity_splintmesh.name=%1$s Splint Mesh
+item.commodity_chain_mesh.name=%1$s Chain Mesh
+item.commodity_scale_mesh.name=%1$s Scales Mesh
+item.commodity_splint_mesh.name=%1$s Splint Mesh
 item.commodity_plateheavy.name=Heavy %1$s Plate
 item.commodity_arrowhead.name=%1$s Arrow Head
-item.commodity_bodkinhead.name=%1$s Bodkin Head
-item.commodity_broadhead.name=%1$s Broad Head
+item.commodity_bodkin_head.name=%1$s Bodkin Head
+item.commodity_broad_head.name=%1$s Broad Head
 item.commodity_cogwork_armour.name=%1$s Cogwork Plating
 
 item.mod_plating.name=%1$s Plating
@@ -207,7 +206,7 @@ material.tin.name=Tin
 
 material.bronze.name=Bronze
 material.iron.name=Iron
-material.pigiron.name=Pig Iron
+material.pig_iron.name=Pig Iron
 material.steel.name=Steel
 material.tungsten.name=Wolframite
 material.obsidian.name=Obsidian
@@ -639,22 +638,22 @@ tile.reinforced_stone_brick_stairs.name=Reinforced Stone Brick Steps
 tile.bronze_bars.name=Bronze Bars
 tile.iron_bars.name=Iron Bars
 tile.steel_bars.name=Steel Bars
-tile.dragonforge_bars.name=Dragonforge Bars
-tile.redsteel_bars.name=Red Steel Bars
-tile.blacksteel_bars.name=Black Steel Bars
-tile.bluesteel_bars.name=Blue Steel Bars
+tile.dragon_forge_bars.name=Dragonforge Bars
+tile.red_steel_bars.name=Red Steel Bars
+tile.black_steel_bars.name=Black Steel Bars
+tile.blue_steel_bars.name=Blue Steel Bars
 
 tile.copper_block.name=Block of Copper
 tile.tin_block.name=Block of Tin
 tile.silver_block.name=Block of Silver
-tile.pigiron_block.name=Block of Pig Iron
+tile.pig_iron_block.name=Block of Pig Iron
 
 tile.bronze_block.name=Block of Bronze
 tile.steel_block.name=Block of Steel
-tile.dragonforge_block.name=Block of Dragonforge
-tile.redsteel_block.name=Block of Red Steel
-tile.blacksteel_block.name=Block of Black Steel
-tile.bluesteel_block.name=Block of  Blue Steel
+tile.dragon_forge_block.name=Block of Dragonforge
+tile.red_steel_block.name=Block of Red Steel
+tile.black_steel_block.name=Block of Black Steel
+tile.blue_steel_block.name=Block of  Blue Steel
 
 tile.adamantium_block.name=Block of Adamantium
 tile.mithril_block.name=Block of Mithril

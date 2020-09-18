@@ -1,5 +1,5 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/ornate_halbeard",
         "layer1": "minefantasyreborn:items/ornate_halbeard_haft",

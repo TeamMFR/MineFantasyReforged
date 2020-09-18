@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.render;
+package minefantasy.mfr.client.render.entity;
 
 import minefantasy.mfr.entity.EntitySmoke;
 import net.minecraft.client.renderer.entity.Render;

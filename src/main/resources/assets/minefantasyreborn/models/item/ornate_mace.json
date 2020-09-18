@@ -1,5 +1,5 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
         "layer0": "minefantasyreborn:items/ornate_mace",
         "layer1": "minefantasyreborn:items/ornate_mace_haft",
