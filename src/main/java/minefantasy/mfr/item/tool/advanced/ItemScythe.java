@@ -8,14 +8,16 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -41,7 +43,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -100,7 +101,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
                                 world.playSound(entity,pos.add(x2,y2,z2), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
                                 tryBreakFarmland(world, pos.add(x2,y2,z2));
                                 if (!entity.capabilities.isCreativeMode) {
-                                    ItemLumberAxeMFR.tirePlayer(entity, 1F);
+                                    ItemLumberAxe.tirePlayer(entity, 1F);
                                     for (ItemStack drop : items) {
                                         if (world.rand.nextFloat() <= 1.0F) {
                                             dropBlockAsItem_do(world, pos.add(x2, y2, z2), drop);
@@ -150,7 +151,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack hoe = player.getHeldItem(hand);
-        if (!player.canPlayerEdit(pos, facing, hoe) || !ItemLumberAxeMFR.canAcceptCost(player)) {
+        if (!player.canPlayerEdit(pos, facing, hoe) || !ItemLumberAxe.canAcceptCost(player)) {
             return EnumActionResult.FAIL;
         } else {
             Block block = world.getBlockState(pos).getBlock();
@@ -328,6 +329,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 
     @Override
     public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F, -0.24F, -15, 0.26f), modelLocation);
     }
 }

@@ -42,7 +42,7 @@ import java.util.Random;
 /**
  * @author Anonymous Productions
  */
-public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRegister {
+public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private float baseDamage = 2F;
     private Random rand = new Random();
@@ -51,7 +51,7 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRe
     private boolean isCustom = false;
     private float efficiencyMod = 1.0F;
 
-    public ItemHvyShovel(String name, ToolMaterial material, int rarity) {
+    public ItemHeavyShovel(String name, ToolMaterial material, int rarity) {
         super(material);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
@@ -66,7 +66,7 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRe
     @Override
     public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
         if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)
-                && ItemLumberAxeMFR.canAcceptCost(user)) {
+                && ItemLumberAxe.canAcceptCost(user)) {
             int range = 2;
             for (int x1 = -range; x1 <= range; x1++) {
                 // for(int y1 = -1; y1 <= 1; y1 ++)
@@ -90,7 +90,7 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRe
                                     }
                                     world.setBlockToAir(pos);
                                     item.damageItem(1, user);
-                                    ItemLumberAxeMFR.tirePlayer(user, 1F);
+                                    ItemLumberAxe.tirePlayer(user, 1F);
                                 }
                             }
                         }
@@ -117,18 +117,18 @@ public class ItemHvyShovel extends ItemSpade implements IToolMaterial, IClientRe
         return toolMaterial;
     }
 
-    public ItemHvyShovel setCustom(String s) {
+    public ItemHeavyShovel setCustom(String s) {
         canRepair = false;
         isCustom = true;
         return this;
     }
 
-    public ItemHvyShovel setBaseDamage(float baseDamage) {
+    public ItemHeavyShovel setBaseDamage(float baseDamage) {
         this.baseDamage = baseDamage;
         return this;
     }
 
-    public ItemHvyShovel setEfficiencyMod(float efficiencyMod) {
+    public ItemHeavyShovel setEfficiencyMod(float efficiencyMod) {
         this.efficiencyMod = efficiencyMod;
         return this;
     }

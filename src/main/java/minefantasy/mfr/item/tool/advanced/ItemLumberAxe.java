@@ -2,12 +2,15 @@ package minefantasy.mfr.item.tool.advanced;
 
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.item.tool.ItemAxeMFR;
+import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,10 +24,10 @@ import net.minecraftforge.common.ForgeHooks;
 
 import java.util.Random;
 
-public class ItemLumberAxeMFR extends ItemAxeMFR implements IRackItem {
+public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
     private Random rand = new Random();
 
-    public ItemLumberAxeMFR(String name, Item.ToolMaterial material, int rarity) {
+    public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {
         super(name, material, rarity);
         this.setMaxDamage(getMaxDamage() * 5);
     }
@@ -150,5 +153,11 @@ public class ItemLumberAxeMFR extends ItemAxeMFR implements IRackItem {
 
     private EnumFacing getFacingFor(EntityLivingBase user, BlockPos pos) {
         return EnumFacing.getDirectionFromEntityLiving(pos, user);// TODO: FD
+    }
+
+    @Override
+    public void registerClient() {
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F, -0.24F, -15, 0.26f), modelLocation);
     }
 }

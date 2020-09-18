@@ -35,14 +35,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
 /**
  * @author Anonymous Productions
  */
-public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
+public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private float baseDamage = 2F;
     private Random rand = new Random();
@@ -51,7 +50,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
     private boolean isCustom = false;
     private float efficiencyMod = 1.0F;
 
-    public ItemHvyPick(String name, ToolMaterial material, int rarity) {
+    public ItemHeavyPick(String name, ToolMaterial material, int rarity) {
         super(material);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
@@ -66,7 +65,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
     @Override
     public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
         if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)
-                && ItemLumberAxeMFR.canAcceptCost(user)) {
+                && ItemLumberAxe.canAcceptCost(user)) {
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int y1 = -1; y1 <= 1; y1++) {
                     for (int z1 = -1; z1 <= 1; z1++) {
@@ -85,7 +84,7 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
                                 }
                                 world.setBlockToAir(blockPos);
                                 item.damageItem(1, user);
-                                ItemLumberAxeMFR.tirePlayer(user, 1F);
+                                ItemLumberAxe.tirePlayer(user, 1F);
                             }
                         }
                     }
@@ -104,19 +103,19 @@ public class ItemHvyPick extends ItemPickaxe implements IToolMaterial, IClientRe
         return toolMaterial;
     }
 
-    public ItemHvyPick setCustom(String s) {
+    public ItemHeavyPick setCustom(String s) {
         setCreativeTab(CreativeTabMFR.tabOldTools);
         canRepair = false;
         isCustom = true;
         return this;
     }
 
-    public ItemHvyPick setBaseDamage(float baseDamage) {
+    public ItemHeavyPick setBaseDamage(float baseDamage) {
         this.baseDamage = baseDamage;
         return this;
     }
 
-    public ItemHvyPick setEfficiencyMod(float efficiencyMod) {
+    public ItemHeavyPick setEfficiencyMod(float efficiencyMod) {
         this.efficiencyMod = efficiencyMod;
         return this;
     }

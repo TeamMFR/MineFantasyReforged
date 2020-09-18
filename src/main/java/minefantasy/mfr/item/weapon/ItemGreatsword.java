@@ -1,6 +1,9 @@
 package minefantasy.mfr.item.weapon;
 
 import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -127,5 +130,11 @@ public class ItemGreatsword extends ItemHeavyWeapon {
     @Override
     public float getCounterDamage() {
         return 0.5F;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F,-0.27F), modelLocation);
     }
 }
