@@ -330,6 +330,6 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     @Override
     public void registerClient() {
         ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F, -0.24F, -15, 0.26f), modelLocation);
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F, -0.5F, -15, 0.26f), modelLocation);
     }
 }

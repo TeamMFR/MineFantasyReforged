@@ -2,9 +2,12 @@ package minefantasy.mfr.item.weapon;
 
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.mechanics.EventManagerMFR;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -192,5 +195,12 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
     @Override
     public float getCounterDamage() {
         return 0.5F;
+    }
+
+
+    @Override
+    public void registerClient() {
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F,-0.27F), modelLocation);
     }
 }

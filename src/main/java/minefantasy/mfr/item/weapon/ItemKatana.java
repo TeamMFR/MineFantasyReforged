@@ -168,6 +168,6 @@ public class ItemKatana extends ItemHeavyWeapon {
     @Override
     public void registerClient() {
         ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F, -0.24F, -15, 0.26f), modelLocation);
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderBigTool(() -> modelLocation, 2F, -0.4F, -15, 0.26f), modelLocation);
     }
 }

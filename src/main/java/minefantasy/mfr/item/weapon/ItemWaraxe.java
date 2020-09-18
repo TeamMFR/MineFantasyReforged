@@ -195,4 +195,5 @@ public class ItemWaraxe extends ItemWeaponMFR {
     public float getCounterDamage() {
         return 1.0F;
     }
+
 }
