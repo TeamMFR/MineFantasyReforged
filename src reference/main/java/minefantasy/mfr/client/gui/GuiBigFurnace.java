@@ -1,4 +1,4 @@
-package minefantasy.mfr.gui;
+package minefantasy.mfr.client.gui;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.tile.TileEntityBigFurnace;

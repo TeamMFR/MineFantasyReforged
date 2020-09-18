@@ -8,7 +8,7 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.basic.BlockTileEntity;
 import minefantasy.mfr.block.decor.BlockAmmoBox;
-import minefantasy.mfr.client.render.block.ModelDummyParticle;
+import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

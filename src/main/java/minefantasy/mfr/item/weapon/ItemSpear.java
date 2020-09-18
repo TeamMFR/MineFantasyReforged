@@ -1,15 +1,14 @@
 package minefantasy.mfr.item.weapon;
 
-import codechicken.lib.model.ModelRegistryHelper;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.api.weapon.WeaponClass;
-import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.client.render.item.RenderSpear;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,9 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 
 import java.util.List;
 
@@ -169,10 +166,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 
     @Override
     public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
         ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-        ModelLoader.setCustomModelResourceLocation(this, 0, modelLocation);
-        ModelRegistryHelper.register(modelLocation, new RenderSpear(() -> modelLocation));
-
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderSpear(() -> modelLocation), modelLocation);
     }
 }

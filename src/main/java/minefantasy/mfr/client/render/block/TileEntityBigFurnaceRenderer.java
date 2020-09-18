@@ -2,10 +2,8 @@ package minefantasy.mfr.client.render.block;
 
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
-import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.decor.BlockAmmoBox;
 import minefantasy.mfr.block.refining.BlockBigFurnace;
-import minefantasy.mfr.itemblock.ItemBlockAmmoBox;
+import minefantasy.mfr.client.model.block.ModelBigFurnace;
 import minefantasy.mfr.itemblock.ItemBlockSpecialRender;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +18,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
-import org.lwjgl.opengl.GL11;
 
 /**
  * @author Anonymous Productions

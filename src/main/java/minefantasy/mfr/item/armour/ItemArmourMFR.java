@@ -7,8 +7,8 @@ import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -369,7 +369,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
         }
 
         if (fullplate == null) {
-            fullplate = new minefantasy.mfr.client.render.armour.ModelFullplate(1.0F);
+            fullplate = new minefantasy.mfr.client.model.armour.ModelFullplate(1.0F);
         }
         model = this.design == ArmourDesign.FIELDPLATE
                 ? (net.minecraft.client.model.ModelBiped) fullplate

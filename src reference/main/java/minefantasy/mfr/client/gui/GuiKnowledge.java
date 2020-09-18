@@ -1,4 +1,4 @@
-package minefantasy.mfr.gui;
+package minefantasy.mfr.client.gui;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.math.MathHelper;

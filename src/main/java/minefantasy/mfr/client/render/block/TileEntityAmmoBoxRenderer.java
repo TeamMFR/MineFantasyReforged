@@ -5,6 +5,9 @@ import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.decor.BlockAmmoBox;
 import minefantasy.mfr.block.refining.BlockBigFurnace;
+import minefantasy.mfr.client.model.block.ModelAmmoBox;
+import minefantasy.mfr.client.model.block.ModelFoodBox;
+import minefantasy.mfr.client.model.block.ModelSmallCrate;
 import minefantasy.mfr.itemblock.ItemBlockAmmoBox;
 import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
 import net.minecraft.block.state.IBlockState;
@@ -20,8 +23,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
 import org.lwjgl.opengl.GL11;
-
-import java.util.Random;
 
 public class TileEntityAmmoBoxRenderer <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
     private ModelAmmoBox modelbig, model, modelsml;

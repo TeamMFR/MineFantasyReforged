@@ -369,7 +369,7 @@ public class ItemArmourMFR extends ItemArmourMFRBase implements IElementalResist
         }
 
         if (fullplate == null) {
-            fullplate = new minefantasy.mfr.client.render.armour.ModelFullplate(1.0F);
+            fullplate = new minefantasy.mfr.client.model.armour.ModelFullplate(1.0F);
         }
         model = this.design == ArmourDesign.FIELDPLATE
                 ? (net.minecraft.client.model.ModelBiped) fullplate

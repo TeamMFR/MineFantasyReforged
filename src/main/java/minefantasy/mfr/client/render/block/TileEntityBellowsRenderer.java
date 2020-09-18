@@ -1,9 +1,9 @@
 package minefantasy.mfr.client.render.block;
 
-import codechicken.lib.render.CCModelState;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.block.refining.BlockBellows;
+import minefantasy.mfr.client.model.block.ModelBellows;
 import minefantasy.mfr.tile.TileEntityBellows;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -16,12 +16,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
-import net.minecraftforge.common.model.TRSRTransformation;
-import org.lwjgl.opengl.GL11;
-
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.Map;
 
 public class TileEntityBellowsRenderer  <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
     private ModelBellows model;

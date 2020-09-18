@@ -1,4 +1,4 @@
-package minefantasy.mfr.gui;
+package minefantasy.mfr.client.gui;
 
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.relauncher.Side;

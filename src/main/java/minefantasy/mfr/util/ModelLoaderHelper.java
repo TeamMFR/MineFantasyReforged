@@ -1,5 +1,7 @@
 package minefantasy.mfr.util;
 
+import codechicken.lib.model.ModelRegistryHelper;
+import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -16,6 +18,12 @@ import java.util.function.Function;
 public class ModelLoaderHelper {
 
 	private ModelLoaderHelper() {
+	}
+
+	public static void registerWrappedItemModel(Item item, WrappedItemModel renderClass, ModelResourceLocation modelLocation) {
+				ModelLoaderHelper.registerItem(item);
+				ModelLoader.setCustomModelResourceLocation(item, 0, modelLocation);
+				ModelRegistryHelper.register(modelLocation, renderClass);
 	}
 
 	public static void registerItem(Item item) {

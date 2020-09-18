@@ -3,6 +3,7 @@ package minefantasy.mfr.client.render.block;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.block.crafting.BlockTanningRack;
+import minefantasy.mfr.client.model.block.ModelEngTanningRack;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

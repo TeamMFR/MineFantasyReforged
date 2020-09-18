@@ -2,6 +2,7 @@ package minefantasy.mfr.client.render.block;
 
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.client.model.block.ModelQuern;
 import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

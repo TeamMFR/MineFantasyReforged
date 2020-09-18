@@ -1,6 +1,5 @@
 package minefantasy.mfr.item.archery;
 
-import codechicken.lib.model.ModelRegistryHelper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
@@ -40,7 +39,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -393,11 +391,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 
 	@Override
 	public void registerClient() {
-		ModelLoaderHelper.registerItem(this);
 		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-		ModelLoader.setCustomModelResourceLocation(this, 0, modelLocation);
-		ModelRegistryHelper.register(modelLocation, new RenderBow(() -> modelLocation));
-
+		ModelLoaderHelper.registerWrappedItemModel(this, new RenderBow(() -> modelLocation), modelLocation);
 	}
 
 }

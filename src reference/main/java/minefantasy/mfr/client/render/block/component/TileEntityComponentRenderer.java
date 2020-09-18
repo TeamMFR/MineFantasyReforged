@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.render.block.component;
+package minefantasy.mfr.client.model.block.component;
 
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.material.CustomMaterial;
