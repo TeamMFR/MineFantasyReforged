@@ -525,8 +525,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     }
 
     @Override
-    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam,
-                              boolean properHit) {
+    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam, boolean properHit) {
         if (canCounter(wielder, item) == 1) {
             initialDam *= getCounterDamage();
         }

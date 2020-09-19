@@ -19,12 +19,12 @@ public class WeaponClass {
 
     public Skill parentSkill;
     public String name;
-    public String sound;
+    public String soundCategory;
 
     public WeaponClass(String name, Skill parent, String sound) {
         this.name = name;
         this.parentSkill = parent;
-        this.sound = sound;
+        this.soundCategory = sound;
         classes.put(name, this);
     }
 
@@ -52,7 +52,7 @@ public class WeaponClass {
         return WeaponClass.MISC;
     }
 
-    public String getSound() {
-        return sound;
+    public String getSoundCategory() {
+        return soundCategory;
     }
 }

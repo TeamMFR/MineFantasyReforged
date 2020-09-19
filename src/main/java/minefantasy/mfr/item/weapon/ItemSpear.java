@@ -43,7 +43,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(item, world, list, flag);
 
         if (material != Item.ToolMaterial.WOOD) {
@@ -54,8 +54,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
     }
 
     @Override
-    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam,
-                              boolean properHit) {
+    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam, boolean properHit) {
         float damage = super.modifyDamage(item, wielder, hit, initialDam, properHit);
 
         if (!(hit instanceof EntityLivingBase) || this instanceof ItemLance) {

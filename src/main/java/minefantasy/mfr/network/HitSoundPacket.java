@@ -3,25 +3,21 @@ package minefantasy.mfr.network;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 public class HitSoundPacket extends PacketMF {
-    public static final String packetName = "MF2_Hitsound";
-    private SoundEvent sound;
-    private String type;
+    private String soundCategory;
     private String material;
     private int entId;
-    private Entity entityHit;
-    private Entity entity1;
 
-    public HitSoundPacket(String type, String material, Entity hit) {
-        this.sound = getSound(type, material);
-        this.type = type;
+    public HitSoundPacket(String soundCategory, String material, Entity hit) {
+        this.soundCategory = soundCategory;
         this.material = material;
-        entityHit = hit;
         this.entId = hit.getEntityId();
     }
 
@@ -30,27 +26,30 @@ public class HitSoundPacket extends PacketMF {
 
     @Override
     public void readFromStream(ByteBuf packet) {
+        soundCategory = ByteBufUtils.readUTF8String(packet);
+        material = ByteBufUtils.readUTF8String(packet);
         entId = packet.readInt();
-        entity1 = entityHit.world.getEntityByID(entId);
-        sound = getSound(ByteBufUtils.readUTF8String(packet),ByteBufUtils.readUTF8String(packet));
     }
 
     @Override
     public void writeToStream(ByteBuf packet) {
-        packet.writeInt(entId);
-        ByteBufUtils.writeUTF8String(packet, type);
+        ByteBufUtils.writeUTF8String(packet, soundCategory);
         ByteBufUtils.writeUTF8String(packet, material);
+        packet.writeInt(entId);
     }
 
     @Override
-    protected void execute() {
-        if (entity1 != null) {
+    protected void execute(EntityPlayer player) {
+        Entity entity = player.world.getEntityByID(entId);
+        if (entity != null) {
             if (ConfigClient.playHitsound) {
-                entity1.world.playSound(entity1.posX, entity1.posY, entity1.posZ, sound, SoundCategory.NEUTRAL, 1.0F, 1.0F, false);
+                SoundEvent sound = getSound(soundCategory, material);
+                entity.world.playSound(entity.posX, entity.posY, entity.posZ, sound, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+                MFRLogUtil.logDebug("Played hit sound: " + sound.getSoundName().toString());
             }
         }
     }
-    
+
     public static SoundEvent getSound (String type, String material){
         if (type.equals("blunt") && material.equals("wood")){
             return SoundsMFR.BLUNT_WOOD;
@@ -70,6 +69,6 @@ public class HitSoundPacket extends PacketMF {
         if (type.equals("blade") && material.equals("stone")){
             return SoundsMFR.BLADE_STONE;
         }
-        return null;
+        return SoundsMFR.BLUNT_STONE;
     }
 }

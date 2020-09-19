@@ -819,10 +819,9 @@ public class EventManagerMFR {
 
 	@SubscribeEvent
 	public void startUseItem(LivingEntityUseItemEvent.Start event) {
-		EntityPlayer player = (EntityPlayer) event.getEntityLiving();
-		if (event.getItem() != null && event.getItem().getItemUseAction() == EnumAction.BLOCK) {
-			if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock
-					&& !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
+		EntityLivingBase player = event.getEntityLiving();
+		if (!event.getItem().isEmpty() && event.getItem().getItemUseAction() == EnumAction.BLOCK) {
+			if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
 				event.setCanceled(true);
 			}
 		}

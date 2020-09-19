@@ -80,35 +80,35 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         return toolMaterial;
     }
 
-    private boolean cutGrass(World world, BlockPos pos, int r, EntityPlayer entity, boolean leaf) {
+    private boolean cutGrass(World world, BlockPos pos, int r, EntityPlayer player, boolean leaf) {
         boolean flag = false;
-        ItemStack item = entity.getHeldItemMainhand();
+        ItemStack item = player.getHeldItemMainhand();
         if (item.isEmpty())
             return false;
 
         for (int x2 = -r; x2 <= r; x2++) {
             for (int y2 = -r; y2 <= r; y2++) {
                 for (int z2 = -r; z2 <= r; z2++) {
-                    Block block = world.getBlockState(pos.add(x2,y2,z2)).getBlock();
-                    if (block != null) {
-                        Material m = block.getMaterial(block.getDefaultState());
-                        if (canCutMaterial(m, block.getBlockHardness(block.getDefaultState(), world, pos), leaf)) {
-                            if (pos.getDistance(x2, y2, z2) < r * 1) {
+                    IBlockState state = world.getBlockState(pos.add(x2,y2,z2));
+                    if (state != null) {
+                        Material m = state.getMaterial();
+                        if (canCutMaterial(m, state.getBlockHardness(world, pos), leaf)) {
+                            if (pos.getDistance(x2, y2, z2) < r) {
                                 flag = true;
 
-                                List<ItemStack> items = block.getDrops(world, pos.add(x2, y2, z2), block.getDefaultState(), 1);
+                                List<ItemStack> items = state.getBlock().getDrops(world, pos.add(x2, y2, z2), state, 1);
                                 world.setBlockToAir(pos.add(x2,y2,z2));
-                                world.playSound(entity,pos.add(x2,y2,z2), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
+                                world.playSound(player,pos.add(x2,y2,z2), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
                                 tryBreakFarmland(world, pos.add(x2,y2,z2));
-                                if (!entity.capabilities.isCreativeMode) {
-                                    ItemLumberAxe.tirePlayer(entity, 1F);
+                                if (!player.capabilities.isCreativeMode) {
+                                    ItemLumberAxe.tirePlayer(player, 1F);
                                     for (ItemStack drop : items) {
                                         if (world.rand.nextFloat() <= 1.0F) {
                                             dropBlockAsItem_do(world, pos.add(x2, y2, z2), drop);
                                         }
                                     }
                                 }
-                                item.damageItem(1, entity);
+                                item.damageItem(1, player);
                             }
                         }
                     }
@@ -154,11 +154,11 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         if (!player.canPlayerEdit(pos, facing, hoe) || !ItemLumberAxe.canAcceptCost(player)) {
             return EnumActionResult.FAIL;
         } else {
-            Block block = world.getBlockState(pos).getBlock();
+            IBlockState state = world.getBlockState(pos);
 
-            if (block != null) {
-                Material m = block.getMaterial(block.getDefaultState());
-                float hard = block.getBlockHardness(block.getDefaultState(), world, pos);
+            if (state != null) {
+                Material m = state.getMaterial();
+                float hard = state.getBlockHardness(world, pos);
                 if (this.canCutMaterial(m, hard, false)) {
                     if (cutGrass(world, pos, 5, player, false)) {
                         player.swingArm(hand);

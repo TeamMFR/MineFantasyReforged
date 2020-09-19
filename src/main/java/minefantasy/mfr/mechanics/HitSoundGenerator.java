@@ -8,19 +8,18 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
-import net.minecraft.world.WorldServer;
 
 public class HitSoundGenerator {
     public static void makeHitSound(ItemStack weapon, Entity target) {
         WeaponClass WC = WeaponClass.findClassForAny(weapon);
         String material = "metal";
-        String type = "blunt";
+        String stringCategory;
 
         material = getMaterial(material, weapon);
         if (WC != null) {
-            type = WC.getSound();
+            stringCategory = WC.getSoundCategory();
             if (!target.world.isRemote) {
-                NetworkHandler.sendToAllTracking(target, new HitSoundPacket(type,material, target));
+                NetworkHandler.sendToAllTracking(target, new HitSoundPacket(stringCategory, material, target));
             }
         }
     }

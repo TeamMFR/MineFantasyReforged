@@ -554,7 +554,7 @@ public class ArmourCalculator {
                 }
                 if (stack.getItemDamage() >= stack.getMaxDamage()) {
                     user.setItemStackToSlot(EntityEquipmentSlot.valueOf(stack.getDisplayName()), ItemStack.EMPTY);
-                    user.world.playSound((EntityPlayer) user, user.getPosition(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                    user.world.playSound(null, user.getPosition(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 }
             }
         }

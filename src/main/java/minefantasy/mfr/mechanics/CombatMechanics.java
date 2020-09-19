@@ -53,7 +53,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
@@ -62,7 +61,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
@@ -317,7 +315,7 @@ public class CombatMechanics {
     public void initAttack(LivingAttackEvent event) {
         EntityLivingBase hitter = getHitter(event.getSource());
         int spd = EventManagerMFR.getHitspeedTime(hitter);
-        if (hitter != null && !hitter.world.isRemote) {
+        if (hitter != null && !(hitter instanceof EntityPlayerMP)) {
             if (spd > 0 && !(event.getEntityLiving() instanceof EntityPlayer || event.getEntityLiving() instanceof EntityEnderman)) {
                 event.setCanceled(true);
                 return;
@@ -549,7 +547,7 @@ public class CombatMechanics {
             TacticalManager.throwPlayerOffBalance((EntityPlayer) user, 0.5F, true);
         }
 
-        target.world.playSound((EntityPlayer) target, target.getPosition(), SoundsMFR.CRITICAL, SoundCategory.NEUTRAL,1.0F, 1.0F);
+        target.world.playSound( null, target.getPosition(), SoundsMFR.CRITICAL, SoundCategory.NEUTRAL,1.0F, 1.0F);
     }
 
     private float modifyMobDamage(EntityLivingBase user, float dam) {
@@ -662,12 +660,11 @@ public class CombatMechanics {
                         setParryCooldown(user, ticks);
                     }
 
-                    ItemWeaponMFR.applyFatigue(user, TacticalManager.getHighgroundModifier(user, entityHitting, 2.0F)
-                            * (dam + 1F) * parryFatigue * weaponFatigue);
+                    ItemWeaponMFR.applyFatigue(user, TacticalManager.getHighgroundModifier(user, entityHitting, 2.0F) * (dam + 1F) * parryFatigue * weaponFatigue);
                     if (parry == null) {
-                        user.world.playSound((EntityPlayer) user, user.getPosition(), getDefaultParrySound(weapon), SoundCategory.NEUTRAL, 1.0F, 1.25F + (random.nextFloat() * 0.5F));
+                        user.world.playSound(null, user.getPosition(), getDefaultParrySound(weapon), SoundCategory.NEUTRAL, 1.0F, 1.25F + (random.nextFloat() * 0.5F));
                     } else if (!parry.playCustomParrySound(user, entityHitting, weapon)) {
-                        user.world.playSound((EntityPlayer) user, user.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.NEUTRAL, 1.0F, 1.25F + (random.nextFloat() * 0.5F));
+                        user.world.playSound(null, user.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.NEUTRAL, 1.0F, 1.25F + (random.nextFloat() * 0.5F));
                     }
                     if (user instanceof EntityPlayer) {
                         user.stopActiveHand();
@@ -752,8 +749,7 @@ public class CombatMechanics {
                         type = "Blunt";
                 }
 
-                MFRLogUtil.logDebug(dam + "x " + type + " Damage inflicted to: " + user.getCommandSenderEntity() + " ("
-                        + user.getEntityId() + ")");
+                MFRLogUtil.logDebug(dam + "x " + type + " Damage inflicted to: " + user.getCommandSenderEntity() + " (" + user.getEntityId() + ")");
             }
         }
         return dam;
