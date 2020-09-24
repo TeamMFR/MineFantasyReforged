@@ -150,7 +150,7 @@ public class ToolListMFR {
         BANDAGE_TOUGH = new ItemBandage("bandage_tough", 12F);
 
         BOMB_CRUDE = new ItemCrudeBomb("bomb_crude");
-        BOMB_CUSTOM = new ItemCrudeBomb("bomb_custom");
+        BOMB_CUSTOM = new ItemBomb("bomb_custom");
         MINE_CUSTOM = new ItemMine("mine_custom");
 
         RESEARCH_BOOK = new ItemResearchBook();

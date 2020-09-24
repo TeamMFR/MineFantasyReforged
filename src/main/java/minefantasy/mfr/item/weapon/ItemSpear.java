@@ -14,8 +14,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -38,6 +40,16 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
     }
 
     @Override
+    public boolean allowOffhand(EntityPlayer player, EnumHand hand) {
+        return player.getHeldItem(hand).getItem() instanceof ItemShield;
+    }
+
+    @Override
+    public boolean isHeavyWeapon() {
+        return true;
+    }
+
+    @Override
     public float getReachModifierInBlocks(ItemStack stack) {
         return 3.0F;
     }
@@ -57,9 +69,6 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
     public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam, boolean properHit) {
         float damage = super.modifyDamage(item, wielder, hit, initialDam, properHit);
 
-        if (!(hit instanceof EntityLivingBase) || this instanceof ItemLance) {
-            return damage;
-        }
         EntityLivingBase target = (EntityLivingBase) hit;
 
         if (wielder.isRiding() && tryPerformAbility(wielder, charge_cost)) {

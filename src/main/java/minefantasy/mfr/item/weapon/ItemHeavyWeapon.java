@@ -21,6 +21,11 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
         setMaxDamage((int) (getMaxDamage() * 1.5F));
     }
 
+    @Override
+    public boolean isHeavyWeapon() {
+        return true;
+    }
+
     public int getParryCooldown(EntityLivingBase user) {
         return 18;
     }

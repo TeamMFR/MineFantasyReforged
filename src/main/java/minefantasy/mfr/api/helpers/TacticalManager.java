@@ -192,8 +192,7 @@ public class TacticalManager {
      * @param height the height they jump
      */
     public static void knockbackEntity(Entity target, Entity source, float power, float height) {
-        target.addVelocity(-MathHelper.sin(source.rotationYaw * (float) Math.PI / 180.0F) * power * 0.5F, height,
-                MathHelper.cos(source.rotationYaw * (float) Math.PI / 180.0F) * power * 0.5F);
+        target.addVelocity(-MathHelper.sin(source.rotationYaw * (float) Math.PI / 180.0F) * power * 0.5F, height, MathHelper.cos(source.rotationYaw * (float) Math.PI / 180.0F) * power * 0.5F);
     }
 
     /**

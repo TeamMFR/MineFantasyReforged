@@ -52,6 +52,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
@@ -108,11 +109,11 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     protected float heavyParryFatigue = 2.0F;
     protected float daggerStaminaCost = 0.50F;
     protected float swordStaminaCost = 1.00F;
-    protected float katanaStaminaCost = 0.75F;
+    protected float katanaStaminaCost = 0.85F;
     protected float axeStaminaCost = 1.20F;
-    protected float maceStaminaCost = 1.30F;
+    protected float maceStaminaCost = 1.50F;
     protected float spearStaminaCost = 1.40F;
-    protected float heavyStaminaCost = 1.50F;
+    protected float heavyStaminaCost = 2.50F;
     protected int itemRarity;
     /**
      * The damage of the weapon without material modifiers
@@ -192,7 +193,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     }
 
     public static boolean tryPerformAbility(EntityLivingBase user, float points, boolean flash, boolean armour,
-                                            boolean weapon, boolean takePoints) {
+            boolean weapon, boolean takePoints) {
         if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
             points *= StaminaBar.getBaseDecayModifier(user, armour, weapon);
             if (StaminaBar.isStaminaAvailable(user, points, flash)) {
@@ -256,7 +257,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     /**
      * Gets the multiplier for the parry threshold
      *
-     * @return float Parry Damage Modifier
+     * @return Parry Damage Modifier
      */
     public float getParryDamageModifier(EntityLivingBase user) {
         return 1.0F;
@@ -265,7 +266,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     /**
      * Determines if the weapon can do those cool ninja evades
      *
-     * @return boolean canWeaponEvade
+     * @return if the weapon can evade
      */
     public boolean canWeaponEvade() {
         return true;
@@ -306,8 +307,12 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         }
     }
 
-    protected float getAPDamText() {
-        return 0F;
+    public boolean isHeavyWeapon() {
+        return false;
+    }
+
+    public boolean allowOffhand(EntityPlayer player, EnumHand hand) {
+        return !player.getHeldItem(hand).isEmpty();
     }
 
     protected void addXp(EntityLivingBase user, int chance) {
@@ -360,7 +365,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
     @Override
     public void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam) {
-        if (ConfigWeapon.xpTrain && user instanceof EntityLivingBase && material == ToolMaterial.WOOD) {
+        if (ConfigWeapon.xpTrain && user != null && material == ToolMaterial.WOOD) {
             addXp(user, 50);
         }
     }
@@ -372,11 +377,11 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     @Override
     public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
         if (material == ToolMaterial.WOOD) {
-            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
+            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
             return true;
         }
         if (material == BaseMaterialMFR.STONE.getToolConversion()) {
-            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
+            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.5F, true);
             return true;
         }
         return false;
@@ -438,7 +443,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
                 }
                 if (hit instanceof EntityLivingBase) {
                     for (int a = 0; a < 4; a++) {
-                        hit.world.spawnParticle(EnumParticleTypes.REDSTONE, hit.posX, hit.posY + hit.getEyeHeight(), hit.posZ, rand.nextDouble() / 2D, rand.nextDouble() / 2D, rand.nextDouble() / 2D);
+                        hit.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, hit.posX, hit.posY + hit.getEyeHeight(), hit.posZ, rand.nextDouble() / 2D, rand.nextDouble() / 2D, rand.nextDouble() / 2D);
                     }
                     ((EntityLivingBase) hit).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 0));
                 }
@@ -448,8 +453,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
     @Override
     public boolean canUserParry(EntityLivingBase user) {
-        return user instanceof EntityPlayer || user instanceof ISpecialCombatMob
-                || (canAnyMobParry() || rand.nextFloat() < 0.20F);
+        return user instanceof EntityPlayer || user instanceof ISpecialCombatMob || (canAnyMobParry() || rand.nextFloat() < 0.20F);
     }
 
     protected boolean canAnyMobParry() {
@@ -575,7 +579,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
      * 0 = Cannot Counter 1 = Can Counter -1 = Not Possible
      */
     private int canCounter(EntityLivingBase user, ItemStack item) {
-        if (user != null && user instanceof EntityPlayer) {
+        if (user instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) user;
             if (getParry(item) > 0) {
                 if (ResearchLogic.hasInfoUnlocked(player, "counteratt")) {
@@ -711,5 +715,5 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     public void registerClient() {
         ModelLoaderHelper.registerItem(this);
     }
-
 }
+

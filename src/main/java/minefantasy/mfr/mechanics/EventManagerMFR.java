@@ -42,7 +42,12 @@ import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainerCreative;
+import net.minecraft.client.gui.inventory.GuiInventory;
+import net.minecraft.client.model.ModelBiped;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -75,6 +80,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -84,6 +90,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -104,6 +111,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class EventManagerMFR {
@@ -113,42 +121,6 @@ public class EventManagerMFR {
 	public static boolean displayOreDict;
 
 	private static XSTRandom random = new XSTRandom();
-
-	public static void addArmourDT(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
-		list.add("");
-		String AC = ArmourCalculator.getArmourClass(armour);
-		if (AC != null) {
-			list.add(I18n.format("attribute.armour." + AC));
-		}
-		list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection"));
-		addSingleDT(armour, user, 0, list, extra);
-		addSingleDT(armour, user, 2, list, extra);
-		addSingleDT(armour, user, 1, list, extra);
-	}
-
-	public static void addSingleDT(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra) {
-		EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
-		String attatch = "";
-
-		int rating = (int) (ArmourCalculator.getDTForDisplayPiece(armour, id) * 100F);
-		int equipped = (int) (ArmourCalculator.getDTForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
-
-		if (rating > 0 || equipped > 0) {
-			if (equipped > 0 && rating != equipped) {
-				float d = rating - equipped;
-				if (d > 0) {
-					attatch += TextFormatting.DARK_GREEN;
-				}
-				if (d < 0) {
-					attatch += TextFormatting.RED;
-				}
-				String d2 = ItemWeaponMFR.decimal_format.format(d);
-				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
-			}
-			list.add(TextFormatting.BLUE + I18n.format("attribute.armour.rating." + id) + " " + rating
-					+ attatch);
-		}
-	}
 
 	public static void addArmourDR(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
 		list.add("");
@@ -168,8 +140,7 @@ public class EventManagerMFR {
 		}
 	}
 
-	public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra,
-			boolean advanced) {
+	public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra, boolean advanced) {
 		EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
 		String attatch = "";
 
@@ -189,11 +160,11 @@ public class EventManagerMFR {
 				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
 			}
 			if (advanced) {
-				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.rating." + id) + " " + rating
-						+ attatch);
+				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.rating." + id) + " "
+						+ rating + attatch);
 			} else {
-				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection") + ": " + rating
-						+ attatch);
+				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection") + ": "
+						+ rating + attatch);
 			}
 		}
 	}
@@ -239,7 +210,7 @@ public class EventManagerMFR {
 		EntityLivingBase dropper = event.getEntityLiving();
 
 		if (dropper instanceof EntityChicken) {
-			int dropCount = 1 + random.nextInt(event.getLootingLevel() + 4);
+			int dropCount = 1 + random.nextInt(event.getLootingLevel() + 1 * 4);
 
 			for (int a = 0; a < dropCount; a++) {
 				dropper.entityDropItem(new ItemStack(Items.FEATHER), 0.0F);
@@ -248,9 +219,7 @@ public class EventManagerMFR {
 		if (dropper.getEntityData().hasKey("MF_LootDrop")) {
 			int id = dropper.getEntityData().getInteger("MF_LootDrop");
 			Item drop = id == 0 ? ToolListMFR.LOOT_SACK : id == 1 ? ToolListMFR.LOOT_SACK_UC : ToolListMFR.LOOT_SACK_RARE;
-			if (drop != null){
-				dropper.entityDropItem(new ItemStack(drop), 0.0F);
-			}
+			dropper.entityDropItem(new ItemStack(drop), 0.0F);
 		}
 		if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
 			if (random.nextFloat() * (1 + event.getLootingLevel()) < 0.05F) {
@@ -273,10 +242,8 @@ public class EventManagerMFR {
 			}
 
 			Item meat = dropper.isBurning() ? FoodListMFR.HORSE_COOKED : FoodListMFR.HORSE_RAW;
-			if (meat != null){
-				for (int a = 0; a < dropCount; a++) {
-					dropper.entityDropItem(new ItemStack(meat), 0.0F);
-				}
+			for (int a = 0; a < dropCount; a++) {
+				dropper.entityDropItem(new ItemStack(meat), 0.0F);
 			}
 		}
 		if (getRegisterName(dropper).contains("Wolf")) {
@@ -286,10 +253,8 @@ public class EventManagerMFR {
 			}
 
 			Item meat = dropper.isBurning() ? FoodListMFR.WOLF_COOKED : FoodListMFR.WOLF_RAW;
-			if (meat != null){
-				for (int a = 0; a < dropCount; a++) {
-					dropper.entityDropItem(new ItemStack(meat), 0.0F);
-				}
+			for (int a = 0; a < dropCount; a++) {
+				dropper.entityDropItem(new ItemStack(meat), 0.0F);
 			}
 		}
 		dropLeather(event.getEntityLiving(), event);
@@ -297,7 +262,8 @@ public class EventManagerMFR {
 		if (dropper instanceof EntitySkeleton) {
 			EntitySkeleton skeleton = (EntitySkeleton) dropper;
 
-			if ((skeleton.getHeldItemMainhand().isEmpty() || !(skeleton.getHeldItemMainhand().getItem() instanceof ItemBow)) && event.getDrops() != null && !event.getDrops().isEmpty()) {
+			if ((skeleton.getHeldItemMainhand().isEmpty() || !(skeleton.getHeldItemMainhand().getItem() instanceof ItemBow))
+					&& event.getDrops() != null && !event.getDrops().isEmpty()) {
 
 				for (EntityItem entItem : event.getDrops()) {
 					ItemStack drop = entItem.getItem();
@@ -331,8 +297,7 @@ public class EventManagerMFR {
 	}
 
 	private Item getHideFor(EntityLivingBase mob) {
-		Item[] hide = new Item[] { ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM,
-				ComponentListMFR.RAWHIDE_LARGE };
+		Item[] hide = new Item[]{ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM, ComponentListMFR.RAWHIDE_LARGE};
 		int size = getHideSizeFor(mob);
 		if (mob.isChild()) {
 			size--;
@@ -378,21 +343,22 @@ public class EventManagerMFR {
 				|| mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
 			return true;
 		}
-		return mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig
-				|| mob instanceof EntitySheep || mob instanceof EntityHorse;
+		if (mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig
+				|| mob instanceof EntitySheep || mob instanceof EntityHorse) {
+			return true;
+		}
+		return false;
 	}
 
 	@SubscribeEvent
 	public void onDeath(LivingDeathEvent event) {
-		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityDragon
-				&& event.getSource() != null && event.getSource().getImmediateSource() != null
-				&& event.getSource().getImmediateSource() instanceof EntityPlayer) {
-			PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getImmediateSource());
+		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityDragon && event.getSource() != null
+				&& event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityPlayer) {
+			PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getTrueSource());
 		}
-		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer
-				&& event.getSource() != null && event.getEntity() != null
-				&& event.getSource().getImmediateSource() instanceof EntityDragon) {
-			PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getEntity(), -1);
+		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer && event.getSource() != null
+				&& event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityDragon) {
+			PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getEntityLiving(), -1);
 		}
 		Entity dropper = event.getEntity();
 
@@ -423,7 +389,7 @@ public class EventManagerMFR {
 		}
 		if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemUnbreakable)) {
 			EntityItem eitem = (EntityItem) event.getEntity();
-			if (eitem.getItem() != null) {
+			if (!eitem.getItem().isEmpty()) {
 				if (eitem.getItem().hasTagCompound() && eitem.getItem().getTagCompound().hasKey("Unbreakable")) {
 					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
 					event.getWorld().spawnEntity(newEntity);
@@ -465,7 +431,7 @@ public class EventManagerMFR {
 					if (dropItem) {
 						drop.setCount(1);
 						if (event.getLootingLevel() > 0) {
-							drop.grow(dropper.getRNG().nextInt(event.getLootingLevel() + 1));
+							drop.setCount(dropper.getRNG().nextInt(event.getLootingLevel() + 1));
 						}
 						meats.add(drop.copy());
 					}
@@ -495,9 +461,9 @@ public class EventManagerMFR {
 		if (dead instanceof EntityZombie) {
 			dropBook(dead, 2);
 		}
-		if (source != null && source.getImmediateSource() != null) {
-			if (source.getImmediateSource() instanceof EntityLivingBase) {
-				hunter = (EntityLivingBase) source.getImmediateSource();
+		if (source != null && source.getTrueSource() != null) {
+			if (source.getTrueSource() instanceof EntityLivingBase) {
+				hunter = (EntityLivingBase) source.getTrueSource();
 				weapon = hunter.getHeldItemMainhand();
 				if (hunter instanceof EntityPlayer) {
 					addKill((EntityPlayer) hunter, dead);
@@ -596,17 +562,13 @@ public class EventManagerMFR {
 		}
 	}
 
-	/*
-	 * @SubscribeEvent public void loadChunk(ChunkEvent.Load event) { }
-	 */
-
 	public void playerMineBlock(BlockEvent.BreakEvent event) {
 		EntityPlayer player = event.getPlayer();
 		ItemStack held = player.getHeldItemMainhand();
-		Block broken = event.getState().getBlock();
+		IBlockState broken = event.getState();
 
 		if (broken != null && ConfigHardcore.HCCallowRocks) {
-			if (held.isEmpty()&& CustomStone.isStone(broken)) {
+			if (held.isEmpty()&& CustomStone.isStone(broken.getBlock())) {
 				entityDropItem(event.getWorld(), event.getPos(),
 						new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
 			}
@@ -615,8 +577,7 @@ public class EventManagerMFR {
 					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
 				}
 				if (random.nextInt(3) == 0) {
-					entityDropItem(event.getWorld(), event.getPos(),
-							new ItemStack(ComponentListMFR.VINE, random.nextInt(3) + 1));
+					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.VINE, random.nextInt(3) + 1));
 				}
 			}
 		}
@@ -653,9 +614,7 @@ public class EventManagerMFR {
 			return;
 		}
 
-		ItemStack eventStack = event.getItemStack();
-
-		if (!eventStack.isEmpty()) {
+		if (!event.getItemStack().isEmpty()) {
 			boolean saidArtefact = false;
 			int[] ids = OreDictionary.getOreIDs(event.getItemStack());
 			boolean hasInfo = false;
@@ -677,8 +636,7 @@ public class EventManagerMFR {
 
 								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge)) {
 									saidArtefact = true;
-									event.getToolTip()
-											.add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
+									event.getToolTip().add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
 								}
 							}
 						} else if (displayOreDict) {
@@ -699,35 +657,28 @@ public class EventManagerMFR {
 			if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null) {
 				if (event.getItemStack().getItem() instanceof ItemArmor
 						&& (!(event.getItemStack().getItem() instanceof ItemArmourBaseMFR)
-								|| ClientItemsMFR.showSpecials(event.getItemStack(), event.getEntityPlayer().world,
-										event.getToolTip(), event.getFlags()))) {
-					addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(),
-							event.getFlags().isAdvanced());
+						|| ClientItemsMFR.showSpecials(event.getItemStack(), event.getEntityPlayer().world, event.getToolTip(), event.getFlags()))) {
+					addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
 				}
-			}
-			if (ArmourCalculator.advancedDamageTypes
-					&& ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
-				displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
 			}
 			if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
 				showCrafterTooltip(event.getItemStack(), event.getToolTip());
 			}
-			if (event.getItemStack().hasTagCompound()
-					&& event.getItemStack().getTagCompound().hasKey("MF_CraftedByName")) {
+			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_CraftedByName")) {
 				String name = event.getItemStack().getTagCompound().getString("MF_CraftedByName");
 				boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
 
 				event.getToolTip().add((special ? TextFormatting.GREEN : "")
-						+ I18n.format("attribute.mfcraftedbyname.name") + ": " + name + TextFormatting.GRAY);
+						+ I18n.format("attribute.mfcraftedbyname.name")
+						+ ": " + name
+						+ TextFormatting.GRAY);
 			}
 			WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
 			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != null) {
 				event.getToolTip().add(I18n.format("weaponclass." + WC.name.toLowerCase()));
 				float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
 				if (skillMod > 100)
-					event.getToolTip().add(I18n.format("rpg.skillmod")
-							+ ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
-
+					event.getToolTip().add(I18n.format("rpg.skillmod") + ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
 			}
 		}
 	}
@@ -757,8 +708,7 @@ public class EventManagerMFR {
 		int tier = ToolHelper.getCrafterTier(tool);
 		float efficiency = ToolHelper.getCrafterEfficiency(tool);
 
-		list.add(I18n.format("attribute.mfcrafttool.name") + ": "
-				+ I18n.format("tooltype." + toolType));
+		list.add(I18n.format("attribute.mfcrafttool.name") + ": " + I18n.format("tooltype." + toolType));
 		list.add(I18n.format("attribute.mfcrafttier.name") + ": " + tier);
 		list.add(I18n.format("attribute.mfcrafteff.name") + ": " + efficiency);
 	}
@@ -800,11 +750,6 @@ public class EventManagerMFR {
 			StaminaMechanics.tickEntity(event.getEntityLiving());
 		}
 		tickHitSpeeds(event.getEntityLiving());
-
-		/*
-		 * if (event.entity.ticksExisted == 1 && event.entity instanceof EntityPlayer &&
-		 * !event.entity.worldObj.isRemote) { }
-		 */
 
 	}
 
@@ -881,7 +826,7 @@ public class EventManagerMFR {
 	}
 
 	private boolean isHotItem(ItemStack item) {
-		return !item.isEmpty() && (item.getItem() instanceof IHotItem);
+		return item != null && (item.getItem() instanceof IHotItem);
 	}
 
 	@SideOnly(Side.CLIENT)

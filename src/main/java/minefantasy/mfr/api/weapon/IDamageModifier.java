@@ -5,6 +5,5 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 public interface IDamageModifier {
-    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam,
-			boolean properHit);
+    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam, boolean properHit);
 }

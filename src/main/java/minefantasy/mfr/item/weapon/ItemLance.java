@@ -107,7 +107,7 @@ public class ItemLance extends ItemSpear {
                     ((EntityPlayer) attacker).onCriticalHit(target);
                 }
 
-                if (target.isRiding() && speed > (speedCap / 2F) && target instanceof EntityPlayer) {
+                if (target.isRiding()) {
                     target.dismountRidingEntity();
                 }
             }
