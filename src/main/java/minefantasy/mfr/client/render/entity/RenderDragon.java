@@ -6,9 +6,9 @@ import minefantasy.mfr.client.model.entity.ModelDragon;
 import minefantasy.mfr.client.model.entity.ModelFrostDragon;
 import minefantasy.mfr.client.model.entity.ModelVenomDragon;
 import minefantasy.mfr.entity.mob.EntityDragon;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,9 +22,10 @@ public class RenderDragon extends RenderLiving<EntityDragon> {
     private static ModelBase venomModel = new ModelVenomDragon();
     private static ModelBase frostModel = new ModelFrostDragon();
     private static ModelBase ashModel = new ModelAshDragon();
+    public RenderDragon(RenderManager renderManager) {
 
-    public RenderDragon(float shadow) {
-        super(Minecraft.getMinecraft().getRenderManager(), dragonModel, shadow);
+        super(renderManager, dragonModel, 2F);
+
     }
 
     public void doRender(EntityDragon entity, double x, double y, double z, float f, float f1) {

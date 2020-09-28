@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class EntityShrapnel extends Entity implements IDamageType {
@@ -194,6 +195,12 @@ public class EntityShrapnel extends Entity implements IDamageType {
             this.world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, this.posX, this.posY + 0.5D, this.posZ, 0.0D, 0.0D, 0.0D);
             this.setPosition(this.posX, this.posY, this.posZ);
         }
+    }
+
+    @Nullable
+    public AxisAlignedBB getCollisionBoundingBox()
+    {
+        return this.getEntityBoundingBox();
     }
 
     /**

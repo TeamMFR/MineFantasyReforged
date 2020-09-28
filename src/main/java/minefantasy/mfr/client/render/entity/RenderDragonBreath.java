@@ -1,17 +1,17 @@
 package minefantasy.mfr.client.render.entity;
 
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -19,9 +19,10 @@ import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class RenderDragonBreath extends Render<EntityDragonBreath> {
-    public RenderDragonBreath() {
-        super(Minecraft.getMinecraft().getRenderManager());
-    }
+
+    public RenderDragonBreath(RenderManager renderManager) {
+		super(renderManager);
+	}
 
     /**
      * Actually renders the given argument. This is a synthetic bridge method,

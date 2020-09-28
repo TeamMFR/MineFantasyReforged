@@ -157,7 +157,7 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         ItemStack item = user.getHeldItem(hand);
         if (!user.isSwingInProgress) {
             world.playSound(user, user.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F, 1.0F);
-//            user.setActiveHand(user.swingingHand);
+            user.setActiveHand(hand);
         }
         return ActionResult.newResult(EnumActionResult.PASS, item);
     }
@@ -177,7 +177,10 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         }
 
         if (!world.isRemote) {
-            world.spawnEntity(new EntityMine(world, user).setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item)));
+
+            EntityMine mine = new EntityMine(world, user);
+            mine.setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
+            world.spawnEntity(mine);
         }
 
         return item;
@@ -239,7 +242,7 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 
     @Override
     public EnumRarity getRarity(ItemStack item) {
-        if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item) == "crystal") {
+        if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item).equals("crystal")) {
             return EnumRarity.UNCOMMON;
         }
         return EnumRarity.COMMON;

@@ -195,7 +195,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
     public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase entity) {
         entity.swingArm(entity.getActiveHand());
 
-        if (!(entity instanceof EntityPlayer && ((EntityPlayer)entity).isCreative())) {
+        if (!(entity instanceof EntityPlayer && ((EntityPlayer)entity).capabilities.isCreativeMode)) {
             item.shrink(1);
         }
 

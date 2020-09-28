@@ -139,16 +139,16 @@ public class ClientProxy extends ClientProxyBase {
     public void registerEntityRenderer() {
         RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, RenderArrowMF::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, RenderBomb::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, new RenderMine());
-        RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, new RenderShrapnel("shrapnel"));
+        RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, RenderMine::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, RenderShrapnel::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, RenderFireBlast::new);
         RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, RenderSmoke::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, new RenderDragonBreath());
+        RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, RenderDragonBreath::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
         //RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour()); //TODO: Fix if necessary
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, new RenderDragon(2F));
-       // RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));//TODO: Fix if necessary
+        RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, RenderDragon::new);
+        // RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));//TODO: Fix if necessary
         RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
     }
 
