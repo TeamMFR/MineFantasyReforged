@@ -2,10 +2,11 @@ package minefantasy.mfr.item.gadget;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.item.ItemBaseMFR;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -14,8 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemPotion;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
@@ -24,27 +24,18 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
 
-public class ItemSyringe extends ItemPotion {
+public class ItemSyringe extends ItemBaseMFR {
 
-    public ItemSyringe() {
-        super();
+    public ItemSyringe(String name ) {
+        super(name);
         this.setMaxStackSize(16);
-        String name = "syringe";
-        setRegistryName(name);
-        setUnlocalizedName(name);
-
         this.setCreativeTab(CreativeTabMFR.tabGadget);
-        this.setUnlocalizedName(name);
     }
 
     @Override
@@ -53,9 +44,8 @@ public class ItemSyringe extends ItemPotion {
             return super.getAttributeModifiers(slot, stack);
         }
 
-        Multimap map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0, 0));
+        Multimap<String, AttributeModifier> map = HashMultimap.create();
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0, 0));
 
         return map;
     }
@@ -86,68 +76,47 @@ public class ItemSyringe extends ItemPotion {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-        ItemStack item = user.getHeldItem(hand);
-        if (user.isSwingInProgress) {
-            return ActionResult.newResult(EnumActionResult.PASS, item);
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack stack = player.getHeldItem(hand);
+        if (player.isSwingInProgress) {
+            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
-        user.setActiveHand(user.swingingHand);
+        player.setActiveHand(hand);
 
-        if (!user.capabilities.isCreativeMode) {
-            item.shrink(1);
+        if (!player.capabilities.isCreativeMode) {
+            stack.shrink(1);
         }
 
-        user.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
-        user.playSound(SoundsMFR.BLADE_METAL, 1.0F, 1.5F);
+        player.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
+        player.playSound(SoundsMFR.BLADE_METAL, 1.0F, 1.5F);
         if (!world.isRemote) {
-            apply(user, item);
+            apply(player, stack);
         }
 
-        if (!user.capabilities.isCreativeMode) {
-            if (item.getCount() <= 0) {
-                return ActionResult.newResult(EnumActionResult.PASS,new ItemStack(ToolListMFR.SYRINGE_EMPTY));
+        if (!player.capabilities.isCreativeMode) {
+            if (stack.getCount() <= 0) {
+                return ActionResult.newResult(EnumActionResult.SUCCESS, new ItemStack(ToolListMFR.SYRINGE_EMPTY));
             }
 
-            if (!user.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.SYRINGE_EMPTY))) {
-                user.entityDropItem(new ItemStack(ToolListMFR.SYRINGE_EMPTY), 0F);
+            if (!player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.SYRINGE_EMPTY))) {
+                player.entityDropItem(new ItemStack(ToolListMFR.SYRINGE_EMPTY), 0F);
             }
         }
 
-        return ActionResult.newResult(EnumActionResult.PASS, item);
+        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
     }
 
     private void apply(EntityLivingBase target, ItemStack item) {
-        List list = PotionUtils.getEffectsFromStack(item);
+        List<PotionEffect> list = PotionUtils.getEffectsFromStack(item);
 
-        if (list != null) {
-            Iterator iterator = list.iterator();
-
-            while (iterator.hasNext()) {
-                PotionEffect potioneffect = (PotionEffect) iterator.next();
-                target.addPotionEffect(new PotionEffect(potioneffect));
-            }
+        for (PotionEffect potion : list) {
+            target.addPotionEffect(new PotionEffect(potion));
         }
     }
 
-    @Override
-    public String getItemStackDisplayName(ItemStack item) {
-        if (item.getItemDamage() == 0) {
-            return I18n.format("item.syringe_empty.name");
-        } else {
-            String s = "";
-
-            List list = PotionUtils.getEffectsFromStack(item);
-            String s1;
-
-            if (list != null && !list.isEmpty()) {
-                s1 = ((PotionEffect) list.get(0)).getEffectName();
-                s1 = s1 + ".postfix";
-                return s + I18n.format(s1).trim();
-            } else {
-                s1 = PotionUtils.getPotionFromItem(item).toString();
-                return I18n.format(s1).trim() + " " + super.getItemStackDisplayName(item);
-            }
-        }
+    public String getItemStackDisplayName(ItemStack stack) {
+        String potion = I18n.format(PotionUtils.getPotionFromItem(stack).getNamePrefixed("potion.effect."));
+        return potion + " " + super.getItemStackDisplayName(stack);
     }
 
     @Override
@@ -156,11 +125,16 @@ public class ItemSyringe extends ItemPotion {
         if (!isInCreativeTab(tab)) {
             return;
         }
-        for (PotionType potiontype : PotionType.REGISTRY)
-        {
-            if (potiontype != PotionTypes.EMPTY) {
+        for (PotionType potiontype : PotionType.REGISTRY) {
+            if (potiontype != PotionTypes.EMPTY && potiontype != PotionTypes.MUNDANE && potiontype != PotionTypes.AWKWARD && potiontype != PotionTypes.WATER && potiontype != PotionTypes.THICK) {
                 items.add(PotionUtils.addPotionToItemStack(new ItemStack(this), potiontype));
             }
         }
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean hasEffect(ItemStack stack)
+    {
+        return super.hasEffect(stack) || !PotionUtils.getEffectsFromStack(stack).isEmpty();
     }
 }

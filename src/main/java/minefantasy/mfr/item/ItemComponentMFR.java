@@ -210,7 +210,6 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         canRepair = false;
         this.unitCount = units;
         isCustom = true;
-        this.setHasSubtypes(true);
         this.materialType = type;
         return this;
     }

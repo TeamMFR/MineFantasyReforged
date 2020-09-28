@@ -33,7 +33,7 @@ public class ItemBombComponent extends ItemComponentMFR implements IBombComponen
         components.put(type + tier, this);
     }
 
-    public static Item getBombComponent(String name, int tier) {
+    public static Item getBombComponent(String name, String tier) {
         return components.get(name + tier);
     }
 

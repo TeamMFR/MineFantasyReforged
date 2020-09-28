@@ -2,19 +2,19 @@ package minefantasy.mfr.item.gadget;
 
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityArrowMFR;
-import minefantasy.mfr.item.archery.ArrowType;
-import minefantasy.mfr.item.archery.ItemArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.item.archery.ArrowType;
+import minefantasy.mfr.item.archery.ItemArrowMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -27,11 +27,11 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
         setMaxStackSize(16);
     }
 
-    public static ItemStack createBombArrow(byte powder, byte filling) {
+    public static ItemStack createBombArrow(String powder, String filling) {
         return createBombArrow(ToolListMFR.EXPLODING_ARROW, powder, filling);
     }
 
-    public static ItemStack createBombArrow(Item design, byte powder, byte filling) {
+    public static ItemStack createBombArrow(Item design, String powder, String filling) {
         ItemStack arrow = new ItemStack(design);
 
         ItemBomb.setFilling(arrow, filling);
@@ -48,14 +48,14 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(item, world, list, flag);
 
         if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
             list.add(TextFormatting.GREEN + I18n.format("bomb.case.sticky")
                     + TextFormatting.GRAY);
         }
-        EnumExplosiveType fill = EnumExplosiveType.getType(ItemBomb.getFilling(item));
+        EnumFillingType fill = EnumFillingType.getType(ItemBomb.getFilling(item));
         EnumPowderType powder = EnumPowderType.getType(ItemBomb.getPowder(item));
 
         int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
@@ -75,9 +75,16 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
         }
         for (byte pdr = 0; pdr < 2; pdr++) {
             for (byte fill = 0; fill < 3; fill++) {
-                items.add(createBombArrow(pdr, fill));
+
             }
         }
+        items.add(createBombArrow("black_powder", "basic"));
+        items.add(createBombArrow("black_powder", "shrapnel"));
+        items.add(createBombArrow("black_powder", "fire"));
+        items.add(createBombArrow("advanced_black_powder", "basic"));
+        items.add(createBombArrow("advanced_black_powder", "shrapnel"));
+        items.add(createBombArrow("advanced_black_powder", "fire"));
+
     }
 
     @Override

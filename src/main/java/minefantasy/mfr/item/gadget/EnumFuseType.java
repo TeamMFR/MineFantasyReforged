@@ -6,13 +6,13 @@ public enum EnumFuseType {
     public String name;
     public int time;
 
-    private EnumFuseType(String name, int time) {
+    EnumFuseType(String name, int time) {
         this.name = name;
         this.time = time;
     }
 
-    public static EnumFuseType getType(byte i) {
-        if (i == 1) {
+    public static EnumFuseType getType(String string) {
+        if (string.equals("long_fuse")) {
             return LONGFUSE;
         }
         return BASIC;

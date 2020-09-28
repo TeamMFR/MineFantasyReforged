@@ -1,6 +1,5 @@
 package minefantasy.mfr.item.gadget;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityBomb;
@@ -16,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,18 +23,21 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
-    private static final String powderNBT = "MineFantasy_PowderType";
-    private static final String fuseNBT = "MineFantasy_FuseType";
-    private static final String fillingNBT = "MineFantasy_ExplosiveType";
-    private static final String casingNBT = "MineFantasy_CaseType";
+    private static final String powderNBT = "powder_type";
+    private static final String fuseNBT = "fuse_type";
+    private static final String fillingNBT = "filling_type";
+    private static final String casingNBT = "casing_type";
 
     public ItemBomb(String name) {
         super(name);
@@ -42,6 +45,44 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());
+
+        this.addPropertyOverride(new ResourceLocation("casing"), new IItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+                if (getCasing(stack).equals("ceramic")){
+                    return 1;
+                }
+                if (getCasing(stack).equals("iron")){
+                    return 2;
+                }
+                if (getCasing(stack).equals("obsidian")){
+                    return 3;
+                }
+                if (getCasing(stack).equals("crystal")){
+                    return 4;
+                }
+                return 0;
+            }
+        });
+        this.addPropertyOverride(new ResourceLocation("filling"), new IItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+                if (getFilling(stack).equals("basic")){
+                    return 1;
+                }
+                if (getFilling(stack).equals("shrapnel")){
+                    return 2;
+                }
+                if (getFilling(stack).equals("fire")){
+                    return 3;
+                }
+                return 0;
+            }
+        });
     }
 
     public static void setSticky(ItemStack item) {
@@ -49,62 +90,62 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         nbt.setBoolean("stickyBomb", true);
     }
 
-    public static void setFuse(ItemStack item, byte fuse) {
+    public static void setFuse(ItemStack item, String fuse) {
         NBTTagCompound nbt = getNBT(item);
-        nbt.setByte(fuseNBT, fuse);
+        nbt.setString(fuseNBT, fuse);
     }
 
-    public static byte getFuse(ItemStack item) {
+    public static String getFuse(ItemStack item) {
         NBTTagCompound nbt = getNBT(item);
         if (item.getItem() instanceof ItemBomb) {
-            return ((ItemBomb) item.getItem()).getItemFuse(nbt.getByte(fuseNBT));
+            return ((ItemBomb) item.getItem()).getItemFuse(nbt.getString(fuseNBT));
         }
-        return nbt.getByte(fuseNBT);
+        return nbt.getString(fuseNBT);
     }
 
-    public static void setPowder(ItemStack item, byte powder) {
+    public static void setPowder(ItemStack item, String powder) {
         NBTTagCompound nbt = getNBT(item);
-        nbt.setByte(powderNBT, powder);
+        nbt.setString(powderNBT, powder);
     }
 
-    public static byte getPowder(ItemStack item) {
+    public static String getPowder(ItemStack item) {
         NBTTagCompound nbt = getNBT(item);
         if (item.getItem() instanceof ItemBomb) {
-            return ((ItemBomb) item.getItem()).getItemPowder(nbt.getByte(powderNBT));
+            return ((ItemBomb) item.getItem()).getItemPowder(nbt.getString(powderNBT));
         }
-        return nbt.getByte(powderNBT);
+        return nbt.getString(powderNBT);
     }
 
     /**
      * 0 = Basic 1 = Shrapnel 2 = Fire
      */
-    public static void setFilling(ItemStack item, byte filling) {
+    public static void setFilling(ItemStack item, String filling) {
         NBTTagCompound nbt = getNBT(item);
-        nbt.setByte(fillingNBT, filling);
+        nbt.setString(fillingNBT, filling);
     }
 
-    public static byte getFilling(ItemStack item) {
+    public static String getFilling(ItemStack item) {
         NBTTagCompound nbt = getNBT(item);
         if (item.getItem() instanceof ItemBomb) {
-            return ((ItemBomb) item.getItem()).getItemFilling(nbt.getByte(fillingNBT));
+            return ((ItemBomb) item.getItem()).getItemFilling(nbt.getString(fillingNBT));
         }
-        return nbt.getByte(fillingNBT);
+        return nbt.getString(fillingNBT);
     }
 
     /**
      * 0 = Ceramic 1 = Iron
      */
-    public static void setCasing(ItemStack item, byte casing) {
+    public static void setCasing(ItemStack item, String casing) {
         NBTTagCompound nbt = getNBT(item);
-        nbt.setByte(casingNBT, casing);
+        nbt.setString(casingNBT, casing);
     }
 
-    public static byte getCasing(ItemStack item) {
+    public static String getCasing(ItemStack item) {
         NBTTagCompound nbt = getNBT(item);
         if (item.getItem() instanceof ItemBomb) {
-            return ((ItemBomb) item.getItem()).getItemCasing(nbt.getByte(casingNBT));
+            return ((ItemBomb) item.getItem()).getItemCasing(nbt.getString(casingNBT));
         }
-        return nbt.getByte(casingNBT);
+        return nbt.getString(casingNBT);
     }
 
     public static NBTTagCompound getNBT(ItemStack item) {
@@ -113,7 +154,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         return item.getTagCompound();
     }
 
-    public static ItemStack createExplosive(Item item, byte casing, byte filling, byte fuse, byte powder, int stackSize, boolean sticky) {
+    public static ItemStack createExplosive(Item item, String casing, String filling, String fuse, String powder, int stackSize, boolean sticky) {
         ItemStack bomb = new ItemStack(item, stackSize);
         setFilling(bomb, filling);
         setCasing(bomb, casing);
@@ -125,7 +166,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         return bomb;
     }
 
-    public static ItemStack createExplosive(Item item, byte casing, byte filling, byte fuse, byte powder, int stackSize) {
+    public static ItemStack createExplosive(Item item, String casing, String filling, String fuse, String powder, int stackSize) {
         return createExplosive(item, casing, filling, fuse, powder, stackSize, false);
     }
 
@@ -155,8 +196,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         user.swingArm(user.swingingHand);
             item.shrink(1);
         if (!world.isRemote) {
-            EntityBomb bomb = new EntityBomb(world, user).setType(getFilling(item), getCasing(item), getFuse(item),
-                    getPowder(item));
+            EntityBomb bomb = new EntityBomb(world, user).setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
             world.spawnEntity(bomb);
             if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
                 bomb.getEntityData().setBoolean("stickyBomb", true);
@@ -166,14 +206,14 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(item, world, list, flag);
 
         if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
             list.add(TextFormatting.GREEN + I18n.format("bomb.case.sticky")
                     + TextFormatting.GRAY);
         }
-        EnumExplosiveType fill = EnumExplosiveType.getType(getFilling(item));
+        EnumFillingType fill = EnumFillingType.getType(getFilling(item));
         EnumCasingType casing = EnumCasingType.getType(getCasing(item));
         EnumFuseType fuse = EnumFuseType.getType(getFuse(item));
         EnumPowderType powder = EnumPowderType.getType(getPowder(item));
@@ -193,11 +233,11 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 
     @Override
     public String getUnlocalizedName(ItemStack item) {
-        EnumExplosiveType type = EnumExplosiveType.getType(getFilling(item));
+        EnumFillingType type = EnumFillingType.getType(getFilling(item));
         return "item.bomb_" + type.name;
     }
 
-    public ItemStack createBomb(byte casing, byte filling, byte fuse, byte powder, int stackSize) {
+    public ItemStack createBomb(String casing, String filling, String fuse, String powder, int stackSize) {
         return ItemBomb.createExplosive(this, casing, filling, fuse, powder, stackSize);
     }
 
@@ -206,26 +246,26 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         if (!isInCreativeTab(tab)) {
             return;
         }
-        items.add(createBomb((byte) 0, (byte) 0, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 0, (byte) 1, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 0, (byte) 2, (byte) 0, (byte) 0, 1));
+        items.add(createBomb("ceramic", "basic", "basic", "black_powder", 1));
+        items.add(createBomb("ceramic", "shrapnel", "basic", "black_powder", 1));
+        items.add(createBomb("ceramic", "fire", "basic", "black_powder", 1));
 
-        items.add(createBomb((byte) 1, (byte) 0, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 1, (byte) 1, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 1, (byte) 2, (byte) 0, (byte) 0, 1));
+        items.add(createBomb("iron", "basic", "basic", "black_powder", 1));
+        items.add(createBomb("iron", "shrapnel", "basic", "black_powder", 1));
+        items.add(createBomb("iron", "fire", "basic", "black_powder", 1));
 
-        items.add(createBomb((byte) 2, (byte) 0, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 2, (byte) 1, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 2, (byte) 2, (byte) 0, (byte) 0, 1));
+        items.add(createBomb("obsidian", "basic", "basic", "black_powder", 1));
+        items.add(createBomb("obsidian", "shrapnel", "basic", "black_powder", 1));
+        items.add(createBomb("obsidian", "fire", "basic", "black_powder", 1));
 
-        items.add(createBomb((byte) 3, (byte) 0, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 3, (byte) 1, (byte) 0, (byte) 0, 1));
-        items.add(createBomb((byte) 3, (byte) 2, (byte) 0, (byte) 0, 1));
+        items.add(createBomb("crystal", "basic", "basic", "black_powder", 1));
+        items.add(createBomb("crystal", "shrapnel", "basic", "black_powder", 1));
+        items.add(createBomb("crystal", "fire", "basic", "black_powder", 1));
     }
 
     @Override
     public EnumRarity getRarity(ItemStack item) {
-        if (getFilling(item) >= 2 || getCasing(item) >= 2) {
+        if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item).equals("crystal")) {
             return EnumRarity.UNCOMMON;
         }
         return EnumRarity.COMMON;
@@ -233,26 +273,27 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 
     @Override
     public Object[] getSalvage(ItemStack item) {
-        return new Object[]{ItemBombComponent.getBombComponent("bombcase", getCasing(item)),
+        return new Object[]{
+                ItemBombComponent.getBombComponent("bombcase", getCasing(item)),
                 ItemBombComponent.getBombComponent("fuse", getFuse(item)),
                 ItemBombComponent.getBombComponent("powder", getPowder(item)),
-                ItemBombComponent.getBombComponent("filling", getFilling(item)),};
+                ItemBombComponent.getBombComponent("filling", getFilling(item))};
     }
 
-    public byte getItemFuse(byte value) {
-        return value;
+    public String getItemFuse(String fuse) {
+        return fuse;
     }
 
-    public byte getItemFilling(byte value) {
-        return value;
+    public String getItemFilling(String filling) {
+        return filling;
     }
 
-    public byte getItemCasing(byte value) {
-        return value;
+    public String getItemCasing(String casing) {
+        return casing;
     }
 
-    public byte getItemPowder(byte value) {
-        return value;
+    public String getItemPowder(String powder) {
+        return powder;
     }
 
     @Override

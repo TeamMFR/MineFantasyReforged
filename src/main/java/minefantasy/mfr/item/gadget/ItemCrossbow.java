@@ -48,7 +48,7 @@ public class ItemCrossbow extends ItemBaseMFR
     private String[] fullParts = new String[]{"mod", "muzzle", "mechanism", "stock"};
 
     public ItemCrossbow() {
-        super("mf_crossbowcustom");
+        super("crossbow_custom");
 
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setFull3D();

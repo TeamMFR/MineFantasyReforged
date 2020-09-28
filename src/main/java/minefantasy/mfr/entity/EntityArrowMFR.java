@@ -9,7 +9,7 @@ import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.item.archery.ArrowType;
-import minefantasy.mfr.item.gadget.EnumExplosiveType;
+import minefantasy.mfr.item.gadget.EnumFillingType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -384,7 +384,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                     if (isExplosive()) {
                         dam = this.getExplosionDamage();
                         damagesource.setExplosion();
-                        if (this.getFilling() == 2) {
+                        if (this.getFilling().equals("fire")) {
                             damagesource.setFireDamage();
                         }
                     }
@@ -852,9 +852,9 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         power = f;
     }
 
-    public EntityArrowMFR setBombStats(int powder, int filling) {
-        getEntityData().setInteger("powder", powder);
-        getEntityData().setInteger("filling", filling);
+    public EntityArrowMFR setBombStats(String powder, String filling) {
+        getEntityData().setString("powder", powder);
+        getEntityData().setString("filling", filling);
         getEntityData().setBoolean("Explosive", true);
         return this;
     }
@@ -887,7 +887,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
                         if (!(entityHit instanceof EntityItem)) {
                             DamageSource source = causeBombDamage(this, shootingEntity != null ? shootingEntity : this);
                             source.setExplosion();
-                            if (getFilling() == 2) {
+                            if (getFilling().equals("fire")) {
                                 source.setFireDamage();
                             }
                             entityHit.attackEntityFrom(source, dam);
@@ -898,15 +898,15 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
             this.setDead();
         }
 
-        int filling = getFilling();
-        if (filling > 0) {
+        String filling = getFilling();
+        if (!filling.equals("basic")) {
             for (int a = 0; a < 16; a++) {
                 float range = 0.6F;
                 EntityShrapnel shrapnel = new EntityShrapnel(world, posX, posY + 0.5D, posZ,
                         (rand.nextDouble() - 0.5) * range, (rand.nextDouble() - 0.5) * range,
                         (rand.nextDouble() - 0.5) * range);
 
-                if (filling == 2) {
+                if (filling.equals("fire")) {
                     shrapnel.setFire(10);
                 }
                 world.spawnEntity(shrapnel);
@@ -914,20 +914,20 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         }
     }
 
-    private int getFilling() {
-        return getEntityData().getInteger("filling");
+    private String getFilling() {
+        return getEntityData().getString("filling");
     }
 
-    private int getPowder() {
-        return getEntityData().getInteger("powder");
+    private String getPowder() {
+        return getEntityData().getString("powder");
     }
 
-    private EnumExplosiveType getBlast() {
-        return EnumExplosiveType.getType((byte) getFilling());
+    private EnumFillingType getBlast() {
+        return EnumFillingType.getType( getFilling());
     }
 
     private EnumPowderType getPowderType() {
-        return EnumPowderType.getType((byte) getPowder());
+        return EnumPowderType.getType(getPowder());
     }
 
     private double getRangeOfBlast() {

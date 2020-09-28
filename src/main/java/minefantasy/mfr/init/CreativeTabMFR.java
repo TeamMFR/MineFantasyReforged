@@ -43,7 +43,7 @@ public final class CreativeTabMFR extends CreativeTabs {
             case 5:
                 return new ItemStack(BlockListMFR.ANVIL_IRON);
             case 6:
-                return new ItemStack(ToolListMFR.BOMB_CUSTOM);
+                return ToolListMFR.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
             case 7:
                 return ComponentListMFR.PLANK.construct("oak_wood");
             case 8:

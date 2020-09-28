@@ -26,7 +26,7 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
         setMaxStackSize(20);
     }
 
-    public static ItemStack createBombArrow(byte powder, byte filling) {
+    public static ItemStack createBombArrow(String powder, String filling) {
         ItemStack arrow = new ItemStack(ToolListMFR.EXPLODING_BOLT);
 
         ItemBomb.setFilling(arrow, filling);
@@ -43,10 +43,10 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(item, world, list, flag);
 
-        EnumExplosiveType fill = EnumExplosiveType.getType(ItemBomb.getFilling(item));
+        EnumFillingType fill = EnumFillingType.getType(ItemBomb.getFilling(item));
         EnumPowderType powder = EnumPowderType.getType(ItemBomb.getPowder(item));
 
         int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
@@ -64,11 +64,12 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
         if (!isInCreativeTab(tab)) {
             return;
         }
-        for (byte pdr = 0; pdr < 2; pdr++) {
-            for (byte fill = 0; fill < 3; fill++) {
-                items.add(createBombArrow(pdr, fill));
-            }
-        }
+        items.add(createBombArrow("black_powder", "basic"));
+        items.add(createBombArrow("black_powder", "shrapnel"));
+        items.add(createBombArrow("black_powder", "fire"));
+        items.add(createBombArrow("advanced_black_powder", "basic"));
+        items.add(createBombArrow("advanced_black_powder", "shrapnel"));
+        items.add(createBombArrow("advanced_black_powder", "fire"));
     }
 
     @Override

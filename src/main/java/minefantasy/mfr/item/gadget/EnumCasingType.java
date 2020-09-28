@@ -9,24 +9,24 @@ public enum EnumCasingType {
     public float rangeModifier;
     public float weightModifier;
 
-    private EnumCasingType(String name, float damage, float range, float weight) {
+    EnumCasingType(String name, float damage, float range, float weight) {
         this.name = name;
         this.damageModifier = damage;
         this.rangeModifier = range;
         this.weightModifier = weight;
     }
 
-    public static EnumCasingType getType(byte i) {
-        if (i == -1) {
+    public static EnumCasingType getType(String string) {
+        if (string.equals("crude")) {
             return CRUDE;
         }
-        if (i == 1) {
+        if (string.equals("iron")) {
             return IRON;
         }
-        if (i == 2) {
+        if (string.equals("obsidian")) {
             return OBSIDIAN;
         }
-        if (i == 3) {
+        if (string.equals("crystal")) {
             return CRYSTAL;
         }
         return CERAMIC;

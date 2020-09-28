@@ -455,6 +455,7 @@ item.cogwork_shaft.name=Cogwork Shaft
 item.spyglass.name=Spyglass
 item.climbing_pick_basic.name=Climbing Pick
 item.parachute.name=Parachute
+item.syringe.name= Syringe
 item.syringe_empty.name=Empty Syringe
 
 tile.cogwork_helm.name=Cogwork Helmet Block
@@ -496,8 +497,8 @@ death.attack.bomb.thrown=%1$s was blown up by %2$s
 death.attack.bomb=%1$s was blown up by a bomb
 death.attack.bomb.suicide=%1$s blew themself up.... Idiot
 
-bomb.powder.blackpowder.name=Blackpowder Charge
-bomb.powder.advBlackpowder.name=Advanced Blackpowder Charge
+bomb.powder.black_powder.name=Blackpowder Charge
+bomb.powder.advanced_black_powder.name=Advanced Blackpowder Charge
 bomb.fuse.basic.name=Basic Fuse
 bomb.fuse.long.name=Long Fuse
 bomb.case.crude.name=Paper Casing

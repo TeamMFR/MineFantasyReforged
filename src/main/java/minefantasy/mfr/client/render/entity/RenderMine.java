@@ -23,7 +23,7 @@ public class RenderMine extends Render<EntityMine> {
     }
 
     public void doRender(EntityMine mine, double x, double y, double z, float f, float f1) {
-        Block block = mine.getCasing() == 3 ? Blocks.GLASS : mine.getCasing() == 2 ? Blocks.OBSIDIAN : mine.getCasing() == 1 ? Blocks.IRON_BLOCK : Blocks.HARDENED_CLAY;
+        Block block = mine.getCasing().equals("crystal") ? Blocks.GLASS : mine.getCasing().equals("obsidian") ? Blocks.OBSIDIAN : mine.getCasing().equals("iron") ? Blocks.IRON_BLOCK : Blocks.HARDENED_CLAY;
         GL11.glPushMatrix();
         GL11.glTranslatef((float) x, (float) y - 0.3F, (float) z);
 

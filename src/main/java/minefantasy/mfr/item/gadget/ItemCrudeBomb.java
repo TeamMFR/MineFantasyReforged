@@ -44,22 +44,22 @@ public class ItemCrudeBomb extends ItemBomb implements ISpecialSalvage {
     }
 
     @Override
-    public byte getItemFuse(byte value) {
-        return 0;
+    public String getItemFuse(String value) {
+        return "basic";
     }
 
     @Override
-    public byte getItemFilling(byte value) {
-        return 0;
+    public String getItemFilling(String value) {
+        return "basic";
     }
 
     @Override
-    public byte getItemCasing(byte value) {
-        return -1;
+    public String getItemCasing(String value) {
+        return "crude";
     }
 
     @Override
-    public byte getItemPowder(byte value) {
-        return 0;
+    public String getItemPowder(String value) {
+        return "black_powder";
     }
 }

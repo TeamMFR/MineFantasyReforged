@@ -7,13 +7,13 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBombBench;
+import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.gadget.ItemBomb;
 import minefantasy.mfr.item.gadget.ItemExplodingArrow;
-import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.BombBenchPacket;
+import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
@@ -32,7 +31,6 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre {
     public float progress;
@@ -201,16 +199,16 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
     }
 
     private boolean areItemsEqual(ItemStack bomb1, ItemStack bomb2) {
-        if (ItemBomb.getCasing(bomb1) != ItemBomb.getCasing(bomb2)) {
+        if (!ItemBomb.getCasing(bomb1).equals(ItemBomb.getCasing(bomb2))) {
             return false;
         }
-        if (ItemBomb.getPowder(bomb1) != ItemBomb.getPowder(bomb2)) {
+        if (!ItemBomb.getPowder(bomb1).equals(ItemBomb.getPowder(bomb2))) {
             return false;
         }
-        if (ItemBomb.getFilling(bomb1) != ItemBomb.getFilling(bomb2)) {
+        if (!ItemBomb.getFilling(bomb1).equals(ItemBomb.getFilling(bomb2))) {
             return false;
         }
-        if (ItemBomb.getFuse(bomb1) != ItemBomb.getFuse(bomb2)) {
+        if (!ItemBomb.getFuse(bomb1).equals(ItemBomb.getFuse(bomb2))) {
             return false;
         }
         return bomb1.isItemEqual(bomb2);
@@ -224,23 +222,22 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
         if (!isMatch(1, "powder") || (!isArrow && !isMatch(3, "fuse"))) {
             return ItemStack.EMPTY;
         }
-        byte caseTier = -1;
-        byte filling = 0;
-        byte fuse = -1;
-        byte powder = -1;
+        String caseTier = null;
+        String filling = null;
+        String fuse = null;
+        String powder;
         Item design = null;
         String com0 = getComponentType(getInventory().getStackInSlot(0));
         String com1 = getComponentType(getInventory().getStackInSlot(1));
         String com2 = getComponentType(getInventory().getStackInSlot(2));
         String com3 = getComponentType(getInventory().getStackInSlot(3));
         if (com0 != null) {
-            caseTier = getComponentTier(getInventory().getStackInSlot(0));
-            String type = com0;
-            design = getDesignCrafted(type);
+            caseTier = getComponentType(getInventory().getStackInSlot(0));
+            design = getDesignCrafted(com0);
         }
         if (com1 != null) {
             if (com1.equalsIgnoreCase("powder")) {
-                powder = getComponentTier(getInventory().getStackInSlot(1));
+                powder = getComponentType(getInventory().getStackInSlot(1));
             } else {
                 return ItemStack.EMPTY;
             }
@@ -248,7 +245,7 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
             return ItemStack.EMPTY;
         if (com2 != null) {
             if (com2.equalsIgnoreCase("filling")) {
-                filling = getComponentTier(getInventory().getStackInSlot(2));
+                filling = getComponentType(getInventory().getStackInSlot(2));
             } else {
                 return ItemStack.EMPTY;
             }
@@ -256,7 +253,7 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
         if (isArrow || com3 != null) {
             if (!isArrow) {
                 if (com3.equalsIgnoreCase("fuse")) {
-                    fuse = getComponentTier(getInventory().getStackInSlot(3));
+                    fuse = getComponentType(getInventory().getStackInSlot(3));
                 } else {
                     return ItemStack.EMPTY;
                 }
@@ -264,9 +261,9 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
         } else
             return ItemStack.EMPTY;
 
-        if (design != null && isArrow && powder > -1) {
+        if (design != null && isArrow && powder != null) {
             return ItemExplodingArrow.createBombArrow(design, powder, filling);
-        } else if (design != null && fuse > -1 && powder > -1) {
+        } else if (design != null && fuse != null && powder != null) {
             return ItemBomb.createExplosive(design, caseTier, filling, fuse, powder, 1, false);
         }
         return ItemStack.EMPTY;

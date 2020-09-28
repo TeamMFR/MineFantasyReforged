@@ -1,6 +1,6 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/mine_iron"
+        "layer0": "minefantasyreborn:items/syringe"
     }
 }

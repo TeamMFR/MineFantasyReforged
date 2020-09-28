@@ -1,0 +1,89 @@
+﻿{
+    "parent": "item/generated",
+    "overrides": [
+        {
+            "predicate": {
+                "casing": 1,
+                "filling": 1
+            },
+            "model": "minefantasyreborn:item/mine_ceramic_basic"
+        },
+        {
+            "predicate": {
+                "casing": 1,
+                "filling": 2
+            },
+            "model": "minefantasyreborn:item/mine_ceramic_shrapnel"
+        },
+        {
+            "predicate": {
+                "casing": 1,
+                "filling": 3
+            },
+            "model": "minefantasyreborn:item/mine_ceramic_fire"
+        },
+        {
+            "predicate": {
+                "casing": 2,
+                "filling": 1
+            },
+            "model": "minefantasyreborn:item/mine_iron_basic"
+        },
+        {
+            "predicate": {
+                "casing": 2,
+                "filling": 2
+            },
+            "model": "minefantasyreborn:item/mine_iron_shrapnel"
+        },
+        {
+            "predicate": {
+                "casing": 2,
+                "filling": 3
+            },
+            "model": "minefantasyreborn:item/mine_iron_fire"
+        },
+        {
+            "predicate": {
+                "casing": 3,
+                "filling": 1
+            },
+            "model": "minefantasyreborn:item/mine_obsidian_basic"
+        },
+        {
+            "predicate": {
+                "casing": 3,
+                "filling": 2
+            },
+            "model": "minefantasyreborn:item/mine_obsidian_shrapnel"
+        },
+        {
+            "predicate": {
+                "casing": 3,
+                "filling": 3
+            },
+            "model": "minefantasyreborn:item/mine_obsidian_fire"
+        },
+        {
+            "predicate": {
+                "casing": 4,
+                "filling": 1
+            },
+            "model": "minefantasyreborn:item/mine_crystal_basic"
+        },
+        {
+            "predicate": {
+                "casing": 4,
+                "filling": 2
+            },
+            "model": "minefantasyreborn:item/mine_crystal_shrapnel"
+        },
+        {
+            "predicate": {
+                "casing": 4,
+                "filling": 3
+            },
+            "model": "minefantasyreborn:item/mine_crystal_fire"
+        }
+    ]
+}

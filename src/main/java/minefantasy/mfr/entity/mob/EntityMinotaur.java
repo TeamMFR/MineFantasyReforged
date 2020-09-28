@@ -738,7 +738,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
     }
 
     public void throwBomb(EntityLivingBase attackTarget, float spread) {
-        EntityBomb bomb = new EntityBomb(world, this).setType((byte) 1, (byte) 0, (byte) 0, (byte) 0);
+        EntityBomb bomb = new EntityBomb(world, this).setType("shrapnel", "ceramic", "basic", "black_powder");
         world.spawnEntity(bomb);
         this.swingArm(EnumHand.MAIN_HAND);
     }

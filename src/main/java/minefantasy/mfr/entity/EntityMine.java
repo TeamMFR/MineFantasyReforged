@@ -2,7 +2,7 @@ package minefantasy.mfr.entity;
 
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.gadget.EnumCasingType;
-import minefantasy.mfr.item.gadget.EnumExplosiveType;
+import minefantasy.mfr.item.gadget.EnumFillingType;
 import minefantasy.mfr.item.gadget.EnumFuseType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import net.minecraft.entity.Entity;
@@ -28,10 +28,10 @@ import java.util.Iterator;
 import java.util.List;
 
 public class EntityMine extends Entity {
-    private static final DataParameter<Byte> FILLING = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
-    private static final DataParameter<Byte> CASING = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
-    private static final DataParameter<Byte> FUSE = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
-    private static final DataParameter<Byte> POWDER = EntityDataManager.<Byte>createKey(EntityBomb.class, DataSerializers.BYTE);
+    private static final DataParameter<String> FILLING = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
+    private static final DataParameter<String> CASING = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
+    private static final DataParameter<String> FUSE = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
+    private static final DataParameter<String> POWDER = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
     private static DamageSource mineDmg = new DamageSource("mine").setExplosion();
     private static DamageSource mineFireDmg = new DamageSource("mine").setExplosion().setFireDamage();
     private final int typeId = 2;
@@ -117,10 +117,10 @@ public class EntityMine extends Entity {
 
     @Override
     protected void entityInit() {
-        dataManager.set(FILLING, (byte) 0);
-        dataManager.set(CASING, (byte) 0);
-        dataManager.set(FUSE, (byte) 0);
-        dataManager.set(POWDER, (byte) 0);
+        dataManager.set(FILLING, "");
+        dataManager.set(CASING, "");
+        dataManager.set(FUSE, "");
+        dataManager.set(POWDER, "");
     }
 
     /**
@@ -170,9 +170,7 @@ public class EntityMine extends Entity {
             List<EntityLivingBase> list = world.getEntitiesWithinAABB(EntityLivingBase.class, getEntityBoundingBox().expand(radius * 2, radius, radius * 2));
             if (fuse == 0 && !list.isEmpty()) {
                 boolean detonate = false;
-                Iterator i = list.iterator();
-                while (i.hasNext()) {
-                    EntityLivingBase e = (EntityLivingBase) i.next();
+                for (EntityLivingBase e : list) {
                     if (e.getDistance(this) < radius) {
                         detonate = true;
                         break;
@@ -236,10 +234,9 @@ public class EntityMine extends Entity {
             List var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
 
             if (var4 != null && !var4.isEmpty()) {
-                Iterator splashDamage = var4.iterator();
 
-                while (splashDamage.hasNext()) {
-                    Entity entityHit = (Entity) splashDamage.next();
+                for (Object o : var4) {
+                    Entity entityHit = (Entity) o;
 
                     double distanceToEntity = this.getDistance(entityHit);
 
@@ -247,7 +244,7 @@ public class EntityMine extends Entity {
                     if (distanceToEntity < radius) {
                         float dam = getDamage();
 
-                        if (getCasing() != 2 && distanceToEntity > radius / 2) {
+                        if (!getCasing().equals("obsidian") && distanceToEntity > radius / 2) {
                             double sc = distanceToEntity - (radius / 2);
                             if (sc < 0)
                                 sc = 0;
@@ -257,7 +254,7 @@ public class EntityMine extends Entity {
                         }
                         if (!(entityHit instanceof EntityItem)) {
                             DamageSource source = mineDmg;
-                            if (getFilling() == 2) {
+                            if (getFilling().equals("fire")) {
                                 source = mineFireDmg;
                             }
                             if (entityHit.attackEntityFrom(source, dam)) {
@@ -270,13 +267,13 @@ public class EntityMine extends Entity {
             this.setDead();
         }
 
-        int t = getFilling();
-        if (t > 0) {
+        String filling = getFilling();
+        if (!filling.equals("basic")) {
             for (int a = 0; a < 16; a++) {
                 float range = 0.6F;
                 EntityShrapnel shrapnel = new EntityShrapnel(world, posX, posY + 0.5D, posZ, (rand.nextDouble() - 0.5) * (range / 2), (rand.nextDouble()) * range, (rand.nextDouble() - 0.5) * (range / 2));
 
-                if (t == 2) {
+                if (filling.equals("fire")) {
                     shrapnel.setFire(10);
                 }
                 world.spawnEntity(shrapnel);
@@ -285,7 +282,7 @@ public class EntityMine extends Entity {
     }
 
     private void applyEffects(Entity hit) {
-        if (getFilling() == 2) {
+        if (getFilling().equals("fire")) {
             hit.setFire(8);
         }
         if (hit instanceof EntityLivingBase) {
@@ -305,23 +302,23 @@ public class EntityMine extends Entity {
         return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + this.getEyeHeight(), this.posZ), new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
     }
 
-    public byte getFilling() {
+    public String getFilling() {
         return dataManager.get(FILLING);
     }
 
-    public byte getCasing() {
+    public String getCasing() {
         return dataManager.get(CASING);
     }
 
-    public byte getFuse() {
+    public String getFuse() {
         return dataManager.get(FUSE);
     }
 
-    public byte getPowder() {
+    public String getPowder() {
         return dataManager.get(POWDER);
     }
 
-    public EntityMine setType(byte filling, byte casing, byte fuse, byte powder) {
+    public EntityMine setType(String filling, String casing, String fuse, String powder) {
         dataManager.set(FILLING, filling);
         dataManager.set(CASING, casing);
         dataManager.set(FUSE, fuse);
@@ -332,8 +329,8 @@ public class EntityMine extends Entity {
         return this;
     }
 
-    private EnumExplosiveType getBlast() {
-        return EnumExplosiveType.getType(getFilling());
+    private EnumFillingType getBlast() {
+        return EnumFillingType.getType(getFilling());
     }
 
     private EnumCasingType getCase() {

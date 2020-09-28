@@ -8,10 +8,12 @@ import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.OrnateStyle;
+import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.world.ColorizerFoliage;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -43,6 +45,7 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_YEW);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_IRONBARK);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_EBONY);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1 ), ToolListMFR.SYRINGE);
 
 		// Standard Tools
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_PICK);

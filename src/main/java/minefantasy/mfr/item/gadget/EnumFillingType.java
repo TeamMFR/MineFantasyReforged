@@ -1,23 +1,23 @@
 package minefantasy.mfr.item.gadget;
 
-public enum EnumExplosiveType {
+public enum EnumFillingType {
     BASIC("basic", 24F, 1.0F), SHRAPNEL("shrapnel", 32F, 1.0F), FIRE("fire", 40F, 1.0F);
 
     public String name;
     public float damage;
     public float range;
 
-    private EnumExplosiveType(String name, float damage, float range) {
+    EnumFillingType(String name, float damage, float range) {
         this.name = name;
         this.damage = damage;
         this.range = range;
     }
 
-    public static EnumExplosiveType getType(byte i) {
-        if (i == 1) {
+    public static EnumFillingType getType(String string) {
+        if (string.equals("shrapnel")) {
             return SHRAPNEL;
         }
-        if (i == 2) {
+        if (string.equals("fire")) {
             return FIRE;
         }
         return BASIC;

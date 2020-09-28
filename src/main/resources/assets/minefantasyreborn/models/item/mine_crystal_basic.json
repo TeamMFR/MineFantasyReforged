@@ -1,5 +1,5 @@
 ﻿{
-    "parent": "item/generated",
+    "parent": "minefantasyreborn:item/mine_custom",
     "textures": {
         "layer0": "minefantasyreborn:items/mine_crystal"
     }

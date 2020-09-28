@@ -177,7 +177,7 @@ public class ToolListMFR {
         CLIMBING_PICK_BASIC = new ItemClimbingPick("climbing_pick_basic", ToolMaterial.IRON, 0);
         PARACHUTE = new ItemParachute();
 
-        SYRINGE = new ItemSyringe();
+        SYRINGE = new ItemSyringe("syringe");
         SYRINGE_EMPTY = new ItemComponentMFR("syringe_empty").setCreativeTab(CreativeTabMFR.tabGadget);
 
         LOOT_SACK = new ItemLootSack("loot_sack", 8, 0);
