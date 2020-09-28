@@ -1,19 +1,19 @@
 package minefantasy.mfr.entity;
 
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.weapon.IDamageType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -217,13 +217,13 @@ public class EntityShrapnel extends Entity implements IDamageType {
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
     @Override
-    public void writeEntityToNBT(NBTTagCompound p_70014_1_) {
-        p_70014_1_.setShort("xTile", (short) this.field_145795_e);
-        p_70014_1_.setShort("yTile", (short) this.field_145793_f);
-        p_70014_1_.setShort("zTile", (short) this.field_145794_g);
-        p_70014_1_.setByte("inTile", (byte) Block.getIdFromBlock(this.field_145796_h));
-        p_70014_1_.setByte("inGround", (byte) (this.inGround ? 1 : 0));
-        p_70014_1_.setTag("direction",
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        nbt.setShort("xTile", (short) this.field_145795_e);
+        nbt.setShort("yTile", (short) this.field_145793_f);
+        nbt.setShort("zTile", (short) this.field_145794_g);
+        nbt.setByte("inTile", (byte) Block.getIdFromBlock(this.field_145796_h));
+        nbt.setByte("inGround", (byte) (this.inGround ? 1 : 0));
+        nbt.setTag("direction",
                 this.newDoubleNBTList(new double[]{this.motionX, this.motionY, this.motionZ}));
     }
 
@@ -231,15 +231,15 @@ public class EntityShrapnel extends Entity implements IDamageType {
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
     @Override
-    public void readEntityFromNBT(NBTTagCompound p_70037_1_) {
-        this.field_145795_e = p_70037_1_.getShort("xTile");
-        this.field_145793_f = p_70037_1_.getShort("yTile");
-        this.field_145794_g = p_70037_1_.getShort("zTile");
-        this.field_145796_h = Block.getBlockById(p_70037_1_.getByte("inTile") & 255);
-        this.inGround = p_70037_1_.getByte("inGround") == 1;
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        this.field_145795_e = nbt.getShort("xTile");
+        this.field_145793_f = nbt.getShort("yTile");
+        this.field_145794_g = nbt.getShort("zTile");
+        this.field_145796_h = Block.getBlockById(nbt.getByte("inTile") & 255);
+        this.inGround = nbt.getByte("inGround") == 1;
 
-        if (p_70037_1_.hasKey("direction", 9)) {
-            NBTTagList nbttaglist = p_70037_1_.getTagList("direction", 6);
+        if (nbt.hasKey("direction", 9)) {
+            NBTTagList nbttaglist = nbt.getTagList("direction", 6);
             this.motionX = nbttaglist.getDoubleAt(0);
             this.motionY = nbttaglist.getDoubleAt(1);
             this.motionZ = nbttaglist.getDoubleAt(2);

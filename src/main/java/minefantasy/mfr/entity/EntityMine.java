@@ -24,7 +24,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class EntityMine extends Entity {
@@ -32,6 +31,8 @@ public class EntityMine extends Entity {
     private static final DataParameter<String> CASING = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
     private static final DataParameter<String> FUSE = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
     private static final DataParameter<String> POWDER = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
+    private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityBomb.class, DataSerializers.ITEM_STACK);
+
     private static DamageSource mineDmg = new DamageSource("mine").setExplosion();
     private static DamageSource mineFireDmg = new DamageSource("mine").setExplosion().setFireDamage();
     private final int typeId = 2;
@@ -117,11 +118,25 @@ public class EntityMine extends Entity {
 
     @Override
     protected void entityInit() {
-        dataManager.set(FILLING, "");
-        dataManager.set(CASING, "");
-        dataManager.set(FUSE, "");
-        dataManager.set(POWDER, "");
+        dataManager.register(ITEM, ItemStack.EMPTY);
+        dataManager.register(FILLING, "");
+        dataManager.register(CASING, "");
+        dataManager.register(FUSE, "");
+        dataManager.register(POWDER, "");
     }
+
+	public ItemStack getItem() {
+		return dataManager.get(ITEM);
+	}
+
+	/**
+	 * Sets the item that this entity represents. Used for rendering
+	 */
+	public void setItem(ItemStack stack)
+	{
+		this.getDataManager().set(ITEM, stack);
+		this.getDataManager().setDirty(ITEM);
+	}
 
     /**
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk

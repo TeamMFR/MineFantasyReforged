@@ -157,7 +157,7 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         ItemStack item = user.getHeldItem(hand);
         if (!user.isSwingInProgress) {
             world.playSound(user, user.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F, 1.0F);
-            user.setActiveHand(user.swingingHand);
+//            user.setActiveHand(user.swingingHand);
         }
         return ActionResult.newResult(EnumActionResult.PASS, item);
     }

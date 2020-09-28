@@ -1,36 +1,20 @@
 package minefantasy.mfr.entity.mob;
 
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.pathfinding.PathNavigateGround;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.armour.IArmourPenetrationMob;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.entity.mob.ai.AI_MinotaurFindTarget;
+import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.init.OrnateStyle;
+import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.item.gadget.ItemBomb;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -39,20 +23,37 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
+import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
@@ -738,7 +739,13 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
     }
 
     public void throwBomb(EntityLivingBase attackTarget, float spread) {
-        EntityBomb bomb = new EntityBomb(world, this).setType("shrapnel", "ceramic", "basic", "black_powder");
+        ItemStack itemBomb = new ItemStack(ToolListMFR.BOMB_CUSTOM);
+        ItemBomb.setFilling(itemBomb, "1");
+        ItemBomb.setFuse(itemBomb, "basic");
+        ItemBomb.setCasing(itemBomb, "ceramic");
+        ItemBomb.setPowder(itemBomb, "black_powder");
+
+        EntityBomb bomb = new EntityBomb(world, this, itemBomb).setType("shrapnel", "ceramic", "basic", "black_powder");
         world.spawnEntity(bomb);
         this.swingArm(EnumHand.MAIN_HAND);
     }

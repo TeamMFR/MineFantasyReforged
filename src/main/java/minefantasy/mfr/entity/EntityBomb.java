@@ -13,6 +13,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -32,6 +33,7 @@ public class EntityBomb extends Entity {
     private static final DataParameter<String> CASING = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
     private static final DataParameter<String> FUSE = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
     private static final DataParameter<String> POWDER = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
+    private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityBomb.class, DataSerializers.ITEM_STACK);
     /**
      * How long the fuse is
      */
@@ -43,11 +45,13 @@ public class EntityBomb extends Entity {
         this.fuse = getFuseTime();
         this.preventEntitySpawning = true;
         this.setSize(0.5F, 0.5F);
+        this.setItem(ItemStack.EMPTY);
     }
 
-    public EntityBomb(World world, EntityLivingBase thrower) {
+    public EntityBomb(World world, EntityLivingBase thrower, ItemStack item) {
         this(world);
         this.thrower = thrower;
+        this.setItem(item);
 
         this.setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ,
                 thrower.rotationYaw, thrower.rotationPitch);
@@ -73,6 +77,19 @@ public class EntityBomb extends Entity {
 
     public static DamageSource causeBombDamage(Entity bomb, Entity user) {
         return (new EntityDamageSourceBomb(bomb, user)).setProjectile();
+    }
+
+    public ItemStack getItem() {
+        return dataManager.get(ITEM);
+    }
+
+    /**
+     * Sets the item that this entity represents. Used for rendering
+     */
+    public void setItem(ItemStack stack)
+    {
+        this.getDataManager().set(ITEM, stack);
+        this.getDataManager().setDirty(ITEM);
     }
 
     private int getFuseTime() {
@@ -108,10 +125,11 @@ public class EntityBomb extends Entity {
 
     @Override
     protected void entityInit() {
-        dataManager.set(FILLING, "");
-        dataManager.set(CASING, "");
-        dataManager.set(FUSE, "");
-        dataManager.set(POWDER, "");
+        dataManager.register(ITEM, ItemStack.EMPTY);
+        dataManager.register(FILLING, "");
+        dataManager.register(CASING, "");
+        dataManager.register(FUSE, "");
+        dataManager.register(POWDER, "");
     }
 
     /**

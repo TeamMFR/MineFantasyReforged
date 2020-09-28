@@ -138,7 +138,7 @@ public class ClientProxy extends ClientProxyBase {
 
     public void registerEntityRenderer() {
         RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, RenderArrowMF::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, new RenderBomb());
+        RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, RenderBomb::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, new RenderMine());
         RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, new RenderShrapnel("shrapnel"));
         RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, RenderFireBlast::new);

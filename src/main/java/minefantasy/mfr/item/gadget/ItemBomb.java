@@ -192,11 +192,16 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase user) {
-        user.swingArm(user.swingingHand);
+    public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase entity) {
+        entity.swingArm(entity.getActiveHand());
+
+        if (!(entity instanceof EntityPlayer && ((EntityPlayer)entity).isCreative())) {
             item.shrink(1);
+        }
+
         if (!world.isRemote) {
-            EntityBomb bomb = new EntityBomb(world, user).setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
+
+            EntityBomb bomb = new EntityBomb(world, entity, item).setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
             world.spawnEntity(bomb);
             if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
                 bomb.getEntityData().setBoolean("stickyBomb", true);
