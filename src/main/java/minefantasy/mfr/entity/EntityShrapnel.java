@@ -75,7 +75,7 @@ public class EntityShrapnel extends Entity implements IDamageType {
     @Override
     @SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double dist) {
-        double d1 = this.getCollisionBoundingBox().getAverageEdgeLength() * 4.0D;
+        double d1 = this.getEntityBoundingBox().getAverageEdgeLength() * 4.0D;
         d1 *= 64.0D;
         return dist < d1 * d1;
     }
@@ -118,7 +118,7 @@ public class EntityShrapnel extends Entity implements IDamageType {
 
             Entity entity = null;
             List list = this.world.getEntitiesWithinAABBExcludingEntity(this,
-                    this.getCollisionBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+                    this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
             double d0 = 0.0D;
 
             for (int i = 0; i < list.size(); ++i) {

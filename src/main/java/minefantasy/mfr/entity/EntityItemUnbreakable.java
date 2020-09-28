@@ -62,9 +62,7 @@ public class EntityItemUnbreakable extends EntityItem {
                 this.motionY -= 0.03999999910593033D;
             }
             //just a guess that this function is pushOutOfBlocks
-            noClip = pushOutOfBlocks(posX,
-                    (getCollisionBoundingBox().minY + getCollisionBoundingBox().maxY) / 2.0D,
-                    posZ);
+            noClip = pushOutOfBlocks(posX, (getEntityBoundingBox().minY + getEntityBoundingBox().maxY) / 2.0D, posZ);
 
             //again just a guess
             this.move(MoverType.SELF, motionX, motionY, motionZ);//this.moveEntity(this.motionX, this.motionY, this.motionZ);
@@ -92,7 +90,7 @@ public class EntityItemUnbreakable extends EntityItem {
                 IBlockState blockState = world.getBlockState(
                         new BlockPos(
                                 MathHelper.floor(posX),
-                                MathHelper.floor(getCollisionBoundingBox().minY) -1,
+                                MathHelper.floor(getEntityBoundingBox().minY) -1,
                                 MathHelper.floor(posZ)));
 
                 //parameters are all nulls because function ignores them and just returns slipperiness
