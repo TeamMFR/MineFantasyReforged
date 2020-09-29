@@ -166,6 +166,9 @@ public class ComponentListMFR {
 	public static Item CROSSBOW_AMMO = Utils.nullValue();
 	public static Item CROSSBOW_SCOPE = Utils.nullValue();
 
+	public static Item CROSSBOW_STRING_UNLOADED = Utils.nullValue();
+	public static Item CROSSBOW_STRING_LOADED = Utils.nullValue();
+
 	public static ItemCustomComponent CHAIN_MESH = Utils.nullValue();
 	public static ItemCustomComponent SCALE_MESH = Utils.nullValue();
 	public static ItemCustomComponent SPLINT_MESH = Utils.nullValue();
@@ -334,8 +337,12 @@ public class ComponentListMFR {
 		CROSSBOW_ARMS_ADVANCED = new ItemCrossbowPart("crossbow_arms_advanced", "mechanism").addPower(1.15F).addSpeed(1.00F).addRecoil(6F).addSpread(0.25F).addDurability(150);
 
 		CROSSBOW_BAYONET = new ItemCrossbowPart("crossbow_bayonet", "muzzle").addBash(4.0F).addRecoil(-1F).addSpeed(0.5F);
+
 		CROSSBOW_AMMO = new ItemCrossbowPart("crossbow_ammo", "mod").addCapacity(5).addSpread(2.00F);
 		CROSSBOW_SCOPE = new ItemCrossbowPart("crossbow_scope", "mod").setScope(0.75F);
+
+		CROSSBOW_STRING_UNLOADED = new ItemCrossbowPart("crossbow_string_unloaded", "string_unloaded");
+		CROSSBOW_STRING_LOADED = new ItemCrossbowPart("crossbow_string_loaded", "string_load");
 
 		CHAIN_MESH = new ItemCustomComponent("chain_mesh", 1F, "metal").setStoragePlacement("sheet", "mail");
 		SCALE_MESH = new ItemCustomComponent("scale_mesh", 1F, "metal").setStoragePlacement("sheet", "scale");
@@ -503,8 +510,12 @@ public class ComponentListMFR {
 		registry.register(CROSSBOW_ARMS_ADVANCED);
 
 		registry.register(CROSSBOW_BAYONET);
+
 		registry.register(CROSSBOW_AMMO);
 		registry.register(CROSSBOW_SCOPE);
+
+		registry.register(CROSSBOW_STRING_UNLOADED);
+		registry.register(CROSSBOW_STRING_LOADED);
 
 		registry.register(CHAIN_MESH);
 		registry.register(SCALE_MESH);

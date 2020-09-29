@@ -2,8 +2,11 @@ package minefantasy.mfr.item.gadget;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
+import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.item.ItemComponentMFR;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;

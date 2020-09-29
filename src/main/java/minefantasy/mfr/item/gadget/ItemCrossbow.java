@@ -11,7 +11,7 @@ import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
@@ -20,13 +20,18 @@ import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.item.archery.ItemArrowMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
+import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -36,7 +41,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -95,28 +99,26 @@ public class ItemCrossbow extends ItemBaseMFR
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-        ItemStack item = user.getHeldItem(hand);
-        if (!world.isRemote && user.isSneaking() || AmmoMechanicsMFR.isDepleted(item))// OPEN INV
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack item = player.getHeldItem(hand);
+        if (!world.isRemote && player.isSneaking() || AmmoMechanicsMFR.isDepleted(item))// OPEN INV
         {
-            user.openGui(MineFantasyReborn.INSTANCE, 1, user.world, 1, 0, 0);
+            player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
             return ActionResult.newResult(EnumActionResult.FAIL, item);
         }
         ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);
-        if (loaded == null || user.isSwingInProgress)// RELOAD
+        if (loaded.isEmpty() || player.isSwingInProgress)// RELOAD
         {
-            startUse(user, item, "reload");
+            startUse(player, item, "reload");
             return ActionResult.newResult(EnumActionResult.FAIL, item);
-        } else // FIRE
-        {
         }
-        startUse(user, item, "fire");
+        startUse(player, item, "fire");// FIRE
         return ActionResult.newResult(EnumActionResult.PASS, item);
     }
 
     @Override
     public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase user) {
-        boolean infinity = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(51), item) > 0;
+        boolean infinity = EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, item) > 0;
         user.swingArm(EnumHand.MAIN_HAND);
         ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);
         ItemStack storage = AmmoMechanicsMFR.getAmmo(item);
@@ -124,14 +126,14 @@ public class ItemCrossbow extends ItemBaseMFR
         boolean shouldConsume = true;
 
         if (action.equalsIgnoreCase("reload")) {
-            if (storage == null && infinity) {
+            if (storage.isEmpty() && infinity) {
                 shouldConsume = false;
                 storage = CustomToolListMFR.STANDARD_BOLT.construct("Magic");
             }
-            if (storage != null)// RELOAD
+            if (!storage.isEmpty())// RELOAD
             {
                 boolean success = false;
-                if (loaded == null) {
+                if (loaded.isEmpty()) {
                     ItemStack ammo = storage.copy();
                     ammo.setCount(1);
                     if (shouldConsume)
@@ -159,7 +161,7 @@ public class ItemCrossbow extends ItemBaseMFR
         int max = getMaxItemUseDuration(item);
 
         if (time == (max - 5) && getUseAction(item).equalsIgnoreCase("reload")
-                && (loaded == null || loaded.getCount() < getAmmoCapacity(item))) {
+                && (loaded.isEmpty() || loaded.getCount() < getAmmoCapacity(item))) {
             player.playSound(SoundsMFR.CROSSBOW_LOAD, 1.0F, 1 / (getFullValue(item, "speed") / 4F));
         }
     }
@@ -171,9 +173,9 @@ public class ItemCrossbow extends ItemBaseMFR
 
         if (action.equalsIgnoreCase("fire") && this.onFireArrow(user.world, AmmoMechanicsMFR.getArrowOnBow(item),
                 item, (EntityPlayer) user, this.getFullValue(item, "power"), false)) {
-            if (loaded != null) {
+            if (!loaded.isEmpty()) {
                 loaded.grow(1);
-                AmmoMechanicsMFR.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : null));
+                AmmoMechanicsMFR.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : ItemStack.EMPTY));
             }
             recoilUser((EntityPlayer) user, getFullValue(item, "recoil"));
             AmmoMechanicsMFR.damageContainer(item, (EntityPlayer) user, 1);
@@ -184,7 +186,7 @@ public class ItemCrossbow extends ItemBaseMFR
     public void startUse(EntityPlayer user, ItemStack item, String action) {
         setUseAction(item, action);
         if (user != null)
-            user.setActiveHand(user.swingingHand);
+            user.setActiveHand(EnumHand.MAIN_HAND);
     }
 
     public void stopUse(ItemStack item) {
@@ -213,15 +215,13 @@ public class ItemCrossbow extends ItemBaseMFR
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag fullInfo) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag fullInfo) {
         super.addInformation(item, world, list, fullInfo);
 
         list.add(I18n.format("attribute.crossbow.power.name", getFullValue(item, "power")));
         list.add(I18n.format("attribute.crossbow.speed.name", getFullValue(item, "speed")));
-        list.add(I18n.format("attribute.crossbow.recoil.name",
-                getFullValue(item, "recoil")));
-        list.add(I18n.format("attribute.crossbow.spread.name",
-                getFullValue(item, "spread")));
+        list.add(I18n.format("attribute.crossbow.recoil.name", getFullValue(item, "recoil")));
+        list.add(I18n.format("attribute.crossbow.spread.name", getFullValue(item, "spread")));
         list.add(I18n.format("attribute.crossbow.capacity.name", getAmmoCapacity(item)));
         list.add(I18n.format("attribute.crossbow.bash.name", getMeleeDmg(item)));
     }
@@ -270,17 +270,12 @@ public class ItemCrossbow extends ItemBaseMFR
         if (!isInCreativeTab(tab)) {
             return;
         }
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_HANDLE_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC));
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_LIGHT));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_HANDLE_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_LIGHT));
 
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC, (ICrossbowPart) ComponentListMFR.CROSSBOW_AMMO));
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD,
-                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_HEAVY, (ICrossbowPart) ComponentListMFR.CROSSBOW_BAYONET));
-        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_IRON,
-                (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_ADVANCED, (ICrossbowPart) ComponentListMFR.CROSSBOW_SCOPE));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC, (ICrossbowPart) ComponentListMFR.CROSSBOW_AMMO));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_HEAVY, (ICrossbowPart) ComponentListMFR.CROSSBOW_BAYONET));
+        items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_IRON, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_ADVANCED, (ICrossbowPart) ComponentListMFR.CROSSBOW_SCOPE));
     }
 
     public String getNameModifier(ItemStack item, String partname) {
@@ -359,7 +354,7 @@ public class ItemCrossbow extends ItemBaseMFR
 
     public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge,
                                boolean infinite) {
-        if (arrow == null || !(arrow.getItem() instanceof ItemArrowMFR)) {
+        if (arrow.isEmpty() || !(arrow.getItem() instanceof ItemArrowMFR)) {
             return false;
         }
         ItemArrowMFR ammo = (ItemArrowMFR) arrow.getItem();
@@ -370,16 +365,16 @@ public class ItemCrossbow extends ItemBaseMFR
         EntityArrowMFR entArrow = ammo
                 .getFiredArrow(new EntityArrowMFR(world, user, getFullValue(bow, "spread"), charge * 2.0F), arrow);
 
-        int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(48), bow);
-        entArrow.setPower(1 + (0.25F * var9));
+        int powerModifier = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
+        entArrow.setPower(1 + (0.25F * powerModifier));
 
-        int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(49), bow);
+        int punchModifier = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
 
-        if (var10 > 0) {
-            entArrow.setKnockbackStrength(var10);
+        if (punchModifier > 0) {
+            entArrow.setKnockbackStrength(punchModifier);
         }
 
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(50), bow) > 0) {
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bow) > 0) {
             entArrow.setFire(100);
         }
 
@@ -387,7 +382,7 @@ public class ItemCrossbow extends ItemBaseMFR
             entArrow.canBePickedUp = 2;
         }
 
-        if (bow != null && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
+        if (!bow.isEmpty() && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
             entArrow = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
         }
         if (!world.isRemote) {
@@ -411,8 +406,8 @@ public class ItemCrossbow extends ItemBaseMFR
                 getItem(item, "mod")};
     }
 
-    private Object getItem(ItemStack item, String type) {
-        return ItemCrossbowPart.getPart(type, this.getPart(type, item));
+    public Object getItem(ItemStack item, String type) {
+        return ItemCrossbowPart.getPart(type, getPart(type, item));
     }
 
     @Override
@@ -464,5 +459,11 @@ public class ItemCrossbow extends ItemBaseMFR
             return part.makesSmallWeapon();
         }
         return true;
+    }
+
+    @Override
+    public void registerClient() {
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderCrossbow(() -> modelLocation), modelLocation);
     }
 }
