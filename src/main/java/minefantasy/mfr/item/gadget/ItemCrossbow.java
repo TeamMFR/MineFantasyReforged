@@ -27,6 +27,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -112,8 +113,10 @@ public class ItemCrossbow extends ItemBaseMFR
             startUse(player, item, "reload");
             return ActionResult.newResult(EnumActionResult.FAIL, item);
         }
-        startUse(player, item, "fire");// FIRE
-        return ActionResult.newResult(EnumActionResult.PASS, item);
+        else{
+            startUse(player, item, "fire");// FIRE
+            return ActionResult.newResult(EnumActionResult.SUCCESS, item);
+        }
     }
 
     @Override
@@ -352,8 +355,7 @@ public class ItemCrossbow extends ItemBaseMFR
         return initialDam + this.getMeleeDmg(item) - 1;
     }
 
-    public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge,
-                               boolean infinite) {
+    public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge, boolean infinite) {
         if (arrow.isEmpty() || !(arrow.getItem() instanceof ItemArrowMFR)) {
             return false;
         }
@@ -362,16 +364,15 @@ public class ItemCrossbow extends ItemBaseMFR
             return false;
         }
         // TODO Arrow entity instance
-        EntityArrowMFR entArrow = ammo
-                .getFiredArrow(new EntityArrowMFR(world, user, getFullValue(bow, "spread"), charge * 2.0F), arrow);
+        EntityArrowMFR entArrow = ammo.getFiredArrow(new EntityArrowMFR(world, user, getFullValue(bow, "spread"), charge * 2.0F), arrow);
 
-        int powerModifier = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
-        entArrow.setPower(1 + (0.25F * powerModifier));
+        int power_level = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
+        entArrow.setPower(1 + (0.25F * power_level));
 
-        int punchModifier = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
+        int punch_level = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
 
-        if (punchModifier > 0) {
-            entArrow.setKnockbackStrength(punchModifier);
+        if (punch_level > 0) {
+            entArrow.setKnockbackStrength(punch_level);
         }
 
         if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bow) > 0) {
@@ -382,8 +383,10 @@ public class ItemCrossbow extends ItemBaseMFR
             entArrow.canBePickedUp = 2;
         }
 
-        if (!bow.isEmpty() && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
-            entArrow = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
+        if (!bow.isEmpty()) {
+            if (bow.getItem() instanceof ISpecialBow) {
+                entArrow = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
+            }
         }
         if (!world.isRemote) {
             world.spawnEntity(entArrow);

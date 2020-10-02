@@ -4,15 +4,15 @@ import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
+import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.item.gadget.ItemCrossbow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.model.IModelState;
-import org.lwjgl.opengl.GL11;
 
 import java.util.function.Supplier;
 
@@ -24,61 +24,95 @@ import java.util.function.Supplier;
  */
 
 public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
-
     public RenderCrossbow(Supplier<ModelResourceLocation> wrappedModel) {
         super(wrappedModel);
     }
 
     @Override
-    public void renderItem(ItemStack item, ItemCameraTransforms.TransformType type) {
-        ItemCrossbow crossbow = (ItemCrossbow) item.getItem();
-
-        if (type != ItemCameraTransforms.TransformType.NONE) {
-            renderPart(item, "stock");
-            renderPart(item, "mechanism");
-            renderPart(item, "string_unloaded");
-            renderPart(item, "muzzle");
-            renderPart(item, "mod");
-        }
-        if (type == ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND && crossbow.getZoom(item) < 0.1F) {
-            renderPart(item, "stock");
-            renderPart(item, "mechanism");
-            renderPart(item, "string_unloaded");
-            renderPart(item, "muzzle");
-            renderPart(item, "mod");
-        }
-    }
-
-    private void renderPart(ItemStack item, String part_name) {
-
+    public void renderItem(ItemStack stack, TransformType type) {
         GlStateManager.pushMatrix();
 
-        GlStateManager.translate(0.75F, -0.25F, 0F);
-        GlStateManager.translate(0f, 0f, 0);
-        doRenderPart(item, part_name);
+        if (type != TransformType.GUI) {
+            GlStateManager.scale(2F, 2F, 2F);
+            GlStateManager.translate(0.2F, 0.5F, 0.35F);
+            renderPart(stack, "stock", type);
+            renderPart(stack, "mechanism", type);
+            renderPart(stack, "muzzle", type);
+            renderPart(stack, "mod", type);
+            if (AmmoMechanicsMFR.isFirearmLoaded(stack)){
+                renderString("string_loaded");
+            }
+            else{
+                renderString( "string_unloaded");
+            }
+            renderArrow(stack);
+        }
+        else{
+            GlStateManager.scale(1.5F, 1.5F, 1.5F);
+            GlStateManager.translate(0.2F, 0.5F, 0.35F);
+            renderPart(stack, "stock", type);
+            renderPart(stack, "mechanism", type);
+            renderPart(stack, "muzzle", type);
+            renderPart(stack, "mod", type);
+            if (AmmoMechanicsMFR.isFirearmLoaded(stack)){
+                renderString("string_loaded");
+            }
+            else{
+                renderString( "string_unloaded");
+            }
+        }
 
         GlStateManager.popMatrix();
-
     }
 
-    private void doRenderPart(ItemStack item, String part_name) {
+    private void renderPart(ItemStack stack, String part_name, TransformType type) {
         boolean isArms = part_name.equalsIgnoreCase("mechanism");
+        boolean isStock = part_name.equalsIgnoreCase("stock");
+
+        ItemCrossbow crossbow = (ItemCrossbow) stack.getItem();
+        ItemStack part = new ItemStack((Item) crossbow.getItem(stack, part_name));
+
         GlStateManager.pushMatrix();
 
-        GlStateManager.scale(1.5F, 1.5F, 1.5F);
-        GlStateManager.translate(-0.4F, 0.5F, 0F);
-
-        if (isArms){
-         GlStateManager.rotate(90, -1, 1, 0);
+        if (type != TransformType.GUI){
+            if (isArms){
+                GlStateManager.rotate(90, -1, 1, 0);
+            }
         }
 
-        ItemCrossbow crossbow = (ItemCrossbow) item.getItem();
-        ItemStack part = new ItemStack((Item) crossbow.getItem(item, part_name));
-
-        Minecraft.getMinecraft().getRenderItem().renderItem(part, ItemCameraTransforms.TransformType.NONE);
+        Minecraft.getMinecraft().getRenderItem().renderItem(part, TransformType.NONE);
 
         GlStateManager.popMatrix();
 
+    }
+
+    private void renderString(String part_name){
+        GlStateManager.pushMatrix();
+
+        ItemStack string_stack = part_name.equalsIgnoreCase("string_unloaded") ? new ItemStack(ComponentListMFR.CROSSBOW_STRING_UNLOADED) : new ItemStack(ComponentListMFR.CROSSBOW_STRING_LOADED);
+        GlStateManager.rotate(90, -1, 1, 0);
+
+        Minecraft.getMinecraft().getRenderItem().renderItem(string_stack, TransformType.NONE);
+
+        GlStateManager.popMatrix();
+    }
+
+    private void renderArrow(ItemStack stack){
+        ItemStack arrowStack = AmmoMechanicsMFR.getArrowOnBow(stack);
+
+        if (!arrowStack.isEmpty() && AmmoMechanicsMFR.isFirearmLoaded(stack)) {
+
+            GlStateManager.pushMatrix(); //arrow start
+
+            GlStateManager.scale(0.375F, 0.375F, 0.375F);
+            GlStateManager.translate(0.2F,-0.05F,0F);
+            GlStateManager.rotate(90, 0, 0, 1);
+            GlStateManager.rotate(90, 1, 1, 0);
+
+            Minecraft.getMinecraft().getRenderItem().renderItem(arrowStack, TransformType.NONE);
+
+            GlStateManager.popMatrix(); //arrow end
+        }
     }
 
     @Override
