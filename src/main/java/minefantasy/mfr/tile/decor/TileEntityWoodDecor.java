@@ -14,7 +14,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
     public TileEntityWoodDecor(String tex) {
         this.tex = tex;
-        this.material = CustomMaterial.getMaterial("refined_wood");
+        this.material = CustomMaterial.getMaterial("RefinedWood");
     }
 
     public TileEntityWoodDecor(String tex, CustomMaterial material) {
@@ -27,7 +27,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     }
 
     public CustomMaterial getMaterial() {
-        return this.material != null ? this.material : trySetMaterial("refined_wood");
+        return this.material != null ? this.material : trySetMaterial("RefinedWood");
     }
 
     public void setMaterial(CustomMaterial material) {
@@ -35,7 +35,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     }
 
     public String getMaterialName() {
-        return this.material != null ? material.getName() : "refined_wood";
+        return this.material != null ? material.getName() : "RefinedWood";
     }
 
     public CustomMaterial trySetMaterial(String materialName) {

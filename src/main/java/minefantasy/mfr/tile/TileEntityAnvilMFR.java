@@ -503,7 +503,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
                 return false;
             }
             if (resSlot.getItem() instanceof IHotItem) {
-                ItemStack heated = Heatable.getItem(resSlot);
+                ItemStack heated = Heatable.getItemStack(resSlot);
                 if (heated != null) {
                     resSlot = heated;
                 }
@@ -521,7 +521,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
             return 0;
 
         if (slot.getItem() instanceof IHotItem) {
-            ItemStack held = Heatable.getItem(slot);
+            ItemStack held = Heatable.getItemStack(slot);
             if (!held.isEmpty())
                 return held.getMaxStackSize();
         }

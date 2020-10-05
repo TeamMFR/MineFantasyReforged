@@ -33,23 +33,23 @@ public final class CreativeTabMFR extends CreativeTabs {
     public ItemStack getIconItemStack() {
         switch (type) {
             case 1:
-                return CustomToolListMFR.STANDARD_AXE.construct("steel", "oak_wood");
+                return CustomToolListMFR.STANDARD_AXE.construct("steel", "OakWood");
             case 2:
-                return (CustomToolListMFR.STANDARD_SWORD).construct("steel", "oak_wood");
+                return (CustomToolListMFR.STANDARD_SWORD).construct("steel", "OakWood");
             case 3:
                 return CustomArmourListMFR.STANDARD_PLATE_HELMET.construct("steel");
             case 4:
-                return CustomToolListMFR.STANDARD_BOW.construct("steel", "oak_wood");
+                return CustomToolListMFR.STANDARD_BOW.construct("steel", "OakWood");
             case 5:
                 return new ItemStack(BlockListMFR.ANVIL_IRON);
             case 6:
                 return ToolListMFR.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
             case 7:
-                return ComponentListMFR.PLANK.construct("oak_wood");
+                return ComponentListMFR.PLANK.construct("OakWood");
             case 8:
-                return CustomToolListMFR.STANDARD_HANDPICK.construct("steel", "oak_wood");
+                return CustomToolListMFR.STANDARD_HANDPICK.construct("steel", "OakWood");
             case 9:
-                return CustomToolListMFR.STANDARD_HAMMER.construct("steel", "oak_wood");
+                return CustomToolListMFR.STANDARD_HAMMER.construct("steel", "OakWood");
             case 10:
                 return new ItemStack(BlockListMFR.COPPER_ORE);
             case 11:

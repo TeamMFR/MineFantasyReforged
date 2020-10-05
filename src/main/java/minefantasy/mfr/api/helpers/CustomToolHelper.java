@@ -1,6 +1,5 @@
 package minefantasy.mfr.api.helpers;
 
-import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.material.CustomMaterial;
@@ -11,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.EnumHelper;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -50,7 +48,7 @@ public class CustomToolHelper {
     }
 
     public static ItemStack construct(Item base, String main) {
-        return construct(base, main, "oak_wood");
+        return construct(base, main, "OakWood");
     }
 
     public static ItemStack construct(Item base, String main, String haft) {
@@ -460,7 +458,7 @@ public class CustomToolHelper {
             return null;
 
         if (item.getItem() instanceof ItemHeated) {
-            return getComponentMaterial(ItemHeated.getItem(item), type);
+            return getComponentMaterial(ItemHeated.getStack(item), type);
         }
 
         CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);

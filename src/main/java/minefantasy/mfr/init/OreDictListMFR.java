@@ -11,17 +11,17 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictListMFR {
 
 	public static void registerOreDictEntries() {
-		OreDictionary.registerOre("copper_ore", BlockListMFR.COPPER_ORE);
-		OreDictionary.registerOre("tin_ore", BlockListMFR.TIN_ORE);
-		OreDictionary.registerOre("silver_ore", BlockListMFR.SILVER_ORE);
-		OreDictionary.registerOre("mythic_ore", BlockListMFR.MYTHIC_ORE);
-		OreDictionary.registerOre("kaolinite_ore", BlockListMFR.KAOLINITE_ORE);
-		OreDictionary.registerOre("borax_ore", BlockListMFR.NITRE_ORE);
-		OreDictionary.registerOre("sulfur_ore", BlockListMFR.SULFUR_ORE);
-		OreDictionary.registerOre("borax_ore", BlockListMFR.BORAX_ORE);
-		OreDictionary.registerOre("tungsten_ore", BlockListMFR.TUNGSTEN_ORE);
-		OreDictionary.registerOre("clay_ore", BlockListMFR.CLAY_ORE);
-		OreDictionary.registerOre("coal_rich_ore", BlockListMFR.COAL_RICH_ORE);
+		OreDictionary.registerOre("oreCopper", BlockListMFR.COPPER_ORE);
+		OreDictionary.registerOre("oreTin", BlockListMFR.TIN_ORE);
+		OreDictionary.registerOre("oreSilver", BlockListMFR.SILVER_ORE);
+		OreDictionary.registerOre("oreMythic", BlockListMFR.MYTHIC_ORE);
+		OreDictionary.registerOre("oreKaolinite", BlockListMFR.KAOLINITE_ORE);
+		OreDictionary.registerOre("oreNitre", BlockListMFR.NITRE_ORE);
+		OreDictionary.registerOre("oreSulfur", BlockListMFR.SULFUR_ORE);
+		OreDictionary.registerOre("oreBorax", BlockListMFR.BORAX_ORE);
+		OreDictionary.registerOre("oreTungsten", BlockListMFR.TUNGSTEN_ORE);
+		OreDictionary.registerOre("oreClay", BlockListMFR.CLAY_ORE);
+		OreDictionary.registerOre("oreRichCoal", BlockListMFR.COAL_RICH_ORE);
 
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.LIMESTONE, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(BlockListMFR.LIMESTONE, 1, 0));
@@ -29,56 +29,54 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_BRICK, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_PAVEMENT, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("block_glass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("block_glass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("pane_glass", new ItemStack(BlockListMFR.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("pane_glass", new ItemStack(BlockListMFR.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("planks_oak_wood", new ItemStack(Blocks.PLANKS, 1, 0));
-		OreDictionary.registerOre("planks_spruce_wood", new ItemStack(Blocks.PLANKS, 1, 1));
-		OreDictionary.registerOre("planks_birch_wood", new ItemStack(Blocks.PLANKS, 1, 2));
-		OreDictionary.registerOre("planks_jungle_wood", new ItemStack(Blocks.PLANKS, 1, 3));
-		OreDictionary.registerOre("planks_acacia_wood", new ItemStack(Blocks.PLANKS, 1, 4));
-		OreDictionary.registerOre("planks_dark_oak_wood", new ItemStack(Blocks.PLANKS, 1, 5));
+		OreDictionary.registerOre("planksOakWood", new ItemStack(Blocks.PLANKS, 1, 0));
+		OreDictionary.registerOre("planksSpruceWood", new ItemStack(Blocks.PLANKS, 1, 1));
+		OreDictionary.registerOre("planksBirchWood", new ItemStack(Blocks.PLANKS, 1, 2));
+		OreDictionary.registerOre("planksJungleWood", new ItemStack(Blocks.PLANKS, 1, 3));
+		OreDictionary.registerOre("planksAcaciaWood", new ItemStack(Blocks.PLANKS, 1, 4));
+		OreDictionary.registerOre("planksDarkOakWood", new ItemStack(Blocks.PLANKS, 1, 5));
 
-		OreDictionary.registerOre("planks_ironbark_wood", BlockListMFR.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planks_ebony_wood", BlockListMFR.EBONY_PLANKS);
-		OreDictionary.registerOre("planks_yew_wood", BlockListMFR.YEW_PLANKS);
-		OreDictionary.registerOre("planks_ironbark_wood", BlockListMFR.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planks_ebony_wood", BlockListMFR.EBONY_PLANKS);
-		OreDictionary.registerOre("planks_yew_wood", BlockListMFR.YEW_PLANKS);
+		OreDictionary.registerOre("planksIronbarkWood", BlockListMFR.IRONBARK_PLANKS);
+		OreDictionary.registerOre("planksEbonyWood", BlockListMFR.EBONY_PLANKS);
+		OreDictionary.registerOre("planksYewWood", BlockListMFR.YEW_PLANKS);
+		OreDictionary.registerOre("planksIronbarkWood", BlockListMFR.IRONBARK_PLANKS);
+		OreDictionary.registerOre("planksEbonyWood", BlockListMFR.EBONY_PLANKS);
+		OreDictionary.registerOre("planksYewWood", BlockListMFR.YEW_PLANKS);
 
-		for (ItemStack plank : OreDictionary.getOres("plank_wood")) {
-			if (plank.getItem().getClass().getName().contains("block_wooden_device")) {
+		for (ItemStack plank : OreDictionary.getOres("plankWood")) {
+			if (plank.getItem().getClass().getName().contains("blockWoodenDevice")) {
 				if (plank.getUnlocalizedName().equalsIgnoreCase("tile.blockWoodenDevice.6")) {
-					OreDictionary.registerOre("planks_greatwood_wood", plank);
+					OreDictionary.registerOre("planksGreatwoodWood", plank);
 				}
 				if (plank.getUnlocalizedName().equalsIgnoreCase("tile.blockWoodenDevice.7")) {
-					OreDictionary.registerOre("planks_silverwood_wood", plank);
+					OreDictionary.registerOre("planksSilverwoodWood", plank);
 				}
 			}
 		}
 
-		OreDictionary.registerOre("copper_ingot", ComponentListMFR.COPPER_INGOT);
-		OreDictionary.registerOre("tin_ingot", ComponentListMFR.TIN_INGOT);
-		OreDictionary.registerOre("bronze_ingot", ComponentListMFR.BRONZE_INGOT);
-		OreDictionary.registerOre("pig_iron_ingot", ComponentListMFR.PIG_IRON_INGOT);
-		OreDictionary.registerOre("steel_ingot", ComponentListMFR.STEEL_INGOT);
-		OreDictionary.registerOre("encrusted_ingot", ComponentListMFR.ENCRUSTED_INGOT);
-		OreDictionary.registerOre("black_steel_ingot", ComponentListMFR.BLACK_STEEL_INGOT);
-		OreDictionary.registerOre("silver_ingot", ComponentListMFR.SILVER_INGOT);
-		OreDictionary.registerOre("red_steel_ingot", ComponentListMFR.RED_STEEL_INGOT);
-		OreDictionary.registerOre("blue_steel_ingot", ComponentListMFR.BLUE_STEEL_INGOT);
-		OreDictionary.registerOre("adamantium_ingot", ComponentListMFR.ADAMANTIUM_INGOT);
-		OreDictionary.registerOre("mithril_ingot", ComponentListMFR.MITHRIL_INGOT);
-		OreDictionary.registerOre("ignotumite_ingot", ComponentListMFR.IGNOTUMITE_INGOT);
-		OreDictionary.registerOre("mithium_ingot", ComponentListMFR.MITHIUM_INGOT);
-		OreDictionary.registerOre("ender_ingot", ComponentListMFR.ENDER_INGOT);
-		OreDictionary.registerOre("tungsten_ingot", ComponentListMFR.TUNGSTEN_INGOT);
-		OreDictionary.registerOre("obsidian_ingot", ComponentListMFR.OBSIDIAN_INGOT);
-		OreDictionary.registerOre("composite_alloy_ingot", ComponentListMFR.COMPOSITE_ALLOY_INGOT);
-		OreDictionary.registerOre("iron_ingot", Items.IRON_INGOT);
-		OreDictionary.registerOre("gold_ingot", Items.GOLD_INGOT);
+		OreDictionary.registerOre("ingotCopper", ComponentListMFR.COPPER_INGOT);
+		OreDictionary.registerOre("ingotTin", ComponentListMFR.TIN_INGOT);
+		OreDictionary.registerOre("ingotBronze", ComponentListMFR.BRONZE_INGOT);
+		OreDictionary.registerOre("ingotPigIron", ComponentListMFR.PIG_IRON_INGOT);
+		OreDictionary.registerOre("ingotSteel", ComponentListMFR.STEEL_INGOT);
+		OreDictionary.registerOre("ingotEncrusted", ComponentListMFR.ENCRUSTED_INGOT);
+		OreDictionary.registerOre("ingotBlackSteel", ComponentListMFR.BLACK_STEEL_INGOT);
+		OreDictionary.registerOre("ingotSilver", ComponentListMFR.SILVER_INGOT);
+		OreDictionary.registerOre("ingotRedSteel", ComponentListMFR.RED_STEEL_INGOT);
+		OreDictionary.registerOre("ingotBlueSteel", ComponentListMFR.BLUE_STEEL_INGOT);
+		OreDictionary.registerOre("ingotAdamantium", ComponentListMFR.ADAMANTIUM_INGOT);
+		OreDictionary.registerOre("ingotMithril", ComponentListMFR.MITHRIL_INGOT);
+		OreDictionary.registerOre("ingotIgnotumite", ComponentListMFR.IGNOTUMITE_INGOT);
+		OreDictionary.registerOre("ingotMithium", ComponentListMFR.MITHIUM_INGOT);
+		OreDictionary.registerOre("ingotEnder", ComponentListMFR.ENDER_INGOT);
+		OreDictionary.registerOre("ingotTungsten", ComponentListMFR.TUNGSTEN_INGOT);
+		OreDictionary.registerOre("ingotObsidian", ComponentListMFR.OBSIDIAN_INGOT);
+		OreDictionary.registerOre("ingotCompositeAlloy", ComponentListMFR.COMPOSITE_ALLOY_INGOT);
 
 		String meatRaw = "raw_meat";
 		String cookedMeat = "cooked_meat";

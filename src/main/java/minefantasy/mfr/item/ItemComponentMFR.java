@@ -98,6 +98,10 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
             }
         }
 
+        add(items, ComponentListMFR.BLACK_STEEL_WEAK_INGOT);
+        add(items, ComponentListMFR.BLUE_STEEL_WEAK_INGOT);
+        add(items, ComponentListMFR.RED_STEEL_WEAK_INGOT);
+
         add(items, ComponentListMFR.NAIL);
         add(items, ComponentListMFR.RIVET);
         add(items, ComponentListMFR.THREAD);

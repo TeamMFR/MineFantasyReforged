@@ -10,12 +10,14 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.ISmithTongs;
+import minefantasy.mfr.client.render.item.RenderTong;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -41,7 +43,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -49,9 +50,7 @@ import java.util.List;
  */
 public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, IClientRegister {
     protected int itemRarity;
-    private ToolMaterial material;
     private float baseDamage;
-    private String name;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
@@ -59,9 +58,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
 
     public ItemTongs(String name, ToolMaterial material, int rarity) {
         super(0F, 1.0F, material, Sets.newHashSet(new Block[]{}));
-        this.material = material;
         itemRarity = rarity;
-        this.name = name;
         setCreativeTab(CreativeTabMFR.tabOldTools);
         this.setMaxDamage(getMaxDamage() / 5);
         setRegistryName(name);
@@ -96,7 +93,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
 
                 float water = TongsHelper.getWaterSource(world, pos);
 
-                if (TongsHelper.getHeldItem(item) != null && water >= 0) {
+                if (!TongsHelper.getHeldItem(item).isEmpty() && water >= 0) {
                     ItemStack drop = TongsHelper.getHeldItem(item).copy(), cooled = drop;
 
                     if (TongsHelper.isCoolableItem(drop)) {
@@ -110,7 +107,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
                             world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, 0, 0.065F, 0);
                         }
                     }
-                    if (cooled != null && !world.isRemote) {
+                    if (!cooled.isEmpty() && !world.isRemote) {
                         if (world.isAirBlock(pos.add(0,1,0))) {
                             EntityItem entity = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, cooled);
                             entity.setPickupDelay(20);
@@ -220,13 +217,13 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
     }
 
     @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
         if (isCustom) {
             CustomToolHelper.addInformation(item, list);
         } else {
 
             ItemStack held = TongsHelper.getHeldItem(item);
-            if (held != null) {
+            if (!held.isEmpty()) {
                 list.add("");
                 list.add(held.getItem().getItemStackDisplayName(held));
                 held.getItem().addInformation(held, world, list, flag);
@@ -250,8 +247,10 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
     // ====================================================== CUSTOM END
     // ==============================================================\\
 
+
     @Override
     public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderTong(() -> modelLocation), modelLocation);
     }
 }

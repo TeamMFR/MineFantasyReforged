@@ -436,8 +436,8 @@ public class TileEntityForge extends TileEntityBase implements  IBasicMetre, IHe
             getInventory().setStackInSlot(0, placed);
             return true;
         } else if (contents.getItem() instanceof ItemHeated) {
-            ItemStack hot = Heatable.getItem(contents);
-            if (hot != null && hot.isItemEqual(held) && ItemStack.areItemStackTagsEqual(held, hot)
+            ItemStack hot = Heatable.getItemStack(contents);
+            if (!hot.isEmpty() && hot.isItemEqual(held) && ItemStack.areItemStackTagsEqual(held, hot)
                     && contents.getCount() < contents.getMaxStackSize()) {
                 contents.grow(1);
                 return true;

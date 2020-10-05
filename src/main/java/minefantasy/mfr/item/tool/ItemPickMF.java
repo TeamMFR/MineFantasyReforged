@@ -184,8 +184,8 @@ public class ItemPickMF extends ItemPickaxe implements IToolMaterial, IClientReg
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "oak_wood"));
+                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "OakWood"));
                 }
             }
         } else {

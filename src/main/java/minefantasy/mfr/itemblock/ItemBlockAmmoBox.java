@@ -70,13 +70,11 @@ public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
         }
         if (MineFantasyReborn.isDebug()) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-            Iterator iteratorWood = wood.iterator();
-            while (iteratorWood.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorWood.next();
+            for (CustomMaterial customMat : wood) {
                 items.add(this.construct(customMat.name));
             }
         } else {
-            items.add(this.construct("refined_wood"));
+            items.add(this.construct("RefinedWood"));
         }
     }
 

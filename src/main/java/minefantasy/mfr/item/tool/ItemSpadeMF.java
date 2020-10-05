@@ -134,8 +134,8 @@ public class ItemSpadeMF extends ItemSpade implements IToolMaterial, IClientRegi
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "oak_wood"));
+                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "OakWood"));
                 }
             }
         } else {

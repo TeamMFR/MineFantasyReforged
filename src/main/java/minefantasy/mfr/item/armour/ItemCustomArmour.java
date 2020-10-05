@@ -131,12 +131,9 @@ public class ItemCustomArmour extends ItemArmourMFR {
             return;
         }
         ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-        Iterator iteratorMetal = metal.iterator();
         if (this.getCreativeTab() != CreativeTabMFR.tabArmour) {
-            while (iteratorMetal.hasNext()) {
-                CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-
-                if (customMat.getItemStack() != null) {
+            for (CustomMaterial customMat : metal) {
+                if (!customMat.getItemStack().isEmpty()) {
                     items.add(construct(customMat.name));
                 }
             }
@@ -145,10 +142,8 @@ public class ItemCustomArmour extends ItemArmourMFR {
         if (this != CustomArmourListMFR.STANDARD_CHAIN_BOOTS)
             return;
 
-        while (iteratorMetal.hasNext()) {
-            CustomMaterial customMat = (CustomMaterial) iteratorMetal.next();
-
-            if (customMat.getItemStack() != null) {
+        for (CustomMaterial customMat : metal) {
+            if (!customMat.getItemStack().isEmpty()) {
                 addSuits(items, customMat.name);
             }
         }

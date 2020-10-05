@@ -176,8 +176,8 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack() != null) {
-                    items.add(this.construct(customMat.name, "oak_wood"));
+                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+                    items.add(this.construct(customMat.name, "OakWood"));
                 }
             }
         } else {

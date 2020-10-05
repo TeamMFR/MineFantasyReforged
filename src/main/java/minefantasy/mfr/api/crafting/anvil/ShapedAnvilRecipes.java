@@ -153,7 +153,7 @@ public class ShapedAnvilRecipes implements IAnvilRecipe {
             return item;
         }
 
-        ItemStack hotItem = Heatable.getItem(item);
+        ItemStack hotItem = Heatable.getItemStack(item);
 
         if (!hotItem.isEmpty()) {
             return hotItem;

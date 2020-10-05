@@ -2,6 +2,7 @@ package minefantasy.mfr.api.heating;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
@@ -140,7 +141,7 @@ public class Heatable {
      * @return what item is heated
      */
     public static ItemStack getQuenchedItem(ItemStack item, float hazard) {
-        ItemStack cold = Heatable.getItem(item);
+        ItemStack cold = Heatable.getItemStack(item);
 
         if (HCCquenchRuin && cold.isItemStackDamageable() && hazard > 0) {
             cold.setItemDamage((int) (cold.getMaxDamage() * hazard / 100F));
@@ -149,7 +150,7 @@ public class Heatable {
         return cold;
     }
 
-    public static ItemStack getItem(ItemStack item) {
+    public static ItemStack getItemStack(ItemStack item) {
         if (item.isEmpty() || !(item.getItem() instanceof IHotItem)) {
             return ItemStack.EMPTY;
         }
@@ -179,9 +180,8 @@ public class Heatable {
     }
 
     private static Heatable findRegister(ItemStack item) {
-        Heatable specific = registerList.get(item.getItem().getUnlocalizedName() + "_" + item.getItemDamage());// Try
-        // Specific
-        // first
+        Heatable specific = registerList.get(item.getItem().getUnlocalizedName() + "_" + item.getItemDamage());// Try specific first
+
         if (specific != null) {
             return specific;
         }

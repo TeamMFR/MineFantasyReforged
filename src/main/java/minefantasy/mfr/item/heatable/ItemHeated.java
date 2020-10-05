@@ -1,17 +1,26 @@
 package minefantasy.mfr.item.heatable;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.GuiHelper;
+import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.client.render.item.RenderHotItem;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.item.ItemBaseMFR;
+import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -19,15 +28,15 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
@@ -36,24 +45,46 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 
     public ItemHeated() {
         super("hot_item");
-        this.setHasSubtypes(true);
         this.setMaxStackSize(64);
+
+        this.addPropertyOverride(new ResourceLocation("type"), new IItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+                Item heldItem  = getStack(stack).getItem();
+                for (int i = 0; i < ComponentListMFR.INGOTS.length; i ++){
+                    ItemComponentMFR ingot = ComponentListMFR.INGOTS[i];
+                    if(heldItem == ingot){
+                        return i;
+                    }
+                }
+                if ( heldItem == Items.IRON_INGOT){
+                    return 17;
+                }
+                if ( heldItem == Items.GOLD_INGOT){
+                    return 18;
+                }
+                if ( heldItem == ComponentListMFR.BAR){
+                    return 19;
+                }
+                if ( heldItem == ComponentListMFR.RIVET){
+                    return 20;
+                }
+                if ( heldItem == ComponentListMFR.METAL_HUNK){
+                    return 21;
+                }
+                return 0;
+            }
+        });
     }
 
     public static int getTemp(ItemStack item) {
         return Heatable.getTemp(item);
     }
 
-    public static int getWorkTemp(ItemStack item) {
-        return Heatable.getWorkTemp(item);
-    }
-
-    public static int getUnstableTemp(ItemStack item) {
-        return Heatable.getWorkTemp(item);
-    }
-
-    public static ItemStack getItem(ItemStack item) {
-        return Heatable.getItem(item);
+    public static ItemStack getStack(ItemStack item) {
+        return Heatable.getItemStack(item);
     }
 
     public static void setTemp(ItemStack item, int heat) {
@@ -115,34 +146,6 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
         return item;
     }
 
-    private static void shareTraits(NBTTagCompound nbt, ItemStack item) {
-        NBTTagCompound itemtag = getNBT(item);
-        if (itemtag.hasKey("Unbreakable")) {
-            nbt.setBoolean("Unbreakable", itemtag.getBoolean("Unbreakable"));
-        }
-        if (itemtag.hasKey("MF_Inferior")) {
-            nbt.setBoolean("MF_Inferior", itemtag.getBoolean("MF_Inferior"));
-        }
-        if (itemtag.hasKey("MFCraftQuality")) {
-            nbt.setFloat("MFCraftQuality", itemtag.getFloat("MFCraftQuality"));
-        }
-    }
-
-    public static boolean showTemp(ItemStack stack) {
-        if (stack == null)
-            return false;
-
-        NBTTagCompound nbt = getNBT(stack);
-
-        if (nbt == null)
-            return false;
-
-        if (nbt.hasKey(Heatable.NBT_ShouldDisplay)) {
-            return nbt.getBoolean(Heatable.NBT_ShouldDisplay);
-        }
-        return false;
-    }
-
     private static NBTTagCompound getNBT(ItemStack item) {
         if (!item.hasTagCompound())
             item.setTagCompound(new NBTTagCompound());
@@ -153,7 +156,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
     public String getItemStackDisplayName(ItemStack stack) {
         String name = "";
 
-        ItemStack item = getItem(stack);
+        ItemStack item = getStack(stack);
         if (item != null)
             name = item.getItem().getItemStackDisplayName(item);
         return I18n.format("prefix.hotitem.name", name);
@@ -161,16 +164,16 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 
     @Override
     public EnumRarity getRarity(ItemStack stack) {
-        ItemStack item = getItem(stack);
-        if (item != null)
+        ItemStack item = getStack(stack);
+        if (!item.isEmpty())
             return item.getItem().getRarity(item);
 
         return EnumRarity.COMMON;
     }
 
     @Override
-    public void addInformation(ItemStack stack, World world, List list, ITooltipFlag b) {
-        ItemStack item = getItem(stack);
+    public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag b) {
+        ItemStack item = getStack(stack);
 
         if (item != null) {
             item.getItem().addInformation(item, world, list, b);
@@ -181,8 +184,8 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
         if (nbt.hasKey(Heatable.NBT_ShouldDisplay)) {
             if (nbt.getBoolean(Heatable.NBT_ShouldDisplay)) {
                 list.add(getHeatString(stack));
-                if (!getWorkString(item, stack).equals(""))
-                    list.add(getWorkString(item, stack));
+                if (!getWorkString(stack).equals(""))
+                    list.add(getWorkString(stack));
             }
         }
     }
@@ -193,7 +196,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
         return heat + unit;
     }
 
-    private String getWorkString(ItemStack heated, ItemStack item) {
+    private String getWorkString(ItemStack item) {
         byte stage = Heatable.getHeatableStage(item);
         switch (stage) {
             case 1:
@@ -230,10 +233,10 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
                         world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, rayTracePos.getX() + 0.5F, rayTracePos.getY() + 1, rayTracePos.getZ() + 0.5F, 0, 0.065F, 0);
                     }
 
-                    ItemStack drop = getItem(item).copy();
+                    ItemStack drop = getStack(item).copy();
 
                     if (Heatable.HCCquenchRuin) {
-                        float damageDone = 50F + (water > 0F ? water : 0F);
+                        float damageDone = 50F + (Math.max(water, 0F));
                         if (damageDone > 99F)
                             damageDone = 99F;
 
@@ -242,7 +245,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
                         }
                     }
                     drop.setCount(item.getCount());
-                    if (drop != null) {
+                    if (!drop.isEmpty()) {
                         item.setCount(0);
 
                         if (item.getCount() <= 0) {
@@ -256,47 +259,43 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
         }
     }
 
-    public int getColorFromItemStack(ItemStack item, int renderPass) {
-        if (renderPass > 1 || !renderDynamicHotIngotRendering) {
+    public int getColorFromItemStack(ItemStack stack) {
+        if (!renderDynamicHotIngotRendering) {
             return Color.WHITE.getRGB();
         }
-        NBTTagCompound nbt = getNBT(item);
-        int heat = getTemp(item);
+        int heat = getTemp(stack);
         int maxHeat = Heatable.forgeMaximumMetalHeat;
         double heatPer = (double) heat / (double) maxHeat * 100D;
 
-        int red = getRedOnHeat(heatPer);
+        int red = getRedOnHeat();
         int green = getGreenOnHeat(heatPer);
         int blue = getBlueOnHeat(heatPer);
 
-        float curr_red = 1.0F;
-        float curr_green = 1.0F;
-        float curr_blue = 1.0F;
+        float curr_red;
+        float curr_green;
+        float curr_blue;
 
-        ItemStack held = getItem(item);
-//        if (held != null) {
-//            int colour = item.getItem().getColorFromItemStack(held, 0);
-//
-//            curr_red = (colour >> 16 & 255) / 255.0F;
-//            curr_green = (colour >> 8 & 255) / 255.0F;
-//            curr_blue = (colour & 255) / 255.0F;
-//
-//            red = (int) (red * curr_red);
-//            green = (int) (green * curr_green);
-//            blue = (int) (blue * curr_blue);
-//        }
+        ItemStack held = getStack(stack);
+        if (!held.isEmpty()) {
+            int colour = -1;
+            CustomMaterial mat = CustomMaterial.getMaterialFor(held, CustomToolHelper.slot_main);
+            if (mat != null){
+                colour = mat.getColourInt();
+            }
+
+            curr_red = (colour >> 16 & 255) / 255.0F;
+            curr_green = (colour >> 8 & 255) / 255.0F;
+            curr_blue = (colour & 255) / 255.0F;
+
+            red = (int) (red * curr_red);
+            green = (int) (green * curr_green);
+            blue = (int) (blue * curr_blue);
+        }
 
         return GuiHelper.getColourForRGB(red, green, blue);
     }
 
-    @SideOnly(Side.CLIENT)
-    public boolean requiresMultipleRenderPasses() {
-        return true;
-    }
-
-    private int getRedOnHeat(double percent) {
-        if (percent <= 0)
-            return 255;
+    private int getRedOnHeat() {
         return 255;
     }
 
@@ -339,4 +338,12 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
     public boolean isCoolable(ItemStack item) {
         return true;
     }
+
+    //TODO: Make a more dynamic ItemHeated model coloration
+//
+//    @Override
+//    public void registerClient() {
+//        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+//        ModelLoaderHelper.registerWrappedItemModel(this, new RenderHotItem(() -> modelLocation), modelLocation);
+//    }
 }

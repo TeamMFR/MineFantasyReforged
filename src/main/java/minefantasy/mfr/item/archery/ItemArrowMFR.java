@@ -174,7 +174,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         if (isCustom) {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
-                if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
                     items.add(this.construct(customMat.name));
                 }
             }

@@ -89,9 +89,9 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
             return;
         }
         if (isCustom) {
-            items.add(this.construct("oak_wood"));
-            items.add(this.construct("ironbark_wood"));
-            items.add(this.construct("ebony_wood"));
+            items.add(this.construct("OakWood"));
+            items.add(this.construct("IronbarkWood"));
+            items.add(this.construct("EbonyWood"));
         } else {
             super.getSubItems(tab, items);
         }

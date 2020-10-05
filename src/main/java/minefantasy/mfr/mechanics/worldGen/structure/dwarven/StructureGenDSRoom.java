@@ -401,13 +401,13 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private void setupRack(TileEntityRack rack) {
-        rack.setMaterial(CustomMaterial.getMaterial("scrap_wood"));
+        rack.setMaterial(CustomMaterial.getMaterial("ScrapWood"));
         ItemWeaponMFR[] items = new ItemWeaponMFR[]{CustomToolListMFR.STANDARD_SWORD, CustomToolListMFR.STANDARD_WARAXE,
                 CustomToolListMFR.STANDARD_MACE, CustomToolListMFR.STANDARD_DAGGER};
         for (int i = 0; i < rack.getInventory().getSlots(); i++) {
             if (rand.nextInt(3) != 0) {
                 ItemWeaponMFR loot = items[rand.nextInt(items.length)];
-                rack.getInventory().setStackInSlot(i, loot.construct("iron", "scrap_wood"));
+                rack.getInventory().setStackInSlot(i, loot.construct("iron", "ScrapWood"));
             }
         }
     }

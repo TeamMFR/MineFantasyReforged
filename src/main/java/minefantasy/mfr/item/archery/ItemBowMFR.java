@@ -361,7 +361,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		if (isCustom) {
 			ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 			for (CustomMaterial customMat : wood) {
-				if (MineFantasyReborn.isDebug() || customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct("iron", customMat.name));
 				}
 			}

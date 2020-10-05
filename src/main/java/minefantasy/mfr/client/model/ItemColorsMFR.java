@@ -10,6 +10,7 @@ import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
+import minefantasy.mfr.item.heatable.ItemHeated;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
@@ -235,6 +236,8 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_PANE);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);
+
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemHeated) stack.getItem()).getColorFromItemStack(stack) : 0xFFFFFF), ComponentListMFR.HOT_ITEM);
 
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.COGWORK_ARMOUR);
 
