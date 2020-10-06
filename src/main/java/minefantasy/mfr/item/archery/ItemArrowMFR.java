@@ -1,33 +1,31 @@
 package minefantasy.mfr.item.archery;
 
-
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.material.BaseMaterialMFR;
-import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.util.ModelLoaderHelper;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.util.NonNullList;
-import net.minecraft.world.World;
-import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IAmmo;
+import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.entity.EntityArrowMFR;
+import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.mechanics.MFArrowDispenser;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.BlockDispenser;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.world.World;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -140,7 +138,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         return ammoType;
     }
 
-    public ItemArrowMFR setCustom(String designType) {
+    public ItemArrowMFR setCustom() {
         canRepair = false;
         isCustom = true;
         return this;
@@ -193,16 +191,10 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 
     @Override
     public String getItemStackDisplayName(ItemStack item) {
-        String name = ("" + I18n.format(this.getUnlocalizedNameInefficiently(item) + ".name"))
-                .trim();
+        String name = ("" + I18n.format(this.getUnlocalizedNameInefficiently(item) + ".name")).trim();
 
         if (isCustom)
             name = CustomToolHelper.getLocalisedName(item, name);
-
-        if (design != ArrowType.NORMAL && design != ArrowType.EXPLOSIVE && design != ArrowType.BOLT
-                && design != ArrowType.EXPLOSIVEBOLT) {
-            name += " (" + I18n.format("arrow.head." + design.name.toLowerCase() + ".name") + ")";
-        }
 
         return name;
     }

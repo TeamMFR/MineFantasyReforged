@@ -158,22 +158,22 @@ materialtype.maxtemp.name=%1$s*C Melting Point
 material.any.name=Any
 
 # WOOD
-material.scrap_wood.name=Scrap
-material.oak_wood.name=Oak
-material.birch_wood.name=Birch
-material.spruce_wood.name=Spruce
-material.acacia_wood.name=Acacia
-material.jungle_wood.name=Jungle
-material.refined_wood.name=Refined
-material.ironbark_wood.name=Ironbark
-material.ebony_wood.name=Ebony
-material.dark_oak_wood.name=Dark Oak
-material.pine_wood.name=Pine
-material.cherry_wood.name=Cherry
-material.poplar_wood.name=Poplar
-material.maple_wood.name=Maple
-material.mahoe_wood.name=Mahoe
-material.greenheart_wood.name=Green Heart
+material.scrapwood.name=Scrap
+material.oakwood.name=Oak
+material.birchwood.name=Birch
+material.sprucewood.name=Spruce
+material.acaciawood.name=Acacia
+material.junglewood.name=Jungle
+material.refinedwood.name=Refined
+material.ironbarkwood.name=Ironbark
+material.ebonywood.name=Ebony
+material.darkoakwood.name=Dark Oak
+material.pinewood.name=Pine
+material.cherrywood.name=Cherry
+material.poplarwood.name=Poplar
+material.maplewood.name=Maple
+material.mahoewood.name=Mahoe
+material.greenheartwood.name=Green Heart
 material.palmwood.name=Palm
 material.limewood.name=Lime
 material.balsawood.name=Balsa
@@ -190,7 +190,7 @@ material.firwood.name=Fir
 material.purpleheart_wood.name=Purple Heart
 material.silverwood_wood.name=Silverwood
 material.greatwood_wood.name=Greatwood
-material.yew_wood.name=Yew
+material.yewwood.name=Yew
 
 
 
@@ -206,14 +206,14 @@ material.tin.name=Tin
 
 material.bronze.name=Bronze
 material.iron.name=Iron
-material.pig_iron.name=Pig Iron
+material.pigiron.name=Pig Iron
 material.steel.name=Steel
 material.tungsten.name=Wolframite
 material.obsidian.name=Obsidian
 material.encrusted.name=Diamond
-material.black_steel.name=Black Steel
-material.red_steel.name=Red Steel
-material.blue_steel.name=Blue Steel
+material.blacksteel.name=Black Steel
+material.redsteel.name=Red Steel
+material.bluesteel.name=Blue Steel
 
 material.adamantium.name=Adamantium
 material.mithril.name=Mithril
@@ -233,7 +233,7 @@ material.titanium.name=Titanium
 material.stainless_steel.name=Stainless Steel
 
 # ALLOY
-material.composite_alloy.name=Composite Alloyed
+material.compositealloy.name=Composite Alloyed
 
 # MOD
 material.thaumium.name=Thaumium
@@ -345,11 +345,11 @@ item.pure_gold_ingot_ingot.name=Pure Gold Ingot
 item.composite_alloy_ingot.name=Composite Alloyed Ingot
 item.black_steel_weak_ingot.name=Unrefined Black Steel
 item.blue_steel_weak_ingot.name=Unrefined Blue Steel
-item.red_steel_weak_ingot.name=Unrefined Red Steelwith
+item.red_steel_weak_ingot.name=Unrefined Red Steel
 
-item.red_steel_ingot.name=Red Steel Ingot
-item.black_steel_ingot.name=Black Steel Ingot
-item.blue_steel_ingot.name=Blue Steel Ingot
+item.redsteel_ingot.name=Red Steel Ingot
+item.blacksteel_ingot.name=Black Steel Ingot
+item.bluesteel_ingot.name=Blue Steel Ingot
 
 item.adamantium_ingot.name=Adamantium Ingot
 item.mithril_ingot.name=Mithril Ingot
@@ -867,6 +867,8 @@ item.standard_plate_boots.name=%1$s Sabatons
 
 item.standard_bow.name=%1$s Bow
 item.standard_arrow.name=%1$s Arrow
+item.standard_arrow_bodkin.name=%1$s Bodkin Arrow
+item.standard_arrow_broad.name=%1$s Broadhead Arrow
 item.standard_bolt.name=%1$s Quarrel
 
 item.standard_mallet.name=%1$s Mallet

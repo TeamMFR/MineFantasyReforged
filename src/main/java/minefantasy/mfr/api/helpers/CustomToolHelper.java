@@ -296,8 +296,7 @@ public class CustomToolHelper {
         if (base != null) {
             name = base.getName();
         }
-        return I18n.format(unlocalName,
-                I18n.format("material." + name + ".name"));
+        return I18n.format(unlocalName, I18n.format("material." + name + ".name"));
     }
 
     public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) {

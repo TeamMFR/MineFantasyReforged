@@ -6,8 +6,6 @@ import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.item.armour.ItemApron;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
-import minefantasy.mfr.util.Utils;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,31 +25,6 @@ public class LeatherArmourListMFR {
     public static ItemArmourMFR[] LEATHER;
     public static ItemArmourMFR LEATHER_APRON;
 
-	public static Item HIDE_HELMET = Utils.nullValue();
-	public static Item HIDE_CHEST = Utils.nullValue();
-	public static Item HIDE_LEGS = Utils.nullValue();
-	public static Item HIDE_BOOTS = Utils.nullValue();
-
-	public static Item ROUGH_LEATHER_HELMET = Utils.nullValue();
-	public static Item ROUGH_LEATHER_CHEST = Utils.nullValue();
-	public static Item ROUGH_LEATHER_LEGS = Utils.nullValue();
-	public static Item ROUGH_LEATHER_BOOTS = Utils.nullValue();
-
-	public static Item STRONG_LEATHER_HELMET = Utils.nullValue();
-	public static Item STRONG_LEATHER_CHEST = Utils.nullValue();
-	public static Item STRONG_LEATHER_LEGS = Utils.nullValue();
-	public static Item STRONG_LEATHER_BOOTS = Utils.nullValue();
-
-	public static Item STUD_LEATHER_HELMET = Utils.nullValue();
-	public static Item STUD_LEATHER_CHEST = Utils.nullValue();
-	public static Item STUD_LEATHER_LEGS = Utils.nullValue();
-	public static Item STUD_LEATHER_BOOTS = Utils.nullValue();
-
-	public static Item PADDED_LEATHER_HELMET = Utils.nullValue();
-	public static Item PADDED_LEATHER_CHEST = Utils.nullValue();
-	public static Item PADDED_LEATHER_LEGS = Utils.nullValue();
-	public static Item PADDED_LEATHER_BOOTS = Utils.nullValue();
-
     public static void init(){
         LEATHER_MAT = new ArmourMaterialMFR("leather", 5, 0.30F, 18, 1.00F);
         APRON = new ArmourMaterialMFR("apron", 6, 0.30F, 0, 1.00F);
@@ -66,7 +39,7 @@ public class LeatherArmourListMFR {
             float bulk = baseMat.weight;
             ArmourDesign design = baseMat == BaseMaterialMFR.PADDING ? ArmourDesign.PADDING : ArmourDesign.LEATHER;
 
-            LEATHER[id + 0] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD, matName.toLowerCase() + "_layer_1", rarity, bulk);
+            LEATHER[id] = new ItemArmourMFR(matName.toLowerCase() + "_helmet", baseMat, design, EntityEquipmentSlot.HEAD, matName.toLowerCase() + "_layer_1", rarity, bulk);
             LEATHER[id + 1] = new ItemArmourMFR(matName.toLowerCase() + "_chest", baseMat, design, EntityEquipmentSlot.CHEST, matName.toLowerCase() + "_layer_1", rarity, bulk);
             LEATHER[id + 2] = new ItemArmourMFR(matName.toLowerCase() + "_legs", baseMat, design, EntityEquipmentSlot.LEGS, matName.toLowerCase() + "_layer_2", rarity, bulk);
             LEATHER[id + 3] = new ItemArmourMFR(matName.toLowerCase() + "_boots", baseMat, design, EntityEquipmentSlot.FEET, matName.toLowerCase() + "_layer_1", rarity, bulk);
@@ -97,11 +70,8 @@ public class LeatherArmourListMFR {
         return pool[slot];
     }
 
-    public static boolean isUnbreakable(BaseMaterialMFR material, EntityLivingBase user) {
-        if (material == BaseMaterialMFR.ENDERFORGE || material == BaseMaterialMFR.IGNOTUMITE
-                || material == BaseMaterialMFR.MITHIUM) {
-            return true;
-        }
-        return false;
-    }
+    public static boolean isUnbreakable(BaseMaterialMFR material) {
+		return material == BaseMaterialMFR.ENDERFORGE || material == BaseMaterialMFR.IGNOTUMITE
+				|| material == BaseMaterialMFR.MITHIUM;
+	}
 }

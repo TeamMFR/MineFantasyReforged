@@ -232,7 +232,8 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER_APRON);
 
-		///COMMODITIES
+
+		/// COMMODITIES
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_PANE);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);

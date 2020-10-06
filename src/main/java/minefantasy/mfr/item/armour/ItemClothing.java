@@ -25,7 +25,7 @@ public class ItemClothing extends ItemArmourMFR {
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        String tex = MineFantasyReborn.MOD_ID + "/models/armour/" + design.getName().toLowerCase() + "/" + texture;
+        String tex = MineFantasyReborn.MOD_ID + ":textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
         if (type == null && canColour())// bottom layer
         {
             return tex + "_cloth.png";

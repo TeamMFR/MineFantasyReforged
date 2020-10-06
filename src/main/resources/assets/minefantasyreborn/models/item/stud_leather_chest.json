@@ -1,7 +1,7 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/stud_leather_boots",
-        "layer1": "minefantasyreborn:items/stud_leather_boots_overlay"
+        "layer0": "minefantasyreborn:items/stud_leather_chest",
+        "layer1": "minefantasyreborn:items/stud_leather_chest_overlay"
     }
 }

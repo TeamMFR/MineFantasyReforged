@@ -62,7 +62,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
         if (source.isFireDamage() && this.getFireResistance(stack, source) > 100F) {
             return;
         }
-        if (LeatherArmourListMFR.isUnbreakable(baseMaterial, entity)) {
+        if (LeatherArmourListMFR.isUnbreakable(baseMaterial)) {
             return;
         }
         initArmourDamage(entity, stack, damage);
@@ -345,9 +345,12 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-        if (entity instanceof EntityPlayer && armorType != EntityEquipmentSlot.HEAD  && design == ArmourDesign.FIELDPLATE
+        if (entity instanceof EntityPlayer
+                && armorType != EntityEquipmentSlot.LEGS
+                && armorType != EntityEquipmentSlot.FEET
+                && design == ArmourDesign.FIELDPLATE
                 && ConfigClient.customModel) {
-            return getArmourTextureName(stack, entity, slot, type) + "_S.png";
+            return getArmourTextureName(stack, entity, slot, type) + "_s.png";
         }
         return getArmourTextureName(stack, entity, slot, type) + ".png";
     }
