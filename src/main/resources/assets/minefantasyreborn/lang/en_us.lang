@@ -678,7 +678,7 @@ tile.chimney.stone_extractor.wide.name=Stone Extractor Chimney
 tile.chimney.pipe.name=Smoke Pipe
 tile.bellows.name=Bellows
 tile.tanner.name=Shabby Tanning Rack
-tile.tanner_strong.name=Tanning Rack
+tile.tanner_refined.name=Tanning Rack
 tile.tanner_metal.name=Advanced Tanning Rack
 tile.bomb_bench.name=Bomb Crafting Table
 tile.crossbow_bench.name=Crossbow Assembly Table
@@ -699,8 +699,8 @@ tile.blastfurnchamber.name=Blast Furnace Chamber
 tile.blastfurnheater.name=Blast Furnace Heater
 
 tile.firepit.name=Firepit
-tile.food_roast_basic.name=Stove
-tile.food_oven_basic.name=Stone Oven
+tile.stove.name=Stove
+tile.oven.name=Stone Oven
 
 tile.rack_wood.name=%1$s Tool Rack
 tile.food_box_basic.name=%1$s Provisions Box
@@ -1183,16 +1183,16 @@ item.skillbook_engineering.desc=+%1$s Engineering
 item.skillbook_combat.name=Mixed Field Tactics
 item.skillbook_combat.desc=+%1$s Weaponry
 
-item.skillbook_artisanry2.name=Artisans through the ages
-item.skillbook_artisanry2.desc=Max Artisanry
-item.skillbook_construction2.name=Archive of Architecture
-item.skillbook_construction2.desc=Max Construction
-item.skillbook_provisioning2.name=History of Trade
-item.skillbook_provisioning2.desc=Max Provisioning
-item.skillbook_engineering2.name=Engineers' Lexicon
-item.skillbook_engineering2.desc=Max Engineering
-item.skillbook_combat2.name=Great War Journal
-item.skillbook_combat2.desc=Max Weaponry
+item.skillbook_artisanry_max.name=Artisans through the ages
+item.skillbook_artisanry_max.desc=Max Artisanry
+item.skillbook_construction_max.name=Archive of Architecture
+item.skillbook_construction_max.desc=Max Construction
+item.skillbook_provisioning_max.name=History of Trade
+item.skillbook_provisioning_max.desc=Max Provisioning
+item.skillbook_engineering_max.name=Engineers' Lexicon
+item.skillbook_engineering_max.desc=Max Engineering
+item.skillbook_combat_max.name=Great War Journal
+item.skillbook_combat_max.desc=Max Weaponry
 
 # KNOWLEDGE INFORMATION
 
