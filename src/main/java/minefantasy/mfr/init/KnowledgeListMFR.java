@@ -8,7 +8,9 @@ import minefantasy.mfr.api.knowledge.InformationPage;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.recipe.RecipeHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -16,7 +18,21 @@ import net.minecraft.item.crafting.IRecipe;
 import java.util.ArrayList;
 
 public class KnowledgeListMFR {
-    public static final ArrayList<IRecipe> plankRecipe = new ArrayList<IRecipe>();
+
+    // note: please follow the naming convention for static final vars, these should be all upper (https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
+    public static final IRecipe STICK_RECIPE = RecipeHelper.getMFRRecipe("sticks");
+    public static final IRecipe PLANK_RECIPE = RecipeHelper.getMFRRecipe("plank_cut");
+    public static final IRecipe FIREPIT_RECIPE = RecipeHelper.getMFRRecipe("firepit");
+    public static final IRecipe STOVE_RECIPE = RecipeHelper.getMFRRecipe("stove");
+    public static final IRecipe CARPENTER_RECIPE = RecipeHelper.getMFRRecipe("carpenter");
+    public static final IRecipe SUGAR_POT_RECIPE = RecipeHelper.getMFRRecipe("sugar_pot");
+    public static final IRecipe CHEESE_WHEEL_RECIPE = RecipeHelper.getMFRRecipe("cheese_wheel");
+    public static final IRecipe PIE_MEAT_RECIPE = RecipeHelper.getMFRRecipe("pie_meat");
+    public static final IRecipe PIE_SHEPARDS_RECIPE = RecipeHelper.getMFRRecipe("pie_shepards");
+    public static final IRecipe PIE_APPLE_RECIPE = RecipeHelper.getMFRRecipe("pie_apple");
+    public static final IRecipe PIE_BERRY_RECIPE = RecipeHelper.getMFRRecipe("pie_berry");
+    public static final IRecipe PIE_PUMPKIN_RECIPE = RecipeHelper.getMFRRecipe("pie_pumpkin");
+    public static final IRecipe DRYROCKS_RECIPE = ConfigHardcore.HCCallowRocks ? RecipeHelper.getMFRRecipe("dryrocks_hc") : RecipeHelper.getMFRRecipe("dryrocks");
     public static final ArrayList<IRecipe> stoneBricksR = new ArrayList<IRecipe>();
     public static final ArrayList<IAnvilRecipe> barR = new ArrayList<IAnvilRecipe>();
     public static final ArrayList<IAnvilRecipe> baringotR = new ArrayList<IAnvilRecipe>();
@@ -75,8 +91,7 @@ public class KnowledgeListMFR {
     public static InformationBase cookingutensil, firepit, generic_meat, stew, jerky, saussage, sandwitch, sandwitchBig,
             meatpie, shepardpie, bread, oats, salt, jug, berry, icing, sweetroll, eclair, cake, carrotcake, chococake,
             bfcake, applepie, berrypie, cheese, cheeseroll, bandage, bandageadv;
-    public static IRecipe firepitRecipe, cooktopRecipe, carpenterRecipe, waterJugR, milkJugR, plantOilR, sugarRecipe,
-            stickRecipe, dryrocksR, meatpieOut, shepardOut, cheeseOut, berryOut, appleOut, pumpPieOut;
+    public static IRecipe waterJugR, milkJugR, plantOilR;
     public static IAnvilRecipe hunkR, ingotR, bucketR, crestR;
     public static ICarpenterRecipe artBookR, conBookR, proBookR, engBookR, comBookR, artBook2R, conBook2R, proBook2R,
             engBook2R, comBook2R;

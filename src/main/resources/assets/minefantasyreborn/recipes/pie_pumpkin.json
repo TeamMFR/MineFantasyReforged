@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" P "
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreborn:pie_pumpkin_cooked"
+		}
+	},
+	"result": {
+		"item": "minecraft:pumpkin_pie"
+	}
+}

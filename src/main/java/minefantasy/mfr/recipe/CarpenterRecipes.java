@@ -1,9 +1,5 @@
 package minefantasy.mfr.recipe;
 
-
-import minefantasy.mfr.init.LeatherArmourListMFR;
-import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.crafting.refine.PaintOilRecipe;
@@ -13,11 +9,14 @@ import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.block.decor.BlockWoodDecor;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.init.KnowledgeListMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -237,9 +236,6 @@ public class CarpenterRecipes {
     }
 
     public static void assembleWoodBasic() {
-        //KnowledgeListMFR.carpenterRecipe = GameRegistry.addShapedRecipe(new ItemStack(BlockListMFR.CARPENTER), new Object[]{"PBP", "P P", 'B', Blocks.CRAFTING_TABLE, 'P', ComponentListMFR.plank});
-        //TODO: Replace with proper JSON recipe
-
         Salvage.addSalvage(BlockListMFR.CARPENTER, ComponentListMFR.PLANK.construct("ScrapWood", 4), Blocks.CRAFTING_TABLE);
 
         KnowledgeListMFR.nailPlanksR = MineFantasyRebornAPI.addCarpenterRecipe(construction,
