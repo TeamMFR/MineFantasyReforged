@@ -9,6 +9,7 @@
 		}
 	},
 	"result": {
-		"item": "minefantasyreborn:cheese_wheel"
+		"item": "minefantasyreborn:cheese_wheel",
+		"data": 0
 	}
 }

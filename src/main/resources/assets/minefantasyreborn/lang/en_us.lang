@@ -1042,6 +1042,7 @@ item.bowl_water_salt.name=Salt Water
 item.salt.name=Salt
 item.cake_tin.name=Cake Tin
 item.pie_tin.name=Pie Tray
+item.pie_tray.name=Pie Tray
 item.pie_tray_uncooked.name=Clay Pie Tray
 item.flour.name=Flour
 item.sugar_pot.name=Sugar Pot
