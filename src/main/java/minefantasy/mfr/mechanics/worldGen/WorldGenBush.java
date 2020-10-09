@@ -29,7 +29,7 @@ public class WorldGenBush extends WorldGenerator {
 
             if (world.isAirBlock(pos) && world.getBlockState(pos.add(0,-1,0)).getBlock() == Blocks.GRASS
                     && block.canPlaceBlockAt(world, pos)) {
-                world.setBlockState(pos, block.getDefaultState().withProperty(AGE, rand.nextBoolean() ? 4 : rand.nextInt(4)), meta);
+                world.setBlockState(pos, block.getDefaultState().withProperty(AGE, rand.nextInt(10) == 0 ? 3 : 4), meta);
             }
         }
 
