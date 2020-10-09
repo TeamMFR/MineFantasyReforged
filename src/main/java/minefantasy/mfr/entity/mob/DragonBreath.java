@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public abstract class DragonBreath {
-    public static ArrayList<DragonBreath> projectiles = new ArrayList<DragonBreath>();
+    public static ArrayList<DragonBreath> PROJECTILES = new ArrayList<DragonBreath>();
 
     public static int nextID = 0;
     public static DragonBreath fire, frost, poison, ash;
@@ -36,7 +36,7 @@ public abstract class DragonBreath {
 
     public void register() {
         this.id = nextID;
-        projectiles.add(this);
+        PROJECTILES.add(this);
         ++nextID;
     }
 

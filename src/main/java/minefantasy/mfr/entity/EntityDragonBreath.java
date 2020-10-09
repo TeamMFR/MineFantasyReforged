@@ -171,7 +171,7 @@ public class EntityDragonBreath extends EntityFireball {
 
     public DragonBreath getBreath() {
         if (breath == null) {
-            DragonBreath load = DragonBreath.projectiles.get(getType());
+            DragonBreath load = DragonBreath.PROJECTILES.get(getType());
             if (load != null) {
                 breath = load;
             } else {

@@ -7,6 +7,7 @@ import minefantasy.mfr.client.model.entity.ModelFrostDragon;
 import minefantasy.mfr.client.model.entity.ModelVenomDragon;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
@@ -36,13 +37,14 @@ public class RenderDragon extends RenderLiving<EntityDragon> {
 
     @Override
     protected void preRenderCallback(EntityDragon mob, float f) {
+        super.preRenderCallback(mob, f);
         float scale = mob.getScale();
-        GL11.glScalef(scale, scale, scale);
+        GlStateManager.scale(scale, scale, scale);
     }
 
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityDragon entity) {
-        return TextureHelperMFR.getResource("textures/models/monster/dragon/" + ((EntityDragon) entity).getTexture() + ".png");
+        return TextureHelperMFR.getResource("textures/models/monster/dragon/" + ((EntityDragon) entity).getType().tex    + ".png");
     }
 }

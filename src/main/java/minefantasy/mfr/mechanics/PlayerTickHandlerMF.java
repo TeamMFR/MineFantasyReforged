@@ -58,7 +58,6 @@ public class PlayerTickHandlerMF {
 			dragon.setDragon(tier);
 			dragon.disengage(100);
 			player.world.playSound(dragon.posX, dragon.posY - 16D, dragon.posZ, SoundEvents.ENTITY_ENDERDRAGON_GROWL, SoundCategory.AMBIENT, 3.0F, 1.5F, true);
-			dragon.fireBreathCooldown = 200;
 
 			if (ConfigMobs.dragonMSG && !player.world.isRemote) {
 				player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
