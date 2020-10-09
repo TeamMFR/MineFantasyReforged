@@ -9,6 +9,7 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -20,11 +21,13 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
@@ -36,6 +39,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
@@ -82,33 +86,30 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 
     private boolean cutGrass(World world, BlockPos pos, int r, EntityPlayer player, boolean leaf) {
         boolean flag = false;
-        ItemStack item = player.getHeldItemMainhand();
-        if (item.isEmpty())
+        ItemStack stack = player.getHeldItemMainhand();
+        if (stack.isEmpty())
             return false;
 
         for (int x2 = -r; x2 <= r; x2++) {
             for (int y2 = -r; y2 <= r; y2++) {
                 for (int z2 = -r; z2 <= r; z2++) {
-                    IBlockState state = world.getBlockState(pos.add(x2,y2,z2));
+                    BlockPos newPos = pos.add(x2, y2, z2);
+                    IBlockState state = world.getBlockState(newPos);
                     if (state != null) {
                         Material m = state.getMaterial();
-                        if (canCutMaterial(m, state.getBlockHardness(world, pos), leaf)) {
-                            if (pos.getDistance(x2, y2, z2) < r) {
+                        if (canCutMaterial(m, state.getBlockHardness(world, newPos), leaf)) {
+
+                            if (pos.getDistance(pos.getX() + x2, pos.getY() + y2, pos.getZ() + z2) < r) {
                                 flag = true;
 
-                                List<ItemStack> items = state.getBlock().getDrops(world, pos.add(x2, y2, z2), state, 1);
-                                world.setBlockToAir(pos.add(x2,y2,z2));
-                                world.playSound(player,pos.add(x2,y2,z2), SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
-                                tryBreakFarmland(world, pos.add(x2,y2,z2));
+                                world.setBlockToAir(newPos);
+                                world.playSound(player, newPos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
+                                tryBreakFarmland(world, newPos.add(0,-1,0));
                                 if (!player.capabilities.isCreativeMode) {
                                     ItemLumberAxe.tirePlayer(player, 1F);
-                                    for (ItemStack drop : items) {
-                                        if (world.rand.nextFloat() <= 1.0F) {
-                                            dropBlockAsItem_do(world, pos.add(x2, y2, z2), drop);
-                                        }
-                                    }
+                                    state.getBlock().dropBlockAsItemWithChance(world, newPos, state, ConfigTools.hvyDropChance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
                                 }
-                                item.damageItem(1, player);
+                                stack.damageItem(1, player);
                             }
                         }
                     }
@@ -116,6 +117,13 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
             }
         }
         return flag;
+    }
+
+    public double getDistance(double x, double y, double z, BlockPos pos) {
+        double var7 = pos.getX() - x;
+        double var9 = pos.getY() - y;
+        double var11 = pos.getZ() - z;
+        return MathHelper.sqrt(var7 * var7 + var9 * var9 + var11 * var11);
     }
 
     private void tryBreakFarmland(World world, BlockPos pos) {
@@ -138,20 +146,20 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         }
     }
 
-    private boolean canCutMaterial(Material m, float str, boolean leaf) {
+    private boolean canCutMaterial(Material material, float str, boolean leaf) {
         if (!leaf) {
             if (str <= 0.0F) {
-                return m == Material.VINE || m == Material.PLANTS || m == Material.GRASS;
+                return material == Material.VINE || material == Material.PLANTS || material == Material.GRASS;
             } else
                 return false;
         }
-        return m == Material.LEAVES || m == Material.VINE;
+        return material == Material.LEAVES || material == Material.VINE;
     }
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack hoe = player.getHeldItem(hand);
-        if (!player.canPlayerEdit(pos, facing, hoe) || !ItemLumberAxe.canAcceptCost(player)) {
+        ItemStack stack = player.getHeldItemMainhand();
+        if (!player.canPlayerEdit(pos, facing, stack) || !ItemLumberAxe.canAcceptCost(player)) {
             return EnumActionResult.FAIL;
         } else {
             IBlockState state = world.getBlockState(pos);
@@ -170,7 +178,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
                 }
             }
         }
-        return EnumActionResult.FAIL;
+        return EnumActionResult.SUCCESS;
     }
 
     @Override
@@ -222,12 +230,6 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
     protected float getWeightModifier(ItemStack stack) {
         return CustomToolHelper.getWeightModifier(stack, 1.0F);
     }
-
-//    @Override
-//    @SideOnly(Side.CLIENT)
-//    public int getColorFromItemStack(ItemStack item, int layer) {
-//        return CustomToolHelper.getColourFromItemStack(item, layer, super.getColorFromItemStack(item, layer));
-//    }
 
     @Override
     public int getMaxDamage(ItemStack stack) {

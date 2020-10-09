@@ -15,12 +15,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
@@ -69,7 +69,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
             for (int x1 = -1; x1 <= 1; x1++) {
                 for (int y1 = -1; y1 <= 1; y1++) {
                     for (int z1 = -1; z1 <= 1; z1++) {
-                        EnumFacing EF = getEFFor(user, pos);
+                        EnumFacing EF = EnumFacing.getDirectionFromEntityLiving(pos, user);
                         BlockPos blockPos = new BlockPos(pos.add( EF.getFrontOffsetX()+x1, EF.getFrontOffsetY()+y1, EF.getFrontOffsetZ()+z1 ));
 
                         if (!(x1 + EF.getFrontOffsetX() == 0 && y1 + EF.getFrontOffsetY() == 0 && z1 + EF.getFrontOffsetZ() == 0)) {
@@ -80,7 +80,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
                                     /*&& ForgeHooks.isToolEffective(item, newblock, m)*/) {
 
                                 if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
-                                    newblock.getBlock().dropBlockAsItem(world, pos, newblock, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item));
+                                    newblock.getBlock().dropBlockAsItem(world, pos, newblock, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
                                 }
                                 world.setBlockToAir(blockPos);
                                 item.damageItem(1, user);
@@ -92,10 +92,6 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
             }
         }
         return super.onBlockDestroyed(item, world, state, pos, user);
-    }
-
-    private EnumFacing getEFFor(EntityLivingBase user, BlockPos pos) {
-        return EnumFacing.getDirectionFromEntityLiving(pos, user);// TODO: FD
     }
 
     @Override

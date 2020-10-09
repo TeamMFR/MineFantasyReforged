@@ -21,6 +21,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemSpade;
@@ -64,32 +66,33 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
     }
 
     @Override
-    public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
-        if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)
-                && ItemLumberAxe.canAcceptCost(user)) {
+    public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
+        if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, stack) && ItemLumberAxe.canAcceptCost(user)) {
             int range = 2;
             for (int x1 = -range; x1 <= range; x1++) {
-                // for(int y1 = -1; y1 <= 1; y1 ++)
                 {
                     for (int z1 = -range; z1 <= range; z1++) {
-                        if (getDistance(pos.getX() + x1, pos.getY(), pos.getZ() + z1, pos.getX() ,pos.getY() ,pos.getZ() ) <= range * 1 + 0.5D) {
-                            EnumFacing facing = getFacingFor(user, pos);
-                            BlockPos blockPos = pos.add(x1 + facing.getFrontOffsetX(), facing.getFrontOffsetY(), z1 + facing.getFrontOffsetZ());
+                        if (getDistance(pos.getX() + x1, pos.getY(), pos.getZ() + z1, pos) <= range + 0.5D) {
+                            EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, user);
+                            int blockX = pos.getX() + x1 + facing.getFrontOffsetX();
+                            int blockY = pos.getY() + facing.getFrontOffsetY();
+                            int blockZ = pos.getZ() + z1 + facing.getFrontOffsetZ();
 
                             if (!(x1 + facing.getFrontOffsetX() == 0 && facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
-                                IBlockState newblock = world.getBlockState(pos);
-                                IBlockState above = world.getBlockState(pos.add(0,1,0));
+                                BlockPos newBlockPos = new BlockPos(blockX, blockY, blockZ);
+                                IBlockState newBlock = world.getBlockState(newBlockPos);
+                                IBlockState above = world.getBlockState(newBlockPos.add(0, 1,0));
 
-                                if ((above == null || !above.getMaterial().isSolid())
-                                        && newblock != null && user instanceof EntityPlayer
-                                        && ForgeHooks.canHarvestBlock(newblock.getBlock(), (EntityPlayer) user, world, pos)
-                                        && ForgeHooks.isToolEffective(world, pos, item)) {
+                                if ((above == Blocks.AIR || !above.getMaterial().isSolid()) && newBlock != null
+                                        && user instanceof EntityPlayer
+                                        && ForgeHooks.canHarvestBlock(newBlock.getBlock(), (EntityPlayer) user, world, newBlockPos)
+                                        && ForgeHooks.isToolEffective(world, newBlockPos, stack)) {
 
                                     if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
-                                        newblock.getBlock().dropBlockAsItem(world, blockPos, state, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item));
+                                        newBlock.getBlock().dropBlockAsItemWithChance(world, newBlockPos, newBlock, ConfigTools.hvyDropChance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
                                     }
-                                    world.setBlockToAir(pos);
-                                    item.damageItem(1, user);
+                                    world.setBlockToAir(newBlockPos);
+                                    stack.damageItem(1, user);
                                     ItemLumberAxe.tirePlayer(user, 1F);
                                 }
                             }
@@ -98,18 +101,14 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
                 }
             }
         }
-        return super.onBlockDestroyed(item, world,state, pos, user);
+        return super.onBlockDestroyed(stack, world,state, pos, user);
     }
 
-    public double getDistance(double x, double y, double z, int posX, int posY, int posZ) {
-        double var7 = posX - x;
-        double var9 = posY - y;
-        double var11 = posZ - z;
+    public double getDistance(double x, double y, double z, BlockPos pos) {
+        double var7 = pos.getX() - x;
+        double var9 = pos.getY() - y;
+        double var11 = pos.getZ() - z;
         return MathHelper.sqrt(var7 * var7 + var9 * var9 + var11 * var11);
-    }
-
-    private EnumFacing getFacingFor(EntityLivingBase user, BlockPos pos) {
-        return EnumFacing.getDirectionFromEntityLiving(pos, user);// TODO: FD
     }
 
     @Override
