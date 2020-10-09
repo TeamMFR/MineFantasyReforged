@@ -69,7 +69,6 @@ import minefantasy.mfr.itemblock.ItemBlockTrough;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import minefantasy.mfr.tile.TileEntityBellows;
-import minefantasy.mfr.tile.TileEntityBerryBush;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import minefantasy.mfr.tile.TileEntityBombBench;
@@ -651,7 +650,6 @@ public class BlockListMFR {
 
 
 		registry.register(BERRY_BUSH);
-		registerTile(TileEntityBerryBush.class, "berry_bush_tile");
 
 		registry.register(BLAST_CHAMBER);
 		registerTile(TileEntityBlastChamber.class, "blast_furnace_chamber_tile");

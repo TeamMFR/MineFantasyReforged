@@ -135,7 +135,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
     }
 
     public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
-        if (stack.isEmpty())
+        if (stack == null) // fixes GUI crash with missing or incorrect recipes
             return;
 
         boolean heatable = Heatable.canHeatItem(stack);

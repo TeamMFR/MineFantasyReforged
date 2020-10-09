@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PCP"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreborn:plank"
+		},
+		"C": {
+			"item": "minecraft:cobblestone"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:stove"
+	}
+}

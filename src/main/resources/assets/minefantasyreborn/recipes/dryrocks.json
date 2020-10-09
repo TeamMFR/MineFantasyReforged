@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"R  ",
+		" R "
+	],
+	"key": {
+		"R": {
+			"item": "minecraft:cobblestone"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:dryrocks"
+	},
+	"conditions" : [
+		{
+			"type": "forge:not",
+			"value": {
+				"type": "minefantasyreborn:hccallowrocks"
+			}
+		}
+	]
+}

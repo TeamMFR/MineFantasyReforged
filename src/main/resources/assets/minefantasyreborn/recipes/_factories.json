@@ -1,0 +1,5 @@
+{
+    "conditions": {
+        "hccallowrocks": "minefantasy.mfr.recipe.factories.HCCallowRocks"
+    }
+}

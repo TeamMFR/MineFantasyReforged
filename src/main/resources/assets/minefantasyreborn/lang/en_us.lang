@@ -552,6 +552,8 @@ item.crossbow_ammo.desc=6x shot capacity, increased spread.
 item.crossbow_scope.desc=Allows zoom function.
 item.crossbow_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
 
+tile.berry_bush.name=Berry Bush
+
 # ORES
 
 tile.copper_ore.name=Copper Ore
@@ -604,9 +606,9 @@ tile.cobble_pavement_stairs.name=Cobblestone Pavement Steps
 tile.cobble_brick.name=Cobblestone Bricks
 tile.cobble_brick_stairs.name=Cobblestone Brick Steps
 tile.clayWall.name=Clay Wall Panel
-tile.ironbark_log.name=Ironbark Log
-tile.ebony_log.name=Ebony Log
-tile.yew_log.name=Yew Log
+tile.log_ironbark.name=Ironbark Log
+tile.log_ebony.name=Ebony Log
+tile.log_yew.name=Yew Log
 tile.ironbark_leaves.name=Ironbark Leaves
 tile.ebony_leaves.name=Ebony Leaves
 tile.yew_leaves.name=Yew Leaves
@@ -678,7 +680,7 @@ tile.chimney.stone_extractor.wide.name=Stone Extractor Chimney
 tile.chimney.pipe.name=Smoke Pipe
 tile.bellows.name=Bellows
 tile.tanner.name=Shabby Tanning Rack
-tile.tanner_strong.name=Tanning Rack
+tile.tanner_refined.name=Tanning Rack
 tile.tanner_metal.name=Advanced Tanning Rack
 tile.bomb_bench.name=Bomb Crafting Table
 tile.crossbow_bench.name=Crossbow Assembly Table
@@ -699,8 +701,8 @@ tile.blastfurnchamber.name=Blast Furnace Chamber
 tile.blastfurnheater.name=Blast Furnace Heater
 
 tile.firepit.name=Firepit
-tile.food_roast_basic.name=Stove
-tile.food_oven_basic.name=Stone Oven
+tile.stove.name=Stove
+tile.oven.name=Stone Oven
 
 tile.rack_wood.name=%1$s Tool Rack
 tile.food_box_basic.name=%1$s Provisions Box
@@ -1042,6 +1044,7 @@ item.bowl_water_salt.name=Salt Water
 item.salt.name=Salt
 item.cake_tin.name=Cake Tin
 item.pie_tin.name=Pie Tray
+item.pie_tray.name=Pie Tray
 item.pie_tray_uncooked.name=Clay Pie Tray
 item.flour.name=Flour
 item.sugar_pot.name=Sugar Pot
@@ -1097,7 +1100,7 @@ item.eclair_uniced.name=Uniced Eclair
 item.eclair_empty.name=Empty Eclair
 item.saussage_cooked.name=Saussage
 item.saussage_raw.name=Raw Saussage
-tile.cheese.name=Cheese Wheel
+tile.cheese_wheel.name=Cheese Wheel
 item.cheese_slice.name=Cheese
 item.sushi.name=Sushi
 item.curry.name=Curry
@@ -1183,16 +1186,16 @@ item.skillbook_engineering.desc=+%1$s Engineering
 item.skillbook_combat.name=Mixed Field Tactics
 item.skillbook_combat.desc=+%1$s Weaponry
 
-item.skillbook_artisanry2.name=Artisans through the ages
-item.skillbook_artisanry2.desc=Max Artisanry
-item.skillbook_construction2.name=Archive of Architecture
-item.skillbook_construction2.desc=Max Construction
-item.skillbook_provisioning2.name=History of Trade
-item.skillbook_provisioning2.desc=Max Provisioning
-item.skillbook_engineering2.name=Engineers' Lexicon
-item.skillbook_engineering2.desc=Max Engineering
-item.skillbook_combat2.name=Great War Journal
-item.skillbook_combat2.desc=Max Weaponry
+item.skillbook_artisanry_max.name=Artisans through the ages
+item.skillbook_artisanry_max.desc=Max Artisanry
+item.skillbook_construction_max.name=Archive of Architecture
+item.skillbook_construction_max.desc=Max Construction
+item.skillbook_provisioning_max.name=History of Trade
+item.skillbook_provisioning_max.desc=Max Provisioning
+item.skillbook_engineering_max.name=Engineers' Lexicon
+item.skillbook_engineering_max.desc=Max Engineering
+item.skillbook_combat_max.name=Great War Journal
+item.skillbook_combat_max.desc=Max Weaponry
 
 # KNOWLEDGE INFORMATION
 

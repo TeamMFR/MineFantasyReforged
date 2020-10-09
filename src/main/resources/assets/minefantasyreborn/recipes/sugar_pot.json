@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" S ",
+		" S ",
+		" P "
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreborn:clay_pot"
+		},
+		"S": {
+			"item": "minecraft:sugar"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:sugar_pot"
+	}
+}

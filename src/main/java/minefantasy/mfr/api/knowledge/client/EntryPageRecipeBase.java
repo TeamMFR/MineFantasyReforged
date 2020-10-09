@@ -1,24 +1,20 @@
 package minefantasy.mfr.api.knowledge.client;
 
 import minefantasy.mfr.MineFantasyReborn;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.renderer.entity.RenderEntityItem;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -90,8 +86,10 @@ public class EntryPageRecipeBase extends EntryPage {
             for (int y = 0; y < shaped.recipeHeight; y++) {
                 for (int x = 0; x < shaped.recipeWidth; x++) {
                     ingredients = shaped.recipeItems.get(y * shaped.recipeWidth + x).getMatchingStacks();
-                    renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX, posY,
+                    if (ingredients.length != 0) { // fixes crash with mod operation with 0 divisior
+                        renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX, posY,
                             mx, my);
+                    }
                 }
             }
         } else if (recipe instanceof ShapedOreRecipe) {
@@ -120,8 +118,10 @@ public class EntryPageRecipeBase extends EntryPage {
                         if (index >= shapeless.recipeItems.size())
                             break drawGrid;
                         ingredients = shapeless.recipeItems.get(index).getMatchingStacks();
-                        renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX,
-                                posY, mx, my);
+                        if (ingredients.length != 0) {
+                            renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX,
+                                    posY, mx, my);
+                        }
                     }
                 }
             }

@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" P ",
+		"S S"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreborn:plank"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:firepit"
+	}
+}
