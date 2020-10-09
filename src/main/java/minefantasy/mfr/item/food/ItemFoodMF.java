@@ -272,23 +272,8 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
         world.playSound(consumer, consumer.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
         this.onMFFoodEaten(food, world, consumer);
 
-        if (this.isDamageable())// Multifood
-        {
-            if (food.attemptDamageItem(1, consumer.getRNG(), (EntityPlayerMP) consumer)) {
-                food.shrink(1);
-                if (food.getCount() < 0) {
-                    food.setCount(0);
-                }
-            }
-        } else// Food
-        {
-            ItemStack left = getLeftOver(food);
-            if (!left.isEmpty()) {
-                if (!consumer.inventory.addItemStackToInventory(left) && !consumer.world.isRemote) {
-                    consumer.entityDropItem(left, 1.0F);
-                }
-            }
-            food.shrink(1);
+        if (this.isDamageable()) {
+            food.attemptDamageItem(1, consumer.getRNG(), (EntityPlayerMP) consumer);
         }
     }
 

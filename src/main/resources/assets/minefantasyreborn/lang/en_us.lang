@@ -552,6 +552,8 @@ item.crossbow_ammo.desc=6x shot capacity, increased spread.
 item.crossbow_scope.desc=Allows zoom function.
 item.crossbow_bayonet.desc=Adds melee damage, reduces recoil, slow reload.
 
+tile.berry_bush.name=Berry Bush
+
 # ORES
 
 tile.copper_ore.name=Copper Ore
@@ -604,9 +606,9 @@ tile.cobble_pavement_stairs.name=Cobblestone Pavement Steps
 tile.cobble_brick.name=Cobblestone Bricks
 tile.cobble_brick_stairs.name=Cobblestone Brick Steps
 tile.clayWall.name=Clay Wall Panel
-tile.ironbark_log.name=Ironbark Log
-tile.ebony_log.name=Ebony Log
-tile.yew_log.name=Yew Log
+tile.log_ironbark.name=Ironbark Log
+tile.log_ebony.name=Ebony Log
+tile.log_yew.name=Yew Log
 tile.ironbark_leaves.name=Ironbark Leaves
 tile.ebony_leaves.name=Ebony Leaves
 tile.yew_leaves.name=Yew Leaves
@@ -1098,7 +1100,7 @@ item.eclair_uniced.name=Uniced Eclair
 item.eclair_empty.name=Empty Eclair
 item.saussage_cooked.name=Saussage
 item.saussage_raw.name=Raw Saussage
-tile.cheese.name=Cheese Wheel
+tile.cheese_wheel.name=Cheese Wheel
 item.cheese_slice.name=Cheese
 item.sushi.name=Sushi
 item.curry.name=Curry

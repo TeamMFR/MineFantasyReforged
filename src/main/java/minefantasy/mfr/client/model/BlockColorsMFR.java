@@ -20,6 +20,7 @@ public class BlockColorsMFR {
 		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.LEAVES_YEW);
 		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.LEAVES_IRONBARK);
 		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.LEAVES_EBONY);
+		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.BERRY_BUSH);
 	}
 }
 

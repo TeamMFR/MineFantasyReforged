@@ -46,6 +46,7 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_YEW);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_IRONBARK);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_EBONY);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.BERRY_BUSH);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1 ), ToolListMFR.SYRINGE);
 
 		// Standard Tools

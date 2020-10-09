@@ -8,6 +8,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
+import static minefantasy.mfr.block.food.BlockBerryBush.AGE;
+
 public class WorldGenBush extends WorldGenerator {
     private Block block;
     private int meta;
@@ -27,7 +29,7 @@ public class WorldGenBush extends WorldGenerator {
 
             if (world.isAirBlock(pos) && world.getBlockState(pos.add(0,-1,0)).getBlock() == Blocks.GRASS
                     && block.canPlaceBlockAt(world, pos)) {
-                world.setBlockState(pos, block.getDefaultState(), meta);
+                world.setBlockState(pos, block.getDefaultState().withProperty(AGE, rand.nextBoolean() ? 4 : rand.nextInt(4)), meta);
             }
         }
 
