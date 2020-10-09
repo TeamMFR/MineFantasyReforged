@@ -118,10 +118,10 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = "https://maven.pkg.github.com/TeamMFR/MineFantasy-reborn"
+            url = uri("https://maven.pkg.github.com/TeamMFR/MineFantasy-reborn")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getProperty("USERNAME")
-                password = project.findProperty("gpr.password") ?: System.getProperty("PASSWORD")
+                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
+                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
             }
         }
     }
