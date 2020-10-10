@@ -100,7 +100,7 @@ public class ClientProxy extends ClientProxyBase {
 
     @Override
     public void preInit(FMLPreInitializationEvent e) {
-        registerRenders();
+        registerEntityRenderer();
         registerTickHandlers();
     }
 
@@ -157,78 +157,4 @@ public class ClientProxy extends ClientProxyBase {
         return Minecraft.getMinecraft().player;
     }
 
-    private void registerRenders() {
-        registerEntityRenderer();
-
-//        MinecraftForgeClient.registerItemRenderer(ToolListMFR.swordStone, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(ToolListMFR.maceStone, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(ToolListMFR.waraxeStone, new RenderSword().setAxe());
-//        MinecraftForgeClient.registerItemRenderer(ToolListMFR.spearStone, new RenderSpear());
-//        MinecraftForgeClient.registerItemRenderer(ToolListMFR.swordTraining, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(ToolListMFR.crossbow_custom, new RenderCrossbow(2.0F));
-//
-//        // STANDARD
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_dagger, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_sword, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_waraxe, new RenderSword().setAxe());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_mace, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_scythe, new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_warhammer,
-//                new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_battleaxe,
-//                new RenderHeavyWeapon().setBlunt().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_greatsword,
-//                new RenderHeavyWeapon().setGreatsword().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_katana,
-//                new RenderHeavyWeapon().setKatana().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_spear, new RenderSpear());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_halbeard, new RenderSpear(true));
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_lance, new RenderLance());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_lumber, new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_saw, new RenderSaw());
-//        MinecraftForgeClient.registerItemRenderer(CustomToolListMFR.standard_bow, new RenderBow(false));
-//        // DRAGONFORGED
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_dagger, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_sword, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_waraxe, new RenderSword().setAxe());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_mace, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_warhammer,
-//                new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_battleaxe,
-//                new RenderHeavyWeapon().setBlunt().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_greatsword,
-//                new RenderHeavyWeapon().setGreatsword().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_katana,
-//                new RenderHeavyWeapon().setKatana().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_spear, new RenderSpear());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_halbeard, new RenderSpear(true));
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_lance, new RenderLance());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_scythe,
-//                new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_lumber,
-//                new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_saw, new RenderSaw());
-//        MinecraftForgeClient.registerItemRenderer(DragonforgedStyle.dragonforged_bow, new RenderBow(false));
-//
-//        // ORNATE
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_dagger, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_sword, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_waraxe, new RenderSword().setAxe());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_mace, new RenderSword());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_warhammer, new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_battleaxe,
-//                new RenderHeavyWeapon().setBlunt().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_greatsword,
-//                new RenderHeavyWeapon().setGreatsword().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_katana,
-//                new RenderHeavyWeapon().setKatana().setParryable());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_spear, new RenderSpear());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_halbeard, new RenderSpear(true));
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_lance, new RenderLance());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_scythe, new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_lumber, new RenderHeavyWeapon().setBlunt());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_saw, new RenderSaw());
-//        MinecraftForgeClient.registerItemRenderer(OrnateStyle.ornate_bow, new RenderBow(false));
-
-    }
 }

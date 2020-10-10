@@ -9,34 +9,25 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.client.render.item.RenderHotItem;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.item.ItemBaseMFR;
-import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.IItemPropertyGetter;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-import javax.annotation.Nullable;
 import java.awt.*;
 import java.util.List;
 
@@ -46,37 +37,6 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
     public ItemHeated() {
         super("hot_item");
         this.setMaxStackSize(64);
-
-        this.addPropertyOverride(new ResourceLocation("type"), new IItemPropertyGetter()
-        {
-            @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-            {
-                Item heldItem  = getStack(stack).getItem();
-                for (int i = 0; i < ComponentListMFR.INGOTS.length; i ++){
-                    ItemComponentMFR ingot = ComponentListMFR.INGOTS[i];
-                    if(heldItem == ingot){
-                        return i;
-                    }
-                }
-                if ( heldItem == Items.IRON_INGOT){
-                    return 17;
-                }
-                if ( heldItem == Items.GOLD_INGOT){
-                    return 18;
-                }
-                if ( heldItem == ComponentListMFR.BAR){
-                    return 19;
-                }
-                if ( heldItem == ComponentListMFR.RIVET){
-                    return 20;
-                }
-                if ( heldItem == ComponentListMFR.METAL_HUNK){
-                    return 21;
-                }
-                return 0;
-            }
-        });
     }
 
     public static int getTemp(ItemStack item) {
@@ -339,11 +299,9 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
         return true;
     }
 
-    //TODO: Make a more dynamic ItemHeated model coloration
-//
-//    @Override
-//    public void registerClient() {
-//        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-//        ModelLoaderHelper.registerWrappedItemModel(this, new RenderHotItem(() -> modelLocation), modelLocation);
-//    }
+    @Override
+    public void registerClient() {
+        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+        ModelLoaderHelper.registerWrappedItemModel(this, new RenderHotItem(() -> modelLocation), modelLocation);
+    }
 }

@@ -187,9 +187,9 @@ material.mahoganywood.name=Mahogany
 material.wengewood.name=Wenge
 material.redwoodwood.name=Redwood
 material.firwood.name=Fir
-material.purpleheart_wood.name=Purple Heart
-material.silverwood_wood.name=Silverwood
-material.greatwood_wood.name=Greatwood
+material.purpleheartwood.name=Purple Heart
+material.silverwoodwood.name=Silverwood
+material.greatwoodwood.name=Greatwood
 material.yewwood.name=Yew
 
 
@@ -347,9 +347,9 @@ item.black_steel_weak_ingot.name=Unrefined Black Steel
 item.blue_steel_weak_ingot.name=Unrefined Blue Steel
 item.red_steel_weak_ingot.name=Unrefined Red Steel
 
-item.redsteel_ingot.name=Red Steel Ingot
-item.blacksteel_ingot.name=Black Steel Ingot
-item.bluesteel_ingot.name=Blue Steel Ingot
+item.red_steel_ingot.name=Red Steel Ingot
+item.black_steel_ingot.name=Black Steel Ingot
+item.blue_steel_ingot.name=Blue Steel Ingot
 
 item.adamantium_ingot.name=Adamantium Ingot
 item.mithril_ingot.name=Mithril Ingot

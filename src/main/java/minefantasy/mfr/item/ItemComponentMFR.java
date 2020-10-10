@@ -80,7 +80,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
             if (ingot == ComponentListMFR.INGOTS[3]) {
                 add(items, Items.IRON_INGOT);
             }
-            if (ingot == ComponentListMFR.INGOTS[7]) {
+            if (ingot == ComponentListMFR.INGOTS[6]) {
                 add(items, Items.GOLD_INGOT);
             }
             add(items, ingot);
@@ -98,9 +98,6 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
             }
         }
 
-        add(items, ComponentListMFR.BLACK_STEEL_WEAK_INGOT);
-        add(items, ComponentListMFR.BLUE_STEEL_WEAK_INGOT);
-        add(items, ComponentListMFR.RED_STEEL_WEAK_INGOT);
 
         add(items, ComponentListMFR.NAIL);
         add(items, ComponentListMFR.RIVET);
