@@ -19,7 +19,6 @@ import java.util.Random;
 public class EntityDragonBreath extends EntityFireball {
     private static final float size = 0.75F;
     private static final DataParameter<Integer> TYPE_ID = EntityDataManager.<Integer>createKey(Entity.class, DataSerializers.VARINT);
-    private final int typeId = 2;
     public Random rand = new Random();
     private DragonBreath breath;
 
