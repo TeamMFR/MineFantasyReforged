@@ -3,20 +3,14 @@ package minefantasy.mfr.api.knowledge.client;
 import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +19,6 @@ public class EntryPageRecipeBase extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
     private IRecipe[] recipes;
     private int recipeID;
-    private ItemStack tooltipStack;
 
     public EntryPageRecipeBase(List<IRecipe> recipes) {
         IRecipe[] array = new IRecipe[recipes.size()];
@@ -45,7 +38,6 @@ public class EntryPageRecipeBase extends EntryPage {
         if (onTick) {
             tickRecipes();
         }
-        tooltipStack = ItemStack.EMPTY;
 
         this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/craft_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
@@ -55,22 +47,6 @@ public class EntryPageRecipeBase extends EntryPage {
         mc.fontRenderer.drawSplitString(cft,
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
         renderRecipe(parent, x, y, ticks, posX, posY, recipe);
-
-        if (!tooltipStack.isEmpty()) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList<>();
-            boolean first = true;
-
-            for (String s : tooltipData) {
-                String s_ = s;
-                if (!first)
-                    s_ = TextFormatting.GRAY + s;
-                parsedTooltip.add(s_);
-                first = false;
-            }
-
-            minefantasy.mfr.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-        }
     }
 
     private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, IRecipe recipe) {
@@ -198,26 +174,6 @@ public class EntryPageRecipeBase extends EntryPage {
 
     public int getGridY() {
         return 36;
-    }
-
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
-        RenderItem render = Minecraft.getMinecraft().getRenderItem();
-        if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
-            tooltipStack = stack;
-        }
-
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderHelper.enableGUIStandardItemLighting();
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-        RenderHelper.disableStandardItemLighting();
-        GL11.glPopMatrix();
-
-        GL11.glDisable(GL11.GL_LIGHTING);
     }
 
     @Override

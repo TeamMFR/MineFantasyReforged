@@ -1,27 +1,16 @@
 package minefantasy.mfr.api.knowledge.client;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
-import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EntryPageBlastFurnace extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
     private ItemStack input, output;
-    private ItemStack tooltipStack;
 
     public EntryPageBlastFurnace(ItemStack in, ItemStack out) {
         this.input = in;
@@ -38,7 +27,6 @@ public class EntryPageBlastFurnace extends EntryPage {
 
     @Override
     public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        tooltipStack = null;
 
         this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/blast_furnace_grid.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
@@ -48,22 +36,6 @@ public class EntryPageBlastFurnace extends EntryPage {
                 posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
 
         renderRecipe(parent, x, y, f, posX, posY);
-        if (!tooltipStack.isEmpty()) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList();
-            boolean first = true;
-
-            for (String s : tooltipData) {
-                String s_ = s;
-                if (!first)
-                    s_ = TextFormatting.GRAY + s;
-                parsedTooltip.add(s_);
-                first = false;
-            }
-
-            minefantasy.mfr.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-        }
-
     }
 
     private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY) {
@@ -88,24 +60,6 @@ public class EntryPageBlastFurnace extends EntryPage {
         renderItem(gui, xPos, yPos, stack1, accountForContainer, mx, my);
     }
 
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
-        RenderItem render = Minecraft.getMinecraft().getRenderItem();
-        if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
-            tooltipStack = stack;
-        }
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderHelper.enableGUIStandardItemLighting();
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
-        RenderHelper.disableStandardItemLighting();
-        GL11.glPopMatrix();
-
-        GL11.glDisable(GL11.GL_LIGHTING);
-    }
 
     @Override
     public void preRender(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {

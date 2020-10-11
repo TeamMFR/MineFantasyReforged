@@ -2,8 +2,8 @@ package minefantasy.mfr.api.knowledge.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.TextFormatting;
 
 public class EntryPageText extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
@@ -60,7 +60,7 @@ public class EntryPageText extends EntryPage {
                 temp = temp + c;
             }
         }
-        mc.fontRenderer.drawSplitString(text, posX + 14, posY + 15, 155, 0);
+        mc.fontRenderer.drawSplitString(text, posX + 14, posY + 12, 155, 0);
     }
 
     @Override

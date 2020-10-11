@@ -9,24 +9,17 @@ import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EntryPageRecipeAnvil extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
     private IAnvilRecipe[] recipes;
     private int recipeID;
-    private ItemStack tooltipStack;
 
     public EntryPageRecipeAnvil(List<IAnvilRecipe> recipes) {
         IAnvilRecipe[] array = new IAnvilRecipe[recipes.size()];
@@ -42,7 +35,6 @@ public class EntryPageRecipeAnvil extends EntryPage {
 
     @Override
     public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
-        tooltipStack = ItemStack.EMPTY;
         if (onTick) {
             tickRecipes();
         }
@@ -54,23 +46,6 @@ public class EntryPageRecipeAnvil extends EntryPage {
         String cft = "<" + I18n.format("method.anvil") + ">";
         mc.fontRenderer.drawSplitString(cft, posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
         renderRecipe(parent, x, y, f, posX, posY, recipe);
-
-        if (!tooltipStack.isEmpty()) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList<>();
-            boolean first = true;
-
-            for (String s : tooltipData) {
-                String s_ = s;
-                if (!first)
-                    s_ = TextFormatting.GRAY + s;
-                parsedTooltip.add(s_);
-                first = false;
-            }
-
-            minefantasy.mfr.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-        }
-
     }
 
     private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, IAnvilRecipe recipe) {
@@ -157,8 +132,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
         renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my, heatable);
     }
 
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx,
-                           int my, boolean heatable) {
+    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my, boolean heatable) {
         if (heatable) {
             GL11.glPushMatrix();
             GL11.glColor3f(255, 255, 255);
@@ -168,23 +142,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
             GL11.glPopMatrix();
         }
 
-        RenderItem render = Minecraft.getMinecraft().getRenderItem();
-        if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
-            tooltipStack = stack;
-        }
-
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderHelper.enableGUIStandardItemLighting();
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer, stack, xPos, yPos, null);
-        RenderHelper.disableStandardItemLighting();
-        GL11.glPopMatrix();
-
-        GL11.glDisable(GL11.GL_LIGHTING);
+        renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my);
     }
 
     @Override

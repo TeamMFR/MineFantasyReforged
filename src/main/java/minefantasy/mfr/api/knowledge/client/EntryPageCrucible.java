@@ -4,26 +4,15 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.refine.Alloy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class EntryPageCrucible extends EntryPage {
     private Minecraft mc = Minecraft.getMinecraft();
     private Alloy[] recipes;
     private int recipeID;
     private int currTier;
-    private ItemStack tooltipStack;
 
     public EntryPageCrucible(Alloy... recipes) {
         this.recipes = recipes;
@@ -34,7 +23,6 @@ public class EntryPageCrucible extends EntryPage {
         if (onTick) {
             tickRecipes();
         }
-        tooltipStack = ItemStack.EMPTY;
 
         this.mc.getTextureManager().bindTexture( new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/crucible.png"));
         parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
@@ -47,22 +35,6 @@ public class EntryPageCrucible extends EntryPage {
             currTier = recipe.getLevel();
         }
         renderRecipe(parent, x, y, f, posX, posY, recipe);
-
-        if (!tooltipStack.isEmpty()) {
-            List<String> tooltipData = tooltipStack.getTooltip(Minecraft.getMinecraft().player, ITooltipFlag.TooltipFlags.NORMAL);
-            List<String> parsedTooltip = new ArrayList<>();
-            boolean first = true;
-
-            for (String s : tooltipData) {
-                String s_ = s;
-                if (!first)
-                    s_ = TextFormatting.GRAY + s;
-                parsedTooltip.add(s_);
-                first = false;
-            }
-
-            minefantasy.mfr.api.helpers.RenderHelper.renderTooltip(x, y, parsedTooltip);
-        }
     }
 
     protected String getName() {
@@ -133,27 +105,6 @@ public class EntryPageCrucible extends EntryPage {
             stack1.setItemDamage(0);
 
         renderItem(gui, xPos + 15, yPos + 22, stack1, accountForContainer, mx, my);
-    }
-
-    public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my) {
-        RenderItem render = Minecraft.getMinecraft().getRenderItem();
-        if (mx > xPos && mx < (xPos + 16) && my > yPos && my < (yPos + 16)) {
-            tooltipStack = stack;
-        }
-        boolean mouseDown = Mouse.isButtonDown(0);
-
-        GL11.glPushMatrix();
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        RenderHelper.enableGUIStandardItemLighting();
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
-        render.renderItemAndEffectIntoGUI(stack, xPos, yPos);
-        render.renderItemOverlayIntoGUI(Minecraft.getMinecraft().fontRenderer,stack, xPos, yPos, null);
-        RenderHelper.disableStandardItemLighting();
-        GL11.glPopMatrix();
-
-        GL11.glDisable(GL11.GL_LIGHTING);
     }
 
     @Override
