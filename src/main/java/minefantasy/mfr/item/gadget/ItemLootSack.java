@@ -47,11 +47,10 @@ public class ItemLootSack extends ItemBaseMFR {
             Random rand = new Random();
             LootContext.Builder lootContextBuilder = new LootContext.Builder((WorldServer)world);
             List<ItemStack> result = world.getLootTableManager().getLootTableFromLocation(this.pool).generateLootForPools(rand, lootContextBuilder.build());
-            for (int a = 0; a < result.size(); a++) {
-                if (result.get(a) != null) {
-                    ItemStack drop = result.get(a);
-                    if (!user.inventory.addItemStackToInventory(drop)) {
-                        user.entityDropItem(drop, 0F);
+            for (ItemStack stack : result) {
+                if (!stack.isEmpty()) {
+                    if (!user.inventory.addItemStackToInventory(stack)) {
+                        user.entityDropItem(stack, 0F);
                     }
                 }
             }

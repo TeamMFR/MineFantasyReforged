@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.block.Block;
@@ -68,7 +69,7 @@ public class BlockOreMF extends Block {
      */
     @Override
     public int quantityDropped(Random rand) {
-        return rand.nextInt(dropMax);
+        return MathHelper.getInt(rand, dropMin, dropMax);
     }
 
     /**

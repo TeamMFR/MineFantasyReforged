@@ -3,9 +3,9 @@ package minefantasy.mfr.item.archery;
 import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.entity.EntityArrowMFR;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -44,16 +44,16 @@ public class ArrowFirerMF implements IArrowHandler {
 
         EntityArrowMFR entArrow = ammo.getFiredArrow(new EntityArrowMFR(world, user, spread, firepower * 2.0F), arrow);
 
-        int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(48), bow);
-        entArrow.setPower(1 + (0.25F * var9));
+        int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
+        entArrow.setPower(1 + (0.25F * power));
 
-        int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(49), bow);
+        int punch = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
 
-        if (var10 > 0) {
-            entArrow.setKnockbackStrength(var10);
+        if (punch > 0) {
+            entArrow.setKnockbackStrength(punch);
         }
 
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(50), bow) > 0) {
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bow) > 0) {
             entArrow.setFire(100);
         }
 

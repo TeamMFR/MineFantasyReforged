@@ -14,12 +14,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -66,7 +66,7 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
                 if (target.isShearable(itemstack, player.world, pos)) {
                     XSTRandom rand = new XSTRandom();
                     if(rand.nextInt(10) < 3) { //knife has reduced drop and can't be used to shear entity's
-                        List<ItemStack> drops = target.onSheared(itemstack, player.world, pos, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), itemstack));
+                        List<ItemStack> drops = target.onSheared(itemstack, player.world, pos, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, itemstack));
                         for (ItemStack stack : drops) {
                             float f = 0.7F;
                             double d = (double) (rand.nextFloat() * f) + (double) (1.0F - f) * 0.5D;

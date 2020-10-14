@@ -2,11 +2,11 @@ package minefantasy.mfr.item.archery;
 
 import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.api.archery.ISpecialBow;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityTippedArrow;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -17,13 +17,12 @@ import net.minecraft.world.World;
 public class ArrowFireFlint implements IArrowHandler {
 
     @Override
-    public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge,
-                               boolean infinite) {
+    public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge, boolean infinite) {
         if (infinite || arrow.getItem() != Items.ARROW) {
             return false;
         }
         float maxCharge = 20F;
-        if (bow != null && bow.getItem() instanceof ISpecialBow) {
+        if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
             maxCharge = ((ISpecialBow) bow.getItem()).getMaxCharge();
         }
         float firepower = charge / maxCharge;
@@ -37,19 +36,19 @@ public class ArrowFireFlint implements IArrowHandler {
 
         EntityArrow entArrow = new EntityTippedArrow(world, user);
 
-        int var9 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(48), bow);
+        int power = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
 
-        if (var9 > 0) {
-            entArrow.setDamage(entArrow.getDamage() + var9 * 0.5D + 0.5D);
+        if (power > 0) {
+            entArrow.setDamage(entArrow.getDamage() + power * 0.5D + 0.5D);
         }
 
-        int var10 = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(49), bow);
+        int punch = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
 
-        if (var10 > 0) {
-            entArrow.setKnockbackStrength(var10);
+        if (punch > 0) {
+            entArrow.setKnockbackStrength(punch);
         }
 
-        if (EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(50), bow) > 0) {
+        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bow) > 0) {
             entArrow.setFire(100);
         }
 
@@ -57,7 +56,7 @@ public class ArrowFireFlint implements IArrowHandler {
             entArrow.pickupStatus = EntityArrow.PickupStatus.DISALLOWED;
         }
 
-        if (bow != null && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
+        if (!bow.isEmpty() && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
             entArrow = (EntityArrow) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
         }
         if (!world.isRemote) {

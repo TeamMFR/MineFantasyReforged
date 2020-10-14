@@ -7,6 +7,7 @@ import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -120,7 +121,7 @@ public class ArrowHandlerMF {
     }
 
     private boolean getIsInfinite(EntityPlayer user, ItemStack bow) {
-        return user.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(51), bow) > 0;
+        return user.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, bow) > 0;
     }
 
     // Used to take an item/subId from the inventory

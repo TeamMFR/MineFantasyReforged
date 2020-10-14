@@ -11,10 +11,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -99,7 +99,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
             IBlockState newblock = world.getBlockState(pos);
             breakSurrounding(item, world, newblock, pos, user);
             if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
-                newblock.getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos), EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item));
+                newblock.getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos), EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
             }
             world.setBlockToAir(pos);
             item.damageItem(1, user);
@@ -139,7 +139,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
                             if (item.getItemDamage() < item.getMaxDamage() && newblock != null
                                     && user instanceof EntityPlayer && newblock.getMaterial(state) == Material.LEAVES) {
                                 if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
-                                    newblock.dropBlockAsItem(world, blockPos, state, EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item));
+                                    newblock.dropBlockAsItem(world, blockPos, state, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
                                 }
                                 world.setBlockToAir(blockPos);
                                 item.damageItem(1, user);

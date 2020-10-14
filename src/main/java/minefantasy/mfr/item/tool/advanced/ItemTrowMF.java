@@ -15,7 +15,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -23,6 +22,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
@@ -37,7 +37,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -70,15 +69,15 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial, IClientRegis
 
         if (!world.isRemote) {
             int harvestlvl = this.getMaterial().getHarvestLevel();
-            int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item);
-            boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(33), item) == 1;
+            int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item);
+            boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, item) == 1;
 
             ArrayList<ItemStack> specialdrops = RandomDigs.getDroppedItems(state.getBlock(), state.getBlock().getMetaFromState(state), harvestlvl, fortune, silk, pos.getY());
 
             if (specialdrops != null && !specialdrops.isEmpty()) {
 
                 for (ItemStack newdrop : specialdrops) {
-                    if (newdrop != null) {
+                    if (!newdrop.isEmpty()) {
                         if (newdrop.getCount() < 1)
                             newdrop.setCount(1);
 
@@ -94,7 +93,7 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial, IClientRegis
         if (block == Blocks.GRAVEL) {
             world.setBlockToAir(pos);
             int loot = 0;
-            int enc = EnchantmentHelper.getEnchantmentLevel(Enchantment.getEnchantmentByID(35), item);
+            int enc = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item);
             if (enc > 0) {
                 loot = rand.nextInt(enc);
             }

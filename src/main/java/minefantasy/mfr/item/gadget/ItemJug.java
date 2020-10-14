@@ -92,19 +92,19 @@ public class ItemJug extends ItemComponentMFR {
     }
 
     public ActionResult<ItemStack> rightClickEmpty(ItemStack item, World world, EntityPlayer player) {
-        RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+        RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-        if (movingobjectposition == null) {
+        if (rayTraceResult == null) {
             return super.onItemRightClick(world, player, player.getActiveHand());
         } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = movingobjectposition.getBlockPos();
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+                BlockPos pos = rayTraceResult.getBlockPos();
 
                 if (!world.canMineBlockBody(player, pos)) {
                     return super.onItemRightClick(world, player, player.getActiveHand());
                 }
 
-                if (!player.canPlayerEdit(pos, movingobjectposition.sideHit, item)) {
+                if (!player.canPlayerEdit(pos, rayTraceResult.sideHit, item)) {
                     return super.onItemRightClick(world, player, player.getActiveHand());
                 }
 
@@ -134,13 +134,13 @@ public class ItemJug extends ItemComponentMFR {
 
     public ActionResult<ItemStack> useFilled(ItemStack item, World world, EntityPlayer user) {
         if (!world.isRemote && storageType != null) {
-            RayTraceResult movingobjectposition = this.rayTrace(world, user, false);
+            RayTraceResult rayTraceResult = this.rayTrace(world, user, false);
 
-            if (movingobjectposition == null) {
+            if (rayTraceResult == null) {
                 return ActionResult.newResult(EnumActionResult.PASS, item);
             } else {
                 int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user,
-                        movingobjectposition);
+                        rayTraceResult);
                 if (placed > 0) {
                     item.shrink(placed);
                     return ActionResult.newResult(EnumActionResult.PASS, item);

@@ -1,9 +1,5 @@
 package minefantasy.mfr.item.armour;
 
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
@@ -17,16 +13,18 @@ import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ItemCustomArmour extends ItemArmourMFR {
-    private String specialDesign = "standard";
+    private String specialDesign;
     private float ratingModifier = 1.0F;
 
     public ItemCustomArmour(String craftDesign, String name, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
@@ -35,36 +33,26 @@ public class ItemCustomArmour extends ItemArmourMFR {
         canRepair = false;
     }
 
-    /**
-     * Adds a suit ONLY IF the material ingot exists
-     */
-    public static void tryAddSuits(List list, String plating) {
-        NonNullList<ItemStack> mats = OreDictionary.getOres("ingot" + plating);
-        if (MineFantasyReborn.isDebug() || (mats != null && !mats.isEmpty())) {
-            addSuits(list, plating);
-        }
-    }
-
     public static void addSuits(List<ItemStack> list, String material) {
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_HELMET).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_CHEST).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_LEGS).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_CHAIN_BOOTS).construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_HELMET.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_CHEST.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_LEGS.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_CHAIN_BOOTS.construct(material));
 
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_HELMET).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_CHEST).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_LEGS).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SCALE_BOOTS).construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_HELMET.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_CHEST.construct(material));
+        list.add(CustomArmourListMFR.STANDARD_SCALE_LEGS.construct(material));
+        list.add((CustomArmourListMFR.STANDARD_SCALE_BOOTS).construct(material));
 
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_HELMET).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_CHEST).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_LEGS).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_SPLINT_BOOTS).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_SPLINT_HELMET).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_SPLINT_CHEST).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_SPLINT_LEGS).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_SPLINT_BOOTS).construct(material));
 
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_HELMET).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_CHEST).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_LEGS).construct(material));
-        list.add(((ItemCustomArmour)CustomArmourListMFR.STANDARD_PLATE_BOOTS).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_PLATE_HELMET).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_PLATE_CHEST).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_PLATE_LEGS).construct(material));
+        list.add((CustomArmourListMFR.STANDARD_PLATE_BOOTS).construct(material));
     }
 
     public ItemCustomArmour modifyRating(float rating) {

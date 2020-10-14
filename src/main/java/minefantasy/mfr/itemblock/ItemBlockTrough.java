@@ -59,13 +59,9 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
         if (!isInCreativeTab(itemIn)) {
             return;
         }
-        if (MineFantasyReborn.isDebug()) {
-            ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-            for (CustomMaterial customMat : wood) {
-                items.add(this.construct(customMat.name));
-            }
-        } else {
-            items.add(this.construct("RefinedWood"));
+        ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
+        for (CustomMaterial customMat : wood) {
+            items.add(this.construct(customMat.name));
         }
     }
 

@@ -16,13 +16,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemBlock;
@@ -38,7 +38,6 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -70,7 +69,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
         if (!world.isRemote) {
             IBlockState state = world.getBlockState(pos);
             int harvestlvl = this.getMaterial().getHarvestLevel();
-            int fortune = EnchantmentHelper.getEnchantmentLevel( Enchantment.getEnchantmentByID(35), item);
+            int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item);
             boolean silk = user.getHeldItemMainhand().canHarvestBlock(blockState);
 
             //double drop logic

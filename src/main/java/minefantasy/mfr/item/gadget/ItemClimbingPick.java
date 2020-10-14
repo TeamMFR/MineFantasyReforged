@@ -91,13 +91,13 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
             return false;
 
         World world = player.world;
-        RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+        RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-        if (movingobjectposition == null) {
+        if (rayTraceResult == null) {
             return false;
         } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = movingobjectposition.getBlockPos();
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+                BlockPos pos = rayTraceResult.getBlockPos();
 
                 NBTTagCompound nbt = getOrCreateNBT(player.getHeldItemMainhand());
                 if (init) {
@@ -141,16 +141,16 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
             player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
         }
         World world = player.world;
-        RayTraceResult movingobjectposition = this.rayTrace(world, (EntityPlayer) player, true);
+        RayTraceResult rayTraceResult = this.rayTrace(world, (EntityPlayer) player, true);
 
-        if (movingobjectposition == null) {
+        if (rayTraceResult == null) {
             if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility(player, cost)) {
                 player.stopActiveHand();
             }
             return;
         } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = movingobjectposition.getBlockPos();
+            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+                BlockPos pos = rayTraceResult.getBlockPos();
                 IBlockState block = world.getBlockState(pos);
 
                 if (isInWall((EntityPlayer) player, false)) {

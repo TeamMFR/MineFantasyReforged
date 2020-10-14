@@ -568,11 +568,11 @@ public class EventManagerMFR {
 		IBlockState broken = event.getState();
 
 		if (broken != null && ConfigHardcore.HCCallowRocks) {
-			if (held.isEmpty()&& CustomStone.isStone(broken.getBlock())) {
+			if (held.isEmpty() && CustomStone.isStone(broken.getBlock())) {
 				entityDropItem(event.getWorld(), event.getPos(),
 						new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
 			}
-			if (!held.isEmpty() && held.getItem() == ComponentListMFR.SHARP_ROCK && broken instanceof BlockLeaves) {
+			if (!held.isEmpty() && held.getItem() == ComponentListMFR.SHARP_ROCK && broken.getBlock() instanceof BlockLeaves) {
 				if (random.nextInt(5) == 0) {
 					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
 				}
