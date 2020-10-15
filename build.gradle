@@ -21,8 +21,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'idea'
 
 repositories {
-    mavenCentral()
     maven {
+        mavenCentral()
         name "LatvianModder Ivy"
         url = "https://maven.latmod.com/"
     }
@@ -118,10 +118,10 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/TeamMFR/MineFantasy-reborn")
+            url = "https://maven.pkg.github.com/TeamMFR/MineFantasy-reborn"
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("USERNAME")
-                password = project.findProperty("gpr.key") ?: System.getenv("TOKEN")
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
             }
         }
     }
