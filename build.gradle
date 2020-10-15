@@ -127,6 +127,7 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
+            artifactId 'minefantasy-reborn'
             from(components.java)
         }
     }
