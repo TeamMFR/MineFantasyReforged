@@ -37,7 +37,7 @@ jobs:
     - name: Publish to GitHub Packages
       run: |
         chmod +x gradlew
-        ./gradlew build publish
+        ./gradlew build publish --debug
       env:
         USERNAME: ${{ github.actor }}
         PASSWORD: ${{ secrets.GITHUB_TOKEN }}
