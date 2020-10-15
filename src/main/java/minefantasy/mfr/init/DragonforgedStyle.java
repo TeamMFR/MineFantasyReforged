@@ -9,7 +9,7 @@ import minefantasy.mfr.item.armour.ItemCustomArmour;
 import minefantasy.mfr.item.tool.ItemAxeMFR;
 import minefantasy.mfr.item.tool.ItemHoeMF;
 import minefantasy.mfr.item.tool.ItemPickMF;
-import minefantasy.mfr.item.tool.ItemShears;
+import minefantasy.mfr.item.tool.ItemShearsMFR;
 import minefantasy.mfr.item.tool.ItemSpadeMF;
 import minefantasy.mfr.item.tool.advanced.ItemHandpick;
 import minefantasy.mfr.item.tool.advanced.ItemHeavyPick;
@@ -79,7 +79,7 @@ public class DragonforgedStyle {
     public static ItemHammer DRAGONFORGED_HAMMER = Utils.nullValue();
     public static ItemHammer DRAGONFORGED_HVYHAMMER = Utils.nullValue();
     public static ItemTongs DRAGONFORGED_TONGS = Utils.nullValue();
-    public static ItemShears DRAGONFORGED_SHEARS = Utils.nullValue();
+    public static ItemShearsMFR DRAGONFORGED_SHEARS = Utils.nullValue();
     public static ItemKnifeMFR DRAGONFORGED_KNIFE = Utils.nullValue();
     public static ItemNeedle DRAGONFORGED_NEEDLE = Utils.nullValue();
     public static ItemSaw DRAGONFORGED_SAW = Utils.nullValue();
@@ -143,7 +143,7 @@ public class DragonforgedStyle {
 
         // Crafters
         DRAGONFORGED_TONGS = (ItemTongs) new ItemTongs(design + "_tongs", mat, 0).setCustom(design).setCreativeTab(tab);
-        DRAGONFORGED_SHEARS = (ItemShears) new ItemShears(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+        DRAGONFORGED_SHEARS = (ItemShearsMFR) new ItemShearsMFR(design + "_shears", mat, 0, 0).setCustom().setCreativeTab(tab);
         DRAGONFORGED_KNIFE = (ItemKnifeMFR) new ItemKnifeMFR(design + "_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
         DRAGONFORGED_NEEDLE = (ItemNeedle) new ItemNeedle(design + "_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab);
         DRAGONFORGED_SAW = (ItemSaw) new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab);

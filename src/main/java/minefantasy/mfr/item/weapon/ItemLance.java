@@ -7,15 +7,9 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityList;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityEnderPearl;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemMonsterPlacer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -116,8 +110,8 @@ public class ItemLance extends ItemSpear {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModSpear * 2;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + -1.5F;
     }
 
     @Override

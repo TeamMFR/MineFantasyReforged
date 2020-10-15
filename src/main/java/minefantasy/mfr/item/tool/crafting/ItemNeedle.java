@@ -62,9 +62,8 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
         }
 
         Multimap<String, AttributeModifier> map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.5D, 0));
-
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0.5D, 0));
+        map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -1F, 0));
         return map;
     }
 

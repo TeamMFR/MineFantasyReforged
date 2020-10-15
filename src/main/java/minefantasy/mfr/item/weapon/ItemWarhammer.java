@@ -73,8 +73,8 @@ public class ItemWarhammer extends ItemHeavyWeapon {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModMace;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + speedMace;
     }
 
     @Override

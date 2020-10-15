@@ -19,6 +19,7 @@ import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +35,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemAxeMFR extends net.minecraft.item.ItemAxe implements IToolMaterial, IClientRegister {
+public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegister {
     protected int itemRarity;
     private float baseDamage = 3F;
     // ===================================================== CUSTOM START
@@ -43,7 +44,7 @@ public class ItemAxeMFR extends net.minecraft.item.ItemAxe implements IToolMater
     private float efficiencyMod = 1.0F;
 
     public ItemAxeMFR(String name, ToolMaterial material, int rarity) {
-        super(material, material.getAttackDamage(), 1.0F);
+        super(material, material.getAttackDamage(), -1.0F);
         itemRarity = rarity;
         setCreativeTab(CreativeTabMFR.tabOldTools);
         setRegistryName(name);
@@ -81,9 +82,8 @@ public class ItemAxeMFR extends net.minecraft.item.ItemAxe implements IToolMater
         }
 
         Multimap<String, AttributeModifier> map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
-
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
+        map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3F, 0));
         return map;
     }
 

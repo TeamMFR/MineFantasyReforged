@@ -17,7 +17,6 @@ import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.IPowerAttack;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
-import minefantasy.mfr.api.weapon.IWeaponSpeed;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigExperiment;
@@ -43,7 +42,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.item.EntityEnderPearl;
-import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -313,13 +311,6 @@ public class CombatMechanics {
     @SubscribeEvent
     public void initAttack(LivingAttackEvent event) {
         EntityLivingBase hitter = getHitter(event.getSource());
-        int spd = EventManagerMFR.getHitspeedTime(hitter);
-        if (hitter != null && !(hitter.world.isRemote)) {
-            if (spd < 0 && !(event.getEntityLiving() instanceof EntityPlayer || event.getEntityLiving() instanceof EntityEnderman)) {
-                event.setCanceled(true);
-                return;
-            }
-        }
         DamageSource src = event.getSource();
         EntityLivingBase hit = event.getEntityLiving();
         World world = hit.world;
@@ -349,17 +340,6 @@ public class CombatMechanics {
 
         if (damage <= 0) {
             event.setCanceled(true);
-        }
-        if (hitter instanceof EntityLivingBase) {
-            int hitTime = 5;
-            if (!hitter.getHeldItemMainhand().isEmpty()) {
-                ItemStack weapon = hitter.getHeldItemMainhand();
-                if (weapon.getItem() instanceof IWeaponSpeed) {
-                    hitTime += ((IWeaponSpeed) weapon.getItem()).modifyHitTime(hitter, weapon);
-                }
-            }
-            if (hitTime > 0)
-                EventManagerMFR.setHitTime(hitter, hitTime);
         }
     }
 
@@ -583,10 +563,6 @@ public class CombatMechanics {
         if (target instanceof EntityLivingBase && weapon.getItem() instanceof ISpecialEffect) {
             ((ISpecialEffect) weapon.getItem()).onProperHit(user, weapon, target, dam);
         }
-
-        if (weapon.getItem() instanceof IWeaponSpeed) {
-            target.hurtResistantTime += ((IWeaponSpeed) weapon.getItem()).modifyHitTime(user, weapon);
-        }
         if (weapon.getItem() instanceof IKnockbackWeapon) {
             float kb = ((IKnockbackWeapon) weapon.getItem()).getAddedKnockback(user, weapon);
 
@@ -667,21 +643,6 @@ public class CombatMechanics {
                     if (user instanceof EntityPlayer) {
                         user.stopActiveHand();
                         ItemWeaponMFR.setParry(weapon, 20);
-                    }
-
-                    if (entityHitting instanceof EntityLivingBase) {
-                        EntityLivingBase hitter = (EntityLivingBase) entityHitting;
-                        int hitTime = 5;
-                        if (!hitter.getHeldItemMainhand().isEmpty()) {
-                            ItemStack attackingWep = hitter.getHeldItemMainhand();
-                            if (attackingWep.getItem() instanceof IWeaponSpeed) {
-                                hitTime += ((IWeaponSpeed) attackingWep.getItem()).modifyHitTime(hitter, weapon);
-                            }
-                        }
-                        if (hitTime > 0) {
-                            MFRLogUtil.logDebug("Recoil hitter: " + hitter.getName() + " for " + hitTime * 3 + " ticks.");
-                            EventManagerMFR.setHitTime(hitter, hitTime * 3);
-                        }
                     }
                 }
             }

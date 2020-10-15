@@ -22,7 +22,6 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeaponClass;
-import minefantasy.mfr.api.weapon.IWeaponSpeed;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.CreativeTabMFR;
@@ -69,16 +68,16 @@ import java.util.Random;
 
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
-        IKnockbackWeapon, IWeaponSpeed, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
+        IKnockbackWeapon, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
         IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     public static float axeAPModifier = -0.1F;
-    protected static int speedModHeavy = 5;
-    protected static int speedModSword = 0;
-    protected static int speedModAxe = 1;
-    protected static int speedModMace = 2;
-    protected static int speedModKatana = -5;
-    protected static int speedModSpear = 2;
+    protected static float speedModHeavy = -1F;
+    protected static float speedSword = -1F;
+    protected static float speedAxe = -1.5F;
+    protected static float speedMace = -2F;
+    protected static float speedKatana = -0.5F;
+    protected static float speedSpear = -2F;
     protected static float damageModSword = 0.0F;
     protected static float damageModAxe = 0.5F;
     protected static float damageModMace = 1.0F;
@@ -131,11 +130,12 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
      * and weight Heavy weapons do more damage, exhaust more and have balance offset
      * (+50% dam)
      * <p>
-     * Weapon Types: Blade: Parry Defensive, average damage and speed Axe: Brutal
-     * Offensive, slower than sword, more damage, Good against Armour Blunt: Simple
-     * Offensive, slower than axe, more damage, Good against Medium Armour Polearm:
-     * Ranged Defensive, Good against Heavy Armour Lightblade: Fast Offensive,
-     * Better against Unarmoured
+     * Weapon Types:
+     * Blade: Parry Defensive, average damage and speed
+     * Axe: Brutal Offensive, slower than sword, more damage, Good against Armour
+     * Blunt: Simple Offensive, slower than axe, more damage, Good against Medium Armour
+     * Polearm: Ranged Defensive, Good against Heavy Armour
+     * Lightblade: Fast Offensive, Better against Unarmoured
      */
     public ItemWeaponMFR(ToolMaterial material, String named, int rarity, float weight) {
         super(material);
@@ -466,11 +466,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return 0;
-    }
-
-    @Override
     public float[] getDamageRatio(Object... implement) {
         if (implement.length > 1) {
             return getWeaponRatio((ItemStack) implement[0], (EntityLivingBase) implement[1]);
@@ -605,9 +600,8 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         }
 
         Multimap<String, AttributeModifier> map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-                new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
-
+        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
+        map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", getAttackSpeed(stack), 0));
         return map;
     }
 
@@ -626,6 +620,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
      */
     protected float getMeleeDamage(ItemStack item) {
         return baseDamage + CustomToolHelper.getMeleeDamage(item, material.getAttackDamage());
+    }
+
+    /**
+     * Gets a stack-sensitive value for the attack speed
+     */
+    public float getAttackSpeed(ItemStack item) {
+        return 0;
     }
 
     protected float getWeightModifier(ItemStack stack) {

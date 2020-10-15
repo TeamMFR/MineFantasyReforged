@@ -59,8 +59,8 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModHeavy;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + speedModHeavy;
     }
 
     @Override

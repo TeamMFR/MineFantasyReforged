@@ -13,6 +13,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemShears extends net.minecraft.item.ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
+public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
     protected int itemRarity;
     private ToolMaterial toolMaterial;
     private int tier;
@@ -35,7 +36,7 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
     private boolean isCustom = false;
     private float efficiencyMod = 1.0F;
 
-    public ItemShears(String name, ToolMaterial material, int rarity, int tier) {
+    public ItemShearsMFR(String name, ToolMaterial material, int rarity, int tier) {
         super();
         this.tier = tier;
         itemRarity = rarity;
@@ -48,13 +49,13 @@ public class ItemShears extends net.minecraft.item.ItemShears implements IToolMa
         MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
-    public ItemShears setCustom(String s) {
+    public ItemShearsMFR setCustom() {
         canRepair = false;
         isCustom = true;
         return this;
     }
 
-    public ItemShears setEfficiencyMod(float efficiencyMod) {
+    public ItemShearsMFR setEfficiencyMod(float efficiencyMod) {
         this.efficiencyMod = efficiencyMod;
         return this;
     }

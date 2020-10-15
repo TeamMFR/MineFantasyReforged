@@ -59,8 +59,8 @@ public class ItemHalbeard extends ItemSpear {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModSpear;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + -1F;
     }
 
     /**
@@ -97,5 +97,18 @@ public class ItemHalbeard extends ItemSpear {
     @Override
     public float getScale(ItemStack itemstack) {
         return 3.0F;
+    }
+
+    /**
+     * Can this Item disable a shield
+     * @param stack The ItemStack
+     * @param shield The shield in question
+     * @param entity The EntityLivingBase holding the shield
+     * @param attacker The EntityLivingBase holding the ItemStack
+     * @retrun True if this ItemStack can disable the shield in question.
+     */
+    public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker)
+    {
+        return true;
     }
 }

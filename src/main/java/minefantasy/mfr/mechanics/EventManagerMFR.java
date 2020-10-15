@@ -116,7 +116,6 @@ import java.util.List;
 
 public class EventManagerMFR {
 
-	public static final String hitspeedNBT = "MF_HitCooldown";
 	public static final String injuredNBT = "MF_Injured";
 	public static boolean displayOreDict;
 
@@ -177,25 +176,6 @@ public class EventManagerMFR {
 		}
 
 		return s;
-	}
-
-	public static void tickHitSpeeds(EntityLivingBase user) {
-		int time = getHitspeedTime(user);
-		if (time > 0) {
-			time--;
-			user.getEntityData().setInteger(hitspeedNBT, time);
-		}
-	}
-
-	public static void setHitTime(EntityLivingBase user, int time) {
-		user.getEntityData().setInteger(hitspeedNBT, time);
-	}
-
-	public static int getHitspeedTime(Entity entity) {
-		if (entity != null && entity.getEntityData().hasKey(hitspeedNBT)) {
-			return entity.getEntityData().getInteger(hitspeedNBT);
-		}
-		return 0;
 	}
 
 	public static int getInjuredTime(Entity entity) {
@@ -749,7 +729,6 @@ public class EventManagerMFR {
 		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity)) {
 			StaminaMechanics.tickEntity(event.getEntityLiving());
 		}
-		tickHitSpeeds(event.getEntityLiving());
 
 	}
 

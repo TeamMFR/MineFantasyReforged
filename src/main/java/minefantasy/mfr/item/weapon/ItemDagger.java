@@ -1,8 +1,6 @@
 package minefantasy.mfr.item.weapon;
 
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.WeaponClass;
-import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
@@ -81,11 +79,8 @@ public class ItemDagger extends ItemWeaponMFR {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        if (!StaminaBar.isSystemActive || StaminaBar.isAnyStamina(user, false)) {
-            return speedModKatana;
-        }
-        return 0;
+    public float getAttackSpeed(ItemStack item) {
+        return speedKatana;
     }
 
     /**

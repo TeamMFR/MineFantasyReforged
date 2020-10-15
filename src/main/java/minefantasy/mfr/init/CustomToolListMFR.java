@@ -8,7 +8,7 @@ import minefantasy.mfr.item.archery.ItemBowMFR;
 import minefantasy.mfr.item.tool.ItemAxeMFR;
 import minefantasy.mfr.item.tool.ItemHoeMF;
 import minefantasy.mfr.item.tool.ItemPickMF;
-import minefantasy.mfr.item.tool.ItemShears;
+import minefantasy.mfr.item.tool.ItemShearsMFR;
 import minefantasy.mfr.item.tool.ItemSpadeMF;
 import minefantasy.mfr.item.tool.advanced.ItemHandpick;
 import minefantasy.mfr.item.tool.advanced.ItemHeavyPick;
@@ -76,7 +76,7 @@ public class CustomToolListMFR {
     public static ItemHammer STANDARD_HAMMER = Utils.nullValue();
     public static ItemHammer STANDARD_HVYHAMMER = Utils.nullValue();
     public static ItemTongs STANDARD_TONGS = Utils.nullValue();
-    public static ItemShears STANDARD_SHEARS = Utils.nullValue();
+    public static ItemShearsMFR STANDARD_SHEARS = Utils.nullValue();
     public static ItemKnifeMFR STANDARD_KNIFE = Utils.nullValue();
     public static ItemNeedle STANDARD_NEEDLE = Utils.nullValue();
     public static ItemSaw STANDARD_SAW = Utils.nullValue();
@@ -128,7 +128,7 @@ public class CustomToolListMFR {
         STANDARD_HAMMER = (ItemHammer) new ItemHammer(design + "_hammer", ToolMaterial.IRON, false, 0, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_HVYHAMMER = (ItemHammer) new ItemHammer(design + "_hvyhammer", ToolMaterial.IRON, true, 0, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_TONGS = (ItemTongs) new ItemTongs(design + "_tongs", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
-        STANDARD_SHEARS = (ItemShears) new ItemShears(design + "_shears", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
+        STANDARD_SHEARS = (ItemShearsMFR) new ItemShearsMFR(design + "_shears", ToolMaterial.IRON, 0, 0).setCustom().setCreativeTab(tab);
         STANDARD_KNIFE = (ItemKnifeMFR) new ItemKnifeMFR(design + "_knife", ToolMaterial.IRON, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_NEEDLE = (ItemNeedle) new ItemNeedle(design + "_needle", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_SAW = (ItemSaw) new ItemSaw(design + "_saw", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);

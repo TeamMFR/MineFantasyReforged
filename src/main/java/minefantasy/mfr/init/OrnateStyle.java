@@ -9,7 +9,7 @@ import minefantasy.mfr.item.armour.ItemCustomArmour;
 import minefantasy.mfr.item.tool.ItemAxeMFR;
 import minefantasy.mfr.item.tool.ItemHoeMF;
 import minefantasy.mfr.item.tool.ItemPickMF;
-import minefantasy.mfr.item.tool.ItemShears;
+import minefantasy.mfr.item.tool.ItemShearsMFR;
 import minefantasy.mfr.item.tool.ItemSpadeMF;
 import minefantasy.mfr.item.tool.advanced.ItemHandpick;
 import minefantasy.mfr.item.tool.advanced.ItemHeavyPick;
@@ -80,7 +80,7 @@ public class OrnateStyle {
     public static ItemHammer ORNATE_HAMMER = Utils.nullValue();
     public static ItemHammer ORNATE_HVYHAMMER = Utils.nullValue();
     public static ItemTongs ORNATE_TONGS = Utils.nullValue();
-    public static ItemShears ORNATE_SHEARS = Utils.nullValue();
+    public static ItemShearsMFR ORNATE_SHEARS = Utils.nullValue();
     public static ItemKnifeMFR ORNATE_KNIFE = Utils.nullValue();
     public static ItemNeedle ORNATE_NEEDLE = Utils.nullValue();
     public static ItemSaw ORNATE_SAW = Utils.nullValue();
@@ -144,7 +144,7 @@ public class OrnateStyle {
 
         // Crafters
         ORNATE_TONGS = (ItemTongs) new ItemTongs(design + "_tongs", mat, 0).setCustom(design).setCreativeTab(tab);
-        ORNATE_SHEARS = (ItemShears) new ItemShears(design + "_shears", mat, 0, 0).setCustom(design).setCreativeTab(tab);
+        ORNATE_SHEARS = (ItemShearsMFR) new ItemShearsMFR(design + "_shears", mat, 0, 0).setCustom().setCreativeTab(tab);
         ORNATE_KNIFE = (ItemKnifeMFR) new ItemKnifeMFR(design + "_knife", mat, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
         ORNATE_NEEDLE = (ItemNeedle) new ItemNeedle(design + "_needle", mat, 0, 0).setCustom(design).setCreativeTab(tab);
         ORNATE_SAW = (ItemSaw) new ItemSaw(design + "_saw", mat, 0, 0).setCustom(design).setCreativeTab(tab);

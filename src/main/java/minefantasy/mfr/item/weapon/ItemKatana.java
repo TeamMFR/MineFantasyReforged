@@ -1,7 +1,6 @@
 package minefantasy.mfr.item.weapon;
 
 import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -15,13 +14,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 
-import java.util.Random;
-
 /**
  * @author Anonymous Productions
  */
 public class ItemKatana extends ItemHeavyWeapon {
-    private Random rand = new Random();
 
     /**
      * Katanas are heavy counterparts to Tantos, unlike most heavy weapons: these
@@ -68,7 +64,7 @@ public class ItemKatana extends ItemHeavyWeapon {
     /**
      * Gets the multiplier for the parry threshold
      *
-     * @return
+     * @return Parry Damage modifier
      */
     @Override
     public float getParryDamageModifier(EntityLivingBase user) {
@@ -110,11 +106,8 @@ public class ItemKatana extends ItemHeavyWeapon {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        if (!StaminaBar.isSystemActive || StaminaBar.isAnyStamina(user, false)) {
-            return speedModKatana;
-        }
-        return speedModHeavy / 2;
+    public float getAttackSpeed(ItemStack item) {
+        return speedKatana;
     }
 
     @Override

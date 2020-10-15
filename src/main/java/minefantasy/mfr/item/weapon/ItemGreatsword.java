@@ -13,13 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 
-import java.util.Random;
-
 /**
  * @author Anonymous Productions
  */
 public class ItemGreatsword extends ItemHeavyWeapon {
-    private Random rand = new Random();
 
     /**
      * Greatswords are heavy counterparts to swords, with added damage, knockback
@@ -95,8 +92,8 @@ public class ItemGreatsword extends ItemHeavyWeapon {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModSword;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + -2F;
     }
 
     /**

@@ -60,8 +60,8 @@ public class ItemMace extends ItemWeaponMFR {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModMace;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + speedMace;
     }
 
     @Override

@@ -135,8 +135,8 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModSpear;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + speedSpear;
     }
 
     /**

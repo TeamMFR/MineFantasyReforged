@@ -145,8 +145,8 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
     }
 
     @Override
-    public int modifyHitTime(EntityLivingBase user, ItemStack item) {
-        return super.modifyHitTime(user, item) + speedModAxe;
+    public float getAttackSpeed(ItemStack item) {
+        return super.getAttackSpeed(item) + speedAxe;
     }
 
     @Override
@@ -197,6 +197,18 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
         return 0.5F;
     }
 
+    /**
+     * Can this Item disable a shield
+     * @param stack The ItemStack
+     * @param shield The shield in question
+     * @param entity The EntityLivingBase holding the shield
+     * @param attacker The EntityLivingBase holding the ItemStack
+     * @retrun True if this ItemStack can disable the shield in question.
+     */
+    public boolean canDisableShield(ItemStack stack, ItemStack shield, EntityLivingBase entity, EntityLivingBase attacker)
+    {
+        return true;
+    }
 
     @Override
     public void registerClient() {
