@@ -58,7 +58,7 @@ minecraft {
 }
 version = minecraft.version + "-" + project.major +"."+ project.minor +"."+ project.patch +"."+ getBuildNumber() + getStable()
 group = "minefantasy.mfr.MineFantasyReborn" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "MineFantasyReborn"
+archivesBaseName = "minefantasyreborn"
 
 dependencies {
     //deobfCompile "mezz.jei:jei_${minecraft_version}:${jei_version}"
