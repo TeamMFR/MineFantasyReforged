@@ -37,6 +37,4 @@ jobs:
           GPR_API_KEY: ${{ secrets.GPR_TOKEN }}
         run: |
           chmod +x gradlew
-          ./gradlew clean
-          ./gradlew setupCIWorkspace
-          ./gradlew build publish
+          ./gradlew build publish --stacktrace --info
