@@ -39,6 +39,5 @@ jobs:
         chmod +x gradlew
         ./gradlew build publish --debug --stacktrace
       env:
-        USERNAME: ${{ github.actor }}
         PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
