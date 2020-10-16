@@ -77,9 +77,9 @@ public class StaminaMechanics {
         // out of stamina
         if (values[0] <= 0) {
             if (ConfigStamina.affectSpeed) {
-                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 2));
+                entity.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 40));
             }
-            entity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 2));
+            entity.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 40));
             // Drain air when exhausted, you will drown faster
             if (isInWater(entity) && entity.getAir() > -20 && entity.ticksExisted % 20 == 0) {
                 entity.setAir(entity.getAir() - 1);

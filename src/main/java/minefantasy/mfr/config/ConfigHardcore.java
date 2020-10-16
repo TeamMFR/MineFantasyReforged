@@ -3,16 +3,14 @@ package minefantasy.mfr.config;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.knowledge.InformationBase;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.tile.TileEntityRoast;
-import minefantasy.mfr.hunger.HungerSystemMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
+import minefantasy.mfr.tile.TileEntityRoast;
 
 public class ConfigHardcore extends ConfigurationBaseMF {
     public static final String CATEGORY_CRAFTING = "1: HARDCORE CRAFTING";
     public static final String CATEGORY_RESEARCH = "2: Research";
     public static final String CATEGORY_FOOD = "3: Food and Hunting";
     public static final String CATEGORY_MOB = "4: Monster Upgrades";
-    public static final String CATEGORY_USER = "5: Player Debuffs";
     public static boolean HCCreduceIngots = true;
     public static boolean HCChotBurn = true;
     public static boolean HCCWeakItems = true;
@@ -75,9 +73,6 @@ public class ConfigHardcore extends ConfigurationBaseMF {
         preventCook = Boolean.parseBoolean(
                 config.get(CATEGORY_FOOD, "Prevent furnace food", false, "Stop food and ceramic from being cooked in a furnace")
                         .getString());
-        HungerSystemMFR.slowdownRate = Integer.parseInt(config.get(CATEGORY_FOOD, "Hunger slow rate", 3,
-                "how many added points per haunch is slows by. Default is 3: meaning it's takes 3 additional haunches to remove 1, meaning each haunch takes 4 times to be removed")
-                .getString());
         TileEntityRoast.enableOverheat = Boolean
                 .parseBoolean(config
                         .get(CATEGORY_FOOD, "Burn at high temperature", true,

@@ -93,7 +93,7 @@ public class ItemGreatsword extends ItemHeavyWeapon {
 
     @Override
     public float getAttackSpeed(ItemStack item) {
-        return super.getAttackSpeed(item) + -2F;
+        return super.getAttackSpeed(item) + -1.5F;
     }
 
     /**
