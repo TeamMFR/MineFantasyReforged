@@ -805,7 +805,7 @@ public class EventManagerMFR {
 	}
 
 	private boolean isHotItem(ItemStack item) {
-		return item != null && (item.getItem() instanceof IHotItem);
+		return !item.isEmpty() && (item.getItem() instanceof IHotItem);
 	}
 
 	@SideOnly(Side.CLIENT)

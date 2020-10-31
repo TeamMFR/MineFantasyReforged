@@ -41,6 +41,4 @@ public class ItemUnfinishedFood extends ItemBaseMFR {
         return ToolListMFR.RARITY[lvl];
     }
 
-    public void onCrafted(EntityPlayer user, ItemStack item) {
-    }
 }

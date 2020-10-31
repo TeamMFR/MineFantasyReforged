@@ -2,15 +2,16 @@ package minefantasy.mfr.item.food;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.stamina.StaminaBar;
-import minefantasy.mfr.hunger.HungerSystemMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.MobEffects;
@@ -21,6 +22,7 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
@@ -39,8 +41,6 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
     protected int hungerLevel;
     protected float saturationLevel;
     private float staminaRestore = 0F;
-    private Item leftOver;
-    private float mfSaturation = 0F;
     private boolean hasEffect = false;
     private float staminaBuff = 0F;
     private int staminaSeconds = 0;
@@ -52,7 +52,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
     private int useTime = 32;
 
     public ItemFoodMF(String name, int hunger, float saturation, boolean isMeat) {
-        super(hunger, 0F, isMeat);
+        super(hunger, saturation, isMeat);
 
         hungerLevel = hunger;
         saturationLevel = saturation;
@@ -109,16 +109,6 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
             }
             if (staminaRegenSeconds > 0) {
                 StaminaBar.buffStaminaRegen(consumer, staminaRegenBuff, staminaRegenSeconds);
-            }
-        }
-        if (mfSaturation > 0) {
-            int foodLeftOver = consumer.getFoodStats().getFoodLevel();
-
-            float saturation = mfSaturation - (20 - foodLeftOver);
-
-            if (saturation > 0) {
-                HungerSystemMFR.applySaturation(consumer, saturation);
-
             }
         }
 
@@ -178,7 +168,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
 
     public ItemFoodMF setSaturation(float amount) {
         hasEffect = true;
-        this.mfSaturation = amount * FoodListMFR.SAT_MODIFIER;
+        this.saturationLevel = amount * FoodListMFR.SAT_MODIFIER;
         return this;
     }
 
@@ -203,16 +193,16 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack food, World world, List list, ITooltipFlag flag) {
+    public void addInformation(ItemStack food, World world, List<String> list, ITooltipFlag flag) {
         super.addInformation(food, world, list, flag);
         list.add(I18n.format("food.stat.hunger.name", hungerLevel));
 
         if (hasEffect && ClientItemsMFR.showSpecials(food, world, list, flag)) {
             list.add("");
             list.add(TextFormatting.WHITE + I18n.format("food.stat.list.name"));
-            if (mfSaturation > 0) {
+            if (saturationLevel > 0) {
                 list.add(I18n.format("food.stat.saturation.name",
-                        decimal_format.format(mfSaturation)));
+                        decimal_format.format(saturationLevel)));
             }
             if (staminaRestore > 0) {
                 list.add(I18n.format("food.stat.staminaPlus.name", (int) staminaRestore));
@@ -261,32 +251,36 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
     }
 
     public ItemFoodMF setReturnItem(Item item) {
-        leftOver = item;
         return this;
     }
 
     @Override
-    public void onFoodEaten(ItemStack food, World world, EntityPlayer consumer) {
-        setEatDelay(consumer, 10);
-        consumer.getFoodStats().addStats(this, food);
-        world.playSound(consumer, consumer.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
-        this.onMFFoodEaten(food, world, consumer);
+    public ItemStack onItemUseFinish(ItemStack food, World world, EntityLivingBase consumer)
+    {
+        if (consumer instanceof EntityPlayer)
+        {
+            setEatDelay((EntityPlayer) consumer, 10);
+            ((EntityPlayer) consumer).getFoodStats().addStats(this, food);
+            world.playSound((EntityPlayer) consumer, consumer.getPosition(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.AMBIENT, 1.0F, 1.0F);
+            this.onMFFoodEaten(food, world, (EntityPlayer) consumer);
 
-        if (this.isDamageable()) {
-            food.attemptDamageItem(1, consumer.getRNG(), (EntityPlayerMP) consumer);
+            if (this.isDamageable() && consumer instanceof EntityPlayerMP) {
+                if (food.attemptDamageItem(1, consumer.getRNG(), (EntityPlayerMP) consumer)){
+                    food.shrink(1);
+                    if (food.getCount() < 0) {
+                        food.setCount(0);
+                    }
+                }
+            }
+            else{
+                food.shrink(1);
+            }
         }
+
+        return food;
     }
 
-    protected ItemStack getLeftOver(ItemStack food) {
-        if (food.hasTagCompound() && food.getTagCompound().hasKey(leftOverNbt)) {
-            return new ItemStack(food.getTagCompound().getCompoundTag(leftOverNbt));
-        }
-        if (leftOver != null) {
-            return new ItemStack(leftOver);
-        }
-        return getContainerItem(food);
-    }
-//
+    //
 //    @Override
 //    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 //        if (!isInCreativeTab(tab)) {

@@ -566,7 +566,7 @@ public class CombatMechanics {
         if (weapon.getItem() instanceof IKnockbackWeapon) {
             float kb = ((IKnockbackWeapon) weapon.getItem()).getAddedKnockback(user, weapon);
 
-            if (kb > 0) {
+            if (kb != 0) {
                 TacticalManager.knockbackEntity(target, user, kb, 0F);
             }
         }

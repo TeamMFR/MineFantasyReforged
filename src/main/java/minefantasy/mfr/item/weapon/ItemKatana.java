@@ -111,6 +111,11 @@ public class ItemKatana extends ItemHeavyWeapon {
     }
 
     @Override
+    protected float getKnockbackStrength() {
+        return -0.5F;
+    }
+
+    @Override
     public float getParryStaminaDecay(DamageSource source, ItemStack weapon) {
         return 1.0F;
     }

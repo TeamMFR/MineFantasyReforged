@@ -4,8 +4,6 @@ import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.refine.ISmokeHandler;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.entity.EntitySmoke;
-import minefantasy.mfr.hunger.HungerSystemMFR;
-import minefantasy.mfr.init.EntityListMF;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.archery.ArrowFireFlint;
 import minefantasy.mfr.item.archery.ArrowFirerMF;
@@ -44,7 +42,6 @@ public class CommonProxy implements ISmokeHandler{
 
     public void registerTickHandlers() {
         FMLCommonHandler.instance().bus().register(new PlayerTickHandlerMF());
-        FMLCommonHandler.instance().bus().register(new HungerSystemMFR());
         MinecraftForge.EVENT_BUS.register(new EventManagerMFR());
         MinecraftForge.EVENT_BUS.register(new CombatMechanics());
         MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
