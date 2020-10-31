@@ -113,9 +113,9 @@ public class GuiKnowledge extends GuiScreen {
 		int purchasey = j1 + (informationHeight - buyHeight) / 2;
 		// PURCHASE SCREEN
 		this.buttonList.add(
-				new GuiOptionButton(3, purchasex + 19, purchasey + 47, I18n.format("gui.purchase")));
-		this.buttonList
-				.add(new GuiOptionButton(4, purchasex + 125, purchasey + 47, I18n.format("gui.cancel")));
+				new GuiButton(3, purchasex + 19, purchasey + 47, 81, 20, I18n.format("gui.purchase")));
+		this.buttonList.add(
+				new GuiButton(4, purchasex + 125, purchasey + 47, 81, 20, I18n.format("gui.cancel")));
 	}
 
 	@Override
@@ -132,12 +132,12 @@ public class GuiKnowledge extends GuiScreen {
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton p_146284_1_) {
-		if (p_146284_1_.id == 1) {
+	protected void actionPerformed(GuiButton GuiButton) {
+		if (GuiButton.id == 1) {
 			this.mc.displayGuiScreen((GuiScreen) null);
 		}
 
-		if (selected == null && p_146284_1_.id == 2) {
+		if (selected == null && GuiButton.id == 2) {
 			currentPage++;
 
 			if (currentPage >= InformationPage.getInfoPages().size()) {
@@ -146,11 +146,11 @@ public class GuiKnowledge extends GuiScreen {
 			button.displayString = InformationPage.getTitle(currentPage);
 		}
 
-		if (p_146284_1_.id == 3 && selected != null) {
+		if (GuiButton.id == 3 && selected != null) {
 			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new ResearchRequestPacket(player, selected.ID));
 			selected = null;
 		}
-		if (p_146284_1_.id == 4 && selected != null) {
+		if (GuiButton.id == 4 && selected != null) {
 			selected = null;
 		}
 	}
@@ -496,16 +496,16 @@ public class GuiKnowledge extends GuiScreen {
 					s1 = I18n.format("achievement.unknown");
 					j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
 					s = (new TextComponentString(
-							"achievement.requires" + new Object[] { achievement.parentInfo.getDisplayName() }))
-									.getUnformattedText();
+							"achievement.requires" + new Object[] {achievement.parentInfo.getDisplayName()}))
+							.getUnformattedText();
 					k4 = this.fontRenderer.getWordWrappedHeight(s, j4);
 					this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k4 + 12 + 3, -1073741824, -1073741824);
 					this.fontRenderer.drawSplitString(s, i5, j5 + 12, j4, -9416624);
 				} else if (researchVisibility < 3) {
 					j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
 					s = (new TextComponentString(
-							"achievement.requires" + new Object[] { achievement.parentInfo.getDisplayName() }))
-									.getUnformattedText();
+							"achievement.requires" + new Object[] {achievement.parentInfo.getDisplayName()}))
+							.getUnformattedText();
 					k4 = this.fontRenderer.getWordWrappedHeight(s, j4);
 					this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k4 + 12 + 3, -1073741824, -1073741824);
 					this.fontRenderer.drawSplitString(s, i5, j5 + 12, j4, -9416624);
@@ -555,7 +555,7 @@ public class GuiKnowledge extends GuiScreen {
 	}
 
 	private int[] getVisibleRange() {
-		return new int[] { 1, 2, 3 };
+		return new int[] {1, 2, 3};
 	}
 
 	private void renderPurchaseScreen(int x, int y, int mx, int my) {
