@@ -5,6 +5,7 @@ import minefantasy.mfr.entity.EntityDragonBreath;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -46,9 +47,10 @@ public class PoisonBreath extends DragonBreath {
                 for (ItemStack item: equipment) {
                     if (item != null) {
                         item.damageItem((int) dam, ((EntityLivingBase) target));
-                        if (item.getItemDamage() >= item.getMaxDamage()) {
+                        EntityEquipmentSlot slot = item.getItem().getEquipmentSlot(item);
+                        if (item.getItemDamage() >= item.getMaxDamage() &&  slot != null) {
                             ((EntityLivingBase) target).renderBrokenItemStack(item);
-                            target.setItemStackToSlot(EntityEquipmentSlot.valueOf(item.getDisplayName()), null);
+                            target.setItemStackToSlot(slot, new ItemStack(Items.AIR));
                         }
                     }
                 }
