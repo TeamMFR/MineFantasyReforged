@@ -22,6 +22,7 @@ import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -34,6 +35,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -45,6 +47,8 @@ import com.google.common.base.Predicate;
 
 public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
+    protected static final DataParameter<Byte> VEX_FLAGS = EntityDataManager.<Byte>createKey(EntityDragon.class, DataSerializers.BYTE);
+    
 	private static final DataParameter<Boolean> TERRESTRIAL = EntityDataManager.<Boolean>createKey(EntityDragon.class,
 			DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager
@@ -66,6 +70,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			return !flag;
 		}
 	};
+    private BlockPos boundOrigin;
 	public static int interestTimeSeconds = 90;
 	private Entity lastEnemy;
 	public static float heartChance = 1.0F;
@@ -74,6 +79,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		super(worldIn);
 		this.isImmuneToFire = true;
 		((PathNavigateGround) this.getNavigator()).setCanSwim(true);
+		this.moveHelper = new AIMoveControl(this);
 	}
 
 	public void disengage(int time) {
@@ -94,16 +100,13 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	@Override
 	protected void initEntityAI() {
 		super.initEntityAI();
-		this.tasks.addTask(1, new EntityAIAttackMelee(this, 1.0D, false));
-		this.tasks.addTask(1, new EntityAIAttackRanged(this, 1.0D, getType().coolTimer, 50));
-		this.tasks.addTask(2, new EntityAIMoveTowardsTarget(this, 0.9D, 32.0F));
-		this.tasks.addTask(3, new EntityAIMoveThroughVillage(this, 0.6D, true));
-		this.tasks.addTask(4, new EntityAIMoveTowardsRestriction(this, 1.0D));
-		this.tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.6D));
-		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityLiving.class, 50.0F, 120));
-		this.tasks.addTask(9, new EntityAILookIdle(this));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false, new Class[0]));
-        this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLiving.class, 0, false, false, ATTACKABLE));
+        this.tasks.addTask(0, new EntityAISwimming(this));
+        this.tasks.addTask(4, new AIChargeAttack());
+        this.tasks.addTask(8, new AIMoveRandom());
+        this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
+        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityDragon.class}));
+        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -113,51 +116,9 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			this.width = 3.0F * getScale();
 			this.height = 2.0F * getScale();
 		}
-		this.motionY *= 0.6000000238418579D;
-
-		
-		if (!this.world.isRemote) {
-			Entity entity = getAttackTarget();
-
-			if (entity != null) {
-				if (this.posY < entity.posY) {
-					if (this.motionY < 0.0D) {
-						this.motionY = 0.0D;
-					}
-
-					this.motionY += (0.5D - this.motionY) * 0.6000000238418579D;
-				}
-				double d0 = entity.posX - this.posX;
-				double d1 = entity.posZ - this.posZ;
-				double d3 = d0 * d0 + d1 * d1;
-
-				if (d3 > 9.0D) {
-					double d5 = (double) MathHelper.sqrt(d3);
-					this.motionX += (d0 / d5 * 0.5D - this.motionX) * 0.6000000238418579D;
-					this.motionZ += (d1 / d5 * 0.5D - this.motionZ) * 0.6000000238418579D;
-				}
-			} else {
-				if (this.posY < 90) {
-					if (this.motionY < 0.0D) {
-						this.motionY = 0.0D;
-					}
-
-					this.motionY += (0.5D - this.motionY) * 0.6000000238418579D;
-				} else {
-					if (this.motionY < 0.0D) {
-						this.motionY = 0.0D;
-					}
-				}
-			}
-		}
-
-
-        if (this.motionX * this.motionX + this.motionZ * this.motionZ > 0.05000000074505806D)
-        {
-            this.rotationYaw = (float)MathHelper.atan2(this.motionZ, this.motionX) * (180F / (float)Math.PI) - 90.0F;
-        }
 
 		super.onUpdate();
+        this.setNoGravity(true);
 	}
 
 	private float getFlightSpeed() {
@@ -174,9 +135,41 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		super.applyEntityAttributes();
 		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getType().health);
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getType().meleeDamage);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.75D);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(256.0D);
 	}
+	
+	private boolean getVexFlag(int mask)
+    {
+        int i = ((Byte)this.dataManager.get(VEX_FLAGS)).byteValue();
+        return (i & mask) != 0;
+    }
+
+    private void setVexFlag(int mask, boolean value)
+    {
+        int i = ((Byte)this.dataManager.get(VEX_FLAGS)).byteValue();
+
+        if (value)
+        {
+            i = i | mask;
+        }
+        else
+        {
+            i = i & ~mask;
+        }
+
+        this.dataManager.set(VEX_FLAGS, Byte.valueOf((byte)(i & 255)));
+    }
+    
+    public boolean isCharging()
+    {
+        return this.getVexFlag(1);
+    }
+
+    public void setCharging(boolean charging)
+    {
+        this.setVexFlag(1, charging);
+    }
+
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
@@ -267,6 +260,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.dataManager.register(DISENGAGE_TIME, 0);
 		this.dataManager.register(BREED, 0);
 		this.dataManager.register(TIER, rand.nextInt(5));
+        this.dataManager.register(VEX_FLAGS, Byte.valueOf((byte)0));
 	}
 
 	public Shockwave createShockwave(double x, double y, double z, float power, boolean grief) {
@@ -439,6 +433,18 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
         }
     }
 
+    @Nullable
+    public BlockPos getBoundOrigin()
+    {
+        return this.boundOrigin;
+    }
+
+    public void setBoundOrigin(@Nullable BlockPos boundOriginIn)
+    {
+        this.boundOrigin = boundOriginIn;
+    }
+
+   
     private Item getLoot(int tier) {
         if (tier == 4)// Ancient
         {
@@ -464,4 +470,194 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		// TODO Auto-generated method stub
 
 	}
+	
+	class AIChargeAttack extends EntityAIBase
+    {
+        public AIChargeAttack()
+        {
+            this.setMutexBits(1);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute()
+        {
+            if (EntityDragon.this.getAttackTarget() != null && !EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.rand.nextInt(7) == 0)
+            {
+                return EntityDragon.this.getDistanceSq(EntityDragon.this.getAttackTarget()) > 4.0D;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean shouldContinueExecuting()
+        {
+            return EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.isCharging() && EntityDragon.this.getAttackTarget() != null && EntityDragon.this.getAttackTarget().isEntityAlive();
+        }
+
+        /**
+         * Execute a one shot task or start executing a continuous task
+         */
+        public void startExecuting()
+        {
+            EntityLivingBase entitylivingbase = EntityDragon.this.getAttackTarget();
+            Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
+            EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+            EntityDragon.this.setCharging(true);
+            EntityDragon.this.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0F, 1.0F);
+        }
+
+        /**
+         * Reset the task's internal state. Called when this task is interrupted by another one
+         */
+        public void resetTask()
+        {
+            EntityDragon.this.setCharging(false);
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask()
+        {
+            EntityLivingBase entitylivingbase = EntityDragon.this.getAttackTarget();
+            double d0 = EntityDragon.this.getPositionVector().distanceTo(entitylivingbase.getPositionVector());
+            if (d0<3)
+            {
+                EntityDragon.this.attackEntityAsMob(entitylivingbase);
+                EntityDragon.this.setCharging(false);
+            }
+            else
+            {
+                if (d0 < 9.0D)
+                {
+                    Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
+                    EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+                }
+                if(d0 < 16.0D) {
+                    double xAngle = EntityDragon.this.getAttackTarget().posX - EntityDragon.this.posX;
+                    double yAngle = EntityDragon.this.getAttackTarget().getEntityBoundingBox().minY + EntityDragon.this.getAttackTarget().height / 2.0F
+                            - (EntityDragon.this.posY + EntityDragon.this.height / 2.0F);
+                    double zAngle = EntityDragon.this.getAttackTarget().posZ - EntityDragon.this.posZ;
+                    double power = 1.0D;
+                    Vec3d var20 = EntityDragon.this.getLook(1.0F);
+                    Entity breath = EntityDragon.this.getBreath(xAngle, yAngle, zAngle);
+                    breath.posX = EntityDragon.this.posX + var20.x * power;
+                    breath.posY = EntityDragon.this.posY + EntityDragon.this.height / 2.0F + 0.5D;
+                    breath.posZ = EntityDragon.this.posZ + var20.z * power;
+                    EntityDragon.this.world.spawnEntity(breath);
+                    System.out.println("");
+                }
+            }
+        }
+    }
+
+    
+
+    class AIMoveControl extends EntityMoveHelper
+    {
+        public AIMoveControl(EntityDragon vex)
+        {
+            super(vex);
+        }
+
+        public void onUpdateMoveHelper()
+        {
+            if (this.action == EntityMoveHelper.Action.MOVE_TO)
+            {
+                double d0 = this.posX - EntityDragon.this.posX;
+                double d1 = this.posY - EntityDragon.this.posY;
+                double d2 = this.posZ - EntityDragon.this.posZ;
+                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+                d3 = (double)MathHelper.sqrt(d3);
+
+                if (d3 < EntityDragon.this.getEntityBoundingBox().getAverageEdgeLength())
+                {
+                    this.action = EntityMoveHelper.Action.WAIT;
+                    EntityDragon.this.motionX *= 0.5D;
+                    EntityDragon.this.motionY *= 0.5D;
+                    EntityDragon.this.motionZ *= 0.5D;
+                }
+                else
+                {
+                    EntityDragon.this.motionX += d0 / d3 * 0.05D * this.speed;
+                    EntityDragon.this.motionY += d1 / d3 * 0.05D * this.speed;
+                    EntityDragon.this.motionZ += d2 / d3 * 0.05D * this.speed;
+
+                    if (EntityDragon.this.getAttackTarget() == null)
+                    {
+                        EntityDragon.this.rotationYaw = -((float)MathHelper.atan2(EntityDragon.this.motionX, EntityDragon.this.motionZ)) * (180F / (float)Math.PI);
+                        EntityDragon.this.renderYawOffset = EntityDragon.this.rotationYaw;
+                    }
+                    else
+                    {
+                        double d4 = EntityDragon.this.getAttackTarget().posX - EntityDragon.this.posX;
+                        double d5 = EntityDragon.this.getAttackTarget().posZ - EntityDragon.this.posZ;
+                        EntityDragon.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
+                        EntityDragon.this.renderYawOffset = EntityDragon.this.rotationYaw;
+                    }
+                }
+            }
+        }
+    }
+
+    class AIMoveRandom extends EntityAIBase
+    {
+        public AIMoveRandom()
+        {
+            this.setMutexBits(1);
+        }
+
+        /**
+         * Returns whether the EntityAIBase should begin execution.
+         */
+        public boolean shouldExecute()
+        {
+            return !EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.rand.nextInt(7) == 0;
+        }
+
+        /**
+         * Returns whether an in-progress EntityAIBase should continue executing
+         */
+        public boolean shouldContinueExecuting()
+        {
+            return false;
+        }
+
+        /**
+         * Keep ticking a continuous task that has already been started
+         */
+        public void updateTask()
+        {
+            BlockPos blockpos = EntityDragon.this.getBoundOrigin();
+
+            if (blockpos == null)
+            {
+                blockpos = new BlockPos(EntityDragon.this);
+            }
+
+            for (int i = 0; i < 3; ++i)
+            {
+                BlockPos blockpos1 = blockpos.add(EntityDragon.this.rand.nextInt(15) - 7, EntityDragon.this.rand.nextInt(11) - 5, EntityDragon.this.rand.nextInt(15) - 7);
+
+                if (EntityDragon.this.world.isAirBlock(blockpos1))
+                {
+                    EntityDragon.this.moveHelper.setMoveTo((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
+
+                    if (EntityDragon.this.getAttackTarget() == null)
+                    {
+                        EntityDragon.this.getLookHelper().setLookPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
+                    }
+
+                    break;
+                }
+            }
+        }
+    }
 }
