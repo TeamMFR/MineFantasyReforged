@@ -1,7 +1,5 @@
 package minefantasy.mfr.recipe;
 
-import java.util.ArrayList;
-
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
@@ -24,6 +22,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
+
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class BasicRecipesMF {
 
@@ -33,7 +33,6 @@ public class BasicRecipesMF {
 	}
 
 	public static void init() {
-		addFoodOutput();
 		TempRecipesMF.init();// TODO remove temp recipes
 		ForgingRecipes.init();
 		CarpenterRecipes.init();
@@ -46,71 +45,9 @@ public class BasicRecipesMF {
 
 		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 
-		// KnowledgeListMFR.stickRecipe = GameRegistry.addShapedRecipe(new
-		// ItemStack(Items.STICK, 2), new Object[]{"S", 'S', ComponentListMFR.plank});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapedRecipe(new ItemStack(Items.STICK, 2), new Object[]{"S",
-		// 'S', ComponentListMFR.plank_cut});
-		// TODO Replace with proper recipe JSON
-
-		// KnowledgeListMFR.firepitRecipe = GameRegistry.addShapedRecipe(new
-		// ItemStack(BlockListMFR.FIREPIT), new Object[]{" P ", "S S", 'S', Items.STICK,
-		// 'P', ComponentListMFR.plank});
-		// TODO Replace with proper recipe JSON
-		// KnowledgeListMFR.cooktopRecipe = GameRegistry.addShapedRecipe(new
-		// ItemStack(BlockListMFR.ROAST), new Object[]{"PSP", 'S', Blocks.COBBLESTONE,
-		// 'P', ComponentListMFR.plank});
-		// TODO Replace with proper recipe JSON
-
-		// GameRegistry.addShapelessRecipe(new ItemStack(BlockListMFR.YEW_PLANKS, 4),
-		// new Object[]{BlockListMFR.LOG_YEW});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapelessRecipe(new ItemStack(BlockListMFR.IRONBARK_PLANKS,
-		// 4), new Object[]{BlockListMFR.LOG_IRONBARK});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapelessRecipe(new ItemStack(BlockListMFR.EBONY_PLANKS, 4),
-		// new Object[]{BlockListMFR.LOG_EBONY});
-		// TODO Replace with proper recipe JSON
-
 		for (CustomMaterial customMat : wood) {
 			assembleWoodVariations(customMat);
 		}
-
-		// KnowledgeListMFR.plantOilR = GameRegistry.addShapedRecipe(new
-		// ItemStack(ComponentListMFR.plant_oil, 4), new Object[]{" B ", "BFB", " B ",
-		// 'F', Items.WHEAT_SEEDS, 'B', FoodListMFR.jug_empty});
-		// TODO Replace with proper recipe JSON
-		// KnowledgeListMFR.waterJugR = GameRegistry.addShapedRecipe(new
-		// ItemStack(FoodListMFR.jug_water, 4), new Object[]{" B ", "BWB", " B ", 'W',
-		// Items.WATER_BUCKET, 'B', FoodListMFR.jug_empty});
-		// TODO Replace with proper recipe JSON
-		// KnowledgeListMFR.sugarRecipe = GameRegistry.addShapedRecipe(new
-		// ItemStack(FoodListMFR.sugarpot), new Object[]{"S", "S", "B", 'S',
-		// Items.SUGAR, 'B', ComponentListMFR.clay_pot,});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapelessRecipe(new ItemStack(Items.SUGAR, 2), new
-		// Object[]{FoodListMFR.sugarpot,});
-		// TODO Replace with proper recipe JSON
-		// KnowledgeListMFR.milkJugR = GameRegistry.addShapedRecipe(new
-		// ItemStack(FoodListMFR.jug_milk, 4), new Object[]{" B ", "BMB", " B ", 'M',
-		// Items.MILK_BUCKET, 'B', FoodListMFR.jug_empty});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapedRecipe(new ItemStack(Items.MILK_BUCKET), new Object[]{"
-		// B ", "BMB", " B ", 'M', Items.BUCKET, 'B', FoodListMFR.jug_milk});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapedRecipe(new ItemStack(Items.WATER_BUCKET), new
-		// Object[]{" B ", "BMB", " B ", 'M', Items.BUCKET, 'B',
-		// FoodListMFR.jug_water});
-		// TODO Replace with proper recipe JSON
-
-		// GameRegistry.addRecipe(new RecipeSyringe());
-		// TODO Replace with proper recipe JSON
-		// Just a way on making the overpowered gunpowder from black powder
-		// GameRegistry.addShapelessRecipe(new ItemStack(Items.GUNPOWDER), new
-		// Object[]{new ItemStack(ComponentListMFR.blackpowder), new
-		// ItemStack(ComponentListMFR.blackpowder), new
-		// ItemStack(ComponentListMFR.nitre),});
-		// TODO Replace with proper recipe JSON
 
 //        for (int id = 0; id < BlockListMFR.METAL_BLOCKS.length; id++) {
 //            BaseMaterialMFR material = BaseMaterialMFR.getMaterial(BlockListMFR.METAL_BLOCKS[id]);
@@ -145,16 +82,6 @@ public class BasicRecipesMF {
 						"BB",
 						'B', ComponentListMFR.STRONG_BRICK});
 		BaseMaterialMFR mat = BaseMaterialMFR.IRON;
-
-		// GameRegistry.addShapelessRecipe(new ItemStack(ComponentListMFR.hideSmall),
-		// new Object[]{ComponentListMFR.rawhideSmall, ComponentListMFR.flux});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapelessRecipe(new ItemStack(ComponentListMFR.hideMedium),
-		// new Object[]{ComponentListMFR.rawhideMedium, ComponentListMFR.flux});
-		// TODO Replace with proper recipe JSON
-		// GameRegistry.addShapelessRecipe(new ItemStack(ComponentListMFR.hideLarge),
-		// new Object[]{ComponentListMFR.rawhideLarge, ComponentListMFR.flux});
-		// TODO Replace with proper recipe JSON
 
 		TanningRecipe.addRecipe(ComponentListMFR.HIDE_SMALL, mat.craftTimeModifier * 2F, -1,
 				new ItemStack(Items.LEATHER));
@@ -204,20 +131,6 @@ public class BasicRecipesMF {
 		// TODO Replace with proper recipe JSON
 
 		Object rock = ConfigHardcore.HCCallowRocks ? ComponentListMFR.SHARP_ROCK : Blocks.COBBLESTONE;
-		// KnowledgeListMFR.dryrocksR = GameRegistry.addShapedRecipe(new
-		// ItemStack(ToolListMFR.dryrocks), new Object[]{"R ", " R", 'R', rock});
-		// TODO Replace with proper recipe JSON
-
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.MUD_BRICK_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.MUD_PAVEMENT_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.COBBLE_BRICK_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.COBBLE_PAVEMENT_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.REINFORCED_STONE_BRICK_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.REINFORCED_STONE_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.YEW_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.IRONBARK_STAIR).addRecipe();//TODO Replace with proper recipe JSON
-//        ((ConstructionBlockMF.StairsConstBlock) BlockListMFR.EBONY_STAIR).addRecipe();//TODO Replace with proper recipe JSON
 	}
 
 	private static void assembleWoodVariations(CustomMaterial material) {
@@ -254,16 +167,7 @@ public class BasicRecipesMF {
 		if (planks.getUnlocalizedName().toLowerCase().contains(sub)) {
 			// KnowledgeListMFR.plankRecipe.add(GameRegistry.addShapedRecipe(ComponentListMFR.plank.construct(material.name,
 			// 4), new Object[]{"P", "P", 'P', planks.copy()}));
-			// TODO Replace with proper recipe JSON
+			// TODO Replace with proper recipe JSON - this should probably use oredict and might work already
 		}
-	}
-
-	private static void addFoodOutput() {
-//        KnowledgeListMFR.cheeseOut = GameRegistry.addShapedRecipe(new ItemStack(BlockListMFR.CHEESE_WHEEL), new Object[]{"F", 'F', FoodListMFR.cheese_pot,});//TODO Replace with proper recipe JSON
-//        KnowledgeListMFR.meatpieOut = GameRegistry.addShapedRecipe(new ItemStack(BlockListMFR.PIE_MEAT), new Object[]{"F", 'F', FoodListMFR.pie_meat_cooked});//TODO Replace with proper recipe JSON
-//        KnowledgeListMFR.shepardOut = GameRegistry.addShapedRecipe(new ItemStack(BlockListMFR.PIE_SHEPARDS), new Object[]{"F", 'F', FoodListMFR.pie_shepard_cooked});//TODO Replace with proper recipe JSON
-//        KnowledgeListMFR.appleOut = GameRegistry.addShapedRecipe(new ItemStack(BlockListMFR.PIE_APPLE), new Object[]{"F", 'F', FoodListMFR.pie_apple_cooked});//TODO Replace with proper recipe JSON
-//        KnowledgeListMFR.berryOut = GameRegistry.addShapedRecipe(new ItemStack(BlockListMFR.PIE_BERRY), new Object[]{"F", 'F', FoodListMFR.pie_berry_cooked});//TODO Replace with proper recipe JSON
-//        KnowledgeListMFR.pumpPieOut = GameRegistry.addShapedRecipe(new ItemStack(Items.PUMPKIN_PIE), new Object[]{"F", 'F', FoodListMFR.pie_pumpkin_cooked});//TODO Replace with proper recipe JSON
 	}
 }

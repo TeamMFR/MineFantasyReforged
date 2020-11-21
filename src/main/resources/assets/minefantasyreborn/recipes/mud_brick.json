@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B B",
+		"B B",
+		"B B"
+	],
+	"key": {
+		"B": {
+			"item": "minecraft:dirt"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:mud_brick",
+		"count": 4
+	}
+}

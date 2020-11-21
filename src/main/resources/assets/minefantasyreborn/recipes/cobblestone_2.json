@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B  "
+	],
+	"key": {
+		"B": {
+			"item": "minefantasyreborn:cobble_pavement"
+		}
+	},
+	"result": {
+		"item": "minecraft:cobblestone"
+	}
+}

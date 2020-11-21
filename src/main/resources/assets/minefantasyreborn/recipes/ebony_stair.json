@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"P  ",
+		"PP  ",
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreborn:ebony_planks"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:ebony_stair",
+		"count": 4
+	}
+}

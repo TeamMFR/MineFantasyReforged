@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"P  ",
+		"PP  ",
+		"PPP"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreborn:ironbark_planks"
+		}
+	},
+	"result": {
+		"item": "minefantasyreborn:ironbark_stair",
+		"count": 4
+	}
+}

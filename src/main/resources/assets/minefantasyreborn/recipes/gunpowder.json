@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"BB ",
+		"N  "
+	],
+	"key": {
+		"B": {
+			"item": "minefantasyreborn:blackpowder"
+		},
+		"N": {
+			"item": "minefantasyreborn:nitre"
+		}
+	},
+	"result": {
+		"item": "minecraft:gunpowder"
+	}
+}
