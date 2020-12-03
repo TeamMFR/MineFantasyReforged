@@ -1,0 +1,27 @@
+{
+	"type": "crafting_shaped",
+	"skill": "artisanry",
+	"research": "artisanry",
+	"sound" :  "minefantasyreborn:block.hammercarpenter",
+	"tool_type":"knife",
+	"tool_tier": 1,
+	"craft_time": 20,
+	"pattern": [
+		" J J",
+		"JMJJ",
+		" J J",
+		" J J"
+	],
+	"key": {
+		"J": {
+			"item": "minefantasyreborn:jug_empty"
+		},
+		"M": {
+			"item": "minecraft:milk_bucket"
+		}
+	},
+	"result": {
+		"item": "minecraft:diamond",
+		"count": 4
+	}
+}

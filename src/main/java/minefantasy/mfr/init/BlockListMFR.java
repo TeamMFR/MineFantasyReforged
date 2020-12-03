@@ -264,17 +264,17 @@ public class BlockListMFR {
 
 	public static BlockTileEntity<TileEntityQuern> QUERN = Utils.nullValue();
 
-	public static Block MUD_BRICK_STAIR = Utils.nullValue();
-	public static Block MUD_PAVEMENT_STAIR = Utils.nullValue();
-	public static Block COBBLE_BRICK_STAIR = Utils.nullValue();
-	public static Block COBBLE_PAVEMENT_STAIR = Utils.nullValue();
-	public static Block FIREBRICK_STAIR = Utils.nullValue();
-	public static Block REINFORCED_STONE_STAIR = Utils.nullValue();
-	public static Block REINFORCED_STONE_BRICK_STAIR = Utils.nullValue();
+	public static Block MUD_BRICK_STAIRS = Utils.nullValue();
+	public static Block MUD_PAVEMENT_STAIRS = Utils.nullValue();
+	public static Block COBBLE_BRICK_STAIRS = Utils.nullValue();
+	public static Block COBBLE_PAVEMENT_STAIRS = Utils.nullValue();
+	public static Block FIREBRICK_STAIRS = Utils.nullValue();
+	public static Block REINFORCED_STONE_STAIRS = Utils.nullValue();
+	public static Block REINFORCED_STONE_BRICK_STAIRS = Utils.nullValue();
 
-	public static Block YEW_STAIR = Utils.nullValue();
-	public static Block IRONBARK_STAIR = Utils.nullValue();
-	public static Block EBONY_STAIR = Utils.nullValue();
+	public static Block YEW_STAIRS = Utils.nullValue();
+	public static Block IRONBARK_STAIRS = Utils.nullValue();
+	public static Block EBONY_STAIRS = Utils.nullValue();
 
 	public static Block FIREPIT = Utils.nullValue();
 	public static Block STOVE = Utils.nullValue();
@@ -459,17 +459,17 @@ public class BlockListMFR {
 
 		QUERN = new BlockQuern("quern");
 
-		MUD_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("mud_brick_stairs", MUD_BRICK);
-		MUD_PAVEMENT_STAIR = new ConstructionBlockMF.StairsConstBlock("mud_pavement_stairs", MUD_PAVEMENT);
-		COBBLE_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("cobble_brick_stairs", COBBLE_BRICK);
-		COBBLE_PAVEMENT_STAIR = new ConstructionBlockMF.StairsConstBlock("cobble_pavement_stairs", COBBLE_PAVEMENT);
-		FIREBRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("firebrick_stairs", FIREBRICKS);
-		REINFORCED_STONE_STAIR = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_stairs", REINFORCED_STONE);
-		REINFORCED_STONE_BRICK_STAIR = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_brick_stairs", REINFORCED_STONE_BRICKS);
+		MUD_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("mud_brick_stairs", MUD_BRICK);
+		MUD_PAVEMENT_STAIRS = new ConstructionBlockMF.StairsConstBlock("mud_pavement_stairs", MUD_PAVEMENT);
+		COBBLE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("cobble_brick_stairs", COBBLE_BRICK);
+		COBBLE_PAVEMENT_STAIRS = new ConstructionBlockMF.StairsConstBlock("cobble_pavement_stairs", COBBLE_PAVEMENT);
+		FIREBRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("firebrick_stairs", FIREBRICKS);
+		REINFORCED_STONE_STAIRS = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_stairs", REINFORCED_STONE);
+		REINFORCED_STONE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_brick_stairs", REINFORCED_STONE_BRICKS);
 
-		YEW_STAIR = new ConstructionBlockMF.StairsConstBlock("yew_stairs", YEW_PLANKS);
-		IRONBARK_STAIR = new ConstructionBlockMF.StairsConstBlock("ironbark_stairs", IRONBARK_PLANKS);
-		EBONY_STAIR = new ConstructionBlockMF.StairsConstBlock("ebony_stairs", EBONY_PLANKS);
+		YEW_STAIRS = new ConstructionBlockMF.StairsConstBlock("yew_stairs", YEW_PLANKS);
+		IRONBARK_STAIRS = new ConstructionBlockMF.StairsConstBlock("ironbark_stairs", IRONBARK_PLANKS);
+		EBONY_STAIRS = new ConstructionBlockMF.StairsConstBlock("ebony_stairs", EBONY_PLANKS);
 
 		FIREPIT = new BlockFirepit();
 		STOVE = new BlockRoast(false);
@@ -606,17 +606,17 @@ public class BlockListMFR {
 		registry.register(IRONBARK_PLANKS);
 		registry.register(EBONY_PLANKS);
 
-		registry.register(MUD_BRICK_STAIR);
-		registry.register(MUD_PAVEMENT_STAIR);
-		registry.register(COBBLE_BRICK_STAIR);
-		registry.register(COBBLE_PAVEMENT_STAIR);
-		registry.register(FIREBRICK_STAIR);
-		registry.register(REINFORCED_STONE_STAIR);
-		registry.register(REINFORCED_STONE_BRICK_STAIR);
+		registry.register(MUD_BRICK_STAIRS);
+		registry.register(MUD_PAVEMENT_STAIRS);
+		registry.register(COBBLE_BRICK_STAIRS);
+		registry.register(COBBLE_PAVEMENT_STAIRS);
+		registry.register(FIREBRICK_STAIRS);
+		registry.register(REINFORCED_STONE_STAIRS);
+		registry.register(REINFORCED_STONE_BRICK_STAIRS);
 
-		registry.register(YEW_STAIR);
-		registry.register(IRONBARK_STAIR);
-		registry.register(EBONY_STAIR);
+		registry.register(YEW_STAIRS);
+		registry.register(IRONBARK_STAIRS);
+		registry.register(EBONY_STAIRS);
 
 		registry.register(COGWORK_HELM);
 		registry.register(COGWORK_LEGS);
@@ -880,17 +880,17 @@ public class BlockListMFR {
 
 		registry.register(new ItemBlockSpecialRender(QUERN, new TileEntityQuernRenderer<>()));
 
-		registry.register(new ItemBlockBase(MUD_BRICK_STAIR));
-		registry.register(new ItemBlockBase(MUD_PAVEMENT_STAIR));
-		registry.register(new ItemBlockBase(COBBLE_BRICK_STAIR));
-		registry.register(new ItemBlockBase(COBBLE_PAVEMENT_STAIR));
-		registry.register(new ItemBlockBase(FIREBRICK_STAIR));
-		registry.register(new ItemBlockBase(REINFORCED_STONE_STAIR));
-		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICK_STAIR));
+		registry.register(new ItemBlockBase(MUD_BRICK_STAIRS));
+		registry.register(new ItemBlockBase(MUD_PAVEMENT_STAIRS));
+		registry.register(new ItemBlockBase(COBBLE_BRICK_STAIRS));
+		registry.register(new ItemBlockBase(COBBLE_PAVEMENT_STAIRS));
+		registry.register(new ItemBlockBase(FIREBRICK_STAIRS));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_STAIRS));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICK_STAIRS));
 
-		registry.register(new ItemBlockBase(YEW_STAIR));
-		registry.register(new ItemBlockBase(IRONBARK_STAIR));
-		registry.register(new ItemBlockBase(EBONY_STAIR));
+		registry.register(new ItemBlockBase(YEW_STAIRS));
+		registry.register(new ItemBlockBase(IRONBARK_STAIRS));
+		registry.register(new ItemBlockBase(EBONY_STAIRS));
 
 		registry.register(new ItemBlockBase(FIREPIT));
 		registry.register(new ItemBlockBase(STOVE));

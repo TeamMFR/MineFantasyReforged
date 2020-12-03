@@ -18,7 +18,6 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.ArtefactListMFR;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
@@ -27,6 +26,7 @@ import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.init.OreDictListMFR;
 import minefantasy.mfr.init.OrnateStyle;
@@ -40,12 +40,13 @@ import minefantasy.mfr.mechanics.worldGen.WorldGenMFBase;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.BasicRecipesMF;
-import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.recipe.CarpenterRecipeManager;
 import net.minecraft.init.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -56,6 +57,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
@@ -72,6 +75,8 @@ public class MineFantasyReborn {
 
 	@Mod.Instance
 	public static MineFantasyReborn INSTANCE;
+
+	public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
 	private static Configuration getCfg(FMLPreInitializationEvent event, String name) {
 		return new Configuration(new File(event.getModConfigurationDirectory(), "MineFantasyReborn/" + name + ".cfg"));
@@ -108,8 +113,11 @@ public class MineFantasyReborn {
 		new ConfigCrafting().setConfig(getCfg(preEvent, "Crafting"));
 		new ConfigMobs().setConfig(getCfg(preEvent, "Mobs"));
 
+		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
+		CarpenterRecipeManager.INSTANCE.loadRecipes();
+
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
-		MFRLogUtil.log("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
+		MineFantasyReborn.LOG.info("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
 
 		BaseMaterialMFR.init();
 		WoodMaterial.init();
@@ -144,6 +152,9 @@ public class MineFantasyReborn {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(this);
+
+
+		CarpenterRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), CarpenterRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
 

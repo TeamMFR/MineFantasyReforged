@@ -1,5 +1,6 @@
 package minefantasy.mfr.config;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.CustomArmourEntry;
 import minefantasy.mfr.api.armour.CustomDamageRatioEntry;
@@ -41,15 +42,14 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
                 breakdownLineForDamage(s);
             }
         } catch (Exception e) {
-            MFRLogUtil.logWarn("Failed to load Custom Item Entries from config. Check the config file");
+            MineFantasyReborn.LOG.warn("Failed to load Custom Item Entries from config. Check the config file");
         }
     }
 
     private static void registerArmourclassEntry(Item piece, String design, float weight) {
         ArmourDesign AC = getClassFor(design);
         if (AC == null) {
-            MFRLogUtil.logWarn(
-                    "Could not define armour design '" + design + "' for item id: " + Item.getIdFromItem(piece));
+            MineFantasyReborn.LOG.warn("Could not define armour design '" + design + "' for item id: " + Item.getIdFromItem(piece));
             return;
         }
         CustomArmourEntry.registerItem(piece, AC, weight, AC.getGroup());

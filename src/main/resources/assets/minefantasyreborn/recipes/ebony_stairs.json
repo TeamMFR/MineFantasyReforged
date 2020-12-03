@@ -2,16 +2,16 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"P  ",
-		"PP  ",
+		"PP ",
 		"PPP"
 	],
 	"key": {
 		"P": {
-			"item": "minefantasyreborn:ironbark_planks"
+			"item": "minefantasyreborn:ebony_planks"
 		}
 	},
 	"result": {
-		"item": "minefantasyreborn:ironbark_stair",
+		"item": "minefantasyreborn:ebony_stairs",
 		"count": 4
 	}
 }

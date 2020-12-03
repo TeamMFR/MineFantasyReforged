@@ -7,11 +7,11 @@
 	],
 	"key": {
 		"B": {
-			"item": "minefantasyreborn:cobble_brick"
+			"item": "minefantasyreborn:reinforced_stone"
 		}
 	},
 	"result": {
-		"item": "minefantasyreborn:cobble_brick_stair",
+		"item": "minefantasyreborn:reinforced_stone_stairs",
 		"count": 4
 	}
 }

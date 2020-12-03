@@ -1,5 +1,6 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.refine.BloomRecipe;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
@@ -7,7 +8,6 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -42,9 +42,9 @@ public class SmeltingRecipesMF {
                         ComponentListMFR.OBSIDIAN_ROCK});
         if (ConfigHardcore.HCCreduceIngots) {
             if (MineFantasyRebornAPI.removeSmelting(Blocks.IRON_ORE) && MineFantasyRebornAPI.removeSmelting(Blocks.GOLD_ORE)) {
-                MFRLogUtil.logDebug("Removed Ore Smelting (Hardcore Ingots");
+                MineFantasyReborn.LOG.debug("Removed Ore Smelting (Hardcore Ingots");
             } else {
-                MFRLogUtil.logWarn("Failed to remove Ore smelting!");
+                MineFantasyReborn.LOG.warn("Failed to remove Ore smelting!");
             }
             BloomRecipe.addRecipe(new ItemStack(Blocks.IRON_ORE), iron);
             BloomRecipe.addRecipe(new ItemStack(Blocks.GOLD_ORE), gold);

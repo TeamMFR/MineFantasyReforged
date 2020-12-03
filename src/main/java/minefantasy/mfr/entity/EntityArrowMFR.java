@@ -1,5 +1,6 @@
 package minefantasy.mfr.entity;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IArrowRetrieve;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
@@ -12,7 +13,6 @@ import minefantasy.mfr.item.archery.ArrowType;
 import minefantasy.mfr.item.gadget.EnumFillingType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
 import minefantasy.mfr.mechanics.CombatMechanics;
-import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -790,7 +790,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         try {
             return dataManager.get(TEXTURE_DW);
         } catch (Exception e) {
-            MFRLogUtil.logWarn("Arrow Failed To Load Texture");
+            MineFantasyReborn.LOG.warn("Arrow Failed To Load Texture");
             return "steel_arrow";
         }
     }

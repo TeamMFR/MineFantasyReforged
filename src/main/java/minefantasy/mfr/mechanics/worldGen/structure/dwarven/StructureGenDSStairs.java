@@ -1,7 +1,6 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -145,7 +144,7 @@ public class StructureGenDSStairs extends StructureModuleMFR {
                     placeBlock(Blocks.AIR, new BlockPos(x, y, z) );
                 }
             }
-            placeBlock(BlockListMFR.COBBLE_PAVEMENT_STAIR, new BlockPos(x, 0, -1) );
+            placeBlock(BlockListMFR.COBBLE_PAVEMENT_STAIRS, new BlockPos(x, 0, -1) );
         }
     }
 
@@ -213,7 +212,7 @@ public class StructureGenDSStairs extends StructureModuleMFR {
             if (z >= depth - 1) {
                 return new Object[]{BlockListMFR.COBBLE_PAVEMENT, 0};
             }
-            return new Object[]{BlockListMFR.COBBLE_PAVEMENT_STAIR, Integer.valueOf(getStairDirection(reverse()))};
+            return new Object[]{BlockListMFR.COBBLE_PAVEMENT_STAIRS, Integer.valueOf(getStairDirection(reverse()))};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
             return new Object[]{BlockListMFR.REINFORCED_STONE, Integer.valueOf(0)};

@@ -2,16 +2,16 @@
 	"type": "minecraft:crafting_shaped",
 	"pattern": [
 		"P  ",
-		"PP  ",
+		"PP ",
 		"PPP"
 	],
 	"key": {
 		"P": {
-			"item": "minefantasyreborn:yew_planks"
+			"item": "minefantasyreborn:ironbark_planks"
 		}
 	},
 	"result": {
-		"item": "minefantasyreborn:yew_stair",
+		"item": "minefantasyreborn:ironbark_stairs",
 		"count": 4
 	}
 }

@@ -7,6 +7,8 @@ public class SkillList {
     // public static Skill sneak = new Skill("sneak").register();
 
     // CRAFTING
+
+    // TODO create enum for skills
     public static Skill artisanry = new Skill("artisanry").register();
     public static Skill engineering = new Skill("engineering").register();
     public static Skill construction = new Skill("construction").register();

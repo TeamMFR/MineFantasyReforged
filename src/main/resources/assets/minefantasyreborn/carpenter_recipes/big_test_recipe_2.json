@@ -1,0 +1,21 @@
+{
+	"type": "crafting_shaped",
+	"pattern": [
+		" J J",
+		"JMJJ",
+		" J J",
+		" J J"
+	],
+	"key": {
+		"J": {
+			"item": "minefantasyreborn:jug_empty"
+		},
+		"M": {
+			"item": "minecraft:milk_bucket"
+		}
+	},
+	"result": {
+		"item": "minecraft:diamond",
+		"count": 4
+	}
+}

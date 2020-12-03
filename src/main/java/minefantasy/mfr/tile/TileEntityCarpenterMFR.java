@@ -355,8 +355,8 @@ public class TileEntityCarpenterMFR extends TileEntityBase implements ICarpenter
             return ItemStack.EMPTY;
         }
 
-        if (ticksExisted <= 1)
-            return ItemStack.EMPTY;
+//        if (ticksExisted <= 1)
+//            return ItemStack.EMPTY;
 
         for (int a = 0; a < getOutputSlotNum(); a++) {
             craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));

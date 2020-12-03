@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.crafting.tanning;
 
-import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,7 +47,7 @@ public class TanningRecipe {
         if (input instanceof Block) {
             return new ItemStack((Block) input, 1, OreDictionary.WILDCARD_VALUE);
         }
-        MFRLogUtil.logWarn("Tanning Recipe found invalid item!");
+        MineFantasyReborn.LOG.warn("Tanning Recipe found invalid item!");
         return ItemStack.EMPTY;
     }
 

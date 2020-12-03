@@ -41,7 +41,7 @@ public class BasicRecipesMF {
 		CookingRecipes.init();
 		DragonforgedStyle.loadCrafting();
 		OrnateStyle.loadCrafting();
-		// GameRegistry.addRecipe(new RecipeArmourDyeMF()); //TODO Replace with proper recipe JSON
+		// GameRegistry.addRecipe(new RecipeArmourDyeMF()); //TODO Replace with proper recipe JSON_FILE_EXT
 
 		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 
@@ -58,7 +58,7 @@ public class BasicRecipesMF {
 //                //GameRegistry.addShapelessRecipe(new ItemStack(ingot.getItem(), 9), new Object[]{BlockListMFR.STORAGE[id]});
 //            }
 //        }
-		// TODO Replace with proper recipe JSON for each metal block
+		// TODO Replace with proper recipe JSON_FILE_EXT for each metal block
 
 		KnowledgeListMFR.fireclayR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(ComponentListMFR.FIRECLAY, 4),
 				new Object[]{
@@ -76,7 +76,7 @@ public class BasicRecipesMF {
 						"BB",
 						"BB",
 						'B', ComponentListMFR.STRONG_BRICK});
-		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(BlockListMFR.FIREBRICK_STAIR),
+		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(BlockListMFR.FIREBRICK_STAIRS),
 				new Object[]{
 						"B ",
 						"BB",
@@ -128,7 +128,7 @@ public class BasicRecipesMF {
 
 		// GameRegistry.addShapedRecipe(ComponentListMFR.plank.construct("ScrapWood"),
 		// new Object[]{"S", "S", 'S', Items.STICK,});
-		// TODO Replace with proper recipe JSON
+		// TODO Replace with proper recipe JSON_FILE_EXT
 
 		Object rock = ConfigHardcore.HCCallowRocks ? ComponentListMFR.SHARP_ROCK : Blocks.COBBLESTONE;
 	}
@@ -155,7 +155,7 @@ public class BasicRecipesMF {
 				for (ItemStack block : list) {
 					// KnowledgeListMFR.plankRecipe.add(GameRegistry.addShapedRecipe(ComponentListMFR.plank.construct(material.name,
 					// 4), new Object[]{"P", "P", 'P', block}));
-					// TODO Replace with proper recipe JSON
+					// TODO Replace with proper recipe JSON_FILE_EXT
 					CarpenterRecipes.addSawPlanks(block, material);
 				}
 		}
@@ -167,7 +167,7 @@ public class BasicRecipesMF {
 		if (planks.getUnlocalizedName().toLowerCase().contains(sub)) {
 			// KnowledgeListMFR.plankRecipe.add(GameRegistry.addShapedRecipe(ComponentListMFR.plank.construct(material.name,
 			// 4), new Object[]{"P", "P", 'P', planks.copy()}));
-			// TODO Replace with proper recipe JSON - this should probably use oredict and might work already
+			// TODO Replace with proper recipe JSON_FILE_EXT - this should probably use oredict and might work already
 		}
 	}
 }
