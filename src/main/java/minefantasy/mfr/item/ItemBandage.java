@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.mechanics.EventManagerMFR;
+import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -120,7 +120,7 @@ public class ItemBandage extends ItemBaseMFR {
                         }
                     }
                 }
-                toHeal.getEntityData().setInteger(EventManagerMFR.injuredNBT, 0);
+                toHeal.getEntityData().setInteger(EventManagerMFRToRemove.injuredNBT, 0);
             }
         }
         return item;
@@ -128,7 +128,7 @@ public class ItemBandage extends ItemBaseMFR {
 
     private boolean canHeal(EntityLivingBase toHeal) {
         return toHeal.hurtResistantTime <= 0
-                && (toHeal.getHealth() <= (toHeal.getMaxHealth() - 1F) || EventManagerMFR.getInjuredTime(toHeal) > 0)
+                && (toHeal.getHealth() <= (toHeal.getMaxHealth() - 1F) || EventManagerMFRToRemove.getInjuredTime(toHeal) > 0)
                 && !toHeal.isBurning();
     }
 

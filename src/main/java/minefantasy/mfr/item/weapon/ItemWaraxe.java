@@ -3,7 +3,7 @@ package minefantasy.mfr.item.weapon;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.init.SoundsMFR;
-import minefantasy.mfr.mechanics.EventManagerMFR;
+import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,7 +11,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -113,7 +112,7 @@ public class ItemWaraxe extends ItemWeaponMFR {
     @Override
     public void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam) {
         if (rand.nextFloat() < injuryChance && dam > 0) {
-            hit.getEntityData().setInteger(EventManagerMFR.injuredNBT, 200 + rand.nextInt(600));
+            hit.getEntityData().setInteger(EventManagerMFRToRemove.injuredNBT, 200 + rand.nextInt(600));
         }
         super.onProperHit(user, weapon, hit, dam);
     }

@@ -1,22 +1,22 @@
 package minefantasy.mfr.api.helpers;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.api.armour.*;
+import minefantasy.mfr.api.armour.ArmourDesign;
+import minefantasy.mfr.api.armour.CustomArmourEntry;
+import minefantasy.mfr.api.armour.CustomDamageRatioEntry;
+import minefantasy.mfr.api.armour.IArmourMFR;
+import minefantasy.mfr.api.armour.IArmourPenetrationMob;
+import minefantasy.mfr.api.armour.IArmouredEntity;
+import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
-import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
@@ -27,6 +27,10 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * This class is used to calculate armour values like classes and weight
@@ -418,7 +422,7 @@ public class ArmourCalculator {
     /**
      * CLIENT SINGLE PIECE: Gets a stat for a single piece: Used by Tooltips
      */
-    public static float getDRForDisplayPiece(ItemStack armour, int id) {
+    public static float getDamageReductionForDisplayPiece(ItemStack armour, int id) {
         if (armour.isEmpty()) {
             return 0F;
         }

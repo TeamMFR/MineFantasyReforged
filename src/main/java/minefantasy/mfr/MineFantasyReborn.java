@@ -62,8 +62,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
-@Mod(modid = MineFantasyReborn.MOD_ID, name = MineFantasyReborn.NAME, version = "@VERSION@", dependencies = "required:forge@[0.000.000.001,);"
-		+ CodeChickenLib.MOD_VERSION_DEP)
+@Mod(modid = MineFantasyReborn.MOD_ID, name = MineFantasyReborn.NAME, version = "@VERSION@", dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP)
 public class MineFantasyReborn {
 	public static final String MOD_ID = "minefantasyreborn";
 	public static final String NAME = "MineFantasy Reborn";

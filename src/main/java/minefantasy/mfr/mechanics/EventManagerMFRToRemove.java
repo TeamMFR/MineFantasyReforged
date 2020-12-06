@@ -1,26 +1,19 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.IPowerArmour;
-import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.ArrowEffectsMF;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.EntityHelper;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.LevelupEvent;
-import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SyncSkillEvent;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.ISmithTongs;
-import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigStamina;
@@ -32,8 +25,6 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.integration.CustomStone;
-import minefantasy.mfr.item.ClientItemsMFR;
-import minefantasy.mfr.item.armour.ItemArmourBaseMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
@@ -69,10 +60,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -82,7 +71,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.FakePlayer;
@@ -92,7 +80,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -101,66 +88,18 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
-
-public class EventManagerMFR {
+public class EventManagerMFRToRemove {
 
 	public static final String injuredNBT = "MF_Injured";
-	public static boolean displayOreDict;
+	public static boolean displayOreDict = ConfigClient.displayOreDict;
 
 	private static XSTRandom random = new XSTRandom();
 
-	public static void addArmourDR(ItemStack armour, EntityPlayer user, List<String> list, boolean extra) {
-		list.add("");
-		String AC = ArmourCalculator.getArmourClass(armour);
-		if (AC != null) {
-			list.add(I18n.format("attribute.armour." + AC));
-		}
-		if (armour.getItem() instanceof ISpecialArmourMFR) {
-			if (ArmourCalculator.advancedDamageTypes) {
-				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection"));
-				addSingleDR(armour, user, 0, list, extra, true);
-				addSingleDR(armour, user, 2, list, extra, true);
-				addSingleDR(armour, user, 1, list, extra, true);
-			} else {
-				addSingleDR(armour, user, 0, list, extra, false);
-			}
-		}
-	}
 
-	public static void addSingleDR(ItemStack armour, EntityPlayer user, int id, List<String> list, boolean extra, boolean advanced) {
-		EntityEquipmentSlot slot = ((ItemArmor) armour.getItem()).armorType;
-		String attatch = "";
-
-		int rating = (int) (ArmourCalculator.getDRForDisplayPiece(armour, id) * 100F);
-		int equipped = (int) (ArmourCalculator.getDRForDisplayPiece(user.getItemStackFromSlot(slot), id) * 100F);
-
-		if (rating > 0 || equipped > 0) {
-			if (equipped > 0 && rating != equipped) {
-				float d = rating - equipped;
-				if (d > 0) {
-					attatch += TextFormatting.DARK_GREEN;
-				}
-				if (d < 0) {
-					attatch += TextFormatting.RED;
-				}
-				String d2 = ItemWeaponMFR.decimal_format.format(d);
-				attatch += " (" + (d > 0 ? "+" : "") + d2 + ")";
-			}
-			if (advanced) {
-				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.rating." + id) + " "
-						+ rating + attatch);
-			} else {
-				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection") + ": "
-						+ rating + attatch);
-			}
-		}
-	}
 
 	public static String getRegisterName(Entity entity) {
 		String s = EntityList.getEntityString(entity);
@@ -582,81 +521,6 @@ public class EventManagerMFR {
 		hunter.getEntityData().setInteger(type, kills);
 	}
 
-	@SubscribeEvent
-	public void setTooltip(ItemTooltipEvent event) {
-		if (event.getEntity() != null && !event.getEntity().world.isRemote) {
-			return;
-		}
-
-		if (!event.getItemStack().isEmpty()) {
-			boolean saidArtefact = false;
-			int[] ids = OreDictionary.getOreIDs(event.getItemStack());
-			boolean hasInfo = false;
-			if (ids != null && event.getEntityPlayer() != null) {
-				for (int id : ids) {
-					String s = OreDictionary.getOreName(id);
-					if (s != null) {
-						if (!hasInfo && s.startsWith("ingot")) {
-							String s2 = s.substring(5, s.length());
-							CustomMaterial material = CustomMaterial.getMaterial(s2);
-							if (material != null)
-								hasInfo = true;
-
-							CustomToolHelper.addComponentString(event.getItemStack(), event.getToolTip(), material);
-						}
-						if (s.startsWith("Artefact-")) {
-							if (!saidArtefact) {
-								String knowledge = s.substring(9).toLowerCase();
-
-								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge)) {
-									saidArtefact = true;
-									event.getToolTip().add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
-								}
-							}
-						} else if (displayOreDict) {
-							event.getToolTip().add("oreDict: " + s);
-						}
-					}
-				}
-			}
-
-			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_Inferior")) {
-				if (event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
-					event.getToolTip().add(TextFormatting.RED + I18n.format("attribute.inferior.name"));
-				}
-				if (!event.getItemStack().getTagCompound().getBoolean("MF_Inferior")) {
-					event.getToolTip().add(TextFormatting.GREEN + I18n.format("attribute.superior.name"));
-				}
-			}
-			if (event.getEntityPlayer() != null && event.getToolTip() != null && event.getFlags() != null) {
-				if (event.getItemStack().getItem() instanceof ItemArmor
-						&& (!(event.getItemStack().getItem() instanceof ItemArmourBaseMFR)
-						|| ClientItemsMFR.showSpecials(event.getItemStack(), event.getEntityPlayer().world, event.getToolTip(), event.getFlags()))) {
-					addArmourDR(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
-				}
-			}
-			if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
-				showCrafterTooltip(event.getItemStack(), event.getToolTip());
-			}
-			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey(CRAFTED_BY_NAME_TAG)) {
-				String name = event.getItemStack().getTagCompound().getString(CRAFTED_BY_NAME_TAG);
-				boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
-
-				event.getToolTip().add((special ? TextFormatting.GREEN : "")
-						+ I18n.format("attribute.mfcraftedbyname.name")
-						+ ": " + name
-						+ TextFormatting.GRAY);
-			}
-			WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
-			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != null) {
-				event.getToolTip().add(I18n.format("weaponclass." + WC.name.toLowerCase()));
-				float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
-				if (skillMod > 100)
-					event.getToolTip().add(I18n.format("rpg.skillmod") + ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
-			}
-		}
-	}
-
 	private void displayWeaponTraits(float[] ratio, List<String> list) {
 		int cutting = (int) (ratio[0] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
 		int piercing = (int) (ratio[2] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
@@ -675,16 +539,6 @@ public class EventManagerMFR {
 			}
 			list.add(s);
 		}
-	}
-
-	private void showCrafterTooltip(ItemStack tool, List<String> list) {
-		String toolType = ToolHelper.getCrafterTool(tool);
-		int tier = ToolHelper.getCrafterTier(tool);
-		float efficiency = ToolHelper.getCrafterEfficiency(tool);
-
-		list.add(I18n.format("attribute.mfcrafttool.name") + ": " + I18n.format("tooltype." + toolType));
-		list.add(I18n.format("attribute.mfcrafttier.name") + ": " + tier);
-		list.add(I18n.format("attribute.mfcrafteff.name") + ": " + efficiency);
 	}
 
 	@SubscribeEvent
