@@ -17,7 +17,7 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreborn:plank"
+      "item": "minefantasyreborn:timber"
     }
   },
   "result": {
@@ -32,6 +32,6 @@
         }
       }
     },
-    "item": "minefantasyreborn:plank_cut"
+    "item": "minefantasyreborn:timber_cut"
   }
 }

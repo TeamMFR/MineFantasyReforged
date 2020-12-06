@@ -7,8 +7,8 @@ import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -69,7 +69,7 @@ public class ForgedToolRecipes {
 
     private static void addComponentTools() {
         Item bar = ComponentListMFR.BAR;
-        Item plank = ComponentListMFR.PLANK;
+        Item plank = ComponentListMFR.TIMBER;
         Item strip = ComponentListMFR.LEATHER_STRIP;
         Item rivet = ComponentListMFR.RIVET;
         Item hunk = ComponentListMFR.METAL_HUNK;
@@ -107,7 +107,7 @@ public class ForgedToolRecipes {
 
     private static void addStandardTools() {
         Item bar = ComponentListMFR.BAR;
-        Item plank = ComponentListMFR.PLANK;
+        Item plank = ComponentListMFR.TIMBER;
         Item strip = ComponentListMFR.LEATHER_STRIP;
         Item rivet = ComponentListMFR.RIVET;
 
@@ -159,7 +159,7 @@ public class ForgedToolRecipes {
 
     private static void addStandardCrafters() {
         Item bar = ComponentListMFR.BAR;
-        Item plank = ComponentListMFR.PLANK;
+        Item plank = ComponentListMFR.TIMBER;
         Item strip = ComponentListMFR.LEATHER_STRIP;
         Item rivet = ComponentListMFR.RIVET;
 
@@ -197,7 +197,7 @@ public class ForgedToolRecipes {
 
     private static void addStandardWeapons() {
         Item bar = ComponentListMFR.BAR;
-        Item plank = ComponentListMFR.PLANK;
+        Item plank = ComponentListMFR.TIMBER;
         Item strip = ComponentListMFR.LEATHER_STRIP;
         Item rivet = ComponentListMFR.RIVET;
 

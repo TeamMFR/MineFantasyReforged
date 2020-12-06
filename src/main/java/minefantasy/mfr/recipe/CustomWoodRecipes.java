@@ -7,11 +7,10 @@ import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.block.decor.BlockWoodDecor;
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.init.SoundsMFR;
-import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import net.minecraft.init.SoundEvents;
+import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.item.ItemComponentMFR;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
 
@@ -33,9 +32,9 @@ public class CustomWoodRecipes {
     }
 
     private static void addRecipes(CustomMaterial material) {
-        ItemStack timber = ComponentListMFR.PLANK.construct(material.name);
-        ItemStack cutPlank = ((ItemComponentMFR) ComponentListMFR.PLANK_CUT).construct(material.name);
-        ItemStack woodpane = ((ItemComponentMFR) ComponentListMFR.PLANK_PANE).construct(material.name);
+        ItemStack timber = ComponentListMFR.TIMBER.construct(material.name);
+        ItemStack cutPlank = ((ItemComponentMFR) ComponentListMFR.TIMBER_CUT).construct(material.name);
+        ItemStack woodpane = ((ItemComponentMFR) ComponentListMFR.TIMBER_PANE).construct(material.name);
 
         ItemStack result;
         int time;

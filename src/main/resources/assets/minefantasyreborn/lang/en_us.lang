@@ -315,7 +315,7 @@ item.world_gen_placer=World Gen Placer
 
 # COMMODITY
 
-item.plank.name=Timber
+item.timber.name=Timber
 item.plant_oil.name=Plant Oil
 item.plankRefined.name=Refined Timber
 item.rivet.name=Rivets
@@ -1151,8 +1151,8 @@ food.stat.cure.poison=Cure Poison
 
 # CONSTRUCTION
 item.hinge.name=Hinge
-item.commodity_plank_cut.name=Cut %1$s Timber
-item.commodity_plank_pane.name=%1$s Timber Pane
+item.commodity_timber_cut.name=Cut %1$s Timber
+item.commodity_timber_pane.name=%1$s Timber Pane
 
 
 # RPG

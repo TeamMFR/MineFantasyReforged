@@ -379,7 +379,7 @@ public class KnowledgeListMFR {
         repair_ornate = (new InformationBase("repair_ornate", 12, 2, 3, BlockListMFR.REPAIR_ORNATE, repair_advanced))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
 
-        constructionPts = (new InformationBase("constructionPts", 0, 0, 0, ComponentListMFR.PLANK_CUT,
+        constructionPts = (new InformationBase("constructionPts", 0, 0, 0, ComponentListMFR.TIMBER_CUT,
                 (InformationBase) null)).registerStat().setPage(construction).setUnlocked();
         reinforced_stone = (new InformationBase("reinforced_stone", 1, 0, 0, BlockListMFR.REINFORCED_STONE,
                 (InformationBase) null)).registerStat().setPage(construction).setUnlocked();

@@ -2,7 +2,6 @@ package minefantasy.mfr.init;
 
 import minefantasy.mfr.api.knowledge.InformationBase;
 import minefantasy.mfr.api.knowledge.ResearchArtefacts;
-import minefantasy.mfr.item.ItemArtefact;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,7 +38,7 @@ public class ArtefactListMFR {
         add(KnowledgeListMFR.bombCrystal, Items.DIAMOND);
         add(KnowledgeListMFR.mineCrystal, Items.DIAMOND);
 
-        add(KnowledgeListMFR.crossbows, Items.STRING, ComponentListMFR.PLANK, Blocks.LEVER);
+        add(KnowledgeListMFR.crossbows, Items.STRING, ComponentListMFR.TIMBER, Blocks.LEVER);
         add(KnowledgeListMFR.crossShaftAdvanced, ComponentListMFR.TUNGSTEN_GEARS);
         add(KnowledgeListMFR.crossHeadAdvanced, ComponentListMFR.TUNGSTEN_GEARS);
         add(KnowledgeListMFR.crossAmmo, ComponentListMFR.TUNGSTEN_GEARS);

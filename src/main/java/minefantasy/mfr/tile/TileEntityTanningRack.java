@@ -124,7 +124,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
                     updateRecipe();
                     if (isShabbyRack() && rand.nextInt(10) == 0 && !world.isRemote) {
                         for (int a = 0; a < rand.nextInt(10); a++) {
-                            ItemStack plank = ComponentListMFR.PLANK.construct("ScrapWood");
+                            ItemStack plank = ComponentListMFR.TIMBER.construct("ScrapWood");
                             world.playSound(player, pos.add(0.5D,0.5D, 0.5D), SoundEvents.ENTITY_ZOMBIE_BREAK_DOOR_WOOD, SoundCategory.AMBIENT, 1.0F, 1.0F);
                             dropItem(plank);
                         }

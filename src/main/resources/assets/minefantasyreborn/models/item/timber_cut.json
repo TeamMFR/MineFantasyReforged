@@ -1,6 +1,6 @@
 ﻿{
     "parent": "item/generated",
     "textures": {
-        "layer0": "minefantasyreborn:items/plank_pane"
+        "layer0": "minefantasyreborn:items/timber_cut"
     }
 }

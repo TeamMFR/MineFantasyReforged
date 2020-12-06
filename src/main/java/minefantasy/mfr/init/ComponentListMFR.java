@@ -70,7 +70,7 @@ public class ComponentListMFR {
 	
 	public static Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 
-	public static ItemComponentMFR PLANK = Utils.nullValue();
+	public static ItemComponentMFR TIMBER = Utils.nullValue();
 
 	public static Item VINE = Utils.nullValue();
 	public static Item SHARP_ROCK = Utils.nullValue();
@@ -191,8 +191,8 @@ public class ComponentListMFR {
 	public static Item GOLD_COIN = Utils.nullValue();
 
 	public static Item HINGE = Utils.nullValue();
-	public static Item PLANK_CUT = Utils.nullValue();
-	public static Item PLANK_PANE = Utils.nullValue();
+	public static Item TIMBER_CUT = Utils.nullValue();
+	public static Item TIMBER_PANE = Utils.nullValue();
 
 	public static Item COGWORK_PULLEY = Utils.nullValue();
 
@@ -240,9 +240,9 @@ public class ComponentListMFR {
 
 		COMPOSITE_ALLOY_INGOT = new ItemComponentMFR("composite_alloy_ingot", 1);
 
-		PLANK = new ItemComponentMFR("plank").setCustom(1, "wood").setStoragePlacement("plank","plank");
-		PLANK_CUT = new ItemComponentMFR("plank_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
-		PLANK_PANE = new ItemComponentMFR("plank_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
+		TIMBER = new ItemComponentMFR("timber").setCustom(1, "wood").setStoragePlacement("plank","plank");
+		TIMBER_CUT = new ItemComponentMFR("timber_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
+		TIMBER_PANE = new ItemComponentMFR("timber_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
 
 		VINE = new ItemComponentMFR("vine", -1);
 		SHARP_ROCK = new ItemComponentMFR("sharp_rock", -1);
@@ -414,9 +414,9 @@ public class ComponentListMFR {
 
 		registry.register(COMPOSITE_ALLOY_INGOT);
 
-		registry.register(PLANK);
-		registry.register(PLANK_CUT);
-		registry.register(PLANK_PANE);
+		registry.register(TIMBER);
+		registry.register(TIMBER_CUT);
+		registry.register(TIMBER_PANE);
 
 		registry.register(VINE);
 		registry.register(SHARP_ROCK);

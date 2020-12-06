@@ -20,7 +20,7 @@
       "item": "minefantasyreborn:plant_oil"
     },
     "L": {
-      "item": "minefantasyreborn:plank"
+      "item": "minefantasyreborn:timber"
     }
   },
   "result": {
@@ -35,6 +35,6 @@
         }
       }
     },
-    "item": "minefantasyreborn:plank"
+    "item": "minefantasyreborn:timber"
   }
 }

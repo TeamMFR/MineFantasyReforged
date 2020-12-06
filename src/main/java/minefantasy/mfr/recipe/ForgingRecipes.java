@@ -1,24 +1,24 @@
 package minefantasy.mfr.recipe;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.init.LeatherArmourListMFR;
+import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.LeatherArmourListMFR;
+import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.HashMap;
 
@@ -268,7 +268,7 @@ public class ForgingRecipes {
         KnowledgeListMFR.mineCaseIronR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.MINE_CASING_IRON, 2), "bombIron", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  T  ", "  P  ", " IRI ", "IR RI", 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'P', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 'I', ironHunk, 'R', ComponentListMFR.RIVET);
 
         time = 5;
-        KnowledgeListMFR.bombarrowR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.BOMB_CASING_ARROW), "bombarrow", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "   IR", "FPITI", "   IR", 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'I', ironHunk, 'R', Items.REDSTONE, 'P', ComponentListMFR.PLANK.construct("RefinedWood"), 'F', ComponentListMFR.FLETCHING);
+        KnowledgeListMFR.bombarrowR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.BOMB_CASING_ARROW), "bombarrow", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "   IR", "FPITI", "   IR", 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'I', ironHunk, 'R', Items.REDSTONE, 'P', ComponentListMFR.TIMBER.construct("RefinedWood"), 'F', ComponentListMFR.FLETCHING);
         KnowledgeListMFR.bombBoltR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.BOMB_CASING_BOLT), "bombarrow", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  IR", "FITI", "  IR", 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'I', ironHunk, 'R', Items.REDSTONE, 'F', ComponentListMFR.FLETCHING);
 
         material = BaseMaterialMFR.BLACK_STEEL;
@@ -278,7 +278,7 @@ public class ForgingRecipes {
         KnowledgeListMFR.mineCaseObsidianR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.MINE_CASING_OBSIDIAN, 2), "mineObsidian", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  T  ", "  P  ", " IRI ", "IRORI", 'T', ToolListMFR.ENGIN_ANVIL_TOOLS, 'O', Blocks.OBSIDIAN, 'P', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 'I', obsidianHunk, 'R', ComponentListMFR.RIVET);
         time = 15;
         material = BaseMaterialMFR.STEEL;
-        KnowledgeListMFR.crossBayonetR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.CROSSBOW_BAYONET), "crossBayonet", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "R R I", "PIII ", 'P', ComponentListMFR.PLANK.construct("RefinedWood"), 'I', ironHunk, 'R', ComponentListMFR.RIVET);
+        KnowledgeListMFR.crossBayonetR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ComponentListMFR.CROSSBOW_BAYONET), "crossBayonet", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "R R I", "PIII ", 'P', ComponentListMFR.TIMBER.construct("RefinedWood"), 'I', ironHunk, 'R', ComponentListMFR.RIVET);
 
         Salvage.addSalvage(ToolListMFR.ENGIN_ANVIL_TOOLS, steelHunk, steelHunk, steelHunk, steelHunk, new ItemStack(ComponentListMFR.LEATHER_STRIP, 4));
 
@@ -299,23 +299,23 @@ public class ForgingRecipes {
 
         Salvage.addSalvage(ComponentListMFR.BOMB_CASING_IRON, ironHunk, ironHunk);
         Salvage.addSalvage(ComponentListMFR.MINE_CASING_IRON, ironHunk, ironHunk, ComponentListMFR.RIVET, iron);
-        Salvage.addSalvage(ComponentListMFR.BOMB_CASING_ARROW, ironHunk, ironHunk, ironHunk, ironHunk, new ItemStack(Items.REDSTONE, 2), ComponentListMFR.PLANK.construct("RefinedWood"), ComponentListMFR.FLETCHING);
+        Salvage.addSalvage(ComponentListMFR.BOMB_CASING_ARROW, ironHunk, ironHunk, ironHunk, ironHunk, new ItemStack(Items.REDSTONE, 2), ComponentListMFR.TIMBER.construct("RefinedWood"), ComponentListMFR.FLETCHING);
 
         Salvage.addSalvage(ComponentListMFR.BOMB_CASING_BOLT, ironHunk, ironHunk, ironHunk, ironHunk, new ItemStack(Items.REDSTONE, 2), ComponentListMFR.FLETCHING);
 
         Salvage.addSalvage(ComponentListMFR.BOMB_CASING_OBSIDIAN, obsidianHunk, obsidianHunk, new ItemStack(ComponentListMFR.RIVET, 2));
         Salvage.addSalvage(ComponentListMFR.MINE_CASING_OBSIDIAN, obsidianHunk, obsidianHunk, iron, ComponentListMFR.RIVET);
 
-        Salvage.addSalvage(ComponentListMFR.CROSSBOW_BAYONET, ironHunk, ironHunk, ironHunk, ironHunk, ComponentListMFR.PLANK.construct("RefinedWood"), new ItemStack(ComponentListMFR.RIVET, 2));
+        Salvage.addSalvage(ComponentListMFR.CROSSBOW_BAYONET, ironHunk, ironHunk, ironHunk, ironHunk, ComponentListMFR.TIMBER.construct("RefinedWood"), new ItemStack(ComponentListMFR.RIVET, 2));
     }
 
     private static void addConstruction() {
         BaseMaterialMFR material = BaseMaterialMFR.TIN;
         ItemStack tin = ComponentListMFR.bar("Tin");
         int time = 10;
-        KnowledgeListMFR.brushRecipe = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ToolListMFR.PAINT_BRUSH), "paint_brush", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "W", "I", "P", 'W', Blocks.WOOL, 'I', tin, 'P', ComponentListMFR.PLANK.construct("RefinedWood"));
+        KnowledgeListMFR.brushRecipe = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(ToolListMFR.PAINT_BRUSH), "paint_brush", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "W", "I", "P", 'W', Blocks.WOOL, 'I', tin, 'P', ComponentListMFR.TIMBER.construct("RefinedWood"));
 
-        Salvage.addSalvage(ToolListMFR.PAINT_BRUSH, Blocks.WOOL, tin, ComponentListMFR.PLANK.construct("RefinedWood"));
+        Salvage.addSalvage(ToolListMFR.PAINT_BRUSH, Blocks.WOOL, tin, ComponentListMFR.TIMBER.construct("RefinedWood"));
     }
 
     private static void addCogworkParts() {

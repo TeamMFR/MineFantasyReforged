@@ -72,7 +72,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
             return;
         }
 
-        if (this != ComponentListMFR.PLANK) {
+        if (this != ComponentListMFR.TIMBER) {
             return;
         }
 
@@ -91,7 +91,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : wood) {
                 items.add(this.construct(customMat.name));
-                items.add(((ItemComponentMFR) ComponentListMFR.PLANK_PANE).construct(customMat.name));
+                items.add(((ItemComponentMFR) ComponentListMFR.TIMBER_PANE).construct(customMat.name));
             }
             for (CustomMaterial customMat : metal) {
                 items.add(ComponentListMFR.bar(customMat.name));

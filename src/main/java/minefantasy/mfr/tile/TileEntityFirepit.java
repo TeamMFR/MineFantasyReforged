@@ -8,7 +8,6 @@ import minefantasy.mfr.api.helpers.Functions;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.block.crafting.BlockFirepit;
-import minefantasy.mfr.block.refining.BlockForge;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
@@ -67,10 +66,10 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 			Item i = input.getItem();
 			if (i == Items.STICK)
 				return 600;// 30Sec
-			if (i == ComponentListMFR.PLANK || i == ComponentListMFR.PLANK_CUT) {
+			if (i == ComponentListMFR.TIMBER || i == ComponentListMFR.TIMBER_CUT) {
 				return (int) (200 * CustomToolHelper.getBurnModifier(input));
 			}
-			if (i == ComponentListMFR.PLANK_PANE) {
+			if (i == ComponentListMFR.TIMBER_PANE) {
 				return (int) (600 * CustomToolHelper.getBurnModifier(input));
 			}
 

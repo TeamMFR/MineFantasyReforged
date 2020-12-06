@@ -17,10 +17,10 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreborn:plank_cut"
+      "item": "minefantasyreborn:timber_cut"
     },
     "L": {
-      "item": "minefantasyreborn:plank"
+      "item": "minefantasyreborn:timber"
     },
     "N": {
       "item": "minefantasyreborn:nail"
@@ -38,6 +38,6 @@
         }
       }
     },
-    "item": "minefantasyreborn:plank_pane"
+    "item": "minefantasyreborn:timber_pane"
   }
 }

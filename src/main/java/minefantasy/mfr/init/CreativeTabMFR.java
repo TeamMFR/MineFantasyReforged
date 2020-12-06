@@ -45,7 +45,7 @@ public final class CreativeTabMFR extends CreativeTabs {
             case 6:
                 return ToolListMFR.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
             case 7:
-                return ComponentListMFR.PLANK.construct("OakWood");
+                return ComponentListMFR.TIMBER.construct("OakWood");
             case 8:
                 return CustomToolListMFR.STANDARD_HANDPICK.construct("steel", "OakWood");
             case 9:

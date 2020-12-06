@@ -142,7 +142,7 @@
 //
 //	public static final Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 //
-//	public static final ItemComponentMFR PLANK = Utils.nullValue();
+//	public static final ItemComponentMFR TIMBER = Utils.nullValue();
 //	public static final Item VINE = Utils.nullValue();
 //	public static final Item SHARP_ROCK = Utils.nullValue();
 //
@@ -257,8 +257,8 @@
 //	public static final Item GOLD_COIN = Utils.nullValue();
 //
 //	public static final Item HINGE = Utils.nullValue();
-//	public static final Item PLANK_CUT = Utils.nullValue();
-//	public static final Item PLANK_PANE = Utils.nullValue();
+//	public static final Item TIMBER_CUT = Utils.nullValue();
+//	public static final Item TIMBER_PANE = Utils.nullValue();
 //
 //	public static final Item COGWORK_PULLEY = Utils.nullValue();
 //

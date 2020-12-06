@@ -235,9 +235,9 @@ public class ItemColorsMFR {
 
 
 		/// COMMODITIES
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_CUT);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_PANE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER_CUT);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER_PANE);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);
 
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemHeated) stack.getItem()).getColorFromItemStack(stack) : 0xFFFFFF), ComponentListMFR.HOT_ITEM);
