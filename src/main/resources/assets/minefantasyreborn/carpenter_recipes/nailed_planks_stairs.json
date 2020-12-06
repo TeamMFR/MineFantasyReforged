@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "refined_planks",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 5,
+  "recipe_hammer": 1,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.hammercarpenter",
+  "pattern": [
+    "N   ",
+    "P   ",
+    "PP  ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank"
+    },
+    "N": {
+      "item": "minefantasyreborn:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:nailed_planks_stairs"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "craftArmourBasic",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 40,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "L L ",
+    "EEE ",
+    "TET ",
+    "    "
+  ],
+  "key": {
+    "T": {
+      "item": "minefantasyreborn:thread"
+    },
+    "E": {
+      "item": "minecraft:leather"
+    },
+    "L": {
+      "item": "minefantasyreborn:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:rough_leather_chest"
+  }
+}

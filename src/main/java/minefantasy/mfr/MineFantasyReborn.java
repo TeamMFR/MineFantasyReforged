@@ -194,6 +194,9 @@ public class MineFantasyReborn {
 		MetalMaterial.addHeatables();
 
 		PROXY.postInit(postEvent);
+
+		// enabling this will dump all carpenter recipes to jsons! see RecipeExporter for path
+		// RecipeExporter exporter = new RecipeExporter();
 	}
 
 	@EventHandler

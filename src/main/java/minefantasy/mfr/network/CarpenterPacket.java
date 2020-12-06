@@ -1,7 +1,7 @@
 package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -16,7 +16,7 @@ public class CarpenterPacket extends PacketMF {
     private String research;
     private TileEntity tileEntity;
 
-    public CarpenterPacket(TileEntityCarpenterMFR tile) {
+    public CarpenterPacket(TileEntityCarpenter tile) {
         tileEntity = tile;
         coords = tile.getPos();
         resultName = tile.getResultName();
@@ -58,8 +58,8 @@ public class CarpenterPacket extends PacketMF {
 
     @Override
     protected void execute(EntityPlayer player) {
-        if (tileEntity != null && tileEntity instanceof TileEntityCarpenterMFR) {
-            TileEntityCarpenterMFR carpenter = (TileEntityCarpenterMFR) tileEntity;
+        if (tileEntity != null && tileEntity instanceof TileEntityCarpenter) {
+            TileEntityCarpenter carpenter = (TileEntityCarpenter) tileEntity;
             carpenter.resName = resultName;
             carpenter.setToolType(toolNeeded);
             carpenter.setResearch(research);

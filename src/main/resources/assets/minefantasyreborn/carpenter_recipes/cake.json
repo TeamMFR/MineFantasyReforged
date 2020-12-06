@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "bread",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "I   ",
+    "C   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreborn:cake_simple_uniced"
+    },
+    "I": {
+      "item": "minefantasyreborn:icing"
+    }
+  },
+  "result": {
+    "item": "minecraft:cake"
+  }
+}

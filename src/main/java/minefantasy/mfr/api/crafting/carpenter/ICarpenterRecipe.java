@@ -27,9 +27,11 @@ public interface ICarpenterRecipe {
 
     int getRecipeHammer();
 
-    float getExperiance();
+    float getExperience();
 
     int getAnvil();
+
+    int getBlockTier();
 
     boolean outputHot();
 

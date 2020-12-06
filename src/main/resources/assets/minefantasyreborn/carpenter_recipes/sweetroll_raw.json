@@ -1,0 +1,38 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "sweetroll",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 5,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    " J  ",
+    "FES ",
+    "BBB ",
+    "    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:berries"
+    },
+    "S": {
+      "item": "minefantasyreborn:sugar_pot"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "F": {
+      "item": "minefantasyreborn:flour"
+    },
+    "J": {
+      "item": "minefantasyreborn:jug_milk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:sweetroll_raw"
+  }
+}

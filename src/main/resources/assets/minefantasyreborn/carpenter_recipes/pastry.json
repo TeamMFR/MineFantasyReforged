@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    " S  ",
+    "FEF ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreborn:salt"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "F": {
+      "item": "minefantasyreborn:flour"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:pastry"
+  }
+}

@@ -4,7 +4,9 @@ import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,11 +44,13 @@ public class CraftingManagerCarpenter {
      * Adds a recipe. See spreadsheet on first page for details.
      */
     public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, Object... input) {
-        return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 0, input);
+//        return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 0, input);
+		return null;
     }
 
     public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, Object... input) {
-        return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 1, input);
+//        return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 1, input);
+		return null;
     }
 
     /**
@@ -144,7 +148,7 @@ public class CraftingManagerCarpenter {
         return recipe;
     }
 
-    public ItemStack findMatchingRecipe(CarpenterCraftMatrix matrix) {
+    public ItemStack findMatchingRecipe(CarpenterCraftMatrix matrix, World world) {
         int var2 = 0;
         ItemStack var3 = ItemStack.EMPTY;
         ItemStack var4 = ItemStack.EMPTY;
@@ -194,7 +198,7 @@ public class CraftingManagerCarpenter {
         }
     }
 
-    public ItemStack findMatchingRecipe(ICarpenter bench, CarpenterCraftMatrix matrix) {
+    public ItemStack findMatchingRecipe(ICarpenter bench, CarpenterCraftMatrix matrix, World world) {
         int time;
         int anvil;
         boolean hot;
@@ -241,8 +245,9 @@ public class CraftingManagerCarpenter {
             while (recipesIterator.hasNext()) {
                 ICarpenterRecipe rec = (ICarpenterRecipe) recipesIterator.next();
 
-                if (rec.matches(matrix)) {
+                if (((IRecipe) rec).matches(matrix, world)) {
                     iCarpenterRecipe = rec;
+                    break;
                 }
             }
 

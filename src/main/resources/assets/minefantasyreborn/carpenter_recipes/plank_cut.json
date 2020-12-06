@@ -1,0 +1,37 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "saw",
+  "is_tool_recipe": true,
+  "block_tier": -1,
+  "craft_time": 2,
+  "recipe_hammer": 0,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.sawcarpenter",
+  "pattern": [
+    "P   ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank"
+    }
+  },
+  "result": {
+    "nbt": {
+      "tagMap": {
+        "mf_custom_materials": {
+          "tagMap": {
+            "main_metal": {
+              "data": "scrapwood"
+            }
+          }
+        }
+      }
+    },
+    "item": "minefantasyreborn:plank_cut"
+  }
+}

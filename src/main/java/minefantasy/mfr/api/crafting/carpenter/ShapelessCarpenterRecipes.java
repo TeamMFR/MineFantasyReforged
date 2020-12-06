@@ -138,13 +138,18 @@ public class ShapelessCarpenterRecipes implements ICarpenterRecipe {
     }
 
     @Override
-    public float getExperiance() {
+    public float getExperience() {
         return this.recipeExperiance;
     }
 
     @Override
     public int getAnvil() {
         return this.blockTier;
+    }
+
+    @Override
+    public int getBlockTier() {
+        return blockTier;
     }
 
     @Override

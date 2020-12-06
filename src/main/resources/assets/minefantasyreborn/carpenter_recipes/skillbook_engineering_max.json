@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 1,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "T   ",
+    "S   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreborn:skillbook_engineering"
+    },
+    "T": {
+      "item": "minefantasyreborn:talisman_greater"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:skillbook_engineering_max"
+  }
+}

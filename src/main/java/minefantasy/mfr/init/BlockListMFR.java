@@ -73,7 +73,7 @@ import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import minefantasy.mfr.tile.TileEntityBombBench;
 import minefantasy.mfr.tile.TileEntityBombPress;
-import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityChimney;
 import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.tile.TileEntityCrossbowBench;
@@ -642,7 +642,7 @@ public class BlockListMFR {
 		registry.register(ANVIL_RED_STEEL);
 		registerTile(TileEntityAnvilMFR.class, "anvil_tile");
 		registry.register(CARPENTER);
-		registerTile(TileEntityCarpenterMFR.class, "carpenter_tile");
+		registerTile(TileEntityCarpenter.class, "carpenter_tile");
 		registry.register(BOMB_BENCH);
 		registerTile(TileEntityBombBench.class, "bomb_bench_tile");
 		registry.register(CROSSBOW_BENCH);

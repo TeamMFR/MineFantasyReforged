@@ -1,0 +1,38 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "cogArmour",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 150,
+  "recipe_hammer": 4,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.twistbolt",
+  "pattern": [
+    "BPB ",
+    "ITI ",
+    "BRB ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:piston"
+    },
+    "B": {
+      "item": "minefantasyreborn:bolt"
+    },
+    "R": {
+      "item": "minefantasyreborn:iron_frame"
+    },
+    "T": {
+      "item": "minefantasyreborn:tungsten_gears"
+    },
+    "I": {
+      "item": "minefantasyreborn:iron_strut"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:cogwork_shaft"
+  }
+}

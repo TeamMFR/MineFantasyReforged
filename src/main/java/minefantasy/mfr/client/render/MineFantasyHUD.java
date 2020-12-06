@@ -18,7 +18,7 @@ import minefantasy.mfr.item.gadget.IScope;
 import minefantasy.mfr.item.tool.advanced.ItemMattock;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.tile.TileEntityAnvilMFR;
-import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.client.Minecraft;
@@ -103,8 +103,8 @@ public class MineFantasyHUD extends Gui {
                 if (tile instanceof TileEntityAnvilMFR) {
                     this.renderCraftMetre(world, player, (TileEntityAnvilMFR) tile);
                 }
-                if (tile instanceof TileEntityCarpenterMFR) {
-                    this.renderCraftMetre(world, player, (TileEntityCarpenterMFR) tile);
+                if (tile instanceof TileEntityCarpenter) {
+                    this.renderCraftMetre(world, player, (TileEntityCarpenter) tile);
                 }
                 if (tile instanceof TileEntityTanningRack) {
                     this.renderCraftMetre(world, player, (TileEntityTanningRack) tile);
@@ -421,7 +421,7 @@ public class MineFantasyHUD extends Gui {
         GL11.glPopMatrix();
     }
 
-    private void renderCraftMetre(World world, EntityPlayer player, TileEntityCarpenterMFR tile) {
+    private void renderCraftMetre(World world, EntityPlayer player, TileEntityCarpenter tile) {
         boolean knowsCraft = tile.doesPlayerKnowCraft(player);
         GL11.glPushMatrix();
         ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
@@ -439,6 +439,7 @@ public class MineFantasyHUD extends Gui {
         mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
+        boolean test = !"adfs".equalsIgnoreCase("");
         if (knowsCraft && !tile.resName.equalsIgnoreCase("") && tile.getToolNeeded() != null) {
             boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getToolNeeded(),
                     tile.getToolTierNeeded());

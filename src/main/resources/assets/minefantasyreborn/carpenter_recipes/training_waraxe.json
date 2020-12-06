@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 30,
+  "recipe_hammer": 1,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.hammercarpenter",
+  "pattern": [
+    " PP ",
+    "LLPN",
+    "  P ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:planks",
+      "data": 32767
+    },
+    "L": {
+      "item": "minefantasyreborn:plank"
+    },
+    "N": {
+      "item": "minefantasyreborn:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:training_waraxe"
+  }
+}

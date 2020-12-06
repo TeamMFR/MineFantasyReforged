@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "bombs",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 4,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "R   ",
+    "C   ",
+    "T   ",
+    "    "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minefantasyreborn:coal_dust"
+    },
+    "T": {
+      "item": "minefantasyreborn:thread"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bomb_fuse",
+    "count": 8
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "bandageadv",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 20,
+  "recipe_hammer": 2,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "T   ",
+    "L   ",
+    "B   ",
+    "    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bandage_wool"
+    },
+    "T": {
+      "item": "minefantasyreborn:thread"
+    },
+    "L": {
+      "item": "minefantasyreborn:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bandage_tough"
+  }
+}

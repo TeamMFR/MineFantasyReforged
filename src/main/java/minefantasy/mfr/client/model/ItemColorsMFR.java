@@ -236,6 +236,7 @@ public class ItemColorsMFR {
 
 		/// COMMODITIES
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_CUT);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLANK_PANE);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);
 

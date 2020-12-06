@@ -1,0 +1,38 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "advforge",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 400,
+  "recipe_hammer": 4,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.twistbolt",
+  "pattern": [
+    " E  ",
+    "IRRI",
+    "PPPP",
+    "BBBB"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plate"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "B": {
+      "item": "minefantasyreborn:bolt"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "I": {
+      "item": "minefantasyreborn:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:forge_metal"
+  }
+}

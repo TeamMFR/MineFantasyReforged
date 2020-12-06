@@ -5,7 +5,7 @@ import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -16,10 +16,10 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiCarpenterMF extends GuiContainer {
-    private TileEntityCarpenterMFR tile;
+    private TileEntityCarpenter tile;
     private int regularXSize = 176;
 
-    public GuiCarpenterMF(ContainerBase container, TileEntityCarpenterMFR tile) {
+    public GuiCarpenterMF(ContainerBase container, TileEntityCarpenter tile) {
         super(container);
         this.xSize = 195;
         this.ySize = 240;

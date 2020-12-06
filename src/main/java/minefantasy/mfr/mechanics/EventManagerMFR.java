@@ -44,10 +44,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainerCreative;
-import net.minecraft.client.gui.inventory.GuiInventory;
-import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -80,7 +76,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -89,8 +84,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -111,8 +104,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
 public class EventManagerMFR {
 
@@ -644,8 +638,8 @@ public class EventManagerMFR {
 			if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
 				showCrafterTooltip(event.getItemStack(), event.getToolTip());
 			}
-			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey("MF_CraftedByName")) {
-				String name = event.getItemStack().getTagCompound().getString("MF_CraftedByName");
+			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey(CRAFTED_BY_NAME_TAG)) {
+				String name = event.getItemStack().getTagCompound().getString(CRAFTED_BY_NAME_TAG);
 				boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
 
 				event.getToolTip().add((special ? TextFormatting.GREEN : "")

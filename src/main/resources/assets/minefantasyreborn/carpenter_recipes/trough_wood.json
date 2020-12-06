@@ -1,0 +1,41 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": true,
+  "block_tier": -1,
+  "craft_time": 7,
+  "recipe_hammer": 0,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.hammercarpenter",
+  "pattern": [
+    "P P ",
+    "PPP ",
+    "NNN ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank",
+      "data": 32767
+    },
+    "N": {
+      "item": "minefantasyreborn:nail"
+    }
+  },
+  "result": {
+    "nbt": {
+      "tagMap": {
+        "mf_custom_materials": {
+          "tagMap": {
+            "main_metal": {
+              "data": "scrapwood"
+            }
+          }
+        }
+      }
+    },
+    "item": "minefantasyreborn:trough_wood"
+  }
+}

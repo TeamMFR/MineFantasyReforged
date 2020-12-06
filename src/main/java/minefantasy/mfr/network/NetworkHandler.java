@@ -22,7 +22,7 @@ import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import minefantasy.mfr.tile.TileEntityBombBench;
-import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityCrossbowBench;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.tile.TileEntityForge;
@@ -178,7 +178,7 @@ public class NetworkHandler implements IGuiHandler {
 				case GUI_BIG_FURNANCE:
 					return ((TileEntityBigFurnace) tileEntity).createContainer(player);
 				case GUI_CARPENTER_BENCH:
-					return ((TileEntityCarpenterMFR) tileEntity).createContainer(player);
+					return ((TileEntityCarpenter) tileEntity).createContainer(player);
 				case GUI_BOMB_BENCH:
 					return ((TileEntityBombBench) tileEntity).createContainer(player);
 				case GUI_RESEARCH_BENCH:
@@ -219,7 +219,7 @@ public class NetworkHandler implements IGuiHandler {
 				case GUI_BIG_FURNANCE:
 					return new GuiBigFurnace(((TileEntityBigFurnace) tileEntity).createContainer(player), (TileEntityBigFurnace) tileEntity);
 				case GUI_CARPENTER_BENCH:
-					return new GuiCarpenterMF(((TileEntityCarpenterMFR) tileEntity).createContainer(player), (TileEntityCarpenterMFR) tileEntity);
+					return new GuiCarpenterMF(((TileEntityCarpenter) tileEntity).createContainer(player), (TileEntityCarpenter) tileEntity);
 				case GUI_BOMB_BENCH:
 					return new GuiBombBench(((TileEntityBombBench) tileEntity).createContainer(player), (TileEntityBombBench) tileEntity);
 				case GUI_RESEARCH_BENCH:

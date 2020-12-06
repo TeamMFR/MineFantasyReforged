@@ -1,0 +1,38 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "crossbows",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 200,
+  "recipe_hammer": 0,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.twistbolt",
+  "pattern": [
+    " I  ",
+    "PSP ",
+    "BCB ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank"
+    },
+    "B": {
+      "item": "minefantasyreborn:bolt"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "minefantasyreborn:carpenter_bench"
+    },
+    "I": {
+      "item": "minefantasyreborn:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:crossbow_bench"
+  }
+}

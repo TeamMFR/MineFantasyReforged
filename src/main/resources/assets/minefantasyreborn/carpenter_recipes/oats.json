@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 20,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "J   ",
+    "W   ",
+    "H   ",
+    "B   "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bowl"
+    },
+    "W": {
+      "item": "minecraft:wheat"
+    },
+    "H": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "J": {
+      "item": "minefantasyreborn:jug_milk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:oats"
+  }
+}

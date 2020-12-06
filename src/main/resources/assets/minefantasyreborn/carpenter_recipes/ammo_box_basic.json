@@ -1,0 +1,46 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "ammo_box",
+  "tool_type": "hammer",
+  "is_tool_recipe": true,
+  "block_tier": -1,
+  "craft_time": 15,
+  "recipe_hammer": 0,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.hammercarpenter",
+  "pattern": [
+    "HPH ",
+    "L L ",
+    "NPN ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank_pane"
+    },
+    "H": {
+      "item": "minefantasyreborn:hinge"
+    },
+    "L": {
+      "item": "minefantasyreborn:plank_cut"
+    },
+    "N": {
+      "item": "minefantasyreborn:nail"
+    }
+  },
+  "result": {
+    "nbt": {
+      "tagMap": {
+        "mf_custom_materials": {
+          "tagMap": {
+            "main_metal": {
+              "data": "scrapwood"
+            }
+          }
+        }
+      }
+    },
+    "item": "minefantasyreborn:ammo_box_basic"
+  }
+}

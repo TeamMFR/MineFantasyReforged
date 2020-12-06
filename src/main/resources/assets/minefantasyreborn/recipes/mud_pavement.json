@@ -6,7 +6,8 @@
 	],
 	"key": {
 		"B": {
-			"item": "minecraft:dirt"
+			"item": "minecraft:dirt",
+			"data": 0
 		}
 	},
 	"result": {

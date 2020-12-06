@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "commodities",
+  "tool_type": "shears",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:entity.sheep.shear",
+  "pattern": [
+    "L   ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:leather"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:leather_strip",
+    "count": 4
+  }
+}

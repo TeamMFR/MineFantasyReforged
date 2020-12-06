@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "craftArmourLight",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 50,
+  "recipe_hammer": 1,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    " W  ",
+    "TRT ",
+    " T  ",
+    "    "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreborn:rough_leather_helmet"
+    },
+    "T": {
+      "item": "minefantasyreborn:thread"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:padded_helmet"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "crossShafts",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 300,
+  "recipe_hammer": 2,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.hammercarpenter",
+  "pattern": [
+    "NN N",
+    "PPPP",
+    " PPP",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank"
+    },
+    "N": {
+      "item": "minefantasyreborn:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:crossbow_stock_wood"
+  }
+}

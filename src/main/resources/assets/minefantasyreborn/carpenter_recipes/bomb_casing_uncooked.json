@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "bombCeramic",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 2,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    " C  ",
+    "C C ",
+    " C  ",
+    "    "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bomb_casing_uncooked",
+    "count": 2
+  }
+}

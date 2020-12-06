@@ -1,0 +1,41 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "bpress",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 200,
+  "recipe_hammer": 3,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.twistbolt",
+  "pattern": [
+    "BIB ",
+    "RRL ",
+    "OSO ",
+    "    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bolt"
+    },
+    "R": {
+      "item": "minefantasyreborn:bronze_gears"
+    },
+    "S": {
+      "item": "minefantasyreborn:standard_spanner"
+    },
+    "I": {
+      "item": "minefantasyreborn:iron_frame"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "O": {
+      "item": "minefantasyreborn:iron_strut"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bomb_press"
+  }
+}

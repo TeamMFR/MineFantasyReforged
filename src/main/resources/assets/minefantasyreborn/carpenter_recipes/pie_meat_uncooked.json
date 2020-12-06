@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "meatpie",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 150,
+  "recipe_hammer": 2,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    " P  ",
+    "GGG ",
+    " P  ",
+    " I  "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:pastry"
+    },
+    "G": {
+      "item": "minefantasyreborn:generic_meat_mince_cooked"
+    },
+    "I": {
+      "item": "minefantasyreborn:pie_tray"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:pie_meat_uncooked"
+  }
+}

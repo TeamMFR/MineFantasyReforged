@@ -1198,7 +1198,7 @@ item.skillbook_combat_max.desc=Max Weaponry
 
 # KNOWLEDGE INFORMATION
 
-method.workbench=Basic Workbench
+method.workbench=Crafting Table
 method.furnace=Smelting
 method.bloomery=Bloomery
 method.blastfurnace=Blast Furnace

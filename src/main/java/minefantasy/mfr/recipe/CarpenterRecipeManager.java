@@ -9,6 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mfr.config.ConfigCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
 
@@ -26,6 +28,7 @@ import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +42,7 @@ public class CarpenterRecipeManager {
 
 	public static Map<String, IRecipe> loaded = new TreeMap<>();
 
-
+	// TODO: check net.minecraftforge.fml.common.registry.GameRegistry.addShapedRecipe as we should probably register our recipes as proper IRecipes
 
 	public static final CarpenterRecipeManager INSTANCE = new CarpenterRecipeManager();
 
@@ -101,8 +104,6 @@ public class CarpenterRecipeManager {
 
 					Gson gson = new Gson();
 					JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-					System.out.println(jsonObject.entrySet());
-					//					ShapedRecipes recipe = deserialize(p);
 					IRecipe recipe = parseRecipeJson(jsonObject);
 
 					if (!loaded.containsKey(name)) {
@@ -134,15 +135,50 @@ public class CarpenterRecipeManager {
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		String tool_tier = JsonUtils.getString(json, "tool_tier", "none");
+		Float experience = JsonUtils.getFloat(json, "experience", 0F);
 		int craft_time = JsonUtils.getInt(json, "craft_time",0);
+		byte tool_recipe = JsonUtils.getBoolean(json, "is_tool_recipe") ? (byte) 1 : (byte) 0;
 
+		IRecipe recipe = null;
 		if ("crafting_shaped".equals(s)) {
-			return deserialize(json);
+			recipe =  deserialize(json);
 		} else if ("crafting_shapeless".equals(s)) {
-			return deserialize(json);
+			recipe = deserialize(json);
 		} else {
 			throw new JsonSyntaxException("Invalid or unsupported recipe type '" + s + "'");
 		}
+
+		String[] pattern = shrink(patternFromJson(JsonUtils.getJsonArray(json, "pattern")));
+
+		Map<Character, Ingredient> map = deserializeKeyToCharMap(JsonUtils.getJsonObject(json, "key"));
+
+		NonNullList<Ingredient> e = recipe.getIngredients();
+
+		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
+		Object[] o = new Object[] {};
+
+		for (String p : pattern) {
+			if (p.trim().length() > 0) {
+				o = appendValue(o, p);
+			}
+		}
+
+		for ( Map.Entry<Character, Ingredient>  i : map.entrySet()) {
+			if (!Character.isWhitespace(i.getKey())) {
+				o = appendValue(o, i.getKey());
+				o = appendValue(o, i.getValue().getMatchingStacks()[0].getItem());
+			}
+		}
+
+		CraftingManagerCarpenter.getInstance().addRecipe(resultStack, null, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, 0, 0,  craft_time, tool_recipe, o);
+		return recipe;
+	}
+
+	private static Object[] appendValue(Object[] obj, Object newObj) {
+
+		ArrayList<Object> temp = new ArrayList<Object>(Arrays.asList(obj));
+		temp.add(newObj);
+		return temp.toArray();
 	}
 
 	private static String[] patternFromJson(JsonArray jsonArray) {
@@ -243,6 +279,26 @@ public class CarpenterRecipeManager {
 		}
 
 		map.put(" ", Ingredient.EMPTY);
+		return map;
+	}
+
+	// TODO: This should be removed once we deco the old addRecipe methods
+	private static Map<Character, Ingredient> deserializeKeyToCharMap(JsonObject jsonObject) {
+		Map<Character, Ingredient> map = Maps.<Character, Ingredient>newHashMap();
+
+		for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
+			if (((String) entry.getKey()).length() != 1) {
+				throw new JsonSyntaxException("Invalid key entry: '" + (String) entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+			}
+
+			if (" ".equals(entry.getKey())) {
+				throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
+			}
+
+			map.put(entry.getKey().charAt(0), deserializeIngredient(entry.getValue()));
+		}
+
+		map.put(' ', Ingredient.EMPTY);
 		return map;
 	}
 

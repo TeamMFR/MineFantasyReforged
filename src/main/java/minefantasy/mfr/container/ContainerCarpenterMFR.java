@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.tile.TileEntityCarpenterMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
@@ -10,10 +10,10 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerCarpenterMFR extends ContainerBase {
-    private TileEntityCarpenterMFR tile;
+    private TileEntityCarpenter tile;
     private boolean isGuiContainer;
 
-    public ContainerCarpenterMFR(TileEntityCarpenterMFR tile) {
+    public ContainerCarpenterMFR(TileEntityCarpenter tile) {
         isGuiContainer = false;
         this.tile = tile;
         int width = tile.width;
@@ -35,7 +35,7 @@ public class ContainerCarpenterMFR extends ContainerBase {
         }
     }
 
-    public ContainerCarpenterMFR(EntityPlayer player, TileEntityCarpenterMFR tile) {
+    public ContainerCarpenterMFR(EntityPlayer player, TileEntityCarpenter tile) {
         super(player.inventory, tile);
         isGuiContainer = true;
         this.tile = tile;
@@ -74,6 +74,7 @@ public class ContainerCarpenterMFR extends ContainerBase {
                 }
             }
         }
+        tile.sendUpdates();
     }
 
     @Override

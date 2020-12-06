@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "blackpowder",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 2,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "NS  ",
+    "CC  ",
+    "LL  ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreborn:sulfur"
+    },
+    "C": {
+      "item": "minefantasyreborn:coal_dust"
+    },
+    "L": {
+      "item": "minefantasyreborn:clay_pot"
+    },
+    "N": {
+      "item": "minefantasyreborn:nitre"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:blackpowder",
+    "count": 2
+  }
+}

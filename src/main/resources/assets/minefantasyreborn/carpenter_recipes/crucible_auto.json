@@ -1,0 +1,38 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "advcrucible",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 200,
+  "recipe_hammer": 4,
+  "experience": 0,
+  "sound": "minefantasyreborn:block.twistbolt",
+  "pattern": [
+    " E  ",
+    "PCP ",
+    "PTP ",
+    "BBB "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plate"
+    },
+    "B": {
+      "item": "minefantasyreborn:bolt"
+    },
+    "C": {
+      "item": "minefantasyreborn:crucible_fireclay"
+    },
+    "T": {
+      "item": "minefantasyreborn:tungsten_gears"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:crucible_auto"
+  }
+}

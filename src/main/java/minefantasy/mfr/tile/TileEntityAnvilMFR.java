@@ -42,6 +42,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
+import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
+
 public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQualityBalance {
     public int tier;
     public String resName = "<No Project Set>";
@@ -209,7 +211,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
             }
 
             if (result.getMaxStackSize() == 1 && !lastPlayerHit.isEmpty()) {
-                getNBT(result).setString("MF_CraftedByName", lastPlayerHit);
+                getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastPlayerHit);
             }
 
             int temp = this.averageTemp();
@@ -756,6 +758,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
         return anvilTierRequired;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);

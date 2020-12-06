@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "berrypie",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 100,
+  "recipe_hammer": 2,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "SPS ",
+    "BBB ",
+    "SPS ",
+    " I  "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:pastry"
+    },
+    "B": {
+      "item": "minefantasyreborn:berries"
+    },
+    "S": {
+      "item": "minefantasyreborn:sugar_pot"
+    },
+    "I": {
+      "item": "minefantasyreborn:pie_tray"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:pie_berry_uncooked"
+  }
+}

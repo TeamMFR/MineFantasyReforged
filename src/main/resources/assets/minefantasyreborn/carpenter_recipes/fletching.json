@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "arrows",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 4,
+  "recipe_hammer": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "P   ",
+    "F   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plank"
+    },
+    "F": {
+      "item": "minecraft:feather"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:fletching",
+    "count": 16
+  }
+}
