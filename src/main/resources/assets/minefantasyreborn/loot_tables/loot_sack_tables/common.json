@@ -104,8 +104,8 @@
                 },
                 {
                     "type": "item",
-                    "entryName:": "oak_wood_plank",
-                    "name": "minefantasyreborn:plank",
+                    "entryName:": "oak_wood_timber",
+                    "name": "minefantasyreborn:timber",
                     "functions": [
                         {
                             "function": "set_count",
@@ -169,8 +169,8 @@
                 },
                 {
                     "type": "item",
-                    "entryName:": "refined_wood_plank",
-                    "name": "minefantasyreborn:plank",
+                    "entryName:": "refined_wood_timber",
+                    "name": "minefantasyreborn:timber",
                     "functions": [
                         {
                             "function": "set_count",
