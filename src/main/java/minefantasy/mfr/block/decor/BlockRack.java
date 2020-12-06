@@ -1,11 +1,10 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.RackCommandPacket;
 import minefantasy.mfr.tile.decor.TileEntityRack;
-import net.minecraft.block.BlockDirectional;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -33,7 +32,7 @@ import java.util.Random;
  */
 public class BlockRack extends BlockWoodDecor {
 
-	public static final PropertyDirection FACING = BlockDirectional.FACING;
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	public BlockRack(String name) {
 		super(name);
