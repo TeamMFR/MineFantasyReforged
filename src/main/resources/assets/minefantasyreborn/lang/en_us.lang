@@ -120,7 +120,7 @@ item.spawn_cogwork.desc=Mechanical suit of superior strength
 # TOOL LIST
 
 item.tool_pick.name=%1$s Pick
-item.commodity_plank.name=%1$s Timber
+item.commodity_timber.name=%1$s Timber
 item.haft.name=Haft
 item.commodity_metal_hunk.name=%1$s Hunk
 item.commodity_scrap.name=%1$s Scrap
