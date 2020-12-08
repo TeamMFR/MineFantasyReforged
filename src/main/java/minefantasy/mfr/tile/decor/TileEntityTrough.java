@@ -53,8 +53,8 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	 */
 	@Override
 	public float quench() {
-		if (fill >= 6) {
-			removeFluid(6);
+		if (!isEmpty()) {
+			removeFluid(1);
 			return 0F;
 		}
 		return -1F;
