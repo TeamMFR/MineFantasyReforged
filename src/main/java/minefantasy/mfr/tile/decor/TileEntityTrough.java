@@ -1,196 +1,230 @@
 package minefantasy.mfr.tile.decor;
 
 import minefantasy.mfr.api.heating.IQuenchBlock;
-import minefantasy.mfr.block.decor.BlockTrough;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.TroughPacket;
+import minefantasy.mfr.util.BlockUtils;
+import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nullable;
+
 public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBlock, ITickable {
-    public static int capacityScale = 8;
-    public int fill;
-    private int ticksExisted;
+	public static int capacityScale = 8;
+	/**
+	 * The number of fill_count entries in the blockstate json
+	 */
+	private static int fillLevels = 7;
+	public int fill;
 
-    public TileEntityTrough() {
-        super("trough_wood");
-    }
+	public TileEntityTrough() {
+		super("trough_wood");
+	}
 
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-    {
-        return oldState.getBlock() != newState.getBlock();
-    }
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
+	}
 
-    @Override
-    public void update() {
-        ++ticksExisted;
-        if (ticksExisted == 20 || ticksExisted % 100 == 0) {
-            syncData();
-        }
-        if (ticksExisted % 100 == 0 && world.isRainingAt(pos.add(0,1,0))) {
-            addCapacity(1);
-        }
-    }
+	@Override
+	public void update() {
+		/* Fill with some water every 5 seconds if its raining and the position */
+		if (world.getTotalWorldTime() % 100 == 0 && world.isRainingAt(pos.add(0, 1, 0))) {
+			addFluid(1);
+		}
+	}
 
-    @Override
-    public float quench() {
-        if (fill > 0) {
-            --fill;
-            return 0F;
-        }
-        return -1F;
-    }
+	/**
+	 * Called when a hot item is soaked into the water of the trough
+	 *
+	 * @return apparently returns 0F if the trough had water, -1F if it didn't // TODO: does this really needs to be a float? It should probably return a boolean
+	 */
+	@Override
+	public float quench() {
+		if (fill >= 6) {
+			removeFluid(6);
+			return 0F;
+		}
+		return -1F;
+	}
 
-    public boolean interact(EntityPlayer user, ItemStack held) {
-        if (!held.isEmpty()) {
-            int glass_bottle = 1, jug = 1, bucket = 16;
-            if (fill < getCapacity())// Give
-            {
-                if (held.getItem() == Items.WATER_BUCKET) {
-                    user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(Items.BUCKET));
-                    addCapacity(bucket);
-                    BlockTrough.setActiveState(getFillCount(), world, pos);
-                    return true;
-                }
-                if (held.getItem() == FoodListMFR.JUG_WATER) {
-                    givePlayerItem(user, held, new ItemStack(FoodListMFR.JUG_EMPTY));
-                    addCapacity(jug);
-                    return true;
-                }
-                if (held.getItem() == Items.POTIONITEM && held.getItemDamage() == 0) {
-                    givePlayerItem(user, held, new ItemStack(Items.GLASS_BOTTLE));
-                    addCapacity(glass_bottle);
-                    BlockTrough.setActiveState(getFillCount(), world, pos);
-                    return true;
-                }
-            }
+	public boolean interact(EntityPlayer player, ItemStack stack) {
+		if (!stack.isEmpty()) {
+			int glassBottleAmount = 1, jugAmount = 1, bucketAmount = 16;
 
-            // Take
-            if (fill >= 1 && held.getItem() == Items.GLASS_BOTTLE && held.getItemDamage() == 0) {
-                givePlayerItem(user, held, new ItemStack(Items.POTIONITEM));
-                addCapacity(-glass_bottle);
-                BlockTrough.setActiveState(getFillCount(), world, pos);
-                return true;
-            }
-            if (fill >= 16 && held.getItem() == Items.BUCKET) {
-                givePlayerItem(user, held, new ItemStack(Items.WATER_BUCKET));
-                addCapacity(-bucket);
-                BlockTrough.setActiveState(getFillCount(), world, pos);
-                return true;
-            }
+			// Add fluid
+			if (!isFull()) {
+				if (stack.getItem() == Items.WATER_BUCKET) {
+					stack.shrink(1);
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.BUCKET));
+					addFluid(bucketAmount);
+					return true;
+				}
+				if (stack.getItem() == FoodListMFR.JUG_WATER) {
+					stack.shrink(1);
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(FoodListMFR.JUG_EMPTY));
+					addFluid(jugAmount);
+					return true;
+				}
+				if (stack.getItem() == Items.POTIONITEM && PotionUtils.getPotionFromItem(stack) == PotionTypes.WATER) {
+					stack.shrink(1);
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.GLASS_BOTTLE));
+					addFluid(glassBottleAmount);
+					return true;
+				}
+			}
 
-        }
-        return false;
-    }
+			// Take fluid
+			if (!isEmpty()) {
+				if (stack.getItem() == Items.GLASS_BOTTLE && PotionUtils.getPotionFromItem(stack) == PotionTypes.EMPTY) {
+					stack.shrink(1);
+					PlayerUtils.giveStackToPlayer(player, PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM, 1), PotionTypes.WATER));
+					removeFluid(glassBottleAmount);
+					return true;
+				}
+				if (stack.getItem() == FoodListMFR.JUG_EMPTY) {
+					stack.shrink(1);
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(FoodListMFR.JUG_WATER));
+					removeFluid(jugAmount);
+					return true;
+				}
+				if (fill >= bucketAmount && stack.getItem() == Items.BUCKET) {
+					stack.shrink(1);
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.WATER_BUCKET));
+					removeFluid(bucketAmount);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    private void givePlayerItem(EntityPlayer user, ItemStack held, ItemStack jug) {
-        if (held.getCount() == 1) {
-            user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, jug);
-            return;
-        }
+	private boolean isFull() {
+		return fill == getCapacity();
+	}
 
-        held.shrink(1);
-        if (!user.inventory.addItemStackToInventory(jug)) {
-            if (!user.world.isRemote) {
-                user.entityDropItem(jug, 0F);
-            }
-        }
-    }
+	private boolean isEmpty() {
+		return fill == 0;
+	}
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        nbt.setInteger("fill", fill);
+	/**
+	 * Insert the specified amount of fluid into the trough
+	 *
+	 * @param amount the fluid amount to insert
+	 */
+	private void addFluid(int amount) {
+		int cap = getCapacity();
+		fill = Math.min(cap, fill + amount);
+		sendUpdates();
+	}
+
+	/**
+	 * Attempt to remove the specified amount of fluid from the trough
+	 *
+	 * @param amount the fluid amount to insert
+	 */
+	private void removeFluid(int amount) {
+		fill = Math.max(0, fill - amount);
+		sendUpdates();
+	}
+
+	@Override
+	public int getCapacity() {
+		return super.getCapacity() * capacityScale;
+	}
+
+	/**
+	 * Used to get the fill_count blockstate
+	 *
+	 * @return the fill count (0-6). It always returns at least 1, if the trough contains any water!
+	 */
+	public int getFillCount() {
+		float fillPercent = (float) fill / getCapacity();
+
+		int fillCount = 0;
+		if (fillPercent > 0) {
+			fillCount = Math.max((int) (fillPercent * fillLevels - 1), 1);
+		}
+		return fillCount;
+	}
+
+	public void sendUpdates() {
+		BlockUtils.notifyBlockUpdate(this);
+		markDirty();
+	}
+
+	@Override
+	@Nullable
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		return this.writeToNBT(new NBTTagCompound());
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		handleUpdateTag(pkt.getNbtCompound());
+	}
+
+	@Override
+	public void handleUpdateTag(NBTTagCompound tag) {
+		super.readFromNBT(tag);
+		BlockUtils.notifyBlockUpdate(this);
+	}
+
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("fill", fill);
 		return nbt;
 	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        fill = nbt.getInteger("fill");
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		fill = nbt.getInteger("fill");
+	}
 
-    private void addCapacity(int i) {
-        int cap = getCapacity();
-        fill = Math.min(cap, fill + i);
-        syncData();
-    }
+	///////// UNUSED /////////
 
-    @Override
-    public int getCapacity() {
-        return super.getCapacity() * capacityScale;
-    }
+	@Override
+	protected ItemStackHandler createInventory() {
+		return null;
+	}
 
-    public int getFillCount(){
-        int max_fill = 96;
-        int room_left = max_fill - fill;
-        int fill_int;
-        if (room_left == 0){
-            fill_int = 6;
-        }
-        else if (room_left > 0 && room_left < 16){
-            fill_int = 5;
-        }
-        else if (room_left > 16 && room_left < 32){
-            fill_int = 4;
-        }
-        else if (room_left > 48 && room_left < 64){
-            fill_int = 3;
-        }
-        else if (room_left > 64 && room_left < 80){
-            fill_int = 2;
-        }
-        else if (room_left > 80 && room_left < 96){
-            fill_int = 1;
-        }
-        else {
-            fill_int = 0;
-        }
+	@Override
+	public ItemStackHandler getInventory() {
+		return null;
+	}
 
-        return fill_int;
-    }
+	@Override
+	public ContainerBase createContainer(EntityPlayer player) {
+		return null;
+	}
 
-    public void syncData() {
-        if (world.isRemote)
-            return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new TroughPacket(this));
-        super.sendPacketToClient();
-    }
+	@Override
+	protected int getGuiId() {
+		return 0;
+	}
 
-    @Override
-    protected ItemStackHandler createInventory() {
-        return null;
-    }
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return null;
-    }
-
-    @Override
-    public ContainerBase createContainer(EntityPlayer player) {
-        return null;
-    }
-
-    @Override
-    protected int getGuiId() {
-        return 0;
-    }
-
-    @Override
-    public boolean isItemValidForSlot(int slot, ItemStack item) {
-        return false;
-    }
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item) {
+		return false;
+	}
 
 }

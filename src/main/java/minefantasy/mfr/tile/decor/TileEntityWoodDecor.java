@@ -9,16 +9,16 @@ import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
 public abstract class TileEntityWoodDecor extends TileEntityBase {
-    private String tex;
+    private String texture;
     private CustomMaterial material;
 
-    public TileEntityWoodDecor(String tex) {
-        this.tex = tex;
+    public TileEntityWoodDecor(String texture) {
+        this.texture = texture;
         this.material = CustomMaterial.getMaterial("RefinedWood");
     }
 
     public TileEntityWoodDecor(String tex, CustomMaterial material) {
-        this.tex = tex;
+        this.texture = tex;
         this.material = material;
     }
 
@@ -71,10 +71,10 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
         if (world != null) {
             Block block = world.getBlockState(pos).getBlock();
             if (block instanceof BlockWoodDecor) {
-                this.tex = ((BlockWoodDecor) block).getFullTexName();
+                this.texture = ((BlockWoodDecor) block).getFullTexName();
             }
         }
-        return tex;
+        return texture;
     }
 
     public void sendPacketToClient() {
