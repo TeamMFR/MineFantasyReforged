@@ -716,8 +716,8 @@ attribute.fill=Fill x%1$s
 item.bedroll.name=Bedroll
 tile.bedroll.name=Bedroll
 
-tile.framed_end.name=Framed Mythic Stone
-tile.decorated_end.name=Decorated Mythic Stone
+tile.mythic_stone_framed.name=Framed Mythic Stone
+tile.mythic_stone_decorated.name=Decorated Mythic Stone
 
 # TABS
 itemGroup.forgedtool=[MF] Forged Tools

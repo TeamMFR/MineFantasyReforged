@@ -1,11 +1,18 @@
 package minefantasy.mfr.block.basic;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 
-public class BlockMythicDecor extends BlockMeta {
+public class BlockMythicDecor extends Block {
 
-    public BlockMythicDecor() {
-        super("mythic_decor", Material.ROCK, "framed_end", "decorated_end");
-    }
-
+	public BlockMythicDecor(String name) {
+		super(Material.ROCK);
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		this.setHarvestLevel("pickaxe", 2);
+		this.setHardness(2.0F);
+		this.setResistance(2.0F);
+		this.setCreativeTab(CreativeTabs.DECORATIONS);
+	}
 }

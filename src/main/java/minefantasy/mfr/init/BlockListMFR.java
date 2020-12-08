@@ -295,7 +295,8 @@ public class BlockListMFR {
 	public static Block FRAME_BLOCK = Utils.nullValue();
 	public static Block COGWORK_BUILDER = Utils.nullValue();
 
-	public static Block MYTHIC_DECOR = Utils.nullValue();
+	public static Block MYTHIC_STONE_FRAMED = Utils.nullValue();
+	public static Block MYTHIC_STONE_DECORATED = Utils.nullValue();
 	public static Block WG_MARK = Utils.nullValue();
 	public static Block COMPONENTS = Utils.nullValue();
 	public static Block SCHEMATIC_GENERAL = Utils.nullValue();
@@ -490,7 +491,8 @@ public class BlockListMFR {
 		FRAME_BLOCK = new BlockFrame("frame_block");
 		COGWORK_BUILDER = new BlockFrame("cogwork_builder", FRAME_BLOCK).setCogworkHolder();
 
-		MYTHIC_DECOR = new BlockMythicDecor();
+		MYTHIC_STONE_FRAMED = new BlockMythicDecor("mythic_stone_framed");
+		MYTHIC_STONE_DECORATED = new BlockMythicDecor("mythic_stone_decorated");
 		WG_MARK = new BlockWorldGenMarker("world_gen_flag");
 		COMPONENTS = new BlockComponent();
 		SCHEMATIC_GENERAL = new BlockSchematic("schematic_general");
@@ -624,7 +626,8 @@ public class BlockListMFR {
 		registry.register(FRAME_BLOCK);
 		registry.register(COGWORK_BUILDER);
 
-		registry.register(MYTHIC_DECOR);
+		registry.register(MYTHIC_STONE_FRAMED);
+		registry.register(MYTHIC_STONE_DECORATED);
 		registry.register(SCHEMATIC_GENERAL);
 
 		registry.register(SALVAGE_BASIC);
@@ -911,7 +914,8 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(FRAME_BLOCK));
 		registry.register(new ItemBlockBase(COGWORK_BUILDER));
 
-		registry.register(new ItemBlockBase(MYTHIC_DECOR));
+		registry.register(new ItemBlockBase(MYTHIC_STONE_FRAMED));
+		registry.register(new ItemBlockBase(MYTHIC_STONE_DECORATED));
 		registry.register(new ItemBlockBase(WG_MARK));
 		registry.register(new ItemBlockBase(COMPONENTS));
 		registry.register(new ItemBlockBase(SCHEMATIC_GENERAL));
