@@ -14,7 +14,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.util.Random;
 
 public class StructureGenDSHall extends StructureModuleMFR {
-    protected static Block floor = BlockListMFR.COBBLE_PAVEMENT;
+    protected static Block floor = BlockListMFR.COBBLESTONE_ROAD;
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
 
     public StructureGenDSHall(World world, StructureCoordinates position) {

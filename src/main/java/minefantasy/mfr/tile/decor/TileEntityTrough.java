@@ -19,8 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nullable;
-
 public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBlock, ITickable {
 	public static int capacityScale = 8;
 	/**
@@ -127,7 +125,8 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	private void addFluid(int amount) {
 		int cap = getCapacity();
 		fill = Math.min(cap, fill + amount);
-		sendUpdates();
+		markDirty();
+		BlockUtils.notifyBlockUpdate(this);
 	}
 
 	/**
@@ -137,7 +136,8 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	 */
 	private void removeFluid(int amount) {
 		fill = Math.max(0, fill - amount);
-		sendUpdates();
+		markDirty();
+		BlockUtils.notifyBlockUpdate(this);
 	}
 
 	@Override
@@ -160,20 +160,18 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 		return fillCount;
 	}
 
-	public void sendUpdates() {
-		BlockUtils.notifyBlockUpdate(this);
-		markDirty();
-	}
-
 	@Override
-	@Nullable
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+		NBTTagCompound tag = new NBTTagCompound();
+		writeUpdateNBT(tag);
+		return new SPacketUpdateTileEntity(pos, 0, tag);
 	}
 
 	@Override
 	public NBTTagCompound getUpdateTag() {
-		return this.writeToNBT(new NBTTagCompound());
+		NBTTagCompound tag = super.getUpdateTag();
+		writeUpdateNBT(tag);
+		return tag;
 	}
 
 	@Override
@@ -183,21 +181,35 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
-		super.readFromNBT(tag);
+		readNBT(tag);
 		BlockUtils.notifyBlockUpdate(this);
 	}
 
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
+		return writeNBT(nbt);
+	}
+
+	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("fill", fill);
 		return nbt;
+	}
+
+	protected void writeUpdateNBT(NBTTagCompound tag) {
+		writeNBT(tag);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		readNBT(nbt);
+		markDirty();
+	}
+
+	public void readNBT(NBTTagCompound nbt) {
 		fill = nbt.getInteger("fill");
+		markDirty();
 	}
 
 	///////// UNUSED /////////

@@ -144,7 +144,7 @@ public class StructureGenDSStairs extends StructureModuleMFR {
                     placeBlock(Blocks.AIR, new BlockPos(x, y, z) );
                 }
             }
-            placeBlock(BlockListMFR.COBBLE_PAVEMENT_STAIRS, new BlockPos(x, 0, -1) );
+            placeBlock(BlockListMFR.COBBLE_BRICK_STAIRS, new BlockPos(x, 0, -1) );
         }
     }
 
@@ -210,9 +210,9 @@ public class StructureGenDSStairs extends StructureModuleMFR {
     protected Object[] getFloor(int radius, int depth, int x, int z) {
         if (x >= -1 && x <= 1) {
             if (z >= depth - 1) {
-                return new Object[]{BlockListMFR.COBBLE_PAVEMENT, 0};
+                return new Object[]{BlockListMFR.COBBLESTONE_ROAD, 0};
             }
-            return new Object[]{BlockListMFR.COBBLE_PAVEMENT_STAIRS, Integer.valueOf(getStairDirection(reverse()))};
+            return new Object[]{BlockListMFR.COBBLE_BRICK_STAIRS, Integer.valueOf(getStairDirection(reverse()))};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
             return new Object[]{BlockListMFR.REINFORCED_STONE, Integer.valueOf(0)};
@@ -220,7 +220,7 @@ public class StructureGenDSStairs extends StructureModuleMFR {
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             return new Object[]{BlockListMFR.REINFORCED_STONE, Integer.valueOf(0)};
         }
-        return new Object[]{BlockListMFR.COBBLE_PAVEMENT, 0};
+        return new Object[]{BlockListMFR.COBBLESTONE_ROAD, 0};
     }
 
     protected Object[] getWalls(int radius, int height, int depth, int x, int y, int z) {

@@ -4,7 +4,6 @@ import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -15,7 +14,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSCrossroads extends StructureModuleMFR {
     protected ResourceLocation lootType = LootTableList.CHESTS_ABANDONED_MINESHAFT;
-    protected Block floor_block = BlockListMFR.COBBLE_PAVEMENT;
+    protected Block floor_block = BlockListMFR.COBBLESTONE_ROAD;
 
     public StructureGenDSCrossroads(World world, StructureCoordinates position) {
         super(world, position);

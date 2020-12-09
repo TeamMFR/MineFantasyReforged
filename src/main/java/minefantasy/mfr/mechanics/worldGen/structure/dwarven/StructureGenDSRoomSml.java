@@ -116,7 +116,7 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
         if (x == -(width - 1) || x == (width - 1) || z == 1 || z == depth - 1) {
             return new Object[]{BlockListMFR.REINFORCED_STONE, 0};
         }
-        return new Object[]{BlockListMFR.COBBLE_PAVEMENT, 0};
+        return new Object[]{BlockListMFR.COBBLESTONE_ROAD, 0};
     }
 
     private Object[] getCeiling(int width, int depth, int x, int z) {

@@ -27,7 +27,7 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("stone", new ItemStack(BlockListMFR.LIMESTONE, 1, 0));
 		OreDictionary.registerOre("limestone", new ItemStack(BlockListMFR.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_BRICK, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_PAVEMENT, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLESTONE_ROAD, 1, OreDictionary.WILDCARD_VALUE));
 
 		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));

@@ -15,11 +15,9 @@ import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.item.gadget.IScope;
-import minefantasy.mfr.item.tool.advanced.ItemMattock;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import minefantasy.mfr.tile.TileEntityCarpenter;
-import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -114,9 +112,6 @@ public class MineFantasyHUD extends Gui {
                 }
                 if (tile instanceof IQualityBalance) {
                     this.renderQualityBalance(world, player, (IQualityBalance) tile);
-                }
-                if (tile instanceof TileEntityRoad) {
-                    renderRoad(world, player, ((TileEntityRoad) tile));
                 }
             }
         }
@@ -532,24 +527,5 @@ public class MineFantasyHUD extends Gui {
 
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         GL11.glPopMatrix();
-    }
-
-    private void renderRoad(World world, EntityPlayer player, TileEntityRoad tile) {
-        if (!mc.player.getHeldItemMainhand().isEmpty()) {
-            if (mc.player.getHeldItemMainhand().getItem() instanceof ItemMattock) {
-                GL11.glPushMatrix();
-                ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
-                int width = scaledresolution.getScaledWidth();
-                int height = scaledresolution.getScaledHeight();
-
-                bindTexture("textures/gui/hud_overlay.png");
-                int xPos = width / 2 + 12;
-                int yPos = height / 2 - 6;
-                ;
-
-                this.drawTexturedModalRect(xPos, yPos, tile.isLocked ? 0 : 8, 20, 8, 12);
-                GL11.glPopMatrix();
-            }
-        }
     }
 }

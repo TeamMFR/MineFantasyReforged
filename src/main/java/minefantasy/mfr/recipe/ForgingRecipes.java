@@ -331,15 +331,15 @@ public class ForgingRecipes {
         Salvage.addSalvage(BlockListMFR.FRAME_BLOCK, ComponentListMFR.IRON_FRAME, ComponentListMFR.RIVET);
 
         time = 10;
-        KnowledgeListMFR.cogHelmR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(BlockListMFR.COGWORK_HELM), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFR", "SEES", " RR ", 'E', Items.ENDER_EYE, 'F', ComponentListMFR.IRON_FRAME, 'R', ComponentListMFR.RIVET, 'S', ComponentListMFR.COGWORK_SHAFT);
-        Salvage.addSalvage(BlockListMFR.COGWORK_HELM, new ItemStack(Items.ENDER_EYE, 2), new ItemStack(ComponentListMFR.IRON_FRAME, 2), new ItemStack(ComponentListMFR.COGWORK_SHAFT, 2), new ItemStack(ComponentListMFR.RIVET, 4));
+        KnowledgeListMFR.cogHelmR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(BlockListMFR.BLOCKCOGWORK_HELM), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFR", "SEES", " RR ", 'E', Items.ENDER_EYE, 'F', ComponentListMFR.IRON_FRAME, 'R', ComponentListMFR.RIVET, 'S', ComponentListMFR.COGWORK_SHAFT);
+        Salvage.addSalvage(BlockListMFR.BLOCKCOGWORK_HELM, new ItemStack(Items.ENDER_EYE, 2), new ItemStack(ComponentListMFR.IRON_FRAME, 2), new ItemStack(ComponentListMFR.COGWORK_SHAFT, 2), new ItemStack(ComponentListMFR.RIVET, 4));
         time = 15;
-        KnowledgeListMFR.cogChestR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(BlockListMFR.COGWORK_CHEST), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " RFR ", "RSFSR", "RFBFR", " SFS ", 'F', ComponentListMFR.IRON_FRAME, 'R', ComponentListMFR.RIVET, 'S', ComponentListMFR.COGWORK_SHAFT, 'B', Blocks.FURNACE);
-        Salvage.addSalvage(BlockListMFR.COGWORK_CHEST, Blocks.FURNACE, new ItemStack(ComponentListMFR.IRON_FRAME, 5), new ItemStack(ComponentListMFR.COGWORK_SHAFT, 4), new ItemStack(ComponentListMFR.RIVET, 6));
+        KnowledgeListMFR.cogChestR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(BlockListMFR.BLOCKCOGWORK_CHESTPLATE), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " RFR ", "RSFSR", "RFBFR", " SFS ", 'F', ComponentListMFR.IRON_FRAME, 'R', ComponentListMFR.RIVET, 'S', ComponentListMFR.COGWORK_SHAFT, 'B', Blocks.FURNACE);
+        Salvage.addSalvage(BlockListMFR.BLOCKCOGWORK_CHESTPLATE, Blocks.FURNACE, new ItemStack(ComponentListMFR.IRON_FRAME, 5), new ItemStack(ComponentListMFR.COGWORK_SHAFT, 4), new ItemStack(ComponentListMFR.RIVET, 6));
 
         time = 10;
-        KnowledgeListMFR.cogLegsR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(BlockListMFR.COGWORK_LEGS), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFFR", "RS SR", " S S ", " F F ", 'F', ComponentListMFR.IRON_FRAME, 'R', ComponentListMFR.RIVET, 'S', ComponentListMFR.COGWORK_SHAFT);
-        Salvage.addSalvage(BlockListMFR.COGWORK_LEGS, new ItemStack(ComponentListMFR.IRON_FRAME, 5), new ItemStack(ComponentListMFR.COGWORK_SHAFT, 4), new ItemStack(ComponentListMFR.RIVET, 4));
+        KnowledgeListMFR.cogLegsR = MineFantasyRebornAPI.addAnvilRecipe(engineering, new ItemStack(BlockListMFR.BLOCKCOGWORK_LEGS), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFFR", "RS SR", " S S ", " F F ", 'F', ComponentListMFR.IRON_FRAME, 'R', ComponentListMFR.RIVET, 'S', ComponentListMFR.COGWORK_SHAFT);
+        Salvage.addSalvage(BlockListMFR.BLOCKCOGWORK_LEGS, new ItemStack(ComponentListMFR.IRON_FRAME, 5), new ItemStack(ComponentListMFR.COGWORK_SHAFT, 4), new ItemStack(ComponentListMFR.RIVET, 4));
 
     }
 }

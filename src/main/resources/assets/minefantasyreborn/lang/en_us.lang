@@ -458,9 +458,9 @@ item.parachute.name=Parachute
 item.syringe.name= Syringe
 item.syringe_empty.name=Empty Syringe
 
-tile.cogwork_helm.name=Cogwork Helmet Block
-tile.cogwork_chest.name=Cogwork Chest Block
-tile.cogwork_legs.name=Cogwork Legs Block
+tile.blockcogwork_helm.name=Cogwork Helmet Block
+tile.blockcogwork_chestplate.name=Cogwork Chest Block
+tile.blockcogwork_legs.name=Cogwork Legs Block
 tile.frame_block.name=Frame Block
 tile.cogwork_builder.name=Cogwork Hook
 
@@ -572,21 +572,20 @@ tile.coal_rich_ore.name=Rich Coal Deposit
 
 tile.window.name=Window
 tile.window_pane.name=Window Pane
-tile.mud_pavement.name=Rough Mud Bricks
-tile.mud_pavement_stair.name=Rough Mud Brick Steps
+tile.mud_road.name=Mud Road
 tile.mud_brick.name=Mud Bricks
 tile.mud_brick_stair.name=Mud Brick Steps
 tile.thatch.name=Thatch
 tile.thatch_stair.name=Thatch Stairs
+tile.component.name=Component
 
 tile.limestone.name=Limestone
 tile.limestone_cobblestone.name=Limestone Cobblestone
 tile.limestone_brick.name=Limestone Brick
-tile.limestone_pavement.name=Limestone Pavement
+tile.limestone_road.name=Limestone Road
 tile.limestone_stair.name=Limestone Stairs
 tile.limestone_cobblestone_stair.name=Limestone Cobblestone Stairs
 tile.limestone_brick_stair.name=Limestone Brick Stairs
-tile.limestone_pavement_stair.name=Limestone Pavement Stairs
 
 tile.slate.name=Slate
 tile.slate_cobblestone.name=Slate Cobblestone
@@ -595,14 +594,12 @@ tile.slate_pavement.name=Slate Pavement
 tile.slate_stair.name=Slate Stairs
 tile.slate_cobblestone_stair.name=Slate Cobblestone Stairs
 tile.slate_brick_stair.name=Slate Brick Stairs
-tile.slate_pavement_stair.name=Slate Pavement Stairs
 
 tile.framed_glass.name=Framed Glass
 tile.framed_pane.name=Framed Glass Pane
 tile.firebricks.name=Fire Bricks
 tile.firebrick_stairs.name=Fire Brick Steps
-tile.cobble_pavement.name=Cobblestone Pavement
-tile.cobble_pavement_stairs.name=Cobblestone Pavement Steps
+tile.cobblestone_road.name=Cobblestone Road
 tile.cobble_brick.name=Cobblestone Bricks
 tile.cobble_brick_stairs.name=Cobblestone Brick Steps
 tile.clayWall.name=Clay Wall Panel
@@ -2018,7 +2015,7 @@ knowledge.glass.1=Glass is decorative, but extremely fragile. Putting a frame ar
 
 knowledge.brickworks=Basic Brickworks
 knowledge.brickworks.desc=Expanded stone
-knowledge.brickworks.1=There's more than one way to build with stone. Dirt and stone can make bricks and pavement.
+knowledge.brickworks.1=There's more than one way to build with stone. Dirt and stone can make bricks and roads.
 
 knowledge.bars=Metal Bars
 knowledge.bars.desc=Strong Fencing

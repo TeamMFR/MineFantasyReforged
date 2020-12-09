@@ -82,7 +82,6 @@ import minefantasy.mfr.tile.TileEntityFirepit;
 import minefantasy.mfr.tile.TileEntityForge;
 import minefantasy.mfr.tile.TileEntityQuern;
 import minefantasy.mfr.tile.TileEntityResearchBench;
-import minefantasy.mfr.tile.TileEntityRoad;
 import minefantasy.mfr.tile.TileEntityRoast;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import minefantasy.mfr.tile.TileEntityWorldGenMarker;
@@ -124,10 +123,10 @@ public class BlockListMFR {
 	public static Block COAL_RICH_ORE = Utils.nullValue();
 
 	public static Block MUD_BRICK = Utils.nullValue();
-	public static Block MUD_PAVEMENT = Utils.nullValue();
+	public static Block MUD_ROAD = Utils.nullValue();
 
 	public static Block COBBLE_BRICK = Utils.nullValue();
-	public static Block COBBLE_PAVEMENT = Utils.nullValue();
+	public static Block COBBLESTONE_ROAD = Utils.nullValue();
 
 	public static Block WINDOW = Utils.nullValue();
 	public static Block FRAMED_GLASS = Utils.nullValue();
@@ -140,11 +139,10 @@ public class BlockListMFR {
 	public static Block LIMESTONE = Utils.nullValue();
 	public static Block LIMESTONE_COBBLE = Utils.nullValue();
 	public static Block LIMESTONE_BRICK = Utils.nullValue();
-	public static Block LIMESTONE_PAVEMENT = Utils.nullValue();
+	public static Block LIMESTONE_ROAD = Utils.nullValue();
 	public static Block LIMESTONE_STAIRS = Utils.nullValue();
 	public static Block LIMESTONE_COBBLE_STAIRS = Utils.nullValue();
 	public static Block LIMESTONE_BRICK_STAIRS = Utils.nullValue();
-	public static Block LIMESTONE_PAVEMENT_STAIRS = Utils.nullValue();
 
 	public static Block FIREBRICKS = Utils.nullValue();
 	public static Block CLAY_WALL = Utils.nullValue();
@@ -241,9 +239,6 @@ public class BlockListMFR {
 
 	public static BlockTileEntity<TileEntityBombPress> BOMB_PRESS = Utils.nullValue();
 
-	public static Block ROAD = Utils.nullValue();
-	public static Block LOW_ROAD = Utils.nullValue();
-
 	public static Block SALVAGE_BASIC = Utils.nullValue();
 	public static Block BLOOMERY = Utils.nullValue();
 	public static Block LOG_YEW = Utils.nullValue();
@@ -265,9 +260,7 @@ public class BlockListMFR {
 	public static BlockTileEntity<TileEntityQuern> QUERN = Utils.nullValue();
 
 	public static Block MUD_BRICK_STAIRS = Utils.nullValue();
-	public static Block MUD_PAVEMENT_STAIRS = Utils.nullValue();
 	public static Block COBBLE_BRICK_STAIRS = Utils.nullValue();
-	public static Block COBBLE_PAVEMENT_STAIRS = Utils.nullValue();
 	public static Block FIREBRICK_STAIRS = Utils.nullValue();
 	public static Block REINFORCED_STONE_STAIRS = Utils.nullValue();
 	public static Block REINFORCED_STONE_BRICK_STAIRS = Utils.nullValue();
@@ -289,9 +282,9 @@ public class BlockListMFR {
 	public static BlockAmmoBox AMMO_BOX_BASIC = Utils.nullValue();
 	public static BlockAmmoBox CRATE_BASIC = Utils.nullValue();
 
-	public static Block COGWORK_HELM = Utils.nullValue();
-	public static Block COGWORK_LEGS = Utils.nullValue();
-	public static Block COGWORK_CHEST = Utils.nullValue();
+	public static Block BLOCKCOGWORK_HELM = Utils.nullValue();
+	public static Block BLOCKCOGWORK_LEGS = Utils.nullValue();
+	public static Block BLOCKCOGWORK_CHESTPLATE = Utils.nullValue();
 	public static Block FRAME_BLOCK = Utils.nullValue();
 	public static Block COGWORK_BUILDER = Utils.nullValue();
 
@@ -318,10 +311,10 @@ public class BlockListMFR {
 		COAL_RICH_ORE = new BlockOreMF("coal_rich_ore", 2, 1, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
 
 		MUD_BRICK = new BasicBlockMF("mud_brick", Material.GROUND).setHardness(1.0F).setResistance(0.5F);
-		MUD_PAVEMENT = new BasicBlockMF("mud_pavement", Material.GROUND).setHardness(0.5F);
+		MUD_ROAD = new BlockRoad("mud_road", Material.GROUND, SoundType.GROUND).setHardness(0.5F);
 
 		COBBLE_BRICK = new BasicBlockMF("cobble_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(12.0F);
-		COBBLE_PAVEMENT = new BasicBlockMF("cobble_pavement", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(10.0F);
+		COBBLESTONE_ROAD = new BlockRoad("cobblestone_road", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(10.0F);
 
 		WINDOW = new BasicBlockMF("window", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.1F);
 		FRAMED_GLASS = new BasicBlockMF("framed_glass", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.2F);
@@ -334,12 +327,11 @@ public class BlockListMFR {
 		LIMESTONE = new BasicBlockMF("limestone", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_COBBLE = new BasicBlockMF("limestone_cobble", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_BRICK = new BasicBlockMF("limestone_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
-		LIMESTONE_PAVEMENT = new BasicBlockMF("limestone_pavement", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_ROAD = new BlockRoad("limestone_road", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		
 		LIMESTONE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_stairs", LIMESTONE);
 		LIMESTONE_COBBLE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_cobble_stairs", LIMESTONE_COBBLE);
 		LIMESTONE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_brick_stairs", LIMESTONE_BRICK);
-		LIMESTONE_PAVEMENT_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_pavement_stairs", LIMESTONE_PAVEMENT);
 
 		FIREBRICKS = new BasicBlockMF("firebricks", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(5.0F).setResistance(15.0F);
 		CLAY_WALL = new BasicBlockMF("clay_wall", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(1.0F).setResistance(1.0F);
@@ -436,9 +428,6 @@ public class BlockListMFR {
 
 		BOMB_PRESS = new BlockBombPress();
 
-		ROAD = new BlockRoad("road_mf", 14F);
-		LOW_ROAD = new BlockRoad("road_mf_short", 7F);
-
 		SALVAGE_BASIC = new BlockSalvage("basic", 1.0F);
 		BLOOMERY = new BlockBloomery();
 
@@ -461,9 +450,7 @@ public class BlockListMFR {
 		QUERN = new BlockQuern("quern");
 
 		MUD_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("mud_brick_stairs", MUD_BRICK);
-		MUD_PAVEMENT_STAIRS = new ConstructionBlockMF.StairsConstBlock("mud_pavement_stairs", MUD_PAVEMENT);
 		COBBLE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("cobble_brick_stairs", COBBLE_BRICK);
-		COBBLE_PAVEMENT_STAIRS = new ConstructionBlockMF.StairsConstBlock("cobble_pavement_stairs", COBBLE_PAVEMENT);
 		FIREBRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("firebrick_stairs", FIREBRICKS);
 		REINFORCED_STONE_STAIRS = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_stairs", REINFORCED_STONE);
 		REINFORCED_STONE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("reinforced_stone_brick_stairs", REINFORCED_STONE_BRICKS);
@@ -485,9 +472,9 @@ public class BlockListMFR {
 		AMMO_BOX_BASIC = new BlockAmmoBox("ammo_box_basic", (byte) 1);
 		CRATE_BASIC = new BlockAmmoBox("crate_basic", (byte) 2);
 
-		COGWORK_HELM = new BlockCogwork("cogwork_helm", false);
-		COGWORK_LEGS = new BlockCogwork("cogwork_legs", false);
-		COGWORK_CHEST = new BlockCogwork("cogwork_chest", true);
+		BLOCKCOGWORK_HELM = new BlockCogwork("blockcogwork_helm", false);
+		BLOCKCOGWORK_LEGS = new BlockCogwork("blockcogwork_legs", false);
+		BLOCKCOGWORK_CHESTPLATE = new BlockCogwork("blockcogwork_chestplate", true);
 		FRAME_BLOCK = new BlockFrame("frame_block");
 		COGWORK_BUILDER = new BlockFrame("cogwork_builder", FRAME_BLOCK).setCogworkHolder();
 
@@ -516,10 +503,10 @@ public class BlockListMFR {
 		registry.register(COAL_RICH_ORE);
 
 		registry.register(MUD_BRICK);
-		registry.register(MUD_PAVEMENT);
+		registry.register(MUD_ROAD);
 
 		registry.register(COBBLE_BRICK);
-		registry.register(COBBLE_PAVEMENT);
+		registry.register(COBBLESTONE_ROAD);
 
 		registry.register(WINDOW);
 		registry.register(FRAMED_GLASS);
@@ -532,12 +519,11 @@ public class BlockListMFR {
 		registry.register(LIMESTONE);
 		registry.register(LIMESTONE_COBBLE);
 		registry.register(LIMESTONE_BRICK);
-		registry.register(LIMESTONE_PAVEMENT);
+		registry.register(LIMESTONE_ROAD);
 
 		registry.register(LIMESTONE_STAIRS);
 		registry.register(LIMESTONE_COBBLE_STAIRS);
 		registry.register(LIMESTONE_BRICK_STAIRS);
-		registry.register(LIMESTONE_PAVEMENT_STAIRS);
 
 		registry.register(FIREBRICKS);
 		registry.register(CLAY_WALL);
@@ -609,9 +595,7 @@ public class BlockListMFR {
 		registry.register(EBONY_PLANKS);
 
 		registry.register(MUD_BRICK_STAIRS);
-		registry.register(MUD_PAVEMENT_STAIRS);
 		registry.register(COBBLE_BRICK_STAIRS);
-		registry.register(COBBLE_PAVEMENT_STAIRS);
 		registry.register(FIREBRICK_STAIRS);
 		registry.register(REINFORCED_STONE_STAIRS);
 		registry.register(REINFORCED_STONE_BRICK_STAIRS);
@@ -620,9 +604,9 @@ public class BlockListMFR {
 		registry.register(IRONBARK_STAIRS);
 		registry.register(EBONY_STAIRS);
 
-		registry.register(COGWORK_HELM);
-		registry.register(COGWORK_LEGS);
-		registry.register(COGWORK_CHEST);
+		registry.register(BLOCKCOGWORK_HELM);
+		registry.register(BLOCKCOGWORK_LEGS);
+		registry.register(BLOCKCOGWORK_CHESTPLATE);
 		registry.register(FRAME_BLOCK);
 		registry.register(COGWORK_BUILDER);
 
@@ -689,10 +673,6 @@ public class BlockListMFR {
 		registry.register(BOMB_PRESS);
 		registerTile(TileEntityBombPress.class, "bomb_press_tile");
 
-		registry.register(ROAD);
-		registry.register(LOW_ROAD);
-		registerTile(TileEntityRoad.class, "road_tile");
-
 		registry.register(BLOOMERY);
 		registerTile(TileEntityBloomery.class, "bloomery_tile");
 
@@ -742,10 +722,10 @@ public class BlockListMFR {
 		registry.register(new ItemBlockOreMF(COAL_RICH_ORE));
 
 		registry.register(new ItemBlockBase(MUD_BRICK));
-		registry.register(new ItemBlockBase(MUD_PAVEMENT));
+		registry.register(new ItemBlockBase(MUD_ROAD));
 
 		registry.register(new ItemBlockBase(COBBLE_BRICK));
-		registry.register(new ItemBlockBase(COBBLE_PAVEMENT));
+		registry.register(new ItemBlockBase(COBBLESTONE_ROAD));
 
 		registry.register(new ItemBlockBase(WINDOW));
 		registry.register(new ItemBlockBase(FRAMED_GLASS));
@@ -758,12 +738,11 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(LIMESTONE));
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE));
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK));
-		registry.register(new ItemBlockBase(LIMESTONE_PAVEMENT));
+		registry.register(new ItemBlockBase(LIMESTONE_ROAD));
 
 		registry.register(new ItemBlockBase(LIMESTONE_STAIRS));
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE_STAIRS));
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK_STAIRS));
-		registry.register(new ItemBlockBase(LIMESTONE_PAVEMENT_STAIRS));
 
 		registry.register(new ItemBlockBase(FIREBRICKS));
 		registry.register(new ItemBlockBase(CLAY_WALL));
@@ -859,9 +838,6 @@ public class BlockListMFR {
 
 		registry.register(new ItemBlockSpecialRender(BOMB_PRESS, new TileEntityBombPressRenderer<>()));
 
-		registry.register(new ItemBlockBase(ROAD));
-		registry.register(new ItemBlockBase(LOW_ROAD));
-
 		registry.register(new ItemBlockSalvage(SALVAGE_BASIC));
 
 		registry.register(new ItemBlockBase(BLOOMERY));
@@ -884,9 +860,7 @@ public class BlockListMFR {
 		registry.register(new ItemBlockSpecialRender(QUERN, new TileEntityQuernRenderer<>()));
 
 		registry.register(new ItemBlockBase(MUD_BRICK_STAIRS));
-		registry.register(new ItemBlockBase(MUD_PAVEMENT_STAIRS));
 		registry.register(new ItemBlockBase(COBBLE_BRICK_STAIRS));
-		registry.register(new ItemBlockBase(COBBLE_PAVEMENT_STAIRS));
 		registry.register(new ItemBlockBase(FIREBRICK_STAIRS));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_STAIRS));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICK_STAIRS));
@@ -908,9 +882,9 @@ public class BlockListMFR {
 		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC, new TileEntityAmmoBoxRenderer<>()));
 		registry.register(new ItemBlockAmmoBox(CRATE_BASIC, new TileEntityAmmoBoxRenderer<>()));
 
-		registry.register(new ItemBlockBase(COGWORK_HELM));
-		registry.register(new ItemBlockBase(COGWORK_LEGS));
-		registry.register(new ItemBlockBase(COGWORK_CHEST));
+		registry.register(new ItemBlockBase(BLOCKCOGWORK_HELM));
+		registry.register(new ItemBlockBase(BLOCKCOGWORK_LEGS));
+		registry.register(new ItemBlockBase(BLOCKCOGWORK_CHESTPLATE));
 		registry.register(new ItemBlockBase(FRAME_BLOCK));
 		registry.register(new ItemBlockBase(COGWORK_BUILDER));
 

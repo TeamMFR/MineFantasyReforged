@@ -366,7 +366,7 @@ public class KnowledgeListMFR {
         crossScope = (new InformationBase("crossScope", -7, 3, 1, ComponentListMFR.CROSSBOW_SCOPE, crossShafts))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
 
-        cogArmour = (new InformationBase("cogArmour", 8, -3, 2, BlockListMFR.COGWORK_HELM, tungsten)).registerStat()
+        cogArmour = (new InformationBase("cogArmour", 8, -3, 2, BlockListMFR.BLOCKCOGWORK_HELM, tungsten)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 60);
         compPlate = (new InformationBase("compPlate", 10, -3, 1, ComponentListMFR.COMPOSITE_ALLOY_INGOT, tungsten))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 50)

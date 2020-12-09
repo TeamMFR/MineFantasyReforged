@@ -11,11 +11,14 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCogwork extends BlockDirectional {
     private boolean isMain;
@@ -25,7 +28,7 @@ public class BlockCogwork extends BlockDirectional {
         this.isMain = helmet;
 
         setRegistryName(name);
-        setUnlocalizedName("block" + name );
+        setUnlocalizedName(name);
         this.setTickRandomly(true);
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.setHardness(1F);
@@ -43,8 +46,8 @@ public class BlockCogwork extends BlockDirectional {
 
     public boolean tryBuild(EntityPlayer builder, World world, BlockPos pos) {
         if (isMain && PowerArmour.isStationBlock(world, pos.add(0,2,0))
-                && world.getBlockState(pos.add(0,-1,0)).getBlock() == BlockListMFR.COGWORK_LEGS
-                && world.getBlockState(pos.add(0,1,0)).getBlock() == BlockListMFR.COGWORK_HELM) {
+                && world.getBlockState(pos.add(0,-1,0)).getBlock() == BlockListMFR.BLOCKCOGWORK_LEGS
+                && world.getBlockState(pos.add(0,1,0)).getBlock() == BlockListMFR.BLOCKCOGWORK_HELM) {
             if (!world.isRemote) {
                 world.setBlockState(pos, getDefaultState());
                 world.setBlockState(pos.add(0,-1,0), getDefaultState());
@@ -66,9 +69,19 @@ public class BlockCogwork extends BlockDirectional {
         return l * 90;
     }
 
-
     @Override
     public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    public boolean isFullCube(IBlockState state)
+    {
         return false;
     }
 

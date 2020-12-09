@@ -1,15 +1,15 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.tile.decor.TileEntityRack;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
-import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.LootRegistryMFR;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
+import minefantasy.mfr.tile.decor.TileEntityRack;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -22,7 +22,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSRoom extends StructureModuleMFR {
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
-    protected Block floor_block = BlockListMFR.COBBLE_PAVEMENT;
+    protected Block floor_block = BlockListMFR.COBBLESTONE_ROAD;
     private String type = "Basic";
 
     public StructureGenDSRoom(World world, StructureCoordinates position) {

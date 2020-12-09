@@ -14,7 +14,6 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.network.CogworkControlPacket;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.RackCommandPacket;
 import minefantasy.mfr.proxy.ClientProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -938,9 +937,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     protected void dropFewItems(boolean pkill, int looting) {
-        this.dropItem(Item.getItemFromBlock(BlockListMFR.COGWORK_HELM), 1);
-        this.dropItem(Item.getItemFromBlock(BlockListMFR.COGWORK_CHEST), 1);
-        this.dropItem(Item.getItemFromBlock(BlockListMFR.COGWORK_LEGS), 1);
+        this.dropItem(Item.getItemFromBlock(BlockListMFR.BLOCKCOGWORK_HELM), 1);
+        this.dropItem(Item.getItemFromBlock(BlockListMFR.BLOCKCOGWORK_CHESTPLATE), 1);
+        this.dropItem(Item.getItemFromBlock(BlockListMFR.BLOCKCOGWORK_LEGS), 1);
 
     }
 

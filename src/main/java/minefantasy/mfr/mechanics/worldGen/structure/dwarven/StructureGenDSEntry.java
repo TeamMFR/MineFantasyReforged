@@ -1,8 +1,8 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
+import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSEntry extends StructureModuleMFR {
-    private static Block floor = BlockListMFR.COBBLE_PAVEMENT;
+    private static Block floor = BlockListMFR.COBBLESTONE_ROAD;
     public boolean isSurfaceBuild;
     private ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
 
