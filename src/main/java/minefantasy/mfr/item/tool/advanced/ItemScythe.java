@@ -13,7 +13,7 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

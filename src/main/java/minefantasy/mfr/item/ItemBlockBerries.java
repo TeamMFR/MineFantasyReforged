@@ -1,4 +1,4 @@
-package minefantasy.mfr.itemblock;
+package minefantasy.mfr.item;
 
 import net.minecraft.block.Block;
 

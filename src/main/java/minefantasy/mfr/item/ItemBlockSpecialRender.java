@@ -1,4 +1,4 @@
-package minefantasy.mfr.itemblock;
+package minefantasy.mfr.item;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.render.item.IItemRenderer;

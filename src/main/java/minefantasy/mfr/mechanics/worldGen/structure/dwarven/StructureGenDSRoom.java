@@ -9,7 +9,7 @@ import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

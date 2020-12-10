@@ -1,4 +1,4 @@
-package minefantasy.mfr.tile.decor;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.heating.IQuenchBlock;
 import minefantasy.mfr.container.ContainerBase;

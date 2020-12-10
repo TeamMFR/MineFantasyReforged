@@ -1,11 +1,10 @@
-package minefantasy.mfr.tile.decor;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.helpers.BlockPositionHelper;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.TileInventoryPacket;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;

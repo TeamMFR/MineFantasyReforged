@@ -3,7 +3,7 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.RackCommandPacket;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;

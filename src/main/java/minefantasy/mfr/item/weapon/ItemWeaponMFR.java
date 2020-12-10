@@ -30,7 +30,7 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.resources.I18n;

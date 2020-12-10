@@ -2,7 +2,7 @@ package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.block.BlockRack;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

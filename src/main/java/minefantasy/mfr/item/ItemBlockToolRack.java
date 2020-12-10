@@ -1,6 +1,5 @@
-package minefantasy.mfr.itemblock;
+package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import net.minecraft.block.Block;
@@ -11,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class ItemBlockToolRack extends ItemBlockBase {
     public ItemBlockToolRack(Block base) {

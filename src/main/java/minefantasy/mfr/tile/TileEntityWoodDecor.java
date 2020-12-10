@@ -1,10 +1,9 @@
-package minefantasy.mfr.tile.decor;
+package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.WoodDecorPacket;
-import minefantasy.mfr.tile.TileEntityBase;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 

@@ -1,4 +1,4 @@
-package minefantasy.mfr.itemblock;
+package minefantasy.mfr.item;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.render.item.IItemRenderer;
@@ -8,7 +8,7 @@ import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockTileEntity;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
-import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
+import minefantasy.mfr.tile.TileEntityAmmoBox;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;

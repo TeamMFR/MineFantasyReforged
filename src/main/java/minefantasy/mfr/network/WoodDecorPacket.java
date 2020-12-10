@@ -1,7 +1,7 @@
 package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
+import minefantasy.mfr.tile.TileEntityWoodDecor;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;

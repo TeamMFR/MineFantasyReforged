@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.weapon;
 
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import net.minecraft.item.ItemStack;
 
 public interface IRackItem {

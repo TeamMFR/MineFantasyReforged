@@ -1,8 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.tile.decor.TileEntityTrough;
-import minefantasy.mfr.tile.decor.TileEntityWoodDecor;
+import minefantasy.mfr.tile.TileEntityTrough;
+import minefantasy.mfr.tile.TileEntityWoodDecor;
 import minefantasy.mfr.util.WorldUtils;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;

@@ -21,7 +21,7 @@ import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.item.archery.ItemArrowMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.tile.decor.TileEntityRack;
+import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
