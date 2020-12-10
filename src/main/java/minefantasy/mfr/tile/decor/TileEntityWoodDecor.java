@@ -1,7 +1,7 @@
 package minefantasy.mfr.tile.decor;
 
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.decor.BlockWoodDecor;
+import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.WoodDecorPacket;
 import minefantasy.mfr.tile.TileEntityBase;

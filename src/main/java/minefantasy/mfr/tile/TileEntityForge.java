@@ -8,7 +8,7 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.helpers.Functions;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
-import minefantasy.mfr.block.refining.BlockForge;
+import minefantasy.mfr.block.BlockForge;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerForge;
 import minefantasy.mfr.init.ComponentListMFR;

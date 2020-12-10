@@ -2,7 +2,7 @@ package minefantasy.mfr.client.render.block;
 
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
-import minefantasy.mfr.block.refining.BlockBigFurnace;
+import minefantasy.mfr.block.BlockBigFurnace;
 import minefantasy.mfr.client.model.block.ModelBigFurnace;
 import minefantasy.mfr.itemblock.ItemBlockSpecialRender;
 import minefantasy.mfr.tile.TileEntityBigFurnace;

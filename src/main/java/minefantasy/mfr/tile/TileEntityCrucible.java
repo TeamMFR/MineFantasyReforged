@@ -5,7 +5,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.SmokeMechanics;
-import minefantasy.mfr.block.refining.BlockCrucible;
+import minefantasy.mfr.block.BlockCrucible;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrucible;

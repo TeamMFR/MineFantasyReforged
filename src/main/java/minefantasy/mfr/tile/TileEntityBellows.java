@@ -1,7 +1,7 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.refine.IBellowsUseable;
-import minefantasy.mfr.block.refining.BlockBellows;
+import minefantasy.mfr.block.BlockBellows;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.entity.player.EntityPlayer;

@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.decor.BlockComponent;
+import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.client.util.ITooltipFlag;

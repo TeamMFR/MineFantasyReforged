@@ -2,7 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.refine.ISmokeCarrier;
 import minefantasy.mfr.api.refine.SmokeMechanics;
-import minefantasy.mfr.block.refining.BlockChimney;
+import minefantasy.mfr.block.BlockChimney;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;

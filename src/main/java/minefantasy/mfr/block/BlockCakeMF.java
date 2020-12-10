@@ -1,0 +1,176 @@
+package minefantasy.mfr.block;
+
+import minefantasy.mfr.api.helpers.ToolHelper;
+import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.item.food.ItemFoodMF;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
+public class BlockCakeMF extends Block {
+    public static final PropertyInteger BITES = PropertyInteger.create("bites", 0, 8);
+    protected static final AxisAlignedBB[] CAKE_AABB = new AxisAlignedBB[] {
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 15D / 16D),  //0
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 13.5D / 16D),//1
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 12D / 16D),  //2
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 10.5D / 16D),//3
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 9D / 16D),   //4
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 7.5D / 16D), //5
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 6D / 16D),   //6
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 4.5D / 16D), //7
+            new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 3D / 16D)    //8
+    };
+    private Item cakeSlice;
+
+    public BlockCakeMF(String name, Item slice) {
+        super(Material.CAKE);
+
+        setRegistryName(name);
+        setUnlocalizedName(name);
+        cakeSlice = slice;
+
+        this.setTickRandomly(true);
+        setCreativeTab(CreativeTabMFR.tabFood);
+    }
+
+
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, BITES);
+    }
+
+    /**
+     * Convert the given metadata into a BlockState for this Block
+     */
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return this.getDefaultState().withProperty(BITES, meta);
+    }
+
+    /**
+     * Convert the BlockState into the correct metadata value
+     */
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(BITES);
+    }
+
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return CAKE_AABB[((Integer)state.getValue(BITES)).intValue()];
+    }
+
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+
+    /**
+     * Is this block (a) opaque and (b) a full 1m cube? This determines whether or
+     * not to render the shared face of two adjacent blocks and also whether the
+     * player can attach torches, redstone wire, etc to this block.
+     */
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    /**
+     * Called upon block activation (right click on the block.)
+     */
+    @Override
+    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand,
+            EnumFacing side, float hitX, float hitY, float hitZ) {
+        if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("knife")) {
+            this.cutSlice(world, state, pos, user);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Called when a player hits the block. Args: world, x, y, z, player
+     */
+    @Override
+    public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
+        if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("knife")) {
+            IBlockState state = world.getBlockState(pos);
+            this.cutSlice(world, state, pos, user);
+        }
+    }
+
+    private void cutSlice(World world, IBlockState state, BlockPos pos, EntityPlayer user) {
+        if (cakeSlice != null) {
+            ItemStack slice = new ItemStack(cakeSlice);
+            if (!user.inventory.addItemStackToInventory(slice)) {
+                user.entityDropItem(slice, 1.0F);
+            }
+        }
+        int i = ((Integer)state.getValue(BITES)).intValue();
+
+        if (i >= 8) {
+            world.setBlockToAir(pos);
+        } else {
+            world.setBlockState(pos, state.withProperty(BITES, Integer.valueOf(i + 1)), 3);
+        }
+        if (!user.getHeldItemMainhand().isEmpty()) {
+            user.getHeldItemMainhand().damageItem(1, user);
+        }
+    }
+
+    /**
+     * Checks to see if its valid to put this block at the specified coordinates.
+     * Args: world, x, y, z
+     */
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return !super.canPlaceBlockAt(world, pos) ? false : this.canBlockStay(world, pos);
+    }
+
+    /**
+     * Lets the block know when one of its neighbor changes. Doesn't know which
+     * neighbor changed (coordinates passed are their own) Args: x, y, z, neighbor
+     * Block
+     */
+    @Override
+    public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!this.canBlockStay(world, pos)) {
+            ItemStack item = new ItemStack(this, 1, damageDropped(world.getBlockState(pos)));
+            EntityItem drop = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, item);
+            world.spawnEntity(drop);
+            world.setBlockToAir(pos);
+        }
+    }
+
+    /**
+     * Can this block stay at this position. Similar to canPlaceBlockAt except gets
+     * checked often with plants.
+     */
+
+    public boolean canBlockStay(World world, BlockPos pos) {
+        return world.getBlockState(pos.add(0,-1,0)).getMaterial().isSolid();
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        return 0;
+    }
+
+    public int getRarity() {
+        if (cakeSlice instanceof ItemFoodMF) {
+            return ((ItemFoodMF) cakeSlice).itemRarity;
+        }
+        return 0;
+    }
+}

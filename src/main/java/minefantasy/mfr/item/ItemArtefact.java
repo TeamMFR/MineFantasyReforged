@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.knowledge.IArtefact;
-import minefantasy.mfr.block.decor.BlockSchematic;
+import minefantasy.mfr.block.BlockSchematic;
 import minefantasy.mfr.init.CreativeTabMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;

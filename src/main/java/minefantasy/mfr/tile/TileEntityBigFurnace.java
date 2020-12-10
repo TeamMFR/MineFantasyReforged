@@ -5,7 +5,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
-import minefantasy.mfr.block.refining.BlockBigFurnace;
+import minefantasy.mfr.block.BlockBigFurnace;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBigFurnace;
 import minefantasy.mfr.init.FoodListMFR;

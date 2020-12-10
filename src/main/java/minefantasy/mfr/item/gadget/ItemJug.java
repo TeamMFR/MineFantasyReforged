@@ -2,10 +2,10 @@ package minefantasy.mfr.item.gadget;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.stamina.StaminaBar;
-import minefantasy.mfr.block.decor.BlockComponent;
-import minefantasy.mfr.item.ItemComponentMFR;
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.item.ItemComponentMFR;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,6 +1,6 @@
 package minefantasy.mfr.itemblock;
 
-import minefantasy.mfr.block.food.BlockCakeMF;
+import minefantasy.mfr.block.BlockCakeMF;
 import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;

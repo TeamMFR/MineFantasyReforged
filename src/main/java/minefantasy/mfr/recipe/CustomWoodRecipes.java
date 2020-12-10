@@ -5,7 +5,7 @@ import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.block.decor.BlockWoodDecor;
+import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;

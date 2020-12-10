@@ -4,7 +4,7 @@ import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.block.crafting.BlockEngineerTanner;
+import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
 import minefantasy.mfr.init.ComponentListMFR;

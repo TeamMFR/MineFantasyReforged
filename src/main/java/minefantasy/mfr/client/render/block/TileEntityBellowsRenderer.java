@@ -2,7 +2,7 @@ package minefantasy.mfr.client.render.block;
 
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
-import minefantasy.mfr.block.refining.BlockBellows;
+import minefantasy.mfr.block.BlockBellows;
 import minefantasy.mfr.client.model.block.ModelBellows;
 import minefantasy.mfr.tile.TileEntityBellows;
 import net.minecraft.block.state.IBlockState;

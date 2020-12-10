@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.archery;
 
-import minefantasy.mfr.block.decor.BlockAmmoBox;
+import minefantasy.mfr.block.BlockAmmoBox;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;

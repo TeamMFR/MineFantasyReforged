@@ -1,13 +1,13 @@
 package minefantasy.mfr.itemblock;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
-import minefantasy.mfr.block.decor.BlockTrough;
+import minefantasy.mfr.block.BlockTrough;
 import minefantasy.mfr.tile.decor.TileEntityTrough;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,13 +21,11 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 

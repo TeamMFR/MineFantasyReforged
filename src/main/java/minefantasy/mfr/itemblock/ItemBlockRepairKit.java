@@ -1,11 +1,11 @@
 package minefantasy.mfr.itemblock;
 
-import minefantasy.mfr.block.crafting.BlockRepairKit;
+import minefantasy.mfr.block.BlockRepairKit;
 import net.minecraft.block.Block;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;

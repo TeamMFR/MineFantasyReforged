@@ -3,7 +3,7 @@ package minefantasy.mfr.api.helpers;
 import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.heating.ForgeFuel;
 import minefantasy.mfr.api.heating.ForgeItemHandler;
-import minefantasy.mfr.block.crafting.BlockFrame;
+import minefantasy.mfr.block.BlockFrame;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

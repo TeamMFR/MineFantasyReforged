@@ -1,6 +1,6 @@
 package minefantasy.mfr.itemblock;
 
-import minefantasy.mfr.block.basic.BlockMeta;
+import minefantasy.mfr.block.BlockMeta;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 

@@ -7,7 +7,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.Functions;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.block.crafting.BlockFirepit;
+import minefantasy.mfr.block.BlockFirepit;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;

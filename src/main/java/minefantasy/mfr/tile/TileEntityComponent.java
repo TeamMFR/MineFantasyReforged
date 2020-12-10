@@ -2,7 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.block.decor.BlockComponent;
+import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.StorageBlockPacket;
 import net.minecraft.entity.player.EntityPlayer;

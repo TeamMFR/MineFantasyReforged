@@ -3,7 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.api.crafting.IHeatSource;
 import minefantasy.mfr.api.crafting.IHeatUser;
-import minefantasy.mfr.block.crafting.BlockRoast;
+import minefantasy.mfr.block.BlockRoast;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;

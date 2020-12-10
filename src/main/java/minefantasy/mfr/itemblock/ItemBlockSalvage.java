@@ -1,6 +1,6 @@
 package minefantasy.mfr.itemblock;
 
-import minefantasy.mfr.block.crafting.BlockSalvage;
+import minefantasy.mfr.block.BlockSalvage;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

@@ -2,13 +2,13 @@ package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.block.refining.BlockBlastHeater;
+import minefantasy.mfr.block.BlockBlastHeater;
+import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBlastHeater;
+import minefantasy.mfr.entity.EntityFireBlast;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.TileEntityCrucible;
-import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.entity.EntityFireBlast;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

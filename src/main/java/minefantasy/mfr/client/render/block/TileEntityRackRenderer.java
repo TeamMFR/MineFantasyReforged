@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.block.decor.BlockRack;
+import minefantasy.mfr.block.BlockRack;
 import minefantasy.mfr.tile.decor.TileEntityRack;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

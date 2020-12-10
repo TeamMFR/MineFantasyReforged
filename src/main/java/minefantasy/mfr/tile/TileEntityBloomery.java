@@ -7,7 +7,7 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
-import minefantasy.mfr.block.refining.BlockBloomery;
+import minefantasy.mfr.block.BlockBloomery;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
 import minefantasy.mfr.init.KnowledgeListMFR;

@@ -2,12 +2,11 @@ package minefantasy.mfr.itemblock;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.render.item.IItemRenderer;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
-import minefantasy.mfr.block.basic.BlockTileEntity;
-import minefantasy.mfr.block.decor.BlockAmmoBox;
+import minefantasy.mfr.block.BlockAmmoBox;
+import minefantasy.mfr.block.BlockTileEntity;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.tile.decor.TileEntityAmmoBox;
 import net.minecraft.block.state.IBlockState;
@@ -26,7 +25,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {

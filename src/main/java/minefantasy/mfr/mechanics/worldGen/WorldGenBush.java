@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-import static minefantasy.mfr.block.food.BlockBerryBush.AGE;
+import static minefantasy.mfr.block.BlockBerryBush.AGE;
 
 public class WorldGenBush extends WorldGenerator {
     private Block block;

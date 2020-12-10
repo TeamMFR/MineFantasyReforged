@@ -6,7 +6,7 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
-import minefantasy.mfr.block.decor.BlockAmmoBox;
+import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.gadget.ItemSyringe;
