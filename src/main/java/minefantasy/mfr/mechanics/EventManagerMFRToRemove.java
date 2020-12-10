@@ -1,6 +1,7 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.api.armour.IPowerArmour;
+import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.helpers.ArrowEffectsMF;
@@ -20,7 +21,6 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.mob.EntityDragon;
-import minefantasy.mfr.farming.FarmingHelper;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;

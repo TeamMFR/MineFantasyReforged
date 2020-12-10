@@ -1,6 +1,6 @@
 package minefantasy.mfr.config;
 
-import minefantasy.mfr.farming.FarmingHelper;
+import minefantasy.mfr.api.farming.FarmingHelper;
 
 public class ConfigFarming extends ConfigurationBaseMF {
     public static final String CATEGORY_BONUS = "Bonuses";

@@ -1,7 +1,6 @@
-package minefantasy.mfr.farming;
+package minefantasy.mfr.api.farming;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.farming.CustomHoeEntry;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
