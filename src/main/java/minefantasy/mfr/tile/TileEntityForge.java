@@ -12,7 +12,7 @@ import minefantasy.mfr.block.BlockForge;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerForge;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.item.heatable.ItemHeated;
+import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.network.ForgePacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.block.Block;

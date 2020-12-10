@@ -3,7 +3,7 @@ package minefantasy.mfr.api.helpers;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.item.heatable.ItemHeated;
+import minefantasy.mfr.item.ItemHeated;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;

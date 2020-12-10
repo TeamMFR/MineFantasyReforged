@@ -1,10 +1,8 @@
 package minefantasy.mfr.container.slots;
 
 import minefantasy.mfr.tile.TileEntityBombBench;
-import minefantasy.mfr.item.gadget.ItemBomb;
-import minefantasy.mfr.item.gadget.ItemMine;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
+import minefantasy.mfr.item.ItemBomb;
+import minefantasy.mfr.item.ItemMine;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;

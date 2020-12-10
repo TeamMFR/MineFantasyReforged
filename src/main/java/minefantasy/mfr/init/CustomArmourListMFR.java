@@ -2,8 +2,8 @@ package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.item.armour.ItemArmourMFR;
-import minefantasy.mfr.item.armour.ItemCustomArmour;
+import minefantasy.mfr.item.ItemArmourMFR;
+import minefantasy.mfr.item.ItemCustomArmour;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.inventory.EntityEquipmentSlot;

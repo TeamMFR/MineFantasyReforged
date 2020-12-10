@@ -3,7 +3,7 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.item.tool.crafting.ItemTongs;
+import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.tile.TileEntityAnvilMFR;
 import net.minecraft.block.SoundType;

@@ -6,7 +6,7 @@ import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
-import minefantasy.mfr.item.weapon.ItemWeaponMFR;
+import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.world.gen.structure.StructureGenAncientForge;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;

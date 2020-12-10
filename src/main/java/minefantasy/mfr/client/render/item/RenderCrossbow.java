@@ -5,7 +5,7 @@ import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.item.gadget.ItemCrossbow;
+import minefantasy.mfr.item.ItemCrossbow;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;

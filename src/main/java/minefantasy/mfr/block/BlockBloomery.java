@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.item.tool.ItemLighterMF;
+import minefantasy.mfr.item.ItemLighterMF;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

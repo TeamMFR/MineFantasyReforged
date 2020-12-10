@@ -25,7 +25,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.integration.CustomStone;
-import minefantasy.mfr.item.weapon.ItemWeaponMFR;
+import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.SkillPacket;

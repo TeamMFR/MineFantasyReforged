@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.entity.EntityArrowMFR;
-import minefantasy.mfr.item.archery.ItemArrowMFR;
+import minefantasy.mfr.item.ItemArrowMFR;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.BehaviorDefaultDispenseItem;
 import net.minecraft.dispenser.IBlockSource;

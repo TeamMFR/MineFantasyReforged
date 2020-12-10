@@ -9,7 +9,7 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCarpenterMFR;
-import minefantasy.mfr.item.armour.ItemArmourMFR;
+import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.network.CarpenterPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.MFRLogUtil;

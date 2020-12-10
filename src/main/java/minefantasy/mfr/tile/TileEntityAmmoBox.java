@@ -9,7 +9,7 @@ import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBandage;
-import minefantasy.mfr.item.gadget.ItemSyringe;
+import minefantasy.mfr.item.ItemSyringe;
 import minefantasy.mfr.network.AmmoBoxCommandPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.block.Block;

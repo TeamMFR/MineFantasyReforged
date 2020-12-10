@@ -1,7 +1,6 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.item.armour.ItemArmourMFR;
-import net.minecraft.block.BlockColored;
+import minefantasy.mfr.item.ItemArmourMFR;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;

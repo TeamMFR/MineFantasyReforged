@@ -2,14 +2,13 @@ package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.entity.EntityMine;
-import minefantasy.mfr.item.gadget.ItemBomb;
-import minefantasy.mfr.item.gadget.ItemMine;
+import minefantasy.mfr.item.ItemBomb;
+import minefantasy.mfr.item.ItemMine;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 
 public class BombDispenser implements IBehaviorDispenseItem {

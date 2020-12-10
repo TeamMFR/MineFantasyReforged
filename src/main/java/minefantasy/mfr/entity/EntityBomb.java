@@ -1,9 +1,9 @@
 package minefantasy.mfr.entity;
 
-import minefantasy.mfr.item.gadget.EnumCasingType;
-import minefantasy.mfr.item.gadget.EnumFillingType;
-import minefantasy.mfr.item.gadget.EnumFuseType;
-import minefantasy.mfr.item.gadget.EnumPowderType;
+import minefantasy.mfr.item.EnumCasingType;
+import minefantasy.mfr.item.EnumFillingType;
+import minefantasy.mfr.item.EnumFuseType;
+import minefantasy.mfr.item.EnumPowderType;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

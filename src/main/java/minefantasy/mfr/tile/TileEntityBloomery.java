@@ -12,7 +12,7 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.item.heatable.ItemHeated;
+import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import minefantasy.mfr.util.InventoryUtils;
