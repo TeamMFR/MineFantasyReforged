@@ -8,6 +8,7 @@ import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.helpers.PowerArmour;
+import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;

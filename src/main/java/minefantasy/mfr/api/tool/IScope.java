@@ -1,4 +1,4 @@
-package minefantasy.mfr.item;
+package minefantasy.mfr.api.tool;
 
 import net.minecraft.item.ItemStack;
 

@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.entity.player.EntityPlayer;
