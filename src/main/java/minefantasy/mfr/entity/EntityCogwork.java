@@ -9,9 +9,9 @@ import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigArmour;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.CogworkControlPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.ClientProxy;
@@ -307,9 +307,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         }
         if (ticksExisted % 100 == 0) {
             if (rand.nextInt(20) == 0) {
-                this.playSound(SoundsMFR.COGWORK_TOOT, 0.5F, 1.0F);
+                this.playSound(MineFantasySounds.COGWORK_TOOT, 0.5F, 1.0F);
             }
-            this.playSound(SoundsMFR.COGWORK_IDLE, 0.5F, 0.75F + rand.nextFloat() * 0.5F);
+            this.playSound(MineFantasySounds.COGWORK_IDLE, 0.5F, 0.75F + rand.nextFloat() * 0.5F);
         }
 
         if (!world.isRemote) {
@@ -937,9 +937,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     protected void dropFewItems(boolean pkill, int looting) {
-        this.dropItem(Item.getItemFromBlock(BlockListMFR.BLOCKCOGWORK_HELM), 1);
-        this.dropItem(Item.getItemFromBlock(BlockListMFR.BLOCKCOGWORK_CHESTPLATE), 1);
-        this.dropItem(Item.getItemFromBlock(BlockListMFR.BLOCKCOGWORK_LEGS), 1);
+        this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCKCOGWORK_HELM), 1);
+        this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCKCOGWORK_CHESTPLATE), 1);
+        this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCKCOGWORK_LEGS), 1);
 
     }
 

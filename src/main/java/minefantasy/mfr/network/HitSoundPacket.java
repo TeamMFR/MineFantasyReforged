@@ -2,7 +2,7 @@ package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,23 +52,23 @@ public class HitSoundPacket extends PacketMF {
 
     public static SoundEvent getSound (String type, String material){
         if (type.equals("blunt") && material.equals("wood")){
-            return SoundsMFR.BLUNT_WOOD;
+            return MineFantasySounds.BLUNT_WOOD;
         }
         if (type.equals("blunt") && material.equals("metal")){
-            return SoundsMFR.BLUNT_METAL;
+            return MineFantasySounds.BLUNT_METAL;
         }
         if (type.equals("blunt") && material.equals("stone")){
-            return SoundsMFR.BLUNT_STONE;
+            return MineFantasySounds.BLUNT_STONE;
         }
         if (type.equals("blade") && material.equals("wood")){
-            return SoundsMFR.BLADE_WOOD;
+            return MineFantasySounds.BLADE_WOOD;
         }
         if (type.equals("blade") && material.equals("metal")){
-            return SoundsMFR.BLADE_METAL;
+            return MineFantasySounds.BLADE_METAL;
         }
         if (type.equals("blade") && material.equals("stone")){
-            return SoundsMFR.BLADE_STONE;
+            return MineFantasySounds.BLADE_STONE;
         }
-        return SoundsMFR.BLUNT_STONE;
+        return MineFantasySounds.BLUNT_STONE;
     }
 }

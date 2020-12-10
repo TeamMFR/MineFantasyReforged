@@ -8,7 +8,7 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerResearchBench;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchTablePacket;
 import net.minecraft.entity.player.EntityPlayer;
@@ -112,7 +112,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
             if (base != null && !ResearchLogic.alreadyUsedArtefact(user, base, getInventory().getStackInSlot(0))
                     && ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user)) {
                 int artefacts = ResearchArtefacts.useArtefact(getInventory().getStackInSlot(0), base, user);
-                world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundsMFR.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+                world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
                 if (!user.world.isRemote) {
                     Object name = new TextComponentString("knowledge." + base.getUnlocalisedName());
                     if (artefacts == -1) {
@@ -171,7 +171,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
         if (user.swingProgress > 0) {
             efficiency *= Math.max(0F, 1.0F - user.swingProgress);
         }
-        world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundsMFR.FLIP_PAGE, SoundCategory.NEUTRAL, 1.0F, rand.nextFloat() * 0.4F + 0.8F, true);
+        world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.FLIP_PAGE, SoundCategory.NEUTRAL, 1.0F, rand.nextFloat() * 0.4F + 0.8F, true);
         efficiency *= getEnvironmentBoost();
         progress += efficiency;
     }

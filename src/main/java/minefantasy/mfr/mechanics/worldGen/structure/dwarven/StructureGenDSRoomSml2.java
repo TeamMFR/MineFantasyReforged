@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
-import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
@@ -60,7 +60,7 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(Block block) {
-        if (block == BlockListMFR.REINFORCED_STONE_BRICKS || block == BlockListMFR.REINFORCED_STONE) {
+        if (block == MineFantasyBlocks.REINFORCED_STONE_BRICKS || block == MineFantasyBlocks.REINFORCED_STONE) {
             return false;
         }
         return true;
@@ -96,15 +96,15 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
         placeBlock(Blocks.AIR, new BlockPos(0, 1, 0) );
         placeBlock(Blocks.AIR, new BlockPos(0, 2, 0) );
 
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(-1, 1, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(-1, 2, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, new BlockPos(-1, 3, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos(-1, 1, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(-1, 2, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, new BlockPos(-1, 3, -1) );
 
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos( 1, 1, -1));
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(1, 2, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, new BlockPos(1, 3, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos( 1, 1, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(1, 2, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, new BlockPos(1, 3, -1) );
 
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(0, 3, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(0, 3, -1) );
         placeBlock(Blocks.AIR, new BlockPos(0, 1, -1) );
         placeBlock(Blocks.AIR, new BlockPos(0, 2, -1) );
 
@@ -113,25 +113,25 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
 
     private Object[] getFloor(int width, int depth, int x, int z) {
         if (x == -(width - 1) || x == (width - 1) || z == 1 || z == depth - 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, 0};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, 0};
         }
-        return new Object[]{BlockListMFR.REFINED_PLANKS, 0};
+        return new Object[]{MineFantasyBlocks.REFINED_PLANKS, 0};
     }
 
     private Object[] getCeiling(int width, int depth, int x, int z) {
         if (x == -(width - 1) || x == (width - 1) || z == 1 || z == depth - 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
-        return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     private Object[] getWalls(int width, int depth, int x, int z) {
         if (x == -width || x == width || z == depth || z == 0) {
             if ((x == -width && (z == depth || z == 0)) || (x == width && (z == depth || z == 0))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
             }
 
-            return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
         }
         return new Object[]{Blocks.AIR, false};
     }
@@ -142,8 +142,8 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
         placeBlock(Blocks.DOUBLE_STONE_SLAB,new BlockPos(width - 3, 1, 2));
 
         for (int x = width - 1; x >= (width - 4); x--) {
-            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS, new BlockPos(x, 1, 5) );
-            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS,new BlockPos(x, 2, 5) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, new BlockPos(x, 1, 5) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS,new BlockPos(x, 2, 5) );
             placeBlock(Blocks.STONE_SLAB, new BlockPos(x, 3, 5) );
         }
         placeBlock(Blocks.STONE_SLAB, new BlockPos(width - 1, 1, 7) );
@@ -156,7 +156,7 @@ public class StructureGenDSRoomSml2 extends StructureModuleMFR {
         placeBlock(Blocks.STONE_SLAB, new BlockPos(-(width - 1), 1, 2) );
         placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(-(width - 1), 1, 3) );
 
-        placeChest(new BlockPos(width - 3, 1, 7), rotateLeft(), LootRegistryMFR.DWARVEN_HOME_RICH);
+        placeChest(new BlockPos(width - 3, 1, 7), rotateLeft(), MineFantasyLoot.DWARVEN_HOME_RICH);
     }
 
     private void placeChest(BlockPos pos, int d, ResourceLocation loot) {

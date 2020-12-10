@@ -6,8 +6,8 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -82,15 +82,15 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 		}
 
 		if (targetBlock == Blocks.GRASS || targetBlock == Blocks.DIRT) {
-			Block roadBlock = BlockListMFR.MUD_ROAD;
+			Block roadBlock = MineFantasyBlocks.MUD_ROAD;
 			placeRoad(player, world, pos, mattock, roadBlock);
 		}
 		if (targetBlock == Blocks.COBBLESTONE) {
-			Block roadBlock = BlockListMFR.COBBLESTONE_ROAD;
+			Block roadBlock = MineFantasyBlocks.COBBLESTONE_ROAD;
 			placeRoad(player, world, pos, mattock, roadBlock);
 		}
-		if (targetBlock == BlockListMFR.LIMESTONE_COBBLE) {
-			Block roadBlock = BlockListMFR.LIMESTONE_ROAD;
+		if (targetBlock == MineFantasyBlocks.LIMESTONE_COBBLE) {
+			Block roadBlock = MineFantasyBlocks.LIMESTONE_ROAD;
 			placeRoad(player, world, pos, mattock, roadBlock);
 		}
 		return EnumActionResult.FAIL;

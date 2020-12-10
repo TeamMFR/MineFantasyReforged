@@ -3,7 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.block.refining.BlockBellows;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,9 +30,9 @@ public class TileEntityBellows extends TileEntityBase implements ITickable {
         IBellowsUseable forge = getFacingForge();
         if (press < 10) {
             if (player != null) {
-                player.playSound(SoundsMFR.BELLOWS, 1, 1);
+                player.playSound(MineFantasySounds.BELLOWS, 1, 1);
             } else {
-                world.playSound(null, pos, SoundsMFR.BELLOWS, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, MineFantasySounds.BELLOWS, SoundCategory.BLOCKS, 1.0F, 1.0F);
             }
             press = 50;
             if (forge != null) {

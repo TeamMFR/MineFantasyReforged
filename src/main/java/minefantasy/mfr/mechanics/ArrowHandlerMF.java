@@ -3,8 +3,7 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigStamina;
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.enchantment.Enchantment;
+import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
@@ -111,7 +110,7 @@ public class ArrowHandlerMF {
                     if (!user.capabilities.isCreativeMode) {
                         bow.damageItem(1, user);
                     }
-                    world.playSound(user, user.getPosition(), SoundsMFR.BOW_FIRE, SoundCategory.NEUTRAL, 0.5F, 1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
+                    world.playSound(user, user.getPosition(), MineFantasySounds.BOW_FIRE, SoundCategory.NEUTRAL, 0.5F, 1.0F / (world.rand.nextFloat() * 0.4F + 1.2F) + charge * 0.5F);
                     loadArrow(user, bow, ItemStack.EMPTY);
                     AmmoMechanicsMFR.consumeAmmo(user, bow);
                     break;

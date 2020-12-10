@@ -7,7 +7,7 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -95,11 +95,11 @@ public class BlockSalvage extends Block {
         float efficiency = ToolHelper.getCrafterEfficiency(held);
         if (type.equalsIgnoreCase("saw")) {
             modifier += (efficiency * 0.1F);
-            world.playSound(user, pos.add(0.5, 0.5, 0.5), SoundsMFR.SAW_CARPENTER, SoundCategory.NEUTRAL, 2F, 1F);
+            world.playSound(user, pos.add(0.5, 0.5, 0.5), MineFantasySounds.SAW_CARPENTER, SoundCategory.NEUTRAL, 2F, 1F);
         }
         if (type.equalsIgnoreCase("hammer") || type.equalsIgnoreCase("hvyhammer")) {
             modifier += (efficiency * 0.05F);
-            world.playSound(user, pos.add(0.5, 0.5, 0.5), SoundsMFR.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 2F, 1F);
+            world.playSound(user, pos.add(0.5, 0.5, 0.5), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 2F, 1F);
         }
 
         List<ItemStack> salvage = Salvage.salvage(user, junk, dropLevel * getPlayerDropLevel(user) * modifier);

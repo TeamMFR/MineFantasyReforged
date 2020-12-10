@@ -4,7 +4,7 @@ import minefantasy.mfr.api.crafting.refine.QuernRecipes;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerQuern;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -75,7 +75,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
         if (postUseTicks > 0 || !((turnAngle == levels || turnAngle == levels * 2 || turnAngle == levels * 3 || turnAngle == 0))) {
             this.turnAngle++;
             if (!world.isRemote && (turnAngle == levels || turnAngle == levels * 2 || turnAngle == levels * 3 || turnAngle == max)) {
-                world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsMFR.QUERN, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+                world.playSound(pos.getX(), pos.getY(), pos.getZ(), MineFantasySounds.QUERN, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
                 onRevolutionComplete();
             }
             if (turnAngle >= max) {
@@ -100,13 +100,13 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
     public void onUse() {
         if (postUseTicks == 0) {
-            world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsMFR.QUERN, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+            world.playSound(pos.getX(), pos.getY(), pos.getZ(), MineFantasySounds.QUERN, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
         }
         this.postUseTicks = 10;
     }
 
     public void onRevolutionComplete() {
-        world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsMFR.CRAFT_PRIMITIVE, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+        world.playSound(pos.getX(), pos.getY(), pos.getZ(), MineFantasySounds.CRAFT_PRIMITIVE, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
         QuernRecipes result = getResult(getInventory().getStackInSlot(0));
         if (result != null && (!result.consumePot || !getInventory().getStackInSlot(1).isEmpty()) && result.tier <= getTier()) {
             ItemStack craft = result.result;
@@ -135,7 +135,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
     }
 
     private void tryCraft(ItemStack result, boolean consumePot) {
-        world.playSound(pos.getX(), pos.getY(), pos.getZ(), SoundsMFR.CRAFT_PRIMITIVE, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+        world.playSound(pos.getX(), pos.getY(), pos.getZ(), MineFantasySounds.CRAFT_PRIMITIVE, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
         /*
          * if(rand.nextFloat() > 0.20F)//20% success rate {
          * worldObj.playSoundEffect(xCoord, yCoord, zCoord, "dig.gravel", 1.0F, 0.5F);

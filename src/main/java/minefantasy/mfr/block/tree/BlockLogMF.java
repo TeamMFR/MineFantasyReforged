@@ -1,11 +1,9 @@
 package minefantasy.mfr.block.tree;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,7 +11,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import java.util.Random;
 
@@ -33,7 +30,7 @@ public class BlockLogMF extends BlockLog {
     }
 
     private Block getSaplingDrop() {
-        return this == BlockListMFR.LOG_EBONY ? BlockListMFR.SAPLING_EBONY : this == BlockListMFR.LOG_IRONBARK ? BlockListMFR.SAPLING_IRONBARK : BlockListMFR.SAPLING_YEW;
+        return this == MineFantasyBlocks.LOG_EBONY ? MineFantasyBlocks.SAPLING_EBONY : this == MineFantasyBlocks.LOG_IRONBARK ? MineFantasyBlocks.SAPLING_IRONBARK : MineFantasyBlocks.SAPLING_YEW;
     }
 
     @Override

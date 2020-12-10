@@ -25,7 +25,7 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.tool.crafting.ItemKnifeMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
@@ -377,11 +377,11 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
     @Override
     public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
         if (material == ToolMaterial.WOOD) {
-            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
             return true;
         }
         if (material == BaseMaterialMFR.STONE.getToolConversion()) {
-            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.5F, true);
+            blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.5F, true);
             return true;
         }
         return false;

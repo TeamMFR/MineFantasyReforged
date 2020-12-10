@@ -41,7 +41,7 @@ public final class CreativeTabMFR extends CreativeTabs {
             case 4:
                 return CustomToolListMFR.STANDARD_BOW.construct("steel", "OakWood");
             case 5:
-                return new ItemStack(BlockListMFR.ANVIL_IRON);
+                return new ItemStack(MineFantasyBlocks.ANVIL_IRON);
             case 6:
                 return ToolListMFR.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
             case 7:
@@ -51,7 +51,7 @@ public final class CreativeTabMFR extends CreativeTabs {
             case 9:
                 return CustomToolListMFR.STANDARD_HAMMER.construct("steel", "OakWood");
             case 10:
-                return new ItemStack(BlockListMFR.COPPER_ORE);
+                return new ItemStack(MineFantasyBlocks.COPPER_ORE);
             case 11:
                 return new ItemStack(FoodListMFR.SWEETROLL);
             case 12:

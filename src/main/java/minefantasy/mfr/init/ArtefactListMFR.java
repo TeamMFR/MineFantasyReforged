@@ -18,7 +18,7 @@ public class ArtefactListMFR {
     private static void addEngineering() {
         add(KnowledgeListMFR.blackpowder, ComponentListMFR.NITRE, ComponentListMFR.SULFUR, Items.COAL, Items.GUNPOWDER);
         add(KnowledgeListMFR.advblackpowder, Items.GLOWSTONE_DUST, Items.REDSTONE);
-        add(KnowledgeListMFR.tungsten, ComponentListMFR.ORE_TUNGSTEN, BlockListMFR.TUNGSTEN_ORE);
+        add(KnowledgeListMFR.tungsten, ComponentListMFR.ORE_TUNGSTEN, MineFantasyBlocks.TUNGSTEN_ORE);
         add(KnowledgeListMFR.coke, Items.COAL, Items.REDSTONE);
         add(KnowledgeListMFR.spyglass, ComponentListMFR.BRONZE_GEARS, Blocks.GLASS);
         add(KnowledgeListMFR.parachute, Items.FEATHER, Blocks.WOOL);
@@ -74,7 +74,7 @@ public class ArtefactListMFR {
         add(KnowledgeListMFR.refined_planks, ComponentListMFR.NAIL);
         add(KnowledgeListMFR.clay_wall, Items.CLAY_BALL, ComponentListMFR.NAIL);
         add(KnowledgeListMFR.paint_brush, Blocks.WOOL);
-        add(KnowledgeListMFR.decorated_stone, Items.IRON_INGOT, BlockListMFR.REINFORCED_STONE);
+        add(KnowledgeListMFR.decorated_stone, Items.IRON_INGOT, MineFantasyBlocks.REINFORCED_STONE);
         add(KnowledgeListMFR.bed_roll, Items.BED);
         add(KnowledgeListMFR.ammo_box, Blocks.CHEST);
         add(KnowledgeListMFR.big_box, Blocks.CHEST);
@@ -90,9 +90,9 @@ public class ArtefactListMFR {
         add(KnowledgeListMFR.coalflux, Items.COAL, ComponentListMFR.FLUX);
         add(KnowledgeListMFR.smeltIron, Blocks.IRON_ORE);
         add(KnowledgeListMFR.crucible2, ComponentListMFR.FIRECLAY);
-        add(KnowledgeListMFR.blastfurn, Items.IRON_INGOT, Blocks.IRON_ORE, Blocks.FURNACE, BlockListMFR.BLOOMERY,
-                BlockListMFR.LIMESTONE, ComponentListMFR.KAOLINITE);
-        add(KnowledgeListMFR.bigfurn, Items.IRON_INGOT, Blocks.FURNACE, BlockListMFR.BLOOMERY, ComponentListMFR.KAOLINITE,
+        add(KnowledgeListMFR.blastfurn, Items.IRON_INGOT, Blocks.IRON_ORE, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY,
+                MineFantasyBlocks.LIMESTONE, ComponentListMFR.KAOLINITE);
+        add(KnowledgeListMFR.bigfurn, Items.IRON_INGOT, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY, ComponentListMFR.KAOLINITE,
                 Items.COAL);
         for (ItemStack pig : OreDictionary.getOres("ingot_pig_iron")) {
             add(KnowledgeListMFR.smeltSteel, pig);
@@ -114,9 +114,9 @@ public class ArtefactListMFR {
         }
 
         for (ItemStack silver : OreDictionary.getOres("ingot_silver")) {
-            add(KnowledgeListMFR.smeltMithril, BlockListMFR.MYTHIC_ORE, silver);
+            add(KnowledgeListMFR.smeltMithril, MineFantasyBlocks.MYTHIC_ORE, silver);
         }
-        add(KnowledgeListMFR.smeltAdamant, BlockListMFR.MYTHIC_ORE, Items.GOLD_INGOT);
+        add(KnowledgeListMFR.smeltAdamant, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT);
 
         for (ItemStack mithril : OreDictionary.getOres("ingot_mithril")) {
             add(KnowledgeListMFR.smeltMithium, mithril, Items.GHAST_TEAR, Items.DIAMOND);
@@ -135,8 +135,8 @@ public class ArtefactListMFR {
         add(KnowledgeListMFR.arrowsBroad, Items.FEATHER, Items.FLINT);
 
         add(KnowledgeListMFR.repair_basic, Items.LEATHER, Items.FLINT, ComponentListMFR.NAIL);
-        add(KnowledgeListMFR.repair_advanced, BlockListMFR.REPAIR_BASIC, Items.SLIME_BALL, Items.STRING);
-        add(KnowledgeListMFR.repair_ornate, Items.DIAMOND, Items.GOLD_INGOT, BlockListMFR.REPAIR_ADVANCED);
+        add(KnowledgeListMFR.repair_advanced, MineFantasyBlocks.REPAIR_BASIC, Items.SLIME_BALL, Items.STRING);
+        add(KnowledgeListMFR.repair_ornate, Items.DIAMOND, Items.GOLD_INGOT, MineFantasyBlocks.REPAIR_ADVANCED);
     }
 
     private static void add(InformationBase info, Object... artifacts) {

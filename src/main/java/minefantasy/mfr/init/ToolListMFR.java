@@ -16,10 +16,10 @@ import minefantasy.mfr.item.gadget.ItemExplodingArrow;
 import minefantasy.mfr.item.gadget.ItemExplodingBolt;
 import minefantasy.mfr.item.gadget.ItemLootSack;
 import minefantasy.mfr.item.gadget.ItemMine;
+import minefantasy.mfr.item.gadget.ItemMobSpawner;
 import minefantasy.mfr.item.gadget.ItemParachute;
 import minefantasy.mfr.item.gadget.ItemSpyglass;
 import minefantasy.mfr.item.gadget.ItemSyringe;
-import minefantasy.mfr.item.gadget.MobSpawnerMF;
 import minefantasy.mfr.item.tool.ItemAxeMFR;
 import minefantasy.mfr.item.tool.ItemHoeMF;
 import minefantasy.mfr.item.tool.ItemLighterMF;
@@ -192,7 +192,7 @@ public class ToolListMFR {
         DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "WorldGenAncientForge");
         DEBUG_PLACE_ANCIENT_ALTER = new ItemWorldGenPlacer("world_gen_placer_ancient_alter", "WorldGenAncientAlter");
         DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "WorldGenDwarvenStronghold");
-        DEBUG_MOB = new MobSpawnerMF();
+        DEBUG_MOB = new ItemMobSpawner();
     }
 
     @SubscribeEvent

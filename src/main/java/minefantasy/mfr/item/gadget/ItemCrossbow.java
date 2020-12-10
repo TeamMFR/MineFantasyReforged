@@ -16,7 +16,7 @@ import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.item.archery.ItemArrowMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
@@ -27,7 +27,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -165,7 +164,7 @@ public class ItemCrossbow extends ItemBaseMFR
 
         if (time == (max - 5) && getUseAction(item).equalsIgnoreCase("reload")
                 && (loaded.isEmpty() || loaded.getCount() < getAmmoCapacity(item))) {
-            player.playSound(SoundsMFR.CROSSBOW_LOAD, 1.0F, 1 / (getFullValue(item, "speed") / 4F));
+            player.playSound(MineFantasySounds.CROSSBOW_LOAD, 1.0F, 1 / (getFullValue(item, "speed") / 4F));
         }
     }
 
@@ -391,7 +390,7 @@ public class ItemCrossbow extends ItemBaseMFR
         if (!world.isRemote) {
             world.spawnEntity(entArrow);
         }
-        world.playSound(user, user.getPosition(), SoundsMFR.CROSSBOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+        world.playSound(user, user.getPosition(), MineFantasySounds.CROSSBOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
         return true;
     }

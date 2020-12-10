@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics.worldGen;
 
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.state.IBlockState;
@@ -56,10 +56,10 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
         super(update);
         this.log = log;
         this.leaves = leaves;
-        if (log == BlockListMFR.LOG_IRONBARK) {
+        if (log == MineFantasyBlocks.LOG_IRONBARK) {
             leafDistanceLimit = 2;
         }
-        heightLimitLimit = log == BlockListMFR.LOG_EBONY ? 10 : 8;
+        heightLimitLimit = log == MineFantasyBlocks.LOG_EBONY ? 10 : 8;
     }
 
     public WorldGenMFTree setSaplingGrown() {

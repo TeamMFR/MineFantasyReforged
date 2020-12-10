@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.model;
 
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -17,10 +17,10 @@ public class BlockColorsMFR {
 
 		final IBlockColor leavesColourHandler = (state, blockAccess, pos, tintIndex) -> ColorizerFoliage.getFoliageColorBasic();
 
-		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.LEAVES_YEW);
-		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.LEAVES_IRONBARK);
-		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.LEAVES_EBONY);
-		blockColors.registerBlockColorHandler(leavesColourHandler, BlockListMFR.BERRY_BUSH);
+		blockColors.registerBlockColorHandler(leavesColourHandler, MineFantasyBlocks.LEAVES_YEW);
+		blockColors.registerBlockColorHandler(leavesColourHandler, MineFantasyBlocks.LEAVES_IRONBARK);
+		blockColors.registerBlockColorHandler(leavesColourHandler, MineFantasyBlocks.LEAVES_EBONY);
+		blockColors.registerBlockColorHandler(leavesColourHandler, MineFantasyBlocks.BERRY_BUSH);
 	}
 }
 

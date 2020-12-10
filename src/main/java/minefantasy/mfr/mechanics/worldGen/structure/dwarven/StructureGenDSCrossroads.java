@@ -3,7 +3,7 @@ package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -14,7 +14,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSCrossroads extends StructureModuleMFR {
     protected ResourceLocation lootType = LootTableList.CHESTS_ABANDONED_MINESHAFT;
-    protected Block floor_block = BlockListMFR.COBBLESTONE_ROAD;
+    protected Block floor_block = MineFantasyBlocks.COBBLESTONE_ROAD;
 
     public StructureGenDSCrossroads(World world, StructureCoordinates position) {
         super(world, position);
@@ -59,7 +59,7 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(Block block) {
-        if (block == BlockListMFR.REINFORCED_STONE_BRICKS || block == BlockListMFR.REINFORCED_STONE) {
+        if (block == MineFantasyBlocks.REINFORCED_STONE_BRICKS || block == MineFantasyBlocks.REINFORCED_STONE) {
             return false;
         }
         return true;
@@ -102,12 +102,12 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
                 blockarray = getTrim(width_span, depth, x, z);
                 if (blockarray != null) {
                     placeBlock((Block) blockarray[0], new BlockPos(x, height, z));
-                    placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos( x, 4, z));
-                    if ( blockarray[0] == BlockListMFR.REINFORCED_STONE_FRAMED) {
+                    placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos( x, 4, z));
+                    if ( blockarray[0] == MineFantasyBlocks.REINFORCED_STONE_FRAMED) {
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(h == 5 ? Blocks.GLOWSTONE : BlockListMFR.REINFORCED_STONE, new BlockPos(x, h,z ));
+                            placeBlock(h == 5 ? Blocks.GLOWSTONE : MineFantasyBlocks.REINFORCED_STONE, new BlockPos(x, h,z ));
                         }
-                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(x, 1, z));
+                        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos(x, 1, z));
                     }
                 }
 
@@ -148,19 +148,19 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
         }
         if (x == -(radius - 1) || x == (radius - 1)) {
             if (z == (int) Math.ceil((float) depth / 2) || z == (int) Math.floor((float) depth / 2)) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
                     || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
             int m = 0;
             if (x == 0 || z == 5 || z == (depth - 5)) {
                 m = 1;
             }
-            return new Object[]{BlockListMFR.REINFORCED_STONE, m};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, m};
         }
         return null;
     }
@@ -170,9 +170,9 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
-        return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     private Object[] getFloor(int radius, int depth, int x, int z) {
@@ -180,10 +180,10 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
             return new Object[]{floor_block, false};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return new Object[]{floor_block, false};
     }
@@ -191,10 +191,10 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
     private Object[] getWalls(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if ((x == -radius && (z == depth || z == 0)) || (x == radius && (z == depth || z == 0))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
             }
 
-            return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
         }
         return new Object[]{Blocks.AIR, false};
     }
@@ -229,7 +229,7 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
             for (int z = -d; z <= d; z++) {
                 Block block = Blocks.WATER;
                 if (z == -d || z == d || x == -w || x == w) {
-                    block = BlockListMFR.REINFORCED_STONE;
+                    block = MineFantasyBlocks.REINFORCED_STONE;
                 }
                 this.placeBlock(block,new BlockPos( x, 1, depth / 2 + z));
             }

@@ -11,7 +11,7 @@ import minefantasy.mfr.block.refining.BlockBloomery;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.heatable.ItemHeated;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
@@ -217,7 +217,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
                 drop = ItemHeated.createHotItem(drop, 1200);
                 entityDropItem(world, pos, drop);
             }
-            world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsMFR.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+            world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
 
             return true;
         }

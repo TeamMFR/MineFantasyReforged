@@ -5,7 +5,7 @@ import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.client.render.item.RenderSpear;
 import minefantasy.mfr.config.ConfigWeapon;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
@@ -87,7 +87,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 
     @Override
     public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-        blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
+        blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
         return true;
     }
 

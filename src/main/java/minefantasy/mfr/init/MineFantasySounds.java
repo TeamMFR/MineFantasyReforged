@@ -15,7 +15,7 @@ import java.util.List;
 @ObjectHolder(MineFantasyReborn.MOD_ID)
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 
-public class SoundsMFR {
+public class MineFantasySounds {
 	private static final List<SoundEvent> sounds = new ArrayList<>();
 
 	public static SoundEvent BELLOWS = createSoundEvent("block.bellows");

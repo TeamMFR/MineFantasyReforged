@@ -606,8 +606,8 @@ public class ComponentListMFR {
 		RandomOre.addOre(new ItemStack(KAOLINITE), 1.5F, Blocks.STONE, -1, 32, 128, false);
 		RandomOre.addOre(new ItemStack(FLUX), 2F, Blocks.STONE, -1, 0, 128, false);
 		RandomOre.addOre(new ItemStack(FLUX_STRONG), 1F, Blocks.STONE, 2, 0, 128, false);
-		RandomOre.addOre(new ItemStack(FLUX), 20F, BlockListMFR.LIMESTONE, 0, -1, 0, 256, true);
-		RandomOre.addOre(new ItemStack(FLUX_STRONG), 10F, BlockListMFR.LIMESTONE, 0, 2, 0, 256, true);
+		RandomOre.addOre(new ItemStack(FLUX), 20F, MineFantasyBlocks.LIMESTONE, 0, -1, 0, 256, true);
+		RandomOre.addOre(new ItemStack(FLUX_STRONG), 10F, MineFantasyBlocks.LIMESTONE, 0, 2, 0, 256, true);
 		RandomOre.addOre(new ItemStack(Items.COAL), 2F, Blocks.STONE, -1, 0, 128, false);
 		RandomOre.addOre(new ItemStack(SULFUR), 2F, Blocks.STONE, -1, 0, 16, false);
 		RandomOre.addOre(new ItemStack(NITRE), 3F, Blocks.STONE, -1, 0, 64, false);

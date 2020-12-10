@@ -12,10 +12,10 @@ import minefantasy.mfr.api.knowledge.client.EntryPageRecipeCarpenter;
 import minefantasy.mfr.api.knowledge.client.EntryPageSmelting;
 import minefantasy.mfr.api.knowledge.client.EntryPageText;
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.ForgingRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -176,26 +176,26 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.icingRecipe));
 
         KnowledgeListMFR.ores.addPages(new EntryPageText("knowledge.ores.1"), new EntryPageText(""));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("copper", BlockListMFR.COPPER_ORE, ComponentListMFR.COPPER_INGOT));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("tin", BlockListMFR.TIN_ORE, ComponentListMFR.TIN_INGOT));
-        KnowledgeListMFR.ores.addPages(assembleOreDescHC("silver", BlockListMFR.SILVER_ORE, ComponentListMFR.SILVER_INGOT));
-        KnowledgeListMFR.ores.addPages(assembleOreDesc("wolframite", BlockListMFR.TUNGSTEN_ORE));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("copper", MineFantasyBlocks.COPPER_ORE, ComponentListMFR.COPPER_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("tin", MineFantasyBlocks.TIN_ORE, ComponentListMFR.TIN_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDescHC("silver", MineFantasyBlocks.SILVER_ORE, ComponentListMFR.SILVER_INGOT));
+        KnowledgeListMFR.ores.addPages(assembleOreDesc("wolframite", MineFantasyBlocks.TUNGSTEN_ORE));
         KnowledgeListMFR.ores.addPages(new EntryPageCrucible(KnowledgeListMFR.wolframiteR));
-        KnowledgeListMFR.ores.addPages(assembleOreDesc("mythic", BlockListMFR.MYTHIC_ORE));
+        KnowledgeListMFR.ores.addPages(assembleOreDesc("mythic", MineFantasyBlocks.MYTHIC_ORE));
         KnowledgeListMFR.ores.addPages(new EntryPageText("knowledge.ores.2"));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("clay", BlockListMFR.CLAY_ORE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("kaolinite", BlockListMFR.KAOLINITE_ORE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("limestone", BlockListMFR.LIMESTONE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("borax", BlockListMFR.BORAX_ORE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("nitre", BlockListMFR.NITRE_ORE));
-        KnowledgeListMFR.ores.addPages(assembleMineralDesc("sulfur", BlockListMFR.SULFUR_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("clay", MineFantasyBlocks.CLAY_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("kaolinite", MineFantasyBlocks.KAOLINITE_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("limestone", MineFantasyBlocks.LIMESTONE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("borax", MineFantasyBlocks.BORAX_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("nitre", MineFantasyBlocks.NITRE_ORE));
+        KnowledgeListMFR.ores.addPages(assembleMineralDesc("sulfur", MineFantasyBlocks.SULFUR_ORE));
 
         KnowledgeListMFR.plants.addPages(new EntryPageText("knowledge.plants.1"));
-        KnowledgeListMFR.plants.addPages(assembleImgPage("berry", BlockListMFR.BERRY_BUSH));
+        KnowledgeListMFR.plants.addPages(assembleImgPage("berry", MineFantasyBlocks.BERRY_BUSH));
         KnowledgeListMFR.plants.addPages(new EntryPageText("knowledge.plants.2"));
-        KnowledgeListMFR.plants.addPages(assembleImgPage("yew", BlockListMFR.LOG_YEW));
-        KnowledgeListMFR.plants.addPages(assembleImgPage("ironbark", BlockListMFR.LOG_IRONBARK));
-        KnowledgeListMFR.plants.addPages(assembleImgPage("ebony", BlockListMFR.LOG_EBONY));
+        KnowledgeListMFR.plants.addPages(assembleImgPage("yew", MineFantasyBlocks.LOG_YEW));
+        KnowledgeListMFR.plants.addPages(assembleImgPage("ironbark", MineFantasyBlocks.LOG_IRONBARK));
+        KnowledgeListMFR.plants.addPages(assembleImgPage("ebony", MineFantasyBlocks.LOG_EBONY));
 
         KnowledgeListMFR.minotaurs.addPages(new EntryPageText("knowledge.minotaurs.1"),
                 new EntryPageText("knowledge.minotaurs.2"), new EntryPageText("knowledge.minotaurs.3"),
@@ -252,15 +252,15 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.smeltBronze.addPages(new EntryPageText("knowledge.smeltBronze.1"));
         if (ConfigHardcore.HCCreduceIngots) {
             KnowledgeListMFR.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.1"));
-            KnowledgeListMFR.smeltCopper.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.COPPER_ORE),
+            KnowledgeListMFR.smeltCopper.addPages(new EntryPageRecipeBloom(new ItemStack(MineFantasyBlocks.COPPER_ORE),
                     new ItemStack(ComponentListMFR.COPPER_INGOT)));
-            KnowledgeListMFR.smeltBronze.addPages(new EntryPageRecipeBloom(new ItemStack(BlockListMFR.TIN_ORE),
+            KnowledgeListMFR.smeltBronze.addPages(new EntryPageRecipeBloom(new ItemStack(MineFantasyBlocks.TIN_ORE),
                     new ItemStack(ComponentListMFR.TIN_INGOT)));
         } else {
-            KnowledgeListMFR.smeltCopper.addPages(new EntryPageSmelting(new ItemStack(BlockListMFR.COPPER_ORE),
+            KnowledgeListMFR.smeltCopper.addPages(new EntryPageSmelting(new ItemStack(MineFantasyBlocks.COPPER_ORE),
                     new ItemStack(ComponentListMFR.COPPER_INGOT)));
             KnowledgeListMFR.smeltBronze.addPages(
-                    new EntryPageSmelting(new ItemStack(BlockListMFR.TIN_ORE), new ItemStack(ComponentListMFR.TIN_INGOT)));
+                    new EntryPageSmelting(new ItemStack(MineFantasyBlocks.TIN_ORE), new ItemStack(ComponentListMFR.TIN_INGOT)));
         }
         KnowledgeListMFR.smeltBronze.addPages(new EntryPageCrucible(KnowledgeListMFR.bronze));
         KnowledgeListMFR.smeltIron.addPages(new EntryPageText("knowledge.smeltIron.2"));
@@ -378,7 +378,7 @@ public class KnowledgePageRegistry {
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.fireBricksR));
         KnowledgeListMFR.bigfurn.addPages(new EntryPageText("knowledge.bigfurn.heater"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.bigHeatR),
-                assembleSimpleImgPage("furnace_heater", BlockListMFR.FURNACE_HEATER.getUnlocalizedName() + ".name"));
+                assembleSimpleImgPage("furnace_heater", MineFantasyBlocks.FURNACE_HEATER.getUnlocalizedName() + ".name"));
         KnowledgeListMFR.bigfurn.addPages(new EntryPageText("knowledge.bigfurn.top"),
                 new EntryPageRecipeAnvil(KnowledgeListMFR.bigFurnR),
                 assembleSimpleImgPage("furnace_full", "knowledge.bigfurn.structure"));
@@ -425,7 +425,7 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.engTanner.addPages(new EntryPageText("knowledge.engTanner.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.engTannerR));
         KnowledgeListMFR.advcrucible.addPages(
-                assembleSimpleImgPage("auto_crucible_example", BlockListMFR.CRUCIBLE_AUTO.getUnlocalizedName() + ".name"),
+                assembleSimpleImgPage("auto_crucible_example", MineFantasyBlocks.CRUCIBLE_AUTO.getUnlocalizedName() + ".name"),
                 new EntryPageText("knowledge.advcrucible.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.autoCrucibleR),
                 new EntryPageText("knowledge.crucible2.blocks"),
@@ -798,7 +798,7 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.oats.addPages(new EntryPageText("knowledge.oats.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.oatsRecipe));
 
-        KnowledgeListMFR.berry.addPages(assembleImgPage("berry", BlockListMFR.BERRY_BUSH));
+        KnowledgeListMFR.berry.addPages(assembleImgPage("berry", MineFantasyBlocks.BERRY_BUSH));
         KnowledgeListMFR.icing.addPages(new EntryPageText("knowledge.icing.1"),
                 new EntryPageGrind(new ItemStack(Items.REEDS), new ItemStack(FoodListMFR.SUGAR_POT)),
                 new EntryPageRecipeBase(KnowledgeListMFR.SUGAR_POT_RECIPE), new EntryPageText("knowledge.icing.2"),

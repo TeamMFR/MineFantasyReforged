@@ -107,7 +107,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber(modid=MineFantasyReborn.MOD_ID)
-public class BlockListMFR {
+public class MineFantasyBlocks {
 
 	public static Block COPPER_ORE = Utils.nullValue();
 	public static Block TIN_ORE = Utils.nullValue();
@@ -286,7 +286,7 @@ public class BlockListMFR {
 	public static Block BLOCKCOGWORK_LEGS = Utils.nullValue();
 	public static Block BLOCKCOGWORK_CHESTPLATE = Utils.nullValue();
 	public static Block FRAME_BLOCK = Utils.nullValue();
-	public static Block COGWORK_BUILDER = Utils.nullValue();
+	public static Block COGWORK_HOLDER = Utils.nullValue();
 
 	public static Block MYTHIC_STONE_FRAMED = Utils.nullValue();
 	public static Block MYTHIC_STONE_DECORATED = Utils.nullValue();
@@ -476,7 +476,7 @@ public class BlockListMFR {
 		BLOCKCOGWORK_LEGS = new BlockCogwork("blockcogwork_legs", false);
 		BLOCKCOGWORK_CHESTPLATE = new BlockCogwork("blockcogwork_chestplate", true);
 		FRAME_BLOCK = new BlockFrame("frame_block");
-		COGWORK_BUILDER = new BlockFrame("cogwork_builder", FRAME_BLOCK).setCogworkHolder();
+		COGWORK_HOLDER = new BlockFrame("cogwork_holder", FRAME_BLOCK).setCogworkHolder();
 
 		MYTHIC_STONE_FRAMED = new BlockMythicDecor("mythic_stone_framed");
 		MYTHIC_STONE_DECORATED = new BlockMythicDecor("mythic_stone_decorated");
@@ -608,7 +608,7 @@ public class BlockListMFR {
 		registry.register(BLOCKCOGWORK_LEGS);
 		registry.register(BLOCKCOGWORK_CHESTPLATE);
 		registry.register(FRAME_BLOCK);
-		registry.register(COGWORK_BUILDER);
+		registry.register(COGWORK_HOLDER);
 
 		registry.register(MYTHIC_STONE_FRAMED);
 		registry.register(MYTHIC_STONE_DECORATED);
@@ -886,7 +886,7 @@ public class BlockListMFR {
 		registry.register(new ItemBlockBase(BLOCKCOGWORK_LEGS));
 		registry.register(new ItemBlockBase(BLOCKCOGWORK_CHESTPLATE));
 		registry.register(new ItemBlockBase(FRAME_BLOCK));
-		registry.register(new ItemBlockBase(COGWORK_BUILDER));
+		registry.register(new ItemBlockBase(COGWORK_HOLDER));
 
 		registry.register(new ItemBlockBase(MYTHIC_STONE_FRAMED));
 		registry.register(new ItemBlockBase(MYTHIC_STONE_DECORATED));

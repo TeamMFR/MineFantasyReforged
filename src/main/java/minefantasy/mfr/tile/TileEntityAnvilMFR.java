@@ -15,7 +15,7 @@ import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerAnvilMF;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
 import minefantasy.mfr.item.heatable.ItemHeated;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
@@ -163,7 +163,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
                     ruinCraft();
                 }
 
-                world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), SoundsMFR.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, rightClick ? 1.2F : 1.0F);
+                world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, rightClick ? 1.2F : 1.0F);
                 float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItem(EnumHand.MAIN_HAND)) * (rightClick ? 0.75F : 1.0F);
 
                 if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
@@ -175,7 +175,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
                     craftItem(user);
                 }
             } else {
-                world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), SoundsMFR.ANVIL_FAIL, SoundCategory.NEUTRAL, 0.25F, 1.0F);
+                world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_FAIL, SoundCategory.NEUTRAL, 0.25F, 1.0F);
             }
             lastPlayerHit = user.getName();
             updateCraftingData();
@@ -726,7 +726,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
 
     public void upset(EntityPlayer user) {
         if (this.progress > 0 && this.progressMax > 0) {
-            world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), SoundsMFR.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, 0.75F);
+            world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, 0.75F);
             if (!world.isRemote) {
                 progress -= (progressMax / 10F);
                 if (progress < 0) {

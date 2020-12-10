@@ -462,7 +462,7 @@ tile.blockcogwork_helm.name=Cogwork Helmet Block
 tile.blockcogwork_chestplate.name=Cogwork Chest Block
 tile.blockcogwork_legs.name=Cogwork Legs Block
 tile.frame_block.name=Frame Block
-tile.cogwork_builder.name=Cogwork Hook
+tile.cogwork_holder.name=Cogwork Holder
 
 item.cogwork_pulley.name=Cogwork Pulley
 

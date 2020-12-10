@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -44,20 +44,20 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
             placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(p, 0, -radius), 0);
             placeBlock(Blocks.STONE_BRICK_STAIRS, new BlockPos(p, 0, radius), 0);
         }
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 0, -radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(radius, 0, -radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 0, radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(radius, 0, radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 0, -radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(radius, 0, -radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 0, radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(radius, 0, radius));
 
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 1, -radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(radius, 1, -radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 1, radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(radius, 1, radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 1, -radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(radius, 1, -radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 1, radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(radius, 1, radius));
 
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 2, -radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(radius, 2, -radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 2, radius));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(radius, 2, radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 2, -radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(radius, 2, -radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-radius, 2, radius));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(radius, 2, radius));
 
         // CHEST
         {

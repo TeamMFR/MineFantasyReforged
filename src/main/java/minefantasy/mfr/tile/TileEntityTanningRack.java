@@ -7,8 +7,8 @@ import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.block.crafting.BlockEngineerTanner;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -216,7 +216,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
     }
 
     private boolean isShabbyRack() {
-        return world.getBlockState(pos).getBlock() == BlockListMFR.TANNER;
+        return world.getBlockState(pos).getBlock() == MineFantasyBlocks.TANNER;
     }
 
     private void dropItem(ItemStack itemstack) {

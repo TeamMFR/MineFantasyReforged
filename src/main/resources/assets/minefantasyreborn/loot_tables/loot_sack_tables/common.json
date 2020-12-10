@@ -104,25 +104,6 @@
                 },
                 {
                     "type": "item",
-                    "entryName:": "oak_wood_timber",
-                    "name": "minefantasyreborn:timber",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 8
-                            }
-                        },
-                        {
-                            "function": "set_nbt",
-                            "tag": "{type:\"OakWood\"}"
-                        }
-                    ],
-                    "weight": 20
-                },
-                {
-                    "type": "item",
                     "name": "minefantasyreborn:bar",
                     "functions": [
                         {
@@ -168,8 +149,27 @@
                     "weight": 10
                 },
                 {
+                    "entryName:": "oak_timber",
                     "type": "item",
+                    "name": "minefantasyreborn:timber",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 8
+                            }
+                        },
+                        {
+                            "function": "set_nbt",
+                            "tag": "{type:\"OakWood\"}"
+                        }
+                    ],
+                    "weight": 20
+                },
+                {
                     "entryName:": "refined_wood_timber",
+                    "type": "item",
                     "name": "minefantasyreborn:timber",
                     "functions": [
                         {

@@ -11,28 +11,28 @@ import net.minecraftforge.oredict.OreDictionary;
 public class OreDictListMFR {
 
 	public static void registerOreDictEntries() {
-		OreDictionary.registerOre("oreCopper", BlockListMFR.COPPER_ORE);
-		OreDictionary.registerOre("oreTin", BlockListMFR.TIN_ORE);
-		OreDictionary.registerOre("oreSilver", BlockListMFR.SILVER_ORE);
-		OreDictionary.registerOre("oreMythic", BlockListMFR.MYTHIC_ORE);
-		OreDictionary.registerOre("oreKaolinite", BlockListMFR.KAOLINITE_ORE);
-		OreDictionary.registerOre("oreNitre", BlockListMFR.NITRE_ORE);
-		OreDictionary.registerOre("oreSulfur", BlockListMFR.SULFUR_ORE);
-		OreDictionary.registerOre("oreBorax", BlockListMFR.BORAX_ORE);
-		OreDictionary.registerOre("oreTungsten", BlockListMFR.TUNGSTEN_ORE);
-		OreDictionary.registerOre("oreClay", BlockListMFR.CLAY_ORE);
-		OreDictionary.registerOre("oreRichCoal", BlockListMFR.COAL_RICH_ORE);
+		OreDictionary.registerOre("oreCopper", MineFantasyBlocks.COPPER_ORE);
+		OreDictionary.registerOre("oreTin", MineFantasyBlocks.TIN_ORE);
+		OreDictionary.registerOre("oreSilver", MineFantasyBlocks.SILVER_ORE);
+		OreDictionary.registerOre("oreMythic", MineFantasyBlocks.MYTHIC_ORE);
+		OreDictionary.registerOre("oreKaolinite", MineFantasyBlocks.KAOLINITE_ORE);
+		OreDictionary.registerOre("oreNitre", MineFantasyBlocks.NITRE_ORE);
+		OreDictionary.registerOre("oreSulfur", MineFantasyBlocks.SULFUR_ORE);
+		OreDictionary.registerOre("oreBorax", MineFantasyBlocks.BORAX_ORE);
+		OreDictionary.registerOre("oreTungsten", MineFantasyBlocks.TUNGSTEN_ORE);
+		OreDictionary.registerOre("oreClay", MineFantasyBlocks.CLAY_ORE);
+		OreDictionary.registerOre("oreRichCoal", MineFantasyBlocks.COAL_RICH_ORE);
 
-		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.LIMESTONE, 1, 1));
-		OreDictionary.registerOre("stone", new ItemStack(BlockListMFR.LIMESTONE, 1, 0));
-		OreDictionary.registerOre("limestone", new ItemStack(BlockListMFR.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLE_BRICK, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("cobblestone", new ItemStack(BlockListMFR.COBBLESTONE_ROAD, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, 1));
+		OreDictionary.registerOre("stone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, 0));
+		OreDictionary.registerOre("limestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.COBBLE_BRICK, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.COBBLESTONE_ROAD, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("blockGlass", new ItemStack(BlockListMFR.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
-		OreDictionary.registerOre("paneGlass", new ItemStack(BlockListMFR.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("blockGlass", new ItemStack(MineFantasyBlocks.WINDOW, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("blockGlass", new ItemStack(MineFantasyBlocks.FRAMED_GLASS, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("paneGlass", new ItemStack(MineFantasyBlocks.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("paneGlass", new ItemStack(MineFantasyBlocks.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
 
 		OreDictionary.registerOre("planksOakWood", new ItemStack(Blocks.PLANKS, 1, 0));
 		OreDictionary.registerOre("planksSpruceWood", new ItemStack(Blocks.PLANKS, 1, 1));
@@ -41,12 +41,12 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("planksAcaciaWood", new ItemStack(Blocks.PLANKS, 1, 4));
 		OreDictionary.registerOre("planksDarkOakWood", new ItemStack(Blocks.PLANKS, 1, 5));
 
-		OreDictionary.registerOre("planksIronbarkWood", BlockListMFR.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planksEbonyWood", BlockListMFR.EBONY_PLANKS);
-		OreDictionary.registerOre("planksYewWood", BlockListMFR.YEW_PLANKS);
-		OreDictionary.registerOre("planksIronbarkWood", BlockListMFR.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planksEbonyWood", BlockListMFR.EBONY_PLANKS);
-		OreDictionary.registerOre("planksYewWood", BlockListMFR.YEW_PLANKS);
+		OreDictionary.registerOre("planksIronbarkWood", MineFantasyBlocks.IRONBARK_PLANKS);
+		OreDictionary.registerOre("planksEbonyWood", MineFantasyBlocks.EBONY_PLANKS);
+		OreDictionary.registerOre("planksYewWood", MineFantasyBlocks.YEW_PLANKS);
+		OreDictionary.registerOre("planksIronbarkWood", MineFantasyBlocks.IRONBARK_PLANKS);
+		OreDictionary.registerOre("planksEbonyWood", MineFantasyBlocks.EBONY_PLANKS);
+		OreDictionary.registerOre("planksYewWood", MineFantasyBlocks.YEW_PLANKS);
 
 		for (ItemStack plank : OreDictionary.getOres("plankWood")) {
 			if (plank.getItem().getClass().getName().contains("blockWoodenDevice")) {

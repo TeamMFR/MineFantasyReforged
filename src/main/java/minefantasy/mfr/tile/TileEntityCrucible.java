@@ -9,7 +9,7 @@ import minefantasy.mfr.block.refining.BlockCrucible;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrucible;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 import minefantasy.mfr.util.InventoryUtils;
@@ -254,7 +254,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
     }
 
     private boolean isFirebrick(int x, int y, int z) {
-        return world.getBlockState(pos.add(x,y,z)).getBlock() == BlockListMFR.FIREBRICKS;
+        return world.getBlockState(pos.add(x,y,z)).getBlock() == MineFantasyBlocks.FIREBRICKS;
     }
     // INVENTORY
 

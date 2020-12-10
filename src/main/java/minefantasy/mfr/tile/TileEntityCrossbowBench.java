@@ -6,7 +6,7 @@ import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrossbowBench;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.network.CrossbowBenchPacket;
 import minefantasy.mfr.network.NetworkHandler;
@@ -87,7 +87,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
             progress = 0F;
         } else if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("spanner")) {
             if (!user.getHeldItemMainhand().isEmpty()) {
-                world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundsMFR.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+                world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
                 user.getHeldItemMainhand().damageItem(1, user);
                 if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
                     user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);

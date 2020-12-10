@@ -1,20 +1,19 @@
 package minefantasy.mfr.api.knowledge;
 
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.util.SoundEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.knowledge.client.EntryPage;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.IStatType;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 
@@ -192,7 +191,7 @@ public class InformationBase {
 
         boolean success = ResearchLogic.canPurchase(user, this);
         if (success && !user.world.isRemote) {
-            user.playSound(SoundsMFR.UPDATE_RESEARCH, 1.0F, 1.0F);
+            user.playSound(MineFantasySounds.UPDATE_RESEARCH, 1.0F, 1.0F);
             if (getPerk()) {
                 user.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 1.0F);
             }

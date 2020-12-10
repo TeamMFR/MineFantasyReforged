@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
@@ -14,7 +14,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 import java.util.Random;
 
 public class StructureGenDSHall extends StructureModuleMFR {
-    protected static Block floor = BlockListMFR.COBBLESTONE_ROAD;
+    protected static Block floor = MineFantasyBlocks.COBBLESTONE_ROAD;
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
 
     public StructureGenDSHall(World world, StructureCoordinates position) {
@@ -61,7 +61,7 @@ public class StructureGenDSHall extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(Block block) {
-        if (block == BlockListMFR.REINFORCED_STONE_BRICKS || block == BlockListMFR.REINFORCED_STONE) {
+        if (block == MineFantasyBlocks.REINFORCED_STONE_BRICKS || block == MineFantasyBlocks.REINFORCED_STONE) {
             return false;
         }
         return true;
@@ -100,11 +100,11 @@ public class StructureGenDSHall extends StructureModuleMFR {
                 if (blockarray != null) {
                     int meta = (Boolean) blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
                     placeBlock((Block) blockarray[0], new BlockPos(x, height, z) );
-                    if ((Block) blockarray[0] == BlockListMFR.REINFORCED_STONE_FRAMED) {
+                    if ((Block) blockarray[0] == MineFantasyBlocks.REINFORCED_STONE_FRAMED) {
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(x, h, z) );
+                            placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(x, h, z) );
                         }
-                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED,new BlockPos(x, 1, z) );
+                        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED,new BlockPos(x, 1, z) );
                     }
                 }
 
@@ -194,16 +194,16 @@ public class StructureGenDSHall extends StructureModuleMFR {
 
         if (x == -(radius - 1) || x == (radius - 1)) {
             if (z == Math.floor((float) depth / 2)) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return null;
     }
 
     protected Object[] getCeiling(int radius, int depth, int x, int z) {
-        return x == 0 ? new Object[]{BlockListMFR.REINFORCED_STONE, false}
-                : new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return x == 0 ? new Object[]{MineFantasyBlocks.REINFORCED_STONE, false}
+                : new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     protected Object[] getFloor(int radius, int depth, int x, int z) {
@@ -211,10 +211,10 @@ public class StructureGenDSHall extends StructureModuleMFR {
             return new Object[]{floor, false};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return new Object[]{floor, false};
     }
@@ -224,8 +224,8 @@ public class StructureGenDSHall extends StructureModuleMFR {
             return new Object[]{Blocks.AIR, false};
         }
         if (pos.getX() == -radius || pos.getX() == radius || pos.getZ() == depth) {
-            return pos.getY() == height / 2 ? new Object[]{BlockListMFR.REINFORCED_STONE, "Hall"}
-                    : new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+            return pos.getY() == height / 2 ? new Object[]{MineFantasyBlocks.REINFORCED_STONE, "Hall"}
+                    : new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
         }
         return new Object[]{Blocks.AIR, false};
     }

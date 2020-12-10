@@ -5,7 +5,7 @@ import minefantasy.mfr.api.crafting.IHeatSource;
 import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.block.crafting.BlockRoast;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.TileInventoryPacket;
 import net.minecraft.block.Block;
@@ -167,7 +167,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
     @Override
     public Block getBlockType() {
         if (world == null)
-            return BlockListMFR.OVEN;
+            return MineFantasyBlocks.OVEN;
 
         return super.getBlockType();
     }

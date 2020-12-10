@@ -1,22 +1,22 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.init.SoundsMFR;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasySounds;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class ItemSkillBook extends ItemComponentMFR {
             }
         }
         if (used) {
-            user.world.playSound(user.posX, user.posY, user.posZ, SoundsMFR.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+            user.world.playSound(user.posX, user.posY, user.posZ, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
             if (!user.capabilities.isCreativeMode) {
                 item.shrink(1);
             }

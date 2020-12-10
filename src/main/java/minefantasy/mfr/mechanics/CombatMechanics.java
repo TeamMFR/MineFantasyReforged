@@ -26,7 +26,7 @@ import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.Shockwave;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.weapon.ItemBattleaxe;
 import minefantasy.mfr.item.weapon.ItemDagger;
 import minefantasy.mfr.item.weapon.ItemKatana;
@@ -526,7 +526,7 @@ public class CombatMechanics {
             TacticalManager.throwPlayerOffBalance((EntityPlayer) user, 0.5F, true);
         }
 
-        target.world.playSound( null, target.getPosition(), SoundsMFR.CRITICAL, SoundCategory.NEUTRAL,1.0F, 1.0F);
+        target.world.playSound( null, target.getPosition(), MineFantasySounds.CRITICAL, SoundCategory.NEUTRAL,1.0F, 1.0F);
     }
 
     private float modifyMobDamage(EntityLivingBase user, float dam) {
@@ -703,7 +703,7 @@ public class CombatMechanics {
 
     private SoundEvent getDefaultParrySound(ItemStack weapon) {
         if (weapon.getUnlocalizedName().contains("wood") || weapon.getUnlocalizedName().contains("Wood") || weapon.getUnlocalizedName().contains("stone") || weapon.getUnlocalizedName().contains("Stone")) {
-            return SoundsMFR.WOOD_PARRY;
+            return MineFantasySounds.WOOD_PARRY;
         }
         return SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR;
     }

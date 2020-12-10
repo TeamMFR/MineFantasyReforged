@@ -47,7 +47,7 @@ public class LeatherArmourListMFR {
     }
 
     @SubscribeEvent
-    public static void registerItem(RegistryEvent.Register<Item> event) {
+    public static void registerLeatherArmourListMFR(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> registry = event.getRegistry();
 
         registry.registerAll(LEATHER);

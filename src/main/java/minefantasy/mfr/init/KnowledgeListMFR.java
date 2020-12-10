@@ -156,9 +156,9 @@ public class KnowledgeListMFR {
     public static ArrayList<ICarpenterRecipe> nailTroughR = new ArrayList<ICarpenterRecipe>();
 
     public static void init() {
-        carpenter = (new InformationBase("carpenter", 0, -3, 0, BlockListMFR.CARPENTER, (InformationBase) null))
+        carpenter = (new InformationBase("carpenter", 0, -3, 0, MineFantasyBlocks.CARPENTER, (InformationBase) null))
                 .registerStat().setUnlocked();
-        salvage = (new InformationBase("salvage", 0, -4, 0, BlockListMFR.SALVAGE_BASIC, (InformationBase) null))
+        salvage = (new InformationBase("salvage", 0, -4, 0, MineFantasyBlocks.SALVAGE_BASIC, (InformationBase) null))
                 .registerStat().setUnlocked();
         gettingStarted = (new InformationBase("gettingStarted", 0, 0, 0, Items.BOOK, (InformationBase) null))
                 .registerStat().setUnlocked();
@@ -166,10 +166,10 @@ public class KnowledgeListMFR {
                 .registerStat().setUnlocked();
         talisman = (new InformationBase("talisman", 4, 2, 0, ComponentListMFR.TALISMAN_LESSER, research)).registerStat()
                 .setUnlocked();
-        ores = (new InformationBase("ores", 1, -2, 0, BlockListMFR.COPPER_ORE, (InformationBase) null)).registerStat()
+        ores = (new InformationBase("ores", 1, -2, 0, MineFantasyBlocks.COPPER_ORE, (InformationBase) null)).registerStat()
                 .setUnlocked();
-        plants = (new InformationBase("plants", 1, -3, 0, BlockListMFR.LOG_IRONBARK, ores)).registerStat().setUnlocked();
-        chimney = (new InformationBase("chimney", 0, 2, 0, BlockListMFR.CHIMNEY_STONE, (InformationBase) null))
+        plants = (new InformationBase("plants", 1, -3, 0, MineFantasyBlocks.LOG_IRONBARK, ores)).registerStat().setUnlocked();
+        chimney = (new InformationBase("chimney", 0, 2, 0, MineFantasyBlocks.CHIMNEY_STONE, (InformationBase) null))
                 .registerStat().setUnlocked();
         tanning = (new InformationBase("tanning", 0, -2, 0, Items.LEATHER, (InformationBase) null)).registerStat()
                 .setUnlocked().setSpecial();
@@ -192,11 +192,11 @@ public class KnowledgeListMFR {
                 .setUnlocked();
 
         // ARTISANRY -From Not very to the most Expensive
-        bloomery = (new InformationBase("bloomery", 4, -2, 0, BlockListMFR.BLOOMERY, crucible)).registerStat()
+        bloomery = (new InformationBase("bloomery", 4, -2, 0, MineFantasyBlocks.BLOOMERY, crucible)).registerStat()
                 .setPage(artisanry).setUnlocked().setSpecial();
-        crucible = (new InformationBase("crucible", 4, 0, 0, BlockListMFR.CRUCIBLE_STONE, (InformationBase) null))
+        crucible = (new InformationBase("crucible", 4, 0, 0, MineFantasyBlocks.CRUCIBLE_STONE, (InformationBase) null))
                 .registerStat().setPage(artisanry).setUnlocked().setSpecial();
-        crucible2 = (new InformationBase("crucible2", 6, 0, 1, BlockListMFR.CRUCIBLE_FIRECLAY, crucible)).registerStat()
+        crucible2 = (new InformationBase("crucible2", 6, 0, 1, MineFantasyBlocks.CRUCIBLE_FIRECLAY, crucible)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 40);
 
         smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, ComponentListMFR.COPPER_INGOT, (InformationBase) null))
@@ -207,9 +207,9 @@ public class KnowledgeListMFR {
                 .setPage(artisanry).addSkill(SkillList.artisanry, 10).setDescriptValues(getMetalTier("iron"));
         coalflux = (new InformationBase("coalflux", 1, 6, 2, ComponentListMFR.COAL_FLUX, smeltIron)).registerStat()
                 .setPage(artisanry).addSkill(SkillList.artisanry, 15);
-        blastfurn = (new InformationBase("blastfurn", 2, 5, 5, BlockListMFR.BLAST_HEATER, smeltIron))
+        blastfurn = (new InformationBase("blastfurn", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smeltIron))
                 .registerStat().setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 25);
-        bigfurn = (new InformationBase("bigfurn", 0, 5, 4, BlockListMFR.FURNACE_STONE, smeltIron)).registerStat()
+        bigfurn = (new InformationBase("bigfurn", 0, 5, 4, MineFantasyBlocks.FURNACE_STONE, smeltIron)).registerStat()
                 .setPage(artisanry).setSpecial().addSkill(SkillList.artisanry, 10);
         smeltPig = (new InformationBase("smeltPig", 3, 3, 0, ComponentListMFR.PIG_IRON_INGOT, blastfurn)).registerStat()
                 .setPage(artisanry).setUnlocked().addSkill(SkillList.artisanry, 25);
@@ -253,13 +253,13 @@ public class KnowledgeListMFR {
 
         craftHCCTools = (new InformationBase("craftHCCTools", -1, -2, 0, ToolListMFR.STONE_PICK, (InformationBase) null))
                 .registerStat().setPage(artisanry).setUnlocked();
-        bellows = (new InformationBase("bellows", 0, -1, 0, BlockListMFR.BELLOWS, (InformationBase) null)).registerStat()
+        bellows = (new InformationBase("bellows", 0, -1, 0, MineFantasyBlocks.BELLOWS, (InformationBase) null)).registerStat()
                 .setPage(artisanry).setUnlocked();
-        trough = (new InformationBase("trough", 0, -2, 0, BlockListMFR.TROUGH_WOOD, bellows)).registerStat()
+        trough = (new InformationBase("trough", 0, -2, 0, MineFantasyBlocks.TROUGH_WOOD, bellows)).registerStat()
                 .setPage(artisanry).setUnlocked();
-        forge = (new InformationBase("forge", 0, 0, 0, BlockListMFR.FORGE, (InformationBase) null)).registerStat()
+        forge = (new InformationBase("forge", 0, 0, 0, MineFantasyBlocks.FORGE, (InformationBase) null)).registerStat()
                 .setPage(artisanry).setUnlocked();
-        anvil = (new InformationBase("anvil", -1, 0, 0, BlockListMFR.ANVIL_IRON, forge)).registerStat().setPage(artisanry)
+        anvil = (new InformationBase("anvil", -1, 0, 0, MineFantasyBlocks.ANVIL_IRON, forge)).registerStat().setPage(artisanry)
                 .setUnlocked().setSpecial();
         bar = (new InformationBase("bar", -1, 2, 0, ComponentListMFR.BAR, anvil)).registerStat().setPage(artisanry)
                 .setUnlocked();
@@ -307,11 +307,11 @@ public class KnowledgeListMFR {
                 .setPage(engineering).addSkill(SkillList.engineering, 10);
         syringe = (new InformationBase("syringe", 5, -2, 1, ToolListMFR.SYRINGE_EMPTY, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 25);
-        engTanner = (new InformationBase("engTanner", 5, 2, 1, BlockListMFR.TANNER_METAL, ecomponents)).registerStat()
+        engTanner = (new InformationBase("engTanner", 5, 2, 1, MineFantasyBlocks.TANNER_METAL, ecomponents)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 40).addSkill(SkillList.artisanry, 25);
-        advcrucible = (new InformationBase("advcrucible", 7, 3, 1, BlockListMFR.CRUCIBLE_AUTO, engTanner)).registerStat()
+        advcrucible = (new InformationBase("advcrucible", 7, 3, 1, MineFantasyBlocks.CRUCIBLE_AUTO, engTanner)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 50).addSkill(SkillList.artisanry, 35);
-        advforge = (new InformationBase("advforge", 9, 3, 1, BlockListMFR.FORGE_METAL, advcrucible)).registerStat()
+        advforge = (new InformationBase("advforge", 9, 3, 1, MineFantasyBlocks.FORGE_METAL, advcrucible)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 75).addSkill(SkillList.artisanry, 50);
 
         blackpowder = (new InformationBase("blackpowder", 0, 0, 4, ComponentListMFR.BLACKPOWDER, (InformationBase) null))
@@ -320,7 +320,7 @@ public class KnowledgeListMFR {
                 blackpowder)).registerStat().setPage(engineering).addSkill(SkillList.engineering, 50);
         bombs = (new InformationBase("bombs", 0, 2, 3, ToolListMFR.BOMB_CUSTOM, blackpowder)).registerStat()
                 .setPage(engineering).setSpecial().addSkill(SkillList.engineering, 10);
-        bpress = (new InformationBase("bpress", -1, 1, 2, BlockListMFR.BOMB_PRESS, bombs)).registerStat()
+        bpress = (new InformationBase("bpress", -1, 1, 2, MineFantasyBlocks.BOMB_PRESS, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 30);
         bombarrow = (new InformationBase("bombarrow", 1, 1, 2, ToolListMFR.EXPLODING_ARROW, bombs)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 40);
@@ -349,7 +349,7 @@ public class KnowledgeListMFR {
         mineCrystal = (new InformationBase("mineCrystal", -2, 9, 1, ComponentListMFR.MINE_CASING_CRYSTAL, mineObsidian))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 40);
 
-        crossbows = (new InformationBase("crossbows", -4, 0, 3, BlockListMFR.CROSSBOW_BENCH, null)).registerStat()
+        crossbows = (new InformationBase("crossbows", -4, 0, 3, MineFantasyBlocks.CROSSBOW_BENCH, null)).registerStat()
                 .setPage(engineering).setSpecial().addSkill(SkillList.engineering, 0);
         crossShafts = (new InformationBase("crossShafts", -6, 2, 0, ComponentListMFR.CROSSBOW_STOCK_WOOD, crossbows))
                 .registerStat().setPage(engineering).setUnlocked();
@@ -366,55 +366,55 @@ public class KnowledgeListMFR {
         crossScope = (new InformationBase("crossScope", -7, 3, 1, ComponentListMFR.CROSSBOW_SCOPE, crossShafts))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 20);
 
-        cogArmour = (new InformationBase("cogArmour", 8, -3, 2, BlockListMFR.BLOCKCOGWORK_HELM, tungsten)).registerStat()
+        cogArmour = (new InformationBase("cogArmour", 8, -3, 2, MineFantasyBlocks.BLOCKCOGWORK_HELM, tungsten)).registerStat()
                 .setPage(engineering).addSkill(SkillList.engineering, 60);
         compPlate = (new InformationBase("compPlate", 10, -3, 1, ComponentListMFR.COMPOSITE_ALLOY_INGOT, tungsten))
                 .registerStat().setPage(engineering).addSkill(SkillList.engineering, 50)
                 .addSkill(SkillList.artisanry, 40);
 
-        repair_basic = (new InformationBase("repair_basic", 8, 0, 2, BlockListMFR.REPAIR_BASIC, (InformationBase) null))
+        repair_basic = (new InformationBase("repair_basic", 8, 0, 2, MineFantasyBlocks.REPAIR_BASIC, (InformationBase) null))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 10);
-        repair_advanced = (new InformationBase("repair_advanced", 10, 0, 3, BlockListMFR.REPAIR_ADVANCED, repair_basic))
+        repair_advanced = (new InformationBase("repair_advanced", 10, 0, 3, MineFantasyBlocks.REPAIR_ADVANCED, repair_basic))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 25);
-        repair_ornate = (new InformationBase("repair_ornate", 12, 2, 3, BlockListMFR.REPAIR_ORNATE, repair_advanced))
+        repair_ornate = (new InformationBase("repair_ornate", 12, 2, 3, MineFantasyBlocks.REPAIR_ORNATE, repair_advanced))
                 .registerStat().setPage(artisanry).addSkill(SkillList.artisanry, 50);
 
         constructionPts = (new InformationBase("constructionPts", 0, 0, 0, ComponentListMFR.TIMBER_CUT,
                 (InformationBase) null)).registerStat().setPage(construction).setUnlocked();
-        reinforced_stone = (new InformationBase("reinforced_stone", 1, 0, 0, BlockListMFR.REINFORCED_STONE,
+        reinforced_stone = (new InformationBase("reinforced_stone", 1, 0, 0, MineFantasyBlocks.REINFORCED_STONE,
                 (InformationBase) null)).registerStat().setPage(construction).setUnlocked();
-        glass = (new InformationBase("glass", 0, 1, 0, BlockListMFR.FRAMED_GLASS, (InformationBase) null)).registerStat()
+        glass = (new InformationBase("glass", 0, 1, 0, MineFantasyBlocks.FRAMED_GLASS, (InformationBase) null)).registerStat()
                 .setPage(construction).setUnlocked();
-        brickworks = (new InformationBase("brickworks", 3, 0, 0, BlockListMFR.COBBLE_BRICK, reinforced_stone))
+        brickworks = (new InformationBase("brickworks", 3, 0, 0, MineFantasyBlocks.COBBLE_BRICK, reinforced_stone))
                 .registerStat().setPage(construction).setUnlocked();
-        bars = (new InformationBase("bars", 0, 3, 0, BlockListMFR.STEEL_BARS, glass)).registerStat().setPage(construction)
+        bars = (new InformationBase("bars", 0, 3, 0, MineFantasyBlocks.STEEL_BARS, glass)).registerStat().setPage(construction)
                 .setUnlocked();
-        thatch = (new InformationBase("thatch", 0, -3, 0, BlockListMFR.THATCH, clay_wall)).registerStat()
+        thatch = (new InformationBase("thatch", 0, -3, 0, MineFantasyBlocks.THATCH, clay_wall)).registerStat()
                 .setPage(construction).setUnlocked();
-        refined_planks = (new InformationBase("refined_planks", -1, 0, 1, BlockListMFR.REFINED_PLANKS,
+        refined_planks = (new InformationBase("refined_planks", -1, 0, 1, MineFantasyBlocks.REFINED_PLANKS,
                 (InformationBase) null)).registerStat().setPage(construction).addSkill(SkillList.construction, 0);
-        clay_wall = (new InformationBase("clay_wall", 0, -1, 2, BlockListMFR.CLAY_WALL, (InformationBase) null))
+        clay_wall = (new InformationBase("clay_wall", 0, -1, 2, MineFantasyBlocks.CLAY_WALL, (InformationBase) null))
                 .registerStat().setPage(construction).addSkill(SkillList.construction, 5);
 //        paint_brush = (new InformationBase("paint_brush", -3, 0, 1, BlockListMFR.paint_brush, refined_planks))
 //                .registerStat().setPage(construction).addSkill(SkillList.construction, 10);
-        decorated_stone = (new InformationBase("decorated_stone", 5, 0, 2, BlockListMFR.REINFORCED_STONE_FRAMED,
+        decorated_stone = (new InformationBase("decorated_stone", 5, 0, 2, MineFantasyBlocks.REINFORCED_STONE_FRAMED,
                 brickworks)).registerStat().setPage(construction).addSkill(SkillList.construction, 15);
 
 //        bed_roll = (new InformationBase("bed_roll", 2, 3, 1, BlockListMFR.bedroll, (InformationBase) null)).registerStat()
 //                .setPage(construction).setUnlocked();
-        tool_rack = (new InformationBase("tool_rack", 2, 2, 0, BlockListMFR.TOOL_RACK_WOOD, (InformationBase) null))
+        tool_rack = (new InformationBase("tool_rack", 2, 2, 0, MineFantasyBlocks.TOOL_RACK_WOOD, (InformationBase) null))
                 .registerStat().setPage(construction).setUnlocked();
-        food_box = (new InformationBase("food_box", 2, 4, 1, BlockListMFR.FOOD_BOX_BASIC, tool_rack)).registerStat()
+        food_box = (new InformationBase("food_box", 2, 4, 1, MineFantasyBlocks.FOOD_BOX_BASIC, tool_rack)).registerStat()
                 .setPage(construction).setUnlocked();
-        ammo_box = (new InformationBase("ammo_box", 4, 4, 1, BlockListMFR.AMMO_BOX_BASIC, food_box)).registerStat()
+        ammo_box = (new InformationBase("ammo_box", 4, 4, 1, MineFantasyBlocks.AMMO_BOX_BASIC, food_box)).registerStat()
                 .setPage(construction).addSkill(SkillList.construction, 15);
-        big_box = (new InformationBase("big_box", 6, 4, 1, BlockListMFR.CRATE_BASIC, ammo_box)).registerStat()
+        big_box = (new InformationBase("big_box", 6, 4, 1, MineFantasyBlocks.CRATE_BASIC, ammo_box)).registerStat()
                 .setPage(construction).addSkill(SkillList.construction, 25);
 
         // COOKING -The Cheapest
         cookingutensil = (new InformationBase("cookingutensil", -1, 0, 0, FoodListMFR.PIE_TRAY, (InformationBase) null))
                 .registerStat().setPage(provisioning).setUnlocked();
-        firepit = (new InformationBase("firepit", 0, 0, 0, BlockListMFR.FIREPIT, (InformationBase) null)).registerStat()
+        firepit = (new InformationBase("firepit", 0, 0, 0, MineFantasyBlocks.FIREPIT, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
 
         generic_meat = (new InformationBase("generic_meat", 0, -1, 0, FoodListMFR.GENERIC_MEAT_UNCOOKED,
@@ -429,9 +429,9 @@ public class KnowledgeListMFR {
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
         sandwitchBig = (new InformationBase("sandwitchBig", 3, -7, 3, FoodListMFR.SANDWITCH_BIG, sandwitch))
                 .registerStat().setPage(provisioning).addSkill(SkillList.provisioning, 25);
-        meatpie = (new InformationBase("meatpie", -1, -7, 2, BlockListMFR.PIE_MEAT, jerky)).registerStat()
+        meatpie = (new InformationBase("meatpie", -1, -7, 2, MineFantasyBlocks.PIE_MEAT, jerky)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 35);
-        shepardpie = (new InformationBase("shepardpie", -2, -9, 3, BlockListMFR.PIE_SHEPARDS, meatpie)).registerStat()
+        shepardpie = (new InformationBase("shepardpie", -2, -9, 3, MineFantasyBlocks.PIE_SHEPARDS, meatpie)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 80);
         bread = (new InformationBase("bread", 1, 0, 0, FoodListMFR.BREADROLL, (InformationBase) null)).registerStat()
                 .setPage(provisioning).setUnlocked();
@@ -450,20 +450,20 @@ public class KnowledgeListMFR {
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
         eclair = (new InformationBase("eclair", 2, 3, 3, FoodListMFR.ECLAIR, sweetroll)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 75);
-        cake = (new InformationBase("cake", 0, 5, 2, BlockListMFR.CAKE_VANILLA, sweetroll)).registerStat()
+        cake = (new InformationBase("cake", 0, 5, 2, MineFantasyBlocks.CAKE_VANILLA, sweetroll)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 25);
-        carrotcake = (new InformationBase("carrotcake", -1, 7, 3, BlockListMFR.CAKE_CARROT, cake)).registerStat()
+        carrotcake = (new InformationBase("carrotcake", -1, 7, 3, MineFantasyBlocks.CAKE_CARROT, cake)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 40);
-        chococake = (new InformationBase("chococake", 1, 7, 3, BlockListMFR.CAKE_CHOCOLATE, cake)).registerStat()
+        chococake = (new InformationBase("chococake", 1, 7, 3, MineFantasyBlocks.CAKE_CHOCOLATE, cake)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 40);
-        bfcake = (new InformationBase("bfcake", 1, 9, 4, BlockListMFR.CAKE_BF, chococake)).registerStat()
+        bfcake = (new InformationBase("bfcake", 1, 9, 4, MineFantasyBlocks.CAKE_BF, chococake)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 90);
-        berrypie = (new InformationBase("berrypie", 2, 1, 2, BlockListMFR.PIE_BERRY, berry)).registerStat()
+        berrypie = (new InformationBase("berrypie", 2, 1, 2, MineFantasyBlocks.PIE_BERRY, berry)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 20);
-        applepie = (new InformationBase("applepie", 4, 1, 2, BlockListMFR.PIE_APPLE, berrypie)).registerStat()
+        applepie = (new InformationBase("applepie", 4, 1, 2, MineFantasyBlocks.PIE_APPLE, berrypie)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 30);
 
-        cheese = (new InformationBase("cheese", 1, -1, 0, BlockListMFR.CHEESE_WHEEL, (InformationBase) null))
+        cheese = (new InformationBase("cheese", 1, -1, 0, MineFantasyBlocks.CHEESE_WHEEL, (InformationBase) null))
                 .registerStat().setPage(provisioning).setUnlocked();
         cheeseroll = (new InformationBase("cheeseroll", 3, -1, 2, FoodListMFR.CHEESE_ROLL, cheese)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
@@ -490,7 +490,7 @@ public class KnowledgeListMFR {
                 .registerStat().setPage(mastery).addSkill(SkillList.provisioning, 25).setPerk();
         doctor = (new InformationBase("doctor", 0, 3, 0, ToolListMFR.SYRINGE, firstaid)).registerStat().setPage(mastery)
                 .addSkill(SkillList.provisioning, 50).setPerk();
-        scrapper = (new InformationBase("scrapper", 0, -1, 0, BlockListMFR.SALVAGE_BASIC, (InformationBase) null))
+        scrapper = (new InformationBase("scrapper", 0, -1, 0, MineFantasyBlocks.SALVAGE_BASIC, (InformationBase) null))
                 .registerStat().setPage(mastery).addSkill(SkillList.artisanry, 35).setPerk();
 
     }

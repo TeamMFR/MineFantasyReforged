@@ -5,10 +5,10 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
@@ -71,12 +71,12 @@ public class BasicRecipesMF {
 				new Object[]{
 						"C",
 						'C', ComponentListMFR.FIRECLAY});
-		KnowledgeListMFR.fireBricksR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(BlockListMFR.FIREBRICKS),
+		KnowledgeListMFR.fireBricksR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(MineFantasyBlocks.FIREBRICKS),
 				new Object[]{
 						"BB",
 						"BB",
 						'B', ComponentListMFR.STRONG_BRICK});
-		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(BlockListMFR.FIREBRICK_STAIRS),
+		KnowledgeListMFR.fireBrickStairR = MineFantasyRebornAPI.addBasicCarpenterRecipe(new ItemStack(MineFantasyBlocks.FIREBRICK_STAIRS),
 				new Object[]{
 						"B ",
 						"BB",

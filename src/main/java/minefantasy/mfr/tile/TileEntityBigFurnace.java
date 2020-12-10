@@ -8,9 +8,9 @@ import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.refining.BlockBigFurnace;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBigFurnace;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.BigFurnacePacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.block.Block;
@@ -477,7 +477,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 
     public void openChest() {
         if (numUsers == 0) {
-            this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsMFR.FURNACE_OPEN, SoundCategory.NEUTRAL, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F, true);
+            this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MineFantasySounds.FURNACE_OPEN, SoundCategory.NEUTRAL, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F, true);
         }
         ++numUsers;
         if (!opening) {
@@ -488,7 +488,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
     public void closeChest() {
         --numUsers;
         if (numUsers == 0 && doorAngle >= 15) {
-            this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundsMFR.FURNACE_CLOSE, SoundCategory.NEUTRAL, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F, true);
+            this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MineFantasySounds.FURNACE_CLOSE, SoundCategory.NEUTRAL, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F, true);
         }
     }
 
@@ -535,7 +535,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
         if (block == world.getBlockState(pos).getBlock()) {
             return true;
         }
-        return block == BlockListMFR.FIREBRICKS;
+        return block == MineFantasyBlocks.FIREBRICKS;
     }
 
     public boolean isBlockValidForTop(BlockPos pos) {
@@ -547,7 +547,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
         if (block == null) {
             return false;
         }
-        return block == BlockListMFR.FIREBRICKS;
+        return block == MineFantasyBlocks.FIREBRICKS;
     }
 
     public boolean isBlockValidForSide(EnumFacing side) {

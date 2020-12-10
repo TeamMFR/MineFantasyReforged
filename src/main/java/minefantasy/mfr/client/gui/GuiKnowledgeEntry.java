@@ -6,7 +6,7 @@ import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.knowledge.InformationBase;
 import minefantasy.mfr.api.knowledge.client.EntryPage;
 import minefantasy.mfr.api.knowledge.client.EntryPageCraft;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;
@@ -201,7 +201,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
         @Override
         public void playPressSound(SoundHandler soundHandler) {
             soundHandler.playSound(
-                    PositionedSoundRecord.getMasterRecord(SoundsMFR.FLIP_PAGE, 1.0F));
+                    PositionedSoundRecord.getMasterRecord(MineFantasySounds.FLIP_PAGE, 1.0F));
         }
     }
 }

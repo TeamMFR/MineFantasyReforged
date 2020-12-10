@@ -8,7 +8,7 @@ import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBombBench;
 import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.gadget.ItemBomb;
 import minefantasy.mfr.item.gadget.ItemExplodingArrow;
@@ -108,7 +108,7 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
             progress = 0F;
         } else if ((pressUsed || ToolHelper.getCrafterTool(player.getHeldItemMainhand()).equalsIgnoreCase("spanner"))) {
             if (!pressUsed && !player.getHeldItemMainhand().isEmpty()) {
-                world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundsMFR.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+                world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
                 player.getHeldItemMainhand().damageItem(1, player);
                 if (player.getHeldItemMainhand().getItemDamage() >= player.getHeldItemMainhand().getMaxDamage()) {
                     player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);

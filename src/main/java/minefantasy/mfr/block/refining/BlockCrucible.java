@@ -1,9 +1,9 @@
 package minefantasy.mfr.block.refining;
 
 import minefantasy.mfr.block.basic.BlockTileEntity;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.item.ItemFilledMould;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import net.minecraft.block.SoundType;
@@ -75,7 +75,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
                     }
                     if (!world.isRemote) {
                         world.spawnEntity(new EntityLightningBolt(world, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, true));
-                        world.setBlockState(pos, (BlockListMFR.CRUCIBLE_MASTER).getDefaultState(), 2);
+                        world.setBlockState(pos, (MineFantasyBlocks.CRUCIBLE_MASTER).getDefaultState(), 2);
                     }
                 }
                 return true;

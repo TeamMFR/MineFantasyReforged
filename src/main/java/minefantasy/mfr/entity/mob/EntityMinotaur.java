@@ -8,11 +8,11 @@ import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.entity.mob.ai.AI_MinotaurFindTarget;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.OrnateStyle;
-import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.gadget.ItemBomb;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
@@ -267,7 +267,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
                     for (int z = -radius; z <= radius; z++) {
                         BlockPos pos = new BlockPos(posX + x, posY + y, posZ + z);
                         if (rand.nextInt(10) == 0) {
-                            if (world.getBlockState(pos).getBlock() == BlockListMFR.BERRY_BUSH && world.getBlockState(pos).getBlock() == Blocks.AIR) {
+                            if (world.getBlockState(pos).getBlock() == MineFantasyBlocks.BERRY_BUSH && world.getBlockState(pos).getBlock() == Blocks.AIR) {
                                 getNavigator().tryMoveToXYZ(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, 0.6F);
                                 return;
                             }
@@ -282,7 +282,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
             return;
         }
         BlockPos pos = new BlockPos(posX, posY, posZ);
-        if (world.getBlockState(pos) == BlockListMFR.BERRY_BUSH && world.getBlockState(pos) == Blocks.AIR) {
+        if (world.getBlockState(pos) == MineFantasyBlocks.BERRY_BUSH && world.getBlockState(pos) == Blocks.AIR) {
             world.playSound(posX, posY + getEyeHeight(), posZ, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.AMBIENT, 1.0F, 0.75F, true);
             swingArm(EnumHand.MAIN_HAND);
             heal(10);
@@ -390,7 +390,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
      */
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundsMFR.MINOTAUR_DEATH;
+        return MineFantasySounds.MINOTAUR_DEATH;
     }
 
     @Override

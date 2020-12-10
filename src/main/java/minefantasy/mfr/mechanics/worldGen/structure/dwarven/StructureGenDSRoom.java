@@ -3,9 +3,9 @@ package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
@@ -22,7 +22,7 @@ import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSRoom extends StructureModuleMFR {
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
-    protected Block floor_block = BlockListMFR.COBBLESTONE_ROAD;
+    protected Block floor_block = MineFantasyBlocks.COBBLESTONE_ROAD;
     private String type = "Basic";
 
     public StructureGenDSRoom(World world, StructureCoordinates position) {
@@ -86,7 +86,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(Block block) {
-        if (block == BlockListMFR.REINFORCED_STONE_BRICKS || block == BlockListMFR.REINFORCED_STONE) {
+        if (block == MineFantasyBlocks.REINFORCED_STONE_BRICKS || block == MineFantasyBlocks.REINFORCED_STONE) {
             return false;
         }
         return true;
@@ -126,11 +126,11 @@ public class StructureGenDSRoom extends StructureModuleMFR {
                 if (blockarray != null) {
                     int meta = (Boolean) blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
                     placeBlock((Block) blockarray[0], new BlockPos(x, height, z) );
-                    if ((Block) blockarray[0] == BlockListMFR.REINFORCED_STONE_FRAMED) {
+                    if ((Block) blockarray[0] == MineFantasyBlocks.REINFORCED_STONE_FRAMED) {
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(h == 4 ? Blocks.GLOWSTONE : BlockListMFR.REINFORCED_STONE, new BlockPos(x, h, z) );
+                            placeBlock(h == 4 ? Blocks.GLOWSTONE : MineFantasyBlocks.REINFORCED_STONE, new BlockPos(x, h, z) );
                         }
-                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos( x, 1, z));
+                        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos( x, 1, z));
                     }
                 }
 
@@ -205,15 +205,15 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         }
         if (x == -(radius - 1) || x == (radius - 1)) {
             if (z == (int) Math.ceil((float) depth / 2) || z == (int) Math.floor((float) depth / 2)) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
                     || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return null;
     }
@@ -223,14 +223,14 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
-        return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     private Object[] getFloor(int radius, int depth, int x, int z) {
         if (type.equalsIgnoreCase("Living") || type.equalsIgnoreCase("Study")) {
-            floor_block = BlockListMFR.REFINED_PLANKS;
+            floor_block = MineFantasyBlocks.REFINED_PLANKS;
             if (x > -2 && x < 2 && z > 3 && z < (depth - 3)) {
                 floor_block = Blocks.OBSIDIAN;
             }
@@ -239,10 +239,10 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             return new Object[]{floor_block, false};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return new Object[]{floor_block, false};
     }
@@ -250,10 +250,10 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     private Object[] getWalls(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if ((x == -radius && (z == depth || z == 0)) || (x == radius && (z == depth || z == 0))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
             }
 
-            return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
         }
         return new Object[]{Blocks.AIR, false};
     }
@@ -299,8 +299,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             int ystart = 1;
             if (z == (int) Math.ceil((float) depth / 2) + 1 || z == (int) Math.floor((float) depth / 2) - 1) {
                 ystart = 3;
-                placeChest(new BlockPos(-(width - 1), 1, z), rotateLeft(), LootRegistryMFR.DWARVEN_STUDY);
-                placeChest(new BlockPos(width - 1, 1, z), rotateRight(), LootRegistryMFR.DWARVEN_STUDY);
+                placeChest(new BlockPos(-(width - 1), 1, z), rotateLeft(), MineFantasyLoot.DWARVEN_STUDY);
+                placeChest(new BlockPos(width - 1, 1, z), rotateRight(), MineFantasyLoot.DWARVEN_STUDY);
             }
             for (int y = ystart; y < height; y++) {
                 if (getBlock(new BlockPos(-(width - 1), y, z)).getBlock().isReplaceable(world, pos)) {
@@ -315,8 +315,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             placeBlock(Blocks.DOUBLE_STONE_SLAB,new BlockPos(-1 + x, 1, (int) Math.floor((float) depth / 2) - 1) );
             placeBlock(Blocks.DOUBLE_STONE_SLAB, new BlockPos(-1 + x, 1, (int) Math.ceil((float) depth / 2) + 1) );
         }
-        placeBlock(BlockListMFR.SCHEMATIC_GENERAL, new BlockPos(0, 2, (int) Math.floor((float) depth / 2) - 1));
-        placeBlock(BlockListMFR.SCHEMATIC_GENERAL, new BlockPos(0, 2, (int) Math.ceil((float) depth / 2) + 1) );
+        placeBlock(MineFantasyBlocks.SCHEMATIC_GENERAL, new BlockPos(0, 2, (int) Math.floor((float) depth / 2) - 1));
+        placeBlock(MineFantasyBlocks.SCHEMATIC_GENERAL, new BlockPos(0, 2, (int) Math.ceil((float) depth / 2) + 1) );
         // this.placeSpawner(0, 1, depth/2, "Silverfish");
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(mob,new BlockPos(0, 1, depth / 2) );
@@ -330,48 +330,48 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         int height = getHeight();
 
         for (int y = 1; y <= 4; y++) {
-            placeBlock(BlockListMFR.FRAME_BLOCK, new BlockPos(0, y, depth - 1) );
+            placeBlock(MineFantasyBlocks.FRAME_BLOCK, new BlockPos(0, y, depth - 1) );
 
-            placeBlock(BlockListMFR.FRAME_BLOCK, new BlockPos(-1, y, depth - 2) );
-            placeBlock(BlockListMFR.FRAME_BLOCK, new BlockPos(1, y, depth - 2) );
+            placeBlock(MineFantasyBlocks.FRAME_BLOCK, new BlockPos(-1, y, depth - 2) );
+            placeBlock(MineFantasyBlocks.FRAME_BLOCK, new BlockPos(1, y, depth - 2) );
         }
-        placeBlock(BlockListMFR.COGWORK_BUILDER, new BlockPos(0, 4, depth - 2) );
+        placeBlock(MineFantasyBlocks.COGWORK_HOLDER, new BlockPos(0, 4, depth - 2) );
 
         int z = (int) Math.ceil((float) depth / 2);
         for (int x = -width; x <= width; x++) {
-            placeBlock(x == 0 ? BlockListMFR.REINFORCED_STONE_FRAMED_IRON : BlockListMFR.REINFORCED_STONE,new BlockPos(x, height, z) );
+            placeBlock(x == 0 ? MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON : MineFantasyBlocks.REINFORCED_STONE,new BlockPos(x, height, z) );
             if (x < -1 || x > 1) {
                 if (getBlock(new BlockPos(x, 1, z)).getBlock().isReplaceable(world, pos)) {
-                    Block block = (x == -2 || x == 2) ? BlockListMFR.REINFORCED_STONE_FRAMED
-                            : BlockListMFR.REINFORCED_STONE;
+                    Block block = (x == -2 || x == 2) ? MineFantasyBlocks.REINFORCED_STONE_FRAMED
+                            : MineFantasyBlocks.REINFORCED_STONE;
                     placeBlock(block, new BlockPos(x, 1, z) );
                 }
             }
             for (int y = 2; y < height; y++) {
                 if (x < -1 || x > 1 || y > 3) {
                     if (getBlock(new BlockPos(x, y, z)).getBlock().isReplaceable(world, pos)) {
-                        placeBlock(BlockListMFR.BRONZE_BARS, new BlockPos(x, y, z) );
+                        placeBlock(MineFantasyBlocks.BRONZE_BARS, new BlockPos(x, y, z) );
                     }
                 }
             }
         }
-        placeChest(new BlockPos(-(width - 2), 1, z - 1), direction, LootRegistryMFR.DWARVEN_ARMOURY);
-        placeChest(new BlockPos(-(width - 3), 1, z- 1) , direction, LootRegistryMFR.DWARVEN_ARMOURY);
-        placeChest(new BlockPos((width - 2), 1, z - 1), direction, LootRegistryMFR.DWARVEN_ARMOURY);
-        placeChest(new BlockPos((width - 3), 1, z - 1), direction, LootRegistryMFR.DWARVEN_ARMOURY);
+        placeChest(new BlockPos(-(width - 2), 1, z - 1), direction, MineFantasyLoot.DWARVEN_ARMOURY);
+        placeChest(new BlockPos(-(width - 3), 1, z- 1) , direction, MineFantasyLoot.DWARVEN_ARMOURY);
+        placeChest(new BlockPos((width - 2), 1, z - 1), direction, MineFantasyLoot.DWARVEN_ARMOURY);
+        placeChest(new BlockPos((width - 3), 1, z - 1), direction, MineFantasyLoot.DWARVEN_ARMOURY);
 
         for (int z1 = 1; z1 < z; z1++) {
             for (int y = 1; y < height; y++) {
                 if (getBlock(new BlockPos(-(width - 1), y, z1)).getBlock().isReplaceable(world, pos)) {
                     if (y == 1 || y == 3) {
-                        placeChest(new BlockPos(-(width - 1), y, z1), rotateRight(), LootRegistryMFR.DWARVEN_HOME);
+                        placeChest(new BlockPos(-(width - 1), y, z1), rotateRight(), MineFantasyLoot.DWARVEN_HOME);
                     } else {
                         placeBlock(Blocks.STONE_SLAB, new BlockPos(-(width - 1), y, z1) );
                     }
                 }
                 if (getBlock(new BlockPos((width - 1), y, z1)).getBlock().isReplaceable(world, pos)) {
                     if (y == 1 || y == 3) {
-                        placeChest(new BlockPos((width - 1), y, z1), rotateLeft(), LootRegistryMFR.DWARVEN_HOME);
+                        placeChest(new BlockPos((width - 1), y, z1), rotateLeft(), MineFantasyLoot.DWARVEN_HOME);
                     } else {
                         placeBlock(Blocks.STONE_SLAB, new BlockPos((width - 1), y, z), 1);
                     }
@@ -382,10 +382,10 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             placeRack(new BlockPos((width - 1), 2, depth - 2 - z1), rotateRight());
             placeRack(new BlockPos(-(width - 1), 2, depth - 2 - z1), rotateLeft());
         }
-        placeBlock(BlockListMFR.SCHEMATIC_GENERAL, new BlockPos(-2, 2, depth - 1) );
-        placeBlock(BlockListMFR.SCHEMATIC_GENERAL, new BlockPos(2, 2, depth - 1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(-2, 1, depth - 1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(2, 1, depth - 1) );
+        placeBlock(MineFantasyBlocks.SCHEMATIC_GENERAL, new BlockPos(-2, 2, depth - 1) );
+        placeBlock(MineFantasyBlocks.SCHEMATIC_GENERAL, new BlockPos(2, 2, depth - 1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(-2, 1, depth - 1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(2, 1, depth - 1) );
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(mob, new BlockPos(0, 1, z));
         mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
@@ -393,7 +393,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private void placeRack(BlockPos pos, int newDirection) {
-        placeBlock(BlockListMFR.TOOL_RACK_WOOD, pos, newDirection );
+        placeBlock(MineFantasyBlocks.TOOL_RACK_WOOD, pos, newDirection );
         TileEntity tile = this.getTileEntity(pos, direction);
         if (tile != null && tile instanceof TileEntityRack) {
             setupRack((TileEntityRack) tile);
@@ -421,38 +421,38 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 
         int position = reverseForge ? -1 : 1;
 
-        placeBlock(BlockListMFR.CHIMNEY_STONE_EXTRACTOR, new BlockPos((width * position), 2, z));
-        placeBlock(BlockListMFR.CHIMNEY_STONE_EXTRACTOR, new BlockPos((width * position), 2, z - 1) );
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos((width * position), 3, z));
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos((width * position), 3, z - 1));
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos((width * position), 3, z + 1) );
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos((width * position), 3, z + 2) );
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 3, z + 2) );
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 4, z + 2) );
-        placeBlock(BlockListMFR.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 5, z + 2) );
+        placeBlock(MineFantasyBlocks.CHIMNEY_STONE_EXTRACTOR, new BlockPos((width * position), 2, z));
+        placeBlock(MineFantasyBlocks.CHIMNEY_STONE_EXTRACTOR, new BlockPos((width * position), 2, z - 1) );
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos((width * position), 3, z));
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos((width * position), 3, z - 1));
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos((width * position), 3, z + 1) );
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos((width * position), 3, z + 2) );
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 3, z + 2) );
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 4, z + 2) );
+        placeBlock(MineFantasyBlocks.CHIMNEY_PIPE, new BlockPos(((width - 1) * position), 5, z + 2) );
 
         int chestFacing = position < 0 ? rotateLeft() : rotateRight();
-        placeChest(new BlockPos((-(width - 2) * position), 1, z), chestFacing, LootRegistryMFR.DWARVEN_FORGE);
-        placeChest(new BlockPos((-(width - 2) * position), 1, z - 1), chestFacing, LootRegistryMFR.DWARVEN_FORGE);
+        placeChest(new BlockPos((-(width - 2) * position), 1, z), chestFacing, MineFantasyLoot.DWARVEN_FORGE);
+        placeChest(new BlockPos((-(width - 2) * position), 1, z - 1), chestFacing, MineFantasyLoot.DWARVEN_FORGE);
 
-        placeBlock(BlockListMFR.FORGE,new BlockPos(((width - 1) * position), 1, z) );
-        placeBlock(BlockListMFR.FORGE, new BlockPos(((width - 1) * position), 1, z - 1) );
+        placeBlock(MineFantasyBlocks.FORGE,new BlockPos(((width - 1) * position), 1, z) );
+        placeBlock(MineFantasyBlocks.FORGE, new BlockPos(((width - 1) * position), 1, z - 1) );
         placeBlock(Blocks.AIR, new BlockPos(((width - 1) * position), 2, z));
         placeBlock(Blocks.AIR, new BlockPos(((width - 1) * position), 2, z - 1)) ;
 
-        placeBlock(BlockListMFR.SCHEMATIC_GENERAL, new BlockPos(((width - 1) * position), 2, z + 2) );
-        placeBlock(BlockListMFR.SCHEMATIC_GENERAL, new BlockPos(((width - 1) * position), 2, z - 3));
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(((width - 1) * position), 1, z + 2));
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(((width - 1) * position), 1, z - 3));
+        placeBlock(MineFantasyBlocks.SCHEMATIC_GENERAL, new BlockPos(((width - 1) * position), 2, z + 2) );
+        placeBlock(MineFantasyBlocks.SCHEMATIC_GENERAL, new BlockPos(((width - 1) * position), 2, z - 3));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(((width - 1) * position), 1, z + 2));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(((width - 1) * position), 1, z - 3));
 
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(((width - 1) * position), 1, z - 2)) ;
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(((width - 1) * position), 1, z + 1)) ;
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(((width - 1) * position), 2, z - 2)) ;
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(((width - 1) * position), 2, z + 1)) ;
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, new BlockPos(((width - 1) * position), 3, z - 2)) ;
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, new BlockPos(((width - 1) * position), 3, z + 1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos(((width - 1) * position), 1, z - 2)) ;
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos(((width - 1) * position), 1, z + 1)) ;
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(((width - 1) * position), 2, z - 2)) ;
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(((width - 1) * position), 2, z + 1)) ;
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, new BlockPos(((width - 1) * position), 3, z - 2)) ;
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, new BlockPos(((width - 1) * position), 3, z + 1) );
 
-        placeBlock(BlockListMFR.ANVIL_IRON, new BlockPos(position * 2, 1, z));
+        placeBlock(MineFantasyBlocks.ANVIL_IRON, new BlockPos(position * 2, 1, z));
         placeBlock(Blocks.CAULDRON, new BlockPos(position * 2, 1, z - 1));
 
         placeMiscMachine1(new BlockPos(-(width - 2) * position, 0, depth - 3));
@@ -468,20 +468,20 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 
     private void placeMiscMachine1(BlockPos pos) {
         placeBlock(Blocks.LAVA, pos);
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, pos.add(-1, 1, -1));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, pos.add(-1, 1, 1));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, pos.add(1, 1, 1));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, pos.add(1, 1, -1));
-        placeBlock(BlockListMFR.REINFORCED_STONE, pos.add(-1, 2, -1));
-        placeBlock(BlockListMFR.REINFORCED_STONE, pos.add(-1, 2, 1));
-        placeBlock(BlockListMFR.REINFORCED_STONE, pos.add(1, 2, -1));
-        placeBlock(BlockListMFR.REINFORCED_STONE, pos.add(1, 2, 1));
-        placeBlock(BlockListMFR.REINFORCED_STONE, pos.add(0, 2, 0));
-        placeBlock(BlockListMFR.REINFORCED_STONE, pos.add(0, 3, 0));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, pos.add(1, 2, 0));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, pos.add(-1, 2, 0));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, pos.add(0, 2, 1));
-        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED_IRON, pos.add(0, 2, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, pos.add(-1, 1, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, pos.add(-1, 1, 1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, pos.add(1, 1, 1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, pos.add(1, 1, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, pos.add(-1, 2, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, pos.add(-1, 2, 1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, pos.add(1, 2, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, pos.add(1, 2, 1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, pos.add(0, 2, 0));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, pos.add(0, 3, 0));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, pos.add(1, 2, 0));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, pos.add(-1, 2, 0));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, pos.add(0, 2, 1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, pos.add(0, 2, -1));
 
     }
 

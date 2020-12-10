@@ -3,7 +3,7 @@ package minefantasy.mfr.item.gadget;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.client.resources.I18n;
@@ -54,7 +54,7 @@ public class ItemSyringe extends ItemBaseMFR {
         World world = user.world;
 
         target.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
-        target.playSound(SoundsMFR.BLADE_METAL, 1.0F, 1.5F);
+        target.playSound(MineFantasySounds.BLADE_METAL, 1.0F, 1.5F);
         if (!world.isRemote) {
             apply(target, item);
         }
@@ -87,7 +87,7 @@ public class ItemSyringe extends ItemBaseMFR {
         }
 
         player.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
-        player.playSound(SoundsMFR.BLADE_METAL, 1.0F, 1.5F);
+        player.playSound(MineFantasySounds.BLADE_METAL, 1.0F, 1.5F);
         if (!world.isRemote) {
             apply(player, stack);
         }

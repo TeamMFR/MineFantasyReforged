@@ -3,7 +3,7 @@ package minefantasy.mfr.item.weapon;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.client.render.item.RenderBigTool;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -58,7 +58,7 @@ public class ItemWarhammer extends ItemHeavyWeapon {
 
     @Override
     public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-        blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundsMFR.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
+        blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
         return true;
     }
 

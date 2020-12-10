@@ -10,7 +10,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -154,7 +154,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 					}
 
 					AmmoMechanicsMFR.damageContainer(bow, player, 1);
-					world.playSound(player.posX, player.posY, player.posZ, SoundsMFR.BOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + firepower * 0.5F, true);
+					world.playSound(player.posX, player.posY, player.posZ, MineFantasySounds.BOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + firepower * 0.5F, true);
 
 					if (isInfinite) {
 						entityArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;

@@ -3,7 +3,7 @@ package minefantasy.mfr.mechanics.worldGen;
 import com.google.common.base.Predicate;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -22,21 +22,21 @@ public class WorldGenBiological {
 		Biome biome = world.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 		if (debug || isBiomeInConstraint(biome, ConfigWorldGen.berryMinTemp, ConfigWorldGen.berryMaxTemp,
 				ConfigWorldGen.berryMinRain, ConfigWorldGen.berryMaxRain)) {
-			generatePlant(seed, chunkX, chunkZ, world, BlockListMFR.BERRY_BUSH, ConfigWorldGen.berryRarity);
+			generatePlant(seed, chunkX, chunkZ, world, MineFantasyBlocks.BERRY_BUSH, ConfigWorldGen.berryRarity);
 		}
 		if (debug || isBiomeInConstraint(biome, ConfigWorldGen.yewMinTemp, ConfigWorldGen.yewMaxTemp,
 				ConfigWorldGen.yewMinRain, ConfigWorldGen.yewMaxRain)) {
-			generateTree(seed, chunkX, chunkZ, world, BlockListMFR.LOG_YEW, BlockListMFR.LEAVES_YEW,
+			generateTree(seed, chunkX, chunkZ, world, MineFantasyBlocks.LOG_YEW, MineFantasyBlocks.LEAVES_YEW,
 					ConfigWorldGen.yewRarity);
 		}
 		if (debug || isBiomeInConstraint(biome, ConfigWorldGen.ironbarkMinTemp, ConfigWorldGen.ironbarkMaxTemp,
 				ConfigWorldGen.ironbarkMinRain, ConfigWorldGen.ironbarkMaxRain)) {
-			generateTree(seed, chunkX, chunkZ, world, BlockListMFR.LOG_IRONBARK, BlockListMFR.LEAVES_IRONBARK,
+			generateTree(seed, chunkX, chunkZ, world, MineFantasyBlocks.LOG_IRONBARK, MineFantasyBlocks.LEAVES_IRONBARK,
 					ConfigWorldGen.ironbarkRarity);
 		}
 		if (debug || isBiomeInConstraint(biome, ConfigWorldGen.ebonyMinTemp, ConfigWorldGen.ebonyMaxTemp,
 				ConfigWorldGen.ebonyMinRain, ConfigWorldGen.ebonyMaxRain)) {
-			generateTree(seed, chunkX, chunkZ, world, BlockListMFR.LOG_EBONY, BlockListMFR.LEAVES_EBONY,
+			generateTree(seed, chunkX, chunkZ, world, MineFantasyBlocks.LOG_EBONY, MineFantasyBlocks.LEAVES_EBONY,
 					ConfigWorldGen.ebonyRarity);
 		}
 	}

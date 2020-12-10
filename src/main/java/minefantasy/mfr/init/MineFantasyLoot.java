@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
-public class LootRegistryMFR {
+public class MineFantasyLoot {
 	private static final List<String> VANILLA_CHEST_INJECTION_TABLES = ImmutableList.of("village_blacksmith", "simple_dungeon", "stronghold_library", "desert_pyramid", "jungle_temple", "abandoned_mineshaft", "stronghold_corridor", "stronghold_crossing");
 	public static ResourceLocation DWARVEN_ARMOURY;
 	public static ResourceLocation DWARVEN_FORGE;

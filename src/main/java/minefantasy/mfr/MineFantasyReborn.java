@@ -19,7 +19,6 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.init.ArtefactListMFR;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
@@ -27,7 +26,8 @@ import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.LeatherArmourListMFR;
-import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.OreDictListMFR;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
@@ -132,11 +132,11 @@ public class MineFantasyReborn {
 		DragonforgedStyle.init();
 		OrnateStyle.init();
 
-		BlockListMFR.init();
+		MineFantasyBlocks.init();
 
 
-		LootRegistryMFR.load();
-		BlockListMFR.load();
+		MineFantasyLoot.load();
+		MineFantasyBlocks.load();
 		ComponentListMFR.load();
 		ToolListMFR.load();
 		FoodListMFR.load();
@@ -211,7 +211,7 @@ public class MineFantasyReborn {
 	private void registerBiomeStuff(Biome biome) {
 		if (WorldGenBiological.isBiomeInConstraint(biome, ConfigWorldGen.berryMinTemp, ConfigWorldGen.berryMaxTemp,
 				ConfigWorldGen.berryMinRain, ConfigWorldGen.berryMaxRain)) {
-			biome.addFlower(BlockListMFR.BERRY_BUSH.getDefaultState(), 5);
+			biome.addFlower(MineFantasyBlocks.BERRY_BUSH.getDefaultState(), 5);
 		}
 	}
 }

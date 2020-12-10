@@ -1,22 +1,21 @@
 package minefantasy.mfr.block.decor;
 
-import minefantasy.mfr.MineFantasyReborn;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -66,7 +65,7 @@ public class BlockSchematic extends Block {
 
     public static boolean placeSchematic(int meta, EntityPlayer user, ItemStack item, World world, BlockPos pos) {
         if (world.isAirBlock(pos) && canBuildOn(world, pos.add(0,-1,0))) {
-            world.setBlockState(pos, (BlockListMFR.SCHEMATIC_GENERAL).getDefaultState());
+            world.setBlockState(pos, (MineFantasyBlocks.SCHEMATIC_GENERAL).getDefaultState());
             return true;
         }
         return false;

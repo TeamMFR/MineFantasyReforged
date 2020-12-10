@@ -7,7 +7,7 @@ import minefantasy.mfr.api.refine.ISmokeCarrier;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBlastChamber;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -136,7 +136,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 
     protected boolean isFirebrick(int x, int z) {
         Block block = world.getBlockState(pos.add(x, 0,z)).getBlock();
-        return block == BlockListMFR.FIREBRICKS;
+        return block == MineFantasyBlocks.FIREBRICKS;
     }
 
     protected boolean isAir(int x, int z) {

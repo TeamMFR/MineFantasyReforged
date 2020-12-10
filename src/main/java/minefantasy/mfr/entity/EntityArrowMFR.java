@@ -8,7 +8,7 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigWeapon;
-import minefantasy.mfr.init.SoundsMFR;
+import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.archery.ArrowType;
 import minefantasy.mfr.item.gadget.EnumFillingType;
 import minefantasy.mfr.item.gadget.EnumPowderType;
@@ -560,7 +560,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
         if (this.arrowtype != null && this.arrowtype == ArrowType.BROADHEAD) {
             pitch *= 0.75F;
         }
-        this.playSound(SoundsMFR.ARROW_HIT, 0.5F, pitch);
+        this.playSound(MineFantasySounds.ARROW_HIT, 0.5F, pitch);
         playedSound = true;
     }
 

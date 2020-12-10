@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -70,7 +70,7 @@ public class StructureGenAncientForge extends StructureModuleMFR {
         for (int x = -3; x <= 3; x++) {
             for (int z = 5; z <= 11; z++) {
                 for (int y = -3; y <= 0; y++) {
-                    placeBlock(y == 0 ? BlockListMFR.MYTHIC_STONE_DECORATED : Blocks.OBSIDIAN, new BlockPos(x, y, z));
+                    placeBlock(y == 0 ? MineFantasyBlocks.MYTHIC_STONE_DECORATED : Blocks.OBSIDIAN, new BlockPos(x, y, z));
                 }
             }
         }
@@ -92,21 +92,21 @@ public class StructureGenAncientForge extends StructureModuleMFR {
         placeBlock(Blocks.AIR, new BlockPos(0, 3, depth / 2));
         placeBlock(Blocks.AIR, new BlockPos(0, 4, depth / 2));
 
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-3, 0, depth / 2));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(+3, 0, depth / 2));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(0, 0, depth / 2 + 3));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(0, 0, depth / 2 - 3));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-3, 0, depth / 2));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(+3, 0, depth / 2));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(0, 0, depth / 2 + 3));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(0, 0, depth / 2 - 3));
 
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-3, 0, depth / 2 - 3));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(-3, 0, depth / 2 + 3));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(+3, 0, depth / 2 - 3));
-        placeBlock(BlockListMFR.MYTHIC_STONE_FRAMED, new BlockPos(+3, 0, depth / 2 + 3));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-3, 0, depth / 2 - 3));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(-3, 0, depth / 2 + 3));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(+3, 0, depth / 2 - 3));
+        placeBlock(MineFantasyBlocks.MYTHIC_STONE_FRAMED, new BlockPos(+3, 0, depth / 2 + 3));
 
         placeBlock(Blocks.OBSIDIAN, new BlockPos(0, 0, depth / 2));
         placeBlock(Blocks.OBSIDIAN, new BlockPos(0, 0, depth / 2 - 1));
         placeBlock(Blocks.OBSIDIAN, new BlockPos(0, 0, depth / 2 - 2));
 
-        placeBlock(BlockListMFR.CRUCIBLE_MYTHIC, new BlockPos(0, 1, depth / 2));
+        placeBlock(MineFantasyBlocks.CRUCIBLE_MYTHIC, new BlockPos(0, 1, depth / 2));
         placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(3, 0, depth / 2 - 1));
         placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(-3, 0, depth / 2 - 1));
         placeBlock(Blocks.END_PORTAL_FRAME, new BlockPos(-1, 0, depth / 2 + 3));

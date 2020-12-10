@@ -2,7 +2,7 @@ package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 
 public class StructureGenDSEntry extends StructureModuleMFR {
-    private static Block floor = BlockListMFR.COBBLESTONE_ROAD;
+    private static Block floor = MineFantasyBlocks.COBBLESTONE_ROAD;
     public boolean isSurfaceBuild;
     private ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
 
@@ -70,11 +70,11 @@ public class StructureGenDSEntry extends StructureModuleMFR {
                     int meta = (Boolean) blockarray[1] ? StructureGenAncientForge.getRandomMetadata(rand) : 0;
                     placeBlock((Block) blockarray[0], new BlockPos(x, height + 2, z) );
                     placeBlock((Block) blockarray[0], new BlockPos(x, height, z) );
-                    if ((Block) blockarray[0] == BlockListMFR.REINFORCED_STONE_FRAMED) {
+                    if ((Block) blockarray[0] == MineFantasyBlocks.REINFORCED_STONE_FRAMED) {
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(x, h, z) );
+                            placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(x, h, z) );
                         }
-                        placeBlock(BlockListMFR.REINFORCED_STONE_FRAMED, new BlockPos(x, 1, z));
+                        placeBlock(MineFantasyBlocks.REINFORCED_STONE_FRAMED, new BlockPos(x, 1, z));
                     }
                 }
 
@@ -86,22 +86,22 @@ public class StructureGenDSEntry extends StructureModuleMFR {
             for (int y = 1; y <= 3; y++) {
                 placeBlock(Blocks.AIR, new BlockPos(x, y, 0) );
             }
-            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS,  new BlockPos(x, 0, -1) );
-            placeBlock(BlockListMFR.REINFORCED_STONE_BRICKS,  new BlockPos(x, 0, -2) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS,  new BlockPos(x, 0, -1) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS,  new BlockPos(x, 0, -2) );
 
-            placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(x, -1, -1) );
-            placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(x, -1, -2) );
-            placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(x, 0, -3) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(x, -1, -1) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(x, -1, -2) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(x, 0, -3) );
         }
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos( -2, 0, -1));
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(-2, 0, -2) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2, 0, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2, 0, -2) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos( -2, 0, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(-2, 0, -2) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2, 0, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2, 0, -2) );
 
         placeDoorway(-1, width_span, height, depth);
         placeDoorway(1, width_span, height, depth);
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(0, height - 1, -3) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos( 0, height, -1));
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(0, height - 1, -3) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos( 0, height, -1));
 
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(mob,  new BlockPos(0, 1, depth / 2));
@@ -121,22 +121,22 @@ public class StructureGenDSEntry extends StructureModuleMFR {
 
     private void placeDoorway(int mod, int width_span, int height, int depth) {
         int h = height;
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(3 * mod, 1, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(3 * mod, 1, -2) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(3 * mod, 1, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(3 * mod, 1, -2) );
         for (int y = 1; y < h; y++) {
-            placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, y, -3) );
+            placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, y, -3) );
         }
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(1 * mod, height - 1, -3) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(1 * mod, height - 1, -3) );
 
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, height, -3) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, height, -2) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(1 * mod, height, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, height, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(3 * mod, height, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, height, -3) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, height, -2) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(1 * mod, height, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, height, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(3 * mod, height, -1) );
 
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, height + 1, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, height + 2, -1) );
-        placeBlock(BlockListMFR.REINFORCED_STONE,  new BlockPos(2 * mod, height + 2, 0) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, height + 1, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, height + 2, -1) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE,  new BlockPos(2 * mod, height + 2, 0) );
     }
 
     private Object[] getTrim(int radius, int depth, int x, int z) {
@@ -145,15 +145,15 @@ public class StructureGenDSEntry extends StructureModuleMFR {
         }
         if (x == -(radius - 1) || x == (radius - 1)) {
             if (z == (int) Math.ceil((float) depth / 2)) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
                     || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return null;
     }
@@ -163,9 +163,9 @@ public class StructureGenDSEntry extends StructureModuleMFR {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
-        return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     private Object[] getFloor(int radius, int depth, int x, int z) {
@@ -173,10 +173,10 @@ public class StructureGenDSEntry extends StructureModuleMFR {
             return new Object[]{floor, false};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return new Object[]{floor, false};
     }
@@ -185,20 +185,20 @@ public class StructureGenDSEntry extends StructureModuleMFR {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if (x == -radius || x == radius || x == 0) {
                 if (z == depth || z == Math.ceil((float) depth / 2) || z == 0) {
-                    return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+                    return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
                 }
             }
         }
-        return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     private Object[] getWalls(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if ((x == -radius && (z == depth || z == 0)) || (x == radius && (z == depth || z == 0))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
             }
 
-            return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
         }
         return new Object[]{Blocks.AIR, false};
     }

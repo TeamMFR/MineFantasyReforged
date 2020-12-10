@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics.worldGen.structure;
 
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.tile.TileEntityWorldGenMarker;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -280,7 +280,7 @@ public abstract class StructureModuleMFR {
 
         Block block = world.getBlockState(offset).getBlock();
 
-        world.setBlockState(offset, BlockListMFR.WG_MARK.getDefaultState(), 2);
+        world.setBlockState(offset, MineFantasyBlocks.WG_MARK.getDefaultState(), 2);
         TileEntity tile = world.getTileEntity(offset);
         if (tile != null && tile instanceof TileEntityWorldGenMarker) {
             ((TileEntityWorldGenMarker) tile).className = piece.getName();

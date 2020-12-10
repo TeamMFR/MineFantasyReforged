@@ -1,7 +1,7 @@
 package minefantasy.mfr.block.decor;
 
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.tile.TileEntityComponent;
-import minefantasy.mfr.init.BlockListMFR;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -31,8 +31,8 @@ public class BlockComponent extends BlockContainer {
     public BlockComponent() {
         super(Material.CIRCUITS);
 
-        setRegistryName("");
-        setUnlocalizedName("MF_ComponentStorage");
+        setRegistryName("component");
+        setUnlocalizedName("component");
         this.setHardness(1F);
         this.setResistance(1F);
         new AxisAlignedBB(1 / 16F, 0F, 1 / 16F, 15 / 16F, 12 / 16F, 15 / 16F);
@@ -48,7 +48,7 @@ public class BlockComponent extends BlockContainer {
 
     public static int placeComponent(EntityPlayer user, ItemStack item, World world, BlockPos pos, String type, String tex, int dir) {
         if (world.isAirBlock(pos) && canBuildOn(world, pos.add(0,-1,0))) {
-            world.setBlockState(pos, (IBlockState) BlockListMFR.COMPONENTS, 2);
+            world.setBlockState(pos, (IBlockState) MineFantasyBlocks.COMPONENTS, 2);
 
             int max = getStorageSize(type);
             int size = user.isSneaking() ? Math.min(item.getCount(), max) : 1;

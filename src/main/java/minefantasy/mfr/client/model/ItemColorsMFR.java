@@ -1,12 +1,12 @@
 package minefantasy.mfr.client.model;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.LeatherArmourListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.armour.ItemArmourMFR;
@@ -43,10 +43,10 @@ public class ItemColorsMFR {
 
 
 		// Leaf ItemBlock Coloration
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_YEW);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_IRONBARK);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.LEAVES_EBONY);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), BlockListMFR.BERRY_BUSH);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_YEW);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_IRONBARK);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_EBONY);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.BERRY_BUSH);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1 ), ToolListMFR.SYRINGE);
 
 		// Standard Tools

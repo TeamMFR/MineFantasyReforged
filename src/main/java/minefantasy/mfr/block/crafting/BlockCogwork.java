@@ -3,8 +3,8 @@ package minefantasy.mfr.block.crafting;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.entity.EntityCogwork;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -46,8 +46,8 @@ public class BlockCogwork extends BlockDirectional {
 
     public boolean tryBuild(EntityPlayer builder, World world, BlockPos pos) {
         if (isMain && PowerArmour.isStationBlock(world, pos.add(0,2,0))
-                && world.getBlockState(pos.add(0,-1,0)).getBlock() == BlockListMFR.BLOCKCOGWORK_LEGS
-                && world.getBlockState(pos.add(0,1,0)).getBlock() == BlockListMFR.BLOCKCOGWORK_HELM) {
+                && world.getBlockState(pos.add(0,-1,0)).getBlock() == MineFantasyBlocks.BLOCKCOGWORK_LEGS
+                && world.getBlockState(pos.add(0,1,0)).getBlock() == MineFantasyBlocks.BLOCKCOGWORK_HELM) {
             if (!world.isRemote) {
                 world.setBlockState(pos, getDefaultState());
                 world.setBlockState(pos.add(0,-1,0), getDefaultState());

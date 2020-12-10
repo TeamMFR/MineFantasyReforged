@@ -6,6 +6,7 @@ import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.item.ItemComponentMFR;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -23,7 +24,6 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,10 +31,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class MobSpawnerMF extends ItemComponentMFR {
+public class ItemMobSpawner extends ItemComponentMFR {
     public String[] types = new String[]{"dragon", "minotaur", "hound", "cogwork"};
 
-    public MobSpawnerMF() {
+    public ItemMobSpawner() {
         super("MF_Spawner");
         this.setHasSubtypes(true);
         this.setCreativeTab(CreativeTabs.MISC);

@@ -1,8 +1,8 @@
 package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
 
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
@@ -64,9 +64,9 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
                     || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE_FRAMED, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE_FRAMED, false};
             }
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return null;
     }
@@ -77,9 +77,9 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
-        return new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+        return new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
     }
 
     @Override
@@ -88,10 +88,10 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
             return new Object[]{floor, false};
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+            return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
         }
         return new Object[]{floor, false};
     }
@@ -100,11 +100,11 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
     protected Object[] getWalls(int radius, int height, int depth, BlockPos pos) {
         if (pos.getX() == -radius || pos.getX() == radius || pos.getZ() == depth || pos.getZ() == 0) {
             if ((pos.getX() == -radius && (pos.getZ() == depth || pos.getZ() == 0)) || (pos.getX() == radius && (pos.getZ() == depth || pos.getZ() == 0))) {
-                return new Object[]{BlockListMFR.REINFORCED_STONE, false};
+                return new Object[]{MineFantasyBlocks.REINFORCED_STONE, false};
             }
 
-            return pos.getY() == height / 2 ? new Object[]{BlockListMFR.REINFORCED_STONE, "Hall"}
-                    : new Object[]{BlockListMFR.REINFORCED_STONE_BRICKS, true};
+            return pos.getY() == height / 2 ? new Object[]{MineFantasyBlocks.REINFORCED_STONE, "Hall"}
+                    : new Object[]{MineFantasyBlocks.REINFORCED_STONE_BRICKS, true};
         }
         return new Object[]{Blocks.AIR, false};
     }
@@ -124,8 +124,8 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
             }
         }
 
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(-2, 4, 0) );
-        placeBlock(BlockListMFR.REINFORCED_STONE, new BlockPos(2, 4, 0) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(-2, 4, 0) );
+        placeBlock(MineFantasyBlocks.REINFORCED_STONE, new BlockPos(2, 4, 0) );
 
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(mob, new BlockPos(0, 0, depth / 2));

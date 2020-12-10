@@ -3,9 +3,9 @@ package minefantasy.mfr.block.crafting;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.block.basic.BasicBlockMF;
-import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -81,7 +81,7 @@ public class BlockFrame extends BasicBlockMF {
                 player.inventory.removeStackFromSlot(1);
             }
             if (!world.isRemote) {
-                world.setBlockState(pos, (IBlockState) BlockListMFR.COGWORK_BUILDER,2);
+                world.setBlockState(pos, (IBlockState) MineFantasyBlocks.COGWORK_HOLDER,2);
             }
             return true;
         }

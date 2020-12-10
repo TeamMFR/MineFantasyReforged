@@ -1,7 +1,6 @@
 package minefantasy.mfr.block.tree;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.init.BlockListMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
@@ -15,7 +14,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -106,7 +104,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable {
     }
 
     private Block getBlockDrop() {
-        return this == BlockListMFR.LEAVES_EBONY ? BlockListMFR.SAPLING_EBONY : this == BlockListMFR.LEAVES_IRONBARK ? BlockListMFR.SAPLING_IRONBARK : BlockListMFR.SAPLING_YEW;
+        return this == MineFantasyBlocks.LEAVES_EBONY ? MineFantasyBlocks.SAPLING_EBONY : this == MineFantasyBlocks.LEAVES_IRONBARK ? MineFantasyBlocks.SAPLING_IRONBARK : MineFantasyBlocks.SAPLING_YEW;
     }
 
     @Override

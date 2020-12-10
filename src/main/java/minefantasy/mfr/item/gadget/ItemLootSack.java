@@ -1,7 +1,7 @@
 package minefantasy.mfr.item.gadget;
 
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.init.LootRegistryMFR;
+import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -28,7 +28,7 @@ public class ItemLootSack extends ItemBaseMFR {
         this.setCreativeTab(CreativeTabMFR.tabGadget);
         this.amount = amount;
         this.tier = tier;
-        pool = tier == 0 ? LootRegistryMFR.LOOT_SACK_COMMON : tier == 1 ? LootRegistryMFR.LOOT_SACK_VALUABLE : LootRegistryMFR.LOOT_SACK_EXQUISITE;
+        pool = tier == 0 ? MineFantasyLoot.LOOT_SACK_COMMON : tier == 1 ? MineFantasyLoot.LOOT_SACK_VALUABLE : MineFantasyLoot.LOOT_SACK_EXQUISITE;
     }
 
     @Override
