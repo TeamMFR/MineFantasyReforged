@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen.structure;
+package minefantasy.mfr.world.gen.structure;
 
 import minefantasy.mfr.init.ComponentListMFR;
 import net.minecraft.block.state.IBlockState;

@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
+package minefantasy.mfr.world.gen.structure.dwarven;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
@@ -7,9 +7,9 @@ import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
 import minefantasy.mfr.tile.TileEntityRack;
+import minefantasy.mfr.world.gen.structure.StructureGenAncientForge;
+import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.mechanics.worldGen.WorldGenMFTree;
+import minefantasy.mfr.world.gen.feature.WorldGenMFTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;

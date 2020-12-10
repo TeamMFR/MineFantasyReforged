@@ -1,10 +1,8 @@
-package minefantasy.mfr.mechanics.worldGen;
+package minefantasy.mfr.world.gen.structure;
 
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.mechanics.worldGen.structure.WorldGenAncientAlter;
-import minefantasy.mfr.mechanics.worldGen.structure.WorldGenAncientForge;
-import minefantasy.mfr.mechanics.worldGen.structure.dwarven.WorldGenDwarvenStronghold;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.world.gen.structure.dwarven.WorldGenDwarvenStronghold;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

@@ -1,10 +1,10 @@
-package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
+package minefantasy.mfr.world.gen.structure.dwarven;
 
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
+import minefantasy.mfr.world.gen.structure.StructureGenAncientForge;
+import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;

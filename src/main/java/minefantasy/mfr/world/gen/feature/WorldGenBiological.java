@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen;
+package minefantasy.mfr.world.gen.feature;
 
 import com.google.common.base.Predicate;
 import minefantasy.mfr.MineFantasyReborn;

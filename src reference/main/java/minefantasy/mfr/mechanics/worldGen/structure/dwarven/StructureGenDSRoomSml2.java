@@ -1,9 +1,9 @@
-package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
+package minefantasy.mfr.world.gen.structure.dwarven;
 
 import minefantasy.mfr.init.BlockListMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.LootTypes;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureGenAncientForge;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
+import minefantasy.mfr.world.gen.structure.LootTypes;
+import minefantasy.mfr.world.gen.structure.StructureGenAncientForge;
+import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen.structure;
+package minefantasy.mfr.world.gen.structure;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;

@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen;
+package minefantasy.mfr.world;
 
 import minefantasy.mf2.config.ConfigWorldGen;
 import minefantasy.mf2.mechanics.worldGen.structure.WorldGenAncientAlter;

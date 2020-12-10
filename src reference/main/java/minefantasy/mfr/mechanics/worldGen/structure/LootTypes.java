@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen.structure;
+package minefantasy.mfr.world.gen.structure;
 
 public class LootTypes {
     public static final String DWARVEN_ARMOURY = "DwarvenArmoury";

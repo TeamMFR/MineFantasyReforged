@@ -13,7 +13,7 @@ import minefantasy.mfr.item.tool.*;
 import minefantasy.mfr.item.tool.crafting.*;
 import minefantasy.mfr.item.weapon.*;
 import minefantasy.mfr.material.BaseMaterialMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.LootTypes;
+import minefantasy.mfr.world.gen.structure.LootTypes;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;

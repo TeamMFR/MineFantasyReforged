@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen;
+package minefantasy.mfr.world;
 
 import net.minecraftforge.fml.common.IWorldGenerator;
 import net.minecraft.world.World;

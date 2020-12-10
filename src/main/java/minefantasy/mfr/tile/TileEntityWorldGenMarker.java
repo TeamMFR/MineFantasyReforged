@@ -1,7 +1,7 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
+import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;

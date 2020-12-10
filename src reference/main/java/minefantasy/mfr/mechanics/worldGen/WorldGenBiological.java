@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen;
+package minefantasy.mfr.world;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.BlockListMFR;

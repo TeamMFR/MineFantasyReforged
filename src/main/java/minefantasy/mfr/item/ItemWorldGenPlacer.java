@@ -1,11 +1,11 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.mechanics.worldGen.structure.WorldGenAncientAlter;
-import minefantasy.mfr.mechanics.worldGen.structure.WorldGenAncientForge;
-import minefantasy.mfr.mechanics.worldGen.structure.WorldGenStructureBase;
-import minefantasy.mfr.mechanics.worldGen.structure.dwarven.WorldGenDwarvenStronghold;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.world.gen.structure.WorldGenAncientAlter;
+import minefantasy.mfr.world.gen.structure.WorldGenAncientForge;
+import minefantasy.mfr.world.gen.structure.WorldGenStructureBase;
+import minefantasy.mfr.world.gen.structure.dwarven.WorldGenDwarvenStronghold;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

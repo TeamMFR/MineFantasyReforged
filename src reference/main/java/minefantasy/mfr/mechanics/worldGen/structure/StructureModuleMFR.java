@@ -1,4 +1,4 @@
-package minefantasy.mfr.mechanics.worldGen.structure;
+package minefantasy.mfr.world.gen.structure;
 
 import minefantasy.mfr.tile.TileEntityWorldGenMarker;
 import minefantasy.mfr.init.BlockListMFR;

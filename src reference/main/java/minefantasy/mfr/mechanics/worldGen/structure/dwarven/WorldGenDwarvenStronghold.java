@@ -1,7 +1,7 @@
-package minefantasy.mfr.mechanics.worldGen.structure.dwarven;
+package minefantasy.mfr.world.gen.structure.dwarven;
 
-import minefantasy.mfr.mechanics.worldGen.structure.StructureModuleMFR;
-import minefantasy.mfr.mechanics.worldGen.structure.WorldGenStructureBase;
+import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
+import minefantasy.mfr.world.gen.structure.WorldGenStructureBase;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
