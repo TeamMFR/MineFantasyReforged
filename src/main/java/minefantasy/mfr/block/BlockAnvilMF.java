@@ -23,8 +23,7 @@ import net.minecraft.world.World;
 public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
     public BaseMaterialMFR material;
     private int tier;
-    float height = 1.0F / 16F * 13F;
-    AxisAlignedBB BlockBB = new AxisAlignedBB(0F, 0F, 0F, 1F, height, 1F);
+    private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
 
     public BlockAnvilMF(BaseMaterialMFR material) {
         super(Material.ANVIL);
@@ -48,7 +47,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
 
     @Override
     public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos){
-        return BlockBB;
+        return ANVIL_AABB;
     }
 
     @Override
