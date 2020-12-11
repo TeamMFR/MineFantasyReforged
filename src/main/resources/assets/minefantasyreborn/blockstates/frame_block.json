@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "minefantasyreborn:frame_block",
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

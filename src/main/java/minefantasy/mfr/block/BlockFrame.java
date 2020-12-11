@@ -9,16 +9,20 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFrame extends BasicBlockMF {
-    public static final float offset = 0.28125F;
     public boolean isCogworkHolder = false;
+
+    private static AxisAlignedBB FRAME_AABB = new AxisAlignedBB(0.25F, 0F, 0.25F, 0.75F, 1F, 0.75F);
 
     public BlockFrame(String name) {
         this(name, null);
@@ -38,16 +42,25 @@ public class BlockFrame extends BasicBlockMF {
     }
 
     @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return FRAME_AABB;
+    }
+
+    @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return new AxisAlignedBB(0F, 0F, 0F, 1F, 1F - offset, 1F);
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
     }
 
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
 
     public void setBlockBoundsBasedOnState(IBlockState state, IBlockAccess source, BlockPos pos) {
         if (isCogworkHolder) {
