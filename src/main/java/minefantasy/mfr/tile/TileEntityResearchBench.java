@@ -11,6 +11,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchTablePacket;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -26,7 +27,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class TileEntityResearchBench extends TileEntityBase implements IBasicMetre {
@@ -81,7 +81,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
         if (research != null && research.size() > 0 && result != 0) {
             if (result == -1) {
                 if (!user.world.isRemote)
-                    user.sendMessage(new TextComponentString("research.noskill" + Arrays.toString(new Object[0])));
+                    user.sendMessage(new TextComponentString(I18n.format("research.noskill")));
                 return true;
             }
             maxProgress = getMaxTime();
@@ -98,7 +98,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
         } else {
             if (result == 0) {
                 if (!user.world.isRemote)
-                    user.sendMessage(new TextComponentString("research.null" + Arrays.toString(new Object[0])));
+                    user.sendMessage(new TextComponentString(I18n.format("research.noskill")));
             }
             progress = 0;
         }
@@ -116,9 +116,9 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
                 if (!user.world.isRemote) {
                     Object name = new TextComponentString("knowledge." + base.getUnlocalisedName());
                     if (artefacts == -1) {
-                        user.sendMessage(new TextComponentString("research.finishResearch" + name));
+                        user.sendMessage(new TextComponentString(I18n.format("research.finishResearch",name)));
                     } else {
-                        user.sendMessage(new TextComponentString("research.addArtefact" + name + artefacts + base.getArtefactCount()));
+                        user.sendMessage(new TextComponentString(I18n.format("research.addArtefact",name, artefacts, base.getArtefactCount())));
                     }
                 }
                 return;
