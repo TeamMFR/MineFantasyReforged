@@ -191,12 +191,11 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 
     @Override
     public String getItemStackDisplayName(ItemStack item) {
-        String name = ("" + I18n.format(this.getUnlocalizedNameInefficiently(item) + ".name")).trim();
-
-        if (isCustom)
-            name = CustomToolHelper.getLocalisedName(item, name);
-
-        return name;
+        String material = "";
+        if (isCustom && CustomToolHelper.getCustomPrimaryMaterial(item) != null) {
+            material = I18n.format("material." + CustomToolHelper.getCustomPrimaryMaterial(item).getName() + ".name");
+        }
+        return I18n.format("item." + this.getRegistryName().getResourcePath() + ".name", material);
     }
 
     @Override

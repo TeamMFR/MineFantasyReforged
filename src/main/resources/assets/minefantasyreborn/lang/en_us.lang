@@ -5,13 +5,12 @@ info.bow.reload=Right-Click while sneaking to open firearm.
 info.firearm.ammo=%1$s/%2$s
 info.tooltip.moreinfo=Hold [%1$s] for more information.
 
-achievement.unknown=achievement.unknown
 
 attribute.kit.salvage.name=Salvage Modifier
 
 attribute.kit.repairRate.name=Repair Value
-attribute.kit.repairRate_enchant.name=Repair Value (Enchanted Items) 
-attribute.kit.repairRate_normal.name=Repair Value (Normal Items) 
+attribute.kit.repairRate_enchant.name=Repair Value (Enchanted Items)
+attribute.kit.repairRate_normal.name=Repair Value (Normal Items)
 
 attribute.kit.repairChance.name=Repair Success Rate
 attribute.kit.breakChance.name=Kit Break Chance
@@ -55,6 +54,8 @@ research.null=There is nothing to learn from this.
 research.addArtefact=Added Knowledge to %1$s (%2$s/%3$s)
 research.finishResearch=Finished Research for %1$s
 research.cluecount= (%1$s/%2$s)
+research.requires=Requires %1$s
+research.unknown=Unknown Research
 
 # MOBS
 entity.MF_Minotaur.name=Minefantasy Minotaur
@@ -521,14 +522,14 @@ attribute.crossbow.recoil.name=Recoil x%1$s
 attribute.crossbow.capacity.name=Capacity = %1$s
 attribute.crossbow.bash.name=Melee Dmg = %1$s
 
-crosspart.stock.cross_stock_wood=Crossbow
-crosspart.stock.cross_stock_iron=Crossbow
-crosspart.stock.cross_handle_wood=Hand Crossbow
-crosspart.mechanism.cross_arms_light=Light
-crosspart.mechanism.cross_arms_heavy=Heavy
-crosspart.mechanism.cross_arms_advanced=Advanced
-crosspart.mod.cross_ammo=Repeating
-crosspart.mod.cross_scope=Scoped
+crosspart.stock.crossbow_stock_wood=Crossbow
+crosspart.stock.crossbow_stock_iron=Crossbow
+crosspart.stock.crossbow_handle_wood=Hand Crossbow
+crosspart.mechanism.crossbow_arms_light=Light
+crosspart.mechanism.crossbow_arms_heavy=Heavy
+crosspart.mechanism.crossbow_arms_advanced=Advanced
+crosspart.mod.crossbow_ammo=Repeating
+crosspart.mod.crossbow_scope=Scoped
 
 item.crossbow_stock_wood.name=Crossbow Stock
 item.crossbow_handle_wood.name=Crossbow Handle
@@ -871,7 +872,7 @@ item.standard_arrow_broad.name=%1$s Broadhead Arrow
 item.standard_bolt.name=%1$s Quarrel
 
 item.standard_mallet.name=%1$s Mallet
-item.standard_spoon.name=%1$s Spoon 
+item.standard_spoon.name=%1$s Spoon
 
 # DRAGONFORGE
 item.dragonforged_pick.name=Dragonforged %1$s Pickaxe
@@ -1225,7 +1226,7 @@ knowledge.minotaurs.desc=Horrible Abominations
 knowledge.minotaurs.1=Few creatures match the strength and rage of a minotaur. Legend has it these creatures were once human and cow before being fused into this new, horrible form. Minotaurs are omnivores have an extremely short temper.^Regardless of origins, a minotaur is powerful enough to rip someone to shreds within seconds if their set off, are able to heal quickly from the blood of their foes, and (in some cases) show signs of organisation.
 knowledge.minotaurs.2=$hLesser Minotaur-$r^It may be common sight to see lesser minotaurs in the wild proving a threat to those unfortunate enough to come close.^These creatures are little more than beasts yet provide a misconception of actual minotaur behavior. Lesser minotaurs either have no home or are set out to scavenge for their greater counterparts.
 knowledge.minotaurs.3=$hGreater Minotaur-$r^Greater minotaurs are found dwelling in dwarven complexes underground providing a challenge to explorers.^The minotaurs that are housed within these ruins are more organised and deadly. Standard minotaur warriors are brutal and armed while the elite and warlords that can be found deeper within ruins are powerful foes. It shall be made clear that ruins should be explored only by the prepared. One warrior may prove a challenge, but a group? few have survived.
-knowledge.minotaurs.4=$hSpecies-$r^There are three known species of minotaur found in both wild and ruin. There is no difference to the behavior or living patterns of minotaurs of different species but physical properties do vary. 
+knowledge.minotaurs.4=$hSpecies-$r^There are three known species of minotaur found in both wild and ruin. There is no difference to the behavior or living patterns of minotaurs of different species but physical properties do vary.
 knowledge.minotaurs.combat=$hCombat-$r^The best advice that could be given to fighting off a minotaur would be range. Don't let them get close enough to hit you, even the strongest armour buckles under the force of their fury. Many minotaurs are heavily armoured as well but both hide and plate are vulnerable to piercing attacks a spear would be capable of exploiting both these weaknesses. Spears, explosives, distance and heavy armour give the best chances of survival.
 
 knowledge.mob.minotaur.name=Brown Minotaur
@@ -1672,7 +1673,7 @@ knowledge.craftArmourMedium.scale=As an alternative, Scalemail can be created. S
 knowledge.craftArmourHeavy=Heavy Armor
 knowledge.craftArmourHeavy.desc=Strong but restricted
 
-knowledge.craftArmourHeavy.1=You have gained decent protection from medium armour, yet is still seems limited. Medium armour does have a large amount of advantages but there may be a way to improve further.^Through study of the anatomy of some of the wildlife: It seems apparent that wool and feathers cushion blows rather effectively, a padded piece of armour may offer a decent advantage.^This would make armours created in this style very heavy and hard to wear however. 
+knowledge.craftArmourHeavy.1=You have gained decent protection from medium armour, yet is still seems limited. Medium armour does have a large amount of advantages but there may be a way to improve further.^Through study of the anatomy of some of the wildlife: It seems apparent that wool and feathers cushion blows rather effectively, a padded piece of armour may offer a decent advantage.^This would make armours created in this style very heavy and hard to wear however.
 knowledge.craftArmourHeavy.2=Heavy armour is crafted with a padded suit already made. Padded armour provides a soft and protective layer for underneath armour.
 
 knowledge.craftArmourHeavy.splint=Splintmail isn't quite as heavy as a full blown suit of plate, and has lesser protective qualities in return. However, splintmail is still far superior to medium armors and protects all damage types equally.
@@ -1765,7 +1766,7 @@ knowledge.spoon.info=$hSpoon$r^Spoons. Used for cooking, generally mixing... Wha
 knowledge.arrows=Fletching
 knowledge.arrows.desc=Arrow crafting
 
-knowledge.arrows.1=Crafting arrows can take some time, but still remains moderately low-cost. You can make many different arrow heads from any metal. Arrow shafts can be crafted with paper or feathers, but feathers are more effective. Attach the heads to their shafts on a carpenter bench. 
+knowledge.arrows.1=Crafting arrows can take some time, but still remains moderately low-cost. You can make many different arrow heads from any metal. Arrow shafts can be crafted with paper or feathers, but feathers are more effective. Attach the heads to their shafts on a carpenter bench.
 
 knowledge.arrowsBodkin=Bodkin Arrows
 knowledge.arrowsBodkin.desc=Light and fast
@@ -1775,7 +1776,7 @@ knowledge.arrowsBodkin.1=The physical properties of arrows takes time to master,
 knowledge.arrowsBroad=Broad arrows
 knowledge.arrowsBroad.desc=Heavy and strong
 
-knowledge.arrowsBroad.1=After studying a piece of flint, you find a fascinating shape to one sample in particular. Although making arrows accurate and fast is an excellent choice, a heavy and broadened head could offer a decent damage bonus.^A broad head arrow is heavier, slower and less accurate than the previously created bodkin design. Although the damage this would cause would be a worthy trade indeed. 
+knowledge.arrowsBroad.1=After studying a piece of flint, you find a fascinating shape to one sample in particular. Although making arrows accurate and fast is an excellent choice, a heavy and broadened head could offer a decent damage bonus.^A broad head arrow is heavier, slower and less accurate than the previously created bodkin design. Although the damage this would cause would be a worthy trade indeed.
 
 knowledge.etools=Engineering Tools
 knowledge.etools.desc=Tools of the trade
@@ -1786,7 +1787,7 @@ knowledge.ecomponents.desc=For Engineering
 
 knowledge.ecomponents.1=For engineering, there's some nifty ways you can join components. However, you may need to find some alternative commodities for doing such. It's worthwhile to make a few of these for when their needed.
 
-knowledge.ecomponents.2=Most engineered objects aren't just forged. Construction usually takes pre-forged components and attatching them together. Components however are mostly used for specific purposes, and are better made on-site (Unless you intend to mass produce). 
+knowledge.ecomponents.2=Most engineered objects aren't just forged. Construction usually takes pre-forged components and attatching them together. Components however are mostly used for specific purposes, and are better made on-site (Unless you intend to mass produce).
 
 knowledge.coke=Coke
 knowledge.coke.desc=Refined Fuels
@@ -1837,11 +1838,11 @@ knowledge.spyglass.desc=Yondar!
 knowledge.spyglass.1=There's so much to see out there, but due to the limit of our eyes we have to walk all the way over there to see it... Not anymore.^Spyglasses allow you to see further when used, Shift-Right-Click changes the scope mode.
 
 knowledge.parachute=Parachute
-knowledge.parachute.desc=What goes up... 
+knowledge.parachute.desc=What goes up...
 knowledge.parachute.1=You may know how to get up to a high place, but some time the ground may have something to say on the matter. Parachutes allow you to safely drop from high distances, slowly.
 
 knowledge.syringe=Syringe
-knowledge.syringe.desc=Easy administer 
+knowledge.syringe.desc=Easy administer
 knowledge.syringe.1=Drinking potions is slow and awkward in emergencies. Syringes allow you to inject potions directly into your system, being useful the moment you need it. You can also shift-click on others to use on them.^To Fill: Place an empty syringe and a regular potion on a crafting grid.
 
 knowledge.bombs=Bomb Crafting
@@ -1858,7 +1859,7 @@ knowledge.bombs.4=To craft a bomb: simply put components in their respective slo
 knowledge.crossbows=Crossbow Crafting
 knowledge.crossbows.desc=Deadly Projectiles
 knowledge.crossbows.1=Crossbows are a custom-made firearm capable of dealing large amounts of damage with a reliable rate. Although these are usually slower than bows, crossbows can be made with a variety of components, allowing them to excel at a wider range of purposes.
-knowledge.crossbows.2=To create crossbows, you will need an assembly table.^This table allows the combination of parts to create a finished device. The traits of the crossbow depend on these 4 components (Stock, Arms, Mod and Muzzle). 
+knowledge.crossbows.2=To create crossbows, you will need an assembly table.^This table allows the combination of parts to create a finished device. The traits of the crossbow depend on these 4 components (Stock, Arms, Mod and Muzzle).
 knowledge.crossbows.3=Place this bench down in the desired location. Now you will need to create parts for your crossbow (See further entries).^The Stock and Arms are required for any crossbow. Stocks affect the recoil, and reload speed of the crossbow, short handles define "Hand crossbows" which are fast and inaccurate.
 knowledge.crossbows.4=You may also add both a mod and muzzle to the crossbow. Mods go on the top and can add additional functionalty (at a cost). Muzzles are mods specially designed to be fitted at the tip of the weapon (like a bayonet). It's always good not to add a mod if it's not needed.
 knowledge.crossbows.5=To craft a crossbow: Place the desired parts in their respected slots. (Similar to bomb crafting) You will then need to steadily click the block with a spanner to craft the item.
@@ -1927,7 +1928,7 @@ knowledge.mineCeramic.1=Mines aren't as useful as your conventional bomb but sti
 
 knowledge.bombIron=Iron Bomb Casing
 knowledge.bombIron.desc=Compacted Blasts
-knowledge.bombIron.1=It normally would be wise to make a bomb easy to detonate... But why not let it build up some pressure?^Iron casings take a bit more force to break. This means when they do detonate the explosion(though smaller) has a bit more force behind it. 
+knowledge.bombIron.1=It normally would be wise to make a bomb easy to detonate... But why not let it build up some pressure?^Iron casings take a bit more force to break. This means when they do detonate the explosion(though smaller) has a bit more force behind it.
 
 knowledge.mineIron=Iron Mine Casing
 knowledge.mineIron.desc=Compacted Blasts
