@@ -50,7 +50,7 @@ public class ArtefactListMFR {
         add(KnowledgeListMFR.jerky, FoodListMFR.GENERIC_MEAT_UNCOOKED);
         add(KnowledgeListMFR.saussage, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.GUTS);
         add(KnowledgeListMFR.sandwitch, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.CHEESE_SLICE, Items.BREAD);
-        add(KnowledgeListMFR.sandwitchBig, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.CHEESE_SLICE, Items.BREAD);
+        add(KnowledgeListMFR.sandwitch_big, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.CHEESE_SLICE, Items.BREAD);
 
         add(KnowledgeListMFR.meatpie, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.PASTRY);
         add(KnowledgeListMFR.shepardpie, FoodListMFR.GENERIC_MEAT_UNCOOKED, Items.POTATO, FoodListMFR.PASTRY);

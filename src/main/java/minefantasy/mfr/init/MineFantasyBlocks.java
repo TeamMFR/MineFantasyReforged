@@ -895,11 +895,6 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(SCHEMATIC_GENERAL));
 	}
 
-	@SubscribeEvent
-	public static void registerRenders(ModelRegistryEvent event) {
-
-	}
-
 	public static void load() {
 		// 5:20 default planks
 		Blocks.FIRE.setFireInfo(REFINED_PLANKS, 3, 10);
@@ -907,8 +902,6 @@ public class MineFantasyBlocks {
 		Blocks.FIRE.setFireInfo(IRONBARK_PLANKS, 5, 30);
 		Blocks.FIRE.setFireInfo(LOG_EBONY, 3, 10);// EBONY: Resistant
 		Blocks.FIRE.setFireInfo(EBONY_PLANKS, 3, 10);
-
-
 	}
 
 	private static void registerTile(Class<? extends TileEntity> teClass, String teId) {

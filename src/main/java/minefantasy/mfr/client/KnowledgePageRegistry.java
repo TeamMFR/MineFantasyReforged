@@ -764,7 +764,7 @@ public class KnowledgePageRegistry {
         KnowledgeListMFR.sandwitch.addPages(new EntryPageText("knowledge.sandwitch.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.breadSliceR),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.sandwitchRecipe));
-        KnowledgeListMFR.sandwitchBig.addPages(new EntryPageText("knowledge.sandwitchBig.1"),
+        KnowledgeListMFR.sandwitch_big.addPages(new EntryPageText("knowledge.sandwitch_big.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.sandwitchBigRecipe));
         KnowledgeListMFR.meatpie.addPages(new EntryPageText("knowledge.meatpie.1"),
                 new EntryPageRecipeCarpenter(KnowledgeListMFR.meatPieRecipe),

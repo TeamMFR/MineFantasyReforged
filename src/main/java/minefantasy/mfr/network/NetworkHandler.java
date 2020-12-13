@@ -12,7 +12,7 @@ import minefantasy.mfr.client.gui.GuiCarpenterMF;
 import minefantasy.mfr.client.gui.GuiCrossbowBench;
 import minefantasy.mfr.client.gui.GuiCrucible;
 import minefantasy.mfr.client.gui.GuiForge;
-import minefantasy.mfr.client.gui.GuiKnowledge;
+import minefantasy.mfr.client.gui.GuiKnowledgeMenu;
 import minefantasy.mfr.client.gui.GuiKnowledgeEntry;
 import minefantasy.mfr.client.gui.GuiQuern;
 import minefantasy.mfr.client.gui.GuiReload;
@@ -236,7 +236,7 @@ public class NetworkHandler implements IGuiHandler {
 					if (y >= 0) {
 						return new GuiKnowledgeEntry(mc.currentScreen, InformationList.knowledgeList.get(y));
 					}
-					return new GuiKnowledge(player);
+					return new GuiKnowledgeMenu(player);
 				}
 			case GUI_RELOAD:
 				if (x == 1 && !player.getHeldItemMainhand().isEmpty()) {

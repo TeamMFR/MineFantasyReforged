@@ -27,6 +27,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class TileEntityResearchBench extends TileEntityBase implements IBasicMetre {
@@ -114,11 +115,11 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
                 int artefacts = ResearchArtefacts.useArtefact(getInventory().getStackInSlot(0), base, user);
                 world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
                 if (!user.world.isRemote) {
-                    Object name = new TextComponentString("knowledge." + base.getUnlocalisedName());
+                    String name = I18n.format("knowledge." + s);
                     if (artefacts == -1) {
                         user.sendMessage(new TextComponentString(I18n.format("research.finishResearch",name)));
                     } else {
-                        user.sendMessage(new TextComponentString(I18n.format("research.addArtefact",name, artefacts, base.getArtefactCount())));
+                        user.sendMessage(new TextComponentString(I18n.format("research.addArtefact", name, artefacts, base.getArtefactCount())));
                     }
                 }
                 return;

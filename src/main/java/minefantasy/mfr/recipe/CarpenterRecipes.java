@@ -580,7 +580,7 @@ public class CarpenterRecipes {
                 new Object[]{"B", "C", "M", "B", 'C', FoodListMFR.CHEESE_SLICE, 'M', FoodListMFR.GENERIC_MEAT_COOKED,
                         'B', FoodListMFR.BREAD_SLICE});
         KnowledgeListMFR.sandwitchBigRecipe = MineFantasyRebornAPI.addCarpenterRecipe(provisioning,
-                new ItemStack(FoodListMFR.SANDWITCH_BIG), "sandwitchBig", chopping, "knife", 1, 10,
+                new ItemStack(FoodListMFR.SANDWITCH_BIG), "sandwitch_big", chopping, "knife", 1, 10,
                 new Object[]{"CSC", "MBM", 'S', FoodListMFR.SALT, 'C', FoodListMFR.CHEESE_SLICE, 'M',
                         FoodListMFR.GENERIC_MEAT_COOKED, 'B', Items.BREAD});
         KnowledgeListMFR.shepardRecipe = MineFantasyRebornAPI.addCarpenterRecipe(provisioning,

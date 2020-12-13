@@ -88,7 +88,7 @@ public class KnowledgeListMFR {
             decorated_stone, bars, thatch, easyRefine, paint_brush, tool_rack, food_box, ammo_box, big_box, bed_roll;
     public static InformationBase toughness, fitness, armourpro, parrypro, counteratt, autoparry, scrapper, firstaid,
             doctor;
-    public static InformationBase cookingutensil, firepit, generic_meat, stew, jerky, saussage, sandwitch, sandwitchBig,
+    public static InformationBase cookingutensil, firepit, generic_meat, stew, jerky, saussage, sandwitch, sandwitch_big,
             meatpie, shepardpie, bread, oats, salt, jug, berry, icing, sweetroll, eclair, cake, carrotcake, chococake,
             bfcake, applepie, berrypie, cheese, cheeseroll, bandage, bandageadv;
     public static IRecipe waterJugR, milkJugR, plantOilR;
@@ -427,7 +427,7 @@ public class KnowledgeListMFR {
                 .setPage(provisioning).addSkill(SkillList.provisioning, 35);
         sandwitch = (new InformationBase("sandwitch", 1, -7, 3, FoodListMFR.SANDWITCH_MEAT, jerky)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 15);
-        sandwitchBig = (new InformationBase("sandwitchBig", 3, -7, 3, FoodListMFR.SANDWITCH_BIG, sandwitch))
+        sandwitch_big = (new InformationBase("sandwitch_big", 3, -7, 3, FoodListMFR.SANDWITCH_BIG, sandwitch))
                 .registerStat().setPage(provisioning).addSkill(SkillList.provisioning, 25);
         meatpie = (new InformationBase("meatpie", -1, -7, 2, MineFantasyBlocks.PIE_MEAT, jerky)).registerStat()
                 .setPage(provisioning).addSkill(SkillList.provisioning, 35);
