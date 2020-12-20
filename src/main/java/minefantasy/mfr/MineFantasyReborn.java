@@ -37,8 +37,11 @@ import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
+import minefantasy.mfr.recipe.AnvilRecipeManager;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CarpenterRecipeManager;
+import minefantasy.mfr.recipe.RecipeExporter;
+import minefantasy.mfr.recipe.RecipeExporterAnvil;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenMFBase;
 import net.minecraft.init.Items;
@@ -115,6 +118,9 @@ public class MineFantasyReborn {
 		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
 		CarpenterRecipeManager.INSTANCE.loadRecipes();
 
+		AnvilRecipeManager.INSTANCE.initializeAndExportDefaults();
+		AnvilRecipeManager.INSTANCE.loadRecipes();
+
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
 		MineFantasyReborn.LOG.info("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
 
@@ -154,6 +160,7 @@ public class MineFantasyReborn {
 
 
 		CarpenterRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), CarpenterRecipeManager.DEFAULT_RECIPE_DIRECTORY);
+		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
 
@@ -195,7 +202,8 @@ public class MineFantasyReborn {
 		PROXY.postInit(postEvent);
 
 		// enabling this will dump all carpenter recipes to jsons! see RecipeExporter for path
-		// RecipeExporter exporter = new RecipeExporter();
+		 //RecipeExporter exporter = new RecipeExporter();
+		RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
 	}
 
 	@EventHandler

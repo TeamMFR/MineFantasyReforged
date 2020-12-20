@@ -4,6 +4,7 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.Skill;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -19,7 +20,7 @@ public class CustomToolRecipe extends ShapedAnvilRecipes {
      * Checks if the region of a crafting inventory is match for the recipe.
      */
     @Override
-    protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b) {
+    protected boolean checkMatch(InventoryCrafting matrix, int x, int y, boolean b) {
         String wood = null;
         String metal = null;
         for (int var5 = 0; var5 < ShapelessAnvilRecipes.globalWidth; ++var5) {
@@ -94,9 +95,12 @@ public class CustomToolRecipe extends ShapedAnvilRecipes {
                 }
             }
         }
-        if (!modifyTiers(matrix, metal, true)) {
-            modifyTiers(matrix, wood, false);
+        if (matrix instanceof AnvilCraftMatrix){
+            if (!modifyTiers((AnvilCraftMatrix) matrix, metal, true)) {
+                modifyTiers((AnvilCraftMatrix) matrix, wood, false);
+            }
         }
+
         return true;
     }
 
@@ -104,7 +108,7 @@ public class CustomToolRecipe extends ShapedAnvilRecipes {
         CustomMaterial material = CustomMaterial.getMaterial(tier);
         if (material != null) {
             int newTier = recipeHammer < 0 ? material.crafterTier : recipeHammer;
-            int newAnvil = anvil < 0 ? material.crafterAnvilTier : anvil;
+            int newAnvil = anvilTier < 0 ? material.crafterAnvilTier : anvilTier;
             matrix.modifyTier(newTier, newAnvil, (int) (recipeTime * material.craftTimeModifier));
             if (isMain) {
                 matrix.modifyResearch("smelt" + material.getName());

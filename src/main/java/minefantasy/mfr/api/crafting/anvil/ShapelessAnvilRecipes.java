@@ -50,12 +50,6 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
         this.skillUsed = skill;
     }
 
-    private static NBTTagCompound getNBT(ItemStack item) {
-        if (!item.hasTagCompound())
-            item.setTagCompound(new NBTTagCompound());
-        return item.getTagCompound();
-    }
-
     @Override
     public ItemStack getRecipeOutput() {
         return this.recipeOutput;
@@ -155,7 +149,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
     }
 
     @Override
-    public int getAnvil() {
+    public int getAnvilTier() {
         return this.anvil;
     }
 

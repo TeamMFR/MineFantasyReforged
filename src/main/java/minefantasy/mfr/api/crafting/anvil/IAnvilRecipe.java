@@ -26,7 +26,7 @@ public interface IAnvilRecipe {
 
     int getRecipeHammer();
 
-    int getAnvil();
+    int getAnvilTier();
 
     boolean outputHot();
 

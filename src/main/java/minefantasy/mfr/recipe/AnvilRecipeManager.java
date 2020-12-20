@@ -9,7 +9,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
+import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mfr.config.ConfigCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,7 +19,6 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
 
@@ -35,22 +34,23 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * Class responsible for loading and parsing the carpenter recipe json files from the assets and config folders
+ * Class responsible for loading and parsing the anvil recipe json files from the assets and config folders
  */
-public class CarpenterRecipeManager {
+public class AnvilRecipeManager {
 	public static final List<JsonObject> list = new ArrayList<>();
 
 	public static Map<String, IRecipe> loaded = new TreeMap<>();
 
 	// TODO: check net.minecraftforge.fml.common.registry.GameRegistry.addShapedRecipe as we should probably register our recipes as proper IRecipes
 
-	public static final CarpenterRecipeManager INSTANCE = new CarpenterRecipeManager();
+	public static final AnvilRecipeManager INSTANCE = new AnvilRecipeManager();
 
-	private CarpenterRecipeManager() {} // no instances!
+	private AnvilRecipeManager() {} // no instances!
 
-	public static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/carpenter_recipes";
+	public static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/anvil_recipes";
 	private static final String JSON_FILE_EXT = "json";
-	public static final String CARPENTER_RECIPE_CONFIG_DIRECTORY = "config/minefantasyreborn/recipes/carpenter_recipes/";
+	public static final String ANVIL_RECIPE_CONFIG_DIRECTORY = "config/minefantasyreborn/recipes/anvil_recipes/";
+
 	/**
 	 * Called during preInit from {@link MineFantasyReborn#preInit(net.minecraftforge.fml.common.event.FMLPreInitializationEvent)} to create the config recipe
 	 * directories if they are missing
@@ -58,7 +58,8 @@ public class CarpenterRecipeManager {
 	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public void initializeAndExportDefaults() {
 		// create recipe dirs if they don't exist
-		File existTest = new File(CARPENTER_RECIPE_CONFIG_DIRECTORY);
+
+		File existTest = new File(ANVIL_RECIPE_CONFIG_DIRECTORY);
 		if (!existTest.exists()) {
 			existTest.mkdirs();
 		}
@@ -66,14 +67,14 @@ public class CarpenterRecipeManager {
 
 	public void loadRecipes() {
 		int loadedCount = 0;
-		MineFantasyReborn.LOG.info("loading carpenter recipes from config directory");
-		loadedCount += loadRecipesFromSource(new File(CARPENTER_RECIPE_CONFIG_DIRECTORY), "");
+		MineFantasyReborn.LOG.info("loading anvil recipes from config directory");
+		loadedCount += loadRecipesFromSource(new File(ANVIL_RECIPE_CONFIG_DIRECTORY), "");
 
 		if (ConfigCrafting.loadDefaultRecipes) {
 			loadedCount += loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), DEFAULT_RECIPE_DIRECTORY);
 		}
 
-		MineFantasyReborn.LOG.info("loaded {} carpenter recipe(s)", loadedCount);
+		MineFantasyReborn.LOG.info("loaded {} anvil recipe(s)", loadedCount);
 	}
 
 	public static int loadRecipesFromSource(File source, String base) {
@@ -115,20 +116,19 @@ public class CarpenterRecipeManager {
 		return loaded.size();
 	}
 
-	public static void registerCarpenterRecipes() {
+	public static void registerAnvilRecipes() {
 
 	}
 
 	private static IRecipe parseRecipeJson(JsonObject json) {
 		String s = JsonUtils.getString(json, "type");
 
-		/// custom tags of carpenter table
+		/// custom tags of anvil
 		String skill = JsonUtils.getString(json, "skill", "none");
 		String research = JsonUtils.getString(json, "research", "none");
-		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
+		boolean hot = JsonUtils.getBoolean(json, "hot", false);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
 		String tool_tier = JsonUtils.getString(json, "tool_tier", "none");
-		Float experience = JsonUtils.getFloat(json, "experience", 0F);
 		int craft_time = JsonUtils.getInt(json, "craft_time",0);
 		byte tool_recipe = JsonUtils.getBoolean(json, "is_tool_recipe") ? (byte) 1 : (byte) 0;
 
@@ -162,8 +162,7 @@ public class CarpenterRecipeManager {
 				o = appendValue(o, i.getValue().getMatchingStacks()[0].getItem());
 			}
 		}
-
-		CraftingManagerCarpenter.getInstance().addRecipe(resultStack, null, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, 0, 0,  craft_time, tool_recipe, o);
+		CraftingManagerAnvil.getInstance().addRecipe(resultStack, null, research, hot, tool_type, 0, 0,  craft_time, tool_recipe, o);
 		return recipe;
 	}
 
@@ -185,8 +184,8 @@ public class CarpenterRecipeManager {
 			for (int i = 0; i < astring.length; ++i) {
 				String s = JsonUtils.getString(jsonArray.get(i), "pattern[" + i + "]");
 
-				if (s.length() > 4) {
-					throw new JsonSyntaxException("Invalid pattern: too many columns, 4 is maximum");
+				if (s.length() > 6) {
+					throw new JsonSyntaxException("Invalid pattern: too many columns, 6 is maximum");
 				}
 
 				if (i > 0 && astring[0].length() != s.length()) {

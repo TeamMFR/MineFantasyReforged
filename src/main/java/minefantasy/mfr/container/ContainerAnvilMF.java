@@ -61,6 +61,7 @@ public class ContainerAnvilMF extends ContainerBase {
                 }
             }
         }
+        //tile.sendUpdates();
     }
 
     @Override

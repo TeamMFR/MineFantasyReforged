@@ -239,11 +239,11 @@ public class CraftingManagerCarpenter {
 
             return new ItemStack(var3.getItem(), 1, var9);
         } else {
-            Iterator recipesIterator = this.recipes.iterator();
+            Iterator recipeIterator = this.recipes.iterator();
             ICarpenterRecipe iCarpenterRecipe = null;
 
-            while (recipesIterator.hasNext()) {
-                ICarpenterRecipe rec = (ICarpenterRecipe) recipesIterator.next();
+            while (recipeIterator.hasNext()) {
+                ICarpenterRecipe rec = (ICarpenterRecipe) recipeIterator.next();
 
                 if (((IRecipe) rec).matches(matrix, world)) {
                     iCarpenterRecipe = rec;

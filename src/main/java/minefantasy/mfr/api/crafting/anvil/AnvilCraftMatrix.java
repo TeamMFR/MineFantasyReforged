@@ -6,8 +6,8 @@ import net.minecraft.inventory.InventoryCrafting;
 public class AnvilCraftMatrix extends InventoryCrafting {
     private IAnvil anvil;
 
-    public AnvilCraftMatrix(IAnvil anvil, Container instance, int xSize, int ySize) {
-        super(instance, xSize, ySize);
+    public AnvilCraftMatrix(IAnvil anvil, Container instance, int width, int height) {
+        super(instance, width, height);
         this.anvil = anvil;
     }
 

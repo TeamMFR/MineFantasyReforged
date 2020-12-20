@@ -54,7 +54,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 
         GL11.glColor3f(255, 255, 255);
         GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX + 34, posY + 51, true, true);
-        GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvil(), posX + 124, posY + 51, true, true);
+        GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvilTier(), posX + 124, posY + 51, true, true);
 
         if (recipe instanceof ShapedAnvilRecipes) {
             ShapedAnvilRecipes shaped = (ShapedAnvilRecipes) recipe;

@@ -1,10 +1,16 @@
 package minefantasy.mfr.api.crafting.anvil;
 
+import minefantasy.mfr.api.crafting.carpenter.CarpenterCraftMatrix;
+import minefantasy.mfr.api.crafting.carpenter.ICarpenter;
+import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -145,7 +151,7 @@ public class CraftingManagerAnvil {
         return recipe;
     }
 
-    public ItemStack findMatchingRecipe(AnvilCraftMatrix matrix) {
+    public ItemStack findMatchingRecipe(AnvilCraftMatrix matrix, World world) {
         int var2 = 0;
         ItemStack var3 = null;
         ItemStack var4 = null;
@@ -206,26 +212,27 @@ public class CraftingManagerAnvil {
         return false;
     }
 
-    public ItemStack findMatchingRecipe(IAnvil anvil, AnvilCraftMatrix matrix) {
-        int time = 200;
-        int anvi = 1;
-        boolean hot = false;
-        int hammer = 0;
+    public ItemStack findMatchingRecipe(IAnvil anvil, AnvilCraftMatrix matrix, World world) {
+        int time;
+        int anvilTier;
+        boolean hot;
+        int hammer;
         int var2 = 0;
-        String toolType = "hammer";
-        ItemStack var3 = null;
-        ItemStack var4 = null;
+        String toolType;
+        SoundEvent sound;
+        ItemStack var3 = ItemStack.EMPTY;
+        ItemStack var4 = ItemStack.EMPTY;
 
         for (int var5 = 0; var5 < matrix.getSizeInventory(); ++var5) {
-            ItemStack var6 = matrix.getStackInSlot(var5);
+            ItemStack matrixSlot = matrix.getStackInSlot(var5);
 
-            if (var6 != null) {
+            if (!matrixSlot.isEmpty()) {
                 if (var2 == 0) {
-                    var3 = var6;
+                    var3 = matrixSlot;
                 }
 
                 if (var2 == 1) {
-                    var4 = var6;
+                    var4 = matrixSlot;
                 }
 
                 ++var2;
@@ -246,39 +253,36 @@ public class CraftingManagerAnvil {
 
             return new ItemStack(var3.getItem(), 1, var9);
         } else {
-            Iterator var11 = this.recipes.iterator();
-            IAnvilRecipe var13 = null;
+            Iterator recipeIterator = this.recipes.iterator();
+            IAnvilRecipe iAnvilRecipe = null;
 
-            while (var11.hasNext()) {
-                IAnvilRecipe rec = (IAnvilRecipe) var11.next();
+            while (recipeIterator.hasNext()) {
+                IAnvilRecipe rec = (IAnvilRecipe) recipeIterator.next();
 
-                if (rec.matches(matrix)) {
-                    var13 = rec;
+                if (((IRecipe) rec).matches(matrix, world)) {
+                    iAnvilRecipe = rec;
+                    break;
                 }
             }
 
-            if (var13 != null) {
-                time = var13.getCraftTime();
-                hammer = var13.getRecipeHammer();
-                anvi = var13.getAnvil();
-                hot = var13.outputHot();
-                toolType = var13.getToolType();
+            if (iAnvilRecipe != null) {
+                time = iAnvilRecipe.getCraftTime();
+                hammer = iAnvilRecipe.getRecipeHammer();
+                anvilTier = iAnvilRecipe.getAnvilTier();
+                hot = iAnvilRecipe.outputHot();
+                toolType = iAnvilRecipe.getToolType();
 
-                if (!var13.useCustomTiers()) {
-                    anvil.setForgeTime(time);
-                    anvil.setHammerUsed(hammer);
-                    anvil.setRequiredAnvil(anvi);
-                }
+                anvil.setForgeTime(time);
+                anvil.setHammerUsed(hammer);
+                anvil.setRequiredAnvil(anvilTier);
                 anvil.setHotOutput(hot);
                 anvil.setToolType(toolType);
-                if (!var13.getResearch().equalsIgnoreCase("tier")) {
-                    anvil.setResearch(var13.getResearch());
-                }
-                anvil.setSkill(var13.getSkill());
+                anvil.setResearch(iAnvilRecipe.getResearch());
+                anvil.setSkill(iAnvilRecipe.getSkill());
 
-                return var13.getCraftingResult(matrix);
+                return iAnvilRecipe.getCraftingResult(matrix);
             }
-            return null;
+            return ItemStack.EMPTY;
         }
     }
 

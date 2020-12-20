@@ -21,6 +21,7 @@ import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import minefantasy.mfr.network.AnvilPacket;
 import minefantasy.mfr.network.NetworkHandler;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -30,9 +31,10 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -64,12 +66,15 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
     private boolean outputHot = false;
     private Skill skillUsed;
     private boolean resetRecipe = false;
-    private boolean isFakeAnvil = false;
     private ItemStack recipe;
     private int hammerTierRequired;
     private int anvilTierRequired;
 
     public final ItemStackHandler inventory = createInventory();
+
+    public TileEntityAnvilMFR() {
+        setContainer(new ContainerAnvilMF(this));
+    }
 
     @Override
     protected ItemStackHandler createInventory() {
@@ -91,8 +96,6 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
         return NetworkHandler.GUI_ANVIL;
     }
 
-    public TileEntityAnvilMFR() {setContainer(new ContainerAnvilMF(this)); }
-
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack item) {
         return true;
@@ -101,20 +104,19 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
     @Override
     public void markDirty() {
         ++ticksExisted;
-        if (!world.isRemote && (leftHit == 0 || rightHit == 0)) {
-            reassignHitValues();
-        }
+        super.markDirty();
         if (!world.isRemote) {
-            if (!isFakeAnvil && ticksExisted % 20 == 0) {
+            if (leftHit == 0 || rightHit == 0) {
+                reassignHitValues();
+            }
+            if (ticksExisted % 20 == 0) {
                 updateCraftingData();
             }
             if (!canCraft() && ticksExisted > 1) {
                 progress = progressMax = 0;
-                this.resName = "";
-                this.recipe = null;
+                this.resName = "<No Project Set>";
+                this.recipe = ItemStack.EMPTY;
             }
-        }
-        if (!world.isRemote) {
             updateThreshold();
         }
         resetRecipe = false;
@@ -164,7 +166,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
                 }
 
                 world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, rightClick ? 1.2F : 1.0F);
-                float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItem(EnumHand.MAIN_HAND)) * (rightClick ? 0.75F : 1.0F);
+                float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItemMainhand()) * (rightClick ? 0.75F : 1.0F);
 
                 if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
                     efficiency *= (0.5F - user.swingProgress);
@@ -452,7 +454,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
 
         if (world.isRemote)
             return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX(), pos.getZ(), new AnvilPacket(this));
+        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new AnvilPacket(this));
     }
 
     public String getResultName() {
@@ -506,7 +508,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
             }
             if (resSlot.getItem() instanceof IHotItem) {
                 ItemStack heated = Heatable.getItemStack(resSlot);
-                if (heated != null) {
+                if (!heated.isEmpty()) {
                     resSlot = heated;
                 }
             }
@@ -536,14 +538,15 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
             return ItemStack.EMPTY;
         }
 
-        if (ticksExisted <= 1)
-            return ItemStack.EMPTY;
-
         for (int a = 0; a < getInventory().getSlots() - 1; a++) {
             craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
         }
 
-        return CraftingManagerAnvil.getInstance().findMatchingRecipe(this, craftMatrix);
+        ItemStack result = CraftingManagerAnvil.getInstance().findMatchingRecipe(this, craftMatrix, world);
+        if (result == null) {
+            result = ItemStack.EMPTY;
+        }
+        return result;
     }
 
     public void updateCraftingData() {
@@ -563,9 +566,11 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
                 reassignHitValues();
                 qualityBalance = 0;
             }
-            if (progress > progressMax)
-                progress = progressMax - 1;
+
+            if (progress > progressMax) progress = progressMax - 1;
+
             syncData();
+            sendUpdates();
         }
     }
 
@@ -578,6 +583,34 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
             return this.canFitResult(recipe);
         }
         return false;
+    }
+
+    public void sendUpdates() {
+        world.markBlockRangeForRenderUpdate(pos, pos);
+        world.notifyBlockUpdate(pos, getState(), getState(), 3);
+        world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+        markDirty();
+    }
+
+    private IBlockState getState() {
+        return world.getBlockState(pos);
+    }
+
+    @Override
+    @Nullable
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return this.writeToNBT(new NBTTagCompound());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        super.onDataPacket(net, pkt);
+        handleUpdateTag(pkt.getNbtCompound());
     }
 
     @Override
@@ -602,8 +635,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
 
     public void setContainer(ContainerAnvilMF container) {
         syncAnvil = container;
-        craftMatrix = new AnvilCraftMatrix(this, syncAnvil, ShapelessAnvilRecipes.globalWidth,
-                ShapelessAnvilRecipes.globalHeight);
+        craftMatrix = new AnvilCraftMatrix(this, syncAnvil, ShapelessAnvilRecipes.globalWidth, ShapelessAnvilRecipes.globalHeight);
     }
 
     public boolean shouldRenderCraftMetre() {
