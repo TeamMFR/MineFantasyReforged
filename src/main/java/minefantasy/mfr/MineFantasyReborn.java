@@ -203,7 +203,7 @@ public class MineFantasyReborn {
 
 		// enabling this will dump all carpenter recipes to jsons! see RecipeExporter for path
 		 //RecipeExporter exporter = new RecipeExporter();
-		RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
+		//RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
 	}
 
 	@EventHandler
