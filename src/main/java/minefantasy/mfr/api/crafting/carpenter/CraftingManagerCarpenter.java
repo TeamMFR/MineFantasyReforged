@@ -27,6 +27,7 @@ public class CraftingManagerCarpenter {
      * A list of all the recipes added
      */
     public List recipes = new ArrayList();
+    public HashMap<String, Object> recipeMap = new HashMap<>();
 
     private CraftingManagerCarpenter() {
         Collections.sort(this.recipes, new RecipeSorterCarpenter(this));
@@ -38,6 +39,10 @@ public class CraftingManagerCarpenter {
      */
     public static CraftingManagerCarpenter getInstance() {
         return instance;
+    }
+
+    public static ICarpenterRecipe getRecipeByName(String name) {
+        return (ICarpenterRecipe) getInstance().recipeMap.get(name);
     }
 
     /**
@@ -56,7 +61,7 @@ public class CraftingManagerCarpenter {
     /**
      * Adds a recipe. See spreadsheet on first page for details.
      */
-    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, byte id, Object... input) {
+    public ICarpenterRecipe addRecipe(String name, ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, byte id, Object... input) {
         StringBuilder recipeString = new StringBuilder();
         int var4 = 0;
         int var5 = 0;
@@ -119,6 +124,7 @@ public class CraftingManagerCarpenter {
             recipe = new ShapedCarpenterRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
         }
         this.recipes.add(recipe);
+        this.recipeMap.put(name, recipe);
         return recipe;
     }
 

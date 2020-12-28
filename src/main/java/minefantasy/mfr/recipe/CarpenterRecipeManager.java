@@ -163,7 +163,7 @@ public class CarpenterRecipeManager {
 			}
 		}
 
-		CraftingManagerCarpenter.getInstance().addRecipe(resultStack, null, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, 0, 0,  craft_time, tool_recipe, o);
+		CraftingManagerCarpenter.getInstance().addRecipe(resultStack.getItem().getRegistryName().getResourcePath().toString(), resultStack, null, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, 0, 0,  craft_time, tool_recipe, o);
 		return recipe;
 	}
 
