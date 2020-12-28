@@ -41,9 +41,9 @@ public class KnowledgePageRegistry {
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sharp_rock")),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_pick")),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_hammer")),
-					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sharp_rock-2")));
-			KnowledgeListMFR.gettingStarted.addPages(new EntryPageRecipeCarpenter(KnowledgeListMFR.stoneSpearR),
-					new EntryPageRecipeCarpenter(KnowledgeListMFR.stoneAxeR));
+					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sharp_rock-2")),
+					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_spear")),
+					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_axe")));
 		}
 
 		KnowledgeListMFR.gettingStarted.addPages(
@@ -155,14 +155,15 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("salvage_basic")),
 				new EntryPageText("knowledge.salvage.2"));
 
-		KnowledgeListMFR.commodities.addPages(new EntryPageText("knowledge.commodities.1"),
+		KnowledgeListMFR.commodities.addPages(
+				new EntryPageText("knowledge.commodities.1"),
 				new EntryPageText("knowledge.commodities.plank"),
 				new EntryPageRecipeBase(KnowledgeListMFR.PLANK_RECIPE),
 				new EntryPageRecipeBase(KnowledgeListMFR.STICK_RECIPE),
 				new EntryPageText("knowledge.commodities.refinedplank"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rough_jug_uncooked")),
 				new EntryPageSmelting(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY),
-				new EntryPageRecipeBase(KnowledgeListMFR.plantOilR),
+				new EntryPageRecipeBase(KnowledgeListMFR.JUG_PLANT_OIL_RECIPE),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("refined_planks")),
 				new EntryPageText("knowledge.commodities.flux"),
 				new EntryPageRecipeAnvil(KnowledgeListMFR.fluxR),
@@ -260,7 +261,8 @@ public class KnowledgePageRegistry {
 
 		KnowledgeListMFR.bloomery.addPages(
 				new EntryPageText("knowledge.bloomery.1"),
-				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bloomery")), new EntryPageText("knowledge.bloomery.2"),
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bloomery")),
+				new EntryPageText("knowledge.bloomery.2"),
 				new EntryPageText("knowledge.bloomery.3"));
 
 		KnowledgeListMFR.crucible.addPages(
@@ -347,7 +349,7 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.trough.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("trough_wood")),
 				new EntryPageText("knowledge.trough.2"),
-				new EntryPageRecipeCarpenter(KnowledgeListMFR.nailTroughR));
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("trough_wood")));
 
 		KnowledgeListMFR.forge.addPages(
 				assembleSimpleImgPage("forge_example", "knowledge.forge.1"),
@@ -549,7 +551,7 @@ public class KnowledgePageRegistry {
 
 		KnowledgeListMFR.bpress.addPages(
 				new EntryPageText("knowledge.bpress.1"),
-				new EntryPageRecipeCarpenter(KnowledgeListMFR.bombPressCraft));
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_press")));
 
 		KnowledgeListMFR.bombarrow.addPages(
 				new EntryPageText("knowledge.bombarrow.1"),
@@ -748,7 +750,7 @@ public class KnowledgePageRegistry {
 
 		KnowledgeListMFR.tool_rack.addPages(
 				new EntryPageText("knowledge.tool_rack.1"),
-				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rack_wook")),
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rack_wood")),
 				new EntryPageText("knowledge.tool_rack.rules"));
 
 		KnowledgeListMFR.food_box.addPages(
@@ -773,7 +775,7 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeAnvil(KnowledgeListMFR.hingeRecipe),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jug_uncooked")),
 				new EntryPageSmelting(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY),
-				new EntryPageRecipeBase(KnowledgeListMFR.plantOilR),
+				new EntryPageRecipeBase(KnowledgeListMFR.JUG_PLANT_OIL_RECIPE),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("refined_planks")));
 
 		if (ConfigHardcore.HCCallowRocks) {
@@ -888,7 +890,8 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fletching")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fletching-2")),
 				new EntryPageRecipeAnvil(KnowledgeListMFR.arrowheadR),
-				new EntryPageRecipeCarpenter(KnowledgeListMFR.arrowR));
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("standard_arrow_broad")),
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("standard_arrow_bodkin")));
 
 		KnowledgeListMFR.arrowsBodkin.addPages(
 				new EntryPageText("knowledge.arrowsBodkin.1"),
@@ -966,8 +969,8 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jug_uncooked")),
 				new EntryPageSmelting(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY),
 				new EntryPageText("knowledge.jug.2"),
-				new EntryPageRecipeBase(KnowledgeListMFR.waterJugR),
-				new EntryPageRecipeBase(KnowledgeListMFR.milkJugR));
+				new EntryPageRecipeBase(KnowledgeListMFR.JUG_WATER_RECIPE),
+				new EntryPageRecipeBase(KnowledgeListMFR.JUG_MILK_RECIPE));
 
 		KnowledgeListMFR.generic_meat.addPages(
 				new EntryPageText("knowledge.generic_meat.1"),

@@ -97,7 +97,7 @@ public class CarpenterRecipeManager {
 
 					Gson gson = new Gson();
 					JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-					IRecipe recipe = parseRecipeJson(jsonObject);
+					IRecipe recipe = parseRecipeJson(name, jsonObject);
 
 					if (!loaded.containsKey(name)) {
 						loaded.put(name, recipe);
@@ -119,7 +119,7 @@ public class CarpenterRecipeManager {
 
 	}
 
-	private static IRecipe parseRecipeJson(JsonObject json) {
+	private static IRecipe parseRecipeJson(String name, JsonObject json) {
 		String s = JsonUtils.getString(json, "type");
 
 		/// custom tags of carpenter table
@@ -163,7 +163,7 @@ public class CarpenterRecipeManager {
 			}
 		}
 
-		CraftingManagerCarpenter.getInstance().addRecipe(resultStack.getItem().getRegistryName().getResourcePath().toString(), resultStack, null, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, 0, 0,  craft_time, tool_recipe, o);
+		CraftingManagerCarpenter.getInstance().addRecipe(name, resultStack, null, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, 0, 0,  craft_time, tool_recipe, o);
 		return recipe;
 	}
 
