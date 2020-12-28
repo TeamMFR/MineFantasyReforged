@@ -97,6 +97,7 @@ public class TileEntityForge extends TileEntityBase implements  IBasicMetre, IHe
                 modifyItem(item);
             }
             syncData();
+            sendUpdates();
         }
 
         if (!isLit() && !world.isRemote) {
@@ -477,11 +478,6 @@ public class TileEntityForge extends TileEntityBase implements  IBasicMetre, IHe
         return "forge_" + forge.type + (isLit() ? "_active" : "");
     }
 
-    @Override
-    public final NBTTagCompound getUpdateTag(){
-        return this.writeToNBT(new NBTTagCompound());
-    }
-
     @Nonnull
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
@@ -493,7 +489,7 @@ public class TileEntityForge extends TileEntityBase implements  IBasicMetre, IHe
         nbt.setFloat("fuel", fuel);
         nbt.setFloat("maxFuel", maxFuel);
 
-        inventory.serializeNBT();
+        nbt.setTag("inventory", inventory.serializeNBT());
 
         return nbt;
     }
@@ -508,7 +504,7 @@ public class TileEntityForge extends TileEntityBase implements  IBasicMetre, IHe
         fuel = nbt.getFloat("fuel");
         maxFuel = nbt.getFloat("maxFuel");
 
-        inventory.deserializeNBT(nbt);
+        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
     }
 
     @Override

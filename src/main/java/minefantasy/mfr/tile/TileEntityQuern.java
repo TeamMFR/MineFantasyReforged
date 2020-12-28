@@ -24,6 +24,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityQuern extends TileEntityBase implements ITickable {
+    private int ticksExisted;
     private int postUseTicks;
     public int turnAngle;
 
@@ -68,6 +69,11 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
     public void update() {
         int max = getMaxRevs();
         int levels = max / 4;
+        ticksExisted++;
+
+        if (ticksExisted % 20 == 0) {
+            sendUpdates();
+        }
 
         if (postUseTicks > 0) {
             --postUseTicks;

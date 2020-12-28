@@ -7,6 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -73,7 +74,13 @@ public class TileEntityRackRenderer<T extends TileEntity> extends FastTESR<T> {
 				GlStateManager.rotate(90F + facing.getHorizontalAngle(), 0, 1F, 0);
 				GlStateManager.rotate(r, 0, 0, 1F);
 				GlStateManager.scale(scale, scale, 1);
+
+				GlStateManager.disableLighting();
+				OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+
 				renderHungItem(stack);
+
+				GlStateManager.enableLighting();
 
 				GlStateManager.popMatrix();
 

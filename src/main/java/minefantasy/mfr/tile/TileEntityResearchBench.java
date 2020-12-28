@@ -194,6 +194,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
     @Override
     public void markDirty() {
         syncData();
+        sendUpdates();
     }
 
     public void syncData() {

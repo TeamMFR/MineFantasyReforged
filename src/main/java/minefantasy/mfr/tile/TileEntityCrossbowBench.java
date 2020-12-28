@@ -76,6 +76,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
         ++ticksExisted;
         if (!world.isRemote && (hasRecipe || ticksExisted % 100 == 0)) {
             syncData();
+            sendUpdates();
         }
     }
 

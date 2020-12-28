@@ -7,6 +7,7 @@ import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -43,7 +44,13 @@ public class TileEntityQuernRenderer<T extends TileEntity> extends FastTESR<T> i
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
         GL11.glScalef(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
         GL11.glPushMatrix();
+
+        GlStateManager.disableLighting();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+
         model.renderModel(tile, 0.0625F);
+
+        GlStateManager.enableLighting();
 
         GL11.glPopMatrix();
         GL11.glColor3f(255, 255, 255);

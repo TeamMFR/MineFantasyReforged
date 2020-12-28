@@ -8,6 +8,7 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
@@ -20,7 +21,9 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -197,6 +200,13 @@ public final class MFREventHandler {
 				if (skillMod > 100)
 					event.getToolTip().add(I18n.format("rpg.skillmod") + ItemWeaponMFR.decimal_format.format(skillMod - 100) + "%");
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void specialInteractForComponentBlock(PlayerInteractEvent.RightClickBlock event) {
+		if (event.getEntityPlayer().isSneaking() && event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockComponent){
+			event.setUseBlock(Event.Result.ALLOW);
 		}
 	}
 }

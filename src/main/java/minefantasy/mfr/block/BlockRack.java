@@ -10,7 +10,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -60,25 +59,23 @@ public class BlockRack extends BlockWoodDecor {
 	public static boolean interact(int slot, World world, TileEntityRack tile, EntityPlayer player) {
 
 		ItemStack held = player.getHeldItemMainhand();
+		ItemStack hung = tile.getInventory().getStackInSlot(slot);
 		if (held.isEmpty()) {
-			ItemStack hung = tile.getInventory().getStackInSlot(slot);
 			if (!hung.isEmpty()) {
-				if (world.isRemote) {
+				if (!world.isRemote) {
 					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, hung);
 					tile.getInventory().setStackInSlot(slot, ItemStack.EMPTY);
-					tile.syncItems();
+					tile.sendUpdates();
 				}
 				player.swingArm(EnumHand.MAIN_HAND);
 				return true;
 			}
 		} else {
-			ItemStack hung = tile.getInventory().getStackInSlot(slot);
-
 			if (hung.isEmpty() && tile.canHang(player.getHeldItemMainhand(), slot)) {
-				if (world.isRemote) {
+				if (!world.isRemote) {
 					tile.getInventory().setStackInSlot(slot, player.getHeldItemMainhand().copy());
 					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-					tile.syncItems();
+					tile.sendUpdates();
 				}
 				player.swingArm(EnumHand.MAIN_HAND);
 				return true;
@@ -87,14 +84,14 @@ public class BlockRack extends BlockWoodDecor {
 					int space = hung.getMaxStackSize() - hung.getCount();
 
 					if (held.getCount() > space) {
-						if (world.isRemote) {
+						if (!world.isRemote) {
 							held.shrink(space);
 							hung.grow(space);
 						}
 						player.swingArm(EnumHand.MAIN_HAND);
 						return true;
 					} else {
-						if (world.isRemote) {
+						if (!world.isRemote) {
 							hung.grow(held.getCount());
 							player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 						}
@@ -141,11 +138,6 @@ public class BlockRack extends BlockWoodDecor {
 	}
 
 	/**
-	 * Called when a block is placed using its ItemBlock. Args: World, X, Y, Z,
-	 * side, hitX, hitY, hitZ, block metadata
-	 */
-
-	/**
 	 * Checks to see if its valid to put this block at the specified coordinates.
 	 * Args: world, x, y, z
 	 */
@@ -157,49 +149,9 @@ public class BlockRack extends BlockWoodDecor {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		worldIn.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 4);
-	}
-
-	/**
-	 * Lets the block know when one of its neighbor changes. Doesn't know which
-	 * neighbor changed (coordinates passed are their own) Args: x, y, z, neighbor
-	 * Block
-	 */
-	@Override
-	public void onNeighborChange(IBlockAccess worldIn, BlockPos pos, BlockPos neighbor) {
-		TileEntity tile = worldIn.getTileEntity(pos);
-		World world = tile.getWorld();
-		if (tile != null && tile instanceof TileEntityRack) {
-			((TileEntityRack) tile).updateInventory();
-		}
-		int l = getMetaFromState(world.getBlockState(pos));
-		boolean flag = false;
-
-		if (l == 2 && world.isSideSolid(pos.south(), EnumFacing.NORTH)) {
-			flag = true;
-		}
-
-		if (l == 3 && world.isSideSolid(pos.north(), EnumFacing.SOUTH)) {
-			flag = true;
-		}
-
-		if (l == 4 && world.isSideSolid(pos.east(), EnumFacing.WEST)) {
-			flag = true;
-		}
-
-		if (l == 5 && world.isSideSolid(pos.west(), EnumFacing.EAST)) {
-			flag = true;
-		}
-
-		if (!flag) {
-			this.dropBlockAsItem(tile.getWorld(), pos, getDefaultState(), 0);
-
-			tile.getWorld().setBlockToAir(pos);
-		}
-		super.onNeighborChange(world, pos, neighbor);
 	}
 
 	/**
@@ -216,7 +168,7 @@ public class BlockRack extends BlockWoodDecor {
 		if (!world.isRemote && tile != null) {
 			int slot = tile.getSlotFor(hitX, hitZ, facing);
 			if (slot >= 0 && slot < 4) {
-				NetworkHandler.sendToPlayer((EntityPlayerMP) player, new RackCommandPacket(slot, player, tile));
+				NetworkHandler.sendToServer(new RackCommandPacket(slot, player, tile));
 			}
 		}
 

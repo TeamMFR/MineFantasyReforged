@@ -84,6 +84,7 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
         ++ticksExisted;
         if (!world.isRemote && (hasRecipe || ticksExisted % 100 == 0)) {
             syncData();
+            sendUpdates();
         }
     }
 

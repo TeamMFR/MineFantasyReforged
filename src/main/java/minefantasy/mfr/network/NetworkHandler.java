@@ -12,8 +12,8 @@ import minefantasy.mfr.client.gui.GuiCarpenterMF;
 import minefantasy.mfr.client.gui.GuiCrossbowBench;
 import minefantasy.mfr.client.gui.GuiCrucible;
 import minefantasy.mfr.client.gui.GuiForge;
-import minefantasy.mfr.client.gui.GuiKnowledgeMenu;
 import minefantasy.mfr.client.gui.GuiKnowledgeEntry;
+import minefantasy.mfr.client.gui.GuiKnowledgeMenu;
 import minefantasy.mfr.client.gui.GuiQuern;
 import minefantasy.mfr.client.gui.GuiReload;
 import minefantasy.mfr.client.gui.GuiResearchBench;
@@ -52,7 +52,7 @@ public class NetworkHandler implements IGuiHandler {
 	public static final String CHANNEL_NAME = "MFR";
 
 
-	//unused: 1, 9, 16, 18
+	//unused: 1, 9, 16, 18, 20, 25
 	private static final int STAMINA_PACKET = 2;
 	private static final int PARRY_PACKET = 3;
 	private static final int HIT_SOUND_PACKET = 4;
@@ -68,15 +68,13 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int BOMB_BENCH_PACKET = 15;
 	private static final int ROAD_PACKET = 17;
 	private static final int CROSSBOW_BENCH_PACKET = 19;
-	private static final int TILE_INVENTORY_PACKET = 20;
 	private static final int BIG_FURNACE_PACKET = 21;
 	private static final int DODGE_COMMAND_PACKET = 22;
 	private static final int RACK_COMMAND_PACKET = 23;
 	private static final int AMMO_BOX_COMMAND_PACKET = 24;
-	private static final int WOOD_DECOR_PACKET = 25;
 	private static final int COGWORK_CONTROL_PACKET = 26;
-	private static final int STORAGE_BLOCK_PACKET = 27;
 
+	//unused:
 	public static final int GUI_CRUCIBLE = 1;
 	public static final int GUI_BLAST_CHAMBER = 2;
 	public static final int GUI_BLAST_HEATER = 3;
@@ -114,14 +112,11 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(BOMB_BENCH_PACKET, BombBenchPacket.class, BombBenchPacket::new);
 		PacketMF.registerPacket(ROAD_PACKET, RoadPacket.class, RoadPacket::new);
 		PacketMF.registerPacket(CROSSBOW_BENCH_PACKET, CrossbowBenchPacket.class, CrossbowBenchPacket::new);
-		PacketMF.registerPacket(TILE_INVENTORY_PACKET, TileInventoryPacket.class, TileInventoryPacket::new);
 		PacketMF.registerPacket(BIG_FURNACE_PACKET, BigFurnacePacket.class, BigFurnacePacket::new);
 		PacketMF.registerPacket(DODGE_COMMAND_PACKET, DodgeCommandPacket.class, DodgeCommandPacket::new);
 		PacketMF.registerPacket(RACK_COMMAND_PACKET, RackCommandPacket.class, RackCommandPacket::new);
 		PacketMF.registerPacket(AMMO_BOX_COMMAND_PACKET, AmmoBoxCommandPacket.class, AmmoBoxCommandPacket::new);
-		PacketMF.registerPacket(WOOD_DECOR_PACKET, WoodDecorPacket.class, WoodDecorPacket::new);
 		PacketMF.registerPacket(COGWORK_CONTROL_PACKET, CogworkControlPacket.class, CogworkControlPacket::new);
-		PacketMF.registerPacket(STORAGE_BLOCK_PACKET, StorageBlockPacket.class, StorageBlockPacket::new);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(MineFantasyReborn.INSTANCE, this);
 

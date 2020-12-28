@@ -6,16 +6,12 @@ import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.block.BlockRoast;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.TileInventoryPacket;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
@@ -70,6 +66,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
         int temp = getTemp();
         ++ticksExisted;
         if (ticksExisted % 20 == 0 && !world.isRemote) {
+            sendUpdates();
             if (recipe != null && temp > 0 && maxProgress > 0 && temp > recipe.minTemperature) {
                 if (enableOverheat && recipe.canBurn && temp > recipe.maxTemperature) {
                     getInventory().setStackInSlot(0, recipe.burnt.copy());
@@ -145,7 +142,6 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
             maxProgress = recipe.time;
         }
         progress = 0;
-        sendPacketToClients();
     }
 
     @Override
@@ -158,11 +154,11 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
         return true;
     }
 
-    private void sendPacketToClients() {
-        if (world.isRemote)
-            return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX(), pos.getZ(), new TileInventoryPacket(this.getInventory(), this));
-    }
+//    private void sendPacketToClients() {
+//        if (world.isRemote)
+//            return;
+//        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new TileInventoryPacket(this.getInventory(), this));
+//    }
 
     @Override
     public Block getBlockType() {
@@ -173,18 +169,12 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        // Here we get the packet from the server and read it into our client side tile entity
-        this.readFromNBT(packet.getNbtCompound());
-    }
-
-    @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
         progress = nbt.getFloat("Progress");
         maxProgress = nbt.getFloat("maxProgress");
+        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
-        inventory.serializeNBT();
     }
 
     @Override
@@ -192,8 +182,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
         super.writeToNBT(nbt);
         nbt.setFloat("Progress", progress);
         nbt.setFloat("maxProgress", maxProgress);
-
-        inventory.deserializeNBT(nbt);
+        nbt.setTag("inventory", inventory.serializeNBT());
         return nbt;
     }
 

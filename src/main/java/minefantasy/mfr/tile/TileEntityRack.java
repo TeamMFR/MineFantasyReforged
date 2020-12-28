@@ -3,9 +3,6 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.helpers.BlockPositionHelper;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.TileInventoryPacket;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
@@ -57,7 +54,7 @@ public class TileEntityRack extends TileEntityWoodDecor {
     public void markDirty() {
         ++ticksExisted;
         if (ticksExisted == 10 || ticksExisted % 50 == 0) {
-            syncItems();
+            sendUpdates();
         }
     }
 
@@ -72,24 +69,6 @@ public class TileEntityRack extends TileEntityWoodDecor {
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack item) {
         return false;
-    }
-
-    public void syncItems() {
-        if (!world.isRemote) {
-
-            NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new TileInventoryPacket(getInventory(), this));
-        }
-    }
-
-    private int getEnchantment(int i) {
-        ItemStack is = this.getInventory().getStackInSlot(i);
-        if (is.isEmpty())
-            return 0;
-
-        if (is.isItemEnchanted())
-            return 1;
-
-        return 0;
     }
 
     /*
@@ -143,19 +122,6 @@ public class TileEntityRack extends TileEntityWoodDecor {
     public boolean hasRackBelow(int slot) {
         TileEntity side = world.getTileEntity(pos.add(0,-1,0));
         return side != null && side instanceof TileEntityRack;// && ((TileEntityRack)side).getStackInSlot(slot) == null;
-    }
-
-    public void updateInventory() {
-        if (!world.isRemote) {
-            for (int x = 0; x < getInventory().getSlots(); x++) {
-                ItemStack item = this.getInventory().getStackInSlot(x);
-                if (!item.isEmpty() && !canHang(item, x)) {
-                    EntityItem drop = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, item);
-                    world.spawnEntity(drop);
-                    getInventory().setStackInSlot(x, ItemStack.EMPTY);
-                }
-            }
-        }
     }
 
     @Override

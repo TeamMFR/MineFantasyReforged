@@ -1,32 +1,34 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityComponent;
-import net.minecraft.block.BlockContainer;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BlockComponent extends BlockContainer {
-    public static int component_RI = 118;
-    private Random rand = new Random();
+public class BlockComponent extends BlockTileEntity<TileEntityComponent> {
+    public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
     public BlockComponent() {
         super(Material.CIRCUITS);
@@ -35,76 +37,81 @@ public class BlockComponent extends BlockContainer {
         setUnlocalizedName("component");
         this.setHardness(1F);
         this.setResistance(1F);
-        new AxisAlignedBB(1 / 16F, 0F, 1 / 16F, 15 / 16F, 12 / 16F, 15 / 16F);
+
     }
 
-    private static TileEntityComponent getTile(World world, BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
-            return (TileEntityComponent) tile;
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, FACING);
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, IBlockState state) {
+        return new TileEntityComponent();
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public EnumBlockRenderType getRenderType(IBlockState state) {
+        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+    }
+
+
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public IBlockState getStateFromMeta(int meta)
+    {
+        EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
+        {
+            enumfacing = EnumFacing.NORTH;
         }
-        return null;
+
+        return this.getDefaultState().withProperty(FACING, enumfacing);
     }
 
-    public static int placeComponent(EntityPlayer user, ItemStack item, World world, BlockPos pos, String type, String tex, int dir) {
-        if (world.isAirBlock(pos) && canBuildOn(world, pos.add(0,-1,0))) {
-            world.setBlockState(pos, (IBlockState) MineFantasyBlocks.COMPONENTS, 2);
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return state.getValue(FACING).getIndex();
+    }
 
-            int max = getStorageSize(type);
-            int size = user.isSneaking() ? Math.min(item.getCount(), max) : 1;
+    @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+    }
 
-            TileEntityComponent tile = new TileEntityComponent();
+    public static int placeComponent(EntityPlayer user, ItemStack item, World world, BlockPos pos, String type, String tex) {
+
+        int max = getStorageSize(type);
+        int size = user.isSneaking() ? Math.min(item.getCount(), max) : 1;
+
+        TileEntityComponent tile = (TileEntityComponent) world.getTileEntity(pos);
+        if (tile != null){
             ItemStack newitem = item.copy();
             newitem.setCount(1);
             tile.setItem(newitem, type, tex, max, size);
-            world.setTileEntity(pos, tile);
-            return size;
         }
-        return 0;
+        return size;
     }
 
     public static boolean canBuildOn(World world, BlockPos pos) {
         TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
+        if (tile instanceof TileEntityComponent) {
             return ((TileEntityComponent) tile).isFull();
         }
         return world.isSideSolid(pos, EnumFacing.UP);
-    }
-
-    public static int useComponent(ItemStack item, String type, String tex, World world, EntityPlayer user, RayTraceResult movingobjectposition) {
-        if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-           BlockPos hit = movingobjectposition.getBlockPos();
-
-            if (movingobjectposition.sideHit == EnumFacing.UP) {
-                hit.add(1,0,0);
-            }
-
-            if (movingobjectposition.sideHit == EnumFacing.DOWN) {
-                hit.add(0,1,0);
-            }
-
-            if (movingobjectposition.sideHit == EnumFacing.NORTH) {
-                hit.add(0,0,1);
-            }
-
-            if (movingobjectposition.sideHit == EnumFacing.SOUTH) {
-                hit.add(0,0,1);
-            }
-
-            if (movingobjectposition.sideHit == EnumFacing.EAST) {
-                hit.add(0,1,0);
-            }
-
-            if (movingobjectposition.sideHit == EnumFacing.WEST) {
-                hit.add(1,0,0);
-            }
-
-            if (user.canPlayerEdit(hit, movingobjectposition.sideHit, item)) {
-                int l = MathHelper.floor(user.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
-                return placeComponent(user, item, user.world, hit, type, tex, l);
-            }
-        }
-        return 0;
     }
 
     public static int getStorageSize(String id) {
@@ -128,27 +135,6 @@ public class BlockComponent extends BlockContainer {
     }
 
     @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-
-    @SideOnly(Side.CLIENT)
-    public int getRenderType() {
-        return component_RI;
-    }
-
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        world.setBlockState(pos, state, 2);
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityComponent();
-    }
-
-    @Override
     public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
         useBlock(world, pos, user, true);
     }
@@ -160,9 +146,9 @@ public class BlockComponent extends BlockContainer {
     }
 
     private void useBlock(World world, BlockPos pos, EntityPlayer user, boolean leftClick) {
-        ItemStack held = user.getHeldItem(EnumHand.MAIN_HAND);
+        ItemStack held = user.getHeldItemMainhand();
         TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
+        if (tile instanceof TileEntityComponent) {
             ((TileEntityComponent) tile).interact(user, held, leftClick);
         }
     }
@@ -170,7 +156,7 @@ public class BlockComponent extends BlockContainer {
     @Override
     public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
         TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
+        if (tile instanceof TileEntityComponent) {
             ((TileEntityComponent) tile).checkStack();
         }
     }
@@ -178,14 +164,44 @@ public class BlockComponent extends BlockContainer {
     @Override
     public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
         TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
-            if (((TileEntityComponent) tile).item != null) {
-                ItemStack item = ((TileEntityComponent) tile).item.copy();
+        if (tile instanceof TileEntityComponent) {
+            if (!((TileEntityComponent) tile).getItem().isEmpty()) {
+                ItemStack item = ((TileEntityComponent) tile).getItem().copy();
                 item.setCount(1);
                 return item;
             }
         }
-        return null;
+        return ItemStack.EMPTY;
+    }
+
+    @Override
+    public void breakBlock(World world, BlockPos pos, IBlockState state) {
+        TileEntityBase tile = getTile(world, pos);
+        if (tile instanceof TileEntityComponent){
+            ((TileEntityComponent) tile).getItem().setCount(((TileEntityComponent) tile).stackSize);
+        }
+        tile.onBlockBreak();
+        world.removeTileEntity(pos);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean addDestroyEffects(World world, BlockPos pos, net.minecraft.client.particle.ParticleManager manager) {
+        return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, net.minecraft.client.particle.ParticleManager manager) {
+        return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean addRunningEffects(IBlockState state, World world, BlockPos pos, Entity entity) {
+        return true;
+    }
+
+    public boolean addLandingEffects(IBlockState state, net.minecraft.world.WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles )
+    {
+        return true;
     }
 
     @Override
@@ -194,61 +210,12 @@ public class BlockComponent extends BlockContainer {
     }
 
     @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
-            TileEntityComponent component = (TileEntityComponent) tile;
-
-            if (component.item != null) {
-                while (component.stackSize > 0) {
-                    ItemStack drop = component.item.copy();
-                    int count = Math.min(component.stackSize, drop.getMaxStackSize());
-                    drop.setCount(count);
-                    component.stackSize -= count;
-                    dropItem(world, pos, drop);
-                }
-            }
-        }
-    }
-
-    private void dropItem(World world, BlockPos pos, ItemStack itemstack) {
-        if (itemstack != null) {
-            float f = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-            while (itemstack.getCount() > 0) {
-                int j1 = this.rand.nextInt(21) + 10;
-
-                if (j1 > itemstack.getCount()) {
-                    j1 = itemstack.getCount();
-                }
-
-                itemstack.shrink(j1);
-                EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2,
-                        new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-                if (itemstack.hasTagCompound()) {
-                    entityitem.getItem().setTagCompound( itemstack.getTagCompound().copy());
-                }
-
-                float f3 = 0.05F;
-                entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-                entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-                world.spawnEntity(entityitem);
-            }
-        }
-    }
-
-    @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         float height = 1.0F;
         TileEntity tile = source.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityComponent) {
+        if (tile instanceof TileEntityComponent) {
             height = ((TileEntityComponent) tile).getBlockHeight();
         }
-        return new AxisAlignedBB(pos.getX() + 0.0625D, pos.getY() + 0D, pos.getZ() + 0.0625D,
-                pos.getX() + 0.9375D, pos.getY() + height, pos.getZ() + 0.9375D);
+        return new AxisAlignedBB(1 / 16F, 0F, 1 / 16F, 15 / 16F, 1 / 16F + height, 15 / 16F);
     }
 }

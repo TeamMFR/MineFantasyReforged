@@ -203,6 +203,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
         if (world.isRemote)
             return;
         NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new AmmoBoxCommandPacket(this));
+        sendUpdates();
     }
 
     public int getMaxAmmo(ItemStack ammo) {

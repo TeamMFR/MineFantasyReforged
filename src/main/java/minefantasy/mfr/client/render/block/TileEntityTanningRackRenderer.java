@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -38,6 +39,9 @@ public class TileEntityTanningRackRenderer <T extends TileEntity> extends FastTE
             facing = state.getValue(BlockTanningRack.FACING);
         }
 
+        GlStateManager.disableLighting();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+
         this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/tanner_metal.png"));
         GL11.glPushMatrix();
         GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.45F, (float) d2 + 0.5F);
@@ -54,6 +58,8 @@ public class TileEntityTanningRackRenderer <T extends TileEntity> extends FastTE
         }
 
         renderHungItem(tile);
+
+        GlStateManager.enableLighting();
 
         GL11.glPopMatrix();
 

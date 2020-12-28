@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -42,7 +43,7 @@ public class TileEntityAmmoBoxRenderer <T extends TileEntity> extends FastTESR<T
         EnumFacing facing = EnumFacing.NORTH;
         if (tile.hasWorld()) {
             IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-            facing = state.getValue(BlockBigFurnace.FACING);
+            facing = state.getValue(BlockAmmoBox.FACING);
         }
         this.renderModelAt(tile, -facing.getHorizontalAngle(), d, d1, d2, f);
     }
@@ -62,6 +63,9 @@ public class TileEntityAmmoBoxRenderer <T extends TileEntity> extends FastTESR<T
         CustomMaterial material = tile.getMaterial();
         GL11.glColor3f(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
 
+        GlStateManager.disableLighting();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+
         this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + tile.getTexName() + "_base.png")); // texture
         baseMdl.renderModel(0.0625F);
         baseMdl.renderLid(0.0625F, tile.angle);
@@ -71,6 +75,9 @@ public class TileEntityAmmoBoxRenderer <T extends TileEntity> extends FastTESR<T
         this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + tile.getTexName() + "_detail.png")); // texture
         baseMdl.renderModel(0.0625F);
         baseMdl.renderLid(0.0625F, tile.angle);
+
+        GlStateManager.enableLighting();
+
         GL11.glPopMatrix();
         GL11.glColor3f(1F, 1F, 1F);
         GL11.glPopMatrix(); // end

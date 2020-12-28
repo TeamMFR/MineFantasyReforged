@@ -1,4 +1,4 @@
-package minefantasy.mfr.client.model.block.component;
+package minefantasy.mfr.client.model.block;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

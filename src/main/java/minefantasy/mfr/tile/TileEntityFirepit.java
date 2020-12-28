@@ -276,11 +276,6 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	}
 
 	@Override
-	public final NBTTagCompound getUpdateTag(){
-		return this.writeToNBT(new NBTTagCompound());
-	}
-
-	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setInteger("fuel", fuel);

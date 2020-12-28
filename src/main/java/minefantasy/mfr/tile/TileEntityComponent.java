@@ -3,25 +3,56 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockComponent;
-import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.StorageBlockPacket;
+import minefantasy.mfr.container.ContainerBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityComponent extends TileEntity {
-    public ItemStack item;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+public class TileEntityComponent extends TileEntityBase {
     public int stackSize, max;
     public String type = "bar";
     public String tex = "bar";
     public CustomMaterial material;
     private int ticksExisted;
 
+    public final ItemStackHandler inventory = createInventory();
+
+    @Override
+    protected ItemStackHandler createInventory() {
+        return new ItemStackHandler(8);
+    }
+
+    @Override
+    public ItemStackHandler getInventory() {
+        return inventory;
+    }
+
+    public ItemStack getItem(){
+        return getInventory().getStackInSlot(0);
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int slot, ItemStack item) {
+        return true;
+    }
+
+    @Override
+    public boolean hasFastRenderer() {
+        return true;
+    }
+
     public void setItem(ItemStack item, String type, String tex, int max, int stackSize) {
-        this.item = item;
-        this.item.setCount(1);
+        this.getInventory().setStackInSlot(0, item);
+        this.getItem().setCount(1);
         this.stackSize = stackSize;
         this.max = max;
         this.type = type;
@@ -31,30 +62,35 @@ public class TileEntityComponent extends TileEntity {
     }
 
     public void interact(EntityPlayer user, ItemStack held, boolean leftClick) {
-        if (!item.isEmpty() && stackSize > 0) {
+        if (!getItem().isEmpty() && stackSize > 0) {
             if (leftClick)// Take
             {
+                int amount = user.isSneaking() ? stackSize : 1;
                 if (held.isEmpty()) {
-                    held = item.copy();
-                    held.setCount(1);
+                    held = getItem().copy();
+                    held.setCount(amount);
                     user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, held);
-                    --stackSize;
+                    stackSize -= amount;
                 } else {
-                    ItemStack newitem = item.copy();
-                    newitem.setCount(1);
+                    ItemStack newitem = getItem().copy();
+                    newitem.setCount(amount);
                     if (user.inventory.addItemStackToInventory(newitem)) {
-                        --stackSize;
+                        stackSize -= amount;
                     }
                 }
-                if (item.isEmpty() || stackSize <= 0) {
+                if (getItem().isEmpty() || stackSize <= 0) {
                     world.setBlockToAir(pos);
                     world.removeTileEntity(pos);
                 }
             } else if (!held.isEmpty())// PLACE
             {
-                if (stackSize < max && item.isItemEqual(held) && ItemStack.areItemStackTagsEqual(item, held)) {
-                    ++stackSize;
-                    held.shrink(1);
+                if (stackSize < max && getItem().isItemEqual(held) && ItemStack.areItemStackTagsEqual(getItem(), held)) {
+                    int amount = user.isSneaking() ? held.getCount() : 1;
+                    if (amount != 1) {
+                        amount = amount < max ? Math.min(amount, (max - stackSize)) : (max - stackSize);
+                    }
+                    stackSize += amount;
+                    held.shrink(amount);
                 }
 
                 if (held.getCount() <= 0) {
@@ -63,7 +99,7 @@ public class TileEntityComponent extends TileEntity {
             }
         }
         checkStack();
-        syncData();
+        sendUpdates();
     }
 
     public void checkStack() {
@@ -71,7 +107,7 @@ public class TileEntityComponent extends TileEntity {
             world.setBlockToAir(pos);
         }
         TileEntity tile = world.getTileEntity(pos.add(0,1,0));
-        if (tile != null && tile instanceof TileEntityComponent) {
+        if (tile instanceof TileEntityComponent) {
             ((TileEntityComponent) tile).checkStack();
         }
     }
@@ -81,50 +117,8 @@ public class TileEntityComponent extends TileEntity {
         ++ticksExisted;
 
         if (ticksExisted == 20 || ticksExisted % 120 == 0) {
-            syncData();
+            sendUpdates();
         }
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-
-        max = nbt.getInteger("max_stack");
-        type = nbt.getString("type");
-        tex = nbt.getString("tex");
-        stackSize = nbt.getInteger("stack_size");
-
-        NBTTagCompound itemsave = nbt.getCompoundTag("item_save");
-        item = new ItemStack(itemsave);
-        if (nbt.hasKey("material_name")) {
-            this.material = CustomMaterial.getMaterial(nbt.getString("material_name"));
-        }
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-
-        nbt.setInteger("max_stack", max);
-        nbt.setString("type", type);
-        nbt.setString("tex", tex);
-        nbt.setInteger("stack_size", stackSize);
-
-        if (item != null) {
-            NBTTagCompound itemsave = new NBTTagCompound();
-            item.writeToNBT(itemsave);
-            nbt.setTag("item_save", itemsave);
-        }
-        if (material != null) {
-            nbt.setString("material_name", material.getName());
-        }
-        return nbt;
-    }
-
-    public void syncData() {
-        if (world.isRemote)
-            return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX(), pos.getZ(), new StorageBlockPacket(this));
     }
 
     public boolean isFull() {
@@ -191,5 +185,61 @@ public class TileEntityComponent extends TileEntity {
             return stackSize > 16 ? 1.0F : 0.5F;
         }
         return 1.0F;
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+
+        max = nbt.getInteger("max_stack");
+        type = nbt.getString("type");
+        tex = nbt.getString("tex");
+        stackSize = nbt.getInteger("stack_size");
+        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+        if (nbt.hasKey("material_name")) {
+            this.material = CustomMaterial.getMaterial(nbt.getString("material_name"));
+        }
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+
+        nbt.setInteger("max_stack", max);
+        nbt.setString("type", type);
+        nbt.setString("tex", tex);
+        nbt.setInteger("stack_size", stackSize);
+
+        if (!getItem().isEmpty()) {
+            nbt.setTag("inventory", inventory.serializeNBT());
+        }
+        if (material != null) {
+            nbt.setString("material_name", material.getName());
+        }
+        return nbt;
+    }
+
+    @Override
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    }
+
+    @Nullable
+    @Override
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+        }
+        return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public ContainerBase createContainer(EntityPlayer player) {
+        return null;
+    }
+
+    @Override
+    protected int getGuiId() {
+        return 0;
     }
 }

@@ -2,8 +2,6 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockWoodDecor;
-import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.WoodDecorPacket;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -74,9 +72,5 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
             }
         }
         return texture;
-    }
-
-    public void sendPacketToClient() {
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX(), pos.getZ(), new WoodDecorPacket(this));
     }
 }

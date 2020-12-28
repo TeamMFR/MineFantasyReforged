@@ -6,6 +6,9 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,11 +16,11 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -256,21 +259,31 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-        ItemStack item = user.getHeldItem(hand);
-        if (!world.isRemote && storageType != null) {
-            RayTraceResult rayTraceResult = this.rayTrace(world, user, false);
-
-            if (rayTraceResult == null) {
-                return ActionResult.newResult(EnumActionResult.PASS, item);
-            } else {
-                int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user, rayTraceResult);
-                if (placed > 0) {
-                    item.shrink(placed);
-                    return ActionResult.newResult(EnumActionResult.PASS, item);
-                }
-            }
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (storageType == null) {
+            return EnumActionResult.FAIL;
         }
-        return super.onItemRightClick(world, user, hand);
+
+        ItemStack stack = player.getHeldItem(hand);
+        Block componentBlock = MineFantasyBlocks.COMPONENTS;
+
+        IBlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+
+        if (!block.isReplaceable(world, pos)) {
+            pos = pos.offset(facing);
+        }
+
+        if (!world.mayPlace(componentBlock, pos, false, facing, player)) {
+            return EnumActionResult.FAIL;
+        }
+
+        world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
+
+        int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blocktex);
+
+        stack.shrink(size);
+
+        return EnumActionResult.SUCCESS;
     }
 }

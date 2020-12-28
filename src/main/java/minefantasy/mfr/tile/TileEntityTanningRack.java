@@ -9,7 +9,6 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -17,10 +16,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
@@ -39,6 +35,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
     public String toolType = "knife";
     public float acTime;
     private Random rand = new Random();
+    private int ticksExisted;
 
     public TileEntityTanningRack() {
 
@@ -73,6 +70,12 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 
     @Override
     public void update() {
+        ++ticksExisted;
+
+        if (ticksExisted == 20 || ticksExisted % 120 == 0) {
+            sendUpdates();
+        }
+
         if (isAutomated()) {
             if (acTime > 0) {
                 acTime -= (1F / 20);
@@ -87,7 +90,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
         }
         createContainer(player).detectAndSendChanges();
 
-        ItemStack held = player.getHeldItem(EnumHand.MAIN_HAND);
+        ItemStack held = player.getHeldItemMainhand();
 
         // Interaction
         if (!getInventory().getStackInSlot(1).isEmpty() && (leverPull || ToolHelper.getCrafterTool(held).equalsIgnoreCase(toolType))) {
@@ -191,6 +194,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
             toolType = recipe.toolType;
         }
         progress = 0;
+        sendUpdates();
     }
 
     public boolean doesPlayerKnowCraft() {
@@ -248,33 +252,6 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
         }
     }
 
-    public void sendUpdates() {
-        world.markBlockRangeForRenderUpdate(pos, pos);
-        world.notifyBlockUpdate(pos, getState(), getState(), 3);
-        world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
-        markDirty();
-    }
-    private IBlockState getState() {
-        return world.getBlockState(pos);
-    }
-
-    @Override
-    @Nullable
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
-    }
-
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return this.writeToNBT(new NBTTagCompound());
-    }
-
-    @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-        super.onDataPacket(net, pkt);
-        handleUpdateTag(pkt.getNbtCompound());
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
@@ -285,7 +262,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
         maxProgress = nbt.getFloat("maxProgress");
         toolType = nbt.getString("toolType");
 
-        inventory.serializeNBT();
+        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
     }
 
     @Nonnull
@@ -298,8 +275,8 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
         nbt.setFloat("Progress", progress);
         nbt.setFloat("maxProgress", maxProgress);
         nbt.setString("toolType", toolType);
+        nbt.setTag("inventory", inventory.serializeNBT());
 
-        inventory.deserializeNBT(nbt);
         return nbt;
     }
 

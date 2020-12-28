@@ -10,6 +10,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -57,8 +58,10 @@ public class TileEntityBigFurnaceRenderer <T extends TileEntity> extends FastTES
         GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
         GlStateManager.scale(scale, -scale, -scale);
 
-
+        GlStateManager.disableLighting();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
         model.renderModel(display, (float) ( 90F / 20F * -doorAngle / 180F * Math.PI), 0.0625F);
+        GlStateManager.enableLighting();
 
         GlStateManager.popMatrix(); // end
 

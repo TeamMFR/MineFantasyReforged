@@ -492,12 +492,6 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
         }
     }
 
-    private void sendPacketToClients() {
-        if (!world.isRemote) {
-            NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4 , new BigFurnacePacket(this));
-        }
-    }
-
     /**
      * Heater:0||Stone :1;
      */

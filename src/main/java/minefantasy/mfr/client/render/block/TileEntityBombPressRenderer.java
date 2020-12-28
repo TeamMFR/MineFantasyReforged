@@ -9,6 +9,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -52,7 +53,11 @@ public class TileEntityBombPressRenderer <T extends TileEntity> extends FastTESR
         GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
         GlStateManager.scale(1F, -1F, -1F); // if you read this comment out this line and you can see what happens
         GlStateManager.pushMatrix();
+
+        GlStateManager.disableLighting();
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
         model.renderModel(0.0625F, animation);
+        GlStateManager.enableLighting();
 
         GlStateManager.popMatrix();
         GlStateManager.color(255, 255, 255);

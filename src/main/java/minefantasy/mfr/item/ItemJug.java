@@ -5,15 +5,17 @@ import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.item.ItemComponentMFR;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -30,19 +32,6 @@ public class ItemJug extends ItemComponentMFR {
         super("jug_" + type, 0);
         setCreativeTab(CreativeTabMFR.tabFood);
         this.type = type;
-    }
-
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack item = player.getHeldItem(hand);
-        if (type.equalsIgnoreCase("uncooked")) {
-            return super.onItemRightClick(world, player, hand);
-        }
-        if (type.equalsIgnoreCase("empty")) {
-            rightClickEmpty(item, world, player);
-            return rightClickEmpty(item, world, player);
-        }
-        return useFilled(item, world, player);
     }
 
     @Override
@@ -91,29 +80,29 @@ public class ItemJug extends ItemComponentMFR {
         return EnumAction.DRINK;
     }
 
-    public ActionResult<ItemStack> rightClickEmpty(ItemStack item, World world, EntityPlayer player) {
+    public EnumActionResult rightClickEmpty(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
+        ItemStack stack = player.getHeldItem(hand);
 
         if (rayTraceResult == null) {
-            return super.onItemRightClick(world, player, player.getActiveHand());
+           return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
         } else {
             if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = rayTraceResult.getBlockPos();
 
                 if (!world.canMineBlockBody(player, pos)) {
-                    return super.onItemRightClick(world, player, player.getActiveHand());
+                    return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
                 }
 
-                if (!player.canPlayerEdit(pos, rayTraceResult.sideHit, item)) {
-                    return super.onItemRightClick(world, player, player.getActiveHand());
+                if (!player.canPlayerEdit(pos, rayTraceResult.sideHit, stack)) {
+                    return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
                 }
 
                 if (isWaterSource(world, pos)) {
-                    gather(item, world, player);
-                    return ActionResult.newResult(EnumActionResult.PASS, item);
+                    gather(stack, world, player);
+                    return EnumActionResult.SUCCESS;
                 }
             }
-            return super.onItemRightClick(world, player, player.getActiveHand());
+           return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
         }
     }
 
@@ -132,22 +121,40 @@ public class ItemJug extends ItemComponentMFR {
         return TongsHelper.getWaterSource(world, pos) >= 0;
     }
 
-    public ActionResult<ItemStack> useFilled(ItemStack item, World world, EntityPlayer user) {
-        if (!world.isRemote && storageType != null) {
-            RayTraceResult rayTraceResult = this.rayTrace(world, user, false);
-
-            if (rayTraceResult == null) {
-                return ActionResult.newResult(EnumActionResult.PASS, item);
-            } else {
-                int placed = BlockComponent.useComponent(item, storageType, blocktex, world, user,
-                        rayTraceResult);
-                if (placed > 0) {
-                    item.shrink(placed);
-                    return ActionResult.newResult(EnumActionResult.PASS, item);
-                }
-            }
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (storageType == null) {
+            return EnumActionResult.FAIL;
         }
-        user.setActiveHand(user.swingingHand);
-        return ActionResult.newResult(EnumActionResult.PASS, item);
+
+        ItemStack stack = player.getHeldItem(hand);
+        Block componentBlock = MineFantasyBlocks.COMPONENTS;
+
+        IBlockState state = world.getBlockState(pos);
+        Block block = state.getBlock();
+
+        if (type.equalsIgnoreCase("uncooked")) {
+            return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+        }
+        if (type.equalsIgnoreCase("empty")) {
+            rightClickEmpty(player, world, pos, hand, facing, hitX, hitY, hitZ);
+            return rightClickEmpty(player, world, pos, hand, facing, hitX, hitY, hitZ);
+        }
+
+        if (!block.isReplaceable(world, pos)) {
+            pos = pos.offset(facing);
+        }
+
+        if (!world.mayPlace(componentBlock, pos, false, facing, player)) {
+            return EnumActionResult.FAIL;
+        }
+
+        world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
+
+        int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blocktex);
+
+        stack.shrink(size);
+
+        return EnumActionResult.SUCCESS;
     }
 }

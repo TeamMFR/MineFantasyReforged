@@ -21,7 +21,7 @@ public class BlockEngineerTanner extends BlockTanningRack {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
         if (tile != null) {
-            return tile.interact(user, false, facing == EnumFacing.UP);
+            return tile.interact(user, false, user.isSneaking());
         }
         return true;
     }
