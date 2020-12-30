@@ -2,6 +2,7 @@ package minefantasy.mfr.client.render.block;
 
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockBigFurnace;
@@ -126,7 +127,7 @@ public class TileEntityAmmoBoxRenderer <T extends TileEntity> extends FastTESR<T
 
         GlStateManager.pushMatrix();
 
-        renderInvModel(box.getFullTexName(), box.storageType, CustomMaterial.getMaterial("RefinedWood"), 0F, 0F, 0F, 0F);
+        renderInvModel(box.getFullTexName(), box.storageType, CustomToolHelper.getCustomPrimaryMaterial(stack), 0F, 0F, 0F, 0F);
 
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);

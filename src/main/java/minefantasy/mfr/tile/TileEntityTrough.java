@@ -1,8 +1,12 @@
 package minefantasy.mfr.tile;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.heating.IQuenchBlock;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.item.ItemBlockToolRack;
+import minefantasy.mfr.item.ItemBlockTrough;
 import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +25,7 @@ import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBlock, ITickable {
 	public static int capacityScale = 8;
+	public int colorInt;
 	/**
 	 * The number of fill_count entries in the blockstate json
 	 */
@@ -56,6 +61,16 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 			return 0F;
 		}
 		return -1F;
+	}
+
+	public void setColorInt(ItemStack stack){
+		if (stack.getItem() instanceof ItemBlockTrough){
+			this.colorInt = CustomToolHelper.getColourFromItemStack(stack, 0);
+		}
+	}
+
+	public int getColorInt(){
+		return colorInt;
 	}
 
 	public boolean interact(EntityPlayer player, ItemStack stack) {
@@ -193,6 +208,7 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 
 	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("fill", fill);
+		nbt.setInteger("color_int", colorInt);
 		return nbt;
 	}
 
@@ -209,6 +225,7 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 
 	public void readNBT(NBTTagCompound nbt) {
 		fill = nbt.getInteger("fill");
+		colorInt = nbt.getInteger("color_int");
 		markDirty();
 	}
 

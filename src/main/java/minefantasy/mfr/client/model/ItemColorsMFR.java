@@ -41,13 +41,7 @@ public class ItemColorsMFR {
 			return 0xFFFFFF;
 		};
 
-
-		// Leaf ItemBlock Coloration
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_YEW);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_IRONBARK);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_EBONY);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.BERRY_BUSH);
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1 ), ToolListMFR.SYRINGE);
+		/// TOOL ITEMS
 
 		// Standard Tools
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_PICK);
@@ -70,6 +64,8 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_TROW);
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPOON);
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_MALLET);
+
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1 ), ToolListMFR.SYRINGE);
 
 		//Standard Weapons
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SWORD);
@@ -256,6 +252,18 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.ARROWHEAD);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BROAD_HEAD);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BODKIN_HEAD);
+
+		/// ITEMBLOCKS
+
+		// Leaf ItemBlock Coloration
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_YEW);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_IRONBARK);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.LEAVES_EBONY);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = ColorizerFoliage.getFoliageColorBasic()), MineFantasyBlocks.BERRY_BUSH);
+
+		// Static model Wood Decoration ItemBlock Coloration
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyBlocks.TOOL_RACK_WOOD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyBlocks.TROUGH_WOOD);
 	}
 
 }

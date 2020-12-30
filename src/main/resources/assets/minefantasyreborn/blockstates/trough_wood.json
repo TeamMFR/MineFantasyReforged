@@ -3,7 +3,7 @@
     "defaults": {
         "transform": "forge:default-block",
         "model": "minefantasyreborn:trough",
-        "textures": {"texture": "minefantasyreborn:blocks/trough_basic"}
+        "textures": {"texture": "minefantasyreborn:blocks/trough_wood_base"}
     },
     "variants": {
         "normal": [{}],

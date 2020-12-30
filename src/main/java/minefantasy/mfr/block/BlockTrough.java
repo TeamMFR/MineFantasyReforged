@@ -80,16 +80,16 @@ public class BlockTrough extends BlockWoodDecor {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack item) {
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
 
 		TileEntityTrough tile = (TileEntityTrough) getTile(world, pos);
 		if (tile != null) {
-			if (item.hasTagCompound() && item.getTagCompound().hasKey(FILL_LEVEL)) {
-				tile.fill = item.getTagCompound().getInteger(FILL_LEVEL);
+			if (stack.hasTagCompound() && stack.getTagCompound().hasKey(FILL_LEVEL)) {
+				tile.fill = stack.getTagCompound().getInteger(FILL_LEVEL);
 			}
-			//            setActiveState(tile.getFillCount(), world, pos);
+			tile.setColorInt(stack);
 		}
-		super.onBlockPlacedBy(world, pos, state, user, item);
+		super.onBlockPlacedBy(world, pos, state, user, stack);
 	}
 
 	@Override

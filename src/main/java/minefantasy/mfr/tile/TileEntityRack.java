@@ -1,8 +1,11 @@
 package minefantasy.mfr.tile;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.BlockPositionHelper;
+import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.container.ContainerBase;
+import minefantasy.mfr.item.ItemBlockToolRack;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
@@ -20,6 +23,7 @@ import javax.annotation.Nullable;
 public class TileEntityRack extends TileEntityWoodDecor {
     public ItemStackHandler inventory = createInventory();
     private int ticksExisted;
+    public int colorInt;
 
     public TileEntityRack() {
         super("rack_wood");
@@ -69,6 +73,16 @@ public class TileEntityRack extends TileEntityWoodDecor {
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack item) {
         return false;
+    }
+
+    public void setColorInt(ItemStack stack){
+        if (stack.getItem() instanceof ItemBlockToolRack){
+            this.colorInt = CustomToolHelper.getColourFromItemStack(stack, 0);
+        }
+    }
+
+    public int getColorInt(){
+        return colorInt;
     }
 
     /*
@@ -127,14 +141,14 @@ public class TileEntityRack extends TileEntityWoodDecor {
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-
+        colorInt = nbt.getInteger("color_int");
         inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-
+        nbt.setInteger("color_int", colorInt);
         nbt.setTag("inventory", inventory.serializeNBT());
         return nbt;
     }
