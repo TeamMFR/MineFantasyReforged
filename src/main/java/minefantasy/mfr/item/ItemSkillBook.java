@@ -49,23 +49,23 @@ public class ItemSkillBook extends ItemComponentMFR {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-        ItemStack item = user.getHeldItem(hand);
+    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+        ItemStack item = player.getHeldItem(hand);
         boolean used = false;
         if (skill != null) {
-            int lvl = RPGElements.getLevel(user, skill);
+            int lvl = RPGElements.getLevel(player, skill);
             if (lvl < skill.getMaxLevel()) {
                 if (isMax) {
-                    skill.manualLvlUp(user, 100);
+                    skill.manualLvlUp(player, 100);
                 } else {
-                    skill.addXP(user, world.rand.nextInt(skill.getLvlXP(lvl, user)));
+                    skill.addXP(player, world.rand.nextInt(skill.getLvlXP(lvl)));
                 }
                 used = true;
             }
         }
         if (used) {
-            user.world.playSound(user.posX, user.posY, user.posZ, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
-            if (!user.capabilities.isCreativeMode) {
+            player.world.playSound(player.posX, player.posY, player.posZ, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+            if (!player.capabilities.isCreativeMode) {
                 item.shrink(1);
             }
         }

@@ -5,12 +5,10 @@ import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.helpers.ArrowEffectsMF;
-import minefantasy.mfr.api.helpers.EntityHelper;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.rpg.LevelupEvent;
-import minefantasy.mfr.api.rpg.SyncSkillEvent;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.ISmithTongs;
@@ -28,7 +26,6 @@ import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.SkillPacket;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
@@ -80,7 +77,6 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
 import net.minecraftforge.event.world.BlockEvent;
@@ -574,19 +570,10 @@ public class EventManagerMFRToRemove {
 			injury--;
 			entity.getEntityData().setInteger(injuredNBT, injury);
 		}
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity)) {
-			StaminaMechanics.tickEntity(event.getEntityLiving());
+		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity) && event.getEntityLiving() instanceof EntityPlayer) {
+			StaminaMechanics.tickEntity((EntityPlayer) event.getEntityLiving());
 		}
 
-	}
-
-	@SubscribeEvent
-	public void clonePlayer(PlayerEvent.Clone event) {
-		EntityPlayer origin = event.getOriginal();
-		EntityPlayer spawn = event.getEntityPlayer();
-		if (origin != null && spawn != null) {
-			EntityHelper.cloneNBT(origin, spawn);
-		}
 	}
 
 	@SubscribeEvent
@@ -596,23 +583,6 @@ public class EventManagerMFRToRemove {
 			if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
 				event.setCanceled(true);
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public void levelup(LevelupEvent event) {
-		EntityPlayer player = event.thePlayer;
-		if (!player.world.isRemote) {
-			NetworkHandler.sendToAllTrackingChunk(player.world, player.chunkCoordX, player.chunkCoordZ, new LevelUpPacket(player, event.theSkill, event.theLevel));
-			NetworkHandler.sendToAllTrackingChunk(player.world, player.chunkCoordX, player.chunkCoordZ, new SkillPacket(player, event.theSkill));
-		}
-	}
-
-	@SubscribeEvent
-	public void syncSkill(SyncSkillEvent event) {
-		EntityPlayer player = event.thePlayer;
-		if (!player.world.isRemote) {
-			NetworkHandler.sendToAllTrackingChunk(player.world, player.chunkCoordX, player.chunkCoordZ, new SkillPacket(player, event.theSkill));
 		}
 	}
 

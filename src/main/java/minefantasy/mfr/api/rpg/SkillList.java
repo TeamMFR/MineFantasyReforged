@@ -1,5 +1,7 @@
 package minefantasy.mfr.api.rpg;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 public class SkillList {
     // MOVEMENT
     // public static Skill athletics = new Skill("athletics").register();

@@ -6,16 +6,21 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.api.rpg.LevelupEvent;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.config.ConfigClient;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
+import minefantasy.mfr.network.LevelUpPacket;
+import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -207,6 +212,14 @@ public final class MFREventHandler {
 	public static void specialInteractForComponentBlock(PlayerInteractEvent.RightClickBlock event) {
 		if (event.getEntityPlayer().isSneaking() && event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockComponent){
 			event.setUseBlock(Event.Result.ALLOW);
+		}
+	}
+
+	@SubscribeEvent
+	public static void levelup(LevelupEvent event) {
+		EntityPlayer player = event.thePlayer;
+		if (player instanceof  EntityPlayerMP) {
+			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new LevelUpPacket(player, event.theSkill, event.theLevel));
 		}
 	}
 }

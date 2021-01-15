@@ -37,8 +37,6 @@ public class KnowledgePacket extends PacketMF {
             }
         }
         username = UUID.fromString(ByteBufUtils.readUTF8String(packet));
-
-        packet.clear();
     }
 
     @Override
@@ -54,16 +52,15 @@ public class KnowledgePacket extends PacketMF {
     }
 
     @Override
-    protected void execute() {
-        if (user != null && user.getUniqueID() == username) {
+    protected void execute(EntityPlayer player) {
+        if (username != null && player != null && player.getUniqueID().equals(username)) {
             for (Object[] entry : completed) {
                 InformationBase base = (InformationBase) entry[0];
-                ResearchLogic.setArtefactCount(base.getUnlocalisedName(), user, (Integer) entry[2]);
+                ResearchLogic.setArtefactCount(base.getUnlocalisedName(), player, (Integer) entry[2]);
                 if ((Boolean) entry[1]) {
-                    ResearchLogic.forceUnlock(user, base);
+                    ResearchLogic.forceUnlock(player, base);
                 }
             }
         }
-        completed = null;
     }
 }

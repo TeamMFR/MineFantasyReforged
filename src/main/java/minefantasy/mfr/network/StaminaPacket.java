@@ -2,6 +2,7 @@ package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.api.stamina.StaminaBar;
+import minefantasy.mfr.data.PlayerData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
@@ -42,10 +43,11 @@ public class StaminaPacket extends PacketMF {
     @Override
     public void execute(EntityPlayer player){
         if (username != null && player != null && player.getUniqueID().equals(username)) {
-            StaminaBar.setStaminaValue(player, value[0]);
-            StaminaBar.setMaxStamina(player, value[1]);
-            StaminaBar.setFlashTime(player, value[2]);
-            StaminaBar.setBonusStamina(player, value[3]);
+            PlayerData data = PlayerData.get(player);
+            StaminaBar.setStaminaValue(data, value[0]);
+            StaminaBar.setMaxStamina(data, value[1]);
+            StaminaBar.setFlashTime(data, value[2]);
+            StaminaBar.setBonusStamina(data, value[3]);
         }
     }
 }

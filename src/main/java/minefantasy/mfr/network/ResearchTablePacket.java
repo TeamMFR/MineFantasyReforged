@@ -7,17 +7,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 
 public class ResearchTablePacket extends PacketMF {
-    private BlockPos coords;
+    private BlockPos pos;
     private int id;
     private float[] progress = new float[2];
-    private TileEntity tileEntity;
     private float progress1;
     private float progress2;
     private int ID;
 
     public ResearchTablePacket(TileEntityResearchBench tile) {
-        tileEntity = tile;
-        coords = tile.getPos();
+        pos = tile.getPos();
         id = tile.researchID;
         progress = new float[]{tile.progress, tile.maxProgress};
         if (progress[1] <= 0) {
@@ -30,7 +28,7 @@ public class ResearchTablePacket extends PacketMF {
 
     @Override
     public void readFromStream(ByteBuf packet) {
-        coords = BlockPos.fromLong(packet.readLong());
+        pos = BlockPos.fromLong(packet.readLong());
         progress1 = packet.readFloat();
         progress2 = packet.readFloat();
         ID = packet.readInt();
@@ -38,7 +36,7 @@ public class ResearchTablePacket extends PacketMF {
 
     @Override
     public void writeToStream(ByteBuf packet) {
-        packet.writeLong(coords.toLong());
+        packet.writeLong(pos.toLong());
         packet.writeFloat(progress[0]);
         packet.writeFloat(progress[1]);
         packet.writeInt(id);
@@ -46,15 +44,16 @@ public class ResearchTablePacket extends PacketMF {
 
     @Override
     protected void execute(EntityPlayer player) {
-        if (tileEntity != null && tileEntity instanceof TileEntityResearchBench) {
+        TileEntity tileEntity = player.getEntityWorld().getTileEntity(pos);
+        if (tileEntity instanceof TileEntityResearchBench) {
             progress[0] = progress1;
             progress[1] = progress2;
             id = ID;
 
-            TileEntityResearchBench carpenter = (TileEntityResearchBench) tileEntity;
-            carpenter.researchID = id;
-            carpenter.progress = progress[0];
-            carpenter.maxProgress = (int) progress[1];
+            TileEntityResearchBench tile = (TileEntityResearchBench) tileEntity;
+            tile.researchID = id;
+            tile.progress = progress[0];
+            tile.maxProgress = (int) progress[1];
         }
     }
 }

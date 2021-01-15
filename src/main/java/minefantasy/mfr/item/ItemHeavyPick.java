@@ -75,16 +75,14 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
                         if (!(x1 + EF.getFrontOffsetX() == 0 && y1 + EF.getFrontOffsetY() == 0 && z1 + EF.getFrontOffsetZ() == 0)) {
                             IBlockState newblock = world.getBlockState(blockPos);
 
-                            if (newblock != null && user instanceof EntityPlayer
-                                    && ForgeHooks.canHarvestBlock(newblock.getBlock(), (EntityPlayer) user, world, blockPos)
-                                    /*&& ForgeHooks.isToolEffective(item, newblock, m)*/) {
+                            if (newblock != null && user instanceof EntityPlayer && ForgeHooks.canHarvestBlock(newblock.getBlock(), (EntityPlayer) user, world, blockPos)) {
 
                                 if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
                                     newblock.getBlock().dropBlockAsItem(world, pos, newblock, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
                                 }
                                 world.setBlockToAir(blockPos);
                                 item.damageItem(1, user);
-                                ItemLumberAxe.tirePlayer(user, 1F);
+                                ItemLumberAxe.tirePlayer((EntityPlayer) user, 1F);
                             }
                         }
                     }

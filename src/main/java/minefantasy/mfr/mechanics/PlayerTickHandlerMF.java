@@ -3,19 +3,19 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.PlayerTagData;
 import minefantasy.mfr.api.helpers.TacticalManager;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.data.IStoredVariable;
+import minefantasy.mfr.data.Persistence;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemApron;
-import minefantasy.mfr.item.ItemFoodMF;
 import minefantasy.mfr.item.ItemCrossbow;
+import minefantasy.mfr.item.ItemFoodMF;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
@@ -30,18 +30,29 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.EnumDifficulty;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.gameevent.PlayerEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 import java.util.List;
 
+@Mod.EventBusSubscriber
 public class PlayerTickHandlerMF {
-	private static String stepNBT = "MF_LastStep";
+	public static final IStoredVariable<Boolean> HAS_BOOK_KEY = IStoredVariable.StoredVariable.ofBoolean("hasBook", Persistence.ALWAYS);
+	public static final IStoredVariable<Float> BALANCE_YAW_KEY = IStoredVariable.StoredVariable.ofFloat("balanceYaw", Persistence.DIMENSION_CHANGE);
+	public static final IStoredVariable<Float> BALANCE_PITCH_KEY = IStoredVariable.StoredVariable.ofFloat("balancePitch", Persistence.DIMENSION_CHANGE);
+	public static final IStoredVariable<Integer> LAST_STEP_KEY = IStoredVariable.StoredVariable.ofInt("lastStep", Persistence.DIMENSION_CHANGE);
+	public static final IStoredVariable<Integer> DRAGON_KILLS_KEY = IStoredVariable.StoredVariable.ofInt("dragonKills", Persistence.ALWAYS);
+
 	private static String chunkCoords = "MF_BedPos";
 	private static String resetBed = "MF_Resetbed";
 
 	private static XSTRandom random = new XSTRandom();
+
+	static {
+		PlayerData.registerStoredVariables(HAS_BOOK_KEY, BALANCE_YAW_KEY, BALANCE_PITCH_KEY, LAST_STEP_KEY, DRAGON_KILLS_KEY);
+	}
 
 	public static void spawnDragon(EntityPlayer player) {
 		spawnDragon(player, 64);
@@ -142,18 +153,23 @@ public class PlayerTickHandlerMF {
 		if (i < 0) {
 			i = 0;
 		}
-		NBTTagCompound nbt = PlayerTagData.getPersistedData(player);
-		nbt.setInteger("MF_DragonKills", i);
+		PlayerData.get(player).setVariable(DRAGON_KILLS_KEY, i);
 	}
 
 	public static int getDragonEnemyPoints(EntityPlayer player) {
-		NBTTagCompound nbt = PlayerTagData.getPersistedData(player);
-		return nbt.getInteger("MF_DragonKills");
+		PlayerData data = PlayerData.get(player);
+		if (data != null){
+			if (data.getVariable(DRAGON_KILLS_KEY) == null){
+				data.setVariable(DRAGON_KILLS_KEY, 0);
+			}
+			return data.getVariable(DRAGON_KILLS_KEY);
+		}
+		return 0;
 	}
 
 	public static void wakeUp(EntityPlayer player) {
 		if (StaminaBar.isSystemActive) {
-			StaminaBar.setStaminaValue(player, StaminaBar.getBaseMaxStamina(player));
+			StaminaBar.setStaminaValue(PlayerData.get(player), StaminaBar.getBaseMaxStamina(player));
 		}
 		if (player.getEntityData().hasKey(chunkCoords + "_x")) {
 			player.getEntityData().setBoolean(resetBed, true);
@@ -191,7 +207,7 @@ public class PlayerTickHandlerMF {
 
 			if (event.player.world.isRemote) {
 				if (isNextStep(event.player)) {
-					onStep(event.player, event.player.getEntityData().getInteger(stepNBT) % 2 == 0);
+					onStep(event.player);
 				}
 			}
 			/*
@@ -254,7 +270,7 @@ public class PlayerTickHandlerMF {
 		}
 	}
 
-	private void onStep(EntityPlayer player, boolean alternateStep) {
+	private void onStep(EntityPlayer player) {
 		MineFantasyReborn.LOG.debug("Weight: " + ArmourCalculator.getTotalWeightOfWorn(player, false));
 		if (ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50) {
 			player.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
@@ -262,24 +278,20 @@ public class PlayerTickHandlerMF {
 	}
 
 	private boolean isNextStep(EntityPlayer player) {
-		int prevStep = player.getEntityData().getInteger(stepNBT);
-		int stepcount = (int) player.distanceWalkedOnStepModified;
-		player.getEntityData().setInteger(stepNBT, stepcount);
-
-		return prevStep != stepcount;
+		PlayerData data = PlayerData.get(player);
+		if (data != null ) {
+			if (data.getVariable(LAST_STEP_KEY) == null) {
+				data.setVariable(LAST_STEP_KEY, 0);
+			}else {
+				int prevStep = data.getVariable(LAST_STEP_KEY);
+				int stepcount = (int) player.distanceWalkedOnStepModified;
+				data.setVariable(LAST_STEP_KEY, stepcount);
+				return prevStep != stepcount;
+			}
+		}
+		return false;
 	}
 
-	/*
-	 * private static String lastPitchNBT = "MF_last_AimPitch"; public static void
-	 * setLastPitch(EntityPlayer user, float value) {
-	 * user.getEntityData().setFloat(lastPitchNBT, value); } public static void
-	 * updatePitch(EntityPlayer user) { user.getEntityData().setFloat(lastPitchNBT,
-	 * user.rotationPitch); } public static float getPitchMovement(EntityPlayer
-	 * user) { float lastPitch = user.getEntityData().getFloat(lastPitchNBT) +
-	 * 1000F; float nowPitch = user.rotationPitch + 1000F;
-	 *
-	 * return nowPitch - lastPitch; }
-	 */
 	private void tickDragonSpawner(EntityPlayer player) {
 		if (player.world.getDifficulty() != EnumDifficulty.PEACEFUL && player.dimension == 0) {
 			int i = ConfigMobs.dragonInterval;
@@ -298,14 +310,23 @@ public class PlayerTickHandlerMF {
 		}
 	}
 
-	private void applyBalance(EntityPlayer entityPlayer) {
+	private void applyBalance(EntityPlayer player) {
+		PlayerData data = PlayerData.get(player);
 		float weight = 2.0F;
-		float pitchBalance = entityPlayer.getEntityData().hasKey("MF_Balance_Pitch")
-				? entityPlayer.getEntityData().getFloat("MF_Balance_Pitch")
-				: 0F;
-		float yawBalance = entityPlayer.getEntityData().hasKey("MF_Balance_Yaw")
-				? entityPlayer.getEntityData().getFloat("MF_Balance_Yaw")
-				: 0F;
+
+		float pitchBalance = 0;
+		if(data.getVariable(BALANCE_PITCH_KEY) == null){
+			data.setVariable(BALANCE_PITCH_KEY, 0F);
+		} else{
+			pitchBalance = data.getVariable(BALANCE_PITCH_KEY);
+		}
+
+		float yawBalance = 0;
+		if(data.getVariable(BALANCE_YAW_KEY) == null){
+			data.setVariable(BALANCE_YAW_KEY, 0F);
+		} else{
+			yawBalance = data.getVariable(BALANCE_YAW_KEY);
+		}
 
 		if (pitchBalance > 0) {
 			if (pitchBalance < 1.0F && pitchBalance > -1.0F)
@@ -313,7 +334,7 @@ public class PlayerTickHandlerMF {
 			pitchBalance -= weight;
 
 			if (ConfigWeapon.useBalance) {
-				entityPlayer.rotationPitch += pitchBalance > 0 ? weight : -weight;
+				player.rotationPitch += pitchBalance > 0 ? weight : -weight;
 			}
 
 			if (pitchBalance < 0)
@@ -326,50 +347,42 @@ public class PlayerTickHandlerMF {
 
 			if (ConfigWeapon.useBalance) {
 				MFRLogUtil.logDebug("Weapon Balance Move");
-				entityPlayer.rotationYaw += yawBalance > 0 ? weight : -weight;
+				player.rotationYaw += yawBalance > 0 ? weight : -weight;
 			}
 
 			if (yawBalance < 0)
 				yawBalance = 0;
 		}
-		entityPlayer.getEntityData().setFloat("MF_Balance_Pitch", pitchBalance);
-		entityPlayer.getEntityData().setFloat("MF_Balance_Yaw", yawBalance);
+		data.setVariable(BALANCE_PITCH_KEY, pitchBalance);
+		data.setVariable(BALANCE_YAW_KEY, yawBalance);
 	}
 
 	@SubscribeEvent
-	public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
-		onPlayerEnterWorld(event.player);
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event){
+		if (event.getEntity() instanceof EntityPlayer){
+			onPlayerEnterWorld((EntityPlayer) event.getEntity());
+		}
 	}
 
-	@SubscribeEvent
-	public void onPlayerTravel(PlayerEvent.PlayerChangedDimensionEvent event) {
-		onPlayerEnterWorld(event.player);
-	}
-
-	@SubscribeEvent
-	public void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-		onPlayerEnterWorld(event.player);
-	}
-
-	public void onPlayerEnterWorld(EntityPlayer player) {
-		if (player.world.isRemote)
+	public static void onPlayerEnterWorld(EntityPlayer player) {
+		if (player.world.isRemote){
 			return;
-
-		NBTTagCompound persist = PlayerTagData.getPersistedData(player);
-		MFRLogUtil.logDebug("Sync data");
-		ResearchLogic.syncData(player);
-
-		if (!persist.hasKey("MF_HasBook")) {
-			persist.setBoolean("MF_HasBook", true);
-			if (player.capabilities.isCreativeMode)
-				return;
-
-			player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.RESEARCH_BOOK));
 		}
-		if (RPGElements.isSystemActive) {
-			RPGElements.initSkills(player);
+
+		PlayerData data = PlayerData.get(player);
+		if (data != null){
+			if (data.getVariable(HAS_BOOK_KEY) == null){
+				data.setVariable(HAS_BOOK_KEY, false);
+			}
+			if (!data.getVariable(HAS_BOOK_KEY)) {
+				data.setVariable(HAS_BOOK_KEY, true);
+				if (player.capabilities.isCreativeMode)
+					return;
+				player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.RESEARCH_BOOK));
+			}
 		}
 	}
+
 
 	private void tryResetBed(EntityPlayer player) {
 		if (player.getEntityData().hasKey(resetBed)) {

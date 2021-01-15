@@ -97,17 +97,17 @@ public class CombatMechanics {
     /**
      * 0 = false 1 = true -1 = failure
      */
-    private static int initPowerAttack(EntityLivingBase user, Entity target, boolean properHit) {
-        if (!canExecutePower(user)) {
+    private static int initPowerAttack(EntityPlayer player, Entity target, boolean properHit) {
+        if (!canExecutePower(player)) {
             return 0;
         }
-        if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
-            float points = power_attack_base * (StaminaBar.getBaseDecayModifier(user, true, true) * 0.5F + 0.5F);
-            if (StaminaBar.isStaminaAvailable(user, points, properHit)) {
+        if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(player)) {
+            float points = power_attack_base * (StaminaBar.getBaseDecayModifier(player, true, true) * 0.5F + 0.5F);
+            if (StaminaBar.isStaminaAvailable(player, points, properHit)) {
                 if (properHit) {
-                    ItemWeaponMFR.applyFatigue(user, points);
+                    ItemWeaponMFR.applyFatigue(player, points);
                 }
-                return getPostHitCooldown(user) > 0 ? -1 : 1;
+                return getPostHitCooldown(player) > 0 ? -1 : 1;
             } else {
                 return 0;
             }
@@ -369,8 +369,8 @@ public class CombatMechanics {
         DamageSource src = event.getSource();
         EntityLivingBase hit = event.getEntityLiving();
 
-        if (src != null && src == DamageSource.FALL) {
-            onFall(hit, event.getAmount());
+        if (src != null && src == DamageSource.FALL && hit instanceof EntityPlayer) {
+            onFall((EntityPlayer) hit, event.getAmount());
         }
         World world = hit.world;
         float damage = modifyDamage(src, world, hit, event.getAmount(), true);
@@ -395,8 +395,8 @@ public class CombatMechanics {
             if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect)) {
                 Entity entityHitter = event.getSource().getTrueSource();
 
-                if (entityHitter instanceof EntityLivingBase) {
-                    EntityLivingBase attacker = (EntityLivingBase) entityHitter;
+                if (entityHitter instanceof EntityPlayer) {
+                    EntityPlayer attacker = (EntityPlayer) entityHitter;
                     StaminaMechanics.onAttack(attacker, hit);
                     ItemStack weapon = attacker.getHeldItemMainhand();
                     HitSoundGenerator.makeHitSound(weapon, event.getEntityLiving());
@@ -406,7 +406,7 @@ public class CombatMechanics {
         event.setAmount(damage);
     }
 
-    private void onFall(EntityLivingBase fallen, float height) {
+    private void onFall(EntityPlayer fallen, float height) {
         float weight = ArmourCalculator.getTotalWeightOfWorn(fallen, false);
         if (weight > 100) {
             weight -= 100F;
@@ -462,8 +462,8 @@ public class CombatMechanics {
     private float modifyUserHitDamage(float dam, EntityLivingBase user, Entity source, boolean melee, Entity target, boolean properHit) {
         dam = modifyMobDamage(user, dam);
         // Power Attack
-        if (melee) {
-            int powerAttack = initPowerAttack(user, target, properHit);
+        if (melee && user instanceof EntityPlayer) {
+            int powerAttack = initPowerAttack((EntityPlayer) user, target, properHit);
             if (powerAttack == 1) {
                 dam *= (2F / 1.5F);
                 onPowerAttack(dam, user, target, properHit);
@@ -764,16 +764,19 @@ public class CombatMechanics {
             }
         }
 
-        if (!user.onGround && !tryJumpEvade(user, stamModifier)) {
+        if (!user.onGround && user instanceof EntityPlayer && !tryJumpEvade((EntityPlayer) user, stamModifier)) {
             return false;
         }
-        return tryGroundEvade(user, stamModifier);
+        if (user instanceof EntityPlayer){
+            return tryGroundEvade((EntityPlayer) user, stamModifier);
+        }
+        return false;
     }
 
     /**
      * If the player can slip past enemies Should be any armour but heavy
      */
-    private boolean tryGroundEvade(EntityLivingBase user, float cost) {
+    private boolean tryGroundEvade(EntityPlayer user, float cost) {
         return ItemWeaponMFR.tryPerformAbility(user, evade_cost * cost, true, false);
     }
 
@@ -781,7 +784,7 @@ public class CombatMechanics {
      * If the player can jump over enemies in evading Only ment for
      * unarmoured/Lightarmour
      */
-    private boolean tryJumpEvade(EntityLivingBase user, float cost) {
+    private boolean tryJumpEvade(EntityPlayer user, float cost) {
         return ItemWeaponMFR.tryPerformAbility(user, jumpEvade_cost * cost, true, false);
     }
 
@@ -868,7 +871,7 @@ public class CombatMechanics {
     public void jump(LivingJumpEvent event) {
         if (event.getEntityLiving() instanceof EntityPlayer) {
             if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(event.getEntityLiving())) {
-                StaminaMechanics.onJump(event.getEntityLiving());
+                StaminaMechanics.onJump((EntityPlayer) event.getEntityLiving());
             }
         }
         if (event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer) {

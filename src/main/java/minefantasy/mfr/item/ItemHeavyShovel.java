@@ -92,7 +92,7 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
                                     }
                                     world.setBlockToAir(newBlockPos);
                                     stack.damageItem(1, user);
-                                    ItemLumberAxe.tirePlayer(user, 1F);
+                                    ItemLumberAxe.tirePlayer((EntityPlayer) user, 1F);
                                 }
                             }
                         }

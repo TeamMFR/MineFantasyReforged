@@ -407,11 +407,11 @@ public class KnowledgeListMFR {
 //                .setPage(construction).setUnlocked();
         tool_rack = (new InformationBase("tool_rack", 2, 2, 0, MineFantasyBlocks.TOOL_RACK_WOOD, (InformationBase) null))
                 .registerStat().setPage(construction).setUnlocked();
-        food_box = (new InformationBase("food_box", 2, 4, 1, MineFantasyBlocks.FOOD_BOX_BASIC, tool_rack)).registerStat()
+        food_box = (new InformationBase("food_box", 2, 4, 1, (MineFantasyBlocks.FOOD_BOX_BASIC).construct("OakWood"), tool_rack)).registerStat()
                 .setPage(construction).setUnlocked();
-        ammo_box = (new InformationBase("ammo_box", 4, 4, 1, MineFantasyBlocks.AMMO_BOX_BASIC, food_box)).registerStat()
+        ammo_box = (new InformationBase("ammo_box", 4, 4, 1, (MineFantasyBlocks.AMMO_BOX_BASIC).construct("OakWood"), food_box)).registerStat()
                 .setPage(construction).addSkill(SkillList.construction, 15);
-        big_box = (new InformationBase("big_box", 6, 4, 1, MineFantasyBlocks.CRATE_BASIC, ammo_box)).registerStat()
+        big_box = (new InformationBase("big_box", 6, 4, 1, (MineFantasyBlocks.CRATE_BASIC).construct("OakWood"), ammo_box)).registerStat()
                 .setPage(construction).addSkill(SkillList.construction, 25);
 
         // COOKING -The Cheapest

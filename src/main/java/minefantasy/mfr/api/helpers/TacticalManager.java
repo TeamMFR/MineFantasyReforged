@@ -6,8 +6,10 @@ import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
+import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityWitch;
@@ -21,7 +23,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;
@@ -257,25 +258,25 @@ public class TacticalManager {
     /**
      * Modifies the movement of an entity based on armour
      */
-    public static void applyArmourWeight(EntityLivingBase entityLiving) {
-        if (entityLiving instanceof EntityPlayer && ((EntityPlayer) entityLiving).capabilities.isCreativeMode) {
+    public static void applyArmourWeight(EntityPlayer player) {
+        if (player != null && player.capabilities.isCreativeMode) {
             return;
         }
         // Default speed is 100%
         float totalSpeed = 100F;
 
-        if (shouldSlow && !isImmuneToWeight(entityLiving)) {
+        if (shouldSlow && !isImmuneToWeight(player)) {
 
-            totalSpeed += ArmourCalculator.getSpeedModForWeight(entityLiving);
+            totalSpeed += ArmourCalculator.getSpeedModForWeight(player);
             // Limit the slowest speed to 1%
             if (totalSpeed <= minWeightSpeed) {
                 totalSpeed = minWeightSpeed;
             }
         }
         // apply speed mod
-        if (totalSpeed != 100F && entityLiving.onGround) {
-            entityLiving.motionX *= (totalSpeed / 100F);
-            entityLiving.motionZ *= (totalSpeed / 100F);
+        if (totalSpeed != 100F && player.onGround) {
+            player.motionX *= (totalSpeed / 100F);
+            player.motionZ *= (totalSpeed / 100F);
         }
     }
 
@@ -400,13 +401,9 @@ public class TacticalManager {
         if (offsetY > 0) {
             entityPlayer.moveForward += offsetY;
         }
-        if (newBalanceSystem) {
-            entityPlayer.getEntityData().setFloat("MF_Balance_Pitch", pitchBalance);
-            entityPlayer.getEntityData().setFloat("MF_Balance_Yaw", yawBalance);
-        } else {
-            entityPlayer.rotationPitch += pitchBalance;
-            entityPlayer.rotationYaw += yawBalance;
-        }
+        PlayerData data = PlayerData.get(entityPlayer);
+        data.setVariable(PlayerTickHandlerMF.BALANCE_PITCH_KEY, pitchBalance);
+        data.setVariable(PlayerTickHandlerMF.BALANCE_YAW_KEY, yawBalance);
     }
 
     public static boolean isEntityMoving(EntityLivingBase player) {

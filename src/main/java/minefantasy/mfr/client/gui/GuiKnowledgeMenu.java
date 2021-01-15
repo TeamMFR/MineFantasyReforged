@@ -17,6 +17,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptionButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.RenderItem;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -30,12 +31,10 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class GuiKnowledgeMenu extends GuiScreen {
@@ -48,16 +47,16 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	private static final ResourceLocation skillTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/skill_list.png");
 	protected static int informationWidth = 256;
 	protected static int informationHeight = 202;
-	protected static int field_146563_h;
-	protected static int field_146564_i;
-	protected static float field_146570_r = 1.0F;
-	protected static double field_146569_s;
-	protected static double field_146568_t;
-	protected static double field_146567_u;
-	protected static double field_146566_v;
-	protected static double field_146565_w;
-	protected static double field_146573_x;
-	private static int field_146554_D;
+	protected static int mouseX;
+	protected static int mouseY;
+	protected static float scaleMultiplier = 1.0F;
+	protected static double displayColumnModified1;
+	protected static double displayColumnModified2;
+	protected static double displayColumnModified3;
+	protected static double displayRowModified1;
+	protected static double displayRowModified2;
+	protected static double displayRowModified3;
+	private static int mouseDistanceBooleanCheck;
 	private static boolean allDiscovered = true;
 	private static int currentPage = -1;
 	public int buyWidth = 225;
@@ -76,10 +75,8 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		this.player = user;
 		short short1 = 141;
 		short short2 = 141;
-		GuiKnowledgeMenu.field_146569_s = GuiKnowledgeMenu.field_146567_u = GuiKnowledgeMenu.field_146565_w = KnowledgeListMFR.gettingStarted.displayColumn
-				* 24 - short1 / 2 - 12;
-		GuiKnowledgeMenu.field_146568_t = GuiKnowledgeMenu.field_146566_v = GuiKnowledgeMenu.field_146573_x = KnowledgeListMFR.gettingStarted.displayRow
-				* 24 - short2 / 2;
+		GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2 = GuiKnowledgeMenu.displayColumnModified3 = KnowledgeListMFR.gettingStarted.displayColumn * 24 - short1 / 2 - 12;
+		GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2 = GuiKnowledgeMenu.displayRowModified3 = KnowledgeListMFR.gettingStarted.displayRow * 24 - short2 / 2;
 		informationList.clear();
 		for (Object achievement : InformationList.knowledgeList) {
 			if (!InformationPage.isInfoInPages((InformationBase) achievement)) {
@@ -103,18 +100,14 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		int j1 = (this.height - GuiKnowledgeMenu.informationHeight) / 2 + offsetByY;
 
 		this.buttonList.clear();
-		this.buttonList
-				.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 101, I18n.format("gui.done")));
-		this.buttonList.add(button = new GuiButton(2, (width - informationWidth) / 2 + 24, height / 2 + 101, 125, 20,
-				InformationPage.getTitle(currentPage)));
+		this.buttonList.add(new GuiOptionButton(1, this.width / 2 + 24, this.height / 2 + 101, I18n.format("gui.done")));
+		this.buttonList.add(button = new GuiButton(2, (width - informationWidth) / 2 + 24, height / 2 + 101, 125, 20, InformationPage.getTitle(currentPage)));
 
 		int purchasex = i1 + (informationWidth - buyWidth) / 2;
 		int purchasey = j1 + (informationHeight - buyHeight) / 2;
 		// PURCHASE SCREEN
-		this.buttonList.add(
-				new GuiButton(3, purchasex + 19, purchasey + 47, 81, 20, I18n.format("gui.purchase")));
-		this.buttonList.add(
-				new GuiButton(4, purchasex + 125, purchasey + 47, 81, 20, I18n.format("gui.cancel")));
+		this.buttonList.add(new GuiButton(3, purchasex + 19, purchasey + 47, 81, 20, I18n.format("gui.purchase")));
+		this.buttonList.add(new GuiButton(4, purchasex + 125, purchasey + 47, 81, 20, I18n.format("gui.cancel")));
 	}
 
 	@Override
@@ -159,12 +152,12 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	 * KeyListener.keyTyped(KeyEvent e).
 	 */
 	@Override
-	protected void keyTyped(char p_73869_1_, int p_73869_2_) throws IOException {
-		if (p_73869_2_ == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
+	protected void keyTyped(char typedChar, int keyCode) throws IOException {
+		if (keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
 			this.mc.displayGuiScreen((GuiScreen) null);
 			this.mc.setIngameFocus();
 		} else {
-			super.keyTyped(p_73869_1_, p_73869_2_);
+			super.keyTyped(typedChar, keyCode);
 		}
 	}
 
@@ -172,7 +165,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	 * Draws the screen and all the components in it.
 	 */
 	@Override
-	public void drawScreen(int mx, int my, float f) {
+	public void drawScreen(int mouseX, int mouseY, float f) {
 		{
 			int k;
 
@@ -182,66 +175,65 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				int i1 = k + 8;
 				int j1 = l + 17;
 
-				if ((GuiKnowledgeMenu.field_146554_D == 0 || GuiKnowledgeMenu.field_146554_D == 1) && mx >= i1 && mx < i1 + 224
-						&& my >= j1 && my < j1 + 155) {
-					if (GuiKnowledgeMenu.field_146554_D == 0) {
-						GuiKnowledgeMenu.field_146554_D = 1;
+				if ((GuiKnowledgeMenu.mouseDistanceBooleanCheck == 0 || GuiKnowledgeMenu.mouseDistanceBooleanCheck == 1) && mouseX >= i1 && mouseX < i1 + 224 && mouseY >= j1 && mouseY < j1 + 155) {
+					if (GuiKnowledgeMenu.mouseDistanceBooleanCheck == 0) {
+						GuiKnowledgeMenu.mouseDistanceBooleanCheck = 1;
 					} else {
-						GuiKnowledgeMenu.field_146567_u -= (mx - GuiKnowledgeMenu.field_146563_h) * GuiKnowledgeMenu.field_146570_r;
-						GuiKnowledgeMenu.field_146566_v -= (my - GuiKnowledgeMenu.field_146564_i) * GuiKnowledgeMenu.field_146570_r;
-						GuiKnowledgeMenu.field_146565_w = GuiKnowledgeMenu.field_146569_s = GuiKnowledgeMenu.field_146567_u;
-						GuiKnowledgeMenu.field_146573_x = GuiKnowledgeMenu.field_146568_t = GuiKnowledgeMenu.field_146566_v;
+						GuiKnowledgeMenu.displayColumnModified2 -= (mouseX - GuiKnowledgeMenu.mouseX) * GuiKnowledgeMenu.scaleMultiplier;
+						GuiKnowledgeMenu.displayRowModified2 -= (mouseY - GuiKnowledgeMenu.mouseY) * GuiKnowledgeMenu.scaleMultiplier;
+						GuiKnowledgeMenu.displayColumnModified3 = GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2;
+						GuiKnowledgeMenu.displayRowModified3 = GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2;
 					}
 
-					GuiKnowledgeMenu.field_146563_h = mx;
-					GuiKnowledgeMenu.field_146564_i = my;
+					GuiKnowledgeMenu.mouseX = mouseX;
+					GuiKnowledgeMenu.mouseY = mouseY;
 				}
 			} else {
-				GuiKnowledgeMenu.field_146554_D = 0;
+				GuiKnowledgeMenu.mouseDistanceBooleanCheck = 0;
 			}
 
 			k = Mouse.getDWheel();
-			float f4 = GuiKnowledgeMenu.field_146570_r;
+			float f4 = GuiKnowledgeMenu.scaleMultiplier;
 
 			if (k < 0) {
-				GuiKnowledgeMenu.field_146570_r += 0.25F;
+				GuiKnowledgeMenu.scaleMultiplier += 0.25F;
 			} else if (k > 0) {
-				GuiKnowledgeMenu.field_146570_r -= 0.25F;
+				GuiKnowledgeMenu.scaleMultiplier -= 0.25F;
 			}
 
-			GuiKnowledgeMenu.field_146570_r = MathHelper.clamp(GuiKnowledgeMenu.field_146570_r, 1.0F, 3.0F);
+			GuiKnowledgeMenu.scaleMultiplier = MathHelper.clamp(GuiKnowledgeMenu.scaleMultiplier, 1.0F, 3.0F);
 
-			if (GuiKnowledgeMenu.field_146570_r != f4) {
-				float f6 = f4 - GuiKnowledgeMenu.field_146570_r;
+			if (GuiKnowledgeMenu.scaleMultiplier != f4) {
+				float f6 = f4 - GuiKnowledgeMenu.scaleMultiplier;
 				float f5 = f4 * GuiKnowledgeMenu.informationWidth;
 				float f1 = f4 * GuiKnowledgeMenu.informationHeight;
-				float f2 = GuiKnowledgeMenu.field_146570_r * GuiKnowledgeMenu.informationWidth;
-				float f3 = GuiKnowledgeMenu.field_146570_r * GuiKnowledgeMenu.informationHeight;
-				GuiKnowledgeMenu.field_146567_u -= (f2 - f5) * 0.5F;
-				GuiKnowledgeMenu.field_146566_v -= (f3 - f1) * 0.5F;
-				GuiKnowledgeMenu.field_146565_w = GuiKnowledgeMenu.field_146569_s = GuiKnowledgeMenu.field_146567_u;
-				GuiKnowledgeMenu.field_146573_x = GuiKnowledgeMenu.field_146568_t = GuiKnowledgeMenu.field_146566_v;
+				float f2 = GuiKnowledgeMenu.scaleMultiplier * GuiKnowledgeMenu.informationWidth;
+				float f3 = GuiKnowledgeMenu.scaleMultiplier * GuiKnowledgeMenu.informationHeight;
+				GuiKnowledgeMenu.displayColumnModified2 -= (f2 - f5) * 0.5F;
+				GuiKnowledgeMenu.displayRowModified2 -= (f3 - f1) * 0.5F;
+				GuiKnowledgeMenu.displayColumnModified3 = GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2;
+				GuiKnowledgeMenu.displayRowModified3 = GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2;
 			}
 
-			if (GuiKnowledgeMenu.field_146565_w < columnMin) {
-				GuiKnowledgeMenu.field_146565_w = columnMin;
+			if (GuiKnowledgeMenu.displayColumnModified3 < columnMin) {
+				GuiKnowledgeMenu.displayColumnModified3 = columnMin;
 			}
 
-			if (GuiKnowledgeMenu.field_146573_x < rowMin) {
-				GuiKnowledgeMenu.field_146573_x = rowMin;
+			if (GuiKnowledgeMenu.displayRowModified3 < rowMin) {
+				GuiKnowledgeMenu.displayRowModified3 = rowMin;
 			}
 
-			if (GuiKnowledgeMenu.field_146565_w >= columnMax) {
-				GuiKnowledgeMenu.field_146565_w = columnMax - 1;
+			if (GuiKnowledgeMenu.displayColumnModified3 >= columnMax) {
+				GuiKnowledgeMenu.displayColumnModified3 = columnMax - 1;
 			}
 
-			if (GuiKnowledgeMenu.field_146573_x >= rowMax) {
-				GuiKnowledgeMenu.field_146573_x = rowMax - 1;
+			if (GuiKnowledgeMenu.displayRowModified3 >= rowMax) {
+				GuiKnowledgeMenu.displayRowModified3 = rowMax - 1;
 			}
 
-			GL11.glDisable(GL11.GL_DEPTH_TEST);
+			GlStateManager.disableDepth();
 			this.drawDefaultBackground();
-			this.renderMainPage(mx, my, f);
+			this.renderMainPage(mouseX, mouseY, f);
 			this.drawOverlay();
 		}
 		if (buttonList.get(2) != null) {
@@ -257,17 +249,17 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	@Override
 	public void updateScreen() {
 		{
-			GuiKnowledgeMenu.field_146569_s = GuiKnowledgeMenu.field_146567_u;
-			GuiKnowledgeMenu.field_146568_t = GuiKnowledgeMenu.field_146566_v;
-			double d0 = GuiKnowledgeMenu.field_146565_w - GuiKnowledgeMenu.field_146567_u;
-			double d1 = GuiKnowledgeMenu.field_146573_x - GuiKnowledgeMenu.field_146566_v;
+			GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2;
+			GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2;
+			double d0 = GuiKnowledgeMenu.displayColumnModified3 - GuiKnowledgeMenu.displayColumnModified2;
+			double d1 = GuiKnowledgeMenu.displayRowModified3 - GuiKnowledgeMenu.displayRowModified2;
 
 			if (d0 * d0 + d1 * d1 < 4.0D) {
-				GuiKnowledgeMenu.field_146567_u += d0;
-				GuiKnowledgeMenu.field_146566_v += d1;
+				GuiKnowledgeMenu.displayColumnModified2 += d0;
+				GuiKnowledgeMenu.displayRowModified2 += d1;
 			} else {
-				GuiKnowledgeMenu.field_146567_u += d0 * 0.85D;
-				GuiKnowledgeMenu.field_146566_v += d1 * 0.85D;
+				GuiKnowledgeMenu.displayColumnModified2 += d0 * 0.85D;
+				GuiKnowledgeMenu.displayRowModified2 += d1 * 0.85D;
 			}
 		}
 	}
@@ -280,10 +272,8 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	}
 
 	protected void renderMainPage(int mx, int my, float f) {
-		int k = MathHelper
-				.floor(GuiKnowledgeMenu.field_146569_s + (GuiKnowledgeMenu.field_146567_u - GuiKnowledgeMenu.field_146569_s) * f);
-		int l = MathHelper
-				.floor(GuiKnowledgeMenu.field_146568_t + (GuiKnowledgeMenu.field_146566_v - GuiKnowledgeMenu.field_146568_t) * f);
+		int k = MathHelper.floor(GuiKnowledgeMenu.displayColumnModified1 + (GuiKnowledgeMenu.displayColumnModified2 - GuiKnowledgeMenu.displayColumnModified1) * f);
+		int l = MathHelper.floor(GuiKnowledgeMenu.displayRowModified1 + (GuiKnowledgeMenu.displayRowModified2 - GuiKnowledgeMenu.displayRowModified1) * f);
 
 		if (k < columnMin) {
 			k = columnMin;
@@ -306,33 +296,26 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		int k1 = i1 + 16;
 		int l1 = j1 + 17;
 		this.zLevel = 0.0F;
-		GL11.glDepthFunc(GL11.GL_GEQUAL);
-		GL11.glPushMatrix();
-		GL11.glTranslatef(k1, l1, -200.0F);
-		GL11.glScalef(1.0F / GuiKnowledgeMenu.field_146570_r, 1.0F / GuiKnowledgeMenu.field_146570_r, 0.0F);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+		GlStateManager.depthFunc(GL11.GL_GEQUAL);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate(k1, l1, -200.0F);
+		GlStateManager.scale(1.0F / GuiKnowledgeMenu.scaleMultiplier, 1.0F / GuiKnowledgeMenu.scaleMultiplier, 0.0F);
+		GlStateManager.enableTexture2D();
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.enableColorMaterial();
 
-		int i2 = k + 288 >> 4;
 		int j2 = l + 288 >> 4;
 		int k2 = (k + 288) % 16;
 		int l2 = (l + 288) % 16;
-		boolean flag = true;
-		boolean flag1 = true;
-		boolean flag2 = true;
-		boolean flag3 = true;
-		boolean flag4 = true;
-		Random random = new Random();
-		float f1 = 16.0F / GuiKnowledgeMenu.field_146570_r;
-		float f2 = 16.0F / GuiKnowledgeMenu.field_146570_r;
+		float f1 = 16.0F / GuiKnowledgeMenu.scaleMultiplier;
+		float f2 = 16.0F / GuiKnowledgeMenu.scaleMultiplier;
 		int i3;
 		int j3;
 		int k3;
 
 		for (i3 = 0; i3 * f1 - l2 < 155.0F; ++i3) {
 			float f3 = 0.6F - (j2 + i3) / 25.0F * 0.3F;
-			GL11.glColor4f(f3, f3, f3, 1.0F);
+			GlStateManager.color(f3, f3, f3, 1.0F);
 
 			for (j3 = 0; j3 * f2 - k2 < 224.0F; ++j3) {
 				TextureAtlasSprite sprite = TextureUtils.getBlockTexture("planks_oak");
@@ -342,8 +325,8 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			}
 		}
 
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glDepthFunc(GL11.GL_LEQUAL);
+		GlStateManager.enableDepth();
+		GlStateManager.depthFunc(GL11.GL_LEQUAL);
 		this.mc.getTextureManager().bindTexture(screenTex);
 		int researchVisibility;
 		int j4;
@@ -369,8 +352,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				} else if (flag6) {
 					j4 = -16711936;
 				}
-				if (researchVisibility <= getVisibleRange()[0] && k3 >= -24 && j3 >= -24
-						&& k3 <= GuiKnowledgeMenu.informationHeight && j3 <= GuiKnowledgeMenu.informationWidth && l4 <= GuiKnowledgeMenu.informationHeight && j4 <= GuiKnowledgeMenu.informationWidth) {
+				if (researchVisibility <= getVisibleRange()[0] && k3 >= -24 && j3 >= -24 && k3 <= GuiKnowledgeMenu.informationHeight && j3 <= GuiKnowledgeMenu.informationWidth && l4 <= GuiKnowledgeMenu.informationHeight && j4 <= GuiKnowledgeMenu.informationWidth) {
 
 					this.drawHorizontalLine(j3, l4, k3, j4);
 					this.drawVerticalLine(l4, k3, l3, j4);
@@ -390,11 +372,11 @@ public class GuiKnowledgeMenu extends GuiScreen {
 
 		InformationBase achievement = null;
 		RenderItem renderitem = Minecraft.getMinecraft().getRenderItem();
-		float f4 = (mx - k1) * GuiKnowledgeMenu.field_146570_r;
-		float f5 = (my - l1) * GuiKnowledgeMenu.field_146570_r;
+		float f4 = (mx - k1) * GuiKnowledgeMenu.scaleMultiplier;
+		float f5 = (my - l1) * GuiKnowledgeMenu.scaleMultiplier;
 		RenderHelper.enableGUIStandardItemLighting();
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-		GL11.glEnable(GL11.GL_COLOR_MATERIAL);
+		GlStateManager.enableRescaleNormal();
+		GlStateManager.enableColorMaterial();
 		int i5;
 		int j5;
 
@@ -403,35 +385,34 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			i5 = achievement2.displayColumn * 24 - k;
 			j5 = achievement2.displayRow * 24 - l;
 
-			if (i5 >= -24 && j5 >= -24 && i5 <= 224.0F * GuiKnowledgeMenu.field_146570_r
-					&& j5 <= 155.0F * GuiKnowledgeMenu.field_146570_r) {
+			if (i5 >= -24 && j5 >= -24 && i5 <= 224.0F * GuiKnowledgeMenu.scaleMultiplier && j5 <= 155.0F * GuiKnowledgeMenu.scaleMultiplier) {
 				researchVisibility = ResearchLogic.func_150874_c(player, achievement2);
 				float f6;
 
 				if (ResearchLogic.hasInfoUnlocked(player, achievement2)) {
 					f6 = 0.75F;
-					GL11.glColor4f(f6, f6, f6, 1.0F);
+					GlStateManager.color(f6, f6, f6, 1.0F);
 				} else if (ResearchLogic.canUnlockInfo(player, achievement2)) {
 					f6 = 1.0F;
-					GL11.glColor4f(0.5F, 1.0F, 0.5F, 1.0F);
+					GlStateManager.color(0.5F, 1.0F, 0.5F, 1.0F);
 				} else if (researchVisibility < getVisibleRange()[1]) {
 					f6 = 0.3F;
-					GL11.glColor4f(f6, f6, f6, 1.0F);
+					GlStateManager.color(f6, f6, f6, 1.0F);
 				} else if (researchVisibility == getVisibleRange()[1]) {
 					f6 = 0.2F;
-					GL11.glColor4f(f6, f6, f6, 1.0F);
+					GlStateManager.color(f6, f6, f6, 1.0F);
 				} else {
 					if (researchVisibility != getVisibleRange()[2]) {
 						continue;
 					}
 
 					f6 = 0.1F;
-					GL11.glColor4f(f6, f6, f6, 1.0F);
+					GlStateManager.color(f6, f6, f6, 1.0F);
 				}
 
 				this.mc.getTextureManager().bindTexture(screenTex);
 
-				GL11.glEnable(GL11.GL_BLEND);// Forge: Specifically enable blend because it is needed here. And we fix
+				GlStateManager.enableBlend();// Forge: Specifically enable blend because it is needed here. And we fix
 				// Generic RenderItem's leakage of it.
 				if (achievement2.getSpecial()) {
 					this.drawTexturedModalRect(i5 - 2, j5 - 2, 26, 202, 26, 26);
@@ -440,18 +421,18 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				} else {
 					this.drawTexturedModalRect(i5 - 2, j5 - 2, 0, 202, 26, 26);
 				}
-				GL11.glDisable(GL11.GL_BLEND); // Forge: Cleanup states we set.
+				GlStateManager.disableBlend(); // Forge: Cleanup states we set.
 
 				if (!ResearchLogic.canUnlockInfo(player, achievement2)) {
 					f6 = 0.1F;
-					GL11.glColor4f(f6, f6, f6, 1.0F);
+					GlStateManager.color(f6, f6, f6, 1.0F);
 				}
 
-				GL11.glEnable(GL11.GL_CULL_FACE);
+				GlStateManager.enableCull();
 				renderitem.renderItemAndEffectIntoGUI(achievement2.theItemStack, i5 + 3, j5 + 3);
-				GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+				GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
 				if (f4 >= i5 && f4 <= i5 + 22 && f5 >= j5 && f5 <= j5 + 22) {
 					achievement = achievement2;
@@ -459,17 +440,17 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			}
 		}
 
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glPopMatrix();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.disableDepth();
+		GlStateManager.enableBlend();
+		GlStateManager.popMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		this.mc.getTextureManager().bindTexture(screenTex);
 		this.drawTexturedModalRect(i1, j1, 0, 0, GuiKnowledgeMenu.informationWidth, GuiKnowledgeMenu.informationHeight);
 
 		this.zLevel = 0.0F;
-		GL11.glDepthFunc(GL11.GL_LEQUAL);
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_TEXTURE_2D);
+		GlStateManager.depthFunc(GL11.GL_LEQUAL);
+		GlStateManager.disableDepth();
+		GlStateManager.enableTexture2D();
 
 		if (selected != null) {
 			int purchasex = i1 + (informationWidth - buyWidth) / 2;
@@ -537,7 +518,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			}
 		}
 
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GlStateManager.enableDepth();
 		RenderHelper.disableStandardItemLighting();
 	}
 
@@ -595,7 +576,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				}
 			}
 		}
-		GL11.glColor3f(255, 255, 255);
+		GlStateManager.color(255, 255, 255);
 	}
 
 	private void setPurchaseAvailable(EntityPlayer user) {
@@ -607,7 +588,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	}
 
 	protected void drawSkillList() {
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 
 		int skillWidth = 143;
 		int skillHeight = 156;
@@ -629,12 +610,11 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		drawSkillName(x + 20, y + 92, SkillList.engineering);
 		drawSkillName(x + 20, y + 116, SkillList.combat);
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	protected void drawSkill(int x, int y, Skill skill) {
 		if (skill != null) {
-			int level = RPGElements.getLevel(mc.player, skill);
 			int xp = skill.getXP(player)[0];
 			int max = skill.getXP(player)[1];
 			if (xp > max)
@@ -650,7 +630,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 
 	protected void drawSkillName(int x, int y, Skill skill) {
 		if (skill != null) {
-			int level = RPGElements.getLevel(mc.player, skill);
+			int level = RPGElements.getLevel(player, skill);
 			mc.fontRenderer.drawString(skill.getDisplayName(), x + 2, y + 1, 0);
 			mc.fontRenderer.drawString("" + level, x + 1, y + 10, 0);
 		}

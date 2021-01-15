@@ -7,14 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class InformationList {
-    public static InformationPage artisanry = new InformationPage("infoPage.artisanry", SkillList.artisanry)
-            .registerInfoPage();
-    public static InformationPage construction = new InformationPage("infoPage.construction", SkillList.construction)
-            .registerInfoPage();
-    public static InformationPage provisioning = new InformationPage("infoPage.provisioning", SkillList.provisioning)
-            .registerInfoPage();
-    public static InformationPage engineering = new InformationPage("infoPage.engineering", SkillList.engineering)
-            .registerInfoPage();
+    public static InformationPage artisanry = new InformationPage("infoPage.artisanry", SkillList.artisanry).registerInfoPage();
+    public static InformationPage construction = new InformationPage("infoPage.construction", SkillList.construction).registerInfoPage();
+    public static InformationPage provisioning = new InformationPage("infoPage.provisioning", SkillList.provisioning).registerInfoPage();
+    public static InformationPage engineering = new InformationPage("infoPage.engineering", SkillList.engineering).registerInfoPage();
     public static InformationPage mastery = new InformationPage("infoPage.mastery", null).registerInfoPage();
 
     /**

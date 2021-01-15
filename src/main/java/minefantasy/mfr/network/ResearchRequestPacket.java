@@ -10,14 +10,12 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import java.util.UUID;
 
 public class ResearchRequestPacket extends PacketMF {
-    private EntityPlayer user;
     private int researchID;
     private UUID username;
 
     public ResearchRequestPacket(EntityPlayer user, int id) {
         this.researchID = id;
         this.username = user.getUniqueID();
-        this.user = user;
     }
 
     public ResearchRequestPacket() {
@@ -37,12 +35,12 @@ public class ResearchRequestPacket extends PacketMF {
 
     @Override
     protected void execute(EntityPlayer player) {
-        if (username != null && user.getUniqueID() == username) {
+        if (username != null && player != null && player.getUniqueID().equals(username)) {
             InformationBase research = InformationList.knowledgeList.get(researchID);
-            if (user != null && research != null && research.isEasy()) {
-                if (!user.world.isRemote) {
-                    if (research.onPurchase(user)) {
-                        ResearchLogic.syncData(user);
+            if (research != null && research.isEasy()) {
+                if (!player.world.isRemote) {
+                    if (research.onPurchase(player)) {
+                        ResearchLogic.syncData(player);
                     }
                 }
             }
