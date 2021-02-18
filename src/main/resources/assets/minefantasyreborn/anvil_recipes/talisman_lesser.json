@@ -1,0 +1,29 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "artisanry",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 20,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "DBD   ",
+    "BBB   ",
+    " B    ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "D": {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:talisman_lesser"
+  }
+}

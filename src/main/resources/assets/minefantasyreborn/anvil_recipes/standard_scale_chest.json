@@ -1,0 +1,31 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "craftArmourMedium",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 30,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "RS SR ",
+    "RSTSR ",
+    "RS SR ",
+    "      "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "S": {
+      "item": "minefantasyreborn:scale_mesh"
+    },
+    "T": {
+      "item": "minefantasyreborn:strong_leather_chest"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_scale_chest"
+  }
+}

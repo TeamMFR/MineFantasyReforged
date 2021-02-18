@@ -1,0 +1,26 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "construction",
+  "research": "smeltred_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 5,
+  "recipe_time": 30,
+  "recipe_hammer": 5,
+  "output_hot": false,
+  "pattern": [
+    "M M   ",
+    "M M   ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "M": {
+      "nbt": "{mf_custom_materials:{main_metal:\"red_steel\"}}",
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:red_steel_bars"
+  }
+}

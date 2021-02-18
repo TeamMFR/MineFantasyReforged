@@ -1,0 +1,31 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "paint_brush",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 20,
+  "recipe_hammer": 0,
+  "output_hot": true,
+  "pattern": [
+    "W     ",
+    "B     ",
+    "T     ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "T": {
+      "item": "minefantasyreborn:timber"
+    },
+    "W": {
+      "item": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:paint_brush"
+  }
+}

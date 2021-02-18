@@ -1,0 +1,35 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "bombObsidian",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 4,
+  "recipe_time": 50,
+  "recipe_hammer": 4,
+  "output_hot": true,
+  "pattern": [
+    " E    ",
+    "RMR   ",
+    "MOM   ",
+    "RMR   "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "M": {
+      "item": "minefantasyreborn:metal_hunk"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bomb_casing_obsidian",
+    "count": 2
+  }
+}

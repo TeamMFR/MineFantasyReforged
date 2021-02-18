@@ -1,0 +1,26 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "none",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 1,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "B     ",
+    "      ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "nbt": "{mf_custom_materials:{main_metal:\"Copper\"}}",
+      "item": "minefantasyreborn:bar"
+    }
+  },
+  "result": {
+    "item": "minecraft:air"
+  }
+}

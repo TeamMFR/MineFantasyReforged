@@ -1,0 +1,31 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "tier",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 10,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "B     ",
+    "TL    ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "T": {
+      "item": "minefantasyreborn:timber"
+    },
+    "L": {
+      "item": "minefantasyreborn:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_knife"
+  }
+}

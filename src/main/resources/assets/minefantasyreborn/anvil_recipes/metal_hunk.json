@@ -1,0 +1,29 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 2,
+  "recipe_hammer": 0,
+  "output_hot": true,
+  "pattern": [
+    "F     ",
+    "B     ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "F": {
+      "item": "minefantasyreborn:flux"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:metal_hunk",
+    "count": 4
+  }
+}

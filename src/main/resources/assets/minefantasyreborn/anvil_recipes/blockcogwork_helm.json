@@ -1,0 +1,34 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "cogArmour",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 70,
+  "recipe_hammer": 3,
+  "output_hot": false,
+  "pattern": [
+    "RIIR  ",
+    "CEEC  ",
+    " RR   ",
+    "      "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "C": {
+      "item": "minefantasyreborn:cogwork_shaft"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "I": {
+      "item": "minefantasyreborn:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:blockcogwork_helm"
+  }
+}

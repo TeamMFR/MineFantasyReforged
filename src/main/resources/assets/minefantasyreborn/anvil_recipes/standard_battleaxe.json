@@ -1,0 +1,34 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "tier",
+  "tool_type": "hvyhammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 30,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "LLBBR ",
+    "TTTBR ",
+    "LLBBR ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "T": {
+      "item": "minefantasyreborn:timber"
+    },
+    "L": {
+      "item": "minefantasyreborn:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_battleaxe"
+  }
+}

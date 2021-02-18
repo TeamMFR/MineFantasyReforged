@@ -1,0 +1,31 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "craftArmourHeavy",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 60,
+  "recipe_hammer": -1,
+  "output_hot": false,
+  "pattern": [
+    "RP PR ",
+    "RPAPR ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plate"
+    },
+    "A": {
+      "item": "minefantasyreborn:padded_chest"
+    },
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_plate_chest"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "cogArmour",
+  "tool_type": "hvyhammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 35,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    " E    ",
+    " B    ",
+    "RMR   ",
+    " B    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "M": {
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "nbt": "{mf_custom_materials:{main_metal:\"composite_alloy\"}}",
+    "item": "minefantasyreborn:bar"
+  }
+}

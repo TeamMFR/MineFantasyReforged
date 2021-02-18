@@ -1,0 +1,34 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "ecomponents",
+  "tool_type": "hvyhammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 56,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    "RER   ",
+    "MBM   ",
+    "MBM   ",
+    "      "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "M": {
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:iron_strut"
+  }
+}

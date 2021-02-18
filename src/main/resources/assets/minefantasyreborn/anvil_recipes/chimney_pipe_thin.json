@@ -1,0 +1,30 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "construction",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 14,
+  "recipe_hammer": 0,
+  "output_hot": false,
+  "pattern": [
+    "M  M  ",
+    "CCCC  ",
+    "M  M  ",
+    "      "
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreborn:chimney_stone_thin"
+    },
+    "M": {
+      "nbt": "{mf_custom_materials:{main_metal:\"bronze\"}}",
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:chimney_pipe_thin",
+    "count": 4
+  }
+}

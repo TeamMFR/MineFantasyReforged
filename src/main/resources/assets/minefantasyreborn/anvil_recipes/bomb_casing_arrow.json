@@ -1,0 +1,38 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "bombarrow",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 30,
+  "recipe_hammer": 2,
+  "output_hot": true,
+  "pattern": [
+    "   MR ",
+    "FTMEM ",
+    "   MR ",
+    "      "
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "minefantasyreborn:timber"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "F": {
+      "item": "minefantasyreborn:fletching"
+    },
+    "M": {
+      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bomb_casing_arrow"
+  }
+}

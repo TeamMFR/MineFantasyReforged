@@ -1,0 +1,31 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "tungsten",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 96,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    " E    ",
+    " M    ",
+    "MBM   ",
+    " M    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bronze_gears"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "M": {
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:tungsten_gears"
+  }
+}

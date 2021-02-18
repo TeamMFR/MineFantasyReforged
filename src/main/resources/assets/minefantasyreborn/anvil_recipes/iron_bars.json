@@ -1,0 +1,26 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "construction",
+  "research": "smeltiron",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 12,
+  "recipe_hammer": 2,
+  "output_hot": false,
+  "pattern": [
+    "M M   ",
+    "M M   ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "M": {
+      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:iron_bars"
+  }
+}

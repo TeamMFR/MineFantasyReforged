@@ -1,0 +1,28 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "tier",
+  "tool_type": "hvyhammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 60,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "BR    ",
+    "BBBBBB",
+    "BR    ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_lance"
+  }
+}

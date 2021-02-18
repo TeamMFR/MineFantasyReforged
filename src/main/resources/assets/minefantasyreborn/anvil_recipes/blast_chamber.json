@@ -1,0 +1,28 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "artisanry",
+  "research": "blastfurn",
+  "tool_type": "hvyHammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 60,
+  "recipe_hammer": 2,
+  "output_hot": false,
+  "pattern": [
+    "RP PR ",
+    "RP PR ",
+    "RP PR ",
+    "RP PR "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:plate"
+    },
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:blast_chamber"
+  }
+}

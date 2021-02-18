@@ -1,0 +1,29 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "artisanry",
+  "research": "craftOrnate",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 60,
+  "recipe_hammer": 2,
+  "output_hot": false,
+  "pattern": [
+    " B    ",
+    "BDB   ",
+    " B    ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "nbt": "{mf_custom_materials:{main_metal:\"gold\"}}",
+      "item": "minefantasyreborn:bar"
+    },
+    "D": {
+      "item": "minecraft:dye"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:ornate_items"
+  }
+}

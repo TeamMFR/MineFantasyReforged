@@ -1,0 +1,29 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "artisanry",
+  "research": "blastfurn",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 12,
+  "recipe_hammer": 2,
+  "output_hot": false,
+  "pattern": [
+    "IFI   ",
+    "      ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "F": {
+      "item": "minefantasyreborn:flux_strong"
+    },
+    "I": {
+      "item": "minecraft:iron_ore"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:iron_prep",
+    "count": 2
+  }
+}

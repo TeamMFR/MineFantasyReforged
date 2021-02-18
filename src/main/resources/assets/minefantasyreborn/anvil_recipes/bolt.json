@@ -1,0 +1,32 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "etools",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 14,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    " E    ",
+    "MBM   ",
+    " M    ",
+    " M    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "E": {
+      "item": "minefantasyreborn:engin_anvil_tools"
+    },
+    "M": {
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:bolt",
+    "count": 2
+  }
+}

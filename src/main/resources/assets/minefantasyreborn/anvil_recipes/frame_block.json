@@ -1,0 +1,28 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "engineering",
+  "research": "cogArmour",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 7,
+  "recipe_hammer": 3,
+  "output_hot": false,
+  "pattern": [
+    "R     ",
+    "I     ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "I": {
+      "item": "minefantasyreborn:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:frame_block"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "tier",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 10,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "M     ",
+    "M     ",
+    "M     ",
+    "M     "
+  ],
+  "key": {
+    "M": {
+      "item": "minefantasyreborn:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_needle"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill_used": "artisanry",
+  "research": "smeltSteel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 1,
+  "recipe_time": 5,
+  "recipe_hammer": 1,
+  "output_hot": true,
+  "pattern": [
+    "C     ",
+    "B     ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreborn:bar"
+    },
+    "C": {
+      "item": "minefantasyreborn:coal_dust"
+    }
+  },
+  "result": {
+    "nbt": "{mf_custom_materials:{main_metal:\"steel\"}}",
+    "item": "minefantasyreborn:bar"
+  }
+}

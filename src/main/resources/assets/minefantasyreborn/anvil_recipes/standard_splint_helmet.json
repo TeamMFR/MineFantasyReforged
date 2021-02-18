@@ -1,0 +1,31 @@
+{
+  "type": "CustomToolRecipe",
+  "skill_used": "artisanry",
+  "research": "craftArmourMedium",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 20,
+  "recipe_hammer": -1,
+  "output_hot": true,
+  "pattern": [
+    "RSR   ",
+    "SPS   ",
+    "RSR   ",
+    "      "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:padded_helmet"
+    },
+    "R": {
+      "item": "minefantasyreborn:rivet"
+    },
+    "S": {
+      "item": "minefantasyreborn:splint_mesh"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:standard_splint_helmet"
+  }
+}
