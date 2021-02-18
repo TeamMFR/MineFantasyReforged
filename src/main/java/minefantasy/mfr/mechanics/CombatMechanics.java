@@ -9,7 +9,7 @@ import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IKnockbackWeapon;
@@ -548,7 +548,7 @@ public class CombatMechanics {
                     onWeaponHit(user, weapon, target, damage);
                 }
                 if (RPGElements.isSystemActive && user instanceof EntityPlayer && !user.world.isRemote) {
-                    SkillList.combat.addXP((EntityPlayer) user, (int) (damage / 5F));
+                    Skill.COMBAT.addXP((EntityPlayer) user, (int) (damage / 5F));
                 }
             } else {
                 if (source instanceof EntityArrow && src.isProjectile()) {
@@ -718,7 +718,7 @@ public class CombatMechanics {
          * SkillList.block.addXP((EntityPlayer)user, 10 + (int)prevDam*2); }
          */
         if (RPGElements.isSystemActive && user instanceof EntityPlayer) {
-            SkillList.combat.addXP((EntityPlayer) user, (int) (prevDam / 3F));
+            Skill.COMBAT.addXP((EntityPlayer) user, (int) (prevDam / 3F));
         }
         if (parry != null) {
             parry.onParry(source, user, attacker, dam);

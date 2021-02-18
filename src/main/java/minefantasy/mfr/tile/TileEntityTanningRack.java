@@ -3,7 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
@@ -120,7 +120,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
                 }
                 if (progress >= maxProgress) {
                     if (RPGElements.isSystemActive) {
-                        SkillList.artisanry.addXP(player, 1);
+                        Skill.ARTISANRY.addXP(player, 1);
                     }
                     progress = 0;
                     int ss = !getInventory().getStackInSlot(0).isEmpty() ? getInventory().getStackInSlot(0).getCount() : 1;

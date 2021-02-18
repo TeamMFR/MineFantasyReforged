@@ -3,7 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrossbowBench;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -107,7 +107,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
                 world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
                 progress = 0;
                 if (user != null) {
-                    SkillList.engineering.addXP(user, 10);
+                    Skill.ENGINEERING.addXP(user, 10);
                 }
                 for (int a = 0; a < 4; a++) {
                     inventory.extractItem(a, 1, false);

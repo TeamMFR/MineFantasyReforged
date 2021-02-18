@@ -5,7 +5,7 @@ import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.block.Block;
@@ -46,7 +46,7 @@ public class BlockSalvage extends Block {
         float rate = 1.0F;
 
         if (RPGElements.isSystemActive) {
-            int lvl = RPGElements.getLevel(user, SkillList.artisanry);
+            int lvl = RPGElements.getLevel(user, Skill.ARTISANRY);
             if (lvl > 10) {
                 rate += ((lvl - 10) * 0.01F);
             }

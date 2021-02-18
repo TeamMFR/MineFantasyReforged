@@ -6,7 +6,7 @@ import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.block.BlockBloomery;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
@@ -212,11 +212,11 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
                 if (inventory.getStackInSlot(OUT_SLOT).getCount() <= 0) {
                     inventory.setStackInSlot(OUT_SLOT, ItemStack.EMPTY);
                 }
-                if (RPGElements.isSystemActive && RPGElements.getLevel(user, SkillList.artisanry) <= 20)// Only gain xp
+                if (RPGElements.isSystemActive && RPGElements.getLevel(user, Skill.ARTISANRY) <= 20)// Only gain xp
                 // up to level
                 // 20
                 {
-                    SkillList.artisanry.addXP(user, 1);
+                    Skill.ARTISANRY.addXP(user, 1);
                 }
                 drop.setCount(1);
                 drop = ItemHeated.createHotItem(drop, 1200);

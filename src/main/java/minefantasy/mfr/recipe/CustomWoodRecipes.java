@@ -4,7 +4,6 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.Skill;
-import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
@@ -22,7 +21,7 @@ public class CustomWoodRecipes {
     public static final SoundEvent sawing = MineFantasySounds.SAW_CARPENTER;
     public static final SoundEvent nailHammer = MineFantasySounds.HAMMER_CARPENTER;
     public static final SoundEvent woodHammer = MineFantasySounds.CARPENTER_MALLET;
-    private static final Skill construction = SkillList.construction;
+    private static final Skill construction = Skill.CONSTRUCTION;
 
     public static void init() {
         ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");

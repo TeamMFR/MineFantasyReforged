@@ -25,7 +25,7 @@ public class RPGElements {
     }
 
     public static void addSkill(Skill skill) {
-        skillsMap.put(skill.skillName, skill);
+        skillsMap.put(skill.unlocalizedName, skill);
         skillsList.add(skill);
     }
 
@@ -47,10 +47,10 @@ public class RPGElements {
             for (Skill skill : skillsList){
                 if (skill != null) {
                     skill.init(tag);
-                    tag.setString("name", skill.skillName);
-                    nbt.setTag(skill.skillName, tag);
+                    tag.setString("name", skill.unlocalizedName);
+                    nbt.setTag(skill.unlocalizedName, tag);
                     tag = new NBTTagCompound(); //This is the key to everything
-                    MineFantasyRebornAPI.debugMsg("Initiate skill: " + skill.skillName);
+                    MineFantasyRebornAPI.debugMsg("Initiate skill: " + skill.unlocalizedName);
                 }
             }
             data.setVariable(SKILL_STATS_KEY, nbt);
@@ -62,7 +62,7 @@ public class RPGElements {
     }
 
     public static int getLevel(EntityPlayer player, Skill skill) {
-        return RPGElements.getSkill(player, skill.skillName).getInteger("level");
+        return RPGElements.getSkill(player, skill.unlocalizedName).getInteger("level");
     }
 
     public static float getWeaponModifier(EntityPlayer player, Skill skill) {
@@ -77,7 +77,7 @@ public class RPGElements {
     }
 
     public static boolean hasLevel(EntityPlayer player, Skill skill, int requirement) {
-        return getSkill(player, skill.skillName).getInteger("level") >= requirement;
+        return getSkill(player, skill.unlocalizedName).getInteger("level") >= requirement;
     }
 
 }

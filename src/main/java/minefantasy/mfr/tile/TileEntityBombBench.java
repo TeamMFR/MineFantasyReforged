@@ -4,7 +4,7 @@ import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.IBombComponent;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBombBench;
 import minefantasy.mfr.init.KnowledgeListMFR;
@@ -128,7 +128,7 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
                 world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT,0.35F, 0.5F, false);
                 progress = 0;
                 if (player != null) {
-                    SkillList.engineering.addXP(player, 2);
+                    Skill.ENGINEERING.addXP(player, 2);
                 }
                 boolean isArrow = isMatch(0, "arrow") || isMatch(0, "bolt");
                 for (int a = 0; a < 4; a++) {

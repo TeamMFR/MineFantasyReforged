@@ -46,7 +46,7 @@ public class RecipeExporterAnvil {
 			try { recipe_time = iAnvilRecipe.getCraftTime(); } catch (Exception e) {}
 
 			String skill_used = "none";
-			try { skill_used = iAnvilRecipe.getSkill().skillName; } catch (Exception e) {}
+			try { skill_used = iAnvilRecipe.getSkill().unlocalizedName; } catch (Exception e) {}
 
 			String tool_type = "none";
 			try { tool_type = iAnvilRecipe.getToolType(); } catch (Exception e) {}

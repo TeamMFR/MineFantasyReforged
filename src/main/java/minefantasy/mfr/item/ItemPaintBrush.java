@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.refine.PaintOilRecipe;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
@@ -77,7 +77,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
             if (world.isRemote)
                 return true;
 
-            SkillList.construction.addXP(user, 1);
+            Skill.CONSTRUCTION.addXP(user, 1);
             item.damageItem(1, user);
             world.setBlockState(pos, newBlock.getDefaultState());
         }

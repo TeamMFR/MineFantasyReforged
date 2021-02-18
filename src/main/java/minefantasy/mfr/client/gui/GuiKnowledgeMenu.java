@@ -9,7 +9,6 @@ import minefantasy.mfr.api.knowledge.InformationPage;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
-import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchRequestPacket;
@@ -598,17 +597,17 @@ public class GuiKnowledgeMenu extends GuiScreen {
 
 		this.drawTexturedModalRect(x, y, 0, 0, skillWidth, skillHeight);
 
-		drawSkill(x + 20, y + 20, SkillList.artisanry);
-		drawSkill(x + 20, y + 44, SkillList.construction);
-		drawSkill(x + 20, y + 68, SkillList.provisioning);
-		drawSkill(x + 20, y + 92, SkillList.engineering);
-		drawSkill(x + 20, y + 116, SkillList.combat);
+		drawSkill(x + 20, y + 20, Skill.ARTISANRY);
+		drawSkill(x + 20, y + 44, Skill.CONSTRUCTION);
+		drawSkill(x + 20, y + 68, Skill.PROVISIONING);
+		drawSkill(x + 20, y + 92, Skill.ENGINEERING);
+		drawSkill(x + 20, y + 116, Skill.COMBAT);
 
-		drawSkillName(x + 20, y + 20, SkillList.artisanry);
-		drawSkillName(x + 20, y + 44, SkillList.construction);
-		drawSkillName(x + 20, y + 68, SkillList.provisioning);
-		drawSkillName(x + 20, y + 92, SkillList.engineering);
-		drawSkillName(x + 20, y + 116, SkillList.combat);
+		drawSkillName(x + 20, y + 20, Skill.ARTISANRY);
+		drawSkillName(x + 20, y + 44, Skill.CONSTRUCTION);
+		drawSkillName(x + 20, y + 68, Skill.PROVISIONING);
+		drawSkillName(x + 20, y + 92, Skill.ENGINEERING);
+		drawSkillName(x + 20, y + 116, Skill.COMBAT);
 
 		GlStateManager.popMatrix();
 	}

@@ -6,7 +6,7 @@ import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.Functions;
 import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.SkillList;
+import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.block.BlockFirepit;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.ComponentListMFR;
@@ -231,13 +231,13 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 				}
 				float chance = 75F;
 				if (RPGElements.isSystemActive) {
-					int skill = RPGElements.getLevel(player, SkillList.provisioning);
+					int skill = RPGElements.getLevel(player, Skill.PROVISIONING);
 					chance += (int) ((float) skill / 4);
 				}
 				boolean success = (rand.nextFloat() * 100) < chance;
 				ItemStack creation = success ? result.copy() : new ItemStack(FoodListMFR.BURNT_FOOD);
 				dropItem(player, creation);
-				SkillList.provisioning.addXP(player, success ? 2 : 1);
+				Skill.PROVISIONING.addXP(player, success ? 2 : 1);
 				return true;
 			}
 		}

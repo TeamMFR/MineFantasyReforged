@@ -46,7 +46,7 @@ public class RecipeExporterCarpenter {
 			try { craft_time = iCarpenterRecipe.getCraftTime(); } catch (Exception e) {}
 
 			String skill = "none";
-			try { skill = iCarpenterRecipe.getSkill().skillName; } catch (Exception e) {}
+			try { skill = iCarpenterRecipe.getSkill().unlocalizedName; } catch (Exception e) {}
 
 			String tool_type = "none";
 			try { tool_type = iCarpenterRecipe.getToolType(); } catch (Exception e) {}

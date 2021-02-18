@@ -238,7 +238,7 @@ public class PlayerTickHandlerMF {
 					&& event.player.ticksExisted % 100 == 0) {
 				for (int a = 0; a < event.player.inventory.getSizeInventory(); a++) {
 					ItemStack item = event.player.inventory.getStackInSlot(a);
-					if (!item.isEmpty() && item.getItem() instanceof IHotItem) {
+					if (!event.player.isCreative() && !item.isEmpty() && item.getItem() instanceof IHotItem) {
 						event.player.setFire(5);
 						event.player.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
 					}

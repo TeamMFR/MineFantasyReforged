@@ -8,12 +8,19 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
-public class Skill {
-    public final String skillName;
+public enum Skill {
 
-    public Skill(String name) {
-        this.skillName = name;
+    ARTISANRY("artisanry"),
+    ENGINEERING("engineering"),
+    CONSTRUCTION("construction"),
+    PROVISIONING("provisioning"),
+    COMBAT("combat");
+
+    Skill(String unlocalizedName) {
+        this.unlocalizedName = unlocalizedName;
     }
+
+    public final String unlocalizedName;
 
     public int getMaxLevel() {
         return 100;
@@ -28,6 +35,17 @@ public class Skill {
         return this;
     }
 
+    /** Returns the tier with the given name, or throws an {@link java.lang.IllegalArgumentException} if no such
+     * skill exists. */
+    public static Skill fromName(String name){
+
+        for(Skill skill : values()){
+            if(skill.unlocalizedName.equals(name)) return skill;
+        }
+
+        throw new IllegalArgumentException("No such skill with unlocalized name: " + name);
+    }
+
     /**
      * Gets how much xp needed to level up
      */
@@ -37,7 +55,7 @@ public class Skill {
     }
 
     public int[] getXP(EntityPlayer player) {
-        NBTTagCompound skill = RPGElements.getSkill(player, skillName);
+        NBTTagCompound skill = RPGElements.getSkill(player, unlocalizedName);
 
         if (skill != null) {
             int value = skill.getInteger("xp");
@@ -48,7 +66,7 @@ public class Skill {
     }
 
     public void manualLvlUp(EntityPlayer player, int newLevel) {
-        NBTTagCompound skill = RPGElements.getSkill(player, skillName);
+        NBTTagCompound skill = RPGElements.getSkill(player, unlocalizedName);
         if (skill == null)
             return;
 
@@ -65,7 +83,7 @@ public class Skill {
      */
     public void addXP(EntityPlayer player, int xp) {
         xp = (int) (RPGElements.levelSpeedModifier * xp);
-        NBTTagCompound skill = RPGElements.getSkill(player, skillName);
+        NBTTagCompound skill = RPGElements.getSkill(player, unlocalizedName);
         if (skill == null)
             return;
 
@@ -106,7 +124,7 @@ public class Skill {
 
     private void levelUp(EntityPlayer player, int newlvl) {
         if (!player.world.isRemote) {
-            MineFantasyRebornAPI.debugMsg("Level up detected for " + skillName);
+            MineFantasyRebornAPI.debugMsg("Level up detected for " + unlocalizedName);
             MinecraftForge.EVENT_BUS.post(new LevelupEvent(player, this, newlvl));
         }
     }
@@ -119,6 +137,6 @@ public class Skill {
     }
 
     public String getDisplayName() {
-        return I18n.format("skill." + skillName + ".name");
+        return I18n.format("skill." + unlocalizedName + ".name");
     }
 }

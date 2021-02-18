@@ -20,7 +20,7 @@ public class LevelUpPacket extends PacketMF {
 
     public LevelUpPacket(EntityPlayer user, Skill skill, int level) {
         this.username = user.getUniqueID();
-        this.skillName = skill.skillName;
+        this.skillName = skill.unlocalizedName;
         this.level = level;
     }
 
