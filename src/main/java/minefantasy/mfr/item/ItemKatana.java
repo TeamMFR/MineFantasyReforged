@@ -94,8 +94,8 @@ public class ItemKatana extends ItemHeavyWeapon {
 
     @Override
     public void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam) {
-        if (user.motionY < 0 && !user.onGround && (!(user instanceof EntityPlayer) || user.isSneaking())
-                && tryPerformAbility(user, cleave_cost)) {
+        if (user.motionY < 0 && !user.onGround && ((user instanceof EntityPlayer) || user.isSneaking())
+                && tryPerformAbility((EntityPlayer) user, cleave_cost)) {
             hurtInRange(user, 4D);
             if (hit instanceof EntityLivingBase) {
                 ArmourCalculator.damageArmour((EntityPlayer) hit, (int) (dam * 10));

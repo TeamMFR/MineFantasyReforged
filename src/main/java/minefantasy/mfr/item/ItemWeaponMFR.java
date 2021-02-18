@@ -24,6 +24,7 @@ import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
@@ -179,19 +180,19 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         return item.getTagCompound();
     }
 
-    public static boolean canPerformAbility(EntityLivingBase user, float points) {
+    public static boolean canPerformAbility(EntityPlayer user, float points) {
         return tryPerformAbility(user, points, false, true, true, false);
     }
 
-    public static boolean tryPerformAbility(EntityLivingBase user, float points) {
+    public static boolean tryPerformAbility(EntityPlayer user, float points) {
         return tryPerformAbility(user, points, true, true);
     }
 
-    public static boolean tryPerformAbility(EntityLivingBase user, float points, boolean armour, boolean weapon) {
+    public static boolean tryPerformAbility(EntityPlayer user, float points, boolean armour, boolean weapon) {
         return tryPerformAbility(user, points, true, armour, weapon, true);
     }
 
-    public static boolean tryPerformAbility(EntityLivingBase user, float points, boolean flash, boolean armour,
+    public static boolean tryPerformAbility(EntityPlayer user, float points, boolean flash, boolean armour,
             boolean weapon, boolean takePoints) {
         if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
             points *= StaminaBar.getBaseDecayModifier(user, armour, weapon);
@@ -217,7 +218,9 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             if (stam > 0) {
                 StaminaBar.modifyStaminaValue(user, -points);
             }
-            StaminaBar.setIdleTime(user, pause * StaminaBar.pauseModifier);
+            if (user instanceof EntityPlayer){
+                StaminaBar.setIdleTime(PlayerData.get((EntityPlayer) user), pause * StaminaBar.pauseModifier);
+            }
 
             if (!user.world.isRemote) {
                 MFRLogUtil.logDebug("Spent " + points + " Stamina Pts");
@@ -438,7 +441,9 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             if (user.canEntityBeSeen(hit)) {
                 TacticalManager.knockbackEntity(hit, user, 1.5F, 0.2F);
                 if (StaminaBar.isSystemActive) {
-                    StaminaBar.setIdleTime(user, 60);
+                    if (user instanceof EntityPlayer){
+                        StaminaBar.setIdleTime(PlayerData.get((EntityPlayer) user), 60);
+                    }
                 }
                 if (hit instanceof EntityLivingBase) {
                     for (int a = 0; a < 4; a++) {

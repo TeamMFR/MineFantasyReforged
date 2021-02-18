@@ -2,7 +2,6 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.util.ITooltipFlag;
@@ -42,7 +41,6 @@ public class ItemResearchBook extends ItemBaseMFR {
     public ActionResult<ItemStack> onItemRightClick( World world, EntityPlayer player, EnumHand hand) {
         if (!world.isRemote) {
             ResearchLogic.syncData(player);
-            RPGElements.syncAll(player);
         }
         player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RESEARCH_BOOK, world, 0, -1, 0);
         return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));

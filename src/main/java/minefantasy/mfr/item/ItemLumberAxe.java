@@ -42,10 +42,10 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
         return true;
     }
 
-    public static void tirePlayer(EntityLivingBase user, float points) {
-        if (user instanceof EntityPlayer && StaminaBar.isSystemActive) {
-            StaminaBar.modifyStaminaValue(user, -StaminaBar.getBaseDecayModifier(user, true, true) * points);
-            StaminaBar.ModifyIdleTime(user, 5F * points);
+    public static void tirePlayer(EntityPlayer player, float points) {
+        if (StaminaBar.isSystemActive) {
+            StaminaBar.modifyStaminaValue(player, -StaminaBar.getBaseDecayModifier(player, true, true) * points);
+            StaminaBar.ModifyIdleTime(player, 5F * points);
         }
     }
 
@@ -111,7 +111,9 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
                     }
                 }
             }
-            tirePlayer(user, 0.5F);
+            if (user instanceof EntityPlayer){
+                tirePlayer((EntityPlayer) user, 0.5F);
+            }
         }
     }
 

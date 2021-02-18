@@ -1,17 +1,46 @@
 package minefantasy.mfr.api.knowledge;
 
-import minefantasy.mfr.api.helpers.PlayerTagData;
+import minefantasy.mfr.data.IStoredVariable;
+import minefantasy.mfr.data.Persistence;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.network.KnowledgePacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ResearchLogic {
-    public static final String KnowledgeNBT = "Knowledge";
+    public static final IStoredVariable<NBTTagCompound> KNOWLEDGE_STATS_KEY = IStoredVariable.StoredVariable.ofNBT("knowledgeStats", Persistence.ALWAYS).setSynced();
     public static int knowledgelyr = 0;
+
+    static {
+        PlayerData.registerStoredVariables(KNOWLEDGE_STATS_KEY);
+    }
+
+    private static NBTTagCompound getNBT(EntityPlayer player) {
+        if(player != null){
+            PlayerData data = PlayerData.get(player);
+            if (data != null){
+                if (data.getVariable(KNOWLEDGE_STATS_KEY) == null) {
+                    NBTTagCompound tag = new NBTTagCompound();
+                    tag.setInteger("layer", knowledgelyr);
+                    data.setVariable(KNOWLEDGE_STATS_KEY, tag);
+                }
+                if (data.getVariable(KNOWLEDGE_STATS_KEY).getInteger("Layer") != knowledgelyr) {
+                    data.setVariable(KNOWLEDGE_STATS_KEY, null);
+
+                    NBTTagCompound tag = new NBTTagCompound();
+                    tag.setInteger("Layer", knowledgelyr);
+                    data.setVariable(KNOWLEDGE_STATS_KEY, tag);
+                }
+                return data.getVariable(KNOWLEDGE_STATS_KEY);
+            }
+        }
+        return null;
+    }
 
     public static boolean canPurchase(EntityPlayer player, InformationBase base) {
         if (base.isPreUnlocked() || !canUnlockInfo(player, base)) {
@@ -76,27 +105,6 @@ public class ResearchLogic {
         return true;
     }
 
-    private static NBTTagCompound getNBT(EntityPlayer player) {
-        if(player != null){
-            NBTTagCompound persistant = PlayerTagData.getPersistedData(player);
-            if (!persistant.hasKey(KnowledgeNBT)) {
-                NBTTagCompound tag = new NBTTagCompound();
-                tag.setInteger("Layer", knowledgelyr);
-                persistant.setTag(KnowledgeNBT, tag);
-            }
-            NBTTagCompound load = persistant.getCompoundTag(KnowledgeNBT);
-            if (load.getInteger("Layer") != knowledgelyr) {
-                persistant.removeTag(KnowledgeNBT);
-
-                NBTTagCompound tag = new NBTTagCompound();
-                tag.setInteger("Layer", knowledgelyr);
-                persistant.setTag(KnowledgeNBT, tag);
-            }
-            return load;
-        }
-        return null;
-    }
-
     /**
      * Returns true if the parent has been unlocked, or there is no parent
      */
@@ -121,7 +129,7 @@ public class ResearchLogic {
 
     public static void syncData(EntityPlayer player) {
         if (!player.world.isRemote) {
-            NetworkHandler.sendToAllTrackingChunk(player.world, player.chunkCoordX, player.chunkCoordZ, new KnowledgePacket(player));
+            NetworkHandler.sendToPlayer((EntityPlayerMP) player, new KnowledgePacket(player));
         }
     }
 

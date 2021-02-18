@@ -7,12 +7,14 @@ import minefantasy.mfr.api.knowledge.ResearchArtefacts;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerResearchBench;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchTablePacket;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -27,7 +29,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 
 public class TileEntityResearchBench extends TileEntityBase implements IBasicMetre {
@@ -76,6 +77,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
         if (world.isRemote) {
             return true;
         }
+        syncData();
         ArrayList<String> research = getInfo(getInventory().getStackInSlot(0));
         int result = canResearch(user, research);
 
@@ -113,6 +115,9 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
             if (base != null && !ResearchLogic.alreadyUsedArtefact(user, base, getInventory().getStackInSlot(0))
                     && ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user)) {
                 int artefacts = ResearchArtefacts.useArtefact(getInventory().getStackInSlot(0), base, user);
+                if (user instanceof EntityPlayerMP){
+                    PlayerData.get(user).sync();
+                }
                 world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
                 if (!user.world.isRemote) {
                     String name = I18n.format("knowledge." + s);

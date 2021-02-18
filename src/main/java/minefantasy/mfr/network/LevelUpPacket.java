@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import java.util.UUID;
 
 public class LevelUpPacket extends PacketMF {
-    public static final String packetName = "MF2_levelup";
     private UUID username;
     private int level;
     private String skillName;
@@ -45,7 +44,7 @@ public class LevelUpPacket extends PacketMF {
 
     @Override
     protected void execute(EntityPlayer player) {
-        if (username != null && player.getUniqueID() == username) {
+        if (username != null && player != null && player.getUniqueID().equals(username)) {
             Skill skill = RPGElements.getSkillByName(name);
 
             if (skill != null) {

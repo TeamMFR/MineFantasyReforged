@@ -399,8 +399,8 @@ public class EntityParachute extends Entity {
 	}
 
 	private boolean isTooHeavy() {
-		if (getRidingEntity() != null && getRidingEntity() instanceof EntityLivingBase) {
-			return ArmourCalculator.getTotalWeightOfWorn((EntityLivingBase) getRidingEntity(), false) > 100F;
+		if (getRidingEntity() != null && getRidingEntity() instanceof EntityPlayer) {
+			return ArmourCalculator.getTotalWeightOfWorn((EntityPlayer) getRidingEntity(), false) > 100F;
 		}
 		return false;
 	}

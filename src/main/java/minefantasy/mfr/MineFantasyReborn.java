@@ -18,6 +18,7 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.ArtefactListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
@@ -113,6 +114,8 @@ public class MineFantasyReborn {
 		new ConfigCrafting().setConfig(getCfg(preEvent, "Crafting"));
 		new ConfigMobs().setConfig(getCfg(preEvent, "Mobs"));
 
+		PlayerData.register();
+
 		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
 		CarpenterRecipeManager.INSTANCE.loadRecipes();
 
@@ -136,7 +139,6 @@ public class MineFantasyReborn {
 
 		MineFantasyBlocks.init();
 
-
 		MineFantasyLoot.load();
 		MineFantasyBlocks.load();
 		ComponentListMFR.load();
@@ -153,7 +155,6 @@ public class MineFantasyReborn {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(this);
-
 
 		CarpenterRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), CarpenterRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
@@ -183,6 +184,8 @@ public class MineFantasyReborn {
 
 		ConfigItemRegistry.readCustoms();
 
+		OreDictListMFR.registerOreDictEntries();
+
 		for (Biome biome : Biome.REGISTRY) {
 			registerBiomeStuff(biome);
 		}
@@ -191,7 +194,7 @@ public class MineFantasyReborn {
 		ArtefactListMFR.init();
 		BasicRecipesMF.init();
 
-		OreDictListMFR.registerOreDictEntries();
+
 
 		MetalMaterial.addHeatables();
 

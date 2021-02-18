@@ -8,11 +8,15 @@ import minefantasy.mfr.api.armour.IArmourPenetrationMob;
 import minefantasy.mfr.api.armour.IArmouredEntity;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
+import minefantasy.mfr.data.IStoredVariable;
+import minefantasy.mfr.data.Persistence;
+import minefantasy.mfr.data.PlayerData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntitySpider;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
@@ -54,8 +58,8 @@ public class ArmourCalculator {
      */
     public static final float slowAmount = 10F;
     public static final float[] moveSpeedThreshold = new float[]{30F, 40F};
-    private static final String weightNBT = "MF_Worn_Weight";
-    private static final String weightNBTNS = "MF_Worn_Weight_NS";
+    public static final IStoredVariable<Float> WORN_WEIGHT_KEY = IStoredVariable.StoredVariable.ofFloat("wornWeight", Persistence.DIMENSION_CHANGE);
+    public static final IStoredVariable<Float> WORN_WEIGHT_NS_KEY = IStoredVariable.StoredVariable.ofFloat("wornWeightNS", Persistence.DIMENSION_CHANGE);
     public static boolean advancedDamageTypes = true;
     public static float slowRate = 1.0F;
     public static boolean useConfigIndirectDmg = true;
@@ -123,7 +127,7 @@ public class ArmourCalculator {
         return sizes[slot.getIndex()];
     }
 
-    public static float getSpeedModForWeight(EntityLivingBase user) {
+    public static float getSpeedModForWeight(EntityPlayer user) {
         float mod = 0.0F;
         float min = moveSpeedThreshold[0];
         float max = moveSpeedThreshold[1] - min;
@@ -135,36 +139,37 @@ public class ArmourCalculator {
     }
 
     /**
-     * Gets the total worn weight of a user: this updates every 20 ticks
+     * Gets the total worn weight of a player: this updates every 20 ticks
      */
-    public static float getTotalWeightOfWorn(EntityLivingBase user, boolean considerSpeed) {
-        String tag = considerSpeed ? weightNBTNS : weightNBT;
-        if (!user.getEntityData().hasKey(tag)) {
-            return setTotalWeightOfWorn(user, considerSpeed);
+    public static float getTotalWeightOfWorn(EntityPlayer player, boolean considerSpeed) {
+        PlayerData data = PlayerData.get(player);
+        IStoredVariable<Float> variable = considerSpeed ? WORN_WEIGHT_NS_KEY : WORN_WEIGHT_KEY;
+        if (data.getVariable(variable) == null) {
+            return setTotalWeightOfWorn(player, considerSpeed);
         } else {
-            return user.getEntityData().getFloat(tag);
+            return data.getVariable(variable);
         }
     }
 
-    public static void updateWeights(EntityLivingBase user) {
-        setTotalWeightOfWorn(user, true);
-        setTotalWeightOfWorn(user, false);
+    public static void updateWeights(EntityPlayer player) {
+        setTotalWeightOfWorn(player, true);
+        setTotalWeightOfWorn(player, false);
     }
 
     /**
      * @param considerSpeed if true: some pieces will be ignored, ment for speed calculations
      */
-    public static float setTotalWeightOfWorn(EntityLivingBase user, boolean considerSpeed) {
-        String tag = considerSpeed ? weightNBTNS : weightNBT;
+    public static float setTotalWeightOfWorn(EntityPlayer player, boolean considerSpeed) {
+        PlayerData data = PlayerData.get(player);
+        IStoredVariable<Float> variable = considerSpeed ? WORN_WEIGHT_NS_KEY : WORN_WEIGHT_KEY;
         float weight = 0.0F;
-
-            Iterable<ItemStack> armour = user.getArmorInventoryList();
+            Iterable<ItemStack> armour = player.getArmorInventoryList();
             for (ItemStack stack : armour) {
                 if (!considerSpeed || shouldArmourAlterSpeed(stack)) {
                     weight += getPieceWeight(stack);
                 }
             }
-        user.getEntityData().setFloat(tag, weight);
+        data.setVariable(variable, weight);
         return weight;
     }
 

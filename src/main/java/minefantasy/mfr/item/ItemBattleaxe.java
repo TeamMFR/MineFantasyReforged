@@ -50,17 +50,17 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
 		}
 		EntityLivingBase target = (EntityLivingBase) hit;
 
-		if (wielder.isSprinting()) {
+		if (wielder.isSprinting() && wielder instanceof EntityPlayer) {
 			if (wielder.fallDistance > 0 && canLunge(wielder)
-					&& tryPerformAbility(wielder, lunge_cost, !properHit, true, true, true))// LUNGE: 20 Points
+					&& tryPerformAbility((EntityPlayer) wielder, lunge_cost, !properHit, true, true, true))// LUNGE: 20 Points
 			{
 				return chargeAt(wielder, target, true, damage, properHit);
 			} else if (wielder.onGround && getHeightGap(target, wielder) <= 0.5F
-					&& tryPerformAbility(wielder, charge_cost))// CHARGE: 10 points
+					&& tryPerformAbility((EntityPlayer) wielder, charge_cost))// CHARGE: 10 points
 			{
 				return chargeAt(wielder, target, false, damage, properHit);
 			}
-		} else if (wielder.fallDistance > 0 && !wielder.isOnLadder() && tryPerformAbility(wielder, jump_cost))// JUMP: 2
+		} else if (wielder.fallDistance > 0 && !wielder.isOnLadder() && tryPerformAbility((EntityPlayer) wielder, jump_cost))// JUMP: 2
 		// points
 		{
 			if (properHit)

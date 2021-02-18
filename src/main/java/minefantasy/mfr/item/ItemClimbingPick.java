@@ -47,7 +47,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
         MineFantasyReborn.PROXY.addClientRegister(this);
     }
 
-    public static boolean tryPerformAbility(EntityLivingBase user, float points) {
+    public static boolean tryPerformAbility(EntityPlayer user, float points) {
         if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
             points *= StaminaBar.getClimbinbDecayModifier(user, true);
             if (StaminaBar.isStaminaAvailable(user, points, true)) {
@@ -144,7 +144,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
         RayTraceResult rayTraceResult = this.rayTrace(world, (EntityPlayer) player, true);
 
         if (rayTraceResult == null) {
-            if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility(player, cost)) {
+            if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
                 player.stopActiveHand();
             }
             return;
@@ -173,7 +173,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
                 }
             }
         }
-        if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility(player, cost)) {
+        if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
             player.stopActiveHand();
         }
     }

@@ -82,8 +82,8 @@ public class ArtefactListMFR {
     }
 
     private static void addArtisanry() {
-        for (ItemStack copper : OreDictionary.getOres("ingot_copper")) {
-            for (ItemStack tin : OreDictionary.getOres("ingot_tin")) {
+        for (ItemStack copper : OreDictionary.getOres("ingotCopper")) {
+            for (ItemStack tin : OreDictionary.getOres("ingotTin")) {
                 add(KnowledgeListMFR.smeltBronze, copper, tin);
             }
         }
@@ -94,18 +94,18 @@ public class ArtefactListMFR {
                 MineFantasyBlocks.LIMESTONE, ComponentListMFR.KAOLINITE);
         add(KnowledgeListMFR.bigfurn, Items.IRON_INGOT, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY, ComponentListMFR.KAOLINITE,
                 Items.COAL);
-        for (ItemStack pig : OreDictionary.getOres("ingot_pig_iron")) {
+        for (ItemStack pig : OreDictionary.getOres("ingotPigIron")) {
             add(KnowledgeListMFR.smeltSteel, pig);
         }
-        for (ItemStack steel : OreDictionary.getOres("ingot_steel")) {
+        for (ItemStack steel : OreDictionary.getOres("ingotSteel")) {
             add(KnowledgeListMFR.encrusted, steel, Items.DIAMOND);
             add(KnowledgeListMFR.obsidian, steel, Blocks.OBSIDIAN);
-            for (ItemStack bronze : OreDictionary.getOres("ingot_bronze")) {
+            for (ItemStack bronze : OreDictionary.getOres("ingotBronze")) {
                 add(KnowledgeListMFR.smeltBlackSteel, Blocks.OBSIDIAN, bronze, steel);
             }
         }
-        for (ItemStack black : OreDictionary.getOres("ingot_black_steel")) {
-            for (ItemStack silver : OreDictionary.getOres("ingot_silver")) {
+        for (ItemStack black : OreDictionary.getOres("ingotBlackSteel")) {
+            for (ItemStack silver : OreDictionary.getOres("ingotSilver")) {
                 add(KnowledgeListMFR.smeltBlueSteel, Items.BLAZE_POWDER, silver, black, new ItemStack(Items.DYE, 1, 4),
                         ComponentListMFR.FLUX_STRONG);
             }
@@ -113,14 +113,15 @@ public class ArtefactListMFR {
                     ComponentListMFR.FLUX_STRONG);
         }
 
-        for (ItemStack silver : OreDictionary.getOres("ingot_silver")) {
-            add(KnowledgeListMFR.smeltMithril, MineFantasyBlocks.MYTHIC_ORE, silver);
+        for (ItemStack silver : OreDictionary.getOres("ingotSilver")) {
+            add(KnowledgeListMFR.smeltMithril, MineFantasyBlocks.MYTHIC_ORE, silver, ComponentListMFR.ANCIENT_JEWEL_MITHRIL);
         }
-        add(KnowledgeListMFR.smeltAdamant, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT);
+        add(KnowledgeListMFR.smeltAdamant, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT, ComponentListMFR.ANCIENT_JEWEL_ADAMANT);
+        add(KnowledgeListMFR.smeltMaster, ComponentListMFR.ANCIENT_JEWEL_ADAMANT, ComponentListMFR.ANCIENT_JEWEL_MITHRIL, ComponentListMFR.ANCIENT_JEWEL_MASTER);
 
-        for (ItemStack mithril : OreDictionary.getOres("ingot_mithril")) {
-            add(KnowledgeListMFR.smeltMithium, mithril, Items.GHAST_TEAR, Items.DIAMOND);
-            for (ItemStack adamant : OreDictionary.getOres("ingot_adamantium")) {
+        for (ItemStack mithril : OreDictionary.getOres("ingotMithril")) {
+            add(KnowledgeListMFR.smeltMithium, mithril, Items.GHAST_TEAR, Items.DIAMOND,  ComponentListMFR.ANCIENT_JEWEL_ADAMANT);
+            for (ItemStack adamant : OreDictionary.getOres("ingotAdamantium")) {
                 add(KnowledgeListMFR.smeltIgnotumite, adamant, Items.EMERALD, Items.BLAZE_POWDER);
                 add(KnowledgeListMFR.smeltEnderforge, adamant, mithril, Items.ENDER_PEARL);
             }

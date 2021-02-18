@@ -52,7 +52,8 @@ public class NetworkHandler implements IGuiHandler {
 	public static final String CHANNEL_NAME = "MFR";
 
 
-	//unused: 1, 9, 16, 18, 20, 25
+	//unused: 9, 10, 16, 18, 20, 25
+	private static final int PLAYER_SYNC_PACKET = 1;
 	private static final int STAMINA_PACKET = 2;
 	private static final int PARRY_PACKET = 3;
 	private static final int HIT_SOUND_PACKET = 4;
@@ -60,7 +61,6 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int CARPENTER_PACKET = 6;
 	private static final int KNOWLEDGE_PACKET = 7;
 	private static final int RESEARCH_REQUEST_PACKET = 8;
-	private static final int SKILL_PACKET = 10;
 	private static final int LEVEL_UP_PACKET = 11;
 	private static final int FORGE_PACKET = 12;
 	private static final int RESEARCH_TABLE_PACKET = 13;
@@ -97,6 +97,7 @@ public class NetworkHandler implements IGuiHandler {
 
 		channel.register(new PacketHandlerMF());
 
+		PacketMF.registerPacket(PLAYER_SYNC_PACKET, PlayerDataPacket.class, PlayerDataPacket::new);
 		PacketMF.registerPacket(STAMINA_PACKET, StaminaPacket.class, StaminaPacket::new);
 		PacketMF.registerPacket(PARRY_PACKET, ParryPacket.class, ParryPacket::new);
 		PacketMF.registerPacket(HIT_SOUND_PACKET, HitSoundPacket.class, HitSoundPacket::new);
@@ -104,7 +105,6 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(CARPENTER_PACKET, CarpenterPacket.class, CarpenterPacket::new);
 		PacketMF.registerPacket(KNOWLEDGE_PACKET, KnowledgePacket.class, KnowledgePacket::new);
 		PacketMF.registerPacket(RESEARCH_REQUEST_PACKET, ResearchRequestPacket.class, ResearchRequestPacket::new);
-		PacketMF.registerPacket(SKILL_PACKET, SkillPacket.class, SkillPacket::new);
 		PacketMF.registerPacket(LEVEL_UP_PACKET, LevelUpPacket.class, LevelUpPacket::new);
 		PacketMF.registerPacket(RESEARCH_TABLE_PACKET, ResearchTablePacket.class, ResearchTablePacket::new);
 		PacketMF.registerPacket(TROUGH_PACKET, TroughPacket.class, TroughPacket::new);

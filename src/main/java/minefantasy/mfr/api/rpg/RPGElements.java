@@ -1,7 +1,10 @@
 package minefantasy.mfr.api.rpg;
 
-import minefantasy.mfr.api.helpers.PlayerTagData;
-import minefantasy.mfr.util.XSTRandom;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.data.IStoredVariable;
+import minefantasy.mfr.data.Persistence;
+import minefantasy.mfr.data.PlayerData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -9,22 +12,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RPGElements {
-    private static final String statsName = "RPGStats_MF";
+
+    public static final IStoredVariable<NBTTagCompound> SKILL_STATS_KEY = IStoredVariable.StoredVariable.ofNBT("skillStats", Persistence.ALWAYS).setSynced();
     public static boolean isSystemActive = true;
     public static float levelSpeedModifier = 1.0F;
     public static float levelUpModifier = 1.5F;
     public static ArrayList<Skill> skillsList = new ArrayList<Skill>();
     private static HashMap<String, Skill> skillsMap = new HashMap<String, Skill>();
-    private static XSTRandom rand = new XSTRandom();
 
     static {
-        if (isSystemActive) {
-            SkillList.init();
-        }
-    }
-
-    public static void addSkill(String name) {
-        addSkill(new Skill(name));
+        PlayerData.registerStoredVariables(SKILL_STATS_KEY);
     }
 
     public static void addSkill(Skill skill) {
@@ -32,32 +29,31 @@ public class RPGElements {
         skillsList.add(skill);
     }
 
-    public static NBTTagCompound getTagData(EntityPlayer player) {
-        NBTTagCompound nbt = PlayerTagData.getPersistedData(player);
-        if (!nbt.hasKey(statsName)) {
-            nbt.setTag(statsName, new NBTTagCompound());
-        }
-        return nbt.getCompoundTag(statsName);
-    }
-
     public static NBTTagCompound getSkill(EntityPlayer player, String skillname) {
-        NBTTagCompound nbt = getTagData(player);
-        if (!nbt.hasKey(skillname)) {
-            NBTTagCompound tag = new NBTTagCompound();
-
-            Skill skill = skillsMap.get(skillname);
-            if (skill != null) {
-                skill.init(tag, player);
-            }
-            nbt.setTag(skillname, tag);
+        PlayerData data = PlayerData.get(player);
+        NBTTagCompound nbt = data.getVariable(SKILL_STATS_KEY);
+        if (nbt == null){
+            MineFantasyReborn.LOG.error("Skill Stats are null! This is bad, please report");
+            return null;
         }
         return nbt.getCompoundTag(skillname);
     }
 
     public static void initSkills(EntityPlayer player) {
-        for (int id = 0; id < skillsList.size(); id++) {
-            Skill skill = skillsList.get(id);
-            skill.sync(player);
+        PlayerData data = PlayerData.get(player);
+        if (data != null && data.getVariable(SKILL_STATS_KEY) == null){
+            NBTTagCompound nbt = new NBTTagCompound();
+            NBTTagCompound tag = new NBTTagCompound();
+            for (Skill skill : skillsList){
+                if (skill != null) {
+                    skill.init(tag);
+                    tag.setString("name", skill.skillName);
+                    nbt.setTag(skill.skillName, tag);
+                    tag = new NBTTagCompound(); //This is the key to everything
+                    MineFantasyRebornAPI.debugMsg("Initiate skill: " + skill.skillName);
+                }
+            }
+            data.setVariable(SKILL_STATS_KEY, nbt);
         }
     }
 
@@ -67,24 +63,6 @@ public class RPGElements {
 
     public static int getLevel(EntityPlayer player, Skill skill) {
         return RPGElements.getSkill(player, skill.skillName).getInteger("level");
-    }
-
-    /**
-     * Modifies the stamina cost for an ability (-1 means impossible)
-     */
-    public static float getStaminaCostModifier(EntityPlayer player, Skill skill, int minLevel) {
-        NBTTagCompound stat = getSkill(player, skill.skillName);
-        int level = stat.getInteger("level");
-
-        if (level < minLevel) {
-            return -1;
-        } else {
-            if (skill.getMaxLevel() - minLevel <= 0) {
-                return 1.0F;
-            }
-            float progress = (level - minLevel) / (skill.getMaxLevel() - minLevel);
-            return 1.5F - progress;
-        }
     }
 
     public static float getWeaponModifier(EntityPlayer player, Skill skill) {
@@ -102,19 +80,4 @@ public class RPGElements {
         return getSkill(player, skill.skillName).getInteger("level") >= requirement;
     }
 
-    public static Skill getRandomSkill() {
-        int id = rand.nextInt(skillsList.size());
-        return skillsList.get(id);
-    }
-
-    public static void syncAll(EntityPlayer user) {
-        if (!user.world.isRemote) {
-            for (int a = 0; a < skillsList.size(); a++) {
-                Skill skill = skillsList.get(a);
-                if (skill != null) {
-                    skill.sync(user);
-                }
-            }
-        }
-    }
 }
