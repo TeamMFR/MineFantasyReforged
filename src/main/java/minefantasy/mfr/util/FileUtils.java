@@ -1,4 +1,4 @@
-package minefantasy.mfr.recipe;
+package minefantasy.mfr.util;
 
 import org.apache.commons.io.IOUtils;
 

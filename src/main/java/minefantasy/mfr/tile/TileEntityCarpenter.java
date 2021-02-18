@@ -88,6 +88,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
     @Override
     public void markDirty() {
+        // TODO: do we really need to increment this local variable every second and recheck against every recipe and sync data?
         ++ticksExisted;
         super.markDirty();
         if (!world.isRemote) {

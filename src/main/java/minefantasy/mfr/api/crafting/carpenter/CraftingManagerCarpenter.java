@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.crafting.carpenter;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -31,7 +32,7 @@ public class CraftingManagerCarpenter {
 
     private CraftingManagerCarpenter() {
         Collections.sort(this.recipes, new RecipeSorterCarpenter(this));
-        System.out.println("MineFantasy: Carpenter recipes initiating");
+        MineFantasyReborn.LOG.info("MineFantasy: Carpenter recipes initiating");
     }
 
     /**

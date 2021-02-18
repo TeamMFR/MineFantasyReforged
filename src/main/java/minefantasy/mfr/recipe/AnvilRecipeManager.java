@@ -6,19 +6,17 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mfr.config.ConfigCrafting;
-import net.minecraft.item.Item;
+import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
 
@@ -36,6 +34,7 @@ import java.util.TreeMap;
 /**
  * Class responsible for loading and parsing the anvil recipe json files from the assets and config folders
  */
+@SuppressWarnings("Duplicates")
 public class AnvilRecipeManager {
 	public static final List<JsonObject> list = new ArrayList<>();
 
@@ -74,7 +73,7 @@ public class AnvilRecipeManager {
 			loadedCount += loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), DEFAULT_RECIPE_DIRECTORY);
 		}
 
-		MineFantasyReborn.LOG.info("loaded {} anvil recipe(s)", loadedCount);
+		MineFantasyReborn.LOG.info("AnvilRecipeManager: loaded {} anvil recipe(s)", loadedCount);
 	}
 
 	public static int loadRecipesFromSource(File source, String base) {
@@ -124,22 +123,23 @@ public class AnvilRecipeManager {
 		String s = JsonUtils.getString(json, "type");
 
 		/// custom tags of anvil
-		String skill = JsonUtils.getString(json, "skill", "none");
+		String skill_used = JsonUtils.getString(json, "skill_used", "none");
 		String research = JsonUtils.getString(json, "research", "none");
-		boolean hot = JsonUtils.getBoolean(json, "hot", false);
+		boolean output_hot = JsonUtils.getBoolean(json, "output_hot", false);
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		String tool_tier = JsonUtils.getString(json, "tool_tier", "none");
-		int craft_time = JsonUtils.getInt(json, "craft_time",0);
-		byte tool_recipe = JsonUtils.getBoolean(json, "is_tool_recipe") ? (byte) 1 : (byte) 0;
+		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
+		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
+		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
 
 		IRecipe recipe = null;
-		if ("crafting_shaped".equals(s)) {
-			recipe =  deserialize(json);
-		} else if ("crafting_shapeless".equals(s)) {
+
+//		if ("crafting_shaped".equals(s)) {
 			recipe = deserialize(json);
-		} else {
-			throw new JsonSyntaxException("Invalid or unsupported recipe type '" + s + "'");
-		}
+//		} else if ("crafting_shapeless".equals(s)) {
+//			recipe = deserialize(json);
+//		} else {
+//			throw new JsonSyntaxException("Invalid or unsupported recipe type '" + s + "'");
+//		}
 
 		String[] pattern = shrink(patternFromJson(JsonUtils.getJsonArray(json, "pattern")));
 
@@ -147,7 +147,8 @@ public class AnvilRecipeManager {
 
 		NonNullList<Ingredient> e = recipe.getIngredients();
 
-		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
+//		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
+		ItemStack resultStack = minefantasy.mfr.util.JsonUtils.getItemStack(JsonUtils.getJsonObject(json, "result"));
 		Object[] o = new Object[] {};
 
 		for (String p : pattern) {
@@ -156,13 +157,17 @@ public class AnvilRecipeManager {
 			}
 		}
 
-		for ( Map.Entry<Character, Ingredient>  i : map.entrySet()) {
+		byte type = s.equals("CustomToolRecipe") ? (byte) 1 :(byte) 0;
+
+
+		for (Map.Entry<Character, Ingredient> i : map.entrySet()) {
 			if (!Character.isWhitespace(i.getKey())) {
 				o = appendValue(o, i.getKey());
 				o = appendValue(o, i.getValue().getMatchingStacks()[0].getItem());
 			}
 		}
-		CraftingManagerAnvil.getInstance().addRecipe(resultStack, null, research, hot, tool_type, 0, 0,  craft_time, tool_recipe, o);
+//  private IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool,  int hammer, int anvil, int time, byte recipeType, Object... input) {
+		CraftingManagerAnvil.getInstance().addRecipe(resultStack, null, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, o);
 		return recipe;
 	}
 
@@ -214,8 +219,8 @@ public class AnvilRecipeManager {
 
 		// a list of all slots with their matching ingredient ItemStack, 4x4 for Carpenter
 		NonNullList<Ingredient> IngredientList = deserializeIngredients(pattern, map, patternWidth, patternHeight);
-
-		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
+		ItemStack resultStack = minefantasy.mfr.util.JsonUtils.getItemStack(JsonUtils.getJsonObject(json, "result"));
+//		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
 		return new ShapedRecipes(s, patternWidth, patternHeight, IngredientList, resultStack);
 	}
 
@@ -225,8 +230,8 @@ public class AnvilRecipeManager {
 	 *
 	 * @param pattern       The pattern element from the json. Each member of the array corresponds to a pattern line (top->down)
 	 * @param ingredientMap The ingredients with their key mappings and itemStacks which are required to craft this item
-	 * @param patternWidth  The width of the pattern, 4 for Carpenter
-	 * @param patternHeight The height of the pattern, 4 for Carpenter
+	 * @param patternWidth  The width of the pattern, 6 for Anvil
+	 * @param patternHeight The height of the pattern, 4 for Anvil
 	 * @return a list with an itemStack for every pattern element
 	 */
 	private static NonNullList<Ingredient> deserializeIngredients(String[] pattern, Map<String, Ingredient> ingredientMap, int patternWidth, int patternHeight) {
@@ -297,7 +302,7 @@ public class AnvilRecipeManager {
 	private static Ingredient deserializeIngredient(@Nullable JsonElement element) {
 		if (element != null && !element.isJsonNull()) {
 			if (element.isJsonObject()) {
-				return Ingredient.fromStacks(deserializeItem(element.getAsJsonObject(), false));
+				return Ingredient.fromStacks(minefantasy.mfr.util.JsonUtils.getItemStack(element));
 			} else if (!element.isJsonArray()) {
 				throw new JsonSyntaxException("Expected item to be object or array of objects");
 			} else {
@@ -309,7 +314,8 @@ public class AnvilRecipeManager {
 					ItemStack[] aitemstack = new ItemStack[jsonarray.size()];
 
 					for (int i = 0; i < jsonarray.size(); ++i) {
-						aitemstack[i] = deserializeItem(JsonUtils.getJsonObject(jsonarray.get(i), "item"), false);
+
+						aitemstack[i] = minefantasy.mfr.util.JsonUtils.getItemStack(element);
 					}
 
 					return Ingredient.fromStacks(aitemstack);
@@ -317,28 +323,6 @@ public class AnvilRecipeManager {
 			}
 		} else {
 			throw new JsonSyntaxException("Item cannot be null");
-		}
-	}
-
-	/**
-	 * Returns an ItemStack from a json "item" object. An example input object: "item": "minecraft:milk_bucket"
-	 *
-	 * @param jsonObject the item json object with its related properties (registry name, data, count, etc)
-	 * @param useCount   if true, also attempt to set the count of the itemStack
-	 * @return An ItemStack from the item
-	 */
-	private static ItemStack deserializeItem(JsonObject jsonObject, boolean useCount) {
-		String itemRegistryName = JsonUtils.getString(jsonObject, "item");
-		Item item = Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName));
-
-		if (item == null) {
-			throw new JsonSyntaxException("Unknown item '" + itemRegistryName + "'");
-		} else if (item.getHasSubtypes() && !jsonObject.has("data")) {
-			throw new JsonParseException("Missing data for item '" + itemRegistryName + "'");
-		} else {
-			int data = JsonUtils.getInt(jsonObject, "data", 0);
-			int count = useCount ? JsonUtils.getInt(jsonObject, "count", 1) : 1;
-			return new ItemStack(item, count, data);
 		}
 	}
 

@@ -40,8 +40,6 @@ import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.AnvilRecipeManager;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CarpenterRecipeManager;
-import minefantasy.mfr.recipe.RecipeExporter;
-import minefantasy.mfr.recipe.RecipeExporterAnvil;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenMFBase;
 import net.minecraft.init.Items;
@@ -118,8 +116,6 @@ public class MineFantasyReborn {
 		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
 		CarpenterRecipeManager.INSTANCE.loadRecipes();
 
-		AnvilRecipeManager.INSTANCE.initializeAndExportDefaults();
-		AnvilRecipeManager.INSTANCE.loadRecipes();
 
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
 		MineFantasyReborn.LOG.info("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
@@ -199,11 +195,13 @@ public class MineFantasyReborn {
 
 		MetalMaterial.addHeatables();
 
+		AnvilRecipeManager.INSTANCE.initializeAndExportDefaults();
+		AnvilRecipeManager.INSTANCE.loadRecipes();
 		PROXY.postInit(postEvent);
 
 		// enabling this will dump all carpenter recipes to jsons! see RecipeExporter for path
-		 //RecipeExporter exporter = new RecipeExporter();
-		//RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
+//		 RecipeExporter exporter = new RecipeExporter();
+//		RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
 	}
 
 	@EventHandler

@@ -8,23 +8,19 @@ import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mfr.api.crafting.carpenter.ShapedCarpenterRecipes;
 import net.minecraft.item.ItemStack;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 /**
  * Class which can be used to serialize jsons from the recipes in the MFR recipe registry
  */
-public class RecipeExporter {
+public class RecipeExporterCarpenter {
 
-	public RecipeExporter() {
+	public RecipeExporterCarpenter() {
 		exportRecipes();
 	}
 
@@ -89,13 +85,9 @@ public class RecipeExporter {
 
 			Map<Character, String> keyMap = new HashMap<>();
 
-			if (recipeUniqueIngredientItemList.contains("minefantasyreborn:guts")) {
-				System.out.println("stop here");
-			}
-
 			for (String item : recipeUniqueIngredientItemList) {
 
-				String trimmed = stripNamespace(item);
+				String trimmed = RecipeHelper.stripNamespace(item);
 
 				if (!keyMap.keySet().contains(trimmed.toUpperCase().charAt(0))) {
 					keyMap.put(trimmed.toUpperCase().charAt(0), item);
@@ -112,7 +104,7 @@ public class RecipeExporter {
 				} else {
 					boolean foundKey = false;
 					while (!foundKey) {
-						Character character = Character.toUpperCase(getRandomChar());
+						Character character = Character.toUpperCase(RecipeHelper.getRandomChar());
 						if (!keyMap.keySet().contains(character)) {
 							keyMap.put(Character.toUpperCase(character), item);
 							foundKey = true;
@@ -148,9 +140,6 @@ public class RecipeExporter {
 					}
 					String curritem = (itemStack.getItem().getRegistryName().toString());
 					Character character = reverseKeyMap.get(curritem);
-					if (character == null) {
-						System.out.println("stop here");
-					}
 
 					char[] myNameChars = pattern[row].toCharArray();
 					myNameChars[column] = character;
@@ -217,49 +206,24 @@ public class RecipeExporter {
 			tempRecipe.sound = sound;
 			tempRecipe.pattern = pattern;
 
-			//		tempRecipe.key = key;
 			tempRecipe.result = result;
 
-			// just in case..
-			//g.toJson(tempRecipe);
 
 			tempRecipe.key = key;
 
 			String fileName = iCarpenterRecipe.getRecipeOutput().getItem().getRegistryName().toString();
-			String trimmedName = stripNamespace(fileName);
+			String trimmedName = RecipeHelper.stripNamespace(fileName);
+			String filePath = "C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\";
+			RecipeHelper.writeFile(filePath, trimmedName, tempRecipe, g);
 
-			// Java objects to File
-			//		for (int m = 0; m < 3; i++) {
 
-			// check if file already exists
-			File tmp = new File("C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\" + trimmedName + ".json");
-			boolean exists = tmp.exists();
-
-			if (exists) {
-				int index = 1;
-				while (exists) {
-					index++;
-					File tmpFile = new File("C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\" + trimmedName + "-" + index + ".json");
-					exists = tmpFile.exists();
-				}
-				trimmedName += "-" + index;
-
-			}
-
-			try (FileWriter writer = new FileWriter("C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\" + trimmedName + ".json")) {
-				g.toJson(tempRecipe, writer);
-			}
-			catch (IOException e) {
-				System.out.println("Error during writing recipe json file:");
-				e.printStackTrace();
-			}
 		}
 	}
 
 	/**
 	 * Temporary recipe object which can be printed to json with gson
 	 */
-	private class TempRecipe {
+	public class TempRecipe {
 
 		public String type;
 		public String skill;
@@ -275,59 +239,7 @@ public class RecipeExporter {
 		public Map<Character, Map<String, Object>> key;
 		public Map<String, Object> result;
 
-		TempRecipe() {}
+		public TempRecipe() {}
 
-
-		/** Sample output
-		 * {
-		 *   "type": "crafting_shaped",
-		 *   "skill": "none",
-		 *   "research": "advblackpowder",
-		 *   "tool_type": "hands",
-		 *   "is_tool_recipe": false,
-		 *   "block_tier": -1,
-		 *   "craft_time": 10,
-		 *   "recipe_hammer": -1,
-		 *   "experience": 0,
-		 *   "sound": "minecraft:block.wood.step",
-		 *   "pattern": [
-		 *     " B  ",
-		 *     "RGR ",
-		 *     " C  ",
-		 *     "    "
-		 *   ],
-		 *   "key": {
-		 *     "B": {
-		 *       "item": "minefantasyreborn:blackpowder"
-		 *     },
-		 *     "R": {
-		 *       "item": "minecraft:redstone"
-		 *     },
-		 *     "C": {
-		 *       "item": "minefantasyreborn:clay_pot"
-		 *     },
-		 *     "G": {
-		 *       "item": "minecraft:glowstone_dust"
-		 *     }
-		 *   },
-		 *   "result": {
-		 *     "item": "minefantasyreborn:blackpowder_advanced"
-		 *   }
-		 * }
-		 */
-	}
-
-	/**
-	 * Returns a random Character from a-z
-	 * @return
-	 */
-	private static Character getRandomChar() {
-		Random r = new Random();
-		char c = (char) (r.nextInt(26) + 'a');
-		return c;
-	}
-
-	private static String stripNamespace(String string) {
-		return string.replaceAll(".+:", "");
 	}
 }

@@ -11,6 +11,7 @@ import com.google.gson.JsonSyntaxException;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mfr.config.ConfigCrafting;
+import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -330,7 +331,7 @@ public class CarpenterRecipeManager {
 	 */
 	private static ItemStack deserializeItem(JsonObject jsonObject, boolean useCount) {
 		String itemRegistryName = JsonUtils.getString(jsonObject, "item");
-		Item item = Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName));
+		Item item = Item.getByNameOrId(itemRegistryName);
 
 		if (item == null) {
 			throw new JsonSyntaxException("Unknown item '" + itemRegistryName + "'");
