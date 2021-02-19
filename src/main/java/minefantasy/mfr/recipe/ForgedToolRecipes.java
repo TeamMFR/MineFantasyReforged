@@ -10,7 +10,6 @@ import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -28,7 +27,6 @@ public class ForgedToolRecipes {
         addMetalComponents();
 
         ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-        ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
 
         for (CustomMaterial customMat : metal) {
             ItemStack bar = ComponentListMFR.BAR.createComm(customMat.name);
@@ -65,9 +63,6 @@ public class ForgedToolRecipes {
 
     private static void addComponentTools() {
         Item bar = ComponentListMFR.BAR;
-        Item plank = ComponentListMFR.TIMBER;
-        Item strip = ComponentListMFR.LEATHER_STRIP;
-        Item rivet = ComponentListMFR.RIVET;
         Item hunk = ComponentListMFR.METAL_HUNK;
 
         int time = 10;
@@ -91,10 +86,6 @@ public class ForgedToolRecipes {
         Salvage.addSalvage(ComponentListMFR.BODKIN_HEAD, hunk);
         Salvage.addSalvage(ComponentListMFR.BROAD_HEAD, hunk);
 
-        time = 1;
-        KnowledgeListMFR.arrowR.add(MineFantasyRebornAPI.addCarpenterToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_ARROW, "arrows", SoundEvents.BLOCK_WOOD_HIT, 1, "H", "F", 'F', ComponentListMFR.FLETCHING, 'H', ComponentListMFR.ARROWHEAD));
-        KnowledgeListMFR.arrowR.add(MineFantasyRebornAPI.addCarpenterToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_ARROW_BODKIN, "arrowsBodkin", SoundEvents.BLOCK_WOOD_HIT, 1, "H", "F", 'F', ComponentListMFR.FLETCHING, 'H', ComponentListMFR.BODKIN_HEAD));
-        KnowledgeListMFR.arrowR.add(MineFantasyRebornAPI.addCarpenterToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_ARROW_BROAD, "arrowsBroad", SoundEvents.BLOCK_WOOD_HIT, 1, "H", "F", 'F', ComponentListMFR.FLETCHING, 'H', ComponentListMFR.BROAD_HEAD));
         Salvage.addSalvage(CustomToolListMFR.STANDARD_ARROW, ComponentListMFR.ARROWHEAD, ComponentListMFR.FLETCHING);
         Salvage.addSalvage(CustomToolListMFR.STANDARD_ARROW_BODKIN, ComponentListMFR.BODKIN_HEAD, ComponentListMFR.FLETCHING);
         Salvage.addSalvage(CustomToolListMFR.STANDARD_ARROW_BROAD, ComponentListMFR.BROAD_HEAD, ComponentListMFR.FLETCHING);

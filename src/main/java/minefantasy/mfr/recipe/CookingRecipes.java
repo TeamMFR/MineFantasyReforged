@@ -1,14 +1,14 @@
 package minefantasy.mfr.recipe;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.FoodListMFR;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CookingRecipes {
     public static void init() {
