@@ -39,6 +39,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
@@ -49,6 +50,9 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     private static final DataParameter<String> CUSTOM_MATERIAL = EntityDataManager.<String>createKey(EntityCogwork.class, DataSerializers.STRING);
@@ -63,7 +67,6 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     public static float rating_modifier = 1.0F;
     public static float health_modifier = 1.0F;
     private int noMoveTime = 0;
-    private ItemStack items;
     private float forwardControl, strafeControl;
     private boolean jumpControl;
     private int jumpTimer = 0;
@@ -98,6 +101,17 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         this.dataManager.register(BOLTS, Integer.valueOf(0));
     }
 
+    /**
+     * For vehicles, the first passenger is generally considered the controller and "drives" the vehicle. For example,
+     * Pigs, Horses, and Boats are generally "steered" by the controlling passenger.
+     */
+    @Override
+    @Nullable
+    public Entity getControllingPassenger()
+    {
+        return this.getPassengers().isEmpty() ? null : (Entity)this.getPassengers().get(0);
+    }
+
     public int getBolts() {
         return this.dataManager.get(BOLTS);
     }
@@ -127,16 +141,16 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     public ItemStack getHeldItemMainhand() {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     public Iterable<ItemStack> getArmorInventoryList() {
-        return null;
+        return NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
     }
 
     @Override
     public ItemStack getItemStackFromSlot(EntityEquipmentSlot slotIn) {
-        return null;
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -147,7 +161,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     @Override
     public ItemStack getActiveItemStack()
     {
-        return items;
+        return activeItemStack;
     }
 
     @Override
@@ -170,28 +184,28 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
          * if(isSprinting()) { if(riddenByEntity == null || this.getMoveForward() <= 0
          * || !isPowered()) { setSprinting(false); } }
          */
-        if (this.isBeingRidden()) {
+        if (this.getControllingPassenger() != null) {
             stepHeight = general_step_height;
             updateRider();
-            if (getRidingEntity() != null && getRidingEntity().isBurning() && this.isFullyArmoured()) {
-                getRidingEntity().extinguish();
+            if (getControllingPassenger().isBurning() && this.isFullyArmoured()) {
+                getControllingPassenger().extinguish();
             }
 
             // ARROWS
-            if (getRidingEntity() instanceof EntityLivingBase) {
-                int arrows = ((EntityLivingBase) getRidingEntity()).getArrowCountInEntity();
-                ((EntityLivingBase) getRidingEntity()).setArrowCountInEntity(0);
+            if (getControllingPassenger() instanceof EntityLivingBase) {
+                int arrows = ((EntityLivingBase) getControllingPassenger()).getArrowCountInEntity();
+                ((EntityLivingBase) getControllingPassenger()).setArrowCountInEntity(0);
                 int my_arrows = this.getArrowCountInEntity();
                 this.setArrowCountInEntity(my_arrows + arrows);
 
                 if (this.isFullyArmoured()) {
-                    ((EntityLivingBase) getRidingEntity()).setAir(300);
+                    getControllingPassenger().setAir(300);
                 }
 
                 if (ticksExisted % 20 == 0) {
                     for (int a = 0; a < 4; a++) {
-                        if (!allowEquipment((EntityLivingBase) getRidingEntity())) {
-                            dismountRidingEntity();
+                        if (!allowEquipment((EntityLivingBase) getControllingPassenger())) {
+                            getControllingPassenger().dismountRidingEntity();
                             break;
                         }
                     }
@@ -199,16 +213,15 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
             }
 
             // DAMAGE
-            if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D
-                    && this.rand.nextInt(5) == 0) {
+            if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D && this.rand.nextInt(5) == 0) {
                 int i = MathHelper.floor(this.posX);
                 int j = MathHelper.floor(this.posY - 0.20000000298023224D - this.getMountedYOffset());
                 int k = MathHelper.floor(this.posZ);
                 BlockPos pos = new BlockPos(i,j,k);
                 IBlockState state = this.world.getBlockState(pos);
 
-                if (state.getMaterial() != Material.AIR) {
-                    this.world.spawnParticle(EnumParticleTypes.BLOCK_DUST, this.posX + (this.rand.nextFloat() - 0.5D) * this.width, this.getCollisionBox(this).minY + 0.1D, this.posZ + (this.rand.nextFloat() - 0.5D) * this.width, 4.0D * (this.rand.nextFloat() - 0.5D), 0.5D, (this.rand.nextFloat() - 0.5D) * 4.0D);
+                if (state.getMaterial() == Material.GROUND) {
+                    //this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + (this.rand.nextFloat() - 0.5D) * this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + (this.rand.nextFloat() - 0.5D) * this.width, 4.0D * (this.rand.nextFloat() - 0.5D), 0.5D, (this.rand.nextFloat() - 0.5D) * 4.0D);
                 }
                 if (!world.isRemote && ConfigArmour.cogworkGrief) {
                     damageBlock(state.getBlock(), pos, world.getBlockState(pos));
@@ -244,7 +257,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     /**
      * Rate of constant fuel droppage
      *
-     * @return
+     * @return fuelDecay
      */
     private float getFuelDecay() {
         return getFuelCost() * (isSprinting() ? 3.0F : 1.0F);
@@ -252,18 +265,18 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     private void damageBlock(Block block, BlockPos pos, IBlockState state) {
         if (block == Blocks.GRASS || block == Blocks.FARMLAND) {
-            world.setBlockState(pos, (IBlockState) Blocks.DIRT);
+            world.setBlockState(pos, (Blocks.DIRT).getDefaultState());
         }
         if (state.getMaterial() == Material.GLASS) {
             world.setBlockToAir(pos);
             this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.BLOCKS, 1.0F, 0.9F + (rand.nextFloat() * 0.2F), true);
         }
         if (block == Blocks.ICE) {
-            world.setBlockState(pos, (IBlockState) Blocks.WATER);
+            world.setBlockState(pos, (Blocks.WATER).getDefaultState());
             this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_GLASS_BREAK, SoundCategory.BLOCKS, 1.0F, 0.9F + (rand.nextFloat() * 0.2F), true);
         }
         if (state.getMaterial() == Material.LEAVES) {
-            world.setBlockState(pos, (IBlockState) Blocks.WATER);
+            world.setBlockState(pos, (Blocks.WATER).getDefaultState());
             this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.BLOCKS, 1.0F, 0.9F + (rand.nextFloat() * 0.2F), true);
         }
     }
@@ -291,17 +304,17 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         if (!isPowered())
             return;
 
-        if (world.isRemote && getRidingEntity() != null && getRidingEntity() instanceof EntityPlayer) {
-            float forward = ((EntityPlayer) getRidingEntity()).moveForward;
-            float strafe = ((EntityPlayer) getRidingEntity()).moveStrafing;
+        if (world.isRemote && getControllingPassenger() != null && getControllingPassenger() instanceof EntityPlayer) {
+            float forward = ((EntityPlayer) getControllingPassenger()).moveForward;
+            float strafe = ((EntityPlayer) getControllingPassenger()).moveStrafing;
 
-            if (getRidingEntity() instanceof EntityPlayerMP) {
-                boolean jump = ClientProxy.isUserJumpCommand(getRidingEntity());
+            if (getControllingPassenger() instanceof EntityPlayerMP) {
+                boolean jump = ClientProxy.isUserJumpCommand(getControllingPassenger());
                 if (jump != jumpControl || forward != forwardControl || strafe != strafeControl) {
                     this.forwardControl = forward;
                     this.strafeControl = strafe;
                     this.jumpControl = jump;
-                    NetworkHandler.sendToPlayer((EntityPlayerMP) getRidingEntity(), new CogworkControlPacket(this, getRidingEntity()));
+                    NetworkHandler.sendToPlayer((EntityPlayerMP) getControllingPassenger(), new CogworkControlPacket(this, getControllingPassenger()));
                 }
             }
         }
@@ -343,7 +356,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     public boolean isSprinting() {
-        return isPowered() && forwardControl > 0 && getRidingEntity() != null && getRidingEntity().isSprinting();
+        return isPowered() && forwardControl > 0 && getControllingPassenger() != null && getControllingPassenger().isSprinting();
     }
 
     public float getMoveForward() {
@@ -368,7 +381,6 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     public void setJumpControl(boolean b) {
         this.jumpControl = b;
-        ;
     }
 
     protected void applyEntityAttributes() {
@@ -384,7 +396,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     public EnumHandSide getPrimaryHand() {
-        return null;
+        return EnumHandSide.RIGHT;
     }
 
     @Override
@@ -399,7 +411,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     public boolean canBeCollidedWith() {
-        return getRidingEntity() == null && super.canBeCollidedWith();
+        return getControllingPassenger() == null && super.canBeCollidedWith();
     }
 
     @Override
@@ -413,8 +425,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
             return false;
         }
 
-        ItemStack item = user.getHeldItem(hand);
-        if (item != null) {
+        ItemStack item = user.getHeldItemMainhand();
+        if (!item.isEmpty()) {
             float fuel_item = PowerArmour.getFuelValue(item);
             if (fuel_item > 0) {
                 float fuel = getFuel();
@@ -430,7 +442,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                         item.shrink(1);
 
                         ItemStack container = item.getItem().getContainerItem(item);
-                        if (container != null) {
+                        if (!container.isEmpty()) {
                             if (item.getCount() >= 1) {
                                 if (!user.inventory.addItemStackToInventory(container)) {
                                     user.entityDropItem(container, 0F);
@@ -444,7 +456,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                 }
                 return true;
             }
-            if (this.getRidingEntity() != null) {
+            if (this.getControllingPassenger() != null) {
                 return false;
             }
             if (this.isUnderRepairFrame()) {
@@ -469,7 +481,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                         if (!user.capabilities.isCreativeMode) {
                             item.shrink(1);
                             if (item.getCount() <= 0) {
-                                user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+                                user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
                             }
                         }
                         user.swingArm(hand);
@@ -502,7 +514,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                 }
             }
         }
-        if (user.getRidingEntity() == null) {
+        if (user.getControllingPassenger() == null) {
             if (this.allowEquipment(user)) {
                 this.noMoveTime = 20;
                 user.moveForward = user.moveStrafing = 0F;
@@ -550,29 +562,28 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     public boolean isPowered() {
-        return noMoveTime == 0 && getFuel() > 0 && isBeingRidden();
+        return noMoveTime == 0 && getFuel() > 0 && getControllingPassenger() != null;
     }
 
     @Override
-    public void moveRelative(float strafe, float up, float forward, float friction) {
-        if (isPowered() && this.getRidingEntity() != null && this.getRidingEntity() instanceof EntityLivingBase) {
-            EntityLivingBase user = (EntityLivingBase) getRidingEntity();
+    public void travel(float strafe, float vertical, float forward) {
+        if (isPowered() && this.getControllingPassenger() != null && this.getControllingPassenger() instanceof EntityLivingBase) {
+            EntityLivingBase user = (EntityLivingBase) getControllingPassenger();
 
-            this.prevRotationYaw = this.rotationYaw = this.getRidingEntity().rotationYaw;
-            this.rotationPitch = this.getRidingEntity().rotationPitch * 0.5F;
+            this.prevRotationYaw = this.rotationYaw = this.getControllingPassenger().rotationYaw;
+            this.rotationPitch = this.getControllingPassenger().rotationPitch * 0.5F;
             this.setRotation(this.rotationYaw, this.rotationPitch);
             this.rotationYawHead = this.renderYawOffset = this.rotationYaw;
             strafe = MathHelper.clamp(this.getMoveStrafe(), -1F, 1F) * 0.5F;
-            up = MathHelper.clamp(this.getMoveForward(), -1F, 1F) * 0.5F;
+            forward = MathHelper.clamp(this.getMoveForward(), -1F, 1F) * 0.5F;
 
-            if (up <= 0.0F) {
-                up *= 0.5F;// Backstep slower
+            if (forward <= 0.0F) {
+                forward *= 0.5F;// Backstep slower
             }
 
             if (!this.world.isRemote) {
-                this.setAIMoveSpeed(
-                        (float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
-                moveCogwork(strafe, up);
+                this.setAIMoveSpeed((float) this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+                moveCogwork(strafe, forward);
             }
 
             user.prevLimbSwingAmount = user.limbSwingAmount;
@@ -587,7 +598,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
             user.limbSwingAmount += (f4 - user.limbSwingAmount) * 0.4F;
             user.limbSwing += user.limbSwingAmount;
         } else {
-            super.moveRelative(strafe, up, 1.0F, 1.0F);
+            super.moveRelative(strafe, forward, 1.0F, 1.0F);
         }
     }
 
@@ -595,15 +606,14 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         return isSprinting() ? 2.0F : 1.0F;
     }
 
-    public void moveCogwork(float strafe, float up) {
+    public void moveCogwork(float strafe, float forward) {
         double d0;
 
         if (this.isInWater() || this.isInLava()) {
             d0 = this.posY;
             this.motionY -= 0.03D;
 
-            if (this.collidedHorizontally && this.isOffsetPositionInLiquid(this.motionX,
-                    this.motionY + 0.6000000238418579D - this.posY + d0, this.motionZ)) {
+            if (this.collidedHorizontally && this.isOffsetPositionInLiquid(this.motionX, this.motionY + 0.6000000238418579D - this.posY + d0, this.motionZ)) {
                 this.motionY = 0.30000001192092896D;
             }
         }
@@ -611,27 +621,25 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
             float f2 = 0.91F;
 
             if (this.onGround) {
-				f2 = this.world
-						.getBlockState(new BlockPos(MathHelper.floor(this.posX),
-								MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
+				f2 = this.world.getBlockState(new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.getEntityBoundingBox().minY) - 1, MathHelper.floor(this.posZ))).getBlock().slipperiness * 0.91F;
             }
 
             float f3 = 0.16277136F / (f2 * f2 * f2);
-            float forward;
+            float up;
 
             if (this.onGround) {
-                forward = this.getAIMoveSpeed() * f3;
+                up = this.getAIMoveSpeed() * f3;
             } else {
-                forward = this.jumpMovementFactor;
+                up = this.jumpMovementFactor;
             }
-            if (getRidingEntity() == null) {
-                forward = 0F;
+            if (getControllingPassenger() == null) {
+                up = 0F;
             }
             if (isSprinting()) {
-                forward *= 2.0F;
+                up *= 2.0F;
             }
 
-            this.moveRelative(strafe, forward, forward, 0.02F);
+            this.move(MoverType.SELF, up, forward, 0.02F);
             f2 = 0.91F;
 
             if (this.onGround) {
@@ -764,7 +772,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
     @Override
     public float getAIMoveSpeed() {
-        return getRidingEntity() == null ? 1F : super.getAIMoveSpeed();
+        return getControllingPassenger() == null ? 1F : super.getAIMoveSpeed();
     }
 
     @Override
@@ -783,8 +791,8 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
      * @param shouldPass is used to determine if the wearer should take the hit
      */
     public boolean attackEntityFrom(DamageSource source, float damage, boolean shouldPass) {
-        if (shouldPass && isBeingRidden()) {
-            return this.getRidingEntity().attackEntityFrom(source, damage);
+        if (shouldPass && this.getControllingPassenger() != null) {
+            return this.getControllingPassenger().attackEntityFrom(source, damage);
         }
 
         if (source.isExplosion()) {
@@ -855,7 +863,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         }
 
         if (isFrame) {
-            if (canDestroy && isBeingRidden()) {
+            if (canDestroy && getControllingPassenger() == null) {
                 setHealth(0);
             } else {
                 setHealth(getMaxHealth());
@@ -911,14 +919,18 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     @Override
     protected void collideWithEntity(Entity hit) {
         super.collideWithEntity(hit);
-        if (!isSprinting() || !isPowered() || hit == getRidingEntity()) {
+        if (!isSprinting() || !isPowered() || hit == getControllingPassenger()) {
             return;
         }
         this.playSound(this.getHurtSound(this.getLastDamageSource()), this.getSoundVolume(), this.getSoundPitch());
         float modifier = width * width * height / hit.width * hit.width * hit.height;// compare volume
         float force = (float) Math.hypot(motionX, motionZ) * modifier;
         TacticalManager.knockbackEntity(hit, this, force, force / 4F);
-        hit.attackEntityFrom(DamageSource.causeMobDamage((getRidingEntity() != null && getRidingEntity() instanceof EntityLivingBase) ? (EntityLivingBase) getRidingEntity() : this), force);
+        hit.attackEntityFrom(
+                DamageSource.causeMobDamage((getControllingPassenger() != null && getControllingPassenger() instanceof EntityLivingBase)
+                        ? (EntityLivingBase) getControllingPassenger()
+                        : this),
+                force);
     }
 
     /**
@@ -926,7 +938,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
      * finished)
      */
     public Shockwave newShockwave(double x, double y, double z, float power, boolean fire, boolean grief) {
-        Shockwave explosion = new Shockwave("humanstomp", world, this.getRidingEntity() != null ? this.getRidingEntity() : this, x, y, z, power);
+        Shockwave explosion = new Shockwave("humanstomp", world, this.getControllingPassenger() != null ? this.getControllingPassenger() : this, x, y, z, power);
         explosion.isFlaming = fire;
         explosion.isGriefing = grief;
         explosion.isSmoking = grief;
@@ -969,7 +981,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
             if (this.inPortal) {
                 if (minecraftserver.getAllowNether()) {
-                    if (isBeingRidden() && this.portalCounter++ >= i) {
+                    if (this.getControllingPassenger() == null && this.portalCounter++ >= i) {
                         this.portalCounter = i;
                         this.timeUntilPortal = this.getPortalCooldown();
                         byte dimID;
@@ -1005,10 +1017,10 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     @Override
     public Entity changeDimension(int id) {
         if (isBeingRidden()) {
-            getRidingEntity().changeDimension(id);
+            getControllingPassenger().changeDimension(id);
         }
         super.changeDimension(id);
-        return getRidingEntity();
+        return getControllingPassenger();
     }
 
     @Override

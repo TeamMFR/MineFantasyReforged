@@ -24,11 +24,14 @@ import minefantasy.mfr.client.render.entity.RenderDragonBreath;
 import minefantasy.mfr.client.render.entity.RenderFireBlast;
 import minefantasy.mfr.client.render.entity.RenderHound;
 import minefantasy.mfr.client.render.entity.RenderMine;
+import minefantasy.mfr.client.render.entity.RenderMinotaur;
 import minefantasy.mfr.client.render.entity.RenderParachute;
+import minefantasy.mfr.client.render.entity.RenderPowerArmour;
 import minefantasy.mfr.client.render.entity.RenderShrapnel;
 import minefantasy.mfr.client.render.entity.RenderSmoke;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.entity.EntityBomb;
+import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import minefantasy.mfr.entity.EntityFireBlast;
 import minefantasy.mfr.entity.EntityMine;
@@ -37,6 +40,7 @@ import minefantasy.mfr.entity.EntityShrapnel;
 import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
+import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.mechanics.ExtendedReachMFR;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
@@ -148,11 +152,11 @@ public class ClientProxy extends ClientProxyBase {
         RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, RenderSmoke::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, RenderDragonBreath::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
-        //RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, new RenderPowerArmour()); //TODO: Fix if necessary
+        RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, RenderPowerArmour::new);
 
         RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, RenderDragon::new);
-        // RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, new RenderMinotaur(new ModelMinotaur(), 1.5F));//TODO: Fix if necessary
-        RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, new RenderHound(new ModelHound()));
+        RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, RenderMinotaur::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, RenderHound::new);
     }
 
     @Override

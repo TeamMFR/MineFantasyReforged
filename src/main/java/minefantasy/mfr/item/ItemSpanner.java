@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.material.Material;
@@ -246,7 +247,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
                 }
             }
         } else {

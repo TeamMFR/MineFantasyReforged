@@ -4,10 +4,17 @@ import minefantasy.mfr.entity.mob.EntityMinotaur;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelMinotaur extends ModelBiped {
+
+    ModelRenderer bipedHead;
+    ModelRenderer bipedBody;
+    ModelRenderer bipedLeftArm;
+    ModelRenderer bipedLeftLeg;
+    ModelRenderer bipedRightArm;
+    ModelRenderer bipedRightLeg;
+
     ModelRenderer Nose;
     ModelRenderer Mane;
     ModelRenderer bipedLeftForearm;
@@ -215,17 +222,17 @@ public class ModelMinotaur extends ModelBiped {
         warlordhelm.render(f5);
     }
 
-    public void setRotationAngles(EntityMinotaur mino, float f, float f1, float f2, float f3, float f4, float f5) {
+    public void setRotationAngles(EntityMinotaur mino, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor) {
         int swingAngle = 28 * mino.swing;
         double swingRad = Math.toRadians(swingAngle);
 
         int swingAngleY = 9 * mino.swing;
         double swingRadY = Math.toRadians(swingAngleY);
-        bipedHead.rotateAngleY = f3 / 57.29578F;
-        bipedHead.rotateAngleX = f4 / 57.29578F + (float) Math.toRadians(mino.getHeadChargeAngle());
+        bipedHead.rotateAngleY = netHeadYaw / 57.29578F;
+        bipedHead.rotateAngleX = headPitch / 57.29578F + (float) Math.toRadians(mino.getHeadChargeAngle());
         if (mino.swing <= 0) {
-            bipedRightArm.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 2.0F * f1 * 0.5F;
-            bipedLeftArm.rotateAngleX = MathHelper.cos(f * 0.6662F) * 2.0F * f1 * 0.5F;
+            bipedRightArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.141593F) * 2.0F * limbSwingAmount * 0.5F;
+            bipedLeftArm.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.0F * limbSwingAmount * 0.5F;
             bipedRightArm.rotateAngleY = 0.0F;
             bipedLeftArm.rotateAngleY = 0.0F;
         } else {
@@ -236,8 +243,8 @@ public class ModelMinotaur extends ModelBiped {
         }
         bipedRightArm.rotateAngleZ = 0.0F;
         bipedLeftArm.rotateAngleZ = 0.0F;
-        bipedRightLeg.rotateAngleX = MathHelper.cos(f * 0.6662F) * 1.4F * f1;
-        bipedLeftLeg.rotateAngleX = MathHelper.cos(f * 0.6662F + 3.141593F) * 1.4F * f1;
+        bipedRightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
+        bipedLeftLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + 3.141593F) * 1.4F * limbSwingAmount;
         bipedRightLeg.rotateAngleY = 0.0F;
         bipedLeftLeg.rotateAngleY = 0.0F;
 
@@ -274,22 +281,27 @@ public class ModelMinotaur extends ModelBiped {
             bipedRightArm.rotateAngleY += bipedBody.rotateAngleY * 2.0F;
             bipedRightArm.rotateAngleZ = MathHelper.sin(swingProgress * 3.141593F) * -0.4F;
         }
-        if (mino.getRidingEntity() != null) {
+        if (mino.isBeingRidden()) {
             bipedLeftArm.rotateAngleX = (float) Math.toRadians(180F);
         }
-        if (mino.getAttack() == 3 && mino.getHeldItem(EnumHand.MAIN_HAND) == null)// if is power attack
+        if (mino.getAttack() == 3 && mino.getHeldItemMainhand() == null)// if is power attack
         {
             bipedLeftArm.rotateAngleX = (float) Math.toRadians(-135F);
             bipedRightArm.rotateAngleX = (float) Math.toRadians(-135F);
         }
 
-        bipedRightArm.rotateAngleZ += MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
-        bipedLeftArm.rotateAngleZ -= MathHelper.cos(f2 * 0.09F) * 0.05F + 0.05F;
-        bipedRightArm.rotateAngleX += MathHelper.sin(f2 * 0.067F) * 0.05F;
-        bipedLeftArm.rotateAngleX -= MathHelper.sin(f2 * 0.067F) * 0.05F;
+        bipedRightArm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+        bipedLeftArm.rotateAngleZ -= MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;
+        bipedRightArm.rotateAngleX += MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
+        bipedLeftArm.rotateAngleX -= MathHelper.sin(ageInTicks * 0.067F) * 0.05F;
 
-        bipedLeftThigh.rotateAngleX = bipedLeftFoot.rotateAngleX = bipedLeftLeg.rotateAngleX;
-        bipedRightThigh.rotateAngleX = bipedRightFoot.rotateAngleX = bipedRightLeg.rotateAngleX;
+
+        copyModelAngles(this.bipedLeftLeg, this.bipedLeftThigh);
+        copyModelAngles(this.bipedLeftLeg, this.bipedLeftFoot);
+        copyModelAngles(this.bipedRightLeg, this.bipedRightThigh);
+        copyModelAngles(this.bipedRightLeg, this.bipedRightFoot);
+//        bipedLeftThigh.rotateAngleX = bipedLeftFoot.rotateAngleX = bipedLeftLeg.rotateAngleX;
+//        bipedRightThigh.rotateAngleX = bipedRightFoot.rotateAngleX = bipedRightLeg.rotateAngleX;
 
         joinBlocks(Mane, bipedBody);
         joinBlocks(trapezius, bipedBody);

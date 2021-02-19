@@ -7,6 +7,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -140,7 +141,7 @@ public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegiste
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
                 }
             }
         } else {

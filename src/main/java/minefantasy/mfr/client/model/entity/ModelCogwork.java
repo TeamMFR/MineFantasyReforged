@@ -183,8 +183,8 @@ public class ModelCogwork extends ModelBiped {
             EntityPlayer player = (EntityPlayer) entity;
 
             ItemStack itemstack = player.getHeldItem(EnumHand.MAIN_HAND);
-            rightArmPose = itemstack == null ? ArmPose.EMPTY : ArmPose.ITEM;
-            if (itemstack != null && player.getItemInUseCount() > 0) {
+            rightArmPose = itemstack.isEmpty() ? ArmPose.EMPTY : ArmPose.ITEM;
+            if (!itemstack.isEmpty() && player.getItemInUseCount() > 0) {
                 EnumAction enumaction = itemstack.getItemUseAction();
 
                 if (enumaction == EnumAction.BLOCK) {

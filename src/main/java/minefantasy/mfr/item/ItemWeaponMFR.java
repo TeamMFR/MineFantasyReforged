@@ -29,6 +29,7 @@ import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -503,7 +504,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
                 }
             }
             return;

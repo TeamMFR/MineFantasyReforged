@@ -17,6 +17,7 @@ import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtByTarget;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
+import net.minecraft.entity.ai.EntityAISit;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITargetNonTamed;
 import net.minecraft.entity.ai.EntityAIWander;
@@ -29,7 +30,6 @@ import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityRabbit;
 import net.minecraft.entity.passive.EntitySheep;
 import net.minecraft.entity.passive.EntityTameable;
-import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -77,6 +77,7 @@ public class EntityHound extends EntityTameable {
     public EntityHound(World world) {
         super(world);
         this.setSize(0.6F, 0.8F);
+        this.aiSit = new EntityAISit(this);
         this.tasks.addTask(1, new EntityAISwimming(this));
         this.tasks.addTask(1, new AI_CommonSprint(this, 16.0F));
         this.tasks.addTask(2, this.aiSit);
@@ -381,7 +382,7 @@ public class EntityHound extends EntityTameable {
                         this.heal(itemfood.getHealAmount(itemstack));
 
                         if (itemstack.getCount() <= 0) {
-                            user.inventory.setInventorySlotContents(user.inventory.currentItem, null);
+                            user.inventory.setInventorySlotContents(user.inventory.currentItem, ItemStack.EMPTY);
                         }
 
                         return true;
@@ -410,13 +411,13 @@ public class EntityHound extends EntityTameable {
                 this.navigator.clearPath();
                 this.setAttackTarget((EntityLivingBase) null);
             }
-        } else if (itemstack != null && itemstack.getItem() == Items.BONE && !this.isAngry()) {
+        } else if (!itemstack.isEmpty() && itemstack.getItem() == Items.BONE && !this.isAngry()) {
             if (!user.capabilities.isCreativeMode) {
                 itemstack.shrink(1);
             }
 
             if (itemstack.getCount() <= 0) {
-                user.inventory.setInventorySlotContents(user.inventory.currentItem, (ItemStack) null);
+                user.inventory.setInventorySlotContents(user.inventory.currentItem, ItemStack.EMPTY);
             }
 
             if (!this.world.isRemote) {

@@ -1,5 +1,6 @@
 package minefantasy.mfr.material;
 
+import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.ComponentListMFR;
@@ -159,7 +160,8 @@ public class MetalMaterial extends CustomMaterial {
 
     @Override
     public ItemStack getItemStack() {
-        NonNullList<ItemStack> list = OreDictionary.getOres("ingot" + name);
+        String camelCaseName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name);
+        NonNullList<ItemStack> list = OreDictionary.getOres("ingot" + camelCaseName);
         if (list != null && !list.isEmpty()) {
             return list.get(0);
         }

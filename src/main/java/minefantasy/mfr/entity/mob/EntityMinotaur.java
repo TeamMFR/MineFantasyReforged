@@ -16,6 +16,7 @@ import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -122,7 +123,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
     public void setLoadout() {
         String tier = getMinotaur().weaponTier;
         if (tier != null) {
-            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getRandomWeapon().construct(tier, "OakWood"));
+            this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getRandomWeapon().construct(tier, WoodMaterial.OAK_WOOD));
         }
     }
 

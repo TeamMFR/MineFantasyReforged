@@ -7,6 +7,8 @@ import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.world.gen.structure.StructureGenAncientForge;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
@@ -407,7 +409,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         for (int i = 0; i < rack.getInventory().getSlots(); i++) {
             if (rand.nextInt(3) != 0) {
                 ItemWeaponMFR loot = items[rand.nextInt(items.length)];
-                rack.getInventory().setStackInSlot(i, loot.construct("iron", "ScrapWood"));
+                rack.getInventory().setStackInSlot(i, loot.construct(MetalMaterial.IRON, WoodMaterial.SCRAP_WOOD));
             }
         }
     }

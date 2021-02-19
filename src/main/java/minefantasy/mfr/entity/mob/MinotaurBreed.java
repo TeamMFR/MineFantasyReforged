@@ -6,90 +6,36 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MinotaurBreed {
-    public static final ArrayList normal = new ArrayList<MinotaurBreed>();
-    public static final ArrayList frost = new ArrayList<MinotaurBreed>();
-    public static final ArrayList nether = new ArrayList<MinotaurBreed>();
-    public static MinotaurBreed BROWN = new MinotaurBreed(normal, "minotaur", "Brown", null, 10, ConfigMobs.minotaurHP,
-            ConfigMobs.minotaurMD, ConfigMobs.minotaurGD, 0)
-            .setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC)
-            .setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB).setLesser();
-    public static MinotaurBreed BROWNGUARD = new MinotaurBreed(normal, "minotaur_guard", "GuardBrown", "iron", 20,
-            ConfigMobs.guardminotaurHP, ConfigMobs.guardminotaurMD, ConfigMobs.guardminotaurGD,
-            ConfigMobs.lightminotaurAR)
-            .setGrabs(ConfigMobs.guardminotaurDC, ConfigMobs.guardminotaurGC, ConfigMobs.guardminotaurTC)
-            .setBeserk(ConfigMobs.guardminotaurBT, ConfigMobs.guardminotaurBD, ConfigMobs.guardminotaurGCB)
-            .setIntelligence(1);
-    public static MinotaurBreed BROWNELITE = new MinotaurBreed(normal, "minotaur_elite", "EliteBrown", "steel", 40,
-            ConfigMobs.eliteminotaurHP, ConfigMobs.eliteminotaurMD, ConfigMobs.eliteminotaurGD,
-            ConfigMobs.mediumminotaurAR)
-            .setGrabs(ConfigMobs.eliteminotaurDC, ConfigMobs.eliteminotaurGC, ConfigMobs.eliteminotaurTC)
-            .setBeserk(ConfigMobs.eliteminotaurBT, ConfigMobs.eliteminotaurBD, ConfigMobs.eliteminotaurGCB)
-            .setIntelligence(2);
-    public static MinotaurBreed BROWNBOSS = new MinotaurBreed(normal, "minotaur_boss", "BossBrown", "obsidian", 100,
-            ConfigMobs.bossminotaurHP, ConfigMobs.bossminotaurMD, ConfigMobs.bossminotaurGD, ConfigMobs.heavyminotaurAR)
-            .setGrabs(ConfigMobs.bossminotaurDC, ConfigMobs.bossminotaurGC, ConfigMobs.bossminotaurTC)
-            .setBeserk(ConfigMobs.bossminotaurBT, ConfigMobs.bossminotaurBD, ConfigMobs.bossminotaurGCB)
-            .setIntelligence(3).throwBombs();
-    public static MinotaurBreed FROST = new MinotaurBreed(frost, "frostminotaur", "White", null, 15,
-            ConfigMobs.minotaurHP, ConfigMobs.minotaurMD, ConfigMobs.minotaurGD, ConfigMobs.frostminotaurAR)
-            .setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC)
-            .setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB).setLesser();
-    public static MinotaurBreed FROSTGUARD = new MinotaurBreed(frost, "frostminotaur_guard", "GuardWhite", "iron", 25,
-            ConfigMobs.guardminotaurHP, ConfigMobs.guardminotaurMD, ConfigMobs.guardminotaurGD,
-            ConfigMobs.lightminotaurAR + ConfigMobs.frostminotaurAR)
-            .setGrabs(ConfigMobs.guardminotaurDC, ConfigMobs.guardminotaurGC, ConfigMobs.guardminotaurTC)
-            .setBeserk(ConfigMobs.guardminotaurBT, ConfigMobs.guardminotaurBD, ConfigMobs.guardminotaurGCB)
-            .setIntelligence(1);
-    public static MinotaurBreed FROSTELITE = new MinotaurBreed(frost, "frostminotaur_elite", "EliteWhite", "steel", 50,
-            ConfigMobs.eliteminotaurHP, ConfigMobs.eliteminotaurMD, ConfigMobs.eliteminotaurGD,
-            ConfigMobs.mediumminotaurAR + ConfigMobs.frostminotaurAR)
-            .setGrabs(ConfigMobs.eliteminotaurDC, ConfigMobs.eliteminotaurGC, ConfigMobs.eliteminotaurTC)
-            .setBeserk(ConfigMobs.eliteminotaurBT, ConfigMobs.eliteminotaurBD, ConfigMobs.eliteminotaurGCB)
-            .setIntelligence(2);
-    public static MinotaurBreed FROSTBOSS = new MinotaurBreed(frost, "frostminotaurr_boss", "BossWhite", "obsidian",
-            120, ConfigMobs.bossminotaurHP, ConfigMobs.bossminotaurMD, ConfigMobs.bossminotaurGD,
-            ConfigMobs.heavyminotaurAR + ConfigMobs.frostminotaurAR)
-            .setGrabs(ConfigMobs.bossminotaurDC, ConfigMobs.bossminotaurGC, ConfigMobs.bossminotaurTC)
-            .setBeserk(ConfigMobs.bossminotaurBT, ConfigMobs.bossminotaurBD, ConfigMobs.bossminotaurGCB)
-            .setIntelligence(3).throwBombs();
-    public static MinotaurBreed NETHER = new MinotaurBreed(nether, "dredminotaur", "Nether", null, 15,
-            ConfigMobs.minotaurHP, ConfigMobs.minotaurMD, ConfigMobs.minotaurGD, ConfigMobs.dreadminotaurAR)
-            .setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC)
-            .setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB).setLesser();
-    public static MinotaurBreed NETHERGUARD = new MinotaurBreed(nether, "dredminotaur_guard", "GuardNether", "iron", 25,
-            ConfigMobs.guardminotaurHP, ConfigMobs.guardminotaurMD, ConfigMobs.guardminotaurGD,
-            ConfigMobs.lightminotaurAR + ConfigMobs.dreadminotaurAR)
-            .setGrabs(ConfigMobs.guardminotaurDC, ConfigMobs.guardminotaurGC, ConfigMobs.guardminotaurTC)
-            .setBeserk(ConfigMobs.guardminotaurBT, ConfigMobs.guardminotaurBD, ConfigMobs.guardminotaurGCB)
-            .setIntelligence(1);
-    public static MinotaurBreed NETHERELITE = new MinotaurBreed(nether, "dredminotaur_elite", "EliteNether", "steel",
-            50, ConfigMobs.eliteminotaurHP, ConfigMobs.eliteminotaurMD, ConfigMobs.eliteminotaurGD,
-            ConfigMobs.mediumminotaurAR + ConfigMobs.dreadminotaurAR)
-            .setGrabs(ConfigMobs.eliteminotaurDC, ConfigMobs.eliteminotaurGC, ConfigMobs.eliteminotaurTC)
-            .setBeserk(ConfigMobs.eliteminotaurBT, ConfigMobs.eliteminotaurBD, ConfigMobs.eliteminotaurGCB)
-            .setIntelligence(2);
-    public static MinotaurBreed NETHERBOSS = new MinotaurBreed(nether, "dredminotaur_boss", "BossNether", "obsidian",
-            150, ConfigMobs.bossminotaurHP, ConfigMobs.bossminotaurMD, ConfigMobs.bossminotaurGD,
-            ConfigMobs.heavyminotaurAR + ConfigMobs.dreadminotaurAR)
-            .setGrabs(ConfigMobs.bossminotaurDC, ConfigMobs.bossminotaurGC, ConfigMobs.bossminotaurTC)
-            .setBeserk(ConfigMobs.bossminotaurBT, ConfigMobs.bossminotaurBD, ConfigMobs.bossminotaurGCB)
-            .setIntelligence(3).throwBombs();
-    private static Random rand = new Random();
-    public String name = "minotaur";
-    public String tex = "Brown";
-    public float health = 50;
-    public float poundDamage = 8;
-    public float goreDamage = 8;
-    public float beserkDamage = 12;
+    public static final ArrayList<MinotaurBreed> NORMAL_BREEDS = new ArrayList<>();
+    public static final ArrayList<MinotaurBreed> FROST_BREEDS = new ArrayList<>();
+    public static final ArrayList<MinotaurBreed> NETHER_BREEDS = new ArrayList<>();
+    
+    public static MinotaurBreed BROWN = new MinotaurBreed("minotaur", "_brown", null, 10, ConfigMobs.minotaurHP, ConfigMobs.minotaurMD, ConfigMobs.minotaurGD, 0).setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC).setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB).setLesser();
+    public static MinotaurBreed BROWN_GUARD = new MinotaurBreed("minotaur_guard", "_guard_brown", "iron", 20, ConfigMobs.guardminotaurHP, ConfigMobs.guardminotaurMD, ConfigMobs.guardminotaurGD, ConfigMobs.lightminotaurAR).setGrabs(ConfigMobs.guardminotaurDC, ConfigMobs.guardminotaurGC, ConfigMobs.guardminotaurTC).setBeserk(ConfigMobs.guardminotaurBT, ConfigMobs.guardminotaurBD, ConfigMobs.guardminotaurGCB).setIntelligence(1);
+    public static MinotaurBreed BROWN_ELITE = new MinotaurBreed("minotaur_elite", "_elite_brown", "steel", 40, ConfigMobs.eliteminotaurHP, ConfigMobs.eliteminotaurMD, ConfigMobs.eliteminotaurGD, ConfigMobs.mediumminotaurAR).setGrabs(ConfigMobs.eliteminotaurDC, ConfigMobs.eliteminotaurGC, ConfigMobs.eliteminotaurTC).setBeserk(ConfigMobs.eliteminotaurBT, ConfigMobs.eliteminotaurBD, ConfigMobs.eliteminotaurGCB).setIntelligence(2);
+    public static MinotaurBreed BROWN_BOSS = new MinotaurBreed("minotaur_boss", "_boss_brown", "obsidian", 100, ConfigMobs.bossminotaurHP, ConfigMobs.bossminotaurMD, ConfigMobs.bossminotaurGD, ConfigMobs.heavyminotaurAR).setGrabs(ConfigMobs.bossminotaurDC, ConfigMobs.bossminotaurGC, ConfigMobs.bossminotaurTC).setBeserk(ConfigMobs.bossminotaurBT, ConfigMobs.bossminotaurBD, ConfigMobs.bossminotaurGCB).setIntelligence(3).throwBombs();
+    public static MinotaurBreed FROST = new MinotaurBreed("frostminotaur", "white", null, 15, ConfigMobs.minotaurHP, ConfigMobs.minotaurMD, ConfigMobs.minotaurGD, ConfigMobs.frostminotaurAR).setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC).setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB).setLesser();
+    public static MinotaurBreed FROST_GUARD = new MinotaurBreed("frostminotaur_guard", "_guard_white", "iron", 25, ConfigMobs.guardminotaurHP, ConfigMobs.guardminotaurMD, ConfigMobs.guardminotaurGD, ConfigMobs.lightminotaurAR + ConfigMobs.frostminotaurAR).setGrabs(ConfigMobs.guardminotaurDC, ConfigMobs.guardminotaurGC, ConfigMobs.guardminotaurTC).setBeserk(ConfigMobs.guardminotaurBT, ConfigMobs.guardminotaurBD, ConfigMobs.guardminotaurGCB).setIntelligence(1);
+    public static MinotaurBreed FROST_ELITE = new MinotaurBreed("frostminotaur_elite", "_elite_white", "steel", 50, ConfigMobs.eliteminotaurHP, ConfigMobs.eliteminotaurMD, ConfigMobs.eliteminotaurGD, ConfigMobs.mediumminotaurAR + ConfigMobs.frostminotaurAR).setGrabs(ConfigMobs.eliteminotaurDC, ConfigMobs.eliteminotaurGC, ConfigMobs.eliteminotaurTC).setBeserk(ConfigMobs.eliteminotaurBT, ConfigMobs.eliteminotaurBD, ConfigMobs.eliteminotaurGCB).setIntelligence(2);
+    public static MinotaurBreed FROST_BOSS = new MinotaurBreed("frostminotaurr_boss", "_boss_white", "obsidian", 120, ConfigMobs.bossminotaurHP, ConfigMobs.bossminotaurMD, ConfigMobs.bossminotaurGD, ConfigMobs.heavyminotaurAR + ConfigMobs.frostminotaurAR).setGrabs(ConfigMobs.bossminotaurDC, ConfigMobs.bossminotaurGC, ConfigMobs.bossminotaurTC).setBeserk(ConfigMobs.bossminotaurBT, ConfigMobs.bossminotaurBD, ConfigMobs.bossminotaurGCB).setIntelligence(3).throwBombs();
+    public static MinotaurBreed NETHER = new MinotaurBreed("dredminotaur", "_nether", null, 15, ConfigMobs.minotaurHP, ConfigMobs.minotaurMD, ConfigMobs.minotaurGD, ConfigMobs.dreadminotaurAR).setGrabs(ConfigMobs.minotaurDC, ConfigMobs.minotaurGC, ConfigMobs.minotaurTC).setBeserk(ConfigMobs.minotaurBT, ConfigMobs.minotaurBD, ConfigMobs.minotaurGCB).setLesser();
+    public static MinotaurBreed NETHER_GUARD = new MinotaurBreed("dredminotaur_guard", "_guard_nether", "iron", 25, ConfigMobs.guardminotaurHP, ConfigMobs.guardminotaurMD, ConfigMobs.guardminotaurGD, ConfigMobs.lightminotaurAR + ConfigMobs.dreadminotaurAR).setGrabs(ConfigMobs.guardminotaurDC, ConfigMobs.guardminotaurGC, ConfigMobs.guardminotaurTC).setBeserk(ConfigMobs.guardminotaurBT, ConfigMobs.guardminotaurBD, ConfigMobs.guardminotaurGCB).setIntelligence(1);
+    public static MinotaurBreed NETHER_ELITE = new MinotaurBreed("dredminotaur_elite", "_elite_nether", "steel", 50, ConfigMobs.eliteminotaurHP, ConfigMobs.eliteminotaurMD, ConfigMobs.eliteminotaurGD, ConfigMobs.mediumminotaurAR + ConfigMobs.dreadminotaurAR).setGrabs(ConfigMobs.eliteminotaurDC, ConfigMobs.eliteminotaurGC, ConfigMobs.eliteminotaurTC).setBeserk(ConfigMobs.eliteminotaurBT, ConfigMobs.eliteminotaurBD, ConfigMobs.eliteminotaurGCB).setIntelligence(2);
+    public static MinotaurBreed NETHER_BOSS = new MinotaurBreed("dredminotaur_boss", "_boss_nether", "obsidian", 150, ConfigMobs.bossminotaurHP, ConfigMobs.bossminotaurMD, ConfigMobs.bossminotaurGD, ConfigMobs.heavyminotaurAR + ConfigMobs.dreadminotaurAR).setGrabs(ConfigMobs.bossminotaurDC, ConfigMobs.bossminotaurGC, ConfigMobs.bossminotaurTC).setBeserk(ConfigMobs.bossminotaurBT, ConfigMobs.bossminotaurBD, ConfigMobs.bossminotaurGCB).setIntelligence(3).throwBombs();
+
+    public String name;
+    public String tex;
+    public float health;
+    public float poundDamage;
+    public float goreDamage;
+    public float beserkDamage;
     public int beserkThreshold = 40;
     public int grabChance = 10;
     public int grabChanceBeserk = 25;
     public int throwChance = 20;
     public int disarmChance = 10;
-    public ArrayList pool;
     public int intelligenceLvl = 0;
 
     public int experienceValue;
@@ -97,11 +43,29 @@ public class MinotaurBreed {
     public String weaponTier;
     public int armour_rating;
     public boolean throwsBombs = false;
+    
+    static {
+        //REGISTER BREEDS
+        
+        //Normal
+        NORMAL_BREEDS.add(BROWN);
+        NORMAL_BREEDS.add(BROWN_GUARD);
+        NORMAL_BREEDS.add(BROWN_BOSS);
+        NORMAL_BREEDS.add(BROWN_ELITE);
+        
+        //Frost
+        FROST_BREEDS.add(FROST);
+        FROST_BREEDS.add(FROST_GUARD);
+        FROST_BREEDS.add(FROST_BOSS);
+        FROST_BREEDS.add(FROST_ELITE);
 
-    public MinotaurBreed(ArrayList pool, String name, String tex, String weapons, int xp, float health,
-                         float poundDamage, float goreDamage, int AR) {
-        this.pool = pool;
-        pool.add(this);
+        NETHER_BREEDS.add(NETHER);
+        NETHER_BREEDS.add(NETHER_GUARD);
+        NETHER_BREEDS.add(NETHER_BOSS);
+        NETHER_BREEDS.add(NETHER_ELITE);
+    }
+
+    public MinotaurBreed(String name, String tex, String weapons, int xp, float health, float poundDamage, float goreDamage, int AR) {
         this.name = name;
         this.tex = tex;
         this.health = health;
@@ -113,20 +77,8 @@ public class MinotaurBreed {
         this.armour_rating = AR;
     }
 
-    public static int getRandomMinotaur(int species) {
-        return getRandomMinotaur(species == 1 ? MinotaurBreed.nether : MinotaurBreed.normal);
-    }
-
-    public static int getRandomMinotaur(ArrayList<MinotaurBreed> pool) {
-        if (pool.size() <= 1) {
-            return 0;
-        }
-        return rand.nextInt(pool.size());
-    }
-
     public static MinotaurBreed getBreed(int species, int id) {
-        return getBreed(species == 2 ? MinotaurBreed.frost : species == 1 ? MinotaurBreed.nether : MinotaurBreed.normal,
-                id);
+        return getBreed(species == 2 ? MinotaurBreed.FROST_BREEDS : species == 1 ? MinotaurBreed.NETHER_BREEDS : MinotaurBreed.NORMAL_BREEDS, id);
     }
 
     public static MinotaurBreed getBreed(ArrayList<MinotaurBreed> pool, int id) {
@@ -177,12 +129,12 @@ public class MinotaurBreed {
     }
 
     /**
-     * @param grabChance the percent (0-100) chance to disarm enemies with a power attack
+     * @param disarmChance the percent (0-100) chance to disarm enemies with a power attack
      *                   (Default 10%)
      * @param grabChance the percent (0-100) chance to grab enemies (Default 10%)
-     * @param grabChance the percent (0-100) chance to throw grabbed enemies when hit
+     * @param throwChance the percent (0-100) chance to throw grabbed enemies when hit
      *                   (Default 20%)
-     * @return
+     * @return MinotaurBreed
      */
     public MinotaurBreed setGrabs(int disarmChance, int grabChance, int throwChance) {
         this.disarmChance = disarmChance;

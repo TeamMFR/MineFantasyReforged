@@ -9,6 +9,7 @@ import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -213,7 +214,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
                 }
             }
         } else {

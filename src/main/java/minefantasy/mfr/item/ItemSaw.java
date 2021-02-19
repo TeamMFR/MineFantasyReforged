@@ -9,6 +9,7 @@ import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -176,7 +177,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
                 }
             }
         } else {

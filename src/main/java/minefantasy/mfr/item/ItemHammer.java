@@ -10,6 +10,7 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -174,7 +175,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
             ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : metal) {
                 if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, "OakWood"));
+                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
                 }
             }
         } else {

@@ -3,38 +3,38 @@ package minefantasy.mfr.init;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.item.ItemAxeMFR;
 import minefantasy.mfr.item.ItemBandage;
-import minefantasy.mfr.item.ItemBomb;
-import minefantasy.mfr.item.ItemClimbingPick;
 import minefantasy.mfr.item.ItemComponentMFR;
-import minefantasy.mfr.item.ItemCrossbow;
-import minefantasy.mfr.item.ItemCrudeBomb;
-import minefantasy.mfr.item.ItemEAnvilTools;
-import minefantasy.mfr.item.ItemExplodingArrow;
-import minefantasy.mfr.item.ItemExplodingBolt;
-import minefantasy.mfr.item.ItemHammer;
-import minefantasy.mfr.item.ItemHoeMF;
-import minefantasy.mfr.item.ItemKnifeMFR;
-import minefantasy.mfr.item.ItemLighterMF;
-import minefantasy.mfr.item.ItemLootSack;
-import minefantasy.mfr.item.ItemMace;
-import minefantasy.mfr.item.ItemMine;
-import minefantasy.mfr.item.ItemMobSpawner;
-import minefantasy.mfr.item.ItemNeedle;
-import minefantasy.mfr.item.ItemPaintBrush;
-import minefantasy.mfr.item.ItemParachute;
-import minefantasy.mfr.item.ItemPickMF;
 import minefantasy.mfr.item.ItemResearchBook;
 import minefantasy.mfr.item.ItemSkillBook;
-import minefantasy.mfr.item.ItemSpadeMF;
-import minefantasy.mfr.item.ItemSpear;
-import minefantasy.mfr.item.ItemSpyglass;
-import minefantasy.mfr.item.ItemSword;
-import minefantasy.mfr.item.ItemSyringe;
-import minefantasy.mfr.item.ItemTongs;
-import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.item.ItemWorldGenPlacer;
+import minefantasy.mfr.item.ItemBomb;
+import minefantasy.mfr.item.ItemClimbingPick;
+import minefantasy.mfr.item.ItemCrossbow;
+import minefantasy.mfr.item.ItemCrudeBomb;
+import minefantasy.mfr.item.ItemExplodingArrow;
+import minefantasy.mfr.item.ItemExplodingBolt;
+import minefantasy.mfr.item.ItemLootSack;
+import minefantasy.mfr.item.ItemMine;
+import minefantasy.mfr.item.ItemMobSpawner;
+import minefantasy.mfr.item.ItemParachute;
+import minefantasy.mfr.item.ItemSpyglass;
+import minefantasy.mfr.item.ItemSyringe;
+import minefantasy.mfr.item.ItemAxeMFR;
+import minefantasy.mfr.item.ItemHoeMF;
+import minefantasy.mfr.item.ItemLighterMF;
+import minefantasy.mfr.item.ItemPickMF;
+import minefantasy.mfr.item.ItemSpadeMF;
+import minefantasy.mfr.item.ItemEAnvilTools;
+import minefantasy.mfr.item.ItemHammer;
+import minefantasy.mfr.item.ItemKnifeMFR;
+import minefantasy.mfr.item.ItemNeedle;
+import minefantasy.mfr.item.ItemPaintBrush;
+import minefantasy.mfr.item.ItemTongs;
+import minefantasy.mfr.item.ItemMace;
+import minefantasy.mfr.item.ItemSpear;
+import minefantasy.mfr.item.ItemSword;
+import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Items;
@@ -124,7 +124,10 @@ public class ToolListMFR {
     public static Item DEBUG_PLACE_ANCIENT_FORGE = Utils.nullValue();
     public static Item DEBUG_PLACE_ANCIENT_ALTER = Utils.nullValue();
     public static Item DEBUG_PLACE_DWARVEN_STRONGHOLD = Utils.nullValue();
-    public static Item DEBUG_MOB = Utils.nullValue();
+    public static Item SPAWNER_DRAGON = Utils.nullValue();
+    public static Item SPAWNER_MINOTAUR = Utils.nullValue();
+    public static Item SPAWNER_HOUND = Utils.nullValue();
+    public static Item SPAWNER_COGWORK = Utils.nullValue();
 
     public static void init() {
         TRAINING_SWORD = new ItemSword("training_sword", ToolMaterial.WOOD, -1, 0.8F);
@@ -192,7 +195,11 @@ public class ToolListMFR {
         DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "WorldGenAncientForge");
         DEBUG_PLACE_ANCIENT_ALTER = new ItemWorldGenPlacer("world_gen_placer_ancient_alter", "WorldGenAncientAlter");
         DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "WorldGenDwarvenStronghold");
-        DEBUG_MOB = new ItemMobSpawner();
+
+        SPAWNER_DRAGON = new ItemMobSpawner("dragon");
+        SPAWNER_MINOTAUR = new ItemMobSpawner("minotaur");
+        SPAWNER_HOUND = new ItemMobSpawner("hound");
+        SPAWNER_COGWORK = new ItemMobSpawner("cogwork");
     }
 
     @SubscribeEvent
@@ -265,7 +272,10 @@ public class ToolListMFR {
         registry.register(DEBUG_PLACE_ANCIENT_ALTER);
         registry.register(DEBUG_PLACE_DWARVEN_STRONGHOLD);
 
-        registry.register(DEBUG_MOB);
+        registry.register(SPAWNER_DRAGON);
+        registry.register(SPAWNER_MINOTAUR);
+        registry.register(SPAWNER_HOUND);
+        registry.register(SPAWNER_COGWORK);
     }
 
     public static void load() {

@@ -46,10 +46,10 @@ public class MineFantasyEntities {
 		addEntity(EntityDragonBreath.class, "dragonbreath", 9, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
 
 		DragonBreath.init();
-		addEntity(10, EntityDragon.class, "MF_Dragon");
-		addEntity(11, EntityMinotaur.class, "MF_Minotaur");
-		addEntity(12, EntityCogwork.class, "MF_CogSuit");
-		addEntity(13, EntityHound.class, "MF_Hound");
+		addEntity(10, EntityDragon.class, "dragon");
+		addEntity(11, EntityMinotaur.class, "minotaur");
+		addEntity(12, EntityCogwork.class, "cogwork");
+		addEntity(13, EntityHound.class, "hound");
 
 		addSpawn(EntityDragon.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.Type.NETHER);
 		if (ConfigMobs.minotaurSpawnrate > 0) {

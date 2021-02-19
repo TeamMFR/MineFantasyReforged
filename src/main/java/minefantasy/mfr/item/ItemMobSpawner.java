@@ -1,11 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.entity.EntityCogwork;
-import minefantasy.mfr.entity.mob.EntityDragon;
-import minefantasy.mfr.entity.mob.EntityHound;
-import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.item.ItemComponentMFR;
-import net.minecraft.block.state.IBlockState;
+import minefantasy.mfr.MineFantasyReborn;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,10 +8,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -32,24 +25,24 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemMobSpawner extends ItemComponentMFR {
-    public String[] types = new String[]{"dragon", "minotaur", "hound", "cogwork"};
+    private String entity;
 
-    public ItemMobSpawner() {
-        super("MF_Spawner");
-        this.setHasSubtypes(true);
+    public ItemMobSpawner(String entity) {
+        super("spawn_" + entity);
+        this.entity = entity;
         this.setCreativeTab(CreativeTabs.MISC);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack item, @Nullable World world, List list, ITooltipFlag flagIn) {
-        list.add(I18n.format("item.spawn_" + types[Math.min(types.length - 1, item.getItemDamage())] + ".desc"));
+        list.add(I18n.format("item.spawn_" + entity + ".desc"));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public String getItemStackDisplayName(ItemStack item) {
-        return I18n.format("item.spawn_" + types[Math.min(types.length - 1, item.getItemDamage())] + ".name");
+        return I18n.format("item.spawn_" + entity + ".name");
     }
 
     @Override
@@ -58,15 +51,14 @@ public class ItemMobSpawner extends ItemComponentMFR {
         if (world.isRemote) {
             return EnumActionResult.FAIL;
         } else {
-            IBlockState block = world.getBlockState(pos);
 
             BlockPos blockpos = pos.offset(facing);
             double d0 = this.getYOffset(world, blockpos);
-            Entity entity = spawnCreature(world, getNamedIdFrom(item), (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + d0, (double)blockpos.getZ() + 0.5D);
+            Entity entity = spawnCreature(world, this.entity, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + d0, (double)blockpos.getZ() + 0.5D);
 
             if (entity != null) {
                 if (entity instanceof EntityLivingBase && item.hasDisplayName()) {
-                    ((EntityLiving) entity).setCustomNameTag(item.getDisplayName());
+                    entity.setCustomNameTag(item.getDisplayName());
                 }
 
                 if (!user.capabilities.isCreativeMode) {
@@ -79,24 +71,22 @@ public class ItemMobSpawner extends ItemComponentMFR {
     }
 
     @Nullable
-    public static Entity spawnCreature(World worldIn, @Nullable ResourceLocation entityID, double x, double y, double z)
-    {
-        if (entityID != null && EntityList.ENTITY_EGGS.containsKey(entityID))
-        {
+    public static Entity spawnCreature(World worldIn, String entityID, double x, double y, double z) {
+        if (entityID != null) {
             Entity entity = null;
 
-            for (int i = 0; i < 1; ++i)
-            {
-                entity = EntityList.createEntityByIDFromName(entityID, worldIn);
+            ResourceLocation entityResourceLocation = new ResourceLocation(MineFantasyReborn.MOD_ID, entityID);
 
-                if (entity instanceof EntityLiving)
-                {
+            for (int i = 0; i < 1; ++i) {
+                entity = EntityList.createEntityByIDFromName(entityResourceLocation, worldIn);
+
+                if (entity instanceof EntityLiving) {
                     EntityLiving entityliving = (EntityLiving)entity;
                     entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
                     entityliving.rotationYawHead = entityliving.rotationYaw;
                     entityliving.renderYawOffset = entityliving.rotationYaw;
                     if (net.minecraftforge.event.ForgeEventFactory.doSpecialSpawn(entityliving, worldIn, (float) x, (float) y, (float) z, null)) return null;
-                    entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), (IEntityLivingData)null);
+                    entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
                     worldIn.spawnEntity(entity);
                     entityliving.playLivingSound();
                 }
@@ -110,26 +100,10 @@ public class ItemMobSpawner extends ItemComponentMFR {
         }
     }
 
-    private EntityLivingBase getLiving(World world, int id) {
-        switch (id) {
-            case 0:
-                return new EntityDragon(world);
-            case 1:
-                return new EntityMinotaur(world);
-            case 2:
-                return new EntityHound(world);
-            case 3:
-                return new EntityCogwork(world);
-
-            default:
-                return new EntityDragon(world);
-        }
-    }
-
-    protected double getYOffset(World p_190909_1_, BlockPos p_190909_2_)
+    protected double getYOffset(World world, BlockPos pos)
     {
-        AxisAlignedBB axisalignedbb = (new AxisAlignedBB(p_190909_2_)).expand(0.0D, -1.0D, 0.0D);
-        List<AxisAlignedBB> list = p_190909_1_.getCollisionBoxes((Entity)null, axisalignedbb);
+        AxisAlignedBB axisalignedbb = (new AxisAlignedBB(pos)).expand(0.0D, -1.0D, 0.0D);
+        List<AxisAlignedBB> list = world.getCollisionBoxes(null, axisalignedbb);
 
         if (list.isEmpty())
         {
@@ -144,43 +118,7 @@ public class ItemMobSpawner extends ItemComponentMFR {
                 d0 = Math.max(axisalignedbb1.maxY, d0);
             }
 
-            return d0 - (double)p_190909_2_.getY();
-        }
-    }
-
-    @Nullable
-    public static ResourceLocation getNamedIdFrom(ItemStack stack)
-    {
-        NBTTagCompound nbttagcompound = stack.getTagCompound();
-
-        if (nbttagcompound == null)
-        {
-            return null;
-        }
-        else if (!nbttagcompound.hasKey("EntityTag", 10))
-        {
-            return null;
-        }
-        else
-        {
-            NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("EntityTag");
-
-            if (!nbttagcompound1.hasKey("id", 8))
-            {
-                return null;
-            }
-            else
-            {
-                String s = nbttagcompound1.getString("id");
-                ResourceLocation resourcelocation = new ResourceLocation(s);
-
-                if (!s.contains(":"))
-                {
-                    nbttagcompound1.setString("id", resourcelocation.toString());
-                }
-
-                return resourcelocation;
-            }
+            return d0 - (double)pos.getY();
         }
     }
 }

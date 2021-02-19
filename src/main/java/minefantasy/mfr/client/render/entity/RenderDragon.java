@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import javax.annotation.Nullable;
 
@@ -23,10 +22,9 @@ public class RenderDragon extends RenderLiving<EntityDragon> {
     private static ModelBase venomModel = new ModelVenomDragon();
     private static ModelBase frostModel = new ModelFrostDragon();
     private static ModelBase ashModel = new ModelAshDragon();
+
     public RenderDragon(RenderManager renderManager) {
-
         super(renderManager, dragonModel, 2F);
-
     }
 
     public void doRender(EntityDragon entity, double x, double y, double z, float f, float f1) {
@@ -45,6 +43,6 @@ public class RenderDragon extends RenderLiving<EntityDragon> {
     @Nullable
     @Override
     protected ResourceLocation getEntityTexture(EntityDragon entity) {
-        return TextureHelperMFR.getResource("textures/models/monster/dragon/" + ((EntityDragon) entity).getType().tex    + ".png");
+        return TextureHelperMFR.getResource("textures/models/monster/dragon/" + entity.getType().tex    + ".png");
     }
 }

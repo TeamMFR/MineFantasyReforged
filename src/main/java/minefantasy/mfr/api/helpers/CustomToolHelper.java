@@ -4,6 +4,7 @@ import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.item.ItemHeated;
+import minefantasy.mfr.material.WoodMaterial;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -48,7 +49,7 @@ public class CustomToolHelper {
     }
 
     public static ItemStack construct(Item base, String main) {
-        return construct(base, main, "OakWood");
+        return construct(base, main, WoodMaterial.OAK_WOOD);
     }
 
     public static ItemStack construct(Item base, String main, String haft) {
