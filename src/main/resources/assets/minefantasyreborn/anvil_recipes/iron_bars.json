@@ -1,6 +1,6 @@
 {
   "type": "ShapedAnvilRecipes",
-  "skill_used": "construction",
+  "skill": "construction",
   "research": "smeltiron",
   "tool_type": "hammer",
   "is_tool_recipe": false,

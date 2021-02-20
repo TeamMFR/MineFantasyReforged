@@ -6,7 +6,7 @@
   "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 5,
-  "recipe_hammer": 0,
+  "tool_tier": 0,
   "experience": 0,
   "sound": "minefantasyreborn:block.hammercarpenter",
   "pattern": [
@@ -27,17 +27,6 @@
     }
   },
   "result": {
-    "nbt": {
-      "tagMap": {
-        "mf_custom_materials": {
-          "tagMap": {
-            "main_metal": {
-              "data": "scrapwood"
-            }
-          }
-        }
-      }
-    },
     "item": "minefantasyreborn:rack_wood"
   }
 }

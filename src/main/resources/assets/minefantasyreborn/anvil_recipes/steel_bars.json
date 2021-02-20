@@ -1,6 +1,6 @@
 {
   "type": "ShapedAnvilRecipes",
-  "skill_used": "construction",
+  "skill": "construction",
   "research": "smeltsteel",
   "tool_type": "hammer",
   "is_tool_recipe": false,

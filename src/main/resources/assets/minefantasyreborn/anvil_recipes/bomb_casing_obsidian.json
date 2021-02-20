@@ -1,6 +1,6 @@
 {
   "type": "ShapedAnvilRecipes",
-  "skill_used": "engineering",
+  "skill": "engineering",
   "research": "bombObsidian",
   "tool_type": "hammer",
   "is_tool_recipe": false,

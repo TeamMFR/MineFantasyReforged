@@ -1,6 +1,6 @@
 {
   "type": "ShapedAnvilRecipes",
-  "skill_used": "engineering",
+  "skill": "engineering",
   "research": "ecomponents",
   "tool_type": "hvyhammer",
   "is_tool_recipe": false,

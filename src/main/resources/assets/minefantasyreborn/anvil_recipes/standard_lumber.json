@@ -1,6 +1,6 @@
 {
   "type": "CustomToolRecipe",
-  "skill_used": "artisanry",
+  "skill": "artisanry",
   "research": "tier",
   "tool_type": "hvyHammer",
   "is_tool_recipe": false,

@@ -48,7 +48,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -116,9 +115,8 @@ public class MineFantasyReborn {
 
 		PlayerData.register();
 
-		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
-		CarpenterRecipeManager.INSTANCE.loadRecipes();
-
+//		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
+//		CarpenterRecipeManager.INSTANCE.preInit();
 
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
 		MineFantasyReborn.LOG.info("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
@@ -156,8 +154,7 @@ public class MineFantasyReborn {
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(this);
 
-		CarpenterRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), CarpenterRecipeManager.DEFAULT_RECIPE_DIRECTORY);
-		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
+//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
 
@@ -194,17 +191,16 @@ public class MineFantasyReborn {
 		ArtefactListMFR.init();
 		BasicRecipesMF.init();
 
-
-
 		MetalMaterial.addHeatables();
 
-		AnvilRecipeManager.INSTANCE.initializeAndExportDefaults();
-		AnvilRecipeManager.INSTANCE.loadRecipes();
+		CarpenterRecipeManager.INSTANCE.postInit();
+		AnvilRecipeManager.INSTANCE.postInit();
+
 		PROXY.postInit(postEvent);
 
 		// enabling this will dump all carpenter recipes to jsons! see RecipeExporter for path
-//		 RecipeExporter exporter = new RecipeExporter();
-//		RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
+		// RecipeExporter exporter = new RecipeExporter();
+		// RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
 	}
 
 	@EventHandler

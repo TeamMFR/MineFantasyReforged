@@ -46,27 +46,11 @@ public class CraftingManagerCarpenter {
         return (ICarpenterRecipe) getInstance().recipeMap.get(name);
     }
 
-    /**
-     * Adds a recipe. See spreadsheet on first page for details.
-     */
-    public ICarpenterRecipe addRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, Object... input) {
-//        return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 0, input);
-		return null;
-    }
-
-    public ICarpenterRecipe addToolRecipe(ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, Object... input) {
-//        return addRecipe(result, skill, research, sound, exp, tool, hammer, anvil, time, (byte) 1, input);
-		return null;
-    }
-
-    /**
-     * Adds a recipe. See spreadsheet on first page for details.
-     */
-    public ICarpenterRecipe addRecipe(String name, ItemStack result, Skill skill, String research, SoundEvent sound, float exp, String tool, int hammer, int anvil, int time, byte id, Object... input) {
+    public ICarpenterRecipe addRecipe(String name, ItemStack output, Skill skill, String research, SoundEvent sound, float experience, String toolType, int toolTier, int blockTier, int time, byte id, Object... input) {
         StringBuilder recipeString = new StringBuilder();
         int var4 = 0;
-        int var5 = 0;
-        int var6 = 0;
+        int width = 0;
+        int height = 0;
         int var9;
 
         if (input[var4] instanceof String[]) {
@@ -76,15 +60,15 @@ public class CraftingManagerCarpenter {
 
             for (int var10 = 0; var10 < var9; ++var10) {
                 String var11 = var8[var10];
-                ++var6;
-                var5 = var11.length();
+                ++height;
+                width = var11.length();
                 recipeString.append(var11);
             }
         } else {
             while (input[var4] instanceof String) {
                 String var13 = (String) input[var4++];
-                ++var6;
-                var5 = var13.length();
+                ++height;
+                width = var13.length();
                 recipeString.append(var13);
             }
         }
@@ -106,23 +90,23 @@ public class CraftingManagerCarpenter {
             var14.put(var16, var17);
         }
 
-        ItemStack[] var15 = new ItemStack[var5 * var6];
+        ItemStack[] inputs = new ItemStack[width * height];
 
-        for (var9 = 0; var9 < var5 * var6; ++var9) {
+        for (var9 = 0; var9 < width * height; ++var9) {
             char var18 = recipeString.charAt(var9);
 
             if (var14.containsKey(Character.valueOf(var18))) {
-                var15[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
+                inputs[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
             } else {
-                var15[var9] = ItemStack.EMPTY;
+                inputs[var9] = ItemStack.EMPTY;
             }
         }
         ICarpenterRecipe recipe;
 
         if (id == (byte) 1) {
-            recipe = new CustomToolRecipeCarpenter(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
+            recipe = new CustomToolRecipeCarpenter(width, height, inputs, output, toolType, time, toolTier, blockTier, experience, false, sound, research, skill);
         } else {
-            recipe = new ShapedCarpenterRecipes(var5, var6, var15, result, tool, time, hammer, anvil, exp, false, sound, research, skill);
+            recipe = new ShapedCarpenterRecipes(width, height, inputs, output, toolType, time, toolTier, blockTier, experience, false, sound, research, skill);
         }
         this.recipes.add(recipe);
         this.recipeMap.put(name, recipe);

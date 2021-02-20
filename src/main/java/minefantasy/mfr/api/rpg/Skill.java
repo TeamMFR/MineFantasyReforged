@@ -14,7 +14,8 @@ public enum Skill {
     ENGINEERING("engineering"),
     CONSTRUCTION("construction"),
     PROVISIONING("provisioning"),
-    COMBAT("combat");
+    COMBAT("combat"),
+    NONE("none");
 
     Skill(String unlocalizedName) {
         this.unlocalizedName = unlocalizedName;
@@ -35,7 +36,7 @@ public enum Skill {
         return this;
     }
 
-    /** Returns the tier with the given name, or throws an {@link java.lang.IllegalArgumentException} if no such
+    /** Returns the skill with the given name, or throws an {@link java.lang.IllegalArgumentException} if no such
      * skill exists. */
     public static Skill fromName(String name){
 

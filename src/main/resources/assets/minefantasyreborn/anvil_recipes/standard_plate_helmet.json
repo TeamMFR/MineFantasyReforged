@@ -1,6 +1,6 @@
 {
   "type": "CustomToolRecipe",
-  "skill_used": "artisanry",
+  "skill": "artisanry",
   "research": "craftArmourHeavy",
   "tool_type": "hammer",
   "is_tool_recipe": false,

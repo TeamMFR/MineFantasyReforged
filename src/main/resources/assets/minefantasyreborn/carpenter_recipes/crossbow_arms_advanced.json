@@ -6,7 +6,7 @@
   "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 350,
-  "recipe_hammer": 2,
+  "tool_tier": 2,
   "experience": 0,
   "sound": "minefantasyreborn:block.hammercarpenter",
   "pattern": [

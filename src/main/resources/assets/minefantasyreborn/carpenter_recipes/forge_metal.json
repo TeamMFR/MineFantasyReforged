@@ -6,7 +6,7 @@
   "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 400,
-  "recipe_hammer": 4,
+  "tool_tier": 4,
   "experience": 0,
   "sound": "minefantasyreborn:block.twistbolt",
   "pattern": [

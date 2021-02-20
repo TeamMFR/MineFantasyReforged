@@ -6,7 +6,7 @@
   "is_tool_recipe": true,
   "block_tier": -1,
   "craft_time": 1,
-  "recipe_hammer": -1,
+  "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.step",
   "pattern": [
@@ -24,17 +24,6 @@
     }
   },
   "result": {
-    "nbt": {
-      "tagMap": {
-        "mf_custom_materials": {
-          "tagMap": {
-            "main_metal": {
-              "data": "refinedwood"
-            }
-          }
-        }
-      }
-    },
     "item": "minefantasyreborn:timber"
   }
 }

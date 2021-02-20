@@ -14,13 +14,13 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	protected void loadConfig() {
 		loadDefaultRecipes = Boolean.parseBoolean(config.get(CATEGORY_RECIPES,
 				"Load Default Recipes",
-				false,
-				"If true the default anvil and carpenter decipes will be parsed and enabled.").getString());
+				true,
+				"If true the default recipes will be loaded (anvil, carpenter, etc.).").getString());
 
 		allowIronResmelt = Boolean.parseBoolean(config.get(CATEGORY_REFINING,
 				"Allow Iron ingots to make Pig Iron",
 				false,
-				"If you're not resoureful: you can allow iron ingots to make prepared iron for refining.").getString());
+				"If you're not resourceful: you can allow iron ingots to make prepared iron for refining.").getString());
 
 		TileEntityBlastHeater.maxFurnaceHeight = Integer.parseInt(config.get(CATEGORY_REFINING,
 				"Max Blast Furnace Height",

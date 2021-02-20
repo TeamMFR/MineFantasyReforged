@@ -11,9 +11,9 @@ import net.minecraftforge.oredict.OreDictionary;
  * @author AnonymousProductions
  */
 public class CustomToolRecipeCarpenter extends ShapedCarpenterRecipes {
-    public CustomToolRecipeCarpenter(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType,
-                                     int time, int toolTier, int blockTier, float exp, boolean hot, SoundEvent sound, String research, Skill skill) {
-        super(wdth, heit, inputs, output, toolType, time, toolTier, blockTier, exp, hot, sound, research, skill);
+    public CustomToolRecipeCarpenter(int width, int height, ItemStack[] inputs, ItemStack output, String toolType,
+                                     int time, int toolTier, int blockTier, float experience, boolean hot, SoundEvent sound, String research, Skill skill) {
+        super(width, height, inputs, output, toolType, time, toolTier, blockTier, experience, hot, sound, research, skill);
     }
 
     private boolean checkMatch(CarpenterCraftMatrix matrix, int x, int y, boolean b) {

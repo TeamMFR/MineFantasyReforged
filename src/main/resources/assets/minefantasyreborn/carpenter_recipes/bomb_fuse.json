@@ -6,7 +6,7 @@
   "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 4,
-  "recipe_hammer": -1,
+  "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.step",
   "pattern": [
