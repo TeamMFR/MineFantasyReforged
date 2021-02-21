@@ -2,98 +2,25 @@ package minefantasy.mfr.recipe;
 
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.config.ConfigCrafting;
-import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.common.Loader;
-import org.apache.commons.io.FilenameUtils;
 
 import javax.annotation.Nullable;
-import java.io.File;
-import java.io.Reader;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
-public abstract class RecipeManager {
-
-	private static final String JSON_FILE_EXT = "json";
-
-	public void loadRecipes(String type, String defaultDirectory, String configDirectory, Map<String, IRecipe> loaded) {
-		int loadedCount = 0;
-		MineFantasyReborn.LOG.info("Loading " + type + " recipes from config directory");
-		loadedCount += loadRecipesFromSource(new File(configDirectory), "", loaded);
-		MineFantasyReborn.LOG.info("Loaded {} " + type + " custom recipes", loadedCount);
-
-		if (ConfigCrafting.loadDefaultRecipes) {
-		MineFantasyReborn.LOG.info("Loading default" + type + " recipes");
-			loadedCount += loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), defaultDirectory, loaded);
-			MineFantasyReborn.LOG.info("Loaded {} " + type + " default recipes", loadedCount);
-		}
-
-	}
-
-	protected void createCustomRecipeDirectory(String directory) {
-		// create recipe dirs if they don't exist
-		File existTest = new File(directory);
-		if (!existTest.exists()) {
-			existTest.mkdirs();
-		}
-	}
-
-	public void proxy () {}
-
-	public int loadRecipesFromSource(File source, String base, Map<String, IRecipe> loaded) {
-
-		FileUtils.findFiles(source, base, (root, file) -> {
-			String relative = root.relativize(file).toString();
-
-			String name = FilenameUtils.removeExtension(relative).replaceAll("\\\\", "/");
-
-			String extension = FilenameUtils.getExtension(file.toString());
-
-			if (extension.equals(JSON_FILE_EXT)) {
-
-				try {
-
-					Reader reader = Files.newBufferedReader((file.toAbsolutePath()));
-
-					Gson gson = new Gson();
-					JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-					IRecipe recipe = parseRecipeJson(name, jsonObject);
-
-					if (!loaded.containsKey(name)) {
-						loaded.put(name, recipe);
-					}
-
-				}
-
-				catch (Exception e) {
-					MineFantasyReborn.LOG.error("Error loadin MFR recipe from file " + relative);
-					e.printStackTrace();
-				}
-			}
-		});
-
-		return loaded.size();
-	}
-
-	protected abstract IRecipe parseRecipeJson(String name, JsonObject json);
+// TODO: check net.minecraftforge.fml.common.registry.GameRegistry.addShapedRecipe as we should probably register our recipes as proper IRecipes instead of our own registry
+public abstract class RecipeLoader extends DataLoader {
 
 	protected static String[] shrink(String... strings) {
 		int i = Integer.MAX_VALUE;
@@ -179,25 +106,6 @@ public abstract class RecipeManager {
 	}
 
 	/**
-	 * Deserialize a json object and return a ShapedRecipe from it
-	 *
-	 * @param json the whole json file
-	 * @return a ShapedRecipe object of the json
-	 */
-	static ShapedRecipes deserialize(int columns, int rows, JsonObject json) {
-		String s = JsonUtils.getString(json, "group", "");
-		Map<String, Ingredient> map = deserializeKey(JsonUtils.getJsonObject(json, "key"));
-		String[] pattern = shrink(patternFromJson(columns, rows, JsonUtils.getJsonArray(json, "pattern")));
-		int patternWidth = pattern[0].length(); // columns
-		int patternHeight = pattern.length; // rows
-
-		// a list of all slots with their matching ingredient ItemStack, 4x4 for Carpenter
-		NonNullList<Ingredient> IngredientList = deserializeIngredients(pattern, map, patternWidth, patternHeight);
-		ItemStack resultStack = minefantasy.mfr.util.JsonUtils.getItemStack(JsonUtils.getJsonObject(json, "result"));
-		return new ShapedRecipes(s, patternWidth, patternHeight, IngredientList, resultStack);
-	}
-
-	/**
 	 * This method matches the ingredients from the ingredient list with their keys (keys like "J", "B", etc.) and returns a list of itemStacks for
 	 * every pattern slot with its corresponding item.
 	 *
@@ -231,25 +139,6 @@ public abstract class RecipeManager {
 		} else {
 			return ingredientsList;
 		}
-	}
-
-	private static Map<String, Ingredient> deserializeKey(JsonObject jsonObject) {
-		Map<String, Ingredient> map = Maps.<String, Ingredient>newHashMap();
-
-		for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-			if (entry.getKey().length() != 1) {
-				throw new JsonSyntaxException("Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
-			}
-
-			if (" ".equals(entry.getKey())) {
-				throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
-			}
-
-			map.put(entry.getKey(), deserializeIngredient(entry.getValue()));
-		}
-
-		map.put(" ", Ingredient.EMPTY);
-		return map;
 	}
 
 	static Map<Character, Ingredient> deserializeKeyToCharMap(JsonObject jsonObject) {
@@ -328,7 +217,6 @@ public abstract class RecipeManager {
 
 	Object[] getInputs(String[] pattern, JsonObject json) {
 		Map<Character, Ingredient> map = deserializeKeyToCharMap(JsonUtils.getJsonObject(json, "key"));
-
 
 		Object[] object = new Object[] {};
 

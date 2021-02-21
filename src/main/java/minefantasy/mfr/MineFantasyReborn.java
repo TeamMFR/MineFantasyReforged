@@ -38,9 +38,9 @@ import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
-import minefantasy.mfr.recipe.AnvilRecipeManager;
+import minefantasy.mfr.recipe.AnvilRecipeLoader;
 import minefantasy.mfr.recipe.BasicRecipesMF;
-import minefantasy.mfr.recipe.CarpenterRecipeManager;
+import minefantasy.mfr.recipe.CarpenterRecipeLoader;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenMFBase;
 import net.minecraft.init.Items;
@@ -193,8 +193,8 @@ public class MineFantasyReborn {
 
 		MetalMaterial.addHeatables();
 
-		CarpenterRecipeManager.INSTANCE.postInit();
-		AnvilRecipeManager.INSTANCE.postInit();
+		CarpenterRecipeLoader.INSTANCE.postInit();
+		AnvilRecipeLoader.INSTANCE.postInit();
 
 		PROXY.postInit(postEvent);
 

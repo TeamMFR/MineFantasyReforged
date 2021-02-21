@@ -4,21 +4,18 @@ import com.google.gson.JsonObject;
 import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Class responsible for loading and parsing the anvil recipe json files from the assets and config folders
  */
 // TODO: check net.minecraftforge.fml.common.registry.GameRegistry.addShapedRecipe as we should probably register our recipes as proper IRecipes
-public class AnvilRecipeManager extends RecipeManager {
+public class AnvilRecipeLoader extends RecipeLoader {
 
-	public static final AnvilRecipeManager INSTANCE = new AnvilRecipeManager();
+	public static final AnvilRecipeLoader INSTANCE = new AnvilRecipeLoader();
 
 	private static final int GRID_WIDTH = 6;
 	private static final int GRID_HEIGHT = 4;
@@ -28,17 +25,15 @@ public class AnvilRecipeManager extends RecipeManager {
 
 	public static final List<JsonObject> list = new ArrayList<>();
 
-	private static Map<String, IRecipe> loaded = new TreeMap<>();
-
-	private AnvilRecipeManager() {} // no instances!
+	private AnvilRecipeLoader() {} // no instances!
 
 	public void postInit() {
-		createCustomRecipeDirectory(CUSTOM_RECIPE_DIRECTORY);
-		loadRecipes(TYPE, DEFAULT_RECIPE_DIRECTORY, CUSTOM_RECIPE_DIRECTORY, loaded);
+		createCustomDataDirectory(CUSTOM_RECIPE_DIRECTORY);
+		loadRegistry(TYPE, DEFAULT_RECIPE_DIRECTORY, CUSTOM_RECIPE_DIRECTORY);
 	}
 
 	@Override
-	protected IRecipe parseRecipeJson(String name, JsonObject json) {
+	protected boolean processRegistryEntry(String name, JsonObject json) {
 		String s = JsonUtils.getString(json, "type");
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
@@ -49,14 +44,12 @@ public class AnvilRecipeManager extends RecipeManager {
 		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
 
-		IRecipe recipe = deserialize(GRID_WIDTH, GRID_HEIGHT, json);
-
 		String[] pattern = shrink(patternFromJson(GRID_WIDTH, GRID_HEIGHT, JsonUtils.getJsonArray(json, "pattern")));
 		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
 		Object[] o = getInputs(pattern, json);
 
 		byte type = s.equals("CustomToolRecipe") ? (byte) 1 : (byte) 0;
 		CraftingManagerAnvil.getInstance().addRecipe(resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, o);
-		return recipe;
+		return true;
 	}
 }

@@ -8,15 +8,9 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	public static final String CATEGORY_REFINING = "Refining";
 	public static final String CATEGORY_COOKING = "Cooking";
 	public static boolean allowIronResmelt;
-	public static boolean loadDefaultRecipes = true;
 
 	@Override
 	protected void loadConfig() {
-		loadDefaultRecipes = Boolean.parseBoolean(config.get(CATEGORY_RECIPES,
-				"Load Default Recipes",
-				true,
-				"If true the default recipes will be loaded (anvil, carpenter, etc.).").getString());
-
 		allowIronResmelt = Boolean.parseBoolean(config.get(CATEGORY_REFINING,
 				"Allow Iron ingots to make Pig Iron",
 				false,
