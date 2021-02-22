@@ -8,7 +8,6 @@ import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.client.render.item.RenderHotItem;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

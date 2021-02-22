@@ -50,15 +50,6 @@ public class MineFantasyRebornAPI {
         MFRLogUtil.logDebug(msg);
     }
 
-    public static void removeAllRecipes(Item result) {
-    	for (IRecipe recipe : ForgeRegistries.RECIPES) {
-			if (recipe.getRecipeOutput().getItem() == result
-					&& !ForgeRegistries.RECIPES.getKey(recipe).getResourceDomain().equals(MineFantasyReborn.MOD_ID)) {
-				((IForgeRegistryModifiable) ForgeRegistries.RECIPES).remove(ForgeRegistries.RECIPES.getKey(recipe));
-			}
-		}
-    }
-
     public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot, int hammerType, int anvil, int forgeTime, Object... input) {
         return addAnvilRecipe(skill, result, research, hot, "hammer", hammerType, anvil, forgeTime, input);
     }

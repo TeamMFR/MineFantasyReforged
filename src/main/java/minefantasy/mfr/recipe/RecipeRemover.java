@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
@@ -19,6 +20,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class RecipeRemover {
+    @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
     public static class RegistrationHandler {
 
         /**
@@ -36,14 +38,19 @@ public class RecipeRemover {
                 removeRecipes(Items.FLINT_AND_STEEL);
                 removeRecipes(Items.BUCKET);
             }
+            MineFantasyReborn.LOG.warn("Overriding recipes with dummy recipes, please ignore the above \"Dangerous alternative prefix\" warnings.");
         }
 
+        /**
+         * Remove all crafting recipes with the specified {@link Item} as their output.
+         *
+         * @param output The output Item
+         */
         private static void removeRecipes(final Item output) {
             final int recipesRemoved = removeRecipes(recipe -> {
                 final ItemStack recipeOutput = recipe.getRecipeOutput();
-                return !recipeOutput.isEmpty() && recipeOutput.getItem() == output;
+                return !recipeOutput.isEmpty() && recipe.getRegistryName().getResourceDomain().equals("minecraft") && recipeOutput.getItem() == output;
             });
-            MineFantasyReborn.LOG.info("MineFantasy: Removing replaced recipes...");
         }
 
         /**
@@ -64,8 +71,6 @@ public class RecipeRemover {
                     recipesRemoved++;
                 }
             }
-
-            MineFantasyReborn.LOG.info("Overriding recipes with dummy recipes, please ignore the following \"Dangerous alternative prefix\" warnings.");
             toRemove.forEach(recipe -> {
                 final ResourceLocation registryName = Objects.requireNonNull(recipe.getRegistryName());
                 final IRecipe replacement = new DummyRecipe().setRegistryName(registryName);

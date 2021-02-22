@@ -1,5 +1,8 @@
 {
     "conditions": {
         "hccallowrocks": "minefantasy.mfr.recipe.factories.HCCallowRocks"
+    },
+    "recipes": {
+        "dynamic": "minefantasy.mfr.recipe.TimberDynamicRecipes$Factory"
     }
 }

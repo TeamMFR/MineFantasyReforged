@@ -57,13 +57,12 @@ public class ItemHide extends ItemComponentMFR {
     }
 
     private void tryClean(ItemStack item, World world, EntityPlayer player, BlockPos pos) {
-        player.swingArm(player.getActiveHand());
+        player.swingArm(player.swingingHand);
         if (!world.isRemote) {
             world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
             if (rand.nextFloat() * 2 * hardness < 1.0F) {
                 item.shrink(1);
-                EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ,
-                        new ItemStack(result));
+                EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(result));
                 world.spawnEntity(resultItem);
             }
         }

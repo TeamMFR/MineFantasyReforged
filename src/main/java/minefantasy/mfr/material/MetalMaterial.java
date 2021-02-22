@@ -149,8 +149,8 @@ public class MetalMaterial extends CustomMaterial {
             int[] stats = customMat.getHeatableStats();
             MFRLogUtil.logDebug("Set Heatable Stats for " + customMat.name + ": " + stats[0] + "," + stats[1] + "," + stats[2]);
 
-            MineFantasyRebornAPI.setHeatableStats("ingot" + customMat.name, stats[0], stats[1], stats[2]);
-            MineFantasyRebornAPI.setHeatableStats("hunk" + customMat.name, stats[0], stats[1], stats[2]);
+            MineFantasyRebornAPI.setHeatableStats("ingot" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
+            MineFantasyRebornAPI.setHeatableStats("hunk" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
         }
 
         MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.RIVET, 1000, 2000, 3000);
@@ -160,8 +160,7 @@ public class MetalMaterial extends CustomMaterial {
 
     @Override
     public ItemStack getItemStack() {
-        String camelCaseName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name);
-        NonNullList<ItemStack> list = OreDictionary.getOres("ingot" + camelCaseName);
+        NonNullList<ItemStack> list = OreDictionary.getOres("ingot" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name));
         if (list != null && !list.isEmpty()) {
             return list.get(0);
         }

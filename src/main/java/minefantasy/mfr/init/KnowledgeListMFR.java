@@ -10,6 +10,7 @@ import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.recipe.RecipeHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -203,11 +204,11 @@ public class KnowledgeListMFR {
                 .setPage(artisanry).addSkill(Skill.ARTISANRY, 40);
 
         smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, ComponentListMFR.COPPER_INGOT, (InformationBase) null))
-                .registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier("copper"));
+                .registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier(MetalMaterial.COPPER));
         smeltBronze = (new InformationBase("smeltBronze", 1, 2, 2, ComponentListMFR.BRONZE_INGOT, crucible)).registerStat()
-                .setPage(artisanry).addSkill(Skill.ARTISANRY, 5).setDescriptValues(getMetalTier("bronze"));
+                .setPage(artisanry).addSkill(Skill.ARTISANRY, 5).setDescriptValues(getMetalTier(MetalMaterial.BRONZE));
         smeltIron = (new InformationBase("smeltIron", 1, 4, 1, Items.IRON_INGOT, null)).registerStat()
-                .setPage(artisanry).addSkill(Skill.ARTISANRY, 10).setDescriptValues(getMetalTier("iron"));
+                .setPage(artisanry).addSkill(Skill.ARTISANRY, 10).setDescriptValues(getMetalTier(MetalMaterial.IRON));
         coalflux = (new InformationBase("coalflux", 1, 6, 2, ComponentListMFR.COAL_FLUX, smeltIron)).registerStat()
                 .setPage(artisanry).addSkill(Skill.ARTISANRY, 15);
         blastfurn = (new InformationBase("blastfurn", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smeltIron))
@@ -217,42 +218,42 @@ public class KnowledgeListMFR {
         smeltPig = (new InformationBase("smeltPig", 3, 3, 0, ComponentListMFR.PIG_IRON_INGOT, blastfurn)).registerStat()
                 .setPage(artisanry).setUnlocked().addSkill(Skill.ARTISANRY, 25);
         smeltSteel = (new InformationBase("smeltSteel", 4, 5, 1, ComponentListMFR.STEEL_INGOT, smeltPig)).registerStat()
-                .setPage(artisanry).addSkill(Skill.ARTISANRY, 25).setDescriptValues(getMetalTier("steel"));
+                .setPage(artisanry).addSkill(Skill.ARTISANRY, 25).setDescriptValues(getMetalTier(MetalMaterial.STEEL));
         encrusted = (new InformationBase("smeltEncrusted", 6, 5, 2, ComponentListMFR.DIAMOND_SHARDS, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 35)
-                .setDescriptValues(getMetalTier("encrusted"));
+                .setDescriptValues(getMetalTier(MetalMaterial.ENCRUSTED));
         obsidian = (new InformationBase("smeltObsidian", 6, 3, 2, ComponentListMFR.OBSIDIAN_INGOT, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 40)
-                .setDescriptValues(getMetalTier("obsidian"));
+                .setDescriptValues(getMetalTier(MetalMaterial.OBSIDIAN));
         smeltBlackSteel = (new InformationBase("smeltBlackSteel", 4, 7, 3, ComponentListMFR.BLACK_STEEL_INGOT, smeltSteel))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50)
-                .setDescriptValues(getMetalTier("black_steel"));
+                .setDescriptValues(getMetalTier(MetalMaterial.BLACK_STEEL));
         smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, ComponentListMFR.DRAGON_HEART, null))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50);
         smeltRedSteel = (new InformationBase("smeltRedSteel", 3, 9, 5, ComponentListMFR.RED_STEEL_INGOT, smeltBlackSteel))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
-                .setDescriptValues(getMetalTier("red_steel"));
+                .setDescriptValues(getMetalTier(MetalMaterial.RED_STEEL));
         smeltBlueSteel = (new InformationBase("smeltBlueSteel", 5, 9, 5, ComponentListMFR.BLUE_STEEL_INGOT, smeltBlackSteel))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
-                .setDescriptValues(getMetalTier("blue_steel"));
+                .setDescriptValues(getMetalTier(MetalMaterial.BLUE_STEEL));
         smeltMithril = (new InformationBase("smeltMithril", 5, 12, 3, ComponentListMFR.MITHRIL_INGOT, null)).registerStat()
-                .setPage(artisanry).addSkill(Skill.ARTISANRY, 75).setDescriptValues(getMetalTier("mithril"));
+                .setPage(artisanry).addSkill(Skill.ARTISANRY, 75).setDescriptValues(getMetalTier(MetalMaterial.MITHRIL));
         smeltAdamant = (new InformationBase("smeltAdamantium", 3, 12, 3, ComponentListMFR.ADAMANTIUM_INGOT, null))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 75)
-                .setDescriptValues(getMetalTier("adamantium"));
+                .setDescriptValues(getMetalTier(MetalMaterial.ADAMANTIUM));
 
         smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_MASTER, 1, 3),
                 (InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY,
                 100);
         smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, ComponentListMFR.IGNOTUMITE_INGOT, smeltMaster))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
-                .setDescriptValues(getMetalTier("ignotumite"));
+                .setDescriptValues(getMetalTier(MetalMaterial.IGNOTUMITE));
         smeltMithium = (new InformationBase("smeltMithium", 6, 15, 3, ComponentListMFR.MITHIUM_INGOT, smeltMaster))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
-                .setDescriptValues(getMetalTier("mithium"));
+                .setDescriptValues(getMetalTier(MetalMaterial.MITHIUM));
         smeltEnderforge = (new InformationBase("smeltEnder", 4, 16, 3, ComponentListMFR.ENDER_INGOT, smeltMaster))
                 .registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
-                .setDescriptValues(getMetalTier("ender"));
+                .setDescriptValues(getMetalTier(MetalMaterial.ENDER));
 
         craftHCCTools = (new InformationBase("craftHCCTools", -1, -2, 0, ToolListMFR.STONE_PICK, (InformationBase) null))
                 .registerStat().setPage(artisanry).setUnlocked();
@@ -407,11 +408,11 @@ public class KnowledgeListMFR {
 //                .setPage(construction).setUnlocked();
         tool_rack = (new InformationBase("tool_rack", 2, 2, 0, MineFantasyBlocks.TOOL_RACK_WOOD, (InformationBase) null))
                 .registerStat().setPage(construction).setUnlocked();
-        food_box = (new InformationBase("food_box", 2, 4, 1, (MineFantasyBlocks.FOOD_BOX_BASIC).construct("OakWood"), tool_rack)).registerStat()
+        food_box = (new InformationBase("food_box", 2, 4, 1, (MineFantasyBlocks.FOOD_BOX_BASIC).construct(WoodMaterial.OAK_WOOD), tool_rack)).registerStat()
                 .setPage(construction).setUnlocked();
-        ammo_box = (new InformationBase("ammo_box", 4, 4, 1, (MineFantasyBlocks.AMMO_BOX_BASIC).construct("OakWood"), food_box)).registerStat()
+        ammo_box = (new InformationBase("ammo_box", 4, 4, 1, (MineFantasyBlocks.AMMO_BOX_BASIC).construct(WoodMaterial.OAK_WOOD), food_box)).registerStat()
                 .setPage(construction).addSkill(Skill.CONSTRUCTION, 15);
-        big_box = (new InformationBase("big_box", 6, 4, 1, (MineFantasyBlocks.CRATE_BASIC).construct("OakWood"), ammo_box)).registerStat()
+        big_box = (new InformationBase("big_box", 6, 4, 1, (MineFantasyBlocks.CRATE_BASIC).construct(WoodMaterial.OAK_WOOD), ammo_box)).registerStat()
                 .setPage(construction).addSkill(Skill.CONSTRUCTION, 25);
 
         // COOKING -The Cheapest

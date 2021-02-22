@@ -1,0 +1,18 @@
+{
+	"type": "dynamic",
+	"pattern": [
+		"#",
+		"#"
+	],
+	"key": {
+		"#": {
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		}
+	},
+	"ore_dict_list": "plankWood",
+	"result": {
+		"item": "minefantasyreborn:timber"
+	},
+	"count": 4
+}

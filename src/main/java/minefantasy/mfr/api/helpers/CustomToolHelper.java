@@ -1,10 +1,12 @@
 package minefantasy.mfr.api.helpers;
 
+import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -14,6 +16,7 @@ import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.List;
 
@@ -237,15 +240,13 @@ public class CustomToolHelper {
         if (materialOnTooltip()) {
             CustomMaterial main = getCustomPrimaryMaterial(item);
             if (main != null) {
-                String matName = I18n.format(
-                        I18n.format("material." + main.getName() + ".name"));
+                String matName = I18n.format(I18n.format(Utils.convertSnakeCaseToSplitCapitalized(main.getName())));
                 list.add(TextFormatting.GOLD + matName);
             }
         }
 
         if (haft != null) {
-            String matName = I18n.format("item.mod_haft.name",
-                    I18n.format("material." + haft.getName() + ".name"));
+            String matName = I18n.format("item.mod_haft.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(haft.getName())));
             list.add(TextFormatting.GOLD + matName);
         }
 
@@ -267,7 +268,7 @@ public class CustomToolHelper {
         CustomMaterial metals = getCustomPrimaryMaterial(item);
         if (metals != null) {
             String matName = I18n.format("item.mod_joint.name",
-                    I18n.format("material." + metals.getName() + ".name"));
+                    I18n.format(Utils.convertSnakeCaseToSplitCapitalized(metals.getName())));
             list.add(TextFormatting.GOLD + matName);
         }
 
@@ -283,8 +284,7 @@ public class CustomToolHelper {
         if (base != null) {
             name = base.getName();
         }
-        return I18n.format(unlocalName,
-                I18n.format("material." + name + ".name"));
+        return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
     }
 
     public static String getLocalisedName(ItemStack item, String unlocalName) {
@@ -297,7 +297,7 @@ public class CustomToolHelper {
         if (base != null) {
             name = base.getName();
         }
-        return I18n.format(unlocalName, I18n.format("material." + name + ".name"));
+        return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
     }
 
     public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) {

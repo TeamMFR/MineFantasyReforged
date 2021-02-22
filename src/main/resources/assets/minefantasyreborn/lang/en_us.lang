@@ -158,90 +158,11 @@ materialtype.fireresist.name=%1$s Fire Resistance
 materialtype.maxtemp.name=%1$s*C Melting Point
 material.any.name=Any
 
-# WOOD
-material.scrap_wood.name=Scrap
-material.oak_wood.name=Oak
-material.birch_wood.name=Birch
-material.spruce_wood.name=Spruce
-material.acacia_wood.name=Acacia
-material.jungle_wood.name=Jungle
-material.refined_wood.name=Refined
-material.ironbark_wood.name=Ironbark
-material.ebony_wood.name=Ebony
-material.dark_oak_wood.name=Dark Oak
-material.pine_wood.name=Pine
-material.cherry_wood.name=Cherry
-material.poplar_wood.name=Poplar
-material.maple_wood.name=Maple
-material.mahoe_wood.name=Mahoe
-material.greenheart_wood.name=Green Heart
-material.palm_wood.name=Palm
-material.lime_wood.name=Lime
-material.balsa_wood.name=Balsa
-material.walnut_wood.name=walnut
-material.chestnut_wood.name=Chestnut
-material.larch_wood.name=Larch
-material.willow_wood.name=Willow
-material.teak_wood.name=Teak
-material.sequoia_wood.name=Sequoia
-material.mahogany_wood.name=Mahogany
-material.wenge_wood.name=wenge
-material.redwood_wood.name=Redwood
-material.fir_wood.name=Fir
-material.purpleheart_wood.name=Purple Heart
-material.silverwood_wood.name=Silverwood
-material.greatwood_wood.name=Greatwood
-material.yew_wood.name=Yew
-
-
-
 # LEATHER
 material.leather.name=Leather
 material.hardleather.name=Hardened Leather
 material.minotaurskin.name=Minotaur Leather
 material.dragonskin.name=Dragon Skin
-
-# METAL
-material.copper.name=Copper
-material.tin.name=Tin
-
-material.bronze.name=Bronze
-material.iron.name=Iron
-material.pig_iron.name=Pig Iron
-material.steel.name=Steel
-material.tungsten.name=Wolframite
-material.obsidian.name=Obsidian
-material.encrusted.name=Diamond
-material.black_steel.name=Black Steel
-material.red_steel.name=Red Steel
-material.blue_steel.name=Blue Steel
-
-material.adamantium.name=Adamantium
-material.mithril.name=Mithril
-material.ignotumite.name=Ignotumite
-material.mithium.name=Mithium
-material.ender.name=Enderforge
-
-# PRECIOUS
-material.gold.name=Golden
-material.silver.name=Silver
-
-# NON-MF
-material.bismuth.name=Bismuth
-material.bismuthbronze.name=Bismuth Bronze
-material.nickel.name=Nickel
-material.titanium.name=Titanium
-material.stainless_steel.name=Stainless Steel
-
-# ALLOY
-material.composite_alloy.name=Composite Alloyed
-
-# MOD
-material.thaumium.name=Thaumium
-material.void.name=Void
-material.manasteel.name=Manasteel
-material.elven_elementium.name=Elementium
-material.terrasteel.name=Terrasteel
 
 # ITEM STATS
 
@@ -613,15 +534,15 @@ tile.yew_leaves.name=Yew Leaves
 tile.ironbark_sapling.name=Ironbark Sapling
 tile.ebony_sapling.name=Ebony Sapling
 tile.yew_sapling.name=Yew Sapling
-tile.ironbark_planks.name=Ironbark Planks
-tile.ebony_planks.name=Ebony Planks
-tile.yew_planks.name=Yew Planks
+tile.ironbark_planks.name=Ironbark Wood Planks
+tile.ebony_planks.name=Ebony Wood Planks
+tile.yew_planks.name=Yew Wood Planks
 tile.ironbark_stairs.name=Ironbark Stairs
 tile.ebony_stairs.name=Ebony Stairs
 tile.yew_stairs.name=Yew Stairs
 
-tile.nailed_planks.name=Nailed Planks
-tile.refined_planks.name=Refined Planks
+tile.nailed_planks.name=Nailed Wood Planks
+tile.refined_planks.name=Refined Wood Planks
 tile.nailed_planks_stairs.name=Nailed Plank Stairs
 tile.refined_planks_stairs.name=Refined Plank Stairs
 

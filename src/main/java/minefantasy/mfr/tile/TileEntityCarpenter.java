@@ -50,7 +50,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     private String researchRequired = "";
     private Skill skillUsed;
     private boolean resetRecipe = false;
-    private ItemStack recipe;
+    private ItemStack recipe = ItemStack.EMPTY;
     private int hammerTierRequired;
     private int CarpenterTierRequired;
     private boolean shouldUpdate;

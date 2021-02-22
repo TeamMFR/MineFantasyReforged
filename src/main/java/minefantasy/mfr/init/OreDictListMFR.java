@@ -1,12 +1,18 @@
 package minefantasy.mfr.init;
 
+import com.google.common.base.CaseFormat;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.item.AdvancedFuelHandlerMF;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
-
+import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class OreDictListMFR {
 
@@ -34,27 +40,26 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("paneGlass", new ItemStack(MineFantasyBlocks.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("paneGlass", new ItemStack(MineFantasyBlocks.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("planksOakWood", new ItemStack(Blocks.PLANKS, 1, 0));
-		OreDictionary.registerOre("planksSpruceWood", new ItemStack(Blocks.PLANKS, 1, 1));
-		OreDictionary.registerOre("planksBirchWood", new ItemStack(Blocks.PLANKS, 1, 2));
-		OreDictionary.registerOre("planksJungleWood", new ItemStack(Blocks.PLANKS, 1, 3));
-		OreDictionary.registerOre("planksAcaciaWood", new ItemStack(Blocks.PLANKS, 1, 4));
-		OreDictionary.registerOre("planksDarkOakWood", new ItemStack(Blocks.PLANKS, 1, 5));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 0));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 1));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 2));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 3));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 4));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 5));
+		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.IRONBARK_PLANKS, 1, 0));
+		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.EBONY_PLANKS, 1, 0));
+		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.YEW_PLANKS, 1, 0));
+		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.REFINED_PLANKS, 1, 0));
 
-		OreDictionary.registerOre("planksIronbarkWood", MineFantasyBlocks.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planksEbonyWood", MineFantasyBlocks.EBONY_PLANKS);
-		OreDictionary.registerOre("planksYewWood", MineFantasyBlocks.YEW_PLANKS);
-		OreDictionary.registerOre("planksIronbarkWood", MineFantasyBlocks.IRONBARK_PLANKS);
-		OreDictionary.registerOre("planksEbonyWood", MineFantasyBlocks.EBONY_PLANKS);
-		OreDictionary.registerOre("planksYewWood", MineFantasyBlocks.YEW_PLANKS);
+		NonNullList<ItemStack> plankWoodList = OreDictionary.getOres("plankWood");
+		ArrayList<CustomMaterial> woodMaterialList = CustomMaterial.getList("wood");
+		plankWoodList.remove(0);
 
-		for (ItemStack plank : OreDictionary.getOres("plankWood")) {
-			if (plank.getItem().getClass().getName().contains("blockWoodenDevice")) {
-				if (plank.getUnlocalizedName().equalsIgnoreCase("tile.blockWoodenDevice.6")) {
-					OreDictionary.registerOre("planksGreatwoodWood", plank);
-				}
-				if (plank.getUnlocalizedName().equalsIgnoreCase("tile.blockWoodenDevice.7")) {
-					OreDictionary.registerOre("planksSilverwoodWood", plank);
+		for (ItemStack plank : plankWoodList) {
+			for (CustomMaterial material : CustomMaterial.getList("wood")){
+				if (plank.getDisplayName().replaceAll(" ", "").replaceFirst("Planks", "").equals(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()))){
+					OreDictionary.registerOre("planks" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()), plank);
+					break;
 				}
 			}
 		}

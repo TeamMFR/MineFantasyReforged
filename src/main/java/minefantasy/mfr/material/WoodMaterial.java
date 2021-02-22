@@ -84,8 +84,7 @@ public class WoodMaterial extends CustomMaterial {
 
     @Override
     public ItemStack getItemStack() {
-        String camelCaseName = CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name);
-        NonNullList<ItemStack> list = OreDictionary.getOres("planks" + camelCaseName);
+        NonNullList<ItemStack> list = OreDictionary.getOres("planks" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name));
         if (list != null && !list.isEmpty()) {
             return list.get(0);
         }

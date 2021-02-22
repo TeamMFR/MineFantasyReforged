@@ -17,11 +17,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class BasicRecipesMF {
 
-	@SubscribeEvent
-	public static void registerItem(RegistryEvent.Register<IRecipe> event) {
-		MineFantasyRebornAPI.removeAllRecipes(Items.STICK);
-	}
-
 	public static void init() {
 		ForgingRecipes.init();
 		CarpenterRecipes.init();

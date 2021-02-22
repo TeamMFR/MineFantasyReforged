@@ -2,6 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockWoodDecor;
+import minefantasy.mfr.material.WoodMaterial;
 import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -11,7 +12,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
     public TileEntityWoodDecor(String texture) {
         this.texture = texture;
-        this.material = CustomMaterial.getMaterial("RefinedWood");
+        this.material = CustomMaterial.getMaterial(WoodMaterial.REFINED_WOOD);
     }
 
     public TileEntityWoodDecor(String tex, CustomMaterial material) {
@@ -24,7 +25,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     }
 
     public CustomMaterial getMaterial() {
-        return this.material != null ? this.material : trySetMaterial("RefinedWood");
+        return this.material != null ? this.material : trySetMaterial(WoodMaterial.REFINED_WOOD);
     }
 
     public void setMaterial(CustomMaterial material) {
@@ -32,7 +33,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
     }
 
     public String getMaterialName() {
-        return this.material != null ? material.getName() : "RefinedWood";
+        return this.material != null ? material.getName() : WoodMaterial.REFINED_WOOD;
     }
 
     public CustomMaterial trySetMaterial(String materialName) {
