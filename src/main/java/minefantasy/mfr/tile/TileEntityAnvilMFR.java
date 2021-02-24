@@ -788,7 +788,7 @@ public class TileEntityAnvilMFR extends TileEntityBase implements IAnvil, IQuali
 
         nbt.setFloat("Progress", progress);
         nbt.setFloat("ProgressMax", progressMax);
-        nbt.setString("ResName", resName);
+        nbt.setString("ResultName", resName);
         nbt.setString("toolTypeRequired", toolTypeRequired);
         nbt.setString("researchRequired", researchRequired);
         nbt.setString("TextureName", texName);
