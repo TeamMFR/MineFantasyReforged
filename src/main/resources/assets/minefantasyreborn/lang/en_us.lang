@@ -4,7 +4,7 @@ vehicle.fuel.name=Fuel: %1$s
 info.bow.reload=Right-Click while sneaking to open firearm.
 info.firearm.ammo=%1$s/%2$s
 info.tooltip.moreinfo=Hold [%1$s] for more information.
-
+info.salvage.usage=Drop a valid item on top of the Salvage Block to salvage it
 
 attribute.kit.salvage.name=Salvage Modifier
 

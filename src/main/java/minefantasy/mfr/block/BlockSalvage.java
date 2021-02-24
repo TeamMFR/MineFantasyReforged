@@ -21,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -85,6 +86,8 @@ public class BlockSalvage extends Block {
             }
             return true;
         }
+        user.sendStatusMessage(new TextComponentTranslation("info.salvage.usage"), true);
+
         return false;
     }
 
