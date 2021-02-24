@@ -1,4 +1,4 @@
-package minefantasy.mfr.recipe;
+package minefantasy.mfr.registry;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -10,10 +10,11 @@ import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 
 public abstract class DataLoader {
 
-	private static final String JSON_FILE_EXT = "json";
+	public static final String JSON_FILE_EXT = "json";
 
 	public void loadRegistry(String type, String defaultDirectory, String configDirectory) {
 		MineFantasyReborn.LOG.info("Loading " + type + " registry entries from config directory");
@@ -34,31 +35,33 @@ public abstract class DataLoader {
 	public void loadRegistryFiles(File source, String base, String type) {
 
 		FileUtils.findFiles(source, base, (root, file) -> {
-			String relative = root.relativize(file).toString();
+			Path relative = root.relativize(file);
 
-			String name = FilenameUtils.removeExtension(relative).replaceAll("\\\\", "/");
+			String name = FilenameUtils.removeExtension(relative.toString()).replaceAll("\\\\", "/");
 
 			String extension = FilenameUtils.getExtension(file.toString());
 
 			if (extension.equals(JSON_FILE_EXT)) {
-
-				try {
-
-					Reader reader = Files.newBufferedReader((file.toAbsolutePath()));
-
-					Gson gson = new Gson();
-					JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-
-					processRegistryEntry(name, jsonObject);
-				}
-
-				catch (Exception e) {
-					MineFantasyReborn.LOG.error("Error loading MFR " + type + " registry file " + relative);
-					e.printStackTrace();
-				}
+				parse(name, fileToJsonObject(file, relative, type));
 			}
 		});
 	}
 
-	protected abstract boolean processRegistryEntry(String name, JsonObject json);
+	public JsonObject fileToJsonObject(Path file, Path relative, String type) {
+		try {
+			Reader reader = Files.newBufferedReader((file.toAbsolutePath()));
+			Gson gson = new Gson();
+			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+			return jsonObject;
+		}
+
+		catch (Exception e) {
+			MineFantasyReborn.LOG.error("Error loading MFR " + type + " registry file " + relative);
+			e.printStackTrace();
+		}
+
+		return new JsonObject();
+	}
+
+	protected abstract void parse(String name, JsonObject json);
 }

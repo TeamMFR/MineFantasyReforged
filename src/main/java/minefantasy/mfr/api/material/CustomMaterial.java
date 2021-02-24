@@ -1,10 +1,10 @@
 package minefantasy.mfr.api.material;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.text.DecimalFormat;
@@ -57,7 +57,7 @@ public class CustomMaterial {
     public int crafterAnvilTier = 0;
     public float craftTimeModifier = 1.0F;
     public float meltingPoint;
-    private float[] armourProtection = new float[]{1.0F, 1.0F, 1.0F};
+    private float[] armourProtection = new float[]{1.0F, 1.0F, 1.0F}; // TODO: consider making this property into a typed class
     private boolean unbreakable = false;
 
     public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density) {
@@ -71,6 +71,21 @@ public class CustomMaterial {
         this.density = density;
         this.resistance = resistance;
         this.craftTimeModifier = 2F + (sharpness * 2F);
+    }
+
+    public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density, float[] armourProtection, int[] color) {
+        this.name = name;
+        this.type = type;
+        this.tier = tier;
+        this.hardness = hardness;
+        this.durability = durability;
+        this.flexibility = flexibility;
+        this.sharpness = sharpness;
+        this.density = density;
+        this.resistance = resistance;
+        this.craftTimeModifier = 2F + (sharpness * 2F);
+        this.armourProtection = armourProtection;
+        this.colourRGB = color;
     }
 
     /**
@@ -294,8 +309,8 @@ public class CustomMaterial {
         return type.equalsIgnoreCase("metal");
     }
 
-    public CustomMaterial setUnbreakable() {
-        unbreakable = true;
+    public CustomMaterial setUnbreakable(boolean unbreakable) {
+        this.unbreakable = unbreakable;
         return this;
     }
 

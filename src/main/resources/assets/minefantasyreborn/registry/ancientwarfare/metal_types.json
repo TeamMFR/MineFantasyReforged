@@ -1,0 +1,32 @@
+{
+    "mod": "ancientwarfare",
+    "metals": [
+        {
+            "name": "stainless_steel",
+            "properties": {
+                "tier": 3,
+                "durability": 5.0,
+                "flexibility": 1.0,
+                "sharpness": 2.5,
+                "hardness": 2.75,
+                "resistance": 40,
+                "density": 2.5,
+                "melting_point": 1600,
+                "rarity": 0,
+                "craft_tier": 3,
+                "craft_time_modifier": 1.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.0,
+                "piercing": 1.0
+            },
+            "color": {
+                "red": 188,
+                "green": 188,
+                "blue": 198
+            }
+        }
+    ]
+}

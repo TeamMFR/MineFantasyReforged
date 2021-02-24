@@ -21,7 +21,7 @@ public class AnvilRecipeLoader extends RecipeLoader {
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "anvil";
 	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/anvil_recipes";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/recipes/anvil_recipes/";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/custom/recipes/anvil_recipes/";
 
 	public static final List<JsonObject> list = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class AnvilRecipeLoader extends RecipeLoader {
 	}
 
 	@Override
-	protected boolean processRegistryEntry(String name, JsonObject json) {
+	protected void parse(String name, JsonObject json) {
 		String s = JsonUtils.getString(json, "type");
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
@@ -50,6 +50,5 @@ public class AnvilRecipeLoader extends RecipeLoader {
 
 		byte type = s.equals("CustomToolRecipe") ? (byte) 1 : (byte) 0;
 		CraftingManagerAnvil.getInstance().addRecipe(resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, o);
-		return true;
 	}
 }

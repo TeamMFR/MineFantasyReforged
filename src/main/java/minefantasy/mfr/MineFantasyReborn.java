@@ -41,6 +41,7 @@ import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.AnvilRecipeLoader;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CarpenterRecipeLoader;
+import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenMFBase;
 import net.minecraft.init.Items;
@@ -123,7 +124,8 @@ public class MineFantasyReborn {
 
 		BaseMaterialMFR.init();
 		WoodMaterial.init();
-		MetalMaterial.init();
+//		MetalMaterial.preInit();
+		MetalMaterialRegistry.INSTANCE.preInit();
 		LeatherMaterial.init();
 
 		ComponentListMFR.init();
@@ -157,7 +159,7 @@ public class MineFantasyReborn {
 //		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		GameRegistry.registerWorldGenerator(worldGenManager, 0);
-
+		MetalMaterialRegistry.INSTANCE.preInit();
 
 		PROXY.init();
 	}

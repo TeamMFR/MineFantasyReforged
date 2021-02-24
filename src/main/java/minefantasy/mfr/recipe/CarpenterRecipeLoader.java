@@ -19,7 +19,7 @@ public class CarpenterRecipeLoader extends RecipeLoader {
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "carpenter";
 	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/carpenter_recipes";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/recipes/carpenter_recipes/";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/custom/recipes/carpenter_recipes/";
 
 	private CarpenterRecipeLoader() {} // no instances!
 
@@ -29,7 +29,7 @@ public class CarpenterRecipeLoader extends RecipeLoader {
 	}
 
 	@Override
-	protected boolean processRegistryEntry(String name, JsonObject json) {
+	protected void parse(String name, JsonObject json) {
 
 		String type = JsonUtils.getString(json, "type");
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
@@ -57,6 +57,5 @@ public class CarpenterRecipeLoader extends RecipeLoader {
 		Object[] o = getInputs(pattern, json);
 
 		CraftingManagerCarpenter.getInstance().addRecipe(name, resultStack, skill, research, SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), experience, tool_type, tool_tier, 0, craft_time, tool_recipe, o);
-		return true;
 	}
 }
