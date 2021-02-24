@@ -3,7 +3,7 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.util.JsonUtils;
 import net.minecraftforge.fml.common.Loader;
@@ -12,12 +12,12 @@ import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.nio.file.Path;
 
-public class MetalMaterialRegistry extends DataLoader {
-	private static final String METAL_TYPES = "metal_types";
+public class WoodMaterialRegistry extends DataLoader {
+	private static final String WOOD_TYPES = "wood_types";
 
-	public static final MetalMaterialRegistry INSTANCE = new MetalMaterialRegistry();
+	public static final WoodMaterialRegistry INSTANCE = new WoodMaterialRegistry();
 
-	private static final String TYPE = "metal material";
+	private static final String TYPE = "wood material";
 	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/registry";
 	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/custom/registry";
 
@@ -40,52 +40,44 @@ public class MetalMaterialRegistry extends DataLoader {
 				String modName = relative.getName(0).toString();
 				String fileName = FilenameUtils.removeExtension(relative.getFileName().toString());
 
-				if (!Loader.isModLoaded(modName) || !fileName.equals(METAL_TYPES)) {
+				if (!Loader.isModLoaded(modName) || !fileName.equals(WOOD_TYPES)) {
 					return;
 				}
 
 				JsonObject jsonObject = fileToJsonObject(file, relative, type);
 				parse(fileName, jsonObject);
 			}
+
 		});
 	}
 
 	@Override
 	protected void parse(String name, JsonObject json) {
-		JsonArray metals = JsonUtils.getJsonArray(json, "metals");
+		JsonArray woods = JsonUtils.getJsonArray(json, "woods");
 
-		for (JsonElement e : metals) {
-			JsonObject metal = JsonUtils.getJsonObject(e, "");
-			parseMetal(metal);
+		for (JsonElement e : woods) {
+			JsonObject wood = JsonUtils.getJsonObject(e, "");
+			parseWood(wood);
 		}
 	}
 
-	private void parseMetal(JsonObject json) {
+	private void parseWood(JsonObject json) {
 		String name = JsonUtils.getString(json, "name");
 
-		if (MetalMaterial.getMaterial(name) != null) {
+		if (WoodMaterial.getMaterial(name) != null) {
 			return;
 		}
 
 		JsonObject properties = JsonUtils.getJsonObject(json, "properties");
 		float durability = JsonUtils.getFloat(properties, "durability");
 		float flexibility = JsonUtils.getFloat(properties, "flexibility");
-		float sharpness = JsonUtils.getFloat(properties, "sharpness");
 		float hardness = JsonUtils.getFloat(properties, "hardness");
 		float resistance = JsonUtils.getFloat(properties, "resistance");
 		float density = JsonUtils.getFloat(properties, "density");
 		int tier = JsonUtils.getInt(properties, "tier");
-		int meltingPoint = JsonUtils.getInt(properties, "melting_point");
 		int rarity = JsonUtils.getInt(properties, "rarity");
 		int craftTier = JsonUtils.getInt(properties, "craft_tier");
 		int craftTimeModifier = JsonUtils.getInt(properties, "craft_time_modifier");
-		boolean unbreakable = JsonUtils.getBoolean(properties, "unbreakable");
-
-		JsonObject armourStats = JsonUtils.getJsonObject(json, "armour_stats");
-		float cuttingProtection = JsonUtils.getFloat(armourStats, "cutting");
-		float bluntProtection = JsonUtils.getFloat(armourStats, "blunt");
-		float piercingProtection = JsonUtils.getFloat(armourStats, "piercing");
-		float[] armour = {cuttingProtection, bluntProtection, piercingProtection};
 
 		JsonObject color = JsonUtils.getJsonObject(json, "color");
 		int red = JsonUtils.getInt(color, "red");
@@ -93,12 +85,10 @@ public class MetalMaterialRegistry extends DataLoader {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		MetalMaterial metal = new MetalMaterial(name, tier, hardness, durability, flexibility, sharpness, resistance, density, armour, colors);
-		metal.setMeltingPoint(meltingPoint);
-		metal.setRarity(rarity);
-		metal.setCrafterTiers(craftTier);
-		metal.craftTimeModifier = craftTimeModifier;
-		metal.setUnbreakable(unbreakable);
-		metal.register();
+		WoodMaterial wood = new WoodMaterial(name, tier, hardness, durability, flexibility, resistance, density, colors);
+		wood.setRarity(rarity);
+		wood.setCrafterTiers(craftTier);
+		wood.craftTimeModifier = craftTimeModifier;
+		wood.register();
 	}
 }

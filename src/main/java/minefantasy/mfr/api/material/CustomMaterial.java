@@ -88,6 +88,20 @@ public class CustomMaterial {
         this.colourRGB = color;
     }
 
+    public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density, int[] color) {
+        this.name = name;
+        this.type = type;
+        this.tier = tier;
+        this.hardness = hardness;
+        this.durability = durability;
+        this.flexibility = flexibility;
+        this.sharpness = sharpness;
+        this.density = density;
+        this.resistance = resistance;
+        this.craftTimeModifier = 2F + (sharpness * 2F);
+        this.colourRGB = color;
+    }
+
     /**
      * Gets material name
      */
