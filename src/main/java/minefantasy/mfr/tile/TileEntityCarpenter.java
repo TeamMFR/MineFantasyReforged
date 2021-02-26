@@ -8,7 +8,7 @@ import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.container.ContainerCarpenterMFR;
+import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.network.CarpenterPacket;
 import minefantasy.mfr.network.NetworkHandler;
@@ -42,7 +42,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     private int tier;
     private Random rand = new Random();
     private int ticksExisted;
-    private ContainerCarpenterMFR syncCarpenter;
+    private ContainerCarpenter syncCarpenter;
     private CarpenterCraftMatrix craftMatrix;
     private String lastPlayerHit = "";
     private String toolTypeRequired = "hands";
@@ -58,7 +58,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     public final ItemStackHandler inventory = createInventory();
 
     public TileEntityCarpenter() {
-        setContainer(new ContainerCarpenterMFR(this));
+        setContainer(new ContainerCarpenter(this));
     }
 
     @Override
@@ -73,7 +73,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
     @Override
     public ContainerBase createContainer(EntityPlayer player) {
-        return new ContainerCarpenterMFR(player,this);
+        return new ContainerCarpenter(player,this);
     }
 
     @Override
@@ -420,7 +420,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     public void setHotOutput(boolean i) {
     }
 
-    public void setContainer(ContainerCarpenterMFR container) {
+    public void setContainer(ContainerCarpenter container) {
         syncCarpenter = container;
         craftMatrix = new CarpenterCraftMatrix(this, syncCarpenter, ShapelessCarpenterRecipes.GLOBAL_WIDTH, ShapelessCarpenterRecipes.GLOBAL_HEIGHT);
     }

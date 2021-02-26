@@ -5,5 +5,5 @@ package minefantasy.mfr.constants;
  */
 public final class Constants {
 
-	public static final String CRAFTED_BY_NAME_TAG = "MF_CraftedByName";
+	public static final String CRAFTED_BY_NAME_TAG = "mfr_crafted_by_name";
 }

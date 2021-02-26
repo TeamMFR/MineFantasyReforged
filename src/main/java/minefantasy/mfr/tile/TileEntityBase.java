@@ -18,6 +18,15 @@ import javax.annotation.Nullable;
 
 public abstract class TileEntityBase extends TileEntity {
 
+	public static final String TIER_TAG = "tier";
+	public static final String INVENTORY_TAG = "inventory";
+	public static final String PROGRESS_TAG = "progress";
+	public static final String PROGRESS_MAX_TAG = "progress_max";
+	public static final String RESULT_NAME_TAG = "result_name";
+	public static final String TOOL_TYPE_REQUIRED_TAG = "tool_type_required";
+	public static final String RESEARCH_REQUIRED_TAG = "research_required";
+	public static final String QUALITY_TAG = "quality";
+
 	/**
 	 * Create the inventory.
 	 *

@@ -14,9 +14,11 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.config.ConfigClient;
+import minefantasy.mfr.container.ContainerAnvil;
+import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.item.ItemWeaponMFR;
-import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.client.Minecraft;
@@ -98,8 +100,8 @@ public class MineFantasyHUD extends Gui {
 			World world = player.world;
 			TileEntity tile = world.getTileEntity(coords);
 			if (tile != null) {
-				if (tile instanceof TileEntityAnvilMFR) {
-					this.renderCraftMetre(world, player, (TileEntityAnvilMFR) tile);
+				if (tile instanceof TileEntityAnvil) {
+					this.renderCraftMetre(world, player, (TileEntityAnvil) tile);
 				}
 				if (tile instanceof TileEntityCarpenter) {
 					this.renderCraftMetre(world, player, (TileEntityCarpenter) tile);
@@ -385,7 +387,11 @@ public class MineFantasyHUD extends Gui {
 		mc.renderEngine.bindTexture(TextureHelperMFR.getResource(image));
 	}
 
-	private void renderCraftMetre(World world, EntityPlayer player, TileEntityAnvilMFR tile) {
+	private void renderCraftMetre(World world, EntityPlayer player, TileEntityAnvil tile) {
+		if (player.openContainer instanceof ContainerAnvil) {
+			return;
+		}
+
 		boolean knowsCraft = tile.doesPlayerKnowCraft(player);
 		GL11.glPushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
@@ -403,13 +409,13 @@ public class MineFantasyHUD extends Gui {
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-		if (knowsCraft && tile.getToolNeeded() != null) {
+		if (knowsCraft && tile.getRequiredToolType() != null) {
 
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getToolNeeded(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getToolNeeded(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
+			GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
 
-			if (tile.getAnvilTierNeeded() > -1) {
-				GuiHelper.renderToolIcon(this, "anvil", tile.getAnvilTierNeeded(), xPos + 172, yPos, tile.tier >= tile.getAnvilTierNeeded());
+			if (tile.getRequiredAnvilTier() > -1) {
+				GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPos + 172, yPos, tile.getTier() >= tile.getRequiredAnvilTier());
 			}
 		}
 
@@ -417,6 +423,10 @@ public class MineFantasyHUD extends Gui {
 	}
 
 	private void renderCraftMetre(World world, EntityPlayer player, TileEntityCarpenter tile) {
+		if (player.openContainer instanceof ContainerCarpenter) {
+			return;
+		}
+
 		boolean knowsCraft = tile.doesPlayerKnowCraft(player);
 		GL11.glPushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);

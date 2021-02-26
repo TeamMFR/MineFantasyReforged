@@ -18,7 +18,7 @@ import minefantasy.mfr.client.gui.GuiQuern;
 import minefantasy.mfr.client.gui.GuiReload;
 import minefantasy.mfr.client.gui.GuiResearchBench;
 import minefantasy.mfr.container.ContainerReload;
-import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import minefantasy.mfr.tile.TileEntityBombBench;
@@ -101,7 +101,6 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(STAMINA_PACKET, StaminaPacket.class, StaminaPacket::new);
 		PacketMF.registerPacket(PARRY_PACKET, ParryPacket.class, ParryPacket::new);
 		PacketMF.registerPacket(HIT_SOUND_PACKET, HitSoundPacket.class, HitSoundPacket::new);
-		PacketMF.registerPacket(ANVIL_PACKET, AnvilPacket.class, AnvilPacket::new);
 		PacketMF.registerPacket(CARPENTER_PACKET, CarpenterPacket.class, CarpenterPacket::new);
 		PacketMF.registerPacket(KNOWLEDGE_PACKET, KnowledgePacket.class, KnowledgePacket::new);
 		PacketMF.registerPacket(RESEARCH_REQUEST_PACKET, ResearchRequestPacket.class, ResearchRequestPacket::new);
@@ -131,7 +130,7 @@ public class NetworkHandler implements IGuiHandler {
 	}
 
 	public static void sendToAllPlayers(PacketMF pkt) {
-		//noinspection ConstantConditions
+		//noinspection Co9öu4nstantConditions
 		if (FMLCommonHandler.instance().getEffectiveSide() == Side.SERVER && FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList() != null) {
 			INSTANCE.channel.sendToAll(pkt.getFMLPacket());
 		}
@@ -181,7 +180,7 @@ public class NetworkHandler implements IGuiHandler {
 				case GUI_CROSSBOW_BENCH:
 					return ((TileEntityCrossbowBench) tileEntity).createContainer(player);
 				case GUI_ANVIL:
-					return ((TileEntityAnvilMFR) tileEntity).createContainer(player);
+					return ((TileEntityAnvil) tileEntity).createContainer(player);
 			}
 		}
 		if (ID == GUI_RELOAD && x == 1 && !player.getHeldItemMainhand().isEmpty()){
@@ -222,7 +221,7 @@ public class NetworkHandler implements IGuiHandler {
 				case GUI_CROSSBOW_BENCH:
 					return new GuiCrossbowBench(((TileEntityCrossbowBench) tileEntity).createContainer(player), (TileEntityCrossbowBench) tileEntity);
 				case GUI_ANVIL:
-					return new GuiAnvilMF(((TileEntityAnvilMFR) tileEntity).createContainer(player), (TileEntityAnvilMFR) tileEntity);
+					return new GuiAnvilMF(((TileEntityAnvil) tileEntity).createContainer(player), (TileEntityAnvil) tileEntity);
 			}
 		}
 		switch (ID){

@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityCarpenter;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
@@ -9,37 +9,50 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerAnvilMF extends ContainerBase {
-    private TileEntityAnvilMFR tile;
+public class ContainerCarpenter extends ContainerBase {
+    private TileEntityCarpenter tile;
     private boolean isGuiContainer;
-    private int xInvOffset = 28;
 
-    public ContainerAnvilMF(TileEntityAnvilMFR tile) {
+    public ContainerCarpenter(TileEntityCarpenter tile) {
         isGuiContainer = false;
         this.tile = tile;
-        int width = 6;
-        int height = 4;
+        int width = tile.width;
+        int height = tile.height;
+
+        //main grid
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int slot = y * width + x;
-                this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 8 + x * 18, 38 + y * 18));
+                this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 44 + x * 18, 54 + y * 18));
             }
         }
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 150, 65));
+
+        //special slots
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
+        for (int y = 0; y < 4; y++) {
+            int slot = tile.getInventory().getSlots() - 4 + y;
+            this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));
+        }
     }
 
-    public ContainerAnvilMF(EntityPlayer player, TileEntityAnvilMFR tile) {
+    public ContainerCarpenter(EntityPlayer player, TileEntityCarpenter tile) {
         super(player.inventory, tile);
         isGuiContainer = true;
         this.tile = tile;
-        int width = 6;
-        int height = 4;
+        int width = tile.width;
+        int height = tile.height;
 
-        addTileSlots(width, height, 44, 38);
+        //main grid
+        addTileSlots(width, height, 44, 54);
 
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 214, 66));
+        //special slots
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
+        for (int y = 0; y < 4; y++) {
+            int slot = tile.getInventory().getSlots() - 4 + y;
+            this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));
+        }
 
-        addPlayerSlots(player.inventory, 8 + xInvOffset, 186);
+        addPlayerSlots(player.inventory, 8, 216);
     }
 
     @Override
@@ -61,7 +74,7 @@ public class ContainerAnvilMF extends ContainerBase {
                 }
             }
         }
-        //tile.sendUpdates();
+        tile.sendUpdates();
     }
 
     @Override
@@ -84,7 +97,7 @@ public class ContainerAnvilMF extends ContainerBase {
                 if (!this.mergeItemStack(itemstack1, slotCount, this.inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, slotCount - 1, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 0, slotCount - 5, false)) {
                 return ItemStack.EMPTY;
             }
 

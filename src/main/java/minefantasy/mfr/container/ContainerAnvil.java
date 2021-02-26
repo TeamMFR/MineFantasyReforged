@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.tile.TileEntityCarpenter;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
@@ -9,54 +9,43 @@ import net.minecraftforge.items.SlotItemHandler;
 
 import javax.annotation.Nonnull;
 
-public class ContainerCarpenterMFR extends ContainerBase {
-    private TileEntityCarpenter tile;
+public class ContainerAnvil extends ContainerBase {
+    private TileEntityAnvil tile;
     private boolean isGuiContainer;
+    private int xInvOffset = 28;
 
-    public ContainerCarpenterMFR(TileEntityCarpenter tile) {
+    public ContainerAnvil(TileEntityAnvil tile) {
         isGuiContainer = false;
         this.tile = tile;
-        int width = tile.width;
-        int height = tile.height;
-
-        //main grid
+        int width = 6;
+        int height = 4;
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 int slot = y * width + x;
-                this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 44 + x * 18, 54 + y * 18));
+                this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 8 + x * 18, 38 + y * 18));
             }
         }
-
-        //special slots
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
-        for (int y = 0; y < 4; y++) {
-            int slot = tile.getInventory().getSlots() - 4 + y;
-            this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));
-        }
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 150, 65));
     }
 
-    public ContainerCarpenterMFR(EntityPlayer player, TileEntityCarpenter tile) {
+    public ContainerAnvil(EntityPlayer player, TileEntityAnvil tile) {
         super(player.inventory, tile);
         isGuiContainer = true;
         this.tile = tile;
-        int width = tile.width;
-        int height = tile.height;
+        int width = 6;
+        int height = 4;
 
-        //main grid
-        addTileSlots(width, height, 44, 54);
+        addTileSlots(width, height, 44, 38);
 
-        //special slots
-        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
-        for (int y = 0; y < 4; y++) {
-            int slot = tile.getInventory().getSlots() - 4 + y;
-            this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));
-        }
+        this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 214, 66));
 
-        addPlayerSlots(player.inventory, 8, 216);
+        addPlayerSlots(player.inventory, 8 + xInvOffset, 186);
     }
 
     @Override
     public void detectAndSendChanges() {
+//        super.detectAndSendChanges();
+
         for (int i = 0; i < this.inventorySlots.size(); ++i) {
             ItemStack itemstack = this.inventorySlots.get(i).getStack();
             ItemStack itemstack1 = this.inventoryItemStacks.get(i);
@@ -74,7 +63,7 @@ public class ContainerCarpenterMFR extends ContainerBase {
                 }
             }
         }
-        tile.sendUpdates();
+//        tile.sendUpdates();
     }
 
     @Override
@@ -97,7 +86,7 @@ public class ContainerCarpenterMFR extends ContainerBase {
                 if (!this.mergeItemStack(itemstack1, slotCount, this.inventorySlots.size(), false)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (!this.mergeItemStack(itemstack1, 0, slotCount - 5, false)) {
+            } else if (!this.mergeItemStack(itemstack1, 0, slotCount - 1, false)) {
                 return ItemStack.EMPTY;
             }
 

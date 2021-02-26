@@ -12,21 +12,17 @@ public class AnvilCraftMatrix extends InventoryCrafting {
     }
 
     public void modifyTier(int hammerTier, int anvilTier, int craftTime) {
-        anvil.setHammerUsed(hammerTier);
-        anvil.setRequiredAnvil(anvilTier);
+        anvil.setRequiredHammerTier(hammerTier);
+        anvil.setRequiredAnvilTier(anvilTier);
         anvil.setForgeTime(craftTime);
     }
 
     public void modifyResearch(String name) {
-        anvil.setResearch(name);
+        anvil.setRequiredResearch(name);
     }
 
     public int getTier() {
-        return anvil.getRecipeHammer();
-    }
-
-    public int getAnvilTier() {
-        return anvil.getRecipeAnvil();
+        return anvil.getRequiredHammerTier();
     }
 
 }

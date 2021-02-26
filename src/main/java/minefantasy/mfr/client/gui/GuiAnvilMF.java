@@ -5,7 +5,7 @@ import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -16,11 +16,11 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiAnvilMF extends GuiContainer {
-    private TileEntityAnvilMFR tile;
+    private TileEntityAnvil tile;
     private int regularXSize = 176;
     private int xInvOffset = 28;
 
-    public GuiAnvilMF(ContainerBase container, TileEntityAnvilMFR tile) {
+    public GuiAnvilMF(ContainerBase container, TileEntityAnvil tile) {
         super(container);
         this.xSize = 235;
         this.ySize = 210;
@@ -48,10 +48,10 @@ public class GuiAnvilMF extends GuiContainer {
         int xPoint = (this.width - this.xSize) / 2 + 30;
         int yPoint = (this.height - this.ySize) / 2;
 
-        if (knowsCraft && !tile.resName.equalsIgnoreCase("")) {
-            if (tile.getToolNeeded() != null) {
+        if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
+            if (tile.getRequiredToolType() != null) {
                 if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-                    String s2 = I18n.format("tooltype." + tile.getToolNeeded()) + ", "
+                    String s2 = I18n.format("tooltype." + tile.getRequiredToolType()) + ", "
                             + (tile.getToolTierNeeded() > -1
                             ? I18n.format("attribute.mfcrafttier.name") + " "
                             + tile.getToolTierNeeded()
@@ -62,9 +62,9 @@ public class GuiAnvilMF extends GuiContainer {
             }
             if (x < xPoint + regularXSize + 20 && x > xPoint + regularXSize && y < yPoint + 20 && y > yPoint) {
                 String s2 = I18n.format("tooltype.anvil") + ", "
-                        + (tile.getAnvilTierNeeded() > -1
+                        + (tile.getRequiredAnvilTier() > -1
                         ? I18n.format("attribute.mfcrafttier.name") + " "
-                        + tile.getAnvilTierNeeded()
+                        + tile.getRequiredAnvilTier()
                         : I18n.format("attribute.nomfcrafttier.name"));
                 this.fontRenderer.drawStringWithShadow(s2,
                         regularXSize - fontRenderer.getStringWidth(s2) + 18 + xInvOffset, -12,
@@ -77,7 +77,7 @@ public class GuiAnvilMF extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager()
-                .bindTexture(TextureHelperMFR.getResource("textures/gui/anvil" + tile.getTextureName() + ".png"));
+                .bindTexture(TextureHelperMFR.getResource("textures/gui/" + tile.getTextureName() + ".png"));
         int xPoint = (this.width - this.xSize) / 2;
         int yPoint = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.xSize, this.ySize);
@@ -86,24 +86,24 @@ public class GuiAnvilMF extends GuiContainer {
             int progressWidth = (int) (160F / tile.progressMax * tile.progress);
             this.drawTexturedModalRect(xPoint + 8 + xInvOffset, yPoint + 21, 0, 210, progressWidth, 3);
         }
-        if (tile.doesPlayerKnowCraft(mc.player) && !tile.resName.equalsIgnoreCase("")) {
-            GuiHelper.renderToolIcon(this, "anvil", tile.getAnvilTierNeeded(), xPoint + regularXSize + xInvOffset,
+        if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")) {
+            GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPoint + regularXSize + xInvOffset,
                     yPoint, isBlockSufficient());
 
-            if (tile.getToolNeeded() != null) {
-                GuiHelper.renderToolIcon(this, tile.getToolNeeded(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
+            if (tile.getRequiredToolType() != null) {
+                GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
                         yPoint, isToolSufficient());
             }
         }
     }
 
     private boolean isBlockSufficient() {
-        return tile.tier >= tile.getAnvilTierNeeded();
+        return tile.getTier() >= tile.getRequiredAnvilTier();
     }
 
     private boolean isToolSufficient() {
         if (mc.player != null) {
-            return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getToolNeeded(),
+            return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(),
                     tile.getToolTierNeeded());
         }
         return false;

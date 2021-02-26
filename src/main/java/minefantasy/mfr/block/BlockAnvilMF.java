@@ -5,7 +5,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterialMFR;
-import minefantasy.mfr.tile.TileEntityAnvilMFR;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
+public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
     public BaseMaterialMFR material;
     private int tier;
     private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
@@ -42,7 +42,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
 
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityAnvilMFR();
+        return new TileEntityAnvil(tier, this.getRegistryName().getResourcePath());
     }
 
     @Override
@@ -69,7 +69,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack held = player.getHeldItem(hand);
-        TileEntityAnvilMFR tile = (TileEntityAnvilMFR) getTile(world, pos);
+        TileEntityAnvil tile = (TileEntityAnvil) getTile(world, pos);
         if (tile != null) {
             if (facing == EnumFacing.NORTH && !held.isEmpty() && held.getItem() instanceof ItemTongs
                     && onUsedTongs(world, player, held, tile)) {
@@ -82,7 +82,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
         return true;
     }
 
-    private boolean onUsedTongs(World world, EntityPlayer user, ItemStack held, TileEntityAnvilMFR tile) {
+    private boolean onUsedTongs(World world, EntityPlayer user, ItemStack held, TileEntityAnvil tile) {
         ItemStack result = tile.getInventory().getStackInSlot(tile.getInventory().getSlots() - 1);
         ItemStack grabbed = TongsHelper.getHeldItem(held);
 
@@ -110,7 +110,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvilMFR> {
     @Override
     public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
         {
-            TileEntityAnvilMFR tile = (TileEntityAnvilMFR) getTile(world, pos);
+            TileEntityAnvil tile = (TileEntityAnvil) getTile(world, pos);
             if (tile != null) {
                 if (user.isSneaking()) {
                     tile.upset(user);

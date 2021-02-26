@@ -9,19 +9,19 @@ import minefantasy.mfr.api.rpg.Skill;
 public interface IAnvil {
     void setForgeTime(int i);
 
-    void setHammerUsed(int i);
+    void setRequiredHammerTier(int i);
 
-    void setRequiredAnvil(int i);
+    void setRequiredAnvilTier(int i);
 
     void setHotOutput(boolean i);
 
-    void setToolType(String toolType);
+    void setRequiredToolType(String toolType);
 
-    void setSkill(Skill skill);
+    void setRequiredSkill(Skill skill);
 
-    public void setResearch(String research);
+    public void setRequiredResearch(String research);
 
-    int getRecipeHammer();
+    int getRequiredHammerTier();
 
-    int getRecipeAnvil();
+    int getRequiredAnvilTier();
 }
