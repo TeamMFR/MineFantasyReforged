@@ -52,7 +52,6 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.REFINED_PLANKS, 1, 0));
 
 		NonNullList<ItemStack> plankWoodList = OreDictionary.getOres("plankWood");
-		ArrayList<CustomMaterial> woodMaterialList = CustomMaterial.getList("wood");
 		plankWoodList.remove(0);
 
 		for (ItemStack plank : plankWoodList) {

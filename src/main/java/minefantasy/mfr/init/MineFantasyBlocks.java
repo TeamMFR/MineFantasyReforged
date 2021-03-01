@@ -194,7 +194,7 @@ public class MineFantasyBlocks {
 
 	public static Block PIE_SHEPARDS = Utils.nullValue();
 
-	public static Block BERRY_BUSH = Utils.nullValue();
+	public static BlockBerryBush BERRY_BUSH = Utils.nullValue();
 
 	public static Block BLAST_CHAMBER = Utils.nullValue();
 	public static Block BLAST_HEATER = Utils.nullValue();

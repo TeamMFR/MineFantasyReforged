@@ -1,7 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -18,7 +17,7 @@ public class TileEntityWorldGenMarker extends TileEntity {
         if (!world.isRemote && areChunksLoaded() && ticks >= getSpawnTime()) {
             Block block = Block.getBlockById(prevID);
             world.setBlockState(pos, (IBlockState) (block != null ? block : Blocks.AIR), 2);
-            StructureModuleMFR.placeStructure(className, type, length, deviation, world, pos, this.getBlockMetadata());
+            //StructureModuleMFR.placeStructure(className, type, length, deviation, world, pos, this.getBlockMetadata());
         }
 
         ++ticks;

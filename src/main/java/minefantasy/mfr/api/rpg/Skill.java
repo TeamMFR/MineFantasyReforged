@@ -31,11 +31,6 @@ public enum Skill {
         return 1;
     }
 
-    public Skill register() {
-        RPGElements.addSkill(this);
-        return this;
-    }
-
     /** Returns the skill with the given name, or throws an {@link java.lang.IllegalArgumentException} if no such
      * skill exists. */
     public static Skill fromName(String name){

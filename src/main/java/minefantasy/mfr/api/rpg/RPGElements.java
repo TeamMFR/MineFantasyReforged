@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class RPGElements {
@@ -18,15 +19,14 @@ public class RPGElements {
     public static float levelSpeedModifier = 1.0F;
     public static float levelUpModifier = 1.5F;
     public static ArrayList<Skill> skillsList = new ArrayList<Skill>();
-    private static HashMap<String, Skill> skillsMap = new HashMap<String, Skill>();
+    private static final HashMap<String, Skill> skillsMap = new HashMap<String, Skill>();
 
     static {
         PlayerData.registerStoredVariables(SKILL_STATS_KEY);
-    }
-
-    public static void addSkill(Skill skill) {
-        skillsMap.put(skill.unlocalizedName, skill);
-        skillsList.add(skill);
+        skillsList.addAll(Arrays.asList(Skill.values()));
+        for (Skill skill : Skill.values()){
+            skillsMap.put(skill.unlocalizedName, skill);
+        }
     }
 
     public static NBTTagCompound getSkill(EntityPlayer player, String skillname) {

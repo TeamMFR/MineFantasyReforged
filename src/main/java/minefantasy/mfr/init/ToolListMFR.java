@@ -7,7 +7,6 @@ import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.item.ItemResearchBook;
 import minefantasy.mfr.item.ItemSkillBook;
-import minefantasy.mfr.item.ItemWorldGenPlacer;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemClimbingPick;
 import minefantasy.mfr.item.ItemCrossbow;
@@ -192,9 +191,9 @@ public class ToolListMFR {
 
         PAINT_BRUSH = new ItemPaintBrush("paint_brush", 256);
 
-        DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "WorldGenAncientForge");
-        DEBUG_PLACE_ANCIENT_ALTER = new ItemWorldGenPlacer("world_gen_placer_ancient_alter", "WorldGenAncientAlter");
-        DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "WorldGenDwarvenStronghold");
+//        DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "WorldGenAncientForge");
+//        DEBUG_PLACE_ANCIENT_ALTER = new ItemWorldGenPlacer("world_gen_placer_ancient_alter", "WorldGenAncientAlter");
+//        DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "WorldGenDwarvenStronghold");
 
         SPAWNER_DRAGON = new ItemMobSpawner("dragon");
         SPAWNER_MINOTAUR = new ItemMobSpawner("minotaur");
@@ -268,9 +267,9 @@ public class ToolListMFR {
 
         registry.register(PAINT_BRUSH);
 
-        registry.register(DEBUG_PLACE_ANCIENT_FORGE);
-        registry.register(DEBUG_PLACE_ANCIENT_ALTER);
-        registry.register(DEBUG_PLACE_DWARVEN_STRONGHOLD);
+//        registry.register(DEBUG_PLACE_ANCIENT_FORGE);
+//        registry.register(DEBUG_PLACE_ANCIENT_ALTER);
+//        registry.register(DEBUG_PLACE_DWARVEN_STRONGHOLD);
 
         registry.register(SPAWNER_DRAGON);
         registry.register(SPAWNER_MINOTAUR);

@@ -98,7 +98,8 @@ public class ConfigWorldGen extends ConfigurationBaseMF {
     public static int limestoneSize;
 
     public static String berry = "4A: [Plant Gen] Berry Bush";
-    public static float berryRarity;
+    public static int berryRarity;
+    public static int berryGroupSize;
     public static float berryMinTemp;
     public static float berryMaxTemp;
     public static float berryMinRain;
@@ -312,26 +313,30 @@ public class ConfigWorldGen extends ConfigurationBaseMF {
                 .getString());
         limestoneFrequencyMin = Integer.parseInt(config.get(limestone, "Limestone Frequency Min", 1,
                 "Limestone will try spawn between this and max deposits per chunk").getString());
-        limestoneFrequencyMax = Integer.parseInt(config.get(limestone, "Limestone Frequency Max", 1,
+        limestoneFrequencyMax = Integer.parseInt(config.get(limestone, "Limestone Frequency Max", 2,
                 "Limestone will try spawn between min and this deposits per chunk").getString());
         limestoneLayerMin = Integer.parseInt(config
                 .get(limestone, "Limestone Layer Min", 48, "Limestone deposits spawn above this layer").getString());
         limestoneLayerMax = Integer.parseInt(config
                 .get(limestone, "Limestone Layer Max", 96, "Limestone deposits spawn below this layer").getString());
         limestoneSize = Integer.parseInt(
-                config.get(limestone, "Limestone Size", 128, "How many blocks consist of the deposit").getString());
+                config.get(limestone, "Limestone Size", 48, "How many blocks consist of the deposit").getString());
 
-        // Trees and Plants use SN values to make them more compact (since their pretty
-        // rare)
-        berryRarity = Float.parseFloat(config.get(berry, "Berry Bush Rarity", 3.0E-2D,
-                "The chance for berry bushes to spawn in a chunk. (0=never, 1.0=always), this means some chunks may not have any berries")
+        berryRarity = Integer.parseInt(config.get(berry, "Berry Bush Rarity", 20,
+                "The chance for berry bushes to spawn in a chunk.")
                 .getString());
+        berryGroupSize = Integer.parseInt(config.get(berry, "Berry Bush Group Size", 20,
+                "The size of a grouping for berry bushes to spawn in a chunk.")
+                .getString());
+
         yewRarity = Float.parseFloat(config.get(yew, "Yew Tree Rarity", 1.0E-3D,
                 "The chance for yew trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees")
                 .getString());
+
         ironbarkRarity = Float.parseFloat(config.get(ironbark, "Ironbark Tree Rarity", 1.5E-3D,
                 "The chance for ironbark trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees")
                 .getString());
+
         ebonyRarity = Float.parseFloat(config.get(ebony, "Ebony Tree Rarity", 5.0E-4D,
                 "The chance for ebony trees to spawn in a chunk. (0=never, 1.0=always), this means many chunks may not have any trees")
                 .getString());

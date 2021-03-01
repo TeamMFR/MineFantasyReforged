@@ -24,7 +24,8 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
-    private final Block log, leaves;
+    private final Block LOG;
+    private final Block LEAVES;
     private float growthModifier;
     private String name;
 
@@ -37,8 +38,8 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
         this.setCreativeTab(CreativeTabs.DECORATIONS);
         this.growthModifier = growthModifier;
         name = baseWood.toLowerCase() + "_sapling";
-        this.log = log;
-        this.leaves = leaves;
+        this.LOG = log;
+        this.LEAVES = leaves;
         setRegistryName(name);
         setUnlocalizedName(name);
         setSoundType(SoundType.GROUND);
@@ -72,7 +73,7 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, rand, pos))
             return;
         IBlockState state = world.getBlockState(pos);
-        Object treegen = new WorldGenMFTree(true, log, leaves);
+        Object treegen = new WorldGenMFTree(true, LOG, LEAVES);
 
         boolean flag = false;
 

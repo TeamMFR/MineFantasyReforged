@@ -1,160 +1,101 @@
 package minefantasy.mfr.world.gen.feature;
 
-import com.google.common.base.Predicate;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.block.state.pattern.BlockMatcher;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-public class WorldGenGeological {
-	public static void generate(Random seed, int chunkX, int chunkZ, World world, int dimension) {
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.COPPER_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.copperSize, ConfigWorldGen.copperFrequencyMin, ConfigWorldGen.copperFrequencyMax,
-				ConfigWorldGen.copperRarity, ConfigWorldGen.copperLayerMin, ConfigWorldGen.copperLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.TIN_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.tinSize, ConfigWorldGen.tinFrequencyMin, ConfigWorldGen.tinFrequencyMax,
-				ConfigWorldGen.tinRarity, ConfigWorldGen.tinLayerMin, ConfigWorldGen.tinLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.SILVER_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.silverSize, ConfigWorldGen.silverFrequencyMin, ConfigWorldGen.silverFrequencyMax,
-				ConfigWorldGen.silverRarity, ConfigWorldGen.silverLayerMin, ConfigWorldGen.silverLayerMax);
-		generateOreWithNeighbour(seed, chunkX, chunkZ, world, MineFantasyBlocks.MYTHIC_ORE, BlockMatcher.forBlock(Blocks.STONE), Blocks.BEDROCK,
-				ConfigWorldGen.mythicSize, ConfigWorldGen.mythicFrequencyMin, ConfigWorldGen.mythicFrequencyMax,
-				ConfigWorldGen.mythicRarity, ConfigWorldGen.mythicLayerMin, ConfigWorldGen.mythicLayerMax);
+public class WorldGenGeological implements IWorldGenerator {
 
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.KAOLINITE_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.kaoliniteSize, ConfigWorldGen.kaoliniteFrequencyMin,
-				ConfigWorldGen.kaoliniteFrequencyMax, ConfigWorldGen.kaoliniteRarity, ConfigWorldGen.kaoliniteLayerMin,
-				ConfigWorldGen.kaoliniteLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.CLAY_ORE, BlockMatcher.forBlock(Blocks.DIRT),
-				ConfigWorldGen.claySize, ConfigWorldGen.clayFrequencyMin, ConfigWorldGen.clayFrequencyMax,
-				ConfigWorldGen.clayRarity, ConfigWorldGen.clayLayerMin, ConfigWorldGen.clayLayerMax);
-		generateOreWithNeighbour(seed, chunkX, chunkZ, world, MineFantasyBlocks.NITRE_ORE, BlockMatcher.forBlock(Blocks.STONE), Blocks.AIR,
-				ConfigWorldGen.nitreSize, ConfigWorldGen.nitreFrequencyMin, ConfigWorldGen.nitreFrequencyMax,
-				ConfigWorldGen.nitreRarity, ConfigWorldGen.nitreLayerMin, ConfigWorldGen.nitreLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.SULFUR_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.sulfurSize, ConfigWorldGen.sulfurFrequencyMin, ConfigWorldGen.sulfurFrequencyMax,
-				ConfigWorldGen.sulfurRarity, ConfigWorldGen.sulfurLayerMin, ConfigWorldGen.sulfurLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.BORAX_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.boraxSize, ConfigWorldGen.boraxFrequencyMin, ConfigWorldGen.boraxFrequencyMax,
-				ConfigWorldGen.boraxRarity, ConfigWorldGen.boraxLayerMin, ConfigWorldGen.boraxLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.TUNGSTEN_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.wolframiteSize, ConfigWorldGen.wolframiteFrequencyMin,
-				ConfigWorldGen.wolframiteFrequencyMax, ConfigWorldGen.wolframiteRarity,
-				ConfigWorldGen.wolframiteLayerMin, ConfigWorldGen.wolframiteLayerMax);
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.COAL_RICH_ORE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.coalSize, ConfigWorldGen.coalFrequencyMin, ConfigWorldGen.coalFrequencyMax,
-				ConfigWorldGen.coalRarity, ConfigWorldGen.coalLayerMin, ConfigWorldGen.coalLayerMax);
+	@Override
+	public void generate(Random random, int blockXPos, int blockZPos, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+		//COPPER ORE
+		generateOreInStone(MineFantasyBlocks.COPPER_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.copperSize, MathHelper.getInt(random, ConfigWorldGen.copperFrequencyMin, ConfigWorldGen.copperFrequencyMax),
+				ConfigWorldGen.copperLayerMin, ConfigWorldGen.copperLayerMax, ConfigWorldGen.copperRarity);
+		//TIN ORE
+		generateOreInStone(MineFantasyBlocks.TIN_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.tinSize, MathHelper.getInt(random, ConfigWorldGen.tinFrequencyMin, ConfigWorldGen.tinFrequencyMax),
+				ConfigWorldGen.tinLayerMin, ConfigWorldGen.tinLayerMax, ConfigWorldGen.tinRarity);
+		//SILVER ORE
+		generateOreInStone(MineFantasyBlocks.SILVER_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.silverSize, MathHelper.getInt(random, ConfigWorldGen.silverFrequencyMin, ConfigWorldGen.silverFrequencyMax),
+				ConfigWorldGen.silverLayerMin, ConfigWorldGen.silverLayerMax, ConfigWorldGen.silverRarity);
+		//MYTHIC ORE
+		generateOreInStone(MineFantasyBlocks.MYTHIC_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.mythicSize, MathHelper.getInt(random, ConfigWorldGen.mythicFrequencyMin, ConfigWorldGen.mythicFrequencyMax),
+				ConfigWorldGen.mythicLayerMin, ConfigWorldGen.mythicLayerMax, ConfigWorldGen.mythicRarity);
+		//KAOLINITE ORE
+		generateOreInStone(MineFantasyBlocks.KAOLINITE_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.kaoliniteSize, MathHelper.getInt(random, ConfigWorldGen.kaoliniteFrequencyMin, ConfigWorldGen.kaoliniteFrequencyMax),
+				ConfigWorldGen.kaoliniteLayerMin, ConfigWorldGen.kaoliniteLayerMax, ConfigWorldGen.kaoliniteRarity);
+		//RICH CLAY ORE
+		generateOreInBlock(MineFantasyBlocks.CLAY_ORE.getDefaultState(), Blocks.DIRT, world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.claySize, MathHelper.getInt(random, ConfigWorldGen.clayFrequencyMin, ConfigWorldGen.clayFrequencyMax),
+				ConfigWorldGen.clayLayerMin, ConfigWorldGen.clayLayerMax, ConfigWorldGen.clayRarity);
+		//SULFUR ORE
+		generateOreInStone(MineFantasyBlocks.SULFUR_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.sulfurSize, MathHelper.getInt(random, ConfigWorldGen.sulfurFrequencyMin, ConfigWorldGen.sulfurFrequencyMax),
+				ConfigWorldGen.sulfurLayerMin, ConfigWorldGen.sulfurLayerMax, ConfigWorldGen.sulfurRarity);
 
-		generateOre(seed, chunkX, chunkZ, world, MineFantasyBlocks.LIMESTONE, BlockMatcher.forBlock(Blocks.STONE),
-				ConfigWorldGen.limestoneSize, ConfigWorldGen.limestoneFrequencyMin,
-				ConfigWorldGen.limestoneFrequencyMax, ConfigWorldGen.limestoneRarity, ConfigWorldGen.limestoneLayerMin,
-				ConfigWorldGen.limestoneLayerMax);
+		//NITRE ORE
+		generateOreInStone(MineFantasyBlocks.NITRE_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.nitreSize, MathHelper.getInt(random,ConfigWorldGen.nitreFrequencyMin, ConfigWorldGen.nitreFrequencyMax),
+				 ConfigWorldGen.nitreLayerMin, ConfigWorldGen.nitreLayerMax,ConfigWorldGen.nitreRarity);
+		//BORAX ORE
+		generateOreInStone(MineFantasyBlocks.BORAX_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.boraxSize, MathHelper.getInt(random,ConfigWorldGen.boraxFrequencyMin, ConfigWorldGen.boraxFrequencyMax),
+				ConfigWorldGen.boraxLayerMin, ConfigWorldGen.boraxLayerMax, ConfigWorldGen.boraxRarity);
+		//WOLFRAMITE ORE
+		generateOreInStone(MineFantasyBlocks.TUNGSTEN_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.wolframiteSize, MathHelper.getInt(random,ConfigWorldGen.wolframiteFrequencyMin, ConfigWorldGen.wolframiteFrequencyMax),
+				 ConfigWorldGen.wolframiteLayerMin, ConfigWorldGen.wolframiteLayerMax, ConfigWorldGen.wolframiteRarity);
+		//RICH COAL ORE
+		generateOreInStone(MineFantasyBlocks.COAL_RICH_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.coalSize, MathHelper.getInt(random,ConfigWorldGen.coalFrequencyMin, ConfigWorldGen.coalFrequencyMax),
+				 ConfigWorldGen.coalLayerMin, ConfigWorldGen.coalLayerMax, ConfigWorldGen.coalRarity);
+		//LIMESTONE GENERATION
+		generateOreInStone(MineFantasyBlocks.LIMESTONE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
+				ConfigWorldGen.limestoneSize, MathHelper.getInt(random, ConfigWorldGen.limestoneLayerMin, ConfigWorldGen.limestoneLayerMax),
+				 ConfigWorldGen.limestoneLayerMin, ConfigWorldGen.limestoneLayerMax, ConfigWorldGen.limestoneRarity);
 	}
 
-	/**
-	 * Not used yet, allows a vein consisting of two block types
-	 */
-	private static void generateDuelOre(Random seed, int chunkX, int chunkZ, World world, Block ore, Block bed,
-			int size, int frequencyMin, int frequencyMax, float rarity, int layerMin, int layerMax, Block special,
-			float chance) {
-		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
-		if (seed.nextFloat() < rarity) {
-			for (int count = 0; count < frequency; count++) {
-				BlockPos pos = new BlockPos(chunkX * 16 + seed.nextInt(16), MathHelper.getInt(seed, layerMin, layerMax),
-						chunkZ * 16 + seed.nextInt(16));
-				(new WorldGenDuelMinable(ore, size, special, chance)).generate(world, seed, pos);
+	public void generateOreInStone(IBlockState state, World world, Random random, int blockXPos, int blockZPos, int maxVeinSize, int frequency, int minY, int maxY, float rarity){
+		int deltaY = maxY - minY;
+
+		if (random.nextFloat() < rarity) {
+			for (int x = 0; x < frequency; x++) {
+				int posX = blockXPos + random.nextInt(16);
+				int posY = minY + random.nextInt(deltaY);
+				int posZ = blockZPos + random.nextInt(16);
+				// N.B. This method applies the anti-cascading-lag offset itself
+				(new WorldGenMinable(state, maxVeinSize)).generate(world, random, new BlockPos(posX, posY, posZ));
 			}
 		}
 	}
 
-	private static void generateOre(Random seed, int chunkX, int chunkZ, World world, Block ore,
-			Predicate<IBlockState> bed, int size, int frequencyMin, int frequencyMax, float rarity, int layerMin,
-			int layerMax) {
-		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
-		if (seed.nextFloat() < rarity) {
-			for (int count = 0; count < frequency; count++) {
-				BlockPos pos = new BlockPos(chunkX * 16 + seed.nextInt(16), MathHelper.getInt(seed, layerMin, layerMax),
-						chunkZ * 16 + seed.nextInt(16));
-				(new WorldGenMinable(ore.getDefaultState(), size, bed)).generate(world, seed, pos);
+	public void generateOreInBlock(IBlockState state, Block bed, World world, Random random, int blockXPos, int blockZPos, int maxVeinSize, int frequency, int minY, int maxY, float rarity){
+		int deltaY = maxY - minY;
+
+		if (random.nextFloat() < rarity) {
+			for (int x = 0; x < frequency; x++) {
+				int posX = blockXPos + random.nextInt(16);
+				int posY = minY + random.nextInt(deltaY);
+				int posZ = blockZPos + random.nextInt(16);
+				// N.B. This method applies the anti-cascading-lag offset itself
+				(new WorldGenMinable(state, maxVeinSize, BlockMatcher.forBlock(bed))).generate(world, random, new BlockPos(posX, posY, posZ));
 			}
 		}
-	}
-
-	private static void generateOreWithNeighbour(Random seed, int chunkX, int chunkZ, World world, Block ore, Predicate<IBlockState> bed,
-			Material neighbour, int size, int frequencyMin, int frequencyMax, float rarity, int layerMin,
-			int layerMax) {
-		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
-		if (seed.nextFloat() < rarity) {
-			for (int count = 0; count < frequency; count++) {
-				BlockPos pos = new BlockPos(chunkX * 16 + seed.nextInt(16), MathHelper.getInt(seed, layerMin, layerMax),
-						chunkZ * 16 + seed.nextInt(16));
-
-				if (isNeibourNear(world, pos, neighbour)) {
-					if ((new WorldGenMinableMF(ore, size, bed)).generate(world, seed, pos)) {
-					}
-				}
-			}
-		}
-	}
-
-	private static void generateOreWithNeighbour2(Random seed, int chunkX, int chunkZ, World world, Block basic,
-			float chance, Block special, Predicate<IBlockState> bed, Block neighbour, int size, int frequencyMin, int frequencyMax,
-			float rarity, int layerMin, int layerMax) {
-		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
-		if (seed.nextFloat() < rarity) {
-			for (int count = 0; count < frequency; count++) {
-				BlockPos pos = new BlockPos(chunkX * 16 + seed.nextInt(16), MathHelper.getInt(seed, layerMin, layerMax),
-						chunkZ * 16 + seed.nextInt(16));
-
-				if (isNeibourNear(world, pos, neighbour)) {
-					Block ore = (seed.nextFloat() <= chance ? special : basic);
-					if ((new WorldGenMinableMF(ore, size, bed)).generate(world, seed, pos)) {
-					}
-				}
-			}
-		}
-	}
-
-	private static void generateOreWithNeighbour(Random seed, int chunkX, int chunkZ, World world, Block ore, Predicate<IBlockState> bed,
-			Block neighbour, int size, int frequencyMin, int frequencyMax, float rarity, int layerMin, int layerMax) {
-		int frequency = MathHelper.getInt(seed, frequencyMin, frequencyMax);
-		if (seed.nextFloat() < rarity) {
-			for (int count = 0; count < frequency; count++) {
-				BlockPos pos = new BlockPos(chunkX * 16 + seed.nextInt(16), MathHelper.getInt(seed, layerMin, layerMax),
-						chunkZ * 16 + seed.nextInt(16));
-
-				if (isNeibourNear(world, pos, neighbour)) {
-					if ((new WorldGenMinableMF(ore, size, bed)).generate(world, seed, pos)) {
-					}
-				}
-			}
-		}
-	}
-
-	private static boolean isNeibourNear(World world, BlockPos pos, Block neighbour) {
-		return world.getBlockState(pos.add(-1, 0, 0)).getBlock() == neighbour
-				|| world.getBlockState(pos.add(1, 0, 0)).getBlock() == neighbour
-				|| world.getBlockState(pos.add(0, -1, 0)).getBlock() == neighbour
-				|| world.getBlockState(pos.add(0, 1, 0)).getBlock() == neighbour
-				|| world.getBlockState(pos.add(0, 0, -1)).getBlock() == neighbour
-				|| world.getBlockState(pos.add(0, 0, 1)).getBlock() == neighbour;
-	}
-
-	private static boolean isNeibourNear(World world, BlockPos pos, Material neighbour) {
-		return world.getBlockState(pos.add(-1, 0, 0)).getMaterial() == neighbour
-				|| world.getBlockState(pos.add(1, 0, 0)).getMaterial() == neighbour
-				|| world.getBlockState(pos.add(0, -1, 0)).getMaterial() == neighbour
-				|| world.getBlockState(pos.add(0, 1, 0)).getMaterial() == neighbour
-				|| world.getBlockState(pos.add(0, 0, -1)).getMaterial() == neighbour
-				|| world.getBlockState(pos.add(0, 0, 1)).getMaterial() == neighbour;
 	}
 }
