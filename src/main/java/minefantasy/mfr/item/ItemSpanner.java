@@ -4,44 +4,45 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.material.WoodMaterial;
-import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.util.ModelLoaderHelper;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.Optional.Interface;
-import net.minecraftforge.fml.common.Optional.InterfaceList;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButton;
 import net.minecraft.block.BlockChest;
 import net.minecraft.block.BlockLever;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.common.Optional.Interface;
+import net.minecraftforge.fml.common.Optional.InterfaceList;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
         this.material = ToolMaterial.IRON;
         this.name = name;
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.setMaxDamage(material.getMaxUses() * 2);
         this.tier = tier;
         setRegistryName(name);
@@ -135,8 +136,8 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
     }
 
     @Override
-    public String getToolType(ItemStack item) {
-        return "spanner";
+    public Tool getToolType(ItemStack stack) {
+        return Tool.SPANNER;
     }
 
     @Override

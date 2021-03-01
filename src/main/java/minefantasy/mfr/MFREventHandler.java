@@ -11,7 +11,7 @@ import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
@@ -117,11 +117,11 @@ public final class MFREventHandler {
 	 * @param list the tooltip of the ItemStack
 	 */
 	private static void showCrafterTooltip(ItemStack tool, List<String> list) {
-		String toolType = ToolHelper.getCrafterTool(tool);
+		Tool toolStack = ToolHelper.getToolTypeFromStack(tool);
 		int tier = ToolHelper.getCrafterTier(tool);
 		float efficiency = ToolHelper.getCrafterEfficiency(tool);
 
-		list.add(I18n.format("attribute.mfcrafttool.name") + ": " + I18n.format("tooltype." + toolType));
+		list.add(I18n.format("attribute.mfcrafttool.name") + ": " + toolStack.getDisplayName());
 		list.add(I18n.format("attribute.mfcrafttier.name") + ": " + tier);
 		list.add(I18n.format("attribute.mfcrafteff.name") + ": " + efficiency);
 	}

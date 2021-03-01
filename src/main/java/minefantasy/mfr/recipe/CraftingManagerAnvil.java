@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.anvil;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.rpg.Skill;
@@ -121,6 +121,7 @@ public class CraftingManagerAnvil {
 		this.recipes.add(recipe);
 		return recipe;
 	}
+
 
 	public IAnvilRecipe addShapelessRecipe(ItemStack output, Skill skill, String research, boolean hot,
 			String tool, int hammer, int anvil, int time, Object... input) {
@@ -270,7 +271,7 @@ public class CraftingManagerAnvil {
 				hot = iAnvilRecipe.outputHot();
 				toolType = iAnvilRecipe.getToolType();
 
-				anvil.setForgeTime(time);
+				anvil.setProgressMax(time);
 				anvil.setRequiredHammerTier(hammer);
 				anvil.setRequiredAnvilTier(anvilTier);
 				anvil.setHotOutput(hot);

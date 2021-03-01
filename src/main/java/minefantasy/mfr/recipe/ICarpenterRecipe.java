@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.carpenter;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.item.ItemStack;

@@ -5,8 +5,8 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -119,7 +119,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
             return;
         }
         ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-        if (this.getCreativeTab() != CreativeTabMFR.tabArmour) {
+        if (this.getCreativeTab() != MineFantasyTabs.tabArmour) {
             for (CustomMaterial customMat : metal) {
                 if (!customMat.getItemStack().isEmpty()) {
                     items.add(construct(customMat.name));

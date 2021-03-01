@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.anvil;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.rpg.Skill;
 
@@ -7,7 +7,7 @@ import minefantasy.mfr.api.rpg.Skill;
  * MineFantasy so it can be referred to without importing the mod
  */
 public interface IAnvil {
-    void setForgeTime(int i);
+    void setProgressMax(int i);
 
     void setRequiredHammerTier(int i);
 

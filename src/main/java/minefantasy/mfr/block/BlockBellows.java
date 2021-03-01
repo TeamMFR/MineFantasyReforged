@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import com.google.common.collect.ImmutableMap;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityBellows;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -47,7 +47,7 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> {
         setUnlocalizedName("bellows");
         this.setHardness(1F);
         this.setResistance(0.5F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

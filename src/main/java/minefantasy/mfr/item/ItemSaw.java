@@ -8,7 +8,8 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -55,7 +56,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
         super(material, material.getAttackDamage(), 1.0F);
         this.tier = tier;
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.hitDamage = (2.0F + material.getAttackDamage()) / 2F;
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -89,8 +90,8 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
     }
 
     @Override
-    public String getToolType(ItemStack item) {
-        return "saw";
+    public Tool getToolType(ItemStack stack) {
+        return Tool.SAW;
     }
 
     @Override

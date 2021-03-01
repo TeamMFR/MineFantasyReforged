@@ -412,7 +412,7 @@ public class MineFantasyHUD extends Gui {
 		if (knowsCraft && tile.getRequiredToolType() != null) {
 
 			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
 
 			if (tile.getRequiredAnvilTier() > -1) {
 				GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPos + 172, yPos, tile.getTier() >= tile.getRequiredAnvilTier());
@@ -444,10 +444,10 @@ public class MineFantasyHUD extends Gui {
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-		if (knowsCraft && !tile.resName.equalsIgnoreCase("") && tile.getToolNeeded() != null) {
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getToolNeeded(),
+		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
+			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(),
 					tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getToolNeeded(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
 		}
 
 		GL11.glPopMatrix();

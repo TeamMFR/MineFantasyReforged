@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.anvil;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;

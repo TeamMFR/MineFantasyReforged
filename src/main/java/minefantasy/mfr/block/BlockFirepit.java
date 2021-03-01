@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.tool.ILighter;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityFirepit;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -47,7 +47,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
         setUnlocalizedName(name);
         this.setLightOpacity(0);
         setHardness(2F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,7 +26,7 @@ public class BlockRoad extends Block {
         setUnlocalizedName(name);
         setSoundType(soundType);
         setLightOpacity(255);
-        this.setCreativeTab(CreativeTabMFR.BUILDING_BLOCKS);
+        this.setCreativeTab(MineFantasyTabs.BUILDING_BLOCKS);
     }
 
     @Override

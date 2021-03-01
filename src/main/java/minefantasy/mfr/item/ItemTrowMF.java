@@ -7,7 +7,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -55,7 +55,7 @@ public class ItemTrowMF extends ItemSpade implements IToolMaterial, IClientRegis
     public ItemTrowMF(String name, ToolMaterial material, int rarity) {
         super(material);
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         setRegistryName(name);
         setUnlocalizedName(name);
 

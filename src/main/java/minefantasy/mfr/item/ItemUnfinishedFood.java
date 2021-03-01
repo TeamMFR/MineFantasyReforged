@@ -1,9 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.ItemBaseMFR;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
@@ -22,7 +20,7 @@ public class ItemUnfinishedFood extends ItemBaseMFR {
         setMaxStackSize(1);
         itemRarity = rarity;
 
-        this.setCreativeTab(CreativeTabMFR.tabFood);
+        this.setCreativeTab(MineFantasyTabs.tabFood);
     }
 
     @Override

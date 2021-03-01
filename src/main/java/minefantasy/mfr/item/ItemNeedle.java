@@ -8,7 +8,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -46,7 +47,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
     public ItemNeedle(String name, ToolMaterial material, int rarity, int tier) {
         super(0F, 1.0F, material, Sets.newHashSet(new Block[]{}));
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.tier = tier;
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -142,11 +143,9 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
 
-    // ====================================================== CUSTOM END
-    // ==============================================================\\
     @Override
-    public String getToolType(ItemStack item) {
-        return "needle";
+    public Tool getToolType(ItemStack stack) {
+        return Tool.NEEDLE;
     }
 
     @Override

@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -21,7 +21,7 @@ public class ItemResearchBook extends ItemBaseMFR {
     public ItemResearchBook() {
         super("research_book");
         setMaxStackSize(1);
-        setCreativeTab(CreativeTabMFR.tabGadget);
+        setCreativeTab(MineFantasyTabs.tabGadget);
         setUnlocalizedName("infobook");
 
         setContainerItem(this);

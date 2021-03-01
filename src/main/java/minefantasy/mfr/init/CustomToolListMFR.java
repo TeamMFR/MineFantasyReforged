@@ -1,38 +1,39 @@
 package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.item.ArrowType;
 import minefantasy.mfr.item.EnumBowType;
 import minefantasy.mfr.item.ItemArrowMFR;
-import minefantasy.mfr.item.ItemBowMFR;
 import minefantasy.mfr.item.ItemAxeMFR;
-import minefantasy.mfr.item.ItemHoeMF;
-import minefantasy.mfr.item.ItemPickMF;
-import minefantasy.mfr.item.ItemShearsMFR;
-import minefantasy.mfr.item.ItemSpadeMF;
-import minefantasy.mfr.item.ItemHandpick;
-import minefantasy.mfr.item.ItemHeavyPick;
-import minefantasy.mfr.item.ItemHeavyShovel;
-import minefantasy.mfr.item.ItemLumberAxe;
-import minefantasy.mfr.item.ItemMattock;
-import minefantasy.mfr.item.ItemScythe;
-import minefantasy.mfr.item.ItemTrowMF;
 import minefantasy.mfr.item.ItemBasicCraftTool;
-import minefantasy.mfr.item.ItemHammer;
-import minefantasy.mfr.item.ItemKnifeMFR;
-import minefantasy.mfr.item.ItemNeedle;
-import minefantasy.mfr.item.ItemSaw;
-import minefantasy.mfr.item.ItemSpanner;
-import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.item.ItemBattleaxe;
+import minefantasy.mfr.item.ItemBowMFR;
 import minefantasy.mfr.item.ItemDagger;
 import minefantasy.mfr.item.ItemGreatsword;
 import minefantasy.mfr.item.ItemHalbeard;
+import minefantasy.mfr.item.ItemHammer;
+import minefantasy.mfr.item.ItemHandpick;
+import minefantasy.mfr.item.ItemHeavyPick;
+import minefantasy.mfr.item.ItemHeavyShovel;
+import minefantasy.mfr.item.ItemHoeMF;
 import minefantasy.mfr.item.ItemKatana;
+import minefantasy.mfr.item.ItemKnife;
 import minefantasy.mfr.item.ItemLance;
+import minefantasy.mfr.item.ItemLumberAxe;
 import minefantasy.mfr.item.ItemMace;
+import minefantasy.mfr.item.ItemMattock;
+import minefantasy.mfr.item.ItemNeedle;
+import minefantasy.mfr.item.ItemPickMF;
+import minefantasy.mfr.item.ItemSaw;
+import minefantasy.mfr.item.ItemScythe;
+import minefantasy.mfr.item.ItemShearsMFR;
+import minefantasy.mfr.item.ItemSpadeMF;
+import minefantasy.mfr.item.ItemSpanner;
 import minefantasy.mfr.item.ItemSpear;
 import minefantasy.mfr.item.ItemSword;
+import minefantasy.mfr.item.ItemTongs;
+import minefantasy.mfr.item.ItemTrowMF;
 import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.item.ItemWarhammer;
 import minefantasy.mfr.item.ItemWeaponMFR;
@@ -77,7 +78,7 @@ public class CustomToolListMFR {
     public static ItemHammer STANDARD_HVYHAMMER = Utils.nullValue();
     public static ItemTongs STANDARD_TONGS = Utils.nullValue();
     public static ItemShearsMFR STANDARD_SHEARS = Utils.nullValue();
-    public static ItemKnifeMFR STANDARD_KNIFE = Utils.nullValue();
+    public static ItemKnife STANDARD_KNIFE = Utils.nullValue();
     public static ItemNeedle STANDARD_NEEDLE = Utils.nullValue();
     public static ItemSaw STANDARD_SAW = Utils.nullValue();
     public static ItemBasicCraftTool STANDARD_SPOON = Utils.nullValue();
@@ -92,7 +93,7 @@ public class CustomToolListMFR {
 
     public static void init() {
         String design = "standard";
-        CreativeTabs tab = CreativeTabMFR.tabWeapon;
+        CreativeTabs tab = MineFantasyTabs.tabWeapon;
 
         // Standard Weapons
         STANDARD_SWORD = new ItemSword(design + "_sword", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab);
@@ -108,13 +109,13 @@ public class CustomToolListMFR {
         STANDARD_LANCE = new ItemLance(design + "_lance", ToolMaterial.IRON, 0, 1F).setCustom(design).setTab(tab);
 
         // Standard Tools
-        tab = CreativeTabMFR.tabTool;
+        tab = MineFantasyTabs.tabTool;
         STANDARD_PICK = (ItemPickMF) new ItemPickMF(design + "_pick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_AXE = (ItemAxeMFR) new ItemAxeMFR(design + "_axe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_SPADE = (ItemSpadeMF) new ItemSpadeMF(design + "_spade", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_HOE = (ItemHoeMF) new ItemHoeMF(design + "_hoe", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
 
-        tab = CreativeTabMFR.tabToolAdvanced;
+        tab = MineFantasyTabs.tabToolAdvanced;
         STANDARD_HVYPICK = (ItemHeavyPick) new ItemHeavyPick(design + "_hvypick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_HVYSHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(design + "_hvyshovel", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_HANDPICK = (ItemHandpick) new ItemHandpick(design + "_handpick", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
@@ -124,20 +125,20 @@ public class CustomToolListMFR {
         STANDARD_LUMBER = (ItemLumberAxe) new ItemLumberAxe(design + "_lumber", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
 
         // Standard Crafters
-        tab = CreativeTabMFR.tabCraftTool;
+        tab = MineFantasyTabs.tabCraftTool;
         STANDARD_HAMMER = (ItemHammer) new ItemHammer(design + "_hammer", ToolMaterial.IRON, false, 0, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_HVYHAMMER = (ItemHammer) new ItemHammer(design + "_hvyhammer", ToolMaterial.IRON, true, 0, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_TONGS = (ItemTongs) new ItemTongs(design + "_tongs", ToolMaterial.IRON, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_SHEARS = (ItemShearsMFR) new ItemShearsMFR(design + "_shears", ToolMaterial.IRON, 0, 0).setCustom().setCreativeTab(tab);
-        STANDARD_KNIFE = (ItemKnifeMFR) new ItemKnifeMFR(design + "_knife", ToolMaterial.IRON, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
+        STANDARD_KNIFE = (ItemKnife) new ItemKnife(design + "_knife", ToolMaterial.IRON, 0, 1F, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_NEEDLE = (ItemNeedle) new ItemNeedle(design + "_needle", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
         STANDARD_SAW = (ItemSaw) new ItemSaw(design + "_saw", ToolMaterial.IRON, 0, 0).setCustom(design).setCreativeTab(tab);
 
-        STANDARD_SPOON = (ItemBasicCraftTool) new ItemBasicCraftTool(design + "_spoon", "spoon", 0, 64).setCustom(design).setCreativeTab(tab);
-        STANDARD_MALLET = (ItemBasicCraftTool) new ItemBasicCraftTool(design + "_mallet", "mallet", 0, 64).setCustom(design).setCreativeTab(tab);
+        STANDARD_SPOON = (ItemBasicCraftTool) new ItemBasicCraftTool(design + "_spoon", Tool.SPOON, 0, 64).setCustom(design).setCreativeTab(tab);
+        STANDARD_MALLET = (ItemBasicCraftTool) new ItemBasicCraftTool(design + "_mallet", Tool.MALLET, 0, 64).setCustom(design).setCreativeTab(tab);
         STANDARD_SPANNER = (ItemSpanner) new ItemSpanner(design + "_spanner", 0, 0).setCustom(design).setCreativeTab(tab);
 
-        tab = CreativeTabMFR.tabArcher;
+        tab = MineFantasyTabs.tabArchery;
         STANDARD_BOW = (ItemBowMFR) new ItemBowMFR(design + "_bow", EnumBowType.SHORTBOW).setCustom(design).setCreativeTab(tab);
         STANDARD_ARROW = (ItemArrowMFR) new ItemArrowMFR(design, ArrowType.BOLT, 20).setCustom().setAmmoType("bolt").setCreativeTab(tab);
         STANDARD_BOLT = (ItemArrowMFR) new ItemArrowMFR(design, ArrowType.NORMAL, 16).setCustom().setCreativeTab(tab);

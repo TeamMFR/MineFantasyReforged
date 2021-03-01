@@ -8,7 +8,6 @@ import minefantasy.mfr.api.helpers.ArrowEffectsMF;
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.rpg.LevelupEvent;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.ISmithTongs;
@@ -16,6 +15,7 @@ import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.mob.EntityDragon;
@@ -24,8 +24,6 @@ import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ItemWeaponMFR;
-import minefantasy.mfr.network.LevelUpPacket;
-import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
@@ -380,12 +378,12 @@ public class EventManagerMFRToRemove {
 			}
 		}
 		if (!weapon.isEmpty()) {
-			String type = ToolHelper.getCrafterTool(weapon);
+			Tool tool = ToolHelper.getToolTypeFromStack(weapon);
 			if (weapon.getItem() instanceof IHuntingItem) {
 				if (((IHuntingItem) weapon.getItem()).canRetrieveDrops(weapon)) {
 					dead.getEntityData().setBoolean("hunterKill", true);
 				}
-			} else if (type != null && type.equalsIgnoreCase("knife")) {
+			} else if (tool == Tool.KNIFE) {
 				dead.getEntityData().setBoolean("hunterKill", true);
 			}
 		}

@@ -1,6 +1,5 @@
 package minefantasy.mfr.client;
 
-import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mfr.api.knowledge.client.EntryPage;
 import minefantasy.mfr.api.knowledge.client.EntryPageBlastFurnace;
 import minefantasy.mfr.api.knowledge.client.EntryPageCrucible;
@@ -17,6 +16,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.ForgingRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

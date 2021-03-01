@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -48,7 +48,7 @@ public class BlockOreMF extends Block {
         if (material == Material.ROCK) {
             this.setHarvestLevel("pickaxe", harvestLevel);
         }
-        this.setCreativeTab(CreativeTabMFR.tabOres);
+        this.setCreativeTab(MineFantasyTabs.tabOres);
     }
 
     public BlockOreMF setBlockSoundType(SoundType soundType) {

@@ -1,10 +1,7 @@
 package minefantasy.mfr.api;
 
 import com.google.common.collect.Lists;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.cooking.CookRecipe;
-import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
-import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.crafting.refine.QuernRecipes;
 import minefantasy.mfr.api.heating.Heatable;
@@ -13,18 +10,17 @@ import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.IFuelHandler;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistryModifiable;
 
 import java.util.ArrayList;
 import java.util.Iterator;

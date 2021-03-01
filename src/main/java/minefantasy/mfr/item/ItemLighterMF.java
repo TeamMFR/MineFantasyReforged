@@ -1,22 +1,16 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.item.ItemBaseMFR;
-import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.api.tool.ILighter;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemFlintAndSteel;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.tool.ILighter;
-import minefantasy.mfr.init.CreativeTabMFR;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemFlintAndSteel;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class ItemLighterMF extends ItemBaseMFR implements ILighter {
@@ -27,7 +21,7 @@ public class ItemLighterMF extends ItemBaseMFR implements ILighter {
         setMaxDamage(uses);
         this.chance = chance;
         this.setMaxStackSize(1);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
     }
 
     // 0 for N/A -1 for fail, 1 for succeed

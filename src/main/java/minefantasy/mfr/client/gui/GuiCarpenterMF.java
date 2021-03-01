@@ -42,10 +42,10 @@ public class GuiCarpenterMF extends GuiContainer {
         int xPoint = (this.width - this.xSize) / 2;
         int yPoint = (this.height - this.ySize) / 2;
 
-        if (knowsCraft && !tile.resName.equalsIgnoreCase("")) {
-            if (tile.getToolNeeded() != null) {
+        if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
+            if (tile.getRequiredToolType() != null) {
                 if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-                    String s2 = I18n.format("tooltype." + tile.getToolNeeded()) + ", "
+                    String s2 = I18n.format("tooltype." + tile.getRequiredToolType()) + ", "
                             + (tile.getToolTierNeeded() > -1
                             ? I18n.format("attribute.mfcrafttier.name") + " "
                             + tile.getToolTierNeeded()
@@ -78,12 +78,12 @@ public class GuiCarpenterMF extends GuiContainer {
             int progressWidth = (int) (160F / tile.progressMax * tile.progress);
             this.drawTexturedModalRect(xPoint + 8, yPoint + 21, 0, 240, progressWidth, 3);
         }
-        if (tile.doesPlayerKnowCraft(mc.player) && !tile.resName.equalsIgnoreCase("")) {
+        if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")) {
             GuiHelper.renderToolIcon(this, "carpenter", tile.getCarpenterTierNeeded(), xPoint + regularXSize, yPoint,
                     true);
 
-            if (tile.getToolNeeded() != null) {
-                GuiHelper.renderToolIcon(this, tile.getToolNeeded(), tile.getToolTierNeeded(), xPoint - 20, yPoint,
+            if (tile.getRequiredToolType() != null) {
+                GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPoint - 20, yPoint,
                         isToolSufficient());
             }
         }
@@ -91,7 +91,7 @@ public class GuiCarpenterMF extends GuiContainer {
 
     private boolean isToolSufficient() {
         if (mc.player != null) {
-            return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getToolNeeded(),
+            return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(),
                     tile.getToolTierNeeded());
         }
         return false;

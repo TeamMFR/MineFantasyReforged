@@ -1,7 +1,5 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
-import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mfr.api.knowledge.InformationBase;
 import minefantasy.mfr.api.knowledge.InformationList;
 import minefantasy.mfr.api.knowledge.InformationPage;
@@ -11,6 +9,8 @@ import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.recipe.IAnvilRecipe;
+import minefantasy.mfr.recipe.ICarpenterRecipe;
 import minefantasy.mfr.recipe.RecipeHelper;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

@@ -1,12 +1,12 @@
 package minefantasy.mfr.api.knowledge.client;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
-import minefantasy.mfr.api.crafting.anvil.ShapedAnvilRecipes;
-import minefantasy.mfr.api.crafting.anvil.ShapelessAnvilRecipes;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
+import minefantasy.mfr.recipe.IAnvilRecipe;
+import minefantasy.mfr.recipe.ShapedAnvilRecipes;
+import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

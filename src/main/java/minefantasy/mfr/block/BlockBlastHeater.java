@@ -1,8 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -40,7 +40,7 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
         this.setSoundType(SoundType.METAL);
         this.setHardness(10F);
         this.setResistance(10F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

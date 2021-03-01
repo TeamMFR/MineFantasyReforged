@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.carpenter;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.rpg.Skill;
@@ -250,14 +250,14 @@ public class CraftingManagerCarpenter {
                 toolType = iCarpenterRecipe.getToolType();
                 sound = iCarpenterRecipe.getSound();
 
-                bench.setForgeTime(time);
-                bench.setToolTier(hammer);
+                bench.setProgressMax(time);
+                bench.setRequiredToolTier(hammer);
                 bench.setRequiredCarpenter(anvil);
                 bench.setHotOutput(hot);
-                bench.setToolType(toolType);
+                bench.setRequiredToolType(toolType);
                 bench.setCraftingSound(sound);
                 bench.setResearch(iCarpenterRecipe.getResearch());
-                bench.setSkill(iCarpenterRecipe.getSkill());
+                bench.setRequiredSkill(iCarpenterRecipe.getSkill());
 
                 return iCarpenterRecipe.getCraftingResult(matrix);
             }

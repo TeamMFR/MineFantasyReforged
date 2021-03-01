@@ -3,14 +3,14 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
 
     public ItemExplodingBolt() {
         super("exploding_bolt", 1, BaseMaterialMFR.IRON.getToolConversion(), ArrowType.EXPLOSIVEBOLT);
-        setCreativeTab(CreativeTabMFR.tabGadget);
+        setCreativeTab(MineFantasyTabs.tabGadget);
         setAmmoType("bolt");
         setMaxStackSize(20);
     }

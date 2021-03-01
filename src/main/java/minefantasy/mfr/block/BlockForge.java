@@ -6,8 +6,8 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighterMF;
 import minefantasy.mfr.item.ItemTongs;
@@ -57,7 +57,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
         this.setSoundType(SoundType.STONE);
         this.setHardness(5F);
         this.setResistance(8F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
         this.setLightOpacity(0);
     }
 

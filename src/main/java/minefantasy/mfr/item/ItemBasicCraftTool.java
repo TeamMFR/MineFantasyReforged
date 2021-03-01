@@ -6,7 +6,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -29,15 +30,15 @@ import java.util.List;
 public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
     protected int itemRarity;
     private int tier;
-    private String toolType;
+    private Tool toolType;
     // ===================================================== CUSTOM START
     // =============================================================\\
     private boolean isCustom = false;
 
-    public ItemBasicCraftTool(String name, String type, int tier, int uses) {
+    public ItemBasicCraftTool(String name, Tool type, int tier, int uses) {
         super(1.0F, 1.0F, ToolMaterial.WOOD, Sets.newHashSet(new Block[]{}));
         this.tier = tier;
-        setCreativeTab(CreativeTabMFR.tabCraftTool);
+        setCreativeTab(MineFantasyTabs.tabCraftTool);
 
         toolType = type;
         setRegistryName(name);
@@ -55,7 +56,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
     }
 
     @Override
-    public String getToolType(ItemStack item) {
+    public Tool getToolType(ItemStack stack) {
         return toolType;
     }
 

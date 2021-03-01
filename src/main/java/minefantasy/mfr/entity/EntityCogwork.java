@@ -9,6 +9,7 @@ import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigArmour;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -38,7 +39,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -52,7 +52,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-import java.util.List;
 
 public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
     private static final DataParameter<String> CUSTOM_MATERIAL = EntityDataManager.<String>createKey(EntityCogwork.class, DataSerializers.STRING);
@@ -488,7 +487,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
                         return true;
                     }
                 }
-                if (this.getPlating() != null && ToolHelper.getCrafterTool(item).equalsIgnoreCase("spanner")) {
+                if (this.getPlating() != null && ToolHelper.getToolTypeFromStack(item) == Tool.SPANNER) {
                     this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 1.2F, 1.0F);
                     user.swingArm(hand);
                     int boltCount = this.getBolts();
@@ -855,8 +854,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
         boolean isFrame = plating == null;
 
         if (source.getImmediateSource() != null && source.getImmediateSource() instanceof EntityLivingBase) {
-            canDestroy = ToolHelper.getCrafterTool(((EntityLivingBase) source.getImmediateSource()).getHeldItemMainhand())
-                    .equalsIgnoreCase("spanner");
+            canDestroy = ToolHelper.getToolTypeFromStack(((EntityLivingBase) source.getImmediateSource()).getHeldItemMainhand()) == Tool.SPANNER;
         }
         if (source.isFireDamage() || source.canHarmInCreative()) {
             canDestroy = true;

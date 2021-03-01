@@ -5,6 +5,7 @@ import minefantasy.mfr.api.crafting.engineer.IBombComponent;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBombBench;
 import minefantasy.mfr.init.KnowledgeListMFR;
@@ -107,7 +108,7 @@ public class TileEntityBombBench extends TileEntityBase implements  IBasicMetre 
 
         if (result.isEmpty()) {
             progress = 0F;
-        } else if ((pressUsed || ToolHelper.getCrafterTool(player.getHeldItemMainhand()).equalsIgnoreCase("spanner"))) {
+        } else if ((pressUsed || ToolHelper.getToolTypeFromStack(player.getHeldItemMainhand()) == Tool.SPANNER)) {
             if (!pressUsed && !player.getHeldItemMainhand().isEmpty()) {
                 world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
                 player.getHeldItemMainhand().damageItem(1, player);

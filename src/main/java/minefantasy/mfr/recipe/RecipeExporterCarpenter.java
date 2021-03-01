@@ -2,10 +2,6 @@ package minefantasy.mfr.recipe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
-import minefantasy.mfr.api.crafting.carpenter.CustomToolRecipeCarpenter;
-import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
-import minefantasy.mfr.api.crafting.carpenter.ShapedCarpenterRecipes;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

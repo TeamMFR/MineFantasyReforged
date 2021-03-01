@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.tool.IScope;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -19,7 +19,7 @@ public class ItemSpyglass extends ItemBaseMFR implements IScope {
 
     public ItemSpyglass() {
         super("spyglass");
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
         this.setHasSubtypes(true);
         this.setMaxDamage(0);
         this.setMaxStackSize(1);

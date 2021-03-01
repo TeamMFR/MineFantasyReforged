@@ -1,11 +1,10 @@
-package minefantasy.mfr.api.crafting.anvil;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;

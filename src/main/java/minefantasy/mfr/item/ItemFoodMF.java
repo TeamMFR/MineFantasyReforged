@@ -2,8 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.stamina.StaminaBar;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -56,7 +56,7 @@ public class ItemFoodMF extends ItemFood implements IClientRegister {
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        setCreativeTab(CreativeTabMFR.tabFood);
+        setCreativeTab(MineFantasyTabs.tabFood);
 
         MineFantasyReborn.PROXY.addClientRegister(this);
     }

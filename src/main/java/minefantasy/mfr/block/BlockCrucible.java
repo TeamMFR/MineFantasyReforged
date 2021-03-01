@@ -1,8 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFilledMould;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import net.minecraft.block.SoundType;
@@ -42,7 +42,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
         this.setSoundType(SoundType.STONE);
         this.setHardness(8F);
         this.setResistance(8F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Override

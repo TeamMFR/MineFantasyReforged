@@ -11,7 +11,7 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.ISmithTongs;
 import minefantasy.mfr.client.render.item.RenderTong;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -59,7 +59,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
     public ItemTongs(String name, ToolMaterial material, int rarity) {
         super(0F, 1.0F, material, Sets.newHashSet(new Block[]{}));
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.setMaxDamage(getMaxDamage() / 5);
         setRegistryName(name);
         setUnlocalizedName(name);

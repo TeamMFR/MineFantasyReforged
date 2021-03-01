@@ -1,10 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IQualityBalance;
-import minefantasy.mfr.api.crafting.anvil.AnvilCraftMatrix;
-import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
-import minefantasy.mfr.api.crafting.anvil.IAnvil;
-import minefantasy.mfr.api.crafting.anvil.ShapelessAnvilRecipes;
 import minefantasy.mfr.api.crafting.exotic.SpecialForging;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
@@ -12,6 +8,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.Trait;
 import minefantasy.mfr.container.ContainerAnvil;
 import minefantasy.mfr.container.ContainerBase;
@@ -21,7 +18,12 @@ import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.recipe.AnvilCraftMatrix;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.IAnvil;
+import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -69,8 +71,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	public float rightHit = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
-	private String lastPlayerHit = "";
-	private String requiredToolType = "hammer";
+	private String lastPlayerHit = "";  // TODO: store entity UUID instead of string
+	private Tool requiredToolType = Tool.HAMMER;
 	private String requiredResearch = "";
 	private boolean outputHot = false;
 	private Skill requiredSkill;
@@ -110,27 +112,6 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return true;
 	}
 
-	@Override
-	public void markDirty() {
-		//        ++ticksExisted;
-		super.markDirty();
-		if (!world.isRemote) {
-			if (leftHit == 0 || rightHit == 0) {
-				reassignHitValues();
-			}
-			//            if (ticksExisted % 20 == 0) {
-			updateCraftingData();
-			//            }
-			//            if (!canCraft() && ticksExisted > 1) {
-			progress = progressMax = 0;
-//			this.resultName = "<No Project Set>";
-			this.resultStack = ItemStack.EMPTY;
-			//            }
-			updateThreshold();
-		}
-	}
-
-
 	// FIXME: this is still probably being called more times than necessary
 	// TODO: implement recipe caching
 	public void onInventoryChanged() {
@@ -144,9 +125,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		if (user == null)
 			return false;
 
-		String toolType = ToolHelper.getCrafterTool(user.getHeldItemMainhand());
+		Tool tool = ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand());
 		int hammerTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
-		if (toolType.equalsIgnoreCase("hammer") || toolType.equalsIgnoreCase("hvyHammer")) {
+		if (tool == Tool.HAMMER || tool == Tool.HEAVY_HAMMER) {
 			if (!user.getHeldItemMainhand().isEmpty()) {
 				user.getHeldItemMainhand().damageItem(1, user);
 				if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
@@ -157,7 +138,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				}
 			}
 
-			if (doesPlayerKnowCraft(user) && canCraft() && toolType.equalsIgnoreCase(requiredToolType)) {
+			if (doesPlayerKnowCraft(user) && canCraft() && tool == requiredToolType) {
 				float mod = 1.0F;
 				if (hammerTier < requiredHammerTier) {
 					mod = 2.0F;
@@ -666,7 +647,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	@Override
 	public void setRequiredToolType(String toolType) {
-		this.requiredToolType = toolType;
+		this.requiredToolType = Tool.fromName(toolType);
 	}
 
 	@Override
@@ -678,7 +659,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	public void setRequiredSkill(Skill skill) { requiredSkill = skill; }
 
 	@Override
-	public void setForgeTime(int i) {
+	public void setProgressMax(int i) {
 		progressMax = i;
 	}
 
@@ -697,7 +678,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public String getResultName() {
-		return resultStack == ItemStack.EMPTY || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? "<No Project Set>" : resultStack.getDisplayName();
+		return resultStack == ItemStack.EMPTY || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
 	}
 
 	@Override
@@ -712,7 +693,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return requiredResearch;
 	}
 
-	public String getRequiredToolType() {
+	public Tool getRequiredToolType() {
 		return requiredToolType;
 	}
 
@@ -735,10 +716,10 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		inventory.deserializeNBT(nbt.getCompoundTag(INVENTORY_TAG));
 		progress = nbt.getFloat(PROGRESS_TAG);
 		progressMax = nbt.getFloat(PROGRESS_MAX_TAG);
-		resultStack = new ItemStack(nbt.getCompoundTag("result_stack"));
+		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
 		requiredAnvilTier = nbt.getInteger(REQUIRED_ANVIL_TIER_TAG);
 		requiredHammerTier = nbt.getInteger(REQUIRED_HAMMER_TIER_TAG);
-		requiredToolType = nbt.getString(TOOL_TYPE_REQUIRED_TAG);
+		requiredToolType = Tool.fromName(nbt.getString(TOOL_TYPE_REQUIRED_TAG));
 		requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
 		textureName = nbt.getString(TEXTURE_NAME_TAG);
 		outputHot = nbt.getBoolean(OUTPUT_HOT_TAG);
@@ -754,10 +735,10 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		nbt.setTag(INVENTORY_TAG, inventory.serializeNBT());
 		nbt.setFloat(PROGRESS_TAG, progress);
 		nbt.setFloat(PROGRESS_MAX_TAG, progressMax);
-		nbt.setTag("result_stack", resultStack.writeToNBT(new NBTTagCompound()));
+		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
 		nbt.setInteger(REQUIRED_ANVIL_TIER_TAG, requiredAnvilTier);
 		nbt.setInteger(REQUIRED_HAMMER_TIER_TAG, requiredHammerTier);
-		nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType);
+		nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType.getName());
 		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
 		nbt.setString(TEXTURE_NAME_TAG, textureName);
 		nbt.setBoolean(OUTPUT_HOT_TAG, outputHot);

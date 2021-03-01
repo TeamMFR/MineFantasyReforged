@@ -41,7 +41,7 @@ public class CustomArmourListMFR {
 
     public static void init() {
         String design = "standard";
-        CreativeTabs tab = CreativeTabMFR.tabArmour;
+        CreativeTabs tab = MineFantasyTabs.tabArmour;
 
         STANDARD_SCALE_HELMET = (ItemArmourMFR) new ItemCustomArmour(design, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).setCreativeTab(tab);
         STANDARD_SCALE_CHEST = (ItemArmourMFR) new ItemCustomArmour(design, "scale_chest", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).setCreativeTab(tab);

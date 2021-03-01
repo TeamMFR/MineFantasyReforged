@@ -7,25 +7,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public final class CreativeTabMFR extends CreativeTabs {
-    public static CreativeTabs tabTool = new CreativeTabMFR(CreativeTabs.getNextID(), "forgedtool", 1);
-    public static CreativeTabs tabWeapon = new CreativeTabMFR(CreativeTabs.getNextID(), "forgedweapon", 2);
-    public static CreativeTabs tabArmour = new CreativeTabMFR(CreativeTabs.getNextID(), "forgedarmour", 3);
-    public static CreativeTabs tabArcher = new CreativeTabMFR(CreativeTabs.getNextID(), "MFBows", 4);
-    public static CreativeTabs tabUtil = new CreativeTabMFR(CreativeTabs.getNextID(), "MFUtil", 5);
-    public static CreativeTabs tabGadget = new CreativeTabMFR(CreativeTabs.getNextID(), "MFGadgets", 6);
-    public static CreativeTabs tabMaterialsMFR = new CreativeTabMFR(CreativeTabs.getNextID(), "MFMaterials", 7);
-    public static CreativeTabs tabToolAdvanced = new CreativeTabMFR(CreativeTabs.getNextID(), "MFadvancedtool", 8);
-    public static CreativeTabs tabCraftTool = new CreativeTabMFR(CreativeTabs.getNextID(), "MFcrafttool", 9);
-    public static CreativeTabs tabOres = new CreativeTabMFR(CreativeTabs.getNextID(), "MFore", 10);
-    public static CreativeTabs tabFood = new CreativeTabMFR(CreativeTabs.getNextID(), "MFfood", 11);
-    public static CreativeTabs tabDragonforged = new CreativeTabMFR(CreativeTabs.getNextID(), "MFdragonforged", 12);
-    public static CreativeTabs tabOrnate = new CreativeTabMFR(CreativeTabs.getNextID(), "MFornate", 13);
-    public static CreativeTabs tabOldTools = new CreativeTabMFR(CreativeTabs.getNextID(), "MFOld", 14);
+public final class MineFantasyTabs extends CreativeTabs {
+    public static CreativeTabs tabTool = new MineFantasyTabs(CreativeTabs.getNextID(), "forgedtool", 1);
+    public static CreativeTabs tabWeapon = new MineFantasyTabs(CreativeTabs.getNextID(), "forgedweapon", 2);
+    public static CreativeTabs tabArmour = new MineFantasyTabs(CreativeTabs.getNextID(), "forgedarmour", 3);
+    public static CreativeTabs tabArchery = new MineFantasyTabs(CreativeTabs.getNextID(), "MFBows", 4);
+    public static CreativeTabs tabUtil = new MineFantasyTabs(CreativeTabs.getNextID(), "MFUtil", 5);
+    public static CreativeTabs tabGadget = new MineFantasyTabs(CreativeTabs.getNextID(), "MFGadgets", 6);
+    public static CreativeTabs tabMaterials = new MineFantasyTabs(CreativeTabs.getNextID(), "MFMaterials", 7);
+    public static CreativeTabs tabToolAdvanced = new MineFantasyTabs(CreativeTabs.getNextID(), "MFadvancedtool", 8);
+    public static CreativeTabs tabCraftTool = new MineFantasyTabs(CreativeTabs.getNextID(), "MFcrafttool", 9);
+    public static CreativeTabs tabOres = new MineFantasyTabs(CreativeTabs.getNextID(), "MFore", 10);
+    public static CreativeTabs tabFood = new MineFantasyTabs(CreativeTabs.getNextID(), "MFfood", 11);
+    public static CreativeTabs tabDragonforged = new MineFantasyTabs(CreativeTabs.getNextID(), "MFdragonforged", 12);
+    public static CreativeTabs tabOrnate = new MineFantasyTabs(CreativeTabs.getNextID(), "MFornate", 13);
+    public static CreativeTabs tabOldTools = new MineFantasyTabs(CreativeTabs.getNextID(), "MFOld", 14);
 
     private int type;
 
-    CreativeTabMFR(int id, String item, int t) {
+    MineFantasyTabs(int id, String item, int t) {
         super(item);
         type = t;
     }

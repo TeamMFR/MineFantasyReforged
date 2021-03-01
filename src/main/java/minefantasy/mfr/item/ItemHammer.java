@@ -9,7 +9,8 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -55,7 +56,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
         this.heavy = heavy;
         this.material = material;
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.setMaxDamage(material.getMaxUses() * 2);
         this.tier = tier;
         setRegistryName(name);
@@ -70,8 +71,8 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
     }
 
     @Override
-    public String getToolType(ItemStack item) {
-        return heavy ? "hvyHammer" : "hammer";
+    public Tool getToolType(ItemStack stack) {
+        return heavy ? Tool.HEAVY_HAMMER : Tool.HAMMER;
     }
 
     @Override

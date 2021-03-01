@@ -5,8 +5,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -62,7 +62,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         super(name);
         itemRarity = rarity;
         this.name = name;
-        this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
+        this.setCreativeTab(MineFantasyTabs.tabMaterials);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
         if (!isInCreativeTab(tab)) {
             return;
         }
-        if (this.getCreativeTab() != CreativeTabMFR.tabMaterialsMFR) {
+        if (this.getCreativeTab() != MineFantasyTabs.tabMaterials) {
             super.getSubItems(tab, items);
             return;
         }

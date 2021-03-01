@@ -7,7 +7,7 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.config.ConfigTools;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -54,7 +54,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
     public ItemHeavyPick(String name, ToolMaterial material, int rarity) {
         super(material);
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -99,7 +99,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
     }
 
     public ItemHeavyPick setCustom(String s) {
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         canRepair = false;
         isCustom = true;
         return this;

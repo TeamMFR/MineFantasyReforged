@@ -6,8 +6,8 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -69,7 +69,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
         if (!isInCreativeTab(tab)) {
             return;
         }
-        if (tab != CreativeTabMFR.tabMaterialsMFR) {
+        if (tab != MineFantasyTabs.tabMaterials) {
             ArrayList<CustomMaterial> wood = CustomMaterial.getList("metal");
             for (CustomMaterial customMat : wood) {
                 items.add(this.createComm(customMat.name));

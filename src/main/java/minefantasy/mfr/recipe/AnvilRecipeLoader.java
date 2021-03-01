@@ -1,7 +1,6 @@
 package minefantasy.mfr.recipe;
 
 import com.google.gson.JsonObject;
-import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;

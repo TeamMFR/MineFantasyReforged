@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.RackCommandPacket;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -41,7 +41,7 @@ public class BlockRack extends BlockWoodDecor {
 
 		setRegistryName(name);
 		setUnlocalizedName(name);
-		this.setCreativeTab(CreativeTabMFR.tabUtil);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
 	}
 
 	@Nonnull

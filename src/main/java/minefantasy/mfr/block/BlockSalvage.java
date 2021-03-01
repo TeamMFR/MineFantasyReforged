@@ -6,8 +6,9 @@ import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -40,7 +41,7 @@ public class BlockSalvage extends Block {
         this.setSoundType(SoundType.ANVIL);
         this.setHardness(2F);
         this.setResistance(1F);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
     }
 
     public static float getPlayerDropLevel(EntityPlayer user) {
@@ -94,13 +95,13 @@ public class BlockSalvage extends Block {
     private boolean salvageItem(World world, EntityPlayer user, ItemStack junk, BlockPos pos) {
         float modifier = 0.5F;
         ItemStack held = user.getHeldItemMainhand();
-        String type = ToolHelper.getCrafterTool(held);
+        Tool tool = ToolHelper.getToolTypeFromStack(held);
         float efficiency = ToolHelper.getCrafterEfficiency(held);
-        if (type.equalsIgnoreCase("saw")) {
+        if (tool == Tool.SAW) {
             modifier += (efficiency * 0.1F);
             world.playSound(user, pos.add(0.5, 0.5, 0.5), MineFantasySounds.SAW_CARPENTER, SoundCategory.NEUTRAL, 2F, 1F);
         }
-        if (type.equalsIgnoreCase("hammer") || type.equalsIgnoreCase("hvyhammer")) {
+        if (tool == Tool.HAMMER || tool == Tool.HEAVY_HAMMER) {
             modifier += (efficiency * 0.05F);
             world.playSound(user, pos.add(0.5, 0.5, 0.5), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 2F, 1F);
         }

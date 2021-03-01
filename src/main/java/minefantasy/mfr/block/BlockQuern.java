@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,7 +29,7 @@ public class BlockQuern extends BlockTileEntity<TileEntityQuern> {
         this.setSoundType(SoundType.STONE);
         this.setHardness(5F);
         this.setResistance(5F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

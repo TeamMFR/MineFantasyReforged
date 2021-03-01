@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.anvil;
+package minefantasy.mfr.recipe;
 
 import java.util.Comparator;
 

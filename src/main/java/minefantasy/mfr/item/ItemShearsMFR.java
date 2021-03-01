@@ -5,7 +5,8 @@ import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -42,7 +43,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
         this.tier = tier;
         itemRarity = rarity;
         toolMaterial = material;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.setMaxDamage(material.getMaxUses());
         setRegistryName(name);
         setUnlocalizedName(name);
@@ -126,11 +127,9 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
         return CustomToolHelper.getLocalisedName(item, unlocalName);
     }
 
-    // ====================================================== CUSTOM END
-    // ==============================================================\\
     @Override
-    public String getToolType(ItemStack item) {
-        return "shears";
+    public Tool getToolType(ItemStack stack) {
+        return Tool.SAW;
     }
 
     @Override

@@ -1,9 +1,11 @@
 package minefantasy.mfr.api.helpers;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.CustomCrafterEntry;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.ISharpenable;
+import minefantasy.mfr.constants.Tool;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,10 +18,9 @@ public class ToolHelper {
     public static final String sharpnessLevelNBT = "MF_Sharpness_Level";
     private static String specialItem = "MF_SpecialItemType";
 
-    public static boolean shouldShowTooltip(ItemStack tool) {
-        String type = getCrafterTool(tool);
-
-        return type != null && !type.equalsIgnoreCase("nothing") && !type.equalsIgnoreCase("hands");
+    public static boolean shouldShowTooltip(ItemStack stack) {
+		Tool tool = getToolTypeFromStack(stack);
+		return !(tool == Tool.HANDS || tool == Tool.OTHER);
     }
 
     public static float getCrafterEfficiency(ItemStack tool) {
@@ -46,14 +47,35 @@ public class ToolHelper {
 
     // QUALITY//
 
-    public static String getCrafterTool(ItemStack tool) {
+    public static String getCrafterToolName(ItemStack tool) {
         if (tool.isEmpty()) {
-            return "hands";
+            return Tool.HANDS.getName();
         }
         if (tool.getItem() instanceof IToolMFR) {
-            return ((IToolMFR) tool.getItem()).getToolType(tool);
+            return ((IToolMFR) tool.getItem()).getToolType(tool).getName();
         }
         return CustomCrafterEntry.getEntryType(tool);
+    }
+
+	/**
+	 * Checks the specified ItemStack's Tool type. Returns OTHER if it has no valid tool nbt tag
+	 * @param stack The item stack to check
+	 * @return
+	 */
+	public static Tool getToolTypeFromStack(ItemStack stack) {
+        if (stack == null) {
+            MineFantasyReborn.LOG.warn("Attempted to get the tool type of a null ItemStack");
+            return Tool.HANDS;
+        }
+
+        if (stack.isEmpty()) {
+            return Tool.HANDS;
+        }
+
+        if (stack.getItem() instanceof IToolMFR) {
+            return ((IToolMFR) stack.getItem()).getToolType(stack);
+        }
+        return Tool.OTHER;
     }
 
     /**
@@ -284,11 +306,21 @@ public class ToolHelper {
         return stringList;
     }
 
+    @Deprecated
     public static boolean isToolSufficient(ItemStack heldItem, String toolNeeded, int toolTierNeeded) {
-        String toolType = getCrafterTool(heldItem);
+		Tool tool = getToolTypeFromStack(heldItem);
+
         int tier = getCrafterTier(heldItem);
 
-        return toolType.equalsIgnoreCase(toolNeeded) && tier >= toolTierNeeded;
+        return tool.getName().equals(toolNeeded) && tier >= toolTierNeeded;
+    }
+
+    public static boolean isToolSufficient(ItemStack heldItem, Tool toolNeeded, int toolTierNeeded) {
+		Tool tool = getToolTypeFromStack(heldItem);
+
+        int tier = getCrafterTier(heldItem);
+
+        return tool.getName().equals(toolNeeded) && tier >= toolTierNeeded;
     }
 
     public static void setUnbreakable(ItemStack tool, boolean isUnbreakable) {

@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.knowledge.IArtefact;
 import minefantasy.mfr.block.BlockSchematic;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -35,7 +35,7 @@ public class ItemArtefact extends ItemBaseMFR implements IArtefact {
 		this.lootType = lootType;
 		this.dropWeight = dropChance;
 
-		this.setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
+		this.setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -41,7 +41,7 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> {
         this.setHardness(1F + 0.5F * tier);
         this.setResistance(1F);
         this.setLightOpacity(0);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

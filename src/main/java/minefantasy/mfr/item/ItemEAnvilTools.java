@@ -1,11 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.item.ItemBaseMFR;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.init.CreativeTabMFR;
-import net.minecraft.item.Item;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -14,7 +10,7 @@ import net.minecraft.item.ItemStack;
 public class ItemEAnvilTools extends ItemBaseMFR {
     public ItemEAnvilTools(String name, int uses) {
         super(name);
-        setCreativeTab(CreativeTabMFR.tabCraftTool);
+        setCreativeTab(MineFantasyTabs.tabCraftTool);
 
         this.setMaxDamage(uses);
         setMaxStackSize(1);

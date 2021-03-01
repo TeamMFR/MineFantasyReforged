@@ -2,9 +2,10 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.ToolHelper;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -30,7 +31,7 @@ public class BlockCogwork extends BlockDirectional {
         setRegistryName(name);
         setUnlocalizedName(name);
         this.setTickRandomly(true);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
         this.setHardness(1F);
         this.setResistance(5F);
         this.setLightOpacity(0);
@@ -38,7 +39,7 @@ public class BlockCogwork extends BlockDirectional {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && ToolHelper.getCrafterTool(player.getHeldItem(hand)).equalsIgnoreCase("spanner")) {
+        if (!world.isRemote && ToolHelper.getToolTypeFromStack(player.getHeldItem(hand)) == Tool.SPANNER) {
             return tryBuild(player, world, pos);
         }
         return false;

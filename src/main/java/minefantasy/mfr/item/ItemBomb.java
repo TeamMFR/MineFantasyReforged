@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityBomb;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.BombDispenser;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.resources.I18n;
@@ -42,7 +42,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
         super(name);
         this.maxStackSize = 16;
 
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());
 
         this.addPropertyOverride(new ResourceLocation("casing"), new IItemPropertyGetter()

@@ -9,8 +9,8 @@ import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.client.render.item.RenderBow;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -79,7 +79,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		itemRarity = rarity;
 		setRegistryName(name);
 		setUnlocalizedName(name);
-		setCreativeTab(CreativeTabMFR.tabOldTools);
+		setCreativeTab(MineFantasyTabs.tabOldTools);
 
 		MineFantasyReborn.PROXY.addClientRegister(this);
 	}

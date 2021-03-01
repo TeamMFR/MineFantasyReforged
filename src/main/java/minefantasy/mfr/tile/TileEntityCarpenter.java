@@ -1,22 +1,26 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.crafting.carpenter.CarpenterCraftMatrix;
-import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
-import minefantasy.mfr.api.crafting.carpenter.ICarpenter;
-import minefantasy.mfr.api.crafting.carpenter.ShapelessCarpenterRecipes;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.network.CarpenterPacket;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.recipe.CarpenterCraftMatrix;
+import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.recipe.ICarpenter;
+import minefantasy.mfr.recipe.ShapelessCarpenterRecipes;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -29,31 +33,29 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Random;
 
 import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
 public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
-    public final int width = 4;
-    public final int height = 4;
-    public String resName = "<No Project Set>";
+
+    // the tier of this carpenter block
+    private int tier;
+    public static final int width = 4;
+    public static final int height = 4;
+
+    private ItemStack resultStack = ItemStack.EMPTY;
+
     public float progressMax;
     public float progress;
-    private int tier;
-    private Random rand = new Random();
-    private int ticksExisted;
     private ContainerCarpenter syncCarpenter;
     private CarpenterCraftMatrix craftMatrix;
-    private String lastPlayerHit = "";
-    private String toolTypeRequired = "hands";
+    private String lastPlayerHit = ""; // TODO: store entity UUID instead of string
     private SoundEvent craftSound = SoundEvents.BLOCK_WOOD_STEP;
-    private String researchRequired = "";
-    private Skill skillUsed;
-    private boolean resetRecipe = false;
-    private ItemStack recipe = ItemStack.EMPTY;
-    private int hammerTierRequired;
-    private int CarpenterTierRequired;
-    private boolean shouldUpdate;
+    private String requiredResearch = "";
+    private Skill requiredSkill;
+    private Tool requiredToolType = Tool.HANDS;
+    private int requiredToolTier;
+    private int requiredCarpenterTier;
 
     public final ItemStackHandler inventory = createInventory();
 
@@ -86,30 +88,11 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
         return true;
     }
 
-    @Override
-    public void markDirty() {
-        // TODO: do we really need to increment this local variable every second and recheck against every recipe and sync data?
-        ++ticksExisted;
-        super.markDirty();
-        if (!world.isRemote) {
-            if (ticksExisted % 20 == 0) {
-                updateCraftingData();
-            }
-            if (!canCraft() && ticksExisted > 1) {
-                progress = progressMax = 0;
-                this.resName = "<No Project Set>";
-                this.recipe = ItemStack.EMPTY;
-            }
-        }
-        resetRecipe = false;
-    }
-
     public void onInventoryChanged() {
-        if (!resetRecipe) {
             updateCraftingData();
-            MFRLogUtil.logDebug("Carpenter: Optimised Inv Tick");
-            resetRecipe = true;
-        }
+            IBlockState iblockstate = world.getBlockState(getPos());
+            world.notifyBlockUpdate(getPos(), iblockstate, iblockstate, 3);
+            markDirty();
     }
 
     public boolean tryCraft(EntityPlayer user) {
@@ -117,9 +100,9 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
             return false;
         }
 
-        String toolType = ToolHelper.getCrafterTool(user.getHeldItemMainhand());
-        int hammerTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
-        if (!toolType.equalsIgnoreCase("nothing")) {
+        Tool tool = ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand());
+        int toolTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
+        if (!(tool == Tool.OTHER)) {
             if (!user.getHeldItemMainhand().isEmpty()) {
                 user.getHeldItemMainhand().damageItem(1, user);
                 if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
@@ -134,9 +117,9 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
             if (doesPlayerKnowCraft(user)
                     && canCraft()
-                    && toolType.equalsIgnoreCase(toolTypeRequired)
-                    && tier >= CarpenterTierRequired
-                    && hammerTier >= hammerTierRequired) {
+                    && tool == requiredToolType
+                    && tier >= requiredCarpenterTier
+                    && toolTier >= requiredToolTier) {
                 world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, getUseSound(), SoundCategory.AMBIENT, 1.0F, 1.0F, false);
                 float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItemMainhand());
 
@@ -161,10 +144,10 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
     private SoundEvent getUseSound() {
         if (craftSound.toString().equalsIgnoreCase("engineering")) {
-            if (rand.nextInt(5) == 0) {
+            if (world.rand.nextInt(5) == 0) {
                 return SoundEvents.UI_BUTTON_CLICK;
             }
-            if (rand.nextInt(20) == 0) {
+            if (world.rand.nextInt(20) == 0) {
                 return SoundEvents.BLOCK_WOODEN_DOOR_OPEN;
             }
             return SoundEvents.BLOCK_WOOD_STEP;
@@ -175,7 +158,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     private void craftItem(EntityPlayer user) {
         if (this.canCraft()) {
             addXP(user);
-            ItemStack result = recipe.copy();
+            ItemStack result = resultStack.copy();
             if (!result.isEmpty() && result.getItem() instanceof ItemArmourMFR) {
                 result = modifyArmour(result);
             }
@@ -230,12 +213,12 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
     private void dropItem(ItemStack itemstack) {
         if (!itemstack.isEmpty()) {
-            float f = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-            float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
+            float f = world.rand.nextFloat() * 0.8F + 0.1F;
+            float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
+            float f2 = world.rand.nextFloat() * 0.8F + 0.1F;
 
             while (itemstack.getCount() > 0) {
-                int j1 = this.rand.nextInt(21) + 10;
+                int j1 = world.rand.nextInt(21) + 10;
 
                 if (j1 > itemstack.getCount()) {
                     j1 = itemstack.getCount();
@@ -249,9 +232,9 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
                 }
 
                 float f3 = 0.05F;
-                entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-                entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-                entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
+                entityitem.motionX = (float) world.rand.nextGaussian() * f3;
+                entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
+                entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
                 world.spawnEntity(entityitem);
             }
         }
@@ -263,16 +246,8 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
         NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new CarpenterPacket(this));
     }
 
-    public String getResultName() {
-        if (!world.isRemote && !recipe.isEmpty() && recipe.getItem() != null && recipe.getDisplayName() != null) {
-
-            resName = recipe.getDisplayName();
-        }
-        return resName;
-    }
-
-    public String getToolNeeded() {
-        return toolTypeRequired;
+    public String getRequiredToolType() {
+        return requiredToolType.getName();
     }
 
     public SoundEvent getCraftingSound() {
@@ -285,15 +260,14 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     }
 
     public int getToolTierNeeded() {
-        return this.hammerTierRequired;
+        return this.requiredToolTier;
     }
 
     public int getCarpenterTierNeeded() {
-        return this.CarpenterTierRequired;
+        return this.requiredCarpenterTier;
     }
 
     public void consumeResources() {
-        resetRecipe = true;
         for (int slot = 0; slot < getOutputSlotNum(); slot++) {
             ItemStack item = getInventory().getStackInSlot(slot);
             if (!item.isEmpty() && item.getItem() != null && !item.getItem().getContainerItem(item).isEmpty()) {
@@ -310,7 +284,6 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
                 this.getInventory().extractItem(slot, 1, false);
             }
         }
-        resetRecipe = false;
         this.onInventoryChanged();
     }
 
@@ -360,9 +333,6 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
             return ItemStack.EMPTY;
         }
 
-//        if (ticksExisted <= 1)
-//            return ItemStack.EMPTY;
-
         for (int a = 0; a < getOutputSlotNum(); a++) {
             craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
         }
@@ -374,17 +344,21 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
         return result;
     }
 
+    public String getResultName() {
+        return resultStack == ItemStack.EMPTY || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
+    }
+
     public void updateCraftingData() {
         if (!world.isRemote) {
-            ItemStack oldRecipe = recipe;
-            recipe = getResult();
+            ItemStack oldRecipe = resultStack;
+            resultStack = getResult();
             // syncItems();
 
             if (!canCraft() && progress > 0) {
                 progress = 0;
                 // quality = 100;
             }
-            if (!recipe.isEmpty() && !oldRecipe.isEmpty() && !recipe.isItemEqual(oldRecipe)) {
+            if (!resultStack.isEmpty() && !oldRecipe.isEmpty() && !resultStack.isItemEqual(oldRecipe)) {
                 progress = 0;
             }
             if (progress > progressMax) progress = progressMax - 1;
@@ -395,25 +369,25 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     }
 
     public boolean canCraft() {
-        if (progressMax > 0 && !recipe.isEmpty() && recipe instanceof ItemStack) {
-            return this.canFitResult(recipe);
+        if (progressMax > 0 && !resultStack.isEmpty() && resultStack instanceof ItemStack) {
+            return this.canFitResult(resultStack);
         }
         return false;
     }
 
     @Override
-    public void setForgeTime(int i) {
+    public void setProgressMax(int i) {
         progressMax = i;
     }
 
     @Override
-    public void setToolTier(int i) {
-        hammerTierRequired = i;
+    public void setRequiredToolTier(int i) {
+        requiredToolTier = i;
     }
 
     @Override
     public void setRequiredCarpenter(int i) {
-        CarpenterTierRequired = i;
+        requiredCarpenterTier = i;
     }
 
     @Override
@@ -426,7 +400,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     }
 
     public boolean shouldRenderCraftMetre() {
-        return !recipe.isEmpty();
+        return !resultStack.isEmpty();
     }
 
     public int getProgressBar(int i) {
@@ -434,17 +408,17 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     }
 
     @Override
-    public void setToolType(String toolType) {
-        this.toolTypeRequired = toolType;
+    public void setRequiredToolType(String toolType) {
+        this.requiredToolType = Tool.fromName(toolType);
     }
 
     @Override
     public void setResearch(String research) {
-        this.researchRequired = research;
+        this.requiredResearch = research;
     }
 
     public String getResearchNeeded() {
-        return researchRequired;
+        return requiredResearch;
     }
 
     public boolean doesPlayerKnowCraft(EntityPlayer user) {
@@ -455,43 +429,39 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
     }
 
     private void addXP(EntityPlayer smith) {
-        if (skillUsed != null) {
+        if (requiredSkill != null) {
             float baseXP = this.progressMax / 10F;
-            skillUsed.addXP(smith, (int) baseXP + 1);
+            requiredSkill.addXP(smith, (int) baseXP + 1);
         }
     }
 
     @Override
-    public void setSkill(Skill skill) {
-        skillUsed = skill;
+    public void setRequiredSkill(Skill skill) {
+        requiredSkill = skill;
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
-        tier = nbt.getInteger("tier");
-
-        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
-
-        progress = nbt.getFloat("Progress");
-        progressMax = nbt.getFloat("ProgressMax");
-        resName = nbt.getString("ResultName");
-        toolTypeRequired = nbt.getString("toolTypeRequired");
-        researchRequired = nbt.getString("researchRequired");
+        tier = nbt.getInteger(TIER_TAG);
+        inventory.deserializeNBT(nbt.getCompoundTag(INVENTORY_TAG));
+        progress = nbt.getFloat(PROGRESS_TAG);
+        progressMax = nbt.getFloat(PROGRESS_MAX_TAG);
+        resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
+        requiredToolType = Tool.fromName(nbt.getString(TOOL_TYPE_REQUIRED_TAG));
+        requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         super.writeToNBT(nbt);
-        nbt.setInteger("tier", tier);
-
-        nbt.setTag("inventory", inventory.serializeNBT());
-
-        nbt.setFloat("Progress", progress);
-        nbt.setFloat("ProgressMax", progressMax);
-        nbt.setString("ResultName", resName);
-        nbt.setString("toolTypeRequired", toolTypeRequired);
-        nbt.setString("researchRequired", researchRequired);
+        nbt.setInteger(TIER_TAG, tier);
+        nbt.setTag(INVENTORY_TAG, inventory.serializeNBT());
+        nbt.setFloat(PROGRESS_TAG, progress);
+        nbt.setFloat(PROGRESS_MAX_TAG, progressMax);
+        nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
+        nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType.getName());
+        nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
         return nbt;
     }
 

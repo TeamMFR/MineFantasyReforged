@@ -93,7 +93,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
         ItemStack held = player.getHeldItemMainhand();
 
         // Interaction
-        if (!getInventory().getStackInSlot(1).isEmpty() && (leverPull || ToolHelper.getCrafterTool(held).equalsIgnoreCase(toolType))) {
+        if (!getInventory().getStackInSlot(1).isEmpty() && (leverPull || ToolHelper.getToolTypeFromStack(held).getName().equalsIgnoreCase(toolType))) {
             if (leverPull || ToolHelper.getCrafterTier(held) >= tier) {
                 if (!leverPull) {
                     held.damageItem(1, player);
@@ -141,8 +141,8 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
             }
             return true;
         }
-        if (!leftClick && (ToolHelper.getCrafterTool(held).equalsIgnoreCase("nothing")
-                || ToolHelper.getCrafterTool(held).equalsIgnoreCase("hands"))) {
+        if (!leftClick && (ToolHelper.getCrafterToolName(held).equalsIgnoreCase("nothing")
+                || ToolHelper.getCrafterToolName(held).equalsIgnoreCase("hands"))) {
             // Item placement
             ItemStack item = getInventory().getStackInSlot(0);
             if (item.isEmpty()) {

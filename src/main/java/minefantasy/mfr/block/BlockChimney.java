@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityChimney;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -38,7 +38,7 @@ public class BlockChimney extends Block {
         this.setSoundType(SoundType.METAL);
         this.setHardness(5F);
         this.setResistance(10F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

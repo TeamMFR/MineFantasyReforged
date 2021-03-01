@@ -8,16 +8,16 @@ import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.item.AdvancedFuelHandlerMF;
 import minefantasy.mfr.item.FuelHandlerMF;
 import minefantasy.mfr.item.ItemArtefact;
+import minefantasy.mfr.item.ItemBombComponent;
 import minefantasy.mfr.item.ItemBowl;
 import minefantasy.mfr.item.ItemComponentMFR;
+import minefantasy.mfr.item.ItemCrossbowPart;
+import minefantasy.mfr.item.ItemCustomComponent;
 import minefantasy.mfr.item.ItemFilledMould;
+import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.item.ItemHide;
 import minefantasy.mfr.item.ItemRawOre;
 import minefantasy.mfr.item.ItemSpecialDesign;
-import minefantasy.mfr.item.ItemCustomComponent;
-import minefantasy.mfr.item.ItemBombComponent;
-import minefantasy.mfr.item.ItemCrossbowPart;
-import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Blocks;
@@ -354,8 +354,8 @@ public class ComponentListMFR {
 		BODKIN_HEAD = new ItemCustomComponent("bodkin_head", 1 / 4F, "metal");
 		BROAD_HEAD = new ItemCustomComponent("broad_head", 1 / 4F, "metal");
 
-		COGWORK_ARMOUR = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(CreativeTabMFR.tabGadget).setMaxStackSize(1);
-		BAR = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(CreativeTabMFR.tabMaterialsMFR);
+		COGWORK_ARMOUR = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
+		BAR = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		FLUX_POT = new ItemComponentMFR("flux_pot", 0).setContainerItem(CLAY_POT);
 		COAL_FLUX = new ItemComponentMFR("coal_flux", 0);
@@ -365,7 +365,7 @@ public class ComponentListMFR {
 		GOLD_COIN = new ItemComponentMFR("gold_coin", 0);
 
 		HINGE = new ItemComponentMFR("hinge", 0);
-		COGWORK_PULLEY = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(CreativeTabMFR.tabGadget);
+		COGWORK_PULLEY = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(MineFantasyTabs.tabGadget);
 
 		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
 		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");

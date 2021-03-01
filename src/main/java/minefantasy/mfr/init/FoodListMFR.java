@@ -5,9 +5,9 @@ import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.item.ItemBurntFood;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.item.ItemFoodMF;
+import minefantasy.mfr.item.ItemJug;
 import minefantasy.mfr.item.ItemMultiFood;
 import minefantasy.mfr.item.ItemUnfinishedFood;
-import minefantasy.mfr.item.ItemJug;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -148,9 +148,9 @@ public class FoodListMFR {
         GENERIC_MEAT_CHUNK_COOKED = new ItemFoodMF("generic_meat_chunk_cooked", 5, 0.5F, true);
         GENERIC_MEAT_MINCE_UNCOOKED = new ItemFoodMF("generic_meat_mince_uncooked", 2, 0.2F, true).setContainerItem(ComponentListMFR.CLAY_POT);
         GENERIC_MEAT_MINCE_COOKED = new ItemFoodMF("generic_meat_mince_cooked", 5, 0.5F, true).setContainerItem(ComponentListMFR.CLAY_POT);
-        FLOUR = new ItemComponentMFR("flour", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        BREADCRUMBS = new ItemComponentMFR("breadcrumbs", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        GUTS = new ItemComponentMFR("guts", 0).setCreativeTab(CreativeTabMFR.tabFood);
+        FLOUR = new ItemComponentMFR("flour", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        BREADCRUMBS = new ItemComponentMFR("breadcrumbs", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        GUTS = new ItemComponentMFR("guts", 0).setCreativeTab(MineFantasyTabs.tabFood);
         BREADROLL = new ItemFoodMF("breadroll", 5, 1.0F, false);
         BREAD_SLICE = new ItemFoodMF("bread_slice", 2, 1.0F, false);
         CURDS = new ItemUnfinishedFood("curds");
@@ -197,13 +197,13 @@ public class FoodListMFR {
         ECLAIR = new ItemMultiFood("eclair", 4, 4, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
         // MISC
-        CAKE_TIN = new ItemComponentMFR("cake_tin", 0).setCreativeTab(CreativeTabMFR.tabFood);
-        PIE_TRAY = new ItemComponentMFR("pie_tray", 0).setStoragePlacement("bigplate", "tray").setCreativeTab(CreativeTabMFR.tabFood);
-        ICING = new ItemComponentMFR("icing", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        CUSTARD = new ItemComponentMFR("custard", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        CHOCOLATE = new ItemComponentMFR("chocolate", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        CHOC_CHIPS = new ItemComponentMFR("choc_chips", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        CAKE_TIN = new ItemComponentMFR("cake_tin", 0).setCreativeTab(MineFantasyTabs.tabFood);
+        PIE_TRAY = new ItemComponentMFR("pie_tray", 0).setStoragePlacement("bigplate", "tray").setCreativeTab(MineFantasyTabs.tabFood);
+        ICING = new ItemComponentMFR("icing", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        CUSTARD = new ItemComponentMFR("custard", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        CHOCOLATE = new ItemComponentMFR("chocolate", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        CHOC_CHIPS = new ItemComponentMFR("choc_chips", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
         BERRIES = new ItemFoodMF("berries", 2, 2.0F, false).setEatTime(10).setStaminaRestore(10F).setAlwaysEdible();
         BERRIES_JUICY = new ItemFoodMF("berries_juicy", 3, 5.0F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setAlwaysEdible();
         SWEETROLL_RAW = new ItemUnfinishedFood("sweetroll_raw").setMaxStackSize(64);
@@ -228,9 +228,9 @@ public class FoodListMFR {
         PIE_BERRY_COOKED = new ItemUnfinishedFood("pie_berry_cooked").setContainerItem(PIE_TRAY);
         PIE_SHEPARD_COOKED = new ItemUnfinishedFood("pie_shepard_cooked").setContainerItem(PIE_TRAY);
         PIE_PUMPKIN_COOKED = new ItemUnfinishedFood("pie_pumpkin_cooked").setContainerItem(PIE_TRAY);
-        SALT = new ItemComponentMFR("salt", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        SUGAR_POT = new ItemComponentMFR("sugar_pot", 0).setCreativeTab(CreativeTabMFR.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        BOWL_WATER_SALT = new ItemComponentMFR("bowl_water_salt", 0).setCreativeTab(CreativeTabMFR.tabFood);
+        SALT = new ItemComponentMFR("salt", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        SUGAR_POT = new ItemComponentMFR("sugar_pot", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
+        BOWL_WATER_SALT = new ItemComponentMFR("bowl_water_salt", 0).setCreativeTab(MineFantasyTabs.tabFood);
         DOUGH = new ItemUnfinishedFood("dough").setMaxStackSize(64);
         PASTRY = new ItemUnfinishedFood("pastry").setMaxStackSize(64);
         RAW_BREAD = new ItemUnfinishedFood("raw_bread").setMaxStackSize(64);

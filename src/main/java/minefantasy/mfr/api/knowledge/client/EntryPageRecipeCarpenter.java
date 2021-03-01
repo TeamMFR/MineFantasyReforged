@@ -1,10 +1,10 @@
 package minefantasy.mfr.api.knowledge.client;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
-import minefantasy.mfr.api.crafting.carpenter.ShapedCarpenterRecipes;
-import minefantasy.mfr.api.crafting.carpenter.ShapelessCarpenterRecipes;
 import minefantasy.mfr.api.helpers.GuiHelper;
+import minefantasy.mfr.recipe.ICarpenterRecipe;
+import minefantasy.mfr.recipe.ShapedCarpenterRecipes;
+import minefantasy.mfr.recipe.ShapelessCarpenterRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;

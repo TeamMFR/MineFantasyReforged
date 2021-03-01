@@ -2,10 +2,9 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.ItemBaseMFR;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -34,7 +33,7 @@ public class ItemSyringe extends ItemBaseMFR {
     public ItemSyringe(String name ) {
         super(name);
         this.setMaxStackSize(16);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
     }
 
     @Override

@@ -25,8 +25,8 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.WoodMaterial;
@@ -146,7 +146,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         // (also more efficent)
         name = named;
         this.material = material;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         setRegistryName(name);
         setUnlocalizedName(name);
 
@@ -510,7 +510,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
             return;
         }
 
-        if (this instanceof ItemKnifeMFR) {
+        if (this instanceof ItemKnife) {
             super.getSubItems(tab, items);
             return;
         }

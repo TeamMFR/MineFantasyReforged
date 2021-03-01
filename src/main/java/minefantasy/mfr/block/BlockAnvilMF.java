@@ -2,7 +2,7 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.tile.TileEntityAnvil;
@@ -37,7 +37,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
         this.setHardness(material.hardness + 1 / 2F);
         this.setResistance(material.hardness + 1);
         this.setLightOpacity(0);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Override

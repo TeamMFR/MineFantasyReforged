@@ -2,9 +2,10 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.helpers.PowerArmour;
 import minefantasy.mfr.api.helpers.ToolHelper;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,7 +31,7 @@ public class BlockFrame extends BasicBlockMF {
 
     public BlockFrame(String name, Object drop) {
         super(name, Material.IRON, drop);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
         this.setHardness(1.0F);
         this.setResistance(3.0F);
     }
@@ -81,7 +82,7 @@ public class BlockFrame extends BasicBlockMF {
 
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (ToolHelper.getCrafterTool(player.getHeldItem(hand)).equalsIgnoreCase("spanner")) {
+        if (ToolHelper.getToolTypeFromStack(player.getHeldItem(hand)) == Tool.SPANNER) {
             return tryBuild(player, world, pos);
         }
         return false;

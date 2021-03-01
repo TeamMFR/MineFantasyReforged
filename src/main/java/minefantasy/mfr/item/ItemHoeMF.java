@@ -4,7 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -38,7 +38,7 @@ public class ItemHoeMF extends ItemHoe implements IToolMaterial, IClientRegister
     public ItemHoeMF(String name, ToolMaterial material, int rarity) {
         super(material);
         itemRarity = rarity;
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.toolMaterial = material;
         setRegistryName(name);
         setUnlocalizedName(name);

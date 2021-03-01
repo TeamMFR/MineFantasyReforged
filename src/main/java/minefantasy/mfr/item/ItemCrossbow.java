@@ -15,9 +15,9 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -53,7 +53,7 @@ public class ItemCrossbow extends ItemBaseMFR
     public ItemCrossbow() {
         super("crossbow_custom");
 
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
         this.setFull3D();
         this.setMaxDamage(150);
         this.setMaxStackSize(1);

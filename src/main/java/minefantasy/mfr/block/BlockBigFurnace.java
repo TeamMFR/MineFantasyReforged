@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -34,7 +34,7 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> {
         setUnlocalizedName(name);
         this.isHeater = isHeater;
         this.tier = tier;
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
         this.setSoundType(SoundType.STONE);
         this.setHardness(3.5F);
         this.setResistance(2F);

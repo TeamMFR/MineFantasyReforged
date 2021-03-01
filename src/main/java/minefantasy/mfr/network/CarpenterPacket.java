@@ -19,7 +19,7 @@ public class CarpenterPacket extends PacketMF {
         tileEntity = tile;
         coords = tile.getPos();
         resultName = tile.getResultName();
-        toolNeeded = tile.getToolNeeded();
+        toolNeeded = tile.getRequiredToolType();
         progress = new float[]{tile.progress, tile.progressMax};
         tiers = new int[]{tile.getToolTierNeeded(), tile.getCarpenterTierNeeded()};
         if (progress[1] <= 0) {

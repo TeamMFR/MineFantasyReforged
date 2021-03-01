@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.tile.TileEntityWoodDecor;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -45,7 +45,7 @@ public class BlockAmmoBox extends BlockWoodDecor {
         setUnlocalizedName(name);
         this.setHardness(0.5F);
         this.setResistance(2F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Override

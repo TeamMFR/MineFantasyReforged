@@ -5,9 +5,10 @@ import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.weapon.IRackItem;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityRack;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,8 +26,8 @@ import net.minecraft.world.World;
  */
 public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
     public ItemPaintBrush(String name, int uses) {
-        super(name, "brush", 0, uses);
-        setCreativeTab(CreativeTabMFR.tabCraftTool);
+        super(name, Tool.BRUSH, 0, uses);
+        setCreativeTab(MineFantasyTabs.tabCraftTool);
 
         // setTextureName("minefantasy2:Tool/Crafting/"+name);
         // this.setUnlocalizedName(name);

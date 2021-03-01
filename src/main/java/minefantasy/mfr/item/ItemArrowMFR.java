@@ -7,7 +7,7 @@ import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.entity.EntityArrowMFR;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.mechanics.MFArrowDispenser;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -79,7 +79,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         AmmoMechanicsMFR.addArrow(new ItemStack(this));
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, dispenser);
 

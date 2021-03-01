@@ -4,6 +4,7 @@ import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrossbowBench;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -86,7 +87,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 
         if (result.isEmpty()) {
             progress = 0F;
-        } else if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("spanner")) {
+        } else if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.SPANNER) {
             if (!user.getHeldItemMainhand().isEmpty()) {
                 world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
                 user.getHeldItemMainhand().damageItem(1, user);

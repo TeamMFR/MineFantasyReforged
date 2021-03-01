@@ -6,8 +6,8 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -53,7 +53,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 		setRegistryName(name);
 		setUnlocalizedName(name);
 
-		setCreativeTab(CreativeTabMFR.tabOldTools);
+		setCreativeTab(MineFantasyTabs.tabOldTools);
 		this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));
 
 		MineFantasyReborn.PROXY.addClientRegister(this);

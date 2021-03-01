@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.carpenter;
+package minefantasy.mfr.recipe;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -12,8 +12,8 @@ public class CarpenterCraftMatrix extends InventoryCrafting {
     }
 
     public void modifyTier(int hammerTier, int craftTime) {
-        crafter.setToolTier(hammerTier);
-        crafter.setForgeTime(craftTime);
+        crafter.setRequiredToolTier(hammerTier);
+        crafter.setProgressMax(craftTime);
     }
 
 }

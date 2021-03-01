@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CustomMaterial {
-    public static final String NBTBase = "mf_custom_materials";
+
+    public static final CustomMaterial NONE = new CustomMaterial("none", "none", 0, 0, 0, 0, 0, 0, 0);
+
+    private static final String NBTBase = "mf_custom_materials";
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
     public static final DecimalFormat decimal_format_grams = new DecimalFormat("#");
     /**

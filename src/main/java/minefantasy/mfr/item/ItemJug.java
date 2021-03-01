@@ -3,9 +3,9 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.block.BlockComponent;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,7 +30,7 @@ public class ItemJug extends ItemComponentMFR {
 
     public ItemJug(String type) {
         super("jug_" + type, 0);
-        setCreativeTab(CreativeTabMFR.tabFood);
+        setCreativeTab(MineFantasyTabs.tabFood);
         this.type = type;
     }
 

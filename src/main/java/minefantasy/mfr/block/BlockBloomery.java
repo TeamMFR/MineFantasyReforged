@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemLighterMF;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import net.minecraft.block.SoundType;
@@ -32,7 +32,7 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
         this.setSoundType(SoundType.STONE);
         this.setHardness(8F);
         this.setResistance(10F);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Override

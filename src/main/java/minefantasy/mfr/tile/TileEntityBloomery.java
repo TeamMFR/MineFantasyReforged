@@ -8,6 +8,7 @@ import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.block.BlockBloomery;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
 import minefantasy.mfr.init.KnowledgeListMFR;
@@ -195,9 +196,10 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
         if (!hasBloom() || isActive) {
             return false;
         }
-        String toolType = ToolHelper.getCrafterTool(held);
+
+        Tool tool = ToolHelper.getToolTypeFromStack(held);
         float pwr = ToolHelper.getCrafterEfficiency(held);
-        if (toolType.equalsIgnoreCase("hammer") || toolType.equalsIgnoreCase("hvyHammer")) {
+        if (tool == Tool.HAMMER || tool == Tool.HEAVY_HAMMER) {
             if (user.world.isRemote)
                 return true;
 

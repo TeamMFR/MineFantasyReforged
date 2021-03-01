@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -42,7 +42,7 @@ public class BlockRepairKit extends Block {
         this.setHardness(1F);
         this.setResistance(0F);
         this.setLightOpacity(0);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
     }
 
     public BlockRepairKit setOrnate(float enc) {

@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.carpenter;
+package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.util.SoundEvent;
@@ -8,19 +8,19 @@ import net.minecraft.util.SoundEvent;
  * MineFantasy so it can be referred to without importing the mod
  */
 public interface ICarpenter {
-    void setForgeTime(int i);
+    void setProgressMax(int i);
 
-    void setToolTier(int i);
+    void setRequiredToolTier(int i);
 
     void setRequiredCarpenter(int i);
 
     void setHotOutput(boolean i);
 
-    void setToolType(String toolType);
+    void setRequiredToolType(String toolType);
 
     void setCraftingSound(SoundEvent sound);
 
     void setResearch(String research);
 
-    void setSkill(Skill skill);
+    void setRequiredSkill(Skill skill);
 }

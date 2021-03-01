@@ -1,7 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFoodMF;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -42,7 +43,7 @@ public class BlockCakeMF extends Block {
         cakeSlice = slice;
 
         this.setTickRandomly(true);
-        setCreativeTab(CreativeTabMFR.tabFood);
+        setCreativeTab(MineFantasyTabs.tabFood);
     }
 
 
@@ -92,7 +93,7 @@ public class BlockCakeMF extends Block {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand,
             EnumFacing side, float hitX, float hitY, float hitZ) {
-        if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("knife")) {
+        if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.KNIFE) {
             this.cutSlice(world, state, pos, user);
             return true;
         }
@@ -104,7 +105,7 @@ public class BlockCakeMF extends Block {
      */
     @Override
     public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-        if (ToolHelper.getCrafterTool(user.getHeldItemMainhand()).equalsIgnoreCase("knife")) {
+        if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.KNIFE) {
             IBlockState state = world.getBlockState(pos);
             this.cutSlice(world, state, pos, user);
         }

@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,7 +27,7 @@ public class ItemBandage extends ItemBaseMFR {
         this.name = name;
         healPwr = healAmount;
         setMaxStackSize(16);
-        setCreativeTab(CreativeTabMFR.tabGadget);
+        setCreativeTab(MineFantasyTabs.tabGadget);
     }
 
     @Override

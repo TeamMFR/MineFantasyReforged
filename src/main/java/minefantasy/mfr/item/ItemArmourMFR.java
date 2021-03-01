@@ -7,8 +7,8 @@ import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.LeatherArmourListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -44,7 +44,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        setCreativeTab(CreativeTabMFR.tabArmour);
+        setCreativeTab(MineFantasyTabs.tabArmour);
 
         itemRarity = rarity;
     }

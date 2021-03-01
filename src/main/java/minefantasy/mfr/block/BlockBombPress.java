@@ -1,8 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityBombPress;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -38,7 +38,7 @@ public class BlockBombPress extends BlockTileEntity<TileEntityBombPress> {
         this.setHardness(5F);
         this.setResistance(2F);
         this.setLightOpacity(0);
-        this.setCreativeTab(CreativeTabMFR.tabUtil);
+        this.setCreativeTab(MineFantasyTabs.tabUtil);
     }
 
     @Nonnull

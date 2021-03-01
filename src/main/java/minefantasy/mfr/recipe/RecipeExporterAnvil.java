@@ -2,10 +2,6 @@ package minefantasy.mfr.recipe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import minefantasy.mfr.api.crafting.anvil.CraftingManagerAnvil;
-import minefantasy.mfr.api.crafting.anvil.CustomToolRecipe;
-import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
-import minefantasy.mfr.api.crafting.anvil.ShapedAnvilRecipes;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

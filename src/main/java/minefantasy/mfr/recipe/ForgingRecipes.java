@@ -2,7 +2,6 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;

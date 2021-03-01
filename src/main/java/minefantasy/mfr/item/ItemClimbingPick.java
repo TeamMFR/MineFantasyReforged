@@ -1,29 +1,28 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.proxy.IClientRegister;
-import minefantasy.mfr.util.ModelLoaderHelper;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tier.IToolMaterial;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ModelLoaderHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -41,7 +40,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        setCreativeTab(CreativeTabMFR.tabGadget);
+        setCreativeTab(MineFantasyTabs.tabGadget);
         setMaxDamage(material.getMaxUses());
 
         MineFantasyReborn.PROXY.addClientRegister(this);

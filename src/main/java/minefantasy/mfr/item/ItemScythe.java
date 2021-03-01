@@ -11,7 +11,7 @@ import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
-import minefantasy.mfr.init.CreativeTabMFR;
+import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -73,7 +73,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
         setRegistryName(name);
         setUnlocalizedName(name);
 
-        setCreativeTab(CreativeTabMFR.tabOldTools);
+        setCreativeTab(MineFantasyTabs.tabOldTools);
         this.maxStackSize = 1;
         this.setMaxDamage(material.getMaxUses());
 

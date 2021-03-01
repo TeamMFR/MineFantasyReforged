@@ -8,6 +8,7 @@ import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
@@ -42,7 +43,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
+public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
     protected int itemRarity;
     private int tier;
     private float baseDamage;
@@ -52,7 +53,7 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
     /**
      * Knives are weapons used for hunting, and tools used for processing
      */
-    public ItemKnifeMFR(String name, Item.ToolMaterial material, int rarity, float weight, int tier) {
+    public ItemKnife(String name, Item.ToolMaterial material, int rarity, float weight, int tier) {
         super(material, name, rarity, weight);
         this.tier = tier;
     }
@@ -98,8 +99,8 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
     }
 
     @Override
-    public String getToolType(ItemStack item) {
-        return "knife";
+    public Tool getToolType(ItemStack stack) {
+        return Tool.KNIFE;
     }
 
     @Override
@@ -125,13 +126,13 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
         return null;
     }
 
-    public ItemKnifeMFR setCustom(String s) {
+    public ItemKnife setCustom(String s) {
         canRepair = false;
         isCustom = true;
         return this;
     }
 
-    public ItemKnifeMFR setBaseDamage(float baseDamage) {
+    public ItemKnife setBaseDamage(float baseDamage) {
         this.baseDamage = baseDamage;
         return this;
     }
@@ -146,7 +147,7 @@ public class ItemKnifeMFR extends ItemWeaponMFR implements IToolMFR, IHuntingIte
         return CustomToolHelper.getCrafterTier(item, tier);
     }
 
-    public ItemKnifeMFR setEfficiencyMod(float efficiencyMod) {
+    public ItemKnife setEfficiencyMod(float efficiencyMod) {
         this.efficiencyMod = efficiencyMod;
         return this;
     }

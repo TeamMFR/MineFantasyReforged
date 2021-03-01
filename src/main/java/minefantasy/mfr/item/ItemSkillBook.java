@@ -2,8 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
-import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -28,7 +28,7 @@ public class ItemSkillBook extends ItemComponentMFR {
     public ItemSkillBook(String name, Skill skill) {
         super(name, 1);
         setMaxStackSize(16);
-        this.setCreativeTab(CreativeTabMFR.tabGadget);
+        this.setCreativeTab(MineFantasyTabs.tabGadget);
         this.skill = skill;
         this.name = name;
     }

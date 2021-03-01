@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.anvil;
+package minefantasy.mfr.recipe;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
@@ -14,7 +14,7 @@ public class AnvilCraftMatrix extends InventoryCrafting {
     public void modifyTier(int hammerTier, int anvilTier, int craftTime) {
         anvil.setRequiredHammerTier(hammerTier);
         anvil.setRequiredAnvilTier(anvilTier);
-        anvil.setForgeTime(craftTime);
+        anvil.setProgressMax(craftTime);
     }
 
     public void modifyResearch(String name) {

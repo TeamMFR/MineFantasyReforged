@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.helpers.GuiHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.helpers.ToolHelper;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -49,9 +50,9 @@ public class GuiAnvilMF extends GuiContainer {
         int yPoint = (this.height - this.ySize) / 2;
 
         if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
-            if (tile.getRequiredToolType() != null) {
+            if (tile.getRequiredToolType() != Tool.OTHER) {
                 if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-                    String s2 = I18n.format("tooltype." + tile.getRequiredToolType()) + ", "
+                    String s2 = tile.getRequiredToolType().getDisplayName() + ", "
                             + (tile.getToolTierNeeded() > -1
                             ? I18n.format("attribute.mfcrafttier.name") + " "
                             + tile.getToolTierNeeded()
@@ -90,8 +91,8 @@ public class GuiAnvilMF extends GuiContainer {
             GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPoint + regularXSize + xInvOffset,
                     yPoint, isBlockSufficient());
 
-            if (tile.getRequiredToolType() != null) {
-                GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
+            if (tile.getRequiredToolType() != Tool.OTHER) {
+                GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
                         yPoint, isToolSufficient());
             }
         }
