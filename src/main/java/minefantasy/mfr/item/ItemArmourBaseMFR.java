@@ -1,18 +1,16 @@
 package minefantasy.mfr.item;
 
-import java.text.DecimalFormat;
-import java.util.List;
-
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.api.armour.IArmourMFR;
 import minefantasy.mfr.api.armour.IArmourRating;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.ToolHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -22,11 +20,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.text.DecimalFormat;
+import java.util.List;
 
 public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmourMFR, IArmourRating, ISpecialArmourMFR, IClientRegister {
     public static final DecimalFormat decimal_format = new DecimalFormat("#.#");

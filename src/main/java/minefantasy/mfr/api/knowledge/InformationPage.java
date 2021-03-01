@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.knowledge;
 
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import net.minecraft.client.resources.I18n;
 
 import java.util.Arrays;

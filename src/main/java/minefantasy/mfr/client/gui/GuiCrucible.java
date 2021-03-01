@@ -1,9 +1,9 @@
 package minefantasy.mfr.client.gui;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.tile.TileEntityCrucible;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.item.ItemBlock;
 import org.lwjgl.opengl.GL11;

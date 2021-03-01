@@ -1,7 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IHeatUser;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.SmokeMechanics;
@@ -12,6 +11,7 @@ import minefantasy.mfr.container.ContainerCrucible;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEndPortalFrame;

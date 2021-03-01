@@ -1,8 +1,7 @@
 package minefantasy.mfr.api.armour;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.helpers.ArmourCalculator;
+import minefantasy.mfr.util.ArmourCalculator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;

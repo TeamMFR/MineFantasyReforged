@@ -1,8 +1,8 @@
 package minefantasy.mfr.client.render.entity;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.client.model.entity.ModelCogwork;
 import minefantasy.mfr.entity.EntityCogwork;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderManager;

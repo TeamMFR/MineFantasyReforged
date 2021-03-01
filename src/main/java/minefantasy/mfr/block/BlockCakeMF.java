@@ -1,9 +1,9 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFoodMF;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;

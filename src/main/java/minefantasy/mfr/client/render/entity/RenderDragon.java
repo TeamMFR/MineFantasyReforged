@@ -1,11 +1,11 @@
 package minefantasy.mfr.client.render.entity;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.client.model.entity.ModelAshDragon;
 import minefantasy.mfr.client.model.entity.ModelDragon;
 import minefantasy.mfr.client.model.entity.ModelFrostDragon;
 import minefantasy.mfr.client.model.entity.ModelVenomDragon;
 import minefantasy.mfr.entity.mob.EntityDragon;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderLiving;

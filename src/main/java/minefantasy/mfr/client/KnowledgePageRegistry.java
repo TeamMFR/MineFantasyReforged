@@ -1,16 +1,16 @@
 package minefantasy.mfr.client;
 
-import minefantasy.mfr.api.knowledge.client.EntryPage;
-import minefantasy.mfr.api.knowledge.client.EntryPageBlastFurnace;
-import minefantasy.mfr.api.knowledge.client.EntryPageCrucible;
-import minefantasy.mfr.api.knowledge.client.EntryPageGrind;
-import minefantasy.mfr.api.knowledge.client.EntryPageImage;
-import minefantasy.mfr.api.knowledge.client.EntryPageRecipeAnvil;
-import minefantasy.mfr.api.knowledge.client.EntryPageRecipeBase;
-import minefantasy.mfr.api.knowledge.client.EntryPageRecipeBloom;
-import minefantasy.mfr.api.knowledge.client.EntryPageRecipeCarpenter;
-import minefantasy.mfr.api.knowledge.client.EntryPageSmelting;
-import minefantasy.mfr.api.knowledge.client.EntryPageText;
+import minefantasy.mfr.client.knowledge.EntryPage;
+import minefantasy.mfr.client.knowledge.EntryPageBlastFurnace;
+import minefantasy.mfr.client.knowledge.EntryPageCrucible;
+import minefantasy.mfr.client.knowledge.EntryPageGrind;
+import minefantasy.mfr.client.knowledge.EntryPageImage;
+import minefantasy.mfr.client.knowledge.EntryPageRecipeAnvil;
+import minefantasy.mfr.client.knowledge.EntryPageRecipeBase;
+import minefantasy.mfr.client.knowledge.EntryPageRecipeBloom;
+import minefantasy.mfr.client.knowledge.EntryPageRecipeCarpenter;
+import minefantasy.mfr.client.knowledge.EntryPageSmelting;
+import minefantasy.mfr.client.knowledge.EntryPageText;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;

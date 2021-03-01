@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.constants.WeaponClass;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;

@@ -1,11 +1,9 @@
 package minefantasy.mfr.proxy;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.helpers.ClientTickHandler;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
-import minefantasy.mfr.client.model.entity.ModelHound;
 import minefantasy.mfr.client.render.AnimationHandlerMF;
 import minefantasy.mfr.client.render.HudHandlerMF;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
@@ -52,6 +50,7 @@ import minefantasy.mfr.tile.TileEntityQuern;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.tile.TileEntityRoast;
 import minefantasy.mfr.tile.TileEntityTanningRack;
+import minefantasy.mfr.util.ClientTickHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,8 +1,7 @@
 package minefantasy.mfr.api.heating;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;

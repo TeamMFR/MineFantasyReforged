@@ -1,8 +1,8 @@
 package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.mechanics.RPGElements;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

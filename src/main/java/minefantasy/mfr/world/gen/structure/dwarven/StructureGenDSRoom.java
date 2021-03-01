@@ -1,12 +1,12 @@
 package minefantasy.mfr.world.gen.structure.dwarven;
 
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.tile.TileEntityRack;

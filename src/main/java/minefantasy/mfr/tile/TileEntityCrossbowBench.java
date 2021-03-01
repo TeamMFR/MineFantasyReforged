@@ -2,8 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
-import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrossbowBench;
@@ -11,6 +10,7 @@ import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.network.CrossbowBenchPacket;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

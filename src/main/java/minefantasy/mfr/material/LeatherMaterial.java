@@ -1,7 +1,5 @@
 package minefantasy.mfr.material;
 
-import minefantasy.mfr.api.material.CustomMaterial;
-
 public class LeatherMaterial extends CustomMaterial {
     public LeatherMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness, float resistance, float density) {
         super(name, "leather", tier, hardness, durability, flexibility, sharpness, resistance, density);

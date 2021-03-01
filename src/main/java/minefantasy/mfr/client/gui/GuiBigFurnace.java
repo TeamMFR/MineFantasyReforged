@@ -1,8 +1,8 @@
 package minefantasy.mfr.client.gui;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import org.lwjgl.opengl.GL11;
 

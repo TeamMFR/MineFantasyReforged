@@ -1,7 +1,6 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.enchantment.EnchantmentHelper;

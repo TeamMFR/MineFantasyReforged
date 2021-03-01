@@ -1,13 +1,13 @@
 package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.item.ItemBurntFood;
 import minefantasy.mfr.item.ItemComponentMFR;
 import minefantasy.mfr.item.ItemFoodMF;
 import minefantasy.mfr.item.ItemJug;
 import minefantasy.mfr.item.ItemMultiFood;
 import minefantasy.mfr.item.ItemUnfinishedFood;
+import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;

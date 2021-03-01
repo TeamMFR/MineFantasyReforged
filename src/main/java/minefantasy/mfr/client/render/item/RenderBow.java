@@ -4,7 +4,6 @@ import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;

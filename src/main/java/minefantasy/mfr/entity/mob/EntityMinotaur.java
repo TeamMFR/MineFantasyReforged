@@ -1,9 +1,6 @@
 package minefantasy.mfr.entity.mob;
 
 import minefantasy.mfr.api.armour.IArmourPenetrationMob;
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.PowerArmour;
-import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityBomb;
@@ -17,6 +14,9 @@ import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.PowerArmour;
+import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;

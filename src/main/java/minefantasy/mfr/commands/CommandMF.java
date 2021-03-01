@@ -1,19 +1,16 @@
 package minefantasy.mfr.commands;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.ToolHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.client.resources.I18n;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;

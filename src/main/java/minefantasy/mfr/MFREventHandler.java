@@ -1,23 +1,23 @@
 package minefantasy.mfr;
 
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.api.rpg.LevelupEvent;
-import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.constants.WeaponClass;
+import minefantasy.mfr.event.LevelUpEvent;
 import minefantasy.mfr.item.ClientItemsMFR;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
+import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -216,7 +216,7 @@ public final class MFREventHandler {
 	}
 
 	@SubscribeEvent
-	public static void levelup(LevelupEvent event) {
+	public static void levelup(LevelUpEvent event) {
 		EntityPlayer player = event.thePlayer;
 		if (player instanceof  EntityPlayerMP) {
 			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new LevelUpPacket(player, event.theSkill, event.theLevel));

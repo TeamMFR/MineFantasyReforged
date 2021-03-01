@@ -2,9 +2,9 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;

@@ -2,11 +2,11 @@ package minefantasy.mfr.client.gui;
 
 import codechicken.lib.gui.GuiDraw;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.client.EntryPage;
-import minefantasy.mfr.api.knowledge.client.EntryPageCraft;
+import minefantasy.mfr.client.knowledge.EntryPage;
+import minefantasy.mfr.client.knowledge.EntryPageCraft;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.client.audio.SoundHandler;

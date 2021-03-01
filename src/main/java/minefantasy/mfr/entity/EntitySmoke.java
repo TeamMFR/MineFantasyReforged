@@ -1,7 +1,7 @@
 package minefantasy.mfr.entity;
 
 import minefantasy.mfr.api.armour.IGasProtector;
-import minefantasy.mfr.api.helpers.PowerArmour;
+import minefantasy.mfr.util.PowerArmour;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;

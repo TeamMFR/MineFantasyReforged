@@ -2,7 +2,6 @@ package minefantasy.mfr.material;
 
 import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.ItemStack;

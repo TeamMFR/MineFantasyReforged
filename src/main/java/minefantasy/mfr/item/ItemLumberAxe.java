@@ -1,9 +1,9 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
+import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;

@@ -2,12 +2,12 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

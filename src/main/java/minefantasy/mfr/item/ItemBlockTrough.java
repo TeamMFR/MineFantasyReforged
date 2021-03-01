@@ -1,10 +1,10 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockTrough;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityTrough;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;

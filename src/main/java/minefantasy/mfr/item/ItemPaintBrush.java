@@ -1,15 +1,15 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.crafting.refine.PaintOilRecipe;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.api.weapon.IRackItem;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.tile.TileEntityRack;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;

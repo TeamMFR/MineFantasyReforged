@@ -1,6 +1,6 @@
 package minefantasy.mfr.config;
 
-import minefantasy.mfr.api.stamina.StaminaBar;
+import minefantasy.mfr.mechanics.StaminaBar;
 
 public class ConfigStamina extends ConfigurationBaseMF {
     public static String VALUES = "Value Modifiers";

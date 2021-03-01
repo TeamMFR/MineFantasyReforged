@@ -1,11 +1,11 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.TacticalManager;
-import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;

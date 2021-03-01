@@ -1,11 +1,11 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.api.helpers.PowerArmour;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.util.PowerArmour;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

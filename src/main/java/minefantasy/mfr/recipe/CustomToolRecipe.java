@@ -1,9 +1,9 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;

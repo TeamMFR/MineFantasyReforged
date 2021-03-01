@@ -1,7 +1,7 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;

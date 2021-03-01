@@ -1,12 +1,12 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
-import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.client.render.item.RenderSpear;
 import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;

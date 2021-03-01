@@ -1,13 +1,13 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

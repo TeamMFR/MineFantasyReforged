@@ -1,9 +1,10 @@
 package minefantasy.mfr.constants;
 
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
 
 /**
- * An enum to represent a tool type. See {@link minefantasy.mfr.api.helpers.ToolHelper} for helper methods and {@link minefantasy.mfr.api.tool.IToolMFR} to
+ * An enum to represent a tool type. See {@link ToolHelper} for helper methods and {@link minefantasy.mfr.api.tool.IToolMFR} to
  * register an item as a tool.
  */
 public enum Tool {

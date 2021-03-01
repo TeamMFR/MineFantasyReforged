@@ -1,7 +1,6 @@
 package minefantasy.mfr.api;
 
 import com.google.common.collect.Lists;
-import minefantasy.mfr.api.cooking.CookRecipe;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.crafting.refine.QuernRecipes;
 import minefantasy.mfr.api.heating.Heatable;
@@ -9,7 +8,8 @@ import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.util.MFRLogUtil;

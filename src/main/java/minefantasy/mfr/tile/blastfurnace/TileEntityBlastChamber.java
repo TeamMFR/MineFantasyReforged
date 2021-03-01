@@ -1,7 +1,6 @@
 package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.api.refine.ISmokeCarrier;
 import minefantasy.mfr.api.refine.SmokeMechanics;
@@ -10,6 +9,7 @@ import minefantasy.mfr.container.ContainerBlastChamber;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.TileEntityBase;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

@@ -2,7 +2,6 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -10,6 +9,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;

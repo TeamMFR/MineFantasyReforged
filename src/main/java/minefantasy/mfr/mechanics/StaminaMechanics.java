@@ -1,14 +1,13 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.StaminaPacket;
+import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

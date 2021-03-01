@@ -1,8 +1,8 @@
 package minefantasy.mfr.client.render.entity;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.client.model.entity.ModelParachute;
 import minefantasy.mfr.entity.EntityParachute;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;

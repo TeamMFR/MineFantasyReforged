@@ -1,9 +1,9 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.container.ContainerBase;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;

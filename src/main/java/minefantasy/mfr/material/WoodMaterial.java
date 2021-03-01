@@ -1,7 +1,6 @@
 package minefantasy.mfr.material;
 
 import com.google.common.base.CaseFormat;
-import minefantasy.mfr.api.material.CustomMaterial;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

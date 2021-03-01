@@ -1,8 +1,8 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.weapon.WeaponClass;
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.constants.WeaponClass;
+import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;

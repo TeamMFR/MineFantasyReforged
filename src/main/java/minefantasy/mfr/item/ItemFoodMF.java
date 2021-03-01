@@ -1,10 +1,10 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.resources.I18n;

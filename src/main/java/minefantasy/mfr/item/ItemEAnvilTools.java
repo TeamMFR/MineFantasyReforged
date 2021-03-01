@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.item.ItemStack;
 
 /**

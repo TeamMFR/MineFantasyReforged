@@ -1,6 +1,6 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 
 /**
  * @author AnonymousProductions This interface is used by the anvil in

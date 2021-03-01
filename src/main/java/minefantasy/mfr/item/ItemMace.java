@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

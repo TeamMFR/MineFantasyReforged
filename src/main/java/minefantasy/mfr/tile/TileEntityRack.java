@@ -1,11 +1,10 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.helpers.BlockPositionHelper;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBlockToolRack;
+import minefantasy.mfr.util.BlockPositionHelper;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;

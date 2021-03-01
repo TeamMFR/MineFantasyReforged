@@ -1,9 +1,9 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.TacticalManager;
-import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
+import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

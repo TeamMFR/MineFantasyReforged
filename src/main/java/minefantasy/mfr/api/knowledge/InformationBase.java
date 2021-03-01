@@ -1,9 +1,9 @@
 package minefantasy.mfr.api.knowledge;
 
-import minefantasy.mfr.api.knowledge.client.EntryPage;
-import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.client.knowledge.EntryPage;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.mechanics.RPGElements;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;

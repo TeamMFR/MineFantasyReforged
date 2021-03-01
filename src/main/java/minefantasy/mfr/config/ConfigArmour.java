@@ -1,8 +1,8 @@
 package minefantasy.mfr.config;
 
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.TacticalManager;
 import minefantasy.mfr.entity.EntityCogwork;
+import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.TacticalManager;
 
 public class ConfigArmour extends ConfigurationBaseMF {
     public static final String CATEGORY_BONUS = "Bonuses";

@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.client.render.item.RenderLance;
+import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;

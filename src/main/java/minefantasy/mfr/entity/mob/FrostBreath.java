@@ -1,8 +1,8 @@
 package minefantasy.mfr.entity.mob;
 
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityDragonBreath;
+import minefantasy.mfr.mechanics.StaminaBar;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

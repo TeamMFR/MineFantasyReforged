@@ -1,11 +1,11 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.StaminaBar;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;

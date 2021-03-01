@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.api.weapon.WeaponClass;
+import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.network.HitSoundPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.entity.Entity;

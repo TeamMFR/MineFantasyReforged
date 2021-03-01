@@ -1,8 +1,8 @@
 package minefantasy.mfr.client.render.entity;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.client.model.entity.ModelMinotaur;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.entity.RenderBiped;
 import net.minecraft.client.renderer.entity.RenderManager;

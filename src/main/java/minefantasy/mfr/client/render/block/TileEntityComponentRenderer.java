@@ -1,7 +1,5 @@
 package minefantasy.mfr.client.render.block;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.client.model.block.ModelBarStack;
 import minefantasy.mfr.client.model.block.ModelBigPlateStack;
@@ -9,7 +7,9 @@ import minefantasy.mfr.client.model.block.ModelJugStack;
 import minefantasy.mfr.client.model.block.ModelPlankStack;
 import minefantasy.mfr.client.model.block.ModelPotStack;
 import minefantasy.mfr.client.model.block.ModelSheetStack;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityComponent;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;

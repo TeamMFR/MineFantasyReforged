@@ -1,5 +1,7 @@
 package minefantasy.mfr.api.weapon;
 
+import minefantasy.mfr.constants.WeaponClass;
+
 public interface IWeaponClass {
-    public WeaponClass getWeaponClass();
+    WeaponClass getWeaponClass();
 }

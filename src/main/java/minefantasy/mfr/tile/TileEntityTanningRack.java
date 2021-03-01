@@ -1,14 +1,14 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
-import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.block.BlockEngineerTanner;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;

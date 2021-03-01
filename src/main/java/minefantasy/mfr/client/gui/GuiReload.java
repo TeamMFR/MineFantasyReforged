@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.gui;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.container.ContainerReload;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;

@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
 

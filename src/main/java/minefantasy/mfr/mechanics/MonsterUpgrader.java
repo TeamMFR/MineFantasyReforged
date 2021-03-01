@@ -1,30 +1,30 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.material.MetalMaterial;
-import minefantasy.mfr.material.WoodMaterial;
-import net.minecraft.entity.monster.AbstractSkeleton;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.item.ItemCustomArmour;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
+import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class MonsterUpgrader {
 	public static final String zombieArmourNBT = "MF_ZombieArmour";

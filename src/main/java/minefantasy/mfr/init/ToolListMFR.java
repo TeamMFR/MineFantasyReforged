@@ -1,8 +1,8 @@
 package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemAxeMFR;
 import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.ItemBomb;

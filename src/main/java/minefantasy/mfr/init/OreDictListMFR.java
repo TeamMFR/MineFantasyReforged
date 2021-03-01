@@ -1,18 +1,13 @@
 package minefantasy.mfr.init;
 
 import com.google.common.base.CaseFormat;
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.item.AdvancedFuelHandlerMF;
+import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class OreDictListMFR {
 

@@ -1,6 +1,5 @@
 package minefantasy.mfr.client.model;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
@@ -11,6 +10,7 @@ import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;

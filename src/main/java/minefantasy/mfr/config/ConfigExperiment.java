@@ -1,6 +1,6 @@
 package minefantasy.mfr.config;
 
-import minefantasy.mfr.api.helpers.ArmourCalculator;
+import minefantasy.mfr.util.ArmourCalculator;
 
 public class ConfigExperiment extends ConfigurationBaseMF {
     public static final String CATEGORY_EARLY = "Unfinished Features";

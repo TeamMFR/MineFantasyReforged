@@ -1,6 +1,6 @@
 package minefantasy.mfr.config;
 
-import minefantasy.mfr.api.cooking.CookRecipe;
+import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 
 public class ConfigCrafting extends ConfigurationBaseMF {

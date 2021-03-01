@@ -2,13 +2,13 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.RPGElements;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -1,11 +1,11 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.block.BlockWoodDecor;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.item.ItemComponentMFR;
+import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

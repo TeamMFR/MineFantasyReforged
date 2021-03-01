@@ -1,7 +1,7 @@
 package minefantasy.mfr.data;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.rpg.RPGElements;
+import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.PlayerDataPacket;
 import net.minecraft.entity.Entity;

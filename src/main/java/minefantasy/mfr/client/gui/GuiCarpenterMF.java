@@ -1,11 +1,11 @@
 package minefantasy.mfr.client.gui;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.helpers.GuiHelper;
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.tile.TileEntityCarpenter;
+import minefantasy.mfr.util.GuiHelper;
+import minefantasy.mfr.util.TextureHelperMFR;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;

@@ -1,8 +1,8 @@
 package minefantasy.mfr.client.gui;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.tile.TileEntityForge;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

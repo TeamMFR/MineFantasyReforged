@@ -2,9 +2,8 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.IBombComponent;
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBombBench;
@@ -15,6 +14,7 @@ import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemExplodingArrow;
 import minefantasy.mfr.network.BombBenchPacket;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,7 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

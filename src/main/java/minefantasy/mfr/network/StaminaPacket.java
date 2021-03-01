@@ -1,8 +1,8 @@
 package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.mechanics.StaminaBar;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

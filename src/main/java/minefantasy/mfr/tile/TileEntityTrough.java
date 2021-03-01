@@ -1,13 +1,11 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.heating.IQuenchBlock;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.item.ItemBlockToolRack;
 import minefantasy.mfr.item.ItemBlockTrough;
 import minefantasy.mfr.util.BlockUtils;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;

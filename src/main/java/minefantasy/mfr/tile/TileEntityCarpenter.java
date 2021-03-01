@@ -1,8 +1,7 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.helpers.ToolHelper;
 import minefantasy.mfr.api.knowledge.ResearchLogic;
-import minefantasy.mfr.api.rpg.Skill;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCarpenter;
@@ -13,6 +12,7 @@ import minefantasy.mfr.recipe.CarpenterCraftMatrix;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.ICarpenter;
 import minefantasy.mfr.recipe.ShapelessCarpenterRecipes;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;

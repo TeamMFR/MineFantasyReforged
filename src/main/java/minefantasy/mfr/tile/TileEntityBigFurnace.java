@@ -1,7 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.heating.ForgeItemHandler;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
@@ -11,8 +10,8 @@ import minefantasy.mfr.container.ContainerBigFurnace;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.network.BigFurnacePacket;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

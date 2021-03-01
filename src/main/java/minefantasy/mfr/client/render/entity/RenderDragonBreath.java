@@ -1,8 +1,7 @@
 package minefantasy.mfr.client.render.entity;
 
-import minefantasy.mfr.api.helpers.TextureHelperMFR;
 import minefantasy.mfr.entity.EntityDragonBreath;
-import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;

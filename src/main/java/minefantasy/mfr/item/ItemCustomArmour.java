@@ -2,13 +2,13 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.api.helpers.ArmourCalculator;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
-import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
+import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;

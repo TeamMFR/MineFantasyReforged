@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.crafting;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;

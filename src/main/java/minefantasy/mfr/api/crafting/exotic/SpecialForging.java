@@ -1,7 +1,7 @@
 package minefantasy.mfr.api.crafting.exotic;
 
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.helpers.CustomToolHelper;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

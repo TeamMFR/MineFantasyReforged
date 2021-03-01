@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
