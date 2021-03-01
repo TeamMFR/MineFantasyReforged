@@ -1,8 +1,8 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -18,37 +18,38 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class ItemResearchBook extends ItemBaseMFR {
-    public ItemResearchBook() {
-        super("research_book");
-        setMaxStackSize(1);
-        setCreativeTab(MineFantasyTabs.tabGadget);
-        setUnlocalizedName("infobook");
+	public ItemResearchBook() {
+		super("research_book");
+		setMaxStackSize(1);
+		setCreativeTab(MineFantasyTabs.tabGadget);
+		setUnlocalizedName("infobook");
 
-        setContainerItem(this);
-    }
+		setContainerItem(this);
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        return EnumRarity.UNCOMMON;
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		return EnumRarity.UNCOMMON;
+	}
 
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed.
-     * Args: itemStack, world, entityPlayer
-     * @return
-     */
-    @Override
-    public ActionResult<ItemStack> onItemRightClick( World world, EntityPlayer player, EnumHand hand) {
-        if (!world.isRemote) {
-            ResearchLogic.syncData(player);
-        }
-        player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RESEARCH_BOOK, world, 0, -1, 0);
-        return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));
-    }
+	/**
+	 * Called whenever this item is equipped and the right mouse button is pressed.
+	 * Args: itemStack, world, entityPlayer
+	 *
+	 * @return
+	 */
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		if (!world.isRemote) {
+			ResearchLogic.syncData(player);
+		}
+		player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RESEARCH_BOOK, world, 0, -1, 0);
+		return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag fullInfo) {
-        super.addInformation(item, world, list, fullInfo);
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack item, World world, List list, ITooltipFlag fullInfo) {
+		super.addInformation(item, world, list, fullInfo);
+	}
 }

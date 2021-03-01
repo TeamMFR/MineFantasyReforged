@@ -26,87 +26,87 @@ import net.minecraftforge.common.model.IModelState;
  * <p>
  * Custom renderers based off render tutorial by MC_DucksAreBest
  */
-public class TileEntityBombPressRenderer <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
-    private ModelBombPress model;
-    private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bomb_press.png");
+public class TileEntityBombPressRenderer<T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
+	private ModelBombPress model;
+	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bomb_press.png");
 
-    public TileEntityBombPressRenderer() {
-        model = new ModelBombPress();
-    }
+	public TileEntityBombPressRenderer() {
+		model = new ModelBombPress();
+	}
 
-    @Override
-    public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
-        renderModelAt((TileEntityBombPress) te, x, y, z, partial, ((TileEntityBombPress) te).animation);
-    }
+	@Override
+	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
+		renderModelAt((TileEntityBombPress) te, x, y, z, partial, ((TileEntityBombPress) te).animation);
+	}
 
-    public void renderModelAt(TileEntityBombPress tile, double d, double d1, double d2, float f, float animation) {
-        EnumFacing facing = EnumFacing.NORTH;
-        if (tile.hasWorld()) {
-            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-            facing = state.getValue(BlockBombPress.FACING);
-        }
+	public void renderModelAt(TileEntityBombPress tile, double d, double d1, double d2, float f, float animation) {
+		EnumFacing facing = EnumFacing.NORTH;
+		if (tile.hasWorld()) {
+			IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+			facing = state.getValue(BlockBombPress.FACING);
+		}
 
-        this.bindTexture(texture);
+		this.bindTexture(texture);
 
-        GlStateManager.pushMatrix(); // start
-        GlStateManager.translate((float) d + 0.5F, (float) d1 + 1, (float) d2 + 0.5F); // size
-        GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
-        GlStateManager.scale(1F, -1F, -1F); // if you read this comment out this line and you can see what happens
-        GlStateManager.pushMatrix();
+		GlStateManager.pushMatrix(); // start
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + 1, (float) d2 + 0.5F); // size
+		GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
+		GlStateManager.scale(1F, -1F, -1F); // if you read this comment out this line and you can see what happens
+		GlStateManager.pushMatrix();
 
-        GlStateManager.disableLighting();
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
-        model.renderModel(0.0625F, animation);
-        GlStateManager.enableLighting();
+		GlStateManager.disableLighting();
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+		model.renderModel(0.0625F, animation);
+		GlStateManager.enableLighting();
 
-        GlStateManager.popMatrix();
-        GlStateManager.color(255, 255, 255);
-        GlStateManager.popMatrix(); // end
+		GlStateManager.popMatrix();
+		GlStateManager.color(255, 255, 255);
+		GlStateManager.popMatrix(); // end
 
-    }
+	}
 
-    public void renderInvModelAt(double d, double d1, double d2, float f, float animation) {
-        EnumFacing facing = EnumFacing.NORTH;
+	public void renderInvModelAt(double d, double d1, double d2, float f, float animation) {
+		EnumFacing facing = EnumFacing.NORTH;
 
-        GlStateManager.pushMatrix(); // start
-        GlStateManager.translate((float) d + 0.5F, (float) d1 + 1, (float) d2 + 0.5F); // size
-        GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
-        GlStateManager.scale(1F, -1F, -1F); // if you read this comment out this line and you can see what happens
-        GlStateManager.pushMatrix();
-        model.renderModel(0.0625F, animation);
+		GlStateManager.pushMatrix(); // start
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + 1, (float) d2 + 0.5F); // size
+		GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
+		GlStateManager.scale(1F, -1F, -1F); // if you read this comment out this line and you can see what happens
+		GlStateManager.pushMatrix();
+		model.renderModel(0.0625F, animation);
 
-        GlStateManager.popMatrix();
-        GlStateManager.color(255, 255, 255);
-        GlStateManager.popMatrix(); // end
+		GlStateManager.popMatrix();
+		GlStateManager.color(255, 255, 255);
+		GlStateManager.popMatrix(); // end
 
-    }
+	}
 
-    @Override
-    public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
+	@Override
+	public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
 
-        GlStateManager.pushMatrix();
+		GlStateManager.pushMatrix();
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-        renderInvModelAt(0, 0F, 0F, 0F, 0F);
+		renderInvModelAt(0, 0F, 0F, 0F, 0F);
 
-        GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.popMatrix();
-    }
+		GlStateManager.enableBlend();
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		GlStateManager.popMatrix();
+	}
 
-    @Override
-    public IModelState getTransforms() {
-        return TransformUtils.DEFAULT_BLOCK;
-    }
+	@Override
+	public IModelState getTransforms() {
+		return TransformUtils.DEFAULT_BLOCK;
+	}
 
-    @Override
-    public boolean isAmbientOcclusion() {
-        return false;
-    }
+	@Override
+	public boolean isAmbientOcclusion() {
+		return false;
+	}
 
-    @Override
-    public boolean isGui3d() {
-        return true;
-    }
+	@Override
+	public boolean isGui3d() {
+		return true;
+	}
 }

@@ -308,7 +308,7 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
 		}
 	}
 
-    public boolean generate(World world, Random rand, BlockPos position) {
+	public boolean generate(World world, Random rand, BlockPos position) {
 		this.world = world;
 		this.basePos = position;
 		this.rand = new Random(rand.nextLong());

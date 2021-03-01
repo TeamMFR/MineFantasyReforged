@@ -25,9 +25,9 @@ import java.util.Random;
 
 /**
  * @author Anonymous Productions
- *         <p>
- *         Sources are provided for educational reasons. though small bits of
- *         code, or methods can be used in your own creations.
+ * <p>
+ * Sources are provided for educational reasons. though small bits of
+ * code, or methods can be used in your own creations.
  */
 public class BlockRack extends BlockWoodDecor {
 
@@ -49,7 +49,6 @@ public class BlockRack extends BlockWoodDecor {
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, FACING);
 	}
-
 
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
@@ -153,7 +152,7 @@ public class BlockRack extends BlockWoodDecor {
 		super.onBlockPlacedBy(world, pos, state, placer, stack);
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileEntityRack) {
-			((TileEntityRack)tile).setColorInt(stack);
+			((TileEntityRack) tile).setColorInt(stack);
 		}
 		world.setBlockState(pos, state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()), 4);
 	}
@@ -165,7 +164,7 @@ public class BlockRack extends BlockWoodDecor {
 	public int quantityDropped(Random rand) {
 		return 1;
 	}
-	
+
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityRack tile = (TileEntityRack) world.getTileEntity(pos);
@@ -180,12 +179,10 @@ public class BlockRack extends BlockWoodDecor {
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta)
-	{
+	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
 
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-		{
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;
 		}
 
@@ -193,14 +190,12 @@ public class BlockRack extends BlockWoodDecor {
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
-	{
+	public int getMetaFromState(IBlockState state) {
 		return state.getValue(FACING).getIndex();
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-	{
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 }

@@ -44,8 +44,8 @@ import javax.annotation.Nullable;
 
 public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
-    protected static final DataParameter<Byte> VEX_FLAGS = EntityDataManager.<Byte>createKey(EntityDragon.class, DataSerializers.BYTE);
-    
+	protected static final DataParameter<Byte> VEX_FLAGS = EntityDataManager.<Byte>createKey(EntityDragon.class, DataSerializers.BYTE);
+
 	private static final DataParameter<Boolean> TERRESTRIAL = EntityDataManager.<Boolean>createKey(EntityDragon.class,
 			DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager
@@ -57,17 +57,17 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	private final Predicate<Entity> ATTACKABLE = new Predicate<Entity>() {
 		public boolean apply(@Nullable Entity entity) {
 			boolean flag = entity instanceof EntityLivingBase;
-			
-			if(entity instanceof EntityDragon) {
-				flag = !((EntityDragon)entity).getType().breedName.equals(EntityDragon.this.getType().breedName);
+
+			if (entity instanceof EntityDragon) {
+				flag = !((EntityDragon) entity).getType().breedName.equals(EntityDragon.this.getType().breedName);
 			} else {
-				
+
 			}
-			
+
 			return !flag;
 		}
 	};
-    private BlockPos boundOrigin;
+	private BlockPos boundOrigin;
 	public static int interestTimeSeconds = 90;
 	private Entity lastEnemy;
 	public static float heartChance = 1.0F;
@@ -97,13 +97,13 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	@Override
 	protected void initEntityAI() {
 		super.initEntityAI();
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(4, new AIChargeAttack());
-        this.tasks.addTask(8, new AIMoveRandom());
-        this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
-        this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
-        this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityDragon.class}));
-        this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+		this.tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(4, new AIChargeAttack());
+		this.tasks.addTask(8, new AIMoveRandom());
+		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
+		this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityDragon.class}));
+		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
 	@Override
@@ -115,13 +115,13 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		}
 
 		super.onUpdate();
-        this.setNoGravity(true);
+		this.setNoGravity(true);
 	}
 
 	private float getFlightSpeed() {
 		return 0.8F;
 	}
-	
+
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
 		setDragon(getRandomTier());
@@ -134,39 +134,31 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(getType().meleeDamage);
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(256.0D);
 	}
-	
-	private boolean getVexFlag(int mask)
-    {
-        int i = ((Byte)this.dataManager.get(VEX_FLAGS)).byteValue();
-        return (i & mask) != 0;
-    }
 
-    private void setVexFlag(int mask, boolean value)
-    {
-        int i = ((Byte)this.dataManager.get(VEX_FLAGS)).byteValue();
+	private boolean getVexFlag(int mask) {
+		int i = ((Byte) this.dataManager.get(VEX_FLAGS)).byteValue();
+		return (i & mask) != 0;
+	}
 
-        if (value)
-        {
-            i = i | mask;
-        }
-        else
-        {
-            i = i & ~mask;
-        }
+	private void setVexFlag(int mask, boolean value) {
+		int i = ((Byte) this.dataManager.get(VEX_FLAGS)).byteValue();
 
-        this.dataManager.set(VEX_FLAGS, Byte.valueOf((byte)(i & 255)));
-    }
-    
-    public boolean isCharging()
-    {
-        return this.getVexFlag(1);
-    }
+		if (value) {
+			i = i | mask;
+		} else {
+			i = i & ~mask;
+		}
 
-    public void setCharging(boolean charging)
-    {
-        this.setVexFlag(1, charging);
-    }
+		this.dataManager.set(VEX_FLAGS, Byte.valueOf((byte) (i & 255)));
+	}
 
+	public boolean isCharging() {
+		return this.getVexFlag(1);
+	}
+
+	public void setCharging(boolean charging) {
+		this.setVexFlag(1, charging);
+	}
 
 	@Override
 	public void fall(float distance, float damageMultiplier) {
@@ -257,7 +249,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.dataManager.register(DISENGAGE_TIME, 0);
 		this.dataManager.register(BREED, 0);
 		this.dataManager.register(TIER, rand.nextInt(5));
-        this.dataManager.register(VEX_FLAGS, Byte.valueOf((byte)0));
+		this.dataManager.register(VEX_FLAGS, Byte.valueOf((byte) 0));
 	}
 
 	public Shockwave createShockwave(double x, double y, double z, float power, boolean grief) {
@@ -284,12 +276,12 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 
-//        nbt.setInteger("FireBreath", fireBreathTick);
-//		nbt.setInteger("FireBreathCooldown", fireBreathCooldown);
+		//        nbt.setInteger("FireBreath", fireBreathTick);
+		//		nbt.setInteger("FireBreathCooldown", fireBreathCooldown);
 
 		nbt.setInteger("Breed", getBreed());
 		nbt.setInteger("Tier", getTier());
-//        nbt.setInteger("interestTime", interestTime);
+		//        nbt.setInteger("interestTime", interestTime);
 	}
 
 	/**
@@ -298,8 +290,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		if (nbt.hasKey("Breed")) {
-//        fireBreathTick = nbt.getInteger("FireBreath");
-//			fireBreathCooldown = nbt.getInteger("FireBreathCooldown");
+			//        fireBreathTick = nbt.getInteger("FireBreath");
+			//			fireBreathCooldown = nbt.getInteger("FireBreathCooldown");
 
 			setBreed(nbt.getInteger("Breed"));
 			setTier(nbt.getInteger("Tier"));
@@ -307,154 +299,149 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			stepHeight = 1.25F + (getTier() * 0.25F);
 			this.experienceValue = 50 * (getTier() + 1);
 
-//        interestTime = nbt.getInteger("interestTime");
+			//        interestTime = nbt.getInteger("interestTime");
 
 			if (this.hasCustomName()) {
-//            this.bossInfo.setName(this.getDisplayName());
+				//            this.bossInfo.setName(this.getDisplayName());
 			}
 		}
 
 	}
-	
 
+	@Override
+	protected SoundEvent getAmbientSound() {
+		return MineFantasySounds.DRAGON_SAY;
+	}
 
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return MineFantasySounds.DRAGON_SAY;
-    }
+	@Override
+	protected void playStepSound(BlockPos pos, Block floor) {
+		this.playSound(MineFantasySounds.DRAGON_STEP, 1.0F, 1.0F);
+	}
 
-    @Override
-    protected void playStepSound(BlockPos pos, Block floor) {
-        this.playSound(MineFantasySounds.DRAGON_STEP, 1.0F, 1.0F);
-    }
+	/**
+	 * Returns the sound this mob makes when it is hurt.
+	 */
+	@Override
+	protected SoundEvent getHurtSound(DamageSource source) {
+		return MineFantasySounds.DRAGON_HURT;
+	}
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return MineFantasySounds.DRAGON_HURT;
-    }
+	/**
+	 * Returns the volume for the sounds this mob makes.
+	 */
+	@Override
+	protected float getSoundVolume() {
+		return 2.0F;
+	}
 
-    /**
-     * Returns the volume for the sounds this mob makes.
-     */
-    @Override
-    protected float getSoundVolume() {
-        return 2.0F;
-    }
+	@Override
+	protected float getSoundPitch() {
+		return 1.0F;
+	}
 
-    @Override
-    protected float getSoundPitch() {
-        return 1.0F;
-    }
+	protected Item getDropItem() {
+		return ComponentListMFR.DRAGON_HEART;
+	}
 
-    protected Item getDropItem() {
-        return ComponentListMFR.DRAGON_HEART;
-    }
-    
-    private boolean didDropHeart(int tier) {
-        if (tier == 4)// Ancient
-        {
-            return true;
-        }
-        if (tier == 3)// Elder
-        {
-            return true;
-        }
-        if (tier == 2)// Mature
-        {
-            return rand.nextFloat() * heartChance > 0.25F;// 75% chance
-        }
-        if (tier == 1)// Adult
-        {
-            return rand.nextFloat() * heartChance > 0.85F;// 15% chance
-        }
-        return false;// Young
-    }
+	private boolean didDropHeart(int tier) {
+		if (tier == 4)// Ancient
+		{
+			return true;
+		}
+		if (tier == 3)// Elder
+		{
+			return true;
+		}
+		if (tier == 2)// Mature
+		{
+			return rand.nextFloat() * heartChance > 0.25F;// 75% chance
+		}
+		if (tier == 1)// Adult
+		{
+			return rand.nextFloat() * heartChance > 0.85F;// 15% chance
+		}
+		return false;// Young
+	}
 
-    private int getLootCount(int tier) {
-        if (tier == 4)// Ancient
-        {
-            return 1;// 1 Exquisite
-        }
-        if (tier == 3)// Elder
-        {
-            return 2 + rand.nextInt(4);// 2-5 Valuable
-        }
-        if (tier == 2)// Mature
-        {
-            return 2 + rand.nextInt(1);// 2-3 Valuable
-        }
-        if (tier == 1)// Adult
-        {
-            return 1 + rand.nextInt(1);// 1-2 Valuable
-        }
-        return 1;// Young, 1 Valuable
-    }
-    
-    /**
-     * Checks if the entity's current position is a valid location to spawn this
-     * entity.
-     */
-    @Override
-    public boolean getCanSpawnHere() {
-        return super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
-    }
+	private int getLootCount(int tier) {
+		if (tier == 4)// Ancient
+		{
+			return 1;// 1 Exquisite
+		}
+		if (tier == 3)// Elder
+		{
+			return 2 + rand.nextInt(4);// 2-5 Valuable
+		}
+		if (tier == 2)// Mature
+		{
+			return 2 + rand.nextInt(1);// 2-3 Valuable
+		}
+		if (tier == 1)// Adult
+		{
+			return 1 + rand.nextInt(1);// 1-2 Valuable
+		}
+		return 1;// Young, 1 Valuable
+	}
 
-    /**
-     * Will return how many at most can spawn in a chunk at once.
-     */
-    public int getMaxSpawnedInChunk() {
-        return 1;
-    }
+	/**
+	 * Checks if the entity's current position is a valid location to spawn this
+	 * entity.
+	 */
+	@Override
+	public boolean getCanSpawnHere() {
+		return super.getCanSpawnHere() && this.world.getDifficulty() != EnumDifficulty.PEACEFUL;
+	}
 
-    /**
-     * Drop 0-2 items of this living's type. @param par1 - Whether this entity has
-     * recently been hit by a player. @param par2 - Level of Looting used to kill
-     * this mob.
-     */
-    @Override
-    protected void dropFewItems(boolean playerKill, int looting) {
-        int count = getLootCount(getTier()) + rand.nextInt(looting + 1);
-        for (int a = 0; a < count; a++) {
-            Item drop = getLoot(getTier());
-            this.dropItem(drop, 1);
-        }
-        if (getTier() == 4)// ANCIENT
-        {
-            this.dropItem(Items.NETHER_STAR, 1);
-        }
-        if (didDropHeart(this.getTier())) {
-            this.dropItem(ComponentListMFR.DRAGON_HEART, 1);
-        }
-    }
+	/**
+	 * Will return how many at most can spawn in a chunk at once.
+	 */
+	public int getMaxSpawnedInChunk() {
+		return 1;
+	}
 
-    @Nullable
-    public BlockPos getBoundOrigin()
-    {
-        return this.boundOrigin;
-    }
+	/**
+	 * Drop 0-2 items of this living's type. @param par1 - Whether this entity has
+	 * recently been hit by a player. @param par2 - Level of Looting used to kill
+	 * this mob.
+	 */
+	@Override
+	protected void dropFewItems(boolean playerKill, int looting) {
+		int count = getLootCount(getTier()) + rand.nextInt(looting + 1);
+		for (int a = 0; a < count; a++) {
+			Item drop = getLoot(getTier());
+			this.dropItem(drop, 1);
+		}
+		if (getTier() == 4)// ANCIENT
+		{
+			this.dropItem(Items.NETHER_STAR, 1);
+		}
+		if (didDropHeart(this.getTier())) {
+			this.dropItem(ComponentListMFR.DRAGON_HEART, 1);
+		}
+	}
 
-    public void setBoundOrigin(@Nullable BlockPos boundOriginIn)
-    {
-        this.boundOrigin = boundOriginIn;
-    }
+	@Nullable
+	public BlockPos getBoundOrigin() {
+		return this.boundOrigin;
+	}
 
-   
-    private Item getLoot(int tier) {
-        if (tier == 4)// Ancient
-        {
-            return ToolListMFR.LOOT_SACK_RARE;
-        }
-        return ToolListMFR.LOOT_SACK_UC;// Any
-    }
+	public void setBoundOrigin(@Nullable BlockPos boundOriginIn) {
+		this.boundOrigin = boundOriginIn;
+	}
 
-    private Entity getBreath(double xAngle, double yAngle, double zAngle) {
-        return new EntityDragonBreath(this.world, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage)
-                .setType(getType().rangedAttack.id);
-    }
-    
+	private Item getLoot(int tier) {
+		if (tier == 4)// Ancient
+		{
+			return ToolListMFR.LOOT_SACK_RARE;
+		}
+		return ToolListMFR.LOOT_SACK_UC;// Any
+	}
+
+	private Entity getBreath(double xAngle, double yAngle, double zAngle) {
+		return new EntityDragonBreath(this.world, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage)
+				.setType(getType().rangedAttack.id);
+	}
+
 	@Override
 	public void attackEntityWithRangedAttack(EntityLivingBase target, float distanceFactor) {
 		Entity entity = getBreath(this.getLookVec().x, getLookVec().y, getLookVec().z);
@@ -467,194 +454,159 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		// TODO Auto-generated method stub
 
 	}
-	
-	class AIChargeAttack extends EntityAIBase
-    {
-        public AIChargeAttack()
-        {
-            this.setMutexBits(1);
-        }
 
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute()
-        {
-            if (EntityDragon.this.getAttackTarget() != null && !EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.rand.nextInt(7) == 0)
-            {
-                return EntityDragon.this.getDistanceSq(EntityDragon.this.getAttackTarget()) > 4.0D;
-            }
-            else
-            {
-                return false;
-            }
-        }
+	class AIChargeAttack extends EntityAIBase {
+		public AIChargeAttack() {
+			this.setMutexBits(1);
+		}
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
-        public boolean shouldContinueExecuting()
-        {
-            return EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.isCharging() && EntityDragon.this.getAttackTarget() != null && EntityDragon.this.getAttackTarget().isEntityAlive();
-        }
+		/**
+		 * Returns whether the EntityAIBase should begin execution.
+		 */
+		public boolean shouldExecute() {
+			if (EntityDragon.this.getAttackTarget() != null && !EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.rand.nextInt(7) == 0) {
+				return EntityDragon.this.getDistanceSq(EntityDragon.this.getAttackTarget()) > 4.0D;
+			} else {
+				return false;
+			}
+		}
 
-        /**
-         * Execute a one shot task or start executing a continuous task
-         */
-        public void startExecuting()
-        {
-            EntityLivingBase entitylivingbase = EntityDragon.this.getAttackTarget();
-            Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
-            EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
-            EntityDragon.this.setCharging(true);
-            EntityDragon.this.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0F, 1.0F);
-        }
+		/**
+		 * Returns whether an in-progress EntityAIBase should continue executing
+		 */
+		public boolean shouldContinueExecuting() {
+			return EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.isCharging() && EntityDragon.this.getAttackTarget() != null && EntityDragon.this.getAttackTarget().isEntityAlive();
+		}
 
-        /**
-         * Reset the task's internal state. Called when this task is interrupted by another one
-         */
-        public void resetTask()
-        {
-            EntityDragon.this.setCharging(false);
-        }
+		/**
+		 * Execute a one shot task or start executing a continuous task
+		 */
+		public void startExecuting() {
+			EntityLivingBase entitylivingbase = EntityDragon.this.getAttackTarget();
+			Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
+			EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+			EntityDragon.this.setCharging(true);
+			EntityDragon.this.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0F, 1.0F);
+		}
 
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask()
-        {
-            EntityLivingBase entitylivingbase = EntityDragon.this.getAttackTarget();
-            double d0 = EntityDragon.this.getPositionVector().distanceTo(entitylivingbase.getPositionVector());
-            if (d0<3)
-            {
-                EntityDragon.this.attackEntityAsMob(entitylivingbase);
-                EntityDragon.this.setCharging(false);
-            }
-            else
-            {
-                if (d0 < 9.0D)
-                {
-                    Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
-                    EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
-                }
-                if(d0 < 16.0D) {
-                    double xAngle = EntityDragon.this.getAttackTarget().posX - EntityDragon.this.posX;
-                    double yAngle = EntityDragon.this.getAttackTarget().getEntityBoundingBox().minY + EntityDragon.this.getAttackTarget().height / 2.0F
-                            - (EntityDragon.this.posY + EntityDragon.this.height / 2.0F);
-                    double zAngle = EntityDragon.this.getAttackTarget().posZ - EntityDragon.this.posZ;
-                    double power = 1.0D;
-                    Vec3d var20 = EntityDragon.this.getLook(1.0F);
-                    Entity breath = EntityDragon.this.getBreath(xAngle, yAngle, zAngle);
-                    breath.posX = EntityDragon.this.posX + var20.x * power;
-                    breath.posY = EntityDragon.this.posY + EntityDragon.this.height / 2.0F + 0.5D;
-                    breath.posZ = EntityDragon.this.posZ + var20.z * power;
-                    EntityDragon.this.world.spawnEntity(breath);
-                    System.out.println("");
-                }
-            }
-        }
-    }
+		/**
+		 * Reset the task's internal state. Called when this task is interrupted by another one
+		 */
+		public void resetTask() {
+			EntityDragon.this.setCharging(false);
+		}
 
-    
+		/**
+		 * Keep ticking a continuous task that has already been started
+		 */
+		public void updateTask() {
+			EntityLivingBase entitylivingbase = EntityDragon.this.getAttackTarget();
+			double d0 = EntityDragon.this.getPositionVector().distanceTo(entitylivingbase.getPositionVector());
+			if (d0 < 3) {
+				EntityDragon.this.attackEntityAsMob(entitylivingbase);
+				EntityDragon.this.setCharging(false);
+			} else {
+				if (d0 < 9.0D) {
+					Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
+					EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
+				}
+				if (d0 < 16.0D) {
+					double xAngle = EntityDragon.this.getAttackTarget().posX - EntityDragon.this.posX;
+					double yAngle = EntityDragon.this.getAttackTarget().getEntityBoundingBox().minY + EntityDragon.this.getAttackTarget().height / 2.0F
+							- (EntityDragon.this.posY + EntityDragon.this.height / 2.0F);
+					double zAngle = EntityDragon.this.getAttackTarget().posZ - EntityDragon.this.posZ;
+					double power = 1.0D;
+					Vec3d var20 = EntityDragon.this.getLook(1.0F);
+					Entity breath = EntityDragon.this.getBreath(xAngle, yAngle, zAngle);
+					breath.posX = EntityDragon.this.posX + var20.x * power;
+					breath.posY = EntityDragon.this.posY + EntityDragon.this.height / 2.0F + 0.5D;
+					breath.posZ = EntityDragon.this.posZ + var20.z * power;
+					EntityDragon.this.world.spawnEntity(breath);
+					System.out.println("");
+				}
+			}
+		}
+	}
 
-    class AIMoveControl extends EntityMoveHelper
-    {
-        public AIMoveControl(EntityDragon vex)
-        {
-            super(vex);
-        }
+	class AIMoveControl extends EntityMoveHelper {
+		public AIMoveControl(EntityDragon vex) {
+			super(vex);
+		}
 
-        public void onUpdateMoveHelper()
-        {
-            if (this.action == EntityMoveHelper.Action.MOVE_TO)
-            {
-                double d0 = this.posX - EntityDragon.this.posX;
-                double d1 = this.posY - EntityDragon.this.posY;
-                double d2 = this.posZ - EntityDragon.this.posZ;
-                double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-                d3 = (double)MathHelper.sqrt(d3);
+		public void onUpdateMoveHelper() {
+			if (this.action == EntityMoveHelper.Action.MOVE_TO) {
+				double d0 = this.posX - EntityDragon.this.posX;
+				double d1 = this.posY - EntityDragon.this.posY;
+				double d2 = this.posZ - EntityDragon.this.posZ;
+				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
+				d3 = (double) MathHelper.sqrt(d3);
 
-                if (d3 < EntityDragon.this.getEntityBoundingBox().getAverageEdgeLength())
-                {
-                    this.action = EntityMoveHelper.Action.WAIT;
-                    EntityDragon.this.motionX *= 0.5D;
-                    EntityDragon.this.motionY *= 0.5D;
-                    EntityDragon.this.motionZ *= 0.5D;
-                }
-                else
-                {
-                    EntityDragon.this.motionX += d0 / d3 * 0.05D * this.speed;
-                    EntityDragon.this.motionY += d1 / d3 * 0.05D * this.speed;
-                    EntityDragon.this.motionZ += d2 / d3 * 0.05D * this.speed;
+				if (d3 < EntityDragon.this.getEntityBoundingBox().getAverageEdgeLength()) {
+					this.action = EntityMoveHelper.Action.WAIT;
+					EntityDragon.this.motionX *= 0.5D;
+					EntityDragon.this.motionY *= 0.5D;
+					EntityDragon.this.motionZ *= 0.5D;
+				} else {
+					EntityDragon.this.motionX += d0 / d3 * 0.05D * this.speed;
+					EntityDragon.this.motionY += d1 / d3 * 0.05D * this.speed;
+					EntityDragon.this.motionZ += d2 / d3 * 0.05D * this.speed;
 
-                    if (EntityDragon.this.getAttackTarget() == null)
-                    {
-                        EntityDragon.this.rotationYaw = -((float)MathHelper.atan2(EntityDragon.this.motionX, EntityDragon.this.motionZ)) * (180F / (float)Math.PI);
-                        EntityDragon.this.renderYawOffset = EntityDragon.this.rotationYaw;
-                    }
-                    else
-                    {
-                        double d4 = EntityDragon.this.getAttackTarget().posX - EntityDragon.this.posX;
-                        double d5 = EntityDragon.this.getAttackTarget().posZ - EntityDragon.this.posZ;
-                        EntityDragon.this.rotationYaw = -((float)MathHelper.atan2(d4, d5)) * (180F / (float)Math.PI);
-                        EntityDragon.this.renderYawOffset = EntityDragon.this.rotationYaw;
-                    }
-                }
-            }
-        }
-    }
+					if (EntityDragon.this.getAttackTarget() == null) {
+						EntityDragon.this.rotationYaw = -((float) MathHelper.atan2(EntityDragon.this.motionX, EntityDragon.this.motionZ)) * (180F / (float) Math.PI);
+						EntityDragon.this.renderYawOffset = EntityDragon.this.rotationYaw;
+					} else {
+						double d4 = EntityDragon.this.getAttackTarget().posX - EntityDragon.this.posX;
+						double d5 = EntityDragon.this.getAttackTarget().posZ - EntityDragon.this.posZ;
+						EntityDragon.this.rotationYaw = -((float) MathHelper.atan2(d4, d5)) * (180F / (float) Math.PI);
+						EntityDragon.this.renderYawOffset = EntityDragon.this.rotationYaw;
+					}
+				}
+			}
+		}
+	}
 
-    class AIMoveRandom extends EntityAIBase
-    {
-        public AIMoveRandom()
-        {
-            this.setMutexBits(1);
-        }
+	class AIMoveRandom extends EntityAIBase {
+		public AIMoveRandom() {
+			this.setMutexBits(1);
+		}
 
-        /**
-         * Returns whether the EntityAIBase should begin execution.
-         */
-        public boolean shouldExecute()
-        {
-            return !EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.rand.nextInt(7) == 0;
-        }
+		/**
+		 * Returns whether the EntityAIBase should begin execution.
+		 */
+		public boolean shouldExecute() {
+			return !EntityDragon.this.getMoveHelper().isUpdating() && EntityDragon.this.rand.nextInt(7) == 0;
+		}
 
-        /**
-         * Returns whether an in-progress EntityAIBase should continue executing
-         */
-        public boolean shouldContinueExecuting()
-        {
-            return false;
-        }
+		/**
+		 * Returns whether an in-progress EntityAIBase should continue executing
+		 */
+		public boolean shouldContinueExecuting() {
+			return false;
+		}
 
-        /**
-         * Keep ticking a continuous task that has already been started
-         */
-        public void updateTask()
-        {
-            BlockPos blockpos = EntityDragon.this.getBoundOrigin();
+		/**
+		 * Keep ticking a continuous task that has already been started
+		 */
+		public void updateTask() {
+			BlockPos blockpos = EntityDragon.this.getBoundOrigin();
 
-            if (blockpos == null)
-            {
-                blockpos = new BlockPos(EntityDragon.this);
-            }
+			if (blockpos == null) {
+				blockpos = new BlockPos(EntityDragon.this);
+			}
 
-            for (int i = 0; i < 3; ++i)
-            {
-                BlockPos blockpos1 = blockpos.add(EntityDragon.this.rand.nextInt(15) - 7, EntityDragon.this.rand.nextInt(11) - 5, EntityDragon.this.rand.nextInt(15) - 7);
+			for (int i = 0; i < 3; ++i) {
+				BlockPos blockpos1 = blockpos.add(EntityDragon.this.rand.nextInt(15) - 7, EntityDragon.this.rand.nextInt(11) - 5, EntityDragon.this.rand.nextInt(15) - 7);
 
-                if (EntityDragon.this.world.isAirBlock(blockpos1))
-                {
-                    EntityDragon.this.moveHelper.setMoveTo((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 0.25D);
+				if (EntityDragon.this.world.isAirBlock(blockpos1)) {
+					EntityDragon.this.moveHelper.setMoveTo((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 0.25D);
 
-                    if (EntityDragon.this.getAttackTarget() == null)
-                    {
-                        EntityDragon.this.getLookHelper().setLookPosition((double)blockpos1.getX() + 0.5D, (double)blockpos1.getY() + 0.5D, (double)blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
-                    }
+					if (EntityDragon.this.getAttackTarget() == null) {
+						EntityDragon.this.getLookHelper().setLookPosition((double) blockpos1.getX() + 0.5D, (double) blockpos1.getY() + 0.5D, (double) blockpos1.getZ() + 0.5D, 180.0F, 20.0F);
+					}
 
-                    break;
-                }
-            }
-        }
-    }
+					break;
+				}
+			}
+		}
+	}
 }

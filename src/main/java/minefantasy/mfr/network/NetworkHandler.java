@@ -1,7 +1,6 @@
 package minefantasy.mfr.network;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.client.gui.GuiAnvilMF;
 import minefantasy.mfr.client.gui.GuiBigFurnace;
 import minefantasy.mfr.client.gui.GuiBlastChamber;
@@ -18,6 +17,7 @@ import minefantasy.mfr.client.gui.GuiQuern;
 import minefantasy.mfr.client.gui.GuiReload;
 import minefantasy.mfr.client.gui.GuiResearchBench;
 import minefantasy.mfr.container.ContainerReload;
+import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBloomery;
@@ -50,7 +50,6 @@ public class NetworkHandler implements IGuiHandler {
 
 	public static final NetworkHandler INSTANCE = new NetworkHandler();
 	public static final String CHANNEL_NAME = "MFR";
-
 
 	//unused: 9, 10, 16, 18, 20, 25
 	private static final int PLAYER_SYNC_PACKET = 1;
@@ -101,7 +100,6 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(STAMINA_PACKET, StaminaPacket.class, StaminaPacket::new);
 		PacketMF.registerPacket(PARRY_PACKET, ParryPacket.class, ParryPacket::new);
 		PacketMF.registerPacket(HIT_SOUND_PACKET, HitSoundPacket.class, HitSoundPacket::new);
-		PacketMF.registerPacket(CARPENTER_PACKET, CarpenterPacket.class, CarpenterPacket::new);
 		PacketMF.registerPacket(KNOWLEDGE_PACKET, KnowledgePacket.class, KnowledgePacket::new);
 		PacketMF.registerPacket(RESEARCH_REQUEST_PACKET, ResearchRequestPacket.class, ResearchRequestPacket::new);
 		PacketMF.registerPacket(LEVEL_UP_PACKET, LevelUpPacket.class, LevelUpPacket::new);
@@ -183,7 +181,7 @@ public class NetworkHandler implements IGuiHandler {
 					return ((TileEntityAnvil) tileEntity).createContainer(player);
 			}
 		}
-		if (ID == GUI_RELOAD && x == 1 && !player.getHeldItemMainhand().isEmpty()){
+		if (ID == GUI_RELOAD && x == 1 && !player.getHeldItemMainhand().isEmpty()) {
 			return new ContainerReload(player.inventory, player.getHeldItemMainhand());
 		}
 
@@ -224,7 +222,7 @@ public class NetworkHandler implements IGuiHandler {
 					return new GuiAnvilMF(((TileEntityAnvil) tileEntity).createContainer(player), (TileEntityAnvil) tileEntity);
 			}
 		}
-		switch (ID){
+		switch (ID) {
 			case GUI_RESEARCH_BOOK:
 				if (x == 0) {
 					if (y >= 0) {

@@ -39,485 +39,474 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class TileEntityForge extends TileEntityBase implements  IBasicMetre, IHeatSource, IBellowsUseable, ITickable {
-    public static final float maxTemperature = 5000;
-    public float fuel;
-    public float maxFuel = 6000;// 5m
-    public float temperature;
-    public float fuelTemperature;
-    public float dragonHeartPower = 0F;
-    public int workableState = 0;
-    public int exactTemperature;
-    int justShared;
-    private Random rand = new Random();
-    private int ticksExisted;
-
-    public final ItemStackHandler inventory = createInventory();
-
-    @Override
-    protected ItemStackHandler createInventory() {
-        return new ItemStackHandler(1);
-    }
-
-    @Override
-    public ItemStackHandler getInventory() {
-        return this.inventory;
-    }
-
-    @Override
-    public ContainerBase createContainer(EntityPlayer player) {
-        return new ContainerForge(player.inventory,this);
-    }
-
-    @Override
-    protected int getGuiId() {
-        return NetworkHandler.GUI_FORGE;
-    }
-
-    @Override
-    public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-    {
-        return oldState.getBlock() != newState.getBlock();
-    }
-
-
-    @Override
-    public void update() {
-        ++ticksExisted;
-
-        if (world.isRemote)
-            return;
-
-        if (justShared > 0)
-            --justShared;
-
-        if (ticksExisted % 20 == 0) {
-            ItemStack item = getInventory().getStackInSlot(0);
-            if (!item.isEmpty() && !world.isRemote) {
-                modifyItem(item);
-            }
-            syncData();
-            sendUpdates();
-        }
-
-        if (!isLit() && !world.isRemote) {
-            if (temperature > 0 && ticksExisted % 5 == 0) {
-                temperature = 0;
-            }
-            return;
-        }
-        tickFuel();
-        if (fuel <= 0) {
-            this.extinguish();
-            return;
-        }
-        boolean isBurning = isBurning();// Check if it's burning
-        float maxTemp = isLit() ? (fuelTemperature + getUnderTemperature()) : 0;
-
-        if (temperature < maxTemp) {
-            float amount = 2.0F;
-            temperature += amount;
-            if (temperature > maxTemp) {
-                temperature = maxTemp;
-            }
-        } else if (temperature > maxTemp && rand.nextInt(20) == 0) {
-            temperature -= 10;
-        }
-
-        if (isBurning && temperature > 250 && rand.nextInt(20) == 0 && !isOutside()) {
-            int val = this.getTier() == 1 ? 3 : 1;
-            if (this.hasBlockAbove()) {
-                SmokeMechanics.emitSmokeIndirect(world, pos.add(0,1,0), val);
-            }
-            else {
-                SmokeMechanics.emitSmokeIndirect(world, pos, val);
-            }
-        }
-        maxFuel = getTier() == 1 ? 12000 : 6000;
-    }
-
-    private boolean isOutside() {
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
-                if (!world.canBlockSeeSky(pos.add(x,1,y))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    private void tickFuel() {
-        if (fuel > 0) {
-            fuel -= 0.2F;
-        }
-
-        if (fuel < 0){
-            fuel = 0;
-        }
-    }
-
-    public boolean isBurning() {
-        return fuel > 0 && temperature > 0;
-    }
-
-    public int getFuelCount(){
-        maxFuel = getTier() == 1 ? 12000 : 6000;
-        int room_left = (int) (maxFuel - fuel);
-        int fuelInt;
-        if (maxFuel == 6000){
-            if (room_left == 0){
-                fuelInt = 3;
-            }
-            else if (room_left > 0 && room_left < 3000){
-                fuelInt = 2;
-            }
-            else if (room_left > 3000 && room_left < 6000){
-                fuelInt = 1;
-            }
-            else {
-                fuelInt = 0;
-            }
-        }
-        else {
-            if (room_left == 0){
-                fuelInt = 3;
-            }
-            else if (room_left > 0 && room_left < 6000){
-                fuelInt = 2;
-            }
-            else if (room_left > 6000 && room_left < 12000){
-                fuelInt = 1;
-            }
-            else {
-                fuelInt = 0;
-            }
-        }
-        return fuelInt;
-    }
-
-    private void modifyItem(ItemStack item) {
-        if (item.getItem() == ComponentListMFR.HOT_ITEM) {
-            int temp = ItemHeated.getTemp(item);
-            if (temp > temperature) {
-                int i = (int) (temperature / 5F);
-                temp -= i;
-            } else {
-                int increase = (int) (temperature / (20F * getStackModifier(item.getCount())));
-                if (temp >= (temperature - increase)) {
-                    temp = (int) temperature;
-                } else {
-                    temp += increase;
-                }
-            }
-            if (temp >= 0) {
-                ItemHeated.setTemp(item, Math.max(0, temp));
-            }
-        } else if (temperature > 0) {
-            this.getInventory().setStackInSlot(0, ItemHeated.createHotItem(item));
-
-        }
-    }
-
-    private float getStackModifier(int stackSize) {
-        return 1F + stackSize / 16F;
-    }
-
-    public int getTier() {
-        Block block = world.getBlockState(pos).getBlock();
-        if (block instanceof BlockForge) {
-            return ((BlockForge) block).tier;
-        }
-        return 0;
-    }
-
-    public float getUnderTemperature() {
-        IBlockState under = world.getBlockState(pos.add(0,-1,0));
-
-        if (under.getMaterial() == Material.FIRE) {
-            return 50F;
-        }
-        if (under.getMaterial() == Material.LAVA) {
-            return 100F;
-        }
-        return 0F;
-    }
-
-
-
-    @Override
-    public boolean isItemValidForSlot(int slot, ItemStack item) {
-        return true;
-    }
-
-    public boolean isLit() {
-        IBlockState state = world.getBlockState(pos);
-        BlockForge forge = getActiveBlock();
-        return forge.getBurningValue(state);
-    }
-
-    public BlockForge getActiveBlock() {
-        if (world == null)
-            return null;
-
-        Block block = world.getBlockState(pos).getBlock();
-
-        if (block instanceof BlockForge) {
-            return (BlockForge) block;
-        }
-        return null;
-    }
-
-    /**
-     * Puts the fire out
-     */
-    public void extinguish() {
-        if (getTier() == 1) {
-            return;
-        }
-        BlockForge.setActiveState(false, getFuelCount(), hasBlockAbove(), world, pos);
-    }
-
-    /**
-     * Fires the forge up
-     */
-    public void fireUpForge() {
-        if (getTier() == 1) {
-            return;
-        }
-        BlockForge.setActiveState(true, getFuelCount(), hasBlockAbove(), world, pos);
-    }
-
-    public float getBellowsEffect() {
-        return getTier() == 1 ? 2.0F : 1.5F;
-    }
-
-    private float getBellowsMax() {
-        return Math.min(fuelTemperature * getBellowsEffect(), getMaxTemp());
-    }
-
-    public int getMaxTemp() {
-        return (int) maxTemperature;
-    }
-
-    public boolean addFuel(ForgeFuel stats, boolean hand, int tier) {
-        maxFuel = tier == 1 ? 12000 : 6000;
-
-        boolean hasUsed = false;
-
-        if (stats.baseHeat > this.fuelTemperature) // uses if hotter
-        {
-            hasUsed = true;
-        }
-        int room_left = (int) (maxFuel - fuel);
-        if (hand && room_left > 0) {
-            hasUsed = true;
-            fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
-        } else if (!hand && (fuel == 0 || room_left >= stats.duration))// For hoppers: only fill when there's full room
-        {
-            hasUsed = true;
-            fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
-        }
-        if (stats.doesLight && !isLit()) {
-            fireUpForge();
-            hasUsed = true;
-        }
-        if (hasUsed) {
-            fuelTemperature = stats.baseHeat;
-        }
-        BlockForge.setActiveState(isLit(), getFuelCount(), hasBlockAbove(), world, pos);
-        return hasUsed;
-    }
-
-    @Override
-    public int getMetreScale(int size) {
-        if (shouldShowMetre()) {
-            return (int) (size / this.maxFuel * this.fuel);
-        }
-        return 0;
-    }
-
-    public int[] getTempsScaled(int size) {
-        int[] temps = new int[2];
-        if (shouldShowMetre()) {
-            temps[0] = (int) (size / this.maxTemperature * this.temperature);
-            temps[1] = (int) (size / this.maxTemperature * this.fuelTemperature);
-        }
-        if (temps[0] > size)
-            temps[0] = size;
-        if (temps[1] > size)
-            temps[1] = size;
-        return temps;
-    }
-
-    @Override
-    public boolean shouldShowMetre() {
-        return true;
-    }
-
-    @Override
-    public String getLocalisedName() {
-        return (int) this.temperature + "C " + I18n.format(workableState >= 2 ? "state.unstable" : workableState == 1 ? "state.workable" : "forge.fuel.name");
-    }
-
-    private void syncData() {
-
-        if (world.isRemote)
-            return;
-
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new ForgePacket(this));
-
-    }
-
-    public void onUsedWithBellows(float powerLevel) {
-        if (!isBurning())
-            return;
-        if (justShared > 0) {
-            return;
-        }
-        if (fuel <= 0) {
-            return;
-        }
-        float max = getBellowsMax();
-        justShared = 5;
-        if (temperature < max) {
-            temperature = Math.min(max, temperature + (500F * powerLevel));
-        }
-
-        for (int a = 0; a < 10; a++) {
-            world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + (rand.nextDouble() * 0.8D) + 0.1D, pos.getY() + 0.4D,
-                    pos.getZ() + (rand.nextDouble() * 0.8D) + 0.1D, 0, 0.01, 0);
-        }
-
-        pumpBellows(-1, 0, powerLevel * 0.9F);
-        pumpBellows(0, -1, powerLevel * 0.9F);
-        pumpBellows(0, 1, powerLevel * 0.9F);
-        pumpBellows(1, 0, powerLevel * 0.9F);
-
-    }
-
-    private void pumpBellows(int x, int z, float pump) {
-        if (fuel <= 0)
-            return;
-
-        // int share = 2;
-        TileEntity tile = world.getTileEntity(pos.add(x,0,z));
-        if (tile == null)
-            return;
-
-        if (tile instanceof TileEntityForge) {
-            TileEntityForge forge = (TileEntityForge) tile;
-            forge.onUsedWithBellows(pump);
-        }
-    }
-
-    public float getBlockTemperature() {
-        if (this.isLit()) {
-            return temperature;
-        }
-        return 0;
-    }
-
-    public boolean hasBlockAbove() {
-        if (world == null) return false;
-
-        TileEntity tile = world.getTileEntity(pos.add(0,1,0));
-        if (tile != null && tile instanceof IHeatUser) {
-            return ((IHeatUser) tile).canAccept(this);
-        }
-
-        return tile instanceof TileEntityFurnace;
-    }
-
-    public boolean tryAddHeatable(ItemStack held) {
-        ItemStack contents = getInventory().getStackInSlot(0);
-        if (contents.isEmpty()) {
-            ItemStack placed = held.copy();
-            placed.setCount(1);
-            getInventory().setStackInSlot(0, placed);
-            return true;
-        } else if (contents.getItem() instanceof ItemHeated) {
-            ItemStack hot = Heatable.getItemStack(contents);
-            if (!hot.isEmpty() && hot.isItemEqual(held) && ItemStack.areItemStackTagsEqual(held, hot)
-                    && contents.getCount() < contents.getMaxStackSize()) {
-                contents.grow(1);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public int getWorkableState() {
-        if (world == null || world.isRemote) {
-            return workableState;
-        }
-        if (!this.getInventory().getStackInSlot(0).isEmpty()) {
-            return Heatable.getHeatableStage(getInventory().getStackInSlot(0));
-        }
-        return 0;
-    }
-
-    @Override
-    public boolean canPlaceAbove() {
-        return true;
-    }
-
-    @Override
-    public int getHeat() {
-        if (world.isRemote) {
-            return exactTemperature;
-        }
-        int mx = (int) (temperature * 1.2F);
-        int mn = (int) (temperature * 0.8F);
-        return Functions.getIntervalWave1_i(ticksExisted, 400, mx, mn);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public String getTextureName() {
-        BlockForge forge = (BlockForge) world.getBlockState(pos).getBlock();
-        return "forge_" + forge.type + (isLit() ? "_active" : "");
-    }
-
-    @Nonnull
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-
-        nbt.setFloat("temperature", temperature);
-        nbt.setFloat("fuelTemperature", fuelTemperature);
-        nbt.setFloat("dragonHeartPower", dragonHeartPower);
-        nbt.setFloat("fuel", fuel);
-        nbt.setFloat("maxFuel", maxFuel);
-
-        nbt.setTag("inventory", inventory.serializeNBT());
-
-        return nbt;
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-
-        temperature = nbt.getFloat("temperature");
-        fuelTemperature = nbt.getFloat("fuelTemperature");
-        dragonHeartPower = nbt.getFloat("dragonHeartPower");
-        fuel = nbt.getFloat("fuel");
-        maxFuel = nbt.getFloat("maxFuel");
-
-        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
-    }
-
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-    }
-
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInventory());
-        }
-        return super.getCapability(capability, facing);
-    }
+public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHeatSource, IBellowsUseable, ITickable {
+	public static final float maxTemperature = 5000;
+	public float fuel;
+	public float maxFuel = 6000;// 5m
+	public float temperature;
+	public float fuelTemperature;
+	public float dragonHeartPower = 0F;
+	public int workableState = 0;
+	public int exactTemperature;
+	int justShared;
+	private Random rand = new Random();
+	private int ticksExisted;
+
+	public final ItemStackHandler inventory = createInventory();
+
+	@Override
+	protected ItemStackHandler createInventory() {
+		return new ItemStackHandler(1);
+	}
+
+	@Override
+	public ItemStackHandler getInventory() {
+		return this.inventory;
+	}
+
+	@Override
+	public ContainerBase createContainer(EntityPlayer player) {
+		return new ContainerForge(player.inventory, this);
+	}
+
+	@Override
+	protected int getGuiId() {
+		return NetworkHandler.GUI_FORGE;
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
+	}
+
+	@Override
+	public void update() {
+		++ticksExisted;
+
+		if (world.isRemote)
+			return;
+
+		if (justShared > 0)
+			--justShared;
+
+		if (ticksExisted % 20 == 0) {
+			ItemStack item = getInventory().getStackInSlot(0);
+			if (!item.isEmpty() && !world.isRemote) {
+				modifyItem(item);
+			}
+			syncData();
+			sendUpdates();
+		}
+
+		if (!isLit() && !world.isRemote) {
+			if (temperature > 0 && ticksExisted % 5 == 0) {
+				temperature = 0;
+			}
+			return;
+		}
+		tickFuel();
+		if (fuel <= 0) {
+			this.extinguish();
+			return;
+		}
+		boolean isBurning = isBurning();// Check if it's burning
+		float maxTemp = isLit() ? (fuelTemperature + getUnderTemperature()) : 0;
+
+		if (temperature < maxTemp) {
+			float amount = 2.0F;
+			temperature += amount;
+			if (temperature > maxTemp) {
+				temperature = maxTemp;
+			}
+		} else if (temperature > maxTemp && rand.nextInt(20) == 0) {
+			temperature -= 10;
+		}
+
+		if (isBurning && temperature > 250 && rand.nextInt(20) == 0 && !isOutside()) {
+			int val = this.getTier() == 1 ? 3 : 1;
+			if (this.hasBlockAbove()) {
+				SmokeMechanics.emitSmokeIndirect(world, pos.add(0, 1, 0), val);
+			} else {
+				SmokeMechanics.emitSmokeIndirect(world, pos, val);
+			}
+		}
+		maxFuel = getTier() == 1 ? 12000 : 6000;
+	}
+
+	private boolean isOutside() {
+		for (int x = -1; x <= 1; x++) {
+			for (int y = -1; y <= 1; y++) {
+				if (!world.canBlockSeeSky(pos.add(x, 1, y))) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	private void tickFuel() {
+		if (fuel > 0) {
+			fuel -= 0.2F;
+		}
+
+		if (fuel < 0) {
+			fuel = 0;
+		}
+	}
+
+	public boolean isBurning() {
+		return fuel > 0 && temperature > 0;
+	}
+
+	public int getFuelCount() {
+		maxFuel = getTier() == 1 ? 12000 : 6000;
+		int room_left = (int) (maxFuel - fuel);
+		int fuelInt;
+		if (maxFuel == 6000) {
+			if (room_left == 0) {
+				fuelInt = 3;
+			} else if (room_left > 0 && room_left < 3000) {
+				fuelInt = 2;
+			} else if (room_left > 3000 && room_left < 6000) {
+				fuelInt = 1;
+			} else {
+				fuelInt = 0;
+			}
+		} else {
+			if (room_left == 0) {
+				fuelInt = 3;
+			} else if (room_left > 0 && room_left < 6000) {
+				fuelInt = 2;
+			} else if (room_left > 6000 && room_left < 12000) {
+				fuelInt = 1;
+			} else {
+				fuelInt = 0;
+			}
+		}
+		return fuelInt;
+	}
+
+	private void modifyItem(ItemStack item) {
+		if (item.getItem() == ComponentListMFR.HOT_ITEM) {
+			int temp = ItemHeated.getTemp(item);
+			if (temp > temperature) {
+				int i = (int) (temperature / 5F);
+				temp -= i;
+			} else {
+				int increase = (int) (temperature / (20F * getStackModifier(item.getCount())));
+				if (temp >= (temperature - increase)) {
+					temp = (int) temperature;
+				} else {
+					temp += increase;
+				}
+			}
+			if (temp >= 0) {
+				ItemHeated.setTemp(item, Math.max(0, temp));
+			}
+		} else if (temperature > 0) {
+			this.getInventory().setStackInSlot(0, ItemHeated.createHotItem(item));
+
+		}
+	}
+
+	private float getStackModifier(int stackSize) {
+		return 1F + stackSize / 16F;
+	}
+
+	public int getTier() {
+		Block block = world.getBlockState(pos).getBlock();
+		if (block instanceof BlockForge) {
+			return ((BlockForge) block).tier;
+		}
+		return 0;
+	}
+
+	public float getUnderTemperature() {
+		IBlockState under = world.getBlockState(pos.add(0, -1, 0));
+
+		if (under.getMaterial() == Material.FIRE) {
+			return 50F;
+		}
+		if (under.getMaterial() == Material.LAVA) {
+			return 100F;
+		}
+		return 0F;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item) {
+		return true;
+	}
+
+	public boolean isLit() {
+		IBlockState state = world.getBlockState(pos);
+		BlockForge forge = getActiveBlock();
+		return forge.getBurningValue(state);
+	}
+
+	public BlockForge getActiveBlock() {
+		if (world == null)
+			return null;
+
+		Block block = world.getBlockState(pos).getBlock();
+
+		if (block instanceof BlockForge) {
+			return (BlockForge) block;
+		}
+		return null;
+	}
+
+	/**
+	 * Puts the fire out
+	 */
+	public void extinguish() {
+		if (getTier() == 1) {
+			return;
+		}
+		BlockForge.setActiveState(false, getFuelCount(), hasBlockAbove(), world, pos);
+	}
+
+	/**
+	 * Fires the forge up
+	 */
+	public void fireUpForge() {
+		if (getTier() == 1) {
+			return;
+		}
+		BlockForge.setActiveState(true, getFuelCount(), hasBlockAbove(), world, pos);
+	}
+
+	public float getBellowsEffect() {
+		return getTier() == 1 ? 2.0F : 1.5F;
+	}
+
+	private float getBellowsMax() {
+		return Math.min(fuelTemperature * getBellowsEffect(), getMaxTemp());
+	}
+
+	public int getMaxTemp() {
+		return (int) maxTemperature;
+	}
+
+	public boolean addFuel(ForgeFuel stats, boolean hand, int tier) {
+		maxFuel = tier == 1 ? 12000 : 6000;
+
+		boolean hasUsed = false;
+
+		if (stats.baseHeat > this.fuelTemperature) // uses if hotter
+		{
+			hasUsed = true;
+		}
+		int room_left = (int) (maxFuel - fuel);
+		if (hand && room_left > 0) {
+			hasUsed = true;
+			fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
+		} else if (!hand && (fuel == 0 || room_left >= stats.duration))// For hoppers: only fill when there's full room
+		{
+			hasUsed = true;
+			fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
+		}
+		if (stats.doesLight && !isLit()) {
+			fireUpForge();
+			hasUsed = true;
+		}
+		if (hasUsed) {
+			fuelTemperature = stats.baseHeat;
+		}
+		BlockForge.setActiveState(isLit(), getFuelCount(), hasBlockAbove(), world, pos);
+		return hasUsed;
+	}
+
+	@Override
+	public int getMetreScale(int size) {
+		if (shouldShowMetre()) {
+			return (int) (size / this.maxFuel * this.fuel);
+		}
+		return 0;
+	}
+
+	public int[] getTempsScaled(int size) {
+		int[] temps = new int[2];
+		if (shouldShowMetre()) {
+			temps[0] = (int) (size / this.maxTemperature * this.temperature);
+			temps[1] = (int) (size / this.maxTemperature * this.fuelTemperature);
+		}
+		if (temps[0] > size)
+			temps[0] = size;
+		if (temps[1] > size)
+			temps[1] = size;
+		return temps;
+	}
+
+	@Override
+	public boolean shouldShowMetre() {
+		return true;
+	}
+
+	@Override
+	public String getLocalisedName() {
+		return (int) this.temperature + "C " + I18n.format(workableState >= 2 ? "state.unstable" : workableState == 1 ? "state.workable" : "forge.fuel.name");
+	}
+
+	private void syncData() {
+
+		if (world.isRemote)
+			return;
+
+		NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4, new ForgePacket(this));
+
+	}
+
+	public void onUsedWithBellows(float powerLevel) {
+		if (!isBurning())
+			return;
+		if (justShared > 0) {
+			return;
+		}
+		if (fuel <= 0) {
+			return;
+		}
+		float max = getBellowsMax();
+		justShared = 5;
+		if (temperature < max) {
+			temperature = Math.min(max, temperature + (500F * powerLevel));
+		}
+
+		for (int a = 0; a < 10; a++) {
+			world.spawnParticle(EnumParticleTypes.FLAME, pos.getX() + (rand.nextDouble() * 0.8D) + 0.1D, pos.getY() + 0.4D,
+					pos.getZ() + (rand.nextDouble() * 0.8D) + 0.1D, 0, 0.01, 0);
+		}
+
+		pumpBellows(-1, 0, powerLevel * 0.9F);
+		pumpBellows(0, -1, powerLevel * 0.9F);
+		pumpBellows(0, 1, powerLevel * 0.9F);
+		pumpBellows(1, 0, powerLevel * 0.9F);
+
+	}
+
+	private void pumpBellows(int x, int z, float pump) {
+		if (fuel <= 0)
+			return;
+
+		// int share = 2;
+		TileEntity tile = world.getTileEntity(pos.add(x, 0, z));
+		if (tile == null)
+			return;
+
+		if (tile instanceof TileEntityForge) {
+			TileEntityForge forge = (TileEntityForge) tile;
+			forge.onUsedWithBellows(pump);
+		}
+	}
+
+	public float getBlockTemperature() {
+		if (this.isLit()) {
+			return temperature;
+		}
+		return 0;
+	}
+
+	public boolean hasBlockAbove() {
+		if (world == null)
+			return false;
+
+		TileEntity tile = world.getTileEntity(pos.add(0, 1, 0));
+		if (tile != null && tile instanceof IHeatUser) {
+			return ((IHeatUser) tile).canAccept(this);
+		}
+
+		return tile instanceof TileEntityFurnace;
+	}
+
+	public boolean tryAddHeatable(ItemStack held) {
+		ItemStack contents = getInventory().getStackInSlot(0);
+		if (contents.isEmpty()) {
+			ItemStack placed = held.copy();
+			placed.setCount(1);
+			getInventory().setStackInSlot(0, placed);
+			return true;
+		} else if (contents.getItem() instanceof ItemHeated) {
+			ItemStack hot = Heatable.getItemStack(contents);
+			if (!hot.isEmpty() && hot.isItemEqual(held) && ItemStack.areItemStackTagsEqual(held, hot)
+					&& contents.getCount() < contents.getMaxStackSize()) {
+				contents.grow(1);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public int getWorkableState() {
+		if (world == null || world.isRemote) {
+			return workableState;
+		}
+		if (!this.getInventory().getStackInSlot(0).isEmpty()) {
+			return Heatable.getHeatableStage(getInventory().getStackInSlot(0));
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean canPlaceAbove() {
+		return true;
+	}
+
+	@Override
+	public int getHeat() {
+		if (world.isRemote) {
+			return exactTemperature;
+		}
+		int mx = (int) (temperature * 1.2F);
+		int mn = (int) (temperature * 0.8F);
+		return Functions.getIntervalWave1_i(ticksExisted, 400, mx, mn);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public String getTextureName() {
+		BlockForge forge = (BlockForge) world.getBlockState(pos).getBlock();
+		return "forge_" + forge.type + (isLit() ? "_active" : "");
+	}
+
+	@Nonnull
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+
+		nbt.setFloat("temperature", temperature);
+		nbt.setFloat("fuelTemperature", fuelTemperature);
+		nbt.setFloat("dragonHeartPower", dragonHeartPower);
+		nbt.setFloat("fuel", fuel);
+		nbt.setFloat("maxFuel", maxFuel);
+
+		nbt.setTag("inventory", inventory.serializeNBT());
+
+		return nbt;
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+
+		temperature = nbt.getFloat("temperature");
+		fuelTemperature = nbt.getFloat("fuelTemperature");
+		dragonHeartPower = nbt.getFloat("dragonHeartPower");
+		fuel = nbt.getFloat("fuel");
+		maxFuel = nbt.getFloat("maxFuel");
+
+		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+	}
+
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInventory());
+		}
+		return super.getCapability(capability, facing);
+	}
 }

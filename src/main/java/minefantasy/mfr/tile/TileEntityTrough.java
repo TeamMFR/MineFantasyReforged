@@ -61,13 +61,13 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 		return -1F;
 	}
 
-	public void setColorInt(ItemStack stack){
-		if (stack.getItem() instanceof ItemBlockTrough){
+	public void setColorInt(ItemStack stack) {
+		if (stack.getItem() instanceof ItemBlockTrough) {
 			this.colorInt = CustomToolHelper.getColourFromItemStack(stack, 0);
 		}
 	}
 
-	public int getColorInt(){
+	public int getColorInt() {
 		return colorInt;
 	}
 

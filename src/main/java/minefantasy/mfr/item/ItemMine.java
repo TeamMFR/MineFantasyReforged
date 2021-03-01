@@ -31,232 +31,228 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
-    private static final String powderNBT = "powder_type";
-    private static final String fuseNBT = "fuse_type";
-    private static final String fillingNBT = "filling_type";
-    private static final String casingNBT = "casing_type";
+	private static final String powderNBT = "powder_type";
+	private static final String fuseNBT = "fuse_type";
+	private static final String fillingNBT = "filling_type";
+	private static final String casingNBT = "casing_type";
 
-    public ItemMine(String name) {
-        super(name);
-        this.maxStackSize = 16;
+	public ItemMine(String name) {
+		super(name);
+		this.maxStackSize = 16;
 
-        this.setCreativeTab(MineFantasyTabs.tabGadget);
-        BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());
+		this.setCreativeTab(MineFantasyTabs.tabGadget);
+		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, new BombDispenser());
 
-        this.addPropertyOverride(new ResourceLocation("casing"), new IItemPropertyGetter()
-        {
-            @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-            {
-                if (getCasing(stack).equals("ceramic")){
-                    return 1;
-                }
-                if (getCasing(stack).equals("iron")){
-                    return 2;
-                }
-                if (getCasing(stack).equals("obsidian")){
-                    return 3;
-                }
-                if (getCasing(stack).equals("crystal")){
-                    return 4;
-                }
-                return 0;
-            }
-        });
-        this.addPropertyOverride(new ResourceLocation("filling"), new IItemPropertyGetter()
-        {
-            @SideOnly(Side.CLIENT)
-            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
-            {
-                if (getFilling(stack).equals("basic")){
-                    return 1;
-                }
-                if (getFilling(stack).equals("shrapnel")){
-                    return 2;
-                }
-                if (getFilling(stack).equals("fire")){
-                    return 3;
-                }
-                return 0;
-            }
-        });
-    }
+		this.addPropertyOverride(new ResourceLocation("casing"), new IItemPropertyGetter() {
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+				if (getCasing(stack).equals("ceramic")) {
+					return 1;
+				}
+				if (getCasing(stack).equals("iron")) {
+					return 2;
+				}
+				if (getCasing(stack).equals("obsidian")) {
+					return 3;
+				}
+				if (getCasing(stack).equals("crystal")) {
+					return 4;
+				}
+				return 0;
+			}
+		});
+		this.addPropertyOverride(new ResourceLocation("filling"), new IItemPropertyGetter() {
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+				if (getFilling(stack).equals("basic")) {
+					return 1;
+				}
+				if (getFilling(stack).equals("shrapnel")) {
+					return 2;
+				}
+				if (getFilling(stack).equals("fire")) {
+					return 3;
+				}
+				return 0;
+			}
+		});
+	}
 
-    public static void setFuse(ItemStack item, String fuse) {
-        NBTTagCompound nbt = getNBT(item);
-        nbt.setString(fuseNBT, fuse);
-    }
+	public static void setFuse(ItemStack item, String fuse) {
+		NBTTagCompound nbt = getNBT(item);
+		nbt.setString(fuseNBT, fuse);
+	}
 
-    public static String getFuse(ItemStack item) {
-        NBTTagCompound nbt = getNBT(item);
-        if (nbt.hasKey(fuseNBT)) {
-            return nbt.getString(fuseNBT);
-        }
-        return "basic";
-    }
+	public static String getFuse(ItemStack item) {
+		NBTTagCompound nbt = getNBT(item);
+		if (nbt.hasKey(fuseNBT)) {
+			return nbt.getString(fuseNBT);
+		}
+		return "basic";
+	}
 
-    public static void setPowder(ItemStack item, String powder) {
-        NBTTagCompound nbt = getNBT(item);
-        nbt.setString(powderNBT, powder);
-    }
+	public static void setPowder(ItemStack item, String powder) {
+		NBTTagCompound nbt = getNBT(item);
+		nbt.setString(powderNBT, powder);
+	}
 
-    public static String getPowder(ItemStack item) {
-        NBTTagCompound nbt = getNBT(item);
-        if (nbt.hasKey(powderNBT)) {
-            return nbt.getString(powderNBT);
-        }
-        return "black_powder";
-    }
+	public static String getPowder(ItemStack item) {
+		NBTTagCompound nbt = getNBT(item);
+		if (nbt.hasKey(powderNBT)) {
+			return nbt.getString(powderNBT);
+		}
+		return "black_powder";
+	}
 
-    /**
-     * 0 = Basic 1 = Shrapnel 2 = Fire
-     */
-    public static void setFilling(ItemStack item, String filling) {
-        NBTTagCompound nbt = getNBT(item);
-        nbt.setString(fillingNBT, filling);
-    }
+	/**
+	 * 0 = Basic 1 = Shrapnel 2 = Fire
+	 */
+	public static void setFilling(ItemStack item, String filling) {
+		NBTTagCompound nbt = getNBT(item);
+		nbt.setString(fillingNBT, filling);
+	}
 
-    public static String getFilling(ItemStack item) {
-        NBTTagCompound nbt = getNBT(item);
-        if (nbt.hasKey(fillingNBT)) {
-            return nbt.getString(fillingNBT);
-        }
-        return "basic";
-    }
+	public static String getFilling(ItemStack item) {
+		NBTTagCompound nbt = getNBT(item);
+		if (nbt.hasKey(fillingNBT)) {
+			return nbt.getString(fillingNBT);
+		}
+		return "basic";
+	}
 
-    /**
-     * 0 = Ceramic 1 = Iron
-     */
-    public static void setCasing(ItemStack item, String casing) {
-        NBTTagCompound nbt = getNBT(item);
-        nbt.setString(casingNBT, casing);
-    }
+	/**
+	 * 0 = Ceramic 1 = Iron
+	 */
+	public static void setCasing(ItemStack item, String casing) {
+		NBTTagCompound nbt = getNBT(item);
+		nbt.setString(casingNBT, casing);
+	}
 
-    public static String getCasing(ItemStack item) {
-        NBTTagCompound nbt = getNBT(item);
-        if (nbt.hasKey(casingNBT)) {
-            return nbt.getString(casingNBT);
-        }
-        return "ceramic";
-    }
+	public static String getCasing(ItemStack item) {
+		NBTTagCompound nbt = getNBT(item);
+		if (nbt.hasKey(casingNBT)) {
+			return nbt.getString(casingNBT);
+		}
+		return "ceramic";
+	}
 
-    public static NBTTagCompound getNBT(ItemStack item) {
-        if (!item.hasTagCompound())
-            item.setTagCompound(new NBTTagCompound());
-        return item.getTagCompound();
-    }
+	public static NBTTagCompound getNBT(ItemStack item) {
+		if (!item.hasTagCompound())
+			item.setTagCompound(new NBTTagCompound());
+		return item.getTagCompound();
+	}
 
-    @Override
-    public EnumAction getItemUseAction(ItemStack item) {
-        return EnumAction.BLOCK;
-    }
+	@Override
+	public EnumAction getItemUseAction(ItemStack item) {
+		return EnumAction.BLOCK;
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-        ItemStack item = user.getHeldItem(hand);
-        if (!user.isSwingInProgress) {
-            world.playSound(user, user.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F, 1.0F);
-            user.setActiveHand(hand);
-        }
-        return ActionResult.newResult(EnumActionResult.PASS, item);
-    }
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
+		ItemStack item = user.getHeldItem(hand);
+		if (!user.isSwingInProgress) {
+			world.playSound(user, user.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.AMBIENT, 1.0F, 1.0F);
+			user.setActiveHand(hand);
+		}
+		return ActionResult.newResult(EnumActionResult.PASS, item);
+	}
 
-    @Override
-    public int getMaxItemUseDuration(ItemStack item) {
-        return 35;
-    }
+	@Override
+	public int getMaxItemUseDuration(ItemStack item) {
+		return 35;
+	}
 
-    @Override
-    public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase entityLiving) {
-        EntityPlayer user = (EntityPlayer) entityLiving;
-        world.playSound(user, user.getPosition(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.AMBIENT, 1.0F, 1.0F);
-        user.swingArm(EnumHand.MAIN_HAND);
-        if (!user.capabilities.isCreativeMode) {
-            item.shrink(1);
-        }
+	@Override
+	public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase entityLiving) {
+		EntityPlayer user = (EntityPlayer) entityLiving;
+		world.playSound(user, user.getPosition(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.AMBIENT, 1.0F, 1.0F);
+		user.swingArm(EnumHand.MAIN_HAND);
+		if (!user.capabilities.isCreativeMode) {
+			item.shrink(1);
+		}
 
-        if (!world.isRemote) {
+		if (!world.isRemote) {
 
-            EntityMine mine = new EntityMine(world, user);
-            mine.setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
-            world.spawnEntity(mine);
-        }
+			EntityMine mine = new EntityMine(world, user);
+			mine.setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
+			world.spawnEntity(mine);
+		}
 
-        return item;
-    }
+		return item;
+	}
 
-    @Override
-    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
-        super.addInformation(item, world, list, flag);
+	@Override
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+		super.addInformation(item, world, list, flag);
 
-        EnumFillingType fill = EnumFillingType.getType(getFilling(item));
-        EnumCasingType casing = EnumCasingType.getType(getCasing(item));
-        EnumFuseType fuse = EnumFuseType.getType(getFuse(item));
-        EnumPowderType powder = EnumPowderType.getType(getPowder(item));
+		EnumFillingType fill = EnumFillingType.getType(getFilling(item));
+		EnumCasingType casing = EnumCasingType.getType(getCasing(item));
+		EnumFuseType fuse = EnumFuseType.getType(getFuse(item));
+		EnumPowderType powder = EnumPowderType.getType(getPowder(item));
 
-        int damage = (int) (fill.damage * casing.damageModifier * powder.damageModifier);
-        float range = fill.range * casing.rangeModifier * powder.rangeModifier;
-        float fusetime = fuse.time / 20F;
+		int damage = (int) (fill.damage * casing.damageModifier * powder.damageModifier);
+		float range = fill.range * casing.rangeModifier * powder.rangeModifier;
+		float fusetime = fuse.time / 20F;
 
-        list.add(I18n.format("bomb.case." + casing.name + ".name"));
-        list.add(I18n.format("bomb.powder." + powder.name + ".name"));
-        list.add(I18n.format("bomb.fuse." + fuse.name + ".name"));
-        list.add("");
-        list.add(I18n.format("bomb.fusetime.name", fusetime));
-        list.add(I18n.format("bomb.damage.name") + ": " + damage);
-        list.add(I18n.format("bomb.range.metric.name", range));
-    }
+		list.add(I18n.format("bomb.case." + casing.name + ".name"));
+		list.add(I18n.format("bomb.powder." + powder.name + ".name"));
+		list.add(I18n.format("bomb.fuse." + fuse.name + ".name"));
+		list.add("");
+		list.add(I18n.format("bomb.fusetime.name", fusetime));
+		list.add(I18n.format("bomb.damage.name") + ": " + damage);
+		list.add(I18n.format("bomb.range.metric.name", range));
+	}
 
-    @Override
-    public String getUnlocalizedName(ItemStack item) {
-        EnumFillingType type = EnumFillingType.getType(getFilling(item));
-        return "item.mine_" + type.name;
-    }
+	@Override
+	public String getUnlocalizedName(ItemStack item) {
+		EnumFillingType type = EnumFillingType.getType(getFilling(item));
+		return "item.mine_" + type.name;
+	}
 
-    public ItemStack createMine(String casing, String filling, String fuse, String powder, int stackSize) {
-        return ItemBomb.createExplosive(this, casing, filling, fuse, powder, stackSize);
-    }
+	public ItemStack createMine(String casing, String filling, String fuse, String powder, int stackSize) {
+		return ItemBomb.createExplosive(this, casing, filling, fuse, powder, stackSize);
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(tab)) {
-            return;
-        }
-        items.add(createMine("ceramic", "basic", "basic", "black_powder", 1));
-        items.add(createMine("ceramic", "shrapnel", "basic", "black_powder", 1));
-        items.add(createMine("ceramic", "fire", "basic", "black_powder", 1));
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (!isInCreativeTab(tab)) {
+			return;
+		}
+		items.add(createMine("ceramic", "basic", "basic", "black_powder", 1));
+		items.add(createMine("ceramic", "shrapnel", "basic", "black_powder", 1));
+		items.add(createMine("ceramic", "fire", "basic", "black_powder", 1));
 
-        items.add(createMine("iron", "basic", "basic", "black_powder", 1));
-        items.add(createMine("iron", "shrapnel", "basic", "black_powder", 1));
-        items.add(createMine("iron", "fire", "basic", "black_powder", 1));
+		items.add(createMine("iron", "basic", "basic", "black_powder", 1));
+		items.add(createMine("iron", "shrapnel", "basic", "black_powder", 1));
+		items.add(createMine("iron", "fire", "basic", "black_powder", 1));
 
-        items.add(createMine("obsidian", "basic", "basic", "black_powder", 1));
-        items.add(createMine("obsidian", "shrapnel", "basic", "black_powder", 1));
-        items.add(createMine("obsidian", "fire", "basic", "black_powder", 1));
+		items.add(createMine("obsidian", "basic", "basic", "black_powder", 1));
+		items.add(createMine("obsidian", "shrapnel", "basic", "black_powder", 1));
+		items.add(createMine("obsidian", "fire", "basic", "black_powder", 1));
 
-        items.add(createMine("crystal", "basic", "basic", "black_powder", 1));
-        items.add(createMine("crystal", "shrapnel", "basic", "black_powder", 1));
-        items.add(createMine("crystal", "fire", "basic", "black_powder", 1));
-    }
+		items.add(createMine("crystal", "basic", "basic", "black_powder", 1));
+		items.add(createMine("crystal", "shrapnel", "basic", "black_powder", 1));
+		items.add(createMine("crystal", "fire", "basic", "black_powder", 1));
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item).equals("crystal")) {
-            return EnumRarity.UNCOMMON;
-        }
-        return EnumRarity.COMMON;
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		if (getFilling(item).equals("fire") || getCasing(item).equals("obsidian") || getCasing(item).equals("crystal")) {
+			return EnumRarity.UNCOMMON;
+		}
+		return EnumRarity.COMMON;
+	}
 
-    @Override
-    public Object[] getSalvage(ItemStack item) {
-        return new Object[]{ItemBombComponent.getBombComponent("minecase", getCasing(item)),
-                ItemBombComponent.getBombComponent("fuse", getFuse(item)),
-                ItemBombComponent.getBombComponent("powder", getPowder(item)),
-                ItemBombComponent.getBombComponent("filling", getFilling(item)),};
-    }
+	@Override
+	public Object[] getSalvage(ItemStack item) {
+		return new Object[] {ItemBombComponent.getBombComponent("minecase", getCasing(item)),
+				ItemBombComponent.getBombComponent("fuse", getFuse(item)),
+				ItemBombComponent.getBombComponent("powder", getPowder(item)),
+				ItemBombComponent.getBombComponent("filling", getFilling(item)),};
+	}
 
-    @Override
-    public String getAmmoType(ItemStack arrow) {
-        return "mine";
-    }
+	@Override
+	public String getAmmoType(ItemStack arrow) {
+		return "mine";
+	}
 }

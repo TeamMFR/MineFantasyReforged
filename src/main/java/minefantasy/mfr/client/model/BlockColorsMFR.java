@@ -23,8 +23,8 @@ public class BlockColorsMFR {
 		IBlockColor blockColorForToolRack = (state, blockAccess, pos, tintIndex) -> {
 			if (tintIndex == 0 && blockAccess != null && pos != null) {
 				TileEntity tile = blockAccess.getTileEntity(pos);
-				if (tile instanceof TileEntityRack){
-					return ((TileEntityRack)tile).getColorInt();
+				if (tile instanceof TileEntityRack) {
+					return ((TileEntityRack) tile).getColorInt();
 				}
 			}
 			return 0xFFFFFF;
@@ -33,8 +33,8 @@ public class BlockColorsMFR {
 		IBlockColor blockColorForTrough = (state, blockAccess, pos, tintIndex) -> {
 			if (tintIndex == 0 && blockAccess != null && pos != null) {
 				TileEntity tile = blockAccess.getTileEntity(pos);
-				if (tile instanceof TileEntityTrough){
-					return ((TileEntityTrough)tile).getColorInt();
+				if (tile instanceof TileEntityTrough) {
+					return ((TileEntityTrough) tile).getColorInt();
 				}
 			}
 			return 0xFFFFFF;

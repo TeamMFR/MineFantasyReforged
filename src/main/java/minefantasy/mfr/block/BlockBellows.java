@@ -33,101 +33,97 @@ import java.util.Map;
  * code, or methods can be used in your own creations.
  */
 public class BlockBellows extends BlockTileEntity<TileEntityBellows> {
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    private static final Map<EnumFacing, AxisAlignedBB> AABBS = ImmutableMap.of(
-            EnumFacing.WEST,  new AxisAlignedBB(0.0F, 0.0F, 0.188F, 0.7F, 0.95F, 0.81F),
-            EnumFacing.EAST,  new AxisAlignedBB(0.3F, 0.0F, 0.188F, 1.0F, 0.95F, 0.81F),
-            EnumFacing.SOUTH, new AxisAlignedBB(0.188F, 0.0F, 0.3F, 0.81F, 0.95F, 1.0F),
-            EnumFacing.NORTH, new AxisAlignedBB(0.188F, 0.0F, 0.0F, 0.81F, 0.95F, 0.7F));
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	private static final Map<EnumFacing, AxisAlignedBB> AABBS = ImmutableMap.of(
+			EnumFacing.WEST, new AxisAlignedBB(0.0F, 0.0F, 0.188F, 0.7F, 0.95F, 0.81F),
+			EnumFacing.EAST, new AxisAlignedBB(0.3F, 0.0F, 0.188F, 1.0F, 0.95F, 0.81F),
+			EnumFacing.SOUTH, new AxisAlignedBB(0.188F, 0.0F, 0.3F, 0.81F, 0.95F, 1.0F),
+			EnumFacing.NORTH, new AxisAlignedBB(0.188F, 0.0F, 0.0F, 0.81F, 0.95F, 0.7F));
 
-    public BlockBellows() {
-        super(Material.WOOD);
+	public BlockBellows() {
+		super(Material.WOOD);
 
-        setRegistryName("bellows");
-        setUnlocalizedName("bellows");
-        this.setHardness(1F);
-        this.setResistance(0.5F);
-        this.setCreativeTab(MineFantasyTabs.tabUtil);
-    }
+		setRegistryName("bellows");
+		setUnlocalizedName("bellows");
+		this.setHardness(1F);
+		this.setResistance(0.5F);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
 
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityBellows();
-    }
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityBellows();
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
-        return AABBS.get(state.getValue(FACING));
-    }
+	@Nullable
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return AABBS.get(state.getValue(FACING));
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return AABBS.get(state.getValue(FACING));
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return AABBS.get(state.getValue(FACING));
+	}
 
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        world.setBlockState(pos, state);
-    }
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
+		world.setBlockState(pos, state);
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntityBellows bellows = (TileEntityBellows) getTile(world, pos);
-        if (bellows != null) {
-            bellows.interact(player, 2F);
-        }
-        return true;
-    }
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntityBellows bellows = (TileEntityBellows) getTile(world, pos);
+		if (bellows != null) {
+			bellows.interact(player, 2F);
+		}
+		return true;
+	}
 
-    @Override
-    public String getTexture(){
-        return "noteblock";
-    }
+	@Override
+	public String getTexture() {
+		return "noteblock";
+	}
 
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
 
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
 
-        return this.getDefaultState().withProperty(FACING, enumfacing);
-    }
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(FACING).getIndex();
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
 
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
-    }
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+	}
 }

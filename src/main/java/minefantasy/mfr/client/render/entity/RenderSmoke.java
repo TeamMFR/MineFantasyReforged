@@ -11,14 +11,14 @@ import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class RenderSmoke extends Render<EntitySmoke> {
-    public RenderSmoke(RenderManager renderManager) {
-        super(renderManager);
-        this.shadowSize = 0F;
-    }
+	public RenderSmoke(RenderManager renderManager) {
+		super(renderManager);
+		this.shadowSize = 0F;
+	}
 
-    @Nullable
-    @Override
-    protected ResourceLocation getEntityTexture(EntitySmoke entity) {
-        return null;
-    }
+	@Nullable
+	@Override
+	protected ResourceLocation getEntityTexture(EntitySmoke entity) {
+		return null;
+	}
 }

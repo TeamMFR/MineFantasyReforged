@@ -51,6 +51,7 @@ public class RecipeHelper {
 
 	/**
 	 * Returns a random Character from a-z
+	 *
 	 * @return a random lowercase Character
 	 */
 	public static Character getRandomChar() {

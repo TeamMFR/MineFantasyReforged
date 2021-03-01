@@ -8,22 +8,22 @@ import net.minecraft.item.ItemStack;
  * @author Anonymous Productions
  */
 public class ItemEAnvilTools extends ItemBaseMFR {
-    public ItemEAnvilTools(String name, int uses) {
-        super(name);
-        setCreativeTab(MineFantasyTabs.tabCraftTool);
+	public ItemEAnvilTools(String name, int uses) {
+		super(name);
+		setCreativeTab(MineFantasyTabs.tabCraftTool);
 
-        this.setMaxDamage(uses);
-        setMaxStackSize(1);
-    }
+		this.setMaxDamage(uses);
+		setMaxStackSize(1);
+	}
 
-    @Override
-    public ItemStack getContainerItem(ItemStack item) {
-        item.setItemDamage(item.getItemDamage() + 1);
-        return item.getItemDamage() >= item.getMaxDamage() ? ItemStack.EMPTY : item;
-    }
+	@Override
+	public ItemStack getContainerItem(ItemStack item) {
+		item.setItemDamage(item.getItemDamage() + 1);
+		return item.getItemDamage() >= item.getMaxDamage() ? ItemStack.EMPTY : item;
+	}
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return ToolHelper.setDuraOnQuality(stack, super.getMaxDamage());
-    }
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return ToolHelper.setDuraOnQuality(stack, super.getMaxDamage());
+	}
 }

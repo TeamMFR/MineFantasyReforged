@@ -51,27 +51,27 @@ public class WorldGenGeological implements IWorldGenerator {
 
 		//NITRE ORE
 		generateOreInStone(MineFantasyBlocks.NITRE_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
-				ConfigWorldGen.nitreSize, MathHelper.getInt(random,ConfigWorldGen.nitreFrequencyMin, ConfigWorldGen.nitreFrequencyMax),
-				 ConfigWorldGen.nitreLayerMin, ConfigWorldGen.nitreLayerMax,ConfigWorldGen.nitreRarity);
+				ConfigWorldGen.nitreSize, MathHelper.getInt(random, ConfigWorldGen.nitreFrequencyMin, ConfigWorldGen.nitreFrequencyMax),
+				ConfigWorldGen.nitreLayerMin, ConfigWorldGen.nitreLayerMax, ConfigWorldGen.nitreRarity);
 		//BORAX ORE
 		generateOreInStone(MineFantasyBlocks.BORAX_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
-				ConfigWorldGen.boraxSize, MathHelper.getInt(random,ConfigWorldGen.boraxFrequencyMin, ConfigWorldGen.boraxFrequencyMax),
+				ConfigWorldGen.boraxSize, MathHelper.getInt(random, ConfigWorldGen.boraxFrequencyMin, ConfigWorldGen.boraxFrequencyMax),
 				ConfigWorldGen.boraxLayerMin, ConfigWorldGen.boraxLayerMax, ConfigWorldGen.boraxRarity);
 		//WOLFRAMITE ORE
 		generateOreInStone(MineFantasyBlocks.TUNGSTEN_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
-				ConfigWorldGen.wolframiteSize, MathHelper.getInt(random,ConfigWorldGen.wolframiteFrequencyMin, ConfigWorldGen.wolframiteFrequencyMax),
-				 ConfigWorldGen.wolframiteLayerMin, ConfigWorldGen.wolframiteLayerMax, ConfigWorldGen.wolframiteRarity);
+				ConfigWorldGen.wolframiteSize, MathHelper.getInt(random, ConfigWorldGen.wolframiteFrequencyMin, ConfigWorldGen.wolframiteFrequencyMax),
+				ConfigWorldGen.wolframiteLayerMin, ConfigWorldGen.wolframiteLayerMax, ConfigWorldGen.wolframiteRarity);
 		//RICH COAL ORE
 		generateOreInStone(MineFantasyBlocks.COAL_RICH_ORE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
-				ConfigWorldGen.coalSize, MathHelper.getInt(random,ConfigWorldGen.coalFrequencyMin, ConfigWorldGen.coalFrequencyMax),
-				 ConfigWorldGen.coalLayerMin, ConfigWorldGen.coalLayerMax, ConfigWorldGen.coalRarity);
+				ConfigWorldGen.coalSize, MathHelper.getInt(random, ConfigWorldGen.coalFrequencyMin, ConfigWorldGen.coalFrequencyMax),
+				ConfigWorldGen.coalLayerMin, ConfigWorldGen.coalLayerMax, ConfigWorldGen.coalRarity);
 		//LIMESTONE GENERATION
 		generateOreInStone(MineFantasyBlocks.LIMESTONE.getDefaultState(), world, random, blockXPos * 16, blockZPos * 16,
 				ConfigWorldGen.limestoneSize, MathHelper.getInt(random, ConfigWorldGen.limestoneLayerMin, ConfigWorldGen.limestoneLayerMax),
-				 ConfigWorldGen.limestoneLayerMin, ConfigWorldGen.limestoneLayerMax, ConfigWorldGen.limestoneRarity);
+				ConfigWorldGen.limestoneLayerMin, ConfigWorldGen.limestoneLayerMax, ConfigWorldGen.limestoneRarity);
 	}
 
-	public void generateOreInStone(IBlockState state, World world, Random random, int blockXPos, int blockZPos, int maxVeinSize, int frequency, int minY, int maxY, float rarity){
+	public void generateOreInStone(IBlockState state, World world, Random random, int blockXPos, int blockZPos, int maxVeinSize, int frequency, int minY, int maxY, float rarity) {
 		int deltaY = maxY - minY;
 
 		if (random.nextFloat() < rarity) {
@@ -85,7 +85,7 @@ public class WorldGenGeological implements IWorldGenerator {
 		}
 	}
 
-	public void generateOreInBlock(IBlockState state, Block bed, World world, Random random, int blockXPos, int blockZPos, int maxVeinSize, int frequency, int minY, int maxY, float rarity){
+	public void generateOreInBlock(IBlockState state, Block bed, World world, Random random, int blockXPos, int blockZPos, int maxVeinSize, int frequency, int minY, int maxY, float rarity) {
 		int deltaY = maxY - minY;
 
 		if (random.nextFloat() < rarity) {

@@ -12,27 +12,27 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderHound extends RenderLiving<EntityHound> {
-    private static ModelBase houndModel = new ModelHound();
+	private static ModelBase houndModel = new ModelHound();
 
-    public RenderHound(RenderManager renderManager) {
-        super(renderManager, houndModel, 0.5F);
-    }
+	public RenderHound(RenderManager renderManager) {
+		super(renderManager, houndModel, 0.5F);
+	}
 
-    /**
-     * Defines what float the third param in setRotationAngles of ModelBase is
-     */
-    @Override
-    protected float handleRotationFloat(EntityHound mob, float f) {
-        return mob.getTailRotation();
-    }
+	/**
+	 * Defines what float the third param in setRotationAngles of ModelBase is
+	 */
+	@Override
+	protected float handleRotationFloat(EntityHound mob, float f) {
+		return mob.getTailRotation();
+	}
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless
-     * you call Render.bindEntityTexture.
-     */
-    @Override
-    protected ResourceLocation getEntityTexture(EntityHound entity) {
-        return TextureHelperMFR.getResource("textures/models/animal/hound/hound.png");
-    }
+	/**
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless
+	 * you call Render.bindEntityTexture.
+	 */
+	@Override
+	protected ResourceLocation getEntityTexture(EntityHound entity) {
+		return TextureHelperMFR.getResource("textures/models/animal/hound/hound.png");
+	}
 
 }

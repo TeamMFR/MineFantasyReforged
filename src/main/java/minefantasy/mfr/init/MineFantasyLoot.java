@@ -27,8 +27,7 @@ public class MineFantasyLoot {
 	public static ResourceLocation LOOT_SACK_VALUABLE;
 	public static ResourceLocation LOOT_SACK_EXQUISITE;
 
-
-	public static void load(){
+	public static void load() {
 		for (String s : VANILLA_CHEST_INJECTION_TABLES) {
 			LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "inject/chests/" + s));
 		}
@@ -37,9 +36,9 @@ public class MineFantasyLoot {
 		DWARVEN_HOME = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "dwarven_tables/dwarven_home"));
 		DWARVEN_HOME_RICH = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "dwarven_tables/dwarven_home_rich"));
 		DWARVEN_STUDY = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "dwarven_tables/dwarven_study"));
-		LOOT_SACK_COMMON = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "loot_sack_tables/common" ));
-		LOOT_SACK_VALUABLE = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "loot_sack_tables/valuable" ));
-		LOOT_SACK_EXQUISITE = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "loot_sack_tables/exquisite" ));
+		LOOT_SACK_COMMON = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "loot_sack_tables/common"));
+		LOOT_SACK_VALUABLE = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "loot_sack_tables/valuable"));
+		LOOT_SACK_EXQUISITE = LootTableList.register(new ResourceLocation(MineFantasyReborn.MOD_ID, "loot_sack_tables/exquisite"));
 	}
 
 	//code from AncientWarfare 2, AWCoreLoot

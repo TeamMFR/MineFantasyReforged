@@ -11,38 +11,38 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 
 public class CustomWoodRecipes {
-    public static final String basic = "step.wood";
+	public static final String basic = "step.wood";
 
-    public static void init() {
-        ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-        for (CustomMaterial customMat : wood) {
-            addRecipes(customMat);
-        }
-    }
+	public static void init() {
+		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
+		for (CustomMaterial customMat : wood) {
+			addRecipes(customMat);
+		}
+	}
 
-    private static void addRecipes(CustomMaterial material) {
-        ItemStack timber = ComponentListMFR.TIMBER.construct(material.name);
-        ItemStack cutPlank = ((ItemComponentMFR) ComponentListMFR.TIMBER_CUT).construct(material.name);
-        ItemStack woodpane = ((ItemComponentMFR) ComponentListMFR.TIMBER_PANE).construct(material.name);
+	private static void addRecipes(CustomMaterial material) {
+		ItemStack timber = ComponentListMFR.TIMBER.construct(material.name);
+		ItemStack cutPlank = ((ItemComponentMFR) ComponentListMFR.TIMBER_CUT).construct(material.name);
+		ItemStack woodpane = ((ItemComponentMFR) ComponentListMFR.TIMBER_PANE).construct(material.name);
 
-        ItemStack result;
+		ItemStack result;
 
-        result = ((BlockWoodDecor) MineFantasyBlocks.TOOL_RACK_WOOD).construct(material.name);
-        Salvage.addSalvage(result, cutPlank, cutPlank, cutPlank, timber, timber, timber, timber,
-                new ItemStack(ComponentListMFR.NAIL, 2));
+		result = ((BlockWoodDecor) MineFantasyBlocks.TOOL_RACK_WOOD).construct(material.name);
+		Salvage.addSalvage(result, cutPlank, cutPlank, cutPlank, timber, timber, timber, timber,
+				new ItemStack(ComponentListMFR.NAIL, 2));
 
-        result = MineFantasyBlocks.FOOD_BOX_BASIC.construct(material.name);
-        Salvage.addSalvage(result, cutPlank, cutPlank, cutPlank, cutPlank, new ItemStack(ComponentListMFR.NAIL, 2), ComponentListMFR.HINGE);
+		result = MineFantasyBlocks.FOOD_BOX_BASIC.construct(material.name);
+		Salvage.addSalvage(result, cutPlank, cutPlank, cutPlank, cutPlank, new ItemStack(ComponentListMFR.NAIL, 2), ComponentListMFR.HINGE);
 
-        result = MineFantasyBlocks.AMMO_BOX_BASIC.construct(material.name);
-        Salvage.addSalvage(result, cutPlank, cutPlank, woodpane, woodpane, new ItemStack(ComponentListMFR.NAIL, 2), new ItemStack(ComponentListMFR.HINGE, 2));
+		result = MineFantasyBlocks.AMMO_BOX_BASIC.construct(material.name);
+		Salvage.addSalvage(result, cutPlank, cutPlank, woodpane, woodpane, new ItemStack(ComponentListMFR.NAIL, 2), new ItemStack(ComponentListMFR.HINGE, 2));
 
-        result = MineFantasyBlocks.CRATE_BASIC.construct(material.name);
-        Salvage.addSalvage(result, woodpane, woodpane, woodpane, woodpane, woodpane, woodpane, new ItemStack(ComponentListMFR.NAIL, 4), new ItemStack(ComponentListMFR.HINGE, 2));
+		result = MineFantasyBlocks.CRATE_BASIC.construct(material.name);
+		Salvage.addSalvage(result, woodpane, woodpane, woodpane, woodpane, woodpane, woodpane, new ItemStack(ComponentListMFR.NAIL, 4), new ItemStack(ComponentListMFR.HINGE, 2));
 
-        result = ((BlockWoodDecor) MineFantasyBlocks.TROUGH_WOOD).construct(material.name);
-        Salvage.addSalvage(result, timber, timber, timber, timber, timber, new ItemStack(ComponentListMFR.NAIL, 3));
+		result = ((BlockWoodDecor) MineFantasyBlocks.TROUGH_WOOD).construct(material.name);
+		Salvage.addSalvage(result, timber, timber, timber, timber, timber, new ItemStack(ComponentListMFR.NAIL, 3));
 
-    }
+	}
 
 }

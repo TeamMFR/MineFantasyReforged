@@ -48,11 +48,9 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	private Random rand = new Random();
 
 	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
-	{
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
 		return oldState.getBlock() != newState.getBlock();
 	}
-
 
 	/**
 	 * Gets the burn time
@@ -163,7 +161,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 			if (fuel > maxFuel) {
 				fuel = maxFuel;
 			}
-			BlockFirepit.setActiveState(isBurning(),fuel > 0, hasBlockAbove(), world, pos);
+			BlockFirepit.setActiveState(isBurning(), fuel > 0, hasBlockAbove(), world, pos);
 			return true;
 		}
 		return false;

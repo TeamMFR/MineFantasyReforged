@@ -19,7 +19,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 
 import javax.annotation.Nonnull;
 
-public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe{
+public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
 	protected Item output;
 	protected NonNullList<ItemStack> oreDictList;
@@ -63,11 +63,11 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 					target = getIngredients().get(subX + subY * width);
 				}
 
-				ItemStack itemstack = inv.getStackInRowAndColumn(x,y);
+				ItemStack itemstack = inv.getStackInRowAndColumn(x, y);
 
 				if (itemstack != ItemStack.EMPTY) {
 					for (ItemStack ingredient : oreDictList) {
-						if (itemstack.getItem() == ingredient.getItem() && (itemstack.getMetadata() == ingredient.getMetadata() || ingredient.getMetadata() == OreDictionary.WILDCARD_VALUE)){
+						if (itemstack.getItem() == ingredient.getItem() && (itemstack.getMetadata() == ingredient.getMetadata() || ingredient.getMetadata() == OreDictionary.WILDCARD_VALUE)) {
 							this.input = itemstack;
 						}
 					}
@@ -108,16 +108,16 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 	public static ItemStack addNBT(ItemStack input, ItemStack output) {
 		String oreDictValue = null;
 		int oreId = 0;
-		for (int i : OreDictionary.getOreIDs(input)){
-			if (i != 1){
+		for (int i : OreDictionary.getOreIDs(input)) {
+			if (i != 1) {
 				oreId = i;
 			}
 		}
-		if (oreId != 0){
+		if (oreId != 0) {
 			oreDictValue = OreDictionary.getOreName(oreId);
 		}
-		if (oreDictValue != null){
-			if (oreDictValue.startsWith("planks")){
+		if (oreDictValue != null) {
+			if (oreDictValue.startsWith("planks")) {
 				String material = oreDictValue.split("planks")[1];
 
 				NBTTagCompound nbt = new NBTTagCompound();

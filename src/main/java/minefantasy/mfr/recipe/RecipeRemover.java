@@ -20,64 +20,64 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class RecipeRemover {
-    @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
-    public static class RegistrationHandler {
+	@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+	public static class RegistrationHandler {
 
-        /**
-         * Remove crafting recipes.
-         *
-         * @param event The event
-         */
-        @SubscribeEvent(priority = EventPriority.LOWEST)
-        public static void removeRecipes(final RegistryEvent.Register<IRecipe> event) {
-            removeRecipes(Items.STICK);
-            if(ConfigHardcore.HCCRemoveCraft){
-                removeRecipes(Items.BREAD);
-                removeRecipes(Items.PUMPKIN_PIE);
-                removeRecipes(Items.CAKE);
-                removeRecipes(Items.FLINT_AND_STEEL);
-                removeRecipes(Items.BUCKET);
-            }
-            MineFantasyReborn.LOG.warn("Overriding recipes with dummy recipes, please ignore the above \"Dangerous alternative prefix\" warnings.");
-        }
+		/**
+		 * Remove crafting recipes.
+		 *
+		 * @param event The event
+		 */
+		@SubscribeEvent(priority = EventPriority.LOWEST)
+		public static void removeRecipes(final RegistryEvent.Register<IRecipe> event) {
+			removeRecipes(Items.STICK);
+			if (ConfigHardcore.HCCRemoveCraft) {
+				removeRecipes(Items.BREAD);
+				removeRecipes(Items.PUMPKIN_PIE);
+				removeRecipes(Items.CAKE);
+				removeRecipes(Items.FLINT_AND_STEEL);
+				removeRecipes(Items.BUCKET);
+			}
+			MineFantasyReborn.LOG.warn("Overriding recipes with dummy recipes, please ignore the above \"Dangerous alternative prefix\" warnings.");
+		}
 
-        /**
-         * Remove all crafting recipes with the specified {@link Item} as their output.
-         *
-         * @param output The output Item
-         */
-        private static void removeRecipes(final Item output) {
-            final int recipesRemoved = removeRecipes(recipe -> {
-                final ItemStack recipeOutput = recipe.getRecipeOutput();
-                return !recipeOutput.isEmpty() && recipe.getRegistryName().getResourceDomain().equals("minecraft") && recipeOutput.getItem() == output;
-            });
-        }
+		/**
+		 * Remove all crafting recipes with the specified {@link Item} as their output.
+		 *
+		 * @param output The output Item
+		 */
+		private static void removeRecipes(final Item output) {
+			final int recipesRemoved = removeRecipes(recipe -> {
+				final ItemStack recipeOutput = recipe.getRecipeOutput();
+				return !recipeOutput.isEmpty() && recipe.getRegistryName().getResourceDomain().equals("minecraft") && recipeOutput.getItem() == output;
+			});
+		}
 
-        /**
-         * Remove all crafting recipes that match the specified predicate.
-         *
-         * @param predicate The predicate
-         * @return The number of recipes removed
-         */
-        private static int removeRecipes(final Predicate<IRecipe> predicate) {
-            int recipesRemoved = 0;
+		/**
+		 * Remove all crafting recipes that match the specified predicate.
+		 *
+		 * @param predicate The predicate
+		 * @return The number of recipes removed
+		 */
+		private static int removeRecipes(final Predicate<IRecipe> predicate) {
+			int recipesRemoved = 0;
 
-            final IForgeRegistry<IRecipe> registry = ForgeRegistries.RECIPES;
-            final List<IRecipe> toRemove = new ArrayList<>();
+			final IForgeRegistry<IRecipe> registry = ForgeRegistries.RECIPES;
+			final List<IRecipe> toRemove = new ArrayList<>();
 
-            for (final IRecipe recipe : registry) {
-                if (predicate.test(recipe)) {
-                    toRemove.add(recipe);
-                    recipesRemoved++;
-                }
-            }
-            toRemove.forEach(recipe -> {
-                final ResourceLocation registryName = Objects.requireNonNull(recipe.getRegistryName());
-                final IRecipe replacement = new DummyRecipe().setRegistryName(registryName);
-                registry.register(replacement);
-            });
+			for (final IRecipe recipe : registry) {
+				if (predicate.test(recipe)) {
+					toRemove.add(recipe);
+					recipesRemoved++;
+				}
+			}
+			toRemove.forEach(recipe -> {
+				final ResourceLocation registryName = Objects.requireNonNull(recipe.getRegistryName());
+				final IRecipe replacement = new DummyRecipe().setRegistryName(registryName);
+				registry.register(replacement);
+			});
 
-            return recipesRemoved;
-        }
-    }
+			return recipesRemoved;
+		}
+	}
 }

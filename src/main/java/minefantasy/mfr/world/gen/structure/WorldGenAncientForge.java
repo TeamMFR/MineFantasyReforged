@@ -6,53 +6,53 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WorldGenAncientForge extends WorldGenStructureBase {
-    public WorldGenAncientForge() {
-    }
+	public WorldGenAncientForge() {
+	}
 
-    @Override
-    protected StructureModuleMFR getStartPiece(World world, BlockPos pos, int direction) {
-        return new StructureGenAncientForgeEntry(world, pos, direction);
-    }
+	@Override
+	protected StructureModuleMFR getStartPiece(World world, BlockPos pos, int direction) {
+		return new StructureGenAncientForgeEntry(world, pos, direction);
+	}
 
-    @Override
-    protected boolean isBlockAcceptableOrigin(World world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial().isSolid() && isValidGround(world, pos);
-    }
+	@Override
+	protected boolean isBlockAcceptableOrigin(World world, BlockPos pos) {
+		return world.getBlockState(pos).getMaterial().isSolid() && isValidGround(world, pos);
+	}
 
-    @Override
-    protected boolean canStructureBuild(StructureModuleMFR piece) {
-        // SEARCH FOR CLIFF
-        for (int x = -1; x <= 1; x++) {
-            for (int y = 0; y < 3; y++) {
-                for (int z = 1; z <= 2; z++) {
-                    BlockPos pos = piece.offsetPos(new BlockPos(x, y, z), piece.direction);
-                    Material material = piece.world.getBlockState(pos).getMaterial();
+	@Override
+	protected boolean canStructureBuild(StructureModuleMFR piece) {
+		// SEARCH FOR CLIFF
+		for (int x = -1; x <= 1; x++) {
+			for (int y = 0; y < 3; y++) {
+				for (int z = 1; z <= 2; z++) {
+					BlockPos pos = piece.offsetPos(new BlockPos(x, y, z), piece.direction);
+					Material material = piece.world.getBlockState(pos).getMaterial();
 
-                    if (!material.isOpaque()) {
-                        return false;
-                    }
-                    if (!material.isSolid()) {
-                        return false;
-                    }
-                }
-                for (int z = 0; z > -2; z--) {
-                    IBlockState state = piece.getBlock(new BlockPos(x, y, z));
-                    if (state.getMaterial().isSolid()) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
+					if (!material.isOpaque()) {
+						return false;
+					}
+					if (!material.isSolid()) {
+						return false;
+					}
+				}
+				for (int z = 0; z > -2; z--) {
+					IBlockState state = piece.getBlock(new BlockPos(x, y, z));
+					if (state.getMaterial().isSolid()) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+	}
 
-    @Override
-    protected boolean isDirectionRandom() {
-        return false;
-    }
+	@Override
+	protected boolean isDirectionRandom() {
+		return false;
+	}
 
-    @Override
-    protected int[] getYGenBounds(World world) {
-        return new int[]{64, 255};
-    }
+	@Override
+	protected int[] getYGenBounds(World world) {
+		return new int[] {64, 255};
+	}
 }

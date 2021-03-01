@@ -21,102 +21,97 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> {
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-	private static AxisAlignedBB AABB_NORTH = new AxisAlignedBB(0, 0, 5.5f / 16f, 1f, 19/16f, 10.5/16f);
-	private static AxisAlignedBB AABB_WEST = new AxisAlignedBB(5.5f / 16f, 0, 0, 10.5/16f, 19/16f, 1f);
+	private static AxisAlignedBB AABB_NORTH = new AxisAlignedBB(0, 0, 5.5f / 16f, 1f, 19 / 16f, 10.5 / 16f);
+	private static AxisAlignedBB AABB_WEST = new AxisAlignedBB(5.5f / 16f, 0, 0, 10.5 / 16f, 19 / 16f, 1f);
 
 	public int tier;
-    public String tex;
+	public String tex;
 
-    public BlockTanningRack(int tier, String tex) {
-        super(Material.WOOD);
+	public BlockTanningRack(int tier, String tex) {
+		super(Material.WOOD);
 
-        this.tier = tier;
-        this.tex = tex;
-        String name = "tanner" + tex;
+		this.tier = tier;
+		this.tex = tex;
+		String name = "tanner" + tex;
 
-        setRegistryName(name);
-        setUnlocalizedName(name);
-        this.setHardness(1F + 0.5F * tier);
-        this.setResistance(1F);
-        this.setLightOpacity(0);
-        this.setCreativeTab(MineFantasyTabs.tabUtil);
-    }
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		this.setHardness(1F + 0.5F * tier);
+		this.setResistance(1F);
+		this.setLightOpacity(0);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
 
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityTanningRack();
-    }
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityTanningRack();
+	}
 
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        world.setBlockState(pos, state, 2);
-    }
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
+		world.setBlockState(pos, state, 2);
+	}
 
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
+		if (tile != null) {
+			return tile.interact(user, false, false);
+		}
+		return true;
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
-        if (tile != null) {
-            return tile.interact(user, false, false);
-        }
-        return true;
-    }
+	@Override
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
+		TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
+		if (tile != null) {
+			tile.interact(user, true, false);
+		}
+	}
 
-    @Override
-    public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-        TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
-        if (tile != null) {
-            tile.interact(user, true, false);
-        }
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
 
-    @Override
-    public IBlockState getStateFromMeta(int meta)
-    {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
 
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
 
-        return this.getDefaultState().withProperty(FACING, enumfacing);
-    }
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
 
-    @Override
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(FACING).getIndex();
-    }
-
-    @Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		switch (state.getValue(FACING)) {
 			case NORTH:
 			case SOUTH:
-                return AABB_NORTH;
+				return AABB_NORTH;
 			case WEST:
 			case EAST:
-                return AABB_WEST;
+				return AABB_WEST;
 			default:
 				return AABB_NORTH;
 		}

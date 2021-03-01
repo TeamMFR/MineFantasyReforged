@@ -13,30 +13,30 @@ import java.util.Random;
 
 public class ItemBurntFood extends ItemComponentMFR {
 
-    private Random rand = new Random();
+	private Random rand = new Random();
 
-    public ItemBurntFood(String name) {
-        super(name, -1);
-    }
+	public ItemBurntFood(String name) {
+		super(name, -1);
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack item = player.getHeldItem(hand);
-        if (this == FoodListMFR.BURNT_FOOD) {
-            if (!world.isRemote && rand.nextInt(5) == 0) {
-                player.entityDropItem(new ItemStack(Items.COAL, 1, 1), 0.0F);
-            }
-            item.shrink(1);
-            return ActionResult.newResult(EnumActionResult.PASS, item);
-        }
-        if (!world.isRemote) {
-            player.entityDropItem(new ItemStack(FoodListMFR.BURNT_FOOD, item.getCount()), 0.0F);
-        }
-        return ActionResult.newResult(EnumActionResult.PASS, item.getItem().getContainerItem(item));
-    }
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack item = player.getHeldItem(hand);
+		if (this == FoodListMFR.BURNT_FOOD) {
+			if (!world.isRemote && rand.nextInt(5) == 0) {
+				player.entityDropItem(new ItemStack(Items.COAL, 1, 1), 0.0F);
+			}
+			item.shrink(1);
+			return ActionResult.newResult(EnumActionResult.PASS, item);
+		}
+		if (!world.isRemote) {
+			player.entityDropItem(new ItemStack(FoodListMFR.BURNT_FOOD, item.getCount()), 0.0F);
+		}
+		return ActionResult.newResult(EnumActionResult.PASS, item.getItem().getContainerItem(item));
+	}
 
-    @Override
-    public ItemStack getContainerItem(ItemStack itemStack) {
-        return new ItemStack(getContainerItem(), itemStack.getCount());
-    }
+	@Override
+	public ItemStack getContainerItem(ItemStack itemStack) {
+		return new ItemStack(getContainerItem(), itemStack.getCount());
+	}
 }

@@ -11,42 +11,42 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import java.util.UUID;
 
 public class RackCommandPacket extends PacketMF {
-    private TileEntityRack rack;
-    private int slot;
-    private UUID username;
-    private BlockPos pos;
+	private TileEntityRack rack;
+	private int slot;
+	private UUID username;
+	private BlockPos pos;
 
-    public RackCommandPacket(int slot, EntityPlayer player, TileEntityRack rack) {
-        this.username = player.getUniqueID();
-        this.slot = slot;
-        this.rack = rack;
-        this.pos = rack.getPos();
-    }
+	public RackCommandPacket(int slot, EntityPlayer player, TileEntityRack rack) {
+		this.username = player.getUniqueID();
+		this.slot = slot;
+		this.rack = rack;
+		this.pos = rack.getPos();
+	}
 
-    public RackCommandPacket() {
-    }
+	public RackCommandPacket() {
+	}
 
-    @Override
-    public void readFromStream(ByteBuf packet) {
-        pos = BlockPos.fromLong(packet.readLong());
-        slot = packet.readInt();
-        username = UUID.fromString(ByteBufUtils.readUTF8String(packet));
-    }
+	@Override
+	public void readFromStream(ByteBuf packet) {
+		pos = BlockPos.fromLong(packet.readLong());
+		slot = packet.readInt();
+		username = UUID.fromString(ByteBufUtils.readUTF8String(packet));
+	}
 
-    @Override
-    public void writeToStream(ByteBuf packet) {
-        packet.writeLong(pos.toLong());
-        packet.writeInt(slot);
-        ByteBufUtils.writeUTF8String(packet, username.toString());
-    }
+	@Override
+	public void writeToStream(ByteBuf packet) {
+		packet.writeLong(pos.toLong());
+		packet.writeInt(slot);
+		ByteBufUtils.writeUTF8String(packet, username.toString());
+	}
 
-    @Override
-    protected void execute(EntityPlayer player) {
-        TileEntity tile = player.world.getTileEntity(pos);
+	@Override
+	protected void execute(EntityPlayer player) {
+		TileEntity tile = player.world.getTileEntity(pos);
 
-        if (tile instanceof TileEntityRack) {
-            rack = (TileEntityRack) tile;
-            BlockRack.interact(slot, player.world, rack, player);
-        }
-    }
+		if (tile instanceof TileEntityRack) {
+			rack = (TileEntityRack) tile;
+			BlockRack.interact(slot, player.world, rack, player);
+		}
+	}
 }

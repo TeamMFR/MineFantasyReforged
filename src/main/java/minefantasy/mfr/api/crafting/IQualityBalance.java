@@ -1,11 +1,11 @@
 package minefantasy.mfr.api.crafting;
 
 public interface IQualityBalance {
-    float getMarkerPosition();
+	float getMarkerPosition();
 
-    float getThresholdPosition();
+	float getThresholdPosition();
 
-    float getSuperThresholdPosition();
+	float getSuperThresholdPosition();
 
-    boolean shouldShowMetre();
+	boolean shouldShowMetre();
 }

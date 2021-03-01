@@ -16,35 +16,35 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class AshBreath extends DragonBreath {
 
-    public AshBreath(String name) {
-        super(name);
-    }
+	public AshBreath(String name) {
+		super(name);
+	}
 
-    @Override
-    public DamageSource getDamageSource(EntityDragonBreath breath, EntityLivingBase shooter) {
-        return shooter == null ? new DamageSource("ashblastBase").setDamageBypassesArmor()
-                : (new EntityDamageSourceIndirect("ashblast", breath, shooter).setDamageBypassesArmor());
-    }
+	@Override
+	public DamageSource getDamageSource(EntityDragonBreath breath, EntityLivingBase shooter) {
+		return shooter == null ? new DamageSource("ashblastBase").setDamageBypassesArmor()
+				: (new EntityDamageSourceIndirect("ashblast", breath, shooter).setDamageBypassesArmor());
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getTexture(EntityDragonBreath instance) {
-        return "textures/projectile/dragonbreath_ash";
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getTexture(EntityDragonBreath instance) {
+		return "textures/projectile/dragonbreath_ash";
+	}
 
-    public void onHitEntity(Entity target, EntityDragonBreath instance) {
-        super.onHitEntity(target, instance);
-        if (target instanceof EntityLivingBase) {
-            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0));
-        }
-    }
+	public void onHitEntity(Entity target, EntityDragonBreath instance) {
+		super.onHitEntity(target, instance);
+		if (target instanceof EntityLivingBase) {
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0));
+		}
+	}
 
-    @Override
-    public float modifyDamage(Entity hit, float dam) {
-        return EntitySmoke.canPoison(hit, random) ? (dam / 5F + 1) : 0F;
-    }
+	@Override
+	public float modifyDamage(Entity hit, float dam) {
+		return EntitySmoke.canPoison(hit, random) ? (dam / 5F + 1) : 0F;
+	}
 
-    @Override
-    public void hitBlock(World world, IBlockState state, EntityDragonBreath instance, BlockPos pos, boolean impact) {
-    }
+	@Override
+	public void hitBlock(World world, IBlockState state, EntityDragonBreath instance, BlockPos pos, boolean impact) {
+	}
 }

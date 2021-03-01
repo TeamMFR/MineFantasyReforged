@@ -65,7 +65,7 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPOON);
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_MALLET);
 
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1 ), ToolListMFR.SYRINGE);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1), ToolListMFR.SYRINGE);
 
 		//Standard Weapons
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SWORD);
@@ -159,29 +159,28 @@ public class ItemColorsMFR {
 
 		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_BOW);
 
-
 		/// ARMOUR ITEMS
 
 		// Standard armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SCALE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SCALE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_CHAIN_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_CHAIN_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SPLINT_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SPLINT_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_PLATE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_PLATE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer,  CustomArmourListMFR.STANDARD_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_BOOTS);
 
 		// Ornate armour
 		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SCALE_HELMET);
@@ -228,7 +227,6 @@ public class ItemColorsMFR {
 		//Leather Armours
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER_APRON);
-
 
 		/// COMMODITIES
 		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER);

@@ -1,8 +1,8 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityCrossbowBench;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,67 +21,67 @@ import net.minecraft.world.World;
 
 public class BlockCrossbowBench extends BlockTileEntity<TileEntityCrossbowBench> {
 
-    public BlockCrossbowBench() {
-        super(Material.WOOD);
+	public BlockCrossbowBench() {
+		super(Material.WOOD);
 
-        setRegistryName("crossbow_bench");
-        setUnlocalizedName("crossbow_bench");
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(5F);
-        this.setResistance(2F);
-        this.setLightOpacity(0);
-        this.setCreativeTab(MineFantasyTabs.tabUtil);
-    }
+		setRegistryName("crossbow_bench");
+		setUnlocalizedName("crossbow_bench");
+		this.setSoundType(SoundType.STONE);
+		this.setHardness(5F);
+		this.setResistance(2F);
+		this.setLightOpacity(0);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this);
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this);
+	}
 
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityCrossbowBench();
-    }
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityCrossbowBench();
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        world.setBlockState(pos, state, 2);
-    }
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
+		world.setBlockState(pos, state, 2);
+	}
 
-    /**
-     * Called upon block activation (right click on the block.)
-     */
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.crossbows)) {
-            if (world.isRemote)
-                player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
-            return false;
-        }
-        TileEntityCrossbowBench tile = (TileEntityCrossbowBench) getTile(world, pos);
-        if (tile != null && (world.isAirBlock(pos.add(0,1,0)) || !world.isSideSolid(pos.add(0,1,0), EnumFacing.DOWN))) {
-            if (facing != EnumFacing.UP || !tile.tryCraft(player) && !world.isRemote) {
-                tile.openGUI(world, player);
-            }
-        }
-        return true;
-    }
+	/**
+	 * Called upon block activation (right click on the block.)
+	 */
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.crossbows)) {
+			if (world.isRemote)
+				player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
+			return false;
+		}
+		TileEntityCrossbowBench tile = (TileEntityCrossbowBench) getTile(world, pos);
+		if (tile != null && (world.isAirBlock(pos.add(0, 1, 0)) || !world.isSideSolid(pos.add(0, 1, 0), EnumFacing.DOWN))) {
+			if (facing != EnumFacing.UP || !tile.tryCraft(player) && !world.isRemote) {
+				tile.openGUI(world, player);
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-        if (ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.bombs)) {
-            TileEntityCrossbowBench tile = (TileEntityCrossbowBench) getTile(world, pos);
-            if (tile != null) {
-                tile.tryCraft(user);
-            }
-        }
-    }
+	@Override
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
+		if (ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.bombs)) {
+			TileEntityCrossbowBench tile = (TileEntityCrossbowBench) getTile(world, pos);
+			if (tile != null) {
+				tile.tryCraft(user);
+			}
+		}
+	}
 }

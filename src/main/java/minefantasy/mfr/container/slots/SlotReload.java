@@ -6,15 +6,15 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class SlotReload extends SlotItemHandler {
-    private ContainerReload container;
+	private ContainerReload container;
 
-    public SlotReload(ContainerReload container, ItemStackHandler parent, int id, int x, int y) {
-        super(parent, id, x, y);
-        this.container = container;
-    }
+	public SlotReload(ContainerReload container, ItemStackHandler parent, int id, int x, int y) {
+		super(parent, id, x, y);
+		this.container = container;
+	}
 
-    @Override
-    public boolean isItemValid(ItemStack item) {
-        return container.canAccept(item);
-    }
+	@Override
+	public boolean isItemValid(ItemStack item) {
+		return container.canAccept(item);
+	}
 }

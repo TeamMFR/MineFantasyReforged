@@ -67,7 +67,7 @@ public class ComponentListMFR {
 	public static ItemComponentMFR ENDER_INGOT = Utils.nullValue();
 	public static ItemComponentMFR TUNGSTEN_INGOT = Utils.nullValue();
 	public static ItemComponentMFR OBSIDIAN_INGOT = Utils.nullValue();
-	
+
 	public static Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 
 	public static ItemComponentMFR TIMBER = Utils.nullValue();
@@ -207,7 +207,6 @@ public class ComponentListMFR {
 	public static ItemArtefact SCHEMATIC_COGWORK = Utils.nullValue();
 	public static ItemArtefact SCHEMATIC_ALLOYS = Utils.nullValue();
 
-
 	public static Item ORNATE_ITEMS = Utils.nullValue();
 
 	public static void init() {
@@ -240,7 +239,7 @@ public class ComponentListMFR {
 
 		COMPOSITE_ALLOY_INGOT = new ItemComponentMFR("composite_alloy_ingot", 1);
 
-		TIMBER = new ItemComponentMFR("timber").setCustom(1, "wood").setStoragePlacement("plank","plank");
+		TIMBER = new ItemComponentMFR("timber").setCustom(1, "wood").setStoragePlacement("plank", "plank");
 		TIMBER_CUT = new ItemComponentMFR("timber_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
 		TIMBER_PANE = new ItemComponentMFR("timber_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
 
@@ -369,18 +368,18 @@ public class ComponentListMFR {
 
 		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
 		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
-		ANCIENT_JEWEL_MASTER =  new ItemArtefact("ancient_jewel_master", 30, EnumRarity.EPIC, ItemArtefact.MYTHIC, 1, "smeltMaster");
+		ANCIENT_JEWEL_MASTER = new ItemArtefact("ancient_jewel_master", 30, EnumRarity.EPIC, ItemArtefact.MYTHIC, 1, "smeltMaster");
 		TRILOGY_JEWEL = new ItemArtefact("trilogy_jewel", EnumRarity.EPIC, null, 1);
 		SCHEMATIC_BOMB = new ItemArtefact("schematic_bomb", 50, EnumRarity.RARE, null, 1, "bombObsidian", "mineObsidian");
 		SCHEMATIC_CROSSBOW = new ItemArtefact("schematic_crossbow", 50, EnumRarity.RARE, null, 1, "crossShaftAdvanced", "crossHeadAdvanced");
 		SCHEMATIC_FORGE = new ItemArtefact("schematic_forge", 50, EnumRarity.RARE, null, 1, "advforge", "advcrucible");
-		SCHEMATIC_GEARS =  new ItemArtefact("schematic_gears", 50, EnumRarity.RARE, null, 1, "cogArmour");
+		SCHEMATIC_GEARS = new ItemArtefact("schematic_gears", 50, EnumRarity.RARE, null, 1, "cogArmour");
 		SCHEMATIC_COGWORK = new ItemArtefact("schematic_cogwork", 50, EnumRarity.RARE, null, 1, "cogArmour");
-		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy",50, EnumRarity.RARE, null, 1, "compPlate");
+		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy", 50, EnumRarity.RARE, null, 1, "compPlate");
 
 		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", 1, "ornate");
 	}
-	
+
 	@SubscribeEvent
 	public static void registerItem(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
@@ -553,10 +552,9 @@ public class ComponentListMFR {
 
 		registry.register(ORNATE_ITEMS);
 	}
-	
-	
+
 	public static void load() {
-		INGOTS = new ItemComponentMFR[]{
+		INGOTS = new ItemComponentMFR[] {
 				COPPER_INGOT,
 				TIN_INGOT,
 				BRONZE_INGOT,

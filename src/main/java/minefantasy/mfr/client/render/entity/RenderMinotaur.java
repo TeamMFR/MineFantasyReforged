@@ -28,7 +28,6 @@ public class RenderMinotaur extends RenderBiped<EntityMinotaur> {
 		super.doRender(entity, x, y, z, f, 1);
 	}
 
-
 	@Override
 	protected ResourceLocation getEntityTexture(EntityMinotaur entity) {
 		return TextureHelperMFR.getResource("textures/models/monster/minotaur/" + entity.getTexture() + ".png");

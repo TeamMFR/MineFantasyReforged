@@ -47,23 +47,23 @@ public class WorldGenBiological implements IWorldGenerator {
 	/**
 	 * Generates the specified plant randomly throughout the world.
 	 *
-	 * @param state The plant block
-	 * @param world The world
-	 * @param random A instance of {@code Random} to use
-	 * @param x The x coordinate of the first block in the chunk
-	 * @param z The y coordinate of the first block in the chunk
+	 * @param state          The plant block
+	 * @param world          The world
+	 * @param random         A instance of {@code Random} to use
+	 * @param x              The x coordinate of the first block in the chunk
+	 * @param z              The y coordinate of the first block in the chunk
 	 * @param chancesToSpawn Number of chances to spawn a flower patch
-	 * @param groupSize The number of times to try generating a flower per flower patch spawn
+	 * @param groupSize      The number of times to try generating a flower per flower patch spawn
 	 */
-	public static void generatePlant(IBlockState state, World world, Random random, int x, int z, int chancesToSpawn, int groupSize){
+	public static void generatePlant(IBlockState state, World world, Random random, int x, int z, int chancesToSpawn, int groupSize) {
 
-		for(int i = 0; i < chancesToSpawn; i++){
+		for (int i = 0; i < chancesToSpawn; i++) {
 
 			int randPosX = x + random.nextInt(16);
 			int randPosY = random.nextInt(256);
 			int randPosZ = z + random.nextInt(16);
 
-			for(int l = 0; l < groupSize; ++l){
+			for (int l = 0; l < groupSize; ++l) {
 
 				int i1 = randPosX + random.nextInt(8) - random.nextInt(8);
 				int j1 = randPosY + random.nextInt(4) - random.nextInt(4);
@@ -71,7 +71,7 @@ public class WorldGenBiological implements IWorldGenerator {
 
 				BlockPos pos = new BlockPos(i1, j1, k1);
 
-				if(world.isBlockLoaded(pos) && world.isAirBlock(pos) && (!world.provider.isNether() || j1 < 127) && state.getBlock().canPlaceBlockOnSide(world, pos, EnumFacing.UP)){
+				if (world.isBlockLoaded(pos) && world.isAirBlock(pos) && (!world.provider.isNether() || j1 < 127) && state.getBlock().canPlaceBlockOnSide(world, pos, EnumFacing.UP)) {
 
 					world.setBlockState(pos, state, 2);
 				}

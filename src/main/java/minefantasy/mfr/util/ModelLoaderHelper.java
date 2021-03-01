@@ -21,14 +21,15 @@ public class ModelLoaderHelper {
 	}
 
 	public static void registerWrappedItemModel(Item item, WrappedItemModel renderClass, ModelResourceLocation modelLocation) {
-				ModelLoaderHelper.registerItem(item);
-				ModelLoader.setCustomModelResourceLocation(item, 0, modelLocation);
-				ModelRegistryHelper.register(modelLocation, renderClass);
+		ModelLoaderHelper.registerItem(item);
+		ModelLoader.setCustomModelResourceLocation(item, 0, modelLocation);
+		ModelRegistryHelper.register(modelLocation, renderClass);
 	}
 
 	public static void registerItem(Item item) {
 		registerItem(item, "inventory");
 	}
+
 	public static void registerItem(Item item, String prefix) {
 		registerItem(item, prefix, "inventory");
 	}

@@ -3,14 +3,14 @@ package minefantasy.mfr.config;
 import net.minecraftforge.common.config.Configuration;
 
 public abstract class ConfigurationBaseMF {
-    protected Configuration config;
+	protected Configuration config;
 
-    public void setConfig(Configuration configuration) {
-        configuration.load();
-        config = configuration;
-        loadConfig();
-        configuration.save();
-    }
+	public void setConfig(Configuration configuration) {
+		configuration.load();
+		config = configuration;
+		loadConfig();
+		configuration.save();
+	}
 
-    protected abstract void loadConfig();
+	protected abstract void loadConfig();
 }

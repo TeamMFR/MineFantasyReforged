@@ -35,12 +35,12 @@ public class OreDictListMFR {
 		OreDictionary.registerOre("paneGlass", new ItemStack(MineFantasyBlocks.WINDOW_PANE, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("paneGlass", new ItemStack(MineFantasyBlocks.FRAMED_GLASS_PANE, 1, OreDictionary.WILDCARD_VALUE));
 
-		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 0));
-		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 1));
-		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 2));
-		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 3));
-		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 4));
-		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1 , 5));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1, 0));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1, 1));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1, 2));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1, 3));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1, 4));
+		OreDictionary.registerOre("plankWood", new ItemStack(Blocks.PLANKS, 1, 5));
 		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.IRONBARK_PLANKS, 1, 0));
 		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.EBONY_PLANKS, 1, 0));
 		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.YEW_PLANKS, 1, 0));
@@ -50,8 +50,8 @@ public class OreDictListMFR {
 		plankWoodList.remove(0);
 
 		for (ItemStack plank : plankWoodList) {
-			for (CustomMaterial material : CustomMaterial.getList("wood")){
-				if (plank.getDisplayName().replaceAll(" ", "").replaceFirst("Planks", "").equals(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()))){
+			for (CustomMaterial material : CustomMaterial.getList("wood")) {
+				if (plank.getDisplayName().replaceAll(" ", "").replaceFirst("Planks", "").equals(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()))) {
 					OreDictionary.registerOre("planks" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()), plank);
 					break;
 				}

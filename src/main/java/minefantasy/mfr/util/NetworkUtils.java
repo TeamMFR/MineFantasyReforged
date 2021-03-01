@@ -15,29 +15,31 @@ import java.lang.reflect.Method;
  */
 
 public class NetworkUtils {
-    private static final Class playerInstanceClass;
-    private static final Method getOrCreateChunkWatcher;
-    private static final Method sendToAllPlayersWatchingChunk;
+	private static final Class playerInstanceClass;
+	private static final Method getOrCreateChunkWatcher;
+	private static final Method sendToAllPlayersWatchingChunk;
 
-    static {
-        try {
-            playerInstanceClass = PlayerInteractionManager.class.getDeclaredClasses()[0];
-            getOrCreateChunkWatcher = ReflectionHelper.findMethod(PlayerInteractionManager.class, null, "getOrCreateChunkWatcher", int.class, int.class, boolean.class);
-            sendToAllPlayersWatchingChunk = ReflectionHelper.findMethod(playerInstanceClass, null, "sendToAllPlayersWatchingChunk"  , Packet.class);
-            getOrCreateChunkWatcher.setAccessible(true);
-            sendToAllPlayersWatchingChunk.setAccessible(true);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
+	static {
+		try {
+			playerInstanceClass = PlayerInteractionManager.class.getDeclaredClasses()[0];
+			getOrCreateChunkWatcher = ReflectionHelper.findMethod(PlayerInteractionManager.class, null, "getOrCreateChunkWatcher", int.class, int.class, boolean.class);
+			sendToAllPlayersWatchingChunk = ReflectionHelper.findMethod(playerInstanceClass, null, "sendToAllPlayersWatchingChunk", Packet.class);
+			getOrCreateChunkWatcher.setAccessible(true);
+			sendToAllPlayersWatchingChunk.setAccessible(true);
+		}
+		catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
 
-    public static void sendToWatchers(Packet packet, WorldServer world, BlockPos pos) {
-        try {
-            Object playerInstance = getOrCreateChunkWatcher.invoke(world.getPlayerChunkMap(), pos.getX() >> 4, pos.getZ() >> 4, false);
-            if (playerInstance != null)
-                sendToAllPlayersWatchingChunk.invoke(playerInstance, packet);
-        } catch (Exception ex) {
-            throw new RuntimeException(ex);
-        }
-    }
+	public static void sendToWatchers(Packet packet, WorldServer world, BlockPos pos) {
+		try {
+			Object playerInstance = getOrCreateChunkWatcher.invoke(world.getPlayerChunkMap(), pos.getX() >> 4, pos.getZ() >> 4, false);
+			if (playerInstance != null)
+				sendToAllPlayersWatchingChunk.invoke(playerInstance, packet);
+		}
+		catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
 }

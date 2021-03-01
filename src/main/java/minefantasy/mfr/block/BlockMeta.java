@@ -8,33 +8,34 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public abstract class BlockMeta extends Block {
-    protected final String[] names;
-    @SideOnly(Side.CLIENT)
+	protected final String[] names;
 
-    public BlockMeta(String name, Material material, String... names) {
-        super(material);
-        this.names = names;
+	@SideOnly(Side.CLIENT)
 
-        setRegistryName(name);
-        setUnlocalizedName(name);
-        if (material == Material.ROCK) {
-            this.setHarvestLevel("pickaxe", 0);
-        }
-        this.setHardness(2.0F);
-        this.setResistance(2.0F);
-        this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-    }
+	public BlockMeta(String name, Material material, String... names) {
+		super(material);
+		this.names = names;
 
-    public String getUnlocalisedName(int meta) {
-        return "tile." + names[Math.min(meta, names.length - 1)];
-    }
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		if (material == Material.ROCK) {
+			this.setHarvestLevel("pickaxe", 0);
+		}
+		this.setHardness(2.0F);
+		this.setResistance(2.0F);
+		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+	}
 
-    public int getCount() {
-        return names.length;
-    }
+	public String getUnlocalisedName(int meta) {
+		return "tile." + names[Math.min(meta, names.length - 1)];
+	}
 
-    @Override
-    public int damageDropped(IBlockState state) {
-        return state.getBlock().damageDropped(state);
-    }
+	public int getCount() {
+		return names.length;
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return state.getBlock().damageDropped(state);
+	}
 }

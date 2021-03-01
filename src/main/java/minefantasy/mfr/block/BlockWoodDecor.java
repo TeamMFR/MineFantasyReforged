@@ -17,63 +17,63 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor> {
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
-    private final String texture;
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	private final String texture;
 
-    public BlockWoodDecor(String texture) {
-        super(Material.WOOD);
-        this.texture = texture;
-    }
+	public BlockWoodDecor(String texture) {
+		super(Material.WOOD);
+		this.texture = texture;
+	}
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
 
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return null;
-    }
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return null;
+	}
 
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        TileEntityWoodDecor tile = getTile(world, pos);
-        if (tile != null) {
-            CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
-            if (material != null) {
-                tile.setMaterial(material);
-            }
-        }
-    }
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
+		TileEntityWoodDecor tile = getTile(world, pos);
+		if (tile != null) {
+			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
+			if (material != null) {
+				tile.setMaterial(material);
+			}
+		}
+	}
 
-    protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {
-        if (tile != null && item != null) {
-            CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, tile.getMaterialName());
-        }
-        return item;
-    }
+	protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {
+		if (tile != null && item != null) {
+			CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, tile.getMaterialName());
+		}
+		return item;
+	}
 
-    private TileEntityWoodDecor getTile(World world, BlockPos pos) {
-        TileEntity tile = world.getTileEntity(pos);
-        if (tile != null && tile instanceof TileEntityWoodDecor) {
-            return (TileEntityWoodDecor) tile;
-        }
-        return null;
-    }
+	private TileEntityWoodDecor getTile(World world, BlockPos pos) {
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile != null && tile instanceof TileEntityWoodDecor) {
+			return (TileEntityWoodDecor) tile;
+		}
+		return null;
+	}
 
-    public String getFullTexName() {
-        return this.texture;
-    }
+	public String getFullTexName() {
+		return this.texture;
+	}
 
-    public ItemStack construct(String name) {
-        return construct(name, 1);
-    }
+	public ItemStack construct(String name) {
+		return construct(name, 1);
+	}
 
-    public ItemStack construct(String name, int stacksize) {
-        ItemStack item = new ItemStack(this, stacksize);
-        CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, name.toLowerCase());
+	public ItemStack construct(String name, int stacksize) {
+		ItemStack item = new ItemStack(this, stacksize);
+		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, name.toLowerCase());
 
-        return item;
-    }
+		return item;
+	}
 }

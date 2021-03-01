@@ -8,16 +8,16 @@ import net.minecraft.world.World;
 
 public class BlockWorldGenMarker extends BlockContainer {
 
-    public BlockWorldGenMarker(String name) {
-        super(Material.AIR);
-        this.setBlockUnbreakable();
-        setRegistryName(name);
+	public BlockWorldGenMarker(String name) {
+		super(Material.AIR);
+		this.setBlockUnbreakable();
+		setRegistryName(name);
 
-    }
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileEntityWorldGenMarker();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileEntityWorldGenMarker();
+	}
 
 }

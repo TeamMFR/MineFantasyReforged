@@ -81,9 +81,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	public final ItemStackHandler inventory = createInventory();
 
-	public TileEntityAnvil(int tier, String textureName) {
-		this.tier = tier;
-		this.textureName = textureName;
+	public TileEntityAnvil() {
 		setContainer(new ContainerAnvil(this));
 	}
 
@@ -603,6 +601,14 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 		}
 		return item;
+	}
+
+	public void setTier(int tier) {
+		this.tier = tier;
+	}
+
+	public void setTextureName(String textureName) {
+		this.textureName = textureName;
 	}
 
 	private void setTrait(ItemStack item, String trait, boolean flag) {

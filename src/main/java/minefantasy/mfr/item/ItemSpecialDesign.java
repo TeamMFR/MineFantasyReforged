@@ -4,16 +4,16 @@ import minefantasy.mfr.api.crafting.exotic.ISpecialCraftItem;
 import net.minecraft.item.ItemStack;
 
 public class ItemSpecialDesign extends ItemComponentMFR implements ISpecialCraftItem {
-    private String design;
+	private String design;
 
-    public ItemSpecialDesign(String name, int rarity, String design) {
-        super(name, rarity);
-        this.design = design;
-    }
+	public ItemSpecialDesign(String name, int rarity, String design) {
+		super(name, rarity);
+		this.design = design;
+	}
 
-    @Override
-    public String getDesign(ItemStack item) {
-        return this.design;
-    }
+	@Override
+	public String getDesign(ItemStack item) {
+		return this.design;
+	}
 
 }

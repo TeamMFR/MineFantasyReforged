@@ -92,8 +92,6 @@ public class EventManagerMFRToRemove {
 
 	private static XSTRandom random = new XSTRandom();
 
-
-
 	public static String getRegisterName(Entity entity) {
 		String s = EntityList.getEntityString(entity);
 
@@ -203,7 +201,7 @@ public class EventManagerMFRToRemove {
 	}
 
 	private Item getHideFor(EntityLivingBase mob) {
-		Item[] hide = new Item[]{ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM, ComponentListMFR.RAWHIDE_LARGE};
+		Item[] hide = new Item[] {ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM, ComponentListMFR.RAWHIDE_LARGE};
 		int size = getHideSizeFor(mob);
 		if (mob.isChild()) {
 			size--;
@@ -271,7 +269,8 @@ public class EventManagerMFRToRemove {
 		boolean useArrows = true;
 		try {
 			Class.forName("minefantasy.mf2.api.helpers.ArrowEffectsMF");
-		} catch (Exception e) {
+		}
+		catch (Exception e) {
 			useArrows = false;
 		}
 		if (dropper != null && useArrows && ConfigExperiment.stickArrows && !dropper.world.isRemote) {
@@ -635,45 +634,45 @@ public class EventManagerMFRToRemove {
 		event.setRenderItem(showHeld);
 	}
 
-//    @SideOnly(Side.CLIENT)
-//    @SubscribeEvent
-//    public void renderEntity(RenderLivingEvent.Pre event) {
-//        if (!(event.getRenderer() instanceof RenderPowerArmour)) {
-//            boolean renderHead = false;
-//            boolean renderBody = false;
-//            boolean renderLeftArm = false;
-//            boolean renderRightArm = false;
-//            boolean renderLeftLeg = false;
-//            boolean renderRightLeg = false;
-//            Minecraft mc = Minecraft.getMinecraft();
-//
-//            if (event.getEntity() instanceof EntityPlayer && !(event.getEntity() == mc.player
-//                    && (mc.currentScreen instanceof GuiContainerCreative || mc.currentScreen instanceof GuiInventory))
-//                    && PowerArmour.isWearingCogwork(event.getEntity()) && mc.gameSettings.thirdPersonView != 0) {
-//                IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
-//                renderHead = cogwork.isArmoured("left_leg");
-//                renderBody = cogwork.isArmoured("right_leg");
-//                renderLeftArm = cogwork.isArmoured("left_arm");
-//                renderRightArm = cogwork.isArmoured("right_arm");
-//                renderLeftLeg = cogwork.isArmoured("left_leg");
-//                renderRightLeg = cogwork.isArmoured("right_leg");
-//            }
-//
-//            if (event.getRenderer() instanceof RenderPlayer) {
-//                RenderPlayer RP = (RenderPlayer) event.getRenderer();
-//                ModelBiped[] layers = new ModelBiped[]{RP.getMainModel()};
-//
-//                for (ModelBiped model : layers) {
-//                    model.bipedHead.isHidden = model.bipedHeadwear.isHidden = model.bipedHead.isHidden = renderHead;
-//                    model.bipedBody.isHidden = renderBody;
-//
-//                    model.bipedLeftArm.isHidden = renderLeftArm;
-//                    model.bipedRightArm.isHidden = renderRightArm;
-//                    model.bipedLeftLeg.isHidden = renderLeftLeg;
-//                    model.bipedRightLeg.isHidden = renderRightLeg;
-//                }
-//            }
-//        }
-//    }
+	//    @SideOnly(Side.CLIENT)
+	//    @SubscribeEvent
+	//    public void renderEntity(RenderLivingEvent.Pre event) {
+	//        if (!(event.getRenderer() instanceof RenderPowerArmour)) {
+	//            boolean renderHead = false;
+	//            boolean renderBody = false;
+	//            boolean renderLeftArm = false;
+	//            boolean renderRightArm = false;
+	//            boolean renderLeftLeg = false;
+	//            boolean renderRightLeg = false;
+	//            Minecraft mc = Minecraft.getMinecraft();
+	//
+	//            if (event.getEntity() instanceof EntityPlayer && !(event.getEntity() == mc.player
+	//                    && (mc.currentScreen instanceof GuiContainerCreative || mc.currentScreen instanceof GuiInventory))
+	//                    && PowerArmour.isWearingCogwork(event.getEntity()) && mc.gameSettings.thirdPersonView != 0) {
+	//                IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
+	//                renderHead = cogwork.isArmoured("left_leg");
+	//                renderBody = cogwork.isArmoured("right_leg");
+	//                renderLeftArm = cogwork.isArmoured("left_arm");
+	//                renderRightArm = cogwork.isArmoured("right_arm");
+	//                renderLeftLeg = cogwork.isArmoured("left_leg");
+	//                renderRightLeg = cogwork.isArmoured("right_leg");
+	//            }
+	//
+	//            if (event.getRenderer() instanceof RenderPlayer) {
+	//                RenderPlayer RP = (RenderPlayer) event.getRenderer();
+	//                ModelBiped[] layers = new ModelBiped[]{RP.getMainModel()};
+	//
+	//                for (ModelBiped model : layers) {
+	//                    model.bipedHead.isHidden = model.bipedHeadwear.isHidden = model.bipedHead.isHidden = renderHead;
+	//                    model.bipedBody.isHidden = renderBody;
+	//
+	//                    model.bipedLeftArm.isHidden = renderLeftArm;
+	//                    model.bipedRightArm.isHidden = renderRightArm;
+	//                    model.bipedLeftLeg.isHidden = renderLeftLeg;
+	//                    model.bipedRightLeg.isHidden = renderRightLeg;
+	//                }
+	//            }
+	//        }
+	//    }
 	// TODO: Fix if necessary with RenderPowerArmour
 }

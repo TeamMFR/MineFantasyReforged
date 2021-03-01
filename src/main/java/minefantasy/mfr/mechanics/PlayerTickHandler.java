@@ -157,8 +157,8 @@ public class PlayerTickHandler {
 
 	public static int getDragonEnemyPoints(EntityPlayer player) {
 		PlayerData data = PlayerData.get(player);
-		if (data != null){
-			if (data.getVariable(DRAGON_KILLS_KEY) == null){
+		if (data != null) {
+			if (data.getVariable(DRAGON_KILLS_KEY) == null) {
 				data.setVariable(DRAGON_KILLS_KEY, 0);
 			}
 			return data.getVariable(DRAGON_KILLS_KEY);
@@ -244,7 +244,6 @@ public class PlayerTickHandler {
 				}
 			}
 
-
 			// TODO: move this to minefantasy.mfr.item.gadget.ItemCrossbow
 			if (!event.player.getHeldItemMainhand().isEmpty()) {
 				ItemStack stack = event.player.getHeldItemMainhand();
@@ -278,10 +277,10 @@ public class PlayerTickHandler {
 
 	private boolean isNextStep(EntityPlayer player) {
 		PlayerData data = PlayerData.get(player);
-		if (data != null ) {
+		if (data != null) {
 			if (data.getVariable(LAST_STEP_KEY) == null) {
 				data.setVariable(LAST_STEP_KEY, 0);
-			}else {
+			} else {
 				int prevStep = data.getVariable(LAST_STEP_KEY);
 				int stepcount = (int) player.distanceWalkedOnStepModified;
 				data.setVariable(LAST_STEP_KEY, stepcount);
@@ -314,16 +313,16 @@ public class PlayerTickHandler {
 		float weight = 2.0F;
 
 		float pitchBalance = 0;
-		if(data.getVariable(BALANCE_PITCH_KEY) == null){
+		if (data.getVariable(BALANCE_PITCH_KEY) == null) {
 			data.setVariable(BALANCE_PITCH_KEY, 0F);
-		} else{
+		} else {
 			pitchBalance = data.getVariable(BALANCE_PITCH_KEY);
 		}
 
 		float yawBalance = 0;
-		if(data.getVariable(BALANCE_YAW_KEY) == null){
+		if (data.getVariable(BALANCE_YAW_KEY) == null) {
 			data.setVariable(BALANCE_YAW_KEY, 0F);
-		} else{
+		} else {
 			yawBalance = data.getVariable(BALANCE_YAW_KEY);
 		}
 
@@ -357,20 +356,20 @@ public class PlayerTickHandler {
 	}
 
 	@SubscribeEvent
-	public static void onEntityJoinWorld(EntityJoinWorldEvent event){
-		if (event.getEntity() instanceof EntityPlayer){
+	public static void onEntityJoinWorld(EntityJoinWorldEvent event) {
+		if (event.getEntity() instanceof EntityPlayer) {
 			onPlayerEnterWorld((EntityPlayer) event.getEntity());
 		}
 	}
 
 	public static void onPlayerEnterWorld(EntityPlayer player) {
-		if (player.world.isRemote){
+		if (player.world.isRemote) {
 			return;
 		}
 
 		PlayerData data = PlayerData.get(player);
-		if (data != null){
-			if (data.getVariable(HAS_BOOK_KEY) == null){
+		if (data != null) {
+			if (data.getVariable(HAS_BOOK_KEY) == null) {
 				data.setVariable(HAS_BOOK_KEY, false);
 			}
 			if (!data.getVariable(HAS_BOOK_KEY)) {
@@ -381,7 +380,6 @@ public class PlayerTickHandler {
 			}
 		}
 	}
-
 
 	private void tryResetBed(EntityPlayer player) {
 		if (player.getEntityData().hasKey(resetBed)) {

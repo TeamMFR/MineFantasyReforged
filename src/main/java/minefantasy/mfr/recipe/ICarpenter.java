@@ -8,19 +8,19 @@ import net.minecraft.util.SoundEvent;
  * MineFantasy so it can be referred to without importing the mod
  */
 public interface ICarpenter {
-    void setProgressMax(int i);
+	void setProgressMax(int i);
 
-    void setRequiredToolTier(int i);
+	void setRequiredToolTier(int i);
 
-    void setRequiredCarpenter(int i);
+	void setRequiredCarpenter(int i);
 
-    void setHotOutput(boolean i);
+	void setHotOutput(boolean i);
 
-    void setRequiredToolType(String toolType);
+	void setRequiredToolType(String toolType);
 
-    void setCraftingSound(SoundEvent sound);
+	void setCraftingSound(SoundEvent sound);
 
-    void setResearch(String research);
+	void setResearch(String research);
 
-    void setRequiredSkill(Skill skill);
+	void setRequiredSkill(Skill skill);
 }

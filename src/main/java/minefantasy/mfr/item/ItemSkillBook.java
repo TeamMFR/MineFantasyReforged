@@ -21,59 +21,59 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class ItemSkillBook extends ItemComponentMFR {
-    private Skill skill;
-    private String name;
-    private boolean isMax = false;
+	private Skill skill;
+	private String name;
+	private boolean isMax = false;
 
-    public ItemSkillBook(String name, Skill skill) {
-        super(name, 1);
-        setMaxStackSize(16);
-        this.setCreativeTab(MineFantasyTabs.tabGadget);
-        this.skill = skill;
-        this.name = name;
-    }
+	public ItemSkillBook(String name, Skill skill) {
+		super(name, 1);
+		setMaxStackSize(16);
+		this.setCreativeTab(MineFantasyTabs.tabGadget);
+		this.skill = skill;
+		this.name = name;
+	}
 
-    public Item setMax() {
-        isMax = true;
-        return setMaxStackSize(1);
-    }
+	public Item setMax() {
+		isMax = true;
+		return setMaxStackSize(1);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
-        if (isMax) {
-            list.add(I18n.format("item." + name + ".desc"));
-        } else {
-            list.add(I18n.format("item." + name + ".desc", 1));
-        }
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+		if (isMax) {
+			list.add(I18n.format("item." + name + ".desc"));
+		} else {
+			list.add(I18n.format("item." + name + ".desc", 1));
+		}
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack item = player.getHeldItem(hand);
-        boolean used = false;
-        if (skill != null) {
-            int lvl = RPGElements.getLevel(player, skill);
-            if (lvl < skill.getMaxLevel()) {
-                if (isMax) {
-                    skill.manualLvlUp(player, 100);
-                } else {
-                    skill.addXP(player, world.rand.nextInt(skill.getLvlXP(lvl)));
-                }
-                used = true;
-            }
-        }
-        if (used) {
-            player.world.playSound(player.posX, player.posY, player.posZ, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
-            if (!player.capabilities.isCreativeMode) {
-                item.shrink(1);
-            }
-        }
-        return ActionResult.newResult(EnumActionResult.PASS, item);
-    }
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack item = player.getHeldItem(hand);
+		boolean used = false;
+		if (skill != null) {
+			int lvl = RPGElements.getLevel(player, skill);
+			if (lvl < skill.getMaxLevel()) {
+				if (isMax) {
+					skill.manualLvlUp(player, 100);
+				} else {
+					skill.addXP(player, world.rand.nextInt(skill.getLvlXP(lvl)));
+				}
+				used = true;
+			}
+		}
+		if (used) {
+			player.world.playSound(player.posX, player.posY, player.posZ, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+			if (!player.capabilities.isCreativeMode) {
+				item.shrink(1);
+			}
+		}
+		return ActionResult.newResult(EnumActionResult.PASS, item);
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        return isMax ? EnumRarity.EPIC : EnumRarity.COMMON;
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		return isMax ? EnumRarity.EPIC : EnumRarity.COMMON;
+	}
 }

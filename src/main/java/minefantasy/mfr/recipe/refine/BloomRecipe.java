@@ -10,46 +10,46 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class BloomRecipe {// FurnaceRecipes
-    public static HashMap<ItemStack, ItemStack> recipeList = new HashMap();
-    public ItemStack result;
-    public int time;
-    public String research;
+	public static HashMap<ItemStack, ItemStack> recipeList = new HashMap();
+	public ItemStack result;
+	public int time;
+	public String research;
 
-    public BloomRecipe(ItemStack result, int time, String research) {
-        this.result = result;
-        this.time = time;
-        this.research = research;
-    }
+	public BloomRecipe(ItemStack result, int time, String research) {
+		this.result = result;
+		this.time = time;
+		this.research = research;
+	}
 
-    public static void addRecipe(ItemStack input, ItemStack output) {
-        recipeList.put(input, output);
-    }
+	public static void addRecipe(ItemStack input, ItemStack output) {
+		recipeList.put(input, output);
+	}
 
-    public static void addRecipe(Block input, ItemStack output) {
-        addRecipe(Item.getItemFromBlock(input), output);
-    }
+	public static void addRecipe(Block input, ItemStack output) {
+		addRecipe(Item.getItemFromBlock(input), output);
+	}
 
-    public static void addRecipe(Item input, ItemStack output) {
-        addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), output);
-    }
+	public static void addRecipe(Item input, ItemStack output) {
+		addRecipe(new ItemStack(input, 1, OreDictionary.WILDCARD_VALUE), output);
+	}
 
-    public static ItemStack getSmeltingResult(ItemStack item) {
-        Iterator iterator = recipeList.entrySet().iterator();
-        Entry entry;
+	public static ItemStack getSmeltingResult(ItemStack item) {
+		Iterator iterator = recipeList.entrySet().iterator();
+		Entry entry;
 
-        do {
-            if (!iterator.hasNext()) {
-                return null;
-            }
+		do {
+			if (!iterator.hasNext()) {
+				return null;
+			}
 
-            entry = (Entry) iterator.next();
-        } while (!doesMatch(item, (ItemStack) entry.getKey()));
+			entry = (Entry) iterator.next();
+		} while (!doesMatch(item, (ItemStack) entry.getKey()));
 
-        return (ItemStack) entry.getValue();
-    }
+		return (ItemStack) entry.getValue();
+	}
 
-    private static boolean doesMatch(ItemStack item1, ItemStack item2) {
-        return item2.getItem() == item1.getItem() && (item2.getItemDamage() == OreDictionary.WILDCARD_VALUE
-                || item2.getItemDamage() == item1.getItemDamage());
-    }
+	private static boolean doesMatch(ItemStack item1, ItemStack item2) {
+		return item2.getItem() == item1.getItem() && (item2.getItemDamage() == OreDictionary.WILDCARD_VALUE
+				|| item2.getItemDamage() == item1.getItemDamage());
+	}
 }

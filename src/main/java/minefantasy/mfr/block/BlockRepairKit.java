@@ -20,84 +20,84 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockRepairKit extends Block {
-    public float repairLevel;
-    public float successRate;
-    public float breakChance;
-    public boolean isOrnate = false;
-    public float repairLevelEnchant = 0.0F;
-    private Random rand = new Random();
-    AxisAlignedBB BlockBB = new AxisAlignedBB(1F / 16F, 0F, 1F / 16F, 15F / 16F, 6F / 16F, 15F / 16F);
+	public float repairLevel;
+	public float successRate;
+	public float breakChance;
+	public boolean isOrnate = false;
+	public float repairLevelEnchant = 0.0F;
+	private Random rand = new Random();
+	AxisAlignedBB BlockBB = new AxisAlignedBB(1F / 16F, 0F, 1F / 16F, 15F / 16F, 6F / 16F, 15F / 16F);
 
-    public BlockRepairKit(String name, float repairLevel, float rate, float breakChance) {
-        super(Material.CLOTH);
+	public BlockRepairKit(String name, float repairLevel, float rate, float breakChance) {
+		super(Material.CLOTH);
 
-        this.repairLevel = repairLevel;
-        this.successRate = rate;
-        this.breakChance = breakChance;
-        name = "repair_kit_" + name;
+		this.repairLevel = repairLevel;
+		this.successRate = rate;
+		this.breakChance = breakChance;
+		name = "repair_kit_" + name;
 
-        setRegistryName(name);
-        setUnlocalizedName(name);
-        this.setSoundType(SoundType.CLOTH);
-        this.setHardness(1F);
-        this.setResistance(0F);
-        this.setLightOpacity(0);
-        this.setCreativeTab(MineFantasyTabs.tabGadget);
-    }
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		this.setSoundType(SoundType.CLOTH);
+		this.setHardness(1F);
+		this.setResistance(0F);
+		this.setLightOpacity(0);
+		this.setCreativeTab(MineFantasyTabs.tabGadget);
+	}
 
-    public BlockRepairKit setOrnate(float enc) {
-        repairLevelEnchant = enc;
-        isOrnate = true;
-        return this;
-    }
+	public BlockRepairKit setOrnate(float enc) {
+		repairLevelEnchant = enc;
+		isOrnate = true;
+		return this;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox (IBlockState state, IBlockAccess source, BlockPos pos){
-        return BlockBB;
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		return BlockBB;
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (world.isRemote) {
-            return true;
-        }
-        ItemStack held = user.getHeldItem(hand);
-        // held.getItem().isRepairable() Was used but new MF tools disable this to avoid
-        // vanilla repairs
-        if (!held.isEmpty() && canRepair(held) && (!held.isItemEnchanted() || isOrnate)) {
-            if (rand.nextFloat() < successRate) {
-                boolean broken = rand.nextFloat() < breakChance;
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (world.isRemote) {
+			return true;
+		}
+		ItemStack held = user.getHeldItem(hand);
+		// held.getItem().isRepairable() Was used but new MF tools disable this to avoid
+		// vanilla repairs
+		if (!held.isEmpty() && canRepair(held) && (!held.isItemEnchanted() || isOrnate)) {
+			if (rand.nextFloat() < successRate) {
+				boolean broken = rand.nextFloat() < breakChance;
 
-                float lvl = held.isItemEnchanted() ? repairLevelEnchant : repairLevel;
-                int repairAmount = (int) (held.getMaxDamage() * lvl);
-                held.setItemDamage(Math.max(0, held.getItemDamage() - repairAmount));
-                world.playBroadcastSound(broken ? 1020 : 1021, pos, 0);
+				float lvl = held.isItemEnchanted() ? repairLevelEnchant : repairLevel;
+				int repairAmount = (int) (held.getMaxDamage() * lvl);
+				held.setItemDamage(Math.max(0, held.getItemDamage() - repairAmount));
+				world.playBroadcastSound(broken ? 1020 : 1021, pos, 0);
 
-                if (broken) {
-                    world.playSound(user, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT,1.0F, 1.0F );
-                    world.setBlockToAir(pos);
-                }
-                return true;
-            } else {
-                world.playSound(user, pos, SoundEvents.BLOCK_CLOTH_STEP, SoundCategory.AMBIENT,0.5F, 0.5F );
-            }
-            return true;
-        }
-        return false;
-    }
+				if (broken) {
+					world.playSound(user, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F);
+					world.setBlockToAir(pos);
+				}
+				return true;
+			} else {
+				world.playSound(user, pos, SoundEvents.BLOCK_CLOTH_STEP, SoundCategory.AMBIENT, 0.5F, 0.5F);
+			}
+			return true;
+		}
+		return false;
+	}
 
-    private boolean canRepair(ItemStack held) {
-        if (held.isEmpty())
-            return false;
-        if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != null)// Custom Tool
-        {
-            return held.isItemDamaged();
-        }
-        return held.getItem().isRepairable();
-    }
+	private boolean canRepair(ItemStack held) {
+		if (held.isEmpty())
+			return false;
+		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != null)// Custom Tool
+		{
+			return held.isItemDamaged();
+		}
+		return held.getItem().isRepairable();
+	}
 }

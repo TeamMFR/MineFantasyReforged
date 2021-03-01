@@ -204,14 +204,12 @@ public class RecipeExporterCarpenter {
 
 			tempRecipe.result = result;
 
-
 			tempRecipe.key = key;
 
 			String fileName = iCarpenterRecipe.getRecipeOutput().getItem().getRegistryName().toString();
 			String trimmedName = RecipeHelper.stripNamespace(fileName);
 			String filePath = "C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\";
 			RecipeHelper.writeFile(filePath, trimmedName, tempRecipe, g);
-
 
 		}
 	}

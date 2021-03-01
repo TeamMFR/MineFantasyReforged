@@ -20,7 +20,7 @@ public class ContainerBase extends Container {
 
 	public ContainerBase() {}
 
-	protected void addTileSlots(int width, int height, int xPos, int yPos){
+	protected void addTileSlots(int width, int height, int xPos, int yPos) {
 		IItemHandler inventory = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -30,7 +30,7 @@ public class ContainerBase extends Container {
 		}
 	}
 
-	protected void addPlayerSlots(InventoryPlayer playerInventory, int xPosition, int yPosition){
+	protected void addPlayerSlots(InventoryPlayer playerInventory, int xPosition, int yPosition) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 9; ++j) {
 				this.addSlotToContainer(new Slot(playerInventory, j + i * 9 + 9, xPosition + j * 18, yPosition - 58 + i * 18));

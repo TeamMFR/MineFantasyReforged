@@ -30,115 +30,115 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
-    protected int itemRarity;
-    private ToolMaterial toolMaterial;
-    private int tier;
-    // ===================================================== CUSTOM START
-    // =============================================================\\
-    private boolean isCustom = false;
-    private float efficiencyMod = 1.0F;
+	protected int itemRarity;
+	private ToolMaterial toolMaterial;
+	private int tier;
+	// ===================================================== CUSTOM START
+	// =============================================================\\
+	private boolean isCustom = false;
+	private float efficiencyMod = 1.0F;
 
-    public ItemShearsMFR(String name, ToolMaterial material, int rarity, int tier) {
-        super();
-        this.tier = tier;
-        itemRarity = rarity;
-        toolMaterial = material;
-        setCreativeTab(MineFantasyTabs.tabOldTools);
-        this.setMaxDamage(material.getMaxUses());
-        setRegistryName(name);
-        setUnlocalizedName(name);
+	public ItemShearsMFR(String name, ToolMaterial material, int rarity, int tier) {
+		super();
+		this.tier = tier;
+		itemRarity = rarity;
+		toolMaterial = material;
+		setCreativeTab(MineFantasyTabs.tabOldTools);
+		this.setMaxDamage(material.getMaxUses());
+		setRegistryName(name);
+		setUnlocalizedName(name);
 
-        MineFantasyReborn.PROXY.addClientRegister(this);
-    }
+		MineFantasyReborn.PROXY.addClientRegister(this);
+	}
 
-    public ItemShearsMFR setCustom() {
-        canRepair = false;
-        isCustom = true;
-        return this;
-    }
+	public ItemShearsMFR setCustom() {
+		canRepair = false;
+		isCustom = true;
+		return this;
+	}
 
-    public ItemShearsMFR setEfficiencyMod(float efficiencyMod) {
-        this.efficiencyMod = efficiencyMod;
-        return this;
-    }
+	public ItemShearsMFR setEfficiencyMod(float efficiencyMod) {
+		this.efficiencyMod = efficiencyMod;
+		return this;
+	}
 
-    protected float getWeightModifier(ItemStack stack) {
-        return CustomToolHelper.getWeightModifier(stack, 1.0F);
-    }
+	protected float getWeightModifier(ItemStack stack) {
+		return CustomToolHelper.getWeightModifier(stack, 1.0F);
+	}
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
-    }
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
+	}
 
-    public ItemStack construct(String main, String haft) {
-        return CustomToolHelper.construct(this, main, haft);
-    }
+	public ItemStack construct(String main, String haft) {
+		return CustomToolHelper.construct(this, main, haft);
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        return CustomToolHelper.getRarity(item, itemRarity);
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		return CustomToolHelper.getRarity(item, itemRarity);
+	}
 
-    @Override
-    public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
-        return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass, player, blockState));
-    }
+	@Override
+	public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
+		return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass, player, blockState));
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(tab)) {
-            return;
-        }
-        if (isCustom) {
-            ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            for (CustomMaterial customMat : metal) {
-                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
-                }
-            }
-        } else {
-            super.getSubItems(tab, items);
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (!isInCreativeTab(tab)) {
+			return;
+		}
+		if (isCustom) {
+			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			for (CustomMaterial customMat : metal) {
+				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+					items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
+				}
+			}
+		} else {
+			super.getSubItems(tab, items);
+		}
+	}
 
-    @Override
-    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
-        if (isCustom) {
-            CustomToolHelper.addInformation(item, list);
-        }
-        super.addInformation(item, world, list, flag);
-    }
+	@Override
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+		if (isCustom) {
+			CustomToolHelper.addInformation(item, list);
+		}
+		super.addInformation(item, world, list, flag);
+	}
 
-    @Override
-    public float getEfficiency(ItemStack item) {
-        return CustomToolHelper.getEfficiency(item, toolMaterial.getEfficiency(), efficiencyMod);
-    }
+	@Override
+	public float getEfficiency(ItemStack item) {
+		return CustomToolHelper.getEfficiency(item, toolMaterial.getEfficiency(), efficiencyMod);
+	}
 
-    @Override
-    public int getTier(ItemStack item) {
-        return CustomToolHelper.getCrafterTier(item, tier);
-    }
+	@Override
+	public int getTier(ItemStack item) {
+		return CustomToolHelper.getCrafterTier(item, tier);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item) {
-        String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
-        return CustomToolHelper.getLocalisedName(item, unlocalName);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
+		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
+		return CustomToolHelper.getLocalisedName(item, unlocalName);
+	}
 
-    @Override
-    public Tool getToolType(ItemStack stack) {
-        return Tool.SAW;
-    }
+	@Override
+	public Tool getToolType(ItemStack stack) {
+		return Tool.SAW;
+	}
 
-    @Override
-    public ToolMaterial getMaterial() {
-        return toolMaterial;
-    }
+	@Override
+	public ToolMaterial getMaterial() {
+		return toolMaterial;
+	}
 
-    @Override
-    public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
-    }
+	@Override
+	public void registerClient() {
+		ModelLoaderHelper.registerItem(this);
+	}
 }

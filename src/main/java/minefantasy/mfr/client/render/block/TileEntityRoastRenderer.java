@@ -10,9 +10,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.model.animation.FastTESR;
 
-public class TileEntityRoastRenderer <T extends TileEntity> extends FastTESR<T> {
+public class TileEntityRoastRenderer<T extends TileEntity> extends FastTESR<T> {
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer){
+	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
 		GlStateManager.pushMatrix();
 		GlStateManager.translate(x, y, z);
 

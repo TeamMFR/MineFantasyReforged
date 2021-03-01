@@ -7,17 +7,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public interface ISpecialArmourMFR {
-    float getDTValue(EntityLivingBase user, ItemStack armour, DamageSource src);
+	float getDTValue(EntityLivingBase user, ItemStack armour, DamageSource src);
 
-    @SideOnly(Side.CLIENT)
-    /**
-     * DamageType: 0=cutting, 1=blunt, 2=piercing
-     */ float getDTDisplay(ItemStack armour, int damageType);
+	@SideOnly(Side.CLIENT)
+	/**
+	 * DamageType: 0=cutting, 1=blunt, 2=piercing
+	 */
+	float getDTDisplay(ItemStack armour, int damageType);
 
-    float getDRValue(EntityLivingBase user, ItemStack armour, DamageSource src);
+	float getDRValue(EntityLivingBase user, ItemStack armour, DamageSource src);
 
-    @SideOnly(Side.CLIENT)
-    /**
-     * DamageType: 0=cutting, 1=blunt, 2=piercing
-     */ float getDRDisplay(ItemStack armour, int damageType);
+	@SideOnly(Side.CLIENT)
+	/**
+	 * DamageType: 0=cutting, 1=blunt, 2=piercing
+	 */
+	float getDRDisplay(ItemStack armour, int damageType);
 }

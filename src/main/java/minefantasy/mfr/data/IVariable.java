@@ -16,8 +16,9 @@ import java.util.function.BiFunction;
  * as a spell class. They can then be used as keys to access the values themselves via {@link PlayerData}.
  * Encapsulation can also be achieved by simply restricting access to the keys.
  * <p></p>
+ *
  * @param <T> The type of variable stored.
- * Author Credit: Electroblob. Used with permission, thank you Electroblob!
+ *            Author Credit: Electroblob. Used with permission, thank you Electroblob!
  */
 public interface IVariable<T> {
 
@@ -25,13 +26,16 @@ public interface IVariable<T> {
 	// it is stored and handled, but they DO NOT CONTAIN THE ACTUAL DATA.
 	// Only one instance exists for each thing to be stored, and is shared across instances of PlayerData.
 
-	/** Convenience method that allows this variable to define tick behaviour. This is particularly useful for
+	/**
+	 * Convenience method that allows this variable to define tick behaviour. This is particularly useful for
 	 * trivial operations such as decrementing a value, for which a dedicated event handling method would be
-	 * unnecessarily verbose. */
+	 * unnecessarily verbose.
+	 */
 	T update(EntityPlayer player, T value);
 
 	/**
 	 * Returns whether this variable persists when data is copied.
+	 *
 	 * @param respawn True if the player died and is respawning, false if they are just travelling between dimensions.
 	 * @return True if the variable should be copied over, false if not.
 	 */
@@ -39,6 +43,7 @@ public interface IVariable<T> {
 
 	/**
 	 * Returns whether this variable requires syncing with clients.
+	 *
 	 * @return True if the variable should be synced with clients, false if not.
 	 */
 	boolean isSynced();
@@ -53,10 +58,12 @@ public interface IVariable<T> {
 	 */
 	T read(ByteBuf buf);
 
-	/** If you're storing a lot of data, you can optionally implement this method to define a condition which, if
+	/**
+	 * If you're storing a lot of data, you can optionally implement this method to define a condition which, if
 	 * satisfied, will result in the data being removed from storage, reducing unnecessary syncing and saving. This
-	 * is particularly relevant if the value is synced as it reduces packet size. */
-	default boolean canPurge(EntityPlayer player, T value){
+	 * is particularly relevant if the value is synced as it reduces packet size.
+	 */
+	default boolean canPurge(EntityPlayer player, T value) {
 		return false;
 	}
 
@@ -64,6 +71,7 @@ public interface IVariable<T> {
 	 * General-purpose implementation of {@link IVariable} for non-stored variables. These may still, however, persist
 	 * across player respawn/dimension change.
 	 * <p></p>
+	 *
 	 * @param <T> The type of variable stored.
 	 */
 	class Variable<T> implements IVariable<T> {
@@ -72,7 +80,7 @@ public interface IVariable<T> {
 
 		private BiFunction<EntityPlayer, T, T> ticker;
 
-		public Variable(Persistence persistence){
+		public Variable(Persistence persistence) {
 			this.persistence = persistence;
 			this.ticker = (p, t) -> t;
 		}
@@ -82,37 +90,38 @@ public interface IVariable<T> {
 		 * primitive types! For lambda expressions, check the second parameter isn't null before operating on it.
 		 * For method references, do not reference a method that takes a primitive type. Otherwise, this will cause
 		 * a (difficult to debug) {@link NullPointerException} if the key was not stored.</i>
+		 *
 		 * @param ticker A {@link BiFunction} specifying the actions to be performed on this variable each tick. The
 		 *               {@code BiFunction} returns the new value for this variable.
 		 * @return This {@code Variable} object, allowing this method to be chained onto object creation.
 		 */
-		public Variable<T> withTicker(BiFunction<EntityPlayer, T, T> ticker){
+		public Variable<T> withTicker(BiFunction<EntityPlayer, T, T> ticker) {
 			this.ticker = ticker;
 			return this;
 		}
 
 		@Override
-		public T update(EntityPlayer player, T value){
+		public T update(EntityPlayer player, T value) {
 			return ticker.apply(player, value);
 		}
 
 		@Override
-		public boolean isPersistent(boolean respawn){
+		public boolean isPersistent(boolean respawn) {
 			return respawn ? persistence.persistsOnRespawn() : persistence.persistsOnDimensionChange();
 		}
 
 		@Override
-		public boolean isSynced(){
+		public boolean isSynced() {
 			return false;// Not implemented for now, maybe we will one day
 		}
 
 		@Override
-		public void write(ByteBuf buf, T value){
+		public void write(ByteBuf buf, T value) {
 			// NYI
 		}
 
 		@Override
-		public T read(ByteBuf buf){
+		public T read(ByteBuf buf) {
 			return null; // NYI
 		}
 	}

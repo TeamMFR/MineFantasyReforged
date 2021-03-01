@@ -1,11 +1,11 @@
 package minefantasy.mfr.api.refine;
 
 public interface ISmokeCarrier {
-    int getSmokeValue();
+	int getSmokeValue();
 
-    void setSmokeValue(int smoke);
+	void setSmokeValue(int smoke);
 
-    int getMaxSmokeStorage();
+	int getMaxSmokeStorage();
 
-    boolean canAbsorbIndirect();
+	boolean canAbsorbIndirect();
 }

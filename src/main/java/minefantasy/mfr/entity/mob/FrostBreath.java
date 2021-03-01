@@ -20,58 +20,58 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FrostBreath extends DragonBreath {
 
-    public FrostBreath(String name) {
-        super(name);
-    }
+	public FrostBreath(String name) {
+		super(name);
+	}
 
-    @Override
-    public DamageSource getDamageSource(EntityDragonBreath breath, EntityLivingBase shooter) {
-        return shooter == null ? new DamageSource("frostblastBase")
-                : (new EntityDamageSourceIndirect("frostblast", breath, shooter));
-    }
+	@Override
+	public DamageSource getDamageSource(EntityDragonBreath breath, EntityLivingBase shooter) {
+		return shooter == null ? new DamageSource("frostblastBase")
+				: (new EntityDamageSourceIndirect("frostblast", breath, shooter));
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getTexture(EntityDragonBreath instance) {
-        return "textures/projectile/dragonbreath_frost";
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getTexture(EntityDragonBreath instance) {
+		return "textures/projectile/dragonbreath_frost";
+	}
 
-    public void onHitEntity(Entity target, EntityDragonBreath instance) {
-        super.onHitEntity(target, instance);
-        if (target instanceof EntityLivingBase) {
-            if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity((EntityLivingBase) target)) {
-                StaminaBar.modifyStaminaValue((EntityLivingBase) target, -1F);
-            }
-            ((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));
-        }
-    }
+	public void onHitEntity(Entity target, EntityDragonBreath instance) {
+		super.onHitEntity(target, instance);
+		if (target instanceof EntityLivingBase) {
+			if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity((EntityLivingBase) target)) {
+				StaminaBar.modifyStaminaValue((EntityLivingBase) target, -1F);
+			}
+			((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));
+		}
+	}
 
-    @Override
-    public float modifyDamage(Entity hit, float dam) {
-        return dam;
-    }
+	@Override
+	public float modifyDamage(Entity hit, float dam) {
+		return dam;
+	}
 
-    @Override
-    public void hitBlock(World world, IBlockState state, EntityDragonBreath instance, BlockPos pos, boolean impact) {
-        IBlockState hit = world.getBlockState(pos);
-        if (!world.isRemote && (impact || instance.rand.nextInt(20) == 0)) {
-            if (ConfigMobs.dragonGriefGeneral && world.isAirBlock(pos.add(0,1,0))) {
-                if (hit.isSideSolid(world, pos, EnumFacing.UP)) {
-                    world.setBlockState(pos.add(0,1,0), Blocks.SNOW_LAYER.getDefaultState());
-                }
-                Block block = hit.getBlock();
-                if (!world.getGameRules().getBoolean("mobGriefing"))
-                    return;
-                if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
-                    world.setBlockState(pos, Blocks.ICE.getDefaultState());
-                }
-                if (block == Blocks.WATER || block == Blocks.LAVA) {
-                    world.setBlockState(pos,  Blocks.OBSIDIAN.getDefaultState());
-                }
-                if (block == Blocks.WATER || block == Blocks.FLOWING_LAVA) {
-                    world.setBlockState(pos,  Blocks.COBBLESTONE.getDefaultState());
-                }
-            }
-        }
-    }
+	@Override
+	public void hitBlock(World world, IBlockState state, EntityDragonBreath instance, BlockPos pos, boolean impact) {
+		IBlockState hit = world.getBlockState(pos);
+		if (!world.isRemote && (impact || instance.rand.nextInt(20) == 0)) {
+			if (ConfigMobs.dragonGriefGeneral && world.isAirBlock(pos.add(0, 1, 0))) {
+				if (hit.isSideSolid(world, pos, EnumFacing.UP)) {
+					world.setBlockState(pos.add(0, 1, 0), Blocks.SNOW_LAYER.getDefaultState());
+				}
+				Block block = hit.getBlock();
+				if (!world.getGameRules().getBoolean("mobGriefing"))
+					return;
+				if (block == Blocks.WATER || block == Blocks.FLOWING_WATER) {
+					world.setBlockState(pos, Blocks.ICE.getDefaultState());
+				}
+				if (block == Blocks.WATER || block == Blocks.LAVA) {
+					world.setBlockState(pos, Blocks.OBSIDIAN.getDefaultState());
+				}
+				if (block == Blocks.WATER || block == Blocks.FLOWING_LAVA) {
+					world.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
+				}
+			}
+		}
+	}
 }

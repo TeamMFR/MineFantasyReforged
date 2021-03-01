@@ -6,16 +6,16 @@ import net.minecraft.block.material.Material;
 
 public class BlockPaneMF extends BlockPane {
 
-    public BlockPaneMF(String name, Material material, boolean recoverable) {
-        super(material, recoverable);
+	public BlockPaneMF(String name, Material material, boolean recoverable) {
+		super(material, recoverable);
 
-        setRegistryName(name);
-        setUnlocalizedName(name);
-    }
+		setRegistryName(name);
+		setUnlocalizedName(name);
+	}
 
-    public BlockPaneMF setBlockSoundType(SoundType soundType) {
-        setSoundType(soundType);
-        return this;
-    }
+	public BlockPaneMF setBlockSoundType(SoundType soundType) {
+		setSoundType(soundType);
+		return this;
+	}
 
 }

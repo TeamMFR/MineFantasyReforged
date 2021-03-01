@@ -7,5 +7,5 @@ import net.minecraft.world.World;
  * to be used
  */
 public interface ISmokeHandler {
-    void spawnSmoke(World world, double x, double y, double z, int value);
+	void spawnSmoke(World world, double x, double y, double z, int value);
 }

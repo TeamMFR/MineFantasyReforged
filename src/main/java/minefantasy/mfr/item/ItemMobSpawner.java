@@ -25,100 +25,94 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemMobSpawner extends ItemComponentMFR {
-    private String entity;
+	private String entity;
 
-    public ItemMobSpawner(String entity) {
-        super("spawn_" + entity);
-        this.entity = entity;
-        this.setCreativeTab(CreativeTabs.MISC);
-    }
+	public ItemMobSpawner(String entity) {
+		super("spawn_" + entity);
+		this.entity = entity;
+		this.setCreativeTab(CreativeTabs.MISC);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack item, @Nullable World world, List list, ITooltipFlag flagIn) {
-        list.add(I18n.format("item.spawn_" + entity + ".desc"));
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack item, @Nullable World world, List list, ITooltipFlag flagIn) {
+		list.add(I18n.format("item.spawn_" + entity + ".desc"));
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item) {
-        return I18n.format("item.spawn_" + entity + ".name");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
+		return I18n.format("item.spawn_" + entity + ".name");
+	}
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer user, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        ItemStack item = user.getHeldItem(hand);
-        if (world.isRemote) {
-            return EnumActionResult.FAIL;
-        } else {
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer user, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack item = user.getHeldItem(hand);
+		if (world.isRemote) {
+			return EnumActionResult.FAIL;
+		} else {
 
-            BlockPos blockpos = pos.offset(facing);
-            double d0 = this.getYOffset(world, blockpos);
-            Entity entity = spawnCreature(world, this.entity, (double)blockpos.getX() + 0.5D, (double)blockpos.getY() + d0, (double)blockpos.getZ() + 0.5D);
+			BlockPos blockpos = pos.offset(facing);
+			double d0 = this.getYOffset(world, blockpos);
+			Entity entity = spawnCreature(world, this.entity, (double) blockpos.getX() + 0.5D, (double) blockpos.getY() + d0, (double) blockpos.getZ() + 0.5D);
 
-            if (entity != null) {
-                if (entity instanceof EntityLivingBase && item.hasDisplayName()) {
-                    entity.setCustomNameTag(item.getDisplayName());
-                }
+			if (entity != null) {
+				if (entity instanceof EntityLivingBase && item.hasDisplayName()) {
+					entity.setCustomNameTag(item.getDisplayName());
+				}
 
-                if (!user.capabilities.isCreativeMode) {
-                    item.shrink(1);
-                }
-            }
+				if (!user.capabilities.isCreativeMode) {
+					item.shrink(1);
+				}
+			}
 
-            return EnumActionResult.PASS;
-        }
-    }
+			return EnumActionResult.PASS;
+		}
+	}
 
-    @Nullable
-    public static Entity spawnCreature(World worldIn, String entityID, double x, double y, double z) {
-        if (entityID != null) {
-            Entity entity = null;
+	@Nullable
+	public static Entity spawnCreature(World worldIn, String entityID, double x, double y, double z) {
+		if (entityID != null) {
+			Entity entity = null;
 
-            ResourceLocation entityResourceLocation = new ResourceLocation(MineFantasyReborn.MOD_ID, entityID);
+			ResourceLocation entityResourceLocation = new ResourceLocation(MineFantasyReborn.MOD_ID, entityID);
 
-            for (int i = 0; i < 1; ++i) {
-                entity = EntityList.createEntityByIDFromName(entityResourceLocation, worldIn);
+			for (int i = 0; i < 1; ++i) {
+				entity = EntityList.createEntityByIDFromName(entityResourceLocation, worldIn);
 
-                if (entity instanceof EntityLiving) {
-                    EntityLiving entityliving = (EntityLiving)entity;
-                    entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
-                    entityliving.rotationYawHead = entityliving.rotationYaw;
-                    entityliving.renderYawOffset = entityliving.rotationYaw;
-                    if (net.minecraftforge.event.ForgeEventFactory.doSpecialSpawn(entityliving, worldIn, (float) x, (float) y, (float) z, null)) return null;
-                    entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
-                    worldIn.spawnEntity(entity);
-                    entityliving.playLivingSound();
-                }
-            }
+				if (entity instanceof EntityLiving) {
+					EntityLiving entityliving = (EntityLiving) entity;
+					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
+					entityliving.rotationYawHead = entityliving.rotationYaw;
+					entityliving.renderYawOffset = entityliving.rotationYaw;
+					if (net.minecraftforge.event.ForgeEventFactory.doSpecialSpawn(entityliving, worldIn, (float) x, (float) y, (float) z, null))
+						return null;
+					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
+					worldIn.spawnEntity(entity);
+					entityliving.playLivingSound();
+				}
+			}
 
-            return entity;
-        }
-        else
-        {
-            return null;
-        }
-    }
+			return entity;
+		} else {
+			return null;
+		}
+	}
 
-    protected double getYOffset(World world, BlockPos pos)
-    {
-        AxisAlignedBB axisalignedbb = (new AxisAlignedBB(pos)).expand(0.0D, -1.0D, 0.0D);
-        List<AxisAlignedBB> list = world.getCollisionBoxes(null, axisalignedbb);
+	protected double getYOffset(World world, BlockPos pos) {
+		AxisAlignedBB axisalignedbb = (new AxisAlignedBB(pos)).expand(0.0D, -1.0D, 0.0D);
+		List<AxisAlignedBB> list = world.getCollisionBoxes(null, axisalignedbb);
 
-        if (list.isEmpty())
-        {
-            return 0.0D;
-        }
-        else
-        {
-            double d0 = axisalignedbb.minY;
+		if (list.isEmpty()) {
+			return 0.0D;
+		} else {
+			double d0 = axisalignedbb.minY;
 
-            for (AxisAlignedBB axisalignedbb1 : list)
-            {
-                d0 = Math.max(axisalignedbb1.maxY, d0);
-            }
+			for (AxisAlignedBB axisalignedbb1 : list) {
+				d0 = Math.max(axisalignedbb1.maxY, d0);
+			}
 
-            return d0 - (double)pos.getY();
-        }
-    }
+			return d0 - (double) pos.getY();
+		}
+	}
 }

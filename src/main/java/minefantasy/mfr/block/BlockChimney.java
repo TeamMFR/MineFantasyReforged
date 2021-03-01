@@ -16,75 +16,72 @@ import net.minecraft.world.World;
 import javax.annotation.Nonnull;
 
 public class BlockChimney extends Block {
-    public int size;
-    /**
-     * Weather it can absorb smoke indirectly (not directly above a source)
-     */
-    public boolean isIndirect;
-    private boolean isWide;
-    private boolean isPipe;
+	public int size;
+	/**
+	 * Weather it can absorb smoke indirectly (not directly above a source)
+	 */
+	public boolean isIndirect;
+	private boolean isWide;
+	private boolean isPipe;
 
-    public BlockChimney(String type, boolean wide, boolean indirect, int size) {
-        super(Material.ROCK);
-        this.isIndirect = indirect;
-        isWide = wide;
-        this.size = size;
-        if (wide) {
-            this.setLightOpacity(255);
-        }
+	public BlockChimney(String type, boolean wide, boolean indirect, int size) {
+		super(Material.ROCK);
+		this.isIndirect = indirect;
+		isWide = wide;
+		this.size = size;
+		if (wide) {
+			this.setLightOpacity(255);
+		}
 
-        setRegistryName("chimney_" + type + (isWide ? "_wide" : "_thin"));
-        setUnlocalizedName(("chimney." + type + (isWide ? ".wide" : "")));
-        this.setSoundType(SoundType.METAL);
-        this.setHardness(5F);
-        this.setResistance(10F);
-        this.setCreativeTab(MineFantasyTabs.tabUtil);
-    }
+		setRegistryName("chimney_" + type + (isWide ? "_wide" : "_thin"));
+		setUnlocalizedName(("chimney." + type + (isWide ? ".wide" : "")));
+		this.setSoundType(SoundType.METAL);
+		this.setHardness(5F);
+		this.setResistance(10F);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this);
-    }
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this);
+	}
 
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityChimney();
-    }
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityChimney();
+	}
 
-    public boolean hasTileEntity(IBlockState state)
-    {
-        return true;
-    }
+	public boolean hasTileEntity(IBlockState state) {
+		return true;
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        if (isWide){
-            return new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F);
-        }
-        else{
-            return new AxisAlignedBB(1F / 4F, 0, 1F / 4F, 3F / 4F, 1F, 3F / 4F);
-        }
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+		if (isWide) {
+			return new AxisAlignedBB(0F, 0F, 0F, 1F, 1F, 1F);
+		} else {
+			return new AxisAlignedBB(1F / 4F, 0, 1F / 4F, 3F / 4F, 1F, 3F / 4F);
+		}
+	}
 
+	public boolean isWideChimney() {
+		return isWide;
+	}
 
-    public boolean isWideChimney() {
-        return isWide;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return isWide;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return isWide;
-    }
+	public Block setPipe() {
+		isPipe = true;
+		isWide = false;
+		return this;
+	}
 
-    public Block setPipe() {
-        isPipe = true;
-        isWide = false;
-        return this;
-    }
-
-    public boolean isPipe() {
-        return isPipe;
-    }
+	public boolean isPipe() {
+		return isPipe;
+	}
 
 }

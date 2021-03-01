@@ -23,57 +23,55 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 /**
  * @author Anonymous Productions
  */
-public class CommonProxy implements ISmokeHandler{
+public class CommonProxy implements ISmokeHandler {
 
+	public World getClientWorld() {
+		return null;
+	}
 
+	public void registerMain() {
+		AmmoMechanics.addHandler(new ArrowFireFlint());
+		AmmoMechanics.addHandler(new ArrowFirerMF());
+		SmokeMechanics.handler = this;
+	}
 
-    public World getClientWorld() {
-        return null;
-    }
+	public void preInit(FMLPreInitializationEvent e) {
+	}
 
-    public void registerMain() {
-        AmmoMechanics.addHandler(new ArrowFireFlint());
-        AmmoMechanics.addHandler(new ArrowFirerMF());
-        SmokeMechanics.handler = this;
-    }
+	public void registerTickHandlers() {
+		FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
+		MinecraftForge.EVENT_BUS.register(new EventManagerMFRToRemove());
+		MinecraftForge.EVENT_BUS.register(new CombatMechanics());
+		MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
+		MinecraftForge.EVENT_BUS.register(new ArrowHandler());
+	}
 
-    public void preInit(FMLPreInitializationEvent e) {
-    }
+	public EntityPlayer getClientPlayer() {
+		return null;
+	}
 
-    public void registerTickHandlers() {
-        FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
-        MinecraftForge.EVENT_BUS.register(new EventManagerMFRToRemove());
-        MinecraftForge.EVENT_BUS.register(new CombatMechanics());
-        MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
-        MinecraftForge.EVENT_BUS.register(new ArrowHandler());
-    }
+	@Override
+	public void spawnSmoke(World world, double x, double y, double z, int value) {
+		XSTRandom random = new XSTRandom();
+		for (int a = 0; a < value; a++) {
+			float sprayRange = 0.005F;
+			float sprayX = (random.nextFloat() * sprayRange) - (sprayRange / 2);
+			float sprayZ = (random.nextFloat() * sprayRange) - (sprayRange / 2);
+			float height = 0.001F;
+			if (random.nextInt(2) == 0) {
+				EntitySmoke smoke = new EntitySmoke(world, x, y - 0.5D, z, sprayX, height, sprayZ);
+				world.spawnEntity(smoke);
+			}
+		}
+	}
 
-    public EntityPlayer getClientPlayer() {
-        return null;
-    }
+	public void postInit(FMLPostInitializationEvent e) {
+		CustomStone.init();
+	}
 
-    @Override
-    public void spawnSmoke(World world, double x, double y, double z, int value) {
-        XSTRandom random = new XSTRandom();
-        for (int a = 0; a < value; a++) {
-            float sprayRange = 0.005F;
-            float sprayX = (random.nextFloat() * sprayRange) - (sprayRange / 2);
-            float sprayZ = (random.nextFloat() * sprayRange) - (sprayRange / 2);
-            float height = 0.001F;
-            if (random.nextInt(2) == 0) {
-                EntitySmoke smoke = new EntitySmoke(world, x, y - 0.5D, z, sprayX, height, sprayZ);
-                world.spawnEntity(smoke);
-            }
-        }
-    }
-
-    public void postInit(FMLPostInitializationEvent e) {
-        CustomStone.init();
-    }
-
-    public void addClientRegister(IClientRegister register) {
-        //NOOP for commonProxy
-    }
+	public void addClientRegister(IClientRegister register) {
+		//NOOP for commonProxy
+	}
 
 	public void preInit() {
 		//NOOP for commonProxy

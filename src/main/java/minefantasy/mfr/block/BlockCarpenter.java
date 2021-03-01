@@ -17,61 +17,61 @@ import net.minecraft.world.World;
 
 public class BlockCarpenter extends BlockTileEntity<TileEntityCarpenter> {
 
-    public BlockCarpenter() {
-        super(Material.WOOD);
+	public BlockCarpenter() {
+		super(Material.WOOD);
 
-        setRegistryName("carpenter_bench");
-        setUnlocalizedName("carpenter_bench");
-        this.setSoundType(SoundType.WOOD);
-        this.setHardness(5F);
-        this.setResistance(2F);
-        this.setLightOpacity(0);
-        this.setCreativeTab(MineFantasyTabs.tabUtil);
-    }
+		setRegistryName("carpenter_bench");
+		setUnlocalizedName("carpenter_bench");
+		this.setSoundType(SoundType.WOOD);
+		this.setHardness(5F);
+		this.setResistance(2F);
+		this.setLightOpacity(0);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this);
-    }
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this);
+	}
 
-    @Override
-    public TileEntity createTileEntity(World world, IBlockState state) {
-        return new TileEntityCarpenter();
-    }
+	@Override
+	public TileEntity createTileEntity(World world, IBlockState state) {
+		return new TileEntityCarpenter();
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        world.setBlockState(pos, state, 2);
-    }
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
+		world.setBlockState(pos, state, 2);
+	}
 
-    /**
-     * Called upon block activation (right click on the block.)
-     * For the carpenter, clicking at the top attempts to progress the crafting (if the in-hand item is valid or the hand is empty), clicking on the side opens the gui
-     */
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntityCarpenter tile = (TileEntityCarpenter) getTile(world, pos);
-        if (tile != null && (world.isAirBlock(pos.add(0,1,0)) || !world.isSideSolid(pos.add(0,1,0), EnumFacing.DOWN))) {
-            if (facing != EnumFacing.UP || !tile.tryCraft(player) && !world.isRemote) {
-                tile.openGUI(world, player);
-            }
-        }
-        return true;
-    }
+	/**
+	 * Called upon block activation (right click on the block.)
+	 * For the carpenter, clicking at the top attempts to progress the crafting (if the in-hand item is valid or the hand is empty), clicking on the side opens the gui
+	 */
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntityCarpenter tile = (TileEntityCarpenter) getTile(world, pos);
+		if (tile != null && (world.isAirBlock(pos.add(0, 1, 0)) || !world.isSideSolid(pos.add(0, 1, 0), EnumFacing.DOWN))) {
+			if (facing != EnumFacing.UP || !tile.tryCraft(player) && !world.isRemote) {
+				tile.openGUI(world, player);
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-        TileEntityCarpenter tile = (TileEntityCarpenter) getTile(world, pos);
-        if (tile != null) {
-            tile.tryCraft(user);
-        }
-    }
+	@Override
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
+		TileEntityCarpenter tile = (TileEntityCarpenter) getTile(world, pos);
+		if (tile != null) {
+			tile.tryCraft(user);
+		}
+	}
 }

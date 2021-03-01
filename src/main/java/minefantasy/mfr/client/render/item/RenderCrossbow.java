@@ -20,109 +20,106 @@ import java.util.function.Supplier;
 
 @SideOnly(Side.CLIENT)
 public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
-    public RenderCrossbow(Supplier<ModelResourceLocation> wrappedModel) {
-        super(wrappedModel);
-    }
+	public RenderCrossbow(Supplier<ModelResourceLocation> wrappedModel) {
+		super(wrappedModel);
+	}
 
-    @Override
-    public void renderItem(ItemStack stack, TransformType type) {
-        GlStateManager.pushMatrix();
+	@Override
+	public void renderItem(ItemStack stack, TransformType type) {
+		GlStateManager.pushMatrix();
 
-        if (type != TransformType.GUI) {
-            GlStateManager.scale(2F, 2F, 2F);
-            GlStateManager.translate(0.2F, 0.5F, 0.35F);
-            renderPart(stack, "stock", type);
-            renderPart(stack, "mechanism", type);
-            renderPart(stack, "muzzle", type);
-            renderPart(stack, "mod", type);
-            if (AmmoMechanics.isFirearmLoaded(stack)){
-                renderString("string_loaded");
-            }
-            else{
-                renderString( "string_unloaded");
-            }
-            renderArrow(stack);
-        }
-        else{
-            GlStateManager.scale(1.5F, 1.5F, 1.5F);
-            GlStateManager.translate(0.2F, 0.5F, 0.35F);
-            renderPart(stack, "stock", type);
-            renderPart(stack, "mechanism", type);
-            renderPart(stack, "muzzle", type);
-            renderPart(stack, "mod", type);
-            if (AmmoMechanics.isFirearmLoaded(stack)){
-                renderString("string_loaded");
-            }
-            else{
-                renderString( "string_unloaded");
-            }
-        }
+		if (type != TransformType.GUI) {
+			GlStateManager.scale(2F, 2F, 2F);
+			GlStateManager.translate(0.2F, 0.5F, 0.35F);
+			renderPart(stack, "stock", type);
+			renderPart(stack, "mechanism", type);
+			renderPart(stack, "muzzle", type);
+			renderPart(stack, "mod", type);
+			if (AmmoMechanics.isFirearmLoaded(stack)) {
+				renderString("string_loaded");
+			} else {
+				renderString("string_unloaded");
+			}
+			renderArrow(stack);
+		} else {
+			GlStateManager.scale(1.5F, 1.5F, 1.5F);
+			GlStateManager.translate(0.2F, 0.5F, 0.35F);
+			renderPart(stack, "stock", type);
+			renderPart(stack, "mechanism", type);
+			renderPart(stack, "muzzle", type);
+			renderPart(stack, "mod", type);
+			if (AmmoMechanics.isFirearmLoaded(stack)) {
+				renderString("string_loaded");
+			} else {
+				renderString("string_unloaded");
+			}
+		}
 
-        GlStateManager.popMatrix();
-    }
+		GlStateManager.popMatrix();
+	}
 
-    private void renderPart(ItemStack stack, String part_name, TransformType type) {
-        boolean isArms = part_name.equalsIgnoreCase("mechanism");
-        boolean isStock = part_name.equalsIgnoreCase("stock");
+	private void renderPart(ItemStack stack, String part_name, TransformType type) {
+		boolean isArms = part_name.equalsIgnoreCase("mechanism");
+		boolean isStock = part_name.equalsIgnoreCase("stock");
 
-        ItemCrossbow crossbow = (ItemCrossbow) stack.getItem();
-        ItemStack part = new ItemStack((Item) crossbow.getItem(stack, part_name));
+		ItemCrossbow crossbow = (ItemCrossbow) stack.getItem();
+		ItemStack part = new ItemStack((Item) crossbow.getItem(stack, part_name));
 
-        GlStateManager.pushMatrix();
+		GlStateManager.pushMatrix();
 
-        if (type != TransformType.GUI){
-            if (isArms){
-                GlStateManager.rotate(90, -1, 1, 0);
-            }
-        }
+		if (type != TransformType.GUI) {
+			if (isArms) {
+				GlStateManager.rotate(90, -1, 1, 0);
+			}
+		}
 
-        Minecraft.getMinecraft().getRenderItem().renderItem(part, TransformType.NONE);
+		Minecraft.getMinecraft().getRenderItem().renderItem(part, TransformType.NONE);
 
-        GlStateManager.popMatrix();
+		GlStateManager.popMatrix();
 
-    }
+	}
 
-    private void renderString(String part_name){
-        GlStateManager.pushMatrix();
+	private void renderString(String part_name) {
+		GlStateManager.pushMatrix();
 
-        ItemStack string_stack = part_name.equalsIgnoreCase("string_unloaded") ? new ItemStack(ComponentListMFR.CROSSBOW_STRING_UNLOADED) : new ItemStack(ComponentListMFR.CROSSBOW_STRING_LOADED);
-        GlStateManager.rotate(90, -1, 1, 0);
+		ItemStack string_stack = part_name.equalsIgnoreCase("string_unloaded") ? new ItemStack(ComponentListMFR.CROSSBOW_STRING_UNLOADED) : new ItemStack(ComponentListMFR.CROSSBOW_STRING_LOADED);
+		GlStateManager.rotate(90, -1, 1, 0);
 
-        Minecraft.getMinecraft().getRenderItem().renderItem(string_stack, TransformType.NONE);
+		Minecraft.getMinecraft().getRenderItem().renderItem(string_stack, TransformType.NONE);
 
-        GlStateManager.popMatrix();
-    }
+		GlStateManager.popMatrix();
+	}
 
-    private void renderArrow(ItemStack stack){
-        ItemStack arrowStack = AmmoMechanics.getArrowOnBow(stack);
+	private void renderArrow(ItemStack stack) {
+		ItemStack arrowStack = AmmoMechanics.getArrowOnBow(stack);
 
-        if (!arrowStack.isEmpty() && AmmoMechanics.isFirearmLoaded(stack)) {
+		if (!arrowStack.isEmpty() && AmmoMechanics.isFirearmLoaded(stack)) {
 
-            GlStateManager.pushMatrix(); //arrow start
+			GlStateManager.pushMatrix(); //arrow start
 
-            GlStateManager.scale(0.375F, 0.375F, 0.375F);
-            GlStateManager.translate(0.2F,-0.05F,0F);
-            GlStateManager.rotate(90, 0, 0, 1);
-            GlStateManager.rotate(90, 1, 1, 0);
+			GlStateManager.scale(0.375F, 0.375F, 0.375F);
+			GlStateManager.translate(0.2F, -0.05F, 0F);
+			GlStateManager.rotate(90, 0, 0, 1);
+			GlStateManager.rotate(90, 1, 1, 0);
 
-            Minecraft.getMinecraft().getRenderItem().renderItem(arrowStack, TransformType.NONE);
+			Minecraft.getMinecraft().getRenderItem().renderItem(arrowStack, TransformType.NONE);
 
-            GlStateManager.popMatrix(); //arrow end
-        }
-    }
+			GlStateManager.popMatrix(); //arrow end
+		}
+	}
 
-    @Override
-    public IModelState getTransforms() {
-        return TransformUtils.DEFAULT_BOW;
-    }
+	@Override
+	public IModelState getTransforms() {
+		return TransformUtils.DEFAULT_BOW;
+	}
 
-    @Override
-    public boolean isAmbientOcclusion() {
-        return false;
-    }
+	@Override
+	public boolean isAmbientOcclusion() {
+		return false;
+	}
 
-    @Override
-    public boolean isGui3d() {
-        return true;
-    }
+	@Override
+	public boolean isGui3d() {
+		return true;
+	}
 }

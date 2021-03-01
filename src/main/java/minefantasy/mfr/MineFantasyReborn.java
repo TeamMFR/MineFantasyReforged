@@ -117,8 +117,8 @@ public class MineFantasyReborn {
 
 		PlayerData.register();
 
-//		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
-//		CarpenterRecipeManager.INSTANCE.preInit();
+		//		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
+		//		CarpenterRecipeManager.INSTANCE.preInit();
 
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
 		MineFantasyReborn.LOG.info("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
@@ -156,7 +156,7 @@ public class MineFantasyReborn {
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(this);
 
-//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
+		//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		GameRegistry.registerWorldGenerator(WORLD_GEN_GEOLOGICAL, 5);
 		GameRegistry.registerWorldGenerator(WORLD_GEN_BIOLOGICAL, 5);

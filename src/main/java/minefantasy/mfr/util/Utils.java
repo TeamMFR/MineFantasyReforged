@@ -25,7 +25,7 @@ public class Utils {
 				|| item2.getItemDamage() == item1.getItemDamage());
 	}
 
-	public static String convertSnakeCaseToSplitCapitalized(String string){
+	public static String convertSnakeCaseToSplitCapitalized(String string) {
 		return WordUtils.capitalize(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_UNDERSCORE, string).replaceAll("_", " "));
 	}
 

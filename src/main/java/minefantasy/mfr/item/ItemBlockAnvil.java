@@ -10,16 +10,16 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class ItemBlockAnvil extends ItemBlockBase {
-    private BlockAnvilMF anvil;
+	private BlockAnvilMF anvil;
 
-    public ItemBlockAnvil(Block block) {
-        super(block);
-        this.anvil = (BlockAnvilMF) block;
-    }
+	public ItemBlockAnvil(Block block) {
+		super(block);
+		this.anvil = (BlockAnvilMF) block;
+	}
 
-    @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
-        list.add(I18n.format("attribute.mfcrafttier.name") + ": " + anvil.getTier());
-        super.addInformation(item, world, list, flag);
-    }
+	@Override
+	public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+		list.add(I18n.format("attribute.mfcrafttier.name") + ": " + anvil.getTier());
+		super.addInformation(item, world, list, flag);
+	}
 }

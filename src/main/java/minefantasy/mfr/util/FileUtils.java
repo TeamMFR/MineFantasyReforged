@@ -57,7 +57,7 @@ public class FileUtils {
 					itr = Files.walk(root).iterator();
 				}
 				catch (IOException e) {
-					System.out.println("Error iterating filesystem for: {}" + root + e );
+					System.out.println("Error iterating filesystem for: {}" + root + e);
 					return;
 				}
 

@@ -11,13 +11,13 @@ import javax.annotation.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class RenderArrowMF extends RenderArrow<EntityArrowMFR> {
-    public RenderArrowMF(RenderManager renderManager) {
-        super(renderManager);
-    }
+	public RenderArrowMF(RenderManager renderManager) {
+		super(renderManager);
+	}
 
-    @Override
-    @Nullable
-    protected ResourceLocation getEntityTexture(EntityArrowMFR arrow){
-        return new ResourceLocation("minefantasyreborn:textures/projectile/" + arrow.getTexture() + ".png");
-    }
+	@Override
+	@Nullable
+	protected ResourceLocation getEntityTexture(EntityArrowMFR arrow) {
+		return new ResourceLocation("minefantasyreborn:textures/projectile/" + arrow.getTexture() + ".png");
+	}
 }

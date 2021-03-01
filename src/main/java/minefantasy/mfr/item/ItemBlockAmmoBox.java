@@ -28,57 +28,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
-    public ItemBlockAmmoBox(BlockTileEntity block, IItemRenderer renderer) {
-        super(block);
-        //noinspection ConstantConditions
-        setRegistryName(block.getRegistryName());
-        ModelResourceLocation modelLocation = new ModelResourceLocation(block.getRegistryName(), "special");
-        ModelRegistryHelper.registerItemRenderer(this, renderer);
-        ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(block.getTexture()));
-        ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
-            @Override
-            @SideOnly(Side.CLIENT)
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return modelLocation;
-            }
-        });
-    }
+	public ItemBlockAmmoBox(BlockTileEntity block, IItemRenderer renderer) {
+		super(block);
+		//noinspection ConstantConditions
+		setRegistryName(block.getRegistryName());
+		ModelResourceLocation modelLocation = new ModelResourceLocation(block.getRegistryName(), "special");
+		ModelRegistryHelper.registerItemRenderer(this, renderer);
+		ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(block.getTexture()));
+		ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modelLocation;
+			}
+		});
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack item, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Ammo) && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Stock)) {
-            ItemStack ammo = new ItemStack(item.getTagCompound().getCompoundTag(BlockAmmoBox.NBT_Ammo));
-            int stock = item.getTagCompound().getInteger(BlockAmmoBox.NBT_Stock);
-            if (!ammo.isEmpty()) {
-                tooltip.add(ammo.getDisplayName() + " x" + stock);
-            }
-        }
-        CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-        if (material != null) {
-            tooltip.add(I18n.format("attribute.box.capacity.name",
-                    TileEntityAmmoBox.getCapacity(material.tier)));
-        }
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack item, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Ammo) && item.getTagCompound().hasKey(BlockAmmoBox.NBT_Stock)) {
+			ItemStack ammo = new ItemStack(item.getTagCompound().getCompoundTag(BlockAmmoBox.NBT_Ammo));
+			int stock = item.getTagCompound().getInteger(BlockAmmoBox.NBT_Stock);
+			if (!ammo.isEmpty()) {
+				tooltip.add(ammo.getDisplayName() + " x" + stock);
+			}
+		}
+		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
+		if (material != null) {
+			tooltip.add(I18n.format("attribute.box.capacity.name",
+					TileEntityAmmoBox.getCapacity(material.tier)));
+		}
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(itemIn)) {
-            return;
-        }
-        ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-        for (CustomMaterial customMat : wood) {
-            items.add(this.construct(customMat.name));
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+		if (!isInCreativeTab(itemIn)) {
+			return;
+		}
+		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
+		for (CustomMaterial customMat : wood) {
+			items.add(this.construct(customMat.name));
+		}
+	}
 
-    private ItemStack construct(String name) {
-        return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
-    }
+	private ItemStack construct(String name) {
+		return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item) {
-        return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
+		return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
+	}
 }

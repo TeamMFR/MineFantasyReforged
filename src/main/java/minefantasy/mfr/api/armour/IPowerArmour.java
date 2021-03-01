@@ -5,17 +5,17 @@ import net.minecraft.util.DamageSource;
 
 public interface IPowerArmour {
 
-    boolean isFullyArmoured();
+	boolean isFullyArmoured();
 
-    float modifyDamage(EntityLivingBase user, float damage, DamageSource src);
+	float modifyDamage(EntityLivingBase user, float damage, DamageSource src);
 
-    boolean isPowered();
+	boolean isPowered();
 
-    /**
-     * Is armour covering a particular limb
-     *
-     * @param limb (head, body, left_arm, right_arm, left_leg, right_leg)
-     */
-    boolean isArmoured(String limb);
+	/**
+	 * Is armour covering a particular limb
+	 *
+	 * @param limb (head, body, left_arm, right_arm, left_leg, right_leg)
+	 */
+	boolean isArmoured(String limb);
 
 }

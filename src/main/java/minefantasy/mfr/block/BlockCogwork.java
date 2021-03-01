@@ -22,75 +22,73 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCogwork extends BlockDirectional {
-    private boolean isMain;
+	private boolean isMain;
 
-    public BlockCogwork(String name, boolean helmet) {
-        super(Material.CIRCUITS);
-        this.isMain = helmet;
+	public BlockCogwork(String name, boolean helmet) {
+		super(Material.CIRCUITS);
+		this.isMain = helmet;
 
-        setRegistryName(name);
-        setUnlocalizedName(name);
-        this.setTickRandomly(true);
-        this.setCreativeTab(MineFantasyTabs.tabGadget);
-        this.setHardness(1F);
-        this.setResistance(5F);
-        this.setLightOpacity(0);
-    }
+		setRegistryName(name);
+		setUnlocalizedName(name);
+		this.setTickRandomly(true);
+		this.setCreativeTab(MineFantasyTabs.tabGadget);
+		this.setHardness(1F);
+		this.setResistance(5F);
+		this.setLightOpacity(0);
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote && ToolHelper.getToolTypeFromStack(player.getHeldItem(hand)) == Tool.SPANNER) {
-            return tryBuild(player, world, pos);
-        }
-        return false;
-    }
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!world.isRemote && ToolHelper.getToolTypeFromStack(player.getHeldItem(hand)) == Tool.SPANNER) {
+			return tryBuild(player, world, pos);
+		}
+		return false;
+	}
 
-    public boolean tryBuild(EntityPlayer builder, World world, BlockPos pos) {
-        if (isMain && PowerArmour.isStationBlock(world, pos.add(0,2,0))
-                && world.getBlockState(pos.add(0,-1,0)).getBlock() == MineFantasyBlocks.BLOCKCOGWORK_LEGS
-                && world.getBlockState(pos.add(0,1,0)).getBlock() == MineFantasyBlocks.BLOCKCOGWORK_HELM) {
-            if (!world.isRemote) {
-                world.setBlockState(pos, getDefaultState());
-                world.setBlockState(pos.add(0,-1,0), getDefaultState());
-                world.setBlockState(pos.add(0,1,0), getDefaultState());
+	public boolean tryBuild(EntityPlayer builder, World world, BlockPos pos) {
+		if (isMain && PowerArmour.isStationBlock(world, pos.add(0, 2, 0))
+				&& world.getBlockState(pos.add(0, -1, 0)).getBlock() == MineFantasyBlocks.BLOCKCOGWORK_LEGS
+				&& world.getBlockState(pos.add(0, 1, 0)).getBlock() == MineFantasyBlocks.BLOCKCOGWORK_HELM) {
+			if (!world.isRemote) {
+				world.setBlockState(pos, getDefaultState());
+				world.setBlockState(pos.add(0, -1, 0), getDefaultState());
+				world.setBlockState(pos.add(0, 1, 0), getDefaultState());
 
-                EntityCogwork suit = new EntityCogwork(world);
-                int angle = getAngleFor(builder);
-                suit.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() - 0.95D, pos.getZ() + 0.5D, angle, 0.0F);
-                suit.rotationYaw = suit.rotationYawHead = suit.prevRotationYaw = suit.prevRotationYawHead = angle;
-                world.spawnEntity(suit);
-            }
+				EntityCogwork suit = new EntityCogwork(world);
+				int angle = getAngleFor(builder);
+				suit.setLocationAndAngles(pos.getX() + 0.5D, pos.getY() - 0.95D, pos.getZ() + 0.5D, angle, 0.0F);
+				suit.rotationYaw = suit.rotationYawHead = suit.prevRotationYaw = suit.prevRotationYawHead = angle;
+				world.spawnEntity(suit);
+			}
 
-        }
-        return false;
-    }
+		}
+		return false;
+	}
 
-    private int getAngleFor(EntityPlayer user) {
-        int l = MathHelper.floor(user.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
-        return l * 90;
-    }
+	private int getAngleFor(EntityPlayer user) {
+		int l = MathHelper.floor(user.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
+		return l * 90;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.CUTOUT;
-    }
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 
-    /**
-     * Called when the block is placed in the world.
-     */
-    @Override
-    public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-        world.setBlockState(pos, state, 2);
-    }
+	/**
+	 * Called when the block is placed in the world.
+	 */
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
+		world.setBlockState(pos, state, 2);
+	}
 }

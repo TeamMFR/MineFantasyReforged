@@ -45,8 +45,7 @@ public class RenderLance extends WrappedItemModel implements IItemRenderer {
 				if (speed > 4.0F) {
 					if (transformType == TransformType.FIRST_PERSON_RIGHT_HAND || transformType == TransformType.FIRST_PERSON_LEFT_HAND) {
 						r = 90F;
-					}
-					else{
+					} else {
 						r = 20F;
 						GlStateManager.translate(0.0F, -0.11F, 0F);
 					}
@@ -55,8 +54,7 @@ public class RenderLance extends WrappedItemModel implements IItemRenderer {
 
 			GlStateManager.rotate(r, 0, 0, 1);
 
-		}
-		else if (transformType == TransformType.GROUND){
+		} else if (transformType == TransformType.GROUND) {
 			GlStateManager.scale(3F, 3F, 1F);
 		}
 		renderWrapped(stack);

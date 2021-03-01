@@ -31,183 +31,183 @@ import java.util.Random;
  * @author Anonymous Productions
  */
 public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
-    private Random rand = new Random();
-    private int itemRarity;
+	private Random rand = new Random();
+	private int itemRarity;
 
-    public ItemClimbingPick(String name, ToolMaterial material, int rarity) {
-        super(material);
-        itemRarity = rarity;
-        setRegistryName(name);
-        setUnlocalizedName(name);
+	public ItemClimbingPick(String name, ToolMaterial material, int rarity) {
+		super(material);
+		itemRarity = rarity;
+		setRegistryName(name);
+		setUnlocalizedName(name);
 
-        setCreativeTab(MineFantasyTabs.tabGadget);
-        setMaxDamage(material.getMaxUses());
+		setCreativeTab(MineFantasyTabs.tabGadget);
+		setMaxDamage(material.getMaxUses());
 
-        MineFantasyReborn.PROXY.addClientRegister(this);
-    }
+		MineFantasyReborn.PROXY.addClientRegister(this);
+	}
 
-    public static boolean tryPerformAbility(EntityPlayer user, float points) {
-        if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
-            points *= StaminaBar.getClimbinbDecayModifier(user, true);
-            if (StaminaBar.isStaminaAvailable(user, points, true)) {
-                ItemWeaponMFR.applyFatigue(user, points);
-                return true;
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
+	public static boolean tryPerformAbility(EntityPlayer user, float points) {
+		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
+			points *= StaminaBar.getClimbinbDecayModifier(user, true);
+			if (StaminaBar.isStaminaAvailable(user, points, true)) {
+				ItemWeaponMFR.applyFatigue(user, points);
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return true;
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        int lvl = itemRarity + 1;
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		int lvl = itemRarity + 1;
 
-        if (item.isItemEnchanted()) {
-            if (lvl == 0) {
-                lvl++;
-            }
-            lvl++;
-        }
-        if (lvl >= ToolListMFR.RARITY.length) {
-            lvl = ToolListMFR.RARITY.length - 1;
-        }
-        return ToolListMFR.RARITY[lvl];
-    }
+		if (item.isItemEnchanted()) {
+			if (lvl == 0) {
+				lvl++;
+			}
+			lvl++;
+		}
+		if (lvl >= ToolListMFR.RARITY.length) {
+			lvl = ToolListMFR.RARITY.length - 1;
+		}
+		return ToolListMFR.RARITY[lvl];
+	}
 
-    @Override
-    public ToolMaterial getMaterial() {
-        return toolMaterial;
-    }
+	@Override
+	public ToolMaterial getMaterial() {
+		return toolMaterial;
+	}
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return ToolHelper.setDuraOnQuality(stack, super.getMaxDamage());
-    }
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return ToolHelper.setDuraOnQuality(stack, super.getMaxDamage());
+	}
 
-    public boolean isInWall(EntityPlayer player, boolean init) {
-        if (player.getHeldItem(EnumHand.MAIN_HAND) == null)
-            return false;
+	public boolean isInWall(EntityPlayer player, boolean init) {
+		if (player.getHeldItem(EnumHand.MAIN_HAND) == null)
+			return false;
 
-        World world = player.world;
-        RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
+		World world = player.world;
+		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-        if (rayTraceResult == null) {
-            return false;
-        } else {
-            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = rayTraceResult.getBlockPos();
+		if (rayTraceResult == null) {
+			return false;
+		} else {
+			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+				BlockPos pos = rayTraceResult.getBlockPos();
 
-                NBTTagCompound nbt = getOrCreateNBT(player.getHeldItemMainhand());
-                if (init) {
-                    nbt.setInteger("MF_HeldPosX", pos.getX());
-                    nbt.setInteger("MF_HeldPosY", pos.getY());
-                    nbt.setInteger("MF_HeldPosZ", pos.getZ());
-                } else {
-                    int x1 = nbt.getInteger("MF_HeldPosX");
-                    int y1 = nbt.getInteger("MF_HeldPosY");
-                    int z1 = nbt.getInteger("MF_HeldPosZ");
+				NBTTagCompound nbt = getOrCreateNBT(player.getHeldItemMainhand());
+				if (init) {
+					nbt.setInteger("MF_HeldPosX", pos.getX());
+					nbt.setInteger("MF_HeldPosY", pos.getY());
+					nbt.setInteger("MF_HeldPosZ", pos.getZ());
+				} else {
+					int x1 = nbt.getInteger("MF_HeldPosX");
+					int y1 = nbt.getInteger("MF_HeldPosY");
+					int z1 = nbt.getInteger("MF_HeldPosZ");
 
-                    if (x1 !=  pos.getX() || y1 !=  pos.getY() || z1 !=  pos.getZ()) {
-                        player.stopActiveHand();
-                        return false;
-                    }
-                }
+					if (x1 != pos.getX() || y1 != pos.getY() || z1 != pos.getZ()) {
+						player.stopActiveHand();
+						return false;
+					}
+				}
 
-                IBlockState block = world.getBlockState(pos);
+				IBlockState block = world.getBlockState(pos);
 
-                if (player.posY < (pos.getY() + 2.8F) && player.posY > (pos.getY() - 3)
-                        && player.getDistance(pos.getX() + 0.5, player.posY, pos.getZ() + 0.5) < 1D && player.fallDistance < 5
-                        && block.getMaterial().isSolid() && block.isOpaqueCube()) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+				if (player.posY < (pos.getY() + 2.8F) && player.posY > (pos.getY() - 3)
+						&& player.getDistance(pos.getX() + 0.5, player.posY, pos.getZ() + 0.5) < 1D && player.fallDistance < 5
+						&& block.getMaterial().isSolid() && block.isOpaqueCube()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    private NBTTagCompound getOrCreateNBT(ItemStack item) {
-        if (!item.hasTagCompound()) {
-            item.setTagCompound(new NBTTagCompound());
-        }
-        return item.getTagCompound();
-    }
+	private NBTTagCompound getOrCreateNBT(ItemStack item) {
+		if (!item.hasTagCompound()) {
+			item.setTagCompound(new NBTTagCompound());
+		}
+		return item.getTagCompound();
+	}
 
-    @Override
-    public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
-        float cost = 0.5F;
-        if (stack.getItemDamage() >= stack.getMaxDamage()) {
-            player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
-        }
-        World world = player.world;
-        RayTraceResult rayTraceResult = this.rayTrace(world, (EntityPlayer) player, true);
+	@Override
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
+		float cost = 0.5F;
+		if (stack.getItemDamage() >= stack.getMaxDamage()) {
+			player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+		}
+		World world = player.world;
+		RayTraceResult rayTraceResult = this.rayTrace(world, (EntityPlayer) player, true);
 
-        if (rayTraceResult == null) {
-            if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
-                player.stopActiveHand();
-            }
-            return;
-        } else {
-            if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = rayTraceResult.getBlockPos();
-                IBlockState block = world.getBlockState(pos);
+		if (rayTraceResult == null) {
+			if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
+				player.stopActiveHand();
+			}
+			return;
+		} else {
+			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+				BlockPos pos = rayTraceResult.getBlockPos();
+				IBlockState block = world.getBlockState(pos);
 
-                if (isInWall((EntityPlayer) player, false)) {
-                    if (!player.isSwingInProgress) {
-                        cost *= 0.5F;
-                        player.motionY = 0;
-                    } else {
+				if (isInWall((EntityPlayer) player, false)) {
+					if (!player.isSwingInProgress) {
+						cost *= 0.5F;
+						player.motionY = 0;
+					} else {
 
-                        player.fallDistance = 0;
-                        if (!player.isSneaking() && player.posY < pos.getY() + 3) {
-                            player.motionY = 0.05D;
-                        } else if (player.isSneaking() && player.posY > pos.getY() - 2) {
-                            player.motionY = -0.05D;
-                            cost *= 0.75F;
-                        } else {
-                            player.motionY = 0;
-                            cost *= 0.5F;
-                        }
-                    }
-                }
-            }
-        }
-        if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
-            player.stopActiveHand();
-        }
-    }
+						player.fallDistance = 0;
+						if (!player.isSneaking() && player.posY < pos.getY() + 3) {
+							player.motionY = 0.05D;
+						} else if (player.isSneaking() && player.posY > pos.getY() - 2) {
+							player.motionY = -0.05D;
+							cost *= 0.75F;
+						} else {
+							player.motionY = 0;
+							cost *= 0.5F;
+						}
+					}
+				}
+			}
+		}
+		if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
+			player.stopActiveHand();
+		}
+	}
 
-    @Override
-    public EnumAction getItemUseAction(ItemStack item) {
-        return EnumAction.BOW;
-    }
+	@Override
+	public EnumAction getItemUseAction(ItemStack item) {
+		return EnumAction.BOW;
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand){
-        ItemStack item = user.getHeldItem(hand);
-        if (user.isHandActive())
-            return ActionResult.newResult(EnumActionResult.PASS, item);
-        if (StaminaBar.isSystemActive && !StaminaBar.isAnyStamina(user, true)) {
-            return ActionResult.newResult(EnumActionResult.PASS, item);
-        }
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
+		ItemStack item = user.getHeldItem(hand);
+		if (user.isHandActive())
+			return ActionResult.newResult(EnumActionResult.PASS, item);
+		if (StaminaBar.isSystemActive && !StaminaBar.isAnyStamina(user, true)) {
+			return ActionResult.newResult(EnumActionResult.PASS, item);
+		}
 
-        if (isInWall(user, true)) {
-            user.setActiveHand(hand);
-            if (!world.isRemote) {
-                item.damageItem(1, user);
-            }
-            user.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 2.0F);
-        }
-        return ActionResult.newResult(EnumActionResult.FAIL, item);
-    }
+		if (isInWall(user, true)) {
+			user.setActiveHand(hand);
+			if (!world.isRemote) {
+				item.damageItem(1, user);
+			}
+			user.playSound(SoundEvents.ENTITY_SHEEP_SHEAR, 1.0F, 2.0F);
+		}
+		return ActionResult.newResult(EnumActionResult.FAIL, item);
+	}
 
-    @Override
-    public int getMaxItemUseDuration(ItemStack item) {
-        return Integer.MAX_VALUE;
-    }
+	@Override
+	public int getMaxItemUseDuration(ItemStack item) {
+		return Integer.MAX_VALUE;
+	}
 
-    @Override
-    public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
-    }
+	@Override
+	public void registerClient() {
+		ModelLoaderHelper.registerItem(this);
+	}
 }

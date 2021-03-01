@@ -101,8 +101,7 @@ public class RenderBigTool extends WrappedItemModel implements IItemRenderer {
 				}
 				GlStateManager.scale(scale, scale, 1);
 			}
-		}
-		else if (transformType == ItemCameraTransforms.TransformType.GROUND){
+		} else if (transformType == ItemCameraTransforms.TransformType.GROUND) {
 			GlStateManager.scale(scale, scale, 1);
 		}
 

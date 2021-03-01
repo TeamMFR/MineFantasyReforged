@@ -8,7 +8,6 @@ import net.minecraftforge.items.IItemHandler;
 
 public class InventoryUtils {
 
-
 	public static void dropItemsInWorld(World world, IItemHandler handler, BlockPos pos) {
 		for (int slot = 0; slot < handler.getSlots(); slot++) {
 			dropItemInWorld(world, handler.getStackInSlot(slot), pos);

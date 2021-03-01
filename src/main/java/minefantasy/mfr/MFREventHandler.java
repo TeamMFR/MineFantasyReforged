@@ -1,18 +1,18 @@
 package minefantasy.mfr;
 
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.block.BlockComponent;
+import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.event.LevelUpEvent;
-import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.LevelUpPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.ArmourCalculator;
@@ -113,6 +113,7 @@ public final class MFREventHandler {
 
 	/**
 	 * Adds a tooltip to the specified ItemStack about the crafter (if it has info about the crafter in nbt)
+	 *
 	 * @param tool the ItemStack
 	 * @param list the tooltip of the ItemStack
 	 */
@@ -210,7 +211,7 @@ public final class MFREventHandler {
 
 	@SubscribeEvent
 	public static void specialInteractForComponentBlock(PlayerInteractEvent.RightClickBlock event) {
-		if (event.getEntityPlayer().isSneaking() && event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockComponent){
+		if (event.getEntityPlayer().isSneaking() && event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockComponent) {
 			event.setUseBlock(Event.Result.ALLOW);
 		}
 	}
@@ -218,7 +219,7 @@ public final class MFREventHandler {
 	@SubscribeEvent
 	public static void levelup(LevelUpEvent event) {
 		EntityPlayer player = event.thePlayer;
-		if (player instanceof  EntityPlayerMP) {
+		if (player instanceof EntityPlayerMP) {
 			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new LevelUpPacket(player, event.theSkill, event.theLevel));
 		}
 	}

@@ -27,192 +27,192 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMetre {
-    public float progress;
-    public float maxProgress = 25F;
-    public boolean hasRecipe;
-    /**
-     * Stock, Head, Mod, Muzzle, Result
-     */
-    public final ItemStackHandler inventory = createInventory();
+	public float progress;
+	public float maxProgress = 25F;
+	public boolean hasRecipe;
+	/**
+	 * Stock, Head, Mod, Muzzle, Result
+	 */
+	public final ItemStackHandler inventory = createInventory();
 
-    private int ticksExisted;
+	private int ticksExisted;
 
-    @Override
-    protected ItemStackHandler createInventory() {
-        return new ItemStackHandler(5);
-    }
+	@Override
+	protected ItemStackHandler createInventory() {
+		return new ItemStackHandler(5);
+	}
 
-    @Override
-    public ItemStackHandler getInventory() {
-        return this.inventory;
-    }
+	@Override
+	public ItemStackHandler getInventory() {
+		return this.inventory;
+	}
 
-    @Override
-    public ContainerBase createContainer(EntityPlayer player) {
-        return new ContainerCrossbowBench(player,this);
-    }
+	@Override
+	public ContainerBase createContainer(EntityPlayer player) {
+		return new ContainerCrossbowBench(player, this);
+	}
 
-    @Override
-    protected int getGuiId() {
-        return NetworkHandler.GUI_CROSSBOW_BENCH;
-    }
+	@Override
+	protected int getGuiId() {
+		return NetworkHandler.GUI_CROSSBOW_BENCH;
+	}
 
-    private static ICrossbowPart getCrossbowPart(ItemStack item) {
-        if (!item.isEmpty() && item.getItem() instanceof ICrossbowPart) {
-            return (ICrossbowPart) item.getItem();
-        }
-        return null;
-    }
+	private static ICrossbowPart getCrossbowPart(ItemStack item) {
+		if (!item.isEmpty() && item.getItem() instanceof ICrossbowPart) {
+			return (ICrossbowPart) item.getItem();
+		}
+		return null;
+	}
 
-    public static boolean isMatch(ItemStack item, String var) {
-        ICrossbowPart part = getCrossbowPart(item);
-        if (part != null) {
-            return part.getComponentType().equalsIgnoreCase(var);
-        }
-        return false;
-    }
+	public static boolean isMatch(ItemStack item, String var) {
+		ICrossbowPart part = getCrossbowPart(item);
+		if (part != null) {
+			return part.getComponentType().equalsIgnoreCase(var);
+		}
+		return false;
+	}
 
-    @Override
-    public void markDirty() {
-        ++ticksExisted;
-        if (!world.isRemote && (hasRecipe || ticksExisted % 100 == 0)) {
-            syncData();
-            sendUpdates();
-        }
-    }
+	@Override
+	public void markDirty() {
+		++ticksExisted;
+		if (!world.isRemote && (hasRecipe || ticksExisted % 100 == 0)) {
+			syncData();
+			sendUpdates();
+		}
+	}
 
-    public boolean tryCraft(EntityPlayer user) {
-        ItemStack result = findResult();
-        hasRecipe = !result.isEmpty();
+	public boolean tryCraft(EntityPlayer user) {
+		ItemStack result = findResult();
+		hasRecipe = !result.isEmpty();
 
-        if (result.isEmpty()) {
-            progress = 0F;
-        } else if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.SPANNER) {
-            if (!user.getHeldItemMainhand().isEmpty()) {
-                world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
-                user.getHeldItemMainhand().damageItem(1, user);
-                if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
-                    user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-                }
-            }
-            float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItemMainhand());
+		if (result.isEmpty()) {
+			progress = 0F;
+		} else if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.SPANNER) {
+			if (!user.getHeldItemMainhand().isEmpty()) {
+				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+				user.getHeldItemMainhand().damageItem(1, user);
+				if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
+					user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+				}
+			}
+			float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItemMainhand());
 
-            if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
-                efficiency *= (0.5F - user.swingProgress);
-            }
+			if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
+				efficiency *= (0.5F - user.swingProgress);
+			}
 
-            if (!world.isRemote) {
-                progress += efficiency;
-            }
-            if ((progress >= maxProgress && craftItem(result))) {
-                world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
-                progress = 0;
-                if (user != null) {
-                    Skill.ENGINEERING.addXP(user, 10);
-                }
-                for (int a = 0; a < 4; a++) {
-                    inventory.extractItem(a, 1, false);
-                }
-            }
-            return true;
-        }
-        return false;
-    }
+			if (!world.isRemote) {
+				progress += efficiency;
+			}
+			if ((progress >= maxProgress && craftItem(result))) {
+				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
+				progress = 0;
+				if (user != null) {
+					Skill.ENGINEERING.addXP(user, 10);
+				}
+				for (int a = 0; a < 4; a++) {
+					inventory.extractItem(a, 1, false);
+				}
+			}
+			return true;
+		}
+		return false;
+	}
 
-    private boolean craftItem(ItemStack result) {
-        if (inventory.getStackInSlot(4).isEmpty()) {
-            this.inventory.setStackInSlot(4, result);
-            return true;
-        } else {
-            return false;
-        }
-    }
+	private boolean craftItem(ItemStack result) {
+		if (inventory.getStackInSlot(4).isEmpty()) {
+			this.inventory.setStackInSlot(4, result);
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-    public void syncData() {
-        if (world.isRemote)
-            return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new CrossbowBenchPacket(this));
-    }
+	public void syncData() {
+		if (world.isRemote)
+			return;
+		NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4, new CrossbowBenchPacket(this));
+	}
 
-    private ItemStack findResult() {
-        ICrossbowPart stock = getCrossbowPart(inventory.getStackInSlot(0));
-        ICrossbowPart head = getCrossbowPart(inventory.getStackInSlot(1));
-        ICrossbowPart mod = getCrossbowPart(inventory.getStackInSlot(2));
-        ICrossbowPart muzzle = getCrossbowPart(inventory.getStackInSlot(3));
+	private ItemStack findResult() {
+		ICrossbowPart stock = getCrossbowPart(inventory.getStackInSlot(0));
+		ICrossbowPart head = getCrossbowPart(inventory.getStackInSlot(1));
+		ICrossbowPart mod = getCrossbowPart(inventory.getStackInSlot(2));
+		ICrossbowPart muzzle = getCrossbowPart(inventory.getStackInSlot(3));
 
-        if (stock == null || head == null)
-            return ItemStack.EMPTY;
+		if (stock == null || head == null)
+			return ItemStack.EMPTY;
 
-        return ToolListMFR.CROSSBOW_CUSTOM.constructCrossbow(stock, head, mod, muzzle);
-    }
+		return ToolListMFR.CROSSBOW_CUSTOM.constructCrossbow(stock, head, mod, muzzle);
+	}
 
-    @Override
-    public boolean isItemValidForSlot(int slot, ItemStack item) {
-        if (isMatch(item, "stock")) {
-            return slot == 0;
-        }
-        if (isMatch(item, "mechanism")) {
-            return slot == 1;
-        }
-        if (isMatch(item, "mod")) {
-            return slot == 2;
-        }
-        if (isMatch(item, "muzzle")) {
-            return slot == 3;
-        }
-        return false;
-    }
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item) {
+		if (isMatch(item, "stock")) {
+			return slot == 0;
+		}
+		if (isMatch(item, "mechanism")) {
+			return slot == 1;
+		}
+		if (isMatch(item, "mod")) {
+			return slot == 2;
+		}
+		if (isMatch(item, "muzzle")) {
+			return slot == 3;
+		}
+		return false;
+	}
 
-    @Override
-    public int getMetreScale(int size) {
-        return (int) Math.min(size, size / maxProgress * progress);
-    }
+	@Override
+	public int getMetreScale(int size) {
+		return (int) Math.min(size, size / maxProgress * progress);
+	}
 
-    @Override
-    public boolean shouldShowMetre() {
-        return true;
-    }
+	@Override
+	public boolean shouldShowMetre() {
+		return true;
+	}
 
-    @Override
-    public String getLocalisedName() {
-        return I18n.format("tile.crossbowBench.name");
-    }
+	@Override
+	public String getLocalisedName() {
+		return I18n.format("tile.crossbowBench.name");
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
 
-        inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
-        progress = nbt.getFloat("progress");
-        maxProgress = nbt.getFloat("maxProgress");
-        hasRecipe = nbt.getBoolean("hasRecipe");
-    }
+		progress = nbt.getFloat("progress");
+		maxProgress = nbt.getFloat("maxProgress");
+		hasRecipe = nbt.getBoolean("hasRecipe");
+	}
 
-    @Nonnull
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
+	@Nonnull
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
 
-        nbt.setTag("inventory", inventory.serializeNBT());
+		nbt.setTag("inventory", inventory.serializeNBT());
 
-        nbt.setFloat("progress", progress);
-        nbt.setFloat("maxProgress", maxProgress);
-        nbt.setBoolean("hasRecipe", hasRecipe);
-        return nbt;
-    }
+		nbt.setFloat("progress", progress);
+		nbt.setFloat("maxProgress", maxProgress);
+		nbt.setBoolean("hasRecipe", hasRecipe);
+		return nbt;
+	}
 
-    @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-    }
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
 
-    @Nullable
-    @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
-        }
-        return super.getCapability(capability, facing);
-    }
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+		}
+		return super.getCapability(capability, facing);
+	}
 }

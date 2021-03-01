@@ -13,22 +13,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockEngineerTanner extends BlockTanningRack {
 
-    public BlockEngineerTanner(int tier, String tex) {
-        super(tier, tex);
-    }
+	public BlockEngineerTanner(int tier, String tex) {
+		super(tier, tex);
+	}
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
-        if (tile != null) {
-            return tile.interact(user, false, user.isSneaking());
-        }
-        return true;
-    }
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
+		if (tile != null) {
+			return tile.interact(user, false, user.isSneaking());
+		}
+		return true;
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
 }

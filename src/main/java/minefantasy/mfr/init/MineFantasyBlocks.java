@@ -105,7 +105,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid=MineFantasyReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class MineFantasyBlocks {
 
 	public static Block COPPER_ORE = Utils.nullValue();
@@ -145,7 +145,7 @@ public class MineFantasyBlocks {
 
 	public static Block FIREBRICKS = Utils.nullValue();
 	public static Block CLAY_WALL = Utils.nullValue();
-	
+
 	public static BlockMetalBarsMF IRON_BARS = Utils.nullValue();
 	public static BlockMetalBarsMF BRONZE_BARS = Utils.nullValue();
 	public static BlockMetalBarsMF STEEL_BARS = Utils.nullValue();
@@ -167,7 +167,7 @@ public class MineFantasyBlocks {
 	public static BlockMetalMF IGNOTUMITE_STORAGE = Utils.nullValue();
 	public static BlockMetalMF MITHIUM_STORAGE = Utils.nullValue();
 	public static BlockMetalMF ENDER_STORAGE = Utils.nullValue();
-	
+
 	public static BlockAnvilMF ANVIL_STONE = Utils.nullValue();
 	public static BlockAnvilMF ANVIL_BRONZE = Utils.nullValue();
 	public static BlockAnvilMF ANVIL_IRON = Utils.nullValue();
@@ -175,7 +175,7 @@ public class MineFantasyBlocks {
 	public static BlockAnvilMF ANVIL_BLACK_STEEL = Utils.nullValue();
 	public static BlockAnvilMF ANVIL_BLUE_STEEL = Utils.nullValue();
 	public static BlockAnvilMF ANVIL_RED_STEEL = Utils.nullValue();
-	
+
 	public static BlockCarpenter CARPENTER = Utils.nullValue();
 	public static BlockBombBench BOMB_BENCH = Utils.nullValue();
 	public static BlockCrossbowBench CROSSBOW_BENCH = Utils.nullValue();
@@ -293,7 +293,6 @@ public class MineFantasyBlocks {
 	public static Block COMPONENTS = Utils.nullValue();
 	public static Block SCHEMATIC_GENERAL = Utils.nullValue();
 
-
 	public static void init() {
 
 		COPPER_ORE = new BlockOreMF("copper_ore", 0, -1).setHardness(2.0F).setResistance(3.0F);
@@ -318,7 +317,7 @@ public class MineFantasyBlocks {
 		WINDOW = new BasicBlockMF("window", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.1F);
 		FRAMED_GLASS = new BasicBlockMF("framed_glass", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.2F);
 		FRAMED_GLASS_PANE = new BlockPaneMF("framed_glass_pane", Material.GLASS, true).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.1F);
-		WINDOW_PANE = new BlockPaneMF("window_pane",  Material.GLASS,true).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.2F);
+		WINDOW_PANE = new BlockPaneMF("window_pane", Material.GLASS, true).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.2F);
 
 		THATCH = new BasicBlockMF("thatch", Material.LEAVES).setBlockSoundType(SoundType.GROUND).setHardness(1.0F);
 		THATCH_STAIR = new ConstructionBlockMF.StairsConstBlock("thatch_stairs", THATCH);
@@ -327,7 +326,7 @@ public class MineFantasyBlocks {
 		LIMESTONE_COBBLE = new BasicBlockMF("limestone_cobble", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_BRICK = new BasicBlockMF("limestone_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_ROAD = new BlockRoad("limestone_road", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
-		
+
 		LIMESTONE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_stairs", LIMESTONE);
 		LIMESTONE_COBBLE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_cobble_stairs", LIMESTONE_COBBLE);
 		LIMESTONE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_brick_stairs", LIMESTONE_BRICK);
@@ -364,7 +363,7 @@ public class MineFantasyBlocks {
 		ANVIL_BLACK_STEEL = new BlockAnvilMF(BaseMaterialMFR.BLACK_STEEL);
 		ANVIL_BLUE_STEEL = new BlockAnvilMF(BaseMaterialMFR.BLUE_STEEL);
 		ANVIL_RED_STEEL = new BlockAnvilMF(BaseMaterialMFR.RED_STEEL);
-		
+
 		CARPENTER = new BlockCarpenter();
 		BOMB_BENCH = new BlockBombBench();
 		CROSSBOW_BENCH = new BlockCrossbowBench();
@@ -633,7 +632,6 @@ public class MineFantasyBlocks {
 		registerTile(TileEntityBombBench.class, "bomb_bench_tile");
 		registry.register(CROSSBOW_BENCH);
 		registerTile(TileEntityCrossbowBench.class, "crossbow_bench_tile");
-
 
 		registry.register(BERRY_BUSH);
 

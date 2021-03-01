@@ -24,259 +24,259 @@ import net.minecraft.util.SoundCategory;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable, IBasicMetre {
-    public int angle, stock;
-    public ItemStack inventoryStack = ItemStack.EMPTY;
-    private byte storageSize = -1;
-    private int ticksExisted;
+	public int angle, stock;
+	public ItemStack inventoryStack = ItemStack.EMPTY;
+	private byte storageSize = -1;
+	private int ticksExisted;
 
-    public TileEntityAmmoBox() {
-        super("ammo_box_basic", CustomMaterial.getMaterial("RefinedWood"));
-    }
+	public TileEntityAmmoBox() {
+		super("ammo_box_basic", CustomMaterial.getMaterial("RefinedWood"));
+	}
 
-    public TileEntityAmmoBox(String tex, CustomMaterial material, byte size) {
-        super(tex, material);
-        this.storageSize = size;
-    }
+	public TileEntityAmmoBox(String tex, CustomMaterial material, byte size) {
+		super(tex, material);
+		this.storageSize = size;
+	}
 
-    @Override
-    public boolean hasFastRenderer() {
-        return true;
-    }
+	@Override
+	public boolean hasFastRenderer() {
+		return true;
+	}
 
-    @Override
-    public void update() {
-        ++ticksExisted;
-        if (ticksExisted == 20 || ticksExisted % 100 == 0) {
-            syncData();
-        }
-        if (angle > 0)
-            --angle;
-    }
+	@Override
+	public void update() {
+		++ticksExisted;
+		if (ticksExisted == 20 || ticksExisted % 100 == 0) {
+			syncData();
+		}
+		if (angle > 0)
+			--angle;
+	}
 
-    public boolean interact(EntityPlayer user, ItemStack held) {
-        if (!held.isEmpty()) {
-            if (this.getStorageType() == 1 && !inventoryStack.isEmpty() && held.getItem() instanceof IFirearm && loadGun(held)) {
-                open();
-                syncData();
-                return true;
-            }
-            if (canAcceptItem(held)) {
-                int max = this.getMaxAmmo(!inventoryStack.isEmpty() ? inventoryStack : held);
-                if (inventoryStack.isEmpty()) {
-                    open();
-                    placeInEmpty(user, held, max);
-                } else if (areItemStacksEqual(held, inventoryStack) && stock < max) {
-                    open();
-                    addToBox(user, held, max);
-                }
+	public boolean interact(EntityPlayer user, ItemStack held) {
+		if (!held.isEmpty()) {
+			if (this.getStorageType() == 1 && !inventoryStack.isEmpty() && held.getItem() instanceof IFirearm && loadGun(held)) {
+				open();
+				syncData();
+				return true;
+			}
+			if (canAcceptItem(held)) {
+				int max = this.getMaxAmmo(!inventoryStack.isEmpty() ? inventoryStack : held);
+				if (inventoryStack.isEmpty()) {
+					open();
+					placeInEmpty(user, held, max);
+				} else if (areItemStacksEqual(held, inventoryStack) && stock < max) {
+					open();
+					addToBox(user, held, max);
+				}
 
-                syncData();
-                return true;
-            }
-            return false;
-        } else if (!inventoryStack.isEmpty()) {
-            open();
-            takeStack(user, held);
-            syncData();
-            return true;
-        }
-        syncData();
-        return false;
-    }
+				syncData();
+				return true;
+			}
+			return false;
+		} else if (!inventoryStack.isEmpty()) {
+			open();
+			takeStack(user, held);
+			syncData();
+			return true;
+		}
+		syncData();
+		return false;
+	}
 
-    private boolean canAcceptItem(ItemStack held) {
-        if (held.getItem() instanceof IStorageBlock) {
-            return false;
-        }
-        byte type = this.getStorageType();
+	private boolean canAcceptItem(ItemStack held) {
+		if (held.getItem() instanceof IStorageBlock) {
+			return false;
+		}
+		byte type = this.getStorageType();
 
-        return type == 0 ? isFood(held) : type == 1 ? held.getItem() instanceof IAmmo : type == 2;
-    }
+		return type == 0 ? isFood(held) : type == 1 ? held.getItem() instanceof IAmmo : type == 2;
+	}
 
-    private boolean isFood(ItemStack held) {
-        return held.getItem() instanceof ItemFood || held.getItem() instanceof ItemBandage || held.getItem() instanceof ItemSyringe;
-    }
+	private boolean isFood(ItemStack held) {
+		return held.getItem() instanceof ItemFood || held.getItem() instanceof ItemBandage || held.getItem() instanceof ItemSyringe;
+	}
 
-    private boolean loadGun(ItemStack held) {
-        IFirearm gun = (IFirearm) held.getItem();
-        if (gun.canAcceptAmmo(held, getAmmoClass())) {
-            ItemStack loaded = AmmoMechanics.getAmmo(held);
-            if (loaded.isEmpty()) {
-                int ss = Math.min(inventoryStack.getMaxStackSize(), stock);
-                ItemStack newloaded = inventoryStack.copy();
-                newloaded.setCount(ss);
-                AmmoMechanics.setAmmo(held, newloaded);
-                stock -= ss;
-                if (stock <= 0) {
-                    inventoryStack = ItemStack.EMPTY;
-                }
-                return true;
-            } else if (areItemStacksEqual(loaded, inventoryStack)) {
-                int room_left = loaded.getMaxStackSize() - loaded.getCount();
-                if (stock > room_left) {
-                    stock -= room_left;
-                    loaded.grow(room_left);
-                    AmmoMechanics.setAmmo(held, loaded);
-                } else {
-                    loaded.grow(stock);
-                    AmmoMechanics.setAmmo(held, loaded);
-                    stock = 0;
-                    inventoryStack = ItemStack.EMPTY;
-                }
+	private boolean loadGun(ItemStack held) {
+		IFirearm gun = (IFirearm) held.getItem();
+		if (gun.canAcceptAmmo(held, getAmmoClass())) {
+			ItemStack loaded = AmmoMechanics.getAmmo(held);
+			if (loaded.isEmpty()) {
+				int ss = Math.min(inventoryStack.getMaxStackSize(), stock);
+				ItemStack newloaded = inventoryStack.copy();
+				newloaded.setCount(ss);
+				AmmoMechanics.setAmmo(held, newloaded);
+				stock -= ss;
+				if (stock <= 0) {
+					inventoryStack = ItemStack.EMPTY;
+				}
+				return true;
+			} else if (areItemStacksEqual(loaded, inventoryStack)) {
+				int room_left = loaded.getMaxStackSize() - loaded.getCount();
+				if (stock > room_left) {
+					stock -= room_left;
+					loaded.grow(room_left);
+					AmmoMechanics.setAmmo(held, loaded);
+				} else {
+					loaded.grow(stock);
+					AmmoMechanics.setAmmo(held, loaded);
+					stock = 0;
+					inventoryStack = ItemStack.EMPTY;
+				}
 
-                return true;
-            }
-        }
-        return false;
-    }
+				return true;
+			}
+		}
+		return false;
+	}
 
-    private void addToBox(EntityPlayer user, ItemStack held, int max) {
-        int room_left = max - stock;
-        if (held.getCount() <= room_left) {
-            stock += held.getCount();
-            user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-        } else {
-            held.shrink(room_left);
-            stock += room_left;
-        }
-    }
+	private void addToBox(EntityPlayer user, ItemStack held, int max) {
+		int room_left = max - stock;
+		if (held.getCount() <= room_left) {
+			stock += held.getCount();
+			user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+		} else {
+			held.shrink(room_left);
+			stock += room_left;
+		}
+	}
 
-    private void takeStack(EntityPlayer user, ItemStack held) {
-        int ss = stock;
-        ItemStack taken = inventoryStack.copy();
-        if (ss > taken.getMaxStackSize()) {
-            ss = taken.getMaxStackSize();
-        }
-        taken.setCount(ss);
-        stock -= ss;
-        user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, taken);
-        if (stock <= 0) {
-            inventoryStack = ItemStack.EMPTY;
-        }
-    }
+	private void takeStack(EntityPlayer user, ItemStack held) {
+		int ss = stock;
+		ItemStack taken = inventoryStack.copy();
+		if (ss > taken.getMaxStackSize()) {
+			ss = taken.getMaxStackSize();
+		}
+		taken.setCount(ss);
+		stock -= ss;
+		user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, taken);
+		if (stock <= 0) {
+			inventoryStack = ItemStack.EMPTY;
+		}
+	}
 
-    /**
-     * Place ammo in empty box
-     */
-    private void placeInEmpty(EntityPlayer user, ItemStack held, int max) {
-        inventoryStack = held.copy();
-        int ss = held.getCount();
-        if (held.getCount() <= max)// Place all
-        {
-            user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-        } else // Fill as much
-        {
-            stock = max;
-            held.shrink(max);
-        }
-        stock = ss;
-    }
+	/**
+	 * Place ammo in empty box
+	 */
+	private void placeInEmpty(EntityPlayer user, ItemStack held, int max) {
+		inventoryStack = held.copy();
+		int ss = held.getCount();
+		if (held.getCount() <= max)// Place all
+		{
+			user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+		} else // Fill as much
+		{
+			stock = max;
+			held.shrink(max);
+		}
+		stock = ss;
+	}
 
-    private void open() {
-        angle = 16;
-        this.world.playSound(this.pos.getX() + 0.5D, this.pos.getY() + 0.25D, this.pos.getZ() + 0.5D, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.AMBIENT, 0.5F, this.world.rand.nextFloat() * 0.1F + 1.4F, false);
-    }
+	private void open() {
+		angle = 16;
+		this.world.playSound(this.pos.getX() + 0.5D, this.pos.getY() + 0.25D, this.pos.getZ() + 0.5D, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.AMBIENT, 0.5F, this.world.rand.nextFloat() * 0.1F + 1.4F, false);
+	}
 
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
-        super.writeToNBT(nbt);
-        nbt.setInteger("stock", stock);
-        if (!inventoryStack.isEmpty()) {
-            NBTTagCompound itemsave = new NBTTagCompound();
-            inventoryStack.writeToNBT(itemsave);
-            nbt.setTag("storage", itemsave);
-        }
-        return nbt;
-    }
+	@Override
+	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setInteger("stock", stock);
+		if (!inventoryStack.isEmpty()) {
+			NBTTagCompound itemsave = new NBTTagCompound();
+			inventoryStack.writeToNBT(itemsave);
+			nbt.setTag("storage", itemsave);
+		}
+		return nbt;
+	}
 
-    @Override
-    public void readFromNBT(NBTTagCompound nbt) {
-        super.readFromNBT(nbt);
-        stock = nbt.getInteger("stock");
-        if (nbt.hasKey("storage")) {
-            NBTTagCompound itemsave = nbt.getCompoundTag("storage");
-            inventoryStack = new ItemStack(itemsave);
-        }
-    }
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		stock = nbt.getInteger("stock");
+		if (nbt.hasKey("storage")) {
+			NBTTagCompound itemsave = nbt.getCompoundTag("storage");
+			inventoryStack = new ItemStack(itemsave);
+		}
+	}
 
-    public void syncData() {
-        if (world.isRemote)
-            return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new AmmoBoxCommandPacket(this));
-        sendUpdates();
-    }
+	public void syncData() {
+		if (world.isRemote)
+			return;
+		NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4, new AmmoBoxCommandPacket(this));
+		sendUpdates();
+	}
 
-    public int getMaxAmmo(ItemStack ammo) {
-        return ammo.getMaxStackSize() * getCapacity(getMaterial().tier);
-    }
+	public int getMaxAmmo(ItemStack ammo) {
+		return ammo.getMaxStackSize() * getCapacity(getMaterial().tier);
+	}
 
-    @Override
-    public int getMetreScale(int size) {
-        if (!inventoryStack.isEmpty()) {
-            return (int) Math.min(size, (float) size / (float) getMaxAmmo(inventoryStack) * stock);
-        }
-        return 0;
-    }
+	@Override
+	public int getMetreScale(int size) {
+		if (!inventoryStack.isEmpty()) {
+			return (int) Math.min(size, (float) size / (float) getMaxAmmo(inventoryStack) * stock);
+		}
+		return 0;
+	}
 
-    @Override
-    public boolean shouldShowMetre() {
-        return !inventoryStack.isEmpty();
-    }
+	@Override
+	public boolean shouldShowMetre() {
+		return !inventoryStack.isEmpty();
+	}
 
-    @Override
-    public String getLocalisedName() {
-        if (!inventoryStack.isEmpty()) {
-            return inventoryStack.getDisplayName() + " x" + stock;
-        }
-        return "";
-    }
+	@Override
+	public String getLocalisedName() {
+		if (!inventoryStack.isEmpty()) {
+			return inventoryStack.getDisplayName() + " x" + stock;
+		}
+		return "";
+	}
 
-    private boolean areItemStacksEqual(ItemStack i1, ItemStack i2) {
-        if (i1.isEmpty() || i2.isEmpty())
-            return false;
+	private boolean areItemStacksEqual(ItemStack i1, ItemStack i2) {
+		if (i1.isEmpty() || i2.isEmpty())
+			return false;
 
-        return i1.isItemEqual(i2) && ItemStack.areItemStackTagsEqual(i1, i2);
-    }
+		return i1.isItemEqual(i2) && ItemStack.areItemStackTagsEqual(i1, i2);
+	}
 
-    private String getAmmoClass() {
-        if (!inventoryStack.isEmpty() && inventoryStack.getItem() instanceof IAmmo) {
-            return ((IAmmo) inventoryStack.getItem()).getAmmoType(inventoryStack);
-        }
-        return "null";
-    }
+	private String getAmmoClass() {
+		if (!inventoryStack.isEmpty() && inventoryStack.getItem() instanceof IAmmo) {
+			return ((IAmmo) inventoryStack.getItem()).getAmmoType(inventoryStack);
+		}
+		return "null";
+	}
 
-    public byte getStorageType() {
-        if (world != null) {
-            Block block = world.getBlockState(pos).getBlock();
-            if (block instanceof BlockAmmoBox) {
-                return ((BlockAmmoBox) block).storageType;
-            }
-        }
-        return storageSize;
-    }
+	public byte getStorageType() {
+		if (world != null) {
+			Block block = world.getBlockState(pos).getBlock();
+			if (block instanceof BlockAmmoBox) {
+				return ((BlockAmmoBox) block).storageType;
+			}
+		}
+		return storageSize;
+	}
 
-    @Override
-    protected ItemStackHandler createInventory() {
-        return null;
-    }
+	@Override
+	protected ItemStackHandler createInventory() {
+		return null;
+	}
 
-    @Override
-    public ItemStackHandler getInventory() {
-        return null;
-    }
+	@Override
+	public ItemStackHandler getInventory() {
+		return null;
+	}
 
-    @Override
-    public ContainerBase createContainer(EntityPlayer player) {
-        return null;
-    }
+	@Override
+	public ContainerBase createContainer(EntityPlayer player) {
+		return null;
+	}
 
-    @Override
-    protected int getGuiId() {
-        return 0;
-    }
+	@Override
+	protected int getGuiId() {
+		return 0;
+	}
 
-    @Override
-    public boolean isItemValidForSlot(int slot, ItemStack item) {
-        return false;
-    }
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item) {
+		return false;
+	}
 }

@@ -28,107 +28,107 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
-    protected int itemRarity;
-    private int tier;
-    private Tool toolType;
-    // ===================================================== CUSTOM START
-    // =============================================================\\
-    private boolean isCustom = false;
+	protected int itemRarity;
+	private int tier;
+	private Tool toolType;
+	// ===================================================== CUSTOM START
+	// =============================================================\\
+	private boolean isCustom = false;
 
-    public ItemBasicCraftTool(String name, Tool type, int tier, int uses) {
-        super(1.0F, 1.0F, ToolMaterial.WOOD, Sets.newHashSet(new Block[]{}));
-        this.tier = tier;
-        setCreativeTab(MineFantasyTabs.tabCraftTool);
+	public ItemBasicCraftTool(String name, Tool type, int tier, int uses) {
+		super(1.0F, 1.0F, ToolMaterial.WOOD, Sets.newHashSet(new Block[] {}));
+		this.tier = tier;
+		setCreativeTab(MineFantasyTabs.tabCraftTool);
 
-        toolType = type;
-        setRegistryName(name);
-        setUnlocalizedName(name);
+		toolType = type;
+		setRegistryName(name);
+		setUnlocalizedName(name);
 
-        setMaxDamage(uses);
-        this.setMaxStackSize(1);
+		setMaxDamage(uses);
+		this.setMaxStackSize(1);
 
-        MineFantasyReborn.PROXY.addClientRegister(this);
-    }
+		MineFantasyReborn.PROXY.addClientRegister(this);
+	}
 
-    @Override
-    public ToolMaterial getMaterial() {
-        return toolMaterial;
-    }
+	@Override
+	public ToolMaterial getMaterial() {
+		return toolMaterial;
+	}
 
-    @Override
-    public Tool getToolType(ItemStack stack) {
-        return toolType;
-    }
+	@Override
+	public Tool getToolType(ItemStack stack) {
+		return toolType;
+	}
 
-    @Override
-    public float[] getDamageRatio(Object... implement) {
-        return new float[]{0, 1, 0};
-    }
+	@Override
+	public float[] getDamageRatio(Object... implement) {
+		return new float[] {0, 1, 0};
+	}
 
-    @Override
-    public float getPenetrationLevel(Object implement) {
-        return 0F;
-    }
+	@Override
+	public float getPenetrationLevel(Object implement) {
+		return 0F;
+	}
 
-    public ItemBasicCraftTool setCustom(String s) {
-        canRepair = false;
-        isCustom = true;
-        return this;
-    }
+	public ItemBasicCraftTool setCustom(String s) {
+		canRepair = false;
+		isCustom = true;
+		return this;
+	}
 
-    public ItemStack construct(String main) {
-        return CustomToolHelper.construct(this, main);
-    }
+	public ItemStack construct(String main) {
+		return CustomToolHelper.construct(this, main);
+	}
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
-    }
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(tab)) {
-            return;
-        }
-        if (isCustom) {
-            items.add(this.construct(WoodMaterial.OAK_WOOD));
-            items.add(this.construct(WoodMaterial.IRONBARK_WOOD));
-            items.add(this.construct(WoodMaterial.EBONY_WOOD));
-        } else {
-            super.getSubItems(tab, items);
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (!isInCreativeTab(tab)) {
+			return;
+		}
+		if (isCustom) {
+			items.add(this.construct(WoodMaterial.OAK_WOOD));
+			items.add(this.construct(WoodMaterial.IRONBARK_WOOD));
+			items.add(this.construct(WoodMaterial.EBONY_WOOD));
+		} else {
+			super.getSubItems(tab, items);
+		}
+	}
 
-    @Override
-    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
-        super.addInformation(item, world, list, flag);
-    }
+	@Override
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+		super.addInformation(item, world, list, flag);
+	}
 
-    @Override
-    public float getEfficiency(ItemStack item) {
-        float efficiencyMod = 1.0F;
-        return CustomToolHelper.getEfficiencyForHds(item, toolMaterial.getEfficiency(), efficiencyMod);
-    }
+	@Override
+	public float getEfficiency(ItemStack item) {
+		float efficiencyMod = 1.0F;
+		return CustomToolHelper.getEfficiencyForHds(item, toolMaterial.getEfficiency(), efficiencyMod);
+	}
 
-    @Override
-    public int getTier(ItemStack item) {
-        return CustomToolHelper.getCrafterTier(item, tier);
-    }
+	@Override
+	public int getTier(ItemStack item) {
+		return CustomToolHelper.getCrafterTier(item, tier);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item) {
-        String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
-        return CustomToolHelper.getLocalisedName(item, unlocalName);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
+		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
+		return CustomToolHelper.getLocalisedName(item, unlocalName);
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        return CustomToolHelper.getRarity(item, itemRarity);
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		return CustomToolHelper.getRarity(item, itemRarity);
+	}
 
-    @Override
-    public void registerClient() {
-        ModelLoaderHelper.registerItem(this);
-    }
+	@Override
+	public void registerClient() {
+		ModelLoaderHelper.registerItem(this);
+	}
 }

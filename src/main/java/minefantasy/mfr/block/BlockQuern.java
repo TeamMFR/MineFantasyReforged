@@ -21,66 +21,65 @@ import javax.annotation.Nonnull;
 
 public class BlockQuern extends BlockTileEntity<TileEntityQuern> {
 
-    public BlockQuern(String type) {
-        super(Material.ROCK);
+	public BlockQuern(String type) {
+		super(Material.ROCK);
 
-        setRegistryName(type);
-        setUnlocalizedName(type);
-        this.setSoundType(SoundType.STONE);
-        this.setHardness(5F);
-        this.setResistance(5F);
-        this.setCreativeTab(MineFantasyTabs.tabUtil);
-    }
+		setRegistryName(type);
+		setUnlocalizedName(type);
+		this.setSoundType(SoundType.STONE);
+		this.setHardness(5F);
+		this.setResistance(5F);
+		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
 
-    @Nonnull
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this);
-    }
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this);
+	}
 
-    @Override
-    public TileEntity createTileEntity(final World world, final IBlockState state) {
-        return new TileEntityQuern();
-    }
+	@Override
+	public TileEntity createTileEntity(final World world, final IBlockState state) {
+		return new TileEntityQuern();
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public EnumBlockRenderType getRenderType(IBlockState state) {
-        return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
+	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
 
-    @Nonnull
-    @Override
-    public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY, final float hitZ, final int meta, final EntityLivingBase placer, final EnumHand hand) {
-        return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
-    }
+	@Nonnull
+	@Override
+	public IBlockState getStateForPlacement(final World world, final BlockPos pos, final EnumFacing facing, final float hitX, final float hitY, final float hitZ, final int meta, final EntityLivingBase placer, final EnumHand hand) {
+		return super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
+	}
 
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		TileEntityQuern tile = (TileEntityQuern) getTile(world, pos);
+		if (tile != null) {
+			if (facing == EnumFacing.UP) {
+				tile.onUse();
+			}
+			// GUI
+			else if (!world.isRemote) {
 
-    @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        TileEntityQuern tile = (TileEntityQuern) getTile(world,pos);
-        if (tile != null) {
-            if (facing == EnumFacing.UP) {
-                tile.onUse();
-            }
-            // GUI
-            else if (!world.isRemote) {
+				if (tile != null) {
+					tile.openGUI(world, player);
+				}
+			}
+		}
+		return true;
+	}
 
-                if (tile != null) {
-                    tile.openGUI(world, player);
-                }
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public String getTexture(){
-        return "cauldron_side";
-    }
+	@Override
+	public String getTexture() {
+		return "cauldron_side";
+	}
 }

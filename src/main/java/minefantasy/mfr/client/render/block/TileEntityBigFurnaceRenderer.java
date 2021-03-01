@@ -26,98 +26,99 @@ import net.minecraftforge.common.model.IModelState;
  * Sources are provided for educational reasons. though small bits of
  * code, or methods can be used in your own creations.
  */
-public class TileEntityBigFurnaceRenderer <T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
-    private ModelBigFurnace model;
-    public TileEntityBigFurnaceRenderer() {
-        model = new ModelBigFurnace();
-    }
+public class TileEntityBigFurnaceRenderer<T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
+	private ModelBigFurnace model;
 
-    @Override
-    public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
+	public TileEntityBigFurnaceRenderer() {
+		model = new ModelBigFurnace();
+	}
 
-        renderAModelAt((TileEntityBigFurnace) te, x, y, z, partialTick);
-    }
+	@Override
+	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
 
-    public void renderAModelAt(TileEntityBigFurnace tile, double d, double d1, double d2, float partialTicks) {
-        EnumFacing facing = EnumFacing.NORTH;
-        if (tile.hasWorld()) {
-            IBlockState state = tile.getWorld().getBlockState(tile.getPos());
-            facing = state.getValue(BlockBigFurnace.FACING);
-        }
+		renderAModelAt((TileEntityBigFurnace) te, x, y, z, partialTick);
+	}
 
-        this.bindTexture(tile.getTexture());
+	public void renderAModelAt(TileEntityBigFurnace tile, double d, double d1, double d2, float partialTicks) {
+		EnumFacing facing = EnumFacing.NORTH;
+		if (tile.hasWorld()) {
+			IBlockState state = tile.getWorld().getBlockState(tile.getPos());
+			facing = state.getValue(BlockBigFurnace.FACING);
+		}
 
-        boolean display = tile.isBurning();
+		this.bindTexture(tile.getTexture());
 
-        float doorAngle = tile.getPrevDoorAngle() + (tile.getDoorAngle() - tile.getPrevDoorAngle()) * partialTicks;
+		boolean display = tile.isBurning();
 
-        GlStateManager.pushMatrix(); // start
-        float scale = 1.0F;
+		float doorAngle = tile.getPrevDoorAngle() + (tile.getDoorAngle() - tile.getPrevDoorAngle()) * partialTicks;
 
-        GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F); // size
-        GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
-        GlStateManager.scale(scale, -scale, -scale);
+		GlStateManager.pushMatrix(); // start
+		float scale = 1.0F;
 
-        GlStateManager.disableLighting();
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
-        model.renderModel(display, (float) ( 90F / 20F * -doorAngle / 180F * Math.PI), 0.0625F);
-        GlStateManager.enableLighting();
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F); // size
+		GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
+		GlStateManager.scale(scale, -scale, -scale);
 
-        GlStateManager.popMatrix(); // end
+		GlStateManager.disableLighting();
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+		model.renderModel(display, (float) (90F / 20F * -doorAngle / 180F * Math.PI), 0.0625F);
+		GlStateManager.enableLighting();
 
-    }
+		GlStateManager.popMatrix(); // end
 
-    public void renderInvModel(boolean heater, String type, double d, double d1, double d2, float f) {
+	}
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + type + ".png"));
-        GlStateManager.pushMatrix(); // start
-        float scale = 1.0F;
+	public void renderInvModel(boolean heater, String type, double d, double d1, double d2, float f) {
 
-        GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.5F , (float) d2 + 0.5F); // size
-        GlStateManager.rotate(180, 0.0F, 1.0F, 0.0F);
-        GlStateManager.scale(scale, -scale, -scale);
-        model.renderModel(false, 0F, 0.0625F);
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + type + ".png"));
+		GlStateManager.pushMatrix(); // start
+		float scale = 1.0F;
 
-        GlStateManager.popMatrix(); // end
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.5F, (float) d2 + 0.5F); // size
+		GlStateManager.rotate(180, 0.0F, 1.0F, 0.0F);
+		GlStateManager.scale(scale, -scale, -scale);
+		model.renderModel(false, 0F, 0.0625F);
 
-    }
+		GlStateManager.popMatrix(); // end
 
-    public float pixel(float count) {
-        return count * 0.0625F;
-    }
+	}
 
-    @Override
-    public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
-        ItemBlock itemBlock;
+	public float pixel(float count) {
+		return count * 0.0625F;
+	}
 
-        BlockBigFurnace furnace = new BlockBigFurnace("furnace_stone", false, 0);
+	@Override
+	public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
+		ItemBlock itemBlock;
 
-        if (stack.getItem() instanceof ItemBlockSpecialRender){
-            itemBlock = (ItemBlock) stack.getItem();
-            furnace = (BlockBigFurnace) itemBlock.getBlock();
-        }
+		BlockBigFurnace furnace = new BlockBigFurnace("furnace_stone", false, 0);
 
-        GlStateManager.pushMatrix();
+		if (stack.getItem() instanceof ItemBlockSpecialRender) {
+			itemBlock = (ItemBlock) stack.getItem();
+			furnace = (BlockBigFurnace) itemBlock.getBlock();
+		}
 
-        renderInvModel(furnace.isHeater, furnace.isHeater ? "furnace_heater" : "furnace_rock", 0F, 0F, 0F, 0F);
+		GlStateManager.pushMatrix();
 
-        GlStateManager.enableBlend();
-        GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.popMatrix();
-    }
+		renderInvModel(furnace.isHeater, furnace.isHeater ? "furnace_heater" : "furnace_rock", 0F, 0F, 0F, 0F);
 
-    @Override
-    public IModelState getTransforms() {
-        return TransformUtils.DEFAULT_BLOCK;
-    }
+		GlStateManager.enableBlend();
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		GlStateManager.popMatrix();
+	}
 
-    @Override
-    public boolean isAmbientOcclusion() {
-        return false;
-    }
+	@Override
+	public IModelState getTransforms() {
+		return TransformUtils.DEFAULT_BLOCK;
+	}
 
-    @Override
-    public boolean isGui3d() {
-        return true;
-    }
+	@Override
+	public boolean isAmbientOcclusion() {
+		return false;
+	}
+
+	@Override
+	public boolean isGui3d() {
+		return true;
+	}
 }

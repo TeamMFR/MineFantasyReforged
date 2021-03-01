@@ -29,15 +29,20 @@ import java.util.function.Function;
  * This interface is provided for complex cases that require custom NBT handling of some kind. In most cases,
  * {@link StoredVariable} should be sufficient.
  * <p></p>
+ *
  * @param <T> The type of variable stored.
- * Author Credit: Electroblob. Used with permission, thank you Electroblob!
+ *            Author Credit: Electroblob. Used with permission, thank you Electroblob!
  */
 public interface IStoredVariable<T> extends IVariable<T> {
 
-	/** Writes the value to the given NBT tag. */
+	/**
+	 * Writes the value to the given NBT tag.
+	 */
 	void write(NBTTagCompound nbt, T value);
 
-	/** Reads the value from the given NBT tag. */
+	/**
+	 * Reads the value from the given NBT tag.
+	 */
 	T read(NBTTagCompound nbt);
 
 	/**
@@ -45,6 +50,7 @@ public interface IStoredVariable<T> extends IVariable<T> {
 	 * also contains a number of static methods for common implementations (primitives, {@code String}, {@code UUID},
 	 * {@code BlockPos} and {@code ItemStack}).
 	 * <p></p>
+	 *
 	 * @param <T> The type of variable stored.
 	 * @param <E> The type of NBT tag the variable will be stored as.
 	 */
@@ -62,11 +68,12 @@ public interface IStoredVariable<T> extends IVariable<T> {
 
 		/**
 		 * Creates a new {@code StoredVariable} with the given key and serialisation behaviour.
-		 * @param key The string key used to write the value to NBT (should be unique). This serves no other purpose.
-		 * @param serialiser A function used to write the value to NBT.
+		 *
+		 * @param key          The string key used to write the value to NBT (should be unique). This serves no other purpose.
+		 * @param serialiser   A function used to write the value to NBT.
 		 * @param deserialiser A function used to read the value from NBT.
 		 */
-		public StoredVariable(String key, Function<T, E> serialiser, Function<E, T> deserialiser, Persistence persistence){
+		public StoredVariable(String key, Function<T, E> serialiser, Function<E, T> deserialiser, Persistence persistence) {
 			this.key = key;
 			this.serialiser = serialiser;
 			this.deserialiser = deserialiser;
@@ -79,11 +86,12 @@ public interface IStoredVariable<T> extends IVariable<T> {
 		 * primitive types! For lambda expressions, check the second parameter isn't null before operating on it.
 		 * For method references, do not reference a method that takes a primitive type. Otherwise, this will cause
 		 * a (difficult to debug) {@link NullPointerException} if the key was not stored.</i>
+		 *
 		 * @param ticker A {@link BiFunction} specifying the actions to be performed on this variable each tick. The
 		 *               {@code BiFunction} returns the new value for this variable.
 		 * @return This {@code StoredVariable} object, allowing this method to be chained onto object creation.
 		 */
-		public StoredVariable<T, E> withTicker(BiFunction<EntityPlayer, T, T> ticker){
+		public StoredVariable<T, E> withTicker(BiFunction<EntityPlayer, T, T> ticker) {
 			this.ticker = ticker;
 			return this;
 		}
@@ -91,125 +99,156 @@ public interface IStoredVariable<T> extends IVariable<T> {
 		/**
 		 * Adds synchronisation to this variable, meaning it will be sent to clients whenever {@link PlayerData#sync()}
 		 * is called (this always happens on player login, but other than that you'll need to do it yourself).
+		 *
 		 * @return This {@code StoredVariable} object, allowing this method to be chained onto object creation.
 		 */
-		public StoredVariable<T, E> setSynced(){
+		public StoredVariable<T, E> setSynced() {
 			this.synced = true;
 			return this;
 		}
 
 		@Override
-		public void write(NBTTagCompound nbt, T value){
-			if(value != null) nbt.setTag(key, serialiser.apply(value));
+		public void write(NBTTagCompound nbt, T value) {
+			if (value != null)
+				nbt.setTag(key, serialiser.apply(value));
 		}
 
 		@Override
 		@SuppressWarnings("unchecked") // Can't check it due to type erasure
-		public T read(NBTTagCompound nbt){
+		public T read(NBTTagCompound nbt) {
 			// A system allowing any kind of variable to be stored on the fly cannot be made without casting somewhere.
 			// However, doing it like this means we only cast once, below, and proper regulation of access means we
 			// can effectively guarantee the cast is safe.
-			return nbt.hasKey(key) ? deserialiser.apply((E)nbt.getTag(key)) : null; // Still gotta check it ain't null
+			return nbt.hasKey(key) ? deserialiser.apply((E) nbt.getTag(key)) : null; // Still gotta check it ain't null
 		}
 
 		@Override
-		public T update(EntityPlayer player, T value){
+		public T update(EntityPlayer player, T value) {
 			return ticker.apply(player, value);
 		}
 
 		@Override
-		public boolean isPersistent(boolean respawn){
+		public boolean isPersistent(boolean respawn) {
 			return respawn ? persistence.persistsOnRespawn() : persistence.persistsOnDimensionChange();
 		}
 
 		@Override
-		public boolean isSynced(){
+		public boolean isSynced() {
 			return synced;
 		}
 
 		@Override
-		public void write(ByteBuf buf, T value){
-			if(!synced) return;
+		public void write(ByteBuf buf, T value) {
+			if (!synced)
+				return;
 			NBTTagCompound nbt = new NBTTagCompound();
 			write(nbt, value);
 			ByteBufUtils.writeTag(buf, nbt); // Sure, it's not super-efficient, but it's by far the simplest way!
 		}
 
 		@Override
-		public T read(ByteBuf buf){
-			if(!synced) return null; // Better to check in here because this method should only read if it needs to
+		public T read(ByteBuf buf) {
+			if (!synced)
+				return null; // Better to check in here because this method should only read if it needs to
 			NBTTagCompound nbt = ByteBufUtils.readTag(buf);
-			if(nbt == null) return null;
+			if (nbt == null)
+				return null;
 			return read(nbt);
 		}
 
 		// Standard implementations to shorten common usages a bit
 
-		/** Creates a new {@code StoredVariable} for a byte value with the given key. */
-		public static StoredVariable<Byte, NBTTagByte> ofByte(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a byte value with the given key.
+		 */
+		public static StoredVariable<Byte, NBTTagByte> ofByte(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagByte::new, NBTTagByte::getByte, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a boolean value with the given key. As per Minecraft's usual
-		 * NBT conventions, the boolean value is stored as an {@link NBTTagByte} (1 = true, 0 = false). */
-		public static StoredVariable<Boolean, NBTTagByte> ofBoolean(String key, Persistence persistence){
-			return new StoredVariable<>(key, b -> new NBTTagByte((byte)(b?1:0)), t -> t.getByte() == 1, persistence);
+		/**
+		 * Creates a new {@code StoredVariable} for a boolean value with the given key. As per Minecraft's usual
+		 * NBT conventions, the boolean value is stored as an {@link NBTTagByte} (1 = true, 0 = false).
+		 */
+		public static StoredVariable<Boolean, NBTTagByte> ofBoolean(String key, Persistence persistence) {
+			return new StoredVariable<>(key, b -> new NBTTagByte((byte) (b ? 1 : 0)), t -> t.getByte() == 1, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for an integer value with the given key. */
-		public static StoredVariable<Integer, NBTTagInt> ofInt(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for an integer value with the given key.
+		 */
+		public static StoredVariable<Integer, NBTTagInt> ofInt(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagInt::new, NBTTagInt::getInt, persistence);
 		}
 
 		// I'm not going to do byte and long arrays here, if you really need them it's pretty obvious how to do it
 
-		/** Creates a new {@code StoredVariable} for an integer array value with the given key. */
-		public static StoredVariable<int[], NBTTagIntArray> ofIntArray(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for an integer array value with the given key.
+		 */
+		public static StoredVariable<int[], NBTTagIntArray> ofIntArray(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagIntArray::new, NBTTagIntArray::getIntArray, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a float value with the given key. */
-		public static StoredVariable<Float, NBTTagFloat> ofFloat(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a float value with the given key.
+		 */
+		public static StoredVariable<Float, NBTTagFloat> ofFloat(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagFloat::new, NBTTagFloat::getFloat, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a double value with the given key. */
-		public static StoredVariable<Double, NBTTagDouble> ofDouble(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a double value with the given key.
+		 */
+		public static StoredVariable<Double, NBTTagDouble> ofDouble(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagDouble::new, NBTTagDouble::getDouble, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a short value with the given key. */
-		public static StoredVariable<Short, NBTTagShort> ofShort(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a short value with the given key.
+		 */
+		public static StoredVariable<Short, NBTTagShort> ofShort(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagShort::new, NBTTagShort::getShort, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a long value with the given key. */
-		public static StoredVariable<Long, NBTTagLong> ofLong(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a long value with the given key.
+		 */
+		public static StoredVariable<Long, NBTTagLong> ofLong(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagLong::new, NBTTagLong::getLong, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a {@link String} value with the given key. */
-		public static StoredVariable<String, NBTTagString> ofString(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a {@link String} value with the given key.
+		 */
+		public static StoredVariable<String, NBTTagString> ofString(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTTagString::new, NBTTagString::getString, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a {@link BlockPos} value with the given key. */
-		public static StoredVariable<BlockPos, NBTTagCompound> ofBlockPos(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a {@link BlockPos} value with the given key.
+		 */
+		public static StoredVariable<BlockPos, NBTTagCompound> ofBlockPos(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTUtil::createPosTag, NBTUtil::getPosFromTag, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for a {@link UUID} value with the given key. */
-		public static StoredVariable<UUID, NBTTagCompound> ofUUID(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for a {@link UUID} value with the given key.
+		 */
+		public static StoredVariable<UUID, NBTTagCompound> ofUUID(String key, Persistence persistence) {
 			return new StoredVariable<>(key, NBTUtil::createUUIDTag, NBTUtil::getUUIDFromTag, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for an {@link ItemStack} value with the given key. */
-		public static StoredVariable<ItemStack, NBTTagCompound> ofItemStack(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for an {@link ItemStack} value with the given key.
+		 */
+		public static StoredVariable<ItemStack, NBTTagCompound> ofItemStack(String key, Persistence persistence) {
 			return new StoredVariable<>(key, ItemStack::serializeNBT, ItemStack::new, persistence);
 		}
 
-		/** Creates a new {@code StoredVariable} for an {@link NBTTagCompound} value with the given key. */
-		public static StoredVariable<NBTTagCompound, NBTTagCompound> ofNBT(String key, Persistence persistence){
+		/**
+		 * Creates a new {@code StoredVariable} for an {@link NBTTagCompound} value with the given key.
+		 */
+		public static StoredVariable<NBTTagCompound, NBTTagCompound> ofNBT(String key, Persistence persistence) {
 			return new StoredVariable<>(key, t -> t, t -> t, persistence); // No conversion required!
 		}
 	}

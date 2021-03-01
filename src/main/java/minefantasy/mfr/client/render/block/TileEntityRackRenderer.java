@@ -17,7 +17,7 @@ import net.minecraftforge.client.model.animation.FastTESR;
 
 public class TileEntityRackRenderer<T extends TileEntity> extends FastTESR<T> {
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer){
+	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
 		EnumFacing facing = EnumFacing.NORTH;
 		if (te.hasWorld()) {
 			IBlockState state = te.getWorld().getBlockState(te.getPos());
@@ -27,32 +27,29 @@ public class TileEntityRackRenderer<T extends TileEntity> extends FastTESR<T> {
 		float itemsStart = 2F / 16F;
 		float itemsGap = 4F / 16F;
 
-		if (te instanceof TileEntityRack){
+		if (te instanceof TileEntityRack) {
 			for (int a = 0; a < 4; a++) {
 				float itemX;
 				float itemY = 0.3F;
 				float itemZ;
-				float offset = 12F/16F;
+				float offset = 12F / 16F;
 
 				GlStateManager.pushMatrix();
 				GlStateManager.translate(x, y, z);
 				ItemStack stack = ((TileEntityRack) te).getInventory().getStackInSlot(a);
 
-				if (facing == EnumFacing.EAST){
-					itemX = 17F/16F;
+				if (facing == EnumFacing.EAST) {
+					itemX = 17F / 16F;
 					itemZ = (itemsStart - (a * itemsGap) + offset);
-				}
-				else if (facing == EnumFacing.WEST) {
-					itemX = -1F/16F;
+				} else if (facing == EnumFacing.WEST) {
+					itemX = -1F / 16F;
 					itemZ = itemsStart + (a * itemsGap);
-				}
-				else if (facing == EnumFacing.SOUTH) {
+				} else if (facing == EnumFacing.SOUTH) {
 					itemX = itemsStart + (a * itemsGap);
-					itemZ = -9F/16F;
-				}
-				else {
+					itemZ = -9F / 16F;
+				} else {
 					itemX = (itemsStart - (a * itemsGap) + offset);
-					itemZ = 24F/16F;
+					itemZ = 24F / 16F;
 				}
 				float r = getRotationForItem(stack.getItem());
 				float scale = 1.0F;

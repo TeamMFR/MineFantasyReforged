@@ -13,20 +13,20 @@ import java.io.IOException;
 
 public class PacketHandlerMF {
 
-    @SubscribeEvent
-    public void onServerPacket(FMLNetworkEvent.ServerCustomPacketEvent event) throws IOException {
-        PacketMF packet = PacketMF.readPacket(event.getPacket().payload());
-        EntityPlayer player = ((NetHandlerPlayServer) event.getHandler()).player;
+	@SubscribeEvent
+	public void onServerPacket(FMLNetworkEvent.ServerCustomPacketEvent event) throws IOException {
+		PacketMF packet = PacketMF.readPacket(event.getPacket().payload());
+		EntityPlayer player = ((NetHandlerPlayServer) event.getHandler()).player;
 
-        ((WorldServer) player.world).addScheduledTask(() -> packet.execute(player));
+		((WorldServer) player.world).addScheduledTask(() -> packet.execute(player));
 
-    }
+	}
 
-    @SubscribeEvent
-    @SideOnly(Side.CLIENT)
-    public void onClientPacket(FMLNetworkEvent.ClientCustomPacketEvent event) throws IOException{
-        PacketMF packet = PacketMF.readPacket(event.getPacket().payload());
+	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
+	public void onClientPacket(FMLNetworkEvent.ClientCustomPacketEvent event) throws IOException {
+		PacketMF packet = PacketMF.readPacket(event.getPacket().payload());
 
-        Minecraft.getMinecraft().addScheduledTask(() -> packet.execute(Minecraft.getMinecraft().player));
-    }
+		Minecraft.getMinecraft().addScheduledTask(() -> packet.execute(Minecraft.getMinecraft().player));
+	}
 }

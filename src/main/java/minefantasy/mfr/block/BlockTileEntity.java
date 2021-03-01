@@ -12,7 +12,6 @@ import net.minecraft.world.World;
 
 public abstract class BlockTileEntity<TE extends TileEntityBase> extends Block {
 
-
 	public BlockTileEntity(final Material material, final MapColor mapColor) {
 		super(material, mapColor);
 	}
@@ -33,7 +32,7 @@ public abstract class BlockTileEntity<TE extends TileEntityBase> extends Block {
 		return (TileEntityBase) world.getTileEntity(pos);
 	}
 
-	public String getTexture(){
+	public String getTexture() {
 		return "planks_oak";
 	}
 

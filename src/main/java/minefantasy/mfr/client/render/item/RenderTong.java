@@ -29,7 +29,7 @@ public class RenderTong extends WrappedItemModel implements IItemRenderer {
 		GlStateManager.pushMatrix();
 
 		renderWrapped(stack);
-		if (!heldItem.isEmpty()){
+		if (!heldItem.isEmpty()) {
 			GlStateManager.scale(0.5F, 0.5F, 0.5F);
 			GlStateManager.translate(1.5F, 1.5F, 1F);
 			Minecraft.getMinecraft().getRenderItem().renderItem(heldItem, TransformType.NONE);

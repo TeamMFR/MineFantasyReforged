@@ -28,153 +28,153 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
-    /**
-     * The spear is for the defensive player, it has a long reach, knockback and can
-     * be thrown. Spears are good for keeping enemies at a distance, Parrying is
-     * easier when sneaking
-     * <p>
-     * These are for the defensive player
-     */
-    public ItemSpear(String name, Item.ToolMaterial material, int rarity, float weight) {
-        super(material, name, rarity, weight);
-    }
+	/**
+	 * The spear is for the defensive player, it has a long reach, knockback and can
+	 * be thrown. Spears are good for keeping enemies at a distance, Parrying is
+	 * easier when sneaking
+	 * <p>
+	 * These are for the defensive player
+	 */
+	public ItemSpear(String name, Item.ToolMaterial material, int rarity, float weight) {
+		super(material, name, rarity, weight);
+	}
 
-    @Override
-    public boolean allowOffhand(EntityPlayer player, EnumHand hand) {
-        return player.getHeldItem(hand).getItem() instanceof ItemShield;
-    }
+	@Override
+	public boolean allowOffhand(EntityPlayer player, EnumHand hand) {
+		return player.getHeldItem(hand).getItem() instanceof ItemShield;
+	}
 
-    @Override
-    public boolean isHeavyWeapon() {
-        return true;
-    }
+	@Override
+	public boolean isHeavyWeapon() {
+		return true;
+	}
 
-    @Override
-    public float getReachModifierInBlocks(ItemStack stack) {
-        return 3.0F;
-    }
+	@Override
+	public float getReachModifierInBlocks(ItemStack stack) {
+		return 3.0F;
+	}
 
-    @Override
-    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
-        super.addInformation(item, world, list, flag);
+	@Override
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+		super.addInformation(item, world, list, flag);
 
-        if (material != Item.ToolMaterial.WOOD) {
-            list.add(TextFormatting.DARK_GREEN + I18n.format(
-                    "attribute.modifier.plus." + 0, decimal_format.format(getMountedDamage()),
-                    I18n.format("attribute.weapon.mountedBonus")));
-        }
-    }
+		if (material != Item.ToolMaterial.WOOD) {
+			list.add(TextFormatting.DARK_GREEN + I18n.format(
+					"attribute.modifier.plus." + 0, decimal_format.format(getMountedDamage()),
+					I18n.format("attribute.weapon.mountedBonus")));
+		}
+	}
 
-    @Override
-    public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam, boolean properHit) {
-        float damage = super.modifyDamage(item, wielder, hit, initialDam, properHit);
+	@Override
+	public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam, boolean properHit) {
+		float damage = super.modifyDamage(item, wielder, hit, initialDam, properHit);
 
-        EntityLivingBase target = (EntityLivingBase) hit;
+		EntityLivingBase target = (EntityLivingBase) hit;
 
-        if (wielder instanceof EntityPlayer && wielder.isRiding() && tryPerformAbility((EntityPlayer) wielder, charge_cost)) {
-            ItemWaraxe.brutalise(wielder, target, 1.0F);
-            return damage + getMountedDamage();
-        }
-        if (!wielder.isRiding() && wielder.isSprinting()) {
-            if (this instanceof ItemHalbeard) {
-                return Math.max(damage / 1.25F, 1.0F);
-            } else {
-                return damage * 1.25F;
-            }
-        }
-        return damage;
-    }
+		if (wielder instanceof EntityPlayer && wielder.isRiding() && tryPerformAbility((EntityPlayer) wielder, charge_cost)) {
+			ItemWaraxe.brutalise(wielder, target, 1.0F);
+			return damage + getMountedDamage();
+		}
+		if (!wielder.isRiding() && wielder.isSprinting()) {
+			if (this instanceof ItemHalbeard) {
+				return Math.max(damage / 1.25F, 1.0F);
+			} else {
+				return damage * 1.25F;
+			}
+		}
+		return damage;
+	}
 
-    @Override
-    public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-        blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
-        return true;
-    }
+	@Override
+	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
+		blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
+		return true;
+	}
 
-    @Override
-    public void onParry(DamageSource source, EntityLivingBase user, Entity attacker, float dam) {
-        super.onParry(source, user, attacker, dam);
-        if (ConfigWeapon.useBalance && user instanceof EntityPlayer) {
-            TacticalManager.throwPlayerOffBalance((EntityPlayer) user, getBalance(), rand.nextBoolean());
-        }
-    }
+	@Override
+	public void onParry(DamageSource source, EntityLivingBase user, Entity attacker, float dam) {
+		super.onParry(source, user, attacker, dam);
+		if (ConfigWeapon.useBalance && user instanceof EntityPlayer) {
+			TacticalManager.throwPlayerOffBalance((EntityPlayer) user, getBalance(), rand.nextBoolean());
+		}
+	}
 
-    private float getMountedDamage() {
-        if (material == Item.ToolMaterial.WOOD) {
-            return 0;
-        }
-        return 4F;
-    }
+	private float getMountedDamage() {
+		if (material == Item.ToolMaterial.WOOD) {
+			return 0;
+		}
+		return 4F;
+	}
 
-    @Override
-    protected int getParryDamage(float dam) {
-        return (int) dam;
-    }
+	@Override
+	protected int getParryDamage(float dam) {
+		return (int) dam;
+	}
 
-    /**
-     * Gets the angle the weapon can parry
-     */
-    @Override
-    public float getParryAngleModifier(EntityLivingBase user) {
-        return user.isSneaking() ? 1.2F : 0.85F;
-    }
+	/**
+	 * Gets the angle the weapon can parry
+	 */
+	@Override
+	public float getParryAngleModifier(EntityLivingBase user) {
+		return user.isSneaking() ? 1.2F : 0.85F;
+	}
 
-    @Override
-    public float getBalance() {
-        return 0.5F;
-    }
+	@Override
+	public float getBalance() {
+		return 0.5F;
+	}
 
-    @Override
-    protected float getKnockbackStrength() {
-        return 2.5F;
-    }
+	@Override
+	protected float getKnockbackStrength() {
+		return 2.5F;
+	}
 
-    @Override
-    protected boolean canAnyMobParry() {
-        return false;
-    }
+	@Override
+	protected boolean canAnyMobParry() {
+		return false;
+	}
 
-    @Override
-    public float getAttackSpeed(ItemStack item) {
-        return super.getAttackSpeed(item) + speedSpear;
-    }
+	@Override
+	public float getAttackSpeed(ItemStack item) {
+		return super.getAttackSpeed(item) + speedSpear;
+	}
 
-    /**
-     * gets the time after being hit your guard will be let down
-     */
-    @Override
-    public int getParryCooldown(DamageSource source, float dam, ItemStack weapon) {
-        return spearParryTime;
-    }
+	/**
+	 * gets the time after being hit your guard will be let down
+	 */
+	@Override
+	public int getParryCooldown(DamageSource source, float dam, ItemStack weapon) {
+		return spearParryTime;
+	}
 
-    @Override
-    protected float getStaminaMod() {
-        return spearStaminaCost;
-    }
+	@Override
+	protected float getStaminaMod() {
+		return spearStaminaCost;
+	}
 
-    @Override
-    public WeaponClass getWeaponClass() {
-        return WeaponClass.POLEARM;
-    }
+	@Override
+	public WeaponClass getWeaponClass() {
+		return WeaponClass.POLEARM;
+	}
 
-    @Override
-    protected float[] getWeaponRatio(ItemStack implement) {
-        return piercingDamage;
-    }
+	@Override
+	protected float[] getWeaponRatio(ItemStack implement) {
+		return piercingDamage;
+	}
 
-    @Override
-    public boolean canCounter() {
-        return false;
-    }
+	@Override
+	public boolean canCounter() {
+		return false;
+	}
 
-    @Override
-    public float getScale(ItemStack itemstack) {
-        return 3.0F;
-    }
+	@Override
+	public float getScale(ItemStack itemstack) {
+		return 3.0F;
+	}
 
-    @Override
-    public void registerClient() {
-        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-        ModelLoaderHelper.registerWrappedItemModel(this, new RenderSpear(() -> modelLocation), modelLocation);
-    }
+	@Override
+	public void registerClient() {
+		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+		ModelLoaderHelper.registerWrappedItemModel(this, new RenderSpear(() -> modelLocation), modelLocation);
+	}
 }

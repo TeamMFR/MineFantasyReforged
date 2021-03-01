@@ -8,40 +8,40 @@ import net.minecraft.util.SoundEvent;
  * @author AnonymousProductions
  */
 public interface ICarpenterRecipe {
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     */
-    boolean matches(CarpenterCraftMatrix var1);
+	/**
+	 * Used to check if a recipe matches current crafting inventory
+	 */
+	boolean matches(CarpenterCraftMatrix var1);
 
-    /**
-     * Returns an Item that is the result of this recipe
-     */
-    ItemStack getCraftingResult(CarpenterCraftMatrix var1);
+	/**
+	 * Returns an Item that is the result of this recipe
+	 */
+	ItemStack getCraftingResult(CarpenterCraftMatrix var1);
 
-    int getCraftTime();
+	int getCraftTime();
 
-    /**
-     * Returns the size of the recipe area
-     */
-    int getRecipeSize();
+	/**
+	 * Returns the size of the recipe area
+	 */
+	int getRecipeSize();
 
-    int getRecipeHammer();
+	int getRecipeHammer();
 
-    float getExperience();
+	float getExperience();
 
-    int getAnvil();
+	int getAnvil();
 
-    int getBlockTier();
+	int getBlockTier();
 
-    boolean outputHot();
+	boolean outputHot();
 
-    String getToolType();
+	String getToolType();
 
-    SoundEvent getSound();
+	SoundEvent getSound();
 
-    ItemStack getRecipeOutput();
+	ItemStack getRecipeOutput();
 
-    String getResearch();
+	String getResearch();
 
-    Skill getSkill();
+	Skill getSkill();
 }

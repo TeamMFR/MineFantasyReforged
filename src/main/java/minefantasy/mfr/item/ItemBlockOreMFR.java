@@ -7,27 +7,27 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
 public class ItemBlockOreMFR extends ItemBlockBase {
-    private BlockOreMF ore;
+	private BlockOreMF ore;
 
-    public ItemBlockOreMFR(Block block) {
-        super(block);
-        ore = (BlockOreMF) block;
+	public ItemBlockOreMFR(Block block) {
+		super(block);
+		ore = (BlockOreMF) block;
 
-    }
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        int lvl = ore.rarity + 1;
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		int lvl = ore.rarity + 1;
 
-        if (item.isItemEnchanted()) {
-            if (lvl == 0) {
-                lvl++;
-            }
-            lvl++;
-        }
-        if (lvl >= ToolListMFR.RARITY.length) {
-            lvl = ToolListMFR.RARITY.length - 1;
-        }
-        return ToolListMFR.RARITY[lvl];
-    }
+		if (item.isItemEnchanted()) {
+			if (lvl == 0) {
+				lvl++;
+			}
+			lvl++;
+		}
+		if (lvl >= ToolListMFR.RARITY.length) {
+			lvl = ToolListMFR.RARITY.length - 1;
+		}
+		return ToolListMFR.RARITY[lvl];
+	}
 }

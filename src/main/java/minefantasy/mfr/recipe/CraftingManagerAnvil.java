@@ -31,7 +31,6 @@ public class CraftingManagerAnvil {
 
 	private CraftingManagerAnvil() {
 		Collections.sort(this.recipes, new RecipeSorterAnvil(this));
-		System.out.println("MineFantasy: Anvil recipes initiating");
 	}
 
 	/**
@@ -43,7 +42,7 @@ public class CraftingManagerAnvil {
 
 	public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, Object... input) {
 		return null;
-//		return addRecipe(result, skill, research, hot, tool, hammer, anvil, time, (byte) 0, input);
+		//		return addRecipe(result, skill, research, hot, tool, hammer, anvil, time, (byte) 0, input);
 	}
 
 	public IAnvilRecipe addToolRecipe(ItemStack result, Skill skill, String research, boolean hot,
@@ -121,7 +120,6 @@ public class CraftingManagerAnvil {
 		this.recipes.add(recipe);
 		return recipe;
 	}
-
 
 	public IAnvilRecipe addShapelessRecipe(ItemStack output, Skill skill, String research, boolean hot,
 			String tool, int hammer, int anvil, int time, Object... input) {

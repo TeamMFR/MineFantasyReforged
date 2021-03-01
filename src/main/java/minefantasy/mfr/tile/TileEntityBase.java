@@ -34,7 +34,6 @@ public abstract class TileEntityBase extends TileEntity {
 	 */
 	protected abstract ItemStackHandler createInventory();
 
-
 	/**
 	 * Get the inventory.
 	 *
@@ -77,14 +76,15 @@ public abstract class TileEntityBase extends TileEntity {
 	 * On Block Break, drop inventory items.
 	 */
 	public void onBlockBreak() {
-		if (getInventory() != null){
+		if (getInventory() != null) {
 			InventoryUtils.dropItemsInWorld(world, getInventory(), pos);
 		}
 	}
+
 	public void sendUpdates() {
 		world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
-		world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+		world.scheduleBlockUpdate(pos, this.getBlockType(), 0, 0);
 		markDirty();
 	}
 

@@ -30,104 +30,104 @@ import java.util.List;
 import java.util.Random;
 
 public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
-    private Random rand = new Random();
+	private Random rand = new Random();
 
-    public ItemBlockTrough(Block base) {
-        super(base);
-    }
+	public ItemBlockTrough(Block base) {
+		super(base);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
-        if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockTrough.FILL_LEVEL)) {
-            int stock = item.getTagCompound().getInteger(BlockTrough.FILL_LEVEL);
-            if (stock > 0) {
-                list.add(I18n.format("attribute.fill", stock));
-            }
-        }
-        CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-        if (material != null) {
-            list.add(I18n.format("attribute.fill.capacity.name",
-                    TileEntityTrough.getCapacity(material.tier) * TileEntityTrough.capacityScale));
-        }
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
+		if (item.hasTagCompound() && item.getTagCompound().hasKey(BlockTrough.FILL_LEVEL)) {
+			int stock = item.getTagCompound().getInteger(BlockTrough.FILL_LEVEL);
+			if (stock > 0) {
+				list.add(I18n.format("attribute.fill", stock));
+			}
+		}
+		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
+		if (material != null) {
+			list.add(I18n.format("attribute.fill.capacity.name",
+					TileEntityTrough.getCapacity(material.tier) * TileEntityTrough.capacityScale));
+		}
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(itemIn)) {
-            return;
-        }
-        ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
-        for (CustomMaterial customMat : wood) {
-            items.add(this.construct(customMat.name));
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs itemIn, NonNullList<ItemStack> items) {
+		if (!isInCreativeTab(itemIn)) {
+			return;
+		}
+		ArrayList<CustomMaterial> wood = CustomMaterial.getList("wood");
+		for (CustomMaterial customMat : wood) {
+			items.add(this.construct(customMat.name));
+		}
+	}
 
-    private ItemStack construct(String name) {
-        return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
-    }
+	private ItemStack construct(String name) {
+		return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item) {
-        return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
+		return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
+	}
 
-    @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
 
-        if (movingobjectposition == null) {
-            return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
-        } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos hit = movingobjectposition.getBlockPos();
-                ItemStack item = player.getHeldItem(hand);
+		if (movingobjectposition == null) {
+			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+		} else {
+			if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
+				BlockPos hit = movingobjectposition.getBlockPos();
+				ItemStack item = player.getHeldItem(hand);
 
-                if (!world.canMineBlockBody(player, hit)) {
-                    return super.onItemUse( player, world, pos, hand, facing, hitX, hitY, hitZ);
-                }
+				if (!world.canMineBlockBody(player, hit)) {
+					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+				}
 
-                if (!player.canPlayerEdit(hit, movingobjectposition.sideHit, item)) {
-                    return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
-                }
+				if (!player.canPlayerEdit(hit, movingobjectposition.sideHit, item)) {
+					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+				}
 
-                if (isWaterSource(world, hit)) {
-                    gather(player);
-                    world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
-                    return EnumActionResult.FAIL;
-                }
-            }
-            return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
-        }
-    }
+				if (isWaterSource(world, hit)) {
+					gather(player);
+					world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
+					return EnumActionResult.FAIL;
+				}
+			}
+			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+		}
+	}
 
-    private void gather(EntityPlayer player) {
-        ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
-        if (item != null) {
-            int tier = 0;
-            CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-            if (material != null) {
-                tier = material.tier;
-            }
-            NBTTagCompound nbt = getNBT(item);
-            nbt.setInteger(BlockTrough.FILL_LEVEL, TileEntityTrough.getCapacity(tier) * TileEntityTrough.capacityScale);
-        }
-        player.swingArm(EnumHand.MAIN_HAND);
+	private void gather(EntityPlayer player) {
+		ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
+		if (item != null) {
+			int tier = 0;
+			CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
+			if (material != null) {
+				tier = material.tier;
+			}
+			NBTTagCompound nbt = getNBT(item);
+			nbt.setInteger(BlockTrough.FILL_LEVEL, TileEntityTrough.getCapacity(tier) * TileEntityTrough.capacityScale);
+		}
+		player.swingArm(EnumHand.MAIN_HAND);
 
-    }
+	}
 
-    private NBTTagCompound getNBT(ItemStack item) {
-        if (!item.hasTagCompound()) {
-            item.setTagCompound(new NBTTagCompound());
-        }
-        return item.getTagCompound();
-    }
+	private NBTTagCompound getNBT(ItemStack item) {
+		if (!item.hasTagCompound()) {
+			item.setTagCompound(new NBTTagCompound());
+		}
+		return item.getTagCompound();
+	}
 
-    private boolean isWaterSource(World world, BlockPos pos) {
-        if (world.getBlockState(pos).getMaterial() == Material.WATER) {
-            return true;
-        }
-        return false;
-    }
+	private boolean isWaterSource(World world, BlockPos pos) {
+		if (world.getBlockState(pos).getMaterial() == Material.WATER) {
+			return true;
+		}
+		return false;
+	}
 }

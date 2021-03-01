@@ -49,207 +49,206 @@ import java.util.List;
  * @author Anonymous Productions
  */
 public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, IClientRegister {
-    protected int itemRarity;
-    private float baseDamage;
-    // ===================================================== CUSTOM START
-    // =============================================================\\
-    private boolean isCustom = false;
-    private float efficiencyMod = 1.0F;
+	protected int itemRarity;
+	private float baseDamage;
+	// ===================================================== CUSTOM START
+	// =============================================================\\
+	private boolean isCustom = false;
+	private float efficiencyMod = 1.0F;
 
-    public ItemTongs(String name, ToolMaterial material, int rarity) {
-        super(0F, 1.0F, material, Sets.newHashSet(new Block[]{}));
-        itemRarity = rarity;
-        setCreativeTab(MineFantasyTabs.tabOldTools);
-        this.setMaxDamage(getMaxDamage() / 5);
-        setRegistryName(name);
-        setUnlocalizedName(name);
+	public ItemTongs(String name, ToolMaterial material, int rarity) {
+		super(0F, 1.0F, material, Sets.newHashSet(new Block[] {}));
+		itemRarity = rarity;
+		setCreativeTab(MineFantasyTabs.tabOldTools);
+		this.setMaxDamage(getMaxDamage() / 5);
+		setRegistryName(name);
+		setUnlocalizedName(name);
 
-        MineFantasyReborn.PROXY.addClientRegister(this);
-    }
+		MineFantasyReborn.PROXY.addClientRegister(this);
+	}
 
-    @Override
-    public ToolMaterial getMaterial() {
-        return toolMaterial;
-    }
+	@Override
+	public ToolMaterial getMaterial() {
+		return toolMaterial;
+	}
 
-    @Override
-    public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-        ItemStack item = player.getHeldItem(hand);
-        RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack item = player.getHeldItem(hand);
+		RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
 
-        if (movingobjectposition == null) {
-            return ActionResult.newResult(EnumActionResult.PASS, item);
-        } else {
-            if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-                BlockPos pos = movingobjectposition.getBlockPos();
+		if (movingobjectposition == null) {
+			return ActionResult.newResult(EnumActionResult.PASS, item);
+		} else {
+			if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
+				BlockPos pos = movingobjectposition.getBlockPos();
 
-                if (!world.canMineBlockBody(player, pos)) {
-                    return ActionResult.newResult(EnumActionResult.PASS, item);
-                }
+				if (!world.canMineBlockBody(player, pos)) {
+					return ActionResult.newResult(EnumActionResult.PASS, item);
+				}
 
-                if (!player.canPlayerEdit(pos, movingobjectposition.sideHit, item)) {
-                    return ActionResult.newResult(EnumActionResult.PASS, item);
-                }
+				if (!player.canPlayerEdit(pos, movingobjectposition.sideHit, item)) {
+					return ActionResult.newResult(EnumActionResult.PASS, item);
+				}
 
-                float water = TongsHelper.getWaterSource(world, pos);
+				float water = TongsHelper.getWaterSource(world, pos);
 
-                if (!TongsHelper.getHeldItem(item).isEmpty() && water >= 0) {
-                    ItemStack drop = TongsHelper.getHeldItem(item).copy(), cooled = drop;
+				if (!TongsHelper.getHeldItem(item).isEmpty() && water >= 0) {
+					ItemStack drop = TongsHelper.getHeldItem(item).copy(), cooled = drop;
 
-                    if (TongsHelper.isCoolableItem(drop)) {
-                        cooled = Heatable.getQuenchedItem(drop, water);
-                        cooled.setCount(drop.getCount());
+					if (TongsHelper.isCoolableItem(drop)) {
+						cooled = Heatable.getQuenchedItem(drop, water);
+						cooled.setCount(drop.getCount());
 
-                        player.playSound(SoundEvents.ENTITY_GENERIC_SPLASH, 1F, 1F);
-                        player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 2F, 0.5F);
+						player.playSound(SoundEvents.ENTITY_GENERIC_SPLASH, 1F, 1F);
+						player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 2F, 0.5F);
 
-                        for (int a = 0; a < 5; a++) {
-                            world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, 0, 0.065F, 0);
-                        }
-                    }
-                    if (!cooled.isEmpty() && !world.isRemote) {
-                        if (world.isAirBlock(pos.add(0,1,0))) {
-                            EntityItem entity = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, cooled);
-                            entity.setPickupDelay(20);
-                            entity.motionX = entity.motionY = entity.motionZ = 0F;
-                            world.spawnEntity(entity);
-                        } else {
-                            player.entityDropItem(cooled, 0);
-                        }
-                    }
+						for (int a = 0; a < 5; a++) {
+							world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, 0, 0.065F, 0);
+						}
+					}
+					if (!cooled.isEmpty() && !world.isRemote) {
+						if (world.isAirBlock(pos.add(0, 1, 0))) {
+							EntityItem entity = new EntityItem(world, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5, cooled);
+							entity.setPickupDelay(20);
+							entity.motionX = entity.motionY = entity.motionZ = 0F;
+							world.spawnEntity(entity);
+						} else {
+							player.entityDropItem(cooled, 0);
+						}
+					}
 
-                    return ActionResult.newResult(EnumActionResult.PASS, TongsHelper.clearHeldItem(item, player));
-                }
-            }
+					return ActionResult.newResult(EnumActionResult.PASS, TongsHelper.clearHeldItem(item, player));
+				}
+			}
 
-            return ActionResult.newResult(EnumActionResult.FAIL, item);
-        }
-    }
+			return ActionResult.newResult(EnumActionResult.FAIL, item);
+		}
+	}
 
-    public ItemTongs setCustom(String s) {
-        canRepair = false;
-        isCustom = true;
-        return this;
-    }
+	public ItemTongs setCustom(String s) {
+		canRepair = false;
+		isCustom = true;
+		return this;
+	}
 
-    public ItemTongs setBaseDamage(float baseDamage) {
-        this.baseDamage = baseDamage;
-        return this;
-    }
+	public ItemTongs setBaseDamage(float baseDamage) {
+		this.baseDamage = baseDamage;
+		return this;
+	}
 
-    public ItemTongs setEfficiencyMod(float efficiencyMod) {
-        this.efficiencyMod = efficiencyMod;
-        return this;
-    }
+	public ItemTongs setEfficiencyMod(float efficiencyMod) {
+		this.efficiencyMod = efficiencyMod;
+		return this;
+	}
 
-    @Override
-    public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
-        if (slot != EntityEquipmentSlot.MAINHAND) {
-            return super.getAttributeModifiers(slot, stack);
-        }
+	@Override
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+		if (slot != EntityEquipmentSlot.MAINHAND) {
+			return super.getAttributeModifiers(slot, stack);
+		}
 
-        Multimap<String, AttributeModifier> map = HashMultimap.create();
-        map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
-        map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -1F, 0));
-        return map;
-    }
+		Multimap<String, AttributeModifier> map = HashMultimap.create();
+		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
+		map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -1F, 0));
+		return map;
+	}
 
-    /**
-     * Gets a stack-sensitive value for the melee dmg
-     */
-    protected float getMeleeDamage(ItemStack item) {
-        return baseDamage + CustomToolHelper.getMeleeDamage(item, toolMaterial.getAttackDamage());
-    }
+	/**
+	 * Gets a stack-sensitive value for the melee dmg
+	 */
+	protected float getMeleeDamage(ItemStack item) {
+		return baseDamage + CustomToolHelper.getMeleeDamage(item, toolMaterial.getAttackDamage());
+	}
 
-    protected float getWeightModifier(ItemStack stack) {
-        return CustomToolHelper.getWeightModifier(stack, 1.0F);
-    }
+	protected float getWeightModifier(ItemStack stack) {
+		return CustomToolHelper.getWeightModifier(stack, 1.0F);
+	}
 
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
-    }
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
+	}
 
-    public ItemStack construct(String main) {
-        return CustomToolHelper.construct(this, main, null);
-    }
+	public ItemStack construct(String main) {
+		return CustomToolHelper.construct(this, main, null);
+	}
 
-    @Override
-    public EnumRarity getRarity(ItemStack item) {
-        return CustomToolHelper.getRarity(item, itemRarity);
-    }
+	@Override
+	public EnumRarity getRarity(ItemStack item) {
+		return CustomToolHelper.getRarity(item, itemRarity);
+	}
 
-    public float getDigSpeed(ItemStack stack, Block block, World world, BlockPos pos, EntityPlayer player) {
-        if (!ForgeHooks.isToolEffective(world, pos, stack)) {
-            return this.getDestroySpeed(stack, block);
-        }
-        float digSpeed = player.getDigSpeed(block.getDefaultState(), pos);
-        return CustomToolHelper.getEfficiency(stack, digSpeed, efficiencyMod / 10);
-    }
+	public float getDigSpeed(ItemStack stack, Block block, World world, BlockPos pos, EntityPlayer player) {
+		if (!ForgeHooks.isToolEffective(world, pos, stack)) {
+			return this.getDestroySpeed(stack, block);
+		}
+		float digSpeed = player.getDigSpeed(block.getDefaultState(), pos);
+		return CustomToolHelper.getEfficiency(stack, digSpeed, efficiencyMod / 10);
+	}
 
-    public float getDestroySpeed(ItemStack stack, Block block) {
-        return block.getMaterial(block.getDefaultState()) != Material.IRON && block.getMaterial(block.getDefaultState()) != Material.ANVIL
-                && block.getMaterial(block.getDefaultState()) != Material.ROCK ? super.getDestroySpeed(stack, block.getDefaultState())
-                : CustomToolHelper.getEfficiency(stack, this.efficiency, efficiencyMod / 2);
-    }
+	public float getDestroySpeed(ItemStack stack, Block block) {
+		return block.getMaterial(block.getDefaultState()) != Material.IRON && block.getMaterial(block.getDefaultState()) != Material.ANVIL
+				&& block.getMaterial(block.getDefaultState()) != Material.ROCK ? super.getDestroySpeed(stack, block.getDefaultState())
+				: CustomToolHelper.getEfficiency(stack, this.efficiency, efficiencyMod / 2);
+	}
 
-    @Override
-    public int getHarvestLevel(ItemStack stack, String toolClass, EntityPlayer player, IBlockState state) {
-        return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass, player, state));
-    }
+	@Override
+	public int getHarvestLevel(ItemStack stack, String toolClass, EntityPlayer player, IBlockState state) {
+		return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass, player, state));
+	}
 
-    @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-        if (!isInCreativeTab(tab)) {
-            return;
-        }
-        if (isCustom) {
-            ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-            for (CustomMaterial customMat : metal) {
-                if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-                    items.add(this.construct(customMat.name));
-                }
-            }
-        } else {
-            super.getSubItems(tab, items);
-        }
-    }
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (!isInCreativeTab(tab)) {
+			return;
+		}
+		if (isCustom) {
+			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
+			for (CustomMaterial customMat : metal) {
+				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+					items.add(this.construct(customMat.name));
+				}
+			}
+		} else {
+			super.getSubItems(tab, items);
+		}
+	}
 
-    @Override
-    public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
-        if (isCustom) {
-            CustomToolHelper.addInformation(item, list);
-        } else {
+	@Override
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+		if (isCustom) {
+			CustomToolHelper.addInformation(item, list);
+		} else {
 
-            ItemStack held = TongsHelper.getHeldItem(item);
-            if (!held.isEmpty()) {
-                list.add("");
-                list.add(held.getItem().getItemStackDisplayName(held));
-                held.getItem().addInformation(held, world, list, flag);
-            }
-        }
+			ItemStack held = TongsHelper.getHeldItem(item);
+			if (!held.isEmpty()) {
+				list.add("");
+				list.add(held.getItem().getItemStackDisplayName(held));
+				held.getItem().addInformation(held, world, list, flag);
+			}
+		}
 
-        super.addInformation(item, world, list, flag);
-    }
+		super.addInformation(item, world, list, flag);
+	}
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public String getItemStackDisplayName(ItemStack item) {
-        String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
-        return CustomToolHelper.getLocalisedName(item, unlocalName);
-    }
+	@Override
+	@SideOnly(Side.CLIENT)
+	public String getItemStackDisplayName(ItemStack item) {
+		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
+		return CustomToolHelper.getLocalisedName(item, unlocalName);
+	}
 
-    @Override
-    public boolean hitEntity(ItemStack item, EntityLivingBase target, EntityLivingBase user) {
-        return true;
-    }
-    // ====================================================== CUSTOM END
-    // ==============================================================\\
+	@Override
+	public boolean hitEntity(ItemStack item, EntityLivingBase target, EntityLivingBase user) {
+		return true;
+	}
+	// ====================================================== CUSTOM END
+	// ==============================================================\\
 
-
-    @Override
-    public void registerClient() {
-        ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
-        ModelLoaderHelper.registerWrappedItemModel(this, new RenderTong(() -> modelLocation), modelLocation);
-    }
+	@Override
+	public void registerClient() {
+		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
+		ModelLoaderHelper.registerWrappedItemModel(this, new RenderTong(() -> modelLocation), modelLocation);
+	}
 }

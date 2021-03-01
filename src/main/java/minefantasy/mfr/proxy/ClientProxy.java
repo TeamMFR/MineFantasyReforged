@@ -71,96 +71,96 @@ import org.lwjgl.input.Keyboard;
  */
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends ClientProxyBase {
-    @Override
-    public void preInit() {
-        super.preInit();
+	@Override
+	public void preInit() {
+		super.preInit();
 
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+		MinecraftForge.EVENT_BUS.register(this);
+	}
 
-    @Override
-    public void init() {
-        super.init();
+	@Override
+	public void init() {
+		super.init();
 
-        BlockColorsMFR.init();
-        ItemColorsMFR.init();
-    }
+		BlockColorsMFR.init();
+		ItemColorsMFR.init();
+	}
 
-    @Override
-    public void postInit() {
-        super.postInit();
-    }
+	@Override
+	public void postInit() {
+		super.postInit();
+	}
 
-    /**
-     * Is the player trying to jump (assuming no screens are open)
-     */
-    public static boolean isUserJumpCommand(Entity user) {
-        return Minecraft.getMinecraft().currentScreen == null && user == Minecraft.getMinecraft().player && Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
-    }
+	/**
+	 * Is the player trying to jump (assuming no screens are open)
+	 */
+	public static boolean isUserJumpCommand(Entity user) {
+		return Minecraft.getMinecraft().currentScreen == null && user == Minecraft.getMinecraft().player && Keyboard.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindJump.getKeyCode());
+	}
 
-    @Override
-    public World getClientWorld() {
-        return FMLClientHandler.instance().getClient().world;
-    }
+	@Override
+	public World getClientWorld() {
+		return FMLClientHandler.instance().getClient().world;
+	}
 
-    @Override
-    public void preInit(FMLPreInitializationEvent e) {
-        registerEntityRenderer();
-        registerTickHandlers();
-    }
+	@Override
+	public void preInit(FMLPreInitializationEvent e) {
+		registerEntityRenderer();
+		registerTickHandlers();
+	}
 
-    @Override
-    public void registerMain() {
-        super.registerMain();
+	@Override
+	public void registerMain() {
+		super.registerMain();
 
-    }
+	}
 
-    @Override
-    public void postInit(FMLPostInitializationEvent e) {
-        super.postInit(e);
-        MineFantasyRebornAPI.init();
-        KnowledgePageRegistry.registerPages();
-    }
+	@Override
+	public void postInit(FMLPostInitializationEvent e) {
+		super.postInit(e);
+		MineFantasyRebornAPI.init();
+		KnowledgePageRegistry.registerPages();
+	}
 
-    @Override
-    public void registerTickHandlers() {
-        super.registerTickHandlers();
-        FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
-        FMLCommonHandler.instance().bus().register(new AnimationHandler());
-        FMLCommonHandler.instance().bus().register(new ExtendedReach());
-        MinecraftForge.EVENT_BUS.register(new HudHandler());
-        FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+	@Override
+	public void registerTickHandlers() {
+		super.registerTickHandlers();
+		FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
+		FMLCommonHandler.instance().bus().register(new AnimationHandler());
+		FMLCommonHandler.instance().bus().register(new ExtendedReach());
+		MinecraftForge.EVENT_BUS.register(new HudHandler());
+		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new TileEntityBellowsRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBombPress.class, new TileEntityBombPressRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer<>());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer<>());
-    }
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new TileEntityBellowsRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAmmoBox.class, new TileEntityAmmoBoxRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityQuern.class, new TileEntityQuernRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBombPress.class, new TileEntityBombPressRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer<>());
+	}
 
-    public void registerEntityRenderer() {
-        RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, RenderArrowMF::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, RenderBomb::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, RenderMine::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, RenderShrapnel::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, RenderFireBlast::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, RenderSmoke::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, RenderDragonBreath::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
-        RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, RenderPowerArmour::new);
+	public void registerEntityRenderer() {
+		RenderingRegistry.registerEntityRenderingHandler(EntityArrowMFR.class, RenderArrowMF::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityBomb.class, RenderBomb::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMine.class, RenderMine::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityShrapnel.class, RenderShrapnel::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityFireBlast.class, RenderFireBlast::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntitySmoke.class, RenderSmoke::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragonBreath.class, RenderDragonBreath::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityParachute.class, new RenderParachute());
+		RenderingRegistry.registerEntityRenderingHandler(EntityCogwork.class, RenderPowerArmour::new);
 
-        RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, RenderDragon::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, RenderMinotaur::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, RenderHound::new);
-    }
+		RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, RenderDragon::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, RenderMinotaur::new);
+		RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, RenderHound::new);
+	}
 
-    @Override
-    public EntityPlayer getClientPlayer() {
-        return Minecraft.getMinecraft().player;
-    }
+	@Override
+	public EntityPlayer getClientPlayer() {
+		return Minecraft.getMinecraft().player;
+	}
 
 }
