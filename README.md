@@ -1,6 +1,6 @@
 # MineFantasy Reborn &nbsp; ![Mod Build](https://github.com/TeamMFR/MineFantasy-reborn/workflows/Mod%20Build/badge.svg)
 
-Dev Build: [Link](https://github.com/TeamMFR/MineFantasy-reborn/packages/396537)
+Dev Build: [Link](https://github.com/TeamMFR/MineFantasy-reborn/packages)
 
 Source installation information for modders  
 -------------------------------------------
