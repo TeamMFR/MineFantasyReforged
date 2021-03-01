@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Old package cleanup with Delete Package Versions
-      - uses: actions/delete-package-versions@v1
+        uses: actions/delete-package-versions@v1
         with:
           package-name: 'minefantasy.mfr.MineFantasyReborn.MineFantasy-reborn'
           num-old-versions-to-delete: 1
