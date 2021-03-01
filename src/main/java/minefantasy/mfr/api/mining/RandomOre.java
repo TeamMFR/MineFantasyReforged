@@ -1,8 +1,7 @@
 package minefantasy.mfr.api.mining;
 
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -13,7 +12,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class RandomOre {
-    public static ArrayList<RandomOre> drops = new ArrayList<RandomOre>();
+    public static ArrayList<RandomOre> drops = new ArrayList<>();
 
     private final ItemStack loot;
     private final float chanceToDrop;
@@ -70,7 +69,7 @@ public class RandomOre {
 
     public static ArrayList<ItemStack> getDroppedItems(EntityLivingBase user, Block base, int meta, int harvest,
                                                        int fortune, boolean silktouch, int y) {
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> loot = new ArrayList<>();
 
         if (!drops.isEmpty()) {
             Iterator list = drops.iterator();

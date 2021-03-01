@@ -1,6 +1,5 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
@@ -10,6 +9,7 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.ItemSyringe;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.network.AmmoBoxCommandPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.block.Block;
@@ -100,12 +100,12 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
     private boolean loadGun(ItemStack held) {
         IFirearm gun = (IFirearm) held.getItem();
         if (gun.canAcceptAmmo(held, getAmmoClass())) {
-            ItemStack loaded = AmmoMechanicsMFR.getAmmo(held);
+            ItemStack loaded = AmmoMechanics.getAmmo(held);
             if (loaded.isEmpty()) {
                 int ss = Math.min(inventoryStack.getMaxStackSize(), stock);
                 ItemStack newloaded = inventoryStack.copy();
                 newloaded.setCount(ss);
-                AmmoMechanicsMFR.setAmmo(held, newloaded);
+                AmmoMechanics.setAmmo(held, newloaded);
                 stock -= ss;
                 if (stock <= 0) {
                     inventoryStack = ItemStack.EMPTY;
@@ -116,10 +116,10 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
                 if (stock > room_left) {
                     stock -= room_left;
                     loaded.grow(room_left);
-                    AmmoMechanicsMFR.setAmmo(held, loaded);
+                    AmmoMechanics.setAmmo(held, loaded);
                 } else {
                     loaded.grow(stock);
-                    AmmoMechanicsMFR.setAmmo(held, loaded);
+                    AmmoMechanics.setAmmo(held, loaded);
                     stock = 0;
                     inventoryStack = ItemStack.EMPTY;
                 }

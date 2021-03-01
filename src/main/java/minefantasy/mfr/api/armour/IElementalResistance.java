@@ -8,23 +8,23 @@ public interface IElementalResistance {
      * @return this determines the chance an item is to deflect arrows. more damage
      * means less chance
      */
-    public float getArrowDeflection(ItemStack item, DamageSource source);
+	float getArrowDeflection(ItemStack item, DamageSource source);
 
     /**
      * @return the Magic resistance percent (0-100) (for the whole suit) -values
      * mean weakness
      */
-    public float getMagicResistance(ItemStack item, DamageSource source);
+	float getMagicResistance(ItemStack item, DamageSource source);
 
     /**
      * @return the Magic resistance percent (0-100) (for the whole suit) -values
      * mean weakness
      */
-    public float getFireResistance(ItemStack item, DamageSource source);
+	float getFireResistance(ItemStack item, DamageSource source);
 
     /**
      * @return the Base resistance percent for non magic/fire(0-100) (for the whole
      * suit) -values mean weakness
      */
-    public float getBaseResistance(ItemStack item, DamageSource source);
+	float getBaseResistance(ItemStack item, DamageSource source);
 }

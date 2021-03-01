@@ -6,7 +6,7 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 
 public class CustomCrafterEntry {
-    public static HashMap<Item, CustomCrafterEntry> entries = new HashMap<Item, CustomCrafterEntry>();
+    public static HashMap<Item, CustomCrafterEntry> entries = new HashMap<>();
     public Item itemID;
     /**
      * The Efficiency(same variable as dig speed)

@@ -2,10 +2,10 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.api.armour.IArmourMFR;
 import minefantasy.mfr.api.armour.IArmourRating;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
+import minefantasy.mfr.material.ArmourMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -36,14 +36,14 @@ public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmo
     public int enchantment;
     public String texture;
     public float armourWeight;
-    public ArmourMaterialMFR material;
+    public ArmourMaterial material;
     public ArmourDesign design;
     public float DT;
     protected float suitBulk;
     private EntityEquipmentSlot piece;
     private int baseRating;
 
-    public ItemArmourBaseMFR(String name, ArmourMaterialMFR material, ArmourDesign AD, EntityEquipmentSlot slot, String tex) {
+    public ItemArmourBaseMFR(String name, ArmourMaterial material, ArmourDesign AD, EntityEquipmentSlot slot, String tex) {
         super(baseMaterial, 0, slot);
         this.material = material;
         baseAR = material.baseAR;
@@ -184,7 +184,7 @@ public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmo
         }
     }
 
-    public ArmourMaterialMFR getMaterial() {
+    public ArmourMaterial getMaterial() {
         return this.material;
     }
 

@@ -1,17 +1,17 @@
 package minefantasy.mfr.proxy;
 
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.refine.ISmokeHandler;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ArrowFireFlint;
 import minefantasy.mfr.item.ArrowFirerMF;
-import minefantasy.mfr.mechanics.ArrowHandlerMF;
+import minefantasy.mfr.mechanics.AmmoMechanics;
+import minefantasy.mfr.mechanics.ArrowHandler;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.mechanics.MonsterUpgrader;
-import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
+import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -32,8 +32,8 @@ public class CommonProxy implements ISmokeHandler{
     }
 
     public void registerMain() {
-        AmmoMechanicsMFR.addHandler(new ArrowFireFlint());
-        AmmoMechanicsMFR.addHandler(new ArrowFirerMF());
+        AmmoMechanics.addHandler(new ArrowFireFlint());
+        AmmoMechanics.addHandler(new ArrowFirerMF());
         SmokeMechanics.handler = this;
     }
 
@@ -41,11 +41,11 @@ public class CommonProxy implements ISmokeHandler{
     }
 
     public void registerTickHandlers() {
-        FMLCommonHandler.instance().bus().register(new PlayerTickHandlerMF());
+        FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
         MinecraftForge.EVENT_BUS.register(new EventManagerMFRToRemove());
         MinecraftForge.EVENT_BUS.register(new CombatMechanics());
         MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
-        MinecraftForge.EVENT_BUS.register(new ArrowHandlerMF());
+        MinecraftForge.EVENT_BUS.register(new ArrowHandler());
     }
 
     public EntityPlayer getClientPlayer() {

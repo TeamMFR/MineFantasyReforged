@@ -79,12 +79,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
         return true;
     }
 
-    @Override
-    public boolean isSpecialRender(ItemStack item) {
-        return true;
-    }
-
-    @Override
+	@Override
     public boolean onBlockDestroyed(ItemStack item, World world, IBlockState block, BlockPos pos, EntityLivingBase user) {
         if (user instanceof EntityPlayer && canAcceptCost(user)) {
             breakChain(world, pos, item, block, user, 32, block.getBlock());

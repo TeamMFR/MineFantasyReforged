@@ -3,7 +3,7 @@ package minefantasy.mfr.init;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.item.ItemBurntFood;
 import minefantasy.mfr.item.ItemComponentMFR;
-import minefantasy.mfr.item.ItemFoodMF;
+import minefantasy.mfr.item.ItemFoodMFR;
 import minefantasy.mfr.item.ItemJug;
 import minefantasy.mfr.item.ItemMultiFood;
 import minefantasy.mfr.item.ItemUnfinishedFood;
@@ -136,64 +136,64 @@ public class FoodListMFR {
     
     public static void init() {
         // MORSELS
-        WOLF_RAW = new ItemFoodMF("wolf_raw", 2, 0.2F, true);
-        WOLF_COOKED = new ItemFoodMF("wolf_cooked", 6, 0.6F, true);
-        HORSE_RAW = new ItemFoodMF("horse_raw", 4, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER,500,0), 0.5F);
-        HORSE_COOKED = new ItemFoodMF("horse_cooked", 10, 1.0F, true);
-        GENERIC_MEAT_UNCOOKED = new ItemFoodMF("generic_meat_uncooked", 2, 0.2F, true);
-        GENERIC_MEAT_COOKED = new ItemFoodMF("generic_meat_cooked", 5, 0.5F, true);
-        GENERIC_MEAT_STRIP_UNCOOKED = new ItemFoodMF("generic_meat_strip_uncooked", 2, 0.2F, true);
-        GENERIC_MEAT_STRIP_COOKED = new ItemFoodMF("generic_meat_strip_cooked", 5, 0.5F, true);
-        GENERIC_MEAT_CHUNK_UNCOOKED = new ItemFoodMF("generic_meat_chunk_uncooked", 2, 0.2F, true);
-        GENERIC_MEAT_CHUNK_COOKED = new ItemFoodMF("generic_meat_chunk_cooked", 5, 0.5F, true);
-        GENERIC_MEAT_MINCE_UNCOOKED = new ItemFoodMF("generic_meat_mince_uncooked", 2, 0.2F, true).setContainerItem(ComponentListMFR.CLAY_POT);
-        GENERIC_MEAT_MINCE_COOKED = new ItemFoodMF("generic_meat_mince_cooked", 5, 0.5F, true).setContainerItem(ComponentListMFR.CLAY_POT);
+        WOLF_RAW = new ItemFoodMFR("wolf_raw", 2, 0.2F, true);
+        WOLF_COOKED = new ItemFoodMFR("wolf_cooked", 6, 0.6F, true);
+        HORSE_RAW = new ItemFoodMFR("horse_raw", 4, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER,500,0), 0.5F);
+        HORSE_COOKED = new ItemFoodMFR("horse_cooked", 10, 1.0F, true);
+        GENERIC_MEAT_UNCOOKED = new ItemFoodMFR("generic_meat_uncooked", 2, 0.2F, true);
+        GENERIC_MEAT_COOKED = new ItemFoodMFR("generic_meat_cooked", 5, 0.5F, true);
+        GENERIC_MEAT_STRIP_UNCOOKED = new ItemFoodMFR("generic_meat_strip_uncooked", 2, 0.2F, true);
+        GENERIC_MEAT_STRIP_COOKED = new ItemFoodMFR("generic_meat_strip_cooked", 5, 0.5F, true);
+        GENERIC_MEAT_CHUNK_UNCOOKED = new ItemFoodMFR("generic_meat_chunk_uncooked", 2, 0.2F, true);
+        GENERIC_MEAT_CHUNK_COOKED = new ItemFoodMFR("generic_meat_chunk_cooked", 5, 0.5F, true);
+        GENERIC_MEAT_MINCE_UNCOOKED = new ItemFoodMFR("generic_meat_mince_uncooked", 2, 0.2F, true).setContainerItem(ComponentListMFR.CLAY_POT);
+        GENERIC_MEAT_MINCE_COOKED = new ItemFoodMFR("generic_meat_mince_cooked", 5, 0.5F, true).setContainerItem(ComponentListMFR.CLAY_POT);
         FLOUR = new ItemComponentMFR("flour", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
         BREADCRUMBS = new ItemComponentMFR("breadcrumbs", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
         GUTS = new ItemComponentMFR("guts", 0).setCreativeTab(MineFantasyTabs.tabFood);
-        BREADROLL = new ItemFoodMF("breadroll", 5, 1.0F, false);
-        BREAD_SLICE = new ItemFoodMF("bread_slice", 2, 1.0F, false);
+        BREADROLL = new ItemFoodMFR("breadroll", 5, 1.0F, false);
+        BREAD_SLICE = new ItemFoodMFR("bread_slice", 2, 1.0F, false);
         CURDS = new ItemUnfinishedFood("curds");
         CHEESE_POT = new ItemUnfinishedFood("cheese_pot").setContainerItem(ComponentListMFR.CLAY_POT);
-        CHEESE_SLICE = new ItemFoodMF("cheese_slice", 4, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F);
+        CHEESE_SLICE = new ItemFoodMFR("cheese_slice", 4, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F);
 
         // T1 (basic mixing)
         // Util: Roast, Prep Block (Stone-Bronze Age)
-        STEW = new ItemFoodMF("stew", 5, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.BOWL).setMaxStackSize(1);
-        OATS = new ItemFoodMF("oats", 5, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.BOWL).setMaxStackSize(1);
+        STEW = new ItemFoodMFR("stew", 5, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.BOWL).setMaxStackSize(1);
+        OATS = new ItemFoodMFR("oats", 5, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.BOWL).setMaxStackSize(1);
 
         // T2 (Basic baking, stone oven, processed mixing)
         // Util: Stone Oven, Prep Block (Bronze Age - Early Iron Age)
-        CHEESE_ROLL = new ItemFoodMF("cheese_roll", 6, 1.0F, false, 0).setFoodStats(2, 0.0F, 0.4F, 0.6F).setMaxStackSize(1);
-        JERKY = new ItemFoodMF("jerky", 6, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.0F, 1.0F).setMaxStackSize(8);
-        SAUSAGE_RAW = new ItemFoodMF("saussage_raw", 4, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.1F, 0.6F).setMaxStackSize(16);
-        SAUSAGE_COOKED = new ItemFoodMF("saussage_cooked", 8, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
-        SWEETROLL_UNICED = new ItemFoodMF("sweetroll_uniced", 5, 1.0F, false, 0).setFoodStats(2, 0.5F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+        CHEESE_ROLL = new ItemFoodMFR("cheese_roll", 6, 1.0F, false, 0).setFoodStats(2, 0.0F, 0.4F, 0.6F).setMaxStackSize(1);
+        JERKY = new ItemFoodMFR("jerky", 6, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.0F, 1.0F).setMaxStackSize(8);
+        SAUSAGE_RAW = new ItemFoodMFR("saussage_raw", 4, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.1F, 0.6F).setMaxStackSize(16);
+        SAUSAGE_COOKED = new ItemFoodMFR("saussage_cooked", 8, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
+        SWEETROLL_UNICED = new ItemFoodMFR("sweetroll_uniced", 5, 1.0F, false, 0).setFoodStats(2, 0.5F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
         SWEETROLL = new ItemMultiFood("sweetroll", 2, 3, 1.0F, false, 0).setFoodStats(2, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible();
         SANDWITCH_MEAT = new ItemMultiFood("sandwitch_meat", 2, 6, 1.0F, false, 0).setFoodStats(2, 0.0F, 0.5F, 0.5F).setUnlocalizedName("sandwitch");
         SANDWITCH_BIG = new ItemMultiFood("sandwitch_big", 4, 6, 1.0F, false, 1).setFoodStats(2, 0.0F, 0.5F, 0.5F);
 
         // T3 (Quality baking, metal oven)
         // Util: Metal Oven, Prep Block, Steel Tools (Mid Iron Age)
-        MEATPIE_SLICE = new ItemFoodMF("meatpie_slice", 8, 1.0F, false, 0).setFoodStats(3, 0.0F, 0.2F, 0.8F).setMaxStackSize(1);
-        PIESLICE_APPLE = new ItemFoodMF("pieslice_apple", 5, 1.0F, false, 0).setFoodStats(3, 0.8F, 0.2F, 0.0F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
-        PIESLICE_BERRY = new ItemFoodMF("pieslice_berry", 5, 1.0F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
+        MEATPIE_SLICE = new ItemFoodMFR("meatpie_slice", 8, 1.0F, false, 0).setFoodStats(3, 0.0F, 0.2F, 0.8F).setMaxStackSize(1);
+        PIESLICE_APPLE = new ItemFoodMFR("pieslice_apple", 5, 1.0F, false, 0).setFoodStats(3, 0.8F, 0.2F, 0.0F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
+        PIESLICE_BERRY = new ItemFoodMFR("pieslice_berry", 5, 1.0F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
 
         // T4 (Advanced baking, multiple processes, temperature regulation)
         // Util : Metal Oven, Prep Block, Full tool set, Proper kitchen setup (Mid Iron
         // Age)
-        PIESLICE_SHEPARDS = new ItemFoodMF("pieslice_shepards", 10, 1.0F, false, 1).setFoodStats(4, 0.0F, 0.5F, 0.5F);
-        CAKE_SLICE = new ItemFoodMF("cake_slice", 3, 0.8F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
-        CARROTCAKE_SLICE = new ItemFoodMF("carrotcake_slice", 4, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+        PIESLICE_SHEPARDS = new ItemFoodMFR("pieslice_shepards", 10, 1.0F, false, 1).setFoodStats(4, 0.0F, 0.5F, 0.5F);
+        CAKE_SLICE = new ItemFoodMFR("cake_slice", 3, 0.8F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+        CARROTCAKE_SLICE = new ItemFoodMFR("carrotcake_slice", 4, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
         // T5 (Advanced baking, multiple process, temperature regulation, many
         // ingreedients)
-        CHOCCAKE_SLICE = new ItemFoodMF("choccake_slice", 4, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+        CHOCCAKE_SLICE = new ItemFoodMFR("choccake_slice", 4, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
         // T6 (Perfected meals, extremely difficylt to create)
-        BFCAKE_SLICE = new ItemFoodMF("bfcake_slice", 6, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
-        ECLAIR_UNICED = new ItemFoodMF("eclair_uniced", 5, 1.0F, false, 0).setFoodStats(5, 0.3F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-        ECLAIR_EMPTY = new ItemFoodMF("eclair_empty", 5, 1.0F, false, 0).setFoodStats(5, 0.5F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+        BFCAKE_SLICE = new ItemFoodMFR("bfcake_slice", 6, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+        ECLAIR_UNICED = new ItemFoodMFR("eclair_uniced", 5, 1.0F, false, 0).setFoodStats(5, 0.3F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+        ECLAIR_EMPTY = new ItemFoodMFR("eclair_empty", 5, 1.0F, false, 0).setFoodStats(5, 0.5F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
         ECLAIR = new ItemMultiFood("eclair", 4, 4, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
         // MISC
@@ -204,8 +204,8 @@ public class FoodListMFR {
         COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
         CHOCOLATE = new ItemComponentMFR("chocolate", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
         CHOC_CHIPS = new ItemComponentMFR("choc_chips", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(ComponentListMFR.CLAY_POT);
-        BERRIES = new ItemFoodMF("berries", 2, 2.0F, false).setEatTime(10).setStaminaRestore(10F).setAlwaysEdible();
-        BERRIES_JUICY = new ItemFoodMF("berries_juicy", 3, 5.0F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setAlwaysEdible();
+        BERRIES = new ItemFoodMFR("berries", 2, 2.0F, false).setEatTime(10).setStaminaRestore(10F).setAlwaysEdible();
+        BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 5.0F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setAlwaysEdible();
         SWEETROLL_RAW = new ItemUnfinishedFood("sweetroll_raw").setMaxStackSize(64);
         ECLAIR_RAW = new ItemUnfinishedFood("eclair_raw").setMaxStackSize(64);
         CAKE_RAW = new ItemUnfinishedFood("cake_raw");

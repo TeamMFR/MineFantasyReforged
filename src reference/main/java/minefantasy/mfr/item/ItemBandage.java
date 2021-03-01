@@ -7,7 +7,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.mechanics.EventManagerMFR;

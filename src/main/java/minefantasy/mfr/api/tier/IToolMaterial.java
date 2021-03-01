@@ -6,5 +6,5 @@ public interface IToolMaterial {
     /**
      * Gets the material for outside reference
      */
-    public ToolMaterial getMaterial();
+    ToolMaterial getMaterial();
 }

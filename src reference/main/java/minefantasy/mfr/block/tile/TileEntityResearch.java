@@ -1,10 +1,10 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IBasicMetre;
-import minefantasy.mfr.api.knowledge.IArtefact;
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.ResearchArtefacts;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.IArtefact;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.SoundsMFR;
 import minefantasy.mfr.proxy.NetworkUtils;

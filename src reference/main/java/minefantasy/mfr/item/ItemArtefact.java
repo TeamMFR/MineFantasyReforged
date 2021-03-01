@@ -1,8 +1,8 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.knowledge.IArtefact;
-import minefantasy.mfr.api.knowledge.ResearchArtefacts;
+import minefantasy.mfr.mechanics.knowledge.IArtefact;
+import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
 import minefantasy.mfr.block.decor.BlockSchematic;
 import minefantasy.mfr.init.CreativeTabMFR;
 import minefantasy.mfr.init.ToolListMFR;

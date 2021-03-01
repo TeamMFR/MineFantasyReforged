@@ -4,7 +4,6 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;
 import minefantasy.mfr.api.tier.IToolMaterial;
@@ -28,6 +27,7 @@ import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.StaminaBar;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -707,12 +707,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
         return true;
     }
 
-    @Override
-    public boolean isSpecialRender(ItemStack item) {
-        return false;
-    }
-
-    @Override
+	@Override
     public String getDesign(ItemStack item) {
         return designType;
     }

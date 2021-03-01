@@ -3,7 +3,7 @@ package minefantasy.mfr.api.armour;
 import java.util.HashMap;
 
 public class ArmourDesign {
-    public static HashMap<String, ArmourDesign> designs = new HashMap<String, ArmourDesign>();
+    public static HashMap<String, ArmourDesign> designs = new HashMap<>();
 
     public static final String light = "light";
     public static final String medium = "medium";

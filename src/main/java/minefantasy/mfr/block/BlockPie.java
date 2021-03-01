@@ -6,7 +6,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockPie extends BlockCakeMF {
+public class BlockPie extends BlockCakeMFR {
 
     protected static final AxisAlignedBB[] PIE_AABB = new AxisAlignedBB[] {
             new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 6D / 16D, 15D / 16D),  //0

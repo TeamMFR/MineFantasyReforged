@@ -12,7 +12,7 @@ import minefantasy.mfr.api.armour.ItemArmourMFRBase;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.helpers.*;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.rpg.LevelupEvent;
 import minefantasy.mfr.api.rpg.RPGElements;

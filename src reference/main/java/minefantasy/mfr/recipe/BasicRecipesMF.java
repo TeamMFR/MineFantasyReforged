@@ -12,7 +12,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.OrnateStyle;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.mechanics.knowledge.KnowledgeListMFR;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

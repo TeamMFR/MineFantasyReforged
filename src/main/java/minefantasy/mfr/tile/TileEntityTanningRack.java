@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
+import minefantasy.mfr.recipe.TanningRecipe;
 import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.container.ContainerBase;

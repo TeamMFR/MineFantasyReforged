@@ -1,8 +1,8 @@
 package minefantasy.mfr.config;
 
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityRoast;
 import minefantasy.mfr.hunger.HungerSystemMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;

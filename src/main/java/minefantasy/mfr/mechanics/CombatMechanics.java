@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.api.armour.IElementalResistance;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IKnockbackWeapon;
 import minefantasy.mfr.api.weapon.IParryable;

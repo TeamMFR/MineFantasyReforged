@@ -1,8 +1,8 @@
 package minefantasy.mfr.item.tool.crafting;
 
-import minefantasy.mfr.api.crafting.refine.PaintOilRecipe;
+import minefantasy.mfr.recipe.refine.PaintOilRecipe;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.tile.decor.TileEntityRack;

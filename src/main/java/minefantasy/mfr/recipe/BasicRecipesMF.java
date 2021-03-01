@@ -1,18 +1,13 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.crafting.tanning.TanningRecipe;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class BasicRecipesMF {

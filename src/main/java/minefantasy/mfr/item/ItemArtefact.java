@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.knowledge.IArtefact;
+import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import minefantasy.mfr.block.BlockSchematic;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.entity.player.EntityPlayer;

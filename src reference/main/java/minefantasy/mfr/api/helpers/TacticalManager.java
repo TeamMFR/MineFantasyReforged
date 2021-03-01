@@ -3,7 +3,7 @@ package minefantasy.mfr.api.helpers;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;

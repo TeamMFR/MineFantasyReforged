@@ -2,9 +2,9 @@ package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemArmourMFR;
+import minefantasy.mfr.material.ArmourMaterial;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
@@ -20,14 +20,14 @@ import net.minecraftforge.registries.IForgeRegistry;
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class LeatherArmourListMFR {
     public static final String[] leathermats = new String[]{"hide", "rough_leather", "strong_leather", "stud_leather", "padded"};
-    public static ArmourMaterialMFR LEATHER_MAT;
-    public static ArmourMaterialMFR APRON;
+    public static ArmourMaterial LEATHER_MAT;
+    public static ArmourMaterial APRON;
     public static ItemArmourMFR[] LEATHER;
     public static ItemArmourMFR LEATHER_APRON;
 
     public static void init(){
-        LEATHER_MAT = new ArmourMaterialMFR("leather", 5, 0.30F, 18, 1.00F);
-        APRON = new ArmourMaterialMFR("apron", 6, 0.30F, 0, 1.00F);
+        LEATHER_MAT = new ArmourMaterial("leather", 5, 0.30F, 18, 1.00F);
+        APRON = new ArmourMaterial("apron", 6, 0.30F, 0, 1.00F);
         LEATHER = new ItemArmourMFR[leathermats.length * 4];
         LEATHER_APRON = new ItemApron("leather_apron", BaseMaterialMFR.LEATHER_APRON, "leatherapron_layer_1", 0);
 

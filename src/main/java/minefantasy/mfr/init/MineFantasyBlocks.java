@@ -12,7 +12,7 @@ import minefantasy.mfr.block.BlockBlastHeater;
 import minefantasy.mfr.block.BlockBloomery;
 import minefantasy.mfr.block.BlockBombBench;
 import minefantasy.mfr.block.BlockBombPress;
-import minefantasy.mfr.block.BlockCakeMF;
+import minefantasy.mfr.block.BlockCakeMFR;
 import minefantasy.mfr.block.BlockCarpenter;
 import minefantasy.mfr.block.BlockCheeseWheel;
 import minefantasy.mfr.block.BlockChimney;
@@ -56,11 +56,11 @@ import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mfr.item.ItemBlockAmmoBox;
-import minefantasy.mfr.item.ItemBlockAnvilMF;
+import minefantasy.mfr.item.ItemBlockAnvil;
 import minefantasy.mfr.item.ItemBlockBase;
 import minefantasy.mfr.item.ItemBlockBerries;
 import minefantasy.mfr.item.ItemBlockCake;
-import minefantasy.mfr.item.ItemBlockOreMF;
+import minefantasy.mfr.item.ItemBlockOreMFR;
 import minefantasy.mfr.item.ItemBlockRepairKit;
 import minefantasy.mfr.item.ItemBlockSalvage;
 import minefantasy.mfr.item.ItemBlockSpecialRender;
@@ -371,10 +371,10 @@ public class MineFantasyBlocks {
 
 		CHEESE_WHEEL = new BlockCheeseWheel("cheese_wheel", FoodListMFR.CHEESE_SLICE);
 
-		CAKE_VANILLA = new BlockCakeMF("cake_vanilla", FoodListMFR.CAKE_SLICE);
-		CAKE_CARROT = new BlockCakeMF("cake_carrot", FoodListMFR.CARROTCAKE_SLICE);
-		CAKE_CHOCOLATE = new BlockCakeMF("cake_chocolate", FoodListMFR.CHOCCAKE_SLICE);
-		CAKE_BF = new BlockCakeMF("cake_bf", FoodListMFR.BFCAKE_SLICE);
+		CAKE_VANILLA = new BlockCakeMFR("cake_vanilla", FoodListMFR.CAKE_SLICE);
+		CAKE_CARROT = new BlockCakeMFR("cake_carrot", FoodListMFR.CARROTCAKE_SLICE);
+		CAKE_CHOCOLATE = new BlockCakeMFR("cake_chocolate", FoodListMFR.CHOCCAKE_SLICE);
+		CAKE_BF = new BlockCakeMFR("cake_bf", FoodListMFR.BFCAKE_SLICE);
 
 		PIE_MEAT = new BlockPie("pie_meat", FoodListMFR.MEATPIE_SLICE);
 
@@ -707,18 +707,18 @@ public class MineFantasyBlocks {
 	public static void registerItemBlocks(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
-		registry.register(new ItemBlockOreMF(COPPER_ORE));
-		registry.register(new ItemBlockOreMF(TIN_ORE));
-		registry.register(new ItemBlockOreMF(SILVER_ORE));
-		registry.register(new ItemBlockOreMF(MYTHIC_ORE));
+		registry.register(new ItemBlockOreMFR(COPPER_ORE));
+		registry.register(new ItemBlockOreMFR(TIN_ORE));
+		registry.register(new ItemBlockOreMFR(SILVER_ORE));
+		registry.register(new ItemBlockOreMFR(MYTHIC_ORE));
 
-		registry.register(new ItemBlockOreMF(KAOLINITE_ORE));
-		registry.register(new ItemBlockOreMF(NITRE_ORE));
-		registry.register(new ItemBlockOreMF(SULFUR_ORE));
-		registry.register(new ItemBlockOreMF(BORAX_ORE));
-		registry.register(new ItemBlockOreMF(TUNGSTEN_ORE));
-		registry.register(new ItemBlockOreMF(CLAY_ORE));
-		registry.register(new ItemBlockOreMF(COAL_RICH_ORE));
+		registry.register(new ItemBlockOreMFR(KAOLINITE_ORE));
+		registry.register(new ItemBlockOreMFR(NITRE_ORE));
+		registry.register(new ItemBlockOreMFR(SULFUR_ORE));
+		registry.register(new ItemBlockOreMFR(BORAX_ORE));
+		registry.register(new ItemBlockOreMFR(TUNGSTEN_ORE));
+		registry.register(new ItemBlockOreMFR(CLAY_ORE));
+		registry.register(new ItemBlockOreMFR(COAL_RICH_ORE));
 
 		registry.register(new ItemBlockBase(MUD_BRICK));
 		registry.register(new ItemBlockBase(MUD_ROAD));
@@ -768,13 +768,13 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(MITHIUM_STORAGE));
 		registry.register(new ItemBlockBase(ENDER_STORAGE));
 
-		registry.register(new ItemBlockAnvilMF(ANVIL_STONE));
-		registry.register(new ItemBlockAnvilMF(ANVIL_BRONZE));
-		registry.register(new ItemBlockAnvilMF(ANVIL_IRON));
-		registry.register(new ItemBlockAnvilMF(ANVIL_STEEL));
-		registry.register(new ItemBlockAnvilMF(ANVIL_BLACK_STEEL));
-		registry.register(new ItemBlockAnvilMF(ANVIL_BLUE_STEEL));
-		registry.register(new ItemBlockAnvilMF(ANVIL_RED_STEEL));
+		registry.register(new ItemBlockAnvil(ANVIL_STONE));
+		registry.register(new ItemBlockAnvil(ANVIL_BRONZE));
+		registry.register(new ItemBlockAnvil(ANVIL_IRON));
+		registry.register(new ItemBlockAnvil(ANVIL_STEEL));
+		registry.register(new ItemBlockAnvil(ANVIL_BLACK_STEEL));
+		registry.register(new ItemBlockAnvil(ANVIL_BLUE_STEEL));
+		registry.register(new ItemBlockAnvil(ANVIL_RED_STEEL));
 
 		registry.register(new ItemBlockBase(CARPENTER));
 		registry.register(new ItemBlockBase(BOMB_BENCH));

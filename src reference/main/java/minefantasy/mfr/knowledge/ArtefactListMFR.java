@@ -1,7 +1,7 @@
-package minefantasy.mfr.knowledge;
+package minefantasy.mfr.mechanics.knowledge;
 
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.ResearchArtefacts;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
 import minefantasy.mfr.init.*;
 import minefantasy.mfr.item.ItemArtefact;
 import net.minecraft.init.Blocks;

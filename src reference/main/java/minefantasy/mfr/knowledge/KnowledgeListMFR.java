@@ -1,10 +1,10 @@
-package minefantasy.mfr.knowledge;
+package minefantasy.mfr.mechanics.knowledge;
 
 import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.InformationList;
-import minefantasy.mfr.api.knowledge.InformationPage;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.InformationList;
+import minefantasy.mfr.mechanics.knowledge.InformationPage;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.rpg.SkillList;

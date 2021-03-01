@@ -7,7 +7,7 @@ import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.init.ArmourListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.mechanics.knowledge.KnowledgeListMFR;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

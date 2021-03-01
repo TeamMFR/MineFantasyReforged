@@ -5,8 +5,8 @@ import net.minecraft.item.Item;
 import java.util.HashMap;
 
 public class CustomDamageRatioEntry {
-    public static HashMap<Integer, CustomDamageRatioEntry> entries = new HashMap<Integer, CustomDamageRatioEntry>();
-    public static HashMap<String, CustomDamageRatioEntry> entriesProj = new HashMap<String, CustomDamageRatioEntry>();
+    public static HashMap<Integer, CustomDamageRatioEntry> entries = new HashMap<>();
+    public static HashMap<String, CustomDamageRatioEntry> entriesProj = new HashMap<>();
 
     public float[] vars;
 

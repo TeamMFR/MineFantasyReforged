@@ -1,11 +1,11 @@
-package minefantasy.mfr.api.knowledge;
+package minefantasy.mfr.mechanics.knowledge;
 
 import minefantasy.mfr.init.SoundsMFR;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.api.knowledge.client.EntryPage;
+import minefantasy.mfr.mechanics.knowledge.client.EntryPage;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.Skill;
 import net.minecraft.block.Block;

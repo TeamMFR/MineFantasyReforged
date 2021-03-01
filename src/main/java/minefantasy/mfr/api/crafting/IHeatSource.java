@@ -1,7 +1,7 @@
 package minefantasy.mfr.api.crafting;
 
 public interface IHeatSource {
-    public boolean canPlaceAbove();
+    boolean canPlaceAbove();
 
-    public int getHeat();
+    int getHeat();
 }

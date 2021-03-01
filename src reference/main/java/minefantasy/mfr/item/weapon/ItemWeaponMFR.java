@@ -21,7 +21,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.helpers.CustomToolHelper;
 import minefantasy.mfr.api.helpers.TacticalManager;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.material.CustomMaterial;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;

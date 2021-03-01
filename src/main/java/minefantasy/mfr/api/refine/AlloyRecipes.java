@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AlloyRecipes {
-    public static List<Alloy> alloys = new ArrayList<Alloy>();
+    public static List<Alloy> alloys = new ArrayList<>();
 
     public static Alloy addAlloy(ItemStack out, int level, List in) {
         Alloy alloy = new Alloy(out, level, in);

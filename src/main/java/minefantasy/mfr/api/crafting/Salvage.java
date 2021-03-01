@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Salvage {
-    public static HashMap<String, Object[]> salvageList = new HashMap<String, Object[]>();
-    public static HashMap<String, Item> sharedSalvage = new HashMap<String, Item>();
+    public static HashMap<String, Object[]> salvageList = new HashMap<>();
+    public static HashMap<String, Item> sharedSalvage = new HashMap<>();
     private static XSTRandom random = new XSTRandom();
 
     public static void shareSalvage(Item item1, Item item2) {
@@ -65,7 +65,7 @@ public class Salvage {
 
     private static List<ItemStack> dropItems(ItemStack mainItem, EntityPlayer user, Object[] entryList,
                                              float chanceModifier, float chance) {
-        List<ItemStack> items = new ArrayList<ItemStack>();
+        List<ItemStack> items = new ArrayList<>();
         for (Object entry : entryList) {
             if (entry != null) {
                 if (entry instanceof Item && random.nextFloat() * chanceModifier < chance) {

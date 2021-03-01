@@ -1,9 +1,9 @@
 package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.InformationList;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.InformationList;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 

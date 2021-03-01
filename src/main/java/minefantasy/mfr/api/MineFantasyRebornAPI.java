@@ -2,7 +2,6 @@ package minefantasy.mfr.api;
 
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
-import minefantasy.mfr.api.crafting.refine.QuernRecipes;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.refine.AlloyRecipes;
@@ -12,6 +11,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.IAnvilRecipe;
+import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -211,19 +211,6 @@ public class MineFantasyRebornAPI {
         for (ItemStack item : OreDictionary.getOres(oredict)) {
             setHeatableStats(item, min, unstable, max);
         }
-    }
-
-    private static ItemStack convertItem(Object object) {
-        if (object instanceof ItemStack) {
-            return ((ItemStack) object);
-        }
-        if (object instanceof Item) {
-            return new ItemStack((Item) object, 1, OreDictionary.WILDCARD_VALUE);
-        }
-        if (object instanceof Block) {
-            return new ItemStack((Block) object, 1, OreDictionary.WILDCARD_VALUE);
-        }
-        return ItemStack.EMPTY;
     }
 
     /**

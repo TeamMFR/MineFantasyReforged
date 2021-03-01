@@ -3,9 +3,9 @@ package minefantasy.mfr.client.render.item;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.item.ItemCrossbow;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
@@ -13,16 +13,12 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.model.IModelState;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.function.Supplier;
 
-/**
- * @author Anonymous Productions
- * <p>
- * Sources are provided for educational reasons.
- * though small bits of code, or methods can be used in your own creations.
- */
-
+@SideOnly(Side.CLIENT)
 public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
     public RenderCrossbow(Supplier<ModelResourceLocation> wrappedModel) {
         super(wrappedModel);
@@ -39,7 +35,7 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
             renderPart(stack, "mechanism", type);
             renderPart(stack, "muzzle", type);
             renderPart(stack, "mod", type);
-            if (AmmoMechanicsMFR.isFirearmLoaded(stack)){
+            if (AmmoMechanics.isFirearmLoaded(stack)){
                 renderString("string_loaded");
             }
             else{
@@ -54,7 +50,7 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
             renderPart(stack, "mechanism", type);
             renderPart(stack, "muzzle", type);
             renderPart(stack, "mod", type);
-            if (AmmoMechanicsMFR.isFirearmLoaded(stack)){
+            if (AmmoMechanics.isFirearmLoaded(stack)){
                 renderString("string_loaded");
             }
             else{
@@ -98,9 +94,9 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
     }
 
     private void renderArrow(ItemStack stack){
-        ItemStack arrowStack = AmmoMechanicsMFR.getArrowOnBow(stack);
+        ItemStack arrowStack = AmmoMechanics.getArrowOnBow(stack);
 
-        if (!arrowStack.isEmpty() && AmmoMechanicsMFR.isFirearmLoaded(stack)) {
+        if (!arrowStack.isEmpty() && AmmoMechanics.isFirearmLoaded(stack)) {
 
             GlStateManager.pushMatrix(); //arrow start
 

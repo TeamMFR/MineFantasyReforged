@@ -15,7 +15,7 @@ public class BlastFurnaceRecipes {
     /**
      * The list of smelting results.
      */
-    private Map<ItemStack, ItemStack> smeltingList = new HashMap<ItemStack, ItemStack>();
+    private Map<ItemStack, ItemStack> smeltingList = new HashMap<>();
 
     private BlastFurnaceRecipes() {
     }

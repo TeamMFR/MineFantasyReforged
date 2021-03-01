@@ -5,7 +5,7 @@ import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mfr.api.crafting.carpenter.ICarpenter;
 import minefantasy.mfr.api.crafting.carpenter.ShapelessCarpenterRecipes;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.Skill;
 import minefantasy.mfr.container.ContainerCarpenterMFR;
 import minefantasy.mfr.item.armour.ItemArmourMFR;

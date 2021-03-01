@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.item.ItemLighterMF;
+import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -83,7 +83,7 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
                 return true;
             }
             // Light
-            int l = ItemLighterMF.tryUse(held, player);
+            int l = ItemLighter.tryUse(held, player);
             if (!tile.isActive && !tile.hasBloom()) {
                 if (!held.isEmpty() && l != 0) {
                     player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);

@@ -1,13 +1,13 @@
 package minefantasy.mfr;
 
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.event.LevelUpEvent;
-import minefantasy.mfr.item.ClientItemsMFR;
+import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;

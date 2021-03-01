@@ -6,7 +6,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
-public class BlockCheeseWheel extends BlockCakeMF {
+public class BlockCheeseWheel extends BlockCakeMFR {
 
     protected static final AxisAlignedBB[] CHEESE_AABB = new AxisAlignedBB[] {
             new AxisAlignedBB(4D / 16D, 0.0D, 4D / 16D, 12D / 16D, 5D / 16D, 12D / 16D),  //0

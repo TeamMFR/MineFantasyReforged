@@ -1,7 +1,7 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IWornStaminaItem;
 import minefantasy.mfr.data.IStoredVariable;

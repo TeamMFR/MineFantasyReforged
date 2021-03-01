@@ -1,9 +1,9 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.container.slots.SlotReload;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -20,7 +20,7 @@ public class ContainerReload extends Container {
     public ContainerReload(InventoryPlayer user, ItemStack weapon) {
         this.weapon = weapon;
         weaponInv = new ItemStackHandler(1);
-        weaponInv.setStackInSlot(0, AmmoMechanicsMFR.getAmmo(weapon));
+        weaponInv.setStackInSlot(0, AmmoMechanics.getAmmo(weapon));
         this.addSlotToContainer(new SlotReload(this, weaponInv, 0, 79, 11));
 
         int i;
@@ -43,7 +43,7 @@ public class ContainerReload extends Container {
         ItemStack result = super.slotClick(slotId, dragType, clickTypeIn, player);
 
         ItemStack ammo = weaponInv.getStackInSlot(0);
-        AmmoMechanicsMFR.setAmmo(weapon, ammo);
+        AmmoMechanics.setAmmo(weapon, ammo);
 
         return result;
     }

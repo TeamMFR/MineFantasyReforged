@@ -233,12 +233,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
         return true;
     }
 
-    @Override
-    public boolean isSpecialRender(ItemStack item) {
-        return false;
-    }
-
-    @Override
+	@Override
     public void registerClient() {
         ModelLoaderHelper.registerItem(this);
     }

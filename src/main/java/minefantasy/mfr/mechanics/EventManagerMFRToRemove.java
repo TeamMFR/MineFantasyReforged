@@ -260,11 +260,11 @@ public class EventManagerMFRToRemove {
 	public void onDeath(LivingDeathEvent event) {
 		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityDragon && event.getSource() != null
 				&& event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityPlayer) {
-			PlayerTickHandlerMF.addDragonKill((EntityPlayer) event.getSource().getTrueSource());
+			PlayerTickHandler.addDragonKill((EntityPlayer) event.getSource().getTrueSource());
 		}
 		if (!event.getEntityLiving().world.isRemote && event.getEntityLiving() instanceof EntityPlayer && event.getSource() != null
 				&& event.getSource().getTrueSource() != null && event.getSource().getTrueSource() instanceof EntityDragon) {
-			PlayerTickHandlerMF.addDragonEnemyPts((EntityPlayer) event.getEntityLiving(), -1);
+			PlayerTickHandler.addDragonEnemyPts((EntityPlayer) event.getEntityLiving(), -1);
 		}
 		Entity dropper = event.getEntity();
 
@@ -616,7 +616,7 @@ public class EventManagerMFRToRemove {
 
 	@SubscribeEvent
 	public void wakeUp(PlayerWakeUpEvent event) {
-		PlayerTickHandlerMF.wakeUp(event.getEntityPlayer());
+		PlayerTickHandler.wakeUp(event.getEntityPlayer());
 	}
 
 	private boolean isHotItem(ItemStack item) {

@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
@@ -240,11 +240,11 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
         }
     }
 
-    public void syncData() {
-        if (world.isRemote)
-            return;
-        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new CarpenterPacket(this));
-    }
+//    public void syncData() {
+//        if (world.isRemote)
+//            return;
+//        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new CarpenterPacket(this));
+//    }
 
     public String getRequiredToolType() {
         return requiredToolType.getName();
@@ -363,7 +363,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
             }
             if (progress > progressMax) progress = progressMax - 1;
 
-            syncData();
+//            syncData();
             sendUpdates();
         }
     }

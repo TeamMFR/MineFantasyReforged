@@ -1,13 +1,13 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.MFArrowDispenser;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -80,7 +80,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
         setUnlocalizedName(name);
 
         setCreativeTab(MineFantasyTabs.tabOldTools);
-        AmmoMechanicsMFR.addArrow(new ItemStack(this));
+        AmmoMechanics.addArrow(new ItemStack(this));
         BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, dispenser);
 
         MineFantasyReborn.PROXY.addClientRegister(this);

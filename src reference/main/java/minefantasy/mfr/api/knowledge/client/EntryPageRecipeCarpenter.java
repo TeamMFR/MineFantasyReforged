@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.knowledge.client;
+package minefantasy.mfr.mechanics.knowledge.client;
 
 import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mfr.api.crafting.carpenter.ShapedCarpenterRecipes;

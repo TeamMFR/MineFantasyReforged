@@ -2,7 +2,7 @@ package minefantasy.mfr.client.render;
 
 import net.minecraftforge.fml.client.FMLClientHandler;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.item.weapon.ItemWeaponMFR;
 import net.minecraft.client.Minecraft;

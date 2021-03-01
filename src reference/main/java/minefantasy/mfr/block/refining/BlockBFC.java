@@ -1,10 +1,10 @@
 package minefantasy.mfr.block.refining;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastFC;
 import minefantasy.mfr.init.CreativeTabMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.mechanics.knowledge.KnowledgeListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;

@@ -2,12 +2,12 @@ package minefantasy.mfr.client;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import minefantasy.mfr.api.knowledge.client.*;
+import minefantasy.mfr.mechanics.knowledge.client.*;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.mechanics.knowledge.KnowledgeListMFR;
 import minefantasy.mfr.recipe.ForgingRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

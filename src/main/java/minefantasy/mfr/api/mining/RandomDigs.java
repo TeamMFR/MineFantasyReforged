@@ -1,7 +1,6 @@
 package minefantasy.mfr.api.mining;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -10,7 +9,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 public class RandomDigs {
-    public static ArrayList<RandomDigs> drops = new ArrayList<RandomDigs>();
+    public static ArrayList<RandomDigs> drops = new ArrayList<>();
 
     private final ItemStack loot;
     private final float chanceToDrop;
@@ -54,7 +53,7 @@ public class RandomDigs {
 
     public static ArrayList<ItemStack> getDroppedItems(Block base, int meta, int harvest, int fortune,
                                                        boolean silktouch, int y) {
-        ArrayList<ItemStack> loot = new ArrayList<ItemStack>();
+        ArrayList<ItemStack> loot = new ArrayList<>();
 
         if (!drops.isEmpty()) {
             Iterator list = drops.iterator();

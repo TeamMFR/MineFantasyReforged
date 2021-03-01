@@ -2,14 +2,14 @@ package minefantasy.mfr.util;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.armour.IElementalResistance;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
-import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
+import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityWitch;
@@ -402,8 +402,8 @@ public class TacticalManager {
             entityPlayer.moveForward += offsetY;
         }
         PlayerData data = PlayerData.get(entityPlayer);
-        data.setVariable(PlayerTickHandlerMF.BALANCE_PITCH_KEY, pitchBalance);
-        data.setVariable(PlayerTickHandlerMF.BALANCE_YAW_KEY, yawBalance);
+        data.setVariable(PlayerTickHandler.BALANCE_PITCH_KEY, pitchBalance);
+        data.setVariable(PlayerTickHandler.BALANCE_YAW_KEY, yawBalance);
     }
 
     public static boolean isEntityMoving(EntityLivingBase player) {

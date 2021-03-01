@@ -17,6 +17,4 @@ public interface IRackItem {
 
     boolean canHang(TileEntityRack rack, ItemStack item, int slot);
 
-    boolean isSpecialRender(ItemStack item);
-
 }

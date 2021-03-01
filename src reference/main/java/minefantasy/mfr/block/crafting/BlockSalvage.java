@@ -4,7 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.api.helpers.ToolHelper;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.rpg.SkillList;
 import minefantasy.mfr.init.CreativeTabMFR;

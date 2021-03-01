@@ -2,12 +2,12 @@ package minefantasy.mfr.recipe;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.crafting.refine.BloomRecipe;
+import minefantasy.mfr.recipe.refine.BloomRecipe;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.init.BlockListMFR;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.knowledge.KnowledgeListMFR;
+import minefantasy.mfr.mechanics.knowledge.KnowledgeListMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

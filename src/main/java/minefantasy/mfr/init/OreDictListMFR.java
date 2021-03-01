@@ -1,7 +1,7 @@
 package minefantasy.mfr.init;
 
 import com.google.common.base.CaseFormat;
-import minefantasy.mfr.item.AdvancedFuelHandlerMF;
+import minefantasy.mfr.item.AdvancedFuelHandler;
 import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -106,7 +106,7 @@ public class OreDictListMFR {
 		addOreD("listAllchickenraw", meatRaw);
 		addOreD("listAllfishraw", meatRaw);
 
-		AdvancedFuelHandlerMF.registerItems();
+		AdvancedFuelHandler.registerItems();
 
 	}
 

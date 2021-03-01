@@ -3,7 +3,7 @@ package minefantasy.mfr.client.render.item;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
@@ -25,7 +25,7 @@ public class RenderBow extends WrappedItemModel implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemStack stack, TransformType transformType) {
-		ItemStack arrowStack = AmmoMechanicsMFR.getArrowOnBow(stack);
+		ItemStack arrowStack = AmmoMechanics.getArrowOnBow(stack);
 		boolean pulling = false;
 
 		if (entity != null) {
@@ -39,7 +39,7 @@ public class RenderBow extends WrappedItemModel implements IItemRenderer {
 
 		GlStateManager.popMatrix(); // bow end
 
-		if (!arrowStack.isEmpty() && AmmoMechanicsMFR.isFirearmLoaded(stack) ) {
+		if (!arrowStack.isEmpty() && AmmoMechanics.isFirearmLoaded(stack) ) {
 
 			GlStateManager.pushMatrix(); //arrow start
 

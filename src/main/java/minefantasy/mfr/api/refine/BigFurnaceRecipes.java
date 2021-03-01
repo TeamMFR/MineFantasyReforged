@@ -9,7 +9,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.HashMap;
 
 public class BigFurnaceRecipes {
-    public static HashMap<String, BigFurnaceRecipes> recipeList = new HashMap<String, BigFurnaceRecipes>();
+    public static HashMap<String, BigFurnaceRecipes> recipeList = new HashMap<>();
     public final ItemStack input, result;
     public final int tier;
 

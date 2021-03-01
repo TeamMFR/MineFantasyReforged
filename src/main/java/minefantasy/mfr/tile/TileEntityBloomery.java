@@ -1,8 +1,8 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
-import minefantasy.mfr.api.crafting.refine.BloomRecipe;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.refine.BloomRecipe;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockBloomery;
 import minefantasy.mfr.constants.Skill;

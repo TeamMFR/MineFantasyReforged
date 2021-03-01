@@ -14,7 +14,7 @@ import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.helpers.ArmourCalculator;
 import minefantasy.mfr.api.helpers.PlayerTagData;
 import minefantasy.mfr.api.helpers.TacticalManager;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.api.rpg.RPGElements;
 import minefantasy.mfr.api.stamina.StaminaBar;
 import minefantasy.mfr.config.ConfigHardcore;

@@ -1,6 +1,5 @@
 package minefantasy.mfr.material;
 
-import minefantasy.mfr.api.armour.ArmourMaterialMFR;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.util.EnumHelper;
@@ -130,7 +129,7 @@ public class BaseMaterialMFR {
     public boolean isMythic = false;
     public int rarity;
     // SPECIALS
-    private ArmourMaterialMFR armourConversion;
+    private ArmourMaterial armourConversion;
     private ToolMaterial toolConversion;
 
     public BaseMaterialMFR(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantment, float weight, int lvl) {
@@ -236,12 +235,12 @@ public class BaseMaterialMFR {
         return material;
     }
 
-    private static ArmourMaterialMFR getMFRArmourMaterial(String name) {
+    private static ArmourMaterial getMFRArmourMaterial(String name) {
         BaseMaterialMFR material = materialMap.get(name);
         return material != null ? getMFRArmourMaterial(material) : null;
     }
 
-    public static ArmourMaterialMFR getMFRArmourMaterial(BaseMaterialMFR material) {
+    public static ArmourMaterial getMFRArmourMaterial(BaseMaterialMFR material) {
         return material.convertToMFArmour();
     }
 
@@ -283,8 +282,8 @@ public class BaseMaterialMFR {
         return this;
     }
 
-    private ArmourMaterialMFR convertToMFArmour() {
-        return new ArmourMaterialMFR("MF" + name, durability, hardness, enchantment, weight)
+    private ArmourMaterial convertToMFArmour() {
+        return new ArmourMaterial("MF" + name, durability, hardness, enchantment, weight)
                 .setFireResistance(fireResistance).setMagicResistance(arcaneResistance).setMythic(isMythic);
     }
 
@@ -292,7 +291,7 @@ public class BaseMaterialMFR {
         return EnumHelper.addToolMaterial("MF" + name, harvestLevel, durability, 2.0F + (sharpness * 2F), sharpness, enchantment);
     }
 
-    public ArmourMaterialMFR getArmourConversion() {
+    public ArmourMaterial getArmourConversion() {
         if (armourConversion == null) {
             armourConversion = getMFRArmourMaterial(this);
         }

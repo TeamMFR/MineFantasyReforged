@@ -4,8 +4,8 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
-import minefantasy.mfr.client.render.AnimationHandlerMF;
-import minefantasy.mfr.client.render.HudHandlerMF;
+import minefantasy.mfr.client.render.AnimationHandler;
+import minefantasy.mfr.client.render.HudHandler;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
@@ -39,8 +39,8 @@ import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.mechanics.ExtendedReachMFR;
-import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
+import minefantasy.mfr.mechanics.ExtendedReach;
+import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.tile.TileEntityBellows;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
@@ -125,10 +125,10 @@ public class ClientProxy extends ClientProxyBase {
     @Override
     public void registerTickHandlers() {
         super.registerTickHandlers();
-        FMLCommonHandler.instance().bus().register(new PlayerTickHandlerMF());
-        FMLCommonHandler.instance().bus().register(new AnimationHandlerMF());
-        FMLCommonHandler.instance().bus().register(new ExtendedReachMFR());
-        MinecraftForge.EVENT_BUS.register(new HudHandlerMF());
+        FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
+        FMLCommonHandler.instance().bus().register(new AnimationHandler());
+        FMLCommonHandler.instance().bus().register(new ExtendedReach());
+        MinecraftForge.EVENT_BUS.register(new HudHandler());
         FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer<>());

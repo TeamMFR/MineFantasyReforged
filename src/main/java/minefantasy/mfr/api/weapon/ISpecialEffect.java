@@ -5,5 +5,5 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 public interface ISpecialEffect {
-    public void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam);
+    void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam);
 }

@@ -10,5 +10,5 @@ public interface IFirearm {
      * @param weapon the item that is being accessed
      * @param ammo   the ammo type that weapon is being loaded with
      */
-    public boolean canAcceptAmmo(ItemStack weapon, String ammo);
+	boolean canAcceptAmmo(ItemStack weapon, String ammo);
 }

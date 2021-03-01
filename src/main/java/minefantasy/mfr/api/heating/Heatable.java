@@ -18,7 +18,7 @@ public class Heatable {
     public static final String NBT_WorkableTemp = "mf_heatable_work_temp";
     public static final String NBT_UnstableTemp = "mf_heatable_unstable_temp";
     public static boolean requiresHeating = true;
-    public static HashMap<String, Heatable> registerList = new HashMap<String, Heatable>();
+    public static HashMap<String, Heatable> registerList = new HashMap<>();
     /**
      * Hardcore Crafting: Should quencing in inproper sources damage items
      */

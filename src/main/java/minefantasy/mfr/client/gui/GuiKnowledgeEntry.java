@@ -2,7 +2,7 @@ package minefantasy.mfr.client.gui;
 
 import codechicken.lib.gui.GuiDraw;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.client.knowledge.EntryPage;
 import minefantasy.mfr.client.knowledge.EntryPageCraft;
 import minefantasy.mfr.init.MineFantasySounds;

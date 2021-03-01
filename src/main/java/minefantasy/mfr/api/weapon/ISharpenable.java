@@ -6,15 +6,15 @@ public interface ISharpenable {
     /**
      * The max amount of uses of sharpness -1 means can't be sharpened
      */
-    public float getMaxSharpness(ItemStack item);
+    float getMaxSharpness(ItemStack item);
 
     /**
      * The max percent that it can increase damage
      */
-    public float getDamagePercentMax(ItemStack item);
+    float getDamagePercentMax(ItemStack item);
 
     /**
      * The modifier for how much percent is added each use
      */
-    public float getSharpUsesModifier(ItemStack item);
+    float getSharpUsesModifier(ItemStack item);
 }

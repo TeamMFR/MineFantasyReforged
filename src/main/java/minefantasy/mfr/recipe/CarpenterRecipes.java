@@ -1,8 +1,8 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.crafting.refine.PaintOilRecipe;
-import minefantasy.mfr.api.crafting.refine.QuernRecipes;
+import minefantasy.mfr.recipe.refine.PaintOilRecipe;
+import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;

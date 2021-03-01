@@ -8,5 +8,5 @@ import net.minecraft.item.ItemStack;
  * firer
  */
 public interface IDisplayMFRAmmo {
-    public int getAmmoCapacity(ItemStack item);
+    int getAmmoCapacity(ItemStack item);
 }

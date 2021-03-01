@@ -1,7 +1,6 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
@@ -17,6 +16,7 @@ import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -60,11 +60,11 @@ public class ItemCrossbow extends ItemBaseMFR
     }
 
     public static void setUseAction(ItemStack item, String action) {
-        AmmoMechanicsMFR.getNBT(item).setString(useTypeNBT, action);
+        AmmoMechanics.getNBT(item).setString(useTypeNBT, action);
     }
 
     public static String getUseAction(ItemStack item) {
-        String action = AmmoMechanicsMFR.getNBT(item).getString(useTypeNBT);
+        String action = AmmoMechanics.getNBT(item).getString(useTypeNBT);
 
         return action != null ? action : "null";
     }
@@ -100,12 +100,12 @@ public class ItemCrossbow extends ItemBaseMFR
     @Override
     public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
         ItemStack item = player.getHeldItem(hand);
-        if (!world.isRemote && player.isSneaking() || AmmoMechanicsMFR.isDepleted(item))// OPEN INV
+        if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(item))// OPEN INV
         {
             player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
             return ActionResult.newResult(EnumActionResult.FAIL, item);
         }
-        ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);
+        ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
         if (loaded.isEmpty() || player.isSwingInProgress)// RELOAD
         {
             startUse(player, item, "reload");
@@ -121,8 +121,8 @@ public class ItemCrossbow extends ItemBaseMFR
     public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase user) {
         boolean infinity = EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, item) > 0;
         user.swingArm(EnumHand.MAIN_HAND);
-        ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);
-        ItemStack storage = AmmoMechanicsMFR.getAmmo(item);
+        ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
+        ItemStack storage = AmmoMechanics.getAmmo(item);
         String action = getUseAction(item);
         boolean shouldConsume = true;
 
@@ -138,14 +138,14 @@ public class ItemCrossbow extends ItemBaseMFR
                     ItemStack ammo = storage.copy();
                     ammo.setCount(1);
                     if (shouldConsume)
-                        AmmoMechanicsMFR.consumeAmmo((EntityPlayer) user, item);
-                    AmmoMechanicsMFR.putAmmoOnFirearm(item, ammo);
+                        AmmoMechanics.consumeAmmo((EntityPlayer) user, item);
+                    AmmoMechanics.putAmmoOnFirearm(item, ammo);
                     success = true;
                 } else if (loaded.isItemEqual(storage) && loaded.getCount() < getAmmoCapacity(item)) {
                     if (shouldConsume)
-                        AmmoMechanicsMFR.consumeAmmo((EntityPlayer) user, item);
+                        AmmoMechanics.consumeAmmo((EntityPlayer) user, item);
                     loaded.grow(1);
-                    AmmoMechanicsMFR.putAmmoOnFirearm(item, loaded);
+                    AmmoMechanics.putAmmoOnFirearm(item, loaded);
                     success = true;
                 }
                 if (success) {
@@ -158,7 +158,7 @@ public class ItemCrossbow extends ItemBaseMFR
 
     @Override
     public void onUsingTick(ItemStack item, EntityLivingBase player, int time) {
-        ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);
+        ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
         int max = getMaxItemUseDuration(item);
 
         if (time == (max - 5) && getUseAction(item).equalsIgnoreCase("reload")
@@ -169,17 +169,17 @@ public class ItemCrossbow extends ItemBaseMFR
 
     @Override
     public void onPlayerStoppedUsing(ItemStack item, World world, EntityLivingBase user, int timeLeft) {
-        ItemStack loaded = AmmoMechanicsMFR.getArrowOnBow(item);
+        ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
         String action = getUseAction(item);
 
-        if (action.equalsIgnoreCase("fire") && this.onFireArrow(user.world, AmmoMechanicsMFR.getArrowOnBow(item),
+        if (action.equalsIgnoreCase("fire") && this.onFireArrow(user.world, AmmoMechanics.getArrowOnBow(item),
                 item, (EntityPlayer) user, this.getFullValue(item, "power"), false)) {
             if (!loaded.isEmpty()) {
                 loaded.grow(1);
-                AmmoMechanicsMFR.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : ItemStack.EMPTY));
+                AmmoMechanics.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : ItemStack.EMPTY));
             }
             recoilUser((EntityPlayer) user, getFullValue(item, "recoil"));
-            AmmoMechanicsMFR.damageContainer(item, (EntityPlayer) user, 1);
+            AmmoMechanics.damageContainer(item, (EntityPlayer) user, 1);
         }
         stopUse(item);
     }
@@ -449,12 +449,7 @@ public class ItemCrossbow extends ItemBaseMFR
         return isHandCrossbow(item) || rack.hasRackBelow(slot);
     }
 
-    @Override
-    public boolean isSpecialRender(ItemStack item) {
-        return true;
-    }
-
-    public boolean isHandCrossbow(ItemStack item) {
+	public boolean isHandCrossbow(ItemStack item) {
         ICrossbowPart part = ItemCrossbowPart.getPart("stock", getPart("stock", item));
         if (part != null) {
             return part.makesSmallWeapon();

@@ -7,6 +7,6 @@ public interface ISpecialSalvage {
      * Returns a list of Items, Blocks, or ItemStacks dropped by salvage (similar to
      * the regular function)
      */
-    public Object[] getSalvage(ItemStack item);
+	Object[] getSalvage(ItemStack item);
 
 }

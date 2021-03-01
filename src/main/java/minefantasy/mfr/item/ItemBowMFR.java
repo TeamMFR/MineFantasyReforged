@@ -1,7 +1,6 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
@@ -10,6 +9,7 @@ import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -105,7 +105,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 
 		final EntityPlayer player = (EntityPlayer) shooter;
 		final boolean ammoRequired = isAmmoRequired(bow, player);
-		ItemStack ammoStack = AmmoMechanicsMFR.getAmmo(bow);
+		ItemStack ammoStack = AmmoMechanics.getAmmo(bow);
 
 		charge = ForgeEventFactory.onArrowLoose(bow, world, player, charge, !ammoStack.isEmpty() || !ammoRequired);
 		if (charge < 0)
@@ -153,7 +153,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 						entityArrow.setFire(100);
 					}
 
-					AmmoMechanicsMFR.damageContainer(bow, player, 1);
+					AmmoMechanics.damageContainer(bow, player, 1);
 					world.playSound(player.posX, player.posY, player.posZ, MineFantasySounds.BOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + firepower * 0.5F, true);
 
 					if (isInfinite) {
@@ -196,7 +196,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		super.addInformation(item, world, list, flag);
 
 		CustomToolHelper.addBowInformation(item, list);
-		ItemStack ammo = AmmoMechanicsMFR.getAmmo(item);
+		ItemStack ammo = AmmoMechanics.getAmmo(item);
 		if (!ammo.isEmpty()) {
 			list.add(TextFormatting.DARK_GRAY + ammo.getDisplayName() + " x" + ammo.getCount());
 		}
@@ -212,9 +212,9 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(final World world, final EntityPlayer player, final EnumHand hand) {
 		ItemStack bow = player.getHeldItem(hand);
-		final boolean hasAmmo = !AmmoMechanicsMFR.isDepleted(bow);
+		final boolean hasAmmo = !AmmoMechanics.isDepleted(bow);
 
-		if (!world.isRemote && player.isSneaking() || AmmoMechanicsMFR.isDepleted(bow)) {
+		if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(bow)) {
 			reloadBow(bow, player);
 			return ActionResult.newResult(EnumActionResult.FAIL, bow);
 		}

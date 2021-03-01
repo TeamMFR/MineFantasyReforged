@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -25,12 +25,12 @@ public class InventoryReload implements IInventory {
 
     @Override
     public ItemStack getStackInSlot(int i) {
-        return AmmoMechanicsMFR.getAmmo(weapon);
+        return AmmoMechanics.getAmmo(weapon);
     }
 
     @Override
     public ItemStack decrStackSize(int slot, int num) {
-        ItemStack ammo = AmmoMechanicsMFR.getAmmo(weapon);
+        ItemStack ammo = AmmoMechanics.getAmmo(weapon);
         if (ammo != null) {
             ItemStack ammo2 = ammo.copy();
             ammo.shrink(num);
@@ -53,9 +53,9 @@ public class InventoryReload implements IInventory {
     @Override
     public void setInventorySlotContents(int slot, ItemStack item) {
         if (item != null) {
-            AmmoMechanicsMFR.setAmmo(weapon, item);
+            AmmoMechanics.setAmmo(weapon, item);
         } else {
-            AmmoMechanicsMFR.removeAmmo(weapon);
+            AmmoMechanics.removeAmmo(weapon);
         }
     }
 

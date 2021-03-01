@@ -2,7 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.api.crafting.refine.BloomRecipe;
+import minefantasy.mfr.recipe.refine.BloomRecipe;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;

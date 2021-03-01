@@ -2,10 +2,10 @@ package minefantasy.mfr.client.gui;
 
 import codechicken.lib.texture.TextureUtils;
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.InformationList;
-import minefantasy.mfr.api.knowledge.InformationPage;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.InformationList;
+import minefantasy.mfr.mechanics.knowledge.InformationPage;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.mechanics.RPGElements;

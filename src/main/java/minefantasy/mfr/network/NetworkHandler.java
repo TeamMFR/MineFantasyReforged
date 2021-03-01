@@ -1,7 +1,7 @@
 package minefantasy.mfr.network;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.knowledge.InformationList;
+import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.client.gui.GuiAnvilMF;
 import minefantasy.mfr.client.gui.GuiBigFurnace;
 import minefantasy.mfr.client.gui.GuiBlastChamber;

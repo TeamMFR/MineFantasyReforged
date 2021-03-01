@@ -4,12 +4,12 @@ import minefantasy.mfr.api.heating.ForgeFuel;
 import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
-import minefantasy.mfr.item.ItemLighterMF;
+import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.block.Block;
@@ -135,7 +135,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
                 if (facing == EnumFacing.UP && held.getItem() instanceof ItemTongs && onUsedTongs(player, held, tile)) {
                     return true;
                 }
-                int uses = ItemLighterMF.tryUse(held, player);
+                int uses = ItemLighter.tryUse(held, player);
                 if (!tile.isLit() && uses != 0) {
                     player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
                     if (uses == 1) {

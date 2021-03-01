@@ -1,13 +1,13 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -74,8 +74,8 @@ public class BlockSalvage extends Block {
             for (int a = 0; a < amount; a++) {
                 if (salvageItem(world, user, junk, pos)) {
                     if (junk.getCount() == 1) {
-                        AmmoMechanicsMFR.dropAmmo(world, junk, pos.getX() + 0.5D, pos.getY() + 1.25D, pos.getZ() + 0.5D);
-                        AmmoMechanicsMFR.dropAmmoCrate(world, junk, pos.getX() + 0.5D, pos.getY() + 1.25D, pos.getZ() + 0.5D);
+                        AmmoMechanics.dropAmmo(world, junk, pos.getX() + 0.5D, pos.getY() + 1.25D, pos.getZ() + 0.5D);
+                        AmmoMechanics.dropAmmoCrate(world, junk, pos.getX() + 0.5D, pos.getY() + 1.25D, pos.getZ() + 0.5D);
                     }
 
                     drop.getItem().shrink(1);

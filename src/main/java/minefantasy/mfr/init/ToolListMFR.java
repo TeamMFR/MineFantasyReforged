@@ -14,9 +14,9 @@ import minefantasy.mfr.item.ItemEAnvilTools;
 import minefantasy.mfr.item.ItemExplodingArrow;
 import minefantasy.mfr.item.ItemExplodingBolt;
 import minefantasy.mfr.item.ItemHammer;
-import minefantasy.mfr.item.ItemHoeMF;
+import minefantasy.mfr.item.ItemHoeMFR;
 import minefantasy.mfr.item.ItemKnife;
-import minefantasy.mfr.item.ItemLighterMF;
+import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemLootSack;
 import minefantasy.mfr.item.ItemMace;
 import minefantasy.mfr.item.ItemMine;
@@ -24,10 +24,10 @@ import minefantasy.mfr.item.ItemMobSpawner;
 import minefantasy.mfr.item.ItemNeedle;
 import minefantasy.mfr.item.ItemPaintBrush;
 import minefantasy.mfr.item.ItemParachute;
-import minefantasy.mfr.item.ItemPickMF;
+import minefantasy.mfr.item.ItemPickMFR;
 import minefantasy.mfr.item.ItemResearchBook;
 import minefantasy.mfr.item.ItemSkillBook;
-import minefantasy.mfr.item.ItemSpadeMF;
+import minefantasy.mfr.item.ItemSpade;
 import minefantasy.mfr.item.ItemSpear;
 import minefantasy.mfr.item.ItemSpyglass;
 import minefantasy.mfr.item.ItemSword;
@@ -138,10 +138,10 @@ public class ToolListMFR {
         STONE_HAMMER = new ItemHammer("stone_hammer", BaseMaterialMFR.getMaterial("stone").getToolConversion(), false, -1, 0);
         STONE_TONGS = new ItemTongs("stone_tongs", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
         BONE_NEEDLE = new ItemNeedle("bone_needle", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 0);
-        STONE_PICK = new ItemPickMF("stone_pick", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
+        STONE_PICK = new ItemPickMFR("stone_pick", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
         STONE_AXE = new ItemAxeMFR("stone_axe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
-        STONE_SPADE = new ItemSpadeMF("stone_spade", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
-        STONE_HOE = new ItemHoeMF("stone_hoe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
+        STONE_SPADE = new ItemSpade("stone_spade", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
+        STONE_HOE = new ItemHoeMFR("stone_hoe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1);
         STONE_SWORD = new ItemSword("stone_sword", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F);
         STONE_MACE = new ItemMace("stone_mace", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F);
         STONE_WARAXE = new ItemWaraxe("stone_waraxe", BaseMaterialMFR.getMaterial("stone").getToolConversion(), -1, 2.0F);
@@ -157,8 +157,8 @@ public class ToolListMFR {
 
         RESEARCH_BOOK = new ItemResearchBook();
 
-        DRY_ROCKS = new ItemLighterMF("dryrocks", 0.1F, 16);
-        TINDERBOX = new ItemLighterMF("tinderbox", 0.5F, 100);
+        DRY_ROCKS = new ItemLighter("dryrocks", 0.1F, 16);
+        TINDERBOX = new ItemLighter("tinderbox", 0.5F, 100);
 
         SKILLBOOK_ARTISANRY = new ItemSkillBook("skillbook_artisanry", Skill.ARTISANRY);
         SKILLBOOK_CONSTRUCTION = new ItemSkillBook("skillbook_construction", Skill.CONSTRUCTION);

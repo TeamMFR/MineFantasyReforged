@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.knowledge;
+package minefantasy.mfr.mechanics.knowledge;
 
 import minefantasy.mfr.api.rpg.SkillList;
 

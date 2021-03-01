@@ -39,7 +39,7 @@ public class TongsHelper {
      * Picks up an item
      */
     public static boolean trySetHeldItem(ItemStack tongs, ItemStack item) {
-        if (item.isEmpty() || item.getItem() == null || !isHotItem(item) || item.getItem() instanceof ItemBlock) {
+        if (item.isEmpty() || !isHotItem(item) || item.getItem() instanceof ItemBlock) {
             return false;
         }
         NBTTagCompound nbt = getNBT(tongs);

@@ -4,7 +4,6 @@ import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.crafting.exotic.SpecialForging;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
-import minefantasy.mfr.api.knowledge.ResearchLogic;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.Trait;
@@ -14,7 +13,8 @@ import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
-import minefantasy.mfr.mechanics.PlayerTickHandlerMF;
+import minefantasy.mfr.mechanics.PlayerTickHandler;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
@@ -287,8 +287,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 								hasHeart = true;
 								((TileEntityForge) tile).dragonHeartPower = 0;
 								world.createExplosion(null, pos.getX() + x, pos.getY() + y, pos.getZ() + z, 1F, false);
-								PlayerTickHandlerMF.spawnDragon(player);
-								PlayerTickHandlerMF.addDragonEnemyPts(player, 2);
+								PlayerTickHandler.spawnDragon(player);
+								PlayerTickHandler.addDragonEnemyPts(player, 2);
 
 								break;
 							}

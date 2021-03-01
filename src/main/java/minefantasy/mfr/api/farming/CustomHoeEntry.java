@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 
 public class CustomHoeEntry {
-    public static HashMap<Integer, CustomHoeEntry> entries = new HashMap<Integer, CustomHoeEntry>();
+    public static HashMap<Integer, CustomHoeEntry> entries = new HashMap<>();
     public int itemID;
     /**
      * The Efficiency(same variable as dig speed)

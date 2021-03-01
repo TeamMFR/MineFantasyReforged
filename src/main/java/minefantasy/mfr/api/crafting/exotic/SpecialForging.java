@@ -9,8 +9,8 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 
 public class SpecialForging {
-    public static HashMap<Item, Item> dragonforgeCrafts = new HashMap<Item, Item>();
-    public static HashMap<String, Item> specialCrafts = new HashMap<String, Item>();
+    public static HashMap<Item, Item> dragonforgeCrafts = new HashMap<>();
+    public static HashMap<String, Item> specialCrafts = new HashMap<>();
 
     public static void addDragonforgeCraft(Block blackSteel, Block dragon) {
         addDragonforgeCraft(Item.getItemFromBlock(blackSteel), Item.getItemFromBlock(dragon));

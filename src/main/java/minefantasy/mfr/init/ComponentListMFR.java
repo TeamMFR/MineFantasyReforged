@@ -5,7 +5,7 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.mining.RandomOre;
-import minefantasy.mfr.item.AdvancedFuelHandlerMF;
+import minefantasy.mfr.item.AdvancedFuelHandler;
 import minefantasy.mfr.item.FuelHandlerMF;
 import minefantasy.mfr.item.ItemArtefact;
 import minefantasy.mfr.item.ItemBombComponent;
@@ -581,7 +581,7 @@ public class ComponentListMFR {
 
 		Items.POTIONITEM.setContainerItem(Items.GLASS_BOTTLE);
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
-		MineFantasyRebornAPI.registerFuelHandler(new AdvancedFuelHandlerMF());
+		MineFantasyRebornAPI.registerFuelHandler(new AdvancedFuelHandler());
 
 		addRandomDrops();
 		initFuels();

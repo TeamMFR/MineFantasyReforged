@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 
 public class CustomArmourEntry {
-    public static HashMap<Integer, CustomArmourEntry> entries = new HashMap<Integer, CustomArmourEntry>();
+    public static HashMap<Integer, CustomArmourEntry> entries = new HashMap<>();
     public boolean alterSpeed;
     public int itemID;
     /**

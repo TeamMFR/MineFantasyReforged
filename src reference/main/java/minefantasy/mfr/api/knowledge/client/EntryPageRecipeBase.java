@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.knowledge.client;
+package minefantasy.mfr.mechanics.knowledge.client;
 
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import minefantasy.mfr.api.helpers.TextureHelperMFR;

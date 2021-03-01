@@ -4,7 +4,7 @@ import codechicken.lib.CodeChickenLib;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.CustomArmourEntry;
-import minefantasy.mfr.commands.CommandMF;
+import minefantasy.mfr.commands.CommandMFR;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigCrafting;
@@ -207,7 +207,7 @@ public class MineFantasyReborn {
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event) {
-		event.registerServerCommand(new CommandMF());
+		event.registerServerCommand(new CommandMFR());
 	}
 
 	@EventHandler

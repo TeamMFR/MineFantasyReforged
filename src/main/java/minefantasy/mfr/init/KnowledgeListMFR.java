@@ -1,8 +1,8 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.api.knowledge.InformationBase;
-import minefantasy.mfr.api.knowledge.InformationList;
-import minefantasy.mfr.api.knowledge.InformationPage;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.InformationList;
+import minefantasy.mfr.mechanics.knowledge.InformationPage;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;

@@ -10,5 +10,5 @@ public interface IExtendedReachWeapon {
      * @param stack
      * @return
      */
-    public float getReachModifierInBlocks(ItemStack stack);
+    float getReachModifierInBlocks(ItemStack stack);
 }

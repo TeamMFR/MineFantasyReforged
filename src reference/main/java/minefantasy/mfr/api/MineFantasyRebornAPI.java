@@ -12,7 +12,7 @@ import minefantasy.mfr.api.crafting.anvil.IAnvilRecipe;
 import minefantasy.mfr.api.crafting.carpenter.CraftingManagerCarpenter;
 import minefantasy.mfr.api.crafting.carpenter.ICarpenterRecipe;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
-import minefantasy.mfr.api.crafting.refine.QuernRecipes;
+import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.refine.AlloyRecipes;

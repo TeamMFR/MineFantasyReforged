@@ -1,6 +1,5 @@
 package minefantasy.mfr.client.render;
 
-import minefantasy.mfr.api.archery.AmmoMechanicsMFR;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
@@ -12,6 +11,7 @@ import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityCarpenter;
@@ -40,10 +40,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
+@SideOnly(Side.CLIENT)
 public class MineFantasyHUD extends Gui {
 	protected static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
 	private static Minecraft mc = Minecraft.getMinecraft();
@@ -285,7 +288,7 @@ public class MineFantasyHUD extends Gui {
 
 		ItemStack held = player.getHeldItemMainhand();
 		if (!held.isEmpty() && (held.getItem() instanceof IDisplayMFRAmmo)) {
-			ItemStack arrow = AmmoMechanicsMFR.getAmmo(held);
+			ItemStack arrow = AmmoMechanics.getAmmo(held);
 
 			String text = I18n.format("info.bow.reload");
 			if (!arrow.isEmpty()) {
@@ -299,7 +302,7 @@ public class MineFantasyHUD extends Gui {
 
 			int cap = ((IDisplayMFRAmmo) held.getItem()).getAmmoCapacity(held);
 
-			ItemStack ammo = AmmoMechanicsMFR.getArrowOnBow(held);
+			ItemStack ammo = AmmoMechanics.getArrowOnBow(held);
 			int ammocount = ammo == ItemStack.EMPTY ? 0 : ammo.getCount();
 			if (cap > 1) {
 				String ammostring = I18n.format("info.firearm.ammo", ammocount, cap);

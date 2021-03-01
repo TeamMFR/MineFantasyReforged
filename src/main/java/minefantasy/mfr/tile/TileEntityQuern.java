@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.api.crafting.refine.QuernRecipes;
+import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerQuern;
 import minefantasy.mfr.init.ComponentListMFR;

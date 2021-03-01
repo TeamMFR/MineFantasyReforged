@@ -1,4 +1,4 @@
-package minefantasy.mfr.api.crafting.refine;
+package minefantasy.mfr.recipe.refine;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;

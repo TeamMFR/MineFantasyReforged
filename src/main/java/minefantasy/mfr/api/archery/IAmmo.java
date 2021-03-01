@@ -6,5 +6,5 @@ public interface IAmmo {
     /**
      * What ammo is it (arrow, bolt, bullet, etc)
      */
-    public String getAmmoType(ItemStack arrow);
+	String getAmmoType(ItemStack arrow);
 }
