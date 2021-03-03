@@ -10,10 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Old package cleanup with Delete Package Versions
-        uses: actions/delete-package-versions@v1
-        with:
-          package-name: 'minefantasy.mfr.MineFantasyReborn.MineFantasy-reborn'
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up JDK 1.8
