@@ -18,7 +18,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 /**
  * @author Anonymous Productions
  */
-
+// TODO
 @Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
 public class LeatherArmourListMFR {
 	public static final String[] LEATHER_ARMOR_TYPES = new String[] {"hide", "rough_leather", "strong_leather", "stud_leather", "padded"};

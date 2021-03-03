@@ -5,8 +5,8 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.init.LeatherArmourListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.ArmourCalculator;
@@ -114,10 +114,10 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		if (design == ArmourDesign.PLATE) {
 			lvl++;
 		}
-		if (lvl >= ToolListMFR.RARITY.length) {
-			lvl = ToolListMFR.RARITY.length - 1;
+		if (lvl >= MineFantasyItems.RARITY.length) {
+			lvl = MineFantasyItems.RARITY.length - 1;
 		}
-		return ToolListMFR.RARITY[lvl];
+		return MineFantasyItems.RARITY[lvl];
 	}
 
 	@Override

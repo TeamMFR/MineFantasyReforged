@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -117,7 +117,7 @@ public class BlockBerryBush extends BlockBush implements IGrowable, IShearable {
 
 		if (getAge(state) == getMaxAge()) {
 
-			ItemStack itemstack = rand.nextInt(10) == 0 ? new ItemStack(FoodListMFR.BERRIES_JUICY) : new ItemStack(FoodListMFR.BERRIES, 1);
+			ItemStack itemstack = rand.nextInt(10) == 0 ? new ItemStack(MineFantasyItems.BERRIES_JUICY) : new ItemStack(MineFantasyItems.BERRIES, 1);
 
 			float f = this.rand.nextFloat() * 0.8F + 0.1F;
 			float f1 = this.rand.nextFloat() * 0.8F + 0.1F;

@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.block.BlockOreMF;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -25,9 +25,9 @@ public class ItemBlockOreMFR extends ItemBlockBase {
 			}
 			lvl++;
 		}
-		if (lvl >= ToolListMFR.RARITY.length) {
-			lvl = ToolListMFR.RARITY.length - 1;
+		if (lvl >= MineFantasyItems.RARITY.length) {
+			lvl = MineFantasyItems.RARITY.length - 1;
 		}
-		return ToolListMFR.RARITY[lvl];
+		return MineFantasyItems.RARITY[lvl];
 	}
 }

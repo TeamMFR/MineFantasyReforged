@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ public class ItemBurntFood extends ItemComponentMFR {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		if (this == FoodListMFR.BURNT_FOOD) {
+		if (this == MineFantasyItems.BURNT_FOOD) {
 			if (!world.isRemote && rand.nextInt(5) == 0) {
 				player.entityDropItem(new ItemStack(Items.COAL, 1, 1), 0.0F);
 			}
@@ -30,7 +30,7 @@ public class ItemBurntFood extends ItemComponentMFR {
 			return ActionResult.newResult(EnumActionResult.PASS, item);
 		}
 		if (!world.isRemote) {
-			player.entityDropItem(new ItemStack(FoodListMFR.BURNT_FOOD, item.getCount()), 0.0F);
+			player.entityDropItem(new ItemStack(MineFantasyItems.BURNT_FOOD, item.getCount()), 0.0F);
 		}
 		return ActionResult.newResult(EnumActionResult.PASS, item.getItem().getContainerItem(item));
 	}

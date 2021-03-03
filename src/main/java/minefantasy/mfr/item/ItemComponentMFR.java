@@ -2,8 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.block.BlockComponent;
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -75,15 +75,15 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 			return;
 		}
 
-		if (this != ComponentListMFR.TIMBER) {
+		if (this != MineFantasyItems.TIMBER) {
 			return;
 		}
 
-		for (Item ingot : ComponentListMFR.INGOTS) {
-			if (ingot == ComponentListMFR.INGOTS[3]) {
+		for (Item ingot : MineFantasyItems.INGOTS) {
+			if (ingot == MineFantasyItems.INGOTS[3]) {
 				add(items, Items.IRON_INGOT);
 			}
-			if (ingot == ComponentListMFR.INGOTS[6]) {
+			if (ingot == MineFantasyItems.INGOTS[6]) {
 				add(items, Items.GOLD_INGOT);
 			}
 			add(items, ingot);
@@ -94,106 +94,106 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : wood) {
 				items.add(this.construct(customMat.name));
-				items.add(((ItemComponentMFR) ComponentListMFR.TIMBER_PANE).construct(customMat.name));
+				items.add(((ItemComponentMFR) MineFantasyItems.TIMBER_PANE).construct(customMat.name));
 			}
 			for (CustomMaterial customMat : metal) {
-				items.add(ComponentListMFR.bar(customMat.name));
+				items.add(MineFantasyItems.bar(customMat.name));
 			}
 		}
 
-		add(items, ComponentListMFR.NAIL);
-		add(items, ComponentListMFR.RIVET);
-		add(items, ComponentListMFR.THREAD);
-		add(items, ComponentListMFR.CLAY_POT_UNCOOKED);
-		add(items, ComponentListMFR.CLAY_POT);
-		add(items, ComponentListMFR.INGOT_MOULD_UNCOOKED);
-		add(items, ComponentListMFR.INGOT_MOULD);
+		add(items, MineFantasyItems.NAIL);
+		add(items, MineFantasyItems.RIVET);
+		add(items, MineFantasyItems.THREAD);
+		add(items, MineFantasyItems.CLAY_POT_UNCOOKED);
+		add(items, MineFantasyItems.CLAY_POT);
+		add(items, MineFantasyItems.INGOT_MOULD_UNCOOKED);
+		add(items, MineFantasyItems.INGOT_MOULD);
 
-		add(items, ComponentListMFR.LEATHER_STRIP);
-		add(items, ComponentListMFR.RAWHIDE_SMALL);
-		add(items, ComponentListMFR.RAWHIDE_MEDIUM);
-		add(items, ComponentListMFR.RAWHIDE_LARGE);
-		add(items, ComponentListMFR.HIDE_SMALL);
-		add(items, ComponentListMFR.HIDE_MEDIUM);
-		add(items, ComponentListMFR.HIDE_LARGE);
+		add(items, MineFantasyItems.LEATHER_STRIP);
+		add(items, MineFantasyItems.RAWHIDE_SMALL);
+		add(items, MineFantasyItems.RAWHIDE_MEDIUM);
+		add(items, MineFantasyItems.RAWHIDE_LARGE);
+		add(items, MineFantasyItems.HIDE_SMALL);
+		add(items, MineFantasyItems.HIDE_MEDIUM);
+		add(items, MineFantasyItems.HIDE_LARGE);
 
-		add(items, ComponentListMFR.ORE_COPPER);
-		add(items, ComponentListMFR.ORE_TIN);
-		add(items, ComponentListMFR.ORE_IRON);
-		add(items, ComponentListMFR.ORE_SILVER);
-		add(items, ComponentListMFR.ORE_GOLD);
-		add(items, ComponentListMFR.ORE_TUNGSTEN);
+		add(items, MineFantasyItems.ORE_COPPER);
+		add(items, MineFantasyItems.ORE_TIN);
+		add(items, MineFantasyItems.ORE_IRON);
+		add(items, MineFantasyItems.ORE_SILVER);
+		add(items, MineFantasyItems.ORE_GOLD);
+		add(items, MineFantasyItems.ORE_TUNGSTEN);
 
-		add(items, ComponentListMFR.FLUX);
-		add(items, ComponentListMFR.FLUX_STRONG);
-		add(items, ComponentListMFR.FLUX_POT);
-		add(items, ComponentListMFR.COAL_FLUX);
-		add(items, ComponentListMFR.COKE);
-		add(items, ComponentListMFR.DIAMOND_SHARDS);
-		add(items, ComponentListMFR.FLETCHING);
-		add(items, ComponentListMFR.PLANT_OIL);
+		add(items, MineFantasyItems.FLUX);
+		add(items, MineFantasyItems.FLUX_STRONG);
+		add(items, MineFantasyItems.FLUX_POT);
+		add(items, MineFantasyItems.COAL_FLUX);
+		add(items, MineFantasyItems.COKE);
+		add(items, MineFantasyItems.DIAMOND_SHARDS);
+		add(items, MineFantasyItems.FLETCHING);
+		add(items, MineFantasyItems.PLANT_OIL);
 
-		add(items, ComponentListMFR.COAL_DUST);
-		add(items, ComponentListMFR.IRON_PREP);
-		add(items, ComponentListMFR.OBSIDIAN_ROCK);
-		add(items, ComponentListMFR.SULFUR);
-		add(items, ComponentListMFR.NITRE);
-		add(items, ComponentListMFR.BLACKPOWDER);
-		add(items, ComponentListMFR.BLACKPOWDER_ADVANCED);
-		add(items, ComponentListMFR.BOMB_FUSE);
-		add(items, ComponentListMFR.BOMB_FUSE_LONG);
-		add(items, ComponentListMFR.SHRAPNEL);
-		add(items, ComponentListMFR.MAGMA_CREAM_REFINED);
-		add(items, ComponentListMFR.BOMB_CASING_UNCOOKED);
-		add(items, ComponentListMFR.BOMB_CASING);
-		add(items, ComponentListMFR.MINE_CASING_UNCOOKED);
-		add(items, ComponentListMFR.MINE_CASING);
-		add(items, ComponentListMFR.BOMB_CASING_IRON);
-		add(items, ComponentListMFR.MINE_CASING_IRON);
-		add(items, ComponentListMFR.BOMB_CASING_OBSIDIAN);
-		add(items, ComponentListMFR.MINE_CASING_OBSIDIAN);
-		add(items, ComponentListMFR.BOMB_CASING_CRYSTAL);
-		add(items, ComponentListMFR.MINE_CASING_CRYSTAL);
-		add(items, ComponentListMFR.BOMB_CASING_ARROW);
-		add(items, ComponentListMFR.BOMB_CASING_BOLT);
+		add(items, MineFantasyItems.COAL_DUST);
+		add(items, MineFantasyItems.IRON_PREP);
+		add(items, MineFantasyItems.OBSIDIAN_ROCK);
+		add(items, MineFantasyItems.SULFUR);
+		add(items, MineFantasyItems.NITRE);
+		add(items, MineFantasyItems.BLACKPOWDER);
+		add(items, MineFantasyItems.BLACKPOWDER_ADVANCED);
+		add(items, MineFantasyItems.BOMB_FUSE);
+		add(items, MineFantasyItems.BOMB_FUSE_LONG);
+		add(items, MineFantasyItems.SHRAPNEL);
+		add(items, MineFantasyItems.MAGMA_CREAM_REFINED);
+		add(items, MineFantasyItems.BOMB_CASING_UNCOOKED);
+		add(items, MineFantasyItems.BOMB_CASING);
+		add(items, MineFantasyItems.MINE_CASING_UNCOOKED);
+		add(items, MineFantasyItems.MINE_CASING);
+		add(items, MineFantasyItems.BOMB_CASING_IRON);
+		add(items, MineFantasyItems.MINE_CASING_IRON);
+		add(items, MineFantasyItems.BOMB_CASING_OBSIDIAN);
+		add(items, MineFantasyItems.MINE_CASING_OBSIDIAN);
+		add(items, MineFantasyItems.BOMB_CASING_CRYSTAL);
+		add(items, MineFantasyItems.MINE_CASING_CRYSTAL);
+		add(items, MineFantasyItems.BOMB_CASING_ARROW);
+		add(items, MineFantasyItems.BOMB_CASING_BOLT);
 
-		add(items, ComponentListMFR.CLAY_BRICK);
-		add(items, ComponentListMFR.KAOLINITE);
-		add(items, ComponentListMFR.KAOLINITE_DUST);
-		add(items, ComponentListMFR.FIRECLAY);
-		add(items, ComponentListMFR.FIRECLAY_BRICK);
-		add(items, ComponentListMFR.STRONG_BRICK);
-		add(items, ComponentListMFR.DRAGON_HEART);
-		add(items, ComponentListMFR.ORNATE_ITEMS);
+		add(items, MineFantasyItems.CLAY_BRICK);
+		add(items, MineFantasyItems.KAOLINITE);
+		add(items, MineFantasyItems.KAOLINITE_DUST);
+		add(items, MineFantasyItems.FIRECLAY);
+		add(items, MineFantasyItems.FIRECLAY_BRICK);
+		add(items, MineFantasyItems.STRONG_BRICK);
+		add(items, MineFantasyItems.DRAGON_HEART);
+		add(items, MineFantasyItems.ORNATE_ITEMS);
 
-		add(items, ComponentListMFR.TALISMAN_LESSER);
-		add(items, ComponentListMFR.TALISMAN_GREATER);
+		add(items, MineFantasyItems.TALISMAN_LESSER);
+		add(items, MineFantasyItems.TALISMAN_GREATER);
 
-		add(items, ComponentListMFR.BOLT);
-		add(items, ComponentListMFR.IRON_FRAME);
-		add(items, ComponentListMFR.IRON_STRUT);
-		add(items, ComponentListMFR.STEEL_TUBE);
-		add(items, ComponentListMFR.BRONZE_GEARS);
-		add(items, ComponentListMFR.TUNGSTEN_GEARS);
-		add(items, ComponentListMFR.COGWORK_SHAFT);
-		add(items, ComponentListMFR.COMPOSITE_ALLOY_INGOT);
+		add(items, MineFantasyItems.BOLT);
+		add(items, MineFantasyItems.IRON_FRAME);
+		add(items, MineFantasyItems.IRON_STRUT);
+		add(items, MineFantasyItems.STEEL_TUBE);
+		add(items, MineFantasyItems.BRONZE_GEARS);
+		add(items, MineFantasyItems.TUNGSTEN_GEARS);
+		add(items, MineFantasyItems.COGWORK_SHAFT);
+		add(items, MineFantasyItems.COMPOSITE_ALLOY_INGOT);
 
-		add(items, ComponentListMFR.CROSSBOW_HANDLE_WOOD);
-		add(items, ComponentListMFR.CROSSBOW_STOCK_WOOD);
-		add(items, ComponentListMFR.CROSSBOW_STOCK_IRON);
+		add(items, MineFantasyItems.CROSSBOW_HANDLE_WOOD);
+		add(items, MineFantasyItems.CROSSBOW_STOCK_WOOD);
+		add(items, MineFantasyItems.CROSSBOW_STOCK_IRON);
 
-		add(items, ComponentListMFR.CROSSBOW_ARMS_BASIC);
-		add(items, ComponentListMFR.CROSSBOW_ARMS_LIGHT);
-		add(items, ComponentListMFR.CROSSBOW_ARMS_HEAVY);
-		add(items, ComponentListMFR.CROSSBOW_ARMS_ADVANCED);
+		add(items, MineFantasyItems.CROSSBOW_ARMS_BASIC);
+		add(items, MineFantasyItems.CROSSBOW_ARMS_LIGHT);
+		add(items, MineFantasyItems.CROSSBOW_ARMS_HEAVY);
+		add(items, MineFantasyItems.CROSSBOW_ARMS_ADVANCED);
 
-		add(items, ComponentListMFR.CROSSBOW_AMMO);
-		add(items, ComponentListMFR.CROSSBOW_SCOPE);
-		add(items, ComponentListMFR.CROSSBOW_BAYONET);
+		add(items, MineFantasyItems.CROSSBOW_AMMO);
+		add(items, MineFantasyItems.CROSSBOW_SCOPE);
+		add(items, MineFantasyItems.CROSSBOW_BAYONET);
 
-		add(items, ComponentListMFR.COPPER_COIN);
-		add(items, ComponentListMFR.SILVER_COIN);
-		add(items, ComponentListMFR.GOLD_COIN);
+		add(items, MineFantasyItems.COPPER_COIN);
+		add(items, MineFantasyItems.SILVER_COIN);
+		add(items, MineFantasyItems.GOLD_COIN);
 	}
 
 	private void add(List<ItemStack> list, Item item) {

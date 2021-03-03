@@ -20,10 +20,10 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
@@ -513,18 +513,18 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			super.getSubItems(tab, items);
 			return;
 		}
-		if (this != ToolListMFR.TRAINING_SWORD) {
+		if (this != MineFantasyItems.TRAINING_SWORD) {
 			return;
 		}
-		items.add(new ItemStack(ToolListMFR.TRAINING_SWORD));
-		items.add(new ItemStack(ToolListMFR.TRAINING_WARAXE));
-		items.add(new ItemStack(ToolListMFR.TRAINING_MACE));
-		items.add(new ItemStack(ToolListMFR.TRAINING_SPEAR));
+		items.add(new ItemStack(MineFantasyItems.TRAINING_SWORD));
+		items.add(new ItemStack(MineFantasyItems.TRAINING_WARAXE));
+		items.add(new ItemStack(MineFantasyItems.TRAINING_MACE));
+		items.add(new ItemStack(MineFantasyItems.TRAINING_SPEAR));
 
-		items.add(new ItemStack(ToolListMFR.STONE_SWORD));
-		items.add(new ItemStack(ToolListMFR.STONE_WARAXE));
-		items.add(new ItemStack(ToolListMFR.STONE_MACE));
-		items.add(new ItemStack(ToolListMFR.STONE_SPEAR));
+		items.add(new ItemStack(MineFantasyItems.STONE_SWORD));
+		items.add(new ItemStack(MineFantasyItems.STONE_WARAXE));
+		items.add(new ItemStack(MineFantasyItems.STONE_MACE));
+		items.add(new ItemStack(MineFantasyItems.STONE_SPEAR));
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockForge;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerForge;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.network.ForgePacket;
 import minefantasy.mfr.network.NetworkHandler;
@@ -187,7 +187,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	}
 
 	private void modifyItem(ItemStack item) {
-		if (item.getItem() == ComponentListMFR.HOT_ITEM) {
+		if (item.getItem() == MineFantasyItems.HOT_ITEM) {
 			int temp = ItemHeated.getTemp(item);
 			if (temp > temperature) {
 				int i = (int) (temperature / 5F);

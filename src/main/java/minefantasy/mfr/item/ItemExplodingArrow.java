@@ -2,10 +2,9 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityArrowMFR;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -26,7 +25,7 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 	}
 
 	public static ItemStack createBombArrow(String powder, String filling) {
-		return createBombArrow(ToolListMFR.EXPLODING_ARROW, powder, filling);
+		return createBombArrow(MineFantasyItems.EXPLODING_ARROW, powder, filling);
 	}
 
 	public static ItemStack createBombArrow(Item design, String powder, String filling) {
@@ -59,7 +58,7 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 		int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
 		float range = fill.range * powder.rangeModifier * 0.5F;
 
-		list.add(I18n.format(ToolListMFR.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
+		list.add(I18n.format(MineFantasyItems.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
 		list.add(I18n.format("bomb.powder." + powder.name + ".name"));
 		list.add("");
 		list.add(I18n.format("bomb.damage.name") + ": " + damage);
@@ -87,7 +86,7 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 
 	@Override
 	public Object[] getSalvage(ItemStack item) {
-		return new Object[] {ComponentListMFR.BOMB_CASING_ARROW,
+		return new Object[] {MineFantasyItems.BOMB_CASING_ARROW,
 				ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
 				ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)),};
 	}

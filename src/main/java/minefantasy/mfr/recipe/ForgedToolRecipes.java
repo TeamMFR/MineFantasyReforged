@@ -3,10 +3,8 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.constants.Skill;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -29,208 +27,208 @@ public class ForgedToolRecipes {
 		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 
 		for (CustomMaterial customMat : metal) {
-			ItemStack bar = ComponentListMFR.BAR.createComm(customMat.name);
+			ItemStack bar = MineFantasyItems.BAR.createComm(customMat.name);
 			for (ItemStack ingot : OreDictionary.getOres("ingot" + customMat.name)) {
-				KnowledgeListMFR.barR.add(MineFantasyRebornAPI.addAnvilRecipe(null, bar, "", true, "hammer", -1, -1,
+				MineFantasyKnowledgeList.barR.add(MineFantasyRebornAPI.addAnvilRecipe(null, bar, "", true, "hammer", -1, -1,
 						(int) (customMat.craftTimeModifier / 2F), "I", 'I', ingot));
 			}
 
 			ItemStack defaultIngot = customMat.getItemStack();
 			if (defaultIngot != null) {
-				KnowledgeListMFR.baringotR.add(MineFantasyRebornAPI.addAnvilRecipe(null, defaultIngot, "", true, "hammer", -1, -1, (int) (customMat.craftTimeModifier / 2F), "I", 'I', bar));
+				MineFantasyKnowledgeList.baringotR.add(MineFantasyRebornAPI.addAnvilRecipe(null, defaultIngot, "", true, "hammer", -1, -1, (int) (customMat.craftTimeModifier / 2F), "I", 'I', bar));
 			}
 		}
 
-		KnowledgeListMFR.tinderboxR = MineFantasyRebornAPI.addAnvilRecipe(null, new ItemStack(ToolListMFR.TINDERBOX), "", true, "hammer", 0, 0, 10, " F ", "SWS", " I ", 'F', Items.FLINT, 'S', Items.STICK, 'W', Blocks.WOOL, 'I', ComponentListMFR.bar("Iron"));
-		KnowledgeListMFR.flintAndSteelR = MineFantasyRebornAPI.addAnvilRecipe(null, new ItemStack(Items.FLINT_AND_STEEL), "", true, "hammer", 0, 0, 10, "  F", "IC ", " I ", 'F', Items.FLINT, 'C', Items.COAL, 'I', ComponentListMFR.bar("Steel"));
-		Salvage.addSalvage(ToolListMFR.TINDERBOX, Items.FLINT, Items.STICK, Blocks.WOOL, ComponentListMFR.bar("Iron"));
-		Salvage.addSalvage(Items.FLINT_AND_STEEL, Items.FLINT, ComponentListMFR.bar("Steel"));
+		MineFantasyKnowledgeList.tinderboxR = MineFantasyRebornAPI.addAnvilRecipe(null, new ItemStack(MineFantasyItems.TINDERBOX), "", true, "hammer", 0, 0, 10, " F ", "SWS", " I ", 'F', Items.FLINT, 'S', Items.STICK, 'W', Blocks.WOOL, 'I', MineFantasyItems.bar("Iron"));
+		MineFantasyKnowledgeList.flintAndSteelR = MineFantasyRebornAPI.addAnvilRecipe(null, new ItemStack(Items.FLINT_AND_STEEL), "", true, "hammer", 0, 0, 10, "  F", "IC ", " I ", 'F', Items.FLINT, 'C', Items.COAL, 'I', MineFantasyItems.bar("Steel"));
+		Salvage.addSalvage(MineFantasyItems.TINDERBOX, Items.FLINT, Items.STICK, Blocks.WOOL, MineFantasyItems.bar("Iron"));
+		Salvage.addSalvage(Items.FLINT_AND_STEEL, Items.FLINT, MineFantasyItems.bar("Steel"));
 	}
 
 	private static void addMetalComponents() {
 		int time = 2;
-		Item bar = ComponentListMFR.BAR;
-		Item hunk = ComponentListMFR.METAL_HUNK;
+		Item bar = MineFantasyItems.BAR;
+		Item hunk = MineFantasyItems.METAL_HUNK;
 
-		KnowledgeListMFR.hunkR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(hunk, 4), "", true, "hammer", 0, 0, time, "F", "I", 'F', ComponentListMFR.FLUX, 'I', bar);
+		MineFantasyKnowledgeList.hunkR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(hunk, 4), "", true, "hammer", 0, 0, time, "F", "I", 'F', MineFantasyItems.FLUX, 'I', bar);
 
-		KnowledgeListMFR.ingotR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, bar, "", true, "hammer", 0, 0, time, "II", "II", 'I', hunk);
+		MineFantasyKnowledgeList.ingotR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, bar, "", true, "hammer", 0, 0, time, "II", "II", 'I', hunk);
 
 		time = 8;
 		int count = 1;
-		KnowledgeListMFR.bucketR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(Items.BUCKET, count), "", true, "hammer", 0, 0, time, "I I", " I ", 'I', bar);
+		MineFantasyKnowledgeList.bucketR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(Items.BUCKET, count), "", true, "hammer", 0, 0, time, "I I", " I ", 'I', bar);
 	}
 
 	private static void addComponentTools() {
-		Item bar = ComponentListMFR.BAR;
-		Item hunk = ComponentListMFR.METAL_HUNK;
+		Item bar = MineFantasyItems.BAR;
+		Item hunk = MineFantasyItems.METAL_HUNK;
 
 		int time = 10;
 
-		KnowledgeListMFR.nailR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(ComponentListMFR.NAIL, 16), "", true, "hammer", -1, -1, time, "HH", " H", " H", 'H', hunk);
-		KnowledgeListMFR.rivetR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(ComponentListMFR.RIVET, 8), "", true, "hammer", -1, -1, time, "H H", " H ", " H ", 'H', hunk);
+		MineFantasyKnowledgeList.nailR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.NAIL, 16), "", true, "hammer", -1, -1, time, "HH", " H", " H", 'H', hunk);
+		MineFantasyKnowledgeList.rivetR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.RIVET, 8), "", true, "hammer", -1, -1, time, "H H", " H ", " H ", 'H', hunk);
 
-		KnowledgeListMFR.needleR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_NEEDLE, "tier", true, "hammer", -1, -1, time, "H", "H", "H", "H", 'H', hunk);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_NEEDLE, bar);
+		MineFantasyKnowledgeList.needleR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_NEEDLE, "tier", true, "hammer", -1, -1, time, "H", "H", "H", "H", 'H', hunk);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_NEEDLE, bar);
 
 		time = 3;
-		KnowledgeListMFR.crossBoltR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_BOLT, "tier", true, "hammer", -1, -1, time, "H", "F", 'F', ComponentListMFR.FLETCHING, 'H', hunk);
+		MineFantasyKnowledgeList.crossBoltR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_BOLT, "tier", true, "hammer", -1, -1, time, "H", "F", 'F', MineFantasyItems.FLETCHING, 'H', hunk);
 		time = 2;
-		KnowledgeListMFR.arrowheadR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(ComponentListMFR.ARROWHEAD, 4), "tier", true, "hammer", -1, -1, time, "H ", "HH", "H ", 'H', hunk);
+		MineFantasyKnowledgeList.arrowheadR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.ARROWHEAD, 4), "tier", true, "hammer", -1, -1, time, "H ", "HH", "H ", 'H', hunk);
 		time = 5;
-		KnowledgeListMFR.bodkinheadR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(ComponentListMFR.BODKIN_HEAD, 4), "tier", true, "hammer", -1, -1, time, "H  ", " HH", "H  ", 'H', hunk);
+		MineFantasyKnowledgeList.bodkinheadR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.BODKIN_HEAD, 4), "tier", true, "hammer", -1, -1, time, "H  ", " HH", "H  ", 'H', hunk);
 		time = 5;
-		KnowledgeListMFR.broadheadR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(ComponentListMFR.BROAD_HEAD, 4), "tier", true, "hammer", -1, -1, time, "H ", " H", " H", "H ", 'H', hunk);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_BOLT, ComponentListMFR.FLETCHING, hunk);
-		Salvage.addSalvage(ComponentListMFR.ARROWHEAD, hunk);
-		Salvage.addSalvage(ComponentListMFR.BODKIN_HEAD, hunk);
-		Salvage.addSalvage(ComponentListMFR.BROAD_HEAD, hunk);
+		MineFantasyKnowledgeList.broadheadR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.BROAD_HEAD, 4), "tier", true, "hammer", -1, -1, time, "H ", " H", " H", "H ", 'H', hunk);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_BOLT, MineFantasyItems.FLETCHING, hunk);
+		Salvage.addSalvage(MineFantasyItems.ARROWHEAD, hunk);
+		Salvage.addSalvage(MineFantasyItems.BODKIN_HEAD, hunk);
+		Salvage.addSalvage(MineFantasyItems.BROAD_HEAD, hunk);
 
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_ARROW, ComponentListMFR.ARROWHEAD, ComponentListMFR.FLETCHING);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_ARROW_BODKIN, ComponentListMFR.BODKIN_HEAD, ComponentListMFR.FLETCHING);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_ARROW_BROAD, ComponentListMFR.BROAD_HEAD, ComponentListMFR.FLETCHING);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_ARROW, MineFantasyItems.ARROWHEAD, MineFantasyItems.FLETCHING);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_ARROW_BODKIN, MineFantasyItems.BODKIN_HEAD, MineFantasyItems.FLETCHING);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_ARROW_BROAD, MineFantasyItems.BROAD_HEAD, MineFantasyItems.FLETCHING);
 
 	}
 
 	private static void addStandardTools() {
-		Item bar = ComponentListMFR.BAR;
-		Item plank = ComponentListMFR.TIMBER;
-		Item strip = ComponentListMFR.LEATHER_STRIP;
-		Item rivet = ComponentListMFR.RIVET;
+		Item bar = MineFantasyItems.BAR;
+		Item plank = MineFantasyItems.TIMBER;
+		Item strip = MineFantasyItems.LEATHER_STRIP;
+		Item rivet = MineFantasyItems.RIVET;
 
 		int time = 15;
-		KnowledgeListMFR.pickR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_PICK, "tier", true, "hammer", -1, -1, time, "L I", "PPI", "L I", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_PICK, bar, bar, bar, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.pickR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_PICK, "tier", true, "hammer", -1, -1, time, "L I", "PPI", "L I", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_PICK, bar, bar, bar, plank, plank, strip, strip);
 
 		time = 15;
-		KnowledgeListMFR.axeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_AXE, "tier", true, "hammer", -1, -1, time, "LII", "PPI", "L  ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_AXE, bar, bar, bar, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.axeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_AXE, "tier", true, "hammer", -1, -1, time, "LII", "PPI", "L  ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_AXE, bar, bar, bar, plank, plank, strip, strip);
 
 		time = 12;
-		KnowledgeListMFR.hoeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HOE, "tier", true, "hammer", -1, -1, time, "L I", "PPI", "L  ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HOE, bar, bar, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.hoeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HOE, "tier", true, "hammer", -1, -1, time, "L I", "PPI", "L  ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HOE, bar, bar, plank, plank, strip, strip);
 
 		time = 10;
-		KnowledgeListMFR.spadeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SPADE, "tier", true, "hammer", -1, -1, time, "L  ", "PPI", "L  ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SPADE, bar, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.spadeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SPADE, "tier", true, "hammer", -1, -1, time, "L  ", "PPI", "L  ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SPADE, bar, plank, plank, strip, strip);
 
 		// ADVANCED
 		time = 25;
-		KnowledgeListMFR.hvyPickR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HVYPICK, "tier", true, "hvyhammer", -1, -1, time, "LR I", "PPII", "LRII", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HVYPICK, bar, bar, bar, bar, bar, plank, plank, strip, strip, rivet, rivet);
+		MineFantasyKnowledgeList.hvyPickR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HVYPICK, "tier", true, "hvyhammer", -1, -1, time, "LR I", "PPII", "LRII", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HVYPICK, bar, bar, bar, bar, bar, plank, plank, strip, strip, rivet, rivet);
 
 		time = 15;
-		KnowledgeListMFR.handpickR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HANDPICK, "tier", true, "hammer", -1, -1, time, "LI ", "PIR", "L  ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HANDPICK, bar, bar, plank, strip, strip, rivet);
+		MineFantasyKnowledgeList.handpickR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HANDPICK, "tier", true, "hammer", -1, -1, time, "LI ", "PIR", "L  ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HANDPICK, bar, bar, plank, strip, strip, rivet);
 
 		time = 25;
-		KnowledgeListMFR.hvyShovelR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HVYSHOVEL, "tier", true, "hvyhammer", -1, -1, time, "LRII", "PPII", "LRII", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HVYSHOVEL, bar, bar, bar, bar, bar, bar, plank, plank, strip, strip, rivet, rivet);
+		MineFantasyKnowledgeList.hvyShovelR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HVYSHOVEL, "tier", true, "hvyhammer", -1, -1, time, "LRII", "PPII", "LRII", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HVYSHOVEL, bar, bar, bar, bar, bar, bar, plank, plank, strip, strip, rivet, rivet);
 
 		time = 15;
-		KnowledgeListMFR.trowR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_TROW, "tier", true, "hammer", -1, -1, time, "L  ", "PIR", "L  ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_TROW, bar, plank, strip, strip, rivet);
+		MineFantasyKnowledgeList.trowR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_TROW, "tier", true, "hammer", -1, -1, time, "L  ", "PIR", "L  ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_TROW, bar, plank, strip, strip, rivet);
 
 		time = 30;
-		KnowledgeListMFR.scytheR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SCYTHE, "tier", true, "hvyhammer", -1, -1, time, "   I ", "L PIR", "PPPIR", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SCYTHE, bar, bar, bar, plank, plank, plank, plank, strip, rivet, rivet);
+		MineFantasyKnowledgeList.scytheR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SCYTHE, "tier", true, "hvyhammer", -1, -1, time, "   I ", "L PIR", "PPPIR", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SCYTHE, bar, bar, bar, plank, plank, plank, plank, strip, rivet, rivet);
 
 		time = 14;
-		KnowledgeListMFR.mattockR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_MATTOCK, "tier", true, "hammer", -1, -1, time, "L I", "PPI", "LIR", 'I', bar, 'P', plank, 'L', strip, 'R', rivet);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_MATTOCK, bar, bar, bar, rivet, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.mattockR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_MATTOCK, "tier", true, "hammer", -1, -1, time, "L I", "PPI", "LIR", 'I', bar, 'P', plank, 'L', strip, 'R', rivet);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_MATTOCK, bar, bar, bar, rivet, plank, plank, strip, strip);
 
 		time = 15;
-		KnowledgeListMFR.lumberR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_LUMBER, "tier", true, "hvyHammer", -1, -1, time, "L IIR", "PPPIR", "L   R", 'I', bar, 'P', plank, 'L', strip, 'R', rivet);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_LUMBER, bar, bar, bar, rivet, rivet, rivet, plank, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.lumberR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_LUMBER, "tier", true, "hvyHammer", -1, -1, time, "L IIR", "PPPIR", "L   R", 'I', bar, 'P', plank, 'L', strip, 'R', rivet);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_LUMBER, bar, bar, bar, rivet, rivet, rivet, plank, plank, plank, strip, strip);
 	}
 
 	private static void addStandardCrafters() {
-		Item bar = ComponentListMFR.BAR;
-		Item plank = ComponentListMFR.TIMBER;
-		Item strip = ComponentListMFR.LEATHER_STRIP;
-		Item rivet = ComponentListMFR.RIVET;
+		Item bar = MineFantasyItems.BAR;
+		Item plank = MineFantasyItems.TIMBER;
+		Item strip = MineFantasyItems.LEATHER_STRIP;
+		Item rivet = MineFantasyItems.RIVET;
 
 		int time = 10;
-		KnowledgeListMFR.hammerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HAMMER, "tier", true, "hammer", 0, 0, time, "I", "L", "P", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HAMMER, bar, plank, strip);
+		MineFantasyKnowledgeList.hammerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HAMMER, "tier", true, "hammer", 0, 0, time, "I", "L", "P", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HAMMER, bar, plank, strip);
 
 		time = 15;
-		KnowledgeListMFR.hvyHammerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HVYHAMMER, "tier", true, "hammer", -1, -1, time, " II", "RLI", " P ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HVYHAMMER, bar, bar, bar, plank, strip, rivet);
+		MineFantasyKnowledgeList.hvyHammerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HVYHAMMER, "tier", true, "hammer", -1, -1, time, " II", "RLI", " P ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HVYHAMMER, bar, bar, bar, plank, strip, rivet);
 
 		time = 10;
-		KnowledgeListMFR.tongsR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_TONGS, "tier", true, "hammer", -1, -1, time, "I ", " I", 'I', bar);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_TONGS, bar, bar);
+		MineFantasyKnowledgeList.tongsR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_TONGS, "tier", true, "hammer", -1, -1, time, "I ", " I", 'I', bar);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_TONGS, bar, bar);
 
 		time = 10;
-		KnowledgeListMFR.knifeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_KNIFE, "tier", true, "hammer", -1, -1, time, "I ", "PL", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_KNIFE, bar, plank, strip);
+		MineFantasyKnowledgeList.knifeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_KNIFE, "tier", true, "hammer", -1, -1, time, "I ", "PL", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_KNIFE, bar, plank, strip);
 
 		time = 12;
-		KnowledgeListMFR.shearsR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SHEARS, "tier", true, "hammer", -1, -1, time, " I ", "PLI", " P ", 'I', bar, 'P', plank, 'L', Items.LEATHER);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SHEARS, bar, bar, plank, plank, Items.LEATHER);
+		MineFantasyKnowledgeList.shearsR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SHEARS, "tier", true, "hammer", -1, -1, time, " I ", "PLI", " P ", 'I', bar, 'P', plank, 'L', Items.LEATHER);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SHEARS, bar, bar, plank, plank, Items.LEATHER);
 
 		time = 20;
-		KnowledgeListMFR.sawsR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SAW, "tier", true, "hammer", -1, -1, time, "PIII", "LI  ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SAW, bar, bar, bar, bar, plank, strip);
+		MineFantasyKnowledgeList.sawsR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SAW, "tier", true, "hammer", -1, -1, time, "PIII", "LI  ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SAW, bar, bar, bar, bar, plank, strip);
 
 		time = 15;
-		KnowledgeListMFR.spannerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SPANNER,
+		MineFantasyKnowledgeList.spannerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SPANNER,
 				"tier", true, "hammer", -1, -1, time, new Object[] {"  I ", "  II", "LP  ", " L  ",
 
 						'I', bar, 'P', plank, 'L', strip,});
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SPANNER, bar, bar, bar, plank, strip, strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SPANNER, bar, bar, bar, plank, strip, strip);
 	}
 
 	private static void addStandardWeapons() {
-		Item bar = ComponentListMFR.BAR;
-		Item plank = ComponentListMFR.TIMBER;
-		Item strip = ComponentListMFR.LEATHER_STRIP;
-		Item rivet = ComponentListMFR.RIVET;
+		Item bar = MineFantasyItems.BAR;
+		Item plank = MineFantasyItems.TIMBER;
+		Item strip = MineFantasyItems.LEATHER_STRIP;
+		Item rivet = MineFantasyItems.RIVET;
 
 		int time = 15;
-		KnowledgeListMFR.daggerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_DAGGER, "tier", true, "hammer", -1, -1, time, "L  ", "PII", "L  ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_DAGGER, bar, bar, plank, strip, strip);
+		MineFantasyKnowledgeList.daggerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_DAGGER, "tier", true, "hammer", -1, -1, time, "L  ", "PII", "L  ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_DAGGER, bar, bar, plank, strip, strip);
 
 		time = 25;
-		KnowledgeListMFR.swordR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SWORD, "tier", true, "hammer", -1, -1, time, "LI  ", "PIII", "LI  ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SWORD, bar, bar, bar, bar, bar, plank, strip, strip);
+		MineFantasyKnowledgeList.swordR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SWORD, "tier", true, "hammer", -1, -1, time, "LI  ", "PIII", "LI  ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SWORD, bar, bar, bar, bar, bar, plank, strip, strip);
 
 		time = 20;
-		KnowledgeListMFR.waraxeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_WARAXE, "tier", true, "hammer", -1, -1, time, "LII", "PPI", "L I", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_WARAXE, bar, bar, bar, bar, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.waraxeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_WARAXE, "tier", true, "hammer", -1, -1, time, "LII", "PPI", "L I", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_WARAXE, bar, bar, bar, bar, plank, plank, strip, strip);
 
-		KnowledgeListMFR.maceR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_MACE, "tier", true, "hammer", -1, -1, time, "L II", "PPII", "L   ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_MACE, bar, bar, bar, bar, plank, plank, strip, strip);
+		MineFantasyKnowledgeList.maceR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_MACE, "tier", true, "hammer", -1, -1, time, "L II", "PPII", "L   ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_MACE, bar, bar, bar, bar, plank, plank, strip, strip);
 
-		KnowledgeListMFR.spearR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_SPEAR, "tier", true, "hammer", -1, -1, time, " LLI ", "PPPPI", " LLI ", 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_SPEAR, bar, bar, bar, plank, plank, plank, plank, strip, strip, strip, strip);
+		MineFantasyKnowledgeList.spearR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_SPEAR, "tier", true, "hammer", -1, -1, time, " LLI ", "PPPPI", " LLI ", 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_SPEAR, bar, bar, bar, plank, plank, plank, plank, strip, strip, strip, strip);
 
 		// HEAVY
 		time = 30;
-		KnowledgeListMFR.katanaR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_KATANA, "tier", true, "hvyhammer", -1, -1, time, "LR   I", "PIIII ", "LI    ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_KATANA, bar, bar, bar, bar, bar, bar, plank, strip, strip, rivet);
+		MineFantasyKnowledgeList.katanaR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_KATANA, "tier", true, "hvyhammer", -1, -1, time, "LR   I", "PIIII ", "LI    ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_KATANA, bar, bar, bar, bar, bar, bar, plank, strip, strip, rivet);
 
 		time = 40;
-		KnowledgeListMFR.gswordR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_GREATSWORD, "tier", true, "hvyhammer", -1, -1, time, "LIR   ", "PIIIII", "LIR   ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_GREATSWORD, bar, bar, bar, bar, bar, bar, bar, plank, strip, strip, rivet, rivet);
+		MineFantasyKnowledgeList.gswordR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_GREATSWORD, "tier", true, "hvyhammer", -1, -1, time, "LIR   ", "PIIIII", "LIR   ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_GREATSWORD, bar, bar, bar, bar, bar, bar, bar, plank, strip, strip, rivet, rivet);
 
 		time = 30;
-		KnowledgeListMFR.battleaxeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_BATTLEAXE, "tier", true, "hvyhammer", -1, -1, time, "LLIIR", "PPPIR", "LLIIR", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_BATTLEAXE, bar, bar, bar, bar, bar, plank, plank, plank, strip, strip, strip, strip, rivet, rivet, rivet);
+		MineFantasyKnowledgeList.battleaxeR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_BATTLEAXE, "tier", true, "hvyhammer", -1, -1, time, "LLIIR", "PPPIR", "LLIIR", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_BATTLEAXE, bar, bar, bar, bar, bar, plank, plank, plank, strip, strip, strip, strip, rivet, rivet, rivet);
 
-		KnowledgeListMFR.whammerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_WARHAMMER, "tier", true, "hvyhammer", -1, -1, time, "LL IIR", "PPPIIR", "LL  IR", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_WARHAMMER, bar, bar, bar, bar, bar, plank, plank, plank, strip, strip, strip, strip, rivet, rivet, rivet);
+		MineFantasyKnowledgeList.whammerR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_WARHAMMER, "tier", true, "hvyhammer", -1, -1, time, "LL IIR", "PPPIIR", "LL  IR", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_WARHAMMER, bar, bar, bar, bar, bar, plank, plank, plank, strip, strip, strip, strip, rivet, rivet, rivet);
 
-		KnowledgeListMFR.halbeardR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_HALBEARD, "tier", true, "hvyhammer", -1, -1, time, "LLRII", "PPPPI", "LLRI ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_HALBEARD, bar, bar, bar, bar, plank, plank, plank, plank, strip, strip, strip, strip, rivet, rivet);
+		MineFantasyKnowledgeList.halbeardR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_HALBEARD, "tier", true, "hvyhammer", -1, -1, time, "LLRII", "PPPPI", "LLRI ", 'R', rivet, 'I', bar, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_HALBEARD, bar, bar, bar, bar, plank, plank, plank, plank, strip, strip, strip, strip, rivet, rivet);
 
 		time = 25;
-		KnowledgeListMFR.bowR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_BOW, "tier", true, "hammer", -1, -1, time, "PSSSP", " PLP ", 'I', bar, 'S', Items.STRING, 'P', plank, 'L', strip);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_BOW, plank, plank, plank, plank, strip, Items.STRING, Items.STRING, Items.STRING);
+		MineFantasyKnowledgeList.bowR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_BOW, "tier", true, "hammer", -1, -1, time, "PSSSP", " PLP ", 'I', bar, 'S', Items.STRING, 'P', plank, 'L', strip);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_BOW, plank, plank, plank, plank, strip, Items.STRING, Items.STRING, Items.STRING);
 
 		time = 60;
-		KnowledgeListMFR.lanceR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_LANCE, "tier", true, "hvyhammer", -1, -1, time, "IR    ", "IIIIII", "IR    ", 'R', rivet, 'I', bar);
-		Salvage.addSalvage(CustomToolListMFR.STANDARD_LANCE, bar, bar, bar, bar, bar, bar, bar, bar, rivet, rivet);
+		MineFantasyKnowledgeList.lanceR = MineFantasyRebornAPI.addAnvilToolRecipe(Skill.ARTISANRY, MineFantasyItems.STANDARD_LANCE, "tier", true, "hvyhammer", -1, -1, time, "IR    ", "IIIIII", "IR    ", 'R', rivet, 'I', bar);
+		Salvage.addSalvage(MineFantasyItems.STANDARD_LANCE, bar, bar, bar, bar, bar, bar, bar, bar, rivet, rivet);
 	}
 }

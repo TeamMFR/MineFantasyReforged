@@ -6,9 +6,9 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBombBench;
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemExplodingArrow;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
@@ -95,7 +95,7 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 	}
 
 	public boolean tryCraft(EntityPlayer player, boolean pressUsed) {
-		boolean sticky = !pressUsed && ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.stickybomb)
+		boolean sticky = !pressUsed && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.stickybomb)
 				&& !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == Items.SLIME_BALL;
 		if (!world.isRemote && sticky && applySlime()) {
 			int slot = player.inventory.getSlotFor(new ItemStack(Items.SLIME_BALL));
@@ -272,16 +272,16 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 
 	private Item getDesignCrafted(String type) {
 		if (type.equalsIgnoreCase("bombcase")) {
-			return ToolListMFR.BOMB_CUSTOM;
+			return MineFantasyItems.BOMB_CUSTOM;
 		}
 		if (type.equalsIgnoreCase("minecase")) {
-			return ToolListMFR.MINE_CUSTOM;
+			return MineFantasyItems.MINE_CUSTOM;
 		}
 		if (type.equalsIgnoreCase("arrow")) {
-			return ToolListMFR.EXPLODING_ARROW;
+			return MineFantasyItems.EXPLODING_ARROW;
 		}
 		if (type.equalsIgnoreCase("bolt")) {
-			return ToolListMFR.EXPLODING_BOLT;
+			return MineFantasyItems.EXPLODING_BOLT;
 		}
 		return null;
 	}

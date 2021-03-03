@@ -2,7 +2,7 @@ package minefantasy.mfr.material;
 
 import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
@@ -36,9 +36,9 @@ public class MetalMaterial extends CustomMaterial {
 			MineFantasyRebornAPI.setHeatableStats("hunk" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
 		}
 
-		MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.RIVET, 1000, 2000, 3000);
-		MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.METAL_HUNK, -1, -1, -1);
-		MineFantasyRebornAPI.setHeatableStats(ComponentListMFR.BAR, -1, -1, -1);
+		MineFantasyRebornAPI.setHeatableStats(MineFantasyItems.RIVET, 1000, 2000, 3000);
+		MineFantasyRebornAPI.setHeatableStats(MineFantasyItems.METAL_HUNK, -1, -1, -1);
+		MineFantasyRebornAPI.setHeatableStats(MineFantasyItems.BAR, -1, -1, -1);
 	}
 
 	@Override

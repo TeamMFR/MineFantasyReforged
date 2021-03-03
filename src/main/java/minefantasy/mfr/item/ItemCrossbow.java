@@ -12,8 +12,7 @@ import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.entity.EntityArrowMFR;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.AmmoMechanics;
@@ -128,7 +127,7 @@ public class ItemCrossbow extends ItemBaseMFR
 		if (action.equalsIgnoreCase("reload")) {
 			if (storage.isEmpty() && infinity) {
 				shouldConsume = false;
-				storage = CustomToolListMFR.STANDARD_BOLT.construct("Magic");
+				storage = MineFantasyItems.STANDARD_BOLT.construct("Magic");
 			}
 			if (!storage.isEmpty())// RELOAD
 			{
@@ -270,12 +269,12 @@ public class ItemCrossbow extends ItemBaseMFR
 		if (!isInCreativeTab(tab)) {
 			return;
 		}
-		items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_HANDLE_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC));
-		items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_LIGHT));
+		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_HANDLE_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_BASIC));
+		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_LIGHT));
 
-		items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_BASIC, (ICrossbowPart) ComponentListMFR.CROSSBOW_AMMO));
-		items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_WOOD, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_HEAVY, (ICrossbowPart) ComponentListMFR.CROSSBOW_BAYONET));
-		items.add(constructCrossbow((ICrossbowPart) ComponentListMFR.CROSSBOW_STOCK_IRON, (ICrossbowPart) ComponentListMFR.CROSSBOW_ARMS_ADVANCED, (ICrossbowPart) ComponentListMFR.CROSSBOW_SCOPE));
+		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_BASIC, (ICrossbowPart) MineFantasyItems.CROSSBOW_AMMO));
+		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_HEAVY, (ICrossbowPart) MineFantasyItems.CROSSBOW_BAYONET));
+		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_IRON, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_ADVANCED, (ICrossbowPart) MineFantasyItems.CROSSBOW_SCOPE));
 	}
 
 	public String getNameModifier(ItemStack item, String partname) {

@@ -2,8 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.tier.IToolMaterial;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -69,10 +69,10 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 			}
 			lvl++;
 		}
-		if (lvl >= ToolListMFR.RARITY.length) {
-			lvl = ToolListMFR.RARITY.length - 1;
+		if (lvl >= MineFantasyItems.RARITY.length) {
+			lvl = MineFantasyItems.RARITY.length - 1;
 		}
-		return ToolListMFR.RARITY[lvl];
+		return MineFantasyItems.RARITY[lvl];
 	}
 
 	@Override

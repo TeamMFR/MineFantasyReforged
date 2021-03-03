@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
@@ -90,7 +90,7 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		final TileEntityBlastHeater tile = (TileEntityBlastHeater) getTile(world, pos);
 		if (tile != null) {
-			if (ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.blastfurn)) {
+			if (ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.blastfurn)) {
 				if (world.isRemote)
 					player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
 				return false;

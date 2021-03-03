@@ -3,8 +3,8 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.entity.EntityCogwork;
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -92,7 +92,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 		if (!canDamage) {
 			CustomToolHelper.addComponentString(tool, list, getBase(tool), mass);
 		}
-		if (this == ComponentListMFR.COGWORK_ARMOUR) {
+		if (this == MineFantasyItems.COGWORK_ARMOUR) {
 			int AR = EntityCogwork.getArmourRating(getBase(tool));
 			list.add(I18n.format("attribute.armour.protection") + " " + AR);
 			if (mass > 0)

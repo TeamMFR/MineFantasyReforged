@@ -1,8 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.ToolHelper;
@@ -87,7 +87,7 @@ public class BlockFrame extends BasicBlockMF {
 	}
 
 	private boolean tryBuild(EntityPlayer player, World world, BlockPos pos) {
-		if (PowerArmour.isBasicStationFrame(world, pos) && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(ComponentListMFR.COGWORK_PULLEY)))) {
+		if (PowerArmour.isBasicStationFrame(world, pos) && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY)))) {
 			if (!player.capabilities.isCreativeMode) {
 				player.inventory.removeStackFromSlot(1);
 			}

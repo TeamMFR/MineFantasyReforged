@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFilledMould;
 import minefantasy.mfr.tile.TileEntityCrucible;
@@ -66,7 +66,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 		TileEntityCrucible tile = (TileEntityCrucible) getTile(world, pos);
 		if (tile != null) {
 			ItemStack held = player.getHeldItem(hand);
-			if (!held.isEmpty() && held.getItem() == ComponentListMFR.ANCIENT_JEWEL_MASTER && held.getItemDamage() == 3) {
+			if (!held.isEmpty() && held.getItem() == MineFantasyItems.ANCIENT_JEWEL_MASTER && held.getItemDamage() == 3) {
 				if (tier == 2 && isActive) {
 					held.shrink(1);
 					if (held.getCount() <= 0) {
@@ -80,7 +80,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 				return true;
 			}
 			ItemStack out = tile.getInventory().getStackInSlot(tile.getInventory().getSlots() - 1);
-			if (!held.isEmpty() && held.getItem() == ComponentListMFR.INGOT_MOULD
+			if (!held.isEmpty() && held.getItem() == MineFantasyItems.INGOT_MOULD
 					&& !out.isEmpty()
 					&& !(out.getItem() instanceof ItemBlock)) {
 				ItemStack result = out.copy();

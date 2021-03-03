@@ -1,8 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
@@ -35,12 +34,12 @@ public class ItemCrudeBomb extends ItemBomb implements ISpecialSalvage {
 
 	@Override
 	public EnumRarity getRarity(ItemStack item) {
-		return ToolListMFR.POOR;
+		return MineFantasyItems.POOR;
 	}
 
 	@Override
 	public Object[] getSalvage(ItemStack item) {
-		return new Object[] {Items.PAPER, ComponentListMFR.THREAD, ComponentListMFR.BLACKPOWDER};
+		return new Object[] {Items.PAPER, MineFantasyItems.THREAD, MineFantasyItems.BLACKPOWDER};
 	}
 
 	@Override

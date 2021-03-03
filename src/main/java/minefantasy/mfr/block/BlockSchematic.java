@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -88,7 +88,7 @@ public class BlockSchematic extends Block {
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return ComponentListMFR.SCHEMATIC_BOMB;
+		return MineFantasyItems.SCHEMATIC_BOMB;
 	}
 
 	@Override

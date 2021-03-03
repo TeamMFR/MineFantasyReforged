@@ -5,13 +5,10 @@ import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.entity.mob.ai.AI_MinotaurFindTarget;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.init.OrnateStyle;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.ArmourCalculator;
@@ -127,14 +124,14 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 
 	public ItemWeaponMFR getRandomWeapon() {
 		if (getTier() == 3) {
-			return OrnateStyle.ORNATE_GREATSWORD;
+			return MineFantasyItems.ORNATE_GREATSWORD;
 		}
-		ItemWeaponMFR[] list = new ItemWeaponMFR[] {CustomToolListMFR.STANDARD_GREATSWORD,
-				CustomToolListMFR.STANDARD_KATANA,
-				CustomToolListMFR.STANDARD_BATTLEAXE,
-				CustomToolListMFR.STANDARD_WARHAMMER,
-				CustomToolListMFR.STANDARD_SPEAR,
-				CustomToolListMFR.STANDARD_HALBEARD};
+		ItemWeaponMFR[] list = new ItemWeaponMFR[] {MineFantasyItems.STANDARD_GREATSWORD,
+				MineFantasyItems.STANDARD_KATANA,
+				MineFantasyItems.STANDARD_BATTLEAXE,
+				MineFantasyItems.STANDARD_WARHAMMER,
+				MineFantasyItems.STANDARD_SPEAR,
+				MineFantasyItems.STANDARD_HALBEARD};
 		return list[rand.nextInt(list.length)];
 	}
 
@@ -303,7 +300,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 		}
 		count = rand.nextInt(looting + 4) + 1;
 		for (int a = 0; a < count; a++) {
-			this.dropItem(ComponentListMFR.RAWHIDE_LARGE, 1);
+			this.dropItem(MineFantasyItems.RAWHIDE_LARGE, 1);
 		}
 		count = rand.nextInt(looting + 2) + 1;
 		for (int a = 0; a < count; a++) {
@@ -314,12 +311,12 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	private Item getLoot() {
 		int breed = getTier();
 		if (breed > 2) {
-			return ToolListMFR.LOOT_SACK_RARE;
+			return MineFantasyItems.LOOT_SACK_RARE;
 		}
 		if (breed > 0) {
-			return ToolListMFR.LOOT_SACK_UC;
+			return MineFantasyItems.LOOT_SACK_UC;
 		}
-		return ToolListMFR.LOOT_SACK;
+		return MineFantasyItems.LOOT_SACK;
 	}
 
 	private int getLootCount() {
@@ -397,7 +394,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	}
 
 	protected Item getDropItem() {
-		return ComponentListMFR.HIDE_LARGE;
+		return MineFantasyItems.HIDE_LARGE;
 	}
 
 	public double getHeadChargeAngle() {
@@ -736,7 +733,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	}
 
 	public void throwBomb(EntityLivingBase attackTarget, float spread) {
-		ItemStack itemBomb = new ItemStack(ToolListMFR.BOMB_CUSTOM);
+		ItemStack itemBomb = new ItemStack(MineFantasyItems.BOMB_CUSTOM);
 		ItemBomb.setFilling(itemBomb, "1");
 		ItemBomb.setFuse(itemBomb, "basic");
 		ItemBomb.setCasing(itemBomb, "ceramic");

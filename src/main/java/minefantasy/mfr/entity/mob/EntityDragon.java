@@ -4,9 +4,8 @@ import com.google.common.base.Predicate;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import minefantasy.mfr.entity.Shockwave;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
@@ -340,7 +339,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	}
 
 	protected Item getDropItem() {
-		return ComponentListMFR.DRAGON_HEART;
+		return MineFantasyItems.DRAGON_HEART;
 	}
 
 	private boolean didDropHeart(int tier) {
@@ -416,7 +415,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			this.dropItem(Items.NETHER_STAR, 1);
 		}
 		if (didDropHeart(this.getTier())) {
-			this.dropItem(ComponentListMFR.DRAGON_HEART, 1);
+			this.dropItem(MineFantasyItems.DRAGON_HEART, 1);
 		}
 	}
 
@@ -432,9 +431,9 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	private Item getLoot(int tier) {
 		if (tier == 4)// Ancient
 		{
-			return ToolListMFR.LOOT_SACK_RARE;
+			return MineFantasyItems.LOOT_SACK_RARE;
 		}
-		return ToolListMFR.LOOT_SACK_UC;// Any
+		return MineFantasyItems.LOOT_SACK_UC;// Any
 	}
 
 	private Entity getBreath(double xAngle, double yAngle, double zAngle) {

@@ -4,8 +4,8 @@ import minefantasy.mfr.api.heating.ForgeFuel;
 import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighter;
@@ -175,7 +175,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 					}
 					return true;
 				}
-				if (!world.isRemote && ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.smeltDragonforge) && held.getItem() == ComponentListMFR.DRAGON_HEART) {
+				if (!world.isRemote && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.smeltDragonforge) && held.getItem() == MineFantasyItems.DRAGON_HEART) {
 					if (held.getCount() == 1) {
 						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 					} else {
@@ -201,7 +201,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 
 		// GRAB
 		if (grabbed.isEmpty()) {
-			if (!contents.isEmpty() && contents.getItem() == ComponentListMFR.HOT_ITEM) {
+			if (!contents.isEmpty() && contents.getItem() == MineFantasyItems.HOT_ITEM) {
 				if (TongsHelper.trySetHeldItem(held, contents)) {
 					tile.getInventory().setStackInSlot(0, ItemStack.EMPTY);
 					return true;

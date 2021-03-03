@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.entity.EntityLivingBase;
@@ -33,7 +33,7 @@ public class ItemBandage extends ItemBaseMFR {
 	@Override
 	public EnumRarity getRarity(ItemStack item) {
 		if (healPwr <= 5) {
-			return ToolListMFR.POOR;
+			return MineFantasyItems.POOR;
 		}
 		return super.getRarity(item);
 	}

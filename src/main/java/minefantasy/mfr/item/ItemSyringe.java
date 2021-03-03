@@ -2,9 +2,9 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -62,10 +62,10 @@ public class ItemSyringe extends ItemBaseMFR {
 			item.shrink(1);
 
 			if (item.getCount() <= 0) {
-				user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(ToolListMFR.SYRINGE_EMPTY));
+				user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(MineFantasyItems.SYRINGE_EMPTY));
 			} else {
-				if (!((EntityPlayer) user).inventory.addItemStackToInventory(new ItemStack(ToolListMFR.SYRINGE_EMPTY))) {
-					user.entityDropItem(new ItemStack(ToolListMFR.SYRINGE_EMPTY), 0F);
+				if (!((EntityPlayer) user).inventory.addItemStackToInventory(new ItemStack(MineFantasyItems.SYRINGE_EMPTY))) {
+					user.entityDropItem(new ItemStack(MineFantasyItems.SYRINGE_EMPTY), 0F);
 				}
 			}
 		}
@@ -93,11 +93,11 @@ public class ItemSyringe extends ItemBaseMFR {
 
 		if (!player.capabilities.isCreativeMode) {
 			if (stack.getCount() <= 0) {
-				return ActionResult.newResult(EnumActionResult.SUCCESS, new ItemStack(ToolListMFR.SYRINGE_EMPTY));
+				return ActionResult.newResult(EnumActionResult.SUCCESS, new ItemStack(MineFantasyItems.SYRINGE_EMPTY));
 			}
 
-			if (!player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.SYRINGE_EMPTY))) {
-				player.entityDropItem(new ItemStack(ToolListMFR.SYRINGE_EMPTY), 0F);
+			if (!player.inventory.addItemStackToInventory(new ItemStack(MineFantasyItems.SYRINGE_EMPTY))) {
+				player.entityDropItem(new ItemStack(MineFantasyItems.SYRINGE_EMPTY), 0F);
 			}
 		}
 

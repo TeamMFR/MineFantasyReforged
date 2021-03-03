@@ -14,9 +14,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.mob.EntityDragon;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.ArrowEffectsMF;
@@ -122,12 +120,12 @@ public class EventManagerMFRToRemove {
 		}
 		if (dropper.getEntityData().hasKey("MF_LootDrop")) {
 			int id = dropper.getEntityData().getInteger("MF_LootDrop");
-			Item drop = id == 0 ? ToolListMFR.LOOT_SACK : id == 1 ? ToolListMFR.LOOT_SACK_UC : ToolListMFR.LOOT_SACK_RARE;
+			Item drop = id == 0 ? MineFantasyItems.LOOT_SACK : id == 1 ? MineFantasyItems.LOOT_SACK_UC : MineFantasyItems.LOOT_SACK_RARE;
 			dropper.entityDropItem(new ItemStack(drop), 0.0F);
 		}
 		if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {
 			if (random.nextFloat() * (1 + event.getLootingLevel()) < 0.05F) {
-				dropper.entityDropItem(new ItemStack(FoodListMFR.GUTS), 0.0F);
+				dropper.entityDropItem(new ItemStack(MineFantasyItems.GUTS), 0.0F);
 			}
 		}
 		if (dropper instanceof IAnimals && !(dropper instanceof IMob)) {
@@ -145,7 +143,7 @@ public class EventManagerMFRToRemove {
 				dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
 			}
 
-			Item meat = dropper.isBurning() ? FoodListMFR.HORSE_COOKED : FoodListMFR.HORSE_RAW;
+			Item meat = dropper.isBurning() ? MineFantasyItems.HORSE_COOKED : MineFantasyItems.HORSE_RAW;
 			for (int a = 0; a < dropCount; a++) {
 				dropper.entityDropItem(new ItemStack(meat), 0.0F);
 			}
@@ -156,7 +154,7 @@ public class EventManagerMFRToRemove {
 				dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);
 			}
 
-			Item meat = dropper.isBurning() ? FoodListMFR.WOLF_COOKED : FoodListMFR.WOLF_RAW;
+			Item meat = dropper.isBurning() ? MineFantasyItems.WOLF_COOKED : MineFantasyItems.WOLF_RAW;
 			for (int a = 0; a < dropCount; a++) {
 				dropper.entityDropItem(new ItemStack(meat), 0.0F);
 			}
@@ -201,7 +199,7 @@ public class EventManagerMFRToRemove {
 	}
 
 	private Item getHideFor(EntityLivingBase mob) {
-		Item[] hide = new Item[] {ComponentListMFR.RAWHIDE_SMALL, ComponentListMFR.RAWHIDE_MEDIUM, ComponentListMFR.RAWHIDE_LARGE};
+		Item[] hide = new Item[] {MineFantasyItems.RAWHIDE_SMALL, MineFantasyItems.RAWHIDE_MEDIUM, MineFantasyItems.RAWHIDE_LARGE};
 		int size = getHideSizeFor(mob);
 		if (mob.isChild()) {
 			size--;
@@ -311,7 +309,7 @@ public class EventManagerMFRToRemove {
 	}
 
 	private boolean isDragonforge(ItemStack itemstack) {
-		return itemstack.getItem() == ComponentListMFR.DRAGON_HEART;
+		return itemstack.getItem() == MineFantasyItems.DRAGON_HEART;
 	}
 
 	public void alterDrops(EntityLivingBase dropper, LivingDropsEvent event) {
@@ -394,31 +392,31 @@ public class EventManagerMFRToRemove {
 		if (id == 0) {
 			float chance = random.nextFloat();
 			if (chance > 0.75F) {
-				book = ToolListMFR.SKILLBOOK_ENGINEERING;
+				book = MineFantasyItems.SKILLBOOK_ENGINEERING;
 			} else {
-				book = ToolListMFR.SKILLBOOK_PROVISIONING;
+				book = MineFantasyItems.SKILLBOOK_PROVISIONING;
 			}
 		} else if (id == 1 && random.nextInt(5) == 0) {
 			float chance = random.nextFloat();
 			if (chance > 0.9F) {
-				book = ToolListMFR.SKILLBOOK_ENGINEERING;
+				book = MineFantasyItems.SKILLBOOK_ENGINEERING;
 			} else if (chance > 0.6F) {
-				book = ToolListMFR.SKILLBOOK_ARTISANRY;
+				book = MineFantasyItems.SKILLBOOK_ARTISANRY;
 			} else if (chance > 0.3F) {
-				book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
+				book = MineFantasyItems.SKILLBOOK_CONSTRUCTION;
 			} else {
-				book = ToolListMFR.SKILLBOOK_PROVISIONING;
+				book = MineFantasyItems.SKILLBOOK_PROVISIONING;
 			}
 		} else if (id == 2 && random.nextInt(25) == 0) {
 			float chance = random.nextFloat();
 			if (chance > 0.9F) {
-				book = ToolListMFR.SKILLBOOK_ENGINEERING;
+				book = MineFantasyItems.SKILLBOOK_ENGINEERING;
 			} else if (chance > 0.6F) {
-				book = ToolListMFR.SKILLBOOK_ARTISANRY;
+				book = MineFantasyItems.SKILLBOOK_ARTISANRY;
 			} else if (chance > 0.3F) {
-				book = ToolListMFR.SKILLBOOK_CONSTRUCTION;
+				book = MineFantasyItems.SKILLBOOK_CONSTRUCTION;
 			} else {
-				book = ToolListMFR.SKILLBOOK_PROVISIONING;
+				book = MineFantasyItems.SKILLBOOK_PROVISIONING;
 			}
 		}
 		if (book != null) {
@@ -475,14 +473,14 @@ public class EventManagerMFRToRemove {
 		if (broken != null && ConfigHardcore.HCCallowRocks) {
 			if (held.isEmpty() && CustomStone.isStone(broken.getBlock())) {
 				entityDropItem(event.getWorld(), event.getPos(),
-						new ItemStack(ComponentListMFR.SHARP_ROCK, random.nextInt(3) + 1));
+						new ItemStack(MineFantasyItems.SHARP_ROCK, random.nextInt(3) + 1));
 			}
-			if (!held.isEmpty() && held.getItem() == ComponentListMFR.SHARP_ROCK && broken.getBlock() instanceof BlockLeaves) {
+			if (!held.isEmpty() && held.getItem() == MineFantasyItems.SHARP_ROCK && broken.getBlock() instanceof BlockLeaves) {
 				if (random.nextInt(5) == 0) {
 					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
 				}
 				if (random.nextInt(3) == 0) {
-					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(ComponentListMFR.VINE, random.nextInt(3) + 1));
+					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(MineFantasyItems.VINE, random.nextInt(3) + 1));
 				}
 			}
 		}

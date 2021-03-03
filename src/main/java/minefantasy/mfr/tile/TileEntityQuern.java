@@ -2,7 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerQuern;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
@@ -98,7 +98,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	}
 
 	public static boolean isPot(ItemStack item) {
-		return item != null && item.getItem() == ComponentListMFR.CLAY_POT;
+		return item != null && item.getItem() == MineFantasyItems.CLAY_POT;
 	}
 
 	public void onUse() {
@@ -163,7 +163,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 		if (item != null && getResult(item) != null) {
 			return slot == 0;
 		}
-		if (item != null && item.getItem() == ComponentListMFR.CLAY_POT) {
+		if (item != null && item.getItem() == MineFantasyItems.CLAY_POT) {
 			return slot == 1;
 		}
 		return false;

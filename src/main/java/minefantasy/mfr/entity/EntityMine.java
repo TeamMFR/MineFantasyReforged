@@ -1,6 +1,6 @@
 package minefantasy.mfr.entity;
 
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.EnumCasingType;
 import minefantasy.mfr.item.EnumFillingType;
 import minefantasy.mfr.item.EnumFuseType;
@@ -80,7 +80,7 @@ public class EntityMine extends Entity {
 			setDead();
 			user.swingArm(hand);
 			if (!world.isRemote) {
-				ItemStack item = ToolListMFR.MINE_CUSTOM.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
+				ItemStack item = MineFantasyItems.MINE_CUSTOM.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
 				if (!user.inventory.addItemStackToInventory(item)) {
 					this.entityDropItem(item, 0.0F);
 				}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.IFuelHandler;
@@ -12,13 +12,13 @@ public class FuelHandlerMF implements IFuelHandler {
 		if (fuel.getItem() == null) {
 			return 0;
 		}
-		if (fuel.getItem() == ComponentListMFR.TIMBER) {
+		if (fuel.getItem() == MineFantasyItems.TIMBER) {
 			return (int) (200 * CustomToolHelper.getBurnModifier(fuel));
 		}
-		if (fuel.getItem() == ComponentListMFR.COAL_DUST) {
+		if (fuel.getItem() == MineFantasyItems.COAL_DUST) {
 			return 400;
 		}
-		if (fuel.getItem() == ComponentListMFR.COKE) {
+		if (fuel.getItem() == MineFantasyItems.COKE) {
 			return 2400;
 		}
 		return 0;

@@ -33,40 +33,40 @@ public final class MineFantasyTabs extends CreativeTabs {
 	public ItemStack getIconItemStack() {
 		switch (type) {
 			case 1:
-				return CustomToolListMFR.STANDARD_AXE.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return MineFantasyItems.STANDARD_AXE.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 2:
-				return (CustomToolListMFR.STANDARD_SWORD).construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return (MineFantasyItems.STANDARD_SWORD).construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 3:
-				return CustomArmourListMFR.STANDARD_PLATE_HELMET.construct(MineFantasyMaterials.Names.STEEL);
+				return MineFantasyItems.STANDARD_PLATE_HELMET.construct(MineFantasyMaterials.Names.STEEL);
 			case 4:
-				return CustomToolListMFR.STANDARD_BOW.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return MineFantasyItems.STANDARD_BOW.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 5:
 				return new ItemStack(MineFantasyBlocks.ANVIL_IRON);
 			case 6:
-				return ToolListMFR.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
+				return MineFantasyItems.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
 			case 7:
-				return ComponentListMFR.TIMBER.construct(MineFantasyMaterials.Names.OAK_WOOD);
+				return MineFantasyItems.TIMBER.construct(MineFantasyMaterials.Names.OAK_WOOD);
 			case 8:
-				return CustomToolListMFR.STANDARD_HANDPICK.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return MineFantasyItems.STANDARD_HANDPICK.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 9:
-				return CustomToolListMFR.STANDARD_HAMMER.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
+				return MineFantasyItems.STANDARD_HAMMER.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 10:
 				return new ItemStack(MineFantasyBlocks.COPPER_ORE);
 			case 11:
-				return new ItemStack(FoodListMFR.SWEETROLL);
+				return new ItemStack(MineFantasyItems.SWEETROLL);
 			case 12:
-				return new ItemStack(ComponentListMFR.DRAGON_HEART);
+				return new ItemStack(MineFantasyItems.DRAGON_HEART);
 			case 13:
-				return new ItemStack(ComponentListMFR.ORNATE_ITEMS);
+				return new ItemStack(MineFantasyItems.ORNATE_ITEMS);
 			case 14:
-				return new ItemStack(ToolListMFR.STONE_PICK);
+				return new ItemStack(MineFantasyItems.STONE_PICK);
 		}
-		return new ItemStack(ComponentListMFR.PIG_IRON_INGOT);
+		return new ItemStack(MineFantasyItems.PIG_IRON_INGOT);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getTabIconItem() {
-		return new ItemStack(CustomToolListMFR.STANDARD_AXE);
+		return new ItemStack(MineFantasyItems.STANDARD_AXE);
 	}
 }

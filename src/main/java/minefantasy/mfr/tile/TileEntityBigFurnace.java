@@ -7,8 +7,8 @@ import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockBigFurnace;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBigFurnace;
-import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -403,7 +403,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(item);// If no special: try vanilla
 		if (!res.isEmpty()) {
 			if (res.getItem() instanceof ItemFood || item.getItem() instanceof ItemFood) {
-				return new ItemStack(FoodListMFR.BURNT_FOOD, 1, 1);
+				return new ItemStack(MineFantasyItems.BURNT_FOOD, 1, 1);
 			}
 			return res;
 		}

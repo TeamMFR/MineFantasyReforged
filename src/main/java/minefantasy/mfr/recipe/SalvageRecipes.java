@@ -1,14 +1,14 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.crafting.Salvage;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 public class SalvageRecipes {
 	public static void init() {
-		ItemStack ironHunk = ComponentListMFR.METAL_HUNK.createComm("iron");
+		ItemStack ironHunk = MineFantasyItems.METAL_HUNK.createComm("iron");
 		Salvage.addSalvage(Items.WOODEN_PICKAXE, new ItemStack(Items.STICK, 2), new ItemStack(Blocks.PLANKS, 3));
 		Salvage.addSalvage(Items.WOODEN_AXE, new ItemStack(Items.STICK, 2), new ItemStack(Blocks.PLANKS, 3));
 		Salvage.addSalvage(Items.WOODEN_SHOVEL, new ItemStack(Items.STICK, 2), new ItemStack(Blocks.PLANKS, 1));

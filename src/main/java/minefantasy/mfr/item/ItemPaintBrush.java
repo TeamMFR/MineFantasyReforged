@@ -3,8 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.recipe.refine.PaintOilRecipe;
@@ -51,7 +50,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 	public EnumActionResult onItemUse(EntityPlayer user, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack item = user.getHeldItem(hand);
 		if (user.canPlayerEdit(pos, facing, item) && ResearchLogic.hasInfoUnlocked(user, "paint_brush")) {
-			if (!user.isSwingInProgress && user.inventory.hasItemStack(new ItemStack(ComponentListMFR.PLANT_OIL))) {
+			if (!user.isSwingInProgress && user.inventory.hasItemStack(new ItemStack(MineFantasyItems.PLANT_OIL))) {
 				Block block = world.getBlockState(pos).getBlock();
 				if (onUsedWithBlock(world, pos, block, item, user)) {
 					return EnumActionResult.PASS;
@@ -70,7 +69,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 		if (newBlock != null) {
 
 			user.inventory.removeStackFromSlot(EntityEquipmentSlot.MAINHAND.getIndex());
-			ItemStack jug = new ItemStack(FoodListMFR.JUG_EMPTY);
+			ItemStack jug = new ItemStack(MineFantasyItems.JUG_EMPTY);
 
 			if (!user.inventory.addItemStackToInventory(jug) && !world.isRemote) {
 				user.entityDropItem(jug, 0F);

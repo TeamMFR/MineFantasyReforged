@@ -4,7 +4,7 @@ import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerResearchBench;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
@@ -163,9 +163,9 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 
 	private void addProgress(EntityPlayer user) {
 		ItemStack held = user.getHeldItemMainhand();
-		if (!held.isEmpty() && (held.getItem() == ComponentListMFR.TALISMAN_LESSER || held.getItem() == ComponentListMFR.TALISMAN_GREATER)) {
+		if (!held.isEmpty() && (held.getItem() == MineFantasyItems.TALISMAN_LESSER || held.getItem() == MineFantasyItems.TALISMAN_GREATER)) {
 			progress = maxProgress;
-			if (!user.capabilities.isCreativeMode && held.getItem() == ComponentListMFR.TALISMAN_LESSER) {
+			if (!user.capabilities.isCreativeMode && held.getItem() == MineFantasyItems.TALISMAN_LESSER) {
 				held.shrink(1);
 				if (held.getCount() <= 0) {
 					user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);

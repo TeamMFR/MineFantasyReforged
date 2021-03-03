@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -61,7 +61,7 @@ public class ItemCrossbowPart extends ItemComponentMFR implements ICrossbowPart 
 
 	@Override
 	public String getUnlocalisedName() {
-		if (this == ComponentListMFR.CROSSBOW_ARMS_BASIC) {
+		if (this == MineFantasyItems.CROSSBOW_ARMS_BASIC) {
 			return null;
 		}
 		return "crosspart." + type + "." + partname;

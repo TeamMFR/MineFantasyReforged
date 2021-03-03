@@ -2,7 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.heating.IQuenchBlock;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemBlockTrough;
 import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -83,9 +83,9 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 					addFluid(bucketAmount);
 					return true;
 				}
-				if (stack.getItem() == FoodListMFR.JUG_WATER) {
+				if (stack.getItem() == MineFantasyItems.JUG_WATER) {
 					stack.shrink(1);
-					PlayerUtils.giveStackToPlayer(player, new ItemStack(FoodListMFR.JUG_EMPTY));
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(MineFantasyItems.JUG_EMPTY));
 					addFluid(jugAmount);
 					return true;
 				}
@@ -105,9 +105,9 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 					removeFluid(glassBottleAmount);
 					return true;
 				}
-				if (stack.getItem() == FoodListMFR.JUG_EMPTY) {
+				if (stack.getItem() == MineFantasyItems.JUG_EMPTY) {
 					stack.shrink(1);
-					PlayerUtils.giveStackToPlayer(player, new ItemStack(FoodListMFR.JUG_WATER));
+					PlayerUtils.giveStackToPlayer(player, new ItemStack(MineFantasyItems.JUG_WATER));
 					removeFluid(jugAmount);
 					return true;
 				}

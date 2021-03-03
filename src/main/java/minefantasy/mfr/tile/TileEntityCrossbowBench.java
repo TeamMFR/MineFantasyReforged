@@ -6,8 +6,8 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrossbowBench;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.network.CrossbowBenchPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.ToolHelper;
@@ -143,7 +143,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 		if (stock == null || head == null)
 			return ItemStack.EMPTY;
 
-		return ToolListMFR.CROSSBOW_CUSTOM.constructCrossbow(stock, head, mod, muzzle);
+		return MineFantasyItems.CROSSBOW_CUSTOM.constructCrossbow(stock, head, mod, muzzle);
 	}
 
 	@Override

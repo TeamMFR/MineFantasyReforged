@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +31,7 @@ public class ItemFilledMould extends ItemComponentMFR {
 	}
 
 	public static ItemStack createMould(ItemStack fill) {
-		ItemStack mould = new ItemStack(ComponentListMFR.INGOT_MOULD_FILLED);
+		ItemStack mould = new ItemStack(MineFantasyItems.INGOT_MOULD_FILLED);
 		NBTTagCompound nbt = getOrCreateNBT(mould);
 		NBTTagCompound save = new NBTTagCompound();
 		fill.writeToNBT(save);
@@ -93,7 +93,7 @@ public class ItemFilledMould extends ItemComponentMFR {
 					}
 
 					if (!world.isRemote) {
-						ItemStack mould = new ItemStack(ComponentListMFR.INGOT_MOULD);
+						ItemStack mould = new ItemStack(MineFantasyItems.INGOT_MOULD);
 						if (!world.getBlockState(rayTraceResult.getBlockPos().add(0, 1, 0)).getMaterial().isSolid()) {
 							dropItem(world, rayTraceResult.getBlockPos().add(0, 1, 0), drop);
 							dropItem(world, rayTraceResult.getBlockPos().add(0, 1, 0), mould);

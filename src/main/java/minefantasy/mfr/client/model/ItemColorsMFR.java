@@ -1,13 +1,8 @@
 package minefantasy.mfr.client.model;
 
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CustomArmourListMFR;
-import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.DragonforgedStyle;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.init.OrnateStyle;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -44,212 +39,212 @@ public class ItemColorsMFR {
 		/// TOOL ITEMS
 
 		// Standard Tools
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_PICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_AXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPADE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HOE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_SHEARS);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HAMMER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HANDPICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HVYHAMMER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HVYPICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HVYSHOVEL);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_KNIFE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_MATTOCK);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_NEEDLE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SAW);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SCYTHE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPANNER);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_TONGS);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_TROW);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPOON);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_MALLET);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_PICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_AXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SPADE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HOE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SHEARS);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HANDPICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HVYHAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HVYPICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HVYSHOVEL);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_KNIFE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_MATTOCK);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_NEEDLE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SAW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SCYTHE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SPANNER);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_TONGS);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_TROW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SPOON);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_MALLET);
 
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1), ToolListMFR.SYRINGE);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex = tintIndex == 1 ? PotionUtils.getColor(stack) : -1), MineFantasyItems.SYRINGE);
 
 		//Standard Weapons
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SWORD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_BATTLEAXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_DAGGER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_GREATSWORD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_HALBEARD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_KATANA);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_LANCE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_LUMBER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_MACE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_SPEAR);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_WARAXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_WARHAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SWORD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_BATTLEAXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_DAGGER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_GREATSWORD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_HALBEARD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_KATANA);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_LANCE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_LUMBER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_MACE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_SPEAR);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_WARAXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_WARHAMMER);
 
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, CustomToolListMFR.STANDARD_BOW);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_ARROW);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_ARROW_BODKIN);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_ARROW_BROAD);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomToolListMFR.STANDARD_BOLT);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.STANDARD_BOW);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_ARROW);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_ARROW_BODKIN);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_ARROW_BROAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_BOLT);
 
 		// Dragonforged tools
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_AXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HAMMER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HANDPICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HOE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HVYPICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HVYSHOVEL);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_KNIFE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_LUMBER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_MATTOCK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_NEEDLE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_PICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SAW);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SCYTHE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SHEARS);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SPADE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SPANNER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_TONGS);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_TROW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_AXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HANDPICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HOE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HVYPICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HVYSHOVEL);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_KNIFE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_LUMBER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_MATTOCK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_NEEDLE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_PICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SAW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SCYTHE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SHEARS);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SPADE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SPANNER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_TONGS);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_TROW);
 
 		// Dragonforged Weapons
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_BATTLEAXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_DAGGER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_GREATSWORD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HALBEARD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_HVYHAMMER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_KATANA);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_LANCE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_MACE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SPEAR);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_SWORD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_WARAXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_WARHAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_BATTLEAXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_DAGGER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_GREATSWORD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HALBEARD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_HVYHAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_KATANA);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_LANCE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_MACE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SPEAR);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_SWORD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_WARAXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_WARHAMMER);
 
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, DragonforgedStyle.DRAGONFORGED_BOW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.DRAGONFORGED_BOW);
 
 		// Ornate tools
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_AXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HAMMER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HANDPICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HOE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HVYPICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HVYSHOVEL);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_KNIFE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_LUMBER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_MATTOCK);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_NEEDLE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_PICK);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SAW);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SCYTHE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SHEARS);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SPADE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SPANNER);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_TONGS);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_TROW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_AXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HANDPICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HOE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HVYPICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HVYSHOVEL);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_KNIFE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_LUMBER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_MATTOCK);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_NEEDLE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_PICK);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SAW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SCYTHE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SHEARS);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SPADE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SPANNER);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_TONGS);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_TROW);
 
 		// Ornate Weapons
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_BATTLEAXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_DAGGER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_GREATSWORD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HALBEARD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_HVYHAMMER);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_KATANA);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_LANCE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_MACE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SPEAR);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_SWORD);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_WARAXE);
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_WARHAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_BATTLEAXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_DAGGER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_GREATSWORD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HALBEARD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_HVYHAMMER);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_KATANA);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_LANCE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_MACE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SPEAR);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_SWORD);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_WARAXE);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_WARHAMMER);
 
-		itemColors.registerItemColorHandler(itemColorForTwoLayers, OrnateStyle.ORNATE_BOW);
+		itemColors.registerItemColorHandler(itemColorForTwoLayers, MineFantasyItems.ORNATE_BOW);
 
 		/// ARMOUR ITEMS
 
 		// Standard armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, CustomArmourListMFR.STANDARD_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_BOOTS);
 
 		// Ornate armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SCALE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SCALE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_CHAIN_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_CHAIN_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SPLINT_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SPLINT_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_PLATE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_PLATE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, OrnateStyle.ORNATE_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_BOOTS);
 
 		// Dragonforge armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SCALE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SCALE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_CHAIN_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_CHAIN_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SPLINT_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SPLINT_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_CHEST);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_LEGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, DragonforgedStyle.DRAGONFORGED_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_CHEST);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_LEGS);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_BOOTS);
 
 		//Leather Armours
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER);
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER_APRON);
 
 		/// COMMODITIES
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER_CUT);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.TIMBER_PANE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BAR);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.TIMBER);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.TIMBER_CUT);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.TIMBER_PANE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.BAR);
 
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemHeated) stack.getItem()).getColorFromItemStack(stack) : 0xFFFFFF), ComponentListMFR.HOT_ITEM);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemHeated) stack.getItem()).getColorFromItemStack(stack) : 0xFFFFFF), MineFantasyItems.HOT_ITEM);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.COGWORK_ARMOUR);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.COGWORK_ARMOUR);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.CHAIN_MESH);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.SCALE_MESH);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.SPLINT_MESH);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.CHAIN_MESH);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.SCALE_MESH);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.SPLINT_MESH);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.METAL_HUNK);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.METAL_HUNK);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.PLATE_HUGE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.PLATE);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.PLATE_HUGE);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.ARROWHEAD);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BROAD_HEAD);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, ComponentListMFR.BODKIN_HEAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ARROWHEAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.BROAD_HEAD);
+		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.BODKIN_HEAD);
 
 		/// ITEMBLOCKS
 

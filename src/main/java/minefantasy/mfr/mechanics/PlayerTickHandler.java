@@ -9,7 +9,7 @@ import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.mob.EntityDragon;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.item.ItemFoodMFR;
@@ -376,7 +376,7 @@ public class PlayerTickHandler {
 				data.setVariable(HAS_BOOK_KEY, true);
 				if (player.capabilities.isCreativeMode)
 					return;
-				player.inventory.addItemStackToInventory(new ItemStack(ToolListMFR.RESEARCH_BOOK));
+				player.inventory.addItemStackToInventory(new ItemStack(MineFantasyItems.RESEARCH_BOOK));
 			}
 		}
 	}

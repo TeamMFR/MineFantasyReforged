@@ -299,11 +299,11 @@ public class MineFantasyBlocks {
 		SILVER_ORE = new BlockOreMF("silver_ore", 2).setHardness(3.0F).setResistance(5.0F);
 		MYTHIC_ORE = new BlockMythicOre("mythic_ore", false).setHardness(10.0F).setResistance(100.0F);
 
-		KAOLINITE_ORE = new BlockOreMF("kaolinite_ore", 1, 0, ComponentListMFR.KAOLINITE, 1, 1, 1).setHardness(3.0F).setResistance(5.0F);
-		NITRE_ORE = new BlockOreMF("nitre_ore", 2, 0, ComponentListMFR.NITRE, 1, 2, 1).setHardness(3.0F).setResistance(5.0F);
-		SULFUR_ORE = new BlockOreMF("sulfur_ore", 2, 0, ComponentListMFR.SULFUR, 1, 4, 2).setHardness(3.0F).setResistance(2.0F);
-		BORAX_ORE = new BlockOreMF("borax_ore", 2, 1, ComponentListMFR.FLUX_STRONG, 1, 8, 4).setHardness(3.0F).setResistance(2.0F);
-		TUNGSTEN_ORE = new BlockOreMF("tungsten_ore", 3, 1, ComponentListMFR.ORE_TUNGSTEN, 1, 1, 4).setHardness(4.0F).setResistance(2.5F);
+		KAOLINITE_ORE = new BlockOreMF("kaolinite_ore", 1, 0, MineFantasyItems.KAOLINITE, 1, 1, 1).setHardness(3.0F).setResistance(5.0F);
+		NITRE_ORE = new BlockOreMF("nitre_ore", 2, 0, MineFantasyItems.NITRE, 1, 2, 1).setHardness(3.0F).setResistance(5.0F);
+		SULFUR_ORE = new BlockOreMF("sulfur_ore", 2, 0, MineFantasyItems.SULFUR, 1, 4, 2).setHardness(3.0F).setResistance(2.0F);
+		BORAX_ORE = new BlockOreMF("borax_ore", 2, 1, MineFantasyItems.FLUX_STRONG, 1, 8, 4).setHardness(3.0F).setResistance(2.0F);
+		TUNGSTEN_ORE = new BlockOreMF("tungsten_ore", 3, 1, MineFantasyItems.ORE_TUNGSTEN, 1, 1, 4).setHardness(4.0F).setResistance(2.5F);
 		CLAY_ORE = new BlockOreMF("clay_ore", 0, 0, Items.CLAY_BALL, 1, 4, 1, Material.GROUND).setBlockSoundType(SoundType.GROUND).setHardness(0.5F);
 		COAL_RICH_ORE = new BlockOreMF("coal_rich_ore", 2, 1, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
 
@@ -367,19 +367,19 @@ public class MineFantasyBlocks {
 		BOMB_BENCH = new BlockBombBench();
 		CROSSBOW_BENCH = new BlockCrossbowBench();
 
-		CHEESE_WHEEL = new BlockCheeseWheel("cheese_wheel", FoodListMFR.CHEESE_SLICE);
+		CHEESE_WHEEL = new BlockCheeseWheel("cheese_wheel", MineFantasyItems.CHEESE_SLICE);
 
-		CAKE_VANILLA = new BlockCakeMFR("cake_vanilla", FoodListMFR.CAKE_SLICE);
-		CAKE_CARROT = new BlockCakeMFR("cake_carrot", FoodListMFR.CARROTCAKE_SLICE);
-		CAKE_CHOCOLATE = new BlockCakeMFR("cake_chocolate", FoodListMFR.CHOCCAKE_SLICE);
-		CAKE_BF = new BlockCakeMFR("cake_bf", FoodListMFR.BFCAKE_SLICE);
+		CAKE_VANILLA = new BlockCakeMFR("cake_vanilla", MineFantasyItems.CAKE_SLICE);
+		CAKE_CARROT = new BlockCakeMFR("cake_carrot", MineFantasyItems.CARROTCAKE_SLICE);
+		CAKE_CHOCOLATE = new BlockCakeMFR("cake_chocolate", MineFantasyItems.CHOCCAKE_SLICE);
+		CAKE_BF = new BlockCakeMFR("cake_bf", MineFantasyItems.BFCAKE_SLICE);
 
-		PIE_MEAT = new BlockPie("pie_meat", FoodListMFR.MEATPIE_SLICE);
+		PIE_MEAT = new BlockPie("pie_meat", MineFantasyItems.MEATPIE_SLICE);
 
-		PIE_APPLE = new BlockPie("pie_apple", FoodListMFR.PIESLICE_APPLE);
-		PIE_BERRY = new BlockPie("pie_berry", FoodListMFR.PIESLICE_BERRY);
+		PIE_APPLE = new BlockPie("pie_apple", MineFantasyItems.PIESLICE_APPLE);
+		PIE_BERRY = new BlockPie("pie_berry", MineFantasyItems.PIESLICE_BERRY);
 
-		PIE_SHEPARDS = new BlockPie("pie_shepards", FoodListMFR.PIESLICE_SHEPARDS);
+		PIE_SHEPARDS = new BlockPie("pie_shepards", MineFantasyItems.PIESLICE_SHEPARDS);
 
 		BERRY_BUSH = new BlockBerryBush("berry_bush");
 

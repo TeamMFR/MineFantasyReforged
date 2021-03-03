@@ -1,6 +1,6 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemPotion;
@@ -24,7 +24,7 @@ public class RecipeSyringe implements IRecipe {
 			ItemStack itemstack1 = matrix.getStackInSlot(i);
 
 			if (itemstack1 != null) {
-				if (itemstack1.getItem() == ToolListMFR.SYRINGE_EMPTY) {
+				if (itemstack1.getItem() == MineFantasyItems.SYRINGE_EMPTY) {
 					syringe = itemstack1;
 				} else if (itemstack1.getItem() instanceof ItemPotion) {
 					ItemPotion potion = (ItemPotion) itemstack1.getItem();
@@ -53,7 +53,7 @@ public class RecipeSyringe implements IRecipe {
 			ItemStack itemstack1 = matrix.getStackInSlot(i);
 
 			if (itemstack1 != null) {
-				if (itemstack1.getItem() == ToolListMFR.SYRINGE_EMPTY) {
+				if (itemstack1.getItem() == MineFantasyItems.SYRINGE_EMPTY) {
 					syringe = itemstack1;
 				} else if (itemstack1.getItem() instanceof ItemPotion) {
 					ItemPotion potion = (ItemPotion) itemstack1.getItem();
@@ -67,7 +67,7 @@ public class RecipeSyringe implements IRecipe {
 			}
 		}
 		if (syringe != null && filler != null) {
-			return new ItemStack(ToolListMFR.SYRINGE, 1, filler.getItemDamage());
+			return new ItemStack(MineFantasyItems.SYRINGE, 1, filler.getItemDamage());
 		}
 		return null;
 	}

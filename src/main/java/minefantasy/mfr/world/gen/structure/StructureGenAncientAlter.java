@@ -1,7 +1,7 @@
 package minefantasy.mfr.world.gen.structure;
 
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -103,7 +103,7 @@ public class StructureGenAncientAlter extends StructureModuleMFR {
 			tileentitychest.setLootTable(loot, 2 + rand.nextInt(3));
 
 			int artId = rand.nextInt(tileentitychest.getSizeInventory());
-			tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_MITHRIL, 1));
+			tileentitychest.setInventorySlotContents(artId, new ItemStack(MineFantasyItems.ANCIENT_JEWEL_MITHRIL, 1));
 		}
 	}
 

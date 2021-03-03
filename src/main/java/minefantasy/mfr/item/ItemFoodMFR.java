@@ -2,9 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.client.ClientItemsMFR;
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -32,6 +31,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 public class ItemFoodMFR extends ItemFood implements IClientRegister {
+	public static float SAT_MODIFIER = 1.0F;
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	private static final String eatDelayNBT = "MF_EatenFoodDelay";
 	private static final String leftOverNbt = "MF_Food_leftover";
@@ -110,7 +110,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 			}
 		}
 
-		if (this == FoodListMFR.BERRIES_JUICY) {
+		if (this == MineFantasyItems.BERRIES_JUICY) {
 			PotionEffect poison = consumer.getActivePotionEffect(MobEffects.POISON);
 			if (poison != null) {
 				poison.addCurativeItem(food);
@@ -166,7 +166,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 
 	public ItemFoodMFR setSaturation(float amount) {
 		hasEffect = true;
-		this.saturationLevel = amount * FoodListMFR.SAT_MODIFIER;
+		this.saturationLevel = amount * SAT_MODIFIER;
 		return this;
 	}
 
@@ -227,7 +227,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 				}
 			}
 		}
-		if (this == FoodListMFR.BERRIES_JUICY) {
+		if (this == MineFantasyItems.BERRIES_JUICY) {
 			list.add(I18n.format("food.stat.cure.poison"));
 		}
 	}
@@ -242,10 +242,10 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 			}
 			lvl++;
 		}
-		if (lvl >= ToolListMFR.RARITY.length) {
-			lvl = ToolListMFR.RARITY.length - 1;
+		if (lvl >= MineFantasyItems.RARITY.length) {
+			lvl = MineFantasyItems.RARITY.length - 1;
 		}
-		return ToolListMFR.RARITY[lvl];
+		return MineFantasyItems.RARITY[lvl];
 	}
 
 	public ItemFoodMFR setReturnItem(Item item) {

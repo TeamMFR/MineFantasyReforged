@@ -6,8 +6,7 @@ import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.block.BlockFirepit;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.Functions;
@@ -64,10 +63,10 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 			Item i = input.getItem();
 			if (i == Items.STICK)
 				return 600;// 30Sec
-			if (i == ComponentListMFR.TIMBER || i == ComponentListMFR.TIMBER_CUT) {
+			if (i == MineFantasyItems.TIMBER || i == MineFantasyItems.TIMBER_CUT) {
 				return (int) (200 * CustomToolHelper.getBurnModifier(input));
 			}
-			if (i == ComponentListMFR.TIMBER_PANE) {
+			if (i == MineFantasyItems.TIMBER_PANE) {
 				return (int) (600 * CustomToolHelper.getBurnModifier(input));
 			}
 
@@ -233,7 +232,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 					chance += (int) ((float) skill / 4);
 				}
 				boolean success = (rand.nextFloat() * 100) < chance;
-				ItemStack creation = success ? result.copy() : new ItemStack(FoodListMFR.BURNT_FOOD);
+				ItemStack creation = success ? result.copy() : new ItemStack(MineFantasyItems.BURNT_FOOD);
 				dropItem(player, creation);
 				Skill.PROVISIONING.addXP(player, success ? 2 : 1);
 				return true;

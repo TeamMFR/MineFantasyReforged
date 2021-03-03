@@ -1,6 +1,6 @@
 package minefantasy.mfr.world.gen.structure;
 
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntitySilverfish;
@@ -89,7 +89,7 @@ public class StructureGenAFRoom extends StructureModuleMFR {
 				int sp = world.getSpawnPoint().getZ();
 				int item = (coords.getY() < sp) ? 1 : 0;
 				int artId = rand.nextInt(tileentitychest.getSizeInventory());
-				tileentitychest.setInventorySlotContents(artId, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_ADAMANT, 1, item));
+				tileentitychest.setInventorySlotContents(artId, new ItemStack(MineFantasyItems.ANCIENT_JEWEL_ADAMANT, 1, item));
 			}
 		}
 	}

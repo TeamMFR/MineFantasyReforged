@@ -2,13 +2,13 @@ package minefantasy.mfr.client.gui;
 
 import codechicken.lib.texture.TextureUtils;
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
+import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.mechanics.knowledge.InformationPage;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-import minefantasy.mfr.constants.Skill;
-import minefantasy.mfr.init.KnowledgeListMFR;
-import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchRequestPacket;
 import minefantasy.mfr.util.GuiHelper;
@@ -74,8 +74,8 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		this.player = user;
 		short short1 = 141;
 		short short2 = 141;
-		GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2 = GuiKnowledgeMenu.displayColumnModified3 = KnowledgeListMFR.gettingStarted.displayColumn * 24 - short1 / 2 - 12;
-		GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2 = GuiKnowledgeMenu.displayRowModified3 = KnowledgeListMFR.gettingStarted.displayRow * 24 - short2 / 2;
+		GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2 = GuiKnowledgeMenu.displayColumnModified3 = MineFantasyKnowledgeList.gettingStarted.displayColumn * 24 - short1 / 2 - 12;
+		GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2 = GuiKnowledgeMenu.displayRowModified3 = MineFantasyKnowledgeList.gettingStarted.displayRow * 24 - short2 / 2;
 		informationList.clear();
 		for (Object achievement : InformationList.knowledgeList) {
 			if (!InformationPage.isInfoInPages((InformationBase) achievement)) {

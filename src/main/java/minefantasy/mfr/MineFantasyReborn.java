@@ -19,19 +19,13 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.CustomArmourListMFR;
-import minefantasy.mfr.init.CustomToolListMFR;
-import minefantasy.mfr.init.DragonforgedStyle;
-import minefantasy.mfr.init.FoodListMFR;
-import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.init.MineFantasyMaterials;
-import minefantasy.mfr.init.OreDictListMFR;
-import minefantasy.mfr.init.OrnateStyle;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyOreDict;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
@@ -126,22 +120,22 @@ public class MineFantasyReborn {
 		MetalMaterialRegistry.INSTANCE.preInit();
 		MineFantasyMaterials.initLeatherMaterials();
 
-		ComponentListMFR.init();
-		ToolListMFR.init();
-		CustomToolListMFR.init();
-		CustomArmourListMFR.init();
+		MineFantasyItems.initComponent();
+		MineFantasyItems.initTool();
+		MineFantasyItems.initCustomTool();
+		MineFantasyItems.initCustomArmor();
 		LeatherArmourListMFR.init();
-		FoodListMFR.init();
-		DragonforgedStyle.init();
-		OrnateStyle.init();
+		MineFantasyItems.initFood();
+		MineFantasyItems.initDragonforged();
+		MineFantasyItems.initOrnate();
 
 		MineFantasyBlocks.init();
 
 		MineFantasyLoot.load();
 		MineFantasyBlocks.load();
-		ComponentListMFR.load();
-		ToolListMFR.load();
-		FoodListMFR.load();
+		MineFantasyItems.loadComponent();
+		MineFantasyItems.loadTool();
+		MineFantasyItems.loadSpecialFood();
 
 		PROXY.registerTickHandlers();
 
@@ -181,14 +175,14 @@ public class MineFantasyReborn {
 
 		ConfigItemRegistry.readCustoms();
 
-		OreDictListMFR.registerOreDictEntries();
+		MineFantasyOreDict.registerOreDictEntries();
 
 		for (Biome biome : Biome.REGISTRY) {
 			registerBiomeStuff(biome);
 		}
 
-		KnowledgeListMFR.init();
-		KnowledgeListMFR.ArtefactListMFR.init();
+		MineFantasyKnowledgeList.init();
+		MineFantasyKnowledgeList.ArtefactListMFR.init();
 		BasicRecipesMF.init();
 
 		MetalMaterial.addHeatables();

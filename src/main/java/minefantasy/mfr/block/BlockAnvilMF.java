@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterial;
@@ -91,7 +91,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 
 		// GRAB
 		if (grabbed.isEmpty()) {
-			if (!result.isEmpty() && result.getItem() == ComponentListMFR.HOT_ITEM) {
+			if (!result.isEmpty() && result.getItem() == MineFantasyItems.HOT_ITEM) {
 				if (TongsHelper.trySetHeldItem(held, result)) {
 					tile.getInventory().setStackInSlot(tile.getInventory().getSlots() - 1, ItemStack.EMPTY);
 					return true;

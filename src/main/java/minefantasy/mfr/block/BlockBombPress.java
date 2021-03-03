@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityBombPress;
@@ -76,7 +76,7 @@ public class BlockBombPress extends BlockTileEntity<TileEntityBombPress> {
 	 */
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.bombs)) {
+		if (ResearchLogic.hasInfoUnlocked(user, MineFantasyKnowledgeList.bombs)) {
 			if (world.isRemote)
 				user.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
 			return false;

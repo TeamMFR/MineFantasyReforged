@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class OreDictListMFR {
+public class MineFantasyOreDict {
 
 	public static void registerOreDictEntries() {
 		OreDictionary.registerOre("oreCopper", MineFantasyBlocks.COPPER_ORE);
@@ -58,59 +58,59 @@ public class OreDictListMFR {
 			}
 		}
 
-		OreDictionary.registerOre("ingotCopper", ComponentListMFR.COPPER_INGOT);
-		OreDictionary.registerOre("ingotTin", ComponentListMFR.TIN_INGOT);
-		OreDictionary.registerOre("ingotBronze", ComponentListMFR.BRONZE_INGOT);
-		OreDictionary.registerOre("ingotPigIron", ComponentListMFR.PIG_IRON_INGOT);
-		OreDictionary.registerOre("ingotSteel", ComponentListMFR.STEEL_INGOT);
-		OreDictionary.registerOre("ingotEncrusted", ComponentListMFR.ENCRUSTED_INGOT);
-		OreDictionary.registerOre("ingotBlackSteel", ComponentListMFR.BLACK_STEEL_INGOT);
-		OreDictionary.registerOre("ingotSilver", ComponentListMFR.SILVER_INGOT);
-		OreDictionary.registerOre("ingotRedSteel", ComponentListMFR.RED_STEEL_INGOT);
-		OreDictionary.registerOre("ingotBlueSteel", ComponentListMFR.BLUE_STEEL_INGOT);
-		OreDictionary.registerOre("ingotAdamantium", ComponentListMFR.ADAMANTIUM_INGOT);
-		OreDictionary.registerOre("ingotMithril", ComponentListMFR.MITHRIL_INGOT);
-		OreDictionary.registerOre("ingotIgnotumite", ComponentListMFR.IGNOTUMITE_INGOT);
-		OreDictionary.registerOre("ingotMithium", ComponentListMFR.MITHIUM_INGOT);
-		OreDictionary.registerOre("ingotEnder", ComponentListMFR.ENDER_INGOT);
-		OreDictionary.registerOre("ingotTungsten", ComponentListMFR.TUNGSTEN_INGOT);
-		OreDictionary.registerOre("ingotObsidian", ComponentListMFR.OBSIDIAN_INGOT);
-		OreDictionary.registerOre("ingotCompositeAlloy", ComponentListMFR.COMPOSITE_ALLOY_INGOT);
+		OreDictionary.registerOre("ingotCopper", MineFantasyItems.COPPER_INGOT);
+		OreDictionary.registerOre("ingotTin", MineFantasyItems.TIN_INGOT);
+		OreDictionary.registerOre("ingotBronze", MineFantasyItems.BRONZE_INGOT);
+		OreDictionary.registerOre("ingotPigIron", MineFantasyItems.PIG_IRON_INGOT);
+		OreDictionary.registerOre("ingotSteel", MineFantasyItems.STEEL_INGOT);
+		OreDictionary.registerOre("ingotEncrusted", MineFantasyItems.ENCRUSTED_INGOT);
+		OreDictionary.registerOre("ingotBlackSteel", MineFantasyItems.BLACK_STEEL_INGOT);
+		OreDictionary.registerOre("ingotSilver", MineFantasyItems.SILVER_INGOT);
+		OreDictionary.registerOre("ingotRedSteel", MineFantasyItems.RED_STEEL_INGOT);
+		OreDictionary.registerOre("ingotBlueSteel", MineFantasyItems.BLUE_STEEL_INGOT);
+		OreDictionary.registerOre("ingotAdamantium", MineFantasyItems.ADAMANTIUM_INGOT);
+		OreDictionary.registerOre("ingotMithril", MineFantasyItems.MITHRIL_INGOT);
+		OreDictionary.registerOre("ingotIgnotumite", MineFantasyItems.IGNOTUMITE_INGOT);
+		OreDictionary.registerOre("ingotMithium", MineFantasyItems.MITHIUM_INGOT);
+		OreDictionary.registerOre("ingotEnder", MineFantasyItems.ENDER_INGOT);
+		OreDictionary.registerOre("ingotTungsten", MineFantasyItems.TUNGSTEN_INGOT);
+		OreDictionary.registerOre("ingotObsidian", MineFantasyItems.OBSIDIAN_INGOT);
+		OreDictionary.registerOre("ingotCompositeAlloy", MineFantasyItems.COMPOSITE_ALLOY_INGOT);
 
 		String meatRaw = "raw_meat";
 		String cookedMeat = "cooked_meat";
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_BEEF);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_CHICKEN);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_PORKCHOP);
-		OreDictionary.registerOre(cookedMeat, FoodListMFR.WOLF_COOKED);
-		OreDictionary.registerOre(cookedMeat, FoodListMFR.HORSE_COOKED);
+		OreDictionary.registerOre(cookedMeat, MineFantasyItems.WOLF_COOKED);
+		OreDictionary.registerOre(cookedMeat, MineFantasyItems.HORSE_COOKED);
 		OreDictionary.registerOre(cookedMeat, Items.COOKED_FISH);
 		OreDictionary.registerOre(cookedMeat, new ItemStack(Items.COOKED_FISH, 1, 1));
-		addOreD("listAllporkcooked", cookedMeat);
-		addOreD("listAllmuttoncooked", cookedMeat);
-		addOreD("listAllbeefcooked", cookedMeat);
-		addOreD("listAllchickencooked", cookedMeat);
-		addOreD("listAllfishcooked", cookedMeat);
+		addOreDictEntry("listAllporkcooked", cookedMeat);
+		addOreDictEntry("listAllmuttoncooked", cookedMeat);
+		addOreDictEntry("listAllbeefcooked", cookedMeat);
+		addOreDictEntry("listAllchickencooked", cookedMeat);
+		addOreDictEntry("listAllfishcooked", cookedMeat);
 
-		OreDictionary.registerOre(meatRaw, FoodListMFR.GUTS);
+		OreDictionary.registerOre(meatRaw, MineFantasyItems.GUTS);
 		OreDictionary.registerOre(meatRaw, Items.BEEF);
 		OreDictionary.registerOre(meatRaw, Items.CHICKEN);
 		OreDictionary.registerOre(meatRaw, Items.PORKCHOP);
-		OreDictionary.registerOre(meatRaw, FoodListMFR.WOLF_RAW);
-		OreDictionary.registerOre(meatRaw, FoodListMFR.HORSE_RAW);
+		OreDictionary.registerOre(meatRaw, MineFantasyItems.WOLF_RAW);
+		OreDictionary.registerOre(meatRaw, MineFantasyItems.HORSE_RAW);
 		OreDictionary.registerOre(meatRaw, Items.FISH);
 		OreDictionary.registerOre(meatRaw, new ItemStack(Items.FISH, 1, 1));
-		addOreD("listAllporkraw", meatRaw);
-		addOreD("listAllmuttonraw", meatRaw);
-		addOreD("listAllbeefraw", meatRaw);
-		addOreD("listAllchickenraw", meatRaw);
-		addOreD("listAllfishraw", meatRaw);
+		addOreDictEntry("listAllporkraw", meatRaw);
+		addOreDictEntry("listAllmuttonraw", meatRaw);
+		addOreDictEntry("listAllbeefraw", meatRaw);
+		addOreDictEntry("listAllchickenraw", meatRaw);
+		addOreDictEntry("listAllfishraw", meatRaw);
 
 		AdvancedFuelHandler.registerItems();
 
 	}
 
-	private static void addOreD(String list, String mfList) {
+	private static void addOreDictEntry(String list, String mfList) {
 		for (ItemStack stack : OreDictionary.getOres(list)) {
 			OreDictionary.registerOre(mfList, stack);
 		}

@@ -9,7 +9,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.Trait;
 import minefantasy.mfr.container.ContainerAnvil;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
@@ -279,7 +279,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				for (int y = -4; y <= 4; y++) {
 					for (int z = -4; z <= 4; z++) {
 						TileEntity tile = world.getTileEntity(pos.add(x, y, z));
-						if (player != null && ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.smeltDragonforge)
+						if (player != null && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.smeltDragonforge)
 								&& tile != null && tile instanceof TileEntityForge) {
 							if (((TileEntityForge) tile).dragonHeartPower > 0) {
 								hasHeart = true;

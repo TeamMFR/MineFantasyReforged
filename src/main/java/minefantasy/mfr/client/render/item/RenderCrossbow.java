@@ -3,7 +3,7 @@ package minefantasy.mfr.client.render.item;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import net.minecraft.client.Minecraft;
@@ -82,7 +82,7 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
 	private void renderString(String part_name) {
 		GlStateManager.pushMatrix();
 
-		ItemStack string_stack = part_name.equalsIgnoreCase("string_unloaded") ? new ItemStack(ComponentListMFR.CROSSBOW_STRING_UNLOADED) : new ItemStack(ComponentListMFR.CROSSBOW_STRING_LOADED);
+		ItemStack string_stack = part_name.equalsIgnoreCase("string_unloaded") ? new ItemStack(MineFantasyItems.CROSSBOW_STRING_UNLOADED) : new ItemStack(MineFantasyItems.CROSSBOW_STRING_LOADED);
 		GlStateManager.rotate(90, -1, 1, 0);
 
 		Minecraft.getMinecraft().getRenderItem().renderItem(string_stack, TransformType.NONE);

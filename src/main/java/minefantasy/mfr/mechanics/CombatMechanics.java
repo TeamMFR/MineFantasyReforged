@@ -16,7 +16,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.Shockwave;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemBattleaxe;
 import minefantasy.mfr.item.ItemDagger;
@@ -897,7 +897,7 @@ public class CombatMechanics {
 	}
 
 	private float modifyPlayerDamage(EntityPlayer hit, float dam) {
-		if (ResearchLogic.hasInfoUnlocked(hit, KnowledgeListMFR.toughness)) {
+		if (ResearchLogic.hasInfoUnlocked(hit, MineFantasyKnowledgeList.toughness)) {
 			dam *= 0.9F;// 10% Resist
 		}
 		return dam;

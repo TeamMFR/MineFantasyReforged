@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.block.BlockCakeMFR;
-import minefantasy.mfr.init.ToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
@@ -27,9 +27,9 @@ public class ItemBlockCake extends ItemBlockBase {
 	@Override
 	public EnumRarity getRarity(ItemStack item) {
 		int lvl = cake.getRarity() + 1;
-		if (lvl >= ToolListMFR.RARITY.length) {
-			lvl = ToolListMFR.RARITY.length - 1;
+		if (lvl >= MineFantasyItems.RARITY.length) {
+			lvl = MineFantasyItems.RARITY.length - 1;
 		}
-		return ToolListMFR.RARITY[lvl];
+		return MineFantasyItems.RARITY[lvl];
 	}
 }

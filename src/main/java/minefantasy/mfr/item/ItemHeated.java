@@ -4,7 +4,7 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.client.render.item.RenderHotItem;
-import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.GuiHelper;
@@ -78,7 +78,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	public static ItemStack createHotItem(ItemStack item, boolean ignoreStats) {
 		Heatable stats = Heatable.loadStats(item);
 		if (stats != null) {
-			ItemStack out = new ItemStack(ComponentListMFR.HOT_ITEM, item.getCount());
+			ItemStack out = new ItemStack(MineFantasyItems.HOT_ITEM, item.getCount());
 			NBTTagCompound nbt = getNBT(out);
 			NBTTagCompound save = new NBTTagCompound();
 			item.writeToNBT(save);
@@ -90,7 +90,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 
 			return out;
 		} else if (ignoreStats) {
-			ItemStack out = new ItemStack(ComponentListMFR.HOT_ITEM, item.getCount());
+			ItemStack out = new ItemStack(MineFantasyItems.HOT_ITEM, item.getCount());
 			NBTTagCompound nbt = getNBT(out);
 			NBTTagCompound save = new NBTTagCompound();
 			item.writeToNBT(save);

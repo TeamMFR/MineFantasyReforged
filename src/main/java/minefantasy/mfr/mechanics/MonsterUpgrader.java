@@ -1,8 +1,7 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.init.CustomArmourListMFR;
-import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemCustomArmour;
 import minefantasy.mfr.item.ItemWeaponMFR;
@@ -44,7 +43,7 @@ public class MonsterUpgrader {
 					giveEntityWeapon(mob, MineFantasyMaterials.Names.ENCRUSTED, random.nextInt(8));
 				} else if (CombatMechanics.swordSkeleton && random.nextInt(3) == 0) {
 					mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-							CustomToolListMFR.STANDARD_SWORD.construct(MineFantasyMaterials.Names.BRONZE, MineFantasyMaterials.Names.OAK_WOOD));
+							MineFantasyItems.STANDARD_SWORD.construct(MineFantasyMaterials.Names.BRONZE, MineFantasyMaterials.Names.OAK_WOOD));
 					((EntitySkeleton) mob).setCombatTask();
 				}
 			} else if (mob instanceof EntityZombie) {
@@ -118,7 +117,7 @@ public class MonsterUpgrader {
 		}
 		mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 		mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-				CustomToolListMFR.STANDARD_GREATSWORD.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
+				MineFantasyItems.STANDARD_GREATSWORD.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		setArmour(mob, 1, tier);
 		mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
 		mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -126,10 +125,10 @@ public class MonsterUpgrader {
 
 	private void setArmour(EntityLivingBase mob, int id, String tier) {
 		if (id == 1) {
-			ItemStack boots = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_PLATE_BOOTS).construct(tier);
-			ItemStack legs = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_PLATE_LEGS).construct(tier);
-			ItemStack chest = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_PLATE_CHEST).construct(tier);
-			ItemStack helmet = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_PLATE_HELMET).construct(tier);
+			ItemStack boots = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_BOOTS).construct(tier);
+			ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_LEGS).construct(tier);
+			ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_CHEST).construct(tier);
+			ItemStack helmet = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_HELMET).construct(tier);
 
 			if (!boots.isEmpty())
 				mob.setItemStackToSlot(EntityEquipmentSlot.FEET, boots);
@@ -142,10 +141,10 @@ public class MonsterUpgrader {
 			return;
 		}
 
-		ItemStack boots = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_CHAIN_BOOTS).construct(tier);
-		ItemStack legs = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_CHAIN_LEGS).construct(tier);
-		ItemStack chest = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_CHAIN_CHEST).construct(tier);
-		ItemStack helmet = ((ItemCustomArmour) CustomArmourListMFR.STANDARD_CHAIN_HELMET).construct(tier);
+		ItemStack boots = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_BOOTS).construct(tier);
+		ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_LEGS).construct(tier);
+		ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_CHEST).construct(tier);
+		ItemStack helmet = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_HELMET).construct(tier);
 
 		if (!boots.isEmpty())
 			mob.setItemStackToSlot(EntityEquipmentSlot.FEET, boots);
@@ -168,7 +167,7 @@ public class MonsterUpgrader {
 		}
 		mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 		mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-				CustomToolListMFR.STANDARD_WARAXE.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
+				MineFantasyItems.STANDARD_WARAXE.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		setArmour(mob, 0, tier);
 		mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35F);
 		mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -181,18 +180,18 @@ public class MonsterUpgrader {
 		if (CustomMaterial.getMaterial(tier) == null)
 			return;
 
-		ItemWeaponMFR weapon = CustomToolListMFR.STANDARD_SWORD;
+		ItemWeaponMFR weapon = MineFantasyItems.STANDARD_SWORD;
 		if (weaponType == 1) {
-			weapon = CustomToolListMFR.STANDARD_WARAXE;
+			weapon = MineFantasyItems.STANDARD_WARAXE;
 		}
 		if (weaponType == 2) {
-			weapon = CustomToolListMFR.STANDARD_MACE;
+			weapon = MineFantasyItems.STANDARD_MACE;
 		}
 		if (weaponType == 3) {
-			weapon = CustomToolListMFR.STANDARD_DAGGER;
+			weapon = MineFantasyItems.STANDARD_DAGGER;
 		}
 		if (weaponType == 4) {
-			weapon = CustomToolListMFR.STANDARD_SPEAR;
+			weapon = MineFantasyItems.STANDARD_SPEAR;
 		}
 
 		if (mob != null && weapon != null) {

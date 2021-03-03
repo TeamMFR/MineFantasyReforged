@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.init.CustomArmourListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
@@ -34,25 +34,25 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	}
 
 	public static void addSuits(List<ItemStack> list, String material) {
-		list.add(CustomArmourListMFR.STANDARD_CHAIN_HELMET.construct(material));
-		list.add(CustomArmourListMFR.STANDARD_CHAIN_CHEST.construct(material));
-		list.add(CustomArmourListMFR.STANDARD_CHAIN_LEGS.construct(material));
-		list.add(CustomArmourListMFR.STANDARD_CHAIN_BOOTS.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_HELMET.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_CHEST.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_LEGS.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_BOOTS.construct(material));
 
-		list.add(CustomArmourListMFR.STANDARD_SCALE_HELMET.construct(material));
-		list.add(CustomArmourListMFR.STANDARD_SCALE_CHEST.construct(material));
-		list.add(CustomArmourListMFR.STANDARD_SCALE_LEGS.construct(material));
-		list.add((CustomArmourListMFR.STANDARD_SCALE_BOOTS).construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_HELMET.construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_CHEST.construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_LEGS.construct(material));
+		list.add((MineFantasyItems.STANDARD_SCALE_BOOTS).construct(material));
 
-		list.add((CustomArmourListMFR.STANDARD_SPLINT_HELMET).construct(material));
-		list.add((CustomArmourListMFR.STANDARD_SPLINT_CHEST).construct(material));
-		list.add((CustomArmourListMFR.STANDARD_SPLINT_LEGS).construct(material));
-		list.add((CustomArmourListMFR.STANDARD_SPLINT_BOOTS).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_HELMET).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_CHEST).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_LEGS).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_BOOTS).construct(material));
 
-		list.add((CustomArmourListMFR.STANDARD_PLATE_HELMET).construct(material));
-		list.add((CustomArmourListMFR.STANDARD_PLATE_CHEST).construct(material));
-		list.add((CustomArmourListMFR.STANDARD_PLATE_LEGS).construct(material));
-		list.add((CustomArmourListMFR.STANDARD_PLATE_BOOTS).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_HELMET).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_CHEST).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_LEGS).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_BOOTS).construct(material));
 	}
 
 	public ItemCustomArmour modifyRating(float rating) {
@@ -127,7 +127,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 			}
 			return;
 		}
-		if (this != CustomArmourListMFR.STANDARD_CHAIN_BOOTS)
+		if (this != MineFantasyItems.STANDARD_CHAIN_BOOTS)
 			return;
 
 		for (CustomMaterial customMat : metal) {

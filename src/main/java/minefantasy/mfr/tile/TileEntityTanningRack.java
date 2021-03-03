@@ -4,8 +4,8 @@ import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
-import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.recipe.TanningRecipe;
 import minefantasy.mfr.util.ToolHelper;
@@ -130,7 +130,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 					updateRecipe();
 					if (isShabbyRack() && rand.nextInt(10) == 0 && !world.isRemote) {
 						for (int a = 0; a < rand.nextInt(10); a++) {
-							ItemStack plank = ComponentListMFR.TIMBER.construct("ScrapWood");
+							ItemStack plank = MineFantasyItems.TIMBER.construct("ScrapWood");
 							world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.ENTITY_ZOMBIE_BREAK_DOOR_WOOD, SoundCategory.AMBIENT, 1.0F, 1.0F);
 							dropItem(plank);
 						}

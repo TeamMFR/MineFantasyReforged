@@ -7,7 +7,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.RPGElements;
@@ -153,7 +153,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		if (world.canBlockSeeSky(pos.add(0, 1, 0)) && res != null && !isActive) {
 			if (!world.isRemote) {
 				if (res.getItem() == Items.IRON_INGOT
-						&& !ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.smeltIron)) {
+						&& !ResearchLogic.hasInfoUnlocked(user, MineFantasyKnowledgeList.smeltIron)) {
 					return false;
 				}
 				isActive = true;

@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.init.ToolListMFR;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 
@@ -33,10 +33,10 @@ public class ItemUnfinishedFood extends ItemBaseMFR {
 			}
 			lvl++;
 		}
-		if (lvl >= ToolListMFR.RARITY.length) {
-			lvl = ToolListMFR.RARITY.length - 1;
+		if (lvl >= MineFantasyItems.RARITY.length) {
+			lvl = MineFantasyItems.RARITY.length - 1;
 		}
-		return ToolListMFR.RARITY[lvl];
+		return MineFantasyItems.RARITY[lvl];
 	}
 
 }

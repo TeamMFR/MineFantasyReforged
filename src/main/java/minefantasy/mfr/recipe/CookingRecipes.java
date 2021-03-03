@@ -2,8 +2,7 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.config.ConfigHardcore;
-import minefantasy.mfr.init.ComponentListMFR;
-import minefantasy.mfr.init.FoodListMFR;
+import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,37 +10,37 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CookingRecipes {
 	public static void init() {
-		cookMeat(FoodListMFR.HORSE_RAW, FoodListMFR.HORSE_COOKED);
-		cookMeat(FoodListMFR.WOLF_RAW, FoodListMFR.WOLF_COOKED);
-		cookMeat(FoodListMFR.SAUSAGE_RAW, FoodListMFR.SAUSAGE_COOKED);
-		cookMeat(FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.GENERIC_MEAT_COOKED);
-		cookMeat(FoodListMFR.GENERIC_MEAT_STRIP_UNCOOKED, FoodListMFR.GENERIC_MEAT_STRIP_COOKED);
-		cookMeat(FoodListMFR.GENERIC_MEAT_CHUNK_UNCOOKED, FoodListMFR.GENERIC_MEAT_CHUNK_COOKED);
+		cookMeat(MineFantasyItems.HORSE_RAW, MineFantasyItems.HORSE_COOKED);
+		cookMeat(MineFantasyItems.WOLF_RAW, MineFantasyItems.WOLF_COOKED);
+		cookMeat(MineFantasyItems.SAUSAGE_RAW, MineFantasyItems.SAUSAGE_COOKED);
+		cookMeat(MineFantasyItems.GENERIC_MEAT_UNCOOKED, MineFantasyItems.GENERIC_MEAT_COOKED);
+		cookMeat(MineFantasyItems.GENERIC_MEAT_STRIP_UNCOOKED, MineFantasyItems.GENERIC_MEAT_STRIP_COOKED);
+		cookMeat(MineFantasyItems.GENERIC_MEAT_CHUNK_UNCOOKED, MineFantasyItems.GENERIC_MEAT_CHUNK_COOKED);
 
-		bake(FoodListMFR.DOUGH, FoodListMFR.BREADROLL, 150, 300, 10, 20, true);
-		bake(FoodListMFR.RAW_BREAD, Items.BREAD, 150, 300, 20, 40, true);
-		bake(FoodListMFR.CURDS, FoodListMFR.CHEESE_POT, 100, 300, 60, 20, false);
-		bake(FoodListMFR.SWEETROLL_RAW, FoodListMFR.SWEETROLL_UNICED, 150, 250, 20, 10, true);
+		bake(MineFantasyItems.DOUGH, MineFantasyItems.BREADROLL, 150, 300, 10, 20, true);
+		bake(MineFantasyItems.RAW_BREAD, Items.BREAD, 150, 300, 20, 40, true);
+		bake(MineFantasyItems.CURDS, MineFantasyItems.CHEESE_POT, 100, 300, 60, 20, false);
+		bake(MineFantasyItems.SWEETROLL_RAW, MineFantasyItems.SWEETROLL_UNICED, 150, 250, 20, 10, true);
 
-		bake(FoodListMFR.PIE_PUMPKIN_UNCOOKED, FoodListMFR.PIE_PUMPKIN_COOKED, 150, 300, 20, 20, FoodListMFR.BURNT_PIE);
-		bake(FoodListMFR.PIE_APPLE_UNCOOKED, FoodListMFR.PIE_APPLE_COOKED, 150, 300, 25, 20, FoodListMFR.BURNT_PIE);
-		bake(FoodListMFR.PIE_BERRY_UNCOOKED, FoodListMFR.PIE_BERRY_COOKED, 150, 300, 25, 20, FoodListMFR.BURNT_PIE);
-		bake(FoodListMFR.PIE_MEAT_UNCOOKED, FoodListMFR.PIE_MEAT_COOKED, 150, 300, 30, 20, FoodListMFR.BURNT_PIE);
-		bake(FoodListMFR.PIE_SHEPARD_UNCOOKED, FoodListMFR.PIE_SHEPARD_COOKED, 150, 300, 30, 20, FoodListMFR.BURNT_PIE);
+		bake(MineFantasyItems.PIE_PUMPKIN_UNCOOKED, MineFantasyItems.PIE_PUMPKIN_COOKED, 150, 300, 20, 20, MineFantasyItems.BURNT_PIE);
+		bake(MineFantasyItems.PIE_APPLE_UNCOOKED, MineFantasyItems.PIE_APPLE_COOKED, 150, 300, 25, 20, MineFantasyItems.BURNT_PIE);
+		bake(MineFantasyItems.PIE_BERRY_UNCOOKED, MineFantasyItems.PIE_BERRY_COOKED, 150, 300, 25, 20, MineFantasyItems.BURNT_PIE);
+		bake(MineFantasyItems.PIE_MEAT_UNCOOKED, MineFantasyItems.PIE_MEAT_COOKED, 150, 300, 30, 20, MineFantasyItems.BURNT_PIE);
+		bake(MineFantasyItems.PIE_SHEPARD_UNCOOKED, MineFantasyItems.PIE_SHEPARD_COOKED, 150, 300, 30, 20, MineFantasyItems.BURNT_PIE);
 
-		bake(FoodListMFR.CAKE_SIMPLE_RAW, FoodListMFR.CAKE_SIMPLE_UNICED, 150, 250, 30, 30, FoodListMFR.BURNT_CAKE);
-		bake(FoodListMFR.CAKE_RAW, FoodListMFR.CAKE_UNICED, 150, 250, 40, 20, FoodListMFR.BURNT_CAKE);
-		bake(FoodListMFR.CAKE_CHOC_RAW, FoodListMFR.CAKE_CHOC_UNICED, 150, 250, 40, 20, FoodListMFR.BURNT_CAKE);
-		bake(FoodListMFR.CAKE_CARROT_RAW, FoodListMFR.CAKE_CARROT_UNICED, 150, 250, 40, 20, FoodListMFR.BURNT_CAKE);
-		bake(FoodListMFR.CAKE_BF_RAW, FoodListMFR.CAKE_BF_UNICED, 150, 250, 50, 10, FoodListMFR.BURNT_CAKE);
-		bake(FoodListMFR.ECLAIR_RAW, FoodListMFR.ECLAIR_UNICED, 150, 250, 60, 5, true);
+		bake(MineFantasyItems.CAKE_SIMPLE_RAW, MineFantasyItems.CAKE_SIMPLE_UNICED, 150, 250, 30, 30, MineFantasyItems.BURNT_CAKE);
+		bake(MineFantasyItems.CAKE_RAW, MineFantasyItems.CAKE_UNICED, 150, 250, 40, 20, MineFantasyItems.BURNT_CAKE);
+		bake(MineFantasyItems.CAKE_CHOC_RAW, MineFantasyItems.CAKE_CHOC_UNICED, 150, 250, 40, 20, MineFantasyItems.BURNT_CAKE);
+		bake(MineFantasyItems.CAKE_CARROT_RAW, MineFantasyItems.CAKE_CARROT_UNICED, 150, 250, 40, 20, MineFantasyItems.BURNT_CAKE);
+		bake(MineFantasyItems.CAKE_BF_RAW, MineFantasyItems.CAKE_BF_UNICED, 150, 250, 50, 10, MineFantasyItems.BURNT_CAKE);
+		bake(MineFantasyItems.ECLAIR_RAW, MineFantasyItems.ECLAIR_UNICED, 150, 250, 60, 5, true);
 
 		addCeramics();
-		MineFantasyRebornAPI.addCookingRecipe(new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_UNCOOKED),
-				new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_COOKED), new ItemStack(FoodListMFR.BURNT_POT), 100, 200, 10,
+		MineFantasyRebornAPI.addCookingRecipe(new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED),
+				new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), new ItemStack(MineFantasyItems.BURNT_POT), 100, 200, 10,
 				false);
 
-		MineFantasyRebornAPI.addCookingRecipe(new ItemStack(FoodListMFR.BOWL_WATER_SALT), new ItemStack(FoodListMFR.SALT), 100,
+		MineFantasyRebornAPI.addCookingRecipe(new ItemStack(MineFantasyItems.BOWL_WATER_SALT), new ItemStack(MineFantasyItems.SALT), 100,
 				200, 2, false, false);
 
 		if (!ConfigHardcore.preventCook) {
@@ -66,7 +65,7 @@ public class CookingRecipes {
 
 	private static CookRecipe bake(Item in, Item out, int mint, int maxt, int time, int burn_time, boolean burn) {
 		return MineFantasyRebornAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out),
-				new ItemStack(FoodListMFR.BURNT_FOOD), mint, maxt, time, burn_time, true, burn);
+				new ItemStack(MineFantasyItems.BURNT_FOOD), mint, maxt, time, burn_time, true, burn);
 	}
 
 	/*
@@ -83,25 +82,25 @@ public class CookingRecipes {
 	}
 
 	private static void smeltFood() {
-		GameRegistry.addSmelting(FoodListMFR.HORSE_RAW, new ItemStack(FoodListMFR.HORSE_COOKED), 0.2F);
-		GameRegistry.addSmelting(FoodListMFR.WOLF_RAW, new ItemStack(FoodListMFR.WOLF_COOKED), 0.2F);
-		GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_COOKED), 0);
-		GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_STRIP_COOKED), 0);
-		GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_CHUNK_COOKED), 0);
-		GameRegistry.addSmelting(FoodListMFR.GENERIC_MEAT_MINCE_UNCOOKED, new ItemStack(FoodListMFR.GENERIC_MEAT_MINCE_COOKED), 0);
-		GameRegistry.addSmelting(FoodListMFR.BOWL_WATER_SALT, new ItemStack(FoodListMFR.SALT), 0);
-		GameRegistry.addSmelting(FoodListMFR.SAUSAGE_RAW, new ItemStack(FoodListMFR.SAUSAGE_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.HORSE_RAW, new ItemStack(MineFantasyItems.HORSE_COOKED), 0.2F);
+		GameRegistry.addSmelting(MineFantasyItems.WOLF_RAW, new ItemStack(MineFantasyItems.WOLF_COOKED), 0.2F);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_STRIP_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_CHUNK_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.BOWL_WATER_SALT, new ItemStack(MineFantasyItems.SALT), 0);
+		GameRegistry.addSmelting(MineFantasyItems.SAUSAGE_RAW, new ItemStack(MineFantasyItems.SAUSAGE_COOKED), 0);
 	}
 
 	private static void addCeramics() {
-		bakeCeramic(ComponentListMFR.CLAY_POT_UNCOOKED, ComponentListMFR.CLAY_POT, 1000, 5);
-		bakeCeramic(FoodListMFR.JUG_UNCOOKED, FoodListMFR.JUG_EMPTY, 1000, 5);
-		bakeCeramic(ComponentListMFR.PIE_TRAY_UNCOOKED, FoodListMFR.PIE_TRAY, 1000, 10);
-		bakeCeramic(ComponentListMFR.INGOT_MOULD_UNCOOKED, ComponentListMFR.INGOT_MOULD, 1000, 5);
-		bakeCeramic(ComponentListMFR.MINE_CASING_UNCOOKED, ComponentListMFR.MINE_CASING, 1000, 10);
-		bakeCeramic(ComponentListMFR.BOMB_CASING_UNCOOKED, ComponentListMFR.BOMB_CASING, 1000, 10);
+		bakeCeramic(MineFantasyItems.CLAY_POT_UNCOOKED, MineFantasyItems.CLAY_POT, 1000, 5);
+		bakeCeramic(MineFantasyItems.JUG_UNCOOKED, MineFantasyItems.JUG_EMPTY, 1000, 5);
+		bakeCeramic(MineFantasyItems.PIE_TRAY_UNCOOKED, MineFantasyItems.PIE_TRAY, 1000, 10);
+		bakeCeramic(MineFantasyItems.INGOT_MOULD_UNCOOKED, MineFantasyItems.INGOT_MOULD, 1000, 5);
+		bakeCeramic(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING, 1000, 10);
+		bakeCeramic(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING, 1000, 10);
 
-		bakeCeramic(ComponentListMFR.FIRECLAY_BRICK, ComponentListMFR.STRONG_BRICK, 1500, 5);
+		bakeCeramic(MineFantasyItems.FIRECLAY_BRICK, MineFantasyItems.STRONG_BRICK, 1500, 5);
 	}
 
 	private static CookRecipe bakeCeramic(Item clay, Item ceramic, int temp, int time) {

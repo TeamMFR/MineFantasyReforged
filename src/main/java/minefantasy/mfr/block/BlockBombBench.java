@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.KnowledgeListMFR;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityBombBench;
@@ -61,7 +61,7 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 	 */
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (ResearchLogic.hasInfoUnlocked(player, KnowledgeListMFR.bombs)) {
+		if (ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.bombs)) {
 			if (world.isRemote)
 				player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
 			return false;
@@ -77,7 +77,7 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 
 	@Override
 	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
-		if (ResearchLogic.hasInfoUnlocked(user, KnowledgeListMFR.bombs)) {
+		if (ResearchLogic.hasInfoUnlocked(user, MineFantasyKnowledgeList.bombs)) {
 			TileEntityBombBench tile = (TileEntityBombBench) getTile(world, pos);
 			if (tile != null) {
 				tile.tryCraft(user, false);

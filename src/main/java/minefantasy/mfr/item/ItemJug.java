@@ -2,8 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.block.BlockComponent;
-import minefantasy.mfr.init.FoodListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
 import net.minecraft.block.Block;
@@ -112,7 +112,7 @@ public class ItemJug extends ItemComponentMFR {
 			world.playSound(player, player.getPosition(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
 			item.shrink(1);
 			EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ,
-					new ItemStack(FoodListMFR.JUG_WATER));
+					new ItemStack(MineFantasyItems.JUG_WATER));
 			world.spawnEntity(resultItem);
 		}
 	}
