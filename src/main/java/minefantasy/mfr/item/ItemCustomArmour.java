@@ -3,8 +3,8 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.init.CustomArmourListMFR;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.util.ArmourCalculator;
@@ -28,7 +28,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	private float ratingModifier = 1.0F;
 
 	public ItemCustomArmour(String craftDesign, String name, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
-		super(craftDesign + "_" + name, BaseMaterialMFR.IRON, AD, slot, craftDesign + "_" + tex, rarity);
+		super(craftDesign + "_" + name, MineFantasyMaterials.IRON, AD, slot, craftDesign + "_" + tex, rarity);
 		this.specialDesign = craftDesign;
 		canRepair = false;
 	}

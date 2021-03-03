@@ -3,8 +3,9 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.DragonforgedStyle;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.OrnateStyle;
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -24,7 +25,7 @@ public class BasicRecipesMF {
 
 		// TODO Replace with proper recipe JSON_FILE_EXT for each metal block
 
-		BaseMaterialMFR mat = BaseMaterialMFR.IRON;
+		BaseMaterial mat = MineFantasyMaterials.IRON;
 
 		TanningRecipe.addRecipe(ComponentListMFR.HIDE_SMALL, mat.craftTimeModifier * 2F, -1,
 				new ItemStack(Items.LEATHER));

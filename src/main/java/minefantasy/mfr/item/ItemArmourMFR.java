@@ -7,7 +7,7 @@ import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -35,10 +35,10 @@ import java.util.List;
 public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResistance {
 	@SideOnly(Side.CLIENT)
 	private static Object fullplate;
-	protected BaseMaterialMFR baseMaterial;
+	protected BaseMaterial baseMaterial;
 	private int itemRarity;
 
-	public ItemArmourMFR(String name, BaseMaterialMFR material, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
 		super(name, material.getArmourConversion(), AD, slot, tex);
 		baseMaterial = material;
 		setRegistryName(name);
@@ -49,7 +49,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		itemRarity = rarity;
 	}
 
-	public ItemArmourMFR(String name, BaseMaterialMFR material, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity, float customBulk) {
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity, float customBulk) {
 		this(name, material, AD, slot, tex, rarity);
 		this.suitBulk = customBulk;
 	}
@@ -94,7 +94,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 
 	@Override
 	public float getBaseResistance(ItemStack item, DamageSource source) {
-		if (baseMaterial == BaseMaterialMFR.getMaterial("ender") && source.getImmediateSource() != null
+		if (baseMaterial == BaseMaterial.getMaterial("ender") && source.getImmediateSource() != null
 				&& source.getImmediateSource() instanceof EntityEnderPearl) {
 			return 100F;
 		}
@@ -122,7 +122,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 
 	@Override
 	protected boolean isUnbreakable() {
-		return baseMaterial == BaseMaterialMFR.getMaterial("ender");
+		return baseMaterial == BaseMaterial.getMaterial("ender");
 	}
 
 	@Override

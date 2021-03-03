@@ -5,16 +5,18 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.mechanics.knowledge.InformationPage;
+import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
 import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.recipe.ICarpenterRecipe;
 import minefantasy.mfr.recipe.RecipeHelper;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 
@@ -204,11 +206,11 @@ public class KnowledgeListMFR {
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 40);
 
 		smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, ComponentListMFR.COPPER_INGOT, (InformationBase) null))
-				.registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier(MetalMaterial.COPPER));
+				.registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier(MineFantasyMaterials.Names.COPPER));
 		smeltBronze = (new InformationBase("smeltBronze", 1, 2, 2, ComponentListMFR.BRONZE_INGOT, crucible)).registerStat()
-				.setPage(artisanry).addSkill(Skill.ARTISANRY, 5).setDescriptValues(getMetalTier(MetalMaterial.BRONZE));
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 5).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BRONZE));
 		smeltIron = (new InformationBase("smeltIron", 1, 4, 1, Items.IRON_INGOT, null)).registerStat()
-				.setPage(artisanry).addSkill(Skill.ARTISANRY, 10).setDescriptValues(getMetalTier(MetalMaterial.IRON));
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 10).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.IRON));
 		coalflux = (new InformationBase("coalflux", 1, 6, 2, ComponentListMFR.COAL_FLUX, smeltIron)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 15);
 		blastfurn = (new InformationBase("blastfurn", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smeltIron))
@@ -218,42 +220,42 @@ public class KnowledgeListMFR {
 		smeltPig = (new InformationBase("smeltPig", 3, 3, 0, ComponentListMFR.PIG_IRON_INGOT, blastfurn)).registerStat()
 				.setPage(artisanry).setUnlocked().addSkill(Skill.ARTISANRY, 25);
 		smeltSteel = (new InformationBase("smeltSteel", 4, 5, 1, ComponentListMFR.STEEL_INGOT, smeltPig)).registerStat()
-				.setPage(artisanry).addSkill(Skill.ARTISANRY, 25).setDescriptValues(getMetalTier(MetalMaterial.STEEL));
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 25).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.STEEL));
 		encrusted = (new InformationBase("smeltEncrusted", 6, 5, 2, ComponentListMFR.DIAMOND_SHARDS, smeltSteel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 35)
-				.setDescriptValues(getMetalTier(MetalMaterial.ENCRUSTED));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ENCRUSTED));
 		obsidian = (new InformationBase("smeltObsidian", 6, 3, 2, ComponentListMFR.OBSIDIAN_INGOT, smeltSteel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 40)
-				.setDescriptValues(getMetalTier(MetalMaterial.OBSIDIAN));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.OBSIDIAN));
 		smeltBlackSteel = (new InformationBase("smeltBlackSteel", 4, 7, 3, ComponentListMFR.BLACK_STEEL_INGOT, smeltSteel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50)
-				.setDescriptValues(getMetalTier(MetalMaterial.BLACK_STEEL));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BLACK_STEEL));
 		smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, ComponentListMFR.DRAGON_HEART, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50);
 		smeltRedSteel = (new InformationBase("smeltRedSteel", 3, 9, 5, ComponentListMFR.RED_STEEL_INGOT, smeltBlackSteel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
-				.setDescriptValues(getMetalTier(MetalMaterial.RED_STEEL));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.RED_STEEL));
 		smeltBlueSteel = (new InformationBase("smeltBlueSteel", 5, 9, 5, ComponentListMFR.BLUE_STEEL_INGOT, smeltBlackSteel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
-				.setDescriptValues(getMetalTier(MetalMaterial.BLUE_STEEL));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BLUE_STEEL));
 		smeltMithril = (new InformationBase("smeltMithril", 5, 12, 3, ComponentListMFR.MITHRIL_INGOT, null)).registerStat()
-				.setPage(artisanry).addSkill(Skill.ARTISANRY, 75).setDescriptValues(getMetalTier(MetalMaterial.MITHRIL));
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 75).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.MITHRIL));
 		smeltAdamant = (new InformationBase("smeltAdamantium", 3, 12, 3, ComponentListMFR.ADAMANTIUM_INGOT, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 75)
-				.setDescriptValues(getMetalTier(MetalMaterial.ADAMANTIUM));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ADAMANTIUM));
 
 		smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(ComponentListMFR.ANCIENT_JEWEL_MASTER, 1, 3),
 				(InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY,
 				100);
 		smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, ComponentListMFR.IGNOTUMITE_INGOT, smeltMaster))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
-				.setDescriptValues(getMetalTier(MetalMaterial.IGNOTUMITE));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.IGNOTUMITE));
 		smeltMithium = (new InformationBase("smeltMithium", 6, 15, 3, ComponentListMFR.MITHIUM_INGOT, smeltMaster))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
-				.setDescriptValues(getMetalTier(MetalMaterial.MITHIUM));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.MITHIUM));
 		smeltEnderforge = (new InformationBase("smeltEnder", 4, 16, 3, ComponentListMFR.ENDER_INGOT, smeltMaster))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
-				.setDescriptValues(getMetalTier(MetalMaterial.ENDER));
+				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ENDER));
 
 		craftHCCTools = (new InformationBase("craftHCCTools", -1, -2, 0, ToolListMFR.STONE_PICK, (InformationBase) null))
 				.registerStat().setPage(artisanry).setUnlocked();
@@ -408,11 +410,11 @@ public class KnowledgeListMFR {
 		//                .setPage(construction).setUnlocked();
 		tool_rack = (new InformationBase("tool_rack", 2, 2, 0, MineFantasyBlocks.TOOL_RACK_WOOD, (InformationBase) null))
 				.registerStat().setPage(construction).setUnlocked();
-		food_box = (new InformationBase("food_box", 2, 4, 1, (MineFantasyBlocks.FOOD_BOX_BASIC).construct(WoodMaterial.OAK_WOOD), tool_rack)).registerStat()
+		food_box = (new InformationBase("food_box", 2, 4, 1, (MineFantasyBlocks.FOOD_BOX_BASIC).construct(MineFantasyMaterials.Names.OAK_WOOD), tool_rack)).registerStat()
 				.setPage(construction).setUnlocked();
-		ammo_box = (new InformationBase("ammo_box", 4, 4, 1, (MineFantasyBlocks.AMMO_BOX_BASIC).construct(WoodMaterial.OAK_WOOD), food_box)).registerStat()
+		ammo_box = (new InformationBase("ammo_box", 4, 4, 1, (MineFantasyBlocks.AMMO_BOX_BASIC).construct(MineFantasyMaterials.Names.OAK_WOOD), food_box)).registerStat()
 				.setPage(construction).addSkill(Skill.CONSTRUCTION, 15);
-		big_box = (new InformationBase("big_box", 6, 4, 1, (MineFantasyBlocks.CRATE_BASIC).construct(WoodMaterial.OAK_WOOD), ammo_box)).registerStat()
+		big_box = (new InformationBase("big_box", 6, 4, 1, (MineFantasyBlocks.CRATE_BASIC).construct(MineFantasyMaterials.Names.OAK_WOOD), ammo_box)).registerStat()
 				.setPage(construction).addSkill(Skill.CONSTRUCTION, 25);
 
 		// COOKING -The Cheapest
@@ -505,5 +507,145 @@ public class KnowledgeListMFR {
 			return mat.crafterTier;
 
 		return "?";
+	}
+
+	public static class ArtefactListMFR {
+		public static void init() {
+			addArtisanry();
+			addConstruction();
+			addProvisioning();
+			addEngineering();
+		}
+
+		private static void addEngineering() {
+			add(blackpowder, ComponentListMFR.NITRE, ComponentListMFR.SULFUR, Items.COAL, Items.GUNPOWDER);
+			add(advblackpowder, Items.GLOWSTONE_DUST, Items.REDSTONE);
+			add(tungsten, ComponentListMFR.ORE_TUNGSTEN, MineFantasyBlocks.TUNGSTEN_ORE);
+			add(coke, Items.COAL, Items.REDSTONE);
+			add(spyglass, ComponentListMFR.BRONZE_GEARS, Blocks.GLASS);
+			add(parachute, Items.FEATHER, Blocks.WOOL);
+			add(syringe, Items.POTIONITEM);
+			add(engTanner, ComponentListMFR.BRONZE_GEARS);
+			add(bombarrow, Items.FEATHER, ComponentListMFR.BLACKPOWDER);
+			add(bpress, ComponentListMFR.BRONZE_GEARS, Blocks.LEVER);
+			add(bombs, ComponentListMFR.BLACKPOWDER, Items.REDSTONE, Items.STRING);
+			add(shrapnel, Items.FLINT);
+			add(firebomb, ComponentListMFR.DRAGON_HEART, Items.MAGMA_CREAM);
+			add(stickybomb, Items.SLIME_BALL);
+			add(mineCeramic, ComponentListMFR.BLACKPOWDER, Blocks.STONE_PRESSURE_PLATE);
+			add(bombIron, Items.IRON_INGOT);
+			add(mineIron, Items.IRON_INGOT);
+			add(bombObsidian, Blocks.OBSIDIAN);
+			add(mineObsidian, Blocks.OBSIDIAN);
+			add(bombCrystal, Items.DIAMOND);
+			add(mineCrystal, Items.DIAMOND);
+
+			add(crossbows, Items.STRING, ComponentListMFR.TIMBER, Blocks.LEVER);
+			add(crossShaftAdvanced, ComponentListMFR.TUNGSTEN_GEARS);
+			add(crossHeadAdvanced, ComponentListMFR.TUNGSTEN_GEARS);
+			add(crossAmmo, ComponentListMFR.TUNGSTEN_GEARS);
+			add(crossScope, ToolListMFR.SPYGLASS);
+			add(crossBayonet, CustomToolListMFR.STANDARD_DAGGER);
+		}
+
+		private static void addProvisioning() {
+			add(jerky, FoodListMFR.GENERIC_MEAT_UNCOOKED);
+			add(saussage, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.GUTS);
+			add(sandwitch, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.CHEESE_SLICE, Items.BREAD);
+			add(sandwitch_big, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.CHEESE_SLICE, Items.BREAD);
+
+			add(meatpie, FoodListMFR.GENERIC_MEAT_UNCOOKED, FoodListMFR.PASTRY);
+			add(shepardpie, FoodListMFR.GENERIC_MEAT_UNCOOKED, Items.POTATO, FoodListMFR.PASTRY);
+			add(berrypie, FoodListMFR.BERRIES, FoodListMFR.PASTRY);
+			add(applepie, Items.APPLE, FoodListMFR.PASTRY);
+
+			add(sweetroll, Items.SUGAR, FoodListMFR.BERRIES, FoodListMFR.SUGAR_POT);
+			add(eclair, Items.EGG, new ItemStack(Items.DYE, 1, 3), FoodListMFR.PASTRY);
+			add(cheeseroll, Items.BREAD, FoodListMFR.CHEESE_SLICE);
+
+			add(cake, FoodListMFR.FLOUR, Items.EGG);
+			add(carrotcake, FoodListMFR.FLOUR, Items.EGG, Items.CARROT);
+			add(chococake, FoodListMFR.FLOUR, Items.EGG, new ItemStack(Items.DYE, 1, 3));
+			add(bfcake, FoodListMFR.FLOUR, Items.EGG, new ItemStack(Items.DYE, 1, 3),
+					FoodListMFR.BERRIES_JUICY);
+
+			add(bandageadv, Blocks.WOOL, Items.LEATHER);
+		}
+
+		private static void addConstruction() {
+			add(refined_planks, ComponentListMFR.NAIL);
+			add(clay_wall, Items.CLAY_BALL, ComponentListMFR.NAIL);
+			add(paint_brush, Blocks.WOOL);
+			add(decorated_stone, Items.IRON_INGOT, MineFantasyBlocks.REINFORCED_STONE);
+			add(bed_roll, Items.BED);
+			add(ammo_box, Blocks.CHEST);
+			add(big_box, Blocks.CHEST);
+
+		}
+
+		private static void addArtisanry() {
+			for (ItemStack copper : OreDictionary.getOres("ingotCopper")) {
+				for (ItemStack tin : OreDictionary.getOres("ingotTin")) {
+					add(smeltBronze, copper, tin);
+				}
+			}
+			add(coalflux, Items.COAL, ComponentListMFR.FLUX);
+			add(smeltIron, Blocks.IRON_ORE);
+			add(crucible2, ComponentListMFR.FIRECLAY);
+			add(blastfurn, Items.IRON_INGOT, Blocks.IRON_ORE, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY,
+					MineFantasyBlocks.LIMESTONE, ComponentListMFR.KAOLINITE);
+			add(bigfurn, Items.IRON_INGOT, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY, ComponentListMFR.KAOLINITE,
+					Items.COAL);
+			for (ItemStack pig : OreDictionary.getOres("ingotPigIron")) {
+				add(smeltSteel, pig);
+			}
+			for (ItemStack steel : OreDictionary.getOres("ingotSteel")) {
+				add(encrusted, steel, Items.DIAMOND);
+				add(obsidian, steel, Blocks.OBSIDIAN);
+				for (ItemStack bronze : OreDictionary.getOres("ingotBronze")) {
+					add(smeltBlackSteel, Blocks.OBSIDIAN, bronze, steel);
+				}
+			}
+			for (ItemStack black : OreDictionary.getOres("ingotBlackSteel")) {
+				for (ItemStack silver : OreDictionary.getOres("ingotSilver")) {
+					add(smeltBlueSteel, Items.BLAZE_POWDER, silver, black, new ItemStack(Items.DYE, 1, 4),
+							ComponentListMFR.FLUX_STRONG);
+				}
+				add(smeltRedSteel, Items.BLAZE_POWDER, Items.GOLD_INGOT, Items.REDSTONE, black,
+						ComponentListMFR.FLUX_STRONG);
+			}
+
+			for (ItemStack silver : OreDictionary.getOres("ingotSilver")) {
+				add(smeltMithril, MineFantasyBlocks.MYTHIC_ORE, silver, ComponentListMFR.ANCIENT_JEWEL_MITHRIL);
+			}
+			add(smeltAdamant, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT, ComponentListMFR.ANCIENT_JEWEL_ADAMANT);
+			add(smeltMaster, ComponentListMFR.ANCIENT_JEWEL_ADAMANT, ComponentListMFR.ANCIENT_JEWEL_MITHRIL, ComponentListMFR.ANCIENT_JEWEL_MASTER);
+
+			for (ItemStack mithril : OreDictionary.getOres("ingotMithril")) {
+				add(smeltMithium, mithril, Items.GHAST_TEAR, Items.DIAMOND, ComponentListMFR.ANCIENT_JEWEL_ADAMANT);
+				for (ItemStack adamant : OreDictionary.getOres("ingotAdamantium")) {
+					add(smeltIgnotumite, adamant, Items.EMERALD, Items.BLAZE_POWDER);
+					add(smeltEnderforge, adamant, mithril, Items.ENDER_PEARL);
+				}
+			}
+			add(craftArmourMedium, Items.LEATHER);
+			add(craftArmourHeavy, Items.LEATHER, Blocks.WOOL, Items.FEATHER);
+			add(smeltDragonforge, ComponentListMFR.DRAGON_HEART);
+
+			add(craftOrnate, new ItemStack(Items.DYE, 1, 4));
+
+			add(arrowsBodkin, Items.FEATHER);
+			add(arrowsBroad, Items.FEATHER, Items.FLINT);
+
+			add(repair_basic, Items.LEATHER, Items.FLINT, ComponentListMFR.NAIL);
+			add(repair_advanced, MineFantasyBlocks.REPAIR_BASIC, Items.SLIME_BALL, Items.STRING);
+			add(repair_ornate, Items.DIAMOND, Items.GOLD_INGOT, MineFantasyBlocks.REPAIR_ADVANCED);
+		}
+
+		private static void add(InformationBase info, Object... artifacts) {
+			for (Object artifact : artifacts) {
+				ResearchArtefacts.addArtefact(artifact, info);
+			}
+		}
 	}
 }

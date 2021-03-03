@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -15,10 +15,10 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class BlockMetalBarsMF extends BlockPane {
-	public BaseMaterialMFR material;
+	public BaseMaterial material;
 	private Random rand = new Random();
 
-	public BlockMetalBarsMF(BaseMaterialMFR material) {
+	public BlockMetalBarsMF(BaseMaterial material) {
 		super(Material.IRON, true);
 		String name = material.name.toLowerCase() + "_bars";
 

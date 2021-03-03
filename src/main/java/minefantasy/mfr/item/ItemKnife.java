@@ -7,8 +7,8 @@ import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
@@ -217,7 +217,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
+					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}
 		} else {

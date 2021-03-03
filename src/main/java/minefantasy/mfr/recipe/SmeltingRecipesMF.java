@@ -7,7 +7,7 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.recipe.refine.BloomRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -18,25 +18,25 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class SmeltingRecipesMF {
 	public static void init() {
-		ItemStack copper = ComponentListMFR.bar(MetalMaterial.COPPER);
-		ItemStack tin = ComponentListMFR.bar(MetalMaterial.TIN);
-		ItemStack bronze = ComponentListMFR.bar(MetalMaterial.BRONZE);
-		ItemStack iron = ComponentListMFR.bar(MetalMaterial.IRON);
-		ItemStack pigiron = ComponentListMFR.bar(MetalMaterial.PIG_IRON);
-		ItemStack steel = ComponentListMFR.bar(MetalMaterial.STEEL);
-		ItemStack diamond = ComponentListMFR.bar(MetalMaterial.ENCRUSTED);
-		ItemStack tungsten = ComponentListMFR.bar(MetalMaterial.TUNGSTEN);
-		ItemStack obsidian = ComponentListMFR.bar(MetalMaterial.OBSIDIAN);
-		ItemStack black = ComponentListMFR.bar(MetalMaterial.BLACK_STEEL);
-		ItemStack red = ComponentListMFR.bar(MetalMaterial.RED_STEEL);
-		ItemStack blue = ComponentListMFR.bar(MetalMaterial.BLUE_STEEL);
-		ItemStack gold = ComponentListMFR.bar(MetalMaterial.GOLD);
-		ItemStack silver = ComponentListMFR.bar(MetalMaterial.SILVER);
-		ItemStack mithril = ComponentListMFR.bar(MetalMaterial.MITHRIL);
-		ItemStack adamant = ComponentListMFR.bar(MetalMaterial.ADAMANTIUM);
-		ItemStack mithium = ComponentListMFR.bar(MetalMaterial.MITHIUM);
-		ItemStack ignotumite = ComponentListMFR.bar(MetalMaterial.IGNOTUMITE);
-		ItemStack enderforge = ComponentListMFR.bar(MetalMaterial.ENDER);
+		ItemStack copper = ComponentListMFR.bar(MineFantasyMaterials.Names.COPPER);
+		ItemStack tin = ComponentListMFR.bar(MineFantasyMaterials.Names.TIN);
+		ItemStack bronze = ComponentListMFR.bar(MineFantasyMaterials.Names.BRONZE);
+		ItemStack iron = ComponentListMFR.bar(MineFantasyMaterials.Names.IRON);
+		ItemStack pigiron = ComponentListMFR.bar(MineFantasyMaterials.Names.PIG_IRON);
+		ItemStack steel = ComponentListMFR.bar(MineFantasyMaterials.Names.STEEL);
+		ItemStack diamond = ComponentListMFR.bar(MineFantasyMaterials.Names.ENCRUSTED);
+		ItemStack tungsten = ComponentListMFR.bar(MineFantasyMaterials.Names.TUNGSTEN);
+		ItemStack obsidian = ComponentListMFR.bar(MineFantasyMaterials.Names.OBSIDIAN);
+		ItemStack black = ComponentListMFR.bar(MineFantasyMaterials.Names.BLACK_STEEL);
+		ItemStack red = ComponentListMFR.bar(MineFantasyMaterials.Names.RED_STEEL);
+		ItemStack blue = ComponentListMFR.bar(MineFantasyMaterials.Names.BLUE_STEEL);
+		ItemStack gold = ComponentListMFR.bar(MineFantasyMaterials.Names.GOLD);
+		ItemStack silver = ComponentListMFR.bar(MineFantasyMaterials.Names.SILVER);
+		ItemStack mithril = ComponentListMFR.bar(MineFantasyMaterials.Names.MITHRIL);
+		ItemStack adamant = ComponentListMFR.bar(MineFantasyMaterials.Names.ADAMANTIUM);
+		ItemStack mithium = ComponentListMFR.bar(MineFantasyMaterials.Names.MITHIUM);
+		ItemStack ignotumite = ComponentListMFR.bar(MineFantasyMaterials.Names.IGNOTUMITE);
+		ItemStack enderforge = ComponentListMFR.bar(MineFantasyMaterials.Names.ENDER);
 
 		//        KnowledgeListMFR.reStone = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyBlocks.REINFORCED_STONE, 4), 1,
 		//                new Object[]{Blocks.STONE, Blocks.STONE, Blocks.STONE, Blocks.STONE, ComponentListMFR.FIRECLAY, iron,

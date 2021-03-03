@@ -4,7 +4,7 @@ import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemTongs;
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -21,11 +21,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
-	public BaseMaterialMFR material;
+	public BaseMaterial material;
 	private int tier;
 	private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
 
-	public BlockAnvilMF(BaseMaterialMFR material) {
+	public BlockAnvilMF(BaseMaterial material) {
 		super(Material.ANVIL);
 		this.material = material;
 		String name = "anvil_" + material.name;

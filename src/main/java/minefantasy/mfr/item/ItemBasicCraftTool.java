@@ -6,8 +6,8 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -91,9 +91,9 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 			return;
 		}
 		if (isCustom) {
-			items.add(this.construct(WoodMaterial.OAK_WOOD));
-			items.add(this.construct(WoodMaterial.IRONBARK_WOOD));
-			items.add(this.construct(WoodMaterial.EBONY_WOOD));
+			items.add(this.construct(MineFantasyMaterials.Names.OAK_WOOD));
+			items.add(this.construct(MineFantasyMaterials.Names.IRONBARK_WOOD));
+			items.add(this.construct(MineFantasyMaterials.Names.EBONY_WOOD));
 		} else {
 			super.getSubItems(tab, items);
 		}

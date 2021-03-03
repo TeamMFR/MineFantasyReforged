@@ -5,7 +5,7 @@ import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.MFArrowDispenser;
@@ -87,8 +87,8 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 	}
 
 	private ToolMaterial convertMaterial(ToolMaterial material) {
-		if (material == BaseMaterialMFR.getMaterial("ornate").getToolConversion()) {
-			return BaseMaterialMFR.getMaterial("silver").getToolConversion();
+		if (material == BaseMaterial.getMaterial("ornate").getToolMaterial()) {
+			return BaseMaterial.getMaterial("silver").getToolMaterial();
 		}
 		return material;
 	}
@@ -124,7 +124,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 
 	@Override
 	public void onHitEntity(Entity arrowInstance, Entity shooter, Entity hit, float damage) {
-		if (arrowMat == BaseMaterialMFR.getMaterial("dragonforge").getToolConversion()) {
+		if (arrowMat == BaseMaterial.getMaterial("dragonforge").getToolMaterial()) {
 			hit.setFire((int) (damage * (arrowInstance.isBurning() ? 2.0F : 1.0F)));
 		}
 	}

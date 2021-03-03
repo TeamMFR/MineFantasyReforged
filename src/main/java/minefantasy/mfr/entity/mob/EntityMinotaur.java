@@ -8,12 +8,12 @@ import minefantasy.mfr.entity.mob.ai.AI_MinotaurFindTarget;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemWeaponMFR;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
@@ -121,7 +121,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	public void setLoadout() {
 		String tier = getMinotaur().weaponTier;
 		if (tier != null) {
-			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getRandomWeapon().construct(tier, WoodMaterial.OAK_WOOD));
+			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getRandomWeapon().construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		}
 	}
 

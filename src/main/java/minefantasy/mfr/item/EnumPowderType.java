@@ -1,7 +1,8 @@
 package minefantasy.mfr.item;
 
 public enum EnumPowderType {
-	BLACKPOWDER("black_powder", 1.0F, 1.0F), ADVANCED_BLACK_POWDER("advanced_black_powder", 1.5F, 1.0F);
+	BLACKPOWDER("black_powder", 1.0F, 1.0F),
+	ADVANCED_BLACK_POWDER("advanced_black_powder", 1.5F, 1.0F);
 
 	public String name;
 	public float damageModifier;

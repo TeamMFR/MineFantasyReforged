@@ -1,7 +1,9 @@
 package minefantasy.mfr.item;
 
 public enum EnumFillingType {
-	BASIC("basic", 24F, 1.0F), SHRAPNEL("shrapnel", 32F, 1.0F), FIRE("fire", 40F, 1.0F);
+	BASIC("basic", 24F, 1.0F),
+	SHRAPNEL("shrapnel", 32F, 1.0F),
+	FIRE("fire", 40F, 1.0F);
 
 	public String name;
 	public float damage;

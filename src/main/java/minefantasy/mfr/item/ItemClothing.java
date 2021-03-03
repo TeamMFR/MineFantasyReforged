@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -19,7 +19,7 @@ public class ItemClothing extends ItemArmourMFR {
 	/**
 	 * @param piece 0head, 1body, 2legs, 3boots
 	 */
-	public ItemClothing(String name, BaseMaterialMFR material, EntityEquipmentSlot piece, String tex, int rarity) {
+	public ItemClothing(String name, BaseMaterial material, EntityEquipmentSlot piece, String tex, int rarity) {
 		super(name, material, ArmourDesign.CLOTH, piece, tex, rarity);
 	}
 

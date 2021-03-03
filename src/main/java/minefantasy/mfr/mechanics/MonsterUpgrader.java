@@ -3,11 +3,10 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemCustomArmour;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.MetalMaterial;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -42,16 +41,16 @@ public class MonsterUpgrader {
 		if (ConfigHardcore.upgradeZombieWep) {
 			if (mob instanceof AbstractSkeleton) {
 				if ((mob) instanceof EntityWitherSkeleton) {
-					giveEntityWeapon(mob, MetalMaterial.ENCRUSTED, random.nextInt(8));
+					giveEntityWeapon(mob, MineFantasyMaterials.Names.ENCRUSTED, random.nextInt(8));
 				} else if (CombatMechanics.swordSkeleton && random.nextInt(3) == 0) {
 					mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-							CustomToolListMFR.STANDARD_SWORD.construct(MetalMaterial.BRONZE, WoodMaterial.OAK_WOOD));
+							CustomToolListMFR.STANDARD_SWORD.construct(MineFantasyMaterials.Names.BRONZE, MineFantasyMaterials.Names.OAK_WOOD));
 					((EntitySkeleton) mob).setCombatTask();
 				}
 			} else if (mob instanceof EntityZombie) {
-				String tier = MetalMaterial.IRON;
+				String tier = MineFantasyMaterials.Names.IRON;
 				if (mob instanceof EntityPigZombie) {
-					tier = MetalMaterial.OBSIDIAN;
+					tier = MineFantasyMaterials.Names.OBSIDIAN;
 					giveEntityWeapon(mob, tier, random.nextInt(7));
 					if (mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE) != null) {
 						mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
@@ -100,7 +99,7 @@ public class MonsterUpgrader {
 		} else {
 			if (!mob.getHeldItemMainhand().isEmpty()
 					&& mob.getHeldItem(EnumHand.MAIN_HAND).getItem() == Items.IRON_SWORD) {
-				giveEntityWeapon(mob, MetalMaterial.IRON, 0);
+				giveEntityWeapon(mob, MineFantasyMaterials.Names.IRON, 0);
 			}
 		}
 		if (mob instanceof EntityPigZombie) {
@@ -111,15 +110,15 @@ public class MonsterUpgrader {
 	private void createZombieKnight(EntityZombie mob) {
 		if (mob.isChild())
 			return;
-		String tier = MetalMaterial.STEEL;
+		String tier = MineFantasyMaterials.Names.STEEL;
 		int lootId = 0;
 		if (mob instanceof EntityPigZombie) {
 			lootId = 1;
-			tier = MetalMaterial.ENCRUSTED;
+			tier = MineFantasyMaterials.Names.ENCRUSTED;
 		}
 		mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 		mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-				CustomToolListMFR.STANDARD_GREATSWORD.construct(tier, WoodMaterial.OAK_WOOD));
+				CustomToolListMFR.STANDARD_GREATSWORD.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		setArmour(mob, 1, tier);
 		mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
 		mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -161,15 +160,15 @@ public class MonsterUpgrader {
 	private void createZombieBrute(EntityZombie mob) {
 		if (mob.isChild())
 			return;
-		String tier = MetalMaterial.IRON;
+		String tier = MineFantasyMaterials.Names.IRON;
 		int lootId = 0;
 		if (mob instanceof EntityPigZombie) {
 			lootId = 1;
-			tier = MetalMaterial.ENCRUSTED;
+			tier = MineFantasyMaterials.Names.ENCRUSTED;
 		}
 		mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 		mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-				CustomToolListMFR.STANDARD_WARAXE.construct(tier, WoodMaterial.OAK_WOOD));
+				CustomToolListMFR.STANDARD_WARAXE.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		setArmour(mob, 0, tier);
 		mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35F);
 		mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -197,7 +196,7 @@ public class MonsterUpgrader {
 		}
 
 		if (mob != null && weapon != null) {
-			mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, weapon.construct(tier, WoodMaterial.OAK_WOOD));
+			mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, weapon.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		}
 	}
 

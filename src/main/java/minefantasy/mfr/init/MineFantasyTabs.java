@@ -1,7 +1,5 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.material.MetalMaterial;
-import minefantasy.mfr.material.WoodMaterial;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,23 +33,23 @@ public final class MineFantasyTabs extends CreativeTabs {
 	public ItemStack getIconItemStack() {
 		switch (type) {
 			case 1:
-				return CustomToolListMFR.STANDARD_AXE.construct(MetalMaterial.STEEL, WoodMaterial.OAK_WOOD);
+				return CustomToolListMFR.STANDARD_AXE.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 2:
-				return (CustomToolListMFR.STANDARD_SWORD).construct(MetalMaterial.STEEL, WoodMaterial.OAK_WOOD);
+				return (CustomToolListMFR.STANDARD_SWORD).construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 3:
-				return CustomArmourListMFR.STANDARD_PLATE_HELMET.construct(MetalMaterial.STEEL);
+				return CustomArmourListMFR.STANDARD_PLATE_HELMET.construct(MineFantasyMaterials.Names.STEEL);
 			case 4:
-				return CustomToolListMFR.STANDARD_BOW.construct(MetalMaterial.STEEL, WoodMaterial.OAK_WOOD);
+				return CustomToolListMFR.STANDARD_BOW.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 5:
 				return new ItemStack(MineFantasyBlocks.ANVIL_IRON);
 			case 6:
 				return ToolListMFR.BOMB_CUSTOM.createBomb("ceramic", "basic", "basic", "black_powder", 1);
 			case 7:
-				return ComponentListMFR.TIMBER.construct(WoodMaterial.OAK_WOOD);
+				return ComponentListMFR.TIMBER.construct(MineFantasyMaterials.Names.OAK_WOOD);
 			case 8:
-				return CustomToolListMFR.STANDARD_HANDPICK.construct(MetalMaterial.STEEL, WoodMaterial.OAK_WOOD);
+				return CustomToolListMFR.STANDARD_HANDPICK.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 9:
-				return CustomToolListMFR.STANDARD_HAMMER.construct(MetalMaterial.STEEL, WoodMaterial.OAK_WOOD);
+				return CustomToolListMFR.STANDARD_HAMMER.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
 			case 10:
 				return new ItemStack(MineFantasyBlocks.COPPER_ORE);
 			case 11:

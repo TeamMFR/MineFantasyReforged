@@ -19,7 +19,6 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.init.ArtefactListMFR;
 import minefantasy.mfr.init.ComponentListMFR;
 import minefantasy.mfr.init.CustomArmourListMFR;
 import minefantasy.mfr.init.CustomToolListMFR;
@@ -29,11 +28,10 @@ import minefantasy.mfr.init.KnowledgeListMFR;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.OreDictListMFR;
 import minefantasy.mfr.init.OrnateStyle;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.material.BaseMaterialMFR;
-import minefantasy.mfr.material.LeatherMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
@@ -123,10 +121,10 @@ public class MineFantasyReborn {
 		MineFantasyRebornAPI.isInDebugMode = isDebug();
 		MineFantasyReborn.LOG.info("API Debug mode updated: " + MineFantasyRebornAPI.isInDebugMode);
 
-		BaseMaterialMFR.init();
+		MineFantasyMaterials.initBaseMaterials();
 		WoodMaterialRegistry.INSTANCE.preInit();
 		MetalMaterialRegistry.INSTANCE.preInit();
-		LeatherMaterial.init();
+		MineFantasyMaterials.initLeatherMaterials();
 
 		ComponentListMFR.init();
 		ToolListMFR.init();
@@ -190,7 +188,7 @@ public class MineFantasyReborn {
 		}
 
 		KnowledgeListMFR.init();
-		ArtefactListMFR.init();
+		KnowledgeListMFR.ArtefactListMFR.init();
 		BasicRecipesMF.init();
 
 		MetalMaterial.addHeatables();

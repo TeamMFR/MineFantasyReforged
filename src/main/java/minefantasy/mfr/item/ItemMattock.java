@@ -5,9 +5,9 @@ import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -182,7 +182,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
+					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}
 		} else {

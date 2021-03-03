@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.material.BaseMaterialMFR;
+import minefantasy.mfr.material.BaseMaterial;
 import net.minecraft.block.BlockRailPowered;
 import net.minecraft.block.SoundType;
 import net.minecraft.entity.item.EntityMinecart;
@@ -8,14 +8,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class BlockPowRailMF extends BlockRailPowered {
-	private BaseMaterialMFR baseMat;
+	private BaseMaterial baseMat;
 	private boolean isPowered = true;
 
-	public BlockPowRailMF(BaseMaterialMFR material) {
+	public BlockPowRailMF(BaseMaterial material) {
 		this(material, material.name.toLowerCase());
 	}
 
-	public BlockPowRailMF(BaseMaterialMFR material, String type) {
+	public BlockPowRailMF(BaseMaterial material, String type) {
 		super();
 		String name = type + "_rail";
 

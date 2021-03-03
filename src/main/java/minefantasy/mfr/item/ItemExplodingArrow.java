@@ -3,9 +3,9 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.ComponentListMFR;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.material.BaseMaterialMFR;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage {
 
 	public ItemExplodingArrow() {
-		super("exploding_arrow", 1, BaseMaterialMFR.IRON.getToolConversion(), ArrowType.EXPLOSIVE);
+		super("exploding_arrow", 1, MineFantasyMaterials.IRON.getToolMaterial(), ArrowType.EXPLOSIVE);
 		setCreativeTab(MineFantasyTabs.tabGadget);
 		setMaxStackSize(16);
 	}

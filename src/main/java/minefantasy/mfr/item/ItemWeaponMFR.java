@@ -20,12 +20,11 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.init.ToolListMFR;
-import minefantasy.mfr.material.BaseMaterialMFR;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -383,7 +382,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
 			return true;
 		}
-		if (material == BaseMaterialMFR.STONE.getToolConversion()) {
+		if (material == MineFantasyMaterials.STONE.getToolMaterial()) {
 			blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.5F, true);
 			return true;
 		}
@@ -504,7 +503,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
-					items.add(this.construct(customMat.name, WoodMaterial.OAK_WOOD));
+					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}
 			return;
