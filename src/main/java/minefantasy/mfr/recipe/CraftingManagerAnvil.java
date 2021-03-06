@@ -27,7 +27,7 @@ public class CraftingManagerAnvil {
 	/**
 	 * A list of all the recipes added
 	 */
-	public List recipes = new ArrayList();
+	public List recipes = new ArrayList<IRecipe>();
 
 	private CraftingManagerAnvil() {
 		Collections.sort(this.recipes, new RecipeSorterAnvil(this));
@@ -112,7 +112,7 @@ public class CraftingManagerAnvil {
 
 		IAnvilRecipe recipe;
 		if (recipeType == (byte) 1) {
-			recipe = new CustomToolRecipe(var5, var6, var15, result, tool, time, hammer, anvil, hot, research,
+			recipe = new CustomToolRecipeAnvil(var5, var6, var15, result, tool, time, hammer, anvil, hot, research,
 					skill);
 		} else {
 			recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, hot, research, skill);

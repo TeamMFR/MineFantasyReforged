@@ -5,19 +5,14 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.recipe.refine.PaintOilRecipe;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.SoundEvent;
 
 public class CarpenterRecipes {
-	public static final SoundEvent basic = SoundEvents.BLOCK_WOOD_STEP;
-	public static final SoundEvent spanner = MineFantasySounds.TWIST_BOLT;
 
 	public static void init() {
 

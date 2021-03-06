@@ -1,5 +1,6 @@
 package minefantasy.mfr.util;
 
+import minefantasy.mfr.constants.Tool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import org.lwjgl.opengl.GL11;
@@ -28,37 +29,37 @@ public class GuiHelper {
 	public static int[] getToolTypeIcon(String s) {
 		int width = 20;
 		int height = 20;
-		if (s.equalsIgnoreCase("hands")) {
+		if (s.equalsIgnoreCase(Tool.HANDS.getName())) {
 			return new int[] {0, 0};
 		}
-		if (s.equalsIgnoreCase("knife")) {
+		if (s.equalsIgnoreCase(Tool.KNIFE.getName())) {
 			return new int[] {width * 1, height * 0};
 		}
-		if (s.equalsIgnoreCase("saw")) {
+		if (s.equalsIgnoreCase(Tool.SAW.getName())) {
 			return new int[] {width * 2, height * 0};
 		}
-		if (s.equalsIgnoreCase("mallet")) {
+		if (s.equalsIgnoreCase(Tool.MALLET.getName())) {
 			return new int[] {width * 3, height * 0};
 		}
-		if (s.equalsIgnoreCase("needle")) {
+		if (s.equalsIgnoreCase(Tool.NEEDLE.getName())) {
 			return new int[] {width * 4, height * 0};
 		}
-		if (s.equalsIgnoreCase("hammer")) {
+		if (s.equalsIgnoreCase(Tool.HAMMER.getName())) {
 			return new int[] {width * 5, height * 0};
 		}
-		if (s.equalsIgnoreCase("hvyHammer")) {
+		if (s.equalsIgnoreCase(Tool.HEAVY_HAMMER.getName())) {
 			return new int[] {width * 6, height * 0};
 		}
-		if (s.equalsIgnoreCase("spoon")) {
+		if (s.equalsIgnoreCase(Tool.SPOON.getName())) {
 			return new int[] {width * 7, height * 0};
 		}
-		if (s.equalsIgnoreCase("shears")) {
+		if (s.equalsIgnoreCase(Tool.SHEARS.getName())) {
 			return new int[] {width * 8, height * 0};
 		}
-		if (s.equalsIgnoreCase("spanner")) {
+		if (s.equalsIgnoreCase(Tool.SPANNER.getName())) {
 			return new int[] {width * 9, height * 0};
 		}
-		if (s.equalsIgnoreCase("brush")) {
+		if (s.equalsIgnoreCase(Tool.BRUSH.getName())) {
 			return new int[] {width * 11, height * 0};
 		}
 

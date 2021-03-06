@@ -34,9 +34,9 @@ public class RecipeExporterAnvil {
 
 			//// Properties ////
 
-			boolean is_tool_recipe = recipe instanceof CustomToolRecipe;
+			boolean is_tool_recipe = recipe instanceof CustomToolRecipeAnvil;
 
-			String type = recipe instanceof CustomToolRecipe ? "CustomToolRecipe" : "ShapedAnvilRecipes";
+			String type = recipe instanceof CustomToolRecipeAnvil ? "CustomToolRecipe" : "ShapedAnvilRecipes";
 
 			int recipe_time = 5;
 			try { recipe_time = iAnvilRecipe.getCraftTime(); } catch (Exception e) {}

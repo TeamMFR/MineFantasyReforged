@@ -236,6 +236,11 @@ arrow.head.broad.name=Broad Head
 
 item.world_gen_placer=World Gen Placer
 
+
+# INTEGRATION
+integration.jei.category.minefantasyreborn:carpenter=Carpenter Bench
+item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
+
 # COMMODITY
 
 item.timber.name=Timber
