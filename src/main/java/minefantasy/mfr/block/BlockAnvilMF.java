@@ -2,6 +2,7 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterial;
@@ -23,7 +24,9 @@ import net.minecraft.world.World;
 public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	public BaseMaterial material;
 	private int tier;
-	private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
+	private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.1875D, 0.0D, 0.3125D, 0.8125D, 0.8125D, 0.6875D);
+	private static AxisAlignedBB ANVIL_STONE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
+
 
 	public BlockAnvilMF(BaseMaterial material) {
 		super(Material.ANVIL);
@@ -50,7 +53,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return ANVIL_AABB;
+		return material == MineFantasyMaterials.STONE ? ANVIL_STONE_AABB : ANVIL_AABB;
 	}
 
 	@Override
