@@ -32,6 +32,6 @@ public class SlotCrucibleOut extends SlotItemHandler {
 
 	@Override
 	public boolean isItemValid(ItemStack item) {
-		return true;
+		return false;
 	}
 }

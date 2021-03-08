@@ -4,12 +4,14 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyMaterials;
+import minefantasy.mfr.item.ItemMetalComponent;
 import minefantasy.mfr.material.BaseMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -76,18 +78,18 @@ public class ForgingRecipes {
 		time = 2;
 		material = MineFantasyMaterials.IRON;
 		if (ConfigCrafting.allowIronResmelt) {
-			MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.IRON_PREP), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.bar("iron"), 'F', MineFantasyItems.FLUX);
-			MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.IRON_PREP, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.bar("iron"), 'F', MineFantasyItems.FLUX_STRONG);
+			MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.bar("iron"), 'F', MineFantasyItems.FLUX);
+			MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.bar("iron"), 'F', MineFantasyItems.FLUX_STRONG);
 		}
-		MineFantasyKnowledgeList.coalPrepR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.COAL_PREP), "coke", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RCR", "CFC", "RCR", 'R', Items.REDSTONE, 'C', new ItemStack(Items.COAL, 1, 1), 'F', MineFantasyItems.FLUX_STRONG);
-		GameRegistry.addSmelting(MineFantasyItems.COAL_PREP, new ItemStack(MineFantasyItems.COKE), 1F);
+		MineFantasyKnowledgeList.coalPrepR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.PREPARED_COAL), "coke", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RCR", "CFC", "RCR", 'R', Items.REDSTONE, 'C', new ItemStack(Items.COAL, 1, 1), 'F', MineFantasyItems.FLUX_STRONG);
+		GameRegistry.addSmelting(MineFantasyItems.PREPARED_COAL, new ItemStack(MineFantasyItems.COKE), 1F);
 
-		MineFantasyKnowledgeList.ironPrepR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.IRON_PREP), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', Blocks.IRON_ORE, 'F', MineFantasyItems.FLUX);
-		MineFantasyKnowledgeList.ironPrepR2 = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.IRON_PREP, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', Blocks.IRON_ORE, 'F', MineFantasyItems.FLUX_STRONG);
+		MineFantasyKnowledgeList.ironPrepR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', Blocks.IRON_ORE, 'F', MineFantasyItems.FLUX);
+		MineFantasyKnowledgeList.ironPrepR2 = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', Blocks.IRON_ORE, 'F', MineFantasyItems.FLUX_STRONG);
 
-		MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.IRON_PREP), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.ORE_IRON, 'F', MineFantasyItems.FLUX);
-		MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.IRON_PREP, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.ORE_IRON, 'F', MineFantasyItems.FLUX_STRONG);
-		ItemStack plate = MineFantasyItems.PLATE.createComm("iron");
+		MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.ORE_IRON, 'F', MineFantasyItems.FLUX);
+		MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.ORE_IRON, 'F', MineFantasyItems.FLUX_STRONG);
+		ItemStack plate = ((ItemMetalComponent)MineFantasyItems.PLATE).createComponentItemStack("iron");
 		time = 10;
 		MineFantasyKnowledgeList.blastChamR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyBlocks.BLAST_CHAMBER), "blastfurn", false, "hvyHammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RP PR", "RP PR", "RP PR", "RP PR", 'R', MineFantasyItems.RIVET, 'P', plate);
 
@@ -138,8 +140,8 @@ public class ForgingRecipes {
 		recipeMap.put("anvilBlueSteel", blue_steel_anvil_recipe);
 		recipeMap.put("anvilRedSteel", red_steel_recipe);
 
-		ItemStack bronzeHunk = MineFantasyItems.METAL_HUNK.createComm("bronze");
-		ItemStack ironHunk = MineFantasyItems.METAL_HUNK.createComm("iron");
+		ItemStack bronzeHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("bronze");
+		ItemStack ironHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("iron");
 
 		time = 2;
 		material = MineFantasyMaterials.BRONZE;
@@ -166,22 +168,22 @@ public class ForgingRecipes {
 		Salvage.addSalvage(MineFantasyBlocks.IRON_BARS, ironHunk, ironHunk, ironHunk, ironHunk);
 
 		material = MineFantasyBlocks.STEEL_BARS.material;
-		ItemStack steelHunk = MineFantasyItems.METAL_HUNK.createComm(material.name);
+		ItemStack steelHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack(material.name);
 		MineFantasyKnowledgeList.barsR.add(MineFantasyRebornAPI.addAnvilRecipe(Skill.CONSTRUCTION, new ItemStack(MineFantasyBlocks.STEEL_BARS), "smelt" + material.name, false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "I I", "I I", 'I', steelHunk));
 		Salvage.addSalvage(MineFantasyBlocks.STEEL_BARS, steelHunk, steelHunk, steelHunk, steelHunk);
 
 		material = MineFantasyBlocks.BLACK_STEEL_BARS.material;
-		ItemStack blackSteelHunk = MineFantasyItems.METAL_HUNK.createComm(material.name);
+		ItemStack blackSteelHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack(material.name);
 		MineFantasyKnowledgeList.barsR.add(MineFantasyRebornAPI.addAnvilRecipe(Skill.CONSTRUCTION, new ItemStack(MineFantasyBlocks.BLACK_STEEL_BARS), "smelt" + material.name, false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "I I", "I I", 'I', blackSteelHunk));
 		Salvage.addSalvage(MineFantasyBlocks.BLACK_STEEL_BARS, blackSteelHunk, blackSteelHunk, blackSteelHunk, blackSteelHunk);
 
 		material = MineFantasyBlocks.BLUE_STEEL_BARS.material;
-		ItemStack blueSteelHunk = MineFantasyItems.METAL_HUNK.createComm(material.name);
+		ItemStack blueSteelHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack(material.name);
 		MineFantasyKnowledgeList.barsR.add(MineFantasyRebornAPI.addAnvilRecipe(Skill.CONSTRUCTION, new ItemStack(MineFantasyBlocks.BLUE_STEEL_BARS), "smelt" + material.name, false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "I I", "I I", 'I', blueSteelHunk));
 		Salvage.addSalvage(MineFantasyBlocks.BLUE_STEEL_BARS, blueSteelHunk, blueSteelHunk, blueSteelHunk, blueSteelHunk);
 
 		material = MineFantasyBlocks.RED_STEEL_BARS.material;
-		ItemStack redSteelHunk = MineFantasyItems.METAL_HUNK.createComm(material.name);
+		ItemStack redSteelHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack(material.name);
 		MineFantasyKnowledgeList.barsR.add(MineFantasyRebornAPI.addAnvilRecipe(Skill.CONSTRUCTION, new ItemStack(MineFantasyBlocks.RED_STEEL_BARS), "smelt" + material.name, false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "I I", "I I", 'I', redSteelHunk));
 		Salvage.addSalvage(MineFantasyBlocks.RED_STEEL_BARS, redSteelHunk, redSteelHunk, redSteelHunk, redSteelHunk);
 
@@ -226,11 +228,11 @@ public class ForgingRecipes {
 		ItemStack tungsten = MineFantasyItems.bar("Tungsten");
 		ItemStack blacksteel = MineFantasyItems.bar("BlackSteel");
 
-		ItemStack bronzeHunk = MineFantasyItems.METAL_HUNK.createComm("bronze");
-		ItemStack ironHunk = MineFantasyItems.METAL_HUNK.createComm("iron");
-		ItemStack steelHunk = MineFantasyItems.METAL_HUNK.createComm("steel");
-		ItemStack tungstenHunk = MineFantasyItems.METAL_HUNK.createComm("tungsten");
-		ItemStack obsidianHunk = MineFantasyItems.METAL_HUNK.createComm("obsidian");
+		ItemStack bronzeHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("bronze");
+		ItemStack ironHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("iron");
+		ItemStack steelHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("steel");
+		ItemStack tungstenHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("tungsten");
+		ItemStack obsidianHunk = ((ItemMetalComponent)MineFantasyItems.METAL_HUNK).createComponentItemStack("obsidian");
 
 		BaseMaterial material = MineFantasyMaterials.STEEL;
 		int time = 15;
@@ -260,7 +262,7 @@ public class ForgingRecipes {
 		MineFantasyKnowledgeList.mineCaseIronR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.MINE_CASING_IRON, 2), "bombIron", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  T  ", "  P  ", " IRI ", "IR RI", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'P', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 'I', ironHunk, 'R', MineFantasyItems.RIVET);
 
 		time = 5;
-		MineFantasyKnowledgeList.bombarrowR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.BOMB_CASING_ARROW), "bombarrow", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "   IR", "FPITI", "   IR", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'I', ironHunk, 'R', Items.REDSTONE, 'P', MineFantasyItems.TIMBER.construct("RefinedWood"), 'F', MineFantasyItems.FLETCHING);
+		MineFantasyKnowledgeList.bombarrowR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.BOMB_CASING_ARROW), "bombarrow", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "   IR", "FPITI", "   IR", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'I', ironHunk, 'R', Items.REDSTONE, 'P', MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG), 'F', MineFantasyItems.FLETCHING);
 		MineFantasyKnowledgeList.bombBoltR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.BOMB_CASING_BOLT), "bombarrow", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  IR", "FITI", "  IR", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'I', ironHunk, 'R', Items.REDSTONE, 'F', MineFantasyItems.FLETCHING);
 
 		material = MineFantasyMaterials.BLACK_STEEL;
@@ -270,7 +272,7 @@ public class ForgingRecipes {
 		MineFantasyKnowledgeList.mineCaseObsidianR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.MINE_CASING_OBSIDIAN, 2), "mineObsidian", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "  T  ", "  P  ", " IRI ", "IRORI", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'O', Blocks.OBSIDIAN, 'P', Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE, 'I', obsidianHunk, 'R', MineFantasyItems.RIVET);
 		time = 15;
 		material = MineFantasyMaterials.STEEL;
-		MineFantasyKnowledgeList.crossBayonetR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.CROSSBOW_BAYONET), "crossBayonet", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "R R I", "PIII ", 'P', MineFantasyItems.TIMBER.construct("RefinedWood"), 'I', ironHunk, 'R', MineFantasyItems.RIVET);
+		MineFantasyKnowledgeList.crossBayonetR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.CROSSBOW_BAYONET), "crossBayonet", true, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "R R I", "PIII ", 'P', MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG), 'I', ironHunk, 'R', MineFantasyItems.RIVET);
 
 		Salvage.addSalvage(MineFantasyItems.ENGIN_ANVIL_TOOLS, steelHunk, steelHunk, steelHunk, steelHunk, new ItemStack(MineFantasyItems.LEATHER_STRIP, 4));
 
@@ -291,23 +293,23 @@ public class ForgingRecipes {
 
 		Salvage.addSalvage(MineFantasyItems.BOMB_CASING_IRON, ironHunk, ironHunk);
 		Salvage.addSalvage(MineFantasyItems.MINE_CASING_IRON, ironHunk, ironHunk, MineFantasyItems.RIVET, iron);
-		Salvage.addSalvage(MineFantasyItems.BOMB_CASING_ARROW, ironHunk, ironHunk, ironHunk, ironHunk, new ItemStack(Items.REDSTONE, 2), MineFantasyItems.TIMBER.construct("RefinedWood"), MineFantasyItems.FLETCHING);
+		Salvage.addSalvage(MineFantasyItems.BOMB_CASING_ARROW, ironHunk, ironHunk, ironHunk, ironHunk, new ItemStack(Items.REDSTONE, 2), MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG), MineFantasyItems.FLETCHING);
 
 		Salvage.addSalvage(MineFantasyItems.BOMB_CASING_BOLT, ironHunk, ironHunk, ironHunk, ironHunk, new ItemStack(Items.REDSTONE, 2), MineFantasyItems.FLETCHING);
 
 		Salvage.addSalvage(MineFantasyItems.BOMB_CASING_OBSIDIAN, obsidianHunk, obsidianHunk, new ItemStack(MineFantasyItems.RIVET, 2));
 		Salvage.addSalvage(MineFantasyItems.MINE_CASING_OBSIDIAN, obsidianHunk, obsidianHunk, iron, MineFantasyItems.RIVET);
 
-		Salvage.addSalvage(MineFantasyItems.CROSSBOW_BAYONET, ironHunk, ironHunk, ironHunk, ironHunk, MineFantasyItems.TIMBER.construct("RefinedWood"), new ItemStack(MineFantasyItems.RIVET, 2));
+		Salvage.addSalvage(MineFantasyItems.CROSSBOW_BAYONET, ironHunk, ironHunk, ironHunk, ironHunk, MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG), new ItemStack(MineFantasyItems.RIVET, 2));
 	}
 
 	private static void addConstruction() {
 		BaseMaterial material = MineFantasyMaterials.TIN;
 		ItemStack tin = MineFantasyItems.bar("Tin");
 		int time = 10;
-		MineFantasyKnowledgeList.brushRecipe = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.PAINT_BRUSH), "paint_brush", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "W", "I", "P", 'W', Blocks.WOOL, 'I', tin, 'P', MineFantasyItems.TIMBER.construct("RefinedWood"));
+		MineFantasyKnowledgeList.brushRecipe = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.PAINT_BRUSH), "paint_brush", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "W", "I", "P", 'W', Blocks.WOOL, 'I', tin, 'P', MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG));
 
-		Salvage.addSalvage(MineFantasyItems.PAINT_BRUSH, Blocks.WOOL, tin, MineFantasyItems.TIMBER.construct("RefinedWood"));
+		Salvage.addSalvage(MineFantasyItems.PAINT_BRUSH, Blocks.WOOL, tin, MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG));
 	}
 
 	private static void addCogworkParts() {

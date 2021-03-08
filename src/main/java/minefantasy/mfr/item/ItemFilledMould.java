@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
@@ -20,14 +21,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemFilledMould extends ItemComponentMFR {
+public class ItemFilledMould extends ItemBaseMFR {
 
-	private static final String itemNBT = "MF_HeldItem";
 
 	public ItemFilledMould() {
 		super("ingot_mould_filled");
-		// setMaxStackSize(1);
-		this.setUnlocalizedName("ingot_mould");
 	}
 
 	public static ItemStack createMould(ItemStack fill) {
@@ -35,7 +33,7 @@ public class ItemFilledMould extends ItemComponentMFR {
 		NBTTagCompound nbt = getOrCreateNBT(mould);
 		NBTTagCompound save = new NBTTagCompound();
 		fill.writeToNBT(save);
-		nbt.setTag(itemNBT, save);
+		nbt.setTag(Constants.MF_HELD_ITEM_TAG, save);
 		return mould;
 	}
 
@@ -48,8 +46,8 @@ public class ItemFilledMould extends ItemComponentMFR {
 
 	public ItemStack getHeldItem(ItemStack item) {
 		NBTTagCompound nbt = getOrCreateNBT(item);
-		if (nbt.hasKey(itemNBT)) {
-			return new ItemStack(nbt.getCompoundTag(itemNBT));
+		if (nbt.hasKey(Constants.MF_HELD_ITEM_TAG)) {
+			return new ItemStack(nbt.getCompoundTag(Constants.MF_HELD_ITEM_TAG));
 		}
 		return null;
 	}

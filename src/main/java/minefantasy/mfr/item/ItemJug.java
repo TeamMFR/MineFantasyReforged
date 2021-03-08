@@ -151,7 +151,7 @@ public class ItemJug extends ItemComponentMFR {
 
 		world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
 
-		int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blocktex);
+		int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blockTexture);
 
 		stack.shrink(size);
 

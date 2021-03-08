@@ -9,21 +9,20 @@
   "recipe_hammer": 2,
   "output_hot": false,
   "pattern": [
-    "OFO   ",
+    "IFI   ",
     "      ",
     "      ",
     "      "
   ],
   "key": {
     "F": {
-      "item": "minefantasyreborn:flux_strong"
+      "item": "minefantasyreborn:flux"
     },
-    "O": {
-      "item": "minefantasyreborn:ore_iron"
+    "I": {
+      "item": "minecraft:iron_ore"
     }
   },
   "result": {
-    "item": "minefantasyreborn:iron_prep",
-    "count": 2
+    "item": "minefantasyreborn:prepared_iron"
   }
 }

@@ -307,7 +307,7 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.smeltPig.1"),
 				new EntryPageRecipeAnvil(MineFantasyKnowledgeList.ironPrepR),
 				new EntryPageRecipeAnvil(MineFantasyKnowledgeList.ironPrepR2),
-				new EntryPageBlastFurnace(MineFantasyItems.IRON_PREP, pig_iron),
+				new EntryPageBlastFurnace(MineFantasyItems.PREPARED_IRON, pig_iron),
 				new EntryPageText("knowledge.blastfurn.9"));
 
 		MineFantasyKnowledgeList.smeltSteel.addPages(
@@ -528,7 +528,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.coke.addPages(
 				new EntryPageText("knowledge.coke.1"),
 				new EntryPageRecipeAnvil(MineFantasyKnowledgeList.coalPrepR),
-				new EntryPageSmelting(MineFantasyItems.COAL_PREP, MineFantasyItems.COKE));
+				new EntryPageSmelting(MineFantasyItems.PREPARED_COAL, MineFantasyItems.COKE));
 
 		MineFantasyKnowledgeList.blackpowder.addPages(
 				new EntryPageText("knowledge.blackpowder.1"),

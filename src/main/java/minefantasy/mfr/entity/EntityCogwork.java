@@ -7,6 +7,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
+import minefantasy.mfr.item.ItemMetalComponent;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.network.CogworkControlPacket;
 import minefantasy.mfr.network.NetworkHandler;
@@ -500,7 +501,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 					}
 					float damagePercent = 1F - (getHealth() / getMaxHealth());
 					if (!world.isRemote) {
-						ItemStack armour = MineFantasyItems.COGWORK_ARMOUR.createComm(getPlating().name, 1, damagePercent);
+						ItemStack armour = ((ItemMetalComponent) MineFantasyItems.COGWORK_ARMOUR).createComponentItemStack(getPlating().name, 1, damagePercent);
 						if (!user.capabilities.isCreativeMode && !user.inventory.addItemStackToInventory(armour)) {
 							this.entityDropItem(armour, 0.0F);
 						}

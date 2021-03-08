@@ -9,7 +9,7 @@
   "recipe_hammer": 2,
   "output_hot": false,
   "pattern": [
-    "IFI   ",
+    "OFO   ",
     "      ",
     "      ",
     "      "
@@ -18,11 +18,11 @@
     "F": {
       "item": "minefantasyreborn:flux"
     },
-    "I": {
-      "item": "minecraft:iron_ore"
+    "O": {
+      "item": "minefantasyreborn:ore_iron"
     }
   },
   "result": {
-    "item": "minefantasyreborn:iron_prep"
+    "item": "minefantasyreborn:prepared_iron"
   }
 }

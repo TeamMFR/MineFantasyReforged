@@ -1,7 +1,10 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.IQuenchBlock;
+import minefantasy.mfr.constants.Rarity;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -12,22 +15,30 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
-public class ItemHide extends ItemComponentMFR {
+public class ItemHide extends ItemBaseMFR {
 	private final Item result;
 	private float hardness;
-	private Random rand = new Random();
 
 	public ItemHide(String name, Item result, float hardness) {
-		super(name, -1);
+		super(name, Rarity.POOR);
 		this.result = result;
 		this.hardness = hardness;
+		setCreativeTab(MineFantasyTabs.tabMaterials);
+	}
+
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		// from net.minecraft.item.Item.getSubItems to avoid the override in minefantasy.mfr.item.ItemComponentMFR.getSubItems
+		if (this.isInCreativeTab(tab))
+		{
+			items.add(new ItemStack(this));
+		}
 	}
 
 	@Override
@@ -59,8 +70,8 @@ public class ItemHide extends ItemComponentMFR {
 	private void tryClean(ItemStack item, World world, EntityPlayer player, BlockPos pos) {
 		player.swingArm(player.swingingHand);
 		if (!world.isRemote) {
-			world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
-			if (rand.nextFloat() * 2 * hardness < 1.0F) {
+			world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + world.rand.nextFloat() / 4F, 0.5F + world.rand.nextFloat());
+			if (world.rand.nextFloat() * 2 * hardness < 1.0F) {
 				item.shrink(1);
 				EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(result));
 				world.spawnEntity(resultItem);

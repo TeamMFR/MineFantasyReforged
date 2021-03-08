@@ -66,8 +66,10 @@ public class MineFantasyMaterials {
 		public static final String ENCRUSTED = "encrusted";
 		public static final String OBSIDIAN = "obsidian";
 		public static final String TUNGSTEN = "tungsten";
+		public static final String WEAK_BLACK_STEEL = "weak_black_steel";
 		public static final String BLACK_STEEL = "black_steel";
 		public static final String BLUE_STEEL = "blue_steel";
+		public static final String WEAK_RED_STEEL = "weak_red_steel";
 		public static final String RED_STEEL = "red_steel";
 		public static final String SILVER = "silver";
 		public static final String GOLD = "gold";

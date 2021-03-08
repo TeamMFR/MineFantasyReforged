@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
-  "skill": "artisanry",
-  "research": "blastfurn",
+  "skill": "engineering",
+  "research": "coke",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,
@@ -9,21 +9,23 @@
   "recipe_hammer": 2,
   "output_hot": false,
   "pattern": [
-    "IFI   ",
-    "      ",
-    "      ",
+    "RCR   ",
+    "CFC   ",
+    "RCR   ",
     "      "
   ],
   "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minecraft:coal"
+    },
     "F": {
       "item": "minefantasyreborn:flux_strong"
-    },
-    "I": {
-      "item": "minecraft:iron_ore"
     }
   },
   "result": {
-    "item": "minefantasyreborn:iron_prep",
-    "count": 2
+    "item": "minefantasyreborn:prepared_coal"
   }
 }

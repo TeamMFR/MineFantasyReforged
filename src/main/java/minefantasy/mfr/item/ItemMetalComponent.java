@@ -1,25 +1,14 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.crafting.ITieredComponent;
-import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.entity.EntityCogwork;
-import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -27,19 +16,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent {
-	private final String materialType;
+public class ItemMetalComponent extends ItemComponentMFR {
 	private String name;
 	private float mass;
 	private boolean canDamage = false;
-	private String blocktex;
-	private String storageType;
 
-	public ItemCustomComponent(String name, String type) {
-		this(name, -1F, type);
-	}
-
-	public ItemCustomComponent(String name, float mass, String type) {
+	public ItemMetalComponent(String name, float mass, String type) {
 		super(name);
 		this.name = name;
 
@@ -48,7 +30,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 		this.materialType = type;
 	}
 
-	public ItemCustomComponent setCanDamage() {
+	public ItemMetalComponent setCanDamage() {
 		this.canDamage = true;
 		this.setHasSubtypes(false);
 		return this;
@@ -66,13 +48,11 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
-		if (!isInCreativeTab(tab)) {
-			return;
-		}
-		if (tab != MineFantasyTabs.tabMaterials) {
-			ArrayList<CustomMaterial> wood = CustomMaterial.getList("metal");
-			for (CustomMaterial customMat : wood) {
-				items.add(this.createComm(customMat.name));
+		if (this.isInCreativeTab(tab)) {
+
+			ArrayList<CustomMaterial> metals = CustomMaterial.getList("metal");
+			for (CustomMaterial metal : metals) {
+				items.add(this.createComponentItemStack(metal.name));
 			}
 		}
 	}
@@ -109,15 +89,15 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 		return CustomToolHelper.getCustomPrimaryMaterial(component);
 	}
 
-	public ItemStack createComm(String base) {
-		return createComm(base, 1);
+	public ItemStack createComponentItemStack(String base) {
+		return createComponentItemStack(base, 1);
 	}
 
-	public ItemStack createComm(String base, int stack) {
-		return createComm(base, stack, 0);
+	public ItemStack createComponentItemStack(String base, int stack) {
+		return createComponentItemStack(base, stack, 0);
 	}
 
-	public ItemStack createComm(String base, int stack, float damage) {
+	public ItemStack createComponentItemStack(String base, int stack, float damage) {
 		ItemStack item = new ItemStack(this, stack);
 		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
 		int maxdam = this.getMaxDamage(item);
@@ -134,7 +114,7 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 		return super.getMaxDamage(stack);
 	}
 
-	public ItemStack createComm(String base, int stack, int damage) {
+	public ItemStack createComponentItemStack(String base, int stack, int damage) {
 		ItemStack item = new ItemStack(this, stack, damage);
 		CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, base);
 		return item;
@@ -143,40 +123,5 @@ public class ItemCustomComponent extends ItemBaseMFR implements ITieredComponent
 	@Override
 	public String getMaterialType(ItemStack item) {
 		return materialType;
-	}
-
-	public ItemCustomComponent setStoragePlacement(String type, String tex) {
-		this.blocktex = tex;
-		this.storageType = type;
-		return this;
-	}
-
-	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (storageType == null) {
-			return EnumActionResult.FAIL;
-		}
-
-		ItemStack stack = player.getHeldItem(hand);
-		Block componentBlock = MineFantasyBlocks.COMPONENTS;
-
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-
-		if (!block.isReplaceable(world, pos)) {
-			pos = pos.offset(facing);
-		}
-
-		if (!world.mayPlace(componentBlock, pos, false, facing, player)) {
-			return EnumActionResult.FAIL;
-		}
-
-		world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
-
-		int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blocktex);
-
-		stack.shrink(size);
-
-		return EnumActionResult.SUCCESS;
 	}
 }

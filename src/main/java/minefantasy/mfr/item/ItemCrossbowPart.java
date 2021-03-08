@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -13,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemCrossbowPart extends ItemComponentMFR implements ICrossbowPart {
+public class ItemCrossbowPart extends ItemBaseMFR implements ICrossbowPart {
 	private int tier;
 	private String type, partname;
 	private int capacity = 0, durability = 50;
@@ -24,17 +25,14 @@ public class ItemCrossbowPart extends ItemComponentMFR implements ICrossbowPart 
 		this(name, type, ICrossbowPart.components.size(), name);
 	}
 
-	public ItemCrossbowPart(String name, String type, int tier) {
-		this(name, type, tier, name);
-	}
-
 	public ItemCrossbowPart(String name, String type, int tier, String model) {
-		super(name, 0);
+		super(name);
 		this.setFull3D();
 		this.type = type;
 		this.tier = tier;
 		this.partname = model;
 		MineFantasyRebornAPI.registerCrossbowPart(this);
+		this.setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
 
 	public static ICrossbowPart getPart(String type, int id) {

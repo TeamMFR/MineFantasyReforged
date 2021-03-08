@@ -244,7 +244,7 @@ item.flux.desc_extended=Flux is an important purification agent for metalworks, 
 # COMMODITY
 
 item.timber.name=Timber
-item.plant_oil.name=Plant Oil
+item.jug_plant_oil.name=Plant Oil Jug
 item.plankRefined.name=Refined Timber
 item.rivet.name=Rivets
 item.nail.name=Nails
@@ -253,7 +253,7 @@ item.lime_rock.name=Limestone Rock
 item.borax_rock.name=Borax
 item.flux.name=Flux
 item.flux_strong.name=Strong Flux
-item.coal_prep.name=Prepared Coal
+item.prepared_coal.name=Prepared Coal
 item.coke.name=Coke
 item.blackpowder.name=Blackpowder
 item.blackpowder_advanced.name=Advanced Blackpowder
@@ -300,6 +300,7 @@ item.gold_coin.name=Gold Coin
 
 # COMPONENT
 item.ingot_mould.name=Ingot Mould
+item.ingot_mould_filled.name=Ingot Mould
 item.ingot_mould_uncooked.name=Raw Ingot Mould
 
 item.clay_pot.name=Clay Pot
@@ -329,7 +330,7 @@ item.hide_large.name=Clean Large Hide
 item.vine.name=Vine
 item.sharp_rock.name=Sharp Rock
 
-item.iron_prep.name=Prepared Iron Ore
+item.prepared_iron.name=Prepared Iron Ore
 item.diamond_shards.name=Diamond Shards
 item.diamond_dust.name=Diamond Dust
 item.obsidian_rock.name=Obsidian Rock

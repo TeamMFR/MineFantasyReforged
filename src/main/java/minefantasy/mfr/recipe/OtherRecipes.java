@@ -2,9 +2,11 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.item.ItemMetalComponent;
 import minefantasy.mfr.recipe.refine.PaintOilRecipe;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
 import net.minecraft.init.Blocks;
@@ -12,7 +14,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class CarpenterRecipes {
+public class OtherRecipes {
 
 	public static void init() {
 
@@ -31,7 +33,7 @@ public class CarpenterRecipes {
 
 		Salvage.addSalvage(MineFantasyItems.DRY_ROCKS, Blocks.COBBLESTONE);
 
-		ItemStack scrapWood = MineFantasyItems.TIMBER.construct("ScrapWood");
+		ItemStack scrapWood = MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG);
 		Salvage.addSalvage(MineFantasyItems.TRAINING_SWORD, new ItemStack(Blocks.PLANKS, 5),
 				new ItemStack(MineFantasyItems.NAIL, 2), scrapWood);
 		Salvage.addSalvage(MineFantasyItems.TRAINING_WARAXE, new ItemStack(Blocks.PLANKS, 4), MineFantasyItems.NAIL, scrapWood,
@@ -79,7 +81,7 @@ public class CarpenterRecipes {
 				LeatherArmourListMFR.armourItem(LeatherArmourListMFR.LEATHER, 1, 3), new ItemStack(MineFantasyItems.THREAD, 3),
 				Blocks.WOOL);
 
-		ItemStack bronzePlate = MineFantasyItems.PLATE.createComm("bronze");
+		ItemStack bronzePlate = ((ItemMetalComponent) MineFantasyItems.PLATE).createComponentItemStack("bronze");
 
 		Salvage.addSalvage(MineFantasyBlocks.REPAIR_BASIC, new ItemStack(MineFantasyItems.THREAD, 3), MineFantasyItems.NAIL,
 				Items.FLINT, Items.LEATHER, new ItemStack(MineFantasyItems.LEATHER_STRIP, 2));
@@ -90,16 +92,16 @@ public class CarpenterRecipes {
 	}
 
 	private static void assembleWoodBasic() {
-		Salvage.addSalvage(MineFantasyBlocks.CARPENTER, MineFantasyItems.TIMBER.construct("ScrapWood", 4), Blocks.CRAFTING_TABLE);
+		Salvage.addSalvage(MineFantasyBlocks.CARPENTER, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 4), Blocks.CRAFTING_TABLE);
 
-		Salvage.addSalvage(MineFantasyBlocks.FRAMED_GLASS, MineFantasyItems.TIMBER.construct("ScrapWood", 2), Blocks.GLASS);
-		Salvage.addSalvage(MineFantasyBlocks.WINDOW, MineFantasyItems.TIMBER.construct("ScrapWood", 4), Blocks.GLASS);
-		Salvage.addSalvage(MineFantasyBlocks.CLAY_WALL, MineFantasyItems.NAIL, MineFantasyItems.TIMBER.construct("ScrapWood"),
+		Salvage.addSalvage(MineFantasyBlocks.FRAMED_GLASS, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 2), Blocks.GLASS);
+		Salvage.addSalvage(MineFantasyBlocks.WINDOW, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 4), Blocks.GLASS);
+		Salvage.addSalvage(MineFantasyBlocks.CLAY_WALL, MineFantasyItems.NAIL, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG),
 				Items.CLAY_BALL);
-		Salvage.addSalvage(MineFantasyBlocks.TANNER, MineFantasyItems.TIMBER.construct("ScrapWood", 8));
+		Salvage.addSalvage(MineFantasyBlocks.TANNER, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 8));
 		Salvage.addSalvage(MineFantasyBlocks.RESEARCH, MineFantasyBlocks.CARPENTER);
 		Salvage.addSalvage(MineFantasyBlocks.SALVAGE_BASIC, Items.FLINT, new ItemStack(Blocks.STONE, 2),
-				MineFantasyItems.TIMBER.construct("ScrapWood", 2), Blocks.CRAFTING_TABLE);
+				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 2), Blocks.CRAFTING_TABLE);
 	}
 
 	private static void addDusts() {
@@ -150,18 +152,18 @@ public class CarpenterRecipes {
 
 	private static void addWoodworks() {
 		Salvage.addSalvage(MineFantasyBlocks.NAILED_PLANKS, MineFantasyItems.NAIL,
-				MineFantasyItems.TIMBER.construct("ScrapWood", 4));
+				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 4));
 		Salvage.addSalvage(MineFantasyBlocks.REFINED_PLANKS, MineFantasyItems.NAIL,
-				MineFantasyItems.TIMBER.construct("RefinedWood", 4));
+				MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 4));
 		Salvage.addSalvage(MineFantasyBlocks.NAILED_PLANKS_STAIR, MineFantasyItems.NAIL,
-				MineFantasyItems.TIMBER.construct("ScrapWood", 3));
+				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 3));
 		Salvage.addSalvage(MineFantasyBlocks.REFINED_PLANKS_STAIR, MineFantasyItems.NAIL,
-				MineFantasyItems.TIMBER.construct("RefinedWood", 3));
+				MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 3));
 
 		Salvage.addSalvage(MineFantasyBlocks.BELLOWS, new ItemStack(MineFantasyItems.NAIL, 3),
-				MineFantasyItems.TIMBER.construct("RefinedWood", 5), new ItemStack(Items.LEATHER, 2));
+				MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 5), new ItemStack(Items.LEATHER, 2));
 
-		Salvage.addSalvage(MineFantasyBlocks.TANNER_REFINED, MineFantasyItems.TIMBER.construct("RefinedWood", 8),
+		Salvage.addSalvage(MineFantasyBlocks.TANNER_REFINED, MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 8),
 				new ItemStack(MineFantasyItems.NAIL, 3));
 
 		PaintOilRecipe.addRecipe(MineFantasyBlocks.NAILED_PLANKS, MineFantasyBlocks.REFINED_PLANKS);
@@ -209,23 +211,23 @@ public class CarpenterRecipes {
 
 	private static void addCrossbows() {
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_ARMS_LIGHT, new ItemStack(MineFantasyItems.NAIL, 2), Items.STRING,
-				MineFantasyItems.TIMBER.construct("RefinedWood", 4));
+				MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 4));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_ARMS_BASIC, new ItemStack(MineFantasyItems.NAIL, 3),
-				MineFantasyItems.CROSSBOW_ARMS_LIGHT, MineFantasyItems.TIMBER.construct("RefinedWood", 2));
+				MineFantasyItems.CROSSBOW_ARMS_LIGHT, MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 2));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_ARMS_HEAVY, new ItemStack(MineFantasyItems.NAIL, 3),
-				MineFantasyItems.CROSSBOW_ARMS_BASIC, MineFantasyItems.TIMBER.construct("RefinedWood", 2));
+				MineFantasyItems.CROSSBOW_ARMS_BASIC, MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 2));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_ARMS_ADVANCED, MineFantasyItems.TUNGSTEN_GEARS,
 				new ItemStack(MineFantasyItems.NAIL, 2), MineFantasyItems.CROSSBOW_ARMS_BASIC,
 				new ItemStack(MineFantasyItems.STEEL_TUBE, 3));
 
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_SCOPE, MineFantasyItems.TUNGSTEN_GEARS, MineFantasyItems.SPYGLASS,
-				new ItemStack(MineFantasyItems.BOLT, 2), MineFantasyItems.TIMBER.construct("RefinedWood"));
+				new ItemStack(MineFantasyItems.BOLT, 2), MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_AMMO, MineFantasyItems.TUNGSTEN_GEARS,
-				new ItemStack(MineFantasyItems.NAIL, 3), MineFantasyItems.TIMBER.construct("RefinedWood", 7));
+				new ItemStack(MineFantasyItems.NAIL, 3), MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 7));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_HANDLE_WOOD, new ItemStack(MineFantasyItems.NAIL, 2),
-				MineFantasyItems.TIMBER.construct("RefinedWood", 3));
+				MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 3));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_STOCK_WOOD, new ItemStack(MineFantasyItems.NAIL, 3),
-				MineFantasyItems.TIMBER.construct("RefinedWood", 7));
+				MineFantasyItems.TIMBER.construct(Constants.REFINED_WOOD_TAG, 7));
 		Salvage.addSalvage(MineFantasyItems.CROSSBOW_STOCK_IRON, new ItemStack(MineFantasyItems.TUNGSTEN_GEARS, 2),
 				Blocks.OBSIDIAN, new ItemStack(MineFantasyItems.BOLT, 4), new ItemStack(MineFantasyItems.IRON_STRUT, 3),
 				MineFantasyItems.CROSSBOW_STOCK_WOOD);
@@ -234,8 +236,8 @@ public class CarpenterRecipes {
 	private static void addEngineering() {
 		addCrossbows();
 
-		ItemStack blackPlate = MineFantasyItems.PLATE.createComm("blackSteel");
-		ItemStack steelPlate = MineFantasyItems.PLATE.createComm("steel");
+		ItemStack blackPlate = ((ItemMetalComponent) MineFantasyItems.PLATE).createComponentItemStack("blackSteel");
+		ItemStack steelPlate = ((ItemMetalComponent)MineFantasyItems.PLATE).createComponentItemStack("steel");
 
 		Salvage.addSalvage(MineFantasyItems.COGWORK_SHAFT, new ItemStack(MineFantasyItems.IRON_STRUT, 2),
 				new ItemStack(MineFantasyItems.BOLT, 4), MineFantasyItems.IRON_FRAME, Blocks.PISTON,
@@ -247,7 +249,7 @@ public class CarpenterRecipes {
 		Salvage.addSalvage(MineFantasyBlocks.BOMB_BENCH, new ItemStack(MineFantasyItems.BOLT, 4), MineFantasyItems.IRON_FRAME,
 				MineFantasyBlocks.CARPENTER);
 		Salvage.addSalvage(MineFantasyBlocks.CROSSBOW_BENCH, new ItemStack(MineFantasyItems.NAIL, 2),
-				MineFantasyItems.TIMBER.construct("ScrapWood", 2), Items.STRING, MineFantasyBlocks.CARPENTER);
+				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG, 2), Items.STRING, MineFantasyBlocks.CARPENTER);
 		Salvage.addSalvage(MineFantasyBlocks.BOMB_PRESS, new ItemStack(MineFantasyItems.IRON_STRUT, 2),
 				new ItemStack(MineFantasyItems.BOLT, 2), new ItemStack(MineFantasyItems.BRONZE_GEARS, 2), Blocks.LEVER,
 				MineFantasyItems.IRON_FRAME);
@@ -267,10 +269,10 @@ public class CarpenterRecipes {
 
 	private static void addNonPrimitiveStone() {
 		Salvage.addSalvage(MineFantasyItems.STONE_KNIFE, new ItemStack(Blocks.COBBLESTONE, 2),
-				MineFantasyItems.TIMBER.construct("ScrapWood"));
-		Salvage.addSalvage(MineFantasyItems.STONE_HAMMER, Blocks.COBBLESTONE, MineFantasyItems.TIMBER.construct("ScrapWood"));
+				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
+		Salvage.addSalvage(MineFantasyItems.STONE_HAMMER, Blocks.COBBLESTONE, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
 		Salvage.addSalvage(MineFantasyItems.STONE_TONGS, new ItemStack(Blocks.COBBLESTONE, 2),
-				MineFantasyItems.TIMBER.construct("ScrapWood"));
+				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
 		Salvage.addSalvage(MineFantasyItems.BONE_NEEDLE, Items.BONE);
 	}
 

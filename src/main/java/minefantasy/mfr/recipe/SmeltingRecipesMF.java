@@ -116,7 +116,7 @@ public class SmeltingRecipesMF {
 		MineFantasyKnowledgeList.enderforge = MineFantasyRebornAPI.addRatioAlloy(2, enderforge, 3,
 				new Object[] {adamant, mithril, Items.ENDER_PEARL, Items.ENDER_PEARL});
 
-		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.IRON_PREP, MineFantasyItems.bar("PigIron"));
+		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.PREPARED_IRON, MineFantasyItems.bar("PigIron"));
 		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.BLACK_STEEL_WEAK_INGOT, black);
 		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.RED_STEEL_WEAK_INGOT, red);
 		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.BLUE_STEEL_WEAK_INGOT, blue);

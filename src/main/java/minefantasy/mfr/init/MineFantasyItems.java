@@ -8,6 +8,8 @@ import minefantasy.mfr.api.crafting.exotic.SpecialForging;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.item.AdvancedFuelHandler;
@@ -19,6 +21,7 @@ import minefantasy.mfr.item.ItemArrowMFR;
 import minefantasy.mfr.item.ItemArtefact;
 import minefantasy.mfr.item.ItemAxeMFR;
 import minefantasy.mfr.item.ItemBandage;
+import minefantasy.mfr.item.ItemBaseMFR;
 import minefantasy.mfr.item.ItemBasicCraftTool;
 import minefantasy.mfr.item.ItemBattleaxe;
 import minefantasy.mfr.item.ItemBomb;
@@ -32,7 +35,6 @@ import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.item.ItemCrossbowPart;
 import minefantasy.mfr.item.ItemCrudeBomb;
 import minefantasy.mfr.item.ItemCustomArmour;
-import minefantasy.mfr.item.ItemCustomComponent;
 import minefantasy.mfr.item.ItemDagger;
 import minefantasy.mfr.item.ItemEAnvilTools;
 import minefantasy.mfr.item.ItemExplodingArrow;
@@ -57,6 +59,7 @@ import minefantasy.mfr.item.ItemLootSack;
 import minefantasy.mfr.item.ItemLumberAxe;
 import minefantasy.mfr.item.ItemMace;
 import minefantasy.mfr.item.ItemMattock;
+import minefantasy.mfr.item.ItemMetalComponent;
 import minefantasy.mfr.item.ItemMine;
 import minefantasy.mfr.item.ItemMobSpawner;
 import minefantasy.mfr.item.ItemMultiFood;
@@ -64,7 +67,6 @@ import minefantasy.mfr.item.ItemNeedle;
 import minefantasy.mfr.item.ItemPaintBrush;
 import minefantasy.mfr.item.ItemParachute;
 import minefantasy.mfr.item.ItemPickMFR;
-import minefantasy.mfr.item.ItemRawOre;
 import minefantasy.mfr.item.ItemResearchBook;
 import minefantasy.mfr.item.ItemSaw;
 import minefantasy.mfr.item.ItemScythe;
@@ -83,6 +85,7 @@ import minefantasy.mfr.item.ItemUnfinishedFood;
 import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.item.ItemWarhammer;
 import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.item.ItemWoodComponent;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.util.Utils;
@@ -122,26 +125,26 @@ public class MineFantasyItems {
 	public static Item INGOT_MOULD = Utils.nullValue();
 	public static Item INGOT_MOULD_UNCOOKED = Utils.nullValue();
 	public static Item PIE_TRAY_UNCOOKED = Utils.nullValue();
-	public static ItemComponentMFR COPPER_INGOT = Utils.nullValue();
-	public static ItemComponentMFR TIN_INGOT = Utils.nullValue();
-	public static ItemComponentMFR BRONZE_INGOT = Utils.nullValue();
-	public static ItemComponentMFR PIG_IRON_INGOT = Utils.nullValue();
-	public static ItemComponentMFR STEEL_INGOT = Utils.nullValue();
-	public static ItemComponentMFR ENCRUSTED_INGOT = Utils.nullValue();
-	public static ItemComponentMFR BLACK_STEEL_WEAK_INGOT = Utils.nullValue();
-	public static ItemComponentMFR BLACK_STEEL_INGOT = Utils.nullValue();
-	public static ItemComponentMFR SILVER_INGOT = Utils.nullValue();
-	public static ItemComponentMFR RED_STEEL_WEAK_INGOT = Utils.nullValue();
-	public static ItemComponentMFR RED_STEEL_INGOT = Utils.nullValue();
-	public static ItemComponentMFR BLUE_STEEL_WEAK_INGOT = Utils.nullValue();
-	public static ItemComponentMFR BLUE_STEEL_INGOT = Utils.nullValue();
-	public static ItemComponentMFR ADAMANTIUM_INGOT = Utils.nullValue();
-	public static ItemComponentMFR MITHRIL_INGOT = Utils.nullValue();
-	public static ItemComponentMFR IGNOTUMITE_INGOT = Utils.nullValue();
-	public static ItemComponentMFR MITHIUM_INGOT = Utils.nullValue();
-	public static ItemComponentMFR ENDER_INGOT = Utils.nullValue();
-	public static ItemComponentMFR TUNGSTEN_INGOT = Utils.nullValue();
-	public static ItemComponentMFR OBSIDIAN_INGOT = Utils.nullValue();
+	public static Item COPPER_INGOT = Utils.nullValue();
+	public static Item TIN_INGOT = Utils.nullValue();
+	public static Item BRONZE_INGOT = Utils.nullValue();
+	public static Item PIG_IRON_INGOT = Utils.nullValue();
+	public static Item STEEL_INGOT = Utils.nullValue();
+	public static Item ENCRUSTED_INGOT = Utils.nullValue();
+	public static Item BLACK_STEEL_WEAK_INGOT = Utils.nullValue();
+	public static Item BLACK_STEEL_INGOT = Utils.nullValue();
+	public static Item SILVER_INGOT = Utils.nullValue();
+	public static Item RED_STEEL_WEAK_INGOT = Utils.nullValue();
+	public static Item RED_STEEL_INGOT = Utils.nullValue();
+	public static Item BLUE_STEEL_WEAK_INGOT = Utils.nullValue();
+	public static Item BLUE_STEEL_INGOT = Utils.nullValue();
+	public static Item ADAMANTIUM_INGOT = Utils.nullValue();
+	public static Item MITHRIL_INGOT = Utils.nullValue();
+	public static Item IGNOTUMITE_INGOT = Utils.nullValue();
+	public static Item MITHIUM_INGOT = Utils.nullValue();
+	public static Item ENDER_INGOT = Utils.nullValue();
+	public static Item TUNGSTEN_INGOT = Utils.nullValue();
+	public static Item OBSIDIAN_INGOT = Utils.nullValue();
 	public static Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
 	public static ItemComponentMFR TIMBER = Utils.nullValue();
 	public static Item VINE = Utils.nullValue();
@@ -151,7 +154,7 @@ public class MineFantasyItems {
 	public static Item COAL_DUST = Utils.nullValue();
 	public static Item NITRE = Utils.nullValue();
 	public static Item SULFUR = Utils.nullValue();
-	public static Item IRON_PREP = Utils.nullValue();
+	public static Item PREPARED_IRON = Utils.nullValue();
 	public static Item BLACKPOWDER = Utils.nullValue();
 	public static Item BLACKPOWDER_ADVANCED = Utils.nullValue();
 	public static Item FLETCHING = Utils.nullValue();
@@ -198,7 +201,7 @@ public class MineFantasyItems {
 	public static Item ORE_GOLD = Utils.nullValue();
 	public static Item ORE_TUNGSTEN = Utils.nullValue();
 	public static Item HOT_ITEM = Utils.nullValue();
-	public static Item PLANT_OIL = Utils.nullValue();
+	public static Item JUG_PLANT_OIL = Utils.nullValue();
 	public static Item TALISMAN_LESSER = Utils.nullValue();
 	public static Item TALISMAN_GREATER = Utils.nullValue();
 	public static Item BOLT = Utils.nullValue();
@@ -208,7 +211,7 @@ public class MineFantasyItems {
 	public static Item TUNGSTEN_GEARS = Utils.nullValue();
 	public static Item STEEL_TUBE = Utils.nullValue();
 	public static Item COGWORK_SHAFT = Utils.nullValue();
-	public static Item COAL_PREP = Utils.nullValue();
+	public static Item PREPARED_COAL = Utils.nullValue();
 	public static Item INGOT_MOULD_FILLED = Utils.nullValue();
 	public static Item CROSSBOW_STOCK_WOOD = Utils.nullValue();
 	public static Item CROSSBOW_STOCK_IRON = Utils.nullValue();
@@ -222,17 +225,17 @@ public class MineFantasyItems {
 	public static Item CROSSBOW_SCOPE = Utils.nullValue();
 	public static Item CROSSBOW_STRING_UNLOADED = Utils.nullValue();
 	public static Item CROSSBOW_STRING_LOADED = Utils.nullValue();
-	public static ItemCustomComponent CHAIN_MESH = Utils.nullValue();
-	public static ItemCustomComponent SCALE_MESH = Utils.nullValue();
-	public static ItemCustomComponent SPLINT_MESH = Utils.nullValue();
-	public static ItemCustomComponent PLATE = Utils.nullValue();
-	public static ItemCustomComponent PLATE_HUGE = Utils.nullValue();
-	public static ItemCustomComponent METAL_HUNK = Utils.nullValue();
-	public static ItemCustomComponent ARROWHEAD = Utils.nullValue();
-	public static ItemCustomComponent BODKIN_HEAD = Utils.nullValue();
-	public static ItemCustomComponent BROAD_HEAD = Utils.nullValue();
-	public static ItemCustomComponent COGWORK_ARMOUR = Utils.nullValue();
-	public static ItemCustomComponent BAR = Utils.nullValue();
+	public static Item CHAIN_MESH = Utils.nullValue();
+	public static Item SCALE_MESH = Utils.nullValue();
+	public static Item SPLINT_MESH = Utils.nullValue();
+	public static Item PLATE = Utils.nullValue();
+	public static Item PLATE_HUGE = Utils.nullValue();
+	public static Item METAL_HUNK = Utils.nullValue();
+	public static Item ARROWHEAD = Utils.nullValue();
+	public static Item BODKIN_HEAD = Utils.nullValue();
+	public static Item BROAD_HEAD = Utils.nullValue();
+	public static Item COGWORK_ARMOUR = Utils.nullValue();
+	public static Item BAR = Utils.nullValue();
 	public static Item FLUX_POT = Utils.nullValue();
 	public static Item COAL_FLUX = Utils.nullValue();
 	public static Item COPPER_COIN = Utils.nullValue();
@@ -513,9 +516,7 @@ public class MineFantasyItems {
 	public static ItemCustomArmour ORNATE_PLATE_CHEST = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_PLATE_LEGS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_PLATE_BOOTS = Utils.nullValue();
-	public static ItemComponentMFR[] INGOTS;
-
-
+//	public static Item[] INGOTS;
 
 	// Tools
 	public static Item TRAINING_SWORD = Utils.nullValue();
@@ -638,7 +639,7 @@ public class MineFantasyItems {
 
 		// MISC
 		CAKE_TIN = new ItemComponentMFR("cake_tin", 0).setCreativeTab(MineFantasyTabs.tabFood);
-		PIE_TRAY = new ItemComponentMFR("pie_tray", 0).setStoragePlacement("bigplate", "tray").setCreativeTab(MineFantasyTabs.tabFood);
+		PIE_TRAY = new ItemComponentMFR("pie_tray", 0).setStoragePlacement(Constants.StorageTextures.BIGPLATE, Constants.StorageTextures.TRAY).setCreativeTab(MineFantasyTabs.tabFood);
 		ICING = new ItemComponentMFR("icing", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		CUSTARD = new ItemComponentMFR("custard", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
@@ -675,9 +676,9 @@ public class MineFantasyItems {
 		PASTRY = new ItemUnfinishedFood("pastry").setMaxStackSize(64);
 		RAW_BREAD = new ItemUnfinishedFood("raw_bread").setMaxStackSize(64);
 		JUG_UNCOOKED = new ItemJug("uncooked");
-		JUG_EMPTY = new ItemJug("empty").setStoragePlacement("jug", "jug");
-		JUG_WATER = new ItemJug("water").setStoragePlacement("jug", "jugwater").setContainerItem(JUG_EMPTY);
-		JUG_MILK = new ItemJug("milk").setStoragePlacement("jug", "jugmilk").setContainerItem(JUG_EMPTY);
+		JUG_EMPTY = new ItemJug("empty").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG);
+		JUG_WATER = new ItemJug("water").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_WATER).setContainerItem(JUG_EMPTY);
+		JUG_MILK = new ItemJug("milk").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_MILK).setContainerItem(JUG_EMPTY);
 		BURNT_FOOD = new ItemBurntFood("burnt_food");
 		BURNT_POT = new ItemBurntFood("burnt_pot").setContainerItem(CLAY_POT);
 		BURNT_PIE = new ItemBurntFood("burnt_pie").setContainerItem(PIE_TRAY);
@@ -763,7 +764,7 @@ public class MineFantasyItems {
 		registry.register(COAL_DUST);
 		registry.register(NITRE);
 		registry.register(SULFUR);
-		registry.register(IRON_PREP);
+		registry.register(PREPARED_IRON);
 		registry.register(BLACKPOWDER);
 		registry.register(BLACKPOWDER_ADVANCED);
 		registry.register(FLETCHING);
@@ -818,7 +819,7 @@ public class MineFantasyItems {
 
 		registry.register(HOT_ITEM);
 
-		registry.register(PLANT_OIL);
+		registry.register(JUG_PLANT_OIL);
 
 		registry.register(TALISMAN_LESSER);
 		registry.register(TALISMAN_GREATER);
@@ -832,7 +833,7 @@ public class MineFantasyItems {
 		registry.register(STEEL_TUBE);
 		registry.register(COGWORK_SHAFT);
 
-		registry.register(COAL_PREP);
+		registry.register(PREPARED_COAL);
 
 		registry.register(INGOT_MOULD_FILLED);
 
@@ -1195,119 +1196,119 @@ public class MineFantasyItems {
 	}
 
 	public static void initComponent() {
-		CLAY_POT = new ItemBowl("clay_pot").setStoragePlacement("pot", "pot");
-		CLAY_POT_UNCOOKED = new ItemComponentMFR("clay_pot_uncooked", 0);
-		INGOT_MOULD = new ItemComponentMFR("ingot_mould").setStoragePlacement("bar", "mould");
-		INGOT_MOULD_UNCOOKED = new ItemComponentMFR("ingot_mould_uncooked", 0);
+		TIMBER = new ItemWoodComponent("timber").setCustom(1, "wood").setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK);
+		TIMBER_CUT = new ItemWoodComponent("timber_cut").setCustom(1, "wood").setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK_CUT);
+		TIMBER_PANE = new ItemWoodComponent("timber_pane").setCustom(6, "wood").setStoragePlacement(Constants.StorageTextures.SHEET, Constants.StorageTextures.WOOD_PANE);
+
+		COPPER_INGOT = new ItemBaseMFR("copper_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		TIN_INGOT = new ItemBaseMFR("tin_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BRONZE_INGOT = new ItemBaseMFR("bronze_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		PIG_IRON_INGOT = new ItemBaseMFR("pig_iron_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		STEEL_INGOT = new ItemBaseMFR("steel_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		ENCRUSTED_INGOT = new ItemBaseMFR("encrusted_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BLACK_STEEL_WEAK_INGOT = new ItemBaseMFR("black_steel_weak_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BLACK_STEEL_INGOT = new ItemBaseMFR("black_steel_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		SILVER_INGOT = new ItemBaseMFR("silver_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		RED_STEEL_WEAK_INGOT = new ItemBaseMFR("red_steel_weak_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		RED_STEEL_INGOT = new ItemBaseMFR("red_steel_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BLUE_STEEL_WEAK_INGOT = new ItemBaseMFR("blue_steel_weak_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BLUE_STEEL_INGOT = new ItemBaseMFR("blue_steel_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		ADAMANTIUM_INGOT = new ItemBaseMFR("adamantium_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		MITHRIL_INGOT = new ItemBaseMFR("mithril_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		IGNOTUMITE_INGOT = new ItemBaseMFR("ignotumite_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		MITHIUM_INGOT = new ItemBaseMFR("mithium_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		ENDER_INGOT = new ItemBaseMFR("ender_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		TUNGSTEN_INGOT = new ItemBaseMFR("tungsten_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		OBSIDIAN_INGOT = new ItemBaseMFR("obsidian_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
+		COMPOSITE_ALLOY_INGOT = new ItemBaseMFR("composite_alloy_ingot", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
+		BAR = (ItemMetalComponent) new ItemMetalComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
+
+		CLAY_POT = new ItemBowl("clay_pot").setStoragePlacement(Constants.StorageTextures.POT, Constants.StorageTextures.POT);
+		CLAY_POT_UNCOOKED = new ItemBaseMFR("clay_pot_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
+		INGOT_MOULD = new ItemComponentMFR("ingot_mould").setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.MOULD);
+		INGOT_MOULD_UNCOOKED = new ItemBaseMFR("ingot_mould_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
 		PIE_TRAY_UNCOOKED = new ItemComponentMFR("pie_tray_uncooked", 0);
 
-		COPPER_INGOT = new ItemComponentMFR("copper_ingot", BaseMaterial.getMaterial("copper").rarity);
-		TIN_INGOT = new ItemComponentMFR("tin_ingot", BaseMaterial.getMaterial("tin").rarity);
-		BRONZE_INGOT = new ItemComponentMFR("bronze_ingot", BaseMaterial.getMaterial("bronze").rarity);
-		PIG_IRON_INGOT = new ItemComponentMFR("pig_iron_ingot", BaseMaterial.getMaterial("pig_iron").rarity);
-		STEEL_INGOT = new ItemComponentMFR("steel_ingot", BaseMaterial.getMaterial("steel").rarity);
-		ENCRUSTED_INGOT = new ItemComponentMFR("encrusted_ingot", BaseMaterial.getMaterial("encrusted").rarity);
-		BLACK_STEEL_WEAK_INGOT = new ItemComponentMFR("black_steel_weak_ingot", BaseMaterial.getMaterial("weak_black_steel").rarity);
-		BLACK_STEEL_INGOT = new ItemComponentMFR("black_steel_ingot", BaseMaterial.getMaterial("black_steel").rarity);
-		SILVER_INGOT = new ItemComponentMFR("silver_ingot", BaseMaterial.getMaterial("silver").rarity);
-		RED_STEEL_WEAK_INGOT = new ItemComponentMFR("red_steel_weak_ingot", BaseMaterial.getMaterial("weak_red_steel").rarity);
-		RED_STEEL_INGOT = new ItemComponentMFR("red_steel_ingot", BaseMaterial.getMaterial("red_steel").rarity);
-		BLUE_STEEL_WEAK_INGOT = new ItemComponentMFR("blue_steel_weak_ingot", BaseMaterial.getMaterial("weak_blue_steel").rarity);
-		BLUE_STEEL_INGOT = new ItemComponentMFR("blue_steel_ingot", BaseMaterial.getMaterial("blue_steel").rarity);
-		ADAMANTIUM_INGOT = new ItemComponentMFR("adamantium_ingot", BaseMaterial.getMaterial("adamantium").rarity);
-		MITHRIL_INGOT = new ItemComponentMFR("mithril_ingot", BaseMaterial.getMaterial("mithril").rarity);
-		IGNOTUMITE_INGOT = new ItemComponentMFR("ignotumite_ingot", BaseMaterial.getMaterial("ignotumite").rarity);
-		MITHIUM_INGOT = new ItemComponentMFR("mithium_ingot", BaseMaterial.getMaterial("mithium").rarity);
-		ENDER_INGOT = new ItemComponentMFR("ender_ingot", BaseMaterial.getMaterial("enderforge").rarity);
-		TUNGSTEN_INGOT = new ItemComponentMFR("tungsten_ingot", BaseMaterial.getMaterial("tungsten").rarity);
-		OBSIDIAN_INGOT = new ItemComponentMFR("obsidian_ingot", BaseMaterial.getMaterial("obsidian").rarity);
+		VINE = new ItemBaseMFR("vine").setCreativeTab(MineFantasyTabs.tabMaterials);
+		SHARP_ROCK = new ItemBaseMFR("sharp_rock").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		COMPOSITE_ALLOY_INGOT = new ItemComponentMFR("composite_alloy_ingot", 1);
+		FLUX = new ItemBaseMFR("flux").setCreativeTab(MineFantasyTabs.tabMaterials);
+		FLUX_STRONG = new ItemBaseMFR("flux_strong").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		TIMBER = new ItemComponentMFR("timber").setCustom(1, "wood").setStoragePlacement("plank", "plank");
-		TIMBER_CUT = new ItemComponentMFR("timber_cut").setCustom(1, "wood").setStoragePlacement("plank", "plankcut");
-		TIMBER_PANE = new ItemComponentMFR("timber_pane").setCustom(6, "wood").setStoragePlacement("sheet", "woodpane");
+		COAL_DUST = new ItemBaseMFR("coal_dust").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
+		NITRE = new ItemBaseMFR("nitre").setCreativeTab(MineFantasyTabs.tabMaterials);
+		SULFUR = new ItemBaseMFR("sulfur").setCreativeTab(MineFantasyTabs.tabMaterials);
+		PREPARED_IRON = new ItemBaseMFR("prepared_iron").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		VINE = new ItemComponentMFR("vine", -1);
-		SHARP_ROCK = new ItemComponentMFR("sharp_rock", -1);
+		FLETCHING = new ItemBaseMFR("fletching").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BLACKPOWDER = new ItemBombComponent("blackpowder", Rarity.COMMON, "powder", 0).setContainerItem(CLAY_POT);
+		BOMB_CASING_UNCOOKED = new ItemBaseMFR("bomb_casing_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
+		MINE_CASING_UNCOOKED = new ItemBaseMFR("mine_casing_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BLACKPOWDER_ADVANCED = new ItemBombComponent("blackpowder_advanced", Rarity.UNCOMMON, "powder", 1).setContainerItem(CLAY_POT);
+		SHRAPNEL = new ItemBombComponent("shrapnel", Rarity.COMMON, "filling", 1).setContainerItem(CLAY_POT);
+		MAGMA_CREAM_REFINED = new ItemBombComponent("magma_cream_refined", Rarity.UNCOMMON, "filling", 2).setContainerItem(CLAY_POT);
+		BOMB_FUSE = new ItemBombComponent("bomb_fuse", Rarity.COMMON, "fuse", 0);
+		BOMB_FUSE_LONG = new ItemBombComponent("bomb_fuse_long", Rarity.COMMON, "fuse", 1);
+		BOMB_CASING = new ItemBombComponent("bomb_casing", Rarity.COMMON, "bombcase", 0);
+		MINE_CASING = new ItemBombComponent("mine_casing", Rarity.COMMON, "minecase", 0);
+		BOMB_CASING_IRON = new ItemBombComponent("bomb_casing_iron", Rarity.COMMON, "bombcase", 1);
+		MINE_CASING_IRON = new ItemBombComponent("mine_casing_iron", Rarity.COMMON, "bombcase", 1);
+		BOMB_CASING_OBSIDIAN = new ItemBombComponent("bomb_casing_obsidian", Rarity.UNCOMMON, "bombcase", 2);
+		MINE_CASING_OBSIDIAN = new ItemBombComponent("mine_casing_obsidian", Rarity.UNCOMMON, "minecase", 2);
+		BOMB_CASING_CRYSTAL = new ItemBombComponent("bomb_casing_crystal", Rarity.UNCOMMON, "bombcase", 3);
+		MINE_CASING_CRYSTAL = new ItemBombComponent("mine_casing_crystal", Rarity.UNCOMMON, "minecase", 3);
+		BOMB_CASING_ARROW = new ItemBombComponent("bomb_casing_arrow", Rarity.UNCOMMON, "arrow", 0);
+		BOMB_CASING_BOLT = new ItemBombComponent("bomb_casing_bolt", Rarity.UNCOMMON, "bolt", 0);
 
-		FLUX = new ItemComponentMFR("flux", 0);
-		FLUX_STRONG = new ItemComponentMFR("flux_strong", 0);
+		COKE = new ItemBaseMFR("coke", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
+		DIAMOND_SHARDS = new ItemBaseMFR("diamond_shards").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		COAL_DUST = new ItemComponentMFR("coal_dust", 0).setContainerItem(CLAY_POT);
-		NITRE = new ItemComponentMFR("nitre", 0);
-		SULFUR = new ItemComponentMFR("sulfur", 0);
-		IRON_PREP = new ItemComponentMFR("iron_prep", 0);
+		CLAY_BRICK = new ItemBaseMFR("clay_brick").setCreativeTab(MineFantasyTabs.tabMaterials);
+		KAOLINITE = new ItemBaseMFR("kaolinite").setCreativeTab(MineFantasyTabs.tabMaterials);
+		KAOLINITE_DUST = new ItemBaseMFR("kaolinite_dust").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
+		FIRECLAY = new ItemBaseMFR("fireclay").setCreativeTab(MineFantasyTabs.tabMaterials);
+		FIRECLAY_BRICK = new ItemBaseMFR("fireclay_brick").setCreativeTab(MineFantasyTabs.tabMaterials);
+		STRONG_BRICK = new ItemComponentMFR("strong_brick", 0).setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.FIREBRICK);
 
-		BLACKPOWDER = new ItemBombComponent("blackpowder", 0, "powder", 0).setContainerItem(CLAY_POT);
-		BLACKPOWDER_ADVANCED = new ItemBombComponent("blackpowder_advanced", 1, "powder", 1).setContainerItem(CLAY_POT);
-		FLETCHING = new ItemComponentMFR("fletching", 0);
-		SHRAPNEL = new ItemBombComponent("shrapnel", 0, "filling", 1).setContainerItem(CLAY_POT);
-		MAGMA_CREAM_REFINED = new ItemBombComponent("magma_cream_refined", 1, "filling", 2).setContainerItem(CLAY_POT);
-		BOMB_FUSE = new ItemBombComponent("bomb_fuse", 0, "fuse", 0);
-		BOMB_FUSE_LONG = new ItemBombComponent("bomb_fuse_long", 0, "fuse", 1);
-		BOMB_CASING_UNCOOKED = new ItemComponentMFR("bomb_casing_uncooked", 0);
-		BOMB_CASING = new ItemBombComponent("bomb_casing", 0, "bombcase", 0);
-		MINE_CASING_UNCOOKED = new ItemComponentMFR("mine_casing_uncooked", 0);
-		MINE_CASING = new ItemBombComponent("mine_casing", 0, "minecase", 0);
-		BOMB_CASING_IRON = new ItemBombComponent("bomb_casing_iron", 0, "bombcase", 1);
-		MINE_CASING_IRON = new ItemBombComponent("mine_casing_iron", 0, "bombcase", 1);
-		BOMB_CASING_OBSIDIAN = new ItemBombComponent("bomb_casing_obsidian", 1, "bombcase", 2);
-		MINE_CASING_OBSIDIAN = new ItemBombComponent("mine_casing_obsidian", 1, "minecase", 2);
-		BOMB_CASING_CRYSTAL = new ItemBombComponent("bomb_casing_crystal", 1, "bombcase", 3);
-		MINE_CASING_CRYSTAL = new ItemBombComponent("mine_casing_crystal", 1, "minecase", 3);
-		BOMB_CASING_ARROW = new ItemBombComponent("bomb_casing_arrow", 1, "arrow", 0);
-		BOMB_CASING_BOLT = new ItemBombComponent("bomb_casing_bolt", 1, "bolt", 0);
-
-		COKE = new ItemComponentMFR("coke", 1);
-		DIAMOND_SHARDS = new ItemComponentMFR("diamond_shards", 0);
-
-		CLAY_BRICK = new ItemComponentMFR("clay_brick", 0);
-		KAOLINITE = new ItemComponentMFR("kaolinite", 0);
-		KAOLINITE_DUST = new ItemComponentMFR("kaolinite_dust", 0).setContainerItem(CLAY_POT);
-		FIRECLAY = new ItemComponentMFR("fireclay", 0);
-		FIRECLAY_BRICK = new ItemComponentMFR("fireclay_brick", 0);
-		STRONG_BRICK = new ItemComponentMFR("strong_brick", 0).setStoragePlacement("bar", "firebrick");
-
-		HIDE_SMALL = new ItemComponentMFR("hide_small", 0);
-		HIDE_MEDIUM = new ItemComponentMFR("hide_medium", 0);
-		HIDE_LARGE = new ItemComponentMFR("hide_large", 0);
+		HIDE_SMALL = new ItemBaseMFR("hide_small").setCreativeTab(MineFantasyTabs.tabMaterials);
+		HIDE_MEDIUM = new ItemBaseMFR("hide_medium").setCreativeTab(MineFantasyTabs.tabMaterials);
+		HIDE_LARGE = new ItemBaseMFR("hide_large").setCreativeTab(MineFantasyTabs.tabMaterials);
 		RAWHIDE_SMALL = new ItemHide("rawhide_small", HIDE_SMALL, 1.0F);
 		RAWHIDE_MEDIUM = new ItemHide("rawhide_medium", HIDE_MEDIUM, 1.5F);
 		RAWHIDE_LARGE = new ItemHide("rawhide_large", HIDE_LARGE, 3.0F);
 
-		DRAGON_HEART = new ItemSpecialDesign("dragon_heart", 1, "dragon");
+		DRAGON_HEART = new ItemSpecialDesign("dragon_heart", Rarity.UNCOMMON, "dragon");
 
-		LEATHER_STRIP = new ItemComponentMFR("leather_strip", 0);
-		NAIL = new ItemComponentMFR("nail", 0);
-		RIVET = new ItemComponentMFR("rivet", 0);
-		THREAD = new ItemComponentMFR("thread", 0);
-		OBSIDIAN_ROCK = new ItemComponentMFR("obsidian_rock", 0);
+		LEATHER_STRIP = new ItemBaseMFR("leather_strip").setCreativeTab(MineFantasyTabs.tabMaterials);
+		NAIL = new ItemBaseMFR("nail").setCreativeTab(MineFantasyTabs.tabMaterials);
+		RIVET = new ItemBaseMFR("rivet").setCreativeTab(MineFantasyTabs.tabMaterials);
+		THREAD = new ItemBaseMFR("thread").setCreativeTab(MineFantasyTabs.tabMaterials);
+		OBSIDIAN_ROCK = new ItemBaseMFR("obsidian_rock").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		ORE_COPPER = new ItemRawOre("ore_copper", -1);
-		ORE_TIN = new ItemRawOre("ore_tin", -1);
-		ORE_IRON = new ItemRawOre("ore_iron", -1);
-		ORE_SILVER = new ItemRawOre("ore_silver", 0);
-		ORE_GOLD = new ItemRawOre("ore_gold", 0);
-		ORE_TUNGSTEN = new ItemRawOre("ore_tungsten", 1);
+		ORE_COPPER = new ItemBaseMFR("ore_copper", Rarity.POOR).setCreativeTab(MineFantasyTabs.tabMaterials);
+		ORE_TIN = new ItemBaseMFR("ore_tin", Rarity.POOR).setCreativeTab(MineFantasyTabs.tabMaterials);
+		ORE_IRON = new ItemBaseMFR("ore_iron", Rarity.POOR).setCreativeTab(MineFantasyTabs.tabMaterials);
+		ORE_SILVER = new ItemBaseMFR("ore_silver").setCreativeTab(MineFantasyTabs.tabMaterials);
+		ORE_GOLD = new ItemBaseMFR("ore_gold").setCreativeTab(MineFantasyTabs.tabMaterials);
+		ORE_TUNGSTEN = new ItemBaseMFR("ore_tungsten", Rarity.RARE).setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		HOT_ITEM = new ItemHeated();
 
-		PLANT_OIL = new ItemComponentMFR("plant_oil", 0).setStoragePlacement("jug", "jugoil").setContainerItem(JUG_EMPTY);
+		JUG_PLANT_OIL = new ItemComponentMFR("jug_plant_oil", 0).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_OIL).setContainerItem(JUG_EMPTY);
 
-		TALISMAN_LESSER = new ItemComponentMFR("talisman_lesser", 1);
-		TALISMAN_GREATER = new ItemComponentMFR("talisman_greater", 3);
+		TALISMAN_LESSER = new ItemBaseMFR("talisman_lesser", Rarity.RARE).setCreativeTab(MineFantasyTabs.tabMaterials);
+		TALISMAN_GREATER = new ItemBaseMFR("talisman_greater", Rarity.EPIC).setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		BOLT = new ItemComponentMFR("bolt", 0);
+		BOLT = new ItemBaseMFR("bolt").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		IRON_FRAME = new ItemComponentMFR("iron_frame", 0);
-		IRON_STRUT = new ItemComponentMFR("iron_strut", 0);
-		BRONZE_GEARS = new ItemComponentMFR("bronze_gears", 0);
-		TUNGSTEN_GEARS = new ItemComponentMFR("tungsten_gears", 1);
-		STEEL_TUBE = new ItemComponentMFR("steel_tube", 0);
-		COGWORK_SHAFT = new ItemComponentMFR("cogwork_shaft", 1);
+		IRON_FRAME = new ItemBaseMFR("iron_frame").setCreativeTab(MineFantasyTabs.tabMaterials);
+		IRON_STRUT = new ItemBaseMFR("iron_strut").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BRONZE_GEARS = new ItemBaseMFR("bronze_gears").setCreativeTab(MineFantasyTabs.tabMaterials);
+		TUNGSTEN_GEARS = new ItemBaseMFR("tungsten_gears", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
+		STEEL_TUBE = new ItemBaseMFR("steel_tube").setCreativeTab(MineFantasyTabs.tabMaterials);
+		COGWORK_SHAFT = new ItemBaseMFR("cogwork_shaft", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		COAL_PREP = new ItemComponentMFR("coal_prep", 0);
+		PREPARED_COAL = new ItemBaseMFR("prepared_coal").setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		INGOT_MOULD_FILLED = new ItemFilledMould();
 
@@ -1328,28 +1329,27 @@ public class MineFantasyItems {
 		CROSSBOW_STRING_UNLOADED = new ItemCrossbowPart("crossbow_string_unloaded", "string_unloaded");
 		CROSSBOW_STRING_LOADED = new ItemCrossbowPart("crossbow_string_loaded", "string_load");
 
-		CHAIN_MESH = new ItemCustomComponent("chain_mesh", 1F, "metal").setStoragePlacement("sheet", "mail");
-		SCALE_MESH = new ItemCustomComponent("scale_mesh", 1F, "metal").setStoragePlacement("sheet", "scale");
-		SPLINT_MESH = new ItemCustomComponent("splint_mesh", 1F, "metal").setStoragePlacement("sheet", "splint");
-		PLATE = new ItemCustomComponent("plate", 2F, "metal").setStoragePlacement("sheet", "plate");
-		PLATE_HUGE = new ItemCustomComponent("plate_huge", 8F, "metal").setStoragePlacement("bigplate", "bigplate");
-		METAL_HUNK = new ItemCustomComponent("metal_hunk", 0.25F, "metal");
-		ARROWHEAD = new ItemCustomComponent("arrowhead", 1 / 4F, "metal");
-		BODKIN_HEAD = new ItemCustomComponent("bodkin_head", 1 / 4F, "metal");
-		BROAD_HEAD = new ItemCustomComponent("broad_head", 1 / 4F, "metal");
+		CHAIN_MESH = new ItemMetalComponent("chain_mesh", 1F, "metal").setStoragePlacement("sheet", "mail");
+		SCALE_MESH = new ItemMetalComponent("scale_mesh", 1F, "metal").setStoragePlacement("sheet", "scale");
+		SPLINT_MESH = new ItemMetalComponent("splint_mesh", 1F, "metal").setStoragePlacement("sheet", "splint");
+		PLATE = new ItemMetalComponent("plate", 2F, "metal").setStoragePlacement("sheet", "plate");
+		PLATE_HUGE = new ItemMetalComponent("plate_huge", 8F, "metal").setStoragePlacement("bigplate", "bigplate");
+		METAL_HUNK = new ItemMetalComponent("metal_hunk", 0.25F, "metal");
+		ARROWHEAD = new ItemMetalComponent("arrowhead", 1 / 4F, "metal");
+		BODKIN_HEAD = new ItemMetalComponent("bodkin_head", 1 / 4F, "metal");
+		BROAD_HEAD = new ItemMetalComponent("broad_head", 1 / 4F, "metal");
 
-		COGWORK_ARMOUR = (ItemCustomComponent) new ItemCustomComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
-		BAR = (ItemCustomComponent) new ItemCustomComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
+		COGWORK_ARMOUR = (ItemMetalComponent) new ItemMetalComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
 
-		FLUX_POT = new ItemComponentMFR("flux_pot", 0).setContainerItem(CLAY_POT);
-		COAL_FLUX = new ItemComponentMFR("coal_flux", 0);
+		FLUX_POT = new ItemBaseMFR("flux_pot").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
+		COAL_FLUX = new ItemBaseMFR("coal_flux").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		COPPER_COIN = new ItemComponentMFR("copper_coin", 0);
-		SILVER_COIN = new ItemComponentMFR("silver_coin", 0);
-		GOLD_COIN = new ItemComponentMFR("gold_coin", 0);
+		COPPER_COIN = new ItemBaseMFR("copper_coin").setCreativeTab(MineFantasyTabs.tabMaterials);
+		SILVER_COIN = new ItemBaseMFR("silver_coin").setCreativeTab(MineFantasyTabs.tabMaterials);
+		GOLD_COIN = new ItemBaseMFR("gold_coin").setCreativeTab(MineFantasyTabs.tabMaterials);
 
-		HINGE = new ItemComponentMFR("hinge", 0);
-		COGWORK_PULLEY = new ItemComponentMFR("cogwork_pulley", 1).setCreativeTab(MineFantasyTabs.tabGadget);
+		HINGE = new ItemBaseMFR("hinge").setCreativeTab(MineFantasyTabs.tabMaterials);
+		COGWORK_PULLEY = new ItemBaseMFR("cogwork_pulley", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabGadget);
 
 		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
 		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
@@ -1362,32 +1362,32 @@ public class MineFantasyItems {
 		SCHEMATIC_COGWORK = new ItemArtefact("schematic_cogwork", 50, EnumRarity.RARE, null, 1, "cogArmour");
 		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy", 50, EnumRarity.RARE, null, 1, "compPlate");
 
-		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", 1, "ornate");
+		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate");
 	}
 
 	public static void loadComponent() {
-		INGOTS = new ItemComponentMFR[] {
-				COPPER_INGOT,
-				TIN_INGOT,
-				BRONZE_INGOT,
-				PIG_IRON_INGOT,
-				STEEL_INGOT,
-				ENCRUSTED_INGOT,
-				SILVER_INGOT,
-				BLACK_STEEL_WEAK_INGOT,
-				BLACK_STEEL_INGOT,
-				RED_STEEL_WEAK_INGOT,
-				RED_STEEL_INGOT,
-				BLUE_STEEL_WEAK_INGOT,
-				BLUE_STEEL_INGOT,
-				ADAMANTIUM_INGOT,
-				MITHRIL_INGOT,
-				IGNOTUMITE_INGOT,
-				MITHIUM_INGOT,
-				ENDER_INGOT,
-				TUNGSTEN_INGOT,
-				OBSIDIAN_INGOT
-		};
+//		INGOTS = new Item[] {
+//				COPPER_INGOT,
+//				TIN_INGOT,
+//				BRONZE_INGOT,
+//				PIG_IRON_INGOT,
+//				STEEL_INGOT,
+//				ENCRUSTED_INGOT,
+//				SILVER_INGOT,
+//				BLACK_STEEL_WEAK_INGOT,
+//				BLACK_STEEL_INGOT,
+//				RED_STEEL_WEAK_INGOT,
+//				RED_STEEL_INGOT,
+//				BLUE_STEEL_WEAK_INGOT,
+//				BLUE_STEEL_INGOT,
+//				ADAMANTIUM_INGOT,
+//				MITHRIL_INGOT,
+//				IGNOTUMITE_INGOT,
+//				MITHIUM_INGOT,
+//				ENDER_INGOT,
+//				TUNGSTEN_INGOT,
+//				OBSIDIAN_INGOT
+//		};
 
 		Items.POTIONITEM.setContainerItem(Items.GLASS_BOTTLE);
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
@@ -1455,7 +1455,7 @@ public class MineFantasyItems {
 	}
 
 	public static ItemStack bar(String material, int stackSize) {
-		return BAR.createComm(material, stackSize);
+		return ((ItemMetalComponent)BAR).createComponentItemStack(material, stackSize);
 	}
 
 	public static void initCustomTool() {

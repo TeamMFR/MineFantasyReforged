@@ -35,7 +35,7 @@ public class MineFantasyKnowledgeList {
 	public static final IRecipe PIE_APPLE_RECIPE = RecipeHelper.getMFRRecipe("pie_apple");
 	public static final IRecipe PIE_BERRY_RECIPE = RecipeHelper.getMFRRecipe("pie_berry");
 	public static final IRecipe PIE_PUMPKIN_RECIPE = RecipeHelper.getMFRRecipe("pie_pumpkin");
-	public static final IRecipe JUG_PLANT_OIL_RECIPE = RecipeHelper.getMFRRecipe("plant_oil");
+	public static final IRecipe JUG_PLANT_OIL_RECIPE = RecipeHelper.getMFRRecipe("jug_plant_oil");
 	public static final IRecipe JUG_WATER_RECIPE = RecipeHelper.getMFRRecipe("jug_water");
 	public static final IRecipe JUG_MILK_RECIPE = RecipeHelper.getMFRRecipe("jug_milk");
 	public static final IRecipe DRYROCKS_RECIPE = ConfigHardcore.HCCallowRocks ? RecipeHelper.getMFRRecipe("dryrocks_hc") : RecipeHelper.getMFRRecipe("dryrocks");

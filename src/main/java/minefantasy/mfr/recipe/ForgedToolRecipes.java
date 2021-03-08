@@ -5,6 +5,7 @@ import minefantasy.mfr.api.crafting.Salvage;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
+import minefantasy.mfr.item.ItemMetalComponent;
 import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 public class ForgedToolRecipes {
 
 	public static void init() {
-		CarpenterRecipes.initTierWood();
+		OtherRecipes.initTierWood();
 		addStandardTools();
 		addStandardCrafters();
 		addStandardWeapons();
@@ -27,7 +28,7 @@ public class ForgedToolRecipes {
 		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 
 		for (CustomMaterial customMat : metal) {
-			ItemStack bar = MineFantasyItems.BAR.createComm(customMat.name);
+			ItemStack bar = ((ItemMetalComponent)MineFantasyItems.BAR).createComponentItemStack(customMat.name);
 			for (ItemStack ingot : OreDictionary.getOres("ingot" + customMat.name)) {
 				MineFantasyKnowledgeList.barR.add(MineFantasyRebornAPI.addAnvilRecipe(null, bar, "", true, "hammer", -1, -1,
 						(int) (customMat.craftTimeModifier / 2F), "I", 'I', ingot));

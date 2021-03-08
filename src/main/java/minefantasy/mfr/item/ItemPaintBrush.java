@@ -50,7 +50,7 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 	public EnumActionResult onItemUse(EntityPlayer user, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack item = user.getHeldItem(hand);
 		if (user.canPlayerEdit(pos, facing, item) && ResearchLogic.hasInfoUnlocked(user, "paint_brush")) {
-			if (!user.isSwingInProgress && user.inventory.hasItemStack(new ItemStack(MineFantasyItems.PLANT_OIL))) {
+			if (!user.isSwingInProgress && user.inventory.hasItemStack(new ItemStack(MineFantasyItems.JUG_PLANT_OIL))) {
 				Block block = world.getBlockState(pos).getBlock();
 				if (onUsedWithBlock(world, pos, block, item, user)) {
 					return EnumActionResult.PASS;

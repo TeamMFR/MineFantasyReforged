@@ -16,13 +16,14 @@
   ],
   "key": {
     "F": {
-      "item": "minefantasyreborn:flux"
+      "item": "minefantasyreborn:flux_strong"
     },
     "O": {
       "item": "minefantasyreborn:ore_iron"
     }
   },
   "result": {
-    "item": "minefantasyreborn:iron_prep"
+    "item": "minefantasyreborn:prepared_iron",
+    "count": 2
   }
 }

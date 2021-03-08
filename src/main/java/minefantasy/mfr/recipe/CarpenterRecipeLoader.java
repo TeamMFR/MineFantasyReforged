@@ -29,7 +29,6 @@ public class CarpenterRecipeLoader extends RecipeLoader {
 
 	@Override
 	protected void parse(String name, JsonObject json) {
-
 		String type = JsonUtils.getString(json, "type");
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		String research = JsonUtils.getString(json, "research", "none");

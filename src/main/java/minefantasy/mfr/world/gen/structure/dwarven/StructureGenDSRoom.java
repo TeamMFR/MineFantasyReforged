@@ -1,5 +1,6 @@
 package minefantasy.mfr.world.gen.structure.dwarven;
 
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -402,7 +403,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 	}
 
 	private void setupRack(TileEntityRack rack) {
-		rack.setMaterial(CustomMaterial.getMaterial("ScrapWood"));
+		rack.setMaterial(CustomMaterial.getMaterial(Constants.SCRAP_WOOD_TAG));
 		ItemWeaponMFR[] items = new ItemWeaponMFR[] {MineFantasyItems.STANDARD_SWORD, MineFantasyItems.STANDARD_WARAXE,
 				MineFantasyItems.STANDARD_MACE, MineFantasyItems.STANDARD_DAGGER};
 		for (int i = 0; i < rack.getInventory().getSlots(); i++) {

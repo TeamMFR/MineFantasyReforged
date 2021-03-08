@@ -22,7 +22,6 @@ public class CustomToolHelper {
 	public static final String slot_haft = "haft_wood";
 	public static EnumRarity poor = EnumHelper.addRarity("poor", TextFormatting.DARK_GRAY, "poor");
 	public static EnumRarity[] rarity = new EnumRarity[] {poor, EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
-
 	/**
 	 * A bit of the new system, gets custom materials for the head
 	 */

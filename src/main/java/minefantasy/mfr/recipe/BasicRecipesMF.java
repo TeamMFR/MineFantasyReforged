@@ -13,7 +13,7 @@ public class BasicRecipesMF {
 
 	public static void init() {
 		ForgingRecipes.init();
-		CarpenterRecipes.init();
+		OtherRecipes.init();
 		SmeltingRecipesMF.init();
 		SalvageRecipes.init();
 		CookingRecipes.init();
