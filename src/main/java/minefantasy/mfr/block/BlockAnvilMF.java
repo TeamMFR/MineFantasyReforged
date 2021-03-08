@@ -24,8 +24,8 @@ import net.minecraft.world.World;
 public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	public BaseMaterial material;
 	private int tier;
-	private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.1875D, 0.0D, 0.3125D, 0.8125D, 0.8125D, 0.6875D);
-	private static AxisAlignedBB ANVIL_STONE_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
+	private static AxisAlignedBB ANVIL_STONE_AABB = new AxisAlignedBB(0.1875D, 0.0D, 0.3125D, 0.8125D, 0.8125D, 0.6875D);
+	private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
 
 
 	public BlockAnvilMF(BaseMaterial material) {

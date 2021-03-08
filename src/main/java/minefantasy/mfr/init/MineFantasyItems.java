@@ -120,10 +120,6 @@ public class MineFantasyItems {
 	public static EnumRarity[] RARITY;
 
 	// COMPONENTS
-	public static Item CLAY_POT = Utils.nullValue();
-	public static Item CLAY_POT_UNCOOKED = Utils.nullValue();
-	public static Item INGOT_MOULD = Utils.nullValue();
-	public static Item INGOT_MOULD_UNCOOKED = Utils.nullValue();
 	public static Item PIE_TRAY_UNCOOKED = Utils.nullValue();
 	public static Item COPPER_INGOT = Utils.nullValue();
 	public static Item TIN_INGOT = Utils.nullValue();
@@ -146,7 +142,14 @@ public class MineFantasyItems {
 	public static Item TUNGSTEN_INGOT = Utils.nullValue();
 	public static Item OBSIDIAN_INGOT = Utils.nullValue();
 	public static Item COMPOSITE_ALLOY_INGOT = Utils.nullValue();
+	public static Item BAR = Utils.nullValue();
 	public static ItemComponentMFR TIMBER = Utils.nullValue();
+	public static Item TIMBER_CUT = Utils.nullValue();
+	public static Item TIMBER_PANE = Utils.nullValue();
+	public static Item CLAY_POT = Utils.nullValue();
+	public static Item CLAY_POT_UNCOOKED = Utils.nullValue();
+	public static Item INGOT_MOULD = Utils.nullValue();
+	public static Item INGOT_MOULD_UNCOOKED = Utils.nullValue();
 	public static Item VINE = Utils.nullValue();
 	public static Item SHARP_ROCK = Utils.nullValue();
 	public static Item FLUX = Utils.nullValue();
@@ -235,15 +238,12 @@ public class MineFantasyItems {
 	public static Item BODKIN_HEAD = Utils.nullValue();
 	public static Item BROAD_HEAD = Utils.nullValue();
 	public static Item COGWORK_ARMOUR = Utils.nullValue();
-	public static Item BAR = Utils.nullValue();
 	public static Item FLUX_POT = Utils.nullValue();
 	public static Item COAL_FLUX = Utils.nullValue();
 	public static Item COPPER_COIN = Utils.nullValue();
 	public static Item SILVER_COIN = Utils.nullValue();
 	public static Item GOLD_COIN = Utils.nullValue();
 	public static Item HINGE = Utils.nullValue();
-	public static Item TIMBER_CUT = Utils.nullValue();
-	public static Item TIMBER_PANE = Utils.nullValue();
 	public static Item COGWORK_PULLEY = Utils.nullValue();
 	public static ItemArtefact ANCIENT_JEWEL_MITHRIL = Utils.nullValue();
 	public static ItemArtefact ANCIENT_JEWEL_ADAMANT = Utils.nullValue();
@@ -722,12 +722,6 @@ public class MineFantasyItems {
 		IForgeRegistry<Item> registry = event.getRegistry();
 
 		// Components
-		registry.register(CLAY_POT);
-		registry.register(CLAY_POT_UNCOOKED);
-		registry.register(INGOT_MOULD);
-		registry.register(INGOT_MOULD_UNCOOKED);
-		registry.register(PIE_TRAY_UNCOOKED);
-
 		registry.register(COPPER_INGOT);
 		registry.register(TIN_INGOT);
 		registry.register(BRONZE_INGOT);
@@ -748,13 +742,17 @@ public class MineFantasyItems {
 		registry.register(ENDER_INGOT);
 		registry.register(TUNGSTEN_INGOT);
 		registry.register(OBSIDIAN_INGOT);
-
 		registry.register(COMPOSITE_ALLOY_INGOT);
-
+		registry.register(BAR);
 		registry.register(TIMBER);
 		registry.register(TIMBER_CUT);
 		registry.register(TIMBER_PANE);
 
+		registry.register(CLAY_POT);
+		registry.register(CLAY_POT_UNCOOKED);
+		registry.register(INGOT_MOULD);
+		registry.register(INGOT_MOULD_UNCOOKED);
+		registry.register(PIE_TRAY_UNCOOKED);
 		registry.register(VINE);
 		registry.register(SHARP_ROCK);
 
@@ -864,7 +862,6 @@ public class MineFantasyItems {
 		registry.register(BODKIN_HEAD);
 		registry.register(BROAD_HEAD);
 		registry.register(COGWORK_ARMOUR);
-		registry.register(BAR);
 
 		registry.register(FLUX_POT);
 		registry.register(COAL_FLUX);
@@ -1812,7 +1809,7 @@ public class MineFantasyItems {
 		PARACHUTE = new ItemParachute();
 
 		SYRINGE = new ItemSyringe("syringe");
-		SYRINGE_EMPTY = new ItemComponentMFR("syringe_empty").setCreativeTab(MineFantasyTabs.tabGadget);
+		SYRINGE_EMPTY = new ItemBaseMFR("syringe_empty").setCreativeTab(MineFantasyTabs.tabGadget);
 
 		LOOT_SACK = new ItemLootSack("loot_sack", 8, 0);
 		LOOT_SACK_UC = new ItemLootSack("loot_sack_uc", 8, 1);

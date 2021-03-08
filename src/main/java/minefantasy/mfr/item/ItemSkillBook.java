@@ -20,17 +20,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemSkillBook extends ItemComponentMFR {
+public class ItemSkillBook extends ItemBaseMFR {
 	private Skill skill;
-	private String name;
 	private boolean isMax = false;
 
 	public ItemSkillBook(String name, Skill skill) {
-		super(name, 1);
+		super(name);
 		setMaxStackSize(16);
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
 		this.skill = skill;
-		this.name = name;
 	}
 
 	public Item setMax() {
@@ -42,9 +40,9 @@ public class ItemSkillBook extends ItemComponentMFR {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
 		if (isMax) {
-			list.add(I18n.format("item." + name + ".desc"));
+			list.add(I18n.format("item." + skill.unlocalizedName + ".desc"));
 		} else {
-			list.add(I18n.format("item." + name + ".desc", 1));
+			list.add(I18n.format("item." + skill.unlocalizedName + ".desc", 1));
 		}
 	}
 

@@ -30,24 +30,12 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	protected String name;
 	protected int itemRarity;
 	// STORAGE
-	protected String blockTexture;
-	protected String storageType;
+	String blockTexture;
+	String storageType;
 
-	/*
-	 * private int itemRarity;
-	 *
-	 * @Override public EnumRarity getRarity(ItemStack item) { int lvl =
-	 * itemRarity+1;
-	 *
-	 * if(item.isItemEnchanted()) { if(lvl == 0) { lvl++; } lvl ++; } if(lvl >=
-	 * ToolListMF.rarity.length) { lvl = ToolListMF.rarity.length-1; } return
-	 * ToolListMF.rarity[lvl]; }
-	 */
-	// ===================================================== CUSTOM START
-	// =============================================================\\
 	private float unitCount = 1;
 	private boolean isCustom = false;
-	public String materialType = CustomMaterial.NONE.name;
+	String materialType = CustomMaterial.NONE.name;
 
 	public ItemComponentMFR(String name) {
 		this(name, 0);

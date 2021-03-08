@@ -1,0 +1,6 @@
+{
+    "parent": "block/block",
+    "textures": {
+        "layer0": "minecraft:blocks/concrete_magenta"
+    }
+}
