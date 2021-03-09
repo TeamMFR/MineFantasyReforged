@@ -27,24 +27,24 @@ public class CustomToolHelper {
 	 */
 	public static CustomMaterial getCustomPrimaryMaterial(ItemStack item) {
 		if (item.isEmpty())
-			return null;
+			return CustomMaterial.NONE;
 
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
 		if (material != null) {
 			return material;
 		}
-		return null;
+		return CustomMaterial.NONE;
 	}
 
 	public static CustomMaterial getCustomSecondaryMaterial(ItemStack item) {
 		if (item.isEmpty())
-			return null;
+			return CustomMaterial.NONE;
 
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);
 		if (material != null) {
 			return material;
 		}
-		return null;
+		return CustomMaterial.NONE;
 	}
 
 	public static ItemStack construct(Item base, String main) {
@@ -290,7 +290,7 @@ public class CustomToolHelper {
 
 		CustomMaterial base = getCustomPrimaryMaterial(item);
 		String name = "any";
-		if (base != null) {
+		if (base != null && base != CustomMaterial.NONE) {
 			name = base.getName();
 		}
 		return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));

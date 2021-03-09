@@ -55,7 +55,7 @@ public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
 			}
 		}
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-		if (material != null) {
+		if (material != null && material != CustomMaterial.NONE) {
 			tooltip.add(I18n.format("attribute.box.capacity.name",
 					TileEntityAmmoBox.getCapacity(material.tier)));
 		}
