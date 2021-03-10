@@ -13,7 +13,6 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.ShapedCarpenterRecipes;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -34,10 +33,7 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 	private final IDrawable icon;
 
 	static final int WIDTH = 134;
-	static final int HEIGHT = 74;
-	// Annoyingly, these seem to be for 18x18 slots rather than the actual highlighted area, unlike container slots
-	static final int OUTPUT_SLOT_X = 112;
-	static final int OUTPUT_SLOT_Y = 28;
+	static final int HEIGHT = 100;
 
 	private final IDrawable background;
 
@@ -62,17 +58,6 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 		return MineFantasyReborn.NAME;
 	}
 
-	/**
-	 * Draw any extra elements that might be necessary, icons or extra slots.
-	 *
-	 * @see IDrawable for a simple class for drawing things.
-	 * @see IGuiHelper for useful functions.
-	 */
-	@Override
-	public void drawExtras(Minecraft minecraft) {
-		/** see also {@link IRecipeWrapper#drawInfo(net.minecraft.client.Minecraft, int, int, int, int)}*/
-	}
-
 	@Override
 	public IDrawable getBackground() {
 		return background;
@@ -95,33 +80,32 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
 		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 
-		// TODO: finish implementation!
-		// Slot initialisation
-		int i = 0;
-
-		while (i < 15) {
-			slots.init(i++, true, i * 15, 0);
+		// Init ingredient slots, 4x4 grid
+		for (int x = 0; x < 4; x++) {
+			for (int y = 0; y < 4; y++) {
+				int slot = y * 4 + x;
+				slots.init(slot, true, 1 + x * 18, 1 + y * 18);
+			}
 		}
-		slots.init(i++, false, OUTPUT_SLOT_X, OUTPUT_SLOT_Y); // Output
+
+		// Init output slot
+		slots.init(16, false, 112, 28);
 
 		// Assign ingredients to slots
 		for (int j = 0; j < inputs.size(); j++)
 			slots.set(j, inputs.get(j));
+		// Assign outputs to slot
 		for (int k = 0; k < outputs.size(); k++)
-			slots.set(inputs.size() + k, outputs.get(k));
+			slots.set(16, outputs.get(k));
 	}
 
 	/**
 	 * Generates all the MFR carpenter recipes for JEI.
 	 */
 	public static Collection<JEICarpenterRecipe> generateRecipes() {
-
 		List<JEICarpenterRecipe> recipes = new ArrayList<>();
-
 		recipes.addAll(generateRecipeCategory1());
-
 		return recipes;
-
 	}
 
 	@Nullable
@@ -133,12 +117,11 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 	private static Collection<JEICarpenterRecipe> generateRecipeCategory1() {
 
 		List<JEICarpenterRecipe> recipes = new ArrayList<>();
+		List<ShapedCarpenterRecipes> carpenterRecipes = CraftingManagerCarpenter.getInstance().recipes;
 
-		// TODO: loop over all recipes once we are done
-		recipes.add(new JEICarpenterRecipe((ShapedCarpenterRecipes) CraftingManagerCarpenter.getInstance().recipes.get(2))); // example
-		recipes.add(new JEICarpenterRecipe((ShapedCarpenterRecipes) CraftingManagerCarpenter.getInstance().recipes.get(3))); // example
-		recipes.add(new JEICarpenterRecipe((ShapedCarpenterRecipes) CraftingManagerCarpenter.getInstance().recipes.get(4))); // example
-		recipes.add(new JEICarpenterRecipe((ShapedCarpenterRecipes) CraftingManagerCarpenter.getInstance().recipes.get(5))); // example
+		for (ShapedCarpenterRecipes carpenterRecipe : carpenterRecipes) {
+			recipes.add(new JEICarpenterRecipe(carpenterRecipe));
+		}
 
 		return recipes;
 

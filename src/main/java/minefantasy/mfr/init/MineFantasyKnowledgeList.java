@@ -11,7 +11,7 @@ import minefantasy.mfr.mechanics.knowledge.InformationPage;
 import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
 import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.recipe.ICarpenterRecipe;
-import minefantasy.mfr.recipe.RecipeHelper;
+import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

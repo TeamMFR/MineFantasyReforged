@@ -15,9 +15,9 @@ import net.minecraft.util.NonNullList;
 import java.util.Arrays;
 
 @JEIPlugin
-public class MFRJEIIntegration implements IModPlugin {
+public class JEIIntegration implements IModPlugin {
 
-	public MFRJEIIntegration() {
+	public JEIIntegration() {
 	}
 
 	@Override
@@ -44,10 +44,7 @@ public class MFRJEIIntegration implements IModPlugin {
 		// /UNUSED
 
 
-		// yet again cant use this because of the messy minefantasy.mfr.item.ItemComponentMFR.getSubItems method and class
-		addExtendedInfo(registry, MineFantasyItems.FLUX, ".desc_extended"); // not working yet
-
-		addExtendedInfo(registry, new ItemStack(MineFantasyItems.FLUX), ".desc_extended"); // this works
+		addExtendedInfo(registry, MineFantasyItems.FLUX, ".desc_extended");
 
 		registry.addRecipes(JEICarpenterRecipeCategory.generateRecipes(), JEICarpenterRecipeCategory.UID);
 

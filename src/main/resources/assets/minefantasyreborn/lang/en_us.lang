@@ -1094,6 +1094,7 @@ skill.list.basic=Basic Skills
 skill.list.craft=Crafting Skills
 skill.list.combat=Combat Skills
 
+skill.none.name=No Skill
 skill.artisanry.name=Artisanry
 skill.construction.name=Construction
 skill.provisioning.name=Provisioning

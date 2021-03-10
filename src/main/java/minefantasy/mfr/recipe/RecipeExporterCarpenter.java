@@ -2,6 +2,7 @@ package minefantasy.mfr.recipe;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;

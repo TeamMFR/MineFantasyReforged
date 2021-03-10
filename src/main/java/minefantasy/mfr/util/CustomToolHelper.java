@@ -231,18 +231,18 @@ public class CustomToolHelper {
 
 	@SideOnly(Side.CLIENT)
 	public static void addInformation(ItemStack item, List<String> list) {
-		CustomMaterial haft = getCustomSecondaryMaterial(item);
+		CustomMaterial secondaryMaterial = getCustomSecondaryMaterial(item);
 
 		if (materialOnTooltip()) {
-			CustomMaterial main = getCustomPrimaryMaterial(item);
-			if (main != null) {
-				String matName = I18n.format(I18n.format(Utils.convertSnakeCaseToSplitCapitalized(main.getName())));
+			CustomMaterial mainMaterial = getCustomPrimaryMaterial(item);
+			if (mainMaterial != null && mainMaterial != CustomMaterial.NONE) {
+				String matName = I18n.format(I18n.format(Utils.convertSnakeCaseToSplitCapitalized(mainMaterial.getName())));
 				list.add(TextFormatting.GOLD + matName);
 			}
 		}
 
-		if (haft != null) {
-			String matName = I18n.format("item.mod_haft.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(haft.getName())));
+		if (secondaryMaterial != null && secondaryMaterial != CustomMaterial.NONE) {
+			String matName = I18n.format("item.mod_haft.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(secondaryMaterial.getName())));
 			list.add(TextFormatting.GOLD + matName);
 		}
 
@@ -261,26 +261,26 @@ public class CustomToolHelper {
 	@SideOnly(Side.CLIENT)
 	public static void addBowInformation(ItemStack item, List<String> list) {
 
-		CustomMaterial metals = getCustomPrimaryMaterial(item);
-		if (metals != null) {
+		CustomMaterial material = getCustomPrimaryMaterial(item);
+		if (material != null && material != CustomMaterial.NONE) {
 			String matName = I18n.format("item.mod_joint.name",
-					I18n.format(Utils.convertSnakeCaseToSplitCapitalized(metals.getName())));
+					I18n.format(Utils.convertSnakeCaseToSplitCapitalized(material.getName())));
 			list.add(TextFormatting.GOLD + matName);
 		}
 
 	}
 
-	public static String getWoodenLocalisedName(ItemStack item, String unlocalName) {
+	public static String getWoodenLocalisedName(ItemStack item, String unlocalizedName) {
 		if (materialOnTooltip()) {
-			I18n.format(unlocalName);
+			I18n.format(unlocalizedName);
 		}
 
-		CustomMaterial base = getCustomSecondaryMaterial(item);
+		CustomMaterial material = getCustomSecondaryMaterial(item);
 		String name = "any";
-		if (base != null) {
-			name = base.getName();
+		if (material != null && material != CustomMaterial.NONE) {
+			name = material.getName();
 		}
-		return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
+		return I18n.format(unlocalizedName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
 
 	public static String getLocalisedName(ItemStack item, String unlocalName) {
@@ -288,10 +288,10 @@ public class CustomToolHelper {
 			I18n.format(unlocalName);
 		}
 
-		CustomMaterial base = getCustomPrimaryMaterial(item);
+		CustomMaterial material = getCustomPrimaryMaterial(item);
 		String name = "any";
-		if (base != null && base != CustomMaterial.NONE) {
-			name = base.getName();
+		if (material != null && material != CustomMaterial.NONE) {
+			name = material.getName();
 		}
 		return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
@@ -420,18 +420,18 @@ public class CustomToolHelper {
 	}
 
 	public static boolean areToolsSame(ItemStack item1, ItemStack item2) {
-		CustomMaterial main1 = getCustomPrimaryMaterial(item1);
-		CustomMaterial main2 = getCustomSecondaryMaterial(item2);
-		CustomMaterial haft1 = getCustomPrimaryMaterial(item1);
-		CustomMaterial haft2 = getCustomSecondaryMaterial(item2);
-		if ((main1 == null && main2 != null) || (main2 == null && main1 != null))
+		CustomMaterial mainMaterial1 = getCustomPrimaryMaterial(item1);
+		CustomMaterial secondaryMaterial1 = getCustomSecondaryMaterial(item2);
+		CustomMaterial mainMaterial2 = getCustomPrimaryMaterial(item1);
+		CustomMaterial secondaryMaterial2 = getCustomSecondaryMaterial(item2);
+		if ((mainMaterial1 == null && secondaryMaterial1 != null) || (secondaryMaterial1 == null && mainMaterial1 != null))
 			return false;
-		if ((haft1 == null && haft2 != null) || (haft2 == null && haft1 != null))
+		if ((mainMaterial2 == null && secondaryMaterial2 != null) || (secondaryMaterial2 == null && mainMaterial2 != null))
 			return false;
 
-		if (main1 != null && main2 != null && main1 != main2)
+		if (mainMaterial1 != null && secondaryMaterial1 != null && mainMaterial1 != secondaryMaterial1)
 			return false;
-		if (haft1 != null && haft2 != null && haft1 != haft2)
+		if (mainMaterial2 != null && secondaryMaterial2 != null && mainMaterial2 != secondaryMaterial2)
 			return false;
 
 		return true;
