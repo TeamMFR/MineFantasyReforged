@@ -10,12 +10,13 @@
   "output_hot": true,
   "pattern": [
     "  F   ",
-    "BC    ",
-    " B    ",
+    "SC    ",
+    " S    ",
     "      "
   ],
   "key": {
-    "B": {
+    "S": {
+      "nbt": "{mf_custom_materials:{main_metal:\"steel\"}}",
       "item": "minefantasyreborn:bar"
     },
     "C": {

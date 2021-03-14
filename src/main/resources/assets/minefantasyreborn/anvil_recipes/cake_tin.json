@@ -10,15 +10,16 @@
   "output_hot": true,
   "pattern": [
     " R    ",
-    "B B   ",
-    " B    ",
+    "I I   ",
+    " I    ",
     "      "
   ],
   "key": {
     "R": {
       "item": "minefantasyreborn:rivet"
     },
-    "B": {
+    "I": {
+      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
       "item": "minefantasyreborn:bar"
     }
   },

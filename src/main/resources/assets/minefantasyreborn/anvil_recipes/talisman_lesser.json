@@ -9,16 +9,21 @@
   "recipe_hammer": -1,
   "output_hot": true,
   "pattern": [
-    "DBD   ",
-    "BBB   ",
-    " B    ",
+    "LGL   ",
+    "GIG   ",
+    " G    ",
     "      "
   ],
   "key": {
-    "B": {
+    "G": {
+      "nbt": "{mf_custom_materials:{main_metal:\"gold\"}}",
       "item": "minefantasyreborn:bar"
     },
-    "D": {
+    "I": {
+      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "item": "minefantasyreborn:bar"
+    },
+    "L": {
       "item": "minecraft:dye",
       "data": 4
     }

@@ -19,6 +19,7 @@
       "item": "minecraft:redstone"
     },
     "T": {
+      "nbt": "{mf_custom_materials:{main_metal:\"refined_wood\"}}",
       "item": "minefantasyreborn:timber"
     },
     "E": {

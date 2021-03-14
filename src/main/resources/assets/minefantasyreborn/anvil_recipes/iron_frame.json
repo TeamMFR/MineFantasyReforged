@@ -10,9 +10,9 @@
   "output_hot": true,
   "pattern": [
     "RRR   ",
-    "MMM   ",
-    "MEM   ",
-    "MMM   "
+    "ISI   ",
+    "SES   ",
+    "ISI   "
   ],
   "key": {
     "R": {
@@ -21,7 +21,12 @@
     "E": {
       "item": "minefantasyreborn:engin_anvil_tools"
     },
-    "M": {
+    "S": {
+      "nbt": "{mf_custom_materials:{main_metal:\"steel\"}}",
+      "item": "minefantasyreborn:metal_hunk"
+    },
+    "I": {
+      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },

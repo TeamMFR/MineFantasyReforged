@@ -26,6 +26,8 @@ item.research_scroll_complete.name=Completed Research
 item.talisman_lesser.name=Lesser Knowledge Talisman
 item.talisman_greater.name=Greater Knowledge Talisman
 
+item.engin_anvil_tools.name=Engineering Tools
+
 prospect.canmine=You can mine this! (Tool: %1$s | Block: %2$s)
 prospect.cannotmine=This cannot be mined with this tool! (Tool: %1$s | Block: %2$s)
 gui.information=Research
@@ -239,6 +241,7 @@ item.world_gen_placer=World Gen Placer
 
 # INTEGRATION
 integration.jei.category.minefantasyreborn:carpenter=Carpenter Bench
+integration.jei.category.minefantasyreborn:anvil=MineFantasy Anvil
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 
 # COMMODITY
@@ -561,6 +564,7 @@ tile.reinforced_stone_bricks_cracked.name=Worn Reinforced Stone Bricks
 tile.reinforced_stone_bricks_mossy.name=Mossy Reinforced Stone Bricks
 
 tile.reinforced_stone_framed.name=Framed Reinforced Stone
+tile.reinforced_stone_framed_iron.name=Framed Reinforced Stone
 tile.reinforced_stone_stairs.name=Reinforced Stone Steps
 tile.reinforced_stone_brick_stairs.name=Reinforced Stone Brick Steps
 
@@ -671,6 +675,7 @@ item.tinderbox.name=Tinderbox
 item.bandage_crude.name=Crude Bandage
 item.bandage_wool.name=Wool Bandage
 item.bandage_tough.name=Strong Bandage
+item.bandage_heal_amount=Heals %1$s hearts of damage. Use for 5 seconds to apply
 
 # TRAINING
 item.training_sword.name=Training Sword

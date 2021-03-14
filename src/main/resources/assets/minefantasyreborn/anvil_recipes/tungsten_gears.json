@@ -10,9 +10,9 @@
   "output_hot": true,
   "pattern": [
     " E    ",
-    " M    ",
-    "MBM   ",
-    " M    "
+    " T    ",
+    "TBT   ",
+    " T    "
   ],
   "key": {
     "B": {
@@ -21,7 +21,8 @@
     "E": {
       "item": "minefantasyreborn:engin_anvil_tools"
     },
-    "M": {
+    "T": {
+      "nbt": "{mf_custom_materials:{main_metal:\"tungsten\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },
