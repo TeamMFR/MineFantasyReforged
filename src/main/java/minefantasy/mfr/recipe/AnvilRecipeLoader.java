@@ -44,7 +44,7 @@ public class AnvilRecipeLoader extends RecipeLoader {
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
 
 		String[] pattern = shrink(patternFromJson(GRID_WIDTH, GRID_HEIGHT, JsonUtils.getJsonArray(json, "pattern")));
-		ItemStack resultStack = deserializeItem(JsonUtils.getJsonObject(json, "result"), true);
+		ItemStack resultStack = deserializeIngredient(JsonUtils.getJsonObject(json, "result")).getMatchingStacks()[0];
 		Object[] o = getInputs(pattern, json);
 
 		byte type = s.equals("CustomToolRecipe") ? (byte) 1 : (byte) 0;
