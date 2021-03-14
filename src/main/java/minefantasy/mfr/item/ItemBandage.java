@@ -4,6 +4,8 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -15,6 +17,9 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemBandage extends ItemBaseMFR {
 	private static final String healingID = "MF_Bandage_progress";
@@ -162,5 +167,11 @@ public class ItemBandage extends ItemBaseMFR {
 			}
 		}
 		return 0;
+	}
+
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(I18n.format("item.bandage_heal_amount", healPwr / 2));
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

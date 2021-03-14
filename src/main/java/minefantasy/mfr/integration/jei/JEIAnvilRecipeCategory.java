@@ -11,8 +11,8 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.recipe.CraftingManagerCarpenter;
-import minefantasy.mfr.recipe.ShapedCarpenterRecipes;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.ShapedAnvilRecipes;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -23,24 +23,24 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * JEI recipe category implementation for all "recipes" in the carpenter bench.
+ * JEI recipe category implementation for all "recipes" of the MFR anvil.
  */
-public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterRecipe> {
+public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 
-	static final String UID = "minefantasyreborn:carpenter";
+	static final String UID = "minefantasyreborn:anvil";
 
-	static final ResourceLocation TEXTURE = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/integration/jei/carpenter_background.png");
+	static final ResourceLocation TEXTURE = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/integration/jei/anvil_background.png");
 	private final IDrawable icon;
 
-	static final int WIDTH = 134;
+	static final int WIDTH = 165;
 	static final int HEIGHT = 100;
 
 	private final IDrawable background;
 
-	public JEICarpenterRecipeCategory(IRecipeCategoryRegistration registry) {
+	public JEIAnvilRecipeCategory(IRecipeCategoryRegistration registry) {
 		IGuiHelper iGuiHelper = registry.getJeiHelpers().getGuiHelper();
 		background = iGuiHelper.createDrawable(TEXTURE, 0, 0, WIDTH, HEIGHT);
-		icon = iGuiHelper.createDrawableIngredient(new ItemStack(MineFantasyBlocks.CARPENTER));
+		icon = iGuiHelper.createDrawableIngredient(new ItemStack(MineFantasyBlocks.ANVIL_IRON));
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 	 * @since JEI 3.11.0
 	 */
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, JEICarpenterRecipe recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, JEIAnvilRecipe recipeWrapper, IIngredients ingredients) {
 
 		// Okay, they're not technically *slots* but to all intents and purposes, that's how they behave
 		IGuiItemStackGroup slots = recipeLayout.getItemStacks();
@@ -80,8 +80,10 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
 		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 
-		// Init ingredient slots, 4x4 grid
-		int width = 4;
+		// Init ingredient slots, 5x4 grid
+		System.out.println("start");
+
+		int width = 6;
 		int height = 4;
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -91,21 +93,21 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 		}
 
 		// Init output slot
-		slots.init(24, false, 112, 28);
+		slots.init(20, false, 143, 28);
 
 		// Assign ingredients to slots
 		for (int j = 0; j < inputs.size(); j++)
 			slots.set(j, inputs.get(j));
 		// Assign outputs to slot
 		for (int k = 0; k < outputs.size(); k++)
-			slots.set(24, outputs.get(k));
+			slots.set(20, outputs.get(k));
 	}
 
 	/**
-	 * Generates all the MFR carpenter recipes for JEI.
+	 * Generates all the MFR anvil recipes for JEI.
 	 */
-	public static Collection<JEICarpenterRecipe> generateRecipes() {
-		List<JEICarpenterRecipe> recipes = new ArrayList<>();
+	public static Collection<JEIAnvilRecipe> generateRecipes() {
+		List<JEIAnvilRecipe> recipes = new ArrayList<>();
 		recipes.addAll(generateRecipeCategory1());
 		return recipes;
 	}
@@ -116,13 +118,13 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 		return icon;
 	}
 
-	private static Collection<JEICarpenterRecipe> generateRecipeCategory1() {
+	private static Collection<JEIAnvilRecipe> generateRecipeCategory1() {
 
-		List<JEICarpenterRecipe> recipes = new ArrayList<>();
-		List<ShapedCarpenterRecipes> carpenterRecipes = CraftingManagerCarpenter.getInstance().recipes;
+		List<JEIAnvilRecipe> recipes = new ArrayList<>();
+		List<ShapedAnvilRecipes> anvilRecipes = CraftingManagerAnvil.getInstance().recipes;
 
-		for (ShapedCarpenterRecipes carpenterRecipe : carpenterRecipes) {
-			recipes.add(new JEICarpenterRecipe(carpenterRecipe));
+		for (ShapedAnvilRecipes anvilRecipe : anvilRecipes) {
+			recipes.add(new JEIAnvilRecipe(anvilRecipe));
 		}
 
 		return recipes;

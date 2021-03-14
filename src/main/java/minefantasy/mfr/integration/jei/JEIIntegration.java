@@ -27,6 +27,7 @@ public class JEIIntegration implements IModPlugin {
 			return;
 
 		registry.addRecipeCategories(new JEICarpenterRecipeCategory(registry));
+		registry.addRecipeCategories(new JEIAnvilRecipeCategory(registry));
 		// TODO: same for anvil, salvage, ...
 	}
 
@@ -47,7 +48,7 @@ public class JEIIntegration implements IModPlugin {
 		addExtendedInfo(registry, MineFantasyItems.FLUX, ".desc_extended");
 
 		registry.addRecipes(JEICarpenterRecipeCategory.generateRecipes(), JEICarpenterRecipeCategory.UID);
-
+		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipes(), JEIAnvilRecipeCategory.UID);
 	}
 
 	private static void addExtendedInfo(IModRegistry registry, Item item, String... suffixes) {

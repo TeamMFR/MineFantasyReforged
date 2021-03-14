@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
-// TODO: check net.minecraftforge.fml.common.registry.GameRegistry.addShapedRecipe as we should probably register our recipes as proper IRecipes instead of our own registry
 public abstract class RecipeLoader extends DataLoader {
 
 	protected static String[] shrink(String... strings) {
@@ -79,7 +78,7 @@ public abstract class RecipeLoader extends DataLoader {
 		return i;
 	}
 
-	private static Ingredient deserializeIngredient(@Nullable JsonElement element) {
+	public static Ingredient deserializeIngredient(@Nullable JsonElement element) {
 		if (element != null && !element.isJsonNull()) {
 			if (element.isJsonObject()) {
 				return Ingredient.fromStacks(minefantasy.mfr.util.JsonUtils.getItemStack(element));
@@ -230,7 +229,7 @@ public abstract class RecipeLoader extends DataLoader {
 		for (Map.Entry<Character, Ingredient> i : map.entrySet()) {
 			if (!Character.isWhitespace(i.getKey())) {
 				object = appendValue(object, i.getKey());
-				object = appendValue(object, i.getValue().getMatchingStacks()[0].getItem());
+				object = appendValue(object, i.getValue().getMatchingStacks()[0]);
 			}
 		}
 
