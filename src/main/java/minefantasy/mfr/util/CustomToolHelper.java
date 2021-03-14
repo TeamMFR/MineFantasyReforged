@@ -129,7 +129,7 @@ public class CustomToolHelper {
 				return material.getColourInt();
 			}
 		}
-		return 0;
+		return CustomMaterial.NONE.getColourInt();
 	}
 
 	public static float getWeightModifier(ItemStack item, float base) {

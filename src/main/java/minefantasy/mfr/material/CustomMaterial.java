@@ -29,7 +29,7 @@ public class CustomMaterial {
 	/**
 	 * The material colour
 	 */
-	public int[] colourRGB = new int[] {255, 255, 255};
+	public int[] colourRGB = new int[] {237, 237, 237};
 	/**
 	 * Base threshold for armour rating
 	 */
