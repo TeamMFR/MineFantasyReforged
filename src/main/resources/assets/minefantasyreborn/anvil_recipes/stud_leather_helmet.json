@@ -1,0 +1,29 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill": "artisanry",
+  "research": "craftArmourLight",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 14,
+  "recipe_hammer": 3,
+  "output_hot": false,
+  "pattern": [
+    " R    ",
+    "RLR   ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "M": {
+      "nbt": "{mf_custom_materials:{main_metal:\"steel\"}}",
+      "item": "minefantasyreborn:metal_hunk"
+    },
+    "L": {
+      "item": "minefantasyreborn:strong_leather_helmet"
+    }
+  },
+  "result": {
+    "item": "minefantasyreborn:stud_leather_helmet"
+  }
+}
