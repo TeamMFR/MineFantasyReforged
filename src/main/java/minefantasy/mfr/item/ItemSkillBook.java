@@ -40,9 +40,9 @@ public class ItemSkillBook extends ItemBaseMFR {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
 		if (isMax) {
-			list.add(I18n.format("item." + skill.unlocalizedName + ".desc"));
+			list.add(I18n.format("item.skillbook_" + skill.unlocalizedName + "_max.desc"));
 		} else {
-			list.add(I18n.format("item." + skill.unlocalizedName + ".desc", 1));
+			list.add(I18n.format("item.skillbook_" + skill.unlocalizedName + ".desc", 1));
 		}
 	}
 

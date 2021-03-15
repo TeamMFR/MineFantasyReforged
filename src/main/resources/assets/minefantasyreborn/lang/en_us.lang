@@ -506,18 +506,18 @@ tile.window.name=Window
 tile.window_pane.name=Window Pane
 tile.mud_road.name=Mud Road
 tile.mud_brick.name=Mud Bricks
-tile.mud_brick_stair.name=Mud Brick Steps
+tile.mud_brick_stairs.name=Mud Brick Steps
 tile.thatch.name=Thatch
-tile.thatch_stair.name=Thatch Stairs
+tile.thatch_stairs.name=Thatch Stairs
 tile.component.name=Component
 
 tile.limestone.name=Limestone
-tile.limestone_cobblestone.name=Limestone Cobblestone
+tile.limestone_cobble.name=Limestone Cobblestone
 tile.limestone_brick.name=Limestone Brick
 tile.limestone_road.name=Limestone Road
-tile.limestone_stair.name=Limestone Stairs
-tile.limestone_cobblestone_stair.name=Limestone Cobblestone Stairs
-tile.limestone_brick_stair.name=Limestone Brick Stairs
+tile.limestone_stairs.name=Limestone Stairs
+tile.limestone_cobble_stairs.name=Limestone Cobblestone Stairs
+tile.limestone_brick_stairs.name=Limestone Brick Stairs
 
 tile.slate.name=Slate
 tile.slate_cobblestone.name=Slate Cobblestone
@@ -528,7 +528,7 @@ tile.slate_cobblestone_stair.name=Slate Cobblestone Stairs
 tile.slate_brick_stair.name=Slate Brick Stairs
 
 tile.framed_glass.name=Framed Glass
-tile.framed_pane.name=Framed Glass Pane
+tile.framed_glass_pane.name=Framed Glass Pane
 tile.firebricks.name=Fire Bricks
 tile.firebrick_stairs.name=Fire Brick Steps
 tile.cobblestone_road.name=Cobblestone Road
@@ -556,6 +556,8 @@ tile.refined_planks.name=Refined Wood Planks
 tile.nailed_planks_stairs.name=Nailed Plank Stairs
 tile.refined_planks_stairs.name=Refined Plank Stairs
 
+tile.reinforced_stone.name=Reinforced Stone
+tile.reinforced_stone_bricks.name=Reinforced Stone Bricks
 tile.reinforced_stone_base.name=Reinforced Stone
 tile.reinforced_stone_engraved.name=Engraved Reinforced Stone
 
@@ -593,7 +595,7 @@ tile.mithril_block.name=Block of Mithril
 tile.ignotumite_block.name=Block of Ignotumite
 tile.mithium_block.name=Block of Mithium
 
-tile.ender_block.name=Block of Enderforge
+tile.enderforge_block.name=Block of Enderforge
 
 tile.forge_stone.name=Stone Forge
 tile.forge_metal.name=Advanced Forge
