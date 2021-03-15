@@ -1,8 +1,8 @@
 package minefantasy.mfr.init;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigMobs;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.entity.EntityCogwork;
@@ -33,17 +33,17 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 public class MineFantasyEntities {
 	@SubscribeEvent
 	public static void register(RegistryEvent.Register<EntityEntry> event) {
-		addEntity(EntityArrowMFR.class, "arrowMF", 1, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
-		addEntity(EntityBomb.class, "bombMF", 2, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
-		addEntity(EntityShrapnel.class, "shrapnel_mf", 3, 16, ConfigExperiment.dynamicArrows ? 1 : 20);
-		addEntity(EntityFireBlast.class, "fire_blast", 4, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
-		addEntity(EntitySmoke.class, "smoke_mf", 5, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
-		addEntity(EntityItemUnbreakable.class, "special_eitem_mf", 6, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
+		addEntity(EntityArrowMFR.class, "arrowMF", 1, 16, ConfigSpecials.dynamicArrows ? 1 : 20);
+		addEntity(EntityBomb.class, "bombMF", 2, 16, ConfigSpecials.dynamicArrows ? 1 : 20);
+		addEntity(EntityShrapnel.class, "shrapnel_mf", 3, 16, ConfigSpecials.dynamicArrows ? 1 : 20);
+		addEntity(EntityFireBlast.class, "fire_blast", 4, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
+		addEntity(EntitySmoke.class, "smoke_mf", 5, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
+		addEntity(EntityItemUnbreakable.class, "special_eitem_mf", 6, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
 
 		addEntity(EntityMine.class, "landmineMF", 7, 16, 10);
 		addEntity(EntityParachute.class, "parachute_mf", 8, 16, 20);
 
-		addEntity(EntityDragonBreath.class, "dragonbreath", 9, 16, ConfigExperiment.dynamicArrows ? 2 : 20);
+		addEntity(EntityDragonBreath.class, "dragonbreath", 9, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
 
 		DragonBreath.init();
 		addEntity(10, EntityDragon.class, "dragon");

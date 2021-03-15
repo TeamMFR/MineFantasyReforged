@@ -2,15 +2,16 @@ package minefantasy.mfr.config;
 
 import minefantasy.mfr.util.ArmourCalculator;
 
-public class ConfigExperiment extends ConfigurationBaseMF {
+public class ConfigSpecials extends ConfigurationBaseMF {
 	public static final String CATEGORY_EARLY = "Unfinished Features";
 	public static final String CATEGORY_ARCHERY = "Archery Features";
 	public static final String CATEGORY_ARMOUR = "Armour Features";
+	public static final String CATEGORY_MISC = "Misc Features";
 	public static final String CATEGORY_FOOD = "Experimental: Hunger Modification";
 	public static boolean stickArrows;
 	public static boolean dynamicArrows;
 	public static String debug = "";
-
+	public static boolean mythicOreSoundTooltip;
 	@Override
 	protected void loadConfig() {
 		// RPGElements.isSystemActive = Boolean.parseBoolean(config.get(CATEGORY_EARLY,
@@ -35,6 +36,9 @@ public class ConfigExperiment extends ConfigurationBaseMF {
 		ArmourCalculator.advancedDamageTypes = Boolean
 				.parseBoolean(config.get(CATEGORY_ARMOUR, "Advanced Armour Calculator", true, AADesc).getString());
 		debug = config.get("###Enable Debug Mode###", "Debug Passcode", "").getString();
+		mythicOreSoundTooltip = Boolean.parseBoolean(config.get(CATEGORY_MISC, "Mythic Ore Sound Tooltip", false,
+				"When enabled, the Mythic ore will also send a written tooltip when ore emits a chiming sound.")
+				.getString());
 	}
 
 }

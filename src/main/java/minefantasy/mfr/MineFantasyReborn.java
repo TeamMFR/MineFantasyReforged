@@ -8,12 +8,12 @@ import minefantasy.mfr.commands.CommandMFR;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigCrafting;
-import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigFarming;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigIntegration;
 import minefantasy.mfr.config.ConfigItemRegistry;
 import minefantasy.mfr.config.ConfigMobs;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
@@ -77,7 +77,7 @@ public class MineFantasyReborn {
 	}
 
 	public static boolean isDebug() {
-		return ConfigExperiment.debug.equals("AU32-Db42-Acf6-Ggh9-9E8d");
+		return ConfigSpecials.debug.equals("AU32-Db42-Acf6-Ggh9-9E8d");
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class MineFantasyReborn {
 			new ConfigClient().setConfig(getCfg(preEvent, "Client"));
 		}
 		new ConfigArmour().setConfig(getCfg(preEvent, "Armours"));
-		new ConfigExperiment().setConfig(getCfg(preEvent, "Specials"));
+		new ConfigSpecials().setConfig(getCfg(preEvent, "Specials"));
 		new ConfigHardcore().setConfig(getCfg(preEvent, "Hardcore"));
 		new ConfigIntegration().setConfig(getCfg(preEvent, "Integration"));
 		new ConfigTools().setConfig(getCfg(preEvent, "Tools"));

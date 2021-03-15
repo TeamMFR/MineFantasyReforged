@@ -4,7 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IArrowRetrieve;
 import minefantasy.mfr.api.weapon.IDamageType;
-import minefantasy.mfr.config.ConfigExperiment;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ArrowType;
@@ -260,7 +260,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	public void onUpdate() {
 		super.onEntityUpdate();
 
-		if (ConfigExperiment.dynamicArrows && world.isRemote) {
+		if (ConfigSpecials.dynamicArrows && world.isRemote) {
 			return;
 		}
 		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {

@@ -4,6 +4,10 @@ vehicle.fuel.name=Fuel: %1$s
 info.bow.reload=Right-Click while sneaking to open firearm.
 info.firearm.ammo=%1$s/%2$s
 info.tooltip.moreinfo=Hold [%1$s] for more information.
+message.mythic_ore_sound=You hear a chiming sound from %1$s
+message.definite_article=the
+message.below=BELOW
+message.above=ABOVE
 info.salvage.usage=Drop a valid item on top of the Salvage Block to salvage it
 gui.no_project_set=<No Project Set>
 

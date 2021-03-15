@@ -9,7 +9,7 @@ import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigArmour;
-import minefantasy.mfr.config.ConfigExperiment;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.constants.Skill;
@@ -382,7 +382,7 @@ public class CombatMechanics {
 			damage = ISpecialArmor.ArmorProperties.applyArmor(event.getEntityLiving(), (NonNullList<ItemStack>) event.getEntityLiving().getArmorInventoryList(), event.getSource(), damage);
 		}
 		// TODO: Stick arrows (EXPERIMENTAL)
-		if (ConfigExperiment.stickArrows && event.getSource().getImmediateSource() != null
+		if (ConfigSpecials.stickArrows && event.getSource().getImmediateSource() != null
 				&& event.getSource().getImmediateSource() instanceof EntityArrow) {
 			if (!event.getEntity().world.isRemote) {
 				ArrowEffectsMF.stickArrowIn(event.getEntity(), ArrowEffectsMF.getDroppedArrow(event.getSource().getImmediateSource()), event.getSource().getImmediateSource());

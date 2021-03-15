@@ -7,8 +7,8 @@ import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.ISmithTongs;
 import minefantasy.mfr.config.ConfigClient;
-import minefantasy.mfr.config.ConfigExperiment;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
@@ -271,7 +271,7 @@ public class EventManagerMFRToRemove {
 		catch (Exception e) {
 			useArrows = false;
 		}
-		if (dropper != null && useArrows && ConfigExperiment.stickArrows && !dropper.world.isRemote) {
+		if (dropper != null && useArrows && ConfigSpecials.stickArrows && !dropper.world.isRemote) {
 			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowEffectsMF.getStuckArrows(dropper);
 			if (!stuckArrows.isEmpty()) {
 

@@ -134,7 +134,7 @@ public final class MFREventHandler {
 	 */
 	@SubscribeEvent
 	@SideOnly(Side.CLIENT)
-	public static void setTooltip(ItemTooltipEvent event) {
+	public static void onItemTooltip(ItemTooltipEvent event) {
 		//  Excludes this from the initial search tree population for tooltips (during game initialization).
 		if (event.getEntity() == null) {
 			return;
