@@ -58,8 +58,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
 		int yPoint = (this.height - this.bookImageHeight) / 2;
 
 		this.buttonList.clear();
-		this.buttonList.add(this.buttonDone = new GuiButton(0, this.width / 2 - 50,
-				4 + yPoint + this.bookImageHeight - 16, 100, 18, I18n.format("gui.done")));
+		this.buttonList.add(this.buttonDone = new CloseButton(0, this.width / 2 + 162, 2 + yPoint));
 		this.buttonList.add(this.buttonNextPage = new GuiKnowledgeEntry.NextPageButton(1, xPoint + bookImageWidth - 22,
 				yPoint + 216, true));
 		this.buttonList.add(this.buttonPreviousPage = new GuiKnowledgeEntry.NextPageButton(2,
@@ -181,7 +180,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
 		public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
 			if (this.visible) {
 				this.hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
-				GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 				mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/book.png"));
 				int k = 0;
 				int l = 228;
@@ -195,6 +194,37 @@ public class GuiKnowledgeEntry extends GuiScreen {
 				}
 
 				this.drawTexturedModalRect(this.x, this.y, k, l, 18, 10);
+			}
+		}
+
+		@Override
+		public void playPressSound(SoundHandler soundHandler) {
+			soundHandler.playSound(
+					PositionedSoundRecord.getMasterRecord(MineFantasySounds.FLIP_PAGE, 1.0F));
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	static class CloseButton extends GuiButton {
+
+		public CloseButton(int buttonId, int x, int y) {
+			super(buttonId, x, y, 16, 16, "");
+		}
+
+		@Override
+		public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+			if (this.visible) {
+				this.hovered = mouseX >= x && mouseY >= y && mouseX < x + width && mouseY < y + height;
+				GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+				mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/book.png"));
+				int k = 67;
+				int l = 228;
+
+				if (hovered) {
+					k += 16;
+				}
+
+				this.drawTexturedModalRect(this.x, this.y, k, l, 16, 16);
 			}
 		}
 
