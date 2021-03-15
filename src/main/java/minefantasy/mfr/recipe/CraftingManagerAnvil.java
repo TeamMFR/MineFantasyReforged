@@ -28,6 +28,7 @@ public class CraftingManagerAnvil {
 	 * A list of all the recipes added
 	 */
 	public List recipes = new ArrayList<IRecipe>();
+	public HashMap<String, Object> recipeMap = new HashMap<>();
 
 	private CraftingManagerAnvil() {
 		Collections.sort(this.recipes, new RecipeSorterAnvil(this));
@@ -38,6 +39,10 @@ public class CraftingManagerAnvil {
 	 */
 	public static CraftingManagerAnvil getInstance() {
 		return instance;
+	}
+
+	public static IAnvilRecipe getRecipeByName(String name) {
+		return (IAnvilRecipe) getInstance().recipeMap.get(name);
 	}
 
 	public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, Object... input) {
@@ -54,7 +59,7 @@ public class CraftingManagerAnvil {
 	/**
 	 * Adds a recipe. See spreadsheet on first page for details.
 	 */
-	public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, byte recipeType, Object... input) {
+	public IAnvilRecipe addRecipe(String name, ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, byte recipeType, Object... input) {
 		String var3 = "";
 		int var4 = 0;
 		int var5 = 0;
@@ -118,6 +123,7 @@ public class CraftingManagerAnvil {
 			recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, hot, research, skill);
 		}
 		this.recipes.add(recipe);
+		this.recipeMap.put(name, recipe);
 		return recipe;
 	}
 

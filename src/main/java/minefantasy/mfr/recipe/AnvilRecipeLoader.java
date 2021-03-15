@@ -48,6 +48,6 @@ public class AnvilRecipeLoader extends RecipeLoader {
 		Object[] o = getInputs(pattern, json);
 
 		byte type = s.equals("CustomToolRecipe") ? (byte) 1 : (byte) 0;
-		CraftingManagerAnvil.getInstance().addRecipe(resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, o);
+		CraftingManagerAnvil.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, o);
 	}
 }
