@@ -6,13 +6,12 @@ import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.recipe.ShapedAnvilRecipes;
 import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
 import minefantasy.mfr.util.GuiHelper;
-import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
 
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 		if (recipe == null)
 			return;
 
-		GL11.glColor3f(255, 255, 255);
+		GlStateManager.color(255, 255, 255);
 		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX + 34, posY + 51, true, true);
 		GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvilTier(), posX + 124, posY + 51, true, true);
 
@@ -133,16 +132,12 @@ public class EntryPageRecipeAnvil extends EntryPage {
 	}
 
 	public void renderItem(GuiScreen gui, int xPos, int yPos, ItemStack stack, boolean accountForContainer, int mx, int my, boolean heatable) {
+		renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my);
+
 		if (heatable) {
-			GL11.glPushMatrix();
-			GL11.glColor3f(255, 255, 255);
-			this.mc.getTextureManager()
-					.bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/anvil_grid.png"));
-			gui.drawTexturedModalRect(xPos, yPos, 248, 0, 8, 8);
-			GL11.glPopMatrix();
+			GuiHelper.drawHotItemIcon(this.mc, xPos, yPos);
 		}
 
-		renderItem(gui, xPos, yPos, stack, accountForContainer, mx, my);
 	}
 
 	@Override

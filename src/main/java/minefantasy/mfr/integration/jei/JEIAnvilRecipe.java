@@ -3,6 +3,7 @@ package minefantasy.mfr.integration.jei;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.recipe.ShapedAnvilRecipes;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.RecipeHelper;
@@ -13,7 +14,9 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a JEI "recipe" for the MFR anvil.
@@ -46,6 +49,36 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 
+		if (minecraft.currentScreen != null) {
+
+			// add hot output icon
+			if (recipe.outputHot) {
+				GuiHelper.drawHotItemIcon(minecraft,143, 28);
+			}
+
+			// add hot input icons
+			Map<Integer, Map<Integer, Integer>> ingredientMap = new HashMap<>();
+
+			int width = 6;
+			int height = 4;
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					int slot = y * width + x;
+					Map<Integer, Integer> posMap = new HashMap<>();
+					// x and y pos of the current ingredient
+					posMap.put(1 + x * 18, 1 + y * 18);
+					ingredientMap.put(slot, posMap);
+				}
+			}
+
+			for (int j = 0; j < ingredients.size(); j++) {
+				ItemStack stack = (ingredients.get(j).get(0));
+				if (stack != null && Heatable.canHeatItem(ingredients.get(j).get(0))) {
+					GuiHelper.drawHotItemIcon(minecraft, ingredientMap.get(j).keySet().iterator().next(), ingredientMap.get(j).values().iterator().next());
+				}
+			}
+		}
+
 		// draw tool icon with required tier int
 		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.toolType, recipe.recipeHammer, recipeWidth - 23, recipeHeight - 98, true);
 
@@ -70,22 +103,6 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 			// Just display the required Skill type of for this recipe
 			minecraft.fontRenderer.drawStringWithShadow(recipe.skillUsed.getDisplayName(), (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(recipe.skillUsed.getDisplayName()) / 2), (float) 84, 16777215);
 		}
-	}
-
-	/**
-	 * TODO?: This could be used to show the tier and time requirement tooltips, if any
-	 */
-	@Override
-	public List<String> getTooltipStrings(int mouseX, int mouseY) {
-		return null;
-	}
-
-	/**
-	 * TODO?: This could be used to open the page in the recipe book where we have this recipe
-	 */
-	@Override
-	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
-		return false;
 	}
 
 	/**

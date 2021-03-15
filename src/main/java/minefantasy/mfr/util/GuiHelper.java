@@ -3,6 +3,7 @@ package minefantasy.mfr.util;
 import minefantasy.mfr.constants.Tool;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.opengl.GL11;
 
 public class GuiHelper {
@@ -75,4 +76,14 @@ public class GuiHelper {
 	public static int getColourForRGB(int red, int green, int blue) {
 		return (red << 16) + (green << 8) + blue;
 	}
+
+	public static void drawHotItemIcon(Minecraft minecraft, int x, int y) {
+		GlStateManager.pushMatrix();
+		GlStateManager.color(255, 255, 255);
+		GlStateManager.translate(0, 0, 999);
+		minecraft.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/knowledge/anvil_grid.png"));
+		minecraft.currentScreen.drawTexturedModalRect(x, y, 248, 0, 8, 8);
+		GlStateManager.popMatrix();
+	}
+
 }
