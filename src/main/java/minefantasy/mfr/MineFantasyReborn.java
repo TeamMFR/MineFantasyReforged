@@ -36,6 +36,7 @@ import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenGeological;
+import minefantasy.mfr.world.gen.structure.WorldGenStructure;
 import net.minecraft.init.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
@@ -60,9 +61,6 @@ import java.io.File;
 public class MineFantasyReborn {
 	public static final String MOD_ID = "minefantasyreborn";
 	public static final String NAME = "MineFantasy Reborn";
-
-	public static final WorldGenGeological WORLD_GEN_GEOLOGICAL = new WorldGenGeological();
-	public static final WorldGenBiological WORLD_GEN_BIOLOGICAL = new WorldGenBiological();
 
 	@SidedProxy(clientSide = "minefantasy.mfr.proxy.ClientProxy", serverSide = "minefantasy.mfr.proxy.ServerProxy")
 	public static CommonProxy PROXY;
@@ -148,10 +146,11 @@ public class MineFantasyReborn {
 	public void init(FMLInitializationEvent event) {
 		MinecraftForge.EVENT_BUS.register(this);
 
-		//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
+		GameRegistry.registerWorldGenerator(new WorldGenBiological(), 5);
+		GameRegistry.registerWorldGenerator(new WorldGenGeological(), 5);
+		GameRegistry.registerWorldGenerator(new WorldGenStructure(), 5);
 
-		GameRegistry.registerWorldGenerator(WORLD_GEN_GEOLOGICAL, 5);
-		GameRegistry.registerWorldGenerator(WORLD_GEN_BIOLOGICAL, 5);
+		//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		PROXY.init();
 	}

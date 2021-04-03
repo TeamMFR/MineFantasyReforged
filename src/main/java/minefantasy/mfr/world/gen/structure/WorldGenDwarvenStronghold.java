@@ -1,34 +1,51 @@
 package minefantasy.mfr.world.gen.structure;
 
-import minefantasy.mfr.world.gen.structure.pieces.StructureGenAncientForgeEntry;
+import minefantasy.mfr.world.gen.structure.pieces.StructureGenDSEntry;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class WorldGenAncientForge extends WorldGenStructureBase {
-    public WorldGenAncientForge() {
+public class WorldGenDwarvenStronghold extends WorldGenStructureBase {
+    /**
+     * A debug method used to allow strongholds to generate in the air, for easy
+     * observation of shape and size.
+     */
+    public static final boolean debug_air = false;
+    /**
+     * Max percentage of air blocks allowed for structures to build
+     */
+    public static float maxAir = 0.25F;
+    private boolean isSurfaceBuild = false;
+
+    public WorldGenDwarvenStronghold() {
+    }
+
+    public void setSurfaceMode(boolean flag) {
+        isSurfaceBuild = flag;
     }
 
     @Override
     protected StructureModuleMFR getStartPiece(World world, BlockPos pos, EnumFacing facing, Random random) {
-        return new StructureGenAncientForgeEntry(world, pos, facing, random);
+        return new StructureGenDSEntry(world, pos.add(0, -1, 0), facing, random, isSurfaceBuild);
     }
 
     @Override
     protected boolean isBlockAcceptableOrigin(World world, BlockPos pos) {
-        return world.getBlockState(pos).getMaterial().isSolid() && isValidGround(world, pos);
+        return isValidGround(world, pos);
     }
 
     @Override
     protected boolean canStructureBuild(StructureModuleMFR piece) {
+        if (debug_air || isSurfaceBuild) {
+            return true;
+        }
         // SEARCH FOR CLIFF
-         for (int x = -1; x <= 1; x++) {
-            for (int y = 0; y < 3; y++) {
-                for (int z = 1; z <= 2; z++) {
+        for (int x = -3; x <= 3; x++) {
+            for (int y = 0; y < 5; y++) {
+                for (int z = 4; z <= 8; z++) {
                     BlockPos pos = piece.offsetPos(x, y, z, piece.facing);
                     Material material = piece.world.getBlockState(pos).getMaterial();
 
@@ -39,12 +56,6 @@ public class WorldGenAncientForge extends WorldGenStructureBase {
                         return false;
                     }
                 }
-                for (int z = 0; z > -2; z--) {
-                    IBlockState state = piece.world.getBlockState(piece.offsetPos(x, y, z, piece.facing));
-                    if (state.getMaterial().isSolid()) {
-                        return false;
-                    }
-                }
             }
         }
         return true;
@@ -52,11 +63,11 @@ public class WorldGenAncientForge extends WorldGenStructureBase {
 
     @Override
     protected boolean isDirectionRandom() {
-        return false;
+        return isSurfaceBuild;
     }
 
     @Override
     protected int[] getYGenBounds(World world) {
-        return new int[]{64, 255};
+        return new int[]{60, 255};
     }
 }

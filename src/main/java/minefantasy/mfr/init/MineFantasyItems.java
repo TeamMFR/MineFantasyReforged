@@ -86,6 +86,7 @@ import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.item.ItemWarhammer;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.item.ItemWoodComponent;
+import minefantasy.mfr.item.ItemWorldGenPlacer;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.util.Utils;
@@ -568,7 +569,7 @@ public class MineFantasyItems {
 	public static Item EXPLODING_BOLT = Utils.nullValue();
 	public static Item PAINT_BRUSH = Utils.nullValue();
 	public static Item DEBUG_PLACE_ANCIENT_FORGE = Utils.nullValue();
-	public static Item DEBUG_PLACE_ANCIENT_ALTER = Utils.nullValue();
+	public static Item DEBUG_PLACE_ANCIENT_ALTAR = Utils.nullValue();
 	public static Item DEBUG_PLACE_DWARVEN_STRONGHOLD = Utils.nullValue();
 	public static Item SPAWNER_DRAGON = Utils.nullValue();
 	public static Item SPAWNER_MINOTAUR = Utils.nullValue();
@@ -1820,9 +1821,9 @@ public class MineFantasyItems {
 
 		PAINT_BRUSH = new ItemPaintBrush("paint_brush", 256);
 
-		//        DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "WorldGenAncientForge");
-		//        DEBUG_PLACE_ANCIENT_ALTER = new ItemWorldGenPlacer("world_gen_placer_ancient_alter", "WorldGenAncientAlter");
-		//        DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "WorldGenDwarvenStronghold");
+		DEBUG_PLACE_ANCIENT_FORGE = new ItemWorldGenPlacer("world_gen_placer_ancient_forge", "world_gen_ancient_forge");
+		DEBUG_PLACE_ANCIENT_ALTAR = new ItemWorldGenPlacer("world_gen_placer_ancient_altar", "world_gen_ancient_altar");
+		DEBUG_PLACE_DWARVEN_STRONGHOLD = new ItemWorldGenPlacer("world_gen_placer_dwarven_stronghold", "world_gen_dwarven_stronghold");
 
 		SPAWNER_DRAGON = new ItemMobSpawner("dragon");
 		SPAWNER_MINOTAUR = new ItemMobSpawner("minotaur");
@@ -1896,9 +1897,9 @@ public class MineFantasyItems {
 
 		registry.register(PAINT_BRUSH);
 
-		//        registry.register(DEBUG_PLACE_ANCIENT_FORGE);
-		//        registry.register(DEBUG_PLACE_ANCIENT_ALTER);
-		//        registry.register(DEBUG_PLACE_DWARVEN_STRONGHOLD);
+		registry.register(DEBUG_PLACE_ANCIENT_FORGE);
+		registry.register(DEBUG_PLACE_ANCIENT_ALTAR);
+		registry.register(DEBUG_PLACE_DWARVEN_STRONGHOLD);
 
 		registry.register(SPAWNER_DRAGON);
 		registry.register(SPAWNER_MINOTAUR);
