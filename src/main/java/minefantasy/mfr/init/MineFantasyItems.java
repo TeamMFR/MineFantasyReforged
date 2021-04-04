@@ -18,7 +18,6 @@ import minefantasy.mfr.item.EnumBowType;
 import minefantasy.mfr.item.FuelHandlerMF;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemArrowMFR;
-import minefantasy.mfr.item.ItemArtefact;
 import minefantasy.mfr.item.ItemAxeMFR;
 import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.ItemBaseMFR;
@@ -50,6 +49,7 @@ import minefantasy.mfr.item.ItemHeavyPick;
 import minefantasy.mfr.item.ItemHeavyShovel;
 import minefantasy.mfr.item.ItemHide;
 import minefantasy.mfr.item.ItemHoeMFR;
+import minefantasy.mfr.item.ItemJewel;
 import minefantasy.mfr.item.ItemJug;
 import minefantasy.mfr.item.ItemKatana;
 import minefantasy.mfr.item.ItemKnife;
@@ -246,16 +246,10 @@ public class MineFantasyItems {
 	public static Item GOLD_COIN = Utils.nullValue();
 	public static Item HINGE = Utils.nullValue();
 	public static Item COGWORK_PULLEY = Utils.nullValue();
-	public static ItemArtefact ANCIENT_JEWEL_MITHRIL = Utils.nullValue();
-	public static ItemArtefact ANCIENT_JEWEL_ADAMANT = Utils.nullValue();
-	public static ItemArtefact ANCIENT_JEWEL_MASTER = Utils.nullValue();
-	public static ItemArtefact TRILOGY_JEWEL = Utils.nullValue();
-	public static ItemArtefact SCHEMATIC_BOMB = Utils.nullValue();
-	public static ItemArtefact SCHEMATIC_CROSSBOW = Utils.nullValue();
-	public static ItemArtefact SCHEMATIC_FORGE = Utils.nullValue();
-	public static ItemArtefact SCHEMATIC_GEARS = Utils.nullValue();
-	public static ItemArtefact SCHEMATIC_COGWORK = Utils.nullValue();
-	public static ItemArtefact SCHEMATIC_ALLOYS = Utils.nullValue();
+	public static ItemJewel ANCIENT_JEWEL_MITHRIL = Utils.nullValue();
+	public static ItemJewel ANCIENT_JEWEL_ADAMANT = Utils.nullValue();
+	public static ItemJewel ANCIENT_JEWEL_MASTER = Utils.nullValue();
+	public static ItemJewel TRILOGY_JEWEL = Utils.nullValue();
 	public static Item ORNATE_ITEMS = Utils.nullValue();
 
 	// STANDARD ARMOR
@@ -879,12 +873,6 @@ public class MineFantasyItems {
 		registry.register(ANCIENT_JEWEL_ADAMANT);
 		registry.register(ANCIENT_JEWEL_MASTER);
 		registry.register(TRILOGY_JEWEL);
-		registry.register(SCHEMATIC_BOMB);
-		registry.register(SCHEMATIC_CROSSBOW);
-		registry.register(SCHEMATIC_FORGE);
-		registry.register(SCHEMATIC_GEARS);
-		registry.register(SCHEMATIC_COGWORK);
-		registry.register(SCHEMATIC_ALLOYS);
 
 		registry.register(ORNATE_ITEMS);
 
@@ -1349,16 +1337,11 @@ public class MineFantasyItems {
 		HINGE = new ItemBaseMFR("hinge").setCreativeTab(MineFantasyTabs.tabMaterials);
 		COGWORK_PULLEY = new ItemBaseMFR("cogwork_pulley", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabGadget);
 
-		ANCIENT_JEWEL_MITHRIL = new ItemArtefact("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltMithril", "smeltMaster");
-		ANCIENT_JEWEL_ADAMANT = new ItemArtefact("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemArtefact.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
-		ANCIENT_JEWEL_MASTER = new ItemArtefact("ancient_jewel_master", 30, EnumRarity.EPIC, ItemArtefact.MYTHIC, 1, "smeltMaster");
-		TRILOGY_JEWEL = new ItemArtefact("trilogy_jewel", EnumRarity.EPIC, null, 1);
-		SCHEMATIC_BOMB = new ItemArtefact("schematic_bomb", 50, EnumRarity.RARE, null, 1, "bombObsidian", "mineObsidian");
-		SCHEMATIC_CROSSBOW = new ItemArtefact("schematic_crossbow", 50, EnumRarity.RARE, null, 1, "crossShaftAdvanced", "crossHeadAdvanced");
-		SCHEMATIC_FORGE = new ItemArtefact("schematic_forge", 50, EnumRarity.RARE, null, 1, "advforge", "advcrucible");
-		SCHEMATIC_GEARS = new ItemArtefact("schematic_gears", 50, EnumRarity.RARE, null, 1, "cogArmour");
-		SCHEMATIC_COGWORK = new ItemArtefact("schematic_cogwork", 50, EnumRarity.RARE, null, 1, "cogArmour");
-		SCHEMATIC_ALLOYS = new ItemArtefact("schematic_alloy", 50, EnumRarity.RARE, null, 1, "compPlate");
+		ANCIENT_JEWEL_MITHRIL = new ItemJewel("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smeltMithril", "smeltMaster");
+		ANCIENT_JEWEL_ADAMANT = new ItemJewel("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
+		ANCIENT_JEWEL_MASTER = new ItemJewel("ancient_jewel_master", 30, EnumRarity.EPIC, ItemJewel.MYTHIC, 1, "smeltMaster");
+		TRILOGY_JEWEL = new ItemJewel("trilogy_jewel", EnumRarity.EPIC, null, 1);
+
 
 		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate");
 	}

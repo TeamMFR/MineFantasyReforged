@@ -66,6 +66,7 @@ import minefantasy.mfr.item.ItemBlockSalvage;
 import minefantasy.mfr.item.ItemBlockSpecialRender;
 import minefantasy.mfr.item.ItemBlockToolRack;
 import minefantasy.mfr.item.ItemBlockTrough;
+import minefantasy.mfr.item.ItemSchematic;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityBellows;
@@ -290,7 +291,12 @@ public class MineFantasyBlocks {
 	public static Block MYTHIC_STONE_DECORATED = Utils.nullValue();
 	public static Block WG_MARK = Utils.nullValue();
 	public static Block COMPONENTS = Utils.nullValue();
-	public static Block SCHEMATIC_GENERAL = Utils.nullValue();
+	public static Block SCHEMATIC_ALLOY = Utils.nullValue();
+	public static Block SCHEMATIC_BOMB = Utils.nullValue();
+	public static Block SCHEMATIC_CROSSBOW = Utils.nullValue();
+	public static Block SCHEMATIC_COGWORK = Utils.nullValue();
+	public static Block SCHEMATIC_FORGE = Utils.nullValue();
+	public static Block SCHEMATIC_GEARS = Utils.nullValue();
 
 	public static void init() {
 
@@ -479,7 +485,12 @@ public class MineFantasyBlocks {
 		MYTHIC_STONE_DECORATED = new BlockMythicDecor("mythic_stone_decorated");
 		WG_MARK = new BlockWorldGenMarker("world_gen_flag");
 		COMPONENTS = new BlockComponent();
-		SCHEMATIC_GENERAL = new BlockSchematic("schematic_general");
+		SCHEMATIC_ALLOY = new BlockSchematic("schematic_alloy");
+		SCHEMATIC_BOMB = new BlockSchematic("schematic_bomb");
+		SCHEMATIC_CROSSBOW = new BlockSchematic("schematic_crossbow");
+		SCHEMATIC_FORGE = new BlockSchematic("schematic_forge");
+		SCHEMATIC_COGWORK = new BlockSchematic("schematic_cogwork");
+		SCHEMATIC_GEARS = new BlockSchematic("schematic_gears");
 	}
 
 	@SubscribeEvent
@@ -609,7 +620,12 @@ public class MineFantasyBlocks {
 
 		registry.register(MYTHIC_STONE_FRAMED);
 		registry.register(MYTHIC_STONE_DECORATED);
-		registry.register(SCHEMATIC_GENERAL);
+		registry.register(SCHEMATIC_ALLOY);
+		registry.register(SCHEMATIC_BOMB);
+		registry.register(SCHEMATIC_CROSSBOW);
+		registry.register(SCHEMATIC_FORGE);
+		registry.register(SCHEMATIC_COGWORK);
+		registry.register(SCHEMATIC_GEARS);
 
 		registry.register(SALVAGE_BASIC);
 
@@ -888,7 +904,13 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(MYTHIC_STONE_DECORATED));
 		registry.register(new ItemBlockBase(WG_MARK));
 		registry.register(new ItemBlockBase(COMPONENTS));
-		registry.register(new ItemBlockBase(SCHEMATIC_GENERAL));
+
+		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_BOMB,"bombObsidian", "mineObsidian"));
+		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_CROSSBOW,"crossShaftAdvanced", "crossHeadAdvanced"));
+		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_FORGE, "advforge", "advcrucible"));
+		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_GEARS,"cogArmour"));
+		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_COGWORK, "cogArmour"));
+		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_ALLOY,"compPlate"));
 	}
 
 	public static void load() {

@@ -301,8 +301,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             placeBlock(world, Blocks.DOUBLE_STONE_SLAB, -1 + x, 1, (int) Math.floor((float) depth / 2) - 1);
             placeBlock(world, Blocks.DOUBLE_STONE_SLAB, -1 + x, 1, (int) Math.ceil((float) depth / 2) + 1);
         }
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GENERAL,0, 2, (int) Math.floor((float) depth / 2) - 1);
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GENERAL,  0, 2, (int) Math.ceil((float) depth / 2) + 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY,0, 2, (int) Math.floor((float) depth / 2) - 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY,  0, 2, (int) Math.ceil((float) depth / 2) + 1);
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(world, mob, 0, 1, depth / 2);
         mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
@@ -366,8 +366,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             placeRack(world, (width - 1), 2, depth - 2 - z1, facing.rotateY());
             placeRack(world, -(width - 1), 2, depth - 2 - z1, facing.rotateYCCW());
         }
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GENERAL, -2, 2, depth - 1);
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GENERAL, 2, 2, depth - 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, -2, 2, depth - 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, 2, 2, depth - 1);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, -2, 1, depth - 1);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, 2, 1, depth - 1);
         EntityMinotaur mob = new EntityMinotaur(world);
@@ -423,8 +423,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(world, Blocks.AIR,((width - 1) * position), 2, z);
         placeBlock(world, Blocks.AIR,((width - 1) * position), 2, z - 1);
 
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GENERAL, ((width - 1) * position), 2, z + 2);
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GENERAL, ((width - 1) * position), 2, z - 3);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, ((width - 1) * position), 2, z + 2);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, ((width - 1) * position), 2, z - 3);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, ((width - 1) * position), 1, z + 2);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, ((width - 1) * position), 1, z - 3);
 

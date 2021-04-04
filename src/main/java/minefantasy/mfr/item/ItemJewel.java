@@ -1,8 +1,7 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.mechanics.knowledge.IArtefact;
-import minefantasy.mfr.block.BlockSchematic;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
@@ -12,7 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public class ItemArtefact extends ItemBaseMFR implements IArtefact {
+public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	public static final String MYTHIC = "mythic_artefacts";
 	public static final String DWARVEN = "dwarven_artefacts";
 	public static final String GNOMISH = "gnomish_artefacts";
@@ -23,11 +22,11 @@ public class ItemArtefact extends ItemBaseMFR implements IArtefact {
 	public final String lootType;
 	public final int dropWeight;
 
-	public ItemArtefact(String name, EnumRarity rarity, String lootType, int dropChance) {
+	public ItemJewel(String name, EnumRarity rarity, String lootType, int dropChance) {
 		this(name, 0, rarity, lootType, dropChance);
 	}
 
-	public ItemArtefact(String name, int studyTime, EnumRarity rarity, String lootType, int dropChance, String... researches) {
+	public ItemJewel(String name, int studyTime, EnumRarity rarity, String lootType, int dropChance, String... researches) {
 		super(name);
 		this.studyTime = studyTime;
 		this.rarity = rarity;
@@ -57,10 +56,10 @@ public class ItemArtefact extends ItemBaseMFR implements IArtefact {
 			if (movingobjectposition == null) {
 				return ActionResult.newResult(EnumActionResult.PASS, item);
 			} else {
-				if (BlockSchematic.useSchematic(item, world, user, movingobjectposition)) {
-					item.shrink(1);
-					return ActionResult.newResult(EnumActionResult.PASS, item);
-				}
+//				if (BlockSchematic.useSchematic(item, world, user, movingobjectposition)) {
+//					item.shrink(1);
+//					return ActionResult.newResult(EnumActionResult.PASS, item);
+//				}
 			}
 		}
 		return ActionResult.newResult(EnumActionResult.FAIL, item);
