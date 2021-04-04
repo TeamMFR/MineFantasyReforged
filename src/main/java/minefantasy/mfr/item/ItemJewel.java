@@ -2,14 +2,8 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.world.World;
 
 public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	public static final String MYTHIC = "mythic_artefacts";
@@ -45,23 +39,5 @@ public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	@Override
 	public int getStudyTime(ItemStack item) {
 		return studyTime;
-	}
-
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-		ItemStack item = user.getHeldItem(hand);
-		if (!world.isRemote) {
-			RayTraceResult movingobjectposition = this.rayTrace(world, user, false);
-
-			if (movingobjectposition == null) {
-				return ActionResult.newResult(EnumActionResult.PASS, item);
-			} else {
-//				if (BlockSchematic.useSchematic(item, world, user, movingobjectposition)) {
-//					item.shrink(1);
-//					return ActionResult.newResult(EnumActionResult.PASS, item);
-//				}
-			}
-		}
-		return ActionResult.newResult(EnumActionResult.FAIL, item);
 	}
 }

@@ -355,9 +355,12 @@ public class CustomToolHelper {
 	public static void addComponentString(ItemStack tool, List<String> list, CustomMaterial base, float units) {
 		if (base != null) {
 			float mass = base.density * units;
-			list.add(TextFormatting.GOLD + base.getMaterialString());
-			if (mass > 0)
+			if (base != CustomMaterial.NONE) {
+				list.add(TextFormatting.GOLD + base.getMaterialString());
+			}
+			if (mass > 0) {
 				list.add(CustomMaterial.getWeightString(mass));
+			}
 
 			if (base.isHeatable()) {
 				int maxTemp = base.getHeatableStats()[0];
