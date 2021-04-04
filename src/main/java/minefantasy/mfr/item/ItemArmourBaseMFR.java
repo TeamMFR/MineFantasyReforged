@@ -5,6 +5,7 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IArmourMFR;
 import minefantasy.mfr.api.armour.IArmourRating;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -206,7 +207,7 @@ public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmo
 		if (!tool.hasTagCompound()) {
 			tool.setTagCompound(new NBTTagCompound());
 		}
-		tool.getTagCompound().setBoolean("Unbreakable", true);
+		tool.getTagCompound().setBoolean(Constants.UNBREAKABLE_TAG, true);
 	}
 
 	@Override

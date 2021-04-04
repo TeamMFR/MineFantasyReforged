@@ -4,13 +4,11 @@ import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
-import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.ISmithTongs;
-import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
-import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.mob.EntityDragon;
@@ -21,7 +19,6 @@ import minefantasy.mfr.util.ArrowEffectsMF;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
-import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -36,15 +33,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntityWitch;
-import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.passive.EntityPig;
 import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.entity.passive.EntityVillager;
 import net.minecraft.entity.passive.EntityWolf;
 import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
@@ -58,7 +52,6 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
@@ -85,9 +78,6 @@ import java.util.List;
 
 public class EventManagerMFRToRemove {
 
-	public static final String injuredNBT = "MF_Injured";
-	public static boolean displayOreDict = ConfigClient.displayOreDict;
-
 	private static XSTRandom random = new XSTRandom();
 
 	public static String getRegisterName(Entity entity) {
@@ -101,8 +91,8 @@ public class EventManagerMFRToRemove {
 	}
 
 	public static int getInjuredTime(Entity entity) {
-		if (entity.getEntityData().hasKey(injuredNBT)) {
-			return entity.getEntityData().getInteger(injuredNBT);
+		if (entity.getEntityData().hasKey(Constants.INJURED_TAG)) {
+			return entity.getEntityData().getInteger(Constants.INJURED_TAG);
 		}
 		return 0;
 	}
@@ -118,8 +108,8 @@ public class EventManagerMFRToRemove {
 				dropper.entityDropItem(new ItemStack(Items.FEATHER), 0.0F);
 			}
 		}
-		if (dropper.getEntityData().hasKey("MF_LootDrop")) {
-			int id = dropper.getEntityData().getInteger("MF_LootDrop");
+		if (dropper.getEntityData().hasKey(Constants.DROP_LOOT_TAG)) {
+			int id = dropper.getEntityData().getInteger(Constants.DROP_LOOT_TAG);
 			Item drop = id == 0 ? MineFantasyItems.LOOT_SACK : id == 1 ? MineFantasyItems.LOOT_SACK_UC : MineFantasyItems.LOOT_SACK_RARE;
 			dropper.entityDropItem(new ItemStack(drop), 0.0F);
 		}
@@ -129,7 +119,7 @@ public class EventManagerMFRToRemove {
 			}
 		}
 		if (dropper instanceof IAnimals && !(dropper instanceof IMob)) {
-			if (ConfigHardcore.hunterKnife && !dropper.getEntityData().hasKey("hunterKill")) {
+			if (ConfigHardcore.hunterKnife && !dropper.getEntityData().hasKey(Constants.HUNTER_KILL_TAG)) {
 				event.setCanceled(true);
 				return;
 			}
@@ -193,7 +183,7 @@ public class EventManagerMFRToRemove {
 				}
 			}
 		}
-		if (dropHide && hide != null && !(ConfigHardcore.hunterKnife && !mob.getEntityData().hasKey("hunterKill"))) {
+		if (dropHide && hide != null && !(ConfigHardcore.hunterKnife && !mob.getEntityData().hasKey(Constants.HUNTER_KILL_TAG))) {
 			mob.entityDropItem(new ItemStack(hide), 0.0F);
 		}
 	}
@@ -240,16 +230,7 @@ public class EventManagerMFRToRemove {
 	}
 
 	private boolean shouldAnimalDropHide(EntityLivingBase mob) {
-		String mobName = mob.getClass().getName();
-		if (mobName.endsWith("EntityWolf") || mobName.endsWith("EntityPig") || mobName.endsWith("EntitySheep")
-				|| mobName.endsWith("EntityCow") || mobName.endsWith("EntityHorse")) {
-			return true;
-		}
-		if (mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig
-				|| mob instanceof EntitySheep || mob instanceof EntityHorse) {
-			return true;
-		}
-		return false;
+		return mob instanceof EntityWolf || mob instanceof EntityCow || mob instanceof EntityPig || mob instanceof EntitySheep || mob instanceof EntityHorse;
 	}
 
 	@SubscribeEvent
@@ -286,23 +267,23 @@ public class EventManagerMFRToRemove {
 	}
 
 	@SubscribeEvent
-	public void spawnEntity(EntityJoinWorldEvent event) {
+	public void onEntityJoinWorldEvent(EntityJoinWorldEvent event) {
 		if (event.getEntity().isDead) {
 			return;
 		}
 		if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemUnbreakable)) {
-			EntityItem eitem = (EntityItem) event.getEntity();
-			if (!eitem.getItem().isEmpty()) {
-				if (eitem.getItem().hasTagCompound() && eitem.getItem().getTagCompound().hasKey("Unbreakable")) {
-					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
+			EntityItem entityItem = (EntityItem) event.getEntity();
+			if (!entityItem.getItem().isEmpty()) {
+				if (entityItem.getItem().hasTagCompound() && entityItem.getItem().getTagCompound().hasKey(Constants.UNBREAKABLE_TAG)) {
+					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), entityItem);
 					event.getWorld().spawnEntity(newEntity);
-					eitem.setDead();
+					entityItem.setDead();
 				}
-				if (isDragonforge(eitem.getItem())) {
+				if (isDragonforge(entityItem.getItem())) {
 					MFRLogUtil.logDebug("Found dragon heart");
-					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), eitem);
+					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), entityItem);
 					event.getWorld().spawnEntity(newEntity);
-					eitem.setDead();
+					entityItem.setDead();
 				}
 			}
 		}
@@ -347,94 +328,6 @@ public class EventManagerMFRToRemove {
 		}
 	}
 
-	@SubscribeEvent
-	public void killEntity(LivingDeathEvent event) {
-		// killsCount
-		EntityLivingBase dead = event.getEntityLiving();
-		EntityLivingBase hunter = null;
-		ItemStack weapon = ItemStack.EMPTY;
-		DamageSource source = event.getSource();
-
-		if (dead instanceof EntityWitch) {
-			dropBook(dead, 0);
-		}
-		if (dead instanceof EntityVillager) {
-			dropBook(dead, 1);
-		}
-		if (dead instanceof EntityZombie) {
-			dropBook(dead, 2);
-		}
-		if (source != null && source.getTrueSource() != null) {
-			if (source.getTrueSource() instanceof EntityLivingBase) {
-				hunter = (EntityLivingBase) source.getTrueSource();
-				weapon = hunter.getHeldItemMainhand();
-				if (hunter instanceof EntityPlayer) {
-					addKill((EntityPlayer) hunter, dead);
-				}
-			}
-		}
-		if (!weapon.isEmpty()) {
-			Tool tool = ToolHelper.getToolTypeFromStack(weapon);
-			if (weapon.getItem() instanceof IHuntingItem) {
-				if (((IHuntingItem) weapon.getItem()).canRetrieveDrops(weapon)) {
-					dead.getEntityData().setBoolean("hunterKill", true);
-				}
-			} else if (tool == Tool.KNIFE) {
-				dead.getEntityData().setBoolean("hunterKill", true);
-			}
-		}
-	}
-
-	private void dropBook(EntityLivingBase dead, int id) {
-		if (dead.world.isRemote)
-			return;
-		Item book = null;
-		if (id == 0) {
-			float chance = random.nextFloat();
-			if (chance > 0.75F) {
-				book = MineFantasyItems.SKILLBOOK_ENGINEERING;
-			} else {
-				book = MineFantasyItems.SKILLBOOK_PROVISIONING;
-			}
-		} else if (id == 1 && random.nextInt(5) == 0) {
-			float chance = random.nextFloat();
-			if (chance > 0.9F) {
-				book = MineFantasyItems.SKILLBOOK_ENGINEERING;
-			} else if (chance > 0.6F) {
-				book = MineFantasyItems.SKILLBOOK_ARTISANRY;
-			} else if (chance > 0.3F) {
-				book = MineFantasyItems.SKILLBOOK_CONSTRUCTION;
-			} else {
-				book = MineFantasyItems.SKILLBOOK_PROVISIONING;
-			}
-		} else if (id == 2 && random.nextInt(25) == 0) {
-			float chance = random.nextFloat();
-			if (chance > 0.9F) {
-				book = MineFantasyItems.SKILLBOOK_ENGINEERING;
-			} else if (chance > 0.6F) {
-				book = MineFantasyItems.SKILLBOOK_ARTISANRY;
-			} else if (chance > 0.3F) {
-				book = MineFantasyItems.SKILLBOOK_CONSTRUCTION;
-			} else {
-				book = MineFantasyItems.SKILLBOOK_PROVISIONING;
-			}
-		}
-		if (book != null) {
-			dead.entityDropItem(new ItemStack(book), 0F);
-		}
-	}
-
-	private void addKill(EntityPlayer hunter, EntityLivingBase dead) {
-		addKillTo(hunter, "killsCount");
-		if (dead instanceof IMob) {
-			addKillTo(hunter, "killsCountMob");
-		} else if (dead instanceof IAnimals) {
-			addKillTo(hunter, "killsCountAnimal");
-		}
-		if (dead instanceof EntityPlayer) {
-			addKillTo(hunter, "killsCountPlayer");
-		}
-	}
 
 	@SubscribeEvent
 	public void useHoe(UseHoeEvent event) {
@@ -505,11 +398,6 @@ public class EventManagerMFRToRemove {
 		return null;
 	}
 
-	private void addKillTo(EntityPlayer hunter, String type) {
-		int kills = hunter.getEntityData().hasKey(type) ? hunter.getEntityData().getInteger(type) : 0;
-		kills++;
-		hunter.getEntityData().setInteger(type, kills);
-	}
 
 	private void displayWeaponTraits(float[] ratio, List<String> list) {
 		int cutting = (int) (ratio[0] / (ratio[0] + ratio[1] + ratio[2]) * 100F);
@@ -562,7 +450,7 @@ public class EventManagerMFRToRemove {
 		}
 		if (injury > 0 && !entity.world.isRemote) {
 			injury--;
-			entity.getEntityData().setInteger(injuredNBT, injury);
+			entity.getEntityData().setInteger(Constants.INJURED_TAG, injury);
 		}
 		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity) && event.getEntityLiving() instanceof EntityPlayer) {
 			StaminaMechanics.tickEntity((EntityPlayer) event.getEntityLiving());

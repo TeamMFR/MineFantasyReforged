@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
@@ -125,7 +126,7 @@ public class ItemBandage extends ItemBaseMFR {
 						}
 					}
 				}
-				toHeal.getEntityData().setInteger(EventManagerMFRToRemove.injuredNBT, 0);
+				toHeal.getEntityData().setInteger(Constants.INJURED_TAG, 0);
 			}
 		}
 		return item;

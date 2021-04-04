@@ -5,6 +5,7 @@ import minefantasy.mfr.api.crafting.CustomCrafterEntry;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.ISharpenable;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Tool;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
@@ -328,6 +329,6 @@ public class ToolHelper {
 		if (!tool.hasTagCompound()) {
 			tool.setTagCompound(new NBTTagCompound());
 		}
-		tool.getTagCompound().setBoolean("Unbreakable", isUnbreakable);
+		tool.getTagCompound().setBoolean(Constants.UNBREAKABLE_TAG, isUnbreakable);
 	}
 }

@@ -1,9 +1,9 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderBigTool;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.state.IBlockState;
@@ -113,7 +113,7 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
 	@Override
 	public void onProperHit(EntityLivingBase user, ItemStack weapon, Entity hit, float dam) {
 		if (rand.nextFloat() < injuryChance) {
-			hit.getEntityData().setInteger(EventManagerMFRToRemove.injuredNBT, 300 + rand.nextInt(1000));
+			hit.getEntityData().setInteger(Constants.INJURED_TAG, 300 + rand.nextInt(1000));
 		}
 		super.onProperHit(user, weapon, hit, dam);
 	}

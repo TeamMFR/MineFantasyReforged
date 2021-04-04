@@ -7,6 +7,10 @@ public final class Constants {
 
 	public static final String CRAFTED_BY_NAME_TAG = "mfr_crafted_by_name";
 	public static final String MF_HELD_ITEM_TAG = "MF_HeldItem";
+	public static final String UNBREAKABLE_TAG = "Unbreakable";
+	public static final String INJURED_TAG = "MF_Injured";
+	public static final String DROP_LOOT_TAG = "MF_LootDrop";
+	public static final String HUNTER_KILL_TAG = "hunterKill";
 
 	public static final String SCRAP_WOOD_TAG = "ScrapWood"; // TODO: convert to snake_case when complete
 	public static final String REFINED_WOOD_TAG = "RefinedWood"; // TODO: convert to snake_case when complete
