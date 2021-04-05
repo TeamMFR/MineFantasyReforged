@@ -222,7 +222,7 @@ public class InformationBase {
 	}
 
 	public void addPages(EntryPage... info) {
-		pages.addAll(Arrays.asList(info));
+		pages.addAll(Arrays.asList(info)); // TODO: filter out empty (recipe) pages
 	}
 
 	public ArrayList<EntryPage> getPages() {

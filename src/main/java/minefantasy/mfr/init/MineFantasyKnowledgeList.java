@@ -24,7 +24,7 @@ public class MineFantasyKnowledgeList {
 
 	// note: please follow the naming convention for static final vars, these should be all upper (https://www.oracle.com/java/technologies/javase/codeconventions-namingconventions.html)
 	public static final IRecipe STICK_RECIPE = RecipeHelper.getMFRRecipe("sticks");
-	public static final IRecipe PLANK_RECIPE = RecipeHelper.getMFRRecipe("plank_cut");
+	public static final IRecipe TIMBER_RECIPE = RecipeHelper.getMFRRecipe("timber");
 	public static final IRecipe FIREPIT_RECIPE = RecipeHelper.getMFRRecipe("firepit");
 	public static final IRecipe STOVE_RECIPE = RecipeHelper.getMFRRecipe("stove");
 	public static final IRecipe CARPENTER_RECIPE = RecipeHelper.getMFRRecipe("carpenter");

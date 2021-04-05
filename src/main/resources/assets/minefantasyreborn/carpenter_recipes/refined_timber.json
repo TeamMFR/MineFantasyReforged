@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "paint_brush",
+  "tool_type": "brush",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 3,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "P   ",
+    "T   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreborn:jug_plant_oil"
+    },
+    "T": {
+      "item": "minefantasyreborn:timber"
+    }
+  },
+  "result": {
+    "nbt": "{mf_custom_materials:{main_metal:\"refined_wood\"}}",
+    "item": "minefantasyreborn:timber"
+  }
+}

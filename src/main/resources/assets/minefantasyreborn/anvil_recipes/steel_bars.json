@@ -9,8 +9,8 @@
   "recipe_hammer": 3,
   "output_hot": false,
   "pattern": [
-    "M M   ",
-    "M M   ",
+    "MM    ",
+    "MM    ",
     "      ",
     "      "
   ],

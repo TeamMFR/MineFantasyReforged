@@ -45,6 +45,17 @@ public class CraftingManagerAnvil {
 		return (IAnvilRecipe) getInstance().recipeMap.get(name);
 	}
 
+	public static IAnvilRecipe[] getRecipeByName(String... name) {
+		// using for each loop to display contents of a
+		List<IAnvilRecipe> recipes = new ArrayList<>();
+		for (String i : name) {
+			recipes.add(getRecipeByName(i));
+		}
+		IAnvilRecipe[] array = new IAnvilRecipe[recipes.size()];
+		recipes.toArray(array);
+		return array;
+	}
+
 	public IAnvilRecipe addRecipe(ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, Object... input) {
 		return null;
 		//		return addRecipe(result, skill, research, hot, tool, hammer, anvil, time, (byte) 0, input);
