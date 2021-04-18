@@ -25,7 +25,7 @@ public class StructureGenAncientForgeEntry extends StructureModuleMFR {
             for (int w = 0; w < 3; w++) {
                 for (int h = 0; h < 7; h++) {
                     if (d != 1 || h != 6){
-                        placeRandomStoneVariantBlock(world, -1 + w, -d + h - 1, d + 1, random);
+                        placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), -1 + w, -d + h - 1, d + 1);
                     }
                 }
             }
@@ -36,10 +36,10 @@ public class StructureGenAncientForgeEntry extends StructureModuleMFR {
             placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, 0, -d, d + 1, facing, facing);
         }
 
-        placeRandomStoneVariantBlock(world, 0, 3, 2, random);
+        placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), 0 , 3, 2);
         for (int x = -1; x <= 1; x++) {
             for (int y = -1; y <= 6; y++) {
-                placeRandomStoneVariantBlock(world, x, y - 3, 1, random);
+                placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, y - 3, 1);
             }
         }
 

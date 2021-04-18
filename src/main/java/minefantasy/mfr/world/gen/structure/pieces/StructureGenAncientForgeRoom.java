@@ -1,6 +1,5 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.BlockChest;
@@ -33,21 +32,21 @@ public class StructureGenAncientForgeRoom extends StructureModuleMFR {
 		// FLOOR
 		for (int x = -width / 2; x <= width / 2; x++) {
 			for (int z = 0; z <= depth; z++) {
-				placeRandomStoneVariantBlock(world, x, 0, z, random);
+				placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, 0, z);
 			}
 		}
 
 		// CEIL
 		for (int x = -width / 2; x <= width / 2; x++) {
 			for (int z = 0; z <= depth; z++) {
-				placeRandomStoneVariantBlock(world, x, 5, z, random);
+				placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, 5, z);
 			}
 		}
 		// WALLS
 		for (int x = -width / 2; x <= width / 2; x++) {
 			for (int z = 0; z <= depth; z++) {
 				for (int y = 1; y <= 4; y++) {
-					placeRandomStoneVariantBlock(world, x, y, z, random);
+					placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, y, z);
 				}
 			}
 		}

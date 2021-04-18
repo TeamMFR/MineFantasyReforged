@@ -1,11 +1,12 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import minefantasy.mfr.world.gen.structure.WorldGenDwarvenStronghold;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockFurnace;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntityChest;
@@ -63,7 +64,12 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(IBlockState state) {
-        return state != MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState() && state != MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
+        return state != MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_2.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_3.getDefaultState();
     }
 
     @Override
@@ -72,23 +78,23 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
 
         for (int x = -width; x <= width; x++) {
             for (int z = 0; z <= depth; z++) {
-                Block block;
+                IBlockState state;
                 // FLOOR
-                block = getFloor(width, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, 0, z);
+                state = getFloor(width, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, 0, z);
                 }
                 // WALLS
                 for (int y = 1; y <= height; y++) {
-                    block = getWalls(width, depth, x, z);
-                    if (block != null && this.allowBuildOverBlock(world.getBlockState(offsetPos(x, y, z, facing)))) {
-                        placeBlock(world, block,  x, y, z);
+                    state = getWalls(width, depth, x, z);
+                    if (state != null && this.allowBuildOverBlock(world.getBlockState(offsetPos(x, y, z, facing)))) {
+                        placeBlockWithState(world, state,  x, y, z);
                     }
                 }
                 // CEILING
-                block = getCeiling(width, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, height, z);
+                state = getCeiling(width, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, height, z);
                 }
             }
         }
@@ -103,64 +109,62 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, 1, 2, -1);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, 1, 3, -1);
 
-        placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, 1, 3, -1);
+        placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0, 0, 3, -1);
         placeBlock(world, Blocks.AIR, 0, 1, -1);
         placeBlock(world, Blocks.AIR, 0, 2, -1);
 
         buildHomeFurnishings(width, depth, height);
-
-        MineFantasyReborn.LOG.error("Placed DSRoomSml at: " + pos);
     }
 
-    private Block getFloor(int width, int depth, int x, int z) {
+    private IBlockState getFloor(int width, int depth, int x, int z) {
         if (x == -(width - 1) || x == (width - 1) || z == 1 || z == depth - 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return MineFantasyBlocks.COBBLE_BRICK;
+        return MineFantasyBlocks.COBBLE_BRICK.getDefaultState();
     }
 
-    private Block getCeiling(int width, int depth, int x, int z) {
+    private IBlockState getCeiling(int width, int depth, int x, int z) {
         if (x == -(width - 1) || x == (width - 1) || z == 1 || z == depth - 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+        return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
     }
 
-    private Block getWalls(int width, int depth, int x, int z) {
+    private IBlockState getWalls(int width, int depth, int x, int z) {
         if (x == -width || x == width || z == depth || z == 0) {
             if ((x == -width && (z == depth || z == 0)) || (x == width && (z == depth || z == 0))) {
-                return MineFantasyBlocks.REINFORCED_STONE;
+                return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
             }
 
-            return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+            return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
         }
-        return Blocks.AIR;
+        return Blocks.AIR.getDefaultState();
     }
 
     private void buildHomeFurnishings(int width, int depth, int height) {
-        placeBlock(world, Blocks.FURNACE, width, 2, 2);
+        placeBlockWithState(world, Blocks.FURNACE.getDefaultState().withProperty(BlockFurnace.FACING, facing.rotateY()), width, 2, 2);
 
         placeBlock(world, Blocks.DOUBLE_STONE_SLAB, width - 3, 1, 1);
         placeBlock(world, Blocks.DOUBLE_STONE_SLAB, width - 3, 1, 2);
 
         for (int x = width - 1; x >= (width - 4); x--) {
-            placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_BRICKS, x, 1, 4);
-            placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_BRICKS, x, 2, 4);
+            placeBlockWithState(world, getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random), x, 1, 4);
+            placeBlockWithState(world, getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random), x, 2, 4);
             placeBlock(world, Blocks.STONE_SLAB, x, 3, 4);
         }
         placeBlock(world, Blocks.STONE_SLAB, width - 1, 1, 6);
         placeBlock(world, Blocks.STONE_SLAB, width - 2, 1, 6);
         placeBlock(world, Blocks.CAULDRON, width - 2, 1, 1);
 
-        placeBlock(world, Blocks.STONE_BRICK_STAIRS, -(width - 1), 1, 1);
-        placeBlock(world, Blocks.STONE_SLAB, -(width - 1), 1, 2);
-        placeBlock(world, Blocks.STONE_BRICK_STAIRS, -(width - 1), 1, 3);
+        placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -(width - 1), 1, 1, facing, facing);
+        placeBlockWithState(world, Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), -(width - 1), 1, 2);
+        placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -(width - 1), 1, 3, facing, facing.getOpposite());
 
         placeChest(width - 3, 1, 6, MineFantasyLoot.DWARVEN_HOME);
     }
 
     private void placeChest(int x, int y, int z, ResourceLocation loot) {
-        placeBlock(world, Blocks.CHEST, x, y, z);
+        placeBlockWithState(world, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, facing.rotateYCCW()), x, y, z);
         TileEntityChest chest = (TileEntityChest) world.getTileEntity(offsetPos(x, y, z, facing));
 
         if (chest != null) {

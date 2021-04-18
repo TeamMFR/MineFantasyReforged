@@ -4,7 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.init.Blocks;
@@ -32,21 +32,21 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
         // Place Floor
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
-                placeRandomStoneVariantBlock(world, x, 0, z, random);
+                placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, 0 ,z);
 
-                Block block = getFoundation(radius, x, z);
-                if (block != null) {
-                    buildFoundation(block, x, -1, z,block == Blocks.STONEBRICK,32, 3, false);
+                IBlockState state = getFoundation(radius, x, z);
+                if (state != null) {
+                    buildFoundation(state, x, -1, z, 32, 3, false);
                 }
             }
         }
 
         //Place Stairs
         for (int p = -1; p <= 1; p++) {
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -radius, 0, p, facing, EnumFacing.NORTH); //West
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, radius, 0, p, facing, EnumFacing.NORTH); //East
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -radius, 0, p, facing, EnumFacing.WEST); //West
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, radius, 0, p, facing, EnumFacing.EAST); //East
             placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, -radius, facing, EnumFacing.NORTH); //North
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, radius, facing, EnumFacing.NORTH); //South
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, radius, facing, EnumFacing.SOUTH); //South
         }
 
 
@@ -69,14 +69,14 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
 
 
         // Place Chest and Spawner
-        placeRandomStoneVariantBlock(world, 0, 1, 0, random);
+        placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), 0, 1, 0);
         placeChest(world, 0, 2, 0, random, facing, lootType);
         placeSpawner(world, 0, 0, 0, EntityList.getKey(EntityEnderman.class));
 
         MineFantasyReborn.LOG.error("Placed Ancient Altar at: " + pos);
     }
 
-    private Block getFoundation(int radius, int x, int z) {
+    private IBlockState getFoundation(int radius, int x, int z) {
         if (x == -radius && z == -radius)
             return null;
         if (x == radius && z == -radius)
@@ -87,15 +87,15 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
             return null;
 
         if (x == 0 && z == -radius)
-            return Blocks.OBSIDIAN;
+            return Blocks.OBSIDIAN.getDefaultState();
         if (x == 0 && z == radius)
-            return Blocks.OBSIDIAN;
+            return Blocks.OBSIDIAN.getDefaultState();
         if (x == -radius && z == 0)
-            return Blocks.OBSIDIAN;
+            return Blocks.OBSIDIAN.getDefaultState();
         if (x == radius && z == 0)
-            return Blocks.OBSIDIAN;
+            return Blocks.OBSIDIAN.getDefaultState();
 
-        return Blocks.STONEBRICK;
+        return getRandomVariantBlock(Blocks.STONEBRICK, random);
     }
 
     private void placeChest(World world, int x, int y, int z, Random random, EnumFacing facing, ResourceLocation loot) {

@@ -19,7 +19,7 @@ public abstract class WorldGenStructureBase {
             BlockPos newPos = new BlockPos(pos.getX(), y, pos.getZ());
             if (isBlockAcceptableOrigin(world, newPos)) {
                 if (isDirectionRandom()) {
-                    building = getStartPiece(world, newPos.add(0, 1,0), EnumFacing.random(random), random);
+                    building = getStartPiece(world, newPos.add(0, 1,0), EnumFacing.HORIZONTALS[random.nextInt(EnumFacing.HORIZONTALS.length)], random);
                     if (building != null && canStructureBuild(building)) {
                         building.generate();
                         return true;

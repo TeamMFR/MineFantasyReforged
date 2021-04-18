@@ -1,6 +1,6 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -10,21 +10,26 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.item.ItemMine;
 import minefantasy.mfr.item.ItemWeaponMFR;
-import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
-import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import minefantasy.mfr.world.gen.structure.WorldGenDwarvenStronghold;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.BlockChest;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.item.EntityArmorStand;
 import net.minecraft.init.Blocks;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
+import net.minecraft.util.datafix.fixes.ArmorStandSilent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Rotations;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
@@ -36,7 +41,7 @@ import java.util.Random;
 public class StructureGenDSRoom extends StructureModuleMFR {
     private static final String[] possible_types = new String[]{"living", "forge", "study", "armoury"};
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
-    protected Block floor_block = MineFantasyBlocks.COBBLE_BRICK;
+    protected IBlockState FLOOR = MineFantasyBlocks.COBBLE_BRICK.getDefaultState();
     private String type = "basic";
 
     public StructureGenDSRoom(World world, BlockPos pos, EnumFacing facing, Random random) {
@@ -94,7 +99,12 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(IBlockState state) {
-        return state != MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState() && state != MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
+        return state != MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_2.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_3.getDefaultState();
     }
 
     @Override
@@ -104,33 +114,40 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         int height = getHeight();
         for (int x = -width_span; x <= width_span; x++) {
             for (int z = 0; z <= depth; z++) {
-                Block block;
+                IBlockState state;
                 // FLOOR
-                block = getFloor(width_span, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, 0, z);
+                state = getFloor(width_span, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, 0, z);
                 }
                 // WALLS
                 for (int y = 1; y <= height + 1; y++) {
-                    block = getWalls(width_span, depth, x, z);
-                    if (block != null) {
-                        placeBlock(world, block,  x, y, z);
+                    state = getWalls(width_span, depth, x, z);
+                    if (state != null) {
+                        placeBlockWithState(world, state,  x, y, z);
                     }
                 }
                 // CEILING
-                block = getCeiling(width_span, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, height + 1, z);
+                state = getCeiling(width_span, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, height + 1, z);
                 }
 
                 // TRIM
-                block = getTrim(width_span, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, height, z);
-                    if (block == MineFantasyBlocks.REINFORCED_STONE_FRAMED) {
+                state = getTrim(width_span, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, height, z);
+                    if (state == MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState()) {
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(world, h == 4 ? Blocks.GLOWSTONE : MineFantasyBlocks.REINFORCED_STONE, x, h,
-                                    z);
+                            if (h == 4){
+                                placeBlock(world, Blocks.GLOWSTONE, x, h, z);
+                            }
+                            else if (h == 2) {
+                                placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0, x, h, z);
+                            }
+                            else {
+                                placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, x, h, z);
+                            }
                         }
                         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED, x, 1, z);
                     }
@@ -154,8 +171,6 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         if (type.equalsIgnoreCase("study")) {
             generateStudy();
         }
-
-        MineFantasyReborn.LOG.error("Placed DS Room at: " + pos);
     }
 
     protected void buildDoorway() {
@@ -186,63 +201,63 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         return 5;
     }
 
-    private Block getTrim(int radius, int depth, int x, int z) {
+    private IBlockState getTrim(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1)) {
             if (z == (int) Math.ceil((float) depth / 2) || z == (int) Math.floor((float) depth / 2)) {
-                return MineFantasyBlocks.REINFORCED_STONE_FRAMED;
+                return MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState();
             }
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
                     || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return MineFantasyBlocks.REINFORCED_STONE_FRAMED;
+                return MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState();
             }
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
         return null;
     }
 
-    private Block getCeiling(int radius, int depth, int x, int z) {
+    private IBlockState getCeiling(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+        return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
     }
 
-    private Block getFloor(int radius, int depth, int x, int z) {
+    private IBlockState getFloor(int radius, int depth, int x, int z) {
         if (type.equalsIgnoreCase("living") || type.equalsIgnoreCase("study")) {
-            floor_block = MineFantasyBlocks.REFINED_PLANKS;
+            FLOOR = MineFantasyBlocks.REFINED_PLANKS.getDefaultState();
             if (x > -2 && x < 2 && z > 3 && z < (depth - 3)) {
-                floor_block = Blocks.OBSIDIAN;
+                FLOOR = Blocks.OBSIDIAN.getDefaultState();
             }
         }
         if (z < 2 && x >= -1 && x <= 1) {
-            return floor_block;
+            return FLOOR;
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return floor_block;
+        return FLOOR;
     }
 
-    private Block getWalls(int radius, int depth, int x, int z) {
+    private IBlockState getWalls(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if ((x == -radius && (z == depth || z == 0)) || (x == radius && (z == depth || z == 0))) {
-                return MineFantasyBlocks.REINFORCED_STONE;
+                return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
             }
 
-            return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+            return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
         }
-        return Blocks.AIR;
+        return Blocks.AIR.getDefaultState();
     }
 
     public StructureModuleMFR setLoot(ResourceLocation loot) {
@@ -261,12 +276,12 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         int offset2 = hall2 ? -(width_span + 1) : -width_span;
         int offset3 = hall3 ? depth + 1 : depth;
 
-        tryPlaceMinorRoom(width_span, 0, zOffset, false);
-        tryPlaceMinorRoom(offset1, 0, depth - zOffset, hall1);
+        tryPlaceMinorRoom(width_span, 0, zOffset, facing.rotateYCCW(), false);
+        tryPlaceMinorRoom(offset1, 0, depth - zOffset, facing.rotateYCCW(), hall1);
 
-        tryPlaceMinorRoom(-width_span, 0, zOffset, false);
-        tryPlaceMinorRoom(offset2, 0, depth - zOffset, hall2);
-        tryPlaceMinorRoom(0, 0, offset3, hall3);
+        tryPlaceMinorRoom(-width_span, 0, zOffset, facing.rotateY(), false);
+        tryPlaceMinorRoom(offset2, 0, depth - zOffset, facing.rotateY(), hall2);
+        tryPlaceMinorRoom(0, 0, offset3, facing, hall3);
         // this.placeSpawner(0, 1, depth-5);
 
         EntityMinotaur mob = new EntityMinotaur(world);
@@ -301,8 +316,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             placeBlock(world, Blocks.DOUBLE_STONE_SLAB, -1 + x, 1, (int) Math.floor((float) depth / 2) - 1);
             placeBlock(world, Blocks.DOUBLE_STONE_SLAB, -1 + x, 1, (int) Math.ceil((float) depth / 2) + 1);
         }
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY,0, 2, (int) Math.floor((float) depth / 2) - 1);
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY,  0, 2, (int) Math.ceil((float) depth / 2) + 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_BOMB,0, 2, (int) Math.floor((float) depth / 2) - 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_CROSSBOW,  0, 2, (int) Math.ceil((float) depth / 2) + 1);
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(world, mob, 0, 1, depth / 2);
         mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
@@ -350,50 +365,27 @@ public class StructureGenDSRoom extends StructureModuleMFR {
                     if (y == 1 || y == 3) {
                         placeAmmoBox(world, -(width - 1), y, z1, facing.rotateY(), MineFantasyLoot.DWARVEN_AMMO_BOX);
                     } else {
-                        placeBlock(world, Blocks.STONE_SLAB, -(width - 1), y, z1);
+                        placeBlockWithState(world, Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), -(width - 1), y, z1);
                     }
                 }
                 if (world.getBlockState(offsetPos((width - 1), y, z1, facing)).getMaterial().isReplaceable()) {
                     if (y == 1 || y == 3) {
                         placeAmmoBox(world, (width - 1), y, z1, facing.rotateYCCW(), MineFantasyLoot.DWARVEN_AMMO_BOX);
                     } else {
-                        placeBlock(world, Blocks.STONE_SLAB, (width - 1), y, z1);
+                        placeBlockWithState(world, Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), (width - 1), y, z1);
                     }
                 }
             }
         }
-        for (int z1 = 0; z1 < 4; z1++) {
-            placeRack(world, (width - 1), 2, depth - 2 - z1, facing.rotateY());
-            placeRack(world, -(width - 1), 2, depth - 2 - z1, facing.rotateYCCW());
-        }
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, -2, 2, depth - 1);
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, 2, 2, depth - 1);
+
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_GEARS, -2, 2, depth - 1);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_COGWORK, 2, 2, depth - 1);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, -2, 1, depth - 1);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, 2, 1, depth - 1);
         EntityMinotaur mob = new EntityMinotaur(world);
         this.placeEntity(world, mob, 0, 1, z);
         mob.setSpecies(MinotaurBreed.getEnvironment(subtype));
         mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 3);
-    }
-
-    private void placeRack(World world, int x, int y, int z, EnumFacing newFacing) {
-        placeBlock(world, MineFantasyBlocks.TOOL_RACK_WOOD, x, y, z, newFacing);
-        TileEntity tile = world.getTileEntity(offsetPos(x, y, z, facing));
-        if (tile instanceof TileEntityRack) {
-            setupRack((TileEntityRack) tile);
-        }
-    }
-
-    private void setupRack(TileEntityRack rack) {
-        rack.setMaterial(CustomMaterial.getMaterial(MineFantasyMaterials.Names.SCRAP_WOOD));
-        ItemWeaponMFR[] items = new ItemWeaponMFR[] {MineFantasyItems.STANDARD_SWORD, MineFantasyItems.STANDARD_WARAXE,
-                MineFantasyItems.STANDARD_MACE, MineFantasyItems.STANDARD_DAGGER};
-        for (int i = 0; i < rack.getInventory().getSlots(); i++) {
-            if (random.nextInt(3) != 0) {
-                ItemWeaponMFR loot = items[random.nextInt(items.length)];
-                rack.getInventory().setStackInSlot(i, loot.construct(MineFantasyMaterials.Names.IRON, MineFantasyMaterials.Names.SCRAP_WOOD));
-            }
-        }
     }
 
     private void generateForge() {
@@ -424,7 +416,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(world, Blocks.AIR,((width - 1) * position), 2, z - 1);
 
         placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, ((width - 1) * position), 2, z + 2);
-        placeBlock(world, MineFantasyBlocks.SCHEMATIC_ALLOY, ((width - 1) * position), 2, z - 3);
+        placeBlock(world, MineFantasyBlocks.SCHEMATIC_FORGE, ((width - 1) * position), 2, z - 3);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, ((width - 1) * position), 1, z + 2);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, ((width - 1) * position), 1, z - 3);
 
@@ -436,7 +428,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, ((width - 1) * position), 3, z + 1);
 
         placeBlock(world, MineFantasyBlocks.ANVIL_IRON, position * 2, 1, z);
-        placeBlock(world, Blocks.CAULDRON,  position * 2, 1, z - 1);
+        placeBlockWithState(world, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3),  position * 2, 1, z - 1);
 
         placeMiscMachine1(-(width - 2) * position, 0, depth - 3);
         placeMiscMachine1(-(width - 2) * position, 0, 3);
@@ -469,7 +461,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private void placeChest(World world, int x, int y, int z, Random random, EnumFacing facing, ResourceLocation loot) {
-        placeBlock(world, Blocks.CHEST, x, y, z);
+        placeBlockWithState(world, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, facing), x, y, z);
         TileEntityChest chest = (TileEntityChest) world.getTileEntity(offsetPos(x, y, z, facing));
 
         if (chest != null) {
@@ -478,12 +470,12 @@ public class StructureGenDSRoom extends StructureModuleMFR {
     }
 
     private void placeAmmoBox(World world, int x, int y, int z, EnumFacing facing, ResourceLocation loot) {
-        placeBlock(world, MineFantasyBlocks.AMMO_BOX_BASIC, x, y, z);
+        placeBlockWithState(world, MineFantasyBlocks.AMMO_BOX_BASIC.getDefaultState().withProperty(BlockAmmoBox.FACING, facing), x, y, z);
         TileEntityAmmoBox ammoBox = (TileEntityAmmoBox) world.getTileEntity(offsetPos(x, y, z, facing));
 
         if (ammoBox != null) {
             LootContext.Builder lootContext = new LootContext.Builder((WorldServer)this.world);
-            List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(LootTableList.GAMEPLAY_FISHING).generateLootForPools(this.random, lootContext.build());
+            List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(loot).generateLootForPools(this.random, lootContext.build());
             ItemStack ammo = result.get(random.nextInt());
             ammoBox.setMaterial(WoodMaterial.getMaterial(MineFantasyMaterials.Names.REFINED_WOOD));
             ammoBox.inventoryStack = ammo;
@@ -495,8 +487,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         }
     }
 
-    protected void tryPlaceMinorRoom(int x, int y, int z, boolean hall) {
+    protected void tryPlaceMinorRoom(int x, int y, int z, EnumFacing facing, boolean hall) {
         Class<? extends StructureModuleMFR> extension = hall ? StructureGenDSHall.class : StructureGenDSRoomSml2.class;
-        mapStructure(x, y, z, extension);
+        mapStructure(x, y, z, facing, extension);
     }
 }

@@ -91,17 +91,6 @@ public abstract class StructureModuleMFR {
     /**
      * Places a block and rotates it on direction
      *
-     * @param state   The IBlockState of the variant
-     * @param pos     The position of the block
-     * @param facing  The facing of the block
-     */
-    public void placeVariantBlock(World world, IBlockState state, BlockPos pos, EnumFacing facing) {
-        world.setBlockState(pos.offset(facing), state, 2);
-    }
-
-    /**
-     * Places a block and rotates it on direction
-     *
      * @param block   The block
      * @param x       The x offset relative to the pos
      * @param y       The y offset relative to the pos
@@ -110,6 +99,31 @@ public abstract class StructureModuleMFR {
      */
     public void placeBlock(World world, Block block, int x, int y, int z, EnumFacing facing) {
         world.setBlockState(offsetPos(x, y, z, facing), block.getDefaultState(), 2);
+    }
+
+    /**
+     * Places a block with a specific state with default facing
+     *
+     * @param state   The IBlockState of the variant
+     * @param x       The x offset relative to the pos
+     * @param y       The y offset relative to the pos
+     * @param z       The z offset relative to the pos
+     */
+    public void placeBlockWithState(World world, IBlockState state, int x, int y, int z) {
+        placeBlockWithState(world, state, x, y, z, facing);
+    }
+
+    /**
+     * Places a block with a specific state with facing
+     *
+     * @param state   The IBlockState of the variant
+     * @param x       The x offset relative to the pos
+     * @param y       The y offset relative to the pos
+     * @param z       The z offset relative to the pos
+     * @param facing  The facing of the block
+     */
+    public void placeBlockWithState(World world, IBlockState state, int x, int y, int z, EnumFacing facing) {
+        world.setBlockState(offsetPos(x, y, z, facing), state, 2);
     }
 
     /**
@@ -126,27 +140,61 @@ public abstract class StructureModuleMFR {
         world.setBlockState(offsetPos(x, y, z, offsetFacing), block.getDefaultState().withProperty(BlockStairs.FACING, stairFacing), 2);
     }
 
-    public void placeRandomStoneVariantBlock(World world, int x, int y, int z, Random random) {
-        IBlockState state;
+    /**
+     * Accepted Blocks: StoneBrick, MineFantasy Reinforced StoneBrick, MineFantasy Reinforced Engraved Stone after type 0
+     *
+     * @param block  The Block to get the random variant of
+     * @param random Random value for randomization
+     */
+
+    public IBlockState getRandomVariantBlock(Block block, Random random) {
+        IBlockState state = Blocks.AIR.getDefaultState();
 
         float f = random.nextFloat();
 
-        if (f < 0.2F) {
-            state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY);
-        }
-        else if (f < 0.5F) {
-            state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED);
-        }
-        else if (f < 0.55F) {
-            state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED);
-        }
-        else {
-            state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.DEFAULT);
+        if (block == Blocks.STONEBRICK){
+            if (f < 0.2F) {
+                state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.MOSSY);
+            }
+            else if (f < 0.5F) {
+                state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CHISELED);
+            }
+            else if (f < 0.55F) {
+                state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.CRACKED);
+            }
+            else {
+                state = Blocks.STONEBRICK.getDefaultState().withProperty(BlockStoneBrick.VARIANT, BlockStoneBrick.EnumType.DEFAULT);
+            }
         }
 
-        if (state != null) {
-            world.setBlockState(offsetPos(x, y, z, facing), state, 2);
+        if (block == MineFantasyBlocks.REINFORCED_STONE_BRICKS){
+            if (f < 0.2F) {
+                state = MineFantasyBlocks.REINFORCED_STONE_BRICKS_MOSSY.getDefaultState();
+            }
+            else if (f < 0.55F) {
+                state = MineFantasyBlocks.REINFORCED_STONE_BRICKS_CRACKED.getDefaultState();
+            }
+            else {
+                state = MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState();
+            }
         }
+
+        if (block == MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1){
+            if (f < 0.2F) {
+                state = MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1.getDefaultState();
+            }
+            else if (f < 0.5F) {
+                state = MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_2.getDefaultState();
+            }
+            else if (f < 0.55F) {
+                state = MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_3.getDefaultState();
+            }
+            else {
+                state = MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1.getDefaultState();
+            }
+        }
+
+        return state;
 
     }
 
@@ -215,17 +263,17 @@ public abstract class StructureModuleMFR {
     /**
      * Builds a foundation column from -1y
      *
-     * @param block      The block used
+     * @param state      The state used
      * @param x          the relative x position
      * @param y          the relative y position to start
      * @param z          the relative z position
      * @param max        the max depth
-     * @param penetrance how many solid blocks can it pass through
+     * @param penetration how many solid blocks can it pass through
      * @param relative   whether or not it must be stopped by concecutive blocks.
      */
-    protected void buildFoundation(Block block, int x, int y, int z, Boolean randomFlag, int max, int penetrance, boolean relative) {
-        penetrance -= y;
-        int init_penetrance = penetrance;
+    protected void buildFoundation(IBlockState state, int x, int y, int z, int max, int penetration, boolean relative) {
+        penetration -= y;
+        int init_penetration = penetration;
         while (-y < max) {
             IBlockState current = world.getBlockState(offsetPos(x, y, z, facing));
             boolean empty = current.getMaterial().isReplaceable();
@@ -234,19 +282,13 @@ public abstract class StructureModuleMFR {
                 return;
             }
             if (!empty) {
-                --penetrance;
+                --penetration;
             } else if (!relative) {
-                penetrance = init_penetrance;
+                penetration = init_penetration;
             }
 
-            if (empty || penetrance >= 0) {
-                if (randomFlag){
-                    placeRandomStoneVariantBlock(world, x, y, z, random);
-                }
-                else{
-                    placeBlock(world, block, x, y, z);
-                }
-
+            if (empty || penetration >= 0) {
+                placeBlockWithState(world, state, x, y, z);
                 --y;
             } else {
                 return;
@@ -254,13 +296,15 @@ public abstract class StructureModuleMFR {
         }
     }
 
-
-
     protected void mapStructure(int x, int y, int z, Class<? extends StructureModuleMFR> piece) {
-        mapStructure(x, y, z, piece, 0);
+        mapStructure(x, y, z, facing, piece);
     }
 
-    protected void mapStructure(int x, int y, int z, Class<? extends StructureModuleMFR> piece, int delay) {
+    protected void mapStructure(int x, int y, int z, EnumFacing facing, Class<? extends StructureModuleMFR> piece) {
+        mapStructure(x, y, z, facing, piece, 0);
+    }
+
+    protected void mapStructure(int x, int y, int z, EnumFacing facing, Class<? extends StructureModuleMFR> piece, int delay) {
         BlockPos offsetPos = offsetPos(x, y, z, this.facing);
 
         Block block = world.getBlockState(offsetPos).getBlock();

@@ -18,7 +18,7 @@ public class StructureGenAncientForge extends StructureModuleMFR {
 
     @Override
     public void generate() {
-        placeRandomStoneVariantBlock(world, 0, 0, -1, random);
+        placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), 0, 0, -1);
 
         int width = 14;
         int depth = 16;
@@ -26,21 +26,21 @@ public class StructureGenAncientForge extends StructureModuleMFR {
         // FLOOR
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
-                placeRandomStoneVariantBlock(world, x, 0, z, random);
+                placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, 0, z);
             }
         }
 
         // CEIL
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
-                placeRandomStoneVariantBlock(world, x, height, z, random);
+                placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, height, z);
             }
         }
         // WALLS
         for (int x = -width / 2; x <= width / 2; x++) {
             for (int z = 0; z <= depth; z++) {
                 for (int y = 1; y <= height; y++) {
-                    placeRandomStoneVariantBlock(world, x, y, z, random);
+                    placeBlockWithState(world, getRandomVariantBlock(Blocks.STONEBRICK, random), x, y, z);
                 }
             }
         }

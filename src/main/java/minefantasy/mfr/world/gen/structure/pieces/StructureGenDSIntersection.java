@@ -4,7 +4,7 @@ import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
-import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -24,13 +24,13 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
         int offset = 0;
         boolean[] intersection = getRandomIntersectionPattern();
         if (intersection[0]) {
-            tryPlaceHall(0, 0, depth + offset);
+            tryPlaceHall(0, 0, depth + offset, facing);
         }
         if (intersection[1]) {
-            tryPlaceHall(-(width_span + offset), 0, (int) Math.floor((float) depth / 2));
+            tryPlaceHall(-(width_span + offset), 0, (int) Math.floor((float) depth / 2), facing.rotateY());
         }
         if (intersection[2]) {
-            tryPlaceHall((width_span + offset), 0, (int) Math.floor((float) depth / 2));
+            tryPlaceHall((width_span + offset), 0, (int) Math.floor((float) depth / 2), facing.rotateYCCW());
         }
     }
 
@@ -57,7 +57,7 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
     }
 
     @Override
-    protected Block getTrim(int radius, int depth, int x, int z) {
+    protected IBlockState getTrim(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             return null;
         }
@@ -65,48 +65,48 @@ public class StructureGenDSIntersection extends StructureGenDSHall {
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
             if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
                     || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return MineFantasyBlocks.REINFORCED_STONE_FRAMED;
+                return MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState();
             }
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
         return null;
     }
 
     @Override
-    protected Block getCeiling(int radius, int depth, int x, int z) {
+    protected IBlockState getCeiling(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+        return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
     }
 
     @Override
-    protected Block getFloor(int radius, int depth, int x, int z) {
+    protected IBlockState getFloor(int radius, int depth, int x, int z) {
         if (z == 0 && x >= -1 && x <= 1) {
-            return floor;
+            return FLOOR;
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return floor;
+        return FLOOR;
     }
 
     @Override
-    protected Block getWalls(int radius, int height, int depth, int x, int y, int z) {
+    protected IBlockState getWalls(int radius, int height, int depth, int x, int y, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if ((x == -radius && (z == depth || z == 0)) || (x == radius && (z == depth || z == 0))) {
-                return MineFantasyBlocks.REINFORCED_STONE;
+                return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
             }
 
-            return y == height / 2 ? MineFantasyBlocks.REINFORCED_STONE : MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+            return y == height / 2 ? getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1, random) : getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
         }
-        return Blocks.AIR;
+        return Blocks.AIR.getDefaultState();
     }
 
     @Override

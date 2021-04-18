@@ -1,6 +1,5 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
@@ -20,7 +19,7 @@ import java.util.Random;
 
 public class StructureGenDSCrossroads extends StructureModuleMFR {
     protected ResourceLocation lootType = LootTableList.CHESTS_SIMPLE_DUNGEON;
-    protected Block floor_block = MineFantasyBlocks.COBBLE_BRICK;
+    protected IBlockState FLOOR = MineFantasyBlocks.COBBLE_BRICK.getDefaultState();
 
     public StructureGenDSCrossroads(World world, BlockPos pos, EnumFacing facing, Random random) {
         super(world, pos, facing, random);
@@ -60,7 +59,12 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
     }
 
     private boolean allowBuildOverBlock(IBlockState state) {
-        return state != MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState() && state != MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
+        return state != MineFantasyBlocks.REINFORCED_STONE_BRICKS.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_1.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_2.getDefaultState()
+                && state != MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_3.getDefaultState();
     }
 
     @Override
@@ -75,34 +79,42 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
         int height = getHeight();
         for (int x = -width_span; x <= width_span; x++) {
             for (int z = 0; z <= depth; z++) {
-                Block block;
+                IBlockState state;
                 // FLOOR
-                block = getFloor(width_span, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, 0, z);
+                state = getFloor(width_span, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, 0, z);
                 }
                 // WALLS
                 for (int y = 1; y <= height + 1; y++) {
-                    block = getWalls(width_span, depth, x, z);
-                    if (block != null) {
+                    state = getWalls(width_span, depth, x, z);
+                    if (state != null) {
 
-                        placeBlock(world, block, x, y, z);
+                        placeBlockWithState(world, state, x, y, z);
                     }
                 }
                 // CEILING
-                block = getCeiling(width_span, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, height + 1, z);
+                state = getCeiling(width_span, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, height + 1, z);
                 }
 
                 // TRIM
-                block = getTrim(width_span, depth, x, z);
-                if (block != null) {
-                    placeBlock(world, block, x, height, z);
-                    placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, x, 4, z);
-                    if (block == MineFantasyBlocks.REINFORCED_STONE_FRAMED) {
+                state = getTrim(width_span, depth, x, z);
+                if (state != null) {
+                    placeBlockWithState(world, state, x, height, z);
+                    placeBlockWithState(world, state, x, 4, z);
+                    if (state == MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState()) {
                         for (int h = height - 1; h > 1; h--) {
-                            placeBlock(world, h == 5 ? Blocks.GLOWSTONE : MineFantasyBlocks.REINFORCED_STONE, x, h, z);
+                            if (h == 5){
+                                placeBlock(world, Blocks.GLOWSTONE, x, h, z);
+                            }
+                            else if (h == 2){
+                                placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0, x, h, z );
+                            }
+                            else {
+                                placeBlock(world, MineFantasyBlocks.REINFORCED_STONE, x, h, z);
+                            }
                         }
                         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED, x, 1, z);
                     }
@@ -115,8 +127,6 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
         buildDoorway();
 
         generateCrossroad();
-
-        MineFantasyReborn.LOG.error("Placed DSCrossroads at: " + pos);
     }
 
     protected void buildDoorway() {
@@ -141,57 +151,60 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
         return 7;
     }
 
-    private Block getTrim(int radius, int depth, int x, int z) {
+    private IBlockState getTrim(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1)) {
             if (z == (int) Math.ceil((float) depth / 2) || z == (int) Math.floor((float) depth / 2)) {
-                return MineFantasyBlocks.REINFORCED_STONE_FRAMED;
+                return MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState();
             }
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            if ((x == -(radius - 1) && (z == (depth - 1) || z == 1))
-                    || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
-                return MineFantasyBlocks.REINFORCED_STONE_FRAMED;
+            if ((x == -(radius - 1) && (z == (depth - 1) || z == 1)) || (x == (radius - 1) && (z == (depth - 1) || z == 1))) {
+                return MineFantasyBlocks.REINFORCED_STONE_FRAMED.getDefaultState();
             }
-            return MineFantasyBlocks.REINFORCED_STONE;
+            Block block = MineFantasyBlocks.REINFORCED_STONE;
+            if (x == 0 || z == 5 || z == (depth - 5)) {
+                block = MineFantasyBlocks.REINFORCED_STONE_ENGRAVED_0;
+            }
+            return block.getDefaultState();
         }
         return null;
     }
 
-    private Block getCeiling(int radius, int depth, int x, int z) {
+    private IBlockState getCeiling(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             return null;
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+        return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
     }
 
-    private Block getFloor(int radius, int depth, int x, int z) {
+    private IBlockState getFloor(int radius, int depth, int x, int z) {
         if (z < 2 && x >= -1 && x <= 1) {
-            return floor_block;
+            return FLOOR;
         }
         if (x == -radius || x == radius || z == depth || z == 0) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
         if (x == -(radius - 1) || x == (radius - 1) || z == (depth - 1) || z == 1) {
-            return MineFantasyBlocks.REINFORCED_STONE;
+            return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
         }
-        return floor_block;
+        return FLOOR;
     }
 
-    private Block getWalls(int radius, int depth, int x, int z) {
+    private IBlockState getWalls(int radius, int depth, int x, int z) {
         if (x == -radius || x == radius || z == depth || z == 0) {
             if ((x == -radius && (z == depth || z == 0)) || (x == radius && (z == depth || z == 0))) {
-                return MineFantasyBlocks.REINFORCED_STONE;
+                return MineFantasyBlocks.REINFORCED_STONE.getDefaultState();
             }
 
-            return MineFantasyBlocks.REINFORCED_STONE_BRICKS;
+            return getRandomVariantBlock(MineFantasyBlocks.REINFORCED_STONE_BRICKS, random);
         }
-        return Blocks.AIR;
+        return Blocks.AIR.getDefaultState();
     }
 
     public StructureModuleMFR setLoot(ResourceLocation loot) {
@@ -207,13 +220,13 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
 
         boolean stairSide = random.nextBoolean();
 
-        tryPlaceCrossroadHall(0, depth + 1, stairSide, 0);
+        tryPlaceCrossroadHall(0, depth + 1, facing, stairSide, 0);
 
-        tryPlaceCrossroadHall((width_span + 1), zOffset, stairSide, 20);
-        tryPlaceCrossroadHall((width_span + 1), depth - zOffset, !stairSide, 40);
+        tryPlaceCrossroadHall((width_span + 1), zOffset, facing.rotateYCCW(), stairSide, 20);
+        tryPlaceCrossroadHall((width_span + 1), depth - zOffset, facing.rotateYCCW(), !stairSide, 40);
 
-        tryPlaceCrossroadHall(-(width_span + 1), zOffset, stairSide, 60);
-        tryPlaceCrossroadHall(-(width_span + 1), depth - zOffset, !stairSide, 80);
+        tryPlaceCrossroadHall(-(width_span + 1), zOffset, facing.rotateY(), stairSide, 60);
+        tryPlaceCrossroadHall(-(width_span + 1), depth - zOffset, facing.rotateY(), !stairSide, 80);
 
         this.placeMinotaur(depth - 2);
         this.placeMinotaur(2);
@@ -238,8 +251,8 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
         mob.worldGenTier(MinotaurBreed.getEnvironment(subtype), 1);
     }
 
-    protected void tryPlaceCrossroadHall(int x, int z, boolean stair, int delay) {
+    protected void tryPlaceCrossroadHall(int x, int z, EnumFacing facing, boolean stair, int delay) {
         Class<? extends StructureModuleMFR> extension = stair ? StructureGenDSStairs.class : StructureGenDSHall.class;
-        mapStructure(x, 0, z, extension, delay);
+        mapStructure(x, 0, z, facing, extension, delay);
     }
 }

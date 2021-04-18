@@ -1,16 +1,19 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.block.Block;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.world.chunk.Chunk;
+import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityWorldGenMarker extends TileEntity implements ITickable {
+public class TileEntityWorldGenMarker extends TileEntityBase implements ITickable {
 	public String className, type;
 	public int ticks = 0, length = 0, deviation = 0, prevID, prevFacing;
 
@@ -58,5 +61,30 @@ public class TileEntityWorldGenMarker extends TileEntity implements ITickable {
 		nbt.setInteger("prev_facing", prevFacing);
 		nbt.setInteger("deviation", deviation);
 		return nbt;
+	}
+
+	@Override
+	protected ItemStackHandler createInventory() {
+		return null;
+	}
+
+	@Override
+	public ItemStackHandler getInventory() {
+		return null;
+	}
+
+	@Override
+	public ContainerBase createContainer(EntityPlayer player) {
+		return null;
+	}
+
+	@Override
+	protected int getGuiId() {
+		return 0;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int slot, ItemStack item) {
+		return false;
 	}
 }
