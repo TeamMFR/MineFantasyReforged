@@ -36,7 +36,6 @@ import minefantasy.mfr.block.BlockPaneMF;
 import minefantasy.mfr.block.BlockPie;
 import minefantasy.mfr.block.BlockQuern;
 import minefantasy.mfr.block.BlockRack;
-import minefantasy.mfr.block.BlockReinforcedStone;
 import minefantasy.mfr.block.BlockRepairKit;
 import minefantasy.mfr.block.BlockResearchBench;
 import minefantasy.mfr.block.BlockRoad;
@@ -229,7 +228,15 @@ public class MineFantasyBlocks {
 	public static Block NAILED_PLANKS_STAIR = Utils.nullValue();
 
 	public static Block REINFORCED_STONE = Utils.nullValue();
+	public static Block REINFORCED_STONE_ENGRAVED_0 = Utils.nullValue();
+	public static Block REINFORCED_STONE_ENGRAVED_1 = Utils.nullValue();
+	public static Block REINFORCED_STONE_ENGRAVED_2 = Utils.nullValue();
+	public static Block REINFORCED_STONE_ENGRAVED_3 = Utils.nullValue();
+
 	public static Block REINFORCED_STONE_BRICKS = Utils.nullValue();
+	public static Block REINFORCED_STONE_BRICKS_MOSSY = Utils.nullValue();
+	public static Block REINFORCED_STONE_BRICKS_CRACKED = Utils.nullValue();
+
 	public static Block REINFORCED_STONE_FRAMED = Utils.nullValue();
 	public static Block REINFORCED_STONE_FRAMED_IRON = Utils.nullValue();
 
@@ -421,8 +428,16 @@ public class MineFantasyBlocks {
 		REFINED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("refined_planks_stairs", REFINED_PLANKS);
 		NAILED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("nailed_planks_stairs", NAILED_PLANKS);
 
-		REINFORCED_STONE = new BlockReinforcedStone("reinforced_stone", "base", "engraved", "dshall_0", "dshall_1", "dshall_2").setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
-		REINFORCED_STONE_BRICKS = new BlockReinforcedStone("reinforced_stone_bricks", "base", "mossy", "cracked").setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE = new BasicBlockMF("reinforced_stone", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_ENGRAVED_0 = new BasicBlockMF("reinforced_stone_engraved_0", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_ENGRAVED_1 = new BasicBlockMF("reinforced_stone_engraved_1", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_ENGRAVED_2 = new BasicBlockMF("reinforced_stone_engraved_2", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_ENGRAVED_3 = new BasicBlockMF("reinforced_stone_engraved_3", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+
+		REINFORCED_STONE_BRICKS = new BasicBlockMF("reinforced_stone_bricks", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_BRICKS_MOSSY = new BasicBlockMF("reinforced_stone_bricks_mossy", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_BRICKS_CRACKED = new BasicBlockMF("reinforced_stone_bricks_cracked", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+
 		REINFORCED_STONE_FRAMED = new BasicBlockMF("reinforced_stone_framed", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(20F);
 		REINFORCED_STONE_FRAMED_IRON = new BasicBlockMF("reinforced_stone_framed_iron", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(20F);
 
@@ -582,7 +597,15 @@ public class MineFantasyBlocks {
 		registry.register(NAILED_PLANKS_STAIR);
 
 		registry.register(REINFORCED_STONE);
+		registry.register(REINFORCED_STONE_ENGRAVED_0);
+		registry.register(REINFORCED_STONE_ENGRAVED_1);
+		registry.register(REINFORCED_STONE_ENGRAVED_2);
+		registry.register(REINFORCED_STONE_ENGRAVED_3);
+
 		registry.register(REINFORCED_STONE_BRICKS);
+		registry.register(REINFORCED_STONE_BRICKS_MOSSY);
+		registry.register(REINFORCED_STONE_BRICKS_CRACKED);
+
 		registry.register(REINFORCED_STONE_FRAMED);
 		registry.register(REINFORCED_STONE_FRAMED_IRON);
 
@@ -841,7 +864,14 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(NAILED_PLANKS_STAIR));
 
 		registry.register(new ItemBlockBase(REINFORCED_STONE));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_0));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_1));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_2));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_3));
+
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_MOSSY));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_CRACKED));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED_IRON));
 

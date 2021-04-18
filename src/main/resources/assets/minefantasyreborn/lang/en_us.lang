@@ -563,7 +563,10 @@ tile.refined_planks_stairs.name=Refined Plank Stairs
 tile.reinforced_stone.name=Reinforced Stone
 tile.reinforced_stone_bricks.name=Reinforced Stone Bricks
 tile.reinforced_stone_base.name=Reinforced Stone
-tile.reinforced_stone_engraved.name=Engraved Reinforced Stone
+tile.reinforced_stone_engraved_0.name=Engraved Reinforced Stone
+tile.reinforced_stone_engraved_1.name=Engraved Reinforced Stone
+tile.reinforced_stone_engraved_2.name=Engraved Reinforced Stone
+tile.reinforced_stone_engraved_3.name=Engraved Reinforced Stone
 
 tile.reinforced_stone_bricks_base.name=Reinforced Stone Bricks
 tile.reinforced_stone_bricks_cracked.name=Worn Reinforced Stone Bricks

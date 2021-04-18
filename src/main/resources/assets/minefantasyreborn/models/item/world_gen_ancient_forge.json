@@ -1,0 +1,6 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreborn:items/world_gen_ancient_forge"
+    }
+}

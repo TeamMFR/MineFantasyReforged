@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreborn:items/world_gen_dwarven_stronghold"
+    }
+}
+

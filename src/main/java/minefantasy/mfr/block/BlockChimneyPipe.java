@@ -2,7 +2,6 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.tile.TileEntityChimney;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -88,18 +87,17 @@ public class BlockChimneyPipe extends BlockChimney {
 	@Override
 	public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
 		BlockPos offset = pos.offset(facing);
-		return attachesTo(world, world.getBlockState(offset), offset, facing.getOpposite());
+		return attachesTo(world.getBlockState(offset));
 	}
 
 	public boolean canPipeConnectTo(IBlockAccess world, BlockPos pos, EnumFacing dir) {
 		BlockPos other = pos.offset(dir);
 		IBlockState state = world.getBlockState(other);
-		return state.getBlock().canBeConnectedTo(world, other, dir.getOpposite()) || attachesTo(world, state, other, dir.getOpposite());
+		return state.getBlock().canBeConnectedTo(world, other, dir.getOpposite()) || attachesTo(state);
 	}
 
-	public final boolean attachesTo(IBlockAccess blockAccess, IBlockState state, BlockPos pos, EnumFacing facing) {
-		BlockFaceShape blockfaceshape = state.getBlockFaceShape(blockAccess, pos, facing);
-		return blockfaceshape == BlockFaceShape.SOLID || blockfaceshape == BlockFaceShape.MIDDLE_POLE_THIN;
+	public final boolean attachesTo(IBlockState state) {
+		return state.getBlock() instanceof BlockChimney;
 	}
 
 	/**

@@ -76,7 +76,6 @@ public class ItemWorldGenPlacer extends ItemBaseMFR {
 
 	@Override
 	public void registerClient() {
-		// so that we don't need a new icon for all the items, using a generic world_gen_placer.json model
-		ModelLoaderHelper.registerItem(this, 0, "world_gen_placer");
+		ModelLoaderHelper.registerItem(this, 0, structure);
 	}
 }

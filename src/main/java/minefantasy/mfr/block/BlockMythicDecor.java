@@ -13,6 +13,6 @@ public class BlockMythicDecor extends Block {
 		this.setHarvestLevel("pickaxe", 2);
 		this.setHardness(2.0F);
 		this.setResistance(2.0F);
-		this.setCreativeTab(CreativeTabs.DECORATIONS);
+		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 	}
 }
