@@ -4,6 +4,7 @@ import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.heating.ForgeFuel;
 import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.block.BlockFrame;
+import minefantasy.mfr.block.BlockFrameHolder;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -56,7 +57,7 @@ public class PowerArmour {
 
 	public static boolean isStationBlock(World world, BlockPos pos) {
 		Block block = world.getBlockState(pos).getBlock();
-		return isBasicStationFrame(world, pos) && block instanceof BlockFrame && ((BlockFrame) block).isCogworkHolder;
+		return isBasicStationFrame(world, pos) && block instanceof BlockFrameHolder;
 	}
 
 	public static boolean isBasicStationFrame(World world, BlockPos pos) {

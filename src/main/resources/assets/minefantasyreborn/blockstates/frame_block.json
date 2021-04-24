@@ -1,10 +1,35 @@
 {
     "forge_marker": 1,
-    "defaults": {
-        "model": "minefantasyreborn:frame_block",
-        "transform": "forge:default-block"
-    },
     "variants": {
-        "normal": [{}]
+        "normal": [{"model": "minefantasyreborn:frame_block_normal"}],
+        "north": {
+            "true"  : {"submodel": "minefantasyreborn:frame_block_north" },
+            "false" : {"submodel": "minefantasyreborn:frame_block" }
+        },
+
+        "east": {
+            "true"  : {"submodel": "minefantasyreborn:frame_block_east"},
+            "false" : {"submodel": "minefantasyreborn:frame_block" }
+        },
+
+        "south": {
+            "true"  : {"submodel": "minefantasyreborn:frame_block_south" },
+            "false" : {"submodel": "minefantasyreborn:frame_block"}
+        },
+
+        "west": {
+            "true"  : {"submodel": "minefantasyreborn:frame_block_west"},
+            "false" : {"submodel": "minefantasyreborn:frame_block"}
+        },
+
+        "up": {
+            "true"  : {"submodel": "minefantasyreborn:frame_block_up"},
+            "false" : {"submodel": "minefantasyreborn:frame_block"}
+        },
+
+        "down": {
+            "true"  : {"submodel": "minefantasyreborn:frame_block_down"},
+            "false" : {"submodel": "minefantasyreborn:frame_block"}
+        }
     }
 }

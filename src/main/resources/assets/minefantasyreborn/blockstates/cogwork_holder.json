@@ -1,10 +1,7 @@
 {
     "forge_marker": 1,
     "defaults": {
-        "textures": {
-            "all": "minefantasyreborn:blocks/cogwork_holder"
-        },
-        "model": "cube_all"
+        "model": "minefantasyreborn:cogwork_holder"
     },
     "variants": {
         "normal": [{}]

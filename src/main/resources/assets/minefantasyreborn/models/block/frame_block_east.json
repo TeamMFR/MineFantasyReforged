@@ -1,0 +1,23 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "minefantasyreborn:blocks/frame_block",
+		"particle": "minefantasyreborn:blocks/frame_block"
+	},
+	"elements": [
+		{
+			"name": "east",
+			"from": [12, 4, 4],
+			"to": [16, 12, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 4, 4, 12], "texture": "#0"},
+				"east": {"uv": [4, 4, 12, 12], "texture": "#0"},
+				"south": {"uv": [12, 4, 16, 12], "texture": "#0"},
+				"west": {"uv": [4, 4, 12, 12], "texture": "#0"},
+				"up": {"uv": [12, 4, 16, 12], "texture": "#0"},
+				"down": {"uv": [12, 4, 16, 12], "texture": "#0"}
+			}
+		}
+	]
+}

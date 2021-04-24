@@ -946,9 +946,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
 	@Override
 	protected void dropFewItems(boolean pkill, int looting) {
-		this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCKCOGWORK_HELM), 1);
-		this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCKCOGWORK_CHESTPLATE), 1);
-		this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCKCOGWORK_LEGS), 1);
+		this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCK_COGWORK_HELM), 1);
+		this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCK_COGWORK_CHESTPLATE), 1);
+		this.dropItem(Item.getItemFromBlock(MineFantasyBlocks.BLOCK_COGWORK_LEGS), 1);
 
 	}
 

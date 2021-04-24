@@ -325,15 +325,15 @@ public class ForgingRecipes {
 		Salvage.addSalvage(MineFantasyBlocks.FRAME_BLOCK, MineFantasyItems.IRON_FRAME, MineFantasyItems.RIVET);
 
 		time = 10;
-		MineFantasyKnowledgeList.cogHelmR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyBlocks.BLOCKCOGWORK_HELM), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFR", "SEES", " RR ", 'E', Items.ENDER_EYE, 'F', MineFantasyItems.IRON_FRAME, 'R', MineFantasyItems.RIVET, 'S', MineFantasyItems.COGWORK_SHAFT);
-		Salvage.addSalvage(MineFantasyBlocks.BLOCKCOGWORK_HELM, new ItemStack(Items.ENDER_EYE, 2), new ItemStack(MineFantasyItems.IRON_FRAME, 2), new ItemStack(MineFantasyItems.COGWORK_SHAFT, 2), new ItemStack(MineFantasyItems.RIVET, 4));
+		MineFantasyKnowledgeList.cogHelmR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyBlocks.BLOCK_COGWORK_HELM), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFR", "SEES", " RR ", 'E', Items.ENDER_EYE, 'F', MineFantasyItems.IRON_FRAME, 'R', MineFantasyItems.RIVET, 'S', MineFantasyItems.COGWORK_SHAFT);
+		Salvage.addSalvage(MineFantasyBlocks.BLOCK_COGWORK_HELM, new ItemStack(Items.ENDER_EYE, 2), new ItemStack(MineFantasyItems.IRON_FRAME, 2), new ItemStack(MineFantasyItems.COGWORK_SHAFT, 2), new ItemStack(MineFantasyItems.RIVET, 4));
 		time = 15;
-		MineFantasyKnowledgeList.cogChestR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyBlocks.BLOCKCOGWORK_CHESTPLATE), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " RFR ", "RSFSR", "RFBFR", " SFS ", 'F', MineFantasyItems.IRON_FRAME, 'R', MineFantasyItems.RIVET, 'S', MineFantasyItems.COGWORK_SHAFT, 'B', Blocks.FURNACE);
-		Salvage.addSalvage(MineFantasyBlocks.BLOCKCOGWORK_CHESTPLATE, Blocks.FURNACE, new ItemStack(MineFantasyItems.IRON_FRAME, 5), new ItemStack(MineFantasyItems.COGWORK_SHAFT, 4), new ItemStack(MineFantasyItems.RIVET, 6));
+		MineFantasyKnowledgeList.cogChestR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyBlocks.BLOCK_COGWORK_CHESTPLATE), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " RFR ", "RSFSR", "RFBFR", " SFS ", 'F', MineFantasyItems.IRON_FRAME, 'R', MineFantasyItems.RIVET, 'S', MineFantasyItems.COGWORK_SHAFT, 'B', Blocks.FURNACE);
+		Salvage.addSalvage(MineFantasyBlocks.BLOCK_COGWORK_CHESTPLATE, Blocks.FURNACE, new ItemStack(MineFantasyItems.IRON_FRAME, 5), new ItemStack(MineFantasyItems.COGWORK_SHAFT, 4), new ItemStack(MineFantasyItems.RIVET, 6));
 
 		time = 10;
-		MineFantasyKnowledgeList.cogLegsR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyBlocks.BLOCKCOGWORK_LEGS), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFFR", "RS SR", " S S ", " F F ", 'F', MineFantasyItems.IRON_FRAME, 'R', MineFantasyItems.RIVET, 'S', MineFantasyItems.COGWORK_SHAFT);
-		Salvage.addSalvage(MineFantasyBlocks.BLOCKCOGWORK_LEGS, new ItemStack(MineFantasyItems.IRON_FRAME, 5), new ItemStack(MineFantasyItems.COGWORK_SHAFT, 4), new ItemStack(MineFantasyItems.RIVET, 4));
+		MineFantasyKnowledgeList.cogLegsR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyBlocks.BLOCK_COGWORK_LEGS), "cogArmour", false, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RFFFR", "RS SR", " S S ", " F F ", 'F', MineFantasyItems.IRON_FRAME, 'R', MineFantasyItems.RIVET, 'S', MineFantasyItems.COGWORK_SHAFT);
+		Salvage.addSalvage(MineFantasyBlocks.BLOCK_COGWORK_LEGS, new ItemStack(MineFantasyItems.IRON_FRAME, 5), new ItemStack(MineFantasyItems.COGWORK_SHAFT, 4), new ItemStack(MineFantasyItems.RIVET, 4));
 
 	}
 }

@@ -25,6 +25,7 @@ import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.block.BlockFirepit;
 import minefantasy.mfr.block.BlockForge;
 import minefantasy.mfr.block.BlockFrame;
+import minefantasy.mfr.block.BlockFrameHolder;
 import minefantasy.mfr.block.BlockLeavesMF;
 import minefantasy.mfr.block.BlockLogMF;
 import minefantasy.mfr.block.BlockMetalBarsMF;
@@ -288,9 +289,9 @@ public class MineFantasyBlocks {
 	public static BlockAmmoBox AMMO_BOX_BASIC = Utils.nullValue();
 	public static BlockAmmoBox CRATE_BASIC = Utils.nullValue();
 
-	public static Block BLOCKCOGWORK_HELM = Utils.nullValue();
-	public static Block BLOCKCOGWORK_LEGS = Utils.nullValue();
-	public static Block BLOCKCOGWORK_CHESTPLATE = Utils.nullValue();
+	public static Block BLOCK_COGWORK_HELM = Utils.nullValue();
+	public static Block BLOCK_COGWORK_LEGS = Utils.nullValue();
+	public static Block BLOCK_COGWORK_CHESTPLATE = Utils.nullValue();
 	public static Block FRAME_BLOCK = Utils.nullValue();
 	public static Block COGWORK_HOLDER = Utils.nullValue();
 
@@ -490,11 +491,11 @@ public class MineFantasyBlocks {
 		AMMO_BOX_BASIC = new BlockAmmoBox("ammo_box_basic", (byte) 1);
 		CRATE_BASIC = new BlockAmmoBox("crate_basic", (byte) 2);
 
-		BLOCKCOGWORK_HELM = new BlockCogwork("blockcogwork_helm", false);
-		BLOCKCOGWORK_LEGS = new BlockCogwork("blockcogwork_legs", false);
-		BLOCKCOGWORK_CHESTPLATE = new BlockCogwork("blockcogwork_chestplate", true);
+		BLOCK_COGWORK_HELM = new BlockCogwork("block_cogwork_helm", false);
+		BLOCK_COGWORK_LEGS = new BlockCogwork("block_cogwork_legs", false);
+		BLOCK_COGWORK_CHESTPLATE = new BlockCogwork("block_cogwork_chestplate", true);
 		FRAME_BLOCK = new BlockFrame("frame_block");
-		COGWORK_HOLDER = new BlockFrame("cogwork_holder", FRAME_BLOCK).setCogworkHolder();
+		COGWORK_HOLDER = new BlockFrameHolder("cogwork_holder", FRAME_BLOCK);
 
 		MYTHIC_STONE_FRAMED = new BlockMythicDecor("mythic_stone_framed");
 		MYTHIC_STONE_DECORATED = new BlockMythicDecor("mythic_stone_decorated");
@@ -635,9 +636,9 @@ public class MineFantasyBlocks {
 		registry.register(IRONBARK_STAIRS);
 		registry.register(EBONY_STAIRS);
 
-		registry.register(BLOCKCOGWORK_HELM);
-		registry.register(BLOCKCOGWORK_LEGS);
-		registry.register(BLOCKCOGWORK_CHESTPLATE);
+		registry.register(BLOCK_COGWORK_HELM);
+		registry.register(BLOCK_COGWORK_LEGS);
+		registry.register(BLOCK_COGWORK_CHESTPLATE);
 		registry.register(FRAME_BLOCK);
 		registry.register(COGWORK_HOLDER);
 
@@ -924,9 +925,9 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC, new TileEntityAmmoBoxRenderer<>()));
 		registry.register(new ItemBlockAmmoBox(CRATE_BASIC, new TileEntityAmmoBoxRenderer<>()));
 
-		registry.register(new ItemBlockBase(BLOCKCOGWORK_HELM));
-		registry.register(new ItemBlockBase(BLOCKCOGWORK_LEGS));
-		registry.register(new ItemBlockBase(BLOCKCOGWORK_CHESTPLATE));
+		registry.register(new ItemBlockBase(BLOCK_COGWORK_HELM));
+		registry.register(new ItemBlockBase(BLOCK_COGWORK_LEGS));
+		registry.register(new ItemBlockBase(BLOCK_COGWORK_CHESTPLATE));
 		registry.register(new ItemBlockBase(FRAME_BLOCK));
 		registry.register(new ItemBlockBase(COGWORK_HOLDER));
 

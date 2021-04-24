@@ -5,14 +5,14 @@
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 3,
-  "recipe_time": 70,
+  "recipe_time": 105,
   "recipe_hammer": 3,
   "output_hot": false,
   "pattern": [
-    "RIIR  ",
-    "CEEC  ",
-    " RR   ",
-    "      "
+    " RIR  ",
+    "RCICR ",
+    "RIFIR ",
+    " CIC  "
   ],
   "key": {
     "R": {
@@ -21,14 +21,14 @@
     "C": {
       "item": "minefantasyreborn:cogwork_shaft"
     },
-    "E": {
-      "item": "minecraft:ender_eye"
+    "F": {
+      "item": "minecraft:furnace"
     },
     "I": {
       "item": "minefantasyreborn:iron_frame"
     }
   },
   "result": {
-    "item": "minefantasyreborn:blockcogwork_helm"
+    "item": "minefantasyreborn:block_cogwork_chestplate"
   }
 }
