@@ -247,6 +247,7 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
 	// ==============================================================\\
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
 		ModelLoaderHelper.registerWrappedItemModel(this, new RenderTong(() -> modelLocation), modelLocation);

@@ -200,6 +200,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

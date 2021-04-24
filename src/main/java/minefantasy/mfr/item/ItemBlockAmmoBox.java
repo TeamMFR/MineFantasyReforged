@@ -2,11 +2,13 @@ package minefantasy.mfr.item;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.render.item.IItemRenderer;
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockTileEntity;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.state.IBlockState;
@@ -28,20 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
-	public ItemBlockAmmoBox(BlockTileEntity block, IItemRenderer renderer) {
+
+
+	public ItemBlockAmmoBox(BlockTileEntity block) {
 		super(block);
+
 		//noinspection ConstantConditions
 		setRegistryName(block.getRegistryName());
-		ModelResourceLocation modelLocation = new ModelResourceLocation(block.getRegistryName(), "special");
-		ModelRegistryHelper.registerItemRenderer(this, renderer);
-		ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(block.getTexture()));
-		ModelLoader.setCustomStateMapper(block, new StateMapperBase() {
-			@Override
-			@SideOnly(Side.CLIENT)
-			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-				return modelLocation;
-			}
-		});
+
 	}
 
 	@SideOnly(Side.CLIENT)

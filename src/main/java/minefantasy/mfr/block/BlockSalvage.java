@@ -27,17 +27,13 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class BlockSalvage extends Block {
+public class BlockSalvage extends BasicBlockMF{
 	public float dropLevel;
 
 	public BlockSalvage(String name, float dropLevel) {
-		super(Material.WOOD);
+		super("salvage_" + name, Material.WOOD);
 
 		this.dropLevel = dropLevel;
-		name = "salvage_" + name;
-
-		setRegistryName(name);
-		setUnlocalizedName(name);
 		this.setSoundType(SoundType.ANVIL);
 		this.setHardness(2F);
 		this.setResistance(1F);

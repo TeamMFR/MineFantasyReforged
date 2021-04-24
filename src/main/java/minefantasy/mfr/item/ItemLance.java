@@ -13,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -125,6 +127,7 @@ public class ItemLance extends ItemSpear {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
 		ModelLoaderHelper.registerWrappedItemModel(this, new RenderLance(() -> modelLocation), modelLocation);

@@ -154,6 +154,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

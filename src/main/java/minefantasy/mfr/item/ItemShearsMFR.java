@@ -138,6 +138,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

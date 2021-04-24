@@ -160,6 +160,7 @@ public class ItemSpade extends net.minecraft.item.ItemSpade implements IToolMate
 	// ==============================================================\\
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

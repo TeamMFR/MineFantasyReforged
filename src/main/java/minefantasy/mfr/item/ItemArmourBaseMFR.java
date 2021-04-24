@@ -284,6 +284,7 @@ public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmo
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

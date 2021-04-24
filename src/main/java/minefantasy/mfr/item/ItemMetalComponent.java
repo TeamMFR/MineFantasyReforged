@@ -81,6 +81,7 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack tool) {
 		return CustomToolHelper.getLocalisedName(tool, "item.commodity_" + name + ".name");
 	}

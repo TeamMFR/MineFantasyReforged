@@ -1,21 +1,28 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityChimney;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class BlockChimney extends Block {
+public class BlockChimney extends Block implements IClientRegister {
 	public int size;
 	/**
 	 * Weather it can absorb smoke indirectly (not directly above a source)
@@ -39,6 +46,7 @@ public class BlockChimney extends Block {
 		this.setHardness(5F);
 		this.setResistance(10F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull
@@ -84,4 +92,9 @@ public class BlockChimney extends Block {
 		return isPipe;
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
+	}
 }

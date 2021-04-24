@@ -270,6 +270,7 @@ public class CustomToolHelper {
 
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static String getWoodenLocalisedName(ItemStack item, String unlocalizedName) {
 		if (materialOnTooltip()) {
 			I18n.format(unlocalizedName);
@@ -283,6 +284,7 @@ public class CustomToolHelper {
 		return I18n.format(unlocalizedName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
 
+	@SideOnly(Side.CLIENT)
 	public static String getLocalisedName(ItemStack item, String unlocalName) {
 		if (materialOnTooltip()) {
 			I18n.format(unlocalName);

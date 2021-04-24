@@ -128,6 +128,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

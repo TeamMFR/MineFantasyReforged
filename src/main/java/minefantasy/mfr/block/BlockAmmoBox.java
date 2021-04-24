@@ -1,12 +1,21 @@
 package minefantasy.mfr.block;
 
+import codechicken.lib.model.ModelRegistryHelper;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.client.model.block.ModelDummyParticle;
+import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.tile.TileEntityWoodDecor;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -17,12 +26,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.ArrayList;
 
-public class BlockAmmoBox extends BlockWoodDecor {
+public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 	public static final String NBT_Ammo = "Ammo", NBT_Stock = "Stock";
 	/**
 	 * Food-Ammo-All
@@ -47,6 +57,7 @@ public class BlockAmmoBox extends BlockWoodDecor {
 		this.setHardness(0.5F);
 		this.setResistance(2F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Override
@@ -166,5 +177,19 @@ public class BlockAmmoBox extends BlockWoodDecor {
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerClient() {
+		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "special");
+		ModelRegistryHelper.registerItemRenderer(Item.getItemFromBlock(this), new TileEntityAmmoBoxRenderer<>());
+		ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(this.getTexture()));
+		ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modelLocation;
+			}
+		});
 	}
 }

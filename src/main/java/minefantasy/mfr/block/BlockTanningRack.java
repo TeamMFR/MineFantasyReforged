@@ -1,14 +1,18 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -17,10 +21,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> {
+public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
 	private static AxisAlignedBB AABB_NORTH = new AxisAlignedBB(0, 0, 5.5f / 16f, 1f, 19 / 16f, 10.5 / 16f);
@@ -42,6 +49,7 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> {
 		this.setResistance(1F);
 		this.setLightOpacity(0);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull
@@ -115,5 +123,11 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> {
 			default:
 				return AABB_NORTH;
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

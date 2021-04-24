@@ -235,6 +235,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

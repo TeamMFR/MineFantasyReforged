@@ -40,6 +40,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
@@ -225,6 +227,7 @@ public class ItemCrossbow extends ItemBaseMFR
 		list.add(I18n.format("attribute.crossbow.bash.name", getMeleeDmg(item)));
 	}
 
+	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String base = getNameModifier(item, "stock");
 		String arms = getNameModifier(item, "mechanism");
@@ -456,6 +459,7 @@ public class ItemCrossbow extends ItemBaseMFR
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");
 		ModelLoaderHelper.registerWrappedItemModel(this, new RenderCrossbow(() -> modelLocation), modelLocation);

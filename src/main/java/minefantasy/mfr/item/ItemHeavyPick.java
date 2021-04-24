@@ -204,6 +204,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

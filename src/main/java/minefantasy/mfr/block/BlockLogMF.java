@@ -1,20 +1,27 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockLogMF extends BlockLog {
+public class BlockLogMF extends BlockLog implements IClientRegister {
 	private String name;
 	private Random rand = new Random();
 
@@ -27,6 +34,7 @@ public class BlockLogMF extends BlockLog {
 		setUnlocalizedName(name);
 		this.setHarvestLevel("axe", 0);
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	private Block getSaplingDrop() {
@@ -99,5 +107,11 @@ public class BlockLogMF extends BlockLog {
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

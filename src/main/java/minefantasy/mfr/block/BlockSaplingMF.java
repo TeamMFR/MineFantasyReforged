@@ -1,5 +1,7 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.world.gen.feature.WorldGenMFTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
@@ -10,17 +12,22 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockSaplingMF extends BlockBush implements IGrowable {
+public class BlockSaplingMF extends BlockBush implements IGrowable, IClientRegister {
 
 	public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -42,6 +49,7 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
 		setRegistryName(name);
 		setUnlocalizedName(name);
 		setSoundType(SoundType.GROUND);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	/**
@@ -128,5 +136,11 @@ public class BlockSaplingMF extends BlockBush implements IGrowable {
 	@Override
 	protected BlockStateContainer createBlockState() {
 		return new BlockStateContainer(this, new IProperty[] {STAGE});
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

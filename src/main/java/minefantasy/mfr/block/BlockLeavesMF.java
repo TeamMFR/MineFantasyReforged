@@ -1,18 +1,22 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,7 +25,7 @@ import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
 
-public class BlockLeavesMF extends BlockLeaves implements IShearable {
+public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientRegister {
 
 	private String name;
 	private Block sapling;
@@ -41,6 +45,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable {
 		this.dropRate = droprate;
 		this.setTickRandomly(true);
 		setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -111,5 +116,11 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable {
 	@Override
 	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
 		return null;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

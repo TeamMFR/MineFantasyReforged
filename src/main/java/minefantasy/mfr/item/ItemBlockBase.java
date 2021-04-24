@@ -12,6 +12,5 @@ public class ItemBlockBase extends ItemBlock {
 
 		//noinspection ConstantConditions
 		setRegistryName(block.getRegistryName());
-		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(block.getRegistryName(), "normal"));
 	}
 }

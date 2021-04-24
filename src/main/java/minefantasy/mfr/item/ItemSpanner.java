@@ -270,6 +270,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

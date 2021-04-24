@@ -120,6 +120,7 @@ public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegiste
 	// ==============================================================\\
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

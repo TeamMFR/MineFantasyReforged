@@ -1,31 +1,26 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.item.ItemBlockBase;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ConstructionBlockMF extends Block {
+public class ConstructionBlockMF extends BasicBlockMF {
 
 	public static final String[] m_names = new String[] {"", "_cobblestone", "_brick", "_pavement"};
 
-	public ConstructionBlockMF(String unlocName) {
-		this(unlocName, new String[] {"", "_cobblestone", "_brick", "_pavement"});
-	}
-
-	public ConstructionBlockMF(String unlocName, String... types) {
-		this(unlocName, Material.ROCK, types);
-	}
-
 	public ConstructionBlockMF(String name, Material material, String... types) {
-		super(material);
-
-		setRegistryName(name);
-		setUnlocalizedName(name);
+		super(name, material);
 
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		setHardness(1.5F);
@@ -33,9 +28,6 @@ public class ConstructionBlockMF extends Block {
 		if (material == Material.ROCK) {
 			setHarvestLevel("pickaxe", 0);
 		}
-
-		//        addConstructRecipes();
-
 	}
 
 	@Override
@@ -69,8 +61,7 @@ public class ConstructionBlockMF extends Block {
 		}
 	}
 
-	public static class StairsConstBlock extends BlockStairs {
-		private final Block base;
+	public static class StairsConstBlock extends BlockStairs implements IClientRegister{
 
 		public StairsConstBlock(String name, Block baseBlock, IBlockState state) {
 			super(state);
@@ -79,38 +70,17 @@ public class ConstructionBlockMF extends Block {
 			setUnlocalizedName(name);
 			this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 			this.setLightOpacity(0);// They seem to render shadows funny
-			this.base = baseBlock;
+			MineFantasyReborn.PROXY.addClientRegister(this);
 		}
 
 		public StairsConstBlock(String unlocalizedName, Block baseBlock) {
 			this(unlocalizedName, baseBlock, baseBlock.getDefaultState());
 		}
 
-	}
-
-	public static class ItemConstBlock extends ItemBlockBase {
-
-		public ItemConstBlock(Block block) {
-			super(block);
-		}
-
 		@Override
-		public String getUnlocalizedName(ItemStack stack) {
-			switch (stack.getItemDamage()) {
-				case 1:
-					return this.getUnlocalizedName() + "_cobblestone";
-				case 2:
-					return this.getUnlocalizedName() + "_brick";
-				case 3:
-					return this.getUnlocalizedName() + "_pavement";
-				default:
-					return this.getUnlocalizedName();
-			}
-		}
-
-		@Override
-		public int getMetadata(int d) {
-			return d;
+		@SideOnly(Side.CLIENT)
+		public void registerClient() {
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 		}
 	}
 }

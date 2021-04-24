@@ -848,7 +848,7 @@ public class MineFantasyBlocks {
 
 		registry.register(new ItemBlockBase(TANNER));
 		registry.register(new ItemBlockBase(TANNER_REFINED));
-		registry.register(new ItemBlockSpecialRender(TANNER_METAL, new TileEntityTanningRackRenderer<>()));
+		registry.register(new ItemBlockSpecialRender(TANNER_METAL));
 
 		registry.register(new ItemBlockBase(FORGE));
 		registry.register(new ItemBlockBase(FORGE_METAL));
@@ -857,7 +857,7 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockRepairKit(REPAIR_ADVANCED));
 		registry.register(new ItemBlockRepairKit(REPAIR_ORNATE));
 
-		registry.register(new ItemBlockSpecialRender(BELLOWS, new TileEntityBellowsRenderer<>()));
+		registry.register(new ItemBlockSpecialRender(BELLOWS));
 
 		registry.register(new ItemBlockBase(REFINED_PLANKS));
 		registry.register(new ItemBlockBase(NAILED_PLANKS));
@@ -879,7 +879,7 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(RESEARCH));
 		registry.register(new ItemBlockTrough(TROUGH_WOOD));
 
-		registry.register(new ItemBlockSpecialRender(BOMB_PRESS, new TileEntityBombPressRenderer<>()));
+		registry.register(new ItemBlockSpecialRender(BOMB_PRESS));
 
 		registry.register(new ItemBlockSalvage(SALVAGE_BASIC));
 
@@ -900,7 +900,7 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(IRONBARK_PLANKS));
 		registry.register(new ItemBlockBase(EBONY_PLANKS));
 
-		registry.register(new ItemBlockSpecialRender(QUERN, new TileEntityQuernRenderer<>()));
+		registry.register(new ItemBlockSpecialRender(QUERN));
 
 		registry.register(new ItemBlockBase(MUD_BRICK_STAIRS));
 		registry.register(new ItemBlockBase(COBBLE_BRICK_STAIRS));
@@ -916,14 +916,14 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(STOVE));
 		registry.register(new ItemBlockBase(OVEN));
 
-		registry.register(new ItemBlockSpecialRender(FURNACE_HEATER, new TileEntityBigFurnaceRenderer<>()));
-		registry.register(new ItemBlockSpecialRender(FURNACE_STONE, new TileEntityBigFurnaceRenderer<>()));
+		registry.register(new ItemBlockSpecialRender(FURNACE_HEATER));
+		registry.register(new ItemBlockSpecialRender(FURNACE_STONE));
 
 		registry.register(new ItemBlockToolRack(TOOL_RACK_WOOD));
 
-		registry.register(new ItemBlockAmmoBox(FOOD_BOX_BASIC, new TileEntityAmmoBoxRenderer<>()));
-		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC, new TileEntityAmmoBoxRenderer<>()));
-		registry.register(new ItemBlockAmmoBox(CRATE_BASIC, new TileEntityAmmoBoxRenderer<>()));
+		registry.register(new ItemBlockAmmoBox(FOOD_BOX_BASIC));
+		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC));
+		registry.register(new ItemBlockAmmoBox(CRATE_BASIC));
 
 		registry.register(new ItemBlockBase(BLOCK_COGWORK_HELM));
 		registry.register(new ItemBlockBase(BLOCK_COGWORK_LEGS));

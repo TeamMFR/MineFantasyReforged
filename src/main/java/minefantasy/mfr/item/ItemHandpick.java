@@ -238,6 +238,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

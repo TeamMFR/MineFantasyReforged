@@ -165,6 +165,7 @@ public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegiste
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

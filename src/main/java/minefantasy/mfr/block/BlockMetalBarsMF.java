@@ -1,20 +1,27 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.material.BaseMaterial;
+import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockMetalBarsMF extends BlockPane {
+public class BlockMetalBarsMF extends BlockPane implements IClientRegister {
 	public BaseMaterial material;
 	private Random rand = new Random();
 
@@ -29,6 +36,7 @@ public class BlockMetalBarsMF extends BlockPane {
 		this.setHardness(material.hardness + 1 / 2F);
 		this.setResistance(material.hardness + 1);
 		this.material = material;
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Override
@@ -42,5 +50,11 @@ public class BlockMetalBarsMF extends BlockPane {
 			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + rand.nextDouble(), pos.getY() + rand.nextDouble(), pos.getZ() + rand.nextDouble(), 0D, 0D,
 					0D);
 		}
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

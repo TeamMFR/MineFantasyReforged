@@ -16,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemWorldGenPlacer extends ItemBaseMFR {
 	private final String structure;
@@ -58,6 +60,7 @@ public class ItemWorldGenPlacer extends ItemBaseMFR {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		return I18n.format("item.world_gen_placer") + " " + structure;
 	}
@@ -75,6 +78,7 @@ public class ItemWorldGenPlacer extends ItemBaseMFR {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this, 0, structure);
 	}

@@ -1,6 +1,8 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
@@ -8,10 +10,12 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -21,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.IShearable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -28,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockBerryBush extends BlockBush implements IGrowable, IShearable {
+public class BlockBerryBush extends BlockBush implements IGrowable, IShearable, IClientRegister {
 
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 4);
 
@@ -48,6 +53,7 @@ public class BlockBerryBush extends BlockBush implements IGrowable, IShearable {
 		this.setLightOpacity(1);
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Override
@@ -179,5 +185,11 @@ public class BlockBerryBush extends BlockBush implements IGrowable, IShearable {
 		}
 
 		worldIn.setBlockState(pos, this.withAge(i), 2);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

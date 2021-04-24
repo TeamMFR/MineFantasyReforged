@@ -112,6 +112,7 @@ public class ItemSyringe extends ItemBaseMFR {
 		}
 	}
 
+	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack stack) {
 		String potion = I18n.format(PotionUtils.getPotionFromItem(stack).getNamePrefixed("potion.effect."));
 		return potion + " " + super.getItemStackDisplayName(stack);

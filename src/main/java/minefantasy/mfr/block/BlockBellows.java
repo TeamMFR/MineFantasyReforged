@@ -1,15 +1,24 @@
 package minefantasy.mfr.block;
 
+import codechicken.lib.model.ModelRegistryHelper;
 import com.google.common.collect.ImmutableMap;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.client.model.block.ModelDummyParticle;
+import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityBellows;
+import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -19,11 +28,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import javax.swing.*;
 import java.util.Map;
 
 /**
@@ -32,7 +43,7 @@ import java.util.Map;
  * Sources are provided for educational reasons. though small bits of
  * code, or methods can be used in your own creations.
  */
-public class BlockBellows extends BlockTileEntity<TileEntityBellows> {
+public class BlockBellows extends BlockTileEntity<TileEntityBellows> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	private static final Map<EnumFacing, AxisAlignedBB> AABBS = ImmutableMap.of(
 			EnumFacing.WEST, new AxisAlignedBB(0.0F, 0.0F, 0.188F, 0.7F, 0.95F, 0.81F),
@@ -48,6 +59,7 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> {
 		this.setHardness(1F);
 		this.setResistance(0.5F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull
@@ -125,5 +137,19 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> {
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerClient() {
+		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "special");
+		ModelRegistryHelper.registerItemRenderer(Item.getItemFromBlock(this), new TileEntityBellowsRenderer<>());
+		ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(this.getTexture()));
+		ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modelLocation;
+			}
+		});
 	}
 }

@@ -227,6 +227,7 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

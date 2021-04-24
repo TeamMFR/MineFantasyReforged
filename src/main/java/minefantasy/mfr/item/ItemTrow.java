@@ -222,6 +222,7 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

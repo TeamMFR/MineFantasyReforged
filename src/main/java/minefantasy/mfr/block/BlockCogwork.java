@@ -1,17 +1,21 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
@@ -19,10 +23,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockCogwork extends BlockDirectional {
+public class BlockCogwork extends BlockDirectional implements IClientRegister {
 	private final boolean isMain;
 
 	public BlockCogwork(String name, boolean helmet) {
@@ -36,6 +41,7 @@ public class BlockCogwork extends BlockDirectional {
 		this.setHardness(1F);
 		this.setResistance(5F);
 		this.setLightOpacity(0);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	protected BlockStateContainer createBlockState() {
@@ -111,5 +117,11 @@ public class BlockCogwork extends BlockDirectional {
 	private int getAngleFor(EntityPlayer user) {
 		int l = MathHelper.floor(user.rotationYaw * 4.0F / 360.0F + 2.5D) & 3;
 		return l * 90;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

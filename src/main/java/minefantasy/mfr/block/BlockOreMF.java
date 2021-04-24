@@ -1,19 +1,25 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockOreMF extends Block {
+public class BlockOreMF extends BasicBlockMF {
 	public int rarity;
 	private int xp;
 	private Item drop;
@@ -33,17 +39,14 @@ public class BlockOreMF extends Block {
 		this(name, harvestLevel, rarity, drop, min, max, xp, Material.ROCK);
 	}
 
-	public BlockOreMF(String name, int harvestLevel, int rarity, Item drop, int min, int max, int xp,
-			Material material) {
-		super(material);
+	public BlockOreMF(String name, int harvestLevel, int rarity, Item drop, int min, int max, int xp, Material material) {
+		super(name, material);
 		this.xp = xp;
 		this.drop = drop;
 		this.rarity = rarity;
 		this.dropMin = min;
 		this.dropMax = max;
 
-		setRegistryName(name);
-		setUnlocalizedName(name);
 		setSoundType(SoundType.STONE);
 		if (material == Material.ROCK) {
 			this.setHarvestLevel("pickaxe", harvestLevel);

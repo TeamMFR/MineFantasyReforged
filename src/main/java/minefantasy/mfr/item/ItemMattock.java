@@ -206,6 +206,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
 	}

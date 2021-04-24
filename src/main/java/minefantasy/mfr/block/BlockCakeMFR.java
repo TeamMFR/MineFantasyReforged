@@ -20,7 +20,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCakeMFR extends Block {
+public class BlockCakeMFR extends BasicBlockMF {
 	public static final PropertyInteger BITES = PropertyInteger.create("bites", 0, 8);
 	protected static final AxisAlignedBB[] CAKE_AABB = new AxisAlignedBB[] {
 			new AxisAlignedBB(1D / 16D, 0.0D, 1D / 16D, 15D / 16D, 0.5D, 15D / 16D),  //0
@@ -36,10 +36,8 @@ public class BlockCakeMFR extends Block {
 	private Item cakeSlice;
 
 	public BlockCakeMFR(String name, Item slice) {
-		super(Material.CAKE);
+		super(name, Material.CAKE);
 
-		setRegistryName(name);
-		setUnlocalizedName(name);
 		cakeSlice = slice;
 
 		this.setTickRandomly(true);

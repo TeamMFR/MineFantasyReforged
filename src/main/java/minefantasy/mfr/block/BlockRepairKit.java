@@ -1,13 +1,17 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -16,10 +20,13 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
-public class BlockRepairKit extends Block {
+public class BlockRepairKit extends Block implements IClientRegister {
 	public float repairLevel;
 	public float successRate;
 	public float breakChance;
@@ -43,6 +50,7 @@ public class BlockRepairKit extends Block {
 		this.setResistance(0F);
 		this.setLightOpacity(0);
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	public BlockRepairKit setOrnate(float enc) {
@@ -99,5 +107,11 @@ public class BlockRepairKit extends Block {
 			return held.isItemDamaged();
 		}
 		return held.getItem().isRepairable();
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "normal"));
 	}
 }

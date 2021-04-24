@@ -93,7 +93,7 @@ public class TileEntityBigFurnaceRenderer<T extends TileEntity> extends FastTESR
 
 		BlockBigFurnace furnace = new BlockBigFurnace("furnace_stone", false, 0);
 
-		if (stack.getItem() instanceof ItemBlockSpecialRender) {
+		if (stack.getItem() instanceof ItemBlock) {
 			itemBlock = (ItemBlock) stack.getItem();
 			furnace = (BlockBigFurnace) itemBlock.getBlock();
 		}

@@ -1,6 +1,12 @@
 package minefantasy.mfr.block;
 
+import codechicken.lib.model.ModelRegistryHelper;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.client.model.block.ModelDummyParticle;
+import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
+import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -8,8 +14,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -17,12 +26,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 
-public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> {
+public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public final boolean isHeater;
 	public final int tier;
@@ -38,6 +48,7 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> {
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(3.5F);
 		this.setResistance(2F);
+		MineFantasyReborn.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull
@@ -116,5 +127,19 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> {
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerClient() {
+		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "special");
+		ModelRegistryHelper.registerItemRenderer(Item.getItemFromBlock(this), new TileEntityBigFurnaceRenderer<>());
+		ModelRegistryHelper.register(modelLocation, new ModelDummyParticle(this.getTexture()));
+		ModelLoader.setCustomStateMapper(this, new StateMapperBase() {
+			@Override
+			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
+				return modelLocation;
+			}
+		});
 	}
 }
