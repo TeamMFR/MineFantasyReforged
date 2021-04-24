@@ -233,7 +233,7 @@ public abstract class EntityMobMF extends EntityCreature implements IMob {
 	protected boolean isValidLightLevel() {
 		BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
 
-		if (this.world.getLightFromNeighborsFor(EnumSkyBlock.SKY, pos) > this.rand.nextInt(32)) {
+		if (this.world.getLightFromNeighbors(pos) > this.rand.nextInt(32)) {
 			return false;
 		} else {
 			int l = this.world.getLight(pos);
