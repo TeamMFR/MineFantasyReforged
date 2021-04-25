@@ -5,6 +5,7 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.mechanics.knowledge.InformationPage;
@@ -14,6 +15,7 @@ import minefantasy.mfr.recipe.ICarpenterRecipe;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
@@ -515,6 +517,7 @@ public class MineFantasyKnowledgeList {
 			addConstruction();
 			addProvisioning();
 			addEngineering();
+			addArtefacts();
 		}
 
 		private static void addEngineering() {
@@ -642,9 +645,32 @@ public class MineFantasyKnowledgeList {
 			add(repair_ornate, Items.DIAMOND, Items.GOLD_INGOT, MineFantasyBlocks.REPAIR_ADVANCED);
 		}
 
+		private static void addArtefacts() {
+			register(MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
+			register(MineFantasyItems.ANCIENT_JEWEL_MITHRIL);
+			register(MineFantasyItems.ANCIENT_JEWEL_MASTER);
+
+			register(MineFantasyBlocks.SCHEMATIC_ALLOY_ITEM);
+			register(MineFantasyBlocks.SCHEMATIC_BOMB_ITEM);
+			register(MineFantasyBlocks.SCHEMATIC_CROSSBOW_ITEM);
+			register(MineFantasyBlocks.SCHEMATIC_FORGE_ITEM);
+			register(MineFantasyBlocks.SCHEMATIC_COGWORK_ITEM);
+			register(MineFantasyBlocks.SCHEMATIC_GEARS_ITEM);
+		}
+
 		private static void add(InformationBase info, Object... artifacts) {
 			for (Object artifact : artifacts) {
 				ResearchArtefacts.addArtefact(artifact, info);
+			}
+		}
+
+		public static void register(Item item) {
+			if (item instanceof IArtefact){
+				if (((IArtefact) item).getResearches() != null) {
+					for (String research : ((IArtefact) item).getResearches()) {
+						ResearchArtefacts.addArtefact(new ItemStack(item, 1), research.toLowerCase());
+					}
+				}
 			}
 		}
 	}

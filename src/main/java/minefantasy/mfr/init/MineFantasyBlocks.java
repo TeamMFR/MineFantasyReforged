@@ -49,12 +49,6 @@ import minefantasy.mfr.block.BlockTileEntity;
 import minefantasy.mfr.block.BlockTrough;
 import minefantasy.mfr.block.BlockWorldGenMarker;
 import minefantasy.mfr.block.ConstructionBlockMF;
-import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
-import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
-import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
-import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
-import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
-import minefantasy.mfr.client.render.block.TileEntityTanningRackRenderer;
 import minefantasy.mfr.item.ItemBlockAmmoBox;
 import minefantasy.mfr.item.ItemBlockAnvil;
 import minefantasy.mfr.item.ItemBlockBase;
@@ -306,6 +300,13 @@ public class MineFantasyBlocks {
 	public static Block SCHEMATIC_FORGE = Utils.nullValue();
 	public static Block SCHEMATIC_GEARS = Utils.nullValue();
 
+	public static ItemSchematic SCHEMATIC_ALLOY_ITEM = Utils.nullValue();
+	public static ItemSchematic SCHEMATIC_BOMB_ITEM = Utils.nullValue();
+	public static ItemSchematic SCHEMATIC_CROSSBOW_ITEM = Utils.nullValue();
+	public static ItemSchematic SCHEMATIC_COGWORK_ITEM = Utils.nullValue();
+	public static ItemSchematic SCHEMATIC_FORGE_ITEM = Utils.nullValue();
+	public static ItemSchematic SCHEMATIC_GEARS_ITEM = Utils.nullValue();
+
 	public static void init() {
 
 		COPPER_ORE = new BlockOreMF("copper_ore", 0, -1).setHardness(2.0F).setResistance(3.0F);
@@ -507,6 +508,13 @@ public class MineFantasyBlocks {
 		SCHEMATIC_FORGE = new BlockSchematic("schematic_forge");
 		SCHEMATIC_COGWORK = new BlockSchematic("schematic_cogwork");
 		SCHEMATIC_GEARS = new BlockSchematic("schematic_gears");
+
+		SCHEMATIC_ALLOY_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_BOMB,"bombObsidian", "mineObsidian");
+		SCHEMATIC_BOMB_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_CROSSBOW,"crossShaftAdvanced", "crossHeadAdvanced");
+		SCHEMATIC_CROSSBOW_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_FORGE, "advforge", "advcrucible");
+		SCHEMATIC_FORGE_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_GEARS,"cogArmour");
+		SCHEMATIC_COGWORK_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_COGWORK, "cogArmour");
+		SCHEMATIC_GEARS_ITEM = new ItemSchematic(MineFantasyBlocks.SCHEMATIC_ALLOY,"compPlate");
 	}
 
 	@SubscribeEvent
@@ -936,12 +944,12 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(WG_MARK));
 		registry.register(new ItemBlockBase(COMPONENTS));
 
-		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_BOMB,"bombObsidian", "mineObsidian"));
-		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_CROSSBOW,"crossShaftAdvanced", "crossHeadAdvanced"));
-		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_FORGE, "advforge", "advcrucible"));
-		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_GEARS,"cogArmour"));
-		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_COGWORK, "cogArmour"));
-		registry.register(new ItemSchematic(MineFantasyBlocks.SCHEMATIC_ALLOY,"compPlate"));
+		registry.register(SCHEMATIC_ALLOY_ITEM);
+		registry.register(SCHEMATIC_BOMB_ITEM);
+		registry.register(SCHEMATIC_CROSSBOW_ITEM);
+		registry.register(SCHEMATIC_FORGE_ITEM);
+		registry.register(SCHEMATIC_COGWORK_ITEM);
+		registry.register(SCHEMATIC_GEARS_ITEM);
 	}
 
 	public static void load() {

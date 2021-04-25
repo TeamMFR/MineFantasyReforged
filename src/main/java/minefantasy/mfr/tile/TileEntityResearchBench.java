@@ -101,7 +101,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 		} else {
 			if (result == 0) {
 				if (!user.world.isRemote)
-					user.sendMessage(new TextComponentString(I18n.format("research.noskill")));
+					user.sendMessage(new TextComponentString(I18n.format("research.null")));
 			}
 			progress = 0;
 		}

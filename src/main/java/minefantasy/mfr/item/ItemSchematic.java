@@ -31,6 +31,11 @@ public class ItemSchematic extends ItemBlock implements IArtefact, IClientRegist
 	}
 
 	@Override
+	public String[] getResearches() {
+		return researches;
+	}
+
+	@Override
 	public int getStudyTime(ItemStack item) {
 		return 50;
 	}

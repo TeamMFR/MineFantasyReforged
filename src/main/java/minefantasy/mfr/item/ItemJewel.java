@@ -40,4 +40,9 @@ public class ItemJewel extends ItemBaseMFR implements IArtefact {
 	public int getStudyTime(ItemStack item) {
 		return studyTime;
 	}
+
+	@Override
+	public String[] getResearches() {
+		return researches;
+	}
 }
