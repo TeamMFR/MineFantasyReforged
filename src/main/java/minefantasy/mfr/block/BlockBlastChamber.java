@@ -67,7 +67,7 @@ public class BlockBlastChamber extends BlockTileEntity<TileEntityBlastChamber> {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.blastfurn)) {
+		if (!ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.blastfurn)) {
 			if (world.isRemote)
 				player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
 			return false;

@@ -61,7 +61,7 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 	 */
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.bombs)) {
+		if (!ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.bombs)) {
 			if (world.isRemote)
 				player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
 			return false;

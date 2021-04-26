@@ -72,6 +72,9 @@ public class ResearchLogic {
 
 	public static boolean hasInfoUnlocked(EntityPlayer player, InformationBase base) {
 		if (player != null) {
+			if (player.isCreative()){
+				return true;
+			}
 			if (base.isPreUnlocked())
 				return base.parentInfo == null || hasInfoUnlocked(player, base.parentInfo);
 
