@@ -98,8 +98,7 @@ public class ContainerForge extends ContainerBase {
 		return mergeItemStack(true, item, minSlot, maxSlot, goBackwards);
 	}
 
-	protected boolean mergeItemStack(boolean allowStack, ItemStack item, int minSlot, int maxSlot,
-			boolean goBackwards) {
+	protected boolean mergeItemStack(boolean allowStack, ItemStack item, int minSlot, int maxSlot, boolean goBackwards) {
 		boolean flag1 = false;
 		int k = minSlot;
 
@@ -108,26 +107,26 @@ public class ContainerForge extends ContainerBase {
 		}
 
 		Slot slot;
-		ItemStack itemstack1;
+		ItemStack itemStack1;
 
 		if (allowStack && item.isStackable()) {
 			while (item.getCount() > 0 && (!goBackwards && k < maxSlot || goBackwards && k >= minSlot)) {
 				slot = this.inventorySlots.get(k);
-				itemstack1 = slot.getStack();
+				itemStack1 = slot.getStack();
 
-				if (!itemstack1.isEmpty() && itemstack1.getItem() == item.getItem()
-						&& (!item.getHasSubtypes() || item.getItemDamage() == itemstack1.getItemDamage())
-						&& ItemStack.areItemStackTagsEqual(item, itemstack1)) {
-					int l = itemstack1.getCount() + item.getCount();
+				if (!itemStack1.isEmpty() && itemStack1.getItem() == item.getItem()
+						&& (!item.getHasSubtypes() || item.getItemDamage() == itemStack1.getItemDamage())
+						&& ItemStack.areItemStackTagsEqual(item, itemStack1)) {
+					int l = itemStack1.getCount() + item.getCount();
 
 					if (l <= item.getMaxStackSize()) {
 						item.setCount(0);
-						itemstack1.setCount(1);
+						itemStack1.setCount(l);
 						slot.onSlotChanged();
 						flag1 = true;
-					} else if (itemstack1.getCount() < item.getMaxStackSize()) {
-						item.shrink(item.getMaxStackSize() - itemstack1.getCount());
-						itemstack1.setCount(item.getMaxStackSize());
+					} else if (itemStack1.getCount() < item.getMaxStackSize()) {
+						item.shrink(item.getMaxStackSize() - itemStack1.getCount());
+						itemStack1.setCount(item.getMaxStackSize());
 						slot.onSlotChanged();
 						flag1 = true;
 					}
@@ -150,12 +149,12 @@ public class ContainerForge extends ContainerBase {
 
 			while (!goBackwards && k < maxSlot || goBackwards && k >= minSlot) {
 				slot = this.inventorySlots.get(k);
-				itemstack1 = slot.getStack();
+				itemStack1 = slot.getStack();
 
-				if (itemstack1.isEmpty()) {
-					ItemStack i2 = item.copy();
-					i2.setCount(1);
-					slot.putStack(i2);
+				if (itemStack1.isEmpty()) {
+					ItemStack itemStack2 = item.copy();
+					itemStack2.setCount(1);
+					slot.putStack(itemStack2);
 					slot.onSlotChanged();
 					item.shrink(1);
 					flag1 = true;

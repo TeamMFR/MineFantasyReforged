@@ -7,8 +7,11 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.tile.TileEntityAnvil;
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyDirection;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,10 +25,13 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	public BaseMaterial material;
-	private int tier;
-	private static AxisAlignedBB ANVIL_STONE_AABB = new AxisAlignedBB(0.1875D, 0.0D, 0.3125D, 0.8125D, 0.8125D, 0.6875D);
-	private static AxisAlignedBB ANVIL_AABB = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
+	private final int tier;
+	private static final AxisAlignedBB ANVIL_STONE_AABB_NORTH_SOUTH = new AxisAlignedBB(0.1875D, 0.0D, 0.3125D, 0.8125D, 0.8125D, 0.6875D);
+	private static final AxisAlignedBB ANVIL_STONE_AABB_EAST_WEST = new AxisAlignedBB(0.3125D, 0.0D, 0.1875D, 0.6875D, 0.8125D, 0.8125D);
+	private static final AxisAlignedBB ANVIL_AABB_NORTH_SOUTH = new AxisAlignedBB(0.0D, 0.0D, 0.3125D, 1.0D, 0.8125D, 0.6875D);
+	private static final AxisAlignedBB ANVIL_AABB_EAST_WEST = new AxisAlignedBB(0.3125D, 0.0D, 0.0D, 0.6875D, 0.8125D, 1.0D);
 
 
 	public BlockAnvilMF(BaseMaterial material) {
@@ -44,6 +50,11 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	}
 
 	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, FACING);
+	}
+
+	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		TileEntityAnvil anvil = new TileEntityAnvil();
 		anvil.setTier(tier);
@@ -52,8 +63,35 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	}
 
 	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		EnumFacing enumfacing = EnumFacing.getFront(meta);
+
+		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
+			enumfacing = EnumFacing.NORTH;
+		}
+
+		return this.getDefaultState().withProperty(FACING, enumfacing);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(FACING).getIndex();
+	}
+
+	@Override
+	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+	}
+
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return material == MineFantasyMaterials.STONE ? ANVIL_STONE_AABB : ANVIL_AABB;
+		if (state.getValue(FACING) == EnumFacing.NORTH || state.getValue(FACING) == EnumFacing.SOUTH){
+			return material == MineFantasyMaterials.STONE ? ANVIL_STONE_AABB_NORTH_SOUTH : ANVIL_AABB_NORTH_SOUTH;
+		}
+		else{
+			return material == MineFantasyMaterials.STONE ? ANVIL_STONE_AABB_EAST_WEST : ANVIL_AABB_EAST_WEST;
+		}
+
 	}
 
 	@Override
@@ -77,18 +115,17 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 		ItemStack held = player.getHeldItem(hand);
 		TileEntityAnvil tile = (TileEntityAnvil) getTile(world, pos);
 		if (tile != null) {
-			if (facing == EnumFacing.NORTH && !held.isEmpty() && held.getItem() instanceof ItemTongs
-					&& onUsedTongs(world, player, held, tile)) {
+			if (facing == EnumFacing.UP && !held.isEmpty() && held.getItem() instanceof ItemTongs && onUsedTongs(player, held, tile)) {
 				return true;
 			}
-			if (facing == EnumFacing.NORTH || !tile.tryCraft(player, true) && !world.isRemote) {
+			if (facing != EnumFacing.UP || !tile.tryCraft(player, true) && !world.isRemote) {
 				tile.openGUI(world, player);
 			}
 		}
 		return true;
 	}
 
-	private boolean onUsedTongs(World world, EntityPlayer user, ItemStack held, TileEntityAnvil tile) {
+	private boolean onUsedTongs(EntityPlayer user, ItemStack held, TileEntityAnvil tile) {
 		ItemStack result = tile.getInventory().getStackInSlot(tile.getInventory().getSlots() - 1);
 		ItemStack grabbed = TongsHelper.getHeldItem(held);
 
@@ -101,10 +138,10 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 				}
 			}
 		} else {
-			for (int s = 0; s < (tile.getInventory().getSlots() - 1); s++) {
-				ItemStack slot = tile.getInventory().getStackInSlot(s);
+			for (int slot_number = 0; slot_number < (tile.getInventory().getSlots() - 1); slot_number++) {
+				ItemStack slot = tile.getInventory().getStackInSlot(slot_number);
 				if (slot.isEmpty()) {
-					tile.getInventory().setStackInSlot(s, grabbed);
+					tile.getInventory().setStackInSlot(slot_number, grabbed);
 					TongsHelper.clearHeldItem(held, user);
 					return false;
 				}
