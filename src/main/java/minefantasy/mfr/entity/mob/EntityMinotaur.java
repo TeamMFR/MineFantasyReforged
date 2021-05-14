@@ -404,7 +404,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	public float getArmourRating(DamageSource src) {
 		float[] armour = getValueResistences();
 		return (getMinotaur().armour_rating / 100F)
-				* ArmourCalculator.adjustACForDamage(src, getDT(), armour[0], armour[1], armour[2]);
+				* ArmourCalculator.adjustArmorClassForDamage(src, getDT(), armour[0], armour[1], armour[2]);
 	}
 
 	@Override

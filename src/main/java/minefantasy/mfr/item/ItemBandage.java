@@ -1,9 +1,12 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.MFREventHandler;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.data.IStoredVariable;
+import minefantasy.mfr.data.Persistence;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
-import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,27 +21,32 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemBandage extends ItemBaseMFR {
+	public static final IStoredVariable<Integer> BANDAGE_PROGRESS = IStoredVariable.StoredVariable.ofInt("bandage_progress", Persistence.DIMENSION_CHANGE);
 	private static final String healingID = "MF_Bandage_progress";
-	private String name;
-	private float healPwr;
-	private float secondsToUse = 5F;
+	private final float healPower;
+	private final float secondsToUse = 5F;
+
+	static {
+		PlayerData.registerStoredVariables(BANDAGE_PROGRESS);
+	}
 
 	public ItemBandage(String name, float healAmount) {
 		super(name);
-		this.name = name;
-		healPwr = healAmount;
+		healPower = healAmount;
 		setMaxStackSize(16);
 		setCreativeTab(MineFantasyTabs.tabGadget);
 	}
 
 	@Override
 	public EnumRarity getRarity(ItemStack item) {
-		if (healPwr <= 5) {
+		if (healPower <= 5) {
 			return MineFantasyItems.POOR;
 		}
 		return super.getRarity(item);
@@ -49,16 +57,23 @@ public class ItemBandage extends ItemBaseMFR {
 	 * Args: itemStack, world, entityPlayer
 	 */
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer user, EnumHand hand) {
-		ItemStack item = user.getHeldItem(hand);
-		if (!user.isSneaking() && canHeal(user) && user.hurtResistantTime <= 0) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack item = player.getHeldItem(hand);
+		if (!player.isSneaking() && canHeal(player) && player.hurtResistantTime <= 0) {
 			int time = this.getMaxItemUseDuration(item);
-			if (ResearchLogic.hasInfoUnlocked(user, "firstaid")) {
+			if (ResearchLogic.hasInfoUnlocked(player, "firstaid")) {
 				time /= 3;
 			}
-			user.setActiveHand(hand);
+
+			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, player, item,"field_184627_bm");
+			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, player, time,"field_184628_bn");
+			player.getDataManager().set(ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, player, "field_184621_as"), (byte) 1);
+
+			return ActionResult.newResult(EnumActionResult.SUCCESS, item);
 		}
-		return ActionResult.newResult(EnumActionResult.PASS, item);
+		else{
+			return ActionResult.newResult(EnumActionResult.FAIL, item);
+		}
 	}
 
 	/**
@@ -113,7 +128,7 @@ public class ItemBandage extends ItemBaseMFR {
 				player.swingArm(player.getActiveHand());
 
 				if (!player.world.isRemote) {
-					float power = healPwr;
+					float power = healPower;
 					if (ResearchLogic.hasInfoUnlocked(player, "doctor")) {
 						power *= 1.5F;
 					}
@@ -121,9 +136,6 @@ public class ItemBandage extends ItemBaseMFR {
 
 					if (!player.capabilities.isCreativeMode) {
 						item.shrink(1);
-						if (item.getCount() <= 0) {
-
-						}
 					}
 				}
 				toHeal.getEntityData().setInteger(Constants.INJURED_TAG, 0);
@@ -134,7 +146,7 @@ public class ItemBandage extends ItemBaseMFR {
 
 	private boolean canHeal(EntityLivingBase toHeal) {
 		return toHeal.hurtResistantTime <= 0
-				&& (toHeal.getHealth() <= (toHeal.getMaxHealth() - 1F) || EventManagerMFRToRemove.getInjuredTime(toHeal) > 0)
+				&& (toHeal.getHealth() <= (toHeal.getMaxHealth() - 1F) || MFREventHandler.getInjuredTime(toHeal) > 0)
 				&& !toHeal.isBurning();
 	}
 
@@ -156,12 +168,19 @@ public class ItemBandage extends ItemBaseMFR {
 	}
 
 	public void setUserHealTime(EntityLivingBase user, int value) {
+		if (user instanceof EntityPlayer){
+			PlayerData.get((EntityPlayer) user).setVariable(BANDAGE_PROGRESS, value);
+			return;
+		}
 		if (user.getEntityData() != null) {
 			user.getEntityData().setInteger(healingID, value);
 		}
 	}
 
 	public int getUserHealTime(EntityLivingBase user) {
+		if (user instanceof EntityPlayer && PlayerData.get((EntityPlayer) user) != null){
+			return PlayerData.get((EntityPlayer) user).getVariable(BANDAGE_PROGRESS);
+		}
 		if (user.getEntityData() != null) {
 			if (user.getEntityData().hasKey(healingID)) {
 				return user.getEntityData().getInteger(healingID);
@@ -172,7 +191,7 @@ public class ItemBandage extends ItemBaseMFR {
 
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(I18n.format("item.bandage_heal_amount", healPwr / 2));
+		tooltip.add(I18n.format("item.bandage_heal_amount", healPower / 2));
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }

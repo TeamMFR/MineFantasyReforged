@@ -83,13 +83,11 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
 	public EntityArrowMFR(World world) {
 		super(world);
-		setRenderDistanceWeight(10.0D);
 		this.setSize(0.5F, 0.5F);
 	}
 
 	public EntityArrowMFR(World world, double x, double y, double z) {
 		super(world);
-		setRenderDistanceWeight(10.0D);
 		this.setSize(0.5F, 0.5F);
 		this.setPosition(x, y, z);
 	}
@@ -100,7 +98,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	 */
 	public EntityArrowMFR(World world, EntityLivingBase shooter, EntityLivingBase target, float accuracy, float power) {
 		super(world);
-		setRenderDistanceWeight(10.0D);
 		this.shootingEntity = shooter;
 
 		this.firepower = power;
@@ -135,7 +132,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	public EntityArrowMFR(World world, EntityLivingBase shooter, float spread, float power) {
 		super(world);
 		this.firepower = power / 2F;
-		setRenderDistanceWeight(10.0D);
 		this.shootingEntity = shooter;
 
 		if (shooter instanceof EntityPlayer) {
@@ -161,11 +157,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		return (new EntityDamageSourceBomb(bomb, user)).setProjectile();
 	}
 
-	public EntityArrowMFR setDeisgn(ArrowType type) {
-		this.arrowtype = type;
-		return this;
-	}
-
 	/**
 	 * Implement this with the constructor
 	 */
@@ -183,7 +174,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
 	@Override
 	protected void entityInit() {
-		this.dataManager.register(CRITICAL, Byte.valueOf((byte) 0));// Critical
+		this.dataManager.register(CRITICAL, (byte) 0);// Critical
 		this.dataManager.register(TEXTURE_DW, "steel_arrow");
 	}
 
@@ -224,15 +215,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	}
 
 	/**
-	 * Sets the position and rotation. Only difference from the other one is no
-	 * bounding on the rotation. Args: posX, posY, posZ, yaw, pitch
-	 */
-	public void setPositionAndRotation(double x, double y, double z, float yaw, float pitch, int i) {
-		this.setPosition(x, y, z);
-		this.setRotation(yaw, pitch);
-	}
-
-	/**
 	 * Sets the velocity to the args. Args: x, y, z
 	 */
 	@Override
@@ -246,8 +228,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 			float f = MathHelper.sqrt(xv * xv + zv * zv);
 			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(xv, zv) * 180.0D / Math.PI);
 			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(yv, f) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch;
-			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
 			this.ticksInGround = 0;
 		}
@@ -288,7 +268,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		if (this.inGround) {
 			int j = block.getMetaFromState(state);
 
-			if (state == this.inBlock && j == this.inData) {
+			if (state == this.inBlock.getDefaultState() && j == this.inData) {
 				++this.ticksInGround;
 
 				if (this.ticksInGround == 1200) {
@@ -343,7 +323,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 				rayTraceResult = new RayTraceResult(entity);
 			}
 
-			if (rayTraceResult != null && rayTraceResult.entityHit != null && rayTraceResult.entityHit instanceof EntityPlayer) {
+			if (rayTraceResult != null && rayTraceResult.entityHit instanceof EntityPlayer) {
 				EntityPlayer entityplayer = (EntityPlayer) rayTraceResult.entityHit;
 
 				if (entityplayer.capabilities.disableDamage || this.shootingEntity instanceof EntityPlayer && !((EntityPlayer) this.shootingEntity).canAttackPlayer(entityplayer)) {
@@ -359,7 +339,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 					explode();
 				}
 				if (rayTraceResult.entityHit != null) {
-					f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ) / velocityModifier;
 
 					float dam = Math.max(0.1F, this.getHitDamage() * firepower);// (getDamageModifier()*power) / 10F *
 					// (float)k;
@@ -370,7 +349,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 						dam *= (rand.nextFloat() * 0.5F) + 1.0F;
 					}
 
-					DamageSource damagesource = null;
+					DamageSource damagesource;
 
 					if (this.shootingEntity == null) {
 						damagesource = DamageSource.causeArrowDamage(this, this);
@@ -488,13 +467,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 			this.posX += this.motionX;
 			this.posY += this.motionY;
 			this.posZ += this.motionZ;
-			f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
 			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-
-			for (this.rotationPitch = (float) (Math.atan2(this.motionY, f2) * 180.0D / Math.PI); this.rotationPitch
-					- this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-				;
-			}
 
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
 				this.prevRotationPitch += 360.0F;
@@ -539,14 +512,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	private float getDamageModifier(Entity target) {
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(getArrowStack());
 		return CombatMechanics.getSpecialModifier(material, "standard", target, true);
-	}
-
-	private float getModifiedVelocity() {
-		String s = "MF_Bow_Velocity";
-		if (getEntityData().hasKey(s)) {
-			return getEntityData().getFloat(s);
-		}
-		return 1.0F;
 	}
 
 	private boolean isExplosive() {
@@ -665,11 +630,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		return false;
 	}
 
-	@SideOnly(Side.CLIENT)
-	public float getShadowSize() {
-		return 0.0F;
-	}
-
 	@Override
 	public double getDamage() {
 		return this.damage;
@@ -686,20 +646,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	@Override
 	public void setKnockbackStrength(int str) {
 		this.knockbackStrength = str;
-	}
-
-	/**
-	 * [New Method] Whether the arrow has a stream of critical hit particles flying
-	 * behind it. Called by chance
-	 */
-	public void setCritical(boolean flag) {
-		byte b0 = this.dataManager.get(CRITICAL);
-
-		if (flag) {
-			this.dataManager.set(CRITICAL, Byte.valueOf((byte) (b0 | 1)));
-		} else {
-			this.dataManager.set(CRITICAL, Byte.valueOf((byte) (b0 & -2)));
-		}
 	}
 
 	/**
@@ -774,7 +720,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	/**
 	 * Saves the arrow to the NBT
 	 *
-	 * @param arrow
+	 * @param arrow the arrow ItemStack
 	 */
 	private void setArrowStack(ItemStack arrow) {
 		NBTTagCompound arrowNBT = new NBTTagCompound();

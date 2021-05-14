@@ -136,7 +136,7 @@ public class TacticalManager {
 		}
 
 		arc *= getHighgroundModifier(user, entityHitting, 1.5F);
-		arc = ArmourCalculator.adjustACForDamage(source, arc, 1.0F, 1.0F, 0.5F);// Harder to block piercing
+		arc = ArmourCalculator.adjustArmorClassForDamage(source, arc, 1.0F, 1.0F, 0.5F);// Harder to block piercing
 		if (autoParry) {
 			arc *= 0.5F;
 		}

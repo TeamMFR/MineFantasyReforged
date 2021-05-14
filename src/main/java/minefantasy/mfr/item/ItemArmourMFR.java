@@ -38,8 +38,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	protected BaseMaterial baseMaterial;
 	private int itemRarity;
 
-	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
-		super(name, material.getArmourConversion(), AD, slot, tex);
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
+		super(name, material.getArmourConversion(), armourDesign, slot, tex);
 		baseMaterial = material;
 		setRegistryName(name);
 		setUnlocalizedName(name);
@@ -49,8 +49,8 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		itemRarity = rarity;
 	}
 
-	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity, float customBulk) {
-		this(name, material, AD, slot, tex, rarity);
+	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity, float customBulk) {
+		this(name, material, armourDesign, slot, tex, rarity);
 		this.suitBulk = customBulk;
 	}
 
@@ -232,9 +232,9 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	}
 
 	@Override
-	public float getMagicAC(float AC, DamageSource source, double damage, EntityLivingBase player) {
+	public float getMagicArmorClass(float armorClass, DamageSource source, double damage, EntityLivingBase player) {
 		if (damage > 1 && material.isMythic) {
-			return AC;
+			return armorClass;
 		}
 		return 0F;
 	}
@@ -269,15 +269,15 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	}
 
 	@Override
-	public float getDRValue(EntityLivingBase user, ItemStack armour, DamageSource src) {
-		float DR = getProtectionRatio(armour) * scalePiece();
+	public float getDamageRatingValue(EntityLivingBase user, ItemStack armour, DamageSource src) {
+		float damageRating = getProtectionRatio(armour) * scalePiece();
 
 		if (ArmourCalculator.advancedDamageTypes && !user.world.isRemote) {
-			DR = ArmourCalculator.adjustACForDamage(src, DR, getProtectiveTrait(armour, 0),
+			damageRating = ArmourCalculator.adjustArmorClassForDamage(src, damageRating, getProtectiveTrait(armour, 0),
 					getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}
-		MFRLogUtil.logDebug(">>>>DR<<<< = " + DR);
-		return DR;
+		MFRLogUtil.logDebug(">>>>damageRating<<<< = " + damageRating);
+		return damageRating;
 	}
 
 	@Override

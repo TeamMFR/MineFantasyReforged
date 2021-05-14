@@ -70,7 +70,7 @@ public class BaseMaterial {
 	public boolean isMythic = false;
 	public int rarity;
 	// SPECIALS
-	private ArmorMaterial armourConversion;
+	private ArmorMaterialMFR armourConversion;
 	private ToolMaterial toolConversion;
 
 	public BaseMaterial(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantability, float weight, int lvl) {
@@ -109,7 +109,7 @@ public class BaseMaterial {
 		return material;
 	}
 
-	public static ArmorMaterial getMFRArmourMaterial(BaseMaterial material) {
+	public static ArmorMaterialMFR getMFRArmourMaterial(BaseMaterial material) {
 		return material.convertToMFArmour();
 	}
 
@@ -133,12 +133,12 @@ public class BaseMaterial {
 		return this;
 	}
 
-	private ArmorMaterial convertToMFArmour() {
-		return new ArmorMaterial("MF" + name, maxUses, hardness, enchantability, weight)
+	private ArmorMaterialMFR convertToMFArmour() {
+		return new ArmorMaterialMFR("MF" + name, maxUses, hardness, enchantability, weight)
 				.setFireResistance(fireResistance).setMagicResistance(arcaneResistance).setMythic(isMythic);
 	}
 
-	public ArmorMaterial getArmourConversion() {
+	public ArmorMaterialMFR getArmourConversion() {
 		if (armourConversion == null) {
 			armourConversion = getMFRArmourMaterial(this);
 		}

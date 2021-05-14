@@ -31,7 +31,6 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -77,30 +76,6 @@ public class ArmourCalculator {
 
 	public static ArmourDesign getDefaultAD(ItemStack armour) {
 		return ArmourDesign.SOLID;
-	}
-
-	/**
-	 * Converts a hit:damage ratio into vanilla AR(rounding off as it is an int)
-	 */
-	public static int translateToVanillaAR(float ratio) {
-		return (int) Math.min(24, 25F * convertToPercent(ratio));
-	}
-
-	/**
-	 * Converting a single piece to vanilla AR (rounding off as it is an int) Then
-	 * it divides on the slot. Used for armour bar
-	 */
-	public static int translateToVanillaAR(float ratio, int piece, int max) {
-		float scale = (float) piece / (float) max;
-
-		return (int) Math.min(24, 25F * convertToPercent(ratio) * scale);
-	}
-
-	/**
-	 * Converts a hit:damage ratio into a decimal percentage
-	 */
-	public static float convertToPercent(float ratio) {
-		return (1F - (1F / ratio));
 	}
 
 	/**
@@ -206,28 +181,27 @@ public class ArmourCalculator {
 	 *
 	 * @param src         the source (breaks down to ratio)
 	 * @param value       the variable to modify
-	 * @param cuttingProt the cutting resistence
-	 * @param bluntProt   the blunt resistence
-	 * @param pierceProt  the piercing resistence
-	 * @return
+	 * @param cuttingProtection the cutting resistance
+	 * @param bluntProtection   the blunt resistance
+	 * @param pierceProtection  the piercing resistance
+	 * @return damage adjusted for Armor Class, in a float
 	 */
-	public static float adjustACForDamage(DamageSource src, float value, float cuttingProt, float bluntProt, float pierceProt) {
+	public static float adjustArmorClassForDamage(DamageSource src, float value, float cuttingProtection, float bluntProtection, float pierceProtection) {
 		float[] ratio = getRatioForSource(src);
 		if (ratio == null) {
 			return value;// Null means undefined
 		}
 
-		return modifyACForType(value, ratio[0], ratio[1], ratio[2], cuttingProt, bluntProt, pierceProt,
-				getArmourPenetration(src));
+		return modifyArmorClassForType(value, ratio[0], ratio[1], ratio[2], cuttingProtection, bluntProtection, pierceProtection, getArmourPenetration(src));
 	}
 
-	public static float modifyACForType(int type, float value, float cuttingProt, float bluntProt, float pierceProt) {
+	public static float modifyArmorClassForType(int type, float value, float cuttingProt, float bluntProt, float pierceProt) {
 		float[] f = new float[] {0F, 0F, 0F};
 		f[type] = 1.0F;
-		return modifyACForType(value, f[0], f[1], f[2], cuttingProt, bluntProt, pierceProt, 0F);
+		return modifyArmorClassForType(value, f[0], f[1], f[2], cuttingProt, bluntProt, pierceProt, 0F);
 	}
 
-	public static float modifyACForType(float value, float cutting, float blunt, float pierce, float cuttingProt, float bluntProt, float pierceProt, float specialAP) {
+	public static float modifyArmorClassForType(float value, float cutting, float blunt, float pierce, float cuttingProt, float bluntProt, float pierceProt, float specialAP) {
 		if (advancedDamageTypes) {
 			// Averages the ratio between cutting and blunt, while modifying it by the
 			// armour traits
@@ -236,13 +210,13 @@ public class ArmourCalculator {
 		}
 		float ACModifier = 1.0F + specialAP;
 		value *= ACModifier;
-		return value > 0F ? value : 0F;
+		return Math.max(value, 0F);
 	}
 
 	public static float getArmourPenetration(DamageSource source) {
-		if (source != null && source.getImmediateSource() != null) {
-			Entity user = source.getImmediateSource();// The attacker
-			Entity damager = source.getTrueSource();// The thing causing damage(like arrows)
+		if (source != null && source.getTrueSource() != null) {
+			Entity user = source.getTrueSource();// The attacker
+			Entity damager = source.getImmediateSource();// The thing causing damage(like arrows)
 
 			if (user == damager && user instanceof EntityLivingBase && !((EntityLivingBase) user).getHeldItemMainhand().isEmpty()) {
 				if (((EntityLivingBase) user).getHeldItemMainhand().getItem() instanceof IDamageType) {
@@ -269,12 +243,12 @@ public class ArmourCalculator {
 		if (source == DamageSource.CACTUS) {
 			return new float[] {0, 0, 1};// pierce
 		}
-		if (source != null && source.getImmediateSource() != null && source.getImmediateSource() != null) {
-			Entity user = source.getImmediateSource();// The attacker
-			Entity damager = source.getTrueSource();// The thing causing damage(like arrows)
+		if (source != null && source.getImmediateSource() != null && source.getTrueSource() != null) {
+			Entity user = source.getTrueSource();// The attacker
+			Entity damager = source.getImmediateSource();// The thing causing damage(like arrows)
 
 			if (user == damager && user instanceof EntityLivingBase) {
-				return getRatioForMelee((EntityLivingBase) user, ((EntityLivingBase) user).getHeldItem(EnumHand.MAIN_HAND));
+				return getRatioForMelee((EntityLivingBase) user, ((EntityLivingBase) user).getHeldItemMainhand());
 			}
 			return getRatioForIndirect(damager);
 		}
@@ -394,45 +368,45 @@ public class ArmourCalculator {
 	}
 
 	// THRESHOLD
-	@SideOnly(Side.CLIENT)
 	/**
 	 * CLIENT WHOLE ENTITY: Gets the total DT of an entity by damage type: Used by
 	 * the Screen renderer
 	 */
+	@SideOnly(Side.CLIENT)
 	public static float getDTDisplay(EntityLivingBase user, int id) {
 		float armourDT = 0;
 
 		Iterable<ItemStack> armour = user.getArmorInventoryList();
 		for (ItemStack stack : armour) {
 			if (!stack.isEmpty() && stack.getItem() instanceof ISpecialArmourMFR) {
-				float threshold = getArmourValueMod(stack, ((ISpecialArmourMFR) stack.getItem()).getDTDisplay(stack, id));
+				float threshold = getArmourValueMod(stack, ((ISpecialArmourMFR) stack.getItem()).getDamageTypeDisplay(stack, id));
 				armourDT += threshold;
 			}
 		}
 		return armourDT;
 	}
 
-	@SideOnly(Side.CLIENT)
 	/**
 	 * CLIENT SINGLE PIECE: Gets a stat for a single piece: Used by Tooltips
 	 */
+	@SideOnly(Side.CLIENT)
 	public static float getDTForDisplayPiece(ItemStack armour, int id) {
 		if (!armour.isEmpty() && armour.getItem() instanceof ISpecialArmourMFR) {
-			return getArmourValueMod(armour, ((ISpecialArmourMFR) armour.getItem()).getDTDisplay(armour, id));
+			return getArmourValueMod(armour, ((ISpecialArmourMFR) armour.getItem()).getDamageTypeDisplay(armour, id));
 		}
 		return 0F;
 	}
 
-	@SideOnly(Side.CLIENT)
 	/**
 	 * CLIENT SINGLE PIECE: Gets a stat for a single piece: Used by Tooltips
 	 */
+	@SideOnly(Side.CLIENT)
 	public static float getDamageReductionForDisplayPiece(ItemStack armour, int id) {
 		if (armour.isEmpty()) {
 			return 0F;
 		}
 		if (armour.getItem() instanceof ISpecialArmourMFR) {
-			return getArmourValueMod(armour, ((ISpecialArmourMFR) armour.getItem()).getDRDisplay(armour, id));
+			return getArmourValueMod(armour, ((ISpecialArmourMFR) armour.getItem()).getDamageRatingDisplay(armour, id));
 		}
 		return 0F;
 	}
@@ -450,7 +424,7 @@ public class ArmourCalculator {
 		Iterable<ItemStack> armour = user.getArmorInventoryList();
 		for (ItemStack stack : armour) {
 			if (!stack.isEmpty() && stack.getItem() instanceof ISpecialArmourMFR) {
-				float threshold = getArmourValueMod(stack, ((ISpecialArmourMFR) stack.getItem()).getDRDisplay(stack, id));
+				float threshold = getArmourValueMod(stack, ((ISpecialArmourMFR) stack.getItem()).getDamageRatingDisplay(stack, id));
 				armourDT += threshold;
 			}
 		}
@@ -471,7 +445,7 @@ public class ArmourCalculator {
 		Iterable<ItemStack> armour = user.getArmorInventoryList();
 		for (ItemStack stack : armour) {
 			if (!stack.isEmpty() && stack.getItem() instanceof ISpecialArmourMFR) {
-				float threshold = getArmourValueMod(stack, ((ISpecialArmourMFR) stack.getItem()).getDTValue(user, stack, src));
+				float threshold = getArmourValueMod(stack, ((ISpecialArmourMFR) stack.getItem()).getDamageTypeValue(user, stack, src));
 				armourDT += threshold;
 			}
 		}

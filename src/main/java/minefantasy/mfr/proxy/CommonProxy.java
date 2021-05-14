@@ -9,7 +9,6 @@ import minefantasy.mfr.item.ArrowFirerMF;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.ArrowHandler;
 import minefantasy.mfr.mechanics.CombatMechanics;
-import minefantasy.mfr.mechanics.EventManagerMFRToRemove;
 import minefantasy.mfr.mechanics.MonsterUpgrader;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.util.XSTRandom;
@@ -39,9 +38,8 @@ public class CommonProxy implements ISmokeHandler {
 	}
 
 	public void registerTickHandlers() {
-		FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
-		MinecraftForge.EVENT_BUS.register(new EventManagerMFRToRemove());
-		MinecraftForge.EVENT_BUS.register(new CombatMechanics());
+		MinecraftForge.EVENT_BUS.register(new PlayerTickHandler());
+		//MinecraftForge.EVENT_BUS.register(new CombatMechanics());
 		MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
 		MinecraftForge.EVENT_BUS.register(new ArrowHandler());
 	}

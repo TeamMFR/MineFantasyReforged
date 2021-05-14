@@ -12,6 +12,7 @@ import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -27,8 +28,8 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	private String specialDesign;
 	private float ratingModifier = 1.0F;
 
-	public ItemCustomArmour(String craftDesign, String name, ArmourDesign AD, EntityEquipmentSlot slot, String tex, int rarity) {
-		super(craftDesign + "_" + name, MineFantasyMaterials.IRON, AD, slot, craftDesign + "_" + tex, rarity);
+	public ItemCustomArmour(String craftDesign, String name, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
+		super(craftDesign + "_" + name, MineFantasyMaterials.IRON, armourDesign, slot, craftDesign + "_" + tex, rarity);
 		this.specialDesign = craftDesign;
 		canRepair = false;
 	}
@@ -161,9 +162,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
 	@Override
 	protected float getSpecialModifier(ItemStack armour, DamageSource source) {
-		float modifier = CombatMechanics.getSpecialModifier(this.getCustomMaterial(armour), this.specialDesign, source.getImmediateSource(), false);
-
-		MFRLogUtil.logDebug("Modifier = " + modifier);
+		float modifier = CombatMechanics.getSpecialModifier(this.getCustomMaterial(armour), this.specialDesign, source.getTrueSource(), false);
 
 		return super.getSpecialModifier(armour, source) * modifier;
 	}
