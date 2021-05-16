@@ -13,6 +13,7 @@ import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntitySpider;
@@ -141,21 +142,21 @@ public class ArmourCalculator {
 		Iterable<ItemStack> armour = player.getArmorInventoryList();
 		for (ItemStack stack : armour) {
 			if (!considerSpeed || shouldArmourAlterSpeed(stack)) {
-				weight += getPieceWeight(stack);
+				weight += getPieceWeight(stack, EntityLiving.getSlotForItemStack(stack));
 			}
 		}
 		data.setVariable(variable, weight);
 		return weight;
 	}
 
-	public static float getPieceWeight(ItemStack item) {
+	public static float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
 
 		//    	MFRLogUtil.log("Weigth in calculation: "+ item.getItem().getUnlocalizedName());
 		if (item == null || item.getItem() == Items.AIR) {
 			return 0.0F;
 		}
 		if (item.getItem() instanceof IArmourMFR) {
-			return ((IArmourMFR) item.getItem()).getPieceWeight(item);
+			return ((IArmourMFR) item.getItem()).getPieceWeight(item, slot);
 		}
 		return getDefaultSuitWeight(item);
 	}

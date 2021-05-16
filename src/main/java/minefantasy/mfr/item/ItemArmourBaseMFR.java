@@ -273,9 +273,8 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
-	public float getPieceWeight(ItemStack item) {
-		return armourWeight * ArmourCalculator.sizes[getEquipmentSlot().getIndex()];
+	public float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
+		return armourWeight * ArmourCalculator.sizes[slot.getIndex()];
 	}
 
 	@Override

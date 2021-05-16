@@ -32,6 +32,7 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -256,7 +257,7 @@ public class MineFantasyHUD extends Gui {
 
 		Iterable<ItemStack> armour = mc.player.getArmorInventoryList();
 		for (ItemStack stack : armour) {
-			weight += ArmourCalculator.getPieceWeight(stack);
+			weight += ArmourCalculator.getPieceWeight(stack, EntityLiving.getSlotForItemStack(stack));
 		}
 
 		String massString = CustomMaterial.getWeightString(weight);

@@ -136,10 +136,10 @@ public class CustomToolHelper {
 		CustomMaterial metal = getCustomPrimaryMaterial(item);
 		CustomMaterial wood = getCustomSecondaryMaterial(item);
 
-		if (metal != null) {
+		if (metal != CustomMaterial.NONE) {
 			base = (metal.density / 2.5F) * base;
 		}
-		if (wood != null) {
+		if (wood != CustomMaterial.NONE) {
 			base += (wood.density / 2.5F);
 		}
 		return base;

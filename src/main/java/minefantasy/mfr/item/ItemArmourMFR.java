@@ -16,6 +16,7 @@ import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.player.EntityPlayer;
@@ -337,7 +338,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List list, ITooltipFlag full) {
 		CustomToolHelper.addInformation(item, list);
-		float mass = getPieceWeight(item);
+		float mass = getPieceWeight(item, EntityLiving.getSlotForItemStack(item));
 
 		list.add(CustomMaterial.getWeightString(mass));
 		super.addInformation(item, world, list, full);

@@ -138,7 +138,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		}
 
 		if (GuiButton.id == 3 && selected != null) {
-			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new ResearchRequestPacket(player, selected.ID));
+			NetworkHandler.sendToServer(new ResearchRequestPacket(player, selected.ID));
 			selected = null;
 		}
 		if (GuiButton.id == 4 && selected != null) {

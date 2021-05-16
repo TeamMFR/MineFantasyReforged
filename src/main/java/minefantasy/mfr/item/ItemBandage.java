@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MFREventHandler;
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
@@ -60,16 +61,8 @@ public class ItemBandage extends ItemBaseMFR {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
 		if (!player.isSneaking() && canHeal(player) && player.hurtResistantTime <= 0) {
-			int time = this.getMaxItemUseDuration(item);
-			if (ResearchLogic.hasInfoUnlocked(player, "firstaid")) {
-				time /= 3;
-			}
-
-			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, player, item,"field_184627_bm");
-			ObfuscationReflectionHelper.setPrivateValue(EntityLivingBase.class, player, time,"field_184628_bn");
-			player.getDataManager().set(ObfuscationReflectionHelper.getPrivateValue(EntityLivingBase.class, player, "field_184621_as"), (byte) 1);
-
-			return ActionResult.newResult(EnumActionResult.SUCCESS, item);
+			player.setActiveHand(hand);
+			return ActionResult.newResult(EnumActionResult.PASS, item);
 		}
 		else{
 			return ActionResult.newResult(EnumActionResult.FAIL, item);
@@ -105,6 +98,16 @@ public class ItemBandage extends ItemBaseMFR {
 		if (count % 5 == 0) {
 			player.playSound(SoundEvents.BLOCK_CLOTH_BREAK, 1F, 0.005F);
 		}
+		if (player instanceof EntityPlayer){
+			int time = 0;
+			if (ResearchLogic.hasInfoUnlocked((EntityPlayer) player, "firstaid")) {
+				time = getMaxItemUseDuration(stack) / 3;
+			}
+			if (count == time){
+				onItemUseFinish(stack, player.world, player);
+			}
+		}
+
 		player.swingArm(player.getActiveHand());
 	}
 

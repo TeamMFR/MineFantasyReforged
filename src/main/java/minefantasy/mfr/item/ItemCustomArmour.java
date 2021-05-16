@@ -139,8 +139,8 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	}
 
 	@Override
-	public float getPieceWeight(ItemStack item) {
-		float baseWeight = armourWeight * ArmourCalculator.sizes[getEquipmentSlot().getIndex()];
+	public float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
+		float baseWeight = armourWeight * ArmourCalculator.sizes[slot.getIndex()];
 		CustomMaterial material = this.getCustomMaterial(item);
 		if (material != null) {
 			baseWeight *= material.density;
