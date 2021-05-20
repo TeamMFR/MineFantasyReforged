@@ -435,7 +435,7 @@ public class CombatMechanics {
 			damage = modifyPlayerDamage((EntityPlayer) hit_entity, damage);
 		}
 
-		if (source != null && hitter != null) {
+		if (source != null && hitter instanceof EntityLivingBase) {
 			damage = modifyUserHitDamage(damage, (EntityLivingBase) hitter, source, hitter == source, hit_entity, properHit);
 		}
 		if (src.isExplosion() && isSkeleton(hit_entity)) {

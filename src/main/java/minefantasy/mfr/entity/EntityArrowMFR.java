@@ -81,15 +81,32 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 	private int knockbackStrength;
 	private float power = 0F;
 
-	public EntityArrowMFR(World world) {
+	public EntityArrowMFR(World world)
+	{
 		super(world);
+		this.xTile = -1;
+		this.yTile = -1;
+		this.zTile = -1;
+		this.pickupStatus = EntityArrow.PickupStatus.DISALLOWED;
+		this.damage = 2.0D;
 		this.setSize(0.5F, 0.5F);
 	}
 
-	public EntityArrowMFR(World world, double x, double y, double z) {
-		super(world);
-		this.setSize(0.5F, 0.5F);
+	public EntityArrowMFR(World world, double x, double y, double z)
+	{
+		this(world);
 		this.setPosition(x, y, z);
+	}
+
+	public EntityArrowMFR(World world, EntityLivingBase shooter)
+	{
+		this(world, shooter.posX, shooter.posY + (double)shooter.getEyeHeight() - 0.10000000149011612D, shooter.posZ);
+		this.shootingEntity = shooter;
+
+		if (shooter instanceof EntityPlayer)
+		{
+			this.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
+		}
 	}
 
 	/**
@@ -175,56 +192,72 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		this.dataManager.register(TEXTURE_DW, "steel_arrow");
 	}
 
+	public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
+	{
+		float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+		float f1 = -MathHelper.sin(pitch * 0.017453292F);
+		float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+		this.shoot(f, f1, f2, velocity, inaccuracy);
+		this.motionX += shooter.motionX;
+		this.motionZ += shooter.motionZ;
+
+		if (!shooter.onGround)
+		{
+			this.motionY += shooter.motionY;
+		}
+	}
+
 	/**
-	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z
-	 * direction.
+	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
 	 */
-	@Override
-	public void shoot(double x, double y, double z, float power, float spread) {
-		float f2 = MathHelper.sqrt(x * x + y * y + z * z);
-		x /= f2;
-		y /= f2;
-		z /= f2;
-		x += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * spread;
-		y += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * spread;
-		z += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * spread;
-		x *= power;
-		y *= power;
-		z *= power;
+	public void shoot(double x, double y, double z, float velocity, float inaccuracy)
+	{
+		float f = MathHelper.sqrt(x * x + y * y + z * z);
+		x = x / (double)f;
+		y = y / (double)f;
+		z = z / (double)f;
+		x = x + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
+		y = y + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
+		z = z + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
+		x = x * (double)velocity;
+		y = y * (double)velocity;
+		z = z * (double)velocity;
 		this.motionX = x;
 		this.motionY = y;
 		this.motionZ = z;
-		float f3 = MathHelper.sqrt(x * x + z * z);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f3) * 180.0D / Math.PI);
+		float f1 = MathHelper.sqrt(x * x + z * z);
+		this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
+		this.rotationPitch = (float)(MathHelper.atan2(y, f1) * (180D / Math.PI));
+		this.prevRotationYaw = this.rotationYaw;
+		this.prevRotationPitch = this.rotationPitch;
 		this.ticksInGround = 0;
 	}
 
 	/**
-	 * Sets the position and rotation. Only difference from the other one is no
-	 * bounding on the rotation. Args: posX, posY, posZ, yaw, pitch
+	 * Set the position and rotation values directly without any clamping.
 	 */
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport) {
+	public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport)
+	{
 		this.setPosition(x, y, z);
 		this.setRotation(yaw, pitch);
 	}
 
 	/**
-	 * Sets the velocity to the args. Args: x, y, z
+	 * Updates the entity motion clientside, called by packets from the server
 	 */
-	@Override
 	@SideOnly(Side.CLIENT)
-	public void setVelocity(double xv, double yv, double zv) {
-		this.motionX = xv;
-		this.motionY = yv;
-		this.motionZ = zv;
+	public void setVelocity(double x, double y, double z)
+	{
+		this.motionX = x;
+		this.motionY = y;
+		this.motionZ = z;
 
-		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-			float f = MathHelper.sqrt(xv * xv + zv * zv);
-			this.rotationPitch = (float) (MathHelper.atan2(yv, f) * (180D / Math.PI));
-			this.rotationYaw = (float) (MathHelper.atan2(xv, zv) * (180D / Math.PI));
+		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
+		{
+			float f = MathHelper.sqrt(x * x + z * z);
+			this.rotationPitch = (float)(MathHelper.atan2(y, f) * (180D / Math.PI));
+			this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
 			this.prevRotationPitch = this.rotationPitch;
 			this.prevRotationYaw = this.rotationYaw;
 			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -467,8 +500,13 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 			this.posX += this.motionX;
 			this.posY += this.motionY;
 			this.posZ += this.motionZ;
-			this.rotationYaw = (float) (Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
+			f4 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
+			this.rotationYaw = (float)(MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
 
+			//I know this is empty, but if you remove it, an arrow fired straight up won't flip over when gravity takes over
+			for (this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
+				;
+			}
 			while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
 				this.prevRotationPitch += 360.0F;
 			}
@@ -489,8 +527,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 			if (this.isInWater()) {
 				for (int l = 0; l < 4; ++l) {
 					f4 = 0.25F;
-					this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * f4, this.posY - this.motionY * f4,
-							this.posZ - this.motionZ * f4, this.motionX, this.motionY, this.motionZ);
+					this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * f4, this.posY - this.motionY * f4, this.posZ - this.motionZ * f4, this.motionX, this.motionY, this.motionZ);
 				}
 
 				f3 = 0.8F;
