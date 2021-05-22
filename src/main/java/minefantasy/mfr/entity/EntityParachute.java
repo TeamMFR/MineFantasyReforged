@@ -3,9 +3,11 @@ package minefantasy.mfr.entity;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.ArmourCalculator;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -14,6 +16,7 @@ import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -27,13 +30,10 @@ public class EntityParachute extends Entity {
 	/**
 	 * true if no player in parachute
 	 */
-	private boolean isParachuteEmpty;
-	private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntityParachute.class,
-			DataSerializers.FLOAT);
-	private static final DataParameter<Integer> TIME_SINCE_HIT_TAKEN = EntityDataManager
-			.<Integer>createKey(EntityParachute.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager
-			.<Integer>createKey(EntityParachute.class, DataSerializers.VARINT);
+	private final boolean isParachuteEmpty;
+	private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntityParachute.class, DataSerializers.FLOAT);
+	private static final DataParameter<Integer> TIME_SINCE_HIT_TAKEN = EntityDataManager.<Integer>createKey(EntityParachute.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityParachute.class, DataSerializers.VARINT);
 	private double speedMultiplier;
 	private int parachutePosRotationIncrements;
 	private double parachuteX;
@@ -100,7 +100,7 @@ public class EntityParachute extends Entity {
 	 * returns the bounding box for this entity
 	 */
 	public AxisAlignedBB getBoundingBox() {
-		return this.getCollisionBoundingBox();
+		return this.getEntityBoundingBox();
 	}
 
 	/**
@@ -122,20 +122,20 @@ public class EntityParachute extends Entity {
 	/**
 	 * Called when the entity is attacked.
 	 */
-	public boolean attackEntityFrom(DamageSource src, float dam) {
-		if (this.isEntityInvulnerable(src)) {
+	public boolean attackEntityFrom(DamageSource source, float dam) {
+		if (this.isEntityInvulnerable(source)) {
 			return false;
 		} else if (!this.world.isRemote && !this.isDead) {
 			this.setForwardDirection(-this.getForwardDirection());
 			this.setTimeSinceHit(10);
 			this.setDamageTaken(this.getDamageTaken() + dam * 10.0F);
-			this.setDamageTaken(dam);
-			boolean flag = src.getImmediateSource() instanceof EntityPlayer
-					&& ((EntityPlayer) src.getImmediateSource()).capabilities.isCreativeMode;
+			this.markVelocityChanged();
+			boolean flag = source.getTrueSource() instanceof EntityPlayer
+					&& ((EntityPlayer) source.getTrueSource()).capabilities.isCreativeMode;
 
 			if (flag || this.getDamageTaken() > 20.0F) {
-				if (isBeingRidden()) {
-					this.getRidingEntity().startRiding(this);
+				if (this.isBeingRidden()) {
+					this.getPassengers().add(this);
 				}
 
 				if (!flag) {
@@ -218,8 +218,8 @@ public class EntityParachute extends Entity {
 	}
 
 	public void onUpdate() {
-		if (isBeingRidden()) {
-			getRidingEntity().fallDistance = 0;
+		if (this.isBeingRidden()) {
+			this.getPassengers().forEach(entity -> fallDistance = 0);
 			// this.rotationYaw = riddenByEntity.rotationYaw;
 		}
 		super.onUpdate();
@@ -238,13 +238,8 @@ public class EntityParachute extends Entity {
 		byte b0 = 5;
 		double d0 = 0.0D;
 
-		for (int i = 0; i < b0; ++i) {
-			double d1 = this.getBoundingBox().minY
-					+ (this.getBoundingBox().maxY - this.getBoundingBox().minY) * (i + 0) / b0 - 0.125D;
-			double d3 = this.getBoundingBox().minY
-					+ (this.getBoundingBox().maxY - this.getBoundingBox().minY) * (i + 1) / b0 - 0.125D;
-			AxisAlignedBB axisalignedbb = new AxisAlignedBB(this.getBoundingBox().minX, d1, this.getBoundingBox().minZ,
-					this.getBoundingBox().maxX, d3, this.getBoundingBox().maxZ);
+		if (isInsideOfMaterial(Material.WATER)) {
+			d0 += 1.0D / b0;
 		}
 
 		double d10 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -293,13 +288,13 @@ public class EntityParachute extends Entity {
 				this.motionY += 0.007000000216066837D;
 			}
 
-			if (this.getRidingEntity() != null && this.getRidingEntity() instanceof EntityLivingBase) {
-				EntityLivingBase entitylivingbase = (EntityLivingBase) this.getRidingEntity();
-				float f = this.getRidingEntity().rotationYaw + -entitylivingbase.moveStrafing * 90.0F;
-				this.motionX += -Math.sin(f * (float) Math.PI / 180.0F) * this.speedMultiplier
-						* entitylivingbase.moveForward * 0.05000000074505806D;
-				this.motionZ += Math.cos(f * (float) Math.PI / 180.0F) * this.speedMultiplier
-						* entitylivingbase.moveForward * 0.05000000074505806D;
+			for (Entity entity : getPassengers()){
+				if (entity instanceof EntityLivingBase) {
+					EntityLivingBase entitylivingbase = (EntityLivingBase) entity;
+					float f = entity.rotationYaw + -entitylivingbase.moveStrafing * 90.0F;
+					this.motionX += -Math.sin(f * (float) Math.PI / 180.0F) * this.speedMultiplier * entitylivingbase.moveForward * 0.05000000074505806D;
+					this.motionZ += Math.cos(f * (float) Math.PI / 180.0F) * this.speedMultiplier * entitylivingbase.moveForward * 0.05000000074505806D;
+				}
 			}
 
 			d2 = Math.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
@@ -375,42 +370,38 @@ public class EntityParachute extends Entity {
 			this.rotationYaw = (float) (this.rotationYaw + d7);
 			this.setRotation(this.rotationYaw, this.rotationPitch);
 
-			if (!this.world.isRemote) {
-				List list = this.world.getEntitiesWithinAABBExcludingEntity(this,
-						this.getBoundingBox().expand(0.20000000298023224D, 0.0D, 0.20000000298023224D));
+			List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().grow(0.20000000298023224D, -0.009999999776482582D, 0.20000000298023224D), EntitySelectors.getTeamCollisionPredicate(this));
 
-				if (list != null && !list.isEmpty()) {
-					for (int k1 = 0; k1 < list.size(); ++k1) {
-						Entity entity = (Entity) list.get(k1);
+			if (!list.isEmpty())
+			{
+				boolean flag = !this.world.isRemote && !(this.getControllingPassenger() instanceof EntityPlayer);
 
-						if (entity != this.getRidingEntity() && entity.canBePushed()
-								&& entity instanceof EntityParachute) {
-							entity.applyEntityCollision(this);
+				for (Entity entity : list) {
+					if (!entity.isPassenger(this)) {
+						if (flag && this.getPassengers().size() < 2 && !entity.isRiding() && entity.width < this.width && entity instanceof EntityLivingBase && !(entity instanceof EntityWaterMob) && !(entity instanceof EntityPlayer)) {
+							entity.startRiding(this);
+						} else {
+							this.applyEntityCollision(entity);
 						}
 					}
-				}
-
-				if (isBeingRidden() && this.getRidingEntity().isDead) {
-					this.dismountRidingEntity();
 				}
 			}
 		}
 	}
 
 	private boolean isTooHeavy() {
-		if (getRidingEntity() != null && getRidingEntity() instanceof EntityPlayer) {
-			return ArmourCalculator.getTotalWeightOfWorn((EntityPlayer) getRidingEntity(), false) > 100F;
+		for (Entity entity : getPassengers()){
+			if (entity instanceof EntityPlayer) {
+				return ArmourCalculator.getTotalWeightOfWorn((EntityPlayer) entity, false) > 100F;
+			}
 		}
 		return false;
 	}
 
-	public void updateRiderPosition() {
-		if (isBeingRidden()) {
-			double d0 = Math.cos(this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-			double d1 = Math.sin(this.rotationYaw * Math.PI / 180.0D) * 0.4D;
-			this.getRidingEntity().setPosition(this.posX + d0,
-					this.posY + this.getMountedYOffset() + this.getRidingEntity().getYOffset(), this.posZ + d1);
-		}
+	public void updatePassenger(Entity passenger) {
+		double d0 = Math.cos(this.rotationYaw * Math.PI / 180.0D) * 0.4D;
+		double d1 = Math.sin(this.rotationYaw * Math.PI / 180.0D) * 0.4D;
+		passenger.setPosition(this.posX + d0, this.posY + this.getMountedYOffset() + passenger.getYOffset(), this.posZ + d1);
 	}
 
 	/**
@@ -435,7 +426,10 @@ public class EntityParachute extends Entity {
 	 * ground to update the fall distance and deal fall damage if landing on the
 	 * ground. Args: distanceFallenThisTick, onGround
 	 */
-	protected void updateFallState(double dist, boolean hitGound) {
+	protected void updateFallState(double dist, boolean hitGound, IBlockState state, BlockPos pos) {
+		int i = MathHelper.floor(this.posX);
+		int j = MathHelper.floor(this.posY);
+		int k = MathHelper.floor(this.posZ);
 
 		if (hitGound) {
 			if (this.fallDistance > 0.0F || onGround) {
@@ -446,9 +440,7 @@ public class EntityParachute extends Entity {
 
 				this.fallDistance = 0.0F;
 			}
-		} else if (this.world.getBlockState(
-				new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY) - 1, MathHelper.floor(this.posZ)))
-				.getMaterial() != Material.WATER && dist < 0.0D) {
+		} else if (this.world.getBlockState(new BlockPos(i, j - 1, k)).getMaterial() != Material.WATER && dist < 0.0D) {
 			this.fallDistance = (float) (this.fallDistance - dist);
 		}
 	}
@@ -493,13 +485,5 @@ public class EntityParachute extends Entity {
 	 */
 	public void setForwardDirection(int dir) {
 		this.dataManager.set(FORWARD_DIRECTION, Integer.valueOf(dir));
-	}
-
-	/**
-	 * true if no player in parachute
-	 */
-	@SideOnly(Side.CLIENT)
-	public void setIsParachuteEmpty(boolean flag) {
-		this.isParachuteEmpty = flag;
 	}
 }

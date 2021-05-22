@@ -3,9 +3,9 @@ package minefantasy.mfr.client.render.entity;
 import minefantasy.mfr.client.model.entity.ModelParachute;
 import minefantasy.mfr.entity.EntityParachute;
 import minefantasy.mfr.util.TextureHelperMFR;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,12 +14,10 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class RenderParachute extends Render<EntityParachute> {
-	protected ModelBase modelParachute;
+	protected static final ModelBase modelParachute = new ModelParachute();
 
-	public RenderParachute() {
-		super(Minecraft.getMinecraft().getRenderManager());
-		this.shadowSize = 1F;
-		this.modelParachute = new ModelParachute();
+	public RenderParachute(RenderManager renderManager) {
+		super(renderManager);
 	}
 
 	/**
@@ -52,7 +50,7 @@ public class RenderParachute extends Render<EntityParachute> {
 		GL11.glScalef(1.0F / f4, 1.0F / f4, 1.0F / f4);
 		this.bindEntityTexture(entity);
 		GL11.glScalef(-1.0F, -1.0F, 1.0F);
-		this.modelParachute.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+		modelParachute.render(entity, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 		GL11.glPopMatrix();
 	}
 
