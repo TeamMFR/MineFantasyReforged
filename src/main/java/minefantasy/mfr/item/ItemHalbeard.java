@@ -86,7 +86,7 @@ public class ItemHalbeard extends ItemSpear {
 
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement) {
-		return hvyHackingDamage;
+		return heavyHackingDamage;
 	}
 
 	@Override

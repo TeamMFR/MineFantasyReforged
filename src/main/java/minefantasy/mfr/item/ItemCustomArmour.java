@@ -9,10 +9,8 @@ import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.CustomToolHelper;
-import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
@@ -36,23 +34,23 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
 	public static void addSuits(List<ItemStack> list, String material) {
 		list.add(MineFantasyItems.STANDARD_CHAIN_HELMET.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_CHEST.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_LEGS.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_CHESTPLATE.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_LEGGINGS.construct(material));
 		list.add(MineFantasyItems.STANDARD_CHAIN_BOOTS.construct(material));
 
 		list.add(MineFantasyItems.STANDARD_SCALE_HELMET.construct(material));
-		list.add(MineFantasyItems.STANDARD_SCALE_CHEST.construct(material));
-		list.add(MineFantasyItems.STANDARD_SCALE_LEGS.construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_CHESTPLATE.construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_LEGGINGS.construct(material));
 		list.add((MineFantasyItems.STANDARD_SCALE_BOOTS).construct(material));
 
 		list.add((MineFantasyItems.STANDARD_SPLINT_HELMET).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_CHEST).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_LEGS).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_CHESTPLATE).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_LEGGINGS).construct(material));
 		list.add((MineFantasyItems.STANDARD_SPLINT_BOOTS).construct(material));
 
 		list.add((MineFantasyItems.STANDARD_PLATE_HELMET).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_CHEST).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_LEGS).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_CHESTPLATE).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_LEGGINGS).construct(material));
 		list.add((MineFantasyItems.STANDARD_PLATE_BOOTS).construct(material));
 	}
 

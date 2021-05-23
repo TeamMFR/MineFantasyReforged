@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_chain_legs",
-        "layer1": "minefantasyreborn:items/dragonforged_chain_legs_detail"
-    }
-}

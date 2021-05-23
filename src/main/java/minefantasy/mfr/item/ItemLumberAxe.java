@@ -94,7 +94,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 
 			IBlockState newblock = world.getBlockState(pos);
 			breakSurrounding(item, world, newblock, pos, user);
-			if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
+			if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
 				newblock.getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos), EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
 			}
 			world.setBlockToAir(pos);
@@ -136,7 +136,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 
 							if (item.getItemDamage() < item.getMaxDamage() && newblock != null
 									&& user instanceof EntityPlayer && newblock.getMaterial(state) == Material.LEAVES) {
-								if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
+								if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
 									newblock.dropBlockAsItem(world, blockPos, state, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
 								}
 								world.setBlockToAir(blockPos);

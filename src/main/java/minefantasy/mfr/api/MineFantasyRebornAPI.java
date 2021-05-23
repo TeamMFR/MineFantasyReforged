@@ -57,7 +57,7 @@ public class MineFantasyRebornAPI {
 	 * @param result     The output item
 	 * @param research   The research required
 	 * @param hot        True if the result is hot(Does not apply to blocks)
-	 * @param toolType   the tool type required to hit ("hammer", "hvyHammer", etc)
+	 * @param toolType   the tool type required to hit ("hammer", "heavy_hammer", etc)
 	 * @param hammerType the hammer tier required for creation:
 	 * @param anvil      the anvil required bronze 0, iron 1, steel 2
 	 * @param forgeTime  The time taken to forge(default is 200. each hit is about 100)
@@ -74,7 +74,7 @@ public class MineFantasyRebornAPI {
 	 * @param result     what item comes out (basic itemstack)
 	 * @param research   what research is used
 	 * @param hot        whether it requires quenching
-	 * @param toolType   the tool used (hammer or hvyHammer)
+	 * @param toolType   the tool used (hammer or heavy_hammer)
 	 * @param hammerType the tier of hammer
 	 * @param anvil      the tier of anvil
 	 * @param forgeTime  the time it takes to forge

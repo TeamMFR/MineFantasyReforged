@@ -78,7 +78,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
 
 							if (newblock != null && user instanceof EntityPlayer && ForgeHooks.canHarvestBlock(newblock.getBlock(), (EntityPlayer) user, world, blockPos)) {
 
-								if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
+								if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
 									newblock.getBlock().dropBlockAsItem(world, pos, newblock, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
 								}
 								world.setBlockToAir(blockPos);

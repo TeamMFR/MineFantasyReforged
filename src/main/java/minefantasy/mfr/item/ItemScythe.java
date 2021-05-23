@@ -109,7 +109,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 								tryBreakFarmland(world, newPos.add(0, -1, 0));
 								if (!player.capabilities.isCreativeMode) {
 									ItemLumberAxe.tirePlayer(player, 1F);
-									state.getBlock().dropBlockAsItemWithChance(world, newPos, state, ConfigTools.hvyDropChance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
+									state.getBlock().dropBlockAsItemWithChance(world, newPos, state, ConfigTools.heavy_tool_drop_chance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
 								}
 								stack.damageItem(1, player);
 							}

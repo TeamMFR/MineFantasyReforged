@@ -13,7 +13,7 @@ public enum Tool {
 	OTHER("other"),
 	BRUSH("brush"),
 	HAMMER("hammer"),
-	HEAVY_HAMMER("hvyHammer"), // TODO: fix this abbrev laziness!!
+	HEAVY_HAMMER("heavy_hammer"),
 	NEEDLE("needle"),
 	KNIFE("knife"),
 	MALLET("mallet"),

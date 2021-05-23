@@ -310,9 +310,9 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		// Crafters
 
-		String craftDesc = "This Registers items to a tool type and efficiency (such as hammer, hvyHammer, knife, saw, etc):\n"
+		String craftDesc = "This Registers items to a tool type and efficiency (such as hammer, heavy hammer, knife, saw, etc):\n"
 				+ "Order itemid|efficiency|tier|tooltype \n"
-				+ "tooltype can be hammer, hvyHammer, knife, shears, needle, spoon, mallet, saw, spanner \n"
+				+ "tooltype can be hammer, heavy hammer, knife, shears, needle, spoon, mallet, saw, spanner \n"
 				+ "efficiency is the measure of how fast it works (similar to dig speed)";
 
 		crafterList = config.get(CATEGORY_TOOL, "Crafter Registry", new String[0], craftDesc).getStringList();

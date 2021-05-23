@@ -254,20 +254,20 @@ public class MineFantasyItems {
 
 	// STANDARD ARMOR
 	public static ItemArmourMFR STANDARD_SCALE_HELMET = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_SCALE_CHEST = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_SCALE_LEGS = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_SCALE_CHESTPLATE = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_SCALE_LEGGINGS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_SCALE_BOOTS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_CHAIN_HELMET = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_CHAIN_CHEST = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_CHAIN_LEGS = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_CHAIN_CHESTPLATE = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_CHAIN_LEGGINGS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_CHAIN_BOOTS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_SPLINT_HELMET = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_SPLINT_CHEST = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_SPLINT_LEGS = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_SPLINT_CHESTPLATE = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_SPLINT_LEGGINGS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_SPLINT_BOOTS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_PLATE_HELMET = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_PLATE_CHEST = Utils.nullValue();
-	public static ItemArmourMFR STANDARD_PLATE_LEGS = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_PLATE_CHESTPLATE = Utils.nullValue();
+	public static ItemArmourMFR STANDARD_PLATE_LEGGINGS = Utils.nullValue();
 	public static ItemArmourMFR STANDARD_PLATE_BOOTS = Utils.nullValue();
 
 	// DRAGONFORGED TOOLS
@@ -286,15 +286,15 @@ public class MineFantasyItems {
 	public static ItemAxeMFR DRAGONFORGED_AXE = Utils.nullValue();
 	public static ItemSpade DRAGONFORGED_SPADE = Utils.nullValue();
 	public static ItemHoeMFR DRAGONFORGED_HOE = Utils.nullValue();
-	public static ItemHeavyPick DRAGONFORGED_HVYPICK = Utils.nullValue();
-	public static ItemHeavyShovel DRAGONFORGED_HVYSHOVEL = Utils.nullValue();
+	public static ItemHeavyPick DRAGONFORGED_HEAVY_PICK = Utils.nullValue();
+	public static ItemHeavyShovel DRAGONFORGED_HEAVY_SHOVEL = Utils.nullValue();
 	public static ItemHandpick DRAGONFORGED_HANDPICK = Utils.nullValue();
 	public static ItemTrow DRAGONFORGED_TROW = Utils.nullValue();
 	public static ItemScythe DRAGONFORGED_SCYTHE = Utils.nullValue();
 	public static ItemMattock DRAGONFORGED_MATTOCK = Utils.nullValue();
 	public static ItemLumberAxe DRAGONFORGED_LUMBER = Utils.nullValue();
 	public static ItemHammer DRAGONFORGED_HAMMER = Utils.nullValue();
-	public static ItemHammer DRAGONFORGED_HVYHAMMER = Utils.nullValue();
+	public static ItemHammer DRAGONFORGED_HEAVY_HAMMER = Utils.nullValue();
 	public static ItemTongs DRAGONFORGED_TONGS = Utils.nullValue();
 	public static ItemShearsMFR DRAGONFORGED_SHEARS = Utils.nullValue();
 	public static ItemKnife DRAGONFORGED_KNIFE = Utils.nullValue();
@@ -305,20 +305,20 @@ public class MineFantasyItems {
 
 	// DRAGONFORGED ARMOR
 	public static ItemCustomArmour DRAGONFORGED_SCALE_HELMET = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_SCALE_CHEST = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_SCALE_LEGS = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_SCALE_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_SCALE_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_SCALE_BOOTS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_CHAIN_HELMET = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_CHAIN_CHEST = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_CHAIN_LEGS = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_CHAIN_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_CHAIN_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_CHAIN_BOOTS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_SPLINT_HELMET = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_SPLINT_CHEST = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_SPLINT_LEGS = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_SPLINT_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_SPLINT_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_SPLINT_BOOTS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_PLATE_HELMET = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_PLATE_CHEST = Utils.nullValue();
-	public static ItemCustomArmour DRAGONFORGED_PLATE_LEGS = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_PLATE_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour DRAGONFORGED_PLATE_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour DRAGONFORGED_PLATE_BOOTS = Utils.nullValue();
 
 	// STANDARD CUSTOM TOOLS
@@ -337,15 +337,15 @@ public class MineFantasyItems {
 	public static ItemAxeMFR STANDARD_AXE = Utils.nullValue();
 	public static ItemSpade STANDARD_SPADE = Utils.nullValue();
 	public static ItemHoeMFR STANDARD_HOE = Utils.nullValue();
-	public static ItemHeavyPick STANDARD_HVYPICK = Utils.nullValue();
-	public static ItemHeavyShovel STANDARD_HVYSHOVEL = Utils.nullValue();
+	public static ItemHeavyPick STANDARD_HEAVY_PICK = Utils.nullValue();
+	public static ItemHeavyShovel STANDARD_HEAVY_SHOVEL = Utils.nullValue();
 	public static ItemHandpick STANDARD_HANDPICK = Utils.nullValue();
 	public static ItemTrow STANDARD_TROW = Utils.nullValue();
 	public static ItemScythe STANDARD_SCYTHE = Utils.nullValue();
 	public static ItemMattock STANDARD_MATTOCK = Utils.nullValue();
 	public static ItemLumberAxe STANDARD_LUMBER = Utils.nullValue();
 	public static ItemHammer STANDARD_HAMMER = Utils.nullValue();
-	public static ItemHammer STANDARD_HVYHAMMER = Utils.nullValue();
+	public static ItemHammer STANDARD_HEAVY_HAMMER = Utils.nullValue();
 	public static ItemTongs STANDARD_TONGS = Utils.nullValue();
 	public static ItemShearsMFR STANDARD_SHEARS = Utils.nullValue();
 	public static ItemKnife STANDARD_KNIFE = Utils.nullValue();
@@ -477,15 +477,15 @@ public class MineFantasyItems {
 	public static ItemAxeMFR ORNATE_AXE = Utils.nullValue();
 	public static ItemSpade ORNATE_SPADE = Utils.nullValue();
 	public static ItemHoeMFR ORNATE_HOE = Utils.nullValue();
-	public static ItemHeavyPick ORNATE_HVYPICK = Utils.nullValue();
-	public static ItemHeavyShovel ORNATE_HVYSHOVEL = Utils.nullValue();
+	public static ItemHeavyPick ORNATE_HEAVY_PICK = Utils.nullValue();
+	public static ItemHeavyShovel ORNATE_HEAVY_SHOVEL = Utils.nullValue();
 	public static ItemHandpick ORNATE_HANDPICK = Utils.nullValue();
 	public static ItemTrow ORNATE_TROW = Utils.nullValue();
 	public static ItemScythe ORNATE_SCYTHE = Utils.nullValue();
 	public static ItemMattock ORNATE_MATTOCK = Utils.nullValue();
 	public static ItemLumberAxe ORNATE_LUMBER = Utils.nullValue();
 	public static ItemHammer ORNATE_HAMMER = Utils.nullValue();
-	public static ItemHammer ORNATE_HVYHAMMER = Utils.nullValue();
+	public static ItemHammer ORNATE_HEAVY_HAMMER = Utils.nullValue();
 	public static ItemTongs ORNATE_TONGS = Utils.nullValue();
 	public static ItemShearsMFR ORNATE_SHEARS = Utils.nullValue();
 	public static ItemKnife ORNATE_KNIFE = Utils.nullValue();
@@ -496,20 +496,20 @@ public class MineFantasyItems {
 
 	// ORNATE ARMOR
 	public static ItemCustomArmour ORNATE_SCALE_HELMET = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_SCALE_CHEST = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_SCALE_LEGS = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_SCALE_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_SCALE_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_SCALE_BOOTS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_CHAIN_HELMET = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_CHAIN_CHEST = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_CHAIN_LEGS = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_CHAIN_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_CHAIN_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_CHAIN_BOOTS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_SPLINT_HELMET = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_SPLINT_CHEST = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_SPLINT_LEGS = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_SPLINT_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_SPLINT_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_SPLINT_BOOTS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_PLATE_HELMET = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_PLATE_CHEST = Utils.nullValue();
-	public static ItemCustomArmour ORNATE_PLATE_LEGS = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_PLATE_CHESTPLATE = Utils.nullValue();
+	public static ItemCustomArmour ORNATE_PLATE_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_PLATE_BOOTS = Utils.nullValue();
 //	public static Item[] INGOTS;
 
@@ -691,23 +691,23 @@ public class MineFantasyItems {
 		CreativeTabs tab = MineFantasyTabs.tabArmour;
 
 		STANDARD_SCALE_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SCALE_CHEST = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_chest", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SCALE_LEGS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_legs", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).setCreativeTab(tab);
+		STANDARD_SCALE_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).setCreativeTab(tab);
+		STANDARD_SCALE_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).setCreativeTab(tab);
 		STANDARD_SCALE_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).setCreativeTab(tab);
 
 		STANDARD_CHAIN_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).setCreativeTab(tab);
-		STANDARD_CHAIN_CHEST = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_chest", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).setCreativeTab(tab);
-		STANDARD_CHAIN_LEGS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_legs", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).setCreativeTab(tab);
+		STANDARD_CHAIN_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).setCreativeTab(tab);
+		STANDARD_CHAIN_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).setCreativeTab(tab);
 		STANDARD_CHAIN_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).setCreativeTab(tab);
 
 		STANDARD_SPLINT_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SPLINT_CHEST = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_chest", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).setCreativeTab(tab);
-		STANDARD_SPLINT_LEGS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_legs", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).setCreativeTab(tab);
+		STANDARD_SPLINT_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).setCreativeTab(tab);
+		STANDARD_SPLINT_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).setCreativeTab(tab);
 		STANDARD_SPLINT_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).setCreativeTab(tab);
 
 		STANDARD_PLATE_HELMET = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).setCreativeTab(tab);
-		STANDARD_PLATE_CHEST = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_chest", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).setCreativeTab(tab);
-		STANDARD_PLATE_LEGS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_legs", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).setCreativeTab(tab);
+		STANDARD_PLATE_CHESTPLATE = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).setCreativeTab(tab);
+		STANDARD_PLATE_LEGGINGS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).setCreativeTab(tab);
 		STANDARD_PLATE_BOOTS = (ItemArmourMFR) new ItemCustomArmour(standard, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).setCreativeTab(tab);
 	}
 
@@ -992,23 +992,23 @@ public class MineFantasyItems {
 
 		// Custom Armor
 		registry.register(STANDARD_SCALE_HELMET);
-		registry.register(STANDARD_SCALE_CHEST);
-		registry.register(STANDARD_SCALE_LEGS);
+		registry.register(STANDARD_SCALE_CHESTPLATE);
+		registry.register(STANDARD_SCALE_LEGGINGS);
 		registry.register(STANDARD_SCALE_BOOTS);
 
 		registry.register(STANDARD_CHAIN_HELMET);
-		registry.register(STANDARD_CHAIN_CHEST);
-		registry.register(STANDARD_CHAIN_LEGS);
+		registry.register(STANDARD_CHAIN_CHESTPLATE);
+		registry.register(STANDARD_CHAIN_LEGGINGS);
 		registry.register(STANDARD_CHAIN_BOOTS);
 
 		registry.register(STANDARD_SPLINT_HELMET);
-		registry.register(STANDARD_SPLINT_CHEST);
-		registry.register(STANDARD_SPLINT_LEGS);
+		registry.register(STANDARD_SPLINT_CHESTPLATE);
+		registry.register(STANDARD_SPLINT_LEGGINGS);
 		registry.register(STANDARD_SPLINT_BOOTS);
 
 		registry.register(STANDARD_PLATE_HELMET);
-		registry.register(STANDARD_PLATE_CHEST);
-		registry.register(STANDARD_PLATE_LEGS);
+		registry.register(STANDARD_PLATE_CHESTPLATE);
+		registry.register(STANDARD_PLATE_LEGGINGS);
 		registry.register(STANDARD_PLATE_BOOTS);
 
 		// Standard Weapons
@@ -1030,8 +1030,8 @@ public class MineFantasyItems {
 		registry.register(STANDARD_SPADE);
 		registry.register(STANDARD_HOE);
 
-		registry.register(STANDARD_HVYPICK);
-		registry.register(STANDARD_HVYSHOVEL);
+		registry.register(STANDARD_HEAVY_PICK);
+		registry.register(STANDARD_HEAVY_SHOVEL);
 		registry.register(STANDARD_HANDPICK);
 		registry.register(STANDARD_TROW);
 		registry.register(STANDARD_SCYTHE);
@@ -1040,7 +1040,7 @@ public class MineFantasyItems {
 
 		// Standard Crafters
 		registry.register(STANDARD_HAMMER);
-		registry.register(STANDARD_HVYHAMMER);
+		registry.register(STANDARD_HEAVY_HAMMER);
 		registry.register(STANDARD_TONGS);
 		registry.register(STANDARD_SHEARS);
 		registry.register(STANDARD_KNIFE);
@@ -1079,15 +1079,15 @@ public class MineFantasyItems {
 		registry.register(DRAGONFORGED_SPADE);
 		registry.register(DRAGONFORGED_HOE);
 
-		registry.register(DRAGONFORGED_HVYPICK);
-		registry.register(DRAGONFORGED_HVYSHOVEL);
+		registry.register(DRAGONFORGED_HEAVY_PICK);
+		registry.register(DRAGONFORGED_HEAVY_SHOVEL);
 		registry.register(DRAGONFORGED_HANDPICK);
 		registry.register(DRAGONFORGED_TROW);
 		registry.register(DRAGONFORGED_SCYTHE);
 		registry.register(DRAGONFORGED_MATTOCK);
 		registry.register(DRAGONFORGED_LUMBER);
 		registry.register(DRAGONFORGED_HAMMER);
-		registry.register(DRAGONFORGED_HVYHAMMER);
+		registry.register(DRAGONFORGED_HEAVY_HAMMER);
 
 		// Crafters
 		registry.register(DRAGONFORGED_TONGS);
@@ -1099,23 +1099,23 @@ public class MineFantasyItems {
 
 		// Armours
 		registry.register(DRAGONFORGED_SCALE_HELMET);
-		registry.register(DRAGONFORGED_SCALE_CHEST);
-		registry.register(DRAGONFORGED_SCALE_LEGS);
+		registry.register(DRAGONFORGED_SCALE_CHESTPLATE);
+		registry.register(DRAGONFORGED_SCALE_LEGGINGS);
 		registry.register(DRAGONFORGED_SCALE_BOOTS);
 
 		registry.register(DRAGONFORGED_CHAIN_HELMET);
-		registry.register(DRAGONFORGED_CHAIN_CHEST);
-		registry.register(DRAGONFORGED_CHAIN_LEGS);
+		registry.register(DRAGONFORGED_CHAIN_CHESTPLATE);
+		registry.register(DRAGONFORGED_CHAIN_LEGGINGS);
 		registry.register(DRAGONFORGED_CHAIN_BOOTS);
 
 		registry.register(DRAGONFORGED_SPLINT_HELMET);
-		registry.register(DRAGONFORGED_SPLINT_CHEST);
-		registry.register(DRAGONFORGED_SPLINT_LEGS);
+		registry.register(DRAGONFORGED_SPLINT_CHESTPLATE);
+		registry.register(DRAGONFORGED_SPLINT_LEGGINGS);
 		registry.register(DRAGONFORGED_SPLINT_BOOTS);
 
 		registry.register(DRAGONFORGED_PLATE_HELMET);
-		registry.register(DRAGONFORGED_PLATE_CHEST);
-		registry.register(DRAGONFORGED_PLATE_LEGS);
+		registry.register(DRAGONFORGED_PLATE_CHESTPLATE);
+		registry.register(DRAGONFORGED_PLATE_LEGGINGS);
 		registry.register(DRAGONFORGED_PLATE_BOOTS);
 
 		// Ornate
@@ -1140,15 +1140,15 @@ public class MineFantasyItems {
 		registry.register(ORNATE_SPADE);
 		registry.register(ORNATE_HOE);
 
-		registry.register(ORNATE_HVYPICK);
-		registry.register(ORNATE_HVYSHOVEL);
+		registry.register(ORNATE_HEAVY_PICK);
+		registry.register(ORNATE_HEAVY_SHOVEL);
 		registry.register(ORNATE_HANDPICK);
 		registry.register(ORNATE_TROW);
 		registry.register(ORNATE_SCYTHE);
 		registry.register(ORNATE_MATTOCK);
 		registry.register(ORNATE_LUMBER);
 		registry.register(ORNATE_HAMMER);
-		registry.register(ORNATE_HVYHAMMER);
+		registry.register(ORNATE_HEAVY_HAMMER);
 
 		// Crafters
 		registry.register(ORNATE_TONGS);
@@ -1160,23 +1160,23 @@ public class MineFantasyItems {
 
 		// Armours
 		registry.register(ORNATE_SCALE_HELMET);
-		registry.register(ORNATE_SCALE_CHEST);
-		registry.register(ORNATE_SCALE_LEGS);
+		registry.register(ORNATE_SCALE_CHESTPLATE);
+		registry.register(ORNATE_SCALE_LEGGINGS);
 		registry.register(ORNATE_SCALE_BOOTS);
 
 		registry.register(ORNATE_CHAIN_HELMET);
-		registry.register(ORNATE_CHAIN_CHEST);
-		registry.register(ORNATE_CHAIN_LEGS);
+		registry.register(ORNATE_CHAIN_CHESTPLATE);
+		registry.register(ORNATE_CHAIN_LEGGINGS);
 		registry.register(ORNATE_CHAIN_BOOTS);
 
 		registry.register(ORNATE_SPLINT_HELMET);
-		registry.register(ORNATE_SPLINT_CHEST);
-		registry.register(ORNATE_SPLINT_LEGS);
+		registry.register(ORNATE_SPLINT_CHESTPLATE);
+		registry.register(ORNATE_SPLINT_LEGGINGS);
 		registry.register(ORNATE_SPLINT_BOOTS);
 
 		registry.register(ORNATE_PLATE_HELMET);
-		registry.register(ORNATE_PLATE_CHEST);
-		registry.register(ORNATE_PLATE_LEGS);
+		registry.register(ORNATE_PLATE_CHESTPLATE);
+		registry.register(ORNATE_PLATE_LEGGINGS);
 		registry.register(ORNATE_PLATE_BOOTS);
 
 	}
@@ -1464,8 +1464,8 @@ public class MineFantasyItems {
 		STANDARD_HOE = (ItemHoeMFR) new ItemHoeMFR(standard + "_hoe", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
 
 		tab = MineFantasyTabs.tabToolAdvanced;
-		STANDARD_HVYPICK = (ItemHeavyPick) new ItemHeavyPick(standard + "_hvypick", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_HVYSHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(standard + "_hvyshovel", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(standard + "_heavy_pick", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(standard + "_heavy_shovel", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
 		STANDARD_HANDPICK = (ItemHandpick) new ItemHandpick(standard + "_handpick", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
 		STANDARD_TROW = (ItemTrow) new ItemTrow(standard + "_trow", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
 		STANDARD_SCYTHE = (ItemScythe) new ItemScythe(standard + "_scythe", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
@@ -1475,7 +1475,7 @@ public class MineFantasyItems {
 		// Standard Crafters
 		tab = MineFantasyTabs.tabCraftTool;
 		STANDARD_HAMMER = (ItemHammer) new ItemHammer(standard + "_hammer", Item.ToolMaterial.IRON, false, 0, 0).setCustom(standard).setCreativeTab(tab);
-		STANDARD_HVYHAMMER = (ItemHammer) new ItemHammer(standard + "_hvyhammer", Item.ToolMaterial.IRON, true, 0, 0).setCustom(standard).setCreativeTab(tab);
+		STANDARD_HEAVY_HAMMER = (ItemHammer) new ItemHammer(standard + "_heavy_hammer", Item.ToolMaterial.IRON, true, 0, 0).setCustom(standard).setCreativeTab(tab);
 		STANDARD_TONGS = (ItemTongs) new ItemTongs(standard + "_tongs", Item.ToolMaterial.IRON, 0).setCustom(standard).setCreativeTab(tab);
 		STANDARD_SHEARS = (ItemShearsMFR) new ItemShearsMFR(standard + "_shears", Item.ToolMaterial.IRON, 0, 0).setCustom().setCreativeTab(tab);
 		STANDARD_KNIFE = (ItemKnife) new ItemKnife(standard + "_knife", Item.ToolMaterial.IRON, 0, 1F, 0).setCustom(standard).setCreativeTab(tab);
@@ -1520,15 +1520,15 @@ public class MineFantasyItems {
 		ORNATE_SPADE = (ItemSpade) new ItemSpade(ornate + "_spade", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_HOE = (ItemHoeMFR) new ItemHoeMFR(ornate + "_hoe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 
-		ORNATE_HVYPICK = (ItemHeavyPick) new ItemHeavyPick(ornate + "_hvypick", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HVYSHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(ornate + "_hvyshovel", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(ornate + "_heavy_pick", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(ornate + "_heavy_shovel", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_HANDPICK = (ItemHandpick) new ItemHandpick(ornate + "_handpick", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_TROW = (ItemTrow) new ItemTrow(ornate + "_trow", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_SCYTHE = (ItemScythe) new ItemScythe(ornate + "_scythe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_MATTOCK = (ItemMattock) new ItemMattock(ornate + "_mattock", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_LUMBER = (ItemLumberAxe) new ItemLumberAxe(ornate + "_lumber", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_HAMMER = (ItemHammer) new ItemHammer(ornate + "_hammer", ORNATE, false, 0, 0).setCustom(ornate).setCreativeTab(tab);
-		ORNATE_HVYHAMMER = (ItemHammer) new ItemHammer(ornate + "_hvyhammer", ORNATE, true, 0, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_HEAVY_HAMMER = (ItemHammer) new ItemHammer(ornate + "_heavy_hammer", ORNATE, true, 0, 0).setCustom(ornate).setCreativeTab(tab);
 
 		// Crafters
 		ORNATE_TONGS = (ItemTongs) new ItemTongs(ornate + "_tongs", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
@@ -1540,23 +1540,23 @@ public class MineFantasyItems {
 
 		// Armours
 		ORNATE_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SCALE_CHEST = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_chest", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SCALE_LEGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_legs", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SCALE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SCALE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		ORNATE_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
 		ORNATE_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_CHAIN_CHEST = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_chest", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_CHAIN_LEGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_legs", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_CHAIN_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_CHAIN_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		ORNATE_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
 		ORNATE_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SPLINT_CHEST = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_chest", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_SPLINT_LEGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_legs", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SPLINT_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_SPLINT_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		ORNATE_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
 		ORNATE_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_PLATE_CHEST = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_chest", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		ORNATE_PLATE_LEGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_legs", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		ORNATE_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		ORNATE_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(ornate, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 	}
 
@@ -1586,15 +1586,15 @@ public class MineFantasyItems {
 		DRAGONFORGED_SPADE = (ItemSpade) new ItemSpade(dragonforged + "_spade", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_HOE = (ItemHoeMFR) new ItemHoeMFR(dragonforged + "_hoe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 
-		DRAGONFORGED_HVYPICK = (ItemHeavyPick) new ItemHeavyPick(dragonforged + "_hvypick", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HVYSHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(dragonforged + "_hvyshovel", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HEAVY_PICK = (ItemHeavyPick) new ItemHeavyPick(dragonforged + "_heavy_pick", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HEAVY_SHOVEL = (ItemHeavyShovel) new ItemHeavyShovel(dragonforged + "_heavy_shovel", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_HANDPICK = (ItemHandpick) new ItemHandpick(dragonforged + "_handpick", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_TROW = (ItemTrow) new ItemTrow(dragonforged + "_trow", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_SCYTHE = (ItemScythe) new ItemScythe(dragonforged + "_scythe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_MATTOCK = (ItemMattock) new ItemMattock(dragonforged + "_mattock", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_LUMBER = (ItemLumberAxe) new ItemLumberAxe(dragonforged + "_lumber", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_HAMMER = (ItemHammer) new ItemHammer(dragonforged + "_hammer", DRAGONFORGED, false, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
-		DRAGONFORGED_HVYHAMMER = (ItemHammer) new ItemHammer(dragonforged + "_hvyhammer", DRAGONFORGED, true, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_HEAVY_HAMMER = (ItemHammer) new ItemHammer(dragonforged + "_heavy_hammer", DRAGONFORGED, true, 0, 0).setCustom(dragonforged).setCreativeTab(tab);
 
 		// Crafters
 		DRAGONFORGED_TONGS = (ItemTongs) new ItemTongs(dragonforged + "_tongs", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
@@ -1606,23 +1606,23 @@ public class MineFantasyItems {
 
 		// Armours
 		DRAGONFORGED_SCALE_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_helmet", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.HEAD, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SCALE_CHEST = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_chest", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SCALE_LEGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_legs", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SCALE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_chestplate", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.CHEST, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SCALE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_leggings", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.LEGS, "scale_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		DRAGONFORGED_SCALE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "scale_boots", ArmourDesign.SCALEMAIL, EntityEquipmentSlot.FEET, "scale_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
 		DRAGONFORGED_CHAIN_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_helmet", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.HEAD, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_CHAIN_CHEST = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_chest", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_CHAIN_LEGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_legs", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_CHAIN_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_chestplate", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.CHEST, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_CHAIN_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_leggings", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.LEGS, "chain_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		DRAGONFORGED_CHAIN_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "chain_boots", ArmourDesign.CHAINMAIL, EntityEquipmentSlot.FEET, "chain_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
 		DRAGONFORGED_SPLINT_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_helmet", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.HEAD, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SPLINT_CHEST = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_chest", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_SPLINT_LEGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_legs", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SPLINT_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_chestplate", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.CHEST, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_SPLINT_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_leggings", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.LEGS, "splint_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		DRAGONFORGED_SPLINT_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "splint_boots", ArmourDesign.SPLINTMAIL, EntityEquipmentSlot.FEET, "splint_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 
 		DRAGONFORGED_PLATE_HELMET = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_helmet", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.HEAD, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_PLATE_CHEST = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_chest", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-		DRAGONFORGED_PLATE_LEGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_legs", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
+		DRAGONFORGED_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		DRAGONFORGED_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 	}
 
@@ -1648,8 +1648,8 @@ public class MineFantasyItems {
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SPADE, ORNATE_SPADE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_HOE, ORNATE_HOE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SHEARS, ORNATE_SHEARS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HVYPICK, ORNATE_HVYPICK);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HVYSHOVEL, ORNATE_HVYSHOVEL);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_HEAVY_PICK, ORNATE_HEAVY_PICK);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_HEAVY_SHOVEL, ORNATE_HEAVY_SHOVEL);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_TROW, ORNATE_TROW);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_HANDPICK, ORNATE_HANDPICK);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_MATTOCK, ORNATE_MATTOCK);
@@ -1659,30 +1659,30 @@ public class MineFantasyItems {
 		SpecialForging.addSpecialCraft(ornate, STANDARD_LUMBER, ORNATE_LUMBER);
 
 		SpecialForging.addSpecialCraft(ornate, STANDARD_HAMMER, ORNATE_HAMMER);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HVYHAMMER, ORNATE_HVYHAMMER);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_HEAVY_HAMMER, ORNATE_HEAVY_HAMMER);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_TONGS, ORNATE_TONGS);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SAW, ORNATE_SAW);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_NEEDLE, ORNATE_NEEDLE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_KNIFE, ORNATE_KNIFE);
 
 		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_BOOTS, ORNATE_CHAIN_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_LEGS, ORNATE_CHAIN_LEGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_CHEST, ORNATE_CHAIN_CHEST);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_LEGGINGS, ORNATE_CHAIN_LEGGINGS);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_CHESTPLATE, ORNATE_CHAIN_CHESTPLATE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_HELMET, ORNATE_CHAIN_HELMET);
 
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_BOOTS, ORNATE_SCALE_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_LEGS, ORNATE_SCALE_LEGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_CHEST, ORNATE_SCALE_CHEST);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_LEGGINGS, ORNATE_SCALE_LEGGINGS);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_CHESTPLATE, ORNATE_SCALE_CHESTPLATE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_HELMET, ORNATE_SCALE_HELMET);
 
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_BOOTS, ORNATE_SPLINT_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_LEGS, ORNATE_SPLINT_LEGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_CHEST, ORNATE_SPLINT_CHEST);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_LEGGINGS, ORNATE_SPLINT_LEGGINGS);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_CHESTPLATE, ORNATE_SPLINT_CHESTPLATE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_HELMET, ORNATE_SPLINT_HELMET);
 
 		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_BOOTS, ORNATE_PLATE_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_LEGS, ORNATE_PLATE_LEGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_CHEST, ORNATE_PLATE_CHEST);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_LEGGINGS, ORNATE_PLATE_LEGGINGS);
+		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_CHESTPLATE, ORNATE_PLATE_CHESTPLATE);
 		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_HELMET, ORNATE_PLATE_HELMET);
 
 		SpecialForging.addDragonforgeCraft(STANDARD_DAGGER, DRAGONFORGED_DAGGER);
@@ -1703,8 +1703,8 @@ public class MineFantasyItems {
 		SpecialForging.addDragonforgeCraft(STANDARD_SPADE, DRAGONFORGED_SPADE);
 		SpecialForging.addDragonforgeCraft(STANDARD_HOE, DRAGONFORGED_HOE);
 		SpecialForging.addDragonforgeCraft(STANDARD_SHEARS, DRAGONFORGED_SHEARS);
-		SpecialForging.addDragonforgeCraft(STANDARD_HVYPICK, DRAGONFORGED_HVYPICK);
-		SpecialForging.addDragonforgeCraft(STANDARD_HVYSHOVEL, DRAGONFORGED_HVYSHOVEL);
+		SpecialForging.addDragonforgeCraft(STANDARD_HEAVY_PICK, DRAGONFORGED_HEAVY_PICK);
+		SpecialForging.addDragonforgeCraft(STANDARD_HEAVY_SHOVEL, DRAGONFORGED_HEAVY_SHOVEL);
 		SpecialForging.addDragonforgeCraft(STANDARD_TROW, DRAGONFORGED_TROW);
 		SpecialForging.addDragonforgeCraft(STANDARD_HANDPICK, DRAGONFORGED_HANDPICK);
 		SpecialForging.addDragonforgeCraft(STANDARD_MATTOCK, DRAGONFORGED_MATTOCK);
@@ -1714,30 +1714,30 @@ public class MineFantasyItems {
 		SpecialForging.addDragonforgeCraft(STANDARD_LUMBER, DRAGONFORGED_LUMBER);
 
 		SpecialForging.addDragonforgeCraft(STANDARD_HAMMER, DRAGONFORGED_HAMMER);
-		SpecialForging.addDragonforgeCraft(STANDARD_HVYHAMMER, DRAGONFORGED_HVYHAMMER);
+		SpecialForging.addDragonforgeCraft(STANDARD_HEAVY_HAMMER, DRAGONFORGED_HEAVY_HAMMER);
 		SpecialForging.addDragonforgeCraft(STANDARD_TONGS, DRAGONFORGED_TONGS);
 		SpecialForging.addDragonforgeCraft(STANDARD_SAW, DRAGONFORGED_SAW);
 		SpecialForging.addDragonforgeCraft(STANDARD_NEEDLE, DRAGONFORGED_NEEDLE);
 		SpecialForging.addDragonforgeCraft(STANDARD_KNIFE, DRAGONFORGED_KNIFE);
 
 		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_BOOTS, DRAGONFORGED_CHAIN_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_LEGS, DRAGONFORGED_CHAIN_LEGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_CHEST, DRAGONFORGED_CHAIN_CHEST);
+		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_LEGGINGS, DRAGONFORGED_CHAIN_LEGGINGS);
+		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_CHESTPLATE, DRAGONFORGED_CHAIN_CHESTPLATE);
 		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_HELMET, DRAGONFORGED_CHAIN_HELMET);
 
 		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_BOOTS, DRAGONFORGED_SCALE_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_LEGS, DRAGONFORGED_SCALE_LEGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_CHEST, DRAGONFORGED_SCALE_CHEST);
+		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_LEGGINGS, DRAGONFORGED_SCALE_LEGGINGS);
+		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_CHESTPLATE, DRAGONFORGED_SCALE_CHESTPLATE);
 		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_HELMET, DRAGONFORGED_SCALE_HELMET);
 
 		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_BOOTS, DRAGONFORGED_SPLINT_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_LEGS, DRAGONFORGED_SPLINT_LEGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_CHEST, DRAGONFORGED_SPLINT_CHEST);
+		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_LEGGINGS, DRAGONFORGED_SPLINT_LEGGINGS);
+		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_CHESTPLATE, DRAGONFORGED_SPLINT_CHESTPLATE);
 		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_HELMET, DRAGONFORGED_SPLINT_HELMET);
 
 		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_BOOTS, DRAGONFORGED_PLATE_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_LEGS, DRAGONFORGED_PLATE_LEGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_CHEST, DRAGONFORGED_PLATE_CHEST);
+		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_LEGGINGS, DRAGONFORGED_PLATE_LEGGINGS);
+		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_CHESTPLATE, DRAGONFORGED_PLATE_CHESTPLATE);
 		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_HELMET, DRAGONFORGED_PLATE_HELMET);
 	}
 

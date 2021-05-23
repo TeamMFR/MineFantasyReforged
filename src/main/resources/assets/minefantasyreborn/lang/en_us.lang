@@ -185,7 +185,7 @@ attribute.mfcrafttool.name=Crafting Tool
 attribute.mfcrafteff.name=Crafting Efficiency
 attribute.mfcraftedbyname.name=Crafted By
 tooltype.hammer=Hammer
-tooltype.hvyHammer=Heavy Hammer
+tooltype.heavy_hammer=Heavy Hammer
 tooltype.saw=Saw
 tooltype.knife=Knife
 tooltype.needle=Needle
@@ -538,7 +538,7 @@ tile.firebrick_stairs.name=Fire Brick Steps
 tile.cobblestone_road.name=Cobblestone Road
 tile.cobble_brick.name=Cobblestone Bricks
 tile.cobble_brick_stairs.name=Cobblestone Brick Steps
-tile.clayWall.name=Clay Wall Panel
+tile.clay_wall.name=Clay Wall Panel
 tile.log_ironbark.name=Ironbark Log
 tile.log_ebony.name=Ebony Log
 tile.log_yew.name=Yew Log
@@ -595,7 +595,7 @@ tile.steel_block.name=Block of Steel
 tile.dragon_forge_block.name=Block of Dragonforge
 tile.red_steel_block.name=Block of Red Steel
 tile.black_steel_block.name=Block of Black Steel
-tile.blue_steel_block.name=Block of  Blue Steel
+tile.blue_steel_block.name=Block of Blue Steel
 
 tile.adamantium_block.name=Block of Adamantium
 tile.mithril_block.name=Block of Mithril
@@ -694,33 +694,33 @@ item.training_spear.name=Training Spear
 
 # LEATHER STUFF
 item.hide_helmet.name=Hide Headress
-item.hide_chest.name=Hide Armor
-item.hide_legs.name=Hide Skirt
+item.hide_chestplate.name=Hide Armor
+item.hide_leggings.name=Hide Skirt
 item.hide_boots.name=Hide Boots
 
 item.rough_leather_helmet.name=Rough Leather Helmet
-item.rough_leather_chest.name=Rough Leather Armor
-item.rough_leather_legs.name=Rough Leather Leggings
+item.rough_leather_chestplate.name=Rough Leather Armor
+item.rough_leather_leggings.name=Rough Leather Leggings
 item.rough_leather_boots.name=Rough Leather Boots
 
 item.strong_leather_helmet.name=Reinforced Leather Helmet
-item.strong_leather_chest.name=Reinforced Leather Armor
-item.strong_leather_legs.name=Reinforced Leather Leggings
+item.strong_leather_chestplate.name=Reinforced Leather Armor
+item.strong_leather_leggings.name=Reinforced Leather Leggings
 item.strong_leather_boots.name=Reinforced Leather Boots
 
 item.stud_leather_helmet.name=Studded Helmet
-item.stud_leather_chest.name=Studded Armor
-item.stud_leather_legs.name=Studded Leggings
+item.stud_leather_chestplate.name=Studded Armor
+item.stud_leather_leggings.name=Studded Leggings
 item.stud_leather_boots.name=Studded Boots
 
 item.scale_leather_helmet.name=Scaled Helmet
-item.scale_leather_chest.name=Scaled Armor
-item.scale_leather_legs.name=Scaled Leggings
+item.scale_leather_chestplate.name=Scaled Armor
+item.scale_leather_leggings.name=Scaled Leggings
 item.scale_leather_boots.name=Scaled Boots
 
 item.padded_helmet.name=Padded Cap
-item.padded_chest.name=Gambeson
-item.padded_legs.name=Padded Leggings
+item.padded_chestplate.name=Gambeson
+item.padded_leggings.name=Padded Leggings
 item.padded_boots.name=Padded Boots
 
 item.leather_apron.name=Leather Blacksmith Attire
@@ -760,7 +760,7 @@ item.standard_shears.name=%1$s Shears
 item.standard_knife.name=%1$s Knife
 item.standard_needle.name=%1$s Needle
 item.standard_hammer.name=%1$s Hammer
-item.standard_hvyhammer.name=Heavy %1$s Hammer
+item.standard_heavy_hammer.name=Heavy %1$s Hammer
 item.standard_tongs.name=%1$s Tongs
 item.standard_saw.name=%1$s Saw
 item.standard_spanner.name=%1$s Spanner
@@ -780,31 +780,31 @@ item.standard_halbeard.name=%1$s Halbeard
 item.standard_lance.name=%1$s Lance
 
 item.standard_handpick.name=%1$s Handpick
-item.standard_hvypick.name=Heavy %1$s Pickaxe
+item.standard_heavy_pick.name=Heavy %1$s Pickaxe
 item.standard_trow.name=%1$s Spade
-item.standard_hvyshovel.name=Heavy %1$s Shovel
+item.standard_heavy_shovel.name=Heavy %1$s Shovel
 item.standard_scythe.name=%1$s Scythe
 item.standard_mattock.name=%1$s Mattock
 item.standard_lumber.name=%1$s Lumber Axe
 
 item.standard_scale_helmet.name=%1$s Scale Helmet
-item.standard_scale_chest.name=%1$s Scale Suit
-item.standard_scale_legs.name=%1$s Scale Leggings
+item.standard_scale_chestplate.name=%1$s Scale Suit
+item.standard_scale_leggings.name=%1$s Scale Leggings
 item.standard_scale_boots.name=%1$s Scale Boots
 
 item.standard_chain_helmet.name=%1$s Coif
-item.standard_chain_chest.name=%1$s Mail Suit
-item.standard_chain_legs.name=%1$s Mail Leggings
+item.standard_chain_chestplate.name=%1$s Mail Suit
+item.standard_chain_leggings.name=%1$s Mail Leggings
 item.standard_chain_boots.name=%1$s Mail Boots
 
 item.standard_splint_helmet.name=%1$s Splint Helmet
-item.standard_splint_chest.name=%1$s Splint Suit
-item.standard_splint_legs.name=%1$s Splint Leggings
+item.standard_splint_chestplate.name=%1$s Splint Suit
+item.standard_splint_leggings.name=%1$s Splint Leggings
 item.standard_splint_boots.name=%1$s Splint Boots
 
 item.standard_plate_helmet.name=%1$s Great Helm
-item.standard_plate_chest.name=%1$s Curiass
-item.standard_plate_legs.name=%1$s Greaves
+item.standard_plate_chestplate.name=%1$s Curiass
+item.standard_plate_leggings.name=%1$s Greaves
 item.standard_plate_boots.name=%1$s Sabatons
 
 item.standard_bow.name=%1$s Bow
@@ -826,7 +826,7 @@ item.dragonforged_shears.name=Dragonforged %1$s Shears
 item.dragonforged_knife.name=Dragonforged %1$s Knife
 item.dragonforged_needle.name=Dragonforged %1$s Needle
 item.dragonforged_hammer.name=Dragonforged %1$s Hammer
-item.dragonforged_hvyhammer.name=Heavy Dragonforged %1$s Hammer
+item.dragonforged_heavy_hammer.name=Heavy Dragonforged %1$s Hammer
 item.dragonforged_tongs.name=Dragonforged %1$s Tongs
 item.dragonforged_saw.name=Dragonforged %1$s Saw
 item.dragonforged_spanner.name=Dragonforged %1$s Spanner
@@ -846,31 +846,31 @@ item.dragonforged_halbeard.name=Dragonforged %1$s Halbeard
 item.dragonforged_lance.name=Dragonforged %1$s Lance
 
 item.dragonforged_handpick.name=Dragonforged %1$s Handpick
-item.dragonforged_hvypick.name=Heavy Dragonforged %1$s Pickaxe
+item.dragonforged_heavy_pick.name=Heavy Dragonforged %1$s Pickaxe
 item.dragonforged_trow.name=Dragonforged %1$s Spade
-item.dragonforged_hvyshovel.name=Heavy Dragonforged %1$s Shovel
+item.dragonforged_heavy_shovel.name=Heavy Dragonforged %1$s Shovel
 item.dragonforged_scythe.name=Dragonforged %1$s Scythe
 item.dragonforged_mattock.name=Dragonforged %1$s Mattock
 item.dragonforged_lumber.name=Dragonforged %1$s Lumber Axe
 
 item.dragonforged_scale_helmet.name=Dragonforged %1$s Scale Helmet
-item.dragonforged_scale_chest.name=Dragonforged %1$s Scale Suit
-item.dragonforged_scale_legs.name=Dragonforged %1$s Scale Leggings
+item.dragonforged_scale_chestplate.name=Dragonforged %1$s Scale Suit
+item.dragonforged_scale_leggings.name=Dragonforged %1$s Scale Leggings
 item.dragonforged_scale_boots.name=Dragonforged %1$s Scale Boots
 
 item.dragonforged_chain_helmet.name=Dragonforged %1$s Coif
-item.dragonforged_chain_chest.name=Dragonforged %1$s Mail Suit
-item.dragonforged_chain_legs.name=Dragonforged %1$s Mail Leggings
+item.dragonforged_chain_chestplate.name=Dragonforged %1$s Mail Suit
+item.dragonforged_chain_leggings.name=Dragonforged %1$s Mail Leggings
 item.dragonforged_chain_boots.name=Dragonforged %1$s Mail Boots
 
 item.dragonforged_splint_helmet.name=Dragonforged %1$s Splint Helmet
-item.dragonforged_splint_chest.name=Dragonforged %1$s Splint Suit
-item.dragonforged_splint_legs.name=Dragonforged %1$s Splint Leggings
+item.dragonforged_splint_chestplate.name=Dragonforged %1$s Splint Suit
+item.dragonforged_splint_leggings.name=Dragonforged %1$s Splint Leggings
 item.dragonforged_splint_boots.name=Dragonforged %1$s Splint Boots
 
 item.dragonforged_plate_helmet.name=Dragonforged %1$s Bascinet
-item.dragonforged_plate_chest.name=Dragonforged %1$s Curiass
-item.dragonforged_plate_legs.name=Dragonforged %1$s Greaves
+item.dragonforged_plate_chestplate.name=Dragonforged %1$s Curiass
+item.dragonforged_plate_leggings.name=Dragonforged %1$s Greaves
 item.dragonforged_plate_boots.name=Dragonforged %1$s Sabatons
 
 item.dragonforged_bow.name=Dragonforged %1$s Bow
@@ -885,7 +885,7 @@ item.ornate_shears.name=Ornate %1$s Shears
 item.ornate_knife.name=Ornate %1$s Knife
 item.ornate_needle.name=Ornate %1$s Needle
 item.ornate_hammer.name=Ornate %1$s Hammer
-item.ornate_hvyhammer.name=Heavy Ornate %1$s Hammer
+item.ornate_heavy_hammer.name=Heavy Ornate %1$s Hammer
 item.ornate_tongs.name=Ornate %1$s Tongs
 item.ornate_saw.name=Ornate %1$s Saw
 item.ornate_spanner.name=Ornate %1$s Spanner
@@ -905,31 +905,31 @@ item.ornate_halbeard.name=Ornate %1$s Halbeard
 item.ornate_lance.name=Ornate %1$s Lance
 
 item.ornate_handpick.name=Ornate %1$s Handpick
-item.ornate_hvypick.name=Heavy Ornate %1$s Pickaxe
+item.ornate_heavy_pick.name=Heavy Ornate %1$s Pickaxe
 item.ornate_trow.name=Ornate %1$s Spade
-item.ornate_hvyshovel.name=Heavy Ornate %1$s Shovel
+item.ornate_heavy_shovel.name=Heavy Ornate %1$s Shovel
 item.ornate_scythe.name=Ornate %1$s Scythe
 item.ornate_mattock.name=Ornate %1$s Mattock
 item.ornate_lumber.name=Ornate %1$s Lumber Axe
 
 item.ornate_scale_helmet.name=Ornate %1$s Scale Helmet
-item.ornate_scale_chest.name=Ornate %1$s Scale Suit
-item.ornate_scale_legs.name=Ornate %1$s Scale Leggings
+item.ornate_scale_chestplate.name=Ornate %1$s Scale Suit
+item.ornate_scale_leggings.name=Ornate %1$s Scale Leggings
 item.ornate_scale_boots.name=Ornate %1$s Scale Boots
 
 item.ornate_chain_helmet.name=Ornate %1$s Coif
-item.ornate_chain_chest.name=Ornate %1$s Mail Suit
-item.ornate_chain_legs.name=Ornate %1$s Mail Leggings
+item.ornate_chain_chestplate.name=Ornate %1$s Mail Suit
+item.ornate_chain_leggings.name=Ornate %1$s Mail Leggings
 item.ornate_chain_boots.name=Ornate %1$s Mail Boots
 
 item.ornate_splint_helmet.name=Ornate %1$s Splint Helmet
-item.ornate_splint_chest.name=Ornate %1$s Splint Suit
-item.ornate_splint_legs.name=Ornate %1$s Splint Leggings
+item.ornate_splint_chestplate.name=Ornate %1$s Splint Suit
+item.ornate_splint_leggings.name=Ornate %1$s Splint Leggings
 item.ornate_splint_boots.name=Ornate %1$s Splint Boots
 
 item.ornate_plate_helmet.name=Ornate %1$s Armet
-item.ornate_plate_chest.name=Ornate %1$s Curiass
-item.ornate_plate_legs.name=Ornate %1$s Greaves
+item.ornate_plate_chestplate.name=Ornate %1$s Curiass
+item.ornate_plate_leggings.name=Ornate %1$s Greaves
 item.ornate_plate_boots.name=Ornate %1$s Sabatons
 
 item.ornate_bow.name=Ornate %1$s Bow
@@ -1639,11 +1639,11 @@ knowledge.craftAdvTools.desc=Fit for purpose
 
 knowledge.craftAdvTools.1=Not only can you forge proper tools but there is also a selection of additional tools with their own uses. Most of these tools are alternatives to existing tools, only... different.^$hHandpick$r^Handpicks have a chance to drop random items (like ores and minerals) from mining some blocks like stone and netherrack^Also they drop additional items from ore like coal and diamond.
 
-knowledge.hvypick.info=$hHeavy Pick$r^Heavy picks mean business! Upon breaking blocks; heavy picks mine a 3x3x3 block around them, with lower drop rates. Perfect for digging large caverns or mineshafts.
+knowledge.heavy_pick.info=$hHeavy Pick$r^Heavy picks mean business! Upon breaking blocks; heavy picks mine a 3x3x3 block around them, with lower drop rates. Perfect for digging large caverns or mineshafts.
 
 knowledge.trow.info=$hTrow$r^This little cute spade works like a handpick. When digging dirt it can drop random items, grass can drop seeds.
 
-knowledge.hvyshovel.info=$hHeavy Shovel$r^Apart from looking like a door on a haft; Heavy shovels are rather useful tools for digging.^When digging, these shovels will break a disc shaped hole, ignoring hills. Great for levelling terrain out.
+knowledge.heavy_shovel.info=$hHeavy Shovel$r^Apart from looking like a door on a haft; Heavy shovels are rather useful tools for digging.^When digging, these shovels will break a disc shaped hole, ignoring hills. Great for levelling terrain out.
 
 knowledge.scythe.info=$hScythe$r^Scythes can break grass or leaves within a large area when right-clicked, their good for farming and clearing up. Also: If you wear a black hood with it: You can scare old people!
 
@@ -1692,7 +1692,7 @@ knowledge.craftCrafters=Crafting Tools
 knowledge.craftCrafters.desc=That's tools for crafting
 
 knowledge.craftCrafters.1=There's a variety of different tools for the purpose of crafting. A lot of recipes require you to interact with the block with these tools.^$hHammer$r^Hammers are used mostly in forging. hammers are highly useful for both metalworks and some woodworks.
-knowledge.hvyhammer.info=$hHeavy Hammer$r^There also are heavier counterparts of the hammer, used for forging some of the larger metal items.
+knowledge.heavy_hammer.info=$hHeavy Hammer$r^There also are heavier counterparts of the hammer, used for forging some of the larger metal items.
 
 knowledge.tongs.info=$hTongs$r^Tongs are used for picking up hot items from the anvil, to transfer to a water source. Unlike simply dropping hot items, tongs will place items above the block rather than randomly about.
 

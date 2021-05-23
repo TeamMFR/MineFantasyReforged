@@ -65,7 +65,7 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
 
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement) {
-		return hvySlashingDamage;
+		return heavySlashingDamage;
 	}
 
 	@Override

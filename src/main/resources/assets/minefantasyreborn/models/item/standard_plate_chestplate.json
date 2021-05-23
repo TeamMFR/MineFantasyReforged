@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreborn:items/standard_plate_chestplate",
+        "layer1": "minefantasyreborn:items/standard_plate_chestplate_detail"
+    }
+}

@@ -158,7 +158,7 @@ public class ItemBattleaxe extends ItemHeavyWeapon {
 
 	@Override
 	protected float[] getWeaponRatio(ItemStack implement) {
-		return hvyHackingDamage;
+		return heavyHackingDamage;
 	}
 
 	@Override

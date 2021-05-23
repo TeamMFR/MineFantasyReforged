@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/ornate_splint_legs",
-        "layer1": "minefantasyreborn:items/ornate_splint_legs_detail"
-    }
-}

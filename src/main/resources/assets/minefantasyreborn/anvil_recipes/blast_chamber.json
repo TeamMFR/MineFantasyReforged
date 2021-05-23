@@ -2,7 +2,7 @@
   "type": "ShapedAnvilRecipes",
   "skill": "artisanry",
   "research": "blastfurn",
-  "tool_type": "hvyHammer",
+  "tool_type": "heavy_hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,
   "recipe_time": 60,

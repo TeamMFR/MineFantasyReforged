@@ -91,10 +91,10 @@ public class ForgingRecipes {
 		MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyItems.PREPARED_IRON, 2), "blastfurn", false, material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "IFI", 'I', MineFantasyItems.ORE_IRON, 'F', MineFantasyItems.FLUX_STRONG);
 		ItemStack plate = ((ItemMetalComponent)MineFantasyItems.PLATE).createComponentItemStack("iron");
 		time = 10;
-		MineFantasyKnowledgeList.blastChamR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyBlocks.BLAST_CHAMBER), "blastfurn", false, "hvyHammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RP PR", "RP PR", "RP PR", "RP PR", 'R', MineFantasyItems.RIVET, 'P', plate);
+		MineFantasyKnowledgeList.blastChamR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyBlocks.BLAST_CHAMBER), "blastfurn", false, "heavy_hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RP PR", "RP PR", "RP PR", "RP PR", 'R', MineFantasyItems.RIVET, 'P', plate);
 
 		time = 15;
-		MineFantasyKnowledgeList.blastHeatR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyBlocks.BLAST_HEATER), "blastfurn", false, "hvyHammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RP PR", "RP PR", "RP PR", "RPFPR", 'R', MineFantasyItems.RIVET, 'P', plate, 'F', Blocks.FURNACE);
+		MineFantasyKnowledgeList.blastHeatR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ARTISANRY, new ItemStack(MineFantasyBlocks.BLAST_HEATER), "blastfurn", false, "heavy_hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RP PR", "RP PR", "RP PR", "RPFPR", 'R', MineFantasyItems.RIVET, 'P', plate, 'F', Blocks.FURNACE);
 
 		Salvage.addSalvage(MineFantasyBlocks.BLAST_HEATER, new ItemStack(MineFantasyItems.RIVET, 8), plate, plate, plate,
 				plate, plate, plate, plate, plate, Blocks.FURNACE);
@@ -240,7 +240,7 @@ public class ForgingRecipes {
 		time = 5;
 		MineFantasyKnowledgeList.iframeR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.IRON_FRAME), "ecomponents", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RRR", "ISI", "STS", "ISI", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'R', MineFantasyItems.RIVET, 'I', ironHunk, 'S', steelHunk);
 		time = 8;
-		MineFantasyKnowledgeList.istrutR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.IRON_STRUT), "ecomponents", true, "hvyhammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RTR", "SIS", "SIS", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'R', MineFantasyItems.RIVET, 'I', iron, 'S', steelHunk);
+		MineFantasyKnowledgeList.istrutR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.IRON_STRUT), "ecomponents", true, "heavy_hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "RTR", "SIS", "SIS", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'R', MineFantasyItems.RIVET, 'I', iron, 'S', steelHunk);
 		time = 8;
 		MineFantasyKnowledgeList.stubeR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.STEEL_TUBE), "ecomponents", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), "TR R", "SSSS", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'R', MineFantasyItems.RIVET, 'S', steelHunk);
 		time = 2;
@@ -254,7 +254,7 @@ public class ForgingRecipes {
 		MineFantasyKnowledgeList.tgearR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, new ItemStack(MineFantasyItems.TUNGSTEN_GEARS), "tungsten", true, "hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " T ", " W ", "WGW", " W ", 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'W', tungstenHunk, 'G', MineFantasyItems.BRONZE_GEARS);
 		time = 5;
 		material = MineFantasyMaterials.COMPOSITE_ALLOY;
-		MineFantasyKnowledgeList.compPlateR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, MineFantasyItems.bar("CompositeAlloy"), "cogArmour", true, "hvyhammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " T ", " S ", "RWR", " C ", 'R', MineFantasyItems.RIVET, 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'C', copper, 'W', tungstenHunk, 'S', steel);
+		MineFantasyKnowledgeList.compPlateR = MineFantasyRebornAPI.addAnvilRecipe(Skill.ENGINEERING, MineFantasyItems.bar("CompositeAlloy"), "cogArmour", true, "heavy_hammer", material.hammerTier, material.anvilTier, (int) (time * material.craftTimeModifier), " T ", " S ", "RWR", " C ", 'R', MineFantasyItems.RIVET, 'T', MineFantasyItems.ENGIN_ANVIL_TOOLS, 'C', copper, 'W', tungstenHunk, 'S', steel);
 		material = MineFantasyMaterials.IRON;
 
 		time = 5;

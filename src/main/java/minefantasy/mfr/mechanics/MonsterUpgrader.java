@@ -126,8 +126,8 @@ public class MonsterUpgrader {
 	private void setArmour(EntityLivingBase mob, int id, String tier) {
 		if (id == 1) {
 			ItemStack boots = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_BOOTS).construct(tier);
-			ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_LEGS).construct(tier);
-			ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_CHEST).construct(tier);
+			ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_LEGGINGS).construct(tier);
+			ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_CHESTPLATE).construct(tier);
 			ItemStack helmet = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_HELMET).construct(tier);
 
 			if (!boots.isEmpty())
@@ -142,8 +142,8 @@ public class MonsterUpgrader {
 		}
 
 		ItemStack boots = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_BOOTS).construct(tier);
-		ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_LEGS).construct(tier);
-		ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_CHEST).construct(tier);
+		ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_LEGGINGS).construct(tier);
+		ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_CHESTPLATE).construct(tier);
 		ItemStack helmet = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_HELMET).construct(tier);
 
 		if (!boots.isEmpty())

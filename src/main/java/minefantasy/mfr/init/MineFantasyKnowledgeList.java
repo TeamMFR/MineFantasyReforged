@@ -123,8 +123,8 @@ public class MineFantasyKnowledgeList {
 	public static IAnvilRecipe pickR, axeR, spadeR, hoeR, shearsR;
 	public static IAnvilRecipe daggerR, swordR, waraxeR, maceR, spearR, bowR, katanaR, gswordR, whammerR, battleaxeR,
 			halbeardR, lanceR;
-	public static IAnvilRecipe trowR, hvyPickR, hvyShovelR, handpickR, scytheR, mattockR, lumberR;
-	public static IAnvilRecipe hammerR, tongsR, hvyHammerR, needleR, sawsR, knifeR, spannerR;
+	public static IAnvilRecipe trowR, heavyPickR, heavyShovelR, handpickR, scytheR, mattockR, lumberR;
+	public static IAnvilRecipe hammerR, tongsR, heavyHammerR, needleR, sawsR, knifeR, spannerR;
 	public static IAnvilRecipe arrowheadR, bodkinheadR, broadheadR, crossBoltR;
 	public static ICarpenterRecipe fletchingR, fletchingR2, malletR, spoonR;
 	public static IAnvilRecipe ironPrepR, ironPrepR2, coalPrepR;
@@ -275,7 +275,7 @@ public class MineFantasyKnowledgeList {
 				.setPage(artisanry).setUnlocked();
 		craftTools = (new InformationBase("craftTools", -3, 2, 0, MineFantasyItems.STANDARD_PICK, bar)).registerStat()
 				.setPage(artisanry).setUnlocked();
-		craftAdvTools = (new InformationBase("craftAdvTools", -5, 2, 0, MineFantasyItems.STANDARD_HVYPICK, craftTools))
+		craftAdvTools = (new InformationBase("craftAdvTools", -5, 2, 0, MineFantasyItems.STANDARD_HEAVY_PICK, craftTools))
 				.registerStat().setPage(artisanry).setUnlocked();
 		craftWeapons = (new InformationBase("craftWeapons", -3, 1, 5, MineFantasyItems.STANDARD_SWORD, bar))
 				.registerStat().setPage(artisanry).setUnlocked();
@@ -289,9 +289,9 @@ public class MineFantasyKnowledgeList {
 		craftArmourLight = (new InformationBase("craftArmourLight", -3, 3, 1,
 				LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 1), anvil)).registerStat().setPage(artisanry)
 				.setUnlocked();
-		craftArmourMedium = (new InformationBase("craftArmourMedium", -4, 3, 1, MineFantasyItems.STANDARD_CHAIN_CHEST,
+		craftArmourMedium = (new InformationBase("craftArmourMedium", -4, 3, 1, MineFantasyItems.STANDARD_CHAIN_CHESTPLATE,
 				craftArmourLight)).registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 0);
-		craftArmourHeavy = (new InformationBase("craftArmourHeavy", -5, 3, 3, MineFantasyItems.STANDARD_PLATE_CHEST,
+		craftArmourHeavy = (new InformationBase("craftArmourHeavy", -5, 3, 3, MineFantasyItems.STANDARD_PLATE_CHESTPLATE,
 				craftArmourMedium)).registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 10);
 		arrowsBodkin = (new InformationBase("arrowsBodkin", -4, 5, 1, MineFantasyItems.STANDARD_ARROW_BODKIN, arrows))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 10);

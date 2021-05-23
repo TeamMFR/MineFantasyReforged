@@ -2,7 +2,7 @@
   "type": "CustomToolRecipe",
   "skill": "artisanry",
   "research": "tier",
-  "tool_type": "hvyhammer",
+  "tool_type": "heavy_hammer",
   "is_tool_recipe": false,
   "anvil_tier": -1,
   "recipe_time": 60,

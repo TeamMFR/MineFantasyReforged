@@ -94,10 +94,10 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	protected float[] slashingDamage = new float[] {1F, 0F, 0F};
 	protected float[] crushingDamage = new float[] {0F, 1F, 0F};
 	protected float[] hackingDamage = new float[] {4F, 1F, 0F};
-	protected float[] hvyHackingDamage = new float[] {3F, 1F, 0F};
+	protected float[] heavyHackingDamage = new float[] {3F, 1F, 0F};
 	protected float[] piercingDamage = new float[] {0F, 0F, 1F};
-	protected float[] hvyPiercingDamage = new float[] {0F, 1F, 9F};
-	protected float[] hvySlashingDamage = new float[] {9F, 1F, 0F};
+	protected float[] heavyPiercingDamage = new float[] {0F, 1F, 9F};
+	protected float[] heavySlashingDamage = new float[] {9F, 1F, 0F};
 	protected int defParryTime = 15;
 	protected int swordParryTime = 10;
 	protected int axeParryTime = 15;

@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreborn:items/ornate_chain_chestplate",
+        "layer1": "minefantasyreborn:items/ornate_chain_chestplate_detail"
+    }
+}

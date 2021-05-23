@@ -88,8 +88,8 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
 										&& ForgeHooks.canHarvestBlock(newBlock.getBlock(), (EntityPlayer) user, world, newBlockPos)
 										&& ForgeHooks.isToolEffective(world, newBlockPos, stack)) {
 
-									if (rand.nextFloat() * 100F < (100F - ConfigTools.hvyDropChance)) {
-										newBlock.getBlock().dropBlockAsItemWithChance(world, newBlockPos, newBlock, ConfigTools.hvyDropChance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
+									if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
+										newBlock.getBlock().dropBlockAsItemWithChance(world, newBlockPos, newBlock, ConfigTools.heavy_tool_drop_chance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
 									}
 									world.setBlockToAir(newBlockPos);
 									stack.damageItem(1, user);
