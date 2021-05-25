@@ -6,7 +6,9 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -15,8 +17,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 public class ItemCrossbowPart extends ItemBaseMFR implements ICrossbowPart {
-	private int tier;
-	private String type, partname;
+	private final int tier;
+	private final String type;
+	private final String partname;
 	private int capacity = 0, durability = 50;
 	private float power, spread, recoil, speed, bash, zoom;
 	private boolean isHandle = false;
@@ -41,7 +44,7 @@ public class ItemCrossbowPart extends ItemBaseMFR implements ICrossbowPart {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack item, World world, List list, ITooltipFlag fullInfo) {
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag fullInfo) {
 		list.add(TextFormatting.GOLD + I18n.format("crossbow.component.name"));
 		list.add(TextFormatting.ITALIC + I18n.format("crossbow.component." + type));
 		list.add(TextFormatting.DARK_GRAY + I18n.format(getUnlocalizedName() + ".desc"));
@@ -134,5 +137,15 @@ public class ItemCrossbowPart extends ItemBaseMFR implements ICrossbowPart {
 	@Override
 	public boolean makesSmallWeapon() {
 		return isHandle;
+	}
+
+	@Override
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+		if (this.isInCreativeTab(tab)) {
+			if (this == MineFantasyItems.CROSSBOW_STRING_LOADED || this == MineFantasyItems.CROSSBOW_STRING_UNLOADED){
+				return;
+			}
+			items.add(new ItemStack(this));
+		}
 	}
 }

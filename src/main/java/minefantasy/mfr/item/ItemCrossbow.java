@@ -45,15 +45,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemCrossbow extends ItemBaseMFR
-		implements IFirearm, IDisplayMFRAmmo, IDamageModifier, IRackItem, IDamageType, IScope, ISpecialSalvage {
+public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAmmo, IDamageModifier, IRackItem, IDamageType, IScope, ISpecialSalvage {
 	private static final String partNBT = "MineFantasy_GunPiece_";
 	public static String useTypeNBT = "MF_ActionInUse";
-	private String[] fullParts = new String[] {"mod", "muzzle", "mechanism", "stock"};
+	private final String[] fullParts = new String[]{"mod", "muzzle", "mechanism", "stock"};
 
 	public ItemCrossbow() {
 		super("crossbow_custom");
-
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
 		this.setFull3D();
 		this.setMaxDamage(150);
@@ -100,21 +98,21 @@ public class ItemCrossbow extends ItemBaseMFR
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
-		ItemStack item = player.getHeldItem(hand);
-		if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(item))// OPEN INV
+		ItemStack stack = player.getHeldItem(hand);
+		if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(stack))// OPEN INV
 		{
 			player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
-			return ActionResult.newResult(EnumActionResult.FAIL, item);
+			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		}
-		ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
+		ItemStack loaded = AmmoMechanics.getArrowOnBow(stack);
 		if (loaded.isEmpty() || player.isSwingInProgress)// RELOAD
 		{
-			startUse(player, item, "reload");
-			return ActionResult.newResult(EnumActionResult.FAIL, item);
-		} else {
-			startUse(player, item, "fire");// FIRE
-			return ActionResult.newResult(EnumActionResult.SUCCESS, item);
-		}
+			startUse(player, stack, "reload");
+			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+		}  // FIRE
+
+		startUse(player, stack, "fire");
+		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}
 
 	@Override
@@ -137,13 +135,15 @@ public class ItemCrossbow extends ItemBaseMFR
 				if (loaded.isEmpty()) {
 					ItemStack ammo = storage.copy();
 					ammo.setCount(1);
-					if (shouldConsume)
+					if (shouldConsume && user instanceof EntityPlayer){
 						AmmoMechanics.consumeAmmo((EntityPlayer) user, item);
+					}
 					AmmoMechanics.putAmmoOnFirearm(item, ammo);
 					success = true;
 				} else if (loaded.isItemEqual(storage) && loaded.getCount() < getAmmoCapacity(item)) {
-					if (shouldConsume)
+					if (shouldConsume && user instanceof EntityPlayer){
 						AmmoMechanics.consumeAmmo((EntityPlayer) user, item);
+					}
 					loaded.grow(1);
 					AmmoMechanics.putAmmoOnFirearm(item, loaded);
 					success = true;
@@ -161,8 +161,7 @@ public class ItemCrossbow extends ItemBaseMFR
 		ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
 		int max = getMaxItemUseDuration(item);
 
-		if (time == (max - 5) && getUseAction(item).equalsIgnoreCase("reload")
-				&& (loaded.isEmpty() || loaded.getCount() < getAmmoCapacity(item))) {
+		if (time == (max - 5) && getUseAction(item).equalsIgnoreCase("reload") && (loaded.isEmpty() || loaded.getCount() < getAmmoCapacity(item))) {
 			player.playSound(MineFantasySounds.CROSSBOW_LOAD, 1.0F, 1 / (getFullValue(item, "speed") / 4F));
 		}
 	}
@@ -172,14 +171,15 @@ public class ItemCrossbow extends ItemBaseMFR
 		ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
 		String action = getUseAction(item);
 
-		if (action.equalsIgnoreCase("fire") && this.onFireArrow(user.world, AmmoMechanics.getArrowOnBow(item),
-				item, (EntityPlayer) user, this.getFullValue(item, "power"), false)) {
-			if (!loaded.isEmpty()) {
-				loaded.grow(1);
-				AmmoMechanics.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : ItemStack.EMPTY));
+		if (user instanceof EntityPlayer){
+			if (action.equalsIgnoreCase("fire") && this.onFireArrow(user.world, AmmoMechanics.getArrowOnBow(item), item, (EntityPlayer) user, this.getFullValue(item, "power"), false)) {
+				if (!loaded.isEmpty()) {
+					loaded.shrink(1);
+					AmmoMechanics.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : ItemStack.EMPTY));
+				}
+				recoilUser((EntityPlayer) user, getFullValue(item, "recoil"));
+				AmmoMechanics.damageContainer(item, (EntityPlayer) user, 1);
 			}
-			recoilUser((EntityPlayer) user, getFullValue(item, "recoil"));
-			AmmoMechanics.damageContainer(item, (EntityPlayer) user, 1);
 		}
 		stopUse(item);
 	}
@@ -227,7 +227,6 @@ public class ItemCrossbow extends ItemBaseMFR
 		list.add(I18n.format("attribute.crossbow.bash.name", getMeleeDmg(item)));
 	}
 
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String base = getNameModifier(item, "stock");
 		String arms = getNameModifier(item, "mechanism");
@@ -274,7 +273,6 @@ public class ItemCrossbow extends ItemBaseMFR
 		}
 		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_HANDLE_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_BASIC));
 		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_LIGHT));
-
 		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_BASIC, (ICrossbowPart) MineFantasyItems.CROSSBOW_AMMO));
 		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_WOOD, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_HEAVY, (ICrossbowPart) MineFantasyItems.CROSSBOW_BAYONET));
 		items.add(constructCrossbow((ICrossbowPart) MineFantasyItems.CROSSBOW_STOCK_IRON, (ICrossbowPart) MineFantasyItems.CROSSBOW_ARMS_ADVANCED, (ICrossbowPart) MineFantasyItems.CROSSBOW_SCOPE));
@@ -336,11 +334,11 @@ public class ItemCrossbow extends ItemBaseMFR
 		if (implement.length > 0 && implement[0] instanceof ItemStack) {
 			if (this.getMeleeDmg((ItemStack) implement[0]) > 1.0F)// Bayonet is used
 			{
-				return new float[] {0F, 0F, 1F};
+				return new float[]{0F, 0F, 1F};
 			}
 		}
 
-		return new float[] {0F, 1F, 0F};
+		return new float[]{0F, 1F, 0F};
 	}
 
 	@Override
@@ -363,32 +361,30 @@ public class ItemCrossbow extends ItemBaseMFR
 			return false;
 		}
 		// TODO Arrow entity instance
-		EntityArrowMFR entArrow = ammo.getFiredArrow(new EntityArrowMFR(world, user, getFullValue(bow, "spread"), charge * 2.0F), arrow);
+		EntityArrowMFR entityArrowMFR = ammo.getFiredArrow(new EntityArrowMFR(world, user, getFullValue(bow, "spread"), charge * 2.0F), arrow);
 
 		int power_level = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
-		entArrow.setPower(1 + (0.25F * power_level));
+		entityArrowMFR.setPower(1 + (0.25F * power_level));
 
 		int punch_level = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
 
 		if (punch_level > 0) {
-			entArrow.setKnockbackStrength(punch_level);
+			entityArrowMFR.setKnockbackStrength(punch_level);
 		}
 
 		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bow) > 0) {
-			entArrow.setFire(100);
+			entityArrowMFR.setFire(100);
 		}
 
 		if (infinite) {
-			entArrow.canBePickedUp = 2;
+			entityArrowMFR.canBePickedUp = 2;
 		}
 
-		if (!bow.isEmpty()) {
-			if (bow.getItem() instanceof ISpecialBow) {
-				entArrow = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
-			}
+		if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
+			entityArrowMFR = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entityArrowMFR);
 		}
 		if (!world.isRemote) {
-			world.spawnEntity(entArrow);
+			world.spawnEntity(entityArrowMFR);
 		}
 		world.playSound(user, user.getPosition(), MineFantasySounds.CROSSBOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 
@@ -397,15 +393,12 @@ public class ItemCrossbow extends ItemBaseMFR
 
 	@Override
 	public float getZoom(ItemStack item) {
-		return getUseAction(item).equalsIgnoreCase("fire") ? getModifierForPart(item, "mod", "zoom") : 0F;// only mod
-		// affects
-		// zoom;
+		return getUseAction(item).equalsIgnoreCase("fire") ? getModifierForPart(item, "mod", "zoom") : 0F;
 	}
 
 	@Override
 	public Object[] getSalvage(ItemStack item) {
-		return new Object[] {getItem(item, "stock"), getItem(item, "mechanism"), getItem(item, "muzzle"),
-				getItem(item, "mod")};
+		return new Object[]{getItem(item, "stock"), getItem(item, "mechanism"), getItem(item, "muzzle"), getItem(item, "mod")};
 	}
 
 	public Object getItem(ItemStack item, String type) {
@@ -444,8 +437,9 @@ public class ItemCrossbow extends ItemBaseMFR
 
 	@Override
 	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
-		if (slot == 0 || slot == 3)
+		if (slot == 0 || slot == 3){
 			return false;
+		}
 
 		return isHandCrossbow(item) || rack.hasRackBelow(slot);
 	}

@@ -28,9 +28,9 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
 	public void renderItem(ItemStack stack, TransformType type) {
 		GlStateManager.pushMatrix();
 
-		if (type != TransformType.GUI) {
+		if (type != TransformType.GUI && type != TransformType.FIRST_PERSON_LEFT_HAND && type != TransformType.FIRST_PERSON_RIGHT_HAND) {
 			GlStateManager.scale(2F, 2F, 2F);
-			GlStateManager.translate(0.2F, 0.5F, 0.35F);
+			GlStateManager.translate(0.15F, 0.6F, 0.30F);
 			renderPart(stack, "stock", type);
 			renderPart(stack, "mechanism", type);
 			renderPart(stack, "muzzle", type);
@@ -41,7 +41,22 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
 				renderString("string_unloaded");
 			}
 			renderArrow(stack);
-		} else {
+		}
+		else if (type == TransformType.FIRST_PERSON_LEFT_HAND || type == TransformType.FIRST_PERSON_RIGHT_HAND){
+			GlStateManager.scale(2F, 2F, 2F);
+			GlStateManager.translate(0.1F, 0.4F, 0.25F);
+			renderPart(stack, "stock", type);
+			renderPart(stack, "mechanism", type);
+			renderPart(stack, "muzzle", type);
+			renderPart(stack, "mod", type);
+			if (AmmoMechanics.isFirearmLoaded(stack)) {
+				renderString("string_loaded");
+			} else {
+				renderString("string_unloaded");
+			}
+			renderArrow(stack);
+		}
+		else {
 			GlStateManager.scale(1.5F, 1.5F, 1.5F);
 			GlStateManager.translate(0.2F, 0.5F, 0.35F);
 			renderPart(stack, "stock", type);
@@ -110,7 +125,7 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
 
 	@Override
 	public IModelState getTransforms() {
-		return TransformUtils.DEFAULT_BOW;
+		return TransformUtils.DEFAULT_ITEM;
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import org.lwjgl.input.Mouse;
 
 @SideOnly(Side.CLIENT)
 public class HudHandler {
-	private MineFantasyHUD inGameGUI = new MineFantasyHUD();
+	private final MineFantasyHUD inGameGUI = new MineFantasyHUD();
 
 	@SubscribeEvent
 	public void postRenderOverlay(RenderGameOverlayEvent.Post event) {
@@ -26,11 +26,18 @@ public class HudHandler {
 		}
 	}
 
+	@SubscribeEvent()
+	public void onHudRender(RenderGameOverlayEvent event){
+		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR && MineFantasyHUD.isScoped){
+			event.setCanceled(true);
+		}
+	}
+
 	@SubscribeEvent
 	public void onBowFOV(FOVUpdateEvent event) {
 		ItemStack stack = event.getEntity().getActiveItemStack();
 		if (!stack.isEmpty() && stack.getItem() instanceof ItemBowMFR) {
-			int i = event.getEntity().getActiveItemStack().getAnimationsToGo();
+			int i = event.getEntity().getItemInUseMaxCount();
 			float f1 = i / 20.0F;
 			if (f1 > 1.0F) {
 				f1 = 1.0F;

@@ -37,7 +37,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
@@ -49,8 +48,8 @@ import java.awt.*;
 
 @SideOnly(Side.CLIENT)
 public class MineFantasyHUD extends Gui {
-	protected static final ResourceLocation pumpkinBlurTexPath = new ResourceLocation("textures/misc/pumpkinblur.png");
-	private static Minecraft mc = Minecraft.getMinecraft();
+	private static final Minecraft mc = Minecraft.getMinecraft();
+	public static boolean isScoped = false;
 
 	/**
 	 * Gets the 2 config values to get the X,Y orient
@@ -151,8 +150,11 @@ public class MineFantasyHUD extends Gui {
 				int xPos = width / 2 - 128;
 				int yPos = height / 2 - 128;
 				this.drawTexturedModalRect(xPos, yPos, 0, 0, 256, 256);
-
+				isScoped = true;
 				GL11.glPopMatrix();
+			}
+			else {
+				isScoped = false;
 			}
 		}
 	}

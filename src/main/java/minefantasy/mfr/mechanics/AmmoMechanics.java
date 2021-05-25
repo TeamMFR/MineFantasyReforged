@@ -150,7 +150,7 @@ public class AmmoMechanics {
 	}
 
 	public static boolean isDepleted(ItemStack firearm) {
-		return getGunAmmoCount(firearm) == 0 && getAmmo(firearm) == ItemStack.EMPTY && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, firearm) == 0;
+		return getGunAmmoCount(firearm) == 0 && getAmmo(firearm).isEmpty() && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, firearm) == 0;
 	}
 
 	public static boolean isFirearmLoaded(ItemStack firearm) {
@@ -168,7 +168,7 @@ public class AmmoMechanics {
 	}
 
 	public static int getGunAmmoCount(ItemStack item) {
-		if (getArrowOnBow(item) == ItemStack.EMPTY) {
+		if (getArrowOnBow(item).isEmpty()) {
 			return 0;
 		}
 		NBTTagCompound nbt = getNBT(item);

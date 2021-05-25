@@ -244,20 +244,6 @@ public class PlayerTickHandler {
 				}
 			}
 
-			// TODO: move this to minefantasy.mfr.item.gadget.ItemCrossbow
-			if (!event.player.getHeldItemMainhand().isEmpty()) {
-				ItemStack stack = event.player.getHeldItemMainhand();
-				if (stack.getItem() instanceof ItemCrossbow) {
-					if (stack.hasTagCompound()) {
-						NBTTagCompound compound = stack.getTagCompound();
-						if (compound.hasKey(ItemCrossbow.useTypeNBT) && compound.getString(ItemCrossbow.useTypeNBT).equalsIgnoreCase("fire")) {
-							compound.setString(ItemCrossbow.useTypeNBT, "null");
-						}
-					}
-				}
-
-			}
-
 			ArmourCalculator.updateWeights(event.player);
 			float weight = ArmourCalculator.getTotalWeightOfWorn(event.player, false);
 			if (weight > 100F) {

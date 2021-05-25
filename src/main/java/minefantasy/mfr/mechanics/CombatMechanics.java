@@ -1,5 +1,6 @@
 package minefantasy.mfr.mechanics;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IKnockbackWeapon;
@@ -690,7 +691,7 @@ public class CombatMechanics {
 						type = "Blunt";
 				}
 
-				MFRLogUtil.logDebug(dam + "x " + type + " Damage inflicted to: " + user.getName() + " (" + user.getEntityId() + ")");
+				MineFantasyReborn.LOG.debug(dam + "x " + type + " Damage inflicted to: " + user.getName() + " (" + user.getEntityId() + ")");
 			}
 		}
 		return dam;
