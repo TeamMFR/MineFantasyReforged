@@ -2,11 +2,13 @@
     "pools": [
         {
             "name": "main",
+            "type": "chest",
             "rolls": 1,
             "entries": [
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:repair_kit_basic",
+                    "name": "minefantasyreborn:standard_bolt",
+                    "entryName": "iron_quarrel",
                     "functions": [
                         {
                             "function": "set_count",
@@ -14,9 +16,68 @@
                                 "min": 1,
                                 "max": 1
                             }
+                        },
+                        {
+                            "function": "set_nbt",
+                            "tag": "{mf_custom_materials:{main_metal:\"iron\"}}"
                         }
                     ],
                     "weight": 100
+                },
+                {
+                    "type": "item",
+                    "name": "minefantasyreborn:standard_bolt",
+                    "entryName": "encrusted_quarrel",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        },
+                        {
+                            "function": "set_nbt",
+                            "tag": "{mf_custom_materials:{main_metal:\"encrusted\"}}"
+                        }
+                    ],
+                    "weight": 20
+                },
+                {
+                    "type": "item",
+                    "name": "minefantasyreborn:bomb_custom",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        },
+                        {
+                            "function": "set_nbt",
+                            "tag": "{filling_type:\"shrapnel\",powder_type:\"black_powder\",casing_type:\"iron\",fuse_type:\"basic\"}"
+                        }
+                    ],
+                    "weight": 25
+                },
+                {
+                    "type": "item",
+                    "name": "minefantasyreborn:mine_custom",
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 1,
+                                "max": 1
+                            }
+                        },
+                        {
+                            "function": "set_nbt",
+                            "tag": "{filling_type:\"shrapnel\", powder_type:\"black_powder\",casing_type:\"iron\",fuse_type:\"basic\"}"
+                        }
+                    ],
+                    "weight": 25
                 }
             ]
         }

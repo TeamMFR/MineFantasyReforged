@@ -1795,9 +1795,9 @@ public class MineFantasyItems {
 		SYRINGE = new ItemSyringe("syringe");
 		SYRINGE_EMPTY = new ItemBaseMFR("syringe_empty").setCreativeTab(MineFantasyTabs.tabGadget);
 
-		LOOT_SACK = new ItemLootSack("loot_sack", 8, 0);
-		LOOT_SACK_UC = new ItemLootSack("loot_sack_uc", 8, 1);
-		LOOT_SACK_RARE = new ItemLootSack("loot_sack_rare", 12, 2);
+		LOOT_SACK = new ItemLootSack("loot_sack", 0);
+		LOOT_SACK_UC = new ItemLootSack("loot_sack_uc", 1);
+		LOOT_SACK_RARE = new ItemLootSack("loot_sack_rare", 2);
 
 		CROSSBOW_CUSTOM = new ItemCrossbow();
 		EXPLODING_BOLT = new ItemExplodingBolt();

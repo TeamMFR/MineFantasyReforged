@@ -118,6 +118,8 @@ public class MineFantasyReborn {
 		MetalMaterialRegistry.INSTANCE.preInit();
 		MineFantasyMaterials.initLeatherMaterials();
 
+		MineFantasyLoot.load();
+
 		MineFantasyItems.initComponent();
 		MineFantasyItems.initTool();
 		MineFantasyItems.initCustomTool();
@@ -128,8 +130,6 @@ public class MineFantasyReborn {
 		MineFantasyItems.initOrnate();
 
 		MineFantasyBlocks.init();
-
-		MineFantasyLoot.load();
 		MineFantasyBlocks.load();
 		MineFantasyItems.loadComponent();
 		MineFantasyItems.loadTool();

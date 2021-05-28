@@ -2,7 +2,10 @@
     "pools": [
         {
             "name": "main",
-            "rolls": 1,
+            "rolls": {
+                "min": 1,
+                "max": 12
+            },
             "entries": [
                 {
                     "type": "item",
@@ -11,7 +14,7 @@
                         {
                             "function": "set_count",
                             "count": {
-                                "min": 1,
+                                "min": 2,
                                 "max": 5
                             }
                         }
@@ -39,7 +42,7 @@
                         {
                             "function": "set_count",
                             "count": {
-                                "min": 1,
+                                "min": 2,
                                 "max": 5
                             }
                         }
@@ -53,7 +56,7 @@
                         {
                             "function": "set_count",
                             "count": {
-                                "min": 1,
+                                "min": 2,
                                 "max": 5
                             }
                         }
@@ -67,7 +70,7 @@
                         {
                             "function": "set_count",
                             "count": {
-                                "min": 1,
+                                "min": 2,
                                 "max": 5
                             }
                         }
@@ -132,7 +135,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minecraft:ender_pearl",
+                    "name": "minecraft:ender_eye",
                     "functions": [
                         {
                             "function": "set_count",
@@ -157,24 +160,10 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{type:\"Silver\"}"
+                            "tag": "{mf_custom_materials:{main_metal:\"silver\"}}"
                         }
                     ],
                     "weight": 20
-                },
-                {
-                    "type": "item",
-                    "name": "minefantasyreborn:talisman_lesser",
-                    "functions": [
-                        {
-                            "function": "set_count",
-                            "count": {
-                                "min": 1,
-                                "max": 4
-                            }
-                        }
-                    ],
-                    "weight": 10
                 },
                 {
                     "type": "item",
@@ -193,6 +182,66 @@
                         }
                     ],
                     "weight": 10
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_11",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_13",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_blocks",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_cat",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_chirp",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_far",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_mall",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_mellohi",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_stal",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_strad",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_wait",
+                    "weight": 5
+                },
+                {
+                    "type": "item",
+                    "name": "minecraft:record_ward",
+                    "weight": 5
                 }
             ]
         }

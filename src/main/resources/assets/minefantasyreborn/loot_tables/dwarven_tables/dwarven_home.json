@@ -2,7 +2,10 @@
     "pools": [
         {
             "name": "main",
-            "rolls": 1,
+            "rolls": {
+                "min": 2,
+                "max": 3
+            },
             "entries": [
                 {
                     "type": "item",
@@ -130,7 +133,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{type:\"Iron\"}"
+                            "tag": "{mf_custom_materials:{main_metal:\"iron\"}}"
                         }
                     ],
                     "weight": 30
@@ -149,7 +152,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{type:\"Gold\"}"
+                            "tag": "{mf_custom_materials:{main_metal:\"gold\"}}"
                         }
                     ],
                     "weight": 20
@@ -168,7 +171,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{type:\"Silver\"}"
+                            "tag": "{mf_custom_materials:{main_metal:\"oak_wood\"}}"
                         }
                     ],
                     "weight": 20

@@ -22,10 +22,9 @@ public class ItemLootSack extends ItemBaseMFR {
 	protected int amount, tier;
 	protected ResourceLocation pool;
 
-	public ItemLootSack(String name, int amount, int tier) {
+	public ItemLootSack(String name, int tier) {
 		super(name);
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
-		this.amount = amount;
 		this.tier = tier;
 		pool = tier == 0 ? MineFantasyLoot.LOOT_SACK_COMMON : tier == 1 ? MineFantasyLoot.LOOT_SACK_VALUABLE : MineFantasyLoot.LOOT_SACK_EXQUISITE;
 	}

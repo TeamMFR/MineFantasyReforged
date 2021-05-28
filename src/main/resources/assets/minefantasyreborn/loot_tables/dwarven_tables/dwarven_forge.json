@@ -2,7 +2,10 @@
     "pools": [
         {
             "name": "main",
-            "rolls": 1,
+            "rolls": {
+                "min": 5,
+                "max": 5
+            },
             "entries": [
                 {
                     "type": "item",
@@ -46,7 +49,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{type:\"Iron\"}"
+                            "tag": "{mf_custom_materials:{main_metal:\"iron\"}}"
                         }
                     ],
                     "weight": 50
@@ -79,7 +82,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{type:\"Steel\"}"
+                            "tag": "{mf_custom_materials:{main_metal:\"steel\"}}"
                         }
                     ],
                     "weight": 40

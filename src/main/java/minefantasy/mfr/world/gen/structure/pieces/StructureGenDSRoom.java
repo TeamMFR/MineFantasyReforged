@@ -1,6 +1,7 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
 import minefantasy.mfr.block.BlockAmmoBox;
+import minefantasy.mfr.block.BlockAnvilMF;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -300,8 +301,8 @@ public class StructureGenDSRoom extends StructureModuleMFR {
             int ystart = 1;
             if (z == (int) Math.ceil((float) depth / 2) + 1 || z == (int) Math.floor((float) depth / 2) - 1) {
                 ystart = 3;
-                placeChest(world, -(width - 1), 1, z, random, facing.rotateYCCW(), MineFantasyLoot.DWARVEN_STUDY);
-                placeChest(world, width - 1, 1, z, random, facing.rotateY(), MineFantasyLoot.DWARVEN_STUDY);
+                placeChest(world, -(width - 1), 1, z, random, facing.rotateY(), MineFantasyLoot.DWARVEN_STUDY);
+                placeChest(world, width - 1, 1, z, random, facing.rotateYCCW(), MineFantasyLoot.DWARVEN_STUDY);
             }
             for (int y = ystart; y < height; y++) {
                 if (world.getBlockState(offsetPos(-(width - 1), y, z, facing)).getMaterial().isReplaceable()) {
@@ -427,7 +428,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, ((width - 1) * position), 3, z - 2);
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, ((width - 1) * position), 3, z + 1);
 
-        placeBlock(world, MineFantasyBlocks.ANVIL_IRON, position * 2, 1, z);
+        placeBlockWithState(world, MineFantasyBlocks.ANVIL_IRON.getDefaultState().withProperty(BlockAnvilMF.FACING, facing.rotateY()), position * 2, 1, z);
         placeBlockWithState(world, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3),  position * 2, 1, z - 1);
 
         placeMiscMachine1(-(width - 2) * position, 0, depth - 3);
@@ -462,7 +463,7 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 
     private void placeChest(World world, int x, int y, int z, Random random, EnumFacing facing, ResourceLocation loot) {
         placeBlockWithState(world, Blocks.CHEST.getDefaultState().withProperty(BlockChest.FACING, facing), x, y, z);
-        TileEntityChest chest = (TileEntityChest) world.getTileEntity(offsetPos(x, y, z, facing));
+        TileEntityChest chest = (TileEntityChest) world.getTileEntity(offsetPos(x, y, z, this.facing));
 
         if (chest != null) {
             chest.setLootTable(loot, random.nextLong());
@@ -471,12 +472,12 @@ public class StructureGenDSRoom extends StructureModuleMFR {
 
     private void placeAmmoBox(World world, int x, int y, int z, EnumFacing facing, ResourceLocation loot) {
         placeBlockWithState(world, MineFantasyBlocks.AMMO_BOX_BASIC.getDefaultState().withProperty(BlockAmmoBox.FACING, facing), x, y, z);
-        TileEntityAmmoBox ammoBox = (TileEntityAmmoBox) world.getTileEntity(offsetPos(x, y, z, facing));
+        TileEntityAmmoBox ammoBox = (TileEntityAmmoBox) world.getTileEntity(offsetPos(x, y, z, this.facing));
 
         if (ammoBox != null) {
             LootContext.Builder lootContext = new LootContext.Builder((WorldServer)this.world);
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(loot).generateLootForPools(this.random, lootContext.build());
-            ItemStack ammo = result.get(random.nextInt());
+            ItemStack ammo = result.get(random.nextInt(result.size()));
             ammoBox.setMaterial(WoodMaterial.getMaterial(MineFantasyMaterials.Names.REFINED_WOOD));
             ammoBox.inventoryStack = ammo;
             ammoBox.stock = ammo.getMaxStackSize() * (random.nextInt(2) + 1)

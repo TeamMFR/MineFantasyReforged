@@ -43,10 +43,10 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
 
         //Place Stairs
         for (int p = -1; p <= 1; p++) {
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -radius, 0, p, facing, EnumFacing.WEST); //West
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, radius, 0, p, facing, EnumFacing.EAST); //East
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, -radius, facing, EnumFacing.NORTH); //North
-            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, radius, facing, EnumFacing.SOUTH); //South
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -radius, 0, p, facing, facing.rotateY()); //North
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, radius, 0, p, facing, facing.rotateYCCW()); //South
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, -radius, facing, facing.rotateY().rotateY()); //West
+            placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, p, 0, radius, facing, facing); //East
         }
 
 
@@ -100,7 +100,7 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
 
     private void placeChest(World world, int x, int y, int z, Random random, EnumFacing facing, ResourceLocation loot) {
         world.setBlockState(offsetPos(x, y, z, facing), Blocks.CHEST.getDefaultState(), 2);
-        TileEntityChest chest = (TileEntityChest) world.getTileEntity(pos.offset(facing));
+        TileEntityChest chest = (TileEntityChest) world.getTileEntity(offsetPos(x, y, z, facing));
 
         if (chest != null) {
             chest.setLootTable(loot, random.nextLong());
