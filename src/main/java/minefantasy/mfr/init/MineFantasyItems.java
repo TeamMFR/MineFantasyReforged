@@ -167,9 +167,9 @@ public class MineFantasyItems {
 	public static Item BOMB_FUSE = Utils.nullValue();
 	public static Item BOMB_FUSE_LONG = Utils.nullValue();
 	public static Item BOMB_CASING_UNCOOKED = Utils.nullValue();
-	public static Item BOMB_CASING = Utils.nullValue();
+	public static Item BOMB_CASING_CERAMIC = Utils.nullValue();
 	public static Item MINE_CASING_UNCOOKED = Utils.nullValue();
-	public static Item MINE_CASING = Utils.nullValue();
+	public static Item MINE_CASING_CERAMIC = Utils.nullValue();
 	public static Item BOMB_CASING_IRON = Utils.nullValue();
 	public static Item MINE_CASING_IRON = Utils.nullValue();
 	public static Item BOMB_CASING_OBSIDIAN = Utils.nullValue();
@@ -766,9 +766,9 @@ public class MineFantasyItems {
 		registry.register(BOMB_FUSE);
 		registry.register(BOMB_FUSE_LONG);
 		registry.register(BOMB_CASING_UNCOOKED);
-		registry.register(BOMB_CASING);
+		registry.register(BOMB_CASING_CERAMIC);
 		registry.register(MINE_CASING_UNCOOKED);
-		registry.register(MINE_CASING);
+		registry.register(MINE_CASING_CERAMIC);
 		registry.register(BOMB_CASING_IRON);
 		registry.register(MINE_CASING_IRON);
 		registry.register(BOMB_CASING_OBSIDIAN);
@@ -1227,24 +1227,30 @@ public class MineFantasyItems {
 		PREPARED_IRON = new ItemBaseMFR("prepared_iron").setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		FLETCHING = new ItemBaseMFR("fletching").setCreativeTab(MineFantasyTabs.tabMaterials);
-		BLACKPOWDER = new ItemBombComponent("blackpowder", Rarity.COMMON, "powder", 0).setContainerItem(CLAY_POT);
+
 		BOMB_CASING_UNCOOKED = new ItemBaseMFR("bomb_casing_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
 		MINE_CASING_UNCOOKED = new ItemBaseMFR("mine_casing_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
-		BLACKPOWDER_ADVANCED = new ItemBombComponent("blackpowder_advanced", Rarity.UNCOMMON, "powder", 1).setContainerItem(CLAY_POT);
-		SHRAPNEL = new ItemBombComponent("shrapnel", Rarity.COMMON, "filling", 1).setContainerItem(CLAY_POT);
-		MAGMA_CREAM_REFINED = new ItemBombComponent("magma_cream_refined", Rarity.UNCOMMON, "filling", 2).setContainerItem(CLAY_POT);
-		BOMB_FUSE = new ItemBombComponent("bomb_fuse", Rarity.COMMON, "fuse", 0);
-		BOMB_FUSE_LONG = new ItemBombComponent("bomb_fuse_long", Rarity.COMMON, "fuse", 1);
-		BOMB_CASING = new ItemBombComponent("bomb_casing", Rarity.COMMON, "bombcase", 0);
-		MINE_CASING = new ItemBombComponent("mine_casing", Rarity.COMMON, "minecase", 0);
-		BOMB_CASING_IRON = new ItemBombComponent("bomb_casing_iron", Rarity.COMMON, "bombcase", 1);
-		MINE_CASING_IRON = new ItemBombComponent("mine_casing_iron", Rarity.COMMON, "bombcase", 1);
-		BOMB_CASING_OBSIDIAN = new ItemBombComponent("bomb_casing_obsidian", Rarity.UNCOMMON, "bombcase", 2);
-		MINE_CASING_OBSIDIAN = new ItemBombComponent("mine_casing_obsidian", Rarity.UNCOMMON, "minecase", 2);
-		BOMB_CASING_CRYSTAL = new ItemBombComponent("bomb_casing_crystal", Rarity.UNCOMMON, "bombcase", 3);
-		MINE_CASING_CRYSTAL = new ItemBombComponent("mine_casing_crystal", Rarity.UNCOMMON, "minecase", 3);
-		BOMB_CASING_ARROW = new ItemBombComponent("bomb_casing_arrow", Rarity.UNCOMMON, "arrow", 0);
-		BOMB_CASING_BOLT = new ItemBombComponent("bomb_casing_bolt", Rarity.UNCOMMON, "bolt", 0);
+
+		BLACKPOWDER = new ItemBombComponent("blackpowder", Rarity.COMMON, "powder", "black_powder", 0).setContainerItem(CLAY_POT);
+		BLACKPOWDER_ADVANCED = new ItemBombComponent("blackpowder_advanced", Rarity.UNCOMMON, "powder", "advanced_black_powder", 1).setContainerItem(CLAY_POT);
+
+		SHRAPNEL = new ItemBombComponent("shrapnel", Rarity.COMMON, "filling", "shrapnel", 1).setContainerItem(CLAY_POT);
+		MAGMA_CREAM_REFINED = new ItemBombComponent("magma_cream_refined", Rarity.UNCOMMON, "filling", "fire", 2).setContainerItem(CLAY_POT);
+
+		BOMB_FUSE = new ItemBombComponent("bomb_fuse", Rarity.COMMON, "fuse", "basic",0);
+		BOMB_FUSE_LONG = new ItemBombComponent("bomb_fuse_long", Rarity.COMMON, "fuse", "long",1);
+
+		BOMB_CASING_CERAMIC = new ItemBombComponent("bomb_casing_ceramic", Rarity.COMMON, "bombcase", "ceramic",0);
+		MINE_CASING_CERAMIC = new ItemBombComponent("mine_casing_ceramic", Rarity.COMMON, "minecase", "ceramic",0);
+		BOMB_CASING_IRON = new ItemBombComponent("bomb_casing_iron", Rarity.COMMON, "bombcase", "iron", 1);
+		MINE_CASING_IRON = new ItemBombComponent("mine_casing_iron", Rarity.COMMON, "bombcase", "iron", 1);
+		BOMB_CASING_OBSIDIAN = new ItemBombComponent("bomb_casing_obsidian", Rarity.UNCOMMON, "bombcase", "obsidian",2);
+		MINE_CASING_OBSIDIAN = new ItemBombComponent("mine_casing_obsidian", Rarity.UNCOMMON, "minecase", "obsidian", 2);
+		BOMB_CASING_CRYSTAL = new ItemBombComponent("bomb_casing_crystal", Rarity.UNCOMMON, "bombcase", "crystal", 3);
+		MINE_CASING_CRYSTAL = new ItemBombComponent("mine_casing_crystal", Rarity.UNCOMMON, "minecase", "crystal", 3);
+
+		BOMB_CASING_ARROW = new ItemBombComponent("bomb_casing_arrow", Rarity.UNCOMMON, "arrow", "arrow", 0);
+		BOMB_CASING_BOLT = new ItemBombComponent("bomb_casing_bolt", Rarity.UNCOMMON, "bolt", "ceramic", 0);
 
 		COKE = new ItemBaseMFR("coke", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
 		DIAMOND_SHARDS = new ItemBaseMFR("diamond_shards").setCreativeTab(MineFantasyTabs.tabMaterials);

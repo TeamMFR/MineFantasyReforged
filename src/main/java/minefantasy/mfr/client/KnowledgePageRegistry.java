@@ -587,7 +587,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.bombCeramic.addPages(
 				new EntryPageText("knowledge.bombCeramic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_casing_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING));
+				new EntryPageSmelting(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING_CERAMIC));
 
 		MineFantasyKnowledgeList.bombIron.addPages(
 				new EntryPageText("knowledge.bombIron.1"),
@@ -604,7 +604,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.mineCeramic.addPages(
 				new EntryPageText("knowledge.mineCeramic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("mine_casing_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING));
+				new EntryPageSmelting(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING_CERAMIC));
 
 		MineFantasyKnowledgeList.mineIron.addPages(
 				new EntryPageText("knowledge.mineIron.1"),

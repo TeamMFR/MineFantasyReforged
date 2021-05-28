@@ -10,9 +10,9 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemBomb;
+import minefantasy.mfr.item.ItemBombComponent;
 import minefantasy.mfr.item.ItemExplodingArrow;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-import minefantasy.mfr.network.BombBenchPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
@@ -37,7 +37,6 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 	public float progress;
 	public float maxProgress = 25F;
 	public boolean hasRecipe;
-	private int ticksExisted;
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -67,26 +66,24 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 	}
 
 	public static String getComponentType(ItemStack item) {
-		if (!item.isEmpty() && item.getItem() != null && item.getItem() instanceof IBombComponent) {
+		if (!item.isEmpty() && item.getItem() instanceof IBombComponent) {
 			return ((IBombComponent) item.getItem()).getComponentType();
 		}
 		return null;
 	}
 
+	public static String getComponentName(ItemStack item) {
+		if (!item.isEmpty() && item.getItem() instanceof ItemBombComponent) {
+			return ((ItemBombComponent) item.getItem()).getComponentName();
+		}
+		return null;
+	}
+
 	public static byte getComponentTier(ItemStack item) {
-		if (!item.isEmpty() && item.getItem() != null && item.getItem() instanceof IBombComponent) {
+		if (!item.isEmpty() && item.getItem() instanceof IBombComponent) {
 			return ((IBombComponent) item.getItem()).getTier();
 		}
 		return (byte) 0;
-	}
-
-	@Override
-	public void markDirty() {
-		++ticksExisted;
-		if (!world.isRemote && (hasRecipe || ticksExisted % 100 == 0)) {
-			syncData();
-			sendUpdates();
-		}
 	}
 
 	@Override
@@ -95,9 +92,8 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 	}
 
 	public boolean tryCraft(EntityPlayer player, boolean pressUsed) {
-		boolean sticky = !pressUsed && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.stickybomb)
-				&& !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == Items.SLIME_BALL;
-		if (!world.isRemote && sticky && applySlime()) {
+		boolean sticky = !pressUsed && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.stickybomb) && !player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() == Items.SLIME_BALL;
+		if (world.isRemote && sticky && applySlime()) {
 			int slot = player.inventory.getSlotFor(new ItemStack(Items.SLIME_BALL));
 			player.inventory.removeStackFromSlot(slot);
 			return true;
@@ -107,7 +103,7 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 
 		if (result.isEmpty()) {
 			progress = 0F;
-		} else if ((pressUsed || ToolHelper.getToolTypeFromStack(player.getHeldItemMainhand()) == Tool.SPANNER)) {
+		} else if (canCraft() && (pressUsed || ToolHelper.getToolTypeFromStack(player.getHeldItemMainhand()) == Tool.SPANNER)) {
 			if (!pressUsed && !player.getHeldItemMainhand().isEmpty()) {
 				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
 				player.getHeldItemMainhand().damageItem(1, player);
@@ -121,9 +117,8 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 				efficiency *= (0.5F - player.swingProgress);
 			}
 
-			if (!world.isRemote) {
-				progress += efficiency;
-			}
+			progress += efficiency;
+
 			if ((progress >= maxProgress && craftItem(result))) {
 				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
 				progress = 0;
@@ -193,10 +188,28 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 		}
 	}
 
-	public void syncData() {
-		if (world.isRemote)
-			return;
-		NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4, new BombBenchPacket(this));
+
+	public boolean canCraft() {
+		if (maxProgress > 0 && !findResult().isEmpty()) {
+			return this.canFitResult(findResult());
+		}
+		return false;
+	}
+
+	private boolean canFitResult(ItemStack result) {
+		ItemStack resSlot = getInventory().getStackInSlot(getInventory().getSlots() - 1);
+		if (!resSlot.isEmpty() && !result.isEmpty()) {
+			int maxStack = getStackSize(resSlot);
+			return resSlot.getCount() + result.getCount() <= maxStack;
+		}
+		return true;
+	}
+
+	private int getStackSize(ItemStack slot) {
+		if (slot.isEmpty()){
+			return 0;
+		}
+		return slot.getMaxStackSize();
 	}
 
 	private boolean areItemsEqual(ItemStack bomb1, ItemStack bomb2) {
@@ -223,38 +236,38 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 		if (!isMatch(1, "powder") || (!isArrow && !isMatch(3, "fuse"))) {
 			return ItemStack.EMPTY;
 		}
-		String caseTier = null;
-		String filling = null;
-		String fuse = null;
-		String powder;
+		String inputCasing = "basic";
+		String inputFilling = "basic";
+		String inputFuse = "basic";
+		String inputPowder;
 		Item design = null;
-		String com0 = getComponentType(getInventory().getStackInSlot(0));
-		String com1 = getComponentType(getInventory().getStackInSlot(1));
-		String com2 = getComponentType(getInventory().getStackInSlot(2));
-		String com3 = getComponentType(getInventory().getStackInSlot(3));
-		if (com0 != null) {
-			caseTier = getComponentType(getInventory().getStackInSlot(0));
-			design = getDesignCrafted(com0);
+		String casing = getComponentType(getInventory().getStackInSlot(0));
+		String powder = getComponentType(getInventory().getStackInSlot(1));
+		String filling = getComponentType(getInventory().getStackInSlot(2));
+		String fuse = getComponentType(getInventory().getStackInSlot(3));
+		if (casing != null) {
+			inputCasing = getComponentName(getInventory().getStackInSlot(0));
+			design = getDesignCrafted(casing);
 		}
-		if (com1 != null) {
-			if (com1.equalsIgnoreCase("powder")) {
-				powder = getComponentType(getInventory().getStackInSlot(1));
+		if (powder != null) {
+			if (powder.equalsIgnoreCase("powder")) {
+				inputPowder = getComponentName(getInventory().getStackInSlot(1));
 			} else {
 				return ItemStack.EMPTY;
 			}
 		} else
 			return ItemStack.EMPTY;
-		if (com2 != null) {
-			if (com2.equalsIgnoreCase("filling")) {
-				filling = getComponentType(getInventory().getStackInSlot(2));
+		if (filling != null) {
+			if (filling.equalsIgnoreCase("filling")) {
+				inputFilling = getComponentName(getInventory().getStackInSlot(2));
 			} else {
 				return ItemStack.EMPTY;
 			}
 		}
-		if (isArrow || com3 != null) {
+		if (isArrow || fuse != null) {
 			if (!isArrow) {
-				if (com3.equalsIgnoreCase("fuse")) {
-					fuse = getComponentType(getInventory().getStackInSlot(3));
+				if (fuse.equalsIgnoreCase("fuse")) {
+					inputFuse = getComponentName(getInventory().getStackInSlot(3));
 				} else {
 					return ItemStack.EMPTY;
 				}
@@ -262,10 +275,10 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 		} else
 			return ItemStack.EMPTY;
 
-		if (design != null && isArrow && powder != null) {
-			return ItemExplodingArrow.createBombArrow(design, powder, filling);
-		} else if (design != null && fuse != null && powder != null) {
-			return ItemBomb.createExplosive(design, caseTier, filling, fuse, powder, 1, false);
+		if (design != null && isArrow && inputPowder != null) {
+			return ItemExplodingArrow.createBombArrow(design, inputPowder, inputFilling);
+		} else if (design != null && inputFuse != null && inputPowder != null) {
+			return ItemBomb.createExplosive(design, inputCasing, inputFilling, inputFuse, inputPowder, 1, false);
 		}
 		return ItemStack.EMPTY;
 	}
@@ -319,7 +332,7 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 
 	@Override
 	public String getLocalisedName() {
-		return I18n.format("tile.bombBench.name");
+		return I18n.format("tile.bomb_bench.name");
 	}
 
 	@Override

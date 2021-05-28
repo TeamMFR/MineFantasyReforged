@@ -97,8 +97,8 @@ public class CookingRecipes {
 		bakeCeramic(MineFantasyItems.JUG_UNCOOKED, MineFantasyItems.JUG_EMPTY, 1000, 5);
 		bakeCeramic(MineFantasyItems.PIE_TRAY_UNCOOKED, MineFantasyItems.PIE_TRAY, 1000, 10);
 		bakeCeramic(MineFantasyItems.INGOT_MOULD_UNCOOKED, MineFantasyItems.INGOT_MOULD, 1000, 5);
-		bakeCeramic(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING, 1000, 10);
-		bakeCeramic(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING, 1000, 10);
+		bakeCeramic(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING_CERAMIC, 1000, 10);
+		bakeCeramic(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING_CERAMIC, 1000, 10);
 
 		bakeCeramic(MineFantasyItems.FIRECLAY_BRICK, MineFantasyItems.STRONG_BRICK, 1500, 5);
 	}

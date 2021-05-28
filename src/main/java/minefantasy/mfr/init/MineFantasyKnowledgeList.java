@@ -340,7 +340,7 @@ public class MineFantasyKnowledgeList {
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 85);
 		stickybomb = (new InformationBase("stickybomb", -2, 2, 1, Items.SLIME_BALL, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 50);
-		bombCeramic = (new InformationBase("bombCeramic", 2, 3, 0, MineFantasyItems.BOMB_CASING, bombs)).registerStat()
+		bombCeramic = (new InformationBase("bombCeramic", 2, 3, 0, MineFantasyItems.BOMB_CASING_CERAMIC, bombs)).registerStat()
 				.setUnlocked().setPage(engineering);
 		bombIron = (new InformationBase("bombIron", 4, 5, 1, MineFantasyItems.BOMB_CASING_IRON, bombCeramic))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 20);
@@ -348,7 +348,7 @@ public class MineFantasyKnowledgeList {
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 35);
 		bombCrystal = (new InformationBase("bombCrystal", 2, 9, 1, MineFantasyItems.BOMB_CASING_CRYSTAL, bombObsidian))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 40);
-		mineCeramic = (new InformationBase("mineCeramic", -2, 3, 2, MineFantasyItems.MINE_CASING, bombs)).registerStat()
+		mineCeramic = (new InformationBase("mineCeramic", -2, 3, 2, MineFantasyItems.MINE_CASING_CERAMIC, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 15);
 		mineIron = (new InformationBase("mineIron", -4, 5, 1, MineFantasyItems.MINE_CASING_IRON, mineCeramic))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 20);

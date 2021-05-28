@@ -2,13 +2,15 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
+import minefantasy.mfr.api.crafting.exotic.SpecialForging;
+import minefantasy.mfr.api.heating.Heatable;
+import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrossbowBench;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
-import minefantasy.mfr.network.CrossbowBenchPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
@@ -34,8 +36,6 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 	 * Stock, Head, Mod, Muzzle, Result
 	 */
 	public final ItemStackHandler inventory = createInventory();
-
-	private int ticksExisted;
 
 	@Override
 	protected ItemStackHandler createInventory() {
@@ -72,22 +72,13 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 		return false;
 	}
 
-	@Override
-	public void markDirty() {
-		++ticksExisted;
-		if (!world.isRemote && (hasRecipe || ticksExisted % 100 == 0)) {
-			syncData();
-			sendUpdates();
-		}
-	}
-
 	public boolean tryCraft(EntityPlayer user) {
 		ItemStack result = findResult();
 		hasRecipe = !result.isEmpty();
 
 		if (result.isEmpty()) {
 			progress = 0F;
-		} else if (ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.SPANNER) {
+		} else if (canCraft() && ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.SPANNER) {
 			if (!user.getHeldItemMainhand().isEmpty()) {
 				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
 				user.getHeldItemMainhand().damageItem(1, user);
@@ -101,9 +92,8 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 				efficiency *= (0.5F - user.swingProgress);
 			}
 
-			if (!world.isRemote) {
-				progress += efficiency;
-			}
+			progress += efficiency;
+
 			if ((progress >= maxProgress && craftItem(result))) {
 				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
 				progress = 0;
@@ -114,6 +104,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 					inventory.extractItem(a, 1, false);
 				}
 			}
+
 			return true;
 		}
 		return false;
@@ -122,16 +113,11 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 	private boolean craftItem(ItemStack result) {
 		if (inventory.getStackInSlot(4).isEmpty()) {
 			this.inventory.setStackInSlot(4, result);
+			progress = 0;
 			return true;
 		} else {
 			return false;
 		}
-	}
-
-	public void syncData() {
-		if (world.isRemote)
-			return;
-		NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4, new CrossbowBenchPacket(this));
 	}
 
 	private ItemStack findResult() {
@@ -144,6 +130,29 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 			return ItemStack.EMPTY;
 
 		return MineFantasyItems.CROSSBOW_CUSTOM.constructCrossbow(stock, head, mod, muzzle);
+	}
+
+	public boolean canCraft() {
+		if (maxProgress > 0 && !findResult().isEmpty()) {
+			return this.canFitResult(findResult());
+		}
+		return false;
+	}
+
+	private boolean canFitResult(ItemStack result) {
+		ItemStack resSlot = getInventory().getStackInSlot(getInventory().getSlots() - 1);
+		if (!resSlot.isEmpty() && !result.isEmpty()) {
+			int maxStack = getStackSize(resSlot);
+			return resSlot.getCount() + result.getCount() <= maxStack;
+		}
+		return true;
+	}
+
+	private int getStackSize(ItemStack slot) {
+		if (slot.isEmpty()){
+			return 0;
+		}
+		return slot.getMaxStackSize();
 	}
 
 	@Override
@@ -175,7 +184,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 
 	@Override
 	public String getLocalisedName() {
-		return I18n.format("tile.crossbowBench.name");
+		return I18n.format("tile.crossbow_bench.name");
 	}
 
 	@Override
@@ -189,7 +198,6 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 		hasRecipe = nbt.getBoolean("hasRecipe");
 	}
 
-	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);

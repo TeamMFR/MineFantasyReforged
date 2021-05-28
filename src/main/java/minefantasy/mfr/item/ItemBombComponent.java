@@ -18,15 +18,17 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ItemBombComponent extends ItemBaseMFR implements IBombComponent, ISalvageDrop {
-	private static HashMap<String, Item> components = new HashMap<String, Item>();
+	private static final HashMap<String, Item> components = new HashMap<String, Item>();
 
-	private byte tier;
-	private String type;
+	private final byte tier;
+	private final String type;
+	private final String componentName;
 
-	public ItemBombComponent(String name, IRarity rarity, String type, int tier) {
+	public ItemBombComponent(String name, IRarity rarity, String type, String componentName, int tier) {
 		super(name, rarity);
 		this.type = type;
 		this.tier = (byte) tier;
+		this.componentName = componentName;
 		components.put(type + tier, this);
 		setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
@@ -45,6 +47,10 @@ public class ItemBombComponent extends ItemBaseMFR implements IBombComponent, IS
 	@Override
 	public String getComponentType() {
 		return type;
+	}
+
+	public String getComponentName(){
+		return componentName;
 	}
 
 	@Override
