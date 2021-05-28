@@ -20,7 +20,7 @@
         }
     },
     "result": {
-        "nbt": "{mf_custom_materials:{main_metal:\"copper\"}}",
+        "nbt": "{mf_custom_materials:{main_material:\"copper\"}}",
         "item": "minefantasyreborn:bar"
     }
 }

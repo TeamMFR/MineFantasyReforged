@@ -122,7 +122,7 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 
 				NBTTagCompound nbt = new NBTTagCompound();
 				NBTTagCompound materialTag = new NBTTagCompound();
-				materialTag.setString("main_metal", CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, material));
+				materialTag.setString("main_material", CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, material));
 				nbt.setTag("mf_custom_materials", materialTag);
 				output.setTagCompound(nbt);
 

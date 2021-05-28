@@ -16,7 +16,7 @@
   ],
   "key": {
     "M": {
-      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },

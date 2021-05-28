@@ -25,7 +25,7 @@
       "item": "minecraft:heavy_weighted_pressure_plate"
     },
     "M": {
-      "nbt": "{mf_custom_materials:{main_metal:\"obsidian\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"obsidian\"}}",
       "item": "minefantasyreborn:metal_hunk"
     },
     "O": {

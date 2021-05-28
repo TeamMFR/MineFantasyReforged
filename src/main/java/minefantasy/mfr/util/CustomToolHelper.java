@@ -18,8 +18,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.List;
 
 public class CustomToolHelper {
-	public static final String slot_main = "main_metal";
-	public static final String slot_haft = "haft_wood";
+	public static final String slot_main = "main_material";
+	public static final String slot_haft = "haft_material";
 	public static EnumRarity poor = EnumHelper.addRarity("poor", TextFormatting.DARK_GRAY, "poor");
 	public static EnumRarity[] rarity = new EnumRarity[] {poor, EnumRarity.COMMON, EnumRarity.UNCOMMON, EnumRarity.RARE, EnumRarity.EPIC};
 	/**

@@ -22,7 +22,7 @@
       "item": "minefantasyreborn:engin_anvil_tools"
     },
     "T": {
-      "nbt": "{mf_custom_materials:{main_metal:\"tungsten\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },

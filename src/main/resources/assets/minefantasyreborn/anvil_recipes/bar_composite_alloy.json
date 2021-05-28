@@ -29,7 +29,7 @@
     }
   },
   "result": {
-    "nbt": "{mf_custom_materials:{main_metal:\"composite_alloy\"}}",
+    "nbt": "{mf_custom_materials:{main_material:\"composite_alloy\"}}",
     "item": "minefantasyreborn:bar"
   }
 }

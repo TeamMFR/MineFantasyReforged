@@ -19,7 +19,7 @@
       "item": "minecraft:redstone"
     },
     "T": {
-      "nbt": "{mf_custom_materials:{main_metal:\"refined_wood\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}",
       "item": "minefantasyreborn:timber"
     },
     "E": {
@@ -29,7 +29,7 @@
       "item": "minefantasyreborn:fletching"
     },
     "M": {
-      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },

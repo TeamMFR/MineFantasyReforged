@@ -118,7 +118,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"iron\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"iron\"}}"
                         }
                     ],
                     "weight": 20
@@ -166,7 +166,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"oak_wood\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"oak_wood\"}}"
                         }
                     ]
                 },
@@ -185,7 +185,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"refined_wood\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"refined_wood\"}}"
                         }
                     ]
                 }

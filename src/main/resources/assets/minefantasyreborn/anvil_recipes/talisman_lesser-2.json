@@ -16,11 +16,11 @@
   ],
   "key": {
     "S": {
-      "nbt": "{mf_custom_materials:{main_metal:\"silver\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"silver\"}}",
       "item": "minefantasyreborn:bar"
     },
     "I": {
-      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
       "item": "minefantasyreborn:bar"
     },
     "L": {

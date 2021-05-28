@@ -137,7 +137,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"gold\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"gold\"}}"
                         }
                     ],
                     "weight": 20
@@ -156,7 +156,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"silver\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"silver\"}}"
                         }
                     ],
                     "weight": 20

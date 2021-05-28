@@ -14,6 +14,6 @@
 	"result": {
 		"type": "minecraft:item_nbt",
 		"item": "minefantasyreborn:timber",
-		"nbt": "{mf_custom_materials: { main_metal:\"scrap_wood\"} }"
+		"nbt": "{mf_custom_materials: { main_material:\"scrap_wood\"} }"
 	}
 }

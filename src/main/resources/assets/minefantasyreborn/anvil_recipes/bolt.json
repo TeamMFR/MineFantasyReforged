@@ -16,14 +16,14 @@
   ],
   "key": {
     "I": {
-      "nbt": "{mf_custom_materials:{main_metal:\"iron\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
       "item": "minefantasyreborn:bar"
     },
     "E": {
       "item": "minefantasyreborn:engin_anvil_tools"
     },
     "S": {
-      "nbt": "{mf_custom_materials:{main_metal:\"steel\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },

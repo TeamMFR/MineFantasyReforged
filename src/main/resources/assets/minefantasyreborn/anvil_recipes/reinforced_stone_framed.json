@@ -19,7 +19,7 @@
       "item": "minefantasyreborn:reinforced_stone"
     },
     "M": {
-      "nbt": "{mf_custom_materials:{main_metal:\"bronze\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}",
       "item": "minefantasyreborn:metal_hunk"
     }
   },

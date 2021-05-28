@@ -16,7 +16,7 @@
   ],
   "key": {
     "B": {
-      "nbt": "{mf_custom_materials:{main_metal:\"gold\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"gold\"}}",
       "item": "minefantasyreborn:bar"
     },
     "D": {

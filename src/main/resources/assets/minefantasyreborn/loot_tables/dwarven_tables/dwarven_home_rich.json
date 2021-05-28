@@ -133,7 +133,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"iron\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"iron\"}}"
                         }
                     ],
                     "weight": 30
@@ -152,7 +152,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"gold\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"gold\"}}"
                         }
                     ],
                     "weight": 50
@@ -171,7 +171,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"silver\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"silver\"}}"
                         }
                     ],
                     "weight": 50

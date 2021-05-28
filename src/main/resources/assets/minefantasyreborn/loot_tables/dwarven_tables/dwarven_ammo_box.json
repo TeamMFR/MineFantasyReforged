@@ -19,7 +19,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"iron\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"iron\"}}"
                         }
                     ],
                     "weight": 100
@@ -38,7 +38,7 @@
                         },
                         {
                             "function": "set_nbt",
-                            "tag": "{mf_custom_materials:{main_metal:\"encrusted\"}}"
+                            "tag": "{mf_custom_materials:{main_material:\"encrusted\"}}"
                         }
                     ],
                     "weight": 20

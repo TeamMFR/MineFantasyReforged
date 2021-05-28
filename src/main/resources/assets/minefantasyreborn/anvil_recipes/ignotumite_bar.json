@@ -20,7 +20,7 @@
         }
     },
     "result": {
-        "nbt": "{mf_custom_materials:{main_metal:\"ignotumite\"}}",
+        "nbt": "{mf_custom_materials:{main_material:\"ignotumite\"}}",
         "item": "minefantasyreborn:bar"
     }
 }

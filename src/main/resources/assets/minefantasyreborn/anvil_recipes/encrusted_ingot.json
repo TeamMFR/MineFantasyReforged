@@ -16,7 +16,7 @@
   ],
   "key": {
     "B": {
-      "nbt": "{mf_custom_materials:{main_metal:\"encrusted\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"encrusted\"}}",
       "item": "minefantasyreborn:bar"
     }
   },
