@@ -3,8 +3,10 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
@@ -34,6 +36,14 @@ public class CustomToolRecipeCarpenter extends ShapedCarpenterRecipes {
 				}
 
 				ItemStack inputItem = matrix.getStackInRowAndColumn(var5, var6);
+				if (inputItem == null) {
+					inputItem = ItemStack.EMPTY;
+				}
+				if (recipeItem == null) {
+					recipeItem = ItemStack.EMPTY;
+				}
+
+
 
 				if (inputItem != null || recipeItem != null) {
 					String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
@@ -72,7 +82,7 @@ public class CustomToolRecipeCarpenter extends ShapedCarpenterRecipes {
 					if (recipeItem.getItem() != inputItem.getItem()) {
 						return false;
 					}
-					if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
+					if (recipeItem.getItem() == inputItem.getItem() && recipeItem.hasTagCompound() && !CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
 						return false;
 					}
 					if (recipeItem.getItemDamage() != OreDictionary.WILDCARD_VALUE
@@ -87,6 +97,26 @@ public class CustomToolRecipeCarpenter extends ShapedCarpenterRecipes {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Used to check if a recipe matches current crafting inventory
+	 */
+	@Override
+	public boolean matches(InventoryCrafting inv, World worldIn) {
+		for (int i = 0; i <= inv.getWidth() - this.recipeWidth; ++i) {
+			for (int j = 0; j <= inv.getHeight() - this.recipeHeight; ++j) {
+				if (this.checkMatch((CarpenterCraftMatrix)inv, i, j, true)) {
+					return true;
+				}
+
+				if (this.checkMatch((CarpenterCraftMatrix)inv, i, j, false)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	private boolean modifyTiers(CarpenterCraftMatrix matrix, String tier) {
