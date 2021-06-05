@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class ItemHoeMFR extends ItemHoe implements IToolMaterial, IClientRegister {
 	protected int itemRarity;
-	private ToolMaterial toolMaterial;
+	private final ToolMaterial toolMaterial;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;

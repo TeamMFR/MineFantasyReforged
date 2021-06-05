@@ -41,7 +41,7 @@ public class ContainerForge extends ContainerBase {
 
 			if (!ItemStack.areItemStacksEqual(itemstack1, itemstack)) {
 
-				itemstack1 = itemstack == ItemStack.EMPTY ? ItemStack.EMPTY : itemstack.copy();
+				itemstack1 = itemstack.isEmpty() ? ItemStack.EMPTY : itemstack.copy();
 				this.inventoryItemStacks.set(i, itemstack1);
 
 				for (IContainerListener listener : this.listeners) {

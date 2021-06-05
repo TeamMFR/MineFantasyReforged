@@ -99,6 +99,26 @@ public class ItemHalbeard extends ItemSpear {
 		return 3.0F;
 	}
 
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 1.85F;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) {
+		return 3F;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return -0.3F;
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return true;
+	}
+
 	/**
 	 * Can this Item disable a shield
 	 *

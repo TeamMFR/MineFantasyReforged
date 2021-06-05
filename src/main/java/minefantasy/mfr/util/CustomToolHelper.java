@@ -29,11 +29,7 @@ public class CustomToolHelper {
 		if (item.isEmpty())
 			return CustomMaterial.NONE;
 
-		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
-		if (material != null) {
-			return material;
-		}
-		return CustomMaterial.NONE;
+		return CustomMaterial.getMaterialFor(item, slot_main);
 	}
 
 	public static CustomMaterial getCustomSecondaryMaterial(ItemStack item) {
@@ -41,7 +37,7 @@ public class CustomToolHelper {
 			return CustomMaterial.NONE;
 
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			return material;
 		}
 		return CustomMaterial.NONE;
@@ -102,10 +98,10 @@ public class CustomToolHelper {
 	public static int getMaxDamage(ItemStack stack, int dura) {
 		CustomMaterial head = getCustomPrimaryMaterial(stack);
 		CustomMaterial haft = getCustomSecondaryMaterial(stack);
-		if (head != null) {
+		if (head != null && head != CustomMaterial.NONE) {
 			dura = (int) (head.durability * 100);
 		}
-		if (haft != null) {
+		if (haft != null && haft != CustomMaterial.NONE) {
 			dura += (int) (haft.durability * 100);// Hafts add 50% to the durability
 		}
 		return ToolHelper.setDuraOnQuality(stack, dura);
@@ -119,13 +115,13 @@ public class CustomToolHelper {
 	public static int getColourFromItemStack(ItemStack item, int layer) {
 		if (layer == 0) {
 			CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_main);
-			if (material != null) {
+			if (material != null && material != CustomMaterial.NONE) {
 				return material.getColourInt();
 			}
 		}
 		if (layer == 1) {
 			CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);
-			if (material != null) {
+			if (material != null && material != CustomMaterial.NONE) {
 				return material.getColourInt();
 			}
 		}
@@ -152,7 +148,7 @@ public class CustomToolHelper {
 	 */
 	public static float getMeleeDamage(ItemStack item, float defaultModifier) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null) {
+		if (custom != null && custom != CustomMaterial.NONE) {
 			return custom.sharpness;
 		}
 		return defaultModifier;
@@ -162,10 +158,10 @@ public class CustomToolHelper {
 		CustomMaterial base = getCustomSecondaryMaterial(item);
 		CustomMaterial joints = getCustomPrimaryMaterial(item);
 
-		if (base != null) {
+		if (base != null && base != CustomMaterial.NONE) {
 			defaultModifier = base.flexibility;
 		}
-		if (joints != null) {
+		if (joints != null && joints != CustomMaterial.NONE) {
 			defaultModifier *= joints.flexibility;
 		}
 		return defaultModifier;
@@ -176,7 +172,7 @@ public class CustomToolHelper {
 	 */
 	public static float getBaseDamages(ItemStack item, float defaultModifier) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null) {
+		if (custom != null && custom != CustomMaterial.NONE) {
 			return getBaseDamage(custom.sharpness * custom.flexibility);
 		}
 		return getBaseDamage(defaultModifier);
@@ -191,7 +187,7 @@ public class CustomToolHelper {
 
 	public static float getEfficiencyForHds(ItemStack item, float value, float mod) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null) {
+		if (custom != null && custom != CustomMaterial.NONE) {
 			value = 2.0F + (custom.hardness * 4F);// Efficiency starts at 2 and each point of sharpness adds 2
 		}
 		return ToolHelper.modifyDigOnQuality(item, value) * mod;
@@ -199,7 +195,7 @@ public class CustomToolHelper {
 
 	public static float getEfficiency(ItemStack item, float value, float mod) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null) {
+		if (custom != null && custom != CustomMaterial.NONE) {
 			value = 2.0F + (custom.sharpness * 2F);// Efficiency starts at 2 and each point of sharpness adds 2
 		}
 		return ToolHelper.modifyDigOnQuality(item, value) * mod;
@@ -207,7 +203,7 @@ public class CustomToolHelper {
 
 	public static int getCrafterTier(ItemStack item, int value) {
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null) {
+		if (custom != null && custom != CustomMaterial.NONE) {
 			return custom.crafterTier;
 		}
 		return value;
@@ -219,7 +215,7 @@ public class CustomToolHelper {
 		}
 
 		CustomMaterial custom = getCustomPrimaryMaterial(item);
-		if (custom != null) {
+		if (custom != null && custom != CustomMaterial.NONE) {
 			if (custom.tier == 0)
 				return 1;
 			if (custom.tier <= 2)
@@ -299,10 +295,10 @@ public class CustomToolHelper {
 	}
 
 	public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) {
-		if (recipeItem == null) {
-			return inputItem == null;
+		if (recipeItem.isEmpty()) {
+			return inputItem.isEmpty();
 		}
-		if (inputItem == null)
+		if (inputItem.isEmpty())
 			return false;
 
 		return recipeItem.isItemEqual(inputItem) && doesMainMatchForRecipe(recipeItem, inputItem)
@@ -320,11 +316,11 @@ public class CustomToolHelper {
 		CustomMaterial recipeMat = CustomToolHelper.getCustomPrimaryMaterial(recipeItem);
 		CustomMaterial inputMat = CustomToolHelper.getCustomPrimaryMaterial(inputItem);
 
-		if (recipeMat == null) {
+		if (recipeMat == null || recipeMat == CustomMaterial.NONE) {
 			return true;
 		}
 
-		if (inputMat == null && recipeMat != null) {
+		if ((inputMat == null || inputMat == CustomMaterial.NONE) && recipeMat != null) {
 			return false;
 		}
 		if (recipeMat != inputMat) {
@@ -337,11 +333,11 @@ public class CustomToolHelper {
 		CustomMaterial recipeMat = CustomToolHelper.getCustomSecondaryMaterial(recipeItem);
 		CustomMaterial inputMat = CustomToolHelper.getCustomSecondaryMaterial(inputItem);
 
-		if (recipeMat == null) {
+		if (recipeMat == null || recipeMat == CustomMaterial.NONE) {
 			return true;
 		}
 
-		if (inputMat == null && recipeMat != null) {
+		if ((inputMat == null || inputMat == CustomMaterial.NONE) && recipeMat != null) {
 			return false;
 		}
 		if (recipeMat != inputMat) {
@@ -374,7 +370,7 @@ public class CustomToolHelper {
 
 	public static float getBurnModifier(ItemStack fuel) {
 		CustomMaterial mat = CustomMaterial.getMaterialFor(fuel, slot_main);
-		if (mat != null && mat.type.equalsIgnoreCase("wood")) {
+		if (mat != null && mat != CustomMaterial.NONE && mat.type.equalsIgnoreCase("wood")) {
 			return (2 * mat.density) + 0.5F;
 		}
 		return 1.0F;
@@ -401,10 +397,10 @@ public class CustomToolHelper {
 			CustomMaterial base = getCustomPrimaryMaterial(item);
 			CustomMaterial haft = getCustomSecondaryMaterial(item);
 
-			if (base != null) {
+			if (base != null && base != CustomMaterial.NONE) {
 				reference += "_" + base.getName();
 			}
-			if (haft != null) {
+			if (haft != null && haft != CustomMaterial.NONE) {
 				reference += "_" + haft.getName();
 			}
 		}
@@ -429,9 +425,9 @@ public class CustomToolHelper {
 		CustomMaterial secondaryMaterial1 = getCustomSecondaryMaterial(item2);
 		CustomMaterial mainMaterial2 = getCustomPrimaryMaterial(item1);
 		CustomMaterial secondaryMaterial2 = getCustomSecondaryMaterial(item2);
-		if ((mainMaterial1 == null && secondaryMaterial1 != null) || (secondaryMaterial1 == null && mainMaterial1 != null))
+		if (((mainMaterial1 == null || mainMaterial1 == CustomMaterial.NONE) && secondaryMaterial1 != null && secondaryMaterial1 != CustomMaterial.NONE) || ((secondaryMaterial1 == null || secondaryMaterial1 == CustomMaterial.NONE) && mainMaterial1 != null && mainMaterial1 != CustomMaterial.NONE))
 			return false;
-		if ((mainMaterial2 == null && secondaryMaterial2 != null) || (secondaryMaterial2 == null && mainMaterial2 != null))
+		if (((mainMaterial2 == null || mainMaterial2 == CustomMaterial.NONE) && secondaryMaterial2 != null && secondaryMaterial2 != CustomMaterial.NONE) || ((secondaryMaterial2 == null || secondaryMaterial2 == CustomMaterial.NONE) && mainMaterial2 != null && mainMaterial2 != CustomMaterial.NONE))
 			return false;
 
 		if (mainMaterial1 != null && secondaryMaterial1 != null && mainMaterial1 != secondaryMaterial1)
@@ -445,10 +441,10 @@ public class CustomToolHelper {
 	public static boolean isMythic(ItemStack result) {
 		CustomMaterial main1 = getCustomPrimaryMaterial(result);
 		CustomMaterial haft1 = getCustomPrimaryMaterial(result);
-		if (main1 != null && main1.isUnbrekable()) {
+		if (main1 != null  && main1 != CustomMaterial.NONE && main1.isUnbrekable()) {
 			return true;
 		}
-		if (haft1 != null && haft1.isUnbrekable()) {
+		if (haft1 != null  && haft1 != CustomMaterial.NONE && haft1.isUnbrekable()) {
 			return true;
 		}
 		return false;
@@ -463,14 +459,14 @@ public class CustomToolHelper {
 		}
 
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-		if (material != null) {
+		if (material != null && material != CustomMaterial.NONE) {
 			return material.type.equalsIgnoreCase(type) ? material.name : null;
 		}
 		return null;
 	}
 
 	public static boolean hasAnyMaterial(ItemStack item) {
-		return getCustomPrimaryMaterial(item) != null || getCustomSecondaryMaterial(item) != null;
+		return (getCustomPrimaryMaterial(item) != null && getCustomPrimaryMaterial(item) != CustomMaterial.NONE) || (getCustomSecondaryMaterial(item) != null && getCustomSecondaryMaterial(item) != CustomMaterial.NONE);
 	}
 
 	public static ItemStack tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
@@ -483,10 +479,10 @@ public class CustomToolHelper {
 			CustomMaterial primary = CustomToolHelper.getCustomPrimaryMaterial(mainItem);
 			CustomMaterial secondary = CustomToolHelper.getCustomSecondaryMaterial(mainItem);
 
-			if (primary != null && primary.type.equalsIgnoreCase(type)) {
+			if (primary != null && primary != CustomMaterial.NONE && primary.type.equalsIgnoreCase(type)) {
 				CustomMaterial.addMaterial(newitem, slot_main, primary.name);
 			} else {
-				if (secondary != null && secondary.type.equalsIgnoreCase(type)) {
+				if (secondary != null && secondary != CustomMaterial.NONE && secondary.type.equalsIgnoreCase(type)) {
 					CustomMaterial.addMaterial(newitem, slot_main, secondary.name);
 				}
 			}

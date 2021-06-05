@@ -31,14 +31,14 @@ public class InventoryReload implements IInventory {
 	@Override
 	public ItemStack decrStackSize(int slot, int num) {
 		ItemStack ammo = AmmoMechanics.getAmmo(weapon);
-		if (ammo != null) {
+		if (!ammo.isEmpty()) {
 			ItemStack ammo2 = ammo.copy();
 			ammo.shrink(num);
 			ammo2.setCount(num);
 			if (ammo.getCount() > 0) {
 				setInventorySlotContents(slot, ammo);
 			} else {
-				setInventorySlotContents(slot, null);
+				setInventorySlotContents(slot, ItemStack.EMPTY);
 			}
 			return ammo2;
 		}
@@ -47,12 +47,12 @@ public class InventoryReload implements IInventory {
 
 	@Override
 	public ItemStack removeStackFromSlot(int index) {
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack item) {
-		if (item != null) {
+		if (!item.isEmpty()) {
 			AmmoMechanics.setAmmo(weapon, item);
 		} else {
 			AmmoMechanics.removeAmmo(weapon);

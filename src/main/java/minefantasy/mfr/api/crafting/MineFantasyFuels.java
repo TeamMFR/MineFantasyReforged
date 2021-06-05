@@ -18,7 +18,7 @@ public class MineFantasyFuels {
 
 	public static void addForgeFuel(Object input, float time, int temperature, boolean willLight, boolean refined) {
 		ItemStack item = convert(input);
-		if (item != null) {
+		if (!item.isEmpty()) {
 			ForgeItemHandler.forgeFuel.add(new ForgeFuel(item, time, temperature, willLight, refined));
 			if ((int) (temperature * 1.25) > ForgeItemHandler.forgeMaxTemp) {
 				ForgeItemHandler.forgeMaxTemp = (int) (temperature * 1.25);
@@ -35,7 +35,7 @@ public class MineFantasyFuels {
 	public static void addCarbon(Object input, int uses) {
 		ItemStack itemstack = convert(input);
 
-		if (itemstack != null) {
+		if (!itemstack.isEmpty()) {
 			OreDictionary.registerOre("Carbon-" + uses, itemstack);
 		}
 	}
@@ -44,7 +44,7 @@ public class MineFantasyFuels {
 	 * How many smelts (blast furn or bloomery) this can give as carbon
 	 */
 	public static int getCarbon(ItemStack item) {
-		if (item == ItemStack.EMPTY)
+		if (item.isEmpty())
 			return 0;
 
 		for (int i : OreDictionary.getOreIDs(item)) {
@@ -68,9 +68,8 @@ public class MineFantasyFuels {
 
 	public static ItemStack convert(Object input) {
 		if (input == null)
-			return null;
+			return ItemStack.EMPTY;
 
-		ItemStack itemstack = null;
 		if (input instanceof ItemStack) {
 			return (ItemStack) input;
 		} else if (input instanceof Block) {
@@ -79,6 +78,6 @@ public class MineFantasyFuels {
 			return new ItemStack((Item) input);
 		}
 
-		return null;
+		return ItemStack.EMPTY;
 	}
 }

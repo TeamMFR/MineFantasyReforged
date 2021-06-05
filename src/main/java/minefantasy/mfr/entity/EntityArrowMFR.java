@@ -848,12 +848,12 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 		world.createExplosion(this, posX, posY, posZ, 0, false);
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D;
-			AxisAlignedBB var3 = this.getEntityBoundingBox().expand(area, area / 2, area);
-			List<Entity> var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, var3);
+			AxisAlignedBB entityBoundBox = this.getEntityBoundingBox().expand(area, area / 2, area);
+			List<Entity> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, entityBoundBox);
 
-			if (var4 != null && !var4.isEmpty()) {
+			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {
 
-				for (Entity entityHit : var4) {
+				for (Entity entityHit : entitiesWithinAABB) {
 					double distanceToEntity = this.getDistance(entityHit);
 
 					double radius = getRangeOfBlast();
@@ -924,6 +924,6 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 
 	public boolean isMagicArrow() {
 		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(getArrowStack());
-		return material != null && material.type.equalsIgnoreCase("magic");
+		return material != CustomMaterial.NONE && material.type.equalsIgnoreCase("magic");
 	}
 }

@@ -1,6 +1,7 @@
 package minefantasy.mfr.api.weapon;
 
 import minefantasy.mfr.tile.TileEntityRack;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public interface IRackItem {
@@ -17,4 +18,5 @@ public interface IRackItem {
 
 	boolean canHang(TileEntityRack rack, ItemStack item, int slot);
 
+	boolean flip(ItemStack itemStack);
 }

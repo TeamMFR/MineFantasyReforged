@@ -61,7 +61,7 @@ public class ArrowFirerMF implements IArrowHandler {
 			entArrow.canBePickedUp = 2;
 		}
 
-		if (!bow.isEmpty() && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
+		if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
 			entArrow = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
 		}
 		if (!world.isRemote) {

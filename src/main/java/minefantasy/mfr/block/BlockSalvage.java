@@ -116,7 +116,7 @@ public class BlockSalvage extends BasicBlockMF{
 
 	private void dropSalvage(World world, BlockPos pos, List<ItemStack> salvage, ItemStack junk) {
 		for (ItemStack drop : salvage) {
-			if (drop != null)// && !user.inventory.addItemStackToInventory(drop))
+			if (!drop.isEmpty())// && !user.inventory.addItemStackToInventory(drop))
 			{
 				entityDropItem(world, pos, drop);
 			}
@@ -124,7 +124,7 @@ public class BlockSalvage extends BasicBlockMF{
 	}
 
 	public EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {
-		if (item.getCount() != 0 && item.getItem() != null) {
+		if (item.getCount() != 0 && !item.isEmpty()) {
 			EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 1.25D, pos.getZ() + 0.5D, item);
 			entityitem.setPickupDelay(10);
 			world.spawnEntity(entityitem);

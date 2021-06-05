@@ -8,10 +8,12 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.ISmithTongs;
+import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderTong;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -48,7 +50,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, IClientRegister {
+public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISmithTongs, IClientRegister {
 	protected int itemRarity;
 	private float baseDamage;
 	// ===================================================== CUSTOM START
@@ -75,19 +77,19 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
-		RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-		if (movingobjectposition == null) {
+		if (rayTraceResult == null) {
 			return ActionResult.newResult(EnumActionResult.PASS, item);
 		} else {
-			if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-				BlockPos pos = movingobjectposition.getBlockPos();
+			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+				BlockPos pos = rayTraceResult.getBlockPos();
 
 				if (!world.canMineBlockBody(player, pos)) {
 					return ActionResult.newResult(EnumActionResult.PASS, item);
 				}
 
-				if (!player.canPlayerEdit(pos, movingobjectposition.sideHit, item)) {
+				if (!player.canPlayerEdit(pos, rayTraceResult.sideHit, item)) {
 					return ActionResult.newResult(EnumActionResult.PASS, item);
 				}
 
@@ -245,6 +247,41 @@ public class ItemTongs extends ItemTool implements IToolMaterial, ISmithTongs, I
 	}
 	// ====================================================== CUSTOM END
 	// ==============================================================\\
+
+	@Override
+	public float getScale(ItemStack itemstack) {
+		return 1F;
+	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 0.4F;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) {
+		return 1F;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0.5F;
+	}
+
+	@Override
+	public float getRotationOffset(ItemStack itemstack) {
+		return 90F;
+	}
+
+	@Override
+	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
+		return true;
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return false;
+	}
 
 	@Override
 	@SideOnly(Side.CLIENT)

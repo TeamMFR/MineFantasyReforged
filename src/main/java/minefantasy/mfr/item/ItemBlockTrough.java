@@ -46,7 +46,7 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 			}
 		}
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			list.add(I18n.format("attribute.fill.capacity.name",
 					TileEntityTrough.getCapacity(material.tier) * TileEntityTrough.capacityScale));
 		}
@@ -75,20 +75,20 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		RayTraceResult movingobjectposition = this.rayTrace(world, player, true);
+		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-		if (movingobjectposition == null) {
+		if (rayTraceResult == null) {
 			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 		} else {
-			if (movingobjectposition.typeOfHit == RayTraceResult.Type.BLOCK) {
-				BlockPos hit = movingobjectposition.getBlockPos();
+			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+				BlockPos hit = rayTraceResult.getBlockPos();
 				ItemStack item = player.getHeldItem(hand);
 
 				if (!world.canMineBlockBody(player, hit)) {
 					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 				}
 
-				if (!player.canPlayerEdit(hit, movingobjectposition.sideHit, item)) {
+				if (!player.canPlayerEdit(hit, rayTraceResult.sideHit, item)) {
 					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 				}
 
@@ -104,10 +104,10 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 
 	private void gather(EntityPlayer player) {
 		ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
-		if (item != null) {
+		if (!item.isEmpty()) {
 			int tier = 0;
 			CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-			if (material != null) {
+			if (material != CustomMaterial.NONE) {
 				tier = material.tier;
 			}
 			NBTTagCompound nbt = getNBT(item);

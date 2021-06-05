@@ -3,6 +3,7 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.util.JsonUtils;

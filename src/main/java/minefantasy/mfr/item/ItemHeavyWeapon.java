@@ -105,4 +105,24 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
 	public float getScale(ItemStack itemstack) {
 		return 2.0F;
 	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 1.5F;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) {
+		return 1.85F;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0.1F;
+	}
+
+	@Override
+	public boolean flip(ItemStack itemstack) {
+		return true;
+	}
 }

@@ -1,19 +1,11 @@
 package minefantasy.mfr.item;
 
-import codechicken.lib.model.ModelRegistryHelper;
-import codechicken.lib.render.item.IItemRenderer;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockTileEntity;
-import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
 import minefantasy.mfr.util.CustomToolHelper;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -21,7 +13,6 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,7 +42,7 @@ public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
 			}
 		}
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-		if (material != null && material != CustomMaterial.NONE) {
+		if (material != CustomMaterial.NONE) {
 			tooltip.add(I18n.format("attribute.box.capacity.name",
 					TileEntityAmmoBox.getCapacity(material.tier)));
 		}

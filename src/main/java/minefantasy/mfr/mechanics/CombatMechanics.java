@@ -292,7 +292,7 @@ public class CombatMechanics {
 			}
 		}
 
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			if (isSilverishMaterial(material.name) && hit_entity instanceof EntityLivingBase) {
 				if (hit_entity.getClass().getName().contains("Werewolf")) {
 					modifier *= specialWerewolfModifier;

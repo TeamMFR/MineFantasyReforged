@@ -45,7 +45,7 @@ import java.util.List;
  */
 public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 	protected int itemRarity;
-	private int tier;
+	private final int tier;
 	private float baseDamage;
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;

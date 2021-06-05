@@ -244,11 +244,11 @@ public class EntityMine extends Entity {
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D * getPowderType().rangeModifier;
 			AxisAlignedBB AABB = this.getEntityBoundingBox().expand(area, area / 2, area);
-			List var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
+			List entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
 
-			if (var4 != null && !var4.isEmpty()) {
+			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {
 
-				for (Object o : var4) {
+				for (Object o : entitiesWithinAABB) {
 					Entity entityHit = (Entity) o;
 
 					double distanceToEntity = this.getDistance(entityHit);

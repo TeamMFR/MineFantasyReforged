@@ -31,8 +31,8 @@ import java.util.List;
  */
 public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
 	protected int itemRarity;
-	private ToolMaterial toolMaterial;
-	private int tier;
+	private final ToolMaterial toolMaterial;
+	private final int tier;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
@@ -129,7 +129,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 
 	@Override
 	public Tool getToolType(ItemStack stack) {
-		return Tool.SAW;
+		return Tool.SHEARS;
 	}
 
 	@Override

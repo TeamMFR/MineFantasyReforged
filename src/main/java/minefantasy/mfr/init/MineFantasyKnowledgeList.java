@@ -1,5 +1,6 @@
 package minefantasy.mfr.init;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
@@ -246,7 +247,7 @@ public class MineFantasyKnowledgeList {
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 75)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ADAMANTIUM));
 
-		smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, new ItemStack(MineFantasyItems.ANCIENT_JEWEL_MASTER, 1, 3),
+		smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, MineFantasyItems.ANCIENT_JEWEL_MASTER,
 				(InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY,
 				100);
 		smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, MineFantasyItems.IGNOTUMITE_INGOT, smeltMaster))
@@ -505,9 +506,9 @@ public class MineFantasyKnowledgeList {
 
 	private static Object getMetalTier(String string) {
 		CustomMaterial mat = MetalMaterial.getMaterial(string);
-		if (mat != null)
+		if (mat != CustomMaterial.NONE){
 			return mat.crafterTier;
-
+		}
 		return "?";
 	}
 

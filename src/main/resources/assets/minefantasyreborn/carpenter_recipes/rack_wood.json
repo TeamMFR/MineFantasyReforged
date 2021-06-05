@@ -3,7 +3,7 @@
   "skill": "construction",
   "research": "",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
+  "is_tool_recipe": true,
   "block_tier": -1,
   "craft_time": 5,
   "tool_tier": 0,

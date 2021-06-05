@@ -10,21 +10,21 @@ public class WeaponClass {
 	// TODO make this into an enum
 	public static HashMap<String, WeaponClass> classes = new HashMap<String, WeaponClass>();
 
-	public static WeaponClass FIST = new WeaponClass("fist", null, "blunt");
+	public static WeaponClass FIST = new WeaponClass("fist", Skill.NONE, "blunt");
 
-	public static WeaponClass BLADE = new WeaponClass("blade", null, "blunt");
-	public static WeaponClass BLUNT = new WeaponClass("blunt", null, "blade");
-	public static WeaponClass AXE = new WeaponClass("axe", null, "blade");
-	public static WeaponClass POLEARM = new WeaponClass("polearm", null, "blade");
-	public static WeaponClass MISC = new WeaponClass("misc", null, "blunt");
+	public static WeaponClass BLADE = new WeaponClass("blade", Skill.NONE, "blunt");
+	public static WeaponClass BLUNT = new WeaponClass("blunt", Skill.NONE, "blade");
+	public static WeaponClass AXE = new WeaponClass("axe", Skill.NONE, "blade");
+	public static WeaponClass POLEARM = new WeaponClass("polearm", Skill.NONE, "blade");
+	public static WeaponClass MISC = new WeaponClass("misc", Skill.NONE, "blunt");
 
 	public Skill parentSkill;
 	public String name;
 	public String soundCategory;
 
-	public WeaponClass(String name, Skill parent, String sound) {
+	public WeaponClass(String name, Skill parentSkill, String sound) {
 		this.name = name;
-		this.parentSkill = parent;
+		this.parentSkill = parentSkill;
 		this.soundCategory = sound;
 		classes.put(name, this);
 	}

@@ -49,14 +49,14 @@ public class ItemFilledMould extends ItemBaseMFR {
 		if (nbt.hasKey(Constants.MF_HELD_ITEM_TAG)) {
 			return new ItemStack(nbt.getCompoundTag(Constants.MF_HELD_ITEM_TAG));
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List list, ITooltipFlag flag) {
 		ItemStack held = getHeldItem(item);
-		if (held != null) {
+		if (!held.isEmpty()) {
 			list.add(held.getDisplayName());
 		}
 	}
@@ -82,7 +82,7 @@ public class ItemFilledMould extends ItemBaseMFR {
 				float water = TongsHelper.getWaterSource(world, rayTraceResult.getBlockPos());
 				ItemStack drop = getHeldItem(item);
 
-				if (drop != null && water >= 0) {
+				if (!drop.isEmpty() && water >= 0) {
 					player.playSound(SoundEvents.ENTITY_GENERIC_SPLASH, 1F, 1F);
 					player.playSound(SoundEvents.BLOCK_FIRE_EXTINGUISH, 2F, 0.5F);
 

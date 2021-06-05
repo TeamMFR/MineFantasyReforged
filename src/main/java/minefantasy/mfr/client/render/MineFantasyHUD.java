@@ -306,7 +306,7 @@ public class MineFantasyHUD extends Gui {
 			int cap = ((IDisplayMFRAmmo) held.getItem()).getAmmoCapacity(held);
 
 			ItemStack ammo = AmmoMechanics.getArrowOnBow(held);
-			int ammocount = ammo == ItemStack.EMPTY ? 0 : ammo.getCount();
+			int ammocount = ammo.isEmpty() ? 0 : ammo.getCount();
 			if (cap > 1) {
 				String ammostring = I18n.format("info.firearm.ammo", ammocount, cap);
 				mc.fontRenderer.drawStringWithShadow(ammostring, xPosAC, yPosAC + 10, Color.WHITE.getRGB());
@@ -481,9 +481,9 @@ public class MineFantasyHUD extends Gui {
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
-		if (knowsCraft && tile.toolType != null) {
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.toolType, -1);
-			GuiHelper.renderToolIcon(this, tile.toolType, tile.tier, xPos - 20, yPos, available);
+		if (knowsCraft && tile.requiredToolType != null) {
+			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.requiredToolType, -1);
+			GuiHelper.renderToolIcon(this, tile.requiredToolType.getName(), tile.tier, xPos - 20, yPos, available);
 		}
 
 		GL11.glPopMatrix();

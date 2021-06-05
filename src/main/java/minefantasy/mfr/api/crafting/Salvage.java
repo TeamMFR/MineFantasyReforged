@@ -110,7 +110,7 @@ public class Salvage {
 			return getSalvage(new ItemStack(shared));
 		}
 
-		if (item != null && item.getItem() instanceof ISpecialSalvage) {
+		if (!item.isEmpty() && item.getItem() instanceof ISpecialSalvage) {
 			Object[] special = ((ISpecialSalvage) item.getItem()).getSalvage(item);
 			if (special != null) {
 				return special;

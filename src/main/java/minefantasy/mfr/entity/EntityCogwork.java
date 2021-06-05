@@ -86,7 +86,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
 	@SideOnly(Side.CLIENT)
 	public static int getArmourRating(CustomMaterial base) {
-		if (base != null) {
+		if (base != CustomMaterial.NONE) {
 			float ratio = base.hardness * ArmourDesign.COGWORK.getRating() * rating_modifier;
 			return (int) (ratio * ArmourCalculator.armourRatingScale);
 		}
@@ -458,9 +458,9 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 				return false;
 			}
 			if (this.isUnderRepairFrame()) {
-				if (getPlating() == null && item.getItem() == MineFantasyItems.COGWORK_ARMOUR) {
+				if (getPlating() == CustomMaterial.NONE && item.getItem() == MineFantasyItems.COGWORK_ARMOUR) {
 					CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-					if (material != null) {
+					if (material != CustomMaterial.NONE) {
 						this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 1.0F, 1.0F);
 						int boltCount = this.getBolts();
 						if (boltCount < maxBolts) {
@@ -486,7 +486,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 						return true;
 					}
 				}
-				if (this.getPlating() != null && ToolHelper.getToolTypeFromStack(item) == Tool.SPANNER) {
+				if (this.getPlating() != CustomMaterial.NONE && ToolHelper.getToolTypeFromStack(item) == Tool.SPANNER) {
 					this.playSound(SoundEvents.ENTITY_HORSE_ARMOR, 1.2F, 1.0F);
 					user.swingArm(hand);
 					int boltCount = this.getBolts();
@@ -775,7 +775,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 
 	@Override
 	public boolean isFullyArmoured() {
-		return getPlating() != null;
+		return getPlating() != CustomMaterial.NONE;
 	}
 
 	@Override
@@ -801,7 +801,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	}
 
 	public boolean shouldBlockPoisonOrMagic() {
-		return getPlating() != null;
+		return getPlating() != CustomMaterial.NONE;
 	}
 
 	@Override
@@ -820,7 +820,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		float AC = 2.0F;
 		float fResist = 0.0F;
 		CustomMaterial plating = getPlating();
-		if (plating != null) {
+		if (plating != CustomMaterial.NONE) {
 			AC = plating.hardness * ArmourDesign.COGWORK.getRating() * rating_modifier;
 			fResist = plating.getFireResistance() / 100F;
 		}
@@ -850,7 +850,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	protected void damageEntity(DamageSource source, float dam) {
 		CustomMaterial plating = this.getPlating();
 		boolean canDestroy = false;// Only spanner or fire can destroy frames
-		boolean isFrame = plating == null;
+		boolean isFrame = plating == CustomMaterial.NONE;
 
 		if (source.getImmediateSource() != null && source.getImmediateSource() instanceof EntityLivingBase) {
 			canDestroy = ToolHelper.getToolTypeFromStack(((EntityLivingBase) source.getImmediateSource()).getHeldItemMainhand()) == Tool.SPANNER;
@@ -867,7 +867,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 			}
 			return;
 		} else if (dam != 0.0F) {
-			if (plating != null) {
+			if (plating != CustomMaterial.NONE) {
 				float HP = plating.durability * ArmourDesign.COGWORK.getDurability() * 20F * health_modifier;
 				dam *= (this.getMaxHealth() / HP);
 			}
@@ -960,7 +960,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	public float getWeight() {
 		float weight = base_frame_weight;// Weight of frame
 		CustomMaterial plating = getPlating();
-		if (plating != null) {
+		if (plating != CustomMaterial.NONE) {
 			weight += plating.density * base_armour_units;
 		}
 		return weight;

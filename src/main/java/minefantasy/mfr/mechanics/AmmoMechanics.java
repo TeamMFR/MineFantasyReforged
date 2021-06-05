@@ -53,7 +53,7 @@ public class AmmoMechanics {
 
 	public static void putAmmoOnFirearm(ItemStack weapon, ItemStack ammo) {
 		NBTTagCompound save = new NBTTagCompound();
-		if (ammo == null) {
+		if (ammo.isEmpty()) {
 			getNBT(weapon).removeTag(arrowOnBowNBT);
 			return;
 		}
@@ -182,7 +182,7 @@ public class AmmoMechanics {
 	public static void dropAmmoCrate(World world, ItemStack crate, double x, double y, double z) {
 		ItemStack drop = BlockAmmoBox.getHeld(crate, true);
 		int stock = BlockAmmoBox.getStock(crate, true);
-		if (drop != null) {
+		if (!drop.isEmpty()) {
 			while (stock > 0) {
 				int stackSize = Math.min(stock, drop.getMaxStackSize());
 				stock -= stackSize;

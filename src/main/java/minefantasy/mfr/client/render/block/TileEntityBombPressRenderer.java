@@ -7,15 +7,13 @@ import minefantasy.mfr.client.model.block.ModelBombPress;
 import minefantasy.mfr.tile.TileEntityBombPress;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
 
 /**
@@ -26,8 +24,8 @@ import net.minecraftforge.common.model.IModelState;
  * <p>
  * Custom renderers based off render tutorial by MC_DucksAreBest
  */
-public class TileEntityBombPressRenderer<T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
-	private ModelBombPress model;
+public class TileEntityBombPressRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
+	private final ModelBombPress model;
 	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bomb_press.png");
 
 	public TileEntityBombPressRenderer() {
@@ -35,11 +33,11 @@ public class TileEntityBombPressRenderer<T extends TileEntity> extends FastTESR<
 	}
 
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
-		renderModelAt((TileEntityBombPress) te, x, y, z, partial, ((TileEntityBombPress) te).animation);
+	public void render(T te, double x, double y, double z, float partialTick, int breakStage, float partial) {
+		renderModelAt((TileEntityBombPress) te, x, y, z, ((TileEntityBombPress) te).animation);
 	}
 
-	public void renderModelAt(TileEntityBombPress tile, double d, double d1, double d2, float f, float animation) {
+	public void renderModelAt(TileEntityBombPress tile, double d, double d1, double d2, float animation) {
 		EnumFacing facing = EnumFacing.NORTH;
 		if (tile.hasWorld()) {
 			IBlockState state = tile.getWorld().getBlockState(tile.getPos());
@@ -54,10 +52,7 @@ public class TileEntityBombPressRenderer<T extends TileEntity> extends FastTESR<
 		GlStateManager.scale(1F, -1F, -1F); // if you read this comment out this line and you can see what happens
 		GlStateManager.pushMatrix();
 
-		GlStateManager.disableLighting();
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
 		model.renderModel(0.0625F, animation);
-		GlStateManager.enableLighting();
 
 		GlStateManager.popMatrix();
 		GlStateManager.color(255, 255, 255);
@@ -65,7 +60,7 @@ public class TileEntityBombPressRenderer<T extends TileEntity> extends FastTESR<
 
 	}
 
-	public void renderInvModelAt(double d, double d1, double d2, float f, float animation) {
+	public void renderInvModelAt(double d, double d1, double d2, float animation) {
 		EnumFacing facing = EnumFacing.NORTH;
 
 		GlStateManager.pushMatrix(); // start
@@ -88,7 +83,7 @@ public class TileEntityBombPressRenderer<T extends TileEntity> extends FastTESR<
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-		renderInvModelAt(0, 0F, 0F, 0F, 0F);
+		renderInvModelAt(0, 0F, 0F, 0F);
 
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);

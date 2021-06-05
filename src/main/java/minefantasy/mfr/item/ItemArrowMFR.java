@@ -196,7 +196,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String material = "";
-		if (isCustom && CustomToolHelper.getCustomPrimaryMaterial(item) != null) {
+		if (isCustom && CustomToolHelper.getCustomPrimaryMaterial(item) != CustomMaterial.NONE) {
 			material = I18n.format(Utils.convertSnakeCaseToSplitCapitalized(CustomToolHelper.getCustomPrimaryMaterial(item).getName()));
 		}
 		return I18n.format("item." + this.getRegistryName().getResourcePath() + ".name", material);

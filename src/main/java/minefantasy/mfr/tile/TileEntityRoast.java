@@ -87,7 +87,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 
 	private int getTemp() {
 		TileEntity tile = world.getTileEntity(pos.add(0, -1, 0));
-		if (tile != null && tile instanceof IHeatSource) {
+		if (tile instanceof IHeatSource) {
 			return ((IHeatSource) tile).getHeat();
 		}
 		return 0;
@@ -153,12 +153,6 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	public boolean canAccept(TileEntity tile) {
 		return true;
 	}
-
-	//    private void sendPacketToClients() {
-	//        if (world.isRemote)
-	//            return;
-	//        NetworkHandler.sendToAllTrackingChunk (world, pos.getX() >> 4, pos.getZ() >> 4, new TileInventoryPacket(this.getInventory(), this));
-	//    }
 
 	@Override
 	public Block getBlockType() {

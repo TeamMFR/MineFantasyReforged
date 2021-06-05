@@ -41,7 +41,7 @@ public class CommandMFR extends CommandBase {
 			if (strings.length > 0) {
 				if (strings[0].equalsIgnoreCase("edit")) {
 					ItemStack equippedItem = player.getHeldItemMainhand();
-					if (equippedItem == null) {
+					if (equippedItem.isEmpty()) {
 						player.sendMessage(new TextComponentString(I18n.format("command.invalid.item")));
 						return;
 					}
@@ -69,7 +69,7 @@ public class CommandMFR extends CommandBase {
 		}
 
 		CustomMaterial material = CustomMaterial.getMaterial(strings[2]);
-		if (material == null) {
+		if (material == CustomMaterial.NONE) {
 			player.sendMessage(new TextComponentString(I18n.format("command.edit.invalid.material")));
 			return;
 		}

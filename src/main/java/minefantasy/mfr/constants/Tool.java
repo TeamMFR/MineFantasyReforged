@@ -17,7 +17,7 @@ public enum Tool {
 	NEEDLE("needle"),
 	KNIFE("knife"),
 	MALLET("mallet"),
-	SHEARS("sheards"),
+	SHEARS("shears"),
 	SAW("saw"),
 	SPANNER("spanner"),
 	SPOON("spoon");

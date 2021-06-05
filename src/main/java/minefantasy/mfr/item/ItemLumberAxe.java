@@ -58,26 +58,31 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 
 	@Override
 	public float getOffsetX(ItemStack itemstack) {
-		return 0;
+		return 1.5F;
 	}
 
 	@Override
 	public float getOffsetY(ItemStack itemstack) {
-		return 0;
+		return 1.8F;
 	}
 
 	@Override
 	public float getOffsetZ(ItemStack itemstack) {
-		return 0;
+		return 0.05F;
 	}
 
 	@Override
 	public float getRotationOffset(ItemStack itemstack) {
-		return 0;
+		return 90F;
 	}
 
 	@Override
 	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
+		return true;
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
 		return true;
 	}
 

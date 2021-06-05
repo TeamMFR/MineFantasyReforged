@@ -4,7 +4,6 @@ import codechicken.lib.model.ModelRegistryHelper;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
-import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
@@ -124,7 +123,7 @@ public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack held = user.getHeldItem(hand);
 		TileEntity tile = world.getTileEntity(pos);
-		if (tile != null && tile instanceof TileEntityAmmoBox) {
+		if (tile instanceof TileEntityAmmoBox) {
 			return ((TileEntityAmmoBox) tile).interact(user, held);
 		}
 		return false;
@@ -142,8 +141,8 @@ public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 	}
 
 	private ItemStack modifyAmmo(TileEntityAmmoBox tile, ItemStack item) {
-		if (tile != null && item != null) {
-			if (tile.inventoryStack != null) {
+		if (tile != null && !item.isEmpty()) {
+			if (!tile.inventoryStack.isEmpty()) {
 				NBTTagCompound nbt = new NBTTagCompound();
 				if (!item.hasTagCompound()) {
 					item.setTagCompound(new NBTTagCompound());

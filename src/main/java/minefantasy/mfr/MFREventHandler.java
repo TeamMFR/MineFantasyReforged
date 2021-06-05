@@ -13,6 +13,7 @@ import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
 import minefantasy.mfr.entity.EntityCogwork;
@@ -220,7 +221,7 @@ public final class MFREventHandler {
 						if (!hasInfo && s.startsWith("ingot")) {
 							String s2 = s.substring(5, s.length());
 							CustomMaterial material = CustomMaterial.getMaterial(s2);
-							if (material != null)
+							if (material != CustomMaterial.NONE)
 								hasInfo = true;
 
 							CustomToolHelper.addComponentString(event.getItemStack(), event.getToolTip(), material);
@@ -272,7 +273,7 @@ public final class MFREventHandler {
 						+ TextFormatting.GRAY);
 			}
 			WeaponClass WC = WeaponClass.findClassForAny(event.getItemStack());
-			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != null) {
+			if (WC != null && RPGElements.isSystemActive && WC.parentSkill != Skill.NONE) {
 				event.getToolTip().add(I18n.format("weaponclass." + WC.name.toLowerCase()));
 				float skillMod = RPGElements.getWeaponModifier(event.getEntityPlayer(), WC.parentSkill) * 100F;
 				if (skillMod > 100)

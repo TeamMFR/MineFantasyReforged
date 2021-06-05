@@ -208,8 +208,7 @@ public class InformationBase {
 	public boolean hasSkillsUnlocked(EntityPlayer player) {
 		if (skills == null)
 			return true;
-		for (int id = 0; id < skills.size(); id++) {
-			SkillRequirement requirement = skills.get(id);
+		for (SkillRequirement requirement : skills) {
 			if (!requirement.isAvailable(player)) {
 				return false;
 			}

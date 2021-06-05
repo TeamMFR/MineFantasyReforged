@@ -41,9 +41,9 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 	private float progress = 0;
 	private float progressMax = 400;
 	private float temperature;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
-	private int OUT_SLOT = 9;
+	private final int OUT_SLOT = 9;
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -269,7 +269,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 		// worldObj.setBlock(xCoord+x, yCoord+y, zCoord+z, Blocks.end_portal_frame, 0,
 		// 2);
-		return block == Blocks.END_PORTAL_FRAME && block == block.getDefaultState().withProperty(BlockEndPortalFrame.EYE, true);
+		return block == Blocks.END_PORTAL_FRAME && block.getDefaultState() == block.getDefaultState().withProperty(BlockEndPortalFrame.EYE, true);
 	}
 
 	private boolean isBlastOutput() {

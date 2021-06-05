@@ -23,6 +23,9 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -63,23 +66,25 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 		return toolMaterial;
 	}
 
-	public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack item = player.getHeldItemMainhand();
+
 		if (!world.isRemote)
-			return item;
+			return new ActionResult<>(EnumActionResult.FAIL, item);
 
 		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
 		if (rayTraceResult == null) {
-			return item;
+			return new ActionResult<>(EnumActionResult.FAIL, item);
 		} else {
 			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
 				if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
-					return item;
+					return new ActionResult<>(EnumActionResult.FAIL, item);
 				}
 
 				if (!player.canPlayerEdit(rayTraceResult.getBlockPos(), rayTraceResult.sideHit, item)) {
-					return item;
+					return new ActionResult<>(EnumActionResult.FAIL, item);
 				}
 
 				Block block = world.getBlockState(rayTraceResult.getBlockPos()).getBlock();
@@ -95,13 +100,8 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 				}
 			}
 
-			return item;
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
 		}
-	}
-
-	private boolean canMineBlock(World world, int i, int j, int k) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	public ItemPickMFR setCustom(String s) {

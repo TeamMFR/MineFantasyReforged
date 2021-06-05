@@ -38,7 +38,7 @@ public class FarmingHelper {
 	}
 
 	private static float getHoeEfficiency(ItemStack hoe) {
-		if (hoe != null && hoe.getItem() instanceof ItemHoe) {
+		if (!hoe.isEmpty() && hoe.getItem() instanceof ItemHoe) {
 			String name = ((ItemHoe) hoe.getItem()).getMaterialName();
 			ToolMaterial mat = ToolMaterial.valueOf(name);
 

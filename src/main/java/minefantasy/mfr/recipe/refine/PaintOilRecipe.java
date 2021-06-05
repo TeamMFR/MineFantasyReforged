@@ -38,7 +38,7 @@ public class PaintOilRecipe {// FurnaceRecipes
 
 		do {
 			if (!iterator.hasNext()) {
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			entry = iterator.next();

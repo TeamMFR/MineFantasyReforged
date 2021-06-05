@@ -7,19 +7,17 @@ import minefantasy.mfr.client.model.block.ModelBellows;
 import minefantasy.mfr.tile.TileEntityBellows;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
 
-public class TileEntityBellowsRenderer<T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
-	private ModelBellows model;
+public class TileEntityBellowsRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
+	private final ModelBellows model;
 	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bellows.png");
 
 	public TileEntityBellowsRenderer() {
@@ -27,12 +25,11 @@ public class TileEntityBellowsRenderer<T extends TileEntity> extends FastTESR<T>
 	}
 
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
-
-		renderModelAt((TileEntityBellows) te, x, y, z, partialTick);
+	public void render(T te, double x, double y, double z, float partialTick, int breakStage, float partial) {
+		renderModelAt((TileEntityBellows) te, x, y, z);
 	}
 
-	public void renderModelAt(TileEntityBellows tile, double d, double d1, double d2, float f) {
+	public void renderModelAt(TileEntityBellows tile, double d, double d1, double d2) {
 		EnumFacing facing = EnumFacing.NORTH;
 		if (tile.hasWorld()) {
 			IBlockState state = tile.getWorld().getBlockState(tile.getPos());
@@ -55,10 +52,7 @@ public class TileEntityBellowsRenderer<T extends TileEntity> extends FastTESR<T>
 		GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
 		GlStateManager.pushMatrix();
 
-		GlStateManager.disableLighting();
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
 		model.renderModel(0.0625F);
-		GlStateManager.enableLighting();
 
 		GlStateManager.popMatrix();
 		GlStateManager.color(255, 255, 255);
@@ -66,7 +60,7 @@ public class TileEntityBellowsRenderer<T extends TileEntity> extends FastTESR<T>
 
 	}
 
-	public void renderInvModel(double d, double d1, double d2, float f) {
+	public void renderInvModel(double d, double d1, double d2) {
 		int j = 90;
 
 		model.rotate(0);
@@ -78,7 +72,6 @@ public class TileEntityBellowsRenderer<T extends TileEntity> extends FastTESR<T>
 		GlStateManager.rotate(j, 0.0F, 1.0F, 0.0F); // rotate based on metadata
 		GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
 		GlStateManager.pushMatrix();
-		float level = 0F;
 		model.renderModel(0.0625F);
 
 		GlStateManager.popMatrix();
@@ -94,7 +87,7 @@ public class TileEntityBellowsRenderer<T extends TileEntity> extends FastTESR<T>
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-		renderInvModel(0F, 0F, 0F, 0F);
+		renderInvModel(0F, 0F, 0F);
 
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);

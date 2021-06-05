@@ -83,11 +83,6 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	}
 
 	@Override
-	public boolean hasFastRenderer() {
-		return true;
-	}
-
-	@Override
 	public void update() {
 		//ANIMATION
 		if (opening) {

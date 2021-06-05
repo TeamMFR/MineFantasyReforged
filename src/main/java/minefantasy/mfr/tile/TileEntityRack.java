@@ -3,9 +3,9 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBlockToolRack;
+import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.util.BlockPositionHelper;
 import minefantasy.mfr.util.CustomToolHelper;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemBlock;
@@ -13,8 +13,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -49,11 +47,6 @@ public class TileEntityRack extends TileEntityWoodDecor {
 	@Override
 	protected int getGuiId() {
 		return 0;
-	}
-
-	@Override
-	public boolean hasFastRenderer() {
-		return true;
 	}
 
 	@Override
@@ -125,8 +118,9 @@ public class TileEntityRack extends TileEntityWoodDecor {
 		if (item.getItem() instanceof ItemArmor) {
 			return false;
 		}
-		// if(item.getItem() instanceof ItemCrossbow || item.getItem() instanceof
-		// ItemBomb || item.getItem() instanceof ItemMine)return false;
+		if(item.getItem() instanceof ItemCrossbow) {
+			return false;
+		}
 		return item.getItem().isDamageable();
 	}
 

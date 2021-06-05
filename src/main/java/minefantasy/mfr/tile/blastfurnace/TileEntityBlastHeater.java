@@ -120,7 +120,7 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 			TileEntity tileEntity = world.getTileEntity(pos.add(0, y + 1, 0));
 			if (tileEntity instanceof TileEntityBlastChamber && !(tileEntity instanceof TileEntityBlastHeater)) {
 				ItemStack result = getSmeltedResult((TileEntityBlastChamber) tileEntity);
-				if (result != null) {
+				if (!result.isEmpty()) {
 					dropItem(result);
 				}
 			} else {
@@ -142,7 +142,7 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 			TileEntityCrucible crucible = (TileEntityCrucible) under;
 			int slot = crucible.getInventory().getSlots() - 1;
 			{
-				if (crucible.getInventory().getStackInSlot(slot) == ItemStack.EMPTY) {
+				if (crucible.getInventory().getStackInSlot(slot).isEmpty()) {
 					crucible.getInventory().setStackInSlot(slot, result);
 					return;
 				} else if (CustomToolHelper.areEqual(crucible.getInventory().getStackInSlot(slot), result)) {
@@ -192,10 +192,10 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 	private ItemStack getSmeltedResult(TileEntityBlastChamber shaft) {
 		if (shaft.getIsBuilt()) {
 			ItemStack input = shaft.getInventory().getStackInSlot(1);
-			if (shaft.tempUses <= 0 && shaft.getInventory().getStackInSlot(0) == ItemStack.EMPTY || !isCarbon(shaft.getInventory().getStackInSlot(0))) {
+			if (shaft.tempUses <= 0 && shaft.getInventory().getStackInSlot(0).isEmpty() || !isCarbon(shaft.getInventory().getStackInSlot(0))) {
 				return ItemStack.EMPTY;
 			}
-			if (input != ItemStack.EMPTY) {
+			if (!input.isEmpty()) {
 				ItemStack result = getResult(input);
 				if (!result.isEmpty()) {
 					for (int a = 0; a < shaft.getInventory().getSlots(); a++) {

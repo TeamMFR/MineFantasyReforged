@@ -3,6 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerTanner;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -33,18 +34,13 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	public float maxProgress;
 	public String tex = "";
 	public int tier = 0;
-	public String toolType = "knife";
+	public Tool requiredToolType = Tool.KNIFE;
 	public float acTime;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	private int ticksExisted;
 
 	public TileEntityTanningRack() {
 
-	}
-
-	@Override
-	public boolean hasFastRenderer() {
-		return true;
 	}
 
 	public final ItemStackHandler inventory = createInventory();
@@ -94,7 +90,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		ItemStack held = player.getHeldItemMainhand();
 
 		// Interaction
-		if (!getInventory().getStackInSlot(1).isEmpty() && (leverPull || ToolHelper.getToolTypeFromStack(held).getName().equalsIgnoreCase(toolType))) {
+		if (!getInventory().getStackInSlot(1).isEmpty() && (leverPull || ToolHelper.getToolTypeFromStack(held) == requiredToolType)) {
 			if (leverPull || ToolHelper.getCrafterTier(held) >= tier) {
 				if (!leverPull) {
 					held.damageItem(1, player);
@@ -114,7 +110,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 				if (efficiency > 0) {
 					progress += efficiency;
 				}
-				if (toolType.equalsIgnoreCase("shears")) {
+				if (requiredToolType == Tool.SHEARS) {
 					world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.AMBIENT, 1.0F, 1.0F);
 				} else {
 					world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.BLOCK_CLOTH_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F);
@@ -142,8 +138,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			}
 			return true;
 		}
-		if (!leftClick && (ToolHelper.getCrafterToolName(held).equalsIgnoreCase("nothing")
-				|| ToolHelper.getCrafterToolName(held).equalsIgnoreCase("hands"))) {
+		if (!leftClick && (ToolHelper.getCrafterToolName(held).equalsIgnoreCase("nothing") || ToolHelper.getToolTypeFromStack(held) == Tool.HANDS)) {
 			// Item placement
 			ItemStack item = getInventory().getStackInSlot(0);
 			if (item.isEmpty()) {
@@ -192,7 +187,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			getInventory().setStackInSlot(1, recipe.output);
 			tier = recipe.tier;
 			maxProgress = recipe.time;
-			toolType = recipe.toolType;
+			requiredToolType = Tool.fromName(recipe.toolType);
 		}
 		progress = 0;
 		sendUpdates();
@@ -261,7 +256,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		tier = nbt.getInteger("tier");
 		progress = nbt.getFloat("Progress");
 		maxProgress = nbt.getFloat("maxProgress");
-		toolType = nbt.getString("toolType");
+		requiredToolType = Tool.fromName(nbt.getString("toolType"));
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 	}
@@ -275,7 +270,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		nbt.setInteger("tier", tier);
 		nbt.setFloat("Progress", progress);
 		nbt.setFloat("maxProgress", maxProgress);
-		nbt.setString("toolType", toolType);
+		nbt.setString("toolType", requiredToolType.getName());
 		nbt.setTag("inventory", inventory.serializeNBT());
 
 		return nbt;

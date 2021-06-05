@@ -17,7 +17,8 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreborn:timber"
+      "item": "minefantasyreborn:timber",
+      "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}"
     },
     "L": {
       "item": "minecraft:leather"

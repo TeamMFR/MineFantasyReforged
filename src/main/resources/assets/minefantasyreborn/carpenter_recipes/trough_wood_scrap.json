@@ -3,7 +3,7 @@
   "skill": "construction",
   "research": "",
   "tool_type": "hammer",
-  "is_tool_recipe": true,
+  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 7,
   "tool_tier": 0,
@@ -12,18 +12,16 @@
   "pattern": [
     "P P ",
     "PPP ",
-    "NNN ",
+    "    ",
     "    "
   ],
   "key": {
     "P": {
       "item": "minefantasyreborn:timber"
-    },
-    "N": {
-      "item": "minefantasyreborn:nail"
     }
   },
   "result": {
-    "item": "minefantasyreborn:trough_wood"
+    "item": "minefantasyreborn:trough_wood",
+    "nbt": "{mf_custom_materials: { main_material:\"scrap_wood\"} }"
   }
 }

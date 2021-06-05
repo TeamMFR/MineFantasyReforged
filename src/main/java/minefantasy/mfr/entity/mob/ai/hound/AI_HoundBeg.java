@@ -68,7 +68,7 @@ public class AI_HoundBeg extends EntityAIBase {
 	 */
 	private boolean hasPlayerGotBoneInHand(EntityPlayer p_75382_1_) {
 		ItemStack itemstack = p_75382_1_.inventory.getCurrentItem();
-		return itemstack == null ? false
+		return itemstack.isEmpty() ? false
 				: (!this.theWolf.isTamed() && itemstack.getItem() == Items.BONE ? true
 				: this.theWolf.isBreedingItem(itemstack));
 	}

@@ -7,10 +7,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.registry.DataLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 
@@ -209,9 +215,27 @@ public abstract class RecipeLoader extends DataLoader {
 		} else if (item.getHasSubtypes() && !jsonObject.has("data")) {
 			throw new JsonParseException("Missing data for item '" + itemRegistryName + "'");
 		} else {
+			NBTTagCompound nbt = null;
+			if (jsonObject.has("nbt")) {
+				try {
+					JsonElement element = jsonObject.get("nbt");
+
+					if (element.isJsonObject())
+						nbt = new NBTTagCompound();
+					else
+						nbt = JsonToNBT.getTagFromJson(JsonUtils.getString(element, "nbt"));
+				}
+				catch (NBTException e) {
+					throw new JsonSyntaxException("Invalid NBT Entry: " + e.toString());
+				}
+			}
 			int data = JsonUtils.getInt(jsonObject, "data", 0);
 			int count = useCount ? JsonUtils.getInt(jsonObject, "count", 1) : 1;
-			return new ItemStack(item, count, data);
+			ItemStack stack = new ItemStack(item, count, data);
+			if (nbt != null){
+				stack.setTagCompound(nbt);
+			}
+			return stack;
 		}
 	}
 

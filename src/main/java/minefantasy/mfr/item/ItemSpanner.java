@@ -7,6 +7,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
+import minefantasy.mfr.block.BlockRack;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -39,8 +40,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.common.Optional.Interface;
-import net.minecraftforge.fml.common.Optional.InterfaceList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -54,17 +53,11 @@ import java.util.Set;
  * @author Anonymous Productions
  */
 
-@InterfaceList({
-		@Interface(iface = "buildcraft.api.tools.IToolWrench", modid = "BuildCraft|Core"),
-		@Interface(iface = "cofh.api.item.IToolHammer", modid = "CoFHAPI|item")
-})
-
 public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
 	protected int itemRarity;
-	private ToolMaterial material;
-	private int tier;
+	private final ToolMaterial material;
+	private final int tier;
 	private float baseDamage;
-	private String name;
 	private boolean isCustom = false;
 	private float efficiencyMod = 1.0F;
 
@@ -74,7 +67,6 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	public ItemSpanner(String name, int rarity, int tier) {
 		super(2.0F, 1.0F, ToolMaterial.IRON, Sets.newHashSet(new Block[] {}));
 		this.material = ToolMaterial.IRON;
-		this.name = name;
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		this.setMaxDamage(material.getMaxUses() * 2);
@@ -86,6 +78,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 		shiftRotations.add(BlockButton.class);
 		shiftRotations.add(BlockChest.class);
 		blacklistedRotations.add(BlockBed.class);
+		blacklistedRotations.add(BlockRack.class);
 
 		MineFantasyReborn.PROXY.addClientRegister(this);
 	}

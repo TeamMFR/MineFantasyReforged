@@ -76,7 +76,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 			//double drop logic
 			List<ItemStack> drops = blockState.getBlock().getDrops(world, pos, state, ConfigTools.handpickFortune ? fortune : 0);
 
-			if (!silk && drops != null && !drops.isEmpty()) {
+			if (!silk && !drops.isEmpty()) {
 				for (ItemStack drop : drops) {
 					if (isOre(blockState.getBlock(), state) && !drop.isItemEqual(new ItemStack(blockState.getBlock(), 1))
 							&& !(drop.getItem() instanceof ItemBlock) && world.rand.nextFloat() < getDoubleDropChance()) {
@@ -88,7 +88,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 			//special drop logic
 			ArrayList<ItemStack> specialdrops = RandomOre.getDroppedItems(user, blockState.getBlock(), state.getBlock().getMetaFromState(state), harvestlvl, fortune, silk, pos.getY());
 
-			if (specialdrops != null && !specialdrops.isEmpty()) {
+			if (!specialdrops.isEmpty()) {
 
 				for (ItemStack newdrop : specialdrops) {
 					if (!newdrop.isEmpty()) {

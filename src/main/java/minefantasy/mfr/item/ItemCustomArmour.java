@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemCustomArmour extends ItemArmourMFR {
-	private String specialDesign;
+	private final String specialDesign;
 	private float ratingModifier = 1.0F;
 
 	public ItemCustomArmour(String craftDesign, String name, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
@@ -97,7 +97,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	@Override
 	public int getBaseColour(ItemStack item) {
 		CustomMaterial material = getCustomMaterial(item);
-		if (material == null) {
+		if (material == CustomMaterial.NONE) {
 			return (255 << 16) + (255 << 8) + 255;
 		}
 		return material.getColourInt();
@@ -105,11 +105,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
 	@Override
 	public CustomMaterial getCustomMaterial(ItemStack item) {
-		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-		if (material != null) {
-			return material;
-		}
-		return null;
+		return CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
 	}
 
 	@Override
@@ -140,7 +136,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	public float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
 		float baseWeight = armourWeight * ArmourCalculator.sizes[slot.getIndex()];
 		CustomMaterial material = this.getCustomMaterial(item);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			baseWeight *= material.density;
 		}
 		return baseWeight;
@@ -148,7 +144,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
 	public int getMaxDamage(ItemStack stack) {
 		CustomMaterial material = this.getCustomMaterial(stack);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			return (int) ((material.durability * 250) * (design.getDurability() / 2F));
 		}
 		return getMaxDamage();

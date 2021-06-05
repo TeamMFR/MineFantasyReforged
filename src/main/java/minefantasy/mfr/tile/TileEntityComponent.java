@@ -45,11 +45,6 @@ public class TileEntityComponent extends TileEntityBase {
 		return true;
 	}
 
-	@Override
-	public boolean hasFastRenderer() {
-		return true;
-	}
-
 	public void setItem(ItemStack item, String type, String tex, int max, int stackSize) {
 		this.getInventory().setStackInSlot(0, item);
 		this.getItem().setCount(1);
@@ -213,7 +208,7 @@ public class TileEntityComponent extends TileEntityBase {
 		if (!getItem().isEmpty()) {
 			nbt.setTag("inventory", inventory.serializeNBT());
 		}
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			nbt.setString("material_name", material.getName());
 		}
 		return nbt;

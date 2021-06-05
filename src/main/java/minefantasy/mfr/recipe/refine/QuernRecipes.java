@@ -36,7 +36,7 @@ public class QuernRecipes {
 	}
 
 	public static QuernRecipes getResult(ItemStack input) {
-		if (input != null) {
+		if (!input.isEmpty()) {
 			for (QuernRecipes recipes : recipeList) {
 				if (Utils.doesMatch(input, recipes.input)) {
 					return recipes;

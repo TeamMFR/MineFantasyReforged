@@ -209,7 +209,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 				initBasicAttack();
 			}
 			if (this.getAttackTarget() != null) {
-				if (getRageLevel() > 20 && getAttack() != (byte) 2 && getHeldItemMainhand() == ItemStack.EMPTY && rand.nextInt(100) == 0) {
+				if (getRageLevel() > 20 && getAttack() != (byte) 2 && getHeldItemMainhand().isEmpty() && rand.nextInt(100) == 0) {
 					this.initHeadbutt();
 				}
 				EntityLivingBase target = getAttackTarget();
@@ -668,7 +668,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 		MinotaurBreed breed = getMinotaur();
 		byte att = getAttack();
 
-		if (att != (byte) 1 && getHeldItemMainhand() != ItemStack.EMPTY)// no weapon dam on gore
+		if (att != (byte) 1 && !getHeldItemMainhand().isEmpty())// no weapon dam on gore
 		{
 			float melee = att == (byte) 2 ? breed.beserkDamage : breed.poundDamage;
 

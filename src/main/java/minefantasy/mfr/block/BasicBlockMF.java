@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class BasicBlockMF extends Block implements IClientRegister {
-	private Object drop;
+	private final Object drop;
 
 	public BasicBlockMF(String name, Material material) {
 		this(name, material, null);

@@ -679,18 +679,24 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	@Override
 	public float getOffsetY(ItemStack itemstack) {
 		if (this.getScale(itemstack) > 1.5F) {
-			return 0.5F;
+			return 2.0F;
 		}
 		return 0;
 	}
 
 	@Override
 	public float getOffsetZ(ItemStack itemstack) {
+		if (this.getScale(itemstack) > 1.5F) {
+			return -0.1F;
+		}
 		return 0;
 	}
 
 	@Override
 	public float getRotationOffset(ItemStack itemstack) {
+		if (getScale(itemstack) > 1.5F){
+			return 90;
+		}
 		return 0;
 	}
 
@@ -700,10 +706,12 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		if (scale > 1.5F && !rack.hasRackBelow(slot)) {
 			return false;
 		}
-		if (scale > 2.5F && !rack.hasRackAbove(slot)) {
-			return false;
-		}
-		return true;
+		return !(scale > 2.5F) || rack.hasRackAbove(slot);
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return false;
 	}
 
 	@Override

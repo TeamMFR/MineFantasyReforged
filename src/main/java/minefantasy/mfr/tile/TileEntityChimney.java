@@ -19,7 +19,7 @@ public class TileEntityChimney extends TileEntity implements ISmokeCarrier, ITic
 	public int lastSharedInt = 0;
 	protected int smokeStorage;
 	private int isIndirect = -1;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	@Override
 	public void update() {

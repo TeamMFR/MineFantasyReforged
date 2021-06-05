@@ -1,7 +1,5 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.item.ItemBlockToolRack;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityWoodDecor;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -46,7 +44,7 @@ public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor
 		TileEntityWoodDecor tile = getTile(world, pos);
 		if (tile != null) {
 			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
-			if (material != null) {
+			if (material != CustomMaterial.NONE) {
 				tile.setMaterial(material);
 			}
 		}
@@ -62,7 +60,7 @@ public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor
 	}
 
 	protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {
-		if (tile != null && item != null) {
+		if (tile != null && !item.isEmpty()) {
 			CustomMaterial.addMaterial(item, CustomToolHelper.slot_main, tile.getMaterialName());
 		}
 		return item;

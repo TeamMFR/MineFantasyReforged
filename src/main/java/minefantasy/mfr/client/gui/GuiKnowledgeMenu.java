@@ -613,7 +613,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	}
 
 	protected void drawSkill(int x, int y, Skill skill) {
-		if (skill != null) {
+		if (skill != Skill.NONE) {
 			int xp = skill.getXP(player)[0];
 			int max = skill.getXP(player)[1];
 			if (xp > max)
@@ -628,7 +628,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	}
 
 	protected void drawSkillName(int x, int y, Skill skill) {
-		if (skill != null) {
+		if (skill != Skill.NONE) {
 			int level = RPGElements.getLevel(player, skill);
 			mc.fontRenderer.drawString(skill.getDisplayName(), x + 2, y + 1, 0);
 			mc.fontRenderer.drawString("" + level, x + 1, y + 10, 0);

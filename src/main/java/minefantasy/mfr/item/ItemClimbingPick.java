@@ -33,8 +33,8 @@ import java.util.Random;
  * @author Anonymous Productions
  */
 public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
-	private Random rand = new Random();
-	private int itemRarity;
+	private final Random rand = new Random();
+	private final int itemRarity;
 
 	public ItemClimbingPick(String name, ToolMaterial material, int rarity) {
 		super(material);
@@ -88,7 +88,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 	}
 
 	public boolean isInWall(EntityPlayer player, boolean init) {
-		if (player.getHeldItem(EnumHand.MAIN_HAND) == null)
+		if (player.getHeldItemMainhand().isEmpty())
 			return false;
 
 		World world = player.world;
@@ -139,7 +139,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
 		float cost = 0.5F;
 		if (stack.getItemDamage() >= stack.getMaxDamage()) {
-			player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, null);
+			player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 		}
 		World world = player.world;
 		RayTraceResult rayTraceResult = this.rayTrace(world, (EntityPlayer) player, true);

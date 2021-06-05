@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, IClientRegister {
 	protected int itemRarity;
-	private int tier;
+	private final int tier;
 	private float baseDamage;
 	// ===================================================== CUSTOM START
 	// =============================================================\\

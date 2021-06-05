@@ -49,15 +49,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author Anonymous Productions
  */
 public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem, IClientRegister {
 	protected int itemRarity;
-	private Random rand = new Random();
-	private ToolMaterial toolMaterial;
+	private final ToolMaterial toolMaterial;
 	private float baseDamage = 3.0F;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
@@ -131,7 +129,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 	private void tryBreakFarmland(World world, BlockPos pos) {
 		IBlockState base = world.getBlockState(pos);
 
-		if (base != null && base == Blocks.FARMLAND && FarmingHelper.didHarvestRuinBlock(world, true)) {
+		if (base != null && base == Blocks.FARMLAND.getDefaultState() && FarmingHelper.didHarvestRuinBlock(world, true)) {
 			world.setBlockState(pos, (IBlockState) Blocks.DIRT);
 		}
 	}
@@ -300,27 +298,32 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 
 	@Override
 	public float getOffsetX(ItemStack itemstack) {
-		return 0;
+		return 1.5F;
 	}
 
 	@Override
 	public float getOffsetY(ItemStack itemstack) {
-		return 5F / 16F;
+		return 1.7F;
 	}
 
 	@Override
 	public float getOffsetZ(ItemStack itemstack) {
-		return 0;
+		return 0.05F;
 	}
 
 	@Override
 	public float getRotationOffset(ItemStack itemstack) {
-		return 0;
+		return 90F;
 	}
 
 	@Override
 	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
 		return rack.hasRackBelow(slot);
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return true;
 	}
 
 	@Override

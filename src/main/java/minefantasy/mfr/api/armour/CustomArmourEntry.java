@@ -118,7 +118,7 @@ public class CustomArmourEntry {
 	 * Determines if a piece can slow you down
 	 */
 	public static boolean doesPieceSlowDown(ItemStack piece) {
-		if (piece != null) {
+		if (!piece.isEmpty()) {
 			CustomArmourEntry entry = getEntry(piece);
 			if (entry != null) {
 				return entry.alterSpeed;

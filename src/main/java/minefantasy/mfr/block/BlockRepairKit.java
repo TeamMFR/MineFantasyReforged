@@ -2,6 +2,7 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
@@ -102,7 +103,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 	private boolean canRepair(ItemStack held) {
 		if (held.isEmpty())
 			return false;
-		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != null)// Custom Tool
+		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != CustomMaterial.NONE)// Custom Tool
 		{
 			return held.isItemDamaged();
 		}

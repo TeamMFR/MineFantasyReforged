@@ -61,7 +61,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	}
 
 	public static boolean isInput(ItemStack item) {
-		return getResult(item) != ItemStack.EMPTY;
+		return !getResult(item).isEmpty();
 	}
 
 	protected static ItemStack getResult(ItemStack input) {
@@ -101,9 +101,9 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		for (int a = 0; a < getInventory().getSlots(); a++) {
 			ItemStack mySlot = getInventory().getStackInSlot(a);
 
-			if (mySlot != ItemStack.EMPTY && canShare(mySlot, a)) {
+			if (!mySlot.isEmpty() && canShare(mySlot, a)) {
 				ItemStack theirSlot = tile.getInventory().getStackInSlot(a);
-				if (theirSlot == ItemStack.EMPTY) {
+				if (theirSlot.isEmpty()) {
 					ItemStack copy = mySlot.copy();
 					copy.setCount(1);
 					tile.getInventory().setStackInSlot(a, copy);

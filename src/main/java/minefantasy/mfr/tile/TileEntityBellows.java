@@ -21,11 +21,6 @@ public class TileEntityBellows extends TileEntityBase implements ITickable {
 
 	}
 
-	@Override
-	public boolean hasFastRenderer() {
-		return true;
-	}
-
 	public void interact(EntityPlayer player, float powerLevel) {
 		IBellowsUseable forge = getFacingForge();
 		if (press < 10) {

@@ -50,7 +50,7 @@ public class ItemSkillBook extends ItemBaseMFR {
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItem(hand);
 		boolean used = false;
-		if (skill != null) {
+		if (skill != Skill.NONE) {
 			int lvl = RPGElements.getLevel(player, skill);
 			if (lvl < skill.getMaxLevel()) {
 				if (isMax) {

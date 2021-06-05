@@ -7,28 +7,25 @@ import minefantasy.mfr.client.model.block.ModelEngTanningRack;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
-import org.lwjgl.opengl.GL11;
 
-public class TileEntityTanningRackRenderer<T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
+public class TileEntityTanningRackRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
 
-	private ModelEngTanningRack engmodel;
+	private final ModelEngTanningRack engmodel;
 
 	public TileEntityTanningRackRenderer() {
 		engmodel = new ModelEngTanningRack();
 	}
 
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+	public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float partial) {
 		renderAModelAt((TileEntityTanningRack) te, x, y, z);
 	}
 
@@ -39,46 +36,41 @@ public class TileEntityTanningRackRenderer<T extends TileEntity> extends FastTES
 			facing = state.getValue(BlockTanningRack.FACING);
 		}
 
-		GlStateManager.disableLighting();
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
-
 		this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/tanner_metal.png"));
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) d + 0.5F, (float) d1 + 1.45F, (float) d2 + 0.5F);
-		GL11.glRotatef(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
-		GL11.glScalef(1.0F, -1F, -1F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.45F, (float) d2 + 0.5F);
+		GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
+		GlStateManager.scale(1.0F, -1F, -1F);
 		if (tile.isAutomated()) {
 			engmodel.renderModel(0.0625F);
-			GL11.glPushMatrix();
-			GL11.glTranslatef(0F, tile.acTime, 0F);
+			GlStateManager.pushMatrix();
+			GlStateManager.translate(0F, tile.acTime, 0F);
 			engmodel.renderBlade(0.0625F);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 			engmodel.rotateLever(tile.acTime);
 			engmodel.renderLever(0.0625F);
 		}
 
 		renderHungItem(tile);
 
-		GlStateManager.enableLighting();
-
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
 	}
 
 	public void renderInvModel(boolean isAuto, double x, double y, double z) {
 		int j = 90;
-		GL11.glPushMatrix();
-		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.45F, (float) z + 0.5F);
-		GL11.glRotatef(j, 0.0F, 1.0F, 0.0F);
-		GL11.glScalef(1.0F, -1F, -1F);
+		GlStateManager.pushMatrix();
+		GlStateManager.translate((float) x + 0.5F, (float) y + 1.45F, (float) z + 0.5F);
+		GlStateManager.rotate(j, 0.0F, 1.0F, 0.0F);
+		GlStateManager.scale(1.0F, -1F, -1F);
 		if (isAuto) {
 			engmodel.renderModel(0.0625F);
-			GL11.glPushMatrix();
+			GlStateManager.pushMatrix();
 			engmodel.renderBlade(0.0625F);
-			GL11.glPopMatrix();
+			GlStateManager.popMatrix();
 			engmodel.renderLever(0.0625F);
 		}
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 
 	}
 
@@ -99,9 +91,9 @@ public class TileEntityTanningRackRenderer<T extends TileEntity> extends FastTES
 	private void renderHungItem(TileEntityTanningRack tile) {
 		ItemStack stack = tile.getInventory().getStackInSlot(0);
 		if (!stack.isEmpty()) {
-			GL11.glScalef(0.9F, 0.9F, 0.9F);
-			GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F);
-			GL11.glTranslatef(0.0F, -1.1F, 0.0F);
+			GlStateManager.scale(0.9F, 0.9F, 0.9F);
+			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.translate(0.0F, -1.1F, 0.0F);
 			Minecraft.getMinecraft().getRenderItem().renderItem(stack, ItemCameraTransforms.TransformType.FIXED);
 		}
 	}

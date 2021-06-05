@@ -84,7 +84,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	}
 
 	public static boolean isInput(ItemStack input) {
-		return getResult(input) != null;
+		return !getResult(input).isEmpty();
 	}
 
 	private static ItemStack getResult(ItemStack input) {
@@ -230,7 +230,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	}
 
 	public EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {
-		if (item.getCount() != 0 && item.getItem() != null) {
+		if (item.getCount() != 0 && !item.isEmpty()) {
 			EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 1.25F, pos.getZ() + 0.5D, item);
 			entityitem.setPickupDelay(10);
 			world.spawnEntity(entityitem);

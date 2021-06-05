@@ -117,24 +117,22 @@ public class EntityShrapnel extends Entity implements IDamageType {
 			}
 
 			Entity entity = null;
-			List list = this.world.getEntitiesWithinAABBExcludingEntity(this,
-					this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
+			List<Entity> entitiesWithinAABBExcludingEntity = this.world.getEntitiesWithinAABBExcludingEntity(this, this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expand(1.0D, 1.0D, 1.0D));
 			double d0 = 0.0D;
 
-			for (int i = 0; i < list.size(); ++i) {
-				Entity entity1 = (Entity) list.get(i);
+			for (Entity value : entitiesWithinAABBExcludingEntity) {
 
-				if (entity1.canBeCollidedWith()
-						&& (!entity1.isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25)) {
+				if (((Entity) value).canBeCollidedWith()
+						&& (!((Entity) value).isEntityEqual(this.shootingEntity) || this.ticksInAir >= 25)) {
 					float f = 0.3F;
-					AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().expand(f, f, f);
+					AxisAlignedBB axisalignedbb = ((Entity) value).getEntityBoundingBox().expand(f, f, f);
 					RayTraceResult rayTraceResult1 = axisalignedbb.calculateIntercept(vec3, vec31);
 
 					if (rayTraceResult1 != null) {
 						double d1 = vec3.distanceTo(rayTraceResult1.hitVec);
 
 						if (d1 < d0 || d0 == 0.0D) {
-							entity = entity1;
+							entity = (Entity) value;
 							d0 = d1;
 						}
 					}

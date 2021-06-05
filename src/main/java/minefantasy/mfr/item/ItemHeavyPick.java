@@ -45,7 +45,7 @@ import java.util.Random;
 public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
 	protected int itemRarity;
 	private float baseDamage = 2F;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;

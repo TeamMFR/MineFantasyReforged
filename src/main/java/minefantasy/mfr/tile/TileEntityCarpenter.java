@@ -331,14 +331,14 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		}
 
 		ItemStack result = CraftingManagerCarpenter.getInstance().findMatchingRecipe(this, craftMatrix, world);
-		if (result == null) {
+		if (result.isEmpty()) {
 			result = ItemStack.EMPTY;
 		}
 		return result;
 	}
 
 	public String getResultName() {
-		return resultStack == ItemStack.EMPTY || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
+		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
 	}
 
 	public void updateCraftingData() {
@@ -423,7 +423,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	}
 
 	private void addXP(EntityPlayer smith) {
-		if (requiredSkill != null) {
+		if (requiredSkill != Skill.NONE) {
 			float baseXP = this.progressMax / 10F;
 			requiredSkill.addXP(smith, (int) baseXP + 1);
 		}

@@ -282,12 +282,12 @@ public class EntityBomb extends Entity {
 		world.createExplosion(this, posX, posY, posZ, 0, false);
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D;
-			AxisAlignedBB var3 = this.getEntityBoundingBox().expand(area, area / 2, area);
-			List var4 = this.world.getEntitiesWithinAABB(EntityLivingBase.class, var3);
+			AxisAlignedBB axisAlignedBB = this.getEntityBoundingBox().expand(area, area / 2, area);
+			List entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
 
-			if (var4 != null && !var4.isEmpty()) {
+			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {
 
-				for (Object o : var4) {
+				for (Object o : entitiesWithinAABB) {
 					Entity entityHit = (Entity) o;
 
 					double distanceToEntity = this.getDistance(entityHit);

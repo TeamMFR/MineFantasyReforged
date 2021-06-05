@@ -42,9 +42,9 @@ import java.util.List;
  */
 public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
 	protected int itemRarity;
-	private ToolMaterial material;
-	private int tier;
-	private boolean heavy;
+	private final ToolMaterial material;
+	private final int tier;
+	private final boolean heavy;
 	private float baseDamage;
 	// ===================================================== CUSTOM START
 	// =============================================================\\

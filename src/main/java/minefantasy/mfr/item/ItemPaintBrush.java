@@ -114,4 +114,9 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 		return true;
 	}
 
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return false;
+	}
+
 }

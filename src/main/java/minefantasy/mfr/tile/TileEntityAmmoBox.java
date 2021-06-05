@@ -40,11 +40,6 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 	}
 
 	@Override
-	public boolean hasFastRenderer() {
-		return true;
-	}
-
-	@Override
 	public void update() {
 		++ticksExisted;
 		if (ticksExisted == 20 || ticksExisted % 100 == 0) {

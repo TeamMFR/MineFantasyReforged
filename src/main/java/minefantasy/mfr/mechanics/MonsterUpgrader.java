@@ -177,7 +177,7 @@ public class MonsterUpgrader {
 	 * 1=Axe.....2=Mace.....3=dagger.....4=spear.....else sword
 	 */
 	private void giveEntityWeapon(EntityLivingBase mob, String tier, int weaponType) {
-		if (CustomMaterial.getMaterial(tier) == null)
+		if (CustomMaterial.getMaterial(tier) == CustomMaterial.NONE)
 			return;
 
 		ItemWeaponMFR weapon = MineFantasyItems.STANDARD_SWORD;

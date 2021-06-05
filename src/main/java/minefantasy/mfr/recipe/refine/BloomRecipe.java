@@ -39,7 +39,7 @@ public class BloomRecipe {// FurnaceRecipes
 
 		do {
 			if (!iterator.hasNext()) {
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			entry = (Entry) iterator.next();

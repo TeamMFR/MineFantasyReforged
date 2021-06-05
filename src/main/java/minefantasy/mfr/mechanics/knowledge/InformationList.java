@@ -11,7 +11,7 @@ public class InformationList {
 	public static InformationPage construction = new InformationPage("infoPage.construction", Skill.CONSTRUCTION).registerInfoPage();
 	public static InformationPage provisioning = new InformationPage("infoPage.provisioning", Skill.PROVISIONING).registerInfoPage();
 	public static InformationPage engineering = new InformationPage("infoPage.engineering", Skill.ENGINEERING).registerInfoPage();
-	public static InformationPage mastery = new InformationPage("infoPage.mastery", null).registerInfoPage();
+	public static InformationPage mastery = new InformationPage("infoPage.mastery", Skill.NONE).registerInfoPage();
 
 	/**
 	 * Is the smallest column used to display a achievement on the GUI.

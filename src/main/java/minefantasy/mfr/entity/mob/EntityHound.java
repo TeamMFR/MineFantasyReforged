@@ -369,7 +369,7 @@ public class EntityHound extends EntityTameable {
 		ItemStack itemstack = user.inventory.getCurrentItem();
 
 		if (this.isTamed()) {
-			if (itemstack != null) {
+			if (!itemstack.isEmpty()) {
 				if (itemstack.getItem() instanceof ItemFood) {
 					ItemFood itemfood = (ItemFood) itemstack.getItem();
 
@@ -461,7 +461,7 @@ public class EntityHound extends EntityTameable {
 	 */
 	@Override
 	public boolean isBreedingItem(ItemStack item) {
-		return item != null && (item.getItem() instanceof ItemFood && ((ItemFood) item.getItem()).isWolfsFavoriteMeat());
+		return !item.isEmpty() && (item.getItem() instanceof ItemFood && ((ItemFood) item.getItem()).isWolfsFavoriteMeat());
 	}
 
 	/**

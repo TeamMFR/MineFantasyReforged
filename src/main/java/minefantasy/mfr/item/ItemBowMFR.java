@@ -5,6 +5,7 @@ import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
+import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBow;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -12,6 +13,7 @@ import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -47,10 +49,10 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IClientRegister {
+public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo, IFirearm, IRackItem, IClientRegister {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	private final EnumBowType model;
-	private int itemRarity;
+	private final int itemRarity;
 	private float baseDamage = 1.0F;
 	/**
 	 * Return the enchantability factor of the item, most of the time is based on
@@ -305,7 +307,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	public Entity modifyArrow(ItemStack bow, Entity arrow) {
 		if (this.isCustom) {
 			CustomMaterial custom = CustomToolHelper.getCustomPrimaryMaterial(bow);
-			if (custom != null) {
+			if (custom != CustomMaterial.NONE) {
 				if (custom.name.equalsIgnoreCase("silver")) {
 					arrow.getEntityData().setBoolean("MF_Silverbow", true);
 				}
@@ -396,4 +398,38 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		ModelLoaderHelper.registerWrappedItemModel(this, new RenderBow(() -> modelLocation), modelLocation);
 	}
 
+	@Override
+	public float getScale(ItemStack itemstack) {
+		return 1F;
+	}
+
+	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return 1.2F;
+	}
+
+	@Override
+	public float getOffsetY(ItemStack itemstack) {
+		return 1F;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return 0.4F;
+	}
+
+	@Override
+	public float getRotationOffset(ItemStack itemstack) {
+		return 90;
+	}
+
+	@Override
+	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
+		return true;
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return true;
+	}
 }

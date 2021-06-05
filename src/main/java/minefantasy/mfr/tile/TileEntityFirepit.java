@@ -44,7 +44,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	public int fuel = 0;
 	private float charcoal = 0;
 	private int ticksExisted;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
@@ -57,7 +57,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	 * Wood tools and plank item are 1 minute sticks and saplings are 30seconds
 	 */
 	public static int getItemBurnTime(ItemStack input) {
-		if (input == null) {
+		if (input.isEmpty()) {
 			return 0;
 		} else {
 			Item i = input.getItem();

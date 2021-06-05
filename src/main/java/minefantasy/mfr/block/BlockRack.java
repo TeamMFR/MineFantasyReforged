@@ -1,5 +1,6 @@
 package minefantasy.mfr.block;
 
+import com.google.common.collect.ImmutableMap;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.RackCommandPacket;
@@ -21,6 +22,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -32,6 +35,12 @@ import java.util.Random;
 public class BlockRack extends BlockWoodDecor {
 
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+
+	private static final Map<EnumFacing, AxisAlignedBB> AABBS = ImmutableMap.of(
+			EnumFacing.NORTH, new AxisAlignedBB(0.0F, 0.0F, 0.75F, 1.0F, 1.0F, 1.0F),
+			EnumFacing.SOUTH, new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, 0.25F),
+			EnumFacing.WEST, new AxisAlignedBB(0.75F, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F),
+			EnumFacing.EAST, new AxisAlignedBB(0.0F, 0.0F, 0.0F, 0.25F, 1.0F, 1.0F));
 
 	public BlockRack(String name) {
 		super(name);
@@ -62,7 +71,9 @@ public class BlockRack extends BlockWoodDecor {
 		if (held.isEmpty()) {
 			if (!hung.isEmpty()) {
 				if (!world.isRemote) {
-					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, hung);
+					if (!player.capabilities.isCreativeMode){
+						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, hung);
+					}
 					tile.getInventory().setStackInSlot(slot, ItemStack.EMPTY);
 					tile.sendUpdates();
 				}
@@ -73,7 +84,9 @@ public class BlockRack extends BlockWoodDecor {
 			if (hung.isEmpty() && tile.canHang(player.getHeldItemMainhand(), slot)) {
 				if (!world.isRemote) {
 					tile.getInventory().setStackInSlot(slot, player.getHeldItemMainhand().copy());
-					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+					if (!player.capabilities.isCreativeMode){
+						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
+					}
 					tile.sendUpdates();
 				}
 				player.swingArm(EnumHand.MAIN_HAND);
@@ -87,16 +100,14 @@ public class BlockRack extends BlockWoodDecor {
 							held.shrink(space);
 							hung.grow(space);
 						}
-						player.swingArm(EnumHand.MAIN_HAND);
-						return true;
 					} else {
 						if (!world.isRemote) {
 							hung.grow(held.getCount());
 							player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 						}
-						player.swingArm(EnumHand.MAIN_HAND);
-						return true;
 					}
+					player.swingArm(EnumHand.MAIN_HAND);
+					return true;
 				}
 			}
 		}
@@ -105,25 +116,13 @@ public class BlockRack extends BlockWoodDecor {
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		float f = 0.25F;
+		return AABBS.get(state.getValue(FACING));
+	}
 
-		if (state.getValue(FACING) == EnumFacing.getFront(2)) {
-			return new AxisAlignedBB(0.0F, 0.0F, 1.0F - f, 1.0F, 1.0F, 1.0F);
-		}
-
-		if (state.getValue(FACING) == EnumFacing.getFront(3)) {
-			return new AxisAlignedBB(0.0F, 0.0F, 0.0F, 1.0F, 1.0F, f);
-		}
-
-		if (state.getValue(FACING) == EnumFacing.getFront(4)) {
-			return new AxisAlignedBB(1.0F - f, 0.0F, 0.0F, 1.0F, 1.0F, 1.0F);
-		}
-
-		if (state.getValue(FACING) == EnumFacing.getFront(5)) {
-			return new AxisAlignedBB(0.0F, 0.0F, 0.0F, f, 1.0F, 1.0F);
-		} else {
-			return new AxisAlignedBB(0.0D, 0.0D, 0.0D, 1.0D, 1.0D, 1.0D);
-		}
+	@Nullable
+	@Override
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return AABBS.get(state.getValue(FACING));
 	}
 
 	/**
@@ -133,6 +132,10 @@ public class BlockRack extends BlockWoodDecor {
 	 */
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+
+	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
 

@@ -101,7 +101,7 @@ public class MineFantasyMaterials {
 		LINEN = BaseMaterial.addMaterial("linen", 0, 10, -1, 0.1F, 0, 1.00F, 0);
 		WOOL = BaseMaterial.addMaterial("wool", 1, 15, -1, 0.1F, -1, 0, 1.00F, 5);
 
-		LEATHER_APRON = BaseMaterial.addMaterial("leather_apron", 0, 10, -1, 1.5F, -1, 0, 0.50F, 0);
+		LEATHER_APRON = BaseMaterial.addMaterial("leather_apron", 0, 100, -1, 1.5F, -1, 0, 0.50F, 0);
 		HIDE = BaseMaterial.addMaterial("hide", 0, 100, -1, 1.5F, -1, 0, 1.00F, 0);
 		ROUGH = BaseMaterial.addMaterial("rough_leather", 0, 150, -1, 1.5F, -1, 1, 1.00F, 0);
 		REINFORCED = BaseMaterial.addMaterial("strong_leather", 1, 250, -1, 2.0F, -1, 1, 1.00F, 5);

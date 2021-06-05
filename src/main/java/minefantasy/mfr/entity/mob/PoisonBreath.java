@@ -45,7 +45,7 @@ public class PoisonBreath extends DragonBreath {
 			if (instance.rand.nextInt(10) == 0) {
 				Iterable<ItemStack> equipment = target.getEquipmentAndArmor();
 				for (ItemStack item : equipment) {
-					if (item != null) {
+					if (!item.isEmpty()) {
 						item.damageItem((int) dam, ((EntityLivingBase) target));
 						EntityEquipmentSlot slot = item.getItem().getEquipmentSlot(item);
 						if (item.getItemDamage() >= item.getMaxDamage() && slot != null) {

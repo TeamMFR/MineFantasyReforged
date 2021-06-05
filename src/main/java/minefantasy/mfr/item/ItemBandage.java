@@ -1,7 +1,6 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MFREventHandler;
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
@@ -22,8 +21,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
 import javax.annotation.Nullable;
 import java.util.List;

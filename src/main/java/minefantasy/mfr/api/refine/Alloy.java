@@ -17,7 +17,7 @@ public class Alloy {
 	public final List recipeItems;
 	public final ItemStack recipeOutput;
 	public final int level;
-	private Map props = new HashMap();
+	private final Map props = new HashMap();
 
 	public Alloy(ItemStack output, int requiredLevel, List items) {
 		recipeItems = items;
@@ -26,7 +26,10 @@ public class Alloy {
 	}
 
 	public ItemStack getRecipeOutput() {
-		return this.recipeOutput;
+		if (!this.recipeOutput.isEmpty()){
+			return this.recipeOutput;
+		}
+		return ItemStack.EMPTY;
 	}
 
 	public Alloy addProperty(String id, Object prop) {
@@ -45,7 +48,7 @@ public class Alloy {
 		ArrayList checkRecipe = new ArrayList(this.recipeItems);
 
 		for (ItemStack itemstack : inventory) {
-			if (itemstack != null) {
+			if (!itemstack.isEmpty()) {
 				boolean matches = false;
 				Iterator iterator = checkRecipe.iterator();
 
@@ -78,10 +81,10 @@ public class Alloy {
 	private boolean areMaterialsEqual(ItemStack itemstack, ItemStack checkItem) {
 		CustomMaterial material1 = CustomToolHelper.getCustomPrimaryMaterial(itemstack);
 		CustomMaterial material2 = CustomToolHelper.getCustomPrimaryMaterial(checkItem);
-		if (material1 == null && material2 == null) {
+		if (material1 == CustomMaterial.NONE && material2 == CustomMaterial.NONE) {
 			return true;
 		}
-		if (material1 != null && material2 != null) {
+		if (material1 != CustomMaterial.NONE && material2 != CustomMaterial.NONE) {
 			return material1 == material2;
 		}
 		return false;

@@ -235,13 +235,18 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	private void addXP(EntityPlayer smith) {
-		if (requiredSkill == null)
-			return;
+		if (!world.isRemote){
+			if (requiredSkill == Skill.NONE)
+				return;
+			if (requiredSkill == null){
+				return;
+			}
 
-		float baseXP = this.progressMax / 10F;
-		baseXP /= (1.0F + getAbsoluteBalance());
+			float baseXP = this.progressMax / 10F;
+			baseXP /= (1.0F + getAbsoluteBalance());
 
-		requiredSkill.addXP(smith, (int) baseXP + 1);
+			requiredSkill.addXP(smith, (int) baseXP + 1);
+		}
 	}
 
 	private ItemStack modifyArmour(ItemStack result) {
@@ -662,7 +667,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	@Override
-	public void setRequiredSkill(Skill skill) { requiredSkill = skill; }
+	public void setRequiredSkill(Skill skill) {
+		this.requiredSkill = skill;
+	}
 
 	@Override
 	public void setProgressMax(int i) {
@@ -684,7 +691,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public String getResultName() {
-		return resultStack == ItemStack.EMPTY || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
+		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
 	}
 
 	@Override

@@ -211,17 +211,17 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 
 	@Override
 	public float getOffsetX(ItemStack itemstack) {
-		return 0;
+		return 0.45F;
 	}
 
 	@Override
 	public float getOffsetY(ItemStack itemstack) {
-		return 9F / 16F;
+		return 1F;
 	}
 
 	@Override
 	public float getOffsetZ(ItemStack itemstack) {
-		return 0;
+		return 0.5F;
 	}
 
 	@Override
@@ -232,6 +232,11 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 	@Override
 	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
 		return true;
+	}
+
+	@Override
+	public boolean flip(ItemStack itemStack) {
+		return false;
 	}
 
 	@Override

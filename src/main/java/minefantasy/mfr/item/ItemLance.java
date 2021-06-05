@@ -127,6 +127,16 @@ public class ItemLance extends ItemSpear {
 	}
 
 	@Override
+	public float getOffsetX(ItemStack itemstack) {
+		return -0.2F;
+	}
+
+	@Override
+	public float getOffsetZ(ItemStack itemstack) {
+		return -0.3F;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelResourceLocation modelLocation = new ModelResourceLocation(getRegistryName(), "normal");

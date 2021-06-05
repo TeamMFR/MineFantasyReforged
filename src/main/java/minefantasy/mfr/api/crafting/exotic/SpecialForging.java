@@ -34,7 +34,7 @@ public class SpecialForging {
 	}
 
 	public static Item getSpecialCraft(String special, ItemStack input) {
-		if (input != null) {
+		if (!input.isEmpty()) {
 			String id = getIdentifier(input.getItem(), special);
 			if (specialCrafts.containsKey(id)) {
 				return specialCrafts.get(id);
@@ -48,7 +48,7 @@ public class SpecialForging {
 	}
 
 	public static String getItemDesign(ItemStack item) {
-		if (item != null && item.getItem() instanceof ISpecialCraftItem) {
+		if (!item.isEmpty() && item.getItem() instanceof ISpecialCraftItem) {
 			return ((ISpecialCraftItem) item.getItem()).getDesign(item);
 		}
 		return null;

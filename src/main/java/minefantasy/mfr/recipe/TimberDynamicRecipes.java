@@ -65,7 +65,7 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 
 				ItemStack itemstack = inv.getStackInRowAndColumn(x, y);
 
-				if (itemstack != ItemStack.EMPTY) {
+				if (!itemstack.isEmpty()) {
 					for (ItemStack ingredient : oreDictList) {
 						if (itemstack.getItem() == ingredient.getItem() && (itemstack.getMetadata() == ingredient.getMetadata() || ingredient.getMetadata() == OreDictionary.WILDCARD_VALUE)) {
 							this.input = itemstack;

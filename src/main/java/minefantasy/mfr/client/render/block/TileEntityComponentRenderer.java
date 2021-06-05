@@ -12,20 +12,19 @@ import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraftforge.client.model.animation.FastTESR;
 
-public class TileEntityComponentRenderer<T extends TileEntity> extends FastTESR<T> {
-	private ModelBarStack bars;
-	private ModelSheetStack sheets;
-	private ModelPlankStack planks;
-	private ModelPotStack pots;
-	private ModelBigPlateStack bigplates;
-	private ModelJugStack jugs;
+public class TileEntityComponentRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> {
+	private final ModelBarStack bars;
+	private final ModelSheetStack sheets;
+	private final ModelPlankStack planks;
+	private final ModelPotStack pots;
+	private final ModelBigPlateStack bigplates;
+	private final ModelJugStack jugs;
 
 	public TileEntityComponentRenderer() {
 		bars = new ModelBarStack();
@@ -37,7 +36,7 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends FastTESR<
 	}
 
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
+	public void render(T te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		renderModelAt((TileEntityComponent) te, x, y, z); // where to render
 
 	}
@@ -57,19 +56,15 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends FastTESR<
 			GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on metadata
 			GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
 			GlStateManager.pushMatrix();
-			float level = 0F;
 
 			CustomMaterial material = tile.material;
-			if (material != null) {
+			if (material != CustomMaterial.NONE) {
 				GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
 			}
 
 			bindTextureByName("textures/models/object/component/placed_" + tile.tex + ".png"); // texture
 
-			GlStateManager.disableLighting();
-			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
 			render(tile.type, tile.stackSize, 0.0625F);
-			GlStateManager.enableLighting();
 
 			GlStateManager.color(1F, 1F, 1F);
 

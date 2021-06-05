@@ -5,19 +5,16 @@ import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.client.model.block.ModelQuern;
 import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.animation.FastTESR;
 import net.minecraftforge.common.model.IModelState;
-import org.lwjgl.opengl.GL11;
 
-public class TileEntityQuernRenderer<T extends TileEntity> extends FastTESR<T> implements IItemRenderer {
-	private ModelQuern model;
+public class TileEntityQuernRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
+	private final ModelQuern model;
 
 	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/quern_basic.png");
 
@@ -26,51 +23,41 @@ public class TileEntityQuernRenderer<T extends TileEntity> extends FastTESR<T> i
 	}
 
 	@Override
-	public void renderTileEntityFast(T te, double x, double y, double z, float partialTick, int breakStage, float partial, BufferBuilder renderer) {
-
-		renderAModelAt((TileEntityQuern) te, x, y, z, partial);
+	public void render(T te, double x, double y, double z, float partialTick, int breakStage, float partial) {
+		renderModelAt((TileEntityQuern) te, x, y, z);
 	}
 
-	public void renderAModelAt(TileEntityQuern tile, double d, double d1, double d2, float f) {
-		this.renderModelAt(tile, d, d1, d2, f);
-	}
-
-	public void renderModelAt(TileEntityQuern tile, double d, double d1, double d2, float f) {
+	public void renderModelAt(TileEntityQuern tile, double d, double d1, double d2) {
 		this.bindTexture(texture); // texture
 
-		GL11.glPushMatrix(); // start
+		GlStateManager.pushMatrix(); // start
 		float scale = 1.0F;
 		float yOffset = 1.0F;
-		GL11.glTranslatef((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
-		GL11.glScalef(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
-		GL11.glPushMatrix();
-
-		GlStateManager.disableLighting();
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
+		GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
+		GlStateManager.pushMatrix();
 
 		model.renderModel(tile, 0.0625F);
 
-		GlStateManager.enableLighting();
-
-		GL11.glPopMatrix();
-		GL11.glColor3f(255, 255, 255);
-		GL11.glPopMatrix(); // end
+		GlStateManager.popMatrix();
+		GlStateManager.color(255, 255, 255);
+		GlStateManager.popMatrix(); // end
 
 	}
 
-	public void renderInvModelAt(double d, double d1, double d2, float f) {
+	public void renderInvModelAt(double d, double d1, double d2) {
 
-		GL11.glPushMatrix(); // start
+		GlStateManager.pushMatrix(); // start
 		float scale = 1.0F;
 		float yOffset = 1.0F;
-		GL11.glTranslatef((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
-		GL11.glScalef(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
-		GL11.glPushMatrix();
+		GlStateManager.translate((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
+		GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
+		GlStateManager.pushMatrix();
 		model.renderModel(0.0625F);
 
-		GL11.glPopMatrix();
-		GL11.glColor3f(255, 255, 255);
-		GL11.glPopMatrix(); // end
+		GlStateManager.popMatrix();
+		GlStateManager.color(255, 255, 255);
+		GlStateManager.popMatrix(); // end
 
 	}
 
@@ -81,7 +68,7 @@ public class TileEntityQuernRenderer<T extends TileEntity> extends FastTESR<T> i
 
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
 
-		renderInvModelAt(0F, 0F, 0F, 0F);
+		renderInvModelAt(0F, 0F, 0F);
 
 		GlStateManager.enableBlend();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);

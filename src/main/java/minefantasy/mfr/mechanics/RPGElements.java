@@ -46,7 +46,7 @@ public class RPGElements {
 			NBTTagCompound nbt = new NBTTagCompound();
 			NBTTagCompound tag = new NBTTagCompound();
 			for (Skill skill : skillsList) {
-				if (skill != null) {
+				if (skill != Skill.NONE) {
 					skill.init(tag);
 					tag.setString("name", skill.unlocalizedName);
 					nbt.setTag(skill.unlocalizedName, tag);

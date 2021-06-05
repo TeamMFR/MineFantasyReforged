@@ -83,7 +83,7 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
 								IBlockState newBlock = world.getBlockState(newBlockPos);
 								IBlockState above = world.getBlockState(newBlockPos.add(0, 1, 0));
 
-								if ((above == Blocks.AIR || !above.getMaterial().isSolid()) && newBlock != null
+								if ((above == Blocks.AIR.getDefaultState() || !above.getMaterial().isSolid()) && newBlock != null
 										&& user instanceof EntityPlayer
 										&& ForgeHooks.canHarvestBlock(newBlock.getBlock(), (EntityPlayer) user, world, newBlockPos)
 										&& ForgeHooks.isToolEffective(world, newBlockPos, stack)) {

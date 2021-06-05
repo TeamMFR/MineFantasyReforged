@@ -47,7 +47,7 @@ public class LevelUpPacket extends PacketMF {
 		if (username != null && player != null && player.getUniqueID().equals(username)) {
 			Skill skill = RPGElements.getSkillByName(name);
 
-			if (skill != null) {
+			if (skill != Skill.NONE) {
 				player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 0.5F);
 				player.sendMessage(new TextComponentString(I18n.format("rpg.levelup", skill.getDisplayName().toLowerCase(), skillLevel)));
 			}

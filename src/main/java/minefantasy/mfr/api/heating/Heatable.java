@@ -200,7 +200,7 @@ public class Heatable {
 	public int getWorkableStat(ItemStack item) {
 		if (this.minTemperature == -1) {
 			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-			if (material != null)
+			if (material != CustomMaterial.NONE)
 				return material.getHeatableStats()[0];
 		}
 		return this.minTemperature;
@@ -209,7 +209,7 @@ public class Heatable {
 	public int getUnstableStat(ItemStack item) {
 		if (this.unstableTemperature == -1) {
 			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
-			if (material != null)
+			if (material != CustomMaterial.NONE)
 				return material.getHeatableStats()[1];
 		}
 		return this.unstableTemperature;

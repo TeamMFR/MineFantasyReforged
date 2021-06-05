@@ -152,7 +152,7 @@ public class ArmourCalculator {
 	public static float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
 
 		//    	MFRLogUtil.log("Weigth in calculation: "+ item.getItem().getUnlocalizedName());
-		if (item == null || item.getItem() == Items.AIR) {
+		if (!item.isEmpty() || item.getItem() == Items.AIR) {
 			return 0.0F;
 		}
 		if (item.getItem() instanceof IArmourMFR) {

@@ -16,7 +16,7 @@ public class ForgeItemHandler {
 	}
 
 	public static ForgeFuel getStats(ItemStack item) {
-		if (item == null)
+		if (item.isEmpty())
 			return null;
 
 		for (ForgeFuel fuel : forgeFuel) {
@@ -39,7 +39,7 @@ public class ForgeItemHandler {
 	 * @return The amount of smelts it has(will not consume if its 0)
 	 */
 	public static float getForgeFuel(ItemStack item) {
-		if (item == null)
+		if (item.isEmpty())
 			return 0;
 
 		for (ForgeFuel fuel : forgeFuel) {
@@ -56,7 +56,7 @@ public class ForgeItemHandler {
 	}
 
 	public static boolean willLight(ItemStack item) {
-		if (item == null) {
+		if (item.isEmpty()) {
 			return false;
 		}
 
@@ -98,7 +98,7 @@ public class ForgeItemHandler {
 	 * @return The amount of smelts it has(will not consume if its 0)
 	 */
 	public static int getForgeHeat(ItemStack item) {
-		if (item == null)
+		if (item.isEmpty())
 			return 0;
 
 		for (ForgeFuel fuel : forgeFuel) {
@@ -130,7 +130,7 @@ public class ForgeItemHandler {
 	}
 
 	private static boolean matches(ItemStack item, ItemStack compare) {
-		if (item == null || compare == null) {
+		if (item.isEmpty() || compare.isEmpty()) {
 			return false;
 		}
 

@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemMetalComponent extends ItemComponentMFR {
-	private String name;
-	private float mass;
+	private final String name;
+	private final float mass;
 	private boolean canDamage = false;
 
 	public ItemMetalComponent(String name, float mass, String type) {
@@ -59,7 +59,7 @@ public class ItemMetalComponent extends ItemComponentMFR {
 
 	public float getWeightInKg(ItemStack tool) {
 		CustomMaterial base = getBase(tool);
-		if (base != null) {
+		if (base != CustomMaterial.NONE) {
 			return base.density * mass;
 		}
 		return mass;

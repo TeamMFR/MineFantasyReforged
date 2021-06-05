@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -43,11 +42,11 @@ public class BlastFurnaceRecipes {
 		this.smeltingList.put(input, output);
 	}
 
-	public void removeRecipe(@Nullable ItemStack input, ItemStack output) {
+	public void removeRecipe(ItemStack input, ItemStack output) {
 		if (!output.isEmpty()) {
 			for (Iterator<Entry<ItemStack, ItemStack>> it = this.smeltingList.entrySet().iterator(); it.hasNext(); ) {
 				Entry<ItemStack, ItemStack> entry = it.next();
-				if (input != null && !this.compareItemStacks(entry.getKey(), input)) {
+				if (!input.isEmpty() && !this.compareItemStacks(entry.getKey(), input)) {
 					continue;
 				}
 

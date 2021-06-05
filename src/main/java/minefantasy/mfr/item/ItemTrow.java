@@ -47,7 +47,7 @@ import java.util.Random;
 public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegister {
 	protected int itemRarity;
 	private float baseDamage = 1F;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;

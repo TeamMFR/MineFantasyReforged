@@ -284,7 +284,7 @@ public class ModelMinotaur extends ModelBiped {
 		if (mino.isBeingRidden()) {
 			bipedLeftArm.rotateAngleX = (float) Math.toRadians(180F);
 		}
-		if (mino.getAttack() == 3 && mino.getHeldItemMainhand() == null)// if is power attack
+		if (mino.getAttack() == 3 && mino.getHeldItemMainhand().isEmpty())// if is power attack
 		{
 			bipedLeftArm.rotateAngleX = (float) Math.toRadians(-135F);
 			bipedRightArm.rotateAngleX = (float) Math.toRadians(-135F);

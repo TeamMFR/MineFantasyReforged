@@ -9,7 +9,7 @@ public class FuelHandlerMF implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if (fuel.getItem() == null) {
+		if (fuel.isEmpty()) {
 			return 0;
 		}
 		if (fuel.getItem() == MineFantasyItems.TIMBER) {

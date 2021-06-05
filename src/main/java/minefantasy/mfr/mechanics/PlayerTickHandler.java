@@ -11,7 +11,6 @@ import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemApron;
-import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.item.ItemFoodMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.ArmourCalculator;
@@ -22,7 +21,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -44,10 +42,10 @@ public class PlayerTickHandler {
 	public static final IStoredVariable<Integer> LAST_STEP_KEY = IStoredVariable.StoredVariable.ofInt("lastStep", Persistence.DIMENSION_CHANGE);
 	public static final IStoredVariable<Integer> DRAGON_KILLS_KEY = IStoredVariable.StoredVariable.ofInt("dragonKills", Persistence.ALWAYS);
 
-	private static String chunkCoords = "MF_BedPos";
-	private static String resetBed = "MF_Resetbed";
+	private static final String chunkCoords = "MF_BedPos";
+	private static final String resetBed = "MF_Resetbed";
 
-	private static XSTRandom random = new XSTRandom();
+	private static final XSTRandom random = new XSTRandom();
 
 	static {
 		PlayerData.registerStoredVariables(HAS_BOOK_KEY, BALANCE_YAW_KEY, BALANCE_PITCH_KEY, LAST_STEP_KEY, DRAGON_KILLS_KEY);

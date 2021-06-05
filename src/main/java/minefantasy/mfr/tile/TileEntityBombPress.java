@@ -13,11 +13,6 @@ public class TileEntityBombPress extends TileEntityBase implements ITickable {
 	public float animation = 0F;
 
 	@Override
-	public boolean hasFastRenderer() {
-		return true;
-	}
-
-	@Override
 	public void update() {
 		if (world.isBlockPowered(pos)) {
 			if (animation <= 0) {

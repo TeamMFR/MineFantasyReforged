@@ -37,7 +37,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@SideOnly(Side.CLIENT)
 	private static Object fullplate;
 	protected BaseMaterial baseMaterial;
-	private int itemRarity;
+	private final int itemRarity;
 
 	public ItemArmourMFR(String name, BaseMaterial material, ArmourDesign armourDesign, EntityEquipmentSlot slot, String tex, int rarity) {
 		super(name, material.getArmourConversion(), armourDesign, slot, tex);
@@ -72,7 +72,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@Override
 	public float getMagicResistance(ItemStack item, DamageSource source) {
 		CustomMaterial custom = getCustomMaterial(item);
-		if (custom != null) {
+		if (custom != CustomMaterial.NONE) {
 			return custom.resistance;
 		}
 		return material.magicResistanceModifier;
@@ -81,7 +81,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@Override
 	public float getFireResistance(ItemStack item, DamageSource source) {
 		CustomMaterial custom = getCustomMaterial(item);
-		if (custom != null) {
+		if (custom != CustomMaterial.NONE) {
 			MFRLogUtil.logDebug("Fire Resist: " + custom.getFireResistance());
 			return custom.getFireResistance() * design.getRating();
 		}
@@ -262,11 +262,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	 * cogwork armour though
 	 */
 	public CustomMaterial getCustomMaterial(ItemStack item) {
-		CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
-		if (material != null) {
-			return material;
-		}
-		return null;
+		return CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
 	}
 
 	@Override
@@ -284,7 +280,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	@Override
 	protected float getProtectionRatio(ItemStack item) {
 		CustomMaterial main = getCustomMaterial(item);
-		if (main != null) {
+		if (main != CustomMaterial.NONE) {
 			return main.hardness * design.getRating();
 		}
 		return super.getProtectionRatio(item);
@@ -301,7 +297,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		float blunt = 1.0F;
 
 		CustomMaterial material = getCustomMaterial(item);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			cutting = material.getArmourProtection(0);
 			blunt = material.getArmourProtection(1);
 			piercing = material.getArmourProtection(2);
@@ -324,7 +320,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 
 	public float getResistanceModifier(ItemStack item, String hazard) {
 		CustomMaterial custom = getCustomMaterial(item);
-		if (custom != null) {
+		if (custom != CustomMaterial.NONE) {
 			return custom.resistance;
 		}
 		return super.getResistanceModifier(item, hazard);

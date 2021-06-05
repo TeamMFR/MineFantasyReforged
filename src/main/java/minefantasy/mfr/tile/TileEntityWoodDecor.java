@@ -25,7 +25,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 	}
 
 	public CustomMaterial getMaterial() {
-		return this.material != null ? this.material : trySetMaterial(MineFantasyMaterials.Names.REFINED_WOOD);
+		return this.material != CustomMaterial.NONE ? this.material : trySetMaterial(MineFantasyMaterials.Names.REFINED_WOOD);
 	}
 
 	public void setMaterial(CustomMaterial material) {
@@ -33,12 +33,12 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 	}
 
 	public String getMaterialName() {
-		return this.material != null ? material.getName() : MineFantasyMaterials.Names.REFINED_WOOD;
+		return this.material != CustomMaterial.NONE ? material.getName() : MineFantasyMaterials.Names.REFINED_WOOD;
 	}
 
 	public CustomMaterial trySetMaterial(String materialName) {
 		CustomMaterial material = CustomMaterial.getMaterial(materialName);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			this.material = material;
 		}
 		return this.material;
@@ -59,7 +59,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
 	public int getCapacity() {
 		CustomMaterial material = getMaterial();
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			return getCapacity(material.tier);
 		}
 		return getCapacity(0);

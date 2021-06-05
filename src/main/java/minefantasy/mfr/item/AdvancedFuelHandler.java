@@ -20,7 +20,7 @@ public class AdvancedFuelHandler implements IFuelHandler {
 
 	@Override
 	public int getBurnTime(ItemStack fuel) {
-		if (fuel == null) {
+		if (fuel.isEmpty()) {
 			return 0;
 		}
 		if (fuel.getItem() == MineFantasyItems.COAL_DUST) {

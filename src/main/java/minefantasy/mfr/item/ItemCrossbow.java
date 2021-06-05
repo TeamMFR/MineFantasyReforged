@@ -9,7 +9,6 @@ import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IDamageType;
-import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -18,7 +17,6 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.PowerArmour;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -45,7 +43,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAmmo, IDamageModifier, IRackItem, IDamageType, IScope, ISpecialSalvage {
+public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAmmo, IDamageModifier, IDamageType, IScope, ISpecialSalvage {
 	private static final String partNBT = "MineFantasy_GunPiece_";
 	public static String useTypeNBT = "MF_ActionInUse";
 	private final String[] fullParts = new String[]{"mod", "muzzle", "mechanism", "stock"};
@@ -428,40 +426,6 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	@Override
 	public int getMaxDamage(ItemStack item) {
 		return super.getMaxDamage(item) + (int) getFullValue(item, "durability");
-	}
-
-	@Override
-	public float getScale(ItemStack itemstack) {
-		return 1.0F;
-	}
-
-	@Override
-	public float getOffsetX(ItemStack itemstack) {
-		return 0F;
-	}
-
-	@Override
-	public float getOffsetY(ItemStack itemstack) {
-		return (isHandCrossbow(itemstack) ? 0F : 0.5F) + 1 / 8F;
-	}
-
-	@Override
-	public float getOffsetZ(ItemStack itemstack) {
-		return 0.25F;
-	}
-
-	@Override
-	public float getRotationOffset(ItemStack itemstack) {
-		return 0;
-	}
-
-	@Override
-	public boolean canHang(TileEntityRack rack, ItemStack item, int slot) {
-		if (slot == 0 || slot == 3){
-			return false;
-		}
-
-		return isHandCrossbow(item) || rack.hasRackBelow(slot);
 	}
 
 	public boolean isHandCrossbow(ItemStack item) {

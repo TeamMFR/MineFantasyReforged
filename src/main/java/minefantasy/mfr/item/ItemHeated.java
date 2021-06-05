@@ -119,7 +119,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		String name = "";
 
 		ItemStack item = getStack(stack);
-		if (item != null)
+		if (!item.isEmpty())
 			name = item.getItem().getItemStackDisplayName(item);
 		return I18n.format("prefix.hotitem.name", name);
 	}
@@ -137,7 +137,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	public void addInformation(ItemStack stack, World world, List<String> list, ITooltipFlag b) {
 		ItemStack item = getStack(stack);
 
-		if (item != null) {
+		if (!item.isEmpty()) {
 			item.getItem().addInformation(item, world, list, b);
 		} else
 			super.addInformation(stack, world, list, b);
@@ -240,9 +240,9 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		ItemStack held = getStack(stack);
 		if (!held.isEmpty()) {
 			int colour = -1;
-			CustomMaterial mat = CustomMaterial.getMaterialFor(held, CustomToolHelper.slot_main);
-			if (mat != null) {
-				colour = mat.getColourInt();
+			CustomMaterial material = CustomMaterial.getMaterialFor(held, CustomToolHelper.slot_main);
+			if (material != CustomMaterial.NONE) {
+				colour = material.getColourInt();
 			}
 
 			curr_red = (colour >> 16 & 255) / 255.0F;

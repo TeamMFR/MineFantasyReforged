@@ -99,6 +99,10 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 		return false;
 	}
 
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
 	/**
 	 * Called when the block is placed in the world.
 	 */

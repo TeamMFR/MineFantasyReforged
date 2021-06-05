@@ -60,11 +60,6 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	}
 
 	@Override
-	public boolean hasFastRenderer() {
-		return true;
-	}
-
-	@Override
 	public void update() {
 		int max = getMaxRevs();
 		int levels = max / 4;
@@ -98,7 +93,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	}
 
 	public static boolean isPot(ItemStack item) {
-		return item != null && item.getItem() == MineFantasyItems.CLAY_POT;
+		return !item.isEmpty() && item.getItem() == MineFantasyItems.CLAY_POT;
 	}
 
 	public void onUse() {
@@ -160,10 +155,10 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		if (item != null && getResult(item) != null) {
+		if (!item.isEmpty() && getResult(item) != null) {
 			return slot == 0;
 		}
-		if (item != null && item.getItem() == MineFantasyItems.CLAY_POT) {
+		if (!item.isEmpty() && item.getItem() == MineFantasyItems.CLAY_POT) {
 			return slot == 1;
 		}
 		return false;

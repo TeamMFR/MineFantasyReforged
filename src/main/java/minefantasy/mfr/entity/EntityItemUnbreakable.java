@@ -44,7 +44,7 @@ public class EntityItemUnbreakable extends EntityItem {
 		if (getItem().getItem().onEntityItemUpdate(this))
 			return;
 
-		if (getItem() == null) {
+		if (getItem().isEmpty()) {
 			setDead();
 		} else {
 			onEntityUpdate();
@@ -114,9 +114,8 @@ public class EntityItemUnbreakable extends EntityItem {
 
 			if (isBreakable()) {
 				if (!this.world.isRemote && age >= lifespan) {
-					if (item != null) {
-						ItemExpireEvent event = new ItemExpireEvent(this,
-								(item.getItem() == null ? 6000 : item.getItem().getEntityLifespan(item, world)));
+					if (!item.isEmpty()) {
+						ItemExpireEvent event = new ItemExpireEvent(this, (item.getItem() == null ? 6000 : item.getItem().getEntityLifespan(item, world)));
 						if (MinecraftForge.EVENT_BUS.post(event)) {
 							lifespan += event.getExtraLife();
 						} else {
@@ -128,7 +127,7 @@ public class EntityItemUnbreakable extends EntityItem {
 				}
 			}
 
-			if (item != null && item.getCount() <= 0) {
+			if (!item.isEmpty() && item.getCount() <= 0) {
 				this.setDead();
 			}
 		}

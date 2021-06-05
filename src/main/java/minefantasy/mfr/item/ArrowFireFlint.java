@@ -56,7 +56,7 @@ public class ArrowFireFlint implements IArrowHandler {
 			entArrow.pickupStatus = EntityArrow.PickupStatus.DISALLOWED;
 		}
 
-		if (!bow.isEmpty() && bow.getItem() != null && bow.getItem() instanceof ISpecialBow) {
+		if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
 			entArrow = (EntityArrow) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entArrow);
 		}
 		if (!world.isRemote) {

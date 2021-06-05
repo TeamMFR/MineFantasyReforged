@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 
 public class ItemHide extends ItemBaseMFR {
 	private final Item result;
-	private float hardness;
+	private final float hardness;
 
 	public ItemHide(String name, Item result, float hardness) {
 		super(name, Rarity.POOR);
@@ -94,7 +94,7 @@ public class ItemHide extends ItemBaseMFR {
 
 	public boolean isTrough(World world, BlockPos pos) {
 		TileEntity tile = world.getTileEntity(pos);
-		return tile != null && tile instanceof IQuenchBlock;
+		return tile instanceof IQuenchBlock;
 	}
 
 	public boolean isCauldron(World world, BlockPos pos) {

@@ -123,8 +123,9 @@ public class CustomMaterial {
 	 * Gets a material by name
 	 */
 	public static CustomMaterial getMaterial(String name) {
-		if (name == null)
-			return null;
+		if (name == null) {
+			return CustomMaterial.NONE;
+		}
 
 		return materialList.get(name.toLowerCase());
 	}
@@ -144,7 +145,7 @@ public class CustomMaterial {
 	 */
 	public static CustomMaterial getOrAddMaterial(String name, String type, int tier, float hardness, float durability,
 			float flexibility, float sharpness, float resistance, float density, int red, int green, int blue) {
-		if (getMaterial(name) != null) {
+		if (getMaterial(name) != CustomMaterial.NONE) {
 			return getMaterial(name);
 		}
 		return new CustomMaterial(name, type, tier, hardness, durability, flexibility, sharpness, resistance, density).setColour(red, green, blue).register();
@@ -165,7 +166,7 @@ public class CustomMaterial {
 				return getMaterial(nbt.getString(slot));
 			}
 		}
-		return null;
+		return CustomMaterial.NONE;
 	}
 
 	public static NBTTagCompound getNBT(ItemStack item, boolean createNew) {
@@ -188,7 +189,7 @@ public class CustomMaterial {
 	}
 
 	public static void addOreDict(String material, String name) {
-		if (getMaterial(name) != null) {
+		if (getMaterial(name) != CustomMaterial.NONE) {
 			getMaterial(name).addOreDict(material);
 		}
 	}

@@ -16,7 +16,6 @@ public class TroughPacket extends PacketMF {
 		coords = tile.getPos();
 		fill = tile.fill;
 	}
-
 	public TroughPacket() {
 	}
 

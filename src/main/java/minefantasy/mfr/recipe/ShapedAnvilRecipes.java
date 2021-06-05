@@ -134,7 +134,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 			for (int matrixY = 0; matrixY < ShapelessAnvilRecipes.globalHeight; ++matrixY) {
 				int recipeX = matrixX - x;
 				int recipeY = matrixY - y;
-				ItemStack recipeItem = null;
+				ItemStack recipeItem = ItemStack.EMPTY;
 
 				if (recipeX >= 0 && recipeY >= 0 && recipeX < this.recipeWidth && recipeY < this.recipeHeight) {
 					if (b) {

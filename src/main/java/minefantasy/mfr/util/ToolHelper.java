@@ -322,7 +322,7 @@ public class ToolHelper {
 
 		int tier = getCrafterTier(heldItem);
 
-		return tool.getName().equals(toolNeeded) && tier >= toolTierNeeded;
+		return tool == toolNeeded && tier >= toolTierNeeded;
 	}
 
 	public static void setUnbreakable(ItemStack tool, boolean isUnbreakable) {
