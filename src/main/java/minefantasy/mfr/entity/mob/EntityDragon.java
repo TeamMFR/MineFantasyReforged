@@ -431,9 +431,9 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	private Item getLoot(int tier) {
 		if (tier == 4)// Ancient
 		{
-			return MineFantasyItems.LOOT_SACK_RARE;
+			return MineFantasyItems.LOOT_SACK_EXQUISITE;
 		}
-		return MineFantasyItems.LOOT_SACK_UC;// Any
+		return MineFantasyItems.LOOT_SACK_VALUABLE;// Any
 	}
 
 	private Entity getBreath(double xAngle, double yAngle, double zAngle) {

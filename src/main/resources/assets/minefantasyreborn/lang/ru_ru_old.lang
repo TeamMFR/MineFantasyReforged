@@ -368,9 +368,9 @@ item.ingotEnder.name=Слиток стали Края
 
 item.ingotTungsten.name=Вольфрамовый слиток
 
-item.loot_sack.name=Добыча
-item.loot_sack_uc.name=Ценная добыча
-item.loot_sack_rare.name=Драгоценная добыча
+item.loot_sack_common.name=Добыча
+item.loot_sack_valuable.name=Ценная добыча
+item.loot_sack_exquisite.name=Драгоценная добыча
 
 item.copper_coin.name=Медная монета
 item.silver_coin.name=Серебряная монета

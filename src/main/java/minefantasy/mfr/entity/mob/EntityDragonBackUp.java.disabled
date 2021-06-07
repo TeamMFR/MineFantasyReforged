@@ -671,9 +671,9 @@ public class EntityDragon extends EntityFlying implements IMob, IArmouredEntity,
     private Item getLoot(int tier) {
         if (tier == 4)// Ancient
         {
-            return ToolListMFR.LOOT_SACK_RARE;
+            return ToolListMFR.LOOT_SACK_EXQUISITE;
         }
-        return ToolListMFR.LOOT_SACK_UC;// Any
+        return ToolListMFR.LOOT_SACK_VALUABLE;// Any
     }
 
     private boolean didDropHeart(int tier) {

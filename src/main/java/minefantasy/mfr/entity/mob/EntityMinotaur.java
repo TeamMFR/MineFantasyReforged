@@ -311,12 +311,12 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	private Item getLoot() {
 		int breed = getTier();
 		if (breed > 2) {
-			return MineFantasyItems.LOOT_SACK_RARE;
+			return MineFantasyItems.LOOT_SACK_EXQUISITE;
 		}
 		if (breed > 0) {
-			return MineFantasyItems.LOOT_SACK_UC;
+			return MineFantasyItems.LOOT_SACK_VALUABLE;
 		}
-		return MineFantasyItems.LOOT_SACK;
+		return MineFantasyItems.LOOT_SACK_COMMON;
 	}
 
 	private int getLootCount() {

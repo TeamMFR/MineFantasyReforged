@@ -6,7 +6,7 @@
             "entries": [
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:loot_sack",
+                    "name": "minefantasyreborn:loot_sack_common",
                     "functions": [
                         {
                             "function": "set_count",
@@ -20,7 +20,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:loot_sack_uc",
+                    "name": "minefantasyreborn:loot_sack_valuable",
                     "functions": [
                         {
                             "function": "set_count",
@@ -34,7 +34,7 @@
                 },
                 {
                     "type": "item",
-                    "name": "minefantasyreborn:loot_sack_rare",
+                    "name": "minefantasyreborn:loot_sack_exquisite",
                     "functions": [
                         {
                             "function": "set_count",

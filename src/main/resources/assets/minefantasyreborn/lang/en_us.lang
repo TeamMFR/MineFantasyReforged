@@ -296,9 +296,9 @@ item.ender_ingot.name=Enderforge Ingot
 
 item.tungsten_ingot.name=Wolframite Ingot
 
-item.loot_sack.name=Loot
-item.loot_sack_uc.name=Valuable Loot
-item.loot_sack_rare.name=Exquisite Loot
+item.loot_sack_common.name=Common Loot
+item.loot_sack_valuable.name=Valuable Loot
+item.loot_sack_exquisite.name=Exquisite Loot
 
 item.copper_coin.name=Copper Coin
 item.silver_coin.name=Silver Coin

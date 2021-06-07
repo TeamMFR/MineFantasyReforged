@@ -302,7 +302,7 @@ public final class MFREventHandler {
 		}
 		if (dropper.getEntityData().hasKey(Constants.DROP_LOOT_TAG)) {
 			int id = dropper.getEntityData().getInteger(Constants.DROP_LOOT_TAG);
-			Item drop = id == 0 ? MineFantasyItems.LOOT_SACK : id == 1 ? MineFantasyItems.LOOT_SACK_UC : MineFantasyItems.LOOT_SACK_RARE;
+			Item drop = id == 0 ? MineFantasyItems.LOOT_SACK_COMMON : id == 1 ? MineFantasyItems.LOOT_SACK_VALUABLE : MineFantasyItems.LOOT_SACK_EXQUISITE;
 			dropper.entityDropItem(new ItemStack(drop), 0.0F);
 		}
 		if (dropper instanceof EntityAgeable && dropper.getCreatureAttribute() != EnumCreatureAttribute.UNDEAD) {

@@ -361,9 +361,9 @@ item.ingotEnder.name=末影锭
 
 item.ingotTungsten.name=黑钨锭
 
-item.loot_sack.name=战利品
-item.loot_sack_uc.name=贵重的战利品
-item.loot_sack_rare.name=精致的战利品
+item.loot_sack_common.name=战利品
+item.loot_sack_valuable.name=贵重的战利品
+item.loot_sack_exquisite.name=精致的战利品
 
 item.copper_coin.name=铜币
 item.silver_coin.name=银币

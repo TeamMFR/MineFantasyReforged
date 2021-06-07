@@ -556,9 +556,9 @@ public class MineFantasyItems {
 	public static Item PARACHUTE = Utils.nullValue();
 	public static Item SYRINGE = Utils.nullValue();
 	public static Item SYRINGE_EMPTY = Utils.nullValue();
-	public static Item LOOT_SACK = Utils.nullValue();
-	public static Item LOOT_SACK_UC = Utils.nullValue();
-	public static Item LOOT_SACK_RARE = Utils.nullValue();
+	public static Item LOOT_SACK_COMMON = Utils.nullValue();
+	public static Item LOOT_SACK_VALUABLE = Utils.nullValue();
+	public static Item LOOT_SACK_EXQUISITE = Utils.nullValue();
 	public static ItemCrossbow CROSSBOW_CUSTOM = Utils.nullValue();
 	public static Item EXPLODING_BOLT = Utils.nullValue();
 	public static Item PAINT_BRUSH = Utils.nullValue();
@@ -1801,9 +1801,9 @@ public class MineFantasyItems {
 		SYRINGE = new ItemSyringe("syringe");
 		SYRINGE_EMPTY = new ItemBaseMFR("syringe_empty").setCreativeTab(MineFantasyTabs.tabGadget);
 
-		LOOT_SACK = new ItemLootSack("loot_sack", 0);
-		LOOT_SACK_UC = new ItemLootSack("loot_sack_uc", 1);
-		LOOT_SACK_RARE = new ItemLootSack("loot_sack_rare", 2);
+		LOOT_SACK_COMMON = new ItemLootSack("loot_sack_common", 0);
+		LOOT_SACK_VALUABLE = new ItemLootSack("loot_sack_valuable", 1);
+		LOOT_SACK_EXQUISITE = new ItemLootSack("loot_sack_exquisite", 2);
 
 		CROSSBOW_CUSTOM = new ItemCrossbow();
 		EXPLODING_BOLT = new ItemExplodingBolt();
@@ -1877,9 +1877,9 @@ public class MineFantasyItems {
 		registry.register(SYRINGE);
 		registry.register(SYRINGE_EMPTY);
 
-		registry.register(LOOT_SACK);
-		registry.register(LOOT_SACK_UC);
-		registry.register(LOOT_SACK_RARE);
+		registry.register(LOOT_SACK_COMMON);
+		registry.register(LOOT_SACK_VALUABLE);
+		registry.register(LOOT_SACK_EXQUISITE);
 
 		registry.register(CROSSBOW_CUSTOM);
 		registry.register(EXPLODING_BOLT);
