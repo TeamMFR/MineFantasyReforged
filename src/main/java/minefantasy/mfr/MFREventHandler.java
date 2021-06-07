@@ -16,6 +16,7 @@ import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.mob.EntityDragon;
@@ -737,6 +738,7 @@ public final class MFREventHandler {
 		EntityPlayer player = event.thePlayer;
 		if (player instanceof EntityPlayerMP) {
 			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new LevelUpPacket(player, event.theSkill, event.theLevel));
+			PlayerData.get(player).sync();
 		}
 	}
 }

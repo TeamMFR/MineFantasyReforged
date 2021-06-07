@@ -44,7 +44,7 @@ public class GuiForge extends GuiContainer {
 		int[] scale = tile.getTempsScaled(53);
 
 		if (this.tile.temperature > 0) {
-			if (this.tile.isLit()) {
+			if (this.tile.getIsLit()) {
 				int heatScM = scale[1];
 				this.drawTexturedModalRect(xPoint + 32, yPoint + 58 - heatScM, 176, 0, 16, 3);
 			}

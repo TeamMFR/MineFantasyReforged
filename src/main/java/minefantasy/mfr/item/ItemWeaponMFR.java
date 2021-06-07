@@ -180,22 +180,21 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return item.getTagCompound();
 	}
 
-	public static boolean canPerformAbility(EntityPlayer user, float points) {
+	public static boolean canPerformAbility(EntityLivingBase user, float points) {
 		return tryPerformAbility(user, points, false, true, true, false);
 	}
 
-	public static boolean tryPerformAbility(EntityPlayer user, float points) {
+	public static boolean tryPerformAbility(EntityLivingBase user, float points) {
 		return tryPerformAbility(user, points, true, true);
 	}
 
-	public static boolean tryPerformAbility(EntityPlayer user, float points, boolean armour, boolean weapon) {
+	public static boolean tryPerformAbility(EntityLivingBase user, float points, boolean armour, boolean weapon) {
 		return tryPerformAbility(user, points, true, armour, weapon, true);
 	}
 
-	public static boolean tryPerformAbility(EntityPlayer user, float points, boolean flash, boolean armour,
-			boolean weapon, boolean takePoints) {
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
-			points *= StaminaBar.getBaseDecayModifier(user, armour, weapon);
+	public static boolean tryPerformAbility(EntityLivingBase user, float points, boolean flash, boolean armour, boolean weapon, boolean takePoints) {
+		if (user instanceof EntityPlayer && StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
+			points *= StaminaBar.getBaseDecayModifier((EntityPlayer) user, armour, weapon);
 			if (StaminaBar.isStaminaAvailable(user, points, flash)) {
 				if (takePoints && !user.world.isRemote) {
 					applyFatigue(user, points);

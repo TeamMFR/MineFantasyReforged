@@ -48,7 +48,7 @@ public class Alloy {
 		ArrayList checkRecipe = new ArrayList(this.recipeItems);
 
 		for (ItemStack itemstack : inventory) {
-			if (!itemstack.isEmpty()) {
+			if (itemstack != null && !itemstack.isEmpty()) {
 				boolean matches = false;
 				Iterator iterator = checkRecipe.iterator();
 

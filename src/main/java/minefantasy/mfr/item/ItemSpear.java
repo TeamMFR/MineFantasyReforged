@@ -73,7 +73,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 
 		EntityLivingBase target = (EntityLivingBase) hit;
 
-		if (wielder instanceof EntityPlayer && wielder.isRiding() && tryPerformAbility((EntityPlayer) wielder, charge_cost)) {
+		if (wielder instanceof EntityPlayer && wielder.isRiding() && tryPerformAbility(wielder, charge_cost)) {
 			ItemWaraxe.brutalise(wielder, target, 1.0F);
 			return damage + getMountedDamage();
 		}

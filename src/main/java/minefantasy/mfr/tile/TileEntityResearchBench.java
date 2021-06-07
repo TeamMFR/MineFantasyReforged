@@ -12,7 +12,6 @@ import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ResearchTablePacket;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -21,7 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -83,8 +82,10 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 
 		if (research != null && research.size() > 0 && result != 0) {
 			if (result == -1) {
-				if (!user.world.isRemote)
-					user.sendMessage(new TextComponentString(I18n.format("research.noskill")));
+				if (!user.world.isRemote){
+					user.sendMessage(new TextComponentTranslation("research.noskill"));
+				}
+
 				return true;
 			}
 			maxProgress = getMaxTime();
@@ -100,8 +101,10 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 			}
 		} else {
 			if (result == 0) {
-				if (!user.world.isRemote)
-					user.sendMessage(new TextComponentString(I18n.format("research.null")));
+				if (!user.world.isRemote){
+					user.sendMessage(new TextComponentTranslation("research.null"));
+				}
+
 			}
 			progress = 0;
 		}
@@ -120,11 +123,11 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 				}
 				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
 				if (!user.world.isRemote) {
-					String name = I18n.format("knowledge." + s);
+					TextComponentTranslation name = new TextComponentTranslation("knowledge." + s);
 					if (artefacts == -1) {
-						user.sendMessage(new TextComponentString(I18n.format("research.finishResearch", name)));
+						user.sendMessage(new TextComponentTranslation("research.finishResearch", name));
 					} else {
-						user.sendMessage(new TextComponentString(I18n.format("research.addArtefact", name, artefacts, base.getArtefactCount())));
+						user.sendMessage(new TextComponentTranslation("research.addArtefact", name, artefacts, base.getArtefactCount()));
 					}
 				}
 				return;

@@ -12,7 +12,6 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerForge;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemHeated;
-import minefantasy.mfr.network.ForgePacket;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.Functions;
 import net.minecraft.block.Block;
@@ -49,6 +48,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public int workableState = 0;
 	public int exactTemperature;
 	int justShared;
+	private boolean isLit;
 	private Random rand = new Random();
 	private int ticksExisted;
 
@@ -83,8 +83,9 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public void update() {
 		++ticksExisted;
 
-		if (world.isRemote)
+		if (world.isRemote){
 			return;
+		}
 
 		if (justShared > 0)
 			--justShared;
@@ -94,11 +95,10 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			if (!item.isEmpty() && !world.isRemote) {
 				modifyItem(item);
 			}
-			syncData();
 			sendUpdates();
 		}
 
-		if (!isLit() && !world.isRemote) {
+		if (!getIsLit() && !world.isRemote) {
 			if (temperature > 0 && ticksExisted % 5 == 0) {
 				temperature = 0;
 			}
@@ -110,7 +110,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			return;
 		}
 		boolean isBurning = isBurning();// Check if it's burning
-		float maxTemp = isLit() ? (fuelTemperature + getUnderTemperature()) : 0;
+		float maxTemp = getIsLit() ? (fuelTemperature + getUnderTemperature()) : 0;
 
 		if (temperature < maxTemp) {
 			float amount = 2.0F;
@@ -238,22 +238,12 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		return true;
 	}
 
-	public boolean isLit() {
-		IBlockState state = world.getBlockState(pos);
-		BlockForge forge = getActiveBlock();
-		return forge.getBurningValue(state);
+	public boolean getIsLit(){
+		return isLit;
 	}
 
-	public BlockForge getActiveBlock() {
-		if (world == null)
-			return null;
-
-		Block block = world.getBlockState(pos).getBlock();
-
-		if (block instanceof BlockForge) {
-			return (BlockForge) block;
-		}
-		return null;
+	public void setIsLit(Boolean isLit){
+		this.isLit = isLit;
 	}
 
 	/**
@@ -263,6 +253,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		if (getTier() == 1) {
 			return;
 		}
+		setIsLit(false);
 		BlockForge.setActiveState(false, getFuelCount(), hasBlockAbove(), world, pos);
 	}
 
@@ -273,6 +264,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		if (getTier() == 1) {
 			return;
 		}
+		setIsLit(true);
 		BlockForge.setActiveState(true, getFuelCount(), hasBlockAbove(), world, pos);
 	}
 
@@ -306,14 +298,14 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			hasUsed = true;
 			fuel = Math.min(fuel + stats.duration, maxFuel);// Fill as much as can fit
 		}
-		if (stats.doesLight && !isLit()) {
+		if (stats.doesLight && !getIsLit()) {
 			fireUpForge();
 			hasUsed = true;
 		}
 		if (hasUsed) {
 			fuelTemperature = stats.baseHeat;
 		}
-		BlockForge.setActiveState(isLit(), getFuelCount(), hasBlockAbove(), world, pos);
+		BlockForge.setActiveState(getIsLit(), getFuelCount(), hasBlockAbove(), world, pos);
 		return hasUsed;
 	}
 
@@ -346,15 +338,6 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	@Override
 	public String getLocalisedName() {
 		return (int) this.temperature + "C " + I18n.format(workableState >= 2 ? "state.unstable" : workableState == 1 ? "state.workable" : "forge.fuel.name");
-	}
-
-	private void syncData() {
-
-		if (world.isRemote)
-			return;
-
-		NetworkHandler.sendToAllTrackingChunk(world, pos.getX() >> 4, pos.getZ() >> 4, new ForgePacket(this));
-
 	}
 
 	public void onUsedWithBellows(float powerLevel) {
@@ -400,7 +383,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	}
 
 	public float getBlockTemperature() {
-		if (this.isLit()) {
+		if (this.getIsLit()) {
 			return temperature;
 		}
 		return 0;
@@ -464,7 +447,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	@SideOnly(Side.CLIENT)
 	public String getTextureName() {
 		BlockForge forge = (BlockForge) world.getBlockState(pos).getBlock();
-		return "forge_" + forge.type + (isLit() ? "_active" : "");
+		return "forge_" + forge.type + (getIsLit() ? "_active" : "");
 	}
 
 	@Nonnull
@@ -477,6 +460,8 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		nbt.setFloat("dragonHeartPower", dragonHeartPower);
 		nbt.setFloat("fuel", fuel);
 		nbt.setFloat("maxFuel", maxFuel);
+		nbt.setInteger("workableState", getWorkableState());
+		nbt.setBoolean("isLit", isLit);
 
 		nbt.setTag("inventory", inventory.serializeNBT());
 
@@ -492,6 +477,8 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		dragonHeartPower = nbt.getFloat("dragonHeartPower");
 		fuel = nbt.getFloat("fuel");
 		maxFuel = nbt.getFloat("maxFuel");
+		workableState = nbt.getInteger("workableState");
+		isLit = nbt.getBoolean("isLit");
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 	}

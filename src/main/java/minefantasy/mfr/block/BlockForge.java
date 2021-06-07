@@ -11,6 +11,7 @@ import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -58,6 +59,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		this.setResistance(8F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
 		this.setLightOpacity(0);
+		setDefaultState(blockState.getBaseState().withProperty(BURNING,false).withProperty(FUEL_COUNT, 0).withProperty(UNDER, false));
 	}
 
 	@Nonnull
@@ -74,16 +76,20 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public IBlockState getActualState(IBlockState state, IBlockAccess world, BlockPos pos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		return state.withProperty(BURNING, tile.isLit()).withProperty(FUEL_COUNT, tile.getFuelCount()).withProperty(UNDER, tile.hasBlockAbove());
+		return state.withProperty(BURNING, tile.getIsLit()).withProperty(FUEL_COUNT, tile.getFuelCount()).withProperty(UNDER, tile.hasBlockAbove());
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return 0;
+		return state.getValue(FUEL_COUNT);
+	}
+
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(FUEL_COUNT, Integer.valueOf(meta));
 	}
 
 	public static void setActiveState(boolean burning, int fuelCount, boolean under, World world, BlockPos pos) {
-		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, burning).withProperty(FUEL_COUNT, fuelCount).withProperty(UNDER, under));
+		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, burning).withProperty(FUEL_COUNT, fuelCount).withProperty(UNDER, under), 2);
 	}
 
 	@Nonnull
@@ -96,7 +102,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		if (tile != null) {
-			setActiveState(tile.isLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+			setActiveState(false, 0, tile.hasBlockAbove(), world, pos);
 		}
 	}
 
@@ -111,14 +117,25 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	}
 
 	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
 	public boolean isBurning(IBlockAccess world, BlockPos pos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		return tile.isLit();
+		return tile.getIsLit();
 	}
 
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return state.getValue(BURNING) ? 15 : 0;
+		TileEntityBase tile = getTile(world, pos);
+		if (tile != null && tile instanceof TileEntityForge){
+			return ((TileEntityForge) tile).getIsLit() ? 15 : 0;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	@Override
@@ -126,7 +143,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		ItemStack held = player.getHeldItemMainhand();
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		if (tile != null) {
-			if (tile.isLit() && !ItemApron.isUserProtected(player)) {
+			if (tile.getIsLit() && !ItemApron.isUserProtected(player)) {
 				player.setFire(5);
 				player.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
 			}
@@ -135,7 +152,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 					return true;
 				}
 				int uses = ItemLighter.tryUse(held, player);
-				if (!tile.isLit() && uses != 0) {
+				if (!tile.getIsLit() && uses != 0) {
 					player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
 					if (uses == 1) {
 						tile.fireUpForge();
@@ -217,21 +234,17 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		return false;
 	}
 
-	public boolean getBurningValue(IBlockState state) {
-		return state.getValue(BURNING);
-	}
-
 	@Override
 	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		if (tier == 1 && !world.isRemote) {
-			if (tile.isLit() && !world.isBlockPowered(pos)) {
+			if (tile.getIsLit() && !world.isBlockPowered(pos)) {
 				setActiveState(false, tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
-			} else if (!tile.isLit() && world.isBlockPowered(pos)) {
+			} else if (!tile.getIsLit() && world.isBlockPowered(pos)) {
 				setActiveState(true, tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
 			}
 		}
-		setActiveState(tile.isLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+		setActiveState(tile.getIsLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
 	}
 
 	/**
@@ -240,8 +253,8 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public void updateTick(World world, BlockPos pos, IBlockState state, Random rand) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		if (tier == 1 && !world.isRemote && tile.isLit() && !world.isBlockPowered(pos)) {
-			setActiveState(tile.isLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+		if (tier == 1 && !world.isRemote && tile.getIsLit() && !world.isBlockPowered(pos)) {
+			setActiveState(tile.getIsLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
 		}
 	}
 
