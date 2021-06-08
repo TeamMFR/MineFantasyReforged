@@ -5,7 +5,6 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockAmmoBox;
-import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.item.ItemBandage;
 import minefantasy.mfr.item.ItemSyringe;
@@ -31,7 +30,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 	private int ticksExisted;
 
 	public TileEntityAmmoBox() {
-		super("ammo_box_basic", CustomMaterial.getMaterial(Constants.REFINED_WOOD_TAG));
+		super("ammo_box_basic", CustomMaterial.NONE);
 	}
 
 	public TileEntityAmmoBox(String tex, CustomMaterial material, byte size) {

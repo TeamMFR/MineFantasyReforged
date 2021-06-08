@@ -194,6 +194,9 @@ public class TileEntityComponent extends TileEntityBase {
 		if (nbt.hasKey("material_name")) {
 			this.material = CustomMaterial.getMaterial(nbt.getString("material_name"));
 		}
+		else{
+			this.material = CustomMaterial.NONE;
+		}
 	}
 
 	@Override

@@ -12,7 +12,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 
 	public TileEntityWoodDecor(String texture) {
 		this.texture = texture;
-		this.material = CustomMaterial.getMaterial(MineFantasyMaterials.Names.REFINED_WOOD);
+		this.material = CustomMaterial.NONE;
 	}
 
 	public TileEntityWoodDecor(String tex, CustomMaterial material) {
