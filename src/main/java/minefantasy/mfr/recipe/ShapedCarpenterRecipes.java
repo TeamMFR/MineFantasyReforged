@@ -69,7 +69,7 @@ public class ShapedCarpenterRecipes implements IRecipe, ICarpenterRecipe {
 	 */
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
-		return this.getRecipeOutput().copy();
+		return this.getCarpenterRecipeOutput().copy();
 	}
 
 	/**
@@ -83,8 +83,14 @@ public class ShapedCarpenterRecipes implements IRecipe, ICarpenterRecipe {
 	/**
 	 * Returns the resulting ItemStack of this recipe
 	 */
+
 	@Override
-	public ItemStack getRecipeOutput() {
+	public ItemStack getRecipeOutput(){
+		return this.recipeOutput;
+	}
+
+	@Override
+	public ItemStack getCarpenterRecipeOutput() {
 		return this.recipeOutput;
 	}
 

@@ -34,7 +34,7 @@ public interface IAnvilRecipe {
 
 	String getResearch();
 
-	ItemStack getRecipeOutput();
+	ItemStack getAnvilRecipeOutput();
 
 	Skill getSkill();
 

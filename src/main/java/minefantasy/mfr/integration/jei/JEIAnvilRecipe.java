@@ -30,7 +30,7 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 
 	public JEIAnvilRecipe(ShapedAnvilRecipes recipe) {
 		this.recipe = recipe;
-		this.result = recipe.getRecipeOutput();
+		this.result = recipe.getAnvilRecipeOutput();
 		this.ingredients = new ArrayList<>();
 
 		// JEI requires empty stacks in the missing slots, and our recipes are shrinked by default so we must expand them first to the full grid size

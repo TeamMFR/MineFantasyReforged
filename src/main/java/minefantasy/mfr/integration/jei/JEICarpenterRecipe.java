@@ -27,7 +27,7 @@ public class JEICarpenterRecipe implements IRecipeWrapper {
 
 	public JEICarpenterRecipe(ShapedCarpenterRecipes recipe) {
 		this.recipe = recipe;
-		this.result = recipe.getRecipeOutput();
+		this.result = recipe.getCarpenterRecipeOutput();
 		this.ingredients = new ArrayList<>();
 
 		// JEI requires empty stacks in the missing slots, and our recipes are shrinked by default so we must expand them first to the full grid size

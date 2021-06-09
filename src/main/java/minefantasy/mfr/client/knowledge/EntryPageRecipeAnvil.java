@@ -81,7 +81,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 				}
 			}
 		}
-		renderResult(parent, recipe.getRecipeOutput(), false, posX, posY, mx, my, recipe.outputHot());
+		renderResult(parent, recipe.getAnvilRecipeOutput(), false, posX, posY, mx, my, recipe.outputHot());
 	}
 
 	private void tickRecipes() {

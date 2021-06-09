@@ -150,16 +150,16 @@ public class RecipeExporterAnvil {
 			//// Result ////
 
 			// result item
-			result.put("item", iAnvilRecipe.getRecipeOutput().getItem().getRegistryName().toString());
+			result.put("item", iAnvilRecipe.getAnvilRecipeOutput().getItem().getRegistryName().toString());
 
 			// result count, if greater than 1
-			if (iAnvilRecipe.getRecipeOutput().getCount() > 1) {
-				result.put("count", (iAnvilRecipe.getRecipeOutput().getCount()));
+			if (iAnvilRecipe.getAnvilRecipeOutput().getCount() > 1) {
+				result.put("count", (iAnvilRecipe.getAnvilRecipeOutput().getCount()));
 			}
 
 			// result's nbt
-			if (iAnvilRecipe.getRecipeOutput().hasTagCompound()) {
-				Object nbt = iAnvilRecipe.getRecipeOutput().getTagCompound();
+			if (iAnvilRecipe.getAnvilRecipeOutput().hasTagCompound()) {
+				Object nbt = iAnvilRecipe.getAnvilRecipeOutput().getTagCompound();
 				result.put("nbt", nbt.toString());
 			}
 
@@ -211,7 +211,7 @@ public class RecipeExporterAnvil {
 
 			tempRecipe.key = key;
 
-			String fileName = iAnvilRecipe.getRecipeOutput().getItem().getRegistryName().toString();
+			String fileName = iAnvilRecipe.getAnvilRecipeOutput().getItem().getRegistryName().toString();
 			String trimmedName = RecipeHelper.stripNamespace(fileName);
 			String filePath = "C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\";
 			RecipeHelper.writeFile(filePath, trimmedName, tempRecipe, g);

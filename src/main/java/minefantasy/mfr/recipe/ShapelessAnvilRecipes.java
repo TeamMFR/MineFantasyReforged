@@ -50,7 +50,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
 	}
 
 	@Override
-	public ItemStack getRecipeOutput() {
+	public ItemStack getAnvilRecipeOutput() {
 		return this.recipeOutput;
 	}
 

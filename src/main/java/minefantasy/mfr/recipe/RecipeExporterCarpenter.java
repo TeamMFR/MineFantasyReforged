@@ -149,16 +149,16 @@ public class RecipeExporterCarpenter {
 			//// Result ////
 
 			// result item
-			result.put("item", iCarpenterRecipe.getRecipeOutput().getItem().getRegistryName().toString());
+			result.put("item", iCarpenterRecipe.getCarpenterRecipeOutput().getItem().getRegistryName().toString());
 
 			// result count, if greater than 1
-			if (iCarpenterRecipe.getRecipeOutput().getCount() > 1) {
-				result.put("count", (iCarpenterRecipe.getRecipeOutput().getCount()));
+			if (iCarpenterRecipe.getCarpenterRecipeOutput().getCount() > 1) {
+				result.put("count", (iCarpenterRecipe.getCarpenterRecipeOutput().getCount()));
 			}
 
 			// result's nbt
-			if (iCarpenterRecipe.getRecipeOutput().hasTagCompound()) {
-				Object nbt = iCarpenterRecipe.getRecipeOutput().getTagCompound();
+			if (iCarpenterRecipe.getCarpenterRecipeOutput().hasTagCompound()) {
+				Object nbt = iCarpenterRecipe.getCarpenterRecipeOutput().getTagCompound();
 				result.put("nbt", nbt);
 			}
 
@@ -207,7 +207,7 @@ public class RecipeExporterCarpenter {
 
 			tempRecipe.key = key;
 
-			String fileName = iCarpenterRecipe.getRecipeOutput().getItem().getRegistryName().toString();
+			String fileName = iCarpenterRecipe.getCarpenterRecipeOutput().getItem().getRegistryName().toString();
 			String trimmedName = RecipeHelper.stripNamespace(fileName);
 			String filePath = "C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\";
 			RecipeHelper.writeFile(filePath, trimmedName, tempRecipe, g);

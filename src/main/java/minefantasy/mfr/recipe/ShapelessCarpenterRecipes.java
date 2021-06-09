@@ -69,7 +69,7 @@ public class ShapelessCarpenterRecipes implements ICarpenterRecipe {
 	}
 
 	@Override
-	public ItemStack getRecipeOutput() {
+	public ItemStack getCarpenterRecipeOutput() {
 		return this.recipeOutput;
 	}
 

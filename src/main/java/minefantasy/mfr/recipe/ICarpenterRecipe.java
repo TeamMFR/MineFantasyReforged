@@ -39,7 +39,7 @@ public interface ICarpenterRecipe {
 
 	SoundEvent getSound();
 
-	ItemStack getRecipeOutput();
+	ItemStack getCarpenterRecipeOutput();
 
 	String getResearch();
 

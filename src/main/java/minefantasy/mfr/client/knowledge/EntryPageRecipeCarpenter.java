@@ -99,7 +99,7 @@ public class EntryPageRecipeCarpenter extends EntryPage {
 
 			shapelessRecipe = true;
 		}
-		renderResult(parent, recipe.getRecipeOutput(), false, posX, posY, mx, my);
+		renderResult(parent, recipe.getCarpenterRecipeOutput(), false, posX, posY, mx, my);
 	}
 
 	private void tickRecipes() {

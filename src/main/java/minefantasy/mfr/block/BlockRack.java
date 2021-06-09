@@ -171,7 +171,7 @@ public class BlockRack extends BlockWoodDecor {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityRack tile = (TileEntityRack) world.getTileEntity(pos);
-		if (!world.isRemote && tile != null) {
+		if (world.isRemote && tile != null) {
 			int slot = tile.getSlotFor(hitX, hitZ, facing);
 			if (slot >= 0 && slot < 4) {
 				NetworkHandler.sendToServer(new RackCommandPacket(slot, player, tile));

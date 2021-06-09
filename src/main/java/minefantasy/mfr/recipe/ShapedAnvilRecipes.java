@@ -64,7 +64,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 	 */
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inv) {
-		return this.getRecipeOutput().copy();
+		return this.getAnvilRecipeOutput().copy();
 	}
 
 	/**
@@ -76,7 +76,12 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 	}
 
 	@Override
-	public ItemStack getRecipeOutput() {
+	public ItemStack getRecipeOutput(){
+		return this.recipeOutput;
+	}
+
+	@Override
+	public ItemStack getAnvilRecipeOutput() {
 		return this.recipeOutput;
 	}
 
