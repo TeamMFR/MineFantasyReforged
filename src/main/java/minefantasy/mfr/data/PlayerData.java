@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.PlayerDataPacket;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -234,7 +235,7 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 			PlayerData data = PlayerData.get((EntityPlayer) event.getEntity());
 			if (data != null) {
 				if (RPGElements.isSystemActive) {
-					RPGElements.initSkills((EntityPlayer) event.getEntity());
+					RPGElements.initSkills(data);
 				}
 				data.sync();
 			}

@@ -1,7 +1,6 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
@@ -40,9 +39,8 @@ public class RPGElements {
 		return nbt.getCompoundTag(skillname);
 	}
 
-	public static void initSkills(EntityPlayer player) {
-		PlayerData data = PlayerData.get(player);
-		if (data != null && data.getVariable(SKILL_STATS_KEY) == null) {
+	public static void initSkills(PlayerData data) {
+		if (data.getVariable(SKILL_STATS_KEY) == null) {
 			NBTTagCompound nbt = new NBTTagCompound();
 			NBTTagCompound tag = new NBTTagCompound();
 			for (Skill skill : skillsList) {
@@ -51,7 +49,7 @@ public class RPGElements {
 					tag.setString("name", skill.unlocalizedName);
 					nbt.setTag(skill.unlocalizedName, tag);
 					tag = new NBTTagCompound(); //This is the key to everything
-					MineFantasyRebornAPI.debugMsg("Initiate skill: " + skill.unlocalizedName);
+					MineFantasyReborn.LOG.error("Initiate skill: " + skill.unlocalizedName);
 				}
 			}
 			data.setVariable(SKILL_STATS_KEY, nbt);
