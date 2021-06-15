@@ -35,14 +35,10 @@ import java.util.function.Function;
  */
 public interface IStoredVariable<T> extends IVariable<T> {
 
-	/**
-	 * Writes the value to the given NBT tag.
-	 */
+	/** Writes the value to the given NBT tag. */
 	void write(NBTTagCompound nbt, T value);
 
-	/**
-	 * Reads the value from the given NBT tag.
-	 */
+	/** Reads the value from the given NBT tag. */
 	T read(NBTTagCompound nbt);
 
 	/**
@@ -50,7 +46,6 @@ public interface IStoredVariable<T> extends IVariable<T> {
 	 * also contains a number of static methods for common implementations (primitives, {@code String}, {@code UUID},
 	 * {@code BlockPos} and {@code ItemStack}).
 	 * <p></p>
-	 *
 	 * @param <T> The type of variable stored.
 	 * @param <E> The type of NBT tag the variable will be stored as.
 	 */

@@ -84,6 +84,7 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> implements 
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}

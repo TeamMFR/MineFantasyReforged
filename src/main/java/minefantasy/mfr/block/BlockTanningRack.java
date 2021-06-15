@@ -91,6 +91,11 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> imp
 	}
 
 	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
 	public IBlockState getStateFromMeta(int meta) {
 		EnumFacing enumfacing = EnumFacing.getFront(meta);
 

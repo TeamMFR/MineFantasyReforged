@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ResearchLogic {
-	public static final IStoredVariable<NBTTagCompound> KNOWLEDGE_STATS_KEY = IStoredVariable.StoredVariable.ofNBT("knowledgeStats", Persistence.ALWAYS).setSynced();
+	public static final IStoredVariable<NBTTagCompound> KNOWLEDGE_STATS_KEY = IStoredVariable.StoredVariable.ofNBT("knowledgeStats", Persistence.ALWAYS);
 	public static int knowledgelyr = 0;
 
 	static {

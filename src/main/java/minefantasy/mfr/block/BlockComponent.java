@@ -57,6 +57,7 @@ public class BlockComponent extends BlockTileEntity<TileEntityComponent> {
 		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}

@@ -1,10 +1,12 @@
 package minefantasy.mfr.data;
 
 import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.PlayerDataPacket;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -175,7 +177,7 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 	 */
 	public void sync() {
 		if (this.player instanceof EntityPlayerMP) {
-			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new PlayerDataPacket(playerData));
+			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new PlayerDataPacket(this.playerData));
 		}
 	}
 

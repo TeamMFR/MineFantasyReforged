@@ -74,6 +74,7 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 		return BlockRenderLayer.CUTOUT;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}

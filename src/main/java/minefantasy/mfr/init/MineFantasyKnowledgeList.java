@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.item.ItemBomb;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
@@ -327,7 +328,7 @@ public class MineFantasyKnowledgeList {
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 0);
 		advblackpowder = (new InformationBase("advblackpowder", 2, -2, 2, MineFantasyItems.BLACKPOWDER_ADVANCED,
 				blackpowder)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 50);
-		bombs = (new InformationBase("bombs", 0, 2, 3, MineFantasyItems.BOMB_CUSTOM, blackpowder)).registerStat()
+		bombs = (new InformationBase("bombs", 0, 2, 3, ItemBomb.createExplosive(MineFantasyItems.BOMB_CUSTOM, "ceramic", "basic", "basic", "black_powder", 1), blackpowder)).registerStat()
 				.setPage(engineering).setSpecial().addSkill(Skill.ENGINEERING, 10);
 		bpress = (new InformationBase("bpress", -1, 1, 2, MineFantasyBlocks.BOMB_PRESS, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 30);

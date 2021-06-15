@@ -49,7 +49,7 @@ public class RPGElements {
 					tag.setString("name", skill.unlocalizedName);
 					nbt.setTag(skill.unlocalizedName, tag);
 					tag = new NBTTagCompound(); //This is the key to everything
-					MineFantasyReborn.LOG.error("Initiate skill: " + skill.unlocalizedName);
+					MineFantasyReborn.LOG.info("Initiate skill: " + skill.unlocalizedName);
 				}
 			}
 			data.setVariable(SKILL_STATS_KEY, nbt);

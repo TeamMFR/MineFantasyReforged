@@ -74,6 +74,7 @@ public class BlockTrough extends BlockWoodDecor {
 		return false;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}

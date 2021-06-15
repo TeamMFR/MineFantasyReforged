@@ -4,8 +4,6 @@ import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.data.IVariable;
 import minefantasy.mfr.data.PlayerData;
-import minefantasy.mfr.mechanics.RPGElements;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.HashMap;
@@ -37,6 +35,9 @@ public class PlayerDataPacket extends PacketMF {
 
 	@Override
 	protected void execute(EntityPlayer player) {
+		if (playerData.isEmpty()){
+			MineFantasyReborn.LOG.error("PLAYER DATA IS NULL!");
+		}
 		PlayerData data = PlayerData.get(player);
 		if (player.world.isRemote && data != null){
 			playerData.forEach(data::setVariable);

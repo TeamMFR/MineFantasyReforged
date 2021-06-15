@@ -34,6 +34,7 @@ public class BlockFrameHolder extends BasicBlockMF {
 		return BlockRenderLayer.CUTOUT;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}

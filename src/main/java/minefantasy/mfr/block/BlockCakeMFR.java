@@ -66,6 +66,7 @@ public class BlockCakeMFR extends BasicBlockMF {
 		return CAKE_AABB[((Integer) state.getValue(BITES)).intValue()];
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}

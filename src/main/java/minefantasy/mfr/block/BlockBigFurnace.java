@@ -68,6 +68,7 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
+	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
 	}
