@@ -57,7 +57,8 @@ public class ArmourCalculator {
 	 * When your movement starts and peaks at slowing down
 	 */
 	public static final float slowAmount = 10F;
-	public static final float[] moveSpeedThreshold = new float[] {30F, 40F};
+	public static final float moveSpeedThresholdMin = 20F; //ToDo make a config option, potentially?
+	public static final float getMoveSpeedThresholdMax = 40F;
 	public static final IStoredVariable<Float> WORN_WEIGHT_KEY = IStoredVariable.StoredVariable.ofFloat("wornWeight", Persistence.DIMENSION_CHANGE);
 	public static final IStoredVariable<Float> WORN_WEIGHT_NS_KEY = IStoredVariable.StoredVariable.ofFloat("wornWeightNS", Persistence.DIMENSION_CHANGE);
 	public static boolean advancedDamageTypes = true;
@@ -105,8 +106,8 @@ public class ArmourCalculator {
 
 	public static float getSpeedModForWeight(EntityPlayer user) {
 		float mod = 0.0F;
-		float min = moveSpeedThreshold[0];
-		float max = moveSpeedThreshold[1] - min;
+		float min = moveSpeedThresholdMin;
+		float max = getMoveSpeedThresholdMax - min;
 		float mass = getTotalWeightOfWorn(user, true) - min;
 		if (mass > 0 && max > 0) {
 			mod -= (mass / max) * slowAmount * slowRate;
@@ -150,9 +151,7 @@ public class ArmourCalculator {
 	}
 
 	public static float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
-
-		//    	MFRLogUtil.log("Weigth in calculation: "+ item.getItem().getUnlocalizedName());
-		if (!item.isEmpty() || item.getItem() == Items.AIR) {
+		if (item.isEmpty() || item.getItem() == Items.AIR) {
 			return 0.0F;
 		}
 		if (item.getItem() instanceof IArmourMFR) {
@@ -166,7 +165,7 @@ public class ArmourCalculator {
 			return false;
 		}
 
-		return armour.getItem() instanceof IArmourMFR && CustomArmourEntry.doesPieceSlowDown(armour);
+		return armour.getItem() instanceof IArmourMFR || CustomArmourEntry.doesPieceSlowDown(armour);
 	}
 
 	public static float convertKgToIbs(float kg) {
