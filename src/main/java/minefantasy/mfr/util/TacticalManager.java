@@ -368,7 +368,7 @@ public class TacticalManager {
 	}
 
 	public static float getResistance(EntityLivingBase user, DamageSource source) {
-		if (source.isFireDamage()) {
+		if (source == DamageSource.ON_FIRE || source == DamageSource.IN_FIRE || source == DamageSource.HOT_FLOOR) {
 			return resistFire(user, source);
 		}
 		if (source.isMagicDamage() || source == DamageSource.WITHER) {

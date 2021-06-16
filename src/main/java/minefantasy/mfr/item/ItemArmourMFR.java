@@ -60,7 +60,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		if (source.isMagicDamage() && this.getMagicResistance(stack, source) > 100F) {
 			return;
 		}
-		if (source.isFireDamage() && this.getFireResistance(stack, source) > 100F) {
+		if ((source == DamageSource.ON_FIRE || source == DamageSource.IN_FIRE || source == DamageSource.HOT_FLOOR) && this.getFireResistance(stack, source) > 100F) {
 			return;
 		}
 		if (LeatherArmourListMFR.isUnbreakable(baseMaterial)) {

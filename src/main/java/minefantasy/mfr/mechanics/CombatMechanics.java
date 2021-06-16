@@ -424,34 +424,34 @@ public class CombatMechanics {
 		return explosion;
 	}
 
-	private static float modifyDamage(DamageSource src, EntityLivingBase hit_entity, float damage, boolean properHit) {
-		Entity source = src.getImmediateSource();
-		Entity hitter = src.getTrueSource();
+	private static float modifyDamage(DamageSource source, EntityLivingBase hit_entity, float damage, boolean properHit) {
+		Entity attackSource = source.getImmediateSource();
+		Entity hitter = source.getTrueSource();
 
-		if (PowerArmour.allowDamageToBlock(src)) {
-			damage = PowerArmour.modifyDamage(hit_entity, damage, src);
+		if (PowerArmour.allowDamageToBlock(source)) {
+			damage = PowerArmour.modifyDamage(hit_entity, damage, source);
 		}
 
 		if (properHit && hit_entity instanceof EntityPlayer) {
 			damage = modifyPlayerDamage((EntityPlayer) hit_entity, damage);
 		}
 
-		if (source != null && hitter instanceof EntityLivingBase) {
-			damage = modifyUserHitDamage(damage, (EntityLivingBase) hitter, source, hitter == source, hit_entity, properHit);
+		if (attackSource != null && hitter instanceof EntityLivingBase) {
+			damage = modifyUserHitDamage(damage, (EntityLivingBase) hitter, attackSource, hitter == attackSource, hit_entity, properHit);
 		}
-		if (src.isExplosion() && isSkeleton(hit_entity)) {
+		if (source.isExplosion() && isSkeleton(hit_entity)) {
 			damage *= 5F;
 		}
 
 		// TODO: Elemental resistance
-		damage *= TacticalManager.getResistance(hit_entity, src);
-		if (src.isFireDamage()) {
+		damage *= TacticalManager.getResistance(hit_entity, source);
+		if (source != DamageSource.LAVA && (source == DamageSource.ON_FIRE || source == DamageSource.IN_FIRE || source == DamageSource.HOT_FLOOR)) {
 			if (damage <= 0.0F) {
 				hit_entity.extinguish();
 			}
 		}
 
-		return onUserHit(hit_entity, hitter, src, damage, properHit);
+		return onUserHit(hit_entity, hitter, source, damage, properHit);
 	}
 
 	private static boolean isSkeleton(Entity target) {
