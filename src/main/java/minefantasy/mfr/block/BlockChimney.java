@@ -82,6 +82,11 @@ public class BlockChimney extends Block implements IClientRegister {
 		return isWide;
 	}
 
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return isWide;
+	}
+
 	public Block setPipe() {
 		isPipe = true;
 		isWide = false;
