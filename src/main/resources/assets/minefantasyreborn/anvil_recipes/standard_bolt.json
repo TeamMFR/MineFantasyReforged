@@ -9,20 +9,20 @@
   "recipe_hammer": -1,
   "output_hot": true,
   "pattern": [
-    "M     ",
-    "F     ",
-    "      ",
-    "      "
+    "H   ",
+    "F   ",
+    "    ",
+    "    "
   ],
   "key": {
+    "H": {
+      "item": "minefantasyreborn:metal_hunk"
+    },
     "F": {
       "item": "minefantasyreborn:fletching"
-    },
-    "M": {
-      "item": "minefantasyreborn:metal_hunk"
     }
   },
   "result": {
-    "item": "minefantasyreborn:standard_arrow"
+    "item": "minefantasyreborn:standard_bolt"
   }
 }

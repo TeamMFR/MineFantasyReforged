@@ -85,6 +85,7 @@ public abstract class BlockWoodDecor extends BlockTileEntity<TileEntityWoodDecor
 			itemstack = modifyDrop(tile, itemstack);
 			spawnAsEntity(world, pos, itemstack);
 		}
+		super.breakBlock(world, pos, state);
 	}
 
 	protected ItemStack modifyDrop(TileEntityWoodDecor tile, ItemStack item) {

@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 
 public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtendedReachWeapon {
 
@@ -24,6 +25,10 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
 	@Override
 	public boolean isHeavyWeapon() {
 		return true;
+	}
+
+	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
+		return entity.getHeldItem(hand).isEmpty();
 	}
 
 	public int getParryCooldown(EntityLivingBase user) {

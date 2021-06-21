@@ -114,7 +114,7 @@ public class MineFantasyKnowledgeList {
 	public static ICarpenterRecipe dirtRockR, lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR,
 			stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR,
 			boneNeedleR, stoneKnifeR, quernR, stoneovenRecipe;
-	public static Alloy[] reStone, bronze, steel, obsidalloy, black, red, blue, mithril, adamantium, ignotumite,
+	public static Alloy[] reinforcedStone, bronze, steel, obsidalloy, black, red, blue, mithril, adamantium, ignotumite,
 			mithium, enderforge, wolframiteR;
 	public static IAnvilRecipe coalfluxR, encrustedR, steelR, obsidianHunkR, diamondR;
 	public static ICarpenterRecipe nailPlanksR, nailStairR, refinedStairR, strongRackR, bellowsRecipe, bloomeryR,
@@ -405,8 +405,8 @@ public class MineFantasyKnowledgeList {
 				(InformationBase) null)).registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 0);
 		clay_wall = (new InformationBase("clay_wall", 0, -1, 2, MineFantasyBlocks.CLAY_WALL, (InformationBase) null))
 				.registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 5);
-		//        paint_brush = (new InformationBase("paint_brush", -3, 0, 1, BlockListMFR.paint_brush, refined_planks))
-		//                .registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 10);
+		paint_brush = (new InformationBase("paint_brush", -3, 0, 1, MineFantasyItems.PAINT_BRUSH, refined_planks))
+				.registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 10);
 		decorated_stone = (new InformationBase("decorated_stone", 5, 0, 2, MineFantasyBlocks.REINFORCED_STONE_FRAMED,
 				brickworks)).registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 15);
 

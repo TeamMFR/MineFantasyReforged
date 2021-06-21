@@ -1,26 +1,27 @@
 {
   "type": "crafting_shaped",
   "skill": "construction",
-  "research": "paint_brush",
-  "tool_type": "brush",
+  "research": "refined_planks",
+  "tool_type": "hammer",
   "is_tool_recipe": false,
   "block_tier": -1,
-  "craft_time": 3,
-  "tool_tier": -1,
+  "craft_time": 10,
+  "tool_tier": 1,
   "experience": 0,
   "sound": "minecraft:block.cloth.step",
   "pattern": [
-    "P   ",
     "N   ",
-    "    ",
+    "PP  ",
+    "PP  ",
     "    "
   ],
   "key": {
-    "P": {
-      "item": "minefantasyreborn:jug_plant_oil"
-    },
     "N": {
-      "item": "minefantasyreborn:nailed_planks"
+      "item": "minefantasyreborn:nail"
+    },
+    "P": {
+      "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}",
+      "item": "minefantasyreborn:timber"
     }
   },
   "result": {

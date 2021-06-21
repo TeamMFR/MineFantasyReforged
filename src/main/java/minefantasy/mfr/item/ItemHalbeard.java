@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 
 /**
@@ -22,6 +23,11 @@ public class ItemHalbeard extends ItemSpear {
 	public ItemHalbeard(String name, Item.ToolMaterial material, int rarity, float weight) {
 		super(name, material, rarity, weight);
 		setMaxDamage(getMaxDamage() * 2);
+	}
+
+	@Override
+	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
+		return false;
 	}
 
 	@Override

@@ -38,9 +38,9 @@ public class SmeltingRecipesMF {
 		ItemStack ignotumite = MineFantasyItems.bar(MineFantasyMaterials.Names.IGNOTUMITE);
 		ItemStack enderforge = MineFantasyItems.bar(MineFantasyMaterials.Names.ENDER);
 
-		//        KnowledgeListMFR.reStone = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyBlocks.REINFORCED_STONE, 4), 1,
-		//                new Object[]{Blocks.STONE, Blocks.STONE, Blocks.STONE, Blocks.STONE, ComponentListMFR.FIRECLAY, iron,
-		//                        ComponentListMFR.OBSIDIAN_ROCK});
+		MineFantasyKnowledgeList.reinforcedStone = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyBlocks.REINFORCED_STONE, 4), 1,
+				new Object[]{Blocks.STONE, Blocks.STONE, Blocks.STONE, Blocks.STONE, MineFantasyItems.FIRECLAY, iron,
+						MineFantasyItems.OBSIDIAN_ROCK});
 
 		if (ConfigHardcore.HCCreduceIngots) {
 			if (MineFantasyRebornAPI.removeSmelting(Blocks.IRON_ORE) && MineFantasyRebornAPI.removeSmelting(Blocks.GOLD_ORE)) {
@@ -97,7 +97,7 @@ public class SmeltingRecipesMF {
 		MineFantasyKnowledgeList.red = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyItems.RED_STEEL_WEAK_INGOT), 1,
 				new Object[] {steel, gold, Items.REDSTONE, MineFantasyItems.FLUX_STRONG, Items.BLAZE_POWDER});
 
-		MineFantasyKnowledgeList.blue = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyItems.BLACK_STEEL_WEAK_INGOT), 1,
+		MineFantasyKnowledgeList.blue = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyItems.BLUE_STEEL_WEAK_INGOT), 1,
 				new Object[] {steel, silver, new ItemStack(Items.DYE, 1, 4), MineFantasyItems.FLUX_STRONG,
 						Items.BLAZE_POWDER});
 

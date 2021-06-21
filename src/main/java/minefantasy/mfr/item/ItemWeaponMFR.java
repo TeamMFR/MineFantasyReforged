@@ -312,8 +312,36 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return false;
 	}
 
-	public boolean allowOffhand(EntityPlayer player, EnumHand hand) {
-		return !player.getHeldItem(hand).isEmpty();
+
+	/**
+	 * Called when a entity tries to play the 'swing' animation.
+	 *
+	 * @param entity The entity swinging the item.
+	 * @param stack The Item stack
+	 * @return True to cancel any further processing by EntityLiving
+	 */
+	@Override
+	public boolean onEntitySwing(EntityLivingBase entity, ItemStack stack) {
+		return !allowOffhand(entity, EnumHand.OFF_HAND);
+	}
+
+	/**
+	 * Called when the player Left Clicks (attacks) an entity.
+	 * Processed before damage is done, if return value is true further processing is canceled
+	 * and the entity is not attacked.
+	 *
+	 * @param stack The Item being used
+	 * @param player The player that is attacking
+	 * @param entity The entity being attacked
+	 * @return True to cancel the rest of the interaction.
+	 */
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		return !allowOffhand(player, EnumHand.OFF_HAND);
+	}
+
+	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
+		return true;
 	}
 
 	protected void addXp(EntityLivingBase user, int chance) {

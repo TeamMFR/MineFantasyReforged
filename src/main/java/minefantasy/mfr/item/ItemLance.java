@@ -10,7 +10,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -28,6 +30,11 @@ public class ItemLance extends ItemSpear {
 	public ItemLance(String name, Item.ToolMaterial material, int rarity, float weight) {
 		super(name, material, rarity, weight);
 		setMaxDamage(getMaxDamage(new ItemStack(this)) * 2);
+	}
+
+	@Override
+	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
+		return entity.getHeldItem(hand).getItem() instanceof ItemShield || entity.getHeldItem(hand).isEmpty();
 	}
 
 	@Override

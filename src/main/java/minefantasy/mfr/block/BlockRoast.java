@@ -62,6 +62,11 @@ public class BlockRoast extends BlockTileEntity<TileEntityRoast> {
 		return false;
 	}
 
+	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
 	public boolean isOven() {
 		return isOven;
 	}

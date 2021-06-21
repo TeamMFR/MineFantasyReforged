@@ -12,6 +12,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,6 +32,11 @@ public class ItemKatana extends ItemHeavyWeapon {
 
 	@Override
 	public boolean canBlock() {
+		return true;
+	}
+
+	@Override
+	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
 		return true;
 	}
 

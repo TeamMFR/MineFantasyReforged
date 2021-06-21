@@ -88,6 +88,14 @@ public class BlockComponent extends BlockTileEntity<TileEntityComponent> {
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
 
+	/**
+	 * Checks if this block can be placed exactly at the given position.
+	 */
+	@Override
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
+		return worldIn.getBlockState(pos).getMaterial() != Material.WATER && worldIn.getBlockState(pos).getMaterial() != Material.LAVA;
+	}
+
 	public static int placeComponent(EntityPlayer user, ItemStack item, World world, BlockPos pos, String type, String tex) {
 
 		int max = getStorageSize(type);

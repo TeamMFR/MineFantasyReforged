@@ -16,14 +16,14 @@
     "    "
   ],
   "key": {
-    "A": {
-      "item": "minefantasyreborn:arrowhead"
-    },
     "F": {
       "item": "minefantasyreborn:fletching"
+    },
+    "A": {
+      "item": "minefantasyreborn:arrowhead"
     }
   },
   "result": {
-    "item": "minefantasyreborn:standard_bolt"
+    "item": "minefantasyreborn:standard_arrow"
   }
 }

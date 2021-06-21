@@ -66,6 +66,11 @@ public class BlockRepairKit extends Block implements IClientRegister {
 	}
 
 	@Override
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
+
+	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return BlockBB;
 	}
@@ -85,7 +90,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 				float lvl = held.isItemEnchanted() ? repairLevelEnchant : repairLevel;
 				int repairAmount = (int) (held.getMaxDamage() * lvl);
 				held.setItemDamage(Math.max(0, held.getItemDamage() - repairAmount));
-				world.playBroadcastSound(broken ? 1020 : 1021, pos, 0);
+				world.playEvent(broken ? 1029 : 1030, pos, 0);
 
 				if (broken) {
 					world.playSound(user, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F);
@@ -93,7 +98,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 				}
 				return true;
 			} else {
-				world.playSound(user, pos, SoundEvents.BLOCK_CLOTH_STEP, SoundCategory.AMBIENT, 0.5F, 0.5F);
+				world.playSound(null, pos, SoundEvents.BLOCK_CLOTH_STEP, SoundCategory.AMBIENT, 0.5F, 0.5F);
 			}
 			return true;
 		}

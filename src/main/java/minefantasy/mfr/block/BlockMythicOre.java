@@ -48,7 +48,7 @@ public class BlockMythicOre extends BlockOreMF {
 											I18n.format("message.definite_article") + " " + direction.name())), true);
 				}
 		}
-		world.playSound(null, pos, (isPure ? MineFantasySounds.MYTHIC_ORE : SoundEvents.ENTITY_PLAYER_LEVELUP), SoundCategory.NEUTRAL, 1.0F, rand.nextFloat() * 0.4F + 1.1F);
+		world.playSound(null, pos, (isPure ? MineFantasySounds.MYTHIC_ORE : SoundEvents.ENTITY_PLAYER_LEVELUP), SoundCategory.NEUTRAL, 0.25F, rand.nextFloat() * 0.4F + 1.1F);
 		int distance = -1;
 		EntityPlayer closestPlayer = world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 8, false);
 		if (closestPlayer != null) {

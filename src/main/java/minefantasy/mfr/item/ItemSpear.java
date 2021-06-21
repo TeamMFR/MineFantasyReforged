@@ -42,8 +42,8 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 	}
 
 	@Override
-	public boolean allowOffhand(EntityPlayer player, EnumHand hand) {
-		return player.getHeldItem(hand).getItem() instanceof ItemShield;
+	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
+		return entity.getHeldItem(hand).getItem() instanceof ItemShield || entity.getHeldItem(hand).isEmpty();
 	}
 
 	@Override
