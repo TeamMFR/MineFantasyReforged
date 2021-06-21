@@ -43,29 +43,17 @@ import javax.annotation.Nullable;
 
 public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
-	protected static final DataParameter<Byte> VEX_FLAGS = EntityDataManager.<Byte>createKey(EntityDragon.class, DataSerializers.BYTE);
+	private static final String BREED_TAG = "Breed";
+	private static final String TIER_TAG = "Tier";
 
-	private static final DataParameter<Boolean> TERRESTRIAL = EntityDataManager.<Boolean>createKey(EntityDragon.class,
-			DataSerializers.BOOLEAN);
-	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager
-			.<Integer>createKey(EntityDragon.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> BREED = EntityDataManager.<Integer>createKey(EntityDragon.class,
-			DataSerializers.VARINT);
-	private static final DataParameter<Integer> TIER = EntityDataManager.<Integer>createKey(EntityDragon.class,
-			DataSerializers.VARINT);
-	private final Predicate<Entity> ATTACKABLE = new Predicate<Entity>() {
-		public boolean apply(@Nullable Entity entity) {
-			boolean flag = entity instanceof EntityLivingBase;
+	private static final DataParameter<Byte> CHARGING_FLAG = EntityDataManager.createKey(EntityDragon.class, DataSerializers.BYTE);
+	private static final DataParameter<Boolean> TERRESTRIAL = EntityDataManager.createKey(EntityDragon.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> BREED = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> TIER = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
 
-			if (entity instanceof EntityDragon) {
-				flag = !((EntityDragon) entity).getType().breedName.equals(EntityDragon.this.getType().breedName);
-			} else {
+	private final Predicate<Entity> ATTACKABLE = entity -> entity instanceof EntityDragon ? ((EntityDragon) entity).getBreed() == this.getBreed() : entity instanceof EntityLivingBase;
 
-			}
-
-			return !flag;
-		}
-	};
 	private BlockPos boundOrigin;
 	public static int interestTimeSeconds = 90;
 	private Entity lastEnemy;
@@ -134,13 +122,13 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(256.0D);
 	}
 
-	private boolean getVexFlag(int mask) {
-		int i = ((Byte) this.dataManager.get(VEX_FLAGS)).byteValue();
+	private boolean getChargingFlag(int mask) {
+		int i = this.dataManager.get(CHARGING_FLAG).byteValue();
 		return (i & mask) != 0;
 	}
 
-	private void setVexFlag(int mask, boolean value) {
-		int i = ((Byte) this.dataManager.get(VEX_FLAGS)).byteValue();
+	private void setChargingFlag(int mask, boolean value) {
+		int i = this.dataManager.get(CHARGING_FLAG);
 
 		if (value) {
 			i = i | mask;
@@ -148,15 +136,15 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			i = i & ~mask;
 		}
 
-		this.dataManager.set(VEX_FLAGS, Byte.valueOf((byte) (i & 255)));
+		this.dataManager.set(CHARGING_FLAG, (byte) (i & 255));
 	}
 
 	public boolean isCharging() {
-		return this.getVexFlag(1);
+		return this.getChargingFlag(1);
 	}
 
 	public void setCharging(boolean charging) {
-		this.setVexFlag(1, charging);
+		this.setChargingFlag(1, charging);
 	}
 
 	@Override
@@ -248,7 +236,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.dataManager.register(DISENGAGE_TIME, 0);
 		this.dataManager.register(BREED, 0);
 		this.dataManager.register(TIER, rand.nextInt(5));
-		this.dataManager.register(VEX_FLAGS, Byte.valueOf((byte) 0));
+		this.dataManager.register(CHARGING_FLAG, (byte) 0);
 	}
 
 	public Shockwave createShockwave(double x, double y, double z, float power, boolean grief) {
@@ -278,8 +266,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		//        nbt.setInteger("FireBreath", fireBreathTick);
 		//		nbt.setInteger("FireBreathCooldown", fireBreathCooldown);
 
-		nbt.setInteger("Breed", getBreed());
-		nbt.setInteger("Tier", getTier());
+		nbt.setInteger(BREED_TAG, getBreed());
+		nbt.setInteger(TIER_TAG, getTier());
 		//        nbt.setInteger("interestTime", interestTime);
 	}
 
@@ -288,12 +276,12 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	 */
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
-		if (nbt.hasKey("Breed")) {
+		if (nbt.hasKey(BREED_TAG)) {
 			//        fireBreathTick = nbt.getInteger("FireBreath");
 			//			fireBreathCooldown = nbt.getInteger("FireBreathCooldown");
 
-			setBreed(nbt.getInteger("Breed"));
-			setTier(nbt.getInteger("Tier"));
+			setBreed(nbt.getInteger(BREED_TAG));
+			setTier(nbt.getInteger(TIER_TAG));
 			this.setSize(3.0F * getScale(), 2.0F * getScale());
 			stepHeight = 1.25F + (getTier() * 0.25F);
 			this.experienceValue = 50 * (getTier() + 1);
@@ -429,16 +417,11 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	}
 
 	private Item getLoot(int tier) {
-		if (tier == 4)// Ancient
-		{
-			return MineFantasyItems.LOOT_SACK_EXQUISITE;
-		}
-		return MineFantasyItems.LOOT_SACK_VALUABLE;// Any
+		return tier == 4 ? MineFantasyItems.LOOT_SACK_EXQUISITE : MineFantasyItems.LOOT_SACK_VALUABLE;
 	}
 
 	private Entity getBreath(double xAngle, double yAngle, double zAngle) {
-		return new EntityDragonBreath(this.world, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage)
-				.setType(getType().rangedAttack.id);
+		return new EntityDragonBreath(this.world, this, xAngle, yAngle, zAngle, 1.0F).setDamage(getType().fireDamage).setType(getType().rangedAttack.id);
 	}
 
 	@Override
@@ -451,10 +434,11 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
 		// TODO Auto-generated method stub
-
 	}
 
+    // net.minecraft.entity.monster.EntityVex.AIChargeAttack class.
 	class AIChargeAttack extends EntityAIBase {
+
 		public AIChargeAttack() {
 			this.setMutexBits(1);
 		}
@@ -527,6 +511,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		}
 	}
 
+	// net.minecraft.entity.monster.EntityVex.AIMoveControl
 	class AIMoveControl extends EntityMoveHelper {
 		public AIMoveControl(EntityDragon vex) {
 			super(vex);
@@ -564,6 +549,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		}
 	}
 
+	// net.minecraft.entity.monster.EntityVex.AIMoveRandom
 	class AIMoveRandom extends EntityAIBase {
 		public AIMoveRandom() {
 			this.setMutexBits(1);
