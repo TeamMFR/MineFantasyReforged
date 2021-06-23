@@ -205,7 +205,7 @@ public class CombatMechanics {
 	 */
 	private static void commandDodge(EntityPlayer user, int type) {
 		initDodge(user, type);
-		NetworkHandler.sendToAllTracking(user, new DodgeCommandPacket(user, type));
+		NetworkHandler.sendToServer(new DodgeCommandPacket(user, type));
 	}
 
 	public static void initDodge(EntityPlayer user, int type) {
