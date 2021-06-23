@@ -85,24 +85,24 @@ public class ItemJug extends ItemComponentMFR {
 		ItemStack stack = player.getHeldItem(hand);
 
 		if (rayTraceResult == null) {
-			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+			return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 		} else {
 			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
 				if (!world.canMineBlockBody(player, pos)) {
-					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+					return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 				}
 
 				if (!player.canPlayerEdit(pos, rayTraceResult.sideHit, stack)) {
-					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+					return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 				}
 
-				if (isWaterSource(world, pos)) {
+				if (isWaterSource(world, pos.up())) {
 					gather(stack, world, player);
 					return EnumActionResult.SUCCESS;
 				}
 			}
-			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+			return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 		}
 	}
 
@@ -111,8 +111,7 @@ public class ItemJug extends ItemComponentMFR {
 		if (!world.isRemote) {
 			world.playSound(player, player.getPosition(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
 			item.shrink(1);
-			EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ,
-					new ItemStack(MineFantasyItems.JUG_WATER));
+			EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(MineFantasyItems.JUG_WATER));
 			world.spawnEntity(resultItem);
 		}
 	}
@@ -122,38 +121,33 @@ public class ItemJug extends ItemComponentMFR {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
 		if (storageType == null) {
 			return EnumActionResult.FAIL;
 		}
 
-		ItemStack stack = player.getHeldItem(hand);
-		Block componentBlock = MineFantasyBlocks.COMPONENTS;
-
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-
 		if (type.equalsIgnoreCase("uncooked")) {
-			return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+			return super.onItemUseFirst(player, world, pos, facing, hitX, hitY, hitZ, hand);
 		}
 		if (type.equalsIgnoreCase("empty")) {
-			rightClickEmpty(player, world, pos, hand, facing, hitX, hitY, hitZ);
 			return rightClickEmpty(player, world, pos, hand, facing, hitX, hitY, hitZ);
 		}
 
-		if (!block.isReplaceable(world, pos)) {
-			pos = pos.offset(facing);
-		}
+		EnumFacing facingForPlacement = EnumFacing.getDirectionFromEntityLiving(pos, player);
 
-		if (!world.mayPlace(componentBlock, pos, false, facing, player)) {
+		if (facingForPlacement != EnumFacing.UP && world.getBlockState(pos).getBlock() instanceof BlockComponent){
 			return EnumActionResult.FAIL;
 		}
 
-		world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
+		ItemStack stack = player.getHeldItem(hand);
 
-		int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blockTexture);
-
-		stack.shrink(size);
+		if (player.canPlayerEdit(pos.offset(facingForPlacement), facing, stack)) {
+			int size = BlockComponent.placeComponent(player, stack, world, pos.offset(facingForPlacement), facing, hitX, hitY, hitZ, player, hand, storageType, blockTexture);
+			if (!player.capabilities.isCreativeMode){
+				stack.shrink(size);
+				return EnumActionResult.SUCCESS;
+			}
+		}
 
 		return EnumActionResult.SUCCESS;
 	}

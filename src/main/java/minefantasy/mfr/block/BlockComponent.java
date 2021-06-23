@@ -1,5 +1,6 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityComponent;
 import net.minecraft.block.BlockHorizontal;
@@ -92,22 +93,26 @@ public class BlockComponent extends BlockTileEntity<TileEntityComponent> {
 	 * Checks if this block can be placed exactly at the given position.
 	 */
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
-		return worldIn.getBlockState(pos).getMaterial() != Material.WATER && worldIn.getBlockState(pos).getMaterial() != Material.LAVA;
+	public boolean canPlaceBlockAt(World world, BlockPos pos) {
+		return world.getBlockState(pos).getMaterial() != Material.WATER && world.getBlockState(pos).getMaterial() != Material.LAVA && world.isSideSolid(pos.down(), EnumFacing.UP);
 	}
 
-	public static int placeComponent(EntityPlayer user, ItemStack item, World world, BlockPos pos, String type, String tex) {
+	public static int placeComponent(EntityPlayer user, ItemStack item, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EntityPlayer player, EnumHand hand, String type, String tex) {
+		if (world.isAirBlock(pos) && canBuildOn(world, pos.down())){
+			world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
 
-		int max = getStorageSize(type);
-		int size = user.isSneaking() ? Math.min(item.getCount(), max) : 1;
+			int max = getStorageSize(type);
+			int size = user.isSneaking() ? Math.min(item.getCount(), max) : 1;
 
-		TileEntityComponent tile = (TileEntityComponent) world.getTileEntity(pos);
-		if (tile != null) {
-			ItemStack newitem = item.copy();
-			newitem.setCount(1);
-			tile.setItem(newitem, type, tex, max, size);
+			TileEntityComponent tile = (TileEntityComponent) world.getTileEntity(pos);
+			if (tile != null) {
+				ItemStack newitem = item.copy();
+				newitem.setCount(1);
+				tile.setItem(newitem, type, tex, max, size);
+			}
+			return size;
 		}
-		return size;
+		return 0;
 	}
 
 	public static boolean canBuildOn(World world, BlockPos pos) {

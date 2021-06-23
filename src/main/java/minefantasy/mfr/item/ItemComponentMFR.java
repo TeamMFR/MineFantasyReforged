@@ -1,10 +1,12 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -13,10 +15,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -108,31 +112,26 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
 		if (storageType == null) {
 			return EnumActionResult.FAIL;
 		}
 
-		ItemStack stack = player.getHeldItem(hand);
-		Block componentBlock = MineFantasyBlocks.COMPONENTS;
+		EnumFacing facingForPlacement = EnumFacing.getDirectionFromEntityLiving(pos, player);
 
-		IBlockState state = world.getBlockState(pos);
-		Block block = state.getBlock();
-
-		if (!block.isReplaceable(world, pos)) {
-			pos = pos.offset(facing);
-		}
-
-		if (!world.mayPlace(componentBlock, pos, false, facing, player)) {
+		if (facingForPlacement != EnumFacing.UP && world.getBlockState(pos).getBlock() instanceof BlockComponent){
 			return EnumActionResult.FAIL;
 		}
 
-		world.setBlockState(pos, MineFantasyBlocks.COMPONENTS.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, 0, player, hand), 2);
+		ItemStack stack = player.getHeldItem(hand);
 
-		int size = BlockComponent.placeComponent(player, stack, world, pos, storageType, blockTexture);
-
-		stack.shrink(size);
-
-		return EnumActionResult.SUCCESS;
+		if (player.canPlayerEdit(pos.offset(facingForPlacement), facing, stack)) {
+			int size = BlockComponent.placeComponent(player, stack, world, pos.offset(facingForPlacement), facing, hitX, hitY, hitZ, player, hand, storageType, blockTexture);
+			if (!player.capabilities.isCreativeMode){
+				stack.shrink(size);
+				return EnumActionResult.SUCCESS;
+			}
+		}
+		return EnumActionResult.FAIL;
 	}
 }

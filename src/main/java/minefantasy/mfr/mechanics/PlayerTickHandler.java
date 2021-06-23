@@ -17,14 +17,13 @@ import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.TacticalManager;
 import minefantasy.mfr.util.XSTRandom;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -66,15 +65,17 @@ public class PlayerTickHandler {
 			dragon.setDragon(tier);
 			dragon.disengage(100);
 			player.world.playSound(dragon.posX, dragon.posY - 16D, dragon.posZ, SoundEvents.ENTITY_ENDERDRAGON_GROWL, SoundCategory.AMBIENT, 3.0F, 1.5F, true);
+			TextComponentTranslation dragonNearText = new TextComponentTranslation("event.dragonnear.name");
+			dragonNearText.getStyle().setColor(TextFormatting.GOLD);
 
 			if (ConfigMobs.dragonMSG && !player.world.isRemote) {
-				player.sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
+				player.sendMessage(dragonNearText);
 
 				List<?> list = player.world.playerEntities;
 				for (Object instance : list) {
 					if (instance instanceof EntityPlayer) {
 						if (((EntityPlayer) instance).getDistance(player) < 256D && instance != player) {
-							((EntityPlayer) instance).sendMessage(new TextComponentString(TextFormatting.GOLD + I18n.format("event.dragonnear.name")));
+							((EntityPlayer) instance).sendMessage(dragonNearText);
 						}
 					}
 				}
@@ -285,8 +286,7 @@ public class PlayerTickHandler {
 			if (PlayerTickHandler.getDragonEnemyPoints(player) >= 50) {
 				chance *= 2;// twice the chance
 			}
-			if (!player.world.isRemote && player.world.getTotalWorldTime() % i == 0
-					&& random.nextFloat() * 100F < chance) {
+			if (!player.world.isRemote && player.world.getTotalWorldTime() % i == 0 && random.nextFloat() * 100F < chance) {
 				spawnDragon(player);
 			}
 		}
