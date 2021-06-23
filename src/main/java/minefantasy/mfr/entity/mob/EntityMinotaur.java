@@ -4,7 +4,6 @@ import minefantasy.mfr.api.armour.IArmourPenetrationMob;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.entity.EntityBomb;
-import minefantasy.mfr.entity.mob.ai.AI_MinotaurFindTarget;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
@@ -17,10 +16,12 @@ import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.EntityAIAttackMelee;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIHurtByTarget;
 import net.minecraft.entity.ai.EntityAILookIdle;
@@ -29,6 +30,7 @@ import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -55,7 +57,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
-public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob, ISpecialCombatMob {
+public class EntityMinotaur extends EntityCreature implements IArmourPenetrationMob, ISpecialCombatMob, IMob {
 	private static final DataParameter<Byte> ATTACK = EntityDataManager.<Byte>createKey(EntityMinotaur.class, DataSerializers.BYTE);
 	private static final DataParameter<Integer> SPECIES = EntityDataManager.<Integer>createKey(EntityMinotaur.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> TIER = EntityDataManager.<Integer>createKey(EntityMinotaur.class, DataSerializers.VARINT);
@@ -71,19 +73,42 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 
 	public EntityMinotaur(World world) {
 		super(world);
+		this.setSize(1.5F, 2.5F);
+		this.stepHeight = 1.0F;
+		this.experienceValue = 40;
+	}
+
+	protected void initEntityAI() {
 		this.tasks.addTask(0, new EntityAISwimming(this));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
-		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityLivingBase.class, true));
+		this.tasks.addTask(2, new EntityAIAttackMelee(this, 1.0D, false));
+		this.tasks.addTask(4, new EntityAIAttackMelee(this, 1.0D, true));
 		this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
 		this.tasks.addTask(7, new EntityAIWander(this, 0.5D));
 		this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 12.0F));
 		this.tasks.addTask(8, new EntityAILookIdle(this));
 		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true));
-		this.targetTasks.addTask(2, new AI_MinotaurFindTarget(this, EntityPlayer.class, 0, true));
+		this.targetTasks.addTask(2, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 
-		this.setSize(1.5F, 2.5F);
-		this.stepHeight = 1.0F;
-		this.experienceValue = 40;
+	}
+
+	@Override
+	protected void applyEntityAttributes() {
+		super.applyEntityAttributes();
+
+		this.getAttributeMap().registerAttribute(SharedMonsterAttributes.ATTACK_DAMAGE);
+
+		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0D);
+		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35F);
+		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigMobs.minotaurMD);
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigMobs.minotaurHP);
+	}
+
+	protected void entityInit() {
+		super.entityInit();
+		this.dataManager.register(ATTACK, Byte.valueOf((byte) 0));
+		this.dataManager.register(SPECIES, Integer.valueOf((byte) 0));
+		this.dataManager.register(TIER, Integer.valueOf((byte) 0));
+		this.dataManager.register(RAGE, Integer.valueOf((byte) 0));
 	}
 
 	public void worldGenTier(int species, int tier) {
@@ -102,6 +127,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 	 * Called only once on an entity when first time spawned, via egg, mob spawner, natural spawning etc, but not called
 	 * when entity is reloaded from nbt. Mainly used for initializing attributes and inventory
 	 */
+	@Override
 	@Nullable
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
 		float f = difficulty.getClampedAdditionalDifficulty();
@@ -135,23 +161,6 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 		return list[rand.nextInt(list.length)];
 	}
 
-	@Override
-	protected void applyEntityAttributes() {
-		super.applyEntityAttributes();
-		this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(24.0D);
-		this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35F);
-		this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigMobs.minotaurMD);
-		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(ConfigMobs.minotaurHP);
-	}
-
-	protected void entityInit() {
-		super.entityInit();
-		this.dataManager.register(ATTACK, Byte.valueOf((byte) 0));
-		this.dataManager.register(SPECIES, Integer.valueOf((byte) 0));
-		this.dataManager.register(TIER, Integer.valueOf((byte) 0));
-		this.dataManager.register(RAGE, Integer.valueOf((byte) 0));
-	}
-
 	public boolean isBreakDoorsTaskSet() {
 		return this.isBreakDoorsTaskSet;
 	}
@@ -177,9 +186,61 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 		return super.getBlockPathWeight(pos);
 	}
 
+	/**
+	 * Checks to make sure the light is not too bright where the mob is spawning
+	 */
+	protected boolean isValidLightLevel() {
+		BlockPos pos = new BlockPos(MathHelper.floor(this.posX), MathHelper.floor(this.posY), MathHelper.floor(this.posZ));
+
+		if (this.world.getLightFromNeighbors(pos) > this.rand.nextInt(32)) {
+			return false;
+		} else {
+			int l = this.world.getLight(pos);
+
+			if (this.world.isThundering()) {
+				int i1 = this.world.getSkylightSubtracted();
+				this.world.setSkylightSubtracted(10);
+				l = this.world.getLight(pos);
+				this.world.setSkylightSubtracted(i1);
+			}
+
+			return l <= this.rand.nextInt(8);
+		}
+	}
+
+	/**
+	 * Checks if the entity's current position is a valid location to spawn this
+	 * entity.
+	 */
+	@Override
+	public boolean getCanSpawnHere() {
+		return this.world.getDifficulty() != EnumDifficulty.PEACEFUL && this.isValidLightLevel() && super.getCanSpawnHere();
+	}
+
+	/**
+	 * Called frequently so the entity can update its state every tick as required.
+	 * For example, zombies and skeletons use this to react to sunlight and start to
+	 * burn.
+	 */
+	@Override
+	public void onLivingUpdate() {
+		this.updateArmSwingProgress();
+		float f = this.getBrightness();
+
+		if (f > 0.5F) {
+			this.idleTime += 2;
+		}
+
+		super.onLivingUpdate();
+	}
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
+
+		if (this.canDespawn() && !this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+			this.setDead();
+		}
 
 		if (!world.isRemote) {
 			if (getRageLevel() == 0 && getAttackTarget() == null) {
@@ -277,12 +338,12 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 			return;
 		}
 		BlockPos pos = new BlockPos(posX, posY, posZ);
-		if (world.getBlockState(pos) == MineFantasyBlocks.BERRY_BUSH && world.getBlockState(pos) == Blocks.AIR) {
+		if (world.getBlockState(pos).getBlock() == MineFantasyBlocks.BERRY_BUSH && world.getBlockState(pos).getBlock() == Blocks.AIR) {
 			world.playSound(posX, posY + getEyeHeight(), posZ, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.AMBIENT, 1.0F, 0.75F, true);
 			swingArm(EnumHand.MAIN_HAND);
 			heal(10);
 			world.setBlockState(pos, (Blocks.DIRT).getDefaultState(), 2);
-		} else if (world.getBlockState(pos) instanceof BlockCrops && world.getBlockState(pos) != Blocks.AIR) {
+		} else if (world.getBlockState(pos) instanceof BlockCrops && world.getBlockState(pos).getBlock() != Blocks.AIR) {
 			world.playSound(posX, posY + getEyeHeight(), posZ, SoundEvents.ENTITY_GENERIC_EAT, SoundCategory.AMBIENT, 1.0F, 0.75F, true);
 			world.playSound(posX, posY + getEyeHeight(), posZ, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT, 1.0F, 1.00F, true);
 			swingArm(EnumHand.MAIN_HAND);
@@ -481,7 +542,7 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 		this.experienceValue = minotaur.experienceValue;
 
 		if (subspecies == 0) {
-			this.targetTasks.addTask(2, new AI_MinotaurFindTarget(this, EntityLiving.class, 0, false));
+			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, false));
 		}
 		if (subspecies >= 3) {
 			this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
@@ -544,17 +605,17 @@ public class EntityMinotaur extends EntityMobMF implements IArmourPenetrationMob
 		if (getRageLevel() > 50) {
 			addRage((int) (dam * 1.5));
 		}
-		if (getAttack() == 2 && this.isBeingRidden() && this.getRidingEntity() == target) {
+		if (getAttack() == 2 && this.isBeingRidden() && this.getPassengers().contains(target)) {
 			if (target instanceof EntityLivingBase && rand.nextInt(4) == 0) {
 				ArmourCalculator.damageArmour((EntityLivingBase) target, (int) (dam * 0.25F));
 			}
 		}
-		if (this.isBeingRidden()) {
+		if (!this.isBeingRidden()) {
 			if (grabCooldown <= 0 && rand.nextInt(100) < getGrabChance() && canPickUp(target)) {
 				target.startRiding(this);
 			}
-		} else if (rand.nextInt(100) < ConfigMobs.minotaurTC && getRidingEntity() == target) {
-			getRidingEntity().dismountRidingEntity();
+		} else if (rand.nextInt(100) < ConfigMobs.minotaurTC && this.getPassengers().contains(target)) {
+			getPassengers().forEach(Entity::dismountRidingEntity);
 			grabCooldown = 60;
 			TacticalManager.knockbackEntity(target, this, 4F, 1F);
 		}

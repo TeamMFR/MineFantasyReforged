@@ -329,7 +329,7 @@ public class PlayerTickHandler {
 
 			if (ConfigWeapon.useBalance) {
 				MFRLogUtil.logDebug("Weapon Balance Move");
-				player.rotationYaw += yawBalance > 0 ? weight : -weight;
+				player.rotationYaw -= yawBalance > 0 ? weight : -weight;
 			}
 
 			if (yawBalance < 0)

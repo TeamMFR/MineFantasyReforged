@@ -349,7 +349,7 @@ public class CombatMechanics {
 		if (!hitter.getHeldItemMainhand().isEmpty() && hitter.getHeldItemMainhand().getItem() instanceof ItemWeaponMFR) {
 			ItemWeaponMFR hitterWeapon = ((ItemWeaponMFR) hitter.getHeldItemMainhand().getItem());
 			if (hitterWeapon.isHeavyWeapon()) {
-				TacticalManager.throwPlayerOffBalance((EntityPlayer) hitter, hitterWeapon.getBalance(), true);
+				TacticalManager.throwPlayerOffBalance((EntityPlayer) hitter, hitterWeapon.getBalance());
 			}
 		}
 	}
@@ -526,7 +526,7 @@ public class CombatMechanics {
 		}
 		if (user instanceof EntityPlayer) {
 			TacticalManager.lungeEntity(user, target, 0.5F, 0F);
-			TacticalManager.throwPlayerOffBalance((EntityPlayer) user, 0.5F, true);
+			TacticalManager.throwPlayerOffBalance((EntityPlayer) user, 0.5F);
 		}
 
 		target.world.playSound(null, target.getPosition(), MineFantasySounds.CRITICAL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
@@ -866,7 +866,7 @@ public class CombatMechanics {
 		}
 
 		if (ConfigWeapon.useBalance && balance > 0 && entityPlayer != null) {
-			TacticalManager.throwPlayerOffBalance(entityPlayer, balance, true);
+			TacticalManager.throwPlayerOffBalance(entityPlayer, balance);
 		}
 	}
 

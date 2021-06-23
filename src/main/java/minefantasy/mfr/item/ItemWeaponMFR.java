@@ -26,6 +26,7 @@ import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaBar;
+import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
@@ -312,19 +313,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return false;
 	}
 
-
-	/**
-	 * Called when a entity tries to play the 'swing' animation.
-	 *
-	 * @param entity The entity swinging the item.
-	 * @param stack The Item stack
-	 * @return True to cancel any further processing by EntityLiving
-	 */
-	@Override
-	public boolean onEntitySwing(EntityLivingBase entity, ItemStack stack) {
-		return !allowOffhand(entity, EnumHand.OFF_HAND);
-	}
-
 	/**
 	 * Called when the player Left Clicks (attacks) an entity.
 	 * Processed before damage is done, if return value is true further processing is canceled
@@ -337,6 +325,10 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	 */
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		if (!allowOffhand(player, EnumHand.OFF_HAND)){
+			TacticalManager.throwPlayerOffBalance(player, 5F);
+			StaminaBar.modifyStaminaValue(player, -95F);
+		}
 		return !allowOffhand(player, EnumHand.OFF_HAND);
 	}
 

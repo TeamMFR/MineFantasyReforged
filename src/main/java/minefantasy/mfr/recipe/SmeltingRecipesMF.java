@@ -22,7 +22,7 @@ public class SmeltingRecipesMF {
 		ItemStack tin = MineFantasyItems.bar(MineFantasyMaterials.Names.TIN);
 		ItemStack bronze = MineFantasyItems.bar(MineFantasyMaterials.Names.BRONZE);
 		ItemStack iron = MineFantasyItems.bar(MineFantasyMaterials.Names.IRON);
-		ItemStack pigiron = MineFantasyItems.bar(MineFantasyMaterials.Names.PIG_IRON);
+		ItemStack pig_iron = MineFantasyItems.bar(MineFantasyMaterials.Names.PIG_IRON);
 		ItemStack steel = MineFantasyItems.bar(MineFantasyMaterials.Names.STEEL);
 		ItemStack diamond = MineFantasyItems.bar(MineFantasyMaterials.Names.ENCRUSTED);
 		ItemStack tungsten = MineFantasyItems.bar(MineFantasyMaterials.Names.TUNGSTEN);
@@ -92,7 +92,7 @@ public class SmeltingRecipesMF {
 						MineFantasyItems.FLUX_STRONG});
 
 		if (!ConfigHardcore.HCCreduceIngots) {
-			MineFantasyKnowledgeList.steel = MineFantasyRebornAPI.addRatioAlloy(9, steel, 1, new Object[] {pigiron});
+			MineFantasyKnowledgeList.steel = MineFantasyRebornAPI.addRatioAlloy(9, steel, 1, new Object[] {pig_iron});
 		}
 		MineFantasyKnowledgeList.red = MineFantasyRebornAPI.addRatioAlloy(1, new ItemStack(MineFantasyItems.RED_STEEL_WEAK_INGOT), 1,
 				new Object[] {steel, gold, Items.REDSTONE, MineFantasyItems.FLUX_STRONG, Items.BLAZE_POWDER});
@@ -116,7 +116,7 @@ public class SmeltingRecipesMF {
 		MineFantasyKnowledgeList.enderforge = MineFantasyRebornAPI.addRatioAlloy(2, enderforge, 3,
 				new Object[] {adamant, mithril, Items.ENDER_PEARL, Items.ENDER_PEARL});
 
-		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.PREPARED_IRON, MineFantasyItems.bar("PigIron"));
+		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.PREPARED_IRON, pig_iron);
 		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.BLACK_STEEL_WEAK_INGOT, black);
 		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.RED_STEEL_WEAK_INGOT, red);
 		MineFantasyRebornAPI.addBlastFurnaceRecipe(MineFantasyItems.BLUE_STEEL_WEAK_INGOT, blue);

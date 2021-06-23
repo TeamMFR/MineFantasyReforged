@@ -97,7 +97,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 	public void onParry(DamageSource source, EntityLivingBase user, Entity attacker, float dam) {
 		super.onParry(source, user, attacker, dam);
 		if (ConfigWeapon.useBalance && user instanceof EntityPlayer) {
-			TacticalManager.throwPlayerOffBalance((EntityPlayer) user, getBalance(), rand.nextBoolean());
+			TacticalManager.throwPlayerOffBalance((EntityPlayer) user, getBalance());
 		}
 	}
 

@@ -389,10 +389,10 @@ public class TacticalManager {
 		return false;
 	}
 
-	public static void throwPlayerOffBalance(EntityPlayer entityPlayer, float balance, boolean throwDown) {
+	public static void throwPlayerOffBalance(EntityPlayer entityPlayer, float balance) {
 		float amplify = 30.0F;
 
-		float offsetX = -balance / 2;
+		float offsetX = balance / 2;
 		float offsetY = balance;
 
 		float yawBalance = offsetX * amplify;
