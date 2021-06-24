@@ -65,7 +65,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 
 		TileEntityCrucible tile = (TileEntityCrucible) getTile(world, pos);
 		if (tile != null) {
-			ItemStack held = player.getHeldItem(hand);
+			ItemStack held = player.getHeldItemMainhand();
 			if (!held.isEmpty() && held.getItem() == MineFantasyItems.ANCIENT_JEWEL_MASTER && held.getItemDamage() == 3) {
 				if (tier == 2 && isActive) {
 					held.shrink(1);

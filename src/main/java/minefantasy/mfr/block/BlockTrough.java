@@ -99,7 +99,7 @@ public class BlockTrough extends BlockWoodDecor {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		ItemStack stack = user.getHeldItem(hand);
+		ItemStack stack = user.getHeldItemMainhand();
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileEntityTrough) {
 			if (((TileEntityTrough) tile).interact(user, stack)) {
