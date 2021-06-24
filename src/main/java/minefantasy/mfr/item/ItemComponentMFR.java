@@ -116,6 +116,9 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 		if (storageType == null) {
 			return EnumActionResult.FAIL;
 		}
+		if (world.getTileEntity(pos) != null && !(world.getTileEntity(pos) instanceof TileEntityComponent)){
+			return EnumActionResult.FAIL;
+		}
 
 		EnumFacing facingForPlacement = EnumFacing.getDirectionFromEntityLiving(pos, player);
 
