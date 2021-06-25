@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.grass.hit",
+  "pattern": [
+    "T   ",
+    "TT  ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tallgrass",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:thatch_stairs"
+  }
+}

@@ -1,0 +1,36 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreforged:trough",
+        "textures": {"texture": "minefantasyreforged:blocks/trough_wood_base"}
+    },
+    "variants": {
+        "normal": [{}],
+        "fill_count": {
+            "0": {},
+            "1": {
+                "submodel": "minefantasyreforged:water_1"
+            },
+            "2": {
+                "submodel": "minefantasyreforged:water_2"
+            },
+            "3": {
+                "submodel": "minefantasyreforged:water_3"
+            },
+            "4": {
+                "submodel": "minefantasyreforged:water_4"
+            },
+            "5": {
+                "submodel": "minefantasyreforged:water_5"
+            },
+            "6": {
+                "submodel": "minefantasyreforged:water_6"
+            }
+        },
+        "facing=north": { "y": 0 },
+        "facing=south": { "y": 180 },
+        "facing=west":  { "y": 270 },
+        "facing=east":  { "y": 90 }
+    }
+}

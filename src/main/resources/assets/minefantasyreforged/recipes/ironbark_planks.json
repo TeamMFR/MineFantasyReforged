@@ -1,0 +1,13 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+        {
+            "item": "minefantasyreforged:log_ironbark"
+        }
+
+    ],
+    "result": {
+        "item": "minefantasyreforged:ironbark_planks",
+        "count": 4
+    }
+}

@@ -19,8 +19,8 @@ public class WoodMaterialRegistry extends DataLoader {
 	public static final WoodMaterialRegistry INSTANCE = new WoodMaterialRegistry();
 
 	private static final String TYPE = "wood material";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/registry";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/custom/registry";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/registry";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/registry";
 
 	public void preInit() {
 		createCustomDataDirectory(CUSTOM_RECIPE_DIRECTORY);

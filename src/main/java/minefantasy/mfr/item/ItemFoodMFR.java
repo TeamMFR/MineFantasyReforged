@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -59,7 +59,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 
 		setCreativeTab(MineFantasyTabs.tabFood);
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat, int rarity) {

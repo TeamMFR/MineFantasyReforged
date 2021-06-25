@@ -1,0 +1,11 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreforged:crossbow_bench",
+        "textures": {"texture": "minefantasyreforged:blocks/crossbow_bench"}
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

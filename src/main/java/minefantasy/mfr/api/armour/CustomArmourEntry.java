@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.armour;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.util.ArmourCalculator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -82,7 +82,7 @@ public class CustomArmourEntry {
 	public static void registerItem(Item piece, float weight, float bulk, boolean alterSpeed, String AC) {
 		int id = Item.getIdFromItem(piece);
 
-		MineFantasyRebornAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getUnlocalizedName() + "(" + id
+		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getUnlocalizedName() + "(" + id
 				+ ") Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
 		entries.put(id, new CustomArmourEntry(id, weight, bulk, alterSpeed, AC));
 	}

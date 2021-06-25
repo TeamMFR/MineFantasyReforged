@@ -18,7 +18,7 @@ import net.minecraftforge.common.model.IModelState;
 
 public class TileEntityBellowsRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
 	private final ModelBellows model;
-	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bellows.png");
+	private static final ResourceLocation texture = new ResourceLocation("minefantasyreforged:textures/blocks/bellows.png");
 
 	public TileEntityBellowsRenderer() {
 		model = new ModelBellows();

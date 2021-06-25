@@ -9,7 +9,7 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.ShapedCarpenterRecipes;
@@ -27,9 +27,9 @@ import java.util.List;
  */
 public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterRecipe> {
 
-	static final String UID = "minefantasyreborn:carpenter";
+	static final String UID = "minefantasyreforged:carpenter";
 
-	static final ResourceLocation TEXTURE = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/integration/jei/carpenter_background.png");
+	static final ResourceLocation TEXTURE = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/integration/jei/carpenter_background.png");
 	private final IDrawable icon;
 
 	static final int WIDTH = 134;
@@ -55,7 +55,7 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 
 	@Override
 	public String getModName() {
-		return MineFantasyReborn.NAME;
+		return MineFantasyReforged.NAME;
 	}
 
 	@Override

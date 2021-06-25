@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/padded_chestplate",
-        "layer1": "minefantasyreborn:items/padded_chestplate_overlay"
-    }
-}

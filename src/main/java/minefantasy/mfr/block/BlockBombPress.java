@@ -1,9 +1,8 @@
 package minefantasy.mfr.block;
 
 import codechicken.lib.model.ModelRegistryHelper;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
-import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -49,7 +48,7 @@ public class BlockBombPress extends BlockTileEntity<TileEntityBombPress> impleme
 		this.setResistance(2F);
 		this.setLightOpacity(0);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull

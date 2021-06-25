@@ -1,7 +1,7 @@
 package minefantasy.mfr.constants;
 
 /**
- * Stores various global constants used in Minefantasy Reborn.
+ * Stores various global constants used in Minefantasy Reforged.
  */
 public final class Constants {
 

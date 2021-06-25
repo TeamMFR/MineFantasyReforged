@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/dragonforged_splint_helmet",
+        "layer1": "minefantasyreforged:items/dragonforged_splint_helmet_detail"
+    }
+}

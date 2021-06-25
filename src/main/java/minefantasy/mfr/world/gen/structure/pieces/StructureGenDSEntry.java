@@ -1,7 +1,7 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -113,7 +113,7 @@ public class StructureGenDSEntry extends StructureModuleMFR {
             mapStructure(width_span, 0, 2, facing.rotateYCCW(), StructureGenDSSurfaceAppendage.class);
         }
 
-        MineFantasyReborn.LOG.error("Placed Dwarven Stronghold at: " + pos);
+        MineFantasyReforged.LOG.error("Placed Dwarven Stronghold at: " + pos);
     }
 
     private void placeDoorway(int mod, int height) {

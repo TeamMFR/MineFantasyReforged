@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "T   ",
+    "S   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:skillbook_combat"
+    },
+    "T": {
+      "item": "minefantasyreforged:talisman_greater"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:skillbook_combat_max"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "repair_ornate",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 100,
+  "tool_tier": 3,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "GDG ",
+    "YRY ",
+    "GYG ",
+    "    "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:repair_kit_advanced"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "Y": {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:repair_kit_ornate"
+  }
+}

@@ -2,7 +2,7 @@ package minefantasy.mfr.registry;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
@@ -17,10 +17,10 @@ public abstract class DataLoader {
 	public static final String JSON_FILE_EXT = "json";
 
 	public void loadRegistry(String type, String defaultDirectory, String configDirectory) {
-		MineFantasyReborn.LOG.info("Loading " + type + " registry entries from config directory");
+		MineFantasyReforged.LOG.info("Loading " + type + " registry entries from config directory");
 		loadRegistryFiles(new File(configDirectory), "", type);
 
-		MineFantasyReborn.LOG.info("Loading default " + type + " registry entries");
+		MineFantasyReforged.LOG.info("Loading default " + type + " registry entries");
 		loadRegistryFiles(Loader.instance().activeModContainer().getSource(), defaultDirectory, type);
 	}
 
@@ -56,7 +56,7 @@ public abstract class DataLoader {
 		}
 
 		catch (Exception e) {
-			MineFantasyReborn.LOG.error("Error loading MFR " + type + " registry file " + relative);
+			MineFantasyReforged.LOG.error("Error loading MFR " + type + " registry file " + relative);
 			e.printStackTrace();
 		}
 

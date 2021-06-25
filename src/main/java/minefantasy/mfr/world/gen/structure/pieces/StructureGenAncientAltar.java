@@ -1,6 +1,6 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
@@ -73,7 +73,7 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
         placeChest(world, 0, 2, 0, random, facing, lootType);
         placeSpawner(world, 0, 0, 0, EntityList.getKey(EntityEnderman.class));
 
-        MineFantasyReborn.LOG.error("Placed Ancient Altar at: " + pos);
+        MineFantasyReforged.LOG.error("Placed Ancient Altar at: " + pos);
     }
 
     private IBlockState getFoundation(int radius, int x, int z) {

@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "crossHeads",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 200,
+  "tool_tier": 2,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "PPP ",
+    "NSN ",
+    " P  ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_arms_light"
+  }
+}

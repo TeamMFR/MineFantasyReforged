@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.gui;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
@@ -42,7 +42,7 @@ public class GuiAnvilMF extends GuiContainer {
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
 		boolean knowsCraft = tile.doesPlayerKnowCraft(mc.player);
-		String s = MineFantasyReborn.isDebug() ? "Anvil Crafting"
+		String s = MineFantasyReforged.isDebug() ? "Anvil Crafting"
 				: knowsCraft ? I18n.format(tile.getResultName()) : "????";
 		this.fontRenderer.drawString(s, 10 + xInvOffset, 8, 0);
 

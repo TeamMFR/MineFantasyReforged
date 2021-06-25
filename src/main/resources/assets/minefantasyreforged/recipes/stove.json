@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PCP"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreforged:timber"
+		},
+		"C": {
+			"item": "minecraft:cobblestone"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:stove"
+	}
+}

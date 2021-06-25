@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "saw",
+  "is_tool_recipe": true,
+  "block_tier": -1,
+  "craft_time": 2,
+  "tool_tier": 0,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.sawcarpenter",
+  "pattern": [
+    "P   ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:timber_cut"
+  }
+}

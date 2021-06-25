@@ -209,7 +209,7 @@ public class RecipeExporterCarpenter {
 
 			String fileName = iCarpenterRecipe.getCarpenterRecipeOutput().getItem().getRegistryName().toString();
 			String trimmedName = RecipeHelper.stripNamespace(fileName);
-			String filePath = "C:\\git\\MineFantasy-reborn\\src\\main\\resources\\assets\\minefantasyreborn\\generated_recipes\\";
+			String filePath = "C:\\git\\MineFantasy-reforged\\src\\main\\resources\\assets\\minefantasyreforged\\generated_recipes\\";
 			RecipeHelper.writeFile(filePath, trimmedName, tempRecipe, g);
 
 		}

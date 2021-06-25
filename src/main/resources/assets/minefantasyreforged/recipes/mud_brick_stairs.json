@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B  ",
+		"BB ",
+		"BBB"
+	],
+	"key": {
+		"B": {
+			"item": "minefantasyreforged:mud_brick"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:mud_brick_stairs",
+		"count": 4
+	}
+}

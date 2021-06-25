@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "minefantasyreborn:items/ornate_tongs",
-        "layer1": "minefantasyreborn:items/ornate_tongs_detail"
-    }
-}

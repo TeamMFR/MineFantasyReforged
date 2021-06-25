@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -45,7 +45,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 		setCreativeTab(MineFantasyTabs.tabGadget);
 		setMaxDamage(material.getMaxUses());
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public static boolean tryPerformAbility(EntityPlayer user, float points) {

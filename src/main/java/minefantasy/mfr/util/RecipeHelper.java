@@ -1,7 +1,7 @@
 package minefantasy.mfr.util;
 
 import com.google.gson.Gson;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -23,7 +23,7 @@ public class RecipeHelper {
 	}
 
 	public static IRecipe getMFRRecipe(String fileName) {
-		return getRecipeFromRegistry(MineFantasyReborn.MOD_ID + ":" + fileName);
+		return getRecipeFromRegistry(MineFantasyReforged.MOD_ID + ":" + fileName);
 	}
 
 	public static void writeFile(String filePath, String trimmedName, Object tempRecipe, Gson g) {

@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "R   ",
+    "C   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:research_book"
+    },
+    "C": {
+      "item": "minefantasyreforged:carpenter_bench"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:research_bench"
+  }
+}

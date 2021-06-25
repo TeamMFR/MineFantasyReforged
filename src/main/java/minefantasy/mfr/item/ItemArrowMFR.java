@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.entity.EntityArrowMFR;
@@ -85,7 +85,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 		AmmoMechanics.addArrow(new ItemStack(this));
 		BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(this, dispenser);
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	private ToolMaterial convertMaterial(ToolMaterial material) {
@@ -175,7 +175,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name));
 				}
 			}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.knowledge;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.refine.Alloy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
@@ -24,7 +24,7 @@ public class EntryPageCrucible extends EntryPage {
 			tickRecipes();
 		}
 
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/crucible.png"));
+		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/crucible.png"));
 		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
 		Alloy recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];

@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "craftArmourBasic",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "T T ",
+    "L L ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "T": {
+      "item": "minefantasyreforged:thread"
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:rough_leather_boots"
+  }
+}

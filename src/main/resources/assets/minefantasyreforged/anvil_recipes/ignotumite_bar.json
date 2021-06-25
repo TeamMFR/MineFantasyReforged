@@ -1,0 +1,26 @@
+{
+    "type": "ShapedAnvilRecipes",
+    "skill": "artisanry",
+    "research": "",
+    "tool_type": "hammer",
+    "is_tool_recipe": false,
+    "anvil_tier": -1,
+    "recipe_time": 20,
+    "recipe_hammer": -1,
+    "output_hot": true,
+    "pattern": [
+        "I     ",
+        "      ",
+        "      ",
+        "      "
+    ],
+    "key": {
+        "I": {
+            "item": "minefantasyreforged:ignotumite_ingot"
+        }
+    },
+    "result": {
+        "nbt": "{mf_custom_materials:{main_material:\"ignotumite\"}}",
+        "item": "minefantasyreforged:bar"
+    }
+}

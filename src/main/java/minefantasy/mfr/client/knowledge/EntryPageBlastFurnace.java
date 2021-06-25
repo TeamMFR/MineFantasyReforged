@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.knowledge;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
@@ -28,7 +28,7 @@ public class EntryPageBlastFurnace extends EntryPage {
 	@Override
 	public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
 
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/blast_furnace_grid.png"));
+		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/blast_furnace_grid.png"));
 		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
 		String cft = "<" + I18n.format("method.blastfurnace") + ">";

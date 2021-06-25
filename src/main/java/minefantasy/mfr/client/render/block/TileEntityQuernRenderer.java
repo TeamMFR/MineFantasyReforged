@@ -16,7 +16,7 @@ import net.minecraftforge.common.model.IModelState;
 public class TileEntityQuernRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
 	private final ModelQuern model;
 
-	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/quern_basic.png");
+	private static final ResourceLocation texture = new ResourceLocation("minefantasyreforged:textures/blocks/quern_basic.png");
 
 	public TileEntityQuernRenderer() {
 		model = new ModelQuern();

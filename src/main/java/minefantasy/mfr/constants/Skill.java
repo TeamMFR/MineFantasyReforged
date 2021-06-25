@@ -1,6 +1,6 @@
 package minefantasy.mfr.constants;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.event.LevelUpEvent;
 import minefantasy.mfr.mechanics.RPGElements;
@@ -125,7 +125,7 @@ public enum Skill {
 
 	private void levelUp(EntityPlayer player, int newlvl) {
 		if (!player.world.isRemote) {
-			MineFantasyRebornAPI.debugMsg("Level up detected for " + unlocalizedName);
+			MineFantasyReforgedAPI.debugMsg("Level up detected for " + unlocalizedName);
 			MinecraftForge.EVENT_BUS.post(new LevelUpEvent(player, this, newlvl));
 		}
 	}

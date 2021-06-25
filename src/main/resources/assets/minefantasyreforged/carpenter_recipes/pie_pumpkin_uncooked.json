@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "bread",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 50,
+  "tool_tier": 1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "SPS ",
+    "SAS ",
+    " E  ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:pumpkin"
+    },
+    "A": {
+      "item": "minefantasyreforged:pastry"
+    },
+    "S": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "E": {
+      "item": "minefantasyreforged:pie_tray"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:pie_pumpkin_uncooked"
+  }
+}

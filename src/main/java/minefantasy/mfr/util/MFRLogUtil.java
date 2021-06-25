@@ -7,7 +7,7 @@ public class MFRLogUtil {
 
 	public static final Logger MFR_LOGGER = FMLLog.getLogger();
 
-	public static final String PREFIX = "[MineFantasyReborn]: ";
+	public static final String PREFIX = "[MineFantasyReforged]: ";
 
 	public static void log(String mes) {
 		FMLLog.info(PREFIX + mes);

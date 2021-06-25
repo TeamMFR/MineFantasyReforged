@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/dragonforged_spade",
+        "layer1": "minefantasyreforged:items/dragonforged_spade_haft",
+        "layer2": "minefantasyreforged:items/dragonforged_spade_detail"
+    }
+}

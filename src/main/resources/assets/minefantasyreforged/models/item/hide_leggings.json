@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/hide_leggings",
+        "layer1": "minefantasyreforged:items/hide_leggings_overlay"
+    }
+}

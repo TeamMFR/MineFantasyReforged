@@ -1,0 +1,25 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "minefantasyreforged:cake",
+        "textures": {
+            "bottom": "minefantasyreforged:blocks/cake_chocolate_bottom",
+            "inner": "minefantasyreforged:blocks/cake_chocolate_inner",
+            "side": "minefantasyreforged:blocks/cake_chocolate_side",
+            "top": "minefantasyreforged:blocks/cake_chocolate_top"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}],
+        "bites=0": { "model": "minefantasyreforged:cake" },
+        "bites=1": { "model": "minefantasyreforged:cake_bite_1" },
+        "bites=2": { "model": "minefantasyreforged:cake_bite_2" },
+        "bites=3": { "model": "minefantasyreforged:cake_bite_3" },
+        "bites=4": { "model": "minefantasyreforged:cake_bite_4" },
+        "bites=5": { "model": "minefantasyreforged:cake_bite_5" },
+        "bites=6": { "model": "minefantasyreforged:cake_bite_6" },
+        "bites=7": { "model": "minefantasyreforged:cake_bite_7" },
+        "bites=8": { "model": "minefantasyreforged:cake_bite_8" }
+    }
+}

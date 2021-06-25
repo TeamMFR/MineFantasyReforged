@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "S   ",
+    "U   ",
+    "J   ",
+    "C   "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:salt"
+    },
+    "C": {
+      "item": "minefantasyreforged:clay_pot"
+    },
+    "U": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "J": {
+      "item": "minefantasyreforged:jug_milk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:curds"
+  }
+}

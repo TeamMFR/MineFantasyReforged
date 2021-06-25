@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "applepie",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 120,
+  "tool_tier": 2,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "SPS ",
+    "AAA ",
+    "SPS ",
+    " E  "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:pastry"
+    },
+    "A": {
+      "item": "minecraft:apple"
+    },
+    "S": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "E": {
+      "item": "minefantasyreforged:pie_tray"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:pie_apple_uncooked"
+  }
+}

@@ -1,0 +1,7 @@
+﻿{
+    "parent": "minefantasyreforged:item/bomb_custom",
+    "textures": {
+        "layer0": "minefantasyreforged:items/bomb_obsidian",
+        "layer1": "minefantasyreforged:items/bomb_icon_shrapnel"
+    }
+}

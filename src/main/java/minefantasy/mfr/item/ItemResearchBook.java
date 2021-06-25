@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
@@ -43,7 +43,7 @@ public class ItemResearchBook extends ItemBaseMFR {
 		if (!world.isRemote) {
 			ResearchLogic.syncData(player);
 		}
-		player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RESEARCH_BOOK, world, 0, -1, 0);
+		player.openGui(MineFantasyReforged.MOD_ID, NetworkHandler.GUI_RESEARCH_BOOK, world, 0, -1, 0);
 		return ActionResult.newResult(EnumActionResult.PASS, player.getHeldItem(hand));
 	}
 

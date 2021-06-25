@@ -1,0 +1,11 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"transform": "forge:default-block",
+		"model": "minefantasyreforged:schematic_generic",
+		"textures": {"0": "minefantasyreforged:blocks/schematic_forge"}
+	},
+	"variants": {
+		"normal": [{}]
+	}
+}

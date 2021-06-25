@@ -1,0 +1,38 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {"texture": "minefantasyreforged:blocks/smoke_pipe"}
+    },
+    "variants": {
+        "normal": [{"model": "minefantasyreforged:smoke_pipe_normal"}],
+        "north": {
+            "true"  : {"submodel": "minefantasyreforged:smoke_pipe_north" },
+            "false" : {"submodel": "minefantasyreforged:smoke_pipe" }
+        },
+
+        "east": {
+            "true"  : {"submodel": "minefantasyreforged:smoke_pipe_east"},
+            "false" : {"submodel": "minefantasyreforged:smoke_pipe" }
+        },
+
+        "south": {
+            "true"  : {"submodel": "minefantasyreforged:smoke_pipe_south" },
+            "false" : {"submodel": "minefantasyreforged:smoke_pipe"}
+        },
+
+        "west": {
+            "true"  : {"submodel": "minefantasyreforged:smoke_pipe_west"},
+            "false" : {"submodel": "minefantasyreforged:smoke_pipe"}
+        },
+
+        "up": {
+            "true"  : {"submodel": "minefantasyreforged:smoke_pipe_up"},
+            "false" : {"submodel": "minefantasyreforged:smoke_pipe"}
+        },
+
+        "down": {
+            "true"  : {"submodel": "minefantasyreforged:smoke_pipe_down"},
+            "false" : {"submodel": "minefantasyreforged:smoke_pipe"}
+        }
+    }
+}

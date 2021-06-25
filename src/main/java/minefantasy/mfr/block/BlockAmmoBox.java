@@ -1,7 +1,7 @@
 package minefantasy.mfr.block;
 
 import codechicken.lib.model.ModelRegistryHelper;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -56,7 +56,7 @@ public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 		this.setHardness(0.5F);
 		this.setResistance(2F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override

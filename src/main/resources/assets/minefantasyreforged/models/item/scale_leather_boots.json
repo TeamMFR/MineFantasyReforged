@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/scale_leather_boots",
+        "layer1": "minefantasyreforged:items/scale_leather_boots_overlay"
+    }
+}

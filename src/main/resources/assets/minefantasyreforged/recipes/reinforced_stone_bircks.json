@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"BB ",
+		"BB "
+	],
+	"key": {
+		"B": {
+			"item": "minefantasyreforged:reinforced_stone"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:reinforced_stone_bricks",
+		"count": 4
+	}
+}

@@ -1,7 +1,7 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.api.crafting.exotic.SpecialForging;
@@ -108,8 +108,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@ObjectHolder(MineFantasyReborn.MOD_ID)
-@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+@ObjectHolder(MineFantasyReforged.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 public class MineFantasyItems {
 
 	public static Item.ToolMaterial ORNATE = EnumHelper.addToolMaterial("ornate", 2, 250, 6.0F, 2.0F, 100);
@@ -1378,7 +1378,7 @@ public class MineFantasyItems {
 
 		Items.POTIONITEM.setContainerItem(Items.GLASS_BOTTLE);
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
-		MineFantasyRebornAPI.registerFuelHandler(new AdvancedFuelHandler());
+		MineFantasyReforgedAPI.registerFuelHandler(new AdvancedFuelHandler());
 
 		addRandomDrops();
 		initFuels();

@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/standard_scale_boots",
-        "layer1": "minefantasyreborn:items/standard_scale_boots_detail"
-    }
-}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
@@ -45,7 +45,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 		this.dropRate = droprate;
 		this.setTickRandomly(true);
 		setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@SideOnly(Side.CLIENT)

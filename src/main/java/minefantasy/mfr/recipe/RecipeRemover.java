@@ -1,6 +1,6 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigHardcore;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class RecipeRemover {
-	@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+	@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 	public static class RegistrationHandler {
 
 		/**
@@ -38,7 +38,7 @@ public class RecipeRemover {
 				removeRecipes(Items.FLINT_AND_STEEL);
 				removeRecipes(Items.BUCKET);
 			}
-			MineFantasyReborn.LOG.warn("Overriding recipes with dummy recipes, please ignore the above \"Dangerous alternative prefix\" warnings.");
+			MineFantasyReforged.LOG.warn("Overriding recipes with dummy recipes, please ignore the above \"Dangerous alternative prefix\" warnings.");
 		}
 
 		/**

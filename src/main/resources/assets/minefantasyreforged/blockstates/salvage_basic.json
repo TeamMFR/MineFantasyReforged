@@ -1,0 +1,16 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_bottom_top",
+        "textures": {
+            "particle": "minefantasyreforged:blocks/salvage_basic_base",
+            "bottom": "minefantasyreforged:blocks/salvage_basic_base",
+            "top": "minefantasyreforged:blocks/salvage_basic_top",
+            "side": "minefantasyreforged:blocks/salvage_basic_side"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

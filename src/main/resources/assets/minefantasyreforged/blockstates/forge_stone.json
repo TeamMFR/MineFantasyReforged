@@ -1,0 +1,39 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreforged:forge",
+        "textures": {"texture": "minefantasyreforged:blocks/forge_stone"}
+    },
+    "variants": {
+        "normal": [{}],
+        "burning": {
+            "true": {
+                "textures": {"fuel_texture": "minefantasyreforged:blocks/coal_fuel_active"}
+            },
+            "false":  {
+                "textures": {"fuel_texture": "minefantasyreforged:blocks/coal_fuel"}
+            }
+        },
+        "fuel_count": {
+            "0": {},
+            "1": {
+                "submodel": "minefantasyreforged:fuel_1"
+            },
+            "2": {
+                "submodel": "minefantasyreforged:fuel_2"
+            },
+            "3": {
+                "submodel": "minefantasyreforged:fuel_3"
+            }
+        },
+        "under": {
+            "true": {
+                "submodel": "minefantasyreforged:forge_stand"
+            },
+            "false": {
+
+            }
+        }
+    }
+}

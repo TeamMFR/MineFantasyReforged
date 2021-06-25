@@ -1,0 +1,21 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_bottom_top",
+        "textures": {
+            "bottom": "minefantasyreforged:blocks/ebony_log_top",
+            "top": "minefantasyreforged:blocks/ebony_log_top",
+            "side": "minefantasyreforged:blocks/ebony_log_side"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}],
+        "axis": {
+            "y": {},
+            "z": {"x": 90},
+            "x": {"x": 90, "y": 90},
+            "none": {}
+        }
+    }
+}

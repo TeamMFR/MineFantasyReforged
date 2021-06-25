@@ -1,0 +1,36 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "crossScope",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 150,
+  "tool_tier": 2,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    "BSB ",
+    "TP  ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "S": {
+      "item": "minefantasyreforged:spyglass",
+      "data": 0
+    },
+    "T": {
+      "item": "minefantasyreforged:tungsten_gears"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_scope"
+  }
+}

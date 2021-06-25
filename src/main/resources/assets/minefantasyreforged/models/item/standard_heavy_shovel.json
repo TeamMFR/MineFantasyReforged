@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_heavy_shovel",
+        "layer1": "minefantasyreforged:items/standard_heavy_shovel_haft",
+        "layer2": "minefantasyreforged:items/standard_heavy_shovel_detail"
+    }
+}

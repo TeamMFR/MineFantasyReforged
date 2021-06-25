@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;
@@ -25,10 +25,8 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -161,7 +159,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			baseDamage = 0F;
 		}
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public static int getParry(ItemStack item) {
@@ -546,7 +544,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

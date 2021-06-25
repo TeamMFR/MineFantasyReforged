@@ -1,6 +1,6 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.EnumFacing;
@@ -48,7 +48,7 @@ public class StructureGenAncientForgeEntry extends StructureModuleMFR {
         placeBlock(world, Blocks.AIR, 0, 1, 1);
         placeBlock(world, Blocks.AIR, 0, 2, 1);
 
-        MineFantasyReborn.LOG.error("Placed Ancient Forge at: " + pos);
+        MineFantasyReforged.LOG.error("Placed Ancient Forge at: " + pos);
 
         StructureModuleMFR structure = new StructureGenAncientForge(world, offsetPos(0, -length, length + 1, facing), facing, random);
         structure.generate();

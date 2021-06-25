@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "chococake",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 60,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "ICI ",
+    " K  ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:chocolate"
+    },
+    "I": {
+      "item": "minefantasyreforged:icing"
+    },
+    "K": {
+      "item": "minefantasyreforged:cake_choc_uniced"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:cake_chocolate",
+    "data": 0
+  }
+}

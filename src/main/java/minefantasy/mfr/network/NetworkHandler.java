@@ -1,6 +1,6 @@
 package minefantasy.mfr.network;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.gui.GuiAnvilMF;
 import minefantasy.mfr.client.gui.GuiBigFurnace;
 import minefantasy.mfr.client.gui.GuiBlastChamber;
@@ -115,7 +115,7 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(AMMO_BOX_COMMAND_PACKET, AmmoBoxCommandPacket.class, AmmoBoxCommandPacket::new);
 		PacketMF.registerPacket(COGWORK_CONTROL_PACKET, CogworkControlPacket.class, CogworkControlPacket::new);
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(MineFantasyReborn.INSTANCE, this);
+		NetworkRegistry.INSTANCE.registerGuiHandler(MineFantasyReforged.INSTANCE, this);
 
 	}
 

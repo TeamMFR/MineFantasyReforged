@@ -1,0 +1,16 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "cross": "minefantasyreforged:blocks/ironbark_sapling"
+        },
+        "model": "cross",
+        "uvlock": true
+    },
+    "variants": {
+        "normal": [{ }],
+        "inventory": [{ }],
+        "stage=0":[{ }],
+        "stage=1":[{ }]
+    }
+}

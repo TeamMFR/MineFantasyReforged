@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "J   ",
+    "F   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "F": {
+      "item": "minefantasyreforged:flour"
+    },
+    "J": {
+      "item": "minefantasyreforged:jug_water"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:dough"
+  }
+}

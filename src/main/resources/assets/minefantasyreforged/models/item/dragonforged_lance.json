@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/dragonforged_lance",
+        "layer1": "minefantasyreforged:items/dragonforged_lance_haft",
+        "layer2": "minefantasyreforged:items/dragonforged_lance_detail"
+    }
+}

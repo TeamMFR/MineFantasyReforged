@@ -17,8 +17,8 @@ public class CarpenterRecipeLoader extends RecipeLoader {
 	private static final int GRID_WIDTH = 4;
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "carpenter";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/carpenter_recipes";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/custom/recipes/carpenter_recipes/";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/carpenter_recipes";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/recipes/carpenter_recipes/";
 
 	private CarpenterRecipeLoader() {} // no instances!
 

@@ -1,0 +1,26 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill": "construction",
+  "research": "smeltbronze",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 1,
+  "recipe_time": 14,
+  "recipe_hammer": 1,
+  "output_hot": false,
+  "pattern": [
+    "MM    ",
+    "MM    ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "M": {
+      "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}",
+      "item": "minefantasyreforged:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bronze_bars"
+  }
+}

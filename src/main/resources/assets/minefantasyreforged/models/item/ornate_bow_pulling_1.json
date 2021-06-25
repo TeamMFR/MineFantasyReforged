@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/ornate_bow_pulling_1",
+        "layer1": "minefantasyreforged:items/ornate_bow_pulling_1_haft",
+        "layer2": "minefantasyreforged:items/ornate_bow_pulling_1_detail"
+    }
+}

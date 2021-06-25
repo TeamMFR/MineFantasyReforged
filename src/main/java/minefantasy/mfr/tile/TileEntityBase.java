@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.state.IBlockState;
@@ -49,7 +49,7 @@ public abstract class TileEntityBase extends TileEntity {
 	 */
 	public void openGUI(final World world, final EntityPlayer player) {
 		if (!world.isRemote) {
-			player.openGui(MineFantasyReborn.MOD_ID, getGuiId(), world, pos.getX(), pos.getY(), pos.getZ());
+			player.openGui(MineFantasyReforged.MOD_ID, getGuiId(), world, pos.getX(), pos.getY(), pos.getZ());
 		}
 	}
 

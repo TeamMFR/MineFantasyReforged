@@ -1,6 +1,5 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;

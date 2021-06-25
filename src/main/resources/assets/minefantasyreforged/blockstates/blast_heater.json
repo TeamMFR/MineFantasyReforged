@@ -1,0 +1,20 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_bottom_top",
+        "textures": {
+            "particle": "minefantasyreforged:blocks/blast_chamber_top",
+            "bottom": "minefantasyreforged:blocks/blast_chamber_top",
+            "top": "minefantasyreforged:blocks/blast_chamber_top",
+            "side": "minefantasyreforged:blocks/blast_heater"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}],
+        "burning": {
+            "true": {"textures": {"side": "minefantasyreforged:blocks/blast_heater_active"}},
+            "false":  {"textures": {"side": "minefantasyreforged:blocks/blast_heater"}}
+        }
+    }
+}

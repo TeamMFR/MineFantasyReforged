@@ -1,6 +1,6 @@
 package minefantasy.mfr.proxy;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
@@ -120,7 +120,7 @@ public class ClientProxy extends ClientProxyBase {
 	@Override
 	public void postInit(FMLPostInitializationEvent e) {
 		super.postInit(e);
-		MineFantasyRebornAPI.init();
+		MineFantasyReforgedAPI.init();
 		KnowledgePageRegistry.registerPages();
 	}
 

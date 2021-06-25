@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreforged:repair_kit",
+        "textures": {
+            "base": "minefantasyreforged:blocks/repair_advanced_base",
+            "side": "minefantasyreforged:blocks/repair_advanced_side",
+            "top": "minefantasyreforged:blocks/repair_advanced_top"
+        }
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

@@ -63,7 +63,7 @@ public class TileEntityBigFurnaceRenderer<T extends TileEntity> extends TileEnti
 
 	public void renderInvModel(String type, double d, double d1, double d2) {
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + type + ".png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + type + ".png"));
 		GlStateManager.pushMatrix(); // start
 		float scale = 1.0F;
 

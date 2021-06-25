@@ -1,7 +1,0 @@
-﻿{
-    "parent": "minefantasyreborn:item/mine_custom",
-    "textures": {
-        "layer0": "minefantasyreborn:items/mine_crystal",
-        "layer1": "minefantasyreborn:items/bomb_icon_fire"
-    }
-}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.BlockPane;
@@ -36,7 +36,7 @@ public class BlockMetalBarsMF extends BlockPane implements IClientRegister {
 		this.setHardness(material.hardness + 1 / 2F);
 		this.setResistance(material.hardness + 1);
 		this.material = material;
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override

@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "crucible",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "CCC ",
+    " C  ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:ingot_mould_uncooked"
+  }
+}

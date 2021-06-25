@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.gui;
 
 import codechicken.lib.texture.TextureUtils;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.mechanics.RPGElements;
@@ -23,7 +23,6 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,9 +40,9 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	private static final int rowMin = InformationList.minDisplayRow * 24 - 112;
 	private static final int columnMax = InformationList.maxDisplayColumn * 24 - 77;
 	private static final int rowMax = InformationList.maxDisplayRow * 24 - 77;
-	private static final ResourceLocation screenTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/knowledge.png");
-	private static final ResourceLocation buyTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/purchase.png");
-	private static final ResourceLocation skillTex = new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/skill_list.png");
+	private static final ResourceLocation screenTex = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/knowledge.png");
+	private static final ResourceLocation buyTex = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/purchase.png");
+	private static final ResourceLocation skillTex = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/skill_list.png");
 	protected static int informationWidth = 256;
 	protected static int informationHeight = 202;
 	protected static int mouseX;
@@ -113,7 +112,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	protected void mouseClicked(int x, int y, int button) throws IOException {
 		if (selected == null && button == 0 && highlighted != null) {
 			if (ResearchLogic.hasInfoUnlocked(player, highlighted) && !highlighted.getPages().isEmpty()) {
-				player.openGui(MineFantasyReborn.INSTANCE, NetworkHandler.GUI_RESEARCH_BOOK, player.world, 0, highlighted.ID, 0);
+				player.openGui(MineFantasyReforged.INSTANCE, NetworkHandler.GUI_RESEARCH_BOOK, player.world, 0, highlighted.ID, 0);
 			} else if (highlighted.isEasy() && ResearchLogic.canPurchase(player, highlighted)) {
 				selected = highlighted;
 				setPurchaseAvailable(player);

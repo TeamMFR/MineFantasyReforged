@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    " P  ",
+    "PGP ",
+    " P  ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:window"
+  }
+}

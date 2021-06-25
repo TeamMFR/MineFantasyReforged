@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.gui;
 
 import codechicken.lib.gui.GuiDraw;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.knowledge.EntryPage;
 import minefantasy.mfr.client.knowledge.EntryPageCraft;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -115,7 +115,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
 		int xPoint = (this.width - this.bookImageWidth) / 2 + offset;
 		int yPoint = (this.height - this.bookImageHeight) / 2;
 
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/" + tex + ".png"));
+		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/" + tex + ".png"));
 		this.drawTexturedModalRect(xPoint, yPoint, 0, 0, this.bookImageWidth, this.bookImageHeight);
 
 		if (num < infoBase.getPages().size()) {
@@ -156,7 +156,7 @@ public class GuiKnowledgeEntry extends GuiScreen {
 	@Override
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
 		if (keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode()) {
-			mc.player.openGui(MineFantasyReborn.INSTANCE, 1, mc.player.world, 0, -1, 0);
+			mc.player.openGui(MineFantasyReforged.INSTANCE, 1, mc.player.world, 0, -1, 0);
 		} else {
 			super.keyTyped(typedChar, keyCode);
 		}

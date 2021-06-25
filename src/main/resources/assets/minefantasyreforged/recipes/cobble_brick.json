@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B B",
+		"B B"
+	],
+	"key": {
+		"B": {
+			"item": "minecraft:cobblestone"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:cobble_brick",
+		"count": 4
+	}
+}

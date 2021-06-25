@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile.blastfurnace;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.block.BlockBlastHeater;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
@@ -68,7 +68,7 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 	}
 
 	public static int getItemBurnTime(ItemStack fuel) {
-		return MineFantasyRebornAPI.getFuelValue(fuel) / 4;
+		return MineFantasyReforgedAPI.getFuelValue(fuel) / 4;
 	}
 
 	@Override

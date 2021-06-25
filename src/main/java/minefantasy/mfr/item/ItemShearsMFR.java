@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.constants.Tool;
@@ -48,7 +48,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 		setRegistryName(name);
 		setUnlocalizedName(name);
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public ItemShearsMFR setCustom() {
@@ -93,7 +93,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

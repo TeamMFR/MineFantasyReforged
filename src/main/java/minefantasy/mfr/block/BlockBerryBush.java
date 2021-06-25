@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.BlockBush;
@@ -53,7 +53,7 @@ public class BlockBerryBush extends BlockBush implements IGrowable, IShearable, 
 		this.setLightOpacity(1);
 		this.setSoundType(SoundType.PLANT);
 		this.setTickRandomly(true);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override

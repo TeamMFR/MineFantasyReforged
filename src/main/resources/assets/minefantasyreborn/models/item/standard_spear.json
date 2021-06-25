@@ -1,8 +1,0 @@
-﻿{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "minefantasyreborn:items/standard_spear",
-        "layer1": "minefantasyreborn:items/standard_spear_haft",
-        "layer2": "minefantasyreborn:items/standard_spear_detail"
-    }
-}

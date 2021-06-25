@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "crossHeadAdvanced",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 350,
+  "tool_tier": 2,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NSN ",
+    "STS ",
+    " C  ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:steel_tube"
+    },
+    "C": {
+      "item": "minefantasyreforged:crossbow_arms_basic"
+    },
+    "T": {
+      "item": "minefantasyreforged:tungsten_gears"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_arms_advanced"
+  }
+}

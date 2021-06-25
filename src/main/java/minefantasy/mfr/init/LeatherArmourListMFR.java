@@ -1,6 +1,6 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemArmourMFR;
@@ -19,7 +19,7 @@ import net.minecraftforge.registries.IForgeRegistry;
  * @author Anonymous Productions
  */
 // TODO
-@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 public class LeatherArmourListMFR {
 	public static final String[] LEATHER_ARMOR_TYPES = new String[] {"hide", "rough_leather", "strong_leather", "stud_leather", "padded"};
 

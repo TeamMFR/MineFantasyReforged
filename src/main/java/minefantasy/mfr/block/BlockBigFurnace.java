@@ -1,9 +1,8 @@
 package minefantasy.mfr.block;
 
 import codechicken.lib.model.ModelRegistryHelper;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
-import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -48,7 +47,7 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(3.5F);
 		this.setResistance(2F);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull

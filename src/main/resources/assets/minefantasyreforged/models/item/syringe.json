@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/syringe",
+        "layer1": "minefantasyreforged:items/syringe_fill"
+    }
+}

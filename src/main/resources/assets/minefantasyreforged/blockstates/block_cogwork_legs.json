@@ -1,0 +1,24 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "particle": "minefantasyreforged:blocks/cogwork_legs_side",
+            "down": "minefantasyreforged:blocks/cogwork_legs_top",
+            "up": "minefantasyreforged:blocks/cogwork_legs_top",
+            "north": "minefantasyreforged:blocks/cogwork_legs_face",
+            "east": "minefantasyreforged:blocks/cogwork_legs_side",
+            "south": "minefantasyreforged:blocks/cogwork_legs_side",
+            "west": "minefantasyreforged:blocks/cogwork_legs_side"
+        },
+        "model": "cube_all"
+    },
+    "variants": {
+        "facing=up": { "model": "orientable", "x": 270 },
+        "facing=down": { "model": "orientable", "x": 90 },
+        "facing=north": { "model": "orientable" },
+        "facing=south": { "model": "orientable", "y": 180 },
+        "facing=west": { "model": "orientable", "y": 270 },
+        "facing=east": { "model": "orientable", "y": 90 },
+        "normal": [{}]
+    }
+}

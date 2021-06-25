@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "F   ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "F": {
+      "item": "minefantasyreforged:fireclay"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:fireclay_brick"
+  }
+}

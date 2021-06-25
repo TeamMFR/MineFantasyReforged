@@ -1,0 +1,28 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 30,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "S S ",
+    "S S ",
+    "S S ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:chimney_stone_thin",
+    "count": 8
+  }
+}

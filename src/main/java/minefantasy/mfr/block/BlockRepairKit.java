@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -51,7 +51,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 		this.setResistance(0F);
 		this.setLightOpacity(0);
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public BlockRepairKit setOrnate(float enc) {

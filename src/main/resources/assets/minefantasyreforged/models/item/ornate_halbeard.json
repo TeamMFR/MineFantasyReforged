@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/ornate_halbeard",
+        "layer1": "minefantasyreforged:items/ornate_halbeard_haft",
+        "layer2": "minefantasyreforged:items/ornate_halbeard_detail"
+    }
+}

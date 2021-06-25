@@ -1,7 +1,7 @@
 package minefantasy.mfr.material;
 
 import com.google.common.base.CaseFormat;
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.ItemStack;
@@ -32,13 +32,13 @@ public class MetalMaterial extends CustomMaterial {
 			int[] stats = customMat.getHeatableStats();
 			MFRLogUtil.logDebug("Set Heatable Stats for " + customMat.name + ": " + stats[0] + "," + stats[1] + "," + stats[2]);
 
-			MineFantasyRebornAPI.setHeatableStats("ingot" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
-			MineFantasyRebornAPI.setHeatableStats("hunk" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
+			MineFantasyReforgedAPI.setHeatableStats("ingot" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
+			MineFantasyReforgedAPI.setHeatableStats("hunk" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
 		}
 
-		MineFantasyRebornAPI.setHeatableStats(MineFantasyItems.RIVET, 1000, 2000, 3000);
-		MineFantasyRebornAPI.setHeatableStats(MineFantasyItems.METAL_HUNK, -1, -1, -1);
-		MineFantasyRebornAPI.setHeatableStats(MineFantasyItems.BAR, -1, -1, -1);
+		MineFantasyReforgedAPI.setHeatableStats(MineFantasyItems.RIVET, 1000, 2000, 3000);
+		MineFantasyReforgedAPI.setHeatableStats(MineFantasyItems.METAL_HUNK, -1, -1, -1);
+		MineFantasyReforgedAPI.setHeatableStats(MineFantasyItems.BAR, -1, -1, -1);
 	}
 
 	@Override

@@ -305,7 +305,7 @@ public class OtherRecipes {
 
 		// TODO: fix salvage
 		//        Salvage.addSalvage(CustomToolListMFR.STANDARD_SPOON, plank, Items.STICK);
-		//        KnowledgeListMFR.malletR = MineFantasyRebornAPI.addCarpenterToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_MALLET, "",
+		//        KnowledgeListMFR.malletR = MineFantasyReforgedAPI.addCarpenterToolRecipe(Skill.ARTISANRY, CustomToolListMFR.STANDARD_MALLET, "",
 		//                basic, "hands", -1, 1 + (int) (2 * time), new Object[]{"WW", " S", 'W', plank, 'S', Items.STICK});
 
 		Salvage.addSalvage(MineFantasyItems.STANDARD_MALLET, plank, plank, Items.STICK);

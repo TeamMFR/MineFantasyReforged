@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
@@ -73,7 +73,7 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
 	@Override
 	public String getArmourTextureName(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		String tex = MineFantasyReborn.MOD_ID + ":textures/models/armour/custom/" + specialDesign + "/" + texture;
+		String tex = MineFantasyReforged.MOD_ID + ":textures/models/armour/custom/" + specialDesign + "/" + texture;
 		if (type == null)// bottom layer
 		{
 			return tex;// COLOUR LAYER

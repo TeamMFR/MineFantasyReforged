@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
@@ -34,7 +34,7 @@ public class BlockLogMF extends BlockLog implements IClientRegister {
 		setUnlocalizedName(name);
 		this.setHarvestLevel("axe", 0);
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	private Block getSaplingDrop() {

@@ -1,0 +1,33 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 50,
+  "tool_tier": 1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNN ",
+    "PPP ",
+    "LL  ",
+    "PP  "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber",
+      "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}"
+    },
+    "L": {
+      "item": "minecraft:leather"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bellows"
+  }
+}

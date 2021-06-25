@@ -1,0 +1,31 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "S S ",
+    "SCS ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "C": {
+      "item": "minecraft:coal",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:forge_stone"
+  }
+}

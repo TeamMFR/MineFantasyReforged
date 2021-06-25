@@ -1,6 +1,6 @@
 package minefantasy.mfr.world.gen.feature;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.block.BlockBerryBush;
 import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class WorldGenBiological implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		boolean debug = world.getWorldInfo().getTerrainType() == WorldType.FLAT && MineFantasyReborn.isDebug();
+		boolean debug = world.getWorldInfo().getTerrainType() == WorldType.FLAT && MineFantasyReforged.isDebug();
 
 		Biome biome = world.getBiome(new BlockPos(chunkX * 16, 0, chunkZ * 16));
 		if (debug || isBiomeInConstraint(biome, ConfigWorldGen.berryMinTemp, ConfigWorldGen.berryMaxTemp, ConfigWorldGen.berryMinRain, ConfigWorldGen.berryMaxRain)) {
@@ -80,7 +80,7 @@ public class WorldGenBiological implements IWorldGenerator {
 	}
 
 	private static void generateTree(Random random, int chunkX, int chunkZ, World world, Block log, Block leaves, float chance) {
-		boolean doGen = world.getWorldInfo().getTerrainType() != WorldType.FLAT || MineFantasyReborn.isDebug() && world.getWorldInfo().getTerrainType() == WorldType.FLAT;
+		boolean doGen = world.getWorldInfo().getTerrainType() != WorldType.FLAT || MineFantasyReforged.isDebug() && world.getWorldInfo().getTerrainType() == WorldType.FLAT;
 		if (doGen && random.nextFloat() < chance) {
 			int j = (chunkX * 16) + random.nextInt(8);
 			int k = (chunkZ * 16) + random.nextInt(8);

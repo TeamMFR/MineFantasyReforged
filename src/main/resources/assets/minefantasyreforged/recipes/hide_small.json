@@ -1,0 +1,17 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"HF "
+	],
+	"key": {
+		"H": {
+			"item": "minefantasyreforged:rawhide_small"
+		},
+		"F": {
+			"item": "minefantasyreforged:flux"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:hide_small"
+	}
+}

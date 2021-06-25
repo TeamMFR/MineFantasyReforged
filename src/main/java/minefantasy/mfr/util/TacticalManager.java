@@ -1,6 +1,6 @@
 package minefantasy.mfr.util;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
@@ -337,7 +337,7 @@ public class TacticalManager {
 		threshold *= resistance;
 
 		if (!user.world.isRemote)
-			MineFantasyRebornAPI.debugMsg("Arrow Damage: " + dam + " Projectile Threshold: " + threshold);
+			MineFantasyReforgedAPI.debugMsg("Arrow Damage: " + dam + " Projectile Threshold: " + threshold);
 
 		return dam <= threshold && dam > 0;
 	}

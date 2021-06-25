@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "eclair",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": 2,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "C   ",
+    "E   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:chocolate"
+    },
+    "E": {
+      "item": "minefantasyreforged:eclair_uniced"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:eclair_empty"
+  }
+}

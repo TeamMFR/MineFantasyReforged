@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/ornate_spanner",
+        "layer1": "minefantasyreforged:items/ornate_spanner_haft",
+        "layer2": "minefantasyreforged:items/ornate_spanner_detail"
+    }
+}

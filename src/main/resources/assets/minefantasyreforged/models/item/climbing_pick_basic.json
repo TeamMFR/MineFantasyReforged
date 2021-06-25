@@ -1,0 +1,6 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/climbing_pick_basic"
+    }
+}

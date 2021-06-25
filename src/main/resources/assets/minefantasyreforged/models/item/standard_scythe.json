@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_scythe",
+        "layer1": "minefantasyreforged:items/standard_scythe_haft",
+        "layer2": "minefantasyreforged:items/standard_scythe_detail"
+    }
+}

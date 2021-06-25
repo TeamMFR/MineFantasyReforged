@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_mattock",
+        "layer1": "minefantasyreforged:items/standard_mattock_haft",
+        "layer2": "minefantasyreforged:items/standard_mattock_detail"
+    }
+}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.knowledge;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.recipe.ShapedAnvilRecipes;
@@ -38,7 +38,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 			tickRecipes();
 		}
 
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/anvil_grid.png"));
+		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/anvil_grid.png"));
 		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
 		IAnvilRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];

@@ -1,6 +1,0 @@
-﻿{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "minefantasyreborn:items/research_book"
-    }
-}

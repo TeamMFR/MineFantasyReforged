@@ -20,8 +20,8 @@ public class AnvilRecipeLoader extends RecipeLoader {
 	private static final int GRID_WIDTH = 6;
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "anvil";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreborn/anvil_recipes";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreborn/custom/recipes/anvil_recipes/";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/anvil_recipes";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/recipes/anvil_recipes/";
 
 	public static final List<JsonObject> list = new ArrayList<>();
 

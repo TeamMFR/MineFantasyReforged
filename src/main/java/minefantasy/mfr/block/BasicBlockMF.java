@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -36,7 +36,7 @@ public class BasicBlockMF extends Block implements IClientRegister {
 		}
 		this.drop = drop;
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public BasicBlockMF setBlockSoundType(SoundType soundType) {

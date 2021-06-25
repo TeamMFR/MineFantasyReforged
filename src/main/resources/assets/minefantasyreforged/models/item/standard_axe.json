@@ -1,0 +1,9 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_axe",
+        "layer1": "minefantasyreforged:items/standard_axe_haft",
+        "layer2": "minefantasyreforged:items/standard_axe_detail"
+
+    }
+}

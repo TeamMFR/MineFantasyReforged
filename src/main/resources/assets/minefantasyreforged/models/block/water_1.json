@@ -1,0 +1,32 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"texture": "minefantasyreforged:blocks/trough_wood_water",
+		"particle": "minefantasyreforged:blocks/trough_wood_water"
+	},
+	"elements": [
+		{
+			"name": "fill_1",
+			"from": [1, 1, 3],
+			"to": [15, 1, 13],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.58333, 8]},
+			"faces": {
+				"north": {"uv": [16, 2.5, 12.5, 2.5], "texture": "#texture"},
+				"east": {"uv": [18.5, 2.5, 16, 2.5], "texture": "#texture"},
+				"south": {"uv": [22, 2.5, 18.5, 2.5], "texture": "#texture"},
+				"west": {"uv": [12.5, 2.5, 10, 2.5], "texture": "#texture"},
+				"up": {"uv": [12.5, 2.5, 16, 0], "texture": "#texture"},
+				"down": {"uv": [16, 0, 19.5, 2.5], "texture": "#texture"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "fill",
+			"origin": [8, 8, 8],
+			"children": [0]
+		}
+	]
+}

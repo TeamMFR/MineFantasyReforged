@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IWornStaminaItem;
 import minefantasy.mfr.data.IStoredVariable;
@@ -556,7 +556,7 @@ public class StaminaBar {
 		} else if (restrictSystem) {
 			return false;
 		}
-		return MineFantasyRebornAPI.isInDebugMode || !entity.isEntityUndead();
+		return MineFantasyReforgedAPI.isInDebugMode || !entity.isEntityUndead();
 	}
 
 	private static float getPerkArmModifier(float value, EntityPlayer user) {

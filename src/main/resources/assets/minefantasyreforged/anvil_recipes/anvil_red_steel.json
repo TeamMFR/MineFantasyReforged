@@ -1,0 +1,26 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill": "artisanry",
+  "research": "smeltred_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 150,
+  "recipe_hammer": -1,
+  "output_hot": false,
+  "pattern": [
+    " BB   ",
+    "BBB   ",
+    " B    ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "nbt": "{mf_custom_materials:{main_material:\"red_steel\"}}",
+      "item": "minefantasyreforged:bar"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:anvil_red_steel"
+  }
+}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.material.BaseMaterial;
@@ -8,7 +8,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 
-@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 public class BasicRecipesMF {
 
 	public static void init() {

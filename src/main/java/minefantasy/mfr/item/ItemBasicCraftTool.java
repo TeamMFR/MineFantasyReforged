@@ -1,7 +1,7 @@
 package minefantasy.mfr.item;
 
 import com.google.common.collect.Sets;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -47,7 +47,7 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 		setMaxDamage(uses);
 		this.setMaxStackSize(1);
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override

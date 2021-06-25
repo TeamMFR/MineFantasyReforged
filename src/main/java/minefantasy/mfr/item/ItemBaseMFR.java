@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -16,9 +16,9 @@ public class ItemBaseMFR extends Item implements IClientRegister {
 
 	public ItemBaseMFR(String name) {
 		setUnlocalizedName(name);
-		setRegistryName(new ResourceLocation(MineFantasyReborn.MOD_ID, name));
+		setRegistryName(new ResourceLocation(MineFantasyReforged.MOD_ID, name));
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public ItemBaseMFR(String name, IRarity rarity) {

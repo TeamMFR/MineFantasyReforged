@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStairs;
@@ -70,7 +70,7 @@ public class ConstructionBlockMF extends BasicBlockMF {
 			setUnlocalizedName(name);
 			this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 			this.setLightOpacity(0);// They seem to render shadows funny
-			MineFantasyReborn.PROXY.addClientRegister(this);
+			MineFantasyReforged.PROXY.addClientRegister(this);
 		}
 
 		public StairsConstBlock(String unlocalizedName, Block baseBlock) {

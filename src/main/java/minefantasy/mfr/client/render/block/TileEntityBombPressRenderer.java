@@ -26,7 +26,7 @@ import net.minecraftforge.common.model.IModelState;
  */
 public class TileEntityBombPressRenderer<T extends TileEntity> extends TileEntitySpecialRenderer<T> implements IItemRenderer {
 	private final ModelBombPress model;
-	private static final ResourceLocation texture = new ResourceLocation("minefantasyreborn:textures/blocks/bomb_press.png");
+	private static final ResourceLocation texture = new ResourceLocation("minefantasyreforged:textures/blocks/bomb_press.png");
 
 	public TileEntityBombPressRenderer() {
 		model = new ModelBombPress();

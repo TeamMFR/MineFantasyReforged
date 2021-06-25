@@ -1,6 +1,6 @@
 package minefantasy.mfr.entity;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IArrowMFR;
 import minefantasy.mfr.api.archery.IArrowRetrieve;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -774,7 +774,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 			return dataManager.get(TEXTURE_DW);
 		}
 		catch (Exception e) {
-			MineFantasyReborn.LOG.warn("Arrow Failed To Load Texture");
+			MineFantasyReforged.LOG.warn("Arrow Failed To Load Texture");
 			return "steel_arrow";
 		}
 	}

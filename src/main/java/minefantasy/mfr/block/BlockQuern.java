@@ -1,9 +1,8 @@
 package minefantasy.mfr.block;
 
 import codechicken.lib.model.ModelRegistryHelper;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
-import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -40,7 +39,7 @@ public class BlockQuern extends BlockTileEntity<TileEntityQuern> implements ICli
 		this.setHardness(5F);
 		this.setResistance(5F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull

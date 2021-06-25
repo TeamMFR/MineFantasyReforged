@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -224,42 +224,42 @@ public class BlockFrame extends BasicBlockMF {
 		if (state.getValue(NORTH)) {
 			i = getBoundingBoxIndex(EnumFacing.NORTH);
 			if (i > AABB_BY_INDEX.length){
-				MineFantasyReborn.LOG.error(state.getValue(NORTH));
+				MineFantasyReforged.LOG.error(state.getValue(NORTH));
 			}
 		}
 
 		if (state.getValue(EAST)) {
 			i = getBoundingBoxIndex(EnumFacing.EAST);
 			if (i > AABB_BY_INDEX.length){
-				MineFantasyReborn.LOG.error(state.getValue(EAST));
+				MineFantasyReforged.LOG.error(state.getValue(EAST));
 			}
 		}
 
 		if (state.getValue(SOUTH)) {
 			i = getBoundingBoxIndex(EnumFacing.SOUTH);
 			if (i > AABB_BY_INDEX.length){
-				MineFantasyReborn.LOG.error(state.getValue(SOUTH));
+				MineFantasyReforged.LOG.error(state.getValue(SOUTH));
 			}
 		}
 
 		if (state.getValue(WEST)) {
 			i = getBoundingBoxIndex(EnumFacing.WEST);
 			if (i > AABB_BY_INDEX.length){
-				MineFantasyReborn.LOG.error(state.getValue(SOUTH));
+				MineFantasyReforged.LOG.error(state.getValue(SOUTH));
 			}
 		}
 
 		if (state.getValue(UP)) {
 			i = getBoundingBoxIndex(EnumFacing.UP);
 			if (i > AABB_BY_INDEX.length){
-				MineFantasyReborn.LOG.error(state.getValue(UP));
+				MineFantasyReforged.LOG.error(state.getValue(UP));
 			}
 		}
 
 		if (state.getValue(DOWN)) {
 			i = getBoundingBoxIndex(EnumFacing.DOWN);
 			if (i > AABB_BY_INDEX.length){
-				MineFantasyReborn.LOG.error(state.getValue(DOWN));
+				MineFantasyReforged.LOG.error(state.getValue(DOWN));
 			}
 		}
 

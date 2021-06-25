@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.mechanics.knowledge.IArtefact;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -22,7 +22,7 @@ public class ItemSchematic extends ItemBlock implements IArtefact, IClientRegist
 		this.schematic = schematic;
 
 		setRegistryName(block.getRegistryName());
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override

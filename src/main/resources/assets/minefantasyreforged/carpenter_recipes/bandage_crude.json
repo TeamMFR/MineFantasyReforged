@@ -1,0 +1,27 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "bandage",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "RRR ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rawhide_small"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bandage_crude",
+    "count": 2
+  }
+}

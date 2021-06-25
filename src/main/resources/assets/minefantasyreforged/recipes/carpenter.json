@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"PCP",
+		"P P"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreforged:timber"
+		},
+		"C": {
+			"item": "minecraft:crafting_table"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:carpenter_bench"
+	}
+}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.proxy.IClientRegister;
 import net.minecraft.block.BlockPane;
 import net.minecraft.block.SoundType;
@@ -18,7 +18,7 @@ public class BlockPaneMF extends BlockPane implements IClientRegister {
 
 		setRegistryName(name);
 		setUnlocalizedName(name);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public BlockPaneMF setBlockSoundType(SoundType soundType) {

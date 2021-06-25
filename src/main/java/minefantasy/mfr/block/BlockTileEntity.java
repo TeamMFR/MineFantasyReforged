@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityBase;
 import net.minecraft.block.Block;
@@ -21,7 +21,7 @@ public abstract class BlockTileEntity<TE extends TileEntityBase> extends Block i
 
 	public BlockTileEntity(final Material material, final MapColor mapColor) {
 		super(material, mapColor);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public BlockTileEntity(final Material materialIn) {

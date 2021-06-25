@@ -1,0 +1,35 @@
+{
+    "forge_marker": 1,
+    "variants": {
+        "normal": [{"model": "minefantasyreforged:frame_block_normal"}],
+        "north": {
+            "true"  : {"submodel": "minefantasyreforged:frame_block_north" },
+            "false" : {"submodel": "minefantasyreforged:frame_block" }
+        },
+
+        "east": {
+            "true"  : {"submodel": "minefantasyreforged:frame_block_east"},
+            "false" : {"submodel": "minefantasyreforged:frame_block" }
+        },
+
+        "south": {
+            "true"  : {"submodel": "minefantasyreforged:frame_block_south" },
+            "false" : {"submodel": "minefantasyreforged:frame_block"}
+        },
+
+        "west": {
+            "true"  : {"submodel": "minefantasyreforged:frame_block_west"},
+            "false" : {"submodel": "minefantasyreforged:frame_block"}
+        },
+
+        "up": {
+            "true"  : {"submodel": "minefantasyreforged:frame_block_up"},
+            "false" : {"submodel": "minefantasyreforged:frame_block"}
+        },
+
+        "down": {
+            "true"  : {"submodel": "minefantasyreforged:frame_block_down"},
+            "false" : {"submodel": "minefantasyreforged:frame_block"}
+        }
+    }
+}

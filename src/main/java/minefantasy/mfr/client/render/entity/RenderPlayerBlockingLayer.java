@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.render.entity;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,7 +11,6 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -173,7 +172,7 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
             return ObfuscationReflectionHelper.getPrivateValue(clazz, instance, name);
         } catch (Exception e) {
 
-            MineFantasyReborn.LOG.error("Getting field \"" + name + "\" failed", e);
+            MineFantasyReforged.LOG.error("Getting field \"" + name + "\" failed", e);
         }
 
         return null;

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -41,7 +41,7 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 		this.setHardness(1F);
 		this.setResistance(5F);
 		this.setLightOpacity(0);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	protected BlockStateContainer createBlockState() {

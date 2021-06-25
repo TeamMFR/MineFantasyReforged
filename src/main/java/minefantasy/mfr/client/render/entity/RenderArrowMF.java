@@ -18,6 +18,6 @@ public class RenderArrowMF extends RenderArrow<EntityArrowMFR> {
 	@Override
 	@Nullable
 	protected ResourceLocation getEntityTexture(EntityArrowMFR arrow) {
-		return new ResourceLocation("minefantasyreborn:textures/projectile/" + arrow.getTexture() + ".png");
+		return new ResourceLocation("minefantasyreforged:textures/projectile/" + arrow.getTexture() + ".png");
 	}
 }

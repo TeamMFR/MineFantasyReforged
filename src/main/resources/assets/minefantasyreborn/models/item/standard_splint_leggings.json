@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/standard_splint_leggings",
-        "layer2": "minefantasyreborn:items/standard_splint_leggings_detail"
-    }
-}

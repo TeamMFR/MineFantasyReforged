@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/dragonforged_scale_leggings",
+        "layer1": "minefantasyreforged:items/dragonforged_scale_leggings_detail"
+    }
+}

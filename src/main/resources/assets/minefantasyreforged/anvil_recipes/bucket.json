@@ -1,0 +1,26 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill": "artisanry",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 8,
+  "recipe_hammer": 0,
+  "output_hot": true,
+  "pattern": [
+    "B B   ",
+    " B    ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+      "item": "minefantasyreforged:bar"
+    }
+  },
+  "result": {
+    "item": "minecraft:bucket"
+  }
+}

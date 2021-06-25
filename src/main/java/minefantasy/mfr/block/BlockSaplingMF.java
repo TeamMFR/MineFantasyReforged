@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.world.gen.feature.WorldGenMFTree;
 import net.minecraft.block.Block;
@@ -49,7 +49,7 @@ public class BlockSaplingMF extends BlockBush implements IGrowable, IClientRegis
 		setRegistryName(name);
 		setUnlocalizedName(name);
 		setSoundType(SoundType.GROUND);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	/**

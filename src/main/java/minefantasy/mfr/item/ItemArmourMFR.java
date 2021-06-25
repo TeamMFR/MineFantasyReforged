@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.config.ConfigClient;
@@ -353,7 +353,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	}
 
 	public String getArmourTextureName(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type) {
-		String tex = MineFantasyReborn.MOD_ID + ":textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
+		String tex = MineFantasyReforged.MOD_ID + ":textures/models/armour/" + design.getName().toLowerCase() + "/" + texture;
 		if (type == null && canColour())// bottom layer
 		{
 			return tex + "_cloth";

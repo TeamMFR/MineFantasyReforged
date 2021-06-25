@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/ornate_trow",
+        "layer1": "minefantasyreforged:items/ornate_trow_haft",
+        "layer2": "minefantasyreforged:items/ornate_trow_detail"
+    }
+}

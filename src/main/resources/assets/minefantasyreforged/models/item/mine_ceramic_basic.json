@@ -1,0 +1,6 @@
+﻿{
+    "parent": "minefantasyreforged:item/mine_custom",
+    "textures": {
+        "layer0": "minefantasyreforged:items/mine_ceramic"
+    }
+}

@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/ornate_katana",
+        "layer1": "minefantasyreforged:items/ornate_katana_haft",
+        "layer2": "minefantasyreforged:items/ornate_katana_detail"
+    }
+}

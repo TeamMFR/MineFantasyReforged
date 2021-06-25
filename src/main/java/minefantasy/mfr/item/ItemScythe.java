@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -76,7 +76,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 		this.maxStackSize = 1;
 		this.setMaxDamage(material.getMaxUses());
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override
@@ -265,7 +265,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

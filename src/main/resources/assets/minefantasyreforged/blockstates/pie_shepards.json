@@ -1,0 +1,25 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "minefantasyreforged:pie",
+        "textures": {
+            "bottom": "minefantasyreforged:blocks/pie_shepards_bottom",
+            "inner": "minefantasyreforged:blocks/pie_shepards_inner",
+            "side": "minefantasyreforged:blocks/pie_shepards_side",
+            "top": "minefantasyreforged:blocks/pie_shepards_top"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}],
+        "bites=0": { "model": "minefantasyreforged:pie" },
+        "bites=1": { "model": "minefantasyreforged:pie_bite_1" },
+        "bites=2": { "model": "minefantasyreforged:pie_bite_2" },
+        "bites=3": { "model": "minefantasyreforged:pie_bite_3" },
+        "bites=4": { "model": "minefantasyreforged:pie_bite_4" },
+        "bites=5": { "model": "minefantasyreforged:pie_bite_5" },
+        "bites=6": { "model": "minefantasyreforged:pie_bite_6" },
+        "bites=7": { "model": "minefantasyreforged:pie_bite_7" },
+        "bites=8": { "model": "minefantasyreforged:pie_bite_8" }
+    }
+}

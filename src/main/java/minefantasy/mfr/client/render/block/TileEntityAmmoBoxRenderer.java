@@ -61,13 +61,13 @@ public class TileEntityAmmoBoxRenderer<T extends TileEntity> extends TileEntityS
 		CustomMaterial material = tile.getMaterial();
 		GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
 
-		this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + tile.getTexName() + "_base.png")); // texture
+		this.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + tile.getTexName() + "_base.png")); // texture
 		baseMdl.renderModel(0.0625F);
 		baseMdl.renderLid(0.0625F, tile.angle);
 
 		GlStateManager.color(1F, 1F, 1F);
 
-		this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + tile.getTexName() + "_detail.png")); // texture
+		this.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + tile.getTexName() + "_detail.png")); // texture
 		baseMdl.renderModel(0.0625F);
 		baseMdl.renderLid(0.0625F, tile.angle);
 
@@ -90,13 +90,13 @@ public class TileEntityAmmoBoxRenderer<T extends TileEntity> extends TileEntityS
 
 		GlStateManager.color(material.colourRGB[0] / 255F, material.colourRGB[1] / 255F, material.colourRGB[2] / 255F);
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + tex + "_base.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + tex + "_base.png"));
 		baseMdl.renderModel(0.0625F);
 		baseMdl.renderLid(0.0625F, 0F);
 
 		GlStateManager.color(1F, 1F, 1F);
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/" + tex + "_detail.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/" + tex + "_detail.png"));
 		baseMdl.renderModel(0.0625F);
 		baseMdl.renderLid(0.0625F, 0F);
 		GlStateManager.popMatrix();

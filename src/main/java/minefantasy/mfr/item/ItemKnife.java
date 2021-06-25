@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tool.IHuntingItem;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.constants.Tool;
@@ -216,7 +216,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

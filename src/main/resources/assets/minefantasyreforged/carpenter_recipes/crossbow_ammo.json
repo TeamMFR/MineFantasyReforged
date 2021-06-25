@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "crossAmmo",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 200,
+  "tool_tier": 2,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNN ",
+    "P P ",
+    "PTP ",
+    "PPP "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "T": {
+      "item": "minefantasyreforged:tungsten_gears"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_ammo"
+  }
+}

@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/ornate_knife",
+        "layer1": "minefantasyreforged:items/ornate_knife_haft",
+        "layer2": "minefantasyreforged:items/ornate_knife_detail"
+    }
+}

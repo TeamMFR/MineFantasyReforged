@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/syringe",
-        "layer1": "minefantasyreborn:items/syringe_fill"
-    }
-}

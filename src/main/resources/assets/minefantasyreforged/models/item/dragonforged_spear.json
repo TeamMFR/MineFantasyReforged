@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/dragonforged_spear",
+        "layer1": "minefantasyreforged:items/dragonforged_spear_haft",
+        "layer2": "minefantasyreforged:items/dragonforged_spear_detail"
+    }
+}

@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityTanningRack;
@@ -49,7 +49,7 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> imp
 		this.setResistance(1F);
 		this.setLightOpacity(0);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull

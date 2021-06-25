@@ -1,0 +1,44 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "bfcake",
+  "tool_type": "spoon",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 30,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "SJJS",
+    "SEES",
+    "CBBC",
+    "FAFF"
+  ],
+  "key": {
+    "A": {
+      "item": "minefantasyreforged:cake_tin"
+    },
+    "B": {
+      "item": "minefantasyreforged:berries_juicy"
+    },
+    "S": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "C": {
+      "item": "minefantasyreforged:chocolate"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "F": {
+      "item": "minefantasyreforged:flour"
+    },
+    "J": {
+      "item": "minefantasyreforged:jug_milk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:cake_bf_raw"
+  }
+}

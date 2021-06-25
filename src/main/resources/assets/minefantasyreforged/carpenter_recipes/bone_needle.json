@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 4,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.craftprimitive",
+  "pattern": [
+    "B   ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:bone"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bone_needle"
+  }
+}

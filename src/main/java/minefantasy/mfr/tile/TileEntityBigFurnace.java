@@ -589,9 +589,9 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 
 	public ResourceLocation getTexture() {
 		if (isHeater()) {
-			return new ResourceLocation("minefantasyreborn:textures/blocks/furnace_heater.png");
+			return new ResourceLocation("minefantasyreforged:textures/blocks/furnace_heater.png");
 		}
-		return new ResourceLocation("minefantasyreborn:textures/blocks/furnace_rock.png");
+		return new ResourceLocation("minefantasyreforged:textures/blocks/furnace_rock.png");
 	}
 
 	public void readFromNBT(NBTTagCompound nbt) {

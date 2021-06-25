@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.knowledge;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.recipe.ICarpenterRecipe;
 import minefantasy.mfr.recipe.ShapedCarpenterRecipes;
 import minefantasy.mfr.recipe.ShapelessCarpenterRecipes;
@@ -46,7 +46,7 @@ public class EntryPageRecipeCarpenter extends EntryPage {
 			tickRecipes();
 		}
 
-		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, "textures/gui/knowledge/carpenter_grid.png"));
+		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/carpenter_grid.png"));
 		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
 
 		ICarpenterRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];

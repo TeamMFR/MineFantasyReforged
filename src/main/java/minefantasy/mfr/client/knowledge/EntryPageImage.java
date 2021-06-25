@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.knowledge;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
@@ -72,7 +72,7 @@ public class EntryPageImage extends EntryPage {
 	@Override
 	public void preRender(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
 		int xOffset = (universalBookImageWidth - sizes[0]) / 2;
-		parent.mc.renderEngine.bindTexture(new ResourceLocation(MineFantasyReborn.MOD_ID, this.image));
+		parent.mc.renderEngine.bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, this.image));
 		Gui.drawModalRectWithCustomSizedTexture(posX + xOffset, posY + 15, 512, 512, sizes[0], sizes[1], 128, 128);
 	}
 

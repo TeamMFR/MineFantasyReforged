@@ -1,0 +1,6 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/clay_pot_uncooked"
+    }
+}

@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_battleaxe",
+        "layer1": "minefantasyreforged:items/standard_battleaxe_haft",
+        "layer2": "minefantasyreforged:items/standard_battleaxe_detail"
+    }
+}

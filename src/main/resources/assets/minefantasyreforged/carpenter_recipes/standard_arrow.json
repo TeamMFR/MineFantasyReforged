@@ -1,0 +1,29 @@
+{
+  "type": "crafting_shaped",
+  "skill": "artisanry",
+  "research": "arrows",
+  "tool_type": "hands",
+  "is_tool_recipe": true,
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "A   ",
+    "F   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "F": {
+      "item": "minefantasyreforged:fletching"
+    },
+    "A": {
+      "item": "minefantasyreforged:arrowhead"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_arrow"
+  }
+}

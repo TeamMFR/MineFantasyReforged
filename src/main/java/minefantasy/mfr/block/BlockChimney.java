@@ -1,6 +1,6 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityChimney;
@@ -46,7 +46,7 @@ public class BlockChimney extends Block implements IClientRegister {
 		this.setHardness(5F);
 		this.setResistance(10F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull

@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" J ",
+		"JWJ",
+		" J "
+	],
+	"key": {
+		"J": {
+			"item": "minefantasyreforged:jug_empty"
+		},
+		"W": {
+			"item": "minecraft:water_bucket"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:jug_water",
+		"count": 4
+	}
+}

@@ -1,0 +1,23 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "transform": "forge:default-block",
+        "model": "minefantasyreforged:firepit",
+        "textures": {"texture": "minefantasyreforged:blocks/firepit"}
+    },
+    "variants": {
+        "normal": [{"model": "minefantasyreforged:firepit_with_planks"}],
+        "burning": {
+            "true": {"textures": {"texture": "minefantasyreforged:blocks/firepit_active"}},
+            "false":  {}
+        },
+        "planks": {
+            "true": {"model": "minefantasyreforged:firepit_with_planks"},
+            "false":  {}
+        },
+        "under": {
+            "true": {"submodel": "minefantasyreforged:firepit_stand"},
+            "false": {}
+        }
+    }
+}

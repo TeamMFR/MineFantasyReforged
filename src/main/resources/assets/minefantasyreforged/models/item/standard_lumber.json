@@ -1,0 +1,8 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_lumber",
+        "layer1": "minefantasyreforged:items/standard_lumber_haft",
+        "layer2": "minefantasyreforged:items/standard_lumber_detail"
+    }
+}

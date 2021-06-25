@@ -1,0 +1,8 @@
+﻿{
+    "parent": "minefantasyreforged:item/standard_bow",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_bow_pulling_1",
+        "layer1": "minefantasyreforged:items/standard_bow_pulling_1_haft",
+        "layer2": "minefantasyreforged:items/standard_bow_pulling_1_detail"
+    }
+}

@@ -36,7 +36,7 @@ public class TileEntityTanningRackRenderer<T extends TileEntity> extends TileEnt
 			facing = state.getValue(BlockTanningRack.FACING);
 		}
 
-		this.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/tanner_metal.png"));
+		this.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/tanner_metal.png"));
 		GlStateManager.pushMatrix();
 		GlStateManager.translate((float) d + 0.5F, (float) d1 + 1.45F, (float) d2 + 0.5F);
 		GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F);
@@ -79,7 +79,7 @@ public class TileEntityTanningRackRenderer<T extends TileEntity> extends TileEnt
 
 		GlStateManager.pushMatrix();
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreborn:textures/blocks/tanner_metal.png"));
+		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation("minefantasyreforged:textures/blocks/tanner_metal.png"));
 
 		renderInvModel(true, 0F, 0F, 0F);
 

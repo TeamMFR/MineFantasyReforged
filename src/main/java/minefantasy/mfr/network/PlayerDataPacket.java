@@ -1,7 +1,7 @@
 package minefantasy.mfr.network;
 
 import io.netty.buffer.ByteBuf;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.data.IVariable;
 import minefantasy.mfr.data.PlayerData;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +36,7 @@ public class PlayerDataPacket extends PacketMF {
 	@Override
 	protected void execute(EntityPlayer player) {
 		if (playerData.isEmpty()){
-			MineFantasyReborn.LOG.error("PLAYER DATA IS NULL!");
+			MineFantasyReforged.LOG.error("PLAYER DATA IS NULL!");
 		}
 		PlayerData data = PlayerData.get(player);
 		if (player.world.isRemote && data != null){

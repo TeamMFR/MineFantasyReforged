@@ -2,13 +2,12 @@ package minefantasy.mfr.block;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import com.google.common.collect.ImmutableMap;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityBellows;
-import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
@@ -34,7 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.*;
 import java.util.Map;
 
 /**
@@ -59,7 +57,7 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> implements 
 		this.setHardness(1F);
 		this.setResistance(0.5F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Nonnull

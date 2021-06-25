@@ -1,6 +1,6 @@
 package minefantasy.mfr.util;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.crafting.CustomCrafterEntry;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
@@ -66,7 +66,7 @@ public class ToolHelper {
 	 */
 	public static Tool getToolTypeFromStack(ItemStack stack) {
 		if (stack == null) {
-			MineFantasyReborn.LOG.warn("Attempted to get the tool type of a null ItemStack");
+			MineFantasyReforged.LOG.warn("Attempted to get the tool type of a null ItemStack");
 			return Tool.HANDS;
 		}
 

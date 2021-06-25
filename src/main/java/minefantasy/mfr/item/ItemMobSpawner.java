@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -75,7 +75,7 @@ public class ItemMobSpawner extends ItemComponentMFR {
 		if (entityID != null) {
 			Entity entity = null;
 
-			ResourceLocation entityResourceLocation = new ResourceLocation(MineFantasyReborn.MOD_ID, entityID);
+			ResourceLocation entityResourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID, entityID);
 
 			for (int i = 0; i < 1; ++i) {
 				entity = EntityList.createEntityByIDFromName(entityResourceLocation, worldIn);

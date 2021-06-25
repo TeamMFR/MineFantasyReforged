@@ -2,7 +2,7 @@ package minefantasy.mfr.util;
 
 import codechicken.lib.model.ModelRegistryHelper;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -48,7 +48,7 @@ public class ModelLoaderHelper {
 
 	public static void registerItem(Item item, String prefix, boolean metaSuffix, Function<Integer, String> getVariant) {
 		registerItem(item, (it, meta) -> {
-			String modelName = MineFantasyReborn.MOD_ID + ":" + (prefix.isEmpty() ? "" : prefix + "/") + it.getRegistryName().getResourcePath();
+			String modelName = MineFantasyReforged.MOD_ID + ":" + (prefix.isEmpty() ? "" : prefix + "/") + it.getRegistryName().getResourcePath();
 			String suffix = it.getHasSubtypes() && metaSuffix ? "_" + meta : "";
 			return new ModelResourceLocation(modelName + suffix, getVariant.apply(meta));
 		});
@@ -72,7 +72,7 @@ public class ModelLoaderHelper {
 	}
 
 	public static void registerItem(Item item, int meta, String modelVariantName) {
-		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(MineFantasyReborn.MOD_ID + ":" + modelVariantName));
+		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(MineFantasyReforged.MOD_ID + ":" + modelVariantName));
 	}
 
 	public static void registerItem(Item item, int meta, String modelName, String variant) {

@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" J ",
+		"JMJ",
+		" J "
+	],
+	"key": {
+		"J": {
+			"item": "minefantasyreforged:jug_empty"
+		},
+		"M": {
+			"item": "minecraft:milk_bucket"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:jug_milk",
+		"count": 4
+	}
+}

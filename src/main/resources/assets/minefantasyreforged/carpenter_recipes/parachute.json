@@ -1,0 +1,39 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "parachute",
+  "tool_type": "needle",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 350,
+  "tool_tier": 1,
+  "experience": 0,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "TTT ",
+    "WWW ",
+    "LEL ",
+    "LAL "
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:leather"
+    },
+    "T": {
+      "item": "minefantasyreforged:thread"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 32767
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:parachute"
+  }
+}

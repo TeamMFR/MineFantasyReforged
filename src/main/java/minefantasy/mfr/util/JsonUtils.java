@@ -2,7 +2,7 @@ package minefantasy.mfr.util;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.JsonToNBT;
@@ -49,7 +49,7 @@ public class JsonUtils {
 				tagCompound = JsonToNBT.getTagFromJson(net.minecraft.util.JsonUtils.getString(obj, "nbt"));
 			}
 			catch (NBTException e) {
-				MineFantasyReborn.LOG.error("Error reading item stack nbt {}", net.minecraft.util.JsonUtils.getJsonObject(obj, "nbt"));
+				MineFantasyReforged.LOG.error("Error reading item stack nbt {}", net.minecraft.util.JsonUtils.getJsonObject(obj, "nbt"));
 			}
 		}
 

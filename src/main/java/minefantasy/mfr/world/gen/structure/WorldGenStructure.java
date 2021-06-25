@@ -1,6 +1,6 @@
 package minefantasy.mfr.world.gen.structure;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigWorldGen;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -60,7 +60,7 @@ public class WorldGenStructure implements IWorldGenerator {
 				if (stronghold.generate(world, seed, new BlockPos(x + x1, 0, z + z1))) {
 					++STRONGHOLD_COUNT;
 					String s = "Gen: " + STRONGHOLD_COUNT + " Strongholds in " + CHUNK_COUNT + " Chunks = " + ((float) STRONGHOLD_COUNT / (float) CHUNK_COUNT * 100F) + "% cases";
-					MineFantasyReborn.LOG.debug(s);
+					MineFantasyReforged.LOG.debug(s);
 					return;
 				}
 			}
@@ -71,7 +71,7 @@ public class WorldGenStructure implements IWorldGenerator {
 		if (stronghold.generate(world, seed, new BlockPos(x + x1, 0, z + z1))) {
 			++STRONGHOLD_COUNT;
 			String s = "Gen: " + STRONGHOLD_COUNT + " Strongholds in " + CHUNK_COUNT + " Chunks = " + ((float) STRONGHOLD_COUNT / (float) CHUNK_COUNT * 100F) + "% cases";
-			MineFantasyReborn.LOG.debug(s);
+			MineFantasyReforged.LOG.debug(s);
 			return;
 		}
 	}

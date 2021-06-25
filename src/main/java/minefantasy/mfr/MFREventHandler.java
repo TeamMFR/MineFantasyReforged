@@ -266,7 +266,7 @@ public final class MFREventHandler {
 			}
 			if (event.getItemStack().hasTagCompound() && event.getItemStack().getTagCompound().hasKey(CRAFTED_BY_NAME_TAG)) {
 				String name = event.getItemStack().getTagCompound().getString(CRAFTED_BY_NAME_TAG);
-				boolean special = MineFantasyReborn.isNameModder(name);// Mod creators have highlights
+				boolean special = MineFantasyReforged.isNameModder(name);// Mod creators have highlights
 
 				event.getToolTip().add((special ? TextFormatting.GREEN : "")
 						+ I18n.format("attribute.mfcraftedbyname.name")

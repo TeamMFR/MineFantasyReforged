@@ -1,6 +1,6 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.entity.EntityArrowMFR;
@@ -29,7 +29,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
-@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 public class MineFantasyEntities {
 	@SubscribeEvent
 	public static void register(RegistryEvent.Register<EntityEntry> event) {
@@ -62,13 +62,13 @@ public class MineFantasyEntities {
 	}
 
 	private static void addEntity(Class<? extends Entity> entityClass, String entityName, int id, int range, int ticks) {
-		ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, entityName);
-		EntityRegistry.registerModEntity(registryName, entityClass, entityName, id, MineFantasyReborn.INSTANCE, range, ticks, true);
+		ResourceLocation registryName = new ResourceLocation(MineFantasyReforged.MOD_ID, entityName);
+		EntityRegistry.registerModEntity(registryName, entityClass, entityName, id, MineFantasyReforged.INSTANCE, range, ticks, true);
 	}
 
 	private static void addEntity(int IDBase, Class<? extends Entity> entityClass, String entityName) {
-		ResourceLocation registryName = new ResourceLocation(MineFantasyReborn.MOD_ID, entityName);
-		EntityRegistry.registerModEntity(registryName, entityClass, entityName, IDBase, MineFantasyReborn.INSTANCE, 128, 1, true);
+		ResourceLocation registryName = new ResourceLocation(MineFantasyReforged.MOD_ID, entityName);
+		EntityRegistry.registerModEntity(registryName, entityClass, entityName, IDBase, MineFantasyReforged.INSTANCE, 128, 1, true);
 	}
 
 	public static void addSpawn(Class<? extends EntityLiving> entityClass, int weightedProb, int min, int max,

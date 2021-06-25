@@ -1,8 +1,0 @@
-﻿{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "minefantasyreborn:items/dragonforged_scythe",
-        "layer1": "minefantasyreborn:items/dragonforged_scythe_haft",
-        "layer2": "minefantasyreborn:items/dragonforged_scythe_detail"
-    }
-}

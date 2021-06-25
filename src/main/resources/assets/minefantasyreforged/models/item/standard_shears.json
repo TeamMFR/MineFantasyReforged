@@ -1,0 +1,7 @@
+﻿{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "minefantasyreforged:items/standard_shears",
+        "layer1": "minefantasyreforged:items/standard_shears_detail"
+    }
+}

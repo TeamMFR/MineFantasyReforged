@@ -1,0 +1,15 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "cube_bottom_top",
+        "textures": {
+            "bottom": "minefantasyreforged:blocks/reinforced_stone_base",
+            "top": "minefantasyreforged:blocks/reinforced_stone_base",
+            "side": "minefantasyreforged:blocks/reinforced_stone_engraved_1"
+        },
+        "transform": "forge:default-block"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

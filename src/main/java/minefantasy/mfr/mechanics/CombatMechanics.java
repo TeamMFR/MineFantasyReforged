@@ -1,6 +1,6 @@
 package minefantasy.mfr.mechanics;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IKnockbackWeapon;
@@ -44,12 +44,10 @@ import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -693,7 +691,7 @@ public class CombatMechanics {
 						type = "Blunt";
 				}
 
-				MineFantasyReborn.LOG.debug(dam + "x " + type + " Damage inflicted to: " + user.getName() + " (" + user.getEntityId() + ")");
+				MineFantasyReforged.LOG.debug(dam + "x " + type + " Damage inflicted to: " + user.getName() + " (" + user.getEntityId() + ")");
 			}
 		}
 		return dam;

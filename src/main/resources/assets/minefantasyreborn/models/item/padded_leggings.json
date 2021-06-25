@@ -1,7 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/padded_leggings",
-        "layer1": "minefantasyreborn:items/padded_leggings_overlay"
-    }
-}

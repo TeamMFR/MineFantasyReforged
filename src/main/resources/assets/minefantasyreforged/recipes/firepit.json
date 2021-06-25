@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" P ",
+		"S S"
+	],
+	"key": {
+		"P": {
+			"item": "minefantasyreforged:timber"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:firepit"
+	}
+}

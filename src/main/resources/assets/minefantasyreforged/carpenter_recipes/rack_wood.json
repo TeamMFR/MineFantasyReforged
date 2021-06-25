@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "construction",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": true,
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": 0,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "N N ",
+    "P P ",
+    "LLL ",
+    "P P "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "L": {
+      "item": "minefantasyreforged:timber_cut"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:rack_wood"
+  }
+}

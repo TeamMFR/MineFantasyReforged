@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -34,7 +34,7 @@ public class ItemCrossbowPart extends ItemBaseMFR implements ICrossbowPart {
 		this.type = type;
 		this.tier = tier;
 		this.partname = model;
-		MineFantasyRebornAPI.registerCrossbowPart(this);
+		MineFantasyReforgedAPI.registerCrossbowPart(this);
 		this.setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
 

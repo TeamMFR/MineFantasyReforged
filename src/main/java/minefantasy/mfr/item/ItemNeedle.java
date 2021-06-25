@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.constants.Tool;
@@ -52,7 +52,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 		setRegistryName(name);
 		setUnlocalizedName(name);
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override
@@ -109,7 +109,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name));
 				}
 			}

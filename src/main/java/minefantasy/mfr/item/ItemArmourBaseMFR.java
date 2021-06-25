@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IArmourMFR;
 import minefantasy.mfr.api.armour.IArmourRating;
@@ -59,7 +59,7 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 		this.setMaxDamage((int) durability);
 		this.setUnlocalizedName(name);
 		setDamageType(getBaseArmorClass() * scalePiece());
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public ItemArmourBaseMFR setDamageType(float damageType) {

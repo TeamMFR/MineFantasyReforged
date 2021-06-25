@@ -1,6 +1,6 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
@@ -99,7 +99,7 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 		ItemStack stack = player.getHeldItem(hand);
 		if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(stack))// OPEN INV
 		{
-			player.openGui(MineFantasyReborn.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
+			player.openGui(MineFantasyReforged.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
 			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 		}
 		ItemStack loaded = AmmoMechanics.getArrowOnBow(stack);

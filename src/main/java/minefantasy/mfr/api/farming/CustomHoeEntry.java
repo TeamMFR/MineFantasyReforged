@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.farming;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -31,7 +31,7 @@ public class CustomHoeEntry {
 	public static void registerItem(Item piece, float efficiency) {
 		int id = Item.getIdFromItem(piece);
 
-		MineFantasyRebornAPI.debugMsg("Added Custom hoe: " + piece.getUnlocalizedName() + " Efficiency = " + efficiency);
+		MineFantasyReforgedAPI.debugMsg("Added Custom hoe: " + piece.getUnlocalizedName() + " Efficiency = " + efficiency);
 		entries.put(id, new CustomHoeEntry(id, efficiency));
 	}
 

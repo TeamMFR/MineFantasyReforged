@@ -1,7 +1,7 @@
 package minefantasy.mfr.util;
 
 import com.google.common.collect.Maps;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -27,7 +27,7 @@ public class TextureHelperMFR {
 		if (resourcelocation == null) {
 			MFRLogUtil.logDebug("MineFantasy: Added Resource: " + directory);
 
-			resourcelocation = new ResourceLocation(MineFantasyReborn.MOD_ID, directory);
+			resourcelocation = new ResourceLocation(MineFantasyReforged.MOD_ID, directory);
 			resourceList.put(directory, resourcelocation);
 		}
 

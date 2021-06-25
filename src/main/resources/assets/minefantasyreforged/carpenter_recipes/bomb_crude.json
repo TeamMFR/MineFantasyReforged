@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "engineering",
+  "research": "blackpowder",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.craftprimitive",
+  "pattern": [
+    "T   ",
+    "B   ",
+    "P   ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "B": {
+      "item": "minefantasyreforged:blackpowder"
+    },
+    "T": {
+      "item": "minefantasyreforged:thread"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bomb_crude"
+  }
+}

@@ -1,0 +1,14 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B  "
+	],
+	"key": {
+		"B": {
+			"item": "minefantasyreforged:reinforced_stone_bricks"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:reinforced_stone"
+	}
+}

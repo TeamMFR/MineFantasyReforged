@@ -1,0 +1,20 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" J ",
+		"JSJ",
+		" J "
+	],
+	"key": {
+		"S": {
+			"item": "minecraft:wheat_seeds"
+		},
+		"J": {
+			"item": "minefantasyreforged:jug_empty"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:jug_plant_oil",
+		"count": 4
+	}
+}

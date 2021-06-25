@@ -1,7 +1,7 @@
 package minefantasy.mfr.util;
 
 import com.google.common.base.CaseFormat;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
 
 public class Utils {
 
@@ -88,11 +87,11 @@ public class Utils {
 	public static void storeTagSafely(NBTTagCompound compound, String key, NBTBase tag){
 
 		if(compound == tag || deepContains(tag, compound)){
-			MineFantasyReborn.LOG.error("Cannot store tag of type {} under key '{}' as it would result in a circular reference! Please report this (including your full log) to wizardry's issue tracker.",
+			MineFantasyReforged.LOG.error("Cannot store tag of type {} under key '{}' as it would result in a circular reference! Please report this (including your full log) to wizardry's issue tracker.",
 					NBTBase.getTagTypeName(tag.getId()), key);
 		}else{
 			compound.setTag(key, tag);
-			//MineFantasyReborn.LOG.warn("writing: " + key + ": " + tag);
+			//MineFantasyReforged.LOG.warn("writing: " + key + ": " + tag);
 		}
 	}
 

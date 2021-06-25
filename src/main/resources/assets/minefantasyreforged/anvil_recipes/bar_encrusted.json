@@ -1,0 +1,29 @@
+{
+  "type": "ShapedAnvilRecipes",
+  "skill": "artisanry",
+  "research": "smeltEncrusted",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 36,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    "D     ",
+    "B     ",
+    "      ",
+    "      "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "D": {
+      "item": "minefantasyreforged:diamond_shards"
+    }
+  },
+  "result": {
+    "nbt": "{mf_custom_materials:{main_material:\"encrusted\"}}",
+    "item": "minefantasyreforged:bar"
+  }
+}

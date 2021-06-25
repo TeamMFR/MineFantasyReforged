@@ -1,6 +1,6 @@
 package minefantasy.mfr.tile;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.RoadPacket;
 import net.minecraft.block.Block;
@@ -70,7 +70,7 @@ public class TileEntityRoad extends TileEntity {
 	public void requestPacket() {
 		if (!world.isRemote)
 			return;
-		EntityPlayer player = MineFantasyReborn.PROXY.getClientPlayer();
+		EntityPlayer player = MineFantasyReforged.PROXY.getClientPlayer();
 		if (player != null) {
 			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new RoadPacket(this));
 		}

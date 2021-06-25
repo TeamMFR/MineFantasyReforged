@@ -1,0 +1,26 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "",
+  "tool_type": "knife",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "G   ",
+    "    ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "G": {
+      "item": "minefantasyreforged:generic_meat_strip_uncooked"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:generic_meat_chunk_uncooked"
+  }
+}

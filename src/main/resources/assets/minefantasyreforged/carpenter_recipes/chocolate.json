@@ -1,0 +1,35 @@
+{
+  "type": "crafting_shaped",
+  "skill": "provisioning",
+  "research": "icing",
+  "tool_type": "spoon",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    " J  ",
+    "SCS ",
+    " L  ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "C": {
+      "item": "minefantasyreforged:coca_powder"
+    },
+    "J": {
+      "item": "minefantasyreforged:jug_milk"
+    },
+    "L": {
+      "item": "minefantasyreforged:clay_pot"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:chocolate"
+  }
+}

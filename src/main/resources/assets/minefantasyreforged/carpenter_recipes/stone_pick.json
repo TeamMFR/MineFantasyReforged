@@ -1,0 +1,32 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hands",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.craftprimitive",
+  "pattern": [
+    "SVS ",
+    " T  ",
+    " T  ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:sharp_rock"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "V": {
+      "item": "minefantasyreforged:vine"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:stone_pick"
+  }
+}

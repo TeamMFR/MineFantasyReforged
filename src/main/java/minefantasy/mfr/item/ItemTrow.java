@@ -2,7 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.init.MineFantasyMaterials;
@@ -62,7 +62,7 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 
 		setMaxDamage(material.getMaxUses());
 
-		MineFantasyReborn.PROXY.addClientRegister(this);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override
@@ -197,7 +197,7 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 		if (isCustom) {
 			ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
 			for (CustomMaterial customMat : metal) {
-				if (MineFantasyReborn.isDebug() || !customMat.getItemStack().isEmpty()) {
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
 					items.add(this.construct(customMat.name, MineFantasyMaterials.Names.OAK_WOOD));
 				}
 			}

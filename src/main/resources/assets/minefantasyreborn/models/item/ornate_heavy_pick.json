@@ -1,8 +1,0 @@
-﻿{
-    "parent": "item/handheld",
-    "textures": {
-        "layer0": "minefantasyreborn:items/ornate_heavy_pick",
-        "layer1": "minefantasyreborn:items/ornate_heavy_pick_haft",
-        "layer2": "minefantasyreborn:items/ornate_heavy_pick_detail"
-    }
-}

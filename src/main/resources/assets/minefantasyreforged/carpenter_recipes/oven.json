@@ -1,0 +1,30 @@
+{
+  "type": "crafting_shaped",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "experience": 0,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "S   ",
+    "T   ",
+    "    ",
+    "    "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    },
+    "T": {
+      "item": "minefantasyreforged:stove"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:oven"
+  }
+}

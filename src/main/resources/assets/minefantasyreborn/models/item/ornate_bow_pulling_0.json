@@ -1,8 +1,0 @@
-﻿{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "minefantasyreborn:items/ornate_bow_pulling_0",
-        "layer1": "minefantasyreborn:items/ornate_bow_pulling_0_haft",
-        "layer2": "minefantasyreborn:items/ornate_bow_pulling_0_detail"
-    }
-}

@@ -1,10 +1,7 @@
 package minefantasy.mfr.data;
 
-import minefantasy.mfr.MineFantasyReborn;
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.mechanics.RPGElements;
-import minefantasy.mfr.mechanics.knowledge.InformationBase;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.PlayerDataPacket;
 import net.minecraft.entity.Entity;
@@ -202,7 +199,7 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 			}
 			catch (ClassCastException e) {
 				// Should only happen if someone manually edits the save file
-				MineFantasyReborn.LOG.error("Player data NBT tag was not of expected type!", e);
+				MineFantasyReforged.LOG.error("Player data NBT tag was not of expected type!", e);
 			}
 		}
 	}
@@ -214,7 +211,7 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 	public static void onCapabilityLoad(AttachCapabilitiesEvent<Entity> event) {
 
 		if (event.getObject() instanceof EntityPlayer) {
-			event.addCapability(new ResourceLocation(MineFantasyReborn.MOD_ID, "PlayerData"), new PlayerData.Provider((EntityPlayer) event.getObject()));
+			event.addCapability(new ResourceLocation(MineFantasyReforged.MOD_ID, "PlayerData"), new PlayerData.Provider((EntityPlayer) event.getObject()));
 
 		}
 	}

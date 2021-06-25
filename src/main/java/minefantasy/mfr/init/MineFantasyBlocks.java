@@ -1,6 +1,6 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.MineFantasyReborn;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.block.BasicBlockMF;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockAnvilMF;
@@ -99,7 +99,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod.EventBusSubscriber(modid = MineFantasyReborn.MOD_ID)
+@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 public class MineFantasyBlocks {
 
 	public static Block COPPER_ORE = Utils.nullValue();
@@ -962,7 +962,7 @@ public class MineFantasyBlocks {
 	}
 
 	private static void registerTile(Class<? extends TileEntity> teClass, String teId) {
-		GameRegistry.registerTileEntity(teClass, new ResourceLocation(MineFantasyReborn.MOD_ID, teId));
+		GameRegistry.registerTileEntity(teClass, new ResourceLocation(MineFantasyReforged.MOD_ID, teId));
 	}
 }
 

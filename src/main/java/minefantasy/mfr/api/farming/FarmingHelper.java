@@ -1,6 +1,6 @@
 package minefantasy.mfr.api.farming;
 
-import minefantasy.mfr.api.MineFantasyRebornAPI;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemHoe;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class FarmingHelper {
 		float chance = rand.nextFloat() * chanceMax;
 		float efficiency = (getHoeEfficiency(hoe) * (grass ? 2.0F : 3.0F));
 
-		MineFantasyRebornAPI.debugMsg("Hoe Chance Fail = " + chance + " / " + efficiency + " (max= " + chanceMax + ")");
+		MineFantasyReforgedAPI.debugMsg("Hoe Chance Fail = " + chance + " / " + efficiency + " (max= " + chanceMax + ")");
 		return chance > efficiency;// Dirt is easier to hoe
 	}
 

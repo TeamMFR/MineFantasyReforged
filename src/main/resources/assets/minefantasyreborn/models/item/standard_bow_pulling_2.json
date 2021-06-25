@@ -1,8 +1,0 @@
-﻿{
-    "parent": "minefantasyreborn:item/standard_bow",
-    "textures": {
-        "layer0": "minefantasyreborn:items/standard_bow_pulling_2",
-        "layer1": "minefantasyreborn:items/standard_bow_pulling_2_haft",
-        "layer2": "minefantasyreborn:items/standard_bow_pulling_2_detail"
-    }
-}
