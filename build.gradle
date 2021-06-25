@@ -141,7 +141,7 @@ publishing {
     }
     publications {
         gpr(MavenPublication) {
-            artifactId 'minefantasyReforged'
+            artifactId 'minefantasyreforged'
             from(components.java)
         }
     }
