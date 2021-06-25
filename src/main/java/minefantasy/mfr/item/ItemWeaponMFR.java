@@ -25,9 +25,10 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
-import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -46,12 +47,16 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.MobEffects;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
@@ -332,8 +337,28 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return !allowOffhand(player, EnumHand.OFF_HAND);
 	}
 
+	@Override
+	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
+		if (!(player.getHeldItemOffhand().getItem() instanceof ItemShield)){
+			player.setActiveHand(hand);
+			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
+		}
+		return new ActionResult<>(EnumActionResult.FAIL, stack);
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack item) {
+		return 72000;
+	}
+
 	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
 		return true;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack item) {
+		return EnumAction.BLOCK;
 	}
 
 	protected void addXp(EntityLivingBase user, int chance) {

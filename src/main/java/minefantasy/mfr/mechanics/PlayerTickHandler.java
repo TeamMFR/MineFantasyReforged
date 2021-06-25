@@ -2,6 +2,7 @@ package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.MineFantasyReborn;
 import minefantasy.mfr.api.heating.IHotItem;
+import minefantasy.mfr.client.render.entity.RenderPlayerBlockingLayer;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigWeapon;
@@ -19,14 +20,18 @@ import minefantasy.mfr.util.TacticalManager;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
@@ -250,6 +255,32 @@ public class PlayerTickHandler {
 					event.player.motionY -= (weight / 20000F);
 				}
 			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onRightClickItem(final PlayerInteractEvent.RightClickItem evt) {
+
+		EntityPlayer player = evt.getEntityPlayer();
+		if (RenderPlayerBlockingLayer.shouldItemStackBlock(evt.getItemStack())) {
+
+			EnumAction action = player.getHeldItemOffhand().getItemUseAction();
+			if (action == EnumAction.NONE || action == EnumAction.EAT && !player.canEat(false)) {
+
+				player.setActiveHand(evt.getHand());
+				// cause reequip animation, but don't swing hand
+				evt.setCancellationResult(EnumActionResult.SUCCESS);
+				evt.setCanceled(true);
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public void onItemUseStart(final LivingEntityUseItemEvent.Start evt) {
+
+		if (evt.getEntityLiving() instanceof EntityPlayer && RenderPlayerBlockingLayer.shouldItemStackBlock(evt.getItem())) {
+
+			evt.setDuration(72000);
 		}
 	}
 

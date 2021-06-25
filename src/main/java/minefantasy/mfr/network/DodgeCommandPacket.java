@@ -8,14 +8,12 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import java.util.UUID;
 
 public class DodgeCommandPacket extends PacketMF {
-	private EntityPlayer user;
 	private int ID;
 	private UUID username;
 
 	public DodgeCommandPacket(EntityPlayer user, int id) {
 		this.ID = id;
 		this.username = user.getUniqueID();
-		this.user = user;
 	}
 
 	public DodgeCommandPacket() {
@@ -34,9 +32,9 @@ public class DodgeCommandPacket extends PacketMF {
 	}
 
 	@Override
-	protected void execute() {
-		if (user.getUniqueID() == username) {
-			CombatMechanics.initDodge(user, ID);
+	protected void execute(EntityPlayer player) {
+		if (username != null && player.getUniqueID().equals(username)) {
+			CombatMechanics.initDodge(player, ID);
 		}
 	}
 }

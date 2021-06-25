@@ -10,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.opengl.GL11;
 
 import java.util.function.Supplier;
 
@@ -89,7 +88,7 @@ public class RenderBigTool extends WrappedItemModel implements IItemRenderer {
 
 	@Override
 	public void renderItem(ItemStack item, ItemCameraTransforms.TransformType transformType) {
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 
 		if (transformType != ItemCameraTransforms.TransformType.GUI && transformType != ItemCameraTransforms.TransformType.GROUND) {
 

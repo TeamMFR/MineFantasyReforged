@@ -4,7 +4,6 @@ import minefantasy.mfr.api.MineFantasyRebornAPI;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
-import minefantasy.mfr.client.render.AnimationHandler;
 import minefantasy.mfr.client.render.HudHandler;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
@@ -24,6 +23,7 @@ import minefantasy.mfr.client.render.entity.RenderHound;
 import minefantasy.mfr.client.render.entity.RenderMine;
 import minefantasy.mfr.client.render.entity.RenderMinotaur;
 import minefantasy.mfr.client.render.entity.RenderParachute;
+import minefantasy.mfr.client.render.entity.RenderPlayerBlockingLayer;
 import minefantasy.mfr.client.render.entity.RenderPowerArmour;
 import minefantasy.mfr.client.render.entity.RenderShrapnel;
 import minefantasy.mfr.client.render.entity.RenderSmoke;
@@ -39,6 +39,7 @@ import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
+import minefantasy.mfr.client.render.BlockingAnimationHandler;
 import minefantasy.mfr.mechanics.ExtendedReach;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
@@ -89,6 +90,7 @@ public class ClientProxy extends ClientProxyBase {
 	@Override
 	public void postInit() {
 		super.postInit();
+		RenderPlayerBlockingLayer.replaceHeldItemLayer();
 	}
 
 	/**
@@ -126,10 +128,10 @@ public class ClientProxy extends ClientProxyBase {
 	public void registerTickHandlers() {
 		super.registerTickHandlers();
 		FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
-		FMLCommonHandler.instance().bus().register(new AnimationHandler());
 		FMLCommonHandler.instance().bus().register(new ExtendedReach());
 		MinecraftForge.EVENT_BUS.register(new HudHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
+		MinecraftForge.EVENT_BUS.register(new BlockingAnimationHandler());
 
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityTanningRack.class, new TileEntityTanningRackRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBellows.class, new TileEntityBellowsRenderer<>());
