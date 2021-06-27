@@ -1,6 +1,6 @@
 package minefantasy.mfr.client.render;
 
-import minefantasy.mfr.client.render.entity.RenderPlayerBlockingLayer;
+import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -35,7 +35,7 @@ public class BlockingAnimationHandler {
         if (evt.getEntity() instanceof AbstractClientPlayer) {
 
             AbstractClientPlayer player = (AbstractClientPlayer) evt.getEntity();
-            if (player.isHandActive() && RenderPlayerBlockingLayer.shouldItemStackBlock(player.getActiveItemStack())) {
+            if (player.isHandActive() && PlayerUtils.shouldItemStackBlock(player.getActiveItemStack())) {
                 ModelPlayer model = (ModelPlayer) evt.getRenderer().getMainModel();
                 boolean left1 = player.getActiveHand() == EnumHand.OFF_HAND && player.getPrimaryHand() == EnumHandSide.RIGHT;
                 boolean left2 = player.getActiveHand() == EnumHand.MAIN_HAND && player.getPrimaryHand() == EnumHandSide.LEFT;
@@ -62,7 +62,7 @@ public class BlockingAnimationHandler {
         if (player != null && player.isHandActive() && player.getActiveHand() == evt.getHand()) {
 
             ItemStack stack = evt.getItemStack();
-            if (RenderPlayerBlockingLayer.shouldItemStackBlock(stack)) {
+            if (PlayerUtils.shouldItemStackBlock(stack)) {
                 GlStateManager.pushMatrix();
                 boolean rightHanded = (evt.getHand() == EnumHand.MAIN_HAND ? player.getPrimaryHand() : player.getPrimaryHand().opposite()) == EnumHandSide.RIGHT;
                 this.transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, evt.getEquipProgress());

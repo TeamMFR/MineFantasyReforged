@@ -2,7 +2,6 @@ package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.IHotItem;
-import minefantasy.mfr.client.render.entity.RenderPlayerBlockingLayer;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigWeapon;
@@ -16,6 +15,7 @@ import minefantasy.mfr.item.ItemFoodMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.PlayerUtils;
 import minefantasy.mfr.util.TacticalManager;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
@@ -262,7 +262,7 @@ public class PlayerTickHandler {
 	public void onRightClickItem(final PlayerInteractEvent.RightClickItem evt) {
 
 		EntityPlayer player = evt.getEntityPlayer();
-		if (RenderPlayerBlockingLayer.shouldItemStackBlock(evt.getItemStack())) {
+		if (PlayerUtils.shouldItemStackBlock(evt.getItemStack())) {
 
 			EnumAction action = player.getHeldItemOffhand().getItemUseAction();
 			if (action == EnumAction.NONE || action == EnumAction.EAT && !player.canEat(false)) {
@@ -278,7 +278,7 @@ public class PlayerTickHandler {
 	@SubscribeEvent
 	public void onItemUseStart(final LivingEntityUseItemEvent.Start evt) {
 
-		if (evt.getEntityLiving() instanceof EntityPlayer && RenderPlayerBlockingLayer.shouldItemStackBlock(evt.getItem())) {
+		if (evt.getEntityLiving() instanceof EntityPlayer && PlayerUtils.shouldItemStackBlock(evt.getItem())) {
 
 			evt.setDuration(72000);
 		}

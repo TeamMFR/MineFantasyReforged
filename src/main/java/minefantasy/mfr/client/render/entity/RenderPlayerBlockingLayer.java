@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render.entity;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.item.ItemWeaponMFR;
+import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -16,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.util.vector.Quaternion;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -28,6 +30,7 @@ import java.util.Map;
  * Modified and used under the free use public license, thank you so much to Fuzs_!
  */
 
+@SideOnly(Side.CLIENT)
 public class RenderPlayerBlockingLayer extends LayerHeldItem {
 
     private static final String RENDER_LIVING_BASE_LAYER_RENDERERS = "field_177097_h";
@@ -72,7 +75,7 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
 
             // Forge: moved this call down, fixes incorrect offset while sneaking.
             this.translateToHand(handSide);
-            if (entityLivingBase.isHandActive() && shouldItemStackBlock(stack) && entityLivingBase.getActiveHand() == (leftHand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)) {
+            if (entityLivingBase.isHandActive() && PlayerUtils.shouldItemStackBlock(stack) && entityLivingBase.getActiveHand() == (leftHand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)) {
                 GlStateManager.translate((float) (leftHand ? 1 : -1) / 16.0F, 0.4375F, 0.0625F);
 
                 // blocking
@@ -176,9 +179,5 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
         }
 
         return null;
-    }
-
-    public static boolean shouldItemStackBlock(ItemStack stack){
-        return stack.getItem() instanceof ItemWeaponMFR;
     }
 }

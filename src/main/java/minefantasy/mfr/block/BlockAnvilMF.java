@@ -6,6 +6,7 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.material.BaseMaterial;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -126,6 +127,9 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 			if (facing != EnumFacing.UP || !tile.tryCraft(player, true) && !world.isRemote) {
 				tile.openGUI(world, player);
 			}
+		}
+		if (!world.isRemote) {
+			ResearchLogic.syncData(player);
 		}
 		return true;
 	}

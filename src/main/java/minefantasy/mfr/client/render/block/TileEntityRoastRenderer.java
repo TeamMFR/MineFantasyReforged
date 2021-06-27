@@ -26,7 +26,7 @@ public class TileEntityRoastRenderer<T extends TileEntity> extends FastTESR<T> {
 			GlStateManager.rotate(90, 1.0F, 0F, 0F);
 			GlStateManager.translate(.5F, .5F, -0.139F); //I know this is a weird number, but it works goddamnit
 			GlStateManager.scale(.4f, .4f, .4f);
-			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+			GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 
 			GlStateManager.disableLighting();
 			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 15 * 16, 15 * 16);

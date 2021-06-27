@@ -10,10 +10,9 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
@@ -27,18 +26,11 @@ import java.util.Random;
 
 public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientRegister {
 
-	private String name;
-	private Block sapling;
-	private int dropRate;
-
-	@SideOnly(Side.CLIENT)
-
-	public BlockLeavesMF(String baseWood) {
-		this(baseWood, 20);
-	}
+	private final int dropRate;
 
 	public BlockLeavesMF(String baseWood, int droprate) {
-		this.name = baseWood.toLowerCase() + "_leaves";
+		super();
+		String name = baseWood.toLowerCase() + "_leaves";
 
 		setRegistryName(name);
 		setUnlocalizedName(name);
@@ -46,11 +38,6 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 		this.setTickRandomly(true);
 		setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 		MineFantasyReforged.PROXY.addClientRegister(this);
-	}
-
-	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
-		return Blocks.LEAVES.shouldSideBeRendered(state, blockAccess, pos, side);
 	}
 
 	@Override
@@ -78,9 +65,13 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 		return i;
 	}
 
-	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return Blocks.LEAVES.isOpaqueCube(state);
+		return false;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -100,7 +91,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 
 	@Override
 	protected int getSaplingDropChance(IBlockState state) {
-		return state == this.blockState ? dropRate * 2 : dropRate;
+		return state == this.blockState.getBaseState() ? dropRate * 2 : dropRate;
 	}
 
 	private Block getBlockDrop() {

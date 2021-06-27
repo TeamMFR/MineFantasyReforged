@@ -1,6 +1,7 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -80,6 +81,9 @@ public class BlockCarpenter extends BlockTileEntity<TileEntityCarpenter> {
 			if (facing != EnumFacing.UP || !tile.tryCraft(player) && !world.isRemote) {
 				tile.openGUI(world, player);
 			}
+		}
+		if (!world.isRemote) {
+			ResearchLogic.syncData(player);
 		}
 		return true;
 	}

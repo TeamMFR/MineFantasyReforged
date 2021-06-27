@@ -1141,6 +1141,7 @@ item.skillbook_combat_max.desc=Max Weaponry
 
 method.workbench=Crafting Table
 method.furnace=Smelting
+method.baking=Baking
 method.bloomery=Bloomery
 method.blastfurnace=Blast Furnace
 method.anvil=Anvil

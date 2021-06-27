@@ -1,5 +1,6 @@
 package minefantasy.mfr.util;
 
+import minefantasy.mfr.item.ItemWeaponMFR;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
@@ -17,5 +18,9 @@ public class PlayerUtils {
 		if (!player.inventory.addItemStackToInventory(itemToGive)) {
 			player.dropItem(itemToGive, false);
 		}
+	}
+
+	public static boolean shouldItemStackBlock(ItemStack stack){
+		return stack.getItem() instanceof ItemWeaponMFR;
 	}
 }

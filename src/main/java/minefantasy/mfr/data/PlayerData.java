@@ -2,6 +2,7 @@ package minefantasy.mfr.data;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.mechanics.RPGElements;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.PlayerDataPacket;
 import net.minecraft.entity.Entity;
@@ -236,6 +237,7 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 				if (RPGElements.isSystemActive) {
 					RPGElements.initSkills(data);
 				}
+				ResearchLogic.syncData((EntityPlayer) event.getEntity());
 				data.sync();
 			}
 		}
