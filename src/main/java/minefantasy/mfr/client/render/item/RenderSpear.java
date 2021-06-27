@@ -4,6 +4,7 @@ import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.item.ItemHalbeard;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -43,6 +44,9 @@ public class RenderSpear extends WrappedItemModel implements IItemRenderer {
 			GlStateManager.scale(3, 3, 1);
 		}
 		renderWrapped(stack);
+		if (!stack.isEmpty() && stack.hasEffect()){
+			TextureHelperMFR.renderEffect(wrapped, stack);
+		}
 		GlStateManager.popMatrix();
 	}
 

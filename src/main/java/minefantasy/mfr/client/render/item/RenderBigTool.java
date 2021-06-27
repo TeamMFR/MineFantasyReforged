@@ -3,6 +3,9 @@ package minefantasy.mfr.client.render.item;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.util.TextureHelperMFR;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -87,7 +90,7 @@ public class RenderBigTool extends WrappedItemModel implements IItemRenderer {
 	/////////////////
 
 	@Override
-	public void renderItem(ItemStack item, ItemCameraTransforms.TransformType transformType) {
+	public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
 		GlStateManager.pushMatrix();
 
 		if (transformType != ItemCameraTransforms.TransformType.GUI && transformType != ItemCameraTransforms.TransformType.GROUND) {
@@ -104,7 +107,10 @@ public class RenderBigTool extends WrappedItemModel implements IItemRenderer {
 			GlStateManager.scale(scale, scale, 1);
 		}
 
-		renderWrapped(item);
+		renderWrapped(stack);
+		if (!stack.isEmpty() && stack.hasEffect()){
+			TextureHelperMFR.renderEffect(wrapped, stack);
+		}
 		GlStateManager.popMatrix();
 	}
 

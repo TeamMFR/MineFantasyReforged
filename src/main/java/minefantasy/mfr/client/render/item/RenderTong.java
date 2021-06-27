@@ -4,6 +4,7 @@ import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.api.heating.TongsHelper;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
@@ -29,6 +30,9 @@ public class RenderTong extends WrappedItemModel implements IItemRenderer {
 		GlStateManager.pushMatrix();
 
 		renderWrapped(stack);
+		if (!stack.isEmpty() && stack.hasEffect()){
+			TextureHelperMFR.renderEffect(wrapped, stack);
+		}
 		if (!heldItem.isEmpty()) {
 			GlStateManager.scale(0.5F, 0.5F, 0.5F);
 			GlStateManager.translate(1.5F, 1.5F, 1F);

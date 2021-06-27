@@ -4,6 +4,7 @@ import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.mechanics.AmmoMechanics;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
@@ -35,6 +36,9 @@ public class RenderBow extends WrappedItemModel implements IItemRenderer {
 		GlStateManager.pushMatrix(); // bow start
 
 		renderWrapped(stack);
+		if (!stack.isEmpty() && stack.hasEffect()){
+			TextureHelperMFR.renderEffect(wrapped, stack);
+		}
 
 		GlStateManager.popMatrix(); // bow end
 

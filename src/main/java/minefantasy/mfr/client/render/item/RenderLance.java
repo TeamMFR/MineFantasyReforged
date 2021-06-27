@@ -3,6 +3,7 @@ package minefantasy.mfr.client.render.item;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -58,6 +59,9 @@ public class RenderLance extends WrappedItemModel implements IItemRenderer {
 			GlStateManager.scale(3F, 3F, 1F);
 		}
 		renderWrapped(stack);
+		if (!stack.isEmpty() && stack.hasEffect()){
+			TextureHelperMFR.renderEffect(wrapped, stack);
+		}
 		GlStateManager.popMatrix();
 	}
 

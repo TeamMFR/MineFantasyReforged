@@ -3,19 +3,21 @@ package minefantasy.mfr.util;
 import com.google.common.collect.Maps;
 import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.renderer.ItemRenderer;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import org.lwjgl.opengl.GL11;
 
 import java.util.Map;
 
 public class TextureHelperMFR {
 	public static final ResourceLocation ITEM_GLINT = new ResourceLocation("textures/misc/enchanted_item_glint.png");
-	private static final Map resourceList = Maps.newHashMap();
+	private static final Map<Object, Object> resourceList = Maps.newHashMap();
 
 	/**
 	 * This gets the resource location from just a simple directory(Beats the shit
@@ -34,34 +36,49 @@ public class TextureHelperMFR {
 		return resourcelocation;
 	}
 
-	public static void renderEnchantmentEffects(ItemRenderer renderer, AbstractClientPlayer player, EnumHand hand, ItemStack stack) {
+	public static void renderEffect(IBakedModel model, ItemStack stack) {
+		GlStateManager.depthMask(false);
+		GlStateManager.depthFunc(514);
+		GlStateManager.disableLighting();
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_COLOR, GlStateManager.DestFactor.ONE);
+		Minecraft.getMinecraft().renderEngine.bindTexture(ITEM_GLINT);
+		GlStateManager.matrixMode(5890);
+		GlStateManager.pushMatrix();
+		GlStateManager.scale(8.0F, 8.0F, 8.0F);
+		float f = (float) (Minecraft.getSystemTime() % 3000L) / 3000.0F / 8.0F;
+		GlStateManager.translate(f, 0.0F, 0.0F);
+		GlStateManager.rotate(-50.0F, 0.0F, 0.0F, 1.0F);
+		renderModel(model, stack);
+		GlStateManager.popMatrix();
+		GlStateManager.pushMatrix();
+		GlStateManager.scale(8.0F, 8.0F, 8.0F);
+		float f1 = (float) (Minecraft.getSystemTime() % 4873L) / 4873.0F / 8.0F;
+		GlStateManager.translate(-f1, 0.0F, 0.0F);
+		GlStateManager.rotate(10.0F, 0.0F, 0.0F, 1.0F);
+		renderModel(model, stack);
+		GlStateManager.popMatrix();
+		GlStateManager.matrixMode(5888);
+		GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+		GlStateManager.enableLighting();
+		GlStateManager.depthFunc(515);
+		GlStateManager.depthMask(true);
+		Minecraft.getMinecraft().renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+	}
 
-		GL11.glDepthFunc(GL11.GL_EQUAL);
-		GL11.glDisable(GL11.GL_LIGHTING);
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(ITEM_GLINT);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_COLOR, GL11.GL_ONE);
-		float f7 = 0.76F;
-		GL11.glColor4f(0.5F * f7, 0.25F * f7, 0.8F * f7, 1.0F);
-		GL11.glMatrixMode(GL11.GL_TEXTURE);
-		GL11.glPushMatrix();
-		float f8 = 0.125F;
-		GL11.glScalef(f8, f8, f8);
-		float f9 = Minecraft.getSystemTime() % 3000L / 3000.0F * 8.0F;
-		GL11.glTranslatef(f9, 0.0F, 0.0F);
-		GL11.glRotatef(-50.0F, 0.0F, 0.0F, 1.0F);
-		renderer.renderItemInFirstPerson(player, 0.0F, 0.0F, hand, 1.0F, stack, 256);
-		GL11.glPopMatrix();
-		GL11.glPushMatrix();
-		GL11.glScalef(f8, f8, f8);
-		f9 = Minecraft.getSystemTime() % 4873L / 4873.0F * 8.0F;
-		GL11.glTranslatef(-f9, 0.0F, 0.0F);
-		GL11.glRotatef(10.0F, 0.0F, 0.0F, 1.0F);
-		renderer.renderItemInFirstPerson(player, 0.0F, 0.0F, hand, 1.0F, stack, 256);
-		GL11.glPopMatrix();
-		GL11.glMatrixMode(GL11.GL_MODELVIEW);
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glEnable(GL11.GL_LIGHTING);
-		GL11.glDepthFunc(GL11.GL_LEQUAL);
+	private static void renderModel(IBakedModel model, ItemStack stack) {
+		if (net.minecraftforge.common.ForgeModContainer.allowEmissiveItems) {
+			net.minecraftforge.client.ForgeHooksClient.renderLitItem(Minecraft.getMinecraft().getRenderItem(), model, -8372020, stack);
+			return;
+		}
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder bufferbuilder = tessellator.getBuffer();
+		bufferbuilder.begin(7, DefaultVertexFormats.ITEM);
+
+		for (EnumFacing enumfacing : EnumFacing.values()) {
+			Minecraft.getMinecraft().getRenderItem().renderQuads(bufferbuilder, model.getQuads(null, enumfacing, 0L), -8372020, stack);
+		}
+
+		Minecraft.getMinecraft().getRenderItem().renderQuads(bufferbuilder, model.getQuads(null, null, 0L), -8372020, stack);
+		tessellator.draw();
 	}
 }
