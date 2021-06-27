@@ -14,7 +14,7 @@
                 "melting_point": 900,
                 "rarity": -1,
                 "craft_tier": -1,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 2.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -41,7 +41,7 @@
                 "melting_point": 1000,
                 "rarity": 0,
                 "craft_tier": 0,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 2.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -68,7 +68,7 @@
                 "melting_point": 1200,
                 "rarity": 0,
                 "craft_tier": 1,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 5.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -95,7 +95,7 @@
                 "melting_point": 1200,
                 "rarity": 0,
                 "craft_tier": 2,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 6.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -122,7 +122,7 @@
                 "melting_point": 1200,
                 "rarity": 0,
                 "craft_tier": 2,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 6.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -149,7 +149,7 @@
                 "melting_point": 1500,
                 "rarity": 0,
                 "craft_tier": 3,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 7.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -176,7 +176,7 @@
                 "melting_point": 1800,
                 "rarity": 0,
                 "craft_tier": 3,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 8.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -203,7 +203,7 @@
                 "melting_point": 2000,
                 "rarity": 0,
                 "craft_tier": 3,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 8.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -230,7 +230,7 @@
                 "melting_point": 2000,
                 "rarity": 0,
                 "craft_tier": 3,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 8.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -257,7 +257,7 @@
                 "melting_point": 2000,
                 "rarity": 0,
                 "craft_tier": 4,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 10.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -284,7 +284,7 @@
                 "melting_point": 2000,
                 "rarity": 0,
                 "craft_tier": 5,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 12.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -311,7 +311,7 @@
                 "melting_point": 2000,
                 "rarity": 0,
                 "craft_tier": 5,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 14.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -338,7 +338,7 @@
                 "melting_point": 1200,
                 "rarity": 0,
                 "craft_tier": 0,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 2.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -365,7 +365,7 @@
                 "melting_point": 1200,
                 "rarity": 0,
                 "craft_tier": 0,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 2.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -392,7 +392,7 @@
                 "melting_point": 2500,
                 "rarity": 1,
                 "craft_tier": 6,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 16.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -419,7 +419,7 @@
                 "melting_point": 2500,
                 "rarity": 1,
                 "craft_tier": 6,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 18.0,
                 "unbreakable": false
             },
             "armour_stats": {
@@ -446,7 +446,7 @@
                 "melting_point": 2500,
                 "rarity": 2,
                 "craft_tier": 7,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 22.0,
                 "unbreakable": true
             },
             "armour_stats": {
@@ -473,7 +473,7 @@
                 "melting_point": 3000,
                 "rarity": 2,
                 "craft_tier": 7,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 30.0,
                 "unbreakable": true
             },
             "armour_stats": {
@@ -500,7 +500,7 @@
                 "melting_point": 3000,
                 "rarity": 2,
                 "craft_tier": 7,
-                "craft_time_modifier": 1.0,
+                "craft_time_modifier": 26.0,
                 "unbreakable": true
             },
             "armour_stats": {
@@ -527,7 +527,7 @@
                 "melting_point": 2500,
                 "rarity": 1,
                 "craft_tier": 3,
-                "craft_time_modifier": 5.0,
+                "craft_time_modifier": 7.0,
                 "unbreakable": true
             },
             "armour_stats": {

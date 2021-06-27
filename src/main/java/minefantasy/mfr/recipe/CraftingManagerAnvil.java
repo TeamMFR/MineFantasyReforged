@@ -286,12 +286,19 @@ public class CraftingManagerAnvil {
 				hot = iAnvilRecipe.outputHot();
 				toolType = iAnvilRecipe.getToolType();
 
-				anvil.setProgressMax(time);
-				anvil.setRequiredHammerTier(hammer);
-				anvil.setRequiredAnvilTier(anvilTier);
+				if (!iAnvilRecipe.useCustomTiers()){
+					anvil.setProgressMax(time);
+					anvil.setRequiredHammerTier(hammer);
+					anvil.setRequiredAnvilTier(anvilTier);
+				}
+
 				anvil.setHotOutput(hot);
 				anvil.setRequiredToolType(toolType);
-				anvil.setRequiredResearch(iAnvilRecipe.getResearch());
+
+				if (!iAnvilRecipe.getResearch().equalsIgnoreCase("tier")){
+					anvil.setRequiredResearch(iAnvilRecipe.getResearch());
+				}
+
 				anvil.setRequiredSkill(iAnvilRecipe.getSkill());
 
 				return iAnvilRecipe.getCraftingResult(matrix);

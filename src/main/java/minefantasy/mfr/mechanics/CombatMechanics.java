@@ -48,6 +48,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
@@ -211,6 +212,9 @@ public class CombatMechanics {
 	public static void initDodge(EntityPlayer user, int type) {
 		float bulk = ArmourCalculator.getTotalBulk(user);
 		int cost = (int) ((type == 0 ? 15 : 10) * (bulk + 1));// Medium armour cost 2x more
+		if (user.getHeldItemOffhand().getItem() instanceof ItemShield){
+			cost += 100; //ToDo: Add Config option for shield dodge cost
+		}
 
 		if (bulk <= 1.0F && ItemWeaponMFR.tryPerformAbility(user, cost)) {
 			float force = 1.0F - (bulk * 0.25F);// Medium armour gives 75%

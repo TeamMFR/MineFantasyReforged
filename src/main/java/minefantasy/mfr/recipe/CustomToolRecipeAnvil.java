@@ -86,12 +86,12 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 
 	private boolean modifyTiers(AnvilCraftMatrix matrix, String tier, boolean isMain) {
 		CustomMaterial material = CustomMaterial.getMaterial(tier);
-		if (material != null) {
+		if (material != CustomMaterial.NONE) {
 			int newTier = recipeHammer < 0 ? material.crafterTier : recipeHammer;
 			int newAnvil = anvilTier < 0 ? material.crafterAnvilTier : anvilTier;
 			matrix.modifyTier(newTier, newAnvil, (int) (recipeTime * material.craftTimeModifier));
 			if (isMain) {
-				matrix.modifyResearch("smelt" + material.getName());
+				matrix.modifyResearch("smelt_" + material.getName());
 			}
 			return true;
 		}

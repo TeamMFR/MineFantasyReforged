@@ -82,9 +82,9 @@ public class MineFantasyKnowledgeList {
 	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney,
 			tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker,
 			dragons, minotaurs;
-	public static InformationBase bloomery, crucible, crucible2, smeltCopper, smeltBronze, smeltIron, coalflux, bigfurn,
-			blastfurn, smeltPig, smeltSteel, encrusted, obsidian, smeltBlackSteel, smeltDragonforge, smeltBlueSteel,
-			smeltRedSteel, smeltMithril, smeltAdamant, smeltMaster, smeltMithium, smeltIgnotumite, smeltEnderforge;
+	public static InformationBase bloomery, crucible, crucible2, smelt_copper, smelt_bronze, smelt_iron, coalflux, bigfurn,
+			blastfurn, smelt_pig_iron, smelt_steel, smelt_encrusted, smelt_obsidian, smelt_black_steel, smeltDragonforge, smelt_blue_steel,
+			smelt_red_steel, smelt_mithril, smelt_adamantium, smeltMaster, smelt_mithium, smelt_ignotumite, smelt_ender;
 	public static InformationBase bellows, trough, forge, anvil, bar, apron, craftTools, craftAdvTools, craftWeapons,
 			craftAdvWeapons, arrows, craftOrnate, craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin,
 			arrowsBroad, repair_basic, repair_advanced, repair_ornate;
@@ -208,55 +208,55 @@ public class MineFantasyKnowledgeList {
 		crucible2 = (new InformationBase("crucible2", 6, 0, 1, MineFantasyBlocks.CRUCIBLE_FIRECLAY, crucible)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 40);
 
-		smeltCopper = (new InformationBase("smeltCopper", 1, 0, 0, MineFantasyItems.COPPER_INGOT, (InformationBase) null))
+		smelt_copper = (new InformationBase("smelt_copper", 1, 0, 0, MineFantasyItems.COPPER_INGOT, (InformationBase) null))
 				.registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier(MineFantasyMaterials.Names.COPPER));
-		smeltBronze = (new InformationBase("smeltBronze", 1, 2, 2, MineFantasyItems.BRONZE_INGOT, crucible)).registerStat()
+		smelt_bronze = (new InformationBase("smelt_bronze", 1, 2, 2, MineFantasyItems.BRONZE_INGOT, crucible)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 5).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BRONZE));
-		smeltIron = (new InformationBase("smeltIron", 1, 4, 1, Items.IRON_INGOT, null)).registerStat()
+		smelt_iron = (new InformationBase("smelt_iron", 1, 4, 1, Items.IRON_INGOT, null)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 10).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.IRON));
-		coalflux = (new InformationBase("coalflux", 1, 6, 2, MineFantasyItems.COAL_FLUX, smeltIron)).registerStat()
+		coalflux = (new InformationBase("coalflux", 1, 6, 2, MineFantasyItems.COAL_FLUX, smelt_iron)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 15);
-		blastfurn = (new InformationBase("blastfurn", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smeltIron))
+		blastfurn = (new InformationBase("blastfurn", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smelt_iron))
 				.registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY, 25);
-		bigfurn = (new InformationBase("bigfurn", 0, 5, 4, MineFantasyBlocks.FURNACE_STONE, smeltIron)).registerStat()
+		bigfurn = (new InformationBase("bigfurn", 0, 5, 4, MineFantasyBlocks.FURNACE_STONE, smelt_iron)).registerStat()
 				.setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY, 10);
-		smeltPig = (new InformationBase("smeltPig", 3, 3, 0, MineFantasyItems.PIG_IRON_INGOT, blastfurn)).registerStat()
+		smelt_pig_iron = (new InformationBase("smelt_pig_iron", 3, 3, 0, MineFantasyItems.PIG_IRON_INGOT, blastfurn)).registerStat()
 				.setPage(artisanry).setUnlocked().addSkill(Skill.ARTISANRY, 25);
-		smeltSteel = (new InformationBase("smeltSteel", 4, 5, 1, MineFantasyItems.STEEL_INGOT, smeltPig)).registerStat()
+		smelt_steel = (new InformationBase("smelt_steel", 4, 5, 1, MineFantasyItems.STEEL_INGOT, smelt_pig_iron)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 25).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.STEEL));
-		encrusted = (new InformationBase("smeltEncrusted", 6, 5, 2, MineFantasyItems.DIAMOND_SHARDS, smeltSteel))
+		smelt_encrusted = (new InformationBase("smelt_encrusted", 6, 5, 2, MineFantasyItems.DIAMOND_SHARDS, smelt_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 35)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ENCRUSTED));
-		obsidian = (new InformationBase("smeltObsidian", 6, 3, 2, MineFantasyItems.OBSIDIAN_INGOT, smeltSteel))
+		smelt_obsidian = (new InformationBase("smelt_obsidian", 6, 3, 2, MineFantasyItems.OBSIDIAN_INGOT, smelt_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 40)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.OBSIDIAN));
-		smeltBlackSteel = (new InformationBase("smeltBlackSteel", 4, 7, 3, MineFantasyItems.BLACK_STEEL_INGOT, smeltSteel))
+		smelt_black_steel = (new InformationBase("smelt_black_steel", 4, 7, 3, MineFantasyItems.BLACK_STEEL_INGOT, smelt_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BLACK_STEEL));
 		smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, MineFantasyItems.DRAGON_HEART, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50);
-		smeltRedSteel = (new InformationBase("smeltRedSteel", 3, 9, 5, MineFantasyItems.RED_STEEL_INGOT, smeltBlackSteel))
+		smelt_red_steel = (new InformationBase("smelt_red_steel", 3, 9, 5, MineFantasyItems.RED_STEEL_INGOT, smelt_black_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.RED_STEEL));
-		smeltBlueSteel = (new InformationBase("smeltBlueSteel", 5, 9, 5, MineFantasyItems.BLUE_STEEL_INGOT, smeltBlackSteel))
+		smelt_blue_steel = (new InformationBase("smelt_blue_steel", 5, 9, 5, MineFantasyItems.BLUE_STEEL_INGOT, smelt_black_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BLUE_STEEL));
-		smeltMithril = (new InformationBase("smeltMithril", 5, 12, 3, MineFantasyItems.MITHRIL_INGOT, null)).registerStat()
+		smelt_mithril = (new InformationBase("smelt_mithril", 5, 12, 3, MineFantasyItems.MITHRIL_INGOT, null)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 75).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.MITHRIL));
-		smeltAdamant = (new InformationBase("smeltAdamantium", 3, 12, 3, MineFantasyItems.ADAMANTIUM_INGOT, null))
+		smelt_adamantium = (new InformationBase("smelt_adamantium", 3, 12, 3, MineFantasyItems.ADAMANTIUM_INGOT, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 75)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ADAMANTIUM));
 
 		smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, MineFantasyItems.ANCIENT_JEWEL_MASTER,
 				(InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY,
 				100);
-		smeltIgnotumite = (new InformationBase("smeltIgnotumite", 2, 15, 3, MineFantasyItems.IGNOTUMITE_INGOT, smeltMaster))
+		smelt_ignotumite = (new InformationBase("smelt_ignotumite", 2, 15, 3, MineFantasyItems.IGNOTUMITE_INGOT, smeltMaster))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.IGNOTUMITE));
-		smeltMithium = (new InformationBase("smeltMithium", 6, 15, 3, MineFantasyItems.MITHIUM_INGOT, smeltMaster))
+		smelt_mithium = (new InformationBase("smelt_mithium", 6, 15, 3, MineFantasyItems.MITHIUM_INGOT, smeltMaster))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.MITHIUM));
-		smeltEnderforge = (new InformationBase("smeltEnder", 4, 16, 3, MineFantasyItems.ENDER_INGOT, smeltMaster))
+		smelt_ender = (new InformationBase("smelt_ender", 4, 16, 3, MineFantasyItems.ENDER_INGOT, smeltMaster))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ENDER));
 
@@ -590,46 +590,46 @@ public class MineFantasyKnowledgeList {
 		private static void addArtisanry() {
 			for (ItemStack copper : OreDictionary.getOres("ingotCopper")) {
 				for (ItemStack tin : OreDictionary.getOres("ingotTin")) {
-					add(smeltBronze, copper, tin);
+					add(smelt_bronze, copper, tin);
 				}
 			}
 			add(coalflux, Items.COAL, MineFantasyItems.FLUX);
-			add(smeltIron, Blocks.IRON_ORE);
+			add(smelt_iron, Blocks.IRON_ORE);
 			add(crucible2, MineFantasyItems.FIRECLAY);
 			add(blastfurn, Items.IRON_INGOT, Blocks.IRON_ORE, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY,
 					MineFantasyBlocks.LIMESTONE, MineFantasyItems.KAOLINITE);
 			add(bigfurn, Items.IRON_INGOT, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY, MineFantasyItems.KAOLINITE,
 					Items.COAL);
 			for (ItemStack pig : OreDictionary.getOres("ingotPigIron")) {
-				add(smeltSteel, pig);
+				add(smelt_steel, pig);
 			}
 			for (ItemStack steel : OreDictionary.getOres("ingotSteel")) {
-				add(encrusted, steel, Items.DIAMOND);
-				add(obsidian, steel, Blocks.OBSIDIAN);
+				add(smelt_encrusted, steel, Items.DIAMOND);
+				add(smelt_obsidian, steel, Blocks.OBSIDIAN);
 				for (ItemStack bronze : OreDictionary.getOres("ingotBronze")) {
-					add(smeltBlackSteel, Blocks.OBSIDIAN, bronze, steel);
+					add(smelt_black_steel, Blocks.OBSIDIAN, bronze, steel);
 				}
 			}
 			for (ItemStack black : OreDictionary.getOres("ingotBlackSteel")) {
 				for (ItemStack silver : OreDictionary.getOres("ingotSilver")) {
-					add(smeltBlueSteel, Items.BLAZE_POWDER, silver, black, new ItemStack(Items.DYE, 1, 4),
+					add(smelt_blue_steel, Items.BLAZE_POWDER, silver, black, new ItemStack(Items.DYE, 1, 4),
 							MineFantasyItems.FLUX_STRONG);
 				}
-				add(smeltRedSteel, Items.BLAZE_POWDER, Items.GOLD_INGOT, Items.REDSTONE, black,
+				add(smelt_red_steel, Items.BLAZE_POWDER, Items.GOLD_INGOT, Items.REDSTONE, black,
 						MineFantasyItems.FLUX_STRONG);
 			}
 
 			for (ItemStack silver : OreDictionary.getOres("ingotSilver")) {
-				add(smeltMithril, MineFantasyBlocks.MYTHIC_ORE, silver, MineFantasyItems.ANCIENT_JEWEL_MITHRIL);
+				add(smelt_mithril, MineFantasyBlocks.MYTHIC_ORE, silver, MineFantasyItems.ANCIENT_JEWEL_MITHRIL);
 			}
-			add(smeltAdamant, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT, MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
+			add(smelt_adamantium, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT, MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
 			add(smeltMaster, MineFantasyItems.ANCIENT_JEWEL_ADAMANT, MineFantasyItems.ANCIENT_JEWEL_MITHRIL, MineFantasyItems.ANCIENT_JEWEL_MASTER);
 
 			for (ItemStack mithril : OreDictionary.getOres("ingotMithril")) {
-				add(smeltMithium, mithril, Items.GHAST_TEAR, Items.DIAMOND, MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
+				add(smelt_mithium, mithril, Items.GHAST_TEAR, Items.DIAMOND, MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
 				for (ItemStack adamant : OreDictionary.getOres("ingotAdamantium")) {
-					add(smeltIgnotumite, adamant, Items.EMERALD, Items.BLAZE_POWDER);
-					add(smeltEnderforge, adamant, mithril, Items.ENDER_PEARL);
+					add(smelt_ignotumite, adamant, Items.EMERALD, Items.BLAZE_POWDER);
+					add(smelt_ender, adamant, mithril, Items.ENDER_PEARL);
 				}
 			}
 			add(craftArmourMedium, Items.LEATHER);

@@ -124,7 +124,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public boolean isBurning(IBlockAccess world, BlockPos pos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
-		return tile.getIsLit();
+		return tile != null && tile.getIsLit();
 	}
 
 	@Override

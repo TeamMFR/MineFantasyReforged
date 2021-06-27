@@ -1377,38 +1377,38 @@ knowledge.bar=Metal Bar
 knowledge.bar.desc=Standardised shaping
 knowledge.bar.1=An ingot may be used for your standard crafting and trading needs but their too thick for easy forging. Bars are produced from ingots to create a standardised, easy to reforge commodity, allowing easy setup and production of items. Bars are used in artisanry in particular over ingots for this reason.^A bar can be reconverted to an ingot with a similar method.
 
-knowledge.smeltCopper=Copper Smithing
-knowledge.smeltCopper.desc=Tier %1$s, Common material
-knowledge.smeltCopper.1=The path of metalworking is a long and difficult one to learn. Copper is an easily workable and risk-free material.^It's still a piece of junk though, and is unable to make advanced tools, heavy weapons or heavy armour. But it's your piece of junk!
+knowledge.smelt_copper=Copper Smithing
+knowledge.smelt_copper.desc=Tier %1$s, Common material
+knowledge.smelt_copper.1=The path of metalworking is a long and difficult one to learn. Copper is an easily workable and risk-free material.^It's still a piece of junk though, and is unable to make advanced tools, heavy weapons or heavy armour. But it's your piece of junk!
 
-knowledge.smeltBronze=Bronze Smithing
-knowledge.smeltBronze.desc=Tier %1$s, Common material
-knowledge.smeltBronze.1=With further refinement; both tin and copper are able to create an alloy greater than the sum of their parts. ^The applications of this material may be appreciated in later work.
+knowledge.smelt_bronze=Bronze Smithing
+knowledge.smelt_bronze.desc=Tier %1$s, Common material
+knowledge.smelt_bronze.1=With further refinement; both tin and copper are able to create an alloy greater than the sum of their parts. ^The applications of this material may be appreciated in later work.
 
-knowledge.smeltIron=Iron Smithing
-knowledge.smeltIron.desc=Tier %1$s, Common material
-knowledge.smeltIron.1=After some study on local rock formations, it appears rich levels of iron ore can be found. With correct refinement, the metal can be separated from the stone and formed into an ingot.^Iron is stronger than bronze and far more common, allowing for a low-cost and practical material.
-knowledge.smeltIron.2=Smelting iron into workable ingots isn't too difficult, but a certain level of skill is used to work it into a decent shape. You have refined some smithing techniques to enable proper construction of iron tools.
+knowledge.smelt_iron=Iron Smithing
+knowledge.smelt_iron.desc=Tier %1$s, Common material
+knowledge.smelt_iron.1=After some study on local rock formations, it appears rich levels of iron ore can be found. With correct refinement, the metal can be separated from the stone and formed into an ingot.^Iron is stronger than bronze and far more common, allowing for a low-cost and practical material.
+knowledge.smelt_iron.2=Smelting iron into workable ingots isn't too difficult, but a certain level of skill is used to work it into a decent shape. You have refined some smithing techniques to enable proper construction of iron tools.
 
-knowledge.smeltPig=Pig Iron
-knowledge.smeltPig.desc=Iron preparation
-knowledge.smeltPig.1=Natural iron is full of impurities and defects and proper refining of it is crucial to create a decent alloy. The blast furnace has been developed to achieve this. Iron ore can be refined with a particular mixture containing flux. Upon heating: the furnace will be able to draw more impurities away from the ore than other methods, this will yield a purer form of iron.^Pig iron, the product of this process is very brittle however, and further refinement is needed to make any use of it.
+knowledge.smelt_pig_iron=Pig Iron
+knowledge.smelt_pig_iron.desc=Iron preparation
+knowledge.smelt_pig_iron.1=Natural iron is full of impurities and defects and proper refining of it is crucial to create a decent alloy. The blast furnace has been developed to achieve this. Iron ore can be refined with a particular mixture containing flux. Upon heating: the furnace will be able to draw more impurities away from the ore than other methods, this will yield a purer form of iron.^Pig iron, the product of this process is very brittle however, and further refinement is needed to make any use of it.
 
-knowledge.smeltSteel=Steel Smithing
-knowledge.smeltSteel.desc=Tier %1$s, Common material
-knowledge.smeltSteel.1=After taking a look at the pig iron, it appears you may have found the problem behind its brittle nature. A simple method of heating and re-forging these ingots will be able to soften the shape, and increase flexibility.
+knowledge.smelt_steel=Steel Smithing
+knowledge.smelt_steel.desc=Tier %1$s, Common material
+knowledge.smelt_steel.1=After taking a look at the pig iron, it appears you may have found the problem behind its brittle nature. A simple method of heating and re-forging these ingots will be able to soften the shape, and increase flexibility.
 
-knowledge.smeltEncrusted=Encrusted Smithing
-knowledge.smeltEncrusted.desc=Tier %1$s, Exotic material
-knowledge.smeltEncrusted.1=For what appeared to be a stupid idea at first may prove rather useful. By embedding tiny shards into steel it is possible to improve both the resistance and sharpness of the material.^Encrusted diamond ingots are far superior than regular steel and provide excellent perks for their cost.
+knowledge.smelt_encrusted=Encrusted Smithing
+knowledge.smelt_encrusted.desc=Tier %1$s, Exotic material
+knowledge.smelt_encrusted.1=For what appeared to be a stupid idea at first may prove rather useful. By embedding tiny shards into steel it is possible to improve both the resistance and sharpness of the material.^Encrusted diamond ingots are far superior than regular steel and provide excellent perks for their cost.
 
-knowledge.smeltObsidian=Obsidian Smithing
-knowledge.smeltObsidian.desc=Tier %1$s, Exotic material
-knowledge.smeltObsidian.1=Studies into obsidian crystallisations have pointed you towards new discoveries in metallurgy. The high impact resistance of obsidian is unmatched in nature and now it may be possible to make use of these in your own works.^Mixing some molten obsidian with steel allows a strong crystalline ingot which can be worked into tools, providing a range of advantages.
+knowledge.smelt_obsidian=Obsidian Smithing
+knowledge.smelt_obsidian.desc=Tier %1$s, Exotic material
+knowledge.smelt_obsidian.1=Studies into obsidian crystallisations have pointed you towards new discoveries in metallurgy. The high impact resistance of obsidian is unmatched in nature and now it may be possible to make use of these in your own works.^Mixing some molten obsidian with steel allows a strong crystalline ingot which can be worked into tools, providing a range of advantages.
 
-knowledge.smeltBlackSteel=Black Steel Smithing
-knowledge.smeltBlackSteel.desc=Tier %1$s, Common material
-knowledge.smeltBlackSteel.1=Every material has its limit, now you have found the right balance between bronze and iron alloys to perfect a new material. Black steel is extremely strong and far exceeds anything discovered thus far, although it can be difficult to produce and work, it may not be a decent replacement for iron.^This takes a two stage process, bringing together processes done thus far. Black steel can be made in a crucible of reasonable quality, and the ingots can be further refined in a blast furnace. The final result is a new dark, powerful material.
+knowledge.smelt_black_steel=Black Steel Smithing
+knowledge.smelt_black_steel.desc=Tier %1$s, Common material
+knowledge.smelt_black_steel.1=Every material has its limit, now you have found the right balance between bronze and iron alloys to perfect a new material. Black steel is extremely strong and far exceeds anything discovered thus far, although it can be difficult to produce and work, it may not be a decent replacement for iron.^This takes a two stage process, bringing together processes done thus far. Black steel can be made in a crucible of reasonable quality, and the ingots can be further refined in a blast furnace. The final result is a new dark, powerful material.
 
 knowledge.craftOrnate=Ornate Style
 knowledge.craftOrnate.desc=Worthy of clensing
@@ -1421,30 +1421,30 @@ knowledge.smeltDragonforge.desc=Crude and powerful
 knowledge.smeltDragonforge.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.
 knowledge.smeltDragonforge.2=Unlike other designs; dragonforged items require this ritual take place for the craft to work.
 
-knowledge.smeltBlueSteel=Blue Steel Smithing
-knowledge.smeltBlueSteel.desc=Tier %1$s, Common material
+knowledge.smelt_blue_steel=Blue Steel Smithing
+knowledge.smelt_blue_steel.desc=Tier %1$s, Common material
 
-knowledge.smeltBlueSteel.1=With further research into complex alloys, black steel seem to be nearing the peak of capability. However it seems apparent that some improvements can be made to the weight of the alloy. By mixing lapis lazuli and silver you can remove some particular elements from black steel and refine it to a much more lightweight material. How this works isn't fully understood, but it should provide a decent upgrade.
+knowledge.smelt_blue_steel.1=With further research into complex alloys, black steel seem to be nearing the peak of capability. However it seems apparent that some improvements can be made to the weight of the alloy. By mixing lapis lazuli and silver you can remove some particular elements from black steel and refine it to a much more lightweight material. How this works isn't fully understood, but it should provide a decent upgrade.
 
-knowledge.smeltRedSteel=Red Steel Smithing
-knowledge.smeltRedSteel.desc=Tier %1$s, Common material
+knowledge.smelt_red_steel=Red Steel Smithing
+knowledge.smelt_red_steel.desc=Tier %1$s, Common material
 
-knowledge.smeltRedSteel.1=Black steel is nearing the limits of metal capabilities and doesn't appear to be getting much better. Although after studying the effects of redstone and gold had revealed an unusual reaction take place. Redstone when mixed with gold appears to draw material such as black steel closer together, improving strength and weight. An alloy can be developed using this method to create a superior alloy with unimaginable strength.
+knowledge.smelt_red_steel.1=Black steel is nearing the limits of metal capabilities and doesn't appear to be getting much better. Although after studying the effects of redstone and gold had revealed an unusual reaction take place. Redstone when mixed with gold appears to draw material such as black steel closer together, improving strength and weight. An alloy can be developed using this method to create a superior alloy with unimaginable strength.
 
-knowledge.smeltMithril=Mithril Smithing
-knowledge.smeltMithril.desc=Tier %1$s, Exotic material
+knowledge.smelt_mithril=Mithril Smithing
+knowledge.smelt_mithril.desc=Tier %1$s, Exotic material
 
-knowledge.smeltMithril.1=This mythic ore you found is very strange indeed. Any form of alterations made to this significantly changes its physical properties. You have found that interacting silver seems to alter its mass and hardness, but you don't know why or how to control it.^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, that's the theory anyway.
+knowledge.smelt_mithril.1=This mythic ore you found is very strange indeed. Any form of alterations made to this significantly changes its physical properties. You have found that interacting silver seems to alter its mass and hardness, but you don't know why or how to control it.^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, that's the theory anyway.
 
-knowledge.smeltMithril.2=From the readings of this 'schematic talisman' it appears possible to use silver to force the mythic ore into a particular lightweight design. Seemingly the silver takes a large part in turning mythic ore into mithril.^It seems the trinket itself however, though complicated has no purpose.
+knowledge.smelt_mithril.2=From the readings of this 'schematic talisman' it appears possible to use silver to force the mythic ore into a particular lightweight design. Seemingly the silver takes a large part in turning mythic ore into mithril.^It seems the trinket itself however, though complicated has no purpose.
 
 
-knowledge.smeltAdamantium=Adamantium Smithing
-knowledge.smeltAdamantium.desc=Tier %1$s, Exotic material
+knowledge.smelt_adamantium=Adamantium Smithing
+knowledge.smelt_adamantium.desc=Tier %1$s, Exotic material
 
-knowledge.smeltAdamantium.1=Mythic ore seems to follow its own rules and research into its properties have yielded strange results' upon exposing gold to this material, it increases greatly in density, becoming hard and heavy, this baffles you. ^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, that's the theory anyway.
+knowledge.smelt_adamantium.1=Mythic ore seems to follow its own rules and research into its properties have yielded strange results' upon exposing gold to this material, it increases greatly in density, becoming hard and heavy, this baffles you. ^This amulet appears to contain a form of metallurgical instruction in its design. It appears these trinkets are for the purpose of showing off how they are created, likely for the ancient artisans to pass off their knowledge to later generations, that's the theory anyway.
 
-knowledge.smeltAdamantium.2=From the readings of this 'schematic talisman' it appears possible to use gold to force the mythic ore into its green, heavy state. Gold must play a part in the transformation of mythic ore into this particular set of chemistry. ^It seems the trinket itself however, though complicated has no purpose.
+knowledge.smelt_adamantium.2=From the readings of this 'schematic talisman' it appears possible to use gold to force the mythic ore into its green, heavy state. Gold must play a part in the transformation of mythic ore into this particular set of chemistry. ^It seems the trinket itself however, though complicated has no purpose.
 
 knowledge.smeltMaster=Masterwork Mythics
 knowledge.smeltMaster.desc=The next level
@@ -1455,20 +1455,20 @@ knowledge.smeltMaster.2=lesser talismans. There are also markings on the back of
 
 knowledge.smeltMaster.3=between different cultures in different regions. This has no effect on what forges can create what materials however, so their design must be the same.^In any case; this trilogy appears to hold great power and likely comes from the master artisans from both regions, perhaps using it on an active crucible may allow further refinements.
 
-knowledge.smeltIgnotumite=Ignotumite Smithing
-knowledge.smeltIgnotumite.desc=Tier %1$s, Master material
+knowledge.smelt_ignotumite=Ignotumite Smithing
+knowledge.smelt_ignotumite.desc=Tier %1$s, Master material
 
-knowledge.smeltIgnotumite.1=The material known as Ignotumite appears to be a pure upgrade from adamantium. This seems to use more gold along the mythic materials to create what appears to be the heaviest, yet strongest of all the materials.^This can only be made in a master crucible.
+knowledge.smelt_ignotumite.1=The material known as Ignotumite appears to be a pure upgrade from adamantium. This seems to use more gold along the mythic materials to create what appears to be the heaviest, yet strongest of all the materials.^This can only be made in a master crucible.
 
-knowledge.smeltMithium=Mithium Smithing
-knowledge.smeltMithium.desc=Tier %1$s, Master material
+knowledge.smelt_mithium=Mithium Smithing
+knowledge.smelt_mithium.desc=Tier %1$s, Master material
 
-knowledge.smeltMithium.1=This material is a purer form of regular mithril in the ancient arts. What is known as Mithium appears to be nearly weightless, and appears hollow at the touch. It will be possible to further refine the properties of mithril to create the lightest material yet.^This can only be made in a master crucible.
+knowledge.smelt_mithium.1=This material is a purer form of regular mithril in the ancient arts. What is known as Mithium appears to be nearly weightless, and appears hollow at the touch. It will be possible to further refine the properties of mithril to create the lightest material yet.^This can only be made in a master crucible.
 
-knowledge.smeltEnder=Enderforge Smithing
-knowledge.smeltEnderforge.desc=Tier %1$s, Master material
+knowledge.smelt_ender=Enderforge Smithing
+knowledge.smelt_ender.desc=Tier %1$s, Master material
 
-knowledge.smeltEnderforge.1=There's always been something strange about those ender creatures... And this discovery may lead to their origins, perhaps they were the ones that created these artefacts, can't explain how though, ender creatures don't appear too civilised.^Enderforge appears to be designed as a compromise between the two materials of mithril and adamantium, taking the best from both to create a new material. It appears that ender pearls can act as a catalyst to form these two materials together.^This can only be made in a master crucible.
+knowledge.smelt_ender.1=There's always been something strange about those ender creatures... And this discovery may lead to their origins, perhaps they were the ones that created these artefacts, can't explain how though, ender creatures don't appear too civilised.^Enderforge appears to be designed as a compromise between the two materials of mithril and adamantium, taking the best from both to create a new material. It appears that ender pearls can act as a catalyst to form these two materials together.^This can only be made in a master crucible.
 
 knowledge.coalflux=Coal Flux
 knowledge.coalflux.desc=Conservative
