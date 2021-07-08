@@ -1,5 +1,6 @@
 package minefantasy.mfr.mechanics;
 
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.network.ExtendedReachPacket;
 import minefantasy.mfr.network.NetworkHandler;
@@ -12,14 +13,14 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.fml.client.FMLClientHandler;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-@SideOnly(Side.CLIENT)
+@Mod.EventBusSubscriber(value = Side.CLIENT, modid = MineFantasyReforged.MOD_ID)
 public class ExtendedReach {
 
 	@SubscribeEvent(priority = EventPriority.NORMAL, receiveCanceled = true)
