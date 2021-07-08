@@ -15,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,6 +24,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
+@Optional.Interface(iface = "net.shadowmage.ancientwarfare.npc.item.IExtendedReachWeapon", modid = "ancientwarfarenpc")
 public class ItemLance extends ItemSpear {
 	/**
 	 *
@@ -47,8 +49,13 @@ public class ItemLance extends ItemSpear {
 	}
 
 	@Override
-	public float getReachModifierInBlocks(ItemStack stack) {
+	public float getReachModifierInBlocks() {
 		return 3.0F;
+	}
+
+	@Optional.Method(modid = "ancientwarfarenpc")
+	public float getReach() {
+		return 7.0F;
 	}
 
 	@Override

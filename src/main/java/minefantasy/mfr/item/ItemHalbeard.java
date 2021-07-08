@@ -8,10 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.fml.common.Optional;
 
 /**
  * @author Anonymous Productions
  */
+@Optional.Interface(iface = "net.shadowmage.ancientwarfare.npc.item.IExtendedReachWeapon", modid = "ancientwarfarenpc")
 public class ItemHalbeard extends ItemSpear {
 	/**
 	 * The halbeard is the heavy counterpart for the spear: It has increased damage,
@@ -27,12 +29,17 @@ public class ItemHalbeard extends ItemSpear {
 
 	@Override
 	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
-		return false;
+		return entity.getHeldItem(hand).isEmpty();
 	}
 
 	@Override
-	public float getReachModifierInBlocks(ItemStack stack) {
+	public float getReachModifierInBlocks() {
 		return 3.0F;
+	}
+
+	@Optional.Method(modid = "ancientwarfarenpc")
+	public float getReach() {
+		return 7.0F;
 	}
 
 	@Override

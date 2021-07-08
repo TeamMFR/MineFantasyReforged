@@ -1,14 +1,10 @@
 package minefantasy.mfr.api.weapon;
 
-import net.minecraft.item.ItemStack;
-
 public interface IExtendedReachWeapon {
 	/**
-	 * The distance the weapon will hit (note this will ONLY work for main hand
-	 * weapons)
+	 * The distance the weapon will hit as an addition to the standard hit distance, which is 4
 	 *
-	 * @param stack
-	 * @return
+	 * @return the reach modifier
 	 */
-	float getReachModifierInBlocks(ItemStack stack);
+	float getReachModifierInBlocks();
 }

@@ -21,6 +21,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -29,6 +30,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
+@Optional.Interface(iface = "net.shadowmage.ancientwarfare.npc.item.IExtendedReachWeapon", modid = "ancientwarfarenpc")
 public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 	/**
 	 * The spear is for the defensive player, it has a long reach, knockback and can
@@ -52,8 +54,13 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 	}
 
 	@Override
-	public float getReachModifierInBlocks(ItemStack stack) {
+	public float getReachModifierInBlocks() {
 		return 3.0F;
+	}
+
+	@Optional.Method(modid = "ancientwarfarenpc")
+	public float getReach() {
+		return 7.0F;
 	}
 
 	@Override

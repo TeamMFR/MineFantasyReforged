@@ -298,7 +298,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		if (this instanceof IExtendedReachWeapon) {
 			list.add("");
 
-			float reach = ((IExtendedReachWeapon) this).getReachModifierInBlocks(weapon);
+			float reach = ((IExtendedReachWeapon) this).getReachModifierInBlocks();
 
 			if (reach > 0) {
 				list.add(TextFormatting.DARK_GREEN + I18n.format(
@@ -322,17 +322,18 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	 * and the entity is not attacked.
 	 *
 	 * @param stack The Item being used
-	 * @param player The player that is attacking
-	 * @param entity The entity being attacked
+	 * @param entityLiving The player that is attacking
 	 * @return True to cancel the rest of the interaction.
 	 */
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!allowOffhand(player, EnumHand.OFF_HAND)){
-			TacticalManager.throwPlayerOffBalance(player, 5F);
-			StaminaBar.modifyStaminaValue(player, -95F);
+	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+		if (entityLiving instanceof EntityPlayer){
+			if (!allowOffhand(entityLiving, EnumHand.OFF_HAND)){
+				TacticalManager.throwPlayerOffBalance((EntityPlayer) entityLiving, 5F);
+				StaminaBar.modifyStaminaValue(entityLiving, -95F);
+			}
 		}
-		return !allowOffhand(player, EnumHand.OFF_HAND);
+		return false;
 	}
 
 	@Override

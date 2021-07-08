@@ -7,7 +7,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.fml.common.Optional;
 
+@Optional.Interface(iface = "net.shadowmage.ancientwarfare.npc.item.IExtendedReachWeapon", modid = "ancientwarfarenpc")
 public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtendedReachWeapon {
 
 	/**
@@ -97,8 +99,13 @@ public abstract class ItemHeavyWeapon extends ItemWeaponMFR implements IExtended
 	}
 
 	@Override
-	public float getReachModifierInBlocks(ItemStack stack) {
+	public float getReachModifierInBlocks() {
 		return 2.0F;
+	}
+
+	@Optional.Method(modid = "ancientwarfarenpc")
+	public float getReach() {
+		return 6.0F;
 	}
 
 	@Override

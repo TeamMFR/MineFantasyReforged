@@ -1,9 +1,11 @@
 package minefantasy.mfr.proxy;
 
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
+import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
+import minefantasy.mfr.client.render.BlockingAnimationHandler;
 import minefantasy.mfr.client.render.HudHandler;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
@@ -39,7 +41,6 @@ import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
-import minefantasy.mfr.client.render.BlockingAnimationHandler;
 import minefantasy.mfr.mechanics.ExtendedReach;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
@@ -128,7 +129,7 @@ public class ClientProxy extends ClientProxyBase {
 	public void registerTickHandlers() {
 		super.registerTickHandlers();
 		FMLCommonHandler.instance().bus().register(new PlayerTickHandler());
-		FMLCommonHandler.instance().bus().register(new ExtendedReach());
+		MinecraftForge.EVENT_BUS.register(new ExtendedReach());
 		MinecraftForge.EVENT_BUS.register(new HudHandler());
 		FMLCommonHandler.instance().bus().register(new ClientTickHandler());
 		MinecraftForge.EVENT_BUS.register(new BlockingAnimationHandler());
