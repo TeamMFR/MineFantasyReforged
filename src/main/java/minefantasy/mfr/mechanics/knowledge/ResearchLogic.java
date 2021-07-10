@@ -72,9 +72,6 @@ public class ResearchLogic {
 
 	public static boolean hasInfoUnlocked(EntityPlayer player, InformationBase base) {
 		if (player != null) {
-			if (player.isCreative()){
-				return true;
-			}
 			if (base.isPreUnlocked())
 				return base.parentInfo == null || hasInfoUnlocked(player, base.parentInfo);
 
@@ -109,6 +106,20 @@ public class ResearchLogic {
 	}
 
 	/**
+	 * Used to allow creative bypass without breaking research unlocking
+	 * @param player the Player to check for research
+	 * @param research the research to check if the player has it
+	 * @return if the player has the specified research or bypass if Player is in Creative
+	 */
+
+	public static boolean getResearchCheck(EntityPlayer player, InformationBase research) {
+		if (player.capabilities.isCreativeMode){
+			return true;
+		}
+		return ResearchLogic.hasInfoUnlocked(player, research);
+	}
+
+	/**
 	 * Returns true if the parent has been unlocked, or there is no parent
 	 */
 	public static boolean canUnlockInfo(EntityPlayer player, InformationBase base) {
@@ -116,7 +127,7 @@ public class ResearchLogic {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static int func_150874_c(EntityPlayer player, InformationBase base) {
+	public static int getResearchVisibility(EntityPlayer player, InformationBase base) {
 		if (hasInfoUnlocked(player, base)) {
 			return 0;
 		} else {

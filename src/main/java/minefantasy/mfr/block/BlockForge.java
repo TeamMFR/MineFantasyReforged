@@ -192,7 +192,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 					}
 					return true;
 				}
-				if (!world.isRemote && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.smeltDragonforge) && held.getItem() == MineFantasyItems.DRAGON_HEART) {
+				if (!world.isRemote && ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.smeltDragonforge) && held.getItem() == MineFantasyItems.DRAGON_HEART) {
 					if (held.getCount() == 1) {
 						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 					} else {

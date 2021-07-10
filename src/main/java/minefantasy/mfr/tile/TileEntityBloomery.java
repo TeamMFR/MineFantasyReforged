@@ -152,8 +152,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		ItemStack res = getResult();
 		if (world.canBlockSeeSky(pos.add(0, 1, 0)) && res != null && !isActive) {
 			if (!world.isRemote) {
-				if (res.getItem() == Items.IRON_INGOT
-						&& !ResearchLogic.hasInfoUnlocked(user, MineFantasyKnowledgeList.smelt_iron)) {
+				if (res.getItem() == Items.IRON_INGOT && !ResearchLogic.getResearchCheck(user, MineFantasyKnowledgeList.smelt_iron)) {
 					return false;
 				}
 				isActive = true;

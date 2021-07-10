@@ -307,11 +307,11 @@ public class KnowledgePageRegistry {
 						"encrusted_ingot", "black_steel_ingot", "silver_ingot", "red_steel_ingot", "blue_steel_ingot",
 						"adamantium_ingot", "mithril_ingot", "ignotumite_ingot", "mithium_ingot", "ender_ingot", "tungsten_ingot", "obsidian_ingot")));
 
-		MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageText("knowledge.smeltCopper.1"));
-		MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageText("knowledge.smeltBronze.1"));
+		MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageText("knowledge.smelt_copper.1"));
+		MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageText("knowledge.smelt_bronze.1"));
 
 		if (ConfigHardcore.HCCreduceIngots) {
-			MineFantasyKnowledgeList.smelt_iron.addPages(new EntryPageText("knowledge.smeltIron.1"));
+			MineFantasyKnowledgeList.smelt_iron.addPages(new EntryPageText("knowledge.smelt_iron.1"));
 			MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageRecipeBloom(new ItemStack(MineFantasyBlocks.COPPER_ORE), new ItemStack(MineFantasyItems.COPPER_INGOT)));
 			MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageRecipeBloom(new ItemStack(MineFantasyBlocks.TIN_ORE), new ItemStack(MineFantasyItems.TIN_INGOT)));
 		} else {
@@ -319,17 +319,17 @@ public class KnowledgePageRegistry {
 			MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageSmelting(new ItemStack(MineFantasyBlocks.TIN_ORE), new ItemStack(MineFantasyItems.TIN_INGOT)));
 		}
 		MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.bronze));
-		MineFantasyKnowledgeList.smelt_iron.addPages(new EntryPageText("knowledge.smeltIron.2"));
+		MineFantasyKnowledgeList.smelt_iron.addPages(new EntryPageText("knowledge.smelt_iron.2"));
 
 		MineFantasyKnowledgeList.smelt_pig_iron.addPages(
-				new EntryPageText("knowledge.smeltPig.1"),
+				new EntryPageText("knowledge.smelt_pig_iron.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("prepared_iron")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("prepared_iron-2")),
 				new EntryPageBlastFurnace(MineFantasyItems.PREPARED_IRON, pig_iron),
 				new EntryPageText("knowledge.blastfurn.9"));
 
 		MineFantasyKnowledgeList.smelt_steel.addPages(
-				new EntryPageText("knowledge.smeltSteel.1"),
+				new EntryPageText("knowledge.smelt_steel.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("steel_bar")));
 
 		if (!ConfigHardcore.HCCreduceIngots) {
@@ -337,12 +337,12 @@ public class KnowledgePageRegistry {
 		}
 
 		MineFantasyKnowledgeList.smelt_encrusted.addPages(
-				new EntryPageText("knowledge.smeltEncrusted.1"),
+				new EntryPageText("knowledge.smelt_encrusted.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("diamond_shards")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bar_encrusted")));
 
 		MineFantasyKnowledgeList.smelt_obsidian.addPages(
-				new EntryPageText("knowledge.smeltObsidian.1"),
+				new EntryPageText("knowledge.smelt_obsidian.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("obsidian_rock")),
 				new EntryPageCrucible(MineFantasyKnowledgeList.obsidalloy));
 
@@ -701,8 +701,6 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.compPlate.addPages(
 				new EntryPageText("knowledge.compPlate.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bar_composite_alloy")));
-		// KnowledgeListMFR.craftOrnateWeapons.addPages(new
-		// EntryPageText("knowledge.craftOrnateWeapons.1"));
 
 		MineFantasyKnowledgeList.repair_basic.addPages(
 				new EntryPageText("knowledge.repair_basic.1"),
@@ -920,29 +918,29 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("broad_head")));
 
 		MineFantasyKnowledgeList.smelt_black_steel.addPages(
-				new EntryPageText("knowledge.smeltBlackSteel.1"),
+				new EntryPageText("knowledge.smelt_black_steel.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("obsidian_rock")),
 				new EntryPageCrucible(MineFantasyKnowledgeList.black),
 				new EntryPageBlastFurnace(MineFantasyItems.BLACK_STEEL_WEAK_INGOT, black));
 
 		MineFantasyKnowledgeList.smelt_red_steel.addPages(
-				new EntryPageText("knowledge.smeltRedSteel.1"),
+				new EntryPageText("knowledge.smelt_red_steel.1"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.red),
 				new EntryPageBlastFurnace(MineFantasyItems.RED_STEEL_WEAK_INGOT, red));
 
 		MineFantasyKnowledgeList.smelt_blue_steel.addPages(
-				new EntryPageText("knowledge.smeltBlueSteel.1"),
+				new EntryPageText("knowledge.smelt_blue_steel.1"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.blue),
 				new EntryPageBlastFurnace(MineFantasyItems.BLUE_STEEL_WEAK_INGOT, blue));
 
 		MineFantasyKnowledgeList.smelt_adamantium.addPages(
-				new EntryPageText("knowledge.smeltAdamantium.1"),
-				new EntryPageText("knowledge.smeltAdamantium.2"),
+				new EntryPageText("knowledge.smelt_adamantium.1"),
+				new EntryPageText("knowledge.smelt_adamantium.2"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.adamantium));
 
 		MineFantasyKnowledgeList.smelt_mithril.addPages(
-				new EntryPageText("knowledge.smeltMithril.1"),
-				new EntryPageText("knowledge.smeltMithril.2"),
+				new EntryPageText("knowledge.smelt_mithril.1"),
+				new EntryPageText("knowledge.smelt_mithril.2"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.mithril));
 
 		MineFantasyKnowledgeList.smeltMaster.addPages(
@@ -952,15 +950,15 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("trilogy_jewel")));
 
 		MineFantasyKnowledgeList.smelt_ignotumite.addPages(
-				new EntryPageText("knowledge.smeltIgnotumite.1"),
+				new EntryPageText("knowledge.smelt_ignotumite.1"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.ignotumite));
 
 		MineFantasyKnowledgeList.smelt_mithium.addPages(
-				new EntryPageText("knowledge.smeltMithium.1"),
+				new EntryPageText("knowledge.smelt_mithium.1"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.mithium));
 
 		MineFantasyKnowledgeList.smelt_ender.addPages(
-				new EntryPageText("knowledge.smeltEnderforge.1"),
+				new EntryPageText("knowledge.smelt_ender.1"),
 				new EntryPageCrucible(MineFantasyKnowledgeList.enderforge));
 
 		MineFantasyKnowledgeList.firepit.addPages(

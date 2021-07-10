@@ -85,15 +85,15 @@ public class BlockBombPress extends BlockTileEntity<TileEntityBombPress> impleme
 	 * Called upon block activation (right click on the block.)
 	 */
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!ResearchLogic.hasInfoUnlocked(user, MineFantasyKnowledgeList.bombs)) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.bombs)) {
 			if (world.isRemote)
-				user.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
+				player.sendMessage(new TextComponentString(I18n.format("knowledge.unknownUse")));
 			return false;
 		}
 		TileEntityBombPress tile = (TileEntityBombPress) getTile(world, pos);
 		if (tile != null) {
-			tile.use(user);
+			tile.use(player);
 		}
 		return true;
 	}

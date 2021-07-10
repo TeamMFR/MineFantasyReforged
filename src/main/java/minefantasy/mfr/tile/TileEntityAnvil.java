@@ -284,8 +284,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				for (int y = -4; y <= 4; y++) {
 					for (int z = -4; z <= 4; z++) {
 						TileEntity tile = world.getTileEntity(pos.add(x, y, z));
-						if (player != null && ResearchLogic.hasInfoUnlocked(player, MineFantasyKnowledgeList.smeltDragonforge)
-								&& tile != null && tile instanceof TileEntityForge) {
+						if (player != null && ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.smeltDragonforge)
+								&& tile instanceof TileEntityForge) {
 							if (((TileEntityForge) tile).dragonHeartPower > 0) {
 								hasHeart = true;
 								((TileEntityForge) tile).dragonHeartPower = 0;

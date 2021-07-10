@@ -111,7 +111,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 	@Override
 	protected void mouseClicked(int x, int y, int button) throws IOException {
 		if (selected == null && button == 0 && highlighted != null) {
-			if (ResearchLogic.hasInfoUnlocked(player, highlighted) && !highlighted.getPages().isEmpty()) {
+			if (ResearchLogic.getResearchCheck(player, highlighted) && !highlighted.getPages().isEmpty()) {
 				player.openGui(MineFantasyReforged.INSTANCE, NetworkHandler.GUI_RESEARCH_BOOK, player.world, 0, highlighted.ID, 0);
 			} else if (highlighted.isEasy() && ResearchLogic.canPurchase(player, highlighted)) {
 				selected = highlighted;
@@ -340,9 +340,9 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				k3 = achievement1.displayRow * 24 - l + 11;
 				l4 = achievement1.parentInfo.displayColumn * 24 - k + 11;
 				int l3 = achievement1.parentInfo.displayRow * 24 - l + 11;
-				boolean flag5 = ResearchLogic.hasInfoUnlocked(player, achievement1);
-				boolean flag6 = ResearchLogic.canUnlockInfo(player, achievement1);
-				researchVisibility = ResearchLogic.func_150874_c(player, achievement1);
+				boolean flag5 = ResearchLogic.getResearchCheck(player, achievement1);
+				boolean flag6 = ResearchLogic.getResearchCheck(player, achievement1);
+				researchVisibility = ResearchLogic.getResearchVisibility(player, achievement1);
 				j4 = -16777216;
 
 				if (flag5) {
@@ -384,10 +384,10 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			j5 = achievement2.displayRow * 24 - l;
 
 			if (i5 >= -24 && j5 >= -24 && i5 <= 224.0F * GuiKnowledgeMenu.scaleMultiplier && j5 <= 155.0F * GuiKnowledgeMenu.scaleMultiplier) {
-				researchVisibility = ResearchLogic.func_150874_c(player, achievement2);
+				researchVisibility = ResearchLogic.getResearchVisibility(player, achievement2);
 				float f6;
 
-				if (ResearchLogic.hasInfoUnlocked(player, achievement2)) {
+				if (ResearchLogic.getResearchCheck(player, achievement2)) {
 					f6 = 0.75F;
 					GlStateManager.color(f6, f6, f6, 1.0F);
 				} else if (ResearchLogic.canUnlockInfo(player, achievement2)) {
@@ -464,7 +464,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 			String s2 = achievement.getDescription();
 			i5 = mx + 12;
 			j5 = my - 4;
-			researchVisibility = ResearchLogic.func_150874_c(player, achievement);
+			researchVisibility = ResearchLogic.getResearchVisibility(player, achievement);
 
 			if (!ResearchLogic.canUnlockInfo(player, achievement)) {
 				String tooltipString;
@@ -491,7 +491,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				j4 = Math.max(this.fontRenderer.getStringWidth(s1), 120);
 				int k5 = this.fontRenderer.getWordWrappedHeight(s2, j4);
 
-				if (ResearchLogic.hasInfoUnlocked(player, achievement)
+				if (ResearchLogic.getResearchCheck(player, achievement)
 						|| ResearchLogic.canUnlockInfo(player, achievement)) {
 					k5 += 12;
 				}
@@ -499,7 +499,7 @@ public class GuiKnowledgeMenu extends GuiScreen {
 				this.drawGradientRect(i5 - 3, j5 - 3, i5 + j4 + 3, j5 + k5 + 3 + 12, -1073741824, -1073741824);
 				this.fontRenderer.drawSplitString(s2, i5, j5 + 12, j4, -6250336);
 
-				if (ResearchLogic.hasInfoUnlocked(player, achievement)) {
+				if (ResearchLogic.getResearchCheck(player, achievement)) {
 					this.fontRenderer.drawStringWithShadow(I18n.format("information.discovered"), i5,
 							j5 + k5 + 4, -7302913);
 				} else if (InformationBase.easyResearch && ResearchLogic.canUnlockInfo(player, achievement)) {
