@@ -128,7 +128,7 @@ public class ItemLance extends ItemSpear {
 
 	@Override
 	public float getAttackSpeed(ItemStack item) {
-		return super.getAttackSpeed(item) + -1.5F;
+		return super.getAttackSpeed(item) + -1F;
 	}
 
 	@Override

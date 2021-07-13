@@ -73,7 +73,7 @@ public class ItemHalbeard extends ItemSpear {
 
 	@Override
 	public float getAttackSpeed(ItemStack item) {
-		return super.getAttackSpeed(item) + -1F;
+		return super.getAttackSpeed(item) + -0.3F;
 	}
 
 	/**

@@ -76,12 +76,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem, IClientRegister {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public static float axeAPModifier = -0.1F;
-	protected static float speedModHeavy = -1F;
-	protected static float speedSword = -1F;
-	protected static float speedAxe = -1.5F;
-	protected static float speedMace = -2F;
-	protected static float speedKatana = -0.5F;
-	protected static float speedSpear = -2F;
+	protected static float speedModHeavy = -0.4F;
+	protected static float speedSword = -2.4F;
+	protected static float speedAxe = -2.6F;
+	protected static float speedMace = -2.8F;
+	protected static float speedKatana = -2F;
+	protected static float speedDagger = -1.5F;
+	protected static float speedSpear = -2.5F;
 	protected static float damageModSword = 0.0F;
 	protected static float damageModAxe = 0.5F;
 	protected static float damageModMace = 1.0F;

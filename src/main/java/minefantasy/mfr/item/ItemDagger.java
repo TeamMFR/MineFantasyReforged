@@ -80,7 +80,7 @@ public class ItemDagger extends ItemWeaponMFR {
 
 	@Override
 	public float getAttackSpeed(ItemStack item) {
-		return speedKatana;
+		return speedDagger;
 	}
 
 	/**
