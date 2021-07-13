@@ -16,6 +16,8 @@ import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.WeaponClass;
+import minefantasy.mfr.container.ContainerAnvil;
+import minefantasy.mfr.container.ContainerForge;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
@@ -69,7 +71,10 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.ContainerPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -92,6 +97,7 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.entity.player.UseHoeEvent;
@@ -705,6 +711,26 @@ public final class MFREventHandler {
 			if (ConfigHardcore.HCChotBurn && !item.isEmpty() && isHotItem(item)) {
 				if (event.isCancelable()) {
 					event.setCanceled(true);
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onContainerClosed(PlayerContainerEvent.Close event){
+		EntityPlayer player = event.getEntityPlayer();
+		Container container = event.getContainer();
+		if (!(container instanceof ContainerAnvil || container instanceof ContainerForge || container instanceof ContainerPlayer)){
+			for (Slot slot : container.inventorySlots){
+				int slotIndex = slot.slotNumber;
+				if (slotIndex < (container.inventorySlots.size() - player.inventory.mainInventory.size())){
+					ItemStack stack = slot.getStack().copy();
+					if (stack.getItem() instanceof IHotItem){
+
+						player.dropItem(stack, false);
+						container.putStackInSlot(slotIndex, ItemStack.EMPTY);
+						container.detectAndSendChanges();
+					}
 				}
 			}
 		}

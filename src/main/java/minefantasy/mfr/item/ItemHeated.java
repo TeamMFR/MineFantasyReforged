@@ -13,6 +13,8 @@ import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
@@ -34,6 +36,7 @@ import java.util.List;
 
 public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	public static boolean renderDynamicHotIngotRendering = true;
+	private int ticksExisted;
 
 	public ItemHeated() {
 		super("hot_item");
@@ -289,6 +292,47 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 			return (int) (255 - ((255 / 55) * percent));
 		}
 		return 0;
+	}
+
+
+	/**
+	 * Called each tick as long the item is on a player inventory. Uses by maps to check if is on a player hand and
+	 * update it's contents.
+	 */
+	@Override
+	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
+		ticksExisted++;
+		if (ticksExisted % 80 == 0){
+			if (stack.getItem() instanceof IHotItem){
+				setTemp(stack, getTemp(stack) - 1);
+
+				if (getTemp(stack) <= 0){
+					ItemStack cooledStack = getStack(stack);
+					cooledStack.setCount(stack.getCount());
+					entity.replaceItemInInventory(itemSlot, cooledStack);
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean onEntityItemUpdate(EntityItem entityItem) {
+		ItemStack stack = entityItem.getItem();
+		if (entityItem.getItem().getItem() instanceof ItemHeated){
+			setTemp(stack, getTemp(stack) - 1);
+
+			ItemStack cooledStack = getStack(stack);
+			cooledStack.setCount(stack.getCount());
+			if (getTemp(stack) <= 0){
+				entityItem.setItem(cooledStack);
+			}
+			if (entityItem.isInWater()){
+				entityItem.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 1F, 1F);
+				entityItem.setItem(cooledStack);
+
+			}
+		}
+		return false;
 	}
 
 	@Override

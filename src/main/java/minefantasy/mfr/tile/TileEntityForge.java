@@ -10,7 +10,6 @@ import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockForge;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerForge;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.Functions;
@@ -187,7 +186,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	}
 
 	private void modifyItem(ItemStack item) {
-		if (item.getItem() == MineFantasyItems.HOT_ITEM) {
+		if (item.getItem() instanceof ItemHeated) {
 			int temp = ItemHeated.getTemp(item);
 			if (temp > temperature) {
 				int i = (int) (temperature / 5F);
@@ -202,6 +201,17 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			}
 			if (temp >= 0) {
 				ItemHeated.setTemp(item, Math.max(0, temp));
+			}
+			if (temperature <= 0){
+				ItemHeated.setTemp(item, ItemHeated.getTemp(item) - 10);
+
+				if (ItemHeated.getTemp(item) <= 0){
+					ItemStack stack = this.getInventory().getStackInSlot(0);
+					ItemStack cooledStack =  ItemHeated.getStack(stack);
+					cooledStack.setCount(stack.getCount());
+					this.getInventory().setStackInSlot(0, cooledStack);
+				}
+
 			}
 		} else if (temperature > 0) {
 			this.getInventory().setStackInSlot(0, ItemHeated.createHotItem(item));

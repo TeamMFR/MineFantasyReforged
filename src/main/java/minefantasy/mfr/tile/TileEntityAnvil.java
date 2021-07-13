@@ -36,6 +36,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -44,9 +45,11 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.util.UUID;
+
 import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
-public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityBalance {
+public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityBalance, ITickable {
 
 	private static final String LEFT_HIT_TAG = "left_hit";
 	private static final String RIGHT_HIT_TAG = "right_hit";
@@ -71,7 +74,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	public float rightHit = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
-	private String lastPlayerHit = "";  // TODO: store entity UUID instead of string
+	private UUID lastPlayerHit;
 	private Tool requiredToolType = Tool.HAMMER;
 	private String requiredResearch = "";
 	private boolean outputHot = false;
@@ -108,6 +111,24 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
 		return true;
+	}
+
+	@Override
+	public void update() {
+		if (!world.isRemote && world.getTotalWorldTime() % 120 == 0){
+			for (int slot = 0; slot < this.getInventory().getSlots(); slot++){
+				ItemStack stack = this.getInventory().getStackInSlot(slot);
+				if (stack.getItem() instanceof IHotItem){
+					ItemHeated.setTemp(stack, ItemHeated.getTemp(stack) -1);
+
+					if (ItemHeated.getTemp(stack) <= 0){
+						ItemStack cooledStack =  ItemHeated.getStack(stack);
+						cooledStack.setCount(stack.getCount());
+						this.getInventory().setStackInSlot(slot,cooledStack);
+					}
+				}
+			}
+		}
 	}
 
 	// FIXME: this is still probably being called more times than necessary
@@ -167,7 +188,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			} else {
 				world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_FAIL, SoundCategory.NEUTRAL, 0.25F, 1.0F);
 			}
-			lastPlayerHit = user.getName();
+			lastPlayerHit = user.getUniqueID();
 			updateCraftingData();
 
 			return true;
@@ -200,8 +221,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				result = modifyArmour(result);
 			}
 
-			if (result.getMaxStackSize() == 1 && !lastPlayerHit.isEmpty()) {
-				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastPlayerHit);
+			if (result.getMaxStackSize() == 1 && lastPlayerHit != null) {
+				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
 			}
 
 			int temp = this.averageTemp();
@@ -274,7 +295,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	private ItemStack modifySpecials(ItemStack result) {
 		boolean hasHeart = false;
 		boolean isTool = result.getMaxStackSize() == 1 && result.isItemStackDamageable();
-		EntityPlayer player = world.getPlayerEntityByName(lastPlayerHit);
+		EntityPlayer player = world.getPlayerEntityByUUID(lastPlayerHit);
 
 		Item dragonCraft = SpecialForging.getDragonCraft(result);
 
@@ -397,7 +418,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				boolean delay = true;
 				double[] positions = new double[] {pos.getX() + f, pos.getY() + f1 + 1, pos.getZ() + f2};
 				if (world.getBlockState(pos.add(0, 1, 0)).getMaterial().isSolid() && lastPlayerHit != null) {
-					EntityPlayer smith = world.getPlayerEntityByName(lastPlayerHit);
+					EntityPlayer smith = world.getPlayerEntityByUUID(lastPlayerHit);
 					if (smith != null) {
 						delay = false;
 						positions = new double[] {smith.posX, smith.posY, smith.posZ};
