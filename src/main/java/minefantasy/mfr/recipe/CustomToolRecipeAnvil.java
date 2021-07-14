@@ -20,8 +20,8 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 	 * Checks if the region of a crafting inventory is match for the recipe.
 	 */
 	protected boolean checkMatch(InventoryCrafting matrix, int x, int y, boolean b) {
-		String wood = "";
-		String metal = "";
+		String wood = null;
+		String metal = null;
 
 		for (int matrixX = 0; matrixX < ShapelessAnvilRecipes.globalWidth; ++matrixX) {
 			for (int matrixY = 0; matrixY < ShapelessAnvilRecipes.globalHeight; ++matrixY) {
@@ -41,8 +41,29 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 
 				if (!inputItem.isEmpty() || recipeItem != null && !recipeItem.isEmpty()) {
 
-					wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
-					metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
+					String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
+					String component_metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
+
+					// CHECK CUSTOM METAL
+					if (component_metal != null) {
+						if (metal == null) {
+							metal = component_metal;
+						} else {
+							if (!metal.equalsIgnoreCase(component_metal)) {
+								return false;
+							}
+						}
+					}
+					// CHECK CUSTOM WOOD
+					if (component_wood != null) {
+						if (wood == null) {
+							wood = component_wood;
+						} else {
+							if (!wood.equalsIgnoreCase(component_wood)) {
+								return false;
+							}
+						}
+					}
 
 					// HEATING
 					if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {

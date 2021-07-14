@@ -128,8 +128,7 @@ public class CraftingManagerAnvil {
 
 		IAnvilRecipe recipe;
 		if (recipeType == (byte) 1) {
-			recipe = new CustomToolRecipeAnvil(var5, var6, var15, result, tool, time, hammer, anvil, hot, research,
-					skill);
+			recipe = new CustomToolRecipeAnvil(var5, var6, var15, result, tool, time, hammer, anvil, hot, research, skill);
 		} else {
 			recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, hot, research, skill);
 		}

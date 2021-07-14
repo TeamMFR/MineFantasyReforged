@@ -318,7 +318,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entityItem) {
 		ItemStack stack = entityItem.getItem();
-		if (entityItem.getItem().getItem() instanceof ItemHeated){
+		if (entityItem.getItem().getItem() instanceof ItemHeated && !entityItem.hasCustomName()){
 			setTemp(stack, getTemp(stack) - 1);
 
 			ItemStack cooledStack = getStack(stack);

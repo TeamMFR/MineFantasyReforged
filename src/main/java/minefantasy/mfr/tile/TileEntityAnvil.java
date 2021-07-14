@@ -45,8 +45,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import java.util.UUID;
-
 import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
 public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityBalance, ITickable {
@@ -74,7 +72,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	public float rightHit = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
-	private UUID lastPlayerHit;
+	private String lastPlayerHit;
 	private Tool requiredToolType = Tool.HAMMER;
 	private String requiredResearch = "";
 	private boolean outputHot = false;
@@ -188,7 +186,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			} else {
 				world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_FAIL, SoundCategory.NEUTRAL, 0.25F, 1.0F);
 			}
-			lastPlayerHit = user.getUniqueID();
+			lastPlayerHit = user.getName();
 			updateCraftingData();
 
 			return true;
@@ -221,7 +219,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				result = modifyArmour(result);
 			}
 
-			if (result.getMaxStackSize() == 1 && lastPlayerHit != null) {
+			if (result.getMaxStackSize() == 1 && !lastPlayerHit.isEmpty()) {
 				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
 			}
 
@@ -295,7 +293,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	private ItemStack modifySpecials(ItemStack result) {
 		boolean hasHeart = false;
 		boolean isTool = result.getMaxStackSize() == 1 && result.isItemStackDamageable();
-		EntityPlayer player = world.getPlayerEntityByUUID(lastPlayerHit);
+		EntityPlayer player = world.getPlayerEntityByName(lastPlayerHit);
 
 		Item dragonCraft = SpecialForging.getDragonCraft(result);
 
@@ -418,7 +416,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				boolean delay = true;
 				double[] positions = new double[] {pos.getX() + f, pos.getY() + f1 + 1, pos.getZ() + f2};
 				if (world.getBlockState(pos.add(0, 1, 0)).getMaterial().isSolid() && lastPlayerHit != null) {
-					EntityPlayer smith = world.getPlayerEntityByUUID(lastPlayerHit);
+					EntityPlayer smith = world.getPlayerEntityByName(lastPlayerHit);
 					if (smith != null) {
 						delay = false;
 						positions = new double[] {smith.posX, smith.posY, smith.posZ};
