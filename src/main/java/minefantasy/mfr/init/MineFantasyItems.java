@@ -671,7 +671,6 @@ public class MineFantasyItems {
 		PASTRY = new ItemUnfinishedFood("pastry").setMaxStackSize(64);
 		RAW_BREAD = new ItemUnfinishedFood("raw_bread").setMaxStackSize(64);
 		JUG_UNCOOKED = new ItemJug("uncooked");
-		JUG_EMPTY = new ItemJug("empty").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG);
 		JUG_WATER = new ItemJug("water").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_WATER).setContainerItem(JUG_EMPTY);
 		JUG_MILK = new ItemJug("milk").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_MILK).setContainerItem(JUG_EMPTY);
 		BURNT_FOOD = new ItemBurntFood("burnt_food");
@@ -1285,7 +1284,8 @@ public class MineFantasyItems {
 		ORE_TUNGSTEN = new ItemBaseMFR("ore_tungsten", Rarity.RARE).setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		HOT_ITEM = new ItemHeated();
-
+		
+		JUG_EMPTY = new ItemJug("empty").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG);
 		JUG_PLANT_OIL = new ItemComponentMFR("jug_plant_oil", 0).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_OIL).setContainerItem(JUG_EMPTY);
 
 		TALISMAN_LESSER = new ItemBaseMFR("talisman_lesser", Rarity.RARE).setCreativeTab(MineFantasyTabs.tabMaterials);

@@ -171,7 +171,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 			} else if (this.getInventory().getStackInSlot(output).getItem() == result.getItem()) {
 				this.getInventory().getStackInSlot(output).grow(result.getCount()); // Forge BugFix: Results may have multiple items
 			}
-			consumeResources();
+			consumeResources(user);
 		}
 		onInventoryChanged();
 		progress = 0;
@@ -210,35 +210,6 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		return item.getTagCompound();
 	}
 
-	private void dropItem(ItemStack itemstack) {
-		if (!itemstack.isEmpty()) {
-			float f = world.rand.nextFloat() * 0.8F + 0.1F;
-			float f1 = world.rand.nextFloat() * 0.8F + 0.1F;
-			float f2 = world.rand.nextFloat() * 0.8F + 0.1F;
-
-			while (itemstack.getCount() > 0) {
-				int j1 = world.rand.nextInt(21) + 10;
-
-				if (j1 > itemstack.getCount()) {
-					j1 = itemstack.getCount();
-				}
-
-				itemstack.shrink(j1);
-				EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-				if (itemstack.hasTagCompound()) {
-					entityitem.getItem().setTagCompound(itemstack.getTagCompound().copy());
-				}
-
-				float f3 = 0.05F;
-				entityitem.motionX = (float) world.rand.nextGaussian() * f3;
-				entityitem.motionY = (float) world.rand.nextGaussian() * f3 + 0.2F;
-				entityitem.motionZ = (float) world.rand.nextGaussian() * f3;
-				world.spawnEntity(entityitem);
-			}
-		}
-	}
-
 	public String getRequiredToolType() {
 		return requiredToolType.getName();
 	}
@@ -260,16 +231,20 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		return this.requiredCarpenterTier;
 	}
 
-	public void consumeResources() {
+	public void consumeResources(EntityPlayer player) {
 		for (int slot = 0; slot < getOutputSlotNum(); slot++) {
 			ItemStack item = getInventory().getStackInSlot(slot);
-			if (!item.isEmpty() && item.getItem() != null && !item.getItem().getContainerItem(item).isEmpty()) {
+			if (!item.isEmpty() && !item.getItem().getContainerItem(item).isEmpty()) {
 				if (item.getCount() == 1) {
 					getInventory().setStackInSlot(slot, item.getItem().getContainerItem(item));
 				} else {
 					ItemStack drop = processSurplus(item.getItem().getContainerItem(item));
-					if (!drop.isEmpty()) {
-						this.dropItem(drop);
+					if (!drop.isEmpty() && player != null) {
+						EntityItem entityItem = player.dropItem(drop, false);
+						if (entityItem != null){
+							entityItem.setPosition(player.posX, player.posY, player.posZ);
+							entityItem.setNoPickupDelay();
+						}
 					}
 					this.getInventory().extractItem(slot, 1, false);
 				}
@@ -286,19 +261,19 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 				return ItemStack.EMPTY;// If item was sorted
 			}
 
-			int s = getInventory().getSlots() - 4 + a;
-			ItemStack slot = getInventory().getStackInSlot(s);
-			if (slot.isEmpty()) {
-				getInventory().setStackInSlot(s, item);
+			int slot = getInventory().getSlots() - 4 + a;
+			ItemStack stackInSlot = getInventory().getStackInSlot(slot);
+			if (stackInSlot.isEmpty()) {
+				getInventory().setStackInSlot(slot, item);
 				return ItemStack.EMPTY;// All Placed
 			} else {
-				if (slot.isItemEqual(item) && slot.getCount() < slot.getMaxStackSize()) {
-					if (slot.getCount() + item.getCount() <= slot.getMaxStackSize()) {
-						slot.grow(item.getCount());
+				if (stackInSlot.isItemEqual(item) && stackInSlot.getCount() < stackInSlot.getMaxStackSize()) {
+					if (stackInSlot.getCount() + item.getCount() <= stackInSlot.getMaxStackSize()) {
+						stackInSlot.grow(item.getCount());
 						return ItemStack.EMPTY;// All Shared
 					} else {
-						int room_left = slot.getMaxStackSize() - slot.getCount();
-						slot.grow(room_left);
+						int room_left = stackInSlot.getMaxStackSize() - stackInSlot.getCount();
+						stackInSlot.grow(room_left);
 						item.shrink(room_left);// Share
 					}
 				}

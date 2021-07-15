@@ -72,7 +72,6 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	public float rightHit = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
-	private String lastPlayerHit;
 	private Tool requiredToolType = Tool.HAMMER;
 	private String requiredResearch = "";
 	private boolean outputHot = false;
@@ -169,7 +168,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 					this.qualityBalance -= (leftHit * mod);
 				}
 				if (qualityBalance >= 1.0F || qualityBalance <= -1.0F) {
-					ruinCraft();
+					ruinCraft(user);
 				}
 
 				world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, rightClick ? 1.2F : 1.0F);
@@ -186,7 +185,6 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			} else {
 				world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_FAIL, SoundCategory.NEUTRAL, 0.25F, 1.0F);
 			}
-			lastPlayerHit = user.getName();
 			updateCraftingData();
 
 			return true;
@@ -195,9 +193,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return false;
 	}
 
-	private void ruinCraft() {
+	private void ruinCraft(EntityPlayer player) {
 		if (!world.isRemote) {
-			consumeResources();
+			consumeResources(player);
 			reassignHitValues();
 			progress = progressMax = qualityBalance = 0;
 		}
@@ -210,7 +208,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	private void craftItem(EntityPlayer lastHit) {
 		if (this.canCraft()) {
-			ItemStack result = modifySpecials(this.resultStack);
+			ItemStack result = modifySpecials(this.resultStack, lastHit);
 			if (result.isEmpty()) {
 				return;
 			}
@@ -219,7 +217,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				result = modifyArmour(result);
 			}
 
-			if (result.getMaxStackSize() == 1 && !lastPlayerHit.isEmpty()) {
+			if (result.getMaxStackSize() == 1 && lastHit != null) {
 				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
 			}
 
@@ -237,15 +235,27 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 					if (getInventory().getStackInSlot(outputSlot).getCount() + result.getCount() <= getStackSize(getInventory().getStackInSlot(outputSlot))) {
 						getInventory().getStackInSlot(outputSlot).grow(result.getCount());
 					} else {
-						dropItem(result);
+						if (lastHit != null){
+							EntityItem entityItem = lastHit.dropItem(result, false);
+							if (entityItem != null){
+								entityItem.setPosition(lastHit.posX, lastHit.posY, lastHit.posZ);
+								entityItem.setNoPickupDelay();
+							}
+						}
 					}
 				} else {
-					dropItem(result);
+					if (lastHit != null){
+						EntityItem entityItem = lastHit.dropItem(result, false);
+						if (entityItem != null){
+							entityItem.setPosition(lastHit.posX, lastHit.posY, lastHit.posZ);
+							entityItem.setNoPickupDelay();
+						}
+					}
 				}
 			}
 
 			addXP(lastHit);
-			consumeResources();
+			consumeResources(lastHit);
 		}
 		onInventoryChanged();
 		progress = 0;
@@ -290,10 +300,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return result;
 	}
 
-	private ItemStack modifySpecials(ItemStack result) {
+	private ItemStack modifySpecials(ItemStack result, EntityPlayer player) {
 		boolean hasHeart = false;
 		boolean isTool = result.getMaxStackSize() == 1 && result.isItemStackDamageable();
-		EntityPlayer player = world.getPlayerEntityByName(lastPlayerHit);
 
 		Item dragonCraft = SpecialForging.getDragonCraft(result);
 
@@ -400,52 +409,20 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return item.getTagCompound();
 	}
 
-	private void dropItem(ItemStack itemstack) {
-		if (!itemstack.isEmpty()) {
-			float f = world.rand.nextFloat() * 0.4F + 0.3F;
-			float f1 = world.rand.nextFloat() * 0.4F + 0.3F;
-			float f2 = world.rand.nextFloat() * 0.4F + 0.3F;
-
-			while (itemstack.getCount() > 0) {
-				int j1 = world.rand.nextInt(21) + 10;
-
-				if (j1 > itemstack.getCount()) {
-					j1 = itemstack.getCount();
-				}
-
-				boolean delay = true;
-				double[] positions = new double[] {pos.getX() + f, pos.getY() + f1 + 1, pos.getZ() + f2};
-				if (world.getBlockState(pos.add(0, 1, 0)).getMaterial().isSolid() && lastPlayerHit != null) {
-					EntityPlayer smith = world.getPlayerEntityByName(lastPlayerHit);
-					if (smith != null) {
-						delay = false;
-						positions = new double[] {smith.posX, smith.posY, smith.posZ};
-					}
-				}
-
-				itemstack.shrink(j1);
-				EntityItem entityitem = new EntityItem(world, positions[0], positions[1], positions[2],
-						new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-				if (itemstack.hasTagCompound()) {
-					entityitem.getItem().setTagCompound(itemstack.getTagCompound().copy());
-				}
-
-				entityitem.setPickupDelay(delay ? 20 : 0);
-				entityitem.motionX = entityitem.motionY = entityitem.motionZ = 0;
-
-				world.spawnEntity(entityitem);
-			}
-		}
-	}
-
-	public void consumeResources() {
+	public void consumeResources(EntityPlayer player) {
 		for (int slot = 0; slot < getInventory().getSlots() - 1; slot++) {
 			ItemStack item = getInventory().getStackInSlot(slot);
 			if (!item.isEmpty() && item.getItem() != null && !item.getItem().getContainerItem(item).isEmpty()) {
 				if (item.getCount() == 1) {
 					getInventory().setStackInSlot(slot, item.getItem().getContainerItem(item));
 				} else {
-					this.dropItem(item.getItem().getContainerItem(item));
+					if (player != null){
+						EntityItem entityItem = player.dropItem(item.getItem().getContainerItem(item), false);
+						if (entityItem != null){
+							entityItem.setPosition(player.posX, player.posY, player.posZ);
+							entityItem.setNoPickupDelay();
+						}
+					}
 					getInventory().extractItem(slot, 1, false);
 				}
 			} else {
@@ -662,7 +639,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			if (!world.isRemote) {
 				progress -= (progressMax / 10F);
 				if (progress < 0) {
-					ruinCraft();
+					ruinCraft(user);
 				}
 			}
 		}
