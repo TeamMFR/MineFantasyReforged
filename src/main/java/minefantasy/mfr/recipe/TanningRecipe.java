@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.constants.Tool;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -12,10 +13,11 @@ public class TanningRecipe {
 	public static final ArrayList<TanningRecipe> recipeList = new ArrayList<>();
 	public int tier;
 	public float time;
-	public ItemStack input, output;
-	public String toolType;
+	public ItemStack input;
+	public ItemStack output;
+	public Tool toolType;
 
-	public TanningRecipe(ItemStack input, float time, int tier, String toolType, ItemStack output) {
+	public TanningRecipe(ItemStack input, float time, int tier, Tool toolType, ItemStack output) {
 		this.time = time;
 		this.tier = tier;
 		this.input = input;
@@ -28,10 +30,10 @@ public class TanningRecipe {
 	}
 
 	public static TanningRecipe addRecipe(Object input, float time, int tier, ItemStack output) {
-		return addRecipe(input, time, tier, "knife", output);
+		return addRecipe(input, time, tier, Tool.KNIFE, output);
 	}
 
-	public static TanningRecipe addRecipe(Object input, float time, int tier, String toolType, ItemStack output) {
+	public static TanningRecipe addRecipe(Object input, float time, int tier, Tool toolType, ItemStack output) {
 		TanningRecipe recipe = new TanningRecipe(convertItem(input), time, tier, toolType, output);
 		recipeList.add(recipe);
 		return recipe;

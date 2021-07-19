@@ -24,7 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class ItemMobSpawner extends ItemComponentMFR {
+public class ItemMobSpawner extends ItemBaseMFR {
 	private String entity;
 
 	public ItemMobSpawner(String entity) {

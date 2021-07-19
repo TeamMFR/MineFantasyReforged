@@ -11,7 +11,6 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.recipe.TanningRecipe;
 import minefantasy.mfr.util.ToolHelper;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -129,7 +128,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 						for (int a = 0; a < rand.nextInt(10); a++) {
 							ItemStack plank = MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG);
 							world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.ENTITY_ZOMBIE_BREAK_DOOR_WOOD, SoundCategory.AMBIENT, 1.0F, 1.0F);
-							dropItem(plank);
+							player.dropItem(plank, false);
 						}
 						world.setBlockToAir(pos);
 						return true;
@@ -187,7 +186,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			getInventory().setStackInSlot(1, recipe.output);
 			tier = recipe.tier;
 			maxProgress = recipe.time;
-			requiredToolType = Tool.fromName(recipe.toolType);
+			requiredToolType = recipe.toolType;
 		}
 		progress = 0;
 		sendUpdates();
@@ -217,35 +216,6 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 
 	private boolean isShabbyRack() {
 		return world.getBlockState(pos).getBlock() == MineFantasyBlocks.TANNER;
-	}
-
-	private void dropItem(ItemStack itemstack) {
-		if (!itemstack.isEmpty()) {
-			float f = this.rand.nextFloat() * 0.8F + 0.1F;
-			float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-			float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-			while (itemstack.getCount() > 0) {
-				int j1 = this.rand.nextInt(21) + 10;
-
-				if (j1 > itemstack.getCount()) {
-					j1 = itemstack.getCount();
-				}
-
-				itemstack.shrink(j1);
-				EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(itemstack.getItem(), j1, itemstack.getItemDamage()));
-
-				if (itemstack.hasTagCompound()) {
-					entityitem.getItem().setTagCompound(itemstack.getTagCompound().copy());
-				}
-
-				float f3 = 0.05F;
-				entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-				entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-				entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-				world.spawnEntity(entityitem);
-			}
-		}
 	}
 
 	@Override
