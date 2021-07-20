@@ -5,7 +5,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class RandomDigs {
@@ -56,10 +55,8 @@ public class RandomDigs {
 		ArrayList<ItemStack> loot = new ArrayList<>();
 
 		if (!drops.isEmpty()) {
-			Iterator list = drops.iterator();
 
-			while (list.hasNext()) {
-				RandomDigs ore = (RandomDigs) list.next();
+			for (RandomDigs ore : drops) {
 				if (matchesOre(ore, base, meta, harvest, fortune / 2F + 1F, silktouch, y)) {
 					loot.add(ore.loot);
 				}

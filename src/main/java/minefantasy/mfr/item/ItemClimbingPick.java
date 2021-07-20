@@ -155,7 +155,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 				IBlockState block = world.getBlockState(pos);
 
 				if (isInWall((EntityPlayer) player, false)) {
-					if (!player.isSwingInProgress) {
+					if (!player.isHandActive()) {
 						cost *= 0.5F;
 						player.motionY = 0;
 					} else {

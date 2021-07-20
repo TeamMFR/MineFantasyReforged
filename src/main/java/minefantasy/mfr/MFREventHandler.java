@@ -45,6 +45,7 @@ import minefantasy.mfr.util.TacticalManager;
 import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -89,6 +90,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -572,30 +574,35 @@ public final class MFREventHandler {
 		EntityPlayer player = event.getPlayer();
 		ItemStack held = player.getHeldItemMainhand();
 		IBlockState broken = event.getState();
-
-		if (broken != null && ConfigHardcore.HCCallowRocks) {
-			if (held.isEmpty() && CustomStone.isStone(broken.getBlock())) {
-				entityDropItem(event.getWorld(), event.getPos(),
-						new ItemStack(MineFantasyItems.SHARP_ROCK, random.nextInt(3) + 1));
-			}
-			if (!held.isEmpty() && held.getItem() == MineFantasyItems.SHARP_ROCK && broken.getBlock() instanceof BlockLeaves) {
-				if (random.nextInt(5) == 0) {
-					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
+		if (broken != null){
+			if (ConfigHardcore.HCCallowRocks) {
+				if (held.isEmpty() && CustomStone.isStone(broken.getBlock())) {
+					entityDropItem(event.getWorld(), event.getPos(),
+							new ItemStack(MineFantasyItems.SHARP_ROCK, random.nextInt(3) + 1));
 				}
-				if (random.nextInt(3) == 0) {
-					entityDropItem(event.getWorld(), event.getPos(), new ItemStack(MineFantasyItems.VINE, random.nextInt(3) + 1));
+				if (!held.isEmpty() && held.getItem() == MineFantasyItems.SHARP_ROCK && broken.getBlock() instanceof BlockLeaves) {
+					if (random.nextInt(5) == 0) {
+						entityDropItem(event.getWorld(), event.getPos(), new ItemStack(Items.STICK, random.nextInt(3) + 1));
+					}
+					if (random.nextInt(3) == 0) {
+						entityDropItem(event.getWorld(), event.getPos(), new ItemStack(MineFantasyItems.VINE, random.nextInt(3) + 1));
+					}
+				}
+			}
+
+			if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player) && !isBlockPlant(broken.getBlock())) {
+				float points = 2.0F * ConfigStamina.miningSpeed;
+				ItemWeaponMFR.applyFatigue(player, points, 20F);
+
+				if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
+					player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 1));
 				}
 			}
 		}
+	}
 
-		if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player)) {
-			float points = 2.0F * ConfigStamina.miningSpeed;
-			ItemWeaponMFR.applyFatigue(player, points, 20F);
-
-			if (points > 0 && !StaminaBar.isAnyStamina(player, false)) {
-				player.addPotionEffect(new PotionEffect(MobEffects.WEAKNESS, 100, 1));
-			}
-		}
+	public static boolean isBlockPlant(Block block){
+		return block instanceof IPlantable && !(block instanceof BlockGrass);
 	}
 
 	public static EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {

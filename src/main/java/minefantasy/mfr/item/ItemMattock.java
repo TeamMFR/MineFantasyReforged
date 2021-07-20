@@ -82,7 +82,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 			return EnumActionResult.FAIL;
 		}
 
-		if (targetBlock == Blocks.GRASS || targetBlock == Blocks.DIRT) {
+		if (targetBlock == Blocks.GRASS || targetBlock == Blocks.DIRT || targetBlock == Blocks.GRASS_PATH) {
 			Block roadBlock = MineFantasyBlocks.MUD_ROAD;
 			placeRoad(player, world, pos, mattock, roadBlock);
 		}

@@ -130,7 +130,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 		IBlockState base = world.getBlockState(pos);
 
 		if (base != null && base == Blocks.FARMLAND.getDefaultState() && FarmingHelper.didHarvestRuinBlock(world, true)) {
-			world.setBlockState(pos, (IBlockState) Blocks.DIRT);
+			world.setBlockState(pos, Blocks.DIRT.getDefaultState());
 		}
 	}
 
