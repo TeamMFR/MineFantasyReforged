@@ -179,8 +179,8 @@ public class ArmourCalculator {
 	/**
 	 * Modifes a value for resistence
 	 *
-	 * @param src         the source (breaks down to ratio)
-	 * @param value       the variable to modify
+	 * @param src               the source (breaks down to ratio)
+	 * @param value             the variable to modify
 	 * @param cuttingProtection the cutting resistance
 	 * @param bluntProtection   the blunt resistance
 	 * @param pierceProtection  the piercing resistance
@@ -368,6 +368,7 @@ public class ArmourCalculator {
 	}
 
 	// THRESHOLD
+
 	/**
 	 * CLIENT WHOLE ENTITY: Gets the total DT of an entity by damage type: Used by
 	 * the Screen renderer
@@ -524,20 +525,13 @@ public class ArmourCalculator {
 		return 0.5F;
 	}
 
-	public static void damageArmour(EntityLivingBase user, int dura) {
-		Iterable<ItemStack> armour = user.getArmorInventoryList();
-		for (ItemStack stack : armour) {
-			if (!stack.isEmpty()) {
-				if (!user.world.isRemote) {
-					if (stack.getItemDamage() + dura < stack.getMaxDamage()) {
-						stack.damageItem(dura, user);
-					} else {
-						stack.setItemDamage(stack.getMaxDamage());
-					}
-				}
-				if (stack.getItemDamage() >= stack.getMaxDamage()) {
-					user.setItemStackToSlot(EntityEquipmentSlot.valueOf(stack.getDisplayName()), ItemStack.EMPTY);
-					user.world.playSound(null, user.getPosition(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
+	public static void damageArmour(EntityLivingBase target, int damageAmount) {
+		if (!target.world.isRemote) {
+			for (ItemStack stack : target.getArmorInventoryList()) {
+				if (!stack.isEmpty()) {
+					stack.damageItem(damageAmount, target);
+					if (stack.isEmpty()) // item broke
+						target.world.playSound(null, target.getPosition(), SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				}
 			}
 		}
