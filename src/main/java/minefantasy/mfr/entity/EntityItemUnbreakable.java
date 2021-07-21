@@ -14,6 +14,7 @@ import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class EntityItemUnbreakable extends EntityItem {
+
 	public EntityItemUnbreakable(World world) {
 		super(world);
 	}
@@ -21,7 +22,9 @@ public class EntityItemUnbreakable extends EntityItem {
 	public EntityItemUnbreakable(World world, EntityItem parent) {
 		super(world, parent.posX, parent.posY, parent.posZ, parent.getItem());
 		this.mimicSpeed(parent);
-		setPickupDelay(ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, parent, "pickupDelay"));
+
+		// net.minecraft.entity.item.EntityItem.pickupDelay
+		setPickupDelay(ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, parent, "field_145804_b"));
 		isImmuneToFire = true;
 	}
 
