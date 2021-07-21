@@ -485,24 +485,24 @@ public final class MFREventHandler {
 		if (event.getEntity() instanceof EntityItem && !(event.getEntity() instanceof EntityItemUnbreakable)) {
 			EntityItem entityItem = (EntityItem) event.getEntity();
 			if (!entityItem.getItem().isEmpty()) {
+				//noinspection ConstantConditions
 				if (entityItem.getItem().hasTagCompound() && entityItem.getItem().getTagCompound().hasKey(Constants.UNBREAKABLE_TAG)) {
 					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), entityItem);
 					event.getWorld().spawnEntity(newEntity);
 					entityItem.setDead();
+					event.setCanceled(true);
 				}
-				if (isDragonforge(entityItem.getItem())) {
+				if (entityItem.getItem().getItem() == MineFantasyItems.DRAGON_HEART) {
 					MFRLogUtil.logDebug("Found dragon heart");
 					EntityItem newEntity = new EntityItemUnbreakable(event.getWorld(), entityItem);
 					event.getWorld().spawnEntity(newEntity);
 					entityItem.setDead();
+					event.setCanceled(true);
 				}
 			}
 		}
 	}
 
-	private static boolean isDragonforge(ItemStack itemstack) {
-		return itemstack.getItem() == MineFantasyItems.DRAGON_HEART;
-	}
 
 	public static void alterDrops(EntityLivingBase dropper, LivingDropsEvent event) {
 		ArrayList<ItemStack> meats = new ArrayList<ItemStack>();
