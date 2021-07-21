@@ -1,27 +1,19 @@
 package minefantasy.mfr.util;
 
-import net.minecraftforge.fml.common.FMLLog;
-import org.apache.logging.log4j.Logger;
+import minefantasy.mfr.MineFantasyReforged;
 
 public class MFRLogUtil {
 
-	public static final Logger MFR_LOGGER = FMLLog.getLogger();
-
-	public static final String PREFIX = "[MineFantasyReforged]: ";
-
 	public static void log(String mes) {
-		FMLLog.info(PREFIX + mes);
-		// MF_LOGGER.log(Level.INFO, PREFIX + mes);
+		MineFantasyReforged.LOG.info(mes);
 	}
 
 	public static void logWarn(String mes) {
-		FMLLog.warning(PREFIX + "(warning) " + mes);
-		// MF_LOGGER.log(Level.WARN, PREFIX + mes);
+		MineFantasyReforged.LOG.warn(mes);
 	}
 
 	public static void logDebug(String mes) {
-		FMLLog.info(PREFIX + "(debug) " + mes);
-		// MF_LOGGER.debug(PREFIX + mes);
+		MineFantasyReforged.LOG.debug(mes);
 	}
 
 }
