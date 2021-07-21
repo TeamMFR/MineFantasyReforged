@@ -12,7 +12,6 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.AbstractSkeleton;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitch;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
@@ -44,7 +43,7 @@ public class MonsterUpgrader {
 				} else if (CombatMechanics.swordSkeleton && random.nextInt(3) == 0) {
 					mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
 							MineFantasyItems.STANDARD_SWORD.construct(MineFantasyMaterials.Names.BRONZE, MineFantasyMaterials.Names.OAK_WOOD));
-					((EntitySkeleton) mob).setCombatTask();
+					((AbstractSkeleton) mob).setCombatTask();
 				}
 			} else if (mob instanceof EntityZombie) {
 				String tier = MineFantasyMaterials.Names.IRON;
