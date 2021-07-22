@@ -1,7 +1,13 @@
 package minefantasy.mfr.container;
 
+import minefantasy.mfr.api.heating.IHotItem;
+import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.tile.TileEntityAnvil;
+import minefantasy.mfr.util.Utils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -40,6 +46,27 @@ public class ContainerAnvil extends ContainerBase {
 		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 214, 66));
 
 		addPlayerSlots(player.inventory, 8 + xInvOffset, 186);
+	}
+
+	@Override
+	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
+		ItemStack stackInHand = player.inventory.getItemStack();
+		if (slotId >= 0 && !GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindUseItem)){
+			ItemStack stackInSlot = getSlot(slotId).getStack();
+			if (stackInHand.getItem() instanceof IHotItem && !stackInSlot.isEmpty() && stackInSlot.getItem() instanceof IHotItem){
+				int tempForStackInSlot = ItemHeated.getTemp(stackInSlot);
+				int tempForStackInHand = ItemHeated.getTemp(stackInHand);
+				if (ItemStack.areItemStacksEqual(ItemHeated.getStack(stackInHand), ItemHeated.getStack(stackInSlot))){
+					if (Utils.percentDifferenceCalculator(tempForStackInSlot, tempForStackInHand) <= 1.0F){
+						int averageTemp = (tempForStackInSlot + tempForStackInHand) / 2;
+						ItemHeated.setTemp(stackInHand, averageTemp);
+						ItemHeated.setTemp(stackInSlot, averageTemp);
+						return super.slotClick(slotId, dragType, clickTypeIn, player);
+					}
+				}
+			}
+		}
+		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
 
 	@Override

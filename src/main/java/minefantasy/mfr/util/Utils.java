@@ -120,4 +120,15 @@ public class Utils {
 		return false;
 	}
 
+	/**
+	 * Provides the percent difference between two integers, provided in percentage form.
+	 * @param a the first input integer
+	 * @param b the second input integer
+	 * @return the percent difference
+	 */
+	public static float percentDifferenceCalculator (int a, int b){
+		float absoluteDifference = Math.abs(a - b);
+		float average = (a + b) / 2F;
+		return 100 * (absoluteDifference/average);
+	}
 }
