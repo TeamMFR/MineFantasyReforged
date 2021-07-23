@@ -4,8 +4,6 @@ import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.util.Utils;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.IContainerListener;
@@ -51,7 +49,7 @@ public class ContainerAnvil extends ContainerBase {
 	@Override
 	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player) {
 		ItemStack stackInHand = player.inventory.getItemStack();
-		if (slotId >= 0 && !GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindUseItem)){
+		if (slotId >= 0){
 			ItemStack stackInSlot = getSlot(slotId).getStack();
 			if (stackInHand.getItem() instanceof IHotItem && !stackInSlot.isEmpty() && stackInSlot.getItem() instanceof IHotItem){
 				int tempForStackInSlot = ItemHeated.getTemp(stackInSlot);
