@@ -1,12 +1,12 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "construction",
-  "research": "smeltsteel",
+  "research": "smeltiron",
   "tool_type": "hammer",
   "is_tool_recipe": false,
-  "anvil_tier": 3,
+  "anvil_tier": 2,
   "recipe_time": 14,
-  "recipe_hammer": 3,
+  "recipe_hammer": 2,
   "output_hot": false,
   "pattern": [
     "M M   ",
@@ -16,11 +16,11 @@
   ],
   "key": {
     "M": {
-      "nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
       "item": "minefantasyreforged:metal_hunk"
     }
   },
   "result": {
-    "item": "minefantasyreforged:steel_bars"
+    "item": "minefantasyreforged:iron_bars"
   }
 }
