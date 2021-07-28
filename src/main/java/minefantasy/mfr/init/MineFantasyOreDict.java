@@ -1,8 +1,7 @@
 package minefantasy.mfr.init;
 
-import com.google.common.base.CaseFormat;
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.item.AdvancedFuelHandler;
-import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -49,21 +48,12 @@ public class MineFantasyOreDict {
 		NonNullList<ItemStack> plankWoodList = OreDictionary.getOres("plankWood");
 		plankWoodList.remove(0);
 
-		for (ItemStack plank : plankWoodList) {
-			for (CustomMaterial material : CustomMaterial.getList("wood")) {
-				if (plank.getDisplayName().replaceAll(" ", "").replaceFirst("Planks", "").equals(CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()))) {
-					OreDictionary.registerOre("planks" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, material.getName()), plank);
-					break;
-				}
-			}
-		}
-
 		OreDictionary.registerOre("ingotCopper", MineFantasyItems.COPPER_INGOT);
 		OreDictionary.registerOre("ingotTin", MineFantasyItems.TIN_INGOT);
 		OreDictionary.registerOre("ingotBronze", MineFantasyItems.BRONZE_INGOT);
 		OreDictionary.registerOre("ingotPigIron", MineFantasyItems.PIG_IRON_INGOT);
 		OreDictionary.registerOre("ingotSteel", MineFantasyItems.STEEL_INGOT);
-		OreDictionary.registerOre("ingotEncrusted", MineFantasyItems.ENCRUSTED_INGOT);
+		OreDictionary.registerOre("ingotDiamond", MineFantasyItems.ENCRUSTED_INGOT);
 		OreDictionary.registerOre("ingotBlackSteel", MineFantasyItems.BLACK_STEEL_INGOT);
 		OreDictionary.registerOre("ingotSilver", MineFantasyItems.SILVER_INGOT);
 		OreDictionary.registerOre("ingotRedSteel", MineFantasyItems.RED_STEEL_INGOT);
@@ -107,7 +97,19 @@ public class MineFantasyOreDict {
 		addOreDictEntry("listAllfishraw", meatRaw);
 
 		AdvancedFuelHandler.registerItems();
+	}
 
+	public static void registerOreDictCommonIngotEntry(){
+		for (String oreString : OreDictionary.getOreNames()) {
+			if (oreString.startsWith("ingot")){
+				for (ItemStack ingot : OreDictionary.getOres(oreString)){
+					OreDictionary.registerOre("listAllIngots", ingot);
+				}
+			}
+		}
+		for (ItemStack ingot : OreDictionary.getOres("listAllIngots")){
+			MineFantasyReforged.LOG.info("MineFantasy registering: " + ingot.getDisplayName());
+		}
 	}
 
 	private static void addOreDictEntry(String list, String mfList) {

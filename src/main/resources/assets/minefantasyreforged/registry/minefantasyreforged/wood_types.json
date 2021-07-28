@@ -3,6 +3,8 @@
     "woods": [
         {
             "name": "scrap_wood",
+            "inputItem": "",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 0,
                 "hardness": 0.1,
@@ -22,6 +24,8 @@
         },
         {
             "name": "oak_wood",
+            "inputItem": "minecraft:planks",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 1,
                 "hardness": 0.7,
@@ -41,6 +45,8 @@
         },
         {
             "name": "spruce_wood",
+            "inputItem": "minecraft:planks",
+            "inputItemMeta": 1,
             "properties": {
                 "tier": 1,
                 "hardness": 0.2,
@@ -60,6 +66,8 @@
         },
         {
             "name": "birch_wood",
+            "inputItem": "minecraft:planks",
+            "inputItemMeta": 2,
             "properties": {
                 "tier": 1,
                 "hardness": 0.5,
@@ -79,6 +87,8 @@
         },
         {
             "name": "jungle_wood",
+            "inputItem": "minecraft:planks",
+            "inputItemMeta": 3,
             "properties": {
                 "tier": 1,
                 "hardness": 0.4,
@@ -98,6 +108,8 @@
         },
         {
             "name": "acacia_wood",
+            "inputItem": "minecraft:planks",
+            "inputItemMeta": 4,
             "properties": {
                 "tier": 1,
                 "hardness": 0.5,
@@ -117,6 +129,8 @@
         },
         {
             "name": "dark_oak_wood",
+            "inputItem": "minecraft:planks",
+            "inputItemMeta": 5,
             "properties": {
                 "tier": 1,
                 "hardness": 1.2,
@@ -136,6 +150,8 @@
         },
         {
             "name": "refined_wood",
+            "inputItem": "minefantasyreforged:refined_planks",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 2,
                 "hardness": 0.8,
@@ -155,6 +171,8 @@
         },
         {
             "name": "yew_wood",
+            "inputItem": "minefantasyreforged:yew_planks",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 2,
                 "hardness": 0.7,
@@ -174,6 +192,8 @@
         },
         {
             "name": "ironbark_wood",
+            "inputItem": "minefantasyreforged:ironbark_planks",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 2,
                 "hardness": 0.9,
@@ -193,6 +213,8 @@
         },
         {
             "name": "ebony_wood",
+            "inputItem": "minefantasyreforged:ebony_planks",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 3,
                 "hardness": 1.3,

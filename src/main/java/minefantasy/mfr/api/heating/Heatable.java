@@ -179,20 +179,20 @@ public class Heatable {
 	}
 
 	private static Heatable findRegister(ItemStack item) {
-		Heatable specific = registerList.get(item.getItem().getUnlocalizedName() + "_" + item.getItemDamage());// Try specific first
+		Heatable specific = registerList.get(item.getItem().getRegistryName() + "_" + item.getItemDamage());// Try specific first
 
 		if (specific != null) {
 			return specific;
 		}
-		return registerList.get(item.getUnlocalizedName() + "_any");// Try Any;
+		return registerList.get(item.getItem().getRegistryName() + "_any");// Try Any;
 	}
 
 	public static String getRegistrationForItem(ItemStack item) {
 		String s;
 		if (item.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-			s = item.getItem().getUnlocalizedName() + "_any";
+			s = item.getItem().getRegistryName() + "_any";
 		} else {
-			s = item.getItem().getUnlocalizedName() + "_" + item.getItemDamage();
+			s = item.getItem().getRegistryName() + "_" + item.getItemDamage();
 		}
 		return s;
 	}

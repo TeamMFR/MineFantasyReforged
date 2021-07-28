@@ -1,25 +1,26 @@
 {
-  "type": "CustomToolRecipe",
-  "skill": "artisanry",
-  "research": "",
-  "tool_type": "hammer",
-  "is_tool_recipe": false,
-  "anvil_tier": 0,
-  "recipe_time": 2,
-  "recipe_hammer": 0,
-  "output_hot": true,
-  "pattern": [
-    "MM    ",
-    "MM    ",
-    "      ",
-    "      "
-  ],
-  "key": {
-    "M": {
-      "item": "minefantasyreforged:metal_hunk"
+    "type": "CustomToolRecipe",
+    "skill": "artisanry",
+    "research": "",
+    "tool_type": "hammer",
+    "is_tool_recipe": false,
+    "anvil_tier": -1,
+    "recipe_time": 20,
+    "recipe_hammer": -1,
+    "output_hot": true,
+    "pattern": [
+        "#     ",
+        "      ",
+        "      ",
+        "      "
+    ],
+    "key": {
+        "#": {
+            "type": "oreDict",
+            "ore": "listAllIngots"
+        }
+    },
+    "result": {
+        "item": "minefantasyreforged:bar"
     }
-  },
-  "result": {
-    "item": "minefantasyreforged:bar"
-  }
 }

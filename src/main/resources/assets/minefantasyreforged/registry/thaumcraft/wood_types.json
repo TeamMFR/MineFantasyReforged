@@ -3,6 +3,8 @@
     "woods": [
         {
             "name": "silverwood_wood",
+            "inputItem": "thaumcraft:plank_silverwood",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 2,
                 "hardness": 1.0,
@@ -22,6 +24,8 @@
         },
         {
             "name": "greatwood_wood",
+            "inputItem": "thaumcraft:plank_greatwood",
+            "inputItemMeta": 0,
             "properties": {
                 "tier": 2,
                 "hardness": 1.2,

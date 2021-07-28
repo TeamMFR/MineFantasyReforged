@@ -1,5 +1,5 @@
 {
-	"type": "dynamic",
+	"type": "timberdynamic",
 	"pattern": [
 		"#",
 		"#"
@@ -10,7 +10,6 @@
 			"ore": "plankWood"
 		}
 	},
-	"ore_dict_list": "plankWood",
 	"result": {
 		"item": "minefantasyreforged:timber"
 	},

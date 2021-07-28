@@ -1,19 +1,21 @@
 package minefantasy.mfr.recipe;
 
-import com.google.common.base.CaseFormat;
 import com.google.gson.JsonObject;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.material.WoodMaterial;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
@@ -22,7 +24,6 @@ import javax.annotation.Nonnull;
 public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
 
 	protected Item output;
-	protected NonNullList<ItemStack> oreDictList;
 	protected NonNullList<Ingredient> ingredients;
 	protected ItemStack input;
 	protected int count;
@@ -30,10 +31,9 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 	protected int width;
 	protected int height;
 
-	protected TimberDynamicRecipes(Item output, String oreDictList, int count, CraftingHelper.ShapedPrimer primer) {
+	protected TimberDynamicRecipes(Item output, int count, CraftingHelper.ShapedPrimer primer) {
 		this.output = output;
 		this.count = count;
-		this.oreDictList = OreDictionary.getOres(oreDictList);
 		this.ingredients = primer.input;
 		this.width = primer.width;
 		this.height = primer.height;
@@ -66,7 +66,7 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 				ItemStack itemstack = inv.getStackInRowAndColumn(x, y);
 
 				if (!itemstack.isEmpty()) {
-					for (ItemStack ingredient : oreDictList) {
+					for (ItemStack ingredient : OreDictionary.getOres("plankWood")) {
 						if (itemstack.getItem() == ingredient.getItem() && (itemstack.getMetadata() == ingredient.getMetadata() || ingredient.getMetadata() == OreDictionary.WILDCARD_VALUE)) {
 							this.input = itemstack;
 						}
@@ -106,27 +106,16 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 	}
 
 	public static ItemStack addNBT(ItemStack input, ItemStack output) {
-		String oreDictValue = null;
-		int oreId = 0;
-		for (int i : OreDictionary.getOreIDs(input)) {
-			if (i != 1) {
-				oreId = i;
-			}
-		}
-		if (oreId != 0) {
-			oreDictValue = OreDictionary.getOreName(oreId);
-		}
-		if (oreDictValue != null) {
-			if (oreDictValue.startsWith("planks")) {
-				String material = oreDictValue.split("planks")[1];
-
-				NBTTagCompound nbt = new NBTTagCompound();
-				NBTTagCompound materialTag = new NBTTagCompound();
-				materialTag.setString("main_material", CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, material));
-				nbt.setTag("mf_custom_materials", materialTag);
-				output.setTagCompound(nbt);
-
-				return output;
+		for (CustomMaterial material : CustomMaterial.getList("wood")){
+			if (material instanceof WoodMaterial) {
+				Item materialInputItem = ForgeRegistries.ITEMS.getValue(((WoodMaterial) material).inputItemResourceLocation);
+				if (materialInputItem != null){
+					ItemStack materialInputItemStack = new ItemStack(materialInputItem, 1, ((WoodMaterial) material).inputItemMeta);
+					if (input.isItemEqual(materialInputItemStack)){
+						CustomMaterial.addMaterial(output, CustomToolHelper.slot_main, material.name);
+						return output;
+					}
+				}
 			}
 		}
 		return ItemStack.EMPTY;
@@ -149,11 +138,10 @@ public class TimberDynamicRecipes extends net.minecraftforge.registries.IForgeRe
 			primer.input = recipe.getIngredients();
 			primer.mirrored = false;
 
-			final String ore_dict_list = JsonUtils.getString(json, "ore_dict_list");
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			final int count = JsonUtils.getInt(json, "count");
 
-			return new TimberDynamicRecipes(result.getItem(), ore_dict_list, count, primer);
+			return new TimberDynamicRecipes(result.getItem(), count, primer);
 		}
 	}
 }

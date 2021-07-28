@@ -2,7 +2,6 @@ package minefantasy.mfr.recipe;
 
 import com.google.gson.JsonObject;
 import minefantasy.mfr.constants.Skill;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 
@@ -31,7 +30,6 @@ public class AnvilRecipeLoader extends RecipeLoader {
 		createCustomDataDirectory(CUSTOM_RECIPE_DIRECTORY);
 		loadRegistry(TYPE, DEFAULT_RECIPE_DIRECTORY, CUSTOM_RECIPE_DIRECTORY);
 	}
-
 	@Override
 	protected void parse(String name, JsonObject json) {
 		String s = JsonUtils.getString(json, "type");
@@ -46,9 +44,9 @@ public class AnvilRecipeLoader extends RecipeLoader {
 
 		String[] pattern = shrink(patternFromJson(GRID_WIDTH, GRID_HEIGHT, JsonUtils.getJsonArray(json, "pattern")));
 		ItemStack resultStack = deserializeIngredient(JsonUtils.getJsonObject(json, "result")).getMatchingStacks()[0];
-		Object[] o = getInputs(pattern, json);
+		Object[] inputs = getInputs(pattern, json);
 
 		byte type = s.equals("CustomToolRecipe") ? (byte) 1 : (byte) 0;
-		CraftingManagerAnvil.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, o);
+		CraftingManagerAnvil.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, inputs);
 	}
 }

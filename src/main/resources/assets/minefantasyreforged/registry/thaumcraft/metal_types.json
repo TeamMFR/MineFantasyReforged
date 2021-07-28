@@ -3,6 +3,7 @@
 	"metals": [
 		{
 			"name": "thaumium",
+			"oreDictList": "ingotThaumium",
 			"properties": {
 				"tier": 4,
 				"durability": 4.0,
@@ -30,6 +31,7 @@
 		},
 		{
 			"name": "void",
+			"oreDictList": "ingotVoid",
 			"properties": {
 				"tier": 4,
 				"durability": 10.0,

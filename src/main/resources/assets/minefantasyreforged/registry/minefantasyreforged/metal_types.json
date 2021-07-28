@@ -3,6 +3,7 @@
     "metals": [
         {
             "name": "tin",
+            "oreDictList": "ingotTin",
             "properties": {
                 "tier": 0,
                 "durability": 1.0,
@@ -30,6 +31,7 @@
         },
         {
             "name": "copper",
+            "oreDictList": "ingotCopper",
             "properties": {
                 "tier": 0,
                 "durability": 1.0,
@@ -57,6 +59,7 @@
         },
         {
             "name": "bronze",
+            "oreDictList": "ingotBronze",
             "properties": {
                 "tier": 1,
                 "durability": 1.5,
@@ -84,6 +87,7 @@
         },
         {
             "name": "iron",
+            "oreDictList": "ingotIron",
             "properties": {
                 "tier": 2,
                 "durability": 2.0,
@@ -111,6 +115,7 @@
         },
         {
             "name": "pig_iron",
+            "oreDictList": "ingotPigIron",
             "properties": {
                 "tier": 2,
                 "durability": 2.0,
@@ -138,6 +143,7 @@
         },
         {
             "name": "steel",
+            "oreDictList": "ingotSteel",
             "properties": {
                 "tier": 3,
                 "durability": 3.0,
@@ -165,6 +171,7 @@
         },
         {
             "name": "encrusted",
+            "oreDictList": "ingotDiamond",
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -192,6 +199,7 @@
         },
         {
             "name": "obsidian",
+            "oreDictList": "ingotObsidian",
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -219,6 +227,7 @@
         },
         {
             "name": "tungsten",
+            "oreDictList": "ingotTungsten",
             "properties": {
                 "tier": 4,
                 "durability": 8.0,
@@ -246,6 +255,7 @@
         },
         {
             "name": "black_steel",
+            "oreDictList": "ingotBlackSteel",
             "properties": {
                 "tier": 5,
                 "durability": 6.0,
@@ -273,6 +283,7 @@
         },
         {
             "name": "blue_steel",
+            "oreDictList": "ingotBlueSteel",
             "properties": {
                 "tier": 6,
                 "durability": 7.0,
@@ -300,6 +311,7 @@
         },
         {
             "name": "red_steel",
+            "oreDictList": "ingotRedSteel",
             "properties": {
                 "tier": 6,
                 "durability": 8.0,
@@ -327,6 +339,7 @@
         },
         {
             "name": "silver",
+            "oreDictList": "ingotSilver",
             "properties": {
                 "tier": 0,
                 "durability": 2.5,
@@ -354,6 +367,7 @@
         },
         {
             "name": "gold",
+            "oreDictList": "ingotGold",
             "properties": {
                 "tier": 0,
                 "durability": 2.0,
@@ -381,6 +395,7 @@
         },
         {
             "name": "mithril",
+            "oreDictList": "ingotMithril",
             "properties": {
                 "tier": 7,
                 "durability": 10.0,
@@ -408,6 +423,7 @@
         },
         {
             "name": "adamantium",
+            "oreDictList": "ingotAdamantium",
             "properties": {
                 "tier": 7,
                 "durability": 12.0,
@@ -435,6 +451,7 @@
         },
         {
             "name": "mithium",
+            "oreDictList": "ingotMithium",
             "properties": {
                 "tier": 8,
                 "durability": 15.0,
@@ -462,6 +479,7 @@
         },
         {
             "name": "ignotumite",
+            "oreDictList": "ingotIgnotumite",
             "properties": {
                 "tier": 8,
                 "durability": 15.0,
@@ -489,6 +507,7 @@
         },
         {
             "name": "ender",
+            "oreDictList": "ingotEnder",
             "properties": {
                 "tier": 8,
                 "durability": 15.0,
@@ -516,6 +535,7 @@
         },
         {
             "name": "composite_alloy",
+            "oreDictList": "ingotCompositeAlloy",
             "properties": {
                 "tier": 4,
                 "durability": 10,

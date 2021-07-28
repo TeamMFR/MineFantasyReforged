@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTException;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
+import net.minecraftforge.oredict.OreIngredient;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -84,7 +85,12 @@ public abstract class RecipeLoader extends DataLoader {
 	public static Ingredient deserializeIngredient(@Nullable JsonElement element) {
 		if (element != null && !element.isJsonNull()) {
 			if (element.isJsonObject()) {
-				return Ingredient.fromStacks(minefantasy.mfr.util.JsonUtils.getItemStack(element));
+				if (element.getAsJsonObject().has("type") && JsonUtils.getString(element.getAsJsonObject(), "type").equals("oreDict")){
+					return new OreIngredient(JsonUtils.getString(element.getAsJsonObject(), "ore"));
+				}
+				else {
+					return Ingredient.fromStacks(minefantasy.mfr.util.JsonUtils.getItemStack(element));
+				}
 			} else if (!element.isJsonArray()) {
 				throw new JsonSyntaxException("Expected item to be object or array of objects");
 			} else {
@@ -250,7 +256,12 @@ public abstract class RecipeLoader extends DataLoader {
 		for (Map.Entry<Character, Ingredient> i : map.entrySet()) {
 			if (!Character.isWhitespace(i.getKey())) {
 				object = appendValue(object, i.getKey());
-				object = appendValue(object, i.getValue().getMatchingStacks()[0]);
+				if (i.getValue().getMatchingStacks().length > 1){
+					object = appendValue(object, i.getValue().getMatchingStacks());
+				}
+				else {
+					object = appendValue(object, i.getValue().getMatchingStacks()[0]);
+				}
 			}
 		}
 

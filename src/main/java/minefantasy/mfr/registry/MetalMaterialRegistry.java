@@ -3,7 +3,6 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.util.JsonUtils;
@@ -64,6 +63,8 @@ public class MetalMaterialRegistry extends DataLoader {
 	private void parseMetal(JsonObject json) {
 		String name = JsonUtils.getString(json, "name");
 
+		String oreDictList = JsonUtils.getString(json, "oreDictList");
+
 		if (MetalMaterial.getMaterial(name) != null) {
 			return;
 		}
@@ -94,7 +95,7 @@ public class MetalMaterialRegistry extends DataLoader {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		MetalMaterial metal = new MetalMaterial(name, tier, hardness, durability, flexibility, sharpness, resistance, density, armour, colors);
+		MetalMaterial metal = new MetalMaterial(name, tier, hardness, durability, flexibility, sharpness, resistance, density, armour, colors, oreDictList);
 		metal.setMeltingPoint(meltingPoint);
 		metal.setRarity(rarity);
 		metal.setCrafterTiers(craftTier);

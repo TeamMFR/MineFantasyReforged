@@ -12,8 +12,11 @@ import java.util.ArrayList;
 
 public class MetalMaterial extends CustomMaterial {
 
-	public MetalMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness, float resistance, float density, float[] armourProtection, int[] color) {
+	public String oreDictList;
+
+	public MetalMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness, float resistance, float density, float[] armourProtection, int[] color, String oreDictList) {
 		super(name, "metal", tier, hardness, durability, flexibility, resistance, sharpness, density, armourProtection, color);
+		this.oreDictList = oreDictList;
 		setArmourStats(1.0F, flexibility, 1F / flexibility);// Harder materials absorb blunt less but resist cutting and piercing more
 
 		// Adding this is necessary to preserve the old system where defaults are dynamically calculated above with setArmourStats and non-default values take precedence over the calculated values
@@ -32,7 +35,7 @@ public class MetalMaterial extends CustomMaterial {
 			int[] stats = customMat.getHeatableStats();
 			MFRLogUtil.logDebug("Set Heatable Stats for " + customMat.name + ": " + stats[0] + "," + stats[1] + "," + stats[2]);
 
-			MineFantasyReforgedAPI.setHeatableStats("ingot" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
+			MineFantasyReforgedAPI.setHeatableStats(((MetalMaterial)customMat).oreDictList, stats[0], stats[1], stats[2]);
 			MineFantasyReforgedAPI.setHeatableStats("hunk" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, customMat.name), stats[0], stats[1], stats[2]);
 		}
 
@@ -43,7 +46,7 @@ public class MetalMaterial extends CustomMaterial {
 
 	@Override
 	public ItemStack getItemStack() {
-		NonNullList<ItemStack> list = OreDictionary.getOres("ingot" + CaseFormat.UPPER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, name));
+		NonNullList<ItemStack> list = OreDictionary.getOres(oreDictList);
 		if (list != null && !list.isEmpty()) {
 			return list.get(0);
 		}

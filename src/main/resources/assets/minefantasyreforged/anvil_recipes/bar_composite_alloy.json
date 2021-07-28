@@ -10,12 +10,13 @@
   "output_hot": true,
   "pattern": [
     " E    ",
-    " B    ",
+    " S    ",
     "RMR   ",
-    " B    "
+    " C    "
   ],
   "key": {
-    "B": {
+    "S": {
+      "nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
       "item": "minefantasyreforged:bar"
     },
     "R": {
@@ -25,7 +26,12 @@
       "item": "minefantasyreforged:engin_anvil_tools"
     },
     "M": {
+      "nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}",
       "item": "minefantasyreforged:metal_hunk"
+    },
+    "C": {
+      "nbt": "{mf_custom_materials:{main_material:\"copper\"}}",
+      "item": "minefantasyreforged:bar"
     }
   },
   "result": {

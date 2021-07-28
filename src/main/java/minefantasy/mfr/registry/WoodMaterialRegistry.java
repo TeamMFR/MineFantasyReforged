@@ -3,10 +3,10 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.util.JsonUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.Loader;
 import org.apache.commons.io.FilenameUtils;
 
@@ -65,6 +65,9 @@ public class WoodMaterialRegistry extends DataLoader {
 	private void parseWood(JsonObject json) {
 		String name = JsonUtils.getString(json, "name");
 
+		ResourceLocation inputItemResourceLocation = new ResourceLocation(JsonUtils.getString(json, "inputItem"));
+		int inputItemMeta = JsonUtils.getInt(json, "inputItemMeta");
+
 		if (WoodMaterial.getMaterial(name) != null) {
 			return;
 		}
@@ -85,8 +88,7 @@ public class WoodMaterialRegistry extends DataLoader {
 		int green = JsonUtils.getInt(color, "green");
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
-
-		WoodMaterial wood = new WoodMaterial(name, tier, hardness, durability, flexibility, resistance, density, colors);
+		WoodMaterial wood = new WoodMaterial(name, tier, hardness, durability, flexibility, resistance, density, colors, inputItemResourceLocation, inputItemMeta);
 		wood.setRarity(rarity);
 		wood.setCrafterTiers(craftTier);
 		wood.craftTimeModifier = craftTimeModifier;

@@ -2,18 +2,22 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * @author AnonymousProductions
  */
 public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
-	public CustomToolRecipeAnvil(int wdth, int heit, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvi, boolean hot, String research, Skill skill) {
-		super(wdth, heit, inputs, output, toolType, time, hammer, anvi, hot, research, skill);
+	public CustomToolRecipeAnvil(int width, int height, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvil, boolean hot, String research, Skill skill) {
+		super(width, height, inputs, output, toolType, time, hammer, anvil, hot, research, skill);
 	}
 
 	/**
@@ -28,7 +32,6 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 				int recipeX = matrixX - x;
 				int recipeY = matrixY - y;
 				ItemStack recipeItem = ItemStack.EMPTY;
-
 				if (recipeX >= 0 && recipeY >= 0 && recipeX < this.recipeWidth && recipeY < this.recipeHeight) {
 					if (b) {
 						recipeItem = this.recipeItems[this.recipeWidth - recipeX - 1 + recipeY * this.recipeWidth];
@@ -73,6 +76,22 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 						return false;
 					}
 					inputItem = getHotItem(inputItem);
+
+					for (ItemStack stack : recipeItems){
+						if (stack != null && !stack.isEmpty()){
+							if (OreDictionary.itemMatches(inputItem, stack, false)){
+								recipeItem = stack;
+								for (CustomMaterial material : CustomMaterial.getList("metal")){
+									NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
+									for (ItemStack materialOreDictStack : materialOreDictStacks){
+										if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
+											metal = material.name;
+										}
+									}
+								}
+							}
+						}
+					}
 
 					if (inputItem == null && recipeItem != null || inputItem != null && recipeItem == null) {
 						return false;
@@ -132,6 +151,16 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 			ItemStack item = matrix.getStackInSlot(i);
 			String component_wood = CustomToolHelper.getComponentMaterial(item, "wood");
 			String component_metal = CustomToolHelper.getComponentMaterial(item, "metal");
+
+			for (CustomMaterial material : CustomMaterial.getList("metal")){
+				NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
+				for (ItemStack materialOreDictStack : materialOreDictStacks){
+					if (OreDictionary.itemMatches(ItemHeated.getStack(item), materialOreDictStack, true)){
+						component_metal = material.name;
+					}
+				}
+			}
+
 			if (wood == null && component_wood != null) {
 				wood = component_wood;
 			}
@@ -145,6 +174,18 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 		if (wood != null) {
 			CustomMaterial.addMaterial(result, CustomToolHelper.slot_haft, wood);
 		}
+
+		if (result.getItem() == MineFantasyItems.HOT_ITEM){ //Dummy item to match in recipe
+			for (CustomMaterial material : CustomMaterial.getList("metal")){
+				if (material instanceof MetalMaterial) {
+					if (material.getName().equals(metal)){
+						NonNullList<ItemStack> oreDictItemStacks = OreDictionary.getOres(((MetalMaterial) material).oreDictList);
+						result = oreDictItemStacks.get(0);
+					}
+				}
+			}
+		}
+
 		return result;
 	}
 

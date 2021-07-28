@@ -186,6 +186,8 @@ public class MineFantasyReforged {
 
 		MetalMaterial.addHeatables();
 
+		MineFantasyOreDict.registerOreDictCommonIngotEntry();
+
 		CarpenterRecipeLoader.INSTANCE.postInit();
 		AnvilRecipeLoader.INSTANCE.postInit();
 

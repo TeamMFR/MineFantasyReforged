@@ -98,10 +98,11 @@ public class CraftingManagerAnvil {
 		}
 
 		HashMap var14;
-
 		for (var14 = new HashMap(); var4 < input.length; var4 += 2) {
+
 			Character var16 = (Character) input[var4];
 			ItemStack var17 = null;
+			ItemStack[] var18 = null;
 
 			if (input[var4 + 1] instanceof Item) {
 				var17 = new ItemStack((Item) input[var4 + 1], 1, 32767);
@@ -109,9 +110,16 @@ public class CraftingManagerAnvil {
 				var17 = new ItemStack((Block) input[var4 + 1], 1, 32767);
 			} else if (input[var4 + 1] instanceof ItemStack) {
 				var17 = (ItemStack) input[var4 + 1];
+			} else if (input[var4 + 1] instanceof ItemStack[]){
+				var18 = ((ItemStack[]) input[var4 + 1]);
 			}
 
-			var14.put(var16, var17);
+			if (var17 != null){
+				var14.put(var16, var17);
+			}
+			else {
+				var14.put(var16, var18);
+			}
 		}
 
 		ItemStack[] var15 = new ItemStack[var5 * var6];
@@ -120,7 +128,13 @@ public class CraftingManagerAnvil {
 			char var18 = var3.charAt(var9);
 
 			if (var14.containsKey(Character.valueOf(var18))) {
-				var15[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
+				if (var14.get(Character.valueOf(var18)) instanceof ItemStack){
+					var15[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
+				}
+				else if (var14.get(Character.valueOf(var18)) instanceof ItemStack[]) {
+					var15 = ((ItemStack[]) var14.get(Character.valueOf(var18)));
+				}
+
 			} else {
 				var15[var9] = null;
 			}
