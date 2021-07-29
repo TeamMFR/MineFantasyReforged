@@ -12,6 +12,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
+
 /**
  * @author AnonymousProductions
  */
@@ -80,12 +82,14 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 					for (ItemStack stack : recipeItems){
 						if (stack != null && !stack.isEmpty()){
 							if (OreDictionary.itemMatches(inputItem, stack, false)){
-								recipeItem = stack;
 								for (CustomMaterial material : CustomMaterial.getList("metal")){
 									NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-									for (ItemStack materialOreDictStack : materialOreDictStacks){
-										if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
-											metal = material.name;
+									if (materialOreDictStacks.containsAll(Arrays.asList(recipeItems))){
+										recipeItem = stack;
+										for (ItemStack materialOreDictStack : materialOreDictStacks){
+											if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
+												metal = material.name;
+											}
 										}
 									}
 								}

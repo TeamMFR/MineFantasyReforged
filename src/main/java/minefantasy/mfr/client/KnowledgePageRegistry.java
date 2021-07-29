@@ -330,7 +330,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.smelt_steel.addPages(
 				new EntryPageText("knowledge.smelt_steel.1"),
-				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("steel_bar")));
+				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bar_steel")));
 
 		if (!ConfigHardcore.HCCreduceIngots) {
 			MineFantasyKnowledgeList.smelt_steel.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.steel));
