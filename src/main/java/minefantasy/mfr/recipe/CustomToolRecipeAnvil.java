@@ -81,15 +81,13 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 
 					for (ItemStack stack : recipeItems){
 						if (stack != null && !stack.isEmpty()){
-							if (OreDictionary.itemMatches(inputItem, stack, false)){
+							if (OreDictionary.itemMatches(inputItem, stack, true)){
 								for (CustomMaterial material : CustomMaterial.getList("metal")){
 									NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-									if (materialOreDictStacks.containsAll(Arrays.asList(recipeItems))){
-										recipeItem = stack;
-										for (ItemStack materialOreDictStack : materialOreDictStacks){
-											if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
-												metal = material.name;
-											}
+									for (ItemStack materialOreDictStack : materialOreDictStacks){
+										if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
+											metal = material.name;
+											recipeItem = stack;
 										}
 									}
 								}

@@ -51,8 +51,8 @@ public class EntityItemUnbreakable extends EntityItem {
 			setDead();
 		} else {
 			onEntityUpdate();
-
-			int pickupDelay = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "pickupDelay");
+			// net.minecraft.entity.item.EntityItem.pickupDelay
+			int pickupDelay = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "field_145804_b");
 			if (pickupDelay > 0) {
 				this.setPickupDelay(pickupDelay - 1);
 			}

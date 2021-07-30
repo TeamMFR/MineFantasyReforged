@@ -1268,7 +1268,7 @@ public class MineFantasyItems {
 		RAWHIDE_MEDIUM = new ItemHide("rawhide_medium", HIDE_MEDIUM, 1.5F);
 		RAWHIDE_LARGE = new ItemHide("rawhide_large", HIDE_LARGE, 3.0F);
 
-		DRAGON_HEART = new ItemSpecialDesign("dragon_heart", Rarity.UNCOMMON, "dragon");
+		DRAGON_HEART = new ItemSpecialDesign("dragon_heart", Rarity.UNCOMMON, "dragon").setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		LEATHER_STRIP = new ItemBaseMFR("leather_strip").setCreativeTab(MineFantasyTabs.tabMaterials);
 		NAIL = new ItemBaseMFR("nail").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1349,7 +1349,7 @@ public class MineFantasyItems {
 		TRILOGY_JEWEL = new ItemJewel("trilogy_jewel", EnumRarity.EPIC, null, 1);
 
 
-		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate");
+		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate").setCreativeTab(MineFantasyTabs.tabMaterials);;
 	}
 
 	public static void loadComponent() {
