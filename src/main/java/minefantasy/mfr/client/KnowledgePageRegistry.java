@@ -18,7 +18,6 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
-import minefantasy.mfr.recipe.ForgingRecipes;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -364,7 +363,11 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.anvil.addPages(
 				assembleSimpleImgPage("smithy_example", "knowledge.anvil.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("anvil_stone")),
-				new EntryPageRecipeAnvil(ForgingRecipes.recipeMap.get("anvilCrafting")),
+				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("anvil_bronze")),
+				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("anvil_iron")),
+				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("anvil_red_steel")),
+				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("anvil_black_steel")),
+				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("anvil_blue_steel")),
 				new EntryPageText("knowledge.anvil.2"),
 				new EntryPageImage("textures/gui/knowledge/anvil_gui_example.png", 128, 128, ""),
 				new EntryPageText("knowledge.anvil.3"),

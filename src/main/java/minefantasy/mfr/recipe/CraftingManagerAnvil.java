@@ -151,82 +151,6 @@ public class CraftingManagerAnvil {
 		return recipe;
 	}
 
-	public IAnvilRecipe addShapelessRecipe(ItemStack output, Skill skill, String research, boolean hot,
-			String tool, int hammer, int anvil, int time, Object... input) {
-		ArrayList var3 = new ArrayList();
-		Object[] var4 = input;
-		int var5 = input.length;
-
-		for (int var6 = 0; var6 < var5; ++var6) {
-			Object var7 = var4[var6];
-
-			if (var7 instanceof ItemStack) {
-				var3.add(((ItemStack) var7).copy());
-			} else if (var7 instanceof Item) {
-				var3.add(new ItemStack((Item) var7));
-			} else {
-				if (!(var7 instanceof Block)) {
-					throw new RuntimeException("MineFantasy: Invalid shapeless anvil recipe!");
-				}
-
-				var3.add(new ItemStack((Block) var7));
-			}
-		}
-
-		IAnvilRecipe recipe = new ShapelessAnvilRecipes(output, tool, hammer, anvil, time, var3, hot, research, skill);
-		this.recipes.add(recipe);
-		return recipe;
-	}
-
-	public ItemStack findMatchingRecipe(AnvilCraftMatrix matrix, World world) {
-		int var2 = 0;
-		ItemStack var3 = null;
-		ItemStack var4 = null;
-
-		for (int var5 = 0; var5 < matrix.getSizeInventory(); ++var5) {
-			ItemStack var6 = matrix.getStackInSlot(var5);
-
-			if (var6 != null) {
-				if (var2 == 0) {
-					var3 = var6;
-				}
-
-				if (var2 == 1) {
-					var4 = var6;
-				}
-
-				++var2;
-			}
-		}
-
-		if (var2 == 2 && canRepair(var3, var4)) {
-			Item var10 = var3.getItem();
-			int var12 = var10.getMaxDamage() - var3.getItemDamage();
-			int var7 = var10.getMaxDamage() - var4.getItemDamage();
-			int var8 = var12 + var7 + var10.getMaxDamage() * 10 / 100;
-			int var9 = var10.getMaxDamage() - (var8) * 2;
-
-			if (var9 < 0) {
-				var9 = 0;
-			}
-
-			return new ItemStack(var3.getItem(), 1, var9);
-		} else {
-			Iterator var11 = this.recipes.iterator();
-			IAnvilRecipe var13;
-
-			do {
-				if (!var11.hasNext()) {
-					return null;
-				}
-
-				var13 = (IAnvilRecipe) var11.next();
-			} while (!var13.matches(matrix));
-
-			return var13.getCraftingResult(matrix);
-		}
-	}
-
 	private boolean canRepair(ItemStack item1, ItemStack item2) {
 		if (item1.getItem() == item2.getItem() && item1.getCount() == 1 && item2.getCount() == 1
 				&& item1.getItem().isRepairable()) {
@@ -244,42 +168,43 @@ public class CraftingManagerAnvil {
 		int anvilTier;
 		boolean hot;
 		int hammer;
-		int var2 = 0;
+		int matrixItemStackCount = 0;
 		String toolType;
 		SoundEvent sound;
-		ItemStack var3 = ItemStack.EMPTY;
-		ItemStack var4 = ItemStack.EMPTY;
+		ItemStack stack0 = ItemStack.EMPTY;
+		ItemStack stack1 = ItemStack.EMPTY;
 
-		for (int var5 = 0; var5 < matrix.getSizeInventory(); ++var5) {
-			ItemStack matrixSlot = matrix.getStackInSlot(var5);
+		for (int currentSlotIndex = 0; currentSlotIndex < matrix.getSizeInventory(); ++currentSlotIndex) {
+			ItemStack matrixSlotStack = matrix.getStackInSlot(currentSlotIndex);
 
-			if (!matrixSlot.isEmpty()) {
-				if (var2 == 0) {
-					var3 = matrixSlot;
+			// Logic to check if the matrix should match an item repair recipe. (The same two items next to each other in the first two slow).
+			if (!matrixSlotStack.isEmpty()) {
+				if (matrixItemStackCount == 0) {
+					stack0 = matrixSlotStack;
 				}
 
-				if (var2 == 1) {
-					var4 = matrixSlot;
+				if (matrixItemStackCount == 1) {
+					stack1 = matrixSlotStack;
 				}
 
-				++var2;
+				++matrixItemStackCount;
 			}
 		}
 
-		if (var2 == 2 && var3.getItem() == var4.getItem() && var3.getCount() == 1 && var4.getCount() == 1
-				&& var3.getItem().isRepairable()) {
-			Item var10 = var3.getItem();
-			int var12 = var10.getMaxDamage() - var3.getItemDamage();
-			int var7 = var10.getMaxDamage() - var4.getItemDamage();
-			int var8 = var12 + var7 + var10.getMaxDamage() * 10 / 100;
-			int var9 = var10.getMaxDamage() - var8;
+		// Logic to check if the matrix should match an item repair recipe. (The same two items next to each other in the first two slow).
+		if (matrixItemStackCount == 2 && stack0.getItem() == stack1.getItem() && stack0.getCount() == 1 && stack1.getCount() == 1
+				&& stack0.getItem().isRepairable()) {
 
-			if (var9 < 0) {
-				var9 = 0;
-			}
+			Item item0 = stack0.getItem();
 
-			return new ItemStack(var3.getItem(), 1, var9);
+			int item0RemainingDurability = item0.getMaxDamage() - stack0.getItemDamage();
+			int var7 = item0.getMaxDamage() - stack1.getItemDamage();
+			int var8 =  (int) (item0RemainingDurability + var7 + item0.getMaxDamage() * 0.1);
+			int newItemDamage = Math.max(0, item0.getMaxDamage() - var8);
+
+			return new ItemStack(stack0.getItem(), 1, newItemDamage);
 		} else {
+			//// Normal, registered recipes.
 			Iterator recipeIterator = this.recipes.iterator();
 			IAnvilRecipe iAnvilRecipe = null;
 
@@ -318,12 +243,5 @@ public class CraftingManagerAnvil {
 			}
 			return ItemStack.EMPTY;
 		}
-	}
-
-	/**
-	 * returns the List<> of all recipes
-	 */
-	public List getRecipeList() {
-		return this.recipes;
 	}
 }

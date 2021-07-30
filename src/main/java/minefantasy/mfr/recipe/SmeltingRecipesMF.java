@@ -55,6 +55,7 @@ public class SmeltingRecipesMF {
 			MineFantasyReforgedAPI.addFurnaceRecipe(new ItemStack(Blocks.GOLD_ORE), gold, 0);
 		}
 
+
 		refineRawOre(MineFantasyItems.ORE_COPPER, copper);
 		refineRawOre(MineFantasyItems.ORE_TIN, tin);
 		refineRawOre(MineFantasyItems.ORE_IRON, iron);
@@ -65,6 +66,7 @@ public class SmeltingRecipesMF {
 		refineRawOre(MineFantasyBlocks.TIN_ORE, tin, 0.5F);
 		refineRawOre(MineFantasyBlocks.SILVER_ORE, silver, 0.9F);
 
+		GameRegistry.addSmelting(MineFantasyItems.PREPARED_COAL, new ItemStack(MineFantasyItems.COKE), 1F);
 		GameRegistry.addSmelting(MineFantasyBlocks.BORAX_ORE, new ItemStack(MineFantasyItems.FLUX_STRONG, 4), 0.25F);
 		GameRegistry.addSmelting(MineFantasyBlocks.TUNGSTEN_ORE, new ItemStack(MineFantasyItems.ORE_TUNGSTEN, 1), 0.25F);
 		GameRegistry.addSmelting(MineFantasyBlocks.KAOLINITE_ORE, new ItemStack(MineFantasyItems.KAOLINITE), 0.25F);
@@ -143,4 +145,14 @@ public class SmeltingRecipesMF {
 		BigFurnaceRecipes.addRecipe(new ItemStack(ore), bar, 0);
 	}
 
+	static void smeltFood() {
+		GameRegistry.addSmelting(MineFantasyItems.HORSE_RAW, new ItemStack(MineFantasyItems.HORSE_COOKED), 0.2F);
+		GameRegistry.addSmelting(MineFantasyItems.WOLF_RAW, new ItemStack(MineFantasyItems.WOLF_COOKED), 0.2F);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_STRIP_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_CHUNK_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0);
+		GameRegistry.addSmelting(MineFantasyItems.BOWL_WATER_SALT, new ItemStack(MineFantasyItems.SALT), 0);
+		GameRegistry.addSmelting(MineFantasyItems.SAUSAGE_RAW, new ItemStack(MineFantasyItems.SAUSAGE_COOKED), 0);
+	}
 }

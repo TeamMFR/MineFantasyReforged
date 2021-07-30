@@ -1,7 +1,9 @@
 package minefantasy.mfr.recipe.refine;
 
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -44,5 +46,27 @@ public class QuernRecipes {
 			}
 		}
 		return null;
+	}
+
+	public static void init() {
+		addDusts();
+	}
+
+	private static void addDusts() {
+		addRecipe(new ItemStack(Items.DYE, 1, 3), new ItemStack(MineFantasyItems.COCA_POWDER), 0, true);// ItemDye
+		addRecipe(Items.WHEAT, new ItemStack(MineFantasyItems.FLOUR), 0, true);
+		addRecipe(Items.REEDS, new ItemStack(MineFantasyItems.SUGAR_POT), 0, true);
+		addRecipe(MineFantasyItems.BREADROLL, new ItemStack(MineFantasyItems.BREADCRUMBS), 0, true);
+		addRecipe(MineFantasyItems.GENERIC_MEAT_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED), 0, true);
+		addRecipe(MineFantasyItems.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED), 0, true);
+		addRecipe(MineFantasyItems.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED), 0, true);
+		addRecipe(MineFantasyItems.GENERIC_MEAT_COOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0, true);
+		addRecipe(MineFantasyItems.GENERIC_MEAT_STRIP_COOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0, true);
+		addRecipe(MineFantasyItems.GENERIC_MEAT_CHUNK_COOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0, true);
+		addRecipe(Items.COAL, new ItemStack(MineFantasyItems.COAL_DUST), 0, true);
+		addRecipe(new ItemStack(Items.COAL, 1, 1), new ItemStack(MineFantasyItems.COAL_DUST), 0, true);
+		addRecipe(MineFantasyItems.KAOLINITE, new ItemStack(MineFantasyItems.KAOLINITE_DUST), 0, true);
+		addRecipe(Items.FLINT, new ItemStack(MineFantasyItems.SHRAPNEL), 0, true);
+		addRecipe(MineFantasyItems.FLUX, new ItemStack(MineFantasyItems.FLUX_POT), 0, true);
 	}
 }

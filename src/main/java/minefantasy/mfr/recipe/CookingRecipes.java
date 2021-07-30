@@ -44,7 +44,7 @@ public class CookingRecipes {
 				200, 2, false, false);
 
 		if (!ConfigHardcore.preventCook) {
-			smeltFood();
+			SmeltingRecipesMF.smeltFood();
 		}
 	}
 
@@ -79,17 +79,6 @@ public class CookingRecipes {
 	private static CookRecipe bake(Item in, Item out, int mint, int maxt, int time, int burn_time, Item burn) {
 		return MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out), new ItemStack(burn), mint, maxt,
 				time, burn_time, true);
-	}
-
-	private static void smeltFood() {
-		GameRegistry.addSmelting(MineFantasyItems.HORSE_RAW, new ItemStack(MineFantasyItems.HORSE_COOKED), 0.2F);
-		GameRegistry.addSmelting(MineFantasyItems.WOLF_RAW, new ItemStack(MineFantasyItems.WOLF_COOKED), 0.2F);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_STRIP_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_CHUNK_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.BOWL_WATER_SALT, new ItemStack(MineFantasyItems.SALT), 0);
-		GameRegistry.addSmelting(MineFantasyItems.SAUSAGE_RAW, new ItemStack(MineFantasyItems.SAUSAGE_COOKED), 0);
 	}
 
 	private static void addCeramics() {
