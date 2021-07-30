@@ -110,8 +110,8 @@ public class EntityItemUnbreakable extends EntityItem {
 				this.motionY *= -0.5D;
 			}
 
-			int age = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "age");
-			ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, this, age - 1, "age");
+			int age = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "field_70292_b");
+			ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, this, age - 1, "field_70292_b");
 
 			ItemStack item = this.getItem();
 
