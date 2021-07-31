@@ -5,7 +5,7 @@
     "tool_type": "hammer",
     "is_tool_recipe": false,
     "anvil_tier": -1,
-    "recipe_time": 20,
+    "recipe_time": 2,
     "recipe_hammer": -1,
     "output_hot": true,
     "pattern": [

@@ -12,12 +12,21 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
+
 /**
  * @author AnonymousProductions
  */
 public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
+	String oreDictList;
+
 	public CustomToolRecipeAnvil(int width, int height, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvil, boolean hot, String research, Skill skill) {
 		super(width, height, inputs, output, toolType, time, hammer, anvil, hot, research, skill);
+	}
+
+	public CustomToolRecipeAnvil(int width, int height, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvil, boolean hot, String research, Skill skill, String oreDictList) {
+		super(width, height, inputs, output, toolType, time, hammer, anvil, hot, research, skill);
+		this.oreDictList = oreDictList;
 	}
 
 	/**
@@ -77,16 +86,15 @@ public class CustomToolRecipeAnvil extends ShapedAnvilRecipes {
 					}
 					inputItem = getHotItem(inputItem);
 
-					for (ItemStack stack : recipeItems){
-						if (stack != null && !stack.isEmpty()){
-							if (OreDictionary.itemMatches(inputItem, stack, true)){
-								for (CustomMaterial material : CustomMaterial.getList("metal")){
-									NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-									for (ItemStack materialOreDictStack : materialOreDictStacks){
-										if (OreDictionary.itemMatches(inputItem, materialOreDictStack, true)){
-											metal = material.name;
-											recipeItem = stack;
-										}
+					if (oreDictList != null){
+						NonNullList<ItemStack> oreDictStacks = OreDictionary.getOres(oreDictList);
+						if (oreDictStacks.contains(recipeItem)){
+							for (CustomMaterial material : CustomMaterial.getList("metal")){
+								NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
+								for (ItemStack materialOreDictStack : materialOreDictStacks){
+									if (OreDictionary.itemMatches(materialOreDictStack, inputItem, true)){
+										metal = material.name;
+										recipeItem = materialOreDictStack;
 									}
 								}
 							}

@@ -70,81 +70,84 @@ public class CraftingManagerAnvil {
 	/**
 	 * Adds a recipe. See spreadsheet on first page for details.
 	 */
-	public IAnvilRecipe addRecipe(String name, ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, byte recipeType, Object... input) {
-		String var3 = "";
-		int var4 = 0;
-		int var5 = 0;
-		int var6 = 0;
-		int var9;
+	public IAnvilRecipe addRecipe(String name, ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, String recipeType, String oreDictList, Object... input) {
+		String keyString = "";
+		int inputSelector = 0;
+		int width = 0;
+		int height = 0;
+		int keyStringsLength;
 
-		if (input[var4] instanceof String[]) {
-			String[] var7 = ((String[]) input[var4++]);
-			String[] var8 = var7;
-			var9 = var7.length;
+		if (input[inputSelector] instanceof String[]) {
+			String[] keyStrings = ((String[]) input[inputSelector++]);
+			keyStringsLength = keyStrings.length;
 
-			for (int var10 = 0; var10 < var9; ++var10) {
-				String var11 = var8[var10];
-				++var6;
-				var5 = var11.length();
-				var3 = var3 + var11;
+			for (int i = 0; i < keyStringsLength; ++i) {
+				String keyStringBuilder = keyStrings[i];
+				++height;
+				width = keyStringBuilder.length();
+				keyString = keyString + keyStringBuilder;
 			}
 		} else {
-			while (input[var4] instanceof String) {
-				String var13 = (String) input[var4++];
-				++var6;
-				var5 = var13.length();
-				var3 = var3 + var13;
+			while (input[inputSelector] instanceof String) {
+				String keyStringBuilder = (String) input[inputSelector++];
+				++height;
+				width = keyStringBuilder.length();
+				keyString = keyString + keyStringBuilder;
 			}
 		}
 
-		HashMap var14;
-		for (var14 = new HashMap(); var4 < input.length; var4 += 2) {
+		HashMap keyHashMap;
+		for (keyHashMap = new HashMap(); inputSelector < input.length; inputSelector += 2) {
 
-			Character var16 = (Character) input[var4];
-			ItemStack var17 = null;
-			ItemStack[] var18 = null;
+			Character inputCharacter = (Character) input[inputSelector];
+			ItemStack inputItem = null;
+			ItemStack[] inputItems = null;
 
-			if (input[var4 + 1] instanceof Item) {
-				var17 = new ItemStack((Item) input[var4 + 1], 1, 32767);
-			} else if (input[var4 + 1] instanceof Block) {
-				var17 = new ItemStack((Block) input[var4 + 1], 1, 32767);
-			} else if (input[var4 + 1] instanceof ItemStack) {
-				var17 = (ItemStack) input[var4 + 1];
-			} else if (input[var4 + 1] instanceof ItemStack[]){
-				var18 = ((ItemStack[]) input[var4 + 1]);
+			if (input[inputSelector + 1] instanceof Item) {
+				inputItem = new ItemStack((Item) input[inputSelector + 1], 1, 32767);
+			} else if (input[inputSelector + 1] instanceof Block) {
+				inputItem = new ItemStack((Block) input[inputSelector + 1], 1, 32767);
+			} else if (input[inputSelector + 1] instanceof ItemStack) {
+				inputItem = (ItemStack) input[inputSelector + 1];
+			} else if (input[inputSelector + 1] instanceof ItemStack[]){
+				inputItems = ((ItemStack[]) input[inputSelector + 1]);
 			}
 
-			if (var17 != null){
-				var14.put(var16, var17);
+			if (inputItem != null){
+				keyHashMap.put(inputCharacter, inputItem);
 			}
 			else {
-				var14.put(var16, var18);
+				keyHashMap.put(inputCharacter, inputItems);
 			}
 		}
 
-		ItemStack[] var15 = new ItemStack[var5 * var6];
+		ItemStack[] inputs = new ItemStack[width * height];
 
-		for (var9 = 0; var9 < var5 * var6; ++var9) {
-			char var18 = var3.charAt(var9);
+		for (keyStringsLength = 0; keyStringsLength < width * height; ++keyStringsLength) {
+			char charAt = keyString.charAt(keyStringsLength);
 
-			if (var14.containsKey(Character.valueOf(var18))) {
-				if (var14.get(Character.valueOf(var18)) instanceof ItemStack){
-					var15[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
+			if (keyHashMap.containsKey(Character.valueOf(charAt))) {
+				if (keyHashMap.get(Character.valueOf(charAt)) instanceof ItemStack){
+					inputs[keyStringsLength] = ((ItemStack) keyHashMap.get(Character.valueOf(charAt))).copy();
 				}
-				else if (var14.get(Character.valueOf(var18)) instanceof ItemStack[]) {
-					var15 = ((ItemStack[]) var14.get(Character.valueOf(var18)));
+				else if (keyHashMap.get(Character.valueOf(charAt)) instanceof ItemStack[]) {
+					inputs = ((ItemStack[]) keyHashMap.get(Character.valueOf(charAt)));
 				}
 
 			} else {
-				var15[var9] = null;
+				inputs[keyStringsLength] = null;
 			}
 		}
 
 		IAnvilRecipe recipe;
-		if (recipeType == (byte) 1) {
-			recipe = new CustomToolRecipeAnvil(var5, var6, var15, result, tool, time, hammer, anvil, hot, research, skill);
-		} else {
-			recipe = new ShapedAnvilRecipes(var5, var6, var15, result, tool, time, hammer, anvil, hot, research, skill);
+		if (recipeType.equals("CustomToolRecipe")) {
+			recipe = new CustomToolRecipeAnvil(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill);
+		}
+		else if ( recipeType.equals("CustomToolOreDictAnvilRecipes")){
+			recipe = new CustomToolRecipeAnvil(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill, oreDictList);
+		}
+		else {
+			recipe = new ShapedAnvilRecipes(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill);
 		}
 		this.recipes.add(recipe);
 		this.recipeMap.put(name, recipe);
@@ -198,9 +201,9 @@ public class CraftingManagerAnvil {
 			Item item0 = stack0.getItem();
 
 			int item0RemainingDurability = item0.getMaxDamage() - stack0.getItemDamage();
-			int var7 = item0.getMaxDamage() - stack1.getItemDamage();
-			int var8 =  (int) (item0RemainingDurability + var7 + item0.getMaxDamage() * 0.1);
-			int newItemDamage = Math.max(0, item0.getMaxDamage() - var8);
+			int itemDamageDifference = item0.getMaxDamage() - stack1.getItemDamage();
+			int itemDamageModifier =  (int) (item0RemainingDurability + itemDamageDifference + item0.getMaxDamage() * 0.1);
+			int newItemDamage = Math.max(0, item0.getMaxDamage() - itemDamageModifier);
 
 			return new ItemStack(stack0.getItem(), 1, newItemDamage);
 		} else {

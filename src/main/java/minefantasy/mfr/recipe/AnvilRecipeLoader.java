@@ -1,12 +1,15 @@
 package minefantasy.mfr.recipe;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 import minefantasy.mfr.constants.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Class responsible for loading and parsing the anvil recipe json files from the assets and config folders
@@ -32,7 +35,7 @@ public class AnvilRecipeLoader extends RecipeLoader {
 	}
 	@Override
 	protected void parse(String name, JsonObject json) {
-		String s = JsonUtils.getString(json, "type");
+		String type = JsonUtils.getString(json, "type");
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		String research = JsonUtils.getString(json, "research", "none");
@@ -43,10 +46,28 @@ public class AnvilRecipeLoader extends RecipeLoader {
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
 
 		String[] pattern = shrink(patternFromJson(GRID_WIDTH, GRID_HEIGHT, JsonUtils.getJsonArray(json, "pattern")));
+		JsonObject key = JsonUtils.getJsonObject(json, "key");
+
 		ItemStack resultStack = deserializeIngredient(JsonUtils.getJsonObject(json, "result")).getMatchingStacks()[0];
+		String oreDictList = null;
+
+		if (type.equals("CustomToolOreDictAnvilRecipes")){
+			for (Map.Entry<String, JsonElement> entry : key.entrySet()) {
+				if (entry.getKey().length() != 1) {
+					throw new JsonSyntaxException("Invalid key entry: '" + entry.getKey() + "' is an invalid symbol (must be 1 character only).");
+				}
+
+				if (" ".equals(entry.getKey())) {
+					throw new JsonSyntaxException("Invalid key entry: ' ' is a reserved symbol.");
+				}
+				if (entry.getValue().getAsJsonObject().has("type") && JsonUtils.getString(entry.getValue().getAsJsonObject(), "type").equals("oreDict")){
+					oreDictList = JsonUtils.getString(entry.getValue().getAsJsonObject(), "ore");
+				}
+			}
+		}
+
 		Object[] inputs = getInputs(pattern, json);
 
-		byte type = s.equals("CustomToolRecipe") ? (byte) 1 : (byte) 0;
-		CraftingManagerAnvil.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, inputs);
+		CraftingManagerAnvil.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, oreDictList, inputs);
 	}
 }
