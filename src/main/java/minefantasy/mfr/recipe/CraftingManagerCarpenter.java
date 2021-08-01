@@ -46,57 +46,64 @@ public class CraftingManagerCarpenter {
 
 	public ICarpenterRecipe addRecipe(String name, ItemStack output, Skill skill, String research, SoundEvent sound, float experience, String toolType, int toolTier, int blockTier, int time, byte id, Object... input) {
 		StringBuilder recipeString = new StringBuilder();
-		int var4 = 0;
+		int inputSelector = 0;
 		int width = 0;
 		int height = 0;
-		int var9;
+		int keyStringsLength;
 
-		if (input[var4] instanceof String[]) {
-			String[] var7 = ((String[]) input[var4++]);
-			String[] var8 = var7;
-			var9 = var7.length;
+		if (input[inputSelector] instanceof String[]) {
+			String[] keyStrings = ((String[]) input[inputSelector++]);
+			keyStringsLength = keyStrings.length;
 
-			for (int var10 = 0; var10 < var9; ++var10) {
-				String var11 = var8[var10];
+			for (int i = 0; i < keyStringsLength; ++i) {
+				String var11 = keyStrings[i];
 				++height;
 				width = var11.length();
 				recipeString.append(var11);
 			}
 		} else {
-			while (input[var4] instanceof String) {
-				String var13 = (String) input[var4++];
+			while (input[inputSelector] instanceof String) {
+				String keyStringBuilder = (String) input[inputSelector++];
 				++height;
-				width = var13.length();
-				recipeString.append(var13);
+				width = keyStringBuilder.length();
+				recipeString.append(keyStringBuilder);
 			}
 		}
 
-		HashMap var14;
+		HashMap keyHashMap;
 
-		for (var14 = new HashMap(); var4 < input.length; var4 += 2) {
-			Character var16 = (Character) input[var4];
-			ItemStack var17 = ItemStack.EMPTY;
+		for (keyHashMap = new HashMap(); inputSelector < input.length; inputSelector += 2) {
+			Character inputCharacter = (Character) input[inputSelector];
+			ItemStack inputItem = ItemStack.EMPTY;
+			ItemStack[] inputItems = null;
 
-			if (input[var4 + 1] instanceof Item) {
-				var17 = new ItemStack((Item) input[var4 + 1], 1, 32767);
-			} else if (input[var4 + 1] instanceof Block) {
-				var17 = new ItemStack((Block) input[var4 + 1], 1, 32767);
-			} else if (input[var4 + 1] instanceof ItemStack) {
-				var17 = (ItemStack) input[var4 + 1];
+			if (input[inputSelector + 1] instanceof Item) {
+				inputItem = new ItemStack((Item) input[inputSelector + 1], 1, 32767);
+			} else if (input[inputSelector + 1] instanceof Block) {
+				inputItem = new ItemStack((Block) input[inputSelector + 1], 1, 32767);
+			} else if (input[inputSelector + 1] instanceof ItemStack) {
+				inputItem = (ItemStack) input[inputSelector + 1];
+			} else if (input[inputSelector + 1] instanceof ItemStack[]){
+				inputItems = ((ItemStack[]) input[inputSelector + 1]);
 			}
 
-			var14.put(var16, var17);
+			if (!inputItem.isEmpty()){
+				keyHashMap.put(inputCharacter, inputItem);
+			}
+			else {
+				keyHashMap.put(inputCharacter, inputItems);
+			}
 		}
 
 		ItemStack[] inputs = new ItemStack[width * height];
 
-		for (var9 = 0; var9 < width * height; ++var9) {
-			char var18 = recipeString.charAt(var9);
+		for (keyStringsLength = 0; keyStringsLength < width * height; ++keyStringsLength) {
+			char charAt = recipeString.charAt(keyStringsLength);
 
-			if (var14.containsKey(Character.valueOf(var18))) {
-				inputs[var9] = ((ItemStack) var14.get(Character.valueOf(var18))).copy();
+			if (keyHashMap.containsKey(charAt)) {
+				inputs[keyStringsLength] = ((ItemStack) keyHashMap.get(charAt)).copy();
 			} else {
-				inputs[var9] = ItemStack.EMPTY;
+				inputs[keyStringsLength] = ItemStack.EMPTY;
 			}
 		}
 		ICarpenterRecipe recipe;

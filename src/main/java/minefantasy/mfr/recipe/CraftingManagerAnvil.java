@@ -71,7 +71,7 @@ public class CraftingManagerAnvil {
 	 * Adds a recipe. See spreadsheet on first page for details.
 	 */
 	public IAnvilRecipe addRecipe(String name, ItemStack result, Skill skill, String research, boolean hot, String tool, int hammer, int anvil, int time, String recipeType, String oreDictList, Object... input) {
-		String keyString = "";
+		StringBuilder keyString = new StringBuilder();
 		int inputSelector = 0;
 		int width = 0;
 		int height = 0;
@@ -85,14 +85,14 @@ public class CraftingManagerAnvil {
 				String keyStringBuilder = keyStrings[i];
 				++height;
 				width = keyStringBuilder.length();
-				keyString = keyString + keyStringBuilder;
+				keyString.append(keyStringBuilder);
 			}
 		} else {
 			while (input[inputSelector] instanceof String) {
 				String keyStringBuilder = (String) input[inputSelector++];
 				++height;
 				width = keyStringBuilder.length();
-				keyString = keyString + keyStringBuilder;
+				keyString.append(keyStringBuilder);
 			}
 		}
 
@@ -100,7 +100,7 @@ public class CraftingManagerAnvil {
 		for (keyHashMap = new HashMap(); inputSelector < input.length; inputSelector += 2) {
 
 			Character inputCharacter = (Character) input[inputSelector];
-			ItemStack inputItem = null;
+			ItemStack inputItem = ItemStack.EMPTY;
 			ItemStack[] inputItems = null;
 
 			if (input[inputSelector + 1] instanceof Item) {
@@ -113,7 +113,7 @@ public class CraftingManagerAnvil {
 				inputItems = ((ItemStack[]) input[inputSelector + 1]);
 			}
 
-			if (inputItem != null){
+			if (!inputItem.isEmpty()){
 				keyHashMap.put(inputCharacter, inputItem);
 			}
 			else {
@@ -126,16 +126,16 @@ public class CraftingManagerAnvil {
 		for (keyStringsLength = 0; keyStringsLength < width * height; ++keyStringsLength) {
 			char charAt = keyString.charAt(keyStringsLength);
 
-			if (keyHashMap.containsKey(Character.valueOf(charAt))) {
-				if (keyHashMap.get(Character.valueOf(charAt)) instanceof ItemStack){
-					inputs[keyStringsLength] = ((ItemStack) keyHashMap.get(Character.valueOf(charAt))).copy();
+			if (keyHashMap.containsKey(charAt)) {
+				if (keyHashMap.get(charAt) instanceof ItemStack){
+					inputs[keyStringsLength] = ((ItemStack) keyHashMap.get(charAt)).copy();
 				}
-				else if (keyHashMap.get(Character.valueOf(charAt)) instanceof ItemStack[]) {
-					inputs = ((ItemStack[]) keyHashMap.get(Character.valueOf(charAt)));
+				else if (keyHashMap.get(charAt) instanceof ItemStack[]) {
+					inputs = (ItemStack[]) keyHashMap.get(charAt);
 				}
-
-			} else {
-				inputs[keyStringsLength] = null;
+			}
+			else {
+				inputs[keyStringsLength] = ItemStack.EMPTY;
 			}
 		}
 

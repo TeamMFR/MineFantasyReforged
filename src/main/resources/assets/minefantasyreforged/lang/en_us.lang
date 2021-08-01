@@ -781,7 +781,7 @@ item.standard_lance.name=%1$s Lance
 
 item.standard_handpick.name=%1$s Handpick
 item.standard_heavy_pick.name=Heavy %1$s Pickaxe
-item.standard_trow.name=%1$s Spade
+item.standard_trow.name=%1$s Trow
 item.standard_heavy_shovel.name=Heavy %1$s Shovel
 item.standard_scythe.name=%1$s Scythe
 item.standard_mattock.name=%1$s Mattock

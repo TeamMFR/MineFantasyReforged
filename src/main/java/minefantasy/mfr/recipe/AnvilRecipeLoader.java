@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import minefantasy.mfr.constants.Skill;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 
 import java.util.ArrayList;
@@ -66,8 +67,34 @@ public class AnvilRecipeLoader extends RecipeLoader {
 			}
 		}
 
-		Object[] inputs = getInputs(pattern, json);
+		Object[] inputs = this.getInputs(pattern, json);
 
 		CraftingManagerAnvil.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, oreDictList, inputs);
+	}
+
+	Object[] getInputs(String[] pattern, JsonObject json) {
+		Map<Character, Ingredient> map = deserializeKeyToCharMap(JsonUtils.getJsonObject(json, "key"));
+
+		Object[] object = new Object[] {};
+
+		for (String p : pattern) {
+			if (p.trim().length() > 0) {
+				object = appendValue(object, p);
+			}
+		}
+
+		for (Map.Entry<Character, Ingredient> i : map.entrySet()) {
+			if (!Character.isWhitespace(i.getKey())) {
+				object = appendValue(object, i.getKey());
+				if (i.getValue().getMatchingStacks().length > 1){
+					object = appendValue(object, i.getValue().getMatchingStacks());
+				}
+				else {
+					object = appendValue(object, i.getValue().getMatchingStacks()[0]);
+				}
+			}
+		}
+
+		return object;
 	}
 }

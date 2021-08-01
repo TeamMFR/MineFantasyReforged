@@ -256,12 +256,7 @@ public abstract class RecipeLoader extends DataLoader {
 		for (Map.Entry<Character, Ingredient> i : map.entrySet()) {
 			if (!Character.isWhitespace(i.getKey())) {
 				object = appendValue(object, i.getKey());
-				if (i.getValue().getMatchingStacks().length > 1){
-					object = appendValue(object, i.getValue().getMatchingStacks());
-				}
-				else {
-					object = appendValue(object, i.getValue().getMatchingStacks()[0]);
-				}
+				object = appendValue(object, i.getValue().getMatchingStacks()[0]);
 			}
 		}
 

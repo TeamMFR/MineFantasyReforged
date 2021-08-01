@@ -207,18 +207,19 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
-		if (state.getValue(BURNING)) {
-			if (rand.nextInt(10) == 0) {
-				world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
-			}
+		if (!state.getValue(BURNING)){
+			return;
+		}
+		if (rand.nextInt(10) == 0) {
+			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
+		}
 
-			for (int i = 0; i < 3; ++i) {
-				double x = pos.getX() + 0.25D + rand.nextDouble() * 0.5D;
-				double y = pos.getY() + rand.nextDouble() * 0.5D;
-				double z = pos.getZ() + 0.25D + rand.nextDouble() * 0.5D;
-				world.spawnParticle(EnumParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
-				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0.0D, 0.0D, 0.0D);
-			}
+		for (int i = 0; i < 3; ++i) {
+			double x = pos.getX() + 0.25D + rand.nextDouble() * 0.5D;
+			double y = pos.getY() + rand.nextDouble() * 0.5D;
+			double z = pos.getZ() + 0.25D + rand.nextDouble() * 0.5D;
+			world.spawnParticle(EnumParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
+			world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0.0D, 0.0D, 0.0D);
 		}
 	}
 

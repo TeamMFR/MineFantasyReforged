@@ -11,7 +11,6 @@ import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemTongs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -59,7 +58,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		this.setHardness(5F);
 		this.setResistance(8F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		this.setLightOpacity(0);
+		this.setLightLevel(8F);
 		setDefaultState(blockState.getBaseState().withProperty(BURNING,false).withProperty(FUEL_COUNT, 0).withProperty(UNDER, false));
 	}
 
@@ -140,17 +139,6 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	public boolean isBurning(IBlockAccess world, BlockPos pos) {
 		TileEntityForge tile = (TileEntityForge) getTile(world, pos);
 		return tile != null && tile.getIsLit();
-	}
-
-	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-		TileEntityBase tile = getTile(world, pos);
-		if (tile != null && tile instanceof TileEntityForge){
-			return ((TileEntityForge) tile).getIsLit() ? 15 : 0;
-		}
-		else {
-			return 0;
-		}
 	}
 
 	@Override
@@ -255,11 +243,12 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		if (tier == 1 && !world.isRemote) {
 			if (tile.getIsLit() && !world.isBlockPowered(pos)) {
 				setActiveState(false, tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+				tile.setIsLit(false);
 			} else if (!tile.getIsLit() && world.isBlockPowered(pos)) {
 				setActiveState(true, tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
+				tile.setIsLit(true);
 			}
 		}
-		setActiveState(tile.getIsLit(), tile.getFuelCount(), tile.hasBlockAbove(), world, pos);
 	}
 
 	/**

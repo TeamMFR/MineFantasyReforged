@@ -107,9 +107,6 @@ public class MineFantasyOreDict {
 				}
 			}
 		}
-		for (ItemStack ingot : OreDictionary.getOres("listAllIngots")){
-			MineFantasyReforged.LOG.info("MineFantasy registering: " + ingot.getDisplayName());
-		}
 	}
 
 	private static void addOreDictEntry(String list, String mfList) {
