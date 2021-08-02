@@ -28,8 +28,7 @@ public class WoodMaterialRegistry extends DataLoader {
 	}
 
 	public void loadRegistryFiles(File source, String base, String type) {
-		//noinspection ConstantConditions
-		FileUtils.findFiles(Loader.instance().activeModContainer().getSource(), DEFAULT_RECIPE_DIRECTORY, (root, file) -> {
+		FileUtils.findFiles(source, base, (root, file) -> {
 			String extension = FilenameUtils.getExtension(file.toString());
 
 			if (!extension.equals(JSON_FILE_EXT)) {
