@@ -221,7 +221,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 				drop = ItemHeated.createHotItem(drop, 1200);
 				entityDropItem(world, pos, drop);
 			}
-			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+			world.playSound(null, pos, MineFantasySounds.ANVIL_SUCCEED, SoundCategory.AMBIENT, 0.25F, 1.0F);
 
 			return true;
 		}

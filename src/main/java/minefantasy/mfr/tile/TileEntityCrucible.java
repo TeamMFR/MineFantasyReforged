@@ -104,7 +104,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 		}
 	}
 
-	private boolean getIsHot() {
+	public boolean getIsHot() {
 		if (this.getTier() >= 2) {
 			return this.isCoated();
 		}
@@ -157,7 +157,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 	}
 
 	private void spawnParticle(int x, int y, int z) {
-		this.world.playBroadcastSound(2003, pos.add(x, y, z), 0);
+		world.playEvent(2003, pos.add(x, y, z), 0);
 	}
 
 	private boolean canSmelt() {
@@ -252,9 +252,9 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 	public boolean isCoated() {
 		if (this.getTier() >= 2) {
-			return isEnderAlter(-1, -1, -3) && isEnderAlter(-1, -1, 3) && isEnderAlter(-3, -1, -1)
-					&& isEnderAlter(3, -1, -1) && isEnderAlter(1, -1, -3) && isEnderAlter(1, -1, 3)
-					&& isEnderAlter(-3, -1, 1) && isEnderAlter(3, -1, 1);
+			return isEnderAltar(-1, -1, -3) && isEnderAltar(-1, -1, 3) && isEnderAltar(-3, -1, -1)
+					&& isEnderAltar(3, -1, -1) && isEnderAltar(1, -1, -3) && isEnderAltar(1, -1, 3)
+					&& isEnderAltar(-3, -1, 1) && isEnderAltar(3, -1, 1);
 		}
 		return isFirebrick(0, 0, -1) && isFirebrick(0, 0, 1) && isFirebrick(-1, 0, 0) && isFirebrick(1, 0, 0);
 	}
@@ -264,12 +264,10 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 	}
 	// INVENTORY
 
-	private boolean isEnderAlter(int x, int y, int z) {
-		Block block = world.getBlockState(pos.add(x, y, z)).getBlock();
-
-		// worldObj.setBlock(xCoord+x, yCoord+y, zCoord+z, Blocks.end_portal_frame, 0,
-		// 2);
-		return block == Blocks.END_PORTAL_FRAME && block.getDefaultState() == block.getDefaultState().withProperty(BlockEndPortalFrame.EYE, true);
+	private boolean isEnderAltar(int x, int y, int z) {
+		IBlockState state = world.getBlockState(pos.add(x, y, z));
+		Block block = state.getBlock();
+		return block == Blocks.END_PORTAL_FRAME && state.getValue(BlockEndPortalFrame.EYE);
 	}
 
 	private boolean isBlastOutput() {

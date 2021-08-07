@@ -11,6 +11,14 @@
         "transform": "forge:default-block"
     },
     "variants": {
-        "normal": [{}]
+        "normal": [{}],
+        "active": {
+            "true": {
+                "textures": {"top": "minefantasyreforged:blocks/crucible_top_active_stone"}
+            },
+            "false":  {
+                "textures": { "top": "minefantasyreforged:blocks/crucible_top_stone"}
+            }
+        }
     }
 }

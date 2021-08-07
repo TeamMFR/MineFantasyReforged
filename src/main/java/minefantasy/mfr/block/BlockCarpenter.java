@@ -11,7 +11,6 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -78,7 +77,7 @@ public class BlockCarpenter extends BlockTileEntity<TileEntityCarpenter> {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityCarpenter tile = (TileEntityCarpenter) getTile(world, pos);
 		if (tile != null && (world.isAirBlock(pos.add(0, 1, 0)) || !world.isSideSolid(pos.add(0, 1, 0), EnumFacing.DOWN))) {
-			if (facing != EnumFacing.UP || !tile.tryCraft(player) && !world.isRemote) {
+			if (facing != EnumFacing.UP || (!tile.tryCraft(player) && !world.isRemote)) {
 				tile.openGUI(world, player);
 			}
 		}

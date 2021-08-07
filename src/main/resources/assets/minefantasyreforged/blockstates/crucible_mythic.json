@@ -11,6 +11,14 @@
         "transform": "forge:default-block"
     },
     "variants": {
-        "normal": [{}]
+        "normal": [{}],
+        "active": {
+            "true": {
+                "textures": {"top": "minefantasyreforged:blocks/crucible_top_active_mythic"}
+            },
+            "false":  {
+                "textures": { "top": "minefantasyreforged:blocks/crucible_top_mythic"}
+            }
+        }
     }
 }

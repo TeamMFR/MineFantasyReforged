@@ -6,6 +6,7 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.monster.EntitySilverfish;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.EnumFacing;
@@ -84,7 +85,16 @@ public class StructureGenAncientForgeRoom extends StructureModuleMFR {
 			chest.setLootTable(loot, random.nextLong());
 			if (hasTrinket) {
                 int artId = random.nextInt(chest.getSizeInventory());
-				chest.setInventorySlotContents(artId, new ItemStack(MineFantasyItems.ANCIENT_JEWEL_ADAMANT, 1));
+                Item jewel = null;
+                if (facing == EnumFacing.NORTH || facing == EnumFacing.WEST){
+                	jewel = MineFantasyItems.ANCIENT_JEWEL_ADAMANT;
+				}
+                if (facing == EnumFacing.SOUTH || facing == EnumFacing.EAST){
+                	jewel = MineFantasyItems.ANCIENT_JEWEL_MITHRIL;
+				}
+                if (jewel != null){
+					chest.setInventorySlotContents(artId, new ItemStack(jewel, 1));
+				}
 			}
 		}
 	}

@@ -106,7 +106,7 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
             chest.setLootTable(loot, random.nextLong());
 
             int artefactSlot = random.nextInt(chest.getSizeInventory());
-            chest.setInventorySlotContents(artefactSlot, new ItemStack(MineFantasyItems.ANCIENT_JEWEL_MITHRIL, 1));
+            chest.setInventorySlotContents(artefactSlot, new ItemStack(MineFantasyItems.ANCIENT_JEWEL_MASTER, 1));
         }
     }
 }

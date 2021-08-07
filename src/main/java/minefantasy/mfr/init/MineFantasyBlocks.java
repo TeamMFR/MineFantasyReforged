@@ -401,11 +401,11 @@ public class MineFantasyBlocks {
 		BLAST_CHAMBER = new BlockBlastChamber();
 		BLAST_HEATER = new BlockBlastHeater();
 
-		CRUCIBLE_STONE = new BlockCrucible("stone", 0, false);
-		CRUCIBLE_FIRECLAY = new BlockCrucible("fireclay", 1, false);
-		CRUCIBLE_AUTO = new BlockCrucible("auto", 1, false).setAuto().setHardness(12F);
-		CRUCIBLE_MYTHIC = new BlockCrucible("mythic", 2, false).setAuto().setBlockUnbreakable();
-		CRUCIBLE_MASTER = new BlockCrucible("master", 3, false).setAuto().setBlockUnbreakable();
+		CRUCIBLE_STONE = new BlockCrucible("stone", 0);
+		CRUCIBLE_FIRECLAY = new BlockCrucible("fireclay", 1);
+		CRUCIBLE_AUTO = new BlockCrucible("auto", 1).setAuto().setHardness(12F);
+		CRUCIBLE_MYTHIC = new BlockCrucible("mythic", 2).setAuto().setBlockUnbreakable();
+		CRUCIBLE_MASTER = new BlockCrucible("master", 3).setAuto().setBlockUnbreakable();
 
 		CHIMNEY_STONE = new BlockChimney("stone", false, false, 5);
 		CHIMNEY_STONE_WIDE = new BlockChimney("stone", true, false, 10);

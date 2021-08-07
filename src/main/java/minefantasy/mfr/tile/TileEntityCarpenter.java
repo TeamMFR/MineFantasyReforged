@@ -119,7 +119,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 					&& tool == requiredToolType
 					&& tier >= requiredCarpenterTier
 					&& toolTier >= requiredToolTier) {
-				world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, getUseSound(), SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+				world.playSound(null, pos, getUseSound(), SoundCategory.AMBIENT, 1.0F, 1.0F);
 				float efficiency = ToolHelper.getCrafterEfficiency(user.getHeldItemMainhand());
 
 				if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
@@ -151,7 +151,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 			}
 			return SoundEvents.BLOCK_WOOD_STEP;
 		}
-		return craftSound;
+		return getCraftingSound();
 	}
 
 	private void craftItem(EntityPlayer user) {
