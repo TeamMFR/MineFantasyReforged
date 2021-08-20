@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
-import minefantasy.mfr.mechanics.StaminaBar;
+import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
@@ -31,24 +31,6 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {
 		super(name, material, rarity);
 		this.setMaxDamage(getMaxDamage() * 5);
-	}
-
-	public static boolean canAcceptCost(EntityLivingBase user) {
-		return canAcceptCost(user, 0.1F);
-	}
-
-	public static boolean canAcceptCost(EntityLivingBase user, float cost) {
-		if (user instanceof EntityPlayer && StaminaBar.isSystemActive) {
-			return StaminaBar.isPercentStamAvailable(user, cost, true);
-		}
-		return true;
-	}
-
-	public static void tirePlayer(EntityPlayer player, float points) {
-		if (StaminaBar.isSystemActive) {
-			StaminaBar.modifyStaminaValue(player, -StaminaBar.getBaseDecayModifier(player, true, true) * points);
-			StaminaBar.ModifyIdleTime(player, 5F * points);
-		}
 	}
 
 	@Override
@@ -88,7 +70,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack item, World world, IBlockState block, BlockPos pos, EntityLivingBase user) {
-		if (user instanceof EntityPlayer && canAcceptCost(user)) {
+		if (user instanceof EntityPlayer && StaminaMechanics.canAcceptCost(user)) {
 			breakChain(world, pos, item, block, user, 32, block.getBlock());
 		}
 		return super.onBlockDestroyed(item, world, block, pos, user);
@@ -114,7 +96,7 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 				}
 			}
 			if (user instanceof EntityPlayer) {
-				tirePlayer((EntityPlayer) user, 0.5F);
+				StaminaMechanics.tirePlayer((EntityPlayer) user, 0.5F);
 			}
 		}
 	}

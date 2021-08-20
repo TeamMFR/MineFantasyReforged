@@ -12,6 +12,7 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -106,7 +107,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 								world.playSound(player, newPos, SoundEvents.BLOCK_GRASS_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F);
 								tryBreakFarmland(world, newPos.add(0, -1, 0));
 								if (!player.capabilities.isCreativeMode) {
-									ItemLumberAxe.tirePlayer(player, 1F);
+									StaminaMechanics.tirePlayer(player, 1F);
 									state.getBlock().dropBlockAsItemWithChance(world, newPos, state, ConfigTools.heavy_tool_drop_chance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
 								}
 								stack.damageItem(1, player);
@@ -159,7 +160,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		ItemStack stack = player.getHeldItemMainhand();
-		if (!player.canPlayerEdit(pos, facing, stack) || !ItemLumberAxe.canAcceptCost(player)) {
+		if (!player.canPlayerEdit(pos, facing, stack) || !StaminaMechanics.canAcceptCost(player)) {
 			return EnumActionResult.FAIL;
 		} else {
 			IBlockState state = world.getBlockState(pos);

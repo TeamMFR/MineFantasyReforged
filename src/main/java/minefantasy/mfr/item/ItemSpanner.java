@@ -8,6 +8,7 @@ import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.block.BlockRack;
+import minefantasy.mfr.block.BlockRepairKit;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -79,16 +80,22 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 		shiftRotations.add(BlockChest.class);
 		blacklistedRotations.add(BlockBed.class);
 		blacklistedRotations.add(BlockRack.class);
+		blacklistedRotations.add(BlockRepairKit.class);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand) {
-		Block block = world.getBlockState(pos).getBlock();
+		IBlockState state = world.getBlockState(pos);
+		Block block = state.getBlock();
+
+		if (block.hasTileEntity(state)){
+			return EnumActionResult.FAIL;
+		}
 
 		if (block == null || isClass(blacklistedRotations, block.getClass())) {
-			return EnumActionResult.FAIL;
+			return EnumActionResult.PASS;
 		}
 
 		if (player.isSneaking() != isClass(shiftRotations, block.getClass())) {

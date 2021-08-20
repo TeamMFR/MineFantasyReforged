@@ -226,4 +226,22 @@ public class StaminaMechanics {
 
 		return value * ConfigStamina.weaponModifier * StaminaBar.getBaseDecayModifier(user, true, true);
 	}
+
+	public static void tirePlayer(EntityPlayer player, float points) {
+		if (StaminaBar.isSystemActive) {
+			StaminaBar.modifyStaminaValue(player, -StaminaBar.getBaseDecayModifier(player, true, true) * points);
+			StaminaBar.ModifyIdleTime(player, 5F * points);
+		}
+	}
+
+	public static boolean canAcceptCost(EntityLivingBase user) {
+		return canAcceptCost(user, 0.1F);
+	}
+
+	public static boolean canAcceptCost(EntityLivingBase user, float cost) {
+		if (user instanceof EntityPlayer && StaminaBar.isSystemActive) {
+			return StaminaBar.isPercentStamAvailable(user, cost, true);
+		}
+		return true;
+	}
 }

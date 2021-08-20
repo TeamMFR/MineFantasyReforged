@@ -451,9 +451,8 @@ public class MineFantasyHUD extends Gui {
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
 		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(),
-					tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
+			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
 		}
 
 		GL11.glPopMatrix();

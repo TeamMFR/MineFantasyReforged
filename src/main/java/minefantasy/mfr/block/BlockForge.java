@@ -58,7 +58,6 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		this.setHardness(5F);
 		this.setResistance(8F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
-		this.setLightLevel(8F);
 		setDefaultState(blockState.getBaseState().withProperty(BURNING,false).withProperty(FUEL_COUNT, 0).withProperty(UNDER, false));
 	}
 
@@ -119,6 +118,11 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	@Override
 	public boolean isFullCube(IBlockState state) {
 		return false;
+	}
+
+	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return state.getValue(BURNING) ? 15 : 0;
 	}
 
 	/**

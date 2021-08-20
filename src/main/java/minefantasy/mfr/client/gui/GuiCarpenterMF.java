@@ -83,16 +83,14 @@ public class GuiCarpenterMF extends GuiContainer {
 					true);
 
 			if (tile.getRequiredToolType() != null) {
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType(), tile.getToolTierNeeded(), xPoint - 20, yPoint,
-						isToolSufficient());
+				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20, yPoint, isToolSufficient());
 			}
 		}
 	}
 
 	private boolean isToolSufficient() {
 		if (mc.player != null) {
-			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(),
-					tile.getToolTierNeeded());
+			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
 		}
 		return false;
 	}

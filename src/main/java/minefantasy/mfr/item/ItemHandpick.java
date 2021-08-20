@@ -71,7 +71,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 			IBlockState state = world.getBlockState(pos);
 			int harvestlvl = this.getMaterial().getHarvestLevel();
 			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item);
-			boolean silk = user.getHeldItemMainhand().canHarvestBlock(blockState);
+			boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, user.getHeldItemMainhand()) > 0;
 
 			//double drop logic
 			List<ItemStack> drops = blockState.getBlock().getDrops(world, pos, state, ConfigTools.handpickFortune ? fortune : 0);

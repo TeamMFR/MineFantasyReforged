@@ -10,6 +10,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockOreMF extends BasicBlockMF {
@@ -98,5 +99,16 @@ public class BlockOreMF extends BasicBlockMF {
 			return rand.nextInt(xp * 2);
 		}
 		return 0;
+	}
+
+	@Override
+	public String getHarvestTool(IBlockState state) {
+		if (blockMaterial == Material.ROCK){
+			return "pickaxe";
+		}
+		if (blockMaterial == Material.GROUND){
+			return "shovel";
+		}
+		return null;
 	}
 }

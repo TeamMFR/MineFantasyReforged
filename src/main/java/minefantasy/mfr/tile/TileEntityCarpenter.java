@@ -37,6 +37,8 @@ import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
 public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
+	private static final String TOOL_TIER_REQUIRED_TAG = "tool_tier_required";
+
 	// the tier of this carpenter block
 	private int tier;
 	public static final int width = 4;
@@ -48,7 +50,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	public float progress;
 	private ContainerCarpenter syncCarpenter;
 	private CarpenterCraftMatrix craftMatrix;
-	private String lastPlayerHit = ""; // TODO: store entity UUID instead of string
+	private String lastPlayerHit = "";
 	private SoundEvent craftSound = SoundEvents.BLOCK_WOOD_STEP;
 	private String requiredResearch = "";
 	private Skill requiredSkill;
@@ -210,8 +212,8 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		return item.getTagCompound();
 	}
 
-	public String getRequiredToolType() {
-		return requiredToolType.getName();
+	public Tool getRequiredToolType() {
+		return requiredToolType;
 	}
 
 	public SoundEvent getCraftingSound() {
@@ -331,9 +333,6 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 			}
 			if (progress > progressMax)
 				progress = progressMax - 1;
-
-			//            syncData();
-			sendUpdates();
 		}
 	}
 
@@ -418,6 +417,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		progressMax = nbt.getFloat(PROGRESS_MAX_TAG);
 		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
 		requiredToolType = Tool.fromName(nbt.getString(TOOL_TYPE_REQUIRED_TAG));
+		requiredToolTier = nbt.getInteger(TOOL_TIER_REQUIRED_TAG);
 		requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
 	}
 
@@ -430,6 +430,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 		nbt.setFloat(PROGRESS_MAX_TAG, progressMax);
 		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
 		nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType.getName());
+		nbt.setInteger(TOOL_TIER_REQUIRED_TAG, requiredToolTier);
 		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
 		return nbt;
 	}

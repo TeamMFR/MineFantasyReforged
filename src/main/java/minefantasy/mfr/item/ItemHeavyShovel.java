@@ -8,6 +8,7 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -67,34 +68,32 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
-		if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, stack) && ItemLumberAxe.canAcceptCost(user)) {
+		if (!world.isRemote && ForgeHooks.canToolHarvestBlock(world, pos, stack) && StaminaMechanics.canAcceptCost(user)) {
 			int range = 2;
 			for (int x1 = -range; x1 <= range; x1++) {
-				{
-					for (int z1 = -range; z1 <= range; z1++) {
-						if (getDistance(pos.getX() + x1, pos.getY(), pos.getZ() + z1, pos) <= range + 0.5D) {
-							EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, user);
-							int blockX = pos.getX() + x1 + facing.getFrontOffsetX();
-							int blockY = pos.getY() + facing.getFrontOffsetY();
-							int blockZ = pos.getZ() + z1 + facing.getFrontOffsetZ();
+				for (int z1 = -range; z1 <= range; z1++) {
+					if (getDistance(pos.getX() + x1, pos.getY(), pos.getZ() + z1, pos) <= range + 0.5D) {
+						EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, user);
+						int blockX = pos.getX() + x1 + facing.getFrontOffsetX();
+						int blockY = pos.getY() + facing.getFrontOffsetY();
+						int blockZ = pos.getZ() + z1 + facing.getFrontOffsetZ();
 
-							if (!(x1 + facing.getFrontOffsetX() == 0 && facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
-								BlockPos newBlockPos = new BlockPos(blockX, blockY, blockZ);
-								IBlockState newBlock = world.getBlockState(newBlockPos);
-								IBlockState above = world.getBlockState(newBlockPos.add(0, 1, 0));
+						if (!(x1 + facing.getFrontOffsetX() == 0 && facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
+							BlockPos newBlockPos = new BlockPos(blockX, blockY, blockZ);
+							IBlockState newState = world.getBlockState(newBlockPos);
+							IBlockState above = world.getBlockState(newBlockPos.add(0, 1, 0));
 
-								if ((above == Blocks.AIR.getDefaultState() || !above.getMaterial().isSolid()) && newBlock != null
-										&& user instanceof EntityPlayer
-										&& ForgeHooks.canHarvestBlock(newBlock.getBlock(), (EntityPlayer) user, world, newBlockPos)
-										&& ForgeHooks.isToolEffective(world, newBlockPos, stack)) {
+							if ((above == Blocks.AIR.getDefaultState() || !above.getMaterial().isSolid()) && newState != null
+									&& user instanceof EntityPlayer
+									&& ForgeHooks.canHarvestBlock(newState.getBlock(), (EntityPlayer) user, world, newBlockPos)
+									&& ForgeHooks.canToolHarvestBlock(world, newBlockPos, stack)) {
 
-									if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
-										newBlock.getBlock().dropBlockAsItemWithChance(world, newBlockPos, newBlock, ConfigTools.heavy_tool_drop_chance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
-									}
-									world.setBlockToAir(newBlockPos);
-									stack.damageItem(1, user);
-									ItemLumberAxe.tirePlayer((EntityPlayer) user, 1F);
+								if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
+									newState.getBlock().dropBlockAsItemWithChance(world, newBlockPos, newState, ConfigTools.heavy_tool_drop_chance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
 								}
+								world.setBlockToAir(newBlockPos);
+								stack.damageItem(1, user);
+								StaminaMechanics.tirePlayer((EntityPlayer) user, 1F);
 							}
 						}
 					}

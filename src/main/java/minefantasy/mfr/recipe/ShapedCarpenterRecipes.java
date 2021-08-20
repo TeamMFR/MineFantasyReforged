@@ -1,6 +1,8 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -188,6 +190,9 @@ public class ShapedCarpenterRecipes implements IRecipe, ICarpenterRecipe {
 					}
 					// false if not using the wildcard value for item data AND the required item's data doesn't match with the input item
 					if (recipeItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && recipeItem.getItemDamage() != inputItem.getItemDamage()) {
+						if (recipeItem.getItem() == MineFantasyItems.ENGIN_ANVIL_TOOLS){
+							break;
+						}
 						return false;
 					}
 				}
