@@ -126,7 +126,10 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	 */
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-		world.setBlockState(pos, state);
+		TileEntityAnvil tile = (TileEntityAnvil) world.getTileEntity(pos);
+		if (tile != null){
+			tile.reassignHitValues();
+		}
 	}
 
 	/**

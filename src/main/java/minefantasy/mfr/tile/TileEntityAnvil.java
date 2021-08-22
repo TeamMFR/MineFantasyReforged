@@ -645,7 +645,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		}
 	}
 
-	private void reassignHitValues() {
+	public void reassignHitValues() {
 		if (!world.isRemote) {
 			leftHit = 0.1F + (0.01F * world.rand.nextInt(11));
 			rightHit = 0.1F + (0.01F * world.rand.nextInt(11));
