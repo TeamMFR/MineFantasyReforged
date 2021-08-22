@@ -36,6 +36,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -278,12 +279,12 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 
 				if (intLvl > 0)// Smarter means more likely
 				{
-					if (getAttack() != 2 && rand.nextInt(10) < intLvl && onGround && target instanceof EntityPlayer && ((EntityPlayer) target).isActiveItemStackBlocking() && this.getDistance(target) < 4F) {
+					if (getAttack() != 2 && rand.nextInt(10) < intLvl && onGround && target instanceof EntityPlayer && (target.isActiveItemStackBlocking() || target.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block")) && this.getDistance(target) < 4F) {
 						this.jump();
 						this.initPowerAttack();
 					}
 				} else {
-					if (getRageLevel() > 40 && getAttack() != 2 && rand.nextInt(50) == 0 && onGround && target instanceof EntityPlayer && ((EntityPlayer) target).isActiveItemStackBlocking() && this.getDistance(target) < 4F) {
+					if (getRageLevel() > 40 && getAttack() != 2 && rand.nextInt(50) == 0 && onGround && target instanceof EntityPlayer && (target.isActiveItemStackBlocking() || target.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block")) && this.getDistance(target) < 4F) {
 						this.jump();
 						this.initPowerAttack();
 					}
@@ -620,7 +621,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 			TacticalManager.knockbackEntity(target, this, 4F, 1F);
 		}
 		if (getAttack() == 3 && fallDistance > 0 && target instanceof EntityPlayer
-				&& ((EntityPlayer) target).isActiveItemStackBlocking() && rand.nextInt(100) < getDisarmChance()) {
+				&& (((EntityPlayer) target).isActiveItemStackBlocking() || ((EntityPlayer) target).getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block")) && rand.nextInt(100) < getDisarmChance()) {
 			TacticalManager.tryDisarm(this, (EntityLivingBase) target, true);
 		}
 

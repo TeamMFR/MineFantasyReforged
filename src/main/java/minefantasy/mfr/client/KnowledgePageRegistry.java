@@ -653,7 +653,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.crossScope.addPages(
 				new EntryPageText("knowledge.crossScope.1"),
-				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("spyglass")));
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_scope")));
 
 		MineFantasyKnowledgeList.crossAmmo.addPages(
 				new EntryPageText("knowledge.crossAmmo.1"),

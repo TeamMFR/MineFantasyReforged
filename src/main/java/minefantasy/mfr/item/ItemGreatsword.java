@@ -79,7 +79,7 @@ public class ItemGreatsword extends ItemHeavyWeapon {
 
 	@Override
 	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-		blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundEvents.BLOCK_METAL_BREAK, SoundCategory.AMBIENT, 1.0F, 0.75F, true);
+		blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.AMBIENT, 1.0F, 0.75F, true);
 		return true;
 	}
 

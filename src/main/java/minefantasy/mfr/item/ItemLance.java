@@ -9,6 +9,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
@@ -99,6 +100,11 @@ public class ItemLance extends ItemSpear {
 	@Override
 	public boolean canBlock() {
 		return false;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack item) {
+		return EnumAction.NONE;
 	}
 
 	public float joust(EntityLivingBase target, EntityLivingBase attacker, float dam) {

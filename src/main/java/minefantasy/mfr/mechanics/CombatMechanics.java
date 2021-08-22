@@ -48,6 +48,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -808,7 +809,7 @@ public class CombatMechanics {
 			{
 				EntityLivingBase tar = mob.getAttackTarget();
 
-				if (tar != null && tar instanceof EntityPlayer && ((EntityPlayer) tar).isActiveItemStackBlocking()) {
+				if (tar != null && tar instanceof EntityPlayer && (((EntityPlayer) tar).isActiveItemStackBlocking() || tar.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block"))) {
 					double dist = mob.getDistanceSq(tar);
 
 					if (tar instanceof EntityZombie && mob.onGround && mob.getRNG().nextInt(10) == 0 && dist > 1D
@@ -887,19 +888,15 @@ public class CombatMechanics {
 	}
 
 	private static void tryDodge(EntityPlayer user) {
-		if (user.isActiveItemStackBlocking()) {
+		if (user.isActiveItemStackBlocking() || user.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block")) {
 			float forward = user.moveForward;
 			float side = user.moveStrafing;
-
-			if (side > 0F)// LEFT
-			{
-				commandDodge(user, 1);
-			} else if (side < 0)// RIGHT
-			{
-				commandDodge(user, -1);
-			} else if (forward < 0)// BACK
-			{
-				commandDodge(user, 0);
+			if (side > 0F) {
+				commandDodge(user, 1);// LEFT
+			} else if (side < 0) {
+				commandDodge(user, -1);// RIGHT
+			} else if (forward < 0) {
+				commandDodge(user, 0);// BACK
 			}
 		}
 	}
