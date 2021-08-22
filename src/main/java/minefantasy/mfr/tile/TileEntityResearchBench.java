@@ -183,6 +183,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 		world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.FLIP_PAGE, SoundCategory.NEUTRAL, 1.0F, rand.nextFloat() * 0.4F + 0.8F, true);
 		efficiency *= getEnvironmentBoost();
 		progress += efficiency;
+		syncData();
 	}
 
 	private float getEnvironmentBoost() {
