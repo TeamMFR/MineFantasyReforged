@@ -280,7 +280,7 @@ public class PlayerTickHandler {
 
 		if (evt.getEntityLiving() instanceof EntityPlayer && PlayerUtils.shouldItemStackBlock(evt.getItem())) {
 
-			evt.setDuration(72000);
+			evt.setDuration(evt.getItem().getMaxItemUseDuration());
 		}
 	}
 

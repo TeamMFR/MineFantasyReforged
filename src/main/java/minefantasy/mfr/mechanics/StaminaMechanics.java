@@ -21,6 +21,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
+import net.minecraftforge.common.util.EnumHelper;
 
 public class StaminaMechanics {
 	private static boolean hurtAdreneline = true;
@@ -84,7 +85,7 @@ public class StaminaMechanics {
 				player.setAir(player.getAir() - 1);
 			}
 			if (TacticalManager.shouldStaminaBlock) {
-				if (player.isHandActive() && (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItemUseAction() == EnumAction.BLOCK)) {
+				if (player.isHandActive() && (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItemUseAction() == EnumAction.valueOf("mfr_block"))) {
 					player.stopActiveHand();
 				}
 			}

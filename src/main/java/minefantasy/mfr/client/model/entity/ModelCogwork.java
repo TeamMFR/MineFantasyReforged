@@ -187,7 +187,7 @@ public class ModelCogwork extends ModelBiped {
 			if (!itemstack.isEmpty() && player.getItemInUseCount() > 0) {
 				EnumAction enumaction = itemstack.getItemUseAction();
 
-				if (enumaction == EnumAction.BLOCK) {
+				if (enumaction == EnumAction.BLOCK || enumaction == EnumAction.valueOf("mfr_block")) {
 					rightArmPose = ArmPose.BLOCK;
 				} else if (enumaction == EnumAction.BOW) {
 					rightArmPose = ArmPose.BOW_AND_ARROW;

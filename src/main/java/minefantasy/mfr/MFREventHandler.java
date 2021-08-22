@@ -91,6 +91,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -685,7 +686,7 @@ public final class MFREventHandler {
 	@SubscribeEvent
 	public static void startUseItem(LivingEntityUseItemEvent.Start event) {
 		EntityLivingBase player = event.getEntityLiving();
-		if (!event.getItem().isEmpty() && event.getItem().getItemUseAction() == EnumAction.BLOCK) {
+		if (!event.getItem().isEmpty() && event.getItem().getItemUseAction() == EnumAction.valueOf("mfr_block")) {
 			if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
 				event.setCanceled(true);
 			}

@@ -167,7 +167,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack item) {
-		return EnumAction.BLOCK;
+		return EnumAction.valueOf("mfr_block");
 	}
 
 	@Override

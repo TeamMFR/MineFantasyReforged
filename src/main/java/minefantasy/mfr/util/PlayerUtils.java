@@ -1,7 +1,7 @@
 package minefantasy.mfr.util;
 
-import minefantasy.mfr.item.ItemWeaponMFR;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 
 public class PlayerUtils {
@@ -21,6 +21,6 @@ public class PlayerUtils {
 	}
 
 	public static boolean shouldItemStackBlock(ItemStack stack){
-		return stack.getItem() instanceof ItemWeaponMFR;
+		return stack.getItemUseAction() == EnumAction.valueOf("mfr_block");
 	}
 }

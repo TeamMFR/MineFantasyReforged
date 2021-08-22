@@ -106,6 +106,7 @@ public class MineFantasyReforged {
 		new ConfigMobs().setConfig(getCfg(preEvent, "Mobs"));
 
 		PlayerData.register();
+		MineFantasyItems.initEnumActions();
 
 		//		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
 		//		CarpenterRecipeManager.INSTANCE.preInit();

@@ -358,7 +358,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack item) {
-		return EnumAction.BLOCK;
+		return EnumAction.valueOf("mfr_block");
 	}
 
 	protected void addXp(EntityLivingBase user, int chance) {

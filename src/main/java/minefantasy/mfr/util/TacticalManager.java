@@ -24,6 +24,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.Random;
 
@@ -156,7 +157,7 @@ public class TacticalManager {
 			return false;// If burning and can't take the heat.. can't block!
 		}
 		if (!user.getHeldItemMainhand().isEmpty()) {
-			return user.getHeldItemMainhand().getItem().getItemUseAction(user.getHeldItemMainhand()) == EnumAction.BLOCK;
+			return user.getHeldItemMainhand().getItem().getItemUseAction(user.getHeldItemMainhand()) == EnumAction.valueOf("mfr_block");
 		}
 		return false;
 	}

@@ -72,7 +72,7 @@ public class ItemBandage extends ItemBaseMFR {
 	 */
 	@Override
 	public EnumAction getItemUseAction(ItemStack item) {
-		return EnumAction.BLOCK;
+		return EnumAction.valueOf("mfr_block");
 	}
 
 	@Override

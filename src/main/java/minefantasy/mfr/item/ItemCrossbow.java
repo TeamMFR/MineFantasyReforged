@@ -89,7 +89,7 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	public EnumAction getItemUseAction(ItemStack item) {
 		String action = getUseAction(item);
 		if (action.equalsIgnoreCase("reload")) {
-			return EnumAction.BLOCK;
+			return EnumAction.valueOf("mfr_block");
 		}
 		return EnumAction.BOW;
 	}

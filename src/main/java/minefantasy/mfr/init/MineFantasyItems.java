@@ -1966,4 +1966,8 @@ public class MineFantasyItems {
 			item.setMaxDamage(hp);
 		}
 	}
+
+	public static void initEnumActions(){
+		EnumHelper.addAction("mfr_block");
+	}
 }

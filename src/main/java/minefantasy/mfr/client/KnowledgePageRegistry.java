@@ -983,6 +983,15 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.generic_meat.addPages(
 				new EntryPageText("knowledge.generic_meat.1"),
+				new EntryPageRecipeCarpenter(
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_0"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_1"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_2"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_3"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_4"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_5"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_6"),
+						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_7")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_uncooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_cooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_chunk_uncooked")),

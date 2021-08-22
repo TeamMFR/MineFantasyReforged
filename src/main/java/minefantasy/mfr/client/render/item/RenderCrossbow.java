@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.model.IModelState;
@@ -44,15 +43,8 @@ public class RenderCrossbow extends WrappedItemModel implements IItemRenderer {
 			renderArrow(stack);
 		}
 		else if (type == TransformType.FIRST_PERSON_LEFT_HAND || type == TransformType.FIRST_PERSON_RIGHT_HAND){
-			if (stack.getItemUseAction() == EnumAction.BLOCK){
-				GlStateManager.scale(3F, 3F, 3F);
-				GlStateManager.translate(0.1F, 0.4F, 0.25F);
-				GlStateManager.rotate(90, 0F, 1F, 0F);
-			}
-			else{
-				GlStateManager.scale(2F, 2F, 2F);
-				GlStateManager.translate(0.1F, 0.4F, 0.25F);
-			}
+			GlStateManager.scale(2F, 2F, 2F);
+			GlStateManager.translate(0.1F, 0.4F, 0.25F);
 			renderPart(stack, "stock", type);
 			renderPart(stack, "mechanism", type);
 			renderPart(stack, "muzzle", type);
