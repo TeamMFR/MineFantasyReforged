@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -18,7 +19,13 @@ public class BlockColorsMFR {
 	public static void init() {
 		BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
 
-		final IBlockColor leavesColourHandler = (state, blockAccess, pos, tintIndex) -> ColorizerFoliage.getFoliageColorBasic();
+		final IBlockColor leavesColourHandler = (state, blockAccess, pos, tintIndex) -> {
+			if (blockAccess != null && pos != null) {
+				return BiomeColorHelper.getFoliageColorAtPos(blockAccess, pos);
+			}
+
+			return ColorizerFoliage.getFoliageColor(0.5D, 1.0D);
+		};
 
 		IBlockColor blockColorForToolRack = (state, blockAccess, pos, tintIndex) -> {
 			if (tintIndex == 0 && blockAccess != null && pos != null) {

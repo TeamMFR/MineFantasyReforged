@@ -2,6 +2,7 @@ package minefantasy.mfr.proxy;
 
 import minefantasy.mfr.api.refine.ISmokeHandler;
 import minefantasy.mfr.api.refine.SmokeMechanics;
+import minefantasy.mfr.block.BlockLeavesMF;
 import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ArrowFireFlint;
@@ -61,6 +62,10 @@ public class CommonProxy implements ISmokeHandler {
 				world.spawnEntity(smoke);
 			}
 		}
+	}
+
+	public void setGraphicsLevel(BlockLeavesMF parBlock, boolean parFancyEnabled) {
+		parBlock.setGraphicsLevel(parFancyEnabled);
 	}
 
 	public void postInit(FMLPostInitializationEvent e) {

@@ -22,6 +22,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.terraingen.TerrainGen;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,42 +62,26 @@ public class BlockSaplingMF extends BlockBush implements IGrowable, IClientRegis
 			super.updateTick(world, pos, state, rand);
 
 			if (world.getLight(pos.add(0, 1, 0)) >= 9 && rand.nextFloat() * 100F < (14.30F) / growthModifier) {
-				this.initGrow(world, pos, rand);
+				this.initGrow(world, pos, state, rand);
 			}
 		}
 	}
 
-	public void initGrow(World world, BlockPos pos, Random rand) {
-		IBlockState state = world.getBlockState(pos);
-
-		if (state == this.getDefaultState()) {
-			world.setBlockState(pos, state, 4);
+	public void initGrow(World world, BlockPos pos, IBlockState state, Random rand) {
+		if (state.getValue(STAGE) == 0) {
+			world.setBlockState(pos, state.cycleProperty(STAGE), 4);
 		} else {
 			this.tryGrow(world, pos, rand);
 		}
 	}
 
 	public void tryGrow(World world, BlockPos pos, Random rand) {
-		if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(world, rand, pos))
-			return;
-		IBlockState state = world.getBlockState(pos);
-		Object treegen = new WorldGenMFTree(true, LOG, LEAVES);
+		if (!TerrainGen.saplingGrowTree(world, rand, pos)) return;
+		WorldGenerator treegen = new WorldGenMFTree(true, LOG, LEAVES);
 
-		boolean flag = false;
+		world.setBlockState(pos, Blocks.AIR.getDefaultState(), 4);
 
-		IBlockState newBlock = (Blocks.AIR).getDefaultState();
-		world.setBlockState(pos, newBlock, 1);
-
-		if (!((WorldGenerator) treegen).generate(world, rand, pos)) {
-			if (flag) {
-				world.setBlockState(pos, state, 4);
-				world.setBlockState(pos, state, 4);
-				world.setBlockState(pos.add(0, 0, 1), state, 4);
-				world.setBlockState(pos.add(1, 0, 1), state, 4);
-			} else {
-				world.setBlockState(pos, state, 4);
-			}
-		}
+		treegen.generate(world, rand, pos);
 	}
 
 	/**
@@ -107,18 +92,18 @@ public class BlockSaplingMF extends BlockBush implements IGrowable, IClientRegis
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		return false;
+	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient) {
+		return true;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return false;
+	public boolean canUseBonemeal(World world, Random rand, BlockPos pos, IBlockState state) {
+		return world.rand.nextFloat() < 0.45D;
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-
+	public void grow(World world, Random rand, BlockPos pos, IBlockState state) {
+		this.initGrow(world, pos, state, rand);
 	}
 
 	@Override

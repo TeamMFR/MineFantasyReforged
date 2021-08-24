@@ -2,6 +2,7 @@ package minefantasy.mfr.proxy;
 
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
+import minefantasy.mfr.block.BlockLeavesMF;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
@@ -159,6 +160,11 @@ public class ClientProxy extends ClientProxyBase {
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, RenderDragon::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, RenderMinotaur::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, RenderHound::new);
+	}
+
+	@Override
+	public void setGraphicsLevel(BlockLeavesMF parBlock, boolean parFancyEnabled) {
+		parBlock.setGraphicsLevel(parFancyEnabled);
 	}
 
 	@Override

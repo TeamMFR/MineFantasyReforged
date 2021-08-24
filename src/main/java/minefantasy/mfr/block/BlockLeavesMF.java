@@ -12,7 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
@@ -31,11 +31,11 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 	public BlockLeavesMF(String baseWood, int droprate) {
 		super();
 		String name = baseWood.toLowerCase() + "_leaves";
-
 		setRegistryName(name);
 		setUnlocalizedName(name);
 		this.dropRate = droprate;
 		this.setTickRandomly(true);
+		MineFantasyReforged.PROXY.setGraphicsLevel(this, true);
 		setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
@@ -63,15 +63,6 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 		}
 
 		return i;
-	}
-
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
-		return BlockRenderLayer.CUTOUT;
 	}
 
 	@Override
@@ -106,7 +97,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 	@Nonnull
 	@Override
 	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		return null;
+		return NonNullList.withSize(1, new ItemStack(getBlockDrop()));
 	}
 
 	@Override
