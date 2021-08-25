@@ -114,7 +114,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 				tryDecrMainItem(player);
 				updateRecipe();
 				if (!isOven() && this.getTemp() > 0) {
-					world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 1.0F, 1.0F, false);
+					world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				}
 				return true;
 			}

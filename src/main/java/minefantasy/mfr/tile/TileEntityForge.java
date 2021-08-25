@@ -189,8 +189,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		if (item.getItem() instanceof ItemHeated) {
 			int temp = ItemHeated.getTemp(item);
 			if (temp > temperature) {
-				int i = (int) (temperature / 5F);
-				temp -= i;
+				temp = (int) temperature;
 			} else {
 				int increase = (int) (temperature / (20F * getStackModifier(item.getCount())));
 				if (temp >= (temperature - increase)) {

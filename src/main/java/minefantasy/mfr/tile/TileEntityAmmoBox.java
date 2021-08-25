@@ -169,7 +169,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 
 	private void open() {
 		angle = 16;
-		this.world.playSound(this.pos.getX() + 0.5D, this.pos.getY() + 0.25D, this.pos.getZ() + 0.5D, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.AMBIENT, 0.5F, this.world.rand.nextFloat() * 0.1F + 1.4F, false);
+		this.world.playSound(null, pos, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 1.4F);
 	}
 
 	@Override

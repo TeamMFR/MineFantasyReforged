@@ -471,7 +471,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 
 	public void openChest() {
 		if (numUsers == 0) {
-			this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MineFantasySounds.FURNACE_OPEN, SoundCategory.NEUTRAL, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F, true);
+			this.world.playSound(null, pos, MineFantasySounds.FURNACE_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 		}
 		++numUsers;
 		if (!opening) {
@@ -482,7 +482,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public void closeChest() {
 		--numUsers;
 		if (numUsers == 0 && doorAngle >= 15) {
-			this.world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, MineFantasySounds.FURNACE_CLOSE, SoundCategory.NEUTRAL, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F, true);
+			this.world.playSound(null, pos, MineFantasySounds.FURNACE_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 		}
 	}
 

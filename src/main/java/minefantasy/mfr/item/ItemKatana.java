@@ -81,7 +81,7 @@ public class ItemKatana extends ItemHeavyWeapon {
 
 	@Override
 	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-		blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.AMBIENT, 1.0F, 0.75F, true);
+		blocker.world.playSound(null, blocker.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.NEUTRAL, 1.0F, 0.75F);
 		return true;
 	}
 

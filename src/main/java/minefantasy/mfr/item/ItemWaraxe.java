@@ -139,7 +139,7 @@ public class ItemWaraxe extends ItemWeaponMFR {
 
 	@Override
 	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-		blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F, true);
+		blocker.world.playSound(null, blocker.getPosition(), MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.7F);
 		return true;
 	}
 

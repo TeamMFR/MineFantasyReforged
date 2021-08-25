@@ -211,7 +211,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 			return;
 		}
 		if (rand.nextInt(10) == 0) {
-			world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound(null, pos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.BLOCKS, rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F);
 		}
 
 		for (int i = 0; i < 3; ++i) {

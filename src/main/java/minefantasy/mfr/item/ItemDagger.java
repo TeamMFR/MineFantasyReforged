@@ -64,7 +64,7 @@ public class ItemDagger extends ItemWeaponMFR {
 
 	@Override
 	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
-		blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.AMBIENT, 1.0F, 1.65F + (rand.nextFloat() * 0.5F), true);
+		blocker.world.playSound(null, blocker.getPosition(), SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, SoundCategory.NEUTRAL, 1.0F, 1.65F + (rand.nextFloat() * 0.5F));
 		return true;
 	}
 

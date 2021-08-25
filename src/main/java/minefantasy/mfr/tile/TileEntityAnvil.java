@@ -199,7 +199,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			reassignHitValues();
 			progress = progressMax = qualityBalance = 0;
 		}
-		world.playSound(pos.getX() + 0.5, pos.getY() + 0.8, pos.getZ() + 0.5, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.AMBIENT, 1.0F, 0.8F, false);
+		world.playSound(null, pos, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.BLOCKS, 1.0F, 0.8F);
 	}
 
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {

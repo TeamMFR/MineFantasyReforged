@@ -121,7 +121,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 				if (user instanceof EntityPlayerMP) {
 					PlayerData.get(user).sync();
 				}
-				world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+				world.playSound(null, pos, MineFantasySounds.UPDATE_RESEARCH, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				if (!user.world.isRemote) {
 					TextComponentTranslation name = new TextComponentTranslation("knowledge." + s);
 					if (artefacts == -1) {
@@ -180,7 +180,7 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 		if (user.swingProgress > 0) {
 			efficiency *= Math.max(0F, 1.0F - user.swingProgress);
 		}
-		world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, MineFantasySounds.FLIP_PAGE, SoundCategory.NEUTRAL, 1.0F, rand.nextFloat() * 0.4F + 0.8F, true);
+		world.playSound(null, pos, MineFantasySounds.FLIP_PAGE, SoundCategory.BLOCKS, 1.0F, rand.nextFloat() * 0.4F + 0.8F);
 		efficiency *= getEnvironmentBoost();
 		progress += efficiency;
 		syncData();

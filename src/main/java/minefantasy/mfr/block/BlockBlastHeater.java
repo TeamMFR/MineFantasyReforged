@@ -111,7 +111,7 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 	public void randomDisplayTick(IBlockState stateIn, World world, BlockPos pos, Random rand) {
 		TileEntityBlastHeater tile = (TileEntityBlastHeater) getTile(world, pos);
 		if (tile.isBurning() && rand.nextInt(20) == 0) {
-			world.playSound(pos.getX() + 0.5F, pos.getY() + 0.5F, pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.AMBIENT, 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F, false);
+			world.playSound(null, pos, SoundEvents.BLOCK_FIRE_AMBIENT, SoundCategory.AMBIENT, 1.0F + rand.nextFloat(), rand.nextFloat() * 0.7F + 0.3F);
 		}
 	}
 }

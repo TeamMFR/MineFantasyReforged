@@ -423,11 +423,11 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	@Override
 	public boolean playCustomParrySound(EntityLivingBase blocker, Entity attacker, ItemStack weapon) {
 		if (material == ToolMaterial.WOOD) {
-			blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 1.0F, true);
+			blocker.world.playSound(null, blocker.getPosition(), MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 			return true;
 		}
 		if (material == MineFantasyMaterials.STONE.getToolMaterial()) {
-			blocker.world.playSound(blocker.posX, blocker.posY, blocker.posZ, MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.5F, true);
+			blocker.world.playSound(null, blocker.getPosition(), MineFantasySounds.WOOD_PARRY, SoundCategory.NEUTRAL, 1.0F, 0.5F);
 			return true;
 		}
 		return false;

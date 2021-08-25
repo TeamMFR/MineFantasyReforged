@@ -133,7 +133,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 					craftItem(user);
 				}
 			} else {
-				world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_STONE_STEP, SoundCategory.AMBIENT, 1.25F, 1.5F, false);
+				world.playSound(null, pos, SoundEvents.BLOCK_STONE_STEP, SoundCategory.BLOCKS, 1.25F, 1.5F);
 			}
 			lastPlayerHit = user.getName();
 			updateCraftingData();

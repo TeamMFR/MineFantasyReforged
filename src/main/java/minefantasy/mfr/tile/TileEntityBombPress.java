@@ -31,7 +31,7 @@ public class TileEntityBombPress extends TileEntityBase implements ITickable {
 		if (animation <= 0 && under instanceof TileEntityBombBench) {
 			((TileEntityBombBench) under).tryCraft(user, true);
 			animation = 1.0F;
-			world.playSound(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.AMBIENT, 1.0F, 0.75F, false);
+			world.playSound(null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 1.0F, 0.75F);
 		}
 	}
 

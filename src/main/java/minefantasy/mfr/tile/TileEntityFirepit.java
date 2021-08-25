@@ -207,7 +207,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	}
 
 	public void extinguish() {
-		world.playSound(pos.getY() + 0.5F, pos.getY() + 0.25F, pos.getZ() + 0.5F, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.AMBIENT, 0.4F, 2.0F + this.rand.nextFloat() * 0.4F, true);
+		world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.4F, 2.0F + this.rand.nextFloat() * 0.4F);
 		world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 		world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 0.0D, 0.0D, 0.0D);
 

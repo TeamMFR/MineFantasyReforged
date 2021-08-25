@@ -335,7 +335,7 @@ public class CombatMechanics {
 				{
 					if (event.getSource().getTrueSource() != null && !event.getSource().getTrueSource().getEntityData().hasKey("arrowDeflectMF") && !(event.getSource().getImmediateSource() instanceof EntityEnderPearl)) {
 						event.getSource().getTrueSource().getEntityData().setBoolean("arrowDeflectMF", true);
-						event.getEntityLiving().getEntityWorld().playSound(event.getEntity().posX, event.getEntity().posY, event.getEntity().posZ, SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.NEUTRAL, 1.0F, 0.5F, true);
+						event.getEntityLiving().getEntityWorld().playSound(null, event.getEntity().getPosition(), SoundEvents.ENTITY_ITEM_BREAK, SoundCategory.NEUTRAL, 1.0F, 0.5F);
 						event.setCanceled(true);
 					}
 				}

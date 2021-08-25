@@ -336,8 +336,8 @@ public class MineFantasyBlocks {
 		THATCH = new BasicBlockMF("thatch", Material.LEAVES).setBlockSoundType(SoundType.GROUND).setHardness(1.0F);
 		THATCH_STAIR = new ConstructionBlockMF.StairsConstBlock("thatch_stairs", THATCH);
 
-		LIMESTONE = new BasicBlockMF("limestone", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_COBBLE = new BasicBlockMF("limestone_cobble", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE = new BasicBlockMF("limestone", Material.ROCK, LIMESTONE_COBBLE).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_BRICK = new BasicBlockMF("limestone_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_ROAD = new BlockRoad("limestone_road", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
 
@@ -779,8 +779,9 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(THATCH));
 		registry.register(new ItemBlockBase(THATCH_STAIR));
 
-		registry.register(new ItemBlockBase(LIMESTONE));
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE));
+		registry.register(new ItemBlockBase(LIMESTONE));
+
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK));
 		registry.register(new ItemBlockBase(LIMESTONE_ROAD));
 

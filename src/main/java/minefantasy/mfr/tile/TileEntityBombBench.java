@@ -105,7 +105,7 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 			progress = 0F;
 		} else if (canCraft() && (pressUsed || ToolHelper.getToolTypeFromStack(player.getHeldItemMainhand()) == Tool.SPANNER)) {
 			if (!pressUsed && !player.getHeldItemMainhand().isEmpty()) {
-				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+				world.playSound(null, pos, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F);
 				player.getHeldItemMainhand().damageItem(1, player);
 				if (player.getHeldItemMainhand().getItemDamage() >= player.getHeldItemMainhand().getMaxDamage()) {
 					player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
@@ -120,7 +120,7 @@ public class TileEntityBombBench extends TileEntityBase implements IBasicMetre {
 			progress += efficiency;
 
 			if ((progress >= maxProgress && craftItem(result))) {
-				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
+				world.playSound(null, pos, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.BLOCKS, 0.35F, 0.5F);
 				progress = 0;
 				if (player != null) {
 					Skill.ENGINEERING.addXP(player, 2);

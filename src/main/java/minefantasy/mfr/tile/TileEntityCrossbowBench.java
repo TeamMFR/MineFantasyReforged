@@ -77,7 +77,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 			progress = 0F;
 		} else if (canCraft() && ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand()) == Tool.SPANNER) {
 			if (!user.getHeldItemMainhand().isEmpty()) {
-				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MineFantasySounds.TWIST_BOLT, SoundCategory.NEUTRAL, 0.25F, 1.0F, true);
+				world.playSound(null, pos, MineFantasySounds.TWIST_BOLT, SoundCategory.BLOCKS, 0.25F, 1.0F);
 				user.getHeldItemMainhand().damageItem(1, user);
 				if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {
 					user.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
@@ -92,7 +92,7 @@ public class TileEntityCrossbowBench extends TileEntityBase implements IBasicMet
 			progress += efficiency;
 
 			if ((progress >= maxProgress && craftItem(result))) {
-				world.playSound(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.AMBIENT, 0.35F, 0.5F, false);
+				world.playSound(null, pos, SoundEvents.BLOCK_WOODEN_DOOR_OPEN, SoundCategory.BLOCKS, 0.35F, 0.5F);
 				progress = 0;
 				if (user != null) {
 					Skill.ENGINEERING.addXP(user, 10);
