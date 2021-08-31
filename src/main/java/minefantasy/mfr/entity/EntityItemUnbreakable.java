@@ -22,9 +22,7 @@ public class EntityItemUnbreakable extends EntityItem {
 	public EntityItemUnbreakable(World world, EntityItem parent) {
 		super(world, parent.posX, parent.posY, parent.posZ, parent.getItem());
 		this.mimicSpeed(parent);
-
-		// net.minecraft.entity.item.EntityItem.pickupDelay
-		setPickupDelay(ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, parent, "field_145804_b"));
+		setPickupDelay(parent.pickupDelay);
 		isImmuneToFire = true;
 	}
 
@@ -51,8 +49,7 @@ public class EntityItemUnbreakable extends EntityItem {
 			setDead();
 		} else {
 			onEntityUpdate();
-			// net.minecraft.entity.item.EntityItem.pickupDelay
-			int pickupDelay = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "field_145804_b");
+			int pickupDelay = this.pickupDelay;
 			if (pickupDelay > 0) {
 				this.setPickupDelay(pickupDelay - 1);
 			}
@@ -110,8 +107,8 @@ public class EntityItemUnbreakable extends EntityItem {
 				this.motionY *= -0.5D;
 			}
 
-			int age = ObfuscationReflectionHelper.getPrivateValue(EntityItem.class, this, "field_70292_b");
-			ObfuscationReflectionHelper.setPrivateValue(EntityItem.class, this, age - 1, "field_70292_b");
+			int age = this.age;
+			age -= 1;
 
 			ItemStack item = this.getItem();
 

@@ -150,11 +150,11 @@ public class AmmoMechanics {
 	}
 
 	public static boolean isDepleted(ItemStack firearm) {
-		return getGunAmmoCount(firearm) == 0 && getAmmo(firearm).isEmpty() && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, firearm) == 0;
+		return getAmmo(firearm).isEmpty() && EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, firearm) == 0;
 	}
 
 	public static boolean isFirearmLoaded(ItemStack firearm) {
-		return getGunAmmoCount(firearm) > 0;
+		return !getAmmo(firearm).isEmpty() && getGunAmmoCount(firearm) > 0;
 	}
 
 	public static void modifyAmmo(ItemStack item, int value) {

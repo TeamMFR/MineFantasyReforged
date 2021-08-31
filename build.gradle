@@ -110,6 +110,12 @@ processResources {
     }
 }
 
+jar {
+    manifest {
+        attributes 'FMLAT': 'minefantasyreforged_at.cfg'
+    }
+}
+
 def getBuildNumber() {
     if (System.getenv("BUILD_NUMBER") != null) {
         return System.getenv("BUILD_NUMBER").toString()

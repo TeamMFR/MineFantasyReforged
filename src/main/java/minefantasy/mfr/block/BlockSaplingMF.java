@@ -84,13 +84,6 @@ public class BlockSaplingMF extends BlockBush implements IGrowable, IClientRegis
 		treegen.generate(world, rand, pos);
 	}
 
-	/**
-	 * Determines the damage on the item the block drops. Used in cloth and wood.
-	 */
-	public int damageDropped(IBlockState state) {
-		return MathHelper.clamp(state.hashCode() & 7, 0, 5);
-	}
-
 	@Override
 	public boolean canGrow(World world, BlockPos pos, IBlockState state, boolean isClient) {
 		return true;

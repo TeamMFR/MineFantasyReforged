@@ -8,8 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -27,34 +27,34 @@ public class ItemBowl extends ItemComponentMFR {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
+	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand){
 		ItemStack item = player.getHeldItem(hand);
 		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
 		if (rayTraceResult == null) {
-			return super.onItemRightClick(world, player, hand);
+			return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 		} else {
 			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
 				if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
-					return super.onItemRightClick(world, player, hand);
+					return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 				}
 
 				if (!player.canPlayerEdit(rayTraceResult.getBlockPos(), rayTraceResult.sideHit, item)) {
-					return super.onItemRightClick(world, player, hand);
+					return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 				}
 
 				if (isWaterSource(world, rayTraceResult.getBlockPos())) {
-					gather(item, world, player);
-					return ActionResult.newResult(EnumActionResult.PASS, item);
+					gather(item, hand, world, player);
+					return EnumActionResult.SUCCESS;
 				}
 			}
 		}
-		return super.onItemRightClick(world, player, hand);
+		return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 	}
 
-	private void gather(ItemStack item, World world, EntityPlayer player) {
-		player.swingArm(player.getActiveHand());
+	private void gather(ItemStack item, EnumHand hand, World world, EntityPlayer player) {
+		player.swingArm(hand);
 		if (!world.isRemote) {
 			world.playSound(player, player.getPosition(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
 			item.shrink(1);
@@ -73,10 +73,7 @@ public class ItemBowl extends ItemComponentMFR {
 		if (biome == Biome.getBiome(0) || biome == Biome.getBiome(24) || biome == Biome.getBiome(16)) {
 			return true;
 		}
-		MFRLogUtil.logDebug("Biome = " + biome.toString());
-		if (world.getBlockState(pos.add(0, -1, 0)).getBlock() == Blocks.SAND) {
-			return true;
-		}
-		return false;
+		MFRLogUtil.logDebug("Biome = " + biome);
+		return world.getBlockState(pos.add(0, -1, 0)).getBlock() == Blocks.SAND;
 	}
 }
