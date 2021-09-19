@@ -106,7 +106,7 @@ public class ItemKatana extends ItemHeavyWeapon {
 				&& tryPerformAbility((EntityPlayer) user, cleave_cost)) {
 			hurtInRange(user, 4D);
 			if (hit instanceof EntityLivingBase) {
-				ArmourCalculator.damageArmour((EntityPlayer) hit, (int) (dam * 10));
+				ArmourCalculator.damageArmour((EntityLivingBase) hit, (int) (dam * 10));
 			}
 			user.setSneaking(false);
 		}
