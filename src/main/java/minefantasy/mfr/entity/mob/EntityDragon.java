@@ -22,8 +22,8 @@ import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -35,6 +35,10 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -51,6 +55,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> BREED = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> TIER = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
+
+	private final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
 
 	private final Predicate<Entity> ATTACKABLE = entity -> entity instanceof EntityDragon ? ((EntityDragon) entity).getBreed() == this.getBreed() : entity instanceof EntityLivingBase;
 
@@ -97,10 +103,11 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void onUpdate() {
 
 		if (this.world.isRemote) {
-			this.width = 3.0F * getScale();
+			this.width = (3.0F * getScale()) + 3.0F;
 			this.height = 2.0F * getScale();
 		}
 
+		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 		super.onUpdate();
 		this.setNoGravity(true);
 	}
@@ -112,6 +119,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	@Override
 	public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, IEntityLivingData livingdata) {
 		setDragon(getRandomTier());
+		bossInfo.setName(getDisplayName());
 		return super.onInitialSpawn(difficulty, livingdata);
 	}
 
@@ -224,10 +232,21 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		dataManager.set(TIER, i);
 	}
 
-	public String getCommandSenderName() {
-		String tierName = I18n.format(("entity." + getType().name + ".name"));
+	@Override
+	public ITextComponent getDisplayName() {
+		String tierName = "entity." + getType().name + ".name";
 		String breedName = I18n.format(("entity.dragonbreed." + getType().breedName + ".name"));
-		return I18n.format(tierName, breedName);
+		return new TextComponentString(I18n.format(tierName, breedName));
+	}
+
+	/**
+	 * Sets the custom name tag for this entity
+	 */
+	@Override
+	public void setCustomNameTag(String name)
+	{
+		super.setCustomNameTag(name);
+		this.bossInfo.setName(this.getDisplayName());
 	}
 
 	protected void entityInit() {
@@ -289,7 +308,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			//        interestTime = nbt.getInteger("interestTime");
 
 			if (this.hasCustomName()) {
-				//            this.bossInfo.setName(this.getDisplayName());
+				this.bossInfo.setName(this.getDisplayName());
 			}
 		}
 
@@ -431,6 +450,26 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		world.spawnEntity(entity);
 	}
 
+	/**
+	 * Add the given player to the list of players tracking this entity. For instance, a player may track a boss in
+	 * order to view its associated boss bar.
+	 */
+	public void addTrackingPlayer(EntityPlayerMP player)
+	{
+		super.addTrackingPlayer(player);
+		this.bossInfo.addPlayer(player);
+	}
+
+	/**
+	 * Removes the given player from the list of players tracking this entity. See {@link Entity#addTrackingPlayer} for
+	 * more information on tracking.
+	 */
+	public void removeTrackingPlayer(EntityPlayerMP player)
+	{
+		super.removeTrackingPlayer(player);
+		this.bossInfo.removePlayer(player);
+	}
+
 	@Override
 	public void setSwingingArms(boolean swingingArms) {
 		// TODO Auto-generated method stub
@@ -469,7 +508,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			Vec3d vec3d = entitylivingbase.getPositionEyes(1.0F);
 			EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
 			EntityDragon.this.setCharging(true);
-			EntityDragon.this.playSound(SoundEvents.ENTITY_VEX_CHARGE, 1.0F, 1.0F);
+			EntityDragon.this.playSound(MineFantasySounds.DRAGON_FIRE, 1.0F, 1.0F);
 		}
 
 		/**
@@ -513,8 +552,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
 	// net.minecraft.entity.monster.EntityVex.AIMoveControl
 	class AIMoveControl extends EntityMoveHelper {
-		public AIMoveControl(EntityDragon vex) {
-			super(vex);
+		public AIMoveControl(EntityDragon dragon) {
+			super(dragon);
 		}
 
 		public void onUpdateMoveHelper() {

@@ -91,7 +91,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
@@ -644,23 +643,24 @@ public final class MFREventHandler {
 		}
 		EntityLivingBase entity = event.getEntityLiving();
 
+		if (entity.ticksExisted - entity.getLastAttackedEntityTime() > 200) {
+			return;
+		}
+
 		float lowHp = entity.getMaxHealth() / 5F;
 		int injury = getInjuredTime(entity);
 
-		if (ConfigHardcore.critLimp && (entity instanceof EntityLiving
-				|| !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
+		if (ConfigHardcore.critLimp && (entity instanceof EntityLiving || !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
 			if (entity.getHealth() <= lowHp || injury > 0) {
 				if (entity.getRNG().nextInt(10) == 0 && entity.onGround && !entity.isRiding()) {
 					entity.motionX = 0F;
 					entity.motionZ = 0F;
 				}
-				if (entity.ticksExisted % 15 == 0) {
-					entity.limbSwing = 2.0F;
-					float x = (float) (entity.posX + (random.nextFloat() - 0.5F) / 4F);
-					float y = (float) (entity.posY + entity.getEyeHeight() + (random.nextFloat() - 0.5F) / 4F);
-					float z = (float) (entity.posZ + (random.nextFloat() - 0.5F) / 4F);
-					entity.world.spawnParticle(EnumParticleTypes.REDSTONE, x, y, z, 0F, 0F, 0F);
-				}
+				entity.limbSwing = 2.0F;
+				float x = (float) (entity.posX + (random.nextFloat() - 0.5F) / 4F);
+				float y = (float) (entity.posY + entity.getEyeHeight() + (random.nextFloat() - 0.5F) / 4F);
+				float z = (float) (entity.posZ + (random.nextFloat() - 0.5F) / 4F);
+				entity.world.spawnParticle(EnumParticleTypes.REDSTONE, x, y, z, 0F, 0F, 0F);
 			}
 			if (!entity.world.isRemote && entity.getHealth() <= (lowHp / 2) && entity.getRNG().nextInt(200) == 0) {
 				entity.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 100, 50));

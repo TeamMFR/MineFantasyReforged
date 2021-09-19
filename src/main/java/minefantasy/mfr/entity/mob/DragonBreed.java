@@ -108,7 +108,7 @@ public class DragonBreed {
 	public static int getRandomDragon(EntityDragon dragon, int tier) {
 		ArrayList<DragonBreed> pool = breeds[tier];
 		Biome biome = dragon.world.getBiome(new BlockPos((int) (dragon.posX), 0, (int) (dragon.posZ)));
-		int id = getIdForBiome(biome, dragon.world.canBlockSeeSky(new BlockPos((int) dragon.posX, (int) dragon.posY, (int) dragon.posZ)), dragon.dimension);
+		int id = getIdForBiome(biome, dragon.world.isRaining(), dragon.dimension);
 		if (id >= pool.size()) {
 			id = pool.size() - 1;
 		}

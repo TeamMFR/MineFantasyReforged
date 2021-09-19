@@ -1,7 +1,6 @@
 package minefantasy.mfr.proxy;
 
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
-import minefantasy.mfr.api.weapon.IExtendedReachWeapon;
 import minefantasy.mfr.block.BlockLeavesMF;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;

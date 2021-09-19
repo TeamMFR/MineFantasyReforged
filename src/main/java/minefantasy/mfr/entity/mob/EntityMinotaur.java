@@ -1,5 +1,6 @@
 package minefantasy.mfr.entity.mob;
 
+import com.google.common.base.Predicate;
 import minefantasy.mfr.api.armour.IArmourPenetrationMob;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.config.ConfigMobs;
@@ -14,6 +15,7 @@ import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.BlockCrops;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -50,6 +52,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -147,6 +151,11 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 		if (tier != null) {
 			this.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, getRandomWeapon().construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
 		}
+	}
+
+	@Override
+	public ITextComponent getDisplayName() {
+		return new TextComponentString(I18n.format("entity." + getMinotaur().name + ".name"));
 	}
 
 	public ItemWeaponMFR getRandomWeapon() {
@@ -543,7 +552,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 		this.experienceValue = minotaur.experienceValue;
 
 		if (subspecies == 0) {
-			this.targetTasks.addTask(2, new EntityAINearestAttackableTarget<>(this, EntityLiving.class, false));
+			this.targetTasks.addTask(2, new AIAttackNearest(this));
 		}
 		if (subspecies >= 3) {
 			this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
@@ -812,6 +821,12 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 		if (getIntLvl() > 1 && target != null && attacker == target && this.getDistanceSq(attacker) < 4) {
 			this.setAttack((byte) 1);
 			TacticalManager.lungeEntity(this, attacker, 2.0F, 0.2F);
+		}
+	}
+
+	class AIAttackNearest extends EntityAINearestAttackableTarget<EntityLiving> {
+		public AIAttackNearest(EntityMinotaur minotaur) {
+			super(minotaur, EntityLiving.class, 10, true, false, (Predicate<EntityLivingBase>) p_apply_1_ -> !(p_apply_1_ instanceof EntityMinotaur));
 		}
 	}
 }

@@ -88,19 +88,19 @@ entity.minotaur_guard.name=Minotaur Warrior
 entity.minotaur_elite.name=Elite Minotaur
 entity.minotaur_boss.name=Minotaur Warlord
 
-entity.frostminotaur.name=Lesser Frost Minotaur
-entity.frostminotaur_guard.name=Frost Minotaur Warrior
-entity.frostminotaur_elite.name=Elite Frost Minotaur
-entity.frostminotaur_boss.name=Frost Minotaur Warlord
+entity.frost_minotaur.name=Lesser Frost Minotaur
+entity.frost_minotaur_guard.name=Frost Minotaur Warrior
+entity.frost_minotaur_elite.name=Elite Frost Minotaur
+entity.frost_minotaur_boss.name=Frost Minotaur Warlord
 
-entity.dredminotaur.name=Lesser Dread Minotaur
-entity.dreadminotaur_guard.name=Dread Minotaur Bruiser
-entity.dreadminotaur_elite.name=Dread Minotaur Punisher
-entity.dreadminotaur_boss.name=Dread Minotaur Death Overlord
+entity.dread_minotaur.name=Lesser Dread Minotaur
+entity.dread_minotaur_guard.name=Dread Minotaur Bruiser
+entity.dread_minotaur_elite.name=Dread Minotaur Punisher
+entity.dread_minotaur_boss.name=Dread Minotaur Death Overlord
 
-entity.gu.red.name=Red
+entity.dragonbreed.red.name=Red
 entity.dragonbreed.white.name=Frost
-entity.dragonbreed.black.name=Dire
+entity.dragonbreed.dire.name=Dire
 entity.dragonbreed.green.name=Green
 entity.dragonbreed.ash.name=Ash
 
