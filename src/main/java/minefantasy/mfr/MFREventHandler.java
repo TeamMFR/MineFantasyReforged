@@ -643,14 +643,11 @@ public final class MFREventHandler {
 		}
 		EntityLivingBase entity = event.getEntityLiving();
 
-		if (entity.ticksExisted - entity.getLastAttackedEntityTime() > 200) {
-			return;
-		}
-
-		float lowHp = entity.getMaxHealth() / 5F;
 		int injury = getInjuredTime(entity);
 
-		if (ConfigHardcore.critLimp && (entity instanceof EntityLiving || !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
+		if (ConfigHardcore.critLimp && entity.ticksExisted - entity.getLastAttackedEntityTime() > 200 && (entity instanceof EntityLiving || !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
+			float lowHp = entity.getMaxHealth() / 5F;
+
 			if (entity.getHealth() <= lowHp || injury > 0) {
 				if (entity.getRNG().nextInt(10) == 0 && entity.onGround && !entity.isRiding()) {
 					entity.motionX = 0F;
