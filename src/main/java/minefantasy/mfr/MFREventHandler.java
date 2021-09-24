@@ -653,7 +653,6 @@ public final class MFREventHandler {
 					entity.motionX = 0F;
 					entity.motionZ = 0F;
 				}
-				entity.limbSwing = 2.0F;
 				float x = (float) (entity.posX + (random.nextFloat() - 0.5F) / 4F);
 				float y = (float) (entity.posY + entity.getEyeHeight() + (random.nextFloat() - 0.5F) / 4F);
 				float z = (float) (entity.posZ + (random.nextFloat() - 0.5F) / 4F);

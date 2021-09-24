@@ -74,6 +74,8 @@ public class SmeltingRecipesMF {
 		GameRegistry.addSmelting(MineFantasyBlocks.SULFUR_ORE, new ItemStack(MineFantasyItems.SULFUR, 4), 0.25F);
 		GameRegistry.addSmelting(MineFantasyBlocks.CLAY_ORE, new ItemStack(Items.CLAY_BALL, 4), 0.25F);
 
+		GameRegistry.addSmelting(MineFantasyBlocks.LIMESTONE_COBBLE, new ItemStack(MineFantasyBlocks.LIMESTONE),  0.25F);
+
 		// ALLOY
 		MineFantasyKnowledgeList.bronze = MineFantasyReforgedAPI.addRatioAlloy(3, MineFantasyItems.bar("bronze", 3),
 				new Object[] {copper, copper, tin});

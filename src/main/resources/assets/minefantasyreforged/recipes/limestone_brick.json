@@ -1,0 +1,16 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"B B",
+		"B B"
+	],
+	"key": {
+		"B": {
+			"item": "minefantasyreforged:limestone"
+		}
+	},
+	"result": {
+		"item": "minefantasyreforged:limestone_brick",
+		"count": 4
+	}
+}

@@ -24,6 +24,7 @@ import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -31,6 +32,7 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathNavigateGround;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -42,6 +44,8 @@ import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 
@@ -55,6 +59,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> BREED = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> TIER = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
+	private static final DataParameter<Float> JAW_MOVE = EntityDataManager.createKey(EntityDragon.class, DataSerializers.FLOAT);
+	private static final DataParameter<Float> NECK_ANGLE = EntityDataManager.createKey(EntityDragon.class, DataSerializers.FLOAT);
 
 	private final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
 
@@ -62,7 +68,9 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
 	private BlockPos boundOrigin;
 	public static int interestTimeSeconds = 90;
-	private Entity lastEnemy;
+	private Entity targetedEntity;
+	@SideOnly(Side.CLIENT)
+	private int wingFlap, wingTick;
 	public static float heartChance = 1.0F;
 
 	public EntityDragon(World worldIn) {
@@ -74,7 +82,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
 	public void disengage(int time) {
 		if (getAttackTarget() != null && getAttackTarget() instanceof EntityPlayer) {
-			lastEnemy = getAttackTarget();
+			targetedEntity = getAttackTarget();
 		}
 		setDisengageTime(time);
 		setTerrestrial(false);
@@ -105,7 +113,72 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		if (this.world.isRemote) {
 			this.width = (3.0F * getScale()) + 3.0F;
 			this.height = 2.0F * getScale();
+
+			float jawMove = getJawMove();
+			if (jawMove > 0) {
+				--jawMove;
+			}
+			setJawMove(jawMove);
+			float neckAngle = getNeckAngle();
+			if (neckAngle > 0) {
+				--neckAngle;
+			}
+			setNeckAngle(neckAngle);
+
+			wingTick++;
+			if (wingTick == 20) {
+				wingTick = 0;
+				if (!isTerrestrial()){
+					world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_ENDERDRAGON_FLAP, SoundCategory.HOSTILE, 0.5F, 1.5F);
+				}
+
+			}
+			int i = (120 / 20) * wingTick;
+			wingFlap = -40 + i;
 		}
+		if (isInWater()) {
+			if (rand.nextFloat() < 0.8F) {
+				getJumpHelper().setJumping();
+			}
+		}
+
+		int disengageTime = getDisengageTime();
+		if (disengageTime > 0) {
+			if (targetedEntity != null)
+				targetedEntity = null;
+			--disengageTime;
+		}
+		setDisengageTime(disengageTime);
+		if (rand.nextInt(this.getDisengageChance()) == 0 && disengageTime <= 0) {
+			disengage(100);
+		}
+
+		if (onGround)// Ground begin walk
+		{
+			setTerrestrial(true);
+		}
+		if (targetedEntity != null && targetedEntity.posY < (posY - 5D) && this.getDistance(targetedEntity.posX, posY, targetedEntity.posZ) < 2D)// Slam to enemy
+		{
+			setTerrestrial(true);
+		}
+		if (rand.nextInt(100) == 0 && targetedEntity == null)// Idle take off
+		{
+			setTerrestrial(false);
+			jump();
+		}
+		if (targetedEntity != null && targetedEntity.posY > (posY + 2D))// Combat take off
+		{
+			setTerrestrial(false);
+			jump();
+		}
+
+		if (getHealth() < getMaxHealth() && this.ticksExisted % 100 == 0 && getType().regenRate > 0) {
+			heal(getType().regenRate);
+			if (getHealth() > getMaxHealth()) {
+				setHealth(getMaxHealth());
+			}
+		}
+
 
 		this.bossInfo.setPercent(this.getHealth() / this.getMaxHealth());
 		super.onUpdate();
@@ -114,6 +187,10 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
 	private float getFlightSpeed() {
 		return 0.8F;
+	}
+
+	private int getDisengageChance() {
+		return getType().disengageChance;
 	}
 
 	@Override
@@ -153,6 +230,47 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
 	public void setCharging(boolean charging) {
 		this.setChargingFlag(1, charging);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getJawMove() {
+		return this.dataManager.get(JAW_MOVE);
+	}
+
+	public void setJawMove(float i) {
+		this.dataManager.set(JAW_MOVE, i);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getNeckAngle() {
+		return this.dataManager.get(NECK_ANGLE);
+	}
+
+	public void setNeckAngle(float i) {
+		this.dataManager.set(NECK_ANGLE, i);
+	}
+
+	@SideOnly(Side.CLIENT)
+	public double wingFlap() {
+		return wingFlap;
+	}
+
+	@SideOnly(Side.CLIENT)
+	public float getVertTailAngle() {
+		if (this.motionY > 0.05F || this.motionY < -0.05F)// accend or decend
+		{
+			if (!(this.motionX == 0 && this.motionZ == 0))// moving
+			{
+				float angle = (float) (45F * this.motionY) * 5;
+				if (angle < -45)
+					angle = -45;
+				if (angle > 45)
+					angle = 45;
+
+				return angle;
+			}
+		}
+		return 0;
 	}
 
 	@Override
@@ -256,6 +374,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.dataManager.register(BREED, 0);
 		this.dataManager.register(TIER, rand.nextInt(5));
 		this.dataManager.register(CHARGING_FLAG, (byte) 0);
+		this.dataManager.register(JAW_MOVE, 0F);
+		this.dataManager.register(NECK_ANGLE, 0F);
 	}
 
 	public Shockwave createShockwave(double x, double y, double z, float power, boolean grief) {
@@ -320,6 +440,12 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	}
 
 	@Override
+	public void playLivingSound() {
+		super.playLivingSound();
+		setJawMove(20);
+	}
+
+	@Override
 	protected void playStepSound(BlockPos pos, Block floor) {
 		this.playSound(MineFantasySounds.DRAGON_STEP, 1.0F, 1.0F);
 	}
@@ -330,6 +456,12 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	@Override
 	protected SoundEvent getHurtSound(DamageSource source) {
 		return MineFantasySounds.DRAGON_HURT;
+	}
+
+	@Override
+	protected void playHurtSound(DamageSource source) {
+		super.playHurtSound(source);
+		setJawMove(20);
 	}
 
 	/**
@@ -475,7 +607,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		// TODO Auto-generated method stub
 	}
 
-    // net.minecraft.entity.monster.EntityVex.AIChargeAttack class.
+	// net.minecraft.entity.monster.EntityVex.AIChargeAttack class.
 	class AIChargeAttack extends EntityAIBase {
 
 		public AIChargeAttack() {
@@ -509,6 +641,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			EntityDragon.this.moveHelper.setMoveTo(vec3d.x, vec3d.y, vec3d.z, 1.0D);
 			EntityDragon.this.setCharging(true);
 			EntityDragon.this.playSound(MineFantasySounds.DRAGON_FIRE, 1.0F, 1.0F);
+			setJawMove(20);
 		}
 
 		/**

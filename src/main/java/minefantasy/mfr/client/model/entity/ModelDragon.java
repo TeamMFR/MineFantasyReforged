@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.model.entity;
 
+import minefantasy.mfr.entity.mob.EntityDragon;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -821,23 +822,54 @@ public class ModelDragon extends ModelBase {
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		super.render(entity, f, f1, f2, f3, f4, f5);
+		setRotationAngles((EntityDragon) entity, f, f1, f2, f3, f4, f5);
 		this.Body.render(f5);
 	}
 
-	@Override
-	public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw,
-			float headPitch, float scaleFactor, Entity entityIn) {
-		super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
+	public void setRotationAngles(EntityDragon dragon, float step1, float step2, float head1, float neckY, float neckX, float head4) {
+		super.setRotationAngles(step1, step2, head1, neckY, neckX, head4, dragon);
+		float wingFlap;
+		float jawAngle = (float) Math.toRadians(dragon.getJawMove());
+		float neckAngle = -(float) Math.toRadians(4.5F * dragon.getNeckAngle());
 
-		Neckbase.rotateAngleY = (float) Math.toRadians(netHeadYaw / 3);
-		Neckmid.rotateAngleY = (float) Math.toRadians(netHeadYaw / 3);
-		Neckend.rotateAngleY = (float) Math.toRadians(netHeadYaw / 3);
-		Neckbase.rotateAngleX = (float) (Math.toRadians(headPitch / 3) - Math.PI / 4);
-		Neckmid.rotateAngleX = (float) Math.toRadians(headPitch / 3);
-		Neckend.rotateAngleX = (float) Math.toRadians(headPitch / 3);
+		this.Headback.rotateAngleX = neckX / (180F / (float) Math.PI) + neckAngle;
+		this.Headback.rotateAngleY = neckY / (180F / (float) Math.PI);
 
-		float angle = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-		Wingshoulderright.rotateAngleZ = -angle;
-		Wingshoulderleft.rotateAngleZ = angle;
+		this.Lowerjaw.rotateAngleX = -0.045553093477052F - jawAngle;
+
+		if (!dragon.isTerrestrial()) // Fly
+		{
+			if (!dragon.onGround) {
+				float angle = (float) Math.toRadians(dragon.getVertTailAngle());
+				this.Body.rotateAngleX = 0.546F - angle;
+			} else {
+				this.Body.rotateAngleX = 0.5462880558742251F;
+			}
+
+			if (dragon.motionY < -0.01F)// Glide
+			{
+				wingFlap = 0;
+			} else if (dragon.motionX == 0 && dragon.motionZ == 0) // Hover
+			{
+				wingFlap = (float) Math.toRadians(dragon.wingFlap());
+			} else {
+				wingFlap = MathHelper.cos(step1 * 0.6662F) * 1.4F * step2;// Move
+			}
+			this.Wingshoulderright.rotateAngleZ = wingFlap * 0.75F;
+			this.Wingshoulderleft.rotateAngleZ = -(wingFlap * 0.75F);
+			this.Wingupperarmright.rotateAngleZ = wingFlap * 0.25F;
+			this.Wingupperarmleft.rotateAngleZ = -(wingFlap * 0.25F);
+
+		} else // Walk
+		{
+			this.Body.rotateAngleX = 0.5462880558742251F;
+			this.Wingshoulderright.rotateAngleZ = (float) -Math.toRadians(40);
+			this.Wingshoulderleft.rotateAngleZ = (float) Math.toRadians(40);
+
+			this.Righthip.rotateAngleX = MathHelper.cos(step1 * 0.6662F) * 1.4F * step2;
+			this.Lefthip.rotateAngleX = MathHelper.cos(step1 * 0.6662F + (float) Math.PI) * 1.4F * step2;
+			this.Shoulderleft_1.rotateAngleX = MathHelper.cos(step1 * 0.6662F + (float) Math.PI) * 1.4F * step2;
+			this.Shoulderleft.rotateAngleX = MathHelper.cos(step1 * 0.6662F) * 1.4F * step2;
+		}
 	}
 }
