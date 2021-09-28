@@ -27,9 +27,6 @@ import java.util.List;
  */
 @Optional.Interface(iface = "net.shadowmage.ancientwarfare.npc.item.IExtendedReachWeapon", modid = "ancientwarfarenpc")
 public class ItemLance extends ItemSpear {
-	/**
-	 *
-	 */
 	public ItemLance(String name, Item.ToolMaterial material, int rarity, float weight) {
 		super(name, material, rarity, weight);
 		setMaxDamage(getMaxDamage(new ItemStack(this)) * 2);
@@ -108,25 +105,21 @@ public class ItemLance extends ItemSpear {
 	}
 
 	public float joust(EntityLivingBase target, EntityLivingBase attacker, float dam) {
-		float speedMod = 20F;
 		float speedCap = 5F;
 
 		if (attacker.isRiding()) {
-			Entity mount = attacker.getRidingEntity();
-			if (mount != null) {
-				float speed = (float) Math.hypot(mount.motionX, mount.motionZ) * speedMod;
-				if (speed > speedCap)
-					speed = speedCap;
+			float speed = (float) (Math.hypot(attacker.moveForward, attacker.moveStrafing) * 3.5);
+			if (speed > speedCap)
+				speed = speedCap;
 
-				dam += getJoustDamage(target.getHeldItemMainhand()) / speedCap * speed;
+			dam += (getJoustDamage(attacker.getHeldItemMainhand()) / speedCap) * speed;
 
-				if (attacker instanceof EntityPlayer) {
-					((EntityPlayer) attacker).onCriticalHit(target);
-				}
+			if (attacker instanceof EntityPlayer) {
+				((EntityPlayer) attacker).onCriticalHit(target);
+			}
 
-				if (target.isRiding()) {
-					target.dismountRidingEntity();
-				}
+			if (target.isRiding() && speed > (speedCap / 2) && speed != speedCap) {
+				target.dismountRidingEntity();
 			}
 		}
 		return dam;
