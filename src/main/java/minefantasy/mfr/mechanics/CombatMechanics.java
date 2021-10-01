@@ -60,9 +60,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -371,14 +371,18 @@ public class CombatMechanics {
 	}
 
 	@SubscribeEvent
-	public static void onHit(LivingDamageEvent event) {
-		DamageSource src = event.getSource();
+	public static void onHit(LivingHurtEvent event) {
+		DamageSource source = event.getSource();
 		EntityLivingBase hit = event.getEntityLiving();
 
-		if (src != null && src == DamageSource.FALL && hit instanceof EntityPlayer) {
+		if (source == null){
+			return;
+		}
+
+		if (source == DamageSource.FALL && hit instanceof EntityPlayer) {
 			onFall((EntityPlayer) hit, event.getAmount());
 		}
-		float damage = modifyDamage(src, hit, event.getAmount(), true);
+		float damage = modifyDamage(source, hit, event.getAmount(), true);
 
 		if (damage > 0 && hit.isSprinting()) {
 			hit.setSprinting(false);
@@ -395,7 +399,7 @@ public class CombatMechanics {
 			}
 		}
 		if (damage > 0) {
-			onOfficialHit(src, hit, damage);
+			onOfficialHit(source, hit, damage);
 
 			if (event.getSource() instanceof EntityDamageSource && !(event.getSource() instanceof EntityDamageSourceIndirect)) {
 				Entity entityHitter = event.getSource().getTrueSource();
@@ -650,7 +654,7 @@ public class CombatMechanics {
 					}
 					if (user instanceof EntityPlayer) {
 						user.stopActiveHand();
-						ItemWeaponMFR.setParry(weapon, 20);
+						ItemWeaponMFR.setParry(weapon, 40);
 					}
 				}
 			}

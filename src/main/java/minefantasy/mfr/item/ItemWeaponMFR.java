@@ -699,6 +699,26 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	// ==============================================================\\
 
 	@Override
+	public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack) {
+		if (ItemStack.areItemsEqualIgnoreDurability(oldStack, newStack)) {
+			return true;
+		}
+		return super.canContinueUsing(oldStack, newStack);
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		// This method does some VERY strange things! Despite its name, it also seems to affect the updating of NBT...
+
+		if(!oldStack.isEmpty() || !newStack.isEmpty()){
+			// We only care about the situation where we specifically want the animation NOT to play.
+			if(oldStack.getItem() == newStack.getItem() && !slotChanged)
+				return false;
+		}
+
+		return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";

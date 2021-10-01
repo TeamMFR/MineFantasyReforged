@@ -4,8 +4,6 @@ import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
 import minefantasy.mfr.util.TextureHelperMFR;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -53,41 +51,6 @@ public class RenderBigTool extends WrappedItemModel implements IItemRenderer {
 		this.rotation = rotation;
 		this.yOffset = yOffset;
 	}
-
-	/////////////////
-	// TODO: remove - from 1.7.10 .. might be useful as reference?
-	//	public RenderHeavyWeapon setParryable() {
-	//		super(wrappedModel);
-	//		doesRenderParry = true;
-	//		return this;
-	//	}
-	//
-	//	public RenderHeavyWeapon setKatana() {
-	//		offset = 1.0F;
-	//		willStab = true;
-	//		return this;
-	//	}
-	//
-	//	public RenderHeavyWeapon setGreatsword() {
-	//		offset = 1.0F;
-	//		return this;
-	//	}
-	//
-	//	public RenderHeavyWeapon setAxe() {
-	//		offset = 1.0F;
-	//		return this;
-	//	}
-	//
-	//	public RenderHeavyWeapon setBlunt() {
-	//		offset = 1.2F;
-	//		return this;
-	//	}
-	//
-	//	public RenderHeavyWeapon setScythe() {
-	//		offset = 1.8F;
-	//		return this;
-	//	}
-	/////////////////
 
 	@Override
 	public void renderItem(ItemStack stack, ItemCameraTransforms.TransformType transformType) {
