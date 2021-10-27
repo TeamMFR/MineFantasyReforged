@@ -81,6 +81,13 @@ public class ArmourCalculator {
 	}
 
 	/**
+	 * Converts a hit:damage ratio into a decimal percentage
+	 */
+	public static float convertToPercent(float ratio) {
+		return (1F - (1F / ratio));
+	}
+
+	/**
 	 * Estimates the distribution of stats over a piece
 	 */
 	private static float estimateScale(ItemStack item, EntityEquipmentSlot slot) {

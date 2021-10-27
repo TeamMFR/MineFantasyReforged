@@ -21,7 +21,6 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.ISpecialArmor;
 import net.minecraftforge.common.util.EnumHelper;
@@ -115,21 +114,21 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 			if (armorClass < 0)
 				armorClass = 0;
 		}
+
 		armorClass++;// because 1.0AC = no armour so it adds on top of this
 
-		//armorProperties.Toughness -= material.durability; //TODO: Introduce Toughness values to armor calculations and definitions
-		ArmorProperties armorProperties = getPropertiesAfterAbsorb(armour, damage, armorClass, 0, armorType);
-		armorProperties.Armor -= material.baseArmorRating;
+		double totalPercent = ArmourCalculator.convertToPercent(armorClass);
+		double maxPercent = 0.99D;// max percentage is 99% damage to avoid immunity
 
-		return armorProperties;
-	}
+		if (totalPercent > maxPercent) {
+			totalPercent = maxPercent;
+		}
+		double percent = totalPercent * scalePiece();
+		if (percent < 0) {
+			percent = 0;
+		}
 
-	public static ISpecialArmor.ArmorProperties getPropertiesAfterAbsorb(ItemStack armor, double damage, float totalArmor, float totalToughness, EntityEquipmentSlot slot) {
-
-		float defenseReduction = (float) damage / (totalToughness / 4 + 2) * 0.01F;
-		float absorbRatio = MathHelper.clamp(totalArmor / 25F - defenseReduction, totalArmor / 125F, ArmourCalculator.sizes[slot.getIndex()]);
-
-		return new ISpecialArmor.ArmorProperties(0, absorbRatio, (int) Math.ceil(Math.max(damage, (armor.getMaxDamage() - armor.getItemDamage()) * 4)));
+		return new ArmorProperties(0, percent, Integer.MAX_VALUE);
 	}
 
 	protected float getSpecialModifier(ItemStack armour, DamageSource source) {
