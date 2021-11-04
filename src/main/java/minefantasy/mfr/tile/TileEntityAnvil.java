@@ -636,11 +636,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	public void upset(EntityPlayer user) {
 		if (this.progress > 0 && this.progressMax > 0) {
 			world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 0.25F, 0.75F);
-			if (!world.isRemote) {
-				progress -= (progressMax / 10F);
-				if (progress < 0) {
-					ruinCraft(user);
-				}
+			progress -= (progressMax / 10F);
+			if (progress < 0) {
+				ruinCraft(user);
 			}
 		}
 	}

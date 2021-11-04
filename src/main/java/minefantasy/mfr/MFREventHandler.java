@@ -1,5 +1,6 @@
 package minefantasy.mfr;
 
+import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.farming.FarmingHelper;
@@ -28,6 +29,7 @@ import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ItemArmourBaseMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.RPGElements;
@@ -229,9 +231,25 @@ public final class MFREventHandler {
 					if (s != null) {
 						if (!hasInfo && s.startsWith("ingot")) {
 							String s2 = s.substring(5, s.length());
-							CustomMaterial material = CustomMaterial.getMaterial(s2);
-							if (material != CustomMaterial.NONE)
+							CustomMaterial material = CustomMaterial.getMaterial(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, s2));
+							if (material != CustomMaterial.NONE){
 								hasInfo = true;
+							}
+							else {
+								if (!s.contains("Brick")){
+									ArrayList<CustomMaterial> metalMaterials = CustomMaterial.getList("metal");
+									for (CustomMaterial metal : metalMaterials){
+										if (metal instanceof MetalMaterial) {
+											if (((MetalMaterial) metal).oreDictList.equals(s)){
+												material = metal;
+												if (material != CustomMaterial.NONE){
+													break;
+												}
+											}
+										}
+									}
+								}
+							}
 
 							CustomToolHelper.addComponentString(event.getItemStack(), event.getToolTip(), material);
 						}
@@ -742,7 +760,10 @@ public final class MFREventHandler {
 
 	@SubscribeEvent
 	public static void wakeUp(PlayerWakeUpEvent event) {
-		PlayerTickHandler.wakeUp(event.getEntityPlayer());
+		EntityPlayer player = event.getEntityPlayer();
+		if (player.isPlayerFullyAsleep()){
+			PlayerTickHandler.wakeUp(event.getEntityPlayer());
+		}
 	}
 
 	private static boolean isHotItem(ItemStack item) {

@@ -2,13 +2,14 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.tool.ILighter;
 import minefantasy.mfr.init.MineFantasyTabs;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFlintAndSteel;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -49,22 +50,25 @@ public class ItemLighter extends ItemBaseMFR implements ILighter {
 		return chance;
 	}
 
-	public boolean onItemUse(ItemStack item, EntityPlayer user, World world, BlockPos pos, EnumFacing face) {
+	public EnumActionResult onItemUse(EntityPlayer player, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack stack = player.getHeldItem(hand);
 
-		if (!user.canPlayerEdit(pos, face, item)) {
-			return false;
+		pos = pos.offset(facing);
+
+		if (!player.canPlayerEdit(pos, facing, stack)) {
+			return EnumActionResult.FAIL;
 		} else {
-			boolean success = user.getRNG().nextFloat() < chance;
+			boolean success = player.getRNG().nextFloat() < chance;
 			if (world.isAirBlock(pos)) {
-				world.playSound(user, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+				world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.AMBIENT, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
 				if (success) {
-					world.setBlockState(pos, (IBlockState) Blocks.FIRE);
+					world.setBlockState(pos, Blocks.FIRE.getDefaultState(), 11);
 				}
 			}
 			if (success) {
-				item.damageItem(1, user);
+				stack.damageItem(1, player);
 			}
-			return true;
+			return EnumActionResult.SUCCESS;
 		}
 	}
 }

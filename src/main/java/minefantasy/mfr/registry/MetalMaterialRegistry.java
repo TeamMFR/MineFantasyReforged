@@ -3,6 +3,7 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.util.JsonUtils;
@@ -64,7 +65,7 @@ public class MetalMaterialRegistry extends DataLoader {
 
 		String oreDictList = JsonUtils.getString(json, "oreDictList");
 
-		if (MetalMaterial.getMaterial(name) != null) {
+		if (MetalMaterial.getMaterial(name) != CustomMaterial.NONE) {
 			return;
 		}
 

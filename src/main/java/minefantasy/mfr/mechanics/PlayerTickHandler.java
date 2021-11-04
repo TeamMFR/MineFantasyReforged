@@ -174,9 +174,6 @@ public class PlayerTickHandler {
 		if (StaminaBar.isSystemActive) {
 			StaminaBar.setStaminaValue(PlayerData.get(player), StaminaBar.getBaseMaxStamina(player));
 		}
-		if (player.getEntityData().hasKey(chunkCoords + "_x")) {
-			player.getEntityData().setBoolean(resetBed, true);
-		}
 	}
 
 	public static void readyToResetBedPosition(EntityPlayer player) {

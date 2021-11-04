@@ -127,7 +127,13 @@ public class CustomMaterial {
 			return CustomMaterial.NONE;
 		}
 
-		return materialList.get(name.toLowerCase());
+		CustomMaterial material = materialList.get(name.toLowerCase());
+		if (material == null){
+			return CustomMaterial.NONE;
+		}
+		else {
+			return material;
+		}
 	}
 
 	/**

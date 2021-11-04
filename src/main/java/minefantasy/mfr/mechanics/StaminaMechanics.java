@@ -21,7 +21,6 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.item.ItemTool;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumHand;
-import net.minecraftforge.common.util.EnumHelper;
 
 public class StaminaMechanics {
 	private static boolean hurtAdreneline = true;
