@@ -123,12 +123,11 @@ public class Shockwave {// Explosion
 		int i2 = MathHelper.floor(this.explosionY + this.explosionSize + 1.0D);
 		int l = MathHelper.floor(this.explosionZ - this.explosionSize - 1.0D);
 		int j2 = MathHelper.floor(this.explosionZ + this.explosionSize + 1.0D);
-		List list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder,
+		List<Entity> list = this.world.getEntitiesWithinAABBExcludingEntity(this.exploder,
 				new AxisAlignedBB(i, k, l, j, i2, j2));
 		Vec3d vec3 = new Vec3d(this.explosionX, this.explosionY, this.explosionZ);
 
-		for (int i1 = 0; i1 < list.size(); ++i1) {
-			Entity entity = (Entity) list.get(i1);
+		for (Entity entity : list) {
 			double d4 = entity.getDistance(this.explosionX, this.explosionY, this.explosionZ) / this.explosionSize;
 
 			if (d4 <= 1.0D && !(entity instanceof EntityItem)) {

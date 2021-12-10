@@ -15,6 +15,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -90,19 +91,20 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote && ToolHelper.getToolTypeFromStack(player.getHeldItem(hand)) == Tool.SPANNER) {
-			return tryBuild(player, world, pos);
+			tryBuild(player, world, pos);
+			return true;
 		}
 		return false;
 	}
 
-	public boolean tryBuild(EntityPlayer builder, World world, BlockPos pos) {
+	public void tryBuild(EntityPlayer builder, World world, BlockPos pos) {
 		if (isMain && PowerArmour.isStationBlock(world, pos.add(0, 2, 0))
 				&& world.getBlockState(pos.add(0, -1, 0)).getBlock() == MineFantasyBlocks.BLOCK_COGWORK_LEGS
 				&& world.getBlockState(pos.add(0, 1, 0)).getBlock() == MineFantasyBlocks.BLOCK_COGWORK_HELM) {
 			if (!world.isRemote) {
-				world.setBlockState(pos, getDefaultState());
-				world.setBlockState(pos.add(0, -1, 0), getDefaultState());
-				world.setBlockState(pos.add(0, 1, 0), getDefaultState());
+				world.setBlockState(pos, Blocks.AIR.getDefaultState());
+				world.setBlockState(pos.add(0, -1, 0), Blocks.AIR.getDefaultState());
+				world.setBlockState(pos.add(0, 1, 0), Blocks.AIR.getDefaultState());
 
 				EntityCogwork suit = new EntityCogwork(world);
 				int angle = getAngleFor(builder);
@@ -112,7 +114,6 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 			}
 
 		}
-		return false;
 	}
 
 	private int getAngleFor(EntityPlayer user) {

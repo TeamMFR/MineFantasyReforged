@@ -3,16 +3,15 @@ package minefantasy.mfr.network;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.entity.EntityCogwork;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class CogworkControlPacket extends PacketMF {
 	private EntityCogwork suit;
 	private float forward, strafe;
 	private boolean isJumping;
-	private Entity entityPlayer;
-	private int id;
+	private int entityID;
 
-	public CogworkControlPacket(EntityCogwork suit, Entity entity) {
-		entityPlayer = entity;
+	public CogworkControlPacket(EntityCogwork suit) {
 		this.suit = suit;
 		this.forward = suit.getMoveForward();
 		this.strafe = suit.getMoveStrafe();
@@ -24,7 +23,7 @@ public class CogworkControlPacket extends PacketMF {
 
 	@Override
 	public void readFromStream(ByteBuf packet) {
-		id = packet.readInt();
+		entityID = packet.readInt();
 		forward = packet.readFloat();
 		strafe = packet.readFloat();
 		isJumping = packet.readBoolean();
@@ -39,13 +38,15 @@ public class CogworkControlPacket extends PacketMF {
 	}
 
 	@Override
-	protected void execute() {
-		Entity entity = entityPlayer.world.getEntityByID(id);
+	protected void execute(EntityPlayer player) {
+		Entity entity = player.world.getEntityByID(entityID);
+
 		if (entity instanceof EntityCogwork) {
 			suit = (EntityCogwork) entity;
 			suit.setMoveForward(forward);
 			suit.setMoveStrafe(strafe);
 			suit.setJumpControl(isJumping);
 		}
+
 	}
 }

@@ -10,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,7 +41,7 @@ public class BlockingAnimationHandler {
 
             AbstractClientPlayer player = (AbstractClientPlayer) evt.getEntity();
             if (player.isHandActive() && PlayerUtils.shouldItemStackBlock(player.getActiveItemStack())) {
-                ModelPlayer model = (ModelPlayer) evt.getRenderer().getMainModel();
+                ModelBiped model = (ModelBiped) evt.getRenderer().getMainModel();
                 boolean left1 = player.getActiveHand() == EnumHand.OFF_HAND && player.getPrimaryHand() == EnumHandSide.RIGHT;
                 boolean left2 = player.getActiveHand() == EnumHand.MAIN_HAND && player.getPrimaryHand() == EnumHandSide.LEFT;
                 if (left1 || left2) {

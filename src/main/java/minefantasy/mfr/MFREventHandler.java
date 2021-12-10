@@ -1,7 +1,6 @@
 package minefantasy.mfr;
 
 import com.google.common.base.CaseFormat;
-import minefantasy.mfr.api.armour.IPowerArmour;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.heating.IHotItem;
@@ -42,7 +41,6 @@ import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.ArrowEffectsMF;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
-import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
 import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.XSTRandom;
@@ -50,7 +48,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
@@ -91,7 +88,6 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.RenderPlayerEvent;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -768,20 +764,6 @@ public final class MFREventHandler {
 
 	private static boolean isHotItem(ItemStack item) {
 		return !item.isEmpty() && (item.getItem() instanceof IHotItem);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void renderEntity(RenderPlayerEvent.Specials.Pre event) {
-		Minecraft mc = Minecraft.getMinecraft();
-		boolean showHeld = true;
-		if (PowerArmour.isWearingCogwork(event.getEntityPlayer()) && mc.gameSettings.thirdPersonView != 0) {
-			IPowerArmour cogwork = (IPowerArmour) event.getEntity().getRidingEntity();
-			if (cogwork != null){
-				showHeld = !cogwork.isArmoured("right_arm");
-			}
-		}
-		event.setRenderItem(showHeld);
 	}
 
 	@SubscribeEvent

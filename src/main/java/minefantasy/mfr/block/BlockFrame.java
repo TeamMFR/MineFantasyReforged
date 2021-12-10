@@ -2,6 +2,7 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -12,6 +13,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,6 +24,7 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -49,6 +52,8 @@ public class BlockFrame extends BasicBlockMF {
 			new AxisAlignedBB(4 / 16D, 4 / 16D, 0 / 16D, 12 / 16D, 12 / 16D, 16 / 16D), //N,E,S 6
 			new AxisAlignedBB(4 / 16D, 0 / 16D, 4 / 16D, 12 / 16D, 16 / 16D, 12 / 16D), //D,S   7
 			new AxisAlignedBB(4 / 16D, 4 / 16D, 4 / 16D, 12 / 16D, 12 / 16D, 12 / 16D)};//NONE  8
+
+	protected static AxisAlignedBB AABB_FOR_COGWORK = new AxisAlignedBB(15 / 16D, 0 / 16D, 15 / 16D, 1 / 16D, 16 / 16D, 1 / 16D);
 
 	public BlockFrame(String name) {
 		this(name, null);
@@ -130,12 +135,18 @@ public class BlockFrame extends BasicBlockMF {
 	private boolean tryBuild(EntityPlayer player, World world, BlockPos pos) {
 		if (PowerArmour.isBasicStationFrame(world, pos) && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY)))) {
 			if (!player.capabilities.isCreativeMode) {
-				player.inventory.removeStackFromSlot(1);
+				player.inventory.removeStackFromSlot(player.inventory.getSlotFor(new ItemStack(MineFantasyItems.COGWORK_PULLEY)));
 			}
 			if (!world.isRemote) {
 				world.setBlockState(pos, MineFantasyBlocks.COGWORK_HOLDER.getDefaultState(), 2);
 			}
 			return true;
+		}
+		else if (!player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY))) {
+			player.sendMessage(new TextComponentString(I18n.format("vehicle.noPulley")));
+		}
+		else if (!PowerArmour.isBasicStationFrame(world, pos)) {
+			player.sendMessage(new TextComponentString(I18n.format("vehicle.noFrame")));
 		}
 		return false;
 	}
@@ -181,13 +192,17 @@ public class BlockFrame extends BasicBlockMF {
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable
-			Entity entityIn, boolean isActualState) {
+	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
 		if (!isActualState) {
 			state = this.getActualState(state, worldIn, pos);
 		}
 
-		addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BY_INDEX[6]);
+		if (entityIn instanceof EntityCogwork) {
+			addCollisionBoxToList(pos, entityBox, collidingBoxes, new AxisAlignedBB(6 / 16D, 0 / 16D, 6 / 16D, 10 / 16D, 16 / 16D, 10 / 16D));
+			return;
+		}
+
+		addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BY_INDEX[8]);
 
 		if (state.getValue(NORTH)) {
 			addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BY_INDEX[getBoundingBoxIndex(EnumFacing.NORTH)]);

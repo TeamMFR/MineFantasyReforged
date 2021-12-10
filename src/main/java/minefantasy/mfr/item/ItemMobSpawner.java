@@ -73,22 +73,31 @@ public class ItemMobSpawner extends ItemBaseMFR {
 	@Nullable
 	public static Entity spawnCreature(World worldIn, String entityID, double x, double y, double z) {
 		if (entityID != null) {
-			Entity entity = null;
+			EntityLivingBase entity = null;
 
 			ResourceLocation entityResourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID, entityID);
 
 			for (int i = 0; i < 1; ++i) {
-				entity = EntityList.createEntityByIDFromName(entityResourceLocation, worldIn);
+				entity = (EntityLivingBase) EntityList.createEntityByIDFromName(entityResourceLocation, worldIn);
+
+				entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
+				entity.rotationYawHead = entity.rotationYaw;
+				entity.renderYawOffset = entity.rotationYaw;
 
 				if (entity instanceof EntityLiving) {
 					EntityLiving entityliving = (EntityLiving) entity;
-					entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
-					entityliving.rotationYawHead = entityliving.rotationYaw;
-					entityliving.renderYawOffset = entityliving.rotationYaw;
+
 					if (net.minecraftforge.event.ForgeEventFactory.doSpecialSpawn(entityliving, worldIn, (float) x, (float) y, (float) z, null))
 						return null;
 					entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
-					worldIn.spawnEntity(entity);
+
+					entityliving.playLivingSound();
+				}
+
+				worldIn.spawnEntity(entity);
+
+				if (entity instanceof EntityLiving) {
+					EntityLiving entityliving = (EntityLiving) entity;
 					entityliving.playLivingSound();
 				}
 			}

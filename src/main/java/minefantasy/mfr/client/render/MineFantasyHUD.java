@@ -27,7 +27,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiContainerCreative;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
@@ -200,23 +200,24 @@ public class MineFantasyHUD extends Gui {
 	}
 
 	private void renderHelmetBlur(int width, int height) {
-		GL11.glDisable(GL11.GL_DEPTH_TEST);
-		GL11.glDepthMask(false);
-		OpenGlHelper.glBlendFunc(770, 771, 1, 0);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
+		GlStateManager.disableDepth();
+		GlStateManager.depthMask(false);
+		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.disableAlpha();
 		bindTexture("textures/gui/scopes/cogwork_helm.png");
-		BufferBuilder bufferBuilder = Tessellator.getInstance().getBuffer();
-		bufferBuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-		bufferBuilder.pos(0.0D, height, -90.0D).tex(0.0D, 1.0D);
-		bufferBuilder.pos(width, height, -90.0D).tex(1.0D, 1.0D);
-		bufferBuilder.pos(width, 0.0D, -90.0D).tex(1.0D, 0.0D);
-		bufferBuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D);
-		bufferBuilder.finishDrawing();
-		GL11.glDepthMask(true);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glEnable(GL11.GL_ALPHA_TEST);
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		Tessellator tessellator = Tessellator.getInstance();
+		BufferBuilder bufferBuilder = tessellator.getBuffer();
+		bufferBuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+		bufferBuilder.pos(0.0D, height, -90.0D).tex(0.0D, 1.0D).endVertex();
+		bufferBuilder.pos(width, height, -90.0D).tex(1.0D, 1.0D).endVertex();
+		bufferBuilder.pos(width, 0.0D, -90.0D).tex(1.0D, 0.0D).endVertex();
+		bufferBuilder.pos(0.0D, 0.0D, -90.0D).tex(0.0D, 0.0D).endVertex();
+		tessellator.draw();
+		GlStateManager.depthMask(true);
+		GlStateManager.enableDepth();
+		GlStateManager.enableAlpha();
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
 	public BlockPos getClickedBlock(float ticks, int mouseX, int mouseY) {

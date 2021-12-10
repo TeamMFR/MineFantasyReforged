@@ -61,7 +61,7 @@ public class PowerArmour {
 	}
 
 	public static boolean isBasicStationFrame(World world, BlockPos pos) {
-		if (!(world.getBlockState(pos).getBlock() instanceof BlockFrame)) {
+		if (!(world.getBlockState(pos).getBlock() instanceof BlockFrame || world.getBlockState(pos).getBlock() instanceof BlockFrameHolder)) {
 			return false;
 		}
 		int shafts = 0;

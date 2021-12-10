@@ -196,9 +196,7 @@ public class ModelCogwork extends ModelBiped {
 		}
 		this.setRotationAngles(f1, f2, isEmpty ? 0F : f3, f4, f5, scale, entity);
 		bipedHead.rotationPointY = bipedHeadwear.rotationPointY = -2F;
-		this.bipedBody.rotationPointZ = this.bipedLeftLeg.rotationPointZ = this.bipedRightLeg.rotationPointZ = isWornByPlayer
-				? 6F
-				: 0F;
+		this.bipedBody.rotationPointZ = this.bipedLeftLeg.rotationPointZ = this.bipedRightLeg.rotationPointZ = isWornByPlayer ? 6F : 0F;
 		this.bipedLeftArm.isHidden = this.bipedRightArm.isHidden = this.leftarmArmour.isHidden = this.rightarmArmour.isHidden = isWornByPlayer;
 
 		if (!isWornByPlayer) {
