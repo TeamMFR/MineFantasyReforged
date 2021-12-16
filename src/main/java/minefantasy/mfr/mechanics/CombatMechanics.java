@@ -10,6 +10,7 @@ import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigArmour;
+import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
@@ -259,6 +260,9 @@ public class CombatMechanics {
 	}
 
 	private static boolean shouldPanic(EntityLivingBase victim) {
+		if (!ConfigMobs.shouldFireCausePanic) {
+			return false;
+		}
 		if (victim instanceof EntityMinotaur) {
 			return ((EntityMinotaur) victim).getRageLevel() < 80;
 		}

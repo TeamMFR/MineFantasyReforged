@@ -604,7 +604,7 @@ public final class MFREventHandler {
 				}
 			}
 
-			if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player) && !isBlockPlant(broken.getBlock())) {
+			if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player) && !isBlockPlant(broken.getBlock()) && !(broken == (Blocks.SNOW_LAYER).getDefaultState())) {
 				float points = 2.0F * ConfigStamina.miningSpeed;
 				ItemWeaponMFR.applyFatigue(player, points, 20F);
 

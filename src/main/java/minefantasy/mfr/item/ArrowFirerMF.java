@@ -38,7 +38,7 @@ public class ArrowFirerMF implements IArrowHandler {
 		ItemArrowMFR ammo = (ItemArrowMFR) arrow.getItem();
 		float spread = 1.0F;
 		if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
-			firepower *= ((ISpecialBow) bow.getItem()).getRange(bow);
+			firepower *= ((ISpecialBow) bow.getItem()).getVelocity(bow);
 			spread = ((ISpecialBow) bow.getItem()).getSpread(bow);
 		}
 

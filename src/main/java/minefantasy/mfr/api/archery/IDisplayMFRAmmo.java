@@ -8,5 +8,11 @@ import net.minecraft.item.ItemStack;
  * firer
  */
 public interface IDisplayMFRAmmo {
+
+	/**
+	 * Used to set the ammo capacity for the display
+	 * @param item The Itemstack of the firearm
+	 * @return the ammo capacity as an Int
+	 */
 	int getAmmoCapacity(ItemStack item);
 }

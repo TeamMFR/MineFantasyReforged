@@ -375,7 +375,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 	}
 
 	@Override
-	public float getRange(ItemStack item) {
+	public float getVelocity(ItemStack item) {
 		return model.velocity;
 	}
 

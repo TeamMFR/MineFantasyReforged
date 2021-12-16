@@ -127,16 +127,9 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 		}
 
 		Multimap<String, AttributeModifier> map = HashMultimap.create();
-		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
+		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", baseDamage, 0));
 		map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.8F, 0));
 		return map;
-	}
-
-	/**
-	 * Gets a stack-sensitive value for the melee dmg
-	 */
-	protected float getMeleeDamage(ItemStack item) {
-		return baseDamage + CustomToolHelper.getMeleeDamage(item, toolMaterial.getAttackDamage());
 	}
 
 	protected float getWeightModifier(ItemStack stack) {

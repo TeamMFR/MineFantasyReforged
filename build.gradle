@@ -133,6 +133,9 @@ processResources {
 }
 
 jar {
+    from {
+        configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
+    }
     manifest {
         attributes([
             "FMLAT": "minefantasyreforged_at.cfg",

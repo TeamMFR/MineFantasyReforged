@@ -10,14 +10,29 @@ public interface ISpecialBow {
 	 * <p>
 	 * Allows to modify an arrow when fired from this bow
 	 *
+	 * @param bow The Itemstack of the bow that is being used
 	 * @param arrow the arrow fired(use a cast to determine what class it is)
 	 * @return the same arrow, but modified
 	 */
 	Entity modifyArrow(ItemStack bow, Entity arrow);
 
+	/**
+	 * The max charge (bow drawback length) possible on the bow
+	 * @return The max charge
+	 */
 	float getMaxCharge();
 
-	float getRange(ItemStack bow);
+	/**
+	 *
+	 * @param bow The Itemstack of the bow that is being used
+	 * @return The velocity modifier of the projectile being fired
+	 */
+	float getVelocity(ItemStack bow);
 
+	/**
+	 *
+	 * @param bow The Itemstack of the bow that is being used
+	 * @return The relative variance in projectile accuracy
+	 */
 	float getSpread(ItemStack bow);
 }

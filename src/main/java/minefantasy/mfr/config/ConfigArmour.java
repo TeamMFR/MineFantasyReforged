@@ -10,6 +10,7 @@ public class ConfigArmour extends ConfigurationBaseMF {
 	public static final String CATEGORY_COGWORK = "Cogwork Features";
 	public static boolean resistArrow;
 	public static boolean cogworkGrief;
+	public static boolean cogworkJump;
 	public static float cogworkFuelUnits;
 
 	@Override
@@ -32,13 +33,15 @@ public class ConfigArmour extends ConfigurationBaseMF {
 				"A modifier for the rate armours slow down movement, increasing this slows you more, decreasing it slows less, just keep it above 0")
 				.getString());
 
-		ArmourCalculator.useConfigIndirectDmg = Boolean.parseBoolean(config.get("Misc", "Use config indrect damage",
+		ArmourCalculator.useConfigIndirectDmg = Boolean.parseBoolean(config.get("Misc", "Use config indirect damage",
 				true,
 				"Allows config for indirect projectiles, disable if you get problems when getting hit by modded projectiles")
 				.getString());
 
 		cogworkGrief = Boolean.parseBoolean(config.get(CATEGORY_COGWORK, "Cogwork Grief", true,
-				"Should cogwork armour cause envionmental damage when impact landing").getString());
+				"Should cogwork armour cause environmental damage when impact landing").getString());
+		cogworkJump = Boolean.parseBoolean(config.get(CATEGORY_COGWORK, "Cogwork Jump", true,
+				"Should cogwork armour be able to jump").getString());
 		cogworkFuelUnits = Float.parseFloat(
 				config.get(CATEGORY_COGWORK, "Cogwork Fuel Modifier", 1F, "Modify the amount of fuel added to cogworks")
 						.getString());

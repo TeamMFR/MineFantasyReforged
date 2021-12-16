@@ -252,7 +252,7 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public String getAmmoType(ItemStack arrow) {
+	public String getAmmoType(ItemStack ammo) {
 		return "mine";
 	}
 }

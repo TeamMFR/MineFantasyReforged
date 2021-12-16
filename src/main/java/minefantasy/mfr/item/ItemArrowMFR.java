@@ -137,7 +137,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 	}
 
 	@Override
-	public String getAmmoType(ItemStack arrow) {
+	public String getAmmoType(ItemStack ammo) {
 		return ammoType;
 	}
 

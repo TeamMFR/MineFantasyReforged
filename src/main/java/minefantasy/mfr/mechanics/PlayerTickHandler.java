@@ -4,6 +4,7 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
@@ -36,6 +37,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Mod.EventBusSubscriber
@@ -304,7 +306,7 @@ public class PlayerTickHandler {
 	}
 
 	private void tickDragonSpawner(EntityPlayer player) {
-		if (player.world.getDifficulty() != EnumDifficulty.PEACEFUL && player.dimension == 0) {
+		if (player.world.getDifficulty() != EnumDifficulty.PEACEFUL && Arrays.stream(ConfigMobs.dragonDimensionID).anyMatch(dim -> dim == player.dimension)) {
 			int i = ConfigMobs.dragonInterval;
 			float chance = ConfigMobs.dragonChance;
 
@@ -386,7 +388,7 @@ public class PlayerTickHandler {
 			}
 			if (!data.getVariable(HAS_BOOK_KEY)) {
 				data.setVariable(HAS_BOOK_KEY, true);
-				if (player.capabilities.isCreativeMode)
+				if (player.capabilities.isCreativeMode || !ConfigSpecials.shouldResearchBookSpawn)
 					return;
 				player.inventory.addItemStackToInventory(new ItemStack(MineFantasyItems.RESEARCH_BOOK));
 			}

@@ -6,7 +6,7 @@ public interface IFirearm {
 	/**
 	 * Determines the type of firing mechanism used (such as arrow, bolt, bullet,
 	 * etc)
-	 *
+	 * Should be used in conjunction with {@link IAmmo#getAmmoType(ItemStack)}
 	 * @param weapon the item that is being accessed
 	 * @param ammo   the ammo type that weapon is being loaded with
 	 */

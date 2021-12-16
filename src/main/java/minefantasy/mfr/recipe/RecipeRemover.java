@@ -31,11 +31,19 @@ public class RecipeRemover {
 		@SubscribeEvent(priority = EventPriority.LOWEST)
 		public static void removeRecipes(final RegistryEvent.Register<IRecipe> event) {
 			removeRecipes(Items.STICK);
-			if (ConfigHardcore.HCCRemoveCraft) {
+			if (ConfigHardcore.HCCRemoveCraftBread) {
 				removeRecipes(Items.BREAD);
+			}
+			if (ConfigHardcore.HCCRemoveCraftPumpkinPie) {
 				removeRecipes(Items.PUMPKIN_PIE);
+			}
+			if (ConfigHardcore.HCCRemoveCraftCake) {
 				removeRecipes(Items.CAKE);
+			}
+			if (ConfigHardcore.HCCRemoveCraftFlintAndSteel) {
 				removeRecipes(Items.FLINT_AND_STEEL);
+			}
+			if (ConfigHardcore.HCCRemoveCraftBucket) {
 				removeRecipes(Items.BUCKET);
 			}
 			MineFantasyReforged.LOG.warn("Overriding recipes with dummy recipes, please ignore the above \"Dangerous alternative prefix\" warnings.");

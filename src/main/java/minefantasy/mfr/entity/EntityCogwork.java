@@ -210,21 +210,20 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 			}
 
 			// DAMAGE
+			int i = MathHelper.floor(this.posX);
+			int j = MathHelper.floor(this.posY - 1);
+			int k = MathHelper.floor(this.posZ);
+			BlockPos pos = new BlockPos(i, j, k);
+			IBlockState state = this.world.getBlockState(pos);
 			if (this.motionX * this.motionX + this.motionZ * this.motionZ > 2.500000277905201E-7D && this.rand.nextInt(5) == 0) {
-				int i = MathHelper.floor(this.posX);
-				int j = MathHelper.floor(this.posY - 1);
-				int k = MathHelper.floor(this.posZ);
-				BlockPos pos = new BlockPos(i, j, k);
-				IBlockState state = this.world.getBlockState(pos);
-
 				if (state.getMaterial() != Material.AIR) {
 					this.world.spawnParticle(EnumParticleTypes.BLOCK_CRACK, this.posX + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, this.getEntityBoundingBox().minY + 0.1D, this.posZ + ((double) this.rand.nextFloat() - 0.5D) * (double) this.width, 4.0D * ((double) this.rand.nextFloat() - 0.5D), 0.5D, ((double) this.rand.nextFloat() - 0.5D) * 4.0D, Block.getStateId(state));
 				}
-				if (ConfigArmour.cogworkGrief) {
-					damageBlock(state.getBlock(), pos, world.getBlockState(pos));
-					state = this.world.getBlockState(pos.add(0, 1, 0));
-					damageSurface(state.getBlock(), pos.add(0, 1, 0), state);
-				}
+			}
+			if (!world.isRemote && ConfigArmour.cogworkGrief && this.rand.nextInt(5) == 0) {
+				damageBlock(state.getBlock(), pos, world.getBlockState(pos));
+				state = this.world.getBlockState(pos.add(0, 1, 0));
+				damageSurface(state.getBlock(), pos.add(0, 1, 0), state);
 			}
 		} else {
 			motionX = motionZ = 0;
@@ -331,16 +330,18 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	}
 
 	protected void jump() {
-		spendFuel(5F);
-		world.playSound(posX, posY, posZ, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.AMBIENT, 2.0F, 1.0F, true);
-		this.motionY = 0.41999998688697815D;
-		if (world.isRemote && this.isSprinting()) {
-			float f = this.rotationYaw * 0.017453292F;
-			this.motionX -= MathHelper.sin(f) * 0.2F;
-			this.motionZ += MathHelper.cos(f) * 0.2F;
+		if (ConfigArmour.cogworkJump) {
+			spendFuel(5F);
+			world.playSound(posX, posY, posZ, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.AMBIENT, 2.0F, 1.0F, true);
+			this.motionY = 0.41999998688697815D;
+			if (world.isRemote && this.isSprinting()) {
+				float f = this.rotationYaw * 0.017453292F;
+				this.motionX -= MathHelper.sin(f) * 0.2F;
+				this.motionZ += MathHelper.cos(f) * 0.2F;
+			}
+			this.isAirBorne = true;
+			ForgeHooks.onLivingJump(this);
 		}
-		this.isAirBorne = true;
-		ForgeHooks.onLivingJump(this);
 	}
 
 	private void spendFuel(float cost) {
