@@ -75,9 +75,9 @@ minecraft {
     clientRunArgs += "--mixin ${resolved_core_config}"
     serverRunArgs += "--mixin ${resolved_core_config}"
     replaceIn "MineFantasyReforged.java"
-    replace "@VERSION@", "${project.minecraft.version}-${project.major}.${project.minor}.${project.patch}." + getBuildNumber() + getStable()
+Fixe    replace "@VERSION@", "${project.minecraft.version}-${project.major}.${project.minor}." + getPatchNumber() + getStable()
 }
-version = minecraft.version + "-" + project.major +"."+ project.minor +"."+ project.patch +"."+ getBuildNumber() + getStable()
+version = minecraft.version + "-" + project.major +"." project.minor + "." + getPatchNumber() + getStable()
 group = "minefantasy.mfr.MineFantasyReforged" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "minefantasyreforged"
 
@@ -152,23 +152,22 @@ mixin {
     add sourceSets.main, mod_mixin_refmap.replace('${mod_id}', mod_id)
 }
 
-
-def getBuildNumber() {
+def getPatchNumber() {
     if (System.getenv("BUILD_NUMBER") != null) {
         return System.getenv("BUILD_NUMBER").toString()
     }
-    return ""
+    return project.minor
 }
 
 def getStable() {
     if (isUnstable()) {
-        return "unstable"
+        return "BETA"
     }
     return ""
 }
 
 def isUnstable() {
-    return (System.getenv("GITHUB_REF") == null || System.getenv("GITHUB_REF").endsWith("-dev"));
+    return (project.major < 1 || System.getenv("GITHUB_REF") == null || System.getenv("GITHUB_REF").endsWith("-dev"));
 }
 
 publishing {
