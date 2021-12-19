@@ -77,7 +77,7 @@ minecraft {
     replaceIn "MineFantasyReforged.java"
     replace "@VERSION@", "${project.minecraft.version}-${project.major}.${project.minor}." + getPatchNumber() + getStable()
 }
-version = minecraft.version + "-" + project.major +"." project.minor + "." + getPatchNumber() + getStable()
+version = minecraft.version + "-" + project.major + "." + project.minor + "." + getPatchNumber() + getStable()
 group = "minefantasy.mfr.MineFantasyReforged" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "minefantasyreforged"
 
