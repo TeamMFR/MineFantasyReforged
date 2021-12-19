@@ -64,7 +64,14 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 
 	@Override
 	protected ItemStackHandler createInventory() {
-		return new ItemStackHandler(8);
+		return new ItemStackHandler(8) {
+			@Override
+			protected void onContentsChanged(int slot) {
+				if (slot == 0) {
+					world.updateComparatorOutputLevel(pos, blockType);
+				}
+			}
+		};
 	}
 
 	@Override
@@ -115,10 +122,12 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		if (isBurning() != wasBurning || ticksExisted == 20) {
 			world.notifyLightSet(pos);
 		}
-		//        if (!world.isRemote) {
-		//            sendPacketToClients();
-		//        }
 		wasBurning = isBurning();
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
 	}
 
 	public float getDoorAngle() {
@@ -364,10 +373,11 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 			if (!getInventory().getStackInSlot(0).isEmpty() && isItemFuel(getInventory().getStackInSlot(0))) {
 				fuel = maxFuel = getItemBurnTime(getInventory().getStackInSlot(0));
 				maxHeat = getItemHeat(getInventory().getStackInSlot(0));
-				ItemStack cont = getInventory().getStackInSlot(0).getItem().getContainerItem(getInventory().getStackInSlot(0));
+				ItemStack container = getInventory().getStackInSlot(0).getItem().getContainerItem(getInventory().getStackInSlot(0));
 
-				if (!cont.isEmpty()) {
-					getInventory().setStackInSlot(0, cont);
+				if (!container.isEmpty()) {
+					getInventory().setStackInSlot(0, container);
+
 				} else {
 					getInventory().extractItem(0, 1, false);
 				}
@@ -378,7 +388,6 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 				maxHeat = 0;
 			}
 		}
-
 	}
 
 	private float getItemHeat(ItemStack itemStack) {
@@ -398,7 +407,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(item);// If no special: try vanilla
 		if (!res.isEmpty()) {
 			if (res.getItem() instanceof ItemFood || item.getItem() instanceof ItemFood) {
-				return new ItemStack(MineFantasyItems.BURNT_FOOD, 1, 1);
+				return new ItemStack(MineFantasyItems.BURNT_FOOD, 1);
 			}
 			return res;
 		}

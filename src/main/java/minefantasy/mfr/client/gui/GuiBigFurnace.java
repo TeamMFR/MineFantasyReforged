@@ -51,11 +51,11 @@ public class GuiBigFurnace extends GuiContainer {
 
 				// HEATMAX
 				int heatScM = this.smelter.getItemHeatScaled(68);
-				this.drawTexturedModalRect(posX + 104, posY + 76 - heatScM, 176, 14, 16, 3);
+				this.drawTexturedModalRect(posX + 104, posY + 69 - heatScM, 176, 14, 16, 3);
 
 				// HEAT
 				int heatSc = this.smelter.getHeatScaled(68);
-				this.drawTexturedModalRect(posX + 107, posY + 76 - heatSc, 176, 17, 10, 5);
+				this.drawTexturedModalRect(posX + 107, posY + 69 - heatSc, 176, 17, 10, 5);
 			} else {
 				if (smelter.progress > 0) {
 					int prog = smelter.getCookProgressScaled(24);

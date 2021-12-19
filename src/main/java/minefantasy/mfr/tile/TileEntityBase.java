@@ -6,11 +6,13 @@ import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -110,4 +112,31 @@ public abstract class TileEntityBase extends TileEntity {
 	}
 
 	public abstract boolean isItemValidForSlot(int slot, ItemStack item);
+
+	public static int calculateRedstoneFromInventory(ItemStackHandler inv)
+	{
+		if (inv == null)
+		{
+			return 0;
+		}
+		else
+		{
+			int i = 0;
+			float f = 0.0F;
+
+			for (int j = 0; j < inv.getSlots(); ++j)
+			{
+				ItemStack itemstack = inv.getStackInSlot(j);
+
+				if (!itemstack.isEmpty())
+				{
+					f += (float)itemstack.getCount() / (float)Math.min(inv.getSlots(), itemstack.getMaxStackSize());
+					++i;
+				}
+			}
+
+			f = f / (float)inv.getSlots();
+			return MathHelper.floor(f * 14.0F) + (i > 0 ? 1 : 0);
+		}
+	}
 }

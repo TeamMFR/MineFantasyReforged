@@ -6,6 +6,7 @@ import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
@@ -17,6 +18,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
@@ -101,6 +103,14 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 
 		}
 		return true;
+	}
+
+	public boolean hasComparatorInputOverride(IBlockState state) {
+		return true;
+	}
+
+	public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
+		return TileEntityBase.calculateRedstoneFromInventory(getTile(worldIn, pos).getInventory());
 	}
 
 	@Override
