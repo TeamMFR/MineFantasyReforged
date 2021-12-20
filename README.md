@@ -1,4 +1,4 @@
-# MineFantasy Reforged &nbsp; ![Mod Build](https://github.com/TeamMFR/MineFantasyReforged/workflows/Mod%20Build/badge.svg)
+# MineFantasy Reforged &nbsp; [![Mod Build](https://github.com/TeamMFR/MineFantasyReforged/actions/workflows/gradle.yml/badge.svg)](https://github.com/TeamMFR/MineFantasyReforged/actions/workflows/gradle.yml)
 
 Dev Build: [Link](https://github.com/TeamMFR/MineFantasyReforged/packages)
 
