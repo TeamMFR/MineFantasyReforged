@@ -1,0 +1,117 @@
+{
+    "mod": "abyssalcraft",
+    "metals": [
+        {
+            "name": "abyssalnite",
+            "oreDictList": "ingotAbyssalnite",
+            "properties": {
+                "tier": 4,
+                "durability": 7.0,
+                "flexibility": 1.0,
+                "sharpness": 3.5,
+                "hardness": 3.5,
+                "resistance": 50,
+                "density": 2.5,
+                "melting_point": 1600,
+                "rarity": 1,
+                "craft_tier": 4,
+                "craft_time_modifier": 10.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.2,
+                "blunt": 1.0,
+                "piercing": 1.0
+            },
+            "color": {
+                "red": 92,
+                "green": 5,
+                "blue": 192
+            }
+        },
+        {
+            "name": "refined_coralium",
+            "oreDictList": "ingotLiquifiedCoralium",
+            "properties": {
+                "tier": 5,
+                "durability": 8.0,
+                "flexibility": 1.3,
+                "sharpness": 3.5,
+                "hardness": 5.25,
+                "resistance": 65,
+                "density": 2.5,
+                "melting_point": 1700,
+                "rarity": 2,
+                "craft_tier": 5,
+                "craft_time_modifier": 2.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.0,
+                "piercing": 1.0
+            },
+            "color": {
+                "red": 52,
+                "green": 154,
+                "blue": 102
+            }
+        },
+        {
+            "name": "dreadium",
+            "oreDictList": "ingotDreadium",
+            "properties": {
+                "tier": 6,
+                "durability": 9.5,
+                "flexibility": 1.3,
+                "sharpness": 4.5,
+                "hardness": 6.5,
+                "resistance": 80,
+                "density": 3.0,
+                "melting_point": 1600,
+                "rarity": 5,
+                "craft_tier": 6,
+                "craft_time_modifier": 15.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.0,
+                "piercing": 1.0
+            },
+            "color": {
+                "red": 144,
+                "green": 20,
+                "blue": 20
+            }
+        },
+        {
+            "name": "ethaxium",
+            "oreDictList": "ingotEthaxium",
+            "properties": {
+                "tier": 8,
+                "durability": 14.0,
+                "flexibility": 1.4,
+                "sharpness": 6.5,
+                "hardness": 9.5,
+                "resistance": 90,
+                "density": 2.5,
+                "melting_point": 3200,
+                "rarity": 2,
+                "craft_tier": 8,
+                "craft_time_modifier": 6.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.0,
+                "piercing": 1.4
+            },
+            "color": {
+                "red": 191,
+                "green": 171,
+                "blue": 171
+            }
+        }
+    ]
+}

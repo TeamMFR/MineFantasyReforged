@@ -1,0 +1,61 @@
+{
+    "mod": "galacticraftplanets",
+    "metals": [
+        {
+            "name": "Desh",
+            "oreDictList": "ingotDesh",
+            "properties": {
+                "tier": 4,
+                "durability": 8.0,
+                "flexibility": 0.4,
+                "sharpness": 3.5,
+                "hardness": 3.5,
+                "resistance": 60,
+                "density": 2.5,
+                "melting_point": 1700,
+                "rarity": 1,
+                "craft_tier": 4,
+                "craft_time_modifier": 13.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.0,
+                "piercing": 1.2
+            },
+            "color": {
+                "red": 44,
+                "green": 46,
+                "blue": 52
+            }
+        },
+        {
+            "name": "titanium",
+            "oreDictList": "ingotTitanium",
+            "properties": {
+                "tier": 5,
+                "durability": 9.5,
+                "flexibility": 1.0,
+                "sharpness": 5.5,
+                "hardness": 4.5,
+                "resistance": 70,
+                "density": 3.0,
+                "melting_point": 2000,
+                "rarity": 1,
+                "craft_tier": 5,
+                "craft_time_modifier": 15.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.3,
+                "blunt": 1.0,
+                "piercing": 1.1
+            },
+            "color": {
+                "red": 38,
+                "green": 44,
+                "blue": 73
+            }
+        }
+    ]
+}
