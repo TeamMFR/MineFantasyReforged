@@ -167,7 +167,7 @@ def getStable() {
 }
 
 def isUnstable() {
-    return $(${project.major} != 1);
+    return true;
 }
 
 publishing {
