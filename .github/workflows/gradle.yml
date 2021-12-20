@@ -35,6 +35,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     needs: build
+    steps:
       - name: Publish to Github Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
