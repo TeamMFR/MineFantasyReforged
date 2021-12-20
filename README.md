@@ -1,4 +1,4 @@
-# MineFantasy Reforged &nbsp; [![Mod Build](https://github.com/TeamMFR/MineFantasyReforged/actions/workflows/gradle.yml/badge.svg)](https://github.com/TeamMFR/MineFantasyReforged/actions/workflows/gradle.yml)
+# MineFantasy Reforged &nbsp; [![Mod Build](https://github.com/TeamMFR/MineFantasyReforged/actions/workflows/gradle.yml/badge.svg)](https://github.com/TeamMFR/MineFantasyReforged/actions/workflows/gradle.yml) [![Curseforge](http://cf.way2muchnoise.eu/full_minefantasy-reforged_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/minefantasy-reforged) [![Curseforge](http://cf.way2muchnoise.eu/versions/For%20MC_minefantasy-reforged_all.svg)](http://www.curseforge.com/minecraft/mc-mods/minefantasy-reforged/files)
 
 Dev Build: [Link](https://github.com/TeamMFR/MineFantasyReforged/packages)
 
