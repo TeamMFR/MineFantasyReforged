@@ -161,7 +161,7 @@ def getPatchNumber() {
 
 def getStable() {
     if (isUnstable()) {
-        return "BETA"
+        return "-BETA"
     }
     return ""
 }
