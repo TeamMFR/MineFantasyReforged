@@ -161,13 +161,13 @@ def getPatchNumber() {
 
 def getStable() {
     if (isUnstable()) {
-        return "BETA"
+        return "-BETA"
     }
     return ""
 }
 
 def isUnstable() {
-    return (project.major < 1);
+    return true;
 }
 
 publishing {
