@@ -42,3 +42,8 @@ jobs:
           ./gradlew clean
           ./gradlew setupCIWorkspace
           ./gradlew build publish
+      - name: Delete oldest package
+        uses: actions/delete-package-versions@v2
+        with:
+          package-name: 'minefantasy.mfr.MineFantasyReforged.minefantasyreforged'
+          num-old-versions-to-delete: 1
