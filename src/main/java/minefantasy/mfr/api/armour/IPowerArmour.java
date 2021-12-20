@@ -1,6 +1,5 @@
 package minefantasy.mfr.api.armour;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 

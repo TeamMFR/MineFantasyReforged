@@ -2,13 +2,13 @@
 {
   "modid": "minefantasyreforged",
   "name": "Minefantasy Reforged",
-  "description": "TODO",
+  "description": "A medieval-fantasy themed soft total conversion, focused around the themes of Blacksmithing and Medieval Combat",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["TODO", "TODO"],
-  "credits": "",
+  "authorList": ["ThatPolishKid99", "WinDanesz"],
+  "credits": "AnonymousProductions, Sirse, P3pp3rF1y, Electroblob, Fuzss",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

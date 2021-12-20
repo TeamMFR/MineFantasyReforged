@@ -24,7 +24,6 @@ import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.MathHelper;
-import net.minecraftforge.common.util.EnumHelper;
 
 import java.util.Random;
 

@@ -2,13 +2,10 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.block.BlockComponent;
-import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.tile.TileEntityComponent;
-import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,6 +1,5 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;

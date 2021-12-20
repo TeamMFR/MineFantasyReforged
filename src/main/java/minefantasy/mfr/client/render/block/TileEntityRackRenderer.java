@@ -2,7 +2,6 @@ package minefantasy.mfr.client.render.block;
 
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.BlockRack;
-import minefantasy.mfr.item.ItemHalbeard;
 import minefantasy.mfr.tile.TileEntityRack;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

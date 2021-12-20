@@ -9,14 +9,12 @@ import minefantasy.mfr.item.ArrowFireFlint;
 import minefantasy.mfr.item.ArrowFirerMF;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.ArrowHandler;
-import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.MonsterUpgrader;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 

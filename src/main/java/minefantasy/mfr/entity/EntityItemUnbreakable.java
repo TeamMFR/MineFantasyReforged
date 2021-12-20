@@ -11,7 +11,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class EntityItemUnbreakable extends EntityItem {
 

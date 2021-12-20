@@ -1,6 +1,5 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.item.AdvancedFuelHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
