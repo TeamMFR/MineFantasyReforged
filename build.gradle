@@ -167,7 +167,7 @@ def getStable() {
 }
 
 def isUnstable() {
-    return (project.major < 1 || System.getenv("GITHUB_REF") == null || System.getenv("GITHUB_REF").endsWith("-dev"));
+    return (project.major < 1);
 }
 
 publishing {
