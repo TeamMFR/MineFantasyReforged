@@ -5,6 +5,8 @@ name: Mod Build
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**/README.md'
 
 jobs:
   build:
