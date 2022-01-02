@@ -5,6 +5,8 @@ name: Mod Build
 on:
   push:
     branches: [ master ]
+    paths-ignore:
+      - '**/README.md'
 
 jobs:
   build:
@@ -16,12 +18,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Generate build number
-        uses: einaregilsson/build-number@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       - name: Build with Gradle
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,6 +38,12 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: Generate build number
+        uses: einaregilsson/build-number@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       - name: Publish to Github Packages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
