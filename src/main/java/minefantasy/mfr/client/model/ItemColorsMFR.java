@@ -35,6 +35,19 @@ public class ItemColorsMFR {
 			}
 			return 0xFFFFFF;
 		};
+		IItemColor itemColorForArmor = (stack, tintIndex) -> {
+			if (tintIndex == 0) {
+				if (stack.getItem() instanceof ItemArmourMFR) {
+					ItemArmourMFR itemArmourMFR = (ItemArmourMFR) stack.getItem();
+					if (itemArmourMFR.hasColor(stack)) {
+						return itemArmourMFR.getColor(stack);
+					} else {
+						return CustomToolHelper.getColourFromItemStack(stack, tintIndex);
+					}
+				}
+			}
+			return 0xFFFFFF;
+		};
 
 		/// TOOL ITEMS
 
@@ -157,67 +170,67 @@ public class ItemColorsMFR {
 		/// ARMOUR ITEMS
 
 		// Standard armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SCALE_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SCALE_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_CHAIN_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_CHAIN_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SPLINT_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SPLINT_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.STANDARD_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_PLATE_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_PLATE_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.STANDARD_PLATE_BOOTS);
 
 		// Ornate armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SCALE_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SCALE_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_CHAIN_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_CHAIN_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SPLINT_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SPLINT_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.ORNATE_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_PLATE_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_PLATE_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.ORNATE_PLATE_BOOTS);
 
 		// Dragonforge armour
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SCALE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SCALE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SCALE_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SCALE_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SCALE_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_CHAIN_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_CHAIN_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_CHAIN_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SPLINT_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SPLINT_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SPLINT_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS);
 
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_HELMET);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_CHESTPLATE);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_LEGGINGS);
-		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.DRAGONFORGED_PLATE_BOOTS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_PLATE_HELMET);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_PLATE_CHESTPLATE);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_PLATE_LEGGINGS);
+		itemColors.registerItemColorHandler(itemColorForArmor, MineFantasyItems.DRAGONFORGED_PLATE_BOOTS);
 
 		//Leather Armours
 		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemArmourMFR) stack.getItem()).getColor(stack) : 0xFFFFFF), LeatherArmourListMFR.LEATHER);

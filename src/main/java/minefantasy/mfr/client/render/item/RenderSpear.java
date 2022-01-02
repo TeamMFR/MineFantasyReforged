@@ -31,7 +31,7 @@ public class RenderSpear extends WrappedItemModel implements IItemRenderer {
 			if (entity != null) {
 				if (entity instanceof EntityPlayer && entity.isSwingInProgress && !(stack.getItem() instanceof ItemHalbeard)) {
 					GlStateManager.rotate(90, 0, 0, 1);
-					GlStateManager.translate(0.5F, -0.5F, 0);
+					GlStateManager.translate(0F, -0.5F, 0F);
 				} else {
 					GlStateManager.translate(-0.8F, -0.8F, 0);
 				}

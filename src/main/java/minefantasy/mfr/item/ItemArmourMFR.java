@@ -186,8 +186,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 				return metal;
 			} else {
 				NBTTagCompound nbttagcompound1 = nbttagcompound.getCompoundTag("display");
-				return nbttagcompound1 == null ? metal
-						: (nbttagcompound1.hasKey("color", 3) ? nbttagcompound1.getInteger("color") : metal);
+				return nbttagcompound1 == null ? metal : (nbttagcompound1.hasKey("color", 3) ? nbttagcompound1.getInteger("color") : metal);
 			}
 		}
 	}

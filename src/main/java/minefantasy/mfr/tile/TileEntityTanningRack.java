@@ -10,6 +10,7 @@ import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.recipe.TanningRecipe;
+import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -183,7 +184,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			getInventory().setStackInSlot(1, ItemStack.EMPTY);
 			progress = maxProgress = tier = 0;
 		} else {
-			getInventory().setStackInSlot(1, recipe.output);
+			getInventory().setStackInSlot(1, recipe.output.copy());
 			tier = recipe.tier;
 			maxProgress = recipe.time;
 			requiredToolType = recipe.toolType;
@@ -216,6 +217,14 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 
 	private boolean isShabbyRack() {
 		return world.getBlockState(pos).getBlock() == MineFantasyBlocks.TANNER;
+	}
+
+	@Override
+	public void onBlockBreak() {
+		if (!inventory.getStackInSlot(1).isEmpty() && !(inventory.getStackInSlot(1).getItem() instanceof ItemBlock)) {
+			inventory.setStackInSlot(1, ItemStack.EMPTY);
+		}
+		InventoryUtils.dropItemsInWorld(world, inventory, pos);
 	}
 
 	@Override

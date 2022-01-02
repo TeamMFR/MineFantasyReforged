@@ -51,19 +51,19 @@ public class MinotaurBreed {
 		//Normal
 		NORMAL_BREEDS.add(BROWN);
 		NORMAL_BREEDS.add(BROWN_GUARD);
-		NORMAL_BREEDS.add(BROWN_BOSS);
 		NORMAL_BREEDS.add(BROWN_ELITE);
+		NORMAL_BREEDS.add(BROWN_BOSS);
 
 		//Frost
 		FROST_BREEDS.add(FROST);
 		FROST_BREEDS.add(FROST_GUARD);
-		FROST_BREEDS.add(FROST_BOSS);
 		FROST_BREEDS.add(FROST_ELITE);
+		FROST_BREEDS.add(FROST_BOSS);
 
 		NETHER_BREEDS.add(NETHER);
 		NETHER_BREEDS.add(NETHER_GUARD);
-		NETHER_BREEDS.add(NETHER_BOSS);
 		NETHER_BREEDS.add(NETHER_ELITE);
+		NETHER_BREEDS.add(NETHER_BOSS);
 	}
 
 	public MinotaurBreed(String name, String tex, String weapons, int xp, float health, float poundDamage, float goreDamage, int AR) {

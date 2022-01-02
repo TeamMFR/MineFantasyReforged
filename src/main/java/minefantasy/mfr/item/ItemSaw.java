@@ -41,10 +41,10 @@ import java.util.List;
  */
 public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem, IClientRegister {
 	protected int itemRarity;
-	private float hitDamage;
+	private final float hitDamage;
 	private float baseDamage;
-	private String name;
-	private int tier;
+	private final String name;
+	private final int tier;
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
@@ -81,7 +81,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 
 		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
 		multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", getMeleeDamage(stack), 0));
-		multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -1F, 0));
+		multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -3F, 0));
 		return multimap;
 	}
 

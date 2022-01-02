@@ -267,8 +267,8 @@ public class PlayerTickHandler {
 			if (action == EnumAction.NONE || action == EnumAction.EAT && !player.canEat(false)) {
 
 				player.setActiveHand(evt.getHand());
-				// cause reequip animation, but don't swing hand
-				evt.setCancellationResult(EnumActionResult.SUCCESS);
+				// Don't cause reequip animation, AND don't swing hand
+				evt.setCancellationResult(EnumActionResult.FAIL);
 				evt.setCanceled(true);
 			}
 		}

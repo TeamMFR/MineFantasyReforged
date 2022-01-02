@@ -176,6 +176,9 @@ material.hardleather.name=Hardened Leather
 material.minotaurskin.name=Minotaur Leather
 material.dragonskin.name=Dragon Skin
 
+#MATERIAL LOCALIZATION OVERRIDES
+material.material_name.name=Localized Name
+
 # ITEM STATS
 
 prefix.hotitem.name=Hot %1$s
@@ -1577,7 +1580,7 @@ knowledge.forge.3=your items.^NOTE: if a crucible(or similar) is above the forge
 knowledge.bellows=Bellows
 knowledge.bellows.desc=Heat Injection
 
-knowledge.bellows.1=Sometimes the fire just isn't hot enough, or it may be taking to long to warm up. Using hotter fuels only takes you so far and can be wasteful when not needed.^Bellows can temporarily boost the temperature of forges by up to 50%. To use: Place them pointing at the desired block and right-click them constantly. They can also work through solid walls.
+knowledge.bellows.1=Sometimes the fire just isn't hot enough, or it may be taking to long to warm up. Using hotter fuels only takes you so far and can be wasteful when not needed.^Bellows can temporarily boost the temperature of forges by up to 50%%. To use: Place them pointing at the desired block and right-click them constantly. They can also work through solid walls.
 
 knowledge.trough=Trough
 knowledge.trough.desc=Ready to Quench
@@ -2128,11 +2131,11 @@ knowledge.title.1=
 
 knowledge.fitness=Fitness
 knowledge.fitness.desc=Kept in shape
-knowledge.fitness.1=Your biggest foe in battle is your energy (well apart from the actual enemy).^Stamina decays 25% Slower.
+knowledge.fitness.1=Your biggest foe in battle is your energy (well apart from the actual enemy).^Stamina decays 25%% Slower.
 
 knowledge.toughness=Toughness
 knowledge.toughness.desc=Take it!
-knowledge.toughness.1=Your constant exposure to battle has granted you a higher resistance to the elements.^Damage from all sources is reduced by 10%.
+knowledge.toughness.1=Your constant exposure to battle has granted you a higher resistance to the elements.^Damage from all sources is reduced by 10%%.
 
 knowledge.armourpro=Armor Proficiency
 knowledge.armourpro.desc=Feel the weight
@@ -2149,7 +2152,7 @@ knowledge.counteratt.2=Swords, Daggers and Katanas do a piercing stab.^Waraxes u
 
 knowledge.autoparry=Reflex Parry
 knowledge.autoparry.desc=Ready for the hit
-knowledge.autoparry.1=Your constant use of finesse has granted you some automatic reflexts.^You can parry attacks without blocking (with a reduced arc).
+knowledge.autoparry.1=Your constant use of finesse has granted you some automatic reflexes.^You can parry attacks without blocking (with a reduced arc).
 
 knowledge.scrapper=Scavenger
 knowledge.scrapper.desc=Take it all
@@ -2161,5 +2164,5 @@ knowledge.firstaid.1=You need to be fast when tending to some injuries and need 
 
 knowledge.doctor=Doctor
 knowledge.doctor.desc=Duty to benefit
-knowledge.doctor.1=Your constant use of aiding your fellow humans has yielded you experience in medicine.^Bandages heal 50% more damage.
+knowledge.doctor.1=Your constant use of aiding your fellow humans has yielded you experience in medicine.^Bandages heal 50%% more damage.
 

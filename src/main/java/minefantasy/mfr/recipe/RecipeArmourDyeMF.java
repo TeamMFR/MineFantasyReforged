@@ -1,127 +1,144 @@
 package minefantasy.mfr.recipe;
 
+import com.google.common.collect.Lists;
+import com.google.gson.JsonObject;
 import minefantasy.mfr.item.ItemArmourMFR;
-import net.minecraft.entity.passive.EntitySheep;
-import net.minecraft.init.Items;
+import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.JsonUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.IRecipeFactory;
+import net.minecraftforge.common.crafting.JsonContext;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
+import java.util.List;
 
-public class RecipeArmourDyeMF implements IRecipe {
+@SuppressWarnings("unused")
+public class RecipeArmourDyeMF extends ShapedOreRecipe {
+
+	public RecipeArmourDyeMF(@Nullable final ResourceLocation group, final ItemStack result, final CraftingHelper.ShapedPrimer primer) {
+		super(group, result, primer);
+	}
+
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
-	@Override
-	public boolean matches(InventoryCrafting matrix, World world) {
-		ItemStack itemstack = null;
-		ArrayList arraylist = new ArrayList();
+	public boolean matches(InventoryCrafting inv, World worldIn) {
+		ItemStack itemstack = ItemStack.EMPTY;
+		List<ItemStack> list = Lists.newArrayList();
 
-		for (int i = 0; i < matrix.getSizeInventory(); ++i) {
-			ItemStack itemstack1 = matrix.getStackInSlot(i);
+		for (int i = 0; i < inv.getSizeInventory(); ++i) {
+			ItemStack stackInSlot = inv.getStackInSlot(i);
 
-			if (itemstack1 != null) {
-				if (itemstack1.getItem() instanceof ItemArmourMFR) {
-					ItemArmourMFR itemarmor = (ItemArmourMFR) itemstack1.getItem();
+			if (!stackInSlot.isEmpty()) {
+				if (stackInSlot.getItem() instanceof ItemArmourMFR) {
+					ItemArmourMFR itemArmourMFR = (ItemArmourMFR) stackInSlot.getItem();
 
-					if (!itemarmor.canColour() || itemstack != null) {
+					if (!itemArmourMFR.canColour() || !itemstack.isEmpty()) {
 						return false;
 					}
 
-					itemstack = itemstack1;
+					itemstack = stackInSlot;
 				} else {
-					if (itemstack1.getItem() != Items.DYE) {
+					if (!net.minecraftforge.oredict.DyeUtils.isDye(stackInSlot)) {
 						return false;
 					}
 
-					arraylist.add(itemstack1);
+					list.add(stackInSlot);
 				}
 			}
 		}
 
-		return itemstack != null && !arraylist.isEmpty();
+		return !itemstack.isEmpty() && !list.isEmpty();
 	}
 
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
-	@Override
 	public ItemStack getCraftingResult(InventoryCrafting matrix) {
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 		int[] aint = new int[3];
 		int i = 0;
 		int j = 0;
 		ItemArmourMFR itemarmor = null;
-		int k;
-		int l;
-		float f;
-		float f1;
-		int l1;
 
-		for (k = 0; k < matrix.getSizeInventory(); ++k) {
-			ItemStack itemstack1 = matrix.getStackInSlot(k);
+		for (int k = 0; k < matrix.getSizeInventory(); ++k) {
+			ItemStack stackInSlot = matrix.getStackInSlot(k);
 
-			if (itemstack1 != null) {
-				if (itemstack1.getItem() instanceof ItemArmourMFR) {
-					itemarmor = (ItemArmourMFR) itemstack1.getItem();
+			if (!stackInSlot.isEmpty()) {
+				if (stackInSlot.getItem() instanceof ItemArmor) {
+					itemarmor = (ItemArmourMFR) stackInSlot.getItem();
 
-					if (!itemarmor.canColour() || itemstack != null) {
-						return null;
+					if (!itemarmor.canColour() || !itemstack.isEmpty()) {
+						return ItemStack.EMPTY;
 					}
 
-					itemstack = itemstack1.copy();
+					itemstack = stackInSlot.copy();
 					itemstack.setCount(1);
 
-					if (itemarmor.hasColor(itemstack1)) {
-						l = itemarmor.getColor(itemstack);
-						f = (l >> 16 & 255) / 255.0F;
-						f1 = (l >> 8 & 255) / 255.0F;
-						float f2 = (l & 255) / 255.0F;
-						i = (int) (i + Math.max(f, Math.max(f1, f2)) * 255.0F);
-						aint[0] = (int) (aint[0] + f * 255.0F);
-						aint[1] = (int) (aint[1] + f1 * 255.0F);
-						aint[2] = (int) (aint[2] + f2 * 255.0F);
+					if (itemarmor.hasColor(stackInSlot)) {
+						int l = itemarmor.getColor(itemstack);
+						float f = (float) (l >> 16 & 255) / 255.0F;
+						float f1 = (float) (l >> 8 & 255) / 255.0F;
+						float f2 = (float) (l & 255) / 255.0F;
+						i = (int) ((float) i + Math.max(f, Math.max(f1, f2)) * 255.0F);
+						aint[0] = (int) ((float) aint[0] + f * 255.0F);
+						aint[1] = (int) ((float) aint[1] + f1 * 255.0F);
+						aint[2] = (int) ((float) aint[2] + f2 * 255.0F);
 						++j;
 					}
 				} else {
-					if (itemstack1.getItem() != Items.DYE) {
-						return null;
+					if (!net.minecraftforge.oredict.DyeUtils.isDye(stackInSlot)) {
+						return ItemStack.EMPTY;
 					}
 
-					float[] afloat = EntitySheep.getDyeRgb(EnumDyeColor.byMetadata(k));
-					int j1 = (int) (afloat[0] * 255.0F);
-					int k1 = (int) (afloat[1] * 255.0F);
-					l1 = (int) (afloat[2] * 255.0F);
-					i += Math.max(j1, Math.max(k1, l1));
-					aint[0] += j1;
-					aint[1] += k1;
-					aint[2] += l1;
+					float[] afloat = net.minecraftforge.oredict.DyeUtils.colorFromStack(stackInSlot).get().getColorComponentValues();
+					int l1 = (int) (afloat[0] * 255.0F);
+					int i2 = (int) (afloat[1] * 255.0F);
+					int j2 = (int) (afloat[2] * 255.0F);
+					i += Math.max(l1, Math.max(i2, j2));
+					aint[0] += l1;
+					aint[1] += i2;
+					aint[2] += j2;
 					++j;
 				}
 			}
 		}
 
 		if (itemarmor == null) {
-			return null;
+			return ItemStack.EMPTY;
 		} else {
-			k = aint[0] / j;
-			int i1 = aint[1] / j;
-			l = aint[2] / j;
-			f = (float) i / (float) j;
-			f1 = Math.max(k, Math.max(i1, l));
-			k = (int) (k * f / f1);
-			i1 = (int) (i1 * f / f1);
-			l = (int) (l * f / f1);
-			l1 = (k << 8) + i1;
-			l1 = (l1 << 8) + l;
-			itemarmor.setColor(itemstack, l1);
+			int i1 = aint[0] / j;
+			int j1 = aint[1] / j;
+			int k1 = aint[2] / j;
+			float f3 = (float) i / (float) j;
+			float f4 = (float) Math.max(i1, Math.max(j1, k1));
+			i1 = (int) ((float) i1 * f3 / f4);
+			j1 = (int) ((float) j1 * f3 / f4);
+			k1 = (int) ((float) k1 * f3 / f4);
+			int k2 = (i1 << 8) + j1;
+			k2 = (k2 << 8) + k1;
+			itemarmor.setColor(itemstack, k2);
 			return itemstack;
 		}
+	}
+
+	@Nonnull
+	@Override
+	public ItemStack getRecipeOutput() {
+		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public boolean isDynamic() {
+		return true;
 	}
 
 	@Override
@@ -129,24 +146,15 @@ public class RecipeArmourDyeMF implements IRecipe {
 		return width >= 5 && height >= 5;
 	}
 
-	@Override
-	public ItemStack getRecipeOutput() {
-		return null;
-	}
+	public static class Factory implements IRecipeFactory {
+		@Override
+		public IRecipe parse(JsonContext context, JsonObject json) {
 
-	@Override
-	public IRecipe setRegistryName(ResourceLocation name) {
-		return null;
-	}
+			final String group = JsonUtils.getString(json, "group", "");
+			final CraftingHelper.ShapedPrimer primer = RecipeHelper.parseShaped(context, json);
+			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-	@Nullable
-	@Override
-	public ResourceLocation getRegistryName() {
-		return null;
-	}
-
-	@Override
-	public Class<IRecipe> getRegistryType() {
-		return null;
+			return new RecipeArmourDyeMF(group.isEmpty() ? null : new ResourceLocation(group), result, primer);
+		}
 	}
 }

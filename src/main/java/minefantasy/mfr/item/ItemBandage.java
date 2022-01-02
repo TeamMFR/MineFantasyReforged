@@ -28,12 +28,13 @@ import java.util.List;
 public class ItemBandage extends ItemBaseMFR {
 	public static final IStoredVariable<Integer> BANDAGE_PROGRESS = IStoredVariable.StoredVariable.ofInt("bandage_progress", Persistence.DIMENSION_CHANGE);
 	private static final String healingID = "MF_Bandage_progress";
-	private final float healPower;
-	private final float secondsToUse = 5F;
 
 	static {
 		PlayerData.registerStoredVariables(BANDAGE_PROGRESS);
 	}
+
+	private final float healPower;
+	private final float secondsToUse = 5F;
 
 	public ItemBandage(String name, float healAmount) {
 		super(name);
@@ -178,7 +179,10 @@ public class ItemBandage extends ItemBaseMFR {
 	}
 
 	public int getUserHealTime(EntityLivingBase user) {
-		if (user instanceof EntityPlayer && PlayerData.get((EntityPlayer) user) != null){
+		if (user.world.isRemote) {
+			return 0;
+		}
+		if (user instanceof EntityPlayer && PlayerData.get((EntityPlayer) user) != null) {
 			return PlayerData.get((EntityPlayer) user).getVariable(BANDAGE_PROGRESS);
 		}
 		if (user.getEntityData() != null) {

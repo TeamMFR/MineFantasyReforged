@@ -69,8 +69,13 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack item = player.getHeldItemMainhand();
 
-		if (!world.isRemote)
+		if (!world.isRemote) {
 			return new ActionResult<>(EnumActionResult.FAIL, item);
+		}
+
+		if (!player.getHeldItemOffhand().isEmpty()) {
+			return new ActionResult<>(EnumActionResult.PASS, item);
+		}
 
 		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 

@@ -52,18 +52,18 @@ public class FireBreath extends DragonBreath {
 	public void hitBlock(World world, IBlockState state, EntityDragonBreath instance, BlockPos pos, boolean impact) {
 		Block hit = world.getBlockState(pos).getBlock();
 		if (!world.isRemote && (impact || instance.rand.nextInt(20) == 0)) {
-			if (!world.isRemote && world.isAirBlock(pos.add(0, 1, 0))) {
-				if (ConfigMobs.dragonGriefFire && hit.isSideSolid(state, world, pos, EnumFacing.UP)
+			if (world.isAirBlock(pos)) {
+				if (ConfigMobs.dragonGriefFire && state.isSideSolid(world, pos, EnumFacing.UP)
 						&& hit.isFlammable(world, pos.add(0, 1, 0), EnumFacing.UP)) {
-					world.setBlockState(pos.add(0, 1, 0), (IBlockState) Blocks.FIRE);
+					world.setBlockState(pos.add(0, 1, 0), Blocks.FIRE.getDefaultState());
 				}
 				if (!world.getGameRules().getBoolean("mobGriefing"))
 					return;
 
 				if (ConfigMobs.dragonGriefGeneral && hit == Blocks.ICE) {
-					world.setBlockState(pos, (IBlockState) Blocks.WATER);
+					world.setBlockState(pos, Blocks.WATER.getDefaultState());
 				}
-				if (ConfigMobs.dragonGriefGeneral && hit.getMaterial(state) == Material.GLASS) {
+				if (ConfigMobs.dragonGriefGeneral && state.getMaterial() == Material.GLASS) {
 					world.playSound(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_GLASS_HIT, SoundCategory.AMBIENT, 1.0F, 1.0F, true);
 					world.setBlockToAir(pos);
 				}

@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -30,8 +29,8 @@ import javax.annotation.Nonnull;
 public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-	private static AxisAlignedBB AABB_NORTH = new AxisAlignedBB(0, 0, 5.5f / 16f, 1f, 19 / 16f, 10.5 / 16f);
-	private static AxisAlignedBB AABB_WEST = new AxisAlignedBB(5.5f / 16f, 0, 0, 10.5 / 16f, 19 / 16f, 1f);
+	private static final AxisAlignedBB AABB_NORTH = new AxisAlignedBB(0, 0, 5.5f / 16f, 1f, 19 / 16f, 10.5 / 16f);
+	private static final AxisAlignedBB AABB_WEST = new AxisAlignedBB(5.5f / 16f, 0, 0, 10.5 / 16f, 19 / 16f, 1f);
 
 	public int tier;
 	public String tex;
@@ -61,11 +60,6 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> imp
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		return new TileEntityTanningRack();
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-		world.setBlockState(pos, state, 2);
 	}
 
 	@Override

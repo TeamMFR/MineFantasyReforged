@@ -1,24 +1,27 @@
 {
-	"mod": "thaumcraft",
-	"metals": [
-		{
-			"name": "thaumium",
-			"oreDictList": "ingotThaumium",
-			"properties": {
-				"tier": 4,
-				"durability": 4.0,
-				"flexibility": 1.0,
-				"sharpness": 3.0,
-				"hardness": 3.0,
-				"resistance": 65,
-				"density": 2.5,
-				"melting_point": 1500,
-				"rarity": 0,
-				"craft_tier": 3,
-				"craft_time_modifier": 1.0,
-				"unbreakable": false
-			},
-			"armour_stats": {
+    "_comment": [
+        "Author: Team MFR"
+    ],
+    "mod": "thaumcraft",
+    "metals": [
+        {
+            "name": "thaumium",
+            "oreDictList": "ingotThaumium",
+            "properties": {
+                "tier": 4,
+                "durability": 4.0,
+                "flexibility": 1.0,
+                "sharpness": 3.0,
+                "hardness": 3.0,
+                "resistance": 65,
+                "density": 2.5,
+                "melting_point": 1500,
+                "rarity": 0,
+                "craft_tier": 3,
+                "craft_time_modifier": 1.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
 				"cutting": 1.0,
 				"blunt": 1.0,
 				"piercing": 1.0

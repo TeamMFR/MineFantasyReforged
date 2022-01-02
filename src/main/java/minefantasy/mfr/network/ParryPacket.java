@@ -10,12 +10,10 @@ import java.util.UUID;
 public class ParryPacket extends PacketMF {
 	private int value;
 	private UUID username;
-	private EntityPlayer player;
 
 	public ParryPacket(int value, EntityPlayer user) {
 		this.value = value;
 		this.username = user.getUniqueID();
-		player = user;
 	}
 
 	public ParryPacket() {
@@ -34,11 +32,13 @@ public class ParryPacket extends PacketMF {
 	}
 
 	@Override
-	protected void execute() {
-		if (username != null) {
-			EntityPlayer entity = player.world.getPlayerEntityByName(username.toString());
-			if (entity != null)
-				CombatMechanics.setParryCooldown(entity, value);
+	protected void execute(EntityPlayer player) {
+		if (player != null) {
+			if (username != null) {
+				EntityPlayer entity = player.world.getPlayerEntityByUUID(username);
+				if (entity != null)
+					CombatMechanics.setParryCooldown(entity, value);
+			}
 		}
 	}
 }

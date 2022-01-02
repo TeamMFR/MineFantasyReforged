@@ -25,6 +25,7 @@ public class MineFantasyOreDict {
 		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, 1));
 		OreDictionary.registerOre("stone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, 0));
 		OreDictionary.registerOre("limestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
+		OreDictionary.registerOre("stoneLimestone", new ItemStack(MineFantasyBlocks.LIMESTONE, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.COBBLE_BRICK, 1, OreDictionary.WILDCARD_VALUE));
 		OreDictionary.registerOre("cobblestone", new ItemStack(MineFantasyBlocks.COBBLESTONE_ROAD, 1, OreDictionary.WILDCARD_VALUE));
 

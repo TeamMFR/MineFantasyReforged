@@ -1,17 +1,17 @@
 {
-	"type": "timberdynamic",
-	"pattern": [
-		"#",
-		"#"
-	],
-	"key": {
-		"#": {
-			"type": "forge:ore_dict",
-			"ore": "plankWood"
-		}
-	},
-	"result": {
-		"item": "minefantasyreforged:timber"
-	},
-	"count": 4
+    "type": "timber_dynamic",
+    "pattern": [
+        "#",
+        "#"
+    ],
+    "key": {
+        "#": {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        }
+    },
+    "result": {
+        "item": "minefantasyreforged:timber",
+        "count": 4
+    }
 }

@@ -7,7 +7,6 @@ import minefantasy.mfr.entity.Shockwave;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import net.minecraft.block.Block;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,7 +37,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.BossInfo;
 import net.minecraft.world.BossInfoServer;
 import net.minecraft.world.DifficultyInstance;
@@ -103,7 +102,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		this.tasks.addTask(8, new AIMoveRandom());
 		this.tasks.addTask(9, new EntityAIWatchClosest(this, EntityPlayer.class, 3.0F, 1.0F));
 		this.tasks.addTask(10, new EntityAIWatchClosest(this, EntityLiving.class, 8.0F));
-		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, new Class[] {EntityDragon.class}));
+		this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, true, EntityDragon.class));
 		this.targetTasks.addTask(3, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
 	}
 
@@ -353,8 +352,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	@Override
 	public ITextComponent getDisplayName() {
 		String tierName = "entity." + getType().name + ".name";
-		String breedName = I18n.format(("entity.dragonbreed." + getType().breedName + ".name"));
-		return new TextComponentString(I18n.format(tierName, breedName));
+		TextComponentTranslation breedName = new TextComponentTranslation("entity.dragonbreed." + getType().breedName + ".name");
+		return new TextComponentTranslation(tierName, breedName);
 	}
 
 	/**
@@ -402,12 +401,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 
-		//        nbt.setInteger("FireBreath", fireBreathTick);
-		//		nbt.setInteger("FireBreathCooldown", fireBreathCooldown);
-
 		nbt.setInteger(BREED_TAG, getBreed());
 		nbt.setInteger(TIER_TAG, getTier());
-		//        nbt.setInteger("interestTime", interestTime);
 	}
 
 	/**
@@ -416,8 +411,6 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		if (nbt.hasKey(BREED_TAG)) {
-			//        fireBreathTick = nbt.getInteger("FireBreath");
-			//			fireBreathCooldown = nbt.getInteger("FireBreathCooldown");
 
 			setBreed(nbt.getInteger(BREED_TAG));
 			setTier(nbt.getInteger(TIER_TAG));
@@ -425,11 +418,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 			stepHeight = 1.25F + (getTier() * 0.25F);
 			this.experienceValue = 50 * (getTier() + 1);
 
-			//        interestTime = nbt.getInteger("interestTime");
-
-			if (this.hasCustomName()) {
-				this.bossInfo.setName(this.getDisplayName());
-			}
+			this.bossInfo.setName(this.getDisplayName());
 		}
 
 	}
@@ -677,7 +666,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 					breath.posY = EntityDragon.this.posY + EntityDragon.this.height / 2.0F + 0.5D;
 					breath.posZ = EntityDragon.this.posZ + var20.z * power;
 					EntityDragon.this.world.spawnEntity(breath);
-					System.out.println("");
+					System.out.println();
 				}
 			}
 		}
@@ -695,7 +684,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 				double d1 = this.posY - EntityDragon.this.posY;
 				double d2 = this.posZ - EntityDragon.this.posZ;
 				double d3 = d0 * d0 + d1 * d1 + d2 * d2;
-				d3 = (double) MathHelper.sqrt(d3);
+				d3 = MathHelper.sqrt(d3);
 
 				if (d3 < EntityDragon.this.getEntityBoundingBox().getAverageEdgeLength()) {
 					this.action = EntityMoveHelper.Action.WAIT;

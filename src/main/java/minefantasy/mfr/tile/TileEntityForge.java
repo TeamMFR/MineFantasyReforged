@@ -48,7 +48,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public int exactTemperature;
 	int justShared;
 	private boolean isLit;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	private int ticksExisted;
 
 	public final ItemStackHandler inventory = createInventory();
@@ -188,25 +188,27 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	private void modifyItem(ItemStack item) {
 		if (item.getItem() instanceof ItemHeated) {
 			int temp = ItemHeated.getTemp(item);
-			if (temp > temperature) {
-				temp = (int) temperature;
-			} else {
-				int increase = (int) (temperature / (20F * getStackModifier(item.getCount())));
-				if (temp >= (temperature - increase)) {
+			if (temperature != 0) {
+				if (temp > temperature) {
 					temp = (int) temperature;
 				} else {
-					temp += increase;
+					int increase = (int) (temperature / (20F * getStackModifier(item.getCount())));
+					if (temp >= (temperature - increase)) {
+						temp = (int) temperature;
+					} else {
+						temp += increase;
+					}
 				}
 			}
 			if (temp >= 0) {
 				ItemHeated.setTemp(item, Math.max(0, temp));
 			}
-			if (temperature <= 0){
+			if (temperature <= 0) {
 				ItemHeated.setTemp(item, ItemHeated.getTemp(item) - 10);
 
-				if (ItemHeated.getTemp(item) <= 0){
+				if (ItemHeated.getTemp(item) <= 0) {
 					ItemStack stack = this.getInventory().getStackInSlot(0);
-					ItemStack cooledStack =  ItemHeated.getStack(stack);
+					ItemStack cooledStack = ItemHeated.getStack(stack);
 					cooledStack.setCount(stack.getCount());
 					this.getInventory().setStackInSlot(0, cooledStack);
 				}
@@ -214,7 +216,6 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			}
 		} else if (temperature > 0) {
 			this.getInventory().setStackInSlot(0, ItemHeated.createHotItem(item));
-
 		}
 	}
 
@@ -292,12 +293,9 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public boolean addFuel(ForgeFuel stats, boolean hand, int tier) {
 		maxFuel = tier == 1 ? 12000 : 6000;
 
-		boolean hasUsed = false;
+		boolean hasUsed = stats.baseHeat > this.fuelTemperature;
 
-		if (stats.baseHeat > this.fuelTemperature) // uses if hotter
-		{
-			hasUsed = true;
-		}
+		// uses if hotter
 		int room_left = (int) (maxFuel - fuel);
 		if (hand && room_left > 0) {
 			hasUsed = true;
@@ -329,8 +327,8 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public int[] getTempsScaled(int size) {
 		int[] temps = new int[2];
 		if (shouldShowMetre()) {
-			temps[0] = (int) (size / this.maxTemperature * this.temperature);
-			temps[1] = (int) (size / this.maxTemperature * this.fuelTemperature);
+			temps[0] = (int) (size / maxTemperature * this.temperature);
+			temps[1] = (int) (size / maxTemperature * this.fuelTemperature);
 		}
 		if (temps[0] > size)
 			temps[0] = size;

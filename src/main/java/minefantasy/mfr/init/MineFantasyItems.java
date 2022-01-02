@@ -1206,7 +1206,7 @@ public class MineFantasyItems {
 		TUNGSTEN_INGOT = new ItemBaseMFR("tungsten_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
 		OBSIDIAN_INGOT = new ItemBaseMFR("obsidian_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
 		COMPOSITE_ALLOY_INGOT = new ItemBaseMFR("composite_alloy_ingot", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
-		BAR = (ItemMetalComponent) new ItemMetalComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BAR = new ItemMetalComponent("bar", 1F, "metal").setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		CLAY_POT = new ItemBowl("clay_pot").setStoragePlacement(Constants.StorageTextures.POT, Constants.StorageTextures.POT);
 		CLAY_POT_UNCOOKED = new ItemBaseMFR("clay_pot_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1331,7 +1331,7 @@ public class MineFantasyItems {
 		BODKIN_HEAD = new ItemMetalComponent("bodkin_head", 1 / 4F, "metal");
 		BROAD_HEAD = new ItemMetalComponent("broad_head", 1 / 4F, "metal");
 
-		COGWORK_ARMOUR = (ItemMetalComponent) new ItemMetalComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
+		COGWORK_ARMOUR = new ItemMetalComponent("cogwork_armour", 30F, "metal").setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
 
 		FLUX_POT = new ItemBaseMFR("flux_pot").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
 		COAL_FLUX = new ItemBaseMFR("coal_flux").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1348,8 +1348,7 @@ public class MineFantasyItems {
 		ANCIENT_JEWEL_MASTER = new ItemJewel("ancient_jewel_master", 30, EnumRarity.EPIC, ItemJewel.MYTHIC, 1, "smeltMaster");
 		TRILOGY_JEWEL = new ItemJewel("trilogy_jewel", EnumRarity.EPIC, null, 1);
 
-
-		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate").setCreativeTab(MineFantasyTabs.tabMaterials);;
+		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate").setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
 
 	public static void loadComponent() {
@@ -1403,8 +1402,8 @@ public class MineFantasyItems {
 		RandomOre.addOre(new ItemStack(KAOLINITE), 1.5F, Blocks.STONE, -1, 32, 128, false);
 		RandomOre.addOre(new ItemStack(FLUX), 2F, Blocks.STONE, -1, 0, 128, false);
 		RandomOre.addOre(new ItemStack(FLUX_STRONG), 1F, Blocks.STONE, 2, 0, 128, false);
-		RandomOre.addOre(new ItemStack(FLUX), 20F, MineFantasyBlocks.LIMESTONE, 0, -1, 0, 256, true);
-		RandomOre.addOre(new ItemStack(FLUX_STRONG), 10F, MineFantasyBlocks.LIMESTONE, 0, 2, 0, 256, true);
+		RandomOre.addOre(new ItemStack(FLUX), 20F, MineFantasyBlocks.LIMESTONE, -1, 0, 256, true);
+		RandomOre.addOre(new ItemStack(FLUX_STRONG), 10F, MineFantasyBlocks.LIMESTONE, 2, 0, 256, true);
 		RandomOre.addOre(new ItemStack(Items.COAL), 2F, Blocks.STONE, -1, 0, 128, false);
 		RandomOre.addOre(new ItemStack(SULFUR), 2F, Blocks.STONE, -1, 0, 16, false);
 		RandomOre.addOre(new ItemStack(NITRE), 3F, Blocks.STONE, -1, 0, 64, false);

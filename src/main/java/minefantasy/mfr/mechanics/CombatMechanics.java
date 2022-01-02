@@ -45,6 +45,7 @@ import net.minecraft.entity.item.EntityEnderPearl;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
@@ -92,7 +93,7 @@ public class CombatMechanics {
 	private static final float power_attack_base = 25F;
 	private static final float parryFatigue = 5F;
 	public static boolean swordSkeleton = true;
-	private static boolean debugParry = true;
+	private static final boolean debugParry = true;
 	private static final XSTRandom random = new XSTRandom();
 	protected static float jumpEvade_cost = 30;
 	protected static float evade_cost = 10;
@@ -163,7 +164,7 @@ public class CombatMechanics {
 
 		if (!user.world.isRemote && user instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) user;
-			NetworkHandler.sendToAllTracking(player, new ParryPacket(ticks, player));
+			NetworkHandler.sendToPlayer((EntityPlayerMP) player, new ParryPacket(ticks, player));
 		}
 	}
 
@@ -817,7 +818,7 @@ public class CombatMechanics {
 			{
 				EntityLivingBase tar = mob.getAttackTarget();
 
-				if (tar != null && tar instanceof EntityPlayer && (((EntityPlayer) tar).isActiveItemStackBlocking() || tar.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block"))) {
+				if (tar != null && tar instanceof EntityPlayer && (tar.isActiveItemStackBlocking() || tar.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block"))) {
 					double dist = mob.getDistanceSq(tar);
 
 					if (tar instanceof EntityZombie && mob.onGround && mob.getRNG().nextInt(10) == 0 && dist > 1D

@@ -3,6 +3,7 @@
         "hccallowrocks": "minefantasy.mfr.recipe.factories.HCCallowRocks"
     },
     "recipes": {
-        "timberdynamic": "minefantasy.mfr.recipe.TimberDynamicRecipes$Factory"
+        "timber_dynamic": "minefantasy.mfr.recipe.RecipeTimberDynamic$Factory",
+        "mfr_armor_dye": "minefantasy.mfr.recipe.RecipeArmourDyeMF$Factory"
     }
 }

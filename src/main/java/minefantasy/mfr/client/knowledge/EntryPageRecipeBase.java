@@ -6,19 +6,21 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EntryPageRecipeBase extends EntryPage {
-	private Minecraft mc = Minecraft.getMinecraft();
-	private IRecipe[] recipes;
+	private final Minecraft mc = Minecraft.getMinecraft();
+	private final IRecipe[] recipes;
 	private int recipeID;
+	private int ingredientID;
 
 	public EntryPageRecipeBase(List<IRecipe> recipes) {
 		IRecipe[] array = new IRecipe[recipes.size()];
@@ -40,16 +42,16 @@ public class EntryPageRecipeBase extends EntryPage {
 		}
 
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/craft_grid.png"));
-		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+		parent.drawTexturedModalRect(posX, posY, 0, 0, universalBookImageWidth, universalBookImageHeight);
 
 		IRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
 		String cft = "<" + I18n.format("method.workbench") + ">";
-		mc.fontRenderer.drawSplitString(cft,
-				posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
-		renderRecipe(parent, x, y, ticks, posX, posY, recipe);
+		mc.fontRenderer.drawSplitString(cft, posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
+
+		renderRecipe(parent, x, y, posX, posY, recipe, onTick);
 	}
 
-	private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, IRecipe recipe) {
+	private void renderRecipe(GuiScreen parent, int mx, int my, int posX, int posY, IRecipe recipe, Boolean onTick) {
 		if (recipe == null) {
 			return;
 		}
@@ -70,16 +72,16 @@ public class EntryPageRecipeBase extends EntryPage {
 			}
 		} else if (recipe instanceof ShapedOreRecipe) {
 			ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
+			if (onTick) {
+				tickIngredients(recipe.getIngredients());
+			}
 			int width = shaped.getRecipeWidth();
 			int height = shaped.getRecipeHeight();
-
 			for (int y = 0; y < height; y++) {
 				for (int x = 0; x < width; x++) {
 					//used to be shaped.getInput[y * width + x] Might not be correct co
-					Object input = shaped.getIngredients().get(y * width + x);
-					if (input != null)
-						renderItemAtGridPos(parent, x, y, input instanceof ItemStack ? (ItemStack) input : ((ArrayList<ItemStack>) input).get(0),
-								true, posX, posY, mx, my);
+					Ingredient input = shaped.getIngredients().get(y * width + x);
+					renderItemAtGridPos(parent, x, y, input.getMatchingStacks()[ingredientID], true, posX, posY, mx, my);
 				}
 			}
 		} else if (recipe instanceof ShapelessRecipes) {
@@ -113,10 +115,8 @@ public class EntryPageRecipeBase extends EntryPage {
 						if (index >= shapeless.getIngredients().size())
 							break drawGrid;
 
-						Object input = shapeless.getIngredients().get(index);
-						if (input != null)
-							renderItemAtGridPos(parent, x, y, input instanceof ItemStack ? (ItemStack) input
-									: ((ArrayList<ItemStack>) input).get(0), true, posX, posY, mx, my);
+						Ingredient input = shapeless.getIngredients().get(index);
+						renderItemAtGridPos(parent, x, y, input.getMatchingStacks()[ingredientID], true, posX, posY, mx, my);
 					}
 				}
 			}
@@ -130,6 +130,14 @@ public class EntryPageRecipeBase extends EntryPage {
 			++recipeID;
 		} else {
 			recipeID = 0;
+		}
+	}
+
+	private void tickIngredients(NonNullList<Ingredient> ingredients) {
+		if (ingredientID < ingredients.get(0).getMatchingStacks().length - 1) {
+			ingredientID++;
+		} else {
+			ingredientID = 0;
 		}
 	}
 
@@ -166,14 +174,6 @@ public class EntryPageRecipeBase extends EntryPage {
 			stack1.setItemDamage(0);
 
 		renderItem(gui, xPos, yPos, stack1, accountForContainer, mx, my);
-	}
-
-	public int getGridX() {
-		return 7;
-	}
-
-	public int getGridY() {
-		return 36;
 	}
 
 	@Override

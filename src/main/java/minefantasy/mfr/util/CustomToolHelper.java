@@ -1,5 +1,6 @@
 package minefantasy.mfr.util;
 
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.init.MineFantasyMaterials;
@@ -37,10 +38,7 @@ public class CustomToolHelper {
 			return CustomMaterial.NONE;
 
 		CustomMaterial material = CustomMaterial.getMaterialFor(item, slot_haft);
-		if (material != CustomMaterial.NONE) {
-			return material;
-		}
-		return CustomMaterial.NONE;
+		return material;
 	}
 
 	public static ItemStack construct(Item base, String main) {
@@ -288,8 +286,13 @@ public class CustomToolHelper {
 
 		CustomMaterial material = getCustomPrimaryMaterial(item);
 		String name = "any";
+		String localized_material = null;
 		if (material != null && material != CustomMaterial.NONE) {
 			name = material.getName();
+			localized_material = I18n.format("material." + name + ".name");
+		}
+		if (localized_material != null && !localized_material.endsWith(".name")) {
+			name = localized_material;
 		}
 		return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
@@ -323,10 +326,7 @@ public class CustomToolHelper {
 		if ((inputMat == null || inputMat == CustomMaterial.NONE) && recipeMat != null) {
 			return false;
 		}
-		if (recipeMat != inputMat) {
-			return false;
-		}
-		return true;
+		return recipeMat == inputMat;
 	}
 
 	public static boolean doesHaftMatchForRecipe(ItemStack recipeItem, ItemStack inputItem) {
@@ -340,10 +340,7 @@ public class CustomToolHelper {
 		if ((inputMat == null || inputMat == CustomMaterial.NONE) && recipeMat != null) {
 			return false;
 		}
-		if (recipeMat != inputMat) {
-			return false;
-		}
-		return true;
+		return recipeMat == inputMat;
 	}
 
 	public static void addComponentString(ItemStack tool, List<String> list, CustomMaterial base) {
@@ -432,10 +429,7 @@ public class CustomToolHelper {
 
 		if (mainMaterial1 != null && secondaryMaterial1 != null && mainMaterial1 != secondaryMaterial1)
 			return false;
-		if (mainMaterial2 != null && secondaryMaterial2 != null && mainMaterial2 != secondaryMaterial2)
-			return false;
-
-		return true;
+		return mainMaterial2 == null || secondaryMaterial2 == null || mainMaterial2 == secondaryMaterial2;
 	}
 
 	public static boolean isMythic(ItemStack result) {
@@ -444,10 +438,7 @@ public class CustomToolHelper {
 		if (main1 != null  && main1 != CustomMaterial.NONE && main1.isUnbrekable()) {
 			return true;
 		}
-		if (haft1 != null  && haft1 != CustomMaterial.NONE && haft1.isUnbrekable()) {
-			return true;
-		}
-		return false;
+		return haft1 != null && haft1 != CustomMaterial.NONE && haft1.isUnbrekable();
 	}
 
 	public static String getComponentMaterial(ItemStack item, String type) {

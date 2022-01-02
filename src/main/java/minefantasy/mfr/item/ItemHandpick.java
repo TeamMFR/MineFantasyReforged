@@ -86,15 +86,22 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 			}
 
 			//special drop logic
-			ArrayList<ItemStack> specialdrops = RandomOre.getDroppedItems(user, blockState.getBlock(), state.getBlock().getMetaFromState(state), harvestlvl, fortune, silk, pos.getY());
+			ArrayList<ItemStack> specialdrops = RandomOre.getDroppedItems(user, blockState.getBlock(), harvestlvl, fortune, silk, pos.getY());
 
 			if (!specialdrops.isEmpty()) {
 
 				for (ItemStack newdrop : specialdrops) {
 					if (!newdrop.isEmpty()) {
-						if (newdrop.getCount() < 1)
+						if (newdrop.getCount() > 1) {
+							if (CustomToolHelper.getCustomPrimaryMaterial(item).tier > 0) {
+								newdrop.setCount(itemRand.nextInt(CustomToolHelper.getCustomPrimaryMaterial(item).tier));
+							} else {
+								newdrop.setCount(1);
+							}
+						}
+						if (newdrop.getCount() < 1) {
 							newdrop.setCount(1);
-
+						}
 						dropItem(world, pos, newdrop);
 					}
 				}
@@ -117,12 +124,11 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 	}
 
 	private void dropItem(World world, BlockPos pos, ItemStack drop) {
-		if (world.isRemote)
-			return;
-
-		EntityItem dropItem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
-		dropItem.setPickupDelay(10);
-		world.spawnEntity(dropItem);
+		if (!world.isRemote) {
+			EntityItem dropItem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
+			dropItem.setPickupDelay(10);
+			world.spawnEntity(dropItem);
+		}
 	}
 
 	private float getDoubleDropChance() {

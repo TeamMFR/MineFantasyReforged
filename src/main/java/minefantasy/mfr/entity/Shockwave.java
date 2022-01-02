@@ -48,11 +48,11 @@ public class Shockwave {// Explosion
 	 * A list of ChunkPositions of blocks affected by this explosion
 	 */
 	public List affectedBlockPositions = new ArrayList();
-	private int maxRange = 16;
-	private Random explosionRNG = new Random();
-	private World world;
+	private final int maxRange = 16;
+	private final Random explosionRNG = new Random();
+	private final World world;
 	private final Map<EntityPlayer, Vec3d> playerKnockbackMap;
-	private String type;
+	private final String type;
 
 	public Shockwave(String type, World world, Entity cause, double x, double y, double z, float power) {
 		this.world = world;
@@ -62,7 +62,7 @@ public class Shockwave {// Explosion
 		this.explosionY = y;
 		this.explosionZ = z;
 		this.type = type;
-		this.playerKnockbackMap = Maps.<EntityPlayer, Vec3d>newHashMap();
+		this.playerKnockbackMap = Maps.newHashMap();
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class Shockwave {// Explosion
 	 */
 	public void initiate() {
 		float f = this.explosionSize;
-		Set<BlockPos> set = Sets.<BlockPos>newHashSet();
+		Set<BlockPos> set = Sets.newHashSet();
 		int i;
 		int j;
 		int k;
@@ -235,7 +235,7 @@ public class Shockwave {// Explosion
 				IBlockState state1 = this.world.getBlockState(pos.add(0, -1, 0));
 
 				if (state.getMaterial() == Material.AIR && state1.isOpaqueCube() && this.explosionRNG.nextInt(3) == 0) {
-					this.world.setBlockState(pos, (IBlockState) Blocks.FIRE);
+					this.world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 				}
 			}
 		}

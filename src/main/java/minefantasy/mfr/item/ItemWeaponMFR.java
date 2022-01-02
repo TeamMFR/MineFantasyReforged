@@ -32,6 +32,7 @@ import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.PlayerUtils;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -328,8 +329,8 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	 */
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
-		if (entityLiving instanceof EntityPlayer){
-			if (!allowOffhand(entityLiving, EnumHand.OFF_HAND)){
+		if (entityLiving instanceof EntityPlayer) {
+			if (!allowOffhand(entityLiving, EnumHand.OFF_HAND)) {
 				TacticalManager.throwPlayerOffBalance((EntityPlayer) entityLiving, 5F);
 				StaminaBar.modifyStaminaValue(entityLiving, -95F);
 			}
@@ -337,10 +338,25 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return false;
 	}
 
+	/**
+	 * Called when the player Left Clicks (attacks) an entity.
+	 * Processed before damage is done, if return value is true further processing is canceled
+	 * and the entity is not attacked.
+	 *
+	 * @param stack  The Item being used
+	 * @param player The player that is attacking
+	 * @param entity The entity being attacked
+	 * @return True to cancel the rest of the interaction.
+	 */
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		return player.isHandActive() && stack.getItemUseAction() == EnumAction.valueOf("mfr_block");
+	}
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (!(player.getHeldItemOffhand().getItem() instanceof ItemShield)){
+		if (!(player.getHeldItemOffhand().getItem() instanceof ItemShield)) {
 			player.setActiveHand(hand);
 			return new ActionResult<>(EnumActionResult.SUCCESS, stack);
 		}

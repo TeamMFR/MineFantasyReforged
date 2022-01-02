@@ -6,6 +6,7 @@ import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityArrowMFR;
+import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
@@ -40,7 +41,7 @@ public class TacticalManager {
 	 */
 	public static boolean shouldStaminaBlock = false;
 	public static boolean newBalanceSystem = false;
-	private static Random rand = new Random();
+	private static final Random rand = new Random();
 
 	/**
 	 * Determines if the defender is hit in the front (180degree arc)
@@ -431,10 +432,7 @@ public class TacticalManager {
 		if (entityHit.getClass().getName().contains("Wraith")) {
 			return true;
 		}
-		if (entityHit.getClass().getName().contains("Werewolf")) {
-			return true;
-		}
-		return false;
+		return entityHit.getClass().getName().contains("Werewolf");
 	}
 
 	public static boolean isDragon(Entity entityHit) {
@@ -444,10 +442,7 @@ public class TacticalManager {
 		if (entityHit instanceof net.minecraft.entity.boss.EntityDragon) {
 			return true;
 		}
-		if (entityHit instanceof minefantasy.mfr.entity.mob.EntityDragon) {
-			return true;
-		}
-		return false;
+		return entityHit instanceof minefantasy.mfr.entity.mob.EntityDragon;
 	}
 
 	/**
@@ -472,7 +467,11 @@ public class TacticalManager {
 		if (attacker != null && steal && attacker.getHeldItemMainhand().isEmpty()) {
 			attacker.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, target.getHeldItemMainhand().copy());
 		} else {
-			target.entityDropItem(target.getActiveItemStack(), 1.0F);
+			ItemStack targetMainhandStack = target.getHeldItemMainhand();
+			if (target instanceof EntityMinotaur) {
+				targetMainhandStack.damageItem((rand.nextInt(5) * 50), target);
+			}
+			target.entityDropItem(targetMainhandStack, 1.0F);
 		}
 		target.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
 		return true;

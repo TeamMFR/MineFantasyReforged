@@ -15,7 +15,6 @@ import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.block.BlockCrops;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
@@ -53,7 +52,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
@@ -63,17 +62,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 
 public class EntityMinotaur extends EntityCreature implements IArmourPenetrationMob, ISpecialCombatMob, IMob {
-	private static final DataParameter<Byte> ATTACK = EntityDataManager.<Byte>createKey(EntityMinotaur.class, DataSerializers.BYTE);
-	private static final DataParameter<Integer> SPECIES = EntityDataManager.<Integer>createKey(EntityMinotaur.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> TIER = EntityDataManager.<Integer>createKey(EntityMinotaur.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> RAGE = EntityDataManager.<Integer>createKey(EntityMinotaur.class, DataSerializers.VARINT);
+	private static final DataParameter<Byte> ATTACK = EntityDataManager.createKey(EntityMinotaur.class, DataSerializers.BYTE);
+	private static final DataParameter<Integer> SPECIES = EntityDataManager.createKey(EntityMinotaur.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> TIER = EntityDataManager.createKey(EntityMinotaur.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> RAGE = EntityDataManager.createKey(EntityMinotaur.class, DataSerializers.VARINT);
 	public int swing;
 	private int grabCooldown;
 	private int hitCooldownTime;
 	private int specialAttackTime;
 	private boolean isBreakDoorsTaskSet;
-	private float[] punch = new float[] {0F, 1F, 0F};
-	private float[] headbutt = new float[] {0F, 1F, 4F};
+	private final float[] punch = new float[] {0F, 1F, 0F};
+	private final float[] headbutt = new float[] {0F, 1F, 4F};
 	private final EntityAIBreakDoor breakDoor = new EntityAIBreakDoor(this);
 
 	public EntityMinotaur(World world) {
@@ -119,6 +118,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 	public void worldGenTier(int species, int tier) {
 		setMob(species, tier);
 		setLoadout();
+		this.setDropChance(EntityEquipmentSlot.MAINHAND, 1.0F);
 		if (tier > 0) {
 			this.setHomePosAndDistance(new BlockPos((int) posX, (int) posY, (int) posZ), getRange(tier));
 		}
@@ -140,6 +140,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 
 		setMob(species, 0);
 		setLoadout();
+		this.setDropChance(EntityEquipmentSlot.MAINHAND, 1.0F);
 
 		this.setBreakDoorsAItask(this.rand.nextFloat() < f * 0.1F);
 
@@ -155,7 +156,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentString(I18n.format("entity." + getMinotaur().name + ".name"));
+		return new TextComponentTranslation("entity." + getMinotaur().name + ".name");
 	}
 
 	public ItemWeaponMFR getRandomWeapon() {
@@ -538,23 +539,23 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 	}
 
 	/**
-	 * @param species    Brown, Snow, Nether
-	 * @param subspecies the tier such as normal, warlord, etc
+	 * @param species Brown, Snow, Nether
+	 * @param tier    the tier such as normal, warlord, etc
 	 */
-	public void setMob(int species, int subspecies) {
-		MinotaurBreed minotaur = MinotaurBreed.getBreed(species, subspecies);
+	public void setMob(int species, int tier) {
+		MinotaurBreed minotaur = MinotaurBreed.getBreed(species, tier);
 
 		setSpecies(species);
-		setTier(subspecies);
+		setTier(tier);
 
 		this.preventEntitySpawning = minotaur.isSpecial;
 		this.isImmuneToFire = species == 1;
 		this.experienceValue = minotaur.experienceValue;
 
-		if (subspecies == 0) {
+		if (tier == 0) {
 			this.targetTasks.addTask(2, new AIAttackNearest(this));
 		}
-		if (subspecies >= 3) {
+		if (tier >= 3) {
 			this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(16.0D);
 		}
 	}

@@ -1,0 +1,36 @@
+{
+    "_comment": [
+        "Author: -toErIpNid-"
+    ],
+    "mod": "bewitchment",
+    "metals": [
+        {
+            "name": "cold_iron",
+            "oreDictList": "ore:ingotColdIron",
+            "properties": {
+                "tier": 6,
+                "durability": 7.0,
+                "flexibility": 1.2,
+                "sharpness": 5.0,
+                "hardness": 4.0,
+                "resistance": 65,
+                "density": 2.0,
+                "melting_point": 2000,
+                "rarity": 0,
+                "craft_tier": 5,
+                "craft_time_modifier": 12.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.2,
+                "piercing": 0.8
+            },
+            "color": {
+                "red": 43,
+                "green": 57,
+                "blue": 57
+            }
+        }
+    ]
+}

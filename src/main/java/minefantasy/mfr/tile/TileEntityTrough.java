@@ -27,7 +27,7 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	/**
 	 * The number of fill_count entries in the blockstate json
 	 */
-	private static int fillLevels = 7;
+	private static final int fillLevels = 7;
 	public int fill;
 
 	public TileEntityTrough() {
@@ -169,6 +169,9 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 		int fillCount = 0;
 		if (fillPercent > 0) {
 			fillCount = Math.max((int) (fillPercent * fillLevels - 1), 1);
+		}
+		if (fillCount >= 7) {
+			fillCount = 6;
 		}
 		return fillCount;
 	}

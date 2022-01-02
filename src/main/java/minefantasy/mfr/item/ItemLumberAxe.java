@@ -6,7 +6,6 @@ import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ModelLoaderHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -26,11 +25,79 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.Random;
 
 public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
-	private Random rand = new Random();
+	private final Random rand = new Random();
 
 	public ItemLumberAxe(String name, Item.ToolMaterial material, int rarity) {
 		super(name, material, rarity);
 		this.setMaxDamage(getMaxDamage() * 5);
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
+		if (!user.world.isRemote && user instanceof EntityPlayer && StaminaMechanics.canAcceptCost(user)) {
+			breakChain(world, pos, item, state, user, 32, state);
+		}
+		return super.onBlockDestroyed(item, world, state, pos, user);
+	}
+
+	private void breakChain(World world, BlockPos pos, ItemStack item, IBlockState state, EntityLivingBase user, int maxLogs, IBlockState orient) {
+		if (maxLogs > 0 && isLog(world, pos, orient)) {
+
+			IBlockState newState = world.getBlockState(pos);
+			breakSurrounding(item, world, pos, user);
+			if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
+				newState.getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos), EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
+			}
+			world.setBlockToAir(pos);
+			item.damageItem(1, user);
+
+			maxLogs--;
+			for (int x1 = -1; x1 <= 1; x1++) {
+				for (int y1 = -1; y1 <= 1; y1++) {
+					for (int z1 = -1; z1 <= 1; z1++) {
+						breakChain(world, pos.add(x1, y1, z1), item, newState, user, maxLogs, orient);
+					}
+				}
+			}
+			if (user instanceof EntityPlayer) {
+				StaminaMechanics.tirePlayer((EntityPlayer) user, 0.5F);
+			}
+		}
+	}
+
+	private boolean isLog(World world, BlockPos pos, IBlockState orient) {
+		IBlockState state = world.getBlockState(pos);
+		return state == orient && state.getMaterial() == Material.WOOD;
+	}
+
+	public void breakSurrounding(ItemStack item, World world, BlockPos pos, EntityLivingBase user) {
+		if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)) {
+			for (int x1 = -2; x1 <= 2; x1++) {
+				for (int y1 = -2; y1 <= 2; y1++) {
+					for (int z1 = -2; z1 <= 2; z1++) {
+						EnumFacing facing = getFacingFor(user, pos);
+						BlockPos blockPos = pos.add(x1 + facing.getFrontOffsetX(), y1 + facing.getFrontOffsetY(), z1 + facing.getFrontOffsetZ());
+
+						if (!(x1 + facing.getFrontOffsetX() == 0 && y1 + facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
+
+							IBlockState newState = world.getBlockState(blockPos);
+
+							if (item.getItemDamage() < item.getMaxDamage() && user instanceof EntityPlayer && newState.getMaterial() == Material.LEAVES) {
+								if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
+									newState.getBlock().dropBlockAsItem(world, blockPos, newState, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
+								}
+								world.setBlockToAir(blockPos);
+								item.damageItem(1, user);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private EnumFacing getFacingFor(EntityLivingBase user, BlockPos pos) {
+		return EnumFacing.getDirectionFromEntityLiving(pos, user);// TODO: FD
 	}
 
 	@Override
@@ -66,78 +133,6 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	@Override
 	public boolean flip(ItemStack itemStack) {
 		return true;
-	}
-
-	@Override
-	public boolean onBlockDestroyed(ItemStack item, World world, IBlockState block, BlockPos pos, EntityLivingBase user) {
-		if (user instanceof EntityPlayer && StaminaMechanics.canAcceptCost(user)) {
-			breakChain(world, pos, item, block, user, 32, block.getBlock());
-		}
-		return super.onBlockDestroyed(item, world, block, pos, user);
-	}
-
-	private void breakChain(World world, BlockPos pos, ItemStack item, IBlockState state, EntityLivingBase user, int maxLogs, Block orient) {
-		if (maxLogs > 0 && isLog(world, pos, orient)) {
-
-			IBlockState newblock = world.getBlockState(pos);
-			breakSurrounding(item, world, newblock, pos, user);
-			if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
-				newblock.getBlock().dropBlockAsItem(world, pos, world.getBlockState(pos), EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
-			}
-			world.setBlockToAir(pos);
-			item.damageItem(1, user);
-
-			maxLogs--;
-			for (int x1 = -1; x1 <= 1; x1++) {
-				for (int y1 = -1; y1 <= 1; y1++) {
-					for (int z1 = -1; z1 <= 1; z1++) {
-						breakChain(world, pos.add(x1, y1, z1), item, newblock, user, maxLogs, orient);
-					}
-				}
-			}
-			if (user instanceof EntityPlayer) {
-				StaminaMechanics.tirePlayer((EntityPlayer) user, 0.5F);
-			}
-		}
-	}
-
-	private boolean isLog(World world, BlockPos pos, Block orient) {
-		Block block = world.getBlockState(pos).getBlock();
-		if (block != null) {
-			return block == orient && block.getMaterial(block.getDefaultState()) == Material.WOOD;
-		}
-		return false;
-	}
-
-	public void breakSurrounding(ItemStack item, World world, IBlockState state, BlockPos pos, EntityLivingBase user) {
-		if (!world.isRemote && ForgeHooks.isToolEffective(world, pos, item)) {
-			for (int x1 = -2; x1 <= 2; x1++) {
-				for (int y1 = -2; y1 <= 2; y1++) {
-					for (int z1 = -2; z1 <= 2; z1++) {
-						EnumFacing facing = getFacingFor(user, pos);
-						BlockPos blockPos = pos.add(x1 + facing.getFrontOffsetX(), y1 + facing.getFrontOffsetY(), z1 + facing.getFrontOffsetZ());
-
-						if (!(x1 + facing.getFrontOffsetX() == 0 && y1 + facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
-
-							Block newblock = world.getBlockState(blockPos).getBlock();
-
-							if (item.getItemDamage() < item.getMaxDamage() && newblock != null
-									&& user instanceof EntityPlayer && newblock.getMaterial(state) == Material.LEAVES) {
-								if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
-									newblock.dropBlockAsItem(world, blockPos, state, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item));
-								}
-								world.setBlockToAir(blockPos);
-								item.damageItem(1, user);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private EnumFacing getFacingFor(EntityLivingBase user, BlockPos pos) {
-		return EnumFacing.getDirectionFromEntityLiving(pos, user);// TODO: FD
 	}
 
 	@Override
