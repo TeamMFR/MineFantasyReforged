@@ -14,6 +14,7 @@ import minefantasy.mfr.network.AmmoBoxCommandPacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemFood;
@@ -69,9 +70,9 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 				return true;
 			}
 			return false;
-		} else if (!inventoryStack.isEmpty()) {
+		} else if (!inventoryStack.isEmpty() && !(held.getItem() == Items.AIR)) {
 			open();
-			takeStack(user, held);
+			takeStack(user);
 			syncData();
 			return true;
 		}
@@ -136,7 +137,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 		}
 	}
 
-	private void takeStack(EntityPlayer user, ItemStack held) {
+	private void takeStack(EntityPlayer user) {
 		int ss = stock;
 		ItemStack taken = inventoryStack.copy();
 		if (ss > taken.getMaxStackSize()) {

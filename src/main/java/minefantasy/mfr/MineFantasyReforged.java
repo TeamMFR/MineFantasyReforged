@@ -168,10 +168,20 @@ public class MineFantasyReforged {
 		CustomArmourEntry.registerItem(Items.CHAINMAIL_LEGGINGS, ArmourDesign.MAIL);
 		CustomArmourEntry.registerItem(Items.CHAINMAIL_BOOTS, ArmourDesign.MAIL);
 
-		CustomArmourEntry.registerItem(Items.GOLDEN_HELMET, ArmourDesign.SOLID, 1.5F, "medium");
-		CustomArmourEntry.registerItem(Items.GOLDEN_CHESTPLATE, ArmourDesign.SOLID, 1.5F, "medium");
-		CustomArmourEntry.registerItem(Items.GOLDEN_LEGGINGS, ArmourDesign.SOLID, 1.5F, "medium");
-		CustomArmourEntry.registerItem(Items.GOLDEN_BOOTS, ArmourDesign.SOLID, 1.5F, "medium");
+		CustomArmourEntry.registerItem(Items.IRON_HELMET, ArmourDesign.SOLID, 1.5F, "medium");
+		CustomArmourEntry.registerItem(Items.IRON_CHESTPLATE, ArmourDesign.SOLID, 1.5F, "medium");
+		CustomArmourEntry.registerItem(Items.IRON_LEGGINGS, ArmourDesign.SOLID, 1.5F, "medium");
+		CustomArmourEntry.registerItem(Items.IRON_BOOTS, ArmourDesign.SOLID, 1.5F, "medium");
+
+		CustomArmourEntry.registerItem(Items.GOLDEN_HELMET, ArmourDesign.SOLID, 2F, "medium");
+		CustomArmourEntry.registerItem(Items.GOLDEN_CHESTPLATE, ArmourDesign.SOLID, 2F, "medium");
+		CustomArmourEntry.registerItem(Items.GOLDEN_LEGGINGS, ArmourDesign.SOLID, 2F, "medium");
+		CustomArmourEntry.registerItem(Items.GOLDEN_BOOTS, ArmourDesign.SOLID, 2F, "medium");
+		
+		CustomArmourEntry.registerItem(Items.DIAMOND_HELMET, ArmourDesign.SOLID, 2.5F, "medium");
+		CustomArmourEntry.registerItem(Items.DIAMOND_CHESTPLATE, ArmourDesign.SOLID, 2.5F, "medium");
+		CustomArmourEntry.registerItem(Items.DIAMOND_LEGGINGS, ArmourDesign.SOLID, 2.5F, "medium");
+		CustomArmourEntry.registerItem(Items.DIAMOND_BOOTS, ArmourDesign.SOLID, 2.5F, "medium");
 
 		ConfigItemRegistry.readCustoms();
 

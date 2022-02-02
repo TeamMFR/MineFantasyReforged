@@ -57,6 +57,7 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int PARRY_PACKET = 3;
 	private static final int HIT_SOUND_PACKET = 4;
 	private static final int EXTENDED_REACH_PACKET = 5;
+	private static final int ARTEFACT_PACKET = 6;
 	private static final int KNOWLEDGE_PACKET = 7;
 	private static final int RESEARCH_REQUEST_PACKET = 8;
 	private static final int LEVEL_UP_PACKET = 11;
@@ -100,6 +101,7 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(PARRY_PACKET, ParryPacket.class, ParryPacket::new);
 		PacketMF.registerPacket(HIT_SOUND_PACKET, HitSoundPacket.class, HitSoundPacket::new);
 		PacketMF.registerPacket(EXTENDED_REACH_PACKET, ExtendedReachPacket.class, ExtendedReachPacket::new);
+		PacketMF.registerPacket(ARTEFACT_PACKET, ArtefactPacket.class, ArtefactPacket::new);
 		PacketMF.registerPacket(KNOWLEDGE_PACKET, KnowledgePacket.class, KnowledgePacket::new);
 		PacketMF.registerPacket(RESEARCH_REQUEST_PACKET, ResearchRequestPacket.class, ResearchRequestPacket::new);
 		PacketMF.registerPacket(LEVEL_UP_PACKET, LevelUpPacket.class, LevelUpPacket::new);

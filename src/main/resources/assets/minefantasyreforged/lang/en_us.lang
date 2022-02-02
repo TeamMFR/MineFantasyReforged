@@ -61,6 +61,7 @@ vehicle.noFrame=You need a proper Frame Assembly to insert the Pulley.
 vehicle.noPulley=You do not have a Pulley on you.
 
 research.noskill=You may learn something from this, with more skill.
+research.noresearch=You may learn something from this, with more knowledge.
 research.null=There is nothing to learn from this.
 
 research.addArtefact=Added Knowledge to %1$s (%2$s/%3$s)
@@ -1744,7 +1745,7 @@ knowledge.ecomponents.2=Most engineered objects aren't just forged. Construction
 knowledge.coke=Coke
 knowledge.coke.desc=Refined Fuels
 
-knowledge.coke.1=Alone, Coal is just full of impurities which reflect on poor burning capabilities. With much refinement, and the use of redstone, charcoal can be burned at a rate that completely removes all imperfections and leaves the coal in its purest form, for optimal fuel use. This process only works with charcoal however.
+knowledge.coke.1=Alone, Coal is just full of impurities which reflect on poor burning capabilities. With much refinement, and the use of redstone, charcoal can be burned at a rate that completely removes all imperfections and leaves the coal in its purest form, for optimal fuel use. This process only works with coal however.
 
 knowledge.tungsten=Wolframite Smithing
 knowledge.tungsten.desc=Machine-Worthy Metal

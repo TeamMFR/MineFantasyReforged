@@ -138,7 +138,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			}
 			return true;
 		}
-		if (!leftClick && (ToolHelper.getCrafterToolName(held).equalsIgnoreCase("nothing") || ToolHelper.getToolTypeFromStack(held) == Tool.HANDS)) {
+		if (!leftClick && (ToolHelper.getToolTypeFromStack(held) == Tool.OTHER || ToolHelper.getToolTypeFromStack(held) == Tool.HANDS)) {
 			// Item placement
 			ItemStack item = getInventory().getStackInSlot(0);
 			if (item.isEmpty()) {

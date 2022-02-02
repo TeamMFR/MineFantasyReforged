@@ -8,7 +8,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Mouse;
 
 @SideOnly(Side.CLIENT)
 public class HudHandler {
@@ -16,10 +15,8 @@ public class HudHandler {
 
 	@SubscribeEvent
 	public void postRenderOverlay(RenderGameOverlayEvent.Post event) {
-		if (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR) {
-			int mouseX = Mouse.getX();
-			int mouseY = Mouse.getY();
-			inGameGUI.renderGameOverlay(event.getPartialTicks(), mouseX, mouseY);
+		if (event.getType() == RenderGameOverlayEvent.ElementType.ALL) {
+			inGameGUI.renderGameOverlay();
 		}
 		if (event.getType() == RenderGameOverlayEvent.ElementType.HELMET) {
 			inGameGUI.renderViewport();

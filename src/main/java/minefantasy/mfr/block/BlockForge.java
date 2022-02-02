@@ -29,10 +29,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Random;
@@ -80,11 +83,33 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FUEL_COUNT);
+		int i = 0;
+
+		if (state.getValue(FUEL_COUNT) == 1) {
+			i |= 1;
+		}
+
+		if (state.getValue(FUEL_COUNT) == 2) {
+			i |= 2;
+		}
+
+		if (state.getValue(FUEL_COUNT) == 3) {
+			i |= 3;
+		}
+
+		if (state.getValue(BURNING)) {
+			i |= 4;
+		}
+
+		if (state.getValue(UNDER)) {
+			i |= 8;
+		}
+
+		return i;
 	}
 
 	public IBlockState getStateFromMeta(int meta) {
-		return this.getDefaultState().withProperty(FUEL_COUNT, Integer.valueOf(meta));
+		return this.getDefaultState().withProperty(FUEL_COUNT, (meta & 3)).withProperty(BURNING, (meta & 4) > 0).withProperty(UNDER, (meta & 8) > 0);
 	}
 
 	public static void setActiveState(boolean burning, int fuelCount, boolean under, World world, BlockPos pos) {
@@ -239,6 +264,25 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
+		if (world.getTileEntity(pos) instanceof TileEntityForge && !(((TileEntityForge) world.getTileEntity(pos)).isBurning())) {
+			return;
+		}
+
+		for (int i = 0; i < 3; ++i) {
+			double x = pos.getX() + 0.25D + random.nextDouble() * 0.5D;
+			double y = pos.getY() + random.nextDouble() * 0.5D;
+			double z = pos.getZ() + 0.25D + random.nextDouble() * 0.5D;
+			world.spawnParticle(EnumParticleTypes.FLAME, x, y, z, 0.0D, 0.0D, 0.0D);
+			TileEntityForge tile = (TileEntityForge) world.getTileEntity(pos);
+			if (tile != null && tile.isOutside()) {
+				world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, x, y, z, 0.0D, 0.0D, 0.0D);
+			}
+		}
 	}
 
 	@Override

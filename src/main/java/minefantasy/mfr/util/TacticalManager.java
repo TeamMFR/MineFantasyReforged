@@ -132,6 +132,11 @@ public class TacticalManager {
 				return false;
 			}
 		}
+
+		if (source.isMagicDamage()) {
+			return false;
+		}
+
 		if (source.isProjectile()) {
 			arc *= 0.75F;
 		}
@@ -369,7 +374,8 @@ public class TacticalManager {
 	}
 
 	public static float getResistance(EntityLivingBase user, DamageSource source) {
-		if (source == DamageSource.ON_FIRE || source == DamageSource.IN_FIRE || source == DamageSource.HOT_FLOOR) {
+		if (user.world.isFlammableWithin(user.getEntityBoundingBox().shrink(0.001D))
+				&& source == DamageSource.ON_FIRE || source == DamageSource.IN_FIRE || source == DamageSource.HOT_FLOOR) {
 			return resistFire(user, source);
 		}
 		if (source.isMagicDamage() || source == DamageSource.WITHER) {

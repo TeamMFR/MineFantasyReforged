@@ -129,12 +129,16 @@ public class ConfigWorldGen extends ConfigurationBaseMF {
 	public static String structure = "6A: [Structure Gen] General";
 	public static int structureTickRate;
 	public static String ancientForge = "6B: [Structure Gen] Ancient Forge";
-	public static float MFChance;
-	public static String ancientAlter = "6C: [Structure Gen] Ancient Alter";
-	public static float MAChance;
+	public static float ancientForgeSpawnChance;
+	public static int ancientForgeGrid;
+	public static String ancientAltar = "6C: [Structure Gen] Ancient Alter";
+	public static float ancientAltarSpawnChance;
+	public static int ancientAltarGrid;
 	public static String dwarvenSH = "6D: [Structure Gen] Dwarven Stronghold";
-	public static float DSChance;
-	public static int DSGrid, DSLength, DSDeviations;
+	public static float dwarvenStrongholdSpawnChance;
+	public static int dwarvenStrongholdGrid;
+	public static int dwarvenStrongholdLength;
+	public static int dwarvenStrongholdDeviations;
 
 	@Override
 	protected void loadConfig() {
@@ -392,29 +396,38 @@ public class ConfigWorldGen extends ConfigurationBaseMF {
 		structureTickRate = Integer.parseInt(config
 				.get(structure, "Generation Tick rate", 1, "How many ticks (1/20seconds) for each section to generate")
 				.getString());
-		MFChance = Float
+
+		ancientForgeSpawnChance = Float
 				.parseFloat(config
-						.get(ancientForge, "Spawn Chance", 1.5E-2D,
+						.get(ancientForge, "Spawn Chance", 2.5E-2D,
 								"The chance for this structure to generate in a chunk. (0=never, 1.0=always)")
 						.getString());
-		MAChance = Float
+		ancientForgeGrid = Integer.parseInt(config.get(ancientForge, "Ancient Forge Grid size", 2,
+						"Ancient Forges generate on a grid on the map to avoid overlaps, this defines the minimum distance between two strongholds (in 16x16 block chunks)")
+				.getString());
+
+		ancientAltarSpawnChance = Float
 				.parseFloat(config
-						.get(ancientAlter, "Spawn Chance", 1.0E-2D,
+						.get(ancientAltar, "Spawn Chance", 2.0E-2D,
 								"The chance for this structure to generate in a chunk. (0=never, 1.0=always)")
 						.getString());
-		DSChance = Float
+		ancientAltarGrid = Integer.parseInt(config.get(ancientAltar, "Ancient Altar Grid size", 6,
+						"Ancient Altars generate on a grid on the map to avoid overlaps, this defines the minimum distance between two strongholds (in 16x16 block chunks)")
+				.getString());
+
+		dwarvenStrongholdSpawnChance = Float
 				.parseFloat(config
-						.get(dwarvenSH, "Spawn Chance", 5.0E-2D,
+						.get(dwarvenSH, "Spawn Chance", 8.0E-2D,
 								"The chance for this structure to generate in a chunk. (0=never, 1.0=always)")
 						.getString());
 
-		DSGrid = Integer.parseInt(config.get(dwarvenSH, "Stronghold Grid size", 8,
+		dwarvenStrongholdGrid = Integer.parseInt(config.get(dwarvenSH, "Stronghold Grid size", 12,
 				"Strongholds generate on a grid on the map to avoid overlaps, this defines the minimum distance between two strongholds (in 16x16 block chunks)")
 				.getString());
-		DSLength = Integer.parseInt(config.get(dwarvenSH, "Stronghold max length", 8,
+		dwarvenStrongholdLength = Integer.parseInt(config.get(dwarvenSH, "Stronghold max length", 8,
 				"Max amount of halls making the length of dwarf strongholds (some may be smaller or larger, but this is a guideline)")
 				.getString());
-		DSDeviations = Integer.parseInt(config.get(dwarvenSH, "Stronghold max deviations", 1,
+		dwarvenStrongholdDeviations = Integer.parseInt(config.get(dwarvenSH, "Stronghold max deviations", 1,
 				"Max amount of intersections in dwarf stronghold hallways (not including living hubs). This can significantly increase complexity of strongholds and in turn lag when generating")
 				.getString());
 

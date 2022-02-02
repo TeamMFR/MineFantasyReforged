@@ -17,7 +17,8 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber"
+      "item": "minefantasyreforged:timber",
+      "nbt": "{mf_custom_materials:{main_material:\"oak_wood\"}}"
     },
     "N": {
       "item": "minefantasyreforged:nail"

@@ -1,6 +1,5 @@
 package minefantasy.mfr.util;
 
-import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.init.MineFantasyMaterials;
@@ -236,7 +235,14 @@ public class CustomToolHelper {
 		}
 
 		if (secondaryMaterial != null && secondaryMaterial != CustomMaterial.NONE) {
-			String matName = I18n.format("item.mod_haft.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(secondaryMaterial.getName())));
+			String name;
+			String localized_material;
+			name = secondaryMaterial.getName();
+			localized_material = I18n.format("material." + name + ".name");
+			if (!localized_material.endsWith(".name")) {
+				name = localized_material;
+			}
+			String matName = I18n.format("item.mod_haft.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 			list.add(TextFormatting.GOLD + matName);
 		}
 
@@ -257,31 +263,42 @@ public class CustomToolHelper {
 
 		CustomMaterial material = getCustomPrimaryMaterial(item);
 		if (material != null && material != CustomMaterial.NONE) {
-			String matName = I18n.format("item.mod_joint.name",
-					I18n.format(Utils.convertSnakeCaseToSplitCapitalized(material.getName())));
+			String name;
+			String localized_material;
+			name = material.getName();
+			localized_material = I18n.format("material." + name + ".name");
+			if (!localized_material.endsWith(".name")) {
+				name = localized_material;
+			}
+			String matName = I18n.format("item.mod_joint.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 			list.add(TextFormatting.GOLD + matName);
 		}
 
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static String getWoodenLocalisedName(ItemStack item, String unlocalizedName) {
+	public static String getSecondaryLocalisedName(ItemStack item, String unlocalizedName) {
 		if (materialOnTooltip()) {
 			I18n.format(unlocalizedName);
 		}
 
 		CustomMaterial material = getCustomSecondaryMaterial(item);
 		String name = "any";
+		String localized_material = null;
 		if (material != null && material != CustomMaterial.NONE) {
 			name = material.getName();
+			localized_material = I18n.format("material." + name + ".name");
+		}
+		if (localized_material != null && !localized_material.endsWith(".name")) {
+			name = localized_material;
 		}
 		return I18n.format(unlocalizedName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
 
 	@SideOnly(Side.CLIENT)
-	public static String getLocalisedName(ItemStack item, String unlocalName) {
+	public static String getLocalisedName(ItemStack item, String unlocalizedName) {
 		if (materialOnTooltip()) {
-			I18n.format(unlocalName);
+			I18n.format(unlocalizedName);
 		}
 
 		CustomMaterial material = getCustomPrimaryMaterial(item);
@@ -294,7 +311,7 @@ public class CustomToolHelper {
 		if (localized_material != null && !localized_material.endsWith(".name")) {
 			name = localized_material;
 		}
-		return I18n.format(unlocalName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
+		return I18n.format(unlocalizedName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
 
 	public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) {

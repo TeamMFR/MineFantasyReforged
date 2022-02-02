@@ -33,6 +33,6 @@ public class WorldGenAncientAltar extends WorldGenStructureBase {
 
     @Override
     protected int[] getYGenBounds(World world) {
-        return new int[]{74, 255};
+        return new int[]{66, 255};
     }
 }

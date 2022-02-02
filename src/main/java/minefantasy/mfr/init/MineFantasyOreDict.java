@@ -101,7 +101,7 @@ public class MineFantasyOreDict {
 
 	public static void registerOreDictCommonIngotEntry(){
 		for (String oreString : OreDictionary.getOreNames()) {
-			if (oreString.startsWith("ingot")){
+			if (oreString.startsWith("ingot") && !oreString.contains("Brick")){
 				for (ItemStack ingot : OreDictionary.getOres(oreString)){
 					OreDictionary.registerOre("listAllIngots", ingot);
 				}

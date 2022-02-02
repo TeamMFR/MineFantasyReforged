@@ -7,20 +7,25 @@
   "anvil_tier": 2,
   "recipe_time": 60,
   "recipe_hammer": 2,
-  "output_hot": false,
+  "output_hot": true,
   "pattern": [
-    " B    ",
-    "BDB   ",
-    " B    ",
+    " G    ",
+    "SLS   ",
+    " G    ",
     "      "
   ],
   "key": {
-    "B": {
+    "G": {
       "nbt": "{mf_custom_materials:{main_material:\"gold\"}}",
       "item": "minefantasyreforged:bar"
     },
-    "D": {
-      "item": "minecraft:dye"
+    "S": {
+      "nbt": "{mf_custom_materials:{main_material:\"silver\"}}",
+      "item": "minefantasyreforged:bar"
+    },
+    "L": {
+      "item": "minecraft:dye",
+      "data" : 4
     }
   },
   "result": {

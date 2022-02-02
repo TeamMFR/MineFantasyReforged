@@ -22,7 +22,8 @@ import javax.annotation.Nonnull;
 
 @SuppressWarnings("unused")
 public class RecipeTimberDynamic extends ShapedOreRecipe {
-	ItemStack inputItemStack;
+	private ItemStack inputItemStack;
+	private ItemStack belowInputItemStack;
 
 	public RecipeTimberDynamic(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
 		super(group, result, primer);
@@ -43,23 +44,18 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 						target = input.get(subX + subY * width);
 					}
 				}
-
 				if (!target.apply(matrix.getStackInRowAndColumn(x, y))) {
 					return false;
 				} else {
-					ItemStack ingredientInput = matrix.getStackInRowAndColumn(x, y);
-					ItemStack itemStackBelow = matrix.getStackInRowAndColumn(x, y + 1);
-					if (!ingredientInput.isEmpty()) {
-						inputItemStack = ingredientInput;
-						if (!itemStackBelow.isEmpty()) {
-							return itemStackBelow.isItemEqual(inputItemStack);
-						}
+					if (!matrix.getStackInRowAndColumn(x, y).isEmpty()) {
+						inputItemStack = matrix.getStackInRowAndColumn(x, y);
+						belowInputItemStack = matrix.getStackInRowAndColumn(x, y - 1);
 					}
 				}
 			}
 		}
 
-		return true;
+		return (!inputItemStack.isEmpty() && inputItemStack.isItemEqual(belowInputItemStack));
 	}
 
 	@Nonnull

@@ -11,6 +11,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +20,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockCakeMFR extends BasicBlockMF {
 	public static final PropertyInteger BITES = PropertyInteger.create("bites", 0, 8);
@@ -130,7 +133,7 @@ public class BlockCakeMFR extends BasicBlockMF {
 	 */
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos) {
-		return !super.canPlaceBlockAt(world, pos) ? false : this.canBlockStay(world, pos);
+		return super.canPlaceBlockAt(world, pos) && this.canBlockStay(world, pos);
 	}
 
 	/**
@@ -157,9 +160,12 @@ public class BlockCakeMFR extends BasicBlockMF {
 		return world.getBlockState(pos.add(0, -1, 0)).getMaterial().isSolid();
 	}
 
-	@Override
-	public int damageDropped(IBlockState state) {
-		return 0;
+	/**
+	 * Get the Item that this Block should drop when harvested.
+	 */
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+		return Items.AIR;
 	}
 
 	public int getRarity() {

@@ -3,6 +3,7 @@ package minefantasy.mfr.mechanics.knowledge;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.network.ArtefactPacket;
 import minefantasy.mfr.network.KnowledgePacket;
 import minefantasy.mfr.network.NetworkHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -171,14 +172,24 @@ public class ResearchLogic {
 	public static void addArtefactUsed(EntityPlayer user, InformationBase base, ItemStack item) {
 		NBTTagCompound nbt = getNBT(user);
 		nbt.setBoolean(getKeyName(item, base), true);
+		if (!user.world.isRemote) {
+			NetworkHandler.sendToPlayer((EntityPlayerMP) user, new ArtefactPacket(user, getKeyName(item, base)));
+		}
+	}
+
+	public static void addArtefactUsed(EntityPlayer user, String artefactKey) {
+		NBTTagCompound nbt = getNBT(user);
+		nbt.setBoolean(artefactKey, true);
 	}
 
 	public static boolean alreadyUsedArtefact(EntityPlayer user, InformationBase base, ItemStack item) {
 		NBTTagCompound nbt = getNBT(user);
-		if (nbt.hasKey(getKeyName(item, base))) {
-			return true;
-		}
-		return false;
+		return nbt.hasKey(getKeyName(item, base));
+	}
+
+	public static boolean alreadyUsedArtefact(EntityPlayer user, String artefactKey) {
+		NBTTagCompound nbt = getNBT(user);
+		return nbt.hasKey(artefactKey);
 	}
 
 	private static String getKeyName(ItemStack item, InformationBase base) {

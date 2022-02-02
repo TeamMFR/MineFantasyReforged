@@ -70,13 +70,13 @@ public class MineFantasyHUD extends Gui {
 					renderScope(player.getHeldItemMainhand());
 				}
 				if (player.getRidingEntity() != null && player.getRidingEntity() instanceof EntityCogwork) {
-					renderPowerHelmet(player, (EntityCogwork) player.getRidingEntity());
+					renderPowerHelmet((EntityCogwork) player.getRidingEntity());
 				}
 			}
 		}
 	}
 
-	public void renderGameOverlay(float partialTicks, int mouseX, int mouseY) {
+	public void renderGameOverlay() {
 		if (mc.player != null) {
 			EntityPlayer player = mc.player;
 
@@ -85,18 +85,17 @@ public class MineFantasyHUD extends Gui {
 			} else {
 				renderAmmo(player);
 			}
-			if (StaminaBar.isSystemActive && !player.capabilities.isCreativeMode
-					&& !PowerArmour.isWearingCogwork(player)) {
+			if (StaminaBar.isSystemActive && mc.playerController.gameIsSurvivalOrAdventure() && !PowerArmour.isWearingCogwork(player)) {
 				renderStaminaBar(player);
 			}
-			Entity highlight = getClickedEntity(partialTicks, mouseX, mouseY);
+			Entity highlight = getClickedEntity();
 			if (highlight instanceof EntityCogwork) {
 				lookAtCogwork((EntityCogwork) highlight);
 			}
 
-			GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-			BlockPos coords = getClickedBlock(partialTicks, mouseX, mouseY);
+			BlockPos coords = getClickedBlock();
 			if (coords == null)
 				return;
 
@@ -104,44 +103,29 @@ public class MineFantasyHUD extends Gui {
 			TileEntity tile = world.getTileEntity(coords);
 			if (tile != null) {
 				if (tile instanceof TileEntityAnvil) {
-					this.renderCraftMetre(world, player, (TileEntityAnvil) tile);
+					this.renderCraftMetre(player, (TileEntityAnvil) tile);
 				}
 				if (tile instanceof TileEntityCarpenter) {
-					this.renderCraftMetre(world, player, (TileEntityCarpenter) tile);
+					this.renderCraftMetre(player, (TileEntityCarpenter) tile);
 				}
 				if (tile instanceof TileEntityTanningRack) {
-					this.renderCraftMetre(world, player, (TileEntityTanningRack) tile);
+					this.renderCraftMetre(player, (TileEntityTanningRack) tile);
 				}
 				if (tile instanceof IBasicMetre) {
-					this.renderCraftMetre(world, player, (IBasicMetre) tile);
+					this.renderCraftMetre((IBasicMetre) tile);
 				}
 				if (tile instanceof IQualityBalance) {
-					this.renderQualityBalance(world, player, (IQualityBalance) tile);
+					this.renderQualityBalance((IQualityBalance) tile);
 				}
 			}
 		}
-	}
-
-	protected void renderPowerHelmet() {
-		GL11.glPushMatrix();
-		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
-		int width = scaledresolution.getScaledWidth();
-		int height = scaledresolution.getScaledHeight();
-
-		bindTexture("textures/gui/scopes/cogwork_helm.png");
-		int x = (width / 2 - 256);
-		int y = height - 256;
-
-		this.drawTexturedModalRect(x, y, 0, 64, 128, 64);
-
-		GL11.glPopMatrix();
 	}
 
 	private void renderScope(ItemStack item) {
 		if (item.getItem() instanceof IFirearm) {
 			float factor = ((IScope) item.getItem()).getZoom(item);
 			if (factor > 0.1F) {
-				GL11.glPushMatrix();
+				GlStateManager.pushMatrix();
 				ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 				int width = scaledresolution.getScaledWidth();
 				int height = scaledresolution.getScaledHeight();
@@ -151,7 +135,7 @@ public class MineFantasyHUD extends Gui {
 				int yPos = height / 2 - 128;
 				this.drawTexturedModalRect(xPos, yPos, 0, 0, 256, 256);
 				isScoped = true;
-				GL11.glPopMatrix();
+				GlStateManager.popMatrix();
 			}
 			else {
 				isScoped = false;
@@ -160,22 +144,22 @@ public class MineFantasyHUD extends Gui {
 	}
 
 	private void lookAtCogwork(EntityCogwork suit) {
-		GL11.glPushMatrix();
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		GlStateManager.pushMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
 
 		renderCogworkFuel(width, height, suit);
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
-	private void renderPowerHelmet(EntityPlayer user, EntityCogwork suit) {
-		GL11.glPushMatrix();
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+	private void renderPowerHelmet(EntityCogwork suit) {
+		GlStateManager.pushMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
@@ -183,11 +167,10 @@ public class MineFantasyHUD extends Gui {
 		renderHelmetBlur(width, height);
 		renderCogworkFuel(width, height, suit);
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
 	private void renderCogworkFuel(int width, int height, EntityCogwork suit) {
-		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 
 		bindTexture("textures/gui/hud_overlay.png");
 		int[] orientationAR = getOrientsFor(width, height, ConfigClient.CF_xOrient, ConfigClient.CF_yOrient);
@@ -220,14 +203,14 @@ public class MineFantasyHUD extends Gui {
 		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
-	public BlockPos getClickedBlock(float ticks, int mouseX, int mouseY) {
+	public BlockPos getClickedBlock() {
 		if (mc.objectMouseOver != null && mc.objectMouseOver.typeOfHit == RayTraceResult.Type.BLOCK) {
 			return new BlockPos(mc.objectMouseOver.getBlockPos());
 		}
 		return null;
 	}
 
-	public Entity getClickedEntity(float ticks, int mouseX, int mouseY) {
+	public Entity getClickedEntity() {
 		if (mc.objectMouseOver != null
 				&& mc.objectMouseOver.typeOfHit == RayTraceResult.Type.ENTITY) {
 			return mc.objectMouseOver.entityHit;
@@ -248,12 +231,12 @@ public class MineFantasyHUD extends Gui {
 		if (ArmourCalculator.advancedDamageTypes) {
 			mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.protection"), xPosAR,
 					yPosAR, Color.WHITE.getRGB());
-			displayTraitValue(xPosAR, yPosAR + 8, orientationAR, 0, player, base);
-			displayTraitValue(xPosAR, yPosAR + 16, orientationAR, 2, player, base);
-			displayTraitValue(xPosAR, yPosAR + 24, orientationAR, 1, player, base);
+			displayTraitValue(xPosAR, yPosAR + 8, 0, player, base);
+			displayTraitValue(xPosAR, yPosAR + 16, 2, player, base);
+			displayTraitValue(xPosAR, yPosAR + 24, 1, player, base);
 			y = 32;
 		} else {
-			displayGeneralAR(xPosAR, yPosAR, orientationAR, player, base);
+			displayGeneralAR(xPosAR, yPosAR, player, base);
 		}
 
 		float weight = getBaseWeight(player);
@@ -287,8 +270,6 @@ public class MineFantasyHUD extends Gui {
 		int height = scaledresolution.getScaledHeight();
 
 		int[] orientationAR = getOrientsFor(width, height, ConfigClient.AR_xOrient, ConfigClient.AR_yOrient);
-		int xPosAR = orientationAR[0] + ConfigClient.AR_xPos;
-		int yPosAR = orientationAR[1] + ConfigClient.AR_yPos;
 
 		ItemStack held = player.getHeldItemMainhand();
 		if (!held.isEmpty() && (held.getItem() instanceof IDisplayMFRAmmo)) {
@@ -298,7 +279,6 @@ public class MineFantasyHUD extends Gui {
 			if (!arrow.isEmpty()) {
 				text = arrow.getDisplayName() + " x" + arrow.getCount();
 			}
-			int[] orientationAC = getOrientsFor(width, height, ConfigClient.AC_xOrient, ConfigClient.AC_yOrient);
 			int xPosAC = orientationAR[0] + ConfigClient.AC_xPos;
 			int yPosAC = orientationAR[1] + ConfigClient.AC_yPos;
 
@@ -315,13 +295,13 @@ public class MineFantasyHUD extends Gui {
 		}
 	}
 
-	private void displayTraitValue(int xPosAR, int yPosAR, int[] orientationAR, int id, EntityPlayer player, int base) {
+	private void displayTraitValue(int xPosAR, int yPosAR, int id, EntityPlayer player, int base) {
 		float AR = (int) (ArmourCalculator.getDRDisplay(player, id) * 100F) + base;
 		mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.rating." + id) + " "
 				+ ItemWeaponMFR.decimal_format.format(AR), xPosAR, yPosAR, Color.WHITE.getRGB());
 	}
 
-	private void displayGeneralAR(int xPosAR, int yPosAR, int[] orientationAR, EntityPlayer player, int base) {
+	private void displayGeneralAR(int xPosAR, int yPosAR, EntityPlayer player, int base) {
 		float AR = ((int) (ArmourCalculator.getDRDisplay(player, 0) * 100F) + base);
 
 		mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.protection") + ": "
@@ -329,8 +309,8 @@ public class MineFantasyHUD extends Gui {
 	}
 
 	private void renderStaminaBar(EntityPlayer player) {
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+		GlStateManager.enableBlend();
+		GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
 		float staminaMax = StaminaBar.getTotalMaxStamina(player);
 		float staminaAt = StaminaBar.getStaminaValue(player);
@@ -342,7 +322,7 @@ public class MineFantasyHUD extends Gui {
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 		bindTexture("textures/gui/hud_overlay.png");
 
 		int[] orientation = getOrientsFor(width, height, ConfigClient.stam_xOrient, ConfigClient.stam_yOrient);
@@ -356,20 +336,15 @@ public class MineFantasyHUD extends Gui {
 		if (flash > 0 && player.ticksExisted % 10 < 5) {
 			this.drawTexturedModalRect(xPos, yPos, 0, 10, 81, 5);
 		}
-		/*
-		 * else if(StaminaBar.getBonusStaminaRegenTicks(player) > 0 &&
-		 * player.ticksExisted % 10 < 5) { this.drawTexturedModalRect(xPos, yPos, 0, 15,
-		 * 81, 5); }
-		 */
 
 		String stamTxt = (int) staminaAt + " / " + (int) staminaMax;
 		boolean bonus = StaminaBar.getBonusStamina(player) > 0;
 
 		if (mc.currentScreen instanceof GuiInventory) {
-			mc.fontRenderer.drawStringWithShadow(stamTxt, xPos + 41 - (mc.fontRenderer.getStringWidth(stamTxt) / 2),
+			mc.fontRenderer.drawStringWithShadow(stamTxt, xPos + 41 - (mc.fontRenderer.getStringWidth(stamTxt) / 2F),
 					yPos - 2, bonus ? Color.CYAN.getRGB() : Color.WHITE.getRGB());
 		}
-		GL11.glDisable(GL11.GL_BLEND);
+		GlStateManager.disableBlend();
 	}
 
 	private int modifyMetre(int i, int max, int cfg) {
@@ -394,19 +369,19 @@ public class MineFantasyHUD extends Gui {
 		mc.renderEngine.bindTexture(TextureHelperMFR.getResource(image));
 	}
 
-	private void renderCraftMetre(World world, EntityPlayer player, TileEntityAnvil tile) {
+	private void renderCraftMetre(EntityPlayer player, TileEntityAnvil tile) {
 		if (player.openContainer instanceof ContainerAnvil) {
 			return;
 		}
 
 		boolean knowsCraft = tile.doesPlayerKnowCraft(player);
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
 
 		bindTexture("textures/gui/hud_overlay.png");
-		int xPos = width / 2 + -86;
+		int xPos = width / 2 - 86;
 		int yPos = height - 69;
 
 		this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
@@ -414,7 +389,7 @@ public class MineFantasyHUD extends Gui {
 
 		String s = knowsCraft ? tile.getResultName() : "????";
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
 		if (knowsCraft && tile.getRequiredToolType() != null) {
 
@@ -426,22 +401,22 @@ public class MineFantasyHUD extends Gui {
 			}
 		}
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
-	private void renderCraftMetre(World world, EntityPlayer player, TileEntityCarpenter tile) {
+	private void renderCraftMetre(EntityPlayer player, TileEntityCarpenter tile) {
 		if (player.openContainer instanceof ContainerCarpenter) {
 			return;
 		}
 
 		boolean knowsCraft = tile.doesPlayerKnowCraft(player);
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
 
 		bindTexture("textures/gui/hud_overlay.png");
-		int xPos = width / 2 + -86;
+		int xPos = width / 2 - 86;
 		int yPos = height - 69;
 
 		this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
@@ -449,25 +424,25 @@ public class MineFantasyHUD extends Gui {
 
 		String s = knowsCraft ? tile.getResultName() : "????";
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
 		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
 			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
 			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
 		}
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
-	private void renderCraftMetre(World world, EntityPlayer player, TileEntityTanningRack tile) {
+	private void renderCraftMetre(EntityPlayer player, TileEntityTanningRack tile) {
 		boolean knowsCraft = tile.doesPlayerKnowCraft();
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
 
 		bindTexture("textures/gui/hud_overlay.png");
-		int xPos = width / 2 + -86;
+		int xPos = width / 2 - 86;
 		int yPos = height - 69;
 
 		this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
@@ -479,27 +454,27 @@ public class MineFantasyHUD extends Gui {
 			s += " x" + result.getCount();
 		}
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
 		if (knowsCraft && tile.requiredToolType != null) {
 			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.requiredToolType, -1);
 			GuiHelper.renderToolIcon(this, tile.requiredToolType.getName(), tile.tier, xPos - 20, yPos, available);
 		}
 
-		GL11.glPopMatrix();
+		GlStateManager.popMatrix();
 	}
 
-	private void renderCraftMetre(World world, EntityPlayer player, IBasicMetre tile) {
+	private void renderCraftMetre(IBasicMetre tile) {
 		if (!tile.shouldShowMetre()) {
 			return;
 		}
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
 
 		bindTexture("textures/gui/hud_overlay.png");
-		int xPos = width / 2 + -86;
+		int xPos = width / 2 - 86;
 		int yPos = height - 69;
 
 		this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
@@ -507,21 +482,21 @@ public class MineFantasyHUD extends Gui {
 
 		String s = tile.getLocalisedName();
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		GL11.glPopMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		GlStateManager.popMatrix();
 	}
 
-	private void renderQualityBalance(World world, EntityPlayer player, IQualityBalance tile) {
+	public void renderQualityBalance(IQualityBalance tile) {
 		if (!tile.shouldShowMetre()) {
 			return;
 		}
-		GL11.glPushMatrix();
+		GlStateManager.pushMatrix();
 		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
 		int width = scaledresolution.getScaledWidth();
 		int height = scaledresolution.getScaledHeight();
 
 		bindTexture("textures/gui/hud_overlay.png");
-		int xPos = width / 2 + -86;
+		int xPos = width / 2 - 86;
 		int yPos = height - 69 + 17;
 		int barwidth = 160;
 		int centre = xPos + 5 + (barwidth / 2);
@@ -538,7 +513,7 @@ public class MineFantasyHUD extends Gui {
 		this.drawTexturedModalRect(centre - offset2, yPos + 1, 91, 33, 1, 4);
 		this.drawTexturedModalRect(centre + offset2, yPos + 1, 91, 33, 1, 4);
 
-		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		GL11.glPopMatrix();
+		GlStateManager.color(1.0F, 1.0F, 1.0F);
+		GlStateManager.popMatrix();
 	}
 }

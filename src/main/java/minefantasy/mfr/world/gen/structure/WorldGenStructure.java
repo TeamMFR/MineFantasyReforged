@@ -14,26 +14,6 @@ public class WorldGenStructure implements IWorldGenerator {
 	private static int STRONGHOLD_COUNT;
 	private static int CHUNK_COUNT;
 
-	@Override
-	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-		++CHUNK_COUNT;
-		if (world.provider.getDimension() == 0) {
-
-			if (random.nextFloat() < ConfigWorldGen.MAChance) {
-				generateAncientAlter(random, chunkX, chunkZ, world);
-			}
-			if (random.nextFloat() < ConfigWorldGen.MFChance) {
-				generateAncientForge(random, chunkX, chunkZ, world);
-			}
-			if (confineToGrid(chunkX, chunkZ, ConfigWorldGen.DSGrid)) {
-				if (random.nextFloat() < ConfigWorldGen.DSChance) {
-					generateDwarvenStronghold(random, chunkX, chunkZ, world);
-				}
-
-			}
-		}
-	}
-
 	private static boolean confineToGrid(int chunkX, int chunkZ, int chunkSize) {
 		return chunkX % chunkSize == 0 && chunkZ % chunkSize == 0;
 	}
@@ -77,18 +57,36 @@ public class WorldGenStructure implements IWorldGenerator {
 	}
 
 	private static void generateAncientAlter(Random seed, int chunkX, int chunkZ, World world) {
-		int spawnZ = world.getSpawnPoint().getZ();
-		int spawnChunkZ = (int) (spawnZ / 16F);
+		int x = (16 * chunkX);
+		int z = (16 * chunkZ);
 
-		if (chunkZ == spawnChunkZ) {
-			int x = (16 * chunkX);
-			int z = (16 * chunkZ);
+		WorldGenAncientAltar altar = new WorldGenAncientAltar();
+		for (int x1 = 0; x1 < 16; x1++) {
+			if (altar.generate(world, seed, new BlockPos(x + x1, 0, z))) {
+				return;
+			}
+		}
+	}
 
-			WorldGenAncientAltar altar = new WorldGenAncientAltar();
-			for (int x1 = 0; x1 < 16; x1++) { {
-					if (altar.generate(world, seed, new BlockPos(x + x1, 0, z))) {
-						return;
-					}
+	@Override
+	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
+		++CHUNK_COUNT;
+		if (world.provider.getDimension() == 0) {
+			if (confineToGrid(chunkX, chunkZ, ConfigWorldGen.ancientAltarGrid)) {
+				if (random.nextFloat() < ConfigWorldGen.ancientAltarSpawnChance) {
+					generateAncientAlter(random, chunkX, chunkZ, world);
+				}
+			}
+
+			if (confineToGrid(chunkX, chunkZ, ConfigWorldGen.ancientForgeGrid)) {
+				if (random.nextFloat() < ConfigWorldGen.ancientForgeSpawnChance) {
+					generateAncientForge(random, chunkX, chunkZ, world);
+				}
+			}
+
+			if (confineToGrid(chunkX, chunkZ, ConfigWorldGen.dwarvenStrongholdGrid)) {
+				if (random.nextFloat() < ConfigWorldGen.dwarvenStrongholdSpawnChance) {
+					generateDwarvenStronghold(random, chunkX, chunkZ, world);
 				}
 			}
 		}

@@ -253,7 +253,7 @@ public final class MFREventHandler {
 							if (!saidArtefact) {
 								String knowledge = s.substring(9).toLowerCase();
 
-								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge)) {
+								if (!ResearchLogic.hasInfoUnlocked(event.getEntityPlayer(), knowledge) && !ResearchLogic.alreadyUsedArtefact(event.getEntityPlayer(), ResearchLogic.getResearch(knowledge), event.getItemStack())) {
 									saidArtefact = true;
 									event.getToolTip().add(TextFormatting.AQUA + I18n.format("info.hasKnowledge"));
 								}
@@ -561,9 +561,8 @@ public final class MFREventHandler {
 		if (block != Blocks.FARMLAND
 				&& FarmingHelper.didHoeFail(event.getCurrent(), event.getWorld(), block == Blocks.GRASS)) {
 			EntityPlayer player = event.getEntityPlayer();
-			player.swingArm(player.isHandActive() ? player.getActiveHand() : (player.getHeldItem(EnumHand.MAIN_HAND) == event.getCurrent() ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND));
-			event.getWorld().playSound(player, event.getPos(), SoundEvents.ITEM_HOE_TILL,
-					SoundCategory.AMBIENT, 12, 1F);
+			player.swingArm(player.isHandActive() ? player.getActiveHand() : (player.getHeldItemMainhand() == event.getCurrent() ? EnumHand.MAIN_HAND : EnumHand.OFF_HAND));
+			event.getWorld().playSound(player, event.getPos(), SoundEvents.ITEM_HOE_TILL, SoundCategory.AMBIENT, 12, 1F);
 			event.setCanceled(true);
 		}
 	}

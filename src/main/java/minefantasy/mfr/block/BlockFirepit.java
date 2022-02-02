@@ -36,9 +36,8 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	private static final PropertyBool BURNING = PropertyBool.create("burning");
 	private static final PropertyBool PLANKS = PropertyBool.create("planks");
 	private static final PropertyBool UNDER = PropertyBool.create("under");
-
-	private Random rand = new Random();
 	AxisAlignedBB AABB = new AxisAlignedBB(0.2F, 0F, 0.2F, 0.8F, 0.5F, 0.8F);
+	private Random rand = new Random();
 
 	public BlockFirepit() {
 		super(Material.WOOD);
@@ -49,6 +48,10 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 		this.setLightOpacity(0);
 		setHardness(2F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
+	}
+
+	public static void setActiveState(boolean burning, boolean planks, boolean under, World world, BlockPos pos) {
+		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, burning).withProperty(PLANKS, planks).withProperty(UNDER, under), 2);
 	}
 
 	@Nonnull
@@ -69,12 +72,27 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state) {
-		return 0;
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(BURNING, (meta & 1) > 0).withProperty(PLANKS, (meta & 4) > 0).withProperty(UNDER, (meta & 8) > 0);
 	}
 
-	public static void setActiveState(boolean burning, boolean planks, boolean under, World world, BlockPos pos) {
-		world.setBlockState(pos, world.getBlockState(pos).withProperty(BURNING, burning).withProperty(PLANKS, planks).withProperty(UNDER, under));
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		int i = 0;
+
+		if (state.getValue(BURNING)) {
+			i |= 1;
+		}
+
+		if (state.getValue(PLANKS)) {
+			i |= 4;
+		}
+
+		if (state.getValue(UNDER)) {
+			i |= 8;
+		}
+
+		return i;
 	}
 
 	@Nonnull
@@ -87,7 +105,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		TileEntityFirepit tile = (TileEntityFirepit) getTile(world, pos);
 		if (tile != null) {
-			setActiveState(tile.isBurning(), tile.fuel > 0, tile.hasBlockAbove(), world, pos);
+			setActiveState(false, false, tile.hasBlockAbove(), world, pos);
 		}
 	}
 
@@ -171,10 +189,6 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 		return super.onBlockActivated(world, pos, state, player, hand, facing, hitX, hitY, hitZ);
 	}
 
-	public boolean getBurningValue(IBlockState state) {
-		return state.getValue(BURNING);
-	}
-
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;
@@ -205,9 +219,14 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	}
 
 	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return state.getValue(BURNING) ? 15 : 0;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(IBlockState state, World world, BlockPos pos, Random random) {
-		if (!state.getValue(BURNING)){
+		if (world.getTileEntity(pos) instanceof TileEntityFirepit && !(((TileEntityFirepit) world.getTileEntity(pos)).isLit())) {
 			return;
 		}
 		if (rand.nextInt(10) == 0) {

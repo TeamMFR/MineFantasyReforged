@@ -3,19 +3,20 @@ package minefantasy.mfr.api.farming;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class CustomHoeEntry {
-	public static HashMap<Integer, CustomHoeEntry> entries = new HashMap<>();
-	public int itemID;
+	public static HashMap<ResourceLocation, CustomHoeEntry> entries = new HashMap<>();
+	public ResourceLocation item;
 	/**
 	 * The Efficiency(same variable as dig speed)
 	 */
 	public float efficiency;
 
-	private CustomHoeEntry(int id, float efficiency) {
-		this.itemID = id;
+	private CustomHoeEntry(ResourceLocation itemResourceLocation, float efficiency) {
+		this.item = itemResourceLocation;
 		this.efficiency = efficiency;
 	}
 
@@ -29,10 +30,9 @@ public class CustomHoeEntry {
 	 */
 
 	public static void registerItem(Item piece, float efficiency) {
-		int id = Item.getIdFromItem(piece);
 
 		MineFantasyReforgedAPI.debugMsg("Added Custom hoe: " + piece.getUnlocalizedName() + " Efficiency = " + efficiency);
-		entries.put(id, new CustomHoeEntry(id, efficiency));
+		entries.put(piece.getRegistryName(), new CustomHoeEntry(piece.getRegistryName(), efficiency));
 	}
 
 	/**
@@ -64,9 +64,8 @@ public class CustomHoeEntry {
 	 */
 	public static CustomHoeEntry getEntry(Item piece) {
 		if (piece != null) {
-			int id = Item.getIdFromItem(piece);
-			if (entries.containsKey(id)) {
-				return entries.get(id);
+			if (entries.containsKey(piece.getRegistryName())) {
+				return entries.get(piece.getRegistryName());
 			}
 		}
 		return null;

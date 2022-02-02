@@ -132,7 +132,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		maxFuel = getTier() == 1 ? 12000 : 6000;
 	}
 
-	private boolean isOutside() {
+	public boolean isOutside() {
 		for (int x = -1; x <= 1; x++) {
 			for (int y = -1; y <= 1; y++) {
 				if (!world.canBlockSeeSky(pos.add(x, 1, y))) {

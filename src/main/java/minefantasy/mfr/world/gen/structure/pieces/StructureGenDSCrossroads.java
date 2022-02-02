@@ -70,8 +70,8 @@ public class StructureGenDSCrossroads extends StructureModuleMFR {
     @Override
     public void generate() {
         if (lengthId == -100) {
-            this.lengthId = ConfigWorldGen.DSLength;
-            this.deviationCount = ConfigWorldGen.DSDeviations;
+            this.lengthId = ConfigWorldGen.dwarvenStrongholdLength;
+            this.deviationCount = ConfigWorldGen.dwarvenStrongholdDeviations;
         }
 
         int width_span = getWidthSpan();

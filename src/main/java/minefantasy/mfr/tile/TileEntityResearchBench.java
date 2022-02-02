@@ -88,6 +88,13 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 
 				return true;
 			}
+			if (result == -2) {
+				if (!user.world.isRemote){
+					user.sendMessage(new TextComponentTranslation("research.noresearch"));
+				}
+
+				return true;
+			}
 			maxProgress = getMaxTime();
 			if (maxProgress > 0) {
 				addProgress(user);
@@ -148,8 +155,10 @@ public class TileEntityResearchBench extends TileEntityBase implements IBasicMet
 			if (base != null && !ResearchLogic.alreadyUsedArtefact(user, base, getInventory().getStackInSlot(0))) {
 				if (ResearchLogic.canPurchase(user, base) && base.hasSkillsUnlocked(user)) {
 					return 1;
-				} else if (!ResearchLogic.hasInfoUnlocked(user, base)) {
+				} else if (!ResearchLogic.hasInfoUnlocked(user, base) && !base.hasSkillsUnlocked(user)) {
 					result = -1;
+				} else if (!ResearchLogic.hasInfoUnlocked(user, base) && base.hasSkillsUnlocked(user)) {
+					result = -2;
 				}
 			}
 		}

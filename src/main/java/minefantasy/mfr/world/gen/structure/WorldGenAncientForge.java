@@ -57,6 +57,6 @@ public class WorldGenAncientForge extends WorldGenStructureBase {
 
     @Override
     protected int[] getYGenBounds(World world) {
-        return new int[]{64, 255};
+        return new int[]{67, 255};
     }
 }

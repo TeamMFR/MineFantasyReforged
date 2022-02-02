@@ -4,7 +4,6 @@ import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.util.EntityUtils;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumFacing;
@@ -43,9 +42,9 @@ public class BlockMythicOre extends BlockOreMF {
 							(float) (pos.getZ() + 0.5 - player.posZ));
 
 					player.sendStatusMessage(new TextComponentTranslation("message.mythic_ore_sound",
-							(direction.ordinal() == 0 ? I18n.format("message.below") :
-									direction.ordinal() == 1 ? I18n.format("message.above") :
-											I18n.format("message.definite_article") + " " + direction.name())), true);
+							(direction.ordinal() == 0 ? new TextComponentTranslation("message.below").getUnformattedText() :
+									direction.ordinal() == 1 ? new TextComponentTranslation("message.above").getUnformattedText() :
+											new TextComponentTranslation("message.definite_article").getUnformattedText() + " " + direction.name())), true);
 				}
 		}
 		world.playSound(null, pos, (isPure ? MineFantasySounds.MYTHIC_ORE : SoundEvents.ENTITY_PLAYER_LEVELUP), SoundCategory.NEUTRAL, 0.25F, rand.nextFloat() * 0.4F + 1.1F);

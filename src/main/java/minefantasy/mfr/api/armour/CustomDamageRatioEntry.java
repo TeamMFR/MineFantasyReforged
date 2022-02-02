@@ -1,12 +1,13 @@
 package minefantasy.mfr.api.armour;
 
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class CustomDamageRatioEntry {
-	public static HashMap<Integer, CustomDamageRatioEntry> entries = new HashMap<>();
-	public static HashMap<String, CustomDamageRatioEntry> entriesProj = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomDamageRatioEntry> entries = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomDamageRatioEntry> entriesProj = new HashMap<>();
 
 	public float[] vars;
 
@@ -21,47 +22,47 @@ public class CustomDamageRatioEntry {
 	 * @param vars the damage type ratio cutting:blunt
 	 */
 	public static void registerItem(Item item, float[] vars) {
-		registerItem(Item.getIdFromItem(item), vars);
+		registerItem(item.getRegistryName(), vars);
 	}
 
 	/**
 	 * Register a weapon to give variables
 	 *
-	 * @param id   the item id
+	 * @param resourceLocation   the item resourceLocation
 	 * @param vars the damage type ratio cutting:blunt
 	 */
-	public static void registerItem(int id, float[] vars) {
-		entries.put(id, new CustomDamageRatioEntry(vars));
+	public static void registerItem(ResourceLocation resourceLocation, float[] vars) {
+		entries.put(resourceLocation, new CustomDamageRatioEntry(vars));
 	}
 
 	/**
 	 * Register an entity (like arrows) to give variables
 	 *
-	 * @param id   the entity id
+	 * @param resourceLocation   the entity resourceLocation
 	 * @param vars the damage type ratio cutting:blunt
 	 */
-	public static void registerEntity(String id, float[] vars) {
-		entriesProj.put(id, new CustomDamageRatioEntry(vars));
+	public static void registerEntity(ResourceLocation resourceLocation, float[] vars) {
+		entriesProj.put(resourceLocation, new CustomDamageRatioEntry(vars));
 	}
 
 	/**
 	 * Gets the ratio for an item, null if it's not found
 	 */
 	public static float[] getTraits(Item item) {
-		return getTraits(Item.getIdFromItem(item));
+		return getTraits(item.getRegistryName());
 	}
 
 	/**
 	 * Gets the ratio for an item, null if it's not found
 	 */
-	public static float[] getTraits(int id) {
-		return entries.get(id) != null ? entries.get(id).vars : null;
+	public static float[] getTraits(ResourceLocation resourceLocation) {
+		return entries.get(resourceLocation) != null ? entries.get(resourceLocation).vars : null;
 	}
 
 	/**
 	 * Gets the ratio for an entity, null if it's not found
 	 */
-	public static float[] getTraits(String id) {
-		return entriesProj.get(id) != null ? entriesProj.get(id).vars : new float[] {1, 1, 1};
+	public static float[] getEntityTraits(ResourceLocation resourceLocation) {
+		return entriesProj.get(resourceLocation) != null ? entriesProj.get(resourceLocation).vars : new float[] {1, 1, 1};
 	}
 }

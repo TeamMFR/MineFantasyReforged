@@ -48,7 +48,7 @@ public class StructureGenAncientForgeEntry extends StructureModuleMFR {
         placeBlock(world, Blocks.AIR, 0, 1, 1);
         placeBlock(world, Blocks.AIR, 0, 2, 1);
 
-        MineFantasyReforged.LOG.error("Placed Ancient Forge at: " + pos);
+        MineFantasyReforged.LOG.info("Placed Ancient Forge at: " + pos);
 
         StructureModuleMFR structure = new StructureGenAncientForge(world, offsetPos(0, -length, length + 1, facing), facing, random);
         structure.generate();

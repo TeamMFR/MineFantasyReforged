@@ -33,6 +33,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -275,7 +277,7 @@ public class ArmourCalculator {
 		}
 
 		if (useConfigIndirectDmg) {
-			return CustomDamageRatioEntry.getTraits(getEntityRegisterName(damager));
+			return CustomDamageRatioEntry.getEntityTraits(ForgeRegistries.ENTITIES.getKey(EntityRegistry.getEntry(damager.getClass())));
 		}
 		return new float[] {1, 1, 1};
 	}
@@ -296,6 +298,9 @@ public class ArmourCalculator {
 
 		if (item instanceof IDamageType) {
 			return user != null ? ((IDamageType) item).getDamageRatio(weapon, user) : ((IDamageType) item).getDamageRatio(weapon);
+		}
+		if (CustomDamageRatioEntry.getTraits(item) != null) {
+			return CustomDamageRatioEntry.getTraits(item);
 		}
 		if (item instanceof ItemSword) {
 			return new float[] {1, 0, 0};// sword is cutting by default

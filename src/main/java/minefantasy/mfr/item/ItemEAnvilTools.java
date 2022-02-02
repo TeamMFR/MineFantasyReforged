@@ -11,7 +11,7 @@ public class ItemEAnvilTools extends ItemBaseMFR {
 	public ItemEAnvilTools(String name, int uses) {
 		super(name);
 		setCreativeTab(MineFantasyTabs.tabCraftTool);
-
+		this.setContainerItem(this);
 		this.setMaxDamage(uses);
 		setMaxStackSize(1);
 	}

@@ -1,29 +1,44 @@
 package minefantasy.mfr.recipe;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.IRecipeFactory;
+import net.minecraftforge.common.crafting.JsonContext;
 
-import javax.annotation.Nullable;
+import javax.annotation.Nonnull;
 
-public class RecipeSyringe implements IRecipe {
+@SuppressWarnings("unused")
+public class RecipeSyringe extends ShapelessRecipes {
+	public RecipeSyringe(String group, NonNullList<Ingredient> ingredients, ItemStack result) {
+		super(group, result, ingredients);
+	}
+
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	public boolean matches(InventoryCrafting matrix, World world) {
-		ItemStack syringe = null;
-		ItemStack filler = null;
+	public boolean matches(InventoryCrafting matrix, @Nonnull World world) {
+		ItemStack syringe = ItemStack.EMPTY;
+		ItemStack filler = ItemStack.EMPTY;
 
 		for (int i = 0; i < matrix.getSizeInventory(); ++i) {
 			ItemStack itemstack1 = matrix.getStackInSlot(i);
 
-			if (itemstack1 != null) {
+			if (!itemstack1.isEmpty()) {
 				if (itemstack1.getItem() == MineFantasyItems.SYRINGE_EMPTY) {
 					syringe = itemstack1;
 				} else if (itemstack1.getItem() instanceof ItemPotion) {
@@ -38,63 +53,53 @@ public class RecipeSyringe implements IRecipe {
 			}
 		}
 
-		return syringe != null && filler != null;
+		return !syringe.isEmpty() && !filler.isEmpty();
 	}
 
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
+	@Nonnull
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting matrix) {
-		ItemStack syringe = null;
-		ItemStack filler = null;
+		ItemStack syringe = ItemStack.EMPTY;
+		ItemStack filler = ItemStack.EMPTY;
 
 		for (int i = 0; i < matrix.getSizeInventory(); ++i) {
 			ItemStack itemstack1 = matrix.getStackInSlot(i);
 
-			if (itemstack1 != null) {
+			if (!itemstack1.isEmpty()) {
 				if (itemstack1.getItem() == MineFantasyItems.SYRINGE_EMPTY) {
 					syringe = itemstack1;
 				} else if (itemstack1.getItem() instanceof ItemPotion) {
-					ItemPotion potion = (ItemPotion) itemstack1.getItem();
-
 					if (itemstack1.getItem() == Items.SPLASH_POTION) {
-						return null;
+						return ItemStack.EMPTY;
 					}
 
 					filler = itemstack1;
 				}
 			}
 		}
-		if (syringe != null && filler != null) {
-			return new ItemStack(MineFantasyItems.SYRINGE, 1, filler.getItemDamage());
+		if (!syringe.isEmpty() && !filler.isEmpty()) {
+			return PotionUtils.addPotionToItemStack(new ItemStack(MineFantasyItems.SYRINGE, 1), PotionUtils.getPotionFromItem(filler));
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
-	@Override
-	public boolean canFit(int width, int height) {
-		return width >= 5 && height >= 5;
-	}
+	public static class Factory implements IRecipeFactory {
+		@Override
+		public IRecipe parse(JsonContext context, JsonObject json) {
+			String group = JsonUtils.getString(json, "group", "");
 
-	@Override
-	public ItemStack getRecipeOutput() {
-		return null;
-	}
+			NonNullList<Ingredient> ingredients = NonNullList.create();
+			for (JsonElement ele : JsonUtils.getJsonArray(json, "ingredients"))
+				ingredients.add(CraftingHelper.getIngredient(ele, context));
 
-	@Override
-	public IRecipe setRegistryName(ResourceLocation name) {
-		return null;
-	}
+			if (ingredients.isEmpty())
+				throw new JsonParseException("No ingredients for shapeless recipe");
 
-	@Nullable
-	@Override
-	public ResourceLocation getRegistryName() {
-		return null;
-	}
-
-	@Override
-	public Class<IRecipe> getRegistryType() {
-		return null;
+			ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
+			return new RecipeSyringe(group, ingredients, result);
+		}
 	}
 }

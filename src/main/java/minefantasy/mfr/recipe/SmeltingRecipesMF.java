@@ -108,7 +108,7 @@ public class SmeltingRecipesMF {
 		MineFantasyKnowledgeList.adamantium = MineFantasyReforgedAPI.addRatioAlloy(2, MineFantasyItems.bar("adamantium", 2), 2,
 				new Object[] {MineFantasyBlocks.MYTHIC_ORE, gold, gold});
 
-		MineFantasyKnowledgeList.mithril = MineFantasyReforgedAPI.addRatioAlloy(2, MineFantasyItems.bar("mithril", 2),
+		MineFantasyKnowledgeList.mithril = MineFantasyReforgedAPI.addRatioAlloy(2, MineFantasyItems.bar("mithril", 2), 2,
 				new Object[] {MineFantasyBlocks.MYTHIC_ORE, silver, silver});
 
 		MineFantasyKnowledgeList.ignotumite = MineFantasyReforgedAPI.addRatioAlloy(2, ignotumite, 3,

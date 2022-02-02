@@ -14,7 +14,7 @@ public class ArmourDesign {
 	// Reg Name Prot Dura Weight Bulk Ctg Bnt Png
 	public static final ArmourDesign CLOTH = new ArmourDesign("clothing", "Clothing", 1.0F, 1.0F, 0F, 0.25F)
 			.calibrateTraits(0.5F, 1.0F, 0.5F).setWeightGroup(light);// Weak
-	public static final ArmourDesign SOLID = new ArmourDesign("default", "Basic", 1.0F, 1.0F, 40F, 1.00F)
+	public static final ArmourDesign SOLID = new ArmourDesign("solid", "Basic", 1.0F, 1.0F, 40F, 1.00F)
 			.setWeightGroup(medium);// Basic Armour
 	public static final ArmourDesign MAIL = new ArmourDesign("mail", "Mail", 1.0F, 1.0F, 35F, 0.75F)
 			.calibrateTraits(1.0F, 0.7F, 0.9F).setWeightGroup(medium);// Vulnerable to blunt

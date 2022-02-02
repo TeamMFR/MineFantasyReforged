@@ -11,7 +11,6 @@ import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -27,11 +26,6 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 	public ItemPaintBrush(String name, int uses) {
 		super(name, Tool.BRUSH, 0, uses);
 		setCreativeTab(MineFantasyTabs.tabCraftTool);
-
-		// setTextureName("minefantasy2:Tool/Crafting/"+name);
-		// this.setUnlocalizedName(name);
-		// this.setMaxDamage(uses);
-		// setMaxStackSize(1);
 		this.setFull3D();
 	}
 
@@ -67,19 +61,20 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 			newBlock = Block.getBlockFromItem(output.getItem());
 		}
 		if (newBlock != null) {
+			if (!user.capabilities.isCreativeMode) {
+				user.inventory.decrStackSize(user.inventory.getSlotFor(new ItemStack(MineFantasyItems.JUG_PLANT_OIL)), 1);
+				ItemStack jug = new ItemStack(MineFantasyItems.JUG_EMPTY);
 
-			user.inventory.removeStackFromSlot(EntityEquipmentSlot.MAINHAND.getIndex());
-			ItemStack jug = new ItemStack(MineFantasyItems.JUG_EMPTY);
+				if (!user.inventory.addItemStackToInventory(jug) && !world.isRemote) {
+					user.entityDropItem(jug, 0F);
+				}
 
-			if (!user.inventory.addItemStackToInventory(jug) && !world.isRemote) {
-				user.entityDropItem(jug, 0F);
+				Skill.CONSTRUCTION.addXP(user, 1);
+				item.damageItem(1, user);
 			}
-			if (world.isRemote)
-				return true;
-
-			Skill.CONSTRUCTION.addXP(user, 1);
-			item.damageItem(1, user);
+			world.destroyBlock(pos, false);
 			world.setBlockState(pos, newBlock.getDefaultState());
+			return true;
 		}
 		return false;
 	}
@@ -90,23 +85,21 @@ public class ItemPaintBrush extends ItemBasicCraftTool implements IRackItem {
 	}
 
 	@Override
-	public float getOffsetX(ItemStack itemstack) {
-		return 0;
-	}
+	public float getOffsetX(ItemStack itemstack) {return 1.18F;}
 
 	@Override
 	public float getOffsetY(ItemStack itemstack) {
-		return 9F / 16F;
+		return -0.65F;
 	}
 
 	@Override
 	public float getOffsetZ(ItemStack itemstack) {
-		return 1F / 8F;
+		return 1.10F;
 	}
 
 	@Override
 	public float getRotationOffset(ItemStack itemstack) {
-		return 90;
+		return -90F;
 	}
 
 	@Override

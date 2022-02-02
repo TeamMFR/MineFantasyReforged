@@ -113,7 +113,7 @@ public class StructureGenDSEntry extends StructureModuleMFR {
             mapStructure(width_span, 0, 2, facing.rotateYCCW(), StructureGenDSSurfaceAppendage.class);
         }
 
-        MineFantasyReforged.LOG.error("Placed Dwarven Stronghold at: " + pos);
+        MineFantasyReforged.LOG.info("Placed Dwarven Stronghold at: " + pos);
     }
 
     private void placeDoorway(int mod, int height) {

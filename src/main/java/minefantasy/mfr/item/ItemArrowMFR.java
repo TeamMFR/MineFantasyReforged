@@ -12,7 +12,6 @@ import minefantasy.mfr.mechanics.MFArrowDispenser;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
-import minefantasy.mfr.util.Utils;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -195,11 +194,8 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 	@Override
 	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
-		String material = "";
-		if (isCustom && CustomToolHelper.getCustomPrimaryMaterial(item) != CustomMaterial.NONE) {
-			material = I18n.format(Utils.convertSnakeCaseToSplitCapitalized(CustomToolHelper.getCustomPrimaryMaterial(item).getName()));
-		}
-		return I18n.format("item." + this.getRegistryName().getResourcePath() + ".name", material);
+		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
+		return CustomToolHelper.getLocalisedName(item, unlocalName);
 	}
 
 	@Override

@@ -5,13 +5,14 @@ import minefantasy.mfr.util.ArmourCalculator;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class CustomArmourEntry {
-	public static HashMap<Integer, CustomArmourEntry> entries = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomArmourEntry> entries = new HashMap<>();
 	public boolean alterSpeed;
-	public int itemID;
+	public ResourceLocation item;
 	/**
 	 * The Weight of the piece(not suit)
 	 */
@@ -25,12 +26,12 @@ public class CustomArmourEntry {
 	 */
 	public String AC;
 
-	private CustomArmourEntry(int id, float weight, float bulk, boolean alterSpeed, String AC) {
+	private CustomArmourEntry(ResourceLocation item, float weight, float bulk, boolean alterSpeed, String armorClass) {
 		this.alterSpeed = alterSpeed;
-		this.itemID = id;
+		this.item = item;
 		this.weight = weight;
 		this.bulkiness = bulk;
-		this.AC = AC;
+		this.AC = armorClass;
 	}
 
 	/**
@@ -80,11 +81,9 @@ public class CustomArmourEntry {
 	 * @param alterSpeed if the armour's weight slows you down
 	 */
 	public static void registerItem(Item piece, float weight, float bulk, boolean alterSpeed, String AC) {
-		int id = Item.getIdFromItem(piece);
 
-		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getUnlocalizedName() + "(" + id
-				+ ") Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
-		entries.put(id, new CustomArmourEntry(id, weight, bulk, alterSpeed, AC));
+		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getUnlocalizedName() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
+		entries.put(piece.getRegistryName(), new CustomArmourEntry(piece.getRegistryName(), weight, bulk, alterSpeed, AC));
 	}
 
 	/**
@@ -145,9 +144,8 @@ public class CustomArmourEntry {
 	 */
 	public static CustomArmourEntry getEntry(Item piece) {
 		if (piece != null) {
-			int id = Item.getIdFromItem(piece);
-			if (entries.containsKey(id)) {
-				return entries.get(id);
+			if (entries.containsKey(piece.getRegistryName())) {
+				return entries.get(piece.getRegistryName());
 			}
 		}
 		return null;

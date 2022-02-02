@@ -1352,28 +1352,6 @@ public class MineFantasyItems {
 	}
 
 	public static void loadComponent() {
-//		INGOTS = new Item[] {
-//				COPPER_INGOT,
-//				TIN_INGOT,
-//				BRONZE_INGOT,
-//				PIG_IRON_INGOT,
-//				STEEL_INGOT,
-//				ENCRUSTED_INGOT,
-//				SILVER_INGOT,
-//				BLACK_STEEL_WEAK_INGOT,
-//				BLACK_STEEL_INGOT,
-//				RED_STEEL_WEAK_INGOT,
-//				RED_STEEL_INGOT,
-//				BLUE_STEEL_WEAK_INGOT,
-//				BLUE_STEEL_INGOT,
-//				ADAMANTIUM_INGOT,
-//				MITHRIL_INGOT,
-//				IGNOTUMITE_INGOT,
-//				MITHIUM_INGOT,
-//				ENDER_INGOT,
-//				TUNGSTEN_INGOT,
-//				OBSIDIAN_INGOT
-//		};
 
 		Items.POTIONITEM.setContainerItem(Items.GLASS_BOTTLE);
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
@@ -1417,7 +1395,7 @@ public class MineFantasyItems {
 		RandomOre.addOre(new ItemStack(Items.QUARTZ), 5F, Blocks.NETHERRACK, -1, 0, 512, false);
 		RandomOre.addOre(new ItemStack(Items.BLAZE_POWDER), 5F, Blocks.NETHERRACK, -1, 0, 512, false);
 		RandomOre.addOre(new ItemStack(Items.NETHER_WART), 1F, Blocks.NETHERRACK, -1, 0, 512, false);
-		RandomOre.addOre(new ItemStack(Items.NETHER_STAR), 0.01F, Blocks.NETHERRACK, -1, 0, 512, false);
+		RandomOre.addOre(new ItemStack(Items.SKULL, 1, 1), 0.01F, Blocks.NETHERRACK, -1, 0, 512, false);
 
 		RandomDigs.addOre(new ItemStack(Blocks.SKULL, 1, 1), 0.1F, Blocks.SOUL_SAND, 3, 0, 256, false);
 		RandomDigs.addOre(new ItemStack(Items.BONE), 5F, Blocks.DIRT, -1, 0, 256, false);

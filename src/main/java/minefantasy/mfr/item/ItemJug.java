@@ -96,7 +96,7 @@ public class ItemJug extends ItemComponentMFR {
 				}
 
 				if (isWaterSource(world, pos.up())) {
-					gather(stack, world, player);
+					gather(stack, world, player, hand);
 					return EnumActionResult.SUCCESS;
 				}
 			}
@@ -104,8 +104,8 @@ public class ItemJug extends ItemComponentMFR {
 		}
 	}
 
-	private void gather(ItemStack item, World world, EntityPlayer player) {
-		player.swingArm(player.swingingHand);
+	private void gather(ItemStack item, World world, EntityPlayer player, EnumHand hand) {
+		player.swingArm(hand);
 		if (!world.isRemote) {
 			world.playSound(player, player.getPosition(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
 			item.shrink(1);

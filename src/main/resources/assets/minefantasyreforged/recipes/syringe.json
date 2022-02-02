@@ -1,0 +1,14 @@
+{
+    "type": "minefantasyreforged:syringe_dynamic",
+    "ingredients": [
+        {
+            "item": "minefantasyreforged:syringe_empty"
+        },
+        {
+            "item": "minecraft:potion"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:syringe"
+    }
+}

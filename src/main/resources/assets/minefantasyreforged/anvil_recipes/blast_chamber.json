@@ -16,6 +16,7 @@
   ],
   "key": {
     "P": {
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
       "item": "minefantasyreforged:plate"
     },
     "R": {

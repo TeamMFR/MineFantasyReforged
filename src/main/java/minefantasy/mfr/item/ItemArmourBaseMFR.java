@@ -82,8 +82,11 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public int getArmorDisplay(EntityPlayer player, ItemStack armour, int slot) {
 		float max = armour.getMaxDamage();
 		float dam = max - armour.getItemDamage();
-
-		return Math.round(5F / max * dam);
+		float total = 0;
+		total += (ArmourCalculator.getDamageReductionForDisplayPiece(armour, 0) * 100F);
+		total += (ArmourCalculator.getDamageReductionForDisplayPiece(armour, 1) * 100F);
+		total += (ArmourCalculator.getDamageReductionForDisplayPiece(armour, 2) * 100F);
+		return Math.round((total / 50) / max * dam);
 	}
 
 	@Override

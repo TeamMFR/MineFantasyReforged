@@ -19,7 +19,6 @@ import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
@@ -111,11 +110,6 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> implements 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return AABBS.get(state.getValue(FACING));
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase user, ItemStack stack) {
-		world.setBlockState(pos, state);
 	}
 
 	@Override

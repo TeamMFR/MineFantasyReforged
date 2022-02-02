@@ -10,7 +10,6 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.Functions;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -116,27 +115,13 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	}
 
 	public boolean isLit() {
-		IBlockState state = world.getBlockState(pos);
-		BlockFirepit firepit = getActiveBlock();
-		return firepit.getBurningValue(state);
+		return isLit;
 	}
 
 	public void setLit(boolean lit) {
 		BlockFirepit.setActiveState(lit, fuel > 0, hasBlockAbove(), world, pos);
 		isLit = lit;
 		ticksExisted = 0;
-	}
-
-	public BlockFirepit getActiveBlock() {
-		if (world == null)
-			return null;
-
-		Block block = world.getBlockState(pos).getBlock();
-
-		if (block instanceof BlockFirepit) {
-			return (BlockFirepit) block;
-		}
-		return null;
 	}
 
 	private void tryLight() {
@@ -264,12 +249,14 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	public SPacketUpdateTileEntity getUpdatePacket() {
 		NBTTagCompound tag = new NBTTagCompound();
 		tag.setInteger("fuel", fuel);
+		tag.setBoolean("isLit", isLit);
 		return new SPacketUpdateTileEntity(pos, 0, tag);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
 		fuel = packet.getNbtCompound().getInteger("fuel");
+		isLit = packet.getNbtCompound().getBoolean("isLit");
 	}
 
 	@Override

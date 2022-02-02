@@ -46,18 +46,6 @@ public class ToolHelper {
 		return CustomCrafterEntry.getEntryTier(tool);
 	}
 
-	// QUALITY//
-
-	public static String getCrafterToolName(ItemStack tool) {
-		if (tool.isEmpty()) {
-			return Tool.HANDS.getName();
-		}
-		if (tool.getItem() instanceof IToolMFR) {
-			return ((IToolMFR) tool.getItem()).getToolType(tool).getName();
-		}
-		return CustomCrafterEntry.getEntryType(tool);
-	}
-
 	/**
 	 * Checks the specified ItemStack's Tool type. Returns OTHER if it has no valid tool nbt tag
 	 *
@@ -77,6 +65,11 @@ public class ToolHelper {
 		if (stack.getItem() instanceof IToolMFR) {
 			return ((IToolMFR) stack.getItem()).getToolType(stack);
 		}
+
+		if (CustomCrafterEntry.getEntry(stack) != null) {
+			return CustomCrafterEntry.getEntryType(stack);
+		}
+
 		return Tool.OTHER;
 	}
 

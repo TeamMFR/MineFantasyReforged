@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.crafting;
 
+import minefantasy.mfr.constants.Tool;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -35,12 +36,12 @@ public class CustomCrafterEntry {
 	/**
 	 * Gets the variables for the item if there are any: order is weight, bulk
 	 */
-	public static String getEntryType(ItemStack piece) {
+	public static Tool getEntryType(ItemStack piece) {
 		CustomCrafterEntry entry = getEntry(piece);
 		if (entry != null) {
-			return entry.type;
+			return Tool.fromName(entry.type);
 		}
-		return "nothing";
+		return Tool.OTHER;
 	}
 
 	public static float getEntryEfficiency(ItemStack piece) {

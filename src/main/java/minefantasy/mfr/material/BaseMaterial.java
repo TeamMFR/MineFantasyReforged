@@ -86,18 +86,18 @@ public class BaseMaterial {
 	}
 
 	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float sharpness, int enchantment, float weight, int lvl) {
-		float AC;
-		AC = ((sharpness + SWORD_DAMAGE) / armourVsSwordBalance) - 1.0F;
-		MFRLogUtil.logDebug("Added Ratio Armour Material " + name + " AR = " + AC);
-		float initAc = AC;
+		float armorClass;
+		armorClass = ((sharpness + SWORD_DAMAGE) / armourVsSwordBalance) - 1.0F;
+		MFRLogUtil.logDebug("Added Ratio Armour Material " + name + " AR = " + armorClass);
+		float initAc = armorClass;
 
-		AC = Math.round(AC * (100F / ACrounding));
-		AC = AC / (100F / ACrounding);
+		armorClass = Math.round(armorClass * (100F / ACrounding));
+		armorClass = armorClass / (100F / ACrounding);
 
-		if (initAc != AC) {
-			MFRLogUtil.logDebug("Auto-Calculated ArmourRating for tier: " + name + ", modified to " + AC);
+		if (initAc != armorClass) {
+			MFRLogUtil.logDebug("Auto-Calculated ArmourRating for tier: " + name + ", modified to " + armorClass);
 		}
-		return addMaterial(name, tier, durability, harvestLevel, AC, sharpness, enchantment, weight, lvl);
+		return addMaterial(name, tier, durability, harvestLevel, armorClass, sharpness, enchantment, weight, lvl);
 	}
 
 	public static BaseMaterial addMaterial(String name, int tier, int durability, int harvestLevel, float hardness, float sharpness, int enchantment, float weight, int lvl) {

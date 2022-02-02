@@ -21,7 +21,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -50,6 +49,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeHooks;
@@ -485,7 +485,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 							}
 							else {
 								if (user.world.isRemote){
-									user.sendMessage(new TextComponentString(I18n.format("vehicle.noBolts")));
+									user.sendMessage(new TextComponentTranslation("vehicle.noBolts"));
 								}
 							}
 
@@ -539,7 +539,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 				this.playSound(SoundEvents.BLOCK_PISTON_CONTRACT, 1.0F, 0.6F);
 			}
 			else if (getFuel() <= 0 && !user.world.isRemote && user.swingingHand == hand) {
-				user.sendMessage(new TextComponentString(I18n.format("vehicle.noFuel")));
+				user.sendMessage(new TextComponentTranslation("vehicle.noFuel"));
 				return false;
 			}
 			return true;
@@ -561,7 +561,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		if (allowedBulk >= 0) {
 			if (bulk > allowedBulk) {
 				if (user instanceof EntityPlayer && world.isRemote) {
-					user.sendMessage(new TextComponentString(I18n.format("vehicle.tooBigArmour")));
+					user.sendMessage(new TextComponentTranslation("vehicle.tooBigArmour"));
 				}
 				return false;
 			}
@@ -570,7 +570,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		Iterable<ItemStack> armour = user.getArmorInventoryList();
 		for (ItemStack stack : armour) {
 			if (user instanceof EntityPlayer && world.isRemote) {
-				user.sendMessage(new TextComponentString(I18n.format("vehicle.noArmour")));
+				user.sendMessage(new TextComponentTranslation("vehicle.noArmour"));
 			}
 			return false;
 		}
@@ -590,7 +590,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		else if (getFuel() <= 0 && getControllingPassenger() instanceof EntityPlayer
 				&& (((EntityPlayer) getControllingPassenger()).moveForward > 0 || ((EntityPlayer) getControllingPassenger()).moveStrafing > 0)
 				&& ticksExisted % 80 == 0) {
-			getControllingPassenger().sendMessage(new TextComponentString(I18n.format("vehicle.outOfFuel")));
+			getControllingPassenger().sendMessage(new TextComponentTranslation("vehicle.outOfFuel"));
 			return false;
 		}
 		else {
@@ -967,9 +967,12 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		if (!isPowered() || hit == getControllingPassenger()) {
 			return;
 		}
-		this.playSound(this.getHurtSound(this.getLastDamageSource()), this.getSoundVolume(), this.getSoundPitch());
+
 		float modifier = width * width * height / hit.width * hit.width * hit.height;// compare volume
-		float force = (float) Math.hypot(motionX, motionZ) * modifier;
+		float force = (float) Math.hypot(this.forwardControl, this.strafeControl) * modifier;
+		if (force > 0) {
+			this.playSound(this.getHurtSound(this.getLastDamageSource()), this.getSoundVolume(), this.getSoundPitch());
+		}
 		TacticalManager.knockbackEntity(hit, this, force, force / 4F);
 		hit.attackEntityFrom(
 				DamageSource.causeMobDamage((getControllingPassenger() != null && getControllingPassenger() instanceof EntityLivingBase)

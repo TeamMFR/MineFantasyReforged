@@ -25,6 +25,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
@@ -264,6 +265,12 @@ public class PlayerTickHandler {
 		if (PlayerUtils.shouldItemStackBlock(evt.getItemStack())) {
 
 			EnumAction action = player.getHeldItemOffhand().getItemUseAction();
+			if (action == EnumAction.BLOCK) {
+				player.setActiveHand(EnumHand.OFF_HAND);
+				// Don't cause reequip animation, AND don't swing hand
+				evt.setCancellationResult(EnumActionResult.FAIL);
+				evt.setCanceled(true);
+			}
 			if (action == EnumAction.NONE || action == EnumAction.EAT && !player.canEat(false)) {
 
 				player.setActiveHand(evt.getHand());

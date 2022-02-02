@@ -3,14 +3,12 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 
@@ -174,10 +172,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 						return false;
 					}
 
-					if (recipeItem.getItemDamage() != OreDictionary.WILDCARD_VALUE && recipeItem.getItemDamage() != inputItem.getItemDamage()) {
-						if (recipeItem.getItem() == MineFantasyItems.ENGIN_ANVIL_TOOLS){
-							break;
-						}
+					if (!(recipeItem.getItem().hasContainerItem(recipeItem) && recipeItem.getItem().getContainerItem() == recipeItem.getItem()) && recipeItem.getItemDamage() != inputItem.getItemDamage()) {
 						return false;
 					}
 					if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {

@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ConfigItemRegistry extends ConfigurationBaseMF {
 	public static final String CATEGORY_ARMOUR = "Armour List";
@@ -27,19 +28,19 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 		MFRLogUtil.logDebug("Loading Custom Item Entries from config...");
 		try {
 			for (String s : armourListAC) {
-				breakdownLineForAutoarmour(s);
+				ArmorRegistryParser(s);
 			}
 			for (String s : hoeList) {
-				breakdownLineForHoe(s);
+				HoeRegistryParser(s);
 			}
 			for (String s : crafterList) {
-				breakdownLineForCrafter(s);
+				CrafterRegistryParser(s);
 			}
 			for (String s : customDamagerList) {
-				breakdownLineForDamage(s);
+				WeaponDamageRegistryParser(s);
 			}
 			for (String s : customDamagerEntityList) {
-				breakdownLineForDamage(s);
+				ProjectileEntityDamageRegistryParser(s);
 			}
 		}
 		catch (Exception e) {
@@ -47,280 +48,191 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 		}
 	}
 
-	private static void registerArmourclassEntry(Item piece, String design, float weight) {
-		ArmourDesign AC = getClassFor(design);
-		if (AC == null) {
-			MineFantasyReforged.LOG.warn("Could not define armour design '" + design + "' for item id: " + Item.getIdFromItem(piece));
+	private static void ArmorRegistryParser(String entry) {
+		String[] entryContents = entry.split("\\|");
+
+		Item armorItem = Item.REGISTRY.getObject(new ResourceLocation(entryContents[0]));
+		if (armorItem == null) {
+			MineFantasyReforged.LOG.warn("Could not define armor item for: " + entryContents[0]);
 			return;
 		}
-		CustomArmourEntry.registerItem(piece, AC, weight, AC.getGroup());
-	}
 
-	private static ArmourDesign getClassFor(String name) {
-		ArmourDesign design = ArmourDesign.designs.get(name);
-		if (design != null) {
-			return design;
+		ArmourDesign armourDesign = ArmourDesign.designs.get(entryContents[1]);
+		if (armourDesign == null) {
+			MineFantasyReforged.LOG.warn("Could not define armour design '" + entryContents[1] + "' for item id: " + armorItem.getRegistryName());
+			return;
 		}
-		return null;
-	}
 
-	private static void breakdownLineForAutoarmour(String config) {
-		String temp = "";
-		int phase = 0;
-		String id = "";
-		ArmourDesign AD = null;
-		String weightGroup = "medium";
-		float weight = 1.0F;
-		for (int a = 0; a < config.length(); a++) {
-			if (a == config.length() - 1) {
-				temp = temp + config.charAt(a);
-			}
-			if (config.charAt(a) == "|".charAt(0) || a == config.length() - 1) {
-				if (phase == 0) {
-					id = temp;
-					temp = "";
-					phase++;
-				} else if (phase == 1) {
-					ArmourDesign design = getClassFor(temp);
-					if (design != null) {
-						AD = design;
-					}
-					temp = "";
-					phase++;
-				} else if (phase == 2) {
-					weightGroup = temp;
-					temp = "";
-					phase++;
-				} else if (phase == 3) {
-					weight = Float.valueOf(temp);
-					temp = "";
-
-					Item piece = getItemFromString(id);
-					if (AD != null && piece != null) {
-						CustomArmourEntry.registerItem(piece, AD, weight, weightGroup);
-						MFRLogUtil.logDebug("Added Armour: " + piece.getUnlocalizedName() + "(" + AD.getName() + ") To "
-								+ weightGroup + " armour category... Modified weight is " + weight);
-					}
-					phase = 0;
-				}
-			} else {
-				if (config.charAt(a) != " ".charAt(0)) {
-					temp = temp + config.charAt(a);
-				}
-			}
+		String weightClass = entryContents[2];
+		if (Objects.equals(weightClass, "") || weightClass == null) {
+			MineFantasyReforged.LOG.warn("Could not define armour weight class for '" + entryContents[2] + "' for item id: " + armorItem.getRegistryName());
+			return;
 		}
-	}
 
-	private static void breakdownLineForHoe(String config) {
-		String temp = "";
-		int phase = 0;
-		String id = "";
-		float eff = 6.0F;
-
-		for (int a = 0; a < config.length(); a++) {
-			if (a == config.length() - 1) {
-				temp = temp + config.charAt(a);
-			}
-			if (config.charAt(a) == "|".charAt(0) || a == config.length() - 1) {
-				if (phase == 0) {
-					id = temp;
-					temp = "";
-					phase++;
-				} else if (phase == 1) {
-					eff = Float.valueOf(temp);
-					temp = "";
-
-					Item hoe = getItemFromString(id);
-					if (hoe != null) {
-						CustomHoeEntry.registerItem(hoe, eff);
-						MFRLogUtil.logDebug("Added Hoe: " + id + " With Efficiency " + eff);
-					}
-					phase = 0;
-				}
-			} else {
-				if (config.charAt(a) != " ".charAt(0)) {
-					temp = temp + config.charAt(a);
-				}
-			}
+		float weightModifier = Float.parseFloat(entryContents[3]);
+		if (weightModifier == 0.0F) {
+			MineFantasyReforged.LOG.warn("Could not define weight modifier for '" + entryContents[3] + "' for item id: " + armorItem.getRegistryName());
+			return;
 		}
+
+		CustomArmourEntry.registerItem(armorItem, armourDesign, weightModifier, weightClass);
+		MineFantasyReforged.LOG.info("Added Custom Armor entry for " + armorItem.getRegistryName() + " with armor design: " + armourDesign.getName() + ", with weight class: " + weightClass + ", with weight modifier: " + weightModifier);
 	}
 
-	private static void breakdownLineForCrafter(String config) {
-		String temp = "";
-		int phase = 0;
-		String id = "";
-		String type = "";
-		int tier = -1;
-		float efficiency = 2.0F;
+	private static void HoeRegistryParser(String entry) {
+		String[] entryContents = entry.split("\\|");
 
-		for (int a = 0; a < config.length(); a++) {
-			if (a == config.length() - 1) {
-				temp = temp + config.charAt(a);
-			}
-			if (config.charAt(a) == "|".charAt(0) || a == config.length() - 1) {
-				if (phase == 0) {
-					id = temp;
-					temp = "";
-					phase++;
-				} else if (phase == 1) {
-					efficiency = Float.valueOf(temp);
-					temp = "";
-					phase++;
-				} else if (phase == 2) {
-					tier = Integer.valueOf(temp);
-					temp = "";
-					phase++;
-				} else if (phase == 3) {
-					type = temp;
-					temp = "";
-
-					Item hoe = getItemFromString(id);
-					if (hoe != null) {
-						CustomCrafterEntry.registerItem(hoe, type, efficiency, tier);
-						MFRLogUtil.logDebug("Added Crafter: " + id + " as " + type + " for efficiency " + efficiency);
-					}
-					phase = 0;
-				}
-			} else {
-				if (config.charAt(a) != " ".charAt(0)) {
-					temp = temp + config.charAt(a);
-				}
-			}
+		Item hoeItem = Item.REGISTRY.getObject(new ResourceLocation(entryContents[0]));
+		if (hoeItem == null) {
+			MineFantasyReforged.LOG.warn("Could not define hoe item for: " + entryContents[0]);
+			return;
 		}
-	}
 
-	private static void breakdownLineForDamage(String config) {
-		String temp = "";
-		int phase = 0;
-		String id = "";
-		float cut = 0;
-		float blunt = 0;
-		float pierce = 0;
-
-		for (int a = 0; a < config.length(); a++) {
-			if (a == config.length() - 1) {
-				temp = temp + config.charAt(a);
-			}
-			if (config.charAt(a) == "|".charAt(0) || a == config.length() - 1) {
-				if (phase == 0) {
-					id = temp;
-					temp = "";
-					phase++;
-				} else if (phase == 1) {
-					cut = Float.valueOf(temp);
-					temp = "";
-					phase++;
-				} else if (phase == 2) {
-					pierce = Float.valueOf(temp);
-					temp = "";
-					phase++;
-				} else if (phase == 3) {
-					blunt = Float.valueOf(temp);
-					temp = "";
-
-					Item weapon = getItemFromString(id);
-					if (weapon != null) {
-						CustomDamageRatioEntry.registerItem(weapon, new float[] {cut, blunt, pierce});
-						MFRLogUtil.logDebug(
-								"Added Custom weapon: " + id + " With Ratio " + cut + ":" + pierce + ":" + blunt);
-					}
-					phase = 0;
-				}
-			} else {
-				if (config.charAt(a) != " ".charAt(0)) {
-					temp = temp + config.charAt(a);
-				}
-			}
+		float hoeEfficiency = Float.parseFloat(entryContents[1]);
+		if (hoeEfficiency == 0.0F) {
+			MineFantasyReforged.LOG.warn("Could not define hoe efficiency '" + entryContents[1] + "' for item id: " + hoeItem.getRegistryName());
+			return;
 		}
+
+		CustomHoeEntry.registerItem(hoeItem, hoeEfficiency);
+		MineFantasyReforged.LOG.info("Added Custom Hoe entry for " + hoeItem.getRegistryName() + " with efficiency: " + hoeEfficiency);
 	}
 
-	private static void breakdownLineForDamageEntity(String config) {
-		String temp = "";
-		int phase = 0;
-		String id = "";
-		float cut = 0;
-		float pierce = 0;
-		float blunt = 0;
+	private static void CrafterRegistryParser(String entry) {
+		String[] entryContents = entry.split("\\|");
 
-		for (int a = 0; a < config.length(); a++) {
-			if (a == config.length() - 1) {
-				temp = temp + config.charAt(a);
-			}
-			if (config.charAt(a) == "|".charAt(0) || a == config.length() - 1) {
-				if (phase == 0) {
-					id = temp;
-					temp = "";
-					phase++;
-				} else if (phase == 1) {
-					cut = Float.valueOf(temp);
-					temp = "";
-					phase++;
-				} else if (phase == 2) {
-					pierce = Float.valueOf(temp);
-					temp = "";
-					phase++;
-				} else if (phase == 3) {
-					blunt = Float.valueOf(temp);
-					temp = "";
-
-					CustomDamageRatioEntry.registerEntity(id, new float[] {cut, blunt, pierce});
-					MFRLogUtil
-							.logDebug("Added Custom entity: " + id + " With Ratio " + cut + ":" + pierce + ":" + blunt);
-					phase = 0;
-				}
-			} else {
-				if (config.charAt(a) != " ".charAt(0)) {
-					temp = temp + config.charAt(a);
-				}
-			}
+		Item crafterItem = Item.REGISTRY.getObject(new ResourceLocation(entryContents[0]));
+		if (crafterItem == null) {
+			MineFantasyReforged.LOG.warn("Could not define crafter item for: " + entryContents[0]);
+			return;
 		}
+
+		String crafterType = entryContents[1];
+		if (Objects.equals(crafterType, "") || crafterType == null) {
+			MineFantasyReforged.LOG.warn("Could not define crafter type '" + entryContents[1] + "' for item id: " + crafterItem.getRegistryName());
+			return;
+		}
+
+		float crafterEfficiency = Float.parseFloat(entryContents[2]);
+		if (crafterEfficiency < 0F) {
+			MineFantasyReforged.LOG.warn("Could not define crafter efficiency for '" + entryContents[2] + "' for item id: " + crafterItem.getRegistryName());
+			return;
+		}
+
+		int crafterTier = Integer.parseInt(entryContents[3]);
+		if (crafterTier < 0) {
+			MineFantasyReforged.LOG.warn("Could not define crafter tier for '" + entryContents[3] + "' for item id: " + crafterItem.getRegistryName());
+			return;
+		}
+
+		CustomCrafterEntry.registerItem(crafterItem, crafterType, crafterEfficiency, crafterTier);
+		MineFantasyReforged.LOG.info("Added Custom Crafter entry for " + crafterItem.getRegistryName() + " with type: " + crafterType + ", with efficiency: " + crafterEfficiency + ", with a tier: " + crafterTier);
 	}
 
-	private static Item getItemFromString(String id) {
-		Object object = Item.REGISTRY.getObject(new ResourceLocation(id));
-		return object != null && object instanceof Item ? (Item) object : null;
+	private static void WeaponDamageRegistryParser(String entry) {
+		String[] entryContents = entry.split("\\|");
+
+		Item weaponItem = Item.REGISTRY.getObject(new ResourceLocation(entryContents[0]));
+		if (weaponItem == null) {
+			MineFantasyReforged.LOG.warn("Could not define weapon item for: " + entryContents[0]);
+			return;
+		}
+
+		float cut = Float.parseFloat(entryContents[1]);
+		if (cut < 0) {
+			MineFantasyReforged.LOG.warn("Could not define cut damage for '" + entryContents[2] + "' for item id: " + weaponItem.getRegistryName());
+			return;
+		}
+
+		float blunt = Float.parseFloat(entryContents[2]);
+		if (blunt < 0) {
+			MineFantasyReforged.LOG.warn("Could not define blunt damage for '" + entryContents[2] + "' for item id: " + weaponItem.getRegistryName());
+			return;
+		}
+
+		float pierce = Float.parseFloat(entryContents[3]);
+		if (pierce < 0) {
+			MineFantasyReforged.LOG.warn("Could not define pierce damage for '" + entryContents[2] + "' for item id: " + weaponItem.getRegistryName());
+			return;
+		}
+
+		CustomDamageRatioEntry.registerItem(weaponItem, new float[] {cut, blunt, pierce});
+		MineFantasyReforged.LOG.info("Added Custom Weapon Damage entry for " + weaponItem.getRegistryName() + " with damage stats: " + Arrays.toString(new float[] {cut, blunt, pierce}));
+	}
+
+	private static void ProjectileEntityDamageRegistryParser(String entry) {
+		String[] entryContents = entry.split("\\|");
+
+		String projectileEntityID = entryContents[0];
+		if (Objects.equals(projectileEntityID, "") || projectileEntityID == null) {
+			MineFantasyReforged.LOG.warn("Could not define projectile entity for: " + entryContents[0]);
+			return;
+		}
+
+		float cut = Float.parseFloat(entryContents[1]);
+		if (cut < 0) {
+			MineFantasyReforged.LOG.warn("Could not define cut damage for '" + entryContents[2] + "' for projectile entity id: " + projectileEntityID);
+			return;
+		}
+
+		float blunt = Float.parseFloat(entryContents[2]);
+		if (blunt < 0) {
+			MineFantasyReforged.LOG.warn("Could not define blunt damage for '" + entryContents[2] + "' for projectile entity id: " + projectileEntityID);
+			return;
+		}
+
+		float pierce = Float.parseFloat(entryContents[3]);
+		if (pierce < 0) {
+			MineFantasyReforged.LOG.warn("Could not define pierce damage for '" + entryContents[2] + "' for projectile entity id: " + projectileEntityID);
+			return;
+		}
+
+		CustomDamageRatioEntry.registerEntity(new ResourceLocation(projectileEntityID), new float[] {cut, blunt, pierce});
+		MineFantasyReforged.LOG.info("Added Custom Projectile Entity Damage entry for " + projectileEntityID + " with damage stats: " + Arrays.toString(new float[] {cut, blunt, pierce}));
+
 	}
 
 	@Override
 	protected void loadConfig() {
 		// Weight
 
-		String AAdesc = "This will register items under a certain 'Design' calculating the variables itself.\n Each entry has it's own line:\n"
+		String ArmorRegistryDescription = "This will register items under a certain 'Design' calculating the variables itself.\n Each entry has it's own line:\n"
 				+ "Order itemid|Design|WeightGroup|WeightModifier \n"
 				+ "The WeightModifier alters the weight for heavier or lighter materials keep it at 1.0 unless you have a special material (like mithril and adamamantium)\n"
-				+ "Designs can be any that are registered: MineFantasy designs are 'clothing', 'leather', 'mail', 'default'(that's just basic metal armour), and 'plate'\n"
+				+ "Designs can be any that are registered: MineFantasy designs are 'clothing', 'leather', 'mail', 'solid'(that's just basic metal armour), and 'plate'\n"
 				+ "WeightGroup refers to whether it is light medium or heavy armour \n"
 				+ "EXAMPLE (This is what vanilla gold is registered under) \n"
-				+ "minecraft:golden_helmet|default|medium|2.0 \n" + "minecraft:golden_chestplate|default|medium|2.0 \n"
-				+ "minecraft:golden_leggings|default|medium|2.0 \n" + "minecraft:golden_boots|default|medium|2.0 \n"
+				+ "minecraft:golden_helmet|solid|medium|2.0 \n" + "minecraft:golden_chestplate|solid|medium|2.0 \n"
+				+ "minecraft:golden_leggings|solid|medium|2.0 \n" + "minecraft:golden_boots|solid|medium|2.0 \n"
 				+ "The 2.0 means it is 2x heavier than other vanilla armours \n"
 				+ "This does not override existing MF armours \n";
 
-		armourListAC = config.get(CATEGORY_ARMOUR, "Auto-Armour Registry", new String[0], AAdesc).getStringList();
+		armourListAC = config.get(CATEGORY_ARMOUR, "Armour Registry", new String[0], ArmorRegistryDescription).getStringList();
 		Arrays.sort(armourListAC);
 
 		// Hoes
 
-		String hoeDesc = "This Registers Hoe items to an efficiency level: (It uses the same variable as efficiency, you may need to find that out first, by default: it should be able to guess it:\n"
-				+ "Order itemid|efficicncy \n"
-				+ "Efficicney is a variable that goes into play with the failure chance, higher efficicnecy has easier tiling\n";
+		String hoeRegistryDescription = "This Registers Hoe items to an efficiency level: (It uses the same variable as efficiency, you may need to find that out first, by default: it should be able to guess it:\n"
+				+ "Order itemid|efficiency \n"
+				+ "Efficiency is a variable that goes into play with the failure chance, higher efficiency has easier tiling\n";
 
-		hoeList = config.get(CATEGORY_FARM, "Hoe Registry", new String[0], hoeDesc).getStringList();
+		hoeList = config.get(CATEGORY_FARM, "Hoe Registry", new String[0], hoeRegistryDescription).getStringList();
 		Arrays.sort(hoeList);
 
 		// Crafters
 
-		String craftDesc = "This Registers items to a tool type and efficiency (such as hammer, heavy hammer, knife, saw, etc):\n"
-				+ "Order itemid|efficiency|tier|tooltype \n"
-				+ "tooltype can be hammer, heavy hammer, knife, shears, needle, spoon, mallet, saw, spanner \n"
-				+ "efficiency is the measure of how fast it works (similar to dig speed)";
+		String crafterDescription = "This Registers items to a tool type and efficiency (such as hammer, heavy hammer, knife, saw, etc):\n"
+				+ "Order itemid|tooltype|efficiency|tier \n"
+				+ "tooltype can be hammer, heavy_hammer, knife, shears, needle, spoon, mallet, saw, spanner, or brush \n"
+				+ "efficiency is the measure of how fast it works (similar to dig speed)"
+				+ "EXAMPLE: ancientwarfare:iron_hammer|hammer|2.0|3";
 
-		crafterList = config.get(CATEGORY_TOOL, "Crafter Registry", new String[0], craftDesc).getStringList();
+		crafterList = config.get(CATEGORY_TOOL, "Crafter Registry", new String[0], crafterDescription).getStringList();
 		Arrays.sort(crafterList);
 
 		// Weapons
 
-		String damageDesc = "[Experimental] This registers weapons for the damage variable mechanics implemented by option. \n"
+		String weaponDamageDescription = "This registers weapons for the damage variable mechanics implemented by option. \n"
 				+ "Though mod-added armours have absolutely no support, and never can without being specifically coded to \n"
 				+ "MineFantasy armours will take these variables and function differently on the values. But weapon items can \n"
 				+ "be added to the list: Put each entry on it's own line set out like this: \n"
@@ -329,14 +241,12 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 				+ "EXAMPLE (for example... making a stick to piercing damage) \n" + "minecraft:stick|0|1.0|0 \n"
 				+ "The difference between the ratio is what determines damage 1|0 means 100% cutting damage, 3|1 means it's 3 cutting to 1 blunt (or 75%, 25%). use whatever numbers you need to make the ratio.";
 
-		customDamagerList = config.get(CATEGORY_WEPS, "Custom Damage Ratios", new String[0], damageDesc)
-				.getStringList();
+		customDamagerList = config.get(CATEGORY_WEPS, "Custom Damage Ratios", new String[0], weaponDamageDescription).getStringList();
 		Arrays.sort(customDamagerList);
 
-		String damageEDesc = "Similar method to 'Custom Damage Ratios' only with entities, This is for registering things like arrows, same format only with the entity registry name (usually modid:name)";
+		String projectileEntityDamageDescription = "Similar method to 'Custom Damage Ratios' only with entities, This is for registering things like arrows, same format only with the entity registry name (usually modid:name)";
 
-		customDamagerEntityList = config.get(CATEGORY_WEPS, "Custom Entity Damage Ratios", new String[0], damageEDesc)
-				.getStringList();
+		customDamagerEntityList = config.get(CATEGORY_WEPS, "Custom Entity Damage Ratios", new String[0], projectileEntityDamageDescription).getStringList();
 		Arrays.sort(customDamagerEntityList);
 	}
 }

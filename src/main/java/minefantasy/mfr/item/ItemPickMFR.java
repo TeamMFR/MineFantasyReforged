@@ -24,7 +24,6 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -70,43 +69,39 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 		ItemStack item = player.getHeldItemMainhand();
 
 		if (!world.isRemote) {
-			return new ActionResult<>(EnumActionResult.FAIL, item);
+			return super.onItemRightClick(world, player, hand);
 		}
 
 		if (!player.getHeldItemOffhand().isEmpty()) {
-			return new ActionResult<>(EnumActionResult.PASS, item);
+			return super.onItemRightClick(world, player, hand);
 		}
 
 		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-		if (rayTraceResult == null) {
-			return new ActionResult<>(EnumActionResult.FAIL, item);
-		} else {
-			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+		if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
-				if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
-					return new ActionResult<>(EnumActionResult.FAIL, item);
-				}
-
-				if (!player.canPlayerEdit(rayTraceResult.getBlockPos(), rayTraceResult.sideHit, item)) {
-					return new ActionResult<>(EnumActionResult.FAIL, item);
-				}
-
-				Block block = world.getBlockState(rayTraceResult.getBlockPos()).getBlock();
-				int blockTier = block.getHarvestLevel(world.getBlockState(rayTraceResult.getBlockPos()));
-
-				int HL = CustomToolHelper.getHarvestLevel(item, toolMaterial.getHarvestLevel());
-				if (blockTier > HL) {
-					String msg = I18n.format("prospect.cannotmine", HL, blockTier);
-					player.sendMessage(new TextComponentString(TextFormatting.RED + msg));
-				} else {
-					String msg = I18n.format("prospect.canmine", HL, blockTier);
-					player.sendMessage(new TextComponentString(TextFormatting.GREEN + msg));
-				}
+			if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
+				return super.onItemRightClick(world, player, hand);
 			}
 
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, item);
+			if (!player.canPlayerEdit(rayTraceResult.getBlockPos(), rayTraceResult.sideHit, item)) {
+				return super.onItemRightClick(world, player, hand);
+			}
+
+			Block block = world.getBlockState(rayTraceResult.getBlockPos()).getBlock();
+			int blockTier = block.getHarvestLevel(world.getBlockState(rayTraceResult.getBlockPos()));
+
+			int harvestLevel = CustomToolHelper.getHarvestLevel(item, toolMaterial.getHarvestLevel());
+			if (blockTier > harvestLevel) {
+				String msg = I18n.format("prospect.cannotmine", harvestLevel, blockTier);
+				player.sendMessage(new TextComponentString(TextFormatting.RED + msg));
+			} else {
+				String msg = I18n.format("prospect.canmine", harvestLevel, blockTier);
+				player.sendMessage(new TextComponentString(TextFormatting.GREEN + msg));
+			}
 		}
+
+		return super.onItemRightClick(world, player, hand);
 	}
 
 	public ItemPickMFR setCustom(String s) {

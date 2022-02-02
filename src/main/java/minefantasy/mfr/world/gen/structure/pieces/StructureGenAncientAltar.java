@@ -73,7 +73,7 @@ public class StructureGenAncientAltar extends StructureModuleMFR {
         placeChest(world, 0, 2, 0, random, facing, lootType);
         placeSpawner(world, 0, 0, 0, EntityList.getKey(EntityEnderman.class));
 
-        MineFantasyReforged.LOG.error("Placed Ancient Altar at: " + pos);
+        MineFantasyReforged.LOG.info("Placed Ancient Altar at: " + pos);
     }
 
     private IBlockState getFoundation(int radius, int x, int z) {

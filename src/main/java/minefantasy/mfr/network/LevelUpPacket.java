@@ -3,10 +3,9 @@ package minefantasy.mfr.network;
 import io.netty.buffer.ByteBuf;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.mechanics.RPGElements;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import java.util.UUID;
@@ -49,7 +48,7 @@ public class LevelUpPacket extends PacketMF {
 
 			if (skill != Skill.NONE) {
 				player.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 1.0F, 0.5F);
-				player.sendMessage(new TextComponentString(I18n.format("rpg.levelup", skill.getDisplayName().toLowerCase(), skillLevel)));
+				player.sendMessage(new TextComponentTranslation("rpg.levelup", skill.getDisplayName().toLowerCase(), skillLevel));
 			}
 		}
 	}

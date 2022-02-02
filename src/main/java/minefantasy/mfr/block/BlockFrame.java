@@ -13,7 +13,6 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,7 +23,7 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -133,20 +132,18 @@ public class BlockFrame extends BasicBlockMF {
 	}
 
 	private boolean tryBuild(EntityPlayer player, World world, BlockPos pos) {
-		if (PowerArmour.isBasicStationFrame(world, pos) && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY)))) {
+		if (!world.isRemote && PowerArmour.isBasicStationFrame(world, pos) && (player.capabilities.isCreativeMode || player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY)))) {
 			if (!player.capabilities.isCreativeMode) {
-				player.inventory.removeStackFromSlot(player.inventory.getSlotFor(new ItemStack(MineFantasyItems.COGWORK_PULLEY)));
+				player.inventory.removeStackFromSlot(player.inventory.findSlotMatchingUnusedItem(new ItemStack(MineFantasyItems.COGWORK_PULLEY)));
 			}
-			if (!world.isRemote) {
-				world.setBlockState(pos, MineFantasyBlocks.COGWORK_HOLDER.getDefaultState(), 2);
-			}
+			world.setBlockState(pos, MineFantasyBlocks.COGWORK_HOLDER.getDefaultState(), 2);
 			return true;
 		}
-		else if (!player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY))) {
-			player.sendMessage(new TextComponentString(I18n.format("vehicle.noPulley")));
+		else if (!world.isRemote && !player.inventory.hasItemStack(new ItemStack(MineFantasyItems.COGWORK_PULLEY))) {
+			player.sendMessage(new TextComponentTranslation("vehicle.noPulley"));
 		}
-		else if (!PowerArmour.isBasicStationFrame(world, pos)) {
-			player.sendMessage(new TextComponentString(I18n.format("vehicle.noFrame")));
+		else if (!world.isRemote && !PowerArmour.isBasicStationFrame(world, pos)) {
+			player.sendMessage(new TextComponentTranslation("vehicle.noFrame"));
 		}
 		return false;
 	}

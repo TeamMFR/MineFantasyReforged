@@ -59,7 +59,7 @@ public class ItemHide extends ItemBaseMFR {
 				}
 
 				if (isWaterSource(world, rayTraceResult.getBlockPos())) {
-					tryClean(item, world, player, rayTraceResult.getBlockPos());
+					tryClean(item, world, player, rayTraceResult.getBlockPos(), hand);
 				}
 			}
 
@@ -67,8 +67,8 @@ public class ItemHide extends ItemBaseMFR {
 		}
 	}
 
-	private void tryClean(ItemStack item, World world, EntityPlayer player, BlockPos pos) {
-		player.swingArm(player.swingingHand);
+	private void tryClean(ItemStack item, World world, EntityPlayer player, BlockPos pos, EnumHand hand) {
+		player.swingArm(hand);
 		if (!world.isRemote) {
 			world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + world.rand.nextFloat() / 4F, 0.5F + world.rand.nextFloat());
 			if (world.rand.nextFloat() * 2 * hardness < 1.0F) {

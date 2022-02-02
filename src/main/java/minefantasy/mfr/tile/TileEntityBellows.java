@@ -46,11 +46,11 @@ public class TileEntityBellows extends TileEntityBase implements ITickable {
 
 	public IBellowsUseable getFacingForge() {
 		EnumFacing facing = world.getBlockState(pos).getValue(BlockBellows.FACING);
-		BlockPos forgePos = new BlockPos(pos.add(facing.getFrontOffsetX(), facing.getFrontOffsetY(), facing.getFrontOffsetZ()));
+		BlockPos forgePos = new BlockPos(pos.offset(facing));
 
 		TileEntity tile = world.getTileEntity(forgePos);
 
-		if (tile != null && tile instanceof IBellowsUseable)
+		if (tile instanceof IBellowsUseable)
 			return (IBellowsUseable) tile;
 
 		if (world.getBlockState(forgePos).getMaterial() != null && world.getBlockState(forgePos).getMaterial().isSolid()) {
@@ -61,7 +61,7 @@ public class TileEntityBellows extends TileEntityBase implements ITickable {
 
 	public IBellowsUseable getFacingForgeThroughWall() {
 		EnumFacing facing = world.getBlockState(pos).getValue(BlockBellows.FACING);
-		BlockPos forgePos = new BlockPos(pos.add(facing.getFrontOffsetX() * 2, facing.getFrontOffsetY() * 2, facing.getFrontOffsetZ() * 2));
+		BlockPos forgePos = new BlockPos(pos.offset(facing, 2));
 
 		TileEntity tile = world.getTileEntity(forgePos);
 		if (tile == null)
