@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "artisanry",
-  "research": "crucible2",
+  "research": "firebrick_crucible",
   "tool_type": "hands",
   "is_tool_recipe": false,
   "block_tier": -1,

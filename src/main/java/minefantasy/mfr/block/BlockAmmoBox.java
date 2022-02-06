@@ -126,7 +126,7 @@ public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		ItemStack held = user.getHeldItem(hand);
+		ItemStack held = user.getHeldItemMainhand();
 		TileEntity tile = world.getTileEntity(pos);
 		if (tile instanceof TileEntityAmmoBox) {
 			return ((TileEntityAmmoBox) tile).interact(user, held);

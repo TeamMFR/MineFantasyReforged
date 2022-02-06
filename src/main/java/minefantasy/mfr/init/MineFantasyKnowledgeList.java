@@ -11,8 +11,6 @@ import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.InformationList;
 import minefantasy.mfr.mechanics.knowledge.InformationPage;
 import minefantasy.mfr.mechanics.knowledge.ResearchArtefacts;
-import minefantasy.mfr.recipe.IAnvilRecipe;
-import minefantasy.mfr.recipe.ICarpenterRecipe;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,8 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
 
 public class MineFantasyKnowledgeList {
 
@@ -42,185 +38,253 @@ public class MineFantasyKnowledgeList {
 	public static final IRecipe JUG_WATER_RECIPE = RecipeHelper.getMFRRecipe("jug_water");
 	public static final IRecipe JUG_MILK_RECIPE = RecipeHelper.getMFRRecipe("jug_milk");
 	public static final IRecipe DRYROCKS_RECIPE = ConfigHardcore.HCCallowRocks ? RecipeHelper.getMFRRecipe("dryrocks_hc") : RecipeHelper.getMFRRecipe("dryrocks");
-	public static final ArrayList<IRecipe> stoneBricksR = new ArrayList<IRecipe>();
-	public static final ArrayList<IAnvilRecipe> barR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> baringotR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> talismanRecipe = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> barsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> mailRecipes = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> mailHelmetR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> mailChestR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> mailLegsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> mailBootsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> scaleRecipes = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> scaleHelmetR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> scaleChestR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> scaleLegsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> scaleBootsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> splintRecipes = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> splintHelmetR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> splintChestR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> splintLegsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> splintBootsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> plateRecipes = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> plateHelmetR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> plateChestR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> plateLegsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> plateBootsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> ornateWepsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<IAnvilRecipe> advOrnateWepsR = new ArrayList<IAnvilRecipe>();
-	public static final ArrayList<ICarpenterRecipe> arrowR = new ArrayList<ICarpenterRecipe>();
-	public static final ArrayList<ICarpenterRecipe> meatRecipes = new ArrayList<ICarpenterRecipe>();
-	public static final ArrayList<ICarpenterRecipe> easyPaintPlank = new ArrayList<ICarpenterRecipe>();
-	public static final ArrayList<ICarpenterRecipe> refinedPlankR = new ArrayList<ICarpenterRecipe>();
+	
 	public static InformationPage artisanry = InformationList.artisanry;
 	public static InformationPage construction = InformationList.construction;
 	public static InformationPage engineering = InformationList.engineering;
 	public static InformationPage provisioning = InformationList.provisioning;
 	public static InformationPage mastery = InformationList.mastery;
+	
 	// BASICS -FREE
-	public static InformationBase carpenter, gettingStarted, salvage, research, talisman, ores, plants, chimney,
-			tanning, commodities, dust, craftCrafters, stamina, combat, craftArmourBasic, craftHCCTools, firemaker,
-			dragons, minotaurs;
-	public static InformationBase bloomery, crucible, crucible2, smelt_copper, smelt_bronze, smelt_iron, coalflux, bigfurn,
-			blastfurn, smelt_pig_iron, smelt_steel, smelt_encrusted, smelt_obsidian, smelt_black_steel, smeltDragonforge, smelt_blue_steel,
-			smelt_red_steel, smelt_mithril, smelt_adamantium, smeltMaster, smelt_mithium, smelt_ignotumite, smelt_ender;
-	public static InformationBase bellows, trough, forge, anvil, bar, apron, craftTools, craftAdvTools, craftWeapons,
-			craftAdvWeapons, arrows, craftOrnate, craftArmourLight, craftArmourMedium, craftArmourHeavy, arrowsBodkin,
-			arrowsBroad, repair_basic, repair_advanced, repair_ornate;
-	public static InformationBase coke, etools, ecomponents, tungsten, climber, spyglass, parachute, syringe, engTanner,
-			advforge, advcrucible, blackpowder, advblackpowder, bombs, bpress, bombarrow, bombFuse, shrapnel, firebomb,
-			stickybomb, bombCeramic, bombIron, bombObsidian, bombCrystal, mineCeramic, mineIron, mineObsidian,
-			mineCrystal, crossbows, crossShafts, crossHeads, crossHeadAdvanced, crossShaftAdvanced, crossAmmo,
-			crossScope, crossBayonet, cogArmour, compPlate;
-	public static InformationBase constructionPts, refined_planks, reinforced_stone, clay_wall, glass, brickworks,
-			decorated_stone, bars, thatch, easyRefine, paint_brush, tool_rack, food_box, ammo_box, big_box, bed_roll;
-	public static InformationBase toughness, fitness, armourpro, parrypro, counteratt, autoparry, scrapper, firstaid,
-			doctor;
-	public static InformationBase cookingutensil, firepit, generic_meat, stew, jerky, saussage, sandwitch, sandwitch_big,
-			meatpie, shepardpie, bread, oats, salt, jug, berry, icing, sweetroll, eclair, cake, carrotcake, chococake,
-			bfcake, applepie, berrypie, cheese, cheeseroll, bandage, bandageadv;
-	public static IRecipe waterJugR, milkJugR, plantOilR;
-	public static IAnvilRecipe hunkR, ingotR, bucketR, crestR;
-	public static ICarpenterRecipe artBookR, conBookR, proBookR, engBookR, comBookR, artBook2R, conBook2R, proBook2R,
-			engBook2R, comBook2R;
-	public static IAnvilRecipe greatTalismanRecipe;
-	public static ICarpenterRecipe fireclayR, fireBrickR, fireBricksR, fireBrickStairR, refinedPlankBlockR, clayWallR,
-			bSalvageR, tannerRecipe, stoneAnvilRecipe, forgeRecipe, apronRecipe, woodTroughRecipe;
-	public static ICarpenterRecipe researchTableRecipe, framedGlassR, windowR, thatchR, thatchStairR;
-	public static IAnvilRecipe smokePipeR, framedStoneR, iframedStoneR, fluxR, nailR, rivetR;
-	public static IAnvilRecipe tinderboxR, flintAndSteelR;
-	public static ICarpenterRecipe dirtRockR, lStripsR, threadR, stringR, sharpRocksR, stonePickR, stoneAxeR,
-			stoneSpadeR, stoneHoeR, stoneSwordR, stoneWarR, stoneMaceR, stoneSpearR, stoneHammerR, stoneTongsR,
-			boneNeedleR, stoneKnifeR, quernR, stoneovenRecipe;
-	public static Alloy[] reinforcedStone, bronze, steel, obsidalloy, black, red, blue, mithril, adamantium, ignotumite,
-			mithium, enderforge, wolframiteR;
-	public static IAnvilRecipe coalfluxR, encrustedR, steelR, obsidianHunkR, diamondR;
-	public static ICarpenterRecipe nailPlanksR, nailStairR, refinedStairR, strongRackR, bellowsRecipe, bloomeryR,
-			crucibleRecipe, advCrucibleRecipe, trilogyRecipe, chimneyRecipe, wideChimneyRecipe, extractChimneyRecipe;
-	public static ICarpenterRecipe hideHelmR, hideChestR, hideLegsR, hideBootsR, roughHelmetR, roughChestR, roughLegsR,
-			roughBootsR, reHelmetR, reChestR, reLegsR, reBootsR;
-	public static IAnvilRecipe studHelmetR, studChestR, studLegsR, studBootsR;
-	public static IAnvilRecipe pickR, axeR, spadeR, hoeR, shearsR;
-	public static IAnvilRecipe daggerR, swordR, waraxeR, maceR, spearR, bowR, katanaR, gswordR, whammerR, battleaxeR,
-			halbeardR, lanceR;
-	public static IAnvilRecipe trowR, heavyPickR, heavyShovelR, handpickR, scytheR, mattockR, lumberR;
-	public static IAnvilRecipe hammerR, tongsR, heavyHammerR, needleR, sawsR, knifeR, spannerR;
-	public static IAnvilRecipe arrowheadR, bodkinheadR, broadheadR, crossBoltR;
-	public static ICarpenterRecipe fletchingR, fletchingR2, malletR, spoonR;
-	public static IAnvilRecipe ironPrepR, ironPrepR2, coalPrepR;
-	public static IAnvilRecipe blastChamR, blastHeatR, bigFurnR, bigHeatR;
-	public static ICarpenterRecipe padding[] = new ICarpenterRecipe[4];
-	public static ICarpenterRecipe repairBasicR, repairAdvancedR, repairOrnateR;
-	public static ICarpenterRecipe spyglassR, bombBenchCraft, bombPressCraft, advancedForgeR, engTannerR, autoCrucibleR;
-	public static ICarpenterRecipe crudeBombR, bombFuseR, longFuseR;
-	public static ICarpenterRecipe crossBenchCraft, crossStockWoodR, crossStockIronR, crossHandleWoodR, crossHeadLightR,
-			crossHeadMediumR, crossHeadHeavyR, crossHeadAdvancedR, crossAmmoR, crossScopeR;
-	public static ICarpenterRecipe bombCaseCeramicR, mineCaseCeramicR, bombCaseCrystalR, mineCaseCrystalR;
-	public static IAnvilRecipe bombCaseIronR, mineCaseIronR, bombCaseObsidianR, mineCaseObsidianR, crossBayonetR;
-	public static ICarpenterRecipe meatStripR, meatHunkR, gutsRecipe;
-	public static IAnvilRecipe caketinRecipe;
-	public static ICarpenterRecipe breadSliceR, pastryRecipe, doughRecipe, breadRecipe, curdRecipe, oatsRecipe,
-			custardRecipe, icingRecipe, stewRecipe, saussageR, jerkyRecipe, meatPieRecipe, sandwitchRecipe,
-			sandwitchBigRecipe, shepardRecipe, sweetrollRecipe, iceSR, eclairDoughR, eclairIceR, eclairFillR;
-	public static ICarpenterRecipe pumpPieR, simpCakeR, simpCakeOut, berryR, appleR, cheeserollR, cakeR, carrotCakeR,
-			chocoCakeR, bfCakeR, cakeI, carrotCakeI, chocoCakeI, bfCakeI;
+	public static InformationBase carpenter;
+	public static InformationBase getting_started;
+	public static InformationBase salvage;
+	public static InformationBase research;
+	public static InformationBase talisman;
+	public static InformationBase ores;
+	public static InformationBase plants;
+	public static InformationBase chimney;
+	public static InformationBase tanning;
+	public static InformationBase commodities;
+	public static InformationBase dust;
+	public static InformationBase craft_crafters;
+	public static InformationBase stamina;
+	public static InformationBase combat;
+	public static InformationBase craft_armour_basic;
+	public static InformationBase crafting_HCC_tools;
+	public static InformationBase firemaker;
+	public static InformationBase dragons;
+	public static InformationBase minotaurs;
 
-	public static ICarpenterRecipe syringeR, parachuteR, bandageR, badBandageR, goodBandageR, cogShaftR;
+	//ARTISAN
+	//Smelting
+	public static InformationBase bloomery;
+	public static InformationBase crucible;
+	public static InformationBase firebrick_crucible;
+	public static InformationBase smelt_copper;
+	public static InformationBase smelt_bronze;
+	public static InformationBase smelt_iron;
+	public static InformationBase coal_flux;
+	public static InformationBase big_furnace;
+	public static InformationBase blast_furnace;
+	public static InformationBase smelt_pig_iron;
+	public static InformationBase smelt_steel;
+	public static InformationBase smelt_encrusted;
+	public static InformationBase smelt_obsidian;
+	public static InformationBase smelt_black_steel;
+	public static InformationBase smelt_dragonforged;
+	public static InformationBase smelt_blue_steel;
+	public static InformationBase smelt_red_steel;
+	public static InformationBase smelt_mithril;
+	public static InformationBase smelt_adamantium;
+	public static InformationBase smelt_master;
+	public static InformationBase smelt_mithium;
+	public static InformationBase smelt_ignotumite;
+	public static InformationBase smelt_ender;
 
-	public static IAnvilRecipe hingeRecipe, brushRecipe, climbPickbR, iframeR, boltR, istrutR, bgearR, tgearR, stubeR,
-			eatoolsR, bombarrowR, bombBoltR, compPlateR;
-	public static ICarpenterRecipe mouldRecipe, jugRecipe, potRecipe, pieTrayRecipe, blackpowderRec, advblackpowderRec,
-			magmaRefinedR, chocoRecipe, bedrollR;
+	//Info and Crafting
+	public static InformationBase bellows;
+	public static InformationBase trough;
+	public static InformationBase forge;
+	public static InformationBase anvil;
+	public static InformationBase bar;
+	public static InformationBase apron;
+	public static InformationBase craft_tools;
+	public static InformationBase craft_advanced_tools;
+	public static InformationBase craft_weapons;
+	public static InformationBase craft_advanced_weapons;
+	public static InformationBase arrows;
+	public static InformationBase craft_ornate;
+	public static InformationBase craft_armour_light;
+	public static InformationBase craft_armour_medium;
+	public static InformationBase craft_armour_heavy;
+	public static InformationBase arrows_bodkin;
+	public static InformationBase arrows_broad;
+	public static InformationBase repair_basic;
+	public static InformationBase repair_advanced;
+	public static InformationBase repair_ornate;
 
-	public static IAnvilRecipe frameBlockR, cogPulleyR, cogLegsR, cogChestR, cogHelmR;
-	public static ArrayList<IAnvilRecipe> hugePlateR = new ArrayList<IAnvilRecipe>();
-	public static ArrayList<IAnvilRecipe> cogPlateR = new ArrayList<IAnvilRecipe>();
-	public static ArrayList<ICarpenterRecipe> sawnPlankR = new ArrayList<ICarpenterRecipe>();
-	public static ArrayList<ICarpenterRecipe> plankPaneR = new ArrayList<ICarpenterRecipe>();
-	public static ArrayList<ICarpenterRecipe> rackRecipe = new ArrayList<ICarpenterRecipe>();
-	public static ArrayList<ICarpenterRecipe> foodboxR = new ArrayList<ICarpenterRecipe>();
-	public static ArrayList<ICarpenterRecipe> ammoboxR = new ArrayList<ICarpenterRecipe>();
-	public static ArrayList<ICarpenterRecipe> bigboxR = new ArrayList<ICarpenterRecipe>();
-	public static ArrayList<ICarpenterRecipe> nailTroughR = new ArrayList<ICarpenterRecipe>();
+	//ENGINEERING
+	public static InformationBase coke;
+	public static InformationBase engineering_tools;
+	public static InformationBase engineering_components;
+	public static InformationBase tungsten;
+	public static InformationBase climber;
+	public static InformationBase spyglass;
+	public static InformationBase parachute;
+	public static InformationBase syringe;
+	public static InformationBase engineering_tanner;
+	public static InformationBase advanced_forge;
+	public static InformationBase advanced_crucible;
+	public static InformationBase blackpowder;
+	public static InformationBase advanced_blackpowder;
+	public static InformationBase bombs;
+	public static InformationBase bomb_press;
+	public static InformationBase bomb_arrow;
+	public static InformationBase bomb_fuse;
+	public static InformationBase shrapnel;
+	public static InformationBase firebomb;
+	public static InformationBase sticky_bomb;
+	public static InformationBase bomb_ceramic;
+	public static InformationBase bomb_iron;
+	public static InformationBase bomb_obsidian;
+	public static InformationBase bomb_crystal;
+	public static InformationBase mine_ceramic;
+	public static InformationBase mine_iron;
+	public static InformationBase mine_obsidian;
+	public static InformationBase mine_crystal;
+	public static InformationBase crossbows;
+	public static InformationBase crossbow_shafts;
+	public static InformationBase crossbow_heads;
+	public static InformationBase crossbow_head_advanced;
+	public static InformationBase crossbow_shaft_advanced;
+	public static InformationBase crossbow_ammo;
+	public static InformationBase crossbow_scope;
+	public static InformationBase crossbow_bayonet;
+	public static InformationBase cogwork_armour;
+	public static InformationBase composite_alloy;
 
+	//CONSTRUCTION
+	public static InformationBase construction_parts;
+	public static InformationBase refined_planks;
+	public static InformationBase reinforced_stone;
+	public static InformationBase clay_wall;
+	public static InformationBase glass;
+	public static InformationBase brickworks;
+	public static InformationBase decorated_stone;
+	public static InformationBase bars;
+	public static InformationBase thatch;
+	public static InformationBase paint_brush;
+	public static InformationBase tool_rack;
+	public static InformationBase food_box;
+	public static InformationBase ammo_box;
+	public static InformationBase big_box;
+	public static InformationBase bed_roll;
+
+	//PROVISIONING
+	public static InformationBase cooking_utensils;
+	public static InformationBase firepit;
+	public static InformationBase generic_meat;
+	public static InformationBase stew;
+	public static InformationBase jerky;
+	public static InformationBase sausage;
+	public static InformationBase sandwitch;
+	public static InformationBase sandwitch_big;
+	public static InformationBase meatpie;
+	public static InformationBase shepard_pie;
+	public static InformationBase bread;
+	public static InformationBase oats;
+	public static InformationBase salt;
+	public static InformationBase jug;
+	public static InformationBase berry;
+	public static InformationBase icing;
+	public static InformationBase sweetroll;
+	public static InformationBase eclair;
+	public static InformationBase cake;
+	public static InformationBase carrot_cake;
+	public static InformationBase chocolate_cake;
+	public static InformationBase black_forest_cake;
+	public static InformationBase apple_pie;
+	public static InformationBase berry_pie;
+	public static InformationBase cheese;
+	public static InformationBase cheese_roll;
+	public static InformationBase bandage;
+	public static InformationBase bandage_advanced;
+
+	//MASTERY
+	public static InformationBase toughness;
+	public static InformationBase fitness;
+	public static InformationBase armour_pro;
+	public static InformationBase parry_pro;
+	public static InformationBase counter_attack;
+	public static InformationBase auto_parry;
+	public static InformationBase scrapper;
+	public static InformationBase first_aid;
+	public static InformationBase doctor;
+
+	public static Alloy[] reinforced_stone_alloy;
+	public static Alloy[] bronze_alloy;
+	public static Alloy[] steel_alloy;
+	public static Alloy[] obsidian_alloy;
+	public static Alloy[] black_steel_alloy;
+	public static Alloy[] red_steel_alloy;
+	public static Alloy[] blue_steel_alloy;
+	public static Alloy[] mithril_alloy;
+	public static Alloy[] adamantium_alloy;
+	public static Alloy[] ignotumite_alloy;
+	public static Alloy[] mithium_alloy;
+	public static Alloy[] enderforge_alloy;
+	public static Alloy[] wolframite_raw_alloy;
+	
 	public static void init() {
-		carpenter = (new InformationBase("carpenter", 0, -3, 0, MineFantasyBlocks.CARPENTER, (InformationBase) null))
+		carpenter = (new InformationBase("carpenter", 0, -3, 0, MineFantasyBlocks.CARPENTER, null))
 				.registerStat().setUnlocked();
-		salvage = (new InformationBase("salvage", 0, -4, 0, MineFantasyBlocks.SALVAGE_BASIC, (InformationBase) null))
+		salvage = (new InformationBase("salvage", 0, -4, 0, MineFantasyBlocks.SALVAGE_BASIC, null))
 				.registerStat().setUnlocked();
-		gettingStarted = (new InformationBase("gettingStarted", 0, 0, 0, Items.BOOK, (InformationBase) null))
+		getting_started = (new InformationBase("getting_started", 0, 0, 0, Items.BOOK, null))
 				.registerStat().setUnlocked();
-		research = (new InformationBase("research", 1, 1, 0, MineFantasyItems.RESEARCH_BOOK, (InformationBase) null))
+		research = (new InformationBase("research", 1, 1, 0, MineFantasyItems.RESEARCH_BOOK, null))
 				.registerStat().setUnlocked();
-		talisman = (new InformationBase("talisman", 4, 2, 0, MineFantasyItems.TALISMAN_LESSER, research)).registerStat()
-				.setUnlocked();
-		ores = (new InformationBase("ores", 1, -2, 0, MineFantasyBlocks.COPPER_ORE, (InformationBase) null)).registerStat()
-				.setUnlocked();
-		plants = (new InformationBase("plants", 1, -3, 0, MineFantasyBlocks.LOG_IRONBARK, ores)).registerStat().setUnlocked();
-		chimney = (new InformationBase("chimney", 0, 2, 0, MineFantasyBlocks.CHIMNEY_STONE, (InformationBase) null))
+		talisman = (new InformationBase("talisman", 4, 2, 0, MineFantasyItems.TALISMAN_LESSER, research))
 				.registerStat().setUnlocked();
-		tanning = (new InformationBase("tanning", 0, -2, 0, Items.LEATHER, (InformationBase) null)).registerStat()
-				.setUnlocked().setSpecial();
-		commodities = (new InformationBase("commodities", -1, -2, 0, MineFantasyItems.NAIL, (InformationBase) null))
+		ores = (new InformationBase("ores", 1, -2, 0, MineFantasyBlocks.COPPER_ORE, null))
 				.registerStat().setUnlocked();
-		dust = (new InformationBase("dust", -1, -3, 0, MineFantasyItems.CLAY_POT, commodities)).registerStat()
-				.setUnlocked();
-		craftCrafters = (new InformationBase("craftCrafters", -1, 1, 0, MineFantasyItems.STANDARD_HAMMER,
-				(InformationBase) null)).registerStat().setUnlocked();
-		stamina = (new InformationBase("stamina", -3, 1, 0, Items.FEATHER, craftCrafters)).registerStat().setUnlocked();
-		combat = (new InformationBase("combat", -5, 2, 0, Items.IRON_SWORD, stamina)).registerStat().setUnlocked();
-		craftArmourBasic = (new InformationBase("craftArmourBasic", -5, 0, 5,
-				LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 1), combat)).registerStat().setUnlocked();
-		firemaker = (new InformationBase("firemaker", 5, 1, 0, Items.FLINT_AND_STEEL, (InformationBase) null))
+		plants = (new InformationBase("plants", 1, -3, 0, MineFantasyBlocks.LOG_IRONBARK, ores))
 				.registerStat().setUnlocked();
-
-		dragons = (new InformationBase("dragons", -1, 3, 0, MineFantasyItems.DRAGON_HEART, (InformationBase) null))
+		chimney = (new InformationBase("chimney", 0, 2, 0, MineFantasyBlocks.CHIMNEY_STONE, null))
 				.registerStat().setUnlocked();
-		minotaurs = (new InformationBase("minotaurs", 1, 3, 0, Items.BEEF, (InformationBase) null)).registerStat()
-				.setUnlocked();
+		tanning = (new InformationBase("tanning", 0, -2, 0, Items.LEATHER, null))
+				.registerStat().setUnlocked().setSpecial();
+		commodities = (new InformationBase("commodities", -1, -2, 0, MineFantasyItems.NAIL, null))
+				.registerStat().setUnlocked();
+		dust = (new InformationBase("dust", -1, -3, 0, MineFantasyItems.CLAY_POT, commodities))
+				.registerStat().setUnlocked();
+		craft_crafters = (new InformationBase("craft_crafters", -1, 1, 0, MineFantasyItems.STANDARD_HAMMER, null))
+				.registerStat().setUnlocked();
+		stamina = (new InformationBase("stamina", -3, 1, 0, Items.FEATHER, craft_crafters))
+				.registerStat().setUnlocked();
+		combat = (new InformationBase("combat", -5, 2, 0, Items.IRON_SWORD, stamina))
+				.registerStat().setUnlocked();
+		craft_armour_basic = (new InformationBase("craft_armour_basic", -5, 0, 5, LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 0, 1), combat))
+				.registerStat().setUnlocked();
+		firemaker = (new InformationBase("firemaker", 5, 1, 0, Items.FLINT_AND_STEEL, null))
+				.registerStat().setUnlocked();
+		dragons = (new InformationBase("dragons", -1, 3, 0, MineFantasyItems.DRAGON_HEART, null))
+				.registerStat().setUnlocked();
+		minotaurs = (new InformationBase("minotaurs", 1, 3, 0, Items.BEEF, null))
+				.registerStat().setUnlocked();
 
 		// ARTISANRY -From Not very to the most Expensive
 		bloomery = (new InformationBase("bloomery", 4, -2, 0, MineFantasyBlocks.BLOOMERY, crucible)).registerStat()
 				.setPage(artisanry).setUnlocked().setSpecial();
-		crucible = (new InformationBase("crucible", 4, 0, 0, MineFantasyBlocks.CRUCIBLE_STONE, (InformationBase) null))
+		crucible = (new InformationBase("crucible", 4, 0, 0, MineFantasyBlocks.CRUCIBLE_STONE, null))
 				.registerStat().setPage(artisanry).setUnlocked().setSpecial();
-		crucible2 = (new InformationBase("crucible2", 6, 0, 1, MineFantasyBlocks.CRUCIBLE_FIRECLAY, crucible)).registerStat()
+		firebrick_crucible = (new InformationBase("firebrick_crucible", 6, 0, 1, MineFantasyBlocks.CRUCIBLE_FIRECLAY, crucible)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 40);
 
-		smelt_copper = (new InformationBase("smelt_copper", 1, 0, 0, MineFantasyItems.COPPER_INGOT, (InformationBase) null))
+		smelt_copper = (new InformationBase("smelt_copper", 1, 0, 0, MineFantasyItems.COPPER_INGOT, null))
 				.registerStat().setPage(artisanry).setUnlocked().setDescriptValues(getMetalTier(MineFantasyMaterials.Names.COPPER));
 		smelt_bronze = (new InformationBase("smelt_bronze", 1, 2, 2, MineFantasyItems.BRONZE_INGOT, crucible)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 5).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BRONZE));
 		smelt_iron = (new InformationBase("smelt_iron", 1, 4, 1, Items.IRON_INGOT, null)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 10).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.IRON));
-		coalflux = (new InformationBase("coalflux", 1, 6, 2, MineFantasyItems.COAL_FLUX, smelt_iron)).registerStat()
+		coal_flux = (new InformationBase("coal_flux", 1, 6, 2, MineFantasyItems.COAL_FLUX, smelt_iron)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 15);
-		blastfurn = (new InformationBase("blastfurn", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smelt_iron))
+		blast_furnace = (new InformationBase("blast_furnace", 2, 5, 5, MineFantasyBlocks.BLAST_HEATER, smelt_iron))
 				.registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY, 25);
-		bigfurn = (new InformationBase("bigfurn", 0, 5, 4, MineFantasyBlocks.FURNACE_STONE, smelt_iron)).registerStat()
+		big_furnace = (new InformationBase("big_furnace", 0, 5, 4, MineFantasyBlocks.FURNACE_STONE, smelt_iron)).registerStat()
 				.setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY, 10);
-		smelt_pig_iron = (new InformationBase("smelt_pig_iron", 3, 3, 0, MineFantasyItems.PIG_IRON_INGOT, blastfurn)).registerStat()
+		smelt_pig_iron = (new InformationBase("smelt_pig_iron", 3, 3, 0, MineFantasyItems.PIG_IRON_INGOT, blast_furnace)).registerStat()
 				.setPage(artisanry).setUnlocked().addSkill(Skill.ARTISANRY, 25);
 		smelt_steel = (new InformationBase("smelt_steel", 4, 5, 1, MineFantasyItems.STEEL_INGOT, smelt_pig_iron)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 25).setDescriptValues(getMetalTier(MineFantasyMaterials.Names.STEEL));
@@ -233,7 +297,7 @@ public class MineFantasyKnowledgeList {
 		smelt_black_steel = (new InformationBase("smelt_black_steel", 4, 7, 3, MineFantasyItems.BLACK_STEEL_INGOT, smelt_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.BLACK_STEEL));
-		smeltDragonforge = (new InformationBase("smeltDragonforge", -4, -1, 1, MineFantasyItems.DRAGON_HEART, null))
+		smelt_dragonforged = (new InformationBase("smelt_dragonforged", -4, -1, 1, MineFantasyItems.DRAGON_HEART, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50);
 		smelt_red_steel = (new InformationBase("smelt_red_steel", 3, 9, 5, MineFantasyItems.RED_STEEL_INGOT, smelt_black_steel))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 65)
@@ -246,27 +310,25 @@ public class MineFantasyKnowledgeList {
 		smelt_adamantium = (new InformationBase("smelt_adamantium", 3, 12, 3, MineFantasyItems.ADAMANTIUM_INGOT, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 75)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ADAMANTIUM));
-
-		smeltMaster = (new InformationBase("smeltMaster", 4, 13, 3, MineFantasyItems.ANCIENT_JEWEL_MASTER,
-				(InformationBase) null)).registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY,
-				100);
-		smelt_ignotumite = (new InformationBase("smelt_ignotumite", 2, 15, 3, MineFantasyItems.IGNOTUMITE_INGOT, smeltMaster))
+		smelt_master = (new InformationBase("smelt_master", 4, 13, 3, MineFantasyItems.ANCIENT_JEWEL_MASTER, null))
+				.registerStat().setPage(artisanry).setSpecial().addSkill(Skill.ARTISANRY, 100);
+		smelt_ignotumite = (new InformationBase("smelt_ignotumite", 2, 15, 3, MineFantasyItems.IGNOTUMITE_INGOT, smelt_master))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.IGNOTUMITE));
-		smelt_mithium = (new InformationBase("smelt_mithium", 6, 15, 3, MineFantasyItems.MITHIUM_INGOT, smeltMaster))
+		smelt_mithium = (new InformationBase("smelt_mithium", 6, 15, 3, MineFantasyItems.MITHIUM_INGOT, smelt_master))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.MITHIUM));
-		smelt_ender = (new InformationBase("smelt_ender", 4, 16, 3, MineFantasyItems.ENDER_INGOT, smeltMaster))
+		smelt_ender = (new InformationBase("smelt_ender", 4, 16, 3, MineFantasyItems.ENDER_INGOT, smelt_master))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 100)
 				.setDescriptValues(getMetalTier(MineFantasyMaterials.Names.ENDER));
 
-		craftHCCTools = (new InformationBase("craftHCCTools", -1, -2, 0, MineFantasyItems.STONE_PICK, (InformationBase) null))
-				.registerStat().setPage(artisanry).setUnlocked();
-		bellows = (new InformationBase("bellows", 0, -1, 0, MineFantasyBlocks.BELLOWS, (InformationBase) null)).registerStat()
+		crafting_HCC_tools = (new InformationBase("crafting_HCC_tools", -1, -2, 0, MineFantasyItems.STONE_PICK, null)).registerStat()
+				.setPage(artisanry).setUnlocked();
+		bellows = (new InformationBase("bellows", 0, -1, 0, MineFantasyBlocks.BELLOWS, null)).registerStat()
 				.setPage(artisanry).setUnlocked();
 		trough = (new InformationBase("trough", 0, -2, 0, MineFantasyBlocks.TROUGH_WOOD, bellows)).registerStat()
 				.setPage(artisanry).setUnlocked();
-		forge = (new InformationBase("forge", 0, 0, 0, MineFantasyBlocks.FORGE, (InformationBase) null)).registerStat()
+		forge = (new InformationBase("forge", 0, 0, 0, MineFantasyBlocks.FORGE, null)).registerStat()
 				.setPage(artisanry).setUnlocked();
 		anvil = (new InformationBase("anvil", -1, 0, 0, MineFantasyBlocks.ANVIL_IRON, forge)).registerStat().setPage(artisanry)
 				.setUnlocked().setSpecial();
@@ -274,125 +336,124 @@ public class MineFantasyKnowledgeList {
 				.setUnlocked();
 		apron = (new InformationBase("apron", -1, -1, 0, LeatherArmourListMFR.LEATHER_APRON, anvil)).registerStat()
 				.setPage(artisanry).setUnlocked();
-		craftTools = (new InformationBase("craftTools", -3, 2, 0, MineFantasyItems.STANDARD_PICK, bar)).registerStat()
+		craft_tools = (new InformationBase("craft_tools", -3, 2, 0, MineFantasyItems.STANDARD_PICK, bar)).registerStat()
 				.setPage(artisanry).setUnlocked();
-		craftAdvTools = (new InformationBase("craftAdvTools", -5, 2, 0, MineFantasyItems.STANDARD_HEAVY_PICK, craftTools))
-				.registerStat().setPage(artisanry).setUnlocked();
-		craftWeapons = (new InformationBase("craftWeapons", -3, 1, 5, MineFantasyItems.STANDARD_SWORD, bar))
-				.registerStat().setPage(artisanry).setUnlocked();
-		craftAdvWeapons = (new InformationBase("craftAdvWeapons", -5, 1, 0, MineFantasyItems.STANDARD_BATTLEAXE,
-				craftWeapons)).registerStat().setPage(artisanry).setUnlocked();
+		craft_advanced_tools = (new InformationBase("craft_advanced_tools", -5, 2, 0, MineFantasyItems.STANDARD_HEAVY_PICK, craft_tools)).registerStat()
+				.setPage(artisanry).setUnlocked();
+		craft_weapons = (new InformationBase("craft_weapons", -3, 1, 5, MineFantasyItems.STANDARD_SWORD, bar)).registerStat()
+				.setPage(artisanry).setUnlocked();
+		craft_advanced_weapons = (new InformationBase("craft_advanced_weapons", -5, 1, 0, MineFantasyItems.STANDARD_BATTLEAXE, craft_weapons)).registerStat()
+				.setPage(artisanry).setUnlocked();
 		arrows = (new InformationBase("arrows", -3, 4, 0, MineFantasyItems.STANDARD_ARROW, bar)).registerStat()
 				.setPage(artisanry).setUnlocked();
 
-		craftOrnate = (new InformationBase("craftOrnate", -3, -1, 1, MineFantasyItems.ORNATE_ITEMS, null)).registerStat()
+		craft_ornate = (new InformationBase("craft_ornate", -3, -1, 1, MineFantasyItems.ORNATE_ITEMS, null)).registerStat()
 				.setPage(artisanry).addSkill(Skill.ARTISANRY, 35);
-		craftArmourLight = (new InformationBase("craftArmourLight", -3, 3, 1,
-				LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 1), anvil)).registerStat().setPage(artisanry)
-				.setUnlocked();
-		craftArmourMedium = (new InformationBase("craftArmourMedium", -4, 3, 1, MineFantasyItems.STANDARD_CHAIN_CHESTPLATE,
-				craftArmourLight)).registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 0);
-		craftArmourHeavy = (new InformationBase("craftArmourHeavy", -5, 3, 3, MineFantasyItems.STANDARD_PLATE_CHESTPLATE,
-				craftArmourMedium)).registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 10);
-		arrowsBodkin = (new InformationBase("arrowsBodkin", -4, 5, 1, MineFantasyItems.STANDARD_ARROW_BODKIN, arrows))
-				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 10);
-		arrowsBroad = (new InformationBase("arrowsBroad", -5, 5, 2, MineFantasyItems.STANDARD_ARROW_BROAD, arrows))
-				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 20);
+		craft_armour_light = (new InformationBase("craft_armour_light", -3, 3, 1, LeatherArmourListMFR.armour(LeatherArmourListMFR.LEATHER, 3, 1), anvil)).registerStat()
+				.setPage(artisanry).setUnlocked();
+		craft_armour_medium = (new InformationBase("craft_armour_medium", -4, 3, 1, MineFantasyItems.STANDARD_CHAIN_CHESTPLATE, craft_armour_light)).registerStat()
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 0);
+		craft_armour_heavy = (new InformationBase("craft_armour_heavy", -5, 3, 3, MineFantasyItems.STANDARD_PLATE_CHESTPLATE,
+				craft_armour_medium)).registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 10);
+		arrows_bodkin = (new InformationBase("arrows_bodkin", -4, 5, 1, MineFantasyItems.STANDARD_ARROW_BODKIN, arrows)).registerStat()
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 10);
+		arrows_broad = (new InformationBase("arrows_broad", -5, 5, 2, MineFantasyItems.STANDARD_ARROW_BROAD, arrows)).registerStat()
+				.setPage(artisanry).addSkill(Skill.ARTISANRY, 20);
 
 		// ENGINEERING - Highly Expensive
-		etools = (new InformationBase("etools", 3, 0, 0, MineFantasyItems.STANDARD_SPANNER, (InformationBase) null))
-				.registerStat().setPage(engineering).setUnlocked();
-		ecomponents = (new InformationBase("ecomponents", 5, 0, 0, MineFantasyItems.BOLT, etools)).registerStat()
+		engineering_tools = (new InformationBase("engineering_tools", 3, 0, 0, MineFantasyItems.STANDARD_SPANNER, null)).registerStat()
 				.setPage(engineering).setUnlocked();
-		tungsten = (new InformationBase("tungsten", 8, -1, 1, MineFantasyItems.TUNGSTEN_INGOT, ecomponents)).registerStat()
+		engineering_components = (new InformationBase("engineering_components", 5, 0, 0, MineFantasyItems.BOLT, engineering_tools)).registerStat()
+				.setPage(engineering).setUnlocked();
+		tungsten = (new InformationBase("tungsten", 8, -1, 1, MineFantasyItems.TUNGSTEN_INGOT, engineering_components)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 20).addSkill(Skill.ARTISANRY, 20);
-		coke = (new InformationBase("coke", 4, -1, 2, MineFantasyItems.COKE, ecomponents)).registerStat()
+		coke = (new InformationBase("coke", 4, -1, 2, MineFantasyItems.COKE, engineering_components)).registerStat()
 				.setPage(engineering);
-		climber = (new InformationBase("climber", 7, 0, 1, MineFantasyItems.CLIMBING_PICK_BASIC, ecomponents)).registerStat()
+		climber = (new InformationBase("climber", 7, 0, 1, MineFantasyItems.CLIMBING_PICK_BASIC, engineering_components)).registerStat()
 				.setPage(engineering).setUnlocked();
 		spyglass = (new InformationBase("spyglass", 8, 1, 2, new ItemStack(MineFantasyItems.SPYGLASS, 1, 2), climber))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 5);
 		parachute = (new InformationBase("parachute", 9, 2, 2, MineFantasyItems.PARACHUTE, climber)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 10);
-		syringe = (new InformationBase("syringe", 5, -2, 1, MineFantasyItems.SYRINGE_EMPTY, ecomponents)).registerStat()
+		syringe = (new InformationBase("syringe", 5, -2, 1, MineFantasyItems.SYRINGE_EMPTY, engineering_components)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 25);
-		engTanner = (new InformationBase("engTanner", 5, 2, 1, MineFantasyBlocks.TANNER_METAL, ecomponents)).registerStat()
+		engineering_tanner = (new InformationBase("engineering_tanner", 5, 2, 1, MineFantasyBlocks.TANNER_METAL, engineering_components)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 40).addSkill(Skill.ARTISANRY, 25);
-		advcrucible = (new InformationBase("advcrucible", 7, 3, 1, MineFantasyBlocks.CRUCIBLE_AUTO, engTanner)).registerStat()
+		advanced_crucible = (new InformationBase("v", 7, 3, 1, MineFantasyBlocks.CRUCIBLE_AUTO, engineering_tanner)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 50).addSkill(Skill.ARTISANRY, 35);
-		advforge = (new InformationBase("advforge", 9, 3, 1, MineFantasyBlocks.FORGE_METAL, advcrucible)).registerStat()
+		advanced_forge = (new InformationBase("advanced_forge", 9, 3, 1, MineFantasyBlocks.FORGE_METAL, advanced_crucible)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 75).addSkill(Skill.ARTISANRY, 50);
 
-		blackpowder = (new InformationBase("blackpowder", 0, 0, 4, MineFantasyItems.BLACKPOWDER, (InformationBase) null))
+		blackpowder = (new InformationBase("blackpowder", 0, 0, 4, MineFantasyItems.BLACKPOWDER, null))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 0);
-		advblackpowder = (new InformationBase("advblackpowder", 2, -2, 2, MineFantasyItems.BLACKPOWDER_ADVANCED,
-				blackpowder)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 50);
+		advanced_blackpowder = (new InformationBase("advanced_blackpowder", 2, -2, 2, MineFantasyItems.BLACKPOWDER_ADVANCED, blackpowder)).registerStat()
+				.setPage(engineering).addSkill(Skill.ENGINEERING, 50);
 		bombs = (new InformationBase("bombs", 0, 2, 3, ItemBomb.createExplosive(MineFantasyItems.BOMB_CUSTOM, "ceramic", "basic", "basic", "black_powder", 1), blackpowder)).registerStat()
 				.setPage(engineering).setSpecial().addSkill(Skill.ENGINEERING, 10);
-		bpress = (new InformationBase("bpress", -1, 1, 2, MineFantasyBlocks.BOMB_PRESS, bombs)).registerStat()
+		bomb_press = (new InformationBase("bomb_press", -1, 1, 2, MineFantasyBlocks.BOMB_PRESS, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 30);
-		bombarrow = (new InformationBase("bombarrow", 1, 1, 2, MineFantasyItems.EXPLODING_ARROW, bombs)).registerStat()
+		bomb_arrow = (new InformationBase("bomb_arrow", 1, 1, 2, MineFantasyItems.EXPLODING_ARROW, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 40);
-		bombFuse = (new InformationBase("bombFuse", 2, 2, 0, MineFantasyItems.BOMB_FUSE, bombs)).registerStat()
+		bomb_fuse = (new InformationBase("bomb_fuse", 2, 2, 0, MineFantasyItems.BOMB_FUSE, bombs)).registerStat()
 				.setUnlocked().setPage(engineering);
 		shrapnel = (new InformationBase("shrapnel", 0, 4, 1, MineFantasyItems.SHRAPNEL, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 25);
 		firebomb = (new InformationBase("firebomb", 0, 6, 2, Items.BLAZE_POWDER, shrapnel)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 85);
-		stickybomb = (new InformationBase("stickybomb", -2, 2, 1, Items.SLIME_BALL, bombs)).registerStat()
+		sticky_bomb = (new InformationBase("sticky_bomb", -2, 2, 1, Items.SLIME_BALL, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 50);
-		bombCeramic = (new InformationBase("bombCeramic", 2, 3, 0, MineFantasyItems.BOMB_CASING_CERAMIC, bombs)).registerStat()
+		bomb_ceramic = (new InformationBase("bomb_ceramic", 2, 3, 0, MineFantasyItems.BOMB_CASING_CERAMIC, bombs)).registerStat()
 				.setUnlocked().setPage(engineering);
-		bombIron = (new InformationBase("bombIron", 4, 5, 1, MineFantasyItems.BOMB_CASING_IRON, bombCeramic))
+		bomb_iron = (new InformationBase("bomb_iron", 4, 5, 1, MineFantasyItems.BOMB_CASING_IRON, bomb_ceramic))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 20);
-		bombObsidian = (new InformationBase("bombObsidian", 4, 7, 2, MineFantasyItems.BOMB_CASING_OBSIDIAN, bombIron))
+		bomb_obsidian = (new InformationBase("bomb_obsidian", 4, 7, 2, MineFantasyItems.BOMB_CASING_OBSIDIAN, bomb_iron))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 35);
-		bombCrystal = (new InformationBase("bombCrystal", 2, 9, 1, MineFantasyItems.BOMB_CASING_CRYSTAL, bombObsidian))
+		bomb_crystal = (new InformationBase("bomb_crystal", 2, 9, 1, MineFantasyItems.BOMB_CASING_CRYSTAL, bomb_obsidian))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 40);
-		mineCeramic = (new InformationBase("mineCeramic", -2, 3, 2, MineFantasyItems.MINE_CASING_CERAMIC, bombs)).registerStat()
+		mine_ceramic = (new InformationBase("mine_ceramic", -2, 3, 2, MineFantasyItems.MINE_CASING_CERAMIC, bombs)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 15);
-		mineIron = (new InformationBase("mineIron", -4, 5, 1, MineFantasyItems.MINE_CASING_IRON, mineCeramic))
+		mine_iron = (new InformationBase("mine_iron", -4, 5, 1, MineFantasyItems.MINE_CASING_IRON, mine_ceramic))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 20);
-		mineObsidian = (new InformationBase("mineObsidian", -4, 7, 2, MineFantasyItems.MINE_CASING_OBSIDIAN, mineIron))
+		mine_obsidian = (new InformationBase("mine_obsidian", -4, 7, 2, MineFantasyItems.MINE_CASING_OBSIDIAN, mine_iron))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 35);
-		mineCrystal = (new InformationBase("mineCrystal", -2, 9, 1, MineFantasyItems.MINE_CASING_CRYSTAL, mineObsidian))
+		mine_crystal = (new InformationBase("mine_crystal", -2, 9, 1, MineFantasyItems.MINE_CASING_CRYSTAL, mine_obsidian))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 40);
 
 		crossbows = (new InformationBase("crossbows", -4, 0, 3, MineFantasyBlocks.CROSSBOW_BENCH, null)).registerStat()
 				.setPage(engineering).setSpecial().addSkill(Skill.ENGINEERING, 0);
-		crossShafts = (new InformationBase("crossShafts", -6, 2, 0, MineFantasyItems.CROSSBOW_STOCK_WOOD, crossbows))
+		crossbow_shafts = (new InformationBase("crossbow_shafts", -6, 2, 0, MineFantasyItems.CROSSBOW_STOCK_WOOD, crossbows))
 				.registerStat().setPage(engineering).setUnlocked();
-		crossShaftAdvanced = (new InformationBase("crossShaftAdvanced", -6, 4, 2, MineFantasyItems.CROSSBOW_STOCK_IRON,
-				crossShafts)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 40);
-		crossHeads = (new InformationBase("crossHeads", -2, -2, 0, MineFantasyItems.CROSSBOW_ARMS_BASIC, crossbows))
+		crossbow_shaft_advanced = (new InformationBase("cross_shaft_advanced", -6, 4, 2, MineFantasyItems.CROSSBOW_STOCK_IRON,
+				crossbow_shafts)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 40);
+		crossbow_heads = (new InformationBase("crossbow_heads", -2, -2, 0, MineFantasyItems.CROSSBOW_ARMS_BASIC, crossbows))
 				.registerStat().setPage(engineering).setUnlocked();
-		crossHeadAdvanced = (new InformationBase("crossHeadAdvanced", -3, -3, 2, MineFantasyItems.CROSSBOW_ARMS_ADVANCED,
-				crossHeads)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 30);
-		crossBayonet = (new InformationBase("crossBayonet", -1, -3, 1, MineFantasyItems.CROSSBOW_BAYONET, crossHeads))
+		crossbow_head_advanced = (new InformationBase("crossbow_head_advanced", -3, -3, 2, MineFantasyItems.CROSSBOW_ARMS_ADVANCED,
+				crossbow_heads)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 30);
+		crossbow_bayonet = (new InformationBase("crossbow_bayonet", -1, -3, 1, MineFantasyItems.CROSSBOW_BAYONET, crossbow_heads))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 10);
-		crossAmmo = (new InformationBase("crossAmmo", -5, 3, 1, MineFantasyItems.CROSSBOW_AMMO, crossShafts)).registerStat()
+		crossbow_ammo = (new InformationBase("crossbow_ammo", -5, 3, 1, MineFantasyItems.CROSSBOW_AMMO, crossbow_shafts)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 30);
-		crossScope = (new InformationBase("crossScope", -7, 3, 1, MineFantasyItems.CROSSBOW_SCOPE, crossShafts))
+		crossbow_scope = (new InformationBase("crossbow_scope", -7, 3, 1, MineFantasyItems.CROSSBOW_SCOPE, crossbow_shafts))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 20);
 
-		cogArmour = (new InformationBase("cogArmour", 8, -3, 2, MineFantasyBlocks.BLOCK_COGWORK_HELM, tungsten)).registerStat()
+		cogwork_armour = (new InformationBase("cogwork_armour", 8, -3, 2, MineFantasyBlocks.BLOCK_COGWORK_HELM, tungsten)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 60);
-		compPlate = (new InformationBase("compPlate", 10, -3, 1, MineFantasyItems.COMPOSITE_ALLOY_INGOT, tungsten))
+		composite_alloy = (new InformationBase("composite_alloy", 10, -3, 1, MineFantasyItems.COMPOSITE_ALLOY_INGOT, tungsten))
 				.registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 50)
 				.addSkill(Skill.ARTISANRY, 40);
 
-		repair_basic = (new InformationBase("repair_basic", 8, 0, 2, MineFantasyBlocks.REPAIR_BASIC, (InformationBase) null))
+		repair_basic = (new InformationBase("repair_basic", 8, 0, 2, MineFantasyBlocks.REPAIR_BASIC, null))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 10);
 		repair_advanced = (new InformationBase("repair_advanced", 10, 0, 3, MineFantasyBlocks.REPAIR_ADVANCED, repair_basic))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 25);
 		repair_ornate = (new InformationBase("repair_ornate", 12, 2, 3, MineFantasyBlocks.REPAIR_ORNATE, repair_advanced))
 				.registerStat().setPage(artisanry).addSkill(Skill.ARTISANRY, 50);
 
-		constructionPts = (new InformationBase("constructionPts", 0, 0, 0, MineFantasyItems.TIMBER_CUT,
-				(InformationBase) null)).registerStat().setPage(construction).setUnlocked();
+		construction_parts = (new InformationBase("construction_parts", 0, 0, 0, MineFantasyItems.TIMBER_CUT,
+				null)).registerStat().setPage(construction).setUnlocked();
 		reinforced_stone = (new InformationBase("reinforced_stone", 1, 0, 0, MineFantasyBlocks.REINFORCED_STONE,
-				(InformationBase) null)).registerStat().setPage(construction).setUnlocked();
-		glass = (new InformationBase("glass", 0, 1, 0, MineFantasyBlocks.FRAMED_GLASS, (InformationBase) null)).registerStat()
+				null)).registerStat().setPage(construction).setUnlocked();
+		glass = (new InformationBase("glass", 0, 1, 0, MineFantasyBlocks.FRAMED_GLASS, null)).registerStat()
 				.setPage(construction).setUnlocked();
 		brickworks = (new InformationBase("brickworks", 3, 0, 0, MineFantasyBlocks.COBBLE_BRICK, reinforced_stone))
 				.registerStat().setPage(construction).setUnlocked();
@@ -401,8 +462,8 @@ public class MineFantasyKnowledgeList {
 		thatch = (new InformationBase("thatch", 0, -3, 0, MineFantasyBlocks.THATCH, clay_wall)).registerStat()
 				.setPage(construction).setUnlocked();
 		refined_planks = (new InformationBase("refined_planks", -1, 0, 1, MineFantasyBlocks.REFINED_PLANKS,
-				(InformationBase) null)).registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 0);
-		clay_wall = (new InformationBase("clay_wall", 0, -1, 2, MineFantasyBlocks.CLAY_WALL, (InformationBase) null))
+				null)).registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 0);
+		clay_wall = (new InformationBase("clay_wall", 0, -1, 2, MineFantasyBlocks.CLAY_WALL, null))
 				.registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 5);
 		paint_brush = (new InformationBase("paint_brush", -3, 0, 1, MineFantasyItems.PAINT_BRUSH, refined_planks))
 				.registerStat().setPage(construction).addSkill(Skill.CONSTRUCTION, 10);
@@ -411,7 +472,7 @@ public class MineFantasyKnowledgeList {
 
 		//        bed_roll = (new InformationBase("bed_roll", 2, 3, 1, BlockListMFR.bedroll, (InformationBase) null)).registerStat()
 		//                .setPage(construction).setUnlocked();
-		tool_rack = (new InformationBase("tool_rack", 2, 2, 0, MineFantasyBlocks.TOOL_RACK_WOOD, (InformationBase) null))
+		tool_rack = (new InformationBase("tool_rack", 2, 2, 0, MineFantasyBlocks.TOOL_RACK_WOOD, null))
 				.registerStat().setPage(construction).setUnlocked();
 		food_box = (new InformationBase("food_box", 2, 4, 1, (MineFantasyBlocks.FOOD_BOX_BASIC).construct(MineFantasyMaterials.Names.OAK_WOOD), tool_rack)).registerStat()
 				.setPage(construction).setUnlocked();
@@ -421,18 +482,18 @@ public class MineFantasyKnowledgeList {
 				.setPage(construction).addSkill(Skill.CONSTRUCTION, 25);
 
 		// COOKING -The Cheapest
-		cookingutensil = (new InformationBase("cookingutensil", -1, 0, 0, MineFantasyItems.PIE_TRAY, (InformationBase) null))
+		cooking_utensils = (new InformationBase("cooking_utensils", -1, 0, 0, MineFantasyItems.PIE_TRAY, null))
 				.registerStat().setPage(provisioning).setUnlocked();
-		firepit = (new InformationBase("firepit", 0, 0, 0, MineFantasyBlocks.FIREPIT, (InformationBase) null)).registerStat()
+		firepit = (new InformationBase("firepit", 0, 0, 0, MineFantasyBlocks.FIREPIT, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
 
 		generic_meat = (new InformationBase("generic_meat", 0, -1, 0, MineFantasyItems.GENERIC_MEAT_UNCOOKED,
-				(InformationBase) null)).registerStat().setPage(provisioning).setUnlocked();
+				null)).registerStat().setPage(provisioning).setUnlocked();
 		stew = (new InformationBase("stew", 0, -3, 0, MineFantasyItems.STEW, generic_meat)).registerStat()
 				.setPage(provisioning).setUnlocked();
 		jerky = (new InformationBase("jerky", 0, -5, 1, MineFantasyItems.JERKY, stew)).registerStat().setPage(provisioning)
 				.addSkill(Skill.PROVISIONING, 10);
-		saussage = (new InformationBase("saussage", 2, -5, 2, MineFantasyItems.SAUSAGE_COOKED, jerky)).registerStat()
+		sausage = (new InformationBase("sausage", 2, -5, 2, MineFantasyItems.SAUSAGE_COOKED, jerky)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 35);
 		sandwitch = (new InformationBase("sandwitch", 1, -7, 3, MineFantasyItems.SANDWITCH_MEAT, jerky)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 15);
@@ -440,18 +501,18 @@ public class MineFantasyKnowledgeList {
 				.registerStat().setPage(provisioning).addSkill(Skill.PROVISIONING, 25);
 		meatpie = (new InformationBase("meatpie", -1, -7, 2, MineFantasyBlocks.PIE_MEAT, jerky)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 35);
-		shepardpie = (new InformationBase("shepardpie", -2, -9, 3, MineFantasyBlocks.PIE_SHEPARDS, meatpie)).registerStat()
+		shepard_pie = (new InformationBase("shepard_pie", -2, -9, 3, MineFantasyBlocks.PIE_SHEPARDS, meatpie)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 80);
-		bread = (new InformationBase("bread", 1, 0, 0, MineFantasyItems.BREADROLL, (InformationBase) null)).registerStat()
+		bread = (new InformationBase("bread", 1, 0, 0, MineFantasyItems.BREADROLL, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
 		oats = (new InformationBase("oats", 3, 0, 0, MineFantasyItems.OATS, bread)).registerStat().setPage(provisioning)
 				.setUnlocked();
 
-		salt = (new InformationBase("salt", -2, -2, 0, MineFantasyItems.SALT, (InformationBase) null)).registerStat()
+		salt = (new InformationBase("salt", -2, -2, 0, MineFantasyItems.SALT, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
-		jug = (new InformationBase("jug", -1, -2, 0, MineFantasyItems.JUG_WATER, (InformationBase) null)).registerStat()
+		jug = (new InformationBase("jug", -1, -2, 0, MineFantasyItems.JUG_WATER, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
-		berry = (new InformationBase("berry", 0, 1, 0, MineFantasyItems.BERRIES, (InformationBase) null)).registerStat()
+		berry = (new InformationBase("berry", 0, 1, 0, MineFantasyItems.BERRIES, null)).registerStat()
 				.setPage(provisioning).setUnlocked();
 		icing = (new InformationBase("icing", -1, 2, 0, MineFantasyItems.ICING, berry)).registerStat().setPage(provisioning)
 				.setUnlocked();
@@ -461,45 +522,45 @@ public class MineFantasyKnowledgeList {
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 75);
 		cake = (new InformationBase("cake", 0, 5, 2, MineFantasyBlocks.CAKE_VANILLA, sweetroll)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 25);
-		carrotcake = (new InformationBase("carrotcake", -1, 7, 3, MineFantasyBlocks.CAKE_CARROT, cake)).registerStat()
+		carrot_cake = (new InformationBase("carrot_cake", -1, 7, 3, MineFantasyBlocks.CAKE_CARROT, cake)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 40);
-		chococake = (new InformationBase("chococake", 1, 7, 3, MineFantasyBlocks.CAKE_CHOCOLATE, cake)).registerStat()
+		chocolate_cake = (new InformationBase("chocolate_cake", 1, 7, 3, MineFantasyBlocks.CAKE_CHOCOLATE, cake)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 40);
-		bfcake = (new InformationBase("bfcake", 1, 9, 4, MineFantasyBlocks.CAKE_BF, chococake)).registerStat()
+		black_forest_cake = (new InformationBase("black_forest_cake", 1, 9, 4, MineFantasyBlocks.CAKE_BF, chocolate_cake)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 90);
-		berrypie = (new InformationBase("berrypie", 2, 1, 2, MineFantasyBlocks.PIE_BERRY, berry)).registerStat()
+		berry_pie = (new InformationBase("berry_pie", 2, 1, 2, MineFantasyBlocks.PIE_BERRY, berry)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 20);
-		applepie = (new InformationBase("applepie", 4, 1, 2, MineFantasyBlocks.PIE_APPLE, berrypie)).registerStat()
+		apple_pie = (new InformationBase("apple_pie", 4, 1, 2, MineFantasyBlocks.PIE_APPLE, berry_pie)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 30);
 
-		cheese = (new InformationBase("cheese", 1, -1, 0, MineFantasyBlocks.CHEESE_WHEEL, (InformationBase) null))
+		cheese = (new InformationBase("cheese", 1, -1, 0, MineFantasyBlocks.CHEESE_WHEEL, null))
 				.registerStat().setPage(provisioning).setUnlocked();
-		cheeseroll = (new InformationBase("cheeseroll", 3, -1, 2, MineFantasyItems.CHEESE_ROLL, cheese)).registerStat()
+		cheese_roll = (new InformationBase("cheese_roll", 3, -1, 2, MineFantasyItems.CHEESE_ROLL, cheese)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 15);
 
-		bandage = (new InformationBase("bandage", -3, 0, 0, MineFantasyItems.BANDAGE_WOOL, (InformationBase) null))
+		bandage = (new InformationBase("bandage", -3, 0, 0, MineFantasyItems.BANDAGE_WOOL, null))
 				.registerStat().setPage(provisioning).setUnlocked();
-		bandageadv = (new InformationBase("bandageadv", -5, -1, 2, MineFantasyItems.BANDAGE_TOUGH, bandage)).registerStat()
+		bandage_advanced = (new InformationBase("bandage_advanced", -5, -1, 2, MineFantasyItems.BANDAGE_TOUGH, bandage)).registerStat()
 				.setPage(provisioning).addSkill(Skill.PROVISIONING, 40);
 
 		// MASTERY
 		toughness = (new InformationBase("toughness", -1, 0, 0, MineFantasyItems.STANDARD_PLATE_HELMET,
-				(InformationBase) null)).registerStat().setPage(mastery).addSkill(Skill.COMBAT, 10).setPerk();
-		fitness = (new InformationBase("fitness", 1, 0, 0, MineFantasyItems.DRAGON_HEART, (InformationBase) null))
+				null)).registerStat().setPage(mastery).addSkill(Skill.COMBAT, 10).setPerk();
+		fitness = (new InformationBase("fitness", 1, 0, 0, MineFantasyItems.DRAGON_HEART, null))
 				.registerStat().setPage(mastery).addSkill(Skill.COMBAT, 20).setPerk();
-		armourpro = (new InformationBase("armourpro", 2, -1, 0, Items.DIAMOND_CHESTPLATE, fitness)).registerStat()
+		armour_pro = (new InformationBase("armour_pro", 2, -1, 0, Items.DIAMOND_CHESTPLATE, fitness)).registerStat()
 				.setPage(mastery).addSkill(Skill.COMBAT, 60).setPerk();
-		parrypro = (new InformationBase("parrypro", -2, -1, 0, Items.IRON_SWORD, toughness)).registerStat()
+		parry_pro = (new InformationBase("parry_pro", -2, -1, 0, Items.IRON_SWORD, toughness)).registerStat()
 				.setPage(mastery).addSkill(Skill.COMBAT, 20).setPerk();
-		counteratt = (new InformationBase("counteratt", -1, -2, 0, MineFantasyItems.STANDARD_WARAXE, parrypro))
+		counter_attack = (new InformationBase("counter_attack", -1, -2, 0, MineFantasyItems.STANDARD_WARAXE, parry_pro))
 				.registerStat().setPage(mastery).addSkill(Skill.COMBAT, 25).setPerk();
-		autoparry = (new InformationBase("autoparry", -3, -2, 0, MineFantasyItems.STANDARD_SWORD, parrypro))
+		auto_parry = (new InformationBase("auto_parry", -3, -2, 0, MineFantasyItems.STANDARD_SWORD, parry_pro))
 				.registerStat().setPage(mastery).addSkill(Skill.COMBAT, 50).setPerk();
-		firstaid = (new InformationBase("firstaid", 0, 1, 0, MineFantasyItems.BANDAGE_WOOL, (InformationBase) null))
+		first_aid = (new InformationBase("first_aid", 0, 1, 0, MineFantasyItems.BANDAGE_WOOL, null))
 				.registerStat().setPage(mastery).addSkill(Skill.PROVISIONING, 25).setPerk();
-		doctor = (new InformationBase("doctor", 0, 3, 0, MineFantasyItems.SYRINGE, firstaid)).registerStat().setPage(mastery)
+		doctor = (new InformationBase("doctor", 0, 3, 0, MineFantasyItems.SYRINGE, first_aid)).registerStat().setPage(mastery)
 				.addSkill(Skill.PROVISIONING, 50).setPerk();
-		scrapper = (new InformationBase("scrapper", 0, -1, 0, MineFantasyBlocks.SALVAGE_BASIC, (InformationBase) null))
+		scrapper = (new InformationBase("scrapper", 0, -1, 0, MineFantasyBlocks.SALVAGE_BASIC, null))
 				.registerStat().setPage(mastery).addSkill(Skill.ARTISANRY, 35).setPerk();
 
 	}
@@ -523,57 +584,57 @@ public class MineFantasyKnowledgeList {
 
 		private static void addEngineering() {
 			add(blackpowder, MineFantasyItems.NITRE, MineFantasyItems.SULFUR, Items.COAL, Items.GUNPOWDER);
-			add(advblackpowder, Items.GLOWSTONE_DUST, Items.REDSTONE);
+			add(advanced_blackpowder, Items.GLOWSTONE_DUST, Items.REDSTONE);
 			add(tungsten, MineFantasyItems.ORE_TUNGSTEN, MineFantasyBlocks.TUNGSTEN_ORE);
 			add(coke, Items.COAL, Items.REDSTONE);
 			add(spyglass, MineFantasyItems.BRONZE_GEARS, Blocks.GLASS);
 			add(parachute, Items.FEATHER, Blocks.WOOL);
 			add(syringe, Items.POTIONITEM);
-			add(engTanner, MineFantasyItems.BRONZE_GEARS);
-			add(bombarrow, Items.FEATHER, MineFantasyItems.BLACKPOWDER);
-			add(bpress, MineFantasyItems.BRONZE_GEARS, Blocks.LEVER);
+			add(engineering_tanner, MineFantasyItems.BRONZE_GEARS);
+			add(bomb_arrow, Items.FEATHER, MineFantasyItems.BLACKPOWDER);
+			add(bomb_press, MineFantasyItems.BRONZE_GEARS, Blocks.LEVER);
 			add(bombs, MineFantasyItems.BLACKPOWDER, Items.REDSTONE, Items.STRING);
 			add(shrapnel, Items.FLINT);
 			add(firebomb, MineFantasyItems.DRAGON_HEART, Items.MAGMA_CREAM);
-			add(stickybomb, Items.SLIME_BALL);
-			add(mineCeramic, MineFantasyItems.BLACKPOWDER, Blocks.STONE_PRESSURE_PLATE);
-			add(bombIron, Items.IRON_INGOT);
-			add(mineIron, Items.IRON_INGOT);
-			add(bombObsidian, Blocks.OBSIDIAN);
-			add(mineObsidian, Blocks.OBSIDIAN);
-			add(bombCrystal, Items.DIAMOND);
-			add(mineCrystal, Items.DIAMOND);
+			add(sticky_bomb, Items.SLIME_BALL);
+			add(mine_ceramic, MineFantasyItems.BLACKPOWDER, Blocks.STONE_PRESSURE_PLATE);
+			add(bomb_iron, Items.IRON_INGOT);
+			add(mine_iron, Items.IRON_INGOT);
+			add(bomb_obsidian, Blocks.OBSIDIAN);
+			add(mine_obsidian, Blocks.OBSIDIAN);
+			add(bomb_crystal, Items.DIAMOND);
+			add(mine_crystal, Items.DIAMOND);
 
 			add(crossbows, Items.STRING, MineFantasyItems.TIMBER, Blocks.LEVER);
-			add(crossShaftAdvanced, MineFantasyItems.TUNGSTEN_GEARS);
-			add(crossHeadAdvanced, MineFantasyItems.TUNGSTEN_GEARS);
-			add(crossAmmo, MineFantasyItems.TUNGSTEN_GEARS);
-			add(crossScope, MineFantasyItems.SPYGLASS);
-			add(crossBayonet, MineFantasyItems.STANDARD_DAGGER);
+			add(crossbow_shaft_advanced, MineFantasyItems.TUNGSTEN_GEARS);
+			add(crossbow_head_advanced, MineFantasyItems.TUNGSTEN_GEARS);
+			add(crossbow_ammo, MineFantasyItems.TUNGSTEN_GEARS);
+			add(crossbow_scope, MineFantasyItems.SPYGLASS);
+			add(crossbow_bayonet, MineFantasyItems.STANDARD_DAGGER);
 		}
 
 		private static void addProvisioning() {
 			add(jerky, MineFantasyItems.GENERIC_MEAT_UNCOOKED);
-			add(saussage, MineFantasyItems.GENERIC_MEAT_UNCOOKED, MineFantasyItems.GUTS);
+			add(sausage, MineFantasyItems.GENERIC_MEAT_UNCOOKED, MineFantasyItems.GUTS);
 			add(sandwitch, MineFantasyItems.GENERIC_MEAT_UNCOOKED, MineFantasyItems.CHEESE_SLICE, Items.BREAD);
 			add(sandwitch_big, MineFantasyItems.GENERIC_MEAT_UNCOOKED, MineFantasyItems.CHEESE_SLICE, Items.BREAD);
 
 			add(meatpie, MineFantasyItems.GENERIC_MEAT_UNCOOKED, MineFantasyItems.PASTRY);
-			add(shepardpie, MineFantasyItems.GENERIC_MEAT_UNCOOKED, Items.POTATO, MineFantasyItems.PASTRY);
-			add(berrypie, MineFantasyItems.BERRIES, MineFantasyItems.PASTRY);
-			add(applepie, Items.APPLE, MineFantasyItems.PASTRY);
+			add(shepard_pie, MineFantasyItems.GENERIC_MEAT_UNCOOKED, Items.POTATO, MineFantasyItems.PASTRY);
+			add(berry_pie, MineFantasyItems.BERRIES, MineFantasyItems.PASTRY);
+			add(apple_pie, Items.APPLE, MineFantasyItems.PASTRY);
 
 			add(sweetroll, Items.SUGAR, MineFantasyItems.BERRIES, MineFantasyItems.SUGAR_POT);
 			add(eclair, Items.EGG, new ItemStack(Items.DYE, 1, 3), MineFantasyItems.PASTRY);
-			add(cheeseroll, Items.BREAD, MineFantasyItems.CHEESE_SLICE);
+			add(cheese_roll, Items.BREAD, MineFantasyItems.CHEESE_SLICE);
 
 			add(cake, MineFantasyItems.FLOUR, Items.EGG);
-			add(carrotcake, MineFantasyItems.FLOUR, Items.EGG, Items.CARROT);
-			add(chococake, MineFantasyItems.FLOUR, Items.EGG, new ItemStack(Items.DYE, 1, 3));
-			add(bfcake, MineFantasyItems.FLOUR, Items.EGG, new ItemStack(Items.DYE, 1, 3),
+			add(carrot_cake, MineFantasyItems.FLOUR, Items.EGG, Items.CARROT);
+			add(chocolate_cake, MineFantasyItems.FLOUR, Items.EGG, new ItemStack(Items.DYE, 1, 3));
+			add(black_forest_cake, MineFantasyItems.FLOUR, Items.EGG, new ItemStack(Items.DYE, 1, 3),
 					MineFantasyItems.BERRIES_JUICY);
 
-			add(bandageadv, Blocks.WOOL, Items.LEATHER);
+			add(bandage_advanced, Blocks.WOOL, Items.LEATHER);
 		}
 
 		private static void addConstruction() {
@@ -593,12 +654,12 @@ public class MineFantasyKnowledgeList {
 					add(smelt_bronze, copper, tin);
 				}
 			}
-			add(coalflux, Items.COAL, MineFantasyItems.FLUX);
+			add(coal_flux, Items.COAL, MineFantasyItems.FLUX);
 			add(smelt_iron, Blocks.IRON_ORE);
-			add(crucible2, MineFantasyItems.FIRECLAY);
-			add(blastfurn, Items.IRON_INGOT, Blocks.IRON_ORE, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY,
+			add(firebrick_crucible, MineFantasyItems.FIRECLAY);
+			add(blast_furnace, Items.IRON_INGOT, Blocks.IRON_ORE, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY,
 					MineFantasyBlocks.LIMESTONE, MineFantasyItems.KAOLINITE);
-			add(bigfurn, Items.IRON_INGOT, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY, MineFantasyItems.KAOLINITE,
+			add(big_furnace, Items.IRON_INGOT, Blocks.FURNACE, MineFantasyBlocks.BLOOMERY, MineFantasyItems.KAOLINITE,
 					Items.COAL);
 			for (ItemStack pig : OreDictionary.getOres("ingotPigIron")) {
 				add(smelt_steel, pig);
@@ -623,7 +684,7 @@ public class MineFantasyKnowledgeList {
 				add(smelt_mithril, MineFantasyBlocks.MYTHIC_ORE, silver, MineFantasyItems.ANCIENT_JEWEL_MITHRIL);
 			}
 			add(smelt_adamantium, MineFantasyBlocks.MYTHIC_ORE, Items.GOLD_INGOT, MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
-			add(smeltMaster, MineFantasyItems.ANCIENT_JEWEL_ADAMANT, MineFantasyItems.ANCIENT_JEWEL_MITHRIL, MineFantasyItems.ANCIENT_JEWEL_MASTER);
+			add(smelt_master, MineFantasyItems.ANCIENT_JEWEL_ADAMANT, MineFantasyItems.ANCIENT_JEWEL_MITHRIL, MineFantasyItems.ANCIENT_JEWEL_MASTER);
 
 			for (ItemStack mithril : OreDictionary.getOres("ingotMithril")) {
 				add(smelt_mithium, mithril, Items.GHAST_TEAR, Items.DIAMOND, MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
@@ -632,14 +693,14 @@ public class MineFantasyKnowledgeList {
 					add(smelt_ender, adamant, mithril, Items.ENDER_PEARL);
 				}
 			}
-			add(craftArmourMedium, Items.LEATHER);
-			add(craftArmourHeavy, Items.LEATHER, Blocks.WOOL, Items.FEATHER);
-			add(smeltDragonforge, MineFantasyItems.DRAGON_HEART);
+			add(craft_armour_medium, Items.LEATHER);
+			add(craft_armour_heavy, Items.LEATHER, Blocks.WOOL, Items.FEATHER);
+			add(smelt_dragonforged, MineFantasyItems.DRAGON_HEART);
 
-			add(craftOrnate, new ItemStack(Items.DYE, 1, 4));
+			add(craft_ornate, new ItemStack(Items.DYE, 1, 4));
 
-			add(arrowsBodkin, Items.FEATHER);
-			add(arrowsBroad, Items.FEATHER, Items.FLINT);
+			add(arrows_bodkin, Items.FEATHER);
+			add(arrows_broad, Items.FEATHER, Items.FLINT);
 
 			add(repair_basic, Items.LEATHER, Items.FLINT, MineFantasyItems.NAIL);
 			add(repair_advanced, MineFantasyBlocks.REPAIR_BASIC, Items.SLIME_BALL, Items.STRING);
@@ -669,7 +730,7 @@ public class MineFantasyKnowledgeList {
 			if (item instanceof IArtefact){
 				if (((IArtefact) item).getResearches() != null) {
 					for (String research : ((IArtefact) item).getResearches()) {
-						ResearchArtefacts.addArtefact(new ItemStack(item, 1), research.toLowerCase());
+						ResearchArtefacts.addArtefact(new ItemStack(item, 1), research);
 					}
 				}
 			}

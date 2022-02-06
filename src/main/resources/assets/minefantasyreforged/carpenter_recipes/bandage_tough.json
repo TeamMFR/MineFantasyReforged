@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "provisioning",
-  "research": "bandageadv",
+  "research": "bandage_advanced",
   "tool_type": "needle",
   "is_tool_recipe": false,
   "block_tier": -1,

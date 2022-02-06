@@ -127,7 +127,7 @@ public class InformationBase {
 		ID = nextID;
 		nextID++;
 		InformationList.knowledgeList.add(this);
-		InformationList.nameMap.put(idName.toLowerCase(), this);
+		InformationList.nameMap.put(idName, this);
 		return this;
 	}
 

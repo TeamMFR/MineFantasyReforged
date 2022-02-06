@@ -1,7 +1,7 @@
 {
   "type": "CustomToolRecipe",
   "skill": "engineering",
-  "research": "cogArmour",
+  "research": "cogwork_armour",
   "tool_type": "heavy_hammer",
   "is_tool_recipe": false,
   "anvil_tier": -1,

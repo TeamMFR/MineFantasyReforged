@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "engineering",
-  "research": "crossScope",
+  "research": "crossbow_scope",
   "tool_type": "spanner",
   "is_tool_recipe": false,
   "block_tier": -1,

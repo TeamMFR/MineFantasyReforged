@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "artisanry",
-  "research": "smeltEncrusted",
+  "research": "smelt_encrusted",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 3,

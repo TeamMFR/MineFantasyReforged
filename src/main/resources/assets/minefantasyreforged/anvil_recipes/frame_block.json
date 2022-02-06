@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "engineering",
-  "research": "cogArmour",
+  "research": "cogwork_armour",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 3,

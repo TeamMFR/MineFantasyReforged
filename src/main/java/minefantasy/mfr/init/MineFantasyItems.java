@@ -1343,9 +1343,9 @@ public class MineFantasyItems {
 		HINGE = new ItemBaseMFR("hinge").setCreativeTab(MineFantasyTabs.tabMaterials);
 		COGWORK_PULLEY = new ItemBaseMFR("cogwork_pulley", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabGadget);
 
-		ANCIENT_JEWEL_MITHRIL = new ItemJewel("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smeltMithril", "smeltMaster");
-		ANCIENT_JEWEL_ADAMANT = new ItemJewel("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smeltAdamantium", "smeltMaster");
-		ANCIENT_JEWEL_MASTER = new ItemJewel("ancient_jewel_master", 30, EnumRarity.EPIC, ItemJewel.MYTHIC, 1, "smeltMaster");
+		ANCIENT_JEWEL_MITHRIL = new ItemJewel("ancient_jewel_mithril", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smelt_mithril", "smelt_master");
+		ANCIENT_JEWEL_ADAMANT = new ItemJewel("ancient_jewel_adamant", 20, EnumRarity.RARE, ItemJewel.MYTHIC, 2, "smelt_adamantium", "smelt_master");
+		ANCIENT_JEWEL_MASTER = new ItemJewel("ancient_jewel_master", 30, EnumRarity.EPIC, ItemJewel.MYTHIC, 1, "smelt_master");
 		TRILOGY_JEWEL = new ItemJewel("trilogy_jewel", EnumRarity.EPIC, null, 1);
 
 		ORNATE_ITEMS = new ItemSpecialDesign("ornate_items", Rarity.UNCOMMON, "ornate").setCreativeTab(MineFantasyTabs.tabMaterials);

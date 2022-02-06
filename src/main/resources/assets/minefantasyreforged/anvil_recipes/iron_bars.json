@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "construction",
-  "research": "smeltiron",
+  "research": "smelt_iron",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,

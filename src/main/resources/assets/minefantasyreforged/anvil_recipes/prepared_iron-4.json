@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "artisanry",
-  "research": "blastfurn",
+  "research": "blast_furnace",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,

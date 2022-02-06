@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "engineering",
-  "research": "bpress",
+  "research": "bomb_press",
   "tool_type": "spanner",
   "is_tool_recipe": false,
   "block_tier": -1,

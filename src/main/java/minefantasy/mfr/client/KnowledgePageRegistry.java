@@ -36,8 +36,8 @@ public class KnowledgePageRegistry {
 		ItemStack blue = MineFantasyItems.bar("blue_steel");
 
 		if (ConfigHardcore.HCCallowRocks) {
-			MineFantasyKnowledgeList.gettingStarted.addPages(
-					new EntryPageText("knowledge.gettingStarted.hcc"),
+			MineFantasyKnowledgeList.getting_started.addPages(
+					new EntryPageText("knowledge.getting_started.hcc"),
 					new EntryPageRecipeBase(MineFantasyKnowledgeList.CARPENTER_RECIPE),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sharp_rock")),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_pick")),
@@ -47,50 +47,50 @@ public class KnowledgePageRegistry {
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_axe")));
 		}
 
-		MineFantasyKnowledgeList.gettingStarted.addPages(
-				new EntryPageText("knowledge.gettingStarted.1"),
-				new EntryPageText("knowledge.gettingStarted.2"),
-				new EntryPageText("knowledge.gettingStarted.carpenter"),
+		MineFantasyKnowledgeList.getting_started.addPages(
+				new EntryPageText("knowledge.getting_started.1"),
+				new EntryPageText("knowledge.getting_started.2"),
+				new EntryPageText("knowledge.getting_started.carpenter"),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.CARPENTER_RECIPE),
-				new EntryPageText("knowledge.gettingStarted.fire"),
+				new EntryPageText("knowledge.getting_started.fire"),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.FIREPIT_RECIPE),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.DRYROCKS_RECIPE),
-				new EntryPageText("knowledge.gettingStarted.food"),
+				new EntryPageText("knowledge.getting_started.food"),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.STOVE_RECIPE),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("oven")),
-				new EntryPageText("knowledge.gettingStarted.tanning"),
+				new EntryPageText("knowledge.getting_started.tanning"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("tanner")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_knife")),
-				new EntryPageText("knowledge.gettingStarted.forging"),
+				new EntryPageText("knowledge.getting_started.forging"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("anvil_stone")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("forge_stone")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_hammer")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_tongs")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.DRYROCKS_RECIPE),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("leather_apron")),
-				new EntryPageText("knowledge.gettingStarted.forgingbars"),
+				new EntryPageText("knowledge.getting_started.forging_bars"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bar")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName( "ingot")),
-				new EntryPageText("knowledge.gettingStarted.flux"),
+				new EntryPageText("knowledge.getting_started.flux"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("flux"), CraftingManagerAnvil.getRecipeByName("flux_1")),
-				new EntryPageText("knowledge.gettingStarted.3"),
+				new EntryPageText("knowledge.getting_started.3"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_shears")),
-				new EntryPageText("knowledge.gettingStarted.4"),
-				new EntryPageText("knowledge.gettingStarted.5"),
+				new EntryPageText("knowledge.getting_started.4"),
+				new EntryPageText("knowledge.getting_started.5"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_hammer")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_tongs")),
-				new EntryPageText("knowledge.gettingStarted.6"),
-				new EntryPageText("knowledge.gettingStarted.upgrade"),
+				new EntryPageText("knowledge.getting_started.6"),
+				new EntryPageText("knowledge.getting_started.upgrade"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("research_bench")),
-				new EntryPageText("knowledge.gettingStarted.7"),
-				new EntryPageText("knowledge.gettingStarted.10"),
+				new EntryPageText("knowledge.getting_started.7"),
+				new EntryPageText("knowledge.getting_started.10"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("clay_pot_uncooked")),
 				new EntryPageSmelting(MineFantasyItems.CLAY_POT_UNCOOKED, MineFantasyItems.CLAY_POT),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("quern")),
-				new EntryPageText("knowledge.gettingStarted.11"),
-				new EntryPageText("knowledge.gettingStarted.12"),
+				new EntryPageText("knowledge.getting_started.11"),
+				new EntryPageText("knowledge.getting_started.12"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("salvage_basic")),
-				new EntryPageText("knowledge.gettingStarted.13"));
+				new EntryPageText("knowledge.getting_started.13"));
 
 		MineFantasyKnowledgeList.research.addPages(
 				new EntryPageText("knowledge.research.1"),
@@ -132,13 +132,13 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.combat.addPages(
 				new EntryPageText("knowledge.combat.1"),
 				new EntryPageText("knowledge.parry.info"),
-				new EntryPageText("knowledge.advparry.info"),
-				new EntryPageText("knowledge.poweratt.info"),
+				new EntryPageText("knowledge.advanced_parry.info"),
+				new EntryPageText("knowledge.power_attack.info"),
 				new EntryPageText("knowledge.dodge.info"),
 				new EntryPageText("knowledge.armour.info"));
 
-		MineFantasyKnowledgeList.craftArmourBasic.addPages(
-				new EntryPageText("knowledge.craftArmourBasic.1"),
+		MineFantasyKnowledgeList.craft_armour_basic.addPages(
+				new EntryPageText("knowledge.craft_armour_basic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("hide_helmet")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("hide_chestplate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("hide_leggings")),
@@ -160,8 +160,8 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.commodities.addPages(
 				new EntryPageText("knowledge.commodities.1"),
 				new EntryPageText("knowledge.commodities.plank"),
-				new EntryPageRecipeBase(RecipeHelper.getMFRRecipe("timber")),
-				new EntryPageRecipeBase(RecipeHelper.getMFRRecipe("sticks")),
+				new EntryPageRecipeBase(MineFantasyKnowledgeList.TIMBER_RECIPE),
+				new EntryPageRecipeBase(MineFantasyKnowledgeList.STICK_RECIPE),
 				new EntryPageText("knowledge.commodities.refinedplank"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jug_uncooked")),
 				new EntryPageSmelting(MineFantasyItems.JUG_UNCOOKED, MineFantasyItems.JUG_EMPTY),
@@ -208,23 +208,23 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.ores.addPages(assembleOreDescHC("copper", MineFantasyBlocks.COPPER_ORE, MineFantasyItems.COPPER_INGOT));
 		MineFantasyKnowledgeList.ores.addPages(assembleOreDescHC("tin", MineFantasyBlocks.TIN_ORE, MineFantasyItems.TIN_INGOT));
 		MineFantasyKnowledgeList.ores.addPages(assembleOreDescHC("silver", MineFantasyBlocks.SILVER_ORE, MineFantasyItems.SILVER_INGOT));
-		MineFantasyKnowledgeList.ores.addPages(assembleOreDesc("wolframite", MineFantasyBlocks.TUNGSTEN_ORE));
-		MineFantasyKnowledgeList.ores.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.wolframiteR));
-		MineFantasyKnowledgeList.ores.addPages(assembleOreDesc("mythic", MineFantasyBlocks.MYTHIC_ORE));
+		MineFantasyKnowledgeList.ores.addPages(assembleOreDesc("wolframite"));
+		MineFantasyKnowledgeList.ores.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.wolframite_raw_alloy));
+		MineFantasyKnowledgeList.ores.addPages(assembleOreDesc("mythic"));
 		MineFantasyKnowledgeList.ores.addPages(new EntryPageText("knowledge.ores.2"));
-		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("clay", MineFantasyBlocks.CLAY_ORE));
-		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("kaolinite", MineFantasyBlocks.KAOLINITE_ORE));
-		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("limestone", MineFantasyBlocks.LIMESTONE));
-		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("borax", MineFantasyBlocks.BORAX_ORE));
-		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("nitre", MineFantasyBlocks.NITRE_ORE));
-		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("sulfur", MineFantasyBlocks.SULFUR_ORE));
+		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("clay"));
+		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("kaolinite"));
+		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("limestone"));
+		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("borax"));
+		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("nitre"));
+		MineFantasyKnowledgeList.ores.addPages(assembleMineralDesc("sulfur"));
 
 		MineFantasyKnowledgeList.plants.addPages(new EntryPageText("knowledge.plants.1"));
-		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("berry", MineFantasyBlocks.BERRY_BUSH));
+		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("berry"));
 		MineFantasyKnowledgeList.plants.addPages(new EntryPageText("knowledge.plants.2"));
-		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("yew", MineFantasyBlocks.LOG_YEW));
-		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("ironbark", MineFantasyBlocks.LOG_IRONBARK));
-		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("ebony", MineFantasyBlocks.LOG_EBONY));
+		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("yew"));
+		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("ironbark"));
+		MineFantasyKnowledgeList.plants.addPages(assembleImgPage("ebony"));
 
 		MineFantasyKnowledgeList.minotaurs.addPages(new EntryPageText("knowledge.minotaurs.1"),
 				new EntryPageText("knowledge.minotaurs.2"), new EntryPageText("knowledge.minotaurs.3"),
@@ -279,13 +279,13 @@ public class KnowledgePageRegistry {
 					new EntryPageSmelting(MineFantasyItems.INGOT_MOULD_UNCOOKED, MineFantasyItems.INGOT_MOULD));
 		}
 
-		MineFantasyKnowledgeList.crucible2.addPages(
-				assembleSimpleImgPage("fire_crucible_example", "knowledge.crucible2.1"),
+		MineFantasyKnowledgeList.firebrick_crucible.addPages(
+				assembleSimpleImgPage("fire_crucible_example", "knowledge.firebrick_crucible.1"),
 				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crucible_fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
-				assembleSimpleImgPage("fire_crucible", "knowledge.crucible2.blocks"));
+				assembleSimpleImgPage("fire_crucible", "knowledge.firebrick_crucible.blocks"));
 
 		MineFantasyKnowledgeList.bar.addPages(
 				new EntryPageText("knowledge.bar.1"),
@@ -304,7 +304,7 @@ public class KnowledgePageRegistry {
 			MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageSmelting(new ItemStack(MineFantasyBlocks.COPPER_ORE), new ItemStack(MineFantasyItems.COPPER_INGOT)));
 			MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageSmelting(new ItemStack(MineFantasyBlocks.TIN_ORE), new ItemStack(MineFantasyItems.TIN_INGOT)));
 		}
-		MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.bronze));
+		MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.bronze_alloy));
 		MineFantasyKnowledgeList.smelt_iron.addPages(new EntryPageText("knowledge.smelt_iron.2"));
 
 		MineFantasyKnowledgeList.smelt_pig_iron.addPages(
@@ -312,14 +312,14 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("prepared_iron")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("prepared_iron-2")),
 				new EntryPageBlastFurnace(MineFantasyItems.PREPARED_IRON, pig_iron),
-				new EntryPageText("knowledge.blastfurn.9"));
+				new EntryPageText("knowledge.blast_furnace.9"));
 
 		MineFantasyKnowledgeList.smelt_steel.addPages(
 				new EntryPageText("knowledge.smelt_steel.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bar_steel")));
 
 		if (!ConfigHardcore.HCCreduceIngots) {
-			MineFantasyKnowledgeList.smelt_steel.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.steel));
+			MineFantasyKnowledgeList.smelt_steel.addPages(new EntryPageCrucible(MineFantasyKnowledgeList.steel_alloy));
 		}
 
 		MineFantasyKnowledgeList.smelt_encrusted.addPages(
@@ -330,7 +330,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.smelt_obsidian.addPages(
 				new EntryPageText("knowledge.smelt_obsidian.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("obsidian_rock")),
-				new EntryPageCrucible(MineFantasyKnowledgeList.obsidalloy));
+				new EntryPageCrucible(MineFantasyKnowledgeList.obsidian_alloy));
 
 		if (ConfigHardcore.HCCreduceIngots) {
 			MineFantasyKnowledgeList.smelt_iron.addPages(
@@ -376,27 +376,27 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.anvil.6"),
 				new EntryPageImage("textures/gui/knowledge/quality_example.png", 128, 128, "knowledge.anvil.7"));
 
-		MineFantasyKnowledgeList.smeltDragonforge.addPages(
-				new EntryPageText("knowledge.smeltDragonforge.1"),
-				new EntryPageText("knowledge.smeltDragonforge.2"));
+		MineFantasyKnowledgeList.smelt_dragonforged.addPages(
+				new EntryPageText("knowledge.smelt_dragonforged.1"),
+				new EntryPageText("knowledge.smelt_dragonforged.2"));
 
-		MineFantasyKnowledgeList.craftOrnate.addPages(
-				new EntryPageText("knowledge.craftOrnate.1"),
+		MineFantasyKnowledgeList.craft_ornate.addPages(
+				new EntryPageText("knowledge.craft_ornate.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("ornate_items")));
 
-		MineFantasyKnowledgeList.craftArmourLight.addPages(
-				new EntryPageText("knowledge.craftArmourLight.1"),
-				new EntryPageText("knowledge.craftArmourLight.2"),
+		MineFantasyKnowledgeList.craft_armour_light.addPages(
+				new EntryPageText("knowledge.craft_armour_light.1"),
+				new EntryPageText("knowledge.craft_armour_light.2"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rough_leather_helmet")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rough_leather_chestplate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rough_leather_leggings")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("rough_leather_boots")),
-				new EntryPageText("knowledge.craftArmourLight.3"),
+				new EntryPageText("knowledge.craft_armour_light.3"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_helmet")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_chestplate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_leggings")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_boots")),
-				new EntryPageText("knowledge.craftArmourLight.4"),
+				new EntryPageText("knowledge.craft_armour_light.4"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("strong_leather_helmet")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("strong_leather_chestplate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("strong_leather_leggings")),
@@ -406,88 +406,88 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("stud_leather_leggings")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("stud_leather_boots")));
 
-		MineFantasyKnowledgeList.craftArmourMedium.addPages(
-				new EntryPageText("knowledge.craftArmourMedium.1"),
+		MineFantasyKnowledgeList.craft_armour_medium.addPages(
+				new EntryPageText("knowledge.craft_armour_medium.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("chain_mesh")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_chain_helmet")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_chain_chestplate")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_chain_leggings")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_chain_boots")),
-				new EntryPageText("knowledge.craftArmourMedium.scale"),
+				new EntryPageText("knowledge.craft_armour_medium.scale"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("scale_mesh")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_scale_helmet")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_scale_chestplate")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_scale_leggings")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_scale_boots")));
 
-		MineFantasyKnowledgeList.craftArmourHeavy.addPages(
-				new EntryPageText("knowledge.craftArmourHeavy.1"),
-				new EntryPageText("knowledge.craftArmourHeavy.2"),
+		MineFantasyKnowledgeList.craft_armour_heavy.addPages(
+				new EntryPageText("knowledge.craft_armour_heavy.1"),
+				new EntryPageText("knowledge.craft_armour_heavy.2"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_helmet")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_chestplate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_leggings")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("padded_boots")),
-				new EntryPageText("knowledge.craftArmourHeavy.splint"),
+				new EntryPageText("knowledge.craft_armour_heavy.splint"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("splint_mesh")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_splint_helmet")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_splint_chestplate")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_splint_leggings")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_splint_boots")),
-				new EntryPageText("knowledge.craftArmourHeavy.plate"),
+				new EntryPageText("knowledge.craft_armour_heavy.plate"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("plate")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_plate_helmet")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_plate_chestplate")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_plate_leggings")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_plate_boots")));
 
-		MineFantasyKnowledgeList.coalflux.addPages(
-				new EntryPageText("knowledge.coalflux.1"),
+		MineFantasyKnowledgeList.coal_flux.addPages(
+				new EntryPageText("knowledge.coal_flux.1"),
 				new EntryPageGrind(new ItemStack(MineFantasyItems.FLUX), new ItemStack(MineFantasyItems.FLUX_POT)),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("coal_flux")));
 
-		MineFantasyKnowledgeList.bigfurn.addPages(
-				assembleSimpleImgPage("furnace_example", "knowledge.bigfurn.1"),
-				new EntryPageText("knowledge.bigfurn.2"),
+		MineFantasyKnowledgeList.big_furnace.addPages(
+				assembleSimpleImgPage("furnace_example", "knowledge.big_furnace.1"),
+				new EntryPageText("knowledge.big_furnace.2"),
 				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay_brick")),
 				new EntryPageSmelting(new ItemStack(MineFantasyItems.FIRECLAY_BRICK), new ItemStack(MineFantasyItems.STRONG_BRICK)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
-				new EntryPageText("knowledge.bigfurn.heater"),
+				new EntryPageText("knowledge.big_furnace.heater"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("furnace_heater")),
 				assembleSimpleImgPage("furnace_heater", MineFantasyBlocks.FURNACE_HEATER.getUnlocalizedName() + ".name"),
-				new EntryPageText("knowledge.bigfurn.top"),
+				new EntryPageText("knowledge.big_furnace.top"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("furnace_stone")),
-				assembleSimpleImgPage("furnace_full", "knowledge.bigfurn.structure"));
+				assembleSimpleImgPage("furnace_full", "knowledge.big_furnace.structure"));
 
-		MineFantasyKnowledgeList.blastfurn.addPages(
-				new EntryPageText("knowledge.blastfurn.1"),
-				new EntryPageText("knowledge.blastfurn.2"),
+		MineFantasyKnowledgeList.blast_furnace.addPages(
+				new EntryPageText("knowledge.blast_furnace.1"),
+				new EntryPageText("knowledge.blast_furnace.2"),
 				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay_brick")),
 				new EntryPageSmelting(new ItemStack(MineFantasyItems.FIRECLAY_BRICK), new ItemStack(MineFantasyItems.STRONG_BRICK)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
-				new EntryPageText("knowledge.blastfurn.3"),
+				new EntryPageText("knowledge.blast_furnace.3"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("blast_chamber")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("blast_heater")),
-				new EntryPageText("knowledge.blastfurn.4"),
-				new EntryPageText("knowledge.blastfurn.5"),
-				new EntryPageImage("textures/gui/knowledge/blast_example.png", 96, 96, "knowledge.blastfurn.6"),
-				new EntryPageText("knowledge.blastfurn.7"));
+				new EntryPageText("knowledge.blast_furnace.4"),
+				new EntryPageText("knowledge.blast_furnace.5"),
+				new EntryPageImage("textures/gui/knowledge/blast_example.png", 96, 96, "knowledge.blast_furnace.6"),
+				new EntryPageText("knowledge.blast_furnace.7"));
 
 		if (ConfigHardcore.HCCreduceIngots) {
-			MineFantasyKnowledgeList.blastfurn.addPages(new EntryPageText("knowledge.blastfurn.hcc"));
+			MineFantasyKnowledgeList.blast_furnace.addPages(new EntryPageText("knowledge.blast_furnace.hcc"));
 		}
 
-		MineFantasyKnowledgeList.etools.addPages(
-				new EntryPageText("knowledge.etools.1"),
+		MineFantasyKnowledgeList.engineering_tools.addPages(
+				new EntryPageText("knowledge.engineering_tools.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_spanner")), new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("engin_anvil_tools")));
 
-		MineFantasyKnowledgeList.ecomponents.addPages(
-				new EntryPageText("knowledge.ecomponents.1"),
+		MineFantasyKnowledgeList.engineering_components.addPages(
+				new EntryPageText("knowledge.engineering_components.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bolt")),
-				new EntryPageText("knowledge.ecomponents.2"),
+				new EntryPageText("knowledge.engineering_components.2"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("iron_frame")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bronze_gears")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("tungsten_gears")),
@@ -498,7 +498,7 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.tungsten.1"),
 				new EntryPageText("knowledge.tungsten.2"),
 				new EntryPageText("knowledge.tungsten.3"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.wolframiteR));
+				new EntryPageCrucible(MineFantasyKnowledgeList.wolframite_raw_alloy));
 
 		MineFantasyKnowledgeList.climber.addPages(
 				new EntryPageText("knowledge.climber.1"),
@@ -517,20 +517,20 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.syringe.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("syringe_empty")));
 
-		MineFantasyKnowledgeList.engTanner.addPages(
-				new EntryPageText("knowledge.engTanner.1"),
+		MineFantasyKnowledgeList.engineering_tanner.addPages(
+				new EntryPageText("knowledge.engineering_tanner.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("tanner_metal")));
 
-		MineFantasyKnowledgeList.advcrucible.addPages(
+		MineFantasyKnowledgeList.advanced_crucible.addPages(
 				assembleSimpleImgPage("auto_crucible_example", MineFantasyBlocks.CRUCIBLE_AUTO.getUnlocalizedName() + ".name"),
-				new EntryPageText("knowledge.advcrucible.1"),
+				new EntryPageText("knowledge.advanced_crucible.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crucible_auto")),
-				new EntryPageText("knowledge.crucible2.blocks"),
+				new EntryPageText("knowledge.firebrick_crucible.blocks"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
 				assembleSimpleImgPage("auto_crucible", "knowledge.basicstructure"));
 
-		MineFantasyKnowledgeList.advforge.addPages(
-				new EntryPageText("knowledge.advforge.1"),
+		MineFantasyKnowledgeList.advanced_forge.addPages(
+				new EntryPageText("knowledge.advanced_forge.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("forge_metal")));
 
 		MineFantasyKnowledgeList.coke.addPages(
@@ -544,8 +544,8 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("blackpowder")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_crude")));
 
-		MineFantasyKnowledgeList.advblackpowder.addPages(
-				new EntryPageText("knowledge.advblackpowder.1"),
+		MineFantasyKnowledgeList.advanced_blackpowder.addPages(
+				new EntryPageText("knowledge.advanced_blackpowder.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("blackpowder_advanced")));
 
 		MineFantasyKnowledgeList.bombs.addPages(
@@ -556,12 +556,12 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.bombs.3"),
 				new EntryPageText("knowledge.bombs.4"));
 
-		MineFantasyKnowledgeList.bpress.addPages(
-				new EntryPageText("knowledge.bpress.1"),
+		MineFantasyKnowledgeList.bomb_press.addPages(
+				new EntryPageText("knowledge.bomb_press.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_press")));
 
-		MineFantasyKnowledgeList.bombarrow.addPages(
-				new EntryPageText("knowledge.bombarrow.1"),
+		MineFantasyKnowledgeList.bomb_arrow.addPages(
+				new EntryPageText("knowledge.bomb_arrow.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bomb_casing_arrow")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bomb_casing_bolt")));
 
@@ -575,49 +575,49 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.firebomb.3"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("magma_cream_refined")));
 
-		MineFantasyKnowledgeList.bombCeramic.addPages(
-				new EntryPageText("knowledge.bombCeramic.1"),
+		MineFantasyKnowledgeList.bomb_ceramic.addPages(
+				new EntryPageText("knowledge.bomb_ceramic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_casing_uncooked")),
 				new EntryPageSmelting(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING_CERAMIC));
 
-		MineFantasyKnowledgeList.bombIron.addPages(
-				new EntryPageText("knowledge.bombIron.1"),
+		MineFantasyKnowledgeList.bomb_iron.addPages(
+				new EntryPageText("knowledge.bomb_iron.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bomb_casing_iron")));
 
-		MineFantasyKnowledgeList.bombObsidian.addPages(
-				new EntryPageText("knowledge.bombObsidian.1"),
+		MineFantasyKnowledgeList.bomb_obsidian.addPages(
+				new EntryPageText("knowledge.bomb_obsidian.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bomb_casing_obsidian")));
 
-		MineFantasyKnowledgeList.bombCrystal.addPages(
-				new EntryPageText("knowledge.bombCrystal.1"),
+		MineFantasyKnowledgeList.bomb_crystal.addPages(
+				new EntryPageText("knowledge.bomb_crystal.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_casing_crystal")));
 
-		MineFantasyKnowledgeList.mineCeramic.addPages(
-				new EntryPageText("knowledge.mineCeramic.1"),
+		MineFantasyKnowledgeList.mine_ceramic.addPages(
+				new EntryPageText("knowledge.mine_ceramic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("mine_casing_uncooked")),
 				new EntryPageSmelting(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING_CERAMIC));
 
-		MineFantasyKnowledgeList.mineIron.addPages(
-				new EntryPageText("knowledge.mineIron.1"),
+		MineFantasyKnowledgeList.mine_iron.addPages(
+				new EntryPageText("knowledge.mine_iron.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("mine_casing_iron")));
 
-		MineFantasyKnowledgeList.mineObsidian.addPages(
-				new EntryPageText("knowledge.mineObsidian.1"),
+		MineFantasyKnowledgeList.mine_obsidian.addPages(
+				new EntryPageText("knowledge.mine_obsidian.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("mine_casing_obsidian")));
 
-		MineFantasyKnowledgeList.mineCrystal.addPages(
-				new EntryPageText("knowledge.mineCrystal.1"),
+		MineFantasyKnowledgeList.mine_crystal.addPages(
+				new EntryPageText("knowledge.mine_crystal.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("mine_casing_crystal")));
 
-		MineFantasyKnowledgeList.bombFuse.addPages(
-				new EntryPageText("knowledge.bombFuse.1"),
+		MineFantasyKnowledgeList.bomb_fuse.addPages(
+				new EntryPageText("knowledge.bomb_fuse.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_fuse")),
-				new EntryPageText("knowledge.bombFuse.2"),
+				new EntryPageText("knowledge.bomb_fuse.2"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_fuse_long")));
 
-		MineFantasyKnowledgeList.stickybomb.addPages(
-				new EntryPageText("knowledge.stickybomb.1"),
-				new EntryPageText("knowledge.stickybomb.2"));
+		MineFantasyKnowledgeList.sticky_bomb.addPages(
+				new EntryPageText("knowledge.sticky_bomb.1"),
+				new EntryPageText("knowledge.sticky_bomb.2"));
 
 		MineFantasyKnowledgeList.crossbows.addPages(
 				new EntryPageText("knowledge.crossbows.1"),
@@ -629,67 +629,67 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.crossbows.6"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_bolt")));
 
-		MineFantasyKnowledgeList.crossShafts.addPages(
-				new EntryPageText("knowledge.crossShafts.handle"),
+		MineFantasyKnowledgeList.crossbow_shafts.addPages(
+				new EntryPageText("knowledge.crossbow_shafts.handle"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_handle_wood")),
-				new EntryPageText("knowledge.crossShafts.stock"),
+				new EntryPageText("knowledge.crossbow_shafts.stock"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_stock_wood")));
 
-		MineFantasyKnowledgeList.crossHeads.addPages(
-				new EntryPageText("knowledge.crossHeads.light"),
+		MineFantasyKnowledgeList.crossbow_heads.addPages(
+				new EntryPageText("knowledge.crossbow_heads.light"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_arms_light")),
-				new EntryPageText("knowledge.crossHeads.medium"),
+				new EntryPageText("knowledge.crossbow_heads.medium"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_arms_basic")),
-				new EntryPageText("knowledge.crossHeads.heavy"),
+				new EntryPageText("knowledge.crossbow_heads.heavy"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_arms_heavy")));
 
-		MineFantasyKnowledgeList.crossHeadAdvanced.addPages(
-				new EntryPageText("knowledge.crossHeads.advanced"),
+		MineFantasyKnowledgeList.crossbow_head_advanced.addPages(
+				new EntryPageText("knowledge.crossbow_head_advanced.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_arms_advanced")));
 
-		MineFantasyKnowledgeList.crossShaftAdvanced.addPages(
-				new EntryPageText("knowledge.crossShafts.advanced"),
+		MineFantasyKnowledgeList.crossbow_shaft_advanced.addPages(
+				new EntryPageText("knowledge.crossbow_shaft_advanced.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_stock_iron")));
 
-		MineFantasyKnowledgeList.crossScope.addPages(
-				new EntryPageText("knowledge.crossScope.1"),
+		MineFantasyKnowledgeList.crossbow_scope.addPages(
+				new EntryPageText("knowledge.crossbow_scope.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_scope")));
 
-		MineFantasyKnowledgeList.crossAmmo.addPages(
-				new EntryPageText("knowledge.crossAmmo.1"),
+		MineFantasyKnowledgeList.crossbow_ammo.addPages(
+				new EntryPageText("knowledge.crossbow_ammo.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crossbow_ammo")));
 
-		MineFantasyKnowledgeList.crossBayonet.addPages(
-				new EntryPageText("knowledge.crossBayonet.1"),
+		MineFantasyKnowledgeList.crossbow_bayonet.addPages(
+				new EntryPageText("knowledge.crossbow_bayonet.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("crossbow_bayonet")));
 
-		MineFantasyKnowledgeList.cogArmour.addPages(
-				new EntryPageText("knowledge.cogArmour.1"),
-				new EntryPageText("knowledge.cogArmour.2"),
-				new EntryPageText("knowledge.cogArmour.station"),
+		MineFantasyKnowledgeList.cogwork_armour.addPages(
+				new EntryPageText("knowledge.cogwork_armour.1"),
+				new EntryPageText("knowledge.cogwork_armour.2"),
+				new EntryPageText("knowledge.cogwork_armour.station.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("frame_block")),
 				assembleSimpleImgPage("cogwork_station", "knowledge.cogwork_station"),
-				new EntryPageText("knowledge.cogArmour.station.2"),
+				new EntryPageText("knowledge.cogwork_armour.station.2"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("cogwork_pulley")),
 				assembleSimpleImgPage("cogwork_station_2", "knowledge.rightclickspanner"),
-				new EntryPageText("knowledge.cogArmour.crafting"),
+				new EntryPageText("knowledge.cogwork_armour.crafting"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cogwork_shaft")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("block_cogwork_helm")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("block_cogwork_chestplate")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("block_cogwork_legs")),
 				assembleSimpleImgPage("cogwork_suit_craft", "knowledge.rightclickspanner"),
-				new EntryPageText("knowledge.cogArmour.armour"),
+				new EntryPageText("knowledge.cogwork_armour.armour"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("plate_huge")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("cogwork_armour")),
-				new EntryPageText("knowledge.cogArmour.advantage"),
-				new EntryPageText("knowledge.cogArmour.advantage.2"),
-				new EntryPageText("knowledge.cogArmour.advantage.3"),
-				new EntryPageText("knowledge.cogArmour.disadvantage"),
-				new EntryPageText("knowledge.cogArmour.disadvantage.2"),
-				new EntryPageText("knowledge.cogArmour.removal"));
+				new EntryPageText("knowledge.cogwork_armour.advantage"),
+				new EntryPageText("knowledge.cogwork_armour.advantage.2"),
+				new EntryPageText("knowledge.cogwork_armour.advantage.3"),
+				new EntryPageText("knowledge.cogwork_armour.disadvantage"),
+				new EntryPageText("knowledge.cogwork_armour.disadvantage.2"),
+				new EntryPageText("knowledge.cogwork_armour.removal"));
 
-		MineFantasyKnowledgeList.compPlate.addPages(
-				new EntryPageText("knowledge.compPlate.1"),
+		MineFantasyKnowledgeList.composite_alloy.addPages(
+				new EntryPageText("knowledge.composite_alloy.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bar_composite_alloy")));
 
 		MineFantasyKnowledgeList.repair_basic.addPages(
@@ -714,7 +714,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.reinforced_stone.addPages(
 				new EntryPageText("knowledge.reinforced_stone.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("obsidian_rock")),
-				new EntryPageCrucible(MineFantasyKnowledgeList.reinforcedStone));
+				new EntryPageCrucible(MineFantasyKnowledgeList.reinforced_stone_alloy));
 
 		MineFantasyKnowledgeList.brickworks.addPages(
 				new EntryPageText("knowledge.brickworks.1"),
@@ -776,8 +776,8 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crate_basic")),
 				new EntryPageText("knowledge.ammo_box.2"));
 
-		MineFantasyKnowledgeList.constructionPts.addPages(
-				new EntryPageText("knowledge.constructionPts.1"),
+		MineFantasyKnowledgeList.construction_parts.addPages(
+				new EntryPageText("knowledge.construction_parts.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("timber_cut")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("timber_pane")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("hinge")),
@@ -787,11 +787,11 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("refined_timber")));
 
 		if (ConfigHardcore.HCCallowRocks) {
-			MineFantasyKnowledgeList.craftHCCTools.addPages(
-					new EntryPageText("knowledge.craftHCCTools.1"),
-					new EntryPageText("knowledge.craftHCCTools.2"),
+			MineFantasyKnowledgeList.crafting_HCC_tools.addPages(
+					new EntryPageText("knowledge.crafting_HCC_tools.1"),
+					new EntryPageText("knowledge.crafting_HCC_tools.2"),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sharp_rock")),
-					new EntryPageText("knowledge.craftHCCTools.3"),
+					new EntryPageText("knowledge.crafting_HCC_tools.3"),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_pick")),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_spade")),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_axe")),
@@ -806,16 +806,16 @@ public class KnowledgePageRegistry {
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_spear")));
 		}
 
-		MineFantasyKnowledgeList.craftTools.addPages(
-				new EntryPageText("knowledge.craftTools.1"),
+		MineFantasyKnowledgeList.craft_tools.addPages(
+				new EntryPageText("knowledge.craft_tools.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_pick")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_axe")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_spade")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_hoe")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_shears")));
 
-		MineFantasyKnowledgeList.craftAdvTools.addPages(
-				new EntryPageText("knowledge.craftAdvTools.1"),
+		MineFantasyKnowledgeList.craft_advanced_tools.addPages(
+				new EntryPageText("knowledge.craft_advanced_tools.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_handpick")),
 				new EntryPageText("knowledge.heavy_pick.info"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_heavy_pick")),
@@ -839,8 +839,8 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.flintsteel.info"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("flint_and_steel")));
 
-		MineFantasyKnowledgeList.craftCrafters.addPages(
-				new EntryPageText("knowledge.craftCrafters.1"),
+		MineFantasyKnowledgeList.craft_crafters.addPages(
+				new EntryPageText("knowledge.craft_crafters.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("stone_hammer")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_hammer")),
 				new EntryPageText(""),
@@ -865,8 +865,8 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.spoon.info"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("standard_spoon")));
 
-		MineFantasyKnowledgeList.craftWeapons.addPages(
-				new EntryPageText("knowledge.craftWeapons.1"),
+		MineFantasyKnowledgeList.craft_weapons.addPages(
+				new EntryPageText("knowledge.craft_weapons.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_dagger")),
 				new EntryPageText("knowledge.sword.info"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_sword")),
@@ -879,8 +879,8 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.bow.info"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_bow")));
 
-		MineFantasyKnowledgeList.craftAdvWeapons.addPages(
-				new EntryPageText("knowledge.craftAdvWeapons.1"),
+		MineFantasyKnowledgeList.craft_advanced_weapons.addPages(
+				new EntryPageText("knowledge.craft_advanced_weapons.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_katana")),
 				new EntryPageText("knowledge.greatsword.info"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("standard_greatsword")),
@@ -902,57 +902,57 @@ public class KnowledgePageRegistry {
 						                     CraftingManagerCarpenter.getRecipeByName("standard_arrow_broad"),
 						                     CraftingManagerCarpenter.getRecipeByName("standard_arrow_bodkin")));
 
-		MineFantasyKnowledgeList.arrowsBodkin.addPages(
-				new EntryPageText("knowledge.arrowsBodkin.1"),
+		MineFantasyKnowledgeList.arrows_bodkin.addPages(
+				new EntryPageText("knowledge.arrows_bodkin.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("bodkin_head")));
 
-		MineFantasyKnowledgeList.arrowsBroad.addPages(
-				new EntryPageText("knowledge.arrowsBroad.1"),
+		MineFantasyKnowledgeList.arrows_broad.addPages(
+				new EntryPageText("knowledge.arrows_broad.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("broad_head")));
 
 		MineFantasyKnowledgeList.smelt_black_steel.addPages(
 				new EntryPageText("knowledge.smelt_black_steel.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("obsidian_rock")),
-				new EntryPageCrucible(MineFantasyKnowledgeList.black),
+				new EntryPageCrucible(MineFantasyKnowledgeList.black_steel_alloy),
 				new EntryPageBlastFurnace(MineFantasyItems.BLACK_STEEL_WEAK_INGOT, black));
 
 		MineFantasyKnowledgeList.smelt_red_steel.addPages(
 				new EntryPageText("knowledge.smelt_red_steel.1"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.red),
+				new EntryPageCrucible(MineFantasyKnowledgeList.red_steel_alloy),
 				new EntryPageBlastFurnace(MineFantasyItems.RED_STEEL_WEAK_INGOT, red));
 
 		MineFantasyKnowledgeList.smelt_blue_steel.addPages(
 				new EntryPageText("knowledge.smelt_blue_steel.1"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.blue),
+				new EntryPageCrucible(MineFantasyKnowledgeList.blue_steel_alloy),
 				new EntryPageBlastFurnace(MineFantasyItems.BLUE_STEEL_WEAK_INGOT, blue));
 
 		MineFantasyKnowledgeList.smelt_adamantium.addPages(
 				new EntryPageText("knowledge.smelt_adamantium.1"),
 				new EntryPageText("knowledge.smelt_adamantium.2"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.adamantium));
+				new EntryPageCrucible(MineFantasyKnowledgeList.adamantium_alloy));
 
 		MineFantasyKnowledgeList.smelt_mithril.addPages(
 				new EntryPageText("knowledge.smelt_mithril.1"),
 				new EntryPageText("knowledge.smelt_mithril.2"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.mithril));
+				new EntryPageCrucible(MineFantasyKnowledgeList.mithril_alloy));
 
-		MineFantasyKnowledgeList.smeltMaster.addPages(
-				new EntryPageText("knowledge.smeltMaster.1"),
-				new EntryPageText("knowledge.smeltMaster.2"),
-				new EntryPageText("knowledge.smeltMaster.3"),
+		MineFantasyKnowledgeList.smelt_master.addPages(
+				new EntryPageText("knowledge.smelt_master.1"),
+				new EntryPageText("knowledge.smelt_master.2"),
+				new EntryPageText("knowledge.smelt_master.3"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("trilogy_jewel")));
 
 		MineFantasyKnowledgeList.smelt_ignotumite.addPages(
 				new EntryPageText("knowledge.smelt_ignotumite.1"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.ignotumite));
+				new EntryPageCrucible(MineFantasyKnowledgeList.ignotumite_alloy));
 
 		MineFantasyKnowledgeList.smelt_mithium.addPages(
 				new EntryPageText("knowledge.smelt_mithium.1"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.mithium));
+				new EntryPageCrucible(MineFantasyKnowledgeList.mithium_alloy));
 
 		MineFantasyKnowledgeList.smelt_ender.addPages(
 				new EntryPageText("knowledge.smelt_ender.1"),
-				new EntryPageCrucible(MineFantasyKnowledgeList.enderforge));
+				new EntryPageCrucible(MineFantasyKnowledgeList.enderforge_alloy));
 
 		MineFantasyKnowledgeList.firepit.addPages(
 				new EntryPageText("knowledge.firepit.1"),
@@ -963,8 +963,8 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("oven")),
 				new EntryPageText("knowledge.firepit.4"));
 
-		MineFantasyKnowledgeList.cookingutensil.addPages(
-				new EntryPageText("knowledge.cookingutensil.1"),
+		MineFantasyKnowledgeList.cooking_utensils.addPages(
+				new EntryPageText("knowledge.cooking_utensils.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("cake_tin")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_tray_uncooked")),
 				new EntryPageSmelting(MineFantasyItems.PIE_TRAY_UNCOOKED, MineFantasyItems.PIE_TRAY));
@@ -1006,8 +1006,8 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.jerky.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jerky")));
 
-		MineFantasyKnowledgeList.saussage.addPages(
-				new EntryPageText("knowledge.saussage.1"),
+		MineFantasyKnowledgeList.sausage.addPages(
+				new EntryPageText("knowledge.sausage.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("guts")),
 				new EntryPageGrind(new ItemStack(MineFantasyItems.BREADROLL), new ItemStack(MineFantasyItems.BREADCRUMBS)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("saussage_raw")),
@@ -1028,8 +1028,8 @@ public class KnowledgePageRegistry {
 				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_MEAT_UNCOOKED), new ItemStack(MineFantasyItems.PIE_MEAT_COOKED)),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_MEAT_RECIPE));
 
-		MineFantasyKnowledgeList.shepardpie.addPages(
-				new EntryPageText("knowledge.shepardpie.1"),
+		MineFantasyKnowledgeList.shepard_pie.addPages(
+				new EntryPageText("knowledge.shepard_pie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_shepard_uncooked")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_SHEPARD_UNCOOKED), new ItemStack(MineFantasyItems.PIE_SHEPARD_COOKED)),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_SHEPARDS_RECIPE));
@@ -1055,7 +1055,7 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.oats.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("oats")));
 
-		MineFantasyKnowledgeList.berry.addPages(assembleImgPage("berry", MineFantasyBlocks.BERRY_BUSH));
+		MineFantasyKnowledgeList.berry.addPages(assembleImgPage("berry"));
 
 		MineFantasyKnowledgeList.icing.addPages(
 				new EntryPageText("knowledge.icing.1"),
@@ -1076,34 +1076,34 @@ public class KnowledgePageRegistry {
 				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_RAW), new ItemStack(MineFantasyItems.CAKE_UNICED)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_vanilla")));
 
-		MineFantasyKnowledgeList.carrotcake.addPages(
-				new EntryPageText("knowledge.carrotcake.1"),
+		MineFantasyKnowledgeList.carrot_cake.addPages(
+				new EntryPageText("knowledge.carrot_cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_carrot_raw")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_CARROT_RAW), new ItemStack(MineFantasyItems.CAKE_CARROT_UNICED)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_carrot")));
 
-		MineFantasyKnowledgeList.chococake.addPages(
-				new EntryPageText("knowledge.chococake.1"),
+		MineFantasyKnowledgeList.chocolate_cake.addPages(
+				new EntryPageText("knowledge.chocolate_cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("chocolate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_choc_raw")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_CHOC_RAW), new ItemStack(MineFantasyItems.CAKE_CHOC_UNICED)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_chocolate")));
 
-		MineFantasyKnowledgeList.bfcake.addPages(
-				new EntryPageText("knowledge.bfcake.1"),
+		MineFantasyKnowledgeList.black_forest_cake.addPages(
+				new EntryPageText("knowledge.black_forest_cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("chocolate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_bf_raw")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_BF_RAW), new ItemStack(MineFantasyItems.CAKE_BF_UNICED)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_choc_raw")));
 
-		MineFantasyKnowledgeList.berrypie.addPages(
-				new EntryPageText("knowledge.berrypie.1"),
+		MineFantasyKnowledgeList.berry_pie.addPages(
+				new EntryPageText("knowledge.berry_pie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_berry_uncooked")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_BERRY_UNCOOKED), new ItemStack(MineFantasyItems.PIE_BERRY_COOKED)),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_BERRY_RECIPE));
 
-		MineFantasyKnowledgeList.applepie.addPages(
-				new EntryPageText("knowledge.applepie.1"),
+		MineFantasyKnowledgeList.apple_pie.addPages(
+				new EntryPageText("knowledge.apple_pie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_apple_uncooked")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_APPLE_UNCOOKED), new ItemStack(MineFantasyItems.PIE_APPLE_COOKED)),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_APPLE_RECIPE));
@@ -1123,8 +1123,8 @@ public class KnowledgePageRegistry {
 				new EntryPageBaking(new ItemStack(MineFantasyItems.CURDS), new ItemStack(MineFantasyItems.CHEESE_POT)),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.CHEESE_WHEEL_RECIPE));
 
-		MineFantasyKnowledgeList.cheeseroll.addPages(
-				new EntryPageText("knowledge.cheeseroll.1"),
+		MineFantasyKnowledgeList.cheese_roll.addPages(
+				new EntryPageText("knowledge.cheese_roll.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cheese_roll")));
 
 		MineFantasyKnowledgeList.bandage.addPages(
@@ -1134,22 +1134,22 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bandage_crude-3")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bandage_wool")));
 
-		MineFantasyKnowledgeList.bandageadv.addPages(
-				new EntryPageText("knowledge.bandageadv.1"),
+		MineFantasyKnowledgeList.bandage_advanced.addPages(
+				new EntryPageText("knowledge.bandage_advanced.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bandage_tough")));
 
 		// MASTERY
 		MineFantasyKnowledgeList.toughness.addPages(new EntryPageText("knowledge.toughness.1"));
 		MineFantasyKnowledgeList.fitness.addPages(new EntryPageText("knowledge.fitness.1"));
-		MineFantasyKnowledgeList.armourpro.addPages(new EntryPageText("knowledge.armourpro.1"));
-		MineFantasyKnowledgeList.parrypro.addPages(new EntryPageText("knowledge.parrypro.1"));
+		MineFantasyKnowledgeList.armour_pro.addPages(new EntryPageText("knowledge.armour_pro.1"));
+		MineFantasyKnowledgeList.parry_pro.addPages(new EntryPageText("knowledge.parry_pro.1"));
 
-		MineFantasyKnowledgeList.counteratt.addPages(
-				new EntryPageText("knowledge.counteratt.1"),
-				new EntryPageText("knowledge.counteratt.2"));
+		MineFantasyKnowledgeList.counter_attack.addPages(
+				new EntryPageText("knowledge.counter_attack.1"),
+				new EntryPageText("knowledge.counter_attack.2"));
 
-		MineFantasyKnowledgeList.autoparry.addPages(new EntryPageText("knowledge.autoparry.1"));
-		MineFantasyKnowledgeList.firstaid.addPages(new EntryPageText("knowledge.firstaid.1"));
+		MineFantasyKnowledgeList.auto_parry.addPages(new EntryPageText("knowledge.auto_parry.1"));
+		MineFantasyKnowledgeList.first_aid.addPages(new EntryPageText("knowledge.first_aid.1"));
 		MineFantasyKnowledgeList.doctor.addPages(new EntryPageText("knowledge.doctor.1"));
 		MineFantasyKnowledgeList.scrapper.addPages(new EntryPageText("knowledge.scrapper.1"));
 	}
@@ -1169,17 +1169,17 @@ public class KnowledgePageRegistry {
 		return assembleOreDesc(orename, ore, ingot);
 	}
 
-	private static EntryPage[] assembleOreDesc(String orename, Block ore) {
+	private static EntryPage[] assembleOreDesc(String orename) {
 		return new EntryPage[] {new EntryPageImage("textures/gui/knowledge/image/" + orename + ".png", 96, 96,
 				"knowledge.ores." + orename)};
 	}
 
-	private static EntryPage[] assembleMineralDesc(String orename, Block ore) {
+	private static EntryPage[] assembleMineralDesc(String orename) {
 		return new EntryPage[] {new EntryPageImage("textures/gui/knowledge/image/" + orename + ".png", 96, 96,
 				"knowledge.minerals." + orename)};
 	}
 
-	private static EntryPage[] assembleImgPage(String name, Block blockname) {
+	private static EntryPage[] assembleImgPage(String name) {
 		return new EntryPage[] {new EntryPageImage("textures/gui/knowledge/image/" + name + ".png", 96, 96,
 				"knowledge." + name + ".1")};
 	}

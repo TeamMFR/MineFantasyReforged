@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "artisanry",
-  "research": "smeltblack_steel",
+  "research": "smelt_black_steel",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": -1,

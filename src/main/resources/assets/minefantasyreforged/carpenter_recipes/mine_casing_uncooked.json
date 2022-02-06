@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "engineering",
-  "research": "mineCeramic",
+  "research": "mine_ceramic",
   "tool_type": "hands",
   "is_tool_recipe": false,
   "block_tier": -1,

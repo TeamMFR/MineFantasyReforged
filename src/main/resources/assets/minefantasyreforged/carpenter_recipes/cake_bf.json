@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "provisioning",
-  "research": "bfcake",
+  "research": "black_forest_cake",
   "tool_type": "knife",
   "is_tool_recipe": false,
   "block_tier": -1,

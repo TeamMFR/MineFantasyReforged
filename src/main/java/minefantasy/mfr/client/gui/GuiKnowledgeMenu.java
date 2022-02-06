@@ -73,8 +73,8 @@ public class GuiKnowledgeMenu extends GuiScreen {
 		this.player = user;
 		short short1 = 141;
 		short short2 = 141;
-		GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2 = GuiKnowledgeMenu.displayColumnModified3 = MineFantasyKnowledgeList.gettingStarted.displayColumn * 24 - short1 / 2 - 12;
-		GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2 = GuiKnowledgeMenu.displayRowModified3 = MineFantasyKnowledgeList.gettingStarted.displayRow * 24 - short2 / 2;
+		GuiKnowledgeMenu.displayColumnModified1 = GuiKnowledgeMenu.displayColumnModified2 = GuiKnowledgeMenu.displayColumnModified3 = MineFantasyKnowledgeList.getting_started.displayColumn * 24 - short1 / 2 - 12;
+		GuiKnowledgeMenu.displayRowModified1 = GuiKnowledgeMenu.displayRowModified2 = GuiKnowledgeMenu.displayRowModified3 = MineFantasyKnowledgeList.getting_started.displayRow * 24 - short2 / 2;
 		informationList.clear();
 		for (Object achievement : InformationList.knowledgeList) {
 			if (!InformationPage.isInfoInPages((InformationBase) achievement)) {

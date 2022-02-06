@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "engineering",
-  "research": "crossHeads",
+  "research": "crossbow_heads",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "block_tier": -1,

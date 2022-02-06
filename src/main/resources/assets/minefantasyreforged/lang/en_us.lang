@@ -1215,43 +1215,43 @@ knowledge.ash_dragon.1=Ash dragons are found in the hot and dry such as deserts 
 
 knowledge.dragons.combat=$hCombat-$r^Dragons may be fast and have the sky advantage, but they have a few weaknesses to exploit. Firstly is the ability to leave and return the battlefield, you are best to pay attention and avoid losing sight of your foe. As the dragon swoops, make your strike. A proerly lined ranged attack will grant an advantage when it takes off again. As well as that: specialised dragonforged items may be crafted to give an edge to the battle.
 
-knowledge.gettingStarted=Getting Started
-knowledge.gettingStarted.desc=From the ground-up
+knowledge.getting_started=Getting Started
+knowledge.getting_started.desc=From the ground-up
 
-knowledge.gettingStarted.1=This is where you start working on MineFantasy. At this stage, it's recommended you at least have a hole to live in and somewhere to build, as well you should have a supply of wood, coal, copper, stone and hide. With these resources you can begin. To start in your world you will need to ready the three main processes.
-knowledge.gettingStarted.2=Crafting blocks require some interaction on your part to function. First: Set up the recipe as instructed(heating items for anvils). Then select the correct tool with the correct tier (such as fists, knives, hammers, etc). You will then need to click the block with the item keeping hits about a second apart until it finishes.
+knowledge.getting_started.1=This is where you start working on MineFantasy. At this stage, it's recommended you at least have a hole to live in and somewhere to build, as well you should have a supply of wood, coal, copper, stone and hide. With these resources you can begin. To start in your world you will need to ready the three main processes.
+knowledge.getting_started.2=Crafting blocks require some interaction on your part to function. First: Set up the recipe as instructed(heating items for anvils). Then select the correct tool with the correct tier (such as fists, knives, hammers, etc). You will then need to click the block with the item keeping hits about a second apart until it finishes.
 
-knowledge.gettingStarted.hcc=$hHardcore Crafting-$r^Hardcore crafting appears to be active. Regular tools are less effective and its recommended that primitive tools are crafted. See the Artisanry section for all the tools.^To start off: Punch some stone... no really, break stone bare-handed (meaning no item held) and Sharp Rocks will be dropped.^Use these to break some leaves for vines and sticks, and logs for wood.
+knowledge.getting_started.hcc=$hHardcore Crafting-$r^Hardcore crafting appears to be active. Regular tools are less effective and its recommended that primitive tools are crafted. See the Artisanry section for all the tools.^To start off: Punch some stone... no really, break stone bare-handed (meaning no item held) and Sharp Rocks will be dropped.^Use these to break some leaves for vines and sticks, and logs for wood.
 
-knowledge.gettingStarted.fire=$hFirepit-$r^Before you get to work, you need a fire, one of these should provide flame and a place to cook if you have meat.^Right-click with timber to add fuel, and firestarter to light.
-knowledge.gettingStarted.food=Also place one of these stove tops on top of the fire. You then need to right-click raw food (mainly meat) to place them on the plate.
+knowledge.getting_started.fire=$hFirepit-$r^Before you get to work, you need a fire, one of these should provide flame and a place to cook if you have meat.^Right-click with timber to add fuel, and firestarter to light.
+knowledge.getting_started.food=Also place one of these stove tops on top of the fire. You then need to right-click raw food (mainly meat) to place them on the plate.
 
-knowledge.gettingStarted.carpenter=$hCarpenter Bench-$r^The carpenter bench is a basic crafting table for a selection of recipes. The tools needed for this vary and some recipes require bare fists. See the crafting tools section for more information on tools.
+knowledge.getting_started.carpenter=$hCarpenter Bench-$r^The carpenter bench is a basic crafting table for a selection of recipes. The tools needed for this vary and some recipes require bare fists. See the crafting tools section for more information on tools.
 
-knowledge.gettingStarted.tanning=$hTanning-$r^By now you likely would have gathered some hide you can't use. Tanning is a simple method of creating leather from hide.^To start off, build a shabby tanning rack and a stone knife. These tools are poor quality and should be upgraded when convenient.
+knowledge.getting_started.tanning=$hTanning-$r^By now you likely would have gathered some hide you can't use. Tanning is a simple method of creating leather from hide.^To start off, build a shabby tanning rack and a stone knife. These tools are poor quality and should be upgraded when convenient.
 
-knowledge.gettingStarted.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic firestarter (Dry rocks-Craft-Tools), and wear an apron too!
+knowledge.getting_started.forging=$hForging-$r^Forging is the main method of crafting. Pretty much every tool and metal object is made through this process. Start off by making a stone forge, anvil and tools. Place the anvil near the forge and some water. The artisanty tab has an entry of how forging works. Be sure to make a basic firestarter (Dry rocks-Craft-Tools), and wear an apron too!
 
-knowledge.gettingStarted.forgingbars=Most recipes use bars rather than ingots. A bar is an easy to forge component made from metal. Create bars from placing a hot ingot on an anvil and hammering them.
-knowledge.gettingStarted.flux=Flux is an important purification agent for metalworks. Primarily this is used for the treatment of metals in the forging process and some alloy creation. Flux is required or hunks and plates, required for some tools and armour.^The best source of flux is limestone. Make sure to keep a look out in your travels.
-knowledge.gettingStarted.3=Now you need some leather strips for tools. Gather 2 copper (crafted into bars), 2 planks and 1 leather to craft a set of copper shears.
-knowledge.gettingStarted.4=With these shears, you can cut leather to strips on the carpenter's bench OR a tanning rack by right-clicking them on the block with leather on it.
+knowledge.getting_started.forging_bars=Most recipes use bars rather than ingots. A bar is an easy to forge component made from metal. Create bars from placing a hot ingot on an anvil and hammering them.
+knowledge.getting_started.flux=Flux is an important purification agent for metalworks. Primarily this is used for the treatment of metals in the forging process and some alloy creation. Flux is required or hunks and plates, required for some tools and armour.^The best source of flux is limestone. Make sure to keep a look out in your travels.
+knowledge.getting_started.3=Now you need some leather strips for tools. Gather 2 copper (crafted into bars), 2 planks and 1 leather to craft a set of copper shears.
+knowledge.getting_started.4=With these shears, you can cut leather to strips on the carpenter's bench OR a tanning rack by right-clicking them on the block with leather on it.
 
-knowledge.gettingStarted.5=At this point: You now should have access to leather, copper, planks and strips. It is now possible to upgrade that stone hammer!
+knowledge.getting_started.5=At this point: You now should have access to leather, copper, planks and strips. It is now possible to upgrade that stone hammer!
 
-knowledge.gettingStarted.6=With your forge set up, you can now craft some copper tools. Check the "Forged Tools" Section for some copper alternatives.^Make sure to use tongs when handling hot items of course by right-clicking forge/anvil with tongs held.
+knowledge.getting_started.6=With your forge set up, you can now craft some copper tools. Check the "Forged Tools" Section for some copper alternatives.^Make sure to use tongs when handling hot items of course by right-clicking forge/anvil with tongs held.
 
-knowledge.gettingStarted.upgrade=$hUpgrading-$r^Basic crummy old copper will only get you so far, soon enough you will want more. The research book and table allows you to expand on what can be made and how.^To start off, make a research table. The research table can study various items to unlock new recipes and processes to aid in your survival. Open the research book to view your current progress on knowledge, open the research table to place an item for studying.
+knowledge.getting_started.upgrade=$hUpgrading-$r^Basic crummy old copper will only get you so far, soon enough you will want more. The research book and table allows you to expand on what can be made and how.^To start off, make a research table. The research table can study various items to unlock new recipes and processes to aid in your survival. Open the research book to view your current progress on knowledge, open the research table to place an item for studying.
 
-knowledge.gettingStarted.7=Start off by smelting a copper and tin ingot and placing each on the research table, assuming your artisanry skill is high enough (level 5): you will be able to learn something from them. Try and work towards bronze smithing. You may also try looking at some leather to learn how to make better armour.
+knowledge.getting_started.7=Start off by smelting a copper and tin ingot and placing each on the research table, assuming your artisanry skill is high enough (level 5): you will be able to learn something from them. Try and work towards bronze smithing. You may also try looking at some leather to learn how to make better armour.
 
 
-knowledge.gettingStarted.10=Soon enough you will need to work with dusts, either in cooking, engineering or artisanry. Most dusts are made with a quern in clay pots.
+knowledge.getting_started.10=Soon enough you will need to work with dusts, either in cooking, engineering or artisanry. Most dusts are made with a quern in clay pots.
 
-knowledge.gettingStarted.11=Try work towards "Bronze Smithing" now, crucibles are already known as you see. For this you will need 5 "Artisanry". You gain artisanry from crafting tools, weapons, armour and some commodities.^Once bronze smithing is researched, try upgrade your tools and start the road to the next endevour.
+knowledge.getting_started.11=Try work towards "Bronze Smithing" now, crucibles are already known as you see. For this you will need 5 "Artisanry". You gain artisanry from crafting tools, weapons, armour and some commodities.^Once bronze smithing is researched, try upgrade your tools and start the road to the next endevour.
 
-knowledge.gettingStarted.12=$hSalvage-$r^If you've found yourself low on useful resources and/or high on unused junk; give the salvage station a go.^This small, portable block allows retrival of components from objects.
-knowledge.gettingStarted.13=To use: Just place the block and drop an item on top of it, then right-click the block. (Only Basic game, and Minefantasy items can be salvaged.^This is pretty much the basics, the rest is for you to find out...
+knowledge.getting_started.12=$hSalvage-$r^If you've found yourself low on useful resources and/or high on unused junk; give the salvage station a go.^This small, portable block allows retrival of components from objects.
+knowledge.getting_started.13=To use: Just place the block and drop an item on top of it, then right-click the block. (Only Basic game, and Minefantasy items can be salvaged.^This is pretty much the basics, the rest is for you to find out...
 
 knowledge.dust=Grinding Powders
 knowledge.dust.desc=Technique for Dusts
@@ -1369,9 +1369,9 @@ knowledge.combat.1=You may have noticed that constantly swinging aimlessly at mo
 knowledge.parry.info=$hParrying and Blocking$r^When holding right-click on most weapons, you block, simple right? Well now: blocking is much more effective. When you block an attack from straight-up, you immidiately reduce(and can remove) the damage of the hit, blades are best at this while hafted weapons (like axes and blunt) take damage based on the hit.^It is recommended to block attacks rather than try take them, this technique can save lives. Attacking directly after a parry does reduce damage however.
 
 
-knowledge.advparry.info=$hParrying abilities$r^When a parry succeeds: if you're holding shift, you will lunge forward, and even past an attacker, throwing them your way. This consumes stamina but timed right, can change the battlefield to your favor. It is also possible to do this while jumping.
+knowledge.advanced_parry.info=$hParrying abilities$r^When a parry succeeds: if you're holding shift, you will lunge forward, and even past an attacker, throwing them your way. This consumes stamina but timed right, can change the battlefield to your favor. It is also possible to do this while jumping.
 
-knowledge.poweratt.info=$hPower attacks$r^If you hold sneak and attack while falling down, you will attempt a power attack. A power attack cost stamina, but when it succeeds will double damage and bypass through a blocking target. This can be interrupted if attacked just before the attempt.
+knowledge.power_attack.info=$hPower attacks$r^If you hold sneak and attack while falling down, you will attempt a power attack. A power attack cost stamina, but when it succeeds will double damage and bypass through a blocking target. This can be interrupted if attacked just before the attempt.
 
 knowledge.dodge.info=$hDodge$r^In many situations, it's better to avoid a hit all together. If you jump to the sides or back while blocking, you will leap quickly. This uses stamina and cannot be done in heavy armour.
 
@@ -1420,16 +1420,16 @@ knowledge.smelt_black_steel=Black Steel Smithing
 knowledge.smelt_black_steel.desc=Tier %1$s, Common material
 knowledge.smelt_black_steel.1=Every material has its limit, now you have found the right balance between bronze and iron alloys to perfect a new material. Black steel is extremely strong and far exceeds anything discovered thus far, although it can be difficult to produce and work, it may not be a decent replacement for iron.^This takes a two stage process, bringing together processes done thus far. Black steel can be made in a crucible of reasonable quality, and the ingots can be further refined in a blast furnace. The final result is a new dark, powerful material.
 
-knowledge.craftOrnate=Ornate Style
-knowledge.craftOrnate.desc=Worthy of clensing
+knowledge.craft_ornate=Ornate Style
+knowledge.craft_ornate.desc=Worthy of clensing
 
-knowledge.craftOrnate.1=With the proper materials and time, it is possible to create more decorative varients of weapon, tool and armour. Ornate items are far more powerful against the unholy such as undead.^An ornate crest is used to craft these. place a single crest in the output slot of anvils then craft an appropriate item. When crafting finishes: an ornate item will be crafted.
+knowledge.craft_ornate.1=With the proper materials and time, it is possible to create more decorative varients of weapon, tool and armour. Ornate items are far more powerful against the unholy such as undead.^An ornate crest is used to craft these. place a single crest in the output slot of anvils then craft an appropriate item. When crafting finishes: an ornate item will be crafted.
 
-knowledge.smeltDragonforge=Dragonforge Style
-knowledge.smeltDragonforge.desc=Crude and powerful
+knowledge.smelt_dragonforged=Dragonforge Style
+knowledge.smelt_dragonforged.desc=Crude and powerful
 
-knowledge.smeltDragonforge.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.
-knowledge.smeltDragonforge.2=Unlike other designs; dragonforged items require this ritual take place for the craft to work.
+knowledge.smelt_dragonforged.1=Dragons are tough creatures, and hunting them takes preparation and experience. Through your efforts, it is possible to use their own powers against them, Dragonforge weapons are more effective against damaging dragons.^To create dragonforge: Start by making any standard melee weapon. Just before finishing however: throw (right-click) a dragon heart into a nearby forge, then quickly finish the craft.^If all goes well you will have a dragonforge item.
+knowledge.smelt_dragonforged.2=Unlike other designs; dragonforged items require this ritual take place for the craft to work.
 
 knowledge.smelt_blue_steel=Blue Steel Smithing
 knowledge.smelt_blue_steel.desc=Tier %1$s, Common material
@@ -1456,14 +1456,14 @@ knowledge.smelt_adamantium.1=Mythic ore seems to follow its own rules and resear
 
 knowledge.smelt_adamantium.2=From the readings of this 'schematic talisman' it appears possible to use gold to force the mythic ore into its green, heavy state. Gold must play a part in the transformation of mythic ore into this particular set of chemistry. ^It seems the trinket itself however, though complicated has no purpose.
 
-knowledge.smeltMaster=Masterwork Mythics
-knowledge.smeltMaster.desc=The next level
+knowledge.smelt_master=Masterwork Mythics
+knowledge.smelt_master.desc=The next level
 
-knowledge.smeltMaster.1=Your seeing some patterns emerging here. Whatever civilisation left these talismans behind appear to use them as a basic form of storing information, though it seems a book would have done just fine, but why judge.^You have found a new one, similar to the rest with the anvil shaped edges on a barbed shield shape, this follows the same set of instructions as the previously found artefacts. However with all three of these; it appears that they fit together like a puzzle. The master talisman appears to be carried by an elite artisan, with the two apprentices carrying the
+knowledge.smelt_master.1=Your seeing some patterns emerging here. Whatever civilisation left these talismans behind appear to use them as a basic form of storing information, though it seems a book would have done just fine, but why judge.^You have found a new one, similar to the rest with the anvil shaped edges on a barbed shield shape, this follows the same set of instructions as the previously found artefacts. However with all three of these; it appears that they fit together like a puzzle. The master talisman appears to be carried by an elite artisan, with the two apprentices carrying the
 
-knowledge.smeltMaster.2=lesser talismans. There are also markings on the back of the master talisman describing a combined piece being placed into a working mythic crucible' This may be able to improve the crucible in some way.^The interesting part is the locations you have found these artefacts. Though the master talisman could be found anywhere, the lesser talismans were found depending on geographical location. Further south regions had the mithril workers while the northern regions had the adamantium workers.This pattern reinforces the idea that the mythic works were formed
+knowledge.smelt_master.2=lesser talismans. There are also markings on the back of the master talisman describing a combined piece being placed into a working mythic crucible' This may be able to improve the crucible in some way.^The interesting part is the locations you have found these artefacts. Though the master talisman could be found anywhere, the lesser talismans were found depending on geographical location. Further south regions had the mithril workers while the northern regions had the adamantium workers.This pattern reinforces the idea that the mythic works were formed
 
-knowledge.smeltMaster.3=between different cultures in different regions. This has no effect on what forges can create what materials however, so their design must be the same.^In any case; this trilogy appears to hold great power and likely comes from the master artisans from both regions, perhaps using it on an active crucible may allow further refinements.
+knowledge.smelt_master.3=between different cultures in different regions. This has no effect on what forges can create what materials however, so their design must be the same.^In any case; this trilogy appears to hold great power and likely comes from the master artisans from both regions, perhaps using it on an active crucible may allow further refinements.
 
 knowledge.smelt_ignotumite=Ignotumite Smithing
 knowledge.smelt_ignotumite.desc=Tier %1$s, Master material
@@ -1480,43 +1480,43 @@ knowledge.smelt_ender.desc=Tier %1$s, Master material
 
 knowledge.smelt_ender.1=There's always been something strange about those ender creatures... And this discovery may lead to their origins, perhaps they were the ones that created these artefacts, can't explain how though, ender creatures don't appear too civilised.^Enderforge appears to be designed as a compromise between the two materials of mithril and adamantium, taking the best from both to create a new material. It appears that ender pearls can act as a catalyst to form these two materials together.^This can only be made in a master crucible.
 
-knowledge.coalflux=Coal Flux
-knowledge.coalflux.desc=Conservative
-knowledge.coalflux.1=A growing problem with smelting equipment is the large amount of coal required for proper reactions to take place. This results in difficulty refining large loads of material without a lot of coal to back it up.^You believe mixing flux with coal would be able to reduce the cost taken in these reactions, this would potentially halve the cost of coal for each use, allowing a single piece to create two equally useful materials.^This does come at a cost, the coal processed would no longer serve as a viable fuel source.
+knowledge.coal_flux=Coal Flux
+knowledge.coal_flux.desc=Conservative
+knowledge.coal_flux.1=A growing problem with smelting equipment is the large amount of coal required for proper reactions to take place. This results in difficulty refining large loads of material without a lot of coal to back it up.^You believe mixing flux with coal would be able to reduce the cost taken in these reactions, this would potentially halve the cost of coal for each use, allowing a single piece to create two equally useful materials.^This does come at a cost, the coal processed would no longer serve as a viable fuel source.
 
-knowledge.bigfurn=Furnace
-knowledge.bigfurn.desc=Mass Producing
+knowledge.big_furnace=Furnace
+knowledge.big_furnace.desc=Mass Producing
 
-knowledge.bigfurn.1=The process of refining basic ores and materials is nearly perfected now. The bloomery is a low-tech, slow and uneconomical device that makes a chore of all smelting work.^A large furnace has been developed from fire clay.
+knowledge.big_furnace.1=The process of refining basic ores and materials is nearly perfected now. The bloomery is a low-tech, slow and uneconomical device that makes a chore of all smelting work.^A large furnace has been developed from fire clay.
 
-knowledge.bigfurn.2=This furnace is able to smelt four items at a time with relatively high efficiency. Its design is simple enough to work with ease, but will take some work to properly install.
+knowledge.big_furnace.2=This furnace is able to smelt four items at a time with relatively high efficiency. Its design is simple enough to work with ease, but will take some work to properly install.
 
-knowledge.bigfurn.heater=For the furnace to function, it needs a place for the fuel to go. These heater blocks will be able to burn fuel steadily, the hotter these get, and the faster the furnace will smelt. Heaters need to be kept stable however, requiring fire-brick walls across its sides.
+knowledge.big_furnace.heater=For the furnace to function, it needs a place for the fuel to go. These heater blocks will be able to burn fuel steadily, the hotter these get, and the faster the furnace will smelt. Heaters need to be kept stable however, requiring fire-brick walls across its sides.
 
-knowledge.bigfurn.top=Above the heater goes the furnace itself. This block works similar to the smaller models used, only is capable of regulating temperature much more efficiently. Much like the fuel-based counterpart the furnace requires fire bricks across its sides and top.
+knowledge.big_furnace.top=Above the heater goes the furnace itself. This block works similar to the smaller models used, only is capable of regulating temperature much more efficiently. Much like the fuel-based counterpart the furnace requires fire bricks across its sides and top.
 
-knowledge.bigfurn.structure=the structure works with multiple furnaces, two side walls and one back wall can support many connected furnaces.
+knowledge.big_furnace.structure=the structure works with multiple furnaces, two side walls and one back wall can support many connected furnaces.
 
-knowledge.blastfurn=Refining
-knowledge.blastfurn.desc=More than smelting
+knowledge.blast_furnace=Refining
+knowledge.blast_furnace.desc=More than smelting
 
-knowledge.blastfurn.1=Processing of materials such as iron tends to leave them filled with impurities, and not reaching their full potential. A solution may be found by using a blast furnace.^Blast furnaces allow material to be smelted at incredibly high temperatures, and with a much higher rate of purity than other smelting equipment. This furnace does come at a cost in order to generate such a reaction, but should be able to properly refine iron ore to a much higher grade.
+knowledge.blast_furnace.1=Processing of materials such as iron tends to leave them filled with impurities, and not reaching their full potential. A solution may be found by using a blast furnace.^Blast furnaces allow material to be smelted at incredibly high temperatures, and with a much higher rate of purity than other smelting equipment. This furnace does come at a cost in order to generate such a reaction, but should be able to properly refine iron ore to a much higher grade.
 
-knowledge.blastfurn.2=Of course before making the furnace: you will need to make a decent casing around them. For that, there's fire bricks.^Firebricks are able to sustain the extreme temperatures of the blast furnace and are used in its creation.
+knowledge.blast_furnace.2=Of course before making the furnace: you will need to make a decent casing around them. For that, there's fire bricks.^Firebricks are able to sustain the extreme temperatures of the blast furnace and are used in its creation.
 #Firebrick Recipes
-knowledge.blastfurn.3=The furnace is made of two blocks: Heaters and Chambers. Make one heater and up to 16 chamber blocks. The more chambers you put in, the more it can smelt.
+knowledge.blast_furnace.3=The furnace is made of two blocks: Heaters and Chambers. Make one heater and up to 16 chamber blocks. The more chambers you put in, the more it can smelt.
 #Furnace Recipes
-knowledge.blastfurn.4=Now with fire bricks, a heater, and some chambers: You can now assemble the furnace.^To start off: place the heater on the ground.^If a crucible is under the heater: It will catch the output.^Also make sure to leave plenty of room (about 4 blocks) all 4 sides.^The heater should have firebricks on 4 corners at its level. And by the life of you: don't cover the sides.
-knowledge.blastfurn.5=With that ready, stack the shafts on top of the heater, and put fire bricks on all 4 sides. leaving the top exposed to the sky (or a chimney).
+knowledge.blast_furnace.4=Now with fire bricks, a heater, and some chambers: You can now assemble the furnace.^To start off: place the heater on the ground.^If a crucible is under the heater: It will catch the output.^Also make sure to leave plenty of room (about 4 blocks) all 4 sides.^The heater should have firebricks on 4 corners at its level. And by the life of you: don't cover the sides.
+knowledge.blast_furnace.5=With that ready, stack the shafts on top of the heater, and put fire bricks on all 4 sides. leaving the top exposed to the sky (or a chimney).
 #Structure
-knowledge.blastfurn.6=Using the blast furnace is pretty simple, but does consume a lot of fuel.^Start off by putting input (such as prepared iron) in the bottom slot and coal in the top slot of the top-most chamber block, (its recommended to use a small chimney to catch the smoke while remaining in
-knowledge.blastfurn.7=access to the block). When done properly the items will fall down the chute stacking 1 per chamber. After that: put some fuel in the bottom, fuel burns regardless of smelting so it's wise to take note of how much you may need. Upon finishing: all chambers will process one item, and the heater will evacuate its pressure, leaving a spectacular jet of flames.^Just make sure not to obstruct these jets or the furnace could explode. And keep flammable objects away!
+knowledge.blast_furnace.6=Using the blast furnace is pretty simple, but does consume a lot of fuel.^Start off by putting input (such as prepared iron) in the bottom slot and coal in the top slot of the top-most chamber block, (its recommended to use a small chimney to catch the smoke while remaining in
+knowledge.blast_furnace.7=access to the block). When done properly the items will fall down the chute stacking 1 per chamber. After that: put some fuel in the bottom, fuel burns regardless of smelting so it's wise to take note of how much you may need. Upon finishing: all chambers will process one item, and the heater will evacuate its pressure, leaving a spectacular jet of flames.^Just make sure not to obstruct these jets or the furnace could explode. And keep flammable objects away!
 
-knowledge.blastfurn.hcc=$hHardcore Crafting-$r^With Hardcore crafting; A crucible must be placed underneath the furnace heater to catch molten ingots, you need to use a mould to remove them.
+knowledge.blast_furnace.hcc=$hHardcore Crafting-$r^With Hardcore crafting; A crucible must be placed underneath the furnace heater to catch molten ingots, you need to use a mould to remove them.
 
 #Prepared Iron
 
-knowledge.blastfurn.9=Prepared iron ore is used to make pig iron.^Pig iron can be turned into steel.^You may use strong flux to double production, but strong flux is rare and should be used wisely.
+knowledge.blast_furnace.9=Prepared iron ore is used to make pig iron.^Pig iron can be turned into steel.^You may use strong flux to double production, but strong flux is rare and should be used wisely.
 
 knowledge.bloomery=Bloomery
 knowledge.bloomery.desc=Early Metalworks
@@ -1536,11 +1536,11 @@ knowledge.crucible.2=In order to function, Crucibles need a heat source below th
 
 knowledge.crucible.hcc=$hHardcore Crafting-$r^With hardcore crafting however: Items cannot be retrieved from the crucible GUI. You need to craft an ingot mould, right-click this to retrieve the ingots 1 at a time, and cool them in water.^Also: If you break the crucible, outputs will be lost!
 
-knowledge.crucible2=Advanced Alloying
-knowledge.crucible2.desc=More Mixing...
-knowledge.crucible2.1=The possible applications for fire clay and brick are always broadening. Crucibles have always had difficulties with heat regulation and were never able to properly melt down material efficiently. The addition of fireclay should fix this problem.
+knowledge.firebrick_crucible=Advanced Alloying
+knowledge.firebrick_crucible.desc=More Mixing...
+knowledge.firebrick_crucible.1=The possible applications for fire clay and brick are always broadening. Crucibles have always had difficulties with heat regulation and were never able to properly melt down material efficiently. The addition of fireclay should fix this problem.
 
-knowledge.crucible2.blocks=The outer layer is not enough however for the crucible to function properly. Four additional blocks of fire brick must be set around the block for the crucible to function properly.
+knowledge.firebrick_crucible.blocks=The outer layer is not enough however for the crucible to function properly. Four additional blocks of fire brick must be set around the block for the crucible to function properly.
 
 knowledge.apron=Blacksmith Apron
 knowledge.apron.desc=Protective wear
@@ -1605,49 +1605,46 @@ knowledge.repair_ornate.desc=Enchantment Repair
 
 knowledge.repair_ornate.1=Magical items seem to play by their own rules here' Stuff just doesn't stick to them. It however appears that gold and diamond can counteract these effects. If the tools are used with these materials in a particular way, they may be able to repair enchanted items.^This also offers some increased effectiveness over a regular advanced repair kit.
 
-knowledge.craftArmourBasic=Basic Armor
-knowledge.craftArmourBasic.desc=Nothing fancy
-knowledge.craftArmourBasic.1=When you first start out in this world, you may want something to wear. These Armors don't offer much protection but their better than nothing.
+knowledge.craft_armour_basic=Basic Armor
+knowledge.craft_armour_basic.desc=Nothing fancy
+knowledge.craft_armour_basic.1=When you first start out in this world, you may want something to wear. These Armors don't offer much protection but their better than nothing.
 
-knowledge.craftArmourLight=Light Armor
-knowledge.craftArmourLight.desc=Cheap and practical
+knowledge.craft_armour_light=Light Armor
+knowledge.craft_armour_light.desc=Cheap and practical
+knowledge.craft_armour_light.1=Light armor is designed to be as easy to wear as possible and is only made from a small variety of material. You do not get much protecion from this, but your ability to dodge and parry will be unaffected.^These suits are best worn where tactics and avoidance are used.
+knowledge.craft_armour_light.2=Rough leather is a basic layer of sewn leather pieces covering the body. This alone provides little protection but acts as a foundation for other suits.
+knowledge.craft_armour_light.3=Padded armour is highly effective against light attacks, blunt in particular. This suit is used as a foundation for heavy armour.
+knowledge.craft_armour_light.4=Reinforced and studded leather are upgraded versions from rough leather. Reinforced leather can be used to craft medium armour.
 
-knowledge.craftArmourLight.1=Light armor is designed to be as easy to wear as possible and is only made from a small variety of material. You do not get much protecion from this, but your ability to dodge and parry will be unaffected.^These suits are best worn where tactics and avoidance are used.
-knowledge.craftArmourLight.2=Rough leather is a basic layer of sewn leather pieces covering the body. This alone provides little protection but acts as a foundation for other suits.
-knowledge.craftArmourLight.3=Padded armour is highly effective against light attacks, blunt in particular. This suit is used as a foundation for heavy armour.
-knowledge.craftArmourLight.4=Reinforced and studded leather are upgraded versions from rough leather. Reinforced leather can be used to craft medium armour.
-knowledge.craftArmourMedium=Medium Armor
-knowledge.craftArmourMedium.desc=Average protection
+knowledge.craft_armour_medium=Medium Armor
+knowledge.craft_armour_medium.desc=Average protection
+knowledge.craft_armour_medium.1=Through some inspection of leathers, it appears obvious that it has many limits to its strength and impact resistance.^Much similar to how animals have fur, scales and bone that may assist in protection, you must also find something to reinforce leather with to allow better protective capabilities.^Mail armour is made of standard leather, only with metal components to give some extra resistance, though it may restrict movement slightly and would prove tiring to wear.
+knowledge.craft_armour_medium.scale=As an alternative, Scalemail can be created. Scale armor has more balanced protection against all forms of damage, not quite as effective against piercing and cutting resistance, it makes up in blunt.
 
-knowledge.craftArmourMedium.1=Through some inspection of leathers, it appears obvious that it has many limits to its strength and impact resistance.^Much similar to how animals have fur, scales and bone that may assist in protection, you must also find something to reinforce leather with to allow better protective capabilities.^Mail armour is made of standard leather, only with metal components to give some extra resistance, though it may restrict movement slightly and would prove tiring to wear.
+knowledge.craft_armour_heavy=Heavy Armor
+knowledge.craft_armour_heavy.desc=Strong but restricted
+knowledge.craft_armour_heavy.1=You have gained decent protection from medium armour, yet is still seems limited. Medium armour does have a large amount of advantages but there may be a way to improve further.^Through study of the anatomy of some of the wildlife: It seems apparent that wool and feathers cushion blows rather effectively, a padded piece of armour may offer a decent advantage.^This would make armours created in this style very heavy and hard to wear however.
+knowledge.craft_armour_heavy.2=Heavy armour is crafted with a padded suit already made. Padded armour provides a soft and protective layer for underneath armour.
+knowledge.craft_armour_heavy.splint=Splintmail isn't quite as heavy as a full blown suit of plate, and has lesser protective qualities in return. However, splintmail is still far superior to medium armors and protects all damage types equally.
+knowledge.craft_armour_heavy.plate=Plate armour is the strongest, but most expensive and difficult to craft.
 
-knowledge.craftArmourMedium.scale=As an alternative, Scalemail can be created. Scale armor has more balanced protection against all forms of damage, not quite as effective against piercing and cutting resistance, it makes up in blunt.
+knowledge.crafting_HCC_tools=Primitive Tools
+knowledge.crafting_HCC_tools.desc=(HARDCORE CRAFTING)
 
-knowledge.craftArmourHeavy=Heavy Armor
-knowledge.craftArmourHeavy.desc=Strong but restricted
+knowledge.crafting_HCC_tools.1=With Hardcore Crafting active: Basic tools are not what they used to be... You need to work your way up to metal by crafting primitve stone tools first.^Primitive stone tools are made on the carpenter bench.^ Every Stone tool needs 3 components to make:^Sharp rocks are gained by breaking stone bare-handed (No item held).^Vines can be gained by breaking leaves with a sharp rock.
 
-knowledge.craftArmourHeavy.1=You have gained decent protection from medium armour, yet is still seems limited. Medium armour does have a large amount of advantages but there may be a way to improve further.^Through study of the anatomy of some of the wildlife: It seems apparent that wool and feathers cushion blows rather effectively, a padded piece of armour may offer a decent advantage.^This would make armours created in this style very heavy and hard to wear however.
-knowledge.craftArmourHeavy.2=Heavy armour is crafted with a padded suit already made. Padded armour provides a soft and protective layer for underneath armour.
+knowledge.crafting_HCC_tools.2=Sticks can be gained similar to vines.^Stone can also be crafted from cobblestone, a hammer is first needed though.
 
-knowledge.craftArmourHeavy.splint=Splintmail isn't quite as heavy as a full blown suit of plate, and has lesser protective qualities in return. However, splintmail is still far superior to medium armors and protects all damage types equally.
-knowledge.craftArmourHeavy.plate=Plate armour is the strongest, but most expensive and difficult to craft.
-knowledge.craftHCCTools=Primitive Tools
-knowledge.craftHCCTools.desc=(HARDCORE CRAFTING)
+knowledge.crafting_HCC_tools.3=With these thee components, a carpenter bench must be made for tool crafting: It is recommended to make a pick first, as they can mine stone (processed into rocks).
 
-knowledge.craftHCCTools.1=With Hardcore Crafting active: Basic tools are not what they used to be... You need to work your way up to metal by crafting primitve stone tools first.^Primitive stone tools are made on the carpenter bench.^ Every Stone tool needs 3 components to make:^Sharp rocks are gained by breaking stone bare-handed (No item held).^Vines can be gained by breaking leaves with a sharp rock.
+knowledge.craft_tools=Forged Tools
+knowledge.craft_tools.desc=Properly crafted
+knowledge.craft_tools.1=What is that? you throw a stick on some rocks and call that a tool? HA! These are how REAL tools are made!^All the goodness of normal tools only made properly, these tools have double the durability... and double the style.^Picks can also tell you a blocks tier and if it can be mined. Just right-click a block with a forged pick.
 
-knowledge.craftHCCTools.2=Sticks can be gained similar to vines.^Stone can also be crafted from cobblestone, a hammer is first needed though.
+knowledge.craft_advanced_tools=Advanced Tools
+knowledge.craft_advanced_tools.desc=Fit for purpose
 
-knowledge.craftHCCTools.3=With these thee components, a carpenter bench must be made for tool crafting: It is recommended to make a pick first, as they can mine stone (processed into rocks).
-
-knowledge.craftTools=Forged Tools
-knowledge.craftTools.desc=Properly crafted
-knowledge.craftTools.1=What is that? you throw a stick on some rocks and call that a tool? HA! These are how REAL tools are made!^All the goodness of normal tools only made properly, these tools have double the durability... and double the style.^Picks can also tell you a blocks tier and if it can be mined. Just right-click a block with a forged pick.
-
-knowledge.craftAdvTools=Advanced Tools
-knowledge.craftAdvTools.desc=Fit for purpose
-
-knowledge.craftAdvTools.1=Not only can you forge proper tools but there is also a selection of additional tools with their own uses. Most of these tools are alternatives to existing tools, only... different.^$hHandpick$r^Handpicks have a chance to drop random items (like ores and minerals) from mining some blocks like stone and netherrack^Also they drop additional items from ore like coal and diamond.
+knowledge.craft_advanced_tools.1=Not only can you forge proper tools but there is also a selection of additional tools with their own uses. Most of these tools are alternatives to existing tools, only... different.^$hHandpick$r^Handpicks have a chance to drop random items (like ores and minerals) from mining some blocks like stone and netherrack^Also they drop additional items from ore like coal and diamond.
 
 knowledge.heavy_pick.info=$hHeavy Pick$r^Heavy picks mean business! Upon breaking blocks; heavy picks mine a 3x3x3 block around them, with lower drop rates. Perfect for digging large caverns or mineshafts.
 
@@ -1662,10 +1659,10 @@ knowledge.mattock.use=Right-click with the mattock to turn a block into a road. 
 
 knowledge.lumber.info=$hLumber Axe$r^This heavy axe is used for ripping down forests with ease. The lumber axe is capable of demolishing a whole tree with a single break of a block. Larger trees use more durability and can drain the strength of the tool fast.
 
-knowledge.craftWeapons=Forged Weapons
-knowledge.craftWeapons.desc=For "Defense"
+knowledge.craft_weapons=Forged Weapons
+knowledge.craft_weapons.desc=For "Defense"
 
-knowledge.craftWeapons.1=What is that? A wooden sword... you can do better than that...^Different combat styles use different weapons, there should be one to fit your style.^$hDagger$r^Daggers are tiny little blades that... well their pretty lame really.^But their light and quick to the strike! Pretty good for a spammy-attack style.
+knowledge.craft_weapons.1=What is that? A wooden sword... you can do better than that...^Different combat styles use different weapons, there should be one to fit your style.^$hDagger$r^Daggers are tiny little blades that... well their pretty lame really.^But their light and quick to the strike! Pretty good for a spammy-attack style.
 
 knowledge.sword.info=$hSword$r^A good old sword. Swords block the most damage and at the best arc. A finesse based blocking and countering style suits this weapon.
 
@@ -1677,10 +1674,10 @@ knowledge.spear.info=$hSpear$r^If you're too scared for close combat, spears all
 
 knowledge.bow.info=$hBow$r^Standard wooden bow with metal joints.^Note that some more brittle metals (like pig iron) will lessen the damage of the item.^RIGHT-CLICK while sneaking to open the inventory. Ammo must be loaded before use.
 
-knowledge.craftAdvWeapons=Heavy Weapons
-knowledge.craftAdvWeapons.desc=Big enough?
+knowledge.craft_advanced_weapons=Heavy Weapons
+knowledge.craft_advanced_weapons.desc=Big enough?
 
-knowledge.craftAdvWeapons.1=I'm not sure what you're intending on killing but here's some of the... larger pieces.^$hKatana$r^Katanas are the lightest heavy weapon and aren't much heavier than a normal sword. This weapon strikes fast and is the least tiring to use. Power attacks will also damage armour.^^Ninja approved!
+knowledge.craft_advanced_weapons.1=I'm not sure what you're intending on killing but here's some of the... larger pieces.^$hKatana$r^Katanas are the lightest heavy weapon and aren't much heavier than a normal sword. This weapon strikes fast and is the least tiring to use. Power attacks will also damage armour.^^Ninja approved!
 
 knowledge.greatsword.info=$hGreatsword$r^A heavy, flat blade. Greatswords are the best defensive heavy weapon. Like swords: Greatswords are decent for blocking.
 
@@ -1698,10 +1695,10 @@ knowledge.dryrocks.info=Dry rocks are the most basic, and least effective method
 knowledge.tinderbox.info=The tinderbox is effective at starting fires and highly durable. It still may take a few tries to get a flame, but the extra uses pays off.
 knowledge.flintsteel.info=This is the most effective fire starter as it works instantly. Flint and Steels have less durability than a tinder box however.
 
-knowledge.craftCrafters=Crafting Tools
-knowledge.craftCrafters.desc=That's tools for crafting
+knowledge.craft_crafters=Crafting Tools
+knowledge.craft_crafters.desc=That's tools for crafting
 
-knowledge.craftCrafters.1=There's a variety of different tools for the purpose of crafting. A lot of recipes require you to interact with the block with these tools.^$hHammer$r^Hammers are used mostly in forging. hammers are highly useful for both metalworks and some woodworks.
+knowledge.craft_crafters.1=There's a variety of different tools for the purpose of crafting. A lot of recipes require you to interact with the block with these tools.^$hHammer$r^Hammers are used mostly in forging. hammers are highly useful for both metalworks and some woodworks.
 knowledge.heavy_hammer.info=$hHeavy Hammer$r^There also are heavier counterparts of the hammer, used for forging some of the larger metal items.
 
 knowledge.tongs.info=$hTongs$r^Tongs are used for picking up hot items from the anvil, to transfer to a water source. Unlike simply dropping hot items, tongs will place items above the block rather than randomly about.
@@ -1721,26 +1718,26 @@ knowledge.arrows.desc=Arrow crafting
 
 knowledge.arrows.1=Crafting arrows can take some time, but still remains moderately low-cost. You can make many different arrow heads from any metal. Arrow shafts can be crafted with paper or feathers, but feathers are more effective. Attach the heads to their shafts on a carpenter bench.
 
-knowledge.arrowsBodkin=Bodkin Arrows
-knowledge.arrowsBodkin.desc=Light and fast
+knowledge.arrows_bodkin=Bodkin Arrows
+knowledge.arrows_bodkin.desc=Light and fast
 
-knowledge.arrowsBodkin.1=The physical properties of arrows takes time to master, but there is a way to improve it. You believe a lightweight, smooth and symmetrical head would improve the speed and accuracy of arrows. This would come at a cost of damage, but it may be worth it.
+knowledge.arrows_bodkin.1=The physical properties of arrows takes time to master, but there is a way to improve it. You believe a lightweight, smooth and symmetrical head would improve the speed and accuracy of arrows. This would come at a cost of damage, but it may be worth it.
 
-knowledge.arrowsBroad=Broad arrows
-knowledge.arrowsBroad.desc=Heavy and strong
+knowledge.arrows_broad=Broad arrows
+knowledge.arrows_broad.desc=Heavy and strong
 
-knowledge.arrowsBroad.1=After studying a piece of flint, you find a fascinating shape to one sample in particular. Although making arrows accurate and fast is an excellent choice, a heavy and broadened head could offer a decent damage bonus.^A broad head arrow is heavier, slower and less accurate than the previously created bodkin design. Although the damage this would cause would be a worthy trade indeed.
+knowledge.arrows_broad.1=After studying a piece of flint, you find a fascinating shape to one sample in particular. Although making arrows accurate and fast is an excellent choice, a heavy and broadened head could offer a decent damage bonus.^A broad head arrow is heavier, slower and less accurate than the previously created bodkin design. Although the damage this would cause would be a worthy trade indeed.
 
-knowledge.etools=Engineering Tools
-knowledge.etools.desc=Tools of the trade
-knowledge.etools.1=Engineering could be a delicate trade in some aspects. For that, you need tools that can handle these processes.
+knowledge.engineering_tools=Engineering Tools
+knowledge.engineering_tools.desc=Tools of the trade
+knowledge.engineering_tools.1=Engineering could be a delicate trade in some aspects. For that, you need tools that can handle these processes.
 
-knowledge.ecomponents=Components and Commodities
-knowledge.ecomponents.desc=For Engineering
+knowledge.engineering_components=Components and Commodities
+knowledge.engineering_components.desc=For Engineering
 
-knowledge.ecomponents.1=For engineering, there's some nifty ways you can join components. However, you may need to find some alternative commodities for doing such. It's worthwhile to make a few of these for when their needed.
+knowledge.engineering_components.1=For engineering, there's some nifty ways you can join components. However, you may need to find some alternative commodities for doing such. It's worthwhile to make a few of these for when their needed.
 
-knowledge.ecomponents.2=Most engineered objects aren't just forged. Construction usually takes pre-forged components and attatching them together. Components however are mostly used for specific purposes, and are better made on-site (Unless you intend to mass produce).
+knowledge.engineering_components.2=Most engineered objects aren't just forged. Construction usually takes pre-forged components and attatching them together. Components however are mostly used for specific purposes, and are better made on-site (Unless you intend to mass produce).
 
 knowledge.coke=Coke
 knowledge.coke.desc=Refined Fuels
@@ -1756,30 +1753,30 @@ knowledge.tungsten.2=If you use a high enough tier (such as encrusted) below lay
 
 knowledge.tungsten.3=Although this material is highly valued to engineers, it does require some decent smithing skills to refine the ore, making it even more difficult to acquire.
 
-knowledge.engTanner=Advanced Tanner
-knowledge.engTanner.desc=Easy Tanning
+knowledge.engineering_tanner=Advanced Tanner
+knowledge.engineering_tanner.desc=Easy Tanning
 
-knowledge.engTanner.1=Tanning is probably one of the most tiring methods of production. Now with some proper mechanical methods you can make it easier!^This tanning rack is able to slice and dice clean hide for you. Just place the item as usual than right-click the top.
+knowledge.engineering_tanner.1=Tanning is probably one of the most tiring methods of production. Now with some proper mechanical methods you can make it easier!^This tanning rack is able to slice and dice clean hide for you. Just place the item as usual than right-click the top.
 
-knowledge.advcrucible=Auto Crucible
-knowledge.advcrucible.desc=Easy Alloys
+knowledge.advanced_crucible=Auto Crucible
+knowledge.advanced_crucible.desc=Easy Alloys
 
-knowledge.advcrucible.1=These schematics found highlight an interesting secret behind dwarven metalworks. Through study into smelting technology, it appears there is a mechanical system that can shape and cool off metal into ingots without effort. If a crucible were to be fitted with this system, it would improve production indeed.
+knowledge.advanced_crucible.1=These schematics found highlight an interesting secret behind dwarven metalworks. Through study into smelting technology, it appears there is a mechanical system that can shape and cool off metal into ingots without effort. If a crucible were to be fitted with this system, it would improve production indeed.
 
-knowledge.advforge=Advanced Forge
-knowledge.advforge.desc=Full control
+knowledge.advanced_forge=Advanced Forge
+knowledge.advanced_forge.desc=Full control
 
-knowledge.advforge.1=These dwarven schematics also appear to have a design of forge which as such a well-controlled method of burning fuel that it can be controlled with a redstone signal.^This forge can be easily switched on and off, saving fuel consumption.
+knowledge.advanced_forge.1=These dwarven schematics also appear to have a design of forge which as such a well-controlled method of burning fuel that it can be controlled with a redstone signal.^This forge can be easily switched on and off, saving fuel consumption.
 
 knowledge.blackpowder=Explosives
 knowledge.blackpowder.desc=Boom!
 
 knowledge.blackpowder.1=Using generic gunpowder and TNT to blow things up may be satisfying but it makes one hell of a mess. It is possible however to create devices with more controlled explosions that limit the environmental damage.^Blackpowder is an explosive substance capable of doing large damage while limiting the destruction of blocks.^It's not world-shatteringly powerful like the stuff creepers use.^Blackpowder is made from various minerals found while mining.
 
-knowledge.advblackpowder=Refined Blackpowder
-knowledge.advblackpowder.desc=Ka Boom!
+knowledge.advanced_blackpowder=Refined Blackpowder
+knowledge.advanced_blackpowder.desc=Ka Boom!
 
-knowledge.advblackpowder.1=Blackpowder has proven useful for explosive creation but sometimes you may need more of a blast.^Through the use of redstone and glowstone: you can beef-up the power of blackpowder to increase damage.
+knowledge.advanced_blackpowder.1=Blackpowder has proven useful for explosive creation but sometimes you may need more of a blast.^Through the use of redstone and glowstone: you can beef-up the power of blackpowder to increase damage.
 
 knowledge.climber=Climbing Pick
 knowledge.climber.desc=Getting up there
@@ -1818,46 +1815,46 @@ knowledge.crossbows.4=You may also add both a mod and muzzle to the crossbow. Mo
 knowledge.crossbows.5=To craft a crossbow: Place the desired parts in their respected slots. (Similar to bomb crafting) You will then need to steadily click the block with a spanner to craft the item.
 knowledge.crossbows.6=When that's finished: you have a crossbow. Crossbows function differently to bows and can be fired immidiately if the weapon is ready. Sneak and use the item to open its inventory. This must be used. You can add any bolt to the inventory of the crossbow and it will load when you use it.
 
-knowledge.crossShafts=Crossbow Stocks
-knowledge.crossShafts.desc=Vital component
-knowledge.crossShafts.handle=Handles are miniture stocks designed for creating hand crossbows. This small design allows fast reload speed at the cost of accuracy and recoil.
-knowledge.crossShafts.stock=Stocks are full-sized versions of the Handle and are capable of firing a crossbow with less recoil. Due to their size, reduce the reload time.
+knowledge.crossbow_shafts=Crossbow Stocks
+knowledge.crossbow_shafts.desc=Vital component
+knowledge.crossbow_shafts.handle=Handles are miniture stocks designed for creating hand crossbows. This small design allows fast reload speed at the cost of accuracy and recoil.
+knowledge.crossbow_shafts.stock=Stocks are full-sized versions of the Handle and are capable of firing a crossbow with less recoil. Due to their size, reduce the reload time.
 
-knowledge.crossHeads=Crossbow Arms
-knowledge.crossHeads.desc=Vital Component
-knowledge.crossHeads.light=A Lightweight crossbow head allows easy reload speed at a cost of power. This head can be modified multiple times to increase its weight and power.
-knowledge.crossHeads.medium=A standard sized crossbow head. This has a balanced power and speed.
-knowledge.crossHeads.heavy=A heavy-duty, reinforced crossbow head. This has a massive force behind it, and it shows with a high recoil and slow reload time.
+knowledge.crossbow_heads=Crossbow Arms
+knowledge.crossbow_heads.desc=Vital Component
+knowledge.crossbow_heads.light=A Lightweight crossbow head allows easy reload speed at a cost of power. This head can be modified multiple times to increase its weight and power.
+knowledge.crossbow_heads.medium=A standard sized crossbow head. This has a balanced power and speed.
+knowledge.crossbow_heads.heavy=A heavy-duty, reinforced crossbow head. This has a massive force behind it, and it shows with a high recoil and slow reload time.
 
-knowledge.crossHeadAdvanced=Advanced Crossbow Arms
-knowledge.crossHeadAdvanced.desc=Precision over speed
+knowledge.crossbow_head_advanced=Advanced Crossbow Arms
+knowledge.crossbow_head_advanced.desc=Precision over speed
 
-knowledge.crossHeads.advanced=This set of dwarven crossbow schematics consists of a steel cross capable of releasing a powerful force. With the right materials and tools, it is possible to create your own.^Although slow, this crossbow head should be able to fire bolts with deadly power and accuracy.
+knowledge.crossbow_head_advanced.1=This set of dwarven crossbow schematics consists of a steel cross capable of releasing a powerful force. With the right materials and tools, it is possible to create your own.^Although slow, this crossbow head should be able to fire bolts with deadly power and accuracy.
 
-knowledge.crossShaftAdvanced=Advanced Crossbow Stock
-knowledge.crossShaftAdvanced.desc=Recoil Control
+knowledge.crossbow_shaft_advanced=Advanced Crossbow Stock
+knowledge.crossbow_shaft_advanced.desc=Recoil Control
 
-knowledge.crossShafts.advanced=For what appears to be based off a regular wooden stock: this dwarven crossbow includes a metal design. Although heavy, it appears to contain a spring-loaded system for absorbing recoil.
+knowledge.crossbow_shaft_advanced.1=For what appears to be based off a regular wooden stock: this dwarven crossbow includes a metal design. Although heavy, it appears to contain a spring-loaded system for absorbing recoil.
 
-knowledge.crossAmmo=Repeating Crossbow
-knowledge.crossAmmo.desc=Expanded capacity
-knowledge.crossAmmo.1=Crossbows can take time to reload, and you may need to fire more than once to get the job done. Repeating mechanisms go in the "mod" slot and allow crossbows to fire multiple shots before reloading (at a cost of accuracy)
+knowledge.crossbow_ammo=Repeating Crossbow
+knowledge.crossbow_ammo.desc=Expanded capacity
+knowledge.crossbow_ammo.1=Crossbows can take time to reload, and you may need to fire more than once to get the job done. Repeating mechanisms go in the "mod" slot and allow crossbows to fire multiple shots before reloading (at a cost of accuracy)
 
-knowledge.crossScope=Crossbow Scope
-knowledge.crossScope.desc=Primitive Sniper
-knowledge.crossScope.1=What use would an accurate crossbow be without the ability to see what you're shooting at. Spyglasses can now be modified to fit onto crossbows in the "mod" slot.
+knowledge.crossbow_scope=Crossbow Scope
+knowledge.crossbow_scope.desc=Primitive Sniper
+knowledge.crossbow_scope.1=What use would an accurate crossbow be without the ability to see what you're shooting at. Spyglasses can now be modified to fit onto crossbows in the "mod" slot.
 
-knowledge.crossBayonet=Crossbow Bayonet
-knowledge.crossBayonet.desc=Melee Damage
-knowledge.crossBayonet.1=While some reload their crossbows, it's usual for some jerk to take advantage of the situation, you need to fight back another way. Bayonets attach to the "muzzle" slot and can increase the melee damage from crossbows.
+knowledge.crossbow_bayonet=Crossbow Bayonet
+knowledge.crossbow_bayonet.desc=Melee Damage
+knowledge.crossbow_bayonet.1=While some reload their crossbows, it's usual for some jerk to take advantage of the situation, you need to fight back another way. Bayonets attach to the "muzzle" slot and can increase the melee damage from crossbows.
 
-knowledge.bpress=Bomb Press
-knowledge.bpress.desc=Mass Productive
-knowledge.bpress.1=Having to assemble each bomb individually can be tedious... very tedious. This device can do the work for you, all you need to do is place it directly above a bomb crafting table, pull the lever and it crafts the bomb for you.
+knowledge.bomb_press=Bomb Press
+knowledge.bomb_press.desc=Mass Productive
+knowledge.bomb_press.1=Having to assemble each bomb individually can be tedious... very tedious. This device can do the work for you, all you need to do is place it directly above a bomb crafting table, pull the lever and it crafts the bomb for you.
 
-knowledge.bombarrow=Bomb Arrows
-knowledge.bombarrow.desc=To pack a punch
-knowledge.bombarrow.1=Your experience in the creations of bombs has paid off. These tiny explosives can be packed similar to bombs and deliver a deadly blast. Bomb arrows are created like any bomb, place the arrow casing in the case slot. These do not take fuses.
+knowledge.bomb_arrow=Bomb Arrows
+knowledge.bomb_arrow.desc=To pack a punch
+knowledge.bomb_arrow.1=Your experience in the creations of bombs has paid off. These tiny explosives can be packed similar to bombs and deliver a deadly blast. Bomb arrows are created like any bomb, place the arrow casing in the case slot. These do not take fuses.
 
 knowledge.shrapnel=Shrapnel Bombs
 knowledge.shrapnel.desc=Simple Filling
@@ -1871,89 +1868,89 @@ knowledge.firebomb.1=Adding shrapnel to bombs is very effective at elimiting one
 knowledge.firebomb.2=How it works is the magma cream (being a mixture of burning embers and sticky slime) is able to keep a self-sustaining flame while remaining as a spreadable substance. Additional blaze powder then reacts with a dragon heart to release a magical catalyst that increases the temperature of the flame.
 knowledge.firebomb.3=Incineration bombs may be expensive, but their extremely effective against armour.
 
-knowledge.bombCeramic=Ceramic Bomb Casing
-knowledge.bombCeramic.desc=Basic Bombs
-knowledge.bombCeramic.1=Bombs are one of the simplest forms of explosives: Just throw it and it explodes.^Ceramic casings however are brittle and don't restrict the blast much. Bombs made from these will have an average explosion radius.
+knowledge.bomb_ceramic=Ceramic Bomb Casing
+knowledge.bomb_ceramic.desc=Basic Bombs
+knowledge.bomb_ceramic.1=Bombs are one of the simplest forms of explosives: Just throw it and it explodes.^Ceramic casings however are brittle and don't restrict the blast much. Bombs made from these will have an average explosion radius.
 
-knowledge.mineCeramic=Ceramic Mine Casing
-knowledge.mineCeramic.desc=Basic Mines
-knowledge.mineCeramic.1=Mines aren't as useful as your conventional bomb but still have their place. A mine will explode when something walks near it.^Ceramic cases are brittle and unstable, this means their both sensetive and don't restrict blasts much. Ceramic mines have an average explosion radius.
+knowledge.mine_ceramic=Ceramic Mine Casing
+knowledge.mine_ceramic.desc=Basic Mines
+knowledge.mine_ceramic.1=Mines aren't as useful as your conventional bomb but still have their place. A mine will explode when something walks near it.^Ceramic cases are brittle and unstable, this means their both sensetive and don't restrict blasts much. Ceramic mines have an average explosion radius.
 
-knowledge.bombIron=Iron Bomb Casing
-knowledge.bombIron.desc=Compacted Blasts
-knowledge.bombIron.1=It normally would be wise to make a bomb easy to detonate... But why not let it build up some pressure?^Iron casings take a bit more force to break. This means when they do detonate the explosion(though smaller) has a bit more force behind it.
+knowledge.bomb_iron=Iron Bomb Casing
+knowledge.bomb_iron.desc=Compacted Blasts
+knowledge.bomb_iron.1=It normally would be wise to make a bomb easy to detonate... But why not let it build up some pressure?^Iron casings take a bit more force to break. This means when they do detonate the explosion(though smaller) has a bit more force behind it.
 
-knowledge.mineIron=Iron Mine Casing
-knowledge.mineIron.desc=Compacted Blasts
-knowledge.mineIron.1=Ceramic casings may bit too sensetive. Iron bomb casings not only allow the blast to build more pressure, but their solid construction makes them harder to trigger, reducing their range but increasing their damage.
+knowledge.mine_iron=Iron Mine Casing
+knowledge.mine_iron.desc=Compacted Blasts
+knowledge.mine_iron.1=Ceramic casings may bit too sensetive. Iron bomb casings not only allow the blast to build more pressure, but their solid construction makes them harder to trigger, reducing their range but increasing their damage.
 
-knowledge.bombObsidian=Obisidian Bomb Casing
-knowledge.bombObsidian.desc=Sealing in the freshness
+knowledge.bomb_obsidian=Obisidian Bomb Casing
+knowledge.bomb_obsidian.desc=Sealing in the freshness
 
-knowledge.bombObsidian.1=This set of bomb schematics appears to consist of a casing made from obsidian. This casing though hard is designed with fracture points for a more controlled explosion. These would yield high damage over smaller range.
+knowledge.bomb_obsidian.1=This set of bomb schematics appears to consist of a casing made from obsidian. This casing though hard is designed with fracture points for a more controlled explosion. These would yield high damage over smaller range.
 
-knowledge.mineObsidian=Obisidian Mine Casing
-knowledge.mineObsidian.desc=Sealing in the freshness
+knowledge.mine_obsidian=Obisidian Mine Casing
+knowledge.mine_obsidian.desc=Sealing in the freshness
 
-knowledge.mineObsidian.1=This is a dwarven design of a mine casing. The design incorporates a hard obsidian casing with fracture points in particular areas. The explosion dealt from this would yield large damage over a smaller area.
+knowledge.mine_obsidian.1=This is a dwarven design of a mine casing. The design incorporates a hard obsidian casing with fracture points in particular areas. The explosion dealt from this would yield large damage over a smaller area.
 
-knowledge.bombCrystal=Crystal Bomb Casing
-knowledge.bombCrystal.desc=Stylish
+knowledge.bomb_crystal=Crystal Bomb Casing
+knowledge.bomb_crystal.desc=Stylish
 
-knowledge.bombCrystal.1=Reducing the blast radius to focus more on damage seems decent, but why not increase the blast radius?^Glass casings have no resistence meaning all the power spreads as far as possible.^And add some diamond into the mix so the shards cause more damage anyway!
+knowledge.bomb_crystal.1=Reducing the blast radius to focus more on damage seems decent, but why not increase the blast radius?^Glass casings have no resistence meaning all the power spreads as far as possible.^And add some diamond into the mix so the shards cause more damage anyway!
 
-knowledge.mineCrystal=Crystal Mine Casing
-knowledge.mineCrystal.desc=Stylish
-knowledge.mineCrystal.1=A delicate glass mine. This can be set off real easy with a large explosion.^Not only that but adding diamond shards into the workings of the case just makes it hurt all the more (and by that I mean the person who stands on it, not the fact it cost you a diamond to make).
+knowledge.mine_crystal=Crystal Mine Casing
+knowledge.mine_crystal.desc=Stylish
+knowledge.mine_crystal.1=A delicate glass mine. This can be set off real easy with a large explosion.^Not only that but adding diamond shards into the workings of the case just makes it hurt all the more (and by that I mean the person who stands on it, not the fact it cost you a diamond to make).
 
-knowledge.bombFuse=Bomb Fuses
-knowledge.bombFuse.desc=Timed destruction
-knowledge.bombFuse.1=What's a bomb without a fuse? A massively blown up hand! Fuses are a vital part of any explosive devices, even mines use them to some extent.^The fuse you create determines how long until the device explodes.
-knowledge.bombFuse.2=You can also make an extended fuse. With this: bombs can be thrown much farther before exploding. Not much use on mines though...
+knowledge.bomb_fuse=Bomb Fuses
+knowledge.bomb_fuse.desc=Timed destruction
+knowledge.bomb_fuse.1=What's a bomb without a fuse? A massively blown up hand! Fuses are a vital part of any explosive devices, even mines use them to some extent.^The fuse you create determines how long until the device explodes.
+knowledge.bomb_fuse.2=You can also make an extended fuse. With this: bombs can be thrown much farther before exploding. Not much use on mines though...
 
-knowledge.stickybomb=Sticky Bombs
-knowledge.stickybomb.desc=Catch this!
-knowledge.stickybomb.1=Sticky bombs- as the name might suggest, are bombs that are sticky. And with this amazing trait: will attatch themselves to whatever poor sod gets in its way.^So what you have here is a bomb that does a lot of damage sticking to someone! Which never stops being funny.
-knowledge.stickybomb.2=To create these: Leave(or put) a bomb in the output slot and right-click the block with a slime ball. A single slimeball can coat a stack of any size.
+knowledge.sticky_bomb=Sticky Bombs
+knowledge.sticky_bomb.desc=Catch this!
+knowledge.sticky_bomb.1=Sticky bombs- as the name might suggest, are bombs that are sticky. And with this amazing trait: will attatch themselves to whatever poor sod gets in its way.^So what you have here is a bomb that does a lot of damage sticking to someone! Which never stops being funny.
+knowledge.sticky_bomb.2=To create these: Leave(or put) a bomb in the output slot and right-click the block with a slime ball. A single slimeball can coat a stack of any size.
 
 # Use of Cogworks
 
-knowledge.cogArmour=Cogwork Suit
-knowledge.cogArmour.desc=Power Armor
+knowledge.cogwork_armour=Cogwork Suit
+knowledge.cogwork_armour.desc=Power Armor
 
-knowledge.cogArmour.1=This appears to be a real discovery, and seems to highlight why dwarven ruins had particularly large halls. These are schematics for an advanced set of gears which can replicate human movement into a heavy exoskeleton. What this reveals is a massive suit of armour capable of making the wearer nearly invulnerable to damage.^Cogwork armour is the pinnacle of dwarven engineering and capable of carrying huge amounts of weight. The only downside however is powering the suit, as it requires pure burning fuel and a lot of it.
+knowledge.cogwork_armour.1=This appears to be a real discovery, and seems to highlight why dwarven ruins had particularly large halls. These are schematics for an advanced set of gears which can replicate human movement into a heavy exoskeleton. What this reveals is a massive suit of armour capable of making the wearer nearly invulnerable to damage.^Cogwork armour is the pinnacle of dwarven engineering and capable of carrying huge amounts of weight. The only downside however is powering the suit, as it requires pure burning fuel and a lot of it.
 
-knowledge.cogArmour.2=Though no actual suits have been found in ruins, the assembly systems remain in-tact and they appear to be more than capable of fitting a suit to something more human sized.
+knowledge.cogwork_armour.2=Though no actual suits have been found in ruins, the assembly systems remain in-tact and they appear to be more than capable of fitting a suit to something more human sized.
 
-knowledge.cogArmour.station=$hCrafting Station$r^A crafting station is necessary for any construction or modification to take place. Cogwork crafting stations are made from a frame and pulley system. To start off, built three posts 4 blocks tall with a single one in the middle-top.
+knowledge.cogwork_armour.station.1=$hCrafting Station$r^A crafting station is necessary for any construction or modification to take place. Cogwork crafting stations are made from a frame and pulley system. To start off, built three posts 4 blocks tall with a single one in the middle-top.
 # Example
 knowledge.cogwork_station=Crafting Station
-knowledge.cogArmour.station.2=With the frame set up, you need to craft the pulley, when this is made, right-click the top block of the frame to install it. Ensure you have the frame in the right place, there's no way to return the pulley after installation.
+knowledge.cogwork_armour.station.2=With the frame set up, you need to craft the pulley, when this is made, right-click the top block of the frame to install it. Ensure you have the frame in the right place, there's no way to return the pulley after installation.
 # Pulley Recipe
-knowledge.cogArmour.crafting=To craft cogwork armour: you need the three blocks (Helmet, Chest and Legs). Stack these on top of each other inside the frame. Then right-click the chest with a spanner.
+knowledge.cogwork_armour.crafting=To craft cogwork armour: you need the three blocks (Helmet, Chest and Legs). Stack these on top of each other inside the frame. Then right-click the chest with a spanner.
 # Piece Recipes
-knowledge.cogArmour.armour=$hPlating$r^To add plating, you need to craft a plating item. Each set of plates cost a lot of ingots, and is recommended to use simple materials like steel. These can be installed by right-clicking a suit in a frame. You also need 16 bolts, which will be consumed before plating can be added. plating can easily be removed with a spanner.
+knowledge.cogwork_armour.armour=$hPlating$r^To add plating, you need to craft a plating item. Each set of plates cost a lot of ingots, and is recommended to use simple materials like steel. These can be installed by right-clicking a suit in a frame. You also need 16 bolts, which will be consumed before plating can be added. plating can easily be removed with a spanner.
 # Armour Recipe
-knowledge.cogArmour.fuel=$hRefueling$r^Cogwork armour only takes refined fuels (coke or magma cream). Right-click the suit to add fuel.^The heavier the armour on the suit, the faster fuel decays.
-knowledge.cogArmour.advantage=$hAdvantages$r^An unarmoured suit can give immunity to smoke, remove fall damage, increase attack damage and eliminate stamina decay.
-knowledge.cogArmour.advantage.2=When fitted with plating: the suit is sealed, you will gain a huge armour bonus and be able to breathe underwater. The suit is also able to remove poison/wither damage and make the wearer immune to fire.
-knowledge.cogArmour.advantage.3=The armour can still take damage from fire depending on its melting point, higher durability tiers make the armour last longer as well, plating must be removed at a cogwork station for repair.
-knowledge.cogArmour.disadvantage=When wearing cogwork, you cannot jump, but are able to walk up single-block steps, your movement is also much slower and you are unable to sneak.
-knowledge.cogArmour.disadvantage.2=Explosions can also damage the armour more than other forms of damage, as well as stun you for a second.
-knowledge.cogArmour.removal=Although plating is removed when the suit is broken, the framework remains in tact, an empty, unarmoured suit can be broken by hitting it with a spanner, it may also be destroyed if left in fire or lava when plating is broken.
+knowledge.cogwork_armour.fuel=$hRefueling$r^Cogwork armour only takes refined fuels (coke or magma cream). Right-click the suit to add fuel.^The heavier the armour on the suit, the faster fuel decays.
+knowledge.cogwork_armour.advantage=$hAdvantages$r^An unarmoured suit can give immunity to smoke, remove fall damage, increase attack damage and eliminate stamina decay.
+knowledge.cogwork_armour.advantage.2=When fitted with plating: the suit is sealed, you will gain a huge armour bonus and be able to breathe underwater. The suit is also able to remove poison/wither damage and make the wearer immune to fire.
+knowledge.cogwork_armour.advantage.3=The armour can still take damage from fire depending on its melting point, higher durability tiers make the armour last longer as well, plating must be removed at a cogwork station for repair.
+knowledge.cogwork_armour.disadvantage=When wearing cogwork, you cannot jump, but are able to walk up single-block steps, your movement is also much slower and you are unable to sneak.
+knowledge.cogwork_armour.disadvantage.2=Explosions can also damage the armour more than other forms of damage, as well as stun you for a second.
+knowledge.cogwork_armour.removal=Although plating is removed when the suit is broken, the framework remains in tact, an empty, unarmoured suit can be broken by hitting it with a spanner, it may also be destroyed if left in fire or lava when plating is broken.
 
-knowledge.compPlate=Composite Alloy
-knowledge.compPlate.desc=Powerful all-rounder
+knowledge.composite_alloy=Composite Alloy
+knowledge.composite_alloy.desc=Powerful all-rounder
 
-knowledge.compPlate.1=So far, most alloys have simply been a matter of mixing them together in a pot. This dwarven design of alloy appears to be different, layering multiple materials together into a plate. Although not as efficient at making tools, the applications for armour would be very efficient, although heavy.^It is obvious this particular alloy was designed to be used with the cogwork armour.
+knowledge.composite_alloy.1=So far, most alloys have simply been a matter of mixing them together in a pot. This dwarven design of alloy appears to be different, layering multiple materials together into a plate. Although not as efficient at making tools, the applications for armour would be very efficient, although heavy.^It is obvious this particular alloy was designed to be used with the cogwork armour.
 
 knowledge.refined_planks=Refined Planks
 knowledge.refined_planks.desc=Structually stable
 knowledge.refined_planks.1=Refined planks are both strong and resistent to weathering and should prove a decent building material. By nailing some of these together, you can make a block for building. This block cannot be taken apart.^You can also make this out of normal planks.
 
-knowledge.constructionPts=Construction Parts
-knowledge.constructionPts.desc=Prepared Woods
-knowledge.constructionPts.1=Wood must be cut and shaped in many ways before being workable, here are a few shapes and sizes required for construction.^A lot of timber goes in to creating proper furnishings, as well as metal for fittings and nails.
+knowledge.construction_parts=Construction Parts
+knowledge.construction_parts.desc=Prepared Woods
+knowledge.construction_parts.1=Wood must be cut and shaped in many ways before being workable, here are a few shapes and sizes required for construction.^A lot of timber goes in to creating proper furnishings, as well as metal for fittings and nails.
 
 knowledge.reinforced_stone=Reinforced Stone
 knowledge.reinforced_stone.desc=Heavy Duty
@@ -2022,9 +2019,9 @@ knowledge.jerky=Jerky
 knowledge.jerky.desc=For the traveller
 knowledge.jerky.1=Jerky may not be the tastiest or warmest of food, but it has its own purpose. This is one of the few stackable foods and has a decent stamina bonus across the board. Good for mining trips and explorations.
 
-knowledge.saussage=Saussage
-knowledge.saussage.desc=Sealed meats
-knowledge.saussage.1=When rationing meats into jerky, you tend to sacrifice pleasure of consumption for practicality. No more chewy, salty, jerky! Saussages keep meat fresh in a casing made from... uh... entrails...
+knowledge.sausage=Sausage
+knowledge.sausage.desc=Sealed meats
+knowledge.sausage.1=When rationing meats into jerky, you tend to sacrifice pleasure of consumption for practicality. No more chewy, salty, jerky! Saussages keep meat fresh in a casing made from... uh... entrails...
 
 knowledge.sandwitch=Sandwitches
 knowledge.sandwitch.desc=Simple
@@ -2038,9 +2035,9 @@ knowledge.meatpie=Meat Pie
 knowledge.meatpie.desc=Hearty and filling
 knowledge.meatpie.1=What's better than putting meat in a pie? nothing! Meat pies are filling and give a high stamina buff. Place the pie block and right-click with a knife to cut a slice.
 
-knowledge.shepardpie=Shepards Pie
-knowledge.shepardpie.desc=You can eat it if you're not a shepard too
-knowledge.shepardpie.1=Even better than a meat pie, now with potato! And a bigger stamina buff. Place the pie block and right-click with a knife to cut a slice.
+knowledge.shepard_pie=Shepards Pie
+knowledge.shepard_pie.desc=You can eat it if you're not a shepard too
+knowledge.shepard_pie.1=Even better than a meat pie, now with potato! And a bigger stamina buff. Place the pie block and right-click with a knife to cut a slice.
 
 knowledge.salt=Salt
 knowledge.salt.desc=A little extra
@@ -2078,33 +2075,33 @@ knowledge.cake=Cake
 knowledge.cake.desc=Made the RIGHT way!
 knowledge.cake.1=A big cake. Restores stamina and gives stamina regen. Place the cake block and right-click with a knife to cut a slice.
 
-knowledge.carrotcake=Carrot Cake
-knowledge.carrotcake.desc=Kind of healthy...
-knowledge.carrotcake.1=Standard cake with carrots in it. Restores stamina and gives stamina regen that lasts longer. Place the cake block and right-click with a knife to cut a slice.
+knowledge.carrot_cake=Carrot Cake
+knowledge.carrot_cake.desc=Kind of healthy...
+knowledge.carrot_cake.1=Standard cake with carrots in it. Restores stamina and gives stamina regen that lasts longer. Place the cake block and right-click with a knife to cut a slice.
 
-knowledge.chococake=Chocolate Cake
-knowledge.chococake.desc=Decedant
-knowledge.chococake.1=Dense with chocolate. Restores stamina and gives a faster stamina regen. Place the cake block and right-click with a knife to cut a slice.
+knowledge.chocolate_cake=Chocolate Cake
+knowledge.chocolate_cake.desc=Decedant
+knowledge.chocolate_cake.1=Dense with chocolate. Restores stamina and gives a faster stamina regen. Place the cake block and right-click with a knife to cut a slice.
 
-knowledge.bfcake=Black-Forest Cake
-knowledge.bfcake.desc=Fancy
-knowledge.bfcake.1=Layers of chocolate and fresh berries. Restores large stamina and gives fast stamina regen for longer. Place the cake block and right-click with a knife to cut a slice.
+knowledge.black_forest_cake=Black-Forest Cake
+knowledge.black_forest_cake.desc=Fancy
+knowledge.black_forest_cake.1=Layers of chocolate and fresh berries. Restores large stamina and gives fast stamina regen for longer. Place the cake block and right-click with a knife to cut a slice.
 
-knowledge.berrypie=Berry Pie
-knowledge.berrypie.desc=Simple dessert
-knowledge.berrypie.1=Berries are nice and juicy, but you may want to do something with them. Berry pies restore some stamina and give a stamina regen buff for a short time. Place the pie block and right-click with a knife to cut a slice.
+knowledge.berry_pie=Berry Pie
+knowledge.berry_pie.desc=Simple dessert
+knowledge.berry_pie.1=Berries are nice and juicy, but you may want to do something with them. Berry pies restore some stamina and give a stamina regen buff for a short time. Place the pie block and right-click with a knife to cut a slice.
 
-knowledge.applepie=Apple Pie
-knowledge.applepie.desc=Simple dessert
-knowledge.applepie.1=Similar to berry pies only with slightly better effects. Apple pies restore some stamina and give a stamina regen buff for a short time. Place the pie block and right-click with a knife to cut a slice.
+knowledge.apple_pie=Apple Pie
+knowledge.apple_pie.desc=Simple dessert
+knowledge.apple_pie.1=Similar to berry pies only with slightly better effects. Apple pies restore some stamina and give a stamina regen buff for a short time. Place the pie block and right-click with a knife to cut a slice.
 
 knowledge.cheese=Cheese
 knowledge.cheese.desc=Solid dairy
 knowledge.cheese.1=Cheese is made from refining milk. It has use in some recipes. Place the cheese block and right-click with a knife to cut a slice.
 
-knowledge.cheeseroll=Cheese Roll
-knowledge.cheeseroll.desc=Easy snack
-knowledge.cheeseroll.1=Cheese goes well with bread. Put some cheese in a roll to give it some flavour.
+knowledge.cheese_roll=Cheese Roll
+knowledge.cheese_roll.desc=Easy snack
+knowledge.cheese_roll.1=Cheese goes well with bread. Put some cheese in a roll to give it some flavour.
 
 knowledge.firepit=Firepit and Stoves
 knowledge.firepit.desc=Basic cooking
@@ -2113,17 +2110,17 @@ knowledge.firepit.2=Stovetops are used to cook food, these must be placed on top
 knowledge.firepit.3=Ovens are able to cook baked items such as bread as well as that of a normal cooktop.^Ovens are also required to make ceramics out of clay making them useful in cooking as well as other crafts, provided the temperature is very high, such as coal in a forge.
 knowledge.firepit.4=When cooking: use a firepit for basic cooking, a forge with coal dust for advanced cooking, and a forge with standard fuel (like coal) for ceramics.
 
-knowledge.cookingutensil=Cooking Utensils
-knowledge.cookingutensil.desc=Tools for cooking
-knowledge.cookingutensil.1=For cooking, there's a variety of non-edible items that go into cooking. These include mostly trays and tins. For tools: see the basic section.
+knowledge.cooking_utensils=Cooking Utensils
+knowledge.cooking_utensils.desc=Tools for cooking
+knowledge.cooking_utensils.1=For cooking, there's a variety of non-edible items that go into cooking. These include mostly trays and tins. For tools: see the basic section.
 
 knowledge.bandage=Bandages
 knowledge.bandage.desc=First Aid
 knowledge.bandage.1=There's times when someone gets badly injured, now simply asking them to shut up and eat a piece of chicken gets old fast. Bandages can restore health when used, hold right-click to use.^They don't work when you're starving, drowning, burning, poisoned, and... a lot of stuff really.
 
-knowledge.bandageadv=Strong Bandages
-knowledge.bandageadv.desc=Tough Stuff
-knowledge.bandageadv.1=These advanced leather bandages heal much more damage. They can be costly however.
+knowledge.bandage_advanced=Strong Bandages
+knowledge.bandage_advanced.desc=Tough Stuff
+knowledge.bandage_advanced.1=These advanced leather bandages heal much more damage. They can be costly however.
 
 # MASTERY TEXT
 knowledge.title=
@@ -2138,30 +2135,30 @@ knowledge.toughness=Toughness
 knowledge.toughness.desc=Take it!
 knowledge.toughness.1=Your constant exposure to battle has granted you a higher resistance to the elements.^Damage from all sources is reduced by 10%%.
 
-knowledge.armourpro=Armor Proficiency
-knowledge.armourpro.desc=Feel the weight
-knowledge.armourpro.1=After all this time, your core has become stronger.^Armor penalty to stamina cost is halved.
+knowledge.armour_pro=Armor Proficiency
+knowledge.armour_pro.desc=Feel the weight
+knowledge.armour_pro.1=After all this time, your core has become stronger.^Armor penalty to stamina cost is halved.
 
-knowledge.parrypro=Parry Tactics
-knowledge.parrypro.desc=Control your movement
-knowledge.parrypro.1=The position in the battlefield is an important weapon and should be used to your advantage.^Holding shift when parrying allows you to leap towards, and past your opponent. This is useful to slip past their defenses.
+knowledge.parry_pro=Parry Tactics
+knowledge.parry_pro.desc=Control your movement
+knowledge.parry_pro.1=The position in the battlefield is an important weapon and should be used to your advantage.^Holding shift when parrying allows you to leap towards, and past your opponent. This is useful to slip past their defenses.
 
-knowledge.counteratt=Counter attack
-knowledge.counteratt.desc=Return strike
-knowledge.counteratt.1=Parrying may protect you but it throws you off balance a bit, however you are experienced enough to use this to your advantage.^Right after parrying you can do an alternate attack that does different damage.
-knowledge.counteratt.2=Swords, Daggers and Katanas do a piercing stab.^Waraxes use their piercing back.^Heavy weapons deal a pummel smash.^Blunt weapons and polearms have no effect.
+knowledge.counter_attack=Counter attack
+knowledge.counter_attack.desc=Return strike
+knowledge.counter_attack.1=Parrying may protect you but it throws you off balance a bit, however you are experienced enough to use this to your advantage.^Right after parrying you can do an alternate attack that does different damage.
+knowledge.counter_attack.2=Swords, Daggers and Katanas do a piercing stab.^Waraxes use their piercing back.^Heavy weapons deal a pummel smash.^Blunt weapons and polearms have no effect.
 
-knowledge.autoparry=Reflex Parry
-knowledge.autoparry.desc=Ready for the hit
-knowledge.autoparry.1=Your constant use of finesse has granted you some automatic reflexes.^You can parry attacks without blocking (with a reduced arc).
+knowledge.auto_parry=Reflex Parry
+knowledge.auto_parry.desc=Ready for the hit
+knowledge.auto_parry.1=Your constant use of finesse has granted you some automatic reflexes.^You can parry attacks without blocking (with a reduced arc).
 
 knowledge.scrapper=Scavenger
 knowledge.scrapper.desc=Take it all
 knowledge.scrapper.1=Your skill in crafting items has allowed you to understand how things come together, and apart..^You now have higher drop rates when salvaging.
 
-knowledge.firstaid=First Aid
-knowledge.firstaid.desc=Tend to the wounded
-knowledge.firstaid.1=You need to be fast when tending to some injuries and need to be ready for the moment.^Using bandages is significantly faster.
+knowledge.first_aid=First Aid
+knowledge.first_aid.desc=Tend to the wounded
+knowledge.first_aid.1=You need to be fast when tending to some injuries and need to be ready for the moment.^Using bandages is significantly faster.
 
 knowledge.doctor=Doctor
 knowledge.doctor.desc=Duty to benefit

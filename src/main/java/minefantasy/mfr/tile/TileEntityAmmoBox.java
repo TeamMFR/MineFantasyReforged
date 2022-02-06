@@ -27,16 +27,10 @@ import net.minecraftforge.items.ItemStackHandler;
 public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable, IBasicMetre {
 	public int angle, stock;
 	public ItemStack inventoryStack = ItemStack.EMPTY;
-	private byte storageSize = -1;
 	private int ticksExisted;
 
 	public TileEntityAmmoBox() {
 		super("ammo_box_basic", CustomMaterial.NONE);
-	}
-
-	public TileEntityAmmoBox(String tex, CustomMaterial material, byte size) {
-		super(tex, material);
-		this.storageSize = size;
 	}
 
 	@Override
@@ -70,7 +64,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 				return true;
 			}
 			return false;
-		} else if (!inventoryStack.isEmpty() && !(held.getItem() == Items.AIR)) {
+		} else if (!inventoryStack.isEmpty() && (held.getItem() == Items.AIR)) {
 			open();
 			takeStack(user);
 			syncData();
@@ -248,7 +242,7 @@ public class TileEntityAmmoBox extends TileEntityWoodDecor implements ITickable,
 				return ((BlockAmmoBox) block).storageType;
 			}
 		}
-		return storageSize;
+		return (byte) -1;
 	}
 
 	@Override

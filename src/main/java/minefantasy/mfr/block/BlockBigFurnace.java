@@ -96,7 +96,6 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 		if (!world.isRemote) {
 			TileEntityBigFurnace tile = (TileEntityBigFurnace) getTile(world, pos);
 			if (tile != null) {
-				tile.openChest();
 				tile.openGUI(world, player);
 			}
 

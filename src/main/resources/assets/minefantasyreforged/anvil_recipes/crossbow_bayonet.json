@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "engineering",
-  "research": "crossBayonet",
+  "research": "cross_bayonet",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 3,

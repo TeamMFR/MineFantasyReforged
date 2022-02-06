@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "artisanry",
-  "research": "coalflux",
+  "research": "coal_flux",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 2,

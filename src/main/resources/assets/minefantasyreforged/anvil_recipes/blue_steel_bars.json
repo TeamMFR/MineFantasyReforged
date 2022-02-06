@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "construction",
-  "research": "smeltblue_steel",
+  "research": "smelt_blue_steel",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 5,

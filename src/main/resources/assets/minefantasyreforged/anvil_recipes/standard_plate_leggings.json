@@ -1,7 +1,7 @@
 {
   "type": "CustomToolRecipe",
   "skill": "artisanry",
-  "research": "craftArmourHeavy",
+  "research": "craft_armour_heavy",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": -1,

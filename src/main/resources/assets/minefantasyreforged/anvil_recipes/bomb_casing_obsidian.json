@@ -1,7 +1,7 @@
 {
   "type": "ShapedAnvilRecipes",
   "skill": "engineering",
-  "research": "bombObsidian",
+  "research": "bomb_obsidian",
   "tool_type": "hammer",
   "is_tool_recipe": false,
   "anvil_tier": 4,

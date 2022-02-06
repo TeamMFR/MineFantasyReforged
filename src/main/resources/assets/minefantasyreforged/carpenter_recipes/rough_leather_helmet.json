@@ -1,7 +1,7 @@
 {
   "type": "crafting_shaped",
   "skill": "artisanry",
-  "research": "craftArmourBasic",
+  "research": "craft_armour_basic",
   "tool_type": "needle",
   "is_tool_recipe": false,
   "block_tier": -1,
