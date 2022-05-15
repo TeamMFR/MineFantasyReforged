@@ -34,7 +34,7 @@ public class MonsterUpgrader {
 	private static XSTRandom random = new XSTRandom();
 
 	public void upgradeMob(EntityLivingBase mob) {
-		int diff = mob.world.getDifficulty().getDifficultyId();
+		int diff = mob.world.getDifficulty().getId();
 
 		if (ConfigHardcore.upgradeZombieWep) {
 			if (mob instanceof AbstractSkeleton) {

@@ -20,7 +20,7 @@ public class BlockRailMF extends BlockRail {
 		String name = type + "_rail";
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setHarvestLevel("pickaxe", material.harvestLevel);
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(material.hardness + 1 / 2F);

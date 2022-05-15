@@ -44,7 +44,7 @@ public class ItemSpade extends net.minecraft.item.ItemSpade implements IToolMate
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
@@ -102,7 +102,7 @@ public class ItemSpade extends net.minecraft.item.ItemSpade implements IToolMate
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
-		if (!state.getBlock().isToolEffective(state.getBlock().getUnlocalizedName(), state)) {
+		if (!state.getBlock().isToolEffective(state.getBlock().getTranslationKey(), state)) {
 			return this.getSpadeDestroySpeed(stack, state);
 		}
 		return CustomToolHelper.getEfficiency(stack, super.getDestroySpeed(stack, state), efficiencyMod);

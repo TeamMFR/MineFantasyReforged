@@ -1,6 +1,13 @@
 package minefantasy.mfr.client.render.entity;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.item.ItemHalbeard;
+import minefantasy.mfr.item.ItemHeavyWeapon;
+import minefantasy.mfr.item.ItemKatana;
+import minefantasy.mfr.item.ItemSpear;
+import minefantasy.mfr.item.ItemWaraxe;
+import minefantasy.mfr.item.ItemWarhammer;
+import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +18,8 @@ import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerHeldItem;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -26,7 +35,7 @@ import java.util.Map;
 
 /**
  * Author Credit: Fuzs_ in the Golden Age Combat mod/Sword Blocking Mechanics mod
- * Github Link: https://github.com/Fuzss/swordblockingmechanics/tree/1.12
+ * Github Link: <a href="https://github.com/Fuzss/swordblockingmechanics/tree/1.12">https://github.com/Fuzss/swordblockingmechanics/tree/1.12</a>
  * Modified and used under the free use public license, thank you so much to Fuzs_!
  */
 
@@ -42,7 +51,6 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
 
     @Override
     public void doRenderLayer(EntityLivingBase entitylivingbaseIn, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch, float scale) {
-
         boolean flag = entitylivingbaseIn.getPrimaryHand() == EnumHandSide.RIGHT;
         ItemStack itemstack = flag ? entitylivingbaseIn.getHeldItemOffhand() : entitylivingbaseIn.getHeldItemMainhand();
         ItemStack itemstack1 = flag ? entitylivingbaseIn.getHeldItemMainhand() : entitylivingbaseIn.getHeldItemOffhand();
@@ -103,7 +111,7 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
 
                 applyTransformReverse(new ItemTransformVec3f(new Vector3f(0.0F, (leftHand ? 1 : -1) * 90.0F, (leftHand ? -1 : 1) * 55.0F), new Vector3f(0.0F, 0.25F, 0.03125F), new Vector3f(0.85F, 0.85F, 0.85F)), leftHand);
             } else {
-
+                performCounterAttackAnimation((EntityPlayer) entityLivingBase, stack, leftHand);
                 GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
                 GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
                 GlStateManager.translate((float) (leftHand ? -1 : 1) / 16.0F, 0.125F, -0.625F);
@@ -164,7 +172,7 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
         }
     }
 
-    public static List<LayerRenderer<EntityLivingBase>> getLayerRenderers(RenderPlayer instance) {
+    public static List<LayerRenderer<EntityLivingBase>> getLayerRenderers(RenderLivingBase<?> instance) {
         return (List<LayerRenderer<EntityLivingBase>>) getPrivateValue(RenderLivingBase.class, instance, RENDER_LIVING_BASE_LAYER_RENDERERS);
     }
 
@@ -179,5 +187,45 @@ public class RenderPlayerBlockingLayer extends LayerHeldItem {
         }
 
         return null;
+    }
+
+    private void performCounterAttackAnimation(EntityPlayer player, ItemStack stack, boolean leftHand) {
+        boolean hasParried = false;
+        //Parry Animations
+        if (player != null && !stack.isEmpty()) {
+            hasParried = ItemWeaponMFR.canCounter(player, stack) == 1;
+        }
+
+        if (hasParried) {
+            Item item = stack.getItem();
+            if (item instanceof ItemWaraxe) {
+                GlStateManager.rotate(180F, 0F, 0F, 1F);
+                GlStateManager.translate(leftHand ? -0.1F : 0.1F, -1.1F, 0F);
+            }
+            else if (item instanceof ItemSpear && !(item instanceof ItemHalbeard)) {
+                GlStateManager.translate(leftHand ? 0.1F : -0.1F, 0.1F, leftHand ? -0.5F : -0.4F);
+                GlStateManager.rotate((leftHand ? -1F : 1F) * -50.0F, 0.0F, 1.0F, 0.0F);
+                GlStateManager.rotate(-25.0F, 1.0F, 0.0F, 0.0F);
+                GlStateManager.rotate((leftHand ? -1F : 1F) * -60.0F, 0.0F, 0.0F, 1.0F);
+            }
+            else if (item instanceof ItemHeavyWeapon) {
+                if (item instanceof ItemKatana) {
+                    GlStateManager.rotate(180, 1F, 0F, 0F);
+                    GlStateManager.translate(0F, -1F, 0.1F);
+                }
+                else if (item instanceof ItemWarhammer) {
+                    GlStateManager.rotate(180F, 0F, 0F, 1F);
+                    GlStateManager.translate(leftHand ? -0.1F : 0.1F, -1.1F, 0F);
+                }
+                else { //Greatsword, Battleaxe
+                    GlStateManager.rotate(-100, 1F, 0F, 0F);
+                    GlStateManager.translate(0F, -0.5F,  0.8F);
+                }
+            }
+            else { //Sword, Mace, Halberd
+                GlStateManager.rotate(80, 1F, 0F, 0F);
+                GlStateManager.translate(0F, -0.4F, -0.4F);
+            }
+        }
     }
 }

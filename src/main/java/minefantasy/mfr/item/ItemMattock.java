@@ -51,7 +51,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 		super(material);
 		itemRarity = rarity;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		this.setHarvestLevel("pickaxe", Math.max(0, material.getHarvestLevel() - 2));

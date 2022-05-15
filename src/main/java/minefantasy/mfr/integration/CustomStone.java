@@ -4,7 +4,6 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class CustomStone {
@@ -12,10 +11,9 @@ public class CustomStone {
 	private static NonNullList<ItemStack> customStones;
 
 	public static void init() {
-		String stoneEntry = ForgeVersion.getBuildVersion() < 934 ? "stoneSmooth" : "stone";
-		if (!OreDictionary.doesOreNameExist(stoneEntry))
+		if (!OreDictionary.doesOreNameExist("stone"))
 			return;
-		customStones = OreDictionary.getOres(stoneEntry);
+		customStones = OreDictionary.getOres("stone");
 	}
 
 	public static boolean isStone(Block block) {

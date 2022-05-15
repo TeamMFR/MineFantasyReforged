@@ -59,7 +59,7 @@ public class JEIIntegration implements IModPlugin {
 	}
 
 	private static void addExtendedInfo(IModRegistry registry, ItemStack stack, String... suffixes) {
-		String prefix = stack.getItem().getUnlocalizedName(stack);
+		String prefix = stack.getItem().getTranslationKey(stack);
 		String[] keys = Arrays.stream(suffixes).map(s -> prefix + s).toArray(String[]::new);
 		registry.addIngredientInfo(stack, VanillaTypes.ITEM, keys);
 	}

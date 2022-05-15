@@ -24,7 +24,7 @@ public class BlockCrossbowBench extends BlockTileEntity<TileEntityCrossbowBench>
 		super(Material.WOOD);
 
 		setRegistryName("crossbow_bench");
-		setUnlocalizedName("crossbow_bench");
+		setTranslationKey("crossbow_bench");
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(5F);
 		this.setResistance(2F);

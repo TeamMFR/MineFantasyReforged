@@ -46,7 +46,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		this.setMaxDamage(material.getMaxUses());
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}

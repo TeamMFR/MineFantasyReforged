@@ -232,7 +232,7 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack item) {
+	public String getTranslationKey(ItemStack item) {
 		EnumFillingType type = EnumFillingType.getType(getFilling(item));
 		return "item.bomb_" + type.name;
 	}

@@ -15,7 +15,7 @@ public class ItemBaseMFR extends Item implements IClientRegister {
 	private IRarity rarity = Rarity.COMMON;
 
 	public ItemBaseMFR(String name) {
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setRegistryName(new ResourceLocation(MineFantasyReforged.MOD_ID, name));
 
 		MineFantasyReforged.PROXY.addClientRegister(this);

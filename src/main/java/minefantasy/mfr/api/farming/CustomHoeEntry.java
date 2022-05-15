@@ -31,7 +31,7 @@ public class CustomHoeEntry {
 
 	public static void registerItem(Item piece, float efficiency) {
 
-		MineFantasyReforgedAPI.debugMsg("Added Custom hoe: " + piece.getUnlocalizedName() + " Efficiency = " + efficiency);
+		MineFantasyReforgedAPI.debugMsg("Added Custom hoe: " + piece.getTranslationKey() + " Efficiency = " + efficiency);
 		entries.put(piece.getRegistryName(), new CustomHoeEntry(piece.getRegistryName(), efficiency));
 	}
 

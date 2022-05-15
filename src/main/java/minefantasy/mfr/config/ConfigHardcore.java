@@ -9,7 +9,7 @@ import minefantasy.mfr.tile.TileEntityRoast;
 public class ConfigHardcore extends ConfigurationBaseMF {
 	public static final String CATEGORY_CRAFTING = "1: HARDCORE CRAFTING";
 	public static final String CATEGORY_RESEARCH = "2: Research";
-	public static final String CATEGORY_FOOD = "3: Food and Hunting";
+	public static final String CATEGORY_FOOD = "3: Cooking and Hunting";
 	public static final String CATEGORY_MOB = "4: Monster Upgrades";
 	public static boolean HCCreduceIngots = true;
 	public static boolean HCChotBurn = true;
@@ -25,6 +25,7 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 	public static boolean hunterKnife;
 	public static boolean lessHunt;
 	public static boolean preventCook;
+	public static boolean preventCeramic;
 	public static boolean upgradeZombieWep;
 	public static float zombieWepChance;
 	public static boolean fastZombies;
@@ -68,7 +69,9 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 		lessHunt = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Reduce Meat Drops", false,
 				"This will alter the stack size of animal meat drops, meaning they only drop 1 every time").getString());
 		preventCook = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Prevent furnace food", false,
-				"Stop food and ceramic from being cooked in a furnace").getString());
+				"Stop food from being cooked in a furnace").getString());
+		preventCeramic = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Prevent furnace ceramic", false,
+				"Stop ceramics from being cooked in a furnace").getString());
 		TileEntityRoast.enableOverheat = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Burn at high temperature", true,
 				"Cooking food on a stove or oven will automatically burn at high temperatures").getString());
 

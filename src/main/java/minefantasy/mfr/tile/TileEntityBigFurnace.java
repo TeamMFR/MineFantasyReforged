@@ -287,7 +287,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		IBlockState state = world.getBlockState(pos);
 		EnumFacing facing = state.getValue(BlockBigFurnace.FACING).getOpposite();
 
-		SmokeMechanics.emitSmokeIndirect(world, pos.add(facing.getFrontOffsetX(), (isHeater() ? 2 : 1), facing.getFrontOffsetZ()), 1);
+		SmokeMechanics.emitSmokeIndirect(world, pos.add(facing.getXOffset(), (isHeater() ? 2 : 1), facing.getZOffset()), 1);
 	}
 
 	private int getMaxTime() {
@@ -552,7 +552,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 			return false;
 		}
 
-		return isBlockValidForSide(pos.add(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ()));
+		return isBlockValidForSide(pos.add(side.getXOffset(), side.getYOffset(), side.getZOffset()));
 	}
 
 	public boolean isSolid(EnumFacing side) {
@@ -560,7 +560,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 			return false;
 		}
 
-		Material mat = world.getBlockState(pos.add(side.getFrontOffsetX(), side.getFrontOffsetY(), side.getFrontOffsetZ())).getMaterial();
+		Material mat = world.getBlockState(pos.add(side.getXOffset(), side.getYOffset(), side.getZOffset())).getMaterial();
 
 		return mat.isSolid();
 	}

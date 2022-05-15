@@ -31,7 +31,7 @@ public class BlockLogMF extends BlockLog implements IClientRegister {
 
 		name = "log_" + baseWood.toLowerCase();
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setHarvestLevel("axe", 0);
 		this.setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
 		MineFantasyReforged.PROXY.addClientRegister(this);

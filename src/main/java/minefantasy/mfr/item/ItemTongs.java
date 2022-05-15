@@ -64,7 +64,7 @@ public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISm
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		this.setMaxDamage(getMaxDamage() / 5);
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}

@@ -46,7 +46,7 @@ public class BlockBerryBush extends BlockBush implements IGrowable, IShearable, 
 		super(Material.LEAVES);
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(AGE, 0));
 		this.setTickRandomly(true);
 		this.setCreativeTab(CreativeTabs.DECORATIONS);

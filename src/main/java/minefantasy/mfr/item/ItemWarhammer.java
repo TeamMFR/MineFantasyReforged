@@ -109,7 +109,12 @@ public class ItemWarhammer extends ItemHeavyWeapon {
 
 	@Override
 	public boolean canCounter() {
-		return false;
+		return true;
+	}
+
+	@Override
+	public float[] getCounterRatio() {
+		return piercingDamage;
 	}
 
 	@Override

@@ -56,7 +56,7 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 		float baseDurability = material.durability * design.getDurability() / 2F;
 		float durability = baseDurability / 2F + (baseDurability / 2F * ArmourCalculator.sizes[slot.getIndex()] / ArmourCalculator.sizes[1]);
 		this.setMaxDamage((int) durability);
-		this.setUnlocalizedName(name);
+		this.setTranslationKey(name);
 		setDamageType(getBaseArmorClass() * scalePiece());
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}

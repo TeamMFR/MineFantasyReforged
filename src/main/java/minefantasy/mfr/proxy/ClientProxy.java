@@ -41,6 +41,7 @@ import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.entity.mob.EntityHound;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
+import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.mechanics.ExtendedReach;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
@@ -76,7 +77,6 @@ public class ClientProxy extends ClientProxyBase {
 	@Override
 	public void preInit() {
 		super.preInit();
-
 		MinecraftForge.EVENT_BUS.register(this);
 	}
 
@@ -110,6 +110,7 @@ public class ClientProxy extends ClientProxyBase {
 	public void preInit(FMLPreInitializationEvent e) {
 		registerEntityRenderer();
 		registerTickHandlers();
+		MineFantasyKeybindings.registerKeyBindings();
 	}
 
 	@Override

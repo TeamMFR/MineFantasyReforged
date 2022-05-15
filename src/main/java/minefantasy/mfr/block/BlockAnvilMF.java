@@ -43,7 +43,7 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 		this.tier = material.tier;
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(material.hardness + 1 / 2F);
 		this.setResistance(material.hardness + 1);
@@ -60,13 +60,13 @@ public class BlockAnvilMF extends BlockTileEntity<TileEntityAnvil> {
 	public TileEntity createTileEntity(World world, IBlockState state) {
 		TileEntityAnvil anvil = new TileEntityAnvil();
 		anvil.setTier(tier);
-		anvil.setTextureName(this.getRegistryName().getResourcePath());
+		anvil.setTextureName(this.getRegistryName().getPath());
 		return anvil;
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

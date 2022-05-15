@@ -629,7 +629,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			modifier *= 0.25F;
 		}
 
-		float baseThreshold = world.getDifficulty().getDifficultyId() >= 2 ? 7.5F : 10F;
+		float baseThreshold = world.getDifficulty().getId() >= 2 ? 7.5F : 10F;
 		thresholdPosition = (isMythicRecipe() ? 0.05F : baseThreshold / 100F) * modifier;
 	}
 

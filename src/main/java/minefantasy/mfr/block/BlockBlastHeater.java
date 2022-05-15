@@ -34,7 +34,7 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 		super(Material.ANVIL);
 
 		setRegistryName("blast_heater");
-		setUnlocalizedName("blastfurnheater");
+		setTranslationKey("blastfurnheater");
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(10F);
 		this.setResistance(10F);

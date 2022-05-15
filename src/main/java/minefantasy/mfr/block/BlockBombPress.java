@@ -41,7 +41,7 @@ public class BlockBombPress extends BlockTileEntity<TileEntityBombPress> impleme
 		super(Material.IRON);
 
 		setRegistryName("bomb_press");
-		setUnlocalizedName("bomb_press");
+		setTranslationKey("bomb_press");
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(5F);
 		this.setResistance(2F);
@@ -104,7 +104,7 @@ public class BlockBombPress extends BlockTileEntity<TileEntityBombPress> impleme
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

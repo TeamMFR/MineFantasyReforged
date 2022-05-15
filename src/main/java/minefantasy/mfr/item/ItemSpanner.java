@@ -73,7 +73,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 		this.setMaxDamage(material.getMaxUses() * 2);
 		this.tier = tier;
 		setRegistryName(name);
-		this.setUnlocalizedName(name);
+		this.setTranslationKey(name);
 
 		shiftRotations.add(BlockLever.class);
 		shiftRotations.add(BlockButton.class);

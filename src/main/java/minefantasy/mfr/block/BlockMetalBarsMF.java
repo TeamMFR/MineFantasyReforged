@@ -30,7 +30,7 @@ public class BlockMetalBarsMF extends BlockPane implements IClientRegister {
 		String name = material.name.toLowerCase() + "_bars";
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setHarvestLevel("pickaxe", material.harvestLevel);
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(material.hardness + 1 / 2F);
@@ -40,7 +40,7 @@ public class BlockMetalBarsMF extends BlockPane implements IClientRegister {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity hitter) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity hitter) {
 		if (material.name.equalsIgnoreCase("dragonforge") && !hitter.isImmuneToFire()
 				&& hitter instanceof EntityLivingBase) {
 			hitter.setFire(10);

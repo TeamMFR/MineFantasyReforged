@@ -1,16 +1,13 @@
 {
-	"type": "minecraft:crafting_shaped",
-	"pattern": [
-		"HF "
-	],
-	"key": {
-		"H": {
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
 			"item": "minefantasyreforged:rawhide_medium"
 		},
-		"F": {
+		{
 			"item": "minefantasyreforged:flux"
 		}
-	},
+	],
 	"result": {
 		"item": "minefantasyreforged:hide_medium"
 	}

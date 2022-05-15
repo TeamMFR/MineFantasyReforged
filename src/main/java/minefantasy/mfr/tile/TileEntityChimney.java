@@ -151,7 +151,7 @@ public class TileEntityChimney extends TileEntity implements ISmokeCarrier, ITic
 	}
 
 	public boolean canAccept(EnumFacing facing) {
-		return canAccept(facing.getFrontOffsetX(), facing.getFrontOffsetY(), facing.getFrontOffsetZ());
+		return canAccept(facing.getXOffset(), facing.getYOffset(), facing.getZOffset());
 	}
 
 	@Override

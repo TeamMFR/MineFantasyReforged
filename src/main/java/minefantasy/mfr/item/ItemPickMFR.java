@@ -55,7 +55,7 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
@@ -78,7 +78,7 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 
 		RayTraceResult rayTraceResult = this.rayTrace(world, player, true);
 
-		if (rayTraceResult.typeOfHit != null && rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
+		if (rayTraceResult != null && rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 
 			if (!world.canMineBlockBody(player, rayTraceResult.getBlockPos())) {
 				return super.onItemRightClick(world, player, hand);

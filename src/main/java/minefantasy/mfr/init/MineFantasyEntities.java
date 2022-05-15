@@ -8,6 +8,7 @@ import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import minefantasy.mfr.entity.EntityFireBlast;
+import minefantasy.mfr.entity.EntityItemHeated;
 import minefantasy.mfr.entity.EntityItemUnbreakable;
 import minefantasy.mfr.entity.EntityMine;
 import minefantasy.mfr.entity.EntityParachute;
@@ -39,7 +40,6 @@ public class MineFantasyEntities {
 		addEntity(EntityFireBlast.class, "fire_blast", 4, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
 		addEntity(EntitySmoke.class, "smoke_mf", 5, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
 		addEntity(EntityItemUnbreakable.class, "special_eitem_mf", 6, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
-
 		addEntity(EntityMine.class, "landmineMF", 7, 16, 10);
 		addEntity(EntityParachute.class, "parachute_mf", 8, 16, 20);
 
@@ -50,6 +50,8 @@ public class MineFantasyEntities {
 		addEntity(11, EntityMinotaur.class, "minotaur");
 		addEntity(12, EntityCogwork.class, "cogwork");
 		addEntity(13, EntityHound.class, "hound");
+
+		addEntity(14, EntityItemHeated.class, "entity_item_heated");
 
 		addSpawn(EntityDragon.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.Type.NETHER);
 		if (ConfigMobs.minotaurSpawnrate > 0) {

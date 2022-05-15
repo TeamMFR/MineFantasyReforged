@@ -6,6 +6,7 @@ import minefantasy.mfr.api.armour.CustomArmourEntry;
 import minefantasy.mfr.api.armour.CustomDamageRatioEntry;
 import minefantasy.mfr.api.crafting.CustomCrafterEntry;
 import minefantasy.mfr.api.farming.CustomHoeEntry;
+import minefantasy.mfr.api.stamina.CustomFoodEntry;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -18,11 +19,13 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 	public static final String CATEGORY_FARM = "Farming";
 	public static final String CATEGORY_TOOL = "Tools";
 	public static final String CATEGORY_WEPS = "Weapon Register";
+	public static final String CATEGORY_FOOD = "Food Register";
 	public static String[] armourListAC = new String[0];
 	public static String[] hoeList = new String[0];
 	public static String[] crafterList = new String[0];
 	public static String[] customDamagerList = new String[0];
 	public static String[] customDamagerEntityList = new String[0];
+	public static String[] customFoodList = new String[0];
 
 	public static void readCustoms() {
 		MFRLogUtil.logDebug("Loading Custom Item Entries from config...");
@@ -41,6 +44,9 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 			}
 			for (String s : customDamagerEntityList) {
 				ProjectileEntityDamageRegistryParser(s);
+			}
+			for (String s : customFoodList) {
+				FoodRegistryParser(s);
 			}
 		}
 		catch (Exception e) {
@@ -192,6 +198,43 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 	}
 
+	private static void FoodRegistryParser(String entry) {
+		String[] entryContents = entry.split("\\|");
+
+		Item foodItem = Item.REGISTRY.getObject(new ResourceLocation(entryContents[0]));
+		if (foodItem == null) {
+			MineFantasyReforged.LOG.warn("Could not define food item for: " + entryContents[0]);
+			return;
+		}
+
+		int tier = Integer.parseInt(entryContents[1]);
+		if (tier < 0) {
+			MineFantasyReforged.LOG.warn("Could not define tier value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			return;
+		}
+
+		float sugar = Float.parseFloat(entryContents[2]);
+		if (sugar < 0) {
+			MineFantasyReforged.LOG.warn("Could not define sugar value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			return;
+		}
+
+		float carbs = Float.parseFloat(entryContents[3]);
+		if (carbs < 0) {
+			MineFantasyReforged.LOG.warn("Could not define carbs value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			return;
+		}
+
+		float fats = Float.parseFloat(entryContents[3]);
+		if (fats < 0) {
+			MineFantasyReforged.LOG.warn("Could not define fats value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			return;
+		}
+
+		CustomFoodEntry.registerItem(foodItem, tier, sugar, carbs, fats);
+		MineFantasyReforged.LOG.info("Added Custom Food entry for " + foodItem.getRegistryName() + " with foods stats: " + Arrays.toString(new float[] {tier, sugar, carbs, fats}));
+	}
+
 	@Override
 	protected void loadConfig() {
 		// Weight
@@ -248,5 +291,22 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		customDamagerEntityList = config.get(CATEGORY_WEPS, "Custom Entity Damage Ratios", new String[0], projectileEntityDamageDescription).getStringList();
 		Arrays.sort(customDamagerEntityList);
+
+		//Foods
+		String foodStatsDescription = "This registers custom food stats for use in the MFR stamina system. \n"
+				+ "MineFantasy foods are assigned food stats by default, which affects how they impact the Player's stamina in various ways.\n"
+				+ "This is done by assigning the tier of the food, the sugar value of the food, the carbs value of the food, and the fats value of the food \n"
+				+ "Put each entry on it's own line, then set it out like this: \n"
+				+ "id|tier|sugar|carbs|fats \n"
+				+ "id is the item id as a string (you need to find it out yourself) and it must be a Food item, i.e, extending from vanilla class ItemFood \n"
+				+ "tier will multiply the other food stats. \n"
+				+ "sugar will control Stamina restore modifier and Stamina regen modifier. \n"
+				+ "carbs will control max Stamina modifier. \n"
+				+ "fat will control eat delay modifier and fat accumulation modifier. \n"
+				+ "EXAMPLE (for example... making a steak have the same stats as MFR Jerky) \n"
+				+ "minecraft:cooked_beef|2|0.0F|0.0F|1.0F \n";
+
+		customFoodList = config.get(CATEGORY_FOOD, "Custom Food Stats", new String[0], foodStatsDescription).getStringList();
+		Arrays.sort(customFoodList);
 	}
 }

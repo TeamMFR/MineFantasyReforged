@@ -2,9 +2,12 @@ package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.IHotItem;
+import minefantasy.mfr.api.stamina.CustomFoodEntry;
+import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigSpecials;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
@@ -19,9 +22,12 @@ import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.PlayerUtils;
 import minefantasy.mfr.util.TacticalManager;
 import minefantasy.mfr.util.XSTRandom;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.MobEffects;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
@@ -33,6 +39,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -46,8 +53,8 @@ public class PlayerTickHandler {
 	public static final IStoredVariable<Boolean> HAS_BOOK_KEY = IStoredVariable.StoredVariable.ofBoolean("hasBook", Persistence.ALWAYS);
 	public static final IStoredVariable<Float> BALANCE_YAW_KEY = IStoredVariable.StoredVariable.ofFloat("balanceYaw", Persistence.DIMENSION_CHANGE);
 	public static final IStoredVariable<Float> BALANCE_PITCH_KEY = IStoredVariable.StoredVariable.ofFloat("balancePitch", Persistence.DIMENSION_CHANGE);
-	public static final IStoredVariable<Integer> LAST_STEP_KEY = IStoredVariable.StoredVariable.ofInt("lastStep", Persistence.DIMENSION_CHANGE);
 	public static final IStoredVariable<Integer> DRAGON_KILLS_KEY = IStoredVariable.StoredVariable.ofInt("dragonKills", Persistence.ALWAYS);
+	public static final IStoredVariable<BlockPos> LAST_POS = IStoredVariable.StoredVariable.ofBlockPos("lastPos", Persistence.NEVER);
 
 	private static final String chunkCoords = "MF_BedPos";
 	private static final String resetBed = "MF_Resetbed";
@@ -55,7 +62,7 @@ public class PlayerTickHandler {
 	private static final XSTRandom random = new XSTRandom();
 
 	static {
-		PlayerData.registerStoredVariables(HAS_BOOK_KEY, BALANCE_YAW_KEY, BALANCE_PITCH_KEY, LAST_STEP_KEY, DRAGON_KILLS_KEY);
+		PlayerData.registerStoredVariables(HAS_BOOK_KEY, BALANCE_YAW_KEY, BALANCE_PITCH_KEY, DRAGON_KILLS_KEY, LAST_POS);
 	}
 
 	public static void spawnDragon(EntityPlayer player) {
@@ -188,12 +195,6 @@ public class PlayerTickHandler {
 		}
 	}
 
-	// SPRINT JUMPING
-	// DEFAULT:= 0:22 (50seconds till starve, 35s till nosprint) (16m in MC time for
-	// 4 missing bars)
-	// SLOW=5: = 2:20 (5mins till starve, 3:30 till nosprint) (1h 40m in MC time for
-	// 4 missing bars)
-	// EXHAUSTION SCALE = 3.0F = 1hunger
 	@SubscribeEvent
 	public void onPlayerTick(TickEvent.PlayerTickEvent event) {
 		if (event.phase == TickEvent.Phase.END) {
@@ -208,19 +209,13 @@ public class PlayerTickHandler {
 			// COMMON
 			TacticalManager.applyArmourWeight(event.player);
 
-			if (event.player.world.isRemote) {
-				if (isNextStep(event.player)) {
-					onStep(event.player);
-				}
+			if ((!event.player.isRiding() || event.player.getRidingEntity() instanceof EntityLivingBase) && hasPosChanged(event.player)) {
+				onStep(event.player);
 			}
-			/*
-			 * if(RPGElements.isSystemActive) { if(event.player.isSprinting() &&
-			 * event.player.ticksExisted % 10 == 0) {
-			 * SkillList.athletics.addXP(event.player, 1); } else
-			 * if(event.player.isSneaking() && TacticalManager.isEntityMoving(event.player)
-			 * && event.player.ticksExisted % 10 == 0) { SkillList.sneak.addXP(event.player,
-			 * 1); } }
-			 */
+			if (event.player.isPotionActive(MobEffects.HUNGER)){
+				ItemFoodMFR.decrementFatAccumulation(event.player, 0.05F);
+			}
+
 			// DRAGON EVENT
 			if (!event.player.world.isRemote) {
 				tickDragonSpawner(event.player);
@@ -290,26 +285,66 @@ public class PlayerTickHandler {
 		}
 	}
 
-	private void onStep(EntityPlayer player) {
-		MineFantasyReforged.LOG.debug("Weight: " + ArmourCalculator.getTotalWeightOfWorn(player, false));
-		if (ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50) {
-			player.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
+
+	@SubscribeEvent
+	public static void onItemUseFinish(LivingEntityUseItemEvent.Finish event) {
+		ItemStack stack = event.getItem();
+		if (stack.getItem() instanceof ItemFood) {
+			CustomFoodEntry foodEntry = CustomFoodEntry.getEntry(stack);
+			if (foodEntry != null && event.getEntity() instanceof EntityPlayer) {
+				ItemFoodMFR.onCustomFoodEaten((EntityPlayer) event.getEntity(),
+						foodEntry.staminaRestore,
+						foodEntry.staminaSeconds, foodEntry.staminaBuff,
+						foodEntry.staminaRegenSeconds, foodEntry.staminaRegenBuff,
+						foodEntry.eatDelay, foodEntry.fatAccumulation);
+			}
 		}
 	}
 
-	private boolean isNextStep(EntityPlayer player) {
-		PlayerData data = PlayerData.get(player);
-		if (data != null) {
-			if (data.getVariable(LAST_STEP_KEY) == null) {
-				data.setVariable(LAST_STEP_KEY, 0);
-			} else {
-				int prevStep = data.getVariable(LAST_STEP_KEY);
-				int stepcount = (int) player.distanceWalkedOnStepModified;
-				data.setVariable(LAST_STEP_KEY, stepcount);
-				return prevStep != stepcount;
+	@SubscribeEvent
+	public static void jump(LivingEvent.LivingJumpEvent event) {
+		if (event.getEntity() instanceof EntityPlayer) {
+			ItemFoodMFR.decrementFatAccumulation((EntityPlayer) event.getEntity(), 0.5F);
+		}
+	}
+
+	private void onStep(EntityPlayer player) {
+		if (!player.world.isRemote) {
+			PlayerData data = PlayerData.get(player);
+			if (data != null) {
+				float fat_accumulation = ItemFoodMFR.getFatAccumulation(player);
+				float constant_max_stamina = StaminaBar.getDefaultMax(player) + StaminaBar.getBonusStamina(player);
+				if (fat_accumulation > ConfigStamina.fatThreshold || constant_max_stamina != StaminaBar.getTotalMaxStamina(player)) {
+					StaminaBar.setMaxStamina(data, StaminaBar.getDefaultMax(player) - (fat_accumulation / 10));
+				}
+			}
+			if (player.isRiding()) {
+				ItemFoodMFR.decrementFatAccumulation(player, 0.1F);
+			}
+			else if (player.isSprinting()) {
+				ItemFoodMFR.decrementFatAccumulation(player, 0.5F);
+			}
+			else {
+				ItemFoodMFR.decrementFatAccumulation(player, 0.25F);
 			}
 		}
-		return false;
+		else {
+			MineFantasyReforged.LOG.debug("Weight: " + ArmourCalculator.getTotalWeightOfWorn(player, false));
+			if (ConfigArmour.armorSounds && ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50) {
+				player.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
+			}
+		}
+	}
+
+	public static boolean hasPosChanged(EntityPlayer player) {
+		PlayerData data = PlayerData.get(player);
+		BlockPos pos = data.getVariable(LAST_POS);
+		data.setVariable(LAST_POS, player.getPosition());
+		if (pos == null) {
+			return true;
+		} else {
+			return !pos.equals(player.getPosition());
+		}
 	}
 
 	private void tickDragonSpawner(EntityPlayer player) {

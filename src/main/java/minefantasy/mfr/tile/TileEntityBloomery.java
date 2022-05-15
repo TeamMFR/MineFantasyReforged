@@ -7,6 +7,7 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
+import minefantasy.mfr.entity.EntityItemHeated;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemHeated;
@@ -230,7 +231,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 
 	public EntityItem entityDropItem(World world, BlockPos pos, ItemStack item) {
 		if (item.getCount() != 0 && !item.isEmpty()) {
-			EntityItem entityitem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 1.25F, pos.getZ() + 0.5D, item);
+			EntityItem entityitem = new EntityItemHeated(world, pos.getX() + 0.5D, pos.getY() + 1.25F, pos.getZ() + 0.5D, item);
 			entityitem.setPickupDelay(10);
 			entityitem.setCustomNameTag("bloomery");
 			world.spawnEntity(entityitem);

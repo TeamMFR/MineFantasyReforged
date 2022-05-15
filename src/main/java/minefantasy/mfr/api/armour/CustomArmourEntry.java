@@ -82,7 +82,7 @@ public class CustomArmourEntry {
 	 */
 	public static void registerItem(Item piece, float weight, float bulk, boolean alterSpeed, String AC) {
 
-		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getUnlocalizedName() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
+		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getTranslationKey() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
 		entries.put(piece.getRegistryName(), new CustomArmourEntry(piece.getRegistryName(), weight, bulk, alterSpeed, AC));
 	}
 

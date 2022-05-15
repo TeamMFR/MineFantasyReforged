@@ -9,12 +9,12 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.recipe.refine.BloomRecipe;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class SmeltingRecipesMF {
 	public static void init() {
@@ -48,11 +48,20 @@ public class SmeltingRecipesMF {
 			} else {
 				MineFantasyReforged.LOG.warn("Failed to remove Ore smelting!");
 			}
-			BloomRecipe.addRecipe(new ItemStack(Blocks.IRON_ORE), iron);
-			BloomRecipe.addRecipe(new ItemStack(Blocks.GOLD_ORE), gold);
 
-			MineFantasyReforgedAPI.addFurnaceRecipe(new ItemStack(Blocks.IRON_ORE), iron, 0);
-			MineFantasyReforgedAPI.addFurnaceRecipe(new ItemStack(Blocks.GOLD_ORE), gold, 0);
+			for (ItemStack ore: OreDictionary.getOres("oreIron")) {
+				BloomRecipe.addRecipe(ore, iron);
+			}
+			for (ItemStack ore: OreDictionary.getOres("oreGold")) {
+				BloomRecipe.addRecipe(ore, gold);
+			}
+
+			for (ItemStack ore: OreDictionary.getOres("oreIron")) {
+				MineFantasyReforgedAPI.addFurnaceRecipe(ore, iron, 0);
+			}
+			for (ItemStack ore: OreDictionary.getOres("oreGold")) {
+				MineFantasyReforgedAPI.addFurnaceRecipe(ore, gold, 0);
+			}
 		}
 
 
@@ -62,9 +71,15 @@ public class SmeltingRecipesMF {
 		refineRawOre(MineFantasyItems.ORE_SILVER, silver);
 		refineRawOre(MineFantasyItems.ORE_GOLD, gold);
 
-		refineRawOre(MineFantasyBlocks.COPPER_ORE, copper, 0.4F);
-		refineRawOre(MineFantasyBlocks.TIN_ORE, tin, 0.5F);
-		refineRawOre(MineFantasyBlocks.SILVER_ORE, silver, 0.9F);
+		for (ItemStack ore: OreDictionary.getOres("oreCopper")) {
+			refineRawOre(ore, copper, 0.4F);
+		}
+		for (ItemStack ore: OreDictionary.getOres("oreTin")) {
+			refineRawOre(ore, tin, 0.5F);
+		}
+		for (ItemStack ore: OreDictionary.getOres("oreSilver")) {
+			refineRawOre(ore, silver, 0.9F);
+		}
 
 		GameRegistry.addSmelting(MineFantasyItems.PREPARED_COAL, new ItemStack(MineFantasyItems.COKE), 1F);
 		GameRegistry.addSmelting(MineFantasyBlocks.BORAX_ORE, new ItemStack(MineFantasyItems.FLUX_STRONG, 4), 0.25F);
@@ -127,24 +142,16 @@ public class SmeltingRecipesMF {
 	}
 
 	private static void refineRawOre(Item ore, ItemStack bar) {
-		refineRawOre(ore, bar, 0F);
+		refineRawOre(new ItemStack(ore), bar, 0F);
 	}
 
-	private static void refineRawOre(Block ore, ItemStack bar) {
-		refineRawOre(ore, bar, 0F);
-	}
-
-	private static void refineRawOre(Block ore, ItemStack bar, float xp) {
-		refineRawOre(Item.getItemFromBlock(ore), bar, xp);
-	}
-
-	private static void refineRawOre(Item ore, ItemStack bar, float xp) {
+	private static void refineRawOre(ItemStack ore, ItemStack bar, float xp) {
 		if (ConfigHardcore.HCCreduceIngots) {
 			BloomRecipe.addRecipe(ore, bar);
 		} else {
 			GameRegistry.addSmelting(ore, bar, xp);
 		}
-		BigFurnaceRecipes.addRecipe(new ItemStack(ore), bar, 0);
+		BigFurnaceRecipes.addRecipe(ore, bar, 0);
 	}
 
 	static void smeltFood() {

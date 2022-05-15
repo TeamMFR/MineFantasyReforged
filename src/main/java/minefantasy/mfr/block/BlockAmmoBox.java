@@ -52,7 +52,7 @@ public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 		this.name = name;
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setHardness(0.5F);
 		this.setResistance(2F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
@@ -164,7 +164,7 @@ public class BlockAmmoBox extends BlockWoodDecor implements IClientRegister {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

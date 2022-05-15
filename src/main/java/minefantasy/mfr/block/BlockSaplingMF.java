@@ -47,7 +47,7 @@ public class BlockSaplingMF extends BlockBush implements IGrowable, IClientRegis
 		this.LOG = log;
 		this.LEAVES = leaves;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setSoundType(SoundType.GROUND);
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}

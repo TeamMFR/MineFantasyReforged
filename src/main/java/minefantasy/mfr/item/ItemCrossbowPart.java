@@ -47,7 +47,7 @@ public class ItemCrossbowPart extends ItemBaseMFR implements ICrossbowPart {
 	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag fullInfo) {
 		list.add(TextFormatting.GOLD + I18n.format("crossbow.component.name"));
 		list.add(TextFormatting.ITALIC + I18n.format("crossbow.component." + type));
-		list.add(TextFormatting.DARK_GRAY + I18n.format(getUnlocalizedName() + ".desc"));
+		list.add(TextFormatting.DARK_GRAY + I18n.format(getTranslationKey() + ".desc"));
 	}
 
 	@Override

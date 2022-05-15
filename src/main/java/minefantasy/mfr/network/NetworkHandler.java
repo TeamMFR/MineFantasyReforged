@@ -51,7 +51,7 @@ public class NetworkHandler implements IGuiHandler {
 	public static final NetworkHandler INSTANCE = new NetworkHandler();
 	public static final String CHANNEL_NAME = "MFR";
 
-	//unused: 6, 9, 10, 16, 18, 20, 25
+	//unused: 10, 16, 18, 20, 25
 	private static final int PLAYER_SYNC_PACKET = 1;
 	private static final int STAMINA_PACKET = 2;
 	private static final int PARRY_PACKET = 3;
@@ -60,6 +60,8 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int ARTEFACT_PACKET = 6;
 	private static final int KNOWLEDGE_PACKET = 7;
 	private static final int RESEARCH_REQUEST_PACKET = 8;
+	private static final int REMOVE_OFFHAND_PACKET = 9;
+	private static final int OPEN_BOW_GUI_PACKET = 10;
 	private static final int LEVEL_UP_PACKET = 11;
 	private static final int FORGE_PACKET = 12;
 	private static final int RESEARCH_TABLE_PACKET = 13;
@@ -104,6 +106,8 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(ARTEFACT_PACKET, ArtefactPacket.class, ArtefactPacket::new);
 		PacketMF.registerPacket(KNOWLEDGE_PACKET, KnowledgePacket.class, KnowledgePacket::new);
 		PacketMF.registerPacket(RESEARCH_REQUEST_PACKET, ResearchRequestPacket.class, ResearchRequestPacket::new);
+		PacketMF.registerPacket(REMOVE_OFFHAND_PACKET, RemoveOffhandPacket.class, RemoveOffhandPacket::new);
+		PacketMF.registerPacket(OPEN_BOW_GUI_PACKET, OpenBowGUIPacket.class, OpenBowGUIPacket::new);
 		PacketMF.registerPacket(LEVEL_UP_PACKET, LevelUpPacket.class, LevelUpPacket::new);
 		PacketMF.registerPacket(RESEARCH_TABLE_PACKET, ResearchTablePacket.class, ResearchTablePacket::new);
 		PacketMF.registerPacket(TROUGH_PACKET, TroughPacket.class, TroughPacket::new);

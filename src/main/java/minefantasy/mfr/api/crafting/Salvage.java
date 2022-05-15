@@ -106,7 +106,7 @@ public class Salvage {
 		// SHARED
 		Item shared = sharedSalvage.get(CustomToolHelper.getReferenceName(item, "any", false));
 		if (shared != null) {
-			MFRLogUtil.logDebug("Found shared: " + shared.getUnlocalizedName());
+			MFRLogUtil.logDebug("Found shared: " + shared.getTranslationKey());
 			return getSalvage(new ItemStack(shared));
 		}
 

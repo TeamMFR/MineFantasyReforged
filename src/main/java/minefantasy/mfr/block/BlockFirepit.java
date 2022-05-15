@@ -44,7 +44,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 		String name = "firepit";
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setLightOpacity(0);
 		setHardness(2F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
@@ -243,7 +243,7 @@ public class BlockFirepit extends BlockTileEntity<TileEntityFirepit> {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+	public void onEntityCollision(World world, BlockPos pos, IBlockState state, Entity entity) {
 		if (world.isRemote) {
 			return;
 		}

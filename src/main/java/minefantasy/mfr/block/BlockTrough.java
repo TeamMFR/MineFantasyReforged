@@ -32,7 +32,7 @@ public class BlockTrough extends BlockWoodDecor {
 		super(name);
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setHardness(1F);
 		this.setResistance(0.5F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);

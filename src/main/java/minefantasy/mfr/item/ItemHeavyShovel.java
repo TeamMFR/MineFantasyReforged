@@ -59,7 +59,7 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		setMaxDamage(material.getMaxUses());
 
@@ -74,11 +74,11 @@ public class ItemHeavyShovel extends ItemSpade implements IToolMaterial, IClient
 				for (int z1 = -range; z1 <= range; z1++) {
 					if (getDistance(pos.getX() + x1, pos.getY(), pos.getZ() + z1, pos) <= range + 0.5D) {
 						EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, user);
-						int blockX = pos.getX() + x1 + facing.getFrontOffsetX();
-						int blockY = pos.getY() + facing.getFrontOffsetY();
-						int blockZ = pos.getZ() + z1 + facing.getFrontOffsetZ();
+						int blockX = pos.getX() + x1 + facing.getXOffset();
+						int blockY = pos.getY() + facing.getYOffset();
+						int blockZ = pos.getZ() + z1 + facing.getZOffset();
 
-						if (!(x1 + facing.getFrontOffsetX() == 0 && facing.getFrontOffsetY() == 0 && z1 + facing.getFrontOffsetZ() == 0)) {
+						if (!(x1 + facing.getXOffset() == 0 && facing.getYOffset() == 0 && z1 + facing.getZOffset() == 0)) {
 							BlockPos newBlockPos = new BlockPos(blockX, blockY, blockZ);
 							IBlockState newState = world.getBlockState(newBlockPos);
 							IBlockState above = world.getBlockState(newBlockPos.add(0, 1, 0));

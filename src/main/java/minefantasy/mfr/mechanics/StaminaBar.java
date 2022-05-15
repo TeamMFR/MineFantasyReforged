@@ -545,7 +545,7 @@ public class StaminaBar {
 		if (!scaleDifficulty) {
 			return decayModifierCfg * decayModifierBase;
 		}
-		int difficultyMod = world.getDifficulty().getDifficultyId() - 2;
+		int difficultyMod = world.getDifficulty().getId() - 2;
 		return (decayModifierCfg * decayModifierBase) + (0.25F * difficultyMod);
 	}
 
@@ -560,7 +560,7 @@ public class StaminaBar {
 	}
 
 	private static float getPerkArmModifier(float value, EntityPlayer user) {
-		if (ResearchLogic.hasInfoUnlocked(user, "armourpro")) {
+		if (ResearchLogic.hasInfoUnlocked(user, "armour_pro")) {
 			value *= 0.5F;
 		}
 		return value;

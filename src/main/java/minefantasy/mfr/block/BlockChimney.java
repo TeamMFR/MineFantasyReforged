@@ -41,7 +41,7 @@ public class BlockChimney extends Block implements IClientRegister {
 		}
 
 		setRegistryName("chimney_" + type + (isWide ? "_wide" : "_thin"));
-		setUnlocalizedName(("chimney." + type + (isWide ? ".wide" : "")));
+		setTranslationKey(("chimney." + type + (isWide ? ".wide" : "")));
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(5F);
 		this.setResistance(10F);

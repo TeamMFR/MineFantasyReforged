@@ -6,9 +6,12 @@ import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.config.ConfigClient;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.container.ContainerAnvil;
 import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.entity.EntityCogwork;
+import minefantasy.mfr.init.MineFantasyKeybindings;
+import minefantasy.mfr.item.ItemFoodMFR;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
@@ -274,8 +277,7 @@ public class MineFantasyHUD extends Gui {
 		ItemStack held = player.getHeldItemMainhand();
 		if (!held.isEmpty() && (held.getItem() instanceof IDisplayMFRAmmo)) {
 			ItemStack arrow = AmmoMechanics.getAmmo(held);
-
-			String text = I18n.format("info.bow.reload");
+			String text = MineFantasyKeybindings.BOW_MENU.isSetToDefaultValue() ? I18n.format("info.bow.reload") : I18n.format("info.bow.reload_custom", MineFantasyKeybindings.BOW_MENU.getDisplayName());
 			if (!arrow.isEmpty()) {
 				text = arrow.getDisplayName() + " x" + arrow.getCount();
 			}
@@ -314,6 +316,7 @@ public class MineFantasyHUD extends Gui {
 
 		float staminaMax = StaminaBar.getTotalMaxStamina(player);
 		float staminaAt = StaminaBar.getStaminaValue(player);
+		float fatAt = ItemFoodMFR.getFatAccumulation(player);
 
 		float staminaPercentage = staminaMax > 0 ? Math.min(1.0F, staminaAt / staminaMax) : 0F;
 
@@ -338,11 +341,20 @@ public class MineFantasyHUD extends Gui {
 		}
 
 		String stamTxt = (int) staminaAt + " / " + (int) staminaMax;
+		String fatTxt = (int) fatAt + " grams";
 		boolean bonus = StaminaBar.getBonusStamina(player) > 0;
 
+		int colorRGB = Color.WHITE.getRGB();
+		if (fatAt > ConfigStamina.fatThreshold) {
+			colorRGB = Color.ORANGE.getRGB();
+		}
+		if (fatAt > (ConfigStamina.fatThreshold + (ConfigStamina.fatThreshold / 2))) {
+			colorRGB = Color.RED.getRGB();
+		}
+
 		if (mc.currentScreen instanceof GuiInventory) {
-			mc.fontRenderer.drawStringWithShadow(stamTxt, xPos + 41 - (mc.fontRenderer.getStringWidth(stamTxt) / 2F),
-					yPos - 2, bonus ? Color.CYAN.getRGB() : Color.WHITE.getRGB());
+			mc.fontRenderer.drawStringWithShadow(stamTxt, xPos + 41 - (mc.fontRenderer.getStringWidth(stamTxt) / 2F), yPos - 2, bonus ? Color.CYAN.getRGB() : Color.WHITE.getRGB());
+			mc.fontRenderer.drawStringWithShadow(fatTxt, xPos - 30 - (mc.fontRenderer.getStringWidth(fatTxt) / 2F), yPos - 2, colorRGB);
 		}
 		GlStateManager.disableBlend();
 	}

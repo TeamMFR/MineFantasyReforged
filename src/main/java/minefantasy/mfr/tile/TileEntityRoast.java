@@ -73,7 +73,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 					updateRecipe();
 				}
 				progress += (temp / 100F);
-				if (progress >= maxProgress) {
+				if (progress >= maxProgress && recipe != null) {
 					getInventory().setStackInSlot(0, recipe.output.copy());
 					updateRecipe();
 				}

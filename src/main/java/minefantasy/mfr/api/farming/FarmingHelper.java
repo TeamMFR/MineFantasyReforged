@@ -31,7 +31,7 @@ public class FarmingHelper {
 		if (!isEnabled) {
 			return false;
 		}
-		float chance = 20F + (world.getDifficulty().getDifficultyId() * 10F);
+		float chance = 20F + (world.getDifficulty().getId() * 10F);
 		if (scythe)
 			chance *= 2F;
 		return rand.nextFloat() * 100F <= chance * farmBreakCfg;

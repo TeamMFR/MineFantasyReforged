@@ -27,7 +27,7 @@ public class BlockBlastChamber extends BlockTileEntity<TileEntityBlastChamber> {
 		super(Material.ANVIL);
 
 		setRegistryName("blast_chamber");
-		setUnlocalizedName("blastfurnchamber");
+		setTranslationKey("blastfurnchamber");
 		this.setSoundType(SoundType.METAL);
 		this.setHardness(8F);
 		this.setResistance(10F);

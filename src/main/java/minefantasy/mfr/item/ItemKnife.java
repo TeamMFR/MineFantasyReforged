@@ -191,7 +191,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
-		if (state.getBlock().isToolEffective(state.getBlock().getUnlocalizedName(), state)) {
+		if (state.getBlock().isToolEffective(state.getBlock().getTranslationKey(), state)) {
 			return this.getSwordDestroySpeed(stack, state);
 		}
 		return CustomToolHelper.getEfficiency(stack, super.getDestroySpeed(stack, state), efficiencyMod);

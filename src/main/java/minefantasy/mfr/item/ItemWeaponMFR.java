@@ -32,7 +32,6 @@ import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
-import minefantasy.mfr.util.PlayerUtils;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -153,7 +152,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		this.material = material;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		this.baseDamage = 4 + getDamageModifier();
 
@@ -544,7 +543,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	protected float[] getWeaponRatio(ItemStack implement) {
-		return new float[] {1F, 0F, 0F};
+		return slashingDamage;
 	}
 
 	protected float[] getWeaponRatio(ItemStack implement, EntityLivingBase user) {
@@ -623,7 +622,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	public float[] getCounterRatio() {
-		return new float[] {0, 0, 1};
+		return piercingDamage;
 	}
 
 	public float getCounterDamage() {
@@ -637,11 +636,11 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	/*
 	 * 0 = Cannot Counter 1 = Can Counter -1 = Not Possible
 	 */
-	private int canCounter(EntityLivingBase user, ItemStack item) {
+	public static int canCounter(EntityLivingBase user, ItemStack item) {
 		if (user instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) user;
 			if (getParry(item) > 0) {
-				if (ResearchLogic.hasInfoUnlocked(player, "counteratt")) {
+				if (ResearchLogic.hasInfoUnlocked(player, "counter_attack") && ((ItemWeaponMFR)item.getItem()).canCounter()) {
 					return 1;// Can
 				}
 				return 0;// Cannot

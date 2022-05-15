@@ -4,6 +4,7 @@ import minefantasy.mfr.api.refine.ISmokeHandler;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockLeavesMF;
 import minefantasy.mfr.entity.EntitySmoke;
+import minefantasy.mfr.integration.CustomSand;
 import minefantasy.mfr.integration.CustomStone;
 import minefantasy.mfr.item.ArrowFireFlint;
 import minefantasy.mfr.item.ArrowFirerMF;
@@ -68,6 +69,7 @@ public class CommonProxy implements ISmokeHandler {
 
 	public void postInit(FMLPostInitializationEvent e) {
 		CustomStone.init();
+		CustomSand.init();
 	}
 
 	public void addClientRegister(IClientRegister register) {

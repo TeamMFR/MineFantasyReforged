@@ -35,7 +35,7 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 		this.tier = tier;
 		this.type = type;
 		setRegistryName("crucible_" + type);
-		setUnlocalizedName("crucible_" + type);
+		setTranslationKey("crucible_" + type);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(8F);
 		this.setResistance(8F);

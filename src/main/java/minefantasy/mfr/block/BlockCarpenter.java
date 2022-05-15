@@ -25,7 +25,7 @@ public class BlockCarpenter extends BlockTileEntity<TileEntityCarpenter> {
 		super(Material.WOOD);
 
 		setRegistryName("carpenter_bench");
-		setUnlocalizedName("carpenter_bench");
+		setTranslationKey("carpenter_bench");
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(5F);
 		this.setResistance(2F);
@@ -50,7 +50,7 @@ public class BlockCarpenter extends BlockTileEntity<TileEntityCarpenter> {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

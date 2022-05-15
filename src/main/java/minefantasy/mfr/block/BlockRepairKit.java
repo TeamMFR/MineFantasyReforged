@@ -45,7 +45,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 		name = "repair_kit_" + name;
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setSoundType(SoundType.CLOTH);
 		this.setHardness(1F);
 		this.setResistance(0F);

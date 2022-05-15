@@ -379,7 +379,7 @@ public class MineFantasyKnowledgeList {
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 25);
 		engineering_tanner = (new InformationBase("engineering_tanner", 5, 2, 1, MineFantasyBlocks.TANNER_METAL, engineering_components)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 40).addSkill(Skill.ARTISANRY, 25);
-		advanced_crucible = (new InformationBase("v", 7, 3, 1, MineFantasyBlocks.CRUCIBLE_AUTO, engineering_tanner)).registerStat()
+		advanced_crucible = (new InformationBase("advanced_crucible", 7, 3, 1, MineFantasyBlocks.CRUCIBLE_AUTO, engineering_tanner)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 50).addSkill(Skill.ARTISANRY, 35);
 		advanced_forge = (new InformationBase("advanced_forge", 9, 3, 1, MineFantasyBlocks.FORGE_METAL, advanced_crucible)).registerStat()
 				.setPage(engineering).addSkill(Skill.ENGINEERING, 75).addSkill(Skill.ARTISANRY, 50);
@@ -423,7 +423,7 @@ public class MineFantasyKnowledgeList {
 				.setPage(engineering).setSpecial().addSkill(Skill.ENGINEERING, 0);
 		crossbow_shafts = (new InformationBase("crossbow_shafts", -6, 2, 0, MineFantasyItems.CROSSBOW_STOCK_WOOD, crossbows))
 				.registerStat().setPage(engineering).setUnlocked();
-		crossbow_shaft_advanced = (new InformationBase("cross_shaft_advanced", -6, 4, 2, MineFantasyItems.CROSSBOW_STOCK_IRON,
+		crossbow_shaft_advanced = (new InformationBase("crossbow_shaft_advanced", -6, 4, 2, MineFantasyItems.CROSSBOW_STOCK_IRON,
 				crossbow_shafts)).registerStat().setPage(engineering).addSkill(Skill.ENGINEERING, 40);
 		crossbow_heads = (new InformationBase("crossbow_heads", -2, -2, 0, MineFantasyItems.CROSSBOW_ARMS_BASIC, crossbows))
 				.registerStat().setPage(engineering).setUnlocked();

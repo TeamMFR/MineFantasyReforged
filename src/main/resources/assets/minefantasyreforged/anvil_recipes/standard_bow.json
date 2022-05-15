@@ -10,7 +10,7 @@
   "output_hot": true,
   "pattern": [
     "TSSST ",
-    " TLT  ",
+    "HTLTH ",
     "      ",
     "      "
   ],
@@ -23,6 +23,9 @@
     },
     "L": {
       "item": "minefantasyreforged:leather_strip"
+    },
+    "H": {
+      "item": "minefantasyreforged:metal_hunk"
     }
   },
   "result": {

@@ -466,7 +466,7 @@ public class EntityArrowMFR extends EntityArrow implements IProjectile, IDamageT
 					this.setIsCritical(false);
 
 					if (state.getMaterial() != Material.AIR) {
-						this.inBlock.onEntityCollidedWithBlock(this.world, pos, state, this);
+						this.inBlock.onEntityCollision(this.world, pos, state, this);
 					}
 					if (isMagicArrow()) {
 						setDead();

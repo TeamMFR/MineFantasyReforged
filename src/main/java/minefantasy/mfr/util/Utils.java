@@ -88,7 +88,7 @@ public class Utils {
 
 		if(compound == tag || deepContains(tag, compound)){
 			MineFantasyReforged.LOG.error("Cannot store tag of type {} under key '{}' as it would result in a circular reference! Please report this (including your full log) to wizardry's issue tracker.",
-					NBTBase.getTagTypeName(tag.getId()), key);
+					NBTBase.getTypeName(tag.getId()), key);
 		}else{
 			compound.setTag(key, tag);
 			//MineFantasyReforged.LOG.warn("writing: " + key + ": " + tag);

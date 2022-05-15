@@ -409,7 +409,7 @@ public class MineFantasyItems {
 	// T5 (Advanced baking, multiple process, temperature regulation, many
 	// ingreedients)
 	public static Item CHOCCAKE_SLICE = Utils.nullValue();
-	// T6 (Perfected meals, extremely difficylt to create)
+	// T6 (Perfected meals, extremely difficult to create)
 	public static Item BFCAKE_SLICE = Utils.nullValue();
 	public static Item ECLAIR_UNICED = Utils.nullValue();
 	public static Item ECLAIR_EMPTY = Utils.nullValue();
@@ -575,7 +575,7 @@ public class MineFantasyItems {
 		WOLF_RAW = new ItemFoodMFR("wolf_raw", 2, 0.2F, true);
 		WOLF_COOKED = new ItemFoodMFR("wolf_cooked", 6, 0.6F, true);
 		HORSE_RAW = new ItemFoodMFR("horse_raw", 4, 0.4F, true).setPotionEffect(new PotionEffect(MobEffects.HUNGER, 500, 0), 0.5F);
-		HORSE_COOKED = new ItemFoodMFR("horse_cooked", 10, 1.0F, true);
+		HORSE_COOKED = new ItemFoodMFR("horse_cooked", 7, 0.6F, true);
 		GENERIC_MEAT_UNCOOKED = new ItemFoodMFR("generic_meat_uncooked", 2, 0.2F, true);
 		GENERIC_MEAT_COOKED = new ItemFoodMFR("generic_meat_cooked", 5, 0.5F, true);
 		GENERIC_MEAT_STRIP_UNCOOKED = new ItemFoodMFR("generic_meat_strip_uncooked", 2, 0.2F, true);
@@ -595,42 +595,42 @@ public class MineFantasyItems {
 
 		// T1 (basic mixing)
 		// Util: Roast, Prep Block (Stone-Bronze Age)
-		STEW = new ItemFoodMFR("stew", 5, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.BOWL).setMaxStackSize(1);
-		OATS = new ItemFoodMFR("oats", 5, 1.0F, false, 0).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.BOWL).setMaxStackSize(1);
+		STEW = new ItemFoodMFR("stew", 5, 0.7F, false, 0).setFoodStats(1, 0.0F, 0.0F, 1.0F).setReturnItem(Items.BOWL).setMaxStackSize(1);
+		OATS = new ItemFoodMFR("oats", 5, 0.7F, false, 0).setFoodStats(1, 0.0F, 0.8F, 0.2F).setReturnItem(Items.BOWL).setMaxStackSize(1);
 
 		// T2 (Basic baking, stone oven, processed mixing)
 		// Util: Stone Oven, Prep Block (Bronze Age - Early Iron Age)
-		CHEESE_ROLL = new ItemFoodMFR("cheese_roll", 6, 1.0F, false, 0).setFoodStats(2, 0.0F, 0.4F, 0.6F).setMaxStackSize(1);
-		JERKY = new ItemFoodMFR("jerky", 6, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.0F, 1.0F).setMaxStackSize(8);
-		SAUSAGE_RAW = new ItemFoodMFR("saussage_raw", 4, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.1F, 0.6F).setMaxStackSize(16);
-		SAUSAGE_COOKED = new ItemFoodMFR("saussage_cooked", 8, 1.0F, true, 0).setFoodStats(2, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
-		SWEETROLL_UNICED = new ItemFoodMFR("sweetroll_uniced", 5, 1.0F, false, 0).setFoodStats(2, 0.5F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-		SWEETROLL = new ItemMultiFood("sweetroll", 2, 3, 1.0F, false, 0).setFoodStats(2, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible();
-		SANDWITCH_MEAT = new ItemMultiFood("sandwitch_meat", 2, 6, 1.0F, false, 0).setFoodStats(2, 0.0F, 0.5F, 0.5F).setUnlocalizedName("sandwitch");
-		SANDWITCH_BIG = new ItemMultiFood("sandwitch_big", 4, 6, 1.0F, false, 1).setFoodStats(2, 0.0F, 0.5F, 0.5F);
+		CHEESE_ROLL = new ItemFoodMFR("cheese_roll", 6, 0.8F, false, 0).setFoodStats(2, 0.0F, 0.4F, 0.6F).setMaxStackSize(4);
+		JERKY = new ItemFoodMFR("jerky", 6, 0.8F, true, 0).setFoodStats(2, 0.0F, 0.0F, 1.0F).setMaxStackSize(8);
+		SAUSAGE_RAW = new ItemFoodMFR("saussage_raw", 4, 0.8F, true, 0).setFoodStats(2, 0.0F, 0.1F, 0.6F).setMaxStackSize(16);
+		SAUSAGE_COOKED = new ItemFoodMFR("saussage_cooked", 8, 0.8F, true, 0).setFoodStats(2, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
+		SWEETROLL_UNICED = new ItemFoodMFR("sweetroll_uniced", 5, 0.8F, false, 0).setFoodStats(2, 0.5F, 0.0F, 0.2F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+		SWEETROLL = new ItemMultiFood("sweetroll", 2, 3, 0.8F, false, 0).setFoodStats(2, 1.0F, 0.0F, 0.2F).setEatTime(16).setAlwaysEdible();
+		SANDWITCH_MEAT = new ItemMultiFood("sandwitch_meat", 2, 6, 0.8F, false, 0).setFoodStats(2, 0.0F, 0.5F, 0.5F).setTranslationKey("sandwitch");
+		SANDWITCH_BIG = new ItemMultiFood("sandwitch_big", 4, 6, 0.8F, false, 1).setFoodStats(2, 0.0F, 0.5F, 0.5F);
 
 		// T3 (Quality baking, metal oven)
 		// Util: Metal Oven, Prep Block, Steel Tools (Mid Iron Age)
-		MEATPIE_SLICE = new ItemFoodMFR("meatpie_slice", 8, 1.0F, false, 0).setFoodStats(3, 0.0F, 0.2F, 0.8F).setMaxStackSize(1);
-		PIESLICE_APPLE = new ItemFoodMFR("pieslice_apple", 5, 1.0F, false, 0).setFoodStats(3, 0.8F, 0.2F, 0.0F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
-		PIESLICE_BERRY = new ItemFoodMFR("pieslice_berry", 5, 1.0F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
+		MEATPIE_SLICE = new ItemFoodMFR("meatpie_slice", 8, 1.0F, false, 0).setFoodStats(3, 0.0F, 0.2F, 0.8F).setMaxStackSize(16);
+		PIESLICE_APPLE = new ItemFoodMFR("pieslice_apple", 5, 1.0F, false, 0).setFoodStats(3, 0.8F, 0.2F, 0.5F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
+		PIESLICE_BERRY = new ItemFoodMFR("pieslice_berry", 5, 1.0F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.5F).setEatTime(16).setAlwaysEdible().setAlwaysEdible();
 
 		// T4 (Advanced baking, multiple processes, temperature regulation)
 		// Util : Metal Oven, Prep Block, Full tool set, Proper kitchen setup (Mid Iron
 		// Age)
-		PIESLICE_SHEPARDS = new ItemFoodMFR("pieslice_shepards", 10, 1.0F, false, 1).setFoodStats(4, 0.0F, 0.5F, 0.5F);
-		CAKE_SLICE = new ItemFoodMFR("cake_slice", 3, 0.8F, false, 0).setFoodStats(3, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
-		CARROTCAKE_SLICE = new ItemFoodMFR("carrotcake_slice", 4, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+		PIESLICE_SHEPARDS = new ItemFoodMFR("pieslice_shepards", 10, 1.0F, false, 1).setFoodStats(4, 0.0F, 0.5F, 0.7F);
+		CAKE_SLICE = new ItemFoodMFR("cake_slice", 5, 0.8F, false, 0).setFoodStats(3, 1.0F, 0.0F, 1.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
+		CARROTCAKE_SLICE = new ItemFoodMFR("carrotcake_slice", 6, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.8F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
 
 		// T5 (Advanced baking, multiple process, temperature regulation, many
-		// ingreedients)
-		CHOCCAKE_SLICE = new ItemFoodMFR("choccake_slice", 4, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+		// ingredients)
+		CHOCCAKE_SLICE = new ItemFoodMFR("choccake_slice", 6, 0.8F, false, 0).setFoodStats(4, 1.0F, 0.0F, 1.2F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
 
-		// T6 (Perfected meals, extremely difficylt to create)
-		BFCAKE_SLICE = new ItemFoodMFR("bfcake_slice", 6, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
-		ECLAIR_UNICED = new ItemFoodMFR("eclair_uniced", 5, 1.0F, false, 0).setFoodStats(5, 0.3F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-		ECLAIR_EMPTY = new ItemFoodMFR("eclair_empty", 5, 1.0F, false, 0).setFoodStats(5, 0.5F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
-		ECLAIR = new ItemMultiFood("eclair", 4, 4, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 0.0F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
+		// T6 (Perfected meals, extremely difficult to create)
+		BFCAKE_SLICE = new ItemFoodMFR("bfcake_slice", 7, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 1.3F).setEatTime(16).setAlwaysEdible().setMaxStackSize(4);
+		ECLAIR_UNICED = new ItemFoodMFR("eclair_uniced", 5, 1.0F, false, 0).setFoodStats(5, 0.3F, 0.0F, 0.4F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+		ECLAIR_EMPTY = new ItemFoodMFR("eclair_empty", 5, 1.0F, false, 0).setFoodStats(5, 0.5F, 0.0F, 0.6F).setEatTime(16).setAlwaysEdible().setMaxStackSize(64);
+		ECLAIR = new ItemMultiFood("eclair", 4, 7, 1.0F, false, 1).setFoodStats(5, 1.0F, 0.0F, 1.5F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
 		// MISC
 		CAKE_TIN = new ItemComponentMFR("cake_tin", 0).setCreativeTab(MineFantasyTabs.tabFood);
@@ -640,8 +640,8 @@ public class MineFantasyItems {
 		COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		CHOCOLATE = new ItemComponentMFR("chocolate", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		CHOC_CHIPS = new ItemComponentMFR("choc_chips", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		BERRIES = new ItemFoodMFR("berries", 2, 2.0F, false).setEatTime(10).setStaminaRestore(10F).setAlwaysEdible();
-		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 5.0F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setAlwaysEdible();
+		BERRIES = new ItemFoodMFR("berries", 2, 0.5F, false).setEatTime(10).setStaminaRestore(10F).setAlwaysEdible();
+		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 0.5F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setAlwaysEdible();
 		SWEETROLL_RAW = new ItemUnfinishedFood("sweetroll_raw").setMaxStackSize(64);
 		ECLAIR_RAW = new ItemUnfinishedFood("eclair_raw").setMaxStackSize(64);
 		CAKE_RAW = new ItemUnfinishedFood("cake_raw");
@@ -910,7 +910,6 @@ public class MineFantasyItems {
 		registry.register(SAUSAGE_COOKED);
 		registry.register(SWEETROLL_UNICED);
 
-		// TODO: fix item texture to change with metadata
 		registry.register(SWEETROLL);
 		registry.register(SANDWITCH_MEAT);
 		registry.register(SANDWITCH_BIG);
@@ -937,7 +936,6 @@ public class MineFantasyItems {
 		registry.register(ECLAIR_UNICED);
 		registry.register(ECLAIR_EMPTY);
 
-		// TODO: fix item texture to change with metadata
 		registry.register(ECLAIR);
 
 		// MISC
@@ -1483,17 +1481,17 @@ public class MineFantasyItems {
 		float ratingMod = 0.8F;
 
 		// Weapons
-		ORNATE_SWORD = new ItemSword(ornate + "_sword", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_WARAXE = new ItemWaraxe(ornate + "_waraxe", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_MACE = new ItemMace(ornate + "_mace", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_DAGGER = new ItemDagger(ornate + "_dagger", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_SPEAR = new ItemSpear(ornate + "_spear", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_GREATSWORD = new ItemGreatsword(ornate + "_greatsword", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_BATTLEAXE = new ItemBattleaxe(ornate + "_battleaxe", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_WARHAMMER = new ItemWarhammer(ornate + "_warhammer", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_KATANA = new ItemKatana(ornate + "_katana", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_HALBEARD = new ItemHalbeard(ornate + "_halbeard", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
-		ORNATE_LANCE = new ItemLance(ornate + "_lance", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(1);
+		ORNATE_SWORD = new ItemSword(ornate + "_sword", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_WARAXE = new ItemWaraxe(ornate + "_waraxe", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_MACE = new ItemMace(ornate + "_mace", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_DAGGER = new ItemDagger(ornate + "_dagger", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_SPEAR = new ItemSpear(ornate + "_spear", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_GREATSWORD = new ItemGreatsword(ornate + "_greatsword", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_BATTLEAXE = new ItemBattleaxe(ornate + "_battleaxe", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_WARHAMMER = new ItemWarhammer(ornate + "_warhammer", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_KATANA = new ItemKatana(ornate + "_katana", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_HALBEARD = new ItemHalbeard(ornate + "_halbeard", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
+		ORNATE_LANCE = new ItemLance(ornate + "_lance", ORNATE, 0, 1F).setCustom(ornate).setTab(tab).modifyBaseDamage(-1);
 
 		ORNATE_BOW = (ItemBowMFR) new ItemBowMFR(ornate + "_bow", ORNATE, EnumBowType.SHORTBOW, 1).setCustom(ornate).setCreativeTab(tab);
 

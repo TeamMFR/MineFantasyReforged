@@ -3,6 +3,7 @@
 forge.fuel.name=~燃料~
 vehicle.fuel.name=燃料：%1$s
 info.bow.reload=潜行状态下右键打开火器。
+info.bow.reload_custom=Press [%1$s] to open firearm.
 info.firearm.ammo=%1$s/%2$s
 info.tooltip.moreinfo=按住 [%1$s] 获取更多信息。
 message.mythic_ore_sound=你听到一声%1$s的鸣叫。
@@ -257,6 +258,7 @@ attribute.armour.heavy=重型盔甲
 attribute.weight.name=重量
 
 attribute.bowPower.name=伤害倍数 x%1$s
+attribute.bowDrawbackSpeed.name=拉弓速度 %1$ss
 attribute.arrowPower.name=伤害
 
 attribute.armour.rating.0=斩击防护：
@@ -1118,9 +1120,8 @@ food.stat.staminaPlus.name=恢复%1$耐力
 food.stat.staminabuffHours.name=%2$s小时内增加%1$s耐力
 food.stat.staminabuffMinutes.name=%2$s分钟内增加%1$s耐力
 food.stat.staminabuffSeconds.name=%2$s秒内增加%1$s耐力
-food.stat.saturationMinutes.name=%1$s分钟内饱和
-food.stat.saturationSeconds.name=%1$s秒内饱和
-food.stat.saturation.name=饱和度：%1$s
+food.stat.eatDelay.name=吃延迟：%1$s 秒
+food.stat.fatAccumulation.name=肥胖堆积：%1$s 克
 food.stat.staminabuffRegenMinutes.name=%2$s分钟内每秒恢复%1$s耐力
 food.stat.staminabuffRegenSeconds.name=%2$s秒内每秒恢复%1$s耐力
 food.stat.cure.poison=解毒

@@ -30,7 +30,7 @@ public class BlockRoast extends BlockTileEntity<TileEntityRoast> {
 		String name = isOven ? "oven" : "stove";
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setHardness(1.5F);
 		this.setResistance(1F);
 		this.setLightOpacity(0);
@@ -82,7 +82,7 @@ public class BlockRoast extends BlockTileEntity<TileEntityRoast> {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

@@ -19,7 +19,6 @@ public class BasicRecipesMF {
 		SalvageRecipes.init();
 		CookingRecipes.init();
 		MineFantasyItems.loadCrafting();
-		// GameRegistry.addRecipe(new RecipeArmourDyeMF()); //TODO Replace with proper recipe JSON_FILE_EXT
 
 		// TODO Replace with proper recipe JSON_FILE_EXT for each metal block
 

@@ -60,7 +60,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
 		this.setMaxDamage(material.getMaxUses() * 2);
 		this.tier = tier;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}

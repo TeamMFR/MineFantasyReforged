@@ -1,11 +1,11 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.integration.CustomSand;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumActionResult;
@@ -74,6 +74,6 @@ public class ItemBowl extends ItemComponentMFR {
 			return true;
 		}
 		MFRLogUtil.logDebug("Biome = " + biome);
-		return world.getBlockState(pos.add(0, -1, 0)).getBlock() == Blocks.SAND;
+		return CustomSand.isSand(world.getBlockState(pos.add(0, -1, 0)).getBlock());
 	}
 }

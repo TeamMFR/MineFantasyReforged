@@ -40,7 +40,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 		super(material);
 		itemRarity = rarity;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		setCreativeTab(MineFantasyTabs.tabGadget);
 		setMaxDamage(material.getMaxUses());

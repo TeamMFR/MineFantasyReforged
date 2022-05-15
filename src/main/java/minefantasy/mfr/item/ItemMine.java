@@ -204,7 +204,7 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public String getUnlocalizedName(ItemStack item) {
+	public String getTranslationKey(ItemStack item) {
 		EnumFillingType type = EnumFillingType.getType(getFilling(item));
 		return "item.mine_" + type.name;
 	}

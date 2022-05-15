@@ -30,7 +30,13 @@ public final class MineFantasyTabs extends CreativeTabs {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public ItemStack getIconItemStack() {
+	public ItemStack createIcon() {
+		return new ItemStack(MineFantasyItems.STANDARD_AXE);
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public ItemStack getIcon() {
 		switch (type) {
 			case 1:
 				return MineFantasyItems.STANDARD_AXE.construct(MineFantasyMaterials.Names.STEEL, MineFantasyMaterials.Names.OAK_WOOD);
@@ -62,11 +68,5 @@ public final class MineFantasyTabs extends CreativeTabs {
 				return new ItemStack(MineFantasyItems.STONE_PICK);
 		}
 		return new ItemStack(MineFantasyItems.PIG_IRON_INGOT);
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public ItemStack getTabIconItem() {
-		return new ItemStack(MineFantasyItems.STANDARD_AXE);
 	}
 }

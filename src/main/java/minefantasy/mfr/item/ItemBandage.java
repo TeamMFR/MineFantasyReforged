@@ -98,7 +98,7 @@ public class ItemBandage extends ItemBaseMFR {
 		}
 		if (player instanceof EntityPlayer){
 			int time = 0;
-			if (ResearchLogic.hasInfoUnlocked((EntityPlayer) player, "firstaid")) {
+			if (ResearchLogic.hasInfoUnlocked((EntityPlayer) player, "first_aid")) {
 				time = getMaxItemUseDuration(stack) / 3;
 			}
 			if (count == time){
@@ -153,7 +153,7 @@ public class ItemBandage extends ItemBaseMFR {
 
 	public boolean isReadyToHeal(EntityPlayer player, EntityLivingBase patient) {
 		int time = getUserHealTime(patient) + 1;
-		if (ResearchLogic.hasInfoUnlocked(player, "firstaid")) {
+		if (ResearchLogic.hasInfoUnlocked(player, "first_aid")) {
 			time += 3;
 		}
 		patient.playSound(SoundEvents.BLOCK_CLOTH_BREAK, 1F, 0.005F);

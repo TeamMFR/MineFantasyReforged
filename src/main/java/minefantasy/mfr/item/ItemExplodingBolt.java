@@ -49,7 +49,7 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
 		int damage = (int) (fill.damage * powder.damageModifier * 0.5F);
 		float range = fill.range * powder.rangeModifier * 0.5F;
 
-		list.add(I18n.format(MineFantasyItems.BOMB_CUSTOM.getUnlocalizedName(item) + ".name"));
+		list.add(I18n.format(MineFantasyItems.BOMB_CUSTOM.getTranslationKey(item) + ".name"));
 		list.add(I18n.format("bomb.powder." + powder.name + ".name"));
 		list.add("");
 		list.add(I18n.format("bomb.damage.name") + ": " + damage);

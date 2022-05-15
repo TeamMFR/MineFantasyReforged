@@ -719,7 +719,7 @@ public class CombatMechanics {
 	}
 
 	private static SoundEvent getDefaultParrySound(ItemStack weapon) {
-		if (weapon.getUnlocalizedName().contains("wood") || weapon.getUnlocalizedName().contains("Wood") || weapon.getUnlocalizedName().contains("stone") || weapon.getUnlocalizedName().contains("Stone")) {
+		if (weapon.getTranslationKey().contains("wood") || weapon.getTranslationKey().contains("Wood") || weapon.getTranslationKey().contains("stone") || weapon.getTranslationKey().contains("Stone")) {
 			return MineFantasySounds.WOOD_PARRY;
 		}
 		return SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR;
@@ -767,7 +767,7 @@ public class CombatMechanics {
 	private static boolean canEvade(EntityLivingBase user) {
 		float stamModifier = 1.0F;
 		if (user instanceof EntityPlayer) {
-			if (!ResearchLogic.hasInfoUnlocked((EntityPlayer) user, "parrypro")) {
+			if (!ResearchLogic.hasInfoUnlocked((EntityPlayer) user, "parry_pro")) {
 				return false;
 			}
 

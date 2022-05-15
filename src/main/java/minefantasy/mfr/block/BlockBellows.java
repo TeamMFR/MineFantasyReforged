@@ -53,7 +53,7 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> implements 
 		super(Material.WOOD);
 
 		setRegistryName("bellows");
-		setUnlocalizedName("bellows");
+		setTranslationKey("bellows");
 		this.setHardness(1F);
 		this.setResistance(0.5F);
 		this.setCreativeTab(MineFantasyTabs.tabUtil);
@@ -128,7 +128,7 @@ public class BlockBellows extends BlockTileEntity<TileEntityBellows> implements 
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

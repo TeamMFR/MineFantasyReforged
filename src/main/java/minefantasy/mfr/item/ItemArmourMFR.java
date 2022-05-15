@@ -43,7 +43,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		super(name, material.getArmourConversion(), armourDesign, slot, tex);
 		baseMaterial = material;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		setCreativeTab(MineFantasyTabs.tabArmour);
 

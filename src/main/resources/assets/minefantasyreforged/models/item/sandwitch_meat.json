@@ -2,5 +2,19 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "minefantasyreforged:items/sandwitch_0"
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "bites": 0
+            },
+            "model": "minefantasyreforged:item/sandwitch_0"
+        },
+        {
+            "predicate": {
+                "bites": 1
+            },
+            "model": "minefantasyreforged:item/sandwitch_1"
+        }
+    ]
 }

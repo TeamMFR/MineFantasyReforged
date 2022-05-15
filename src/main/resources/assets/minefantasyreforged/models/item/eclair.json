@@ -2,5 +2,31 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "minefantasyreforged:items/eclair_0"
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "bites": 0
+            },
+            "model": "minefantasyreforged:item/eclair_0"
+        },
+        {
+            "predicate": {
+                "bites": 1
+            },
+            "model": "minefantasyreforged:item/eclair_1"
+        },
+        {
+            "predicate": {
+                "bites": 2
+            },
+            "model": "minefantasyreforged:item/eclair_2"
+        },
+        {
+            "predicate": {
+                "bites": 3
+            },
+            "model": "minefantasyreforged:item/eclair_3"
+        }
+    ]
 }

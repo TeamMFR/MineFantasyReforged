@@ -24,7 +24,7 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 		super(Material.WOOD);
 
 		setRegistryName("bomb_bench");
-		setUnlocalizedName("bomb_bench");
+		setTranslationKey("bomb_bench");
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(5F);
 		this.setResistance(2F);
@@ -66,7 +66,7 @@ public class BlockBombBench extends BlockTileEntity<TileEntityBombBench> {
 			return false;
 		}
 		TileEntityBombBench tile = (TileEntityBombBench) getTile(world, pos);
-		if (tile != null && !world.isSideSolid(pos.add(0, 1, 0), EnumFacing.DOWN)) {
+		if (tile != null) {
 			if (facing != EnumFacing.UP || !tile.tryCraft(player, false) && !world.isRemote) {
 				tile.openGUI(world, player);
 			}

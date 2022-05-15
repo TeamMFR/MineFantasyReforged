@@ -60,7 +60,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		this.hitDamage = (2.0F + material.getAttackDamage()) / 2F;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		this.name = name;
 		this.setHarvestLevel("axe", material.getHarvestLevel());

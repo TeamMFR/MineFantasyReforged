@@ -187,7 +187,7 @@ public class Shockwave {// Explosion
 			iterator = this.affectedBlockPositions.iterator();
 
 			while (iterator.hasNext()) {
-				chunkposition = world.getChunkFromBlockCoords((BlockPos) iterator.next()).getPos();
+				chunkposition = world.getChunk((BlockPos) iterator.next()).getPos();
 				i = chunkposition.x;
 				j = 0;
 				k = chunkposition.z;

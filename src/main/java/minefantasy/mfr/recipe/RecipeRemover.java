@@ -50,14 +50,14 @@ public class RecipeRemover {
 		}
 
 		/**
-		 * Remove all crafting recipes with the specified {@link Item} as their output.
+		 * Remove all Vanilla crafting recipes with the specified {@link Item} as their output.
 		 *
 		 * @param output The output Item
 		 */
 		private static void removeRecipes(final Item output) {
 			final int recipesRemoved = removeRecipes(recipe -> {
 				final ItemStack recipeOutput = recipe.getRecipeOutput();
-				return !recipeOutput.isEmpty() && recipe.getRegistryName().getResourceDomain().equals("minecraft") && recipeOutput.getItem() == output;
+				return !recipeOutput.isEmpty() && recipe.getRegistryName().getNamespace().equals("minecraft") && recipeOutput.getItem() == output;
 			});
 		}
 

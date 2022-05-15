@@ -455,7 +455,7 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
 				new EntryPageText("knowledge.big_furnace.heater"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("furnace_heater")),
-				assembleSimpleImgPage("furnace_heater", MineFantasyBlocks.FURNACE_HEATER.getUnlocalizedName() + ".name"),
+				assembleSimpleImgPage("furnace_heater", MineFantasyBlocks.FURNACE_HEATER.getTranslationKey() + ".name"),
 				new EntryPageText("knowledge.big_furnace.top"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("furnace_stone")),
 				assembleSimpleImgPage("furnace_full", "knowledge.big_furnace.structure"));
@@ -522,7 +522,7 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("tanner_metal")));
 
 		MineFantasyKnowledgeList.advanced_crucible.addPages(
-				assembleSimpleImgPage("auto_crucible_example", MineFantasyBlocks.CRUCIBLE_AUTO.getUnlocalizedName() + ".name"),
+				assembleSimpleImgPage("auto_crucible_example", MineFantasyBlocks.CRUCIBLE_AUTO.getTranslationKey() + ".name"),
 				new EntryPageText("knowledge.advanced_crucible.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crucible_auto")),
 				new EntryPageText("knowledge.firebrick_crucible.blocks"),

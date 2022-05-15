@@ -75,6 +75,11 @@ public class ItemLance extends ItemSpear {
 		return false;
 	}
 
+	@Override
+	public boolean canCounter() {
+		return false;
+	}
+
 	// Higher stamina means more precice hits: Full stamina hits are perfect
 	@Override
 	public float getBalance(EntityLivingBase user) {

@@ -56,7 +56,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		this.type = type;
 
 		setRegistryName("forge_" + type);
-		setUnlocalizedName("forge_" + type);
+		setTranslationKey("forge_" + type);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(5F);
 		this.setResistance(8F);

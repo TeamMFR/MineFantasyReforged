@@ -101,7 +101,7 @@ public class TacticalManager {
 		}
 		if (user instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) user;
-			autoParry = ResearchLogic.hasInfoUnlocked(player, "autoparry") && !player.isHandActive();
+			autoParry = ResearchLogic.hasInfoUnlocked(player, "auto_parry") && !player.isHandActive();
 
 			if (!player.isHandActive() && !autoParry) {
 				return false;

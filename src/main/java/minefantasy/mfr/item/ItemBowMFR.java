@@ -7,6 +7,7 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBow;
+import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
@@ -29,6 +30,7 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -38,6 +40,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -45,6 +48,7 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -80,10 +84,27 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		this.setMaxDamage(dura);
 		itemRarity = rarity;
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
+		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+				if (entityIn == null) {
+					return 0.0F;
+				} else {
+					return !(entityIn.getActiveItemStack().getItem() instanceof ItemBow) ? 0.0F : (float) ((stack.getMaxItemUseDuration()) - entityIn.getItemInUseCount()) / getDrawbackTime(stack);
+
+				}
+			}
+		});
+		this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter() {
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+				return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack ? 1.0F : 0.0F;
+			}
+		});
 	}
 
 	@Override
@@ -176,12 +197,16 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		}
 	}
 
+	public static int getDrawbackTime(ItemStack stack) {
+		return (int) (((ItemBowMFR)stack.getItem()).model.chargeTime + (5 * (CustomToolHelper.getCustomPrimaryMaterial(stack).resistance / 25)));
+	}
+
 	/**
 	 * How long it takes to use or consume an item
 	 */
 	@Override
 	public int getMaxItemUseDuration(ItemStack item) {
-		return 72000;
+		return getDrawbackTime(item) * 20;
 	}
 
 	/**
@@ -203,8 +228,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 			list.add(TextFormatting.DARK_GRAY + ammo.getDisplayName() + " x" + ammo.getCount());
 		}
 
-		list.add(TextFormatting.BLUE + I18n.format("attribute.bowPower.name",
-				decimal_format.format(getBowDamage(item))));
+		list.add(TextFormatting.BLUE + I18n.format("attribute.bowPower.name", decimal_format.format(getBowDamage(item))));
+		list.add(TextFormatting.GREEN + I18n.format("attribute.bowDrawbackSpeed.name", decimal_format.format(getDrawbackTime(item) / 20F)));
 	}
 
 	/**
@@ -216,23 +241,22 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		ItemStack bow = player.getHeldItem(hand);
 		final boolean hasAmmo = !AmmoMechanics.isDepleted(bow);
 
-		if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(bow)) {
-			reloadBow(bow, player);
+		if (world.isRemote && MineFantasyKeybindings.BOW_MENU.isKeyDown() || AmmoMechanics.isDepleted(bow)) {
+			reloadBow(player);
 			return ActionResult.newResult(EnumActionResult.FAIL, bow);
 		}
-		if (!player.isSneaking()) {
-			final ActionResult<ItemStack> ret = ForgeEventFactory.onArrowNock(bow, world, player, hand, hasAmmo);
-			if (ret != null)
-				return ret;
 
-			if (isAmmoRequired(bow, player) && !hasAmmo) {
-				return new ActionResult<>(EnumActionResult.FAIL, bow);
-			} else {
-				player.setActiveHand(hand);
-				return new ActionResult<>(EnumActionResult.SUCCESS, bow);
-			}
+		final ActionResult<ItemStack> ret = ForgeEventFactory.onArrowNock(bow, world, player, hand, hasAmmo);
+		if (ret != null){
+			return ret;
 		}
-		return new ActionResult<>(EnumActionResult.FAIL, bow);
+
+		if (isAmmoRequired(bow, player) && !hasAmmo) {
+			return new ActionResult<>(EnumActionResult.FAIL, bow);
+		} else {
+			player.setActiveHand(hand);
+			return new ActionResult<>(EnumActionResult.SUCCESS, bow);
+		}
 	}
 
 	public boolean canAccept(ItemStack ammo) {
@@ -249,7 +273,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		return ammoType.equalsIgnoreCase("arrow");
 	}
 
-	private void reloadBow(ItemStack item, EntityPlayer player) {
+	public void reloadBow(EntityPlayer player) {
 		player.openGui(MineFantasyReforged.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
 	}
 

@@ -24,7 +24,7 @@ public class BlockResearchBench extends BlockTileEntity<TileEntityResearchBench>
 		super(Material.WOOD);
 
 		setRegistryName("research_bench");
-		setUnlocalizedName("research_bench");
+		setTranslationKey("research_bench");
 		this.setSoundType(SoundType.WOOD);
 		this.setHardness(5F);
 		this.setResistance(2F);
@@ -49,7 +49,7 @@ public class BlockResearchBench extends BlockTileEntity<TileEntityResearchBench>
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;

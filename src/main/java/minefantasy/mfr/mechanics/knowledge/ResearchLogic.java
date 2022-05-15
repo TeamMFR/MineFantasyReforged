@@ -193,6 +193,6 @@ public class ResearchLogic {
 	}
 
 	private static String getKeyName(ItemStack item, InformationBase base) {
-		return "research_" + base.getUnlocalisedName() + "_" + item.getUnlocalizedName() + "_" + item.getItemDamage();
+		return "research_" + base.getUnlocalisedName() + "_" + item.getTranslationKey() + "_" + item.getItemDamage();
 	}
 }

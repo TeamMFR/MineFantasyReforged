@@ -34,7 +34,7 @@ public class BlockQuern extends BlockTileEntity<TileEntityQuern> implements ICli
 		super(Material.ROCK);
 
 		setRegistryName(type);
-		setUnlocalizedName(type);
+		setTranslationKey(type);
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(5F);
 		this.setResistance(5F);

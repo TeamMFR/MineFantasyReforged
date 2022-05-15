@@ -22,7 +22,7 @@ public class ItemResearchBook extends ItemBaseMFR {
 		super("research_book");
 		setMaxStackSize(1);
 		setCreativeTab(MineFantasyTabs.tabGadget);
-		setUnlocalizedName("infobook");
+		setTranslationKey("infobook");
 
 		setContainerItem(this);
 	}

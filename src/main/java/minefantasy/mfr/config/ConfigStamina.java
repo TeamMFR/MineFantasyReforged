@@ -9,6 +9,9 @@ public class ConfigStamina extends ConfigurationBaseMF {
 	public static float weaponModifier;
 	public static float sprintModifier;
 	public static int fullRegenSeconds;
+	public static int eatDelayModifier;
+	public static int fatAccumulationModifier;
+	public static int fatThreshold;
 	public static float weaponDrain;
 	public static float bowModifier;
 	public static float miningSpeed;
@@ -42,9 +45,6 @@ public class ConfigStamina extends ConfigurationBaseMF {
 		StaminaBar.defaultMax = Float.parseFloat(config.get(VALUES, "Max stamina base", 100F,
 				"This is where your stamina starts on spawning, Note that when changed: it only applies on death or new worlds")
 				.getString());
-		// StaminaBar.restrictSystem = Boolean.parseBoolean(config.get("Restrict use to
-		// players", "Will restrict", false, "This restricts the stamina system only to
-		// players").getString());
 
 		weaponModifier = Float.parseFloat(
 				config.get(VALUES, "Weapon Modifier", 1.0F, "This modifies the amount using weapons influences stamina")
@@ -53,6 +53,15 @@ public class ConfigStamina extends ConfigurationBaseMF {
 				config.get(VALUES, "Sprint Modifier", 1.0F, "Modify how fast sprinting decays stamina").getString());
 		fullRegenSeconds = Integer.parseInt(config.get(VALUES, "Regen Time", 15,
 				"Base time(seconds) until the metre is refilled(this is the base, other variables will be modified)")
+				.getString());
+		eatDelayModifier = Integer.parseInt(config.get(VALUES, "Eat Delay Modifier", 10,
+						"Multiplied by the fatty content of food to delay the next time you can eat")
+				.getString());
+		fatAccumulationModifier = Integer.parseInt(config.get(VALUES, "Fat Accumulation Modifier", 10,
+						"Multiplied by the fatty content of food to determine how much fat accumulation occurs")
+				.getString());
+		fatThreshold = Integer.parseInt(config.get(VALUES, "Fat Threshold", 400,
+						"The threshold for what is considered 'fat' and begins to impact max stamina")
 				.getString());
 		weaponDrain = Float.parseFloat(config.get(VALUES, "Exhausted Damage Modifier", 0.85F,
 				"This is how being exhausted(empty stamina) influences your damage as a decimal. 0.85 = 85%. A value more than 1 increases the damage when out of stamina")

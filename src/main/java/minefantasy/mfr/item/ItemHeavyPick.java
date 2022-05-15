@@ -17,13 +17,11 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemPickaxe;
@@ -45,9 +43,9 @@ import java.util.Random;
  * @author Anonymous Productions
  */
 public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClientRegister {
+	private final Random rand = new Random();
 	protected int itemRarity;
 	private float baseDamage = 2F;
-	private final Random rand = new Random();
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
@@ -58,7 +56,7 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
 		itemRarity = rarity;
 		setCreativeTab(MineFantasyTabs.tabOldTools);
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 
 		setMaxDamage(material.getMaxUses());
 
@@ -72,21 +70,21 @@ public class ItemHeavyPick extends ItemPickaxe implements IToolMaterial, IClient
 				for (int y1 = -1; y1 <= 1; y1++) {
 					for (int z1 = -1; z1 <= 1; z1++) {
 						EnumFacing enumFacing = EnumFacing.getDirectionFromEntityLiving(pos, user);
-						if (enumFacing != EnumFacing.UP && enumFacing != EnumFacing.DOWN){
+						if (enumFacing != EnumFacing.UP && enumFacing != EnumFacing.DOWN) {
 							enumFacing = user.getHorizontalFacing();
 						}
 
-						int blockX = pos.getX() + x1 + enumFacing.getFrontOffsetX();
-						int blockY = pos.getY() + y1 + enumFacing.getFrontOffsetY();
-						int blockZ = pos.getZ() + z1 + enumFacing.getFrontOffsetZ();
+						int blockX = pos.getX() + x1 + enumFacing.getXOffset();
+						int blockY = pos.getY() + y1 + enumFacing.getYOffset();
+						int blockZ = pos.getZ() + z1 + enumFacing.getZOffset();
 						BlockPos blockPos = new BlockPos(blockX, blockY, blockZ);
 
-						if (!(x1 + enumFacing.getFrontOffsetX() == 0 && y1 + enumFacing.getFrontOffsetY() == 0 && z1 + enumFacing.getFrontOffsetZ() == 0)) {
+						if (!(x1 + enumFacing.getXOffset() == 0 && y1 + enumFacing.getYOffset() == 0 && z1 + enumFacing.getZOffset() == 0)) {
 							IBlockState newState = world.getBlockState(blockPos);
 							if (newState != null && user instanceof EntityPlayer && isToolEffective(newState, world, blockPos, stack)) {
 
 								if (rand.nextFloat() * 100F < (100F - ConfigTools.heavy_tool_drop_chance)) {
-									newState.getBlock().dropBlockAsItemWithChance(world, pos, newState, ConfigTools.heavy_tool_drop_chance, EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack));
+									newState.getBlock().harvestBlock(world, (EntityPlayer) user, pos, newState, null, stack);
 								}
 								world.setBlockToAir(blockPos);
 								stack.damageItem(1, user);

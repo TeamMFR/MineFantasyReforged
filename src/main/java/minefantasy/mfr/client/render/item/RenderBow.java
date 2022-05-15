@@ -3,13 +3,13 @@ package minefantasy.mfr.client.render.item;
 import codechicken.lib.model.bakedmodels.WrappedItemModel;
 import codechicken.lib.render.item.IItemRenderer;
 import codechicken.lib.util.TransformUtils;
+import minefantasy.mfr.item.ItemBowMFR;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.util.TextureHelperMFR;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformType;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.fml.relauncher.Side;
@@ -48,15 +48,16 @@ public class RenderBow extends WrappedItemModel implements IItemRenderer {
 
 			if (pulling) {
 
-				float pull = Math.min(!(entity.getActiveItemStack().getItem() instanceof ItemBow) ? 0.0F : (float) (stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / 20.0F, 1.0F);
-				if (pull > 0 && pull < 0.7F) {
+				float pull = Math.min(!(entity.getActiveItemStack().getItem() instanceof ItemBowMFR) ? 0.0F : (float)(stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / ItemBowMFR.getDrawbackTime(stack), 1.0F);
+
+				if (pull >= 0.9F) {
+					pull = 0.9F;
+				}
+				else if (pull >= 0.65) {
+					pull = 0.65F;
+				}
+				else if (pull >= 0) {
 					pull = 0;
-				} else if (pull < 0.8F) {
-					pull = 0.4F;
-				} else if (pull < 0.9F) {
-					pull = 0.7F;
-				} else {
-					pull = 1F;
 				}
 
 				GlStateManager.translate((4F + (pull * 4)) / 16F, (12F - (pull * 4)) / 16F, 8.1F / 16F);

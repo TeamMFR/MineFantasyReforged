@@ -36,7 +36,7 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 		this.isMain = helmet;
 
 		setRegistryName(name);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		this.setTickRandomly(true);
 		this.setCreativeTab(MineFantasyTabs.tabGadget);
 		this.setHardness(1F);
@@ -51,7 +51,7 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.getFront(meta);
+		EnumFacing enumfacing = EnumFacing.byIndex(meta);
 
 		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
 			enumfacing = EnumFacing.NORTH;
@@ -71,7 +71,7 @@ public class BlockCogwork extends BlockDirectional implements IClientRegister {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
+	public BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 

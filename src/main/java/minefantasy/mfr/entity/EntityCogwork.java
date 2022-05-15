@@ -715,7 +715,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 			{
 				pooledMutableBlockPos.setPos(this.posX, 0.0D, this.posZ);
 
-				if (!this.world.isRemote || this.world.isBlockLoaded(pooledMutableBlockPos) && this.world.getChunkFromBlockCoords(pooledMutableBlockPos).isLoaded())
+				if (!this.world.isRemote || this.world.isBlockLoaded(pooledMutableBlockPos) && this.world.getChunk(pooledMutableBlockPos).isLoaded())
 				{
 					if (!this.hasNoGravity())
 					{

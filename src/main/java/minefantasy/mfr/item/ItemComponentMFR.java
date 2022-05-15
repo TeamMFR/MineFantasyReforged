@@ -122,6 +122,10 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 
 		ItemStack stack = player.getHeldItem(hand);
 
+		if (!(world.getBlockState(pos).getBlock() instanceof BlockComponent) && !world.isSideSolid(pos, facingForPlacement)) {
+			return EnumActionResult.FAIL;
+		}
+
 		if (player.canPlayerEdit(pos.offset(facingForPlacement), facing, stack)) {
 			int size = BlockComponent.placeComponent(player, stack, world, pos.offset(facingForPlacement), facing, hitX, hitY, hitZ, player, hand, storageType, blockTexture);
 			if (!player.capabilities.isCreativeMode){

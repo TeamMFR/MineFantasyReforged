@@ -30,7 +30,7 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 		super(Material.ROCK);
 
 		setRegistryName("bloomery");
-		setUnlocalizedName("bloomery");
+		setTranslationKey("bloomery");
 		this.setSoundType(SoundType.STONE);
 		this.setHardness(8F);
 		this.setResistance(10F);
