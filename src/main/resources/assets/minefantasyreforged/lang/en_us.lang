@@ -11,6 +11,7 @@ message.below=BELOW
 message.above=ABOVE
 info.salvage.usage=Drop a valid item on top of the Salvage Block to salvage it
 gui.no_project_set=<No Project Set>
+info.offBalance.message=Trying to use a heavy weapon with only one hand throws you off balance!
 
 attribute.kit.salvage.name=Salvage Modifier
 
@@ -259,7 +260,7 @@ integration.jei.category.minefantasyreforged:carpenter=Carpenter Bench
 integration.jei.category.minefantasyreforged:anvil=MineFantasy Anvil
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 key.category.mfr.general=MineFantasy Reforged
-key.mfr.bow_menu=MFR Bow Reload Menu
+key.mfr.reload_menu=MFR Reload Menu
 key.mfr.remove_offhand=Remove item from offhand
 # COMMODITY
 
@@ -464,11 +465,11 @@ gui.bombcraftmf.name=Bomb Crafting
 gui.crossbowcraftmf.name=Crossbow Crafting
 
 attribute.crossbow.power.name=Power x%1$s
-attribute.crossbow.speed.name=Reload Time  = %1$ss
+attribute.crossbow.speed.name=Reload Time %1$ss
 attribute.crossbow.spread.name=Spread x%1$s
 attribute.crossbow.recoil.name=Recoil x%1$s
-attribute.crossbow.capacity.name=Capacity = %1$s
-attribute.crossbow.bash.name=Melee Dmg = %1$s
+attribute.crossbow.capacity.name=Capacity %1$s
+attribute.crossbow.bash.name=Melee Dmg %1$s
 
 crosspart.stock.crossbow_stock_wood=Crossbow
 crosspart.stock.crossbow_stock_iron=Crossbow

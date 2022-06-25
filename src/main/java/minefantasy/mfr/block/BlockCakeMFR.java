@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -20,6 +21,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -133,6 +137,9 @@ public class BlockCakeMFR extends BasicBlockMF {
 	 */
 	@Override
 	public boolean canPlaceBlockAt(World world, BlockPos pos) {
+		if (world.getBlockState(pos.down()).getBlock() instanceof BlockCakeMFR) {
+			return false;
+		}
 		return super.canPlaceBlockAt(world, pos) && this.canBlockStay(world, pos);
 	}
 
@@ -163,9 +170,14 @@ public class BlockCakeMFR extends BasicBlockMF {
 	/**
 	 * Get the Item that this Block should drop when harvested.
 	 */
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
 		return Items.AIR;
+	}
+
+	@Override
+	public int damageDropped(IBlockState state) {
+		return state.getValue(BITES);
 	}
 
 	public int getRarity() {
@@ -173,5 +185,18 @@ public class BlockCakeMFR extends BasicBlockMF {
 			return ((ItemFoodMFR) cakeSlice).itemRarity;
 		}
 		return 0;
+	}
+
+	@Override
+	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
+		return false;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerClient() {
+		for (int i : BITES.getAllowedValues()) {
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), i, new ModelResourceLocation(getRegistryName(), "bites=" + i));
+		}
 	}
 }

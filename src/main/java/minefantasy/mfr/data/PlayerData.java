@@ -26,11 +26,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -51,7 +51,7 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 	/**
 	 * Internal storage of registered variable keys. This only contains the stored keys.
 	 **/
-	private static final Set<IStoredVariable> storedVariables = new HashSet<>();
+	private static final List<IStoredVariable> storedVariables = new ArrayList<>();
 
 	/**
 	 * Internal storage of custom data. Note that a {@code Map} cannot specify that its values are of
@@ -103,8 +103,8 @@ public class PlayerData implements INBTSerializable<NBTTagCompound> {
 	 * Returns a set containing the registered {@link IStoredVariable} objects for which {@link IVariable#isSynced()}
 	 * returns true. Used internally for packet reading.
 	 */
-	public static Set<IVariable> getSyncedVariables() {
-		return storedVariables.stream().filter(IVariable::isSynced).collect(Collectors.toSet());
+	public static List<IVariable> getSyncedVariables() {
+		return storedVariables.stream().filter(IVariable::isSynced).collect(Collectors.toList());
 	}
 
 	/**

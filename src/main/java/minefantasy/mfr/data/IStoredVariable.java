@@ -1,6 +1,7 @@
 package minefantasy.mfr.data;
 
 import io.netty.buffer.ByteBuf;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
@@ -104,8 +105,7 @@ public interface IStoredVariable<T> extends IVariable<T> {
 
 		@Override
 		public void write(NBTTagCompound nbt, T value) {
-			if (value != null)
-				nbt.setTag(key, serialiser.apply(value));
+			if(value != null) Utils.storeTagSafely(nbt, key, serialiser.apply(value));
 		}
 
 		@Override

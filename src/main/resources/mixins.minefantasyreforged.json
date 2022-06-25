@@ -2,7 +2,7 @@
   "required": true,
   "package": "minefantasy.mfr.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "refmap.minefantasyreforged.json",
+  "refmap": "mixins.refmap.minefantasyreforged.json",
   "mixins": [],
   "client": [
     "MixinRenderLivingBase"

@@ -3,7 +3,7 @@ package minefantasy.mfr.client.keybinding;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.network.OpenBowGUIPacket;
+import minefantasy.mfr.network.OpenReloadGUIPacket;
 import minefantasy.mfr.network.RemoveOffhandPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.Mod;
@@ -20,8 +20,8 @@ public class KeyBindingHandler {
 		if (event.phase != TickEvent.Phase.END)
 			return;
 
-		if (MineFantasyKeybindings.BOW_MENU.isKeyDown() && !MineFantasyKeybindings.BOW_MENU.isSetToDefaultValue()) {
-			NetworkHandler.sendToServer(new OpenBowGUIPacket(MINECRAFT.player));
+		if (MineFantasyKeybindings.RELOAD_MENU.isKeyDown() && !MineFantasyKeybindings.RELOAD_MENU.isSetToDefaultValue()) {
+			NetworkHandler.sendToServer(new OpenReloadGUIPacket(MINECRAFT.player));
 		}
 
 		if (MineFantasyKeybindings.REMOVE_OFFHAND.isPressed()) {

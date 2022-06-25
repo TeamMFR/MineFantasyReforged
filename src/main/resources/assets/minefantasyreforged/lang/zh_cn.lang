@@ -12,6 +12,7 @@ message.below=少于
 message.above=多于
 info.salvage.usage=将一个合适的物品放至方块顶部以分解它
 gui.no_project_set=<No Project Set>
+info.offBalance.message=单手使用重型武器会使你失衡！
 
 attribute.kit.salvage.name=回收调节
 
@@ -490,11 +491,11 @@ gui.bombcraftmf.name=制作炸弹
 gui.crossbowcraftmf.name=制作弩弓
 
 attribute.crossbow.power.name=伤害系数 x%1$s
-attribute.crossbow.speed.name=装填速度 = %1$ss
+attribute.crossbow.speed.name=装填速度 %1$ss
 attribute.crossbow.spread.name=射击范围 x%1$s
 attribute.crossbow.recoil.name=后坐力 x%1$s
-attribute.crossbow.capacity.name=容量 = %1$s
-attribute.crossbow.bash.name=近战伤害 = %1$s
+attribute.crossbow.capacity.name=容量 %1$s
+attribute.crossbow.bash.name=近战伤害 %1$s
 
 crosspart.stock.crossbow_stock_wood=木弩
 crosspart.stock.crossbow_stock_iron=铁弩

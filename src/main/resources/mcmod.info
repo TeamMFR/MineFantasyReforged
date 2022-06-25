@@ -1,12 +1,12 @@
 [
     {
-        "modid": "minefantasyreforged",
-        "name": "Minefantasy Reforged",
-        "description": "A medieval-fantasy themed soft total conversion, focused around the themes of Blacksmithing and Medieval Combat",
+        "mod_id": "${mod_id}",
+        "name": "${name}",
+        "description": "${description}",
         "version": "${version}",
-        "mcversion": "${mcversion}",
-        "url": "",
-        "updateUrl": "",
+        "mc_version": "${mc_version}",
+        "url": "${url}",
+        "updateUrl": "${update_url}",
         "authorList": [
             "ThatPolishKid99",
             "WinDanesz"

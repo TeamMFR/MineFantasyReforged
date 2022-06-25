@@ -67,7 +67,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	}
 
 	static {
-		PlayerData.registerStoredVariables(FAT_ACCUMULATION);
+		PlayerData.registerStoredVariables(EAT_DELAY, FAT_ACCUMULATION);
 	}
 
 	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat, int rarity) {

@@ -20,6 +20,7 @@ import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.PlayerData;
+import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -60,6 +61,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -330,6 +332,12 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		if (entityLiving instanceof EntityPlayer) {
 			if (!allowOffhand(entityLiving, EnumHand.OFF_HAND)) {
+				if (entityLiving.isRiding() && entityLiving.getRidingEntity() instanceof EntityCogwork) {
+					return false;
+				}
+				if (!entityLiving.world.isRemote) {
+					entityLiving.sendMessage(new TextComponentTranslation("info.offBalance.message"));
+				}
 				TacticalManager.throwPlayerOffBalance((EntityPlayer) entityLiving, 5F);
 				StaminaBar.modifyStaminaValue(entityLiving, -95F);
 			}

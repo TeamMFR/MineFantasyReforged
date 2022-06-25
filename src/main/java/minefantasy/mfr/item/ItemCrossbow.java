@@ -12,6 +12,7 @@ import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.AmmoMechanics;
@@ -97,10 +98,9 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (!world.isRemote && player.isSneaking() || AmmoMechanics.isDepleted(stack))// OPEN INV
-		{
-			player.openGui(MineFantasyReforged.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
-			return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
+		if (world.isRemote && MineFantasyKeybindings.RELOAD_MENU.isKeyDown() || AmmoMechanics.isDepleted(stack)) {
+			reloadFirearm(player);
+			return ActionResult.newResult(EnumActionResult.FAIL, stack);
 		}
 		ItemStack loaded = AmmoMechanics.getArrowOnBow(stack);
 		if (loaded.isEmpty() || player.isSwingInProgress)// RELOAD
@@ -202,6 +202,11 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 		float angle = value;
 		user.rotationPitch -= itemRand.nextFloat() * angle;
 		user.rotationYawHead += itemRand.nextFloat() * angle - 0.5F;
+	}
+
+	@Override
+	public void reloadFirearm(EntityPlayer player) {
+		player.openGui(MineFantasyReforged.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
 	}
 
 	@Override

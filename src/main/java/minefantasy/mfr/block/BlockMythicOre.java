@@ -63,9 +63,4 @@ public class BlockMythicOre extends BlockOreMF {
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
 		worldIn.scheduleUpdate(pos, this, this.tickRate(worldIn));
 	}
-
-	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		return true;
-	}
 }

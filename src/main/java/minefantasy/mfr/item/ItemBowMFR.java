@@ -241,8 +241,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		ItemStack bow = player.getHeldItem(hand);
 		final boolean hasAmmo = !AmmoMechanics.isDepleted(bow);
 
-		if (world.isRemote && MineFantasyKeybindings.BOW_MENU.isKeyDown() || AmmoMechanics.isDepleted(bow)) {
-			reloadBow(player);
+		if (world.isRemote && MineFantasyKeybindings.RELOAD_MENU.isKeyDown() || AmmoMechanics.isDepleted(bow)) {
+			reloadFirearm(player);
 			return ActionResult.newResult(EnumActionResult.FAIL, bow);
 		}
 
@@ -273,7 +273,8 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		return ammoType.equalsIgnoreCase("arrow");
 	}
 
-	public void reloadBow(EntityPlayer player) {
+	@Override
+	public void reloadFirearm(EntityPlayer player) {
 		player.openGui(MineFantasyReforged.MOD_ID, NetworkHandler.GUI_RELOAD, player.world, 1, 0, 0);
 	}
 

@@ -1240,7 +1240,7 @@ public class MineFantasyItems {
 		BOMB_CASING_CERAMIC = new ItemBombComponent("bomb_casing_ceramic", Rarity.COMMON, "bombcase", "ceramic",0);
 		MINE_CASING_CERAMIC = new ItemBombComponent("mine_casing_ceramic", Rarity.COMMON, "minecase", "ceramic",0);
 		BOMB_CASING_IRON = new ItemBombComponent("bomb_casing_iron", Rarity.COMMON, "bombcase", "iron", 1);
-		MINE_CASING_IRON = new ItemBombComponent("mine_casing_iron", Rarity.COMMON, "bombcase", "iron", 1);
+		MINE_CASING_IRON = new ItemBombComponent("mine_casing_iron", Rarity.COMMON, "minecase", "iron", 1);
 		BOMB_CASING_OBSIDIAN = new ItemBombComponent("bomb_casing_obsidian", Rarity.UNCOMMON, "bombcase", "obsidian",2);
 		MINE_CASING_OBSIDIAN = new ItemBombComponent("mine_casing_obsidian", Rarity.UNCOMMON, "minecase", "obsidian", 2);
 		BOMB_CASING_CRYSTAL = new ItemBombComponent("bomb_casing_crystal", Rarity.UNCOMMON, "bombcase", "crystal", 3);

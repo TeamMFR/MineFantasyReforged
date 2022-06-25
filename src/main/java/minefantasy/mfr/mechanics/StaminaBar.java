@@ -60,6 +60,10 @@ public class StaminaBar {
 	 */
 	private static float bulkModifier = 1.0F;
 
+	static {
+		PlayerData.registerStoredVariables(STAMINA_REGEN_KEY, STAMINA_REGEN_TICKS_KEY, STAMINA_BONUS_KEY, STAMINA_BONUS_TICKS_KEY, STAMINA_MAX_KEY, STAMINA_VALUE_KEY, STAMINA_IDLE_KEY, STAMINA_FLASHING_KEY);
+	}
+
 	// MAX STAMINA//
 	public static float getTotalMaxStamina(EntityLivingBase user) {
 		return getBaseMaxStamina(user) + getBonusStamina(user);

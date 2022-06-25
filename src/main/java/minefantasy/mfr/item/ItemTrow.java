@@ -74,15 +74,22 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item);
 			boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, item) == 1;
 
-			ArrayList<ItemStack> specialdrops = RandomDigs.getDroppedItems(state.getBlock(), state.getBlock().getMetaFromState(state), harvestlvl, fortune, silk, pos.getY());
+			ArrayList<ItemStack> specialDrops = RandomDigs.getDroppedItems(state.getBlock(), state.getBlock().getMetaFromState(state), harvestlvl, fortune, silk, pos.getY());
 
-			if (specialdrops != null && !specialdrops.isEmpty()) {
+			if (specialDrops != null && !specialDrops.isEmpty()) {
 
-				for (ItemStack newdrop : specialdrops) {
+				for (ItemStack newdrop : specialDrops) {
 					if (!newdrop.isEmpty()) {
-						if (newdrop.getCount() < 1)
+						if (newdrop.getCount() > 1) {
+							if (CustomToolHelper.getCustomPrimaryMaterial(item).tier > 0) {
+								newdrop.setCount(itemRand.nextInt(CustomToolHelper.getCustomPrimaryMaterial(item).tier));
+							} else {
+								newdrop.setCount(1);
+							}
+						}
+						if (newdrop.getCount() < 1){
 							newdrop.setCount(1);
-
+						}
 						dropItem(world, pos, newdrop);
 					}
 				}
@@ -104,12 +111,11 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 	}
 
 	private void dropItem(World world, BlockPos pos, ItemStack drop) {
-		if (world.isRemote)
-			return;
-
-		EntityItem dropItem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
-		dropItem.setPickupDelay(10);
-		world.spawnEntity(dropItem);
+		if (!world.isRemote) {
+			EntityItem dropItem = new EntityItem(world, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, drop);
+			dropItem.setPickupDelay(10);
+			world.spawnEntity(dropItem);
+		}
 	}
 
 	@Override

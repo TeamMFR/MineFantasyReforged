@@ -67,7 +67,7 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 	public boolean onBlockDestroyed(ItemStack item, World world, IBlockState blockState, BlockPos pos, EntityLivingBase user) {
 		if (!world.isRemote) {
 			IBlockState state = world.getBlockState(pos);
-			int harvestlvl = this.getMaterial().getHarvestLevel();
+			int harvestlvl = CustomToolHelper.getHarvestLevel(item, this.getMaterial().getHarvestLevel());
 			int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, item);
 			boolean silk = EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, user.getHeldItemMainhand()) > 0;
 
@@ -84,11 +84,11 @@ public class ItemHandpick extends ItemPickaxe implements IToolMaterial, IClientR
 			}
 
 			//special drop logic
-			ArrayList<ItemStack> specialdrops = RandomOre.getDroppedItems(user, blockState.getBlock(), harvestlvl, fortune, silk, pos.getY());
+			ArrayList<ItemStack> specialDrops = RandomOre.getDroppedItems(user, blockState.getBlock(), harvestlvl, fortune, silk, pos.getY());
 
-			if (!specialdrops.isEmpty()) {
+			if (!specialDrops.isEmpty()) {
 
-				for (ItemStack newdrop : specialdrops) {
+				for (ItemStack newdrop : specialDrops) {
 					if (!newdrop.isEmpty()) {
 						if (newdrop.getCount() > 1) {
 							if (CustomToolHelper.getCustomPrimaryMaterial(item).tier > 0) {

@@ -10,13 +10,22 @@ buildscript {
             name = 'FancyGradle'
             url = 'https://gitlab.com/api/v4/projects/26758973/packages/maven'
         }
-        maven { url = "https://repo.spongepowered.org/repository/maven-public/" }
+        maven {
+            name = 'sponge'
+            url = 'https://repo.spongepowered.org/maven-public/'
+        }
+        repositories {
+            maven {
+                url "https://plugins.gradle.org/m2/"
+
+            }
+        }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:5.+'
         classpath 'org.ajoberstar.grgit:grgit-gradle:3.1.1'
-        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.1-6'
-        classpath "org.spongepowered:mixingradle:0.7-SNAPSHOT"
+        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.2-0'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 
     repositories.each {
@@ -24,6 +33,10 @@ buildscript {
             it.url = "https://maven.minecraftforge.net"
         }
     }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
 apply plugin: 'net.minecraftforge.gradle'
@@ -34,12 +47,13 @@ apply plugin: org.ajoberstar.grgit.gradle.GrgitPlugin
 apply plugin: 'wtf.gofancy.fancygradle'
 apply plugin: "org.spongepowered.mixin"
 
+
 //// Project Settings ////
 // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 
 group = "${project.mod_group}" // groupId
 archivesBaseName = "${project.mod_id}" // artifactId - modid
-version = "${project.mc_version}-" + project.major + "." + project.minor + "." + getPatchNumber() + getStable()
+version = "${project.mc_version}-${project.mod_version}"
 
 //// Project Settings ////
 
@@ -69,11 +83,8 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'info'
 
-            lazyToken("minecraft_classpath") {
-                configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
-            }
-
-            property 'fml.coreMods.load', mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+            // Loads mixins as coremod
+            property 'fml.coreMods.load', 'minefantasy.mfr.mixin.MFRCoreMod'
         }
 
         server {
@@ -84,18 +95,10 @@ minecraft {
             // Recommended logging level for the console
             property 'forge.logging.console.level', 'info'
 
-            lazyToken("minecraft_classpath") {
-                configurations.library.copyRecursive().resolve().collect { it.absolutePath }.join(File.pathSeparator)
-            }
-
-            property 'fml.coreMods.load', mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id)
+            // Loads mixins as coremod
+            property 'fml.coreMods.load', 'minefantasy.mfr.mixin.MFRCoreMod'
         }
     }
-}
-
-configurations {
-    library
-    implementation.extendsFrom library
 }
 
 repositories {
@@ -156,9 +159,17 @@ dependencies {
     implementation fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
     implementation fg.deobf("codechicken:CodeChickenLib:${mc_version}-${ccl_version}:universal")
 
-    library "org.spongepowered:mixin:0.8.5"
-    library "com.google.guava:guava:21.0"
-    //annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
+    implementation("org.spongepowered:mixin:${mixin_version}") {
+        exclude module: "asm-commons"
+        exclude module: "asm-tree"
+        exclude module: "launchwrapper"
+        exclude module: "guava"
+        exclude module: "log4j-core"
+        exclude module: "gson"
+        exclude module: "commons-io"
+    }
+
     //// Dependencies ////
 
     //// Forge examples ////
@@ -183,6 +194,36 @@ dependencies {
 
 }
 
+mixin {
+    defaultObfuscationEnv 'searge'
+    add sourceSets.main, "mixins.refmap.minefantasyreforged.json"
+    config "mixins.minefantasyreforged.json"
+
+}
+
+//ShadowJar
+
+shadowJar {
+    archiveClassifier = ""
+    dependencies {
+        include(dependency("org.spongepowered:mixin:${mixin_version}"))
+    }
+}
+reobf {
+    shadowJar {
+        dependsOn tasks.createMcpToSrg
+        mappings = tasks.createMcpToSrg.outputs.files.singleFile
+    }
+}
+artifacts {
+    archives tasks.shadowJar
+}
+configurations.all {
+    resolutionStrategy {
+        cacheChangingModulesFor 5, 'minutes'
+    }
+}
+
 //// Project manifest data ////
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -199,12 +240,12 @@ jar {
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "Built-On-Java": "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
                 "Built-On": "${project.mc_version}-${project.forge_version}",
-                "FMLCorePlugin": mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id),
-                "FMLCorePluginContainsFMLMod": "false",
+                "FMLCorePlugin": "minefantasy.mfr.mixin.MFRCoreMod",
+                "FMLCorePluginContainsFMLMod": "true",
                 "ForceLoadAsMod": "true",
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder": "0",
-                "MixinConfigs": mod_mixin_configs.replace('${mod_id}', mod_id)
+                "MixinConfigs": "mixins.minefantasyreforged.json"
         ])
     }
 }
@@ -220,43 +261,21 @@ task sourceJar(type: Jar, dependsOn: classes) {
                 "Specification-Vendor": "ThatPolishKid99",
                 "Specification-Version": "1",
                 "Implementation-Title": archivesBaseName + '-sources',
-                "Implementation-Version": "${project.mc_version}-" + project.major + "." + project.minor + "." + getPatchNumber() + getStable(),
+                "Implementation-Version": "${project.mod_version}",
                 "Implementation-Vendor": "ThatPolishKid99",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "Built-On-Java": "${System.getProperty('java.vm.version')} (${System.getProperty('java.vm.vendor')})",
                 "Built-On": "${project.mc_version}-${project.forge_version}",
-                "FMLCorePlugin": mod_core_plugin.replace('${mod_group}', mod_group).replace('${mod_id}', mod_id),
-                "FMLCorePluginContainsFMLMod": "false",
+                "FMLCorePlugin": "minefantasy.mfr.mixin.MFRCoreMod",
+                "FMLCorePluginContainsFMLMod": "true",
                 "ForceLoadAsMod": "true",
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder": "0",
-                "MixinConfigs": mod_mixin_configs.replace('${mod_id}', mod_id)
+                "MixinConfigs": "mixins.minefantasyreforged.json"
         ])
     }
 }
 
-mixin {
-    add sourceSets.main, "refmap.minefantasyreforged.json"
-    config "mixins.minefantasyreforged.json"
-}
-
-def getPatchNumber() {
-    if (System.getenv("BUILD_NUMBER") != null) {
-        return System.getenv("BUILD_NUMBER").toString()
-    }
-    return project.minor
-}
-
-def getStable() {
-    if (isUnstable()) {
-        return "-BETA"
-    }
-    return ""
-}
-
-def isUnstable() {
-    return true;
-}
 //// Project manifest data ////
 
 // Example configuration to allow publishing using the maven-publish task
@@ -264,6 +283,120 @@ def isUnstable() {
 jar.finalizedBy('reobfJar')
 // However if you are in a multi-project build, dev time needs unobfed jar files, so you can delay the obfuscation until publishing by doing
 // publish.dependsOn('reobfJar')
+
+if (System.getenv('USE_ALPHAS').equals('true')) {
+    println 'getenv'
+    task setupGithubActions() {
+        def getVersion = {
+            //TAG-offset-hash
+            def raw = grgit.describe(longDescr: true, tags: true, match: ["${project.mc_version}-[0-9].[0-9].[0-9]", "${project.mc_version}-[0-9][0-9].[0-9][0-9].[0-9][0-9]", "${project.mc_version}-[0-9].[0-9][0-9].[0-9][0-9]", "${project.mc_version}-[0-9].[0-9].[0-9][0-9]", "${project.mc_version}-[0-9].[0-9][0-9].[0-9]", "${project.mc_version}-[0-9][0-9].[0-9].[0-9]"])
+            def desc = (raw == null ? '0.0-0-unknown' : grgit.describe(longDescr: true, tags: true, match: ["${project.mc_version}-[0-9].[0-9].[0-9]", "${project.mc_version}-[0-9][0-9].[0-9][0-9].[0-9][0-9]", "${project.mc_version}-[0-9].[0-9][0-9].[0-9][0-9]", "${project.mc_version}-[0-9].[0-9].[0-9][0-9]", "${project.mc_version}-[0-9].[0-9][0-9].[0-9]", "${project.mc_version}-[0-9][0-9].[0-9].[0-9]"])).split('-') as List
+            def hash = desc.remove(desc.size() - 1)
+            def offset = desc.remove(desc.size() - 1)
+            def tag = desc.join('-')
+            return "${tag}.${offset}".toString().replace("${project.mc_version}-", "") //Bake the response instead of making it dynamic
+        }
+        project.mod_version = getVersion();
+        version = project.mc_version + '-' + getVersion();
+        def getLastTag = {
+            def raw = grgit.describe(longDescr: true, tags: true)
+            def desc = (raw == null ? 'HEAD' : grgit.describe(longDescr: true, tags: true)).split('-') as List
+            desc.remove(desc.size() - 1)
+            desc.remove(desc.size() - 1)
+            def tag = desc.join('-')
+            return tag;
+        }
+        def rawLog = grgit.log(includes: ['HEAD'], excludes: [getLastTag()]);
+        def log = "";
+        for (org.ajoberstar.grgit.Commit commit: rawLog) {
+            log = log + "[`" + commit.abbreviatedId + "`](https://github.com/${project.github}/commit/" + commit.id + ") " + commit.shortMessage + " - " + commit.author.name + "\\n";
+        }
+        doLast {
+            exec {
+                commandLine "echo", "##[set-output name=jar_name;]${project.jar_name}";
+            }
+            if(project.hasProperty('curse_project_id')) {
+                exec {
+                    commandLine "echo", "##[set-output name=curse_project_id;]${project.curse_project_id}";
+                }
+                exec {
+                    commandLine "echo", "##[set-output name=curse_versions;]${project.curse_versions}";
+                }
+                if(project.hasProperty('curse_relations')) {
+                    exec {
+                        commandLine "echo", "##[set-output name=curse_relations;]${project.curse_relations}";
+                    }
+                }
+            }
+            exec {
+                commandLine "echo", "##[set-output name=version;]${project.version}";
+            }
+            exec {
+                commandLine "echo", "##[set-output name=name;]${project.name}";
+            }
+            exec {
+                commandLine "echo", "##[set-output name=url;]${project.url}";
+            }
+            exec {
+                commandLine "echo", "##[set-output name=commitlog;]" + "{\"content\":\"" + (project.hasProperty('hook_content') ? project.hook_content : "") + "\",\"embeds\":[{\"author\":{\"name\":\"WinDanesz\",\"url\":\"https://www.curseforge.com/minecraft/mc-mods/ancient-spellcraft\",\"icon_url\":\"https://avatars.githubusercontent.com/u/31292708?s=48&v=4\"},\"title\":\"${project.mod_id}-alpha-${project.version}\",\"url\":\"https://github.com/${project.github}/releases/tag/alpha-${project.version}\",\"color\":14700288,\"description\":\"" + log + "\"}]}";
+            }
+        }
+    }
+} else {
+    task setupGithubActions() {
+        doLast {
+            exec {
+                commandLine "echo", "##[set-output name=jar_name;]${project.jar_name}";
+            }
+            if(project.hasProperty('curse_project_id')) {
+                exec {
+                    commandLine "echo", "##[set-output name=curse_project_id;]${project.curse_project_id}";
+                }
+                exec {
+                    commandLine "echo", "##[set-output name=curse_versions;]${project.curse_versions}";
+                }
+                if(project.hasProperty('curse_relations')) {
+                    exec {
+                        commandLine "echo", "##[set-output name=curse_relations;]${project.curse_relations}";
+                    }
+                }
+            }
+            exec {
+                commandLine "echo", "##[set-output name=version;]${project.version}";
+            }
+            exec {
+                commandLine "echo", "##[set-output name=name;]${project.name}";
+            }
+            exec {
+                commandLine "echo", "##[set-output name=url;]${project.url}";
+            }
+        }
+    }
+    version = "${project.mc_version}-${project.mod_version}"
+}
+
+processResources {
+    // this will ensure that this task is redone when the versions change.
+    inputs.property "version", version.toString()
+    inputs.property "mc_version", project.mc_version.toString()
+
+
+    // replace tokens in mcmod.info, and pack.mcmeta
+    from(sourceSets.main.resources.srcDirs) {
+        include 'pack.mcmeta'
+        include 'mcmod.info'
+        // replace tokens in mcmod.info
+        expand 'version': version.toString(),
+                'mc_version': project.mc_version.toString(),
+                'mod_id': project.mod_id,
+                'name': project.name,
+                'description': project.description,
+                'url': project.url,
+                'update_url': project.update_url
+    }
+
+    duplicatesStrategy = 'include'
+}
 
 // replace @TOKENS@ in main file
 task replaceTokens(type: Sync) {
@@ -285,11 +418,5 @@ fancyGradle {
         codeChickenLib
         coremods
         asm
-    }
-}
-
-afterEvaluate {
-    configurations.compileClasspath.resolvedConfiguration.firstLevelModuleDependencies.each { dep ->
-        dependencies.annotationProcessor([group: dep.moduleGroup, name: dep.moduleName, version: dep.moduleVersion])
     }
 }

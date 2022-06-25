@@ -233,7 +233,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		if (item.getCount() != 0 && !item.isEmpty()) {
 			EntityItem entityitem = new EntityItemHeated(world, pos.getX() + 0.5D, pos.getY() + 1.25F, pos.getZ() + 0.5D, item);
 			entityitem.setPickupDelay(10);
-			entityitem.setCustomNameTag("bloomery");
+			item.getTagCompound().setBoolean("bloomery", true);
 			world.spawnEntity(entityitem);
 			entityitem.motionX = entityitem.motionY = entityitem.motionZ = 0;
 			return entityitem;

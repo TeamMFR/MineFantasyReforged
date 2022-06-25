@@ -6,7 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
@@ -50,7 +49,7 @@ public abstract class PacketMF {
 		execute();
 	}
 
-	static PacketMF readPacket(ByteBuf data) throws IOException {
+	static PacketMF readPacket(ByteBuf data) {
 		PacketMF pkt = readHeaderFromStream(data);
 		pkt.readFromStream(data);
 		return pkt;

@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.archery;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 public interface IFirearm {
@@ -11,4 +12,6 @@ public interface IFirearm {
 	 * @param ammo   the ammo type that weapon is being loaded with
 	 */
 	boolean canAcceptAmmo(ItemStack weapon, String ammo);
+
+	void reloadFirearm(EntityPlayer player);
 }

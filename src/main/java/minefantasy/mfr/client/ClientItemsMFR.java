@@ -16,7 +16,7 @@ public class ClientItemsMFR {
 		if (GameSettings.isKeyDown(Minecraft.getMinecraft().gameSettings.keyBindSneak)) {
 			return true;
 		} else {
-			String keyname = Keyboard.getKeyName(Minecraft.getMinecraft().gameSettings.keyBindSneak.getKeyCode());
+			String keyname = Keyboard.getKeyName(Keyboard.KEY_LSHIFT);
 			list.add(I18n.format("info.tooltip.moreinfo", keyname.toUpperCase()));
 			return false;
 		}

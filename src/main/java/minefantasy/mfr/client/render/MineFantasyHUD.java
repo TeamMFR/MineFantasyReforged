@@ -277,7 +277,7 @@ public class MineFantasyHUD extends Gui {
 		ItemStack held = player.getHeldItemMainhand();
 		if (!held.isEmpty() && (held.getItem() instanceof IDisplayMFRAmmo)) {
 			ItemStack arrow = AmmoMechanics.getAmmo(held);
-			String text = MineFantasyKeybindings.BOW_MENU.isSetToDefaultValue() ? I18n.format("info.bow.reload") : I18n.format("info.bow.reload_custom", MineFantasyKeybindings.BOW_MENU.getDisplayName());
+			String text = MineFantasyKeybindings.RELOAD_MENU.isSetToDefaultValue() ? I18n.format("info.bow.reload") : I18n.format("info.bow.reload_custom", MineFantasyKeybindings.RELOAD_MENU.getDisplayName());
 			if (!arrow.isEmpty()) {
 				text = arrow.getDisplayName() + " x" + arrow.getCount();
 			}

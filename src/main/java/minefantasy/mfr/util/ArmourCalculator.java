@@ -67,6 +67,10 @@ public class ArmourCalculator {
 	public static float slowRate = 1.0F;
 	public static boolean useConfigIndirectDmg = true;
 
+	static {
+		PlayerData.registerStoredVariables(WORN_WEIGHT_KEY, WORN_WEIGHT_NS_KEY);
+	}
+
 	/**
 	 * Gets the default using the items ArmourClass
 	 */

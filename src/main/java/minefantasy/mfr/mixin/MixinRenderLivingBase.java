@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 
 @SideOnly(Side.CLIENT)
-@Mixin(value = RenderLivingBase.class, remap = false)
+@Mixin(value = RenderLivingBase.class)
 public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends Render<T> {
 
 	protected MixinRenderLivingBase(RenderManager renderManager) {
@@ -28,7 +28,7 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
 		 * Modified: Args for limbSwingAmount and LimbSwing in the method RenderModel(T entitylivingbaseIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor)
 		 * 		are modified to account for shouldRiderSit() returning false.
 	 */
-	@ModifyArgs(method = {"doRender(Lnet/minecraft/entity/EntityLivingBase;DDDFF)V"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/RenderLivingBase;renderModel(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V", ordinal = 1))
+	@ModifyArgs(method = {"doRender*"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/RenderLivingBase;renderModel(Lnet/minecraft/entity/EntityLivingBase;FFFFFF)V", ordinal = 1))
 	private void setRenderModelArgs(Args args) {
 		EntityLivingBase entity = args.get(0);
 		float limbSwing;

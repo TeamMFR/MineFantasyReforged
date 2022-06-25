@@ -87,7 +87,7 @@ public class Utils {
 	public static void storeTagSafely(NBTTagCompound compound, String key, NBTBase tag){
 
 		if(compound == tag || deepContains(tag, compound)){
-			MineFantasyReforged.LOG.error("Cannot store tag of type {} under key '{}' as it would result in a circular reference! Please report this (including your full log) to wizardry's issue tracker.",
+			MineFantasyReforged.LOG.error("Cannot store tag of type {} under key '{}' as it would result in a circular reference! Please report this (including your full log) to MFR's issue tracker.",
 					NBTBase.getTypeName(tag.getId()), key);
 		}else{
 			compound.setTag(key, tag);
