@@ -28,11 +28,8 @@ jobs:
             requesting
             request
             1.12.2
-            spell
             wizardry
             spellcraft
-            reforged
-            minefantasy
           state: all
           threshold: 0.5
           comment: |

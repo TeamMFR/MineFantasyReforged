@@ -1,0 +1,134 @@
+name: 'Create And Publish Release'
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+
+jobs:
+
+  generate_changelog:
+    name: Build > Create and Commit Changelog > Publish
+    #needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # build:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Build
+        run: 'chmod 777 gradlew'
+
+      - name: Build with Gradle
+        id: build
+        env: {USE_ALPHAS: false}
+        run: './gradlew setupGithubActions build --max-workers=1'
+
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
+
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          draft: false
+          name: ${{ github.ref_name }}
+          body: ${{ steps.changelog.outputs.changes }}
+          token: ${{ github.token }}
+
+      - name: Update main CHANGELOG.md
+        id: changelog
+        uses: Requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+
+      - name: Generate Curseforge Changelog
+        id: changelog-generator
+        uses: Helmisek/conventional-changelog-generator@v1.0.6-release
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-types: "fix:Bug Fixes,feat:Features,refactor:Refactoring"
+          template-path: ".github/workflows/CURSEFORGE_CHANGELOG.tpl.md"
+          current-tag: ${{ steps.get_version.outputs.VERSION }}
+      - name: Write curseforge changelog to file
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ${{ github.workspace }}/.github/CURSEFORGE_CHANGELOG.md
+          contents: |
+            ${{steps.changelog-generator.outputs.changelog}}
+          write-mode: overwrite
+
+      - name: "Upload Release to CurseForge"
+        id: publish
+        uses: itsmeow/curseforge-upload@master
+        with:
+          changelog: "${{steps.changelog-generator.outputs.changelog}}"
+          changelog_type: html
+          # display_name: use the filename
+          file_path: "build/libs/${{ steps.build.outputs.jar_name }}-${{ steps.build.outputs.version }}.jar"
+          game_endpoint: minecraft
+          relations: "${{ steps.build.outputs.curse_relations }}"
+          game_versions: "${{ steps.build.outputs.curse_versions }}"
+          project_id: "${{ steps.build.outputs.curse_project_id }}"
+          release_type: release
+          token: "${{ secrets.CURSEFORGE_API_TOKEN }}"
+
+      - name: Update ./forge/update.json latest version
+        uses: jossef/action-set-json-field@v1
+        with:
+          file: ${{ github.workspace }}/.forge/update.json
+          field: promos.'1.12.2-latest'
+          value: ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Update ./forge/update.json recommended version
+        uses: jossef/action-set-json-field@v1
+        with:
+          file: ${{ github.workspace }}/.forge/update.json
+          field: promos.'1.12.2-recommended'
+          value: ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Commit Changelogs and update.json
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: 1.12.2
+          commit_message: 'docs: update changelogs for ${{ github.ref_name }}'
+
+      - name: Generate Discord Announcement With Changelog
+        id: discord-changelog-generator
+        uses: Helmisek/conventional-changelog-generator@v1.0.6-release
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-types: "fix:Bug Fixes,feat:Features,refactor:Refactoring"
+          template-path: ".github/workflows/DISCORD_CHANGELOG.tpl.md"
+          current-tag: ${{ steps.get_version.outputs.VERSION }}
+
+      - name: Write Discord Announcement to File
+        uses: DamianReeves/write-file-action@master
+        with:
+          path: ${{ github.workspace }}/.github/DISCORD_ANNOUNCEMENT.txt
+          contents: |
+            ${{steps.discord-changelog-generator.outputs.changelog}}
+          write-mode: overwrite
+
+      - name: Replace Tokens in Discord Announcement
+        uses: cschleiden/replace-tokens@v1
+        with:
+          files: ${{ github.workspace }}/.github/DISCORD_ANNOUNCEMENT.txt
+        env:
+          MOD_NAME: "${{ steps.build.outputs.name }}"
+          URL: "${{ steps.build.outputs.url }}"
+          FILE_ID: "${{ steps.publish.outputs.id }}"
+
+      - name: Read Discord Announcement From File
+        id: announcement-content
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ${{ github.workspace }}/.github/DISCORD_ANNOUNCEMENT.txt
+
+      - name: Discord Webhook Action
+        uses: tsickert/discord-webhook@v4.0.0
+        with:
+          webhook-url: ${{ secrets.DISCORD_ANNOUNCER_WEBHOOK }}
+          content: "${{ steps.announcement-content.outputs.content }}"
