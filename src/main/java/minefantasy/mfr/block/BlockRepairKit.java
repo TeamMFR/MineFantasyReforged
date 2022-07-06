@@ -106,13 +106,14 @@ public class BlockRepairKit extends Block implements IClientRegister {
 	}
 
 	private boolean canRepair(ItemStack held) {
-		if (held.isEmpty())
+		if (held.isEmpty()) {
 			return false;
+		}
 		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != CustomMaterial.NONE)// Custom Tool
 		{
 			return held.isItemDamaged();
 		}
-		return held.getItem().isRepairable();
+		return held.getItem().isRepairable() && held.getItem().getXpRepairRatio(held) > 0;
 	}
 
 	@Override
