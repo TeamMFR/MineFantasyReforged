@@ -35,8 +35,8 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 
 		// JEI requires empty stacks in the missing slots, and our recipes are shrinked by default so we must expand them first to the full grid size
 		List<ItemStack> expandedList = RecipeHelper.expandPattern(Arrays.asList(recipe.recipeItems), recipe.recipeWidth, recipe.recipeHeight, 6, 4);
-		for (int i = 0; i < 20; i++) {
-			this.ingredients.add(Collections.singletonList(expandedList.get(i)));
+		for (ItemStack itemStack : expandedList) {
+			this.ingredients.add(Collections.singletonList(itemStack));
 		}
 	}
 
@@ -73,7 +73,7 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 
 			for (int j = 0; j < ingredients.size(); j++) {
 				ItemStack stack = (ingredients.get(j).get(0));
-				if (stack != null && Heatable.canHeatItem(ingredients.get(j).get(0))) {
+				if (stack != null && !stack.isEmpty() && Heatable.canHeatItem(ingredients.get(j).get(0))) {
 					GuiHelper.drawHotItemIcon(minecraft, ingredientMap.get(j).keySet().iterator().next(), ingredientMap.get(j).values().iterator().next());
 				}
 			}

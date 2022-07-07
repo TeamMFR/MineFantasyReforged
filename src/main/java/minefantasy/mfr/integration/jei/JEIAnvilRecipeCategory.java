@@ -81,7 +81,6 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 
 		// Init ingredient slots, 5x4 grid
-		System.out.println("start");
 
 		int width = 6;
 		int height = 4;
@@ -93,14 +92,14 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 		}
 
 		// Init output slot
-		slots.init(20, false, 143, 28);
+		slots.init(25, false, 143, 28);
 
 		// Assign ingredients to slots
 		for (int j = 0; j < inputs.size(); j++)
 			slots.set(j, inputs.get(j));
 		// Assign outputs to slot
 		for (int k = 0; k < outputs.size(); k++)
-			slots.set(20, outputs.get(k));
+			slots.set(25, outputs.get(k));
 	}
 
 	/**
