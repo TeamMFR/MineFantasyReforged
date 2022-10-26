@@ -2,7 +2,7 @@
     {
         "mod_id": "${mod_id}",
         "name": "${name}",
-        "description": "${description}",
+        "description": "A medieval-fantasy themed soft total conversion, focused around the themes of Blacksmithing and Medieval Combat",
         "version": "${version}",
         "mc_version": "${mc_version}",
         "url": "${url}",

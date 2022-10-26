@@ -245,7 +245,8 @@ jar {
                 "ForceLoadAsMod": "true",
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder": "0",
-                "MixinConfigs": "mixins.minefantasyreforged.json"
+                "MixinConfigs": "mixins.minefantasyreforged.json",
+                "FMLAT": "minefantasyreforged_at.cfg"
         ])
     }
 }
@@ -271,7 +272,8 @@ task sourceJar(type: Jar, dependsOn: classes) {
                 "ForceLoadAsMod": "true",
                 "TweakClass": "org.spongepowered.asm.launch.MixinTweaker",
                 "TweakOrder": "0",
-                "MixinConfigs": "mixins.minefantasyreforged.json"
+                "MixinConfigs": "mixins.minefantasyreforged.json",
+                "FMLAT": "minefantasyreforged_at.cfg"
         ])
     }
 }
