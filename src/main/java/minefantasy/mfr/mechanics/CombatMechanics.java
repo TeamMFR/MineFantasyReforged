@@ -216,8 +216,10 @@ public class CombatMechanics {
 		float bulk = ArmourCalculator.getTotalBulk(user);
 		int cost = (int) ((type == 0 ? 15 : 10) * (bulk + 1));// Medium armour cost 2x more
 		if (user.getHeldItemOffhand().getItem() instanceof ItemShield){
-			cost += 100; //ToDo: Add Config option for shield dodge cost
+			cost += ConfigStamina.dodgeShieldCost;
 		}
+
+		cost *= ConfigStamina.dodgeCostModifier;
 
 		if (bulk <= 1.0F && ItemWeaponMFR.tryPerformAbility(user, cost)) {
 			float force = 1.0F - (bulk * 0.25F);// Medium armour gives 75%
@@ -229,7 +231,7 @@ public class CombatMechanics {
 				direction -= 90;// LEFT
 			if (type == -1)
 				direction += 90;// RIGHT
-			TacticalManager.leap(user, direction, force, 0.0F);
+			TacticalManager.leap(user, direction, force * ConfigStamina.dodgeForceModifier, 0.0F);
 		}
 	}
 

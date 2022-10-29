@@ -26,6 +26,7 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -331,11 +332,14 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	@Override
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
 		if (entityLiving instanceof EntityPlayer) {
+			PlayerData data = PlayerData.get((EntityPlayer) entityLiving);
+			float balance = data.getVariable(PlayerTickHandler.BALANCE_PITCH_KEY);
+
 			if (!allowOffhand(entityLiving, EnumHand.OFF_HAND)) {
 				if (entityLiving.isRiding() && entityLiving.getRidingEntity() instanceof EntityCogwork) {
 					return false;
 				}
-				if (!entityLiving.world.isRemote) {
+				if (!entityLiving.world.isRemote && balance == 0) {
 					entityLiving.sendMessage(new TextComponentTranslation("info.offBalance.message"));
 				}
 				TacticalManager.throwPlayerOffBalance((EntityPlayer) entityLiving, 5F);

@@ -54,6 +54,8 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	private float fatAccumulation = 0;
 	private int useTime = 32;
 
+	private Item returnItem;
+
 	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat) {
 		super(hunger, saturation, isMeat);
 
@@ -73,6 +75,11 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat, int rarity) {
 		this(name, hunger, saturation, isMeat);
 		itemRarity = rarity;
+	}
+
+	public ItemFoodMFR setReturnItem(Item item) {
+		this.returnItem = item;
+		return this;
 	}
 
 	public static void onTick(EntityPlayer player) {
@@ -302,10 +309,6 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 		return MineFantasyItems.RARITY[lvl];
 	}
 
-	public ItemFoodMFR setReturnItem(Item item) {
-		return this;
-	}
-
 	@Override
 	public ItemStack onItemUseFinish(ItemStack food, World world, EntityLivingBase consumer) {
 		if (consumer instanceof EntityPlayer) {
@@ -322,6 +325,10 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 				}
 			} else {
 				food.shrink(1);
+			}
+
+			if (returnItem != null) {
+				return new ItemStack(returnItem);
 			}
 		}
 

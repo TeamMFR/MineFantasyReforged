@@ -61,6 +61,7 @@ public class ItemHammer extends ItemTool implements IToolMaterial, IToolMFR, IDa
 		this.tier = tier;
 		setRegistryName(name);
 		setTranslationKey(name);
+		setHarvestLevel("hammer", toolMaterial.getHarvestLevel());
 
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}

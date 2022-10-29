@@ -12,7 +12,6 @@ import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.client.render.item.RenderCrossbow;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.AmmoMechanics;
@@ -98,7 +97,7 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World world, EntityPlayer player, EnumHand hand) {
 		ItemStack stack = player.getHeldItem(hand);
-		if (world.isRemote && MineFantasyKeybindings.RELOAD_MENU.isKeyDown() || AmmoMechanics.isDepleted(stack)) {
+		if (AmmoMechanics.isDepleted(stack)) {
 			reloadFirearm(player);
 			return ActionResult.newResult(EnumActionResult.FAIL, stack);
 		}
@@ -239,6 +238,7 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag fullInfo) {
 		super.addInformation(item, world, list, fullInfo);
 
@@ -250,6 +250,8 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 		list.add(I18n.format("attribute.crossbow.bash.name", getMeleeDmg(item)));
 	}
 
+	@Override
+	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String base = getNameModifier(item, "stock");
 		String arms = getNameModifier(item, "mechanism");

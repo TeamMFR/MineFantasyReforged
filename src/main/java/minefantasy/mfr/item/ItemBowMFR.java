@@ -7,7 +7,6 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBow;
-import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
@@ -241,7 +240,7 @@ public class ItemBowMFR extends ItemBow implements ISpecialBow, IDisplayMFRAmmo,
 		ItemStack bow = player.getHeldItem(hand);
 		final boolean hasAmmo = !AmmoMechanics.isDepleted(bow);
 
-		if (world.isRemote && MineFantasyKeybindings.RELOAD_MENU.isKeyDown() || AmmoMechanics.isDepleted(bow)) {
+		if (AmmoMechanics.isDepleted(bow)) {
 			reloadFirearm(player);
 			return ActionResult.newResult(EnumActionResult.FAIL, bow);
 		}
