@@ -694,7 +694,7 @@ public class MineFantasyKnowledgeList {
 				}
 			}
 			add(craft_armour_medium, Items.LEATHER);
-			add(craft_armour_heavy, Items.LEATHER, Blocks.WOOL, Items.FEATHER);
+			add(craft_armour_heavy, Items.LEATHER, MineFantasyItems.PLATE, Blocks.WOOL);
 			add(smelt_dragonforged, MineFantasyItems.DRAGON_HEART);
 
 			add(craft_ornate, new ItemStack(Items.DYE, 1, 4));

@@ -138,7 +138,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 	}
 
 	@Override
-	public float getEfficiency(ItemStack item) {
+	public float getEfficiency(ItemStack item)  	 {
 		return CustomToolHelper.getEfficiency(item, material.getEfficiency(), efficiencyMod);
 	}
 

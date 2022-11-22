@@ -387,7 +387,7 @@ public final class MFREventHandler {
 				alterDrops(dropper, event);
 			}
 		}
-		if (getRegisterName(dropper).contains("Horse")) {
+		if (getRegisterName(dropper).contains("Horse") && !dropper.isEntityUndead()) {
 			int dropCount = random.nextInt(3 + event.getLootingLevel());
 			if (ConfigHardcore.lessHunt) {
 				dropCount = 1 + random.nextInt(event.getLootingLevel() + 1);

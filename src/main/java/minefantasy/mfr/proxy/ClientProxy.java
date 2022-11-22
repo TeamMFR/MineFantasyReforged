@@ -25,7 +25,6 @@ import minefantasy.mfr.client.render.entity.RenderHound;
 import minefantasy.mfr.client.render.entity.RenderMine;
 import minefantasy.mfr.client.render.entity.RenderMinotaur;
 import minefantasy.mfr.client.render.entity.RenderParachute;
-import minefantasy.mfr.client.render.entity.RenderPlayerBlockingLayer;
 import minefantasy.mfr.client.render.entity.RenderPowerArmour;
 import minefantasy.mfr.client.render.entity.RenderShrapnel;
 import minefantasy.mfr.client.render.entity.RenderSmoke;
@@ -91,7 +90,6 @@ public class ClientProxy extends ClientProxyBase {
 	@Override
 	public void postInit() {
 		super.postInit();
-		RenderPlayerBlockingLayer.replaceHeldItemLayer();
 	}
 
 	/**

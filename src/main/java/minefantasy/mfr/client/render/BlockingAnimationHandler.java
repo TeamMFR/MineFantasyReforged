@@ -20,7 +20,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * Author Credit: Fuzs_ in the Golden Age Combat mod/Sword Blocking Mechanics mod
- * Github Link: https://github.com/Fuzss/swordblockingmechanics/tree/1.12
+ * Github Link: <a href="https://github.com/Fuzss/swordblockingmechanics/tree/1.12">https://github.com/Fuzss/swordblockingmechanics/tree/1.12</a>
  * Modified and used under the free use public license, thank you so much to Fuzs_!
  */
 

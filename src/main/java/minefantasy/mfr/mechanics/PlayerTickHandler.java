@@ -3,7 +3,7 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.stamina.CustomFoodEntry;
-import minefantasy.mfr.config.ConfigArmour;
+import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigSpecials;
@@ -330,7 +330,7 @@ public class PlayerTickHandler {
 		}
 		else {
 			MineFantasyReforged.LOG.debug("Weight: " + ArmourCalculator.getTotalWeightOfWorn(player, false));
-			if (ConfigArmour.armorSounds && ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50) {
+			if (ConfigClient.playArmorSound && ArmourCalculator.getTotalWeightOfWorn(player, false) >= 50) {
 				player.playSound(SoundEvents.ENTITY_IRONGOLEM_ATTACK, 1.0F, 1.0F);
 			}
 		}

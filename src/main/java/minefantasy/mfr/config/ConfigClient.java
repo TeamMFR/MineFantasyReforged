@@ -5,17 +5,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ConfigClient extends ConfigurationBaseMF {
-	public static final String CATEGORY_GUI = "Gui/Hud Features";
 
 	public static final String CATEGORY_AESTHETIC = "Aesthetics";
 	public static final String GUI_STAMINA = "Stamina Bar Positioning";
 	public static final String GUI_ARATING = "Armour Rating Positioning";
 	public static final String GUI_ACOUNT = "Arrow Count Positioning";
 	public static final String GUI_CAFUEL = "Clockwork Armour Fuel Positioning";
-	public static final String CATEGORY_BLOCK = "Block Render Ids";
 	public static final String CATEGORY_DEBUG = "Debug Info";
+	public static final String CATEGORY_SOUND = "Sound Settings";
 	public static boolean playBreath;
 	public static boolean playHitsound;
+	public static boolean playArmorSound;
 	public static boolean customModel;
 	public static int stam_xOrient;
 	public static int stam_yOrient;
@@ -38,11 +38,19 @@ public class ConfigClient extends ConfigurationBaseMF {
 
 	@Override
 	protected void loadConfig() {
-		playBreath = Boolean.parseBoolean(config.get(CATEGORY_AESTHETIC, "Make Breathe Sound", true,
+		playBreath = Boolean.parseBoolean(config.get(CATEGORY_SOUND, "Make Breathe Sound", true,
 				"[With Stamina System] Plays breath sounds when low on energy(sound may be annoying to some...)")
 				.getString());
-		playHitsound = Boolean.parseBoolean(config.get(CATEGORY_AESTHETIC, "Make Hit Sound", true,
+		playHitsound = Boolean.parseBoolean(config.get(CATEGORY_SOUND, "Make Hit Sound", true,
 				"Plays sounds when hitting entities with different items").getString());
+		playHitsound = Boolean.parseBoolean(config.get(CATEGORY_SOUND, "Make Hit Sound", true,
+				"Plays sounds when hitting entities with different items").getString());
+
+		playArmorSound = Boolean.parseBoolean(config.get(CATEGORY_SOUND, "Armor Sounds", true,
+						"Should armor make sounds when over 50kg in weight")
+				.getString());
+
+
 		customModel = Boolean
 				.parseBoolean(config
 						.get(CATEGORY_AESTHETIC, "Custom Apparel Model", true,

@@ -2,10 +2,11 @@
   "required": true,
   "package": "minefantasy.mfr.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "mixins.refmap.minefantasyreforged.json",
+  "refmap": "mixins.minefantasyreforged.refmap.json",
   "mixins": [],
   "client": [
-    "MixinRenderLivingBase"
+      "MixinLayerHeldItem",
+      "MixinRenderLivingBase"
   ],
   "minVersion": "0.8"
 }

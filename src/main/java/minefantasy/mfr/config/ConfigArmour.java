@@ -5,11 +5,9 @@ import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.TacticalManager;
 
 public class ConfigArmour extends ConfigurationBaseMF {
-	public static final String CATEGORY_GENERAL = "General";
 	public static final String CATEGORY_BONUS = "Bonuses";
 	public static final String CATEGORY_PENALTIES = "Penalties";
 	public static final String CATEGORY_COGWORK = "Cogwork Features";
-	public static boolean armorSounds;
 	public static boolean resistArrow;
 	public static boolean cogworkGrief;
 	public static boolean cogworkJump;
@@ -17,9 +15,6 @@ public class ConfigArmour extends ConfigurationBaseMF {
 
 	@Override
 	protected void loadConfig() {
-		armorSounds = Boolean.parseBoolean(config.get(CATEGORY_GENERAL, "Armor Sounds", true,
-						"Should armor make sounds when over 50kg in weight")
-				.getString());
 		resistArrow = Boolean.parseBoolean(config.get(CATEGORY_BONUS, "Deflect Arrows", true,
 				"With this option; arrows have a chance to deflect off armour. It compares the arrow damage and armour rating. Chain and plate have higher rates. Arrows bounced off can hurt enemies")
 				.getString());

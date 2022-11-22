@@ -90,8 +90,9 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 		final TileEntityBlastHeater tile = (TileEntityBlastHeater) getTile(world, pos);
 		if (tile != null) {
 			if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.blast_furnace)) {
-				if (!world.isRemote)
+				if (!world.isRemote && hand == player.getActiveHand()) {
 					player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
+				}
 				return false;
 			}
 		}
