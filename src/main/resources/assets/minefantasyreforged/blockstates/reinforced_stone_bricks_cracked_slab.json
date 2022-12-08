@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/reinforced_stone_bricks_cracked",
+            "side": "minefantasyreforged:blocks/reinforced_stone_bricks_cracked",
+            "top": "minefantasyreforged:blocks/reinforced_stone_bricks_cracked",
+            "bottom": "minefantasyreforged:blocks/reinforced_stone_bricks_cracked",
+            "particle": "minefantasyreforged:blocks/reinforced_stone_bricks_cracked"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

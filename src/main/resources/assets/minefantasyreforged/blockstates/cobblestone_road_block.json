@@ -1,0 +1,12 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/cobblestone_road"
+        },
+        "model": "cube_all"
+    },
+    "variants": {
+        "normal": [{}]
+    }
+}

@@ -15,6 +15,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -70,12 +71,15 @@ public class ItemHide extends ItemBaseMFR {
 	private void tryClean(ItemStack item, World world, EntityPlayer player, BlockPos pos, EnumHand hand) {
 		player.swingArm(hand);
 		if (!world.isRemote) {
-			world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + world.rand.nextFloat() / 4F, 0.5F + world.rand.nextFloat());
 			if (world.rand.nextFloat() * 2 * hardness < 1.0F) {
 				item.shrink(1);
 				EntityItem resultItem = new EntityItem(world, player.posX, player.posY, player.posZ, new ItemStack(result));
 				world.spawnEntity(resultItem);
 			}
+		}
+		world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + world.rand.nextFloat() / 4F, 0.5F + world.rand.nextFloat());
+		for (int a = 0; a < 5; a++) {
+			world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, pos.getX() + world.rand.nextInt(2), pos.getY() + world.rand.nextInt(2), pos.getZ() + world.rand.nextInt(2), 0, 0.065F + world.rand.nextInt(a + 1), 0);
 		}
 	}
 

@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/mud_road",
+            "side": "minefantasyreforged:blocks/mud_road",
+            "top": "minefantasyreforged:blocks/mud_road",
+            "bottom": "minefantasyreforged:blocks/mud_road",
+            "particle": "minefantasyreforged:blocks/mud_road"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

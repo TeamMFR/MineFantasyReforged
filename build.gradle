@@ -89,16 +89,6 @@ minecraft {
 
 repositories {
     maven {
-        name 'Curseforge Maven'
-        url 'https://minecraft.curseforge.com/api/maven/'
-    }
-    maven {
-        url 'https://maven.blamejared.com'
-    }
-    maven {
-        url "https://www.cursemaven.com"
-    }
-    maven {
         url = "https://chickenbones.net/maven"
     }
     maven {
@@ -141,7 +131,6 @@ dependencies {
 
     //// Dependencies ////
 
-    //runtime "curse.maven:jei-${jei_projectid}:${jei_fileid}"
     implementation fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
     implementation fg.deobf("codechicken:CodeChickenLib:${mc_version}-${ccl_version}:universal")
     implementation fg.deobf ("zone.rong:mixinbooter:5.0")

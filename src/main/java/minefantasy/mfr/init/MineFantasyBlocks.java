@@ -44,6 +44,7 @@ import minefantasy.mfr.block.BlockRoast;
 import minefantasy.mfr.block.BlockSalvage;
 import minefantasy.mfr.block.BlockSaplingMF;
 import minefantasy.mfr.block.BlockSchematic;
+import minefantasy.mfr.block.BlockSlab;
 import minefantasy.mfr.block.BlockTanningRack;
 import minefantasy.mfr.block.BlockTileEntity;
 import minefantasy.mfr.block.BlockTrough;
@@ -116,10 +117,16 @@ public class MineFantasyBlocks {
 	public static Block COAL_RICH_ORE = Utils.nullValue();
 
 	public static Block MUD_BRICK = Utils.nullValue();
+	public static Block MUD_BRICK_SLAB = Utils.nullValue();
 	public static Block MUD_ROAD = Utils.nullValue();
+	public static Block MUD_ROAD_BLOCK = Utils.nullValue();
+	public static Block MUD_ROAD_BLOCK_SLAB = Utils.nullValue();
 
 	public static Block COBBLE_BRICK = Utils.nullValue();
+	public static Block COBBLE_BRICK_SLAB = Utils.nullValue();
 	public static Block COBBLESTONE_ROAD = Utils.nullValue();
+	public static Block COBBLESTONE_ROAD_BLOCK = Utils.nullValue();
+	public static Block COBBLESTONE_ROAD_BLOCK_SLAB = Utils.nullValue();
 
 	public static Block WINDOW = Utils.nullValue();
 	public static Block FRAMED_GLASS = Utils.nullValue();
@@ -127,18 +134,29 @@ public class MineFantasyBlocks {
 	public static Block WINDOW_PANE = Utils.nullValue();
 
 	public static Block THATCH = Utils.nullValue();
+	public static Block THATCH_SLAB = Utils.nullValue();
 	public static Block THATCH_STAIR = Utils.nullValue();
 
 	public static Block LIMESTONE = Utils.nullValue();
+	public static Block LIMESTONE_SLAB = Utils.nullValue();
 	public static Block LIMESTONE_COBBLE = Utils.nullValue();
+	public static Block LIMESTONE_COBBLE_SLAB = Utils.nullValue();
 	public static Block LIMESTONE_BRICK = Utils.nullValue();
+	public static Block LIMESTONE_BRICK_SLAB = Utils.nullValue();
 	public static Block LIMESTONE_ROAD = Utils.nullValue();
+	public static Block LIMESTONE_ROAD_BLOCK = Utils.nullValue();
+	public static Block LIMESTONE_ROAD_BLOCK_SLAB = Utils.nullValue();
 	public static Block LIMESTONE_STAIRS = Utils.nullValue();
 	public static Block LIMESTONE_COBBLE_STAIRS = Utils.nullValue();
 	public static Block LIMESTONE_BRICK_STAIRS = Utils.nullValue();
 
 	public static Block FIREBRICKS = Utils.nullValue();
+	public static Block FIREBRICKS_SLAB = Utils.nullValue();
 	public static Block CLAY_WALL = Utils.nullValue();
+	public static Block CLAY_WALL_SLAB = Utils.nullValue();
+	public static Block CLAY_WALL_CROSS = Utils.nullValue();
+	public static Block CLAY_WALL_RIGHT_DIAGONAL = Utils.nullValue();
+	public static Block CLAY_WALL_LEFT_DIAGONAL = Utils.nullValue();
 
 	public static BlockMetalBarsMF IRON_BARS = Utils.nullValue();
 	public static BlockMetalBarsMF BRONZE_BARS = Utils.nullValue();
@@ -218,19 +236,25 @@ public class MineFantasyBlocks {
 	public static BlockTileEntity<TileEntityBellows> BELLOWS = Utils.nullValue();
 
 	public static Block REFINED_PLANKS = Utils.nullValue();
+	public static Block REFINED_PLANKS_SLAB = Utils.nullValue();
 	public static Block NAILED_PLANKS = Utils.nullValue();
+	public static Block NAILED_PLANKS_SLAB = Utils.nullValue();
 	public static Block REFINED_PLANKS_STAIR = Utils.nullValue();
 	public static Block NAILED_PLANKS_STAIR = Utils.nullValue();
 
 	public static Block REINFORCED_STONE = Utils.nullValue();
+	public static Block REINFORCED_STONE_SLAB = Utils.nullValue();
 	public static Block REINFORCED_STONE_ENGRAVED_0 = Utils.nullValue();
 	public static Block REINFORCED_STONE_ENGRAVED_1 = Utils.nullValue();
 	public static Block REINFORCED_STONE_ENGRAVED_2 = Utils.nullValue();
 	public static Block REINFORCED_STONE_ENGRAVED_3 = Utils.nullValue();
 
 	public static Block REINFORCED_STONE_BRICKS = Utils.nullValue();
+	public static Block REINFORCED_STONE_BRICKS_SLAB = Utils.nullValue();
 	public static Block REINFORCED_STONE_BRICKS_MOSSY = Utils.nullValue();
+	public static Block REINFORCED_STONE_BRICKS_MOSSY_SLAB = Utils.nullValue();
 	public static Block REINFORCED_STONE_BRICKS_CRACKED = Utils.nullValue();
+	public static Block REINFORCED_STONE_BRICKS_CRACKED_SLAB = Utils.nullValue();
 
 	public static Block REINFORCED_STONE_FRAMED = Utils.nullValue();
 	public static Block REINFORCED_STONE_FRAMED_IRON = Utils.nullValue();
@@ -255,8 +279,11 @@ public class MineFantasyBlocks {
 	public static Block SAPLING_EBONY = Utils.nullValue();
 
 	public static Block YEW_PLANKS = Utils.nullValue();
+	public static Block YEW_PLANKS_SLAB = Utils.nullValue();
 	public static Block IRONBARK_PLANKS = Utils.nullValue();
+	public static Block IRONBARK_PLANKS_SLAB = Utils.nullValue();
 	public static Block EBONY_PLANKS = Utils.nullValue();
+	public static Block EBONY_PLANKS_SLAB = Utils.nullValue();
 
 	public static BlockTileEntity<TileEntityQuern> QUERN = Utils.nullValue();
 
@@ -323,30 +350,47 @@ public class MineFantasyBlocks {
 		COAL_RICH_ORE = new BlockOreMF("coal_rich_ore", 2, 1, Items.COAL, 2, 6, 2).setHardness(5.0F).setResistance(10.0F);
 
 		MUD_BRICK = new BasicBlockMF("mud_brick", Material.GROUND).setHardness(1.0F).setResistance(0.5F);
+		MUD_BRICK_SLAB = new BlockSlab("mud_brick_slab", Material.GROUND, SoundType.STONE).setHardness(1.0F).setResistance(0.5F);
 		MUD_ROAD = new BlockRoad("mud_road", Material.GROUND, SoundType.GROUND).setHardness(0.5F);
+		MUD_ROAD_BLOCK = new BasicBlockMF("mud_road_block", Material.GROUND).setHardness(0.5F);
+		MUD_ROAD_BLOCK_SLAB = new BlockSlab("mud_road_block_slab", Material.GROUND, SoundType.GROUND).setHardness(0.5F);
 
 		COBBLE_BRICK = new BasicBlockMF("cobble_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(12.0F);
+		COBBLE_BRICK_SLAB = new BlockSlab("cobble_brick_slab", Material.GROUND, SoundType.GROUND).setHardness(2.5F).setResistance(12.0F);
 		COBBLESTONE_ROAD = new BlockRoad("cobblestone_road", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(10.0F);
-
+		COBBLESTONE_ROAD_BLOCK = new BasicBlockMF("cobblestone_road_block", Material.ROCK).setHardness(2.0F).setResistance(10.0F);
+		COBBLESTONE_ROAD_BLOCK_SLAB = new BlockSlab("cobblestone_road_block_slab", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(10.0F);
+		
 		WINDOW = new BasicBlockMF("window", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.1F);
 		FRAMED_GLASS = new BasicBlockMF("framed_glass", Material.GLASS).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.2F);
 		FRAMED_GLASS_PANE = new BlockPaneMF("framed_glass_pane", Material.GLASS, true).setBlockSoundType(SoundType.GLASS).setHardness(0.6F).setResistance(0.1F);
 		WINDOW_PANE = new BlockPaneMF("window_pane", Material.GLASS, true).setBlockSoundType(SoundType.GLASS).setHardness(0.9F).setResistance(0.2F);
 
 		THATCH = new BasicBlockMF("thatch", Material.LEAVES).setBlockSoundType(SoundType.GROUND).setHardness(1.0F);
+		THATCH_SLAB = new BlockSlab("thatch_slab", Material.LEAVES, SoundType.PLANT).setHardness(1.0F);
 		THATCH_STAIR = new ConstructionBlockMF.StairsConstBlock("thatch_stairs", THATCH);
 
 		LIMESTONE_COBBLE = new BasicBlockMF("limestone_cobble", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_COBBLE_SLAB = new BlockSlab("limestone_cobble_slab", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE = new BasicBlockMF("limestone", Material.ROCK, LIMESTONE_COBBLE).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_SLAB = new BlockSlab("limestone_slab", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_BRICK = new BasicBlockMF("limestone_brick", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_BRICK_SLAB = new BlockSlab("limestone_brick_slab", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
 		LIMESTONE_ROAD = new BlockRoad("limestone_road", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_ROAD_BLOCK = new BasicBlockMF("limestone_road_block", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
+		LIMESTONE_ROAD_BLOCK_SLAB = new BlockSlab("limestone_road_block_slab", Material.ROCK, SoundType.STONE).setHardness(1.2F).setResistance(8F);
 
 		LIMESTONE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_stairs", LIMESTONE);
 		LIMESTONE_COBBLE_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_cobble_stairs", LIMESTONE_COBBLE);
 		LIMESTONE_BRICK_STAIRS = new ConstructionBlockMF.StairsConstBlock("limestone_brick_stairs", LIMESTONE_BRICK);
 
 		FIREBRICKS = new BasicBlockMF("firebricks", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(5.0F).setResistance(15.0F);
+		FIREBRICKS_SLAB = new BlockSlab("firebricks_slab", Material.ROCK, SoundType.STONE).setHardness(5.0F).setResistance(15.0F);
 		CLAY_WALL = new BasicBlockMF("clay_wall", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(1.0F).setResistance(1.0F);
+		CLAY_WALL_SLAB = new BlockSlab("clay_wall_slab", Material.WOOD, SoundType.WOOD).setHardness(1.0F).setResistance(1.0F);
+		CLAY_WALL_CROSS = new BasicBlockMF("clay_wall_cross", Material.WOOD).setHardness(1.0F).setResistance(1.0F);
+		CLAY_WALL_RIGHT_DIAGONAL = new BasicBlockMF("clay_wall_right_diagonal", Material.WOOD).setHardness(1.0F).setResistance(1.0F);
+		CLAY_WALL_LEFT_DIAGONAL = new BasicBlockMF("clay_wall_left_diagonal", Material.WOOD).setHardness(1.0F).setResistance(1.0F);
 
 		IRON_BARS = new BlockMetalBarsMF(MineFantasyMaterials.IRON);
 		BRONZE_BARS = new BlockMetalBarsMF(MineFantasyMaterials.BRONZE);
@@ -426,19 +470,25 @@ public class MineFantasyBlocks {
 		BELLOWS = new BlockBellows();
 
 		REFINED_PLANKS = new BasicBlockMF("refined_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(2.5F).setResistance(10F);
+		REFINED_PLANKS_SLAB = new BlockSlab("refined_planks_slab", Material.WOOD, SoundType.WOOD).setHardness(2.5F).setResistance(10F);
 		NAILED_PLANKS = new BasicBlockMF("nailed_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(1.5F).setResistance(7F);
+		NAILED_PLANKS_SLAB = new BlockSlab("nailed_planks_slab", Material.WOOD, SoundType.WOOD).setHardness(1.5F).setResistance(7F);
 		REFINED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("refined_planks_stairs", REFINED_PLANKS);
 		NAILED_PLANKS_STAIR = new ConstructionBlockMF.StairsConstBlock("nailed_planks_stairs", NAILED_PLANKS);
 
 		REINFORCED_STONE = new BasicBlockMF("reinforced_stone", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_SLAB = new BlockSlab("reinforced_stone_slab", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_ENGRAVED_0 = new BasicBlockMF("reinforced_stone_engraved_0", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_ENGRAVED_1 = new BasicBlockMF("reinforced_stone_engraved_1", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_ENGRAVED_2 = new BasicBlockMF("reinforced_stone_engraved_2", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_ENGRAVED_3 = new BasicBlockMF("reinforced_stone_engraved_3", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
 
 		REINFORCED_STONE_BRICKS = new BasicBlockMF("reinforced_stone_bricks", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_BRICKS_SLAB = new BlockSlab("reinforced_stone_bricks_slab", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_BRICKS_MOSSY = new BasicBlockMF("reinforced_stone_bricks_mossy", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_BRICKS_MOSSY_SLAB = new BlockSlab("reinforced_stone_bricks_mossy_slab", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(15F);
 		REINFORCED_STONE_BRICKS_CRACKED = new BasicBlockMF("reinforced_stone_bricks_cracked", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.0F).setResistance(15F);
+		REINFORCED_STONE_BRICKS_CRACKED_SLAB = new BlockSlab("reinforced_stone_bricks_cracked_slab", Material.ROCK, SoundType.STONE).setHardness(2.0F).setResistance(15F);
 
 		REINFORCED_STONE_FRAMED = new BasicBlockMF("reinforced_stone_framed", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(20F);
 		REINFORCED_STONE_FRAMED_IRON = new BasicBlockMF("reinforced_stone_framed_iron", Material.ROCK).setBlockSoundType(SoundType.STONE).setHardness(2.5F).setResistance(20F);
@@ -464,8 +514,11 @@ public class MineFantasyBlocks {
 		SAPLING_EBONY = new BlockSaplingMF("ebony", LOG_EBONY, LEAVES_EBONY, 10F);
 
 		YEW_PLANKS = new BasicBlockMF("yew_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(3F).setResistance(6F);
+		YEW_PLANKS_SLAB = new BlockSlab("yew_planks_slab", Material.WOOD, SoundType.WOOD).setHardness(3F).setResistance(6F);
 		IRONBARK_PLANKS = new BasicBlockMF("ironbark_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(4F).setResistance(10F);
+		IRONBARK_PLANKS_SLAB = new BlockSlab("ironbark_planks_slab", Material.WOOD, SoundType.WOOD).setHardness(4F).setResistance(10F);
 		EBONY_PLANKS = new BasicBlockMF("ebony_planks", Material.WOOD).setBlockSoundType(SoundType.WOOD).setHardness(6F).setResistance(12F);
+		EBONY_PLANKS_SLAB = new BlockSlab("ebony_planks_slab", Material.WOOD, SoundType.WOOD).setHardness(6F).setResistance(12F);
 
 		QUERN = new BlockQuern("quern");
 
@@ -535,10 +588,16 @@ public class MineFantasyBlocks {
 		registry.register(COAL_RICH_ORE);
 
 		registry.register(MUD_BRICK);
+		registry.register(MUD_BRICK_SLAB);
 		registry.register(MUD_ROAD);
+		registry.register(MUD_ROAD_BLOCK);
+		registry.register(MUD_ROAD_BLOCK_SLAB);
 
 		registry.register(COBBLE_BRICK);
+		registry.register(COBBLE_BRICK_SLAB);
 		registry.register(COBBLESTONE_ROAD);
+		registry.register(COBBLESTONE_ROAD_BLOCK);
+		registry.register(COBBLESTONE_ROAD_BLOCK_SLAB);
 
 		registry.register(WINDOW);
 		registry.register(FRAMED_GLASS);
@@ -546,19 +605,30 @@ public class MineFantasyBlocks {
 		registry.register(WINDOW_PANE);
 
 		registry.register(THATCH);
+		registry.register(THATCH_SLAB);
 		registry.register(THATCH_STAIR);
 
 		registry.register(LIMESTONE);
+		registry.register(LIMESTONE_SLAB);
 		registry.register(LIMESTONE_COBBLE);
+		registry.register(LIMESTONE_COBBLE_SLAB);
 		registry.register(LIMESTONE_BRICK);
+		registry.register(LIMESTONE_BRICK_SLAB);
 		registry.register(LIMESTONE_ROAD);
+		registry.register(LIMESTONE_ROAD_BLOCK);
+		registry.register(LIMESTONE_ROAD_BLOCK_SLAB);
 
 		registry.register(LIMESTONE_STAIRS);
 		registry.register(LIMESTONE_COBBLE_STAIRS);
 		registry.register(LIMESTONE_BRICK_STAIRS);
 
 		registry.register(FIREBRICKS);
+		registry.register(FIREBRICKS_SLAB);
 		registry.register(CLAY_WALL);
+		registry.register(CLAY_WALL_SLAB);
+		registry.register(CLAY_WALL_CROSS);
+		registry.register(CLAY_WALL_RIGHT_DIAGONAL);
+		registry.register(CLAY_WALL_LEFT_DIAGONAL);
 
 		registry.register(IRON_BARS);
 		registry.register(BRONZE_BARS);
@@ -601,19 +671,25 @@ public class MineFantasyBlocks {
 		registry.register(REPAIR_ORNATE);
 
 		registry.register(REFINED_PLANKS);
+		registry.register(REFINED_PLANKS_SLAB);
 		registry.register(NAILED_PLANKS);
+		registry.register(NAILED_PLANKS_SLAB);
 		registry.register(REFINED_PLANKS_STAIR);
 		registry.register(NAILED_PLANKS_STAIR);
 
 		registry.register(REINFORCED_STONE);
+		registry.register(REINFORCED_STONE_SLAB);
 		registry.register(REINFORCED_STONE_ENGRAVED_0);
 		registry.register(REINFORCED_STONE_ENGRAVED_1);
 		registry.register(REINFORCED_STONE_ENGRAVED_2);
 		registry.register(REINFORCED_STONE_ENGRAVED_3);
 
 		registry.register(REINFORCED_STONE_BRICKS);
+		registry.register(REINFORCED_STONE_BRICKS_SLAB);
 		registry.register(REINFORCED_STONE_BRICKS_MOSSY);
+		registry.register(REINFORCED_STONE_BRICKS_MOSSY_SLAB);
 		registry.register(REINFORCED_STONE_BRICKS_CRACKED);
+		registry.register(REINFORCED_STONE_BRICKS_CRACKED_SLAB);
 
 		registry.register(REINFORCED_STONE_FRAMED);
 		registry.register(REINFORCED_STONE_FRAMED_IRON);
@@ -631,8 +707,11 @@ public class MineFantasyBlocks {
 		registry.register(SAPLING_EBONY);
 
 		registry.register(YEW_PLANKS);
+		registry.register(YEW_PLANKS_SLAB);
 		registry.register(IRONBARK_PLANKS);
+		registry.register(IRONBARK_PLANKS_SLAB);
 		registry.register(EBONY_PLANKS);
+		registry.register(EBONY_PLANKS_SLAB);
 
 		registry.register(MUD_BRICK_STAIRS);
 		registry.register(COBBLE_BRICK_STAIRS);
@@ -766,10 +845,16 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockOreMFR(COAL_RICH_ORE));
 
 		registry.register(new ItemBlockBase(MUD_BRICK));
+		registry.register(new ItemBlockBase(MUD_BRICK_SLAB));
 		registry.register(new ItemBlockBase(MUD_ROAD));
+		registry.register(new ItemBlockBase(MUD_ROAD_BLOCK));
+		registry.register(new ItemBlockBase(MUD_ROAD_BLOCK_SLAB));
 
 		registry.register(new ItemBlockBase(COBBLE_BRICK));
+		registry.register(new ItemBlockBase(COBBLE_BRICK_SLAB));
 		registry.register(new ItemBlockBase(COBBLESTONE_ROAD));
+		registry.register(new ItemBlockBase(COBBLESTONE_ROAD_BLOCK));
+		registry.register(new ItemBlockBase(COBBLESTONE_ROAD_BLOCK_SLAB));
 
 		registry.register(new ItemBlockBase(WINDOW));
 		registry.register(new ItemBlockBase(FRAMED_GLASS));
@@ -777,20 +862,30 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(WINDOW_PANE));
 
 		registry.register(new ItemBlockBase(THATCH));
+		registry.register(new ItemBlockBase(THATCH_SLAB));
 		registry.register(new ItemBlockBase(THATCH_STAIR));
 
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE));
+		registry.register(new ItemBlockBase(LIMESTONE_COBBLE_SLAB));
 		registry.register(new ItemBlockBase(LIMESTONE));
 
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK));
+		registry.register(new ItemBlockBase(LIMESTONE_BRICK_SLAB));
 		registry.register(new ItemBlockBase(LIMESTONE_ROAD));
+		registry.register(new ItemBlockBase(LIMESTONE_ROAD_BLOCK));
+		registry.register(new ItemBlockBase(LIMESTONE_ROAD_BLOCK_SLAB));
 
 		registry.register(new ItemBlockBase(LIMESTONE_STAIRS));
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE_STAIRS));
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK_STAIRS));
 
 		registry.register(new ItemBlockBase(FIREBRICKS));
+		registry.register(new ItemBlockBase(FIREBRICKS_SLAB));
 		registry.register(new ItemBlockBase(CLAY_WALL));
+		registry.register(new ItemBlockBase(CLAY_WALL_SLAB));
+		registry.register(new ItemBlockBase(CLAY_WALL_CROSS));
+		registry.register(new ItemBlockBase(CLAY_WALL_RIGHT_DIAGONAL));
+		registry.register(new ItemBlockBase(CLAY_WALL_LEFT_DIAGONAL));
 
 		registry.register(new ItemBlockBase(IRON_BARS));
 		registry.register(new ItemBlockBase(BRONZE_BARS));
@@ -869,19 +964,25 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockSpecialRender(BELLOWS));
 
 		registry.register(new ItemBlockBase(REFINED_PLANKS));
+		registry.register(new ItemBlockBase(REFINED_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(NAILED_PLANKS));
+		registry.register(new ItemBlockBase(NAILED_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(REFINED_PLANKS_STAIR));
 		registry.register(new ItemBlockBase(NAILED_PLANKS_STAIR));
 
 		registry.register(new ItemBlockBase(REINFORCED_STONE));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_0));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_1));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_2));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_3));
 
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_MOSSY));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_MOSSY_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_CRACKED));
+		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_CRACKED_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED_IRON));
 
@@ -906,8 +1007,11 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(SAPLING_EBONY));
 
 		registry.register(new ItemBlockBase(YEW_PLANKS));
+		registry.register(new ItemBlockBase(YEW_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(IRONBARK_PLANKS));
+		registry.register(new ItemBlockBase(IRONBARK_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(EBONY_PLANKS));
+		registry.register(new ItemBlockBase(EBONY_PLANKS_SLAB));
 
 		registry.register(new ItemBlockSpecialRender(QUERN));
 

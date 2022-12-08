@@ -31,8 +31,10 @@ public class RemoveOffhandPacket extends PacketMF {
 	protected void execute(EntityPlayer player) {
 		if (username != null && player.getUniqueID().equals(username)) {
 			ItemStack offhandStack = player.getHeldItemOffhand();
-			player.inventory.placeItemBackInInventory(player.world, offhandStack);
-			player.inventory.offHandInventory.clear();
+			if (offhandStack.getMaxStackSize() == 1) {
+				player.inventory.placeItemBackInInventory(player.world, offhandStack);
+				player.inventory.offHandInventory.clear();
+			}
 		}
 	}
 }

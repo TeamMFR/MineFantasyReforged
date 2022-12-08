@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/nailed_planks",
+            "side": "minefantasyreforged:blocks/nailed_planks",
+            "top": "minefantasyreforged:blocks/nailed_planks",
+            "bottom": "minefantasyreforged:blocks/nailed_planks",
+            "particle": "minefantasyreforged:blocks/nailed_planks"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

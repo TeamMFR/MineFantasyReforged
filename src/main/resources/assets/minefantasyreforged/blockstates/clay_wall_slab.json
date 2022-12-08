@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/clay_wall",
+            "side": "minefantasyreforged:blocks/clay_wall",
+            "top": "minefantasyreforged:blocks/clay_wall",
+            "bottom": "minefantasyreforged:blocks/clay_wall",
+            "particle": "minefantasyreforged:blocks/clay_wall"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

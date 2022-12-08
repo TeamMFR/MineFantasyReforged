@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/cobble_brick",
+            "side": "minefantasyreforged:blocks/cobble_brick",
+            "top": "minefantasyreforged:blocks/cobble_brick",
+            "bottom": "minefantasyreforged:blocks/cobble_brick",
+            "particle": "minefantasyreforged:blocks/cobble_brick"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

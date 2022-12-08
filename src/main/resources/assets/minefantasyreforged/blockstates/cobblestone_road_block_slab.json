@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/cobblestone_road",
+            "side": "minefantasyreforged:blocks/cobblestone_road",
+            "top": "minefantasyreforged:blocks/cobblestone_road",
+            "bottom": "minefantasyreforged:blocks/cobblestone_road",
+            "particle": "minefantasyreforged:blocks/cobblestone_road"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

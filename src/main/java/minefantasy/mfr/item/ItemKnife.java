@@ -160,7 +160,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 
 		Multimap<String, AttributeModifier> map = HashMultimap.create();
 		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getMeleeDamage(stack), 0));
-		map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -0.5F, 0));
+		map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(), new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -0.75F, 0));
 		return map;
 	}
 
@@ -168,7 +168,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 	 * Gets a stack-sensitive value for the melee dmg
 	 */
 	protected float getMeleeDamage(ItemStack item) {
-		return baseDamage + CustomToolHelper.getMeleeDamage(item, material.getAttackDamage());
+		return baseDamage + CustomToolHelper.getMeleeDamage(item, material.getAttackDamage()) * 0.25F;
 	}
 
 	protected float getWeightModifier(ItemStack stack) {
@@ -194,7 +194,7 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 		if (state.getBlock().isToolEffective(state.getBlock().getTranslationKey(), state)) {
 			return this.getSwordDestroySpeed(stack, state);
 		}
-		return CustomToolHelper.getEfficiency(stack, super.getDestroySpeed(stack, state), efficiencyMod);
+		return CustomToolHelper.getEfficiency(stack, super.getDestroySpeed(stack, state), efficiencyMod) * 0.05F;
 	}
 
 	public float getSwordDestroySpeed(ItemStack stack, IBlockState state) {

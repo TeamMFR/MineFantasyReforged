@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/reinforced_stone_base",
+            "side": "minefantasyreforged:blocks/reinforced_stone_base",
+            "top": "minefantasyreforged:blocks/reinforced_stone_base",
+            "bottom": "minefantasyreforged:blocks/reinforced_stone_base",
+            "particle": "minefantasyreforged:blocks/reinforced_stone_base"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}

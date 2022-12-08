@@ -7,7 +7,7 @@
   "anvil_tier": -1,
   "recipe_time": 25,
   "recipe_hammer": -1,
-  "output_hot": true,
+  "output_hot": false,
   "pattern": [
     "  P   ",
     "LPPPL ",

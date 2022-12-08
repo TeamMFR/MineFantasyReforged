@@ -1,0 +1,18 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "textures": {
+            "all": "minefantasyreforged:blocks/limestone_cobblestone",
+            "side": "minefantasyreforged:blocks/limestone_cobblestone",
+            "top": "minefantasyreforged:blocks/limestone_cobblestone",
+            "bottom": "minefantasyreforged:blocks/limestone_cobblestone",
+            "particle": "minefantasyreforged:blocks/limestone_cobblestone"
+        }
+    },
+    "variants": {
+        "normal": [{"model": "half_slab"}],
+        "type=bottom":  {"model": "half_slab"},
+        "type=top":     {"model": "upper_slab"},
+        "type=double":  {"model": "cube_all"}
+    }
+}
