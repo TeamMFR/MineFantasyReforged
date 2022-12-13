@@ -1496,7 +1496,7 @@ public class MineFantasyItems {
 		ORNATE_BOW = (ItemBowMFR) new ItemBowMFR(ornate + "_bow", ORNATE, EnumBowType.SHORTBOW, 1).setCustom(ornate).setCreativeTab(tab);
 
 		// Tools
-		ORNATE_PICK = (ItemPickMFR) new ItemPickMFR(ornate + "_pick", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
+		ORNATE_PICK = (ItemPickMFR) new ItemPickMFR(ornate + "_pick", ORNATE, 0).setEfficiencyMod(1.25F).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_AXE = (ItemAxeMFR) new ItemAxeMFR(ornate + "_axe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_SPADE = (ItemSpade) new ItemSpade(ornate + "_spade", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
 		ORNATE_HOE = (ItemHoeMFR) new ItemHoeMFR(ornate + "_hoe", ORNATE, 0).setCustom(ornate).setCreativeTab(tab);
@@ -1562,7 +1562,7 @@ public class MineFantasyItems {
 		DRAGONFORGED_BOW = (ItemBowMFR) new ItemBowMFR(dragonforged + "_bow", DRAGONFORGED, EnumBowType.SHORTBOW, 1).setCustom(dragonforged).setCreativeTab(tab);
 
 		// Tools
-		DRAGONFORGED_PICK = (ItemPickMFR) new ItemPickMFR(dragonforged + "_pick", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
+		DRAGONFORGED_PICK = (ItemPickMFR) new ItemPickMFR(dragonforged + "_pick", DRAGONFORGED, 0).setEfficiencyMod(1.25F).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_AXE = (ItemAxeMFR) new ItemAxeMFR(dragonforged + "_axe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_SPADE = (ItemSpade) new ItemSpade(dragonforged + "_spade", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);
 		DRAGONFORGED_HOE = (ItemHoeMFR) new ItemHoeMFR(dragonforged + "_hoe", DRAGONFORGED, 0).setCustom(dragonforged).setCreativeTab(tab);

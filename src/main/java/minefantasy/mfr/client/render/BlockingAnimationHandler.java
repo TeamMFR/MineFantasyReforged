@@ -1,5 +1,6 @@
 package minefantasy.mfr.client.render;
 
+import minefantasy.mfr.MFREventHandler;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
@@ -8,12 +9,16 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.client.event.RenderSpecificHandEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -76,6 +81,16 @@ public class BlockingAnimationHandler {
             performCounterAttackAnimation(player, evt.getItemStack(), rightHanded);
         }
 
+    }
+
+    @SubscribeEvent(priority= EventPriority.HIGHEST)
+    public void onEvent(FOVUpdateEvent event) {
+        EntityPlayer player = event.getEntity();
+        IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+
+        if (speedAttribute.getModifier(MFREventHandler.BLOCK_SPEED_MODIFIER_UUID) != null) {
+            event.setNewfov(1.0F);
+        }
     }
 
     /**

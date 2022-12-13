@@ -47,6 +47,11 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	}
 
 	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
+
+	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 

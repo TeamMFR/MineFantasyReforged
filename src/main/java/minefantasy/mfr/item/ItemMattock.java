@@ -13,6 +13,7 @@ import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -30,6 +31,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -37,6 +39,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+
+import static minefantasy.mfr.material.CustomMaterial.decimal_format;
 
 /**
  * @author Anonymous Productions
@@ -165,7 +169,7 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 
 	@Override
 	public float getDestroySpeed(ItemStack stack, IBlockState state) {
-		return CustomToolHelper.getEfficiency(stack, super.getDestroySpeed(stack, state), efficiencyMod);
+		return CustomToolHelper.getEfficiency(stack, super.getDestroySpeed(stack, state), efficiencyMod / 2F);
 	}
 
 	@Override
@@ -195,6 +199,12 @@ public class ItemMattock extends ItemPickaxe implements IToolMaterial, IClientRe
 		if (isCustom) {
 			CustomToolHelper.addInformation(item, list);
 		}
+
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
+		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
+		list.add(TextFormatting.GREEN + I18n.format("attribute.tool.digEfficiency.name",
+				decimal_format.format(CustomToolHelper.getEfficiency(item, efficiency, efficiencyMod / 2F))));
+
 		super.addInformation(item, world, list, flag);
 	}
 

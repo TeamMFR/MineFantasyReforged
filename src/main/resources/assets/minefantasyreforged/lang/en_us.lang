@@ -210,6 +210,8 @@ tooltype.brush=Paint Brush
 tooltype.anvil=Anvil
 tooltype.carpenter=Carpenter Bench
 
+attribute.tool.digEfficiency.name=Dig Speed Modifier x%1$s
+
 attribute.weapon.penetrateArmor=Armor Penetration
 attribute.weapon.daze=Daze
 attribute.weapon.extendedReach=Reach
@@ -793,7 +795,7 @@ languagecfg.tooltiptier=false
 
 item.standard_pick.name=%1$s Pickaxe
 item.standard_axe.name=%1$s Axe
-item.standard_spade.name=%1$s Spade
+item.standard_spade.name=%1$s Shovel
 item.standard_hoe.name=%1$s Hoe
 
 item.standard_shears.name=%1$s Shears
@@ -887,7 +889,7 @@ item.dragonforged_lance.name=Dragonforged %1$s Lance
 
 item.dragonforged_handpick.name=Dragonforged %1$s Handpick
 item.dragonforged_heavy_pick.name=Heavy Dragonforged %1$s Pickaxe
-item.dragonforged_trow.name=Dragonforged %1$s Spade
+item.dragonforged_trow.name=Dragonforged %1$s Trow
 item.dragonforged_heavy_shovel.name=Heavy Dragonforged %1$s Shovel
 item.dragonforged_scythe.name=Dragonforged %1$s Scythe
 item.dragonforged_mattock.name=Dragonforged %1$s Mattock
@@ -946,7 +948,7 @@ item.ornate_lance.name=Ornate %1$s Lance
 
 item.ornate_handpick.name=Ornate %1$s Handpick
 item.ornate_heavy_pick.name=Heavy Ornate %1$s Pickaxe
-item.ornate_trow.name=Ornate %1$s Spade
+item.ornate_trow.name=Ornate %1$s Trow
 item.ornate_heavy_shovel.name=Heavy Ornate %1$s Shovel
 item.ornate_scythe.name=Ornate %1$s Scythe
 item.ornate_mattock.name=Ornate %1$s Mattock

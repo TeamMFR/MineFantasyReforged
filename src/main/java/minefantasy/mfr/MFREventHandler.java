@@ -7,12 +7,14 @@ import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.stamina.CustomFoodEntry;
 import minefantasy.mfr.api.tool.ISmithTongs;
+import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.client.ClientItemsMFR;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
@@ -56,6 +58,9 @@ import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.IMob;
@@ -113,6 +118,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
@@ -126,6 +132,7 @@ import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 public final class MFREventHandler {
 	private static final XSTRandom random = new XSTRandom();
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
+	public static final UUID BLOCK_SPEED_MODIFIER_UUID = UUID.fromString("2bafbc0d-1832-4a58-8296-f1a0251c8fe3");
 
 	private MFREventHandler() {} // No instances!
 
@@ -726,6 +733,22 @@ public final class MFREventHandler {
 		}
 		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity) && event.getEntityLiving() instanceof EntityPlayer) {
 			StaminaMechanics.tickEntity((EntityPlayer) event.getEntityLiving());
+		}
+
+		IAttributeInstance speedAttribute = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
+		double speedMod = ConfigWeapon.blockSpeedMod;
+		if (entity.getActiveItemStack().getItem() instanceof IParryable) {
+			AttributeModifier blockSpeedMod = new AttributeModifier(BLOCK_SPEED_MODIFIER_UUID, "block_speed_adjustment", speedMod, 2);
+			if (!speedAttribute.hasModifier(blockSpeedMod)) {
+				speedAttribute.applyModifier(blockSpeedMod);
+			}
+			else if (speedAttribute.getModifier(BLOCK_SPEED_MODIFIER_UUID).getAmount() != speedMod) {
+				speedAttribute.removeModifier(BLOCK_SPEED_MODIFIER_UUID);
+				speedAttribute.applyModifier(blockSpeedMod);
+			}
+		}
+		else if (speedAttribute.hasModifier(new AttributeModifier(BLOCK_SPEED_MODIFIER_UUID, "block_speed_adjustment", 0, 0))){
+			speedAttribute.removeModifier(BLOCK_SPEED_MODIFIER_UUID);
 		}
 
 	}

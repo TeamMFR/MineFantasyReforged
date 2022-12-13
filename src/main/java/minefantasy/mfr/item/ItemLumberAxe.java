@@ -3,12 +3,16 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaMechanics;
 import minefantasy.mfr.tile.TileEntityRack;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,12 +20,16 @@ import net.minecraft.init.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.List;
 import java.util.Random;
+
+import static minefantasy.mfr.material.CustomMaterial.decimal_format;
 
 public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 	private final Random rand = new Random();
@@ -90,6 +98,27 @@ public class ItemLumberAxe extends ItemAxeMFR implements IRackItem {
 				}
 			}
 		}
+	}
+
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
+		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
+		return !state.getBlock().isToolEffective("axe", state)
+				? super.getDestroySpeed(stack, state)
+				: CustomToolHelper.getEfficiency(stack, efficiency, efficiencyMod / 8F);
+	}
+
+	@Override
+	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
+		if (isCustom) {
+			CustomToolHelper.addInformation(item, list);
+		}
+
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
+		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
+		list.add(TextFormatting.GREEN + I18n.format("attribute.tool.digEfficiency.name",
+				decimal_format.format(CustomToolHelper.getEfficiency(item, efficiency, efficiencyMod / 8F))));
 	}
 
 	@Override

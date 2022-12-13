@@ -7,11 +7,15 @@ public class ConfigWeapon extends ConfigurationBaseMF {
 	public static boolean breakArrowsGround;
 	public static float arrowBreakMod;
 	public static boolean xpTrain;
+	public static double blockSpeedMod;
 
 	@Override
 	protected void loadConfig() {
 		useBalance = Boolean.parseBoolean(config.get(CATEGORY_PENALTIES, "Heavy Weapon Balance", true,
 				"This causes heavy weapons to throw the camera off angle. This is recommended as it gives a downside to avoid overpowering heavy weapons. With this active: spamming hits is difficult")
+				.getString());
+		blockSpeedMod = Double.parseDouble(config.get(CATEGORY_PENALTIES, "Parry Block Speed Penalty", 1.5F,
+				"How much should blocking for parrying slow the player down. Greater values speed the player up, lower values slow the player down. 2 appears to be completely normal player walking speed")
 				.getString());
 		breakArrowsGround = Boolean.parseBoolean(
 				config.get(CATEGORY_PENALTIES, "Arrow Ground Break", true, "Arrows can break when hitting the ground")

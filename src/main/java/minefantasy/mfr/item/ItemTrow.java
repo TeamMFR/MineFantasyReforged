@@ -12,8 +12,8 @@ import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -31,8 +31,8 @@ import net.minecraft.item.ItemSpade;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -40,6 +40,8 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static minefantasy.mfr.material.CustomMaterial.decimal_format;
 
 /**
  * @author Anonymous Productions
@@ -176,18 +178,14 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
-	public float getDigSpeed(ItemStack stack, Block block, World world, BlockPos pos, EntityPlayer player) {
-		if (!ForgeHooks.isToolEffective(world, pos, stack)) {
-			return this.getDestroySpeed(stack, block);
-		}
-		float digSpeed = player.getDigSpeed(block.getDefaultState(), pos);
-		return CustomToolHelper.getEfficiency(stack, digSpeed, efficiencyMod / 10);
-	}
+	@Override
+	public float getDestroySpeed(ItemStack stack, IBlockState state) {
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stack);
+		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
 
-	public float getDestroySpeed(ItemStack stack, Block block) {
-		return block.getMaterial(block.getDefaultState()) != Material.IRON && block.getMaterial(block.getDefaultState()) != Material.ANVIL
-				&& block.getMaterial(block.getDefaultState()) != Material.ROCK ? super.getDestroySpeed(stack, block.getDefaultState())
-				: CustomToolHelper.getEfficiency(stack, this.efficiency, efficiencyMod / 2);
+		return !state.getBlock().isToolEffective("shovel", state)
+				? super.getDestroySpeed(stack, state)
+				: CustomToolHelper.getEfficiency(stack, efficiency, efficiencyMod / 4F);
 	}
 
 	@Override
@@ -217,6 +215,12 @@ public class ItemTrow extends ItemSpade implements IToolMaterial, IClientRegiste
 		if (isCustom) {
 			CustomToolHelper.addInformation(item, list);
 		}
+
+		CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(item);
+		float efficiency = material.hardness > 0 ? material.hardness : this.efficiency;
+		list.add(TextFormatting.GREEN + I18n.format("attribute.tool.digEfficiency.name",
+				decimal_format.format(CustomToolHelper.getEfficiency(item, efficiency, efficiencyMod / 4F))));
+
 		super.addInformation(item, world, list, flag);
 	}
 
