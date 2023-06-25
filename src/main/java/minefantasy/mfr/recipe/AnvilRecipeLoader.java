@@ -24,7 +24,7 @@ public class AnvilRecipeLoader extends RecipeLoader {
 	private static final int GRID_WIDTH = 6;
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "anvil";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.CONFIG_DIRECTORY +"/anvil_recipes";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.ASSET_DIRECTORY +"/anvil_recipes";
 	private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/anvil_recipes/";
 
 	public static final List<JsonObject> list = new ArrayList<>();

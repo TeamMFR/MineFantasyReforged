@@ -869,27 +869,27 @@ public class MineFantasyArmorCustomEntries {
 
 	private static void loadMowziesMobs() {
 		CustomArmourEntry.registerItem(
-				getItemFromRegistryName("mowziesmobs:barako_mask_bliss"),
+				getItemFromRegistryName("mowziesmobs:barakoa_mask_bliss"),
 				ArmourDesign.LEATHER,
 				0.8F,
 				"light");
 		CustomArmourEntry.registerItem(
-				getItemFromRegistryName("mowziesmobs:barako_mask_fear"),
+				getItemFromRegistryName("mowziesmobs:barakoa_mask_fear"),
 				ArmourDesign.LEATHER,
 				0.8F,
 				"light");
 		CustomArmourEntry.registerItem(
-				getItemFromRegistryName("mowziesmobs:barako_mask_fury"),
+				getItemFromRegistryName("mowziesmobs:barakoa_mask_fury"),
 				ArmourDesign.LEATHER,
 				0.8F,
 				"light");
 		CustomArmourEntry.registerItem(
-				getItemFromRegistryName("mowziesmobs:barako_mask_misery"),
+				getItemFromRegistryName("mowziesmobs:barakoa_mask_misery"),
 				ArmourDesign.LEATHER,
 				0.8F,
 				"light");
 		CustomArmourEntry.registerItem(
-				getItemFromRegistryName("mowziesmobs:barako_mask_rage"),
+				getItemFromRegistryName("mowziesmobs:barakoa_mask_rage"),
 				ArmourDesign.LEATHER,
 				0.8F,
 				"light");

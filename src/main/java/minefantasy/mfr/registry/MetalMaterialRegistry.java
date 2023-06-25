@@ -20,7 +20,7 @@ public class MetalMaterialRegistry extends DataLoader {
 	public static final MetalMaterialRegistry INSTANCE = new MetalMaterialRegistry();
 
 	private static final String TYPE = "metal material";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.CONFIG_DIRECTORY +"/registry";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.ASSET_DIRECTORY +"/registry";
 	private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/registry";
 
 	public void preInit() {
