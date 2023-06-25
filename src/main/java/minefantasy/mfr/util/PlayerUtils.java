@@ -20,7 +20,7 @@ public class PlayerUtils {
 		}
 	}
 
-	public static boolean shouldItemStackBlock(ItemStack stack){
-		return stack.getItemUseAction() == EnumAction.valueOf("mfr_block");
+	public static boolean shouldItemStackBlock(ItemStack stack, ItemStack offhand){
+		return stack.getItemUseAction() == EnumAction.valueOf("mfr_block") && offhand.isEmpty();
 	}
 }

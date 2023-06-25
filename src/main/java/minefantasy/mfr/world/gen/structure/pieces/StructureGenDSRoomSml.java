@@ -1,5 +1,8 @@
 package minefantasy.mfr.world.gen.structure.pieces;
 
+import minefantasy.mfr.block.BlockForge;
+import minefantasy.mfr.block.BlockRoast;
+import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyLoot;
 import minefantasy.mfr.world.gen.structure.StructureModuleMFR;
@@ -142,7 +145,13 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
     }
 
     private void buildHomeFurnishings(int width, int depth, int height) {
-        placeBlockWithState(world, Blocks.FURNACE.getDefaultState().withProperty(BlockFurnace.FACING, facing.rotateY()), width, 2, 2);
+        if (ConfigWorldGen.dwarvenStrongholdShouldFurnaceSpawn) {
+            placeBlockWithState(world, Blocks.FURNACE.getDefaultState().withProperty(BlockFurnace.FACING, facing.rotateY()), width, 2, 2);
+        }
+        else {
+            placeBlockWithState(world, MineFantasyBlocks.OVEN.getDefaultState().withProperty(BlockRoast.FACING, facing.rotateYCCW()), width, 2, 2);
+            placeBlockWithState(world, MineFantasyBlocks.FORGE.getDefaultState().withProperty(BlockForge.UNDER, true), width, 1, 2);
+        }
 
         placeBlock(world, Blocks.DOUBLE_STONE_SLAB, width - 3, 1, 1);
         placeBlock(world, Blocks.DOUBLE_STONE_SLAB, width - 3, 1, 2);
@@ -154,7 +163,9 @@ public class StructureGenDSRoomSml extends StructureModuleMFR {
         }
         placeBlock(world, Blocks.STONE_SLAB, width - 1, 1, 6);
         placeBlock(world, Blocks.STONE_SLAB, width - 2, 1, 6);
-        placeBlock(world, Blocks.CAULDRON, width - 2, 1, 1);
+        if (ConfigWorldGen.dwarvenStrongholdShouldCauldronSpawn) {
+            placeBlock(world, Blocks.CAULDRON, width - 2, 1, 1);
+        }
 
         placeStairBlock(world, Blocks.STONE_BRICK_STAIRS, -(width - 1), 1, 1, facing, facing);
         placeBlockWithState(world, Blocks.STONE_SLAB.getDefaultState().withProperty(BlockSlab.HALF, BlockSlab.EnumBlockHalf.TOP), -(width - 1), 1, 2);

@@ -1,12 +1,12 @@
 package minefantasy.mfr.api.armour;
 
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class CustomDamageRatioEntry {
-	public static HashMap<ResourceLocation, CustomDamageRatioEntry> entries = new HashMap<>();
+	public static HashMap<String, CustomDamageRatioEntry> entries = new HashMap<>();
 	public static HashMap<ResourceLocation, CustomDamageRatioEntry> entriesProj = new HashMap<>();
 
 	public float[] vars;
@@ -18,21 +18,11 @@ public class CustomDamageRatioEntry {
 	/**
 	 * Register a weapon to give variables
 	 *
-	 * @param item the item
+	 * @param weapon   the weapon itemstack
 	 * @param vars the damage type ratio cutting:blunt
 	 */
-	public static void registerItem(Item item, float[] vars) {
-		registerItem(item.getRegistryName(), vars);
-	}
-
-	/**
-	 * Register a weapon to give variables
-	 *
-	 * @param resourceLocation   the item resourceLocation
-	 * @param vars the damage type ratio cutting:blunt
-	 */
-	public static void registerItem(ResourceLocation resourceLocation, float[] vars) {
-		entries.put(resourceLocation, new CustomDamageRatioEntry(vars));
+	public static void registerItem(ItemStack weapon, float[] vars) {
+		entries.put(weapon.getItem().getRegistryName() + ":" + weapon.getMetadata(), new CustomDamageRatioEntry(vars));
 	}
 
 	/**
@@ -48,15 +38,13 @@ public class CustomDamageRatioEntry {
 	/**
 	 * Gets the ratio for an item, null if it's not found
 	 */
-	public static float[] getTraits(Item item) {
-		return getTraits(item.getRegistryName());
-	}
-
-	/**
-	 * Gets the ratio for an item, null if it's not found
-	 */
-	public static float[] getTraits(ResourceLocation resourceLocation) {
-		return entries.get(resourceLocation) != null ? entries.get(resourceLocation).vars : null;
+	public static float[] getTraits(ItemStack weapon) {
+		if (entries.get(weapon.getItem().getRegistryName() + ":" + weapon.getMetadata()) != null) {
+			return entries.get(weapon.getItem().getRegistryName() + ":" + weapon.getMetadata()).vars;
+		}
+		else {
+			return null;
+		}
 	}
 
 	/**

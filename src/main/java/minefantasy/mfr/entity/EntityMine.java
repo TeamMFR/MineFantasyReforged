@@ -21,26 +21,23 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 public class EntityMine extends Entity {
-	private static final DataParameter<String> FILLING = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
-	private static final DataParameter<String> CASING = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
-	private static final DataParameter<String> FUSE = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
-	private static final DataParameter<String> POWDER = EntityDataManager.createKey(EntityBomb.class, DataSerializers.STRING);
-	private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityBomb.class, DataSerializers.ITEM_STACK);
+	private static final DataParameter<String> FILLING = EntityDataManager.createKey(EntityMine.class, DataSerializers.STRING);
+	private static final DataParameter<String> CASING = EntityDataManager.createKey(EntityMine.class, DataSerializers.STRING);
+	private static final DataParameter<String> FUSE = EntityDataManager.createKey(EntityMine.class, DataSerializers.STRING);
+	private static final DataParameter<String> POWDER = EntityDataManager.createKey(EntityMine.class, DataSerializers.STRING);
+	private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityMine.class, DataSerializers.ITEM_STACK);
 
 	private static DamageSource mineDmg = new DamageSource("mine").setExplosion();
 	private static DamageSource mineFireDmg = new DamageSource("mine").setExplosion().setFireDamage();
-	private final int typeId = 2;
 	/**
 	 * How long the fuse is
 	 */
 	public int fuse;
-	private EntityLivingBase thrower;
 
 	public EntityMine(World world) {
 		super(world);
@@ -50,7 +47,6 @@ public class EntityMine extends Entity {
 
 	public EntityMine(World world, EntityLivingBase thrower) {
 		this(world);
-		this.thrower = thrower;
 		this.fuse = 40;
 
 		this.setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ,
@@ -75,14 +71,17 @@ public class EntityMine extends Entity {
 
 	@Override
 	public boolean processInitialInteract(EntityPlayer user, EnumHand hand) {
-		if (user.isSneaking()) {
-			// DISARM
-			setDead();
-			user.swingArm(hand);
-			if (!world.isRemote) {
-				ItemStack item = MineFantasyItems.MINE_CUSTOM.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
-				if (!user.inventory.addItemStackToInventory(item)) {
-					this.entityDropItem(item, 0.0F);
+		if (ticksExisted > 20 && user.getActiveHand() == hand) {
+			if (user.isSneaking()) {
+				// DISARM
+				setDead();
+				user.swingArm(hand);
+				if (!world.isRemote) {
+					user.setActiveHand(hand);
+					ItemStack item = MineFantasyItems.MINE_CUSTOM.createMine(getCasing(), getFilling(), getFuse(), getPowder(), 1);
+					if (!user.inventory.addItemStackToInventory(item)) {
+						this.entityDropItem(item, 0.0F);
+					}
 				}
 			}
 		}
@@ -210,17 +209,16 @@ public class EntityMine extends Entity {
 		}
 	}
 
-	private void explode2() {
-		float power = 5.0F;
-		this.world.createExplosion(this, this.posX, this.posY, this.posZ, power, false);
-	}
-
 	/**
 	 * (abstract) Protected helper method to write subclass entity data to NBT.
 	 */
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound nbt) {
 		nbt.setByte("Fuse", (byte) this.fuse);
+		nbt.setString("casing", getCasing());
+		nbt.setString("filling", getFilling());
+		nbt.setString("fuse", getFuse());
+		nbt.setString("powder", getPowder());
 	}
 
 	/**
@@ -229,13 +227,10 @@ public class EntityMine extends Entity {
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound nbt) {
 		this.fuse = nbt.getByte("Fuse");
-	}
-
-	/**
-	 * returns null or the entityliving it was placed or ignited by
-	 */
-	public EntityLivingBase getTntPlacedBy() {
-		return this.thrower;
+		this.dataManager.set(FILLING, nbt.getString("filling"));
+		this.dataManager.set(CASING, nbt.getString("casing"));
+		this.dataManager.set(FUSE, nbt.getString("fuse"));
+		this.dataManager.set(POWDER, nbt.getString("powder"));
 	}
 
 	public void explode() {
@@ -244,14 +239,13 @@ public class EntityMine extends Entity {
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D * getPowderType().rangeModifier;
 			AxisAlignedBB AABB = this.getEntityBoundingBox().expand(area, area / 2, area);
-			List entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
+			List<EntityLivingBase> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, AABB);
 
 			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {
 
-				for (Object o : entitiesWithinAABB) {
-					Entity entityHit = (Entity) o;
+				for (Entity entity : entitiesWithinAABB) {
 
-					double distanceToEntity = this.getDistance(entityHit);
+					double distanceToEntity = this.getDistance(entity);
 
 					double radius = getRangeOfBlast() * getPowderType().rangeModifier;
 					if (distanceToEntity < radius) {
@@ -265,13 +259,13 @@ public class EntityMine extends Entity {
 								sc = (radius / 2);
 							dam *= (sc / (radius / 2));
 						}
-						if (!(entityHit instanceof EntityItem)) {
+						if (!(entity instanceof EntityItem)) {
 							DamageSource source = mineDmg;
 							if (getFilling().equals("fire")) {
 								source = mineFireDmg;
 							}
-							if (entityHit.attackEntityFrom(source, dam)) {
-								applyEffects(entityHit);
+							if (entity.attackEntityFrom(source, dam)) {
+								applyEffects(entity);
 							}
 						}
 					}
@@ -298,9 +292,6 @@ public class EntityMine extends Entity {
 		if (getFilling().equals("fire")) {
 			hit.setFire(8);
 		}
-		if (hit instanceof EntityLivingBase) {
-			EntityLivingBase live = (EntityLivingBase) hit;
-		}
 	}
 
 	private double getRangeOfBlast() {
@@ -309,10 +300,6 @@ public class EntityMine extends Entity {
 
 	private float getDamage() {
 		return getBlast().damage * getCase().damageModifier * getPowderType().damageModifier;
-	}
-
-	public boolean canEntityBeSeen(Entity entity) {
-		return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + this.getEyeHeight(), this.posZ), new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
 	}
 
 	public String getFilling() {

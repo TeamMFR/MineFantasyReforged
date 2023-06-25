@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minefantasyreforged:clay_wall"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:clay_wall_slab",
+    "count": 6
+  }
+}

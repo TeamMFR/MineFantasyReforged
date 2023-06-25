@@ -106,6 +106,11 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	public EnumRarity getRarity(ItemStack item) {
 		int lvl = itemRarity + 1;
 
+		CustomMaterial material = CustomMaterial.getMaterialFor(item, "main_material");
+		if (material != null) {
+			lvl = material.rarityID + 1;
+		}
+
 		if (item.isItemEnchanted()) {
 			if (lvl == 0) {
 				lvl++;

@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nonnull;
 
@@ -22,7 +23,9 @@ public class ContainerTanner extends ContainerBase {
 		super(inventoryPlayer, tile);
 		this.tile = tile;
 		for (int a = 0; a < 2; a++)
-			this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), a, 0, 0));
+			this.addSlotToContainer(
+					new SlotItemHandler(new CombinedInvWrapper(tile.getInputInventory(), tile.getRecipeInventory()),
+							a, 0, 0));
 	}
 
 	@Override
@@ -75,7 +78,7 @@ public class ContainerTanner extends ContainerBase {
 	@Nonnull
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer user, int currentSlot) {
-		int slotCount = tile.getInventory().getSlots();
+		int slotCount = tile.getInputInventory().getSlots();
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(currentSlot);
 

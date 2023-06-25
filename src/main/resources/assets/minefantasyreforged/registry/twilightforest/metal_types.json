@@ -8,7 +8,7 @@
             "name": "ironwood",
             "oreDictList": "ingotIronwood",
             "properties": {
-                "tier": 0,
+                "tier": 2,
                 "durability": 3.0,
                 "flexibility": 1.5,
                 "sharpness": 2.0,
@@ -17,6 +17,7 @@
                 "density": 2.0,
                 "melting_point": 1300,
                 "rarity": 1,
+                "enchantability": 15,
                 "craft_tier": 2,
                 "craft_time_modifier": 7.0,
                 "unbreakable": false
@@ -27,9 +28,9 @@
                 "piercing": 1.0
             },
             "color": {
-                "red": 45,
-                "green": 99,
-                "blue": 45
+                "red": 144,
+                "green": 137,
+                "blue": 96
             }
         },
         {
@@ -45,6 +46,7 @@
                 "density": 2.5,
                 "melting_point": 2800,
                 "rarity": 2,
+                "enchantability": 16,
                 "craft_tier": 4,
                 "craft_time_modifier": 14.0,
                 "unbreakable": false
@@ -73,6 +75,7 @@
                 "density": 2.0,
                 "melting_point": 1500,
                 "rarity": 3,
+                "enchantability": 14,
                 "craft_tier": 3,
                 "craft_time_modifier": 10.0,
                 "unbreakable": false
@@ -101,6 +104,7 @@
                 "density": 3.0,
                 "melting_point": 1800,
                 "rarity": 0,
+                "enchantability": 17,
                 "craft_tier": 3,
                 "craft_time_modifier": 10.0,
                 "unbreakable": false

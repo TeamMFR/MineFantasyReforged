@@ -2,8 +2,6 @@ package minefantasy.mfr;
 
 import codechicken.lib.CodeChickenLib;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
-import minefantasy.mfr.api.armour.ArmourDesign;
-import minefantasy.mfr.api.armour.CustomArmourEntry;
 import minefantasy.mfr.commands.CommandMFR;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
@@ -18,8 +16,10 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.LeatherArmourListMFR;
+import minefantasy.mfr.init.MineFantasyArmorCustomEntries;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
@@ -37,7 +37,6 @@ import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenGeological;
 import minefantasy.mfr.world.gen.structure.WorldGenStructure;
-import net.minecraft.init.Items;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -71,7 +70,9 @@ public class MineFantasyReforged {
 	public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
 	private static Configuration getCfg(FMLPreInitializationEvent event, String name) {
-		return new Configuration(new File(event.getModConfigurationDirectory(), "MineFantasyReforged/" + name + ".cfg"));
+		return new Configuration(
+				new File(event.getModConfigurationDirectory(),
+						Constants.CONFIG_DIRECTORY + "/" + name + ".cfg"));
 	}
 
 	public static boolean isDebug() {
@@ -158,34 +159,9 @@ public class MineFantasyReforged {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent postEvent) {
-		CustomArmourEntry.registerItem(Items.LEATHER_HELMET, ArmourDesign.LEATHER);
-		CustomArmourEntry.registerItem(Items.LEATHER_CHESTPLATE, ArmourDesign.LEATHER);
-		CustomArmourEntry.registerItem(Items.LEATHER_LEGGINGS, ArmourDesign.LEATHER);
-		CustomArmourEntry.registerItem(Items.LEATHER_BOOTS, ArmourDesign.LEATHER);
-
-		CustomArmourEntry.registerItem(Items.CHAINMAIL_HELMET, ArmourDesign.MAIL);
-		CustomArmourEntry.registerItem(Items.CHAINMAIL_CHESTPLATE, ArmourDesign.MAIL);
-		CustomArmourEntry.registerItem(Items.CHAINMAIL_LEGGINGS, ArmourDesign.MAIL);
-		CustomArmourEntry.registerItem(Items.CHAINMAIL_BOOTS, ArmourDesign.MAIL);
-
-		CustomArmourEntry.registerItem(Items.IRON_HELMET, ArmourDesign.SOLID, 1.5F, "medium");
-		CustomArmourEntry.registerItem(Items.IRON_CHESTPLATE, ArmourDesign.SOLID, 1.5F, "medium");
-		CustomArmourEntry.registerItem(Items.IRON_LEGGINGS, ArmourDesign.SOLID, 1.5F, "medium");
-		CustomArmourEntry.registerItem(Items.IRON_BOOTS, ArmourDesign.SOLID, 1.5F, "medium");
-
-		CustomArmourEntry.registerItem(Items.GOLDEN_HELMET, ArmourDesign.SOLID, 2F, "medium");
-		CustomArmourEntry.registerItem(Items.GOLDEN_CHESTPLATE, ArmourDesign.SOLID, 2F, "medium");
-		CustomArmourEntry.registerItem(Items.GOLDEN_LEGGINGS, ArmourDesign.SOLID, 2F, "medium");
-		CustomArmourEntry.registerItem(Items.GOLDEN_BOOTS, ArmourDesign.SOLID, 2F, "medium");
-		
-		CustomArmourEntry.registerItem(Items.DIAMOND_HELMET, ArmourDesign.SOLID, 2.5F, "medium");
-		CustomArmourEntry.registerItem(Items.DIAMOND_CHESTPLATE, ArmourDesign.SOLID, 2.5F, "medium");
-		CustomArmourEntry.registerItem(Items.DIAMOND_LEGGINGS, ArmourDesign.SOLID, 2.5F, "medium");
-		CustomArmourEntry.registerItem(Items.DIAMOND_BOOTS, ArmourDesign.SOLID, 2.5F, "medium");
-
+		MineFantasyArmorCustomEntries.initVanillaArmorEntries();
+		MineFantasyArmorCustomEntries.initModdedArmorCustomEntries();
 		ConfigItemRegistry.readCustoms();
-
-		MineFantasyOreDict.registerOreDictEntries();
 
 		for (Biome biome : Biome.REGISTRY) {
 			registerBiomeStuff(biome);
@@ -197,7 +173,9 @@ public class MineFantasyReforged {
 
 		MetalMaterial.addHeatables();
 
+		//See the MFREventHandler.oreDictRegistry for the rest of the OreDict registrations
 		MineFantasyOreDict.registerOreDictCommonIngotEntry();
+		MineFantasyItems.addRandomDrops();
 
 		CarpenterRecipeLoader.INSTANCE.postInit();
 		AnvilRecipeLoader.INSTANCE.postInit();

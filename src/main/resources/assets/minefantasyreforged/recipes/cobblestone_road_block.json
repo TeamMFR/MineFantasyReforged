@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:cobblestone_road"
+		}
+
+	],
+	"result": {
+		"item": "minefantasyreforged:cobblestone_road_block",
+		"count": 1
+	}
+}

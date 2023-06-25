@@ -8,7 +8,9 @@
         "uvlock": true
     },
     "variants": {
-        "normal": [{ }],
+        "normal": {
+            "model": "builtin/handheld"
+        },
         "inventory": [{ }],
         "stage=0":[{ }],
         "stage=1":[{ }]

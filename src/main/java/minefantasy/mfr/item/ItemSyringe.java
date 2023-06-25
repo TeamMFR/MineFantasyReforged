@@ -2,10 +2,12 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -26,6 +28,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class ItemSyringe extends ItemBaseMFR {
@@ -43,8 +46,10 @@ public class ItemSyringe extends ItemBaseMFR {
 		}
 
 		Multimap<String, AttributeModifier> map = HashMultimap.create();
-		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0, 0));
-
+		map.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+				new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 0, 0));
+		map.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+				new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -3.2F, 0));
 		return map;
 	}
 
@@ -52,10 +57,8 @@ public class ItemSyringe extends ItemBaseMFR {
 	public boolean hitEntity(ItemStack item, EntityLivingBase target, EntityLivingBase user) {
 		World world = user.world;
 
-		target.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
-		target.playSound(MineFantasySounds.BLADE_METAL, 1.0F, 1.5F);
 		if (!world.isRemote) {
-			apply(target, item);
+			applyPotion(target, item);
 		}
 
 		if (user instanceof EntityPlayer && !((EntityPlayer) user).capabilities.isCreativeMode) {
@@ -81,14 +84,14 @@ public class ItemSyringe extends ItemBaseMFR {
 		}
 		player.setActiveHand(hand);
 
+		player.getCooldownTracker().setCooldown(this, ConfigSpecials.syringeCooldownValue);
+
 		if (!player.capabilities.isCreativeMode) {
 			stack.shrink(1);
 		}
 
-		player.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
-		player.playSound(MineFantasySounds.BLADE_METAL, 1.0F, 1.5F);
 		if (!world.isRemote) {
-			apply(player, stack);
+			applyPotion(player, stack);
 		}
 
 		if (!player.capabilities.isCreativeMode) {
@@ -104,12 +107,21 @@ public class ItemSyringe extends ItemBaseMFR {
 		return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
 	}
 
-	private void apply(EntityLivingBase target, ItemStack item) {
+	private void applyPotion(EntityLivingBase target, ItemStack item) {
 		List<PotionEffect> list = PotionUtils.getEffectsFromStack(item);
 
 		for (PotionEffect potion : list) {
-			target.addPotionEffect(new PotionEffect(potion));
+			if (!target.isPotionActive(potion.getPotion()) || target instanceof EntityPlayer) {
+				target.addPotionEffect(new PotionEffect(potion));
+				target.playSound(SoundEvents.ENTITY_GENERIC_DRINK, 1.0F, 2.0F);
+				target.playSound(MineFantasySounds.BLADE_METAL, 1.0F, 1.5F);
+			}
 		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+		PotionUtils.addPotionTooltip(stack, tooltip, 1.0F);
 	}
 
 	@SideOnly(Side.CLIENT)

@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:fireclay_brick"
+    },
+    "result" : {
+        "item": "minefantasyreforged:strong_brick"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventceramic"
+            }
+        }
+    ]
+}

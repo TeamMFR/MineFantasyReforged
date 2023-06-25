@@ -89,7 +89,7 @@ public class TileEntityTanningRackRenderer<T extends TileEntity> extends TileEnt
 	}
 
 	private void renderHungItem(TileEntityTanningRack tile) {
-		ItemStack stack = tile.getInventory().getStackInSlot(0);
+		ItemStack stack = tile.getInputInventory().getStackInSlot(0);
 		if (!stack.isEmpty()) {
 			GlStateManager.scale(0.9F, 0.9F, 0.9F);
 			GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);

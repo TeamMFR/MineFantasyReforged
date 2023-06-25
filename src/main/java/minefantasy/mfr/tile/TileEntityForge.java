@@ -4,6 +4,7 @@ import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IHeatSource;
 import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.api.heating.ForgeFuel;
+import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
@@ -13,6 +14,7 @@ import minefantasy.mfr.container.ContainerForge;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.Functions;
+import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -52,10 +54,45 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	private int ticksExisted;
 
 	public final ItemStackHandler inventory = createInventory();
+	public final ItemStackHandler fuelInventory = createFuelInventory();
 
 	@Override
 	protected ItemStackHandler createInventory() {
 		return new ItemStackHandler(1);
+	}
+
+	protected ItemStackHandler createFuelInventory() {
+		return new ItemStackHandler(1) {
+
+			@Nonnull
+			@Override
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+				if (isItemValidForSlot(slot, stack)) {
+					return super.insertItem(slot, stack, simulate);
+				}
+				else {
+					return stack;
+				}
+			}
+
+			@Override
+			protected void onContentsChanged(int slot) {
+				ItemStack fuelStack = getStackInSlot(slot);
+				ForgeFuel stats = ForgeItemHandler.getStats(fuelStack);
+				if (stats != null) {
+					if (addFuel(stats, false)) {
+						if (fuelStack != ItemStack.EMPTY) {
+							setStackInSlot(0, ItemStack.EMPTY);
+						}
+					}
+				}
+			}
+
+			@Override
+			public int getSlotLimit(int slot) {
+				return 1;
+			}
+		};
 	}
 
 	@Override
@@ -93,6 +130,17 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			ItemStack item = getInventory().getStackInSlot(0);
 			if (!item.isEmpty() && !world.isRemote) {
 				modifyItem(item);
+			}
+			ItemStack fuelItem = fuelInventory.getStackInSlot(0);
+			if (!fuelItem.isEmpty() && !world.isRemote) {
+				ForgeFuel stats = ForgeItemHandler.getStats(fuelItem);
+				if (stats != null) {
+					if (addFuel(stats, false)) {
+						if (fuelItem != ItemStack.EMPTY) {
+							fuelInventory.setStackInSlot(0, ItemStack.EMPTY);
+						}
+					}
+				}
 			}
 			sendUpdates();
 		}
@@ -245,7 +293,8 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		return true;
+		ForgeFuel stats = ForgeItemHandler.getStats(item);
+		return stats != null;
 	}
 
 	public boolean getIsLit(){
@@ -290,8 +339,8 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		return (int) maxTemperature;
 	}
 
-	public boolean addFuel(ForgeFuel stats, boolean hand, int tier) {
-		maxFuel = tier == 1 ? 12000 : 6000;
+	public boolean addFuel(ForgeFuel stats, boolean hand) {
+		maxFuel = getTier() == 1 ? 12000 : 6000;
 
 		boolean hasUsed = stats.baseHeat > this.fuelTemperature;
 
@@ -457,6 +506,14 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		return "forge_" + forge.type + (getIsLit() ? "_active" : "");
 	}
 
+	@Override
+	public void onBlockBreak() {
+		if (!fuelInventory.getStackInSlot(0).isEmpty()) {
+			fuelInventory.setStackInSlot(0, ItemStack.EMPTY);
+		}
+		InventoryUtils.dropItemsInWorld(world, getInventory(), pos);
+	}
+
 	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
@@ -471,6 +528,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		nbt.setBoolean("isLit", isLit);
 
 		nbt.setTag("inventory", inventory.serializeNBT());
+		nbt.setTag("fuelInventory", fuelInventory.serializeNBT());
 
 		return nbt;
 	}
@@ -488,6 +546,7 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		isLit = nbt.getBoolean("isLit");
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+		fuelInventory.deserializeNBT(nbt.getCompoundTag("fuelInventory"));
 	}
 
 	@Override
@@ -499,7 +558,12 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	@Override
 	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
 		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInventory());
+			if (facing == EnumFacing.UP) {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(fuelInventory);
+			}
+			else {
+				return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(inventory);
+			}
 		}
 		return super.getCapability(capability, facing);
 	}

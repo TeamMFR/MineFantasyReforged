@@ -11,11 +11,13 @@
     },
     "variants": {
         "normal": [{}],
-        "axis": {
-            "y": {},
-            "z": {"x": 90},
-            "x": {"x": 90, "y": 90},
-            "none": {}
-        }
+        "axis=y,tree_base=true"     : {"model": "cube_bottom_top"},
+        "axis=y,tree_base=false"    : {"model": "cube_bottom_top"},
+        "axis=z,tree_base=true"     : {"model": "cube_bottom_top","x": 90},
+        "axis=z,tree_base=false"    : {"model": "cube_bottom_top","x": 90},
+        "axis=x,tree_base=true"     : {"model": "cube_bottom_top","x": 90, "y": 90},
+        "axis=x,tree_base=false"    : {"model": "cube_bottom_top","x": 90, "y": 90},
+        "axis=none,tree_base=true"  : {"model": "cube_bottom_top"},
+        "axis=none,tree_base=false" : {"model": "cube_bottom_top"}
     }
 }

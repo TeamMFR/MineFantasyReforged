@@ -1,6 +1,7 @@
 package minefantasy.mfr.client.render;
 
 import minefantasy.mfr.MFREventHandler;
+import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
@@ -41,7 +42,7 @@ public class BlockingAnimationHandler {
         if (evt.getEntity() instanceof AbstractClientPlayer) {
 
             AbstractClientPlayer player = (AbstractClientPlayer) evt.getEntity();
-            if (player.isHandActive() && PlayerUtils.shouldItemStackBlock(player.getActiveItemStack())) {
+            if (player.isHandActive() && PlayerUtils.shouldItemStackBlock(player.getActiveItemStack(), player.getHeldItemOffhand())) {
                 ModelBiped model = (ModelBiped) evt.getRenderer().getMainModel();
                 boolean left1 = player.getActiveHand() == EnumHand.OFF_HAND && player.getPrimaryHand() == EnumHandSide.RIGHT;
                 boolean left2 = player.getActiveHand() == EnumHand.MAIN_HAND && player.getPrimaryHand() == EnumHandSide.LEFT;
@@ -69,7 +70,7 @@ public class BlockingAnimationHandler {
             boolean rightHanded = (evt.getHand() == EnumHand.MAIN_HAND ? player.getPrimaryHand() : player.getPrimaryHand().opposite()) == EnumHandSide.RIGHT;
             if (player.isHandActive() && player.getActiveHand() == evt.getHand()) {
                 ItemStack stack = evt.getItemStack();
-                if (PlayerUtils.shouldItemStackBlock(stack)) {
+                if (PlayerUtils.shouldItemStackBlock(stack, player.getHeldItemOffhand())) {
                     GlStateManager.pushMatrix();
                     this.transformSideFirstPerson(rightHanded ? 1.0F : -1.0F, evt.getEquipProgress());
                     this.mc.getItemRenderer().renderItemSide(player, stack, rightHanded ? ItemCameraTransforms.TransformType.FIRST_PERSON_RIGHT_HAND : ItemCameraTransforms.TransformType.FIRST_PERSON_LEFT_HAND, !rightHanded);
@@ -78,7 +79,9 @@ public class BlockingAnimationHandler {
                 }
             }
 
-            performCounterAttackAnimation(player, evt.getItemStack(), rightHanded);
+            if (ConfigWeapon.shouldUseMfrCustomAnimations) {
+                performCounterAttackAnimation(player, evt.getItemStack(), rightHanded);
+            }
         }
 
     }

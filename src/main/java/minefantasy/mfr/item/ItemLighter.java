@@ -41,6 +41,11 @@ public class ItemLighter extends ItemBaseMFR implements ILighter {
 	}
 
 	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return true;
+	}
+
+	@Override
 	public boolean canLight() {
 		return true;
 	}

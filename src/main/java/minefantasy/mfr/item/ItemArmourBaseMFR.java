@@ -7,8 +7,10 @@ import minefantasy.mfr.api.armour.IArmourRating;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.ArmorMaterialMFR;
+import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ArmourCalculator;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.client.resources.I18n;
@@ -211,9 +213,21 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 		return scalePiece();
 	}
 
+	/**
+	 * ItemStack sensitive version of getItemEnchantability
+	 *
+	 * @param stack The ItemStack
+	 * @return the item enchantability value
+	 */
 	@Override
-	public int getItemEnchantability() {
-		return material.enchantability;
+	public int getItemEnchantability(ItemStack stack) {
+		CustomMaterial customMaterial = CustomToolHelper.getCustomPrimaryMaterial(stack);
+		if (customMaterial != CustomMaterial.NONE) {
+			return customMaterial.enchantability;
+		}
+		else {
+			return material.enchantability;
+		}
 	}
 
 	@Override

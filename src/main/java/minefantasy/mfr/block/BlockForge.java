@@ -32,6 +32,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -42,7 +43,7 @@ import java.util.Random;
 
 public class BlockForge extends BlockTileEntity<TileEntityForge> {
 	private static final PropertyBool BURNING = PropertyBool.create("burning");
-	private static final PropertyBool UNDER = PropertyBool.create("under");
+	public static final PropertyBool UNDER = PropertyBool.create("under");
 	private static final PropertyInteger FUEL_COUNT = PropertyInteger.create("fuel_count", 0, 3);
 
 	public int tier;
@@ -177,7 +178,10 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 		if (tile != null) {
 			if (tile.getIsLit() && !ItemApron.isUserProtected(player)) {
 				player.setFire(5);
-				player.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
+				player.attackEntityFrom(DamageSource.ON_FIRE, player.isWet() ? 3 : 1);
+				if (!player.world.isRemote) {
+					player.sendMessage(new TextComponentTranslation("info.noHeatProtection.message"));
+				}
 			}
 			if (!held.isEmpty()) {
 				if (facing == EnumFacing.UP && held.getItem() instanceof ItemTongs && onUsedTongs(player, held, tile)) {
@@ -201,7 +205,7 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 				}
 
 				ForgeFuel stats = ForgeItemHandler.getStats(held);
-				if (stats != null && tile.addFuel(stats, true, tier)) {
+				if (stats != null && tile.addFuel(stats, true)) {
 					if (player.capabilities.isCreativeMode) {
 						return true;
 					}

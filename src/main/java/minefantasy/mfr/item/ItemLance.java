@@ -100,11 +100,6 @@ public class ItemLance extends ItemSpear {
 	}
 
 	@Override
-	public boolean canBlock() {
-		return false;
-	}
-
-	@Override
 	public EnumAction getItemUseAction(ItemStack item) {
 		return EnumAction.NONE;
 	}

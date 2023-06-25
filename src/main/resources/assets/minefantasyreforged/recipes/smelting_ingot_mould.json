@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:ingot_mould_uncooked"
+    },
+    "result" : {
+        "item": "minefantasyreforged:ingot_mould"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventceramic"
+            }
+        }
+    ]
+}

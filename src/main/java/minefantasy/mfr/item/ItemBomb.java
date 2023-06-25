@@ -196,7 +196,8 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 
 		if (!world.isRemote) {
 
-			EntityBomb bomb = new EntityBomb(world, entity, item).setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
+			EntityBomb bomb = new EntityBomb(world, entity, item)
+					.setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
 			world.spawnEntity(bomb);
 			if (item.hasTagCompound() && item.getTagCompound().hasKey("stickyBomb")) {
 				bomb.getEntityData().setBoolean("stickyBomb", true);

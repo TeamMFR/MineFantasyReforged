@@ -47,11 +47,6 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	}
 
 	@Override
-	public boolean isEnchantable(ItemStack stack) {
-		return false;
-	}
-
-	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 
@@ -75,7 +70,7 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	public void addInformation(ItemStack tool, World world, List<String> list, ITooltipFlag flag) {
 		super.addInformation(tool, world, list, flag);
 		if (!canDamage) {
-			CustomToolHelper.addComponentString(tool, list, getBase(tool), mass);
+			CustomToolHelper.addComponentString(list, getBase(tool), mass);
 		}
 		if (this == MineFantasyItems.COGWORK_ARMOUR) {
 			int AR = EntityCogwork.getArmourRating(getBase(tool));
@@ -86,7 +81,6 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack tool) {
 		return CustomToolHelper.getLocalisedName(tool, "item.commodity_" + name + ".name");
 	}

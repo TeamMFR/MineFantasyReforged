@@ -26,11 +26,6 @@ public class ItemDagger extends ItemWeaponMFR {
 		super(material, name, rarity, weight);
 	}
 
-	@Override
-	public boolean canBlock() {
-		return true;
-	}
-
 	/**
 	 * Determines if the weapon can parry
 	 */

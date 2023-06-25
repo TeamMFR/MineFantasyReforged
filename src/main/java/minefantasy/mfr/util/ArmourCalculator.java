@@ -303,8 +303,8 @@ public class ArmourCalculator {
 		if (item instanceof IDamageType) {
 			return user != null ? ((IDamageType) item).getDamageRatio(weapon, user) : ((IDamageType) item).getDamageRatio(weapon);
 		}
-		if (CustomDamageRatioEntry.getTraits(item) != null) {
-			return CustomDamageRatioEntry.getTraits(item);
+		if (CustomDamageRatioEntry.getTraits(weapon) != null) {
+			return CustomDamageRatioEntry.getTraits(weapon);
 		}
 		if (item instanceof ItemSword) {
 			return new float[] {1, 0, 0};// sword is cutting by default
@@ -319,7 +319,7 @@ public class ArmourCalculator {
 			return new float[] {0, 1, 0};// Tools are blunt
 		}
 
-		return CustomDamageRatioEntry.getTraits(item);
+		return CustomDamageRatioEntry.getTraits(weapon);
 	}
 
 	private static float[] getMobDefault(EntityLivingBase user) {

@@ -14,8 +14,8 @@ public class MetalMaterial extends CustomMaterial {
 
 	public String oreDictList;
 
-	public MetalMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness, float resistance, float density, float[] armourProtection, int[] color, String oreDictList) {
-		super(name, "metal", tier, hardness, durability, flexibility, resistance, sharpness, density, armourProtection, color);
+	public MetalMaterial(String name, int tier, float hardness, float durability, float flexibility, float sharpness, float resistance, float density, int enchantability, float[] armourProtection, int[] color, String oreDictList) {
+		super(name, "metal", tier, hardness, durability, flexibility, resistance, sharpness, density, enchantability, armourProtection, color);
 		this.oreDictList = oreDictList;
 		setArmourStats(1.0F, flexibility, 1F / flexibility);// Harder materials absorb blunt less but resist cutting and piercing more
 

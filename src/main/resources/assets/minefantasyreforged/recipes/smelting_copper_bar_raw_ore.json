@@ -1,0 +1,19 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:ore_copper"
+    },
+    "result" : {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"copper\"}}"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccreduceingots"
+            }
+        }
+    ]
+}

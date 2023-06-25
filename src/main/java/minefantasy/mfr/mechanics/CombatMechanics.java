@@ -899,7 +899,9 @@ public class CombatMechanics {
 	}
 
 	private static void tryDodge(EntityPlayer user) {
-		if (user.isActiveItemStackBlocking() || user.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block")) {
+		if (user.isActiveItemStackBlocking()
+				|| user.getActiveItemStack().getItemUseAction() == EnumAction.valueOf("mfr_block")
+				|| (TacticalManager.checkAllowsOffhandOnBoth(user))) {
 			float forward = user.moveForward;
 			float side = user.moveStrafing;
 			if (side > 0F) {

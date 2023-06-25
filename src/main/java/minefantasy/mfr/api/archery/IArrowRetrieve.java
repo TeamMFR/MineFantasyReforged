@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.archery;
 
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 
 public interface IArrowRetrieve {
@@ -8,7 +9,7 @@ public interface IArrowRetrieve {
 	 * to the canBePickedUp variable)
 	 * @return True if the arrow can be picked up
 	 */
-	boolean canBePickedUp();
+	EntityArrow.PickupStatus canBePickedUp();
 
 	/**
 	 * Gets the item dropped when the enemy is killed (the arrow item used)

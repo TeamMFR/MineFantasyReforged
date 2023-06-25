@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -23,8 +24,8 @@ public class AnvilRecipeLoader extends RecipeLoader {
 	private static final int GRID_WIDTH = 6;
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "anvil";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/anvil_recipes";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/recipes/anvil_recipes/";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.CONFIG_DIRECTORY +"/anvil_recipes";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/anvil_recipes/";
 
 	public static final List<JsonObject> list = new ArrayList<>();
 

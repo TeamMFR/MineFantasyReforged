@@ -9,7 +9,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.HashMap;
 
 public class Heatable {
-	public static final int forgeMaximumMetalHeat = 5000;
+	public static final int FORGE_MAXIMUM_METAL_HEAT = 5000;
 	public static final String NBT_Item = "mf_heatable_item_save";
 	// public static final String NBT_ItemID = "mf_heatable_item_id";
 	// public static final String NBT_SubID = "mf_uheatable_sub_id";

@@ -1,0 +1,12 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:nitre_ore"
+    },
+    "result" : {
+        "item": "minefantasyreforged:nitre",
+        "count": 4
+    },
+    "experience": 0.25
+}

@@ -1,0 +1,13 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:limestone_road"
+		}
+
+	],
+	"result": {
+		"item": "minefantasyreforged:limestone_road_block",
+		"count": 1
+	}
+}

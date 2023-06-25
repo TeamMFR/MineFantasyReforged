@@ -8,6 +8,7 @@ import minefantasy.mfr.item.ItemHeated;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
@@ -37,10 +38,18 @@ public class RenderHotItem extends WrappedItemModel implements IItemRenderer {
 
 		GlStateManager.pushMatrix();
 
+		GlStateManager.disableLighting();
+		GlStateManager.disableBlend();
+		GlStateManager.depthMask(true);
+		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.f, 240.f);
+
 		IBakedModel heldModel = Minecraft.getMinecraft().getRenderItem().getItemModelWithOverrides(held, world, entity);
 
 		GlStateManager.translate(0.5F, 0.5F, 0.5F);
 		Minecraft.getMinecraft().getRenderItem().renderItem(stack, heldModel);
+
+		GlStateManager.enableLighting();
+		GlStateManager.enableBlend();
 
 		GlStateManager.popMatrix();
 

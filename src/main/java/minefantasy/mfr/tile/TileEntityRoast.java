@@ -49,7 +49,19 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 
 	@Override
 	protected ItemStackHandler createInventory() {
-		return new ItemStackHandler(1);
+		return new ItemStackHandler(1) {
+			//Used to limit the stack size to 1 for the slot, so automated interactions can't over fill it
+			@Override
+			protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+				return 1;
+			}
+
+			//Used to detect content changes in the inventory, and update the recipe, so it will begin cooking
+			@Override
+			protected void onContentsChanged(int slot) {
+				updateRecipe();
+			}
+		};
 	}
 
 	@Override

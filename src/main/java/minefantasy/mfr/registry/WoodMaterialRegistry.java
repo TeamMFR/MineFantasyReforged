@@ -3,6 +3,7 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.FileUtils;
@@ -20,8 +21,8 @@ public class WoodMaterialRegistry extends DataLoader {
 	public static final WoodMaterialRegistry INSTANCE = new WoodMaterialRegistry();
 
 	private static final String TYPE = "wood material";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/registry";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/registry";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.CONFIG_DIRECTORY +"/registry";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/registry";
 
 	public void preInit() {
 		createCustomDataDirectory(CUSTOM_RECIPE_DIRECTORY);

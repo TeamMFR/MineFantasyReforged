@@ -1,0 +1,11 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:prepared_coal"
+    },
+    "result" : {
+        "item": "minefantasyreforged:coke"
+    },
+    "experience": 1
+}

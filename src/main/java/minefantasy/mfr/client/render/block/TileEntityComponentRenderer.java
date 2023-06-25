@@ -7,6 +7,8 @@ import minefantasy.mfr.client.model.block.ModelJugStack;
 import minefantasy.mfr.client.model.block.ModelPlankStack;
 import minefantasy.mfr.client.model.block.ModelPotStack;
 import minefantasy.mfr.client.model.block.ModelSheetStack;
+import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityComponent;
 import minefantasy.mfr.util.TextureHelperMFR;
@@ -41,7 +43,8 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends TileEntit
 	}
 
 	public void renderModelAt(TileEntityComponent tile, double d, double d1, double d2) {
-		if (!tile.getItem().isEmpty()) {
+		if (!tile.getInventory().getStackInSlot(0).isEmpty()
+				&& tile.getInventory().getStackInSlot(0).getItem() != MineFantasyItems.PERSISTENT_COMPONENT_FLAG) {
 			EnumFacing facing = EnumFacing.NORTH;
 			if (tile.hasWorld()) {
 				IBlockState state = tile.getWorld().getBlockState(tile.getPos());
@@ -52,7 +55,7 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends TileEntit
 			float scale = 1.0F;
 			float yOffset = 1.0F;
 			GlStateManager.translate((float) d + 0.5F, (float) d1 + yOffset, (float) d2 + 0.5F); // size
-			GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on metadata
+			GlStateManager.rotate(-facing.getHorizontalAngle(), 0.0F, 1.0F, 0.0F); // rotate based on facing
 			GlStateManager.scale(scale, -scale, -scale); // if you read this comment out this line and you can see what happens
 			GlStateManager.pushMatrix();
 
@@ -63,7 +66,7 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends TileEntit
 
 			bindTextureByName("textures/models/object/component/placed_" + tile.tex + ".png"); // texture
 
-			render(tile.type, tile.stackSize, 0.0625F);
+			render(tile.type, tile.getInventory().getStackInSlot(0).getCount());
 
 			GlStateManager.color(1F, 1F, 1F);
 
@@ -74,24 +77,25 @@ public class TileEntityComponentRenderer<T extends TileEntity> extends TileEntit
 
 	}
 
-	private void render(String type, int stackSize, float f) {
-		if (type.equalsIgnoreCase("bar")) {
-			bars.render(stackSize, f);
+	private void render(String type, int stackSize) {
+
+		if (type.equalsIgnoreCase(Constants.StorageTextures.BAR)) {
+			bars.render(stackSize, (float) 0.0625);
 		}
-		if (type.equalsIgnoreCase("sheet")) {
-			sheets.render(stackSize, f);
+		if (type.equalsIgnoreCase(Constants.StorageTextures.SHEET)) {
+			sheets.render(stackSize, (float) 0.0625);
 		}
-		if (type.equalsIgnoreCase("plank")) {
-			planks.render(stackSize, f);
+		if (type.equalsIgnoreCase(Constants.StorageTextures.PLANK)) {
+			planks.render(stackSize, (float) 0.0625);
 		}
-		if (type.equalsIgnoreCase("pot")) {
-			pots.render(stackSize, f);
+		if (type.equalsIgnoreCase(Constants.StorageTextures.POT)) {
+			pots.render(stackSize, (float) 0.0625);
 		}
-		if (type.equalsIgnoreCase("bigplate")) {
-			bigplates.render(stackSize, f);
+		if (type.equalsIgnoreCase(Constants.StorageTextures.BIGPLATE)) {
+			bigplates.render(stackSize, (float) 0.0625);
 		}
-		if (type.equalsIgnoreCase("jug")) {
-			jugs.render(stackSize, f);
+		if (type.equalsIgnoreCase(Constants.StorageTextures.JUG)) {
+			jugs.render(stackSize, (float) 0.0625);
 		}
 	}
 

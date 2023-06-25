@@ -3,33 +3,31 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.proxy.IClientRegister;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLog;
-import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Random;
-
 public class BlockLogMF extends BlockLog implements IClientRegister {
-	private String name;
-	private Random rand = new Random();
+	public static final PropertyBool TREE_BASE = PropertyBool.create("tree_base");
 
 	public BlockLogMF(String baseWood) {
 		super();
-		setDefaultState(blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+		setDefaultState(blockState.getBaseState()
+				.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y)
+				.withProperty(TREE_BASE, false));
 
-		name = "log_" + baseWood.toLowerCase();
+		String name = "log_" + baseWood.toLowerCase();
 		setRegistryName(name);
 		setTranslationKey(name);
 		this.setHarvestLevel("axe", 0);
@@ -37,25 +35,19 @@ public class BlockLogMF extends BlockLog implements IClientRegister {
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
-	private Block getSaplingDrop() {
-		return this == MineFantasyBlocks.LOG_EBONY ? MineFantasyBlocks.SAPLING_EBONY : this == MineFantasyBlocks.LOG_IRONBARK ? MineFantasyBlocks.SAPLING_IRONBARK : MineFantasyBlocks.SAPLING_YEW;
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, LOG_AXIS, TREE_BASE);
 	}
 
 	@Override
-	public void breakBlock(World world, BlockPos pos, IBlockState state) {
-		super.breakBlock(world, pos, state);
-		if (state == this.blockState) {
-			float f = this.rand.nextFloat() * 0.8F + 0.1F;
-			float f1 = this.rand.nextFloat() * 0.8F + 0.1F;
-			float f2 = this.rand.nextFloat() * 0.8F + 0.1F;
-
-			EntityItem entityitem = new EntityItem(world, pos.getX() + f, pos.getY() + f1, pos.getZ() + f2, new ItemStack(getSaplingDrop(), 1));
-
-			float f3 = 0.05F;
-			entityitem.motionX = (float) this.rand.nextGaussian() * f3;
-			entityitem.motionY = (float) this.rand.nextGaussian() * f3 + 0.2F;
-			entityitem.motionZ = (float) this.rand.nextGaussian() * f3;
-			world.spawnEntity(entityitem);
+	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		super.getDrops(drops, world, pos, state, fortune);
+		if (state.getValue(TREE_BASE)) {
+			drops.add(new ItemStack(
+					this == MineFantasyBlocks.LOG_EBONY ? MineFantasyBlocks.SAPLING_EBONY //if ebony, drop ebony sapling
+					: this == MineFantasyBlocks.LOG_IRONBARK ? MineFantasyBlocks.SAPLING_IRONBARK //if ironbark, drop ironbark sapling
+					: MineFantasyBlocks.SAPLING_YEW)); //if not anything else, drop yew sapling
 		}
 	}
 
@@ -64,49 +56,46 @@ public class BlockLogMF extends BlockLog implements IClientRegister {
 		return 0;
 	}
 
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-		IBlockState state = this.getDefaultState();
+	public IBlockState getStateFromMeta(int meta)
+	{
+		IBlockState iblockstate = this.getDefaultState().withProperty(TREE_BASE, meta == 1);
 
-		switch (meta & 12) {
+		switch (meta & 12)
+		{
 			case 0:
-				state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
+				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
 				break;
 			case 4:
-				state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
+				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.X);
 				break;
 			case 8:
-				state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
+				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
 				break;
 			default:
-				state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
+				iblockstate = iblockstate.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
 		}
 
-		return state;
+		return iblockstate;
 	}
 
-	@Override
 	@SuppressWarnings("incomplete-switch")
-	public int getMetaFromState(IBlockState state) {
-		int meta = 0;
+	public int getMetaFromState(IBlockState state)
+	{
+		int i = state.getValue(TREE_BASE) ? 1 : 0;
 
-		switch (state.getValue(LOG_AXIS)) {
+		switch (state.getValue(LOG_AXIS))
+		{
 			case X:
-				meta |= 4;
+				i |= 4;
 				break;
 			case Z:
-				meta |= 8;
+				i |= 8;
 				break;
 			case NONE:
-				meta |= 12;
+				i |= 12;
 		}
 
-		return meta;
-	}
-
-	@Override
-	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {LOG_AXIS});
+		return i;
 	}
 
 	@Override

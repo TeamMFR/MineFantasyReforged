@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class CustomMaterial {
 
-	public static final CustomMaterial NONE = new CustomMaterial("none", "none", 0, 0, 0, 0, 0, 0, 0);
+	public static final CustomMaterial NONE = new CustomMaterial("none", "none", 0, 0, 0, 0, 0, 0, 0, 0);
 
 	private static final String NBTBase = "mf_custom_materials";
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
@@ -56,6 +56,7 @@ public class CustomMaterial {
 	public float density;
 	public int tier;
 	public int rarityID = 0;
+	public int enchantability;
 	public int crafterTier = 0;
 	public int crafterAnvilTier = 0;
 	public float craftTimeModifier = 1.0F;
@@ -63,7 +64,7 @@ public class CustomMaterial {
 	private float[] armourProtection = new float[] {1.0F, 1.0F, 1.0F}; // TODO: consider making this property into a typed class
 	private boolean unbreakable = false;
 
-	public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density) {
+	public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density, int enchantability) {
 		this.name = name;
 		this.type = type;
 		this.tier = tier;
@@ -73,10 +74,11 @@ public class CustomMaterial {
 		this.sharpness = sharpness;
 		this.density = density;
 		this.resistance = resistance;
+		this.enchantability = enchantability;
 		this.craftTimeModifier = 2F + (sharpness * 2F);
 	}
 
-	public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density, float[] armourProtection, int[] color) {
+	public CustomMaterial(String name, String type, int tier, float hardness, float durability, float flexibility, float resistance, float sharpness, float density, int enchantability, float[] armourProtection, int[] color) {
 		this.name = name;
 		this.type = type;
 		this.tier = tier;
@@ -85,6 +87,7 @@ public class CustomMaterial {
 		this.flexibility = flexibility;
 		this.sharpness = sharpness;
 		this.density = density;
+		this.enchantability = enchantability;
 		this.resistance = resistance;
 		this.craftTimeModifier = 2F + (sharpness * 2F);
 		this.armourProtection = armourProtection;
@@ -150,11 +153,11 @@ public class CustomMaterial {
 	 * @param density     how dense the element is, increasing mass per unit. (KG/Units)
 	 */
 	public static CustomMaterial getOrAddMaterial(String name, String type, int tier, float hardness, float durability,
-			float flexibility, float sharpness, float resistance, float density, int red, int green, int blue) {
+			float flexibility, float sharpness, float resistance, float density, int enchantability, int red, int green, int blue) {
 		if (getMaterial(name) != CustomMaterial.NONE) {
 			return getMaterial(name);
 		}
-		return new CustomMaterial(name, type, tier, hardness, durability, flexibility, sharpness, resistance, density).setColour(red, green, blue).register();
+		return new CustomMaterial(name, type, tier, hardness, durability, flexibility, sharpness, resistance, density, enchantability).setColour(red, green, blue).register();
 	}
 
 	public static void addMaterial(ItemStack item, String slot, String material) {

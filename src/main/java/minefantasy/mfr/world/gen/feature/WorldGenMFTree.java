@@ -1,6 +1,7 @@
 package minefantasy.mfr.world.gen.feature;
 
 import com.google.common.collect.Lists;
+import minefantasy.mfr.block.BlockLogMF;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
@@ -325,6 +326,7 @@ public class WorldGenMFTree extends WorldGenAbstractTree {
 			this.generateLeaves(LEAVES);
 			this.generateTrunk(LOG);
 			this.generateLeafNodeBases(LOG);
+			world.setBlockState(position, LOG.getDefaultState().withProperty(BlockLogMF.TREE_BASE, true));
 			this.world = null; //Fix vanilla Mem leak, holds latest world
 			return true;
 		}

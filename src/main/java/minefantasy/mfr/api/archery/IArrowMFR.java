@@ -19,7 +19,7 @@ public interface IArrowMFR {
 	float getGravityModifier(ItemStack arrow);
 
 	/**
-	 * Gets the chance the arrow will break on impace (0.0 = no chance, 1.0 = 100%
+	 * Gets the chance the arrow will break on impact (0.0 = no chance, 1.0 = 100%
 	 * chance)
 	 * @param entityArrow The Entity of the Arrow (fired and flying through the air)
 	 * @param arrow The Itemstack of the Arrow

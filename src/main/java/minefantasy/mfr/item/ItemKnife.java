@@ -33,8 +33,6 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -101,11 +99,6 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 	@Override
 	public Tool getToolType(ItemStack stack) {
 		return Tool.KNIFE;
-	}
-
-	@Override
-	public boolean canBlock() {
-		return false;
 	}
 
 	/**
@@ -234,7 +227,6 @@ public class ItemKnife extends ItemWeaponMFR implements IToolMFR, IHuntingItem {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
 		return CustomToolHelper.getLocalisedName(item, unlocalName);

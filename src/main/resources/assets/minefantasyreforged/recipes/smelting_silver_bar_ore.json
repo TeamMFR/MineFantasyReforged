@@ -1,0 +1,20 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "ore_dict",
+        "item": "oreSilver"
+    },
+    "result" : {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"silver\"}}"
+    },
+    "experience": 0.9,
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccreduceingots"
+            }
+        }
+    ]
+}

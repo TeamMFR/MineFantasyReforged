@@ -75,10 +75,11 @@ public class ArrowEffectsMF {
 	 */
 	public static boolean shouldArrowStick(Entity projectile) {
 		if (projectile instanceof IArrowRetrieve) {
-			return ((IArrowRetrieve) projectile).canBePickedUp();
+			EntityArrow.PickupStatus pickupStatus = ((IArrowRetrieve) projectile).canBePickedUp();
+			return pickupStatus != EntityArrow.PickupStatus.DISALLOWED;
 		}
 		if (projectile instanceof EntityArrow) {
-			return ((EntityArrow) projectile).captureDrops;
+			return projectile.captureDrops;
 		}
 		return true;
 	}
@@ -90,7 +91,7 @@ public class ArrowEffectsMF {
 	 * @param entity the entity killed
 	 */
 	public static List<ItemStack> getStuckArrows(Entity entity) {
-		List<ItemStack> arrows = new ArrayList<ItemStack>();
+		List<ItemStack> arrows = new ArrayList<>();
 		NBTTagCompound nbt = entity.getEntityData();
 
 		int arrowCount = 0;

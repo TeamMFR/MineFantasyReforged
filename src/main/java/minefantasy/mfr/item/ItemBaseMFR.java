@@ -32,6 +32,11 @@ public class ItemBaseMFR extends Item implements IClientRegister {
 	}
 
 	@Override
+	public boolean isEnchantable(ItemStack stack) {
+		return false;
+	}
+
+	@Override
 	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);

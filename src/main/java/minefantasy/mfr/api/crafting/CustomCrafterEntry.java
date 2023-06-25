@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import java.util.HashMap;
 
 public class CustomCrafterEntry {
-	public static HashMap<Item, CustomCrafterEntry> entries = new HashMap<>();
+	public static HashMap<String, CustomCrafterEntry> entries = new HashMap<>();
 	public Item itemID;
 	/**
 	 * The Efficiency(same variable as dig speed)
@@ -29,8 +29,8 @@ public class CustomCrafterEntry {
 	 * @param piece the item to list
 	 * @param type  the crafter type
 	 */
-	public static void registerItem(Item piece, String type, float efficiency, int tier) {
-		entries.put(piece, new CustomCrafterEntry(piece, type, efficiency, tier));
+	public static void registerItem(ItemStack piece, String type, float efficiency, int tier) {
+		entries.put(piece.getItem().getRegistryName() + ":" + piece.getMetadata(), new CustomCrafterEntry(piece.getItem(), type, efficiency, tier));
 	}
 
 	/**
@@ -67,19 +67,9 @@ public class CustomCrafterEntry {
 	 * @return the entry(if there is one), else null
 	 */
 	public static CustomCrafterEntry getEntry(ItemStack piece) {
-		return getEntry(piece.getItem());
-	}
-
-	/**
-	 * Gets the entry for an item
-	 *
-	 * @param piece the armour item
-	 * @return the entry(if there is one), else null
-	 */
-	public static CustomCrafterEntry getEntry(Item piece) {
 		if (piece != null) {
-			if (entries.containsKey(piece)) {
-				return entries.get(piece);
+			if (entries.containsKey(piece.getItem().getRegistryName() + ":" + piece.getMetadata())) {
+				return entries.get(piece.getItem().getRegistryName() + ":" + piece.getMetadata());
 			}
 		}
 		return null;

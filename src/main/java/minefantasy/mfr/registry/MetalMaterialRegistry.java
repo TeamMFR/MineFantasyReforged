@@ -3,6 +3,7 @@ package minefantasy.mfr.registry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.util.FileUtils;
@@ -19,8 +20,8 @@ public class MetalMaterialRegistry extends DataLoader {
 	public static final MetalMaterialRegistry INSTANCE = new MetalMaterialRegistry();
 
 	private static final String TYPE = "metal material";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/registry";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/registry";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.CONFIG_DIRECTORY +"/registry";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/registry";
 
 	public void preInit() {
 		createCustomDataDirectory(CUSTOM_RECIPE_DIRECTORY);
@@ -79,6 +80,7 @@ public class MetalMaterialRegistry extends DataLoader {
 		int tier = JsonUtils.getInt(properties, "tier");
 		int meltingPoint = JsonUtils.getInt(properties, "melting_point");
 		int rarity = JsonUtils.getInt(properties, "rarity");
+		int enchantability = JsonUtils.getInt(properties, "enchantability");
 		int craftTier = JsonUtils.getInt(properties, "craft_tier");
 		int craftTimeModifier = JsonUtils.getInt(properties, "craft_time_modifier");
 		boolean unbreakable = JsonUtils.getBoolean(properties, "unbreakable");
@@ -95,7 +97,7 @@ public class MetalMaterialRegistry extends DataLoader {
 		int blue = JsonUtils.getInt(color, "blue");
 		int[] colors = {red, green, blue};
 
-		MetalMaterial metal = new MetalMaterial(name, tier, hardness, durability, flexibility, sharpness, resistance, density, armour, colors, oreDictList);
+		MetalMaterial metal = new MetalMaterial(name, tier, hardness, durability, flexibility, sharpness, resistance, density, enchantability, armour, colors, oreDictList);
 		metal.setMeltingPoint(meltingPoint);
 		metal.setRarity(rarity);
 		metal.setCrafterTiers(craftTier);

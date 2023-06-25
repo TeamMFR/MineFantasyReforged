@@ -1,0 +1,12 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:sulfur_ore"
+    },
+    "result" : {
+        "item": "minefantasyreforged:sulfur",
+        "count": 4
+    },
+    "experience": 0.25
+}

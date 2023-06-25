@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:pie_tray_uncooked"
+    },
+    "result" : {
+        "item": "minefantasyreforged:pie_tray"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventceramic"
+            }
+        }
+    ]
+}

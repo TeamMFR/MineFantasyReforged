@@ -242,7 +242,7 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.TIMBER_PANE);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.BAR);
 
-		itemColors.registerItemColorHandler(((stack, tintIndex) -> tintIndex == 0 ? ((ItemHeated) stack.getItem()).getColorFromItemStack(stack) : 0xFFFFFF), MineFantasyItems.HOT_ITEM);
+		itemColors.registerItemColorHandler(((stack, tintIndex) -> ItemHeated.getColorIntFromItemStack(stack)), MineFantasyItems.HOT_ITEM);
 
 		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyItems.COGWORK_ARMOUR);
 
@@ -271,5 +271,4 @@ public class ItemColorsMFR {
 		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyBlocks.TOOL_RACK_WOOD);
 		itemColors.registerItemColorHandler(itemColorForOneLayer, MineFantasyBlocks.TROUGH_WOOD);
 	}
-
 }

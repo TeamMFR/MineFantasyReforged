@@ -1,0 +1,12 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:borax_ore"
+    },
+    "result" : {
+        "item": "minefantasyreforged:flux_strong",
+        "count": 4
+    },
+    "experience": 0.25
+}

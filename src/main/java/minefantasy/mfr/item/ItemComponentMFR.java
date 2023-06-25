@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.crafting.ITieredComponent;
 import minefantasy.mfr.block.BlockComponent;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityComponent;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -51,11 +53,12 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
 
 		super.addInformation(item, world, list, flag);
 		if (isCustom) {
-			CustomToolHelper.addComponentString(item, list, CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main), this.unitCount);
+			CustomToolHelper.addComponentString(list, CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main), this.unitCount);
 		}
 	}
 
@@ -91,7 +94,6 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		if (isCustom) {
 			return CustomToolHelper.getLocalisedName(item, "item.commodity_" + name + ".name");
@@ -107,11 +109,29 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 
 	@Override
 	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, EnumHand hand) {
+		ItemStack stack = player.getHeldItem(hand);
 		if (storageType == null) {
-			return EnumActionResult.FAIL;
+			return EnumActionResult.PASS;
 		}
 		if (world.getTileEntity(pos) != null && !(world.getTileEntity(pos) instanceof TileEntityComponent)){
-			return EnumActionResult.FAIL;
+			return EnumActionResult.PASS;
+		}
+
+		//If the component item is being placed on an existing component, and that existing component is Persistence:
+		//If it is an empty Persistent Component, swap it to whatever component is being placed
+		TileEntity tile = world.getTileEntity(pos);
+		if (tile instanceof TileEntityComponent) {
+			TileEntityComponent tileComponent = (TileEntityComponent) tile;
+			if (tileComponent.type.equalsIgnoreCase(Constants.StorageTextures.PERSIST_FLAG)) {
+				ItemStack newItem = stack.copy();
+
+				int max = BlockComponent.getStorageSize(storageType);
+				int size = player.isSneaking() ? Math.min(newItem.getCount(), max) : 1;
+				newItem.setCount(size);
+				tileComponent.setItem(newItem, storageType, blockTexture, max);
+				stack.shrink(size);
+				return EnumActionResult.SUCCESS;
+			}
 		}
 
 		EnumFacing facingForPlacement = EnumFacing.getDirectionFromEntityLiving(pos, player);
@@ -120,19 +140,26 @@ public class ItemComponentMFR extends ItemBaseMFR implements ITieredComponent {
 			return EnumActionResult.FAIL;
 		}
 
-		ItemStack stack = player.getHeldItem(hand);
-
 		if (!(world.getBlockState(pos).getBlock() instanceof BlockComponent) && !world.isSideSolid(pos, facingForPlacement)) {
 			return EnumActionResult.FAIL;
 		}
 
 		if (player.canPlayerEdit(pos.offset(facingForPlacement), facing, stack)) {
-			int size = BlockComponent.placeComponent(player, stack, world, pos.offset(facingForPlacement), facing, hitX, hitY, hitZ, player, hand, storageType, blockTexture);
+			int size = BlockComponent.placeComponent(player, stack, world, pos.offset(facingForPlacement),
+					facing, hitX, hitY, hitZ, player, hand, storageType, blockTexture);
 			if (!player.capabilities.isCreativeMode){
 				stack.shrink(size);
 				return EnumActionResult.SUCCESS;
 			}
 		}
 		return EnumActionResult.FAIL;
+	}
+
+	public String getBlockTexture() {
+		return blockTexture;
+	}
+
+	public String getStorageType() {
+		return storageType;
 	}
 }

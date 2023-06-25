@@ -1,0 +1,11 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:kaolinite_ore"
+    },
+    "result" : {
+        "item": "minefantasyreforged:kaolinite"
+    },
+    "experience": 0.25
+}

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minefantasyreforged:refined_planks"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:refined_planks_slab",
+    "count": 6
+  }
+}

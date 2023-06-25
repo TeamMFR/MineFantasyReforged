@@ -47,6 +47,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 public class EntityDragon extends EntityMob implements IRangedAttackMob {
 
@@ -56,14 +57,14 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	private static final DataParameter<Byte> CHARGING_FLAG = EntityDataManager.createKey(EntityDragon.class, DataSerializers.BYTE);
 	private static final DataParameter<Boolean> TERRESTRIAL = EntityDataManager.createKey(EntityDragon.class, DataSerializers.BOOLEAN);
 	private static final DataParameter<Integer> DISENGAGE_TIME = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
-	private static final DataParameter<Integer> BREED = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
+	private static final DataParameter<String> BREED = EntityDataManager.createKey(EntityDragon.class, DataSerializers.STRING);
 	private static final DataParameter<Integer> TIER = EntityDataManager.createKey(EntityDragon.class, DataSerializers.VARINT);
 	private static final DataParameter<Float> JAW_MOVE = EntityDataManager.createKey(EntityDragon.class, DataSerializers.FLOAT);
 	private static final DataParameter<Float> NECK_ANGLE = EntityDataManager.createKey(EntityDragon.class, DataSerializers.FLOAT);
 
-	private final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), BossInfo.Color.PURPLE, BossInfo.Overlay.PROGRESS);
+	private final BossInfoServer bossInfo = new BossInfoServer(this.getDisplayName(), BossInfo.Color.RED, BossInfo.Overlay.PROGRESS);
 
-	private final Predicate<Entity> ATTACKABLE = entity -> entity instanceof EntityDragon ? ((EntityDragon) entity).getBreed() == this.getBreed() : entity instanceof EntityLivingBase;
+	private final Predicate<Entity> ATTACKABLE = entity -> entity instanceof EntityDragon ? Objects.equals(((EntityDragon) entity).getBreed(), this.getBreed()) : entity instanceof EntityLivingBase;
 
 	private BlockPos boundOrigin;
 	public static int interestTimeSeconds = 90;
@@ -207,7 +208,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	}
 
 	private boolean getChargingFlag(int mask) {
-		int i = this.dataManager.get(CHARGING_FLAG).byteValue();
+		int i = this.dataManager.get(CHARGING_FLAG);
 		return (i & mask) != 0;
 	}
 
@@ -299,6 +300,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void setDragon(int tier) {
 		setTier(tier);
 		setBreed(DragonBreed.getRandomDragon(this, tier));
+		this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(getType().health);
 		setHealth(getMaxHealth());
 		this.width = 3.0F * getScale();
 		this.height = 2.0F * getScale();
@@ -333,12 +335,12 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		return DragonBreed.getBreed(getTier(), getBreed());
 	}
 
-	public int getBreed() {
+	public String getBreed() {
 		return dataManager.get(BREED);
 	}
 
-	public void setBreed(int i) {
-		dataManager.set(BREED, i);
+	public void setBreed(String breedName) {
+		dataManager.set(BREED, breedName);
 	}
 
 	public int getTier() {
@@ -356,6 +358,13 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		return new TextComponentTranslation(tierName, breedName);
 	}
 
+	@Override
+	public String getName() {
+		String tierName = "entity." + getType().name + ".name";
+		TextComponentTranslation breedName = new TextComponentTranslation("entity.dragonbreed." + getType().breedName + ".name");
+		return new TextComponentTranslation(tierName, breedName).getFormattedText();
+	}
+
 	/**
 	 * Sets the custom name tag for this entity
 	 */
@@ -370,8 +379,8 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		super.entityInit();
 		this.dataManager.register(TERRESTRIAL, false);
 		this.dataManager.register(DISENGAGE_TIME, 0);
-		this.dataManager.register(BREED, 0);
-		this.dataManager.register(TIER, rand.nextInt(5));
+		this.dataManager.register(BREED, "red");
+		this.dataManager.register(TIER, 0);
 		this.dataManager.register(CHARGING_FLAG, (byte) 0);
 		this.dataManager.register(JAW_MOVE, 0F);
 		this.dataManager.register(NECK_ANGLE, 0F);
@@ -401,7 +410,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 
-		nbt.setInteger(BREED_TAG, getBreed());
+		nbt.setString(BREED_TAG, getBreed());
 		nbt.setInteger(TIER_TAG, getTier());
 	}
 
@@ -412,7 +421,7 @@ public class EntityDragon extends EntityMob implements IRangedAttackMob {
 		super.readEntityFromNBT(nbt);
 		if (nbt.hasKey(BREED_TAG)) {
 
-			setBreed(nbt.getInteger(BREED_TAG));
+			setBreed(nbt.getString(BREED_TAG));
 			setTier(nbt.getInteger(TIER_TAG));
 			this.setSize(3.0F * getScale(), 2.0F * getScale());
 			stepHeight = 1.25F + (getTier() * 0.25F);

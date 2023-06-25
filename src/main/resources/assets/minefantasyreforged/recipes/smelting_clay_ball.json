@@ -1,0 +1,12 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:clay_ore"
+    },
+    "result" : {
+        "item": "minecraft:clay_ball",
+        "count": 4
+    },
+    "experience": 0.25
+}

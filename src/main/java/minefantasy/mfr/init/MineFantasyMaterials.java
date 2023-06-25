@@ -88,10 +88,10 @@ public class MineFantasyMaterials {
 
 
 	public static void initLeatherMaterials() {
-		new CustomMaterial(Names.LEATHER, Names.LEATHER, 0, 1.0F, 0.4F, 1.2F, 0F, 0.5F, 0.1F).setColour(198, 92, 53).register();
-		new CustomMaterial(Names.HARD_LEATHER, Names.LEATHER, 1, 1.5F, 0.8F, 1.0F, 0F, 0.5F, 0.2F).setColour( 154, 72, 41).register();
-		new CustomMaterial(Names.MINOTAUR_SKIN, Names.LEATHER, 2, 2.0F, 1.5F, 0.8F, 0F, 1.0F, 0.5F).setColour( 118, 69, 48).register();
-		new CustomMaterial(Names.DRAGON_SKIN, Names.LEATHER, 3, 3.0F, 2.0F, 1.0F, 0F, 1.2F, 0.75F).setColour( 56, 43, 66).register();
+		new CustomMaterial(Names.LEATHER, Names.LEATHER, 0, 1.0F, 0.4F, 1.2F, 0F, 0.5F, 0.1F, 15).setColour(198, 92, 53).register();
+		new CustomMaterial(Names.HARD_LEATHER, Names.LEATHER, 1, 1.5F, 0.8F, 1.0F, 0F, 0.5F, 0.2F,20).setColour( 154, 72, 41).register();
+		new CustomMaterial(Names.MINOTAUR_SKIN, Names.LEATHER, 2, 2.0F, 1.5F, 0.8F, 0F, 1.0F, 0.5F, 25).setColour( 118, 69, 48).register();
+		new CustomMaterial(Names.DRAGON_SKIN, Names.LEATHER, 3, 3.0F, 2.0F, 1.0F, 0F, 1.2F, 0.75F, 30).setColour( 56, 43, 66).register();
 	}
 
 	public static void initBaseMaterials() {

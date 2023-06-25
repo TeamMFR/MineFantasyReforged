@@ -3,7 +3,9 @@
   "package": "minefantasy.mfr.mixin",
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.minefantasyreforged.refmap.json",
-  "mixins": [],
+  "mixins": [
+      "MixinItemBow"
+  ],
   "client": [
       "MixinLayerHeldItem",
       "MixinRenderLivingBase"

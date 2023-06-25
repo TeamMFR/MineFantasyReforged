@@ -1,9 +1,10 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.api.archery.IAmmo;
-import minefantasy.mfr.api.archery.IFirearm;
+import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.container.slots.SlotReload;
+import minefantasy.mfr.item.ItemCrossbow;
 import minefantasy.mfr.mechanics.AmmoMechanics;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
@@ -13,13 +14,25 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerReload extends Container {
 	private ItemStackHandler weaponInv;
 	private ItemStack weapon;
 
 	public ContainerReload(InventoryPlayer user, ItemStack weapon) {
 		this.weapon = weapon;
-		weaponInv = new ItemStackHandler(1);
+		weaponInv = new ItemStackHandler(1) {
+			@Override
+			protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+				if (Utils.isVanillaArrow(stack)) {
+					return ConfigWeapon.vanillaArrowStackLimit;
+				}
+				else {
+					return super.getStackLimit(slot, stack);
+				}
+			}
+		};
 		weaponInv.setStackInSlot(0, AmmoMechanics.getAmmo(weapon));
 		this.addSlotToContainer(new SlotReload(this, weaponInv, 0, 79, 11));
 
@@ -44,6 +57,9 @@ public class ContainerReload extends Container {
 
 		ItemStack ammo = weaponInv.getStackInSlot(0);
 		AmmoMechanics.setAmmo(weapon, ammo);
+		if (!(weapon.getItem() instanceof ItemCrossbow)) {
+			AmmoMechanics.putAmmoOnFirearm(weapon, ammo);
+		}
 
 		return result;
 	}
@@ -80,14 +96,14 @@ public class ContainerReload extends Container {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (clicked >= 1 && clicked < 27)// INVENTORY
+				} else if (clicked < 27)// INVENTORY
 				{
 					if (!this.mergeItemStack(itemstack1, 27, 36, false)) {
 						return ItemStack.EMPTY;
 					}
 				}
 				// BAR
-				else if (clicked >= 27 && clicked < 36 && !this.mergeItemStack(itemstack1, 1, 27, false)) {
+				else if (clicked < 36 && !this.mergeItemStack(itemstack1, 1, 27, false)) {
 					return ItemStack.EMPTY;
 				}
 			} else if (!this.mergeItemStack(itemstack1, 1, 36, false)) {
@@ -111,16 +127,7 @@ public class ContainerReload extends Container {
 	}
 
 	public boolean canAccept(ItemStack ammo) {
-		String ammoType = "null";
-		if (!ammo.isEmpty() && ammo.getItem() instanceof IAmmo) {
-			ammoType = ((IAmmo) ammo.getItem()).getAmmoType(ammo);
-		}
-
-		if (!weapon.isEmpty() && weapon.getItem() instanceof IFirearm) {
-			return ((IFirearm) weapon.getItem()).canAcceptAmmo(weapon, ammoType);
-		}
-
-		return ammoType.equalsIgnoreCase("arrow");
+		return Utils.canAcceptArrow(ammo, weapon);
 	}
 
 	@Override

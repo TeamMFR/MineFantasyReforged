@@ -30,6 +30,7 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 	public static float zombieWepChance;
 	public static boolean fastZombies;
 	public static boolean critLimp;
+	public static int foodRepeatPenaltyLimit;
 
 	@Override
 	protected void loadConfig() {
@@ -74,6 +75,8 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 				"Stop ceramics from being cooked in a furnace").getString());
 		TileEntityRoast.enableOverheat = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Burn at high temperature", true,
 				"Cooking food on a stove or oven will automatically burn at high temperatures").getString());
+		foodRepeatPenaltyLimit = Integer.parseInt(config.get(CATEGORY_FOOD, "Food Repeat Penalty Limit", 3,
+				"How much of certain foods you can eat in a row before vomiting").getString());
 
 		upgradeZombieWep = Boolean.parseBoolean(config.get(CATEGORY_MOB, "Give Zombie Weapon", true,
 				"Zombies have a chance on spawning with forged iron weapons, It also controls some zombies having MF armour").getString());

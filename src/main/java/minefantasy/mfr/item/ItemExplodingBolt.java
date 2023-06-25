@@ -3,11 +3,12 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -17,7 +18,7 @@ import java.util.List;
 public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
 
 	public ItemExplodingBolt() {
-		super("exploding_bolt", 1, MineFantasyMaterials.IRON.getToolMaterial(), ArrowType.EXPLOSIVEBOLT);
+		super("exploding_bolt", 1, ArrowType.EXPLOSIVEBOLT);
 		setCreativeTab(MineFantasyTabs.tabGadget);
 		setAmmoType("bolt");
 		setMaxStackSize(20);
@@ -33,10 +34,10 @@ public class ItemExplodingBolt extends ItemArrowMFR implements ISpecialSalvage {
 	}
 
 	@Override
-	public EntityArrowMFR getFiredArrow(EntityArrowMFR instance, ItemStack arrow) {
-		instance = super.getFiredArrow(instance, arrow);
-		instance.canBePickedUp = 0;
-		return instance.setBombStats(ItemBomb.getPowder(arrow), ItemBomb.getFilling(arrow));
+	public EntityArrow createArrow(World world, ItemStack stack, EntityLivingBase shooter) {
+		EntityArrowMFR instance = (EntityArrowMFR) super.createArrow(world, stack, shooter);
+		instance.pickupStatus = EntityArrow.PickupStatus.DISALLOWED;
+		return instance.setBombStats(ItemBomb.getPowder(stack), ItemBomb.getFilling(stack));
 	}
 
 	@Override

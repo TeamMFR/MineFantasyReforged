@@ -7,9 +7,13 @@
     },
     "variants": {
         "normal": [{}],
-        "facing=north": { "y": 0 },
-        "facing=south": { "y": 180 },
-        "facing=west":  { "y": 270 },
-        "facing=east":  { "y": 90 }
+        "burning=true,facing=north": { "y": 0 },
+        "burning=true,facing=south": { "y": 180 },
+        "burning=true,facing=west":  { "y": 270 },
+        "burning=true,facing=east":  { "y": 90 },
+        "burning=false,facing=north": { "y": 0 },
+        "burning=false,facing=south": { "y": 180 },
+        "burning=false,facing=west":  { "y": 270 },
+        "burning=false,facing=east":  { "y": 90 }
     }
 }

@@ -66,6 +66,7 @@ import minefantasy.mfr.item.ItemMultiFood;
 import minefantasy.mfr.item.ItemNeedle;
 import minefantasy.mfr.item.ItemPaintBrush;
 import minefantasy.mfr.item.ItemParachute;
+import minefantasy.mfr.item.ItemPersistentComponentMarker;
 import minefantasy.mfr.item.ItemPickMFR;
 import minefantasy.mfr.item.ItemResearchBook;
 import minefantasy.mfr.item.ItemSaw;
@@ -147,6 +148,7 @@ public class MineFantasyItems {
 	public static ItemComponentMFR TIMBER = Utils.nullValue();
 	public static Item TIMBER_CUT = Utils.nullValue();
 	public static Item TIMBER_PANE = Utils.nullValue();
+	public static Item PERSISTENT_COMPONENT_FLAG = Utils.nullValue();
 	public static Item CLAY_POT = Utils.nullValue();
 	public static Item CLAY_POT_UNCOOKED = Utils.nullValue();
 	public static Item INGOT_MOULD = Utils.nullValue();
@@ -511,7 +513,6 @@ public class MineFantasyItems {
 	public static ItemCustomArmour ORNATE_PLATE_CHESTPLATE = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_PLATE_LEGGINGS = Utils.nullValue();
 	public static ItemCustomArmour ORNATE_PLATE_BOOTS = Utils.nullValue();
-//	public static Item[] INGOTS;
 
 	// Tools
 	public static Item TRAINING_SWORD = Utils.nullValue();
@@ -640,8 +641,8 @@ public class MineFantasyItems {
 		COCA_POWDER = new ItemComponentMFR("coca_powder", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		CHOCOLATE = new ItemComponentMFR("chocolate", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		CHOC_CHIPS = new ItemComponentMFR("choc_chips", 0).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		BERRIES = new ItemFoodMFR("berries", 2, 0.5F, false).setEatTime(10).setStaminaRestore(10F).setAlwaysEdible();
-		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 0.5F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setAlwaysEdible();
+		BERRIES = new ItemFoodMFR("berries", 2, 0.5F, false).setEatTime(10).setStaminaRestore(10F).setShouldRepeatPenaltyCheck().setAlwaysEdible();
+		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 0.5F, false).setEatTime(10).setStaminaRestore(25F).setRarity(1).setShouldRepeatPenaltyCheck().setAlwaysEdible();
 		SWEETROLL_RAW = new ItemUnfinishedFood("sweetroll_raw").setMaxStackSize(64);
 		ECLAIR_RAW = new ItemUnfinishedFood("eclair_raw").setMaxStackSize(64);
 		CAKE_RAW = new ItemUnfinishedFood("cake_raw");
@@ -741,6 +742,7 @@ public class MineFantasyItems {
 		registry.register(TIMBER);
 		registry.register(TIMBER_CUT);
 		registry.register(TIMBER_PANE);
+		registry.register(PERSISTENT_COMPONENT_FLAG);
 
 		registry.register(CLAY_POT);
 		registry.register(CLAY_POT_UNCOOKED);
@@ -1179,9 +1181,13 @@ public class MineFantasyItems {
 	}
 
 	public static void initComponent() {
-		TIMBER = new ItemWoodComponent("timber").setCustom(1, "wood").setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK);
-		TIMBER_CUT = new ItemWoodComponent("timber_cut").setCustom(1, "wood").setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK_CUT);
-		TIMBER_PANE = new ItemWoodComponent("timber_pane").setCustom(6, "wood").setStoragePlacement(Constants.StorageTextures.SHEET, Constants.StorageTextures.WOOD_PANE);
+		TIMBER = new ItemWoodComponent("timber").setCustom(1, "wood")
+				.setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK);
+		TIMBER_CUT = new ItemWoodComponent("timber_cut").setCustom(1, "wood")
+				.setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK_CUT);
+		TIMBER_PANE = new ItemWoodComponent("timber_pane").setCustom(6, "wood")
+				.setStoragePlacement(Constants.StorageTextures.SHEET, Constants.StorageTextures.WOOD_PANE);
+		PERSISTENT_COMPONENT_FLAG = new ItemPersistentComponentMarker("persistent_component_flag");
 
 		COPPER_INGOT = new ItemBaseMFR("copper_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
 		TIN_INGOT = new ItemBaseMFR("tin_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1355,7 +1361,6 @@ public class MineFantasyItems {
 		GameRegistry.registerFuelHandler(new FuelHandlerMF());
 		MineFantasyReforgedAPI.registerFuelHandler(new AdvancedFuelHandler());
 
-		addRandomDrops();
 		initFuels();
 	}
 
@@ -1374,19 +1379,19 @@ public class MineFantasyItems {
 		MineFantasyFuels.addForgeFuel(COAL_DUST, 1200, 180);// 180C , 60s
 	}
 
-	private static void addRandomDrops() {
-		RandomOre.addOre(new ItemStack(KAOLINITE), 1.5F, Blocks.STONE, -1, 32, 128, false);
-		RandomOre.addOre(new ItemStack(FLUX), 2F, Blocks.STONE, -1, 0, 128, false);
-		RandomOre.addOre(new ItemStack(FLUX_STRONG), 1F, Blocks.STONE, 2, 0, 128, false);
-		RandomOre.addOre(new ItemStack(FLUX), 20F, MineFantasyBlocks.LIMESTONE, -1, 0, 256, true);
-		RandomOre.addOre(new ItemStack(FLUX_STRONG), 10F, MineFantasyBlocks.LIMESTONE, 2, 0, 256, true);
-		RandomOre.addOre(new ItemStack(Items.COAL), 2F, Blocks.STONE, -1, 0, 128, false);
-		RandomOre.addOre(new ItemStack(SULFUR), 2F, Blocks.STONE, -1, 0, 16, false);
-		RandomOre.addOre(new ItemStack(NITRE), 3F, Blocks.STONE, -1, 0, 64, false);
-		RandomOre.addOre(new ItemStack(Items.REDSTONE), 5F, Blocks.STONE, 2, 0, 16, false);
-		RandomOre.addOre(new ItemStack(Items.FLINT), 1F, Blocks.STONE, -1, 0, 64, false);
-		RandomOre.addOre(new ItemStack(DIAMOND_SHARDS), 0.2F, Blocks.STONE, 2, 0, 16, false);
-		RandomOre.addOre(new ItemStack(Items.QUARTZ), 0.5F, Blocks.STONE, 3, 0, 16, false);
+	public static void addRandomDrops() {
+		RandomOre.addOre(new ItemStack(KAOLINITE), 1.5F, "stone", -1, 32, 128, false);
+		RandomOre.addOre(new ItemStack(FLUX), 2F, "stone", -1, 0, 128, false);
+		RandomOre.addOre(new ItemStack(FLUX_STRONG), 1F, "stone", 2, 0, 128, false);
+		RandomOre.addOre(new ItemStack(FLUX), 20F, "stoneLimestone", -1, 0, 256, true);
+		RandomOre.addOre(new ItemStack(FLUX_STRONG), 10F, "stoneLimestone", 2, 0, 256, true);
+		RandomOre.addOre(new ItemStack(Items.COAL), 2F, "stone", -1, 0, 128, false);
+		RandomOre.addOre(new ItemStack(SULFUR), 2F, "stone", -1, 0, 16, false);
+		RandomOre.addOre(new ItemStack(NITRE), 3F, "stone", -1, 0, 64, false);
+		RandomOre.addOre(new ItemStack(Items.REDSTONE), 5F, "stone", 2, 0, 16, false);
+		RandomOre.addOre(new ItemStack(Items.FLINT), 1F,"stone", -1, 0, 64, false);
+		RandomOre.addOre(new ItemStack(DIAMOND_SHARDS), 0.2F,"stone", 2, 0, 16, false);
+		RandomOre.addOre(new ItemStack(Items.QUARTZ), 0.5F, "stone", 3, 0, 16, false);
 
 		RandomOre.addOre(new ItemStack(SULFUR), 10F, Blocks.NETHERRACK, -1, 0, 512, false);
 		RandomOre.addOre(new ItemStack(Items.GLOWSTONE_DUST), 5F, Blocks.NETHERRACK, -1, 0, 512, false);
@@ -1403,13 +1408,13 @@ public class MineFantasyItems {
 		RandomDigs.addOre(new ItemStack(Items.MELON_SEEDS), 5F, Blocks.GRASS, -1, 0, 256, false);
 		RandomDigs.addOre(new ItemStack(Items.PUMPKIN_SEEDS), 8F, Blocks.GRASS, -1, 0, 256, false);
 
-		RandomOre.addOre(new ItemStack(ORE_COPPER), 4F, Blocks.STONE, 0, 48, 96, false);
-		RandomOre.addOre(new ItemStack(ORE_TIN), 2F, Blocks.STONE, 0, 48, 96, false);
-		RandomOre.addOre(new ItemStack(ORE_IRON), 5F, Blocks.STONE, 0, 0, 64, false);
-		RandomOre.addOre(new ItemStack(ORE_SILVER), 1.5F, Blocks.STONE, 0, 0, 32, false);
-		RandomOre.addOre(new ItemStack(ORE_GOLD), 1F, Blocks.STONE, 0, 0, 32, false);
+		RandomOre.addOre(new ItemStack(ORE_COPPER), 4F, "stone", 0, 48, 96, false);
+		RandomOre.addOre(new ItemStack(ORE_TIN), 2F, "stone", 0, 48, 96, false);
+		RandomOre.addOre(new ItemStack(ORE_IRON), 5F, "stone", 0, 0, 64, false);
+		RandomOre.addOre(new ItemStack(ORE_SILVER), 1.5F, "stone", 0, 0, 32, false);
+		RandomOre.addOre(new ItemStack(ORE_GOLD), 1F, "stone", 0, 0, 32, false);
 
-		RandomOre.addOre(new ItemStack(ORE_TUNGSTEN), 2F, Blocks.STONE, 3, 0, 16, false, "tungsten");
+		RandomOre.addOre(new ItemStack(ORE_TUNGSTEN), 2F, "stone", 3, 0, 16, false, "tungsten");
 	}
 
 	public static ItemStack bar(String material) {
@@ -1469,8 +1474,8 @@ public class MineFantasyItems {
 
 		tab = MineFantasyTabs.tabArchery;
 		STANDARD_BOW = (ItemBowMFR) new ItemBowMFR(standard + "_bow", EnumBowType.SHORTBOW).setCustom(standard).setCreativeTab(tab);
-		STANDARD_ARROW = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.BOLT, 20).setCustom().setAmmoType("bolt").setCreativeTab(tab);
-		STANDARD_BOLT = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.NORMAL, 16).setCustom().setCreativeTab(tab);
+		STANDARD_BOLT = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.BOLT, 20).setCustom().setAmmoType("bolt").setCreativeTab(tab);
+		STANDARD_ARROW = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.NORMAL, 16).setCustom().setCreativeTab(tab);
 		STANDARD_ARROW_BODKIN = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.BODKIN, 16).setCustom().setCreativeTab(tab);
 		STANDARD_ARROW_BROAD = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.BROADHEAD, 16).setCustom().setCreativeTab(tab);
 	}

@@ -243,13 +243,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	/**
-	 * Determines if the item can block/parry
-	 */
-	public boolean canBlock() {
-		return true;
-	}
-
-	/**
 	 * Determines if the weapon can parry
 	 */
 	public boolean canWeaponParry() {
@@ -385,7 +378,33 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack item) {
-		return EnumAction.valueOf("mfr_block");
+		//if it is an MFR item in the offhand, it should remove the block option
+		if (item.getTagCompound() != null && item.getTagCompound().hasKey("mfr_offhand")) {
+			return EnumAction.NONE;
+		}
+		else {
+			return EnumAction.valueOf("mfr_block");
+		}
+	}
+
+	@Override
+	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
+		if (entity instanceof EntityPlayer) {
+			EntityPlayer player = (EntityPlayer) entity;
+
+			//Handle adding and removing the mfr_offhand tag when the current MFR item matches the offhand
+			ItemStack offhand = player.getHeldItemOffhand();
+			if (stack.getItem() instanceof ItemWeaponMFR && offhand.getItem() instanceof ItemWeaponMFR) {
+				if (stack.getTagCompound() != null && !stack.getTagCompound().hasKey("mfr_offhand")) {
+					stack.getOrCreateSubCompound("mfr_offhand");
+				}
+			}
+			else {
+				if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("mfr_offhand")) {
+					stack.getTagCompound().removeTag("mfr_offhand");
+				}
+			}
+		}
 	}
 
 	protected void addXp(EntityLivingBase user, int chance) {
@@ -722,6 +741,17 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return CustomToolHelper.getRarity(item, itemRarity);
 	}
 
+	/**
+	 * ItemStack sensitive version of getItemEnchantability
+	 *
+	 * @param stack The ItemStack
+	 * @return the item enchantability value
+	 */
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return CustomToolHelper.getCustomPrimaryMaterial(stack).enchantability;
+	}
+
 	// ====================================================== CUSTOM END
 	// ==============================================================\\
 
@@ -746,7 +776,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return super.shouldCauseReequipAnimation(oldStack, newStack, slotChanged);	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
 		return CustomToolHelper.getLocalisedName(item, unlocalName);

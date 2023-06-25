@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import com.google.gson.JsonObject;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.WoodMaterial;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -22,8 +23,6 @@ import javax.annotation.Nonnull;
 
 @SuppressWarnings("unused")
 public class RecipeTimberDynamic extends ShapedOreRecipe {
-	private ItemStack inputItemStack;
-	private ItemStack belowInputItemStack;
 
 	public RecipeTimberDynamic(ResourceLocation group, @Nonnull ItemStack result, CraftingHelper.ShapedPrimer primer) {
 		super(group, result, primer);
@@ -31,6 +30,8 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 
 	@Override
 	protected boolean checkMatch(InventoryCrafting matrix, int startX, int startY, boolean mirror) {
+		ItemStack inputItemStack = ItemStack.EMPTY;
+		ItemStack belowInputItemStack = ItemStack.EMPTY;
 		for (int x = 0; x < matrix.getWidth(); x++) {
 			for (int y = 0; y < matrix.getHeight(); y++) {
 				int subX = x - startX;
@@ -61,6 +62,13 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 	@Nonnull
 	@Override
 	public ItemStack getCraftingResult(@Nonnull InventoryCrafting matrix) {
+		ItemStack inputStack = ItemStack.EMPTY;
+		for (int i = 0; i < matrix.getSizeInventory(); i++) {
+			ItemStack stackInSlot = matrix.getStackInSlot(i);
+			if (!stackInSlot.isEmpty() && getIngredients().get(0).apply(stackInSlot)) {
+				inputStack = stackInSlot;
+			}
+		}
 		ItemStack outputModified = output.copy();
 		CustomMaterial inputMaterial = CustomMaterial.NONE;
 		for (CustomMaterial material : CustomMaterial.getList("wood")) {
@@ -68,11 +76,14 @@ public class RecipeTimberDynamic extends ShapedOreRecipe {
 				Item materialItem = ForgeRegistries.ITEMS.getValue(((WoodMaterial) material).inputItemResourceLocation);
 				if (materialItem != null) {
 					ItemStack materialItemStack = new ItemStack(materialItem, 1, ((WoodMaterial) material).inputItemMeta);
-					if (inputItemStack.isItemEqual(materialItemStack)) {
+					if (inputStack.isItemEqual(materialItemStack)) {
 						inputMaterial = material;
 					}
 				}
 			}
+		}
+		if (inputMaterial == CustomMaterial.NONE) {
+			inputMaterial = CustomMaterial.getMaterial(Constants.SCRAP_WOOD_TAG);
 		}
 		CustomMaterial.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial.name);
 		return outputModified;

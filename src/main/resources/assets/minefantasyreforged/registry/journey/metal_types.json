@@ -17,6 +17,7 @@
                 "density": 2.0,
                 "melting_point": 2500,
                 "rarity": 0,
+                "enchantability": 9,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
                 "unbreakable": false
@@ -45,6 +46,7 @@
                 "density": 3.0,
                 "melting_point": 1200,
                 "rarity": 0,
+                "enchantability": 15,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
                 "unbreakable": false
@@ -73,6 +75,7 @@
                 "density": 3.5,
                 "melting_point": 1400,
                 "rarity": 0,
+                "enchantability": 16,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
                 "unbreakable": false
@@ -101,6 +104,7 @@
                 "density": 2.5,
                 "melting_point": 1400,
                 "rarity": 0,
+                "enchantability": 12,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
                 "unbreakable": false
@@ -129,6 +133,7 @@
                 "density": 2.5,
                 "melting_point": 1400,
                 "rarity": 0,
+                "enchantability": 13,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
                 "unbreakable": false
@@ -157,6 +162,7 @@
                 "density": 3.5,
                 "melting_point": 1500,
                 "rarity": 0,
+                "enchantability": 12,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
                 "unbreakable": false
@@ -185,6 +191,7 @@
                 "density": 2.5,
                 "melting_point": 1800,
                 "rarity": 0,
+                "enchantability": 17,
                 "craft_tier": 3,
                 "craft_time_modifier": 12.0,
                 "unbreakable": false
@@ -213,6 +220,7 @@
                 "density": 2.5,
                 "melting_point": 2500,
                 "rarity": 0,
+                "enchantability": 16,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
                 "unbreakable": false
@@ -241,6 +249,7 @@
                 "density": 3.5,
                 "melting_point": 2000,
                 "rarity": 0,
+                "enchantability": 17,
                 "craft_tier": 3,
                 "craft_time_modifier": 15.0,
                 "unbreakable": false
@@ -269,6 +278,7 @@
                 "density": 3.0,
                 "melting_point": 2000,
                 "rarity": 0,
+                "enchantability": 24,
                 "craft_tier": 3,
                 "craft_time_modifier": 17.0,
                 "unbreakable": false

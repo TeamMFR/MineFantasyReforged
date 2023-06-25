@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:jug_uncooked"
+    },
+    "result" : {
+        "item": "minefantasyreforged:jug_empty"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventceramic"
+            }
+        }
+    ]
+}

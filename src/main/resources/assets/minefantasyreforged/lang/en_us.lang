@@ -12,6 +12,8 @@ message.above=ABOVE
 info.salvage.usage=Drop a valid item on top of the Salvage Block to salvage it
 gui.no_project_set=<No Project Set>
 info.offBalance.message=Trying to use a heavy weapon with only one hand throws you off balance!
+info.noHeatProtection.message=Ouch! Maybe I should get some blacksmithing equipment for this...
+info.vomiting.message=*Blargh!* Eating that many %1$s that quickly can't be good for you...
 
 attribute.kit.salvage.name=Salvage Modifier
 
@@ -123,6 +125,9 @@ event.dragonnear.forge.name=Your crafts insult dragon kind!
 event.dragonaway.name=The Dragon leaves... For now...
 
 entity.hound.name=Hound
+
+entity.bombMF.name=Bomb
+entity.landmineMF.name=Mine
 
 item.spawn_dragon.name=Spawn Dragon
 item.spawn_dragon.desc=Deadly winged reptiles.
@@ -322,6 +327,7 @@ item.gold_coin.name=Gold Coin
 
 
 # COMPONENT
+item.persistent_component_flag.name=Placed Component Marker
 item.ingot_mould.name=Ingot Mould
 item.ingot_mould_filled.name=Ingot Mould
 item.ingot_mould_uncooked.name=Raw Ingot Mould
@@ -1788,7 +1794,7 @@ knowledge.tungsten.3=Although this material is highly valued to engineers, it do
 knowledge.engineering_tanner=Advanced Tanner
 knowledge.engineering_tanner.desc=Easy Tanning
 
-knowledge.engineering_tanner.1=Tanning is probably one of the most tiring methods of production. Now with some proper mechanical methods you can make it easier!^This tanning rack is able to slice and dice clean hide for you. Just place the item as usual than right-click the top.
+knowledge.engineering_tanner.1=Tanning is probably one of the most tiring methods of production. Now with some proper mechanical methods you can make it easier!^This tanning rack is able to slice and dice clean hide for you. Just place the item as usual, then sneak right-click.
 
 knowledge.advanced_crucible=Auto Crucible
 knowledge.advanced_crucible.desc=Easy Alloys

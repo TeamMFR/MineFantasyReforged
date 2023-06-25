@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:bomb_casing_uncooked"
+    },
+    "result" : {
+        "item": "minefantasyreforged:bomb_casing_ceramic"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventceramic"
+            }
+        }
+    ]
+}

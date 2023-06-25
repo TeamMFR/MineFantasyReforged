@@ -40,16 +40,38 @@ public abstract class MixinRenderLivingBase<T extends EntityLivingBase> extends 
 				limbSwingAmount = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
 				limbSwing = entity.limbSwing - entity.limbSwingAmount * (1.0F - partialTicks);
 
-
-				if (entity.isChild())
-				{
+				if (entity.isChild()) {
 					limbSwing *= 3.0F;
 				}
 
-				if (limbSwingAmount > 1.0F)
-				{
+				if (limbSwingAmount > 1.0F) {
 					limbSwingAmount = 1.0F;
 				}
+
+			args.set(1, limbSwing);
+			args.set(2, limbSwingAmount);
+		}
+	}
+
+	@ModifyArgs(method = {"doRender*"}, at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/RenderLivingBase;renderLayers(Lnet/minecraft/entity/EntityLivingBase;FFFFFFF)V", ordinal = 1))
+	private void setRenderLayerArgs(Args args) {
+		EntityLivingBase entity = args.get(0);
+		float limbSwing;
+		float limbSwingAmount;
+
+		float partialTicks = Minecraft.getMinecraft().getRenderPartialTicks();
+
+		if (entity.getRidingEntity() != null && !entity.getRidingEntity().shouldRiderSit()) {
+			limbSwingAmount = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
+			limbSwing = entity.limbSwing - entity.limbSwingAmount * (1.0F - partialTicks);
+
+			if (entity.isChild()) {
+				limbSwing *= 3F;
+			}
+
+			if (limbSwingAmount > 1.0F) {
+				limbSwingAmount = 1.0F;
+			}
 
 			args.set(1, limbSwing);
 			args.set(2, limbSwingAmount);

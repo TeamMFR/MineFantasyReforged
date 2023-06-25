@@ -6,7 +6,7 @@
     "metals": [
         {
             "name": "cold_iron",
-            "oreDictList": "ore:ingotColdIron",
+            "oreDictList": "ingotColdIron",
             "properties": {
                 "tier": 6,
                 "durability": 7.0,
@@ -17,6 +17,7 @@
                 "density": 2.0,
                 "melting_point": 2000,
                 "rarity": 0,
+                "enchantability": 30,
                 "craft_tier": 5,
                 "craft_time_modifier": 12.0,
                 "unbreakable": false

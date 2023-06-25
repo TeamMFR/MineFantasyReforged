@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:bowl_water_salt"
+    },
+    "result" : {
+        "item": "minefantasyreforged:salt"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventcook"
+            }
+        }
+    ]
+}

@@ -4,6 +4,7 @@ import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.crafting.exotic.SpecialForging;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
+import minefantasy.mfr.block.BlockAnvilMF;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.Trait;
@@ -38,6 +39,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -66,10 +69,12 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	public float progressMax;
 	public float progress;
-	public float qualityBalance = 0F;
-	public float thresholdPosition = 0.1F;
-	public float leftHit = 0F;
-	public float rightHit = 0F;
+	private float qualityBalance = 0F;
+	private float thresholdPosition = 0.1F;
+	private float leftHit = 0F;
+	private float rightHit = 0F;
+	private boolean isHit = false;
+	private float itemRotation = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
 	private Tool requiredToolType = Tool.HAMMER;
@@ -78,6 +83,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	private Skill requiredSkill;
 	private int requiredHammerTier;
 	private int requiredAnvilTier;
+	private int ticksExisted;
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -112,7 +118,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	@Override
 	public void update() {
-		if (!world.isRemote && world.getTotalWorldTime() % 120 == 0){
+		ticksExisted++;
+		if (!world.isRemote && ticksExisted % 120 == 0){
 			for (int slot = 0; slot < this.getInventory().getSlots(); slot++){
 				ItemStack stack = this.getInventory().getStackInSlot(slot);
 				if (stack.getItem() instanceof IHotItem){
@@ -126,6 +133,39 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				}
 			}
 		}
+
+		if (!world.isRemote && ticksExisted % 20 == 0) {
+			IBlockState iblockstate = world.getBlockState(pos);
+			if (!world.getBlockState(pos).getValue(BlockAnvilMF.BURNING))  {
+				if (calcAverageTemp() > 0 ) {
+					world.setBlockState(pos, iblockstate.withProperty(BlockAnvilMF.BURNING, true));
+				}
+			}
+			else {
+				if (calcAverageTemp() <= 0 ) {
+					world.setBlockState(pos, iblockstate.withProperty(BlockAnvilMF.BURNING, false));
+				}
+			}
+		}
+
+		if (isHit()) {
+			if (world.isRemote) {
+				setItemRotation(world.rand.nextFloat() - world.rand.nextFloat() * 10F);
+			}
+			setHit(false); //Needs to happen on client
+		}
+		else {
+			if (world.isRemote) {
+				if (itemRotation != 0) {
+					itemRotation = 0;
+				}
+			}
+		}
+	}
+
+	@Override
+	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
+		return oldState.getBlock() != newState.getBlock();
 	}
 
 	// FIXME: this is still probably being called more times than necessary
@@ -138,8 +178,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public boolean tryCraft(EntityPlayer user, boolean rightClick) {
-		if (user == null)
+		if (user == null) {
 			return false;
+		}
 
 		Tool tool = ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand());
 		int hammerTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
@@ -221,7 +262,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
 			}
 
-			int temp = this.averageTemp();
+			int temp = this.calcAverageTemp();
 			if (outputHot && temp > 0) {
 				result = ItemHeated.createHotItem(result, temp);
 			}
@@ -345,7 +386,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 		}
 
-		if (isPerfectItem() && !isMythicRecipe()) {
+		if (isPerfectItem() && !isMythicRecipe() && result.isItemEnchantable()) {
 			this.setTrait(result, Trait.Inferior.getName(), false);
 			if (CustomToolHelper.isMythic(result)) {
 				result.getTagCompound().setBoolean(Trait.Unbreakable.getName(), true);
@@ -386,7 +427,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return result;
 	}
 
-	private int averageTemp() {
+	public int calcAverageTemp() {
 		float totalTemp = 0;
 		int itemCount = 0;
 		for (int a = 0; a < getInventory().getSlots() - 1; a++) {
@@ -585,13 +626,13 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	private ItemStack damageItem(ItemStack item) {
 		float currentDamage = getItemDamage();
-		if (currentDamage > 0.5F) {
+		if (currentDamage > 0.5F && item.isItemEnchantable()) {
 			setTrait(item, Trait.Inferior.getName(), true);
 			float q = 100F * (0.75F - (currentDamage - 0.5F));
 			ToolHelper.setQuality(item, Math.max(10F, q));
 		}
 		float damage = currentDamage * item.getMaxDamage();
-		if (item.isItemStackDamageable()) {
+		if (item.isItemStackDamageable() && item.isItemEnchantable()) {
 			if (damage > 0) {
 				item.setItemDamage((int) (damage));
 				if (isMythicRecipe()) {
@@ -706,6 +747,22 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	public int getToolTierNeeded() {
 		return this.requiredHammerTier;
+	}
+
+	public boolean isHit() {
+		return isHit;
+	}
+
+	public void setHit(boolean hit) {
+		isHit = hit;
+	}
+
+	public float getItemRotation() {
+		return itemRotation;
+	}
+
+	public void setItemRotation(float itemRotation) {
+		this.itemRotation = itemRotation;
 	}
 
 	private void resetProject() {

@@ -3,17 +3,20 @@ package minefantasy.mfr.proxy;
 import minefantasy.mfr.api.refine.ISmokeHandler;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockLeavesMF;
+import minefantasy.mfr.client.particle.CustomParticle;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.entity.EntitySmoke;
 import minefantasy.mfr.integration.CustomSand;
 import minefantasy.mfr.integration.CustomStone;
-import minefantasy.mfr.item.ArrowFireFlint;
-import minefantasy.mfr.item.ArrowFirerMF;
+import minefantasy.mfr.item.ArrowHandlerMFR;
+import minefantasy.mfr.item.ArrowHandlerVanilla;
+import minefantasy.mfr.item.BoltHandlerMFR;
 import minefantasy.mfr.mechanics.AmmoMechanics;
-import minefantasy.mfr.mechanics.ArrowHandler;
 import minefantasy.mfr.mechanics.MonsterUpgrader;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -29,8 +32,9 @@ public class CommonProxy implements ISmokeHandler {
 	}
 
 	public void registerMain() {
-		AmmoMechanics.addHandler(new ArrowFireFlint());
-		AmmoMechanics.addHandler(new ArrowFirerMF());
+		AmmoMechanics.addHandler(Constants.VANILLA_ARROW_HANDLER, new ArrowHandlerVanilla());
+		AmmoMechanics.addHandler(Constants.MFR_ARROW_HANDLER, new ArrowHandlerMFR());
+		AmmoMechanics.addHandler(Constants.MFR_BOLT_HANDLER, new BoltHandlerMFR());
 		SmokeMechanics.handler = this;
 	}
 
@@ -41,7 +45,6 @@ public class CommonProxy implements ISmokeHandler {
 		MinecraftForge.EVENT_BUS.register(new PlayerTickHandler());
 		//MinecraftForge.EVENT_BUS.register(new CombatMechanics());
 		MinecraftForge.EVENT_BUS.register(new MonsterUpgrader());
-		MinecraftForge.EVENT_BUS.register(new ArrowHandler());
 	}
 
 	public EntityPlayer getClientPlayer() {
@@ -61,6 +64,15 @@ public class CommonProxy implements ISmokeHandler {
 				world.spawnEntity(smoke);
 			}
 		}
+	}
+
+	/** Called from init() in the main mod class to initialise the particle factories. */
+	public void registerParticles(){} // Does nothing since particles are client-side only
+
+	/** Creates a new particle of the specified type from the appropriate particle factory. <i>Does not actually spawn the
+	 * particle; use {@link minefantasy.mfr.util.ParticleBuilder ParticleBuilder} to spawn particles.</i> */
+	public CustomParticle createParticle(ResourceLocation type, World world, double x, double y, double z){
+		return null;
 	}
 
 	public void setGraphicsLevel(BlockLeavesMF parBlock, boolean parFancyEnabled) {

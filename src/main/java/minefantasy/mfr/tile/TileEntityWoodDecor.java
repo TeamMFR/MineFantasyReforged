@@ -25,7 +25,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 	}
 
 	public CustomMaterial getMaterial() {
-		return this.material != CustomMaterial.NONE ? this.material : trySetMaterial(MineFantasyMaterials.Names.REFINED_WOOD);
+		return this.material != CustomMaterial.NONE ? this.material : trySetMaterial(MineFantasyMaterials.Names.SCRAP_WOOD);
 	}
 
 	public void setMaterial(CustomMaterial material) {
@@ -33,7 +33,7 @@ public abstract class TileEntityWoodDecor extends TileEntityBase {
 	}
 
 	public String getMaterialName() {
-		return this.material != CustomMaterial.NONE ? material.getName() : MineFantasyMaterials.Names.REFINED_WOOD;
+		return this.material != CustomMaterial.NONE ? material.getName() : MineFantasyMaterials.Names.SCRAP_WOOD;
 	}
 
 	public CustomMaterial trySetMaterial(String materialName) {

@@ -11,9 +11,7 @@ import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.recipe.refine.BloomRecipe;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class SmeltingRecipesMF {
@@ -64,32 +62,21 @@ public class SmeltingRecipesMF {
 			}
 		}
 
-
-		refineRawOre(MineFantasyItems.ORE_COPPER, copper);
-		refineRawOre(MineFantasyItems.ORE_TIN, tin);
-		refineRawOre(MineFantasyItems.ORE_IRON, iron);
-		refineRawOre(MineFantasyItems.ORE_SILVER, silver);
-		refineRawOre(MineFantasyItems.ORE_GOLD, gold);
+		refineRawOre(new ItemStack(MineFantasyItems.ORE_COPPER), copper);
+		refineRawOre(new ItemStack(MineFantasyItems.ORE_TIN), tin);
+		refineRawOre(new ItemStack(MineFantasyItems.ORE_IRON), iron);
+		refineRawOre(new ItemStack(MineFantasyItems.ORE_SILVER), silver);
+		refineRawOre(new ItemStack(MineFantasyItems.ORE_GOLD), gold);
 
 		for (ItemStack ore: OreDictionary.getOres("oreCopper")) {
-			refineRawOre(ore, copper, 0.4F);
+			refineRawOre(ore, copper);
 		}
 		for (ItemStack ore: OreDictionary.getOres("oreTin")) {
-			refineRawOre(ore, tin, 0.5F);
+			refineRawOre(ore, tin);
 		}
 		for (ItemStack ore: OreDictionary.getOres("oreSilver")) {
-			refineRawOre(ore, silver, 0.9F);
+			refineRawOre(ore, silver);
 		}
-
-		GameRegistry.addSmelting(MineFantasyItems.PREPARED_COAL, new ItemStack(MineFantasyItems.COKE), 1F);
-		GameRegistry.addSmelting(MineFantasyBlocks.BORAX_ORE, new ItemStack(MineFantasyItems.FLUX_STRONG, 4), 0.25F);
-		GameRegistry.addSmelting(MineFantasyBlocks.TUNGSTEN_ORE, new ItemStack(MineFantasyItems.ORE_TUNGSTEN, 1), 0.25F);
-		GameRegistry.addSmelting(MineFantasyBlocks.KAOLINITE_ORE, new ItemStack(MineFantasyItems.KAOLINITE), 0.25F);
-		GameRegistry.addSmelting(MineFantasyBlocks.NITRE_ORE, new ItemStack(MineFantasyItems.NITRE, 4), 0.25F);
-		GameRegistry.addSmelting(MineFantasyBlocks.SULFUR_ORE, new ItemStack(MineFantasyItems.SULFUR, 4), 0.25F);
-		GameRegistry.addSmelting(MineFantasyBlocks.CLAY_ORE, new ItemStack(Items.CLAY_BALL, 4), 0.25F);
-
-		GameRegistry.addSmelting(MineFantasyBlocks.LIMESTONE_COBBLE, new ItemStack(MineFantasyBlocks.LIMESTONE),  0.25F);
 
 		// ALLOY
 		MineFantasyKnowledgeList.bronze_alloy = MineFantasyReforgedAPI.addRatioAlloy(3, MineFantasyItems.bar("bronze", 3),
@@ -141,27 +128,10 @@ public class SmeltingRecipesMF {
 		MineFantasyReforgedAPI.addBlastFurnaceRecipe(MineFantasyItems.BLUE_STEEL_WEAK_INGOT, blue_steel);
 	}
 
-	private static void refineRawOre(Item ore, ItemStack bar) {
-		refineRawOre(new ItemStack(ore), bar, 0F);
-	}
-
-	private static void refineRawOre(ItemStack ore, ItemStack bar, float xp) {
+	private static void refineRawOre(ItemStack ore, ItemStack bar) {
 		if (ConfigHardcore.HCCreduceIngots) {
 			BloomRecipe.addRecipe(ore, bar);
-		} else {
-			GameRegistry.addSmelting(ore, bar, xp);
 		}
 		BigFurnaceRecipes.addRecipe(ore, bar, 0);
-	}
-
-	static void smeltFood() {
-		GameRegistry.addSmelting(MineFantasyItems.HORSE_RAW, new ItemStack(MineFantasyItems.HORSE_COOKED), 0.2F);
-		GameRegistry.addSmelting(MineFantasyItems.WOLF_RAW, new ItemStack(MineFantasyItems.WOLF_COOKED), 0.2F);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_STRIP_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_STRIP_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_CHUNK_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_CHUNK_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED, new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_COOKED), 0);
-		GameRegistry.addSmelting(MineFantasyItems.BOWL_WATER_SALT, new ItemStack(MineFantasyItems.SALT), 0);
-		GameRegistry.addSmelting(MineFantasyItems.SAUSAGE_RAW, new ItemStack(MineFantasyItems.SAUSAGE_COOKED), 0);
 	}
 }

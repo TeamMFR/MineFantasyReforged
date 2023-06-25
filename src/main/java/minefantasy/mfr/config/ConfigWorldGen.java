@@ -140,6 +140,10 @@ public class ConfigWorldGen extends ConfigurationBaseMF {
 	public static int dwarvenStrongholdLength;
 	public static int dwarvenStrongholdDeviations;
 
+	public static boolean dwarvenStrongholdShouldFurnaceSpawn;
+
+	public static boolean dwarvenStrongholdShouldCauldronSpawn;
+
 	@Override
 	protected void loadConfig() {
 		copperRarity = Float.parseFloat(config.get(copper, "Copper Rarity", 1.0D,
@@ -430,7 +434,12 @@ public class ConfigWorldGen extends ConfigurationBaseMF {
 		dwarvenStrongholdDeviations = Integer.parseInt(config.get(dwarvenSH, "Stronghold max deviations", 1,
 				"Max amount of intersections in dwarf stronghold hallways (not including living hubs). This can significantly increase complexity of strongholds and in turn lag when generating")
 				.getString());
-
+		dwarvenStrongholdShouldFurnaceSpawn = Boolean.parseBoolean(config.get(dwarvenSH, "Stronghold Should Furnace Spawn", true,
+						"Should the furnace block spawn inside the Stronghold")
+				.getString());
+		dwarvenStrongholdShouldCauldronSpawn = Boolean.parseBoolean(config.get(dwarvenSH, "Stronghold Should Cauldron Spawn", false,
+						"Should the cauldron block spawn inside the Stronghold")
+				.getString());
 	}
 
 }

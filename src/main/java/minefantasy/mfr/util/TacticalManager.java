@@ -7,6 +7,7 @@ import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
+import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.StaminaBar;
@@ -24,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.MathHelper;
 
 import java.util.Random;
@@ -155,6 +157,18 @@ public class TacticalManager {
 
 	private static boolean canWeaponBlock(ItemStack item) {
 		return item.getItem() instanceof ItemSword || item.getItem() instanceof IParryable;
+	}
+
+	public static boolean checkAllowsOffhandOnBoth(EntityPlayer player) {
+		ItemStack mainHand = player.getHeldItemMainhand();
+		ItemStack offHand = player.getHeldItemOffhand();
+		if(mainHand.getItem() instanceof ItemWeaponMFR && offHand.getItem() instanceof ItemWeaponMFR) {
+			return ((ItemWeaponMFR) mainHand.getItem()).allowOffhand(player, EnumHand.MAIN_HAND)
+					&& ((ItemWeaponMFR) offHand.getItem()).allowOffhand(player, EnumHand.OFF_HAND);
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static boolean isMobBlocking(EntityLivingBase user) {

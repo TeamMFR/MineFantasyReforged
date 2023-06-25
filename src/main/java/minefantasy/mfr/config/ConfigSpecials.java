@@ -13,6 +13,7 @@ public class ConfigSpecials extends ConfigurationBaseMF {
 	public static boolean dynamicArrows;
 	public static String debug = "";
 	public static boolean mythicOreSoundTooltip;
+	public static Integer syringeCooldownValue;
 	@Override
 	protected void loadConfig() {
 		stickArrows = Boolean.parseBoolean(config.get(CATEGORY_ARCHERY, "Save Arrows", true,
@@ -35,6 +36,10 @@ public class ConfigSpecials extends ConfigurationBaseMF {
 				"When enabled, the Mythic ore will also send a written tooltip when ore emits a chiming sound.").getString());
 		shouldResearchBookSpawn = Boolean.parseBoolean(config.get(CATEGORY_MISC, "Should Spawn Research Book", true,
 				"Should the Research book be given to the Player on FIRST world load or not").getString());
+
+		syringeCooldownValue = Integer.parseInt(config.get(CATEGORY_MISC, "Syringe Item Use Cooldown", 80,
+						"This controls how long the cooldown for using (right clicking) the syringe on yourself")
+				.getString());
 	}
 
 }

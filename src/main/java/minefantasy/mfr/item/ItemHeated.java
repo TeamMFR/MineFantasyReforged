@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
@@ -43,6 +44,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	public ItemHeated() {
 		super("hot_item");
 		this.setMaxStackSize(64);
+		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	public static int getTemp(ItemStack item) {
@@ -226,17 +228,20 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		}
 	}
 
-	public int getColorFromItemStack(ItemStack stack) {
+	public static int getColorIntFromItemStack(ItemStack stack) {
 		if (!renderDynamicHotIngotRendering) {
 			return Color.WHITE.getRGB();
 		}
 		int heat = getTemp(stack);
-		int maxHeat = Heatable.forgeMaximumMetalHeat;
+		int maxHeat = Heatable.FORGE_MAXIMUM_METAL_HEAT;
 		double heatPer = (double) heat / (double) maxHeat * 100D;
 
 		int red = getRedOnHeat();
 		int green = getGreenOnHeat(heatPer);
 		int blue = getBlueOnHeat(heatPer);
+		if (heat > 0 && blue <= 80) {
+			blue = 80;
+		}
 
 		float curr_red;
 		float curr_green;
@@ -262,17 +267,15 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		return GuiHelper.getColourForRGB(red, green, blue);
 	}
 
-	private int getRedOnHeat() {
+	public static int getRedOnHeat() {
 		return 255;
 	}
 
-	private int getGreenOnHeat(double percent) {
+	public static int getGreenOnHeat(double percent) {
 		if (percent <= 0)
 			return 255;
 		if (percent > 100)
 			percent = 100;
-		if (percent < 0)
-			percent = 0;
 
 		if (percent <= 55) {
 			return (int) (255 - ((255 / 55) * percent));
@@ -281,14 +284,12 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		}
 	}
 
-	private int getBlueOnHeat(double percent) {
+	public static int getBlueOnHeat(double percent) {
 		if (percent <= 0)
 			return 255;
 
 		if (percent > 100)
 			percent = 100;
-		if (percent < 0)
-			percent = 0;
 
 		if (percent <= 55) {
 			return (int) (255 - ((255 / 55) * percent));

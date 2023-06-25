@@ -1,12 +1,10 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
-import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CookingRecipes {
 	public static void init() {
@@ -43,16 +41,13 @@ public class CookingRecipes {
 		MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(MineFantasyItems.BOWL_WATER_SALT), new ItemStack(MineFantasyItems.SALT), 100,
 				200, 2, false, false);
 
-		if (!ConfigHardcore.preventCook) {
-			SmeltingRecipesMF.smeltFood();
-		}
 	}
 
 	/**
 	 * Cook in for out on anything (100C-200C, for ~15s)
 	 */
-	private static CookRecipe cookMeat(Item in, Item out) {
-		return MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out), 100, 200, 15, false);
+	private static void cookMeat(Item in, Item out) {
+		MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out), 100, 200, 15, false);
 	}
 
 	/*
@@ -63,8 +58,8 @@ public class CookingRecipes {
 	 * @param time   how much time roughly
 	 */
 
-	private static CookRecipe bake(Item in, Item out, int mint, int maxt, int time, int burn_time, boolean burn) {
-		return MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out),
+	private static void bake(Item in, Item out, int mint, int maxt, int time, int burn_time, boolean burn) {
+		MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out),
 				new ItemStack(MineFantasyItems.BURNT_FOOD), mint, maxt, time, burn_time, true, burn);
 	}
 
@@ -76,8 +71,8 @@ public class CookingRecipes {
 	 * @param time   how much time roughly
 	 */
 
-	private static CookRecipe bake(Item in, Item out, int mint, int maxt, int time, int burn_time, Item burn) {
-		return MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out), new ItemStack(burn), mint, maxt,
+	private static void bake(Item in, Item out, int mint, int maxt, int time, int burn_time, Item burn) {
+		MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(in), new ItemStack(out), new ItemStack(burn), mint, maxt,
 				time, burn_time, true);
 	}
 
@@ -92,11 +87,8 @@ public class CookingRecipes {
 		bakeCeramic(MineFantasyItems.FIRECLAY_BRICK, MineFantasyItems.STRONG_BRICK, 1500, 5);
 	}
 
-	private static CookRecipe bakeCeramic(Item clay, Item ceramic, int temp, int time) {
-		if (!ConfigHardcore.preventCeramic) {
-			GameRegistry.addSmelting(clay, new ItemStack(ceramic), 0F);
-		}
-		return MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(clay), new ItemStack(ceramic), null, temp, 1000, time, 0,
+	private static void bakeCeramic(Item clay, Item ceramic, int temp, int time) {
+		MineFantasyReforgedAPI.addCookingRecipe(new ItemStack(clay), new ItemStack(ceramic), null, temp, 1000, time, 0,
 				true, false);
 
 	}

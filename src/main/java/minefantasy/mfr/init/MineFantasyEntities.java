@@ -30,20 +30,22 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 
+import java.util.Arrays;
+
 @Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 public class MineFantasyEntities {
 	@SubscribeEvent
 	public static void register(RegistryEvent.Register<EntityEntry> event) {
-		addEntity(EntityArrowMFR.class, "arrowMF", 1, 16, ConfigSpecials.dynamicArrows ? 1 : 20);
+		addEntity(EntityArrowMFR.class, "arrowMF", 1, 120, ConfigSpecials.dynamicArrows ? 1 : 20);
 		addEntity(EntityBomb.class, "bombMF", 2, 16, ConfigSpecials.dynamicArrows ? 1 : 20);
 		addEntity(EntityShrapnel.class, "shrapnel_mf", 3, 16, ConfigSpecials.dynamicArrows ? 1 : 20);
-		addEntity(EntityFireBlast.class, "fire_blast", 4, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
-		addEntity(EntitySmoke.class, "smoke_mf", 5, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
+		addEntity(EntityFireBlast.class, "fire_blast", 4, 120, ConfigSpecials.dynamicArrows ? 2 : 20);
+		addEntity(EntitySmoke.class, "smoke_mf", 5, 120, ConfigSpecials.dynamicArrows ? 2 : 20);
 		addEntity(EntityItemUnbreakable.class, "special_eitem_mf", 6, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
 		addEntity(EntityMine.class, "landmineMF", 7, 16, 10);
 		addEntity(EntityParachute.class, "parachute_mf", 8, 16, 20);
 
-		addEntity(EntityDragonBreath.class, "dragonbreath", 9, 16, ConfigSpecials.dynamicArrows ? 2 : 20);
+		addEntity(EntityDragonBreath.class, "dragonbreath", 9, 120, ConfigSpecials.dynamicArrows ? 2 : 20);
 
 		DragonBreath.init();
 		addEntity(10, EntityDragon.class, "dragon");
@@ -53,7 +55,9 @@ public class MineFantasyEntities {
 
 		addEntity(14, EntityItemHeated.class, "entity_item_heated");
 
-		addSpawn(EntityDragon.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.Type.NETHER);
+		if (Arrays.stream(ConfigMobs.dragonDimensionID).anyMatch(dim -> dim == -1)) {
+			addSpawn(EntityDragon.class, 1, 1, 1, EnumCreatureType.MONSTER, BiomeDictionary.Type.NETHER);
+		}
 		if (ConfigMobs.minotaurSpawnrate > 0) {
 			addSpawn(EntityMinotaur.class, ConfigMobs.minotaurSpawnrate, 1, 1, EnumCreatureType.MONSTER);
 		}

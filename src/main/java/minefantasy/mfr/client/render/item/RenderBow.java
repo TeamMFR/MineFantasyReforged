@@ -48,7 +48,9 @@ public class RenderBow extends WrappedItemModel implements IItemRenderer {
 
 			if (pulling) {
 
-				float pull = Math.min(!(entity.getActiveItemStack().getItem() instanceof ItemBowMFR) ? 0.0F : (float)(stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / ItemBowMFR.getDrawbackTime(stack), 1.0F);
+				float pull = Math.min(!(entity.getActiveItemStack().getItem() instanceof ItemBowMFR)
+						? 0.0F
+						: (float)(stack.getMaxItemUseDuration() - entity.getItemInUseCount()) / ((ItemBowMFR) entity.getActiveItemStack().getItem()).getMaxCharge(entity.getActiveItemStack()), 1.0F);
 
 				if (pull >= 0.9F) {
 					pull = 0.9F;

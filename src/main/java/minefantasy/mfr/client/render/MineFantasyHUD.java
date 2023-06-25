@@ -69,8 +69,13 @@ public class MineFantasyHUD extends Gui {
 			EntityPlayer player = mc.player;
 
 			if (mc.gameSettings.thirdPersonView == 0) {
-				if (!player.getHeldItemMainhand().isEmpty() && player.getHeldItemMainhand().getItem() instanceof IScope) {
+				if (!player.getHeldItemMainhand().isEmpty()
+						&& player.getHeldItemMainhand().getItem() instanceof IScope
+						&& player.isHandActive()) {
 					renderScope(player.getHeldItemMainhand());
+				}
+				else if (isScoped) {
+					isScoped = false;
 				}
 				if (player.getRidingEntity() != null && player.getRidingEntity() instanceof EntityCogwork) {
 					renderPowerHelmet((EntityCogwork) player.getRidingEntity());
@@ -461,7 +466,7 @@ public class MineFantasyHUD extends Gui {
 		this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, tile.getProgressBar(160), 3);
 
 		String s = knowsCraft ? tile.getResultName() : "????";
-		ItemStack result = tile.getInventory().getStackInSlot(1);
+		ItemStack result = tile.getRecipeInventory().getStackInSlot(0);
 		if (!result.isEmpty() && result.getCount() > 1) {
 			s += " x" + result.getCount();
 		}

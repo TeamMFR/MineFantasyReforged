@@ -81,8 +81,7 @@ public class BlockRepairKit extends Block implements IClientRegister {
 			return true;
 		}
 		ItemStack held = user.getHeldItem(hand);
-		// held.getItem().isRepairable() Was used but new MF tools disable this to avoid
-		// vanilla repairs
+		// held.getItem().isRepairable() Was used but new MF tools disable this to avoid vanilla repairs
 		if (!held.isEmpty() && canRepair(held) && (!held.isItemEnchanted() || isOrnate)) {
 			if (rand.nextFloat() < successRate) {
 				boolean broken = rand.nextFloat() < breakChance;
@@ -107,6 +106,9 @@ public class BlockRepairKit extends Block implements IClientRegister {
 
 	private boolean canRepair(ItemStack held) {
 		if (held.isEmpty()) {
+			return false;
+		}
+		if (!held.isItemDamaged()) {
 			return false;
 		}
 		if (held.getItem().isDamageable() && CustomToolHelper.getCustomPrimaryMaterial(held) != CustomMaterial.NONE)// Custom Tool

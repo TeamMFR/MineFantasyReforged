@@ -1,13 +1,17 @@
 package minefantasy.mfr.proxy;
 
+import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.block.BlockLeavesMF;
 import minefantasy.mfr.client.KnowledgePageRegistry;
 import minefantasy.mfr.client.model.BlockColorsMFR;
 import minefantasy.mfr.client.model.ItemColorsMFR;
+import minefantasy.mfr.client.particle.CustomParticle;
+import minefantasy.mfr.client.particle.ParticleSpark;
 import minefantasy.mfr.client.render.BlockingAnimationHandler;
 import minefantasy.mfr.client.render.HudHandler;
 import minefantasy.mfr.client.render.block.TileEntityAmmoBoxRenderer;
+import minefantasy.mfr.client.render.block.TileEntityAnvilRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
@@ -44,6 +48,7 @@ import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.mechanics.ExtendedReach;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.tile.TileEntityAmmoBox;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityBellows;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBombPress;
@@ -53,9 +58,11 @@ import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.tile.TileEntityRoast;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import minefantasy.mfr.util.ClientTickHandler;
+import minefantasy.mfr.util.ParticleBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -68,11 +75,19 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.input.Keyboard;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Anonymous Productions
  */
 @SideOnly(Side.CLIENT)
 public class ClientProxy extends ClientProxyBase {
+
+	/** Static particle factory map */
+	private static final Map<ResourceLocation, CustomParticle.ICustomParticleFactory> factories = new HashMap<>();
+
+
 	@Override
 	public void preInit() {
 		super.preInit();
@@ -85,6 +100,7 @@ public class ClientProxy extends ClientProxyBase {
 
 		BlockColorsMFR.init();
 		ItemColorsMFR.init();
+		registerParticles();
 	}
 
 	@Override
@@ -140,6 +156,7 @@ public class ClientProxy extends ClientProxyBase {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBigFurnace.class, new TileEntityBigFurnaceRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBombPress.class, new TileEntityBombPressRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRoast.class, new TileEntityRoastRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnvil.class, new TileEntityAnvilRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer<>());
 	}
@@ -158,6 +175,29 @@ public class ClientProxy extends ClientProxyBase {
 		RenderingRegistry.registerEntityRenderingHandler(EntityDragon.class, RenderDragon::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityMinotaur.class, RenderMinotaur::new);
 		RenderingRegistry.registerEntityRenderingHandler(EntityHound.class, RenderHound::new);
+	}
+
+	/** Use {@link CustomParticle#registerParticle(ResourceLocation, CustomParticle.ICustomParticleFactory)}, this is internal. */
+	// I mean, it does exactly the same thing but I might want to make it do something else in future...
+
+	public static void addParticleFactory(ResourceLocation name, CustomParticle.ICustomParticleFactory factory){
+		factories.put(name, factory);
+	}
+
+	@Override
+	public void registerParticles() {
+		// I'll be a good programmer and use the API method rather than the one above. Lead by example, as they say...
+		 CustomParticle.registerParticle(ParticleBuilder.Type.SPARK, ParticleSpark::new);
+	}
+
+	@Override
+	public CustomParticle createParticle(ResourceLocation type, World world, double x, double y, double z){
+		CustomParticle.ICustomParticleFactory factory = factories.get(type);
+		if(factory == null){
+			MineFantasyReforged.LOG.warn("Unrecognised particle type {} ! Ensure the particle is properly registered.", type);
+			return null;
+		}
+		return factory.createParticle(world, x, y, z);
 	}
 
 	@Override

@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AmmoMechanics {
@@ -28,7 +29,7 @@ public class AmmoMechanics {
 	/**
 	 * List of handlers
 	 */
-	public static List<IArrowHandler> handlers = new ArrayList<>();
+	public static HashMap<String, IArrowHandler> handlers = new HashMap<>();
 
 	/**
 	 * Adds an arrow that can be fired
@@ -47,8 +48,8 @@ public class AmmoMechanics {
 	/**
 	 * Adds a handler
 	 */
-	public static void addHandler(IArrowHandler handler) {
-		handlers.add(handler);
+	public static void addHandler(String name, IArrowHandler handler) {
+		handlers.put(name, handler);
 	}
 
 	public static void putAmmoOnFirearm(ItemStack weapon, ItemStack ammo) {

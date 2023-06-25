@@ -2,13 +2,19 @@
     "forge_marker": 1,
     "defaults": {
         "transform": "forge:default-block",
-        "model": "block"
+        "model": "block",
+        "textures": {"texture": "minefantasyreforged:blocks/persistent_component"}
     },
     "variants": {
         "normal": [{}],
-        "facing=north": { "y": 0 },
-        "facing=south": { "y": 180 },
-        "facing=west":  { "y": 270 },
-        "facing=east":  { "y": 90 }
+        "facing=north,persist=true":		{ "model": "minefantasyreforged:persistent_component", "y": 0},
+        "facing=south,persist=true":		{ "model": "minefantasyreforged:persistent_component", "y": 180},
+        "facing=west,persist=true":		    { "model": "minefantasyreforged:persistent_component", "y": 270},
+        "facing=east,persist=true":		    { "model": "minefantasyreforged:persistent_component", "y": 90},
+
+        "facing=north,persist=false":	    { "y": 0},
+        "facing=south,persist=false":	    { "y": 180},
+        "facing=west,persist=false":		{ "y": 270},
+        "facing=east,persist=false":		{ "y": 90}
     }
 }

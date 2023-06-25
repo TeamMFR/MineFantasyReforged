@@ -4,7 +4,9 @@ import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -37,8 +39,27 @@ public class RandomOre {
 		this.research = research;
 	}
 
+	public static void addOre(ItemStack drop, float chance, String oreDict, int harvestLevel, int min, int max, boolean silkDisable) {
+		for (ItemStack stack : OreDictionary.getOres(oreDict)) {
+			Block block = Block.getBlockFromItem(stack.getItem());
+			if (block != Blocks.AIR) {
+				drops.add(new RandomOre(drop, chance / 100F, block, harvestLevel, min, max, silkDisable));
+			}
+		}
+	}
+
 	public static void addOre(ItemStack drop, float chance, Block block, int harvestLevel, int min, int max, boolean silkDisable) {
 		drops.add(new RandomOre(drop, chance / 100F, block, harvestLevel, min, max, silkDisable));
+	}
+
+	public static void addOre(ItemStack drop, float chance, String oreDict, int harvestLevel, int min, int max,
+			boolean silkDisable, String research) {
+		for (ItemStack stack : OreDictionary.getOres(oreDict)) {
+			Block block = Block.getBlockFromItem(stack.getItem());
+			if (block != Blocks.AIR) {
+				drops.add(new RandomOre(drop, chance / 100F, block, harvestLevel, min, max, silkDisable, research));
+			}
+		}
 	}
 
 	public static void addOre(ItemStack drop, float chance, Block block, int harvestLevel, int min, int max,

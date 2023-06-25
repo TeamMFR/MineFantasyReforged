@@ -287,9 +287,9 @@ public class SalvageRecipes {
 		Salvage.addSalvage(MineFantasyItems.STONE_HAMMER, MineFantasyItems.SHARP_ROCK, Items.STICK, MineFantasyItems.VINE);
 		Salvage.addSalvage(MineFantasyItems.STONE_TONGS, MineFantasyItems.SHARP_ROCK, Items.STICK, MineFantasyItems.VINE);
 		Salvage.addSalvage(MineFantasyItems.BONE_NEEDLE, Items.BONE);
-		Salvage.addSalvage(MineFantasyItems.STONE_KNIFE, new ItemStack(Blocks.COBBLESTONE, 2),				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
-		Salvage.addSalvage(MineFantasyItems.STONE_HAMMER, Blocks.COBBLESTONE, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
-		Salvage.addSalvage(MineFantasyItems.STONE_TONGS, new ItemStack(Blocks.COBBLESTONE, 2),				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
+		Salvage.addSalvage(MineFantasyItems.STONE_KNIFE, new ItemStack(MineFantasyItems.SHARP_ROCK, 2),				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
+		Salvage.addSalvage(MineFantasyItems.STONE_HAMMER, MineFantasyItems.SHARP_ROCK, MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
+		Salvage.addSalvage(MineFantasyItems.STONE_TONGS, new ItemStack(MineFantasyItems.SHARP_ROCK, 2),				MineFantasyItems.TIMBER.construct(Constants.SCRAP_WOOD_TAG));
 		Salvage.addSalvage(MineFantasyItems.BONE_NEEDLE, Items.BONE);
 
 		ItemStack blackPlate = ((ItemMetalComponent) MineFantasyItems.PLATE).createComponentItemStack("blackSteel");
@@ -480,7 +480,10 @@ public class SalvageRecipes {
 			Salvage.addSalvage(result, woodpane, woodpane, woodpane, woodpane, woodpane, woodpane, new ItemStack(MineFantasyItems.NAIL, 4), new ItemStack(MineFantasyItems.HINGE, 2));
 
 			result = ((BlockWoodDecor) MineFantasyBlocks.TROUGH_WOOD).construct(material.name);
-			Salvage.addSalvage(result, timber, timber, timber, timber, timber, new ItemStack(MineFantasyItems.NAIL, 3));
+			ItemStack nailStack = material.name.equalsIgnoreCase(Constants.SCRAP_WOOD_TAG)
+					? ItemStack.EMPTY
+					: new ItemStack(MineFantasyItems.NAIL, 3);
+			Salvage.addSalvage(result, timber, timber, timber, timber, timber, nailStack);
 		}
 	}
 }

@@ -2,8 +2,12 @@ package minefantasy.mfr.util;
 
 import com.google.common.base.CaseFormat;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.archery.IAmmo;
+import minefantasy.mfr.api.archery.IFirearm;
+import minefantasy.mfr.item.ItemArrowMFR;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -20,6 +24,10 @@ import javax.annotation.Nullable;
 
 public class Utils {
 
+	public Utils() {
+		throw new IllegalStateException("Util class cannot be instantiated");
+	}
+
 	public static <T> T nullValue() {
 		return null;
 	}
@@ -31,6 +39,34 @@ public class Utils {
 
 	public static String convertSnakeCaseToSplitCapitalized(String string) {
 		return WordUtils.capitalize(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_UNDERSCORE, string).replaceAll("_", " "));
+	}
+
+	public static boolean canAcceptArrow(ItemStack ammo, ItemStack weapon) {
+		String ammoType = "null";
+		if (!ammo.isEmpty() && ammo.getItem() instanceof IAmmo) {
+			ammoType = ((IAmmo) ammo.getItem()).getAmmoType(ammo);
+		}
+
+		if (isVanillaArrow(ammo)) {
+			ammoType = "arrow";
+		}
+
+		if (!weapon.isEmpty() && weapon.getItem() instanceof IFirearm) {
+			return ((IFirearm) weapon.getItem()).canAcceptAmmo(weapon, ammoType);
+		}
+
+		return ammoType.equalsIgnoreCase("arrow");
+	}
+
+	public static boolean isVanillaArrow(ItemStack ammo) {
+		return ammo.getItem() instanceof ItemArrow && !(ammo.getItem() instanceof ItemArrowMFR);
+	}
+
+	public static NBTTagCompound getOrApplyNBT(ItemStack stack) {
+		if (!stack.hasTagCompound()) {
+			stack.setTagCompound(new NBTTagCompound());
+		}
+		return stack.getTagCompound();
 	}
 
 	public static TileEntityChest getOtherDoubleChest(TileEntity inv) {

@@ -1,7 +1,6 @@
 package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.stamina.CustomFoodEntry;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -16,6 +15,7 @@ import minefantasy.mfr.entity.mob.EntityDragon;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemFoodMFR;
+import minefantasy.mfr.item.ItemSyringe;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -29,6 +29,7 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
@@ -40,6 +41,7 @@ import net.minecraft.world.EnumDifficulty;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -228,23 +230,28 @@ public class PlayerTickHandler {
 		}
 
 		if (event.phase == TickEvent.Phase.START) {
-			applyBalance(event.player);
-			ItemFoodMFR.onTick(event.player);
+			EntityPlayer player = event.player;
+			applyBalance(player);
+			ItemFoodMFR.onTick(player);
 
-			if (!event.player.world.isRemote
-					&& !(!ConfigHardcore.HCChotBurn && ItemApron.isUserProtected(event.player))
-					&& event.player.ticksExisted % 100 == 0) {
-				for (int a = 0; a < event.player.inventory.getSizeInventory(); a++) {
-					ItemStack item = event.player.inventory.getStackInSlot(a);
-					if (!event.player.isCreative() && !item.isEmpty() && item.getItem() instanceof IHotItem) {
-						event.player.setFire(5);
-						event.player.attackEntityFrom(DamageSource.ON_FIRE, 1.0F);
+			//Burn player for having hot items on them
+			int tickHotItemCheck = player.isWet() ? 20 : 100;
+			if (!player.world.isRemote
+					&& !(!ConfigHardcore.HCChotBurn && ItemApron.isUserProtected(player))
+					&& player.ticksExisted % tickHotItemCheck == 0) {
+				if (!player.isCreative() && player.inventory.hasItemStack(new ItemStack(MineFantasyItems.HOT_ITEM))) {
+					if (player.getLastDamageSource() != DamageSource.ON_FIRE) {
+						if (!player.world.isRemote) {
+							player.sendMessage(new TextComponentTranslation("info.noHeatProtection.message"));
+						}
 					}
+					player.setFire(5);
+					player.attackEntityFrom(DamageSource.ON_FIRE, player.isWet() ? 3 : 1);
 				}
 			}
 
-			ArmourCalculator.updateWeights(event.player);
-			float weight = ArmourCalculator.getTotalWeightOfWorn(event.player, false);
+			ArmourCalculator.updateWeights(player);
+			float weight = ArmourCalculator.getTotalWeightOfWorn(player, false);
 			if (weight > 100F) {
 				if (event.player.isInWater()) {
 					event.player.motionY -= (weight / 20000F);
@@ -254,10 +261,21 @@ public class PlayerTickHandler {
 	}
 
 	@SubscribeEvent
+	public void onPlayerHitEntity(final AttackEntityEvent event) {
+		EntityPlayer player = event.getEntityPlayer();
+		ItemStack stack = player.getHeldItemMainhand();
+		if (stack.getItem() instanceof ItemSyringe) {
+			if (player.getCooledAttackStrength(0) < 0.9) {
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	@SubscribeEvent
 	public void onRightClickItem(final PlayerInteractEvent.RightClickItem evt) {
 
 		EntityPlayer player = evt.getEntityPlayer();
-		if (PlayerUtils.shouldItemStackBlock(evt.getItemStack())) {
+		if (PlayerUtils.shouldItemStackBlock(evt.getItemStack(), player.getHeldItemOffhand())) {
 
 			EnumAction action = player.getHeldItemOffhand().getItemUseAction();
 			if (action == EnumAction.BLOCK) {
@@ -279,7 +297,7 @@ public class PlayerTickHandler {
 	@SubscribeEvent
 	public void onItemUseStart(final LivingEntityUseItemEvent.Start evt) {
 
-		if (evt.getEntityLiving() instanceof EntityPlayer && PlayerUtils.shouldItemStackBlock(evt.getItem())) {
+		if (evt.getEntityLiving() instanceof EntityPlayer && PlayerUtils.shouldItemStackBlock(evt.getItem(), evt.getEntityLiving().getHeldItemOffhand())) {
 
 			evt.setDuration(evt.getItem().getMaxItemUseDuration());
 		}
@@ -297,6 +315,17 @@ public class PlayerTickHandler {
 						foodEntry.staminaSeconds, foodEntry.staminaBuff,
 						foodEntry.staminaRegenSeconds, foodEntry.staminaRegenBuff,
 						foodEntry.eatDelay, foodEntry.fatAccumulation);
+			}
+			//Handle non MFR Food repeated food reset
+			if (!(stack.getItem() instanceof ItemFoodMFR) && event.getEntityLiving() instanceof EntityPlayer) {
+				PlayerData data = PlayerData.get((EntityPlayer) event.getEntityLiving());
+				if (data != null && data.getVariable(ItemFoodMFR.REPEATED_FOOD_NBT) != null) {
+					NBTTagCompound nbt = data.getVariable(ItemFoodMFR.REPEATED_FOOD_NBT);
+					if (nbt != null && nbt.getInteger("repeat_count") != 0) {
+						nbt.setInteger("repeat_count", 0);
+						event.getItem().writeToNBT(nbt);
+					}
+				}
 			}
 		}
 	}

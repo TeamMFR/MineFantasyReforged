@@ -3,10 +3,8 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.proxy.IClientRegister;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -36,29 +34,29 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 		this.dropRate = droprate;
 		this.setTickRandomly(true);
 		MineFantasyReforged.PROXY.setGraphicsLevel(this, true);
-		setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
+		setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.TRUE).withProperty(DECAYABLE, Boolean.valueOf(true)));
 		MineFantasyReforged.PROXY.addClientRegister(this);
 	}
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+		return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
 	}
 
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		return getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
+		return getDefaultState().withProperty(DECAYABLE, (meta & 4) == 0).withProperty(CHECK_DECAY, (meta & 8) > 0);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
 		int i = 0;
 
-		if (!state.getValue(DECAYABLE).booleanValue()) {
+		if (!state.getValue(DECAYABLE)) {
 			i |= 4;
 		}
 
-		if (state.getValue(CHECK_DECAY).booleanValue()) {
+		if (state.getValue(CHECK_DECAY)) {
 			i |= 8;
 		}
 
@@ -77,16 +75,15 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-		return Item.getItemFromBlock(getBlockDrop());
+		return Item.getItemFromBlock(
+				this == MineFantasyBlocks.LEAVES_EBONY ? MineFantasyBlocks.SAPLING_EBONY //if ebony, drop ebony sapling
+				: this == MineFantasyBlocks.LEAVES_IRONBARK ? MineFantasyBlocks.SAPLING_IRONBARK //if ironbark, drop ironbark sapling
+				: MineFantasyBlocks.SAPLING_YEW); //if not anything else, drop yew sapling
 	}
 
 	@Override
 	protected int getSaplingDropChance(IBlockState state) {
-		return state == this.blockState.getBaseState() ? dropRate * 2 : dropRate;
-	}
-
-	private Block getBlockDrop() {
-		return this == MineFantasyBlocks.LEAVES_EBONY ? MineFantasyBlocks.SAPLING_EBONY : this == MineFantasyBlocks.LEAVES_IRONBARK ? MineFantasyBlocks.SAPLING_IRONBARK : MineFantasyBlocks.SAPLING_YEW;
+		return dropRate;
 	}
 
 	@Override
@@ -97,7 +94,7 @@ public class BlockLeavesMF extends BlockLeaves implements IShearable, IClientReg
 	@Nonnull
 	@Override
 	public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		return NonNullList.withSize(1, new ItemStack(getBlockDrop()));
+		return NonNullList.withSize(1, new ItemStack(this));
 	}
 
 	@Override

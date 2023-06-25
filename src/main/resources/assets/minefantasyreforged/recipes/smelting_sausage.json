@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:saussage_raw"
+    },
+    "result" : {
+        "item": "minefantasyreforged:saussage_cooked"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventcook"
+            }
+        }
+    ]
+}

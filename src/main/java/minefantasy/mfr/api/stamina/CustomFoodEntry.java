@@ -1,14 +1,12 @@
 package minefantasy.mfr.api.stamina;
 
 import minefantasy.mfr.config.ConfigStamina;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class CustomFoodEntry {
-	public static HashMap<ResourceLocation, CustomFoodEntry> entries = new HashMap<>();
+	public static HashMap<String, CustomFoodEntry> entries = new HashMap<>();
 
 	/**
 	 * How much stamina is immediately restored.
@@ -101,18 +99,8 @@ public class CustomFoodEntry {
 	 * @param carbs    The carbs value of the custom food entry. Will control max Stamina modifier.
 	 * @param fats     The fat value of the custom food entry. Will control eat delay modifier and fat accumulation modifier.
 	 */
-	public static void registerItem(Item piece, int tier, float sugar, float carbs, float fats) {
-		entries.put(piece.getRegistryName(), new CustomFoodEntry(tier, sugar, carbs, fats));
-	}
-
-	/**
-	 * Gets the entry for an item
-	 *
-	 * @param stack the armour item
-	 * @return the entry(if there is one), else null
-	 */
-	public static CustomFoodEntry getEntry(ItemStack stack) {
-		return getEntry(stack.getItem());
+	public static void registerItem(ItemStack piece, int tier, float sugar, float carbs, float fats) {
+		entries.put(piece.getItem().getRegistryName() + ":" + piece.getMetadata(), new CustomFoodEntry(tier, sugar, carbs, fats));
 	}
 
 	/**
@@ -121,10 +109,10 @@ public class CustomFoodEntry {
 	 * @param item the armour item
 	 * @return the entry(if there is one), else null
 	 */
-	public static CustomFoodEntry getEntry(Item item) {
+	public static CustomFoodEntry getEntry(ItemStack item) {
 		if (item != null) {
-			if (entries.containsKey(item.getRegistryName())) {
-				return entries.get(item.getRegistryName());
+			if (entries.containsKey(item.getItem().getRegistryName() + ":" + item.getMetadata())) {
+				return entries.get(item.getItem().getRegistryName() + ":" + item.getMetadata());
 			}
 		}
 		return null;

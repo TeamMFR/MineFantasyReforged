@@ -5,14 +5,14 @@ import java.util.HashMap;
 public class ArrowType {
 	public static HashMap<String, ArrowType> arrowMap = new HashMap<>();
 	public static ArrowType BOLT = new ArrowType("bolt", 1.50F, 1.50F, 1.50F).setRatio(0F, 1F, 0F);// Crossbow Bolt
-	public static ArrowType EXPLOSIVEBOLT = new ArrowType("explosivebolt", 1.50F, 1.50F, 0.25F).setRatio(0F, 0F, 1F);// Blunt
+	public static ArrowType EXPLOSIVEBOLT = new ArrowType("explosivebolt", 1.50F, 2F, 0.25F).setRatio(0F, 0F, 1F);// Blunt
 	public static ArrowType NORMAL = new ArrowType("normal", 1.00F, 1.00F, 1.00F).setRatio(1F, 3F, 0F);// Some cut, most
 	// pierce
 	public static ArrowType BODKIN = new ArrowType("bodkin", 1.50F, 0.65F, 0.75F).setRatio(0F, 1F, 0F);// Pure piercing
 	public static ArrowType BROADHEAD = new ArrowType("broad", 0.80F, 1.20F, 1.50F).setRatio(1F, 2F, 0F);// More cutting
 	// than
 	// normal
-	public static ArrowType EXPLOSIVE = new ArrowType("explosive", 1.0F, 1.50F, 0.25F).setRatio(0F, 0F, 1F);// Blunt
+	public static ArrowType EXPLOSIVE = new ArrowType("explosive", 1.0F, 2F, 0.25F).setRatio(0F, 0F, 1F);// Blunt
 	public final float weightModifier;
 	public final float damageModifier;
 	public final float velocity;

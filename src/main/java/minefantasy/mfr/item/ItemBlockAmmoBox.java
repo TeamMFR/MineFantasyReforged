@@ -64,7 +64,6 @@ public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
 	}

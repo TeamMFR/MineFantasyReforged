@@ -11,6 +11,7 @@ import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -34,6 +35,7 @@ import javax.annotation.Nonnull;
 
 public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	public static final PropertyBool BURNING = PropertyBool.create("burning");
 	public final boolean isHeater;
 	public final int tier;
 
@@ -54,7 +56,7 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, FACING);
+		return new BlockStateContainer(this, FACING, BURNING);
 	}
 
 	@Override
@@ -80,8 +82,7 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 
 	@Override
 	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
-		TileEntity tile = getTile(world, pos);
-		return ((TileEntityBigFurnace) tile).isBurning() ? 15 : 0;
+		return state.getValue(BURNING) ? 15 : 0;
 	}
 
 	/**
@@ -103,10 +104,12 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 		return true;
 	}
 
+	@Override
 	public boolean hasComparatorInputOverride(IBlockState state) {
 		return true;
 	}
 
+	@Override
 	public int getComparatorInputOverride(IBlockState blockState, World worldIn, BlockPos pos) {
 		return TileEntityBase.calculateRedstoneFromInventory(getTile(worldIn, pos).getInventory());
 	}
@@ -116,25 +119,28 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 		return "cauldron_side";
 	}
 
-	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing enumfacing = EnumFacing.byIndex(meta);
-
-		if (enumfacing.getAxis() == EnumFacing.Axis.Y) {
-			enumfacing = EnumFacing.NORTH;
-		}
-
-		return this.getDefaultState().withProperty(FACING, enumfacing);
+		return this.getDefaultState()
+				.withProperty(BURNING, (meta & 4) != 0)
+				.withProperty(FACING, EnumFacing.byHorizontalIndex(meta & 3));
 	}
 
-	@Override
 	public int getMetaFromState(IBlockState state) {
-		return state.getValue(FACING).getIndex();
+		int i = 0;
+		i = i | state.getValue(FACING).getHorizontalIndex();
+
+		if (state.getValue(BURNING)) {
+			i |= 4;
+		}
+
+		return i;
 	}
 
 	@Override
 	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+		return this.getDefaultState()
+				.withProperty(FACING, placer.getHorizontalFacing().getOpposite())
+				.withProperty(BURNING, 	false);
 	}
 
 	@SideOnly(Side.CLIENT)

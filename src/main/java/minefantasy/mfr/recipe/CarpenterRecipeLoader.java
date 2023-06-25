@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import com.google.gson.JsonObject;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Skill;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
@@ -17,8 +18,8 @@ public class CarpenterRecipeLoader extends RecipeLoader {
 	private static final int GRID_WIDTH = 4;
 	private static final int GRID_HEIGHT = 4;
 	private static final String TYPE = "carpenter";
-	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/minefantasyreforged/carpenter_recipes";
-	private static final String CUSTOM_RECIPE_DIRECTORY = "config/minefantasyreforged/custom/recipes/carpenter_recipes/";
+	private static final String DEFAULT_RECIPE_DIRECTORY = "assets/" + Constants.CONFIG_DIRECTORY +"/carpenter_recipes";
+	private static final String CUSTOM_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/carpenter_recipes/";
 
 	private CarpenterRecipeLoader() {} // no instances!
 

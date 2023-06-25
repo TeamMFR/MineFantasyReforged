@@ -159,6 +159,11 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 		return new TextComponentTranslation("entity." + getMinotaur().name + ".name");
 	}
 
+	@Override
+	public String getName() {
+		return new TextComponentTranslation("entity." + getMinotaur().name + ".name").getFormattedText();
+	}
+
 	public ItemWeaponMFR getRandomWeapon() {
 		if (getTier() == 3) {
 			return MineFantasyItems.ORNATE_GREATSWORD;
@@ -300,7 +305,7 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 					}
 				}
 				double distance = this.getDistanceSq(target);
-				if (!TacticalManager.isFlankedBy(target, this, 270) && distance > 6 && distance < 12
+				if (!TacticalManager.isFlankedBy(target, this, 270) && distance > 6 && distance < 60
 						&& rand.nextInt(50) == 0 && this.getAttack() == (byte) 0 && this.getMinotaur().throwsBombs) {
 					this.throwBomb(target, 1.0F);
 				}
@@ -401,6 +406,10 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 
 	@Override
 	public boolean attackEntityFrom(DamageSource source, float damage) {
+		//Frost Breeds are slightly more vulnerable to fire damage
+		if (source.isFireDamage() && MinotaurBreed.FROST_BREEDS.contains(getMinotaur())) {
+			damage *= 2;
+		}
 		if (!super.attackEntityFrom(source, damage)) {
 			return false;
 		} else {
@@ -673,9 +682,9 @@ public class EntityMinotaur extends EntityCreature implements IArmourPenetration
 		if (target instanceof EntityLivingBase && PowerArmour.isWearingCogwork((EntityLivingBase) target)) {
 			return false;
 		}
-		float mysize = getVolume(this);
-		float theirsize = getVolume(target);
-		return mysize > theirsize;
+		float minotaurSize = getVolume(this);
+		float targetSize = getVolume(target);
+		return minotaurSize > targetSize;
 	}
 
 	private float getVolume(Entity entity) {

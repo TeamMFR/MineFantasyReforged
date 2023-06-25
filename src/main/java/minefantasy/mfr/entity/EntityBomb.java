@@ -23,7 +23,6 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -169,13 +168,13 @@ public class EntityBomb extends Entity {
 			this.motionZ *= d;
 			this.motionY *= -0.99D;
 		}
-		List collide = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
+		List<Entity> collide = world.getEntitiesWithinAABBExcludingEntity(this, getEntityBoundingBox());
 		if (!collide.isEmpty() && !(thrower != null && collide.contains(thrower))) {
 			if (isSticky()) {
-				Object object = collide.get(0);
-				if (object instanceof Entity && object != this) {
-					if (this.getRidingEntity() == null && !((Entity) object).isBeingRidden() && canStick((Entity) object)) {
-						this.startRiding((Entity) object);
+				Entity object = collide.get(0);
+				if (object != null && object != this) {
+					if (this.getRidingEntity() == null && !object.isBeingRidden() && canStick(object)) {
+						this.startRiding(object);
 						this.fuse = getFuseTime();
 					}
 				}
@@ -262,13 +261,6 @@ public class EntityBomb extends Entity {
 		this.fuse = nbt.getByte("Fuse");
 	}
 
-	/**
-	 * returns null or the entityliving it was placed or ignited by
-	 */
-	public EntityLivingBase getTntPlacedBy() {
-		return this.thrower;
-	}
-
 	@Override
 	public void applyEntityCollision(Entity entity) {
 		if (!(thrower != null && thrower == entity)) {
@@ -283,14 +275,13 @@ public class EntityBomb extends Entity {
 		if (!this.world.isRemote) {
 			double area = getRangeOfBlast() * 2D;
 			AxisAlignedBB axisAlignedBB = this.getEntityBoundingBox().expand(area, area / 2, area);
-			List entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
+			List<EntityLivingBase> entitiesWithinAABB = this.world.getEntitiesWithinAABB(EntityLivingBase.class, axisAlignedBB);
 
 			if (entitiesWithinAABB != null && !entitiesWithinAABB.isEmpty()) {
 
-				for (Object o : entitiesWithinAABB) {
-					Entity entityHit = (Entity) o;
+				for (Entity entity : entitiesWithinAABB) {
 
-					double distanceToEntity = this.getDistance(entityHit);
+					double distanceToEntity = this.getDistance(entity);
 					double radius = getRangeOfBlast();
 					if (distanceToEntity < radius) {
 						float dam = getDamage();
@@ -303,18 +294,18 @@ public class EntityBomb extends Entity {
 								sc = (radius / 2);
 							dam *= (sc / (radius / 2));
 						}
-						if (!(entityHit instanceof EntityItem)) {
+						if (!(entity instanceof EntityItem)) {
 
 							DamageSource source = causeBombDamage(this, thrower != null ? thrower : this);
 							source.setExplosion();
 							if (getFilling().equals("fire")) {
 								source.setFireDamage();
 							}
-							if (getRidingEntity() != null && entityHit == getRidingEntity()) {
+							if (getRidingEntity() != null && entity == getRidingEntity()) {
 								dam *= 1.5F;
 							}
-							if (entityHit.attackEntityFrom(source, dam)) {
-								applyEffects(entityHit);
+							if (entity.attackEntityFrom(source, dam)) {
+								applyEffects(entity);
 							}
 						}
 					}
@@ -343,9 +334,6 @@ public class EntityBomb extends Entity {
 		if (getFilling().equals("fire")) {
 			hit.setFire(5);
 		}
-		if (hit instanceof EntityLivingBase) {
-			EntityLivingBase live = (EntityLivingBase) hit;
-		}
 	}
 
 	private double getRangeOfBlast() {
@@ -354,10 +342,6 @@ public class EntityBomb extends Entity {
 
 	private int getDamage() {
 		return (int) (getBlast().damage * getCase().damageModifier * getPowderType().damageModifier);
-	}
-
-	public boolean canEntityBeSeen(Entity entity) {
-		return this.world.rayTraceBlocks(new Vec3d(this.posX, this.posY + this.getEyeHeight(), this.posZ), new Vec3d(entity.posX, entity.posY + entity.getEyeHeight(), entity.posZ)) == null;
 	}
 
 	public String getFilling() {

@@ -89,6 +89,11 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 	}
 
 	@Override
+	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return state.getValue(BLOOM) ? 9 : 0;
+	}
+
+	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityBloomery tile = (TileEntityBloomery) getTile(world, pos);
 		if (tile != null) {

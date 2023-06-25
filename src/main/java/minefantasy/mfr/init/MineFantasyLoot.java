@@ -37,7 +37,7 @@ public class MineFantasyLoot {
 		DWARVEN_HOME = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "dwarven_tables/dwarven_home"));
 		DWARVEN_HOME_RICH = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "dwarven_tables/dwarven_home_rich"));
 		DWARVEN_STUDY = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "dwarven_tables/dwarven_study"));
-		DWARVEN_AMMO_BOX = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "dwarven_tables/dwarven_ammo_box")); //TODO Fill out this Loot Table
+		DWARVEN_AMMO_BOX = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "dwarven_tables/dwarven_ammo_box"));
 		LOOT_SACK_COMMON = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "loot_sack_tables/common"));
 		LOOT_SACK_VALUABLE = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "loot_sack_tables/valuable"));
 		LOOT_SACK_EXQUISITE = LootTableList.register(new ResourceLocation(MineFantasyReforged.MOD_ID, "loot_sack_tables/exquisite"));

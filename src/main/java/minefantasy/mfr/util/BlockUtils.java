@@ -15,4 +15,11 @@ public class BlockUtils {
 	public static void notifyBlockUpdate(TileEntity tile) {
 		notifyBlockUpdate(tile.getWorld(), tile.getPos());
 	}
+
+	public static boolean isBlockWithinHorizontalRange(BlockPos blockPos, BlockPos pointPos, int range) {
+		int dx = blockPos.getX() - pointPos.getX();
+		int dz = blockPos.getZ() - pointPos.getZ();
+		int distance = (int) Math.sqrt(dx * dx + dz * dz);
+		return distance <= range;
+	}
 }

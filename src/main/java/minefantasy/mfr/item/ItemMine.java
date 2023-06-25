@@ -163,18 +163,18 @@ public class ItemMine extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase entityLiving) {
-		EntityPlayer user = (EntityPlayer) entityLiving;
-		world.playSound(user, user.getPosition(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.AMBIENT, 1.0F, 1.0F);
-		user.swingArm(EnumHand.MAIN_HAND);
-		if (!user.capabilities.isCreativeMode) {
+	public ItemStack onItemUseFinish(ItemStack item, World world, EntityLivingBase entity) {
+		world.playSound(null, entity.getPosition(), SoundEvents.UI_BUTTON_CLICK, SoundCategory.AMBIENT, 1.0F, 1.0F);
+		entity.swingArm(entity.getActiveHand());
+
+		if (!(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode)) {
 			item.shrink(1);
 		}
 
 		if (!world.isRemote) {
 
-			EntityMine mine = new EntityMine(world, user);
-			mine.setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
+			EntityMine mine = new EntityMine(world, entity)
+					.setType(getFilling(item), getCasing(item), getFuse(item), getPowder(item));
 			world.spawnEntity(mine);
 		}
 

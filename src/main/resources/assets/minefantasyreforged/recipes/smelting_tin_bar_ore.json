@@ -1,0 +1,20 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "ore_dict",
+        "item": "oreTin"
+    },
+    "result" : {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"tin\"}}"
+    },
+    "experience": 0.5,
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccreduceingots"
+            }
+        }
+    ]
+}

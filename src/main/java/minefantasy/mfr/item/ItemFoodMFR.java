@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.ClientItemsMFR;
+import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
@@ -22,11 +23,13 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -39,6 +42,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public static final IStoredVariable<Float> EAT_DELAY = IStoredVariable.StoredVariable.ofFloat("eatDelay", Persistence.RESPAWN);
 	public static final IStoredVariable<Float> FAT_ACCUMULATION = IStoredVariable.StoredVariable.ofFloat("fatAccumulation", Persistence.ALWAYS).setSynced();
+	public static final IStoredVariable<NBTTagCompound> REPEATED_FOOD_NBT = IStoredVariable.StoredVariable.ofNBT("repeatedFoodCount", Persistence.ALWAYS);
 	public int itemRarity;
 	protected int hungerLevel;
 	private float staminaRestore = 0F;
@@ -47,6 +51,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	private int staminaSeconds = 0;
 	private boolean staminaInMinutes = false;
 	private boolean staminaInHours = false;
+	private boolean shouldRepeatCheck = false;
 	private float staminaRegenBuff = 0F;
 	private int staminaRegenSeconds = 0;
 	private boolean staminaRegenInMinutes = false;
@@ -69,7 +74,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	}
 
 	static {
-		PlayerData.registerStoredVariables(EAT_DELAY, FAT_ACCUMULATION);
+		PlayerData.registerStoredVariables(EAT_DELAY, FAT_ACCUMULATION, REPEATED_FOOD_NBT);
 	}
 
 	public ItemFoodMFR(String name, int hunger, float saturation, boolean isMeat, int rarity) {
@@ -79,6 +84,11 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 
 	public ItemFoodMFR setReturnItem(Item item) {
 		this.returnItem = item;
+		return this;
+	}
+
+	public ItemFoodMFR setShouldRepeatPenaltyCheck() {
+		this.shouldRepeatCheck = true;
 		return this;
 	}
 
@@ -156,6 +166,40 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 			setEatDelay(consumer, eatDelay);
 		}
 		setFatAccumulation(consumer, fatAccumulation + getFatAccumulation(consumer));
+
+		//MFR repeated eat penalty
+		PlayerData data = PlayerData.get(consumer);
+		if (data != null) {
+			NBTTagCompound nbt = data.getVariable(REPEATED_FOOD_NBT);
+			if (nbt == null) {
+				nbt = new NBTTagCompound();
+				nbt.setInteger("repeat_count", 0);
+				food.writeToNBT(nbt);
+			}
+			else {
+				ItemStack lastEatenFood = new ItemStack(nbt);
+				if (lastEatenFood.isItemEqual(food)) {
+					if (shouldRepeatCheck) {
+						int repeat_count = nbt.getInteger("repeat_count");
+						nbt.setInteger("repeat_count", repeat_count + 1);
+						if (repeat_count >= ConfigHardcore.foodRepeatPenaltyLimit) {
+							consumer.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 300, 1));
+							consumer.addPotionEffect(new PotionEffect(MobEffects.POISON, 120, 900));
+							consumer.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 120, 120));
+							if (!consumer.world.isRemote && repeat_count == 3) {
+								consumer.sendMessage(new TextComponentTranslation("info.vomiting.message", food.getDisplayName()));
+							}
+						}
+					}
+				}
+				else {
+					nbt.setInteger("repeat_count", 0);
+					food.writeToNBT(nbt);
+				}
+			}
+			data.setVariable(REPEATED_FOOD_NBT, nbt);
+		}
+
 		if (this == MineFantasyItems.BERRIES_JUICY) {
 			PotionEffect poison = consumer.getActivePotionEffect(MobEffects.POISON);
 			if (poison != null) {

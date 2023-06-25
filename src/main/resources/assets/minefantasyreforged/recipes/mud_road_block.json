@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minefantasyreforged:mud_road"
+    }
+
+  ],
+  "result": {
+    "item": "minefantasyreforged:mud_road_block",
+    "count": 1
+  }
+}

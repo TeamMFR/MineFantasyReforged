@@ -1,0 +1,19 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:horse_raw"
+    },
+    "result" : {
+        "item": "minefantasyreforged:horse_cooked"
+    },
+    "experience": 0.2,
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventcook"
+            }
+        }
+    ]
+}

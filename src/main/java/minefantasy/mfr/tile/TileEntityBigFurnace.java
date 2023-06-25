@@ -58,7 +58,6 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	private Random rand = new Random();
 	private int aboveType;
 	private int ticksExisted;
-	private boolean wasBurning;
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -118,11 +117,6 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		} else {
 			updateFurnace();
 		}
-		// UNIVERSAL
-		if (isBurning() != wasBurning || ticksExisted == 20) {
-			world.notifyLightSet(pos);
-		}
-		wasBurning = isBurning();
 	}
 
 	@Override
@@ -350,12 +344,26 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	}
 
 	private void updateHeater() {
-		if (world.isRemote)
+		if (world.isRemote) {
 			return;
+		}
 
 		TileEntityBigFurnace furn = getFurnace();
 		if (furn != null) {
 			aboveType = furn.getType();
+		}
+		if (ticksExisted % 20 == 0) {
+			IBlockState state = world.getBlockState(pos);
+			if (!state.getValue(BlockBigFurnace.BURNING)) {
+				if (isBurning()) {
+					world.setBlockState(pos, state.withProperty(BlockBigFurnace.BURNING, true));
+				}
+			}
+			else {
+				if (!isBurning()) {
+					world.setBlockState(pos, state.withProperty(BlockBigFurnace.BURNING, false));
+				}
+			}
 		}
 		if (!built) {
 			heat = maxHeat = fuel = maxFuel = 0;
@@ -383,8 +391,9 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 				}
 			}
 			if (fuel <= 0) {
-				if (heat > 0)
+				if (heat > 0) {
 					heat--;
+				}
 				maxHeat = 0;
 			}
 		}

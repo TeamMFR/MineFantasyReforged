@@ -1,0 +1,19 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:wolf_raw"
+    },
+    "result" : {
+        "item": "minefantasyreforged:wolf_cooked"
+    },
+    "experience": 0.2,
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventcook"
+            }
+        }
+    ]
+}

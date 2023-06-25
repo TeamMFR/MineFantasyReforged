@@ -25,16 +25,21 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Random;
 
 public class TileEntityFirepit extends TileEntityBase implements ITickable, IBasicMetre, IHeatSource {
@@ -44,6 +49,45 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	private float charcoal = 0;
 	private int ticksExisted;
 	private final Random rand = new Random();
+
+	public final ItemStackHandler inventory = createInventory();
+
+	@Override
+	protected ItemStackHandler createInventory() {
+		return new ItemStackHandler(1) {
+			@Nonnull
+			@Override
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+				if (isItemValidForSlot(slot, stack)) {
+					return super.insertItem(slot, stack, simulate);
+				}
+				else {
+					return stack;
+				}
+			}
+
+			@Override
+			protected void onContentsChanged(int slot) {
+				ItemStack fuelStack = getStackInSlot(slot);
+				if (getItemBurnTime(fuelStack) > 0 && addFuel(fuelStack)) {
+					if (fuelStack != ItemStack.EMPTY) {
+						setStackInSlot(0, ItemStack.EMPTY);
+						sendUpdates();
+					}
+				}
+			}
+
+			@Override
+			public int getSlotLimit(int slot) {
+				return 1;
+			}
+		};
+	}
+
+	@Override
+	public ItemStackHandler getInventory() {
+		return inventory;
+	}
 
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
@@ -56,9 +100,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 	 * Wood tools and plank item are 1 minute sticks and saplings are 30seconds
 	 */
 	public static int getItemBurnTime(ItemStack input) {
-		if (input.isEmpty()) {
-			return 0;
-		} else {
+		if (!input.isEmpty()) {
 			Item i = input.getItem();
 			if (i == Items.STICK)
 				return 600;// 30Sec
@@ -69,8 +111,8 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 				return (int) (600 * CustomToolHelper.getBurnModifier(input));
 			}
 
-			return 0;
 		}
+		return 0;
 	}
 
 	@Override
@@ -83,6 +125,16 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 		}
 
 		++ticksExisted;
+		if (ticksExisted % 20 == 0) {
+			ItemStack fuelItem = getInventory().getStackInSlot(0);
+			if (!fuelItem.isEmpty() && !world.isRemote) {
+				if (addFuel(fuelItem)) {
+					if (fuelItem != ItemStack.EMPTY) {
+						getInventory().setStackInSlot(0, ItemStack.EMPTY);
+					}
+				}
+			}
+		}
 		if (isLit()) {
 			if (isWet()) {
 				extinguish();
@@ -140,7 +192,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 
 	public boolean addFuel(ItemStack input) {
 		int amount = getItemBurnTime(input);
-		if (amount > 0 && fuel < maxFuel) {
+		if (amount > 0 && fuel < maxFuel && fuel + amount <= maxFuel) {
 			fuel += amount;
 			if (fuel > maxFuel) {
 				fuel = maxFuel;
@@ -238,7 +290,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 			return false;
 
 		TileEntity tile = world.getTileEntity(pos.add(0, 1, 0));
-		if (tile != null && tile instanceof IHeatUser) {
+		if (tile instanceof IHeatUser) {
 			return ((IHeatUser) tile).canAccept(this);
 		}
 
@@ -266,6 +318,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 		nbt.setInteger("ticksExisted", ticksExisted);
 		nbt.setBoolean("isLit", isLit);
 		nbt.setFloat("charcoal", charcoal);
+		nbt.setTag("inventory", inventory.serializeNBT());
 		return nbt;
 	}
 
@@ -276,16 +329,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 		ticksExisted = nbt.getInteger("ticksExisted");
 		isLit = nbt.getBoolean("isLit");
 		charcoal = nbt.getFloat("charcoal");
-	}
-
-	@Override
-	protected ItemStackHandler createInventory() {
-		return null;
-	}
-
-	@Override
-	public ItemStackHandler getInventory() {
-		return null;
+		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 	}
 
 	@Override
@@ -300,6 +344,21 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		return false;
+		int amount = getItemBurnTime(item);
+		return amount > 0 && fuel < maxFuel && fuel + amount <= maxFuel;
+	}
+
+	@Override
+	public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+	}
+
+	@Nullable
+	@Override
+	public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+		if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+			return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(getInventory());
+		}
+		return super.getCapability(capability, facing);
 	}
 }

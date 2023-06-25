@@ -38,7 +38,17 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 
 	@Override
 	protected ItemStackHandler createInventory() {
-		return new ItemStackHandler(2);
+		return new ItemStackHandler(2) {
+			@Override
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+				if (isItemValidForSlot(slot, stack)) {
+					return super.insertItem(slot, stack, simulate);
+				}
+				else {
+					return stack;
+				}
+			}
+		};
 	}
 
 	@Override

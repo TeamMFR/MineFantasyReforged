@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minefantasyreforged:cobblestone_road_block"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:cobblestone_road_block_slab",
+    "count": 6
+  }
+}

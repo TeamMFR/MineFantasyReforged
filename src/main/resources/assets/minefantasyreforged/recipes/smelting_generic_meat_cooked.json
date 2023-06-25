@@ -1,0 +1,18 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:generic_meat_uncooked"
+    },
+    "result" : {
+        "item": "minefantasyreforged:generic_meat_cooked"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccpreventcook"
+            }
+        }
+    ]
+}

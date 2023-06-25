@@ -1,5 +1,6 @@
 package minefantasy.mfr.mixin;
 
+import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.item.ItemHalbeard;
 import minefantasy.mfr.item.ItemHeavyWeapon;
 import minefantasy.mfr.item.ItemKatana;
@@ -64,7 +65,7 @@ public abstract class MixinLayerHeldItem implements LayerRenderer<EntityLivingBa
 
 				// Forge: moved this call down, fixes incorrect offset while sneaking.
 				translateToHand(handSide);
-				if (entityLivingBase.isHandActive() && PlayerUtils.shouldItemStackBlock(stack) && entityLivingBase.getActiveHand() == (leftHand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)) {
+				if (entityLivingBase.isHandActive() && PlayerUtils.shouldItemStackBlock(stack, entityLivingBase.getHeldItemOffhand()) && entityLivingBase.getActiveHand() == (leftHand ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND)) {
 					GlStateManager.translate((float) (leftHand ? 1 : -1) / 16.0F, 0.4375F, 0.0625F);
 
 					// blocking
@@ -92,7 +93,9 @@ public abstract class MixinLayerHeldItem implements LayerRenderer<EntityLivingBa
 
 					applyTransformReverse(new ItemTransformVec3f(new Vector3f(0.0F, (leftHand ? 1 : -1) * 90.0F, (leftHand ? -1 : 1) * 55.0F), new Vector3f(0.0F, 0.25F, 0.03125F), new Vector3f(0.85F, 0.85F, 0.85F)), leftHand);
 				} else {
-					performCounterAttackAnimation((EntityPlayer) entityLivingBase, stack, leftHand);
+					if (ConfigWeapon.shouldUseMfrCustomAnimations) {
+						performCounterAttackAnimation((EntityPlayer) entityLivingBase, stack, leftHand);
+					}
 					GlStateManager.rotate(-90.0F, 1.0F, 0.0F, 0.0F);
 					GlStateManager.rotate(180.0F, 0.0F, 1.0F, 0.0F);
 					GlStateManager.translate((float) (leftHand ? -1 : 1) / 16.0F, 0.125F, -0.625F);

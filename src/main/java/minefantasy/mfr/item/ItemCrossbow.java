@@ -1,15 +1,16 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
-import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.api.weapon.IDamageModifier;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.client.render.item.RenderCrossbow;
+import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -20,16 +21,17 @@ import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.PowerArmour;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
@@ -37,6 +39,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -164,21 +167,63 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	}
 
 	@Override
-	public void onPlayerStoppedUsing(ItemStack item, World world, EntityLivingBase user, int timeLeft) {
-		ItemStack loaded = AmmoMechanics.getArrowOnBow(item);
-		String action = getUseAction(item);
-
-		if (user instanceof EntityPlayer){
-			if (action.equalsIgnoreCase("fire") && this.onFireArrow(user.world, AmmoMechanics.getArrowOnBow(item), item, (EntityPlayer) user, this.getFullValue(item, "power"), false)) {
-				if (!loaded.isEmpty()) {
-					loaded.shrink(1);
-					AmmoMechanics.putAmmoOnFirearm(item, (loaded.getCount() > 0 ? loaded : ItemStack.EMPTY));
-				}
-				recoilUser((EntityPlayer) user, getFullValue(item, "recoil"));
-				AmmoMechanics.damageContainer(item, (EntityPlayer) user, 1);
-			}
+	public void onPlayerStoppedUsing(ItemStack crossbow, World world, EntityLivingBase user, int timeLeft) {
+		if (!(user instanceof EntityPlayer)) {
+			return;
 		}
-		stopUse(item);
+
+		final EntityPlayer player = (EntityPlayer) user;
+
+		String action = getUseAction(crossbow);
+		ItemStack boltOnBow = AmmoMechanics.getArrowOnBow(crossbow);
+
+		if (!(boltOnBow.getItem() instanceof ItemArrowMFR)) {
+			return;
+		}
+
+		final boolean isInfinite = player.capabilities.isCreativeMode || boltOnBow.getItem() instanceof ItemArrow && ((ItemArrow) boltOnBow.getItem()).isInfinite(boltOnBow, crossbow, player);
+		float power = this.getFullValue(crossbow, "power");
+
+		if (!world.isRemote && action.equalsIgnoreCase("fire")) {
+			IArrowHandler arrowHandler = AmmoMechanics.handlers.get(Constants.MFR_BOLT_HANDLER);
+			ItemArrowMFR itemArrow = (ItemArrowMFR) boltOnBow.getItem();
+
+			EntityArrow entityArrow = itemArrow.createArrow(world, boltOnBow, player);
+
+			entityArrow = arrowHandler.onFireArrow(entityArrow, boltOnBow, crossbow, power, player);
+
+			final int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, crossbow);
+			if (powerLevel > 0 && entityArrow instanceof EntityArrowMFR) {
+				((EntityArrowMFR) entityArrow).setPower(1 + (0.25F * powerLevel));
+			}
+
+			final int punchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, crossbow);
+			if (punchLevel > 0) {
+				entityArrow.setKnockbackStrength(punchLevel);
+			}
+
+			if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, crossbow) > 0) {
+				entityArrow.setFire(100);
+			}
+
+			AmmoMechanics.damageContainer(crossbow, player, 1);
+			world.playSound(null, player.posX, player.posY, player.posZ, MineFantasySounds.BOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + Math.min(power, 1) * 0.5F);
+
+			if (isInfinite) {
+				entityArrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
+			}
+
+			world.spawnEntity(entityArrow);
+
+			if (!isInfinite && !boltOnBow.isEmpty()) {
+				boltOnBow.shrink(1);
+				AmmoMechanics.putAmmoOnFirearm(crossbow, (boltOnBow.getCount() > 0 ? boltOnBow : ItemStack.EMPTY));
+			}
+
+			recoilUser((EntityPlayer) user, getFullValue(crossbow, "recoil"));
+		}
+
+		stopUse(crossbow);
 	}
 
 	public void startUse(EntityPlayer user, ItemStack item, String action) {
@@ -242,16 +287,15 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag fullInfo) {
 		super.addInformation(item, world, list, fullInfo);
 
-		list.add(I18n.format("attribute.crossbow.power.name", getFullValue(item, "power")));
-		list.add(I18n.format("attribute.crossbow.speed.name", getFullValue(item, "speed")));
-		list.add(I18n.format("attribute.crossbow.recoil.name", getFullValue(item, "recoil")));
-		list.add(I18n.format("attribute.crossbow.spread.name", getFullValue(item, "spread")));
-		list.add(I18n.format("attribute.crossbow.capacity.name", getAmmoCapacity(item)));
-		list.add(I18n.format("attribute.crossbow.bash.name", getMeleeDmg(item)));
+		list.add(I18n.translateToLocalFormatted("attribute.crossbow.power.name", getFullValue(item, "power")));
+		list.add(I18n.translateToLocalFormatted("attribute.crossbow.speed.name", getFullValue(item, "speed")));
+		list.add(I18n.translateToLocalFormatted("attribute.crossbow.recoil.name", getFullValue(item, "recoil")));
+		list.add(I18n.translateToLocalFormatted("attribute.crossbow.spread.name", getFullValue(item, "spread")));
+		list.add(I18n.translateToLocalFormatted("attribute.crossbow.capacity.name", getAmmoCapacity(item)));
+		list.add(I18n.translateToLocalFormatted("attribute.crossbow.bash.name", getMeleeDmg(item)));
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String base = getNameModifier(item, "stock");
 		String arms = getNameModifier(item, "mechanism");
@@ -308,7 +352,7 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 		if (part != null) {
 			String name = part.getUnlocalisedName();
 			if (name != null) {
-				return I18n.format(name);
+				return I18n.translateToLocal(name);
 			}
 		}
 		return null;
@@ -375,45 +419,6 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	public float modifyDamage(ItemStack item, EntityLivingBase wielder, Entity hit, float initialDam,
 			boolean properHit) {
 		return initialDam + this.getMeleeDmg(item) - 1;
-	}
-
-	public boolean onFireArrow(World world, ItemStack arrow, ItemStack bow, EntityPlayer user, float charge, boolean infinite) {
-		if (arrow.isEmpty() || !(arrow.getItem() instanceof ItemArrowMFR)) {
-			return false;
-		}
-		ItemArrowMFR ammo = (ItemArrowMFR) arrow.getItem();
-		if (!(ammo.getAmmoType(arrow).equalsIgnoreCase("bolt"))) {
-			return false;
-		}
-		// TODO Arrow entity instance
-		EntityArrowMFR entityArrowMFR = ammo.getFiredArrow(new EntityArrowMFR(world, user, getFullValue(bow, "spread"), charge * 2.0F), arrow);
-
-		int power_level = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, bow);
-		entityArrowMFR.setPower(1 + (0.25F * power_level));
-
-		int punch_level = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, bow);
-
-		if (punch_level > 0) {
-			entityArrowMFR.setKnockbackStrength(punch_level);
-		}
-
-		if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, bow) > 0) {
-			entityArrowMFR.setFire(100);
-		}
-
-		if (infinite) {
-			entityArrowMFR.canBePickedUp = 2;
-		}
-
-		if (!bow.isEmpty() && bow.getItem() instanceof ISpecialBow) {
-			entityArrowMFR = (EntityArrowMFR) ((ISpecialBow) bow.getItem()).modifyArrow(bow, entityArrowMFR);
-		}
-		if (!world.isRemote) {
-			world.spawnEntity(entityArrowMFR);
-		}
-		world.playSound(user, user.getPosition(), MineFantasySounds.CROSSBOW_FIRE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-
-		return true;
 	}
 
 	@Override

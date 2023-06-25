@@ -31,11 +31,6 @@ public class ItemKatana extends ItemHeavyWeapon {
 	}
 
 	@Override
-	public boolean canBlock() {
-		return true;
-	}
-
-	@Override
 	public boolean allowOffhand(EntityLivingBase entity, EnumHand hand) {
 		return true;
 	}

@@ -17,6 +17,7 @@
                 "density": 3.5,
                 "melting_point": 1400,
                 "rarity": 0,
+                "enchantability": 4,
                 "craft_tier": 3,
                 "craft_time_modifier": 8.0,
                 "unbreakable": false

@@ -2,6 +2,7 @@ package minefantasy.mfr.world.gen.structure.pieces;
 
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockAnvilMF;
+import minefantasy.mfr.config.ConfigWorldGen;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
 import minefantasy.mfr.entity.mob.MinotaurBreed;
 import minefantasy.mfr.init.MineFantasyBlocks;
@@ -422,7 +423,10 @@ public class StructureGenDSRoom extends StructureModuleMFR {
         placeBlock(world, MineFantasyBlocks.REINFORCED_STONE_FRAMED_IRON, ((width - 1) * position), 3, z + 1);
 
         placeBlockWithState(world, MineFantasyBlocks.ANVIL_IRON.getDefaultState().withProperty(BlockAnvilMF.FACING, facing.rotateY()), position * 2, 1, z);
-        placeBlockWithState(world, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3),  position * 2, 1, z - 1);
+
+        if (ConfigWorldGen.dwarvenStrongholdShouldCauldronSpawn) {
+            placeBlockWithState(world, Blocks.CAULDRON.getDefaultState().withProperty(BlockCauldron.LEVEL, 3),  position * 2, 1, z - 1);
+        }
 
         placeMiscMachine1(-(width - 2) * position, 0, depth - 3);
         placeMiscMachine1(-(width - 2) * position, 0, 3);

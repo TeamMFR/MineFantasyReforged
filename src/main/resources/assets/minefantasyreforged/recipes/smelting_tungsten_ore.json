@@ -1,0 +1,11 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:tungsten_ore"
+    },
+    "result" : {
+        "item": "minefantasyreforged:ore_tungsten"
+    },
+    "experience": 0.25
+}

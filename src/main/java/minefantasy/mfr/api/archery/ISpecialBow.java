@@ -20,7 +20,7 @@ public interface ISpecialBow {
 	 * The max charge (bow drawback length) possible on the bow
 	 * @return The max charge
 	 */
-	float getMaxCharge();
+	float getMaxCharge(ItemStack bow);
 
 	/**
 	 *

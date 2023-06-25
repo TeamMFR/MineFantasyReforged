@@ -5,11 +5,11 @@ import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -229,7 +229,7 @@ public class CustomToolHelper {
 		if (materialOnTooltip()) {
 			CustomMaterial mainMaterial = getCustomPrimaryMaterial(item);
 			if (mainMaterial != null && mainMaterial != CustomMaterial.NONE) {
-				String matName = I18n.format(I18n.format(Utils.convertSnakeCaseToSplitCapitalized(mainMaterial.getName())));
+				String matName = I18n.translateToLocal(I18n.translateToLocal(Utils.convertSnakeCaseToSplitCapitalized(mainMaterial.getName())));
 				list.add(TextFormatting.GOLD + matName);
 			}
 		}
@@ -238,11 +238,11 @@ public class CustomToolHelper {
 			String name;
 			String localized_material;
 			name = secondaryMaterial.getName();
-			localized_material = I18n.format("material." + name + ".name");
+			localized_material = I18n.translateToLocal("material." + name + ".name");
 			if (!localized_material.endsWith(".name")) {
 				name = localized_material;
 			}
-			String matName = I18n.format("item.mod_haft.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
+			String matName = I18n.translateToLocalFormatted("item.mod_haft.name", I18n.translateToLocal(Utils.convertSnakeCaseToSplitCapitalized(name)));
 			list.add(TextFormatting.GOLD + matName);
 		}
 
@@ -254,7 +254,7 @@ public class CustomToolHelper {
 	 * @return material boolean
 	 */
 	public static boolean materialOnTooltip() {
-		String cfg = I18n.format("languagecfg.tooltiptier");
+		String cfg = I18n.translateToLocal("languagecfg.tooltiptier");
 		return cfg.equalsIgnoreCase("true");
 	}
 
@@ -266,20 +266,21 @@ public class CustomToolHelper {
 			String name;
 			String localized_material;
 			name = material.getName();
-			localized_material = I18n.format("material." + name + ".name");
+			localized_material = net.minecraft.client.resources.I18n.format("material." + name + ".name");
 			if (!localized_material.endsWith(".name")) {
 				name = localized_material;
 			}
-			String matName = I18n.format("item.mod_joint.name", I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
+			String matName = net.minecraft.client.resources.I18n.format(
+					"item.mod_joint.name",
+					net.minecraft.client.resources.I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
 			list.add(TextFormatting.GOLD + matName);
 		}
 
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static String getSecondaryLocalisedName(ItemStack item, String unlocalizedName) {
 		if (materialOnTooltip()) {
-			I18n.format(unlocalizedName);
+			I18n.translateToLocal(unlocalizedName);
 		}
 
 		CustomMaterial material = getCustomSecondaryMaterial(item);
@@ -287,18 +288,19 @@ public class CustomToolHelper {
 		String localized_material = null;
 		if (material != null && material != CustomMaterial.NONE) {
 			name = material.getName();
-			localized_material = I18n.format("material." + name + ".name");
+			localized_material = I18n.translateToLocal("material." + name + ".name");
 		}
 		if (localized_material != null && !localized_material.endsWith(".name")) {
 			name = localized_material;
 		}
-		return I18n.format(unlocalizedName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
+		return I18n.translateToLocalFormatted(
+				unlocalizedName,
+				I18n.translateToLocal(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
 
-	@SideOnly(Side.CLIENT)
 	public static String getLocalisedName(ItemStack item, String unlocalizedName) {
 		if (materialOnTooltip()) {
-			I18n.format(unlocalizedName);
+			return I18n.translateToLocal(unlocalizedName);
 		}
 
 		CustomMaterial material = getCustomPrimaryMaterial(item);
@@ -306,12 +308,14 @@ public class CustomToolHelper {
 		String localized_material = null;
 		if (material != null && material != CustomMaterial.NONE) {
 			name = material.getName();
-			localized_material = I18n.format("material." + name + ".name");
+			localized_material = I18n.translateToLocal("material." + name + ".name");
 		}
 		if (localized_material != null && !localized_material.endsWith(".name")) {
 			name = localized_material;
 		}
-		return I18n.format(unlocalizedName, I18n.format(Utils.convertSnakeCaseToSplitCapitalized(name)));
+		return I18n.translateToLocalFormatted(
+				unlocalizedName,
+				I18n.translateToLocal(Utils.convertSnakeCaseToSplitCapitalized(name)));
 	}
 
 	public static boolean areEqual(ItemStack recipeItem, ItemStack inputItem) {
@@ -360,12 +364,14 @@ public class CustomToolHelper {
 		return recipeMat == inputMat;
 	}
 
-	public static void addComponentString(ItemStack tool, List<String> list, CustomMaterial base) {
-		addComponentString(tool, list, base, 1);
+	@SideOnly(Side.CLIENT)
+	public static void addComponentString(List<String> list, CustomMaterial base) {
+		addComponentString(list, base, 1);
 	}
 
-	public static void addComponentString(ItemStack tool, List<String> list, CustomMaterial base, float units) {
-		if (base != null) {
+	@SideOnly(Side.CLIENT)
+	public static void addComponentString(List<String> list, CustomMaterial base, float units) {
+		if (base != null ) {
 			float mass = base.density * units;
 			if (base != CustomMaterial.NONE) {
 				list.add(TextFormatting.GOLD + base.getMaterialString());
@@ -377,7 +383,7 @@ public class CustomToolHelper {
 			if (base.isHeatable()) {
 				int maxTemp = base.getHeatableStats()[0];
 				int beyondMax = base.getHeatableStats()[1];
-				list.add(I18n.format("materialtype.workable.name", maxTemp, beyondMax));
+				list.add(net.minecraft.client.resources.I18n.format("materialtype.workable.name", maxTemp, beyondMax));
 			}
 		}
 	}

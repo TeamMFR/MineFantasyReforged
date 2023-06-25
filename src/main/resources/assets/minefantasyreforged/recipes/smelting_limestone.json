@@ -1,0 +1,11 @@
+{
+    "type": "smelting",
+    "ingredient": {
+        "type": "item",
+        "item": "minefantasyreforged:limestone_cobble"
+    },
+    "result" : {
+        "item": "minefantasyreforged:limestone"
+    },
+    "experience": 0.25
+}

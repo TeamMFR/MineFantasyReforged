@@ -17,8 +17,10 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.EnumRarity;
-import net.minecraft.item.Item;
+import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
@@ -33,46 +35,31 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegister {
+public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClientRegister {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	public static final MFArrowDispenser dispenser = new MFArrowDispenser();
 	protected float damage;
 	protected String arrowName;
 	protected ArrowType design;
 	protected int itemRarity;
-	private ToolMaterial arrowMat;
 	private String ammoType = "arrow";
 	// ===================================================== CUSTOM START
 	// =============================================================\\
 	private boolean isCustom = false;
 
 	public ItemArrowMFR(String name, ArrowType type, int stackSize) {
-		this(name, 0, ToolMaterial.WOOD, type);
+		this(name, 0, type);
 		setMaxStackSize(stackSize);
 	}
 
-	public ItemArrowMFR(String name, ArrowType type) {
-		this(name, 0, ToolMaterial.WOOD, type);
-	}
-
-	public ItemArrowMFR(String name) {
-		this(name, 0, ToolMaterial.WOOD);
-	}
-
-	public ItemArrowMFR(String name, int rarity, ToolMaterial material) {
-		this(name, rarity, material, ArrowType.NORMAL);
-	}
-
-	public ItemArrowMFR(String name, int rarity, ToolMaterial material, ArrowType type) {
+	public ItemArrowMFR(String name, int rarity, ArrowType type) {
 		name = convertName(name);
-		material = convertMaterial(material);
 
 		super.setTranslationKey((type == ArrowType.EXPLOSIVE || type == ArrowType.EXPLOSIVEBOLT) ? name : type == ArrowType.BOLT ? (name + "_bolt") : (name + "_arrow"));
 		name = getName(name, type);
 		design = type;
 		arrowName = name;
-		arrowMat = material;
-		damage = (3 + material.getAttackDamage()) * type.damageModifier;
+		damage = 3 * type.damageModifier;
 		if (type == ArrowType.EXPLOSIVE || type == ArrowType.EXPLOSIVEBOLT) {
 			damage = 1;
 		}
@@ -118,14 +105,18 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 		return mat + "_arrow_" + type.name.toLowerCase();
 	}
 
-	public EntityArrowMFR getFiredArrow(EntityArrowMFR instance, ItemStack arrow) {
+	@Override
+	public EntityArrow createArrow(World world, ItemStack stack, EntityLivingBase shooter) {
+		EntityArrowMFR instance = new EntityArrowMFR(world, shooter);
 		instance.modifyVelocity(design.velocity);
-		return instance.setArrow(arrow).setArrowTex(arrowName);
+		instance.setArrow(stack).setArrowTex(arrowName);
+		return instance;
 	}
 
 	@Override
 	public void onHitEntity(Entity arrowInstance, Entity shooter, Entity hit, float damage) {
-		if (arrowMat == BaseMaterial.getMaterial("dragonforge").getToolMaterial()) {
+		if (arrowInstance.getEntityData().hasKey("Design")
+				&& arrowInstance.getEntityData().getString("Design").equalsIgnoreCase("dragonforged")) {
 			hit.setFire((int) (damage * (arrowInstance.isBurning() ? 2.0F : 1.0F)));
 		}
 	}
@@ -153,7 +144,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 
 	@Override
 	public float getGravityModifier(ItemStack arrow) {
-		float weight = 1.0F * design.weightModifier;
+		float weight = design.weightModifier;
 		return CustomToolHelper.getWeightModifier(arrow, weight);
 	}
 
@@ -192,7 +183,6 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 	}
 
 	@Override
-	@SideOnly(Side.CLIENT)
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
 		return CustomToolHelper.getLocalisedName(item, unlocalName);
@@ -200,7 +190,7 @@ public class ItemArrowMFR extends Item implements IArrowMFR, IAmmo, IClientRegis
 
 	@Override
 	public float getBreakChance(Entity entityArrow, ItemStack arrow) {
-		int maxUses = CustomToolHelper.getMaxDamage(arrow, arrowMat.getMaxUses());
+		float maxUses = CustomToolHelper.getMaxDamage(arrow, ToolMaterial.WOOD.getMaxUses());
 		return 1F / (maxUses / 150);
 	}
 

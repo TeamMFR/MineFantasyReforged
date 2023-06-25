@@ -1,10 +1,14 @@
 {
     "conditions": {
-        "hccallowrocks": "minefantasy.mfr.recipe.factories.HCCallowRocks"
+        "hccallowrocks": "minefantasy.mfr.recipe.factories.HCCallowRocks",
+        "hccreduceingots": "minefantasy.mfr.recipe.factories.HCCreduceIngots",
+        "hccpreventcook": "minefantasy.mfr.recipe.factories.HCCpreventCook",
+        "hccpreventceramic": "minefantasy.mfr.recipe.factories.HCCpreventCeramic"
     },
     "recipes": {
         "timber_dynamic": "minefantasy.mfr.recipe.RecipeTimberDynamic$Factory",
         "mfr_armor_dye": "minefantasy.mfr.recipe.RecipeArmourDyeMF$Factory",
-        "syringe_dynamic": "minefantasy.mfr.recipe.RecipeSyringe$Factory"
+        "syringe_dynamic": "minefantasy.mfr.recipe.RecipeSyringe$Factory",
+        "smelting": "minefantasy.mfr.recipe.SmeltingRecipe$SmeltingFactory"
     }
 }

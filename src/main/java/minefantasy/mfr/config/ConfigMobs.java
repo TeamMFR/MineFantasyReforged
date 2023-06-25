@@ -69,7 +69,7 @@ public class ConfigMobs extends ConfigurationBaseMF {
 				"How many ticks between visits (12000 means 4 times a day), there is a chance for a dragon each time").getString());
 		dragonChance = Float.parseFloat(config.get(MOB_DRAGON, "3B: Spawn Chance", 5F,
 				"A Percent (0-100) chance that a dragon spawns at set times").getString());
-		dragonDimensionID = config.get(MOB_DRAGON, "3C: Dragon Spawn Dimension", new int[]{0},
+		dragonDimensionID = config.get(MOB_DRAGON, "3C: Dragon Spawn Dimension", new int[]{0, -1},
 				"Which dimension(s) should the Dragons spawn in").getIntList();
 
 		dragonKillNPC = Boolean.parseBoolean(config.get(MOB_DRAGON, "4A: Kill NPC Grief", true,
