@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.6] - 2023-06-26
+### :bug: Bug Fixes
+- [`05d7ca1`](https://github.com/TeamMFR/MineFantasyReforged/commit/05d7ca15782baf48419236a43765d39675762aab) - Fixed asset directory reference *(commit by [@ThatPolishKid99](https://github.com/ThatPolishKid99))*
+- [`e205c1a`](https://github.com/TeamMFR/MineFantasyReforged/commit/e205c1a2456d1481559b23bb6d3335da289a2d57) - Fixed crash with Thaumcraft lacking enchantability in metal registry *(commit by [@ThatPolishKid99](https://github.com/ThatPolishKid99))*
+
+
 ## [v0.2.5] - 2023-06-25
 ### :sparkles: New Features
 - [`29c2f3a`](https://github.com/TeamMFR/MineFantasyReforged/commit/29c2f3a036a0d190fc018c16cee96415a5ccd0e4) - Added slabs of most blocks *(commit by [@ThatPolishKid99](https://github.com/ThatPolishKid99))*
@@ -24,3 +30,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [v0.2.0]: https://github.com/TeamMFR/MineFantasyReforged/compare/build-number-5...v0.2.0
 [v0.2.5]: https://github.com/TeamMFR/MineFantasyReforged/compare/v0.2.0...v0.2.5
+[v0.2.6]: https://github.com/TeamMFR/MineFantasyReforged/compare/v0.2.5...v0.2.6
