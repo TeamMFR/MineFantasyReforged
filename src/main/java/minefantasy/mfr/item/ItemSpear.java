@@ -67,7 +67,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 	public void addInformation(ItemStack item, World world, List<String> list, ITooltipFlag flag) {
 		super.addInformation(item, world, list, flag);
 
-		if (material != Item.ToolMaterial.WOOD) {
+		if (getMountedDamage() > 0) {
 			list.add(TextFormatting.DARK_GREEN + I18n.format(
 					"attribute.modifier.plus." + 0, decimal_format.format(getMountedDamage()),
 					I18n.format("attribute.weapon.mountedBonus")));
@@ -108,7 +108,7 @@ public class ItemSpear extends ItemWeaponMFR implements IExtendedReachWeapon {
 		}
 	}
 
-	private float getMountedDamage() {
+	protected float getMountedDamage() {
 		if (material == Item.ToolMaterial.WOOD) {
 			return 0;
 		}

@@ -58,8 +58,8 @@
             },
             "color": {
                 "red": 88,
-                "green": 250,
-                "blue": 150
+                "green": 255,
+                "blue": 15
             }
         }
     ]

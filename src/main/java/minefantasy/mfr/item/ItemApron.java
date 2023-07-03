@@ -12,9 +12,6 @@ public class ItemApron extends ItemClothing {
 
 	public static boolean isUserProtected(EntityPlayer user) {
 		ItemStack worn = user.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
-		if (user.isWet()) {
-			return false;
-		}
 		if (worn.isEmpty()) {
 			return false;
 		}

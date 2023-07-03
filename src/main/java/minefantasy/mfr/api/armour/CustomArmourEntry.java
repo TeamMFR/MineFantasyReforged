@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import java.util.HashMap;
 
 public class CustomArmourEntry {
-	public static HashMap<String, CustomArmourEntry> entries = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomArmourEntry> entries = new HashMap<>();
 	public boolean alterSpeed;
 	public ResourceLocation item;
 	/**
@@ -110,7 +110,7 @@ public class CustomArmourEntry {
 	public static void registerItem(Item piece, float weight, float bulk, boolean alterSpeed, String AC) {
 
 		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getTranslationKey() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
-		entries.put(piece.getRegistryName() + ":0", new CustomArmourEntry(piece.getRegistryName(), weight, bulk, alterSpeed, AC));
+		entries.put(piece.getRegistryName(), new CustomArmourEntry(piece.getRegistryName(), weight, bulk, alterSpeed, AC));
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class CustomArmourEntry {
 	public static void registerItem(ItemStack piece, float weight, float bulk, boolean alterSpeed, String AC) {
 
 		MineFantasyReforgedAPI.debugMsg("Added Custom " + AC + " armour: " + piece.getTranslationKey() + " Traits = " + weight + "," + bulk + " alter speed = " + alterSpeed);
-		entries.put(piece.getItem().getRegistryName() + ":" + piece.getMetadata(), new CustomArmourEntry(piece.getItem().getRegistryName(), weight, bulk, alterSpeed, AC));
+		entries.put(piece.getItem().getRegistryName(), new CustomArmourEntry(piece.getItem().getRegistryName(), weight, bulk, alterSpeed, AC));
 	}
 
 	/**
@@ -175,8 +175,8 @@ public class CustomArmourEntry {
 	 */
 	public static CustomArmourEntry getEntry(ItemStack piece) {
 		if (piece != null) {
-			if (entries.containsKey(piece.getItem().getRegistryName() + ":" + piece.getMetadata())) {
-				return entries.get(piece.getItem().getRegistryName() + ":" + piece.getMetadata());
+			if (entries.containsKey(piece.getItem().getRegistryName())) {
+				return entries.get(piece.getItem().getRegistryName());
 			}
 		}
 		return null;

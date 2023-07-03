@@ -82,22 +82,8 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 			return;
 		}
 
-		int meta;
-		try {
-			String metadataString = entryContents[4];
-			if (metadataString != null) {
-				meta = Integer.parseInt(metadataString);
-			}
-			else {
-				meta = 0;
-			}
-		}
-		catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-			meta = 0;
-		}
-
-		CustomArmourEntry.registerItem(new ItemStack(armorItem, 1, meta), armourDesign, weightModifier, weightClass);
-		MineFantasyReforged.LOG.info("Added Custom Armor entry for " + armorItem.getRegistryName() + ":" + meta + " with armor design: " + armourDesign.getName() + ", with weight class: " + weightClass + ", with weight modifier: " + weightModifier);
+		CustomArmourEntry.registerItem(new ItemStack(armorItem), armourDesign, weightModifier, weightClass);
+		MineFantasyReforged.LOG.info("Added Custom Armor entry for " + armorItem.getRegistryName() + " with armor design: " + armourDesign.getName() + ", with weight class: " + weightClass + ", with weight modifier: " + weightModifier);
 	}
 
 	private static void HoeRegistryParser(String entry) {
@@ -115,22 +101,8 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 			return;
 		}
 
-		int meta;
-		try {
-			String metadataString = entryContents[2];
-			if (metadataString != null) {
-				meta = Integer.parseInt(metadataString);
-			}
-			else {
-				meta = 0;
-			}
-		}
-		catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-			meta = 0;
-		}
-
-		CustomHoeEntry.registerItem(new ItemStack(hoeItem, 1, meta), hoeEfficiency);
-		MineFantasyReforged.LOG.info("Added Custom Hoe entry for " + hoeItem.getRegistryName() + ":" + meta + " with efficiency: " + hoeEfficiency);
+		CustomHoeEntry.registerItem(new ItemStack(hoeItem), hoeEfficiency);
+		MineFantasyReforged.LOG.info("Added Custom Hoe entry for " + hoeItem.getRegistryName() + " with efficiency: " + hoeEfficiency);
 	}
 
 	private static void CrafterRegistryParser(String entry) {
@@ -160,22 +132,8 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 			return;
 		}
 
-		int meta;
-		try {
-			String metadataString = entryContents[4];
-			if (metadataString != null) {
-				meta = Integer.parseInt(metadataString);
-			}
-			else {
-				meta = 0;
-			}
-		}
-		catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-			meta = 0;
-		}
-
-		CustomCrafterEntry.registerItem(new ItemStack(crafterItem, 1, meta), crafterType, crafterEfficiency, crafterTier);
-		MineFantasyReforged.LOG.info("Added Custom Crafter entry for " + crafterItem.getRegistryName() + ":" + meta + " with type: " + crafterType + ", with efficiency: " + crafterEfficiency + ", with a tier: " + crafterTier);
+		CustomCrafterEntry.registerItem(new ItemStack(crafterItem), crafterType, crafterEfficiency, crafterTier);
+		MineFantasyReforged.LOG.info("Added Custom Crafter entry for " + crafterItem.getRegistryName() + " with type: " + crafterType + ", with efficiency: " + crafterEfficiency + ", with a tier: " + crafterTier);
 	}
 
 	private static void WeaponDamageRegistryParser(String entry) {
@@ -189,7 +147,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		float cut = Float.parseFloat(entryContents[1]);
 		if (cut < 0) {
-			MineFantasyReforged.LOG.warn("Could not define cut damage for '" + entryContents[2] + "' for item id: " + weaponItem.getRegistryName());
+			MineFantasyReforged.LOG.warn("Could not define cut damage for '" + entryContents[1] + "' for item id: " + weaponItem.getRegistryName());
 			return;
 		}
 
@@ -201,26 +159,12 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		float pierce = Float.parseFloat(entryContents[3]);
 		if (pierce < 0) {
-			MineFantasyReforged.LOG.warn("Could not define pierce damage for '" + entryContents[2] + "' for item id: " + weaponItem.getRegistryName());
+			MineFantasyReforged.LOG.warn("Could not define pierce damage for '" + entryContents[3] + "' for item id: " + weaponItem.getRegistryName());
 			return;
 		}
 
-		int meta;
-		try {
-			String metadataString = entryContents[4];
-			if (metadataString != null) {
-				meta = Integer.parseInt(metadataString);
-			}
-			else {
-				meta = 0;
-			}
-		}
-		catch (NumberFormatException | ArrayIndexOutOfBoundsException exception) {
-			meta = 0;
-		}
-
-		CustomDamageRatioEntry.registerItem(new ItemStack(weaponItem, 1, meta), new float[] {cut, blunt, pierce});
-		MineFantasyReforged.LOG.info("Added Custom Weapon Damage entry for " + weaponItem.getRegistryName() + ":" + meta + " with damage stats: " + Arrays.toString(new float[] {cut, blunt, pierce}));
+		CustomDamageRatioEntry.registerItem(new ItemStack(weaponItem), new float[] {cut, blunt, pierce});
+		MineFantasyReforged.LOG.info("Added Custom Weapon Damage entry for " + weaponItem.getRegistryName() + " with damage stats: " + Arrays.toString(new float[] {cut, blunt, pierce}));
 	}
 
 	private static void ProjectileEntityDamageRegistryParser(String entry) {
@@ -234,7 +178,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		float cut = Float.parseFloat(entryContents[1]);
 		if (cut < 0) {
-			MineFantasyReforged.LOG.warn("Could not define cut damage for '" + entryContents[2] + "' for projectile entity id: " + projectileEntityID);
+			MineFantasyReforged.LOG.warn("Could not define cut damage for '" + entryContents[1] + "' for projectile entity id: " + projectileEntityID);
 			return;
 		}
 
@@ -246,7 +190,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		float pierce = Float.parseFloat(entryContents[3]);
 		if (pierce < 0) {
-			MineFantasyReforged.LOG.warn("Could not define pierce damage for '" + entryContents[2] + "' for projectile entity id: " + projectileEntityID);
+			MineFantasyReforged.LOG.warn("Could not define pierce damage for '" + entryContents[1] + "' for projectile entity id: " + projectileEntityID);
 			return;
 		}
 
@@ -266,7 +210,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		int tier = Integer.parseInt(entryContents[1]);
 		if (tier < 0) {
-			MineFantasyReforged.LOG.warn("Could not define tier value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			MineFantasyReforged.LOG.warn("Could not define tier value for '" + entryContents[1] + "' for item id: " + foodItem.getRegistryName());
 			return;
 		}
 
@@ -278,13 +222,13 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		float carbs = Float.parseFloat(entryContents[3]);
 		if (carbs < 0) {
-			MineFantasyReforged.LOG.warn("Could not define carbs value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			MineFantasyReforged.LOG.warn("Could not define carbs value for '" + entryContents[3] + "' for item id: " + foodItem.getRegistryName());
 			return;
 		}
 
 		float fats = Float.parseFloat(entryContents[4]);
 		if (fats < 0) {
-			MineFantasyReforged.LOG.warn("Could not define fats value for '" + entryContents[2] + "' for item id: " + foodItem.getRegistryName());
+			MineFantasyReforged.LOG.warn("Could not define fats value for '" + entryContents[4] + "' for item id: " + foodItem.getRegistryName());
 			return;
 		}
 
@@ -311,7 +255,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 		// Weight
 
 		String ArmorRegistryDescription = "This will register items under a certain 'Design' calculating the variables itself.\n Each entry has it's own line:\n"
-				+ "Order itemid|Design|WeightGroup|WeightModifier|metadata \n"
+				+ "Order itemid|Design|WeightGroup|WeightModifier \n"
 				+ "The WeightModifier alters the weight for heavier or lighter materials keep it at 1.0 unless you have a special material (like mithril and adamamantium)\n"
 				+ "Designs can be any that are registered: MineFantasy designs are 'clothing', 'leather', 'mail', 'solid'(that's just basic metal armour), and 'plate'\n"
 				+ "WeightGroup refers to whether it is light medium or heavy armour \n"
@@ -329,7 +273,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 		// Hoes
 
 		String hoeRegistryDescription = "This Registers Hoe items to an efficiency level: (It uses the same variable as efficiency, you may need to find that out first, by default: it should be able to guess it:\n"
-				+ "Order itemid|efficiency|itemMetaData(optional) \n"
+				+ "Order itemid|efficiency \n"
 				+ "Efficiency is a variable that goes into play with the failure chance, higher efficiency has easier tiling\n";
 
 		hoeList = config.get(CATEGORY_FARM, "Hoe Registry", new String[0], hoeRegistryDescription).getStringList();
@@ -338,7 +282,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 		// Crafters
 
 		String crafterDescription = "This Registers items to a tool type and efficiency (such as hammer, heavy hammer, knife, saw, etc):\n"
-				+ "Order itemid|tooltype|efficiency|tier|metadata \n"
+				+ "Order itemid|tooltype|efficiency|tier \n"
 				+ "tooltype can be hammer, heavy_hammer, knife, shears, needle, spoon, mallet, saw, spanner, or brush \n"
 				+ "efficiency is the measure of how fast it works (similar to dig speed)"
 				+ "tier is the tier of the crafter"
@@ -354,7 +298,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 				+ "Though mod-added armours have absolutely no support, and never can without being specifically coded to \n"
 				+ "MineFantasy armours will take these variables and function differently on the values. But weapon items can \n"
 				+ "be added to the list: Put each entry on it's own line set out like this: \n"
-				+ "id|cutting|pierce|blunt|metadata \n"
+				+ "id|cutting|pierce|blunt \n"
 				+ "id is the item id as a string (you need to find it out yourself), cutting, peirce, and blunt are the ratio. \n"
 				+ "metadata is the metadata of the item, it is optional"
 				+ "EXAMPLE (for example... making a stick to piercing damage) \n" + "minecraft:stick|0|1.0|0 \n"
@@ -373,15 +317,16 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 				+ "MineFantasy foods are assigned food stats by default, which affects how they impact the Player's stamina in various ways.\n"
 				+ "This is done by assigning the tier of the food, the sugar value of the food, the carbs value of the food, and the fats value of the food \n"
 				+ "Put each entry on it's own line, then set it out like this: \n"
-				+ "id|tier|sugar|carbs|fats|metadata \n"
+				+ "id|tier|sugar|carbs|fats|metadata (optional) \n"
 				+ "id is the item id as a string (you need to find it out yourself) and it must be a Food item, i.e, extending from vanilla class ItemFood \n"
 				+ "tier will multiply the other food stats. \n"
 				+ "sugar will control Stamina restore modifier and Stamina regen modifier. \n"
 				+ "carbs will control max Stamina modifier. \n"
 				+ "fat will control eat delay modifier and fat accumulation modifier. \n"
-				+ "metadata is the metadata of the item, this is optional"
+				+ "metadata is the metadata of the item, this is optional. \n"
+				+ "If your food item takes damage, i.e, like the MFR sandwich, you need to define the entry for each metadata of that item, which should be the item damage."
 				+ "EXAMPLE (for example... making a steak have the same stats as MFR Jerky) \n"
-				+ "minecraft:cooked_beef|2|0.0F|0.0F|1.0F \n";
+				+ "minecraft:cooked_beef|2|0.0|0.0|1.0|0 \n";
 
 		customFoodList = config.get(CATEGORY_FOOD, "Custom Food Stats", new String[0], foodStatsDescription).getStringList();
 		Arrays.sort(customFoodList);

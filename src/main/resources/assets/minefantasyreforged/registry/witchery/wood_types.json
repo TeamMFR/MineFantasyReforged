@@ -1,0 +1,71 @@
+{
+    "_comment": [
+        "Author: Lenvill"
+    ],
+    "mod": "witchery",
+    "woods": [
+        {
+            "name": "rowan_wood",
+            "inputItem": "witchery:rowan_planks",
+            "inputItemMeta": 0,
+            "properties": {
+                "tier": 2,
+                "hardness": 1.2,
+                "durability": 2.50,
+                "flexibility": 0.8,
+                "resistance": 50,
+                "density": 1.5,
+                "rarity": 1,
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 213,
+                "green": 180,
+                "blue": 94
+            }
+        },
+        {
+            "name": "alder_wood",
+            "inputItem": "witchery:alder_planks",
+            "inputItemMeta": 0,
+            "properties": {
+                "tier": 2,
+                "hardness": 1.2,
+                "durability": 2.25,
+                "flexibility": 0.9,
+                "resistance": 50,
+                "density": 1.3,
+                "rarity": 1,
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 231,
+                "green": 155,
+                "blue": 88
+            }
+        },
+        {
+            "name": "hawthorn_wood",
+            "inputItem": "thaumcraft:hawthorn_planks",
+            "inputItemMeta": 0,
+            "properties": {
+                "tier": 2,
+                "hardness": 1.5,
+                "durability": 2.25,
+                "flexibility": 0.9,
+                "resistance": 50,
+                "density": 1.2,
+                "rarity": 1,
+                "craft_tier": 2,
+                "craft_time_modifier": 2.0
+            },
+            "color": {
+                "red": 159,
+                "green": 143,
+                "blue": 130
+            }
+        }
+    ]
+}

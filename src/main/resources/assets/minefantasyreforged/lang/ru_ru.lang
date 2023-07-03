@@ -1,4 +1,4 @@
-# Author: Hellcat (6/25/2022)
+# Author: K-LA (6/25/2022)
 # INFORMATION
 forge.fuel.name=~Топливо~
 vehicle.fuel.name=Топливо: %1$s
@@ -55,20 +55,20 @@ knowledge.unlocked=Исследование завершено
 
 vehicle.noArmour=Вы не можете использовать этот костюм, когда носите что-либо.
 vehicle.tooBigArmour=vehicle.Ваша броня слишком объёмна и вы не влезаете в костюм.
-vehicle.noBolts=vehicle.You have no bolts on you, and you need 16 in total to armor your suit.
-vehicle.noFuel=vehicle.The Cogwork Suit needs coke as fuel to operate.
-vehicle.outOfFuel=vehicle.The Cogwork Suit is out of Fuel!
-vehicle.noFrame=vehicle.You need a proper Frame Assembly to insert the Pulley.
-vehicle.noPulley=vehicle.You do not have a Pulley on you.
+vehicle.noBolts=У вас нет заклёпок. Вам нужно 16, чтобы одеть костюм в броню. 
+vehicle.noFuel=Костюму нужен угольный кокс в качестве топлива.
+vehicle.outOfFuel=У шестерёночного костюма кончилось топливо! 
+vehicle.noFrame=Вам нужно правильно собрать рамку, чтобы поставить шкив.
+vehicle.noPulley=На вас нет шкива.
 
 research.noskill=Вы сможете изучить что-то из этого, пока не достигнете более высокого уровня.
-research.noresearch=research.You may learn something from this, with more knowledge.
+research.noresearch=Вы могли бы изучить это, если бы у вас было больше знаний.
 research.null=Больше нечего изучать
 
 research.addArtefact=Добавлено знание: %1$s (%2$s/%3$s)
 research.finishResearch=Исследовано: "%1$s"
 research.cluecount= (%1$s/%2$s)
-research.requires=research.Requires %1$s
+research.requires=Требует %1$s
 research.unknown=research.Unknown Research
 
 # MOBS
@@ -132,38 +132,36 @@ item.spawn_hound.desc=Умная собака с острыми клыками
 item.spawn_cogwork.name=Механическая броня
 item.spawn_cogwork.desc=Максимум защиты
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/TOOL LIST/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TOOL LIST
+
 item.tool_pick.name=%1$s кирка
-item.commodity_timber.name=%1$s брусок
+item.commodity_timber.name=Брусок (%1$s)
 item.haft.name=Рукоять
-item.commodity_metal_hunk.name=%1$s кусок
+item.commodity_metal_hunk.name=Кусок (%1$s)
 item.commodity_scrap.name=%1$s лом
-item.commodity_plate.name=%1$s пластина
-item.commodity_bar.name=Чушка "%1$s"
+item.commodity_plate.name=Пластина (%1$s)
+item.commodity_bar.name=Чушка (%1$s)
 item.commodity_plate_huge.name=Большая %1$s пластина
 item.commodity_chain_mesh.name=%1$s кольчужная сетка
 item.commodity_scale_mesh.name=%1$s чешуйчатая сетка
 item.commodity_splint_mesh.name=%1$s пластинчатая сетка
-item.commodity_plateheavy.name=Тяжёлая пластина из "%1$s"
+item.commodity_plateheavy.name=Тяжёлая пластина из (%1$s)
 item.commodity_arrowhead.name=%1$s наконечник
-item.commodity_bodkin_head.name=Конусовидный наконечник "%1$s"
-item.commodity_broad_head.name=Широкий наконечник "%1$s"
-item.commodity_cogwork_armour.name=Механическая броня "%1$s"
+item.commodity_bodkin_head.name=Конусовидный наконечник (%1$s)
+item.commodity_broad_head.name=Широкий наконечник (%1$s)
+item.commodity_cogwork_armour.name=Механическая броня (%1$s)
 
 item.mod_plating.name=%1$s панцирная
 item.mod_head.name=%1$s Голова
-item.mod_haft.name=Рукоять "%1$s"
-item.mod_joint.name=Плечи "%1$s"
+item.mod_haft.name=Рукоять (%1$s)
+item.mod_joint.name=Плечи (%1$s)
 
 component.head.name=%1$s Head
 component.shaft.name=%1$s Shaft
 component.grip.name=%1$s Grip
 component.brace.name=%1$s Brace
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/MATERIAL LIST/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# MATERIAL LIST
 materialtype.wood.name=Дерево (lvl %1$s)
 materialtype.leather.name=Кожа (lvl %1$s)
 materialtype.metal.name=Металл (lvl %1$s)
@@ -172,101 +170,48 @@ materialtype.workable.name=Темп. ковки: %1$s°C - %2$s°C
 materialtype.resist.name=Сопротивление %1$s
 materialtype.fireresist.name=Сопротивление огню %1$s
 materialtype.maxtemp.name=Темп. плавления: %1$s°C
-material.any.name=Any
+material.any.name=Любой
 
-#WOOD
-material.scrapwood.name=Древесные отходы#
-material.oakwood.name=Дуб#
-material.birchwood.name=Берёза#
-material.sprucewood.name=Ель#
-material.acaciawood.name=Акация#
-material.junglewood.name=Тропическое дерево#
-material.refinedwood.name=Пропитанная древесина#
-material.ironbarkwood.name=Эвкалипт#
-material.ebonywood.name=Эбеновое дерево#
-material.darkoakwood.name=Тёмный дуб#
-material.pinewood.name=Сосна#
-material.cherrywood.name=Вишня#
-material.poplarwood.name=Тополь#
-material.maplewood.name=Клен#
-material.mahoewood.name=Махо#
-material.greenheartwood.name=Зеленосердечное дерево#
-material.palmwood.name=Пальма#
-material.limewood.name=Липа#
-material.balsawood.name=Бальза#
-material.walnutwood.name=Ореховое дерево#
-material.chestnutwood.name=Каштан#
-material.larchwood.name=Лиственница#
-material.willowwood.name=Ива#
-material.teakwood.name=Тик#
-material.sequoiawood.name=Секвойя#
-material.mahoganywood.name=Красное дерево#
-material.wengewood.name=Венге#
-material.redwoodwood.name=Красное дерево#
-material.firwood.name=Ель#
-material.purpleheartwood.name=Пурпурносердечное дерево#
-material.silverwoodwood.name=Серебряное дерево#
-material.greatwoodwood.name=Великое дерево#
-material.yewwood.name=Тис#
-
-
-
-#LEATHER
+# LEATHER
 material.leather.name=Кожа
 material.hardleather.name=Грубая кожа
 material.minotaurskin.name=Кожа минотавра
 material.dragonskin.name=Драконья кожа
 
-#METAL
-# material.copper.name=Медь
-# material.tin.name=Олово
+#MATERIAL LOCALIZATION OVERRIDES
+material.tin.name=Олово
+material.copper.name=Медь
+material.iron.name=Железо
+material.bronze.name=Бронза
+material.pig_iron.name=Чугун
+material.steel.name=Сталь
+material.encrusted.name=Инкрустированная сталь
+material.obsidian.name=Обсидиановая сталь
+material.tungsten.name=Вольфрам
+material.black_steel.name=Чёрная сталь
+material.blue_steel.name=Голубая сталь
+material.red_steel.name=Красная сталь
+material.silver.name=Серебро
+material.gold.name=Золото
+material.mithril.name=Мифрил
+material.adamantium.name=Адамантий
+material.mithium.name=Мифий
+material.ignotumite.name=Игнотумит
+material.ender.name=Сталь Края
+material.composite_alloy.name=Композитный металл
+material.scrap_wood.name=Трухлявое дерево
+material.oak_wood.name=Дуб
+material.spruce_wood.name=Ель
+material.birch_wood.name=Берёза
+material.jungle_wood.name=Тропическое дерево
+material.acacia_wood.name=Акация
+material.dark_oak_wood.name=Тёмный дуб
+material.refined_wood.name=Обработанное дерево
+material.yew_wood.name=Тис
+material.ironbark_wood.name=Эвкалипт
+material.ebony_wood.name=Эбен
 
-# material.bronze.name=Бронза
-# material.iron.name=Железо
-# material.pigiron.name=Чугун
-# material.steel.name=Сталь
-# material.tungsten.name=Вольфрам
-# material.obsidian.name=Обсидиан
-# material.encrusted.name=Алмаз
-# material.blacksteel.name=Чёрная сталь
-# material.redsteel.name=Красная сталь
-# material.bluesteel.name=Голубая сталь
-
-# material.adamantium.name=Адамантий
-# material.mithril.name=Мифрил
-# material.ignotumite.name=Игнотумит
-# material.mithium.name=Мифий
-# material.ender.name=Сталь Края
-
-#PRECIOUS
-# material.gold.name=Золото
-# material.silver.name=Серебро
-
-#NON-MF
-# material.bismuth.name=Висмут
-# material.bismuthbronze.name=Висмутовая бронза
-# material.nickel.name=Никель
-# material.titanium.name=Титан
-# material.stainlesssteel.name=Нержавеющая сталь
-
-#ALLOY
-# material.compositealloy.name=Композитный слиток
-
-#MOD
-# material.thaumium.name=Таум металл
-# material.void.name=Пустотный металл
-# material.manasteel.name=Манафрам
-# material.elvenelementium.name=Элементиум
-# material.terrasteel.name=Терразий
-
-#-------------------------------------
-# MATERIAL LOCALIZATION OVERRIDES
-#-------------------------------------
-material.material_name.name=Localized Name
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/ITEM STATS/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ITEM STATS
 prefix.hotitem.name=Горячий %1$s
 state.workable=Готовый к работе
 state.unstable=Перегретый
@@ -337,16 +282,13 @@ arrow.head.broad.name=Широкий наконечник
 item.world_gen_placer=item.World Gen Placer
 
 
-#---------------------------------------
 # INTEGRATION
-#------------------------------------------
-integration.jei.category.minefantasyreforged:carpenter=Carpenter Bench
-integration.jei.category.minefantasyreforged:anvil=MineFantasy Anvil
-item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
+integration.jei.category.minefantasyreforged:carpenter=Плотницкий верстак
+integration.jei.category.minefantasyreforged:anvil=Наковальня MineFantasy
+item.flux.desc_extended=Флюс является важным очищающим агентом в металлургии, в основном используемый для обработки металлов при ковке и при создании сплавов. Лучшим источником флюса является известняк.
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/COMMODITY/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# COMMODITY
+
 item.timber.name=Брусок
 item.jug_plant_oil.name=Растительное масло
 item.plankRefined.name=Пропитанный брусок
@@ -401,8 +343,7 @@ item.copper_coin.name=Медная монета
 item.silver_coin.name=Серебряная монета
 item.gold_coin.name=Золотая монета
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/COMPONENT/
+# COMPONENT
 item.ingot_mould.name=Слепок слитка
 item.ingot_mould_filled.name=Слепок слитка
 item.ingot_mould_uncooked.name=Необожжённый слепок слитка
@@ -483,13 +424,8 @@ item.bronze_gears.name=Бронзовые шестерёнки
 item.tungsten_gears.name=Вольфрамовые шестерёнки
 item.steel_tube.name=Стальная трубка
 item.cogwork_shaft.name=Вал механической брони
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#
-#
-#
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/GADGET/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# GADGET
 item.spyglass.name=Подзорная труба
 item.climbing_pick_basic.name=Альпеншток
 item.parachute.name=Парашют
@@ -592,9 +528,8 @@ item.crossbow_bayonet.desc=Повышенный урон в ближнем бо�
 
 tile.berry_bush.name=Ягодный куст
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/ORES/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# ORES
+
 tile.copper_ore.name=Медная руда
 tile.tin_ore.name=Оловянная руда
 tile.silver_ore.name=Серебряная руда
@@ -763,9 +698,8 @@ tile.bedroll.name=Лежанка
 
 tile.mythic_stone_framed.name=Обрамлённый мифический камень
 tile.mythic_stone_decorated.name=Декоративный мифический камень
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/TABS/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# TABS
 itemGroup.forgedtool=[MF] Кованые инструменты
 itemGroup.forgedweapon=[MF] Кованое оружие
 itemGroup.forgedarmour=[MF] Кованая броня
@@ -781,34 +715,24 @@ itemGroup.MFOld=[MF] Примитивные инструменты
 itemGroup.MFdragonforged=[MF] Оружие из драконьей стали
 itemGroup.MFornate=[MF] Украшенная амуниция
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/FIRESTARTER/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# FIRESTARTER
 item.dryrocks.name=Сухие камни
 item.tinderbox.name=Трутница
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/BANDAGE/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# BANDAGE
 item.bandage_crude.name=Грубая перевязка
 item.bandage_wool.name=Шерстяная перевязка
 item.bandage_tough.name=Отличная перевязка
-item.bandage_heal_amount=Heals %1$s hearts of damage. Use for 5 seconds to apply
+item.bandage_heal_amount=Лечит %1$s сердец. Используйте 5 секунд.
 
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/TRAINING/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# TRAINING
 item.training_sword.name=Тренировочный меч
 item.training_waraxe.name=Тренировочный боевой топор
 item.training_mace.name=Тренировочная булава
 item.training_spear.name=Тренировочное копьё
 
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/LEATHER STUFF/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# LEATHER STUFF
 item.hide_helmet.name=Сыромятный шлем
 item.hide_chestplate.name=Сыромятный нагрудник
 item.hide_leggings.name=Сыромятные поножи
@@ -841,20 +765,12 @@ item.padded_boots.name=Подбитые сапоги
 
 item.leather_apron.name=Фартук кузнеца
 
-
-
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/WOOD STUFF/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# WOOD STUFF
 item.malletWood.name=Деревянная киянка
 item.spoonWood.name=Деревянная ложка
 item.paint_brush.name=Кисть
 
-
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/STONE STUFF/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# STONE STUFF
 item.stone_pick.name=Каменная кирка
 item.stone_axe.name=Каменный топор
 item.stone_hoe.name=Каменная мотыга
@@ -870,10 +786,9 @@ item.stone_waraxe.name=Каменный боевой топор
 item.stone_mace.name=Каменная булава
 item.stone_spear.name=Каменное копьё
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/STANDARD/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-languagecfg.tooltiptier=true
+
+# STANDARD
+languagecfg.tooltiptier=false
 #//You can move the main tier to the tooltip if this is true, make sure to remove "%1$s " instnaces if you do this
 
 item.standard_pick.name=Кирка
@@ -891,181 +806,178 @@ item.standard_saw.name=Пила
 item.standard_spanner.name=Гаечный ключ
 
 
-item.standard_dagger.name=Кинжал
-item.standard_sword.name=Меч
-item.standard_mace.name=Булава
-item.standard_waraxe.name=Боевой топор
-item.standard_spear.name=Копьё
+item.standard_dagger.name=Кинжал (%1$s)
+item.standard_sword.name=Меч (%1$s)
+item.standard_mace.name=Булава (%1$s)
+item.standard_waraxe.name=Боевой топор (%1$s)
+item.standard_spear.name=Копьё (%1$s)
 
-item.standard_katana.name=Катана
-item.standard_greatsword.name=Двуручный меч
-item.standard_warhammer.name=Боевой молот
-item.standard_battleaxe.name=Секира
-item.standard_halbeard.name=Алебарда
-item.standard_lance.name=Рыцарское копьё
+item.standard_katana.name=Катана (%1$s)
+item.standard_greatsword.name=Двуручный меч (%1$s)
+item.standard_warhammer.name=Боевой молот (%1$s)
+item.standard_battleaxe.name=Секира (%1$s)
+item.standard_halbeard.name=Алебарда (%1$s)
+item.standard_lance.name=Рыцарское копьё (%1$s)
 
-item.standard_handpick.name=Малая кирка
-item.standard_heavy_pick.name=Тяжёлая кирка
-item.standard_trow.name=Малая лопата
-item.standard_heavy_shovel.name=Тяжёлая лопата
-item.standard_scythe.name=Коса
-item.standard_mattock.name=Киркомотыга
-item.standard_lumber.name=Топор дровосека
+item.standard_handpick.name=Малая кирка (%1$s)
+item.standard_heavy_pick.name=Тяжёлая кирка (%1$s)
+item.standard_trow.name=Малая лопата (%1$s)
+item.standard_heavy_shovel.name=Тяжёлая лопата (%1$s)
+item.standard_scythe.name=Коса (%1$s)
+item.standard_mattock.name=Киркомотыга (%1$s)
+item.standard_lumber.name=Топор дровосека (%1$s)
 
-item.standard_scale_helmet.name=Чешуйчатый шлем
-item.standard_scale_chestplate.name=Чешуйчатый нагрудник
-item.standard_scale_leggings.name=Чешуйчатые поножи
-item.standard_scale_boots.name=Чешуйчатые сапоги
+item.standard_scale_helmet.name=Чешуйчатый шлем (%1$s)
+item.standard_scale_chestplate.name=Чешуйчатый нагрудник (%1$s)
+item.standard_scale_leggings.name=Чешуйчатые поножи (%1$s)
+item.standard_scale_boots.name=Чешуйчатые сапоги (%1$s)
 
-item.standard_chain_helmet.name=Кольчужный шлем
-item.standard_chain_chestplate.name=Кольчужный нагрудник
-item.standard_chain_leggings.name=Кольчужные поножи
-item.standard_chain_boots.name=Кольчужные сапоги
+item.standard_chain_helmet.name=Кольчужный шлем (%1$s)
+item.standard_chain_chestplate.name=Кольчужный нагрудник (%1$s)
+item.standard_chain_leggings.name=Кольчужные поножи (%1$s)
+item.standard_chain_boots.name=Кольчужные сапоги (%1$s)
 
-item.standard_splint_helmet.name=Шинный шлем
-item.standard_splint_chestplate.name=Шинный нагрудник
-item.standard_splint_leggings.name=Шинные поножи
-item.standard_splint_boots.name=Шинные сапоги
+item.standard_splint_helmet.name=Шинный шлем (%1$s)
+item.standard_splint_chestplate.name=Шинный нагрудник (%1$s)
+item.standard_splint_leggings.name=Шинные поножи (%1$s)
+item.standard_splint_boots.name=Шинные сапоги (%1$s)
 
-item.standard_plate_helmet.name=Латный шлем
-item.standard_plate_chestplate.name=Латная кираса
-item.standard_plate_leggings.name=Латные поножи
-item.standard_plate_boots.name=Латные сапоги
+item.standard_plate_helmet.name=Латный шлем (%1$s)
+item.standard_plate_chestplate.name=Латная кираса (%1$s)
+item.standard_plate_leggings.name=Латные поножи (%1$s)
+item.standard_plate_boots.name=Латные сапоги (%1$s)
 
 item.standard_bow.name=Лук
 item.standard_arrow.name=Стрела
-item.standard_arrow_bodkin.name=%1$s Конусообразная Стрела
-item.standard_arrow_broad.name=%1$s Широкая Стрела
+item.standard_arrow_bodkin.name=Конусообразная Стрела (%1$s)
+item.standard_arrow_broad.name=Широкая Стрела (%1$s)
 item.standard_bolt.name=Болт
 
 item.standard_mallet.name=Киянка
 item.standard_spoon.name=Ложка
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/DRAGONFORGE/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-item.dragonforged_pick.name=Драконокованая кирка
-item.dragonforged_axe.name=Драконокованый топор
-item.dragonforged_spade.name=Драконокованая лопата
-item.dragonforged_hoe.name=Драконокованая мотыга
 
-item.dragonforged_shears.name=Драконокованые ножницы
-item.dragonforged_knife.name=Драконокованый нож
-item.dragonforged_needle.name=Драконокованая игла
-item.dragonforged_hammer.name=Драконокованый молот
-item.dragonforged_heavy_hammer.name=Тяжёлый драконокованый молот
-item.dragonforged_tongs.name=Драконокованые клещи
-item.dragonforged_saw.name=Драконокованая пила
-item.dragonforged_spanner.name=Драконокованый гаечный ключ
+# DRAGONFORGE
+item.dragonforged_pick.name=Драконокованая кирка (%1$s)
+item.dragonforged_axe.name=Драконокованый топор (%1$s)
+item.dragonforged_spade.name=Драконокованая лопата (%1$s)
+item.dragonforged_hoe.name=Драконокованая мотыга (%1$s)
+
+item.dragonforged_shears.name=Драконокованые ножницы (%1$s)
+item.dragonforged_knife.name=Драконокованый нож (%1$s)
+item.dragonforged_needle.name=Драконокованая игла (%1$s)
+item.dragonforged_hammer.name=Драконокованый молот (%1$s)
+item.dragonforged_heavy_hammer.name=Тяжёлый драконокованый молот (%1$s)
+item.dragonforged_tongs.name=Драконокованые клещи (%1$s)
+item.dragonforged_saw.name=Драконокованая пила (%1$s)
+item.dragonforged_spanner.name=Драконокованый гаечный ключ (%1$s)
 
 
-item.dragonforged_dagger.name=Драконокованый кинжал
-item.dragonforged_sword.name=Драконокованый меч
-item.dragonforged_mace.name=Драконокованая булава
-item.dragonforged_waraxe.name=Драконокованый боевой топор
-item.dragonforged_spear.name=Драконокованое копьё
+item.dragonforged_dagger.name=Драконокованый кинжал (%1$s)
+item.dragonforged_sword.name=Драконокованый меч (%1$s)
+item.dragonforged_mace.name=Драконокованая булава (%1$s)
+item.dragonforged_waraxe.name=Драконокованый боевой топор (%1$s)
+item.dragonforged_spear.name=Драконокованое копьё (%1$s)
 
-item.dragonforged_katana.name=Драконокованая катана
-item.dragonforged_greatsword.name=Драконокованый двуручный меч
-item.dragonforged_warhammer.name=Драконокованый боевой молот
-item.dragonforged_battleaxe.name=Драконокованая секира
-item.dragonforged_halbeard.name=Драконокованая алебарда
-item.dragonforged_lance.name=Драконокованое рыцарское копьё
+item.dragonforged_katana.name=Драконокованая катана (%1$s)
+item.dragonforged_greatsword.name=Драконокованый двуручный меч (%1$s)
+item.dragonforged_warhammer.name=Драконокованый боевой молот (%1$s)
+item.dragonforged_battleaxe.name=Драконокованая секира (%1$s)
+item.dragonforged_halbeard.name=Драконокованая алебарда (%1$s)
+item.dragonforged_lance.name=Драконокованое рыцарское копьё (%1$s)
 
-item.dragonforged_handpick.name=Драконокованая малая кирка
-item.dragonforged_heavy_pick.name=Тяжёлая драконокованая кирка
-item.dragonforged_trow.name=Лёгкая драконокованая лопата
-item.dragonforged_heavy_shovel.name=Тяжёлая драконокованая лопата
-item.dragonforged_scythe.name=Драконокованая коса
-item.dragonforged_mattock.name=Драконокованая киркомотыга
-item.dragonforged_lumber.name=Драконокованый топор дровосека
+item.dragonforged_handpick.name=Драконокованая малая кирка (%1$s)
+item.dragonforged_heavy_pick.name=Тяжёлая драконокованая кирка (%1$s)
+item.dragonforged_trow.name=Лёгкая драконокованая лопата (%1$s)
+item.dragonforged_heavy_shovel.name=Тяжёлая драконокованая лопата (%1$s)
+item.dragonforged_scythe.name=Драконокованая коса (%1$s)
+item.dragonforged_mattock.name=Драконокованая киркомотыга (%1$s)
+item.dragonforged_lumber.name=Драконокованый топор дровосека (%1$s)
 
-item.dragonforged_scale_helmet.name=Драконокованый чешуйчатый шлем
-item.dragonforged_scale_chestplate.name=Драконокованый чешуйчатый нагрудник
-item.dragonforged_scale_leggings.name=Драконокованые чешуйчатые поножи
-item.dragonforged_scale_boots.name=Драконокованые чешуйчатые сапоги
+item.dragonforged_scale_helmet.name=Драконокованый чешуйчатый шлем (%1$s)
+item.dragonforged_scale_chestplate.name=Драконокованый чешуйчатый нагрудник (%1$s)
+item.dragonforged_scale_leggings.name=Драконокованые чешуйчатые поножи (%1$s)
+item.dragonforged_scale_boots.name=Драконокованые чешуйчатые сапоги (%1$s)
 
-item.dragonforged_chain_helmet.name=Драконокованый кольчужный шлем
-item.dragonforged_chain_chestplate.name=Драконокованый кольчужный нагрудник
-item.dragonforged_chain_leggings.name=Драконокованые  кольчужные поножи
-item.dragonforged_chain_boots.name=Драконокованые кольчужные сапоги
+item.dragonforged_chain_helmet.name=Драконокованый кольчужный шлем (%1$s)
+item.dragonforged_chain_chestplate.name=Драконокованый кольчужный нагрудник (%1$s)
+item.dragonforged_chain_leggings.name=Драконокованые  кольчужные поножи (%1$s)
+item.dragonforged_chain_boots.name=Драконокованые кольчужные сапоги (%1$s)
 
-item.dragonforged_splint_helmet.name=Драконокованый шинный шлем
-item.dragonforged_splint_chestplate.name=Драконокованый шинный нагрудник
-item.dragonforged_splint_leggings.name=Драконокованые шинные поножи
-item.dragonforged_splint_boots.name=Драконокованые шинные сапоги
+item.dragonforged_splint_helmet.name=Драконокованый шинный шлем (%1$s)
+item.dragonforged_splint_chestplate.name=Драконокованый шинный нагрудник (%1$s)
+item.dragonforged_splint_leggings.name=Драконокованые шинные поножи (%1$s)
+item.dragonforged_splint_boots.name=Драконокованые шинные сапоги (%1$s)
 
-item.dragonforged_plate_helmet.name=Драконокованый бацинет
-item.dragonforged_plate_chestplate.name=Драконокованый кираса
-item.dragonforged_plate_leggings.name=Драконокованые ножные латы
-item.dragonforged_plate_boots.name=Драконокованые латные сапоги
+item.dragonforged_plate_helmet.name=Драконокованый бацинет (%1$s)
+item.dragonforged_plate_chestplate.name=Драконокованый кираса(%1$s)
+item.dragonforged_plate_leggings.name=Драконокованые ножные латы (%1$s)
+item.dragonforged_plate_boots.name=Драконокованые латные сапоги (%1$s)
 
-item.dragonforged_bow.name=Драконокованый %1$s лук
+item.dragonforged_bow.name=Драконокованый лук (%1$s)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/ORNATE/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-item.ornate_pick.name=Украшенная кирка
-item.ornate_axe.name=Украшенный топор
-item.ornate_spade.name=Украшенная лопата
-item.ornate_hoe.name=Украшенная мотыга
+# ORNATE
+item.ornate_pick.name=Украшенная кирка (%1$s)
+item.ornate_axe.name=Украшенный топор (%1$s)
+item.ornate_spade.name=Украшенная лопата (%1$s)
+item.ornate_hoe.name=Украшенная мотыга (%1$s)
 
-item.ornate_shears.name=Украшенные ножницы
-item.ornate_knife.name=Украшенный нож
-item.ornate_needle.name=Украшенная игла
-item.ornate_hammer.name=Украшенный молот
-item.ornate_heavy_hammer.name=Тяжёлый украшенный молот
-item.ornate_tongs.name=Украшенные клещи
-item.ornate_saw.name=Украшенная пила
-item.ornate_spanner.name=Украшенный гаечный ключ
+item.ornate_shears.name=Украшенные ножницы (%1$s)
+item.ornate_knife.name=Украшенный нож (%1$s)
+item.ornate_needle.name=Украшенная игла (%1$s)
+item.ornate_hammer.name=Украшенный молот (%1$s)
+item.ornate_heavy_hammer.name=Тяжёлый украшенный молот (%1$s)
+item.ornate_tongs.name=Украшенные клещи (%1$s)
+item.ornate_saw.name=Украшенная пила (%1$s)
+item.ornate_spanner.name=Украшенный гаечный ключ (%1$s)
 
-item.ornate_dagger.name=Украшенный кинжал
-item.ornate_sword.name=Украшенный меч
-item.ornate_mace.name=Украшенная булава
-item.ornate_waraxe.name=Украшенный боевой топор
-item.ornate_spear.name=Украшенное копьё
+item.ornate_dagger.name=Украшенный кинжал (%1$s)
+item.ornate_sword.name=Украшенный меч (%1$s)
+item.ornate_mace.name=Украшенная булава (%1$s)
+item.ornate_waraxe.name=Украшенный боевой топор (%1$s)
+item.ornate_spear.name=Украшенное копьё (%1$s)
 
-item.ornate_katana.name=Украшенная катана
-item.ornate_greatsword.name=Украшенный двуручный меч
-item.ornate_warhammer.name=Украшенный боевой молот
-item.ornate_battleaxe.name=Украшенная секира
-item.ornate_halbeard.name=Украшенная алебарда
-item.ornate_lance.name=Украшенное рыцарское копьё
+item.ornate_katana.name=Украшенная катана (%1$s)
+item.ornate_greatsword.name=Украшенный двуручный меч (%1$s)
+item.ornate_warhammer.name=Украшенный боевой молот (%1$s)
+item.ornate_battleaxe.name=Украшенная секира (%1$s)
+item.ornate_halbeard.name=Украшенная алебарда (%1$s)
+item.ornate_lance.name=Украшенное рыцарское копьё (%1$s)
 
-item.ornate_handpick.name=Украшенная малая кирка
-item.ornate_heavy_pick.name=Украшенная тяжёлая кирка
-item.ornate_trow.name=Украшенная лопата
-item.ornate_heavy_shovel.name=Украшенная тяжёлая лопата
-item.ornate_scythe.name=Украшенная коса
-item.ornate_mattock.name=Украшенная киркомотыга
-item.ornate_lumber.name=Украшенный топор дровосека
+item.ornate_handpick.name=Украшенная малая кирка (%1$s)
+item.ornate_heavy_pick.name=Украшенная тяжёлая кирка (%1$s)
+item.ornate_trow.name=Украшенная лопата (%1$s)
+item.ornate_heavy_shovel.name=Украшенная тяжёлая лопата (%1$s)
+item.ornate_scythe.name=Украшенная коса (%1$s)
+item.ornate_mattock.name=Украшенная киркомотыга(%1$s)
+item.ornate_lumber.name=Украшенный топор дровосека (%1$s)
 
-item.ornate_scale_helmet.name=Украшенный чешуйчатый шлем
-item.ornate_scale_chestplate.name=Украшенный чешуйчатый нагрудник
-item.ornate_scale_leggings.name=Украшенные чешуйчатые поножи
-item.ornate_scale_boots.name=Украшенные чешуйчатые сапоги
+item.ornate_scale_helmet.name=Украшенный чешуйчатый шлем (%1$s)
+item.ornate_scale_chestplate.name=Украшенный чешуйчатый нагрудник (%1$s)
+item.ornate_scale_leggings.name=Украшенные чешуйчатые поножи (%1$s)
+item.ornate_scale_boots.name=Украшенные чешуйчатые сапоги (%1$s)
 
-item.ornate_chain_helmet.name=Украшенный кольчужный шлем
-item.ornate_chain_chestplate.name=Украшенный кольчужный нагрудник
-item.ornate_chain_leggings.name=Украшенные кольчужные поножи
-item.ornate_chain_boots.name=Украшенные кольчужные сапоги
+item.ornate_chain_helmet.name=Украшенный кольчужный шлем (%1$s)
+item.ornate_chain_chestplate.name=Украшенный кольчужный нагрудник (%1$s)
+item.ornate_chain_leggings.name=Украшенные кольчужные поножи (%1$s)
+item.ornate_chain_boots.name=Украшенные кольчужные сапоги (%1$s)
 
-item.ornate_splint_helmet.name=Украшенный шинный шлем
-item.ornate_splint_chestplate.name=Украшенный шинный нагрудник
-item.ornate_splint_leggings.name=Украшенные шинные поножи
-item.ornate_splint_boots.name=Украшенные шинные сапоги
+item.ornate_splint_helmet.name=Украшенный шинный шлем (%1$s)
+item.ornate_splint_chestplate.name=Украшенный шинный нагрудник (%1$s)
+item.ornate_splint_leggings.name=Украшенные шинные поножи (%1$s)
+item.ornate_splint_boots.name=Украшенные шинные сапоги (%1$s)
 
 #Нет перевода слова Armet, оставил шлем.
-item.ornate_plate_helmet.name=Украшенный латный шлем
-item.ornate_plate_chestplate.name=Украшенная кираса
-item.ornate_plate_leggings.name=Украшенные ножные латы
-item.ornate_plate_boots.name=Украшенные латные сапоги
+item.ornate_plate_helmet.name=Украшенный латный шлем (%1$s)
+item.ornate_plate_chestplate.name=Украшенная кираса (%1$s)
+item.ornate_plate_leggings.name=Украшенные ножные латы (%1$s)
+item.ornate_plate_boots.name=Украшенные латные сапоги (%1$s)
 
-item.ornate_bow.name=Украшенный лук
+item.ornate_bow.name=Украшенный лук (%1$s)
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/ARTEFACT/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# ARTEFACT
 stat.artefact.name=Артефакт
 item.ancient_jewel.name=Древнее сокровище
 item.ancient_jewel_mithril.name=Древнее сокровище
@@ -1079,9 +991,10 @@ tile.schematic_cogwork.name=Чертежи корпуса механическо
 tile.schematic_bomb.name=Чертежи гномьей бомбы
 tile.schematic_crossbow.name=Чертежи гномьего арбалета
 tile.schematic_alloy.name=Чертежи композитного металла
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/FOOD/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+# FOOD
+
 item.berries.name=Ягоды
 item.berries_juicy.name=Сочные ягоды
 item.generic_meat_uncooked.name=Сырое обычное мясо
@@ -1203,9 +1116,7 @@ item.pie_berry_cooked.name=Приготовленный ягодный пиро�
 item.pie_shepard_cooked.name=Приготовленный пастуший пирог
 item.pie_pumpkin_cooked.name=Приготовленный тыквенный пирог
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/FOOD STATS/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# FOOD STATS
 food.stat.list.name=При поедании:
 food.stat.hunger.name=+%1$s сытости
 food.stat.staminaPlus.name=Восстанавливает %1$s выносливости
@@ -1216,16 +1127,15 @@ food.stat.staminabuffRegenMinutes.name=Восстанавливает %1$s вы�
 food.stat.staminabuffRegenSeconds.name=Восстанавливает %1$s выносливости/сек на %2$s сек.
 food.stat.cure.poison=Лечит отравление
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/CONSTRUCTION/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-item.hinge.name=Петля
-item.commodity_timber_cut.name=Распиленный %1$s брусок
-item.commodity_timber_pane.name=%1$s брусчатая панель
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/RPG/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# CONSTRUCTION
+item.hinge.name=Петля
+item.commodity_timber_cut.name=Распиленный брусок (%1$s)
+item.commodity_timber_pane.name= Брусчатая панель (%1$s)
+
+
+# RPG
+
 rpg.levelup=Ваш навык %1$s повысился до %2$s уровня.
 rpg.required=Требует "%2$s" ур. %1$s
 rpg.skillmod=Модификатор умения: +
@@ -1265,9 +1175,9 @@ item.skillbook_engineering_max.name=Лексикон инженера
 item.skillbook_engineering_max.desc=Максимальный уровень инженерного дела
 item.skillbook_combat_max.name=Повесть о великой войне
 item.skillbook_combat_max.desc=Максимальный уровень мастерства
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/KNOWLEDGE INFORMATION/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# KNOWLEDGE INFORMATION
+
 method.workbench=Базовый верстак
 method.furnace=Выплавка
 method.baking=Выпечка
@@ -1287,9 +1197,8 @@ knowledge.guiSubtitle=Это GUI
 knowledge.basicstructure=Базовая структура
 knowledge.example=Пример
 knowledge.rightclickspanner=ПКМ гаечным ключом
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/KNOWLEDGE TEXT/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# KNOWLEDGE TEXT
 # knowledge.title= DUPLICATE
 # knowledge.title.desc= DUPLICATE
 # knowledge.title.1= DUPLICATE
@@ -1388,8 +1297,7 @@ knowledge.research.desc=Следим за продвижением
 
 knowledge.research.1=В этой книге содержится большинство знаний, начиная с кулинарных рецептов, и заканчивая сложными типами брони. Исследование есть способ найти нечто скрытое в мире и использовать в своих работах. Большинство того ,что Вы могли бы сделать, должно быть изучено, и при надлежащем уровне ремесла секрет будет раскрыт.^Для начала, стоит сделать исследовательскую станцию. Ваш навык и предметы исследований откроют Вам новые знания.
 
-#//Table recipe
-
+# /Table recipe
 knowledge.research.2=При наличии стола исследований, у Вас появится возможность изучать Mine Fantasy раздел за разделом. С версией 2.8 поменялась система изучений с привычных свитков на изучение предметов. Чтобы изучить что-то, положите в стол предмет с пометкой "Можно изучить", и нажимайте ЛКМ-ПКМ. Помните - для того, чтобы изучить что-то, возможно, нужен более высокий уровень определённого ремесла.
 
 knowledge.carpenter=Стол плотника
@@ -1685,6 +1593,7 @@ knowledge.anvil.2=Наковальни крайне просты для краф
 knowledge.anvil.3=Изготовление вещей может показаться сложным, оно имеет две стадии. ^Сперва некоторые вещи должны быть разогреты в $hгорне$r. Если предмет нагреваемый, его нужно разогреть.^Во-вторых, нужно выложить сам рецепт. Начните выкладывать его
 
 knowledge.anvil.4=в сетке$h[3]$r затем: возьмите подходящий молот (тяжёлый или обычный, в зависимости от рецепта). Каждый рецепт имеет рекомендации по уровню молота и наковальни. Молоты низкого уровня непредсказуемы по качеству результата, а низкоуровневые наковальни усложняют крафт качественных вещей. Уровни будут отображаться над заголовком$h[1]$r.^Бейте молотком по наковальне. Шкала програсса$h[2]$r будет заполняться, а по завершению результат крафта появится в слоте$h[4]$r.^Некоторые вещи будут горячими, поэтому их надо остудить в воде нажатием ПКМ или в котле (удерживая shift).
+
 knowledge.anvil.5=Для того, чтобы взять с наковальни разогретую вещь, используйте клещи. Горячие предметы могут нанести вам увечья, используйте клещи, чтобы взять что-либо из горна и перенести на наковальню! 
 
 knowledge.anvil.6=При ковке следите за уровнем качества. Задача состоит в том, чтобы держать маркер подальше от краёв. Если он достигнет одного из них, это разрушит рецепт. При изготовлении повреждаемых вещей уровень срока службы также зависит от уровня качества, а именно от того, вышел ли маркер за края обозначенных отметок.^Как Вы видите, на шкале качества есть 2 зелёные отметки, которые повреждают объект в случае, если маркер находится за их пределами. Разделяйте удары на удары молотом ЛКМ и ПКМ. Также заметьте, что маркер медленнее движется вправо, чем влево.
@@ -2039,7 +1948,7 @@ knowledge.sticky_bomb.desc=Лови!
 knowledge.sticky_bomb.1=Эти бомбы прилипают к цели и разносят её в кровавые ошмётки.
 knowledge.sticky_bomb.2=Для изготовления оставьте бомбу в слоте готовой продукции и щёлкните по столу со сгустком слизи в руке. Один сгусток слизи может быть использован на целый стак!
 
-#$hUse of Cogworks$r^
+#Use of Cogworks
 
 knowledge.cogwork_armour=Механическая броня
 knowledge.cogwork_armour.desc=Растоптай их!
@@ -2248,10 +2157,8 @@ knowledge.bandage_advanced=Крепкие повязки
 knowledge.bandage_advanced.desc=Качественная медпомощь
 knowledge.bandage_advanced.1=Эти дорогие, но качественные повязки могут залатать серьёзные повреждения.
 
+# MASTERY TEXT
 
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-#/MASTERY TEXT/
-#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 knowledge.title=
 knowledge.title.desc=
 knowledge.title.1=
@@ -2292,11 +2199,3 @@ knowledge.first_aid.1=Вы должны быть предельно быстры
 knowledge.doctor=Доктор
 knowledge.doctor.desc=Спасая жизни
 knowledge.doctor.1=Постоянная врачебная практика помогла Вам увеличить эффективность использования повязок. Теперь вы излечиваете ими на 50% лучше.
-info.bow.reload_custom=Press [%1$s] to open firearm.
-info.offBalance.message=Trying to use a heavy weapon with only one hand throws you off balance!
-attribute.bowDrawbackSpeed.name=Drawback Speed %1$ss
-key.category.mfr.general=MineFantasy Reforged
-key.mfr.bow_menu=MFR Bow Reload Menu
-key.mfr.remove_offhand=Remove item from offhand
-food.stat.eatDelay.name=Eat Delay: %1$s secs
-food.stat.fatAccumulation.name=Fat Accumulation: %1$s grams

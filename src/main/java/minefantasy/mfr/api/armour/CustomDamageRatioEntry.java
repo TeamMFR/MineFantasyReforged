@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import java.util.HashMap;
 
 public class CustomDamageRatioEntry {
-	public static HashMap<String, CustomDamageRatioEntry> entries = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomDamageRatioEntry> entries = new HashMap<>();
 	public static HashMap<ResourceLocation, CustomDamageRatioEntry> entriesProj = new HashMap<>();
 
 	public float[] vars;
@@ -22,7 +22,7 @@ public class CustomDamageRatioEntry {
 	 * @param vars the damage type ratio cutting:blunt
 	 */
 	public static void registerItem(ItemStack weapon, float[] vars) {
-		entries.put(weapon.getItem().getRegistryName() + ":" + weapon.getMetadata(), new CustomDamageRatioEntry(vars));
+		entries.put(weapon.getItem().getRegistryName(), new CustomDamageRatioEntry(vars));
 	}
 
 	/**
@@ -39,8 +39,8 @@ public class CustomDamageRatioEntry {
 	 * Gets the ratio for an item, null if it's not found
 	 */
 	public static float[] getTraits(ItemStack weapon) {
-		if (entries.get(weapon.getItem().getRegistryName() + ":" + weapon.getMetadata()) != null) {
-			return entries.get(weapon.getItem().getRegistryName() + ":" + weapon.getMetadata()).vars;
+		if (entries.get(weapon.getItem().getRegistryName()) != null) {
+			return entries.get(weapon.getItem().getRegistryName()).vars;
 		}
 		else {
 			return null;

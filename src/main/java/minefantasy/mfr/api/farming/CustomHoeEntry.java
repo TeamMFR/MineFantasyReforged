@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import java.util.HashMap;
 
 public class CustomHoeEntry {
-	public static HashMap<String, CustomHoeEntry> entries = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomHoeEntry> entries = new HashMap<>();
 	public ResourceLocation item;
 	/**
 	 * The Efficiency(same variable as dig speed)
@@ -29,7 +29,7 @@ public class CustomHoeEntry {
 	public static void registerItem(ItemStack hoeStack, float efficiency) {
 
 		MineFantasyReforgedAPI.debugMsg("Added Custom hoe: " + hoeStack.getTranslationKey() + " Efficiency = " + efficiency);
-		entries.put(hoeStack.getItem().getRegistryName() + ":" + hoeStack.getMetadata(), new CustomHoeEntry(hoeStack.getItem().getRegistryName(), efficiency));
+		entries.put(hoeStack.getItem().getRegistryName(), new CustomHoeEntry(hoeStack.getItem().getRegistryName(), efficiency));
 	}
 
 	/**
@@ -50,19 +50,9 @@ public class CustomHoeEntry {
 	 * @return the entry(if there is one), else null
 	 */
 	public static CustomHoeEntry getEntry(ItemStack hoe) {
-		return getEntry(hoe.getItem().getRegistryName() + ":" + hoe.getMetadata());
-	}
-
-	/**
-	 * Gets the entry for an item
-	 *
-	 * @param hoeWithMetadataString the hoe item
-	 * @return the entry(if there is one), else null
-	 */
-	public static CustomHoeEntry getEntry(String hoeWithMetadataString) {
-		if (hoeWithMetadataString != null) {
-			if (entries.containsKey(hoeWithMetadataString)) {
-				return entries.get(hoeWithMetadataString);
+		if (hoe != null) {
+			if (entries.containsKey(hoe.getItem().getRegistryName())) {
+				return entries.get(hoe.getItem().getRegistryName());
 			}
 		}
 		return null;

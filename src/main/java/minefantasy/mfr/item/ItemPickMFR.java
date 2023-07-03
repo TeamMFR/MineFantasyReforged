@@ -12,6 +12,7 @@ import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -214,7 +215,9 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 			NonNullList<ItemStack> stonePickOres = OreDictionary.getOres("oreCopper");
 			stonePickOres.addAll(OreDictionary.getOres("oreTin"));
 			stonePickOres.addAll(OreDictionary.getOres("oreCoal"));
-			if (OreDictionary.containsMatch(false, stonePickOres, new ItemStack(blockState.getBlock()))) {
+			Block block = blockState.getBlock();
+			if (block != null && !stonePickOres.isEmpty()
+					&& OreDictionary.containsMatch(false, stonePickOres, new ItemStack(block))) {
 				return 1;
 			}
 		}

@@ -1,0 +1,37 @@
+{
+    "_comment": [
+        "Author: Lenvill"
+    ],
+    "mod": "futuremc",
+    "metals": [
+        {
+            "name": "netherite",
+            "oreDictList": "ingotNetherite",
+            "properties": {
+                "tier": 7,
+                "durability": 10.0,
+                "flexibility": 0.6,
+                "sharpness": 8.5,
+                "hardness": 5.5,
+                "resistance": 95,
+                "density": 3.0,
+                "melting_point": 4950,
+                "rarity": 2,
+                "enchantability": 25,
+                "craft_tier": 6,
+                "craft_time_modifier": 18.0,
+                "unbreakable": false
+            },
+            "armour_stats": {
+                "cutting": 1.0,
+                "blunt": 1.0,
+                "piercing": 1.0
+            },
+            "color": {
+                "red": 115,
+                "green": 113,
+                "blue": 115
+            }
+        }
+    ]
+}

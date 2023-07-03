@@ -113,6 +113,11 @@ public class ItemHalbeard extends ItemSpear {
 	}
 
 	@Override
+	protected float getMountedDamage() {
+		return 0;
+	}
+
+	@Override
 	public float getScale(ItemStack itemstack) {
 		return 3.0F;
 	}

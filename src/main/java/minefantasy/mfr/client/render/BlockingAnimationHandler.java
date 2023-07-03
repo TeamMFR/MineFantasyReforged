@@ -86,7 +86,7 @@ public class BlockingAnimationHandler {
 
     }
 
-    @SubscribeEvent(priority= EventPriority.HIGHEST)
+    @SubscribeEvent(priority= EventPriority.LOWEST)
     public void onEvent(FOVUpdateEvent event) {
         EntityPlayer player = event.getEntity();
         IAttributeInstance speedAttribute = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);

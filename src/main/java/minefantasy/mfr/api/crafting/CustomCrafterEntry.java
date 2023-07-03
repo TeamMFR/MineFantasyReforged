@@ -3,11 +3,12 @@ package minefantasy.mfr.api.crafting;
 import minefantasy.mfr.constants.Tool;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
 
 public class CustomCrafterEntry {
-	public static HashMap<String, CustomCrafterEntry> entries = new HashMap<>();
+	public static HashMap<ResourceLocation, CustomCrafterEntry> entries = new HashMap<>();
 	public Item itemID;
 	/**
 	 * The Efficiency(same variable as dig speed)
@@ -30,7 +31,7 @@ public class CustomCrafterEntry {
 	 * @param type  the crafter type
 	 */
 	public static void registerItem(ItemStack piece, String type, float efficiency, int tier) {
-		entries.put(piece.getItem().getRegistryName() + ":" + piece.getMetadata(), new CustomCrafterEntry(piece.getItem(), type, efficiency, tier));
+		entries.put(piece.getItem().getRegistryName(), new CustomCrafterEntry(piece.getItem(), type, efficiency, tier));
 	}
 
 	/**
@@ -68,8 +69,8 @@ public class CustomCrafterEntry {
 	 */
 	public static CustomCrafterEntry getEntry(ItemStack piece) {
 		if (piece != null) {
-			if (entries.containsKey(piece.getItem().getRegistryName() + ":" + piece.getMetadata())) {
-				return entries.get(piece.getItem().getRegistryName() + ":" + piece.getMetadata());
+			if (entries.containsKey(piece.getItem().getRegistryName())) {
+				return entries.get(piece.getItem().getRegistryName());
 			}
 		}
 		return null;
