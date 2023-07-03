@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v0.2.7] - 2023-07-03
+### :bug: Bug Fixes
+- [`b0a63d1`](https://github.com/TeamMFR/MineFantasyReforged/commit/b0a63d1eb1e85e62230b4cf428480ce083348d80) - Reverted taking metadata into account for Item Registry Config for items that take damage. Only the food registry still accounts for metadata *(commit by [@ThatPolishKid99](https://github.com/ThatPolishKid99))*
+
+
 ## [v0.2.6] - 2023-06-26
 ### :bug: Bug Fixes
 - [`05d7ca1`](https://github.com/TeamMFR/MineFantasyReforged/commit/05d7ca15782baf48419236a43765d39675762aab) - Fixed asset directory reference *(commit by [@ThatPolishKid99](https://github.com/ThatPolishKid99))*
@@ -31,3 +36,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [v0.2.0]: https://github.com/TeamMFR/MineFantasyReforged/compare/build-number-5...v0.2.0
 [v0.2.5]: https://github.com/TeamMFR/MineFantasyReforged/compare/v0.2.0...v0.2.5
 [v0.2.6]: https://github.com/TeamMFR/MineFantasyReforged/compare/v0.2.5...v0.2.6
+[v0.2.7]: https://github.com/TeamMFR/MineFantasyReforged/compare/v0.2.6...v0.2.7
