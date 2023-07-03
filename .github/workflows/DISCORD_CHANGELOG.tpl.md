@@ -1,4 +1,3 @@
-<@&641905853808771072>
 :postal_horn: **#{MOD_NAME}#** {{versionName}} is now available on CurseForge! :postal_horn:
 
 :crown: *What's Changed* :crown:
