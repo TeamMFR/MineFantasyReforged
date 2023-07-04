@@ -185,58 +185,58 @@ material.dragonskin.name=Шкіра Дракона
 material.material_name.name=Localized Name
 	#MFR MATERIALS
 		#METAL
-material.tin.name=олов'яний(а/е)
-material.copper.name=мідний(а/е)
-material.bronze.name=бронзовий(а/е)
-material.iron.name=залізний(а/е)
-material.pig_iron.name=сиро-залізний(а/е)
-material.steel.name=сталевий(а/е)
-material.encrusted.name=інкрустований(а/е)
-material.obsidian.name=обсидіановий(а/е)
-material.tungsten.name=вольфрамовий(а/е)
-material.black_steel.name=чорно-залізний(а/е)
-material.red_steel.name=червоно-залізний(а/е)
-material.blue_steel.name=блакитно-залізний(а/е)
-material.silver.name=срібний(а/е)
-material.gold.name=золотий(а/е)
-material.mithril.name=міфриловий(а/е)
-material.adamantium.name=адамантіумний(а/е)
-material.mithium.name=міфіумний(а/е)
-material.ignotumite.name=ігнотумітовий(а/е)
-material.ender.name=ендеровий(а/е)
-material.composite_alloy.name=композитний(а/е)
+material.tin.name=олова
+material.copper.name=міді
+material.bronze.name=бронзи
+material.iron.name=заліза
+material.pig_iron.name=чавуну
+material.steel.name=сталі
+material.encrusted.name=інкрустованого алмазного злитка
+material.obsidian.name=обсидіану
+material.tungsten.name=вольфраму
+material.black_steel.name=чорного заліза
+material.red_steel.name=червоного заліза
+material.blue_steel.name=блакитного заліза
+material.silver.name=срібла
+material.gold.name=золота
+material.mithril.name=міфрила
+material.adamantium.name=адамантіума
+material.mithium.name=міфіума
+material.ignotumite.name=ігнотуміта
+material.ender.name=ендерового сплаву
+material.composite_alloy.name=композиту
 		#WOOD
-material.scrap_wood.name=Погана(ий/е)
-material.oak_wood.name=Дубова(ий/е)
-material.birch_wood.name=Березова(ий/е)
-material.spruce_wood.name=Ялинова(ий/е)
-material.jungle_wood.name=Тропічна(ий/е)
-material.acacia_wood.name=Акацієва(ий/е)
-material.dark_oak_wood.name=Темно-дубова(ий/е)
-material.refined_wood.name=Оброблена(ий/е)
-material.yew_wood.name=Тисова(ий/е)
-material.ironbark_wood.name=Залізно-дерев'яна(ий/е)
-material.ebony_wood.name=Чорно-дерев'яна(ий/е)
+material.scrap_wood.name=Погана
+material.oak_wood.name=Дубова
+material.birch_wood.name=Березова
+material.spruce_wood.name=Ялинова
+material.jungle_wood.name=Тропічна
+material.acacia_wood.name=Акацієва
+material.dark_oak_wood.name=Темно-дубова
+material.refined_wood.name=Оброблена
+material.yew_wood.name=Тисова
+material.ironbark_wood.name=Залізно-дерев'яна
+material.ebony_wood.name=Чорно-дерев'яна
 	#PROJECT: VIBRANT JOURNEY
 		#WOOD
-material.willow_wood.name=Вербна(ий/е)
-material.mangrove_wood.name=Мангрова(ий/е)
-material.palm_wood.name=Пальмова(ий/е)
-material.redwood_wood.name=Секвоєва(ий/е)
-material.fir_wood.name=Ялинова(ий/е)
-material.pine_wood.name=Соснова(ий/е)
-material.aspen_wood.name=Осикова(ий/е)
-material.maple_wood.name=Клинова(ий/е)
-material.baobab_wood.name=Баобабова(ий/е)
-material.cottonwood_wood.name=Бавовникова(ий/е)
-material.pale_juniper_wood.name=Блідо-ялівцева(ий/е)
-material.pale_cherry_wood.name=Блідо-вишнева(ий/е)
-material.jacaranda_wood.name=Жакарандова(ий/е)
+material.willow_wood.name=Вербна
+material.mangrove_wood.name=Мангрова
+material.palm_wood.name=Пальмова
+material.redwood_wood.name=Секвоєва
+material.fir_wood.name=Ялинова
+material.pine_wood.name=Соснова
+material.aspen_wood.name=Осикова
+material.maple_wood.name=Клинова
+material.baobab_wood.name=Баобабова
+material.cottonwood_wood.name=Бавовникова
+material.pale_juniper_wood.name=Блідо-ялівцева
+material.pale_cherry_wood.name=Блідо-вишнева
+material.jacaranda_wood.name=Жакарандова
 	#THAUMCRAFT
 		#METAL
-material.thaumium.name=Тауміумний(а/е)
-material.void.name=Пустотний(а/е)
-material.alchemical_brass.name=Алхімічно-латунний(а/е)
+material.thaumium.name=тауміуму
+material.void.name=пустотного металу
+material.alchemical_brass.name=алхімічної латуні
 
 # ITEM STATS
 
@@ -274,16 +274,16 @@ attribute.weapon.extendedReach=Досяжність
 attribute.weapon.attackSpeed=Швидкість атаки
 attribute.weapon.backstab=Удар у спину
 attribute.weapon.mountedBonus=Бонус при їзді верхи
-attribute.weapon.joustDam=Дуельні пошкодження
+attribute.weapon.joustDam=Пошкодження в поєдинку
 attribute.shield.block.time=с Блоковано
 attribute.shield.arrow.count=Стріл
 attribute.quiver.arrow.empty=Пусто
 attribute.quiver.arrow.count=Стріл
 
-attribute.armour.protection=Рейтинг Броні
-attribute.armour.light=Легка Броня
-attribute.armour.medium=Середня Броня
-attribute.armour.heavy=Тяжка Броня
+attribute.armour.protection=Рейтинг броні
+attribute.armour.light=Легка броня
+attribute.armour.medium=Середня броня
+attribute.armour.heavy=Тяжка броня
 attribute.weight.name=Вага
 
 attribute.bowPower.name=Модифікатор пошкодження x%1$s
@@ -294,9 +294,9 @@ attribute.armour.rating.0=Ріжучий:
 attribute.armour.rating.1=Дроблячий:
 attribute.armour.rating.2=Колючій:
 
-attribute.armour.cuttingresistance=Стійкість до Ріжучого
-attribute.armour.bluntresistance=Стійкість до Дроблячого
-attribute.armour.piercingresistance=Стійкість до Колючого
+attribute.armour.cuttingresistance=Стійкість до ріжучого
+attribute.armour.bluntresistance=Стійкість до дроблячого
+attribute.armour.piercingresistance=Стійкість до колючого
 
 attribute.weapon.cutting=Ріжучі пошкодження
 attribute.weapon.blunt=Дроблячі пошкодження
@@ -310,7 +310,7 @@ arrow.head.normal.name=Звичайний накінечник
 arrow.head.bodkin.name=Гострий накінечник
 arrow.head.broad.name=Широкий накінечник
 
-item.world_gen_placer=World Gen Placer
+item.world_gen_placer=Встановлювач світової генерації
 
 
 # INTEGRATION
@@ -822,188 +822,188 @@ item.stone_spear.name=Кам'яний спис
 languagecfg.tooltiptier=false
 # /You can move the main tier to the tooltip if this is true, make sure to remove "%1$s " instnaces if you do this
 
-item.standard_pick.name=%1$s кайло
-item.standard_axe.name=%1$s сокира
-item.standard_spade.name=%1$s лопата
-item.standard_hoe.name=%1$s мотика
+item.standard_pick.name=Кайло з %1$s
+item.standard_axe.name=Сокира з %1$s
+item.standard_spade.name=Лопата з %1$s
+item.standard_hoe.name=Мотика з %1$s
 
-item.standard_shears.name=%1$s ножиці
-item.standard_knife.name=%1$s ніж
-item.standard_needle.name=%1$s голка
-item.standard_hammer.name=%1$s молот
-item.standard_heavy_hammer.name=Тяжкий %1$s молот
-item.standard_tongs.name=%1$s щипці
-item.standard_saw.name=%1$s пила
-item.standard_spanner.name=%1$s гайковий ключ
+item.standard_shears.name=Ножиці з %1$s
+item.standard_knife.name=Ніж з %1$s
+item.standard_needle.name=Голка з %1$s
+item.standard_hammer.name=Молота %1$s
+item.standard_heavy_hammer.name=Тяжкий молот з %1$s 
+item.standard_tongs.name=Щипці з %1$s
+item.standard_saw.name=Пила з %1$s
+item.standard_spanner.name=Гайковий ключ з %1$s
 
 
-item.standard_dagger.name=%1$s кинджал
-item.standard_sword.name=%1$s меч
-item.standard_mace.name=%1$s булава
-item.standard_waraxe.name=%1$s бойова сокира
-item.standard_spear.name=%1$s спис
+item.standard_dagger.name=Кинджал з %1$s
+item.standard_sword.name=Меч з %1$s
+item.standard_mace.name=Булава з %1$s
+item.standard_waraxe.name=Бойова сокира з %1$s
+item.standard_spear.name=Спис з %1$s
 
-item.standard_katana.name=%1$s катана
-item.standard_greatsword.name=%1$s великий меч
-item.standard_warhammer.name=%1$s бойовий молот
-item.standard_battleaxe.name=%1$s бойова сокира
-item.standard_halbeard.name=%1$s алебарда
-item.standard_lance.name=%1$s піка
+item.standard_katana.name=Катана з %1$s
+item.standard_greatsword.name=Великий меч з %1$s
+item.standard_warhammer.name=Бойовий молот з %1$s
+item.standard_battleaxe.name=Бойова сокира з %1$s
+item.standard_halbeard.name=Алебарда з %1$s
+item.standard_lance.name=Піка з %1$s
 
-item.standard_handpick.name=%1$s ручне кайло
-item.standard_heavy_pick.name=Тяжке %1$s кайло
-item.standard_trow.name=%1$s троу
-item.standard_heavy_shovel.name=Тяжка %1$s лопата
-item.standard_scythe.name=%1$s коса
-item.standard_mattock.name=%1$s кайло-мотика
-item.standard_lumber.name=%1$s дереворубна сокира
+item.standard_handpick.name=Міні-кайло з %1$s
+item.standard_heavy_pick.name=Тяжке кайло з %1$s
+item.standard_trow.name=Троу з %1$s
+item.standard_heavy_shovel.name=Тяжка лопата з %1$s
+item.standard_scythe.name=Коса з %1$s
+item.standard_mattock.name=Кайло-мотика з %1$s
+item.standard_lumber.name=Дереворубна сокира з %1$s
 
-item.standard_scale_helmet.name=%1$s лускатий шолом
-item.standard_scale_chestplate.name=%1$s лускатий нагрудник
-item.standard_scale_leggings.name=%1$s лускаті поножі
-item.standard_scale_boots.name=%1$s лускаті чоботи
+item.standard_scale_helmet.name=Лускатий шолом з %1$s 
+item.standard_scale_chestplate.name=Лускатий нагрудник з %1$s
+item.standard_scale_leggings.name=Лускаті поножі з %1$s
+item.standard_scale_boots.name=Лускаті чоботи з %1$s
 
-item.standard_chain_helmet.name=%1$s кольчужний шолом
-item.standard_chain_chestplate.name=%1$s кольчужний нагрудник
-item.standard_chain_leggings.name=%1$s кольчужні поножі
-item.standard_chain_boots.name=%1$s кольчужні чоботи
+item.standard_chain_helmet.name=Кольчужний шолом з %1$s
+item.standard_chain_chestplate.name=Кольчужний нагрудник з %1$s
+item.standard_chain_leggings.name=Кольчужні поножі з %1$s
+item.standard_chain_boots.name=Кольчужні чоботи з %1$s
 
-item.standard_splint_helmet.name=%1$s пластинчастий шолом
-item.standard_splint_chestplate.name=%1$s пластинчастий нагрудник
-item.standard_splint_leggings.name=%1$s пластинчасті поножі
-item.standard_splint_boots.name=%1$s пластинчасті чоботи
+item.standard_splint_helmet.name=Пластинчастий шолом з %1$s
+item.standard_splint_chestplate.name=Пластинчастий нагрудник з %1$s 
+item.standard_splint_leggings.name=Пластинчасті поножі з %1$s
+item.standard_splint_boots.name=Пластинчасті чоботи з %1$s
 
-item.standard_plate_helmet.name=%1$s великий шолом
-item.standard_plate_chestplate.name=%1$s лати
-item.standard_plate_leggings.name=%1$s грівниці
-item.standard_plate_boots.name=%1$s сабатони
+item.standard_plate_helmet.name=Великий шолом з %1$s
+item.standard_plate_chestplate.name=Лати з %1$s
+item.standard_plate_leggings.name=Грівниці з %1$s
+item.standard_plate_boots.name=Сабатони з %1$s
 
-item.standard_bow.name=%1$s лук
-item.standard_arrow.name=%1$s сткріла
-item.standard_arrow_bodkin.name=%1$s гостра стріла
-item.standard_arrow_broad.name=%1$s широкоголова стріла
-item.standard_bolt.name=%1$s болт
+item.standard_bow.name=Лук з %1$s
+item.standard_arrow.name=Стріла з %1$s
+item.standard_arrow_bodkin.name=Гостра стріла з %1$s
+item.standard_arrow_broad.name=Широкоголова стріла з %1$s
+item.standard_bolt.name=Болт з %1$s
 
-item.standard_mallet.name=%1$s киянка
-item.standard_spoon.name=%1$s ложка
+item.standard_mallet.name=Киянка з %1$s
+item.standard_spoon.name=Ложка з %1$s
 
 # DRAGONFORGE
-item.dragonforged_pick.name=Драконоковане %1$s кайло
-item.dragonforged_axe.name=Драконокована %1$s сокира
-item.dragonforged_spade.name=Драконокована %1$s лопата
-item.dragonforged_hoe.name=Драконокована %1$s мотика
+item.dragonforged_pick.name=Драконоковане кайло з %1$s 
+item.dragonforged_axe.name=Драконокована сокира з %1$s 
+item.dragonforged_spade.name=Драконокована лопата з %1$s 
+item.dragonforged_hoe.name=Драконокована мотика з %1$s 
 
-item.dragonforged_shears.name=Драконоковані %1$s ножиці
-item.dragonforged_knife.name=Драконокований %1$s ніж
-item.dragonforged_needle.name=Драконокована %1$s голка
-item.dragonforged_hammer.name=Драконокований %1$s молоток
-item.dragonforged_heavy_hammer.name=Тяжкий Драконокований %1$s молоток
-item.dragonforged_tongs.name=Драконоковані %1$s щипці
-item.dragonforged_saw.name=Драконокована %1$s пила
-item.dragonforged_spanner.name=Драконокований %1$s гайковий ключ
+item.dragonforged_shears.name=Драконоковані ножиці з %1$s 
+item.dragonforged_knife.name=Драконокований ніж з %1$s 
+item.dragonforged_needle.name=Драконокована голка з %1$s 
+item.dragonforged_hammer.name=Драконокований молоток з %1$s 
+item.dragonforged_heavy_hammer.name=Тяжкий драконокований молоток з %1$s 
+item.dragonforged_tongs.name=Драконоковані щипці з %1$s 
+item.dragonforged_saw.name=Драконокована пила з %1$s 
+item.dragonforged_spanner.name=Драконокований гайковий ключ з %1$s 
 
 
-item.dragonforged_dagger.name=Драконокований %1$s кинджал
-item.dragonforged_sword.name=Драконокований %1$s меч
-item.dragonforged_mace.name=Драконокована %1$s булава
-item.dragonforged_waraxe.name=Драконокована %1$s бойова сокира
-item.dragonforged_spear.name=Драконокований %1$s спис
+item.dragonforged_dagger.name=Драконокований кинджал з %1$s 
+item.dragonforged_sword.name=Драконокований меч з %1$s
+item.dragonforged_mace.name=Драконокована булава з %1$s
+item.dragonforged_waraxe.name=Драконокована бойова сокира з %1$s
+item.dragonforged_spear.name=Драконокований спис з %1$s
 
-item.dragonforged_katana.name=Драконокована %1$s катана
-item.dragonforged_greatsword.name=Драконокований %1$s великий меч
-item.dragonforged_warhammer.name=Драконокований %1$s бойовий молот
-item.dragonforged_battleaxe.name=Драконокована %1$s бойова сокира
-item.dragonforged_halbeard.name=Драконокована %1$s алебарда
-item.dragonforged_lance.name=Драконокована %1$s піка
+item.dragonforged_katana.name=Драконокована катана з %1$s
+item.dragonforged_greatsword.name=Драконокований великий меч з %1$s
+item.dragonforged_warhammer.name=Драконокований бойовий молот з %1$s
+item.dragonforged_battleaxe.name=Драконокована бойова сокира з %1$s
+item.dragonforged_halbeard.name=Драконокована алебарда з %1$s
+item.dragonforged_lance.name=Драконокована піка з %1$s
 
-item.dragonforged_handpick.name=Драконоковане %1$s ручне кайло
-item.dragonforged_heavy_pick.name=Тяжке драконоковане %1$s кайло
-item.dragonforged_trow.name=Драконокована %1$s лопата
-item.dragonforged_heavy_shovel.name=Тяжка драконокована %1$s лопата
-item.dragonforged_scythe.name=Драконокована %1$s коса
-item.dragonforged_mattock.name=Драконокована %1$s кирко-мотика
-item.dragonforged_lumber.name=Драконокована %1$s дереворубна сокира
+item.dragonforged_handpick.name=Драконоковане ручне кайло з %1$s
+item.dragonforged_heavy_pick.name=Тяжке драконоковане кайло з %1$s
+item.dragonforged_trow.name=Драконокована лопата з %1$s
+item.dragonforged_heavy_shovel.name=Тяжка драконокована лопата з %1$s
+item.dragonforged_scythe.name=Драконокована коса з %1$s
+item.dragonforged_mattock.name=Драконокована кирко-мотика з %1$s
+item.dragonforged_lumber.name=Драконокована дереворубна сокира з %1$s
 
-item.dragonforged_scale_helmet.name=Драконокований %1$s лускатий шолом
-item.dragonforged_scale_chestplate.name=Драконокований %1$s лускатий нагрудник
-item.dragonforged_scale_leggings.name=Драконоковані %1$s лускаті поножі
-item.dragonforged_scale_boots.name=Драконоковані %1$s лускаті чоботи
+item.dragonforged_scale_helmet.name=Драконокований лускатий шолом з %1$s
+item.dragonforged_scale_chestplate.name=Драконокований лускатий нагрудник з %1$s
+item.dragonforged_scale_leggings.name=Драконоковані лускаті поножі з %1$s
+item.dragonforged_scale_boots.name=Драконоковані лускаті чоботи з %1$s
 
-item.dragonforged_chain_helmet.name=Драконокований %1$s кольчужний шолом
-item.dragonforged_chain_chestplate.name=Драконокований %1$s кольчужний нагрудник
-item.dragonforged_chain_leggings.name=Драконоковані %1$s кольчужні поножі
-item.dragonforged_chain_boots.name=Драконоковані %1$s кольчужні чоботи
+item.dragonforged_chain_helmet.name=Драконокований кольчужний шолом з %1$s
+item.dragonforged_chain_chestplate.name=Драконокований кольчужний нагрудник з %1$s
+item.dragonforged_chain_leggings.name=Драконоковані кольчужні поножі з %1$s
+item.dragonforged_chain_boots.name=Драконоковані кольчужні чоботи з %1$s
 
-item.dragonforged_splint_helmet.name=Драконокований %1$s пластинчастий шолом
-item.dragonforged_splint_chestplate.name=Драконокований %1$s пластинчастий нагрудник
-item.dragonforged_splint_leggings.name=Драконоковані %1$s пластинчасті поножі
-item.dragonforged_splint_boots.name=Драконоковані %1$s пластинчасті чоботи
+item.dragonforged_splint_helmet.name=Драконокований пластинчастий шолом з %1$s
+item.dragonforged_splint_chestplate.name=Драконокований пластинчастий нагрудник з %1$s
+item.dragonforged_splint_leggings.name=Драконоковані пластинчасті поножі з %1$s
+item.dragonforged_splint_boots.name=Драконоковані пластинчасті чоботи з %1$s
 
-item.dragonforged_plate_helmet.name=Драконокований %1$s бацинет
-item.dragonforged_plate_chestplate.name=Драконоковані %1$s лати
-item.dragonforged_plate_leggings.name=Драконоковані %1$s грівниці
-item.dragonforged_plate_boots.name=Драконоковані %1$s сабатони
+item.dragonforged_plate_helmet.name=Драконокований бацинет з %1$s
+item.dragonforged_plate_chestplate.name=Драконоковані лати з %1$s
+item.dragonforged_plate_leggings.name=Драконоковані грівниці з %1$s
+item.dragonforged_plate_boots.name=Драконоковані сабатони з %1$s
 
-item.dragonforged_bow.name=Драконокований %1$s лук
+item.dragonforged_bow.name=Драконокований лук з %1$s
 
 # ORNATE
-item.ornate_pick.name=Орнаментоване %1$s кайло
-item.ornate_axe.name=Орнаментована %1$s сокира
-item.ornate_spade.name=Орнаментована %1$s лопата
-item.ornate_hoe.name=Орнаментована %1$s мотика
+item.ornate_pick.name=Орнаментоване кайло з %1$s
+item.ornate_axe.name=Орнаментована сокира з %1$s
+item.ornate_spade.name=Орнаментована лопата з %1$s
+item.ornate_hoe.name=Орнаментована мотика з %1$s
 
-item.ornate_shears.name=Орнаментовані %1$s ножиці
-item.ornate_knife.name=Орнаментований %1$s ніж
-item.ornate_needle.name=Орнаментована %1$s голка
-item.ornate_hammer.name=Орнаментований %1$s молоток
-item.ornate_heavy_hammer.name=Тяжкий орнаментований %1$s молоток
-item.ornate_tongs.name=Орнаментовані %1$s щипці
-item.ornate_saw.name=Орнаментована %1$s пила
-item.ornate_spanner.name=Орнаментований %1$s гайковий ключ
+item.ornate_shears.name=Орнаментовані ножиці з %1$s
+item.ornate_knife.name=Орнаментований ніж з %1$s
+item.ornate_needle.name=Орнаментована голка з %1$s
+item.ornate_hammer.name=Орнаментований молоток з %1$s
+item.ornate_heavy_hammer.name=Тяжкий орнаментований молоток з %1$s
+item.ornate_tongs.name=Орнаментовані щипці з %1$s
+item.ornate_saw.name=Орнаментована пила з %1$s
+item.ornate_spanner.name=Орнаментований гайковий ключ з %1$s
 
 
-item.ornate_dagger.name=Орнаментований %1$s кинджал
-item.ornate_sword.name=Орнаментований %1$s меч
-item.ornate_mace.name=Орнаментована %1$s булава
-item.ornate_waraxe.name=Орнаментована %1$s бойова сокира
-item.ornate_spear.name=Орнаментований %1$s спис
+item.ornate_dagger.name=Орнаментований кинджал з %1$s
+item.ornate_sword.name=Орнаментований меч з %1$s
+item.ornate_mace.name=Орнаментована булава з %1$s
+item.ornate_waraxe.name=Орнаментована бойова сокира з %1$s
+item.ornate_spear.name=Орнаментований спис з %1$s
 
-item.ornate_katana.name=Орнаментована %1$s катана
-item.ornate_greatsword.name=Орнаментований %1$s великий меч
-item.ornate_warhammer.name=Орнаментований %1$s бойовий молот
-item.ornate_battleaxe.name=Орнаментована %1$s бойова сокира
-item.ornate_halbeard.name=Орнаментована %1$s алебарда
-item.ornate_lance.name=Орнаментована %1$s піка
+item.ornate_katana.name=Орнаментована катана з %1$s
+item.ornate_greatsword.name=Орнаментований великий меч з %1$s
+item.ornate_warhammer.name=Орнаментований бойовий молот з %1$s
+item.ornate_battleaxe.name=Орнаментована бойова сокира з %1$s
+item.ornate_halbeard.name=Орнаментована алебарда з %1$s
+item.ornate_lance.name=Орнаментована піка з %1$s
 
-item.ornate_handpick.name=Орнаментоване %1$s ручне кайло
-item.ornate_heavy_pick.name=Тяжке орнаментоване %1$s кайло
-item.ornate_trow.name=Орнаментована %1$s лопата
-item.ornate_heavy_shovel.name=Тяжка орнаментований %1$s лопата
-item.ornate_scythe.name=Орнаментована %1$s коса
-item.ornate_mattock.name=Орнаментована %1$s кайло-мотика
-item.ornate_lumber.name=Орнаментована %1$s дереворубна сокира
+item.ornate_handpick.name=Орнаментоване ручне кайло з %1$s
+item.ornate_heavy_pick.name=Тяжке орнаментоване кайло з %1$s
+item.ornate_trow.name=Орнаментована лопата з %1$s
+item.ornate_heavy_shovel.name=Тяжка орнаментована лопата з %1$s
+item.ornate_scythe.name=Орнаментована коса з %1$s
+item.ornate_mattock.name=Орнаментована кайло-мотика з %1$s
+item.ornate_lumber.name=Орнаментована дереворубна сокира з %1$s
 
-item.ornate_scale_helmet.name=Орнаментований %1$s лускатий шолом
-item.ornate_scale_chestplate.name=Орнаментований %1$s лускатий нагрудник
-item.ornate_scale_leggings.name=Орнаментовані %1$s лускаті поножі
-item.ornate_scale_boots.name=Орнаментовані %1$s лускаті чоботи
+item.ornate_scale_helmet.name=Орнаментований лускатий шолом з %1$s
+item.ornate_scale_chestplate.name=Орнаментований лускатий нагрудник з %1$s
+item.ornate_scale_leggings.name=Орнаментовані лускаті поножі з %1$s
+item.ornate_scale_boots.name=Орнаментовані лускаті чоботи з %1$s
 
-item.ornate_chain_helmet.name=Орнаментований %1$s кольчужний шолом
-item.ornate_chain_chestplate.name=Орнаментований %1$s кольчужний нагрудник
-item.ornate_chain_leggings.name=Орнаментовані %1$s кольчужні поножі
-item.ornate_chain_boots.name=Орнаментовані %1$s кольчужні чоботи
+item.ornate_chain_helmet.name=Орнаментований кольчужний шолом з %1$s
+item.ornate_chain_chestplate.name=Орнаментований кольчужний нагрудник з %1$s
+item.ornate_chain_leggings.name=Орнаментовані кольчужні поножі з %1$s
+item.ornate_chain_boots.name=Орнаментовані кольчужні чоботи з %1$s
 
-item.ornate_splint_helmet.name=Орнаментований %1$s пластинчастий шолом
-item.ornate_splint_chestplate.name=Орнаментований %1$s пластинчастий нагрудник
-item.ornate_splint_leggings.name=Орнаментовані %1$s пластинчасті поножі
-item.ornate_splint_boots.name=Орнаментовані %1$s пластинчасті чоботи
+item.ornate_splint_helmet.name=Орнаментований пластинчастий шолом з %1$s
+item.ornate_splint_chestplate.name=Орнаментований пластинчастий нагрудник з %1$s
+item.ornate_splint_leggings.name=Орнаментовані пластинчасті поножі з %1$s
+item.ornate_splint_boots.name=Орнаментовані пластинчасті чоботи з %1$s
 
-item.ornate_plate_helmet.name=Орнаментований %1$s армет
-item.ornate_plate_chestplate.name=Орнаментовані %1$s лати
-item.ornate_plate_leggings.name=Орнаментовані %1$s грівниці
-item.ornate_plate_boots.name=Орнаментований %1$s сабатони
+item.ornate_plate_helmet.name=Орнаментований армет з %1$s
+item.ornate_plate_chestplate.name=Орнаментовані лати з %1$s
+item.ornate_plate_leggings.name=Орнаментовані грівниці з %1$s
+item.ornate_plate_boots.name=Орнаментований сабатони з %1$s
 
-item.ornate_bow.name=Орнаментований %1$s лук
+item.ornate_bow.name=Орнаментований лук з %1$s
 
 
 
@@ -1314,129 +1314,129 @@ knowledge.getting_started.11=Спробуйте зараз попрацюват�
 knowledge.getting_started.12=$hРозбірка-$r^Якщо у вас мало корисних ресурсів і/або багато невикористаного сміття; запустіть станцію розбірки.^Цей маленький портативний блок дозволяє отримувати компоненти з об’єктів.
 knowledge.getting_started.13=Щоб використовувати: просто розмістіть блок і киньте на нього предмет, а потім клацніть по блоку правою кнопкою миші. (Можна розібрати лише предмети з базової гри та предмети Minefantasy.^Це майже основи, решту вам належить дізнатися...
 
-knowledge.dust=Grinding Powders
-knowledge.dust.desc=Technique for Dusts
-knowledge.dust.1=You may be able to hold a pinch or so of dust in your hand, but there's no control for how much, or how to keep it from spilling. Clay Pots are used for carrying dusts and powders for many purposes, most dust is made with the quern, while very few recipe may use other tools. Here are some examples:
-knowledge.dust.quern=To use the quern: all you need is to put clay pots in the middle, the correct item in the top, then click the top of the block.
-knowledge.dust.icing=Some food based recipes (like icing) are made from multiple ingredients and mixed.
+knowledge.dust=Подрібнення пилу
+knowledge.dust.desc=Техніка для пилу
+knowledge.dust.1=Ви можете тримати щіпку пилу в руці, але не можете контролювати, скільки пилу або як уберегти його від розсипання. Глиняні горщики використовуються для перенесення пилу та порошків для багатьох цілей, більшість пилу виготовляється за допомогою ручного млина, тоді як дуже мало рецептів можуть використовувати інші інструменти. Ось кілька прикладів:
+knowledge.dust.quern=Щоб використовувати ручний млин: все, що вам потрібно, це поставити глиняні горщики в середину, правильний предмет угорі, а потім натиснути по верхній частині блоку.
+knowledge.dust.icing=Деякі рецепти їжі (наприклад, глазур) готуються з кількох інгредієнтів і змішуються.
 
-knowledge.research=Research Book
-knowledge.research.desc=Keeping track
+knowledge.research=Книга досліджень
+knowledge.research.desc=Ведення обліку
 
-knowledge.research.1=There is a lot out there in the world to discover, all you have to do is find it. Research is a method of finding what's hidden within the world and using it to better your own works. Most of what you can do or make must be researched, and requires both skill and study to uncover its secrets.^To begin research, you enter without knowing what you may find. A research table must be crafted, and used to study items. Depending on your skill and what items you study may unlock some clues to new knowledge.
+knowledge.research.1=У світі є багато чого для дослідження, все, що вам потрібно зробити, це знайти. Дослідження — це метод пошуку того, що приховано у світі, і використання цього для покращення власних робіт. Більшість того, що ви можете зробити або виготовити, потрібно досліджувати, і для розкриття секретів потрібні як навички, так і навчання.^Щоб розпочати дослідження, ви починаєте, не знаючи, що можете знайти. Стіл дослідження необхідно створити та використовувати для вивчення предметів. Залежно від ваших навичок і предметів, які ви вивчаєте, ви можете відкрити деякі ключі до нових знань.
 
 # /Table recipe
 
-knowledge.research.2=With a research table placed, you are able to study items to uncover new knowledge. You require a certain amount of skill to unlock information, assuming your skill is high enough and you have appropriate prior knowledge, you may gain a clue to your research. Once you get all the clues for research will it be unlocked, you can view your progress with the research book.^If you lack the skill to discover anything new, keep the item and return later on when you discover and learn more.
+knowledge.research.2=Розмістивши стіл дослідження, ви можете вивчати предмети, щоб отримати нові знання. Вам потрібен певний рівень навичок, щоб розблокувати інформацію, припускаючи, що ваші навички достатньо високі та у вас є відповідні попередні знання, ви можете отримати ключ до свого дослідження. Коли ви отримаєте всі підказки для дослідження, його буде розблоковано, ви зможете переглянути свій прогрес у книзі досліджень.^Якщо вам не вистачає навичок відкривати щось нове, збережіть предмет і вивчіть його пізніше, коли знайдете та дізнаєтеся більше.
 
-knowledge.carpenter=Carpenter Bench
-knowledge.carpenter.desc=Simple crafting
-knowledge.carpenter.1=The carpenter bench is used for mostly wood related recipes, but should be built early on anyway. This bench can use a variety of tools such as bare hands(no item), hammers, and knives just to name a few. To use this, just assemble the recipe and click the block slowly with the proper tool.
+knowledge.carpenter=Стіл столяра
+knowledge.carpenter.desc=Просте виготовлення
+knowledge.carpenter.1=Стіл столяра використовується в основному для рецептів, пов’язаних з деревиною, але все одно його слід будувати на початку. На цьому столі можна використовувати різноманітні інструменти, наприклад, голі руки (без предметів), молотки та ножі. Щоб скористатися цим, просто зберіть рецепт і повільно натискайте по блокові відповідним інструментом.
 
-knowledge.salvage=Salvage Station
-knowledge.salvage.desc=Always Recycle
-knowledge.salvage.1=There may be some advantages for being a hoarder in a harsh land, but there's really no use for all that unused furniture... or those inferior tools.^Salvaging stations can recover raw materials from many created items (Either Vanilla or MF).
-knowledge.salvage.2=To use: Place the block and drop an item on top of it, right-click the block to salvage, there's a chance of recovering everything but it's not guaranteed. Damaged items have lower recovery rates.
-knowledge.salvage.3=If you use a hammer on the block, there's a higher chance for returning items.^Saws are even more effective.
+knowledge.salvage=Станція розбірки
+knowledge.salvage.desc=Завжди переробляйте
+knowledge.salvage.1=Бути накопичувачем у суворій країні може мати певні переваги, але насправді немає користі від усіх цих невикористаних меблів... або тих інструментів поганої якості.^Станції розбірки можуть перероблювати сировину з багатьох створених предметів (або Ванільні, або MF).
+knowledge.salvage.2=Щоб використати: помістіть блок і киньте на нього предмет, написніть по блокові правою кнопкою миші, щоб розібрати предмет, є шанс отримати всі предмети з яких складається предмет, але це не гарантовано. Пошкоджені елементи мають нижчий рівень відновлення.
+knowledge.salvage.3=Якщо ви використовуєте молоток на блоці, є більший шанс повернути предмети.^Пили ще ефективніші.
 
-knowledge.talisman=Knowledge Talismans
-knowledge.talisman.desc=Easy reading
-knowledge.talisman.1=Figuring out the essentials of how something works can be difficult. Normally: Using the research table takes a lot of time and effort to get what you want. Talismans can speed up this process when right-clicked on a table.
-knowledge.talisman.2=Greater talismans are rare and hardly used. These work like normal talismans only have infinite uses. You can also make books from them to max any skill.
+knowledge.talisman=Талісмани знань
+knowledge.talisman.desc=Легке читання
+knowledge.talisman.1=З’ясувати основні принципи роботи може бути важко. Зазвичай: використання столу дослідження вимагає багато часу та зусиль, щоб отримати бажане. Талісмани можуть прискорити цей процес, якщо натиснути по столу правою кнопкою миші.
+knowledge.talisman.2=Великі талісмани рідкісні і майже не використовуються. Вони працюють як звичайні талісмани, але мають необмежене використання. Ви також можете створювати з них книги, щоб розвинути будь-які навички до максимуму.
 
-knowledge.commodities=Commodities
-knowledge.commodities.desc=Useful Items
-knowledge.commodities.1=Commidities are the lifeblood of craft, each of these items are common and highly valued for their many uses. Most commodities are worth holding on to for later use.
+knowledge.commodities=Матеріали
+knowledge.commodities.desc=Корисні предмети
+knowledge.commodities.1=Матеріали є кровоносною речовиною ремесла, кожен з цих предметів є поширеним і високо цінується за своїми багатьма використаннями. Більшість матеріалів варто зберігати для подальшого використання.
 
-knowledge.commodities.plank=Timber planks are nice solid pieces of wood, a common building commodity of all trades.^Timber can be broken down from a variety of wood, each providing different traits of quality.
+knowledge.commodities.plank=Дерев’яні дошки — це гарні тверді шматки деревини, звичайний будівельний матеріал для всіх професій.^Деревину можна розділити на різні види деревини, кожна з яких має різні якості.
 
-knowledge.commodities.refinedplank=Some timber can be refined with a simple mixture, hardening its finish. Refined timber will be used for more advanced works. Only tier 1 woods can be used.
+knowledge.commodities.refinedplank=Деяку деревину можна обробити простою сумішшю, зміцнивши її покриття. Для більш складних робіт буде використовуватися оброблена деревина. Для її створення можна використовувати лише деревину 1 рівня.
 
-knowledge.commodities.flux=Flux is commonly used in refining metals. Standard flux can be used in devices such as blast furnaces for refining ingots. Strong flux is used in advanced alloys.
+knowledge.commodities.flux=Флюс зазвичай використовується для очищення металів. Стандартний флюс можна використовувати в таких пристроях, як доменні печі для очищення злитків. Сильний флюс використовується в покращених сплавах.
 
-knowledge.commodities.hunks=For the smaller creations, hunks are used. You can turn bars into hunks with the application of flux.
+knowledge.commodities.hunks=Для невеликих творів використовуються шматочки металу. Ви можете перетворити бруски в шматки металу за допомогою флюсу.
 
-knowledge.commodities.nail=Nails are basic items used in woodworking. They can be made from Copper, Tin, Bronze, Iron or Steel. (This doesn't affect quality, just amount made)
+knowledge.commodities.nail=Цвяхи є основними предметами, які використовуються в деревообробці. Вони можуть бути зроблені з міді, олова, бронзи, заліза або сталі. (Це не впливає на якість, лише на кількість зробленого)
 
-knowledge.commodities.rivet=Rivets are similar to nails, these are used in metalworking. They can be made from Copper, Tin, Bronze, Iron or Steel. (This doesn't affect quality, just amount made)
+knowledge.commodities.rivet=Заклепки схожі на цвяхи, їх використовують у металообробці. Вони можуть бути зроблені з міді, олова, бронзи, заліза або сталі. (Це не впливає на якість, лише на кількість зробленого)
 
-knowledge.commodities.leatherstrip=Leather strips are useful mainly in tool crafting.
+knowledge.commodities.leatherstrip=Шкіряні стрічки використовуються в основному для виготовлення інструментів.
 
-knowledge.commodities.thread=Thread is used in sewing recipes. Thread can be turned into string
+knowledge.commodities.thread=Нитка використовується в швейних рецептах. Нитку можна перетворити на нитку(з ванільного Minecraft)
 
-knowledge.commodities.bucket=Buckets can be made from metal, higher tiers make more.
+knowledge.commodities.bucket=Відра можна зробити з металу, більш високих рівень металів можна зробити більше відер.
 
-knowledge.plants=Biological Gen
-knowledge.plants.desc=Organic resources
-knowledge.plants.1=A common sight on the surface is a variety of tree and plant life that can prove valuable for the right purposes.^Here are the plants found on the surface that can provide food and ingredients when needed.
-knowledge.plants.2=Trees provide different types of wood, some better for certain purposes than others. This is a list of the trees found in the world.
-knowledge.yew.1=Yew trees can be found within many forests, sparsely spread, standing alone. The properties of yew are superior than common wood, but are specifically effective in the creation of bows.
+knowledge.plants=Біологічна генерація
+knowledge.plants.desc=Органічні ресурси
+knowledge.plants.1=Звичайне видовище на поверхні – різноманітність дерев і рослин, які можуть виявитися цінними для правильних цілей.^Ось рослини, знайдені на поверхні, можуть забезпечити їжею та інгредієнтами, коли це необхідно.
+knowledge.plants.2=Дерева забезпечують різні типи деревини, деякі кращі для певних цілей, ніж інші. Це список дерев, які зустрічаються у світі.
+knowledge.yew.1=Дерева тиса можна зустріти в багатьох лісах, рідко розкидані, стоячи окремо. За властивостями тис перевершує звичайну деревину, але особливо ефективний при створенні луків.
 
-knowledge.ironbark.1=Ironbark is a recognisable tree that can be found in forests occasionally. The rough grey bark and orange inners make this tree stand out above the rest. Ironbark is a strong wood excellent for creating durable items.
+knowledge.ironbark.1=Залізне дерево — це впізнаване дерево, яке іноді можна зустріти в лісах. Шорстка сіра кора та помаранчева внутрішня частина виділяють це дерево над іншими. Залізне дерево - міцна деревина, яка чудово підходить для створення довговічних виробів.
 
-knowledge.ebony.1=Ebony trees are huge and rare. These are found in moderate regions and provide extremely strong timber. Ebony trees are recognised by their size and dark brown to black wood. Ebony trees produce the strongest wood available.
+knowledge.ebony.1=Чорні дерева величезні і рідкісні. Вони зустрічаються в помірних регіонах і забезпечують надзвичайно міцну деревину. Чорне дерево розпізнають за розміром і деревиною від темно-коричневого до чорного. Чорне дерево дає найміцнішу деревину.
 
-knowledge.berry=Berries
-knowledge.berry.desc=Nature's snack
-knowledge.berry.1=Berries generate throughout the world if the temperature and rainfall is right. These are a common sight in forests.^Juicy(purple) berries are less common drops, and cure poison.^Berry Bushes can only be harvested with shears or silk touch.
+knowledge.berry=Ягоди
+knowledge.berry.desc=Природна закуска
+knowledge.berry.1=Ягоди вирощують по всьому світу, якщо температура й дощі належні. Це звичайне явище в лісах.^Соковиті (фіолетові) ягоди рідше відпадають, вони лікують від отрути.^Ягідні кущі можна збирати лише ножицями або шовком.
 
-knowledge.ores=Geological Gen
-knowledge.ores.desc=Earthed resources
-knowledge.ores.1=There is a small range of ores that generate in the world. Each of these can be smelted into ingots in one way or another.
-knowledge.ores.copper=Copper ore is a common occurrence between layers 48-96. It can easily be smelted into ingots and turned into tools.^Copper can also be used to make bronze
-knowledge.ores.tin=Tin is about half as common as copper but can be found in the same levels (48-96).^Tin is smelted into ingots and is used with copper to make bronze.
-knowledge.ores.silver=Silver is found in the same areas as gold from layers <32. It's not very useful early on but more uses may be discovered.
-knowledge.ores.wolframite=Wolframite is a rare substance, used for high-tech engineering purposes. It can be found in layers <16 in single block veins.
-knowledge.ores.mythic=Little is known about this "Mythic ore" only that it is somewhat rare and found near bedrock. This strange ore seems to emit tingling sounds, for what reason is unknown...
+knowledge.ores=Геологічна генерація
+knowledge.ores.desc=Земні ресурси
+knowledge.ores.1=У світі генерується невелика різноманітність руд. Кожну з них можна тим чи іншим способом переплавити в злитки.
+knowledge.ores.copper=Мідна руда є звичайним явищем між висотами 48-96. Її можна легко переплавити в злитки та перетворити на інструменти.^Мідь також можна використовувати для виготовлення бронзи
+knowledge.ores.tin=Олово приблизно вдвічі менш поширене, ніж мідь, але його можна знайти на тих самих висотах (48-96).^Олово виплавляють у злитки та використовують разом із міддю для виготовлення бронзи.
+knowledge.ores.silver=Срібло знайдено в тих же областях, що й золото з висоти нижче 32. Це не дуже корисно на ранній стадії, але можуть бути виявлені інші способи використання.
+knowledge.ores.wolframite=Вольфраміт – рідкісна речовина, яка використовується для цілей високотехнологічної техніки. Його можна знайти на висоті нижче 16 в окремих блокових жилах.
+knowledge.ores.mythic=Мало що відомо про цю «міфічну руду», лише те, що вона дещо рідкісна й знайдена біля корінних порід. Здається, ця дивна руда видає легенький дзвін, з якої причини невідомо...
 
 knowledge.ores.2=Minerals also can be found generating within the world. Unlike ores: these can't be smelted into ingots, but have other uses instead.
-knowledge.minerals.clay=Just as well as sand, clay can be found within dirt. Dirt-bearing clay can be found underneath grass, grass cannot grow on it either so it can be easy to find in hills.
-knowledge.minerals.kaolinite=Kaolinite has a rather specific use. Mixed with clay: this mineral can beef up the strength of bricks.^It is found near the surface at layers 48-72 and although it's uncommon, comes in large vein sizes.
-knowledge.minerals.limestone=A common source of flux. Limestone generates in large hunks throughout the world.
-knowledge.minerals.borax=This is a relatively rare substance, Borax is the best source of strong flux: which is needed for powerful alloys.^This is a rare find but can be found at layers 48-96.
-knowledge.minerals.nitre=A common occurrence within some cave walls in layers 16-64. Nitre is used in explosive creation.
-knowledge.minerals.sulfur=Sulfur is found deep underground near lava at layers <16. It can be used to make explosives.
+knowledge.minerals.clay=Так само, як і пісок, глину можна знайти в грунті. Глину, що містить грунт, можна знайти під травою, трава на ній також не може рости, тому її легко знайти на пагорбах.
+knowledge.minerals.kaolinite=Каолініт має досить специфічне застосування. У суміші з глиною: цей мінерал може підвищити міцність цегли.^Він знаходиться біля поверхні на висоті 48-72 і, хоча це рідко, має великі жилки.
+knowledge.minerals.limestone=Звичайне джерело флюсу. Вапняк утворюється великими шматками по всьому світу.
+knowledge.minerals.borax=Це відносно рідкісна речовина, бура є найкращим джерелом сильного флюсу: який необхідний для міцних сплавів.^Це рідкісна знахідка, але її можна знайти на висоті 48-96.
+knowledge.minerals.nitre=Звичайне явище в стінах деяких печер на висотах 16-64. Селітру використовують у створенні вибухівки.
+knowledge.minerals.sulfur=Сірка знаходиться глибоко під землею поблизу лави на висоті нижче 16. Його можна використовувати для виготовлення вибухівки.
 
-knowledge.chimney=Smoke and Chimneys
-knowledge.chimney.desc=What greenhouse gasses?
+knowledge.chimney=Дим і димоходи
+knowledge.chimney.desc=Які парникові гази?
 
-knowledge.chimney.1=It is a well-known fact that burning fuel produces smoke. You will also need to understand that breathing smoke is not wise.^But if you're reading this you probably already figured that out after attempting to smoke it like a pipe.^In any case: Chimneys can be used to redirect smoke away from your precious breathing air and into the sky! Leave it for someone else a few centuries later to complain about.
+knowledge.chimney.1=Загальновідомий факт, що при спалюванні палива утворюється дим. Вам також потрібно розуміти, що вдихати дим нерозумно.^Але якщо ви читаєте це, ви, ймовірно, вже зрозуміли це після спроби викурити дим, як люльку.^У будь-якому випадку: димарі можна використовувати для перенаправлення диму від вашого дорогоцінного повітря в небо! Залиште це комусь іншому, щоб він скаржитися через кілька століть.
 
-knowledge.chimney.2=Chimneys can be widened by building a layer of stone around them, these can both increase the strength and capacity while also being able to seal gaps between ceilings and floors.
+knowledge.chimney.2=Димоходи можна розширити, побудувавши навколо них шар каменю, це може збільшити міцність і пропускну здатність, а також закрити щілини між стелею та підлогою.
 
-knowledge.chimney.3=Extractor chimneys can also be used on some devices (forge and crucible mainly) to absorb smoke indirectly.^"Indirectly" of course just means 1 block adjacent to where it normally would go.
+knowledge.chimney.3=Витяжні димові труби також можна використовувати на деяких пристроях (головним чином у кузні та тиглі) для непрямого поглинання диму.^ «Непряме», звичайно, означає лише 1 блок поруч із тим місцем, куди він зазвичай йде.
 
-knowledge.chimney.pipe=Smoke pipes allow the transport of gas between chimney systems. Each pipe itself cannot release smoke and must connect to a regular chimney at some point, these can only accept smoke from chimneys directly under.
+knowledge.chimney.pipe=Димові труби дозволяють транспортувати газ між системами димоходів. Кожна труба сама по собі не може випускати дим і повинна в певний момент підключитися до звичайного димоходу, вони можуть приймати дим лише з димоходів безпосередньо під ними.
 
-knowledge.chimney.pipe.2=Best use includes a pipe system starting on the top of a starting chimney block, and leading outside with a second chimney on top.
+knowledge.chimney.pipe.2=Найкраще використання передбачає систему труб, яка починається у верхній частині початкового блоку димоходу та веде назовні з другим димарем угорі.
 
-knowledge.tanning=Tanning
-knowledge.tanning.desc=Dead animal working
+knowledge.tanning=Дублення
+knowledge.tanning.desc=Робота над мертвими тваринами
 
-knowledge.tanning.1=Leather is a useful resource to have. Nearly any tool, weapon or armour uses leather.^Tanning is a simple method of cleaning up raw hide into a usable commodity.^To start off: You will need a tanning rack.
+knowledge.tanning.1=Шкіра — корисний ресурс. Майже для будь-якого інструменту, зброї чи обладунків використовується шкіра.^Дублення — це простий спосіб очищення сирої шкіри в придатний для використання матеріал.^Для початку: вам знадобиться стійка для дублення.
 
-knowledge.tanning.2=To tan hide you first need to clean it. Either right-click the hide on water or put flux and hide on a crafting grid. When cleaned; right-click the tanning rack with hide to place it. then right-click with a knife steadily to prepare. For shabby tanning racks: there's a 1/10 chance to break the block.^A properly crafted tanning rack however does not break. It's recommended to craft these when their affordable.
+knowledge.tanning.2=Щоб вичинити шкіру, її спочатку потрібно очистити. Або клацніть правою кнопкою миші шкуру на воді, або покладіть флюс і шкіра на сітку крафта. При очищенні; натисніть правою кнопкою миші по стійці для дублення зі шкірою в ній, щоб розмістити її. потім натисніть праву клавішу миші з ножем, щоб обробити шкіру. Для пошарпаних стійок для дублення: шанс поломки блоку становить 1/10.^ Правильно виготовлена стійка для дублення не ламається. Рекомендується створювати їх, коли вони доступні.
 
-knowledge.stamina=Stamina Mechanics
-knowledge.stamina.desc=Keep fit
+knowledge.stamina=Механіка витривалості
+knowledge.stamina.desc=Підтримувати себе у формі
 
-knowledge.stamina.1=It's not so easy to be running and mining all day you know. Stamina mechanics keep track of such.^Stamina (Represented as the green bar on the screen) decays when performing a variety of actions. It regenerates naturally and its speed is modified by equipped items. MF foods can modify stamina variables and sweet food can give regeneration. It's wise to consider the effects of some heavier items and how they may fit with your play style.
+knowledge.stamina.1=Ви знаєте, це не так легко бігати та копати цілий день. Механіка витривалості відстежує це.^Витривалість (представлена зеленою смугою на екрані) зменшується під час виконання різноманітних дій. Він відновлюється природним шляхом, а його швидкість змінюється спорядженими предметами. MF-їжа може змінювати параметри витривалості, а солодка їжа може сприяти регенерації. Доцільно враховуйте вплив деяких більш важких предметів і те, як вони можуть підходити до вашого стилю гри.
 
-knowledge.combat=Combat mechanics
-knowledge.combat.desc=More than one way to slay a skeleton
+knowledge.combat=Бойові механіки
+knowledge.combat.desc=Більш ніж один спосіб вбити скелета
 
-knowledge.combat.1=You may have noticed that constantly swinging aimlessly at monsters without a care in the world has lost it's effect some times. Combat (being a thing that you just have to deal with some times) has been modified to incorporate more complicated techniques.^Not only that but monsters can also use these meaning a zombie with a weapon is more dangerous than ever, as they can block attacks, power attack, and use other abilities mentioned.
+knowledge.combat.1=Можливо, ви помітили, що безцільне розмахування зброєю перед монстрами іноді втрачає свій ефект. Бій (це те, з чим вам просто доводиться мати справу іноді) було змінено, щоб включити складніші прийоми.^Мало того, монстри також можуть використовувати їх, тобто зомбі зі зброєю небезпечніший, ніж будь-коли, оскільки вони можуть блокувати атаки, силові атаки та використовувати інші згадані здібності.
 
-knowledge.parry.info=$hParrying and Blocking$r^When holding right-click on most weapons, you block, simple right? Well now: blocking is much more effective. When you block an attack from straight-up, you immediately reduce(and can remove) the damage of the hit, blades are best at this while hafted weapons (like axes and blunt) take damage based on the hit.^It is recommended to block attacks rather than try take them, this technique can save lives. Attacking directly after a parry does reduce damage however.
+knowledge.parry.info=$hПарирування та блокування$r^Утримуючи праву кнопку миші з більшістю видів зброї, ви блокуєте, просто так? Ну а тепер: блокування набагато ефективніше. Коли ви блокуєте пряму атаку, ви негайно зменшуєте (і можете усунути) шкоду від удару, леза найкраще справляються з цим, тоді як зброя з руків’ям (як-от сокири та тупа) отримує шкоду залежно від удару.^Рекомендується блокувати атаки, а не намагайтеся їх прийняти, ця техніка може врятувати життя. Однак атака безпосередньо після парирування зменшує шкоду.
 
 
-knowledge.advanced_parry.info=$hParrying abilities$r^When a parry succeeds: if you're holding shift, you will lunge forward, and even past an attacker, throwing them your way. This consumes stamina but timed right, can change the battlefield to your favor. It is also possible to do this while jumping.
+knowledge.advanced_parry.info=$hЗдібності парирування$r^Коли парирування вдається: якщо ви тримаєте шифт, ви кинетеся вперед і навіть повз нападника, кидаючи його на свій бік. Це споживає витривалість, але при правильному розкладі може змінити поле бою на вашу користь. Також це можливо робити під час стрибків.
 
-knowledge.power_attack.info=$hPower attacks$r^If you hold sneak and attack while falling down, you will attempt a power attack. A power attack cost stamina, but when it succeeds will double damage and bypass through a blocking target. This can be interrupted if attacked just before the attempt.
+knowledge.power_attack.info=$hСилові атаки$r^Якщо ви утримуєте шифт й атакуєте під час падіння, ви зробите силову атаку. Силова атака коштує витривалості, але коли вона вдається, вона подвоює шкоду та обходить блокуючу ціль. Це можна перервати, якщо атакувати безпосередньо перед спробою.
 
-knowledge.dodge.info=$hDodge$r^In many situations, it's better to avoid a hit all together. If you jump to the sides or back while blocking, you will leap quickly. This uses stamina and cannot be done in heavy armour.
+knowledge.dodge.info=$hУхиляння$r^У багатьох ситуаціях краще уникати всіх ударів. Якщо ви стрибатимете в сторони або назад під час блокування, ви стрибатимете швидко. Це використовує витривалість і не може бути виконано у важкій броні.
 
-knowledge.armour.info=$hArmour Selection$r^There are three main types of armour Light, Medium and Heavy. If you rely more on avoidance and skill, use light, if you want more protection, rely on heavy, for a mix of both, use medium.
+knowledge.armour.info=$hВибір броні$r^Існує три основних типи броні: легка, середня і важка. Якщо ви більше покладаєтеся на уникнення та вміння, використовуйте легку, якщо ви хочете більше захисту, покладайтеся на важку, щоб поєднати обидва, використовуйте середню.
 
 knowledge.blade.info=
 knowledge.fastblade.info=
@@ -1444,34 +1444,34 @@ knowledge.axe.info=
 knowledge.blunt.info=
 knowledge.polearms.info=
 
-knowledge.bar=Metal Bar
-knowledge.bar.desc=Standardised shaping
-knowledge.bar.1=An ingot may be used for your standard crafting and trading needs but their too thick for easy forging. Bars are produced from ingots to create a standardised, easy to reforge commodity, allowing easy setup and production of items. Bars are used in artisanry in particular over ingots for this reason.^A bar can be reconverted to an ingot with a similar method.
+knowledge.bar=Металевий пруток
+knowledge.bar.desc=Стандартизоване формування
+knowledge.bar.1=Злиток можна використовувати для стандартних потреб ремесла та торгівлі, але він занадто товстий для легкого кування. Прутки виготовляються зі злитків для створення стандартизованого матеріалу, який легко перековувати, що дозволяє легко налаштовувати та виготовляти елементи. З цієї причини прутки використовуються в ремісничому виробництві, зокрема над злитками.^Пруток можна перетворити на злиток подібним методом.
 
-knowledge.smelt_copper=Copper Smithing
-knowledge.smelt_copper.desc=Tier %1$s, Common material
-knowledge.smelt_copper.1=The path of metalworking is a long and difficult one to learn. Copper is an easily workable and risk-free material.^It's still a piece of junk though, and is unable to make advanced tools, heavy weapons or heavy armour. But it's your piece of junk!
+knowledge.smelt_copper=Кування міді
+knowledge.smelt_copper.desc=Звичайний матеріал %1$s рівня
+knowledge.smelt_copper.1=Шлях металообробки довгий і важкий для вивчення. Мідь — це легкооброблюваний і безпечний матеріал.^Це все ще шматок сміття, з якого не можна виготовляти вдосконалені інструменти, важку зброю чи важку броню. Але це ваш мотлох!
 
-knowledge.smelt_bronze=Bronze Smithing
-knowledge.smelt_bronze.desc=Tier %1$s, Common material
-knowledge.smelt_bronze.1=With further refinement; both tin and copper are able to create an alloy greater than the sum of their parts. ^The applications of this material may be appreciated in later work.
+knowledge.smelt_bronze=Кування бронзт
+knowledge.smelt_bronze.desc=Звичайний матеріал %1$s рівня
+knowledge.smelt_bronze.1=З подальшим доопрацюванням; як олово, так і мідь здатні створити сплав, більший, ніж сума їхніх частин. ^Застосування цього матеріалу можна оцінити в подальшій роботі.
 
-knowledge.smelt_iron=Iron Smithing
-knowledge.smelt_iron.desc=Tier %1$s, Common material
-knowledge.smelt_iron.1=After some study on local rock formations, it appears rich levels of iron ore can be found. With correct refinement, the metal can be separated from the stone and formed into an ingot.^Iron is stronger than bronze and far more common, allowing for a low-cost and practical material.
-knowledge.smelt_iron.2=Smelting iron into workable ingots isn't too difficult, but a certain level of skill is used to work it into a decent shape. You have refined some smithing techniques to enable proper construction of iron tools.
+knowledge.smelt_iron=Кування заліза
+knowledge.smelt_iron.desc=Звичайний матеріал %1$s рівня
+knowledge.smelt_iron.1=Після деяких досліджень місцевих гірських утворень виявилося, що тут можна знайти значні запаси залізної руди. За умови правильного очищення метал можна відокремити від каменю та сформувати в злиток.^Залізо міцніше за бронзу та набагато поширеніше, тому є недорогим і практичним матеріалом.
+knowledge.smelt_iron.2=Виплавити залізо в придатні для роботи злитки не надто складно, але потрібно мати певний рівень майстерності, щоб привести його в пристойну форму. Ви удосконалили деякі ковальські техніки, щоб уможливити правильну конструкцію залізних інструментів.
 
-knowledge.smelt_pig_iron=Pig Iron
-knowledge.smelt_pig_iron.desc=Iron preparation
-knowledge.smelt_pig_iron.1=Natural iron is full of impurities and defects and proper refining of it is crucial to create a decent alloy. The blast furnace has been developed to achieve this. Iron ore can be refined with a particular mixture containing flux. Upon heating: the furnace will be able to draw more impurities away from the ore than other methods, this will yield a purer form of iron.^Pig iron, the product of this process is very brittle however, and further refinement is needed to make any use of it.
+knowledge.smelt_pig_iron=Чавун
+knowledge.smelt_pig_iron.desc=Підготовлене залізо
+knowledge.smelt_pig_iron.1=Природне залізо сповнене домішок і дефектів, тому його належне очищення має вирішальне значення для створення гідного сплаву. Для цього була розроблена доменна піч. Залізну руду можна очищати за допомогою спеціальної суміші, що містить флюс. Під час нагрівання: піч зможе відтягнути більше домішок із руди, ніж інші методи, це дасть чистішу форму заліза.^Чавун, продукт цього процесу, однак, дуже крихкий, і для отримання чогось кращого, потрібне подальше очищення.
 
-knowledge.smelt_steel=Steel Smithing
-knowledge.smelt_steel.desc=Tier %1$s, Common material
-knowledge.smelt_steel.1=After taking a look at the pig iron, it appears you may have found the problem behind its brittle nature. A simple method of heating and re-forging these ingots will be able to soften the shape, and increase flexibility.
+knowledge.smelt_steel=Кування сталі
+knowledge.smelt_steel.desc=Звичайний матеріал %1$s рівня
+knowledge.smelt_steel.1=Дослідивши чавун, здається, ви могли виявити проблему його крихкості. Простий метод нагрівання та повторного кування цих злитків зможе пом’якшити форму та збільшити гнучкість.
 
-knowledge.smelt_encrusted=Encrusted Smithing
-knowledge.smelt_encrusted.desc=Tier %1$s, Exotic material
-knowledge.smelt_encrusted.1=For what appeared to be a stupid idea at first may prove rather useful. By embedding tiny shards into steel it is possible to improve both the resistance and sharpness of the material.^Encrusted diamond ingots are far superior than regular steel and provide excellent perks for their cost.
+knowledge.smelt_encrusted=Інкрустоване кування
+knowledge.smelt_encrusted.desc=Екзотичний матеріал %1$s рівня
+knowledge.smelt_encrusted.1=Ідея, яка спочатку здавалася дурною, може виявитися дуже корисною. Вставляючи крихітні осколки в сталь, можна підвищити як міцність, так і гостроту матеріалу.^Інкрустовані алмазні злитки значно перевершують звичайну сталь і забезпечують чудові переваги за свою вартість.
 
 knowledge.smelt_obsidian=Obsidian Smithing
 knowledge.smelt_obsidian.desc=Tier %1$s, Exotic material
