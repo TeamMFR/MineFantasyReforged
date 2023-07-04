@@ -266,6 +266,8 @@ tooltype.brush=Пензель
 tooltype.anvil=Ковадло
 tooltype.carpenter=Стіл столяра
 
+attribute.tool.digEfficiency.name=Модифікатор швидкості копання x%1$s
+
 attribute.weapon.penetrateArmor=Бронепробивність
 attribute.weapon.daze=Ошелешуючість
 attribute.weapon.extendedReach=Досяжність
