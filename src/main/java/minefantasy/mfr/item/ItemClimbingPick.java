@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
@@ -49,7 +50,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 	}
 
 	public static boolean tryPerformAbility(EntityPlayer user, float points) {
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
+		if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(user)) {
 			points *= StaminaBar.getClimbinbDecayModifier(user, true);
 			if (StaminaBar.isStaminaAvailable(user, points, true)) {
 				ItemWeaponMFR.applyFatigue(user, points);
@@ -145,7 +146,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 		RayTraceResult rayTraceResult = this.rayTrace(world, (EntityPlayer) player, true);
 
 		if (rayTraceResult == null) {
-			if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
+			if (!world.isRemote && ConfigStamina.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
 				player.stopActiveHand();
 			}
 			return;
@@ -174,7 +175,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 				}
 			}
 		}
-		if (!world.isRemote && StaminaBar.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
+		if (!world.isRemote && ConfigStamina.isSystemActive && !tryPerformAbility((EntityPlayer) player, cost)) {
 			player.stopActiveHand();
 		}
 	}
@@ -189,7 +190,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 		ItemStack item = user.getHeldItem(hand);
 		if (user.isHandActive())
 			return ActionResult.newResult(EnumActionResult.PASS, item);
-		if (StaminaBar.isSystemActive && !StaminaBar.isAnyStamina(user, true)) {
+		if (ConfigStamina.isSystemActive && !StaminaBar.isAnyStamina(user, true)) {
 			return ActionResult.newResult(EnumActionResult.PASS, item);
 		}
 

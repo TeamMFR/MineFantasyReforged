@@ -1,16 +1,13 @@
 package minefantasy.mfr.config;
 
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
-import minefantasy.mfr.tile.TileEntityRoast;
 
 public class ConfigHardcore extends ConfigurationBaseMF {
 	public static final String CATEGORY_CRAFTING = "1: HARDCORE CRAFTING";
 	public static final String CATEGORY_RESEARCH = "2: Research";
 	public static final String CATEGORY_FOOD = "3: Cooking and Hunting";
-	public static final String CATEGORY_MOB = "4: Monster Upgrades";
 	public static boolean HCCreduceIngots = true;
 	public static boolean HCChotBurn = true;
 	public static boolean HCCWeakItems = true;
@@ -26,14 +23,22 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 	public static boolean lessHunt;
 	public static boolean preventCook;
 	public static boolean preventCeramic;
-	public static boolean upgradeZombieWep;
-	public static float zombieWepChance;
-	public static boolean fastZombies;
-	public static boolean critLimp;
+	public static boolean enableOverheat = true;
 	public static int foodRepeatPenaltyLimit;
 
+	public ConfigHardcore(String name) {
+		super(name);
+	}
+
 	@Override
-	protected void loadConfig() {
+	protected void initializeCategories() {
+		config.addCustomCategoryComment(CATEGORY_CRAFTING, "Controls Hardcore crafting settings. (NO LONGER HANDLES MFR RECIPE DISABLING, SEE CRAFTING CONFIG");
+		config.addCustomCategoryComment(CATEGORY_RESEARCH, "Controls Research settings");
+		config.addCustomCategoryComment(CATEGORY_FOOD, "Controls Food and Hunting settings");
+	}
+
+	@Override
+	protected void initializeValues() {
 		HCCreduceIngots = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hardcore Ingots", true,
 				"Some Metals (Like iron, steel and direct ore smelts) Must be worked manually on an anvil rather than smelted. They may also cost more! Big furnace still works.").getString());
 		HCChotBurn = Boolean.parseBoolean(config.get(CATEGORY_CRAFTING, "Hot burns", true,
@@ -73,20 +78,9 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 				"Stop food from being cooked in a furnace").getString());
 		preventCeramic = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Prevent furnace ceramic", false,
 				"Stop ceramics from being cooked in a furnace").getString());
-		TileEntityRoast.enableOverheat = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Burn at high temperature", true,
+		enableOverheat = Boolean.parseBoolean(config.get(CATEGORY_FOOD, "Burn at high temperature", true,
 				"Cooking food on a stove or oven will automatically burn at high temperatures").getString());
 		foodRepeatPenaltyLimit = Integer.parseInt(config.get(CATEGORY_FOOD, "Food Repeat Penalty Limit", 3,
 				"How much of certain foods you can eat in a row before vomiting").getString());
-
-		upgradeZombieWep = Boolean.parseBoolean(config.get(CATEGORY_MOB, "Give Zombie Weapon", true,
-				"Zombies have a chance on spawning with forged iron weapons, It also controls some zombies having MF armour").getString());
-		zombieWepChance = Float.parseFloat(config.get(CATEGORY_MOB, "Zombie Weapon Spawn Chance Modifier", 1.0F,
-				"Chance for Zombies to have forged weapons, increased with difficulty").getString());
-		fastZombies = Boolean.parseBoolean(config.get(CATEGORY_MOB, "Speed up zombies", true,
-				"Speed up zombies (Sure it's not as real.. but it makes them a bit more dangerous)").getString());
-		critLimp = Boolean.parseBoolean(config.get(CATEGORY_MOB, "Critical Injury Limp", true,
-				"This means when you're badly wounded, you slow down and limp").getString());
-		CombatMechanics.swordSkeleton = Boolean.parseBoolean(
-				config.get(CATEGORY_MOB, "Skeleton Swords", true, "Some Skeletons use swords").getString());
 	}
 }

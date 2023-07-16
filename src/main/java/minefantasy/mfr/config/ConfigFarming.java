@@ -3,14 +3,20 @@ package minefantasy.mfr.config;
 import minefantasy.mfr.api.farming.FarmingHelper;
 
 public class ConfigFarming extends ConfigurationBaseMF {
-	public static final String CATEGORY_BONUS = "Bonuses";
 
 	public static final String CATEGORY_PENALTIES = "Penalties";
 
-	public static final String CATEGORY_MISC = "Other Features";
+	public ConfigFarming(String name) {
+		super(name);
+	}
 
 	@Override
-	protected void loadConfig() {
+	protected void initializeCategories() {
+		config.addCustomCategoryComment(CATEGORY_PENALTIES, "Controls farming penalties");
+	}
+
+	@Override
+	protected void initializeValues() {
 		FarmingHelper.isEnabled = Boolean.parseBoolean(
 				config.get("##Enable System##", "isEnabled", true, "This toggles the farming mechanics").getString());
 

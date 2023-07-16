@@ -1,6 +1,7 @@
 package minefantasy.mfr.entity.mob;
 
 import minefantasy.mfr.config.ConfigMobs;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.entity.EntityDragonBreath;
 import minefantasy.mfr.mechanics.StaminaBar;
 import net.minecraft.block.Block;
@@ -39,7 +40,7 @@ public class FrostBreath extends DragonBreath {
 	public void onHitEntity(Entity target, EntityDragonBreath instance) {
 		super.onHitEntity(target, instance);
 		if (target instanceof EntityLivingBase) {
-			if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity((EntityLivingBase) target)) {
+			if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity((EntityLivingBase) target)) {
 				StaminaBar.modifyStaminaValue((EntityLivingBase) target, -1F);
 			}
 			((EntityLivingBase) target).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));

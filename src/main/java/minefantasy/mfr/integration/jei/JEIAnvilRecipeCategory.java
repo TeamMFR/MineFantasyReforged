@@ -11,7 +11,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerAnvilOld;
 import minefantasy.mfr.recipe.ShapedAnvilRecipes;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -120,7 +120,7 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 	private static Collection<JEIAnvilRecipe> generateRecipeCategory1() {
 
 		List<JEIAnvilRecipe> recipes = new ArrayList<>();
-		List<ShapedAnvilRecipes> anvilRecipes = CraftingManagerAnvil.getInstance().recipes;
+		List<ShapedAnvilRecipes> anvilRecipes = CraftingManagerAnvilOld.getInstance().recipes;
 
 		for (ShapedAnvilRecipes anvilRecipe : anvilRecipes) {
 			recipes.add(new JEIAnvilRecipe(anvilRecipe));

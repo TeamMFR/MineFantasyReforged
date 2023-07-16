@@ -5,6 +5,7 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.tool.IScope;
+import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.container.ContainerAnvil;
@@ -93,7 +94,7 @@ public class MineFantasyHUD extends Gui {
 			} else {
 				renderAmmo(player);
 			}
-			if (StaminaBar.isSystemActive && mc.playerController.gameIsSurvivalOrAdventure() && !PowerArmour.isWearingCogwork(player)) {
+			if (ConfigStamina.isSystemActive && mc.playerController.gameIsSurvivalOrAdventure() && !PowerArmour.isWearingCogwork(player)) {
 				renderStaminaBar(player);
 			}
 			Entity highlight = getClickedEntity();
@@ -236,7 +237,7 @@ public class MineFantasyHUD extends Gui {
 		int xPosAR = orientationAR[0] + ConfigClient.AR_xPos;
 		int yPosAR = orientationAR[1] + ConfigClient.AR_yPos;
 		int y = 8;
-		if (ArmourCalculator.advancedDamageTypes) {
+		if (ConfigArmour.advancedDamageTypes) {
 			mc.fontRenderer.drawStringWithShadow(I18n.format("attribute.armour.protection"), xPosAR,
 					yPosAR, Color.WHITE.getRGB());
 			displayTraitValue(xPosAR, yPosAR + 8, 0, player, base);

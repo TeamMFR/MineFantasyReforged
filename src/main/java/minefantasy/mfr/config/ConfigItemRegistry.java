@@ -19,7 +19,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 	public static final String CATEGORY_ARMOUR = "Armour List";
 	public static final String CATEGORY_FARM = "Farming";
 	public static final String CATEGORY_TOOL = "Tools";
-	public static final String CATEGORY_WEPS = "Weapon Register";
+	public static final String CATEGORY_WEAPONS = "Weapon Register";
 	public static final String CATEGORY_FOOD = "Food Register";
 	public static String[] armourListAC = new String[0];
 	public static String[] hoeList = new String[0];
@@ -27,6 +27,10 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 	public static String[] customDamagerList = new String[0];
 	public static String[] customDamagerEntityList = new String[0];
 	public static String[] customFoodList = new String[0];
+
+	public ConfigItemRegistry(String name) {
+		super(name);
+	}
 
 	public static void readCustoms() {
 		MFRLogUtil.logDebug("Loading Custom Item Entries from config...");
@@ -251,7 +255,16 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 	}
 
 	@Override
-	protected void loadConfig() {
+	protected void initializeCategories() {
+		config.addCustomCategoryComment(CATEGORY_ARMOUR, "Handles Custom Armor Registrations");
+		config.addCustomCategoryComment(CATEGORY_WEAPONS, "Handles Custom Weapon Registrations");
+		config.addCustomCategoryComment(CATEGORY_TOOL, "Handles Custom Crafter Registrations");
+		config.addCustomCategoryComment(CATEGORY_FARM, "Handles Custom Hoe Registrations");
+		config.addCustomCategoryComment(CATEGORY_FOOD, "Handles Custom Food Registrations");
+	}
+
+	@Override
+	protected void initializeValues() {
 		// Weight
 
 		String ArmorRegistryDescription = "This will register items under a certain 'Design' calculating the variables itself.\n Each entry has it's own line:\n"
@@ -304,12 +317,12 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 				+ "EXAMPLE (for example... making a stick to piercing damage) \n" + "minecraft:stick|0|1.0|0 \n"
 				+ "The difference between the ratio is what determines damage 1|0 means 100% cutting damage, 3|1 means it's 3 cutting to 1 blunt (or 75%, 25%). use whatever numbers you need to make the ratio.";
 
-		customDamagerList = config.get(CATEGORY_WEPS, "Custom Damage Ratios", new String[0], weaponDamageDescription).getStringList();
+		customDamagerList = config.get(CATEGORY_WEAPONS, "Custom Damage Ratios", new String[0], weaponDamageDescription).getStringList();
 		Arrays.sort(customDamagerList);
 
 		String projectileEntityDamageDescription = "Similar method to 'Custom Damage Ratios' only with entities, This is for registering things like arrows, same format only with the entity registry name (usually modid:name)";
 
-		customDamagerEntityList = config.get(CATEGORY_WEPS, "Custom Entity Damage Ratios", new String[0], projectileEntityDamageDescription).getStringList();
+		customDamagerEntityList = config.get(CATEGORY_WEAPONS, "Custom Entity Damage Ratios", new String[0], projectileEntityDamageDescription).getStringList();
 		Arrays.sort(customDamagerEntityList);
 
 		//Foods

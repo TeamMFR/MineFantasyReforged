@@ -18,6 +18,7 @@ import minefantasy.mfr.api.weapon.ISpecialCombatMob;
 import minefantasy.mfr.api.weapon.ISpecialEffect;
 import minefantasy.mfr.api.weapon.IWeaponClass;
 import minefantasy.mfr.api.weapon.IWeightedWeapon;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityCogwork;
@@ -201,7 +202,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	public static boolean tryPerformAbility(EntityLivingBase user, float points, boolean flash, boolean armour, boolean weapon, boolean takePoints) {
-		if (user instanceof EntityPlayer && StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
+		if (user instanceof EntityPlayer && ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(user)) {
 			points *= StaminaBar.getBaseDecayModifier((EntityPlayer) user, armour, weapon);
 			if (StaminaBar.isStaminaAvailable(user, points, flash)) {
 				if (takePoints && !user.world.isRemote) {
@@ -220,13 +221,13 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	public static void applyFatigue(EntityLivingBase user, float points, float pause) {
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)) {
+		if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(user)) {
 			float stam = StaminaBar.getStaminaValue(user);
 			if (stam > 0) {
 				StaminaBar.modifyStaminaValue(user, -points);
 			}
 			if (user instanceof EntityPlayer) {
-				StaminaBar.setIdleTime(PlayerData.get((EntityPlayer) user), pause * StaminaBar.pauseModifier);
+				StaminaBar.setIdleTime(PlayerData.get((EntityPlayer) user), pause * ConfigStamina.pauseModifier);
 			}
 
 			if (!user.world.isRemote) {
@@ -530,7 +531,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		for (Entity hit : hurt) {
 			if (user.canEntityBeSeen(hit)) {
 				TacticalManager.knockbackEntity(hit, user, 1.5F, 0.2F);
-				if (StaminaBar.isSystemActive) {
+				if (ConfigStamina.isSystemActive) {
 					if (user instanceof EntityPlayer) {
 						StaminaBar.setIdleTime(PlayerData.get((EntityPlayer) user), 60);
 					}

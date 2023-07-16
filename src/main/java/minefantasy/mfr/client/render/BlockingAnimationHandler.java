@@ -1,7 +1,7 @@
 package minefantasy.mfr.client.render;
 
 import minefantasy.mfr.MFREventHandler;
-import minefantasy.mfr.config.ConfigWeapon;
+import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.util.PlayerUtils;
 import net.minecraft.client.Minecraft;
@@ -79,7 +79,7 @@ public class BlockingAnimationHandler {
                 }
             }
 
-            if (ConfigWeapon.shouldUseMfrCustomAnimations) {
+            if (ConfigClient.shouldUseMfrCustomAnimations) {
                 performCounterAttackAnimation(player, evt.getItemStack(), rightHanded);
             }
         }

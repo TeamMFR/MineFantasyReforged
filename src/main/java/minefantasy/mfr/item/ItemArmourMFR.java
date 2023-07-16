@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IElementalResistance;
+import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -273,7 +274,7 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 	public float getDamageRatingValue(EntityLivingBase user, ItemStack armour, DamageSource src) {
 		float damageRating = getProtectionRatio(armour) * scalePiece();
 
-		if (ArmourCalculator.advancedDamageTypes && !user.world.isRemote) {
+		if (ConfigArmour.advancedDamageTypes && !user.world.isRemote) {
 			damageRating = ArmourCalculator.adjustArmorClassForDamage(src, damageRating, getProtectiveTrait(armour, 0),
 					getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}

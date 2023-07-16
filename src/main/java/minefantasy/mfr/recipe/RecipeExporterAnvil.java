@@ -23,7 +23,7 @@ public class RecipeExporterAnvil {
 
 	public void exportRecipes() {
 
-		CraftingManagerAnvil instance = CraftingManagerAnvil.getInstance();
+		CraftingManagerAnvilOld instance = CraftingManagerAnvilOld.getInstance();
 		List recipes = instance.recipes;
 
 		Gson g = new GsonBuilder().setPrettyPrinting().create();
@@ -58,7 +58,7 @@ public class RecipeExporterAnvil {
 			try { output_hot = iAnvilRecipe.outputHot(); } catch (Exception e) {}
 
 			int recipe_hammer = 0;
-			try { recipe_hammer = iAnvilRecipe.getRecipeHammer(); } catch (Exception e) {}
+			try { recipe_hammer = iAnvilRecipe.getHammerTier(); } catch (Exception e) {}
 
 			int recipeWidth = ((ShapedAnvilRecipes) recipe).recipeWidth;
 			int recipeHeight = ((ShapedAnvilRecipes) recipe).recipeHeight;

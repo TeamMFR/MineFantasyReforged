@@ -4,6 +4,8 @@ import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.armour.IElementalResistance;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.api.weapon.ISpecialCombatMob;
+import minefantasy.mfr.config.ConfigArmour;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.entity.mob.EntityMinotaur;
@@ -35,9 +37,8 @@ import java.util.Random;
  * blocking
  */
 public class TacticalManager {
-	public static boolean shouldSlow = true;
-	public static float minWeightSpeed = 10F;
-	public static float arrowDeflectChance = 1.0F;
+
+
 	/**
 	 * Determines if you cant block with no stamina
 	 */
@@ -94,7 +95,7 @@ public class TacticalManager {
 
 	public static boolean canParry(DamageSource source, EntityLivingBase user, Entity entityHitting, ItemStack weapon) {
 		boolean autoParry = false;
-		if (shouldStaminaBlock && StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)
+		if (shouldStaminaBlock && ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(user)
 				&& !StaminaBar.isAnyStamina(user, false)) {
 			return false;
 		}
@@ -285,12 +286,12 @@ public class TacticalManager {
 		// Default speed is 100%
 		float totalSpeed = 100F;
 
-		if (shouldSlow && !isImmuneToWeight(player)) {
+		if (ConfigArmour.shouldSlow && !isImmuneToWeight(player)) {
 
 			totalSpeed += ArmourCalculator.getSpeedModForWeight(player);
 			// Limit the slowest speed to 1%
-			if (totalSpeed <= minWeightSpeed) {
-				totalSpeed = minWeightSpeed;
+			if (totalSpeed <= ConfigArmour.minWeightSpeed) {
+				totalSpeed = ConfigArmour.minWeightSpeed;
 			}
 		}
 		// apply speed mod

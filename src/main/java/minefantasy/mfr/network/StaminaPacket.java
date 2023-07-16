@@ -24,7 +24,7 @@ public class StaminaPacket extends PacketMF {
 
 	@Override
 	public void readFromStream(ByteBuf packet) {
-		value = new float[] {StaminaBar.getDefaultMax(player), StaminaBar.getDefaultMax(player), 0, 0F};
+		value = new float[] {StaminaBar.getDefaultMax(), StaminaBar.getDefaultMax(), 0, 0F};
 		value[0] = packet.readFloat();
 		value[1] = packet.readFloat();
 		value[2] = packet.readFloat();

@@ -92,7 +92,6 @@ public class CombatMechanics {
 	public static final float specialOrnateModifier = 1.5F;
 	private static final float power_attack_base = 25F;
 	private static final float parryFatigue = 5F;
-	public static boolean swordSkeleton = true;
 	private static final boolean debugParry = true;
 	private static final XSTRandom random = new XSTRandom();
 	protected static float jumpEvade_cost = 30;
@@ -107,7 +106,7 @@ public class CombatMechanics {
 		if (!canExecutePower(player)) {
 			return 0;
 		}
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(player)) {
+		if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(player)) {
 			float points = power_attack_base * (StaminaBar.getBaseDecayModifier(player, true, true) * 0.5F + 0.5F);
 			if (StaminaBar.isStaminaAvailable(player, points, properHit)) {
 				if (properHit) {
@@ -499,7 +498,7 @@ public class CombatMechanics {
 		}
 		if (user != null) {
 			// TODO: Stamina Traits
-			if (StaminaBar.isSystemActive) {
+			if (ConfigStamina.isSystemActive) {
 				if (StaminaBar.getStaminaValue(user) <= 0) {
 					damage *= ConfigStamina.weaponDrain;
 				}
@@ -616,12 +615,12 @@ public class CombatMechanics {
 				threshold = parry.getMaxDamageParry(user, weapon);
 				weaponFatigue = parry.getParryStaminaDecay(source, weapon);
 			}
-			if (StaminaBar.isSystemActive && !StaminaBar.isAnyStamina(user, false)) {
+			if (ConfigStamina.isSystemActive && !StaminaBar.isAnyStamina(user, false)) {
 				threshold /= 2;
 			}
 			threshold *= TacticalManager.getHighgroundModifier(user, entityHitting, 1.15F);
 
-			if (ArmourCalculator.advancedDamageTypes && !user.world.isRemote) {
+			if (ConfigArmour.advancedDamageTypes && !user.world.isRemote) {
 				threshold = ArmourCalculator.adjustArmorClassForDamage(source, threshold, 1.0F, 0.75F, 0.5F);
 			}
 
@@ -645,7 +644,7 @@ public class CombatMechanics {
 					}
 					ticks = ArmourCalculator.modifyParryCooldown(user, ticks);
 
-					if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user)
+					if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(user)
 							&& !StaminaBar.isAnyStamina(user, false)) {
 						ticks *= 3;
 					}
@@ -666,7 +665,7 @@ public class CombatMechanics {
 				}
 			}
 		}
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(user) && !StaminaBar.isAnyStamina(user, false)) {
+		if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(user) && !StaminaBar.isAnyStamina(user, false)) {
 			dam *= Math.max(1.0F, ConfigStamina.exhaustDamage);
 		}
 
@@ -889,7 +888,7 @@ public class CombatMechanics {
 	@SubscribeEvent
 	public static void jump(LivingJumpEvent event) {
 		if (event.getEntityLiving() instanceof EntityPlayer) {
-			if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(event.getEntityLiving())) {
+			if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(event.getEntityLiving())) {
 				StaminaMechanics.onJump((EntityPlayer) event.getEntityLiving());
 			}
 		}

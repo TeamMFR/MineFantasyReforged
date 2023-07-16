@@ -9,7 +9,7 @@ import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.CookRecipe;
-import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerAnvilOld;
 import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -64,7 +64,7 @@ public class MineFantasyReforgedAPI {
 	 * @param input      The input for the item (Exactly the same as regular recipes)
 	 */
 	public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-		return CraftingManagerAnvil.getInstance().addRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
+		return CraftingManagerAnvilOld.getInstance().addRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class MineFantasyReforgedAPI {
 	 * @return IAnvilRecipe
 	 */
 	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-		return CraftingManagerAnvil.getInstance().addToolRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
+		return CraftingManagerAnvilOld.getInstance().addToolRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
 	}
 
 	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, Item result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {

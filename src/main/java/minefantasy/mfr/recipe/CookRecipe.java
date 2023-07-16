@@ -1,5 +1,6 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -11,7 +12,6 @@ import java.util.HashMap;
 public class CookRecipe {
 	public static final HashMap<String, CookRecipe> recipeList = new HashMap<>();
 	public static Item burnt_food = null;
-	public static boolean canCookBasics = true;
 	public final int maxTemperature, minTemperature, time;
 	public final boolean isBaking;
 	public final ItemStack output, burnt;
@@ -77,7 +77,7 @@ public class CookRecipe {
 			return result;
 		}
 
-		if (canCookBasics) {
+		if (ConfigCrafting.canCookBasics) {
 			ItemStack recipe = FurnaceRecipes.instance().getSmeltingResult(item);
 			if (!recipe.isEmpty() && recipe.getItem() instanceof ItemFood) {
 				return new CookRecipe(recipe, new ItemStack(burnt_food), 100, 300, 20, false, true);

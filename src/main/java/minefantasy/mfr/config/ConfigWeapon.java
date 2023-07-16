@@ -3,8 +3,6 @@ package minefantasy.mfr.config;
 public class ConfigWeapon extends ConfigurationBaseMF {
 	public static final String CATEGORY_PENALTIES = "Penalties";
 	public static final String CATEGORY_BONUS = "Bonuses";
-	public static final String CATEGORY_ANIMATIONS = "Animations";
-	public static boolean shouldUseMfrCustomAnimations;
 	public static boolean useBalance;
 	public static boolean breakArrowsGround;
 	public static float arrowBreakMod;
@@ -16,11 +14,19 @@ public class ConfigWeapon extends ConfigurationBaseMF {
 	public static float vanillaSpecialArrowFirepowerMod;
 	public static int vanillaArrowStackLimit;
 
+	public ConfigWeapon(String name) {
+		super(name);
+	}
+
 	@Override
-	protected void loadConfig() {
-		shouldUseMfrCustomAnimations = Boolean.parseBoolean(config.get(CATEGORY_ANIMATIONS, "MFR Custom Animations", true,
-				"Should MFR Custom animations for things like counterattacks after parries and spear and halberd animations occur, true or false. Disable if you are using a mod that adds custom animations for such things, as it mess them up."
-				).getString());
+	protected void initializeCategories() {
+		config.addCustomCategoryComment(CATEGORY_BONUS, "Controls Weapon Bonuses");
+		config.addCustomCategoryComment(CATEGORY_PENALTIES, "Controls Weapon Penalties");
+	}
+
+	@Override
+	protected void initializeValues() {
+
 		useBalance = Boolean.parseBoolean(config.get(CATEGORY_PENALTIES, "Heavy Weapon Balance", true,
 				"This causes heavy weapons to throw the camera off angle. This is recommended as it gives a downside to avoid overpowering heavy weapons. With this active: spamming hits is difficult")
 				.getString());

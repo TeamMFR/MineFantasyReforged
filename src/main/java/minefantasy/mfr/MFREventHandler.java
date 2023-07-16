@@ -11,8 +11,10 @@ import minefantasy.mfr.api.tool.ISmithTongs;
 import minefantasy.mfr.api.weapon.IParryable;
 import minefantasy.mfr.block.BlockComponent;
 import minefantasy.mfr.client.ClientItemsMFR;
+import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigHardcore;
+import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.config.ConfigSpecials;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigWeapon;
@@ -163,7 +165,7 @@ public final class MFREventHandler {
 			list.add(I18n.format("attribute.armour." + armourClass));
 		}
 		if (armour.getItem() instanceof ISpecialArmourMFR) {
-			if (ArmourCalculator.advancedDamageTypes) {
+			if (ConfigArmour.advancedDamageTypes) {
 				list.add(TextFormatting.BLUE + I18n.format("attribute.armour.protection"));
 				addSingleDamageReductionTooltip(armour, user, 0, list, true);
 				addSingleDamageReductionTooltip(armour, user, 2, list, true);
@@ -340,7 +342,7 @@ public final class MFREventHandler {
 					addArmorDamageReductionTooltip(event.getItemStack(), event.getEntityPlayer(), event.getToolTip(), event.getFlags().isAdvanced());
 				}
 			}
-			if (ArmourCalculator.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
+			if (ConfigArmour.advancedDamageTypes && ArmourCalculator.getRatioForWeapon(event.getItemStack()) != null) {
 				displayWeaponTraits(ArmourCalculator.getRatioForWeapon(event.getItemStack()), event.getToolTip());
 			}
 			if (ToolHelper.shouldShowTooltip(event.getItemStack())) {
@@ -740,7 +742,7 @@ public final class MFREventHandler {
 				}
 			}
 
-			if (StaminaBar.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player) && !isBlockPlant(broken.getBlock()) && !(broken == (Blocks.SNOW_LAYER).getDefaultState())) {
+			if (ConfigStamina.isSystemActive && ConfigStamina.affectMining && StaminaBar.doesAffectEntity(player) && !isBlockPlant(broken.getBlock()) && !(broken == (Blocks.SNOW_LAYER).getDefaultState())) {
 				float points = 2.0F * ConfigStamina.miningSpeed;
 				ItemWeaponMFR.applyFatigue(player, points, 20F);
 
@@ -795,7 +797,7 @@ public final class MFREventHandler {
 
 		int injury = getInjuredTime(entity);
 
-		if (ConfigHardcore.critLimp && entity.ticksExisted - entity.getLastAttackedEntityTime() > 200 && (entity instanceof EntityLiving || !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
+		if (ConfigMobs.criticalLimp && entity.ticksExisted - entity.getLastAttackedEntityTime() > 200 && (entity instanceof EntityLiving || !(entity instanceof EntityPlayer && ((EntityPlayer) entity).capabilities.isCreativeMode))) {
 			float lowHp = entity.getMaxHealth() / 5F;
 
 			if (entity.getHealth() <= lowHp || injury > 0) {
@@ -816,7 +818,7 @@ public final class MFREventHandler {
 			injury--;
 			entity.getEntityData().setInteger(Constants.INJURED_TAG, injury);
 		}
-		if (StaminaBar.isSystemActive && StaminaBar.doesAffectEntity(entity) && event.getEntityLiving() instanceof EntityPlayer) {
+		if (ConfigStamina.isSystemActive && StaminaBar.doesAffectEntity(entity) && event.getEntityLiving() instanceof EntityPlayer) {
 			StaminaMechanics.tickEntity((EntityPlayer) event.getEntityLiving());
 		}
 
@@ -851,7 +853,7 @@ public final class MFREventHandler {
 	 */
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void applyExhaustArrow(ArrowLooseEvent event) {
-		if (StaminaBar.isSystemActive && !StaminaBar.isAnyStamina(event.getEntityPlayer(), false)) {
+		if (ConfigStamina.isSystemActive && !StaminaBar.isAnyStamina(event.getEntityPlayer(), false)) {
 			if (ConfigStamina.weaponDrain < 1.0F)
 				event.setCharge(event.getCharge() * (int) ConfigStamina.weaponDrain);
 		}
@@ -861,7 +863,7 @@ public final class MFREventHandler {
 	public static void startUseItem(LivingEntityUseItemEvent.Start event) {
 		EntityLivingBase player = event.getEntityLiving();
 		if (!event.getItem().isEmpty() && event.getItem().getItemUseAction() == EnumAction.valueOf("mfr_block")) {
-			if ((StaminaBar.isSystemActive && TacticalManager.shouldStaminaBlock && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
+			if ((ConfigStamina.isSystemActive && TacticalManager.shouldStaminaBlock && !StaminaBar.isAnyStamina(player, false)) || !CombatMechanics.isParryAvailable(player)) {
 				event.setCanceled(true);
 			}
 		}

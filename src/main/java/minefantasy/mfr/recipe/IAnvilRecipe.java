@@ -24,7 +24,7 @@ public interface IAnvilRecipe {
 	 */
 	int getRecipeSize();
 
-	int getRecipeHammer();
+	int getHammerTier();
 
 	int getAnvilTier();
 

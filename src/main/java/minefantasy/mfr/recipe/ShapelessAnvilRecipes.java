@@ -143,7 +143,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
 	}
 
 	@Override
-	public int getRecipeHammer() {
+	public int getHammerTier() {
 		return this.recipeHammer;
 	}
 

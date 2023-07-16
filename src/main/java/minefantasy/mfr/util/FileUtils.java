@@ -19,6 +19,14 @@ import java.util.function.Function;
 public class FileUtils {
 	private FileUtils() {}
 
+	protected void createCustomDataDirectory(String directory) {
+		// create custom data dirs if they don't exist
+		File existTest = new File(directory);
+		if (!existTest.exists()) {
+			existTest.mkdirs();
+		}
+	}
+
 	public static void findFiles(File source, String base, @Nullable BiConsumer<Path, Path> processor) {
 		findFiles(source, base, null, processor);
 	}

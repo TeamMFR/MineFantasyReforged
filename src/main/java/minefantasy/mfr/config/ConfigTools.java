@@ -8,8 +8,18 @@ public class ConfigTools extends ConfigurationBaseMF {
 	public static int lumberAxeMaxLogs;
 	public static float heavy_tool_drop_chance;
 
+	public ConfigTools(String name) {
+		super(name);
+	}
+
 	@Override
-	protected void loadConfig() {
+	protected void initializeCategories() {
+		config.addCustomCategoryComment(CATEGORY_BONUS, "Controls Tool Bonuses");
+		config.addCustomCategoryComment(CATEGORY_PENALTIES, "Controls Tool Penalties");
+	}
+
+	@Override
+	protected void initializeValues() {
 		handpickBonus = Float.parseFloat(config.get(CATEGORY_BONUS, "Handpick double-drop chance", 20F,
 				"This is the percent value (0-100) handpicks double item drops").getString());
 

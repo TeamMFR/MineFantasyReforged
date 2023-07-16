@@ -151,7 +151,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	}
 
 	protected void onMFFoodEaten(ItemStack food, EntityPlayer consumer) {
-		if (StaminaBar.isSystemActive) {
+		if (ConfigStamina.isSystemActive) {
 			if (staminaRestore > 0) {
 				StaminaBar.modifyStaminaValue(consumer, staminaRestore);
 			}
@@ -210,7 +210,7 @@ public class ItemFoodMFR extends ItemFood implements IClientRegister {
 	}
 
 	public static void onCustomFoodEaten(EntityPlayer consumer, float staminaRestore, int staminaSeconds, float staminaBuff, int staminaRegenSeconds, float staminaRegenBuff, float eatDelay, float fatAccumulation) {
-		if (StaminaBar.isSystemActive) {
+		if (ConfigStamina.isSystemActive) {
 			if (staminaRestore > 0) {
 				StaminaBar.modifyStaminaValue(consumer, staminaRestore);
 			}

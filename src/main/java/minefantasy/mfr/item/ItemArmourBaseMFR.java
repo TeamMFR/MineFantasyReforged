@@ -5,6 +5,7 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IArmourMFR;
 import minefantasy.mfr.api.armour.IArmourRating;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
+import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.ArmorMaterialMFR;
 import minefantasy.mfr.material.CustomMaterial;
@@ -97,7 +98,7 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 		float armorClass = getProtectionRatio(armour);
 		armorClass = ArmourCalculator.getArmourValueMod(armour, armorClass);
 
-		if (ArmourCalculator.advancedDamageTypes && !entity.world.isRemote) {
+		if (ConfigArmour.advancedDamageTypes && !entity.world.isRemote) {
 			armorClass = ArmourCalculator.adjustArmorClassForDamage(source, armorClass, getProtectiveTrait(armour, 0), getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}
 
@@ -239,7 +240,7 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public float getDamageTypeValue(EntityLivingBase user, ItemStack armour, DamageSource src) {
 		float newDamageType = damageType;
 
-		if (ArmourCalculator.advancedDamageTypes && !user.world.isRemote) {
+		if (ConfigArmour.advancedDamageTypes && !user.world.isRemote) {
 			newDamageType = ArmourCalculator.adjustArmorClassForDamage(src, newDamageType, getProtectiveTrait(armour, 0),
 					getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}
@@ -256,7 +257,7 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public float getDamageRatingValue(EntityLivingBase user, ItemStack armour, DamageSource src) {
 		float damageRating = getProtectionRatio(armour) * scalePiece();
 
-		if (ArmourCalculator.advancedDamageTypes && !user.world.isRemote) {
+		if (ConfigArmour.advancedDamageTypes && !user.world.isRemote) {
 			damageRating = ArmourCalculator.adjustArmorClassForDamage(src, damageRating, getProtectiveTrait(armour, 0),
 					getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}
@@ -268,7 +269,7 @@ public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public float getDamageRatingDisplay(ItemStack armour, int damageType) {
 		float damageRating = getProtectionRatio(armour) * scalePiece();
 
-		if (ArmourCalculator.advancedDamageTypes) {
+		if (ConfigArmour.advancedDamageTypes) {
 			damageRating = ArmourCalculator.modifyArmorClassForType(damageType, damageRating, getProtectiveTrait(armour, 0),
 					getProtectiveTrait(armour, 1), getProtectiveTrait(armour, 2));
 		}

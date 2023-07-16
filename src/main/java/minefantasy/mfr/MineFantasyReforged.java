@@ -16,7 +16,6 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
-import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyArmorCustomEntries;
@@ -32,6 +31,7 @@ import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.AnvilRecipeLoader;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CarpenterRecipeLoader;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
@@ -39,7 +39,8 @@ import minefantasy.mfr.world.gen.feature.WorldGenGeological;
 import minefantasy.mfr.world.gen.structure.WorldGenStructure;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -49,12 +50,11 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartedEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.io.File;
 
 @Mod(modid = MineFantasyReforged.MOD_ID, name = MineFantasyReforged.NAME, version = "@VERSION@", dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP + "required-after:mixinbooter;")
 public class MineFantasyReforged {
@@ -67,13 +67,21 @@ public class MineFantasyReforged {
 	@Mod.Instance
 	public static MineFantasyReforged INSTANCE;
 
-	public static final Logger LOG = LogManager.getLogger(MOD_ID);
+	public static ConfigClient configClient;
+	public static ConfigArmour configArmour;
+	public static ConfigSpecials configSpecials;
+	public static ConfigHardcore configHardcore;
+	public static ConfigIntegration configIntegration;
+	public static ConfigTools configTools;
+	public static ConfigWeapon configWeapon;
+	public static ConfigStamina configStamina;
+	public static ConfigItemRegistry configItemRegistry;
+	public static ConfigFarming configFarming;
+	public static ConfigWorldGen configWorldGen;
+	public static ConfigCrafting configCrafting;
+	public static ConfigMobs configMobs;
 
-	private static Configuration getCfg(FMLPreInitializationEvent event, String name) {
-		return new Configuration(
-				new File(event.getModConfigurationDirectory(),
-						Constants.CONFIG_DIRECTORY + "/" + name + ".cfg"));
-	}
+	public static final Logger LOG = LogManager.getLogger(MOD_ID);
 
 	public static boolean isDebug() {
 		return ConfigSpecials.debug.equals("AU32-Db42-Acf6-Ggh9-9E8d");
@@ -91,20 +99,20 @@ public class MineFantasyReforged {
 		NetworkHandler.INSTANCE.registerNetwork();
 
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
-			new ConfigClient().setConfig(getCfg(preEvent, "Client"));
+			configClient = new ConfigClient("Client");
 		}
-		new ConfigArmour().setConfig(getCfg(preEvent, "Armours"));
-		new ConfigSpecials().setConfig(getCfg(preEvent, "Specials"));
-		new ConfigHardcore().setConfig(getCfg(preEvent, "Hardcore"));
-		new ConfigIntegration().setConfig(getCfg(preEvent, "Integration"));
-		new ConfigTools().setConfig(getCfg(preEvent, "Tools"));
-		new ConfigWeapon().setConfig(getCfg(preEvent, "Weapons"));
-		new ConfigStamina().setConfig(getCfg(preEvent, "Stamina_System"));
-		new ConfigItemRegistry().setConfig(getCfg(preEvent, "Item_Registry"));
-		new ConfigFarming().setConfig(getCfg(preEvent, "Farming"));
-		new ConfigWorldGen().setConfig(getCfg(preEvent, "WorldGen"));
-		new ConfigCrafting().setConfig(getCfg(preEvent, "Crafting"));
-		new ConfigMobs().setConfig(getCfg(preEvent, "Mobs"));
+		configArmour = new ConfigArmour("Armours");
+		configSpecials = new ConfigSpecials("Specials");
+		configHardcore = new ConfigHardcore("Hardcore");
+		configIntegration = new ConfigIntegration("Integration");
+		configTools = new ConfigTools("Tools");
+		configWeapon = new ConfigWeapon("Weapons");
+		configStamina = new ConfigStamina("Stamina_System");
+		configItemRegistry = new ConfigItemRegistry("Item_Registry");
+		configFarming = new ConfigFarming("Farming");
+		configWorldGen = new ConfigWorldGen("WorldGen");
+		configCrafting = new ConfigCrafting("Crafting");
+		configMobs = new ConfigMobs("Mobs");
 
 		PlayerData.register();
 		MineFantasyItems.initEnumActions();
@@ -154,6 +162,8 @@ public class MineFantasyReforged {
 
 		//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
+		CraftingManagerAnvil.loadRecipes();
+
 		PROXY.init();
 	}
 
@@ -180,6 +190,20 @@ public class MineFantasyReforged {
 		CarpenterRecipeLoader.INSTANCE.postInit();
 		AnvilRecipeLoader.INSTANCE.postInit();
 
+		configClient.save();
+		configArmour.save();
+		configSpecials.save();
+		configHardcore.save();
+		configIntegration.save();
+		configTools.save();
+		configWeapon.save();
+		configStamina.save();
+		configItemRegistry.save();
+		configFarming.save();
+		configWorldGen.save();
+		configCrafting.save();
+		configMobs.save();
+
 		PROXY.postInit(postEvent);
 		PROXY.postInit();
 
@@ -196,6 +220,30 @@ public class MineFantasyReforged {
 	@EventHandler
 	public final void serverStarted(FMLServerStartedEvent event) {
 
+	}
+
+	@SubscribeEvent
+	public void createRecipeRegistry(RegistryEvent.NewRegistry evt) {
+		CraftingManagerAnvil.init();
+	}
+
+	@SubscribeEvent
+	public void configChangedEvent(ConfigChangedEvent.OnConfigChangedEvent evt) {
+		if (MOD_ID.equals(evt.getModID())) {
+			configClient.save();
+			configArmour.save();
+			configSpecials.save();
+			configHardcore.save();
+			configIntegration.save();
+			configTools.save();
+			configWeapon.save();
+			configStamina.save();
+			configItemRegistry.save();
+			configFarming.save();
+			configWorldGen.save();
+			configCrafting.save();
+			configMobs.save();
+		}
 	}
 
 	private void registerBiomeStuff(Biome biome) {

@@ -2,6 +2,7 @@ package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.block.BlockBlastHeater;
+import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBlastHeater;
@@ -30,7 +31,7 @@ import javax.annotation.Nullable;
 
 public class TileEntityBlastHeater extends TileEntityBlastChamber {
 	public static float maxProgress = 1200;
-	public static int maxFurnaceHeight = 8;
+
 	public int fuel;
 	public int maxFuel;
 	public float heat;
@@ -116,7 +117,7 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 	}
 
 	private void smeltItem() {
-		for (int y = 0; y < maxFurnaceHeight; y++) {
+		for (int y = 0; y < ConfigCrafting.maxFurnaceHeight; y++) {
 			TileEntity tileEntity = world.getTileEntity(pos.add(0, y + 1, 0));
 			if (tileEntity instanceof TileEntityBlastChamber && !(tileEntity instanceof TileEntityBlastHeater)) {
 				ItemStack result = getSmeltedResult((TileEntityBlastChamber) tileEntity);

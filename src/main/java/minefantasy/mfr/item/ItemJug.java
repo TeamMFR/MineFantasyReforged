@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.block.BlockComponent;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
@@ -39,7 +40,7 @@ public class ItemJug extends ItemComponentMFR {
 			if (type.equalsIgnoreCase("milk")) {
 				curePotionEffects(user);
 			}
-			if (StaminaBar.isSystemActive) {
+			if (ConfigStamina.isSystemActive) {
 				StaminaBar.modifyStaminaValue(user, 10);
 			}
 		}

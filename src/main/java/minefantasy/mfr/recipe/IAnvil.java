@@ -19,7 +19,7 @@ public interface IAnvil {
 
 	void setRequiredSkill(Skill skill);
 
-	public void setRequiredResearch(String research);
+	void setRequiredResearch(String research);
 
 	int getRequiredHammerTier();
 

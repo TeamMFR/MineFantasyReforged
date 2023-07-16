@@ -6,9 +6,9 @@ import java.util.Comparator;
  * @author AnonymousProductions
  */
 class RecipeSorterAnvil implements Comparator {
-	final CraftingManagerAnvil craftingManager;
+	final CraftingManagerAnvilOld craftingManager;
 
-	RecipeSorterAnvil(CraftingManagerAnvil manager) {
+	RecipeSorterAnvil(CraftingManagerAnvilOld manager) {
 		this.craftingManager = manager;
 	}
 

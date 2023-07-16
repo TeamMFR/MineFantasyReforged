@@ -8,6 +8,7 @@ import minefantasy.mfr.api.armour.IArmourPenetrationMob;
 import minefantasy.mfr.api.armour.IArmouredEntity;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
+import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
@@ -63,9 +64,6 @@ public class ArmourCalculator {
 	public static final float getMoveSpeedThresholdMax = 40F;
 	public static final IStoredVariable<Float> WORN_WEIGHT_KEY = IStoredVariable.StoredVariable.ofFloat("wornWeight", Persistence.DIMENSION_CHANGE);
 	public static final IStoredVariable<Float> WORN_WEIGHT_NS_KEY = IStoredVariable.StoredVariable.ofFloat("wornWeightNS", Persistence.DIMENSION_CHANGE);
-	public static boolean advancedDamageTypes = true;
-	public static float slowRate = 1.0F;
-	public static boolean useConfigIndirectDmg = true;
 
 	static {
 		PlayerData.registerStoredVariables(WORN_WEIGHT_KEY, WORN_WEIGHT_NS_KEY);
@@ -123,7 +121,7 @@ public class ArmourCalculator {
 		float max = getMoveSpeedThresholdMax - min;
 		float mass = getTotalWeightOfWorn(user, true) - min;
 		if (mass > 0 && max > 0) {
-			mod -= (mass / max) * slowAmount * slowRate;
+			mod -= (mass / max) * slowAmount * ConfigArmour.slowRate;
 		}
 		return mod;
 	}
@@ -215,7 +213,7 @@ public class ArmourCalculator {
 	}
 
 	public static float modifyArmorClassForType(float value, float cutting, float blunt, float pierce, float cuttingProt, float bluntProt, float pierceProt, float specialAP) {
-		if (advancedDamageTypes) {
+		if (ConfigArmour.advancedDamageTypes) {
 			// Averages the ratio between cutting and blunt, while modifying it by the
 			// armour traits
 			value *= (((cutting * cuttingProt) + (blunt * bluntProt) + (pierce * pierceProt))
@@ -280,7 +278,7 @@ public class ArmourCalculator {
 			return new float[] {0, 0, 1};
 		}
 
-		if (useConfigIndirectDmg) {
+		if (ConfigArmour.useConfigIndirectDmg) {
 			return CustomDamageRatioEntry.getEntityTraits(ForgeRegistries.ENTITIES.getKey(EntityRegistry.getEntry(damager.getClass())));
 		}
 		return new float[] {1, 1, 1};

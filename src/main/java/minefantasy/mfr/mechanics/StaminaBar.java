@@ -3,6 +3,7 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IWornStaminaItem;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.data.IStoredVariable;
 import minefantasy.mfr.data.Persistence;
 import minefantasy.mfr.data.PlayerData;
@@ -32,28 +33,9 @@ public class StaminaBar {
 	 * does
 	 */
 	private static final float armourWeightModifierClimbing = 5.0F;
-	/**
-	 * This is the main variable for the entire stamina feature
-	 */
-	public static boolean isSystemActive = true;
-	public static float defaultMax = 100F;
+
+
 	public static float regenModifier = 1.5F;
-
-	// CONFIG VARS
-	/**
-	 * The decay modifier before being scaled by difficulty
-	 */
-	public static float decayModifierCfg = 1.0F;
-	public static float decayModifierBase = 0.5F;
-	public static float configRegenModifier = 1.0F;
-	public static float pauseModifier = 1.0F;
-	public static float configArmourWeightModifier = 1.0F;
-	public static float configBulk = 1.0F;
-	public static boolean scaleDifficulty = true;
-
-	public static boolean levelUp = false;
-
-	public static float levelAmount = 5F;
 	public static boolean restrictSystem = true;
 	/**
 	 * Modifies the regen rate slowdown for armour
@@ -75,16 +57,16 @@ public class StaminaBar {
 			PlayerData data = PlayerData.get((EntityPlayer) user);
 			if (data != null) {
 				if (data.getVariable(STAMINA_MAX_KEY) == null) {
-					setMaxStamina(data, getDefaultMax(user) + bonus);
+					setMaxStamina(data, getDefaultMax() + bonus);
 				}
 				return data.getVariable(STAMINA_MAX_KEY) + bonus;
 			}
 		}
-		return getDefaultMax(user) + bonus;
+		return getDefaultMax() + bonus;
 	}
 
-	public static float getDefaultMax(EntityLivingBase user) {
-		return defaultMax;
+	public static float getDefaultMax() {
+		return ConfigStamina.defaultMax;
 	}
 
 	public static void setMaxStamina(PlayerData data, float value) {
@@ -159,10 +141,10 @@ public class StaminaBar {
 			return 0;
 
 		float amount = 0F;
-		if (user instanceof EntityPlayer && levelUp && levelAmount > 0) {
+		if (user instanceof EntityPlayer && ConfigStamina.levelUp && ConfigStamina.levelAmount > 0) {
 			EntityPlayer player = (EntityPlayer) user;
 			if (player.experienceLevel > 0) {
-				amount += (player.experienceLevel * levelAmount);
+				amount += (player.experienceLevel * ConfigStamina.levelAmount);
 			}
 		}
 		return amount;
@@ -238,7 +220,7 @@ public class StaminaBar {
 	 * @param seconds the time it takes to wear off
 	 */
 	public static void buffStamina(EntityLivingBase user, float mod, int seconds) {
-		if (!isSystemActive) {
+		if (!ConfigStamina.isSystemActive) {
 			return;
 		}
 		if (user instanceof EntityPlayer) {
@@ -253,7 +235,7 @@ public class StaminaBar {
 	}
 
 	public static void buffStaminaRegen(EntityLivingBase user, float mod, int seconds) {
-		if (!isSystemActive) {
+		if (!ConfigStamina.isSystemActive) {
 			return;
 		}
 		if (user instanceof EntityPlayer) {
@@ -274,12 +256,12 @@ public class StaminaBar {
 			PlayerData data = PlayerData.get((EntityPlayer) user);
 			if (data != null) {
 				if (data.getVariable(STAMINA_VALUE_KEY) == null) {
-					setStaminaValue(data, getDefaultMax(user));
+					setStaminaValue(data, getDefaultMax());
 				}
 				return data.getVariable(STAMINA_VALUE_KEY);
 			}
 		}
-		return getDefaultMax(user);
+		return getDefaultMax();
 	}
 
 	public static void setStaminaValue(PlayerData data, float value) {
@@ -318,10 +300,10 @@ public class StaminaBar {
 			if (data != null) {
 
 				if (data.getVariable(STAMINA_MAX_KEY) == null) {
-					data.setVariable(STAMINA_MAX_KEY, getDefaultMax(user));
+					data.setVariable(STAMINA_MAX_KEY, getDefaultMax());
 				}
 				if (data.getVariable(STAMINA_VALUE_KEY) == null) {
-					data.setVariable(STAMINA_VALUE_KEY, getDefaultMax(user));
+					data.setVariable(STAMINA_VALUE_KEY, getDefaultMax());
 				}
 				if (data.getVariable(STAMINA_FLASHING_KEY) == null) {
 					data.setVariable(STAMINA_FLASHING_KEY, 0F);
@@ -469,7 +451,7 @@ public class StaminaBar {
 			float max = ArmourCalculator.encumberanceArray[1];
 			float mass = ArmourCalculator.getTotalWeightOfWorn(player, false) - min;
 			if (mass > 0) {
-				value *= (1 + ((min + mass) / max * configArmourWeightModifier * (armourWeightModifierClimbing - 1)));
+				value *= (1 + ((min + mass) / max * ConfigStamina.configArmourWeightModifier * (armourWeightModifierClimbing - 1)));
 			}
 			value *= armourMod;
 		}
@@ -477,7 +459,7 @@ public class StaminaBar {
 	}
 
 	public static float getBaseRegenModifier(EntityPlayer player, boolean countArmour, boolean countHeld) {
-		float value = configRegenModifier * regenModifier * (5F / 3F);
+		float value = ConfigStamina.configRegenModifier * regenModifier * (5F / 3F);
 
 		if (!TacticalManager.isImmuneToWeight(player)) {
 			if (countHeld) {
@@ -499,7 +481,7 @@ public class StaminaBar {
 						armourMod += ((IWornStaminaItem) stack.getItem()).getRegenModifier(player, stack);
 					}
 				}
-				float weightMod = ArmourCalculator.getTotalWeightOfWorn(player, false) * bulkModifier * configBulk;
+				float weightMod = ArmourCalculator.getTotalWeightOfWorn(player, false) * bulkModifier * ConfigStamina.configBulk;
 				if (weightMod > 0) {
 					float min = ArmourCalculator.encumberanceArray[0];
 					float max = ArmourCalculator.encumberanceArray[1];
@@ -516,7 +498,7 @@ public class StaminaBar {
 	}
 
 	public static float getBaseIdleModifier(EntityLivingBase user, boolean countArmour, boolean countHeld) {
-		float value = pauseModifier;
+		float value = ConfigStamina.pauseModifier;
 
 		if (!TacticalManager.isImmuneToWeight(user)) {
 			if (countHeld) {
@@ -546,11 +528,11 @@ public class StaminaBar {
 	 * faster
 	 */
 	public static float getDecayModifier(World world) {
-		if (!scaleDifficulty) {
-			return decayModifierCfg * decayModifierBase;
+		if (!ConfigStamina.scaleDifficulty) {
+			return ConfigStamina.decayModifierCfg * ConfigStamina.decayModifierBase;
 		}
 		int difficultyMod = world.getDifficulty().getId() - 2;
-		return (decayModifierCfg * decayModifierBase) + (0.25F * difficultyMod);
+		return (ConfigStamina.decayModifierCfg * ConfigStamina.decayModifierBase) + (0.25F * difficultyMod);
 	}
 
 	public static boolean doesAffectEntity(EntityLivingBase entity) {

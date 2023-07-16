@@ -67,9 +67,6 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	private static final float base_frame_weight = 100F;
 	public static float base_fuel_minutes = 20F;
 	public static int maxBolts = 16;
-	public static int allowedBulk = 1;
-	public static float rating_modifier = 1.0F;
-	public static float health_modifier = 1.0F;
 	private int noMoveTime = 0;
 	private float forwardControl, strafeControl;
 	private boolean jumpControl;
@@ -91,7 +88,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	@SideOnly(Side.CLIENT)
 	public static int getArmourRating(CustomMaterial base) {
 		if (base != CustomMaterial.NONE) {
-			float ratio = base.hardness * ArmourDesign.COGWORK.getRating() * rating_modifier;
+			float ratio = base.hardness * ArmourDesign.COGWORK.getRating() * ConfigArmour.rating_modifier;
 			return (int) (ratio * ArmourCalculator.armourRatingScale);
 		}
 		return 0;
@@ -553,13 +550,13 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 	}
 
 	private boolean allowEquipment(EntityLivingBase user) {
-		if (allowedBulk >= 2) {
+		if (ConfigArmour.allowedBulk >= 2) {
 			return true;// Any Armour
 		}
 
 		float bulk = ArmourCalculator.getEquipmentBulk(user);
-		if (allowedBulk >= 0) {
-			if (bulk > allowedBulk) {
+		if (ConfigArmour.allowedBulk >= 0) {
+			if (bulk > ConfigArmour.allowedBulk) {
 				if (user instanceof EntityPlayer && world.isRemote) {
 					user.sendMessage(new TextComponentTranslation("vehicle.tooBigArmour"));
 				}
@@ -871,7 +868,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 		float fResist = 0.0F;
 		CustomMaterial plating = getPlating();
 		if (plating != CustomMaterial.NONE) {
-			AC = plating.hardness * ArmourDesign.COGWORK.getRating() * rating_modifier;
+			AC = plating.hardness * ArmourDesign.COGWORK.getRating() * ConfigArmour.rating_modifier;
 			fResist = plating.getFireResistance() / 100F;
 		}
 
@@ -917,7 +914,7 @@ public class EntityCogwork extends EntityLivingBase implements IPowerArmour {
 			}
 		} else if (dam != 0.0F) {
 			if (plating != CustomMaterial.NONE) {
-				float HP = plating.durability * ArmourDesign.COGWORK.getDurability() * 20F * health_modifier;
+				float HP = plating.durability * ArmourDesign.COGWORK.getDurability() * 20F * ConfigArmour.health_modifier;
 				dam *= (this.getMaxHealth() / HP);
 			}
 			dam = this.applyPotionDamageCalculations(source, dam);

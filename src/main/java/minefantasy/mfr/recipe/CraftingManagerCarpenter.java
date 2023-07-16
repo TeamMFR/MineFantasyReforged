@@ -1,5 +1,6 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Skill;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -113,8 +114,10 @@ public class CraftingManagerCarpenter {
 		} else {
 			recipe = new ShapedCarpenterRecipes(width, height, inputs, output, toolType, time, toolTier, blockTier, experience, false, sound, research, skill);
 		}
-		this.recipes.add(recipe);
-		this.recipeMap.put(name, recipe);
+		if (ConfigCrafting.isCarpenterItemCraftable(recipe.getCarpenterRecipeOutput().getItem())) {
+			this.recipes.add(recipe);
+			this.recipeMap.put(name, recipe);
+		}
 		return recipe;
 	}
 

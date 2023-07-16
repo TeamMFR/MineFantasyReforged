@@ -1,6 +1,7 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.client.render.item.RenderLance;
+import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -83,7 +84,7 @@ public class ItemLance extends ItemSpear {
 	// Higher stamina means more precice hits: Full stamina hits are perfect
 	@Override
 	public float getBalance(EntityLivingBase user) {
-		if (StaminaBar.isSystemActive) {
+		if (ConfigStamina.isSystemActive) {
 			return 0.0F + (2 * (1 - StaminaBar.getStaminaDecimal(user)));
 		}
 		return 0.0F;

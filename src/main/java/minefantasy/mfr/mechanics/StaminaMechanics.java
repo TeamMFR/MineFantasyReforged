@@ -132,7 +132,7 @@ public class StaminaMechanics {
 			if (player.getHeldItem(EnumHand.MAIN_HAND).getItemUseAction() == EnumAction.BOW) {
 				// Item gets factored in with bow
 				int bowSeconds = 30;
-				value += StaminaBar.getDefaultMax(player) / 20F / bowSeconds * ConfigStamina.bowModifier;
+				value += StaminaBar.getDefaultMax() / 20F / bowSeconds * ConfigStamina.bowModifier;
 			}
 		}
 		return value * StaminaBar.getBaseDecayModifier(player, countArmour, true);
@@ -228,7 +228,7 @@ public class StaminaMechanics {
 	}
 
 	public static void tirePlayer(EntityPlayer player, float points) {
-		if (StaminaBar.isSystemActive) {
+		if (ConfigStamina.isSystemActive) {
 			StaminaBar.modifyStaminaValue(player, -StaminaBar.getBaseDecayModifier(player, true, true) * points);
 			StaminaBar.ModifyIdleTime(player, 5F * points);
 		}
@@ -239,7 +239,7 @@ public class StaminaMechanics {
 	}
 
 	public static boolean canAcceptCost(EntityLivingBase user, float cost) {
-		if (user instanceof EntityPlayer && StaminaBar.isSystemActive) {
+		if (user instanceof EntityPlayer && ConfigStamina.isSystemActive) {
 			return StaminaBar.isPercentStamAvailable(user, cost, true);
 		}
 		return true;

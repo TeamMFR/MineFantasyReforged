@@ -90,7 +90,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 	}
 
 	@Override
-	public int getRecipeHammer() {
+	public int getHammerTier() {
 		return recipeHammer;
 	}
 

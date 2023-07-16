@@ -3,6 +3,7 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.crafting.IHeatSource;
 import minefantasy.mfr.api.crafting.IHeatUser;
 import minefantasy.mfr.block.BlockRoast;
+import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.CookRecipe;
@@ -29,7 +30,6 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	/**
 	 * Enable high temperatures ruin cooking
 	 */
-	public static boolean enableOverheat = true;
 	public float progress;
 	public float maxProgress;
 	private int tempTicksExisted = 0;
@@ -80,7 +80,7 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		if (ticksExisted % 20 == 0 && !world.isRemote) {
 			sendUpdates();
 			if (recipe != null && temp > 0 && maxProgress > 0 && temp > recipe.minTemperature) {
-				if (enableOverheat && recipe.canBurn && temp > recipe.maxTemperature) {
+				if (ConfigHardcore.enableOverheat && recipe.canBurn && temp > recipe.maxTemperature) {
 					getInventory().setStackInSlot(0, recipe.burnt.copy());
 					updateRecipe();
 				}
