@@ -29,17 +29,19 @@ public class RenderSpear extends WrappedItemModel implements IItemRenderer {
 		GlStateManager.pushMatrix();
 		if (transformType != TransformType.GUI && transformType != TransformType.GROUND) {
 
-			if (entity != null && ConfigWeapon.shouldUseMfrCustomAnimations) {
-				if (entity instanceof EntityPlayer && entity.isSwingInProgress && !(stack.getItem() instanceof ItemHalbeard)) {
-					GlStateManager.rotate(90, 0, 0, 1);
-					GlStateManager.translate(0F, -0.5F, 0F);
+			if (entity != null ) {
+				if (ConfigWeapon.shouldUseMfrCustomAnimations) {
+					if (entity instanceof EntityPlayer && entity.isSwingInProgress && !(stack.getItem() instanceof ItemHalbeard)) {
+						GlStateManager.rotate(90, 0, 0, 1);
+						GlStateManager.translate(0F, -0.5F, 0F);
+					}
+					if (entity.isSprinting() && transformType == TransformType.FIRST_PERSON_RIGHT_HAND) {
+						GlStateManager.rotate(90, 0, 0, 1);
+					}
 				}
-				if (entity.isSprinting() && transformType == TransformType.FIRST_PERSON_RIGHT_HAND) {
-					GlStateManager.rotate(90, 0, 0, 1);
-				}
+				GlStateManager.translate(-0.8F, -0.8F, 0);
+				GlStateManager.scale(3, 3, 1);
 			}
-			GlStateManager.translate(-0.8F, -0.8F, 0);
-			GlStateManager.scale(3, 3, 1);
 		} else if (transformType == TransformType.GROUND) {
 			GlStateManager.scale(3, 3, 1);
 		}
