@@ -139,7 +139,6 @@ item.spawn_cogwork.name=Spawn Cogwork Suit
 item.spawn_cogwork.desc=Mechanical suit of superior strength
 
 # TOOL LIST
-
 item.tool_pick.name=%1$s Pick
 item.commodity_timber.name=%1$s Timber
 item.haft.name=Haft
@@ -186,6 +185,62 @@ material.dragonskin.name=Dragon Skin
 
 #MATERIAL LOCALIZATION OVERRIDES
 material.material_name.name=Localized Name
+
+#VANILLA ITEMS PREFIX OVERRIDES
+item.crude_wooden_hoe.name=Crude Wooden Hoe
+item.crude_wooden_axe.name=Crude Wooden Axe
+item.crude_wooden_pickaxe.name=Crude Wooden Pickaxe
+item.crude_wooden_shovel.name=Crude Wooden Shovel
+item.crude_wooden_sword.name=Crude Wooden Sword
+item.crude_wooden_helmet.name=Crude Wooden Helmet
+item.crude_wooden_chestplate.name=Crude Wooden Chestplate
+item.crude_wooden_leggings.name=Crude Wooden Leggings
+item.crude_wooden_boots.name=Crude Wooden Boots
+
+item.crude_stone_hoe.name=Crude Stone Hoe
+item.crude_stone_axe.name=Crude Stone Axe
+item.crude_stone_pickaxe.name=Crude Stone Pickaxe
+item.crude_stone_shovel.name=Crude Stone Shovel
+item.crude_stone_sword.name=Crude Stone Sword
+item.crude_stone_helmet.name=Crude Stone Helmet
+item.crude_stone_chestplate.name=Crude Stone Chestplate
+item.crude_stone_leggings.name=Crude Stone Leggings
+item.crude_stone_boots.name=Crude Stone Boots
+
+item.crude_iron_hoe.name=Crude Iron Hoe
+item.crude_iron_axe.name=Crude Iron Axe
+item.crude_iron_pickaxe.name=Crude Iron Pickaxe
+item.crude_iron_shovel.name=Crude Iron Shovel
+item.crude_iron_sword.name=Crude Iron Sword
+item.crude_iron_helmet.name=Crude Iron Helmet
+item.crude_iron_chestplate.name=Crude Iron Chestplate
+item.crude_iron_leggings.name=Crude Iron Leggings
+item.crude_iron_boots.name=Crude Iron Boots
+
+item.crude_golden_hoe.name=Crude Golden Hoe
+item.crude_golden_axe.name=Crude Golden Axe
+item.crude_golden_pickaxe.name=Crude Golden Pickaxe
+item.crude_golden_shovel.name=Crude Golden Shovel
+item.crude_golden_sword.name=Crude Golden Sword
+item.crude_golden_helmet.name=Crude Golden Helmet
+item.crude_golden_chestplate.name=Crude Golden Chestplate
+item.crude_golden_leggings.name=Crude Golden Leggings
+item.crude_golden_boots.name=Crude Golden Boots
+
+item.crude_diamond_hoe.name=Crude Diamond Hoe
+item.crude_diamond_axe.name=Crude Diamond Axe
+item.crude_diamond_pickaxe.name=Crude Diamond Pickaxe
+item.crude_diamond_shovel.name=Crude Diamond Shovel
+item.crude_diamond_sword.name=Crude Diamond Sword
+item.crude_diamond_helmet.name=Crude Diamond Helmet
+item.crude_diamond_chestplate.name=Crude Diamond Chestplate
+item.crude_diamond_leggings.name=Crude Diamond Leggings
+item.crude_diamond_boots.name=Crude Diamond Boots
+
+item.crude_leather_cap.name=Crude Leather Cap
+item.crude_leather_tunic.name=Crude Leather Tunic
+item.crude_leather_pants.name=Crude Leather Pants
+item.crude_leather_boots.name=Crude Leather Boots
 
 # ITEM STATS
 

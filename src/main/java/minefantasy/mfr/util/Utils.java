@@ -41,6 +41,10 @@ public class Utils {
 		return WordUtils.capitalize(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_UNDERSCORE, string).replaceAll("_", " "));
 	}
 
+	public static String convertSplitCapitalizedToSnakeCase(String string) {
+		return string.toLowerCase().replaceAll(" ", "_");
+	}
+
 	public static boolean canAcceptArrow(ItemStack ammo, ItemStack weapon) {
 		String ammoType = "null";
 		if (!ammo.isEmpty() && ammo.getItem() instanceof IAmmo) {
