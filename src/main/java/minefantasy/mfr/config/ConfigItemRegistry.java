@@ -263,6 +263,7 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 		config.addCustomCategoryComment(CATEGORY_TOOL, "Handles Custom Crafter Registrations");
 		config.addCustomCategoryComment(CATEGORY_FARM, "Handles Custom Hoe Registrations");
 		config.addCustomCategoryComment(CATEGORY_FOOD, "Handles Custom Food Registrations");
+		config.addCustomCategoryComment(CATEGORY_STONE_PICK_OVERRIDE, "Handles MFR Stone Pick Harvest Level Override by Blockstate Registrations");
 	}
 
 	@Override
