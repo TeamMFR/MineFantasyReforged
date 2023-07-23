@@ -4,6 +4,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.tier.IToolMaterial;
+import minefantasy.mfr.config.ConfigItemRegistry;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterial;
@@ -12,7 +13,6 @@ import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -33,10 +33,10 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static minefantasy.mfr.material.CustomMaterial.decimal_format;
@@ -100,12 +100,14 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 				harvestLevel = getStonePickHarvestLevel(state);
 			}
 
-			if (blockTier > harvestLevel) {
-				String msg = I18n.format("prospect.cannotmine", harvestLevel, blockTier);
-				player.sendMessage(new TextComponentString(TextFormatting.RED + msg));
-			} else {
-				String msg = I18n.format("prospect.canmine", harvestLevel, blockTier);
-				player.sendMessage(new TextComponentString(TextFormatting.GREEN + msg));
+			if (player.world.isRemote) {
+				if (blockTier > harvestLevel) {
+					String msg = I18n.format("prospect.cannotmine", harvestLevel, blockTier);
+					player.sendMessage(new TextComponentString(TextFormatting.RED + msg));
+				} else {
+					String msg = I18n.format("prospect.canmine", harvestLevel, blockTier);
+					player.sendMessage(new TextComponentString(TextFormatting.GREEN + msg));
+				}
 			}
 		}
 
@@ -169,12 +171,17 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 
 	@Override
 	public int getHarvestLevel(ItemStack stack, String toolClass, @Nullable EntityPlayer player, @Nullable IBlockState blockState) {
-		//Check if the pick is an MFR stone pick, and have it pull up its custom check for harvest level
-		//Mods make this necessary by not having soft copper and tin ore blocks
 		if (ToolHelper.isItemMaterial(stack, BaseMaterial.getMaterial("stone").getToolMaterial())) {
 			return getStonePickHarvestLevel(blockState);
 		}
 		return CustomToolHelper.getHarvestLevel(stack, super.getHarvestLevel(stack, toolClass, player, blockState));
+	}
+
+	private int getStonePickHarvestLevel(IBlockState state) {
+		if (Arrays.stream(ConfigItemRegistry.customStonePickOverride).anyMatch(s -> state.toString().equalsIgnoreCase(s))) {
+			return state.getBlock().getHarvestLevel(state);
+		}
+		return 0;
 	}
 
 	@Override
@@ -206,22 +213,6 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 				decimal_format.format(CustomToolHelper.getEfficiency(item, efficiency, efficiencyMod / 2F))));
 
 		super.addInformation(item, world, list, flag);
-	}
-
-	//Pulls up copper, tin, and coal ore blocks via oreDict, and raises the harvest level if the block being targetted is one of them
-	//Mods make this necessary by not having soft copper and tin ore blocks
-	public int getStonePickHarvestLevel(IBlockState blockState) {
-		if (blockState != null) {
-			NonNullList<ItemStack> stonePickOres = OreDictionary.getOres("oreCopper");
-			stonePickOres.addAll(OreDictionary.getOres("oreTin"));
-			stonePickOres.addAll(OreDictionary.getOres("oreCoal"));
-			Block block = blockState.getBlock();
-			if (block != null && !stonePickOres.isEmpty()
-					&& OreDictionary.containsMatch(false, stonePickOres, new ItemStack(block))) {
-				return 1;
-			}
-		}
-		return 0;
 	}
 
 	@Override

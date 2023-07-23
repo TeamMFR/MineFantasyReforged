@@ -52,6 +52,17 @@ public class TileEntityComponent extends TileEntityBase {
 				return super.insertItem(slot, stack, simulate);
 			}
 
+			@Nonnull
+			@Override
+			public ItemStack extractItem(int slot, int amount, boolean simulate) {
+				if (stacks.get(0).getItem() != MineFantasyItems.PERSISTENT_COMPONENT_FLAG) {
+					return super.extractItem(slot, amount, simulate);
+				}
+				else {
+					return ItemStack.EMPTY;
+				}
+			}
+
 			@Override
 			protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
 				return BlockComponent.getStorageSize(type);

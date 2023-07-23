@@ -21,12 +21,14 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 	public static final String CATEGORY_TOOL = "Tools";
 	public static final String CATEGORY_WEAPONS = "Weapon Register";
 	public static final String CATEGORY_FOOD = "Food Register";
+	public static final String CATEGORY_STONE_PICK_OVERRIDE = "Stone Pick Override";
 	public static String[] armourListAC = new String[0];
 	public static String[] hoeList = new String[0];
 	public static String[] crafterList = new String[0];
 	public static String[] customDamagerList = new String[0];
 	public static String[] customDamagerEntityList = new String[0];
 	public static String[] customFoodList = new String[0];
+	public static String[] customStonePickOverride = new String[0];
 
 	public ConfigItemRegistry(String name) {
 		super(name);
@@ -343,5 +345,12 @@ public class ConfigItemRegistry extends ConfigurationBaseMF {
 
 		customFoodList = config.get(CATEGORY_FOOD, "Custom Food Stats", new String[0], foodStatsDescription).getStringList();
 		Arrays.sort(customFoodList);
+
+		//Stone Pick Overrides
+		String stonePickOverrideDescription = "This registers blockstates that the MFR Stone Pick can mine outside of its usual tier limits. \n"
+				+ "Most of the time you can get away with just the block registry name, like this: minecraft:dirt or minefantasyreforged:copper_ore \n"
+				+ "However, if it has properties, you must enter it exactly as the F3 screen has it, with brackets [] around the properties. Like this: minecraft:dirt[snowy=false,variant=podzol] \n";
+		customStonePickOverride = config.get(CATEGORY_STONE_PICK_OVERRIDE, "Stone Pick Overrides", new String[0], stonePickOverrideDescription).getStringList();
+		Arrays.sort(customStonePickOverride);
 	}
 }
