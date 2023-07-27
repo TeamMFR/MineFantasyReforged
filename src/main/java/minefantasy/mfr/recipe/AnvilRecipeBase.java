@@ -3,7 +3,6 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.constants.Skill;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
@@ -15,7 +14,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	public static final int WIDTH = 6;
 	public static final int HEIGHT = 4;
 	public ItemStack output;
-	private NonNullList<Ingredient> inputs;
+	public NonNullList<Ingredient> inputs;
 	public Skill requiredSkill;
 	public String requiredResearch;
 	public String toolType;
@@ -38,8 +37,6 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		this.craftTime = craftTime;
 		this.hotOutput = hotOutput;
 	}
-
-	abstract IRecipe getCraftingRecipe();
 
 	abstract boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world);
 

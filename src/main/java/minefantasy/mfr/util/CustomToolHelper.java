@@ -8,6 +8,7 @@ import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.util.EnumHelper;
@@ -15,6 +16,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class CustomToolHelper {
@@ -334,6 +336,14 @@ public class CustomToolHelper {
 	 */
 	public static boolean doesMatchForRecipe(ItemStack recipeItem, ItemStack inputItem) {
 		return doesMainMatchForRecipe(recipeItem, inputItem) && doesHaftMatchForRecipe(recipeItem, inputItem);
+	}
+
+	/**
+	 * Checks if two items' materials match
+	 */
+	public static boolean doesMatchForRecipe(Ingredient ingredient, ItemStack inputItem) {
+		return Arrays.stream(ingredient.getMatchingStacks())
+				.anyMatch(itemStack -> doesMainMatchForRecipe(itemStack, inputItem) && doesHaftMatchForRecipe(itemStack, inputItem));
 	}
 
 	public static boolean doesMainMatchForRecipe(ItemStack recipeItem, ItemStack inputItem) {

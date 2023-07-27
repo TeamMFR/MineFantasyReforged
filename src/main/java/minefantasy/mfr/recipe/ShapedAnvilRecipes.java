@@ -6,101 +6,42 @@ import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
+import java.util.Arrays;
 
 /**
  * @author AnonymousProductions
  */
-public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
-	/**
-	 * How many horizontal slots this recipe is wide.
-	 */
-	public int recipeWidth;
-	/**
-	 * How many vertical slots this recipe uses.
-	 */
-	public int recipeHeight;
-	/**
-	 * Is a array of ItemStack that composes the recipe.
-	 */
-	public ItemStack[] recipeItems;
-	/**
-	 * Is the ItemStack that you get when craft the recipe.
-	 */
-	public ItemStack recipeOutput;
+public class ShapedAnvilRecipes extends AnvilRecipeBase {
 
-	public final int recipeHammer;
-	public final boolean outputHot;
-	/**
-	 * The Anvil needed to craft
-	 */
-	public final int anvilTier;
-	public final int recipeTime;
-	public final String toolType;
-	public final String research;
-	public final Skill skillUsed;
-
-	public ShapedAnvilRecipes(int width, int height, ItemStack[] inputs, ItemStack output, String toolType, int time, int hammer, int anvil, boolean hot, String research, Skill skill) {
-		this.outputHot = hot;
-		this.recipeWidth = width;
-		this.anvilTier = anvil;
-		this.recipeHeight = height;
-		this.recipeItems = inputs;
-		this.recipeOutput = output;
-		this.recipeTime = time;
-		this.recipeHammer = hammer;
-		this.toolType = toolType;
-		this.research = research;
-		this.skillUsed = skill;
-	}
-
-	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inv) {
-		return this.getAnvilRecipeOutput().copy();
-	}
-
-	/**
-	 * Used to determine if this recipe can fit in a grid of the given width/height
-	 */
-	@Override
-	public boolean canFit(int width, int height) {
-		return width >= this.recipeWidth && height >= this.recipeHeight;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput(){
-		return this.recipeOutput;
+	public ShapedAnvilRecipes(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int time, int hammer, int anvil, boolean hot, String research, Skill skill) {
+		super(output, inputs, skill, research, toolType, anvil, hammer, time, hot);
 	}
 
 	@Override
 	public ItemStack getAnvilRecipeOutput() {
-		return this.recipeOutput;
+		return this.output;
 	}
 
 	@Override
 	public int getCraftTime() {
-		return recipeTime;
+		return craftTime;
 	}
 
 	@Override
 	public int getHammerTier() {
-		return recipeHammer;
+		return hammerTier;
 	}
 
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
-	@Override
 	public boolean matches(AnvilCraftMatrix matrix) {
-		for (int x = 0; x <= ShapelessAnvilRecipes.globalWidth - this.recipeWidth; ++x) {
-			for (int y = 0; y <= ShapelessAnvilRecipes.globalHeight - this.recipeHeight; ++y) {
+		for (int x = 0; x <= ShapelessAnvilRecipes.globalWidth - WIDTH; ++x) {
+			for (int y = 0; y <= ShapelessAnvilRecipes.globalHeight - HEIGHT; ++y) {
 				if (this.checkMatch(matrix, x, y, true) || this.checkMatch(matrix, x, y, false)) {
 					return true;
 				}
@@ -115,8 +56,8 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 	 */
 	@Override
 	public boolean matches(InventoryCrafting inv, World worldIn) {
-		for (int i = 0; i <= inv.getWidth() - this.recipeWidth; ++i) {
-			for (int j = 0; j <= inv.getHeight() - this.recipeHeight; ++j) {
+		for (int i = 0; i <= inv.getWidth() - WIDTH; ++i) {
+			for (int j = 0; j <= inv.getHeight() - HEIGHT; ++j) {
 				if (this.checkMatch(inv, i, j, true)) {
 					return true;
 				}
@@ -138,19 +79,19 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 			for (int matrixY = 0; matrixY < ShapelessAnvilRecipes.globalHeight; ++matrixY) {
 				int recipeX = matrixX - x;
 				int recipeY = matrixY - y;
-				ItemStack recipeItem = ItemStack.EMPTY;
+				Ingredient ingredient = Ingredient.EMPTY;
 
-				if (recipeX >= 0 && recipeY >= 0 && recipeX < this.recipeWidth && recipeY < this.recipeHeight) {
+				if (recipeX >= 0 && recipeY >= 0 && recipeX < WIDTH && recipeY < HEIGHT) {
 					if (b) {
-						recipeItem = this.recipeItems[this.recipeWidth - recipeX - 1 + recipeY * this.recipeWidth];
+						ingredient = inputs.get(WIDTH - recipeX - 1 + recipeY * WIDTH);
 					} else {
-						recipeItem = this.recipeItems[recipeX + recipeY * this.recipeWidth];
+						ingredient = inputs.get(recipeX + recipeY * WIDTH);
 					}
 				}
 
 				ItemStack inputItem = matrix.getStackInRowAndColumn(matrixX, matrixY);
 
-				if ((inputItem != null && !inputItem.isEmpty()) || recipeItem != null && !recipeItem.isEmpty()) {
+				if ((inputItem != null && !inputItem.isEmpty()) || ingredient != null && !ingredient.apply(ItemStack.EMPTY)) {
 					// HEATING
 					if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
 						return false;
@@ -160,7 +101,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 					}
 					inputItem = getHotItem(inputItem);
 
-					if (inputItem == null && recipeItem != null || inputItem != null && recipeItem == null) {
+					if (inputItem == null && ingredient != null || inputItem != null && ingredient == null) {
 						return false;
 					}
 
@@ -168,14 +109,20 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 						return false;
 					}
 
-					if (recipeItem.getItem() != inputItem.getItem()) {
+					if (!ingredient.apply(inputItem)) {
 						return false;
 					}
 
-					if (!(recipeItem.getItem().hasContainerItem(recipeItem) && recipeItem.getItem().getContainerItem() == recipeItem.getItem()) && recipeItem.getItemDamage() != inputItem.getItemDamage()) {
+					if (Arrays.stream(ingredient.getMatchingStacks()).anyMatch(stack -> {
+						if (stack.getItem().hasContainerItem(stack)) {
+							return stack.getItem().getContainerItem(stack).isItemEqual(stack);
+						}
+						return false;
+					})) {
 						return false;
 					}
-					if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
+
+					if (!CustomToolHelper.doesMatchForRecipe(ingredient, inputItem)) {
 						return false;
 					}
 				}
@@ -206,7 +153,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 	 */
 	@Override
 	public ItemStack getCraftingResult(AnvilCraftMatrix matrix) {
-		return recipeOutput.copy();
+		return output.copy();
 	}
 
 	/**
@@ -214,7 +161,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 	 */
 	@Override
 	public int getRecipeSize() {
-		return this.recipeWidth * this.recipeHeight;
+		return WIDTH * HEIGHT;
 	}
 
 	@Override
@@ -224,7 +171,7 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 
 	@Override
 	public boolean outputHot() {
-		return this.outputHot;
+		return hotOutput;
 	}
 
 	@Override
@@ -234,32 +181,16 @@ public class ShapedAnvilRecipes implements IRecipe, IAnvilRecipe {
 
 	@Override
 	public String getResearch() {
-		return research;
+		return requiredResearch;
 	}
 
 	@Override
 	public Skill getSkill() {
-		return skillUsed;
+		return requiredSkill;
 	}
 
 	@Override
 	public boolean useCustomTiers() {
 		return false;
-	}
-
-	@Override
-	public IRecipe setRegistryName(ResourceLocation name) {
-		return null;
-	}
-
-	@Nullable
-	@Override
-	public ResourceLocation getRegistryName() {
-		return null;
-	}
-
-	@Override
-	public Class<IRecipe> getRegistryType() {
-		return null;
 	}
 }
