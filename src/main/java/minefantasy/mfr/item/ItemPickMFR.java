@@ -178,8 +178,10 @@ public class ItemPickMFR extends ItemPickaxe implements IToolMaterial, IClientRe
 	}
 
 	private int getStonePickHarvestLevel(IBlockState state) {
-		if (Arrays.stream(ConfigItemRegistry.customStonePickOverride).anyMatch(s -> state.toString().equalsIgnoreCase(s))) {
-			return state.getBlock().getHarvestLevel(state);
+		if (state != null && ConfigItemRegistry.customStonePickOverride.length > 0) {
+			if (Arrays.stream(ConfigItemRegistry.customStonePickOverride).anyMatch(s -> state.toString().equalsIgnoreCase(s))) {
+				return state.getBlock().getHarvestLevel(state);
+			}
 		}
 		return 0;
 	}
