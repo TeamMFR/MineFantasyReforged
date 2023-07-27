@@ -1,7 +1,6 @@
 package minefantasy.mfr.entity;
 
 import minefantasy.mfr.entity.mob.DragonBreath;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityFireball;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,7 +17,7 @@ import java.util.Random;
 
 public class EntityDragonBreath extends EntityFireball {
 	private static final float size = 0.75F;
-	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.<Integer>createKey(Entity.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> TYPE_ID = EntityDataManager.<Integer>createKey(EntityDragonBreath.class, DataSerializers.VARINT);
 	public Random rand = new Random();
 	private DragonBreath breath;
 
