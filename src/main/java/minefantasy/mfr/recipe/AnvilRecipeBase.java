@@ -1,14 +1,19 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilRecipeBase> implements IAnvilRecipe {
-	public static final int width = 6;
-	public static final int height = 4;
+import javax.annotation.Nonnull;
+
+public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilRecipeBase> {
+	public static final int WIDTH = 6;
+	public static final int HEIGHT = 4;
 	public ItemStack output;
 	private NonNullList<Ingredient> inputs;
 	public Skill requiredSkill;
@@ -34,7 +39,10 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		this.hotOutput = hotOutput;
 	}
 
-	@Override
+	abstract IRecipe getCraftingRecipe();
+
+	abstract boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world);
+
 	public ItemStack getCraftingResult(AnvilCraftMatrix var1) {
 		return output.copy();
 	}
@@ -43,52 +51,42 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		return inputs;
 	}
 
-	@Override
 	public int getCraftTime() {
 		return craftTime;
 	}
 
-	@Override
 	public int getRecipeSize() {
 		return 0;
 	}
 
-	@Override
 	public int getHammerTier() {
 		return hammerTier;
 	}
 
-	@Override
 	public int getAnvilTier() {
 		return anvilTier;
 	}
 
-	@Override
 	public boolean outputHot() {
 		return hotOutput;
 	}
 
-	@Override
 	public String getToolType() {
 		return toolType;
 	}
 
-	@Override
 	public String getResearch() {
 		return requiredResearch;
 	}
 
-	@Override
 	public ItemStack getAnvilRecipeOutput() {
 		return output;
 	}
 
-	@Override
 	public Skill getSkill() {
 		return requiredSkill;
 	}
 
-	@Override
 	public boolean useCustomTiers() {
 		return false;
 	}

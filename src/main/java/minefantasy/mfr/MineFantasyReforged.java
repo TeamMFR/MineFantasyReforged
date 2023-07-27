@@ -223,7 +223,7 @@ public class MineFantasyReforged {
 	}
 
 	@SubscribeEvent
-	public void createRecipeRegistry(RegistryEvent.NewRegistry evt) {
+	public void createRegistry(RegistryEvent.NewRegistry evt) {
 		CraftingManagerAnvil.init();
 	}
 
