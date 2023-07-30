@@ -75,8 +75,8 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 	 * Checks if the region of a crafting inventory is match for the recipe.
 	 */
 	protected boolean checkMatch(InventoryCrafting matrix, int x, int y, boolean b) {
-		for (int matrixX = 0; matrixX < ShapelessAnvilRecipes.globalWidth; ++matrixX) {
-			for (int matrixY = 0; matrixY < ShapelessAnvilRecipes.globalHeight; ++matrixY) {
+		for (int matrixX = 0; matrixX < WIDTH; ++matrixX) {
+			for (int matrixY = 0; matrixY < HEIGHT; ++matrixY) {
 				int recipeX = matrixX - x;
 				int recipeY = matrixY - y;
 				Ingredient ingredient = Ingredient.EMPTY;
@@ -91,7 +91,7 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 
 				ItemStack inputItem = matrix.getStackInRowAndColumn(matrixX, matrixY);
 
-				if ((inputItem != null && !inputItem.isEmpty()) || ingredient != null && !ingredient.apply(ItemStack.EMPTY)) {
+				if ((!inputItem.isEmpty()) || !ingredient.apply(ItemStack.EMPTY)) {
 					// HEATING
 					if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
 						return false;
@@ -113,12 +113,12 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 						return false;
 					}
 
-					if (Arrays.stream(ingredient.getMatchingStacks()).anyMatch(stack -> {
-						if (stack.getItem().hasContainerItem(stack)) {
-							return stack.getItem().getContainerItem(stack).isItemEqual(stack);
-						}
-						return false;
-					})) {
+					ItemStack finalInputItem = inputItem;
+					boolean isEngineeringTools = Arrays.stream(ingredient.getMatchingStacks())
+							.noneMatch(stack -> !(stack.getItem().hasContainerItem(stack)
+									&& stack.getItem().getContainerItem() == stack.getItem())
+									&& stack.getItemDamage() != finalInputItem.getItemDamage());
+					if (isEngineeringTools) {
 						return false;
 					}
 

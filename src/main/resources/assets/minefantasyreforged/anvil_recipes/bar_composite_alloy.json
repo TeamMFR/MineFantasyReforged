@@ -1,5 +1,5 @@
 {
-  "type": "ShapedAnvilRecipes",
+  "type": "shaped_anvil_recipe",
   "skill": "engineering",
   "research": "cogwork_armour",
   "tool_type": "heavy_hammer",
@@ -16,8 +16,7 @@
   ],
   "key": {
     "S": {
-      "nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
-      "item": "minefantasyreforged:bar"
+      "item": "#BAR_STEEL"
     },
     "R": {
       "item": "minefantasyreforged:rivet"
@@ -26,12 +25,10 @@
       "item": "minefantasyreforged:engin_anvil_tools"
     },
     "M": {
-      "nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}",
-      "item": "minefantasyreforged:metal_hunk"
+      "item": "#HUNK_TUNGSTEN"
     },
     "C": {
-      "nbt": "{mf_custom_materials:{main_material:\"copper\"}}",
-      "item": "minefantasyreforged:bar"
+      "item": "#BAR_COPPER"
     }
   },
   "result": {

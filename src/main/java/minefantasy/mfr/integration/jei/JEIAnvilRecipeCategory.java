@@ -9,10 +9,11 @@ import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import mezz.jei.api.recipe.IStackHelper;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.recipe.CraftingManagerAnvilOld;
-import minefantasy.mfr.recipe.ShapedAnvilRecipes;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -105,10 +106,8 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 	/**
 	 * Generates all the MFR anvil recipes for JEI.
 	 */
-	public static Collection<JEIAnvilRecipe> generateRecipes() {
-		List<JEIAnvilRecipe> recipes = new ArrayList<>();
-		recipes.addAll(generateRecipeCategory1());
-		return recipes;
+	public static Collection<JEIAnvilRecipe> generateRecipes(IStackHelper stackHelper) {
+		return new ArrayList<>(generateRecipeCategory1(stackHelper));
 	}
 
 	@Nullable
@@ -117,13 +116,13 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 		return icon;
 	}
 
-	private static Collection<JEIAnvilRecipe> generateRecipeCategory1() {
+	private static Collection<JEIAnvilRecipe> generateRecipeCategory1(IStackHelper stackHelper) {
 
 		List<JEIAnvilRecipe> recipes = new ArrayList<>();
-		List<ShapedAnvilRecipes> anvilRecipes = CraftingManagerAnvilOld.getInstance().recipes;
+		Collection<AnvilRecipeBase> anvilRecipes = CraftingManagerAnvil.getRecipes();
 
-		for (ShapedAnvilRecipes anvilRecipe : anvilRecipes) {
-			recipes.add(new JEIAnvilRecipe(anvilRecipe));
+		for (AnvilRecipeBase anvilRecipe : anvilRecipes) {
+			recipes.add(new JEIAnvilRecipe(anvilRecipe, stackHelper));
 		}
 
 		return recipes;

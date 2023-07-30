@@ -70,7 +70,7 @@ public class AnvilRecipeLoader extends RecipeLoader {
 
 		Object[] inputs = this.getInputs(pattern, json);
 
-		CraftingManagerAnvilOld.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, oreDictList, inputs);
+		//CraftingManagerAnvilOld.getInstance().addRecipe(name, resultStack, skill, research, output_hot, tool_type, recipe_hammer, anvil_tier, recipe_time, type, oreDictList, inputs);
 	}
 
 	Object[] getInputs(String[] pattern, JsonObject json) {

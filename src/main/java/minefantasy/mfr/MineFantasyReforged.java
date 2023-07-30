@@ -28,7 +28,6 @@ import minefantasy.mfr.init.MineFantasyOreDict;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
-import minefantasy.mfr.recipe.AnvilRecipeLoader;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CarpenterRecipeLoader;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
@@ -188,7 +187,7 @@ public class MineFantasyReforged {
 		MineFantasyItems.addRandomDrops();
 
 		CarpenterRecipeLoader.INSTANCE.postInit();
-		AnvilRecipeLoader.INSTANCE.postInit();
+		//AnvilRecipeLoader.INSTANCE.postInit();
 
 		configClient.save();
 		configArmour.save();

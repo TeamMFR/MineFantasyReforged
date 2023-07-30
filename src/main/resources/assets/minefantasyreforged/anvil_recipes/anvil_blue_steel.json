@@ -1,5 +1,5 @@
 {
-  "type": "ShapedAnvilRecipes",
+  "type": "shaped_anvil_recipe",
   "skill": "artisanry",
   "research": "smelt_blue_steel",
   "tool_type": "hammer",
@@ -16,8 +16,7 @@
   ],
   "key": {
     "B": {
-      "nbt": "{mf_custom_materials:{main_material:\"blue_steel\"}}",
-      "item": "minefantasyreforged:bar"
+      "item": "#BAR_BLUE_STEEL"
     }
   },
   "result": {

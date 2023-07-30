@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
+import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -32,6 +34,7 @@ import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class CraftingManagerAnvil {
 	public CraftingManagerAnvil() {
@@ -132,6 +135,88 @@ public class CraftingManagerAnvil {
 					&& (!checkForExistence || !ANVIL_RECIPES.containsKey(recipe.getRegistryName()))) {
 				ANVIL_RECIPES.register(recipe);
 			}
+		}
+	}
+
+	public static ItemStack findMatchingRecipe(IAnvil anvil, AnvilCraftMatrix matrix, World world) {
+		int time;
+		int anvilTier;
+		boolean hot;
+		int hammer;
+		int matrixItemStackCount = 0;
+		String toolType;
+		SoundEvent sound;
+		ItemStack stack0 = ItemStack.EMPTY;
+		ItemStack stack1 = ItemStack.EMPTY;
+
+		for (int currentSlotIndex = 0; currentSlotIndex < matrix.getSizeInventory(); ++currentSlotIndex) {
+			ItemStack matrixSlotStack = matrix.getStackInSlot(currentSlotIndex);
+
+			// Logic to check if the matrix should match an item repair recipe. (The same two items next to each other in the first two slow).
+			if (!matrixSlotStack.isEmpty()) {
+				if (matrixItemStackCount == 0) {
+					stack0 = matrixSlotStack;
+				}
+
+				if (matrixItemStackCount == 1) {
+					stack1 = matrixSlotStack;
+				}
+
+				++matrixItemStackCount;
+			}
+		}
+
+		// Logic to check if the matrix should match an item repair recipe. (The same two items next to each other in the first two slow).
+		if (matrixItemStackCount == 2 && stack0.getItem() == stack1.getItem() && stack0.getCount() == 1 && stack1.getCount() == 1
+				&& stack0.getItem().isRepairable()) {
+
+			Item item0 = stack0.getItem();
+
+			int item0RemainingDurability = item0.getMaxDamage() - stack0.getItemDamage();
+			int itemDamageDifference = item0.getMaxDamage() - stack1.getItemDamage();
+			int itemDamageModifier =  (int) (item0RemainingDurability + itemDamageDifference + item0.getMaxDamage() * 0.1);
+			int newItemDamage = Math.max(0, item0.getMaxDamage() - itemDamageModifier);
+
+			return new ItemStack(stack0.getItem(), 1, newItemDamage);
+		} else {
+			//// Normal, registered recipes.
+			Iterator<AnvilRecipeBase> recipeIterator = getRecipes().iterator();
+			AnvilRecipeBase anvilRecipeBase = null;
+
+			while (recipeIterator.hasNext()) {
+				AnvilRecipeBase rec = recipeIterator.next();
+
+				if (rec.matches(matrix, world)) {
+					anvilRecipeBase = rec;
+					break;
+				}
+			}
+
+			if (anvilRecipeBase != null) {
+				time = anvilRecipeBase.getCraftTime();
+				hammer = anvilRecipeBase.getHammerTier();
+				anvilTier = anvilRecipeBase.getAnvilTier();
+				hot = anvilRecipeBase.outputHot();
+				toolType = anvilRecipeBase.getToolType();
+
+				if (!anvilRecipeBase.useCustomTiers()){
+					anvil.setProgressMax(time);
+					anvil.setRequiredHammerTier(hammer);
+					anvil.setRequiredAnvilTier(anvilTier);
+				}
+
+				anvil.setHotOutput(hot);
+				anvil.setRequiredToolType(toolType);
+
+				if (!anvilRecipeBase.getResearch().equalsIgnoreCase("tier")){
+					anvil.setRequiredResearch(anvilRecipeBase.getResearch());
+				}
+
+				anvil.setRequiredSkill(anvilRecipeBase.getSkill());
+
+				return anvilRecipeBase.getCraftingResult(matrix);
+			}
+			return ItemStack.EMPTY;
 		}
 	}
 }

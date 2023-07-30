@@ -12,7 +12,8 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 public class AnvilRecipeFactory {
 
 	public AnvilRecipeBase parse(JsonContext context, JsonObject json) {
-		String type = JsonUtils.getString(json, "type").split(":")[1];
+		String type = JsonUtils.getString(json, "type");
+		//String split = type.split(":")[1];
 		AnvilRecipeType recipeType = AnvilRecipeType.deserialize(type);
 		switch (recipeType) {
 			case SHAPED_ANVIL_RECIPE:

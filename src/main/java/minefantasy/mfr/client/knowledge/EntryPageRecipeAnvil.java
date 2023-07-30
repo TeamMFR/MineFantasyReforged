@@ -2,6 +2,7 @@ package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.Heatable;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.IAnvilRecipe;
 import minefantasy.mfr.recipe.ShapedAnvilRecipes;
 import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
@@ -58,9 +59,9 @@ public class EntryPageRecipeAnvil extends EntryPage {
 		if (recipe instanceof ShapedAnvilRecipes) {
 			ShapedAnvilRecipes shaped = (ShapedAnvilRecipes) recipe;
 
-			for (int y = 0; y < shaped.recipeHeight; y++) {
-				for (int x = 0; x < shaped.recipeWidth; x++) {
-					renderItemAtGridPos(parent, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true, posX, posY, mx, my);
+			for (int y = 0; y < AnvilRecipeBase.HEIGHT; y++) {
+				for (int x = 0; x < AnvilRecipeBase.WIDTH; x++) {//TODO: FIX THIS TO NOT JUST GRAB FIRST INGREDIENT, RENDER ALL INGREDIENTS
+					renderItemAtGridPos(parent, 1 + x, 1 + y, shaped.inputs.get(y * AnvilRecipeBase.WIDTH + x).getMatchingStacks()[0], true, posX, posY, mx, my);
 				}
 			}
 		} else if (recipe instanceof ShapelessAnvilRecipes) {

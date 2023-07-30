@@ -18,7 +18,7 @@ import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
-import minefantasy.mfr.recipe.CraftingManagerAnvilOld;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.IAnvil;
 import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
 import minefantasy.mfr.util.CustomToolHelper;
@@ -516,7 +516,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		ItemStack result = CraftingManagerAnvilOld.getInstance().findMatchingRecipe(this, craftMatrix, world);
+		ItemStack result = CraftingManagerAnvil.findMatchingRecipe(this, craftMatrix, world);
 		if (result == null || result.getItem() == Item.getItemFromBlock(Blocks.AIR)) { // right side is only necessary till we fix the empty AIR recipes
 			result = ItemStack.EMPTY;
 			resetProject();

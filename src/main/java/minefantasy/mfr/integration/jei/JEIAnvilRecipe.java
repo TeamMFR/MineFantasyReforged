@@ -3,17 +3,14 @@ package minefantasy.mfr.integration.jei;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
+import mezz.jei.api.recipe.IStackHelper;
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.recipe.ShapedAnvilRecipes;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.util.GuiHelper;
-import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,20 +21,13 @@ import java.util.Map;
 public class JEIAnvilRecipe implements IRecipeWrapper {
 
 	private final ItemStack result;
-	private final ShapedAnvilRecipes recipe;
-
+	private final AnvilRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
-	public JEIAnvilRecipe(ShapedAnvilRecipes recipe) {
+	public JEIAnvilRecipe(AnvilRecipeBase recipe, IStackHelper stackHelper) {
 		this.recipe = recipe;
 		this.result = recipe.getAnvilRecipeOutput();
-		this.ingredients = new ArrayList<>();
-
-		// JEI requires empty stacks in the missing slots, and our recipes are shrinked by default so we must expand them first to the full grid size
-		List<ItemStack> expandedList = RecipeHelper.expandPattern(Arrays.asList(recipe.recipeItems), recipe.recipeWidth, recipe.recipeHeight, 6, 4);
-		for (ItemStack itemStack : expandedList) {
-			this.ingredients.add(Collections.singletonList(itemStack));
-		}
+		this.ingredients = stackHelper.expandRecipeItemStackInputs(recipe.inputs);
 	}
 
 	@Override
@@ -52,7 +42,7 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 		if (minecraft.currentScreen != null) {
 
 			// add hot output icon
-			if (recipe.outputHot) {
+			if (recipe.hotOutput) {
 				GuiHelper.drawHotItemIcon(minecraft,143, 28);
 			}
 
@@ -72,15 +62,18 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 			}
 
 			for (int j = 0; j < ingredients.size(); j++) {
-				ItemStack stack = (ingredients.get(j).get(0));
-				if (stack != null && !stack.isEmpty() && Heatable.canHeatItem(ingredients.get(j).get(0))) {
-					GuiHelper.drawHotItemIcon(minecraft, ingredientMap.get(j).keySet().iterator().next(), ingredientMap.get(j).values().iterator().next());
+				List<ItemStack> stacks = ingredients.get(j);
+				if (!stacks.isEmpty()) {
+					ItemStack stack = (stacks.get(0));
+					if (stack != null && !stack.isEmpty() && Heatable.canHeatItem(ingredients.get(j).get(0))) {
+						GuiHelper.drawHotItemIcon(minecraft, ingredientMap.get(j).keySet().iterator().next(), ingredientMap.get(j).values().iterator().next());
+					}
 				}
 			}
 		}
 
 		// draw tool icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.toolType, recipe.recipeHammer, recipeWidth - 23, recipeHeight - 98, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.toolType, recipe.hammerTier, recipeWidth - 23, recipeHeight - 98, true);
 
 		// draw bench icon with required tier int
 		GuiHelper.renderToolIcon(minecraft.currentScreen, "anvil", recipe.anvilTier, recipeWidth - 23, recipeHeight - 48, true);
@@ -89,11 +82,11 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 
 		if (isPointInRegion(recipeWidth - 23, recipeHeight - 98, 20, 20, mouseX, mouseY, 0, 0)) {
 			// Shows the tool tooltip text with the name of the tool and the minimum tier
-			String s2 = I18n.format("tooltype." + recipe.toolType) + ", " + (recipe.recipeHammer > -1
-					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.recipeHammer
+			String s2 = I18n.format("tooltype." + recipe.toolType) + ", " + (recipe.hammerTier > -1
+					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.hammerTier
 					: I18n.format("attribute.nomfcrafttier.name"));
 			minecraft.fontRenderer.drawStringWithShadow(s2, (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(s2) / 2), (float) 84, 16777215);
-		} else if (isPointInRegion(recipeWidth + -23, recipeHeight - 48, 20, 20, mouseX, mouseY, 0, 0)) {
+		} else if (isPointInRegion(recipeWidth - 23, recipeHeight - 48, 20, 20, mouseX, mouseY, 0, 0)) {
 			// Shows the anvil tooltip text with the minimum anvil tier
 			String s2 = I18n.format("tooltype.anvil") + ", " + (recipe.anvilTier > -1
 					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.anvilTier
@@ -101,7 +94,7 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 			minecraft.fontRenderer.drawStringWithShadow(s2, (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(s2) / 2), (float) 84, 16777215);
 		} else {
 			// Just display the required Skill type of for this recipe
-			minecraft.fontRenderer.drawStringWithShadow(recipe.skillUsed.getDisplayName(), (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(recipe.skillUsed.getDisplayName()) / 2), (float) 84, 16777215);
+			minecraft.fontRenderer.drawStringWithShadow(recipe.requiredSkill.getDisplayName(), (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(recipe.requiredSkill.getDisplayName()) / 2), (float) 84, 16777215);
 		}
 	}
 

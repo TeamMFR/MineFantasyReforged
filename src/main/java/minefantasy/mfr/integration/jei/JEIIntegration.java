@@ -6,6 +6,7 @@ import mezz.jei.api.JEIPlugin;
 import mezz.jei.api.ingredients.IIngredientBlacklist;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import mezz.jei.api.recipe.IStackHelper;
 import minefantasy.mfr.config.ConfigIntegration;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.item.Item;
@@ -44,11 +45,12 @@ public class JEIIntegration implements IModPlugin {
 		// blacklist.addIngredientToBlacklist(MineFantasyItems.ANCIENT_JEWEL_ADAMANT);
 		// /UNUSED
 
+		IStackHelper stackHelper = registry.getJeiHelpers().getStackHelper();
 
 		addExtendedInfo(registry, MineFantasyItems.FLUX, ".desc_extended");
 
 		registry.addRecipes(JEICarpenterRecipeCategory.generateRecipes(), JEICarpenterRecipeCategory.UID);
-		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipes(), JEIAnvilRecipeCategory.UID);
+		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipes(stackHelper), JEIAnvilRecipeCategory.UID);
 	}
 
 	private static void addExtendedInfo(IModRegistry registry, Item item, String... suffixes) {

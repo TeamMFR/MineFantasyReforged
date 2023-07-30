@@ -1,6 +1,5 @@
 package minefantasy.mfr.recipe;
 
-import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
@@ -141,20 +140,20 @@ public class CraftingManagerAnvilOld {
 			}
 		}
 
-		IAnvilRecipe recipe;
+		IAnvilRecipe recipe = null;
 		if (recipeType.equals("CustomToolRecipe")) {
-			recipe = new CustomToolRecipeAnvil(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill);
+			//recipe = new CustomToolRecipeAnvil(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill);
 		}
 		else if ( recipeType.equals("CustomToolOreDictAnvilRecipes")){
-			recipe = new CustomToolRecipeAnvil(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill, oreDictList);
+			//recipe = new CustomToolRecipeAnvil(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill, oreDictList);
 		}
 		else {
-			recipe = new ShapedAnvilRecipes(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill);
+			//recipe = new ShapedAnvilRecipes(width, height, inputs, result, tool, time, hammer, anvil, hot, research, skill);
 		}
-		if (ConfigCrafting.isAnvilItemCraftable(recipe.getAnvilRecipeOutput().getItem())) {
-			this.recipes.add(recipe);
-			this.recipeMap.put(name, recipe);
-		}
+//		if (ConfigCrafting.isAnvilItemCraftable(recipe.getAnvilRecipeOutput().getItem())) {
+//			this.recipes.add(recipe);
+//			this.recipeMap.put(name, recipe);
+//		}
 		return recipe;
 	}
 

@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "ShapedAnvilRecipes",
   "skill": "none",
   "research": "none",
   "tool_type": "hammer",
@@ -16,17 +16,17 @@
   ],
   "key": {
     "I": {
-      "item": "#BAR_IRON"
+      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+      "item": "minefantasyreforged:bar"
     },
     "F": {
       "item": "minecraft:flint"
     },
     "S": {
-      "item": "#STICK_WOOD"
+      "item": "minecraft:stick"
     },
     "W": {
-      "item": "minecraft:wool",
-      "data": 32767
+      "item": "minecraft:wool"
     }
   },
   "result": {
