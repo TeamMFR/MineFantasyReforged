@@ -7,7 +7,7 @@
 	],
 	"key": {
 		"S": {
-			"item": "minecraft:stick"
+			"item": "#STICK_WOOD"
 		}
 	},
 	"result": {

@@ -1,0 +1,20 @@
+{
+  "type": "shapeless_anvil_recipe",
+  "skill": "none",
+  "research": "",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 12,
+  "recipe_hammer": 3,
+  "output_hot": false,
+  "ingredients": [
+    {
+      "item": "minecraft:obsidian"
+    }
+  ],
+  "result": {
+    "item": "minefantasyreforged:obsidian_rock",
+    "count": 4
+  }
+}

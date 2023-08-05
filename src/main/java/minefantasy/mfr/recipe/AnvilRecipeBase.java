@@ -1,7 +1,8 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.api.heating.Heatable;
+import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -23,10 +24,8 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	public int craftTime;
 	public boolean hotOutput;
 
-	public AnvilRecipeBase(
-			ItemStack output, NonNullList<Ingredient> inputs, Skill requiredSkill,
-			String requiredResearch, String toolType, int anvilTier,
-			int hammerTier, int craftTime, boolean hotOutput) {
+	public AnvilRecipeBase(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
+			int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
 		this.output = output;
 		this.inputs = inputs;
 		this.requiredSkill = requiredSkill;
@@ -38,7 +37,23 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		this.hotOutput = hotOutput;
 	}
 
-	abstract boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world);
+	abstract boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world);
+
+	protected ItemStack getHotItem(ItemStack item) {
+		if (item.isEmpty())
+			return ItemStack.EMPTY;
+		if (!(item.getItem() instanceof IHotItem)) {
+			return item;
+		}
+
+		ItemStack hotItem = Heatable.getItemStack(item);
+
+		if (!hotItem.isEmpty()) {
+			return hotItem;
+		}
+
+		return item;
+	}
 
 	public ItemStack getCraftingResult(AnvilCraftMatrix var1) {
 		return output.copy();

@@ -18,9 +18,9 @@ import minefantasy.mfr.mechanics.PlayerTickHandler;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.IAnvil;
-import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
@@ -564,7 +564,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	public void setContainer(ContainerAnvil container) {
 		syncAnvil = container;
-		craftMatrix = new AnvilCraftMatrix(this, syncAnvil, ShapelessAnvilRecipes.globalWidth, ShapelessAnvilRecipes.globalHeight);
+		craftMatrix = new AnvilCraftMatrix(this, syncAnvil, AnvilRecipeBase.WIDTH, AnvilRecipeBase.HEIGHT);
 	}
 
 	public int getProgressBar(int i) {

@@ -10,7 +10,7 @@
 			"item": "minefantasyreforged:steel_bars"
 		},
 		"S": {
-			"item": "minecraft:stick"
+			"item": "#STICK_WOOD"
 		}
 	},
 	"result": {

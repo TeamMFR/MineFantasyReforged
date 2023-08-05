@@ -1,24 +1,20 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.util.CustomToolHelper;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-
-import java.util.Arrays;
 
 /**
  * @author AnonymousProductions
  */
 public class ShapedAnvilRecipes extends AnvilRecipeBase {
 
-	public ShapedAnvilRecipes(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int time, int hammer, int anvil, boolean hot, String research, Skill skill) {
-		super(output, inputs, skill, research, toolType, anvil, hammer, time, hot);
+	public ShapedAnvilRecipes(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
+		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
 	}
 
 	@Override
@@ -39,23 +35,8 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
-	public boolean matches(AnvilCraftMatrix matrix) {
-		for (int x = 0; x <= ShapelessAnvilRecipes.globalWidth - WIDTH; ++x) {
-			for (int y = 0; y <= ShapelessAnvilRecipes.globalHeight - HEIGHT; ++y) {
-				if (this.checkMatch(matrix, x, y, true) || this.checkMatch(matrix, x, y, false)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * Used to check if a recipe matches current crafting inventory
-	 */
 	@Override
-	public boolean matches(InventoryCrafting inv, World worldIn) {
+	public boolean matches(AnvilCraftMatrix inv, World worldIn) {
 		for (int i = 0; i <= inv.getWidth() - WIDTH; ++i) {
 			for (int j = 0; j <= inv.getHeight() - HEIGHT; ++j) {
 				if (this.checkMatch(inv, i, j, true)) {
@@ -74,7 +55,7 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 	/**
 	 * Checks if the region of a crafting inventory is match for the recipe.
 	 */
-	protected boolean checkMatch(InventoryCrafting matrix, int x, int y, boolean b) {
+	protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b) {
 		for (int matrixX = 0; matrixX < WIDTH; ++matrixX) {
 			for (int matrixY = 0; matrixY < HEIGHT; ++matrixY) {
 				int recipeX = matrixX - x;
@@ -113,15 +94,6 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 						return false;
 					}
 
-					ItemStack finalInputItem = inputItem;
-					boolean isEngineeringTools = Arrays.stream(ingredient.getMatchingStacks())
-							.noneMatch(stack -> !(stack.getItem().hasContainerItem(stack)
-									&& stack.getItem().getContainerItem() == stack.getItem())
-									&& stack.getItemDamage() != finalInputItem.getItemDamage());
-					if (isEngineeringTools) {
-						return false;
-					}
-
 					if (!CustomToolHelper.doesMatchForRecipe(ingredient, inputItem)) {
 						return false;
 					}
@@ -130,22 +102,6 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 		}
 
 		return true;
-	}
-
-	protected ItemStack getHotItem(ItemStack item) {
-		if (item.isEmpty())
-			return ItemStack.EMPTY;
-		if (!(item.getItem() instanceof IHotItem)) {
-			return item;
-		}
-
-		ItemStack hotItem = Heatable.getItemStack(item);
-
-		if (!hotItem.isEmpty()) {
-			return hotItem;
-		}
-
-		return item;
 	}
 
 	/**

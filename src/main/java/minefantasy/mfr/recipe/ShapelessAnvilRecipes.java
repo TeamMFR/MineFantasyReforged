@@ -1,124 +1,77 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * @author AnonymousProductions
  */
-public class ShapelessAnvilRecipes implements IAnvilRecipe {
-	public static final int globalWidth = 6;
-	public static final int globalHeight = 4;
+public class ShapelessAnvilRecipes extends AnvilRecipeBase {
 
-	/**
-	 * Is the ItemStack that you get when craft the recipe.
-	 */
-	public final ItemStack recipeOutput;
-
-	public final boolean outputHot;
-	/**
-	 * Is a List of ItemStack that composes the recipe.
-	 */
-	public final List<ItemStack> recipeItems;
-	/**
-	 * The anvil Required
-	 */
-	public final int anvil;
-	public final int recipeTime;
-	public final String toolType;
-	public final String research;
-	public final Skill skillUsed;
-	private final int recipeHammer;
-
-	public ShapelessAnvilRecipes(ItemStack output, String toolType, int hammer, int anvi, int time, List<ItemStack> components, boolean hot, String research, Skill skill) {
-		this.outputHot = hot;
-		this.recipeOutput = output;
-		this.anvil = anvi;
-		this.recipeItems = components;
-		this.recipeHammer = hammer;
-		this.recipeTime = time;
-		this.toolType = toolType;
-		this.research = research;
-		this.skillUsed = skill;
+	public ShapelessAnvilRecipes(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
+		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
 	}
 
 	@Override
 	public ItemStack getAnvilRecipeOutput() {
-		return this.recipeOutput;
+		return this.output;
 	}
 
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	public boolean matches(AnvilCraftMatrix matrix) {
-		ArrayList<ItemStack> var2 = new ArrayList<>(this.recipeItems);
+	boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world) {
+		NonNullList<Ingredient> ingredients = getIngredients();
+		List<Boolean> ingredientsMatched = new ArrayList<>(Collections.nCopies(ingredients.size(), false));
 
-		for (int column = 0; column <= globalWidth; ++column) {
-			for (int row = 0; row <= globalHeight; ++row) {
-				ItemStack inputItem = matrix.getStackInRowAndColumn(row, column);
+		for (int i = 0; i < inv.getSizeInventory(); ++i) {
+			ItemStack inputItem = inv.getStackInSlot(i);
+			if (inputItem.isEmpty()) {
+				continue;
+			}
+			boolean matched = false;
+			for (int j = 0; j < ingredients.size(); j++) {
+				boolean passesChecks = true;
 
-				if (!inputItem.isEmpty()) {
-					boolean var6 = false;
-
-					for (Object o : var2) {
-						ItemStack recipeItem = (ItemStack) o;
-
-						// HEATING
-						if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
-							return false;
-						}
-						if (!Heatable.isWorkable(inputItem)) {
-							return false;
-						}
-						inputItem = getHotItem(inputItem);
-
-						if (inputItem.isEmpty()) {
-							return false;
-						}
-						if (!CustomToolHelper.doesMatchForRecipe(recipeItem, inputItem)) {
-							return false;
-						}
-						if (inputItem.getItem() == recipeItem.getItem()
-								&& (recipeItem.getItemDamage() == OreDictionary.WILDCARD_VALUE
-								|| inputItem.getItemDamage() == recipeItem.getItemDamage())) {
-							var6 = true;
-							var2.remove(recipeItem);
-							break;
-						}
-					}
-
-					if (!var6) {
-						return false;
-					}
+				// HEATING
+				if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
+					passesChecks = false;
 				}
+				if (!Heatable.isWorkable(inputItem)) {
+					passesChecks = false;
+				}
+				inputItem = getHotItem(inputItem);
+
+				if (inputItem.isEmpty()) {
+					passesChecks = false;
+				}
+				if (!CustomToolHelper.doesMatchForRecipe(ingredients.get(j), inputItem)) {
+					passesChecks = false;
+				}
+
+				if (passesChecks && ingredients.get(j).apply(inputItem)) {
+					ingredientsMatched.set(j, true);
+					matched = true;
+					break;
+				}
+			}
+			if (!matched) {
+				return false;
 			}
 		}
 
-		return var2.isEmpty();
-	}
-
-	protected ItemStack getHotItem(ItemStack item) {
-		if (item.isEmpty())
-			return ItemStack.EMPTY;
-		if (!(item.getItem() instanceof IHotItem)) {
-			return item;
-		}
-
-		ItemStack hotItem = Heatable.getItemStack(item);
-
-		if (!hotItem.isEmpty()) {
-			return hotItem;
-		}
-
-		return item;
+		return !ingredientsMatched.contains(false);
 	}
 
 	/**
@@ -126,7 +79,7 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
 	 */
 	@Override
 	public ItemStack getCraftingResult(AnvilCraftMatrix par1AnvilCraftMatrix) {
-		return this.recipeOutput.copy();
+		return this.output.copy();
 	}
 
 	/**
@@ -134,27 +87,27 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
 	 */
 	@Override
 	public int getRecipeSize() {
-		return this.recipeItems.size();
+		return this.inputs.size();
 	}
 
 	@Override
 	public int getCraftTime() {
-		return this.recipeTime;
+		return this.craftTime;
 	}
 
 	@Override
 	public int getHammerTier() {
-		return this.recipeHammer;
+		return this.hammerTier;
 	}
 
 	@Override
 	public int getAnvilTier() {
-		return this.anvil;
+		return this.anvilTier;
 	}
 
 	@Override
 	public boolean outputHot() {
-		return outputHot;
+		return hotOutput;
 	}
 
 	@Override
@@ -164,12 +117,12 @@ public class ShapelessAnvilRecipes implements IAnvilRecipe {
 
 	@Override
 	public String getResearch() {
-		return research;
+		return requiredResearch;
 	}
 
 	@Override
 	public Skill getSkill() {
-		return skillUsed;
+		return requiredSkill;
 	}
 
 	@Override

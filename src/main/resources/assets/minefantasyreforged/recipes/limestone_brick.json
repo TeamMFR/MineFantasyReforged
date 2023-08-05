@@ -6,7 +6,8 @@
 	],
 	"key": {
 		"B": {
-			"item": "minefantasyreforged:limestone"
+			"type": "forge:ore_dict",
+			"ore": "limestone"
 		}
 	},
 	"result": {

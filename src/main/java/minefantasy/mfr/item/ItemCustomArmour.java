@@ -4,7 +4,6 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
-import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.util.ArmourCalculator;
@@ -28,28 +27,6 @@ public class ItemCustomArmour extends ItemArmourMFR {
 		super(craftDesign + "_" + name, MineFantasyMaterials.IRON, armourDesign, slot, craftDesign + "_" + tex, rarity);
 		this.specialDesign = craftDesign;
 		canRepair = false;
-	}
-
-	public static void addSuits(List<ItemStack> list, String material) {
-		list.add(MineFantasyItems.STANDARD_CHAIN_HELMET.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_LEGGINGS.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_BOOTS.construct(material));
-
-		list.add(MineFantasyItems.STANDARD_SCALE_HELMET.construct(material));
-		list.add(MineFantasyItems.STANDARD_SCALE_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.STANDARD_SCALE_LEGGINGS.construct(material));
-		list.add((MineFantasyItems.STANDARD_SCALE_BOOTS).construct(material));
-
-		list.add((MineFantasyItems.STANDARD_SPLINT_HELMET).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_BOOTS).construct(material));
-
-		list.add((MineFantasyItems.STANDARD_PLATE_HELMET).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_BOOTS).construct(material));
 	}
 
 	public ItemCustomArmour modifyRating(float rating) {
@@ -111,23 +88,37 @@ public class ItemCustomArmour extends ItemArmourMFR {
 			return;
 		}
 		ArrayList<CustomMaterial> metal = CustomMaterial.getList("metal");
-		if (this.getCreativeTab() != MineFantasyTabs.tabArmour) {
+		if (items.stream().noneMatch(stack -> stack.getItem() instanceof ItemCustomArmour)) {
 			for (CustomMaterial customMat : metal) {
-				if (!customMat.getItemStack().isEmpty()) {
-					items.add(construct(customMat.name));
+				if (MineFantasyReforged.isDebug() || !customMat.getItemStack().isEmpty()) {
+					addSuits(items, customMat.name);
 				}
-			}
-			return;
-		}
-		if (this != MineFantasyItems.STANDARD_CHAIN_BOOTS)
-			return;
-
-		for (CustomMaterial customMat : metal) {
-			if (!customMat.getItemStack().isEmpty()) {
-				addSuits(items, customMat.name);
 			}
 		}
 	}
+
+	public static void addSuits(List<ItemStack> list, String material) {
+		list.add(MineFantasyItems.STANDARD_CHAIN_HELMET.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_CHESTPLATE.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_LEGGINGS.construct(material));
+		list.add(MineFantasyItems.STANDARD_CHAIN_BOOTS.construct(material));
+
+		list.add(MineFantasyItems.STANDARD_SCALE_HELMET.construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_CHESTPLATE.construct(material));
+		list.add(MineFantasyItems.STANDARD_SCALE_LEGGINGS.construct(material));
+		list.add((MineFantasyItems.STANDARD_SCALE_BOOTS).construct(material));
+
+		list.add((MineFantasyItems.STANDARD_SPLINT_HELMET).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_CHESTPLATE).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_LEGGINGS).construct(material));
+		list.add((MineFantasyItems.STANDARD_SPLINT_BOOTS).construct(material));
+
+		list.add((MineFantasyItems.STANDARD_PLATE_HELMET).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_CHESTPLATE).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_LEGGINGS).construct(material));
+		list.add((MineFantasyItems.STANDARD_PLATE_BOOTS).construct(material));
+	}
+
 
 	@Override
 	public float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {

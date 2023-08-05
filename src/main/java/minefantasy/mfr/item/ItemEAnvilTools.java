@@ -4,6 +4,8 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.item.ItemStack;
 
+import java.util.Random;
+
 /**
  * @author Anonymous Productions
  */
@@ -17,9 +19,10 @@ public class ItemEAnvilTools extends ItemBaseMFR {
 	}
 
 	@Override
-	public ItemStack getContainerItem(ItemStack item) {
-		item.setItemDamage(item.getItemDamage() + 1);
-		return item.getItemDamage() >= item.getMaxDamage() ? ItemStack.EMPTY : item;
+	public ItemStack getContainerItem(ItemStack stack) {
+		ItemStack damagedStack = stack.copy();
+		damagedStack.attemptDamageItem(1, new Random(), null);
+		return damagedStack.getItemDamage() >= damagedStack.getMaxDamage() ? ItemStack.EMPTY : damagedStack;
 	}
 
 	@Override

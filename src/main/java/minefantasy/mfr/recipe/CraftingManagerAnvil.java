@@ -33,8 +33,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 public class CraftingManagerAnvil {
 	public CraftingManagerAnvil() {
@@ -219,4 +221,21 @@ public class CraftingManagerAnvil {
 			return ItemStack.EMPTY;
 		}
 	}
+
+	public static AnvilRecipeBase getRecipeByName(String name) {
+		ResourceLocation resourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID + ":" + name);
+		if (!ANVIL_RECIPES.containsKey(resourceLocation)) {
+			MineFantasyReforged.LOG.error("Anvil Recipe Registry does not contain recipe: {}", name);
+		}
+		return ANVIL_RECIPES.getValue(resourceLocation);
+	}
+
+	public static List<AnvilRecipeBase> getRecipesByName(String... names) {
+		List<AnvilRecipeBase> recipes = new ArrayList<>();
+		for (String name : names) {
+			recipes.add(getRecipeByName(name));
+		}
+		return recipes;
+	}
+
 }

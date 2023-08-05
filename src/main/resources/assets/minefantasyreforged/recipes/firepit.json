@@ -9,7 +9,7 @@
 			"item": "minefantasyreforged:timber"
 		},
 		"S": {
-			"item": "minecraft:stick"
+			"item": "#STICK_WOOD"
 		}
 	},
 	"result": {

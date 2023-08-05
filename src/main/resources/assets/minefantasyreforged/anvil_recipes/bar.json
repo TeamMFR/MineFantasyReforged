@@ -1,0 +1,19 @@
+{
+    "type": "shapeless_custom_material_anvil_recipe",
+    "skill": "artisanry",
+    "research": "",
+    "tool_type": "hammer",
+    "is_tool_recipe": false,
+    "anvil_tier": -1,
+    "recipe_time": 2,
+    "recipe_hammer": -1,
+    "output_hot": true,
+    "ingredients": [
+        {
+            "item": "#LIST_ALL_INGOTS"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:bar"
+    }
+}

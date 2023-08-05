@@ -1,0 +1,34 @@
+{
+  "type": "shaped_anvil_recipe",
+  "skill": "engineering",
+  "research": "engineering_components",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 35,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    "RRR   ",
+    "ISI   ",
+    "SES   ",
+    "ISI   "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools"
+    },
+    "S": {
+      "item": "#HUNK_STEEL"
+    },
+    "I": {
+      "item": "#HUNK_IRON"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:iron_frame"
+  }
+}

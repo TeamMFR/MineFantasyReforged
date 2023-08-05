@@ -1,0 +1,32 @@
+{
+  "type": "shaped_anvil_recipe",
+  "skill": "engineering",
+  "research": "engineering_components",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 35,
+  "recipe_hammer": 3,
+  "output_hot": true,
+  "pattern": [
+    " E    ",
+    " M    ",
+    "MBM   ",
+    " M    "
+  ],
+  "key": {
+    "B": {
+      "item": "#BAR_IRON"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools",
+      "data": 32767
+    },
+    "M": {
+      "item": "#HUNK_BRONZE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bronze_gears"
+  }
+}

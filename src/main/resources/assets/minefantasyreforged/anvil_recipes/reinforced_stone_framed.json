@@ -1,0 +1,28 @@
+{
+  "type": "shaped_anvil_recipe",
+  "skill": "construction",
+  "research": "decorated_stone",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 14,
+  "recipe_hammer": 0,
+  "output_hot": false,
+  "pattern": [
+    " M    ",
+    "MRM   ",
+    " M    ",
+    "      "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:reinforced_stone"
+    },
+    "M": {
+      "item": "#HUNK_BRONZE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:reinforced_stone_framed"
+  }
+}

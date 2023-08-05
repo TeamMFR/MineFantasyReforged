@@ -14,6 +14,8 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.ShapedCustomMaterialAnvilRecipe;
+import minefantasy.mfr.recipe.ShapelessCustomMaterialAnvilRecipe;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -116,13 +118,30 @@ public class JEIAnvilRecipeCategory implements IRecipeCategory<JEIAnvilRecipe> {
 		return icon;
 	}
 
-	private static Collection<JEIAnvilRecipe> generateRecipeCategory1(IStackHelper stackHelper) {
+	public static Collection<JEIAnvilRecipe> generateRecipeCategory1(IStackHelper stackHelper) {
 
 		List<JEIAnvilRecipe> recipes = new ArrayList<>();
 		Collection<AnvilRecipeBase> anvilRecipes = CraftingManagerAnvil.getRecipes();
 
 		for (AnvilRecipeBase anvilRecipe : anvilRecipes) {
-			recipes.add(new JEIAnvilRecipe(anvilRecipe, stackHelper));
+			if (!(anvilRecipe instanceof ShapedCustomMaterialAnvilRecipe || anvilRecipe instanceof ShapelessCustomMaterialAnvilRecipe)) {
+				recipes.add(new JEIAnvilRecipe(anvilRecipe, stackHelper));
+			}
+		}
+
+		return recipes;
+
+	}
+
+	public static Collection<JEIAnvilRecipe> generateRecipeCategory2(IStackHelper stackHelper) {
+
+		List<JEIAnvilRecipe> recipes = new ArrayList<>();
+		Collection<AnvilRecipeBase> anvilRecipes = CraftingManagerAnvil.getRecipes();
+
+		for (AnvilRecipeBase anvilRecipe : anvilRecipes) {
+			if (anvilRecipe instanceof ShapedCustomMaterialAnvilRecipe || anvilRecipe instanceof ShapelessCustomMaterialAnvilRecipe) {
+				recipes.add(new JEIAnvilCustomMaterial(anvilRecipe, stackHelper));
+			}
 		}
 
 		return recipes;

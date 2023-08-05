@@ -6,86 +6,63 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.IShapedRecipe;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class EntryPageRecipeBase extends EntryPage {
 	private final Minecraft mc = Minecraft.getMinecraft();
-	private final IRecipe[] recipes;
-	private int recipeID;
-	private int ingredientID;
+	private final List<IRecipe> recipes;
+	private final CycleTimer cycleTimer = new CycleTimer((int) ((Math.random() * 10000) % Integer.MAX_VALUE));
 
 	public EntryPageRecipeBase(List<IRecipe> recipes) {
-		IRecipe[] array = new IRecipe[recipes.size()];
-		for (int a = 0; a < recipes.size(); a++) {
-			array[a] = recipes.get(a);
-		}
-		this.recipes = array;
-
+		this.recipes = recipes;
 	}
 
 	public EntryPageRecipeBase(IRecipe... recipes) {
-		this.recipes = recipes;
+		this.recipes = Arrays.asList(recipes);
 	}
 
 	@Override
 	public void render(GuiScreen parent, int x, int y, float ticks, int posX, int posY, boolean onTick) {
 		if (onTick) {
-			tickRecipes();
+			cycleTimer.onDraw();
 		}
 
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/craft_grid.png"));
 		parent.drawTexturedModalRect(posX, posY, 0, 0, universalBookImageWidth, universalBookImageHeight);
 
-		IRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
+		IRecipe recipe = cycleTimer.getCycledItem(recipes);
 		String cft = "<" + I18n.format("method.workbench") + ">";
 		mc.fontRenderer.drawSplitString(cft, posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
 
-		renderRecipe(parent, x, y, posX, posY, recipe, onTick);
+		renderRecipe(parent, x, y, posX, posY, recipe);
 	}
 
-	private void renderRecipe(GuiScreen parent, int mx, int my, int posX, int posY, IRecipe recipe, Boolean onTick) {
+	private void renderRecipe(GuiScreen parent, int mx, int my, int posX, int posY, IRecipe recipe) {
 		if (recipe == null) {
 			return;
 		}
 
-		ItemStack[] ingredients;
+		if (recipe instanceof ShapedRecipes || recipe instanceof ShapedOreRecipe) {
 
-		if (recipe instanceof ShapedRecipes) {
-			ShapedRecipes shaped = (ShapedRecipes) recipe;
-
-			for (int y = 0; y < shaped.recipeHeight; y++) {
-				for (int x = 0; x < shaped.recipeWidth; x++) {
-					ingredients = shaped.recipeItems.get(y * shaped.recipeWidth + x).getMatchingStacks();
-					if (ingredients.length != 0) { // fixes crash with mod operation with 0 divisior
-						renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX, posY,
-								mx, my);
+			for (int y = 0; y < ((IShapedRecipe) recipe).getRecipeHeight(); y++) {
+				for (int x = 0; x < ((IShapedRecipe) recipe).getRecipeWidth(); x++) {
+					int index = y * ((IShapedRecipe) recipe).getRecipeWidth() + x;
+					ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(recipe.getIngredients().get(index).getMatchingStacks()));
+					if (stack != null) {
+						renderItemAtGridPos(parent, x, y, stack, true, posX, posY, mx, my);
 					}
 				}
 			}
-		} else if (recipe instanceof ShapedOreRecipe) {
-			ShapedOreRecipe shaped = (ShapedOreRecipe) recipe;
-			if (onTick) {
-				tickIngredients(recipe.getIngredients());
-			}
-			int width = shaped.getRecipeWidth();
-			int height = shaped.getRecipeHeight();
-			for (int y = 0; y < height; y++) {
-				for (int x = 0; x < width; x++) {
-					//used to be shaped.getInput[y * width + x] Might not be correct co
-					Ingredient input = shaped.getIngredients().get(y * width + x);
-					renderItemAtGridPos(parent, x, y, input.getMatchingStacks()[ingredientID], true, posX, posY, mx, my);
-				}
-			}
-		} else if (recipe instanceof ShapelessRecipes) {
-			ShapelessRecipes shapeless = (ShapelessRecipes) recipe;
+		}
+		else if (recipe instanceof ShapelessRecipes || recipe instanceof ShapelessOreRecipe) {
 
 			drawGrid:
 			{
@@ -93,52 +70,18 @@ public class EntryPageRecipeBase extends EntryPage {
 					for (int x = 0; x < 3; x++) {
 						int index = y * 3 + x;
 
-						if (index >= shapeless.recipeItems.size())
+						if (index >= recipe.getIngredients().size())
 							break drawGrid;
-						ingredients = shapeless.recipeItems.get(index).getMatchingStacks();
-						if (ingredients.length != 0) {
-							renderItemAtGridPos(parent, x, y, ingredients[recipeID % ingredients.length], true, posX,
-									posY, mx, my);
+						ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(recipe.getIngredients().get(index).getMatchingStacks()));
+						if (stack != null) {
+							renderItemAtGridPos(parent, x, y, stack, true, posX, posY, mx, my);
 						}
-					}
-				}
-			}
-		} else if (recipe instanceof ShapelessOreRecipe) {
-			ShapelessOreRecipe shapeless = (ShapelessOreRecipe) recipe;
-
-			drawGrid:
-			{
-				for (int y = 0; y < 3; y++) {
-					for (int x = 0; x < 3; x++) {
-						int index = y * 3 + x;
-
-						if (index >= shapeless.getIngredients().size())
-							break drawGrid;
-
-						Ingredient input = shapeless.getIngredients().get(index);
-						renderItemAtGridPos(parent, x, y, input.getMatchingStacks()[ingredientID], true, posX, posY, mx, my);
 					}
 				}
 			}
 		}
 
 		renderResult(parent, recipe.getRecipeOutput(), false, posX, posY, mx, my);
-	}
-
-	private void tickRecipes() {
-		if (recipeID < recipes.length - 1) {
-			++recipeID;
-		} else {
-			recipeID = 0;
-		}
-	}
-
-	private void tickIngredients(NonNullList<Ingredient> ingredients) {
-		if (ingredientID < ingredients.get(0).getMatchingStacks().length - 1) {
-			ingredientID++;
-		} else {
-			ingredientID = 0;
-		}
 	}
 
 	public void renderResult(GuiScreen gui, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {

@@ -21,13 +21,14 @@ import java.util.Map;
 public class JEIAnvilRecipe implements IRecipeWrapper {
 
 	private final ItemStack result;
-	private final AnvilRecipeBase recipe;
+	protected final AnvilRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
 	public JEIAnvilRecipe(AnvilRecipeBase recipe, IStackHelper stackHelper) {
+		List<List<ItemStack>> ingredients = stackHelper.expandRecipeItemStackInputs(recipe.inputs);
 		this.recipe = recipe;
 		this.result = recipe.getAnvilRecipeOutput();
-		this.ingredients = stackHelper.expandRecipeItemStackInputs(recipe.inputs);
+		this.ingredients = ingredients;
 	}
 
 	@Override
@@ -49,8 +50,8 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 			// add hot input icons
 			Map<Integer, Map<Integer, Integer>> ingredientMap = new HashMap<>();
 
-			int width = 6;
-			int height = 4;
+			int width = AnvilRecipeBase.WIDTH;
+			int height = AnvilRecipeBase.HEIGHT;
 			for (int x = 0; x < width; x++) {
 				for (int y = 0; y < height; y++) {
 					int slot = y * width + x;
