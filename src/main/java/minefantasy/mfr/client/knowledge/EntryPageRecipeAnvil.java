@@ -2,23 +2,21 @@ package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.material.CustomMaterial;
-import minefantasy.mfr.material.MetalMaterial;
+import minefantasy.mfr.recipe.AnvilDynamicRecipe;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
-import minefantasy.mfr.recipe.ShapedAnvilRecipes;
-import minefantasy.mfr.recipe.ShapedCustomMaterialAnvilRecipe;
-import minefantasy.mfr.recipe.ShapelessAnvilRecipes;
-import minefantasy.mfr.recipe.ShapelessCustomMaterialAnvilRecipe;
+import minefantasy.mfr.recipe.AnvilShapedCustomMaterialRecipe;
+import minefantasy.mfr.recipe.AnvilShapedRecipe;
+import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
+import minefantasy.mfr.recipe.AnvilShapelessRecipe;
 import minefantasy.mfr.util.GuiHelper;
+import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.NonNullList;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +47,9 @@ public class EntryPageRecipeAnvil extends EntryPage {
 
 		AnvilRecipeBase recipe = cycleTimer.getCycledItem(recipes);
 		String cft = "<" + I18n.format("method.anvil") + ">";
-		mc.fontRenderer.drawSplitString(cft, posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 150, 117, 0);
+		mc.fontRenderer.drawSplitString(cft,
+				posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2),
+				posY + 150, 117, 0);
 		renderRecipe(parent, x, y, posX, posY, recipe);
 	}
 
@@ -62,16 +62,17 @@ public class EntryPageRecipeAnvil extends EntryPage {
 		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getHammerTier(), posX + 34, posY + 51, true, true);
 		GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvilTier(), posX + 124, posY + 51, true, true);
 
-		if (recipe instanceof ShapedAnvilRecipes || recipe instanceof ShapedCustomMaterialAnvilRecipe) {
+		List<Ingredient> inputs = RecipeHelper.expandPattern(recipe.getIngredients(), recipe.getWidth(), recipe.getHeight(), AnvilRecipeBase.MAX_WIDTH, AnvilRecipeBase.MAX_HEIGHT);
+		if (recipe instanceof AnvilShapedRecipe || recipe instanceof AnvilShapedCustomMaterialRecipe || recipe instanceof AnvilDynamicRecipe) {
 
-			for (int y = 0; y < AnvilRecipeBase.HEIGHT; y++) {
-				for (int x = 0; x < AnvilRecipeBase.WIDTH; x++) {
-					int index = y * AnvilRecipeBase.WIDTH + x;
-					ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(recipe.inputs.get(index).getMatchingStacks()));
+			for (int y = 0; y < AnvilRecipeBase.MAX_HEIGHT; y++) {
+				for (int x = 0; x < AnvilRecipeBase.MAX_WIDTH; x++) {
+					int index = y * AnvilRecipeBase.MAX_WIDTH + x;
+					ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(inputs.get(index).getMatchingStacks()));
 					renderItemAtGridPos(parent, 1 + x, 1 + y, stack, true, posX, posY, mx, my);
 				}
 			}
-		} else if (recipe instanceof ShapelessAnvilRecipes || recipe instanceof ShapelessCustomMaterialAnvilRecipe) {
+		} else if (recipe instanceof AnvilShapelessRecipe || recipe instanceof AnvilShapelessCustomMaterialRecipe) {
 
 			drawGrid:
 			{
@@ -82,7 +83,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 						if (index >= recipe.getIngredients().size())
 							break drawGrid;
 
-						ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(recipe.inputs.get(index).getMatchingStacks()));
+						ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(inputs.get(index).getMatchingStacks()));
 						renderItemAtGridPos(parent, 1 + x, 1 + y, stack, true,
 								posX, posY, mx, my);
 					}
@@ -90,20 +91,15 @@ public class EntryPageRecipeAnvil extends EntryPage {
 			}
 		}
 		List<ItemStack> outputs = new ArrayList<>();
-		if (recipe.getAnvilRecipeOutput().getItem() == MineFantasyItems.HOT_ITEM) {//Dummy item to match in recipe
-			for (CustomMaterial material : CustomMaterial.getList("metal")) {
-				if (material instanceof MetalMaterial) {
-					NonNullList<ItemStack> oreDictItemStacks = OreDictionary.getOres(((MetalMaterial) material).oreDictList);
-					outputs.addAll(oreDictItemStacks);
-				}
-			}
+		if (recipe instanceof AnvilDynamicRecipe) {
+			outputs = AnvilDynamicRecipe.getOutputsFromIngredients(inputs, ((AnvilDynamicRecipe) recipe).modifyOutput, recipe.getAnvilRecipeOutput());
 		}
 
 		if (outputs.isEmpty()) {
-			renderResult(parent, recipe.getAnvilRecipeOutput(), false, posX, posY, mx, my, recipe.outputHot());
+			renderResult(parent, recipe.getAnvilRecipeOutput(), false, posX, posY, mx, my, recipe.isHotOutput());
 		}
 		else {
-			renderResult(parent, cycleTimer.getCycledItem(outputs), false, posX, posY, mx, my, recipe.outputHot());
+			renderResult(parent, cycleTimer.getCycledItem(outputs), false, posX, posY, mx, my, recipe.isHotOutput());
 		}
 	}
 
@@ -124,8 +120,9 @@ public class EntryPageRecipeAnvil extends EntryPage {
 	}
 
 	public void renderItemAtGridPos(GuiScreen gui, int x, int y, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
-		if (stack == null) // fixes GUI crash with missing or incorrect recipes
+		if (stack == null) { // fixes GUI crash with missing or incorrect recipes
 			return;
+		}
 
 		boolean heatable = Heatable.canHeatItem(stack);
 

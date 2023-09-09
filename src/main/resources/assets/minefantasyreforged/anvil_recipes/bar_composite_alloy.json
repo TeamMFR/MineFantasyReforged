@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "engineering",
   "research": "cogwork_armour",
   "tool_type": "heavy_hammer",
@@ -9,10 +9,10 @@
   "recipe_hammer": 3,
   "output_hot": true,
   "pattern": [
-    " E    ",
-    " S    ",
-    "RMR   ",
-    " C    "
+    " E ",
+    " S ",
+    "RMR",
+    " C "
   ],
   "key": {
     "S": {

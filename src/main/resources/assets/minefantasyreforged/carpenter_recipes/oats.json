@@ -1,19 +1,18 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "provisioning",
   "research": "",
   "tool_type": "knife",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 20,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.hit",
   "pattern": [
-    "J   ",
-    "W   ",
-    "H   ",
-    "B   "
+    "J",
+    "W",
+    "H",
+    "B"
   ],
   "key": {
     "B": {

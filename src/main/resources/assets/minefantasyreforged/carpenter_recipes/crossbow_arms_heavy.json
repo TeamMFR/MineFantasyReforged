@@ -1,19 +1,16 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "crossbow_heads",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 350,
   "tool_tier": 2,
   "experience": 0,
   "sound": "minefantasyreforged:block.hammercarpenter",
   "pattern": [
-    "NNN ",
-    "PCP ",
-    "    ",
-    "    "
+    "NNN",
+    "PCP"
   ],
   "key": {
     "P": {

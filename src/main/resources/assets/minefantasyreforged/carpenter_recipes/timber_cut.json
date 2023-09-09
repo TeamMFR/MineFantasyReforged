@@ -1,19 +1,15 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_custom_material_recipe",
   "skill": "construction",
   "research": "",
   "tool_type": "saw",
-  "is_tool_recipe": true,
   "block_tier": -1,
   "craft_time": 2,
   "tool_tier": 0,
   "experience": 0,
   "sound": "minefantasyreforged:block.sawcarpenter",
   "pattern": [
-    "P   ",
-    "    ",
-    "    ",
-    "    "
+    "P"
   ],
   "key": {
     "P": {

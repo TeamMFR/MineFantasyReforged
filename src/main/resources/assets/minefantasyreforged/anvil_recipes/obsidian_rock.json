@@ -1,5 +1,5 @@
 {
-  "type": "shapeless_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "none",
   "research": "",
   "tool_type": "hammer",
@@ -8,11 +8,14 @@
   "recipe_time": 12,
   "recipe_hammer": 3,
   "output_hot": false,
-  "ingredients": [
-    {
+  "pattern": [
+    "O"
+  ],
+  "key": {
+    "O": {
       "item": "minecraft:obsidian"
     }
-  ],
+  },
   "result": {
     "item": "minefantasyreforged:obsidian_rock",
     "count": 4

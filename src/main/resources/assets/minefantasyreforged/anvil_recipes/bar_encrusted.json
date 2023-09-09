@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "artisanry",
   "research": "smelt_encrusted",
   "tool_type": "hammer",
@@ -9,10 +9,8 @@
   "recipe_hammer": 3,
   "output_hot": true,
   "pattern": [
-    "D     ",
-    "B     ",
-    "      ",
-    "      "
+    "D",
+    "B"
   ],
   "key": {
     "B": {

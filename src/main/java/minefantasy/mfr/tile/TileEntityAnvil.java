@@ -564,7 +564,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	public void setContainer(ContainerAnvil container) {
 		syncAnvil = container;
-		craftMatrix = new AnvilCraftMatrix(this, syncAnvil, AnvilRecipeBase.WIDTH, AnvilRecipeBase.HEIGHT);
+		craftMatrix = new AnvilCraftMatrix(this, syncAnvil, AnvilRecipeBase.MAX_WIDTH, AnvilRecipeBase.MAX_HEIGHT);
 	}
 
 	public int getProgressBar(int i) {

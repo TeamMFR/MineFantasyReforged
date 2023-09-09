@@ -1,23 +1,22 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "parachute",
   "tool_type": "needle",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 350,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minecraft:block.cloth.step",
   "pattern": [
-    "TTT ",
-    "WWW ",
-    "LEL ",
-    "LAL "
+    "TTT",
+    "WWW",
+    "LEL",
+    "LAL"
   ],
   "key": {
     "A": {
-      "item": "minecraft:leather"
+      "item": "#LEATHER"
     },
     "T": {
       "item": "minefantasyreforged:thread"

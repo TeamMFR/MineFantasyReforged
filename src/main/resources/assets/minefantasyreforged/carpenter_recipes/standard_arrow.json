@@ -1,19 +1,16 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_custom_material_recipe",
   "skill": "artisanry",
   "research": "arrows",
   "tool_type": "hands",
-  "is_tool_recipe": true,
   "block_tier": -1,
   "craft_time": 1,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.hit",
   "pattern": [
-    "A   ",
-    "F   ",
-    "    ",
-    "    "
+    "A",
+    "F"
   ],
   "key": {
     "F": {

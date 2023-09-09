@@ -16,15 +16,10 @@ import java.util.List;
 /**
  * @author AnonymousProductions
  */
-public class ShapelessAnvilRecipes extends AnvilRecipeBase {
+public class AnvilShapelessRecipe extends AnvilRecipeBase {
 
-	public ShapelessAnvilRecipes(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
+	public AnvilShapelessRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
 		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
-	}
-
-	@Override
-	public ItemStack getAnvilRecipeOutput() {
-		return this.output;
 	}
 
 	/**
@@ -75,58 +70,10 @@ public class ShapelessAnvilRecipes extends AnvilRecipeBase {
 	}
 
 	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	@Override
-	public ItemStack getCraftingResult(AnvilCraftMatrix par1AnvilCraftMatrix) {
-		return this.output.copy();
-	}
-
-	/**
 	 * Returns the size of the recipe area
 	 */
 	@Override
 	public int getRecipeSize() {
 		return this.inputs.size();
-	}
-
-	@Override
-	public int getCraftTime() {
-		return this.craftTime;
-	}
-
-	@Override
-	public int getHammerTier() {
-		return this.hammerTier;
-	}
-
-	@Override
-	public int getAnvilTier() {
-		return this.anvilTier;
-	}
-
-	@Override
-	public boolean outputHot() {
-		return hotOutput;
-	}
-
-	@Override
-	public String getToolType() {
-		return toolType;
-	}
-
-	@Override
-	public String getResearch() {
-		return requiredResearch;
-	}
-
-	@Override
-	public Skill getSkill() {
-		return requiredSkill;
-	}
-
-	@Override
-	public boolean useCustomTiers() {
-		return false;
 	}
 }

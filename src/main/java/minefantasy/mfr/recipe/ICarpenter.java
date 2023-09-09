@@ -12,15 +12,13 @@ public interface ICarpenter {
 
 	void setRequiredToolTier(int i);
 
-	void setRequiredCarpenter(int i);
-
-	void setHotOutput(boolean i);
+	void setRequiredCarpenterTier(int i);
 
 	void setRequiredToolType(String toolType);
 
 	void setCraftingSound(SoundEvent sound);
 
-	void setResearch(String research);
+	void setRequiredResearch(String research);
 
 	void setRequiredSkill(Skill skill);
 }

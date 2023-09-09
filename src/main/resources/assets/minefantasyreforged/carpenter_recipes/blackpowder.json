@@ -1,19 +1,17 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "none",
   "research": "blackpowder",
   "tool_type": "hands",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 2,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.step",
   "pattern": [
-    "NS  ",
-    "CC  ",
-    "LL  ",
-    "    "
+    "NS",
+    "CC",
+    "LL"
   ],
   "key": {
     "S": {

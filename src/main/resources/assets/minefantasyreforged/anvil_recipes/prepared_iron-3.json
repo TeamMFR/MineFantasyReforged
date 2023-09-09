@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "artisanry",
   "research": "blast_furnace",
   "tool_type": "hammer",
@@ -9,10 +9,7 @@
   "recipe_hammer": 2,
   "output_hot": false,
   "pattern": [
-    "OFO   ",
-    "      ",
-    "      ",
-    "      "
+    "OFO"
   ],
   "key": {
     "F": {

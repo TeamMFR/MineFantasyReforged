@@ -1,24 +1,21 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "construction",
   "research": "refined_planks",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 5,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minefantasyreforged:block.hammercarpenter",
   "pattern": [
-    "N   ",
-    "P   ",
-    "PP  ",
-    "    "
+    "N ",
+    "P ",
+    "PP"
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber",
-      "nbt": "{mf_custom_materials:{main_material:\"oak_wood\"}}"
+      "item": "#TIMBER_OAK_WOOD"
     },
     "N": {
       "item": "minefantasyreforged:nail"

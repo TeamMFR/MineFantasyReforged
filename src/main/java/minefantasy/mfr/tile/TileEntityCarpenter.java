@@ -8,9 +8,9 @@ import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.CarpenterCraftMatrix;
+import minefantasy.mfr.recipe.CarpenterRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.ICarpenter;
-import minefantasy.mfr.recipe.ShapelessCarpenterRecipes;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -307,7 +307,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		ItemStack result = CraftingManagerCarpenter.getInstance().findMatchingRecipe(this, craftMatrix, world);
+		ItemStack result = CraftingManagerCarpenter.findMatchingRecipe(this, craftMatrix, world);
 		if (result.isEmpty()) {
 			result = ItemStack.EMPTY;
 		}
@@ -354,17 +354,13 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	}
 
 	@Override
-	public void setRequiredCarpenter(int i) {
+	public void setRequiredCarpenterTier(int i) {
 		requiredCarpenterTier = i;
-	}
-
-	@Override
-	public void setHotOutput(boolean i) {
 	}
 
 	public void setContainer(ContainerCarpenter container) {
 		syncCarpenter = container;
-		craftMatrix = new CarpenterCraftMatrix(this, syncCarpenter, ShapelessCarpenterRecipes.GLOBAL_WIDTH, ShapelessCarpenterRecipes.GLOBAL_HEIGHT);
+		craftMatrix = new CarpenterCraftMatrix(this, syncCarpenter, CarpenterRecipeBase.MAX_WIDTH, CarpenterRecipeBase.MAX_HEIGHT);
 	}
 
 	public boolean shouldRenderCraftMetre() {
@@ -381,7 +377,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 	}
 
 	@Override
-	public void setResearch(String research) {
+	public void setRequiredResearch(String research) {
 		this.requiredResearch = research;
 	}
 

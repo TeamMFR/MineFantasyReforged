@@ -1,5 +1,5 @@
 {
-  "type": "shapeless_custom_material_anvil_recipe",
+  "type": "anvil_shaped_custom_material_recipe",
   "skill": "artisanry",
   "research": "",
   "tool_type": "hammer",
@@ -8,14 +8,18 @@
   "recipe_time": 2,
   "recipe_hammer": 0,
   "output_hot": true,
-  "ingredients": [
-    {
+  "pattern": [
+    "F",
+    "B"
+  ],
+  "key": {
+    "B": {
       "item": "minefantasyreforged:bar"
     },
-    {
+    "F": {
       "item": "minefantasyreforged:flux"
     }
-  ],
+  },
   "result": {
     "item": "minefantasyreforged:metal_hunk",
     "count": 4

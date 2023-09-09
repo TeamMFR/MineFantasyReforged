@@ -1,9 +1,8 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "crossbow_shafts",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 300,
   "tool_tier": 2,
@@ -12,8 +11,7 @@
   "pattern": [
     "NN N",
     "PPPP",
-    " PPP",
-    "    "
+    " PPP"
   ],
   "key": {
     "P": {

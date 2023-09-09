@@ -1,19 +1,17 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "construction",
   "research": "clay_wall",
   "tool_type": "saw",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 2,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minefantasyreforged:block.hammercarpenter",
   "pattern": [
-    "PNP ",
-    " C  ",
-    "PNP ",
-    "    "
+    "PNP",
+    " C ",
+    "PNP"
   ],
   "key": {
     "P": {

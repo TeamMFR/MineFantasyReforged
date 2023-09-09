@@ -1,23 +1,19 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "none",
   "research": "",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 10,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minefantasyreforged:block.hammercarpenter",
   "pattern": [
-    "C   ",
-    "    ",
-    "    ",
-    "    "
+    "C"
   ],
   "key": {
     "C": {
-      "item": "minecraft:cobblestone"
+      "item": "#COBBLESTONE"
     }
   },
   "result": {

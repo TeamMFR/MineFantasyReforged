@@ -45,7 +45,7 @@ public class GuiCarpenterMF extends GuiContainer {
 		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
 			if (tile.getRequiredToolType() != null) {
 				if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-					String s2 = I18n.format("tooltype." + tile.getRequiredToolType()) + ", "
+					String s2 = tile.getRequiredToolType().getDisplayName() + ", "
 							+ (tile.getToolTierNeeded() > -1
 							? I18n.format("attribute.mfcrafttier.name") + " "
 							+ tile.getToolTierNeeded()

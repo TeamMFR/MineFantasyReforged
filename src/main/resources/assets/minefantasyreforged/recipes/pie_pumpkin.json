@@ -1,10 +1,13 @@
 {
-	"type": "minecraft:crafting_shapeless",
-	"ingredients": [
-		{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"P"
+	],
+	"key": {
+		"P": {
 			"item": "minefantasyreforged:pie_pumpkin_cooked"
 		}
-	],
+	},
 	"result": {
 		"item": "minecraft:pumpkin_pie"
 	}

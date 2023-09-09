@@ -1,19 +1,17 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
   "research": "repair_basic",
   "tool_type": "needle",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 20,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minecraft:block.cloth.step",
   "pattern": [
-    "TTT ",
-    "FNS ",
-    "LEL ",
-    "    "
+    "TTT",
+    "FNS",
+    "LEL"
   ],
   "key": {
     "S": {
@@ -23,7 +21,7 @@
       "item": "minefantasyreforged:thread"
     },
     "E": {
-      "item": "minecraft:leather"
+      "item": "#LEATHER"
     },
     "F": {
       "item": "minecraft:flint"

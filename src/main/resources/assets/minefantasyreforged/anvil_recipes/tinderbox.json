@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "none",
   "research": "none",
   "tool_type": "hammer",
@@ -9,10 +9,9 @@
   "recipe_hammer": -1,
   "output_hot": true,
   "pattern": [
-    " F    ",
-    "SWS   ",
-    " I    ",
-    "      "
+    " F ",
+    "SWS",
+    " I "
   ],
   "key": {
     "I": {

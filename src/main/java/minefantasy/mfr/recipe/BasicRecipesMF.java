@@ -20,8 +20,6 @@ public class BasicRecipesMF {
 		CookingRecipes.init();
 		MineFantasyItems.loadCrafting();
 
-		// TODO Replace with proper recipe JSON_FILE_EXT for each metal block
-
 		BaseMaterial mat = MineFantasyMaterials.IRON;
 
 		TanningRecipe.addRecipe(MineFantasyItems.HIDE_SMALL, mat.craftTimeModifier * 2F, -1, new ItemStack(Items.LEATHER));

@@ -1,24 +1,21 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
   "research": "crucible",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 20,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minefantasyreforged:block.hammercarpenter",
   "pattern": [
-    "SSS ",
-    "S S ",
-    "SSS ",
-    "    "
+    "SSS",
+    "S S",
+    "SSS"
   ],
   "key": {
     "S": {
-      "item": "minecraft:stone",
-      "data": 0
+      "item": "#STONE"
     }
   },
   "result": {

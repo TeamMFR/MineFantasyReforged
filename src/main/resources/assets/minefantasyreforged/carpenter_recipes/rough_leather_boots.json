@@ -1,19 +1,16 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
   "research": "craft_armour_basic",
   "tool_type": "needle",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 20,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.cloth.step",
   "pattern": [
-    "T T ",
-    "L L ",
-    "    ",
-    "    "
+    "T T",
+    "L L"
   ],
   "key": {
     "T": {

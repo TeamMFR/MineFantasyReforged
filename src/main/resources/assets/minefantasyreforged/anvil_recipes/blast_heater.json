@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "artisanry",
   "research": "blast_furnace",
   "tool_type": "heavy_hammer",
@@ -9,10 +9,10 @@
   "recipe_hammer": 2,
   "output_hot": false,
   "pattern": [
-    "RP PR ",
-    "RP PR ",
-    "RP PR ",
-    "RPFPR "
+    "RP PR",
+    "RP PR",
+    "RP PR",
+    "RPFPR"
   ],
   "key": {
     "P": {

@@ -1,19 +1,17 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "spyglass",
   "tool_type": "spanner",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 300,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minefantasyreforged:block.twistbolt",
   "pattern": [
-    " E  ",
-    "BRB ",
-    "GSG ",
-    "    "
+    " E ",
+    "BRB",
+    "GSG"
   ],
   "key": {
     "B": {

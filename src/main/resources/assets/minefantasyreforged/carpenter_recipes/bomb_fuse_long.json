@@ -1,26 +1,24 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "bombs",
   "tool_type": "hands",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 1,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.step",
   "pattern": [
-    "B   ",
-    "R   ",
-    "B   ",
-    "    "
+    "B",
+    "R",
+    "B"
   ],
   "key": {
     "B": {
       "item": "minefantasyreforged:bomb_fuse"
     },
     "R": {
-      "item": "minecraft:redstone"
+      "item": "#DUST_REDSTONE"
     }
   },
   "result": {

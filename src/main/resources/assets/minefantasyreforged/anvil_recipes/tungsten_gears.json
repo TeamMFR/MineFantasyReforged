@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "engineering",
   "research": "tungsten",
   "tool_type": "hammer",
@@ -9,10 +9,10 @@
   "recipe_hammer": 3,
   "output_hot": true,
   "pattern": [
-    " E    ",
-    " T    ",
-    "TBT   ",
-    " T    "
+    " E ",
+    " T ",
+    "TBT",
+    " T "
   ],
   "key": {
     "B": {

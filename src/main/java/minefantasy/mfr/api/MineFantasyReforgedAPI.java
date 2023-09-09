@@ -8,15 +8,21 @@ import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.recipe.AnvilShapedCustomMaterialRecipe;
+import minefantasy.mfr.recipe.AnvilShapedRecipe;
+import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
+import minefantasy.mfr.recipe.AnvilShapelessRecipe;
 import minefantasy.mfr.recipe.CookRecipe;
-import minefantasy.mfr.recipe.CraftingManagerAnvilOld;
-import minefantasy.mfr.recipe.IAnvilRecipe;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -46,47 +52,90 @@ public class MineFantasyReforgedAPI {
 		MFRLogUtil.logDebug(msg);
 	}
 
-	public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot, int hammerType, int anvil, int forgeTime, Object... input) {
-		return addAnvilRecipe(skill, result, research, hot, "hammer", hammerType, anvil, forgeTime, input);
-	}
-
 	/**
 	 * Adds a shaped recipe for anvils with all variables
 	 *
-	 * @param skill      The skill required for crafting
-	 * @param result     The output item
-	 * @param research   The research required
-	 * @param hot        True if the result is hot(Does not apply to blocks)
-	 * @param toolType   the tool type required to hit ("hammer", "heavy_hammer", etc)
-	 * @param hammerType the hammer tier required for creation:
-	 * @param anvil      the anvil required bronze 0, iron 1, steel 2
-	 * @param forgeTime  The time taken to forge(default is 200. each hit is about 100)
-	 * @param input      The input for the item (Exactly the same as regular recipes)
+	 * @param inputs              The ingredients of this recipe
+	 * @param output     		  What the recipe results in
+	 * @param tool                What is the tool type of this recipe
+	 * @param craftTime           How long should this recipe take to make
+	 * @param hammerTier          The required tier of the hammer for making this recipe
+	 * @param anvilTier 		  The required tier of the anvil this recipe is used on
+	 * @param outputHot           Does this recipe result in a hot output
+	 * @param requiredResearch    The required Research for this recipe
+	 * @param requiredSkill		  The required Skill for this recipe
+	 * @param width               The width of the recipe (Max = 6)
+	 * @param height              The height of the recipe (Max = 4)
 	 */
-	public static IAnvilRecipe addAnvilRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-		return CraftingManagerAnvilOld.getInstance().addRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
+	public static void addShapedAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
+			Skill requiredSkill, int width, int height) {
+		CraftingManagerAnvil.addRecipe(new AnvilShapedRecipe(inputs, output, tool.getName(),
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill,
+				width, height), true);
 	}
 
 	/**
-	 * A special tier-sensitive recipe system for tools
+	 * Adds a shapeless recipe for anvils with all variables
 	 *
-	 * @param skill      the Skill used
-	 * @param result     what item comes out (basic itemstack)
-	 * @param research   what research is used
-	 * @param hot        whether it requires quenching
-	 * @param toolType   the tool used (hammer or heavy_hammer)
-	 * @param hammerType the tier of hammer
-	 * @param anvil      the tier of anvil
-	 * @param forgeTime  the time it takes to forge
-	 * @param input      the items input
-	 * @return IAnvilRecipe
+	 * @param inputs              The ingredients of this recipe
+	 * @param output     		  What the recipe results in
+	 * @param tool                What is the tool type of this recipe
+	 * @param craftTime           How long should this recipe take to make
+	 * @param hammerTier          The required tier of the hammer for making this recipe
+	 * @param anvilTier 		  The required tier of the anvil this recipe is used on
+	 * @param outputHot           Does this recipe result in a hot output
+	 * @param requiredResearch    The required Research for this recipe
+	 * @param requiredSkill		  The required Skill for this recipe
 	 */
-	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, ItemStack result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-		return CraftingManagerAnvilOld.getInstance().addToolRecipe(result, skill, research, hot, toolType, hammerType, anvil, forgeTime, input);
+	public static void addShapelessAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill) {
+		CraftingManagerAnvil.addRecipe(new AnvilShapelessRecipe(inputs, output, tool.getName(),
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill), true);
 	}
 
-	public static IAnvilRecipe addAnvilToolRecipe(Skill skill, Item result, String research, boolean hot, String toolType, int hammerType, int anvil, int forgeTime, Object... input) {
-		return addAnvilToolRecipe(skill, new ItemStack(result), research, hot, toolType, hammerType, anvil, forgeTime, input);
+	/**
+	 * Adds a shaped Custom Material recipe for anvils with all variables
+	 *
+	 * @param inputs              		The ingredients of this recipe
+	 * @param output     		  		What the recipe results in
+	 * @param tool                		What is the tool type of this recipe
+	 * @param craftTime           		How long should this recipe take to make
+	 * @param hammerTier          		The required tier of the hammer for making this recipe
+	 * @param anvilTier 		  		The required tier of the anvil this recipe is used on
+	 * @param outputHot           		Does this recipe result in a hot output
+	 * @param requiredResearch    		The required Research for this recipe
+	 * @param requiredSkill		  		The required Skill for this recipe
+	 * @param width               		The width of the recipe (Max = 6)
+	 * @param height              		The height of the recipe (Max = 4)
+	 * @param tierModifyOutputCount		Does this recipe modify the output count
+	 */
+	public static void addShapedCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill,
+			int width, int height, boolean tierModifyOutputCount) {
+		CraftingManagerAnvil.addRecipe(new AnvilShapedCustomMaterialRecipe(inputs, output, tool.getName(),
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill,
+				width, height, tierModifyOutputCount), true);
+	}
+
+	/**
+	 * Adds a shapeless Custom Material recipe for anvils with all variables
+	 *
+	 * @param inputs              		The ingredients of this recipe
+	 * @param output     		  		What the recipe results in
+	 * @param tool                		What is the tool type of this recipe
+	 * @param craftTime           		How long should this recipe take to make
+	 * @param hammerTier          		The required tier of the hammer for making this recipe
+	 * @param anvilTier 		  		The required tier of the anvil this recipe is used on
+	 * @param outputHot           		Does this recipe result in a hot output
+	 * @param requiredResearch    		The required Research for this recipe
+	 * @param requiredSkill		  		The required Skill for this recipe
+	 * @param tierModifyOutputCount		Does this recipe modify the output count
+	 */
+	public static void addShapelessCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill, boolean tierModifyOutputCount) {
+		CraftingManagerAnvil.addRecipe(new AnvilShapelessCustomMaterialRecipe(inputs, output, tool.getName(),
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill, tierModifyOutputCount), true);
 	}
 
 	public static void addBlastFurnaceRecipe(Item input, ItemStack output) {

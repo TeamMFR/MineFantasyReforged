@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "engineering",
   "research": "bomb_arrow",
   "tool_type": "hammer",
@@ -9,10 +9,9 @@
   "recipe_hammer": 2,
   "output_hot": true,
   "pattern": [
-    "  MR  ",
-    "FMEM  ",
-    "  MR  ",
-    "      "
+    "  MR",
+    "FMEM",
+    "  MR"
   ],
   "key": {
     "R": {

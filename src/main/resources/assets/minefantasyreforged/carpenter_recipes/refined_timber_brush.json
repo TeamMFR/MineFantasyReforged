@@ -1,9 +1,8 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "construction",
   "research": "paint_brush",
   "tool_type": "brush",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 3,
   "tool_tier": -1,
@@ -11,9 +10,7 @@
   "sound": "minecraft:block.cloth.step",
   "pattern": [
     " P  ",
-    "TTTT",
-    "    ",
-    "    "
+    "TTTT"
   ],
   "key": {
     "P": {

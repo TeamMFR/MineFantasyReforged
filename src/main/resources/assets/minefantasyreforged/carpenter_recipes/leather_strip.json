@@ -1,23 +1,19 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "none",
   "research": "commodities",
   "tool_type": "shears",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 10,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:entity.sheep.shear",
   "pattern": [
-    "L   ",
-    "    ",
-    "    ",
-    "    "
+    "L"
   ],
   "key": {
     "L": {
-      "item": "minecraft:leather"
+      "item": "#LEATHER"
     }
   },
   "result": {

@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 @JEIPlugin
@@ -23,10 +24,11 @@ public class JEIIntegration implements IModPlugin {
 	}
 
 	@Override
-	public void registerCategories(IRecipeCategoryRegistration registry) {
+	public void registerCategories(@Nonnull IRecipeCategoryRegistration registry) {
 
-		if (!ConfigIntegration.jeiIntegration)
+		if (!ConfigIntegration.jeiIntegration) {
 			return;
+		}
 
 		registry.addRecipeCategories(new JEICarpenterRecipeCategory(registry));
 		registry.addRecipeCategories(new JEIAnvilRecipeCategory(registry));
@@ -34,7 +36,7 @@ public class JEIIntegration implements IModPlugin {
 	}
 
 	@Override
-	public void register(IModRegistry registry) {
+	public void register(@Nonnull IModRegistry registry) {
 
 		if (!ConfigIntegration.jeiIntegration)
 			return;
@@ -50,9 +52,8 @@ public class JEIIntegration implements IModPlugin {
 
 		addExtendedInfo(registry, MineFantasyItems.FLUX, ".desc_extended");
 
-		registry.addRecipes(JEICarpenterRecipeCategory.generateRecipes(), JEICarpenterRecipeCategory.UID);
-		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipeCategory1(stackHelper), JEIAnvilRecipeCategory.UID);
-		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipeCategory2(stackHelper), JEIAnvilRecipeCategory.UID);
+		registry.addRecipes(JEICarpenterRecipeCategory.generateRecipes(stackHelper), JEICarpenterRecipeCategory.UID);
+		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipes(stackHelper), JEIAnvilRecipeCategory.UID);
 	}
 
 	@Override
@@ -124,101 +125,101 @@ public class JEIIntegration implements IModPlugin {
 				MineFantasyItems.STANDARD_PLATE_HELMET,
 				MineFantasyItems.STANDARD_PLATE_CHESTPLATE,
 				MineFantasyItems.STANDARD_PLATE_LEGGINGS,
-				MineFantasyItems.STANDARD_PLATE_BOOTS,
-				MineFantasyItems.DRAGONFORGED_SWORD,
-				MineFantasyItems.DRAGONFORGED_WARAXE,
-				MineFantasyItems.DRAGONFORGED_MACE,
-				MineFantasyItems.DRAGONFORGED_DAGGER,
-				MineFantasyItems.DRAGONFORGED_SPEAR,
-				MineFantasyItems.DRAGONFORGED_GREATSWORD,
-				MineFantasyItems.DRAGONFORGED_BATTLEAXE,
-				MineFantasyItems.DRAGONFORGED_WARHAMMER,
-				MineFantasyItems.DRAGONFORGED_KATANA,
-				MineFantasyItems.DRAGONFORGED_HALBEARD,
-				MineFantasyItems.DRAGONFORGED_LANCE,
-				MineFantasyItems.DRAGONFORGED_PICK,
-				MineFantasyItems.DRAGONFORGED_AXE,
-				MineFantasyItems.DRAGONFORGED_SPADE,
-				MineFantasyItems.DRAGONFORGED_HOE,
-				MineFantasyItems.DRAGONFORGED_HEAVY_PICK,
-				MineFantasyItems.DRAGONFORGED_HEAVY_SHOVEL,
-				MineFantasyItems.DRAGONFORGED_HANDPICK,
-				MineFantasyItems.DRAGONFORGED_TROW,
-				MineFantasyItems.DRAGONFORGED_SCYTHE,
-				MineFantasyItems.DRAGONFORGED_MATTOCK,
-				MineFantasyItems.DRAGONFORGED_LUMBER,
-				MineFantasyItems.DRAGONFORGED_HAMMER,
-				MineFantasyItems.DRAGONFORGED_HEAVY_HAMMER,
-				MineFantasyItems.DRAGONFORGED_TONGS,
-				MineFantasyItems.DRAGONFORGED_SHEARS,
-				MineFantasyItems.DRAGONFORGED_KNIFE,
-				MineFantasyItems.DRAGONFORGED_NEEDLE,
-				MineFantasyItems.DRAGONFORGED_SAW,
-				MineFantasyItems.DRAGONFORGED_SPANNER,
-				MineFantasyItems.DRAGONFORGED_BOW,
-				MineFantasyItems.DRAGONFORGED_SCALE_HELMET,
-				MineFantasyItems.DRAGONFORGED_SCALE_CHESTPLATE,
-				MineFantasyItems.DRAGONFORGED_SCALE_LEGGINGS,
-				MineFantasyItems.DRAGONFORGED_SCALE_BOOTS,
-				MineFantasyItems.DRAGONFORGED_CHAIN_HELMET,
-				MineFantasyItems.DRAGONFORGED_CHAIN_CHESTPLATE,
-				MineFantasyItems.DRAGONFORGED_CHAIN_LEGGINGS,
-				MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS,
-				MineFantasyItems.DRAGONFORGED_SPLINT_HELMET,
-				MineFantasyItems.DRAGONFORGED_SPLINT_CHESTPLATE,
-				MineFantasyItems.DRAGONFORGED_SPLINT_LEGGINGS,
-				MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS,
-				MineFantasyItems.DRAGONFORGED_PLATE_HELMET,
-				MineFantasyItems.DRAGONFORGED_PLATE_CHESTPLATE,
-				MineFantasyItems.DRAGONFORGED_PLATE_LEGGINGS,
-				MineFantasyItems.DRAGONFORGED_PLATE_BOOTS,
-				MineFantasyItems.ORNATE_SWORD,
-				MineFantasyItems.ORNATE_WARAXE,
-				MineFantasyItems.ORNATE_MACE,
-				MineFantasyItems.ORNATE_DAGGER,
-				MineFantasyItems.ORNATE_SPEAR,
-				MineFantasyItems.ORNATE_GREATSWORD,
-				MineFantasyItems.ORNATE_BATTLEAXE,
-				MineFantasyItems.ORNATE_WARHAMMER,
-				MineFantasyItems.ORNATE_KATANA,
-				MineFantasyItems.ORNATE_HALBEARD,
-				MineFantasyItems.ORNATE_LANCE,
-				MineFantasyItems.ORNATE_PICK,
-				MineFantasyItems.ORNATE_AXE,
-				MineFantasyItems.ORNATE_SPADE,
-				MineFantasyItems.ORNATE_HOE,
-				MineFantasyItems.ORNATE_HEAVY_PICK,
-				MineFantasyItems.ORNATE_HEAVY_SHOVEL,
-				MineFantasyItems.ORNATE_HANDPICK,
-				MineFantasyItems.ORNATE_TROW,
-				MineFantasyItems.ORNATE_SCYTHE,
-				MineFantasyItems.ORNATE_MATTOCK,
-				MineFantasyItems.ORNATE_LUMBER,
-				MineFantasyItems.ORNATE_HAMMER,
-				MineFantasyItems.ORNATE_HEAVY_HAMMER,
-				MineFantasyItems.ORNATE_TONGS,
-				MineFantasyItems.ORNATE_SHEARS,
-				MineFantasyItems.ORNATE_KNIFE,
-				MineFantasyItems.ORNATE_NEEDLE,
-				MineFantasyItems.ORNATE_SAW,
-				MineFantasyItems.ORNATE_SPANNER,
-				MineFantasyItems.ORNATE_BOW,
-				MineFantasyItems.ORNATE_SCALE_HELMET,
-				MineFantasyItems.ORNATE_SCALE_CHESTPLATE,
-				MineFantasyItems.ORNATE_SCALE_LEGGINGS,
-				MineFantasyItems.ORNATE_SCALE_BOOTS,
-				MineFantasyItems.ORNATE_CHAIN_HELMET,
-				MineFantasyItems.ORNATE_CHAIN_CHESTPLATE,
-				MineFantasyItems.ORNATE_CHAIN_LEGGINGS,
-				MineFantasyItems.ORNATE_CHAIN_BOOTS,
-				MineFantasyItems.ORNATE_SPLINT_HELMET,
-				MineFantasyItems.ORNATE_SPLINT_CHESTPLATE,
-				MineFantasyItems.ORNATE_SPLINT_LEGGINGS,
-				MineFantasyItems.ORNATE_SPLINT_BOOTS,
-				MineFantasyItems.ORNATE_PLATE_HELMET,
-				MineFantasyItems.ORNATE_PLATE_CHESTPLATE,
-				MineFantasyItems.ORNATE_PLATE_LEGGINGS,
-				MineFantasyItems.ORNATE_PLATE_BOOTS
+				MineFantasyItems.STANDARD_PLATE_BOOTS
+//				MineFantasyItems.DRAGONFORGED_SWORD,
+//				MineFantasyItems.DRAGONFORGED_WARAXE,
+//				MineFantasyItems.DRAGONFORGED_MACE,
+//				MineFantasyItems.DRAGONFORGED_DAGGER,
+//				MineFantasyItems.DRAGONFORGED_SPEAR,
+//				MineFantasyItems.DRAGONFORGED_GREATSWORD,
+//				MineFantasyItems.DRAGONFORGED_BATTLEAXE,
+//				MineFantasyItems.DRAGONFORGED_WARHAMMER,
+//				MineFantasyItems.DRAGONFORGED_KATANA,
+//				MineFantasyItems.DRAGONFORGED_HALBEARD,
+//				MineFantasyItems.DRAGONFORGED_LANCE,
+//				MineFantasyItems.DRAGONFORGED_PICK,
+//				MineFantasyItems.DRAGONFORGED_AXE,
+//				MineFantasyItems.DRAGONFORGED_SPADE,
+//				MineFantasyItems.DRAGONFORGED_HOE,
+//				MineFantasyItems.DRAGONFORGED_HEAVY_PICK,
+//				MineFantasyItems.DRAGONFORGED_HEAVY_SHOVEL,
+//				MineFantasyItems.DRAGONFORGED_HANDPICK,
+//				MineFantasyItems.DRAGONFORGED_TROW,
+//				MineFantasyItems.DRAGONFORGED_SCYTHE,
+//				MineFantasyItems.DRAGONFORGED_MATTOCK,
+//				MineFantasyItems.DRAGONFORGED_LUMBER,
+//				MineFantasyItems.DRAGONFORGED_HAMMER,
+//				MineFantasyItems.DRAGONFORGED_HEAVY_HAMMER,
+//				MineFantasyItems.DRAGONFORGED_TONGS,
+//				MineFantasyItems.DRAGONFORGED_SHEARS,
+//				MineFantasyItems.DRAGONFORGED_KNIFE,
+//				MineFantasyItems.DRAGONFORGED_NEEDLE,
+//				MineFantasyItems.DRAGONFORGED_SAW,
+//				MineFantasyItems.DRAGONFORGED_SPANNER,
+//				MineFantasyItems.DRAGONFORGED_BOW,
+//				MineFantasyItems.DRAGONFORGED_SCALE_HELMET,
+//				MineFantasyItems.DRAGONFORGED_SCALE_CHESTPLATE,
+//				MineFantasyItems.DRAGONFORGED_SCALE_LEGGINGS,
+//				MineFantasyItems.DRAGONFORGED_SCALE_BOOTS,
+//				MineFantasyItems.DRAGONFORGED_CHAIN_HELMET,
+//				MineFantasyItems.DRAGONFORGED_CHAIN_CHESTPLATE,
+//				MineFantasyItems.DRAGONFORGED_CHAIN_LEGGINGS,
+//				MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS,
+//				MineFantasyItems.DRAGONFORGED_SPLINT_HELMET,
+//				MineFantasyItems.DRAGONFORGED_SPLINT_CHESTPLATE,
+//				MineFantasyItems.DRAGONFORGED_SPLINT_LEGGINGS,
+//				MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS,
+//				MineFantasyItems.DRAGONFORGED_PLATE_HELMET,
+//				MineFantasyItems.DRAGONFORGED_PLATE_CHESTPLATE,
+//				MineFantasyItems.DRAGONFORGED_PLATE_LEGGINGS,
+//				MineFantasyItems.DRAGONFORGED_PLATE_BOOTS,
+//				MineFantasyItems.ORNATE_SWORD,
+//				MineFantasyItems.ORNATE_WARAXE,
+//				MineFantasyItems.ORNATE_MACE,
+//				MineFantasyItems.ORNATE_DAGGER,
+//				MineFantasyItems.ORNATE_SPEAR,
+//				MineFantasyItems.ORNATE_GREATSWORD,
+//				MineFantasyItems.ORNATE_BATTLEAXE,
+//				MineFantasyItems.ORNATE_WARHAMMER,
+//				MineFantasyItems.ORNATE_KATANA,
+//				MineFantasyItems.ORNATE_HALBEARD,
+//				MineFantasyItems.ORNATE_LANCE,
+//				MineFantasyItems.ORNATE_PICK,
+//				MineFantasyItems.ORNATE_AXE,
+//				MineFantasyItems.ORNATE_SPADE,
+//				MineFantasyItems.ORNATE_HOE,
+//				MineFantasyItems.ORNATE_HEAVY_PICK,
+//				MineFantasyItems.ORNATE_HEAVY_SHOVEL,
+//				MineFantasyItems.ORNATE_HANDPICK,
+//				MineFantasyItems.ORNATE_TROW,
+//				MineFantasyItems.ORNATE_SCYTHE,
+//				MineFantasyItems.ORNATE_MATTOCK,
+//				MineFantasyItems.ORNATE_LUMBER,
+//				MineFantasyItems.ORNATE_HAMMER,
+//				MineFantasyItems.ORNATE_HEAVY_HAMMER,
+//				MineFantasyItems.ORNATE_TONGS,
+//				MineFantasyItems.ORNATE_SHEARS,
+//				MineFantasyItems.ORNATE_KNIFE,
+//				MineFantasyItems.ORNATE_NEEDLE,
+//				MineFantasyItems.ORNATE_SAW,
+//				MineFantasyItems.ORNATE_SPANNER,
+//				MineFantasyItems.ORNATE_BOW,
+//				MineFantasyItems.ORNATE_SCALE_HELMET,
+//				MineFantasyItems.ORNATE_SCALE_CHESTPLATE,
+//				MineFantasyItems.ORNATE_SCALE_LEGGINGS,
+//				MineFantasyItems.ORNATE_SCALE_BOOTS,
+//				MineFantasyItems.ORNATE_CHAIN_HELMET,
+//				MineFantasyItems.ORNATE_CHAIN_CHESTPLATE,
+//				MineFantasyItems.ORNATE_CHAIN_LEGGINGS,
+//				MineFantasyItems.ORNATE_CHAIN_BOOTS,
+//				MineFantasyItems.ORNATE_SPLINT_HELMET,
+//				MineFantasyItems.ORNATE_SPLINT_CHESTPLATE,
+//				MineFantasyItems.ORNATE_SPLINT_LEGGINGS,
+//				MineFantasyItems.ORNATE_SPLINT_BOOTS,
+//				MineFantasyItems.ORNATE_PLATE_HELMET,
+//				MineFantasyItems.ORNATE_PLATE_CHESTPLATE,
+//				MineFantasyItems.ORNATE_PLATE_LEGGINGS,
+//				MineFantasyItems.ORNATE_PLATE_BOOTS
 				);
 	}
 

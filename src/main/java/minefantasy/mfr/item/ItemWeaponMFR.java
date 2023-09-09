@@ -600,22 +600,33 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			return;
 		}
 
-		if (this instanceof ItemKnife) {
-			super.getSubItems(tab, items);
-			return;
+		if (this == MineFantasyItems.TRAINING_SWORD) {
+			items.add(new ItemStack(MineFantasyItems.TRAINING_SWORD));
 		}
-		if (this != MineFantasyItems.TRAINING_SWORD) {
-			return;
+		if (this == MineFantasyItems.TRAINING_WARAXE) {
+			items.add(new ItemStack(MineFantasyItems.TRAINING_WARAXE));
 		}
-		items.add(new ItemStack(MineFantasyItems.TRAINING_SWORD));
-		items.add(new ItemStack(MineFantasyItems.TRAINING_WARAXE));
-		items.add(new ItemStack(MineFantasyItems.TRAINING_MACE));
-		items.add(new ItemStack(MineFantasyItems.TRAINING_SPEAR));
-
-		items.add(new ItemStack(MineFantasyItems.STONE_SWORD));
-		items.add(new ItemStack(MineFantasyItems.STONE_WARAXE));
-		items.add(new ItemStack(MineFantasyItems.STONE_MACE));
-		items.add(new ItemStack(MineFantasyItems.STONE_SPEAR));
+		if (this == MineFantasyItems.TRAINING_MACE) {
+			items.add(new ItemStack(MineFantasyItems.TRAINING_MACE));
+		}
+		if (this == MineFantasyItems.TRAINING_SPEAR) {
+			items.add(new ItemStack(MineFantasyItems.TRAINING_SPEAR));
+		}
+		if (this == MineFantasyItems.STONE_KNIFE) {
+			items.add(new ItemStack(MineFantasyItems.STONE_KNIFE));
+		}
+		if (this == MineFantasyItems.STONE_SWORD) {
+			items.add(new ItemStack(MineFantasyItems.STONE_SWORD));
+		}
+		if (this == MineFantasyItems.STONE_WARAXE) {
+			items.add(new ItemStack(MineFantasyItems.STONE_WARAXE));
+		}
+		if (this == MineFantasyItems.STONE_MACE) {
+			items.add(new ItemStack(MineFantasyItems.STONE_MACE));
+		}
+		if (this == MineFantasyItems.STONE_SPEAR) {
+			items.add(new ItemStack(MineFantasyItems.STONE_SPEAR));
+		}
 	}
 
 	@Override

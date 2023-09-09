@@ -2,7 +2,6 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.constants.Skill;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.material.MetalMaterial;
@@ -10,6 +9,7 @@ import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -18,32 +18,27 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
-
-	public ShapelessCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output,
+public class AnvilShapelessCustomMaterialRecipe extends AnvilRecipeBase {
+	protected boolean tierModifyOutputCount;
+	public AnvilShapelessCustomMaterialRecipe(NonNullList<Ingredient> inputs, ItemStack output,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
-			String requiredResearch, Skill requiredSkill) {
-
+			String requiredResearch, Skill requiredSkill, boolean tierModifyOutputCount) {
 		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
-	}
-
-	@Override
-	public ItemStack getAnvilRecipeOutput() {
-		return this.output;
+		this.tierModifyOutputCount = tierModifyOutputCount;
 	}
 
 	/**
 	 * Used to check if a recipe matches current crafting inventory
 	 */
 	@Override
-	boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world) {
+	boolean matches(@Nonnull AnvilCraftMatrix matrix, @Nonnull World world) {
 		String wood = null;
 		String metal = null;
 		NonNullList<Ingredient> ingredients = getIngredients();
 		List<Boolean> ingredientsMatched = new ArrayList<>(Collections.nCopies(ingredients.size(), false));
 
-		for (int i = 0; i < inv.getSizeInventory(); ++i) {
-			ItemStack inputItem = inv.getStackInSlot(i);
+		for (int i = 0; i < matrix.getSizeInventory(); ++i) {
+			ItemStack inputItem = matrix.getStackInSlot(i);
 			if (inputItem.isEmpty()) {
 				continue;
 			}
@@ -75,7 +70,6 @@ public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
 					}
 				}
 
-				Ingredient ingredient = ingredients.get(j);
 				// HEATING
 				if (Heatable.requiresHeating && Heatable.canHeatItem(inputItem)) {
 					passesChecks = false;
@@ -84,17 +78,6 @@ public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
 					passesChecks = false;
 				}
 				inputItem = getHotItem(inputItem);
-
-				for (CustomMaterial material : CustomMaterial.getList("metal")){
-					NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
-					for (ItemStack materialOreDictStack : materialOreDictStacks){
-						if (OreDictionary.itemMatches(materialOreDictStack, inputItem, true)){
-							if (ingredient.apply(materialOreDictStack)) {
-								metal = material.name;
-							}
-						}
-					}
-				}
 
 				if (inputItem.isEmpty()) {
 					passesChecks = false;
@@ -113,6 +96,9 @@ public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
 				return false;
 			}
 		}
+		if (!modifyTiers(matrix, metal, true)) {
+			modifyTiers(matrix, wood, false);
+		}
 
 		return !ingredientsMatched.contains(false);
 	}
@@ -127,14 +113,14 @@ public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
 		String wood = null;
 		String metal = null;
 		for (int i = 0; i < matrix.getSizeInventory(); i++) {
-			ItemStack item = matrix.getStackInSlot(i);
-			String component_wood = CustomToolHelper.getComponentMaterial(item, "wood");
-			String component_metal = CustomToolHelper.getComponentMaterial(item, "metal");
+			ItemStack inputItem = matrix.getStackInSlot(i);
+			String component_wood = CustomToolHelper.getComponentMaterial(inputItem, "wood");
+			String component_metal = CustomToolHelper.getComponentMaterial(inputItem, "metal");
 
 			for (CustomMaterial material : CustomMaterial.getList("metal")){
 				NonNullList<ItemStack> materialOreDictStacks = OreDictionary.getOres(((MetalMaterial)material).oreDictList);
 				for (ItemStack materialOreDictStack : materialOreDictStacks){
-					if (OreDictionary.itemMatches(ItemHeated.getStack(item), materialOreDictStack, true)){
+					if (OreDictionary.itemMatches(ItemHeated.getStack(inputItem), materialOreDictStack, true)){
 						component_metal = material.name;
 					}
 				}
@@ -147,22 +133,19 @@ public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
 				metal = component_metal;
 			}
 		}
-		if (metal != null) {
+		if (metal != null && !tierModifyOutputCount) {
 			CustomMaterial.addMaterial(result, CustomToolHelper.slot_main, metal);
 		}
-		if (wood != null) {
+		if (wood != null && !tierModifyOutputCount) {
 			CustomMaterial.addMaterial(result, CustomToolHelper.slot_haft, wood);
 		}
 
-		if (result.getItem() == MineFantasyItems.HOT_ITEM){ //Dummy item to match in recipe
-			for (CustomMaterial material : CustomMaterial.getList("metal")){
-				if (material instanceof MetalMaterial) {
-					if (material.getName().equals(metal)){
-						NonNullList<ItemStack> oreDictItemStacks = OreDictionary.getOres(((MetalMaterial) material).oreDictList);
-						result = oreDictItemStacks.get(0);
-					}
-				}
-			}
+		if (tierModifyOutputCount) {
+			int modifiedCount = MathHelper.clamp(
+					MetalMaterial.getMaterial(metal).tier * result.getCount(),
+					1,
+					result.getMaxStackSize());
+			result.setCount(modifiedCount);
 		}
 
 		return result;
@@ -177,43 +160,11 @@ public class ShapelessCustomMaterialAnvilRecipe extends AnvilRecipeBase {
 	}
 
 	@Override
-	public int getCraftTime() {
-		return this.craftTime;
-	}
-
-	@Override
-	public int getHammerTier() {
-		return this.hammerTier;
-	}
-
-	@Override
-	public int getAnvilTier() {
-		return this.anvilTier;
-	}
-
-	@Override
-	public boolean outputHot() {
-		return hotOutput;
-	}
-
-	@Override
-	public String getToolType() {
-		return toolType;
-	}
-
-	@Override
-	public String getResearch() {
-		return requiredResearch;
-	}
-
-	@Override
-	public Skill getSkill() {
-		return requiredSkill;
-	}
-
-	@Override
 	public boolean useCustomTiers() {
-		return false;
+		return true;
 	}
 
+	public boolean isTierModifyOutputCount() {
+		return tierModifyOutputCount;
+	}
 }

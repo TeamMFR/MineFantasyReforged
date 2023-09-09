@@ -1,5 +1,5 @@
 {
-  "type": "shaped_custom_material_anvil_recipe",
+  "type": "anvil_shaped_custom_material_recipe",
   "skill": "artisanry",
   "research": "tier",
   "tool_type": "heavy_hammer",
@@ -11,8 +11,7 @@
   "pattern": [
     "LBR   ",
     "TBBBBB",
-    "LBR   ",
-    "      "
+    "LBR   "
   ],
   "key": {
     "B": {

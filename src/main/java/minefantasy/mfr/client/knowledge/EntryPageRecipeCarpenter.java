@@ -1,38 +1,38 @@
 package minefantasy.mfr.client.knowledge;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.recipe.ICarpenterRecipe;
-import minefantasy.mfr.recipe.ShapedCarpenterRecipes;
-import minefantasy.mfr.recipe.ShapelessCarpenterRecipes;
+import minefantasy.mfr.recipe.CarpenterDynamicRecipe;
+import minefantasy.mfr.recipe.CarpenterRecipeBase;
+import minefantasy.mfr.recipe.CarpenterShapedCustomMaterialRecipe;
+import minefantasy.mfr.recipe.CarpenterShapedRecipe;
+import minefantasy.mfr.recipe.CarpenterShapelessCustomMaterialRecipe;
+import minefantasy.mfr.recipe.CarpenterShapelessRecipe;
 import minefantasy.mfr.util.GuiHelper;
+import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class EntryPageRecipeCarpenter extends EntryPage {
-	public static int switchRate = 15;
-	private Minecraft mc = Minecraft.getMinecraft();
-	private ICarpenterRecipe[] recipes = new ICarpenterRecipe[] {};
-	private int recipeID;
-	private boolean shapelessRecipe = false;
-	private boolean oreDictRecipe = false;
+	private final Minecraft mc = Minecraft.getMinecraft();
+	private final List<CarpenterRecipeBase> recipes;
+	private final CycleTimer cycleTimer = new CycleTimer((int) ((Math.random() * 10000) % Integer.MAX_VALUE));
 
-	public EntryPageRecipeCarpenter(List<ICarpenterRecipe> recipes) {
-		ICarpenterRecipe[] array = new ICarpenterRecipe[recipes.size()];
-		for (int a = 0; a < recipes.size(); a++) {
-			array[a] = recipes.get(a);
-		}
-		this.recipes = array;
-
+	public EntryPageRecipeCarpenter(List<CarpenterRecipeBase> recipes) {
+		this.recipes = recipes;
 	}
 
-	public EntryPageRecipeCarpenter(ICarpenterRecipe... recipes) {
-		this.recipes = recipes;
+	public EntryPageRecipeCarpenter(CarpenterRecipeBase recipe) {
+		this.recipes = Collections.singletonList(recipe);
 	}
 
 	@Override
@@ -43,44 +43,43 @@ public class EntryPageRecipeCarpenter extends EntryPage {
 	@Override
 	public void render(GuiScreen parent, int x, int y, float f, int posX, int posY, boolean onTick) {
 		if (onTick) {
-			tickRecipes();
+			cycleTimer.onDraw();
 		}
 
 		this.mc.getTextureManager().bindTexture(new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/gui/knowledge/carpenter_grid.png"));
-		parent.drawTexturedModalRect(posX, posY, 0, 0, this.universalBookImageWidth, this.universalBookImageHeight);
+		parent.drawTexturedModalRect(posX, posY, 0, 0, universalBookImageWidth, universalBookImageHeight);
 
-		ICarpenterRecipe recipe = (recipeID < 0 || recipeID >= recipes.length) ? null : recipes[recipeID];
+		CarpenterRecipeBase recipe = cycleTimer.getCycledItem(recipes);
 		String cft = "<" + I18n.format("method.carpenter") + ">";
 		mc.fontRenderer.drawSplitString(cft,
-				posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2), posY + 175, 117, 0);
-		renderRecipe(parent, x, y, f, posX, posY, recipe);
+				posX + (universalBookImageWidth / 2) - (mc.fontRenderer.getStringWidth(cft) / 2),
+				posY + 175, 117, 0);
+		renderRecipe(parent, x, y, posX, posY, recipe);
 
 	}
 
-	private void renderRecipe(GuiScreen parent, int mx, int my, float f, int posX, int posY, ICarpenterRecipe recipe) {
+	private void renderRecipe(GuiScreen parent, int mx, int my, int posX, int posY, CarpenterRecipeBase recipe) {
 		if (parent == null)
 			return;
 		if (recipe == null)
 			return;
-		shapelessRecipe = false;
-		oreDictRecipe = false;
 
 		GL11.glColor3f(255, 255, 255);
-		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getRecipeHammer(), posX + 34, posY + 51, true,
+		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getToolTier(), posX + 34, posY + 51, true,
 				true);
-		GuiHelper.renderToolIcon(parent, "carpenter", recipe.getAnvil(), posX + 124, posY + 51, true, true);
+		GuiHelper.renderToolIcon(parent, "carpenter", recipe.getCarpenterTier(), posX + 124, posY + 51, true, true);
 
-		if (recipe instanceof ShapedCarpenterRecipes) {
-			ShapedCarpenterRecipes shaped = (ShapedCarpenterRecipes) recipe;
+		List<Ingredient> inputs = RecipeHelper.expandPattern(recipe.getIngredients(), recipe.getWidth(), recipe.getHeight(), CarpenterRecipeBase.MAX_WIDTH, CarpenterRecipeBase.MAX_HEIGHT);
+		if (recipe instanceof CarpenterShapedRecipe || recipe instanceof CarpenterShapedCustomMaterialRecipe || recipe instanceof CarpenterDynamicRecipe) {
 
-			for (int y = 0; y < shaped.recipeHeight; y++) {
-				for (int x = 0; x < shaped.recipeWidth; x++) {
-					renderItemAtGridPos(parent, 1 + x, 1 + y, shaped.recipeItems[y * shaped.recipeWidth + x], true,
-							posX, posY, mx, my);
+			for (int y = 0; y < CarpenterRecipeBase.MAX_HEIGHT; y++) {
+				for (int x = 0; x < CarpenterRecipeBase.MAX_WIDTH; x++) {
+					int index = y * CarpenterRecipeBase.MAX_WIDTH + x;
+					ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(inputs.get(index).getMatchingStacks()));
+					renderItemAtGridPos(parent, 1 + x, 1 + y, stack, true, posX, posY, mx, my);
 				}
 			}
-		} else if (recipe instanceof ShapelessCarpenterRecipes) {
-			ShapelessCarpenterRecipes shapeless = (ShapelessCarpenterRecipes) recipe;
+		} else if (recipe instanceof CarpenterShapelessRecipe || recipe instanceof CarpenterShapelessCustomMaterialRecipe) {
 
 			drawGrid:
 			{
@@ -88,25 +87,26 @@ public class EntryPageRecipeCarpenter extends EntryPage {
 					for (int x = 0; x < 4; x++) {
 						int index = y * 4 + x;
 
-						if (index >= shapeless.recipeItems.size())
+						if (index >= recipe.getIngredients().size())
 							break drawGrid;
 
-						renderItemAtGridPos(parent, 1 + x, 1 + y, (ItemStack) shapeless.recipeItems.get(index), true,
-								posX, posY, mx, my);
+						ItemStack stack = cycleTimer.getCycledItem(Arrays.asList(inputs.get(index).getMatchingStacks()));
+						renderItemAtGridPos(parent, 1 + x, 1 + y, stack, true, posX, posY, mx, my);
 					}
 				}
 			}
 
-			shapelessRecipe = true;
 		}
-		renderResult(parent, recipe.getCarpenterRecipeOutput(), false, posX, posY, mx, my);
-	}
+		List<ItemStack> outputs = new ArrayList<>();
+		if (recipe instanceof CarpenterDynamicRecipe) {
+			//outputs = AnvilDynamicRecipe.getOutputsFromIngredients(inputs, ((CarpenterDynamicRecipe) recipe).modifyOutput, recipe.getCarpenterRecipeOutput());
+		}
 
-	private void tickRecipes() {
-		if (recipeID < recipes.length - 1) {
-			++recipeID;
-		} else {
-			recipeID = 0;
+		if (outputs.isEmpty()) {
+			renderResult(parent, recipe.getCarpenterRecipeOutput(), false, posX, posY, mx, my);
+		}
+		else {
+			renderResult(parent, cycleTimer.getCycledItem(outputs), false, posX, posY, mx, my);
 		}
 	}
 
@@ -128,8 +128,10 @@ public class EntryPageRecipeCarpenter extends EntryPage {
 	}
 
 	public void renderItemAtGridPos(GuiScreen parent, int x, int y, ItemStack stack, boolean accountForContainer, int xOrigin, int yOrigin, int mx, int my) {
-		if (stack.isEmpty())
+		if (stack == null) {// fixes GUI crash with missing or incorrect recipes
 			return;
+		}
+
 		stack = stack.copy();
 
 		int gridSize = 23;

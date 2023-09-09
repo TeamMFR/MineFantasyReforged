@@ -1,19 +1,17 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "none",
   "research": "advanced_blackpowder",
   "tool_type": "hands",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 10,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.step",
   "pattern": [
-    " B  ",
-    "RGR ",
-    " C  ",
-    "    "
+    " B ",
+    "RGR",
+    " C "
   ],
   "key": {
     "B": {
@@ -26,7 +24,7 @@
       "item": "minefantasyreforged:clay_pot"
     },
     "G": {
-      "item": "minecraft:glowstone_dust"
+      "item": "#DUST_REDSTONE"
     }
   },
   "result": {

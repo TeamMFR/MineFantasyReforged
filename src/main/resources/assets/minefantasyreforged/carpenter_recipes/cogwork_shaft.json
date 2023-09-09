@@ -1,19 +1,17 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "cogwork_armour",
   "tool_type": "spanner",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 150,
   "tool_tier": 4,
   "experience": 0,
   "sound": "minefantasyreforged:block.twistbolt",
   "pattern": [
-    "BPB ",
-    "ITI ",
-    "BRB ",
-    "    "
+    "BPB",
+    "ITI",
+    "BRB"
   ],
   "key": {
     "P": {

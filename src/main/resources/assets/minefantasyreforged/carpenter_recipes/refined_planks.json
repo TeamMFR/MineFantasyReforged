@@ -1,27 +1,24 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "construction",
   "research": "refined_planks",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 10,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minecraft:block.cloth.step",
   "pattern": [
-    "N   ",
-    "PP  ",
-    "PP  ",
-    "    "
+    "N ",
+    "PP",
+    "PP"
   ],
   "key": {
     "N": {
       "item": "minefantasyreforged:nail"
     },
     "P": {
-      "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}",
-      "item": "minefantasyreforged:timber"
+      "item": "#TIMBER_REFINED"
     }
   },
   "result": {

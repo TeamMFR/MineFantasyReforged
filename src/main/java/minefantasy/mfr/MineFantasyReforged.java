@@ -29,8 +29,8 @@ import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.BasicRecipesMF;
-import minefantasy.mfr.recipe.CarpenterRecipeLoader;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
@@ -162,6 +162,7 @@ public class MineFantasyReforged {
 		//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
 
 		CraftingManagerAnvil.loadRecipes();
+		CraftingManagerCarpenter.loadRecipes();
 
 		PROXY.init();
 	}
@@ -186,7 +187,7 @@ public class MineFantasyReforged {
 		MineFantasyOreDict.registerOreDictCommonIngotEntry();
 		MineFantasyItems.addRandomDrops();
 
-		CarpenterRecipeLoader.INSTANCE.postInit();
+		//CarpenterRecipeLoader.INSTANCE.postInit();//TODO: Remove these
 		//AnvilRecipeLoader.INSTANCE.postInit();
 
 		configClient.save();

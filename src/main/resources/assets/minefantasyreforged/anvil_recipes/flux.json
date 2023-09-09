@@ -1,5 +1,5 @@
 {
-  "type": "shapeless_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "none",
   "research": "",
   "tool_type": "hammer",
@@ -8,11 +8,14 @@
   "recipe_time": 2,
   "recipe_hammer": -1,
   "output_hot": false,
-  "ingredients": [
-    {
+  "pattern": [
+    "L"
+  ],
+  "key": {
+    "L": {
       "item": "#LIMESTONE"
     }
-  ],
+  },
   "result": {
     "item": "minefantasyreforged:flux",
     "count": 4

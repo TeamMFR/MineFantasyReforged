@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "artisanry",
   "research": "",
   "tool_type": "hammer",
@@ -9,19 +9,16 @@
   "recipe_hammer": -1,
   "output_hot": true,
   "pattern": [
-    "LSL   ",
-    "SIS   ",
-    " S    ",
-    "      "
+    "LSL",
+    "SIS",
+    " S "
   ],
   "key": {
     "S": {
-      "nbt": "{mf_custom_materials:{main_material:\"silver\"}}",
-      "item": "minefantasyreforged:bar"
+      "item": "#BAR_SILVER"
     },
     "I": {
-      "nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
-      "item": "minefantasyreforged:bar"
+      "item": "#BAR_IRON"
     },
     "L": {
       "item": "minecraft:dye",

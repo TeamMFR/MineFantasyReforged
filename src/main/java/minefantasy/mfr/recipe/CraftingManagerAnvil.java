@@ -56,13 +56,13 @@ public class CraftingManagerAnvil {
 	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
-		ModContainer awModContainer = Loader.instance().activeModContainer();
+		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		//noinspection ConstantConditions
-		loadRecipes(awModContainer, new File("config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/anvil_recipes/"), "");
+		loadRecipes(modContainer, new File("config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/anvil_recipes/"), "");
 		Loader.instance().getActiveModList().forEach(m -> CraftingManagerAnvil.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/anvil_recipes"));
 
-		Loader.instance().setActiveModContainer(awModContainer);
+		Loader.instance().setActiveModContainer(modContainer);
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -127,7 +127,7 @@ public class CraftingManagerAnvil {
 		});
 	}
 
-	private static void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence) {
 		Item item = recipe.getAnvilRecipeOutput().getItem();
 		if (ConfigCrafting.isAnvilItemCraftable(item)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
@@ -144,7 +144,7 @@ public class CraftingManagerAnvil {
 		int time;
 		int anvilTier;
 		boolean hot;
-		int hammer;
+		int hammerTier;
 		int matrixItemStackCount = 0;
 		String toolType;
 		SoundEvent sound;
@@ -196,14 +196,14 @@ public class CraftingManagerAnvil {
 
 			if (anvilRecipeBase != null) {
 				time = anvilRecipeBase.getCraftTime();
-				hammer = anvilRecipeBase.getHammerTier();
+				hammerTier = anvilRecipeBase.getHammerTier();
 				anvilTier = anvilRecipeBase.getAnvilTier();
-				hot = anvilRecipeBase.outputHot();
+				hot = anvilRecipeBase.isHotOutput();
 				toolType = anvilRecipeBase.getToolType();
 
 				if (!anvilRecipeBase.useCustomTiers()){
 					anvil.setProgressMax(time);
-					anvil.setRequiredHammerTier(hammer);
+					anvil.setRequiredHammerTier(hammerTier);
 					anvil.setRequiredAnvilTier(anvilTier);
 				}
 

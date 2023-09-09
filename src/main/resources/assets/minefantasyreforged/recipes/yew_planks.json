@@ -1,11 +1,13 @@
 {
-    "type": "minecraft:crafting_shapeless",
-    "ingredients": [
-        {
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "L"
+    ],
+    "key": {
+        "L": {
             "item": "minefantasyreforged:log_yew"
         }
-
-    ],
+    },
     "result": {
         "item": "minefantasyreforged:yew_planks",
         "count": 4

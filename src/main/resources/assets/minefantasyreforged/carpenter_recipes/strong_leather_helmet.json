@@ -1,19 +1,16 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
   "research": "craft_armour_light",
   "tool_type": "needle",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 50,
   "tool_tier": 1,
   "experience": 0,
   "sound": "minecraft:block.cloth.step",
   "pattern": [
-    "TTT ",
-    "LRL ",
-    "    ",
-    "    "
+    "TTT",
+    "LRL"
   ],
   "key": {
     "R": {
@@ -23,7 +20,7 @@
       "item": "minefantasyreforged:thread"
     },
     "L": {
-      "item": "minecraft:leather"
+      "item": "#LEATHER"
     }
   },
   "result": {

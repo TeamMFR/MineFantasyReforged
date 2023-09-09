@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "artisanry",
   "research": "",
   "tool_type": "hammer",
@@ -9,10 +9,9 @@
   "recipe_hammer": 1,
   "output_hot": true,
   "pattern": [
-    "BNB   ",
-    "DTD   ",
-    "BDB   ",
-    "      "
+    "BNB",
+    "DTD",
+    "BDB"
   ],
   "key": {
     "B": {

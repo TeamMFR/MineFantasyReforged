@@ -1,19 +1,18 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "provisioning",
   "research": "sandwitch",
   "tool_type": "hands",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 4,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.hit",
   "pattern": [
-    "B   ",
-    "C   ",
-    "G   ",
-    "B   "
+    "B",
+    "C",
+    "G",
+    "B"
   ],
   "key": {
     "B": {

@@ -1,5 +1,5 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "engineering",
   "research": "advanced_forge",
   "tool_type": "spanner",

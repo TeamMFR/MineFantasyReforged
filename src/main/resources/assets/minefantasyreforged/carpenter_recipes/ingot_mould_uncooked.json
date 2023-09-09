@@ -1,19 +1,16 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "none",
   "research": "crucible",
   "tool_type": "hands",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 10,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.step",
   "pattern": [
-    "CCC ",
-    " C  ",
-    "    ",
-    "    "
+    "CCC",
+    " C "
   ],
   "key": {
     "C": {

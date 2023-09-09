@@ -900,9 +900,10 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fletching")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fletching-2")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("arrowhead")),
-				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("standard_arrow"),
-						                     CraftingManagerCarpenter.getRecipeByName("standard_arrow_broad"),
-						                     CraftingManagerCarpenter.getRecipeByName("standard_arrow_bodkin")));
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipesByName(
+						"standard_arrow",
+						"standard_arrow_broad",
+						"standard_arrow_bodkin")));
 
 		MineFantasyKnowledgeList.arrows_bodkin.addPages(
 				new EntryPageText("knowledge.arrows_bodkin.1"),
@@ -985,15 +986,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.generic_meat.addPages(
 				new EntryPageText("knowledge.generic_meat.1"),
-				new EntryPageRecipeCarpenter(
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_0"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_1"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_2"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_3"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_4"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_5"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_6"),
-						CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked_7")),
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_uncooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_cooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_chunk_uncooked")),

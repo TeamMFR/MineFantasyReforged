@@ -1,9 +1,8 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "artisanry",
   "research": "",
   "tool_type": "knife",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 20,
   "tool_tier": 1,
@@ -12,16 +11,14 @@
   "pattern": [
     "  N ",
     "PPPL",
-    "  N ",
-    "    "
+    "  N "
   ],
   "key": {
     "P": {
       "item": "minefantasyreforged:timber"
     },
     "L": {
-      "item": "minecraft:planks",
-      "data": 32767
+      "item": "#PLANK_WOOD"
     },
     "N": {
       "item": "minefantasyreforged:nail"

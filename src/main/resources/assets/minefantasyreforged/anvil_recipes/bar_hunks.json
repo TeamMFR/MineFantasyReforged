@@ -1,5 +1,5 @@
 {
-  "type": "shaped_custom_material_anvil_recipe",
+  "type": "anvil_shaped_custom_material_recipe",
   "skill": "artisanry",
   "research": "",
   "tool_type": "hammer",
@@ -9,10 +9,8 @@
   "recipe_hammer": 0,
   "output_hot": true,
   "pattern": [
-    "MM    ",
-    "MM    ",
-    "      ",
-    "      "
+    "MM",
+    "MM"
   ],
   "key": {
     "M": {

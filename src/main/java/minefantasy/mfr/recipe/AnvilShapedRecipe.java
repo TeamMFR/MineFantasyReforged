@@ -11,25 +11,17 @@ import net.minecraft.world.World;
 /**
  * @author AnonymousProductions
  */
-public class ShapedAnvilRecipes extends AnvilRecipeBase {
+public class AnvilShapedRecipe extends AnvilRecipeBase {
+	protected int width;
+	protected int height;
 
-	public ShapedAnvilRecipes(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
+	public AnvilShapedRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
+			int craftTime, int hammerTier, int anvilTier,
+			boolean hotOutput, String requiredResearch, Skill requiredSkill,
+			int width, int height) {
 		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
-	}
-
-	@Override
-	public ItemStack getAnvilRecipeOutput() {
-		return this.output;
-	}
-
-	@Override
-	public int getCraftTime() {
-		return craftTime;
-	}
-
-	@Override
-	public int getHammerTier() {
-		return hammerTier;
+		this.width = width;
+		this.height = height;
 	}
 
 	/**
@@ -37,8 +29,8 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 	 */
 	@Override
 	public boolean matches(AnvilCraftMatrix inv, World worldIn) {
-		for (int i = 0; i <= inv.getWidth() - WIDTH; ++i) {
-			for (int j = 0; j <= inv.getHeight() - HEIGHT; ++j) {
+		for (int i = 0; i <= inv.getWidth() - width; ++i) {
+			for (int j = 0; j <= inv.getHeight() - height; ++j) {
 				if (this.checkMatch(inv, i, j, true)) {
 					return true;
 				}
@@ -55,18 +47,18 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 	/**
 	 * Checks if the region of a crafting inventory is match for the recipe.
 	 */
-	protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean b) {
-		for (int matrixX = 0; matrixX < WIDTH; ++matrixX) {
-			for (int matrixY = 0; matrixY < HEIGHT; ++matrixY) {
+	protected boolean checkMatch(AnvilCraftMatrix matrix, int x, int y, boolean mirror) {
+		for (int matrixX = 0; matrixX < MAX_WIDTH; ++matrixX) {
+			for (int matrixY = 0; matrixY < MAX_HEIGHT; ++matrixY) {
 				int recipeX = matrixX - x;
 				int recipeY = matrixY - y;
 				Ingredient ingredient = Ingredient.EMPTY;
 
-				if (recipeX >= 0 && recipeY >= 0 && recipeX < WIDTH && recipeY < HEIGHT) {
-					if (b) {
-						ingredient = inputs.get(WIDTH - recipeX - 1 + recipeY * WIDTH);
+				if (recipeX >= 0 && recipeY >= 0 && recipeX < width && recipeY < height) {
+					if (mirror) {
+						ingredient = inputs.get(width - recipeX - 1 + recipeY * width);
 					} else {
-						ingredient = inputs.get(recipeX + recipeY * WIDTH);
+						ingredient = inputs.get(recipeX + recipeY * width);
 					}
 				}
 
@@ -86,7 +78,7 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 						return false;
 					}
 
-					if (inputItem == null) {
+					if (inputItem.isEmpty()) {
 						return false;
 					}
 
@@ -105,48 +97,20 @@ public class ShapedAnvilRecipes extends AnvilRecipeBase {
 	}
 
 	/**
-	 * Returns an Item that is the result of this recipe
-	 */
-	@Override
-	public ItemStack getCraftingResult(AnvilCraftMatrix matrix) {
-		return output.copy();
-	}
-
-	/**
 	 * Returns the size of the recipe area
 	 */
 	@Override
 	public int getRecipeSize() {
-		return WIDTH * HEIGHT;
+		return width * height;
 	}
 
 	@Override
-	public int getAnvilTier() {
-		return anvilTier;
+	public int getWidth() {
+		return width;
 	}
 
 	@Override
-	public boolean outputHot() {
-		return hotOutput;
-	}
-
-	@Override
-	public String getToolType() {
-		return toolType;
-	}
-
-	@Override
-	public String getResearch() {
-		return requiredResearch;
-	}
-
-	@Override
-	public Skill getSkill() {
-		return requiredSkill;
-	}
-
-	@Override
-	public boolean useCustomTiers() {
-		return false;
+	public int getHeight() {
+		return height;
 	}
 }

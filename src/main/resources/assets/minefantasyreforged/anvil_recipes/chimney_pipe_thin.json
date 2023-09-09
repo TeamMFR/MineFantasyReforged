@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "construction",
   "research": "",
   "tool_type": "hammer",
@@ -9,10 +9,9 @@
   "recipe_hammer": 0,
   "output_hot": false,
   "pattern": [
-    "M  M  ",
-    "CCCC  ",
-    "M  M  ",
-    "      "
+    "M  M",
+    "CCCC",
+    "M  M"
   ],
   "key": {
     "C": {

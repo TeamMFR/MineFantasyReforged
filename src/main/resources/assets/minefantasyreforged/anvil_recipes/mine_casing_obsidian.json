@@ -1,5 +1,5 @@
 {
-  "type": "shaped_anvil_recipe",
+  "type": "anvil_shaped_recipe",
   "skill": "engineering",
   "research": "mine_obsidian",
   "tool_type": "hammer",
@@ -9,10 +9,10 @@
   "recipe_hammer": 4,
   "output_hot": true,
   "pattern": [
-    "  E   ",
-    "  H   ",
-    " MRM  ",
-    "MRORM "
+    "  E  ",
+    "  H  ",
+    " MRM ",
+    "MRORM"
   ],
   "key": {
     "R": {

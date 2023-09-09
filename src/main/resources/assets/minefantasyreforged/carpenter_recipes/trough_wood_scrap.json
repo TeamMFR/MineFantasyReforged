@@ -1,23 +1,20 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "construction",
   "research": "",
   "tool_type": "hammer",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 7,
   "tool_tier": 0,
   "experience": 0,
   "sound": "minefantasyreforged:block.hammercarpenter",
   "pattern": [
-    "P P ",
-    "PPP ",
-    "    ",
-    "    "
+    "P P",
+    "PPP"
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber"
+      "item": "#TIMBER_SCRAP_WOOD"
     }
   },
   "result": {

@@ -1,5 +1,5 @@
 {
-  "type": "shaped_custom_material_anvil_recipe",
+  "type": "anvil_shaped_custom_material_recipe",
   "skill": "artisanry",
   "research": "craft_armour_medium",
   "tool_type": "hammer",
@@ -9,10 +9,9 @@
   "recipe_hammer": -1,
   "output_hot": true,
   "pattern": [
-    "RCR   ",
-    "CSC   ",
-    "RCR   ",
-    "      "
+    "RCR",
+    "CSC",
+    "RCR"
   ],
   "key": {
     "R": {

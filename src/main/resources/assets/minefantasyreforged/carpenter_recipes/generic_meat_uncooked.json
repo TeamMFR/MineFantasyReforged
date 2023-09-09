@@ -1,23 +1,19 @@
 {
-  "type": "crafting_shaped",
+  "type": "carpenter_shaped_recipe",
   "skill": "provisioning",
   "research": "",
   "tool_type": "knife",
-  "is_tool_recipe": false,
   "block_tier": -1,
   "craft_time": 15,
   "tool_tier": -1,
   "experience": 0,
   "sound": "minecraft:block.wood.hit",
   "pattern": [
-    "M   ",
-    "    ",
-    "    ",
-    "    "
+    "M"
   ],
   "key": {
     "M": {
-      "item": "minefantasyreforged:guts"
+      "item": "#RAW_MEAT"
     }
   },
   "result": {

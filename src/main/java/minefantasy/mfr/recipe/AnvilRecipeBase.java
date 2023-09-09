@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
@@ -12,17 +13,17 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import javax.annotation.Nonnull;
 
 public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilRecipeBase> {
-	public static final int WIDTH = 6;
-	public static final int HEIGHT = 4;
-	public ItemStack output;
-	public NonNullList<Ingredient> inputs;
-	public Skill requiredSkill;
-	public String requiredResearch;
-	public String toolType;
-	public int anvilTier;
-	public int hammerTier;
-	public int craftTime;
-	public boolean hotOutput;
+	public static final int MAX_WIDTH = 6;
+	public static final int MAX_HEIGHT = 4;
+	protected ItemStack output;
+	protected NonNullList<Ingredient> inputs;
+	protected Skill requiredSkill;
+	protected String requiredResearch;
+	protected String toolType;
+	protected int anvilTier;
+	protected int hammerTier;
+	protected int craftTime;
+	protected boolean hotOutput;
 
 	public AnvilRecipeBase(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
 			int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
@@ -55,6 +56,20 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		return item;
 	}
 
+	protected boolean modifyTiers(AnvilCraftMatrix matrix, String tier, boolean isMain) {
+		CustomMaterial material = CustomMaterial.getMaterial(tier);
+		if (material != CustomMaterial.NONE) {
+			int newTier = hammerTier < 0 ? material.crafterTier : hammerTier;
+			int newAnvil = anvilTier < 0 ? material.crafterAnvilTier : anvilTier;
+			matrix.modifyTier(newTier, newAnvil, (int) (craftTime * material.craftTimeModifier));
+			if (isMain) {
+				matrix.modifyResearch("smelt_" + material.getName());
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public ItemStack getCraftingResult(AnvilCraftMatrix var1) {
 		return output.copy();
 	}
@@ -79,7 +94,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		return anvilTier;
 	}
 
-	public boolean outputHot() {
+	public boolean isHotOutput() {
 		return hotOutput;
 	}
 
@@ -100,6 +115,13 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	}
 
 	public boolean useCustomTiers() {
+		return false;
+	}
+
+	public int getWidth() {return MAX_WIDTH;}
+	public int getHeight() {return MAX_HEIGHT;}
+
+	public boolean isTierModifyOutputCount() {
 		return false;
 	}
 }
