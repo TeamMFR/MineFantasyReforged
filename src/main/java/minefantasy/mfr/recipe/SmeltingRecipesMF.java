@@ -2,7 +2,6 @@ package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
-import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -52,13 +51,6 @@ public class SmeltingRecipesMF {
 			}
 			for (ItemStack ore: OreDictionary.getOres("oreGold")) {
 				BloomRecipe.addRecipe(ore, gold);
-			}
-
-			for (ItemStack ore: OreDictionary.getOres("oreIron")) {
-				MineFantasyReforgedAPI.addFurnaceRecipe(ore, iron, 0);
-			}
-			for (ItemStack ore: OreDictionary.getOres("oreGold")) {
-				MineFantasyReforgedAPI.addFurnaceRecipe(ore, gold, 0);
 			}
 		}
 
@@ -132,6 +124,5 @@ public class SmeltingRecipesMF {
 		if (ConfigHardcore.HCCreduceIngots) {
 			BloomRecipe.addRecipe(ore, bar);
 		}
-		BigFurnaceRecipes.addRecipe(ore, bar, 0);
 	}
 }

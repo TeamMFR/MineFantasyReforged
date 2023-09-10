@@ -39,6 +39,9 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CraftingManagerAnvil {
+
+	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/anvil_recipes/";
+
 	public CraftingManagerAnvil() {
 	}
 
@@ -58,8 +61,9 @@ public class CraftingManagerAnvil {
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
+		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
 		//noinspection ConstantConditions
-		loadRecipes(modContainer, new File("config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/anvil_recipes/"), "");
+		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
 		Loader.instance().getActiveModList().forEach(m -> CraftingManagerAnvil.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/anvil_recipes"));
 
 		Loader.instance().setActiveModContainer(modContainer);
@@ -128,11 +132,11 @@ public class CraftingManagerAnvil {
 	}
 
 	public static void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence) {
-		Item item = recipe.getAnvilRecipeOutput().getItem();
-		if (ConfigCrafting.isAnvilItemCraftable(item)) {
+		ItemStack itemStack = recipe.getAnvilRecipeOutput();
+		if (ConfigCrafting.isAnvilItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
-			item.getSubItems(item.getCreativeTab(), subItems);
+			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getAnvilRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !ANVIL_RECIPES.containsKey(recipe.getRegistryName()))) {
 				ANVIL_RECIPES.register(recipe);

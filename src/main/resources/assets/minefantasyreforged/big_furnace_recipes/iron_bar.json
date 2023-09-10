@@ -1,0 +1,13 @@
+{
+	"type": "big_furnace_recipe",
+	"anvil_tier": 0,
+	"ingredients": [
+		{
+			"item": "#IRON_ORE"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

@@ -84,10 +84,11 @@ public class RecipeHelper {
 
 	/**
 	 * Expands a small pattern (e.g. 3x2 size) to the given width and height by adding ItemStack.EMPTY stacks to the new, empty slots (e.g. 5x5 size)
-	 * @param stacks The original list of the ItemStacks
-	 * @param oldWidth The original width of this recipe, e.g. 3
-	 * @param oldHeight The original height of this recipe, e.g. 3
-	 * @param targetWidth The target width of this recipe, e.g. 5
+	 *
+	 * @param stacks       The original list of the ItemStacks
+	 * @param oldWidth     The original width of this recipe, e.g. 3
+	 * @param oldHeight    The original height of this recipe, e.g. 3
+	 * @param targetWidth  The target width of this recipe, e.g. 5
 	 * @param targetHeight The target height of this recipe, e.g. 4
 	 * @return A new List<ItemStack> with the original recipe aligned to the "beginning" of the list ("top-left aligned") and wrapped around with empty ItemStacks to fill the required grid size
 	 */
@@ -117,10 +118,11 @@ public class RecipeHelper {
 
 	/**
 	 * Expands a small pattern (e.g. 3x2 size) to the given width and height by adding ItemStack.EMPTY stacks to the new, empty slots (e.g. 5x5 size)
-	 * @param ingredients The original list of the Ingredients
-	 * @param oldWidth The original width of this recipe, e.g. 3
-	 * @param oldHeight The original height of this recipe, e.g. 3
-	 * @param targetWidth The target width of this recipe, e.g. 5
+	 *
+	 * @param ingredients  The original list of the Ingredients
+	 * @param oldWidth     The original width of this recipe, e.g. 3
+	 * @param oldHeight    The original height of this recipe, e.g. 3
+	 * @param targetWidth  The target width of this recipe, e.g. 5
 	 * @param targetHeight The target height of this recipe, e.g. 4
 	 * @return A new List<ItemStack> with the original recipe aligned to the "beginning" of the list ("top-left aligned") and wrapped around with empty ItemStacks to fill the required grid size
 	 */

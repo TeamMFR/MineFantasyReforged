@@ -1,7 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.heating.ForgeItemHandler;
-import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.IBellowsUseable;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockBigFurnace;
@@ -11,6 +10,8 @@ import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -404,13 +405,14 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	}
 
 	public ItemStack getResult(ItemStack item) {
-		if (item.isEmpty())
+		if (item.isEmpty()) {
 			return ItemStack.EMPTY;
+		}
 
 		// SPECIAL SMELTING
-		BigFurnaceRecipes recipe = BigFurnaceRecipes.getResult(item);
-		if (recipe != null && recipe.tier <= this.getTier()) {
-			return recipe.result;
+		BigFurnaceRecipeBase recipe = CraftingManagerBigFurnace.findMatchingRecipe(item);
+		if (recipe != null && recipe.getTier() <= this.getTier()) {
+			return recipe.getBigFurnaceRecipeOutput();
 		}
 
 		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(item);// If no special: try vanilla

@@ -19,7 +19,7 @@ import java.util.function.Function;
 public class FileUtils {
 	private FileUtils() {}
 
-	protected void createCustomDataDirectory(String directory) {
+	public static void createCustomDataDirectory(String directory) {
 		// create custom data dirs if they don't exist
 		File existTest = new File(directory);
 		if (!existTest.exists()) {

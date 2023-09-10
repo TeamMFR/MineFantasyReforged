@@ -5,7 +5,6 @@ import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.api.refine.AlloyRecipes;
-import minefantasy.mfr.api.refine.BigFurnaceRecipes;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
@@ -13,8 +12,10 @@ import minefantasy.mfr.recipe.AnvilShapedCustomMaterialRecipe;
 import minefantasy.mfr.recipe.AnvilShapedRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessRecipe;
+import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
@@ -390,7 +391,7 @@ public class MineFantasyReforgedAPI {
 		return QuernRecipes.addRecipe(input, output, tier, consumePot);
 	}
 
-	public static BigFurnaceRecipes addFurnaceRecipe(ItemStack input, ItemStack output, int tier) {
-		return BigFurnaceRecipes.addRecipe(input, output, tier);
+	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier) {
+		CraftingManagerBigFurnace.addRecipe(new BigFurnaceRecipeBase(output, input, tier), true);
 	}
 }

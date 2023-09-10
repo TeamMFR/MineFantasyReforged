@@ -30,6 +30,7 @@ import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
@@ -116,9 +117,6 @@ public class MineFantasyReforged {
 		PlayerData.register();
 		MineFantasyItems.initEnumActions();
 
-		//		CarpenterRecipeManager.INSTANCE.initializeAndExportDefaults();
-		//		CarpenterRecipeManager.INSTANCE.preInit();
-
 		MineFantasyReforgedAPI.isInDebugMode = isDebug();
 		MineFantasyReforged.LOG.info("API Debug mode updated: " + MineFantasyReforgedAPI.isInDebugMode);
 
@@ -159,10 +157,9 @@ public class MineFantasyReforged {
 		GameRegistry.registerWorldGenerator(new WorldGenGeological(), 5);
 		GameRegistry.registerWorldGenerator(new WorldGenStructure(), 5);
 
-		//		AnvilRecipeManager.loadRecipesFromSource(Loader.instance().activeModContainer().getSource(), AnvilRecipeManager.DEFAULT_RECIPE_DIRECTORY);
-
 		CraftingManagerAnvil.loadRecipes();
 		CraftingManagerCarpenter.loadRecipes();
+		CraftingManagerBigFurnace.loadRecipes();
 
 		PROXY.init();
 	}
@@ -187,9 +184,6 @@ public class MineFantasyReforged {
 		MineFantasyOreDict.registerOreDictCommonIngotEntry();
 		MineFantasyItems.addRandomDrops();
 
-		//CarpenterRecipeLoader.INSTANCE.postInit();//TODO: Remove these
-		//AnvilRecipeLoader.INSTANCE.postInit();
-
 		configClient.save();
 		configArmour.save();
 		configSpecials.save();
@@ -207,9 +201,6 @@ public class MineFantasyReforged {
 		PROXY.postInit(postEvent);
 		PROXY.postInit();
 
-		// enabling this will dump all carpenter recipes to jsons! see RecipeExporter for path
-		// RecipeExporter exporter = new RecipeExporter();
-		// RecipeExporterAnvil exporterAnvil = new RecipeExporterAnvil();
 	}
 
 	@EventHandler
@@ -225,6 +216,8 @@ public class MineFantasyReforged {
 	@SubscribeEvent
 	public void createRegistry(RegistryEvent.NewRegistry evt) {
 		CraftingManagerAnvil.init();
+		CraftingManagerCarpenter.init();
+		CraftingManagerBigFurnace.init();
 	}
 
 	@SubscribeEvent

@@ -1,0 +1,13 @@
+{
+	"type": "big_furnace_recipe",
+	"anvil_tier": 0,
+	"ingredients": [
+		{
+			"item": "#COPPER_ORE"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"copper\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

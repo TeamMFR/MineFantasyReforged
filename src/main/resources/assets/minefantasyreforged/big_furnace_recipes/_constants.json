@@ -1,0 +1,62 @@
+[
+    {
+        "name": "COPPER_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreCopper"
+            },
+            {
+                "item": "minefantasyreforged:ore_copper"
+            }
+        ]
+    },
+    {
+        "name": "TIN_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreTin"
+            },
+            {
+                "item": "minefantasyreforged:ore_tin"
+            }
+        ]
+    },
+    {
+        "name": "IRON_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreIron"
+            },
+            {
+                "item": "minefantasyreforged:ore_iron"
+            }
+        ]
+    },
+    {
+        "name": "GOLD_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreGold"
+            },
+            {
+                "item": "minefantasyreforged:ore_gold"
+            }
+        ]
+    },
+    {
+        "name": "SILVER_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreSilver"
+            },
+            {
+                "item": "minefantasyreforged:ore_silver"
+            }
+        ]
+    }
+]

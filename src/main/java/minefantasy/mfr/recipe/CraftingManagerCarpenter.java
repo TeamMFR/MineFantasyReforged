@@ -40,6 +40,8 @@ import java.util.List;
 
 public class CraftingManagerCarpenter {
 
+	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/carpenter_recipes/";
+
 	public CraftingManagerCarpenter() {
 	}
 
@@ -59,8 +61,9 @@ public class CraftingManagerCarpenter {
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
+		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
 		//noinspection ConstantConditions
-		loadRecipes(modContainer, new File("config/" + Constants.CONFIG_DIRECTORY +"/custom/recipes/carpenter_recipes/"), "");
+		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
 		Loader.instance().getActiveModList().forEach(m -> CraftingManagerCarpenter.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/carpenter_recipes"));
 
 		Loader.instance().setActiveModContainer(modContainer);
@@ -129,11 +132,11 @@ public class CraftingManagerCarpenter {
 	}
 
 	public static void addRecipe(CarpenterRecipeBase recipe, boolean checkForExistence) {
-		Item item = recipe.getCarpenterRecipeOutput().getItem();
-		if (ConfigCrafting.isCarpenterItemCraftable(item)) {
+		ItemStack itemStack = recipe.getCarpenterRecipeOutput();
+		if (ConfigCrafting.isCarpenterItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
-			item.getSubItems(item.getCreativeTab(), subItems);
+			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getCarpenterRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !CARPENTER_RECIPES.containsKey(recipe.getRegistryName()))) {
 				CARPENTER_RECIPES.register(recipe);
