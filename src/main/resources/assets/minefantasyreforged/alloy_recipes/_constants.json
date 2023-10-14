@@ -1,0 +1,149 @@
+[
+    {
+        "name": "TUNGSTEN_ORE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "oreTungsten"
+            },
+            {
+                "item": "minefantasyreforged:ore_tungsten"
+            }
+        ]
+    },
+    {
+        "name": "LIST_ALL_INGOTS",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "listAllIngots"
+        }
+    },
+    {
+        "name": "BAR_COPPER",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"copper\"}}"
+        }
+    },
+    {
+        "name": "BAR_TIN",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"tin\"}}"
+        }
+    },
+    {
+        "name": "BAR_GOLD",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"gold\"}}"
+        }
+    },
+    {
+        "name": "BAR_SILVER",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"silver\"}}"
+        }
+    },
+    {
+        "name": "BAR_BRONZE",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}"
+        }
+    },
+    {
+        "name": "BAR_IRON",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+        }
+    },
+    {
+        "name": "BAR_PIG_IRON",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"pig_iron\"}}"
+        }
+    },
+    {
+        "name": "BAR_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_ENCRUSTED",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"encrusted\"}}"
+        }
+    },
+    {
+        "name": "BAR_BLACK_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"black_steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_BLUE_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"blue_steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_RED_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"red_steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_COMPOSITE_ALLOY",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"composite_alloy\"}}"
+        }
+    },
+    {
+        "name": "BAR_ADAMANTIUM",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"adamantium\"}}"
+        }
+    },
+    {
+        "name": "BAR_MITHRIL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"mithril\"}}"
+        }
+    },
+    {
+        "name": "BAR_IGNOTUMITE",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"ignotumite\"}}"
+        }
+    }
+]

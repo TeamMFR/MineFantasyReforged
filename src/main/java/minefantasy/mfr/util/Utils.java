@@ -21,6 +21,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class Utils {
 
@@ -170,5 +171,21 @@ public class Utils {
 		float absoluteDifference = Math.abs(a - b);
 		float average = (a + b) / 2F;
 		return 100 * (absoluteDifference/average);
+	}
+
+	public static Long gcd(List<Long> input) {
+		long result = input.get(0);
+		for (int i = 1; i < input.size(); i++)
+			result = gcd(result, input.get(i));
+		return result;
+	}
+
+	private static long gcd(Long a, Long b) {
+		while (b > 0) {
+			long temp = b;
+			b = a % b; // % is remainder
+			a = temp;
+		}
+		return a;
 	}
 }

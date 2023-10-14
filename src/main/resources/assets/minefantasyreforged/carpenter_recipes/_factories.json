@@ -1,0 +1,5 @@
+{
+    "conditions": {
+        "hccremovebookcrafts": "minefantasy.mfr.recipe.factories.HCCremoveBookCrafts"
+    }
+}

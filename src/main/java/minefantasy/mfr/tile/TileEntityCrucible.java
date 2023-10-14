@@ -1,8 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IHeatUser;
-import minefantasy.mfr.api.refine.Alloy;
-import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockCrucible;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -10,6 +8,9 @@ import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerCrucible;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.recipe.AlloyRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerAlloy;
+import minefantasy.mfr.recipe.CrucibleCraftMatrix;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.InventoryUtils;
@@ -46,7 +47,14 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 	private final int OUT_SLOT = 9;
 
+	private ContainerCrucible syncCrucible;
+	private CrucibleCraftMatrix craftMatrix;
+
 	public final ItemStackHandler inventory = createInventory();
+
+	public TileEntityCrucible() {
+		setContainer(new ContainerCrucible(this));
+	}
 
 	@Override
 	protected ItemStackHandler createInventory() {
@@ -60,8 +68,12 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 	@Override
 	public ContainerBase createContainer(final EntityPlayer player) {
-
 		return new ContainerCrucible(player.inventory, this);
+	}
+
+	public void setContainer(ContainerCrucible container) {
+		syncCrucible = container;
+		craftMatrix = new CrucibleCraftMatrix(syncCrucible, AlloyRecipeBase.MAX_WIDTH, AlloyRecipeBase.MAX_HEIGHT);
 	}
 
 	@Override
@@ -185,19 +197,19 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 	private ItemStack getRecipe() {
 
-		ItemStack[] input = new ItemStack[inventory.getSlots() - 1];
-		for (int a = 0; a < 9; a++) {
-			if (!inventory.getStackInSlot(a).isEmpty()) {
-				input[a] = inventory.getStackInSlot(a);
-			}
+		if (syncCrucible == null || craftMatrix == null) {
+			return ItemStack.EMPTY;
 		}
-		Alloy alloy = AlloyRecipes.getResult(input);
-		if (alloy != null) {
-			if (alloy.getLevel() <= getTier()) {
-				return AlloyRecipes.getResult(input).getRecipeOutput();
-			}
+
+		for (int a = 0; a < OUT_SLOT; a++) {
+			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
-		return ItemStack.EMPTY;
+
+		ItemStack result = CraftingManagerAlloy.findMatchingRecipe(this, craftMatrix);
+		if (result.isEmpty()) {
+			result = ItemStack.EMPTY;
+		}
+		return result;
 	}
 
 	public int getTier() {
@@ -266,7 +278,8 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 	}
 
 	private boolean isFirebrick(int x, int y, int z) {
-		return world.getBlockState(pos.add(x, y, z)).getBlock() == MineFantasyBlocks.FIREBRICKS;
+		Block block = world.getBlockState(pos.add(x, y, z)).getBlock();
+		return block == MineFantasyBlocks.FIREBRICKS || block == MineFantasyBlocks.FIREBRICK_STAIRS;
 	}
 	// INVENTORY
 

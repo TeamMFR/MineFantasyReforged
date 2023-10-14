@@ -22,5 +22,13 @@
   },
   "result": {
     "item": "minefantasyreforged:skillbook_artisanry_max"
-  }
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovebookcrafts"
+      }
+    }
+  ]
 }

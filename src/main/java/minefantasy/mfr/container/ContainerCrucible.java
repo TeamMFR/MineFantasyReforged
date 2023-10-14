@@ -19,6 +19,10 @@ public class ContainerCrucible extends ContainerBase {
 	private int lastProgressMax;
 	private int lastTemp;
 
+	public ContainerCrucible(TileEntityCrucible tile) {
+		this.tile = tile;
+	}
+
 	public ContainerCrucible(InventoryPlayer playerInventory, TileEntityCrucible tile) {
 		super(playerInventory, tile);
 

@@ -3,17 +3,18 @@ package minefantasy.mfr.api;
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.api.refine.Alloy;
-import minefantasy.mfr.api.refine.AlloyRecipes;
 import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.recipe.AlloyRatioRecipe;
+import minefantasy.mfr.recipe.AlloyShapedRecipe;
 import minefantasy.mfr.recipe.AnvilShapedCustomMaterialRecipe;
 import minefantasy.mfr.recipe.AnvilShapedRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessRecipe;
 import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CookRecipe;
+import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
@@ -29,7 +30,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -156,82 +156,28 @@ public class MineFantasyReforgedAPI {
 	}
 
 	/**
-	 * Adds an alloy for any Crucible
+	 * Adds an alloy ratio recipe with a minimal crucible level
 	 *
-	 * @param out The result
-	 * @param in  The list of required items
+	 * @param out            The result
+	 * @param tier           The minimal crucible tier
+	 * @param inputs         The list of required items
+	 * @param repeatAmount   How many times the ratio can repeat
 	 */
-	public static void addAlloy(ItemStack out, Object... in) {
-		AlloyRecipes.addAlloy(out, convertList(in));
+	public static void addAlloyRatioRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier, int repeatAmount) {
+		CraftingManagerAlloy.addRecipe(new AlloyRatioRecipe(out, inputs, tier, repeatAmount), true);
 	}
 
 	/**
-	 * Adds an alloy with a minimal furnace level
+	 * Adds an alloy ratio recipe with a minimal crucible level
 	 *
-	 * @param out   The result
-	 * @param level The minimal furnace level
-	 * @param in    The list of required items
+	 * @param out       The result
+	 * @param tier      The minimal crucible tier
+	 * @param inputs    The list of required items
+	 * @param height    The height of the recipe
+	 * @param width     The width of the recipe
 	 */
-	public static void addAlloy(ItemStack out, int level, Object... in) {
-		AlloyRecipes.addAlloy(out, level, convertList(in));
-	}
-
-	/**
-	 * Adds an alloy with a minimal furnace level
-	 *
-	 * @param dupe  the amount of times the ratio can be added
-	 * @param out   The result
-	 * @param level The minimal furnace level
-	 * @param in    The list of required items
-	 */
-	public static Alloy[] addRatioAlloy(int dupe, ItemStack out, int level, Object... in) {
-		return AlloyRecipes.addRatioRecipe(out, level, convertList(in), dupe);
-	}
-
-	/**
-	 * Adds an alloy with any smelter
-	 *
-	 * @param dupe the amount of times the ratio can be added
-	 * @param out  The result
-	 * @param in   The list of required items
-	 */
-	public static Alloy[] addRatioAlloy(int dupe, ItemStack out, Object... in) {
-		return AlloyRecipes.addRatioRecipe(out, 0, convertList(in), dupe);
-	}
-
-	/**
-	 * Adds a custom alloy
-	 *
-	 * @param alloy the Alloy to add Use this if you want your alloy to have special
-	 *              properties
-	 * @see Alloy
-	 */
-	public static void addAlloy(Alloy alloy) {
-		AlloyRecipes.addAlloy(alloy);
-	}
-
-	private static List convertList(Object[] in) {
-		ArrayList arraylist = new ArrayList();
-		Object[] aobject = in;
-		int i = in.length;
-
-		for (int j = 0; j < i; ++j) {
-			Object object1 = aobject[j];
-
-			if (object1 instanceof ItemStack) {
-				arraylist.add(((ItemStack) object1).copy());
-			} else if (object1 instanceof Item) {
-				arraylist.add(new ItemStack((Item) object1));
-			} else {
-				if (!(object1 instanceof Block)) {
-					throw new RuntimeException("MineFantasy: Invalid alloy!");
-				}
-
-				arraylist.add(new ItemStack((Block) object1));
-			}
-		}
-
-		return arraylist;
+	public static void addAlloyShapedRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier, int height, int width) {
+		CraftingManagerAlloy.addRecipe(new AlloyShapedRecipe(out, inputs, tier, height, width), true);
 	}
 
 	/**

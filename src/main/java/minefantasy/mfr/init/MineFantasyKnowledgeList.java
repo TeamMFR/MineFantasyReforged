@@ -1,6 +1,5 @@
 package minefantasy.mfr.init;
 
-import minefantasy.mfr.api.refine.Alloy;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.item.ItemBomb;
@@ -211,20 +210,6 @@ public class MineFantasyKnowledgeList {
 	public static InformationBase scrapper;
 	public static InformationBase first_aid;
 	public static InformationBase doctor;
-
-	public static Alloy[] reinforced_stone_alloy;
-	public static Alloy[] bronze_alloy;
-	public static Alloy[] steel_alloy;
-	public static Alloy[] obsidian_alloy;
-	public static Alloy[] black_steel_alloy;
-	public static Alloy[] red_steel_alloy;
-	public static Alloy[] blue_steel_alloy;
-	public static Alloy[] mithril_alloy;
-	public static Alloy[] adamantium_alloy;
-	public static Alloy[] ignotumite_alloy;
-	public static Alloy[] mithium_alloy;
-	public static Alloy[] enderforge_alloy;
-	public static Alloy[] wolframite_raw_alloy;
 	
 	public static void init() {
 		carpenter = (new InformationBase("carpenter", 0, -3, 0, MineFantasyBlocks.CARPENTER, null))

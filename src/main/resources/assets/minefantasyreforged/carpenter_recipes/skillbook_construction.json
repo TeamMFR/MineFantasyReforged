@@ -27,5 +27,13 @@
   },
   "result": {
     "item": "minefantasyreforged:skillbook_construction"
-  }
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovebookcrafts"
+      }
+    }
+  ]
 }

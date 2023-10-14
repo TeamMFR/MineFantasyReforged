@@ -82,6 +82,17 @@ public class RecipeHelper {
 		return string.replaceAll(".+:", "");
 	}
 
+	public static NonNullList<Ingredient> duplicateList(NonNullList<Ingredient> list, Integer repeatAmount) {
+		if (repeatAmount == null) {
+			return NonNullList.create();
+		}
+		NonNullList<Ingredient> duplicateList = NonNullList.create();
+		for (int i = 0; i < repeatAmount; i++) {
+			duplicateList.addAll(list);
+		}
+		return duplicateList;
+	}
+
 	/**
 	 * Expands a small pattern (e.g. 3x2 size) to the given width and height by adding ItemStack.EMPTY stacks to the new, empty slots (e.g. 5x5 size)
 	 *

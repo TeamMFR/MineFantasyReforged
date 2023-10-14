@@ -10,6 +10,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	public static final String ANVIL_RECIPE_SETTINGS = "03 Anvil Recipe Settings";
 	public static final String CARPENTER_RECIPE_SETTINGS = "04 Carpenter Recipe Settings";
 	private static final String BIG_FURNACE_RECIPE_SETTINGS = "05 Big Furnace Recipe Settings";
+	private static final String ALLOY_RECIPE_SETTINGS = "06 Alloy Recipe Settings";
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
@@ -25,6 +26,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		config.addCustomCategoryComment(ANVIL_RECIPE_SETTINGS, "Control whether or not an item's anvil recipe should be enabled");
 		config.addCustomCategoryComment(CARPENTER_RECIPE_SETTINGS, "Controls whether or not an item's carpenter recipe should be enabled");
 		config.addCustomCategoryComment(BIG_FURNACE_RECIPE_SETTINGS, "Controls whether or not an item's big furnace recipe should be enabled");
+		config.addCustomCategoryComment(ALLOY_RECIPE_SETTINGS, "Controls whether or not an item's alloy recipe should be enabled");
 	}
 
 	@Override
@@ -64,6 +66,13 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
 		String name = generateNameFromItemAndNBT(itemStack);
 		return get().getBoolean(name, BIG_FURNACE_RECIPE_SETTINGS, true, "");
+	}
+
+	public static boolean isAlloyItemCraftable(ItemStack itemStack) {
+		//Checks if the given Item should load default recipes for the crucible.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = generateNameFromItemAndNBT(itemStack);
+		return get().getBoolean(name, ALLOY_RECIPE_SETTINGS, true, "");
 	}
 
 	public static Configuration get() {

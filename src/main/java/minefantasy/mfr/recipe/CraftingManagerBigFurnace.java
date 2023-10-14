@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -60,6 +61,7 @@ public class CraftingManagerBigFurnace {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/big_furnace_recipes", CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
 		Loader.instance().getActiveModList().forEach(m -> CraftingManagerBigFurnace.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/big_furnace_recipes"));
@@ -108,7 +110,9 @@ public class CraftingManagerBigFurnace {
 					if (BigFurnaceRecipeType.getByNameWithModId(type, mod.getModId()) != BigFurnaceRecipeType.NONE) {
 						BigFurnaceRecipeBase recipe = factory.parse(ctx, json);
 						recipe.setRegistryName(key);
-						addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Big Furnace recipe", key, type);
 					}

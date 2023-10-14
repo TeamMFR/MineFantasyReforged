@@ -1,0 +1,20 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 2,
+    "repeat_amount": 3,
+    "ingredients": [
+        {
+            "item": "minefantasyreforged:mythic_ore"
+        },
+        {
+            "item": "#BAR_GOLD"
+        },
+        {
+            "item": "#BAR_GOLD"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"adamantium\"}}"
+    }
+}

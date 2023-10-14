@@ -1,6 +1,6 @@
 {
 	"type": "big_furnace_recipe",
-	"anvil_tier": 0,
+	"furnace_tier": 0,
 	"ingredients": [
 		{
 			"item": "#COPPER_ORE"

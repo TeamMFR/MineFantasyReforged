@@ -17,6 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -62,6 +63,7 @@ public class CraftingManagerAnvil {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/anvil_recipes", CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
 		Loader.instance().getActiveModList().forEach(m -> CraftingManagerAnvil.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/anvil_recipes"));
@@ -110,7 +112,9 @@ public class CraftingManagerAnvil {
 					if (AnvilRecipeType.getByNameWithModId(type, mod.getModId()) != AnvilRecipeType.NONE) {
 						AnvilRecipeBase recipe = factory.parse(ctx, json);
 						recipe.setRegistryName(key);
-						addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Anvil recipe", key, type);
 					}

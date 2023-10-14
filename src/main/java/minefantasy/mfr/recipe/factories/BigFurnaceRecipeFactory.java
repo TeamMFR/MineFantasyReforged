@@ -33,7 +33,7 @@ public class BigFurnaceRecipeFactory {
 			throw new JsonParseException("No ingredients for big furnace recipe");
 		}
 
-		int tier = JsonUtils.getInt(json, "tier", 0);
+		int tier = JsonUtils.getInt(json, "furnace_tier", 0);
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
 		return new BigFurnaceRecipeBase(result, ingredients, tier);

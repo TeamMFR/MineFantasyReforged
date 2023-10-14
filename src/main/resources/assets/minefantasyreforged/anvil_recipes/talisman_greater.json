@@ -29,5 +29,13 @@
   },
   "result": {
     "item": "minefantasyreforged:talisman_greater"
-  }
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovetalismanscraft"
+      }
+    }
+  ]
 }

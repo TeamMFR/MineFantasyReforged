@@ -1,0 +1,5 @@
+{
+    "conditions": {
+        "hccremovetalismanscraft": "minefantasy.mfr.recipe.factories.HCCremoveTalismansCraft"
+    }
+}

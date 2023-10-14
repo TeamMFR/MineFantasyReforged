@@ -42,6 +42,21 @@
         }
     },
     {
+        "name": "BAR_GOLD_OR_SILVER",
+        "ingredient": [
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"gold\"}}"
+            },
+            {
+                "type": "minecraft:item_nbt",
+                "item": "minefantasyreforged:bar",
+                "nbt": "{mf_custom_materials:{main_material:\"silver\"}}"
+            }
+        ]
+    },
+    {
         "name": "LIST_ALL_INGOTS",
         "ingredient": {
             "type": "forge:ore_dict",

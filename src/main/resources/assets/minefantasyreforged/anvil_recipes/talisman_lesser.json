@@ -9,13 +9,13 @@
   "recipe_hammer": -1,
   "output_hot": true,
   "pattern": [
-    "LGL",
-    "GIG",
-    " G "
+    "LBL",
+    "BIB",
+    " B "
   ],
   "key": {
-    "G": {
-      "item": "#BAR_GOLD"
+    "B": {
+      "item": "#BAR_GOLD_OR_SILVER"
     },
     "I": {
       "item": "#BAR_IRON"
@@ -27,5 +27,13 @@
   },
   "result": {
     "item": "minefantasyreforged:talisman_lesser"
-  }
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovetalismanscraft"
+      }
+    }
+  ]
 }

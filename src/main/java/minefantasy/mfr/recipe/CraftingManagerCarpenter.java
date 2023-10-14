@@ -17,6 +17,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
@@ -62,6 +63,8 @@ public class CraftingManagerCarpenter {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
+
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/carpenter_recipes", CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
 		Loader.instance().getActiveModList().forEach(m -> CraftingManagerCarpenter.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/carpenter_recipes"));
@@ -110,7 +113,9 @@ public class CraftingManagerCarpenter {
 					if (CarpenterRecipeType.getByNameWithModId(type, mod.getModId()) != CarpenterRecipeType.NONE) {
 						CarpenterRecipeBase recipe = factory.parse(ctx, json);
 						recipe.setRegistryName(key);
-						addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Carpenter recipe", key, type);
 					}

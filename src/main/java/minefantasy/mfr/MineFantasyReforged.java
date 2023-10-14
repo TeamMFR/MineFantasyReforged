@@ -29,6 +29,7 @@ import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
 import minefantasy.mfr.recipe.BasicRecipesMF;
+import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
@@ -160,6 +161,7 @@ public class MineFantasyReforged {
 		CraftingManagerAnvil.loadRecipes();
 		CraftingManagerCarpenter.loadRecipes();
 		CraftingManagerBigFurnace.loadRecipes();
+		CraftingManagerAlloy.loadRecipes();
 
 		PROXY.init();
 	}
@@ -218,6 +220,7 @@ public class MineFantasyReforged {
 		CraftingManagerAnvil.init();
 		CraftingManagerCarpenter.init();
 		CraftingManagerBigFurnace.init();
+		CraftingManagerAlloy.init();
 	}
 
 	@SubscribeEvent

@@ -4,7 +4,7 @@ import minefantasy.mfr.constants.Skill;
 import net.minecraft.util.SoundEvent;
 
 /**
- * @author AnonymousProductions This interface is used by the anvil in
+ * @author AnonymousProductions This interface is used by the Carpenter in
  * MineFantasy so it can be referred to without importing the mod
  */
 public interface ICarpenter {
