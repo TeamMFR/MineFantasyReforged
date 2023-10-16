@@ -1,7 +1,9 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.config.ConfigHardcore;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,19 @@ import java.util.Objects;
 import java.util.function.Predicate;
 
 public class RecipeRemover {
+	/**
+	 * Remove Smelting recipes.
+	 */
+	public static void removeSmeltingRecipes() {
+		if (ConfigHardcore.HCCreduceIngots) {
+			if (MineFantasyReforgedAPI.removeSmelting(Blocks.IRON_ORE) && MineFantasyReforgedAPI.removeSmelting(Blocks.GOLD_ORE)) {
+				MineFantasyReforged.LOG.debug("Removed Ore Smelting (Hardcore Ingots");
+			} else {
+				MineFantasyReforged.LOG.warn("Failed to remove Ore smelting!");
+			}
+		}
+	}
+
 	@Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
 	public static class RegistrationHandler {
 

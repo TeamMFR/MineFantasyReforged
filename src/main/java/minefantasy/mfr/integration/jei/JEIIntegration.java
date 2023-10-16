@@ -1,7 +1,6 @@
 package minefantasy.mfr.integration.jei;
 
 import mezz.jei.Internal;
-import mezz.jei.api.IGuiHelper;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
@@ -20,6 +19,7 @@ import net.minecraft.util.NonNullList;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
+import java.util.List;
 
 @JEIPlugin
 public class JEIIntegration implements IModPlugin {
@@ -41,6 +41,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipeCategories(new JEIAnvilRecipeCategory(registry));
 		registry.addRecipeCategories(new JEIBigFurnaceRecipeCategory(registry, guiHelper));
 		registry.addRecipeCategories(new JEIAlloyRecipeCategory(registry, guiHelper));
+		registry.addRecipeCategories(new JEIBloomeryRecipeCategory(registry, guiHelper));
 		// TODO: same for anvil, salvage, ...
 	}
 
@@ -58,7 +59,8 @@ public class JEIIntegration implements IModPlugin {
 		// /UNUSED
 
 		IStackHelper stackHelper = registry.getJeiHelpers().getStackHelper();
-		IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
+
+		List<ItemStack> fuelItemStacks = registry.getIngredientRegistry().getFuels();
 
 		addExtendedInfo(registry, MineFantasyItems.FLUX, ".desc_extended");
 
@@ -66,6 +68,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipes(JEIAnvilRecipeCategory.generateRecipes(stackHelper), JEIAnvilRecipeCategory.UID);
 		registry.addRecipes(JEIBigFurnaceRecipeCategory.generateRecipes(stackHelper), JEIBigFurnaceRecipeCategory.UID);
 		registry.addRecipes(JEIAlloyRecipeCategory.generateRecipes(stackHelper), JEIAlloyRecipeCategory.UID);
+		registry.addRecipes(JEIBloomeryRecipeCategory.generateRecipes(stackHelper, fuelItemStacks), JEIBloomeryRecipeCategory.UID);
 	}
 
 	@Override

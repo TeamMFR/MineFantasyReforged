@@ -14,7 +14,8 @@ import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.recipe.refine.BloomRecipe;
+import minefantasy.mfr.recipe.BloomeryRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -89,7 +90,13 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	}
 
 	private static ItemStack getResult(ItemStack input) {
-		return BloomRecipe.getSmeltingResult(input);
+		BloomeryRecipeBase recipe = CraftingManagerBloomery.findMatchingRecipe(input);
+		if (recipe != null) {
+			return recipe.getBloomeryRecipeOutput();
+		}
+		else {
+			return ItemStack.EMPTY;
+		}
 	}
 
 	public ItemStack getResult() {

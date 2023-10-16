@@ -322,6 +322,7 @@ integration.jei.category.minefantasyreforged:carpenter=Carpenter Bench
 integration.jei.category.minefantasyreforged:anvil=MineFantasy Anvil
 integration.jei.category.minefantasyreforged:big_furnace=MineFantasy Big Furnace
 integration.jei.category.minefantasyreforged:crucible=MineFantasy Crucible
+integration.jei.category.minefantasyreforged:bloomery=MineFantasy Bloomery
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 recipe.bar.desc=Any Material Ingot to Material Bar
 recipe.ingot.desc=Any Material Bar to Material Ingot

@@ -18,6 +18,7 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.block.Block;
@@ -300,8 +301,8 @@ public class KnowledgePageRegistry {
 
 		if (ConfigHardcore.HCCreduceIngots) {
 			MineFantasyKnowledgeList.smelt_iron.addPages(new EntryPageText("knowledge.smelt_iron.1"));
-			MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageRecipeBloom(new ItemStack(MineFantasyBlocks.COPPER_ORE), new ItemStack(MineFantasyItems.COPPER_INGOT)));
-			MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageRecipeBloom(new ItemStack(MineFantasyBlocks.TIN_ORE), new ItemStack(MineFantasyItems.TIN_INGOT)));
+			MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageRecipeBloom(CraftingManagerBloomery.getRecipeByName("copper_bar")));
+			MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageRecipeBloom(CraftingManagerBloomery.getRecipeByName("tin_bar")));
 		} else {
 			MineFantasyKnowledgeList.smelt_copper.addPages(new EntryPageSmelting(new ItemStack(MineFantasyBlocks.COPPER_ORE), new ItemStack(MineFantasyItems.COPPER_INGOT)));
 			MineFantasyKnowledgeList.smelt_bronze.addPages(new EntryPageSmelting(new ItemStack(MineFantasyBlocks.TIN_ORE), new ItemStack(MineFantasyItems.TIN_INGOT)));
@@ -336,7 +337,7 @@ public class KnowledgePageRegistry {
 
 		if (ConfigHardcore.HCCreduceIngots) {
 			MineFantasyKnowledgeList.smelt_iron.addPages(
-					new EntryPageRecipeBloom(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT)));
+					new EntryPageRecipeBloom(CraftingManagerBloomery.getRecipeByName("iron_bar")));
 		} else {
 			MineFantasyKnowledgeList.smelt_iron
 					.addPages(new EntryPageSmelting(new ItemStack(Blocks.IRON_ORE), new ItemStack(Items.IRON_INGOT)));
@@ -1160,7 +1161,7 @@ public class KnowledgePageRegistry {
 			return new EntryPage[] {
 					new EntryPageImage("textures/gui/knowledge/image/" + orename + ".png", 96, 96,
 							"knowledge.ores." + orename),
-					new EntryPageRecipeBloom(new ItemStack(ore), new ItemStack(ingot))};
+					new EntryPageRecipeBloom(CraftingManagerBloomery.getRecipeByName(orename + "_bar"))};
 		}
 		return assembleOreDesc(orename, ore, ingot);
 	}

@@ -32,7 +32,9 @@ import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
+import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
@@ -162,6 +164,7 @@ public class MineFantasyReforged {
 		CraftingManagerCarpenter.loadRecipes();
 		CraftingManagerBigFurnace.loadRecipes();
 		CraftingManagerAlloy.loadRecipes();
+		CraftingManagerBloomery.loadRecipes();
 
 		PROXY.init();
 	}
@@ -179,6 +182,7 @@ public class MineFantasyReforged {
 		MineFantasyKnowledgeList.init();
 		MineFantasyKnowledgeList.ArtefactListMFR.init();
 		BasicRecipesMF.init();
+		RecipeRemover.removeSmeltingRecipes();
 
 		MetalMaterial.addHeatables();
 
@@ -221,6 +225,7 @@ public class MineFantasyReforged {
 		CraftingManagerCarpenter.init();
 		CraftingManagerBigFurnace.init();
 		CraftingManagerAlloy.init();
+		CraftingManagerBloomery.init();
 	}
 
 	@SubscribeEvent
