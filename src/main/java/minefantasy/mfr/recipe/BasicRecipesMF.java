@@ -15,7 +15,6 @@ public class BasicRecipesMF {
 
 	public static void init() {
 		QuernRecipes.init();
-		SmeltingRecipesMF.init();
 		SalvageRecipes.init();
 		CookingRecipes.init();
 		MineFantasyItems.loadCrafting();

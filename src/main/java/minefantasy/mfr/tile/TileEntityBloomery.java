@@ -16,7 +16,6 @@ import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BloomeryRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
-import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ToolHelper;
@@ -261,7 +260,7 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	}
 
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		if (!item.isEmpty() && TileEntityBlastChamber.isCarbon(item)) {
+		if (!item.isEmpty() && MineFantasyFuels.isCarbon(item)) {
 			return slot == 1;
 		}
 		if (!item.isEmpty() && !getResult(item).isEmpty()) {

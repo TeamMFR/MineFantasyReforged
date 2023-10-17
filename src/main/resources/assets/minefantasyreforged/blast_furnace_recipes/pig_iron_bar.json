@@ -1,0 +1,12 @@
+{
+	"type": "blast_furnace_recipe",
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:prepared_iron"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"pig_iron\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

@@ -3,7 +3,6 @@ package minefantasy.mfr.api;
 import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.engineer.ICrossbowPart;
 import minefantasy.mfr.api.heating.Heatable;
-import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.recipe.AlloyRatioRecipe;
@@ -13,10 +12,12 @@ import minefantasy.mfr.recipe.AnvilShapedRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessRecipe;
 import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
+import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.refine.QuernRecipes;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
@@ -139,8 +140,8 @@ public class MineFantasyReforgedAPI {
 				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill, tierModifyOutputCount), true);
 	}
 
-	public static void addBlastFurnaceRecipe(Item input, ItemStack output) {
-		BlastFurnaceRecipes.smelting().addRecipe(input, output);
+	public static void addBlastFurnaceRecipe(NonNullList<Ingredient> inputs, ItemStack output) {
+		CraftingManagerBlastFurnace.addRecipe(new BlastFurnaceRecipeBase(output, inputs), true);
 	}
 
 	public static void registerFuelHandler(IFuelHandler handler) {

@@ -18,6 +18,7 @@ import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.util.RecipeHelper;
@@ -32,10 +33,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class KnowledgePageRegistry {
 	public static void registerPages() {
-		ItemStack pig_iron = MineFantasyItems.bar("pig_iron");
-		ItemStack black = MineFantasyItems.bar("black_steel");
-		ItemStack red = MineFantasyItems.bar("red_steel");
-		ItemStack blue = MineFantasyItems.bar("blue_steel");
 
 		if (ConfigHardcore.HCCallowRocks) {
 			MineFantasyKnowledgeList.getting_started.addPages(
@@ -314,7 +311,7 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.smelt_pig_iron.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("prepared_iron")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("prepared_iron-2")),
-				new EntryPageBlastFurnace(MineFantasyItems.PREPARED_IRON, pig_iron),
+				new EntryPageBlastFurnace(CraftingManagerBlastFurnace.getRecipeByName("pig_iron_bar")),
 				new EntryPageText("knowledge.blast_furnace.9"));
 
 		MineFantasyKnowledgeList.smelt_steel.addPages(
@@ -919,17 +916,17 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.smelt_black_steel.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("obsidian_rock")),
 				new EntryPageCrucible(CraftingManagerAlloy.getRecipeByName("black_steel_weak_ingot")),
-				new EntryPageBlastFurnace(MineFantasyItems.BLACK_STEEL_WEAK_INGOT, black));
+				new EntryPageBlastFurnace(CraftingManagerBlastFurnace.getRecipeByName("black_steel_bar")));
 
 		MineFantasyKnowledgeList.smelt_red_steel.addPages(
 				new EntryPageText("knowledge.smelt_red_steel.1"),
 				new EntryPageCrucible(CraftingManagerAlloy.getRecipeByName("red_steel_weak_ingot")),
-				new EntryPageBlastFurnace(MineFantasyItems.RED_STEEL_WEAK_INGOT, red));
+				new EntryPageBlastFurnace(CraftingManagerBlastFurnace.getRecipeByName("red_steel_bar")));
 
 		MineFantasyKnowledgeList.smelt_blue_steel.addPages(
 				new EntryPageText("knowledge.smelt_blue_steel.1"),
 				new EntryPageCrucible(CraftingManagerAlloy.getRecipeByName("blue_steel_weak_ingot")),
-				new EntryPageBlastFurnace(MineFantasyItems.BLUE_STEEL_WEAK_INGOT, blue));
+				new EntryPageBlastFurnace(CraftingManagerBlastFurnace.getRecipeByName("blue_steel_bar")));
 
 		MineFantasyKnowledgeList.smelt_adamantium.addPages(
 				new EntryPageText("knowledge.smelt_adamantium.1"),

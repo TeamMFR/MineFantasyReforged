@@ -1,13 +1,14 @@
 package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
-import minefantasy.mfr.api.refine.BlastFurnaceRecipes;
 import minefantasy.mfr.api.refine.ISmokeCarrier;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBlastChamber;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -66,19 +67,18 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		return NetworkHandler.GUI_BLAST_CHAMBER;
 	}
 
-	public static boolean isCarbon(ItemStack item) {
-		return MineFantasyFuels.isCarbon(item);
-	}
-
 	public static boolean isInput(ItemStack item) {
 		return !getResult(item).isEmpty();
 	}
 
 	protected static ItemStack getResult(ItemStack input) {
-		if (!BlastFurnaceRecipes.smelting().getSmeltingResult(input).isEmpty()) {
-			return BlastFurnaceRecipes.smelting().getSmeltingResult(input).copy();
+		BlastFurnaceRecipeBase recipe = CraftingManagerBlastFurnace.findMatchingRecipe(input);
+		if (recipe != null) {
+			return recipe.getBlastFurnaceRecipeOutput().copy();
 		}
-		return ItemStack.EMPTY;
+		else {
+			return ItemStack.EMPTY;
+		}
 	}
 
 	@Override
@@ -132,7 +132,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	private boolean canShare(ItemStack mySlot, int a) {
 		if (a == 1)
 			return isInput(mySlot);
-		return isCarbon(mySlot);
+		return MineFantasyFuels.isCarbon(mySlot);
 	}
 
 	public void updateBuild() {
@@ -159,7 +159,7 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
 		if (slot == 0) {
-			return isCarbon(item);
+			return MineFantasyFuels.isCarbon(item);
 		}
 		return isInput(item);
 	}

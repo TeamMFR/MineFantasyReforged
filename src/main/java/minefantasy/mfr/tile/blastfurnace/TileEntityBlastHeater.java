@@ -1,6 +1,7 @@
 package minefantasy.mfr.tile.blastfurnace;
 
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
+import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.block.BlockBlastHeater;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -193,7 +194,7 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 	private ItemStack getSmeltedResult(TileEntityBlastChamber shaft) {
 		if (shaft.getIsBuilt()) {
 			ItemStack input = shaft.getInventory().getStackInSlot(1);
-			if (shaft.tempUses <= 0 && shaft.getInventory().getStackInSlot(0).isEmpty() || !isCarbon(shaft.getInventory().getStackInSlot(0))) {
+			if (shaft.tempUses <= 0 && shaft.getInventory().getStackInSlot(0).isEmpty() || !MineFantasyFuels.isCarbon(shaft.getInventory().getStackInSlot(0))) {
 				return ItemStack.EMPTY;
 			}
 			if (!input.isEmpty()) {

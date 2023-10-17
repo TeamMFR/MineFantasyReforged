@@ -17,8 +17,9 @@ import mezz.jei.gui.GuiHelper;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.recipe.BloomeryRecipeBase;
-import minefantasy.mfr.recipe.CraftingManagerBloomery;
+import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -30,29 +31,32 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class JEIBloomeryRecipeCategory implements IRecipeCategory<JEIBloomeryRecipe> {
-	static final String UID = "minefantasyreforged:bloomery";
+public class JEIBlastFurnaceRecipeCategory implements IRecipeCategory<JEIBlastFurnaceRecipe> {
+	static final String UID = "minefantasyreforged:blast_furnace";
 
-	static final ResourceLocation TEXTURE = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/integration/jei/bloomery_background.png");
+	static final ResourceLocation TEXTURE = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/integration/jei/blast_furnace_background.png");
+	static final ResourceLocation DOWN_ARROW_TEXTURE = new ResourceLocation(MineFantasyReforged.MOD_ID, "textures/integration/jei/gui_assets.png");
 	private final IDrawable icon;
 
-	static final int WIDTH = 66;
-	static final int HEIGHT = 53;
+	static final int WIDTH = 47;
+	static final int HEIGHT = 88;
 
 	private final IDrawable background;
 	protected final IDrawableStatic staticFlame;
-	protected final IDrawableAnimated animatedFlame;
+	protected final IDrawableAnimated animatedFlameOne;
+	protected final IDrawableAnimated animatedFlameTwo;
 	protected final IDrawableAnimated arrow;
 
-	public JEIBloomeryRecipeCategory(IRecipeCategoryRegistration registry, GuiHelper guiHelper) {
+	public JEIBlastFurnaceRecipeCategory(IRecipeCategoryRegistration registry, GuiHelper guiHelper) {
 		IGuiHelper iGuiHelper = registry.getJeiHelpers().getGuiHelper();
 		background = iGuiHelper.createDrawable(TEXTURE, 0, 0, WIDTH, HEIGHT);
-		icon = iGuiHelper.createDrawableIngredient(new ItemStack(MineFantasyBlocks.BLOOMERY));
+		icon = iGuiHelper.createDrawableIngredient(new ItemStack(MineFantasyBlocks.BLAST_CHAMBER));
 		staticFlame = guiHelper.createDrawable(Constants.RECIPE_GUI_VANILLA, 82, 114, 14, 14);
-		animatedFlame = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
+		animatedFlameOne = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
+		animatedFlameTwo = guiHelper.createAnimatedDrawable(staticFlame, 300, IDrawableAnimated.StartDirection.TOP, true);
 
-		arrow = guiHelper.drawableBuilder(Constants.RECIPE_GUI_VANILLA, 82, 128, 24, 17)
-				.buildAnimated(200, IDrawableAnimated.StartDirection.LEFT, false);
+		arrow = guiHelper.drawableBuilder(DOWN_ARROW_TEXTURE, 0, 0, 17, 24)
+				.buildAnimated(200, IDrawableAnimated.StartDirection.TOP, false);
 	}
 
 	@Override
@@ -77,8 +81,9 @@ public class JEIBloomeryRecipeCategory implements IRecipeCategory<JEIBloomeryRec
 
 	@Override
 	public void drawExtras(Minecraft minecraft) {
-		animatedFlame.draw(minecraft, 3, 19);
-		arrow.draw(minecraft, 22, 18);
+		animatedFlameOne.draw(minecraft, 1, 43);
+		animatedFlameTwo.draw(minecraft, 33, 43);
+		arrow.draw(minecraft, 14, 42);
 	}
 
 	/**
@@ -90,17 +95,18 @@ public class JEIBloomeryRecipeCategory implements IRecipeCategory<JEIBloomeryRec
 	 * @since JEI 3.11.0
 	 */
 	@Override
-	public void setRecipe(IRecipeLayout recipeLayout, JEIBloomeryRecipe recipeWrapper, IIngredients ingredients) {
+	public void setRecipe(IRecipeLayout recipeLayout, JEIBlastFurnaceRecipe recipeWrapper, IIngredients ingredients) {
 		// Okay, they're not technically *slots* but to all intents and purposes, that's how they behave
 		IGuiItemStackGroup slots = recipeLayout.getItemStacks();
 
 		List<List<ItemStack>> inputs = ingredients.getInputs(VanillaTypes.ITEM);
 		List<List<ItemStack>> outputList = ingredients.getOutputs(VanillaTypes.ITEM);
 		List<ItemStack> fuels = recipeWrapper.getFuelItemStacks().stream().filter(MineFantasyFuels::isCarbon).collect(Collectors.toList());
+		fuels.add(new ItemStack(MineFantasyItems.COAL_FLUX));
 
-		slots.init(0, true, 1, 1);
-		slots.init(1, true, 1, 34);
-		slots.init(2, false, 47, 18);
+		slots.init(0, true, 15, 1);//inputs
+		slots.init(1, true, 15, 23);//fuels
+		slots.init(2, false, 15, 69);//outputs, also, nice
 
 		slots.set(0, inputs.get(0));
 		slots.set(1, fuels);
@@ -116,16 +122,16 @@ public class JEIBloomeryRecipeCategory implements IRecipeCategory<JEIBloomeryRec
 	/**
 	 * Generates all the MFR Bloomery recipes for JEI.
 	 */
-	public static Collection<JEIBloomeryRecipe> generateRecipes(IStackHelper stackHelper, List<ItemStack> fuelItemStacks) {
-		return new ArrayList<>(generateBloomeryRecipes(stackHelper, fuelItemStacks));
+	public static Collection<JEIBlastFurnaceRecipe> generateRecipes(IStackHelper stackHelper, List<ItemStack> fuelItemStacks) {
+		return new ArrayList<>(generateBlastFurnaceRecipes(stackHelper, fuelItemStacks));
 	}
 
-	private static Collection<JEIBloomeryRecipe> generateBloomeryRecipes(IStackHelper stackHelper, List<ItemStack> fuelItemStacks) {
-		List<JEIBloomeryRecipe> recipes = new ArrayList<>();
-		Collection<BloomeryRecipeBase> bloomeryRecipes = CraftingManagerBloomery.getRecipes();
+	private static Collection<JEIBlastFurnaceRecipe> generateBlastFurnaceRecipes(IStackHelper stackHelper, List<ItemStack> fuelItemStacks) {
+		List<JEIBlastFurnaceRecipe> recipes = new ArrayList<>();
+		Collection<BlastFurnaceRecipeBase> blastFurnaceRecipes = CraftingManagerBlastFurnace.getRecipes();
 
-		for (BloomeryRecipeBase recipe : bloomeryRecipes) {
-			recipes.add(new JEIBloomeryRecipe(recipe, stackHelper, fuelItemStacks));
+		for (BlastFurnaceRecipeBase recipe : blastFurnaceRecipes) {
+			recipes.add(new JEIBlastFurnaceRecipe(recipe, stackHelper, fuelItemStacks));
 		}
 
 		return recipes;

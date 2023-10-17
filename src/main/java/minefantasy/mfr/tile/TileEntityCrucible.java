@@ -150,7 +150,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 			return;
 		}
 
-		ItemStack itemstack = getRecipe();
+		ItemStack itemstack = getResult();
 
 		if (inventory.getStackInSlot(OUT_SLOT).isEmpty()) {
 			inventory.setStackInSlot(OUT_SLOT, itemstack.copy());
@@ -183,7 +183,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 			return false;
 		}
 
-		ItemStack result = getRecipe();
+		ItemStack result = getResult();
 
 		if (result.isEmpty()) {
 			return false;
@@ -195,7 +195,10 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 				&& inventory.getStackInSlot(OUT_SLOT).getCount() < (inventory.getStackInSlot(OUT_SLOT).getMaxStackSize() - (result.getCount() - 1));
 	}
 
-	private ItemStack getRecipe() {
+	private ItemStack getResult() {
+		if (isBlastOutput()) {
+			return ItemStack.EMPTY;
+		}
 
 		if (syncCrucible == null || craftMatrix == null) {
 			return ItemStack.EMPTY;
@@ -290,7 +293,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 	}
 
 	private boolean isBlastOutput() {
-		if (world == null)
+		if (world.isRemote)
 			return false;
 		TileEntity tile = world.getTileEntity(pos.add(0, 1, 0));
 		return tile instanceof TileEntityBlastHeater;
