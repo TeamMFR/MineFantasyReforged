@@ -91,10 +91,7 @@ minecraft {
 }
 
 repositories {
-    maven {
-        url = "https://chickenbones.net/maven"
-    }
-google()
+    google()
     mavenCentral()
     maven {
         url = uri('https://www.cursemaven.com')
@@ -122,9 +119,17 @@ google()
     maven {
         url = uri('https://jitpack.io')
     }
+    maven {
+        url "https://maven.cleanroommc.com"
+    }
     flatDir {
         dirs 'build/libs'
-    }}
+    }
+    flatDir {
+        // location for sources
+        dirs 'libs'
+    }
+}
 
 dependencies {
     //// MC version ////
