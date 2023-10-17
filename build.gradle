@@ -3,25 +3,28 @@ import org.apache.tools.ant.filters.ReplaceTokens
 
 buildscript {
     repositories {
-        maven { url = 'https://maven.minecraftforge.net' } // old url was 'https://files.minecraftforge.net/maven'
-        mavenCentral()
-        maven { url = "https://ajoberstar.org/bintray-backup/" }
+        gradlePluginPortal()
         maven {
-            name = 'FancyGradle'
-            url = 'https://gitlab.com/api/v4/projects/26758973/packages/maven'
+            name 'MinecraftForge'
+            url 'https://maven.minecraftforge.net/'
         }
-        repositories {
-            maven {
-                url "https://plugins.gradle.org/m2/"
-
-            }
+        maven {
+            name 'Garden of Fancy'
+            url 'https://maven.gofancy.wtf/releases'
+        }
+        //fallback for fancygradle maven
+        //mavenLocal()
+        maven {
+            name 'Sponge'
+            url 'https://repo.spongepowered.org/repository/maven-public/'
         }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:5.+'
         classpath 'org.ajoberstar.grgit:grgit-gradle:3.1.1'
-        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.2-0'
+        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.+'
         classpath 'org.spongepowered:mixingradle:0.7.+'
+
     }
 
     repositories.each {
