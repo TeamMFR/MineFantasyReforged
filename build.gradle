@@ -152,7 +152,10 @@ dependencies {
     //// Dependencies ////
 
     implementation fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
-    implementation fg.deobf("codechicken:CodeChickenLib:${mc_version}-${ccl_version}:universal")
+    //implementation fg.deobf("codechicken:CodeChickenLib:${mc_version}-${ccl_version}:universal")
+    implementation fg.deobf("curse.maven:CodeChickenLib-242818:2779848")
+
+    
     implementation fg.deobf ("zone.rong:mixinbooter:5.0")
     implementation ("net.minecraftforge:mergetool:0.2.3.3") { force = true }
 
