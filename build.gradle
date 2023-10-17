@@ -91,20 +91,37 @@ repositories {
     maven {
         url = "https://chickenbones.net/maven"
     }
+google()
+    mavenCentral()
     maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "http://dvs1.progwml6.com/files/maven"
-        allowInsecureProtocol = true
+        url = uri('https://www.cursemaven.com')
+        content {
+            includeGroup 'curse.maven'
+        }
     }
     maven {
-        url "https://maven.cleanroommc.com"
+        name = 'Modrinth'
+        url = uri('https://api.modrinth.com/maven')
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    maven {
+        name = 'Sponge'
+        url = uri('https://repo.spongepowered.org/maven')
+    }
+    maven {
+        url = uri('https://maven.blamejared.com')
+    }
+    maven {
+        url = uri('https://m2.dv8tion.net/releases')
+    }
+    maven {
+        url = uri('https://jitpack.io')
     }
     flatDir {
-        // location for sources
-        dirs 'libs'
-    }
-}
+        dirs 'build/libs'
+    }}
 
 dependencies {
     //// MC version ////
