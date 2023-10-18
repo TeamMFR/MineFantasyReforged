@@ -35,6 +35,7 @@ import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
@@ -167,6 +168,7 @@ public class MineFantasyReforged {
 		CraftingManagerAlloy.loadRecipes();
 		CraftingManagerBloomery.loadRecipes();
 		CraftingManagerBlastFurnace.loadRecipes();
+		CraftingManagerQuern.loadRecipes();
 
 		PROXY.init();
 	}
@@ -229,6 +231,7 @@ public class MineFantasyReforged {
 		CraftingManagerAlloy.init();
 		CraftingManagerBloomery.init();
 		CraftingManagerBlastFurnace.init();
+		CraftingManagerQuern.init();
 	}
 
 	@SubscribeEvent

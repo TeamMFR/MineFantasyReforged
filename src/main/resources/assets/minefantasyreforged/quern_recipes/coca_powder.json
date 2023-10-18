@@ -1,0 +1,18 @@
+{
+	"type": "quern_recipe",
+	"consume_pot": true,
+	"ingredients": [
+		{
+			"item": "minecraft:dye",
+			"data": 3
+		}
+	],
+	"pot_ingredients": [
+		{
+			"item": "minefantasyreforged:clay_pot"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:coca_powder"
+	}
+}

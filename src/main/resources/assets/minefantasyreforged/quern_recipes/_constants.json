@@ -1,0 +1,30 @@
+[
+    {
+        "name": "GENERIC_MEAT_UNCOOKED",
+        "ingredient": [
+            {
+                "item": "minefantasyreforged:generic_meat_uncooked"
+            },
+            {
+                "item": "minefantasyreforged:generic_meat_strip_uncooked"
+            },
+            {
+                "item": "minefantasyreforged:generic_meat_chunk_uncooked"
+            }
+        ]
+    },
+    {
+        "name": "GENERIC_MEAT_COOKED",
+        "ingredient": [
+            {
+                "item": "minefantasyreforged:generic_meat_cooked"
+            },
+            {
+                "item": "minefantasyreforged:generic_meat_strip_cooked"
+            },
+            {
+                "item": "minefantasyreforged:generic_meat_chunk_cooked"
+            }
+        ]
+    }
+]

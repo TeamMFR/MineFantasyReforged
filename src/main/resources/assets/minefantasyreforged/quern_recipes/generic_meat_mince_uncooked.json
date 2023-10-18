@@ -1,0 +1,17 @@
+{
+	"type": "quern_recipe",
+	"consume_pot": true,
+	"ingredients": [
+		{
+			"item": "#GENERIC_MEAT_UNCOOKED"
+		}
+	],
+	"pot_ingredients": [
+		{
+			"item": "minefantasyreforged:clay_pot"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:generic_meat_mince_uncooked"
+	}
+}

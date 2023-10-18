@@ -5,7 +5,6 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.material.BaseMaterial;
-import minefantasy.mfr.recipe.refine.QuernRecipes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
@@ -14,7 +13,6 @@ import net.minecraftforge.fml.common.Mod;
 public class BasicRecipesMF {
 
 	public static void init() {
-		QuernRecipes.init();
 		SalvageRecipes.init();
 		CookingRecipes.init();
 		MineFantasyItems.loadCrafting();

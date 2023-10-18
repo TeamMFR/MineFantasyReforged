@@ -18,7 +18,8 @@ import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
-import minefantasy.mfr.recipe.refine.QuernRecipes;
+import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.recipe.QuernRecipeBase;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -326,16 +327,8 @@ public class MineFantasyReforgedAPI {
 				requireBaking, canBurn);
 	}
 
-	public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output) {
-		return addQuernRecipe(input, output, 1, true);
-	}
-
-	public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output, int tier) {
-		return addQuernRecipe(input, output, tier, true);
-	}
-
-	public static QuernRecipes addQuernRecipe(ItemStack input, ItemStack output, int tier, boolean consumePot) {
-		return QuernRecipes.addRecipe(input, output, tier, consumePot);
+	public static void addQuernRecipe(NonNullList<Ingredient> inputs, NonNullList<Ingredient> inputPots, ItemStack output, boolean consumePot) {
+		CraftingManagerQuern.addRecipe(new QuernRecipeBase(output, inputs, inputPots, consumePot), true);
 	}
 
 	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier) {

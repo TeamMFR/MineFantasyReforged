@@ -13,6 +13,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	private static final String ALLOY_RECIPE_SETTINGS = "06 Alloy Recipe Settings";
 	private static final String BLOOMERY_RECIPE_SETTINGS = "07 Bloomery Recipe Settings";
 	private static final String BLAST_FURNACE_RECIPE_SETTINGS = "08 Blast Furnace Recipe Settings";
+	private static final String QUERN_RECIPE_SETTINGS = "09 Quern Recipe Settings";
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
@@ -91,6 +92,13 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
 		String name = generateNameFromItemAndNBT(itemStack);
 		return get().getBoolean(name, BLAST_FURNACE_RECIPE_SETTINGS, true, "");
+	}
+
+	public static boolean isQuernItemCraftable(ItemStack itemStack) {
+		//Checks if the given Item should load default recipes for the quern.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = generateNameFromItemAndNBT(itemStack);
+		return get().getBoolean(name, QUERN_RECIPE_SETTINGS, true, "");
 	}
 
 	public static Configuration get() {

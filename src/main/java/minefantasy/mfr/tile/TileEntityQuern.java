@@ -2,10 +2,10 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerQuern;
-import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
-import minefantasy.mfr.recipe.refine.QuernRecipes;
+import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.recipe.QuernRecipeBase;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -85,15 +85,15 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	}
 
 	public static boolean isInput(ItemStack input) {
-		return getResult(input) != null;
+		return !input.isEmpty() && CraftingManagerQuern.findMatchingInputs(input);
 	}
 
-	private static QuernRecipes getResult(ItemStack input) {
-		return QuernRecipes.getResult(input);
+	public static boolean isPot(ItemStack inputPot) {
+		return !inputPot.isEmpty() && CraftingManagerQuern.findMatchingPotInputs(inputPot);
 	}
 
-	public static boolean isPot(ItemStack item) {
-		return !item.isEmpty() && item.getItem() == MineFantasyItems.CLAY_POT;
+	private static QuernRecipeBase getResult(ItemStack input, ItemStack potInput) {
+		return CraftingManagerQuern.findMatchingRecipe(input, potInput);
 	}
 
 	public void onUse() {
@@ -105,21 +105,17 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
 	public void onRevolutionComplete() {
 		world.playSound(null, pos, MineFantasySounds.CRAFT_PRIMITIVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-		QuernRecipes result = getResult(getInventory().getStackInSlot(0));
-		if (result != null && (!result.consumePot || !getInventory().getStackInSlot(1).isEmpty()) && result.tier <= getTier()) {
-			ItemStack craft = result.result;
+		QuernRecipeBase result = getResult(getInventory().getStackInSlot(0), getInventory().getStackInSlot(1));
+		if (result != null && (!result.shouldConsumePot() || !getInventory().getStackInSlot(1).isEmpty())) {
+			ItemStack craft = result.getQuernRecipeOutput();
 			if (canFitResult(craft)) {
 				if (!world.isRemote) {
-					tryCraft(craft, result.consumePot);
+					tryCraft(craft, result.shouldConsumePot());
 				} else {
 					world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, pos.getX() + 0.5F, pos.getY() + 1F, pos.getZ() + 0.5F, 0F, 0.2F, 0F);
 				}
 			}
 		}
-	}
-
-	private int getTier() {
-		return 0;
 	}
 
 	private boolean canFitResult(ItemStack result) {
@@ -155,10 +151,10 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
-		if (!item.isEmpty() && getResult(item) != null) {
+		if (!item.isEmpty() && isInput(item)) {
 			return slot == 0;
 		}
-		if (!item.isEmpty() && item.getItem() == MineFantasyItems.CLAY_POT) {
+		if (!item.isEmpty() && isPot(item)) {
 			return slot == 1;
 		}
 		return false;

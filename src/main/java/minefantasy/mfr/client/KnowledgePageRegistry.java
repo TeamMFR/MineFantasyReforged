@@ -21,6 +21,7 @@ import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -193,10 +194,10 @@ public class KnowledgePageRegistry {
 				new EntryPageSmelting(MineFantasyItems.CLAY_POT_UNCOOKED, MineFantasyItems.CLAY_POT),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("quern")),
 				new EntryPageText("knowledge.dust.quern"),
-				new EntryPageGrind(new ItemStack(Items.COAL), new ItemStack(MineFantasyItems.COAL_DUST)),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
-				new EntryPageGrind(new ItemStack(Items.WHEAT), new ItemStack(MineFantasyItems.FLOUR)),
-				new EntryPageGrind(new ItemStack(Items.DYE, 1, 3), new ItemStack(MineFantasyItems.COCA_POWDER)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("coal_dust")),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("kaolinite_dust")),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("flour")),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("coca_powder")),
 				new EntryPageText("knowledge.dust.icing"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("standard_spoon")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("icing")));
@@ -281,7 +282,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.firebrick_crucible.addPages(
 				assembleSimpleImgPage("fire_crucible_example", "knowledge.firebrick_crucible.1"),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("kaolinite_dust")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("crucible_fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
@@ -442,13 +443,13 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.coal_flux.addPages(
 				new EntryPageText("knowledge.coal_flux.1"),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.FLUX), new ItemStack(MineFantasyItems.FLUX_POT)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("flux_pot")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("coal_flux")));
 
 		MineFantasyKnowledgeList.big_furnace.addPages(
 				assembleSimpleImgPage("furnace_example", "knowledge.big_furnace.1"),
 				new EntryPageText("knowledge.big_furnace.2"),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("kaolinite_dust")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay_brick")),
 				new EntryPageSmelting(new ItemStack(MineFantasyItems.FIRECLAY_BRICK), new ItemStack(MineFantasyItems.STRONG_BRICK)),
@@ -463,7 +464,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.blast_furnace.addPages(
 				new EntryPageText("knowledge.blast_furnace.1"),
 				new EntryPageText("knowledge.blast_furnace.2"),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.KAOLINITE), new ItemStack(MineFantasyItems.KAOLINITE_DUST)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("kaolinite_dust")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay_brick")),
 				new EntryPageSmelting(new ItemStack(MineFantasyItems.FIRECLAY_BRICK), new ItemStack(MineFantasyItems.STRONG_BRICK)),
@@ -541,7 +542,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.blackpowder.addPages(
 				new EntryPageText("knowledge.blackpowder.1"),
-				new EntryPageGrind(new ItemStack(Items.COAL), new ItemStack(MineFantasyItems.COAL_DUST)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("coal_dust")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("blackpowder")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_crude")));
 
@@ -568,7 +569,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.shrapnel.addPages(
 				new EntryPageText("knowledge.shrapnel.1"),
-				new EntryPageGrind(new ItemStack(Items.FLINT), new ItemStack(MineFantasyItems.SHRAPNEL)));
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("shrapnel")));
 
 		MineFantasyKnowledgeList.firebomb.addPages(
 				new EntryPageText("knowledge.firebomb.1"),
@@ -990,7 +991,8 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_cooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_chunk_uncooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_chunk_cooked")),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.GENERIC_MEAT_UNCOOKED), new ItemStack(MineFantasyItems.GENERIC_MEAT_MINCE_UNCOOKED)));
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("generic_meat_mince_uncooked")),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("generic_meat_mince_cooked")));
 
 		MineFantasyKnowledgeList.stew.addPages(
 				new EntryPageText("knowledge.stew.1"),
@@ -1003,7 +1005,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.sausage.addPages(
 				new EntryPageText("knowledge.sausage.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("guts")),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.BREADROLL), new ItemStack(MineFantasyItems.BREADCRUMBS)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("breadcrumbs")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("saussage_raw")),
 				new EntryPageSmelting(new ItemStack(MineFantasyItems.SAUSAGE_RAW), new ItemStack(MineFantasyItems.SAUSAGE_COOKED)));
 
@@ -1030,13 +1032,13 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.bread.addPages(
 				new EntryPageText("knowledge.bread.1"),
-				new EntryPageGrind(new ItemStack(Items.WHEAT), new ItemStack(MineFantasyItems.FLOUR)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("flour")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("dough")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.DOUGH), new ItemStack(MineFantasyItems.BREADROLL)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("raw_bread")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.RAW_BREAD), new ItemStack(Items.BREAD)),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pastry")),
-				new EntryPageGrind(new ItemStack(MineFantasyItems.BREADROLL), new ItemStack(MineFantasyItems.BREADCRUMBS)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("breadcrumbs")),
 				new EntryPageText("knowledge.bread.other"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_pumpkin_uncooked")),
 				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_PUMPKIN_UNCOOKED), new ItemStack(MineFantasyItems.PIE_PUMPKIN_COOKED)),
@@ -1053,7 +1055,7 @@ public class KnowledgePageRegistry {
 
 		MineFantasyKnowledgeList.icing.addPages(
 				new EntryPageText("knowledge.icing.1"),
-				new EntryPageGrind(new ItemStack(Items.REEDS), new ItemStack(MineFantasyItems.SUGAR_POT)),
+				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("sugar_pot")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.SUGAR_POT_RECIPE),
 				new EntryPageText("knowledge.icing.2"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("icing")));
