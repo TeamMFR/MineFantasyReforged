@@ -9,7 +9,8 @@ import minefantasy.mfr.container.ContainerTanner;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
-import minefantasy.mfr.recipe.TanningRecipe;
+import minefantasy.mfr.recipe.CraftingManagerTanner;
+import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -164,7 +165,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 				// Item placement
 				ItemStack item = inputInventory.getStackInSlot(0);
 				if (item.isEmpty()) {
-					if (!held.isEmpty() && !(held.getItem() instanceof ItemBlock) && TanningRecipe.getRecipe(held) != null) {
+					if (!held.isEmpty() && !(held.getItem() instanceof ItemBlock) && CraftingManagerTanner.findMatchingRecipe(held) != null) {
 						ItemStack item2 = held.copy();
 						item2.setCount(1);
 						inputInventory.setStackInSlot(0, item2);
@@ -222,15 +223,15 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	}
 
 	public void updateRecipe() {
-		TanningRecipe recipe = TanningRecipe.getRecipe(inputInventory.getStackInSlot(0));
+		TannerRecipeBase recipe = CraftingManagerTanner.findMatchingRecipe(inputInventory.getStackInSlot(0));
 		if (recipe == null) {
 			recipeInventory.setStackInSlot(0, ItemStack.EMPTY);
 			progress = maxProgress = tier = 0;
 		} else {
-			recipeInventory.setStackInSlot(0, recipe.output.copy());
-			tier = recipe.tier;
-			maxProgress = recipe.time;
-			requiredToolType = recipe.toolType;
+			recipeInventory.setStackInSlot(0, recipe.getTannerRecipeOutput().copy());
+			tier = recipe.getTannerTier();
+			maxProgress = recipe.getCraftTime();
+			requiredToolType = recipe.getToolType();
 		}
 		progress = 0;
 		sendUpdates();

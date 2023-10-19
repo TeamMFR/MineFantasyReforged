@@ -1,0 +1,15 @@
+{
+	"type": "tanner_recipe",
+	"tanner_tier": -1,
+	"craft_time": 18,
+	"tool_type": "shears",
+	"ingredients": [
+		{
+			"item": "minecraft:leather"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:leather_strip",
+		"count": 4
+	}
+}

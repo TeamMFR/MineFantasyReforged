@@ -1,12 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.MineFantasyReforged;
-import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyMaterials;
-import minefantasy.mfr.material.BaseMaterial;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = MineFantasyReforged.MOD_ID)
@@ -17,12 +12,12 @@ public class BasicRecipesMF {
 		CookingRecipes.init();
 		MineFantasyItems.loadCrafting();
 
-		BaseMaterial mat = MineFantasyMaterials.IRON;
-
-		TanningRecipe.addRecipe(MineFantasyItems.HIDE_SMALL, mat.craftTimeModifier * 2F, -1, new ItemStack(Items.LEATHER));
-		TanningRecipe.addRecipe(MineFantasyItems.HIDE_MEDIUM, mat.craftTimeModifier * 3F, -1, new ItemStack(Items.LEATHER, 3));
-		TanningRecipe.addRecipe(MineFantasyItems.HIDE_LARGE, mat.craftTimeModifier * 4F, -1, new ItemStack(Items.LEATHER, 5));
-		TanningRecipe.addRecipe(Items.LEATHER, mat.craftTimeModifier * 2F, -1, Tool.SHEARS, new ItemStack(MineFantasyItems.LEATHER_STRIP, 4));
+//		BaseMaterial mat = MineFantasyMaterials.IRON;
+//
+//		TanningRecipe.addRecipe(MineFantasyItems.HIDE_SMALL, 6 * 2F, -1, new ItemStack(Items.LEATHER));
+//		TanningRecipe.addRecipe(MineFantasyItems.HIDE_MEDIUM, 6 * 3F, -1, new ItemStack(Items.LEATHER, 3));
+//		TanningRecipe.addRecipe(MineFantasyItems.HIDE_LARGE, 6 * 4F, -1, new ItemStack(Items.LEATHER, 5));
+//		TanningRecipe.addRecipe(Items.LEATHER, 6 * 2F, -1, Tool.SHEARS, new ItemStack(MineFantasyItems.LEATHER_STRIP, 4));
 	}
 
 }

@@ -27,6 +27,18 @@ public class GuiHelper {
 		GL11.glColor3f(1F, 1F, 1F);
 	}
 
+	/**
+	 * Test if the 2D point is in a rectangle (relative to the GUI). Args : rectX, rectY, rectWidth, rectHeight, pointX,
+	 * pointY
+	 */
+	public static boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY, int guiLeft, int guiTop) {
+		int i = guiLeft;
+		int j = guiTop;
+		pointX = pointX - i;
+		pointY = pointY - j;
+		return pointX >= rectX - 1 && pointX < rectX + rectWidth + 1 && pointY >= rectY - 1 && pointY < rectY + rectHeight + 1;
+	}
+
 	public static int[] getToolTypeIcon(String s) {
 		int width = 20;
 		int height = 20;
@@ -69,6 +81,9 @@ public class GuiHelper {
 		}
 		if (s.equalsIgnoreCase("carpenter")) {
 			return new int[] {width * 1, height * 2};
+		}
+		if (s.equalsIgnoreCase("tanner")) {
+			return new int[] {width * 2, height * 2};
 		}
 		return new int[] {0, 0};
 	}

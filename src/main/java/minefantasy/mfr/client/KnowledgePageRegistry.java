@@ -10,6 +10,7 @@ import minefantasy.mfr.client.knowledge.EntryPageRecipeAnvil;
 import minefantasy.mfr.client.knowledge.EntryPageRecipeBase;
 import minefantasy.mfr.client.knowledge.EntryPageRecipeBloom;
 import minefantasy.mfr.client.knowledge.EntryPageRecipeCarpenter;
+import minefantasy.mfr.client.knowledge.EntryPageRecipeTanner;
 import minefantasy.mfr.client.knowledge.EntryPageSmelting;
 import minefantasy.mfr.client.knowledge.EntryPageText;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -22,6 +23,7 @@ import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -260,7 +262,9 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.tanning.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("tanner")),
 				new EntryPageText("knowledge.tanning.2"),
-				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("tanner_refined")));
+				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("tanner_refined")),
+				new EntryPageRecipeTanner(CraftingManagerTanner.getRecipesByName("leather_small", "leather_medium", "leather_large")),
+				new EntryPageRecipeTanner(CraftingManagerTanner.getRecipeByName("leather_strip")));
 
 		MineFantasyKnowledgeList.bloomery.addPages(
 				new EntryPageText("knowledge.bloomery.1"),

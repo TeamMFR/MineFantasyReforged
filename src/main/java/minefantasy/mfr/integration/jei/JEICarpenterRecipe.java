@@ -51,13 +51,13 @@ public class JEICarpenterRecipe implements IRecipeWrapper {
 
 		//		minecraft.fontRenderer.drawString("X:" + mouseX + ", Y: " + mouseY, mouseX, mouseY, 16777215);
 
-		if (isPointInRegion(recipeWidth - 23, recipeHeight - 98, 20, 20, mouseX, mouseY, 0, 0)) {
+		if (GuiHelper.isPointInRegion(recipeWidth - 23, recipeHeight - 98, 20, 20, mouseX, mouseY, 0, 0)) {
 			// Shows the tool tooltip text with the name of the tool and the minimum tier
 			String s2 = I18n.format("tooltype." + recipe.getToolType()) + ", " + (recipe.getToolTier() > -1
 					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.getToolTier()
 					: I18n.format("attribute.nomfcrafttier.name"));
 			minecraft.fontRenderer.drawStringWithShadow(s2, (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(s2) / 2), (float) 84, 16777215);
-		} else if (isPointInRegion(recipeWidth - 23, recipeHeight - 48, 20, 20, mouseX, mouseY, 0, 0)) {
+		} else if (GuiHelper.isPointInRegion(recipeWidth - 23, recipeHeight - 48, 20, 20, mouseX, mouseY, 0, 0)) {
 			// Shows the carpenter tooltip text with the minimum carpenter tier
 			String s2 = I18n.format("tooltype.carpenter") + ", " + (recipe.getCarpenterTier() > -1
 					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.getCarpenterTier()
@@ -75,18 +75,6 @@ public class JEICarpenterRecipe implements IRecipeWrapper {
 	@Override
 	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
 		return false;
-	}
-
-	/**
-	 * Test if the 2D point is in a rectangle (relative to the GUI). Args : rectX, rectY, rectWidth, rectHeight, pointX,
-	 * pointY
-	 */
-	protected boolean isPointInRegion(int rectX, int rectY, int rectWidth, int rectHeight, int pointX, int pointY, int guiLeft, int guiTop) {
-		int i = guiLeft;
-		int j = guiTop;
-		pointX = pointX - i;
-		pointY = pointY - j;
-		return pointX >= rectX - 1 && pointX < rectX + rectWidth + 1 && pointY >= rectY - 1 && pointY < rectY + rectHeight + 1;
 	}
 
 }

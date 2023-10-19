@@ -269,6 +269,7 @@ tooltype.brush=Paint Brush
 
 tooltype.anvil=Anvil
 tooltype.carpenter=Carpenter Bench
+tooltype.tanner=Tanner
 
 attribute.tool.digEfficiency.name=Dig Speed Modifier x%1$s
 
@@ -325,6 +326,7 @@ integration.jei.category.minefantasyreforged:crucible=MineFantasy Crucible
 integration.jei.category.minefantasyreforged:bloomery=MineFantasy Bloomery
 integration.jei.category.minefantasyreforged:blast_furnace=MineFantasy Blast Furnace
 integration.jei.category.minefantasyreforged:quern=MineFantasy Quern
+integration.jei.category.minefantasyreforged:tanner=MineFantasy Tanner
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 recipe.bar.desc=Any Material Ingot to Material Bar
 recipe.ingot.desc=Any Material Bar to Material Ingot
@@ -1253,6 +1255,7 @@ method.workbench=Crafting Table
 method.furnace=Smelting
 method.baking=Baking
 method.bloomery=Bloomery
+method.tanner=Tanner
 method.blastfurnace=Blast Furnace
 method.anvil=Anvil
 method.carpenter=Carpenter

@@ -44,6 +44,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipeCategories(new JEIBloomeryRecipeCategory(registry, guiHelper));
 		registry.addRecipeCategories(new JEIBlastFurnaceRecipeCategory(registry, guiHelper));
 		registry.addRecipeCategories(new JEIQuernRecipeCategory(registry, guiHelper));
+		registry.addRecipeCategories(new JEITannerRecipeCategory(registry));
 		// TODO: same for anvil, salvage, ...
 	}
 
@@ -73,6 +74,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipes(JEIBloomeryRecipeCategory.generateRecipes(stackHelper, fuelItemStacks), JEIBloomeryRecipeCategory.UID);
 		registry.addRecipes(JEIBlastFurnaceRecipeCategory.generateRecipes(stackHelper, fuelItemStacks), JEIBlastFurnaceRecipeCategory.UID);
 		registry.addRecipes(JEIQuernRecipeCategory.generateRecipes(stackHelper), JEIQuernRecipeCategory.UID);
+		registry.addRecipes(JEITannerRecipeCategory.generateRecipes(stackHelper), JEITannerRecipeCategory.UID);
 	}
 
 	@Override

@@ -14,6 +14,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	private static final String BLOOMERY_RECIPE_SETTINGS = "07 Bloomery Recipe Settings";
 	private static final String BLAST_FURNACE_RECIPE_SETTINGS = "08 Blast Furnace Recipe Settings";
 	private static final String QUERN_RECIPE_SETTINGS = "09 Quern Recipe Settings";
+	private static final String TANNER_RECIPE_SETTINGS = "09 Tanner Recipe Settings";
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
@@ -32,6 +33,8 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		config.addCustomCategoryComment(ALLOY_RECIPE_SETTINGS, "Controls whether or not an item's alloy recipe should be enabled");
 		config.addCustomCategoryComment(BLOOMERY_RECIPE_SETTINGS, "Controls whether or not an item's bloomery recipe should be enabled");
 		config.addCustomCategoryComment(BLAST_FURNACE_RECIPE_SETTINGS, "Controls whether or not an item's blast furnace recipe should be enabled");
+		config.addCustomCategoryComment(QUERN_RECIPE_SETTINGS, "Controls whether or not an item's quern recipe should be enabled");
+		config.addCustomCategoryComment(TANNER_RECIPE_SETTINGS, "Controls whether or not an item's tanner recipe should be enabled");
 	}
 
 	@Override
@@ -101,6 +104,13 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		return get().getBoolean(name, QUERN_RECIPE_SETTINGS, true, "");
 	}
 
+	public static boolean isTannerItemCraftable(ItemStack itemStack) {
+		//Checks if the given Item should load default recipes for the tanner.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = generateNameFromItemAndNBT(itemStack);
+		return get().getBoolean(name, TANNER_RECIPE_SETTINGS, true, "");
+	}
+
 	public static Configuration get() {
 		return MineFantasyReforged.configCrafting.getConfig();
 	}
@@ -113,6 +123,9 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		}
 		else {
 			name = itemStack.getItem().getRegistryName().toString();
+		}
+		if (itemStack.getCount() > 1) {
+			name = name + "|" + itemStack.getCount();
 		}
 
 		return name.replaceAll("[{}'\"]", "");

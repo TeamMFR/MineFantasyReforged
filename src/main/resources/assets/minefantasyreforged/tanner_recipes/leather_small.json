@@ -1,0 +1,14 @@
+{
+	"type": "tanner_recipe",
+	"tanner_tier": -1,
+	"craft_time": 12,
+	"tool_type": "knife",
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:hide_small"
+		}
+	],
+	"result": {
+		"item": "minecraft:leather"
+	}
+}
