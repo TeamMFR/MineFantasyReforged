@@ -89,7 +89,6 @@ import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.item.ItemWoodComponent;
 import minefantasy.mfr.item.ItemWorldGenPlacer;
 import minefantasy.mfr.material.BaseMaterial;
-import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -680,10 +679,6 @@ public class MineFantasyItems {
 
 		//SPECIAL RECIPES
 		BURNT_CAKE = new ItemBurntFood("burnt_cake").setContainerItem(CAKE_TIN);
-	}
-
-	public static void loadSpecialFood() {
-		CookRecipe.burnt_food = BURNT_FOOD;
 	}
 
 	public static void initCustomArmor() {

@@ -13,13 +13,14 @@ import minefantasy.mfr.recipe.AnvilShapelessCustomMaterialRecipe;
 import minefantasy.mfr.recipe.AnvilShapelessRecipe;
 import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.recipe.BlastFurnaceRecipeBase;
-import minefantasy.mfr.recipe.CookRecipe;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.QuernRecipeBase;
+import minefantasy.mfr.recipe.RoastRecipeBase;
 import minefantasy.mfr.util.MFRLogUtil;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -145,18 +146,6 @@ public class MineFantasyReforgedAPI {
 		CraftingManagerBlastFurnace.addRecipe(new BlastFurnaceRecipeBase(output, inputs), true);
 	}
 
-	public static void registerFuelHandler(IFuelHandler handler) {
-		fuelHandlers.add(handler);
-	}
-
-	public static int getFuelValue(ItemStack itemStack) {
-		int fuelValue = 0;
-		for (IFuelHandler handler : fuelHandlers) {
-			fuelValue = Math.max(fuelValue, handler.getBurnTime(itemStack));
-		}
-		return fuelValue;
-	}
-
 	/**
 	 * Adds an alloy ratio recipe with a minimal crucible level
 	 *
@@ -180,6 +169,41 @@ public class MineFantasyReforgedAPI {
 	 */
 	public static void addAlloyShapedRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier, int height, int width) {
 		CraftingManagerAlloy.addRecipe(new AlloyShapedRecipe(out, inputs, tier, height, width), true);
+	}
+
+	/**
+	 * @param output 		Cooked output ItemStack
+	 * @param inputs		Input Ingredients
+	 * @param burntOutput	Burnt output ItemStack
+	 * @param minTemp		Minimum heat temperature
+	 * @param maxTemp		Maximum heat temperature
+	 * @param cookTime		How long it takes to cook this recipe
+	 * @param burnTime		How long till the recipe burns and outputs burntOutput
+	 * @param canBurn		Can this recipe burn?
+	 * @param isOvenRecipe	Is this an oven recipe (true) or a stovetop recipe (false)
+	 */
+	public static void addRoastRecipe(ItemStack output, NonNullList<Ingredient> inputs, ItemStack burntOutput, int minTemp, int maxTemp, int cookTime, int burnTime, boolean canBurn, boolean isOvenRecipe) {
+		CraftingManagerRoast.addRecipe(new RoastRecipeBase(output, inputs, burntOutput, minTemp, maxTemp, cookTime, burnTime, canBurn, isOvenRecipe), true);
+	}
+
+	public static void addQuernRecipe(NonNullList<Ingredient> inputs, NonNullList<Ingredient> inputPots, ItemStack output, boolean consumePot) {
+		CraftingManagerQuern.addRecipe(new QuernRecipeBase(output, inputs, inputPots, consumePot), true);
+	}
+
+	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier) {
+		CraftingManagerBigFurnace.addRecipe(new BigFurnaceRecipeBase(output, input, tier), true);
+	}
+
+	public static void registerFuelHandler(IFuelHandler handler) {
+		fuelHandlers.add(handler);
+	}
+
+	public static int getFuelValue(ItemStack itemStack) {
+		int fuelValue = 0;
+		for (IFuelHandler handler : fuelHandlers) {
+			fuelValue = Math.max(fuelValue, handler.getBurnTime(itemStack));
+		}
+		return fuelValue;
 	}
 
 	/**
@@ -257,81 +281,5 @@ public class MineFantasyReforgedAPI {
 
 	private static boolean checkMatch(ItemStack item1, ItemStack item2) {
 		return item2.getItem() == item1.getItem() && (item2.getItemDamage() == 32767 || item2.getItemDamage() == item1.getItemDamage());
-	}
-
-	/**
-	 * Add a cooking recipe
-	 *
-	 * @param input           what goes in
-	 * @param output          what is made
-	 * @param min_temperature minimal temperature to work
-	 * @param max_temperature maximum temperature until burn
-	 * @param time            how many ticks until it finishes
-	 * @param requireBaking   whether it needs to be in an oven
-	 */
-	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature, int max_temperature, int time, boolean requireBaking) {
-		return CookRecipe.addRecipe(input, output, min_temperature, max_temperature, time, requireBaking, true);
-	}
-
-	/**
-	 * Add a cooking recipe
-	 *
-	 * @param input           what goes in
-	 * @param output          what is made
-	 * @param min_temperature minimal temperature to work
-	 * @param max_temperature maximum temperature until burn
-	 * @param time            how many ticks until it finishes
-	 * @param requireBaking   whether it needs to be in an oven
-	 * @param canBurn         false if it cannot burn by traditional means (such as if its in a
-	 *                        container)
-	 */
-	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, int min_temperature, int max_temperature, int time, boolean requireBaking, boolean canBurn) {
-		return CookRecipe.addRecipe(input, output, min_temperature, max_temperature, time, requireBaking, canBurn);
-	}
-
-	/**
-	 * Add a cooking recipe
-	 *
-	 * @param input           what goes in
-	 * @param output          what is made
-	 * @param min_temperature minimal temperature to work
-	 * @param max_temperature maximum temperature until burn
-	 * @param time            how many ticks until it finishes
-	 * @param requireBaking   whether it needs to be in an oven
-	 */
-	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem, int min_temperature, int max_temperature, int time, boolean requireBaking) {
-		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, requireBaking,
-				true);
-	}
-
-	/**
-	 * Add a cooking recipe
-	 *
-	 * @param input           what goes in
-	 * @param output          what is made
-	 * @param min_temperature minimal temperature to work
-	 * @param max_temperature maximum temperature until burn
-	 * @param time            how many ticks until it finishes
-	 * @param burn_time       how long until a finished product burns
-	 * @param requireBaking   whether it needs to be in an oven
-	 */
-	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem,
-			int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking) {
-		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time,
-				requireBaking, true);
-	}
-
-	public static CookRecipe addCookingRecipe(ItemStack input, ItemStack output, ItemStack burnItem,
-			int min_temperature, int max_temperature, int time, int burn_time, boolean requireBaking, boolean canBurn) {
-		return CookRecipe.addRecipe(input, output, burnItem, min_temperature, max_temperature, time, burn_time,
-				requireBaking, canBurn);
-	}
-
-	public static void addQuernRecipe(NonNullList<Ingredient> inputs, NonNullList<Ingredient> inputPots, ItemStack output, boolean consumePot) {
-		CraftingManagerQuern.addRecipe(new QuernRecipeBase(output, inputs, inputPots, consumePot), true);
-	}
-
-	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier) {
-		CraftingManagerBigFurnace.addRecipe(new BigFurnaceRecipeBase(output, input, tier), true);
 	}
 }

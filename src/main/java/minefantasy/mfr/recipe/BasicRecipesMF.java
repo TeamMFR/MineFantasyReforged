@@ -9,7 +9,6 @@ public class BasicRecipesMF {
 
 	public static void init() {
 		SalvageRecipes.init();
-		CookingRecipes.init();
 		MineFantasyItems.loadCrafting();
 	}
 

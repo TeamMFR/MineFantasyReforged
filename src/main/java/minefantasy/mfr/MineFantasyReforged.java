@@ -147,7 +147,6 @@ public class MineFantasyReforged {
 		MineFantasyBlocks.load();
 		MineFantasyItems.loadComponent();
 		MineFantasyItems.loadTool();
-		MineFantasyItems.loadSpecialFood();
 
 		PROXY.registerTickHandlers();
 
