@@ -1,7 +1,6 @@
 package minefantasy.mfr.client;
 
 import minefantasy.mfr.client.knowledge.EntryPage;
-import minefantasy.mfr.client.knowledge.EntryPageBaking;
 import minefantasy.mfr.client.knowledge.EntryPageBlastFurnace;
 import minefantasy.mfr.client.knowledge.EntryPageCrucible;
 import minefantasy.mfr.client.knowledge.EntryPageGrind;
@@ -11,6 +10,7 @@ import minefantasy.mfr.client.knowledge.EntryPageRecipeBase;
 import minefantasy.mfr.client.knowledge.EntryPageRecipeBloom;
 import minefantasy.mfr.client.knowledge.EntryPageRecipeCarpenter;
 import minefantasy.mfr.client.knowledge.EntryPageRecipeTanner;
+import minefantasy.mfr.client.knowledge.EntryPageRoast;
 import minefantasy.mfr.client.knowledge.EntryPageSmelting;
 import minefantasy.mfr.client.knowledge.EntryPageText;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -23,6 +23,7 @@ import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.block.Block;
@@ -87,7 +88,7 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.getting_started.7"),
 				new EntryPageText("knowledge.getting_started.10"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("clay_pot_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.CLAY_POT_UNCOOKED, MineFantasyItems.CLAY_POT),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("clay_pot")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("quern")),
 				new EntryPageText("knowledge.getting_started.11"),
 				new EntryPageText("knowledge.getting_started.12"),
@@ -166,7 +167,7 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.STICK_RECIPE),
 				new EntryPageText("knowledge.commodities.refinedplank"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jug_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.JUG_UNCOOKED, MineFantasyItems.JUG_EMPTY),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("jug_empty")),
 				new EntryPageRecipeBase(RecipeHelper.getMFRRecipe("jug_plant_oil")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("refined_timber")),
 				new EntryPageText("knowledge.commodities.flux"),
@@ -193,7 +194,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.dust.addPages(
 				new EntryPageText("knowledge.dust.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("clay_pot_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.CLAY_POT_UNCOOKED, MineFantasyItems.CLAY_POT),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("clay_pot")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("quern")),
 				new EntryPageText("knowledge.dust.quern"),
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("coal_dust")),
@@ -281,7 +282,7 @@ public class KnowledgePageRegistry {
 			MineFantasyKnowledgeList.crucible.addPages(
 					new EntryPageText("knowledge.crucible.hcc"),
 					new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("ingot_mould_uncooked")),
-					new EntryPageSmelting(MineFantasyItems.INGOT_MOULD_UNCOOKED, MineFantasyItems.INGOT_MOULD));
+					new EntryPageRoast(CraftingManagerRoast.getRecipeByName("ingot_mould")));
 		}
 
 		MineFantasyKnowledgeList.firebrick_crucible.addPages(
@@ -456,7 +457,7 @@ public class KnowledgePageRegistry {
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("kaolinite_dust")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay_brick")),
-				new EntryPageSmelting(new ItemStack(MineFantasyItems.FIRECLAY_BRICK), new ItemStack(MineFantasyItems.STRONG_BRICK)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("strong_brick")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
 				new EntryPageText("knowledge.big_furnace.heater"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("furnace_heater")),
@@ -471,7 +472,7 @@ public class KnowledgePageRegistry {
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("kaolinite_dust")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("fireclay_brick")),
-				new EntryPageSmelting(new ItemStack(MineFantasyItems.FIRECLAY_BRICK), new ItemStack(MineFantasyItems.STRONG_BRICK)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("strong_brick")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("firebricks")),
 				new EntryPageText("knowledge.blast_furnace.3"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("blast_chamber")),
@@ -584,7 +585,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.bomb_ceramic.addPages(
 				new EntryPageText("knowledge.bomb_ceramic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("bomb_casing_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.BOMB_CASING_UNCOOKED, MineFantasyItems.BOMB_CASING_CERAMIC));
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("bomb_casing_ceramic")));
 
 		MineFantasyKnowledgeList.bomb_iron.addPages(
 				new EntryPageText("knowledge.bomb_iron.1"),
@@ -601,7 +602,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.mine_ceramic.addPages(
 				new EntryPageText("knowledge.mine_ceramic.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("mine_casing_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.MINE_CASING_UNCOOKED, MineFantasyItems.MINE_CASING_CERAMIC));
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("mine_casing_ceramic")));
 
 		MineFantasyKnowledgeList.mine_iron.addPages(
 				new EntryPageText("knowledge.mine_iron.1"),
@@ -788,7 +789,7 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("timber_pane")),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("hinge")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jug_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.JUG_UNCOOKED, MineFantasyItems.JUG_EMPTY),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("jug_empty")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.JUG_PLANT_OIL_RECIPE),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("refined_timber")));
 
@@ -974,16 +975,16 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.cooking_utensils.1"),
 				new EntryPageRecipeAnvil(CraftingManagerAnvil.getRecipeByName("cake_tin")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_tray_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.PIE_TRAY_UNCOOKED, MineFantasyItems.PIE_TRAY));
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("pie_tray")));
 
 		MineFantasyKnowledgeList.salt.addPages(
 				new EntryPageText("knowledge.salt.1"),
-				new EntryPageSmelting(new ItemStack(MineFantasyItems.BOWL_WATER_SALT), new ItemStack(MineFantasyItems.SALT)));
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("salt")));
 
 		MineFantasyKnowledgeList.jug.addPages(
 				new EntryPageText("knowledge.jug.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("jug_uncooked")),
-				new EntryPageSmelting(MineFantasyItems.JUG_UNCOOKED, MineFantasyItems.JUG_EMPTY),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("jug_empty")),
 				new EntryPageText("knowledge.jug.2"),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.JUG_WATER_RECIPE),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.JUG_MILK_RECIPE));
@@ -992,11 +993,19 @@ public class KnowledgePageRegistry {
 				new EntryPageText("knowledge.generic_meat.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_uncooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_uncooked")),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("generic_meat_strip_cooked")),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("generic_meat_cooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_strip_cooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_chunk_uncooked")),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("generic_meat_chunk_cooked")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("generic_meat_chunk_cooked")),
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("generic_meat_mince_uncooked")),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("generic_meat_mince_cooked")),
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("generic_meat_mince_cooked")));
+
+		MineFantasyKnowledgeList.wild_meat.addPages(
+				new EntryPageText("knowledge.wild_meat.1"),
+				new EntryPageRoast(CraftingManagerRoast.getRecipesByName("horse_cooked", "wolf_cooked")));
 
 		MineFantasyKnowledgeList.stew.addPages(
 				new EntryPageText("knowledge.stew.1"),
@@ -1011,7 +1020,7 @@ public class KnowledgePageRegistry {
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("guts")),
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("breadcrumbs")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("saussage_raw")),
-				new EntryPageSmelting(new ItemStack(MineFantasyItems.SAUSAGE_RAW), new ItemStack(MineFantasyItems.SAUSAGE_COOKED)));
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("saussage_cooked")));
 
 		MineFantasyKnowledgeList.sandwitch.addPages(
 				new EntryPageText("knowledge.sandwitch.1"),
@@ -1025,30 +1034,30 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.meatpie.addPages(
 				new EntryPageText("knowledge.meatpie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_meat_uncooked")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_MEAT_UNCOOKED), new ItemStack(MineFantasyItems.PIE_MEAT_COOKED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("pie_meat_cooked")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_MEAT_RECIPE));
 
 		MineFantasyKnowledgeList.shepard_pie.addPages(
 				new EntryPageText("knowledge.shepard_pie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_shepard_uncooked")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_SHEPARD_UNCOOKED), new ItemStack(MineFantasyItems.PIE_SHEPARD_COOKED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("pie_shepard_cooked")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_SHEPARDS_RECIPE));
 
 		MineFantasyKnowledgeList.bread.addPages(
 				new EntryPageText("knowledge.bread.1"),
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("flour")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("dough")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.DOUGH), new ItemStack(MineFantasyItems.BREADROLL)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("breadroll")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("raw_bread")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.RAW_BREAD), new ItemStack(Items.BREAD)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("bread")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pastry")),
 				new EntryPageGrind(CraftingManagerQuern.getRecipeByName("breadcrumbs")),
 				new EntryPageText("knowledge.bread.other"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_pumpkin_uncooked")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_PUMPKIN_UNCOOKED), new ItemStack(MineFantasyItems.PIE_PUMPKIN_COOKED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("pie_pumpkin_cooked")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_PUMPKIN_RECIPE),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_simple_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_SIMPLE_RAW), new ItemStack(MineFantasyItems.CAKE_SIMPLE_UNICED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("cake_simple_uniced")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake")));
 
 		MineFantasyKnowledgeList.oats.addPages(
@@ -1067,51 +1076,50 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.sweetroll.addPages(
 				new EntryPageText("knowledge.sweetroll.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sweetroll_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.SWEETROLL_RAW), new ItemStack(MineFantasyItems.SWEETROLL_UNICED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("sweetroll_uniced")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("sweetroll")));
 
 		MineFantasyKnowledgeList.cake.addPages(
 				new EntryPageText("knowledge.cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_RAW), new ItemStack(MineFantasyItems.CAKE_UNICED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("cake_uniced")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_vanilla")));
 
 		MineFantasyKnowledgeList.carrot_cake.addPages(
 				new EntryPageText("knowledge.carrot_cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_carrot_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_CARROT_RAW), new ItemStack(MineFantasyItems.CAKE_CARROT_UNICED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("cake_carrot_uniced")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_carrot")));
 
 		MineFantasyKnowledgeList.chocolate_cake.addPages(
 				new EntryPageText("knowledge.chocolate_cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("chocolate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_choc_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_CHOC_RAW), new ItemStack(MineFantasyItems.CAKE_CHOC_UNICED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("cake_choc_uniced")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_chocolate")));
 
 		MineFantasyKnowledgeList.black_forest_cake.addPages(
 				new EntryPageText("knowledge.black_forest_cake.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("chocolate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_bf_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.CAKE_BF_RAW), new ItemStack(MineFantasyItems.CAKE_BF_UNICED)),
-				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("cake_choc_raw")));
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("cake_bf_uniced")));
 
 		MineFantasyKnowledgeList.berry_pie.addPages(
 				new EntryPageText("knowledge.berry_pie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_berry_uncooked")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_BERRY_UNCOOKED), new ItemStack(MineFantasyItems.PIE_BERRY_COOKED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("pie_berry_cooked")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_BERRY_RECIPE));
 
 		MineFantasyKnowledgeList.apple_pie.addPages(
 				new EntryPageText("knowledge.apple_pie.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("pie_apple_uncooked")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.PIE_APPLE_UNCOOKED), new ItemStack(MineFantasyItems.PIE_APPLE_COOKED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("pie_apple_cooked")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.PIE_APPLE_RECIPE));
 
 		MineFantasyKnowledgeList.eclair.addPages(
 				new EntryPageText("knowledge.eclair.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("eclair_raw")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.ECLAIR_RAW), new ItemStack(MineFantasyItems.ECLAIR_UNICED)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("eclair_uniced")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("chocolate")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("eclair_empty")),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("custard")),
@@ -1120,7 +1128,7 @@ public class KnowledgePageRegistry {
 		MineFantasyKnowledgeList.cheese.addPages(
 				new EntryPageText("knowledge.cheese.1"),
 				new EntryPageRecipeCarpenter(CraftingManagerCarpenter.getRecipeByName("curds")),
-				new EntryPageBaking(new ItemStack(MineFantasyItems.CURDS), new ItemStack(MineFantasyItems.CHEESE_POT)),
+				new EntryPageRoast(CraftingManagerRoast.getRecipeByName("cheese_pot")),
 				new EntryPageRecipeBase(MineFantasyKnowledgeList.CHEESE_WHEEL_RECIPE));
 
 		MineFantasyKnowledgeList.cheese_roll.addPages(

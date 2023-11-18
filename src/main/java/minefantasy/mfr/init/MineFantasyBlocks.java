@@ -19,6 +19,7 @@ import minefantasy.mfr.block.BlockChimney;
 import minefantasy.mfr.block.BlockChimneyPipe;
 import minefantasy.mfr.block.BlockCogwork;
 import minefantasy.mfr.block.BlockComponent;
+import minefantasy.mfr.block.BlockCookingBench;
 import minefantasy.mfr.block.BlockCrossbowBench;
 import minefantasy.mfr.block.BlockCrucible;
 import minefantasy.mfr.block.BlockEngineerTanner;
@@ -72,6 +73,7 @@ import minefantasy.mfr.tile.TileEntityBombPress;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityChimney;
 import minefantasy.mfr.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityCookingBench;
 import minefantasy.mfr.tile.TileEntityCrossbowBench;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.tile.TileEntityFirepit;
@@ -189,6 +191,9 @@ public class MineFantasyBlocks {
 	public static BlockAnvilMF ANVIL_RED_STEEL = Utils.nullValue();
 
 	public static BlockCarpenter CARPENTER = Utils.nullValue();
+	public static BlockCookingBench COOKING_BENCH_GRANITE = Utils.nullValue();
+	public static BlockCookingBench COOKING_BENCH_ANDESITE = Utils.nullValue();
+	public static BlockCookingBench COOKING_BENCH_DIORITE = Utils.nullValue();
 	public static BlockBombBench BOMB_BENCH = Utils.nullValue();
 	public static BlockCrossbowBench CROSSBOW_BENCH = Utils.nullValue();
 
@@ -423,6 +428,9 @@ public class MineFantasyBlocks {
 		ANVIL_RED_STEEL = new BlockAnvilMF(MineFantasyMaterials.RED_STEEL);
 
 		CARPENTER = new BlockCarpenter();
+		COOKING_BENCH_GRANITE = new BlockCookingBench("cooking_bench_granite");
+		COOKING_BENCH_ANDESITE = new BlockCookingBench("cooking_bench_andesite");
+		COOKING_BENCH_DIORITE = new BlockCookingBench("cooking_bench_diorite");
 		BOMB_BENCH = new BlockBombBench();
 		CROSSBOW_BENCH = new BlockCrossbowBench();
 
@@ -754,6 +762,10 @@ public class MineFantasyBlocks {
 		registerTile(TileEntityAnvil.class, "anvil_tile");
 		registry.register(CARPENTER);
 		registerTile(TileEntityCarpenter.class, "carpenter_tile");
+		registry.register(COOKING_BENCH_GRANITE);
+		registry.register(COOKING_BENCH_ANDESITE);
+		registry.register(COOKING_BENCH_DIORITE);
+		registerTile(TileEntityCookingBench.class, "cooking_bench_tile");
 		registry.register(BOMB_BENCH);
 		registerTile(TileEntityBombBench.class, "bomb_bench_tile");
 		registry.register(CROSSBOW_BENCH);
@@ -918,6 +930,9 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockAnvil(ANVIL_RED_STEEL));
 
 		registry.register(new ItemBlockBase(CARPENTER));
+		registry.register(new ItemBlockBase(COOKING_BENCH_GRANITE));
+		registry.register(new ItemBlockBase(COOKING_BENCH_ANDESITE));
+		registry.register(new ItemBlockBase(COOKING_BENCH_DIORITE));
 		registry.register(new ItemBlockBase(BOMB_BENCH));
 		registry.register(new ItemBlockBase(CROSSBOW_BENCH));
 

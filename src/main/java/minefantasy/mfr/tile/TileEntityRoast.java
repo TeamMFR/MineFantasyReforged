@@ -6,7 +6,8 @@ import minefantasy.mfr.block.BlockRoast;
 import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
-import minefantasy.mfr.recipe.CookRecipe;
+import minefantasy.mfr.recipe.CraftingManagerRoast;
+import minefantasy.mfr.recipe.RoastRecipeBase;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -33,9 +34,10 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	public float progress;
 	public float maxProgress;
 	private int tempTicksExisted = 0;
-	private Random rand = new Random();
+	private final Random rand = new Random();
 	private int ticksExisted;
-	private CookRecipe recipe;
+	private RoastRecipeBase recipe;
+	private RoastRecipeBase lastRecipe;
 
 	public ItemStackHandler inventory = createInventory();
 
@@ -79,15 +81,27 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 		++ticksExisted;
 		if (ticksExisted % 20 == 0 && !world.isRemote) {
 			sendUpdates();
-			if (recipe != null && temp > 0 && maxProgress > 0 && temp > recipe.minTemperature) {
-				if (ConfigHardcore.enableOverheat && recipe.canBurn && temp > recipe.maxTemperature) {
-					getInventory().setStackInSlot(0, recipe.burnt.copy());
-					updateRecipe();
-				}
+			//progress cooking progress
+			if ((recipe != null || lastRecipe != null)) {
 				progress += (temp / 100F);
+			}
+			//Handle normal cooking completion
+			if (recipe != null && temp > 0 && maxProgress > 0 && temp > recipe.getMinTemperature()) {
 				if (progress >= maxProgress && recipe != null) {
-					getInventory().setStackInSlot(0, recipe.output.copy());
+					getInventory().setStackInSlot(0, recipe.getRoastRecipeOutput().copy());
 					updateRecipe();
+					progress = 0;
+				}
+			}
+			//Handle Burnt cooking completion
+			if (lastRecipe != null && temp > 0 && temp > lastRecipe.getMinTemperature()) {
+				if (ConfigHardcore.enableOverheat && lastRecipe.canBurn()) {
+					if (progress > lastRecipe.getBurnTime() || temp > lastRecipe.getMaxTemperature()) {
+						getInventory().setStackInSlot(0, lastRecipe.getBurntOutput().copy());
+						updateRecipe();
+						lastRecipe = null;
+						progress = 0;
+					}
 				}
 			}
 		}
@@ -118,24 +132,27 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	public boolean interact(EntityPlayer player) {
 		ItemStack held = player.getHeldItemMainhand();
 		ItemStack item = getInventory().getStackInSlot(0);
+		//Put Item from Player to Tile
 		if (item.isEmpty()) {
-			if (!held.isEmpty() && !(held.getItem() instanceof ItemBlock) && CookRecipe.getResult(held, isOven()) != null) {
+			if (!held.isEmpty() && !(held.getItem() instanceof ItemBlock) && CraftingManagerRoast.findMatchingRecipe(held, isOven()) != null) {
 				ItemStack item2 = held.copy();
 				item2.setCount(1);
 				getInventory().setStackInSlot(0, item2);
 				tryDecrMainItem(player);
 				updateRecipe();
+				progress = 0;
 				if (!isOven() && this.getTemp() > 0) {
 					world.playSound(null, pos, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 1.0F, 1.0F);
 				}
 				return true;
 			}
-		} else {
+		} else {//Take Item from Tile to Player or drop on ground
 			if (!player.inventory.addItemStackToInventory(item)) {
 				player.entityDropItem(item, 0.0F);
 			}
 			getInventory().setStackInSlot(0, ItemStack.EMPTY);
 			updateRecipe();
+			progress = 0;
 			return true;
 		}
 		return false;
@@ -149,11 +166,15 @@ public class TileEntityRoast extends TileEntityBase implements IHeatUser, ITicka
 	}
 
 	public void updateRecipe() {
-		recipe = CookRecipe.getResult(getInventory().getStackInSlot(0), isOven());
+		recipe = CraftingManagerRoast.findMatchingRecipe(getInventory().getStackInSlot(0), isOven());
 		if (recipe != null) {
-			maxProgress = recipe.time;
+			maxProgress = recipe.getCookTime();
+			lastRecipe = recipe;
 		}
-		progress = 0;
+		if (getInventory().getStackInSlot(0).isEmpty()) {
+			lastRecipe = null;
+			progress = 0;
+		}
 	}
 
 	@Override

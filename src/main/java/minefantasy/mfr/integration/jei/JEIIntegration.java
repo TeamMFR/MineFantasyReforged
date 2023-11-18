@@ -12,6 +12,7 @@ import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.gui.GuiHelper;
 import mezz.jei.runtime.JeiHelpers;
 import minefantasy.mfr.config.ConfigIntegration;
+import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -45,6 +46,8 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipeCategories(new JEIBlastFurnaceRecipeCategory(registry, guiHelper));
 		registry.addRecipeCategories(new JEIQuernRecipeCategory(registry, guiHelper));
 		registry.addRecipeCategories(new JEITannerRecipeCategory(registry));
+		registry.addRecipeCategories(new JEIRoastRecipeCategory(registry, guiHelper, 0, MineFantasyBlocks.OVEN, "oven"));
+		registry.addRecipeCategories(new JEIRoastRecipeCategory(registry, guiHelper, 56, MineFantasyBlocks.STOVE, "stovetop"));
 		// TODO: same for anvil, salvage, ...
 	}
 
@@ -75,6 +78,8 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipes(JEIBlastFurnaceRecipeCategory.generateRecipes(stackHelper, fuelItemStacks), JEIBlastFurnaceRecipeCategory.UID);
 		registry.addRecipes(JEIQuernRecipeCategory.generateRecipes(stackHelper), JEIQuernRecipeCategory.UID);
 		registry.addRecipes(JEITannerRecipeCategory.generateRecipes(stackHelper), JEITannerRecipeCategory.UID);
+		registry.addRecipes(JEIRoastRecipeCategory.generateRecipes(stackHelper, true), "minefantasyreforged:oven");
+		registry.addRecipes(JEIRoastRecipeCategory.generateRecipes(stackHelper, false), "minefantasyreforged:stovetop");
 	}
 
 	@Override

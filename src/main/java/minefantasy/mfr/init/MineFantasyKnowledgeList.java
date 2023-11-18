@@ -174,6 +174,7 @@ public class MineFantasyKnowledgeList {
 	public static InformationBase cooking_utensils;
 	public static InformationBase firepit;
 	public static InformationBase generic_meat;
+	public static InformationBase wild_meat;
 	public static InformationBase stew;
 	public static InformationBase jerky;
 	public static InformationBase sausage;
@@ -474,6 +475,8 @@ public class MineFantasyKnowledgeList {
 
 		generic_meat = (new InformationBase("generic_meat", 0, -1, 0, MineFantasyItems.GENERIC_MEAT_UNCOOKED,
 				null)).registerStat().setPage(provisioning).setUnlocked();
+		wild_meat = (new InformationBase("wild_meat", -1, -1,  0, MineFantasyItems.HORSE_RAW, null)
+				.registerStat().setPage(provisioning).setUnlocked());
 		stew = (new InformationBase("stew", 0, -3, 0, MineFantasyItems.STEW, generic_meat)).registerStat()
 				.setPage(provisioning).setUnlocked();
 		jerky = (new InformationBase("jerky", 0, -5, 1, MineFantasyItems.JERKY, stew)).registerStat().setPage(provisioning)

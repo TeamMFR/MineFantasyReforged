@@ -543,7 +543,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		if (block == world.getBlockState(pos).getBlock()) {
 			return true;
 		}
-		return block == MineFantasyBlocks.FIREBRICKS;
+		return block == MineFantasyBlocks.FIREBRICKS || block == MineFantasyBlocks.FIREBRICK_STAIRS;
 	}
 
 	public boolean isBlockValidForTop(BlockPos pos) {
@@ -555,7 +555,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		if (block == null) {
 			return false;
 		}
-		return block == MineFantasyBlocks.FIREBRICKS;
+		return block == MineFantasyBlocks.FIREBRICKS || block == MineFantasyBlocks.FIREBRICK_STAIRS;
 	}
 
 	public boolean isBlockValidForSide(EnumFacing side) {
