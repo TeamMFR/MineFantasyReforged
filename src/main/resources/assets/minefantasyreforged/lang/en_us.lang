@@ -11,6 +11,7 @@ message.below=BELOW
 message.above=ABOVE
 info.salvage.usage=Drop a valid item on top of the Salvage Block to salvage it
 gui.no_project_set=<No Project Set>
+gui.kitchen_bench_dirty_progress=Dirtiness
 info.offBalance.message=Trying to use a heavy weapon with only one hand throws you off balance!
 info.noHeatProtection.message=Ouch! Maybe I should get some blacksmithing equipment for this...
 info.vomiting.message=*Blargh!* Eating that many %1$s that quickly can't be good for you...
@@ -266,9 +267,11 @@ tooltype.hands=Bare-Handed
 tooltype.spanner=Spanner
 tooltype.shears=Shears
 tooltype.brush=Paint Brush
+tooltype.wash=Wash
 
 tooltype.anvil=Anvil
 tooltype.carpenter=Carpenter Bench
+tooltype.kitchen_bench=Kitchen Bench
 tooltype.tanner=Tanner
 
 attribute.tool.digEfficiency.name=Dig Speed Modifier x%1$s
@@ -329,6 +332,7 @@ integration.jei.category.minefantasyreforged:quern=MineFantasy Quern
 integration.jei.category.minefantasyreforged:tanner=MineFantasy Tanner
 integration.jei.category.minefantasyreforged:oven=MineFantasy Oven
 integration.jei.category.minefantasyreforged:stovetop=MineFantasy Stove Top
+integration.jei.category.minefantasyreforged:kitchen_bench=Minefantasy Kitchen Bench
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 recipe.bar.desc=Any Material Ingot to Material Bar
 recipe.ingot.desc=Any Material Bar to Material Ingot
@@ -740,9 +744,9 @@ tile.bomb_bench.name=Bomb Crafting Table
 tile.crossbow_bench.name=Crossbow Assembly Table
 tile.bomb_press.name=Bomb Press
 tile.carpenter_bench.name=Carpenter Bench
-tile.cooking_bench_granite.name=Cooking Bench
-tile.cooking_bench_diorite.name=Cooking Bench
-tile.cooking_bench_andesite.name=Cooking Bench
+tile.kitchen_bench_granite.name=Kitchen Bench
+tile.kitchen_bench_diorite.name=Kitchen Bench
+tile.kitchen_bench_andesite.name=Kitchen Bench
 tile.research_bench.name=Research Bench
 tile.quern.name=Quern
 tile.anvil_stone.name=Stone Anvil
@@ -864,6 +868,8 @@ item.stone_waraxe.name=Stone Waraxe
 item.stone_mace.name=Stone Club
 item.stone_spear.name=Stone Spear
 
+# WASH
+item.wash_cloth_wool.name=Wool Wash Cloth
 
 # STANDARD
 languagecfg.tooltiptier=false
@@ -1270,6 +1276,7 @@ method.crucibleT2=Firebrick Crucible
 method.crucibleT3=Mythic Crucible
 method.crucibleT4=Masterwork Crucible
 method.quern=Quern
+method.kitchen_bench=Kitchen Bench
 info.hasKnowledge=Can Research
 
 gui.purchase=Purchase

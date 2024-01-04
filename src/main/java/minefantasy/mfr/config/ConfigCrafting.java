@@ -16,6 +16,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	private static final String QUERN_RECIPE_SETTINGS = "09 Quern Recipe Settings";
 	private static final String TANNER_RECIPE_SETTINGS = "09 Tanner Recipe Settings";
 	private static final String ROAST_RECIPE_SETTINGS = "10 Roast Recipe Settings";
+	private static final String KITCHEN_BENCH_RECIPE_SETTINGS = "11 Kitchen Bench Recipe Settings";
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
@@ -37,6 +38,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		config.addCustomCategoryComment(QUERN_RECIPE_SETTINGS, "Controls whether or not an item's quern recipe should be enabled");
 		config.addCustomCategoryComment(TANNER_RECIPE_SETTINGS, "Controls whether or not an item's tanner recipe should be enabled");
 		config.addCustomCategoryComment(ROAST_RECIPE_SETTINGS, "Controls whether or not an item's roast recipe should be enabled");
+		config.addCustomCategoryComment(KITCHEN_BENCH_RECIPE_SETTINGS, "Controls whether or not an item's kitchen bench recipe should be enabled");
 	}
 
 	@Override
@@ -118,6 +120,13 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
 		String name = generateNameFromItemAndNBT(itemStack);
 		return get().getBoolean(name, ROAST_RECIPE_SETTINGS, true, "");
+	}
+
+	public static boolean isKitchenBenchItemCraftable(ItemStack itemStack) {
+		//Checks if the given Item should load default recipes for the kitchen bench.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = generateNameFromItemAndNBT(itemStack);
+		return get().getBoolean(name, KITCHEN_BENCH_RECIPE_SETTINGS, true, "");
 	}
 
 	public static Configuration get() {

@@ -7,6 +7,7 @@ import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.ISharpenable;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.item.ItemWashCloth;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -44,6 +45,16 @@ public class ToolHelper {
 			return ((IToolMFR) tool.getItem()).getTier(tool);
 		}
 		return CustomCrafterEntry.getEntryTier(tool);
+	}
+
+	public static int getWashMaxUses(ItemStack stack) {
+		if (stack.isEmpty()) {
+			return 0;
+		}
+		if (stack.getItem() instanceof ItemWashCloth) {
+			return ((ItemWashCloth) stack.getItem()).getMaxUses();
+		}
+		return 0; //Todo add Custom Wash Entry
 	}
 
 	/**

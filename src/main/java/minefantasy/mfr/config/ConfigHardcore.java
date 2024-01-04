@@ -25,6 +25,8 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 	public static boolean preventCeramic;
 	public static boolean enableOverheat = true;
 	public static int foodRepeatPenaltyLimit;
+	public static int dirtyProgressSkillModifier;
+	public static int dirtyProgressMax;
 
 	public ConfigHardcore(String name) {
 		super(name);
@@ -82,5 +84,12 @@ public class ConfigHardcore extends ConfigurationBaseMF {
 				"Cooking food on a stove or oven will automatically burn at high temperatures").getString());
 		foodRepeatPenaltyLimit = Integer.parseInt(config.get(CATEGORY_FOOD, "Food Repeat Penalty Limit", 3,
 				"How much of certain foods you can eat in a row before vomiting").getString());
+		dirtyProgressSkillModifier = Integer.parseInt(config.get(CATEGORY_FOOD, "Dirty Progress Skill Mod", 2,
+				"How much to modify the player's current provisioning skill by to reduce the amount of dirtiness "
+						+ "a kitchen bench recipe adds. Formula is as follows, "
+						+ "where dirtyProgressAmount is from the recipe, maxLevel = Provisioning Skill Max Level:\n"
+						+ "dirtyProgressAmount - (dirtyProgressAmount * ((currentLevel / maxLevel) / {this value}))").getString());
+		dirtyProgressMax = Integer.parseInt(config.get(CATEGORY_FOOD, "Dirty Progress Max", 100,
+				"The max amount of dirtiness on the Kitchen Bench, as accumulated by recipe dirty amount").getString());
 	}
 }

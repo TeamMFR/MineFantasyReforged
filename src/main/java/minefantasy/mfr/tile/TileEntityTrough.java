@@ -122,12 +122,20 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 		return false;
 	}
 
-	private boolean isFull() {
+	public boolean isFull() {
 		return fill == getCapacity();
 	}
 
-	private boolean isEmpty() {
+	public boolean isEmpty() {
 		return fill == 0;
+	}
+
+	public int getFill() {
+		return fill;
+	}
+
+	public void setFill(int fill) {
+		this.fill = fill;
 	}
 
 	/**
@@ -135,7 +143,7 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	 *
 	 * @param amount the fluid amount to insert
 	 */
-	private void addFluid(int amount) {
+	public void addFluid(int amount) {
 		int cap = getCapacity();
 		fill = Math.min(cap, fill + amount);
 		markDirty();
@@ -147,7 +155,7 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	 *
 	 * @param amount the fluid amount to insert
 	 */
-	private void removeFluid(int amount) {
+	public void removeFluid(int amount) {
 		fill = Math.max(0, fill - amount);
 		markDirty();
 		BlockUtils.notifyBlockUpdate(this);

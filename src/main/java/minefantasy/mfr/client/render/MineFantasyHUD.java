@@ -8,6 +8,7 @@ import minefantasy.mfr.api.tool.IScope;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigStamina;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerAnvil;
 import minefantasy.mfr.container.ContainerCarpenter;
 import minefantasy.mfr.entity.EntityCogwork;
@@ -19,7 +20,7 @@ import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityCarpenter;
-import minefantasy.mfr.tile.TileEntityCookingBench;
+import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.GuiHelper;
@@ -118,8 +119,8 @@ public class MineFantasyHUD extends Gui {
 				if (tile instanceof TileEntityCarpenter) {
 					this.renderCraftMetre(player, (TileEntityCarpenter) tile);
 				}
-				if (tile instanceof TileEntityCookingBench) {
-					this.renderCraftMetre(player, (TileEntityCookingBench) tile);
+				if (tile instanceof TileEntityKitchenBench) {
+					this.renderCraftMetre(player, (TileEntityKitchenBench) tile);
 				}
 				if (tile instanceof TileEntityTanningRack) {
 					this.renderCraftMetre(player, (TileEntityTanningRack) tile);
@@ -456,31 +457,50 @@ public class MineFantasyHUD extends Gui {
 		GlStateManager.popMatrix();
 	}
 
-	private void renderCraftMetre(EntityPlayer player, TileEntityCookingBench tile) {
+	private void renderCraftMetre(EntityPlayer player, TileEntityKitchenBench tile) {
 		if (player.openContainer instanceof ContainerCarpenter) {
 			return;
 		}
-
-		boolean knowsCraft = tile.doesPlayerKnowCraft(player);
 		GlStateManager.pushMatrix();
-		ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
-		int width = scaledresolution.getScaledWidth();
-		int height = scaledresolution.getScaledHeight();
+		Tool tool = ToolHelper.getToolTypeFromStack(player.getHeldItemMainhand());
+		if (tool != Tool.WASH && tile.getDirtyProgress() < tile.getDirtyProgressMax()) {
+			boolean knowsCraft = tile.doesPlayerKnowCraft(player);
 
-		bindTexture("textures/gui/hud_overlay.png");
-		int xPos = width / 2 - 86;
-		int yPos = height - 69;
+			ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
+			int width = scaledresolution.getScaledWidth();
+			int height = scaledresolution.getScaledHeight();
 
-		this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
-		this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, tile.getProgressBar(160), 3);
+			bindTexture("textures/gui/hud_overlay.png");
+			int xPos = width / 2 - 86;
+			int yPos = height - 69;
 
-		String s = knowsCraft ? tile.getResultName() : "????";
-		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
-		GlStateManager.color(1.0F, 1.0F, 1.0F);
+			this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
+			this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, tile.getProgressBar(160), 3);
 
-		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			String s = knowsCraft ? tile.getResultName() : "????";
+			mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
+			GlStateManager.color(1.0F, 1.0F, 1.0F);
+
+			if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
+				boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
+				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			}
+		}
+		else {
+
+			ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
+			int width = scaledresolution.getScaledWidth();
+			int height = scaledresolution.getScaledHeight();
+
+			bindTexture("textures/gui/hud_overlay.png");
+			int xPos = width / 2 - 86;
+			int yPos = height - 69;
+			this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
+			this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, tile.getDirtyProgressBar(160), 3);
+
+			String s = I18n.format("gui.kitchen_bench_dirty_progress");
+			mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
+			GlStateManager.color(1.0F, 1.0F, 1.0F);
 		}
 
 		GlStateManager.popMatrix();

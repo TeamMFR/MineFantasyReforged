@@ -8,10 +8,10 @@ import minefantasy.mfr.client.gui.GuiBlastHeater;
 import minefantasy.mfr.client.gui.GuiBloomery;
 import minefantasy.mfr.client.gui.GuiBombBench;
 import minefantasy.mfr.client.gui.GuiCarpenterMF;
-import minefantasy.mfr.client.gui.GuiCookingBench;
 import minefantasy.mfr.client.gui.GuiCrossbowBench;
 import minefantasy.mfr.client.gui.GuiCrucible;
 import minefantasy.mfr.client.gui.GuiForge;
+import minefantasy.mfr.client.gui.GuiKitchenBench;
 import minefantasy.mfr.client.gui.GuiKnowledgeEntry;
 import minefantasy.mfr.client.gui.GuiKnowledgeMenu;
 import minefantasy.mfr.client.gui.GuiQuern;
@@ -24,10 +24,10 @@ import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import minefantasy.mfr.tile.TileEntityBombBench;
 import minefantasy.mfr.tile.TileEntityCarpenter;
-import minefantasy.mfr.tile.TileEntityCookingBench;
 import minefantasy.mfr.tile.TileEntityCrossbowBench;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import minefantasy.mfr.tile.TileEntityForge;
+import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.tile.TileEntityQuern;
 import minefantasy.mfr.tile.TileEntityResearchBench;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
@@ -92,7 +92,7 @@ public class NetworkHandler implements IGuiHandler {
 	public static final int GUI_ANVIL = 12;
 	public static final int GUI_RESEARCH_BOOK = 13;
 	public static final int GUI_RELOAD = 14;
-	public static final int GUI_COOKING_BENCH = 15;
+	public static final int GUI_KITCHEN_BENCH = 15;
 
 	private FMLEventChannel channel;
 
@@ -180,8 +180,8 @@ public class NetworkHandler implements IGuiHandler {
 					return ((TileEntityBigFurnace) tileEntity).createContainer(player);
 				case GUI_CARPENTER_BENCH:
 					return ((TileEntityCarpenter) tileEntity).createContainer(player);
-				case GUI_COOKING_BENCH:
-					return ((TileEntityCookingBench) tileEntity).createContainer(player);
+				case GUI_KITCHEN_BENCH:
+					return ((TileEntityKitchenBench) tileEntity).createContainer(player);
 				case GUI_BOMB_BENCH:
 					return ((TileEntityBombBench) tileEntity).createContainer(player);
 				case GUI_RESEARCH_BENCH:
@@ -223,8 +223,8 @@ public class NetworkHandler implements IGuiHandler {
 					return new GuiBigFurnace(((TileEntityBigFurnace) tileEntity).createContainer(player), (TileEntityBigFurnace) tileEntity);
 				case GUI_CARPENTER_BENCH:
 					return new GuiCarpenterMF(((TileEntityCarpenter) tileEntity).createContainer(player), (TileEntityCarpenter) tileEntity);
-				case GUI_COOKING_BENCH:
-					return new GuiCookingBench(((TileEntityCookingBench) tileEntity).createContainer(player), (TileEntityCookingBench) tileEntity);
+				case GUI_KITCHEN_BENCH:
+					return new GuiKitchenBench(((TileEntityKitchenBench) tileEntity).createContainer(player), (TileEntityKitchenBench) tileEntity);
 				case GUI_BOMB_BENCH:
 					return new GuiBombBench(((TileEntityBombBench) tileEntity).createContainer(player), (TileEntityBombBench) tileEntity);
 				case GUI_RESEARCH_BENCH:

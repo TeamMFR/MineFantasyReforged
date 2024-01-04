@@ -20,7 +20,8 @@ public enum Tool {
 	SHEARS("shears"),
 	SAW("saw"),
 	SPANNER("spanner"),
-	SPOON("spoon");
+	SPOON("spoon"),
+	WASH("wash");
 
 	private final String unlocalizedName;
 

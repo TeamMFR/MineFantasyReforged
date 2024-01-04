@@ -1,0 +1,287 @@
+[
+    {
+        "name": "STICK_WOOD",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "stickWood"
+        }
+    },
+    {
+        "name": "PLANK_WOOD",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        }
+    },
+    {
+        "name": "LEATHER",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "leather"
+        }
+    },
+    {
+        "name": "STRING",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "string"
+        }
+    },
+    {
+        "name": "STONE",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "stone"
+        }
+    },
+    {
+        "name": "COBBLESTONE",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "cobblestone"
+        }
+    },
+    {
+        "name": "PAPER",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "paper"
+        }
+    },
+    {
+        "name": "DUST_REDSTONE",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "dustRedstone"
+        }
+    },
+    {
+        "name": "LIMESTONE",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "limestone"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "stoneLimestone"
+            }
+        ]
+    },
+    {
+        "name": "LIST_ALL_INGOTS",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "listAllIngots"
+        }
+    },
+    {
+        "name": "RAW_MEAT",
+        "ingredient": [
+            {
+                "type": "forge:ore_dict",
+                "ore": "raw_meat"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "listAllmeatraw"
+            },
+            {
+                "type": "forge:ore_dict",
+                "ore": "listAllfishraw"
+            }
+        ]
+    },
+    {
+        "name": "TIMBER_REFINED",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:timber",
+            "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}"
+        }
+    },
+    {
+        "name": "TIMBER_OAK_WOOD",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:timber",
+            "nbt": "{mf_custom_materials:{main_material:\"oak_wood\"}}"
+        }
+    },
+    {
+        "name": "TIMBER_SCRAP_WOOD",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:timber",
+            "nbt": "{mf_custom_materials:{main_material:\"scrap_wood\"}}"
+        }
+    },
+    {
+        "name": "BAR_GOLD",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"gold\"}}"
+        }
+    },
+    {
+        "name": "BAR_SILVER",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"silver\"}}"
+        }
+    },
+    {
+        "name": "BAR_COPPER",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"copper\"}}"
+        }
+    },
+    {
+        "name": "BAR_BRONZE",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}"
+        }
+    },
+    {
+        "name": "BAR_IRON",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+        }
+    },
+    {
+        "name": "BAR_PIG_IRON",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"pig_iron\"}}"
+        }
+    },
+    {
+        "name": "BAR_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_ENCRUSTED",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"encrusted\"}}"
+        }
+    },
+    {
+        "name": "BAR_BLACK_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"black_steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_BLUE_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"blue_steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_RED_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"red_steel\"}}"
+        }
+    },
+    {
+        "name": "BAR_COMPOSITE_ALLOY",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:bar",
+            "nbt": "{mf_custom_materials:{main_material:\"composite_alloy\"}}"
+        }
+    },
+    {
+        "name": "HUNK_BRONZE",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"bronze\"}}"
+        }
+    },
+    {
+        "name": "HUNK_IRON",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+        }
+    },
+    {
+        "name": "HUNK_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+        }
+    },
+    {
+        "name": "HUNK_OBSIDIAN",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"obsidian\"}}"
+        }
+    },
+    {
+        "name": "HUNK_BLACK_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"black_steel\"}}"
+        }
+    },
+    {
+        "name": "HUNK_BLUE_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"blue_steel\"}}"
+        }
+    },
+    {
+        "name": "HUNK_RED_STEEL",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"red_steel\"}}"
+        }
+    },
+    {
+        "name": "HUNK_TUNGSTEN",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:metal_hunk",
+            "nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}"
+        }
+    },
+    {
+        "name": "PLATE_IRON",
+        "ingredient": {
+            "type": "minecraft:item_nbt",
+            "item": "minefantasyreforged:plate",
+            "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+        }
+    }
+]

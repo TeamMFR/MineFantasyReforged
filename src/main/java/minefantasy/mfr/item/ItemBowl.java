@@ -44,7 +44,7 @@ public class ItemBowl extends ItemComponentMFR {
 					return super.onItemUseFirst(player, world, pos, side, hitX, hitY, hitZ, hand);
 				}
 
-				if (isWaterSource(world, rayTraceResult.getBlockPos())) {
+				if (isSaltWaterSource(world, rayTraceResult.getBlockPos())) {
 					gather(item, hand, world, player);
 					return EnumActionResult.SUCCESS;
 				}
@@ -64,7 +64,7 @@ public class ItemBowl extends ItemComponentMFR {
 		}
 	}
 
-	private boolean isWaterSource(World world, BlockPos pos) {
+	private boolean isSaltWaterSource(World world, BlockPos pos) {
 		if (world.getBlockState(pos).getMaterial() != Material.WATER) {
 			return false;
 		}

@@ -85,6 +85,10 @@ public class GuiHelper {
 		if (s.equalsIgnoreCase("tanner")) {
 			return new int[] {width * 2, height * 2};
 		}
+
+		if (s.equalsIgnoreCase("kitchen_bench")) {
+			return new int[] {width * 3, height * 2};
+		}
 		return new int[] {0, 0};
 	}
 

@@ -85,6 +85,7 @@ import minefantasy.mfr.item.ItemTrow;
 import minefantasy.mfr.item.ItemUnfinishedFood;
 import minefantasy.mfr.item.ItemWaraxe;
 import minefantasy.mfr.item.ItemWarhammer;
+import minefantasy.mfr.item.ItemWashCloth;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.item.ItemWoodComponent;
 import minefantasy.mfr.item.ItemWorldGenPlacer;
@@ -355,6 +356,7 @@ public class MineFantasyItems {
 	public static ItemBasicCraftTool STANDARD_SPOON = Utils.nullValue();
 	public static ItemBasicCraftTool STANDARD_MALLET = Utils.nullValue();
 	public static ItemSpanner STANDARD_SPANNER = Utils.nullValue();
+	public static ItemWashCloth WASH_CLOTH_WOOL = Utils.nullValue();
 	public static ItemBowMFR STANDARD_BOW = Utils.nullValue();
 	public static ItemArrowMFR STANDARD_ARROW = Utils.nullValue();
 	public static ItemArrowMFR STANDARD_BOLT = Utils.nullValue();
@@ -1467,6 +1469,8 @@ public class MineFantasyItems {
 		STANDARD_MALLET = (ItemBasicCraftTool) new ItemBasicCraftTool(standard + "_mallet", Tool.MALLET, 0, 64).setCustom(standard).setCreativeTab(tab);
 		STANDARD_SPANNER = (ItemSpanner) new ItemSpanner(standard + "_spanner", 0, 0).setCustom(standard).setCreativeTab(tab);
 
+		WASH_CLOTH_WOOL = new ItemWashCloth("wash_cloth_wool", 1).setMaxUses(6);
+
 		tab = MineFantasyTabs.tabArchery;
 		STANDARD_BOW = (ItemBowMFR) new ItemBowMFR(standard + "_bow", EnumBowType.SHORTBOW).setCustom(standard).setCreativeTab(tab);
 		STANDARD_BOLT = (ItemArrowMFR) new ItemArrowMFR(standard, ArrowType.BOLT, 20).setCustom().setAmmoType("bolt").setCreativeTab(tab);
@@ -1869,6 +1873,8 @@ public class MineFantasyItems {
 		registry.register(SPAWNER_MINOTAUR);
 		registry.register(SPAWNER_HOUND);
 		registry.register(SPAWNER_COGWORK);
+
+		registry.register(WASH_CLOTH_WOOL);
 	}
 
 	public static void loadTool() {

@@ -35,6 +35,7 @@ import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.recipe.CraftingManagerKitchenBench;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
@@ -48,7 +49,6 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -60,6 +60,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -74,6 +75,7 @@ public class MineFantasyReforged {
 	@Mod.Instance
 	public static MineFantasyReforged INSTANCE;
 
+	@SideOnly(Side.CLIENT)
 	public static ConfigClient configClient;
 	public static ConfigArmour configArmour;
 	public static ConfigSpecials configSpecials;
@@ -105,7 +107,7 @@ public class MineFantasyReforged {
 	public void preInit(FMLPreInitializationEvent preEvent) {
 		NetworkHandler.INSTANCE.registerNetwork();
 
-		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+		if (preEvent.getSide() == Side.CLIENT) {
 			configClient = new ConfigClient("Client");
 		}
 		configArmour = new ConfigArmour("Armours");
@@ -172,6 +174,7 @@ public class MineFantasyReforged {
 		CraftingManagerQuern.loadRecipes();
 		CraftingManagerTanner.loadRecipes();
 		CraftingManagerRoast.loadRecipes();
+		CraftingManagerKitchenBench.loadRecipes();
 
 		PROXY.init();
 	}
@@ -197,7 +200,9 @@ public class MineFantasyReforged {
 		MineFantasyOreDict.registerOreDictCommonIngotEntry();
 		MineFantasyItems.addRandomDrops();
 
-		configClient.save();
+		if (postEvent.getSide() == Side.CLIENT) {
+			configClient.save();
+		}
 		configArmour.save();
 		configSpecials.save();
 		configHardcore.save();
@@ -237,6 +242,7 @@ public class MineFantasyReforged {
 		CraftingManagerQuern.init();
 		CraftingManagerTanner.init();
 		CraftingManagerRoast.init();
+		CraftingManagerKitchenBench.init();
 	}
 
 	@SubscribeEvent

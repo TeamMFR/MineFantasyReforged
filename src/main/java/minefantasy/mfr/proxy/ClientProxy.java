@@ -16,6 +16,7 @@ import minefantasy.mfr.client.render.block.TileEntityBellowsRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.client.render.block.TileEntityBombPressRenderer;
 import minefantasy.mfr.client.render.block.TileEntityComponentRenderer;
+import minefantasy.mfr.client.render.block.TileEntityKitchenBenchRenderer;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.client.render.block.TileEntityRackRenderer;
 import minefantasy.mfr.client.render.block.TileEntityRoastRenderer;
@@ -53,6 +54,7 @@ import minefantasy.mfr.tile.TileEntityBellows;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import minefantasy.mfr.tile.TileEntityBombPress;
 import minefantasy.mfr.tile.TileEntityComponent;
+import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.tile.TileEntityQuern;
 import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.tile.TileEntityRoast;
@@ -159,6 +161,7 @@ public class ClientProxy extends ClientProxyBase {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityAnvil.class, new TileEntityAnvilRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRack.class, new TileEntityRackRenderer<>());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityComponent.class, new TileEntityComponentRenderer<>());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityKitchenBench.class, new TileEntityKitchenBenchRenderer<>());
 	}
 
 	public void registerEntityRenderer() {

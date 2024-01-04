@@ -1,0 +1,6 @@
+﻿{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "minefantasyreforged:items/wash_cloth_dry_1"
+    }
+}

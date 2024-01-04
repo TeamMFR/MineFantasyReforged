@@ -14,7 +14,7 @@ import java.util.Random;
 /**
  * <i>"Don't waste time spawning particles manually - let {@code ParticleBuilder} do the work for you!"</i>
  * <p></p>
- * Singleton class that builds wizardry particles. This is an alternative (and neater, I think) solution to vanilla's
+ * Singleton class that builds particles. This is an alternative (and neater, I think) solution to vanilla's
  * varargs-based system. All building methods are chainable, so particles can be created using only one line of code,
  * similar to how {@code BufferBuilder} is used for drawing vertices. This class replaces the particle spawning methods
  * in wizardry's proxies.

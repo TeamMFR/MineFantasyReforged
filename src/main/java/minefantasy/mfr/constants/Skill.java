@@ -55,6 +55,11 @@ public enum Skill {
 		return (int) Math.floor(10F * (1.0F + (rise * (level - 1))));
 	}
 
+	/**
+	 * Get the current xp and max xp of the given skill
+	 * @param player the player to get the skill stats from
+	 * @return an int array where the first element is the current xp of the skill, and the second element is the max xp of the current level
+	 */
 	public int[] getXP(EntityPlayer player) {
 		NBTTagCompound skill = RPGElements.getSkill(player, unlocalizedName);
 

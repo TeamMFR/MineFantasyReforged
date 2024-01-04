@@ -1,0 +1,25 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "none",
+  "research": "commodities",
+  "tool_type": "needle",
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": -1,
+  "experience": 2,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "T",
+    "T",
+    "T"
+  ],
+  "key": {
+    "T": {
+      "item": "minefantasyreforged:thread"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:wash_cloth_wool",
+    "data": 3
+  }
+}

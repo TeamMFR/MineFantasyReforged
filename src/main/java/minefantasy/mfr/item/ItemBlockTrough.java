@@ -4,9 +4,9 @@ import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockTrough;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.tile.TileEntityTrough;
+import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -91,7 +91,7 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 					return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
 				}
 
-				if (isWaterSource(world, hit)) {
+				if (BlockUtils.isWaterSource(world, hit)) {
 					gather(player);
 					world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + rand.nextFloat() / 4F, 0.5F + rand.nextFloat());
 					return EnumActionResult.FAIL;
@@ -102,7 +102,7 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 	}
 
 	private void gather(EntityPlayer player) {
-		ItemStack item = player.getHeldItem(EnumHand.MAIN_HAND);
+		ItemStack item = player.getHeldItemMainhand();
 		if (!item.isEmpty()) {
 			int tier = 0;
 			CustomMaterial material = CustomMaterial.getMaterialFor(item, CustomToolHelper.slot_main);
@@ -121,12 +121,5 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 			item.setTagCompound(new NBTTagCompound());
 		}
 		return item.getTagCompound();
-	}
-
-	private boolean isWaterSource(World world, BlockPos pos) {
-		if (world.getBlockState(pos).getMaterial() == Material.WATER) {
-			return true;
-		}
-		return false;
 	}
 }
