@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -86,9 +87,10 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 	}
 
 	@Override
-	public Object[] getSalvage(ItemStack item) {
-		return new Object[] {MineFantasyItems.BOMB_CASING_ARROW,
+	public List<ItemStack> getSalvage(ItemStack item) {
+		return Lists.newArrayList(
+				new ItemStack(MineFantasyItems.BOMB_CASING_ARROW),
 				ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
-				ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)),};
+				ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)));
 	}
 }

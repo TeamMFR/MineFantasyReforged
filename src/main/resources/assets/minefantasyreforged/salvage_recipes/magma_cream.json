@@ -1,0 +1,14 @@
+{
+    "type": "salvage_recipe",
+    "input": {
+        "item": "minecraft:magma_cream"
+    },
+    "outputs": [
+        {
+            "item": "minecraft:slime_ball"
+        },
+        {
+            "item": "minecraft:blaze_powder"
+        }
+    ]
+}

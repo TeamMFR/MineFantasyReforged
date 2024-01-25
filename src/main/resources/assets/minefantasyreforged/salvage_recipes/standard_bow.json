@@ -1,0 +1,34 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_bow"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:string",
+			"count": 3
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_bow"
+		},
+		{
+			"item": "minefantasyreforged:ornate_bow"
+		}
+	]
+}

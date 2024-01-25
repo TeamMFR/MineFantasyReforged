@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:prepared_coal"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:redstone",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:coal",
+			"data": 0,
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:flux_strong"
+		}
+	]
+}

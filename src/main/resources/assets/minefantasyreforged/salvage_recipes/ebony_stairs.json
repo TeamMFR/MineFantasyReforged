@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:ebony_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:ebony_planks_slab"
+		}
+	]
+}

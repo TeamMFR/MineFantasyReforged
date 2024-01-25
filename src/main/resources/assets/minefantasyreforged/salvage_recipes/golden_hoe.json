@@ -1,0 +1,18 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:golden_hoe"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:gold_ingot",
+			"count": 2
+		}
+	]
+}

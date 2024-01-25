@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:jungle_fence"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:planks",
+			"data": 3
+		},
+		{
+			"item": "minecraft:stick"
+		}
+	]
+}

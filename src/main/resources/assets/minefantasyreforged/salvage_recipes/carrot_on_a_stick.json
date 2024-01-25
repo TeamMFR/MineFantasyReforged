@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:carrot_on_a_stick"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:fishing_rod"
+		},
+		{
+			"item": "minecraft:carrot"
+		}
+	]
+}

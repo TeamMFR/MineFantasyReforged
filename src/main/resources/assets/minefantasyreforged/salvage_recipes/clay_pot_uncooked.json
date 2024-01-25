@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:clay_pot_uncooked"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:clay_ball"
+		}
+	]
+}

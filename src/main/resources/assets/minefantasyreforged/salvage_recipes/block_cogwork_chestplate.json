@@ -1,0 +1,26 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:block_cogwork_chestplate"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_frame",
+			"count": 5
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 6
+		},
+		{
+			"item": "minecraft:furnace"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:cogwork_shaft",
+			"count": 4
+		}
+	]
+}

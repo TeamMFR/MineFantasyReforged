@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:spruce_fence"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stick"
+		},
+		{
+			"item": "minecraft:planks",
+			"data": 1
+		}
+	]
+}

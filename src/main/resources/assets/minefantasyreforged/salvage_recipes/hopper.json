@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:hopper"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:iron_ingot",
+			"count": 5
+		},
+		{
+			"item": "minecraft:chest"
+		}
+	]
+}

@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:stone_sword"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:vine"
+		},
+		{
+			"item": "minecraft:stick"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:sharp_rock",
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:hinge"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"item": "minefantasyreforged:rivet"
+		}
+	]
+}

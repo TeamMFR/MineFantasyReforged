@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:stonebrick",
+		"data": 3
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stone_slab",
+			"data": 5,
+			"count": 2
+		}
+	]
+}

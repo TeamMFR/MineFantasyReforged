@@ -1,0 +1,18 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:banner",
+		"data": 9
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stick"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:wool",
+			"data": 6,
+			"count": 6
+		}
+	]
+}

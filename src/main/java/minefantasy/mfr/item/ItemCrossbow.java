@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import com.google.common.collect.Lists;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.api.archery.IDisplayMFRAmmo;
@@ -31,6 +32,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -427,12 +429,17 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	}
 
 	@Override
-	public Object[] getSalvage(ItemStack item) {
-		return new Object[]{getItem(item, "stock"), getItem(item, "mechanism"), getItem(item, "muzzle"), getItem(item, "mod")};
+	public List<ItemStack> getSalvage(ItemStack item) {
+		return Lists.newArrayList(
+				new ItemStack(getItem(item, "stock")),
+				new ItemStack(getItem(item, "mechanism")),
+				new ItemStack(getItem(item, "muzzle")),
+				new ItemStack(getItem(item, "mod"))
+		);
 	}
 
-	public Object getItem(ItemStack item, String type) {
-		return ItemCrossbowPart.getPart(type, getPart(type, item));
+	public Item getItem(ItemStack item, String type) {
+		return (Item) ItemCrossbowPart.getPart(type, getPart(type, item));
 	}
 
 	@Override

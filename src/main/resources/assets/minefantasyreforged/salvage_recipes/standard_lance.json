@@ -1,0 +1,26 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_lance"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"count": 8
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_lance"
+		},
+		{
+			"item": "minefantasyreforged:ornate_lance"
+		}
+	]
+}

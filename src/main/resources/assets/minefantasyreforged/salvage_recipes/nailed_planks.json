@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:nailed_planks"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:nail"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"nbt": "{mf_custom_materials:{main_material:\"oak_wood\"}}",
+			"count": 4
+		}
+	]
+}

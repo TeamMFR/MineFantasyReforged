@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:wooden_button"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:planks",
+			"data": 0
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:stud_leather_chestplate"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:strong_leather_chestplate"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		}
+	]
+}

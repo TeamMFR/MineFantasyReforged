@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_arrow_bodkin"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:fletching"
+		},
+		{
+			"item": "minefantasyreforged:bodkin_head"
+		}
+	]
+}

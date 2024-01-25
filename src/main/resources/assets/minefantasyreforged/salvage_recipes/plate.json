@@ -1,0 +1,18 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:plate"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:flux",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"count": 2
+		}
+	]
+}

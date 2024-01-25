@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:tungsten_gears"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:bronze_gears"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}",
+			"count": 4
+		}
+	]
+}

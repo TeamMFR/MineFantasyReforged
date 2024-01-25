@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:end_rod"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:blaze_rod"
+		},
+		{
+			"item": "minecraft:chorus_fruit_popped"
+		}
+	]
+}

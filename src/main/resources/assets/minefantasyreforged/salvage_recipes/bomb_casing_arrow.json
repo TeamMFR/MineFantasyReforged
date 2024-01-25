@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bomb_casing_arrow"
+	},
+	"outputs": [
+		{
+			"item": "#TIMBER_REFINED"
+		},
+		{
+			"item": "minefantasyreforged:fletching"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:redstone",
+			"count": 2
+		}
+	]
+}

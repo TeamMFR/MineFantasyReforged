@@ -1,0 +1,21 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:strong_leather_chestplate"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:rough_leather_chestplate"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:leather",
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:spruce_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:planks",
+			"data": 1
+		}
+	]
+}

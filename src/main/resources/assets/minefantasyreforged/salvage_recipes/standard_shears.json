@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_shears"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"count": 2
+		},
+		{
+			"item": "minecraft:leather",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"count": 2
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_shears"
+		},
+		{
+			"item": "minefantasyreforged:ornate_shears"
+		}
+	]
+}

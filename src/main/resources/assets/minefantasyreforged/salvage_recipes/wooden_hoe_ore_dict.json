@@ -1,0 +1,26 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:wooden_hoe"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:ore_dict_count",
+			"ore": "stickWood",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:ore_dict_count",
+			"ore": "plankWood",
+			"count": 2
+		}
+	],
+	"conditions" : [
+		{
+			"type": "minefantasyreforged:should_salvage_pick_from_list",
+			"value": {
+				"type": "minefantasyreforged:should_salvage_pick_from_list"
+			}
+		}
+	]
+}

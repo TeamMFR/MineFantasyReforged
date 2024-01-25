@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_plate_helmet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:plate",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:padded_helmet"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_plate_helmet"
+		},
+		{
+			"item": "minefantasyreforged:ornate_plate_helmet"
+		}
+	]
+}

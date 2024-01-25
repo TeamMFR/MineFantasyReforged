@@ -1,0 +1,20 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:padded_chestplate"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:rough_leather_chestplate"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		}
+	]
+}

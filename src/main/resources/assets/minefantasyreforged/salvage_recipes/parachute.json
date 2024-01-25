@@ -1,0 +1,27 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:parachute"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:wool",
+			"data": 0,
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 4
+		},
+		{
+			"item": "minecraft:leather"
+		}
+	]
+}

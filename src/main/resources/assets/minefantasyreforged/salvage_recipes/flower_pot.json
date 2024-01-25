@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:flower_pot"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:brick",
+			"count": 3
+		}
+	]
+}

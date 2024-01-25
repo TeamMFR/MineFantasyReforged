@@ -1,0 +1,20 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:salvage_basic"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:crafting_table"
+		},
+		{
+			"item": "minecraft:flint"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stone",
+			"data": 0,
+			"count": 2
+		}
+	]
+}

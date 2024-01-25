@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_splint_boots"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:padded_boots"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:splint_mesh",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_splint_boots"
+		},
+		{
+			"item": "minefantasyreforged:ornate_splint_boots"
+		}
+	]
+}

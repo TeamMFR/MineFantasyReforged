@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bomb_casing_crystal"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:redstone",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:diamond_shards"
+		}
+	]
+}

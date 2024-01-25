@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:persistent_component_flag"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 8
+		}
+	]
+}

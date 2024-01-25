@@ -1,0 +1,23 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:timber_pane"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber_cut",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bomb_casing_obsidian"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:rivet"
+		},
+		{
+			"item": "#HUNK_OBSIDIAN"
+		},
+		{
+			"item": "minecraft:obsidian"
+		}
+	]
+}

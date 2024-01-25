@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:redstone_torch"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:redstone"
+		},
+		{
+			"item": "minecraft:stick",
+			"count": 2
+		}
+	]
+}

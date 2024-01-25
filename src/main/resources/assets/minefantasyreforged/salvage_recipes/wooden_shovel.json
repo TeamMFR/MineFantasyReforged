@@ -1,0 +1,27 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:wooden_shovel"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:planks",
+			"data": 0,
+			"count": 1
+		}
+	],
+	"conditions" : [
+		{
+			"type": "forge:not",
+			"value": {
+				"type": "minefantasyreforged:should_salvage_pick_from_list"
+			}
+		}
+	]
+}

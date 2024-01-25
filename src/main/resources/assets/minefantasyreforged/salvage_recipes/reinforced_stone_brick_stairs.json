@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:reinforced_stone_brick_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:reinforced_stone_bricks_slab"
+		}
+	]
+}

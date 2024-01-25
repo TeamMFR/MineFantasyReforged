@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:arrowhead"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:metal_hunk"
+		}
+	]
+}

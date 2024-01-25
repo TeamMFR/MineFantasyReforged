@@ -1,0 +1,21 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:enchanting_table"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:obsidian",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:diamond",
+			"count": 2
+		},
+		{
+			"item": "minecraft:book"
+		}
+	]
+}

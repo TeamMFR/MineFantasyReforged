@@ -1,0 +1,23 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:block_cogwork_legs"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:cogwork_shaft",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_frame",
+			"count": 5
+		}
+	]
+}

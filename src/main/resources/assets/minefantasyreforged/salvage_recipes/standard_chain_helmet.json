@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_chain_helmet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:chain_mesh",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:strong_leather_helmet"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_chain_helmet"
+		},
+		{
+			"item": "minefantasyreforged:ornate_chain_helmet"
+		}
+	]
+}

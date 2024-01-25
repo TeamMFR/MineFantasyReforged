@@ -1,0 +1,24 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:ornate_items"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"silver\"}}",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"gold\"}}",
+			"count": 2
+		},
+		{
+			"item": "minecraft:dye",
+			"data": 4
+		}
+	]
+}

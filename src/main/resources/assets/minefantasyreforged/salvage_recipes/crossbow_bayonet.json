@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crossbow_bayonet"
+	},
+	"outputs": [
+		{
+			"item": "#TIMBER_OAK_WOOD"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"tin\"}}",
+			"count": 4
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:stone_button"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stone",
+			"data": 0
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:ender_chest"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:obsidian",
+			"count": 8
+		},
+		{
+			"item": "minecraft:ender_eye"
+		}
+	]
+}

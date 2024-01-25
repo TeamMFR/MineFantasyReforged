@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:diamond_leggings"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:diamond",
+			"count": 7
+		}
+	]
+}

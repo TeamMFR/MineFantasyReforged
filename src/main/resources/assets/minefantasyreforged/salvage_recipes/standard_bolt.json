@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_bolt"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:fletching"
+		},
+		{
+			"item": "minefantasyreforged:metal_hunk"
+		}
+	]
+}

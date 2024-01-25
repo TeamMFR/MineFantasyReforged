@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:oven"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stone",
+			"data": 0
+		},
+		{
+			"item": "minefantasyreforged:stove"
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bar",
+		"nbt": "{mf_custom_materials:{main_material:\"encrusted\"}}"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:diamond_shards"
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+		}
+	]
+}

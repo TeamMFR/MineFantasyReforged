@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_spade"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:bar"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"count": 2
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_spade"
+		},
+		{
+			"item": "minefantasyreforged:ornate_spade"
+		}
+	]
+}

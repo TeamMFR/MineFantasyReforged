@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:mine_casing_crystal"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:heavy_weighted_pressure_plate"
+		},
+		{
+			"item": "minefantasyreforged:diamond_shards"
+		},
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:redstone",
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:prismarine",
+		"data": 0
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:prismarine_shard",
+			"count": 4
+		}
+	]
+}

@@ -1,0 +1,6 @@
+{
+    "conditions": {
+        "should_salvage_pick_from_list": "minefantasy.mfr.recipe.factories.SalvageShouldPickFromList",
+        "remove_craft_flint_and_steel": "minefantasy.mfr.recipe.factories.HCCremoveCraftFlintAndSteel"
+    }
+}

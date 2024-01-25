@@ -1,0 +1,17 @@
+{
+    "type": "salvage_recipe",
+    "input": {
+        "item": "minecraft:dark_oak_fence"
+    },
+    "outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:planks",
+			"data": 5,
+			"count": 1
+		},
+        {
+            "item": "minecraft:stick"
+        }
+    ]
+}

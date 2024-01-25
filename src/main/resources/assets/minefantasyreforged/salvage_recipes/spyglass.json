@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:spyglass",
+		"data": 0
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:bronze_gears"
+		},
+		{
+			"item": "minefantasyreforged:steel_tube"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bolt",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:glass",
+			"count": 2
+		}
+	]
+}

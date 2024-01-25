@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:firepit"
+	},
+	"outputs": [
+		{
+			"item": "#TIMBER_SCRAP_WOOD"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 2
+		}
+	]
+}

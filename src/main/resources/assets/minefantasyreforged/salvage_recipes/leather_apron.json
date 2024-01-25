@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:leather_apron"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:coal",
+			"data": 0
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:leather",
+			"count": 3
+		}
+	]
+}

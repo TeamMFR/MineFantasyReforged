@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import com.google.common.collect.Lists;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.entity.EntityBomb;
@@ -273,12 +274,13 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	@Override
-	public Object[] getSalvage(ItemStack item) {
-		return new Object[] {
+	public List<ItemStack> getSalvage(ItemStack item) {
+		return Lists.newArrayList(
 				ItemBombComponent.getBombComponent("bombcase", getCasing(item)),
 				ItemBombComponent.getBombComponent("fuse", getFuse(item)),
 				ItemBombComponent.getBombComponent("powder", getPowder(item)),
-				ItemBombComponent.getBombComponent("filling", getFilling(item))};
+				ItemBombComponent.getBombComponent("filling", getFilling(item))
+		);
 	}
 
 	public String getItemFuse(String fuse) {

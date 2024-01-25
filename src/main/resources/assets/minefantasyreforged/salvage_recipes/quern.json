@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:quern"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:flint",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stone",
+			"data": 0,
+			"count": 4
+		}
+	]
+}

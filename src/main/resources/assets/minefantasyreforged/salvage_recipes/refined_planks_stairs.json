@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:refined_planks_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:nail"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}",
+			"count": 3
+		}
+	]
+}

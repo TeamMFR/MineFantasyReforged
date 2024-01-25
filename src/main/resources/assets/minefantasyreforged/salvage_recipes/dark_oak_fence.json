@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:dark_oak_fence"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:planks",
+			"data": 5
+		},
+		{
+			"item": "minecraft:stick"
+		}
+	]
+}

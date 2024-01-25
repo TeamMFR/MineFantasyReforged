@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:limestone_road_block"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:limestone_road"
+		}
+	]
+}

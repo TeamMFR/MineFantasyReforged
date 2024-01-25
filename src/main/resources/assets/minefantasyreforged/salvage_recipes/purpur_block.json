@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:purpur_block"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:chorus_fruit_popped"
+		}
+	]
+}

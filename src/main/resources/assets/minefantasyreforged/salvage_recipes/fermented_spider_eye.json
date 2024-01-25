@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:fermented_spider_eye"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:spider_eye"
+		},
+		{
+			"item": "minecraft:brown_mushroom"
+		},
+		{
+			"item": "minecraft:sugar"
+		}
+	]
+}

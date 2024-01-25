@@ -1,0 +1,27 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:repair_kit_basic"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"item": "minecraft:flint"
+		},
+		{
+			"item": "minefantasyreforged:nail"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		},
+		{
+			"item": "minecraft:leather"
+		}
+	]
+}

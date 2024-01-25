@@ -1,0 +1,14 @@
+{
+    "type": "salvage_recipe",
+    "input": {
+        "item": "minecraft:nether_brick_fence"
+    },
+    "outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:nether_brick",
+			"data": 0,
+			"count": 2
+		}
+    ]
+}

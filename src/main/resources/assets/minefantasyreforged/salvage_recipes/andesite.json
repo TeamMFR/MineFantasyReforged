@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:stone",
+		"data": 5
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stone",
+			"data": 3
+		},
+		{
+			"item": "minecraft:cobblestone"
+		}
+	]
+}

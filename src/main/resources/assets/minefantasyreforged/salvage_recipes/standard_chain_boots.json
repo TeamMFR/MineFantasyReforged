@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_chain_boots"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:chain_mesh",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:strong_leather_boots"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_chain_boots"
+		},
+		{
+			"item": "minefantasyreforged:ornate_chain_boots"
+		}
+	]
+}

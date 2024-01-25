@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:black_steel_bars"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"black_steel\"}}",
+			"count": 4
+		}
+	]
+}

@@ -1,0 +1,26 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:stone_sword"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 1
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:cobblestone",
+			"count": 2
+		}
+	],
+	"conditions" : [
+		{
+			"type": "forge:not",
+			"value": {
+				"type": "minefantasyreforged:should_salvage_pick_from_list"
+			}
+		}
+	]
+}

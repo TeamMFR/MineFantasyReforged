@@ -1,0 +1,28 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:block_cogwork_helm"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_frame",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:ender_eye",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:cogwork_shaft",
+			"count": 2
+		}
+	]
+}

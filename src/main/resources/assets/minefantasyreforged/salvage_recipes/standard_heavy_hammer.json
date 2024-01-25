@@ -1,0 +1,30 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_heavy_hammer"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:timber"
+		},
+		{
+			"item": "minefantasyreforged:rivet"
+		},
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"count": 3
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_heavy_hammer"
+		},
+		{
+			"item": "minefantasyreforged:ornate_heavy_hammer"
+		}
+	]
+}

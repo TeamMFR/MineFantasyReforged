@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:dark_oak_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:wooden_slab",
+			"data": 5
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:golden_rail"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:gold_ingot"
+		},
+		{
+			"item": "minecraft:stick"
+		},
+		{
+			"item": "minecraft:redstone"
+		}
+	]
+}

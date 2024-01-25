@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bomb_fuse_long"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bomb_fuse",
+			"count": 2
+		},
+		{
+			"item": "minecraft:redstone"
+		}
+	]
+}

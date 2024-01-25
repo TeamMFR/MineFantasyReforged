@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_spoon"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stick"
+		},
+		{
+			"item": "minefantasyreforged:timber"
+		}
+	]
+}

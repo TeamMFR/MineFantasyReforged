@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bar",
+		"nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:coal_dust"
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"pig_iron\"}}"
+		}
+	]
+}

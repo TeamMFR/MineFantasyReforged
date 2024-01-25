@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:chimney_stone_wide"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:chimney_stone_thin"
+		},
+		{
+			"item": "minecraft:stone",
+			"data": 0
+		}
+	]
+}

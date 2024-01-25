@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:iron_frame"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
+			"count": 4
+		}
+	]
+}

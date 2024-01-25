@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:tanner_metal"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:iron_frame"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bolt",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_strut",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bronze_gears",
+			"count": 3
+		},
+		{
+			"item": "minecraft:lever"
+		}
+	]
+}

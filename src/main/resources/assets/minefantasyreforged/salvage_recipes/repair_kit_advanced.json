@@ -1,0 +1,21 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:repair_kit_advanced"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:string",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:slime_ball",
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:repair_kit_basic"
+		}
+	]
+}

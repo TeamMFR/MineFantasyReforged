@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bomb_crude"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:paper"
+		},
+		{
+			"item": "minefantasyreforged:thread"
+		},
+		{
+			"item": "minefantasyreforged:blackpowder"
+		}
+	]
+}

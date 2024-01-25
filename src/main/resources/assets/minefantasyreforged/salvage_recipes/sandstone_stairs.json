@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:sandstone_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:stone_slab",
+			"data": 1
+		}
+	]
+}

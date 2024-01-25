@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:golden_apple",
+		"data": 0
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:gold_ingot",
+			"count": 8
+		},
+		{
+			"item": "minecraft:apple"
+		}
+	]
+}

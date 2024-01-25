@@ -14,7 +14,7 @@
   ],
   "key": {
     "S": {
-      "item": "minecraft:stick"
+      "item": "#STICK_WOOD"
     },
     "W": {
       "item": "minecraft:wool",

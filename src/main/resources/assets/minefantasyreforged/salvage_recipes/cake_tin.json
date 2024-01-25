@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:cake_tin"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:rivet"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+			"count": 3
+		}
+	]
+}

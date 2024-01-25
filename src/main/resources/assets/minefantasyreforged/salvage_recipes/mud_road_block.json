@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:mud_road_block"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:mud_road"
+		}
+	]
+}

@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:flint_and_steel"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
+			"count": 2
+		},
+		{
+			"item": "minecraft:flint"
+		},
+		{
+			"item": "minecraft:coal",
+			"data": 0
+		}
+	],
+	"conditions" : [
+		{
+			"type": "minefantasyreforged:remove_craft_flint_and_steel",
+			"value": {
+				"type": "minefantasyreforged:remove_craft_flint_and_steel"
+			}
+		}
+	]
+}

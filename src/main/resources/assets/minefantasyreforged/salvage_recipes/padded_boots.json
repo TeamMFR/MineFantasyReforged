@@ -1,0 +1,20 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:padded_boots"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		},
+		{
+			"item": "minefantasyreforged:rough_leather_boots"
+		}
+	]
+}

@@ -1,0 +1,20 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:magma_cream_refined"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:magma_cream"
+		},
+		{
+			"item": "minefantasyreforged:dragon_heart"
+		},
+		{
+			"item": "minecraft:blaze_powder"
+		},
+		{
+			"item": "minefantasyreforged:clay_pot"
+		}
+	]
+}

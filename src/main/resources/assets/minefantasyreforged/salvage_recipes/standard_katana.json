@@ -1,0 +1,32 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_katana"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:leather_strip",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:rivet"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"count": 6
+		},
+		{
+			"item": "minefantasyreforged:timber"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_katana"
+		},
+		{
+			"item": "minefantasyreforged:ornate_katana"
+		}
+	]
+}

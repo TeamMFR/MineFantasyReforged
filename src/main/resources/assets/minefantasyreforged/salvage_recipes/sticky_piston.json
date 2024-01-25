@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:piston"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:piston"
+		},
+		{
+			"item": "minecraft:slime_ball"
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:armor_stand"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 6
+		},
+		{
+			"item": "minecraft:stone_slab",
+			"data": 0
+		}
+	]
+}

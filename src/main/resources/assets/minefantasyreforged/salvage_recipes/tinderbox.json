@@ -1,0 +1,23 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:tinderbox"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:flint"
+		},
+		{
+			"item": "#BAR_IRON"
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 2
+		}
+	]
+}

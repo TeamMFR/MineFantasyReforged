@@ -49,6 +49,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipeCategories(new JEIRoastRecipeCategory(registry, guiHelper, 0, MineFantasyBlocks.OVEN, "oven"));
 		registry.addRecipeCategories(new JEIRoastRecipeCategory(registry, guiHelper, 56, MineFantasyBlocks.STOVE, "stovetop"));
 		registry.addRecipeCategories(new JEIKitchenBenchRecipeCategory(registry));
+		registry.addRecipeCategories(new JEISalvageRecipeCategory(registry));
 		// TODO: same for anvil, salvage, ...
 	}
 
@@ -82,6 +83,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipes(JEIRoastRecipeCategory.generateRecipes(stackHelper, true), "minefantasyreforged:oven");
 		registry.addRecipes(JEIRoastRecipeCategory.generateRecipes(stackHelper, false), "minefantasyreforged:stovetop");
 		registry.addRecipes(JEIKitchenBenchRecipeCategory.generateRecipes(stackHelper), JEIKitchenBenchRecipeCategory.UID);
+		registry.addRecipes(JEISalvageRecipeCategory.generateRecipes(stackHelper), JEISalvageRecipeCategory.UID);
 	}
 
 	@Override

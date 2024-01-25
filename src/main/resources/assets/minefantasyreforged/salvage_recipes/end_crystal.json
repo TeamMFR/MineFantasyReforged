@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:end_crystal"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:ghast_tear"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:glass",
+			"count": 7
+		},
+		{
+			"item": "minecraft:ender_eye"
+		}
+	]
+}

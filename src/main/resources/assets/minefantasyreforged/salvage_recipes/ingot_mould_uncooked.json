@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:ingot_mould_uncooked"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:clay_ball",
+			"count": 4
+		}
+	]
+}

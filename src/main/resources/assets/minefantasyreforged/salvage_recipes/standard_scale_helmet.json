@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_scale_helmet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:strong_leather_helmet"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:scale_mesh",
+			"count": 4
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_scale_helmet"
+		},
+		{
+			"item": "minefantasyreforged:ornate_scale_helmet"
+		}
+	]
+}

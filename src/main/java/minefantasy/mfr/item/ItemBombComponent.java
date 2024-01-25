@@ -33,8 +33,8 @@ public class ItemBombComponent extends ItemBaseMFR implements IBombComponent, IS
 		setCreativeTab(MineFantasyTabs.tabMaterials);
 	}
 
-	public static Item getBombComponent(String name, String tier) {
-		return components.get(name + tier);
+	public static ItemStack getBombComponent(String name, String tier) {
+		return new ItemStack(components.get(name + tier));
 	}
 
 	@Override

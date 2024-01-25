@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crossbow_ammo"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:tungsten_gears"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"nbt": "{mf_custom_materials:{main_material:\"oak_wood\"}}",
+			"count": 7
+		}
+	]
+}

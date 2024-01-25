@@ -38,15 +38,23 @@ import minefantasy.mfr.recipe.CraftingManagerCarpenter;
 import minefantasy.mfr.recipe.CraftingManagerKitchenBench;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
+import minefantasy.mfr.recipe.CraftingManagerSalvage;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.recipe.RecipeRemover;
+import minefantasy.mfr.recipe.SalvageRecipeExporter;
+import minefantasy.mfr.recipe.ingredients.IngredientCount;
+import minefantasy.mfr.recipe.ingredients.IngredientOreCount;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
 import minefantasy.mfr.registry.WoodMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
 import minefantasy.mfr.world.gen.feature.WorldGenGeological;
 import minefantasy.mfr.world.gen.structure.WorldGenStructure;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.IIngredientFactory;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -165,6 +173,8 @@ public class MineFantasyReforged {
 		GameRegistry.registerWorldGenerator(new WorldGenGeological(), 5);
 		GameRegistry.registerWorldGenerator(new WorldGenStructure(), 5);
 
+		registerIngredients();
+
 		CraftingManagerAnvil.loadRecipes();
 		CraftingManagerCarpenter.loadRecipes();
 		CraftingManagerBigFurnace.loadRecipes();
@@ -175,6 +185,7 @@ public class MineFantasyReforged {
 		CraftingManagerTanner.loadRecipes();
 		CraftingManagerRoast.loadRecipes();
 		CraftingManagerKitchenBench.loadRecipes();
+		CraftingManagerSalvage.loadRecipes();
 
 		PROXY.init();
 	}
@@ -192,6 +203,8 @@ public class MineFantasyReforged {
 		MineFantasyKnowledgeList.init();
 		MineFantasyKnowledgeList.ArtefactListMFR.init();
 		BasicRecipesMF.init();
+		SalvageRecipeExporter exporter = new SalvageRecipeExporter();
+//		exporter.exportRecipes();
 		RecipeRemover.removeSmeltingRecipes();
 
 		MetalMaterial.addHeatables();
@@ -243,6 +256,12 @@ public class MineFantasyReforged {
 		CraftingManagerTanner.init();
 		CraftingManagerRoast.init();
 		CraftingManagerKitchenBench.init();
+		CraftingManagerSalvage.init();
+	}
+
+	public static void registerIngredients() {
+		CraftingHelper.register(new ResourceLocation(MOD_ID, "item_count"), (IIngredientFactory) (c, j) -> new IngredientCount(CraftingHelper.getItemStack(j, c)));
+		CraftingHelper.register(new ResourceLocation(MOD_ID, "ore_dict_count"), (IIngredientFactory) (c, j) -> new IngredientOreCount(JsonUtils.getString(j, "ore"), JsonUtils.getInt(j, "count", 1)));
 	}
 
 	@SubscribeEvent

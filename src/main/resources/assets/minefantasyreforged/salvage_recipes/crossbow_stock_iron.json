@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crossbow_stock_iron"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_strut",
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:crossbow_stock_wood"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bolt",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:tungsten_gears",
+			"count": 2
+		},
+		{
+			"item": "minecraft:obsidian"
+		}
+	]
+}

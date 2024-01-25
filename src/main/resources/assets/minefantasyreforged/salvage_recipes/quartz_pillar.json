@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:quartz_block",
+		"data": 2
+	},
+	"outputs": [
+		{
+			"item": "minecraft:quartz_block",
+			"data": 0
+		}
+	]
+}

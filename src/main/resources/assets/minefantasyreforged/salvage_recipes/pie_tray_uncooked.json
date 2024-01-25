@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:pie_tray_uncooked"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:clay_ball",
+			"count": 2
+		}
+	]
+}

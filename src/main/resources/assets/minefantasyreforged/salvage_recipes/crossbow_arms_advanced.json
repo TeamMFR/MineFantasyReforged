@@ -1,0 +1,24 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crossbow_arms_advanced"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:tungsten_gears"
+		},
+		{
+			"item": "minefantasyreforged:crossbow_arms_basic"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:steel_tube",
+			"count": 3
+		}
+	]
+}

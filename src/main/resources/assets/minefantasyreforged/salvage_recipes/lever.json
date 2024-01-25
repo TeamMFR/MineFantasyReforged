@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:lever"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:cobblestone"
+		},
+		{
+			"item": "minecraft:stick"
+		}
+	]
+}

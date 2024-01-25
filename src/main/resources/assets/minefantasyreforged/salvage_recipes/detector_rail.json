@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:detector_rail"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		{
+			"item": "minecraft:redstone"
+		}
+	]
+}

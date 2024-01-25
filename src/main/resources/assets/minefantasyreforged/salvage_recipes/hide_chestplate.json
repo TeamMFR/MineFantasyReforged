@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:hide_chestplate"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:hide_large"
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		}
+	]
+}

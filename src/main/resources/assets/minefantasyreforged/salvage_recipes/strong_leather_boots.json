@@ -1,0 +1,21 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:strong_leather_boots"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:rough_leather_boots"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:leather",
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:hide_boots"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		},
+		{
+			"item": "minefantasyreforged:hide_small"
+		}
+	]
+}

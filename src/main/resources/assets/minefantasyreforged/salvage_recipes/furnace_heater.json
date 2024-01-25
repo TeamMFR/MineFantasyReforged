@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:furnace_heater"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:plate",
+			"nbt": "{mf_custom_materials:{main_material:\"iron\"}}",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:firebricks"
+		},
+		{
+			"item": "minefantasyreforged:forge_stone"
+		}
+	]
+}

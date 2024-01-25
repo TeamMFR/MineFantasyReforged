@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:syringe_empty"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:glass_bottle"
+		},
+		{
+			"item": "minefantasyreforged:steel_tube"
+		}
+	]
+}

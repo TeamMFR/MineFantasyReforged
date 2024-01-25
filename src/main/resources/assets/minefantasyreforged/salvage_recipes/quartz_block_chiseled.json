@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:quartz_block",
+		"data": 1
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stone_slab",
+			"data": 7,
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:purpur_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:purpur_slab",
+			"data": 0
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:chimney_pipe_thin"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:chimney_stone_thin"
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"bronze\"}}"
+		}
+	]
+}

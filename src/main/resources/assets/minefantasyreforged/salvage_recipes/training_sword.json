@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:training_sword"
+	},
+	"outputs": [
+		{
+			"item": "#TIMBER_OAK_WOOD"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:nail",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:planks",
+			"data": 0,
+			"count": 5
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:hide_helmet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:hide_small",
+			"count": 2
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		}
+	]
+}

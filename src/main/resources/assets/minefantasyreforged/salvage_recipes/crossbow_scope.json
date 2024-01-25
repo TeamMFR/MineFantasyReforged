@@ -1,0 +1,23 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crossbow_scope"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bolt",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:tungsten_gears"
+		},
+		{
+			"item": "#TIMBER_OAK_WOOD"
+		},
+		{
+			"item": "minefantasyreforged:spyglass",
+			"data": 0
+		}
+	]
+}

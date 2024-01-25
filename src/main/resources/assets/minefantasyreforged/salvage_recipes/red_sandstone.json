@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:red_sandstone",
+		"data": 0
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:sand",
+			"data": 1,
+			"count": 4
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:standard_arrow"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:arrowhead"
+		},
+		{
+			"item": "minefantasyreforged:fletching"
+		}
+	]
+}

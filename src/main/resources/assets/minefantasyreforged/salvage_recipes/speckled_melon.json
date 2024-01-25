@@ -1,0 +1,16 @@
+{
+    "type": "salvage_recipe",
+    "input": {
+        "item": "minecraft:speckled_melon"
+    },
+    "outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:gold_nugget",
+			"count": 8
+		},
+        {
+            "item": "minecraft:melon"
+        }
+    ]
+}

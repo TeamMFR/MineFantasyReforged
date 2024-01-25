@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:cobblestone_wall",
+		"data": 0
+	},
+	"outputs": [
+		{
+			"item": "minecraft:cobblestone"
+		}
+	]
+}

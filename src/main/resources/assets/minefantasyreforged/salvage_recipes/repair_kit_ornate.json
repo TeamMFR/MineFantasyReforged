@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:repair_kit_ornate"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:gold_ingot",
+			"count": 4
+		},
+		{
+			"item": "minecraft:diamond"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:dye",
+			"data": 4,
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:repair_kit_advanced"
+		}
+	]
+}

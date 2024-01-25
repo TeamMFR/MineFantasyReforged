@@ -1,0 +1,26 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:cogwork_pulley"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_frame",
+			"count": 2
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:tungsten_gears",
+			"count": 2
+		},
+		{
+			"item": "minecraft:redstone_block"
+		}
+	]
+}

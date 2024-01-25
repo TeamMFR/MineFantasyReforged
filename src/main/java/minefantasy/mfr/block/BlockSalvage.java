@@ -1,6 +1,8 @@
 package minefantasy.mfr.block;
 
-import minefantasy.mfr.api.crafting.Salvage;
+import minefantasy.mfr.api.crafting.ISalvageDrop;
+import minefantasy.mfr.api.crafting.ISpecialSalvage;
+import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -8,7 +10,11 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.RPGElements;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.CraftingManagerSalvage;
+import minefantasy.mfr.recipe.SalvageRecipeBase;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
+import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +22,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
@@ -24,9 +31,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlockSalvage extends BasicBlockMF{
+	private static final XSTRandom random = new XSTRandom();
 	public float dropLevel;
 
 	public BlockSalvage(String name, float dropLevel) {
@@ -101,7 +110,7 @@ public class BlockSalvage extends BasicBlockMF{
 			world.playSound(user, pos.add(0.5, 0.5, 0.5), MineFantasySounds.ANVIL_SUCCEED, SoundCategory.NEUTRAL, 2F, 1F);
 		}
 
-		List<ItemStack> salvage = Salvage.salvage(user, junk, dropLevel * getPlayerDropLevel(user) * modifier);
+		List<ItemStack> salvage = salvage(user, junk, dropLevel * getPlayerDropLevel(user) * modifier);
 
 		if (salvage != null) {
 			dropSalvage(world, pos, salvage, junk);
@@ -140,5 +149,75 @@ public class BlockSalvage extends BasicBlockMF{
 			return (drops.get(0));
 		}
 		return null;
+	}
+
+	public static List<ItemStack> salvage(EntityPlayer user, ItemStack item, float dropRate) {
+		SalvageRecipeBase salvageRecipe = CraftingManagerSalvage.findMatchingRecipe(item);
+		if ((salvageRecipe == null || item.isEmpty()) && !(item.getItem() instanceof ISpecialSalvage)) {
+			return null;
+		}
+
+		float durability = 1F;
+		if (item.isItemDamaged()) {
+			durability = (float) (item.getMaxDamage() - item.getItemDamage()) / (float) item.getMaxDamage();
+		}
+
+		float chanceModifier = 1.25F;// 80% Succcess rate
+		float chance = dropRate * durability;// Modifier for skill and durability
+
+		return dropItems(item, user, salvageRecipe, chanceModifier, chance);
+	}
+
+	private static List<ItemStack> dropItems(ItemStack mainItem, EntityPlayer user, SalvageRecipeBase salvageRecipe,
+			float chanceModifier, float chance) {
+		List<ItemStack> items = new ArrayList<>();
+
+		//Special
+		if (mainItem.getItem() instanceof ISpecialSalvage) {
+			List<ItemStack> special = ((ISpecialSalvage) mainItem.getItem()).getSalvage(mainItem);
+			if (special != null) {
+				return special;
+			}
+		}
+
+		//Normal
+		for (Ingredient ingredient : salvageRecipe.getOutputs()) {
+
+			if (ConfigCrafting.shouldSalvagePickFromList) {
+				ItemStack stack = ingredient.getMatchingStacks()[random.nextInt(ingredient.getMatchingStacks().length)];
+				items.addAll(dropItemStack(mainItem, user, stack, chanceModifier, chance));
+			}
+			else {
+				for (ItemStack stack : ingredient.getMatchingStacks()) {
+					items.addAll(dropItemStack(mainItem, user, stack, chanceModifier, chance));
+				}
+			}
+		}
+		return items;
+	}
+
+	private static List<ItemStack> dropItemStack(ItemStack mainItem, EntityPlayer user,
+			ItemStack entry, float chanceModifier, float chance) {
+
+		List<ItemStack> items = new ArrayList<>();
+
+		for (int a = 0; a < entry.getCount(); a++) {
+			if (random.nextFloat() * chanceModifier < chance) {
+				boolean canSalvage = true;
+
+				if (entry.getItem() instanceof ISalvageDrop) {
+					canSalvage = ((ISalvageDrop) entry.getItem()).canSalvage(user, entry);
+				}
+				if (canSalvage) {
+					ItemStack newItem = entry.copy();
+					newItem.setCount(1);
+					if (!CustomToolHelper.hasAnyMaterial(newItem)) {
+						CustomToolHelper.tryDeconstruct(newItem, mainItem);
+					}
+					items.add(newItem);
+				}
+			}
+		}
+		return items;
 	}
 }

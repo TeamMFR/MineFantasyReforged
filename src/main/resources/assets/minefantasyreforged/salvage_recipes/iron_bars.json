@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:iron_bars"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:iron_ingot"
+		}
+	]
+}

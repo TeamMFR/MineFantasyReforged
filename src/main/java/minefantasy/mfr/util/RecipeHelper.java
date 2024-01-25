@@ -8,6 +8,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
+import com.google.gson.stream.JsonWriter;
 import minefantasy.mfr.MineFantasyReforged;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -60,7 +61,9 @@ public class RecipeHelper {
 		}
 
 		try (FileWriter writer = new FileWriter(filePath + trimmedName + ".json")) {
-			g.toJson(tempRecipe, writer);
+			JsonWriter jsonWriter = g.newJsonWriter(writer);
+			jsonWriter.setIndent("\t");
+			g.toJson(tempRecipe, tempRecipe.getClass(),  jsonWriter);
 		}
 		catch (IOException e) {
 			System.out.println("Error during writing recipe json file:");

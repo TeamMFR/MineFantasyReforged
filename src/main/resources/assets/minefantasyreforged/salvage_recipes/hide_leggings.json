@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:hide_leggings"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:hide_medium"
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		}
+	]
+}

@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bar",
+		"nbt": "{mf_custom_materials:{main_material:\"composite_alloy\"}}"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}"
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+		},
+		{
+			"type": "minecraft:item_nbt",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"copper\"}}"
+		}
+	]
+}

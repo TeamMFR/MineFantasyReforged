@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:mine_casing_iron"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:heavy_weighted_pressure_plate"
+		},
+		{
+			"item": "#HUNK_IRON"
+		},
+		{
+			"item": "minefantasyreforged:rivet"
+		}
+	]
+}

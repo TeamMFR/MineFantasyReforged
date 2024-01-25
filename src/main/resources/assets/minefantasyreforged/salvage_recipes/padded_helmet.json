@@ -1,0 +1,20 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:padded_helmet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:rough_leather_helmet"
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		}
+	]
+}

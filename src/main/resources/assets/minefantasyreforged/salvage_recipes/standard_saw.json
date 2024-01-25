@@ -1,0 +1,27 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_saw"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:leather_strip"
+		},
+		{
+			"item": "minefantasyreforged:timber"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"count": 4
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_saw"
+		},
+		{
+			"item": "minefantasyreforged:ornate_saw"
+		}
+	]
+}

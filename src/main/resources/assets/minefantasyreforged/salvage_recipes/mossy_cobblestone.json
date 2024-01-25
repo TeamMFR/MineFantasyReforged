@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:mossy_cobblestone"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:cobblestone"
+		},
+		{
+			"item": "minecraft:vine"
+		}
+	]
+}

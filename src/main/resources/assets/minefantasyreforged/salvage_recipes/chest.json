@@ -1,0 +1,22 @@
+{
+    "type": "salvage_recipe",
+    "input": {
+        "item": "minecraft:chest"
+    },
+    "outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:planks",
+			"data": 0,
+			"count": 8
+		}
+    ],
+	"conditions" : [
+		{
+			"type": "forge:not",
+			"value": {
+				"type": "minefantasyreforged:should_salvage_pick_from_list"
+			}
+		}
+	]
+}

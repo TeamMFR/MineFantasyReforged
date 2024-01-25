@@ -1,0 +1,24 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:daylight_detector"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:glass",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:quartz",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:wooden_slab",
+			"data": 0,
+			"count": 3
+		}
+	]
+}

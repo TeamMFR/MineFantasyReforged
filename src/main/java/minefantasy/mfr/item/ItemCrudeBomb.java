@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import com.google.common.collect.Lists;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.init.MineFantasyItems;
 import net.minecraft.creativetab.CreativeTabs;
@@ -7,6 +8,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+
+import java.util.List;
 
 public class ItemCrudeBomb extends ItemBomb implements ISpecialSalvage {
 
@@ -38,8 +41,11 @@ public class ItemCrudeBomb extends ItemBomb implements ISpecialSalvage {
 	}
 
 	@Override
-	public Object[] getSalvage(ItemStack item) {
-		return new Object[] {Items.PAPER, MineFantasyItems.THREAD, MineFantasyItems.BLACKPOWDER};
+	public List<ItemStack> getSalvage(ItemStack item) {
+		return Lists.newArrayList(
+				new ItemStack(Items.PAPER),
+				new ItemStack(MineFantasyItems.THREAD),
+				new ItemStack(MineFantasyItems.BLACKPOWDER));
 	}
 
 	@Override

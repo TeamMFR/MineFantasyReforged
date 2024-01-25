@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_chain_leggings"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:strong_leather_leggings"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:chain_mesh",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_chain_leggings"
+		},
+		{
+			"item": "minefantasyreforged:ornate_chain_leggings"
+		}
+	]
+}

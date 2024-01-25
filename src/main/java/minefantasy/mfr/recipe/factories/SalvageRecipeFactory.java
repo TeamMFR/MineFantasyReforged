@@ -1,0 +1,70 @@
+package minefantasy.mfr.recipe.factories;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+import minefantasy.mfr.recipe.SalvageRecipeBase;
+import minefantasy.mfr.recipe.SalvageRecipeShared;
+import minefantasy.mfr.recipe.SalvageRecipeStandard;
+import minefantasy.mfr.recipe.types.SalvageRecipeType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.JsonUtils;
+import net.minecraft.util.NonNullList;
+import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.common.crafting.JsonContext;
+
+public class SalvageRecipeFactory {
+	public SalvageRecipeBase parse(JsonContext context, JsonObject json) {
+		String type = JsonUtils.getString(json, "type");
+		SalvageRecipeType recipeType = SalvageRecipeType.deserialize(type);
+		if (recipeType == SalvageRecipeType.SALVAGE_RECIPE) {
+			return parseStandard(context, json);
+		}
+		if (recipeType == SalvageRecipeType.SALVAGE_RECIPE_SHARED) {
+			return parseStandardWithShared(context, json);
+		}
+		return null;
+	}
+
+	private SalvageRecipeBase parseStandardWithShared(JsonContext context, JsonObject json) {
+
+		ItemStack input = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "input"), context);
+
+		NonNullList<Ingredient> outputs = NonNullList.create();
+		for (JsonElement ele : JsonUtils.getJsonArray(json, "outputs")) {
+			outputs.add(CraftingHelper.getIngredient(ele, context));
+		}
+
+		if (outputs.isEmpty()) {
+			throw new JsonParseException("No outputs for salvage recipe");
+		}
+
+		NonNullList<ItemStack> shared = NonNullList.create();
+		for (JsonElement ele : JsonUtils.getJsonArray(json, "shared")) {
+			shared.add(CraftingHelper.getItemStack(ele.getAsJsonObject(), context));
+		}
+
+		if (shared.isEmpty()) {
+			throw new JsonParseException("No shared items for shared salvage recipe");
+		}
+
+		return new SalvageRecipeShared(input, outputs, shared);
+	}
+
+	private SalvageRecipeBase parseStandard(JsonContext context, JsonObject json) {
+
+		ItemStack input = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "input"), context);
+
+		NonNullList<Ingredient> outputs = NonNullList.create();
+		for (JsonElement ele : JsonUtils.getJsonArray(json, "outputs")) {
+			outputs.add(CraftingHelper.getIngredient(ele, context));
+		}
+
+		if (outputs.isEmpty()) {
+			throw new JsonParseException("No outputs for salvage recipe");
+		}
+
+		return new SalvageRecipeStandard(input, outputs);
+	}
+}

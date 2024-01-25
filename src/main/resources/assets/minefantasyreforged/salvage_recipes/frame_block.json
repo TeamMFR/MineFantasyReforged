@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:frame_block"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:rivet"
+		},
+		{
+			"item": "minefantasyreforged:iron_frame"
+		}
+	]
+}

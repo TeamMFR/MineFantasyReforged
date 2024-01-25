@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:flint_and_steel"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:iron_ingot"
+		},
+		{
+			"item": "minecraft:flint"
+		}
+	],
+	"conditions" : [
+		{
+			"type": "minefantasyreforged:remove_craft_flint_and_steel",
+			"value": {
+				"type": "minefantasyreforged:remove_craft_flint_and_steel"
+			}
+		}
+	]
+}

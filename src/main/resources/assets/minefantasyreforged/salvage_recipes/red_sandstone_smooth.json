@@ -1,0 +1,13 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:red_sandstone",
+		"data": 2
+	},
+	"outputs": [
+		{
+			"item": "minecraft:red_sandstone",
+			"data": 0
+		}
+	]
+}

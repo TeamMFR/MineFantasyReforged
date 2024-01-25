@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:encrusted_ingot"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:steel_ingot"
+		},
+		{
+			"item": "minefantasyreforged:diamond_shards"
+		}
+	]
+}

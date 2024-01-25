@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:composite_alloy_ingot"
+	},
+	"outputs": [
+		{
+			"item": "#BAR_COPPER"
+		},
+		{
+			"item": "#BAR_STEEL"
+		},
+		{
+			"item": "#HUNK_TUNGSTEN"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 2
+		}
+	]
+}

@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:compass"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:redstone"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:iron_ingot",
+			"count": 4
+		}
+	]
+}

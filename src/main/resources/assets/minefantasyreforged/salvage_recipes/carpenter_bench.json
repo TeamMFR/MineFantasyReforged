@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:carpenter_bench"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"nbt": "{mf_custom_materials:{main_material:\"scrap_wood\"}}",
+			"count": 4
+		},
+		{
+			"item": "minecraft:crafting_table"
+		}
+	]
+}

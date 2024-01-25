@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_scale_chestplate"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:scale_mesh",
+			"count": 6
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 6
+		},
+		{
+			"item": "minefantasyreforged:strong_leather_chestplate"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_scale_chestplate"
+		},
+		{
+			"item": "minefantasyreforged:ornate_scale_chestplate"
+		}
+	]
+}

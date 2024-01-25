@@ -1,0 +1,21 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:strong_leather_leggings"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:rough_leather_leggings"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:thread",
+			"count": 3
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:leather",
+			"count": 2
+		}
+	]
+}

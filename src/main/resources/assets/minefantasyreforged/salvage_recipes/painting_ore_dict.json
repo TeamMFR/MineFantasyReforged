@@ -1,0 +1,25 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:painting"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stick",
+			"count": 8
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "wool"
+		}
+	],
+	"conditions" : [
+		{
+			"type": "minefantasyreforged:should_salvage_pick_from_list",
+			"value": {
+				"type": "minefantasyreforged:should_salvage_pick_from_list"
+			}
+		}
+	]
+}

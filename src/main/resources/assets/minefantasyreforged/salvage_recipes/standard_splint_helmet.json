@@ -1,0 +1,29 @@
+{
+	"type": "salvage_recipe_shared",
+	"input": {
+		"item": "minefantasyreforged:standard_splint_helmet"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:splint_mesh",
+			"count": 4
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:rivet",
+			"count": 4
+		},
+		{
+			"item": "minefantasyreforged:padded_helmet"
+		}
+	],
+	"shared": [
+		{
+			"item": "minefantasyreforged:dragonforged_splint_helmet"
+		},
+		{
+			"item": "minefantasyreforged:ornate_splint_helmet"
+		}
+	]
+}

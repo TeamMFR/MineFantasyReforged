@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:brewing_stand"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:cobblestone",
+			"count": 3
+		},
+		{
+			"item": "minecraft:blaze_rod"
+		}
+	]
+}

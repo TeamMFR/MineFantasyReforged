@@ -1,0 +1,27 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:cogwork_shaft"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:iron_strut",
+			"count": 2
+		},
+		{
+			"item": "minefantasyreforged:iron_frame"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bolt",
+			"count": 4
+		},
+		{
+			"item": "minecraft:piston"
+		},
+		{
+			"item": "minefantasyreforged:tungsten_gears"
+		}
+	]
+}

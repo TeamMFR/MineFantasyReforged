@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:acacia_fence"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:planks",
+			"data": 4
+		},
+		{
+			"item": "minecraft:stick"
+		}
+	]
+}

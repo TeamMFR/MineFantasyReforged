@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:spectral_arrow"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:glowstone_dust"
+		}
+	]
+}

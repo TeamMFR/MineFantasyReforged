@@ -1,0 +1,12 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:mud_brick"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:dirt",
+			"data": 0
+		}
+	]
+}

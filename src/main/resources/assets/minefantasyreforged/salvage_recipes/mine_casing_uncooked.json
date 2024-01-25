@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:mine_casing_uncooked"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:clay_ball",
+			"count": 3
+		},
+		{
+			"item": "minecraft:stone_pressure_plate"
+		}
+	]
+}

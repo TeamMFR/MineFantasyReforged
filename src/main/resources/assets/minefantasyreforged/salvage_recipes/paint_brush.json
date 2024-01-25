@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:paint_brush"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:wool",
+			"data": 0
+		},
+		{
+			"item": "#TIMBER_REFINED"
+		}
+	]
+}

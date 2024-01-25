@@ -1,0 +1,19 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:tnt"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:gunpowder",
+			"count": 5
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:sand",
+			"data": 0,
+			"count": 4
+		}
+	]
+}

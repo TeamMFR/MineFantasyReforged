@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:research_bench"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:research_book"
+		},
+		{
+			"item": "minefantasyreforged:carpenter_bench"
+		}
+	]
+}

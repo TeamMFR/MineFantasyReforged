@@ -1,0 +1,16 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:crucible_fireclay"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:fireclay",
+			"count": 8
+		},
+		{
+			"item": "minefantasyreforged:crucible_stone"
+		}
+	]
+}

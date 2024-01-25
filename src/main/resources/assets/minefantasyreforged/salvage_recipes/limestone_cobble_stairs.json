@@ -1,0 +1,11 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:limestone_cobble_stairs"
+	},
+	"outputs": [
+		{
+			"item": "minefantasyreforged:limestone_cobble_slab"
+		}
+	]
+}

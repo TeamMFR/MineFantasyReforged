@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bloomery"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:stone",
+			"data": 0,
+			"count": 5
+		},
+		{
+			"item": "minecraft:coal_block"
+		}
+	]
+}

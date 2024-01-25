@@ -1,0 +1,18 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minecraft:noteblock"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:planks",
+			"data": 0,
+			"count": 8
+		},
+		{
+			"item": "minecraft:redstone",
+			"count": 4
+		}
+	]
+}

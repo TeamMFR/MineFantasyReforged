@@ -1,0 +1,15 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:trough_wood",
+		"nbt": "{mf_custom_materials:{main_material:\"scrap_wood\"}}"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:timber",
+			"nbt": "{mf_custom_materials:{main_material:\"scrap_wood\"}}",
+			"count": 5
+		}
+	]
+}

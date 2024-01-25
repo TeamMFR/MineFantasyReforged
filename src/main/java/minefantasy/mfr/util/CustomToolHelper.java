@@ -493,7 +493,7 @@ public class CustomToolHelper {
 		return (getCustomPrimaryMaterial(item) != null && getCustomPrimaryMaterial(item) != CustomMaterial.NONE) || (getCustomSecondaryMaterial(item) != null && getCustomSecondaryMaterial(item) != CustomMaterial.NONE);
 	}
 
-	public static ItemStack tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
+	public static void tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
 		String type = null;
 		if (!newitem.isEmpty() && newitem.getItem() instanceof ITieredComponent) {
 			type = ((ITieredComponent) newitem.getItem()).getMaterialType(newitem);
@@ -511,7 +511,6 @@ public class CustomToolHelper {
 				}
 			}
 		}
-		return newitem;
 	}
 
 	public static String getCustomStyle(ItemStack weapon) {

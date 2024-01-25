@@ -1,0 +1,14 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:clay_wall"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:clay"
+		},
+		{
+			"item": "minefantasyreforged:nail"
+		}
+	]
+}

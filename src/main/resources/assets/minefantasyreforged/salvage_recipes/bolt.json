@@ -1,0 +1,17 @@
+{
+	"type": "salvage_recipe",
+	"input": {
+		"item": "minefantasyreforged:bolt"
+	},
+	"outputs": [
+		{
+			"item": "#BAR_IRON"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:metal_hunk",
+			"nbt": "{mf_custom_materials:{main_material:\"steel\"}}",
+			"count": 2
+		}
+	]
+}
