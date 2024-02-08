@@ -5,12 +5,14 @@ import minefantasy.mfr.api.archery.IFirearm;
 import minefantasy.mfr.api.crafting.IBasicMetre;
 import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.tool.IScope;
+import minefantasy.mfr.api.tool.TransformationBlockWrapper;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.config.ConfigClient;
 import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerAnvil;
 import minefantasy.mfr.container.ContainerCarpenter;
+import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.entity.EntityCogwork;
 import minefantasy.mfr.init.MineFantasyKeybindings;
 import minefantasy.mfr.item.ItemFoodMFR;
@@ -18,6 +20,7 @@ import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
+import minefantasy.mfr.recipe.TransformationRecipeBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
@@ -27,6 +30,7 @@ import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.PowerArmour;
 import minefantasy.mfr.util.TextureHelperMFR;
 import minefantasy.mfr.util.ToolHelper;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -106,11 +110,14 @@ public class MineFantasyHUD extends Gui {
 
 			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
-			BlockPos coords = getClickedBlock();
-			if (coords == null)
-				return;
-
 			World world = player.world;
+			BlockPos coords = getClickedBlock();
+			if (coords == null) {
+				return;
+			}
+
+			renderTransformationProgress(player, coords, world.getBlockState(coords));
+
 			TileEntity tile = world.getTileEntity(coords);
 			if (tile != null) {
 				if (tile instanceof TileEntityAnvil) {
@@ -359,7 +366,7 @@ public class MineFantasyHUD extends Gui {
 		if (fatAt > ConfigStamina.fatThreshold) {
 			colorRGB = Color.ORANGE.getRGB();
 		}
-		if (fatAt > (ConfigStamina.fatThreshold + (ConfigStamina.fatThreshold / 2))) {
+		if (fatAt > (ConfigStamina.fatThreshold + ((float) ConfigStamina.fatThreshold / 2))) {
 			colorRGB = Color.RED.getRGB();
 		}
 
@@ -417,10 +424,10 @@ public class MineFantasyHUD extends Gui {
 		if (knowsCraft && tile.getRequiredToolType() != null) {
 
 			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
 
 			if (tile.getRequiredAnvilTier() > -1) {
-				GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPos + 172, yPos, tile.getTier() >= tile.getRequiredAnvilTier());
+				GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPos + 172, yPos, tile.getTier() >= tile.getRequiredAnvilTier(), true);
 			}
 		}
 
@@ -451,7 +458,7 @@ public class MineFantasyHUD extends Gui {
 
 		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
 			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
 		}
 
 		GlStateManager.popMatrix();
@@ -483,7 +490,7 @@ public class MineFantasyHUD extends Gui {
 
 			if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
 				boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available);
+				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
 			}
 		}
 		else {
@@ -530,7 +537,7 @@ public class MineFantasyHUD extends Gui {
 
 		if (knowsCraft && tile.requiredToolType != null) {
 			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.requiredToolType, -1);
-			GuiHelper.renderToolIcon(this, tile.requiredToolType.getName(), tile.tier, xPos - 20, yPos, available);
+			GuiHelper.renderToolIcon(this, tile.requiredToolType.getName(), tile.tier, xPos - 20, yPos, available, true);
 		}
 
 		GlStateManager.popMatrix();
@@ -587,5 +594,35 @@ public class MineFantasyHUD extends Gui {
 
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 		GlStateManager.popMatrix();
+	}
+
+	private void renderTransformationProgress(EntityPlayer player, BlockPos pos, IBlockState blockState) {
+		PlayerData data = PlayerData.get(player);
+		if (data != null) {
+			TransformationBlockWrapper transformationBlock = data.getVariable(TransformationRecipeBase.TRANSFORMATION_BLOCK);
+			if (transformationBlock != null
+					&& TransformationBlockWrapper.checkTransformationBlock(transformationBlock, blockState, pos)
+					&& transformationBlock.getTool().isItemEqualIgnoreDurability(player.getHeldItemMainhand())) {
+				if (transformationBlock.getProgress() > 0) {
+					GlStateManager.pushMatrix();
+					ScaledResolution scaledresolution = new ScaledResolution(MineFantasyHUD.mc);
+					int width = scaledresolution.getScaledWidth();
+					int height = scaledresolution.getScaledHeight();
+
+					bindTexture("textures/gui/hud_overlay.png");
+					int xPos = width / 2 - 86;
+					int yPos = height - 69;
+
+					this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
+					this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, transformationBlock.getProgressMetre(160), 3);
+
+					String s = "Progress";
+					mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
+					GlStateManager.color(1.0F, 1.0F, 1.0F);
+
+					GlStateManager.popMatrix();
+				}
+			}
+		}
 	}
 }

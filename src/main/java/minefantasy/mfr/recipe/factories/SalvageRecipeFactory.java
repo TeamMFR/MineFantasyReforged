@@ -18,13 +18,14 @@ public class SalvageRecipeFactory {
 	public SalvageRecipeBase parse(JsonContext context, JsonObject json) {
 		String type = JsonUtils.getString(json, "type");
 		SalvageRecipeType recipeType = SalvageRecipeType.deserialize(type);
-		if (recipeType == SalvageRecipeType.SALVAGE_RECIPE) {
-			return parseStandard(context, json);
+		switch (recipeType) {
+			case SALVAGE_RECIPE:
+				return parseStandard(context, json);
+			case SALVAGE_RECIPE_SHARED:
+				return parseStandardWithShared(context, json);
+			default:
+				return null;
 		}
-		if (recipeType == SalvageRecipeType.SALVAGE_RECIPE_SHARED) {
-			return parseStandardWithShared(context, json);
-		}
-		return null;
 	}
 
 	private SalvageRecipeBase parseStandardWithShared(JsonContext context, JsonObject json) {

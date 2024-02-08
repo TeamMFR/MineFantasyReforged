@@ -9,18 +9,20 @@ import org.lwjgl.opengl.GL11;
 public class GuiHelper {
 	private static final Minecraft mc = Minecraft.getMinecraft();
 
-	public static void renderToolIcon(Gui screen, String toolType, int tier, int x, int y, boolean available) {
-		renderToolIcon(screen, toolType, tier, x, y, false, available);
+	public static void renderToolIcon(Gui screen, String toolType, int tier, int x, int y, boolean available, boolean button) {
+		renderToolIcon(screen, toolType, tier, x, y, false, available, button);
 	}
 
 	public static void renderToolIcon(Gui screen, String toolType, int tier, int x, int y, boolean outline,
-			boolean available) {
+			boolean available, boolean button) {
 		if (!available) {
 			GL11.glColor3f(1.0F, 0.3F, 0.3F);
 		}
 		mc.getTextureManager().bindTexture(TextureHelperMFR.getResource("textures/gui/icons.png"));
 		int[] icon = getToolTypeIcon(toolType);
-		screen.drawTexturedModalRect(x, y, outline ? 20 : 0, 0, 20, 20);
+		if (button) {
+			screen.drawTexturedModalRect(x, y, outline ? 20 : 0, 0, 20, 20);
+		}
 		screen.drawTexturedModalRect(x, y, icon[0], icon[1] + 20, 20, 20);
 		if (tier > -1)
 			mc.fontRenderer.drawStringWithShadow("" + tier, x + 4, y + 10, 16777215);

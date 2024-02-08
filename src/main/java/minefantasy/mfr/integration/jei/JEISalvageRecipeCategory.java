@@ -24,7 +24,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * JEI recipe category implementation for all "recipes" in the carpenter bench.
+ * JEI recipe category implementation for all "recipes" in the Salvage bench.
  */
 public class JEISalvageRecipeCategory implements IRecipeCategory<JEISalvageRecipe> {
 

@@ -1,0 +1,19 @@
+{
+	"type": "transformation_recipe",
+	"tool_type": "saw",
+	"skill": "construction",
+	"research": "",
+	"soundName": "minefantasyreforged:block.sawcarpenter",
+	"maxProgress": 4,
+	"inputs": [
+		{
+			"item": "minefantasyreforged:ironbark_planks"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:ironbark_planks_slab"
+	},
+	"dropStack": {
+		"item": "minefantasyreforged:ironbark_planks_slab"
+	}
+}

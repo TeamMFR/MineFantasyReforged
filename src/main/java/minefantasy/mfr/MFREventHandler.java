@@ -2,6 +2,7 @@ package minefantasy.mfr;
 
 import com.google.common.base.CaseFormat;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
+import minefantasy.mfr.api.crafting.CustomCrafterEntry;
 import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.heating.TongsHelper;
@@ -372,6 +373,13 @@ public final class MFREventHandler {
 
 	@SubscribeEvent
 	public static void specialInteractForComponentBlock(PlayerInteractEvent.RightClickBlock event) {
+		// Handle Custom Crafters block transformation
+		if (CustomCrafterEntry.getEntry(event.getItemStack()) != null) {
+			ToolHelper.performBlockTransformation(
+					event.getEntityPlayer(), event.getEntityPlayer().world,
+					event.getPos(), event.getHand(), event.getFace());
+		}
+
 		if (event.getEntityPlayer().isSneaking() && event.getWorld().getBlockState(event.getPos()).getBlock() instanceof BlockComponent) {
 			event.setUseBlock(Event.Result.ALLOW);
 		}

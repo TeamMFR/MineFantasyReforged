@@ -97,7 +97,7 @@ public class JEIAlloyRecipeCategory implements IRecipeCategory<JEIAlloyRecipe> {
 		}
 
 		// Init output slot
-		slots.init(9, false, 94, 19);
+		slots.init(9, false, 93, 18);
 
 		slots.set(ingredients);
 

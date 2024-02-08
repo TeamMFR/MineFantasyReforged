@@ -46,6 +46,18 @@ public class MineFantasyOreDict {
 		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.YEW_PLANKS, 1, 0));
 		OreDictionary.registerOre("plankWood", new ItemStack(MineFantasyBlocks.REFINED_PLANKS, 1, 0));
 
+		OreDictionary.registerOre("slabWood", new ItemStack(MineFantasyBlocks.IRONBARK_PLANKS_SLAB));
+		OreDictionary.registerOre("slabWood", new ItemStack(MineFantasyBlocks.EBONY_PLANKS_SLAB));
+		OreDictionary.registerOre("slabWood", new ItemStack(MineFantasyBlocks.YEW_PLANKS_SLAB));
+		OreDictionary.registerOre("slabWood", new ItemStack(MineFantasyBlocks.REFINED_PLANKS_SLAB));
+		OreDictionary.registerOre("slabWood", new ItemStack(MineFantasyBlocks.NAILED_PLANKS_SLAB));
+
+		OreDictionary.registerOre("stairWood", new ItemStack(MineFantasyBlocks.IRONBARK_STAIRS));
+		OreDictionary.registerOre("stairWood", new ItemStack(MineFantasyBlocks.EBONY_STAIRS));
+		OreDictionary.registerOre("stairWood", new ItemStack(MineFantasyBlocks.YEW_STAIRS));
+		OreDictionary.registerOre("stairWood", new ItemStack(MineFantasyBlocks.REFINED_PLANKS_STAIR));
+		OreDictionary.registerOre("stairWood", new ItemStack(MineFantasyBlocks.NAILED_PLANKS_STAIR));
+
 		NonNullList<ItemStack> plankWoodList = OreDictionary.getOres("plankWood");
 		plankWoodList.remove(0);
 

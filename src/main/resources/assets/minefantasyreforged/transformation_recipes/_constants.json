@@ -1,0 +1,23 @@
+[
+    {
+        "name": "PLANK_WOOD",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "plankWood"
+        }
+    },
+    {
+        "name": "STAIR_WOOD",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "stairWood"
+        }
+    },
+    {
+        "name": "SLAB_WOOD",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "slabWood"
+        }
+    }
+]

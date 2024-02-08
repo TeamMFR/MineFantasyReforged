@@ -1,0 +1,19 @@
+{
+	"type": "transformation_recipe_blockstate",
+	"tool_type": "saw",
+	"skill": "construction",
+	"research": "",
+	"soundName": "minefantasyreforged:block.sawcarpenter",
+	"maxProgress": 4,
+	"dropStack": {
+		"item": "minefantasyreforged:yew_planks_slab"
+	},
+	"inputBlockState": {
+		"Name": "minefantasyreforged:yew_planks_slab",
+		"Properties": {"type" : "double"}
+	},
+	"outputBlockState": {
+		"Name": "minefantasyreforged:yew_planks_slab",
+		"Properties": {"type": "bottom"}
+	}
+}

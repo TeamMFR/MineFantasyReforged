@@ -1,6 +1,7 @@
 package minefantasy.mfr.data;
 
 import io.netty.buffer.ByteBuf;
+import minefantasy.mfr.api.tool.TransformationBlockWrapper;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -245,6 +246,13 @@ public interface IStoredVariable<T> extends IVariable<T> {
 		 */
 		public static StoredVariable<NBTTagCompound, NBTTagCompound> ofNBT(String key, Persistence persistence) {
 			return new StoredVariable<>(key, t -> t, t -> t, persistence); // No conversion required!
+		}
+
+		/**
+		 * Creates a new {@code StoredVariable} for an {@link TransformationBlockWrapper} value with the given key.
+		 */
+		public static StoredVariable<TransformationBlockWrapper, NBTTagCompound> ofTransformationBlockWrapper(String key, Persistence persistence) {
+			return new StoredVariable<>(key, TransformationBlockWrapper::serializeNBT, TransformationBlockWrapper::deserializeNBT, persistence);
 		}
 	}
 }

@@ -32,10 +32,10 @@ public class JEITannerRecipe implements IRecipeWrapper {
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		// draw tool icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType().getName(), recipe.getTannerTier(), recipeWidth - 20, recipeHeight - 20, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType().getName(), recipe.getTannerTier(), recipeWidth - 20, recipeHeight - 20, true, true);
 
 		// draw bench icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, "tanner", recipe.getTannerTier(), recipeWidth - 65, recipeHeight - 20, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, "tanner", recipe.getTannerTier(), recipeWidth - 65, recipeHeight - 20, true, true);
 
 		if (GuiHelper.isPointInRegion(recipeWidth - 20, recipeHeight - 20, 20, 20, mouseX, mouseY, 0, 0)) {
 			// Shows the tool tooltip text with the name of the tool and the minimum tier

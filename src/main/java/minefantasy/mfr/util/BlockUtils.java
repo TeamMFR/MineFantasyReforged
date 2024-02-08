@@ -2,6 +2,7 @@ package minefantasy.mfr.util;
 
 import minefantasy.mfr.tile.TileEntityTrough;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -45,5 +46,20 @@ public class BlockUtils {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Transfer Old BlockState Property to New BlockState
+	 * @param newState the new BlockState, the blockState to transfer the property value to.
+	 * @param oldState the old BlockState, the blockState to transfer the property value from.
+	 * @param property the property for the value to be transferred from.
+	 * @return the new BlockState with the modified property value.
+	 * @param <T> the property type.
+	 */
+	public static <T extends Comparable<T>> IBlockState transferOldToNewProperty(
+			IBlockState newState,
+			IBlockState oldState,
+			IProperty<T> property) {
+		return newState.withProperty(property, oldState.getValue(property));
 	}
 }

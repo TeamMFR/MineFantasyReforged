@@ -334,6 +334,7 @@ integration.jei.category.minefantasyreforged:oven=MineFantasy Oven
 integration.jei.category.minefantasyreforged:stovetop=MineFantasy Stove Top
 integration.jei.category.minefantasyreforged:kitchen_bench=MineFantasy Kitchen Bench
 integration.jei.category.minefantasyreforged:salvage=MineFantasy Salvage
+integration.jei.category.minefantasyreforged:transformation=MineFantasy Transformation
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 recipe.bar.desc=Any Material Ingot to Material Bar
 recipe.ingot.desc=Any Material Bar to Material Ingot
@@ -670,7 +671,7 @@ tile.ebony_stairs.name=Ebony Stairs
 tile.yew_stairs.name=Yew Stairs
 
 tile.nailed_planks.name=Nailed Wood Planks
-tile.nailed_planks_slab=Nailed Wood Slab
+tile.nailed_planks_slab.name=Nailed Wood Slab
 tile.refined_planks.name=Refined Wood Planks
 tile.refined_planks_slab.name=Refined Wood Slab
 tile.nailed_planks_stairs.name=Nailed Plank Stairs

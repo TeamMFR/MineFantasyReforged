@@ -1,0 +1,22 @@
+{
+	"type": "transformation_recipe",
+	"tool_type": "saw",
+	"skill": "construction",
+	"research": "",
+	"soundName": "minefantasyreforged:block.sawcarpenter",
+	"maxProgress": 4,
+	"inputs": [
+		{
+			"item": "minecraft:planks",
+			"data": 5
+		}
+	],
+	"result": {
+		"item": "minecraft:wooden_slab",
+		"data": 5
+	},
+	"dropStack": {
+		"item": "minecraft:wooden_slab",
+		"data": 5
+	}
+}

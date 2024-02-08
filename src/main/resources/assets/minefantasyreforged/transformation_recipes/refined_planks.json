@@ -1,0 +1,20 @@
+{
+	"type": "transformation_recipe",
+	"tool_type": "brush",
+	"skill": "construction",
+	"research": "paint_brush",
+	"soundName": "minecraft:block.cloth.hit",
+	"inputs": [
+		{
+			"item": "minefantasyreforged:nailed_planks"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:refined_planks"
+	},
+	"consumableStacks": [
+		{
+			"item": "minefantasyreforged:jug_plant_oil"
+		}
+	]
+}

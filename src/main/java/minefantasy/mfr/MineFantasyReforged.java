@@ -40,6 +40,7 @@ import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.CraftingManagerSalvage;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
+import minefantasy.mfr.recipe.CraftingManagerTransformation;
 import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.recipe.SalvageRecipeExporter;
 import minefantasy.mfr.recipe.ingredients.IngredientCount;
@@ -186,6 +187,7 @@ public class MineFantasyReforged {
 		CraftingManagerRoast.loadRecipes();
 		CraftingManagerKitchenBench.loadRecipes();
 		CraftingManagerSalvage.loadRecipes();
+		CraftingManagerTransformation.loadRecipes();
 
 		PROXY.init();
 	}
@@ -257,6 +259,7 @@ public class MineFantasyReforged {
 		CraftingManagerRoast.init();
 		CraftingManagerKitchenBench.init();
 		CraftingManagerSalvage.init();
+		CraftingManagerTransformation.init();
 	}
 
 	public static void registerIngredients() {

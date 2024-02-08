@@ -79,10 +79,10 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 		}
 
 		// draw tool icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType(), recipe.getHammerTier(), recipeWidth - 23, recipeHeight - 98, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType(), recipe.getHammerTier(), recipeWidth - 23, recipeHeight - 98, true, true);
 
 		// draw bench icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, "anvil", recipe.getAnvilTier(), recipeWidth - 23, recipeHeight - 48, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, "anvil", recipe.getAnvilTier(), recipeWidth - 23, recipeHeight - 48, true, true);
 
 		//		minecraft.fontRenderer.drawString("X:" + mouseX + ", Y: " + mouseY, mouseX, mouseY, 16777215);
 

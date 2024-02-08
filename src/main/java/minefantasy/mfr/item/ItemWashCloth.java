@@ -8,6 +8,7 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -72,7 +73,7 @@ public class ItemWashCloth extends ItemTool implements IToolMFR, IClientRegister
 			world.playSound(player, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.AMBIENT, 0.125F + itemRand.nextFloat() / 4F, 0.5F + itemRand.nextFloat());
 		}
 
-		return super.onItemUse(player, world, pos, hand, facing, hitX, hitY, hitZ);
+		return ToolHelper.performBlockTransformation(player, world, pos, hand, facing);
 	}
 
 	@Override

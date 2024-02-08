@@ -16,6 +16,7 @@ import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.ToolHelper;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
@@ -169,6 +170,11 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	public ItemSpanner setEfficiencyMod(float efficiencyMod) {
 		this.efficiencyMod = efficiencyMod;
 		return this;
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer user, World world, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return ToolHelper.performBlockTransformation(user, world, pos, hand, facing);
 	}
 
 	@Override

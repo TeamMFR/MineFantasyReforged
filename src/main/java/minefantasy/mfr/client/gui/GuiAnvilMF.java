@@ -89,11 +89,11 @@ public class GuiAnvilMF extends GuiContainer {
 		}
 		if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")) {
 			GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPoint + regularXSize + xInvOffset,
-					yPoint, isBlockSufficient());
+					yPoint, isBlockSufficient(), true);
 
 			if (tile.getRequiredToolType() != Tool.OTHER) {
 				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
-						yPoint, isToolSufficient());
+						yPoint, isToolSufficient(), true);
 			}
 		}
 	}

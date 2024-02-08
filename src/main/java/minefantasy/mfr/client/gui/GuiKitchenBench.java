@@ -82,10 +82,10 @@ public class GuiKitchenBench extends GuiContainer {
 		}
 		if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")) {
 			GuiHelper.renderToolIcon(this, "kitchen_bench", tile.getKitchenBenchTierNeeded(), xPoint + regularXSize, yPoint,
-					true);
+					true, true);
 
 			if (tile.getRequiredToolType() != null) {
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20, yPoint, isToolSufficient());
+				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20, yPoint, isToolSufficient(), true);
 			}
 		}
 	}

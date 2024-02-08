@@ -8,9 +8,20 @@ import minefantasy.mfr.api.weapon.ISharpenable;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.item.ItemWashCloth;
+import minefantasy.mfr.recipe.CraftingManagerTransformation;
+import minefantasy.mfr.recipe.TransformationRecipeBase;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
@@ -55,6 +66,47 @@ public class ToolHelper {
 			return ((ItemWashCloth) stack.getItem()).getMaxUses();
 		}
 		return 0; //Todo add Custom Wash Entry
+	}
+
+	/**
+	 * Conduct Block Transformation on {@link Item#onItemUse(EntityPlayer, World, BlockPos, EnumHand, EnumFacing, float, float, float)}
+	 * @param user The Player using the item
+	 * @param world The World
+	 * @param pos The Block Position of the block being transformed
+	 * @param hand The hand the Player is using the item with
+	 * @param facing The facing of the action
+	 * @return The {@link EnumActionResult} which represents the result of the transformation
+	 */
+	public static EnumActionResult performBlockTransformation(
+			EntityPlayer user,
+			World world,
+			BlockPos pos,
+			EnumHand hand,
+			EnumFacing facing) {
+
+		ItemStack item = user.getHeldItem(hand);
+		IBlockState oldState = world.getBlockState(pos);
+
+		// Find Recipe
+		ItemStack input = new ItemStack(oldState.getBlock());
+		if (input.getItem().getHasSubtypes()) {
+			input = new ItemStack(oldState.getBlock(), 1, oldState.getBlock().getMetaFromState(oldState));
+		}
+		TransformationRecipeBase recipe = CraftingManagerTransformation.findMatchingRecipe(item, input, oldState);
+		if (recipe == null) {
+			return EnumActionResult.FAIL;
+		}
+
+		if (!world.isRemote) {
+			return recipe.onUsedWithBlock(world, pos, oldState, item, user, facing);
+		}
+		else {
+			user.swingArm(hand);
+			if (recipe.getSound() != null) {
+				world.playSound(user, pos, recipe.getSound(), SoundCategory.BLOCKS, 1F, 1F);
+			}
+		}
+		return EnumActionResult.FAIL;
 	}
 
 	/**

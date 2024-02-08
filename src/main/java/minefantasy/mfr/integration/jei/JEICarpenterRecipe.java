@@ -44,10 +44,10 @@ public class JEICarpenterRecipe implements IRecipeWrapper {
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 
 		// draw tool icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType(), recipe.getToolTier(), recipeWidth - 23, recipeHeight - 98, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType(), recipe.getToolTier(), recipeWidth - 23, recipeHeight - 98, true, true);
 
 		// draw bench icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, "carpenter", recipe.getCarpenterTier(), recipeWidth - 23, recipeHeight - 48, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, "carpenter", recipe.getCarpenterTier(), recipeWidth - 23, recipeHeight - 48, true, true);
 
 		//		minecraft.fontRenderer.drawString("X:" + mouseX + ", Y: " + mouseY, mouseX, mouseY, 16777215);
 

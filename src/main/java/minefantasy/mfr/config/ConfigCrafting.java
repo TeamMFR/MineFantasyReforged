@@ -1,6 +1,7 @@
 package minefantasy.mfr.config;
 
 import minefantasy.mfr.MineFantasyReforged;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Configuration;
 
@@ -17,7 +18,8 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	private static final String TANNER_RECIPE_SETTINGS = "09 Tanner Recipe Settings";
 	private static final String ROAST_RECIPE_SETTINGS = "10 Roast Recipe Settings";
 	private static final String KITCHEN_BENCH_RECIPE_SETTINGS = "11 Kitchen Bench Recipe Settings";
-	private static final String SALVAGE_RECIPE_SETTINGS = "12 Kitchen Bench Recipe Settings";
+	private static final String SALVAGE_RECIPE_SETTINGS = "12 Salvage Recipe Settings";
+	private static final String TRANSFORMATION_RECIPE_SETTINGS = "13 Transformation Recipe Settings";
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
@@ -42,6 +44,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		config.addCustomCategoryComment(ROAST_RECIPE_SETTINGS, "Controls whether or not an item's roast recipe should be enabled");
 		config.addCustomCategoryComment(KITCHEN_BENCH_RECIPE_SETTINGS, "Controls whether or not an item's kitchen bench recipe should be enabled");
 		config.addCustomCategoryComment(SALVAGE_RECIPE_SETTINGS, "Controls whether or not an item's salvage recipe should be enabled");
+		config.addCustomCategoryComment(TRANSFORMATION_RECIPE_SETTINGS, "Controls whether or not a block's transformation recipe should be enabled");
 	}
 
 	@Override
@@ -142,6 +145,20 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
 		String name = generateNameFromItemAndNBT(itemStack);
 		return get().getBoolean(name, SALVAGE_RECIPE_SETTINGS, true, "");
+	}
+
+	public static boolean isItemTransformable(ItemStack itemStack) {
+		//Checks if the given Item should load default recipes for being transformable.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = generateNameFromItemAndNBT(itemStack);
+		return get().getBoolean(name, TRANSFORMATION_RECIPE_SETTINGS, true, "");
+	}
+
+	public static boolean isBlockStateTransformable(IBlockState state) {
+		//Checks if the given BlockState should load default recipes for being transformable.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = state.toString();
+		return get().getBoolean(name, TRANSFORMATION_RECIPE_SETTINGS, true, "");
 	}
 
 	public static Configuration get() {
