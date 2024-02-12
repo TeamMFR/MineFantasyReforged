@@ -28,7 +28,6 @@ import minefantasy.mfr.init.MineFantasyOreDict;
 import minefantasy.mfr.material.MetalMaterial;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.proxy.CommonProxy;
-import minefantasy.mfr.recipe.BasicRecipesMF;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
@@ -39,10 +38,10 @@ import minefantasy.mfr.recipe.CraftingManagerKitchenBench;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.recipe.CraftingManagerSalvage;
+import minefantasy.mfr.recipe.CraftingManagerSpecial;
 import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.recipe.CraftingManagerTransformation;
 import minefantasy.mfr.recipe.RecipeRemover;
-import minefantasy.mfr.recipe.SalvageRecipeExporter;
 import minefantasy.mfr.recipe.ingredients.IngredientCount;
 import minefantasy.mfr.recipe.ingredients.IngredientOreCount;
 import minefantasy.mfr.registry.MetalMaterialRegistry;
@@ -188,6 +187,7 @@ public class MineFantasyReforged {
 		CraftingManagerKitchenBench.loadRecipes();
 		CraftingManagerSalvage.loadRecipes();
 		CraftingManagerTransformation.loadRecipes();
+		CraftingManagerSpecial.loadRecipes();
 
 		PROXY.init();
 	}
@@ -204,9 +204,7 @@ public class MineFantasyReforged {
 
 		MineFantasyKnowledgeList.init();
 		MineFantasyKnowledgeList.ArtefactListMFR.init();
-		BasicRecipesMF.init();
-		SalvageRecipeExporter exporter = new SalvageRecipeExporter();
-//		exporter.exportRecipes();
+		//Exporters go here
 		RecipeRemover.removeSmeltingRecipes();
 
 		MetalMaterial.addHeatables();
@@ -260,6 +258,7 @@ public class MineFantasyReforged {
 		CraftingManagerKitchenBench.init();
 		CraftingManagerSalvage.init();
 		CraftingManagerTransformation.init();
+		CraftingManagerSpecial.init();
 	}
 
 	public static void registerIngredients() {

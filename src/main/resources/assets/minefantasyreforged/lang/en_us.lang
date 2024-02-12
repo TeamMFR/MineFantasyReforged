@@ -15,6 +15,7 @@ gui.kitchen_bench_dirty_progress=Dirtiness
 info.offBalance.message=Trying to use a heavy weapon with only one hand throws you off balance!
 info.noHeatProtection.message=Ouch! Maybe I should get some blacksmithing equipment for this...
 info.vomiting.message=*Blargh!* Eating that many %1$s that quickly can't be good for you...
+info.dragonforged.ritual.failure=The Ritual fails due to insufficient heat!
 
 attribute.kit.salvage.name=Salvage Modifier
 
@@ -335,6 +336,7 @@ integration.jei.category.minefantasyreforged:stovetop=MineFantasy Stove Top
 integration.jei.category.minefantasyreforged:kitchen_bench=MineFantasy Kitchen Bench
 integration.jei.category.minefantasyreforged:salvage=MineFantasy Salvage
 integration.jei.category.minefantasyreforged:transformation=MineFantasy Transformation
+integration.jei.category.minefantasyreforged:special=MineFantasy Special Anvil
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 recipe.bar.desc=Any Material Ingot to Material Bar
 recipe.ingot.desc=Any Material Bar to Material Ingot

@@ -1,5 +1,7 @@
 package minefantasy.mfr.client.render.block;
 
+import minefantasy.mfr.api.crafting.exotic.ISpecialCraftItem;
+import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.block.BlockAnvilMF;
 import minefantasy.mfr.init.MineFantasyItems;
@@ -43,7 +45,7 @@ public class TileEntityAnvilRenderer<T extends TileEntity> extends TileEntitySpe
 				facing = state.getValue(BlockAnvilMF.FACING);
 			}
 
-			ItemStack resultStack = ((TileEntityAnvil) tile).getResultStack();
+			ItemStack resultStack = ((TileEntityAnvil) tile).getStaticResultStack();
 
 			if (resultStack.getItem() instanceof ItemBlock) {
 				resultStack = ItemStack.EMPTY;
@@ -51,14 +53,20 @@ public class TileEntityAnvilRenderer<T extends TileEntity> extends TileEntitySpe
 
 			ItemStackHandler inventory = ((TileEntityAnvil) tile).getInventory();
 
-			if (((TileEntityAnvil) tile).progress <= 0 && inventory.getStackInSlot(24).isEmpty()) {
+			ItemStack outputSlotStack = inventory.getStackInSlot(24);
+			if (((TileEntityAnvil) tile).progress <= 0
+					&& (outputSlotStack.isEmpty() || outputSlotStack.getItem() instanceof ISpecialCraftItem)) {
 				for (int i = 0; i < 6; i++) {
 					for (int j = 0; j < 4; j++) {
 						renderItemInSlot(inventory.getStackInSlot(GRID_LAYOUT[j][i]), i, j, 0.075F, facing);
 					}
 				}
 			} else {
-				renderResultStack(resultStack, facing, (TileEntityAnvil) tile);
+				ItemStack outputStack = resultStack;
+				if (!outputSlotStack.isEmpty() && !(outputSlotStack.getItem() instanceof ISpecialCraftItem)) {
+					outputStack = outputSlotStack;
+				}
+				renderResultStack(outputStack, facing, (TileEntityAnvil) tile);
 			}
 		}
 
@@ -105,7 +113,10 @@ public class TileEntityAnvilRenderer<T extends TileEntity> extends TileEntitySpe
 			GlStateManager.rotate(tile.getItemRotation(), 1F, 1F, 1F);
 			GlStateManager.scale(scale, scale, scale);
 
-			ItemStack hotOutput = ItemHeated.createHotItem(stack, tile.calcAverageTemp());
+			ItemStack hotOutput = stack;
+			if (!(stack.getItem() instanceof IHotItem)) {
+				hotOutput = ItemHeated.createHotItem(stack, tile.calcAverageTemp());
+			}
 
 			bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 			Minecraft.getMinecraft().getTextureManager().getTexture(TextureMap.LOCATION_BLOCKS_TEXTURE).setBlurMipmap(false, false);

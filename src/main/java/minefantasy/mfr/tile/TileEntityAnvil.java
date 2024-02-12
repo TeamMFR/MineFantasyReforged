@@ -1,7 +1,6 @@
 package minefantasy.mfr.tile;
 
 import minefantasy.mfr.api.crafting.IQualityBalance;
-import minefantasy.mfr.api.crafting.exotic.SpecialForging;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.block.BlockAnvilMF;
@@ -10,7 +9,6 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.Trait;
 import minefantasy.mfr.container.ContainerAnvil;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
@@ -20,7 +18,9 @@ import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerSpecial;
 import minefantasy.mfr.recipe.IAnvil;
+import minefantasy.mfr.recipe.SpecialRecipeBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
@@ -40,6 +40,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -66,6 +67,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	// research specific fields
 
 	private ItemStack resultStack = ItemStack.EMPTY;
+	private ItemStack resultStackSpecial = ItemStack.EMPTY;
 
 	public float progressMax;
 	public float progress;
@@ -269,7 +271,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 			int outputSlot = getInventory().getSlots() - 1;
 
-			if (getInventory().getStackInSlot(outputSlot).isEmpty() || SpecialForging.getItemDesign(getInventory().getStackInSlot(outputSlot)) != null) {
+			if (getInventory().getStackInSlot(outputSlot).isEmpty()
+					|| CraftingManagerSpecial.findMatchingRecipe(resultStack, getInventory().getStackInSlot(outputSlot)) != null) {
 				getInventory().setStackInSlot(outputSlot, result);
 			} else {
 				if (getInventory().getStackInSlot(outputSlot).isItemEqual(result) && ItemStack.areItemStackTagsEqual(getInventory().getStackInSlot(outputSlot), result)) {
@@ -341,64 +344,82 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return result;
 	}
 
-	private ItemStack modifySpecials(ItemStack result, EntityPlayer player) {
-		boolean hasHeart = false;
-		boolean isTool = result.getMaxStackSize() == 1 && result.isItemStackDamageable();
+	private ItemStack modifySpecials(ItemStack recipeResultStack, EntityPlayer player) {
+		boolean isTool = recipeResultStack.getMaxStackSize() == 1 && recipeResultStack.isItemStackDamageable();
 
-		Item dragonCraft = SpecialForging.getDragonCraft(result);
+		SpecialRecipeBase recipe = CraftingManagerSpecial.findMatchingRecipe(recipeResultStack, inventory.getStackInSlot(getInventory().getSlots() - 1));
+		if (recipe != null) {
+			ItemStack specialCraft = recipe.getOutput();
+			String design = recipe.getDesign();
 
-		if (dragonCraft != null) {
-			// DRAGONFORGE
-			for (int x = -4; x <= 4; x++) {
-				for (int y = -4; y <= 4; y++) {
-					for (int z = -4; z <= 4; z++) {
-						TileEntity tile = world.getTileEntity(pos.add(x, y, z));
-						if (player != null && ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.smelt_dragonforged)
-								&& tile instanceof TileEntityForge) {
-							if (((TileEntityForge) tile).dragonHeartPower > 0) {
-								hasHeart = true;
-								((TileEntityForge) tile).dragonHeartPower = 0;
-								world.createExplosion(null, pos.getX() + x, pos.getY() + y, pos.getZ() + z, 1F, false);
-								PlayerTickHandler.spawnDragon(player);
-								PlayerTickHandler.addDragonEnemyPts(player, 2);
+			if (design.equals("dragonforged") && ResearchLogic
+					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
 
-								break;
+				// DRAGONFORGE
+				float totalTemp = 0;
+				for (int x = -4; x <= 4; x++) {
+					for (int y = -4; y <= 4; y++) {
+						for (int z = -4; z <= 4; z++) {
+							TileEntity tile = world.getTileEntity(pos.add(x, y, z));
+							if (tile instanceof TileEntityForge) {
+								if (((TileEntityForge) tile).getBlockTemperature() > 0) {
+									totalTemp += ((TileEntityForge) tile).temperature;
+									world.createExplosion(null, pos.getX() + x, pos.getY() + y, pos.getZ() + z, 1F, false);
+								}
 							}
 						}
 					}
 				}
+				if (totalTemp >= 12250) {
+					PlayerTickHandler.spawnDragon(player);
+					PlayerTickHandler.addDragonEnemyPts(player, 2);
+
+					NBTBase nbt = !(recipeResultStack.hasTagCompound())
+							? null
+							: recipeResultStack.getTagCompound().copy();
+					recipeResultStack = new ItemStack(specialCraft.getItem(),
+							recipeResultStack.getCount(), recipeResultStack.getItemDamage());
+
+					if (nbt != null) {
+						recipeResultStack.setTagCompound((NBTTagCompound) nbt);
+					}
+				}
+				else {
+					if (!player.world.isRemote) {
+						player.sendMessage(new TextComponentTranslation("info.dragonforged.ritual.failure"));
+					}
+				}
 			}
-		}
-		if (hasHeart) {
-			NBTBase nbt = !(result.hasTagCompound()) ? null : result.getTagCompound().copy();
-			result = new ItemStack(dragonCraft, result.getCount(), result.getItemDamage());
-			if (nbt != null) {
-				result.setTagCompound((NBTTagCompound) nbt);
-			}
-		} else {
-			Item special = SpecialForging.getSpecialCraft(SpecialForging.getItemDesign(getInventory().getStackInSlot(getInventory().getSlots() - 1)), result);
-			if (special != null) {
-				NBTBase nbt = !(result.hasTagCompound()) ? null : result.getTagCompound().copy();
-				result = new ItemStack(special, result.getCount(), result.getItemDamage());
+
+			if (design.equals("ornate") && ResearchLogic
+					.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
+
+				// Ornate
+				NBTBase nbt = !(recipeResultStack.hasTagCompound())
+						? null
+						: recipeResultStack.getTagCompound().copy();
+				recipeResultStack = new ItemStack(specialCraft.getItem(),
+						recipeResultStack.getCount(), recipeResultStack.getItemDamage());
+
 				if (nbt != null) {
-					result.setTagCompound((NBTTagCompound) nbt);
+					recipeResultStack.setTagCompound((NBTTagCompound) nbt);
 				}
 			}
 		}
 
-		if (isPerfectItem() && !isMythicRecipe() && result.isItemEnchantable()) {
-			this.setTrait(result, Trait.Inferior.getName(), false);
-			if (CustomToolHelper.isMythic(result)) {
-				result.getTagCompound().setBoolean(Trait.Unbreakable.getName(), true);
+		if (isPerfectItem() && !isMythicRecipe() && recipeResultStack.isItemEnchantable()) {
+			this.setTrait(recipeResultStack, Trait.Inferior.getName(), false);
+			if (CustomToolHelper.isMythic(recipeResultStack)) {
+				recipeResultStack.getTagCompound().setBoolean(Trait.Unbreakable.getName(), true);
 			} else {
-				ToolHelper.setQuality(result, 200.0F);
+				ToolHelper.setQuality(recipeResultStack, 200.0F);
 			}
-			return result;
+			return recipeResultStack;
 		}
 		if (isTool) {
-			result = modifyQualityComponents(result);
+			recipeResultStack = modifyQualityComponents(recipeResultStack);
 		}
-		return damageItem(result);
+		return damageItem(recipeResultStack);
 	}
 
 	private ItemStack modifyQualityComponents(ItemStack result) {
@@ -474,20 +495,21 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	private boolean canFitResult(ItemStack result) {
-		ItemStack resSlot = getInventory().getStackInSlot(getInventory().getSlots() - 1);
-		if (!resSlot.isEmpty() && !result.isEmpty()) {
-			int maxStack = getStackSize(resSlot);
-			if (resSlot.getCount() + result.getCount() > maxStack) {
+		ItemStack outputSlotStack = getInventory().getStackInSlot(getInventory().getSlots() - 1);
+		if (!outputSlotStack.isEmpty() && !result.isEmpty()) {
+			int maxStack = getStackSize(outputSlotStack);
+			if (outputSlotStack.getCount() + result.getCount() > maxStack) {
 				return false;
 			}
-			if (resSlot.getItem() instanceof IHotItem) {
-				ItemStack heated = Heatable.getItemStack(resSlot);
+			if (outputSlotStack.getItem() instanceof IHotItem) {
+				ItemStack heated = Heatable.getItemStack(outputSlotStack);
 				if (!heated.isEmpty()) {
-					resSlot = heated;
+					outputSlotStack = heated;
 				}
 			}
-			if (!resSlot.isItemEqual(result)
-					&& (SpecialForging.getItemDesign(resSlot) == null || resSlot.getCount() > 1)) {
+			if (!outputSlotStack.isItemEqual(result)
+					&& (CraftingManagerSpecial.findMatchingRecipe(result, outputSlotStack) == null
+					|| outputSlotStack.getCount() > 1)) {
 				return false;
 			}
 		}
@@ -521,7 +543,23 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			result = ItemStack.EMPTY;
 			resetProject();
 		}
+
+		SpecialRecipeBase recipe = CraftingManagerSpecial.findMatchingRecipe(result, getInventory().getStackInSlot(getInventory().getSlots() - 1));
+		if (recipe != null) {
+			resultStackSpecial = recipe.getOutput().copy();
+		}
+		else {
+			resultStackSpecial = ItemStack.EMPTY;
+		}
+
 		return result;
+	}
+
+	public ItemStack getStaticResultStack() {
+		if (!resultStackSpecial.isEmpty()) {
+			return resultStackSpecial;
+		}
+		return resultStack;
 	}
 
 	public void updateCraftingData() {
@@ -726,6 +764,10 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public String getResultName() {
+		if (!resultStackSpecial.isEmpty()) {
+			resultStackSpecial.getDisplayName();
+		}
+
 		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
 	}
 
@@ -781,6 +823,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		progress = nbt.getFloat(PROGRESS_TAG);
 		progressMax = nbt.getFloat(PROGRESS_MAX_TAG);
 		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
+		resultStackSpecial = new ItemStack(nbt.getCompoundTag(RESULT_STACK_SPECIAL_TAG));
 		requiredAnvilTier = nbt.getInteger(REQUIRED_ANVIL_TIER_TAG);
 		requiredHammerTier = nbt.getInteger(REQUIRED_HAMMER_TIER_TAG);
 		requiredToolType = Tool.fromName(nbt.getString(TOOL_TYPE_REQUIRED_TAG));
@@ -800,6 +843,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		nbt.setFloat(PROGRESS_TAG, progress);
 		nbt.setFloat(PROGRESS_MAX_TAG, progressMax);
 		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
+		nbt.setTag(RESULT_STACK_SPECIAL_TAG, resultStackSpecial.writeToNBT(new NBTTagCompound()));
 		nbt.setInteger(REQUIRED_ANVIL_TIER_TAG, requiredAnvilTier);
 		nbt.setInteger(REQUIRED_HAMMER_TIER_TAG, requiredHammerTier);
 		nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType.getName());

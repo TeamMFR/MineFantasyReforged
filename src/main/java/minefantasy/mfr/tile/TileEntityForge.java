@@ -45,7 +45,6 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 	public float maxFuel = 6000;// 5m
 	public float temperature;
 	public float fuelTemperature;
-	public float dragonHeartPower = 0F;
 	public int workableState = 0;
 	public int exactTemperature;
 	int justShared;
@@ -521,7 +520,6 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 
 		nbt.setFloat("temperature", temperature);
 		nbt.setFloat("fuelTemperature", fuelTemperature);
-		nbt.setFloat("dragonHeartPower", dragonHeartPower);
 		nbt.setFloat("fuel", fuel);
 		nbt.setFloat("maxFuel", maxFuel);
 		nbt.setInteger("workableState", getWorkableState());
@@ -539,7 +537,6 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 
 		temperature = nbt.getFloat("temperature");
 		fuelTemperature = nbt.getFloat("fuelTemperature");
-		dragonHeartPower = nbt.getFloat("dragonHeartPower");
 		fuel = nbt.getFloat("fuel");
 		maxFuel = nbt.getFloat("maxFuel");
 		workableState = nbt.getInteger("workableState");

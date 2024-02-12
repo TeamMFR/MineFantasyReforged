@@ -61,6 +61,8 @@ public class MineFantasyOreDict {
 		NonNullList<ItemStack> plankWoodList = OreDictionary.getOres("plankWood");
 		plankWoodList.remove(0);
 
+		OreDictionary.registerOre("dragonHeart", MineFantasyItems.DRAGON_HEART);
+
 		OreDictionary.registerOre("ingotCopper", MineFantasyItems.COPPER_INGOT);
 		OreDictionary.registerOre("ingotTin", MineFantasyItems.TIN_INGOT);
 		OreDictionary.registerOre("ingotBronze", MineFantasyItems.BRONZE_INGOT);

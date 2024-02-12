@@ -75,7 +75,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	protected static boolean validateTransformation(BlockPos pos, ItemStack item, EntityPlayer player, EnumFacing facing, TransformationRecipeBase recipe) {
 		// Check Player can change block and has Recipe Research unlocked
 		if (player.canPlayerEdit(pos, facing, item)) {
-			if (ResearchLogic.hasInfoUnlocked(player, recipe.getResearch())) {
+			if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
 				ItemStack offhandStack = recipe.getOffhandStack().copy();
 				// Check if the offhand stack is in the offhand slot or bypass if empty
 				if (offhandStack.isEmpty() || player.getHeldItemOffhand().isItemEqualIgnoreDurability(offhandStack)) {

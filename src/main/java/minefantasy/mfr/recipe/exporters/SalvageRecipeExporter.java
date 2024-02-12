@@ -1,8 +1,14 @@
-package minefantasy.mfr.recipe;
+package minefantasy.mfr.recipe.exporters;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
+import minefantasy.mfr.recipe.CarpenterRecipeBase;
+import minefantasy.mfr.recipe.CraftingManagerAnvil;
+import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.recipe.CraftingManagerSalvage;
+import minefantasy.mfr.recipe.SalvageRecipeBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.item.ItemStack;

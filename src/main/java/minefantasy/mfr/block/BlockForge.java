@@ -5,12 +5,10 @@ import minefantasy.mfr.api.heating.ForgeItemHandler;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.init.MineFantasyItems;
-import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemApron;
 import minefantasy.mfr.item.ItemLighter;
 import minefantasy.mfr.item.ItemTongs;
-import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.tile.TileEntityForge;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -226,15 +224,6 @@ public class BlockForge extends BlockTileEntity<TileEntityForge> {
 					} else {
 						heldItem.shrink(1);
 					}
-					return true;
-				}
-				if (!world.isRemote && ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.smelt_dragonforged) && held.getItem() == MineFantasyItems.DRAGON_HEART) {
-					if (held.getCount() == 1) {
-						player.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, ItemStack.EMPTY);
-					} else {
-						held.shrink(1);
-					}
-					tile.dragonHeartPower = 1.0F;
 					return true;
 				}
 			}

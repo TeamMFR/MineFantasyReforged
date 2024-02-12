@@ -1,0 +1,13 @@
+{
+	"type": "special_recipe_dragonforged",
+	"research": "smelt_dragonforged",
+	"input": {
+		"item": "minefantasyreforged:standard_heavy_shovel"
+	},
+	"specialInput": {
+		"item": "#DRAGON_HEART"
+	},
+	"result": {
+		"item": "minefantasyreforged:dragonforged_heavy_shovel"
+	}
+}

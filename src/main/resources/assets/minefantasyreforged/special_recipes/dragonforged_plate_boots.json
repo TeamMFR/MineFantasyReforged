@@ -1,0 +1,13 @@
+{
+	"type": "special_recipe_dragonforged",
+	"research": "smelt_dragonforged",
+	"input": {
+		"item": "minefantasyreforged:standard_plate_boots"
+	},
+	"specialInput": {
+		"item": "#DRAGON_HEART"
+	},
+	"result": {
+		"item": "minefantasyreforged:dragonforged_plate_boots"
+	}
+}

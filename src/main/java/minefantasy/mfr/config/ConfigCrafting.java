@@ -20,10 +20,12 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	private static final String KITCHEN_BENCH_RECIPE_SETTINGS = "11 Kitchen Bench Recipe Settings";
 	private static final String SALVAGE_RECIPE_SETTINGS = "12 Salvage Recipe Settings";
 	private static final String TRANSFORMATION_RECIPE_SETTINGS = "13 Transformation Recipe Settings";
+	private static final String SPECIAL_RECIPE_SETTINGS = "14 Special Crafting Recipe Settings";
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
 	public static boolean shouldSalvagePickFromList = false;
+	public static float minimumDragonforgedTemperature = 12250;
 
 	public ConfigCrafting(String name) {
 		super(name);
@@ -45,6 +47,7 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		config.addCustomCategoryComment(KITCHEN_BENCH_RECIPE_SETTINGS, "Controls whether or not an item's kitchen bench recipe should be enabled");
 		config.addCustomCategoryComment(SALVAGE_RECIPE_SETTINGS, "Controls whether or not an item's salvage recipe should be enabled");
 		config.addCustomCategoryComment(TRANSFORMATION_RECIPE_SETTINGS, "Controls whether or not a block's transformation recipe should be enabled");
+		config.addCustomCategoryComment(SPECIAL_RECIPE_SETTINGS, "Controls whether or not an item's special crafting recipe should be enabled");
 	}
 
 	@Override
@@ -68,6 +71,11 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 				false,
 				"If true, this means that the Salvage recipe will pick one ItemStack from the OreDict List at random. "
 						+ "\nIf false, it will add all stacks. This is NOT recommended for OreDicted Recipes.").getString());
+		minimumDragonforgedTemperature = Float.parseFloat(config.get(SPECIAL_RECIPE_SETTINGS,
+				"Dragonforged Minimum Temperature",
+				12250,
+				"Sets the required minimum total temperature for the Dragonforged Ritual."
+						+ "\nValues above 5000 require multiple Forges.").getString());
 	}
 
 	public static boolean isAnvilItemCraftable(ItemStack itemStack) {
@@ -159,6 +167,13 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 		//If an entry for it does not exist, it will be added when queried, defaulting to try
 		String name = state.toString();
 		return get().getBoolean(name, TRANSFORMATION_RECIPE_SETTINGS, true, "");
+	}
+
+	public static boolean isSpecialItemCraftable(ItemStack itemStack) {
+		//Checks if the given Item should load default recipes for the special crafting recipes.
+		//If an entry for it does not exist, it will be added when queried, defaulting to try
+		String name = generateNameFromItemAndNBT(itemStack);
+		return get().getBoolean(name, SPECIAL_RECIPE_SETTINGS, true, "");
 	}
 
 	public static Configuration get() {

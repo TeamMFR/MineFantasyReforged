@@ -1,0 +1,15 @@
+[
+    {
+        "name": "DRAGON_HEART",
+        "ingredient": {
+            "type": "forge:ore_dict",
+            "ore": "dragonHeart"
+        }
+    },
+    {
+        "name": "ORNATE_ITEMS",
+        "ingredient": {
+            "item": "minefantasyreforged:ornate_items"
+        }
+    }
+]

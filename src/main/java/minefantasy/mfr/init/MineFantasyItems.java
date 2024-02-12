@@ -4,7 +4,6 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.MineFantasyReforgedAPI;
 import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
-import minefantasy.mfr.api.crafting.exotic.SpecialForging;
 import minefantasy.mfr.api.mining.RandomDigs;
 import minefantasy.mfr.api.mining.RandomOre;
 import minefantasy.mfr.config.ConfigHardcore;
@@ -1609,121 +1608,6 @@ public class MineFantasyItems {
 		DRAGONFORGED_PLATE_CHESTPLATE = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_chestplate", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.CHEST, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		DRAGONFORGED_PLATE_LEGGINGS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_leggings", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.LEGS, "plate_layer_2", 0).modifyRating(ratingMod).setCreativeTab(tab);
 		DRAGONFORGED_PLATE_BOOTS = (ItemCustomArmour) new ItemCustomArmour(dragonforged, "plate_boots", ArmourDesign.FIELDPLATE, EntityEquipmentSlot.FEET, "plate_layer_1", 0).modifyRating(ratingMod).setCreativeTab(tab);
-	}
-
-	@SuppressWarnings("Duplicates")
-	public static void loadCrafting() {
-		String ornate = "ornate";
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_DAGGER, ORNATE_DAGGER);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SWORD, ORNATE_SWORD);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_MACE, ORNATE_MACE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_WARAXE, ORNATE_WARAXE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPEAR, ORNATE_SPEAR);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_KATANA, ORNATE_KATANA);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_GREATSWORD, ORNATE_GREATSWORD);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_WARHAMMER, ORNATE_WARHAMMER);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_BATTLEAXE, ORNATE_BATTLEAXE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HALBEARD, ORNATE_HALBEARD);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_LANCE, ORNATE_LANCE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_BOW, ORNATE_BOW);
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PICK, ORNATE_PICK);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_AXE, ORNATE_AXE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPADE, ORNATE_SPADE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HOE, ORNATE_HOE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SHEARS, ORNATE_SHEARS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HEAVY_PICK, ORNATE_HEAVY_PICK);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HEAVY_SHOVEL, ORNATE_HEAVY_SHOVEL);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_TROW, ORNATE_TROW);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HANDPICK, ORNATE_HANDPICK);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_MATTOCK, ORNATE_MATTOCK);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPADE, ORNATE_SPADE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCYTHE, ORNATE_SCYTHE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPANNER, ORNATE_SPANNER);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_LUMBER, ORNATE_LUMBER);
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HAMMER, ORNATE_HAMMER);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_HEAVY_HAMMER, ORNATE_HEAVY_HAMMER);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_TONGS, ORNATE_TONGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SAW, ORNATE_SAW);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_NEEDLE, ORNATE_NEEDLE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_KNIFE, ORNATE_KNIFE);
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_BOOTS, ORNATE_CHAIN_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_LEGGINGS, ORNATE_CHAIN_LEGGINGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_CHESTPLATE, ORNATE_CHAIN_CHESTPLATE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_CHAIN_HELMET, ORNATE_CHAIN_HELMET);
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_BOOTS, ORNATE_SCALE_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_LEGGINGS, ORNATE_SCALE_LEGGINGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_CHESTPLATE, ORNATE_SCALE_CHESTPLATE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SCALE_HELMET, ORNATE_SCALE_HELMET);
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_BOOTS, ORNATE_SPLINT_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_LEGGINGS, ORNATE_SPLINT_LEGGINGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_CHESTPLATE, ORNATE_SPLINT_CHESTPLATE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_SPLINT_HELMET, ORNATE_SPLINT_HELMET);
-
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_BOOTS, ORNATE_PLATE_BOOTS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_LEGGINGS, ORNATE_PLATE_LEGGINGS);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_CHESTPLATE, ORNATE_PLATE_CHESTPLATE);
-		SpecialForging.addSpecialCraft(ornate, STANDARD_PLATE_HELMET, ORNATE_PLATE_HELMET);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_DAGGER, DRAGONFORGED_DAGGER);
-		SpecialForging.addDragonforgeCraft(STANDARD_SWORD, DRAGONFORGED_SWORD);
-		SpecialForging.addDragonforgeCraft(STANDARD_MACE, DRAGONFORGED_MACE);
-		SpecialForging.addDragonforgeCraft(STANDARD_WARAXE, DRAGONFORGED_WARAXE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPEAR, DRAGONFORGED_SPEAR);
-		SpecialForging.addDragonforgeCraft(STANDARD_KATANA, DRAGONFORGED_KATANA);
-		SpecialForging.addDragonforgeCraft(STANDARD_GREATSWORD, DRAGONFORGED_GREATSWORD);
-		SpecialForging.addDragonforgeCraft(STANDARD_WARHAMMER, DRAGONFORGED_WARHAMMER);
-		SpecialForging.addDragonforgeCraft(STANDARD_BATTLEAXE, DRAGONFORGED_BATTLEAXE);
-		SpecialForging.addDragonforgeCraft(STANDARD_HALBEARD, DRAGONFORGED_HALBEARD);
-		SpecialForging.addDragonforgeCraft(STANDARD_LANCE, DRAGONFORGED_LANCE);
-		SpecialForging.addDragonforgeCraft(STANDARD_BOW, DRAGONFORGED_BOW);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_PICK, DRAGONFORGED_PICK);
-		SpecialForging.addDragonforgeCraft(STANDARD_AXE, DRAGONFORGED_AXE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPADE, DRAGONFORGED_SPADE);
-		SpecialForging.addDragonforgeCraft(STANDARD_HOE, DRAGONFORGED_HOE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SHEARS, DRAGONFORGED_SHEARS);
-		SpecialForging.addDragonforgeCraft(STANDARD_HEAVY_PICK, DRAGONFORGED_HEAVY_PICK);
-		SpecialForging.addDragonforgeCraft(STANDARD_HEAVY_SHOVEL, DRAGONFORGED_HEAVY_SHOVEL);
-		SpecialForging.addDragonforgeCraft(STANDARD_TROW, DRAGONFORGED_TROW);
-		SpecialForging.addDragonforgeCraft(STANDARD_HANDPICK, DRAGONFORGED_HANDPICK);
-		SpecialForging.addDragonforgeCraft(STANDARD_MATTOCK, DRAGONFORGED_MATTOCK);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPADE, DRAGONFORGED_SPADE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SCYTHE, DRAGONFORGED_SCYTHE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPANNER, DRAGONFORGED_SPANNER);
-		SpecialForging.addDragonforgeCraft(STANDARD_LUMBER, DRAGONFORGED_LUMBER);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_HAMMER, DRAGONFORGED_HAMMER);
-		SpecialForging.addDragonforgeCraft(STANDARD_HEAVY_HAMMER, DRAGONFORGED_HEAVY_HAMMER);
-		SpecialForging.addDragonforgeCraft(STANDARD_TONGS, DRAGONFORGED_TONGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SAW, DRAGONFORGED_SAW);
-		SpecialForging.addDragonforgeCraft(STANDARD_NEEDLE, DRAGONFORGED_NEEDLE);
-		SpecialForging.addDragonforgeCraft(STANDARD_KNIFE, DRAGONFORGED_KNIFE);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_BOOTS, DRAGONFORGED_CHAIN_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_LEGGINGS, DRAGONFORGED_CHAIN_LEGGINGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_CHESTPLATE, DRAGONFORGED_CHAIN_CHESTPLATE);
-		SpecialForging.addDragonforgeCraft(STANDARD_CHAIN_HELMET, DRAGONFORGED_CHAIN_HELMET);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_BOOTS, DRAGONFORGED_SCALE_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_LEGGINGS, DRAGONFORGED_SCALE_LEGGINGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_CHESTPLATE, DRAGONFORGED_SCALE_CHESTPLATE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SCALE_HELMET, DRAGONFORGED_SCALE_HELMET);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_BOOTS, DRAGONFORGED_SPLINT_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_LEGGINGS, DRAGONFORGED_SPLINT_LEGGINGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_CHESTPLATE, DRAGONFORGED_SPLINT_CHESTPLATE);
-		SpecialForging.addDragonforgeCraft(STANDARD_SPLINT_HELMET, DRAGONFORGED_SPLINT_HELMET);
-
-		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_BOOTS, DRAGONFORGED_PLATE_BOOTS);
-		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_LEGGINGS, DRAGONFORGED_PLATE_LEGGINGS);
-		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_CHESTPLATE, DRAGONFORGED_PLATE_CHESTPLATE);
-		SpecialForging.addDragonforgeCraft(STANDARD_PLATE_HELMET, DRAGONFORGED_PLATE_HELMET);
 	}
 
 	public static void initTool() {

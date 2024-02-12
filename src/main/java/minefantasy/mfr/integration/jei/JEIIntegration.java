@@ -51,7 +51,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipeCategories(new JEIKitchenBenchRecipeCategory(registry));
 		registry.addRecipeCategories(new JEISalvageRecipeCategory(registry));
 		registry.addRecipeCategories(new JEITransformationRecipeCategory(registry));
-		// TODO: same for anvil, salvage, ...
+		registry.addRecipeCategories(new JEISpecialRecipeCategory(registry));
 	}
 
 	@Override
@@ -86,6 +86,7 @@ public class JEIIntegration implements IModPlugin {
 		registry.addRecipes(JEIKitchenBenchRecipeCategory.generateRecipes(stackHelper), JEIKitchenBenchRecipeCategory.UID);
 		registry.addRecipes(JEISalvageRecipeCategory.generateRecipes(stackHelper), JEISalvageRecipeCategory.UID);
 		registry.addRecipes(JEITransformationRecipeCategory.generateRecipes(), JEITransformationRecipeCategory.UID);
+		registry.addRecipes(JEISpecialRecipeCategory.generateRecipes(stackHelper), JEISpecialRecipeCategory.UID);
 	}
 
 	@Override

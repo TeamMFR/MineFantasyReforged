@@ -1,0 +1,13 @@
+{
+	"type": "special_recipe_ornate",
+	"research": "craft_ornate",
+	"input": {
+		"item": "minefantasyreforged:standard_sword"
+	},
+	"specialInput": {
+		"item": "#ORNATE_ITEMS"
+	},
+	"result": {
+		"item": "minefantasyreforged:ornate_sword"
+	}
+}

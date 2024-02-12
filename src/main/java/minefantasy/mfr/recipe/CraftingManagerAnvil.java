@@ -12,6 +12,7 @@ import minefantasy.mfr.recipe.types.AnvilRecipeType;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
@@ -228,6 +229,15 @@ public class CraftingManagerAnvil {
 			}
 			return ItemStack.EMPTY;
 		}
+	}
+
+	public static AnvilRecipeBase findRecipeByOutput(Ingredient output) {
+		for (AnvilRecipeBase anvilRecipe : getRecipes()) {
+			if (output.apply(anvilRecipe.getAnvilRecipeOutput())) {
+				return anvilRecipe;
+			}
+		}
+		return null;
 	}
 
 	public static AnvilRecipeBase getRecipeByName(String name) {
