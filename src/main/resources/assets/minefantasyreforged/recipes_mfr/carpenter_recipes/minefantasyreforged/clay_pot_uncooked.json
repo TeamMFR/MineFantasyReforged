@@ -1,0 +1,22 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": -1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "C  C",
+    " CC "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:clay_pot_uncooked",
+    "count": 8
+  }
+}

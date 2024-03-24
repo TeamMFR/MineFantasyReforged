@@ -7,22 +7,21 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mixin.InvokerLoadConstants;
 import minefantasy.mfr.recipe.factories.AnvilRecipeFactory;
 import minefantasy.mfr.recipe.types.AnvilRecipeType;
+import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.util.FileUtils;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
@@ -31,8 +30,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -41,6 +38,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CraftingManagerAnvil {
+
+	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/anvil_recipes/";
 
 	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/anvil_recipes/";
 
@@ -58,18 +57,36 @@ public class CraftingManagerAnvil {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final AnvilRecipeFactory factory = new AnvilRecipeFactory();
-	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/anvil_recipes", CraftingHelper.CONDITIONS));
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m -> CraftingManagerAnvil.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/anvil_recipes"));
+		Loader.instance().getActiveModList().forEach(m ->
+				loadRecipesForEachModDirectory(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
 
 		Loader.instance().setActiveModContainer(modContainer);
+	}
+
+	private static void loadRecipesForEachModDirectory(ModContainer mod, File source, String base) {
+		File recipeDirectory = new File(source.toPath().resolve(base).toString());
+		File[] files = recipeDirectory.listFiles();
+		if (files != null) {
+			for (File d : files) {
+				if (d.isDirectory()) {
+					Path modId = d.toPath().getName(d.toPath().getNameCount() - 1);
+					if (!Loader.isModLoaded(modId.toString())) {
+						return;
+					}
+					String modBase = base + "/" + modId;
+					loadRecipes(mod, source, modBase);
+				}
+			}
+		}
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -81,10 +98,9 @@ public class CraftingManagerAnvil {
 				BufferedReader reader = null;
 				try {
 					reader = Files.newBufferedReader(fPath);
-					JsonObject[] json = JsonUtils.fromJson(GSON, reader, JsonObject[].class);
-					LOAD_CONSTANTS.invoke(ctx, new Object[] {json});
+					InvokerLoadConstants.loadContext(ctx, new File(fPath.toString()));
 				}
-				catch (IOException | IllegalAccessException | InvocationTargetException e) {
+				catch (IOException e) {
 					MineFantasyReforged.LOG.error("Error loading _constants.json: ", e);
 					return false;
 				}
@@ -112,9 +128,8 @@ public class CraftingManagerAnvil {
 				if (Loader.isModLoaded(mod.getModId())) {
 					if (AnvilRecipeType.getByNameWithModId(type, mod.getModId()) != AnvilRecipeType.NONE) {
 						AnvilRecipeBase recipe = factory.parse(ctx, json);
-						recipe.setRegistryName(key);
 						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
 						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Anvil recipe", key, type);
@@ -136,11 +151,12 @@ public class CraftingManagerAnvil {
 		});
 	}
 
-	public static void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(AnvilRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getAnvilRecipeOutput();
 		if (ConfigCrafting.isAnvilItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
+			recipe.setRegistryName(key);
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getAnvilRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !ANVIL_RECIPES.containsKey(recipe.getRegistryName()))) {
@@ -149,86 +165,42 @@ public class CraftingManagerAnvil {
 		}
 	}
 
-	public static ItemStack findMatchingRecipe(IAnvil anvil, AnvilCraftMatrix matrix, World world) {
+	public static AnvilRecipeBase findMatchingRecipe(TileEntityAnvil anvil, AnvilCraftMatrix matrix, World world) {
 		int time;
 		int anvilTier;
-		boolean hot;
-		int hammerTier;
-		int matrixItemStackCount = 0;
-		String toolType;
-		SoundEvent sound;
-		ItemStack stack0 = ItemStack.EMPTY;
-		ItemStack stack1 = ItemStack.EMPTY;
+		int toolTier;
 
-		for (int currentSlotIndex = 0; currentSlotIndex < matrix.getSizeInventory(); ++currentSlotIndex) {
-			ItemStack matrixSlotStack = matrix.getStackInSlot(currentSlotIndex);
+		//// Normal, registered recipes.
+		Iterator<AnvilRecipeBase> recipeIterator = getRecipes().iterator();
+		AnvilRecipeBase anvilRecipeBase = null;
 
-			// Logic to check if the matrix should match an item repair recipe. (The same two items next to each other in the first two slow).
-			if (!matrixSlotStack.isEmpty()) {
-				if (matrixItemStackCount == 0) {
-					stack0 = matrixSlotStack;
-				}
+		while (recipeIterator.hasNext()) {
+			AnvilRecipeBase rec = recipeIterator.next();
 
-				if (matrixItemStackCount == 1) {
-					stack1 = matrixSlotStack;
-				}
-
-				++matrixItemStackCount;
+			if (rec.matches(matrix, world)) {
+				anvilRecipeBase = rec;
+				break;
 			}
 		}
 
-		// Logic to check if the matrix should match an item repair recipe. (The same two items next to each other in the first two slow).
-		if (matrixItemStackCount == 2 && stack0.getItem() == stack1.getItem() && stack0.getCount() == 1 && stack1.getCount() == 1
-				&& stack0.getItem().isRepairable()) {
+		if (anvilRecipeBase != null) {
+			time = anvilRecipeBase.getCraftTime();
+			toolTier = anvilRecipeBase.getToolTier();
+			anvilTier = anvilRecipeBase.getAnvilTier();
 
-			Item item0 = stack0.getItem();
-
-			int item0RemainingDurability = item0.getMaxDamage() - stack0.getItemDamage();
-			int itemDamageDifference = item0.getMaxDamage() - stack1.getItemDamage();
-			int itemDamageModifier =  (int) (item0RemainingDurability + itemDamageDifference + item0.getMaxDamage() * 0.1);
-			int newItemDamage = Math.max(0, item0.getMaxDamage() - itemDamageModifier);
-
-			return new ItemStack(stack0.getItem(), 1, newItemDamage);
-		} else {
-			//// Normal, registered recipes.
-			Iterator<AnvilRecipeBase> recipeIterator = getRecipes().iterator();
-			AnvilRecipeBase anvilRecipeBase = null;
-
-			while (recipeIterator.hasNext()) {
-				AnvilRecipeBase rec = recipeIterator.next();
-
-				if (rec.matches(matrix, world)) {
-					anvilRecipeBase = rec;
-					break;
-				}
+			if (!anvilRecipeBase.useCustomTiers()){
+				anvil.setProgressMax(time);
+				anvil.setRequiredToolTier(toolTier);
+				anvil.setRequiredAnvilTier(anvilTier);
 			}
 
-			if (anvilRecipeBase != null) {
-				time = anvilRecipeBase.getCraftTime();
-				hammerTier = anvilRecipeBase.getHammerTier();
-				anvilTier = anvilRecipeBase.getAnvilTier();
-				hot = anvilRecipeBase.isHotOutput();
-				toolType = anvilRecipeBase.getToolType();
-
-				if (!anvilRecipeBase.useCustomTiers()){
-					anvil.setProgressMax(time);
-					anvil.setRequiredHammerTier(hammerTier);
-					anvil.setRequiredAnvilTier(anvilTier);
-				}
-
-				anvil.setHotOutput(hot);
-				anvil.setRequiredToolType(toolType);
-
-				if (!anvilRecipeBase.getResearch().equalsIgnoreCase("tier")){
-					anvil.setRequiredResearch(anvilRecipeBase.getResearch());
-				}
-
-				anvil.setRequiredSkill(anvilRecipeBase.getSkill());
-
-				return anvilRecipeBase.getCraftingResult(matrix);
+			if (!anvilRecipeBase.getRequiredResearch().equalsIgnoreCase("tier")){
+				anvil.setRequiredResearch(anvilRecipeBase.getRequiredResearch());
 			}
-			return ItemStack.EMPTY;
+
+			return anvilRecipeBase;
 		}
+		return null;
 	}
 
 	public static AnvilRecipeBase findRecipeByOutput(Ingredient output) {
@@ -240,9 +212,9 @@ public class CraftingManagerAnvil {
 		return null;
 	}
 
-	public static AnvilRecipeBase getRecipeByName(String name) {
+	public static AnvilRecipeBase getRecipeByName(String name, boolean isNullable) {
 		ResourceLocation resourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID + ":" + name);
-		if (!ANVIL_RECIPES.containsKey(resourceLocation)) {
+		if (!ANVIL_RECIPES.containsKey(resourceLocation) && !isNullable) {
 			MineFantasyReforged.LOG.error("Anvil Recipe Registry does not contain recipe: {}", name);
 		}
 		return ANVIL_RECIPES.getValue(resourceLocation);
@@ -251,9 +223,16 @@ public class CraftingManagerAnvil {
 	public static List<AnvilRecipeBase> getRecipesByName(String... names) {
 		List<AnvilRecipeBase> recipes = new ArrayList<>();
 		for (String name : names) {
-			recipes.add(getRecipeByName(name));
+			recipes.add(getRecipeByName(name, false));
 		}
 		return recipes;
 	}
 
+	public static String getRecipeName(AnvilRecipeBase recipe) {
+		ResourceLocation recipeLocation = ANVIL_RECIPES.getKey(recipe);
+		if (recipeLocation != null) {
+			return recipeLocation.getPath();
+		}
+		return "";
+	}
 }

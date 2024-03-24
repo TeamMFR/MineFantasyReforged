@@ -1,0 +1,21 @@
+{
+  "type": "anvil_shaped_recipe",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 12,
+  "recipe_hammer": 3,
+  "vanilla_xp": 0.1,
+  "output_hot": false,
+  "pattern": [
+    "D"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:diamond_shards"
+  }
+}

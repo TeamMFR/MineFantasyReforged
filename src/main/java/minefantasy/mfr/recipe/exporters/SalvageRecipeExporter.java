@@ -70,7 +70,8 @@ public class SalvageRecipeExporter {
 				recipeType = "ah fuck cunts";
 			}
 
-			SalvageRecipeBase matchingRecipe = CraftingManagerSalvage.findMatchingRecipe(result);
+			// If you want to activate this again, institute an override for player in this check, or this will break
+			SalvageRecipeBase matchingRecipe = CraftingManagerSalvage.findMatchingRecipe(result, null);
 			if (matchingRecipe != null || result.isEmpty()) {
 				MineFantasyReforged.LOG.error("Rejected" + result.toString());
 				continue;

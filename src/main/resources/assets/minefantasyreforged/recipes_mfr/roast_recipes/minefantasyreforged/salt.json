@@ -1,0 +1,20 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 100,
+	"max_temperature": 200,
+	"cook_time": 2,
+	"can_burn": false,
+	"is_oven_recipe": false,
+	"research": "salt",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.1,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:bowl_water_salt"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:salt"
+	}
+}

@@ -1,0 +1,33 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "coke",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 12,
+  "recipe_hammer": 2,
+  "skill_xp": 0,
+  "vanilla_xp": 0.5,
+  "output_hot": false,
+  "pattern": [
+    "RCR",
+    "CFC",
+    "RCR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minecraft:coal",
+      "data": 0
+    },
+    "F": {
+      "item": "minefantasyreforged:flux_strong"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:prepared_coal"
+  }
+}

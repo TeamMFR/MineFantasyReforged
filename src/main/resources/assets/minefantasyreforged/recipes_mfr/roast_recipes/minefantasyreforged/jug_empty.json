@@ -1,0 +1,17 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 1000,
+	"max_temperature": 1000,
+	"cook_time": 5,
+	"can_burn": false,
+	"is_oven_recipe": true,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:jug_uncooked"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:jug_empty"
+	}
+}

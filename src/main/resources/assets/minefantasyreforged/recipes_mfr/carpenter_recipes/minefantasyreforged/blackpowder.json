@@ -1,0 +1,35 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "blackpowder",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 2,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "NS",
+    "CC",
+    "LL"
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:sulfur"
+    },
+    "C": {
+      "item": "minefantasyreforged:coal_dust"
+    },
+    "L": {
+      "item": "minefantasyreforged:clay_pot"
+    },
+    "N": {
+      "item": "minefantasyreforged:nitre"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:blackpowder",
+    "count": 2
+  }
+}

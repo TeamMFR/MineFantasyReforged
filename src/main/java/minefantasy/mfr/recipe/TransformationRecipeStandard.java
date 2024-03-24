@@ -32,10 +32,12 @@ public class TransformationRecipeStandard extends TransformationRecipeBase {
 			ItemStack offhandStack,
 			Skill skill,
 			String research,
+			int skillXp,
+			float vanillaXp,
 			int maxProgress,
 			String soundName,
 			List<String> blockStateProperties) {
-		super(tool, consumableStacks, dropStack, offhandStack, skill, research, maxProgress, soundName);
+		super(tool, consumableStacks, dropStack, offhandStack, skill, research, skillXp, vanillaXp, maxProgress, soundName);
 		this.inputs = inputs;
 		this.output = output;
 		this.blockStateProperties = blockStateProperties;

@@ -44,9 +44,10 @@ public class KitchenBenchRecipeFactory {
 
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		String research = JsonUtils.getString(json, "research", "none");
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
@@ -56,17 +57,20 @@ public class KitchenBenchRecipeFactory {
 
 		return new KitchenBenchShapelessRecipe(
 				result, ingredients,
-				tool_tier, block_tier, craft_time, experience, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, dirty_progress_amount);
+				tool_tier, block_tier, craft_time, tool_type,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)),
+				research, skill, skillXp, vanillaXp,
+				dirty_progress_amount);
 	}
 
 	private KitchenBenchRecipeBase parseShaped(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
 		String research = JsonUtils.getString(json, "research", "none");
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
@@ -76,8 +80,10 @@ public class KitchenBenchRecipeFactory {
 
 		return new KitchenBenchShapedRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
-				tool_tier, block_tier, craft_time, experience, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, dirty_progress_amount,
+				tool_tier, block_tier, craft_time, tool_type,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)),
+				research, skill, skillXp, vanillaXp,
+				dirty_progress_amount,
 				shouldMirror, recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 

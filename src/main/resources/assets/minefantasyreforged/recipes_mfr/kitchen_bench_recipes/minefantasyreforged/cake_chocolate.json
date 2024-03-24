@@ -1,0 +1,32 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "chocolate_cake",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 60,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.wood.step",
+  "dirty_progress_amount": 4,
+  "pattern": [
+    "ICI",
+    " K "
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:chocolate"
+    },
+    "I": {
+      "item": "minefantasyreforged:icing"
+    },
+    "K": {
+      "item": "minefantasyreforged:cake_choc_uniced"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:cake_chocolate",
+    "data": 0
+  }
+}

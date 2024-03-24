@@ -10,25 +10,29 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerCarpenter extends ContainerBase {
-	private TileEntityCarpenter tile;
-	private boolean isGuiContainer;
+	private final TileEntityCarpenter tile;
+	private final boolean isGuiContainer;
 
 	public ContainerCarpenter(TileEntityCarpenter tile) {
 		isGuiContainer = false;
 		this.tile = tile;
-		int width = tile.width;
-		int height = tile.height;
+		int width = TileEntityCarpenter.WIDTH;
+		int height = TileEntityCarpenter.HEIGHT;
 
 		//main grid
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				int slot = y * width + x;
-				this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 44 + x * 18, 54 + y * 18));
+				this.addSlotToContainer(new SlotItemHandler(tile.getInventory(),
+						slot, 44 + x * 18, 54 + y * 18));
 			}
 		}
 
+		//Output Slots
+		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(),
+				tile.getOutputSlotNum(), 174, 80));
+
 		//special slots
-		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
 		for (int y = 0; y < 4; y++) {
 			int slot = tile.getInventory().getSlots() - 4 + y;
 			this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));
@@ -39,14 +43,16 @@ public class ContainerCarpenter extends ContainerBase {
 		super(player.inventory, tile);
 		isGuiContainer = true;
 		this.tile = tile;
-		int width = tile.width;
-		int height = tile.height;
+		int width = TileEntityCarpenter.WIDTH;
+		int height = TileEntityCarpenter.HEIGHT;
 
 		//main grid
 		addTileSlots(width, height, 44, 54);
 
+		//Output Slots
+		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(),
+				tile.getOutputSlotNum(), 174, 80));
 		//special slots
-		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
 		for (int y = 0; y < 4; y++) {
 			int slot = tile.getInventory().getSlots() - 4 + y;
 			this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));

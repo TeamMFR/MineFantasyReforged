@@ -12,7 +12,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerResearchBench extends ContainerBase {
-	private TileEntityResearchBench tile;
+	private final TileEntityResearchBench tile;
 	private int lastProgress;
 	private int lastProgressMax;
 

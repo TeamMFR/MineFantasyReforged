@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "provisioning",
+  "research": "bandage",
+  "tool_type": "needle",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "RRR"
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rawhide_medium"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bandage_crude",
+    "count": 4
+  }
+}

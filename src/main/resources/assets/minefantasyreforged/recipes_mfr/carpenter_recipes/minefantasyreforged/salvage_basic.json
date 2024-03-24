@@ -1,0 +1,32 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "SFS",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "S": {
+      "item": "#STONE"
+    },
+    "C": {
+      "item": "minecraft:crafting_table"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:salvage_basic"
+  }
+}

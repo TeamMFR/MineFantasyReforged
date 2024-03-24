@@ -1,0 +1,29 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 1,
+    "repeat_amount": 1,
+    "research": "smelt_red_steel",
+    "skill": "artisanry",
+    "skill_xp": 3,
+    "vanilla_xp": 0.7,
+    "ingredients": [
+        {
+            "item": "#BAR_BLACK_STEEL"
+        },
+        {
+            "item": "#BAR_GOLD"
+        },
+        {
+            "item": "minecraft:redstone"
+        },
+        {
+            "item": "minecraft:blaze_powder"
+        },
+        {
+            "item": "minefantasyreforged:flux_strong"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:red_steel_weak_ingot"
+    }
+}

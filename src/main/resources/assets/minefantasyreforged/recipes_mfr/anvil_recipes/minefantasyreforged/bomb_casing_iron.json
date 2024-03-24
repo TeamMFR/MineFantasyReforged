@@ -1,0 +1,35 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "bomb_iron",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 30,
+  "recipe_hammer": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    " E ",
+    " M ",
+    "MRM",
+    " M "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools",
+      "data": 32767
+    },
+    "M": {
+      "item": "#HUNK_IRON"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bomb_casing_iron",
+    "count": 2
+  }
+}

@@ -4,7 +4,7 @@ import minefantasy.mfr.api.crafting.IQualityBalance;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.block.BlockAnvilMF;
-import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.constants.Trait;
 import minefantasy.mfr.container.ContainerAnvil;
@@ -55,16 +55,16 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	private static final String LEFT_HIT_TAG = "left_hit";
 	private static final String RIGHT_HIT_TAG = "right_hit";
-	private static final String OUTPUT_HOT_TAG = "output_hot";
 	private static final String TEXTURE_NAME_TAG = "texture_name";
 	private static final String REQUIRED_HAMMER_TIER_TAG = "required_hammer_tier";
 	private static final String REQUIRED_ANVIL_TIER_TAG = "required_anvil_tier";
 
+	public static final int WIDTH = 6;
+	public static final int HEIGHT = 4;
+
 	// the tier of this anvil block
 	private int tier;
 	private String textureName;
-
-	// research specific fields
 
 	private ItemStack resultStack = ItemStack.EMPTY;
 	private ItemStack resultStackSpecial = ItemStack.EMPTY;
@@ -79,11 +79,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	private float itemRotation = 0F;
 	private ContainerAnvil syncAnvil;
 	private AnvilCraftMatrix craftMatrix;
-	private Tool requiredToolType = Tool.HAMMER;
 	private String requiredResearch = "";
-	private boolean outputHot = false;
-	private Skill requiredSkill;
-	private int requiredHammerTier;
+	private int requiredToolTier;
 	private int requiredAnvilTier;
 	private int ticksExisted;
 
@@ -180,12 +177,21 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public boolean tryCraft(EntityPlayer user, boolean rightClick) {
+		AnvilRecipeBase anvilRecipe = null;
+		if (getRecipe() instanceof AnvilRecipeBase) {
+			anvilRecipe = (AnvilRecipeBase) getRecipe();
+		}
+
+		if (anvilRecipe == null) {
+			return false;
+		}
+
 		if (user == null) {
 			return false;
 		}
 
 		Tool tool = ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand());
-		int hammerTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
+		int toolTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
 		if (tool == Tool.HAMMER || tool == Tool.HEAVY_HAMMER) {
 			if (!user.getHeldItemMainhand().isEmpty()) {
 				user.getHeldItemMainhand().damageItem(1, user);
@@ -197,9 +203,9 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				}
 			}
 
-			if (doesPlayerKnowCraft(user) && canCraft() && tool == requiredToolType) {
+			if (doesPlayerKnowCraft(user) && canCraft() && tool == anvilRecipe.getToolType()) {
 				float mod = 1.0F;
-				if (hammerTier < requiredHammerTier) {
+				if (toolTier < requiredToolTier) {
 					mod = 2.0F;
 					if (world.rand.nextInt(5) == 0) {
 						reassignHitValues();
@@ -223,7 +229,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 				progress += Math.max(0.2F, efficiency);
 				if (progress >= progressMax) {
-					craftItem(user);
+					craftItem(user, anvilRecipe);
 				}
 			} else {
 				world.playSound(user, pos.add(0.5D, 0.5D, 0.5D), MineFantasySounds.ANVIL_FAIL, SoundCategory.NEUTRAL, 0.25F, 1.0F);
@@ -246,10 +252,10 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
-		return getRequiredResearch().isEmpty() || ResearchLogic.hasInfoUnlocked(user, getRequiredResearch());
+		return requiredResearch.isEmpty() || ResearchLogic.hasInfoUnlocked(user, requiredResearch);
 	}
 
-	private void craftItem(EntityPlayer lastHit) {
+	private void craftItem(EntityPlayer lastHit, AnvilRecipeBase anvilRecipe) {
 		if (this.canCraft()) {
 			ItemStack result = modifySpecials(this.resultStack, lastHit);
 			if (result.isEmpty()) {
@@ -265,7 +271,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 
 			int temp = this.calcAverageTemp();
-			if (outputHot && temp > 0) {
+			if (anvilRecipe.isHotOutput() && temp > 0) {
 				result = ItemHeated.createHotItem(result, temp);
 			}
 
@@ -298,7 +304,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 				}
 			}
 
-			addXP(lastHit);
+			addXP(lastHit, anvilRecipe);
 			consumeResources(lastHit);
 		}
 		onInventoryChanged();
@@ -307,18 +313,14 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		qualityBalance = 0;
 	}
 
-	private void addXP(EntityPlayer smith) {
+	private void addXP(EntityPlayer smith, AnvilRecipeBase anvilRecipe) {
 		if (!world.isRemote){
-			if (requiredSkill == Skill.NONE)
-				return;
-			if (requiredSkill == null){
-				return;
-			}
 
 			float baseXP = this.progressMax / 10F;
 			baseXP /= (1.0F + getAbsoluteBalance());
 
-			requiredSkill.addXP(smith, (int) baseXP + 1);
+			anvilRecipe.giveSkillXp(smith, (int) baseXP + 1);
+			anvilRecipe.giveVanillaXp(smith,  baseXP, 1);
 		}
 	}
 
@@ -370,7 +372,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 						}
 					}
 				}
-				if (totalTemp >= 12250) {
+				if (totalTemp >= ConfigCrafting.minimumDragonforgedTemperature) {
 					PlayerTickHandler.spawnDragon(player);
 					PlayerTickHandler.addDragonEnemyPts(player, 2);
 
@@ -530,6 +532,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	// CRAFTING CODE
 	public ItemStack getResultStack() {
+		ItemStack result = ItemStack.EMPTY;
+
 		if (syncAnvil == null || craftMatrix == null) {
 			return ItemStack.EMPTY;
 		}
@@ -538,15 +542,18 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		ItemStack result = CraftingManagerAnvil.findMatchingRecipe(this, craftMatrix, world);
-		if (result == null || result.getItem() == Item.getItemFromBlock(Blocks.AIR)) { // right side is only necessary till we fix the empty AIR recipes
-			result = ItemStack.EMPTY;
+		AnvilRecipeBase anvilRecipe = CraftingManagerAnvil.findMatchingRecipe(this, craftMatrix, world);
+		if (anvilRecipe != null) {
+			setRecipe(anvilRecipe);
+			result = anvilRecipe.getCraftingResult(craftMatrix);
+		}
+		else {
 			resetProject();
 		}
 
-		SpecialRecipeBase recipe = CraftingManagerSpecial.findMatchingRecipe(result, getInventory().getStackInSlot(getInventory().getSlots() - 1));
-		if (recipe != null) {
-			resultStackSpecial = recipe.getOutput().copy();
+		SpecialRecipeBase specialRecipe = CraftingManagerSpecial.findMatchingRecipe(result, getInventory().getStackInSlot(getInventory().getSlots() - 1));
+		if (specialRecipe != null) {
+			resultStackSpecial = specialRecipe.getOutput().copy();
 		}
 		else {
 			resultStackSpecial = ItemStack.EMPTY;
@@ -593,11 +600,6 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			return this.canFitResult(resultStack);
 		}
 		return false;
-	}
-
-	@Override
-	public void setHotOutput(boolean i) {
-		outputHot = i;
 	}
 
 	public void setContainer(ContainerAnvil container) {
@@ -730,18 +732,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	@Override
-	public void setRequiredToolType(String toolType) {
-		this.requiredToolType = Tool.fromName(toolType);
-	}
-
-	@Override
 	public void setRequiredResearch(String research) {
 		this.requiredResearch = research;
-	}
-
-	@Override
-	public void setRequiredSkill(Skill skill) {
-		this.requiredSkill = skill;
 	}
 
 	@Override
@@ -750,13 +742,17 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	@Override
-	public void setRequiredHammerTier(int i) {
-		requiredHammerTier = i;
+	public void setRequiredToolTier(int i) {
+		requiredToolTier = i;
 	}
 
 	@Override
 	public void setRequiredAnvilTier(int i) {
 		requiredAnvilTier = i;
+	}
+
+	public int getRequiredAnvilTier() {
+		return requiredAnvilTier;
 	}
 
 	public int getTier() {
@@ -771,24 +767,8 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
 	}
 
-	@Override
-	public int getRequiredHammerTier() { return requiredHammerTier; }
-
-	@Override
-	public int getRequiredAnvilTier() {
-		return requiredAnvilTier;
-	}
-
-	public String getRequiredResearch() {
-		return requiredResearch;
-	}
-
-	public Tool getRequiredToolType() {
-		return requiredToolType;
-	}
-
 	public int getToolTierNeeded() {
-		return this.requiredHammerTier;
+		return this.requiredToolTier;
 	}
 
 	public boolean isHit() {
@@ -809,7 +789,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 
 	private void resetProject() {
 		resultStack = ItemStack.EMPTY;
-		requiredHammerTier = 0;
+		requiredToolTier = 0;
 		requiredAnvilTier = 0;
 		progress = 0;
 		progressMax = 0;
@@ -825,11 +805,12 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
 		resultStackSpecial = new ItemStack(nbt.getCompoundTag(RESULT_STACK_SPECIAL_TAG));
 		requiredAnvilTier = nbt.getInteger(REQUIRED_ANVIL_TIER_TAG);
-		requiredHammerTier = nbt.getInteger(REQUIRED_HAMMER_TIER_TAG);
-		requiredToolType = Tool.fromName(nbt.getString(TOOL_TYPE_REQUIRED_TAG));
+		requiredToolTier = nbt.getInteger(REQUIRED_HAMMER_TIER_TAG);
 		requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(CraftingManagerAnvil.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		}
 		textureName = nbt.getString(TEXTURE_NAME_TAG);
-		outputHot = nbt.getBoolean(OUTPUT_HOT_TAG);
 		qualityBalance = nbt.getFloat(QUALITY_TAG);
 		leftHit = nbt.getFloat(LEFT_HIT_TAG);
 		rightHit = nbt.getFloat(RIGHT_HIT_TAG);
@@ -845,11 +826,12 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
 		nbt.setTag(RESULT_STACK_SPECIAL_TAG, resultStackSpecial.writeToNBT(new NBTTagCompound()));
 		nbt.setInteger(REQUIRED_ANVIL_TIER_TAG, requiredAnvilTier);
-		nbt.setInteger(REQUIRED_HAMMER_TIER_TAG, requiredHammerTier);
-		nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType.getName());
+		nbt.setInteger(REQUIRED_HAMMER_TIER_TAG, requiredToolTier);
 		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
 		nbt.setString(TEXTURE_NAME_TAG, textureName);
-		nbt.setBoolean(OUTPUT_HOT_TAG, outputHot);
 		nbt.setFloat(QUALITY_TAG, qualityBalance);
 		nbt.setFloat(LEFT_HIT_TAG, leftHit);
 		nbt.setFloat(RIGHT_HIT_TAG, rightHit);

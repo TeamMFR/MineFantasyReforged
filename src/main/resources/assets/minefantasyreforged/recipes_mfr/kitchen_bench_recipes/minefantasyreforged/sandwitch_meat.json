@@ -1,0 +1,33 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "sandwitch",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 4,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.wood.hit",
+  "dirty_progress_amount": 2,
+  "pattern": [
+    "B",
+    "C",
+    "G",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bread_slice"
+    },
+    "C": {
+      "item": "minefantasyreforged:cheese_slice"
+    },
+    "G": {
+      "item": "minefantasyreforged:generic_meat_cooked"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:sandwitch_meat"
+  }
+}

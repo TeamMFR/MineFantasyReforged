@@ -14,19 +14,19 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerAnvil extends ContainerBase {
-	private TileEntityAnvil tile;
-	private boolean isGuiContainer;
-	private int xInvOffset = 28;
+	private final TileEntityAnvil tile;
+	private final boolean isGuiContainer;
 
 	public ContainerAnvil(TileEntityAnvil tile) {
 		isGuiContainer = false;
 		this.tile = tile;
-		int width = 6;
-		int height = 4;
+		int width = TileEntityAnvil.WIDTH;
+		int height = TileEntityAnvil.HEIGHT;
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				int slot = y * width + x;
-				this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 8 + x * 18, 38 + y * 18));
+				this.addSlotToContainer(new SlotItemHandler(tile.getInventory(),
+						slot, 8 + x * 18, 38 + y * 18));
 			}
 		}
 		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 150, 65));
@@ -41,8 +41,10 @@ public class ContainerAnvil extends ContainerBase {
 
 		addTileSlots(width, height, 44, 38);
 
-		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 1, 214, 66));
+		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(),
+				tile.getInventory().getSlots() - 1, 214, 66));
 
+		int xInvOffset = 28;
 		addPlayerSlots(player.inventory, 8 + xInvOffset, 186);
 	}
 

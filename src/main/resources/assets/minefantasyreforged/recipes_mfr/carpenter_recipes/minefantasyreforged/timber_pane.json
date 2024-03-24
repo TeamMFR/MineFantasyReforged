@@ -1,0 +1,30 @@
+{
+  "type": "carpenter_shaped_custom_material_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": 0,
+  "skill_xp": 1,
+  "vanilla_xp": 0.4,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNN",
+    "PLP",
+    "PLP"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber_cut"
+    },
+    "L": {
+      "item": "minefantasyreforged:timber"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:timber_pane"
+  }
+}

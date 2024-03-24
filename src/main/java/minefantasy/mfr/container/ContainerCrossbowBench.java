@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ContainerCrossbowBench extends ContainerBase {
-	private TileEntityCrossbowBench tile;
+	private final TileEntityCrossbowBench tile;
 
 	public ContainerCrossbowBench(EntityPlayer player, TileEntityCrossbowBench tile) {
 		super(player.inventory, tile);

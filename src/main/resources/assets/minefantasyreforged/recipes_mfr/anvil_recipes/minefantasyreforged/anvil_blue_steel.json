@@ -1,0 +1,26 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "smelt_blue_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 110,
+  "recipe_hammer": -1,
+  "skill_xp": 3,
+  "vanilla_xp": 0.6,
+  "output_hot": false,
+  "pattern": [
+    " BB",
+    "BBB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "#BAR_BLUE_STEEL"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:anvil_blue_steel"
+  }
+}

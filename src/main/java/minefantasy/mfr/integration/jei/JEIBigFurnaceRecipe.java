@@ -12,13 +12,18 @@ import java.util.List;
 
 public class JEIBigFurnaceRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final BigFurnaceRecipeBase recipe;
+	protected BigFurnaceRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
 	public JEIBigFurnaceRecipe(BigFurnaceRecipeBase recipe, IStackHelper stackHelper ) {
 		this.result = recipe.getBigFurnaceRecipeOutput();
 		this.recipe = recipe;
 		this.ingredients = stackHelper.expandRecipeItemStackInputs(recipe.getInputs());
+	}
+
+	public JEIBigFurnaceRecipe(ItemStack output, List<ItemStack> inputs, IStackHelper stackHelper) {
+		this.result = output;
+		this.ingredients = stackHelper.expandRecipeItemStackInputs(inputs);
 	}
 
 	@Override

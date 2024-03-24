@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.5,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "SS ",
+    "SSS",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "#STONE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:anvil_stone"
+  }
+}

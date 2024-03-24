@@ -1,0 +1,16 @@
+{
+	"type": "blast_furnace_recipe",
+	"research": "smelt_black_steel",
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.6,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:black_steel_weak_ingot"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"black_steel\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

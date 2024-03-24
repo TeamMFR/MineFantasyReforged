@@ -1,0 +1,27 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 3,
+    "repeat_amount": 2,
+    "research": "smelt_mithium",
+    "skill": "artisanry",
+    "skill_xp": 5,
+    "vanilla_xp": 1.0,
+    "ingredients": [
+        {
+            "item": "#BAR_MITHRIL"
+        },
+        {
+            "item": "#BAR_MITHRIL"
+        },
+        {
+            "item": "minefantasyreforged:diamond_shards"
+        },
+        {
+            "item": "minecraft:ghast_tear"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"mithium\"}}"
+    }
+}

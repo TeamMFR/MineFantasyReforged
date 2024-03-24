@@ -1,0 +1,31 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "research": "craft_armour_medium",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 20,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "RSTSR",
+    "RS SR"
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "S": {
+      "item": "minefantasyreforged:scale_mesh"
+    },
+    "T": {
+      "item": "minefantasyreforged:strong_leather_leggings"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_scale_leggings"
+  }
+}

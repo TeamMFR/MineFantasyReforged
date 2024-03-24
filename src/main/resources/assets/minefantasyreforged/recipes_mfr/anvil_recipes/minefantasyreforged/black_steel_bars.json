@@ -1,0 +1,25 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "research": "smelt_black_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 4,
+  "recipe_time": 20,
+  "recipe_hammer": 4,
+  "skill_xp": 0,
+  "vanilla_xp": 0.4,
+  "output_hot": false,
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "#HUNK_BLACK_STEEL"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:black_steel_bars"
+  }
+}

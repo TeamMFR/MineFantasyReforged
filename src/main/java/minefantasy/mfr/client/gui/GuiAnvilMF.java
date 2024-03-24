@@ -3,6 +3,7 @@ package minefantasy.mfr.client.gui;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.TextureHelperMFR;
@@ -17,12 +18,19 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiAnvilMF extends GuiContainer {
-	private TileEntityAnvil tile;
-	private int regularXSize = 176;
-	private int xInvOffset = 28;
+	private final TileEntityAnvil tile;
+	private final AnvilRecipeBase anvilRecipe;
+	private final int regularXSize = 176;
+	private final int xInvOffset = 28;
 
 	public GuiAnvilMF(ContainerBase container, TileEntityAnvil tile) {
 		super(container);
+		if (tile.getRecipe() instanceof AnvilRecipeBase) {
+			this.anvilRecipe = (AnvilRecipeBase) tile.getRecipe();
+		}
+		else {
+			this.anvilRecipe = null;
+		}
 		this.xSize = 235;
 		this.ySize = 210;
 		this.tile = tile;
@@ -49,10 +57,10 @@ public class GuiAnvilMF extends GuiContainer {
 		int xPoint = (this.width - this.xSize) / 2 + 30;
 		int yPoint = (this.height - this.ySize) / 2;
 
-		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
-			if (tile.getRequiredToolType() != Tool.OTHER) {
+		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && anvilRecipe != null) {
+			if (anvilRecipe.getToolType() != Tool.OTHER) {
 				if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-					String s2 = tile.getRequiredToolType().getDisplayName() + ", "
+					String s2 = anvilRecipe.getToolType().getDisplayName() + ", "
 							+ (tile.getToolTierNeeded() > -1
 							? I18n.format("attribute.mfcrafttier.name") + " "
 							+ tile.getToolTierNeeded()
@@ -87,12 +95,13 @@ public class GuiAnvilMF extends GuiContainer {
 			int progressWidth = (int) (160F / tile.progressMax * tile.progress);
 			this.drawTexturedModalRect(xPoint + 8 + xInvOffset, yPoint + 21, 0, 210, progressWidth, 3);
 		}
-		if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")) {
+		if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")
+				&& anvilRecipe != null) {
 			GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPoint + regularXSize + xInvOffset,
 					yPoint, isBlockSufficient(), true);
 
-			if (tile.getRequiredToolType() != Tool.OTHER) {
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
+			if (anvilRecipe.getToolType() != Tool.OTHER) {
+				GuiHelper.renderToolIcon(this, anvilRecipe.getToolType().getName(), tile.getToolTierNeeded(), xPoint - 20 + xInvOffset,
 						yPoint, isToolSufficient(), true);
 			}
 		}
@@ -104,7 +113,7 @@ public class GuiAnvilMF extends GuiContainer {
 
 	private boolean isToolSufficient() {
 		if (mc.player != null) {
-			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(),
+			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), anvilRecipe.getToolType(),
 					tile.getToolTierNeeded());
 		}
 		return false;

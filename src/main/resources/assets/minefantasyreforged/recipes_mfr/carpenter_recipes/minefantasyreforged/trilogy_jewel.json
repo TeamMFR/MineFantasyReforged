@@ -1,0 +1,31 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "research": "smelt_master",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "skill_xp": 3,
+  "vanilla_xp": 0.6,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    " C ",
+    "M A"
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:ancient_jewel_master"
+    },
+    "M": {
+      "item": "minefantasyreforged:ancient_jewel_mithril"
+    },
+    "A": {
+      "item": "minefantasyreforged:ancient_jewel_adamant"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:trilogy_jewel",
+    "count": 1
+  }
+}

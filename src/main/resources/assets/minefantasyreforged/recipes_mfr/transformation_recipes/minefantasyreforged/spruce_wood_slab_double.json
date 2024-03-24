@@ -1,0 +1,21 @@
+{
+	"type": "transformation_recipe_blockstate",
+	"tool_type": "saw",
+	"skill": "construction",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"soundName": "minefantasyreforged:block.sawcarpenter",
+	"maxProgress": 4,
+	"dropStack": {
+		"item": "minecraft:wooden_slab",
+		"data": 1
+	},
+	"inputBlockState": {
+		"Name": "minecraft:double_wooden_slab",
+		"Properties": {"variant" : "spruce"}
+	},
+	"outputBlockState": {
+		"Name": "minecraft:wooden_slab",
+		"Properties": {"half": "bottom", "variant": "spruce"}
+	}
+}

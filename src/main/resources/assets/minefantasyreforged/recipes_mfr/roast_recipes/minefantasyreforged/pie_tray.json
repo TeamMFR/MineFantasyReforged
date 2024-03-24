@@ -1,0 +1,20 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 1000,
+	"max_temperature": 1000,
+	"cook_time": 10,
+	"can_burn": false,
+	"is_oven_recipe": true,
+	"research": "cooking_utensils",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:pie_tray_uncooked"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:pie_tray"
+	}
+}

@@ -79,7 +79,7 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 		}
 
 		// draw tool icon with required tier int
-		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType(), recipe.getHammerTier(), recipeWidth - 23, recipeHeight - 98, true, true);
+		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getToolType().getName(), recipe.getToolTier(), recipeWidth - 23, recipeHeight - 98, true, true);
 
 		// draw bench icon with required tier int
 		GuiHelper.renderToolIcon(minecraft.currentScreen, "anvil", recipe.getAnvilTier(), recipeWidth - 23, recipeHeight - 48, true, true);
@@ -88,8 +88,8 @@ public class JEIAnvilRecipe implements IRecipeWrapper {
 
 		if (GuiHelper.isPointInRegion(recipeWidth - 23, recipeHeight - 98, 20, 20, mouseX, mouseY, 0, 0)) {
 			// Shows the tool tooltip text with the name of the tool and the minimum tier
-			String s2 = I18n.format("tooltype." + recipe.getToolType()) + ", " + (recipe.getHammerTier() > -1
-					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.getHammerTier()
+			String s2 = I18n.format("tooltype." + recipe.getToolType()) + ", " + (recipe.getToolTier() > -1
+					? I18n.format("attribute.mfcrafttier.name") + " " + recipe.getToolTier()
 					: I18n.format("attribute.nomfcrafttier.name"));
 			minecraft.fontRenderer.drawStringWithShadow(s2, (float) ((recipeWidth / 2) - minecraft.fontRenderer.getStringWidth(s2) / 2), (float) 84, 16777215);
 		} else if (GuiHelper.isPointInRegion(recipeWidth - 23, recipeHeight - 48, 20, 20, mouseX, mouseY, 0, 0)) {

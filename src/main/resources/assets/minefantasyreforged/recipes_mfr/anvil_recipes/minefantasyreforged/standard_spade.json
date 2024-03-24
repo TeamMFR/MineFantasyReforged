@@ -1,0 +1,32 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "research": "tier",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 10,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "L  ",
+    "TTB",
+    "L  "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "T": {
+      "item": "minefantasyreforged:timber"
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_spade"
+  }
+}

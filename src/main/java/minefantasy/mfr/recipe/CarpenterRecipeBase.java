@@ -1,6 +1,7 @@
 package minefantasy.mfr.recipe;
 
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -11,7 +12,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
-public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<CarpenterRecipeBase>{
+public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<CarpenterRecipeBase> implements IRecipeMFR{
 	public static final int MAX_WIDTH = 4;
 	public static final int MAX_HEIGHT = 4;
 	protected ItemStack output;
@@ -19,20 +20,25 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 	protected final int toolTier;
 	protected final int carpenterTier;
 	protected final int craftTime;
-	protected final float recipeExperience;
-	protected final String toolType;
+	protected Integer skillXp;
+	protected float vanillaXp;
+	protected final Tool toolType;
 	protected final SoundEvent soundOfCraft;
 	protected final String research;
 	protected final Skill skillUsed;
 
-	public CarpenterRecipeBase(ItemStack output, NonNullList<Ingredient> inputs, int toolTier, int carpenterTier, int craftTime, float recipeExperience, String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed) {
+	public CarpenterRecipeBase(ItemStack output, NonNullList<Ingredient> inputs,
+			int toolTier, int carpenterTier, int craftTime,
+			int skillXp, float recipeExperience, String toolType, SoundEvent soundOfCraft,
+			String research, Skill skillUsed) {
 		this.output = output;
 		this.inputs = inputs;
 		this.toolTier = toolTier;
 		this.carpenterTier = carpenterTier;
 		this.craftTime = craftTime;
-		this.recipeExperience = recipeExperience;
-		this.toolType = toolType;
+		this.skillXp = skillXp;
+		this.vanillaXp = recipeExperience;
+		this.toolType = Tool.fromName(toolType);
 		this.soundOfCraft = soundOfCraft;
 		this.research = research;
 		this.skillUsed = skillUsed;
@@ -57,6 +63,11 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 		return 0;
 	}
 
+	@Override
+	public String getName() {
+		return CraftingManagerCarpenter.getRecipeName(this);
+	}
+
 	/**
 	 * Returns an Item that is the result of this recipe
 	 */
@@ -76,15 +87,21 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 		return toolTier;
 	}
 
-	public float getExperience() {
-		return recipeExperience;
+	@Override
+	public int getSkillXp() {
+		return skillXp;
+	}
+
+	@Override
+	public float getVanillaXp() {
+		return vanillaXp;
 	}
 
 	public int getCarpenterTier() {
 		return carpenterTier;
 	}
 
-	public String getToolType() {
+	public Tool getToolType() {
 		return toolType;
 	}
 
@@ -96,10 +113,12 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 		return output;
 	}
 
-	public String getResearch() {
+	@Override
+	public String getRequiredResearch() {
 		return research;
 	}
 
+	@Override
 	public Skill getSkill() {
 		return skillUsed;
 	}
@@ -114,5 +133,10 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 
 	public int getHeight() {
 		return MAX_HEIGHT;
+	}
+
+	@Override
+	public boolean shouldSlotGiveSkillXp() {
+		return false;
 	}
 }

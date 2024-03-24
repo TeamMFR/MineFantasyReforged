@@ -19,8 +19,11 @@ public class AnvilShapedCustomMaterialRecipe extends AnvilRecipeBase {
 	protected boolean tierModifyOutputCount;
 	public AnvilShapedCustomMaterialRecipe(NonNullList<Ingredient> inputs, ItemStack output,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
-			String requiredResearch, Skill requiredSkill, int width, int height, boolean tierModifyOutputCount) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
+			String requiredResearch, Skill requiredSkill,
+			int skillXp, float vanillaXp,
+			int width, int height, boolean tierModifyOutputCount) {
+		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.width = width;
 		this.height = height;
 		this.tierModifyOutputCount = tierModifyOutputCount;

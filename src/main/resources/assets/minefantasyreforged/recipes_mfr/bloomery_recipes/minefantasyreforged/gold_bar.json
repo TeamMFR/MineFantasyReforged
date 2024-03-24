@@ -1,0 +1,21 @@
+{
+	"type": "bloomery_recipe",
+	"research": "smelt_iron",
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"ingredients": [
+		{
+			"item": "#GOLD_ORE"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"gold\"}}",
+		"item": "minefantasyreforged:bar"
+	},
+	"conditions" : [
+		{
+			"type": "minefantasyreforged:hccreduceingots"
+		}
+	]
+}

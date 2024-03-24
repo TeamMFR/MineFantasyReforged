@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ContainerBlastChamber extends ContainerBase {
-	private TileEntityBlastChamber tile;
+	private final TileEntityBlastChamber tile;
 
 	public ContainerBlastChamber(InventoryPlayer playerInventory, TileEntityBlastChamber tile) {
 		super(playerInventory, tile);
@@ -67,7 +67,7 @@ public class ContainerBlastChamber extends ContainerBase {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (TileEntityBlastChamber.isInput(itemstack1)) {
+				} else if (tile.isInput(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
 						return ItemStack.EMPTY;
 					}

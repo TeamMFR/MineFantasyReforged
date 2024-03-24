@@ -1,0 +1,28 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "cheese_roll",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 30,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.wood.hit",
+  "dirty_progress_amount": 5,
+  "pattern": [
+    "C",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:breadroll"
+    },
+    "C": {
+      "item": "minefantasyreforged:cheese_slice"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:cheese_roll"
+  }
+}

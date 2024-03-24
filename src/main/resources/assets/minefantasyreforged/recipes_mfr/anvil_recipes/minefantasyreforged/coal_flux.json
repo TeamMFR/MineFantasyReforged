@@ -1,0 +1,30 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "coal_flux",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 2,
+  "recipe_hammer": 2,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": false,
+  "pattern": [
+    "F",
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:coal",
+      "data": 0
+    },
+    "F": {
+      "item": "minefantasyreforged:flux_pot"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:coal_flux",
+    "count": 2
+  }
+}

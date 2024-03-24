@@ -47,14 +47,15 @@ public class CarpenterRecipeFactory {
 		String research = JsonUtils.getString(json, "research", "none");
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
 
 		return new CarpenterDynamicRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
-				tool_tier, block_tier, craft_time, experience, tool_type,
+				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
@@ -73,7 +74,8 @@ public class CarpenterRecipeFactory {
 		String research = JsonUtils.getString(json, "research", "none");
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
@@ -82,7 +84,7 @@ public class CarpenterRecipeFactory {
 
 		return new CarpenterShapelessCustomMaterialRecipe(
 				result, ingredients, tool_tier, block_tier, craft_time,
-				experience, tool_type,
+				skillXp, vanillaXp, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill);
 	}
 
@@ -92,14 +94,15 @@ public class CarpenterRecipeFactory {
 		String research = JsonUtils.getString(json, "research", "none");
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
 
 		return new CarpenterShapedCustomMaterialRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
-				tool_tier, block_tier, craft_time, experience, tool_type,
+				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
@@ -118,7 +121,8 @@ public class CarpenterRecipeFactory {
 		String research = JsonUtils.getString(json, "research", "none");
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
@@ -127,7 +131,7 @@ public class CarpenterRecipeFactory {
 
 		return new CarpenterShapelessRecipe(
 				result, ingredients,
-				tool_tier, block_tier, craft_time, experience, tool_type,
+				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill);
 	}
 
@@ -137,7 +141,8 @@ public class CarpenterRecipeFactory {
 		String research = JsonUtils.getString(json, "research", "none");
 		String sound = JsonUtils.getString(json, "sound", "minecraft:block.wood.hit");
 		String tool_type = JsonUtils.getString(json, "tool_type", "none");
-		float experience = JsonUtils.getFloat(json, "experience", 0F);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
@@ -146,7 +151,7 @@ public class CarpenterRecipeFactory {
 
 		return new CarpenterShapedRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
-				tool_tier, block_tier, craft_time, experience, tool_type,
+				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
 				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, shouldMirror,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}

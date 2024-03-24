@@ -1,0 +1,23 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 8,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.wood.hit",
+  "dirty_progress_amount": 8,
+  "pattern": [
+    "RRRR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:rotten_flesh"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:guts"
+  }
+}

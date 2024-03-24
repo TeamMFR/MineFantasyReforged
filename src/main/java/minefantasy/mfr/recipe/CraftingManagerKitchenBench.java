@@ -7,6 +7,7 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mixin.InvokerLoadConstants;
 import minefantasy.mfr.recipe.factories.KitchenBenchRecipeFactory;
 import minefantasy.mfr.recipe.types.KitchenBenchRecipeType;
 import minefantasy.mfr.util.FileUtils;
@@ -14,13 +15,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
@@ -29,8 +28,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -39,6 +36,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CraftingManagerKitchenBench {
+
+	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/kitchen_bench_recipes";
 
 	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/kitchen_bench_recipes/";
 
@@ -56,19 +55,37 @@ public class CraftingManagerKitchenBench {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final KitchenBenchRecipeFactory factory = new KitchenBenchRecipeFactory();
-	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
 
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/kitchen_bench_recipes", CraftingHelper.CONDITIONS));
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m -> CraftingManagerKitchenBench.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/kitchen_bench_recipes"));
+		Loader.instance().getActiveModList().forEach(m ->
+				loadRecipesForEachModDirectory(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
 
 		Loader.instance().setActiveModContainer(modContainer);
+	}
+
+	private static void loadRecipesForEachModDirectory(ModContainer mod, File source, String base) {
+		File recipeDirectory = new File(source.toPath().resolve(base).toString());
+		File[] files = recipeDirectory.listFiles();
+		if (files != null) {
+			for (File d : files) {
+				if (d.isDirectory()) {
+					Path modId = d.toPath().getName(d.toPath().getNameCount() - 1);
+					if (!Loader.isModLoaded(modId.toString())) {
+						return;
+					}
+					String modBase = base + "/" + modId;
+					loadRecipes(mod, source, modBase);
+				}
+			}
+		}
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -80,10 +97,9 @@ public class CraftingManagerKitchenBench {
 				BufferedReader reader = null;
 				try {
 					reader = Files.newBufferedReader(fPath);
-					JsonObject[] json = JsonUtils.fromJson(GSON, reader, JsonObject[].class);
-					LOAD_CONSTANTS.invoke(ctx, new Object[] {json});
+					InvokerLoadConstants.loadContext(ctx, new File(fPath.toString()));
 				}
-				catch (IOException | IllegalAccessException | InvocationTargetException e) {
+				catch (IOException e) {
 					MineFantasyReforged.LOG.error("Error loading _constants.json: ", e);
 					return false;
 				}
@@ -111,9 +127,8 @@ public class CraftingManagerKitchenBench {
 				if (Loader.isModLoaded(mod.getModId())) {
 					if (KitchenBenchRecipeType.getByNameWithModId(type, mod.getModId()) != KitchenBenchRecipeType.NONE) {
 						KitchenBenchRecipeBase recipe = factory.parse(ctx, json);
-						recipe.setRegistryName(key);
 						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
 						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Kitchen Bench recipe", key, type);
@@ -135,11 +150,12 @@ public class CraftingManagerKitchenBench {
 		});
 	}
 
-	public static void addRecipe(KitchenBenchRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(KitchenBenchRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getKitchenBenchRecipeOutput();
 		if (ConfigCrafting.isKitchenBenchItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
+			recipe.setRegistryName(key);
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getKitchenBenchRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !KITCHEN_BENCH_RECIPES.containsKey(recipe.getRegistryName()))) {
@@ -148,12 +164,8 @@ public class CraftingManagerKitchenBench {
 		}
 	}
 
-	public static ItemStack findMatchingRecipe(IKitchenBench kitchenBench, KitchenBenchCraftMatrix matrix, World world) {
+	public static KitchenBenchRecipeBase findMatchingRecipe(IKitchenBench kitchenBench, KitchenBenchCraftMatrix matrix, World world) {
 		int time;
-		int kitchenBenchTier;
-		int toolTier;
-		String toolType;
-		SoundEvent sound;
 
 		Iterator<KitchenBenchRecipeBase> recipeIterator = getRecipes().iterator();
 		KitchenBenchRecipeBase kitchenBenchRecipeBase = null;
@@ -168,30 +180,16 @@ public class CraftingManagerKitchenBench {
 		}
 
 		if (kitchenBenchRecipeBase != null) {
-			time = kitchenBenchRecipeBase.getCraftTime();
-			toolTier = kitchenBenchRecipeBase.getToolTier();
-			kitchenBenchTier = kitchenBenchRecipeBase.getKitchenBenchTier();
-			toolType = kitchenBenchRecipeBase.getToolType();
-			sound = kitchenBenchRecipeBase.getSound();
+			kitchenBench.setProgressMax(kitchenBenchRecipeBase.getCraftTime());
 
-			kitchenBench.setProgressMax(time);
-			kitchenBench.setRequiredToolTier(toolTier);
-			kitchenBench.setRequiredKitchenBenchTier(kitchenBenchTier);
-
-			kitchenBench.setRequiredToolType(toolType);
-			kitchenBench.setCraftingSound(sound);
-			kitchenBench.setRequiredResearch(kitchenBenchRecipeBase.getResearch());
-			kitchenBench.setRequiredSkill(kitchenBenchRecipeBase.getSkill());
-			kitchenBench.setDirtyProgressAmount(kitchenBenchRecipeBase.getDirtyProgressAmount());
-
-			return kitchenBenchRecipeBase.getCraftingResult(matrix);
+			return kitchenBenchRecipeBase;
 		}
-		return ItemStack.EMPTY;
+		return null;
 	}
 
-	public static KitchenBenchRecipeBase getRecipeByName(String name) {
+	public static KitchenBenchRecipeBase getRecipeByName(String name, boolean isNullable) {
 		ResourceLocation resourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID + ":" + name);
-		if (!KITCHEN_BENCH_RECIPES.containsKey(resourceLocation)) {
+		if (!KITCHEN_BENCH_RECIPES.containsKey(resourceLocation) && !isNullable) {
 			MineFantasyReforged.LOG.error("Kitchen Bench Recipe Registry does not contain recipe: {}", name);
 		}
 		return KITCHEN_BENCH_RECIPES.getValue(resourceLocation);
@@ -200,8 +198,16 @@ public class CraftingManagerKitchenBench {
 	public static List<KitchenBenchRecipeBase> getRecipesByName(String... names) {
 		List<KitchenBenchRecipeBase> recipes = new ArrayList<>();
 		for (String name : names) {
-			recipes.add(getRecipeByName(name));
+			recipes.add(getRecipeByName(name, false));
 		}
 		return recipes;
+	}
+
+	public static String getRecipeName(KitchenBenchRecipeBase recipe) {
+		ResourceLocation recipeLocation = KITCHEN_BENCH_RECIPES.getKey(recipe);
+		if (recipeLocation != null) {
+			return recipeLocation.getPath();
+		}
+		return "";
 	}
 }

@@ -1,0 +1,33 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "research": "clay_wall",
+  "tool_type": "saw",
+  "block_tier": -1,
+  "craft_time": 2,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "shouldMirror": false,
+  "pattern": [
+    " NP",
+    " C ",
+    "PN "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "C": {
+      "item": "minefantasyreforged:clay_wall"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:clay_wall_right_diagonal",
+    "count": 2
+  }
+}

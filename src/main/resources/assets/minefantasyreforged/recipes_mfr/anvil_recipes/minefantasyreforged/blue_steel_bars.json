@@ -1,0 +1,25 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "research": "smelt_blue_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 5,
+  "recipe_time": 22,
+  "recipe_hammer": 5,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "output_hot": false,
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "#HUNK_BLUE_STEEL"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:blue_steel_bars"
+  }
+}

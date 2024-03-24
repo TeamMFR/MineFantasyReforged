@@ -1,0 +1,33 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "paint_brush",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 20,
+  "recipe_hammer": 0,
+  "skill_xp": 0,
+  "vanilla_xp": 0.25,
+  "output_hot": true,
+  "pattern": [
+    "W",
+    "B",
+    "T"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "T": {
+      "item": "#TIMBER_REFINED"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:paint_brush"
+  }
+}

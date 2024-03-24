@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.IHotItem;
 import minefantasy.mfr.constants.Skill;
+import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.material.CustomMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,30 +13,36 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import javax.annotation.Nonnull;
 
-public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilRecipeBase> {
+public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilRecipeBase> implements IRecipeMFR {
 	public static final int MAX_WIDTH = 6;
 	public static final int MAX_HEIGHT = 4;
 	protected ItemStack output;
 	protected NonNullList<Ingredient> inputs;
 	protected Skill requiredSkill;
 	protected String requiredResearch;
-	protected String toolType;
+	protected int skillXp;
+	protected float vanillaXp;
+	protected Tool toolType;
+	protected int toolTier;
 	protected int anvilTier;
-	protected int hammerTier;
+
 	protected int craftTime;
 	protected boolean hotOutput;
 
 	public AnvilRecipeBase(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
-			int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
+			int craftTime, int toolTier, int anvilTier, boolean hotOutput, String requiredResearch,
+			Skill requiredSkill, int skillXp, float vanillaXp) {
 		this.output = output;
 		this.inputs = inputs;
 		this.requiredSkill = requiredSkill;
 		this.requiredResearch = requiredResearch;
-		this.toolType = toolType;
+		this.toolType = Tool.fromName(toolType);
+		this.toolTier = toolTier;
 		this.anvilTier = anvilTier;
-		this.hammerTier = hammerTier;
 		this.craftTime = craftTime;
 		this.hotOutput = hotOutput;
+		this.skillXp = skillXp;
+		this.vanillaXp = vanillaXp;
 	}
 
 	abstract boolean matches(@Nonnull AnvilCraftMatrix inv, @Nonnull World world);
@@ -59,7 +66,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 	protected boolean modifyTiers(AnvilCraftMatrix matrix, String tier, boolean isMain) {
 		CustomMaterial material = CustomMaterial.getMaterial(tier);
 		if (material != CustomMaterial.NONE) {
-			int newTier = hammerTier < 0 ? material.crafterTier : hammerTier;
+			int newTier = toolTier < 0 ? material.crafterTier : toolTier;
 			int newAnvil = anvilTier < 0 ? material.crafterAnvilTier : anvilTier;
 			matrix.modifyTier(newTier, newAnvil, (int) (craftTime * material.craftTimeModifier));
 			if (isMain) {
@@ -70,8 +77,16 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		return false;
 	}
 
+	@Override
+	public String getName() {
+		return CraftingManagerAnvil.getRecipeName(this);
+	}
+
 	public ItemStack getCraftingResult(AnvilCraftMatrix var1) {
 		return output.copy();
+	}
+	public ItemStack getAnvilRecipeOutput() {
+		return output;
 	}
 
 	public NonNullList<Ingredient> getIngredients() {
@@ -86,8 +101,8 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		return 0;
 	}
 
-	public int getHammerTier() {
-		return hammerTier;
+	public int getToolTier() {
+		return toolTier;
 	}
 
 	public int getAnvilTier() {
@@ -98,20 +113,33 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 		return hotOutput;
 	}
 
-	public String getToolType() {
+	public Tool getToolType() {
 		return toolType;
 	}
 
-	public String getResearch() {
+	@Override
+	public String getRequiredResearch() {
 		return requiredResearch;
 	}
 
-	public ItemStack getAnvilRecipeOutput() {
-		return output;
-	}
-
+	@Override
 	public Skill getSkill() {
 		return requiredSkill;
+	}
+
+	@Override
+	public int getSkillXp() {
+		return skillXp;
+	}
+
+	@Override
+	public boolean shouldSlotGiveSkillXp() {
+		return false;
+	}
+
+	@Override
+	public float getVanillaXp() {
+		return vanillaXp;
 	}
 
 	public boolean useCustomTiers() {

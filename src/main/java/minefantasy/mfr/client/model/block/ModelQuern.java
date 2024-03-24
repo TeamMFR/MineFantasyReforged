@@ -48,7 +48,7 @@ public class ModelQuern extends ModelBase {
 
 	public void renderModel(TileEntityQuern quern, float f) {
 		if (quern != null) {
-			top.rotateAngleY = handle.rotateAngleY = (float) (Math.PI * quern.turnAngle) / TileEntityQuern.getMaxRevs() * 2;
+			top.rotateAngleY = handle.rotateAngleY = (float) (Math.PI * quern.getTurnAngle()) / TileEntityQuern.getMaxRevs() * 2;
 		}
 
 		base.render(f);

@@ -1,0 +1,29 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "research": "refined_planks",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "N   ",
+    "P   ",
+    "PP  ",
+    "    "
+  ],
+  "key": {
+    "P": {
+      "item": "#TIMBER_REFINED"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:refined_planks_stairs"
+  }
+}

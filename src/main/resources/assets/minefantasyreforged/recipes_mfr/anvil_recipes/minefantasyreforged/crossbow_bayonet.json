@@ -1,0 +1,31 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "cross_bayonet",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 105,
+  "recipe_hammer": 3,
+  "skill_xp": 0,
+  "vanilla_xp": 0.2,
+  "output_hot": true,
+  "pattern": [
+    "R R M",
+    "TMMM "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "T": {
+      "item": "minefantasyreforged:timber"
+    },
+    "M": {
+      "item": "minefantasyreforged:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_bayonet"
+  }
+}

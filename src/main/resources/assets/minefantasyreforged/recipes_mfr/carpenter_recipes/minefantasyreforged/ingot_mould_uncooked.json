@@ -1,0 +1,22 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "research": "crucible",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "CCC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:ingot_mould_uncooked"
+  }
+}

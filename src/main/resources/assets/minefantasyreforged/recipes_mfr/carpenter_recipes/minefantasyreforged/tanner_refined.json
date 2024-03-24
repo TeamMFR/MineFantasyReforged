@@ -1,0 +1,28 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 80,
+  "tool_tier": 1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.5,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNN",
+    "PPP",
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:tanner_refined"
+  }
+}

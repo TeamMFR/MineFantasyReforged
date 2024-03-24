@@ -1,11 +1,14 @@
 package minefantasy.mfr.block;
 
+import minefantasy.mfr.config.ConfigHardcore;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemFilledMould;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.CraftingManagerAlloy;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.tile.TileEntityCrucible;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -26,6 +29,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 	private static final PropertyBool ACTIVE = PropertyBool.create("active");
@@ -82,6 +88,14 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 				return false;
 			}
 
+			Set<String> playerResearches = new HashSet<>();
+			for (String alloyResearch : CraftingManagerAlloy.getAlloyResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(alloyResearch))) {
+					playerResearches.add(alloyResearch);
+				}
+			}
+			tile.setKnownResearches(playerResearches);
+
 			ItemStack held = player.getHeldItemMainhand();
 			if (!held.isEmpty() && held.getItem() == MineFantasyItems.TRILOGY_JEWEL) {
 				if (tier == 2 && tile.isCoated()) {
@@ -115,15 +129,21 @@ public class BlockCrucible extends BlockTileEntity<TileEntityCrucible> {
 						world.spawnEntity(drop);
 					}
 				}
+
+				// Give XP on removal of items, only if hardcore is on.
+				// If hardcore is off, XP is granted from removing stacks from the GUI Slot
+				if (!world.isRemote && ConfigHardcore.HCCreduceIngots) {
+					IRecipeMFR recipe = tile.getRecipe();
+					if (recipe != null) {
+						recipe.giveVanillaXp(player,0,1);
+						recipe.giveSkillXp(player, 0);
+					}
+				}
 				return true;
 			}
 
-		}
-
-		if (!world.isRemote) {
-			final TileEntityCrucible tileEntity = (TileEntityCrucible) getTile(world, pos);
-			if (tileEntity != null) {
-				tileEntity.openGUI(world, player);
+			if (!world.isRemote) {
+				tile.openGUI(world, player);
 			}
 		}
 

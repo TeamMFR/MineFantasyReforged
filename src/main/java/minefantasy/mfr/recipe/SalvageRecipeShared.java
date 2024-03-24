@@ -1,5 +1,6 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -12,8 +13,9 @@ import java.util.List;
 public class SalvageRecipeShared extends SalvageRecipeBase {
 	protected NonNullList<ItemStack> shared;
 
-	public SalvageRecipeShared(ItemStack input, NonNullList<Ingredient> outputs, NonNullList<ItemStack> shared) {
-		super(input, outputs);
+	public SalvageRecipeShared(ItemStack input, NonNullList<Ingredient> outputs, NonNullList<ItemStack> shared,
+			String requiredResearch, Skill skill, int skillXp, float vanillaXp) {
+		super(input, outputs, requiredResearch, skill, skillXp, vanillaXp);
 		this.shared = shared;
 	}
 

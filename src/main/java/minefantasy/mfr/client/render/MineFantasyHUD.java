@@ -20,6 +20,10 @@ import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.StaminaBar;
+import minefantasy.mfr.recipe.AnvilRecipeBase;
+import minefantasy.mfr.recipe.CarpenterRecipeBase;
+import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
+import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.recipe.TransformationRecipeBase;
 import minefantasy.mfr.tile.TileEntityAnvil;
 import minefantasy.mfr.tile.TileEntityCarpenter;
@@ -421,13 +425,18 @@ public class MineFantasyHUD extends Gui {
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		if (knowsCraft && tile.getRequiredToolType() != null) {
+		if (knowsCraft && tile.getRecipe() instanceof AnvilRecipeBase) {
+			AnvilRecipeBase anvilRecipe = (AnvilRecipeBase) tile.getRecipe();
+			if (anvilRecipe.getToolType() != null) {
+				boolean available = ToolHelper.isToolSufficient(
+						player.getHeldItem(EnumHand.MAIN_HAND),
+						anvilRecipe.getToolType(),
+						tile.getToolTierNeeded());
+				GuiHelper.renderToolIcon(this, anvilRecipe.getToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
 
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
-
-			if (tile.getRequiredAnvilTier() > -1) {
-				GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPos + 172, yPos, tile.getTier() >= tile.getRequiredAnvilTier(), true);
+				if (tile.getRequiredAnvilTier() > -1) {
+					GuiHelper.renderToolIcon(this, "anvil", tile.getRequiredAnvilTier(), xPos + 172, yPos, tile.getTier() >= tile.getRequiredAnvilTier(), true);
+				}
 			}
 		}
 
@@ -456,9 +465,12 @@ public class MineFantasyHUD extends Gui {
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-			GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
+		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")
+				&& tile.getRecipe() instanceof CarpenterRecipeBase) {
+			CarpenterRecipeBase carpenterRecipe = (CarpenterRecipeBase) tile.getRecipe();
+			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), carpenterRecipe.getToolType(), tile.getToolTierNeeded());
+			GuiHelper.renderToolIcon(this, carpenterRecipe.getToolType().getName(),
+					tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
 		}
 
 		GlStateManager.popMatrix();
@@ -488,9 +500,13 @@ public class MineFantasyHUD extends Gui {
 			mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 			GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-			if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && tile.getRequiredToolType() != null) {
-				boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPos - 20, yPos, available, true);
+			if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")
+					&& tile.getRecipe() instanceof KitchenBenchRecipeBase) {
+				KitchenBenchRecipeBase kitchenBenchRecipe = (KitchenBenchRecipeBase) tile.getRecipe();
+				boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND),
+						kitchenBenchRecipe.getToolType(), kitchenBenchRecipe.getToolTier());
+				GuiHelper.renderToolIcon(this, kitchenBenchRecipe.getToolType().getName(),
+						kitchenBenchRecipe.getToolTier(), xPos - 20, yPos, available, true);
 			}
 		}
 		else {
@@ -535,9 +551,12 @@ public class MineFantasyHUD extends Gui {
 		mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 		GlStateManager.color(1.0F, 1.0F, 1.0F);
 
-		if (knowsCraft && tile.requiredToolType != null) {
-			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND), tile.requiredToolType, -1);
-			GuiHelper.renderToolIcon(this, tile.requiredToolType.getName(), tile.tier, xPos - 20, yPos, available, true);
+		if (knowsCraft && tile.getRecipe() instanceof TannerRecipeBase) {
+			TannerRecipeBase tannerRecipe = (TannerRecipeBase) tile.getRecipe();
+			boolean available = ToolHelper.isToolSufficient(player.getHeldItem(EnumHand.MAIN_HAND),
+					tannerRecipe.getToolType(), -1);
+			GuiHelper.renderToolIcon(this, tannerRecipe.getToolType().getName(), tannerRecipe.getTannerTier(),
+					xPos - 20, yPos, available, true);
 		}
 
 		GlStateManager.popMatrix();
@@ -616,7 +635,7 @@ public class MineFantasyHUD extends Gui {
 					this.drawTexturedModalRect(xPos, yPos, 84, 0, 172, 20);
 					this.drawTexturedModalRect(xPos + 6, yPos + 12, 90, 20, transformationBlock.getProgressMetre(160), 3);
 
-					String s = "Progress";
+					String s = transformationBlock.getDisplayName();
 					mc.fontRenderer.drawString(s, xPos + 86 - (mc.fontRenderer.getStringWidth(s) / 2), yPos + 3, 0);
 					GlStateManager.color(1.0F, 1.0F, 1.0F);
 

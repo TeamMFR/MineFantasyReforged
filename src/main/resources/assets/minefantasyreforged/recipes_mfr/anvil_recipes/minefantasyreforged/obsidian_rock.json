@@ -1,0 +1,23 @@
+{
+  "type": "anvil_shaped_recipe",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 12,
+  "recipe_hammer": 3,
+  "skill_xp": 0,
+  "vanilla_xp": 0.1,
+  "output_hot": false,
+  "pattern": [
+    "O"
+  ],
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:obsidian_rock",
+    "count": 4
+  }
+}

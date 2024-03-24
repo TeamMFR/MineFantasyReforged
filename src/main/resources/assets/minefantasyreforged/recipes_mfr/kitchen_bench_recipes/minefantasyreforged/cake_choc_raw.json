@@ -1,0 +1,42 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "chocolate_cake",
+  "tool_type": "spoon",
+  "block_tier": -1,
+  "craft_time": 25,
+  "tool_tier": -1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.4,
+  "sound": "minecraft:block.wood.step",
+  "dirty_progress_amount": 4,
+  "pattern": [
+    "SJS",
+    "SES",
+    "CCC",
+    "FAF"
+  ],
+  "key": {
+    "A": {
+      "item": "minefantasyreforged:cake_tin"
+    },
+    "S": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "C": {
+      "item": "minefantasyreforged:chocolate"
+    },
+    "E": {
+      "item": "minecraft:egg"
+    },
+    "F": {
+      "item": "minefantasyreforged:flour"
+    },
+    "J": {
+      "item": "minefantasyreforged:jug_milk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:cake_choc_raw"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "advanced_crucible",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 200,
+  "tool_tier": 4,
+  "skill_xp": 3,
+  "vanilla_xp": 0.7,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    " E ",
+    "PCP",
+    "PTP",
+    "BBB"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:plate"
+    },
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "C": {
+      "item": "minefantasyreforged:crucible_fireclay"
+    },
+    "T": {
+      "item": "minefantasyreforged:tungsten_gears"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crucible_auto"
+  }
+}

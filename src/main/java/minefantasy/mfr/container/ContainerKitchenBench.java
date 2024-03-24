@@ -27,8 +27,10 @@ public class ContainerKitchenBench extends ContainerBase {
 			}
 		}
 
+		// Output Slots
+		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(),
+				tile.getOutputSlotNum(), 174, 80));
 		//special slots
-		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
 		for (int y = 0; y < 4; y++) {
 			int slot = tile.getInventory().getSlots() - 4 + y;
 			this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));
@@ -45,8 +47,9 @@ public class ContainerKitchenBench extends ContainerBase {
 		//main grid
 		addTileSlots(width, height, 44, 54);
 
+		// Output Slots
+		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getOutputSlotNum(), 174, 80));
 		//special slots
-		this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), tile.getInventory().getSlots() - 5, 174, 80));
 		for (int y = 0; y < 4; y++) {
 			int slot = tile.getInventory().getSlots() - 4 + y;
 			this.addSlotToContainer(new SlotItemHandler(tile.getInventory(), slot, 3, 54 + y * 18));

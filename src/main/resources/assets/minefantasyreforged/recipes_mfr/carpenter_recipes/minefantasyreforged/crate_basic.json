@@ -1,0 +1,32 @@
+{
+  "type": "carpenter_shaped_custom_material_recipe",
+  "skill": "construction",
+  "research": "big_box",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 25,
+  "tool_tier": 0,
+  "skill_xp": 2,
+  "vanilla_xp": 0.4,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNNN",
+    "HPPH",
+    "P  P",
+    " PP "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber_pane"
+    },
+    "H": {
+      "item": "minefantasyreforged:hinge"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crate_basic"
+  }
+}

@@ -1,6 +1,7 @@
 package minefantasy.mfr.util;
 
 import com.google.common.base.CaseFormat;
+import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IFirearm;
@@ -18,10 +19,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class Utils {
 
@@ -44,6 +48,16 @@ public class Utils {
 
 	public static String convertSplitCapitalizedToSnakeCase(String string) {
 		return string.toLowerCase().replaceAll(" ", "_");
+	}
+
+	public static String serializeList(Set<String> list) {
+		return list.toString().replaceAll("[\\[|\\]]", "");
+	}
+
+	public static Set<String> deserializeList(String string) {
+		List<String> list = Arrays.asList(StringUtils.splitByWholeSeparator(string, ","));
+		list.replaceAll(String::trim);
+		return Sets.newHashSet(list);
 	}
 
 	public static boolean canAcceptArrow(ItemStack ammo, ItemStack weapon) {

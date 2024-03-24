@@ -1,0 +1,30 @@
+{
+  "type": "anvil_shaped_recipe",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 10,
+  "recipe_hammer": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "  F",
+    "SC ",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "#BAR_STEEL"
+    },
+    "C": {
+      "item": "minecraft:coal",
+      "data": 0
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "result": {
+    "item": "minecraft:flint_and_steel"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "crossbow_heads",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 350,
+  "tool_tier": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.5,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNN",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "C": {
+      "item": "minefantasyreforged:crossbow_arms_basic"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_arms_heavy"
+  }
+}

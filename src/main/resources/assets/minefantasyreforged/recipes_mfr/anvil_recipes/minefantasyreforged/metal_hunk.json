@@ -1,0 +1,28 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 2,
+  "recipe_hammer": 0,
+  "skill_xp": 0,
+  "vanilla_xp": 0.2,
+  "output_hot": true,
+  "pattern": [
+    "F",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "F": {
+      "item": "minefantasyreforged:flux"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:metal_hunk",
+    "count": 4
+  }
+}

@@ -18,8 +18,12 @@ import java.util.List;
  */
 public class AnvilShapelessRecipe extends AnvilRecipeBase {
 
-	public AnvilShapelessRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput, String requiredResearch, Skill requiredSkill) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
+	public AnvilShapelessRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
+			int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
+			String requiredResearch, Skill requiredSkill,
+			int skillXp, float vanillaXp) {
+		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+				requiredResearch, requiredSkill, skillXp, vanillaXp);
 	}
 
 	/**

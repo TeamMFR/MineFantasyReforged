@@ -1,0 +1,41 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "cogwork_armour",
+  "tool_type": "heavy_hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 35,
+  "recipe_hammer": 3,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "output_hot": true,
+  "pattern": [
+    " E ",
+    " S ",
+    "RMR",
+    " C "
+  ],
+  "key": {
+    "S": {
+      "item": "#BAR_STEEL"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools",
+      "data": 32767
+    },
+    "M": {
+      "item": "#HUNK_TUNGSTEN"
+    },
+    "C": {
+      "item": "#BAR_COPPER"
+    }
+  },
+  "result": {
+    "nbt": "{mf_custom_materials:{main_material:\"composite_alloy\"}}",
+    "item": "minefantasyreforged:bar"
+  }
+}

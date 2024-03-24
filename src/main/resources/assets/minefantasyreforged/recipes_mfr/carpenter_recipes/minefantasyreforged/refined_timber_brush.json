@@ -1,0 +1,29 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "research": "paint_brush",
+  "tool_type": "brush",
+  "block_tier": -1,
+  "craft_time": 3,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    " P  ",
+    "TTTT"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:jug_plant_oil"
+    },
+    "T": {
+      "item": "minefantasyreforged:timber"
+    }
+  },
+  "result": {
+    "nbt": "{mf_custom_materials:{main_material:\"refined_wood\"}}",
+    "item": "minefantasyreforged:timber",
+    "count": 4
+  }
+}

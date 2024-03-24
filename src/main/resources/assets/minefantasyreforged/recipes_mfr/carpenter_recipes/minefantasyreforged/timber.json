@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_dynamic_recipe",
+  "skill": "construction",
+  "research": "commodities",
+  "tool_type": "saw",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minefantasyreforged:block.sawcarpenter",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "#PLANK_WOOD"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:timber",
+    "count": 4
+  }
+}

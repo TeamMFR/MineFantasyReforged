@@ -1,0 +1,41 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "mine_obsidian",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 4,
+  "recipe_time": 50,
+  "recipe_hammer": 4,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "  E  ",
+    "  H  ",
+    " MRM ",
+    "MRORM"
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools",
+      "data": 32767
+    },
+    "H": {
+      "item": "minecraft:heavy_weighted_pressure_plate"
+    },
+    "M": {
+      "item": "#HUNK_OBSIDIAN"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:mine_casing_obsidian",
+    "count": 2
+  }
+}

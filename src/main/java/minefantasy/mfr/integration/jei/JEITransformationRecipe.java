@@ -78,8 +78,6 @@ public class JEITransformationRecipe implements IRecipeWrapper {
 
 		GlStateManager.pushMatrix();
 		GlStateManager.scale(1.5, 1.5, 1.5);
-//		GlStateManager.rotate(90, 0, 0,1);
-//		GlStateManager.translate(-45, -55, 0);
 
 		// draw tool icon with required tier int
 		GuiHelper.renderToolIcon(minecraft.currentScreen, recipe.getTool().getName(), -1,

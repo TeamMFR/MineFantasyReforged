@@ -22,9 +22,11 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 
 	public AnvilDynamicRecipe(NonNullList<Ingredient> inputs, ItemStack output,
 			String toolType, int craftTime, int hammerTier, int anvilTier, boolean hotOutput,
-			String requiredResearch, Skill requiredSkill, boolean modifyOutput,
-			int width, int height) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
+			String requiredResearch, Skill requiredSkill,
+			int skillXp, float vanillaXp,
+			boolean modifyOutput,int width, int height) {
+		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.width = width;
 		this.height = height;
 		this.modifyOutput = modifyOutput;

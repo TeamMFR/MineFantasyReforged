@@ -59,7 +59,7 @@ public class EntryPageRecipeAnvil extends EntryPage {
 		}
 
 		GlStateManager.color(255, 255, 255);
-		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getHammerTier(), posX + 34, posY + 51, true, true);
+		GuiHelper.renderToolIcon(parent, recipe.getToolType().getName(), recipe.getToolTier(), posX + 34, posY + 51, true, true);
 		GuiHelper.renderToolIcon(parent, "anvil", recipe.getAnvilTier(), posX + 124, posY + 51, true, true);
 
 		List<Ingredient> inputs = RecipeHelper.expandPattern(recipe.getIngredients(), recipe.getWidth(), recipe.getHeight(), AnvilRecipeBase.MAX_WIDTH, AnvilRecipeBase.MAX_HEIGHT);

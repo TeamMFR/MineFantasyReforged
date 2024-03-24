@@ -19,12 +19,12 @@ public class KitchenBenchShapedRecipe extends KitchenBenchRecipeBase {
 	public KitchenBenchShapedRecipe(
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int kitchenBenchTier, int craftTime,
-			float recipeExperience, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed, int dirtyProgressAmount,
+			String toolType, SoundEvent soundOfCraft,
+			String research, Skill skillUsed, int skillXp, float vanillaXp, int dirtyProgressAmount,
 			boolean shouldMirror, int width, int height) {
 		super(output, inputs, toolTier, kitchenBenchTier, craftTime,
-				recipeExperience, toolType, soundOfCraft,
-				research, skillUsed, dirtyProgressAmount);
+				toolType, soundOfCraft,
+				research, skillUsed, skillXp, vanillaXp, dirtyProgressAmount);
 		this.shouldMirror = shouldMirror;
 		this.width = width;
 		this.height = height;

@@ -10,8 +10,8 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ContainerBombBench extends ContainerBase {
-	private TileEntityBombBench tile;
-	private boolean isGuiContainer;
+	private final TileEntityBombBench tile;
+	private final boolean isGuiContainer;
 
 	public ContainerBombBench(EntityPlayer player, TileEntityBombBench tile) {
 		super(player.inventory, tile);

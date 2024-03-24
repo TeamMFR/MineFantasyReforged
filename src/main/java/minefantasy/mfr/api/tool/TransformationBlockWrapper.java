@@ -12,13 +12,16 @@ public class TransformationBlockWrapper {
 	private IBlockState state;
 	private Integer progress;
 	private Integer maxProgress;
+	private String displayName;
 
-	public TransformationBlockWrapper(ItemStack tool, BlockPos pos, IBlockState state, int progress, int maxProgress) {
+	public TransformationBlockWrapper(ItemStack tool, BlockPos pos, IBlockState state, int progress, int maxProgress,
+			String displayName) {
 		this.tool = tool;
 		this.pos = pos;
 		this.state = state;
 		this.progress = progress;
 		this.maxProgress = maxProgress;
+		this.displayName = displayName;
 	}
 
 	public int getProgressMetre(double i) {
@@ -32,6 +35,7 @@ public class TransformationBlockWrapper {
 		nbt.setTag("tool", tool.serializeNBT());
 		nbt.setInteger("progress", this.progress);
 		nbt.setInteger("maxProgress", this.maxProgress);
+		nbt.setString("displayName", this.displayName);
 		return nbt;
 	}
 
@@ -41,7 +45,8 @@ public class TransformationBlockWrapper {
 		IBlockState tagState = NBTUtil.readBlockState(nbt.getCompoundTag("state"));
 		int tagProgress = nbt.getInteger("progress");
 		int tagMaxProgress = nbt.getInteger("maxProgress");
-		return new TransformationBlockWrapper(tagTool, tagPos, tagState, tagProgress, tagMaxProgress);
+		String displayName = nbt.getString("displayName");
+		return new TransformationBlockWrapper(tagTool, tagPos, tagState, tagProgress, tagMaxProgress, displayName);
 	}
 
 	public static boolean checkTransformationBlock(TransformationBlockWrapper transformationBlock, IBlockState state, BlockPos pos) {
@@ -86,5 +91,13 @@ public class TransformationBlockWrapper {
 
 	public void setMaxProgress(Integer maxProgress) {
 		this.maxProgress = maxProgress;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }

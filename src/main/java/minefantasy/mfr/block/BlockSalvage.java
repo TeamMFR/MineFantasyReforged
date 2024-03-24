@@ -152,7 +152,7 @@ public class BlockSalvage extends BasicBlockMF{
 	}
 
 	public static List<ItemStack> salvage(EntityPlayer user, ItemStack item, float dropRate) {
-		SalvageRecipeBase salvageRecipe = CraftingManagerSalvage.findMatchingRecipe(item);
+		SalvageRecipeBase salvageRecipe = CraftingManagerSalvage.findMatchingRecipe(item, user);
 		if ((salvageRecipe == null || item.isEmpty()) && !(item.getItem() instanceof ISpecialSalvage)) {
 			return null;
 		}
@@ -193,6 +193,14 @@ public class BlockSalvage extends BasicBlockMF{
 				}
 			}
 		}
+
+		//Grant XP
+		int totalCount = items.stream().mapToInt(ItemStack::getCount).sum();
+		if (!user.world.isRemote) {
+			salvageRecipe.giveVanillaXp(user, 0, totalCount);
+			salvageRecipe.giveSkillXpPerCount(user, 0, totalCount);
+		}
+
 		return items;
 	}
 

@@ -1,0 +1,31 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "provisioning",
+  "research": "bandage_advanced",
+  "tool_type": "needle",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": 2,
+  "skill_xp": 2,
+  "vanilla_xp": 0.4,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "T",
+    "L",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bandage_wool"
+    },
+    "T": {
+      "item": "minefantasyreforged:thread"
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bandage_tough"
+  }
+}

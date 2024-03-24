@@ -1,0 +1,26 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "smelt_red_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 150,
+  "recipe_hammer": -1,
+  "skill_xp": 3,
+  "vanilla_xp": 0.6,
+  "output_hot": false,
+  "pattern": [
+    " BB",
+    "BBB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "#BAR_RED_STEEL"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:anvil_red_steel"
+  }
+}

@@ -3,6 +3,7 @@ package minefantasy.mfr.client.gui;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
 import minefantasy.mfr.tile.TileEntityKitchenBench;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.TextureHelperMFR;
@@ -18,11 +19,18 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiKitchenBench extends GuiContainer {
-	private TileEntityKitchenBench tile;
-	private int regularXSize = 176;
+	private final TileEntityKitchenBench tile;
+	private  final KitchenBenchRecipeBase kitchenBenchRecipe;
+	private final int regularXSize = 176;
 
 	public GuiKitchenBench(ContainerBase container, TileEntityKitchenBench tile) {
 		super(container);
+		if (tile.getRecipe() instanceof KitchenBenchRecipeBase) {
+			this.kitchenBenchRecipe = (KitchenBenchRecipeBase) tile.getRecipe();
+		}
+		else {
+			this.kitchenBenchRecipe = null;
+		}
 		this.xSize = 195;
 		this.ySize = 240;
 		this.tile = tile;
@@ -44,13 +52,13 @@ public class GuiKitchenBench extends GuiContainer {
 		int xPoint = (this.width - this.xSize) / 2;
 		int yPoint = (this.height - this.ySize) / 2;
 
-		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
-			if (tile.getRequiredToolType() != null) {
+		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("") && kitchenBenchRecipe != null) {
+			if (kitchenBenchRecipe.getToolType() != null) {
 				if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-					String s2 = tile.getRequiredToolType().getDisplayName() + ", "
-							+ (tile.getToolTierNeeded() > -1
+					String s2 = kitchenBenchRecipe.getToolType().getDisplayName() + ", "
+							+ (kitchenBenchRecipe.getToolTier() > -1
 							? I18n.format("attribute.mfcrafttier.name") + " "
-							+ tile.getToolTierNeeded()
+							+ kitchenBenchRecipe.getToolTier()
 							: I18n.format("attribute.nomfcrafttier.name"));
 					this.fontRenderer.drawStringWithShadow(s2, -18, -12,
 							isToolSufficient() ? 16777215 : GuiHelper.getColourForRGB(150, 0, 0));
@@ -58,9 +66,9 @@ public class GuiKitchenBench extends GuiContainer {
 			}
 			if (x < xPoint + regularXSize + 20 && x > xPoint + regularXSize && y < yPoint + 20 && y > yPoint) {
 				String s2 = I18n.format("tooltype.kitchen_bench") + ", "
-						+ (tile.getKitchenBenchTierNeeded() > -1
+						+ (kitchenBenchRecipe.getKitchenBenchTier() > -1
 						? I18n.format("attribute.mfcrafttier.name") + " "
-						+ tile.getKitchenBenchTierNeeded()
+						+ kitchenBenchRecipe.getKitchenBenchTier()
 						: I18n.format("attribute.nomfcrafttier.name"));
 				this.fontRenderer.drawStringWithShadow(s2, regularXSize - fontRenderer.getStringWidth(s2) + 18,
 						-12, 16777215);
@@ -80,19 +88,22 @@ public class GuiKitchenBench extends GuiContainer {
 			int progressWidth = (int) (160F / tile.progressMax * tile.progress);
 			this.drawTexturedModalRect(xPoint + 8, yPoint + 21, 0, 240, progressWidth, 3);
 		}
-		if (tile.doesPlayerKnowCraft(mc.player) && !tile.getResultName().equalsIgnoreCase("")) {
-			GuiHelper.renderToolIcon(this, "kitchen_bench", tile.getKitchenBenchTierNeeded(), xPoint + regularXSize, yPoint,
+		if (tile.doesPlayerKnowCraft(mc.player) && kitchenBenchRecipe != null
+				&& !tile.getResultName().equalsIgnoreCase("")) {
+			GuiHelper.renderToolIcon(this, "kitchen_bench", kitchenBenchRecipe.getKitchenBenchTier(), xPoint + regularXSize, yPoint,
 					true, true);
 
-			if (tile.getRequiredToolType() != null) {
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20, yPoint, isToolSufficient(), true);
+			if (kitchenBenchRecipe.getToolType() != null) {
+				GuiHelper.renderToolIcon(this, kitchenBenchRecipe.getToolType().getName(),
+						kitchenBenchRecipe.getToolTier(), xPoint - 20, yPoint, isToolSufficient(), true);
 			}
 		}
 	}
 
 	private boolean isToolSufficient() {
 		if (mc.player != null) {
-			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
+			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND),
+					kitchenBenchRecipe.getToolType(), kitchenBenchRecipe.getToolTier());
 		}
 		return false;
 	}

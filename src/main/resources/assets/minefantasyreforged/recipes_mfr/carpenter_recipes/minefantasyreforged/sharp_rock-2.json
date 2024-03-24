@@ -1,0 +1,21 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.1,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "C"
+  ],
+  "key": {
+    "C": {
+      "item": "#COBBLESTONE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:sharp_rock",
+    "count": 8
+  }
+}

@@ -2,10 +2,8 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.block.BlockEngineerTanner;
 import minefantasy.mfr.constants.Constants;
-import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
-import minefantasy.mfr.container.ContainerTanner;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.mechanics.RPGElements;
@@ -13,6 +11,7 @@ import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.recipe.TannerRecipeBase;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.ToolHelper;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -29,17 +28,18 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	public float progress;
 	public float maxProgress;
 	public String tex = "";
-	public int tier = 0;
-	public Tool requiredToolType = Tool.KNIFE;
 	public float acTime;
 	private final Random rand = new Random();
 	private int ticksExisted;
+	private Set<String> knownResearches = new HashSet<>();
 
 	public TileEntityTanningRack() {
 
@@ -75,7 +75,7 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 
 	@Override
 	public ContainerBase createContainer(EntityPlayer player) {
-		return new ContainerTanner(player.inventory, this);
+		return null;
 	}
 
 	@Override
@@ -104,15 +104,15 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			return true;
 		}
 		if (player != null) {
-			createContainer(player).detectAndSendChanges();
-
 			ItemStack held = player.getHeldItemMainhand();
 
 			// Interaction
+			Tool heldTool = ToolHelper.getToolTypeFromStack(held);
+			TannerRecipeBase tannerRecipe = (TannerRecipeBase) getRecipe();
 			if (!recipeInventory.getStackInSlot(0).isEmpty()
-					&& (leverPull || ToolHelper.getToolTypeFromStack(held) == requiredToolType)) {
+					&& (leverPull || heldTool == tannerRecipe.getToolType())) {
 
-				if (leverPull || ToolHelper.getCrafterTier(held) >= tier) {
+				if (leverPull || ToolHelper.getCrafterTier(held) >= tannerRecipe.getTannerTier()) {
 					if (!leverPull) {
 						held.damageItem(1, player);
 						if (held.getItemDamage() >= held.getMaxDamage()) {
@@ -131,21 +131,22 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 					if (efficiency > 0) {
 						progress += efficiency;
 					}
-					if (requiredToolType == Tool.SHEARS) {
+					if (tannerRecipe.getToolType() == Tool.SHEARS) {
 						world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.ENTITY_SHEEP_SHEAR, SoundCategory.AMBIENT, 1.0F, 1.0F);
 					} else {
 						world.playSound(player, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.BLOCK_CLOTH_BREAK, SoundCategory.AMBIENT, 1.0F, 1.0F);
 					}
 					if (progress >= maxProgress) {
-						if (RPGElements.isSystemActive) {
-							Skill.ARTISANRY.addXP(player, 1);
-						}
 						progress = 0;
-						int ss = !inputInventory.getStackInSlot(0).isEmpty()
+						int count = !inputInventory.getStackInSlot(0).isEmpty()
 								? inputInventory.getStackInSlot(0).getCount()
 								: 1;
+						if (RPGElements.isSystemActive && !world.isRemote) {
+							tannerRecipe.giveSkillXpPerCount(player, 1, count);
+							tannerRecipe.giveVanillaXp(player, 0, count);
+						}
 						ItemStack out = recipeInventory.getStackInSlot(0).copy();
-						out.setCount(out.getCount() * ss);
+						out.setCount(out.getCount() * count);
 						inputInventory.setStackInSlot(0, out);
 						updateRecipe();
 						if (isShabbyRack() && rand.nextInt(10) == 0 && !world.isRemote) {
@@ -161,11 +162,12 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 				}
 				return true;
 			}
-			if (!leftClick && (ToolHelper.getToolTypeFromStack(held) == Tool.OTHER || ToolHelper.getToolTypeFromStack(held) == Tool.HANDS)) {
+			if (!leftClick && (heldTool == Tool.OTHER || heldTool == Tool.HANDS)) {
 				// Item placement
 				ItemStack item = inputInventory.getStackInSlot(0);
 				if (item.isEmpty()) {
-					if (!held.isEmpty() && !(held.getItem() instanceof ItemBlock) && CraftingManagerTanner.findMatchingRecipe(held) != null) {
+					if (!held.isEmpty() && !(held.getItem() instanceof ItemBlock)
+							&& CraftingManagerTanner.findMatchingRecipe(held, this.knownResearches) != null) {
 						ItemStack item2 = held.copy();
 						item2.setCount(1);
 						inputInventory.setStackInSlot(0, item2);
@@ -187,14 +189,15 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		}
 		else if (leverPull) {
 			//Handle Automated interaction
-			if (!recipeInventory.getStackInSlot(0).isEmpty()) {
+			if (!recipeInventory.getStackInSlot(0).isEmpty() && getRecipe() instanceof TannerRecipeBase) {
+				TannerRecipeBase tannerRecipe = (TannerRecipeBase) getRecipe();
 				world.playSound(null, pos.add(0.5D, 0.5D, 0.5D), SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.AMBIENT, 0.75F, 0.85F);
 				acTime = 1.0F;
 
 				float efficiency = 100F;
 
 				progress += efficiency;
-				if (progress >= maxProgress) {
+				if (progress >= tannerRecipe.getCraftTime()) {
 					progress = 0;
 					int ss = !inputInventory.getStackInSlot(0).isEmpty() ? inputInventory.getStackInSlot(0).getCount() : 1;
 					ItemStack out = recipeInventory.getStackInSlot(0).copy();
@@ -206,6 +209,10 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 			}
 		}
 		return false;
+	}
+
+	public void setKnownResearches(Set<String> knownResearches) {
+		this.knownResearches = knownResearches;
 	}
 
 	public boolean isAutomated() {
@@ -223,15 +230,14 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 	}
 
 	public void updateRecipe() {
-		TannerRecipeBase recipe = CraftingManagerTanner.findMatchingRecipe(inputInventory.getStackInSlot(0));
+		TannerRecipeBase recipe = CraftingManagerTanner.findMatchingRecipe(inputInventory.getStackInSlot(0), this.knownResearches);
 		if (recipe == null) {
 			recipeInventory.setStackInSlot(0, ItemStack.EMPTY);
-			progress = maxProgress = tier = 0;
+			maxProgress = 0;
 		} else {
+			setRecipe(recipe);
 			recipeInventory.setStackInSlot(0, recipe.getTannerRecipeOutput().copy());
-			tier = recipe.getTannerTier();
 			maxProgress = recipe.getCraftTime();
-			requiredToolType = recipe.getToolType();
 		}
 		progress = 0;
 		sendUpdates();
@@ -284,13 +290,17 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		super.readFromNBT(nbt);
 		acTime = nbt.getFloat("acTime");
 		tex = nbt.getString("tex");
-		tier = nbt.getInteger("tier");
 		progress = nbt.getFloat("Progress");
 		maxProgress = nbt.getFloat("maxProgress");
-		requiredToolType = Tool.fromName(nbt.getString("toolType"));
 
 		inputInventory.deserializeNBT(nbt.getCompoundTag("inputInventory"));
 		recipeInventory.deserializeNBT(nbt.getCompoundTag("outputInventory"));
+
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(CraftingManagerTanner.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		}
+
+		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 	}
 
 	@Nonnull
@@ -299,12 +309,15 @@ public class TileEntityTanningRack extends TileEntityBase implements ITickable {
 		super.writeToNBT(nbt);
 		nbt.setFloat("acTime", acTime);
 		nbt.setString("tex", tex);
-		nbt.setInteger("tier", tier);
 		nbt.setFloat("Progress", progress);
 		nbt.setFloat("maxProgress", maxProgress);
-		nbt.setString("toolType", requiredToolType.getName());
 		nbt.setTag("inputInventory", inputInventory.serializeNBT());
 		nbt.setTag("outputInventory", recipeInventory.serializeNBT());
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
+
+		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
 
 		return nbt;
 	}

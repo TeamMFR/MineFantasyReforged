@@ -2,6 +2,7 @@ package minefantasy.mfr.tile;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.util.InventoryUtils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,9 +26,12 @@ public abstract class TileEntityBase extends TileEntity {
 	public static final String PROGRESS_MAX_TAG = "progress_max";
 	public static final String RESULT_STACK_TAG = "result_stack";
 	public static final String RESULT_STACK_SPECIAL_TAG = "result_stack_special";
-	public static final String TOOL_TYPE_REQUIRED_TAG = "tool_type_required";
 	public static final String RESEARCH_REQUIRED_TAG = "research_required";
 	public static final String QUALITY_TAG = "quality";
+	public static final String RECIPE_NAME_TAG = "recipe";
+	public static final String KNOWN_RESEARCHES_TAG = "knownResearches";
+
+	private IRecipeMFR recipe;
 
 	/**
 	 * Create the inventory.
@@ -42,6 +46,18 @@ public abstract class TileEntityBase extends TileEntity {
 	 * @return The inventory
 	 */
 	public abstract ItemStackHandler getInventory();
+
+	public void setRecipe(IRecipeMFR recipe) {
+		this.recipe = recipe;
+	}
+
+	public IRecipeMFR getRecipe() {
+		return recipe;
+	}
+
+	public IRecipeMFR getRecipeByOutput(ItemStack stack) {
+		return null;
+	}
 
 	/**
 	 * Open the GUI for the specified player.

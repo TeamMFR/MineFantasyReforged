@@ -1,5 +1,6 @@
 package minefantasy.mfr.container;
 
+import minefantasy.mfr.container.slots.SlotCraftingOutRestrictive;
 import minefantasy.mfr.container.slots.SlotRestrictive;
 import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,15 +11,15 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ContainerQuern extends ContainerBase {
-	private TileEntityQuern tile;
+	private final TileEntityQuern tile;
 
-	public ContainerQuern(InventoryPlayer inventoryPlayer, TileEntityQuern tile) {
+	public ContainerQuern(EntityPlayer player, InventoryPlayer inventoryPlayer, TileEntityQuern tile) {
 		super(inventoryPlayer, tile);
 		this.tile = tile;
 
 		this.addSlotToContainer(new SlotRestrictive(tile, 0, 81, 9));
 		this.addSlotToContainer(new SlotRestrictive(tile, 1, 81, 32));
-		this.addSlotToContainer(new SlotRestrictive(tile, 2, 81, 55));
+		this.addSlotToContainer(new SlotCraftingOutRestrictive(tile, player, 2, 81, 55));
 
 		addPlayerSlots(inventoryPlayer, 8, 151);
 	}
@@ -44,11 +45,11 @@ public class ContainerQuern extends ContainerBase {
 
 			if (clicked > 2)// INVENTORY
 			{
-				if (TileEntityQuern.isInput(itemstack1)) {
+				if (tile.isInput(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return ItemStack.EMPTY;
 					}
-				} else if (TileEntityQuern.isPot(itemstack1)) {
+				} else if (tile.isPot(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
 						return ItemStack.EMPTY;
 					}

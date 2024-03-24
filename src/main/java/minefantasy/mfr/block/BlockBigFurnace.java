@@ -5,7 +5,9 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityBigFurnaceRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.block.BlockHorizontal;
@@ -32,6 +34,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -94,12 +98,19 @@ public class BlockBigFurnace extends BlockTileEntity<TileEntityBigFurnace> imple
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			TileEntityBigFurnace tile = (TileEntityBigFurnace) getTile(world, pos);
-			if (tile != null) {
+		TileEntityBigFurnace tile = (TileEntityBigFurnace) getTile(world, pos);
+		if (tile != null) {
+			Set<String> playerResearches = new HashSet<>();
+			for (String bigFurnaceResearch : CraftingManagerBigFurnace.getBigFurnaceResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(bigFurnaceResearch))) {
+					playerResearches.add(bigFurnaceResearch);
+				}
+			}
+			tile.setKnownResearches(playerResearches);
+
+			if (!world.isRemote) {
 				tile.openGUI(world, player);
 			}
-
 		}
 		return true;
 	}

@@ -1,0 +1,29 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 14,
+  "recipe_hammer": 0,
+  "skill_xp": 0,
+  "vanilla_xp": 0.2,
+  "output_hot": false,
+  "pattern": [
+    "M  M",
+    "CCCC",
+    "M  M"
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:chimney_stone_thin"
+    },
+    "M": {
+      "item": "#HUNK_BRONZE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:chimney_pipe_thin",
+    "count": 4
+  }
+}

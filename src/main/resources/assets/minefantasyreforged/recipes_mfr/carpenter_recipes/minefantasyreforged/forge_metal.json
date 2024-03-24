@@ -1,0 +1,39 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "advanced_forge",
+  "tool_type": "spanner",
+  "is_tool_recipe": false,
+  "block_tier": -1,
+  "craft_time": 400,
+  "tool_tier": 4,
+  "skill_xp": 3,
+  "vanilla_xp": 0.7,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    " E  ",
+    "IRRI",
+    "PPPP",
+    "BBBB"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:plate"
+    },
+    "R": {
+      "item": "minecraft:redstone_block"
+    },
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools"
+    },
+    "I": {
+      "item": "minefantasyreforged:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:forge_metal"
+  }
+}

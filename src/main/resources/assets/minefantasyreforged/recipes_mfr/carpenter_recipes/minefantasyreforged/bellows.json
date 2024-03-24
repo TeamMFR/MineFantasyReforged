@@ -1,0 +1,31 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 50,
+  "tool_tier": 1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.4,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "NNN",
+    "PPP",
+    "LL ",
+    "PP "
+  ],
+  "key": {
+    "P": {
+      "item": "#TIMBER_REFINED"
+    },
+    "L": {
+      "item": "#LEATHER"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bellows"
+  }
+}

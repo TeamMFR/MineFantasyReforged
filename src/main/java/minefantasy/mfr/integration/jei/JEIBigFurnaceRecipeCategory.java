@@ -21,12 +21,14 @@ import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class JEIBigFurnaceRecipeCategory implements IRecipeCategory<JEIBigFurnaceRecipe> {
 	static final String UID = "minefantasyreforged:big_furnace";
@@ -121,6 +123,17 @@ public class JEIBigFurnaceRecipeCategory implements IRecipeCategory<JEIBigFurnac
 
 		for (BigFurnaceRecipeBase recipe : bigFurnaceRecipes) {
 			recipes.add(new JEIBigFurnaceRecipe(recipe, stackHelper));
+		}
+
+		FurnaceRecipes furnaceRecipes = FurnaceRecipes.instance();
+		Map<ItemStack, ItemStack> smeltingMap = furnaceRecipes.getSmeltingList();
+
+		for (Map.Entry<ItemStack, ItemStack> entry : smeltingMap.entrySet()) {
+			ItemStack input = entry.getKey();
+			ItemStack output = entry.getValue();
+
+			List<ItemStack> inputs = stackHelper.getSubtypes(input);
+			recipes.add(new JEIBigFurnaceRecipe(output, inputs, stackHelper));
 		}
 
 		return recipes;

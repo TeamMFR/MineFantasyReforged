@@ -237,8 +237,8 @@ public class TacticalManager {
 		if (source.isProjectile() || source instanceof EntityDamageSourceIndirect) {
 			return true;
 		}
-		if (source.getImmediateSource() != null && source.getImmediateSource() != null) {
-			return source.getImmediateSource() != source.getImmediateSource();
+		if (source.getTrueSource() != null && source.getImmediateSource() != null) {
+			return source.getTrueSource() != source.getImmediateSource();
 		}
 		return false;
 	}

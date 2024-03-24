@@ -1,0 +1,20 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:pie_tray_uncooked"
+  }
+}

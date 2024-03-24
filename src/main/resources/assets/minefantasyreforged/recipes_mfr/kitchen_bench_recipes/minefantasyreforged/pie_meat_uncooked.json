@@ -1,0 +1,33 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "meat_pie",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 150,
+  "tool_tier": 2,
+  "skill_xp": 2,
+  "vanilla_xp": 0.4,
+  "sound": "minecraft:block.wood.hit",
+  "dirty_progress_amount": 4,
+  "pattern": [
+    " P ",
+    "GGG",
+    " P ",
+    " I "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:pastry"
+    },
+    "G": {
+      "item": "minefantasyreforged:generic_meat_mince_cooked"
+    },
+    "I": {
+      "item": "minefantasyreforged:pie_tray"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:pie_meat_uncooked"
+  }
+}

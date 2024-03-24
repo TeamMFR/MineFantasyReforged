@@ -1,0 +1,27 @@
+{
+    "type": "alloy_shaped_recipe",
+    "crucible_tier": 1,
+    "research": "smelt_obsidian",
+    "skill": "artisanry",
+    "skill_xp": 2,
+    "vanilla_xp": 0.5,
+    "pattern": [
+        "OOF",
+        "SOO"
+    ],
+    "key": {
+        "S": {
+            "item": "#BAR_STEEL"
+        },
+        "O": {
+            "item": "minefantasyreforged:obsidian_rock"
+        },
+        "F": {
+            "item": "minefantasyreforged:flux_strong"
+        }
+    },
+    "result": {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"obsidian\"}}"
+    }
+}

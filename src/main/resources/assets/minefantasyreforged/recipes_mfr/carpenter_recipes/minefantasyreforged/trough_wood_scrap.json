@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 7,
+  "tool_tier": 0,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "P P",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "#TIMBER_SCRAP_WOOD"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:trough_wood",
+    "nbt": "{mf_custom_materials: { main_material:\"scrap_wood\"} }"
+  }
+}

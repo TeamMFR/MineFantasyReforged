@@ -1,0 +1,33 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "blast_furnace",
+  "tool_type": "heavy_hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 90,
+  "recipe_hammer": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.55,
+  "output_hot": false,
+  "pattern": [
+    "RP PR",
+    "RP PR",
+    "RP PR",
+    "RPFPR"
+  ],
+  "key": {
+    "P": {
+      "item": "#PLATE_IRON"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "F": {
+      "item": "minecraft:furnace"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:blast_heater"
+  }
+}

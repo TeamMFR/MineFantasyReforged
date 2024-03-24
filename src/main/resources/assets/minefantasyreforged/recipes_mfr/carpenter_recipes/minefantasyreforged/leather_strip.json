@@ -1,0 +1,22 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "research": "commodities",
+  "tool_type": "shears",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:entity.sheep.shear",
+  "pattern": [
+    "L"
+  ],
+  "key": {
+    "L": {
+      "item": "#LEATHER"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:leather_strip",
+    "count": 4
+  }
+}

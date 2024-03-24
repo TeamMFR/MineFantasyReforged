@@ -7,8 +7,10 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mixin.InvokerLoadConstants;
 import minefantasy.mfr.recipe.factories.BigFurnaceRecipeFactory;
 import minefantasy.mfr.recipe.types.BigFurnaceRecipeType;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.FileUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
@@ -18,7 +20,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
@@ -27,15 +28,17 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CraftingManagerBigFurnace {
+
+	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/big_furnace_recipes";
 
 	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/big_furnace_recipes/";
 
@@ -44,6 +47,7 @@ public class CraftingManagerBigFurnace {
 	}
 
 	private static final IForgeRegistry<BigFurnaceRecipeBase> BIG_FURNACE_RECIPES = (new RegistryBuilder<BigFurnaceRecipeBase>()).setName(new ResourceLocation(MineFantasyReforged.MOD_ID, "big_furnace_recipes")).setType(BigFurnaceRecipeBase.class).setMaxID(Integer.MAX_VALUE >> 5).disableSaving().allowModification().create();
+	private static final Set<String> BIG_FURNACE_RESEARCHES = new HashSet<>();
 
 	public static void init() {
 		//call this so that the static final gets initialized at proper time
@@ -55,18 +59,36 @@ public class CraftingManagerBigFurnace {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final BigFurnaceRecipeFactory factory = new BigFurnaceRecipeFactory();
-	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/big_furnace_recipes", CraftingHelper.CONDITIONS));
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m -> CraftingManagerBigFurnace.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/big_furnace_recipes"));
+		Loader.instance().getActiveModList().forEach(m ->
+				loadRecipesForEachModDirectory(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
 
 		Loader.instance().setActiveModContainer(modContainer);
+	}
+
+	private static void loadRecipesForEachModDirectory(ModContainer mod, File source, String base) {
+		File recipeDirectory = new File(source.toPath().resolve(base).toString());
+		File[] files = recipeDirectory.listFiles();
+		if (files != null) {
+			for (File d : files) {
+				if (d.isDirectory()) {
+					Path modId = d.toPath().getName(d.toPath().getNameCount() - 1);
+					if (!Loader.isModLoaded(modId.toString())) {
+						return;
+					}
+					String modBase = base + "/" + modId;
+					loadRecipes(mod, source, modBase);
+				}
+			}
+		}
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -78,10 +100,9 @@ public class CraftingManagerBigFurnace {
 				BufferedReader reader = null;
 				try {
 					reader = Files.newBufferedReader(fPath);
-					JsonObject[] json = JsonUtils.fromJson(GSON, reader, JsonObject[].class);
-					LOAD_CONSTANTS.invoke(ctx, new Object[] {json});
+					InvokerLoadConstants.loadContext(ctx, new File(fPath.toString()));
 				}
-				catch (IOException | IllegalAccessException | InvocationTargetException e) {
+				catch (IOException e) {
 					MineFantasyReforged.LOG.error("Error loading _constants.json: ", e);
 					return false;
 				}
@@ -109,9 +130,8 @@ public class CraftingManagerBigFurnace {
 				if (Loader.isModLoaded(mod.getModId())) {
 					if (BigFurnaceRecipeType.getByNameWithModId(type, mod.getModId()) != BigFurnaceRecipeType.NONE) {
 						BigFurnaceRecipeBase recipe = factory.parse(ctx, json);
-						recipe.setRegistryName(key);
 						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
 						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Big Furnace recipe", key, type);
@@ -133,33 +153,50 @@ public class CraftingManagerBigFurnace {
 		});
 	}
 
-	public static void addRecipe(BigFurnaceRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(BigFurnaceRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getBigFurnaceRecipeOutput();
 		if (ConfigCrafting.isBigFurnaceItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
+			recipe.setRegistryName(key);
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getBigFurnaceRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !BIG_FURNACE_RECIPES.containsKey(recipe.getRegistryName()))) {
 				BIG_FURNACE_RECIPES.register(recipe);
+				String requiredResearch = recipe.getRequiredResearch();
+				if (!requiredResearch.equals("none")) {
+					BIG_FURNACE_RESEARCHES.add(requiredResearch);
+				}
 			}
 		}
 	}
 
-	public static BigFurnaceRecipeBase findMatchingRecipe(ItemStack input) {
+	public static BigFurnaceRecipeBase findMatchingRecipe(ItemStack input, Set<String> knownResearches) {
 		//// Normal, registered recipes.
 
 		for (BigFurnaceRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				return rec;
+				if (rec.getRequiredResearch().equals("none")
+						|| knownResearches.contains(rec.getRequiredResearch())) {
+					return rec;
+				}
 			}
 		}
 		return null;
 	}
 
-	public static BigFurnaceRecipeBase getRecipeByName(String name) {
+	public static BigFurnaceRecipeBase findRecipeByOutput(ItemStack output) {
+		for (BigFurnaceRecipeBase recipe : getRecipes()) {
+			if (CustomToolHelper.areEqual(recipe.getBigFurnaceRecipeOutput(), output)) {
+				return recipe;
+			}
+		}
+		return null;
+	}
+
+	public static BigFurnaceRecipeBase getRecipeByName(String name, boolean isNullable) {
 		ResourceLocation resourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID + ":" + name);
-		if (!BIG_FURNACE_RECIPES.containsKey(resourceLocation)) {
+		if (!BIG_FURNACE_RECIPES.containsKey(resourceLocation) && !isNullable) {
 			MineFantasyReforged.LOG.error("Big Furnace Recipe Registry does not contain recipe: {}", name);
 		}
 		return BIG_FURNACE_RECIPES.getValue(resourceLocation);
@@ -168,8 +205,21 @@ public class CraftingManagerBigFurnace {
 	public static List<BigFurnaceRecipeBase> getRecipesByName(String... names) {
 		List<BigFurnaceRecipeBase> recipes = new ArrayList<>();
 		for (String name : names) {
-			recipes.add(getRecipeByName(name));
+			recipes.add(getRecipeByName(name, false));
 		}
 		return recipes;
+	}
+
+
+	public static String getRecipeName(BigFurnaceRecipeBase recipe) {
+		ResourceLocation recipeLocation = BIG_FURNACE_RECIPES.getKey(recipe);
+		if (recipeLocation != null) {
+			return recipeLocation.getPath();
+		}
+		return "";
+	}
+
+	public static Set<String> getBigFurnaceResearches() {
+		return BIG_FURNACE_RESEARCHES;
 	}
 }

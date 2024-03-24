@@ -7,9 +7,12 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.mixin.InvokerLoadConstants;
 import minefantasy.mfr.recipe.factories.SalvageRecipeFactory;
 import minefantasy.mfr.recipe.types.SalvageRecipeType;
 import minefantasy.mfr.util.FileUtils;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
@@ -18,7 +21,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
@@ -27,8 +29,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -36,6 +36,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class CraftingManagerSalvage {
+
+	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/salvage_recipes";
+
 	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/salvage_recipes/";
 
 	public CraftingManagerSalvage() {
@@ -52,18 +55,36 @@ public class CraftingManagerSalvage {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final SalvageRecipeFactory factory = new SalvageRecipeFactory();
-	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/salvage_recipes", CraftingHelper.CONDITIONS));
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m -> CraftingManagerSalvage.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/salvage_recipes"));
+		Loader.instance().getActiveModList().forEach(m ->
+				loadRecipesForEachModDirectory(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
 
 		Loader.instance().setActiveModContainer(modContainer);
+	}
+
+	private static void loadRecipesForEachModDirectory(ModContainer mod, File source, String base) {
+		File recipeDirectory = new File(source.toPath().resolve(base).toString());
+		File[] files = recipeDirectory.listFiles();
+		if (files != null) {
+			for (File d : files) {
+				if (d.isDirectory()) {
+					Path modId = d.toPath().getName(d.toPath().getNameCount() - 1);
+					if (!Loader.isModLoaded(modId.toString())) {
+						return;
+					}
+					String modBase = base + "/" + modId;
+					loadRecipes(mod, source, modBase);
+				}
+			}
+		}
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -75,10 +96,9 @@ public class CraftingManagerSalvage {
 				BufferedReader reader = null;
 				try {
 					reader = Files.newBufferedReader(fPath);
-					JsonObject[] json = JsonUtils.fromJson(GSON, reader, JsonObject[].class);
-					LOAD_CONSTANTS.invoke(ctx, new Object[] {json});
+					InvokerLoadConstants.loadContext(ctx, new File(fPath.toString()));
 				}
-				catch (IOException | IllegalAccessException | InvocationTargetException e) {
+				catch (IOException e) {
 					MineFantasyReforged.LOG.error("Error loading _constants.json: ", e);
 					return false;
 				}
@@ -106,9 +126,8 @@ public class CraftingManagerSalvage {
 				if (Loader.isModLoaded(mod.getModId())) {
 					if (SalvageRecipeType.getByNameWithModId(type, mod.getModId()) != SalvageRecipeType.NONE) {
 						SalvageRecipeBase recipe = factory.parse(ctx, json);
-						recipe.setRegistryName(key);
 						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
 						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Salvage recipe", key, type);
@@ -130,11 +149,12 @@ public class CraftingManagerSalvage {
 		});
 	}
 
-	public static void addRecipe(SalvageRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(SalvageRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getInput();
 		if (ConfigCrafting.isItemSalvageable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
+			recipe.setRegistryName(key);
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getInput().isItemEqual(s))
 					&& (!checkForExistence || !SALVAGE_RECIPES.containsKey(recipe.getRegistryName()))) {
@@ -143,12 +163,16 @@ public class CraftingManagerSalvage {
 		}
 	}
 
-	public static SalvageRecipeBase findMatchingRecipe(ItemStack input) {
+	public static SalvageRecipeBase findMatchingRecipe(ItemStack input, EntityPlayer user) {
 		//// Normal, registered recipes.
 
 		for (SalvageRecipeBase rec : getRecipes()) {
 			if (rec.matches(input)) {
-				return rec;
+				String requiredResearch = rec.getRequiredResearch();
+				if (requiredResearch.equals("none") ||
+						ResearchLogic.getResearchCheck(user, ResearchLogic.getResearch(requiredResearch))) {
+					return rec;
+				}
 			}
 		}
 		return null;

@@ -1,0 +1,25 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "research": "crucible",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "SSS",
+    "S S",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "#STONE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crucible_stone"
+  }
+}

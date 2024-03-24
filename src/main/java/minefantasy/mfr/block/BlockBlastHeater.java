@@ -3,6 +3,7 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -25,7 +26,9 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 	private static final PropertyBool BURNING = PropertyBool.create("burning");
@@ -95,11 +98,17 @@ public class BlockBlastHeater extends BlockTileEntity<TileEntityBlastHeater> {
 				}
 				return false;
 			}
-		}
-		if (!world.isRemote) {
-			TileEntityBlastHeater tileEntity = (TileEntityBlastHeater) getTile(world, pos);
-			if (tileEntity != null) {
-				tileEntity.openGUI(world, player);
+
+			Set<String> playerResearches = new HashSet<>();
+			for (String blastFurnaceResearch : CraftingManagerBlastFurnace.getBlastFurnaceResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(blastFurnaceResearch))) {
+					playerResearches.add(blastFurnaceResearch);
+				}
+			}
+			tile.setKnownResearches(playerResearches);
+
+			if (!world.isRemote) {
+				tile.openGUI(world, player);
 			}
 		}
 

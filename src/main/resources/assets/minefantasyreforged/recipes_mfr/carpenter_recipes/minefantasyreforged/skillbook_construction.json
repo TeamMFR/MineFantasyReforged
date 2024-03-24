@@ -1,0 +1,37 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "T",
+    "D",
+    "B"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:book"
+    },
+    "T": {
+      "item": "minefantasyreforged:talisman_lesser"
+    },
+    "D": {
+      "item": "minecraft:dye",
+      "data": 14
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:skillbook_construction"
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovebookcrafts"
+      }
+    }
+  ]
+}

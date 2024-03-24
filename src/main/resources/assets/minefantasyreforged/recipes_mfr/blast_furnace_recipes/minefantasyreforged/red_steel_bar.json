@@ -1,0 +1,16 @@
+{
+	"type": "blast_furnace_recipe",
+	"research": "smelt_red_steel",
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.7,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:red_steel_weak_ingot"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"red_steel\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

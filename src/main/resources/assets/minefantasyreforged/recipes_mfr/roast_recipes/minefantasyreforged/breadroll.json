@@ -1,0 +1,24 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 150,
+	"max_temperature": 300,
+	"cook_time": 10,
+	"burn_time": 40,
+	"can_burn": true,
+	"is_oven_recipe": true,
+	"research": "bread",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.1,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:dough"
+		}
+	],
+	"burnt_output": {
+		"item": "minefantasyreforged:burnt_food"
+	},
+	"result": {
+		"item": "minefantasyreforged:breadroll"
+	}
+}

@@ -1,0 +1,37 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "research": "repair_advanced",
+  "tool_type": "needle",
+  "block_tier": -1,
+  "craft_time": 50,
+  "tool_tier": 2,
+  "skill_xp": 2,
+  "vanilla_xp": 0.5,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "SLS",
+    "PRT",
+    "LSL"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:plate"
+    },
+    "R": {
+      "item": "minefantasyreforged:repair_kit_basic"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "T": {
+      "item": "minefantasyreforged:standard_hammer"
+    },
+    "L": {
+      "item": "minecraft:slime_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:repair_kit_advanced"
+  }
+}

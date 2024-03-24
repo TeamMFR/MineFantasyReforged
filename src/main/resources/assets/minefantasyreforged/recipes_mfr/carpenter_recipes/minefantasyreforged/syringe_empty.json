@@ -1,0 +1,35 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "syringe",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 200,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.4,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    "E",
+    "S",
+    "G",
+    "T"
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:steel_tube"
+    },
+    "T": {
+      "item": "minefantasyreforged:standard_needle"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools"
+    },
+    "G": {
+      "item": "minecraft:glass_bottle"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:syringe_empty"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 24,
+  "recipe_hammer": 2,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "LR"
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:hinge"
+  }
+}

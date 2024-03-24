@@ -1,0 +1,32 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "vanilla_xp": 0.8,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "T",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:skillbook_construction"
+    },
+    "T": {
+      "item": "minefantasyreforged:talisman_greater"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:skillbook_construction_max"
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovebookcrafts"
+      }
+    }
+  ]
+}

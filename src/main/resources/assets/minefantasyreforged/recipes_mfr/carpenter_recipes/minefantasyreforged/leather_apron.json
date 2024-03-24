@@ -1,0 +1,25 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "vanilla_xp": 0.6,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "LCL",
+    " L "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:coal",
+      "data": 32767
+    },
+    "L": {
+      "item": "#LEATHER"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:leather_apron"
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 1,
+    "repeat_amount": 1,
+    "research": "smelt_black_steel",
+    "skill": "artisanry",
+    "skill_xp": 3,
+    "vanilla_xp": 0.6,
+    "ingredients": [
+        {
+            "item": "#BAR_STEEL"
+        },
+        {
+            "item": "#BAR_STEEL"
+        },
+        {
+            "item": "#BAR_BRONZE"
+        },
+        {
+            "item": "#BAR_BRONZE"
+        },
+        {
+            "item": "minefantasyreforged:obsidian_rock"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:black_steel_weak_ingot"
+    }
+}

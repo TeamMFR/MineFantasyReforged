@@ -1,0 +1,37 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "crossbow_shaft_advanced",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 300,
+  "tool_tier": 2,
+  "skill_xp": 3,
+  "vanilla_xp": 0.5,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    " BBB",
+    "BOTT",
+    "ICII"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "C": {
+      "item": "minefantasyreforged:crossbow_stock_wood"
+    },
+    "T": {
+      "item": "minefantasyreforged:tungsten_gears"
+    },
+    "I": {
+      "item": "minefantasyreforged:iron_strut"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_stock_iron"
+  }
+}

@@ -1,0 +1,24 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 100,
+	"max_temperature": 300,
+	"cook_time": 60,
+	"burn_time": 240,
+	"can_burn": true,
+	"is_oven_recipe": true,
+	"research": "cheese",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:curds"
+		}
+	],
+	"burnt_output": {
+		"item": "minefantasyreforged:burnt_pot"
+	},
+	"result": {
+		"item": "minefantasyreforged:cheese_pot"
+	}
+}

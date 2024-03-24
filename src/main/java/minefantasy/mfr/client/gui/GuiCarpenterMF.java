@@ -2,6 +2,7 @@ package minefantasy.mfr.client.gui;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.container.ContainerBase;
+import minefantasy.mfr.recipe.CarpenterRecipeBase;
 import minefantasy.mfr.tile.TileEntityCarpenter;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.TextureHelperMFR;
@@ -16,11 +17,18 @@ import org.lwjgl.opengl.GL11;
 
 @SideOnly(Side.CLIENT)
 public class GuiCarpenterMF extends GuiContainer {
-	private TileEntityCarpenter tile;
-	private int regularXSize = 176;
+	private final TileEntityCarpenter tile;
+	private final CarpenterRecipeBase carpenterRecipe;
+	private final int regularXSize = 176;
 
 	public GuiCarpenterMF(ContainerBase container, TileEntityCarpenter tile) {
 		super(container);
+		if (tile.getRecipe() instanceof CarpenterRecipeBase) {
+			this.carpenterRecipe = (CarpenterRecipeBase) tile.getRecipe();
+		}
+		else {
+			this.carpenterRecipe = null;
+		}
 		this.xSize = 195;
 		this.ySize = 240;
 		this.tile = tile;
@@ -43,9 +51,13 @@ public class GuiCarpenterMF extends GuiContainer {
 		int yPoint = (this.height - this.ySize) / 2;
 
 		if (knowsCraft && !tile.getResultName().equalsIgnoreCase("")) {
-			if (tile.getRequiredToolType() != null) {
+			if (this.carpenterRecipe == null) {
+				return;
+			}
+
+			if (carpenterRecipe.getToolType() != null) {
 				if (x < xPoint && x > xPoint - 20 && y < yPoint + 20 && y > yPoint) {
-					String s2 = tile.getRequiredToolType().getDisplayName() + ", "
+					String s2 = carpenterRecipe.getToolType().getDisplayName() + ", "
 							+ (tile.getToolTierNeeded() > -1
 							? I18n.format("attribute.mfcrafttier.name") + " "
 							+ tile.getToolTierNeeded()
@@ -82,15 +94,15 @@ public class GuiCarpenterMF extends GuiContainer {
 			GuiHelper.renderToolIcon(this, "carpenter", tile.getCarpenterTierNeeded(), xPoint + regularXSize, yPoint,
 					true, true);
 
-			if (tile.getRequiredToolType() != null) {
-				GuiHelper.renderToolIcon(this, tile.getRequiredToolType().getName(), tile.getToolTierNeeded(), xPoint - 20, yPoint, isToolSufficient(), true);
+			if (carpenterRecipe != null && carpenterRecipe.getToolType() != null) {
+				GuiHelper.renderToolIcon(this, carpenterRecipe.getToolType().getName(), tile.getToolTierNeeded(), xPoint - 20, yPoint, isToolSufficient(), true);
 			}
 		}
 	}
 
 	private boolean isToolSufficient() {
 		if (mc.player != null) {
-			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), tile.getRequiredToolType(), tile.getToolTierNeeded());
+			return ToolHelper.isToolSufficient(mc.player.getHeldItem(EnumHand.MAIN_HAND), carpenterRecipe.getToolType(), tile.getToolTierNeeded());
 		}
 		return false;
 	}

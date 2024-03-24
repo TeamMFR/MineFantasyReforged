@@ -1,0 +1,26 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "bomb_ceramic",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 2,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.5,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    " C ",
+    "C C",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bomb_casing_uncooked",
+    "count": 2
+  }
+}

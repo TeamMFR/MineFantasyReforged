@@ -1,0 +1,27 @@
+{
+  "type": "carpenter_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "research": "arrows_bodkin",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.wood.hit",
+  "pattern": [
+    "B",
+    "F"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bodkin_head"
+    },
+    "F": {
+      "item": "minefantasyreforged:fletching"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_arrow_bodkin"
+  }
+}

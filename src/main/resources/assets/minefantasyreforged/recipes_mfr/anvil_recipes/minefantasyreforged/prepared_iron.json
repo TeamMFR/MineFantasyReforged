@@ -1,0 +1,27 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "blast_furnace",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 12,
+  "recipe_hammer": 2,
+  "skill_xp": 0,
+  "vanilla_xp": 0.2,
+  "output_hot": false,
+  "pattern": [
+    "IFI"
+  ],
+  "key": {
+    "F": {
+      "item": "minefantasyreforged:flux"
+    },
+    "I": {
+      "item": "minecraft:iron_ore"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:prepared_iron"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "advanced_blackpowder",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.5,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    " B ",
+    "RGR",
+    " C "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:blackpowder"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "C": {
+      "item": "minefantasyreforged:clay_pot"
+    },
+    "G": {
+      "item": "#DUST_REDSTONE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:blackpowder_advanced"
+  }
+}

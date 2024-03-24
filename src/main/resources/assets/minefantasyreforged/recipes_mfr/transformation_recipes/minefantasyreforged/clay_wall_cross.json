@@ -1,0 +1,26 @@
+{
+	"type": "transformation_recipe",
+	"tool_type": "hammer",
+	"skill": "construction",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"soundName": "minefantasyreforged:block.hammercarpenter",
+	"maxProgress": 2,
+	"inputs": [
+		{
+			"item": "minefantasyreforged:clay_wall"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:clay_wall_cross"
+	},
+	"consumableStacks": [
+		{
+			"item": "minefantasyreforged:nail"
+		},
+		{
+			"item": "minefantasyreforged:timber",
+			"count": 2
+		}
+	]
+}

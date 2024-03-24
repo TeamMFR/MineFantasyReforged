@@ -2,6 +2,8 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.item.ItemLighter;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.CraftingManagerBloomery;
 import minefantasy.mfr.tile.TileEntityBloomery;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -22,6 +24,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 	public static final PropertyBool BLOOM = PropertyBool.create("bloom");
@@ -97,6 +101,15 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityBloomery tile = (TileEntityBloomery) getTile(world, pos);
 		if (tile != null) {
+			// Handle Researches
+			Set<String> playerResearches = new HashSet<>();
+			for (String bloomeryResearch : CraftingManagerBloomery.getBloomeryResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(bloomeryResearch))) {
+					playerResearches.add(bloomeryResearch);
+				}
+			}
+			tile.setKnownResearches(playerResearches);
+
 			ItemStack held = player.getHeldItem(hand);
 
 			// Hammer
@@ -105,7 +118,7 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 			}
 			// Light
 			int l = ItemLighter.tryUse(held, player);
-			if (!tile.isActive && !tile.hasBloom()) {
+			if (!tile.isActive() && !tile.hasBloom()) {
 				if (!held.isEmpty() && l != 0) {
 					player.playSound(SoundEvents.ITEM_FLINTANDSTEEL_USE, 1.0F, 1.0F);
 					if (world.isRemote)
@@ -117,7 +130,7 @@ public class BlockBloomery extends BlockTileEntity<TileEntityBloomery> {
 				}
 			}
 			// GUI
-			if (!world.isRemote && !tile.isActive && !tile.hasBloom()) {
+			if (!world.isRemote && !tile.isActive() && !tile.hasBloom()) {
 				final TileEntityBloomery tileEntity = (TileEntityBloomery) getTile(world, pos);
 				if (tileEntity != null) {
 					tileEntity.openGUI(world, player);

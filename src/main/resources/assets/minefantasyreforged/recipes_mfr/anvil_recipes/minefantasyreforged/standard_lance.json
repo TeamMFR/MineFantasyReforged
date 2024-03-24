@@ -1,0 +1,29 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "research": "tier",
+  "tool_type": "heavy_hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 60,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.4,
+  "output_hot": true,
+  "pattern": [
+    "BR    ",
+    "BBBBBB",
+    "BR    "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_lance"
+  }
+}

@@ -1,18 +1,19 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.tile.TileEntityAnvil;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
 
 public class AnvilCraftMatrix extends InventoryCrafting {
-	private IAnvil anvil;
+	private final TileEntityAnvil anvil;
 
-	public AnvilCraftMatrix(IAnvil anvil, Container instance, int width, int height) {
+	public AnvilCraftMatrix(TileEntityAnvil anvil, Container instance, int width, int height) {
 		super(instance, width, height);
 		this.anvil = anvil;
 	}
 
 	public void modifyTier(int hammerTier, int anvilTier, int craftTime) {
-		anvil.setRequiredHammerTier(hammerTier);
+		anvil.setRequiredToolTier(hammerTier);
 		anvil.setRequiredAnvilTier(anvilTier);
 		anvil.setProgressMax(craftTime);
 	}
@@ -20,9 +21,4 @@ public class AnvilCraftMatrix extends InventoryCrafting {
 	public void modifyResearch(String name) {
 		anvil.setRequiredResearch(name);
 	}
-
-	public int getTier() {
-		return anvil.getRequiredHammerTier();
-	}
-
 }

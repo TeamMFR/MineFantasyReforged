@@ -15,7 +15,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerBlastHeater extends ContainerBase {
-	private TileEntityBlastHeater tile;
+	private final TileEntityBlastHeater tile;
 	private int lastFuel;
 	private int lastFuelMax;
 

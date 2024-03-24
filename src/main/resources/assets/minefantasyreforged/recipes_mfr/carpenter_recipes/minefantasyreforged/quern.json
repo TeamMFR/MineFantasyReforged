@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.6,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "FSF",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "#STONE"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:quern"
+  }
+}

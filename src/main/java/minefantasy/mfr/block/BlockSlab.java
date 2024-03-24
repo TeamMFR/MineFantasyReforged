@@ -103,11 +103,11 @@ public class BlockSlab extends Block implements IClientRegister {
 		return super.canPlaceBlockAt(worldIn, pos) || block == this && !state.getValue(TYPE).equals(SlabType.DOUBLE);
 	}
 
-	@Override
-	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
-		IBlockState state = world.getBlockState(pos);
-		return !state.getValue(TYPE).equals(SlabType.DOUBLE);
-	}
+//	@Override
+//	public boolean isReplaceable(IBlockAccess world, BlockPos pos) {
+//		IBlockState state = world.getBlockState(pos);
+//		return !state.getValue(TYPE).equals(SlabType.DOUBLE);
+//	}
 
 	/**
 	 * Handles how many slab ItemBlocks should be dropped based on BlockState, 2 for a DOUBLE Slab, 1 for either TOP or BOTTOM
@@ -120,11 +120,11 @@ public class BlockSlab extends Block implements IClientRegister {
 
 		/**
 		 * Handles how slabs have different AABBs based on their relative position:
-		 *
+		 * <p>
 		 * BOTTOM, where the slab is the bottom half of a full block
-		 *
+		 * <p>
 		 * TOP, where the slab is the upper half of a full block
-		 *
+		 * <p>
 		 * DOUBLE, where the slab(s?) is a full block
 		 * @return the AABB dependent on block state
 		 */

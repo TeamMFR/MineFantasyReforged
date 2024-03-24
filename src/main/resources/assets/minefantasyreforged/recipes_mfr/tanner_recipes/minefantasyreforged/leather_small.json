@@ -1,0 +1,18 @@
+{
+	"type": "tanner_recipe",
+	"tanner_tier": -1,
+	"craft_time": 12,
+	"tool_type": "knife",
+	"research": "tanning",
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.1,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:hide_small"
+		}
+	],
+	"result": {
+		"item": "minecraft:leather"
+	}
+}

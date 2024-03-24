@@ -18,8 +18,10 @@ public class AnvilShapedRecipe extends AnvilRecipeBase {
 	public AnvilShapedRecipe(NonNullList<Ingredient> inputs, ItemStack output, String toolType,
 			int craftTime, int hammerTier, int anvilTier,
 			boolean hotOutput, String requiredResearch, Skill requiredSkill,
+			int skillXp, float vanillaXp,
 			int width, int height) {
-		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput, requiredResearch, requiredSkill);
+		super(inputs, output, toolType, craftTime, hammerTier, anvilTier, hotOutput,
+				requiredResearch, requiredSkill, skillXp, vanillaXp);
 		this.width = width;
 		this.height = height;
 	}

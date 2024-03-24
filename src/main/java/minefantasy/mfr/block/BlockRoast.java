@@ -1,6 +1,8 @@
 package minefantasy.mfr.block;
 
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.CraftingManagerRoast;
 import minefantasy.mfr.tile.TileEntityRoast;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -18,6 +20,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockRoast extends BlockTileEntity<TileEntityRoast> {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -49,10 +53,18 @@ public class BlockRoast extends BlockTileEntity<TileEntityRoast> {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityRoast tile = (TileEntityRoast) getTile(world, pos);
 		if (tile != null) {
-			return tile.interact(user);
+			Set<String> playerResearches = new HashSet<>();
+			for (String roastResearch : CraftingManagerRoast.getRoastResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(roastResearch))) {
+					playerResearches.add(roastResearch);
+				}
+			}
+			tile.setKnownResearches(playerResearches);
+
+			return tile.interact(player);
 		}
 		return true;
 	}

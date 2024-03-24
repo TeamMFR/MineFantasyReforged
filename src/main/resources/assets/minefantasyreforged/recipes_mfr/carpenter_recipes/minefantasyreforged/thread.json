@@ -1,0 +1,27 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "research": "commodities",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 5,
+  "tool_tier": -1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "W",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "item": "#STICK_WOOD"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:thread",
+    "count": 4
+  }
+}

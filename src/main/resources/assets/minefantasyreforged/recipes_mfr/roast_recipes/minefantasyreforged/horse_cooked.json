@@ -1,0 +1,24 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 100,
+	"max_temperature": 200,
+	"cook_time": 15,
+	"burn_time": 60,
+	"can_burn": true,
+	"is_oven_recipe": false,
+	"research": "wild_meat",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:horse_raw"
+		}
+	],
+	"burnt_output": {
+		"item": "minefantasyreforged:burnt_food"
+	},
+	"result": {
+		"item": "minefantasyreforged:horse_cooked"
+	}
+}

@@ -1,0 +1,24 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 150,
+	"max_temperature": 250,
+	"cook_time": 40,
+	"burn_time": 80,
+	"can_burn": true,
+	"is_oven_recipe": true,
+	"research": "cake",
+	"skill": "provisioning",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:cake_raw"
+		}
+	],
+	"burnt_output": {
+		"item": "minefantasyreforged:burnt_cake"
+	},
+	"result": {
+		"item": "minefantasyreforged:cake_uniced"
+	}
+}

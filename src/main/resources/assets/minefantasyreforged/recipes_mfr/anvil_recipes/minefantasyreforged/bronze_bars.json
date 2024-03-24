@@ -1,0 +1,25 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "research": "smelt_bronze",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 1,
+  "recipe_time": 14,
+  "recipe_hammer": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.4,
+  "output_hot": false,
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "#HUNK_BRONZE"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bronze_bars"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "engineering_tanner",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 300,
+  "tool_tier": 3,
+  "skill_xp": 3,
+  "vanilla_xp": 0.7,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    "BLB",
+    "ISI",
+    "RRR",
+    "IOI"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "R": {
+      "item": "minefantasyreforged:bronze_gears"
+    },
+    "S": {
+      "item": "minefantasyreforged:standard_knife"
+    },
+    "I": {
+      "item": "minefantasyreforged:iron_strut"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "O": {
+      "item": "minefantasyreforged:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:tanner_metal"
+  }
+}

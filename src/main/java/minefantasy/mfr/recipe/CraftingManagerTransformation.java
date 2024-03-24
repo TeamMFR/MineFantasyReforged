@@ -7,6 +7,7 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mixin.InvokerLoadConstants;
 import minefantasy.mfr.recipe.factories.TransformationRecipeFactory;
 import minefantasy.mfr.recipe.types.TransformationRecipeType;
 import minefantasy.mfr.util.FileUtils;
@@ -19,7 +20,6 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
@@ -28,8 +28,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -37,6 +35,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class CraftingManagerTransformation {
+
+	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/transformation_recipes";
+
 	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/transformation_recipes/";
 
 	public CraftingManagerTransformation() {
@@ -53,18 +54,36 @@ public class CraftingManagerTransformation {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final TransformationRecipeFactory factory = new TransformationRecipeFactory();
-	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/transformation_recipes", CraftingHelper.CONDITIONS));
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m -> CraftingManagerTransformation.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/transformation_recipes"));
+		Loader.instance().getActiveModList().forEach(m ->
+				loadRecipesForEachModDirectory(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
 
 		Loader.instance().setActiveModContainer(modContainer);
+	}
+
+	private static void loadRecipesForEachModDirectory(ModContainer mod, File source, String base) {
+		File recipeDirectory = new File(source.toPath().resolve(base).toString());
+		File[] files = recipeDirectory.listFiles();
+		if (files != null) {
+			for (File d : files) {
+				if (d.isDirectory()) {
+					Path modId = d.toPath().getName(d.toPath().getNameCount() - 1);
+					if (!Loader.isModLoaded(modId.toString())) {
+						return;
+					}
+					String modBase = base + "/" + modId;
+					loadRecipes(mod, source, modBase);
+				}
+			}
+		}
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -76,10 +95,9 @@ public class CraftingManagerTransformation {
 				BufferedReader reader = null;
 				try {
 					reader = Files.newBufferedReader(fPath);
-					JsonObject[] json = JsonUtils.fromJson(GSON, reader, JsonObject[].class);
-					LOAD_CONSTANTS.invoke(ctx, new Object[] {json});
+					InvokerLoadConstants.loadContext(ctx, new File(fPath.toString()));
 				}
-				catch (IOException | IllegalAccessException | InvocationTargetException e) {
+				catch (IOException e) {
 					MineFantasyReforged.LOG.error("Error loading _constants.json: ", e);
 					return false;
 				}
@@ -107,9 +125,8 @@ public class CraftingManagerTransformation {
 				if (Loader.isModLoaded(mod.getModId())) {
 					if (TransformationRecipeType.getByNameWithModId(type, mod.getModId()) != TransformationRecipeType.NONE) {
 						TransformationRecipeBase recipe = factory.parse(ctx, json);
-						recipe.setRegistryName(key);
 						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
 						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Transformation recipe", key, type);
@@ -131,7 +148,8 @@ public class CraftingManagerTransformation {
 		});
 	}
 
-	public static void addRecipe(TransformationRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(TransformationRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
+		recipe.setRegistryName(key);
 		if (recipe instanceof TransformationRecipeStandard) {
 			addStandardRecipe((TransformationRecipeStandard) recipe, checkForExistence);
 		}

@@ -12,7 +12,9 @@ import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BigFurnaceRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBigFurnace;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -37,7 +39,9 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUseable, ITickable {
 
@@ -45,6 +49,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public int fuel;
 	public int maxFuel;
 	public boolean built = false;
+	private Set<String> knownResearches = new HashSet<>();
 	// ANIMATE
 	private boolean opening = false;
 	public int numUsers;
@@ -194,85 +199,23 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		boolean canSmelt = false;
 		boolean smelted = false;
 
-		if (!getSpecialResult().isEmpty()) {
-			if (!canFitSpecialResult()) {
-				canSmelt = false;
-			} else {
+		for (int a = 0; a < 4; a++) {
+			if (canSmelt(getInventory().getStackInSlot(a), getInventory().getStackInSlot(a + 4))) {
 				canSmelt = true;
 
 				if (progress >= getMaxTime()) {
-					smeltSpecial();
+					smeltItem(a, a + 4);
 					smelted = true;
 				}
 			}
-		} else
-			for (int a = 0; a < 4; a++) {
-				if (canSmelt(getInventory().getStackInSlot(a), getInventory().getStackInSlot(a + 4))) {
-					canSmelt = true;
-
-					if (progress >= getMaxTime()) {
-						smeltItem(a, a + 4);
-						smelted = true;
-					}
-				}
-			}
+		}
 
 		if (canSmelt) {
-			progress += heat;
+			progress += (int) heat;
 		}
 		if (!canSmelt || smelted) {
 			progress = 0;
 		}
-	}
-
-	private boolean canFitSpecialResult() {
-		ItemStack spec = getSpecialResult();
-
-		if (!spec.isEmpty()) {
-			int spaceLeft = 0;
-
-			for (int a = 4; a < 8; a++) {
-				if (getInventory().getStackInSlot(a).isEmpty()) {
-					spaceLeft += 64;
-				} else {
-					if (CustomToolHelper.areEqual(getInventory().getStackInSlot(a), spec)) {
-						if (getInventory().getStackInSlot(a).getCount() < getInventory().getStackInSlot(a).getMaxStackSize()) {
-							spaceLeft += getInventory().getStackInSlot(a).getMaxStackSize() - getInventory().getStackInSlot(a).getCount();
-						}
-					}
-				}
-			}
-			return spec.getCount() <= spaceLeft;
-		}
-		return false;
-	}
-
-	private void smeltSpecial() {
-		ItemStack res = getSpecialResult().copy();
-
-		for (int output = 4; output < 8; output++) {
-			if (res.getCount() <= 0)
-				break;
-
-			if (getInventory().getStackInSlot(output).isEmpty()) {
-				getInventory().setStackInSlot(output, res);
-				break;
-			} else {
-				if (CustomToolHelper.areEqual(getInventory().getStackInSlot(output), res)) {
-					int spaceLeft = getInventory().getStackInSlot(output).getMaxStackSize() - getInventory().getStackInSlot(output).getCount();
-
-					if (res.getCount() <= spaceLeft) {
-						getInventory().getStackInSlot(output).grow(res.getCount());
-						break;
-					} else {
-						getInventory().getStackInSlot(output).grow(spaceLeft);
-						res.shrink(spaceLeft);
-					}
-				}
-			}
-		}
-		for (int input = 0; input < 4; input++)
-			getInventory().extractItem(input, 1, false);
 	}
 
 	public void puffSmoke(Random rand, World world, BlockPos pos) {
@@ -410,12 +353,14 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		}
 
 		// SPECIAL SMELTING
-		BigFurnaceRecipeBase recipe = CraftingManagerBigFurnace.findMatchingRecipe(item);
+		BigFurnaceRecipeBase recipe = CraftingManagerBigFurnace.findMatchingRecipe(item, this.knownResearches);
 		if (recipe != null && recipe.getTier() <= this.getTier()) {
+			setRecipe(recipe);
 			return recipe.getBigFurnaceRecipeOutput();
 		}
 
-		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(item);// If no special: try vanilla
+		// If no special: try vanilla
+		ItemStack res = FurnaceRecipes.instance().getSmeltingResult(item);
 		if (!res.isEmpty()) {
 			if (res.getItem() instanceof ItemFood || item.getItem() instanceof ItemFood) {
 				return new ItemStack(MineFantasyItems.BURNT_FOOD, 1);
@@ -426,8 +371,13 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		return ItemStack.EMPTY;
 	}
 
-	public ItemStack getSpecialResult() {
-		return ItemStack.EMPTY;
+	@Override
+	public IRecipeMFR getRecipeByOutput(ItemStack stack) {
+		return CraftingManagerBigFurnace.findRecipeByOutput(stack);
+	}
+
+	public void setKnownResearches(Set<String> knownResearches) {
+		this.knownResearches = knownResearches;
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -619,6 +569,12 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(CraftingManagerBigFurnace.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		}
+
+		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+
 		justShared = nbt.getInteger("Shared");
 		built = nbt.getBoolean("Built");
 
@@ -652,6 +608,12 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 		nbt.setInteger("progress", progress);
 
 		nbt.setTag("inventory", inventory.serializeNBT());
+
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
+
+		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
 
 		return nbt;
 	}

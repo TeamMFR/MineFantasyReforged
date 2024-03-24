@@ -17,9 +17,11 @@ public class CarpenterShapelessCustomMaterialRecipe extends CarpenterRecipeBase 
 
 	public CarpenterShapelessCustomMaterialRecipe(
 			ItemStack output, NonNullList<Ingredient> inputs,
-			int toolTier, int carpenterTier, int craftTime, float recipeExperience,
+			int toolTier, int carpenterTier, int craftTime,
+			int skillXp, float vanillaXp,
 			String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed) {
-		super(output, inputs, toolTier, carpenterTier, craftTime, recipeExperience, toolType, soundOfCraft, research, skillUsed);
+		super(output, inputs, toolTier, carpenterTier, craftTime,
+				skillXp, vanillaXp, toolType, soundOfCraft, research, skillUsed);
 	}
 
 	/**

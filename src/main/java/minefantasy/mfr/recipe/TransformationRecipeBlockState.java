@@ -21,9 +21,16 @@ public class TransformationRecipeBlockState extends TransformationRecipeBase {
 			IBlockState input,
 			IBlockState output,
 			Tool tool,
-			List<ItemStack> consumableStacks, ItemStack dropStack, ItemStack offhandStack,
-			Skill skill, String research, int progressMax, String soundName) {
-		super(tool, consumableStacks, dropStack, offhandStack, skill, research, progressMax, soundName);
+			List<ItemStack> consumableStacks,
+			ItemStack dropStack,
+			ItemStack offhandStack,
+			Skill skill,
+			String research,
+			int skillXp,
+			float vanillaXp,
+			int progressMax,
+			String soundName) {
+		super(tool, consumableStacks, dropStack, offhandStack, skill, research, skillXp, vanillaXp, progressMax, soundName);
 		this.input = input;
 		this.output = output;
 	}

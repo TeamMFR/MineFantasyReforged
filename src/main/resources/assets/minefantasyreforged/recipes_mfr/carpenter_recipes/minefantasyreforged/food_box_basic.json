@@ -1,0 +1,31 @@
+{
+  "type": "carpenter_shaped_custom_material_recipe",
+  "skill": "construction",
+  "research": "food_box",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": 0,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "HP ",
+    "P P",
+    "NPN"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber_cut"
+    },
+    "H": {
+      "item": "minefantasyreforged:hinge"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:food_box_basic"
+  }
+}

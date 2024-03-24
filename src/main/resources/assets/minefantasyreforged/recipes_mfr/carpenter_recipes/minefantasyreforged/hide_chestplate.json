@@ -1,0 +1,25 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "H",
+    "W"
+  ],
+  "key": {
+    "W": {
+      "item": "minecraft:wool",
+      "data": 32767
+    },
+    "H": {
+      "item": "minefantasyreforged:hide_large"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:hide_chestplate"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "type": "carpenter_shaped_custom_material_recipe",
+  "skill": "construction",
+  "research": "ammo_box",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 15,
+  "tool_tier": 0,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "HPH",
+    "L L",
+    "NPN"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber_pane"
+    },
+    "H": {
+      "item": "minefantasyreforged:hinge"
+    },
+    "L": {
+      "item": "minefantasyreforged:timber_cut"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:ammo_box_basic"
+  }
+}

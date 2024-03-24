@@ -13,7 +13,7 @@ import net.minecraftforge.items.SlotItemHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerForge extends ContainerBase {
-	private TileEntityForge tile;
+	private final TileEntityForge tile;
 	private int lastTemp;
 
 	public ContainerForge(InventoryPlayer inventoryPlayer, TileEntityForge tile) {

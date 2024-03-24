@@ -1,0 +1,30 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "  N ",
+    "PPPL",
+    "  N "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "L": {
+      "item": "#PLANK_WOOD"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:training_spear"
+  }
+}

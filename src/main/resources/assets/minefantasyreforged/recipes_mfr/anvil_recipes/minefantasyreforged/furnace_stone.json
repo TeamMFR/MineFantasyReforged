@@ -1,0 +1,35 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "big_furnace",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 60,
+  "recipe_hammer": 2,
+  "skill_xp": 0,
+  "vanilla_xp": 0.2,
+  "output_hot": false,
+  "pattern": [
+    "PRP",
+    "RFR",
+    "PUP"
+  ],
+  "key": {
+    "P": {
+      "item": "#PLATE_IRON"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "U": {
+      "item": "minecraft:furnace"
+    },
+    "F": {
+      "item": "minefantasyreforged:firebricks"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:furnace_stone"
+  }
+}

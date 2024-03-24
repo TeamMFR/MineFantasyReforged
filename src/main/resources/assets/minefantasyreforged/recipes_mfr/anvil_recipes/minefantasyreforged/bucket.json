@@ -1,0 +1,25 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 0,
+  "recipe_time": 8,
+  "recipe_hammer": 0,
+  "skill_xp": 0,
+  "vanilla_xp": 0.2,
+  "output_hot": true,
+  "tierModifyOutputCount": true,
+  "pattern": [
+    "B B",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    }
+  },
+  "result": {
+    "item": "minecraft:bucket"
+  }
+}

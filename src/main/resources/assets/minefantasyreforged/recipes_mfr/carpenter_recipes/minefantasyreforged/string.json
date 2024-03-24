@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "research": "commodities",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "T",
+    "T",
+    "T",
+    "T"
+  ],
+  "key": {
+    "T": {
+      "item": "minefantasyreforged:thread"
+    }
+  },
+  "result": {
+    "item": "minecraft:string"
+  }
+}

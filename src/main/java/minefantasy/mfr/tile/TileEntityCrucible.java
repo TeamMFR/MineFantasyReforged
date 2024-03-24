@@ -10,10 +10,13 @@ import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AlloyRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.recipe.CrucibleCraftMatrix;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastHeater;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.InventoryUtils;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockEndPortalFrame;
 import net.minecraft.block.material.Material;
@@ -36,7 +39,9 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITickable {
 	private int ticksExisted;
@@ -52,13 +57,29 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 	public final ItemStackHandler inventory = createInventory();
 
+	private Set<String> knownResearches = new HashSet<>();
+
 	public TileEntityCrucible() {
 		setContainer(new ContainerCrucible(this));
 	}
 
 	@Override
 	protected ItemStackHandler createInventory() {
-		return new ItemStackHandler(10);
+		return new ItemStackHandler(10) {
+			@Override
+			protected void onContentsChanged(int slot) {
+				if (slot == OUT_SLOT) {
+					ItemStack output = this.getStackInSlot(slot);
+					IRecipeMFR recipe = CraftingManagerAlloy.findRecipeByOutput(output);
+					if (recipe == null) {
+						recipe = CraftingManagerBlastFurnace.findRecipeByOutput(output);
+					}
+					if (recipe != null) {
+						setRecipe(recipe);
+					}
+				}
+			}
+		};
 	}
 
 	@Override
@@ -68,7 +89,7 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 	@Override
 	public ContainerBase createContainer(final EntityPlayer player) {
-		return new ContainerCrucible(player.inventory, this);
+		return new ContainerCrucible(player, player.inventory, this);
 	}
 
 	public void setContainer(ContainerCrucible container) {
@@ -208,11 +229,16 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		ItemStack result = CraftingManagerAlloy.findMatchingRecipe(this, craftMatrix);
-		if (result.isEmpty()) {
-			result = ItemStack.EMPTY;
+		AlloyRecipeBase recipe = CraftingManagerAlloy.findMatchingRecipe(this, craftMatrix, knownResearches);
+		if (recipe != null) {
+			return recipe.getCraftingResult(craftMatrix);
 		}
-		return result;
+		return ItemStack.EMPTY;
+	}
+
+	@Override
+	public IRecipeMFR getRecipeByOutput(ItemStack stack) {
+		return CraftingManagerAlloy.findRecipeByOutput(stack);
 	}
 
 	public int getTier() {
@@ -299,6 +325,10 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 		return tile instanceof TileEntityBlastHeater;
 	}
 
+	public void setKnownResearches(Set<String> knownResearches) {
+		this.knownResearches = knownResearches;
+	}
+
 	@Override
 	public void onBlockBreak() {
 		if (!inventory.getStackInSlot(inventory.getSlots() - 1).isEmpty() && !(inventory.getStackInSlot(inventory.getSlots() - 1).getItem() instanceof ItemBlock)
@@ -326,6 +356,11 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 		progressMax = nbt.getFloat("progressMax");
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(getRecipeName(nbt));
+		}
+		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 	}
 
 	@Nonnull
@@ -338,7 +373,24 @@ public class TileEntityCrucible extends TileEntityBase implements IHeatUser, ITi
 
 		nbt.setTag("inventory", inventory.serializeNBT());
 
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
+		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+
 		return nbt;
+	}
+
+	private static IRecipeMFR getRecipeName(NBTTagCompound nbt) {
+		String recipeName = nbt.getString(RECIPE_NAME_TAG);
+		IRecipeMFR recipe;
+
+		recipe = CraftingManagerAlloy.getRecipeByName(recipeName, true);
+		if (recipe == null) {
+			recipe = CraftingManagerBlastFurnace.getRecipeByName(recipeName, true);
+		}
+
+		return recipe;
 	}
 
 	@Override

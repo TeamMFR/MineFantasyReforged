@@ -1,0 +1,32 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "research": "craft_armour_heavy",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 40,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.35,
+  "output_hot": false,
+  "pattern": [
+    " R ",
+    "PAP",
+    " R "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:plate"
+    },
+    "A": {
+      "item": "minefantasyreforged:padded_helmet"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_plate_helmet"
+  }
+}

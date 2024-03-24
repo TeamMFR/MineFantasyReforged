@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe.factories;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.SalvageRecipeBase;
 import minefantasy.mfr.recipe.SalvageRecipeShared;
 import minefantasy.mfr.recipe.SalvageRecipeStandard;
@@ -50,7 +51,12 @@ public class SalvageRecipeFactory {
 			throw new JsonParseException("No shared items for shared salvage recipe");
 		}
 
-		return new SalvageRecipeShared(input, outputs, shared);
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
+		return new SalvageRecipeShared(input, outputs, shared, requiredResearch, skill, skillXp, vanillaXp);
 	}
 
 	private SalvageRecipeBase parseStandard(JsonContext context, JsonObject json) {
@@ -66,6 +72,11 @@ public class SalvageRecipeFactory {
 			throw new JsonParseException("No outputs for salvage recipe");
 		}
 
-		return new SalvageRecipeStandard(input, outputs);
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
+		return new SalvageRecipeStandard(input, outputs, requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

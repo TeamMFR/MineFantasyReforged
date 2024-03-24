@@ -1,0 +1,31 @@
+{
+    "type": "alloy_shaped_recipe",
+    "crucible_tier": 1,
+    "research": "reinforced_stone",
+    "skill": "construction",
+    "skill_xp": 1,
+    "vanilla_xp": 0.2,
+    "pattern": [
+        "O  ",
+        "SCB",
+        "SSS"
+    ],
+    "key": {
+        "S": {
+            "item": "minecraft:stone",
+            "data": 0
+        },
+        "C": {
+            "item": "minefantasyreforged:fireclay"
+        },
+        "B": {
+            "item": "#BAR_IRON"
+        },
+        "O": {
+            "item": "minefantasyreforged:obsidian_rock"
+        }
+    },
+    "result": {
+        "item": "minefantasyreforged:reinforced_stone"
+    }
+}

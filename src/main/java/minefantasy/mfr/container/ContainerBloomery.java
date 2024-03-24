@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 import javax.annotation.Nonnull;
 
 public class ContainerBloomery extends ContainerBase {
-	private TileEntityBloomery tile;
+	private final TileEntityBloomery tile;
 
 	public ContainerBloomery(InventoryPlayer playerInventory, TileEntityBloomery tile) {
 		super(playerInventory, tile);
@@ -62,7 +62,7 @@ public class ContainerBloomery extends ContainerBase {
 
 			if (clicked > 1)// INVENTORY
 			{
-				if (TileEntityBloomery.isInput(itemstack1)) {
+				if (tile.isInput(itemstack1)) {
 					if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
 						return ItemStack.EMPTY;
 					}

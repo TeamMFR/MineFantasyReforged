@@ -1,0 +1,33 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "research": "craft_ornate",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 60,
+  "recipe_hammer": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.7,
+  "output_hot": true,
+  "pattern": [
+    " G ",
+    "SLS",
+    " G "
+  ],
+  "key": {
+    "G": {
+      "item": "#BAR_GOLD"
+    },
+    "S": {
+      "item": "#BAR_SILVER"
+    },
+    "L": {
+      "item": "minecraft:dye",
+      "data" : 4
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:ornate_items"
+  }
+}

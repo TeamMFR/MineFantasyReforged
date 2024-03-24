@@ -1,0 +1,27 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "tool_type": "heavy_hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 4,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "FF",
+    "BB"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "F": {
+      "item": "minefantasyreforged:flux"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:plate"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 1,
+  "recipe_time": 50,
+  "recipe_hammer": 1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.7,
+  "output_hot": true,
+  "pattern": [
+    "BNB",
+    "DTD",
+    "BDB"
+  ],
+  "key": {
+    "B": {
+      "item": "#BAR_GOLD"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "T": {
+      "item": "minefantasyreforged:talisman_lesser"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:talisman_greater"
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovetalismanscraft"
+      }
+    }
+  ]
+}

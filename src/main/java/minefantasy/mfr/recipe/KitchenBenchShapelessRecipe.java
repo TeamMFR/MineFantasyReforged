@@ -16,12 +16,12 @@ public class KitchenBenchShapelessRecipe extends KitchenBenchRecipeBase {
 
 	public KitchenBenchShapelessRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int kitchenBenchTier, int craftTime,
-			float recipeExperience, String toolType,
-			SoundEvent soundOfCraft, String research, Skill skillUsed,
+			String toolType, SoundEvent soundOfCraft,
+			String research, Skill skillUsed, int skillXp, float vanillaXp,
 			int dirtyProgressAmount) {
 		super(output, inputs, toolTier, kitchenBenchTier, craftTime,
-				recipeExperience, toolType,
-				soundOfCraft, research, skillUsed,
+				toolType, soundOfCraft,
+				research, skillUsed, skillXp, vanillaXp,
 				dirtyProgressAmount);
 	}
 

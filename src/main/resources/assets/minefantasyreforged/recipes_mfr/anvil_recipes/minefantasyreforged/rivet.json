@@ -1,0 +1,27 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 10,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.1,
+  "output_hot": true,
+  "tierModifyOutputCount": true,
+  "pattern": [
+    "M M",
+    " M ",
+    " M "
+  ],
+  "key": {
+    "M": {
+      "item": "minefantasyreforged:metal_hunk"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:rivet",
+    "count": 8
+  }
+}

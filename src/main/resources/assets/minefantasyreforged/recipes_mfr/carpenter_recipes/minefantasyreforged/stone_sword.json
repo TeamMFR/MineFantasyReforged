@@ -1,0 +1,28 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 8,
+  "tool_tier": -1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.craftprimitive",
+  "pattern": [
+    "S ",
+    "S ",
+    "TV"
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:sharp_rock"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    },
+    "V": {
+      "item": "minefantasyreforged:vine"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:stone_sword"
+  }
+}

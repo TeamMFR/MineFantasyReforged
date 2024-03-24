@@ -1,0 +1,31 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "tool_type": "spoon",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.wood.step",
+  "dirty_progress_amount": 3,
+  "pattern": [
+    "J",
+    "S",
+    "C"
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:sugar_pot"
+    },
+    "C": {
+      "item": "minefantasyreforged:clay_pot"
+    },
+    "J": {
+      "item": "minefantasyreforged:jug_water"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:icing"
+  }
+}

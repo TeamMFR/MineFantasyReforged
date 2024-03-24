@@ -1,0 +1,26 @@
+{
+	"type": "salvage_recipe",
+	"vanilla_xp": 0.4,
+	"input": {
+		"item": "minefantasyreforged:talisman_greater"
+	},
+	"outputs": [
+		{
+			"item": "minecraft:nether_star"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:diamond",
+			"count": 3
+		},
+		{
+			"item": "minefantasyreforged:talisman_lesser"
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minefantasyreforged:bar",
+			"nbt": "{mf_custom_materials:{main_material:\"gold\"}}",
+			"count": 4
+		}
+	]
+}

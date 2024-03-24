@@ -1,0 +1,40 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 20,
+  "recipe_hammer": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.4,
+  "output_hot": true,
+  "pattern": [
+    "LBL",
+    "BIB",
+    " B "
+  ],
+  "key": {
+    "B": {
+      "item": "#BAR_GOLD_OR_SILVER"
+    },
+    "I": {
+      "item": "#BAR_IRON"
+    },
+    "L": {
+      "item": "minecraft:dye",
+      "data": 4
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:talisman_lesser"
+  },
+  "conditions" : [
+    {
+      "type": "forge:not",
+      "value": {
+        "type": "minefantasyreforged:hccremovetalismanscraft"
+      }
+    }
+  ]
+}

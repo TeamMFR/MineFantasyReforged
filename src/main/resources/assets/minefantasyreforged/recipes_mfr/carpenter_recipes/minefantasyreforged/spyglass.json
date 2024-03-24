@@ -1,0 +1,38 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "spyglass",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 300,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    " E ",
+    "BRB",
+    "GSG"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "R": {
+      "item": "minefantasyreforged:bronze_gears"
+    },
+    "S": {
+      "item": "minefantasyreforged:steel_tube"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:spyglass",
+    "data": 0
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 1,
+    "repeat_amount": 9,
+    "research": "smelt_steel",
+    "skill": "artisanry",
+    "skill_xp": 2,
+    "vanilla_xp": 0.4,
+    "ingredients": [
+        {
+            "item": "#BAR_PIG_IRON"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"steel\"}}"
+    },
+    "conditions" : [
+        {
+            "type": "forge:not",
+            "value": {
+                "type": "minefantasyreforged:hccreduceingots"
+            }
+        }
+    ]
+}

@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe.factories;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.AlloyRatioRecipe;
 import minefantasy.mfr.recipe.AlloyRecipeBase;
 import minefantasy.mfr.recipe.AlloyShapedRecipe;
@@ -38,8 +39,13 @@ public class AlloyRecipeFactory {
 	private AlloyRecipeBase parseShaped(JsonContext context, JsonObject json) {
 		ShapedOreRecipe recipe = ShapedOreRecipe.factory(context, json);
 		int crucible_tier = JsonUtils.getInt(json, "crucible_tier", 0);
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
 		return new AlloyShapedRecipe(recipe.getRecipeOutput(), recipe.getIngredients(), crucible_tier,
+				requiredResearch, skill, skillXp, vanillaXp,
 				recipe.getRecipeHeight(), recipe.getRecipeWidth());
 	}
 
@@ -66,7 +72,14 @@ public class AlloyRecipeFactory {
 					"\n If that functionality is important to you, use alloy shaped recipe instead.");
 		}
 
-		return new AlloyRatioRecipe(result, ingredients, crucible_tier, repeat_amount);
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
+		return new AlloyRatioRecipe(result, ingredients, crucible_tier,
+				requiredResearch, skill, skillXp, vanillaXp,
+				repeat_amount);
 	}
 
 	private boolean hasDuplicateSimpleIngredients(NonNullList<Ingredient> ingredients) {

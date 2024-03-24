@@ -1,0 +1,34 @@
+{
+  "type": "anvil_shaped_recipe",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 10,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    " F ",
+    "SWS",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "item": "#BAR_IRON"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "S": {
+      "item": "#STICK_WOOD"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:tinderbox"
+  }
+}

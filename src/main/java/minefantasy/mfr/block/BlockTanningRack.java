@@ -2,7 +2,9 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.tile.TileEntityTanningRack;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
@@ -25,6 +27,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> implements IClientRegister {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
@@ -63,20 +67,32 @@ public class BlockTanningRack extends BlockTileEntity<TileEntityTanningRack> imp
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer user, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
 		if (tile != null) {
-			return tile.interact(user, false, false);
+			setTileResearches(player, tile);
+			return tile.interact(player, false, false);
 		}
 		return true;
 	}
 
 	@Override
-	public void onBlockClicked(World world, BlockPos pos, EntityPlayer user) {
+	public void onBlockClicked(World world, BlockPos pos, EntityPlayer player) {
 		TileEntityTanningRack tile = (TileEntityTanningRack) getTile(world, pos);
 		if (tile != null) {
-			tile.interact(user, true, false);
+			setTileResearches(player, tile);
+			tile.interact(player, true, false);
 		}
+	}
+
+	protected static void setTileResearches(EntityPlayer player, TileEntityTanningRack tile) {
+		Set<String> playerResearches = new HashSet<>();
+		for (String tannerResearch : CraftingManagerTanner.getTannerResearches()) {
+			if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(tannerResearch))) {
+				playerResearches.add(tannerResearch);
+			}
+		}
+		tile.setKnownResearches(playerResearches);
 	}
 
 	@Override

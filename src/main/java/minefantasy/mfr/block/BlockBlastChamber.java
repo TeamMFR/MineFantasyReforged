@@ -3,6 +3,7 @@ package minefantasy.mfr.block;
 import minefantasy.mfr.init.MineFantasyKnowledgeList;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
+import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.blastfurnace.TileEntityBlastChamber;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -20,6 +21,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockBlastChamber extends BlockTileEntity<TileEntityBlastChamber> {
 
@@ -66,14 +69,27 @@ public class BlockBlastChamber extends BlockTileEntity<TileEntityBlastChamber> {
 
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		final TileEntityBlastChamber tileEntity = (TileEntityBlastChamber) getTile(world, pos);
+
 		if (!ResearchLogic.getResearchCheck(player, MineFantasyKnowledgeList.blast_furnace)) {
 			if (!world.isRemote && hand == player.getActiveHand()) {
 				player.sendMessage(new TextComponentTranslation("knowledge.unknownUse"));
 			}
 			return false;
 		}
+
+		if (tileEntity != null) {
+			Set<String> playerResearches = new HashSet<>();
+			for (String blastFurnaceResearch : CraftingManagerBlastFurnace.getBlastFurnaceResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(blastFurnaceResearch))) {
+					playerResearches.add(blastFurnaceResearch);
+				}
+			}
+			tileEntity.setKnownResearches(playerResearches);
+		}
+
 		if (!world.isRemote) {
-			final TileEntityBlastChamber tileEntity = (TileEntityBlastChamber) getTile(world, pos);
+
 			if (tileEntity != null) {
 				tileEntity.openGUI(world, player);
 			}

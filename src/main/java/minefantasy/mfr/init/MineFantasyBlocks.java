@@ -59,6 +59,7 @@ import minefantasy.mfr.item.ItemBlockCake;
 import minefantasy.mfr.item.ItemBlockOreMFR;
 import minefantasy.mfr.item.ItemBlockRepairKit;
 import minefantasy.mfr.item.ItemBlockSalvage;
+import minefantasy.mfr.item.ItemBlockSlab;
 import minefantasy.mfr.item.ItemBlockSpecialRender;
 import minefantasy.mfr.item.ItemBlockToolRack;
 import minefantasy.mfr.item.ItemBlockTrough;
@@ -857,16 +858,16 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockOreMFR(COAL_RICH_ORE));
 
 		registry.register(new ItemBlockBase(MUD_BRICK));
-		registry.register(new ItemBlockBase(MUD_BRICK_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) MUD_BRICK_SLAB));
 		registry.register(new ItemBlockBase(MUD_ROAD));
 		registry.register(new ItemBlockBase(MUD_ROAD_BLOCK));
-		registry.register(new ItemBlockBase(MUD_ROAD_BLOCK_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) MUD_ROAD_BLOCK_SLAB));
 
 		registry.register(new ItemBlockBase(COBBLE_BRICK));
-		registry.register(new ItemBlockBase(COBBLE_BRICK_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) COBBLE_BRICK_SLAB));
 		registry.register(new ItemBlockBase(COBBLESTONE_ROAD));
 		registry.register(new ItemBlockBase(COBBLESTONE_ROAD_BLOCK));
-		registry.register(new ItemBlockBase(COBBLESTONE_ROAD_BLOCK_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) COBBLESTONE_ROAD_BLOCK_SLAB));
 
 		registry.register(new ItemBlockBase(WINDOW));
 		registry.register(new ItemBlockBase(FRAMED_GLASS));
@@ -874,27 +875,27 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(WINDOW_PANE));
 
 		registry.register(new ItemBlockBase(THATCH));
-		registry.register(new ItemBlockBase(THATCH_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) THATCH_SLAB));
 		registry.register(new ItemBlockBase(THATCH_STAIR));
 
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE));
-		registry.register(new ItemBlockBase(LIMESTONE_COBBLE_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) LIMESTONE_COBBLE_SLAB));
 		registry.register(new ItemBlockBase(LIMESTONE));
 
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK));
-		registry.register(new ItemBlockBase(LIMESTONE_BRICK_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) LIMESTONE_BRICK_SLAB));
 		registry.register(new ItemBlockBase(LIMESTONE_ROAD));
 		registry.register(new ItemBlockBase(LIMESTONE_ROAD_BLOCK));
-		registry.register(new ItemBlockBase(LIMESTONE_ROAD_BLOCK_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) LIMESTONE_ROAD_BLOCK_SLAB));
 
 		registry.register(new ItemBlockBase(LIMESTONE_STAIRS));
 		registry.register(new ItemBlockBase(LIMESTONE_COBBLE_STAIRS));
 		registry.register(new ItemBlockBase(LIMESTONE_BRICK_STAIRS));
 
 		registry.register(new ItemBlockBase(FIREBRICKS));
-		registry.register(new ItemBlockBase(FIREBRICKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) FIREBRICKS_SLAB));
 		registry.register(new ItemBlockBase(CLAY_WALL));
-		registry.register(new ItemBlockBase(CLAY_WALL_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) CLAY_WALL_SLAB));
 		registry.register(new ItemBlockBase(CLAY_WALL_CROSS));
 		registry.register(new ItemBlockBase(CLAY_WALL_RIGHT_DIAGONAL));
 		registry.register(new ItemBlockBase(CLAY_WALL_LEFT_DIAGONAL));
@@ -979,25 +980,25 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockSpecialRender(BELLOWS));
 
 		registry.register(new ItemBlockBase(REFINED_PLANKS));
-		registry.register(new ItemBlockBase(REFINED_PLANKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) REFINED_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(NAILED_PLANKS));
-		registry.register(new ItemBlockBase(NAILED_PLANKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) NAILED_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(REFINED_PLANKS_STAIR));
 		registry.register(new ItemBlockBase(NAILED_PLANKS_STAIR));
 
 		registry.register(new ItemBlockBase(REINFORCED_STONE));
-		registry.register(new ItemBlockBase(REINFORCED_STONE_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) REINFORCED_STONE_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_0));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_1));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_2));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_ENGRAVED_3));
 
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS));
-		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) REINFORCED_STONE_BRICKS_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_MOSSY));
-		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_MOSSY_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) REINFORCED_STONE_BRICKS_MOSSY_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_CRACKED));
-		registry.register(new ItemBlockBase(REINFORCED_STONE_BRICKS_CRACKED_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) REINFORCED_STONE_BRICKS_CRACKED_SLAB));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED));
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED_IRON));
 
@@ -1022,11 +1023,11 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(SAPLING_EBONY));
 
 		registry.register(new ItemBlockBase(YEW_PLANKS));
-		registry.register(new ItemBlockBase(YEW_PLANKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) YEW_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(IRONBARK_PLANKS));
-		registry.register(new ItemBlockBase(IRONBARK_PLANKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) IRONBARK_PLANKS_SLAB));
 		registry.register(new ItemBlockBase(EBONY_PLANKS));
-		registry.register(new ItemBlockBase(EBONY_PLANKS_SLAB));
+		registry.register(new ItemBlockSlab((BlockSlab) EBONY_PLANKS_SLAB));
 
 		registry.register(new ItemBlockSpecialRender(QUERN));
 

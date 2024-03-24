@@ -1,0 +1,21 @@
+{
+	"type": "transformation_recipe",
+	"tool_type": "hammer",
+	"skill": "construction",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"soundName": "minefantasyreforged:block.hammercarpenter",
+	"inputs": [
+		{
+			"item": "#STAIR_WOOD"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:nailed_planks_stairs"
+	},
+	"consumableStacks": [
+		{
+			"item": "minefantasyreforged:nail"
+		}
+	]
+}

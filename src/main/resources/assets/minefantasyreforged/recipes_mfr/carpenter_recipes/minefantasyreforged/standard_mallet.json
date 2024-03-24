@@ -1,0 +1,26 @@
+{
+  "type": "carpenter_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 9,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "PP",
+    " S"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_mallet"
+  }
+}

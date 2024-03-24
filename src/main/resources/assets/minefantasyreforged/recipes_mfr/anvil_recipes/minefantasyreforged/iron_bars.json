@@ -1,0 +1,25 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "research": "smelt_iron",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 14,
+  "recipe_hammer": 2,
+  "skill_xp": 0,
+  "vanilla_xp": 0.3,
+  "output_hot": false,
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "#HUNK_IRON"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:iron_bars"
+  }
+}

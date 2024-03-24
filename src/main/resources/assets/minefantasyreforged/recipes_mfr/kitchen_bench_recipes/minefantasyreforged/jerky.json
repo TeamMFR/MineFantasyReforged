@@ -1,0 +1,28 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "jerky",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.wood.hit",
+  "dirty_progress_amount": 6,
+  "pattern": [
+    "S",
+    "G"
+  ],
+  "key": {
+    "S": {
+      "item": "minefantasyreforged:salt"
+    },
+    "G": {
+      "item": "minefantasyreforged:generic_meat_strip_cooked"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:jerky"
+  }
+}

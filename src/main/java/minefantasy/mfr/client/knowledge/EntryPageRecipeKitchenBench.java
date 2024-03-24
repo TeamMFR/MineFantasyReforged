@@ -61,7 +61,7 @@ public class EntryPageRecipeKitchenBench extends EntryPage {
 			return;
 
 		GL11.glColor3f(255, 255, 255);
-		GuiHelper.renderToolIcon(parent, recipe.getToolType(), recipe.getToolTier(), posX + 34, posY + 51, true,
+		GuiHelper.renderToolIcon(parent, recipe.getToolType().getName(), recipe.getToolTier(), posX + 34, posY + 51, true,
 				true);
 		GuiHelper.renderToolIcon(parent, "kitchen_bench", recipe.getKitchenBenchTier(), posX + 124, posY + 51, true, true);
 

@@ -49,11 +49,14 @@ public class AnvilRecipeFactory {
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
 		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		boolean modifyOutput = JsonUtils.getBoolean(json, "modify_output", false);
 
 		return new AnvilDynamicRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
-				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill, modifyOutput,
-				recipe.getRecipeWidth(), recipe.getRecipeHeight());
+				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,
+				skillXp, vanillaXp,
+				modifyOutput, recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 
 	private AnvilRecipeBase parseShapelessCustomMaterial(JsonContext context, JsonObject json) {
@@ -73,12 +76,15 @@ public class AnvilRecipeFactory {
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
 		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tierModifyOutputCount", false);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
 		return new AnvilShapelessCustomMaterialRecipe(ingredients, result,
-				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill, tierModifyOutputCount);
+				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill, skillXp, vanillaXp,
+				tierModifyOutputCount);
 	}
 
 	private AnvilRecipeBase parseShapedCustomMaterial(JsonContext context, JsonObject json) {
@@ -90,10 +96,13 @@ public class AnvilRecipeFactory {
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
 		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tierModifyOutputCount", false);
 
 		return new AnvilShapedCustomMaterialRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,
+				skillXp, vanillaXp,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight(), tierModifyOutputCount);
 	}
 
@@ -114,11 +123,13 @@ public class AnvilRecipeFactory {
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
 		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
 		return new AnvilShapelessRecipe(ingredients, result, tool_type,
-				recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill);
+				recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill, skillXp, vanillaXp);
 	}
 
 	private AnvilRecipeBase parseShaped(JsonContext context, JsonObject json) {
@@ -130,9 +141,12 @@ public class AnvilRecipeFactory {
 		int recipe_hammer = JsonUtils.getInt(json, "recipe_hammer", 0);
 		int anvil_tier = JsonUtils.getInt(json, "anvil_tier", 0);
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
 		return new AnvilShapedRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,
+				skillXp, vanillaXp,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 }

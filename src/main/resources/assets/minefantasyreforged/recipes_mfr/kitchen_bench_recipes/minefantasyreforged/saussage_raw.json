@@ -1,0 +1,39 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "sausage",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 30,
+  "tool_tier": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.wood.hit",
+  "dirty_progress_amount": 7,
+  "pattern": [
+    " G ",
+    "EEE",
+    "BCS"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:breadcrumbs"
+    },
+    "C": {
+      "item": "minecraft:egg"
+    },
+    "S": {
+      "item": "minefantasyreforged:salt"
+    },
+    "E": {
+      "item": "minefantasyreforged:generic_meat_mince_uncooked"
+    },
+    "G": {
+      "item": "minefantasyreforged:guts"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:saussage_raw",
+    "count": 4
+  }
+}

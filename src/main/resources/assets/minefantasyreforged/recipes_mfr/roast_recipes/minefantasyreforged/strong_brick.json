@@ -1,0 +1,20 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 1500,
+	"max_temperature": 1500,
+	"cook_time": 5,
+	"can_burn": false,
+	"is_oven_recipe": true,
+	"research": "firebrick_crucible",
+	"skill": "construction",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:fireclay_brick"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:strong_brick"
+	}
+}

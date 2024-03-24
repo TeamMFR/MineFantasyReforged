@@ -28,6 +28,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.IFuelHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -67,16 +68,23 @@ public class MineFantasyReforgedAPI {
 	 * @param anvilTier 		  The required tier of the anvil this recipe is used on
 	 * @param outputHot           Does this recipe result in a hot output
 	 * @param requiredResearch    The required Research for this recipe
-	 * @param requiredSkill		  The required Skill for this recipe
+	 * @param skill		  		  The Skill for this recipe
+	 * @param skillXp 			  The amount of base skill xp for this recipe (for anvils this is modified by the craft itself
+	 * @param vanillaXp           The amount of vanilla xp for this recipe
 	 * @param width               The width of the recipe (Max = 6)
 	 * @param height              The height of the recipe (Max = 4)
+	 * @param modId               The modId for this recipe to registered under
+	 * @param name				  The name of this recipe
 	 */
+	@Deprecated
 	public static void addShapedAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
 			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
-			Skill requiredSkill, int width, int height) {
+			Skill skill, int skillXp, float vanillaXp,
+			int width, int height, String modId, String name) {
 		CraftingManagerAnvil.addRecipe(new AnvilShapedRecipe(inputs, output, tool.getName(),
-				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill,
-				width, height), true);
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, skill,
+				skillXp, vanillaXp,
+				width, height), true, new ResourceLocation(modId, name));
 	}
 
 	/**
@@ -91,11 +99,18 @@ public class MineFantasyReforgedAPI {
 	 * @param outputHot           Does this recipe result in a hot output
 	 * @param requiredResearch    The required Research for this recipe
 	 * @param requiredSkill		  The required Skill for this recipe
+	 * @param skillXp 			  The amount of base skill xp for this recipe (for anvils this is modified by the craft itself
+	 * @param vanillaXp           The amount of vanilla xp for this recipe
+	 * @param modId               The modId for this recipe to registered under
+	 * @param name				  The name of this recipe
 	 */
+	@Deprecated
 	public static void addShapelessAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
-			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill) {
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
+			Skill requiredSkill, int skillXp, float vanillaXp, String modId, String name) {
 		CraftingManagerAnvil.addRecipe(new AnvilShapelessRecipe(inputs, output, tool.getName(),
-				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill), true);
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill, skillXp, vanillaXp),
+				true, new ResourceLocation(modId, name));
 	}
 
 	/**
@@ -110,16 +125,23 @@ public class MineFantasyReforgedAPI {
 	 * @param outputHot           		Does this recipe result in a hot output
 	 * @param requiredResearch    		The required Research for this recipe
 	 * @param requiredSkill		  		The required Skill for this recipe
+	 * @param skillXp 			        The amount of base skill xp for this recipe (for anvils this is modified by the craft itself
+	 * @param vanillaXp                 The amount of vanilla xp for this recipe
 	 * @param width               		The width of the recipe (Max = 6)
 	 * @param height              		The height of the recipe (Max = 4)
 	 * @param tierModifyOutputCount		Does this recipe modify the output count
+	 * @param modId               		The modId for this recipe to registered under
+	 * @param name				  		The name of this recipe
 	 */
+	@Deprecated
 	public static void addShapedCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
 			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill,
-			int width, int height, boolean tierModifyOutputCount) {
+			int skillXp, float vanillaXp,
+			int width, int height, boolean tierModifyOutputCount, String modId, String name) {
 		CraftingManagerAnvil.addRecipe(new AnvilShapedCustomMaterialRecipe(inputs, output, tool.getName(),
 				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill,
-				width, height, tierModifyOutputCount), true);
+				skillXp, vanillaXp,
+				width, height, tierModifyOutputCount), true, new ResourceLocation(modId, name));
 	}
 
 	/**
@@ -134,64 +156,126 @@ public class MineFantasyReforgedAPI {
 	 * @param outputHot           		Does this recipe result in a hot output
 	 * @param requiredResearch    		The required Research for this recipe
 	 * @param requiredSkill		  		The required Skill for this recipe
+	 * @param skillXp 			  		The amount of base skill xp for this recipe (for anvils this is modified by the craft itself
+	 * @param vanillaXp           		The amount of vanilla xp for this recipe
 	 * @param tierModifyOutputCount		Does this recipe modify the output count
+	 * @param modId               		The modId for this recipe to registered under
+	 * @param name				  		The name of this recipe
 	 */
+	@Deprecated
 	public static void addShapelessCustomMaterialAnvilRecipe(NonNullList<Ingredient> inputs, ItemStack output, Tool tool,
-			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch, Skill requiredSkill, boolean tierModifyOutputCount) {
+			int craftTime, int hammerTier, int anvilTier, boolean outputHot, String requiredResearch,
+			Skill requiredSkill, int skillXp, float vanillaXp,
+			boolean tierModifyOutputCount, String modId, String name) {
 		CraftingManagerAnvil.addRecipe(new AnvilShapelessCustomMaterialRecipe(inputs, output, tool.getName(),
-				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill, tierModifyOutputCount), true);
+				craftTime, hammerTier, anvilTier, outputHot, requiredResearch, requiredSkill, skillXp, vanillaXp,
+				tierModifyOutputCount), true, new ResourceLocation(modId, name));
 	}
 
-	public static void addBlastFurnaceRecipe(NonNullList<Ingredient> inputs, ItemStack output) {
-		CraftingManagerBlastFurnace.addRecipe(new BlastFurnaceRecipeBase(output, inputs), true);
+	/**
+	 * Add a Blast Furnace Recipe
+	 * @param inputs			Input Ingredients
+	 * @param output			Output ItemStack
+	 * @param requiredResearch  The Required Research for this Recipe
+	 * @param skill				The Skill of this recipe
+	 * @param skillXp			The amount of Skill Xp to be granted to the Recipe Skill
+	 * @param vanillaXp			The amount of vanilla Xp to be granted
+	 * @param modId             The modId for this recipe to registered under
+	 * @param name				The name of this recipe
+	 */
+	@Deprecated
+	public static void addBlastFurnaceRecipe(NonNullList<Ingredient> inputs, ItemStack output,
+			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+		CraftingManagerBlastFurnace.addRecipe(new BlastFurnaceRecipeBase(output, inputs, requiredResearch,
+				skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
 
 	/**
 	 * Adds an alloy ratio recipe with a minimal crucible level
 	 *
-	 * @param out            The result
-	 * @param tier           The minimal crucible tier
-	 * @param inputs         The list of required items
-	 * @param repeatAmount   How many times the ratio can repeat
+	 * @param out               The result
+	 * @param tier              The minimal crucible tier
+	 * @param inputs            The list of required items
+	 * @param requiredResearch  The Research the player performing the recipe is required to have unlocked
+	 * @param skill 			The Skill of the player to be given xp
+	 * @param skillXp			The amount of Skill xp to grant to the player for above skill for this recipe
+	 * @param vanillaXp         The amount of vanilla xp to grant the player for this recipe
+	 * @param repeatAmount 		How many times the ratio can repeat
+	 * @param modId             The modId for this recipe to registered under
+	 * @param name				The name of this recipe
 	 */
-	public static void addAlloyRatioRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier, int repeatAmount) {
-		CraftingManagerAlloy.addRecipe(new AlloyRatioRecipe(out, inputs, tier, repeatAmount), true);
+	@Deprecated
+	public static void addAlloyRatioRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier,
+			String requiredResearch, Skill skill, int skillXp, float vanillaXp,
+			int repeatAmount, String modId, String name) {
+		CraftingManagerAlloy.addRecipe(new AlloyRatioRecipe(out, inputs, tier,
+				requiredResearch, skill, skillXp, vanillaXp,
+				repeatAmount), true, new ResourceLocation(modId, name));
 	}
 
 	/**
 	 * Adds an alloy ratio recipe with a minimal crucible level
 	 *
-	 * @param out       The result
-	 * @param tier      The minimal crucible tier
-	 * @param inputs    The list of required items
-	 * @param height    The height of the recipe
-	 * @param width     The width of the recipe
+	 * @param out       		The result
+	 * @param tier      		The minimal crucible tier
+	 * @param inputs    		The list of required items
+	 * @param requiredResearch  The Research the player performing the recipe is required to have unlocked
+	 * @param skill 			The Skill of the player to be given xp
+	 * @param skillXp			The amount of Skill xp to grant to the player for above skill for this recipe
+	 * @param vanillaXp         The amount of vanilla xp to grant the player for this recipe
+	 * @param height    		The height of the recipe
+	 * @param width     		The width of the recipe
+	 * @param modId             The modId for this recipe to registered under
+	 * @param name				The name of this recipe
 	 */
-	public static void addAlloyShapedRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier, int height, int width) {
-		CraftingManagerAlloy.addRecipe(new AlloyShapedRecipe(out, inputs, tier, height, width), true);
+	@Deprecated
+	public static void addAlloyShapedRecipe(ItemStack out, NonNullList<Ingredient> inputs, int tier,
+			String requiredResearch, Skill skill, int skillXp, float vanillaXp,
+			int height, int width, String modId, String name) {
+		CraftingManagerAlloy.addRecipe(new AlloyShapedRecipe(out, inputs, tier,
+				requiredResearch, skill, skillXp, vanillaXp,
+				height, width), true, new ResourceLocation(modId, name));
 	}
 
 	/**
-	 * @param output 		Cooked output ItemStack
-	 * @param inputs		Input Ingredients
-	 * @param burntOutput	Burnt output ItemStack
-	 * @param minTemp		Minimum heat temperature
-	 * @param maxTemp		Maximum heat temperature
-	 * @param cookTime		How long it takes to cook this recipe
-	 * @param burnTime		How long till the recipe burns and outputs burntOutput
-	 * @param canBurn		Can this recipe burn?
-	 * @param isOvenRecipe	Is this an oven recipe (true) or a stovetop recipe (false)
+	 * @param output 			Cooked output ItemStack
+	 * @param inputs			Input Ingredients
+	 * @param burntOutput		Burnt output ItemStack
+	 * @param minTemp			Minimum heat temperature
+	 * @param maxTemp			Maximum heat temperature
+	 * @param cookTime			How long it takes to cook this recipe
+	 * @param burnTime			How long till the recipe burns and outputs burntOutput
+	 * @param canBurn			Can this recipe burn?
+	 * @param isOvenRecipe		Is this an oven recipe (true) or a stovetop recipe (false)
+	 * @param requiredResearch  The required research for this recipe
+	 * @param skill 			The Skill to grant xp to
+	 * @param skillXp           The amount of xp to give to Skill
+	 * @param vanillaXp         The amount of vanilla xp to give
+	 * @param modId             The modId for this recipe to registered under
+	 * @param name				The name of this recipe
 	 */
-	public static void addRoastRecipe(ItemStack output, NonNullList<Ingredient> inputs, ItemStack burntOutput, int minTemp, int maxTemp, int cookTime, int burnTime, boolean canBurn, boolean isOvenRecipe) {
-		CraftingManagerRoast.addRecipe(new RoastRecipeBase(output, inputs, burntOutput, minTemp, maxTemp, cookTime, burnTime, canBurn, isOvenRecipe), true);
+	@Deprecated
+	public static void addRoastRecipe(ItemStack output, NonNullList<Ingredient> inputs, ItemStack burntOutput, int minTemp, int maxTemp,
+			int cookTime, int burnTime, boolean canBurn, boolean isOvenRecipe,
+			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+		CraftingManagerRoast.addRecipe(new RoastRecipeBase(output, inputs, burntOutput, minTemp, maxTemp,
+				cookTime, burnTime, canBurn, isOvenRecipe,
+				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
 
-	public static void addQuernRecipe(NonNullList<Ingredient> inputs, NonNullList<Ingredient> inputPots, ItemStack output, boolean consumePot) {
-		CraftingManagerQuern.addRecipe(new QuernRecipeBase(output, inputs, inputPots, consumePot), true);
+	@Deprecated
+	public static void addQuernRecipe(NonNullList<Ingredient> inputs, NonNullList<Ingredient> inputPots,
+			ItemStack output, boolean consumePot, String requiredResearch, Skill skill, int skillXp, float vanillaXp,
+			String modId, String name) {
+		CraftingManagerQuern.addRecipe(new QuernRecipeBase(output, inputs, inputPots, consumePot,
+				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
 
-	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier) {
-		CraftingManagerBigFurnace.addRecipe(new BigFurnaceRecipeBase(output, input, tier), true);
+	@Deprecated
+	public static void addBigFurnaceRecipe(NonNullList<Ingredient> input, ItemStack output, int tier,
+			String requiredResearch, Skill skill, int skillXp, float vanillaXp, String modId, String name) {
+		CraftingManagerBigFurnace.addRecipe(new BigFurnaceRecipeBase(output, input, tier,
+				requiredResearch, skill, skillXp, vanillaXp), true, new ResourceLocation(modId, name));
 	}
 
 	public static void registerFuelHandler(IFuelHandler handler) {

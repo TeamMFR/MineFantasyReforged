@@ -65,8 +65,6 @@ public class TransformationRecipeFactory {
 			offhandStack = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "offhandStack"), context);
 		}
 
-		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
 		int maxProgress = JsonUtils.getInt(json, "maxProgress", 1);
 		String soundName = JsonUtils.getString(json, "soundName", "");
 
@@ -80,10 +78,15 @@ public class TransformationRecipeFactory {
 			throw new JsonParseException("The output BlockState for this transformation recipe is invalid!");
 		}
 
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
 		return new TransformationRecipeBlockState(
 				inputState, outputState,
 				tool, consumableStacks, dropStack, offhandStack,
-				skill, research, maxProgress, soundName);
+				skill, requiredResearch, skillXp, vanillaXp, maxProgress, soundName);
 	}
 
 	private IBlockState parseBlockState(JsonElement json) {
@@ -163,13 +166,16 @@ public class TransformationRecipeFactory {
 					outputBlockStateProperties));
 		}
 
-		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
-		String research = JsonUtils.getString(json, "research", "none");
 		int maxProgress = JsonUtils.getInt(json, "maxProgress", 1);
 		String soundName = JsonUtils.getString(json, "soundName", "");
 
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
 		return new TransformationRecipeStandard(tool, inputs, result, consumableStacks,
-				dropStack, offhandStack, skill, research, maxProgress, soundName,
+				dropStack, offhandStack, skill, requiredResearch, skillXp, vanillaXp, maxProgress, soundName,
 				blockStateProperties.isEmpty() ? outputBlockStateProperties : blockStateProperties);
 	}
 }

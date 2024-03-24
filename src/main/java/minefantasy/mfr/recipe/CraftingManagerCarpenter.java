@@ -7,21 +7,19 @@ import com.google.gson.JsonParseException;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Constants;
+import minefantasy.mfr.mixin.InvokerLoadConstants;
 import minefantasy.mfr.recipe.factories.CarpenterRecipeFactory;
 import minefantasy.mfr.recipe.types.CarpenterRecipeType;
 import minefantasy.mfr.util.FileUtils;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModContainer;
-import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import org.apache.commons.io.FilenameUtils;
@@ -30,8 +28,6 @@ import org.apache.commons.io.IOUtils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -40,6 +36,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CraftingManagerCarpenter {
+
+	public static final String RECIPE_FOLDER_PATH = "/recipes_mfr/carpenter_recipes";
 
 	public static final String CONFIG_RECIPE_DIRECTORY = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/carpenter_recipes/";
 
@@ -57,19 +55,37 @@ public class CraftingManagerCarpenter {
 
 	private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 	private static final CarpenterRecipeFactory factory = new CarpenterRecipeFactory();
-	private static final Method LOAD_CONSTANTS = ReflectionHelper.findMethod(JsonContext.class, "loadConstants", null, JsonObject[].class);
 
 	public static void loadRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
 		FileUtils.createCustomDataDirectory(CONFIG_RECIPE_DIRECTORY);
 
-		Loader.instance().getActiveModList().forEach(m -> CraftingHelper.loadFactories(m,"assets/" + m.getModId() + "/carpenter_recipes", CraftingHelper.CONDITIONS));
+		Loader.instance().getActiveModList().forEach(m -> CraftingHelper
+				.loadFactories(m,"assets/" + m.getModId() + RECIPE_FOLDER_PATH, CraftingHelper.CONDITIONS));
 		//noinspection ConstantConditions
 		loadRecipes(modContainer, new File(CONFIG_RECIPE_DIRECTORY), "");
-		Loader.instance().getActiveModList().forEach(m -> CraftingManagerCarpenter.loadRecipes(m, m.getSource(), "assets/" + m.getModId() + "/carpenter_recipes"));
+		Loader.instance().getActiveModList().forEach(m ->
+				loadRecipesForEachModDirectory(m, m.getSource(), "assets/" + m.getModId() + RECIPE_FOLDER_PATH));
 
 		Loader.instance().setActiveModContainer(modContainer);
+	}
+
+	private static void loadRecipesForEachModDirectory(ModContainer mod, File source, String base) {
+		File recipeDirectory = new File(source.toPath().resolve(base).toString());
+		File[] files = recipeDirectory.listFiles();
+		if (files != null) {
+			for (File d : files) {
+				if (d.isDirectory()) {
+					Path modId = d.toPath().getName(d.toPath().getNameCount() - 1);
+					if (!Loader.isModLoaded(modId.toString())) {
+						return;
+					}
+					String modBase = base + "/" + modId;
+					loadRecipes(mod, source, modBase);
+				}
+			}
+		}
 	}
 
 	private static void loadRecipes(ModContainer mod, File source, String base) {
@@ -81,10 +97,9 @@ public class CraftingManagerCarpenter {
 				BufferedReader reader = null;
 				try {
 					reader = Files.newBufferedReader(fPath);
-					JsonObject[] json = JsonUtils.fromJson(GSON, reader, JsonObject[].class);
-					LOAD_CONSTANTS.invoke(ctx, new Object[] {json});
+					InvokerLoadConstants.loadContext(ctx, new File(fPath.toString()));
 				}
-				catch (IOException | IllegalAccessException | InvocationTargetException e) {
+				catch (IOException e) {
 					MineFantasyReforged.LOG.error("Error loading _constants.json: ", e);
 					return false;
 				}
@@ -112,9 +127,8 @@ public class CraftingManagerCarpenter {
 				if (Loader.isModLoaded(mod.getModId())) {
 					if (CarpenterRecipeType.getByNameWithModId(type, mod.getModId()) != CarpenterRecipeType.NONE) {
 						CarpenterRecipeBase recipe = factory.parse(ctx, json);
-						recipe.setRegistryName(key);
 						if (CraftingHelper.processConditions(json, "conditions", ctx)) {
-							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID));
+							addRecipe(recipe, mod.getModId().equals(MineFantasyReforged.MOD_ID), key);
 						}
 					} else {
 						MineFantasyReforged.LOG.info("Skipping recipe {} of type {} because it's not a MFR Carpenter recipe", key, type);
@@ -136,11 +150,12 @@ public class CraftingManagerCarpenter {
 		});
 	}
 
-	public static void addRecipe(CarpenterRecipeBase recipe, boolean checkForExistence) {
+	public static void addRecipe(CarpenterRecipeBase recipe, boolean checkForExistence, ResourceLocation key) {
 		ItemStack itemStack = recipe.getCarpenterRecipeOutput();
 		if (ConfigCrafting.isCarpenterItemCraftable(itemStack)) {
 			NonNullList<ItemStack> subItems = NonNullList.create();
 
+			recipe.setRegistryName(key);
 			itemStack.getItem().getSubItems(itemStack.getItem().getCreativeTab(), subItems);
 			if (subItems.stream().anyMatch(s -> recipe.getCarpenterRecipeOutput().isItemEqual(s))
 					&& (!checkForExistence || !CARPENTER_RECIPES.containsKey(recipe.getRegistryName()))) {
@@ -149,85 +164,42 @@ public class CraftingManagerCarpenter {
 		}
 	}
 
-	public static ItemStack findMatchingRecipe(ICarpenter carpenter, CarpenterCraftMatrix matrix, World world) {
+	public static CarpenterRecipeBase findMatchingRecipe(ICarpenter carpenter, CarpenterCraftMatrix matrix, World world) {
 		int time;
 		int carpenterTier;
 		int toolTier;
-		int var2 = 0;
-		String toolType;
-		SoundEvent sound;
-		ItemStack var3 = ItemStack.EMPTY;
-		ItemStack var4 = ItemStack.EMPTY;
 
-		for (int var5 = 0; var5 < matrix.getSizeInventory(); ++var5) {
-			ItemStack matrixSlot = matrix.getStackInSlot(var5);
+		Iterator<CarpenterRecipeBase> recipeIterator = getRecipes().iterator();
+		CarpenterRecipeBase carpenterRecipeBase = null;
 
-			if (!matrixSlot.isEmpty()) {
-				if (var2 == 0) {
-					var3 = matrixSlot;
-				}
+		while (recipeIterator.hasNext()) {
+			CarpenterRecipeBase rec = recipeIterator.next();
 
-				if (var2 == 1) {
-					var4 = matrixSlot;
-				}
-
-				++var2;
+			if (rec.matches(matrix, world)) {
+				carpenterRecipeBase = rec;
+				break;
 			}
 		}
 
-		if (var2 == 2 && var3.getItem() == var4.getItem() && var3.getCount() == 1 && var4.getCount() == 1
-				&& var3.getItem().isRepairable()) {
-			Item var10 = var3.getItem();
-			int var12 = var10.getMaxDamage() - var3.getItemDamage();
-			int var7 = var10.getMaxDamage() - var4.getItemDamage();
-			int var8 = var12 + var7 + var10.getMaxDamage() * 10 / 100;
-			int var9 = var10.getMaxDamage() - var8;
+		if (carpenterRecipeBase != null) {
+			time = carpenterRecipeBase.getCraftTime();
+			toolTier = carpenterRecipeBase.getToolTier();
+			carpenterTier = carpenterRecipeBase.getCarpenterTier();
 
-			if (var9 < 0) {
-				var9 = 0;
+			if (!carpenterRecipeBase.useCustomTiers()) {
+				carpenter.setProgressMax(time);
+				carpenter.setRequiredToolTier(toolTier);
+				carpenter.setRequiredCarpenterTier(carpenterTier);
 			}
 
-			return new ItemStack(var3.getItem(), 1, var9);
-		} else {
-			Iterator<CarpenterRecipeBase> recipeIterator = getRecipes().iterator();
-			CarpenterRecipeBase carpenterRecipeBase = null;
-
-			while (recipeIterator.hasNext()) {
-				CarpenterRecipeBase rec = recipeIterator.next();
-
-				if (rec.matches(matrix, world)) {
-					carpenterRecipeBase = rec;
-					break;
-				}
-			}
-
-			if (carpenterRecipeBase != null) {
-				time = carpenterRecipeBase.getCraftTime();
-				toolTier = carpenterRecipeBase.getToolTier();
-				carpenterTier = carpenterRecipeBase.getCarpenterTier();
-				toolType = carpenterRecipeBase.getToolType();
-				sound = carpenterRecipeBase.getSound();
-
-				if (!carpenterRecipeBase.useCustomTiers()) {
-					carpenter.setProgressMax(time);
-					carpenter.setRequiredToolTier(toolTier);
-					carpenter.setRequiredCarpenterTier(carpenterTier);
-				}
-
-				carpenter.setRequiredToolType(toolType);
-				carpenter.setCraftingSound(sound);
-				carpenter.setRequiredResearch(carpenterRecipeBase.getResearch());
-				carpenter.setRequiredSkill(carpenterRecipeBase.getSkill());
-
-				return carpenterRecipeBase.getCraftingResult(matrix);
-			}
-			return ItemStack.EMPTY;
+			return carpenterRecipeBase;
 		}
+		return null;
 	}
 
-	public static CarpenterRecipeBase getRecipeByName(String name) {
+	public static CarpenterRecipeBase getRecipeByName(String name, boolean isNullable) {
 		ResourceLocation resourceLocation = new ResourceLocation(MineFantasyReforged.MOD_ID + ":" + name);
-		if (!CARPENTER_RECIPES.containsKey(resourceLocation)) {
+		if (!CARPENTER_RECIPES.containsKey(resourceLocation) && !isNullable) {
 			MineFantasyReforged.LOG.error("Carpenter Recipe Registry does not contain recipe: {}", name);
 		}
 		return CARPENTER_RECIPES.getValue(resourceLocation);
@@ -236,8 +208,16 @@ public class CraftingManagerCarpenter {
 	public static List<CarpenterRecipeBase> getRecipesByName(String... names) {
 		List<CarpenterRecipeBase> recipes = new ArrayList<>();
 		for (String name : names) {
-			recipes.add(getRecipeByName(name));
+			recipes.add(getRecipeByName(name, false));
 		}
 		return recipes;
+	}
+
+	public static String getRecipeName(CarpenterRecipeBase recipe) {
+		ResourceLocation recipeLocation = CARPENTER_RECIPES.getKey(recipe);
+		if (recipeLocation != null) {
+			return recipeLocation.getPath();
+		}
+		return "";
 	}
 }

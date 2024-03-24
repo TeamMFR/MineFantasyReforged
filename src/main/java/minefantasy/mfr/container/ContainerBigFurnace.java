@@ -1,6 +1,6 @@
 package minefantasy.mfr.container;
 
-import minefantasy.mfr.container.slots.SlotBigFurnanceOutput;
+import minefantasy.mfr.container.slots.SlotCraftingOutput;
 import minefantasy.mfr.tile.TileEntityBigFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IContainerListener;
@@ -46,10 +46,10 @@ public class ContainerBigFurnace extends ContainerBase {
 			addSlotToContainer(new SlotItemHandler(smelter.getInventory(), 3, 54, 44));
 
 			// OUT
-			addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 4, 106, 26));
-			addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 5, 124, 26));
-			addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 6, 106, 44));
-			addSlotToContainer(new SlotBigFurnanceOutput(player, smelter.getInventory(), 7, 124, 44));
+			addSlotToContainer(new SlotCraftingOutput(tile, player, smelter.getInventory(), 4, 106, 26));
+			addSlotToContainer(new SlotCraftingOutput(tile, player, smelter.getInventory(), 5, 124, 26));
+			addSlotToContainer(new SlotCraftingOutput(tile, player, smelter.getInventory(), 6, 106, 44));
+			addSlotToContainer(new SlotCraftingOutput(tile, player, smelter.getInventory(), 7, 124, 44));
 		}
 
 		addPlayerSlots(player.inventory, 8, 142);
@@ -170,7 +170,7 @@ public class ContainerBigFurnace extends ContainerBase {
 				return ItemStack.EMPTY;
 			}
 
-			slot.onTake(player, itemSlot);
+			slot.onTake(player, placedItem);
 		}
 
 		return placedItem;

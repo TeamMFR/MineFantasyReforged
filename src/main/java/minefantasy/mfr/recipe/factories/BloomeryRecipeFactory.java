@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe.factories;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.BloomeryRecipeBase;
 import minefantasy.mfr.recipe.types.BloomeryRecipeType;
 import net.minecraft.item.ItemStack;
@@ -34,6 +35,11 @@ public class BloomeryRecipeFactory {
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new BloomeryRecipeBase(result, ingredients);
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
+		return new BloomeryRecipeBase(result, ingredients, requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

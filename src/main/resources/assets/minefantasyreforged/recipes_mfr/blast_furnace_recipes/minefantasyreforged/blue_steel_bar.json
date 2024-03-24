@@ -1,0 +1,16 @@
+{
+	"type": "blast_furnace_recipe",
+	"research": "smelt_blue_steel",
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.75,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:blue_steel_weak_ingot"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"blue_steel\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

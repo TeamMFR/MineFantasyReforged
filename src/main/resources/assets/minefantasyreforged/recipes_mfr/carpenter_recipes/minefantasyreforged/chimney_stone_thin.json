@@ -1,0 +1,26 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 30,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "S S",
+    "S S",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone",
+      "data": 0
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:chimney_stone_thin",
+    "count": 8
+  }
+}

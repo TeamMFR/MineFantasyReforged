@@ -1,0 +1,16 @@
+{
+	"type": "blast_furnace_recipe",
+	"research": "smelt_pig_iron",
+	"skill": "artisanry",
+	"skill_xp": 0.5,
+	"vanilla_xp": 0.4,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:prepared_iron"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"pig_iron\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

@@ -17,8 +17,8 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 
 public class ContainerReload extends Container {
-	private ItemStackHandler weaponInv;
-	private ItemStack weapon;
+	private final ItemStackHandler weaponInv;
+	private final ItemStack weapon;
 
 	public ContainerReload(InventoryPlayer user, ItemStack weapon) {
 		this.weapon = weapon;

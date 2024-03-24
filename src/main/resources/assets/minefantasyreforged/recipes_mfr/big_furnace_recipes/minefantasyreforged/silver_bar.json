@@ -1,0 +1,17 @@
+{
+	"type": "big_furnace_recipe",
+	"furnace_tier": 0,
+	"research": "smelt_iron",
+	"skill": "artisanry",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"ingredients": [
+		{
+			"item": "#SILVER_ORE"
+		}
+	],
+	"result": {
+		"nbt": "{mf_custom_materials:{main_material:\"silver\"}}",
+		"item": "minefantasyreforged:bar"
+	}
+}

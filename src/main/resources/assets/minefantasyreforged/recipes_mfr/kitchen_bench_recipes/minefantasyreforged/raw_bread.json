@@ -1,0 +1,23 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 15,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.1,
+  "sound": "minecraft:block.wood.step",
+  "dirty_progress_amount": 5,
+  "pattern": [
+    "DDD"
+  ],
+  "key": {
+    "D": {
+      "item": "minefantasyreforged:dough"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:raw_bread"
+  }
+}

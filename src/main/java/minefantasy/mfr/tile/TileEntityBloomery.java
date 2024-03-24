@@ -3,7 +3,6 @@ package minefantasy.mfr.tile;
 import minefantasy.mfr.api.crafting.MineFantasyFuels;
 import minefantasy.mfr.api.refine.SmokeMechanics;
 import minefantasy.mfr.block.BlockBloomery;
-import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.container.ContainerBase;
 import minefantasy.mfr.container.ContainerBloomery;
@@ -16,9 +15,11 @@ import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.BloomeryRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerBloomery;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.util.InventoryUtils;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ToolHelper;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,16 +40,20 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TileEntityBloomery extends TileEntityBase implements ITickable {
 	private int ticksExisted;
-	public float progress, progressMax;
-	public boolean hasBloom;
-	public boolean isActive;
-	private Random rand = new Random();
+	private float progress;
+	private float progressMax;
+	private boolean hasBloom;
+	private boolean isActive;
+	private Set<String> knownResearches = new HashSet<>();
+	private final Random rand = new Random();
 
-	private int OUT_SLOT = 2;
+	private final int OUT_SLOT = 2;
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -84,14 +89,15 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		return oldState.getBlock() != newState.getBlock();
 	}
 
-	public static boolean isInput(ItemStack input) {
+	public boolean isInput(ItemStack input) {
 		return !getResult(input).isEmpty();
 	}
 
-	private static ItemStack getResult(ItemStack input) {
-		BloomeryRecipeBase recipe = CraftingManagerBloomery.findMatchingRecipe(input);
+	private ItemStack getResult(ItemStack input) {
+		BloomeryRecipeBase recipe = CraftingManagerBloomery.findMatchingRecipe(input, this.knownResearches);
 		if (recipe != null) {
-			return recipe.getBloomeryRecipeOutput();
+			this.setRecipe(recipe);
+			return recipe.getBloomeryRecipeOutput().copy();
 		}
 		else {
 			return ItemStack.EMPTY;
@@ -214,15 +220,18 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 
 			if (rand.nextFloat() * 10F < pwr) {
 				ItemStack drop = inventory.getStackInSlot(OUT_SLOT).copy();
+				IRecipeMFR recipe = CraftingManagerBloomery.findRecipeByOutput(drop);
+				if (recipe == null) {
+					return false;
+				}
 				inventory.extractItem(OUT_SLOT, 1, false);
 				if (inventory.getStackInSlot(OUT_SLOT).getCount() <= 0) {
 					inventory.setStackInSlot(OUT_SLOT, ItemStack.EMPTY);
 				}
-				if (RPGElements.isSystemActive && RPGElements.getLevel(user, Skill.ARTISANRY) <= 20)// Only gain xp
-				// up to level
-				// 20
-				{
-					Skill.ARTISANRY.addXP(user, 1);
+				// Only gain xp up to level 20
+				if (RPGElements.isSystemActive && RPGElements.getLevel(user, recipe.getSkill()) <= 20) {
+					recipe.giveVanillaXp(user, 0, 1);
+					recipe.giveSkillXp(user, 0);
 				}
 				drop.setCount(1);
 				drop = ItemHeated.createHotItem(drop, 1200);
@@ -246,6 +255,14 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		} else {
 			return null;
 		}
+	}
+
+	public void setKnownResearches(Set<String> knownResearches) {
+		this.knownResearches = knownResearches;
+	}
+
+	public boolean isActive() {
+		return isActive;
 	}
 
 	public boolean hasBloom() {
@@ -283,6 +300,12 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
 
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(CraftingManagerBloomery.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		}
+
+		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
+
 		progress = nbt.getFloat("Progress");
 		progressMax = nbt.getFloat("ProgressMax");
 		isActive = nbt.getBoolean("isActive");
@@ -295,6 +318,12 @@ public class TileEntityBloomery extends TileEntityBase implements ITickable {
 		super.writeToNBT(nbt);
 
 		nbt.setTag("inventory", inventory.serializeNBT());
+
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
+
+		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
 
 		nbt.setFloat("Progress", progress);
 		nbt.setFloat("ProgressMax", progressMax);

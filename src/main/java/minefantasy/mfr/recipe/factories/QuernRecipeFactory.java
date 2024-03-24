@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe.factories;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.QuernRecipeBase;
 import minefantasy.mfr.recipe.types.QuernRecipeType;
 import net.minecraft.item.ItemStack;
@@ -42,10 +43,16 @@ public class QuernRecipeFactory {
 			throw new JsonParseException("No pot ingredients for quern recipe");
 		}
 
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
+
 		boolean consume_pot = JsonUtils.getBoolean(json, "consume_pot", false);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
-		return new QuernRecipeBase(result, ingredients, pot_ingredients, consume_pot);
+		return new QuernRecipeBase(result, ingredients, pot_ingredients, consume_pot,
+				requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

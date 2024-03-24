@@ -1,0 +1,30 @@
+{
+    "type": "alloy_ratio_recipe",
+    "crucible_tier": 1,
+    "repeat_amount": 1,
+    "research": "smelt_blue_steel",
+    "skill": "artisanry",
+    "skill_xp": 3,
+    "vanilla_xp": 0.75,
+    "ingredients": [
+        {
+            "item": "#BAR_BLACK_STEEL"
+        },
+        {
+            "item": "#BAR_SILVER"
+        },
+        {
+            "item": "minecraft:dye",
+            "data": 4
+        },
+        {
+            "item": "minecraft:blaze_powder"
+        },
+        {
+            "item": "minefantasyreforged:flux_strong"
+        }
+    ],
+    "result": {
+        "item": "minefantasyreforged:blue_steel_weak_ingot"
+    }
+}

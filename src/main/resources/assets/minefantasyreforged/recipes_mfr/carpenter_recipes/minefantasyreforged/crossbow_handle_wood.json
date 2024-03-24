@@ -1,0 +1,28 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "crossbow_shafts",
+  "tool_type": "hammer",
+  "block_tier": -1,
+  "craft_time": 150,
+  "tool_tier": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.5,
+  "sound": "minefantasyreforged:block.hammercarpenter",
+  "pattern": [
+    "N N",
+    "PP ",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "N": {
+      "item": "minefantasyreforged:nail"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_handle_wood"
+  }
+}

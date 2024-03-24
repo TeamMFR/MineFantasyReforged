@@ -10,6 +10,7 @@ import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.CraftingManagerKitchenBench;
 import minefantasy.mfr.recipe.IKitchenBench;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.recipe.KitchenBenchCraftMatrix;
 import minefantasy.mfr.recipe.KitchenBenchRecipeBase;
 import minefantasy.mfr.util.ToolHelper;
@@ -17,9 +18,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -36,31 +35,20 @@ import static minefantasy.mfr.constants.Constants.CRAFTED_BY_NAME_TAG;
 
 public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBench {
 
-	private static final String TOOL_TIER_REQUIRED_TAG = "tool_tier_required";
 	private static final String DIRTY_PROGRESS_TAG = "dirty_progress";
-	private static final String DIRTY_PROGRESS_AMOUNT_TAG = "dirty_progress_amount";
 
 	// the tier of this cooking bench block
 	private int tier;
 	public static final int WIDTH = 4;
 	public static final int HEIGHT = 4;
 
-	private ItemStack resultStack = ItemStack.EMPTY;
-
 	public float progressMax;
 	public float progress;
 	private final float dirtyProgressMax = ConfigHardcore.dirtyProgressMax;
-	private float dirtyProgressAmount;
 	private float dirtyProgress;
 	private ContainerKitchenBench syncKitchenBench;
 	private KitchenBenchCraftMatrix craftMatrix;
 	private String lastPlayerHit = "";
-	private SoundEvent craftSound = SoundEvents.BLOCK_WOOD_STEP;
-	private String requiredResearch = "";
-	private Skill requiredSkill;
-	private Tool requiredToolType = Tool.HANDS;
-	private int requiredToolTier;
-	private int requiredKitchenBenchTier;
 
 	public final ItemStackHandler inventory = createInventory();
 
@@ -105,6 +93,12 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 			return false;
 		}
 
+		if (getRecipe() == null || !(getRecipe() instanceof KitchenBenchRecipeBase)) {
+			return false;
+		}
+
+		KitchenBenchRecipeBase kitchenBenchRecipe = (KitchenBenchRecipeBase) getRecipe();
+
 		ItemStack held = user.getHeldItemMainhand();
 		Tool tool = ToolHelper.getToolTypeFromStack(held);
 		int toolTier = ToolHelper.getCrafterTier(held);
@@ -118,11 +112,11 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 			}
 
 			if (doesPlayerKnowCraft(user)
-					&& canCraft()
-					&& tool == requiredToolType
-					&& tier >= requiredKitchenBenchTier
-					&& toolTier >= requiredToolTier) {
-				world.playSound(null, pos, getUseSound(), SoundCategory.AMBIENT, 1.0F, 1.0F);
+					&& canCraft(kitchenBenchRecipe)
+					&& tool == kitchenBenchRecipe.getToolType()
+					&& tier >= kitchenBenchRecipe.getKitchenBenchTier()
+					&& toolTier >= kitchenBenchRecipe.getToolTier()) {
+				world.playSound(null, pos, getUseSound(kitchenBenchRecipe), SoundCategory.AMBIENT, 1.0F, 1.0F);
 
 				if (user.swingProgress > 0 && user.swingProgress <= 1.0) {
 					efficiency *= (0.5F - user.swingProgress);
@@ -130,7 +124,7 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 
 				progress += Math.max(0.2F, efficiency);
 				if (progress >= progressMax) {
-					craftItem(user);
+					craftItem(user, kitchenBenchRecipe);
 				}
 			} else {
 				if (tool == Tool.WASH && held.getItemDamage() != ToolHelper.getWashMaxUses(held)) {
@@ -151,8 +145,8 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 		return false;
 	}
 
-	private SoundEvent getUseSound() {
-		if (craftSound.toString().equalsIgnoreCase("engineering")) {
+	private SoundEvent getUseSound(KitchenBenchRecipeBase kitchenBenchRecipe) {
+		if (kitchenBenchRecipe.getSound().toString().equalsIgnoreCase("engineering")) {
 			if (world.rand.nextInt(5) == 0) {
 				return SoundEvents.UI_BUTTON_CLICK;
 			}
@@ -161,13 +155,13 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 			}
 			return SoundEvents.BLOCK_WOOD_STEP;
 		}
-		return getCraftingSound();
+		return kitchenBenchRecipe.getSound();
 	}
 
-	private void craftItem(EntityPlayer user) {
-		if (this.canCraft()) {
-			addXP(user);
-			ItemStack result = resultStack.copy();
+	private void craftItem(EntityPlayer user, KitchenBenchRecipeBase kitchenBenchRecipe) {
+		if (this.canCraft(kitchenBenchRecipe)) {
+			addXP(user, kitchenBenchRecipe);
+			ItemStack result = kitchenBenchRecipe.getCraftingResult().copy();
 			int output = getOutputSlotNum();
 
 			if (this.getInventory().getStackInSlot(output).isEmpty()) {
@@ -182,14 +176,15 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 			float currentLevel = RPGElements.getLevel(user, Skill.PROVISIONING);
 			// More provisioning skill means less mess.
 			float skillMod = ((currentLevel / Skill.PROVISIONING.getMaxLevel()) / ConfigHardcore.dirtyProgressSkillModifier);
-			float dirtyProgressAmountMod = dirtyProgressAmount - (dirtyProgressAmount * skillMod);
-			dirtyProgress += dirtyProgressAmountMod;
+			float dirtyProgressAmountMod = kitchenBenchRecipe.getDirtyProgressAmount()
+					- (kitchenBenchRecipe.getDirtyProgressAmount() * skillMod);
+			addDirtyProgress(dirtyProgressAmountMod);
 		}
 		onInventoryChanged();
 		progress = 0;
 	}
 
-	private int getOutputSlotNum() {
+	public int getOutputSlotNum() {
 		return getInventory().getSlots() - 5;
 	}
 
@@ -198,27 +193,6 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 			item.setTagCompound(new NBTTagCompound());
 		}
 		return item.getTagCompound();
-	}
-
-	public Tool getRequiredToolType() {
-		return requiredToolType;
-	}
-
-	public SoundEvent getCraftingSound() {
-		return craftSound;
-	}
-
-	@Override
-	public void setCraftingSound(SoundEvent sound) {
-		this.craftSound = sound;
-	}
-
-	public int getToolTierNeeded() {
-		return this.requiredToolTier;
-	}
-
-	public int getKitchenBenchTierNeeded() {
-		return this.requiredKitchenBenchTier;
 	}
 
 	public void consumeResources(EntityPlayer player) {
@@ -286,37 +260,40 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 	}
 
 	// CRAFTING CODE
-	public ItemStack getResult() {
+	public KitchenBenchRecipeBase getResult() {
 		if (syncKitchenBench == null || craftMatrix == null) {
-			return ItemStack.EMPTY;
+			return null;
 		}
 
 		for (int a = 0; a < getOutputSlotNum(); a++) {
 			craftMatrix.setInventorySlotContents(a, getInventory().getStackInSlot(a));
 		}
 
-		ItemStack result = CraftingManagerKitchenBench.findMatchingRecipe(this, craftMatrix, world);
-		if (result.isEmpty()) {
-			result = ItemStack.EMPTY;
-		}
-		return result;
+		return CraftingManagerKitchenBench.findMatchingRecipe(this, craftMatrix, world);
 	}
 
 	public String getResultName() {
-		return resultStack.isEmpty() || resultStack.getItem() == Item.getItemFromBlock(Blocks.AIR) ? I18n.format("gui.no_project_set") : resultStack.getDisplayName();
+		if (!(getRecipe() instanceof KitchenBenchRecipeBase)) {
+			return I18n.format("gui.no_project_set");
+		}
+		else {
+			KitchenBenchRecipeBase kitchenBenchRecipe = (KitchenBenchRecipeBase) getRecipe();
+			return kitchenBenchRecipe.getCraftingResult().getDisplayName();
+		}
 	}
 
 	public void updateCraftingData() {
-		if (!world.isRemote) {
-			ItemStack oldRecipe = resultStack;
-			resultStack = getResult();
+		if (!world.isRemote && (getRecipe() instanceof KitchenBenchRecipeBase || getRecipe() == null)) {
+			KitchenBenchRecipeBase oldRecipe = (KitchenBenchRecipeBase) getRecipe();
+			KitchenBenchRecipeBase newRecipe = getResult();
+			setRecipe(newRecipe);
 			// syncItems();
 
-			if (!canCraft() && progress > 0) {
+			if (!canCraft(newRecipe) && progress > 0) {
 				progress = 0;
 				// quality = 100;
 			}
-			if (!resultStack.isEmpty() && !oldRecipe.isEmpty() && !resultStack.isItemEqual(oldRecipe)) {
+			if (newRecipe != null && oldRecipe != null && !newRecipe.equals(oldRecipe)) {
 				progress = 0;
 			}
 			if (progress > progressMax)
@@ -324,12 +301,15 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 		}
 	}
 
-	public boolean canCraft() {
+	public boolean canCraft(KitchenBenchRecipeBase kitchenBenchRecipe) {
+		if (kitchenBenchRecipe == null) {
+			return false;
+		}
 		if (dirtyProgress >= dirtyProgressMax) {
 			return false;
 		}
-		if (progressMax > 0 && !resultStack.isEmpty()) {
-			return this.canFitResult(resultStack);
+		if (progressMax > 0) {
+			return this.canFitResult(kitchenBenchRecipe.getCraftingResult());
 		}
 		return false;
 	}
@@ -339,23 +319,9 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 		progressMax = i;
 	}
 
-	@Override
-	public void setRequiredToolTier(int i) {
-		requiredToolTier = i;
-	}
-
-	@Override
-	public void setRequiredKitchenBenchTier(int i) {
-		requiredKitchenBenchTier = i;
-	}
-
 	public void setContainer(ContainerKitchenBench container) {
 		syncKitchenBench = container;
 		craftMatrix = new KitchenBenchCraftMatrix(this, syncKitchenBench, KitchenBenchRecipeBase.MAX_WIDTH, KitchenBenchRecipeBase.MAX_HEIGHT);
-	}
-
-	public boolean shouldRenderCraftMetre() {
-		return !resultStack.isEmpty();
 	}
 
 	public int getProgressBar(int i) {
@@ -364,25 +330,6 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 
 	public int getDirtyProgressBar(int i) {
 		return (int) Math.ceil(i / dirtyProgressMax * dirtyProgress);
-	}
-
-	@Override
-	public void setRequiredToolType(String toolType) {
-		this.requiredToolType = Tool.fromName(toolType);
-	}
-
-	@Override
-	public void setRequiredResearch(String research) {
-		this.requiredResearch = research;
-	}
-
-	public String getResearchNeeded() {
-		return requiredResearch;
-	}
-
-	@Override
-	public void setDirtyProgressAmount(int amount) {
-		dirtyProgressAmount = amount;
 	}
 
 	public float getDirtyProgress() {
@@ -398,22 +345,22 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 	}
 
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
-		if (getResearchNeeded().isEmpty()) {
+		IRecipeMFR recipe = getRecipe();
+		if (!(recipe instanceof KitchenBenchRecipeBase)
+				|| (recipe.getRequiredResearch().equals("none"))) {
 			return true;
 		}
-		return ResearchLogic.hasInfoUnlocked(user, getResearchNeeded());
+		return ResearchLogic.getResearchCheck(user, ResearchLogic.getResearch(recipe.getRequiredResearch()));
 	}
 
-	private void addXP(EntityPlayer smith) {
-		if (requiredSkill != Skill.NONE) {
-			float baseXP = this.progressMax / 10F;
-			requiredSkill.addXP(smith, (int) baseXP + 1);
+	private void addXP(EntityPlayer smith, KitchenBenchRecipeBase kitchenBenchRecipe) {
+		if (!world.isRemote) {
+			if (kitchenBenchRecipe.getSkill() != Skill.NONE) {
+				float baseXP = this.progressMax / 10F;
+				kitchenBenchRecipe.giveSkillXp(smith, (int) baseXP + 1);
+				kitchenBenchRecipe.giveVanillaXp(smith, baseXP, 1);
+			}
 		}
-	}
-
-	@Override
-	public void setRequiredSkill(Skill skill) {
-		requiredSkill = skill;
 	}
 
 	@Override
@@ -423,12 +370,8 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 		inventory.deserializeNBT(nbt.getCompoundTag(INVENTORY_TAG));
 		progress = nbt.getFloat(PROGRESS_TAG);
 		progressMax = nbt.getFloat(PROGRESS_MAX_TAG);
-		resultStack = new ItemStack(nbt.getCompoundTag(RESULT_STACK_TAG));
-		requiredToolType = Tool.fromName(nbt.getString(TOOL_TYPE_REQUIRED_TAG));
-		requiredToolTier = nbt.getInteger(TOOL_TIER_REQUIRED_TAG);
-		requiredResearch = nbt.getString(RESEARCH_REQUIRED_TAG);
 		dirtyProgress = nbt.getFloat(DIRTY_PROGRESS_TAG);
-		dirtyProgressAmount = nbt.getFloat(DIRTY_PROGRESS_AMOUNT_TAG);
+		this.setRecipe(CraftingManagerKitchenBench.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
 	}
 
 	@Override
@@ -438,12 +381,10 @@ public class TileEntityKitchenBench extends TileEntityBase implements IKitchenBe
 		nbt.setTag(INVENTORY_TAG, inventory.serializeNBT());
 		nbt.setFloat(PROGRESS_TAG, progress);
 		nbt.setFloat(PROGRESS_MAX_TAG, progressMax);
-		nbt.setTag(RESULT_STACK_TAG, resultStack.writeToNBT(new NBTTagCompound()));
-		nbt.setString(TOOL_TYPE_REQUIRED_TAG, requiredToolType.getName());
-		nbt.setInteger(TOOL_TIER_REQUIRED_TAG, requiredToolTier);
-		nbt.setString(RESEARCH_REQUIRED_TAG, requiredResearch);
 		nbt.setFloat(DIRTY_PROGRESS_TAG, dirtyProgress);
-		nbt.setFloat(DIRTY_PROGRESS_AMOUNT_TAG, dirtyProgressAmount);
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
 		return nbt;
 	}
 

@@ -1,0 +1,27 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "research": "craft_armour_basic",
+  "tool_type": "needle",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    "T T",
+    "L L"
+  ],
+  "key": {
+    "T": {
+      "item": "minefantasyreforged:thread"
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:rough_leather_boots"
+  }
+}

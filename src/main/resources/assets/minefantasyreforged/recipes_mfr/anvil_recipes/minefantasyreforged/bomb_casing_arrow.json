@@ -1,0 +1,39 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "bomb_arrow",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 2,
+  "recipe_time": 30,
+  "recipe_hammer": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "output_hot": true,
+  "pattern": [
+    "   MR",
+    "FTMEM",
+    "   MR"
+  ],
+  "key": {
+    "R": {
+      "item": "minecraft:redstone"
+    },
+    "T": {
+      "item": "#TIMBER_REFINED"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools",
+      "data": 32767
+    },
+    "F": {
+      "item": "minefantasyreforged:fletching"
+    },
+    "M": {
+      "item": "#HUNK_IRON"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bomb_casing_arrow"
+  }
+}

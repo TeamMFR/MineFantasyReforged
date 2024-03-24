@@ -5,7 +5,9 @@ import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.client.model.block.ModelDummyParticle;
 import minefantasy.mfr.client.render.block.TileEntityQuernRenderer;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.recipe.CraftingManagerQuern;
 import minefantasy.mfr.tile.TileEntityQuern;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,6 +29,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class BlockQuern extends BlockTileEntity<TileEntityQuern> implements IClientRegister {
 
@@ -74,6 +78,15 @@ public class BlockQuern extends BlockTileEntity<TileEntityQuern> implements ICli
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntityQuern tile = (TileEntityQuern) getTile(world, pos);
 		if (tile != null) {
+			// Handle Researches
+			Set<String> playerResearches = new HashSet<>();
+			for (String quernResearch : CraftingManagerQuern.getQuernResearches()) {
+				if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(quernResearch))) {
+					playerResearches.add(quernResearch);
+				}
+			}
+			tile.setKnownResearches(playerResearches);
+
 			if (facing == EnumFacing.UP) {
 				tile.onUse();
 			}

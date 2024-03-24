@@ -1,0 +1,32 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "research": "craft_armour_light",
+  "tool_type": "needle",
+  "block_tier": -1,
+  "craft_time": 80,
+  "tool_tier": 1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.cloth.step",
+  "pattern": [
+    " W ",
+    "TRT",
+    " T "
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rough_leather_chestplate"
+    },
+    "T": {
+      "item": "minefantasyreforged:thread"
+    },
+    "W": {
+      "item": "minecraft:wool",
+      "data": 32767
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:padded_chestplate"
+  }
+}

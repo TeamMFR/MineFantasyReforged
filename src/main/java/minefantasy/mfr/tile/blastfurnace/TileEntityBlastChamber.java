@@ -12,6 +12,7 @@ import minefantasy.mfr.recipe.CraftingManagerBlastFurnace;
 import minefantasy.mfr.tile.TileEntityBase;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,21 +26,31 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class TileEntityBlastChamber extends TileEntityBase implements ITickable, ISmokeCarrier {
-	public int ticksExisted;
-	public boolean isBuilt = false;
-	public int fireTime;
-	public int tempUses;
+	protected int ticksExisted;
+	private boolean contentsChanged;
+	protected boolean isBuilt = false;
+	protected int fireTime;
+	protected int tempUses;
 	protected int smokeStorage;
 	protected Random rand = new Random();
+	private Set<String> knownResearches = new HashSet<>();
 
 	public final ItemStackHandler inventory = createInventory();
 
 	@Override
 	protected ItemStackHandler createInventory() {
 		return new ItemStackHandler(2) {
+			@Override
+			protected void onContentsChanged(int slot) {
+				if (!world.isRemote) {
+					contentsChanged = true;
+				}
+			}
 			@Override
 			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
 				if (isItemValidForSlot(slot, stack)) {
@@ -67,13 +78,14 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		return NetworkHandler.GUI_BLAST_CHAMBER;
 	}
 
-	public static boolean isInput(ItemStack item) {
+	public boolean isInput(ItemStack item) {
 		return !getResult(item).isEmpty();
 	}
 
-	protected static ItemStack getResult(ItemStack input) {
-		BlastFurnaceRecipeBase recipe = CraftingManagerBlastFurnace.findMatchingRecipe(input);
+	protected ItemStack getResult(ItemStack input) {
+		BlastFurnaceRecipeBase recipe = CraftingManagerBlastFurnace.findMatchingRecipe(input, this.knownResearches);
 		if (recipe != null) {
+			setRecipe(recipe);
 			return recipe.getBlastFurnaceRecipeOutput().copy();
 		}
 		else {
@@ -85,14 +97,18 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	public void update() {
 
 		++ticksExisted;
-		int dropFrequency = 5;
 
-		if (!world.isRemote && ticksExisted % dropFrequency == 0) {
+		if (!world.isRemote && contentsChanged) {
+			this.contentsChanged = false;
 			TileEntity neighbour = world.getTileEntity(pos.add(0, -1, 0));
-			if (neighbour instanceof TileEntityBlastChamber && !(neighbour instanceof TileEntityBlastHeater)) {
-				interact((TileEntityBlastChamber) neighbour);
+			if (neighbour instanceof TileEntityBlastChamber) {
+				((TileEntityBlastChamber) neighbour).setKnownResearches(this.knownResearches);
+				if (!(neighbour instanceof TileEntityBlastHeater)) {
+					interact((TileEntityBlastChamber) neighbour);
+				}
 			}
 		}
+
 		if (ticksExisted % 200 == 0) {
 			updateBuild();
 		}
@@ -105,28 +121,36 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 	}
 
 	protected void interact(TileEntityBlastChamber tile) {
-		if (!tile.isBuilt)
-			return;
+		if (!(tile instanceof TileEntityBlastHeater)) {
+			if (!tile.isBuilt) {
+				return;
+			}
 
-		for (int a = 0; a < getInventory().getSlots(); a++) {
-			ItemStack mySlot = getInventory().getStackInSlot(a);
+			for (int a = 0; a < getInventory().getSlots(); a++) {
+				ItemStack mySlot = getInventory().getStackInSlot(a);
 
-			if (!mySlot.isEmpty() && canShare(mySlot, a)) {
-				ItemStack theirSlot = tile.getInventory().getStackInSlot(a);
-				if (theirSlot.isEmpty()) {
-					ItemStack copy = mySlot.copy();
-					copy.setCount(1);
-					tile.getInventory().setStackInSlot(a, copy);
-					getInventory().extractItem(a, 1, false);
-				} else if (CustomToolHelper.areEqual(theirSlot, mySlot)) {
-					if ((theirSlot.getCount()) < getMaxStackSizeForDistribute()) {
-						theirSlot.grow(1);
+				if (!mySlot.isEmpty() && canShare(mySlot, a)) {
+					ItemStack theirSlot = tile.getInventory().getStackInSlot(a);
+					if (theirSlot.isEmpty()) {
+						ItemStack copy = mySlot.copy();
+						copy.setCount(1);
+						tile.getInventory().setStackInSlot(a, copy);
 						getInventory().extractItem(a, 1, false);
-						tile.getInventory().setStackInSlot(a, theirSlot);
+					} else if (CustomToolHelper.areEqual(theirSlot, mySlot)) {
+						if ((theirSlot.getCount()) < getMaxStackSizeForDistribute()) {
+							theirSlot.grow(1);
+							getInventory().extractItem(a, 1, false);
+							tile.getInventory().setStackInSlot(a, theirSlot);
+						}
 					}
 				}
 			}
 		}
+	}
+
+	public void setKnownResearches(Set<String> knownResearches) {
+		this.knownResearches = knownResearches;
+		this.contentsChanged = true;
 	}
 
 	private boolean canShare(ItemStack mySlot, int a) {
@@ -210,6 +234,13 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		nbt.setInteger("StoredSmoke", smokeStorage);
 
 		nbt.setTag("inventory", inventory.serializeNBT());
+
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
+
+		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
+
 		return nbt;
 	}
 
@@ -223,6 +254,12 @@ public class TileEntityBlastChamber extends TileEntityBase implements ITickable,
 		smokeStorage = nbt.getInteger("StoredSmoke");
 
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(CraftingManagerBlastFurnace.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		}
+
+		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 	}
 
 	@Override

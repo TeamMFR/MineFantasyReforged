@@ -1,0 +1,28 @@
+{
+  "type": "kitchen_bench_shaped_recipe",
+  "skill": "provisioning",
+  "research": "eclair",
+  "tool_type": "knife",
+  "block_tier": -1,
+  "craft_time": 20,
+  "tool_tier": 2,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.wood.step",
+  "dirty_progress_amount": 2,
+  "pattern": [
+    "C",
+    "E"
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:custard"
+    },
+    "E": {
+      "item": "minefantasyreforged:eclair_empty"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:eclair"
+  }
+}

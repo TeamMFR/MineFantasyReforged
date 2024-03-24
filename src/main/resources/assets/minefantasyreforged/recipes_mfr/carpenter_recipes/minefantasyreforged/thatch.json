@@ -1,0 +1,24 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "construction",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 1,
+  "tool_tier": -1,
+  "skill_xp": 1,
+  "vanilla_xp": 0.3,
+  "sound": "minecraft:block.grass.hit",
+  "pattern": [
+    "TT",
+    "TT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:tallgrass",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:thatch"
+  }
+}

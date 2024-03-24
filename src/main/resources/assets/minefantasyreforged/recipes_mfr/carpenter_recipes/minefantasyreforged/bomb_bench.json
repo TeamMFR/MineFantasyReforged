@@ -1,0 +1,30 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "bombs",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 150,
+  "tool_tier": 0,
+  "skill_xp": 3,
+  "vanilla_xp": 0.5,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    "BIB",
+    "BCB"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "C": {
+      "item": "minefantasyreforged:carpenter_bench"
+    },
+    "I": {
+      "item": "minefantasyreforged:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:bomb_bench"
+  }
+}

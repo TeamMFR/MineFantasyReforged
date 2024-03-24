@@ -1,0 +1,21 @@
+{
+	"type": "quern_recipe",
+	"consume_pot": true,
+	"research": "shrapnel",
+	"skill": "engineering",
+	"skill_xp": 1,
+	"vanilla_xp": 0.2,
+	"ingredients": [
+		{
+			"item": "minecraft:flint"
+		}
+	],
+	"pot_ingredients": [
+		{
+			"item": "minefantasyreforged:clay_pot"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:shrapnel"
+	}
+}

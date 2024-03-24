@@ -1,0 +1,28 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "artisanry",
+  "research": "firebrick_crucible",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 40,
+  "tool_tier": -1,
+  "skill_xp": 2,
+  "vanilla_xp": 0.5,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "FFF",
+    "FCF",
+    "FFF"
+  ],
+  "key": {
+    "C": {
+      "item": "minefantasyreforged:crucible_stone"
+    },
+    "F": {
+      "item": "minefantasyreforged:fireclay"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crucible_fireclay"
+  }
+}

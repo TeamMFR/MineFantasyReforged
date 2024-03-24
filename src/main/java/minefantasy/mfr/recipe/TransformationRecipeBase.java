@@ -24,7 +24,7 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<TransformationRecipeBase> {
+public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<TransformationRecipeBase> implements IRecipeMFR{
 	public static IStoredVariable<TransformationBlockWrapper> TRANSFORMATION_BLOCK = IStoredVariable.StoredVariable
 			.ofTransformationBlockWrapper("transformationBlock", Persistence.NEVER)
 			.setSynced();
@@ -33,10 +33,12 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	protected List<ItemStack> consumableStacks;
 	protected ItemStack dropStack;
 	protected ItemStack offhandStack;
-	protected Skill skill;
-	protected String research;
 	protected int maxProgress;
 	protected SoundEvent sound;
+	protected String requiredResearch;
+	protected Skill skill;
+	protected Integer skillXp;
+	protected float vanillaXp;
 
 
 	public TransformationRecipeBase(
@@ -46,6 +48,8 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 			ItemStack offhandStack,
 			Skill skill,
 			String research,
+			int skillXp,
+			float vanillaXp,
 			int maxProgress,
 			String soundName) {
 		this.tool = tool;
@@ -53,7 +57,9 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		this.dropStack = dropStack;
 		this.offhandStack = offhandStack;
 		this.skill = skill;
-		this.research = research;
+		this.requiredResearch = research;
+		this.skillXp = skillXp;
+		this.vanillaXp = vanillaXp;
 		this.maxProgress = maxProgress;
 		this.sound = SoundEvent.REGISTRY.getObject(new ResourceLocation(soundName));
 	}
@@ -63,6 +69,11 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	}
 
 	abstract boolean matches(ItemStack tool, ItemStack input, IBlockState state);
+
+	@Override
+	public String getName() {
+		return this.getRegistryName().toString();
+	}
 
 	public abstract EnumActionResult onUsedWithBlock(
 			World world,
@@ -75,7 +86,9 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 	protected static boolean validateTransformation(BlockPos pos, ItemStack item, EntityPlayer player, EnumFacing facing, TransformationRecipeBase recipe) {
 		// Check Player can change block and has Recipe Research unlocked
 		if (player.canPlayerEdit(pos, facing, item)) {
-			if (ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(recipe.getResearch()))) {
+			String requiredResearch = recipe.getRequiredResearch();
+			if (requiredResearch.equals("none")
+					|| ResearchLogic.getResearchCheck(player, ResearchLogic.getResearch(requiredResearch))) {
 				ItemStack offhandStack = recipe.getOffhandStack().copy();
 				// Check if the offhand stack is in the offhand slot or bypass if empty
 				if (offhandStack.isEmpty() || player.getHeldItemOffhand().isItemEqualIgnoreDurability(offhandStack)) {
@@ -97,6 +110,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 			World world, BlockPos pos, ItemStack item, EntityPlayer player,
 			TransformationRecipeBase recipe, List<ItemStack> consumableStacks, IBlockState newState, IBlockState oldState) {
 		PlayerData data = PlayerData.get(player);
+		String displayName = newState.getBlock().getLocalizedName();
 		if (data != null) {
 			TransformationBlockWrapper transformationBlock = data.getVariable(TRANSFORMATION_BLOCK);
 			// Update Transformation Block
@@ -110,6 +124,7 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 				//Add Progress
 				transformationBlock.setProgress(transformationBlock.getProgress() + 1);
 				transformationBlock.setMaxProgress(this.maxProgress);
+				transformationBlock.setDisplayName(displayName);
 				data.setVariable(TRANSFORMATION_BLOCK, transformationBlock);
 
 				// Check if progress has hit the maxProgress of the recipe
@@ -118,12 +133,13 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 
 					//Don't set to null, it won't sync to the client properly
 					data.setVariable(TRANSFORMATION_BLOCK, new TransformationBlockWrapper(
-							ItemStack.EMPTY, pos, newState, 0, this.maxProgress));
+							ItemStack.EMPTY, pos, newState, 0, this.maxProgress, ""));
 				}
 			}
 			// Create Transformation Block
 			else {
-				data.setVariable(TRANSFORMATION_BLOCK, new TransformationBlockWrapper(item, pos, oldState, 1, this.maxProgress));
+				data.setVariable(TRANSFORMATION_BLOCK,
+						new TransformationBlockWrapper(item, pos, oldState, 1, this.maxProgress, displayName));
 			}
 			//Sync with client
 			data.sync();
@@ -156,7 +172,10 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		}
 
 		// Add skill
-		recipe.getSkill().addXP(player, 1);
+		if (!world.isRemote) {
+			recipe.giveVanillaXp(player, 0, 1);
+			recipe.giveSkillXp(player, 0);
+		}
 		// Damage tool
 		item.damageItem(recipe.getMaxProgress(), player);
 
@@ -187,19 +206,36 @@ public abstract class TransformationRecipeBase extends IForgeRegistryEntry.Impl<
 		return offhandStack;
 	}
 
-	public Skill getSkill() {
-		return skill;
-	}
-
-	public String getResearch() {
-		return research;
-	}
-
 	public int getMaxProgress() {
 		return maxProgress;
 	}
 
 	public SoundEvent getSound() {
 		return sound;
+	}
+
+	@Override
+	public String getRequiredResearch() {
+		return requiredResearch;
+	}
+
+	@Override
+	public Skill getSkill() {
+		return skill;
+	}
+
+	@Override
+	public int getSkillXp() {
+		return skillXp;
+	}
+
+	@Override
+	public float getVanillaXp() {
+		return vanillaXp;
+	}
+
+	@Override
+	public boolean shouldSlotGiveSkillXp() {
+		return false;
 	}
 }

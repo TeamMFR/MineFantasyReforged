@@ -1,0 +1,25 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "construction",
+  "research": "smelt_steel",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 14,
+  "recipe_hammer": 3,
+  "skill_xp": 0,
+  "vanilla_xp": 0.4,
+  "output_hot": false,
+  "pattern": [
+    "M M",
+    "M M"
+  ],
+  "key": {
+    "M": {
+      "item": "#HUNK_STEEL"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:steel_bars"
+  }
+}

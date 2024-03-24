@@ -1,0 +1,35 @@
+{
+  "type": "anvil_shaped_custom_material_recipe",
+  "skill": "artisanry",
+  "research": "tier",
+  "tool_type": "heavy_hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": -1,
+  "recipe_time": 30,
+  "recipe_hammer": -1,
+  "skill_xp": 0,
+  "vanilla_xp": 0.4,
+  "output_hot": true,
+  "pattern": [
+    "LLBBR",
+    "TTTBR",
+    "LLBBR"
+  ],
+  "key": {
+    "B": {
+      "item": "minefantasyreforged:bar"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "T": {
+      "item": "minefantasyreforged:timber"
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:standard_battleaxe"
+  }
+}

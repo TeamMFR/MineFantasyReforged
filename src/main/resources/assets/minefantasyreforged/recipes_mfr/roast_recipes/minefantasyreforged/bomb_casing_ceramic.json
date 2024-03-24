@@ -1,0 +1,20 @@
+{
+	"type": "cooking_recipe",
+	"min_temperature": 1000,
+	"max_temperature": 1000,
+	"cook_time": 10,
+	"can_burn": false,
+	"is_oven_recipe": true,
+	"research": "bomb_ceramic",
+	"skill": "engineering",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"ingredients": [
+		{
+			"item": "minefantasyreforged:bomb_casing_uncooked"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:bomb_casing_ceramic"
+	}
+}

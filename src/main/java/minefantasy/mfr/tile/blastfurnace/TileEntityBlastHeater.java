@@ -194,7 +194,9 @@ public class TileEntityBlastHeater extends TileEntityBlastChamber {
 	private ItemStack getSmeltedResult(TileEntityBlastChamber shaft) {
 		if (shaft.getIsBuilt()) {
 			ItemStack input = shaft.getInventory().getStackInSlot(1);
-			if (shaft.tempUses <= 0 && shaft.getInventory().getStackInSlot(0).isEmpty() || !MineFantasyFuels.isCarbon(shaft.getInventory().getStackInSlot(0))) {
+			ItemStack carbonStack = shaft.getInventory().getStackInSlot(0);
+			if (shaft.tempUses <= 0 && carbonStack.isEmpty()
+					|| !MineFantasyFuels.isCarbon(carbonStack)) {
 				return ItemStack.EMPTY;
 			}
 			if (!input.isEmpty()) {

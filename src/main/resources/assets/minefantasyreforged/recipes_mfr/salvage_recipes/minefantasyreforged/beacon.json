@@ -1,0 +1,22 @@
+{
+	"type": "salvage_recipe",
+	"vanilla_xp": 0.4,
+	"input": {
+		"item": "minecraft:beacon"
+	},
+	"outputs": [
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:glass",
+			"count": 5
+		},
+		{
+			"type": "minefantasyreforged:item_count",
+			"item": "minecraft:obsidian",
+			"count": 3
+		},
+		{
+			"item": "minecraft:nether_star"
+		}
+	]
+}

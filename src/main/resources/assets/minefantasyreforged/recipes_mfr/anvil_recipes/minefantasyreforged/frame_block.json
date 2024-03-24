@@ -1,0 +1,28 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "cogwork_armour",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 7,
+  "recipe_hammer": 3,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "output_hot": false,
+  "pattern": [
+    "R",
+    "I"
+  ],
+  "key": {
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "I": {
+      "item": "minefantasyreforged:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:frame_block"
+  }
+}

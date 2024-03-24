@@ -1,0 +1,23 @@
+{
+	"type": "transformation_recipe",
+	"tool_type": "brush",
+	"skill": "construction",
+	"research": "paint_brush",
+	"skill_xp": 1,
+	"vanilla_xp": 0.3,
+	"soundName": "minecraft:block.cloth.hit",
+	"inputs": [
+		{
+			"item": "minefantasyreforged:nailed_planks_stairs"
+		}
+	],
+	"result": {
+		"item": "minefantasyreforged:refined_planks_stairs"
+	},
+	"consumableStacks": [
+		{
+			"item": "minefantasyreforged:jug_plant_oil"
+		}
+	],
+	"blockStateProperties": ["facing", "shape", "half"]
+}

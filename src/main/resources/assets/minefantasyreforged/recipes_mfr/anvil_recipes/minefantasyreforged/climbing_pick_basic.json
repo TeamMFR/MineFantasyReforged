@@ -1,0 +1,36 @@
+{
+  "type": "anvil_shaped_recipe",
+  "skill": "engineering",
+  "research": "climber",
+  "tool_type": "hammer",
+  "is_tool_recipe": false,
+  "anvil_tier": 3,
+  "recipe_time": 245,
+  "recipe_hammer": 3,
+  "skill_xp": 1,
+  "vanilla_xp": 0.2,
+  "output_hot": true,
+  "pattern": [
+    "L BR",
+    "BBBR",
+    "L E "
+  ],
+  "key": {
+    "B": {
+      "item": "#BAR_COMPOSITE_ALLOY"
+    },
+    "R": {
+      "item": "minefantasyreforged:rivet"
+    },
+    "E": {
+      "item": "minefantasyreforged:engin_anvil_tools",
+      "data": 32767
+    },
+    "L": {
+      "item": "minefantasyreforged:leather_strip"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:climbing_pick_basic"
+  }
+}

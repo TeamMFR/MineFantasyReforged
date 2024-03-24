@@ -3,6 +3,7 @@ package minefantasy.mfr.recipe.factories;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.recipe.RoastRecipeBase;
 import minefantasy.mfr.recipe.types.RoastRecipeType;
 import net.minecraft.item.ItemStack;
@@ -47,10 +48,15 @@ public class RoastRecipeFactory {
 		int burn_time = JsonUtils.getInt(json, "burn_time", 0);
 		boolean can_burn = JsonUtils.getBoolean(json, "can_burn", false);
 		boolean is_oven_recipe = JsonUtils.getBoolean(json, "is_oven_recipe", false);
+		String requiredResearch = JsonUtils.getString(json, "research", "none");
+		Skill skill = Skill.fromName(JsonUtils.getString(json, "skill", "none"));
+		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
+		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
 		return new RoastRecipeBase(result, ingredients, burnt_output, min_temperature, max_temperature,
-				cook_time, burn_time, can_burn, is_oven_recipe);
+				cook_time, burn_time, can_burn, is_oven_recipe,
+				requiredResearch, skill, skillXp, vanillaXp);
 	}
 }

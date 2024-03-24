@@ -1,0 +1,23 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "tool_type": "hands",
+  "block_tier": -1,
+  "craft_time": 8,
+  "tool_tier": -1,
+  "vanilla_xp": 0.2,
+  "sound": "minecraft:block.wood.step",
+  "pattern": [
+    "C  ",
+    "C C",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:jug_uncooked",
+    "count": 4
+  }
+}

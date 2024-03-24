@@ -1,0 +1,33 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "research": "firebomb",
+  "tool_type": "spoon",
+  "block_tier": -1,
+  "craft_time": 10,
+  "tool_tier": -1,
+  "vanilla_xp": 0.4,
+  "sound": "minecraft:block.gravel.step",
+  "pattern": [
+    "B",
+    "D",
+    "M",
+    "C"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_powder"
+    },
+    "C": {
+      "item": "minefantasyreforged:clay_pot"
+    },
+    "D": {
+      "item": "minefantasyreforged:dragon_heart"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:magma_cream_refined"
+  }
+}

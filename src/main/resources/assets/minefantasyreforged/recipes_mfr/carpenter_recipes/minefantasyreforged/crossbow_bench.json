@@ -1,0 +1,37 @@
+{
+  "type": "carpenter_shaped_recipe",
+  "skill": "engineering",
+  "research": "crossbows",
+  "tool_type": "spanner",
+  "block_tier": -1,
+  "craft_time": 200,
+  "tool_tier": 0,
+  "skill_xp": 2,
+  "vanilla_xp": 0.7,
+  "sound": "minefantasyreforged:block.twistbolt",
+  "pattern": [
+    " I ",
+    "PSP",
+    "BCB"
+  ],
+  "key": {
+    "P": {
+      "item": "minefantasyreforged:timber"
+    },
+    "B": {
+      "item": "minefantasyreforged:bolt"
+    },
+    "S": {
+      "item": "#STRING"
+    },
+    "C": {
+      "item": "minefantasyreforged:carpenter_bench"
+    },
+    "I": {
+      "item": "minefantasyreforged:iron_frame"
+    }
+  },
+  "result": {
+    "item": "minefantasyreforged:crossbow_bench"
+  }
+}

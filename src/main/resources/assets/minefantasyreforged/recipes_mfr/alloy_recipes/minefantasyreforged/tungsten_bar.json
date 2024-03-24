@@ -1,0 +1,29 @@
+{
+    "type": "alloy_shaped_recipe",
+    "crucible_tier": 1,
+    "research": "tungsten",
+    "skill": "artisanry",
+    "skill_xp": 3,
+    "vanilla_xp": 0.75,
+    "pattern": [
+        "FFF",
+        "CWF",
+        "CCC"
+    ],
+    "key": {
+        "C": {
+            "item": "minecraft:coal",
+            "data": 0
+        },
+        "W": {
+            "item": "#TUNGSTEN_ORE"
+        },
+        "F": {
+            "item": "minefantasyreforged:flux_strong"
+        }
+    },
+    "result": {
+        "item": "minefantasyreforged:bar",
+        "nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}"
+    }
+}

@@ -5,7 +5,9 @@ import minefantasy.mfr.container.ContainerQuern;
 import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.CraftingManagerQuern;
+import minefantasy.mfr.recipe.IRecipeMFR;
 import minefantasy.mfr.recipe.QuernRecipeBase;
+import minefantasy.mfr.util.Utils;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,11 +24,14 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class TileEntityQuern extends TileEntityBase implements ITickable {
 	private int ticksExisted;
 	private int postUseTicks;
-	public int turnAngle;
+	private int turnAngle;
+	private Set<String> knownResearches = new HashSet<>();
 
 	public static int getMaxRevs() {
 		return 100;
@@ -46,7 +51,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
 	@Override
 	public ContainerBase createContainer(EntityPlayer player) {
-		return new ContainerQuern(player.inventory, this);
+		return new ContainerQuern(player, player.inventory, this);
 	}
 
 	@Override
@@ -84,16 +89,23 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 		}
 	}
 
-	public static boolean isInput(ItemStack input) {
-		return !input.isEmpty() && CraftingManagerQuern.findMatchingInputs(input);
+	public boolean isInput(ItemStack input) {
+		return !input.isEmpty() && CraftingManagerQuern.findMatchingInputs(input, knownResearches);
 	}
 
-	public static boolean isPot(ItemStack inputPot) {
-		return !inputPot.isEmpty() && CraftingManagerQuern.findMatchingPotInputs(inputPot);
+	public boolean isPot(ItemStack inputPot) {
+		return !inputPot.isEmpty() && CraftingManagerQuern.findMatchingPotInputs(inputPot, knownResearches);
 	}
 
-	private static QuernRecipeBase getResult(ItemStack input, ItemStack potInput) {
-		return CraftingManagerQuern.findMatchingRecipe(input, potInput);
+	private QuernRecipeBase getResult(ItemStack input, ItemStack potInput, Set<String> knownResearches) {
+		QuernRecipeBase quernRecipe = CraftingManagerQuern.findMatchingRecipe(input, potInput, knownResearches);
+		setRecipe(quernRecipe);
+		return quernRecipe;
+	}
+
+	@Override
+	public IRecipeMFR getRecipeByOutput(ItemStack stack) {
+		return CraftingManagerQuern.findRecipeByOutput(stack);
 	}
 
 	public void onUse() {
@@ -105,7 +117,7 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
 	public void onRevolutionComplete() {
 		world.playSound(null, pos, MineFantasySounds.CRAFT_PRIMITIVE, SoundCategory.BLOCKS, 1.0F, 1.0F);
-		QuernRecipeBase result = getResult(getInventory().getStackInSlot(0), getInventory().getStackInSlot(1));
+		QuernRecipeBase result = getResult(getInventory().getStackInSlot(0), getInventory().getStackInSlot(1), knownResearches);
 		if (result != null && (!result.shouldConsumePot() || !getInventory().getStackInSlot(1).isEmpty())) {
 			ItemStack craft = result.getQuernRecipeOutput();
 			if (canFitResult(craft)) {
@@ -149,6 +161,14 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 
 	}
 
+	public int getTurnAngle() {
+		return turnAngle;
+	}
+
+	public void setKnownResearches(Set<String> knownResearches) {
+		this.knownResearches = knownResearches;
+	}
+
 	@Override
 	public boolean isItemValidForSlot(int slot, ItemStack item) {
 		if (!item.isEmpty() && isInput(item)) {
@@ -164,6 +184,11 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
 		inventory.deserializeNBT(nbt.getCompoundTag("inventory"));
+		if (!nbt.getString(RECIPE_NAME_TAG).isEmpty()) {
+			this.setRecipe(CraftingManagerQuern.getRecipeByName(nbt.getString(RECIPE_NAME_TAG), true));
+		}
+
+		knownResearches = Utils.deserializeList(nbt.getString(KNOWN_RESEARCHES_TAG));
 	}
 
 	@Nonnull
@@ -171,6 +196,11 @@ public class TileEntityQuern extends TileEntityBase implements ITickable {
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
 		nbt.setTag("inventory", inventory.serializeNBT());
+		if (getRecipe() != null) {
+			nbt.setString(RECIPE_NAME_TAG, getRecipe().getName());
+		}
+
+		nbt.setString(KNOWN_RESEARCHES_TAG, Utils.serializeList(knownResearches));
 		return nbt;
 	}
 

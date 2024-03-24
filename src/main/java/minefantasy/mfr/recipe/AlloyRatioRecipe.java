@@ -1,5 +1,6 @@
 package minefantasy.mfr.recipe;
 
+import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.item.ItemStack;
@@ -16,8 +17,9 @@ import java.util.stream.Collectors;
 public class AlloyRatioRecipe extends AlloyRecipeBase {
 	protected int repeatAmount;
 
-	public AlloyRatioRecipe(ItemStack output, NonNullList<Ingredient> inputs, int tier, int repeatAmount) {
-		super(output, inputs, tier);
+	public AlloyRatioRecipe(ItemStack output, NonNullList<Ingredient> inputs, int tier,
+			String requiredResearch, Skill skill, int skillXp, float xp, int repeatAmount) {
+		super(output, inputs, tier, requiredResearch, skill, skillXp, xp);
 		this.repeatAmount = repeatAmount;
 	}
 
