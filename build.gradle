@@ -153,6 +153,11 @@ repositories {
     }
 }
 
+configurations {
+    embed
+    implementation.extendsFrom(embed)
+}
+
 dependencies {
     //// MC version ////
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
@@ -193,6 +198,11 @@ dependencies {
     }
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    embed ('org.docx4j:docx4j-JAXB-Internal:8.3.11') {
+        exclude group: 'org.slf4j'
+    }
+    embed 'org.slf4j:slf4j-api:1.7.30'
     //// Dependencies ////
 
     //// Forge examples ////

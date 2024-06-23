@@ -71,10 +71,20 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.docx4j.Docx4J;
+import org.docx4j.openpackaging.exceptions.Docx4JException;
+import org.docx4j.openpackaging.packages.WordprocessingMLPackage;
+import org.docx4j.openpackaging.parts.WordprocessingML.MainDocumentPart;
+import org.docx4j.wml.Text;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import java.io.File;
+import java.util.List;
 
 @Mod(modid = MineFantasyReforged.MOD_ID, name = MineFantasyReforged.NAME, version = "@VERSION@", dependencies = "required:forge@[0.000.000.001,);" + CodeChickenLib.MOD_VERSION_DEP + "required-after:mixinbooter;")
 public class MineFantasyReforged {
-	public static final boolean shouldRemap = true;//DO NOT COMMIT AS FALSE
+	public static final boolean shouldRemap = false;//DO NOT COMMIT AS FALSE
 	public static final String MOD_ID = "minefantasyreforged";
 	public static final String NAME = "MineFantasy Reforged";
 
@@ -190,6 +200,8 @@ public class MineFantasyReforged {
 		CraftingManagerTransformation.loadRecipes();
 		CraftingManagerSpecial.loadRecipes();
 
+		testLoadDocx();
+
 		PROXY.init();
 	}
 
@@ -290,6 +302,29 @@ public class MineFantasyReforged {
 		if (WorldGenBiological.isBiomeInConstraint(biome, ConfigWorldGen.berryMinTemp, ConfigWorldGen.berryMaxTemp,
 				ConfigWorldGen.berryMinRain, ConfigWorldGen.berryMaxRain)) {
 			biome.addFlower(MineFantasyBlocks.BERRY_BUSH.getDefaultState(), 5);
+		}
+	}
+
+	private void testLoadDocx() {
+		try {
+			File doc = new File("C:\\Users\\user\\Desktop\\Coding\\MineFantasyReforged\\src\\main\\resources\\assets\\minefantasyreforged\\knowledge\\research_book\\entries\\iron_smelting\\test.docx");
+			WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage
+					.load(doc);
+			MainDocumentPart mainDocumentPart = wordMLPackage
+					.getMainDocumentPart();
+
+			mainDocumentPart.getContent();
+//			String textNodesXPath = "//w:t";
+//			List<Object> textNodes= mainDocumentPart
+//					.getJAXBNodesViaXPath(textNodesXPath, true);
+//			for (Object obj : textNodes) {
+//				Text text = (Text) ((JAXBElement) obj).getValue();
+//				String textValue = text.getValue();
+//				MineFantasyReforged.LOG.error(textValue);
+//			}
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 }
