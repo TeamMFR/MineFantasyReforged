@@ -376,60 +376,63 @@ public class MineFantasyReforgedAPI {
 	/**
 	 * Adds a Shaped Custom Material Carpenter Recipe with all variables
 	 *
-	 * @param output			The ingredients of this recipe
-	 * @param inputs			What the recipe results in
-	 * @param toolTier			The required tier of the tool for making this recipe
-	 * @param carpenterTier		The required tier of the carpenter this recipe is used on
-	 * @param craftTime			How long should this recipe take to make
-	 * @param skillXp			The amount of Skill Xp to be granted to the Recipe Skill
-	 * @param vanillaXp			The amount of vanilla Xp to be granted
-	 * @param toolType			What is the tool type of this recipe
-	 * @param soundOfCraft		The Sound crafting the recipe makes
-	 * @param research			The Required Research for this Recipe
-	 * @param skillUsed			The Skill of this recipe
-	 * @param width             The width of the recipe (Max = 4)
-	 * @param height            The height of the recipe (Max = 4)
-	 * @param modId             The modId for this recipe to registered under
-	 * @param name				The name of this recipe
+	 * @param output					The ingredients of this recipe
+	 * @param inputs					What the recipe results in
+	 * @param toolTier					The required tier of the tool for making this recipe
+	 * @param carpenterTier				The required tier of the carpenter this recipe is used on
+	 * @param craftTime					How long should this recipe take to make
+	 * @param skillXp					The amount of Skill Xp to be granted to the Recipe Skill
+	 * @param vanillaXp					The amount of vanilla Xp to be granted
+	 * @param toolType					What is the tool type of this recipe
+	 * @param soundOfCraft				The Sound crafting the recipe makes
+	 * @param research					The Required Research for this Recipe
+	 * @param skillUsed					The Skill of this recipe
+	 * @param tierModifyOutputCount     If the tier of the material should modify the count of the output
+	 * @param width             		The width of the recipe (Max = 4)
+	 * @param height            		The height of the recipe (Max = 4)
+	 * @param modId             		The modId for this recipe to registered under
+	 * @param name						The name of this recipe
 	 */
 	public static void addShapedCustomMaterialCarpenterRecipe(ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed,
+			String research, Skill skillUsed, boolean tierModifyOutputCount,
 			int width, int height,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterShapedCustomMaterialRecipe(output, inputs,
 				toolTier, carpenterTier, craftTime, skillXp, vanillaXp, toolType, soundOfCraft,
-				research, skillUsed,
+				research, skillUsed, tierModifyOutputCount,
 				width, height), true, new ResourceLocation(modId, name));
 	}
 
 	/**
 	 * Adds a Shapeless Custom Material Carpenter Recipe with all variables
 	 *
-	 * @param output			The ingredients of this recipe
-	 * @param inputs			What the recipe results in
-	 * @param toolTier			The required tier of the tool for making this recipe
-	 * @param carpenterTier		The required tier of the carpenter this recipe is used on
-	 * @param craftTime			How long should this recipe take to make
-	 * @param skillXp			The amount of Skill Xp to be granted to the Recipe Skill
-	 * @param vanillaXp			The amount of vanilla Xp to be granted
-	 * @param toolType			What is the tool type of this recipe
-	 * @param soundOfCraft		The Sound crafting the recipe makes
-	 * @param research			The Required Research for this Recipe
-	 * @param skillUsed			The Skill of this recipe
-	 * @param modId             The modId for this recipe to registered under
-	 * @param name				The name of this recipe
+	 * @param output					The ingredients of this recipe
+	 * @param inputs					What the recipe results in
+	 * @param toolTier					The required tier of the tool for making this recipe
+	 * @param carpenterTier				The required tier of the carpenter this recipe is used on
+	 * @param craftTime					How long should this recipe take to make
+	 * @param skillXp					The amount of Skill Xp to be granted to the Recipe Skill
+	 * @param vanillaXp					The amount of vanilla Xp to be granted
+	 * @param toolType					What is the tool type of this recipe
+	 * @param soundOfCraft				The Sound crafting the recipe makes
+	 * @param research					The Required Research for this Recipe
+	 * @param skillUsed					The Skill of this recipe
+	 * @param tierModifyOutputCount     If the tier of the material should modify the count of the output
+	 * @param modId             		The modId for this recipe to registered under
+	 * @param name						The name of this recipe
 	 */
 	public static void addShapelessCustomMaterialCarpenterRecipe(
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp,
 			String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed,
+			boolean tierModifyOutputCount,
 			String modId, String name) {
 		MineFantasyReforged.CRAFTING_MANAGER_CARPENTER.addRecipe(new CarpenterShapelessCustomMaterialRecipe(
 				output, inputs, toolTier, carpenterTier, craftTime, skillXp, vanillaXp, toolType, soundOfCraft,
-				research, skillUsed), true, new ResourceLocation(modId, name));
+				research, skillUsed, tierModifyOutputCount), true, new ResourceLocation(modId, name));
 	}
 
 	/**

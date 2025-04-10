@@ -5,8 +5,9 @@
 	},
 	"outputs": [
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:metal_hunk",
+			"material_type": "metal_material",
 			"count": 4
 		}
 	],

@@ -89,7 +89,6 @@ import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.item.ItemWoodComponent;
 import minefantasy.mfr.item.ItemWorldGenPlacer;
 import minefantasy.mfr.material.BaseMaterial;
-import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.Utils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
@@ -579,9 +578,9 @@ public class MineFantasyItems {
 		GENERIC_MEAT_CHUNK_COOKED = new ItemFoodMFR("generic_meat_chunk_cooked", 5, 0.5F, true);
 		GENERIC_MEAT_MINCE_UNCOOKED = new ItemFoodMFR("generic_meat_mince_uncooked", 2, 0.2F, true).setContainerItem(CLAY_POT);
 		GENERIC_MEAT_MINCE_COOKED = new ItemFoodMFR("generic_meat_mince_cooked", 5, 0.5F, true).setContainerItem(CLAY_POT);
-		FLOUR = new ItemComponentMFR("flour", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		BREADCRUMBS = new ItemComponentMFR("breadcrumbs", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		GUTS = new ItemComponentMFR("guts", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood);
+		FLOUR = new ItemComponentMFR("flour").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		BREADCRUMBS = new ItemComponentMFR("breadcrumbs").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		GUTS = new ItemComponentMFR("guts").setCreativeTab(MineFantasyTabs.tabFood);
 		BREADROLL = new ItemFoodMFR("breadroll", 5, 1.0F, false);
 		BREAD_SLICE = new ItemFoodMFR("bread_slice", 2, 1.0F, false);
 		CURDS = new ItemUnfinishedFood("curds");
@@ -628,13 +627,13 @@ public class MineFantasyItems {
 		ECLAIR = new ItemMultiFood("eclair", 4, 7, 1.0F, false, Rarity.UNCOMMON).setFoodStats(5, 1.0F, 0.0F, 1.5F).setEatTime(16).setAlwaysEdible().setMaxStackSize(1);
 
 		// MISC
-		CAKE_TIN = new ItemComponentMFR("cake_tin", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood);
-		PIE_TRAY = new ItemComponentMFR("pie_tray", Rarity.COMMON).setStoragePlacement(Constants.StorageTextures.BIGPLATE, Constants.StorageTextures.TRAY).setCreativeTab(MineFantasyTabs.tabFood);
-		ICING = new ItemComponentMFR("icing", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		CUSTARD = new ItemComponentMFR("custard", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		COCA_POWDER = new ItemComponentMFR("coca_powder", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		CHOCOLATE = new ItemComponentMFR("chocolate", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		CHOC_CHIPS = new ItemComponentMFR("choc_chips", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CAKE_TIN = new ItemComponentMFR("cake_tin").setCreativeTab(MineFantasyTabs.tabFood);
+		PIE_TRAY = new ItemComponentMFR("pie_tray").setStoragePlacement(Constants.StorageTextures.BIGPLATE, Constants.StorageTextures.TRAY).setCreativeTab(MineFantasyTabs.tabFood);
+		ICING = new ItemComponentMFR("icing").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CUSTARD = new ItemComponentMFR("custard").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		COCA_POWDER = new ItemComponentMFR("coca_powder").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CHOCOLATE = new ItemComponentMFR("chocolate").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		CHOC_CHIPS = new ItemComponentMFR("choc_chips").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
 		BERRIES = new ItemFoodMFR("berries", 2, 0.5F, false).setEatTime(10).setStaminaRestore(10F).setShouldRepeatPenaltyCheck().setAlwaysEdible();
 		BERRIES_JUICY = new ItemFoodMFR("berries_juicy", 3, 0.5F, false, Rarity.UNCOMMON).setEatTime(10).setStaminaRestore(25F).setShouldRepeatPenaltyCheck().setAlwaysEdible();
 		SWEETROLL_RAW = new ItemUnfinishedFood("sweetroll_raw").setMaxStackSize(64);
@@ -659,9 +658,9 @@ public class MineFantasyItems {
 		PIE_BERRY_COOKED = new ItemUnfinishedFood("pie_berry_cooked").setContainerItem(PIE_TRAY);
 		PIE_SHEPARD_COOKED = new ItemUnfinishedFood("pie_shepard_cooked").setContainerItem(PIE_TRAY);
 		PIE_PUMPKIN_COOKED = new ItemUnfinishedFood("pie_pumpkin_cooked").setContainerItem(PIE_TRAY);
-		SALT = new ItemComponentMFR("salt", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		SUGAR_POT = new ItemComponentMFR("sugar_pot", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
-		BOWL_WATER_SALT = new ItemComponentMFR("bowl_water_salt", Rarity.COMMON).setCreativeTab(MineFantasyTabs.tabFood);
+		SALT = new ItemComponentMFR("salt").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		SUGAR_POT = new ItemComponentMFR("sugar_pot").setCreativeTab(MineFantasyTabs.tabFood).setContainerItem(CLAY_POT);
+		BOWL_WATER_SALT = new ItemComponentMFR("bowl_water_salt").setCreativeTab(MineFantasyTabs.tabFood);
 		DOUGH = new ItemUnfinishedFood("dough").setMaxStackSize(64);
 		PASTRY = new ItemUnfinishedFood("pastry").setMaxStackSize(64);
 		RAW_BREAD = new ItemUnfinishedFood("raw_bread").setMaxStackSize(64);
@@ -1171,11 +1170,11 @@ public class MineFantasyItems {
 	}
 
 	public static void initComponent() {
-		TIMBER = new ItemWoodComponent("timber").setCustom(1, CustomMaterialType.WOOD_MATERIAL)
+		TIMBER = new ItemWoodComponent("timber").setCustom(1)
 				.setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK);
-		TIMBER_CUT = new ItemWoodComponent("timber_cut").setCustom(1, CustomMaterialType.WOOD_MATERIAL)
+		TIMBER_CUT = new ItemWoodComponent("timber_cut").setCustom(1)
 				.setStoragePlacement(Constants.StorageTextures.PLANK, Constants.StorageTextures.PLANK_CUT);
-		TIMBER_PANE = new ItemWoodComponent("timber_pane").setCustom(6, CustomMaterialType.WOOD_MATERIAL)
+		TIMBER_PANE = new ItemWoodComponent("timber_pane").setCustom(6)
 				.setStoragePlacement(Constants.StorageTextures.SHEET, Constants.StorageTextures.WOOD_PANE);
 		PERSISTENT_COMPONENT_FLAG = new ItemPersistentComponentMarker("persistent_component_flag");
 
@@ -1200,13 +1199,13 @@ public class MineFantasyItems {
 		TUNGSTEN_INGOT = new ItemBaseMFR("tungsten_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
 		OBSIDIAN_INGOT = new ItemBaseMFR("obsidian_ingot").setCreativeTab(MineFantasyTabs.tabMaterials);
 		COMPOSITE_ALLOY_INGOT = new ItemBaseMFR("composite_alloy_ingot", Rarity.UNCOMMON).setCreativeTab(MineFantasyTabs.tabMaterials);
-		BAR = new ItemMetalComponent("bar", 1F, CustomMaterialType.METAL_MATERIAL).setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
+		BAR = new ItemMetalComponent("bar", 1F).setStoragePlacement("bar", "bar").setCreativeTab(MineFantasyTabs.tabMaterials);
 
 		CLAY_POT = new ItemBowl("clay_pot").setStoragePlacement(Constants.StorageTextures.POT, Constants.StorageTextures.POT);
 		CLAY_POT_UNCOOKED = new ItemBaseMFR("clay_pot_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
 		INGOT_MOULD = new ItemComponentMFR("ingot_mould").setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.MOULD);
 		INGOT_MOULD_UNCOOKED = new ItemBaseMFR("ingot_mould_uncooked").setCreativeTab(MineFantasyTabs.tabMaterials);
-		PIE_TRAY_UNCOOKED = new ItemComponentMFR("pie_tray_uncooked", Rarity.COMMON);
+		PIE_TRAY_UNCOOKED = new ItemComponentMFR("pie_tray_uncooked");
 
 		VINE = new ItemBaseMFR("vine").setCreativeTab(MineFantasyTabs.tabMaterials);
 		SHARP_ROCK = new ItemBaseMFR("sharp_rock").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1253,7 +1252,7 @@ public class MineFantasyItems {
 		KAOLINITE_DUST = new ItemBaseMFR("kaolinite_dust").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
 		FIRECLAY = new ItemBaseMFR("fireclay").setCreativeTab(MineFantasyTabs.tabMaterials);
 		FIRECLAY_BRICK = new ItemBaseMFR("fireclay_brick").setCreativeTab(MineFantasyTabs.tabMaterials);
-		STRONG_BRICK = new ItemComponentMFR("strong_brick", Rarity.COMMON).setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.FIREBRICK);
+		STRONG_BRICK = new ItemComponentMFR("strong_brick").setStoragePlacement(Constants.StorageTextures.BAR, Constants.StorageTextures.FIREBRICK);
 
 		HIDE_SMALL = new ItemBaseMFR("hide_small").setCreativeTab(MineFantasyTabs.tabMaterials);
 		HIDE_MEDIUM = new ItemBaseMFR("hide_medium").setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1280,7 +1279,7 @@ public class MineFantasyItems {
 		HOT_ITEM = new ItemHeated();
 		
 		JUG_EMPTY = new ItemJug("empty", false).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG);
-		JUG_PLANT_OIL = new ItemComponentMFR("jug_plant_oil", Rarity.COMMON).setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_OIL).setContainerItem(JUG_EMPTY);
+		JUG_PLANT_OIL = new ItemComponentMFR("jug_plant_oil").setStoragePlacement(Constants.StorageTextures.JUG, Constants.StorageTextures.JUG_OIL).setContainerItem(JUG_EMPTY);
 
 		TALISMAN_LESSER = new ItemBaseMFR("talisman_lesser", Rarity.RARE).setCreativeTab(MineFantasyTabs.tabMaterials);
 		TALISMAN_GREATER = new ItemBaseMFR("talisman_greater", Rarity.EPIC).setCreativeTab(MineFantasyTabs.tabMaterials);
@@ -1315,17 +1314,17 @@ public class MineFantasyItems {
 		CROSSBOW_STRING_UNLOADED = new ItemCrossbowPart("crossbow_string_unloaded", "string_unloaded");
 		CROSSBOW_STRING_LOADED = new ItemCrossbowPart("crossbow_string_loaded", "string_load");
 
-		CHAIN_MESH = new ItemMetalComponent("chain_mesh", 1F, CustomMaterialType.METAL_MATERIAL).setStoragePlacement("sheet", "mail");
-		SCALE_MESH = new ItemMetalComponent("scale_mesh", 1F, CustomMaterialType.METAL_MATERIAL).setStoragePlacement("sheet", "scale");
-		SPLINT_MESH = new ItemMetalComponent("splint_mesh", 1F, CustomMaterialType.METAL_MATERIAL).setStoragePlacement("sheet", "splint");
-		PLATE = new ItemMetalComponent("plate", 2F, CustomMaterialType.METAL_MATERIAL).setStoragePlacement("sheet", "plate");
-		PLATE_HUGE = new ItemMetalComponent("plate_huge", 8F, CustomMaterialType.METAL_MATERIAL).setStoragePlacement("bigplate", "bigplate");
-		METAL_HUNK = new ItemMetalComponent("metal_hunk", 0.25F, CustomMaterialType.METAL_MATERIAL);
-		ARROWHEAD = new ItemMetalComponent("arrowhead", 1 / 4F, CustomMaterialType.METAL_MATERIAL);
-		BODKIN_HEAD = new ItemMetalComponent("bodkin_head", 1 / 4F, CustomMaterialType.METAL_MATERIAL);
-		BROAD_HEAD = new ItemMetalComponent("broad_head", 1 / 4F, CustomMaterialType.METAL_MATERIAL);
+		CHAIN_MESH = new ItemMetalComponent("chain_mesh", 1F).setStoragePlacement("sheet", "mail");
+		SCALE_MESH = new ItemMetalComponent("scale_mesh", 1F).setStoragePlacement("sheet", "scale");
+		SPLINT_MESH = new ItemMetalComponent("splint_mesh", 1F).setStoragePlacement("sheet", "splint");
+		PLATE = new ItemMetalComponent("plate", 2F).setStoragePlacement("sheet", "plate");
+		PLATE_HUGE = new ItemMetalComponent("plate_huge", 8F).setStoragePlacement("bigplate", "bigplate");
+		METAL_HUNK = new ItemMetalComponent("metal_hunk", 0.25F);
+		ARROWHEAD = new ItemMetalComponent("arrowhead", 1 / 4F);
+		BODKIN_HEAD = new ItemMetalComponent("bodkin_head", 1 / 4F);
+		BROAD_HEAD = new ItemMetalComponent("broad_head", 1 / 4F);
 
-		COGWORK_ARMOUR = new ItemMetalComponent("cogwork_armour", 30F, CustomMaterialType.METAL_MATERIAL).setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
+		COGWORK_ARMOUR = new ItemMetalComponent("cogwork_armour", 30F).setCanDamage().setCreativeTab(MineFantasyTabs.tabGadget).setMaxStackSize(1);
 
 		FLUX_POT = new ItemBaseMFR("flux_pot").setCreativeTab(MineFantasyTabs.tabMaterials).setContainerItem(CLAY_POT);
 		COAL_FLUX = new ItemBaseMFR("coal_flux").setCreativeTab(MineFantasyTabs.tabMaterials);

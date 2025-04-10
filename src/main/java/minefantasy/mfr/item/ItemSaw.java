@@ -2,13 +2,13 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -47,7 +47,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem, IClientRegister {
+public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToolMFR, IRackItem, IClientRegister, IMaterialDoubleComponent {
 	protected Rarity itemRarity;
 	private final float hitDamage;
 	private float baseDamage;
@@ -157,10 +157,6 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -205,7 +201,7 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {
@@ -225,6 +221,16 @@ public class ItemSaw extends ItemAxe implements IToolMaterial, IDamageType, IToo
 	public String getItemStackDisplayName(ItemStack item) {
 		String unlocalName = this.getUnlocalizedNameInefficiently(item) + ".name";
 		return CustomToolHelper.getLocalisedName(item, unlocalName);
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 	// ====================================================== CUSTOM END
 	// ==============================================================\\

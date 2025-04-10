@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockTrough;
 import minefantasy.mfr.material.CustomMaterial;
@@ -8,6 +9,7 @@ import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.tile.TileEntityTrough;
 import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -31,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
+public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock, IMaterialSingleComponent {
 	private Random rand = new Random();
 
 	public ItemBlockTrough(Block base) {
@@ -61,12 +63,8 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 		}
 		ArrayList<CustomMaterial> wood = CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL);
 		for (CustomMaterial customMat : wood) {
-			items.add(this.construct(customMat.getName()));
+			items.add(CustomToolHelper.constructMainSlot(this, customMat.getName()));
 		}
-	}
-
-	private ItemStack construct(String name) {
-		return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
 	}
 
 	@Override
@@ -111,17 +109,15 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock {
 			if (material != CustomMaterialRegistry.NONE) {
 				tier = material.getTier();
 			}
-			NBTTagCompound nbt = getNBT(item);
+			NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 			nbt.setInteger(BlockTrough.FILL_LEVEL, TileEntityTrough.getCapacity(tier) * TileEntityTrough.capacityScale);
 		}
 		player.swingArm(EnumHand.MAIN_HAND);
 
 	}
 
-	private NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 }

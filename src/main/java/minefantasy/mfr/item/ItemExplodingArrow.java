@@ -6,6 +6,7 @@ import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -93,5 +94,10 @@ public class ItemExplodingArrow extends ItemArrowMFR implements ISpecialSalvage 
 				new ItemStack(MineFantasyItems.BOMB_CASING_ARROW),
 				ItemBombComponent.getBombComponent("powder", ItemBomb.getPowder(item)),
 				ItemBombComponent.getBombComponent("filling", ItemBomb.getFilling(item)));
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.NONE;
 	}
 }

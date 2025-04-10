@@ -15,7 +15,7 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     },
     "F": {
       "item": "minecraft:feather"

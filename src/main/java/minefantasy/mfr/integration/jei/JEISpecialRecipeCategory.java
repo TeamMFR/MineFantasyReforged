@@ -6,15 +6,18 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
+import mezz.jei.gui.Focus;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerSpecial;
 import minefantasy.mfr.recipe.SpecialRecipeBase;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -97,19 +100,44 @@ public class JEISpecialRecipeCategory implements IRecipeCategory<JEISpecialRecip
 		// Init Special Slot
 		slots.init(25, false, 111, 28);
 
-		// Assign ingredients to slots
-		for (int j = 0; j < inputs.size(); j++) {
-			slots.set(j, inputs.get(j));
+		Focus<ItemStack> outputFocus = JEIIntegration.getFocus(recipeLayout, IFocus.Mode.OUTPUT);
+
+		if (AnvilRecipeBase.isCustomRecipe(recipeWrapper.getAnvilRecipe())){
+			// Assign ingredients to slots
+			for (int j = 0; j < inputs.size(); j++) {
+				List<ItemStack> slotStacks = inputs.get(j);
+				if (outputFocus != null && CustomToolHelper.hasAnyMaterial(outputFocus.getValue())) {
+					if (!slotStacks.isEmpty()) {
+						ItemStack slotStack = slotStacks.get(0).copy();
+						CustomToolHelper.tryDeconstruct(slotStack, outputFocus.getValue());
+						slots.set(j, slotStack);
+					}
+				}
+				else {
+					slots.set(j, slotStacks);
+				}
+			}
 		}
+		else {
+			// Assign ingredients to slots
+			for (int j = 0; j < inputs.size(); j++) {
+				slots.set(j, inputs.get(j));
+			}
+		}
+
 		// Assign outputs to slot
 		for (List<ItemStack> stacks : outputList) {
 			slots.set(24, stacks);
 		}
 
 		//Assign special to slot
-		for (ItemStack specialStack : recipeWrapper.recipe.getSpecialInput().getMatchingStacks()) {
+		for (ItemStack specialStack : recipeWrapper.getRecipe().getSpecialInput().getMatchingStacks()) {
 			slots.set(25, specialStack);
 		}
+
+		slots.addTooltipCallback((slotIndex, input, slotStack, tooltip) ->
+				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getAnvilRecipe().getIngredients(),
+						slotStack, tooltip, outputFocus, recipeWrapper.getAnvilRecipe().getAnvilRecipeOutput()));
 	}
 
 	/**

@@ -3,10 +3,12 @@ package minefantasy.mfr.item;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -43,7 +45,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, IClientRegister {
+public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, IMaterialSingleComponent, IClientRegister {
 	protected Rarity itemRarity;
 	private final int tier;
 	private float baseDamage;
@@ -102,10 +104,6 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main) {
-		return CustomToolHelper.construct(this, main, null);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -136,7 +134,7 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName()));
+					items.add(CustomToolHelper.constructMainSlot(this, customMat.getName()));
 				}
 			}
 		} else {
@@ -176,6 +174,17 @@ public class ItemNeedle extends ItemTool implements IToolMaterial, IToolMFR, ICl
 	@Override
 	public ToolMaterial getMaterial() {
 		return toolMaterial;
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		CustomMaterialType type = CustomMaterialType.METAL_MATERIAL;
+
+		if (toolMaterial == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
 	}
 
 	@Override

@@ -20,7 +20,7 @@
       "item": "minefantasyreforged:rivet"
     },
     "C": {
-      "item": "minefantasyreforged:chain_mesh"
+      "item": "#ALL_CHAIN_MESHES"
     },
     "S": {
       "item": "minefantasyreforged:strong_leather_chestplate"

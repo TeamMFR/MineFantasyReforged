@@ -16,7 +16,9 @@
   ],
   "key": {
     "S": {
-      "item": "minefantasyreforged:standard_hammer"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_hammer",
+      "material_type": "metal_material"
     },
     "T": {
       "item": "minefantasyreforged:thread"

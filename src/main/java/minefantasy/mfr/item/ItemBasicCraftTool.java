@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -10,6 +11,7 @@ import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.proxy.IClientRegister;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;
@@ -34,7 +36,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
+public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IMaterialSingleComponent, IClientRegister {
 	protected Rarity itemRarity;
 	private int tier;
 	private Tool toolType;
@@ -89,10 +91,6 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 		return this;
 	}
 
-	public ItemStack construct(String main) {
-		return CustomToolHelper.construct(this, main);
-	}
-
 	@Override
 	public int getMaxDamage(ItemStack stack) {
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
@@ -104,9 +102,9 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 			return;
 		}
 		if (isCustom) {
-			items.add(this.construct(MineFantasyMaterials.Names.OAK_WOOD));
-			items.add(this.construct(MineFantasyMaterials.Names.IRONBARK_WOOD));
-			items.add(this.construct(MineFantasyMaterials.Names.EBONY_WOOD));
+			items.add(CustomToolHelper.constructMainSlot(this, MineFantasyMaterials.Names.OAK_WOOD));
+			items.add(CustomToolHelper.constructMainSlot(this, MineFantasyMaterials.Names.IRONBARK_WOOD));
+			items.add(CustomToolHelper.constructMainSlot(this, MineFantasyMaterials.Names.EBONY_WOOD));
 		} else {
 			super.getSubItems(tab, items);
 		}
@@ -137,6 +135,11 @@ public class ItemBasicCraftTool extends ItemTool implements IToolMaterial, ITool
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 
 	@Override

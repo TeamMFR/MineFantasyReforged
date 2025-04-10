@@ -2,6 +2,7 @@ package minefantasy.mfr.mechanics;
 
 import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.block.BlockAmmoBox;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -55,11 +56,11 @@ public class AmmoMechanics {
 	public static void putAmmoOnFirearm(ItemStack weapon, ItemStack ammo) {
 		NBTTagCompound save = new NBTTagCompound();
 		if (ammo.isEmpty()) {
-			getNBT(weapon).removeTag(arrowOnBowNBT);
+			NbtUtils.getOrCreateNBT(weapon).removeTag(arrowOnBowNBT);
 			return;
 		}
 		ammo.writeToNBT(save);
-		getNBT(weapon).setTag(arrowOnBowNBT, save);
+		NbtUtils.getOrCreateNBT(weapon).setTag(arrowOnBowNBT, save);
 	}
 
 	/**
@@ -106,7 +107,7 @@ public class AmmoMechanics {
 			if (ammo.getCount() > 0) {
 				setAmmo(bow, ammo);
 			} else {
-				getNBT(bow).removeTag(savedAmmoNBT);
+				NbtUtils.getOrCreateNBT(bow).removeTag(savedAmmoNBT);
 			}
 		}
 	}
@@ -128,7 +129,7 @@ public class AmmoMechanics {
 	 * Sets the ammo for the bow
 	 */
 	public static void setAmmo(ItemStack bow, ItemStack ammo) {
-		NBTTagCompound nbt = getNBT(bow);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(bow);
 
 		if (!ammo.isEmpty()) {
 			NBTTagCompound save = new NBTTagCompound();
@@ -139,15 +140,8 @@ public class AmmoMechanics {
 		}
 	}
 
-	public static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
-	}
-
 	public static void removeAmmo(ItemStack bow) {
-		getNBT(bow).removeTag(savedAmmoNBT);
+		NbtUtils.getOrCreateNBT(bow).removeTag(savedAmmoNBT);
 	}
 
 	public static boolean isDepleted(ItemStack firearm) {
@@ -164,7 +158,7 @@ public class AmmoMechanics {
 	}
 
 	public static void setGunAmmoCount(ItemStack item, int ammo) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setInteger(ammoNBT, ammo);
 	}
 
@@ -172,7 +166,7 @@ public class AmmoMechanics {
 		if (getArrowOnBow(item).isEmpty()) {
 			return 0;
 		}
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 
 		if (nbt.hasKey(ammoNBT)) {
 			return nbt.getInteger(ammoNBT);

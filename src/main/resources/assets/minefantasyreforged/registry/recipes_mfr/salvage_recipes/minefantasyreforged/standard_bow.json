@@ -5,16 +5,18 @@
 	},
 	"outputs": [
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:metal_hunk",
+			"material_type": "metal_material",
 			"count": 2
 		},
 		{
 			"item": "minefantasyreforged:leather_strip"
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
 			"count": 4
 		},
 		{

@@ -8,22 +8,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public class CarpenterShapedCustomMaterialRecipe extends CarpenterRecipeBase {
 	protected int width;
 	protected int height;
+	protected boolean tierModifyOutputCount;
 
 	public CarpenterShapedCustomMaterialRecipe(
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp, String toolType, SoundEvent soundOfCraft,
-			String research, Skill skillUsed,
+			String research, Skill skillUsed, boolean tierModifyOutputCount,
 			int width, int height) {
 		super(output, inputs, toolTier, carpenterTier, craftTime,
 				skillXp, vanillaXp, toolType, soundOfCraft, research, skillUsed);
 		this.width = width;
 		this.height = height;
+		this.tierModifyOutputCount = tierModifyOutputCount;
 	}
 
 	/**
@@ -136,18 +139,32 @@ public class CarpenterShapedCustomMaterialRecipe extends CarpenterRecipeBase {
 				}
 			}
 		}
-		if (metal != null) {
+		if (metal != null && !tierModifyOutputCount) {
 			CustomMaterialRegistry.addMaterial(result, CustomToolHelper.slot_main, metal);
 		}
-		if (wood != null) {
+		if (wood != null && !tierModifyOutputCount) {
 			CustomMaterialRegistry.addMaterial(result, metal == null ? CustomToolHelper.slot_main : CustomToolHelper.slot_haft,
 					wood);
 		}
+
+		if (tierModifyOutputCount) {
+			int modifiedCount = MathHelper.clamp(
+					CustomMaterialRegistry.getMaterial(wood).getTier() * result.getCount(),
+					1,
+					result.getMaxStackSize());
+			result.setCount(modifiedCount);
+		}
+
 		return result;
 	}
 
 	public boolean useCustomTiers() {
 		return true;
+	}
+
+	@Override
+	public boolean isTierModifyOutputCount() {
+		return tierModifyOutputCount;
 	}
 
 	/**

@@ -6,6 +6,7 @@ import minefantasy.mfr.api.crafting.ISpecialSalvage;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityBomb;
 import minefantasy.mfr.init.MineFantasyTabs;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -114,17 +115,17 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	public static void setSticky(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setBoolean("stickyBomb", true);
 	}
 
 	public static void setFuse(ItemStack item, String fuse) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(fuseNBT, fuse);
 	}
 
 	public static String getFuse(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (item.getItem() instanceof ItemBomb) {
 			return ((ItemBomb) item.getItem()).getItemFuse(nbt.getString(fuseNBT));
 		}
@@ -132,12 +133,12 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	}
 
 	public static void setPowder(ItemStack item, String powder) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(powderNBT, powder);
 	}
 
 	public static String getPowder(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (item.getItem() instanceof ItemBomb) {
 			return ((ItemBomb) item.getItem()).getItemPowder(nbt.getString(powderNBT));
 		}
@@ -148,12 +149,12 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	 * 0 = Basic 1 = Shrapnel 2 = Fire
 	 */
 	public static void setFilling(ItemStack item, String filling) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(fillingNBT, filling);
 	}
 
 	public static String getFilling(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (item.getItem() instanceof ItemBomb) {
 			return ((ItemBomb) item.getItem()).getItemFilling(nbt.getString(fillingNBT));
 		}
@@ -164,22 +165,16 @@ public class ItemBomb extends ItemBaseMFR implements ISpecialSalvage, IAmmo {
 	 * 0 = Ceramic 1 = Iron
 	 */
 	public static void setCasing(ItemStack item, String casing) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setString(casingNBT, casing);
 	}
 
 	public static String getCasing(ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (item.getItem() instanceof ItemBomb) {
 			return ((ItemBomb) item.getItem()).getItemCasing(nbt.getString(casingNBT));
 		}
 		return nbt.getString(casingNBT);
-	}
-
-	public static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
 	}
 
 	public static ItemStack createExplosive(Item item, String casing, String filling, String fuse, String powder, int stackSize, boolean sticky) {

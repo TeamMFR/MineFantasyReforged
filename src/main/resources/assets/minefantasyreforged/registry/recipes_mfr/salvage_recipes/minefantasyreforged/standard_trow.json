@@ -5,7 +5,7 @@
 	},
 	"outputs": [
 		{
-			"item": "minefantasyreforged:timber"
+			"item": "#ALL_TIMBERS"
 		},
 		{
 			"item": "minefantasyreforged:rivet"
@@ -16,7 +16,7 @@
 			"count": 2
 		},
 		{
-			"item": "minefantasyreforged:bar"
+			"item": "#ALL_BARS"
 		}
 	],
 	"shared": [

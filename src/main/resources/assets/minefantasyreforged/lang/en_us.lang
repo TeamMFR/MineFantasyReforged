@@ -338,6 +338,8 @@ integration.jei.category.minefantasyreforged:kitchen_bench=MineFantasy Kitchen B
 integration.jei.category.minefantasyreforged:salvage=MineFantasy Salvage
 integration.jei.category.minefantasyreforged:transformation=MineFantasy Transformation
 integration.jei.category.minefantasyreforged:special=MineFantasy Special Anvil
+integration.jei.tooltip.recipe.any.material=Accepts: %s
+integration.jei.tooltip.recipe.except.material=except %s
 item.flux.desc_extended=Flux is an important purification agent for metalworks, primarily this is used for the treatment of metals in the forging process and some alloy creation. The best source of flux is limestone.
 
 item.bowl_water_salt.desc_extended=Salt Water is used for crafting Salt. You can gather Salt Water by right-clicking a Clay Pot on water that is in an Ocean or Deep Ocean biome.

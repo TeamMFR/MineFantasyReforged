@@ -3,7 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.archery.IArrowHandler;
 import minefantasy.mfr.api.archery.ISpecialBow;
 import minefantasy.mfr.config.ConfigWeapon;
-import minefantasy.mfr.util.Utils;
+import minefantasy.mfr.util.ArrowUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemSpectralArrow;
@@ -17,7 +17,7 @@ public class ArrowHandlerVanilla implements IArrowHandler {
 
 	@Override
 	public EntityArrow onFireArrow(EntityArrow entityArrow, ItemStack arrow, ItemStack bow, float charge, EntityPlayer player) {
-		if (!Utils.isVanillaArrow(arrow)) {
+		if (!ArrowUtils.isVanillaArrow(arrow)) {
 			return null;
 		}
 

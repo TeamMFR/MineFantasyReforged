@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.api.stamina.IHeldStaminaItem;
 import minefantasy.mfr.api.stamina.IStaminaWeapon;
@@ -38,6 +39,7 @@ import minefantasy.mfr.tile.TileEntityRack;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.TacticalManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -81,7 +83,8 @@ import java.util.Random;
 //Made this extend the sword class (allows them to be enchanted)
 public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign, IPowerAttack, IDamageType,
 		IKnockbackWeapon, IHeldStaminaItem, IStaminaWeapon, IToolMaterial,
-		IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass, IRackItem, IClientRegister {
+		IWeightedWeapon, IParryable, ISpecialEffect, IDamageModifier, IWeaponClass,
+		IRackItem, IClientRegister, IMaterialDoubleComponent {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.#");
 	public static float axeAPModifier = -0.1F;
 	protected static float speedModHeavy = -0.4F;
@@ -181,16 +184,9 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 	}
 
 	public static void setParry(ItemStack item, int i) {
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 
 		nbt.setInteger("ParryAnimation", i);
-	}
-
-	public static NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	public static boolean canPerformAbility(EntityLivingBase user, float points) {
@@ -594,7 +590,7 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 			return;
@@ -744,10 +740,6 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -773,6 +765,28 @@ public abstract class ItemWeaponMFR extends ItemSword implements ISpecialDesign,
 			return true;
 		}
 		return super.canContinueUsing(oldStack, newStack);
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.METAL_MATERIAL;
+
+		if (material == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.WOOD_MATERIAL;
+
+		if (material == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
 	}
 
 	@Override

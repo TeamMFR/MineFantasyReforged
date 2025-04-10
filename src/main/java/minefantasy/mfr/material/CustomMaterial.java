@@ -22,41 +22,41 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 	/**
 	 * Base threshold for armour rating
 	 */
-	private final float hardness;
+	private final Float hardness;
 	/**
 	 * The Modifier for durability (1pt per 250 uses)
 	 */
-	private final float durability;
+	private final Float durability;
 	/**
 	 * used for bow power.. >1 weakens blunt prot, <1 weakens piercing prot
 	 */
-	private final float flexibility;
+	private final Float flexibility;
 	/**
 	 * The Efficiency modifier (Like ToolMaterial) Also does damage
 	 */
-	private final float sharpness;
+	private final Float sharpness;
 	/**
 	 * The modifier to resist elements like fire and corrosion)
 	 */
-	private final float resistance;
+	private final Float resistance;
 	/**
 	 * The weight Kg/U (Kilogram per unit)
 	 */
-	private final float density;
-	private final int tier;
+	private final Float density;
+	private final Integer tier;
 	private final Rarity rarity;
-	private final int enchantability;
-	private final int crafterTier;
+	private final Integer enchantability;
+	private final Integer crafterTier;
 	private final Integer crafterAnvilTier;
 	private final Float craftTimeModifier;
 	private final Integer meltingPoint;
 	private Float[] armourProtection; // TODO: consider making this property into a typed class
-	private final boolean unbreakable;
+	private final Boolean unbreakable;
 
-	public CustomMaterial(String name, CustomMaterialType type, Ingredient materialIngredient, int[] colourRGB, float hardness,
-			float durability, float flexibility, float sharpness, float resistance, float density, int tier, Rarity rarity,
-			int enchantability, int crafterTier, Integer crafterAnvilTier, Float craftTimeModifier, Integer meltingPoint,
-			Float[] armourProtection, boolean unbreakable) {
+	public CustomMaterial(String name, CustomMaterialType type, Ingredient materialIngredient, int[] colourRGB, Float hardness,
+			Float durability, Float flexibility, Float sharpness, Float resistance, Float density, Integer tier, Rarity rarity,
+			Integer enchantability, Integer crafterTier, Integer crafterAnvilTier, Float craftTimeModifier, Integer meltingPoint,
+			Float[] armourProtection, Boolean unbreakable) {
 		this.name = name;
 		this.type = type;
 		this.materialIngredient = materialIngredient;
@@ -108,31 +108,31 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return (colourRGB[0] << 16) + (colourRGB[1] << 8) + colourRGB[2];
 	}
 
-	public float getHardness() {
+	public Float getHardness() {
 		return hardness;
 	}
 
-	public float getDurability() {
+	public Float getDurability() {
 		return durability;
 	}
 
-	public float getFlexibility() {
+	public Float getFlexibility() {
 		return flexibility;
 	}
 
-	public float getSharpness() {
+	public Float getSharpness() {
 		return sharpness;
 	}
 
-	public float getResistance() {
+	public Float getResistance() {
 		return resistance;
 	}
 
-	public float getDensity() {
+	public Float getDensity() {
 		return density;
 	}
 
-	public int getTier() {
+	public Integer getTier() {
 		return tier;
 	}
 
@@ -140,19 +140,19 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return rarity;
 	}
 
-	public int getEnchantability() {
+	public Integer getEnchantability() {
 		return enchantability;
 	}
 
-	public int getCrafterTier() {
+	public Integer getCrafterTier() {
 		return crafterTier;
 	}
 
-	public int getCrafterAnvilTier() {
+	public Integer getCrafterAnvilTier() {
 		return crafterAnvilTier;
 	}
 
-	public float getCraftTimeModifier() {
+	public Float getCraftTimeModifier() {
 		return craftTimeModifier;
 	}
 
@@ -168,7 +168,7 @@ public class CustomMaterial extends IForgeRegistryEntry.Impl<CustomMaterial>{
 		return armourProtection;
 	}
 
-	public boolean isUnbreakable() {
+	public Boolean isUnbreakable() {
 		return unbreakable;
 	}
 

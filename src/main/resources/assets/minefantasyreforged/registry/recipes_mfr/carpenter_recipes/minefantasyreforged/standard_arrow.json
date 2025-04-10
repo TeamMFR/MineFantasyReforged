@@ -18,7 +18,9 @@
       "item": "minefantasyreforged:fletching"
     },
     "A": {
-      "item": "minefantasyreforged:arrowhead"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:arrowhead",
+      "material_type": "metal_material"
     }
   },
   "result": {

@@ -1,11 +1,11 @@
 package minefantasy.mfr.item;
 
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -38,7 +38,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister {
+public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR, IClientRegister, IMaterialDoubleComponent {
 	protected Rarity itemRarity;
 	private final ToolMaterial toolMaterial;
 	private final int tier;
@@ -85,10 +85,6 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -111,6 +107,16 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 	}
 
 	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
+	}
+
+	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (!isInCreativeTab(tab)) {
 			return;
@@ -119,7 +125,7 @@ public class ItemShearsMFR extends ItemShears implements IToolMaterial, IToolMFR
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {

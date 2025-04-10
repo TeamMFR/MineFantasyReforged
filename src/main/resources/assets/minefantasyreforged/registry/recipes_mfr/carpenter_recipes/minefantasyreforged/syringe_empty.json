@@ -20,7 +20,9 @@
       "item": "minefantasyreforged:steel_tube"
     },
     "T": {
-      "item": "minefantasyreforged:standard_needle"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_needle",
+      "material_type": "metal_material"
     },
     "E": {
       "item": "minefantasyreforged:engin_anvil_tools",

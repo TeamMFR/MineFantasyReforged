@@ -66,7 +66,7 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 
 	protected boolean modifyTiers(AnvilCraftMatrix matrix, String tier, boolean isMain) {
 		CustomMaterial material = CustomMaterialRegistry.getMaterial(tier);
-		if (material != CustomMaterialRegistry.NONE && toolType.hasTiers()) {
+		if (material != CustomMaterialRegistry.NONE) {
 			int newTier = toolTier < 0 ? material.getCrafterTier() : toolTier;
 			int newAnvil = anvilTier < 0 ? material.getCrafterAnvilTier() : anvilTier;
 			matrix.modifyTier(newTier, newAnvil, (int) (craftTime * material.getCraftTimeModifier()));
@@ -152,5 +152,10 @@ public abstract class AnvilRecipeBase extends IForgeRegistryEntry.Impl<AnvilReci
 
 	public boolean isTierModifyOutputCount() {
 		return false;
+	}
+
+	public static boolean isCustomRecipe(AnvilRecipeBase recipe) {
+		return recipe instanceof AnvilShapedCustomMaterialRecipe
+				|| recipe instanceof AnvilShapelessCustomMaterialRecipe;
 	}
 }

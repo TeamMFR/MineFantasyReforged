@@ -8,8 +8,9 @@
 			"item": "minefantasyreforged:strong_leather_chestplate"
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:chain_mesh",
+			"material_type": "metal_material",
 			"count": 6
 		},
 		{

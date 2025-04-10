@@ -106,7 +106,7 @@ public class TileEntityCarpenter extends TileEntityBase implements ICarpenter {
 
 		Tool tool = ToolHelper.getToolTypeFromStack(user.getHeldItemMainhand());
 		int toolTier = ToolHelper.getCrafterTier(user.getHeldItemMainhand());
-		if (!(tool == Tool.OTHER)) {
+		if (tool != Tool.OTHER) {
 			if (!user.getHeldItemMainhand().isEmpty()) {
 				user.getHeldItemMainhand().damageItem(1, user);
 				if (user.getHeldItemMainhand().getItemDamage() >= user.getHeldItemMainhand().getMaxDamage()) {

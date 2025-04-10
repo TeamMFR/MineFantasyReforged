@@ -10,12 +10,13 @@
 			"count": 2
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:bar",
+			"material_type": "metal_material",
 			"count": 3
 		},
 		{
-			"item": "minefantasyreforged:timber"
+			"item": "#ALL_TIMBERS"
 		}
 	],
 	"shared": [

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JEIRoastRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final RoastRecipeBase recipe;
+	private final RoastRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
 	public JEIRoastRecipe(RoastRecipeBase recipe, IStackHelper stackHelper) {
@@ -29,8 +29,8 @@ public class JEIRoastRecipe implements IRecipeWrapper {
 
 	@Override
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
-		String max = recipe.getMaxTemperature() + "℃";
-		String min = recipe.getMinTemperature() + "℃";
+		String max = recipe.getMaxTemperature() + "C";
+		String min = recipe.getMinTemperature() + "C";
 		int maxAdjust = max.length() > 4 ? -1 : 2;
 		int minAdjust = min.length() > 4 ? -1 : 2;
 
@@ -48,5 +48,9 @@ public class JEIRoastRecipe implements IRecipeWrapper {
 	@Override
 	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
 		return false;
+	}
+
+	public RoastRecipeBase getRecipe() {
+		return recipe;
 	}
 }

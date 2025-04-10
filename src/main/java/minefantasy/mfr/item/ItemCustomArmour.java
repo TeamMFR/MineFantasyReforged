@@ -117,69 +117,69 @@ public class ItemCustomArmour extends ItemArmourMFR {
 	}
 
 	public static void addSuits(List<ItemStack> list, String material) {
-		list.add(MineFantasyItems.STANDARD_CHAIN_HELMET.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_LEGGINGS.construct(material));
-		list.add(MineFantasyItems.STANDARD_CHAIN_BOOTS.construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_BOOTS, material));
 
-		list.add(MineFantasyItems.STANDARD_SCALE_HELMET.construct(material));
-		list.add(MineFantasyItems.STANDARD_SCALE_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.STANDARD_SCALE_LEGGINGS.construct(material));
-		list.add((MineFantasyItems.STANDARD_SCALE_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SCALE_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SCALE_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SCALE_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SCALE_BOOTS, material));
 
-		list.add((MineFantasyItems.STANDARD_SPLINT_HELMET).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.STANDARD_SPLINT_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SPLINT_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SPLINT_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SPLINT_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_SPLINT_BOOTS, material));
 
-		list.add((MineFantasyItems.STANDARD_PLATE_HELMET).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.STANDARD_PLATE_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_BOOTS, material));
 	}
 
 	public static void addDragonforgedSuits(List<ItemStack> list, String material) {
-		list.add(MineFantasyItems.DRAGONFORGED_CHAIN_HELMET.construct(material));
-		list.add(MineFantasyItems.DRAGONFORGED_CHAIN_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.DRAGONFORGED_CHAIN_LEGGINGS.construct(material));
-		list.add(MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS.construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_CHAIN_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_CHAIN_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_CHAIN_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_CHAIN_BOOTS, material));
 
-		list.add(MineFantasyItems.DRAGONFORGED_SCALE_HELMET.construct(material));
-		list.add(MineFantasyItems.DRAGONFORGED_SCALE_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.DRAGONFORGED_SCALE_LEGGINGS.construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_SCALE_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_SCALE_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_SCALE_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_SCALE_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_SCALE_BOOTS), material));
 
-		list.add((MineFantasyItems.DRAGONFORGED_SPLINT_HELMET).construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_SPLINT_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_SPLINT_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_SPLINT_HELMET), material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_SPLINT_CHESTPLATE), material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_SPLINT_LEGGINGS), material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_SPLINT_BOOTS), material));
 
-		list.add((MineFantasyItems.DRAGONFORGED_PLATE_HELMET).construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_PLATE_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_PLATE_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.DRAGONFORGED_PLATE_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_PLATE_HELMET), material));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_PLATE_CHESTPLATE), material));
+		list.add((CustomToolHelper.constructMainSlot(MineFantasyItems.DRAGONFORGED_PLATE_LEGGINGS, material)));
+		list.add(CustomToolHelper.constructMainSlot((MineFantasyItems.DRAGONFORGED_PLATE_BOOTS), material));
 	}
 
 	public static void addOrnateSuits(List<ItemStack> list, String material) {
-		list.add(MineFantasyItems.ORNATE_CHAIN_HELMET.construct(material));
-		list.add(MineFantasyItems.ORNATE_CHAIN_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.ORNATE_CHAIN_LEGGINGS.construct(material));
-		list.add(MineFantasyItems.ORNATE_CHAIN_BOOTS.construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_CHAIN_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_CHAIN_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_CHAIN_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_CHAIN_BOOTS, material));
 
-		list.add(MineFantasyItems.ORNATE_SCALE_HELMET.construct(material));
-		list.add(MineFantasyItems.ORNATE_SCALE_CHESTPLATE.construct(material));
-		list.add(MineFantasyItems.ORNATE_SCALE_LEGGINGS.construct(material));
-		list.add((MineFantasyItems.ORNATE_SCALE_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SCALE_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SCALE_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SCALE_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SCALE_BOOTS, material));
 
-		list.add((MineFantasyItems.ORNATE_SPLINT_HELMET).construct(material));
-		list.add((MineFantasyItems.ORNATE_SPLINT_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.ORNATE_SPLINT_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.ORNATE_SPLINT_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SPLINT_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SPLINT_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SPLINT_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_SPLINT_BOOTS, material));
 
-		list.add((MineFantasyItems.ORNATE_PLATE_HELMET).construct(material));
-		list.add((MineFantasyItems.ORNATE_PLATE_CHESTPLATE).construct(material));
-		list.add((MineFantasyItems.ORNATE_PLATE_LEGGINGS).construct(material));
-		list.add((MineFantasyItems.ORNATE_PLATE_BOOTS).construct(material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_PLATE_HELMET, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_PLATE_CHESTPLATE, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_PLATE_LEGGINGS, material));
+		list.add(CustomToolHelper.constructMainSlot(MineFantasyItems.ORNATE_PLATE_BOOTS, material));
 	}
 
 
@@ -203,6 +203,11 @@ public class ItemCustomArmour extends ItemArmourMFR {
 
 	public boolean isCustom() {
 		return true;
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
 	}
 
 	@Override

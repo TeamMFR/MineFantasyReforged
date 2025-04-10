@@ -14,7 +14,7 @@ import java.util.List;
 
 public class JEIAlloyRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected final AlloyRecipeBase recipe;
+	private final AlloyRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
 	public JEIAlloyRecipe(AlloyRecipeBase recipe, IStackHelper stackHelper) {
@@ -47,5 +47,9 @@ public class JEIAlloyRecipe implements IRecipeWrapper {
 	@Override
 	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
 		return false;
+	}
+
+	public AlloyRecipeBase getRecipe() {
+		return recipe;
 	}
 }

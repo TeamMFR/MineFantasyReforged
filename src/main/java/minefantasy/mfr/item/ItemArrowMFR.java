@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IArrowMFR;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.entity.EntityArrowMFR;
 import minefantasy.mfr.init.MineFantasyTabs;
@@ -41,7 +42,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClientRegister {
+public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IMaterialSingleComponent, IClientRegister {
 	public static final DecimalFormat decimal_format = new DecimalFormat("#.##");
 	protected float damage;
 	protected String arrowName;
@@ -184,10 +185,6 @@ public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClient
 		return design;
 	}
 
-	public ItemStack construct(String main) {
-		return CustomToolHelper.construct(this, main, null);
-	}
-
 	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (!isInCreativeTab(tab)) {
@@ -197,7 +194,7 @@ public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClient
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName()));
+					items.add(CustomToolHelper.constructMainSlot(this, customMat.getName()));
 				}
 			}
 		}
@@ -223,6 +220,11 @@ public class ItemArrowMFR extends ItemArrow implements IArrowMFR, IAmmo, IClient
 	public float getBreakChance(Entity entityArrow, ItemStack arrow) {
 		float maxUses = CustomToolHelper.getMaxDamage(arrow, ToolMaterial.WOOD.getMaxUses());
 		return 1F / (maxUses / 150);
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
 	}
 
 	@Override

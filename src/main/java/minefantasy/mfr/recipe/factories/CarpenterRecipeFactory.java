@@ -83,6 +83,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
+		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
@@ -92,7 +93,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterShapelessCustomMaterialRecipe(
 				result, ingredients, tool_tier, block_tier, craft_time,
 				skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill);
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, tierModifyOutputCount);
 	}
 
 	private CarpenterRecipeBase parseShapedCustomMaterial(JsonContext context, JsonObject json) {
@@ -106,6 +107,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		int craft_time = JsonUtils.getInt(json, "craft_time", 0);
 		int tool_tier = JsonUtils.getInt(json, "tool_tier", 0);
 		int block_tier = JsonUtils.getInt(json, "block_tier", -1);
+		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
 		SoundEvent soundEvent = SoundEvent.REGISTRY.getObject(new ResourceLocation(sound));
 		handleSoundError(sound, soundEvent, recipe.getRecipeOutput());
@@ -113,7 +115,7 @@ public class CarpenterRecipeFactory implements IRecipeMFRFactory<CarpenterRecipe
 		return new CarpenterShapedCustomMaterialRecipe(
 				recipe.getRecipeOutput(), recipe.getIngredients(),
 				tool_tier, block_tier, craft_time, skillXp, vanillaXp, tool_type,
-				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill,
+				SoundEvent.REGISTRY.getObject(new ResourceLocation(sound)), research, skill, tierModifyOutputCount,
 				recipe.getRecipeWidth(), recipe.getRecipeHeight());
 	}
 

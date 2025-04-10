@@ -5,13 +5,15 @@
 	},
 	"outputs": [
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:plate_huge",
+			"material_type": "metal_material",
 			"count": 6
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:plate",
+			"material_type": "metal_material",
 			"count": 6
 		}
 	]

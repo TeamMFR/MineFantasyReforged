@@ -9,14 +9,14 @@
   "skill_xp": 0,
   "vanilla_xp": 0.2,
   "output_hot": true,
-  "tierModifyOutputCount": true,
+  "tier_modify_output_count": true,
   "pattern": [
     "B B",
     " B "
   ],
   "key": {
     "B": {
-      "item": "minefantasyreforged:bar"
+      "item": "#ALL_BARS"
     }
   },
   "result": {

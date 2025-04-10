@@ -3,9 +3,9 @@ package minefantasy.mfr.mechanics;
 import minefantasy.mfr.config.ConfigMobs;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyMaterials;
-import minefantasy.mfr.item.ItemCustomArmour;
 import minefantasy.mfr.item.ItemWeaponMFR;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.XSTRandom;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -42,7 +42,7 @@ public class MonsterUpgrader {
 					giveEntityWeapon(mob, MineFantasyMaterials.Names.ENCRUSTED, random.nextInt(8));
 				} else if (ConfigMobs.swordSkeleton && random.nextInt(3) == 0) {
 					mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-							MineFantasyItems.STANDARD_SWORD.construct(MineFantasyMaterials.Names.BRONZE, MineFantasyMaterials.Names.OAK_WOOD));
+							CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_SWORD, MineFantasyMaterials.Names.BRONZE));
 					((AbstractSkeleton) mob).setCombatTask();
 				}
 			} else if (mob instanceof EntityZombie) {
@@ -116,7 +116,7 @@ public class MonsterUpgrader {
 		}
 		mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 		mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-				MineFantasyItems.STANDARD_GREATSWORD.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
+				CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_GREATSWORD, tier));
 		setArmour(mob, 1, tier);
 		mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2F);
 		mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -124,10 +124,10 @@ public class MonsterUpgrader {
 
 	private void setArmour(EntityLivingBase mob, int id, String tier) {
 		if (id == 1) {
-			ItemStack boots = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_BOOTS).construct(tier);
-			ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_LEGGINGS).construct(tier);
-			ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_CHESTPLATE).construct(tier);
-			ItemStack helmet = ((ItemCustomArmour) MineFantasyItems.STANDARD_PLATE_HELMET).construct(tier);
+			ItemStack boots = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_BOOTS, tier);
+			ItemStack legs = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_LEGGINGS, tier);
+			ItemStack chest = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_CHESTPLATE, tier);
+			ItemStack helmet = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_PLATE_HELMET, tier);
 
 			if (!boots.isEmpty())
 				mob.setItemStackToSlot(EntityEquipmentSlot.FEET, boots);
@@ -140,10 +140,10 @@ public class MonsterUpgrader {
 			return;
 		}
 
-		ItemStack boots = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_BOOTS).construct(tier);
-		ItemStack legs = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_LEGGINGS).construct(tier);
-		ItemStack chest = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_CHESTPLATE).construct(tier);
-		ItemStack helmet = ((ItemCustomArmour) MineFantasyItems.STANDARD_CHAIN_HELMET).construct(tier);
+		ItemStack boots = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_BOOTS, tier);
+		ItemStack legs = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_LEGGINGS, tier);
+		ItemStack chest = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_CHESTPLATE, tier);
+		ItemStack helmet = CustomToolHelper.constructMainSlot(MineFantasyItems.STANDARD_CHAIN_HELMET, tier);
 
 		if (!boots.isEmpty())
 			mob.setItemStackToSlot(EntityEquipmentSlot.FEET, boots);
@@ -166,7 +166,7 @@ public class MonsterUpgrader {
 		}
 		mob.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0F);
 		mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
-				MineFantasyItems.STANDARD_WARAXE.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
+				CustomToolHelper.constructWithDefaultWood(MineFantasyItems.STANDARD_WARAXE, tier));
 		setArmour(mob, 0, tier);
 		mob.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.35F);
 		mob.getEntityData().setInteger("MF_LootDrop", lootId);
@@ -194,7 +194,8 @@ public class MonsterUpgrader {
 		}
 
 		if (mob != null && weapon != null) {
-			mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, weapon.construct(tier, MineFantasyMaterials.Names.OAK_WOOD));
+			mob.setItemStackToSlot(EntityEquipmentSlot.MAINHAND,
+					CustomToolHelper.constructWithDefaultWood(weapon, tier));
 		}
 	}
 

@@ -16,7 +16,7 @@
     ],
     "key": {
         "B": {
-            "item": "minefantasyreforged:bar"
+            "item": "#ALL_BARS"
         }
     },
     "_comment_": "This is merely a dummy output item",

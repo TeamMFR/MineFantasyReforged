@@ -5,12 +5,14 @@ import minefantasy.mfr.api.armour.ArmourDesign;
 import minefantasy.mfr.api.armour.IArmourMFR;
 import minefantasy.mfr.api.armour.IArmourRating;
 import minefantasy.mfr.api.armour.ISpecialArmourMFR;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.config.ConfigArmour;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.material.ArmorMaterialMFR;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
@@ -34,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmourMFR, IArmourRating, ISpecialArmourMFR, IClientRegister {
+public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmourMFR, IArmourRating, ISpecialArmourMFR, IClientRegister, IMaterialSingleComponent {
 
 	public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.#");
 	public static ArmorMaterial baseMaterial = EnumHelper.addArmorMaterial("MF Armour Base", "MFR_armour_base_texture", 0, new int[] {2, 6, 5, 2}, 0, SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0);
@@ -294,6 +296,11 @@ public class ItemArmourBaseMFR extends ItemArmor implements ISpecialArmor, IArmo
 	@Override
 	public float getPieceWeight(ItemStack item, EntityEquipmentSlot slot) {
 		return armourWeight * ArmourCalculator.sizes[slot.getIndex()];
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
 	}
 
 	@Override

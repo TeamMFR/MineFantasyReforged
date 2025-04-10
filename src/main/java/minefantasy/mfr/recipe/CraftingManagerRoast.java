@@ -83,7 +83,7 @@ public class CraftingManagerRoast extends CraftingManagerBase<RoastRecipeBase> {
 			}
 		}
 
-		if (ConfigCrafting.canCookBasics && !isOven) {
+		if (ConfigCrafting.canCookBasics) {
 			ItemStack output = FurnaceRecipes.instance().getSmeltingResult(input);
 			if (!output.isEmpty() && output.getItem() instanceof ItemFood) {
 

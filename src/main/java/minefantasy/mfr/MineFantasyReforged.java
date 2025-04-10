@@ -16,6 +16,7 @@ import minefantasy.mfr.config.ConfigStamina;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.config.ConfigWeapon;
 import minefantasy.mfr.config.ConfigWorldGen;
+import minefantasy.mfr.data.CapabilityItemMultiUse;
 import minefantasy.mfr.data.PlayerData;
 import minefantasy.mfr.init.LeatherArmourListMFR;
 import minefantasy.mfr.init.MineFantasyArmorCustomEntries;
@@ -44,6 +45,7 @@ import minefantasy.mfr.recipe.CraftingManagerTanner;
 import minefantasy.mfr.recipe.CraftingManagerTransformation;
 import minefantasy.mfr.recipe.RecipeRemover;
 import minefantasy.mfr.recipe.ingredients.IngredientCount;
+import minefantasy.mfr.recipe.ingredients.IngredientMaterial;
 import minefantasy.mfr.recipe.ingredients.IngredientOreCount;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.world.gen.feature.WorldGenBiological;
@@ -147,6 +149,7 @@ public class MineFantasyReforged {
 		configMobs = new ConfigMobs("Mobs");
 
 		PlayerData.register();
+		CapabilityItemMultiUse.register();
 		MineFantasyItems.initEnumActions();
 
 		MineFantasyReforgedAPI.isInDebugMode = isDebug();
@@ -281,8 +284,13 @@ public class MineFantasyReforged {
 	}
 
 	public static void registerIngredients() {
-		CraftingHelper.register(new ResourceLocation(MOD_ID, "item_count"), (IIngredientFactory) (c, j) -> new IngredientCount(CraftingHelper.getItemStack(j, c)));
-		CraftingHelper.register(new ResourceLocation(MOD_ID, "ore_dict_count"), (IIngredientFactory) (c, j) -> new IngredientOreCount(JsonUtils.getString(j, "ore"), JsonUtils.getInt(j, "count", 1)));
+		CraftingHelper.register(new ResourceLocation(MOD_ID, "item_count"),
+				(IIngredientFactory) (c, j) -> new IngredientCount(CraftingHelper.getItemStack(j, c)));
+		CraftingHelper.register(new ResourceLocation(MOD_ID, "ore_dict_count"),
+				(IIngredientFactory) (c, j) -> new IngredientOreCount(JsonUtils.getString(j, "ore"),
+						JsonUtils.getInt(j, "count", 1)));
+		CraftingHelper.register(new ResourceLocation(MOD_ID, "item_material"),
+				(IIngredientFactory) (c, j) -> new IngredientMaterial.IngredientMaterialFactory().parse(c, j));
 	}
 
 	@SubscribeEvent

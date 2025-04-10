@@ -1,16 +1,41 @@
 package minefantasy.mfr.util;
 
+import minefantasy.mfr.api.archery.IAmmo;
 import minefantasy.mfr.api.archery.IArrowRetrieve;
+import minefantasy.mfr.api.archery.IFirearm;
+import minefantasy.mfr.item.ItemArrowMFR;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrowEffectsMF {
+public class ArrowUtils {
+	public static boolean canAcceptArrow(ItemStack ammo, ItemStack weapon) {
+		String ammoType = "null";
+		if (!ammo.isEmpty() && ammo.getItem() instanceof IAmmo) {
+			ammoType = ((IAmmo) ammo.getItem()).getAmmoType(ammo);
+		}
+
+		if (isVanillaArrow(ammo)) {
+			ammoType = "arrow";
+		}
+
+		if (!weapon.isEmpty() && weapon.getItem() instanceof IFirearm) {
+			return ((IFirearm) weapon.getItem()).canAcceptAmmo(weapon, ammoType);
+		}
+
+		return ammoType.equalsIgnoreCase("arrow");
+	}
+
+	public static boolean isVanillaArrow(ItemStack ammo) {
+		return ammo.getItem() instanceof ItemArrow && !(ammo.getItem() instanceof ItemArrowMFR);
+	}
+
 	// THE ARROW STICKING CODE IS EXPERIMENTAL AND NOT ACTIVE BY DEFAULT
 
 	/**

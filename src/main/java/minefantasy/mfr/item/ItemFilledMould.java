@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.constants.Constants;
 import minefantasy.mfr.init.MineFantasyItems;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -30,22 +31,15 @@ public class ItemFilledMould extends ItemBaseMFR {
 
 	public static ItemStack createMould(ItemStack fill) {
 		ItemStack mould = new ItemStack(MineFantasyItems.INGOT_MOULD_FILLED);
-		NBTTagCompound nbt = getOrCreateNBT(mould);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(mould);
 		NBTTagCompound save = new NBTTagCompound();
 		fill.writeToNBT(save);
 		nbt.setTag(Constants.MF_HELD_ITEM_TAG, save);
 		return mould;
 	}
 
-	public static NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
-	}
-
 	public ItemStack getHeldItem(ItemStack item) {
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (nbt.hasKey(Constants.MF_HELD_ITEM_TAG)) {
 			return new ItemStack(nbt.getCompoundTag(Constants.MF_HELD_ITEM_TAG));
 		}

@@ -268,6 +268,7 @@ public class MineFantasyBlocks {
 
 	public static Block RESEARCH = Utils.nullValue();
 	public static Block TROUGH_WOOD = Utils.nullValue();
+	public static ItemBlockTrough TROUGH_WOOD_ITEM = Utils.nullValue();
 
 	public static BlockTileEntity<TileEntityBombPress> BOMB_PRESS = Utils.nullValue();
 
@@ -312,10 +313,14 @@ public class MineFantasyBlocks {
 	public static BlockTileEntity<TileEntityBigFurnace> FURNACE_STONE = Utils.nullValue();
 
 	public static Block TOOL_RACK_WOOD = Utils.nullValue();
+	public static ItemBlockToolRack TOOL_RACK_WOOD_ITEM = Utils.nullValue();
 
 	public static BlockAmmoBox FOOD_BOX_BASIC = Utils.nullValue();
+	public static ItemBlockAmmoBox FOOD_BOX_BASIC_ITEM = Utils.nullValue();
 	public static BlockAmmoBox AMMO_BOX_BASIC = Utils.nullValue();
+	public static ItemBlockAmmoBox AMMO_BOX_BASIC_ITEM = Utils.nullValue();
 	public static BlockAmmoBox CRATE_BASIC = Utils.nullValue();
+	public static ItemBlockAmmoBox CRATE_BASIC_ITEM = Utils.nullValue();
 
 	public static Block BLOCK_COGWORK_HELM = Utils.nullValue();
 	public static Block BLOCK_COGWORK_LEGS = Utils.nullValue();
@@ -505,6 +510,7 @@ public class MineFantasyBlocks {
 
 		RESEARCH = new BlockResearchBench();
 		TROUGH_WOOD = new BlockTrough("trough_wood");
+		TROUGH_WOOD_ITEM = new ItemBlockTrough(TROUGH_WOOD);
 
 		BOMB_PRESS = new BlockBombPress();
 
@@ -550,10 +556,14 @@ public class MineFantasyBlocks {
 		FURNACE_STONE = new BlockBigFurnace("furnace_stone", false, 0);
 
 		TOOL_RACK_WOOD = new BlockRack("rack_wood");
+		TOOL_RACK_WOOD_ITEM = new ItemBlockToolRack(TOOL_RACK_WOOD);
 
 		FOOD_BOX_BASIC = new BlockAmmoBox("food_box_basic", (byte) 0);
+		FOOD_BOX_BASIC_ITEM = new ItemBlockAmmoBox(FOOD_BOX_BASIC);
 		AMMO_BOX_BASIC = new BlockAmmoBox("ammo_box_basic", (byte) 1);
+		AMMO_BOX_BASIC_ITEM = new ItemBlockAmmoBox(AMMO_BOX_BASIC);
 		CRATE_BASIC = new BlockAmmoBox("crate_basic", (byte) 2);
+		CRATE_BASIC_ITEM = new ItemBlockAmmoBox(CRATE_BASIC);
 
 		BLOCK_COGWORK_HELM = new BlockCogwork("block_cogwork_helm", false);
 		BLOCK_COGWORK_LEGS = new BlockCogwork("block_cogwork_legs", false);
@@ -1004,7 +1014,7 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockBase(REINFORCED_STONE_FRAMED_IRON));
 
 		registry.register(new ItemBlockBase(RESEARCH));
-		registry.register(new ItemBlockTrough(TROUGH_WOOD));
+		registry.register(TROUGH_WOOD_ITEM);
 
 		registry.register(new ItemBlockSpecialRender(BOMB_PRESS));
 
@@ -1049,11 +1059,11 @@ public class MineFantasyBlocks {
 		registry.register(new ItemBlockSpecialRender(FURNACE_HEATER));
 		registry.register(new ItemBlockSpecialRender(FURNACE_STONE));
 
-		registry.register(new ItemBlockToolRack(TOOL_RACK_WOOD));
+		registry.register(TOOL_RACK_WOOD_ITEM);
 
-		registry.register(new ItemBlockAmmoBox(FOOD_BOX_BASIC));
-		registry.register(new ItemBlockAmmoBox(AMMO_BOX_BASIC));
-		registry.register(new ItemBlockAmmoBox(CRATE_BASIC));
+		registry.register(FOOD_BOX_BASIC_ITEM);
+		registry.register(AMMO_BOX_BASIC_ITEM);
+		registry.register(CRATE_BASIC_ITEM);
 
 		registry.register(new ItemBlockBase(BLOCK_COGWORK_HELM));
 		registry.register(new ItemBlockBase(BLOCK_COGWORK_LEGS));

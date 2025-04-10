@@ -52,7 +52,7 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 
 	protected boolean modifyTiers(CarpenterCraftMatrix matrix, String tier) {
 		CustomMaterial material = CustomMaterialRegistry.getMaterial(tier);
-		if (material != CustomMaterialRegistry.NONE && toolType.hasTiers()) {
+		if (material != CustomMaterialRegistry.NONE) {
 			int newTier = toolTier < 0 ? material.getCrafterTier() : toolTier;
 			matrix.modifyTier(newTier, (int) (craftTime * material.getCraftTimeModifier()));
 			return true;
@@ -139,5 +139,14 @@ public abstract class CarpenterRecipeBase extends IForgeRegistryEntry.Impl<Carpe
 	@Override
 	public boolean shouldSlotGiveSkillXp() {
 		return false;
+	}
+
+	public boolean isTierModifyOutputCount() {
+		return false;
+	}
+
+	public static boolean isCustomRecipe(CarpenterRecipeBase recipe) {
+		return recipe instanceof CarpenterShapedCustomMaterialRecipe ||
+				recipe instanceof CarpenterShapelessCustomMaterialRecipe;
 	}
 }

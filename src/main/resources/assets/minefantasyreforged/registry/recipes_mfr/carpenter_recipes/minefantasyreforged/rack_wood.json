@@ -16,10 +16,10 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     },
     "L": {
-      "item": "minefantasyreforged:timber_cut"
+      "item": "#ALL_TIMBER_CUTS_EXCEPT_SCRAP"
     },
     "N": {
       "item": "minefantasyreforged:nail"

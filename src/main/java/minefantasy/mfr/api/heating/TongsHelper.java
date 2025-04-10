@@ -1,5 +1,6 @@
 package minefantasy.mfr.api.heating;
 
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
@@ -15,7 +16,7 @@ public class TongsHelper {
 	 * Determines if an item is held
 	 */
 	public static boolean hasHeldItem(ItemStack tongs) {
-		NBTTagCompound nbt = getNBT(tongs);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(tongs);
 
 		return nbt.hasKey("Held") && nbt.getBoolean("Held");
 	}
@@ -27,7 +28,7 @@ public class TongsHelper {
 	 */
 	public static ItemStack clearHeldItem(ItemStack tongs, EntityLivingBase user) {
 		if (!user.world.isRemote) {
-			NBTTagCompound nbt = getNBT(tongs);
+			NBTTagCompound nbt = NbtUtils.getOrCreateNBT(tongs);
 			nbt.setBoolean("Held", false);
 		}
 		tongs.damageItem(1, user);
@@ -42,7 +43,7 @@ public class TongsHelper {
 		if (item.isEmpty() || !isHotItem(item) || item.getItem() instanceof ItemBlock) {
 			return false;
 		}
-		NBTTagCompound nbt = getNBT(tongs);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(tongs);
 		nbt.setBoolean("Held", true);
 		NBTTagCompound save = new NBTTagCompound();
 		item.writeToNBT(save);
@@ -75,7 +76,7 @@ public class TongsHelper {
 	 * Gets the item picked up
 	 */
 	public static ItemStack getHeldItem(ItemStack tongs) {
-		NBTTagCompound nbt = getNBT(tongs);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(tongs);
 		if (nbt.hasKey("Held")) {
 			if (nbt.getBoolean("Held")) {
 				if (nbt.hasKey("Saved")) {
@@ -93,7 +94,7 @@ public class TongsHelper {
 	 * @param tongs the itemstack used
 	 */
 	public static ItemStack getHeldItemTongs(ItemStack tongs) {
-		NBTTagCompound nbt = getNBT(tongs);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(tongs);
 		if (nbt.hasKey("Held")) {
 			if (nbt.getBoolean("Held")) {
 				if (nbt.hasKey("Saved")) {
@@ -103,16 +104,6 @@ public class TongsHelper {
 			}
 		}
 		return ItemStack.EMPTY;
-	}
-
-	/**
-	 * Used for getting the NBT for itemstacks, if none exists; it creates one
-	 */
-	public static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	public static float getWaterSource(World world, BlockPos pos) {

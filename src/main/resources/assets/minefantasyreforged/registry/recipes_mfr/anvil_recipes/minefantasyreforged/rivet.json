@@ -9,7 +9,7 @@
   "skill_xp": 0,
   "vanilla_xp": 0.1,
   "output_hot": true,
-  "tierModifyOutputCount": true,
+  "tier_modify_output_count": true,
   "pattern": [
     "M M",
     " M ",
@@ -17,7 +17,7 @@
   ],
   "key": {
     "M": {
-      "item": "minefantasyreforged:metal_hunk"
+      "item": "#ALL_HUNKS"
     }
   },
   "result": {

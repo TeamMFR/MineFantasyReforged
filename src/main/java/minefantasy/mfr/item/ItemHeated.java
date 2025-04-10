@@ -14,6 +14,7 @@ import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.NbtUtils;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -58,19 +59,19 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 	}
 
 	public static void setTemp(ItemStack item, int heat) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 
 		nbt.setInteger(Heatable.NBT_CurrentTemp, heat);
 	}
 
 	public static void setWorkTemp(ItemStack item, int heat) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		MFRLogUtil.logDebug("Set Workable Temp: " + heat);
 		nbt.setInteger(Heatable.NBT_WorkableTemp, heat);
 	}
 
 	public static void setUnstableTemp(ItemStack item, int heat) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		MFRLogUtil.logDebug("Set Unstable Temp: " + heat);
 		nbt.setInteger(Heatable.NBT_UnstableTemp, heat);
 	}
@@ -90,7 +91,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		Heatable stats = Heatable.loadStats(item);
 		if (stats != null) {
 			ItemStack out = new ItemStack(MineFantasyItems.HOT_ITEM, item.getCount());
-			NBTTagCompound nbt = getNBT(out);
+			NBTTagCompound nbt = NbtUtils.getOrCreateNBT(out);
 			NBTTagCompound save = new NBTTagCompound();
 			item.writeToNBT(save);
 			nbt.setTag(Heatable.NBT_Item, save);
@@ -102,7 +103,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 			return out;
 		} else if (ignoreStats) {
 			ItemStack out = new ItemStack(MineFantasyItems.HOT_ITEM, item.getCount());
-			NBTTagCompound nbt = getNBT(out);
+			NBTTagCompound nbt = NbtUtils.getOrCreateNBT(out);
 			NBTTagCompound save = new NBTTagCompound();
 			item.writeToNBT(save);
 			nbt.setTag(Heatable.NBT_Item, save);
@@ -114,12 +115,6 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 			return out;
 		}
 		return item;
-	}
-
-	private static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
 	}
 
 	@Override
@@ -151,7 +146,7 @@ public class ItemHeated extends ItemBaseMFR implements IHotItem {
 		} else
 			super.addInformation(stack, world, list, b);
 
-		NBTTagCompound nbt = getNBT(stack);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(stack);
 		if (nbt.hasKey(Heatable.NBT_ShouldDisplay)) {
 			if (nbt.getBoolean(Heatable.NBT_ShouldDisplay)) {
 				list.add(getHeatString(stack));

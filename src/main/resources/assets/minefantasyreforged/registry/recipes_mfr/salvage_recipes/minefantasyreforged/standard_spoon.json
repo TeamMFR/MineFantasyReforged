@@ -8,7 +8,7 @@
 			"item": "minecraft:stick"
 		},
 		{
-			"item": "minefantasyreforged:timber"
+			"item": "#ALL_TIMBERS"
 		}
 	]
 }

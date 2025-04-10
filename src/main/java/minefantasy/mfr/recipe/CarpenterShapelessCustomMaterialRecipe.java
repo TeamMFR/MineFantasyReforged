@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
@@ -15,14 +16,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class CarpenterShapelessCustomMaterialRecipe extends CarpenterRecipeBase {
+	protected boolean tierModifyOutputCount;
 
 	public CarpenterShapelessCustomMaterialRecipe(
 			ItemStack output, NonNullList<Ingredient> inputs,
 			int toolTier, int carpenterTier, int craftTime,
 			int skillXp, float vanillaXp,
-			String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed) {
+			String toolType, SoundEvent soundOfCraft, String research, Skill skillUsed,
+			boolean tierModifyOutputCount) {
 		super(output, inputs, toolTier, carpenterTier, craftTime,
 				skillXp, vanillaXp, toolType, soundOfCraft, research, skillUsed);
+		this.tierModifyOutputCount = tierModifyOutputCount;
 	}
 
 	/**
@@ -112,14 +116,23 @@ public class CarpenterShapelessCustomMaterialRecipe extends CarpenterRecipeBase 
 				}
 			}
 		}
-		if (metal != null) {
+		if (metal != null && !tierModifyOutputCount) {
 			CustomMaterialRegistry.addMaterial(result, CustomToolHelper.slot_main, metal);
 		}
-		if (wood != null) {
+		if (wood != null && !tierModifyOutputCount) {
 			CustomMaterialRegistry.addMaterial(result, metal == null
 					? CustomToolHelper.slot_main
 					: CustomToolHelper.slot_haft, wood);
 		}
+
+		if (tierModifyOutputCount) {
+			int modifiedCount = MathHelper.clamp(
+					CustomMaterialRegistry.getMaterial(wood).getTier() * result.getCount(),
+					1,
+					result.getMaxStackSize());
+			result.setCount(modifiedCount);
+		}
+
 		return result;
 	}
 	/**
@@ -133,5 +146,10 @@ public class CarpenterShapelessCustomMaterialRecipe extends CarpenterRecipeBase 
 	@Override
 	public boolean useCustomTiers() {
 		return true;
+	}
+
+	@Override
+	public boolean isTierModifyOutputCount() {
+		return tierModifyOutputCount;
 	}
 }

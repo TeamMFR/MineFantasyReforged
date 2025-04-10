@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.tool.IToolMFR;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -10,16 +11,15 @@ import minefantasy.mfr.block.BlockRack;
 import minefantasy.mfr.block.BlockRepairKit;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.constants.Tool;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.util.BlockUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
 import minefantasy.mfr.util.ToolHelper;
-import minefantasy.mfr.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockButton;
@@ -58,7 +58,7 @@ import java.util.Set;
  * @author Anonymous Productions
  */
 
-public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister {
+public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, IDamageType, IClientRegister, IMaterialDoubleComponent {
 	protected Rarity itemRarity;
 	private final ToolMaterial material;
 	private final int tier;
@@ -106,7 +106,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 			return EnumActionResult.FAIL;
 		}
 
-		if (block instanceof BlockChest && Utils.getOtherDoubleChest(world.getTileEntity(pos)) != null) {
+		if (block instanceof BlockChest && BlockUtils.getOtherDoubleChest(world.getTileEntity(pos)) != null) {
 			return EnumActionResult.FAIL;
 		}
 
@@ -210,10 +210,6 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -260,6 +256,16 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 	}
 
 	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
+	}
+
+	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (!isInCreativeTab(tab)) {
 			return;
@@ -268,7 +274,7 @@ public class ItemSpanner extends ItemTool implements IToolMaterial, IToolMFR, ID
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {

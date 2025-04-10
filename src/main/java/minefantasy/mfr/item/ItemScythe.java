@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.farming.FarmingHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.api.weapon.IDamageType;
@@ -10,7 +11,6 @@ import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderBigTool;
 import minefantasy.mfr.config.ConfigTools;
 import minefantasy.mfr.constants.Rarity;
-import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.mechanics.StaminaMechanics;
@@ -59,7 +59,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem, IClientRegister {
+public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRackItem, IClientRegister, IMaterialDoubleComponent {
 	protected Rarity itemRarity;
 	private final ToolMaterial toolMaterial;
 	private float baseDamage = 3.0F;
@@ -247,10 +247,6 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 		return true;
 	}
 
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -281,6 +277,16 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 	}
 
 	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		return CustomMaterialType.METAL_MATERIAL;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
+	}
+
+	@Override
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
 		if (!isInCreativeTab(tab)) {
 			return;
@@ -289,7 +295,7 @@ public class ItemScythe extends Item implements IToolMaterial, IDamageType, IRac
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {

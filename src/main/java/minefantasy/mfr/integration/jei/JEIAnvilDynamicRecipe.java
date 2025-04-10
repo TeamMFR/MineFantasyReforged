@@ -30,7 +30,7 @@ public class JEIAnvilDynamicRecipe extends JEIAnvilRecipe {
 				AnvilRecipeBase.MAX_WIDTH, AnvilRecipeBase.MAX_HEIGHT));
 		ItemStack result = recipe.getAnvilRecipeOutput();
 		this.outputs = Collections.singletonList(
-				AnvilDynamicRecipe.getOutputsFromGridMap(ingredients, recipe.modifyOutput, result));
+				AnvilDynamicRecipe.getDynamicRecipeOutputs(recipe.modifyOutput, result));
 
 		this.ingredients = ingredients;
 	}
@@ -45,7 +45,7 @@ public class JEIAnvilDynamicRecipe extends JEIAnvilRecipe {
 	public void drawInfo(Minecraft minecraft, int recipeWidth, int recipeHeight, int mouseX, int mouseY) {
 		super.drawInfo(minecraft, recipeWidth, recipeHeight, mouseX, mouseY);
 
-		String recipeName = super.recipe.getRegistryName().getPath();
+		String recipeName = super.getRecipe().getRegistryName().getPath();
 
 		minecraft.fontRenderer.drawStringWithShadow(
 				Translator.translateToLocal("recipe." + recipeName + ".desc"),

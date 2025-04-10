@@ -2,6 +2,7 @@ package minefantasy.mfr.item;
 
 import com.google.common.collect.Multimap;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
 import minefantasy.mfr.api.tier.IToolMaterial;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
@@ -39,7 +40,7 @@ import static minefantasy.mfr.registry.CustomMaterialRegistry.DECIMAL_FORMAT;
 /**
  * @author Anonymous Productions
  */
-public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegister {
+public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegister, IMaterialDoubleComponent {
 	protected Rarity itemRarity;
 	private float baseDamage = 3F;
 	// ===================================================== CUSTOM START
@@ -63,7 +64,6 @@ public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegiste
 	}
 
 	public ItemAxeMFR setCustom(String s) {
-		canRepair = false;
 		isCustom = true;
 		canRepair = false;
 		return this;
@@ -100,10 +100,6 @@ public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegiste
 	@Override
 	public int getMaxDamage(ItemStack stack) {
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
-	}
-
-	public ItemStack construct(String main, String haft) {
-		return CustomToolHelper.construct(this, main, haft);
 	}
 
 	@Override
@@ -146,7 +142,7 @@ public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegiste
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName(), MineFantasyMaterials.Names.OAK_WOOD));
+					items.add(CustomToolHelper.constructWithDefaultWood(this, customMat.getName()));
 				}
 			}
 		} else {
@@ -178,6 +174,28 @@ public class ItemAxeMFR extends ItemAxe implements IToolMaterial, IClientRegiste
 	@SideOnly(Side.CLIENT)
 	public void registerClient() {
 		ModelLoaderHelper.registerItem(this);
+	}
+
+	@Override
+	public CustomMaterialType getPrimaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.METAL_MATERIAL;
+
+		if (toolMaterial == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
+	}
+
+	@Override
+	public CustomMaterialType getSecondaryMaterialType() {
+		CustomMaterialType type = CustomMaterialType.WOOD_MATERIAL;
+
+		if (toolMaterial == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
 	}
 
 	// ====================================================== CUSTOM END

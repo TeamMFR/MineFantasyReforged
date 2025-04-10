@@ -15,8 +15,9 @@
 			"count": 4
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:timber_pane",
+			"material_type": "wood_material",
 			"count": 6
 		}
 	]

@@ -13,8 +13,9 @@
 			"item": "minefantasyreforged:strong_leather_helmet"
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:scale_mesh",
+			"material_type": "metal_material",
 			"count": 4
 		}
 	],

@@ -23,7 +23,7 @@
       "item": "minefantasyreforged:rivet"
     },
     "S": {
-      "item": "minefantasyreforged:splint_mesh"
+      "item": "#ALL_SPLINT_MESHES"
     }
   },
   "result": {

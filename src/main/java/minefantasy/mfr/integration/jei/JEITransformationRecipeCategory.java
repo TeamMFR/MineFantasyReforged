@@ -105,7 +105,7 @@ public class JEITransformationRecipeCategory implements IRecipeCategory<JEITrans
 		slots.init(8, true, 93, 1);
 
 		// Init dropStack slot
-		slots.init(9, true, 93, 38);
+		slots.init(9, false, 93, 38);
 
 		//-----------------------------------------------------------//
 

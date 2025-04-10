@@ -85,7 +85,7 @@ public class CraftingManagerAnvil extends CraftingManagerBase<AnvilRecipeBase> {
 			toolTier = anvilRecipeBase.getToolTier();
 			anvilTier = anvilRecipeBase.getAnvilTier();
 
-			if (!anvilRecipeBase.useCustomTiers()){
+			if (!anvilRecipeBase.useCustomTiers() || !anvilRecipeBase.getToolType().hasTiers()){
 				anvil.setProgressMax(time);
 				anvil.setRequiredToolTier(toolTier);
 				anvil.setRequiredAnvilTier(anvilTier);

@@ -163,7 +163,7 @@ public class ToolHelper {
 		if (item.getMaxStackSize() > 0)
 			return item;
 
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setFloat("MFCraftQuality", qualityLvl);
 
 		return item;
@@ -262,14 +262,6 @@ public class ToolHelper {
 		return rating;
 	}
 
-	private static NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-
-		return item.getTagCompound();
-	}
-
 	public static boolean hasCustomQualityTag(ItemStack item) {
 		return item.hasTagCompound() && item.getTagCompound().hasKey("MFCraftQuality");
 	}
@@ -293,7 +285,7 @@ public class ToolHelper {
 	}
 
 	public static void setToolSharpness(ItemStack item, float level) {
-		NBTTagCompound nbt = getOrCreateNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		float currentLevel = getSharpnessLevel(item);
 		float maxLevel = getMaxSharpness(item);
 		nbt.setFloat(sharpnessLevelNBT, Math.min(maxLevel, currentLevel + level));
@@ -369,15 +361,6 @@ public class ToolHelper {
 			stringList[i] = entries.get(i);
 		}
 		return stringList;
-	}
-
-	@Deprecated
-	public static boolean isToolSufficient(ItemStack heldItem, String toolNeeded, int toolTierNeeded) {
-		Tool tool = getToolTypeFromStack(heldItem);
-
-		int tier = getCrafterTier(heldItem);
-
-		return tool.getName().equals(toolNeeded) && tier >= toolTierNeeded;
 	}
 
 	public static boolean isToolSufficient(ItemStack heldItem, Tool toolNeeded, int toolTierNeeded) {

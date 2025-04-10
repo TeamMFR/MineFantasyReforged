@@ -5,7 +5,9 @@
 	},
 	"outputs": [
 		{
-			"item": "minefantasyreforged:broad_head"
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:broad_head",
+			"material_type": "metal_material"
 		},
 		{
 			"item": "minefantasyreforged:fletching"

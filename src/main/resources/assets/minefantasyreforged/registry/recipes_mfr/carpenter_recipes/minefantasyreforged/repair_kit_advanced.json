@@ -16,7 +16,7 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:plate"
+      "item": "#ALL_PLATES"
     },
     "R": {
       "item": "minefantasyreforged:repair_kit_basic"
@@ -25,7 +25,9 @@
       "item": "minecraft:string"
     },
     "T": {
-      "item": "minefantasyreforged:standard_hammer"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_hammer",
+      "material_type": "metal_material"
     },
     "L": {
       "item": "minecraft:slime_ball"

@@ -23,7 +23,9 @@
       "item": "minefantasyreforged:bronze_gears"
     },
     "S": {
-      "item": "minefantasyreforged:standard_knife"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_knife",
+      "material_type": "metal_material"
     },
     "I": {
       "item": "minefantasyreforged:iron_strut"

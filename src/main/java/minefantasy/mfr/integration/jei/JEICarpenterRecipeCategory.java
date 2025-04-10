@@ -6,20 +6,26 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
+import mezz.jei.gui.Focus;
 import minefantasy.mfr.MineFantasyReforged;
 import minefantasy.mfr.init.MineFantasyBlocks;
+import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.recipe.CarpenterDynamicRecipe;
 import minefantasy.mfr.recipe.CarpenterRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerCarpenter;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -92,14 +98,42 @@ public class JEICarpenterRecipeCategory implements IRecipeCategory<JEICarpenterR
 		// Init output slot
 		slots.init(16, false, 112, 28);
 
+		Focus<ItemStack> outputFocus = JEIIntegration.getFocus(recipeLayout, IFocus.Mode.OUTPUT);
+
 		// Assign ingredients to slots
 		for (int j = 0; j < inputs.size(); j++) {
-			slots.set(j, inputs.get(j));
+			List<ItemStack> slotStacks = inputs.get(j);
+			if (CarpenterRecipeBase.isCustomRecipe(recipeWrapper.getRecipe())) {
+				if (outputFocus != null && CustomToolHelper.hasAnyMaterial(outputFocus.getValue())) {
+					if (!slotStacks.isEmpty()) {
+						ItemStack slotStack = slotStacks.get(0).copy();
+						CustomToolHelper.tryDeconstruct(slotStack, outputFocus.getValue());
+						slots.set(j, slotStack);
+					}
+				} else {
+					slots.set(j, slotStacks);
+				}
+			} else if (recipeWrapper.getRecipe() instanceof CarpenterDynamicRecipe) {
+				if (outputFocus != null && CustomToolHelper.hasAnyMaterial(outputFocus.getValue())) {
+					if (!slotStacks.isEmpty()) {
+						CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(outputFocus.getValue());
+						slots.set(j, Arrays.asList(material.getMaterialIngredient().getMatchingStacks()));
+					}
+				} else {
+					slots.set(j, slotStacks);
+				}
+			} else {
+				slots.set(j, slotStacks);
+			}
 		}
 		// Assign outputs to slot
 		for (List<ItemStack> output : outputs) {
 			slots.set(16, output);
 		}
+
+		slots.addTooltipCallback((slotIndex, input, slotStack, tooltip) ->
+				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getRecipe().getIngredients(),
+						slotStack, tooltip, outputFocus, recipeWrapper.getRecipe().getCarpenterRecipeOutput()));
 	}
 
 	/**

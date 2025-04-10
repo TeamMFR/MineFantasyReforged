@@ -23,13 +23,12 @@ public class ItemMetalComponent extends ItemComponentMFR {
 	private final float mass;
 	private boolean canDamage = false;
 
-	public ItemMetalComponent(String name, float mass, CustomMaterialType type) {
-		super(name);
+	public ItemMetalComponent(String name, float mass) {
+		super(name, CustomMaterialType.METAL_MATERIAL);
 		this.name = name;
 
 		this.setCreativeTab(CreativeTabs.MATERIALS);
 		this.mass = mass;
-		this.materialType = type;
 	}
 
 	public ItemMetalComponent setCanDamage() {
@@ -120,10 +119,5 @@ public class ItemMetalComponent extends ItemComponentMFR {
 		ItemStack item = new ItemStack(this, stack, damage);
 		CustomMaterialRegistry.addMaterial(item, CustomToolHelper.slot_main, base);
 		return item;
-	}
-
-	@Override
-	public CustomMaterialType getMaterialType(ItemStack item) {
-		return materialType;
 	}
 }

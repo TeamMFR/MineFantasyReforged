@@ -8,7 +8,9 @@
 			"item": "minefantasyreforged:fletching"
 		},
 		{
-			"item": "minefantasyreforged:bodkin_head"
+			"type": "minefantasyreforged:item_material",
+			"item": "minefantasyreforged:bodkin_head",
+			"material_type": "metal_material"
 		}
 	]
 }

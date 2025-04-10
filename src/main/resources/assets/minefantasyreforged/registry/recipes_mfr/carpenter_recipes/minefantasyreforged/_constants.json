@@ -93,6 +93,57 @@
         ]
     },
     {
+        "name": "ALL_TIMBERS",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber",
+            "material_type": "wood_material"
+        }
+    },
+    {
+        "name": "ALL_TIMBERS_EXCEPT_SCRAP",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber",
+            "material_type": "wood_material",
+            "excluded_materials": ["scrap_wood"]
+        }
+    },
+    {
+        "name": "ALL_TIMBER_PANES",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber_pane",
+            "material_type": "wood_material"
+        }
+    },
+    {
+        "name": "ALL_TIMBER_PANES_EXCEPT_SCRAP",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber_pane",
+            "material_type": "wood_material",
+            "excluded_materials": ["scrap_wood"]
+        }
+    },
+    {
+        "name": "ALL_TIMBER_CUTS",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber_cut",
+            "material_type": "wood_material"
+        }
+    },
+    {
+        "name": "ALL_TIMBER_CUTS_EXCEPT_SCRAP",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber_cut",
+            "material_type": "wood_material",
+            "excluded_materials": ["scrap_wood"]
+        }
+    },
+    {
         "name": "TIMBER_REFINED",
         "ingredient": {
             "type": "minecraft:item_nbt",
@@ -274,6 +325,14 @@
             "type": "minecraft:item_nbt",
             "item": "minefantasyreforged:metal_hunk",
             "nbt": "{mf_custom_materials:{main_material:\"tungsten\"}}"
+        }
+    },
+    {
+        "name": "ALL_PLATES",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:plate",
+            "material_type": "metal_material"
         }
     },
     {

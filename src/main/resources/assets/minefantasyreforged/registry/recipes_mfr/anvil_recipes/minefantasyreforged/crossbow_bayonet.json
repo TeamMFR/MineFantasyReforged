@@ -19,10 +19,10 @@
       "item": "minefantasyreforged:rivet"
     },
     "T": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     },
     "M": {
-      "item": "minefantasyreforged:metal_hunk"
+      "item": "#ALL_HUNKS"
     }
   },
   "result": {

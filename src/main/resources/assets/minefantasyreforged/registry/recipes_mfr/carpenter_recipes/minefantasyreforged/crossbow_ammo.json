@@ -17,7 +17,7 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     },
     "T": {
       "item": "minefantasyreforged:tungsten_gears"

@@ -55,7 +55,7 @@ public class CustomMaterialRegistry extends DataLoader {
 	public static HashMap<CustomMaterialType, ArrayList<CustomMaterial>> TYPE_LIST = new HashMap<>();
 	public static HashMap<CustomMaterial, ImmutablePair<JsonElement, JsonContext>> INGREDIENT_JSON_MAP = new HashMap<>();
 
-	public static final CustomMaterial NONE = new CustomMaterial("none", CustomMaterialType.NONE, Ingredient.EMPTY, new int[] {237, 237, 237}, 0, 0,0,0,0,0,0, Rarity.COMMON,0, 0, null, null, null, null, false);
+	public static final CustomMaterial NONE = new CustomMaterial("none", CustomMaterialType.NONE, Ingredient.EMPTY, new int[] {237, 237, 237}, 0F, 0F,0F,0F,0F,0F,0, Rarity.COMMON,0, 0, null, null, null, null, false);
 
 	private static final String NBT_BASE = "mf_custom_materials";
 	public static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#.##");
@@ -210,6 +210,20 @@ public class CustomMaterialRegistry extends DataLoader {
 		}
 		NBTTagCompound nbt = getNBT(item, true);
 		nbt.setString(slot, material);
+	}
+
+	/**
+	 * Adds a Custom Material to an ItemStack
+	 * @param item 		The ItemStack to add the Custom Material to
+	 * @param slot 		The 'position' of the Material
+	 * @param material	The CustomMaterial to add
+	 */
+	public static void addMaterial(ItemStack item, String slot, CustomMaterial material) {
+		if (material == null || material.getName().isEmpty()) {
+			return;
+		}
+		NBTTagCompound nbt = getNBT(item, true);
+		nbt.setString(slot, material.getName());
 	}
 
 	/**

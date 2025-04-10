@@ -76,6 +76,23 @@
         }
     },
     {
+        "name": "ALL_TIMBERS",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber",
+            "material_type": "wood_material"
+        }
+    },
+    {
+        "name": "ALL_TIMBERS_EXCEPT_SCRAP",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:timber",
+            "material_type": "wood_material",
+            "excluded_materials": ["scrap_wood"]
+        }
+    },
+    {
         "name": "TIMBER_REFINED",
         "ingredient": {
             "type": "minecraft:item_nbt",
@@ -97,6 +114,14 @@
             "type": "minecraft:item_nbt",
             "item": "minefantasyreforged:timber",
             "nbt": "{mf_custom_materials:{main_material:\"scrap_wood\"}}"
+        }
+    },
+    {
+        "name": "ALL_BARS",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:bar",
+            "material_type": "metal_material"
         }
     },
     {
@@ -196,6 +221,14 @@
         }
     },
     {
+        "name": "ALL_HUNKS",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:metal_hunk",
+            "material_type": "metal_material"
+        }
+    },
+    {
         "name": "HUNK_BRONZE",
         "ingredient": {
             "type": "minecraft:item_nbt",
@@ -260,11 +293,27 @@
         }
     },
     {
+        "name": "ALL_PLATES",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:plate",
+            "material_type": "metal_material"
+        }
+    },
+    {
         "name": "PLATE_IRON",
         "ingredient": {
             "type": "minecraft:item_nbt",
             "item": "minefantasyreforged:plate",
             "nbt": "{mf_custom_materials:{main_material:\"iron\"}}"
+        }
+    },
+    {
+        "name": "ALL_PLATES_HUGE",
+        "ingredient": {
+            "type": "minefantasyreforged:item_material",
+            "item": "minefantasyreforged:plate_huge",
+            "material_type": "metal_material"
         }
     }
 ]

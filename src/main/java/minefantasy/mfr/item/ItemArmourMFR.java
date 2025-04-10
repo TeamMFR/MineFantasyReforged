@@ -11,6 +11,7 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.BaseMaterial;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
+import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.ArmourCalculator;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -238,12 +239,6 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 		return super.getSuitWeightType(item);
 	}
 
-	public ItemStack construct(String plate) {
-		ItemStack item = new ItemStack(this);
-		CustomMaterialRegistry.addMaterial(item, CustomToolHelper.slot_main, plate.toLowerCase());
-		return item;
-	}
-
 	/**
 	 * A bit of the new system, gets custom materials for armour Only used on
 	 * cogwork armour though
@@ -315,6 +310,11 @@ public class ItemArmourMFR extends ItemArmourBaseMFR implements IElementalResist
 
 	public boolean isCustom() {
 		return false;
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.NONE;
 	}
 
 	@Override

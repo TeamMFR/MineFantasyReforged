@@ -16,10 +16,10 @@
   ],
   "key": {
     "B": {
-      "item": "minefantasyreforged:bar"
+      "item": "#ALL_BARS"
     },
     "T": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS"
     },
     "L": {
       "item": "minefantasyreforged:leather_strip"

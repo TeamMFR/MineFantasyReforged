@@ -8,6 +8,7 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -102,6 +103,11 @@ public class JEIBigFurnaceRecipeCategory implements IRecipeCategory<JEIBigFurnac
 
 		slots.set(0, inputs.get(0));
 		slots.set(1, outputList.get(0));
+
+		slots.addTooltipCallback((slotIndex, input, slotStack, tooltip) ->
+				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getRecipe().getInputs(),
+						slotStack, tooltip, JEIIntegration.getFocus(recipeLayout, IFocus.Mode.OUTPUT),
+						recipeWrapper.getRecipe().getBigFurnaceRecipeOutput()));
 	}
 
 	@Nullable

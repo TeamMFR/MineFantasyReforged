@@ -15,17 +15,22 @@
   ],
   "key": {
     "K": {
-      "item": "minefantasyreforged:standard_knife"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_knife",
+      "material_type": "metal_material"
     },
     "S": {
-      "item": "minefantasyreforged:standard_spoon"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_spoon",
+      "material_type": "wood_material",
+      "excluded_materials": ["scrap_wood"]
     },
     "R": {
       "item": "minecraft:stone",
       "data": 4
     },
     "T": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     }
   },
   "result": {

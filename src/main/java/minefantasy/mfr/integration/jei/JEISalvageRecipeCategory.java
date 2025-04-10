@@ -6,14 +6,19 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
+import mezz.jei.gui.Focus;
+import mezz.jei.startup.StackHelper;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialComponent;
 import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.CraftingManagerSalvage;
 import minefantasy.mfr.recipe.SalvageRecipeBase;
+import minefantasy.mfr.util.CustomToolHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -92,20 +97,74 @@ public class JEISalvageRecipeCategory implements IRecipeCategory<JEISalvageRecip
 			}
 		}
 
-		// Assign ingredients to slot
-		slots.set(26, inputs.get(0));
+		Focus<ItemStack> inputFocus = JEIIntegration.getFocus(recipeLayout, IFocus.Mode.INPUT);
+		Focus<ItemStack> outputFocus = JEIIntegration.getFocus(recipeLayout, IFocus.Mode.OUTPUT);
 
-		// Assign outputs to slots
-		for (int j = 0; j < outputs.size(); j++) {
-			slots.set(j, outputs.get(j));
+		if (inputFocus != null) {
+			// Assign outputs to slots
+			for (int j = 0; j < outputs.size(); j++) {
+				List<ItemStack> slotStacks = outputs.get(j);
+
+				List<ItemStack> modifiedStacks = new ArrayList<>();
+				for (ItemStack stack : slotStacks) {
+					if (stack.getItem() instanceof IMaterialComponent && CustomToolHelper.hasAnyMaterial(stack)) {
+						ItemStack stackCopy = stack.copy();
+						CustomToolHelper.tryDeconstruct(stackCopy, inputFocus.getValue());
+						stackCopy.setCount(stack.getCount());
+						modifiedStacks.add(stackCopy);
+					}
+					else {
+						modifiedStacks.add(stack);
+					}
+				}
+				slots.set(j, modifiedStacks);
+			}
+			slots.set(26, inputs.get(0));
+		} else if (outputFocus != null) {
+			// Assign ingredients to slot
+			List<ItemStack> slotStacks = inputs.get(0);
+
+			List<ItemStack> modifiedStacks = new ArrayList<>();
+			for (ItemStack stack : slotStacks) {
+				if (stack.getItem() instanceof IMaterialComponent && CustomToolHelper.hasAnyMaterial(stack)) {
+					ItemStack stackCopy = stack.copy();
+					CustomToolHelper.tryDeconstruct(stackCopy, outputFocus.getValue());
+					stackCopy.setCount(stack.getCount());
+					modifiedStacks.add(stackCopy);
+				}
+				else {
+					modifiedStacks.add(stack);
+				}
+			}
+
+			slots.set(26, modifiedStacks);
+			for (int j = 0; j < outputs.size(); j++) {
+				slots.set(j, outputs.get(j));
+			}
 		}
+		else {
+			for (int j = 0; j < outputs.size(); j++) {
+				slots.set(j, outputs.get(j));
+			}
+			slots.set(26, inputs.get(0));
+		}
+
+		slots.addTooltipCallback((slotIndex, input, slotStack, tooltip) ->
+				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getRecipe().getOutputs(),
+						slotStack, tooltip, inputFocus,
+						recipeWrapper.getRecipe().getInput()));
 	}
 
 	/**
 	 * Generates all the MFR carpenter recipes for JEI.
 	 */
 	public static Collection<JEISalvageRecipe> generateRecipes(IStackHelper stackHelper) {
-		return new ArrayList<>(generateSalvageRecipes(stackHelper));
+		if (stackHelper instanceof StackHelper) {
+			return new ArrayList<>(generateSalvageRecipes((StackHelper) stackHelper));
+		}
+		else {
+			return new ArrayList<>();
+		}
 	}
 
 	@Nullable
@@ -114,7 +173,7 @@ public class JEISalvageRecipeCategory implements IRecipeCategory<JEISalvageRecip
 		return icon;
 	}
 
-	private static Collection<JEISalvageRecipe> generateSalvageRecipes(IStackHelper stackHelper) {
+	private static Collection<JEISalvageRecipe> generateSalvageRecipes(StackHelper stackHelper) {
 
 		List<JEISalvageRecipe> recipes = new ArrayList<>();
 		Collection<SalvageRecipeBase> salvageRecipes = CraftingManagerSalvage.getRecipes();

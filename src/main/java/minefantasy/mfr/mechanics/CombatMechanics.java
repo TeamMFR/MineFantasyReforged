@@ -32,7 +32,7 @@ import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.network.ParryPacket;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.util.ArmourCalculator;
-import minefantasy.mfr.util.ArrowEffectsMF;
+import minefantasy.mfr.util.ArrowUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.PowerArmour;
@@ -402,7 +402,7 @@ public class CombatMechanics {
 		if (ConfigSpecials.stickArrows && event.getSource().getImmediateSource() != null
 				&& event.getSource().getImmediateSource() instanceof EntityArrow) {
 			if (!event.getEntity().world.isRemote) {
-				ArrowEffectsMF.stickArrowIn(event.getEntity(), ArrowEffectsMF.getDroppedArrow(event.getSource().getImmediateSource()), event.getSource().getImmediateSource());
+				ArrowUtils.stickArrowIn(event.getEntity(), ArrowUtils.getDroppedArrow(event.getSource().getImmediateSource()), event.getSource().getImmediateSource());
 			}
 		}
 		if (damage > 0) {

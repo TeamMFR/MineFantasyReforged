@@ -19,13 +19,13 @@
       "item": "#STRING"
     },
     "T": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS"
     },
     "L": {
       "item": "minefantasyreforged:leather_strip"
     },
     "H": {
-      "item": "minefantasyreforged:metal_hunk"
+      "item": "#ALL_HUNKS"
     }
   },
   "result": {

@@ -18,7 +18,7 @@
       "item": "minefantasyreforged:jug_plant_oil"
     },
     "T": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     }
   },
   "result": {

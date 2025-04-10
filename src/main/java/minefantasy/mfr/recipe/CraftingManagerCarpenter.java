@@ -80,7 +80,7 @@ public class CraftingManagerCarpenter extends CraftingManagerBase<CarpenterRecip
 			toolTier = carpenterRecipeBase.getToolTier();
 			carpenterTier = carpenterRecipeBase.getCarpenterTier();
 
-			if (!carpenterRecipeBase.useCustomTiers()) {
+			if (!carpenterRecipeBase.useCustomTiers() || !carpenterRecipeBase.getToolType().hasTiers()) {
 				carpenter.setProgressMax(time);
 				carpenter.setRequiredToolTier(toolTier);
 				carpenter.setRequiredCarpenterTier(carpenterTier);

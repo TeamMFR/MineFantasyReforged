@@ -1,16 +1,20 @@
 package minefantasy.mfr.util;
 
-import minefantasy.mfr.api.crafting.ITieredComponent;
+import minefantasy.mfr.api.crafting.IMaterialComponent;
+import minefantasy.mfr.api.crafting.IMaterialDoubleComponent;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.crafting.exotic.ISpecialDesign;
 import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.material.CustomMaterial;
+import minefantasy.mfr.recipe.ingredients.IngredientMaterial;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.IRarity;
@@ -18,8 +22,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class CustomToolHelper {
 	public static final String slot_main = "main_material";
@@ -35,34 +42,250 @@ public class CustomToolHelper {
 	}
 
 	public static CustomMaterial getCustomSecondaryMaterial(ItemStack item) {
-		if (item.isEmpty())
+		if (item.isEmpty()) {
 			return CustomMaterialRegistry.NONE;
+		}
 
-		CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, slot_haft);
-		return material;
+		return CustomMaterialRegistry.getMaterialFor(item, slot_haft);
 	}
 
-	public static ItemStack construct(Item base, String main) {
+	public static ItemStack constructWithDefaultWood(Item base, String main) {
 		return construct(base, main, MineFantasyMaterials.Names.OAK_WOOD);
 	}
 
 	public static ItemStack construct(Item base, String main, String haft) {
+		ItemStack stack = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.toLowerCase());
+		if (haft != null) {
+			CustomMaterialRegistry.addMaterial(stack, slot_haft, haft.toLowerCase());
+		}
+		return stack;
+	}
+
+	public static ItemStack construct(Item base, CustomMaterial main, CustomMaterial haft) {
+		ItemStack stack = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.getName().toLowerCase());
+		if (haft != CustomMaterialRegistry.NONE) {
+			CustomMaterialRegistry.addMaterial(stack, slot_haft, haft.getName().toLowerCase());
+		}
+		return stack;
+	}
+
+	public static ItemStack construct(ItemStack stack, CustomMaterial main, CustomMaterial haft) {
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.getName().toLowerCase());
+		if (haft != CustomMaterialRegistry.NONE) {
+			CustomMaterialRegistry.addMaterial(stack, slot_haft, haft.getName().toLowerCase());
+		}
+		return stack;
+	}
+
+	public static ItemStack constructMainSlot(Item base, String main) {
 		ItemStack item = new ItemStack(base);
 		CustomMaterialRegistry.addMaterial(item, slot_main, main.toLowerCase());
-		if (haft != null) {
-			CustomMaterialRegistry.addMaterial(item, slot_haft, haft.toLowerCase());
+		return item;
+	}
+
+	public static ItemStack constructMainSlot(Item base, CustomMaterial main) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_main, main);
+		return item;
+	}
+
+	public static ItemStack constructMainSlot(ItemStack inputStack, String main) {
+		ItemStack stack = inputStack.copy();
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main.toLowerCase());
+		return stack;
+	}
+
+	public static ItemStack constructMainSlot(ItemStack inputStack, CustomMaterial main) {
+		ItemStack stack = inputStack.copy();
+		CustomMaterialRegistry.addMaterial(stack, slot_main, main);
+		return stack;
+	}
+
+	public static ItemStack constructSecondarySlot(Item base, String secondary) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_haft, secondary.toLowerCase());
+		return item;
+	}
+
+	public static ItemStack constructSecondarySlot(Item base, CustomMaterial secondary) {
+		ItemStack item = new ItemStack(base);
+		CustomMaterialRegistry.addMaterial(item, slot_haft, secondary);
+		return item;
+	}
+
+	public static List<ItemStack> constructAllVariants(Item item) {
+		List<ItemStack> allVariants = new ArrayList<>();
+
+		if (item instanceof IMaterialComponent) {
+			if (item instanceof IMaterialSingleComponent) {
+				CustomMaterialType type = ((IMaterialSingleComponent) item).getMaterialType();
+				if (type == CustomMaterialType.METAL_MATERIAL) {
+					for (CustomMaterial metalMaterial : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+						allVariants.add(constructMainSlot(item, metalMaterial));
+					}
+				}
+				else {
+					for (CustomMaterial woodMaterial : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
+						allVariants.add(constructMainSlot(item, woodMaterial));
+					}
+				}
+			}
+			else {
+				CustomMaterialType primaryMaterialType = ((IMaterialDoubleComponent)item).getPrimaryMaterialType();
+				CustomMaterialType secondaryMaterialType = ((IMaterialDoubleComponent)item).getSecondaryMaterialType();
+				for (CustomMaterial secondaryMaterial : CustomMaterialRegistry.getList(secondaryMaterialType)) {
+					for (CustomMaterial primaryMaterial : CustomMaterialRegistry.getList(primaryMaterialType)) {
+						allVariants.add(construct(item, primaryMaterial, secondaryMaterial));
+					}
+				}
+			}
 		}
-		return item;
+
+
+		return allVariants;
 	}
 
-	public static ItemStack constructSingleColoredLayer(Item base, String main) {
-		return constructSingleColoredLayer(base, main, 1);
+	public static List<ItemStack> constructAllVariants(ItemStack inputStack) {
+		ItemStack stack = inputStack.copy();
+		Item item = stack.getItem();
+		List<ItemStack> allVariants = new ArrayList<>();
+
+		if (item instanceof IMaterialComponent) {
+			if (item instanceof IMaterialSingleComponent
+					&& ((IMaterialSingleComponent) item).getMaterialType() != CustomMaterialType.NONE) {
+
+				CustomMaterialType type = ((IMaterialSingleComponent) item).getMaterialType();
+				if (type == CustomMaterialType.METAL_MATERIAL) {
+					for (CustomMaterial metalMaterial : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+						allVariants.add(constructMainSlot(stack, metalMaterial));
+					}
+				}
+				else {
+					for (CustomMaterial woodMaterial : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
+						allVariants.add(constructMainSlot(stack, woodMaterial));
+					}
+				}
+			}
+			else if (item instanceof IMaterialDoubleComponent &&
+					((IMaterialDoubleComponent) item).getPrimaryMaterialType() != CustomMaterialType.NONE
+					&& ((IMaterialDoubleComponent) item).getSecondaryMaterialType() != CustomMaterialType.NONE ) {
+
+				CustomMaterialType primaryMaterialType = ((IMaterialDoubleComponent)item).getPrimaryMaterialType();
+				CustomMaterialType secondaryMaterialType = ((IMaterialDoubleComponent)item).getSecondaryMaterialType();
+
+				for (CustomMaterial secondaryMaterial : CustomMaterialRegistry.getList(secondaryMaterialType)) {
+					for (CustomMaterial primaryMaterial : CustomMaterialRegistry.getList(primaryMaterialType)) {
+						allVariants.add(construct(item, primaryMaterial, secondaryMaterial));
+					}
+				}
+			}
+			else {
+				allVariants.add(inputStack);
+			}
+		}
+
+
+		return allVariants;
 	}
 
-	public static ItemStack constructSingleColoredLayer(Item base, String main, int stacksize) {
-		ItemStack item = new ItemStack(base, stacksize);
-		CustomMaterialRegistry.addMaterial(item, slot_main, main.toLowerCase());
-		return item;
+	public static List<ItemStack> constructAllVariants(
+			ItemStack inputStack,
+			Map<CustomMaterialType, List<IngredientMaterial>> ingredientMaterialsByType) {
+
+		ItemStack stack = inputStack.copy();
+		Item item = stack.getItem();
+		List<ItemStack> allVariants = new ArrayList<>();
+
+		if (item instanceof IMaterialComponent) {
+			if (item instanceof IMaterialSingleComponent) {
+				CustomMaterialType type = ((IMaterialSingleComponent) item).getMaterialType();
+				List<CustomMaterial> excludedMaterials = Utils.emptyIfNull(ingredientMaterialsByType.get(type))
+						.stream()
+						.flatMap(ingredientMaterial -> ingredientMaterial.getExcludedMaterials().stream())
+						.collect(Collectors.toList());
+				if (type == CustomMaterialType.METAL_MATERIAL) {
+					for (CustomMaterial metalMaterial : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
+						if (!excludedMaterials.contains(metalMaterial)) {
+							allVariants.add(constructMainSlot(stack, metalMaterial));
+						}
+					}
+				}
+				else {
+					for (CustomMaterial woodMaterial : CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL)) {
+						if (!excludedMaterials.contains(woodMaterial)) {
+							allVariants.add(constructMainSlot(stack, woodMaterial));
+						}
+					}
+				}
+			}
+			else if (((IMaterialDoubleComponent) item).getPrimaryMaterialType() != CustomMaterialType.NONE
+					&& ((IMaterialDoubleComponent) item).getSecondaryMaterialType() != CustomMaterialType.NONE ) {
+				CustomMaterialType primaryMaterialType = ((IMaterialDoubleComponent)item).getPrimaryMaterialType();
+				CustomMaterialType secondaryMaterialType = ((IMaterialDoubleComponent)item).getSecondaryMaterialType();
+				List<CustomMaterial> excludedPrimaryMaterials = Utils.emptyIfNull(ingredientMaterialsByType.get(primaryMaterialType))
+						.stream()
+						.flatMap(ingredientMaterial -> ingredientMaterial.getExcludedMaterials().stream())
+						.collect(Collectors.toList());
+				List<CustomMaterial> excludedSecondaryMaterials = Utils.emptyIfNull(ingredientMaterialsByType.get(secondaryMaterialType))
+						.stream()
+						.flatMap(ingredientMaterial -> ingredientMaterial.getExcludedMaterials().stream())
+						.collect(Collectors.toList());
+				for (CustomMaterial secondaryMaterial : CustomMaterialRegistry.getList(secondaryMaterialType)) {
+					for (CustomMaterial primaryMaterial : CustomMaterialRegistry.getList(primaryMaterialType)) {
+						if (!excludedPrimaryMaterials.contains(primaryMaterial)
+								&& !excludedSecondaryMaterials.contains(secondaryMaterial)) {
+							allVariants.add(construct(item, primaryMaterial, secondaryMaterial));
+						}
+					}
+				}
+			}
+			else {
+				allVariants.add(inputStack);
+			}
+		}
+
+
+		return allVariants;
+	}
+
+	public static List<ItemStack> constructModifiedCounts(ItemStack stack, CustomMaterialType fallbackType) {
+		List<ItemStack> stacks = new ArrayList<>();
+		CustomMaterialType type;
+		if (stack.getItem() instanceof IMaterialComponent) {
+			if (stack.getItem() instanceof IMaterialDoubleComponent) {
+				type = ((IMaterialDoubleComponent) stack.getItem()).getPrimaryMaterialType();
+			}
+			else {
+				type = ((IMaterialSingleComponent) stack.getItem()).getMaterialType();
+			}
+		}
+		else {
+			type = fallbackType;
+		}
+
+		for (CustomMaterial material : CustomMaterialRegistry.getList(type)) {
+			ItemStack copy = stack.copy();
+			int modifiedCount = MathHelper.clamp(
+					material.getTier() * copy.getCount(),
+					1,
+					copy.getMaxStackSize());
+			copy.setCount(modifiedCount);
+			stacks.add(copy);
+		}
+		return stacks;
+	}
+
+	public static void modifyCounts(List<ItemStack> stacks) {
+		for (ItemStack stackToModify : stacks) {
+			CustomMaterial material = CustomToolHelper.getCustomPrimaryMaterial(stackToModify);
+			int modifiedCount = MathHelper.clamp(
+					material.getTier() * stackToModify.getCount(),
+					1,
+					stackToModify.getMaxStackSize());
+			stackToModify.setCount(modifiedCount);
+		}
 	}
 
 	/**
@@ -258,6 +481,11 @@ public class CustomToolHelper {
 	public static boolean materialOnTooltip() {
 		String cfg = I18n.translateToLocal("languagecfg.tooltiptier");
 		return cfg.equalsIgnoreCase("true");
+	}
+
+	public static String getMaterialNameForTooltip(CustomMaterial customMaterial) {
+		return I18n.translateToLocal(I18n.translateToLocal(Utils
+				.convertSnakeCaseToSplitCapitalized(customMaterial.getName())));
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -495,8 +723,8 @@ public class CustomToolHelper {
 
 	public static void tryDeconstruct(ItemStack newitem, ItemStack mainItem) {
 		CustomMaterialType type = null;
-		if (!newitem.isEmpty() && newitem.getItem() instanceof ITieredComponent) {
-			type = ((ITieredComponent) newitem.getItem()).getMaterialType(newitem);
+		if (!newitem.isEmpty() && newitem.getItem() instanceof IMaterialSingleComponent) {
+			type = ((IMaterialSingleComponent) newitem.getItem()).getMaterialType();
 		}
 
 		if (type != null) {

@@ -95,7 +95,7 @@ public class CarpenterDynamicRecipe extends CarpenterRecipeBase {
 		if (inputMaterial == CustomMaterialRegistry.NONE) {
 			inputMaterial = CustomMaterialRegistry.getMaterial(Constants.SCRAP_WOOD_TAG);
 		}
-		CustomMaterialRegistry.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial.getName());
+		CustomMaterialRegistry.addMaterial(outputModified, CustomToolHelper.slot_main, inputMaterial);
 		return outputModified;
 	}
 

@@ -1,11 +1,10 @@
 package minefantasy.mfr.api.crafting;
 
 import minefantasy.mfr.registry.types.CustomMaterialType;
-import net.minecraft.item.ItemStack;
 
-public interface ITieredComponent {
+public interface IMaterialSingleComponent extends IMaterialComponent{
 	/**
 	 * is it made of "wood", "metal", etc
 	 */
-	CustomMaterialType getMaterialType(ItemStack item);
+	CustomMaterialType getMaterialType();
 }

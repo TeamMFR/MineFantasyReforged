@@ -8,6 +8,7 @@ import mezz.jei.api.gui.IGuiItemStackGroup;
 import mezz.jei.api.gui.IRecipeLayout;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
+import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IRecipeCategory;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.IRecipeWrapper;
@@ -19,7 +20,6 @@ import minefantasy.mfr.init.MineFantasyBlocks;
 import minefantasy.mfr.recipe.AlloyRatioRecipe;
 import minefantasy.mfr.recipe.AlloyRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAlloy;
-import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -79,7 +79,8 @@ public class JEIAlloyRecipeCategory implements IRecipeCategory<JEIAlloyRecipe> {
 		List<List<ItemStack>> outputList = ingredients.getOutputs(VanillaTypes.ITEM);
 
 		// Init ingredient slots, 3x3 grid
-		if (recipeWrapper.recipe instanceof AlloyRatioRecipe) {
+		if (recipeWrapper.getRecipe() instanceof AlloyRatioRecipe) {
+			slots.setOverrideDisplayFocus(null);
 			for (int x = 0; x < AlloyRecipeBase.MAX_WIDTH; x++) {
 				for (int y = 0; y < AlloyRecipeBase.MAX_HEIGHT; y++) {
 					int slot = y * AlloyRecipeBase.MAX_WIDTH + x;
@@ -99,8 +100,6 @@ public class JEIAlloyRecipeCategory implements IRecipeCategory<JEIAlloyRecipe> {
 		// Init output slot
 		slots.init(9, false, 93, 18);
 
-		slots.set(ingredients);
-
 		// Assign ingredients to slots
 		for (int j = 0; j < inputs.size(); j++) {
 			slots.set(j, inputs.get(j));
@@ -109,6 +108,11 @@ public class JEIAlloyRecipeCategory implements IRecipeCategory<JEIAlloyRecipe> {
 		for (List<ItemStack> stacks : outputList) {
 			slots.set(9, stacks);
 		}
+
+		slots.addTooltipCallback((slotIndex, input, slotStack, tooltip) ->
+				JEIIntegration.addAnyMaterialTooltip(recipeWrapper.getRecipe().getInputs(),
+						slotStack, tooltip, JEIIntegration.getFocus(recipeLayout, IFocus.Mode.OUTPUT),
+						recipeWrapper.getRecipe().getAlloyRecipeOutput()));
 	}
 
 	/**
@@ -126,17 +130,7 @@ public class JEIAlloyRecipeCategory implements IRecipeCategory<JEIAlloyRecipe> {
 		for (AlloyRecipeBase alloyRecipe : alloyRecipes) {
 
 			if (alloyRecipe instanceof AlloyRatioRecipe) {
-				for (int currentRepeatAmount = 1; currentRepeatAmount <= ((AlloyRatioRecipe) alloyRecipe).getRepeatAmount(); currentRepeatAmount++) {
-					List<List<ItemStack>> ingredients = stackHelper.expandRecipeItemStackInputs(RecipeHelper
-							.expandPattern(RecipeHelper
-									.duplicateList(alloyRecipe.getInputs(), currentRepeatAmount),
-									alloyRecipe.getWidth(), alloyRecipe.getHeight(),
-									AlloyRecipeBase.MAX_WIDTH, AlloyRecipeBase.MAX_HEIGHT));
-					ItemStack outputCopy = alloyRecipe.getAlloyRecipeOutput().copy();
-					outputCopy.setCount(outputCopy.getCount() * currentRepeatAmount);
-					recipes.add(new JEIAlloyRatioRecipe((AlloyRatioRecipe) alloyRecipe, ingredients, outputCopy, stackHelper));
-				}
-
+				recipes.add(new JEIAlloyRatioRecipe((AlloyRatioRecipe) alloyRecipe, stackHelper));
 			}
 			else {
 				recipes.add(new JEIAlloyRecipe(alloyRecipe, stackHelper));

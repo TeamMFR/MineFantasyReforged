@@ -18,10 +18,10 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:plate_huge"
+      "item": "#ALL_PLATES_HUGE"
     },
     "L": {
-      "item": "minefantasyreforged:plate"
+      "item": "#ALL_PLATES"
     }
   },
   "result": {

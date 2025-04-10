@@ -79,7 +79,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
-		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tierModifyOutputCount", false);
+		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
 		ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 
@@ -99,7 +99,7 @@ public class AnvilRecipeFactory implements IRecipeMFRFactory<AnvilRecipeBase> {
 		int recipe_time = JsonUtils.getInt(json, "recipe_time", 0);
 		int skillXp = JsonUtils.getInt(json, "skill_xp", 0);
 		float vanillaXp = JsonUtils.getFloat(json, "vanilla_xp", 0);
-		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tierModifyOutputCount", false);
+		boolean tierModifyOutputCount = JsonUtils.getBoolean(json, "tier_modify_output_count", false);
 
 		return new AnvilShapedCustomMaterialRecipe(recipe.getIngredients(), recipe.getRecipeOutput(),
 				tool_type, recipe_time, recipe_hammer, anvil_tier, output_hot, research, skill,

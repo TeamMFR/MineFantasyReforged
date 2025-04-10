@@ -22,6 +22,7 @@ import minefantasy.mfr.recipe.CraftingManagerSpecial;
 import minefantasy.mfr.recipe.IAnvil;
 import minefantasy.mfr.recipe.SpecialRecipeBase;
 import minefantasy.mfr.util.CustomToolHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
@@ -268,7 +269,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			}
 
 			if (result.getMaxStackSize() == 1 && lastHit != null) {
-				getNBT(result).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
+				NbtUtils.getOrCreateNBT((result)).setString(CRAFTED_BY_NAME_TAG, lastHit.getName());
 			}
 
 			int temp = this.calcAverageTemp();
@@ -465,13 +466,6 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			return (int) (totalTemp / itemCount);
 		}
 		return 0;
-	}
-
-	private NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	public void consumeResources(EntityPlayer player) {
@@ -701,7 +695,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 			return;
 		}
 
-		NBTTagCompound nbt = this.getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setBoolean(trait, flag);
 	}
 

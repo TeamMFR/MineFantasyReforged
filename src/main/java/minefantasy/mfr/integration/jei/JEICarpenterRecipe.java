@@ -4,21 +4,29 @@ import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
+import minefantasy.mfr.recipe.CarpenterDynamicRecipe;
 import minefantasy.mfr.recipe.CarpenterRecipeBase;
+import minefantasy.mfr.recipe.ingredients.IngredientMaterial;
+import minefantasy.mfr.registry.types.CustomMaterialType;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Represents a JEI "recipe" for the carpenter bench.
  */
 public class JEICarpenterRecipe implements IRecipeWrapper {
 
-	private final ItemStack result;
+	private ItemStack result;
+	private List<List<ItemStack>> results;
 	private final CarpenterRecipeBase recipe;
 
 	private final List<List<ItemStack>> ingredients;
@@ -30,14 +38,43 @@ public class JEICarpenterRecipe implements IRecipeWrapper {
 				recipe.getWidth(), recipe.getHeight(),
 				CarpenterRecipeBase.MAX_WIDTH, CarpenterRecipeBase.MAX_HEIGHT));
 		this.recipe = recipe;
-		this.result = recipe.getCarpenterRecipeOutput();
+
+		if (CarpenterRecipeBase.isCustomRecipe(recipe) || recipe instanceof CarpenterDynamicRecipe) {
+			Map<CustomMaterialType, List<IngredientMaterial>> ingredientMaterialsByType = recipe
+					.getIngredients()
+					.stream()
+					.filter(ingredient -> ingredient instanceof IngredientMaterial)
+					.map(ingredient -> ((IngredientMaterial) ingredient))
+					.collect(Collectors.groupingBy(ingredient -> ingredient.getRequiredMaterial().getType()));
+			List<ItemStack> stacks = CustomToolHelper
+					.constructAllVariants(recipe.getCarpenterRecipeOutput(), ingredientMaterialsByType);
+			if (recipe.isTierModifyOutputCount()) {
+				CustomToolHelper.modifyCounts(stacks);
+			}
+			results = Collections.singletonList(stacks);
+		}
+		else {
+			if (recipe.isTierModifyOutputCount()) {
+				results = Collections.singletonList(CustomToolHelper
+						.constructModifiedCounts(recipe.getCarpenterRecipeOutput(), CustomMaterialType.WOOD_MATERIAL));
+			}
+			else {
+				result = recipe.getCarpenterRecipeOutput();
+			}
+		}
+
 		this.ingredients = ingredients;
 	}
 
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ingredients.setInputLists(VanillaTypes.ITEM, this.ingredients);
-		ingredients.setOutput(VanillaTypes.ITEM, result);
+		if (CarpenterRecipeBase.isCustomRecipe(recipe) || recipe instanceof CarpenterDynamicRecipe) {
+			ingredients.setOutputLists(VanillaTypes.ITEM, results);
+		}
+		else {
+			ingredients.setOutput(VanillaTypes.ITEM, result);
+		}
 	}
 
 	@Override
@@ -77,4 +114,7 @@ public class JEICarpenterRecipe implements IRecipeWrapper {
 		return false;
 	}
 
+	public CarpenterRecipeBase getRecipe() {
+		return recipe;
+	}
 }

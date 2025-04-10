@@ -8,10 +8,10 @@
 			"item": "minefantasyreforged:leather_strip"
 		},
 		{
-			"item": "minefantasyreforged:bar"
+			"item": "#ALL_BARS"
 		},
 		{
-			"item": "minefantasyreforged:timber"
+			"item": "#ALL_TIMBERS"
 		}
 	],
 	"shared": [

@@ -1,6 +1,5 @@
 package minefantasy.mfr.item;
 
-import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.integration.CustomSand;
 import minefantasy.mfr.util.MFRLogUtil;
@@ -24,7 +23,7 @@ public class ItemBowl extends ItemComponentMFR {
 	private Random rand = new Random();
 
 	public ItemBowl(String name) {
-		super(name, Rarity.COMMON);
+		super(name);
 	}
 
 	@Override

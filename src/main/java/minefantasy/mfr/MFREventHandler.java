@@ -48,7 +48,7 @@ import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.registry.CustomMaterialRegistry;
 import minefantasy.mfr.registry.types.CustomMaterialType;
 import minefantasy.mfr.util.ArmourCalculator;
-import minefantasy.mfr.util.ArrowEffectsMF;
+import minefantasy.mfr.util.ArrowUtils;
 import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.MFRLogUtil;
 import minefantasy.mfr.util.TacticalManager;
@@ -585,7 +585,7 @@ public final class MFREventHandler {
 			useArrows = false;
 		}
 		if (dropper != null && useArrows && ConfigSpecials.stickArrows && !dropper.world.isRemote) {
-			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowEffectsMF.getStuckArrows(dropper);
+			ArrayList<ItemStack> stuckArrows = (ArrayList<ItemStack>) ArrowUtils.getStuckArrows(dropper);
 			if (!stuckArrows.isEmpty()) {
 
 				for (ItemStack arrow : stuckArrows) {

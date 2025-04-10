@@ -3,6 +3,7 @@ package minefantasy.mfr.item;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import minefantasy.mfr.MineFantasyReforged;
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.api.tier.IToolMaterial;
@@ -10,6 +11,7 @@ import minefantasy.mfr.api.tool.ISmithTongs;
 import minefantasy.mfr.api.weapon.IRackItem;
 import minefantasy.mfr.client.render.item.RenderTong;
 import minefantasy.mfr.constants.Rarity;
+import minefantasy.mfr.init.MineFantasyMaterials;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.material.CustomMaterial;
 import minefantasy.mfr.proxy.IClientRegister;
@@ -53,7 +55,7 @@ import java.util.List;
 /**
  * @author Anonymous Productions
  */
-public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISmithTongs, IClientRegister {
+public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISmithTongs, IMaterialSingleComponent, IClientRegister {
 	protected Rarity itemRarity;
 	private float baseDamage;
 	// ===================================================== CUSTOM START
@@ -177,10 +179,6 @@ public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISm
 		return CustomToolHelper.getMaxDamage(stack, super.getMaxDamage(stack));
 	}
 
-	public ItemStack construct(String main) {
-		return CustomToolHelper.construct(this, main, null);
-	}
-
 	@Override
 	public IRarity getForgeRarity(ItemStack item) {
 		return CustomToolHelper.getRarity(item, itemRarity);
@@ -225,7 +223,7 @@ public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISm
 			ArrayList<CustomMaterial> metal = CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL);
 			for (CustomMaterial customMat : metal) {
 				if (MineFantasyReforged.isDebug() || customMat.getMaterialIngredient() != Ingredient.EMPTY) {
-					items.add(this.construct(customMat.getName()));
+					items.add(CustomToolHelper.constructMainSlot(this, customMat.getName()));
 				}
 			}
 		} else {
@@ -308,6 +306,17 @@ public class ItemTongs extends ItemTool implements IRackItem, IToolMaterial, ISm
 	@Override
 	public boolean flip(ItemStack itemStack) {
 		return false;
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		CustomMaterialType type = CustomMaterialType.METAL_MATERIAL;
+
+		if (toolMaterial == MineFantasyMaterials.STONE.getToolMaterial()) {
+			type = CustomMaterialType.NONE;
+		}
+
+		return type;
 	}
 
 	@Override

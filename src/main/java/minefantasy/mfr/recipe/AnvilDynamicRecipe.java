@@ -190,12 +190,10 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 
 		return result;
 	}
-
 	/**
 	 * Returns all ItemStacks that are the result of this recipe
 	 **/
-	public static List<ItemStack> getOutputsFromGridMap(
-			List<List<ItemStack>> ingredients,
+	public static List<ItemStack> getDynamicRecipeOutputs(
 			boolean modifyOutput,
 			ItemStack result) {
 
@@ -204,37 +202,11 @@ public class AnvilDynamicRecipe extends AnvilRecipeBase {
 		//Bar to Ingot
 		if (modifyOutput){
 			for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)) {
-				if (material instanceof MetalMaterial) {
-					outputs.addAll(Arrays.asList(material.getMaterialIngredient().getMatchingStacks()));
-				}
+				outputs.addAll(Arrays.asList(material.getMaterialIngredient().getMatchingStacks()));
 			}
 		}
 		else {
-			String metal = null;
-			for (List<ItemStack> stacks : ingredients) {
-				//Ingot to Bar
-				for (ItemStack inputItem : stacks) {
-					ItemStack resultCopy = result.copy();
-					String component_metal = CustomToolHelper.getComponentMaterial(inputItem, CustomMaterialType.METAL_MATERIAL);
-
-					if (metal == null && component_metal != null) {
-						metal = component_metal;
-					}
-
-					//ingot to bar material matching
-					for (CustomMaterial material : CustomMaterialRegistry.getList(CustomMaterialType.METAL_MATERIAL)){
-						Ingredient materialIngredient = material.getMaterialIngredient();
-						if (materialIngredient.apply(ItemHeated.getStack(inputItem))) {
-							metal = material.getName();
-						}
-					}
-
-					if (metal != null) {
-						CustomMaterialRegistry.addMaterial(resultCopy, CustomToolHelper.slot_main, metal);
-					}
-					outputs.add(resultCopy);
-				}
-			}
+			outputs.addAll(CustomToolHelper.constructAllVariants(result.getItem()));
 		}
 
 		return outputs;

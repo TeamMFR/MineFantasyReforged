@@ -16,13 +16,13 @@
   ],
   "key": {
     "P": {
-      "item": "minefantasyreforged:timber_pane"
+      "item": "#ALL_TIMBERS"
     },
     "H": {
       "item": "minefantasyreforged:hinge"
     },
     "L": {
-      "item": "minefantasyreforged:timber_cut"
+      "item": "#ALL_TIMBER_CUTS"
     },
     "N": {
       "item": "minefantasyreforged:nail"

@@ -22,7 +22,9 @@
       "item": "minefantasyreforged:bronze_gears"
     },
     "S": {
-      "item": "minefantasyreforged:standard_spanner"
+      "type": "minefantasyreforged:item_material",
+      "item": "minefantasyreforged:standard_spanner",
+      "material_type": "metal_material"
     },
     "I": {
       "item": "minefantasyreforged:iron_frame"

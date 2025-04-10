@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JEIBigFurnaceRecipe implements IRecipeWrapper {
 	private final ItemStack result;
-	protected BigFurnaceRecipeBase recipe;
+	private BigFurnaceRecipeBase recipe;
 	private final List<List<ItemStack>> ingredients;
 
 	public JEIBigFurnaceRecipe(BigFurnaceRecipeBase recipe, IStackHelper stackHelper ) {
@@ -38,5 +38,9 @@ public class JEIBigFurnaceRecipe implements IRecipeWrapper {
 	@Override
 	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
 		return false;
+	}
+
+	public BigFurnaceRecipeBase getRecipe() {
+		return recipe;
 	}
 }

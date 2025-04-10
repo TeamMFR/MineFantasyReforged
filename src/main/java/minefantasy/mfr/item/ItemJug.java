@@ -2,7 +2,6 @@ package minefantasy.mfr.item;
 
 import minefantasy.mfr.api.heating.TongsHelper;
 import minefantasy.mfr.config.ConfigStamina;
-import minefantasy.mfr.constants.Rarity;
 import minefantasy.mfr.init.MineFantasyItems;
 import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
@@ -30,7 +29,7 @@ public class ItemJug extends ItemComponentMFR {
 	private final Random rand = new Random();
 
 	public ItemJug(String type, boolean drinkable) {
-		super("jug_" + type, Rarity.COMMON);
+		super("jug_" + type);
 		setCreativeTab(MineFantasyTabs.tabFood);
 		this.type = type;
 		this.drinkable = drinkable;

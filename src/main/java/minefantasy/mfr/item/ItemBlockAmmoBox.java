@@ -1,5 +1,6 @@
 package minefantasy.mfr.item;
 
+import minefantasy.mfr.api.crafting.IMaterialSingleComponent;
 import minefantasy.mfr.api.tool.IStorageBlock;
 import minefantasy.mfr.block.BlockAmmoBox;
 import minefantasy.mfr.block.BlockTileEntity;
@@ -22,7 +23,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
+public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock, IMaterialSingleComponent {
 
 
 	public ItemBlockAmmoBox(BlockTileEntity block) {
@@ -57,16 +58,17 @@ public class ItemBlockAmmoBox extends ItemBlock implements IStorageBlock {
 		}
 		ArrayList<CustomMaterial> wood = CustomMaterialRegistry.getList(CustomMaterialType.WOOD_MATERIAL);
 		for (CustomMaterial customMat : wood) {
-			items.add(this.construct(customMat.getName()));
+			items.add(CustomToolHelper.constructMainSlot(this, customMat.getName()));
 		}
-	}
-
-	private ItemStack construct(String name) {
-		return CustomToolHelper.constructSingleColoredLayer(this, name, 1);
 	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack item) {
 		return CustomToolHelper.getLocalisedName(item, this.getUnlocalizedNameInefficiently(item) + ".name");
+	}
+
+	@Override
+	public CustomMaterialType getMaterialType() {
+		return CustomMaterialType.WOOD_MATERIAL;
 	}
 }

@@ -8,6 +8,7 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.StaminaBar;
 import minefantasy.mfr.proxy.IClientRegister;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.ToolHelper;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -90,7 +91,7 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 			if (rayTraceResult.typeOfHit == RayTraceResult.Type.BLOCK) {
 				BlockPos pos = rayTraceResult.getBlockPos();
 
-				NBTTagCompound nbt = getOrCreateNBT(player.getHeldItemMainhand());
+				NBTTagCompound nbt = NbtUtils.getOrCreateNBT(player.getHeldItemMainhand());
 				if (init) {
 					nbt.setInteger("MF_HeldPosX", pos.getX());
 					nbt.setInteger("MF_HeldPosY", pos.getY());
@@ -116,13 +117,6 @@ public class ItemClimbingPick extends ItemPickaxe implements IToolMaterial, ICli
 			}
 		}
 		return false;
-	}
-
-	private NBTTagCompound getOrCreateNBT(ItemStack item) {
-		if (!item.hasTagCompound()) {
-			item.setTagCompound(new NBTTagCompound());
-		}
-		return item.getTagCompound();
 	}
 
 	@Override

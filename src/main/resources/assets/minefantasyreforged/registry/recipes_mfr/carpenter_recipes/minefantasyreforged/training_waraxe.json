@@ -18,7 +18,7 @@
       "item": "#PLANK_WOOD"
     },
     "L": {
-      "item": "minefantasyreforged:timber"
+      "item": "#ALL_TIMBERS_EXCEPT_SCRAP"
     },
     "N": {
       "item": "minefantasyreforged:nail"

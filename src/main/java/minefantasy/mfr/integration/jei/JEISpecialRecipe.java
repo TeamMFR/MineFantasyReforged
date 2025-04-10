@@ -9,12 +9,14 @@ import minefantasy.mfr.api.heating.Heatable;
 import minefantasy.mfr.recipe.AnvilRecipeBase;
 import minefantasy.mfr.recipe.CraftingManagerAnvil;
 import minefantasy.mfr.recipe.SpecialRecipeBase;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.GuiHelper;
 import minefantasy.mfr.util.RecipeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +26,9 @@ import java.util.Map;
  */
 public class JEISpecialRecipe implements IRecipeWrapper {
 
-	private ItemStack result;
-	protected SpecialRecipeBase recipe;
-	protected AnvilRecipeBase anvilRecipe;
+	private List<List<ItemStack>> results;
+	private SpecialRecipeBase recipe;
+	private AnvilRecipeBase anvilRecipe;
 	private List<List<ItemStack>> ingredients;
 
 	public JEISpecialRecipe(SpecialRecipeBase recipe, IStackHelper stackHelper) {
@@ -38,7 +40,7 @@ public class JEISpecialRecipe implements IRecipeWrapper {
 					anvilRecipe.getWidth(), anvilRecipe.getHeight(),
 					AnvilRecipeBase.MAX_WIDTH, AnvilRecipeBase.MAX_HEIGHT));
 			this.recipe = recipe;
-			this.result = recipe.getOutput();
+			this.results = Collections.singletonList(CustomToolHelper.constructAllVariants(recipe.getOutput().getItem()));
 			this.ingredients = ingredients;
 		}
 	}
@@ -46,7 +48,7 @@ public class JEISpecialRecipe implements IRecipeWrapper {
 	@Override
 	public void getIngredients(IIngredients ingredients) {
 		ingredients.setInputLists(VanillaTypes.ITEM, this.ingredients);
-		ingredients.setOutput(VanillaTypes.ITEM, result);
+		ingredients.setOutputLists(VanillaTypes.ITEM, results);
 	}
 
 	@Override
@@ -122,5 +124,13 @@ public class JEISpecialRecipe implements IRecipeWrapper {
 	@Override
 	public boolean handleClick(Minecraft minecraft, int mouseX, int mouseY, int mouseButton) {
 		return false;
+	}
+
+	public SpecialRecipeBase getRecipe() {
+		return recipe;
+	}
+
+	public AnvilRecipeBase getAnvilRecipe() {
+		return anvilRecipe;
 	}
 }

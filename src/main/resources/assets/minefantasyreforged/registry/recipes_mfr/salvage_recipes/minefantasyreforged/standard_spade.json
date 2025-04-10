@@ -5,7 +5,7 @@
 	},
 	"outputs": [
 		{
-			"item": "minefantasyreforged:bar"
+			"item": "#ALL_BARS"
 		},
 		{
 			"type": "minefantasyreforged:item_count",
@@ -13,8 +13,9 @@
 			"count": 2
 		},
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
 			"count": 2
 		}
 	],

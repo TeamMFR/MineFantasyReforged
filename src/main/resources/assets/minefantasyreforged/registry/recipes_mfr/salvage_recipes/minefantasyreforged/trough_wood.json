@@ -5,8 +5,10 @@
 	},
 	"outputs": [
 		{
-			"type": "minefantasyreforged:item_count",
+			"type": "minefantasyreforged:item_material",
 			"item": "minefantasyreforged:timber",
+			"material_type": "wood_material",
+			"excluded_materials": ["scrap_wood"],
 			"count": 5
 		},
 		{

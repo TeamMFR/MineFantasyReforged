@@ -19,7 +19,9 @@ import minefantasy.mfr.init.MineFantasyTabs;
 import minefantasy.mfr.mechanics.AmmoMechanics;
 import minefantasy.mfr.mechanics.CombatMechanics;
 import minefantasy.mfr.network.NetworkHandler;
+import minefantasy.mfr.util.CustomToolHelper;
 import minefantasy.mfr.util.ModelLoaderHelper;
+import minefantasy.mfr.util.NbtUtils;
 import minefantasy.mfr.util.PowerArmour;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.util.ITooltipFlag;
@@ -62,32 +64,26 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 	}
 
 	public static void setUseAction(ItemStack item, String action) {
-		AmmoMechanics.getNBT(item).setString(useTypeNBT, action);
+		NbtUtils.getOrCreateNBT(item).setString(useTypeNBT, action);
 	}
 
 	public static String getUseAction(ItemStack item) {
-		String action = AmmoMechanics.getNBT(item).getString(useTypeNBT);
+		String action = NbtUtils.getOrCreateNBT(item).getString(useTypeNBT);
 
 		return action != null ? action : "null";
 	}
 
 	public static void setPart(String part, ItemStack item, int id) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		nbt.setInteger(partNBT + part, id);
 	}
 
 	public static int getPart(String part, ItemStack item) {
-		NBTTagCompound nbt = getNBT(item);
+		NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
 		if (nbt.hasKey(partNBT + part)) {
 			return nbt.getInteger(partNBT + part);
 		}
 		return -1;
-	}
-
-	public static NBTTagCompound getNBT(ItemStack item) {
-		if (!item.hasTagCompound())
-			item.setTagCompound(new NBTTagCompound());
-		return item.getTagCompound();
 	}
 
 	@Override
@@ -129,7 +125,7 @@ public class ItemCrossbow extends ItemBaseMFR implements IFirearm, IDisplayMFRAm
 		if (action.equalsIgnoreCase("reload")) {
 			if (storage.isEmpty() && infinity) {
 				shouldConsume = false;
-				storage = MineFantasyItems.STANDARD_BOLT.construct("Magic");
+				storage = CustomToolHelper.constructMainSlot(this, "Magic");
 			}
 			if (!storage.isEmpty())// RELOAD
 			{
