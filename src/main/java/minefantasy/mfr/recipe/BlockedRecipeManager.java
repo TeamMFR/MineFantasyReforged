@@ -35,7 +35,8 @@ public class BlockedRecipeManager {
 	public void loadBlockedRecipes() {
 		ModContainer modContainer = Loader.instance().activeModContainer();
 
-		FileUtils.createCustomDataDirectory("config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes/blocked_recipes.json");
+		String configPath = "config/" + Constants.CONFIG_DIRECTORY + "/custom/recipes";
+		loadBlockedRecipes(new File(configPath), "blocked_recipes.json");
 
 		Loader.instance().getActiveModList().forEach(m ->
 				loadBlockedRecipes(m.getSource(),
@@ -53,25 +54,23 @@ public class BlockedRecipeManager {
 				return;
 			}
 
-			if (file.toFile().isFile()) {
-				String fileName = FilenameUtils.removeExtension(file.getFileName().toString());
+			String fileName = FilenameUtils.removeExtension(file.getFileName().toString());
 
-				BufferedReader reader = null;
-				try {
-					reader = Files.newBufferedReader(file);
-					JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
+			BufferedReader reader = null;
+			try {
+				reader = Files.newBufferedReader(file);
+				JsonObject json = JsonUtils.fromJson(GSON, reader, JsonObject.class);
 
-					parse(json);
-				}
-				catch (JsonParseException e) {
-					MineFantasyReforged.LOG.error("Parsing error loading blocked recipe entry in {} in {}", fileName, file, e);
-				}
-				catch (IOException e) {
-					MineFantasyReforged.LOG.error("Couldn't read blocked recipe entry in {} in {}", fileName, file, e);
-				}
-				finally {
-					IOUtils.closeQuietly(reader);
-				}
+				parse(json);
+			}
+			catch (JsonParseException e) {
+				MineFantasyReforged.LOG.error("Parsing error loading blocked recipe entry in {} in {}", fileName, file, e);
+			}
+			catch (IOException e) {
+				MineFantasyReforged.LOG.error("Couldn't read blocked recipe entry in {} in {}", fileName, file, e);
+			}
+			finally {
+				IOUtils.closeQuietly(reader);
 			}
 		});
 	}
