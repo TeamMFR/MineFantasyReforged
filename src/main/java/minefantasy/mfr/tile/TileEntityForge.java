@@ -126,6 +126,9 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			return;
 		}
 
+		float oldTemp = temperature;
+		float oldFuel = fuel;
+
 		if (ticksExisted % 20 == 0) {
 			ItemStack item = getInventory().getStackInSlot(0);
 			if (!item.isEmpty() && !world.isRemote) {
@@ -147,12 +150,14 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 		if (!isLit() && !world.isRemote) {
 			if (temperature > 0 && ticksExisted % 5 == 0) {
 				temperature = 0;
+				sendUpdates();
 			}
 			return;
 		}
 		tickFuel();
 		if (fuel <= 0) {
 			this.extinguish();
+			sendUpdates();
 			return;
 		}
 		boolean isBurning = isBurning();// Check if it's burning
@@ -166,6 +171,14 @@ public class TileEntityForge extends TileEntityBase implements IBasicMetre, IHea
 			}
 		} else if (temperature > maxTemp && rand.nextInt(20) == 0) {
 			temperature -= 10;
+		}
+
+		//Send updates to sync with client if temperature has changed
+		if (oldTemp != temperature && ticksExisted % 20 == 0) {
+			sendUpdates();
+		}
+		if (oldFuel != fuel && ticksExisted % 40 == 0) {
+			sendUpdates();
 		}
 
 		if (isBurning && temperature > 250 && rand.nextInt(20) == 0 && !isOutside()) {

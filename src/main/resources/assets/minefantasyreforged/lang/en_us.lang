@@ -945,7 +945,7 @@ item.standard_katana.name=%1$s Katana
 item.standard_greatsword.name=%1$s Greatsword
 item.standard_warhammer.name=%1$s Warhammer
 item.standard_battleaxe.name=%1$s Battleaxe
-item.standard_halbeard.name=%1$s Halbeard
+item.standard_halbeard.name=%1$s Halberd
 item.standard_lance.name=%1$s Lance
 
 item.standard_handpick.name=%1$s Handpick
@@ -1011,7 +1011,7 @@ item.dragonforged_katana.name=Dragonforged %1$s Katana
 item.dragonforged_greatsword.name=Dragonforged %1$s Greatsword
 item.dragonforged_warhammer.name=Dragonforged %1$s Warhammer
 item.dragonforged_battleaxe.name=Dragonforged %1$s Battleaxe
-item.dragonforged_halbeard.name=Dragonforged %1$s Halbeard
+item.dragonforged_halbeard.name=Dragonforged %1$s Halberd
 item.dragonforged_lance.name=Dragonforged %1$s Lance
 
 item.dragonforged_handpick.name=Dragonforged %1$s Handpick
@@ -1070,7 +1070,7 @@ item.ornate_katana.name=Ornate %1$s Katana
 item.ornate_greatsword.name=Ornate %1$s Greatsword
 item.ornate_warhammer.name=Ornate %1$s Warhammer
 item.ornate_battleaxe.name=Ornate %1$s Battleaxe
-item.ornate_halbeard.name=Ornate %1$s Halbeard
+item.ornate_halbeard.name=Ornate %1$s Halberd
 item.ornate_lance.name=Ornate %1$s Lance
 
 item.ornate_handpick.name=Ornate %1$s Handpick
@@ -1847,7 +1847,7 @@ knowledge.warhammer.info=$hWarhammer$r^If you ever wanted to hit something acros
 
 knowledge.battleaxe.info=$hBattleaxe$r^For when a waraxe won't cut it (pun not intended). Battleaxes do more damage then waraxes and are heavier(obviously). for an even crazier barbaric type.^Tiring to use though
 
-knowledge.halbeard.info=$hHalbeard$r^Well if a spear is too whimpy! You can put an axe on it. Halbeards do more damage than spears but are heavier.^Halbeards can stab when sprinting.
+knowledge.halbeard.info=$hHalberd$r^Well if a spear is too whimpy! You can put an axe on it. Halberds do more damage than spears but are heavier.^Halberds can stab when sprinting.
 
 knowledge.lance.info=$hLance$r^Lances are pretty useless as a weapon. But when mounted they do more damage based on the speed you're going.^More suited for jousting if you haven't figured that out.
 

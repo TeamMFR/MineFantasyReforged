@@ -104,7 +104,7 @@ public class TileEntityFirepit extends TileEntityBase implements ITickable, IBas
 		if (!input.isEmpty()) {
 			Item i = input.getItem();
 			if (i == Items.STICK)
-				return 600;// 30Sec
+				return 150;// 15Sec
 			if (i == MineFantasyItems.TIMBER || i == MineFantasyItems.TIMBER_CUT) {
 				return (int) (200 * CustomToolHelper.getBurnModifier(input));
 			}
