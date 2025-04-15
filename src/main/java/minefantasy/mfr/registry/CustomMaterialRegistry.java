@@ -142,8 +142,14 @@ public class CustomMaterialRegistry extends DataLoader {
 		ResourceLocation key = new ResourceLocation(MineFantasyReforged.MOD_ID, customMaterial.getName());
 		customMaterial.setRegistryName(key);
 
-		CUSTOM_MATERIALS.register(customMaterial);
-		getList(customMaterial.getType()).add(customMaterial);
+		if (!CUSTOM_MATERIALS.containsKey(key)) {
+			CUSTOM_MATERIALS.register(customMaterial);
+			getList(customMaterial.getType()).add(customMaterial);
+		}
+		else {
+			MineFantasyReforged.LOG.info(String
+					.format("Material with key %s already registered, skipping second instance", key));
+		}
 	}
 
 	/**
