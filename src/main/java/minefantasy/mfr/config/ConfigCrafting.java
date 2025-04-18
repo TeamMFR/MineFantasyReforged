@@ -23,7 +23,6 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 	public static boolean allowIronResmelt;
 	public static int maxFurnaceHeight;
 	public static boolean canCookBasics = true;
-	public static boolean shouldSalvagePickFromList = false;
 	public static float minimumDragonforgedTemperature = 12250;
 
 	public ConfigCrafting(String name) {
@@ -65,11 +64,6 @@ public class ConfigCrafting extends ConfigurationBaseMF {
 				"Cook non-mf food on cooktop",
 				true,
 				"This means non-mf food cooked in a furnace can work on a cooking plate").getString());
-		shouldSalvagePickFromList = Boolean.parseBoolean(config.get(SALVAGE_RECIPE_SETTINGS,
-				"Salvage OreDict Setting",
-				false,
-				"If true, this means that the Salvage recipe will pick one ItemStack from the OreDict List at random. "
-						+ "\nIf false, it will add all stacks. This is NOT recommended for OreDicted Recipes.").getString());
 		minimumDragonforgedTemperature = Float.parseFloat(config.get(SPECIAL_RECIPE_SETTINGS,
 				"Dragonforged Minimum Temperature",
 				12250,

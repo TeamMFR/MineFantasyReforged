@@ -43,7 +43,7 @@ public class CustomMaterialFactory {
 		String rarity = JsonUtils.getString(properties, "rarity");
 		int enchantability = JsonUtils.getInt(properties, "enchantability");
 		int craftTier = JsonUtils.getInt(properties, "craft_tier");
-		int craftTimeModifier = JsonUtils.getInt(properties, "craft_time_modifier");
+		float craftTimeModifier = JsonUtils.getFloat(properties, "craft_time_modifier");
 		boolean unbreakable = JsonUtils.getBoolean(properties, "unbreakable");
 
 		JsonObject armourStats = JsonUtils.getJsonObject(json, "armour_stats");

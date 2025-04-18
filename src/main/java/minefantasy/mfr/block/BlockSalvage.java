@@ -2,7 +2,6 @@ package minefantasy.mfr.block;
 
 import minefantasy.mfr.api.crafting.ISalvageDrop;
 import minefantasy.mfr.api.crafting.ISpecialSalvage;
-import minefantasy.mfr.config.ConfigCrafting;
 import minefantasy.mfr.constants.Skill;
 import minefantasy.mfr.constants.Tool;
 import minefantasy.mfr.init.MineFantasySounds;
@@ -183,15 +182,7 @@ public class BlockSalvage extends BasicBlockMF{
 		//Normal
 		for (Ingredient ingredient : salvageRecipe.getOutputs()) {
 
-			if (ConfigCrafting.shouldSalvagePickFromList) {
-				ItemStack stack = ingredient.getMatchingStacks()[random.nextInt(ingredient.getMatchingStacks().length)];
-				items.addAll(dropItemStack(mainItem, user, stack, chanceModifier, chance));
-			}
-			else {
-				for (ItemStack stack : ingredient.getMatchingStacks()) {
-					items.addAll(dropItemStack(mainItem, user, stack, chanceModifier, chance));
-				}
-			}
+			items.addAll(dropItemStack(mainItem, user, ingredient.getMatchingStacks()[0], chanceModifier, chance));
 		}
 
 		//Grant XP
@@ -219,7 +210,7 @@ public class BlockSalvage extends BasicBlockMF{
 				if (canSalvage) {
 					ItemStack newItem = entry.copy();
 					newItem.setCount(1);
-					if (!CustomToolHelper.hasAnyMaterial(newItem)) {
+					if (CustomToolHelper.hasAnyMaterial(newItem)) {
 						CustomToolHelper.tryDeconstruct(newItem, mainItem);
 					}
 					items.add(newItem);

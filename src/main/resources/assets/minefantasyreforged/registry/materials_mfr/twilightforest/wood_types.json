@@ -95,7 +95,8 @@
         {
             "name": "towerwood",
             "materialIngredient": {
-                "item": "twilightforest:tower_wood"
+                "item": "twilightforest:tower_wood",
+                "data": 0
             },
             "properties": {
                 "tier": 2,

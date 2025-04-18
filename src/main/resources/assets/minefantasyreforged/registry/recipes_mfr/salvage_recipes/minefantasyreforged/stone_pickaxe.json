@@ -14,13 +14,5 @@
 			"item": "minecraft:cobblestone",
 			"count": 3
 		}
-	],
-	"conditions" : [
-		{
-			"type": "forge:not",
-			"value": {
-				"type": "minefantasyreforged:should_salvage_pick_from_list"
-			}
-		}
 	]
 }
