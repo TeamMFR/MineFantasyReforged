@@ -54,7 +54,7 @@ public class NetworkHandler implements IGuiHandler {
 	public static final NetworkHandler INSTANCE = new NetworkHandler();
 	public static final String CHANNEL_NAME = "MFR";
 
-	//unused: 16, 18, 20, 25
+	//unused: 12, 14, 16, 18, 20, 25
 	private static final int PLAYER_SYNC_PACKET = 1;
 	private static final int STAMINA_PACKET = 2;
 	private static final int PARRY_PACKET = 3;
@@ -66,9 +66,7 @@ public class NetworkHandler implements IGuiHandler {
 	private static final int REMOVE_OFFHAND_PACKET = 9;
 	private static final int OPEN_RELOAD_GUI_PACKET = 10;
 	private static final int LEVEL_UP_PACKET = 11;
-	private static final int FORGE_PACKET = 12;
 	private static final int RESEARCH_TABLE_PACKET = 13;
-	private static final int TROUGH_PACKET = 14;
 	private static final int BOMB_BENCH_PACKET = 15;
 	private static final int BELLOW_PACKET = 16;
 	private static final int ROAD_PACKET = 17;
@@ -116,8 +114,6 @@ public class NetworkHandler implements IGuiHandler {
 		PacketMF.registerPacket(OPEN_RELOAD_GUI_PACKET, OpenReloadGUIPacket.class, OpenReloadGUIPacket::new);
 		PacketMF.registerPacket(LEVEL_UP_PACKET, LevelUpPacket.class, LevelUpPacket::new);
 		PacketMF.registerPacket(RESEARCH_TABLE_PACKET, ResearchTablePacket.class, ResearchTablePacket::new);
-		PacketMF.registerPacket(TROUGH_PACKET, TroughPacket.class, TroughPacket::new);
-		PacketMF.registerPacket(FORGE_PACKET, ForgePacket.class, ForgePacket::new);
 		PacketMF.registerPacket(BOMB_BENCH_PACKET, BombBenchPacket.class, BombBenchPacket::new);
 		PacketMF.registerPacket(BELLOW_PACKET, BellowsPacket.class, BellowsPacket::new);
 		PacketMF.registerPacket(ROAD_PACKET, RoadPacket.class, RoadPacket::new);

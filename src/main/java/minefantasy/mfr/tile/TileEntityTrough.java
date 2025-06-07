@@ -13,8 +13,6 @@ import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
@@ -22,13 +20,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBlock, ITickable {
-	public static int capacityScale = 8;
-	public int colorInt;
-	/**
-	 * The number of fill_count entries in the blockstate json
-	 */
-	private static final int fillLevels = 7;
-	public int fill;
+	private static final int capacityScale = 8;
+	private int colorInt;
+	private int fill;
 
 	public TileEntityTrough() {
 		super("trough_wood");
@@ -50,7 +44,7 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 	/**
 	 * Called when a hot item is soaked into the water of the trough
 	 *
-	 * @return apparently returns 0F if the trough had water, -1F if it didn't // TODO: does this really needs to be a float? It should probably return a boolean
+	 * @return apparently returns 0F if the trough had water, -1F if it didn't
 	 */
 	@Override
 	public float quench() {
@@ -78,20 +72,26 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 			// Add fluid
 			if (!isFull()) {
 				if (stack.getItem() == Items.WATER_BUCKET) {
-					stack.shrink(1);
-					PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.BUCKET));
+					if (!player.isCreative()) {
+						stack.shrink(1);
+						PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.BUCKET));
+					}
 					addFluid(bucketAmount);
 					return true;
 				}
 				if (stack.getItem() == MineFantasyItems.JUG_WATER) {
-					stack.shrink(1);
-					PlayerUtils.giveStackToPlayer(player, new ItemStack(MineFantasyItems.JUG_EMPTY));
+					if (!player.isCreative()) {
+						stack.shrink(1);
+						PlayerUtils.giveStackToPlayer(player, new ItemStack(MineFantasyItems.JUG_EMPTY));
+					}
 					addFluid(jugAmount);
 					return true;
 				}
 				if (stack.getItem() == Items.POTIONITEM && PotionUtils.getPotionFromItem(stack) == PotionTypes.WATER) {
-					stack.shrink(1);
-					PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.GLASS_BOTTLE));
+					if (!player.isCreative()) {
+						stack.shrink(1);
+						PlayerUtils.giveStackToPlayer(player, new ItemStack(Items.GLASS_BOTTLE));
+					}
 					addFluid(glassBottleAmount);
 					return true;
 				}
@@ -161,78 +161,26 @@ public class TileEntityTrough extends TileEntityWoodDecor implements IQuenchBloc
 		BlockUtils.notifyBlockUpdate(this);
 	}
 
+	public static int getCapacityScale() {
+		return capacityScale;
+	}
+
 	@Override
 	public int getCapacity() {
 		return super.getCapacity() * capacityScale;
 	}
 
-	/**
-	 * Used to get the fill_count blockstate
-	 *
-	 * @return the fill count (0-6). It always returns at least 1, if the trough contains any water!
-	 */
-	public int getFillCount() {
-		float fillPercent = (float) fill / getCapacity();
-
-		int fillCount = 0;
-		if (fillPercent > 0) {
-			fillCount = Math.max((int) (fillPercent * fillLevels - 1), 1);
-		}
-		if (fillCount >= 7) {
-			fillCount = 6;
-		}
-		return fillCount;
-	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tag = new NBTTagCompound();
-		writeUpdateNBT(tag);
-		return new SPacketUpdateTileEntity(pos, 0, tag);
-	}
-
-	@Override
-	public NBTTagCompound getUpdateTag() {
-		NBTTagCompound tag = super.getUpdateTag();
-		writeUpdateNBT(tag);
-		return tag;
-	}
-
-	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-		handleUpdateTag(pkt.getNbtCompound());
-	}
-
-	@Override
-	public void handleUpdateTag(NBTTagCompound tag) {
-		readNBT(tag);
-		BlockUtils.notifyBlockUpdate(this);
-	}
-
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-		return writeNBT(nbt);
-	}
-
-	public NBTTagCompound writeNBT(NBTTagCompound nbt) {
 		nbt.setInteger("fill", fill);
 		nbt.setInteger("color_int", colorInt);
 		return nbt;
 	}
 
-	protected void writeUpdateNBT(NBTTagCompound tag) {
-		writeNBT(tag);
-	}
-
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
-		readNBT(nbt);
-		markDirty();
-	}
-
-	public void readNBT(NBTTagCompound nbt) {
 		fill = nbt.getInteger("fill");
 		colorInt = nbt.getInteger("color_int");
 		markDirty();

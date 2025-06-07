@@ -13,6 +13,7 @@ import minefantasy.mfr.init.MineFantasySounds;
 import minefantasy.mfr.item.ItemArmourMFR;
 import minefantasy.mfr.item.ItemHeated;
 import minefantasy.mfr.mechanics.PlayerTickHandler;
+import minefantasy.mfr.mechanics.knowledge.InformationBase;
 import minefantasy.mfr.mechanics.knowledge.ResearchLogic;
 import minefantasy.mfr.network.NetworkHandler;
 import minefantasy.mfr.recipe.AnvilCraftMatrix;
@@ -47,6 +48,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -254,7 +256,13 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 	}
 
 	public boolean doesPlayerKnowCraft(EntityPlayer user) {
-		return requiredResearch.isEmpty() || ResearchLogic.hasInfoUnlocked(user, requiredResearch);
+		if (StringUtils.isNotBlank(requiredResearch) && !requiredResearch.equalsIgnoreCase("none")) {
+			InformationBase research = ResearchLogic.getResearch(requiredResearch);
+			return requiredResearch.isEmpty() || ResearchLogic.getResearchCheck(user, research);
+		}
+		else {
+			return true;
+		}
 	}
 
 	private void craftItem(EntityPlayer lastHit, AnvilRecipeBase anvilRecipe) {
@@ -367,7 +375,7 @@ public class TileEntityAnvil extends TileEntityBase implements IAnvil, IQualityB
 							TileEntity tile = world.getTileEntity(pos.add(x, y, z));
 							if (tile instanceof TileEntityForge) {
 								if (((TileEntityForge) tile).getBlockTemperature() > 0) {
-									totalTemp += ((TileEntityForge) tile).temperature;
+									totalTemp += ((TileEntityForge) tile).getBlockTemperature();
 									world.createExplosion(null, pos.getX() + x, pos.getY() + y, pos.getZ() + z, 1F, false);
 								}
 							}

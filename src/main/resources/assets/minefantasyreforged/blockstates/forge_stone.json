@@ -2,38 +2,109 @@
     "forge_marker": 1,
     "defaults": {
         "transform": "forge:default-block",
-        "model": "minefantasyreforged:forge",
+        "model": "minefantasyreforged:forge_base",
         "textures": {"texture": "minefantasyreforged:blocks/forge_stone"}
     },
     "variants": {
-        "normal": [{}],
+        "normal": [{"model": "minefantasyreforged:forge_full"}],
         "burning": {
-            "true": {
-                "textures": {"fuel_texture": "minefantasyreforged:blocks/coal_fuel_active"}
-            },
-            "false":  {
-                "textures": {"fuel_texture": "minefantasyreforged:blocks/coal_fuel"}
-            }
-        },
-        "fuel_count": {
-            "0": {},
-            "1": {
-                "submodel": "minefantasyreforged:fuel_1"
-            },
-            "2": {
-                "submodel": "minefantasyreforged:fuel_2"
-            },
-            "3": {
-                "submodel": "minefantasyreforged:fuel_3"
-            }
+            "true": {},
+            "false": {}
         },
         "under": {
             "true": {
-                "submodel": "minefantasyreforged:forge_stand"
+                "submodel": "minefantasyreforged:forge_stand",
+                "textures": {"texture": "minefantasyreforged:blocks/forge_top"}
             },
-            "false": {
-
-            }
+            "false": {}
+        },
+        "front_wall": {
+            "true": {
+                "submodel": {
+                    "front_wall": {
+                        "model": "minefantasyreforged:forge_wall",
+                        "y": 180
+                    }
+                }
+            },
+            "false": {}
+        },
+        "back_wall": {
+            "true": {
+                "submodel": {
+                    "back_wall": {
+                        "model": "minefantasyreforged:forge_wall",
+                        "y": 0
+                    }
+                }
+            },
+            "false": {}
+        },
+        "right_wall": {
+            "true": {
+                "submodel": {
+                    "right_wall": {
+                        "model": "minefantasyreforged:forge_wall",
+                        "y": 270
+                    }
+                }
+            },
+            "false": {}
+        },
+        "left_wall": {
+            "true": {
+                "submodel": {
+                    "left_wall": {
+                        "model": "minefantasyreforged:forge_wall",
+                        "y": 90
+                    }
+                }
+            },
+            "false": {}
+        },
+        "front_right_corner": {
+            "true": {
+                "submodel": {
+                    "front_right_corner": {
+                        "model": "minefantasyreforged:forge_corner",
+                        "y": 270
+                    }
+                }
+            },
+            "false": {}
+        },
+        "front_left_corner": {
+            "true": {
+                "submodel": {
+                    "front_left_corner": {
+                        "model": "minefantasyreforged:forge_corner",
+                        "y": 180
+                    }
+                }
+            },
+            "false": {}
+        },
+        "back_right_corner": {
+            "true": {
+                "submodel": {
+                    "back_right_corner": {
+                        "model": "minefantasyreforged:forge_corner",
+                        "y": 0
+                    }
+                }
+            },
+            "false": {}
+        },
+        "back_left_corner": {
+            "true": {
+                "submodel": {
+                    "back_left_corner": {
+                        "model": "minefantasyreforged:forge_corner",
+                        "y": 90
+                    }
+                }
+            },
+            "false": {}
         }
     }
 }

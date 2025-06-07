@@ -393,7 +393,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public int getHeatScaled(int height) {
 		if (heat <= 0)
 			return 0;
-		int size = (int) (height / TileEntityForge.maxTemperature * this.heat);
+		int size = (int) (height / TileEntityForge.getMaxTemperature() * this.heat);
 
 		return Math.min(size, height);
 	}
@@ -402,7 +402,7 @@ public class TileEntityBigFurnace extends TileEntityBase implements IBellowsUsea
 	public int getItemHeatScaled(int height) {
 		if (maxHeat <= 0)
 			return 0;
-		int size = (int) (height / TileEntityForge.maxTemperature * this.maxHeat);
+		int size = (int) (height / TileEntityForge.getMaxTemperature() * this.maxHeat);
 
 		return Math.min(size, height);
 	}

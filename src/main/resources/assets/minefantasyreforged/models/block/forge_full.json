@@ -4,7 +4,7 @@
 	"textures": {"particle": "#texture"},
 	"elements": [
 		{
-			"name": "Back",
+			"name": "back",
 			"from": [2, 1, 0],
 			"to": [14, 8, 2],
 			"shade": false,
@@ -19,7 +19,7 @@
 			}
 		},
 		{
-			"name": "Right",
+			"name": "right",
 			"from": [0, 1, 2],
 			"to": [2, 8, 14],
 			"shade": false,
@@ -34,22 +34,7 @@
 			}
 		},
 		{
-			"name": "cornerBR",
-			"from": [14, 1, 0],
-			"to": [16, 7, 2],
-			"shade": false,
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
-			"faces": {
-				"north": {"uv": [1, 2.75, 0.5, 4.25], "texture": "#texture"},
-				"east": {"uv": [1.5, 2.75, 1, 4.25], "texture": "#texture"},
-				"south": {"uv": [2, 2.75, 1.5, 4.25], "texture": "#texture"},
-				"west": {"uv": [0.5, 2.75, 0, 4.25], "texture": "#texture"},
-				"up": {"uv": [0.5, 2.75, 1, 2.25], "texture": "#texture"},
-				"down": {"uv": [1, 2.25, 1.5, 2.75], "texture": "#texture"}
-			}
-		},
-		{
-			"name": "Left",
+			"name": "left",
 			"from": [14, 1, 2],
 			"to": [16, 8, 14],
 			"shade": false,
@@ -64,7 +49,7 @@
 			}
 		},
 		{
-			"name": "Base",
+			"name": "base",
 			"from": [0, 0, 0],
 			"to": [16, 1, 16],
 			"shade": false,
@@ -94,7 +79,22 @@
 			}
 		},
 		{
-			"name": "cornerBL",
+			"name": "corner_back_left",
+			"from": [14, 1, 0],
+			"to": [16, 7, 2],
+			"shade": false,
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 8]},
+			"faces": {
+				"north": {"uv": [1, 2.75, 0.5, 4.25], "texture": "#texture"},
+				"east": {"uv": [1.5, 2.75, 1, 4.25], "texture": "#texture"},
+				"south": {"uv": [2, 2.75, 1.5, 4.25], "texture": "#texture"},
+				"west": {"uv": [0.5, 2.75, 0, 4.25], "texture": "#texture"},
+				"up": {"uv": [0.5, 2.75, 1, 2.25], "texture": "#texture"},
+				"down": {"uv": [1, 2.25, 1.5, 2.75], "texture": "#texture"}
+			}
+		},
+		{
+			"name": "corner_back_right",
 			"from": [0, 1, 0],
 			"to": [2, 7, 2],
 			"shade": false,
@@ -109,7 +109,7 @@
 			}
 		},
 		{
-			"name": "cornerFR",
+			"name": "corner_front_left",
 			"from": [14, 1, 14],
 			"to": [16, 7, 16],
 			"shade": false,
@@ -124,7 +124,7 @@
 			}
 		},
 		{
-			"name": "cornerFL",
+			"name": "corner_front_right",
 			"from": [0, 1, 14],
 			"to": [2, 7, 16],
 			"shade": false,

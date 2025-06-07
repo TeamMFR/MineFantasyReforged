@@ -52,7 +52,7 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock, IMa
 		CustomMaterial material = CustomMaterialRegistry.getMaterialFor(item, CustomToolHelper.slot_main);
 		if (material != CustomMaterialRegistry.NONE) {
 			list.add(I18n.format("attribute.fill.capacity.name",
-					TileEntityTrough.getCapacity(material.getTier()) * TileEntityTrough.capacityScale));
+					TileEntityTrough.getCapacity(material.getTier()) * TileEntityTrough.getCapacityScale()));
 		}
 	}
 
@@ -110,7 +110,7 @@ public class ItemBlockTrough extends ItemBlockBase implements IStorageBlock, IMa
 				tier = material.getTier();
 			}
 			NBTTagCompound nbt = NbtUtils.getOrCreateNBT(item);
-			nbt.setInteger(BlockTrough.FILL_LEVEL, TileEntityTrough.getCapacity(tier) * TileEntityTrough.capacityScale);
+			nbt.setInteger(BlockTrough.FILL_LEVEL, TileEntityTrough.getCapacity(tier) * TileEntityTrough.getCapacityScale());
 		}
 		player.swingArm(EnumHand.MAIN_HAND);
 

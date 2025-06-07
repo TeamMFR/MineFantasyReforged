@@ -20,7 +20,7 @@ public class ContainerForge extends ContainerBase {
 		super(inventoryPlayer, tile);
 		this.tile = tile;
 
-		this.addSlotToContainer(new SlotItemHandler(this.tile.inventory, 0, 70 + 18, 14 + 18));
+		this.addSlotToContainer(new SlotItemHandler(this.tile.getInventory(), 0, 70 + 18, 14 + 18));
 
 		addPlayerSlots(inventoryPlayer, 8, 151);
 	}
@@ -29,11 +29,11 @@ public class ContainerForge extends ContainerBase {
 	public void detectAndSendChanges() {
 		for (IContainerListener listener : this.listeners) {
 
-			if (this.lastTemp != (int) tile.temperature) {
-				listener.sendWindowProperty(this, 0, (int) tile.temperature);
+			if (this.lastTemp != (int) tile.getBlockTemperature()) {
+				listener.sendWindowProperty(this, 0, (int) tile.getBlockTemperature());
 			}
 		}
-		this.lastTemp = (int) tile.temperature;
+		this.lastTemp = (int) tile.getBlockTemperature();
 
 		for (int i = 0; i < this.inventorySlots.size(); ++i) {
 			ItemStack itemstack = this.inventorySlots.get(i).getStack();
@@ -55,7 +55,7 @@ public class ContainerForge extends ContainerBase {
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int value) {
 		if (id == 0) {
-			tile.temperature = value;
+			tile.setTemperature(value);
 		}
 	}
 
